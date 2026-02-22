@@ -5,6 +5,7 @@ import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/features/grammar/grammar_providers.dart';
 import 'package:jpstudy/features/home/models/practice_destination.dart';
+import 'package:jpstudy/features/home/widgets/home_surface.dart';
 
 import '../providers/dashboard_provider.dart';
 
@@ -27,24 +28,14 @@ class PracticeHub extends ConsumerWidget {
     );
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+      padding: const EdgeInsets.fromLTRB(
+        HomeSurface.pageHorizontalPadding,
+        0,
+        HomeSurface.pageHorizontalPadding,
+        0,
+      ),
       child: Container(
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [Color(0xFFFFFFFF), Color(0xFFF6FBFF)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          borderRadius: BorderRadius.circular(24),
-          border: Border.all(color: const Color(0xFFDCE8F8)),
-          boxShadow: const [
-            BoxShadow(
-              color: Color(0x0F2B3F59),
-              blurRadius: 16,
-              offset: Offset(0, 8),
-            ),
-          ],
-        ),
+        decoration: HomeSurface.softPanel(),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(14, 14, 14, 14),
           child: Column(
@@ -156,7 +147,7 @@ class _PracticeTile extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: const Color(0xFFE2E8F5)),
+            border: Border.all(color: HomeSurface.panelBorder),
             boxShadow: const [
               BoxShadow(
                 color: Color(0x09283A57),

@@ -5,6 +5,7 @@ import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
 import '../../grammar/grammar_providers.dart';
 import '../providers/dashboard_provider.dart';
+import 'home_surface.dart';
 
 class MiniDashboard extends ConsumerWidget {
   const MiniDashboard({super.key});
@@ -36,7 +37,12 @@ class MiniDashboard extends ConsumerWidget {
     final focusCount = state.totalMistakeCount + ghostCount;
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 10, 16, 12),
+      padding: const EdgeInsets.fromLTRB(
+        HomeSurface.pageHorizontalPadding,
+        10,
+        HomeSurface.pageHorizontalPadding,
+        12,
+      ),
       child: LayoutBuilder(
         builder: (context, constraints) {
           final crossAxisCount = constraints.maxWidth >= 880
@@ -46,21 +52,9 @@ class MiniDashboard extends ConsumerWidget {
               : 1;
           return Container(
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [Color(0xFFFFFFFF), Color(0xFFF4FAFF)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(28),
-              border: Border.all(color: const Color(0xFFDCE8F8)),
-              boxShadow: const [
-                BoxShadow(
-                  color: Color(0x102C3F59),
-                  blurRadius: 18,
-                  offset: Offset(0, 8),
-                ),
-              ],
+            decoration: HomeSurface.softPanel(
+              colors: const [Color(0xFFFFFFFF), Color(0xFFF4FAFF)],
+              radius: 28,
             ),
             child: Column(
               children: [
@@ -178,7 +172,7 @@ class _StatTile extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white.withValues(alpha: 0.94),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFDCE8F8)),
+        border: Border.all(color: HomeSurface.panelBorder),
       ),
       child: Row(
         children: [

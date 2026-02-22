@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:jpstudy/core/app_language.dart';
+
 import '../../common/widgets/clay_button.dart';
 import '../../common/widgets/clay_card.dart';
 import '../../../theme/app_theme_v2.dart';
@@ -39,7 +40,9 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
   }
 
   void _selectWord(int index) {
-    if (_isLastCorrect != null) return;
+    if (_isLastCorrect != null) {
+      return;
+    }
     setState(() {
       final word = _remainingWords.removeAt(index);
       _selectedWords.add(word);
@@ -47,7 +50,9 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
   }
 
   void _deselectWord(int index) {
-    if (_isLastCorrect != null) return;
+    if (_isLastCorrect != null) {
+      return;
+    }
     setState(() {
       final word = _selectedWords.removeAt(index);
       _remainingWords.add(word);
@@ -57,11 +62,8 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
   void _check() {
     setState(() {
       final userSentence = _selectedWords.join('').trim();
-      // Remove spaces from both for robust comparison in Japanese
-      // (though usually no spaces, but just in case of formatting)
       final normalizedUser = userSentence.replaceAll(' ', '');
       final normalizedCorrect = widget.correctSentence.replaceAll(' ', '');
-
       _isLastCorrect = normalizedUser == normalizedCorrect;
       widget.onCheck(_isLastCorrect!, userSentence);
     });
@@ -78,7 +80,7 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
 
   @override
   Widget build(BuildContext context) {
-    Color targetColor = Colors.white;
+    var targetColor = Colors.white;
     if (_isLastCorrect == true) {
       targetColor = AppThemeV2.secondary.withValues(alpha: 0.2);
     }
@@ -90,10 +92,9 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
       children: [
         Column(
           children: [
-            // Prompt
             Container(
               width: double.infinity,
-              margin: const EdgeInsets.only(bottom: 24),
+              margin: const EdgeInsets.only(bottom: 16),
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: AppThemeV2.primary.withValues(alpha: 0.05),
@@ -108,8 +109,8 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
                     _tr(
                       widget.language,
                       en: 'Arrange the sentence:',
-                      vi: 'Ghép câu hoàn chỉnh:',
-                      ja: '文を並び替えてください:',
+                      vi: 'Gh\u00e9p c\u00e2u ho\u00e0n ch\u1ec9nh:',
+                      ja: '\u6587\u3092\u4e26\u3073\u66ff\u3048\u3066\u304f\u3060\u3055\u3044:',
                     ),
                     style: TextStyle(
                       color: AppThemeV2.textSub,
@@ -131,12 +132,10 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
                 ],
               ),
             ),
-
-            // Target Area
             ClayCard(
               color: targetColor,
               child: Container(
-                constraints: const BoxConstraints(minHeight: 120),
+                constraints: const BoxConstraints(minHeight: 96),
                 width: double.infinity,
                 alignment: Alignment.centerLeft,
                 child: Wrap(
@@ -152,8 +151,7 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
                 ),
               ),
             ),
-            const SizedBox(height: 32),
-            // Source Area
+            const SizedBox(height: 18),
             Wrap(
               spacing: 12,
               runSpacing: 16,
@@ -166,8 +164,7 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
                 ).animate().fadeIn(delay: 50.ms * entry.key);
               }).toList(),
             ),
-            const Spacer(),
-            // Actions
+            const SizedBox(height: 10),
             Row(
               children: [
                 Expanded(
@@ -175,8 +172,8 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
                     label: _tr(
                       widget.language,
                       en: 'Reset',
-                      vi: 'Xóa & làm lại',
-                      ja: 'リセット',
+                      vi: 'X\u00f3a & l\u00e0m l\u1ea1i',
+                      ja: '\u30ea\u30bb\u30c3\u30c8',
                     ),
                     icon: Icons.refresh,
                     style: ClayButtonStyle.neutral,
@@ -190,8 +187,8 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
                     label: _tr(
                       widget.language,
                       en: 'Check',
-                      vi: 'Kiểm tra',
-                      ja: '確認',
+                      vi: 'Ki\u1ec3m tra',
+                      ja: '\u78ba\u8a8d',
                     ),
                     icon: Icons.check_circle,
                     style: _isLastCorrect == true
@@ -205,8 +202,6 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
             ),
           ],
         ),
-
-        // Feedback Overlay
         if (_isLastCorrect != null)
           Positioned.fill(
             child: Container(
@@ -229,20 +224,20 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
                           ? _tr(
                               widget.language,
                               en: 'CORRECT!',
-                              vi: 'CHÍNH XÁC!',
-                              ja: '正解！',
+                              vi: 'CH\u00cdNH X\u00c1C!',
+                              ja: '\u6b63\u89e3\uff01',
                             )
                           : _tr(
                               widget.language,
                               en: 'TRY AGAIN',
-                              vi: 'THỬ LẠI NHÉ!',
-                              ja: 'もう一度',
+                              vi: 'TH\u1eec L\u1ea0I NH\u00c9!',
+                              ja: '\u3082\u3046\u4e00\u5ea6',
                             ),
                       style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.w900,
                         color: _isLastCorrect! ? Colors.green : Colors.red,
-                        letterSpacing: 2.0,
+                        letterSpacing: 2,
                       ),
                     ).animate().fadeIn(delay: 200.ms).moveY(begin: 20, end: 0),
                   ],

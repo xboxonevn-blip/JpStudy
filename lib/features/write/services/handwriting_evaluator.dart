@@ -66,7 +66,9 @@ class HandwritingEvaluator {
     KanjiStrokeTemplate? template,
     HandwritingScoringVersion scoringVersion = HandwritingScoringVersion.v2,
   }) {
-    final meaningfulStrokes = strokes.where((stroke) => stroke.length > 1).toList();
+    final meaningfulStrokes = strokes
+        .where((stroke) => stroke.length > 1)
+        .toList();
     final drawnStrokes = meaningfulStrokes.length;
     final strokeDelta = (drawnStrokes - expectedStrokes).abs().toDouble();
     final tolerance = expectedStrokes >= 12
@@ -76,7 +78,9 @@ class HandwritingEvaluator {
         : 0;
     final strokeScore = 1.0 - (strokeDelta / (tolerance + 1)).clamp(0.0, 1.0);
 
-    final minSide = canvasSize.shortestSide == 0 ? 200 : canvasSize.shortestSide;
+    final minSide = canvasSize.shortestSide == 0
+        ? 200
+        : canvasSize.shortestSide;
     final minLength = minSide * max(1.0, expectedStrokes * 0.2);
     final inkLength = _inkLength(strokes);
     final lengthScore = (inkLength / max(1.0, minLength)).clamp(0.0, 1.0);
@@ -113,7 +117,8 @@ class HandwritingEvaluator {
         (templateScore * profile.templateWeight);
 
     final templateGatePass =
-        !profile.requiresTemplateGate || templateScore >= profile.minTemplateScore;
+        !profile.requiresTemplateGate ||
+        templateScore >= profile.minTemplateScore;
     final isCorrect =
         totalScore >= profile.requiredScore &&
         strokeScore >= profile.minStrokeScore &&
@@ -267,16 +272,16 @@ class HandwritingEvaluator {
         );
       case HandwritingQualityTier.generated:
         return _TierProfile(
-          strokeWeight: 0.31,
-          lengthWeight: 0.15,
-          shapeWeight: 0.25,
-          orderWeight: 0.19,
-          templateWeight: 0.10,
-          requiredScore: showGuide ? 0.61 : 0.71,
-          minStrokeScore: 0.50,
-          minShapeScore: 0.35,
-          minOrderScore: 0.35,
-          minTemplateScore: 0.30,
+          strokeWeight: 0.28,
+          lengthWeight: 0.12,
+          shapeWeight: 0.24,
+          orderWeight: 0.18,
+          templateWeight: 0.18,
+          requiredScore: showGuide ? 0.64 : 0.73,
+          minStrokeScore: 0.52,
+          minShapeScore: 0.38,
+          minOrderScore: 0.48,
+          minTemplateScore: 0.42,
         );
     }
   }
@@ -287,9 +292,7 @@ class HandwritingEvaluator {
     required KanjiStrokeTemplate? template,
   }) {
     if (strokes.isEmpty) return 0;
-    final allPoints = <Offset>[
-      for (final stroke in strokes) ...stroke,
-    ];
+    final allPoints = <Offset>[for (final stroke in strokes) ...stroke];
     final minX = allPoints.map((p) => p.dx).reduce(min);
     final maxX = allPoints.map((p) => p.dx).reduce(max);
     final minY = allPoints.map((p) => p.dy).reduce(min);
@@ -303,7 +306,8 @@ class HandwritingEvaluator {
 
     final targetArea = template?.targetArea ?? 0.32;
     final areaScore =
-        1.0 - ((areaRatio - targetArea).abs() / max(0.1, targetArea)).clamp(0.0, 1.0);
+        1.0 -
+        ((areaRatio - targetArea).abs() / max(0.1, targetArea)).clamp(0.0, 1.0);
 
     final center = Offset((minX + maxX) / 2, (minY + maxY) / 2);
     final canvasCenter = Offset(canvasSize.width / 2, canvasSize.height / 2);
@@ -313,7 +317,8 @@ class HandwritingEvaluator {
 
     final aspect = width / height;
     final targetAspect = template?.targetAspect ?? 1.0;
-    final aspectScore = 1.0 - ((aspect - targetAspect).abs() / 1.5).clamp(0.0, 1.0);
+    final aspectScore =
+        1.0 - ((aspect - targetAspect).abs() / 1.5).clamp(0.0, 1.0);
 
     return (areaScore * 0.45) + (centerScore * 0.35) + (aspectScore * 0.20);
   }
@@ -323,7 +328,8 @@ class HandwritingEvaluator {
     required Size canvasSize,
     required KanjiStrokeTemplate? template,
   }) {
-    if (template != null && (template.isHighConfidence || template.isMediumConfidence)) {
+    if (template != null &&
+        (template.isHighConfidence || template.isMediumConfidence)) {
       return HandwritingTemplateMatcher.templateOrderScore(
         strokes: strokes,
         template: template,
