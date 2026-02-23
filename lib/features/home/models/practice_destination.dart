@@ -5,6 +5,7 @@ import 'package:jpstudy/features/grammar/screens/grammar_practice_screen.dart';
 
 class PracticeDestination {
   const PracticeDestination({
+    required this.id,
     required this.title,
     required this.subtitle,
     required this.icon,
@@ -14,6 +15,7 @@ class PracticeDestination {
     this.badgeCount,
   });
 
+  final String id;
   final String title;
   final String subtitle;
   final IconData icon;
@@ -33,6 +35,7 @@ List<PracticeDestination> buildPracticeDestinations({
 }) {
   final list = <PracticeDestination>[
     PracticeDestination(
+      id: 'match',
       title: language.practiceMatchLabel,
       subtitle: language.practiceMatchSubtitle,
       icon: Icons.extension_rounded,
@@ -40,6 +43,7 @@ List<PracticeDestination> buildPracticeDestinations({
       route: '/match',
     ),
     PracticeDestination(
+      id: 'ghost',
       title: language.practiceGhostLabel,
       subtitle: language.practiceGhostSubtitle,
       icon: Icons.auto_fix_high_rounded,
@@ -49,6 +53,7 @@ List<PracticeDestination> buildPracticeDestinations({
       badgeCount: ghostCount > 0 ? ghostCount : null,
     ),
     PracticeDestination(
+      id: 'kanji_dash',
       title: language.practiceKanjiDashLabel,
       subtitle: language.practiceKanjiDashSubtitle,
       icon: Icons.flash_on_rounded,
@@ -56,6 +61,7 @@ List<PracticeDestination> buildPracticeDestinations({
       route: '/kanji-dash',
     ),
     PracticeDestination(
+      id: 'handwriting',
       title: language.writeModeHandwritingLabel,
       subtitle: language.writeModeHandwritingSubtitle,
       icon: Icons.draw_rounded,
@@ -63,6 +69,7 @@ List<PracticeDestination> buildPracticeDestinations({
       route: '/practice/handwriting',
     ),
     PracticeDestination(
+      id: 'mock_exam',
       title: language.practiceExamCardLabel,
       subtitle: language.practiceExamSubtitle,
       icon: Icons.quiz_rounded,
@@ -70,6 +77,7 @@ List<PracticeDestination> buildPracticeDestinations({
       route: '/practice/mock-exam',
     ),
     PracticeDestination(
+      id: 'immersion',
       title: language.practiceImmersionLabel,
       subtitle: language.practiceImmersionSubtitle,
       icon: Icons.newspaper_rounded,
@@ -77,6 +85,7 @@ List<PracticeDestination> buildPracticeDestinations({
       route: '/immersion',
     ),
     PracticeDestination(
+      id: 'mistakes',
       title: language.practiceMistakesLabel,
       subtitle: language.practiceMistakesSubtitle,
       icon: Icons.warning_amber_rounded,
@@ -131,6 +140,68 @@ List<PracticeDestination> buildPracticeDestinations({
   }).toList()..sort((a, b) => b.score.compareTo(a.score));
 
   return scored.map((entry) => entry.destination).toList(growable: false);
+}
+
+List<PracticeDestination> applyPracticeDestinationOrder({
+  required List<PracticeDestination> rankedDestinations,
+  required List<String> preferredOrder,
+}) {
+  if (preferredOrder.isEmpty) {
+    return rankedDestinations;
+  }
+
+  final byId = {for (final item in rankedDestinations) item.id: item};
+  final ordered = <PracticeDestination>[];
+  for (final id in preferredOrder) {
+    final item = byId.remove(id);
+    if (item != null) {
+      ordered.add(item);
+    }
+  }
+  ordered.addAll(byId.values);
+  return List<PracticeDestination>.unmodifiable(ordered);
+}
+
+List<PracticeDestination> selectFocusPracticeDestinations({
+  required List<PracticeDestination> rankedDestinations,
+  int limit = 3,
+}) {
+  if (rankedDestinations.length <= limit) {
+    return rankedDestinations;
+  }
+
+  final urgent = rankedDestinations
+      .where((item) => (item.badgeCount ?? 0) > 0 || _isFocusRoute(item.route))
+      .toList(growable: false);
+
+  final picked = <PracticeDestination>[];
+  for (final item in urgent) {
+    if (picked.any((entry) => entry.id == item.id)) {
+      continue;
+    }
+    picked.add(item);
+    if (picked.length == limit) {
+      return List<PracticeDestination>.unmodifiable(picked);
+    }
+  }
+
+  for (final item in rankedDestinations) {
+    if (picked.any((entry) => entry.id == item.id)) {
+      continue;
+    }
+    picked.add(item);
+    if (picked.length == limit) {
+      break;
+    }
+  }
+  return List<PracticeDestination>.unmodifiable(picked);
+}
+
+bool _isFocusRoute(String route) {
+  return route == '/grammar-practice' ||
+      route == '/mistakes' ||
+      route == '/practice/handwriting' ||
+      route == '/immersion';
 }
 
 class _ScoredDestination {

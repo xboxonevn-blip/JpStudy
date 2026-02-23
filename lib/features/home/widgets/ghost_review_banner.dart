@@ -8,7 +8,9 @@ import '../../grammar/grammar_providers.dart';
 import '../../grammar/screens/grammar_practice_screen.dart';
 
 class GhostReviewBanner extends ConsumerWidget {
-  const GhostReviewBanner({super.key});
+  const GhostReviewBanner({super.key, this.embedded = false});
+
+  final bool embedded;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -17,9 +19,13 @@ class GhostReviewBanner extends ConsumerWidget {
 
     return ghostCountAsync.when(
       data: (count) {
+        final cardMargin = embedded
+            ? const EdgeInsets.only(bottom: 10)
+            : const EdgeInsets.fromLTRB(16, 0, 16, 12);
+
         if (count == 0) {
           return Container(
-            margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+            margin: cardMargin,
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
               color: Colors.white.withValues(alpha: 0.9),
@@ -67,7 +73,7 @@ class GhostReviewBanner extends ConsumerWidget {
         }
 
         return Container(
-          margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+          margin: cardMargin,
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             gradient: const LinearGradient(

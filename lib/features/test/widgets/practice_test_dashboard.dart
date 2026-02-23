@@ -12,7 +12,9 @@ import 'package:jpstudy/core/services/session_storage_provider.dart';
 import '../models/test_config.dart';
 
 class PracticeTestDashboard extends ConsumerWidget {
-  const PracticeTestDashboard({super.key});
+  const PracticeTestDashboard({super.key, this.embedded = false});
+
+  final bool embedded;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -38,10 +40,18 @@ class PracticeTestDashboard extends ConsumerWidget {
     // Localization
     final language = ref.watch(appLanguageProvider);
 
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
-      child: _buildTestCard(context, ref, levelLabel, color, language),
+    final card = _buildTestCard(
+      context,
+      ref,
+      levelLabel,
+      color,
+      language,
+      embedded: embedded,
     );
+    if (embedded) {
+      return card;
+    }
+    return Padding(padding: const EdgeInsets.only(bottom: 16), child: card);
   }
 
   Widget _buildTestCard(
@@ -49,11 +59,14 @@ class PracticeTestDashboard extends ConsumerWidget {
     WidgetRef ref,
     String level,
     Color color,
-    AppLanguage language,
-  ) {
+    AppLanguage language, {
+    required bool embedded,
+  }) {
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-      elevation: 2,
+      margin: embedded
+          ? EdgeInsets.zero
+          : const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      elevation: embedded ? 0 : 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: InkWell(
         onTap: () => _startLevelTest(context, ref, level, language),
@@ -74,11 +87,11 @@ class PracticeTestDashboard extends ConsumerWidget {
               ),
             ],
           ),
-          padding: const EdgeInsets.all(20),
+          padding: EdgeInsets.all(embedded ? 16 : 20),
           child: Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(12),
+                padding: EdgeInsets.all(embedded ? 10 : 12),
                 decoration: BoxDecoration(
                   color: Colors.white.withValues(alpha: 0.2),
                   shape: BoxShape.circle,
@@ -97,8 +110,8 @@ class PracticeTestDashboard extends ConsumerWidget {
                   children: [
                     Text(
                       language.mockExamTitle(level),
-                      style: const TextStyle(
-                        fontSize: 20,
+                      style: TextStyle(
+                        fontSize: embedded ? 18 : 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),

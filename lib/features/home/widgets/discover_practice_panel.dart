@@ -2,17 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/features/grammar/grammar_providers.dart';
+import 'package:jpstudy/features/home/models/practice_destination.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
+import 'package:jpstudy/features/home/providers/practice_hub_preferences_provider.dart';
 import 'package:jpstudy/features/home/widgets/ghost_review_banner.dart';
 import 'package:jpstudy/features/home/widgets/home_surface.dart';
 import 'package:jpstudy/features/home/widgets/practice_hub.dart';
 import 'package:jpstudy/features/test/widgets/practice_test_dashboard.dart';
 
 class DiscoverPracticePanel extends ConsumerStatefulWidget {
-  const DiscoverPracticePanel({super.key, this.initiallyExpanded = false});
+  const DiscoverPracticePanel({
+    super.key,
+    this.initiallyExpanded = false,
+    this.dense = false,
+  });
 
   final bool initiallyExpanded;
+  final bool dense;
 
   @override
   ConsumerState<DiscoverPracticePanel> createState() =>
@@ -31,18 +39,37 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
   @override
   Widget build(BuildContext context) {
     final language = ref.watch(appLanguageProvider);
+    final level = ref.watch(studyLevelProvider);
     final ghostCount = ref
         .watch(grammarGhostCountProvider)
         .maybeWhen(data: (count) => count, orElse: () => 0);
-    final mistakeCount =
-        ref.watch(dashboardProvider).valueOrNull?.totalMistakeCount ?? 0;
+    final dashboard = ref.watch(dashboardProvider).valueOrNull;
+    final mistakeCount = dashboard?.totalMistakeCount ?? 0;
+    final totalDue =
+        (dashboard?.vocabDue ?? 0) +
+        (dashboard?.grammarDue ?? 0) +
+        (dashboard?.kanjiDue ?? 0);
     final highlightCount = ghostCount + mistakeCount;
+    final hubPrefs = ref.watch(practiceHubPreferencesProvider);
+
+    final rankedTiles = buildPracticeDestinations(
+      language: language,
+      ghostCount: ghostCount,
+      mistakeCount: mistakeCount,
+      dueReviewCount: totalDue,
+      level: level,
+      preferImmersion: totalDue == 0 && mistakeCount == 0 && ghostCount == 0,
+    );
+    final orderedTiles = applyPracticeDestinationOrder(
+      rankedDestinations: rankedTiles,
+      preferredOrder: hubPrefs.orderIds,
+    );
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(
-        HomeSurface.pageHorizontalPadding,
+      padding: EdgeInsets.fromLTRB(
+        widget.dense ? 0 : HomeSurface.pageHorizontalPadding,
         0,
-        HomeSurface.pageHorizontalPadding,
+        widget.dense ? 0 : HomeSurface.pageHorizontalPadding,
         0,
       ),
       child: Container(
@@ -58,12 +85,17 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
               },
               borderRadius: BorderRadius.circular(HomeSurface.panelRadius),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(14, 14, 14, 14),
+                padding: EdgeInsets.fromLTRB(
+                  widget.dense ? 12 : 14,
+                  widget.dense ? 12 : 14,
+                  widget.dense ? 12 : 14,
+                  widget.dense ? 12 : 14,
+                ),
                 child: Row(
                   children: [
                     Container(
-                      width: 36,
-                      height: 36,
+                      width: widget.dense ? 34 : 36,
+                      height: widget.dense ? 34 : 36,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         gradient: const LinearGradient(
@@ -85,20 +117,53 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
                         children: [
                           Text(
                             language.practiceHubTitle,
-                            style: const TextStyle(
-                              fontSize: 16,
+                            style: TextStyle(
+                              fontSize: widget.dense ? 15 : 16,
                               fontWeight: FontWeight.w800,
-                              color: Color(0xFF0F172A),
+                              color: const Color(0xFF0F172A),
                             ),
                           ),
                           Text(
                             language.practiceHubSubtitle,
-                            style: const TextStyle(
-                              fontSize: 12,
-                              color: Color(0xFF64748B),
+                            style: TextStyle(
+                              fontSize: widget.dense ? 11.5 : 12,
+                              color: const Color(0xFF64748B),
                             ),
                           ),
                         ],
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    _FocusChip(
+                      enabled: hubPrefs.focusModeEnabled,
+                      label: _focusChipLabel(language),
+                      compact: widget.dense,
+                      onTap: () {
+                        ref
+                            .read(practiceHubPreferencesProvider.notifier)
+                            .setFocusMode(!hubPrefs.focusModeEnabled);
+                      },
+                    ),
+                    const SizedBox(width: 4),
+                    IconButton(
+                      tooltip: _reorderTooltipLabel(language),
+                      onPressed: orderedTiles.isEmpty
+                          ? null
+                          : () => _showReorderSheet(
+                              language: language,
+                              orderedTiles: orderedTiles,
+                            ),
+                      icon: const Icon(Icons.drag_indicator_rounded, size: 20),
+                      color: const Color(0xFF334155),
+                      style: IconButton.styleFrom(
+                        minimumSize: const Size(34, 34),
+                        padding: EdgeInsets.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          side: const BorderSide(color: Color(0xFFDCE8F8)),
+                        ),
+                        backgroundColor: const Color(0xFFF8FBFF),
                       ),
                     ),
                     if (highlightCount > 0) ...[
@@ -140,20 +205,255 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
               crossFadeState: _expanded
                   ? CrossFadeState.showSecond
                   : CrossFadeState.showFirst,
-              firstChild: const SizedBox(height: 4),
-              secondChild: const Padding(
-                padding: EdgeInsets.only(bottom: 10),
-                child: Column(
+              firstChild: SizedBox(height: widget.dense ? 2 : 4),
+              secondChild: Padding(
+                padding: EdgeInsets.fromLTRB(
+                  widget.dense ? 12 : 14,
+                  0,
+                  widget.dense ? 12 : 14,
+                  widget.dense ? 12 : 10,
+                ),
+                child: const Column(
                   children: [
-                    GhostReviewBanner(),
-                    SizedBox(height: 8),
-                    PracticeTestDashboard(),
-                    SizedBox(height: 4),
-                    PracticeHub(),
+                    GhostReviewBanner(embedded: true),
+                    SizedBox(height: 6),
+                    PracticeTestDashboard(embedded: true),
+                    SizedBox(height: 10),
+                    PracticeHub(
+                      embedded: true,
+                      showHeader: false,
+                      showFocusHint: false,
+                    ),
                   ],
                 ),
               ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _showReorderSheet({
+    required AppLanguage language,
+    required List<PracticeDestination> orderedTiles,
+  }) async {
+    final editing = List<PracticeDestination>.from(orderedTiles);
+    await showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      isScrollControlled: true,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setModalState) {
+            return SafeArea(
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height * 0.74,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 0, 8, 8),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  _reorderTitle(language),
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  _reorderSubtitle(language),
+                                  style: const TextStyle(
+                                    color: Color(0xFF64748B),
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () async {
+                              await ref
+                                  .read(practiceHubPreferencesProvider.notifier)
+                                  .resetOrder();
+                            },
+                            child: Text(_resetLabel(language)),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Divider(height: 1),
+                    Expanded(
+                      child: ReorderableListView.builder(
+                        itemCount: editing.length,
+                        onReorder: (oldIndex, newIndex) {
+                          setModalState(() {
+                            if (newIndex > oldIndex) {
+                              newIndex -= 1;
+                            }
+                            final moved = editing.removeAt(oldIndex);
+                            editing.insert(newIndex, moved);
+                          });
+                          ref
+                              .read(practiceHubPreferencesProvider.notifier)
+                              .saveOrder(
+                                editing.map((item) => item.id).toList(),
+                              );
+                        },
+                        itemBuilder: (context, index) {
+                          final item = editing[index];
+                          return ListTile(
+                            key: ValueKey('practice_reorder_${item.id}'),
+                            leading: CircleAvatar(
+                              radius: 16,
+                              backgroundColor: item.color.withValues(
+                                alpha: 0.14,
+                              ),
+                              child: Icon(
+                                item.icon,
+                                size: 16,
+                                color: item.color,
+                              ),
+                            ),
+                            title: Text(
+                              item.title,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            subtitle: Text(
+                              item.subtitle,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            trailing: const Icon(Icons.drag_handle_rounded),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  String _focusChipLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Focus 3';
+      case AppLanguage.vi:
+        return 'Ưu tiên 3';
+      case AppLanguage.ja:
+        return '優先3';
+    }
+  }
+
+  String _reorderTooltipLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Reorder cards';
+      case AppLanguage.vi:
+        return 'Sắp xếp thẻ';
+      case AppLanguage.ja:
+        return 'カード並び替え';
+    }
+  }
+
+  String _reorderTitle(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Reorder Practice Cards';
+      case AppLanguage.vi:
+        return 'Sắp xếp thẻ luyện tập';
+      case AppLanguage.ja:
+        return '練習カードの並び替え';
+    }
+  }
+
+  String _reorderSubtitle(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Drag to reorder quick practice cards.';
+      case AppLanguage.vi:
+        return 'Kéo thả để đổi thứ tự thẻ luyện tập nhanh.';
+      case AppLanguage.ja:
+        return 'ドラッグでクイック練習カードの順序を変更できます。';
+    }
+  }
+
+  String _resetLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Reset';
+      case AppLanguage.vi:
+        return 'Đặt lại';
+      case AppLanguage.ja:
+        return 'リセット';
+    }
+  }
+}
+
+class _FocusChip extends StatelessWidget {
+  const _FocusChip({
+    required this.enabled,
+    required this.label,
+    required this.onTap,
+    required this.compact,
+  });
+
+  final bool enabled;
+  final String label;
+  final VoidCallback onTap;
+  final bool compact;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: compact ? 7 : 8,
+          vertical: compact ? 4 : 5,
+        ),
+        decoration: BoxDecoration(
+          color: enabled ? const Color(0xFFFEF3C7) : const Color(0xFFF8FAFC),
+          borderRadius: BorderRadius.circular(999),
+          border: Border.all(
+            color: enabled ? const Color(0xFFFBBF24) : const Color(0xFFDCE8F8),
+          ),
+        ),
+        child: Row(
+          children: [
+            Icon(
+              Icons.filter_alt_rounded,
+              size: compact ? 12 : 13,
+              color: enabled
+                  ? const Color(0xFFB45309)
+                  : const Color(0xFF64748B),
+            ),
+            if (!compact) ...[
+              const SizedBox(width: 4),
+              Text(
+                label,
+                style: TextStyle(
+                  color: enabled
+                      ? const Color(0xFF92400E)
+                      : const Color(0xFF475569),
+                  fontSize: 11.5,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ],
           ],
         ),
       ),

@@ -8,7 +8,9 @@ import '../providers/dashboard_provider.dart';
 import 'home_surface.dart';
 
 class MiniDashboard extends ConsumerWidget {
-  const MiniDashboard({super.key});
+  const MiniDashboard({super.key, this.compact = false});
+
+  final bool compact;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,7 +21,8 @@ class MiniDashboard extends ConsumerWidget {
         .maybeWhen(data: (count) => count, orElse: () => 0);
 
     return dashboardAsync.when(
-      data: (state) => _buildContent(state, language, ghostCount),
+      data: (state) =>
+          _buildContent(state, language, ghostCount, compact: compact),
       loading: () => const SizedBox(
         height: 88,
         child: Center(child: CircularProgressIndicator()),
@@ -31,30 +34,40 @@ class MiniDashboard extends ConsumerWidget {
   Widget _buildContent(
     DashboardState state,
     AppLanguage language,
-    int ghostCount,
-  ) {
+    int ghostCount, {
+    required bool compact,
+  }) {
     final totalDue = state.vocabDue + state.grammarDue + state.kanjiDue;
     final focusCount = state.totalMistakeCount + ghostCount;
+    final headerTitle = language.progressTitle;
+    final headerSubtitle = language.continueJourneyLabel;
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(
-        HomeSurface.pageHorizontalPadding,
-        10,
-        HomeSurface.pageHorizontalPadding,
-        12,
+      padding: EdgeInsets.fromLTRB(
+        compact ? 0 : HomeSurface.pageHorizontalPadding,
+        compact ? 0 : 10,
+        compact ? 0 : HomeSurface.pageHorizontalPadding,
+        compact ? 0 : 12,
       ),
       child: LayoutBuilder(
         builder: (context, constraints) {
-          final crossAxisCount = constraints.maxWidth >= 880
+          final crossAxisCount = compact
+              ? (constraints.maxWidth >= 340 ? 2 : 1)
+              : constraints.maxWidth >= 880
               ? 4
               : constraints.maxWidth >= 560
               ? 2
               : 1;
           return Container(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+            padding: EdgeInsets.fromLTRB(
+              compact ? 14 : 16,
+              compact ? 14 : 16,
+              compact ? 14 : 16,
+              compact ? 14 : 16,
+            ),
             decoration: HomeSurface.softPanel(
               colors: const [Color(0xFFFFFFFF), Color(0xFFF4FAFF)],
-              radius: 28,
+              radius: compact ? 24 : 28,
             ),
             child: Column(
               children: [
@@ -66,7 +79,7 @@ class MiniDashboard extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            language.continueJourneyLabel,
+                            headerSubtitle,
                             style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w800,
@@ -74,13 +87,13 @@ class MiniDashboard extends ConsumerWidget {
                               color: Color(0xFF4B5563),
                             ),
                           ),
-                          const SizedBox(height: 4),
+                          SizedBox(height: compact ? 2 : 4),
                           Text(
-                            language.progressTitle,
+                            headerTitle,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              fontSize: 22,
+                            style: TextStyle(
+                              fontSize: compact ? 19 : 22,
                               fontWeight: FontWeight.w800,
                               color: Color(0xFF0F172A),
                             ),
@@ -89,10 +102,10 @@ class MiniDashboard extends ConsumerWidget {
                       ),
                     ),
                     Container(
-                      width: 44,
-                      height: 44,
+                      width: compact ? 38 : 44,
+                      height: compact ? 38 : 44,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
+                        borderRadius: BorderRadius.circular(compact ? 12 : 14),
                         gradient: const LinearGradient(
                           colors: [Color(0xFFFFEDD5), Color(0xFFFFFBEB)],
                           begin: Alignment.topLeft,
@@ -100,22 +113,22 @@ class MiniDashboard extends ConsumerWidget {
                         ),
                         border: Border.all(color: const Color(0xFFFED7AA)),
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.local_fire_department_rounded,
                         color: Color(0xFFEA580C),
-                        size: 22,
+                        size: compact ? 20 : 22,
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 14),
+                SizedBox(height: compact ? 10 : 14),
                 GridView.count(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   crossAxisCount: crossAxisCount,
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
-                  childAspectRatio: 2.45,
+                  childAspectRatio: compact ? 2.12 : 2.45,
                   children: [
                     _StatTile(
                       icon: Icons.local_fire_department_rounded,

@@ -9,14 +9,21 @@ import 'package:jpstudy/data/models/kanji_item.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/write/screens/handwriting_practice_screen.dart';
 
-class KanjiListWidget extends ConsumerWidget {
+class KanjiListWidget extends ConsumerStatefulWidget {
   const KanjiListWidget({super.key, required this.lessonId});
 
   final int lessonId;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final kanjiAsync = ref.watch(lessonKanjiProvider(lessonId));
+  ConsumerState<KanjiListWidget> createState() => _KanjiListWidgetState();
+}
+
+class _KanjiListWidgetState extends ConsumerState<KanjiListWidget> {
+  final Set<int> _expandedIds = <int>{};
+
+  @override
+  Widget build(BuildContext context) {
+    final kanjiAsync = ref.watch(lessonKanjiProvider(widget.lessonId));
     final language = ref.watch(appLanguageProvider);
 
     return kanjiAsync.when(
@@ -41,42 +48,85 @@ class KanjiListWidget extends ConsumerWidget {
               characterIndex: characterIndex,
               language: language,
             );
+            final expanded = _expandedIds.contains(item.id);
 
             return Card(
               margin: const EdgeInsets.only(bottom: 12),
-              child: ExpansionTile(
-                leading: Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Theme.of(
-                      context,
-                    ).primaryColor.withValues(alpha: 0.12),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  alignment: Alignment.center,
-                  child: Text(
-                    item.character,
-                    style: const TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
+              child: Column(
+                children: [
+                  InkWell(
+                    borderRadius: BorderRadius.circular(12),
+                    onTap: () {
+                      setState(() {
+                        if (expanded) {
+                          _expandedIds.remove(item.id);
+                        } else {
+                          _expandedIds.add(item.id);
+                        }
+                      });
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: Theme.of(
+                                context,
+                              ).primaryColor.withValues(alpha: 0.12),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              item.character,
+                              style: const TextStyle(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  primaryMeaning,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(subtitle),
+                              ],
+                            ),
+                          ),
+                          AnimatedRotation(
+                            turns: expanded ? 0.5 : 0,
+                            duration: const Duration(milliseconds: 180),
+                            child: const Icon(Icons.expand_more_rounded),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                title: Text(
-                  primaryMeaning,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                subtitle: Text(subtitle),
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: _buildExpandedBody(
-                      context,
-                      language: language,
-                      item: item,
-                      allItems: items,
-                      compounds: compounds,
+                  AnimatedCrossFade(
+                    duration: const Duration(milliseconds: 200),
+                    crossFadeState: expanded
+                        ? CrossFadeState.showSecond
+                        : CrossFadeState.showFirst,
+                    firstChild: const SizedBox.shrink(),
+                    secondChild: Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                      child: _buildExpandedBody(
+                        context,
+                        language: language,
+                        item: item,
+                        allItems: items,
+                        compounds: compounds,
+                      ),
                     ),
                   ),
                 ],
@@ -248,7 +298,7 @@ class KanjiListWidget extends ConsumerWidget {
                   MaterialPageRoute(
                     builder: (context) => HandwritingPracticeScreen(
                       lessonTitle:
-                          '${language.lessonTitle(lessonId)} - ${language.kanjiLabel}',
+                          '${language.lessonTitle(widget.lessonId)} - ${language.kanjiLabel}',
                       items: allItems,
                       includeCompoundWords: true,
                       maxCompoundsPerKanji: -1,
