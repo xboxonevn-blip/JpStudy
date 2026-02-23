@@ -26,6 +26,9 @@ import 'package:jpstudy/features/achievements/achievements_screen.dart';
 import 'package:jpstudy/features/design_lab/design_lab_screen.dart';
 import 'package:jpstudy/features/write/screens/home_handwriting_practice_screen.dart';
 import 'package:jpstudy/features/test/screens/home_mock_exam_screen.dart';
+import 'package:jpstudy/features/jlpt/screens/jlpt_coach_screen.dart';
+import 'package:jpstudy/features/jlpt/screens/jlpt_mock_pro_screen.dart';
+import 'package:jpstudy/features/jlpt/screens/jlpt_reading_screen.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -231,6 +234,18 @@ class AppRouter {
       GoRoute(
         path: '/practice/mock-exam',
         builder: (context, state) => const HomeMockExamScreen(),
+      ),
+      GoRoute(
+        path: '/jlpt/coach',
+        builder: (context, state) => const JlptCoachScreen(),
+      ),
+      GoRoute(
+        path: '/jlpt/reading',
+        builder: (context, state) => const JlptReadingScreen(),
+      ),
+      GoRoute(
+        path: '/jlpt/mock-pro',
+        builder: (context, state) => const JlptMockProScreen(),
       ),
       GoRoute(
         path: '/learn/session',

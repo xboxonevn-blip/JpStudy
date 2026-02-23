@@ -35,6 +35,14 @@ List<PracticeDestination> buildPracticeDestinations({
 }) {
   final list = <PracticeDestination>[
     PracticeDestination(
+      id: 'jlpt_coach',
+      title: _jlptCoachTitle(language),
+      subtitle: _jlptCoachSubtitle(language),
+      icon: Icons.school_rounded,
+      color: const Color(0xFF2563EB),
+      route: '/jlpt/coach',
+    ),
+    PracticeDestination(
       id: 'match',
       title: language.practiceMatchLabel,
       subtitle: language.practiceMatchSubtitle,
@@ -133,6 +141,14 @@ List<PracticeDestination> buildPracticeDestinations({
           score += 2;
         }
         break;
+      case '/jlpt/coach':
+        if (dueReviewCount == 0) {
+          score += 4;
+        }
+        if (mistakeCount > 0 || ghostCount > 0) {
+          score += 5;
+        }
+        break;
       default:
         break;
     }
@@ -202,6 +218,28 @@ bool _isFocusRoute(String route) {
       route == '/mistakes' ||
       route == '/practice/handwriting' ||
       route == '/immersion';
+}
+
+String _jlptCoachTitle(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'JLPT Coach';
+    case AppLanguage.vi:
+      return 'Tro ly JLPT';
+    case AppLanguage.ja:
+      return 'JLPTコーチ';
+  }
+}
+
+String _jlptCoachSubtitle(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Reading, mock exam, diagnosis, 7-day plan.';
+    case AppLanguage.vi:
+      return 'Doc hieu, mock exam, chan doan, ke hoach 7 ngay.';
+    case AppLanguage.ja:
+      return '読解、模試、診断、7日プラン。';
+  }
 }
 
 class _ScoredDestination {

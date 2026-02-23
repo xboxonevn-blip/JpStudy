@@ -14,6 +14,7 @@ import '../../learn/models/learn_session_args.dart';
 import 'package:go_router/go_router.dart';
 import '../../../data/db/app_database.dart';
 import '../../write/screens/handwriting_practice_screen.dart';
+import '../../jlpt/models/jlpt_coach_models.dart';
 
 class MistakeScreen extends ConsumerStatefulWidget {
   const MistakeScreen({super.key});
@@ -23,6 +24,8 @@ class MistakeScreen extends ConsumerStatefulWidget {
 }
 
 class _MistakeScreenState extends ConsumerState<MistakeScreen> {
+  bool _showDueOnly = false;
+
   @override
   Widget build(BuildContext context) {
     final repo = ref.watch(mistakeRepositoryProvider);
@@ -43,6 +46,13 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
           }
 
           final allMistakes = snapshot.data ?? [];
+          final dueBuckets = computeMistakeDueBuckets(
+            allMistakes,
+            DateTime.now(),
+          );
+          final visibleMistakes = _showDueOnly
+              ? allMistakes.where(_isDueBy137).toList(growable: false)
+              : allMistakes;
 
           if (allMistakes.isEmpty) {
             return Center(
@@ -71,7 +81,7 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
           }
 
           return FutureBuilder<_MistakeDetails>(
-            future: _loadMistakeDetails(allMistakes, db, lessonRepo),
+            future: _loadMistakeDetails(visibleMistakes, db, lessonRepo),
             builder: (context, detailSnapshot) {
               if (detailSnapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
@@ -84,68 +94,92 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
 
               return Column(
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
+                    child: _buildDueSummaryCard(language, dueBuckets),
+                  ),
                   Expanded(
-                    child: ListView.builder(
-                      itemCount: allMistakes.length,
-                      itemBuilder: (context, index) {
-                        final mistake = allMistakes[index];
-                        final display = _buildMistakeDisplay(
-                          mistake,
-                          details,
-                          language,
-                        );
-                        final contextLines = _buildContextLines(
-                          mistake,
-                          language,
-                        );
-                        final icon = _mistakeIcon(mistake.type);
-                        final color = _mistakeColor(mistake.type);
+                    child: visibleMistakes.isEmpty
+                        ? Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(24),
+                              child: Text(
+                                _tr(
+                                  language,
+                                  'No due mistakes for 1-3-7 right now.',
+                                  'Hien chua co loi den han 1-3-7.',
+                                  '現在、1-3-7の期限ミスはありません。',
+                                ),
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  color: Color(0xFF6B7390),
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ),
+                          )
+                        : ListView.builder(
+                            itemCount: visibleMistakes.length,
+                            itemBuilder: (context, index) {
+                              final mistake = visibleMistakes[index];
+                              final display = _buildMistakeDisplay(
+                                mistake,
+                                details,
+                                language,
+                              );
+                              final contextLines = _buildContextLines(
+                                mistake,
+                                language,
+                              );
+                              final icon = _mistakeIcon(mistake.type);
+                              final color = _mistakeColor(mistake.type);
 
-                        return Card(
-                          margin: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 6,
-                          ),
-                          child: ListTile(
-                            leading: Icon(icon, color: color),
-                            title: Text(display.title),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(display.subtitle),
-                                if (contextLines.isNotEmpty) ...[
-                                  const SizedBox(height: 6),
-                                  ...contextLines.map(
-                                    (line) => Text(
-                                      line,
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                        color: Color(0xFF6B7390),
-                                      ),
-                                    ),
+                              return Card(
+                                margin: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 6,
+                                ),
+                                child: ListTile(
+                                  leading: Icon(icon, color: color),
+                                  title: Text(display.title),
+                                  subtitle: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(display.subtitle),
+                                      if (contextLines.isNotEmpty) ...[
+                                        const SizedBox(height: 6),
+                                        ...contextLines.map(
+                                          (line) => Text(
+                                            line,
+                                            style: const TextStyle(
+                                              fontSize: 12,
+                                              color: Color(0xFF6B7390),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ],
                                   ),
-                                ],
-                              ],
-                            ),
-                            trailing: IconButton(
-                              icon: const Icon(Icons.delete_outline),
-                              onPressed: () {
-                                repo.removeMistake(
-                                  type: mistake.type,
-                                  itemId: mistake.itemId,
-                                );
-                                ref.invalidate(dashboardProvider);
-                              },
-                            ),
+                                  trailing: IconButton(
+                                    icon: const Icon(Icons.delete_outline),
+                                    onPressed: () {
+                                      repo.removeMistake(
+                                        type: mistake.type,
+                                        itemId: mistake.itemId,
+                                      );
+                                      ref.invalidate(dashboardProvider);
+                                    },
+                                  ),
+                                ),
+                              );
+                            },
                           ),
-                        );
-                      },
-                    ),
                   ),
                   _buildPracticeActions(
                     context,
                     ref,
-                    allMistakes,
+                    visibleMistakes,
                     details,
                     language,
                   ),
@@ -261,6 +295,107 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
         ],
       ),
     );
+  }
+
+  Widget _buildDueSummaryCard(AppLanguage language, MistakeDueBuckets buckets) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xFFFFFBEB),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFFDE68A)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(
+                Icons.schedule_rounded,
+                color: Color(0xFFB45309),
+                size: 18,
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  _tr(
+                    language,
+                    '1-3-7 due review',
+                    'On den han 1-3-7',
+                    '1-3-7期限レビュー',
+                  ),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w900,
+                    color: Color(0xFF92400E),
+                  ),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    _showDueOnly = !_showDueOnly;
+                  });
+                },
+                child: Text(
+                  _showDueOnly
+                      ? _tr(language, 'Show all', 'Hien tat ca', 'すべて表示')
+                      : _tr(
+                          language,
+                          'Show due only',
+                          'Chi hien den han',
+                          '期限のみ表示',
+                        ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          Text(
+            _tr(
+              language,
+              'Due now: D1 ${buckets.due1d} | D3 ${buckets.due3d} | D7 ${buckets.due7d} | New ${buckets.notDue}',
+              'Den han: D1 ${buckets.due1d} | D3 ${buckets.due3d} | D7 ${buckets.due7d} | Moi ${buckets.notDue}',
+              '期限: D1 ${buckets.due1d} | D3 ${buckets.due3d} | D7 ${buckets.due7d} | 新規 ${buckets.notDue}',
+            ),
+            style: const TextStyle(
+              fontWeight: FontWeight.w700,
+              color: Color(0xFF78350F),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  bool _isDueBy137(UserMistake mistake) {
+    final age = DateTime.now().difference(mistake.lastMistakeAt);
+    return age.inHours >= 24;
+  }
+
+  String _dueCheckpointLabel(DateTime lastMistakeAt, AppLanguage language) {
+    final age = DateTime.now().difference(lastMistakeAt);
+    if (age.inHours < 24) {
+      return _tr(language, 'Not due (new)', 'Chua den han (moi)', '未期限(新規)');
+    }
+    if (age.inHours < 72) {
+      return _tr(language, 'D1 due', 'Den han D1', 'D1期限');
+    }
+    if (age.inHours < 24 * 7) {
+      return _tr(language, 'D3 due', 'Den han D3', 'D3期限');
+    }
+    return _tr(language, 'D7 due', 'Den han D7', 'D7期限');
+  }
+
+  String _tr(AppLanguage language, String en, String vi, String ja) {
+    switch (language) {
+      case AppLanguage.en:
+        return en;
+      case AppLanguage.vi:
+        return vi;
+      case AppLanguage.ja:
+        return ja;
+    }
   }
 
   Widget _buildPracticeButton({
@@ -526,6 +661,10 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
 
   List<String> _buildContextLines(UserMistake mistake, AppLanguage language) {
     final lines = <String>[];
+    lines.add(
+      '${_tr(language, 'Review checkpoint', 'Moc on', '復習チェックポイント')}: '
+      '${_dueCheckpointLabel(mistake.lastMistakeAt, language)}',
+    );
     final prompt = (mistake.prompt ?? '').trim();
     if (prompt.isNotEmpty) {
       lines.add('${language.mistakePromptLabel}: $prompt');

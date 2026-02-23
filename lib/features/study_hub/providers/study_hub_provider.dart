@@ -1,4 +1,4 @@
-﻿import 'dart:convert';
+import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -105,7 +105,8 @@ class QaAnswer {
       id: json['id'] as String? ?? '',
       body: json['body'] as String? ?? '',
       upvotes: json['upvotes'] as int? ?? 0,
-      createdAt: DateTime.tryParse(json['createdAt'] as String? ?? '') ??
+      createdAt:
+          DateTime.tryParse(json['createdAt'] as String? ?? '') ??
           DateTime.fromMillisecondsSinceEpoch(0),
     );
   }
@@ -173,9 +174,7 @@ class QaThread {
         ? rawAnswers
               .whereType<Map>()
               .map(
-                (entry) => QaAnswer.fromJson(
-                  Map<String, dynamic>.from(entry as Map),
-                ),
+                (entry) => QaAnswer.fromJson(Map<String, dynamic>.from(entry)),
               )
               .toList(growable: false)
         : const <QaAnswer>[];
@@ -190,7 +189,8 @@ class QaThread {
           : const <String>[],
       upvotes: json['upvotes'] as int? ?? 0,
       resolved: json['resolved'] as bool? ?? false,
-      createdAt: DateTime.tryParse(json['createdAt'] as String? ?? '') ??
+      createdAt:
+          DateTime.tryParse(json['createdAt'] as String? ?? '') ??
           DateTime.fromMillisecondsSinceEpoch(0),
       answers: answers,
     );
@@ -223,15 +223,15 @@ class StudyHubState {
   });
 
   StudyHubState.initial()
-      : loaded = false,
-        selectedLevels = const <StudyResourceLevel>{},
-        selectedTopics = const <StudyResourceTopic>{},
-        selectedLabels = const <String>{},
-        packLessons = const <String, int>{},
-        doneOnboardingSteps = const <String>{},
-        threads = const <QaThread>[],
-        examChecklistDone = const <String>{},
-        examDate = null;
+    : loaded = false,
+      selectedLevels = const <StudyResourceLevel>{},
+      selectedTopics = const <StudyResourceTopic>{},
+      selectedLabels = const <String>{},
+      packLessons = const <String, int>{},
+      doneOnboardingSteps = const <String>{},
+      threads = const <QaThread>[],
+      examChecklistDone = const <String>{},
+      examDate = null;
 
   final bool loaded;
   final Set<StudyResourceLevel> selectedLevels;
@@ -291,12 +291,14 @@ class StudyHubState {
     final labels = (json['selectedLabels'] as List<dynamic>? ?? const [])
         .map((entry) => entry.toString())
         .toSet();
-    final doneSteps = (json['doneOnboardingSteps'] as List<dynamic>? ?? const [])
-        .map((entry) => entry.toString())
-        .toSet();
-    final doneChecklist = (json['examChecklistDone'] as List<dynamic>? ?? const [])
-        .map((entry) => entry.toString())
-        .toSet();
+    final doneSteps =
+        (json['doneOnboardingSteps'] as List<dynamic>? ?? const [])
+            .map((entry) => entry.toString())
+            .toSet();
+    final doneChecklist =
+        (json['examChecklistDone'] as List<dynamic>? ?? const [])
+            .map((entry) => entry.toString())
+            .toSet();
     final packRaw = json['packLessons'];
     final packs = <String, int>{};
     if (packRaw is Map) {
@@ -311,7 +313,9 @@ class StudyHubState {
     final decodedThreads = rawThreads is List
         ? rawThreads
               .whereType<Map>()
-              .map((entry) => QaThread.fromJson(Map<String, dynamic>.from(entry)))
+              .map(
+                (entry) => QaThread.fromJson(Map<String, dynamic>.from(entry)),
+              )
               .toList(growable: false)
         : _defaultThreads;
 
@@ -335,10 +339,11 @@ class StudyHubState {
 
 const _prefsKey = 'study_hub.state.v1';
 
-final studyHubProvider =
-    StateNotifierProvider<StudyHubNotifier, StudyHubState>((ref) {
-  return StudyHubNotifier()..load();
-});
+final studyHubProvider = StateNotifierProvider<StudyHubNotifier, StudyHubState>(
+  (ref) {
+    return StudyHubNotifier()..load();
+  },
+);
 
 class StudyHubNotifier extends StateNotifier<StudyHubState> {
   StudyHubNotifier() : super(StudyHubState.initial());
@@ -754,21 +759,25 @@ final studyResources = <StudyResource>[
 ];
 
 List<StudyResource> filteredResources(StudyHubState state) {
-  return studyResources.where((resource) {
-    if (state.selectedLevels.isNotEmpty &&
-        !state.selectedLevels.contains(resource.level)) {
-      return false;
-    }
-    if (state.selectedTopics.isNotEmpty &&
-        !state.selectedTopics.contains(resource.topic)) {
-      return false;
-    }
-    if (state.selectedLabels.isNotEmpty &&
-        state.selectedLabels.intersection(resource.labels.toSet()).isEmpty) {
-      return false;
-    }
-    return true;
-  }).toList(growable: false);
+  return studyResources
+      .where((resource) {
+        if (state.selectedLevels.isNotEmpty &&
+            !state.selectedLevels.contains(resource.level)) {
+          return false;
+        }
+        if (state.selectedTopics.isNotEmpty &&
+            !state.selectedTopics.contains(resource.topic)) {
+          return false;
+        }
+        if (state.selectedLabels.isNotEmpty &&
+            state.selectedLabels
+                .intersection(resource.labels.toSet())
+                .isEmpty) {
+          return false;
+        }
+        return true;
+      })
+      .toList(growable: false);
 }
 
 List<StudyResource> popularResources({int limit = 5}) {
@@ -833,4 +842,3 @@ final _defaultThreads = <QaThread>[
     ],
   ),
 ];
-

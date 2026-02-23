@@ -31,6 +31,7 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
   bool _showFurigana = true;
   bool _showTranslation = true;
   bool _isAutoScrolling = false;
+  bool _quickAddMode = false;
   Future<ImmersionArticle?>? _detailFuture;
   Set<String> _savedTokens = {};
   Map<String, ImmersionToken> _unknownQueue = {};
@@ -41,13 +42,19 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
   AppLanguage? _quizLanguage;
   List<ImmersionQuizAttempt> _quizHistory = const [];
   _QuizHistoryFilter _quizHistoryFilter = _QuizHistoryFilter.week;
+  String? _readingArticleId;
+  DateTime? _readingStartedAt;
+  double _readingProgress = 0;
+  int _readingTotalChars = 0;
 
   final ScrollController _scrollController = ScrollController();
   Timer? _autoScrollTimer;
+  Timer? _readingTicker;
 
   @override
   void initState() {
     super.initState();
+    _scrollController.addListener(_handleScrollProgress);
     _ensureDetailLoaded();
     _loadSavedTokens();
   }
@@ -55,6 +62,8 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
   @override
   void dispose() {
     _autoScrollTimer?.cancel();
+    _readingTicker?.cancel();
+    _scrollController.removeListener(_handleScrollProgress);
     _scrollController.dispose();
     super.dispose();
   }
@@ -127,6 +136,66 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
     setState(() {
       _isAutoScrolling = false;
     });
+  }
+
+  void _handleScrollProgress() {
+    if (!_scrollController.hasClients) {
+      return;
+    }
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final next = maxScroll <= 0
+        ? 0.0
+        : (_scrollController.offset / maxScroll).clamp(0.0, 1.0);
+    if ((next - _readingProgress).abs() < 0.01) {
+      return;
+    }
+    setState(() {
+      _readingProgress = next;
+    });
+  }
+
+  void _startReadingMetrics(ImmersionArticle article) {
+    if (_readingArticleId == article.id) {
+      return;
+    }
+    final totalChars = article.paragraphs
+        .expand((paragraph) => paragraph)
+        .fold<int>(0, (sum, token) => sum + token.surface.runes.length);
+    _readingTicker?.cancel();
+    _readingTicker = Timer.periodic(const Duration(seconds: 5), (_) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {});
+    });
+    _readingArticleId = article.id;
+    _readingStartedAt = DateTime.now();
+    _readingProgress = 0;
+    _readingTotalChars = totalChars;
+  }
+
+  int _estimatedReadChars({required bool isRead}) {
+    if (_readingTotalChars <= 0) {
+      return 0;
+    }
+    final progress = isRead ? 1.0 : _readingProgress.clamp(0.0, 1.0);
+    return (_readingTotalChars * progress).round();
+  }
+
+  Duration _readingElapsed() {
+    if (_readingStartedAt == null) {
+      return Duration.zero;
+    }
+    return DateTime.now().difference(_readingStartedAt!);
+  }
+
+  double _charsPerMinute({required bool isRead}) {
+    final elapsed = _readingElapsed();
+    if (elapsed.inSeconds <= 0) {
+      return 0;
+    }
+    final chars = _estimatedReadChars(isRead: isRead);
+    return chars / elapsed.inSeconds * 60;
   }
 
   void _ensureArticleSession(ImmersionArticle article, AppLanguage language) {
@@ -568,6 +637,73 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
     }
   }
 
+  String _quickAddModeLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Quick add mode';
+      case AppLanguage.vi:
+        return 'Che do them nhanh';
+      case AppLanguage.ja:
+        return 'クイック追加モード';
+    }
+  }
+
+  String _readingStatsTitle(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Reading speed';
+      case AppLanguage.vi:
+        return 'Toc do doc';
+      case AppLanguage.ja:
+        return '読書速度';
+    }
+  }
+
+  String _readingStatsHint(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Speed updates from scroll progress. Enable quick add to save words in one tap.';
+      case AppLanguage.vi:
+        return 'Toc do cap nhat theo tien do cuon. Bat them nhanh de luu tu chi voi 1 cham.';
+      case AppLanguage.ja:
+        return '速度はスクロール進捗で更新されます。クイック追加を有効にすると1タップで保存できます。';
+    }
+  }
+
+  String _readingElapsedLabel(AppLanguage language, Duration elapsed) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Elapsed: ${elapsed.inMinutes}m ${elapsed.inSeconds % 60}s';
+      case AppLanguage.vi:
+        return 'Da doc: ${elapsed.inMinutes}p ${elapsed.inSeconds % 60}s';
+      case AppLanguage.ja:
+        return '経過: ${elapsed.inMinutes}分${elapsed.inSeconds % 60}秒';
+    }
+  }
+
+  String _readingProgressLabel(AppLanguage language, int percent) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Progress: $percent%';
+      case AppLanguage.vi:
+        return 'Tien do: $percent%';
+      case AppLanguage.ja:
+        return '進捗: $percent%';
+    }
+  }
+
+  String _readingSpeedLabel(AppLanguage language, double cpm) {
+    final value = cpm.round();
+    switch (language) {
+      case AppLanguage.en:
+        return 'Speed: $value chars/min';
+      case AppLanguage.vi:
+        return 'Toc do: $value ky tu/phut';
+      case AppLanguage.ja:
+        return '速度: $value 文字/分';
+    }
+  }
+
   String _unknownQueueTitle(AppLanguage language, int count) {
     switch (language) {
       case AppLanguage.en:
@@ -922,11 +1058,16 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
     bool isRead,
   ) {
     _ensureArticleSession(article, language);
+    _startReadingMetrics(article);
     final dateLabel = MaterialLocalizations.of(
       context,
     ).formatMediumDate(article.publishedAt);
     final filteredHistory = _historyForCurrentFilter();
     final chartPoints = _historyPointsForChart();
+    final elapsed = _readingElapsed();
+    final progress = isRead ? 1.0 : _readingProgress.clamp(0.0, 1.0);
+    final progressPercent = (progress * 100).round();
+    final charsPerMinute = _charsPerMinute(isRead: isRead);
 
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -934,6 +1075,20 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
         context,
         language,
         actions: [
+          IconButton(
+            tooltip: _quickAddModeLabel(language),
+            onPressed: () {
+              setState(() {
+                _quickAddMode = !_quickAddMode;
+              });
+            },
+            icon: Icon(
+              _quickAddMode
+                  ? Icons.playlist_add_check_circle_rounded
+                  : Icons.playlist_add_check_rounded,
+              color: _quickAddMode ? const Color(0xFF059669) : null,
+            ),
+          ),
           IconButton(
             tooltip: language.immersionMarkReadLabel,
             onPressed: _toggleReadStatus,
@@ -1002,6 +1157,16 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
               isRead: isRead,
               language: language,
             ),
+            const SizedBox(height: 12),
+            _ReadingSpeedCard(
+              title: _readingStatsTitle(language),
+              hint: _readingStatsHint(language),
+              elapsedLabel: _readingElapsedLabel(language, elapsed),
+              progressLabel: _readingProgressLabel(language, progressPercent),
+              speedLabel: _readingSpeedLabel(language, charsPerMinute),
+              quickAddModeLabel: _quickAddModeLabel(language),
+              quickAddEnabled: _quickAddMode,
+            ),
             if (_unknownQueue.isNotEmpty) ...[
               const SizedBox(height: 12),
               _UnknownQueueCard(
@@ -1027,7 +1192,18 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
                           showFurigana: _showFurigana,
                           isSaved: _isTokenSaved(token),
                           onTap: token.hasMeaning
-                              ? () => _showTokenDetail(token, language)
+                              ? () async {
+                                  if (_quickAddMode && !_isTokenSaved(token)) {
+                                    await _addToSrs(token, language);
+                                    return;
+                                  }
+                                  await _showTokenDetail(token, language);
+                                }
+                              : null,
+                          onLongPress: token.hasMeaning
+                              ? () async {
+                                  await _addToSrs(token, language);
+                                }
                               : null,
                         ),
                       )
@@ -1337,6 +1513,73 @@ class _ArticleHeaderCard extends StatelessWidget {
   }
 }
 
+class _ReadingSpeedCard extends StatelessWidget {
+  const _ReadingSpeedCard({
+    required this.title,
+    required this.hint,
+    required this.elapsedLabel,
+    required this.progressLabel,
+    required this.speedLabel,
+    required this.quickAddModeLabel,
+    required this.quickAddEnabled,
+  });
+
+  final String title;
+  final String hint;
+  final String elapsedLabel;
+  final String progressLabel;
+  final String speedLabel;
+  final String quickAddModeLabel;
+  final bool quickAddEnabled;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.95),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFFDCE8F8)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontWeight: FontWeight.w900,
+              color: Color(0xFF0F172A),
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            hint,
+            style: const TextStyle(
+              fontSize: 12.5,
+              color: Color(0xFF64748B),
+              height: 1.35,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Wrap(
+            spacing: 6,
+            runSpacing: 6,
+            children: [
+              _TinyTag(label: elapsedLabel),
+              _TinyTag(label: progressLabel),
+              _TinyTag(label: speedLabel),
+              _TinyTag(
+                label: '$quickAddModeLabel: ${quickAddEnabled ? 'ON' : 'OFF'}',
+                emphasize: quickAddEnabled,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _ParagraphCard extends StatelessWidget {
   const _ParagraphCard({required this.children});
 
@@ -1362,12 +1605,14 @@ class _TokenChip extends StatelessWidget {
     required this.showFurigana,
     required this.isSaved,
     this.onTap,
+    this.onLongPress,
   });
 
   final ImmersionToken token;
   final bool showFurigana;
   final bool isSaved;
   final VoidCallback? onTap;
+  final VoidCallback? onLongPress;
 
   @override
   Widget build(BuildContext context) {
@@ -1387,6 +1632,7 @@ class _TokenChip extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: onTap,
+        onLongPress: onLongPress,
         borderRadius: BorderRadius.circular(10),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 5),
