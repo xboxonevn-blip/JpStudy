@@ -58,4 +58,14 @@ class SrsDao extends DatabaseAccessor<AppDatabase> with _$SrsDaoMixin {
           ..where((t) => t.nextReviewAt.isSmallerOrEqualValue(DateTime.now())))
         .get();
   }
+
+  /// Reactive due count used by dashboard and home indicators.
+  Stream<int> watchDueReviewCount() {
+    final countExpr = srsState.vocabId.count();
+    return (selectOnly(srsState)
+          ..addColumns([countExpr])
+          ..where(srsState.nextReviewAt.isSmallerOrEqualValue(DateTime.now())))
+        .map((row) => row.read(countExpr) ?? 0)
+        .watchSingle();
+  }
 }

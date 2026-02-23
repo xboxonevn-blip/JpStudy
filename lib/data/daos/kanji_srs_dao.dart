@@ -58,4 +58,16 @@ class KanjiSrsDao extends DatabaseAccessor<AppDatabase>
       kanjiSrsState,
     )..where((t) => t.nextReviewAt.isSmallerOrEqualValue(now))).get();
   }
+
+  /// Reactive due count for dashboard/home.
+  Stream<int> watchDueReviewCount() {
+    final countExpr = kanjiSrsState.kanjiId.count();
+    return (selectOnly(kanjiSrsState)
+          ..addColumns([countExpr])
+          ..where(
+            kanjiSrsState.nextReviewAt.isSmallerOrEqualValue(DateTime.now()),
+          ))
+        .map((row) => row.read(countExpr) ?? 0)
+        .watchSingle();
+  }
 }

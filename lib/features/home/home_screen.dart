@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/services/backup_sync_service.dart';
 import 'package:jpstudy/core/notifications/notification_service.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/language_provider.dart';
@@ -14,6 +15,7 @@ import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/core/theme_provider.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/common/widgets/japanese_background.dart';
+import 'package:jpstudy/features/home/providers/backup_status_provider.dart';
 import 'package:jpstudy/features/home/screens/learning_path_screen.dart';
 import 'package:jpstudy/features/home/widgets/header_bar.dart';
 import 'package:jpstudy/features/home/widgets/level_gate.dart';
@@ -388,7 +390,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Future<void> _exportBackup(BuildContext context, AppLanguage language) async {
     final repo = ref.read(lessonRepositoryProvider);
     final data = await repo.exportBackup();
-    final jsonText = const JsonEncoder.withIndent('  ').convert(data);
+    final envelope = await BackupSyncService.buildExportEnvelope(data);
+    final jsonText = const JsonEncoder.withIndent('  ').convert(envelope);
     final location = await getSaveLocation(
       suggestedName: 'jpstudy_backup.json',
       acceptedTypeGroups: const [
@@ -451,8 +454,33 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     try {
       final content = await File(file.path).readAsString();
       final data = jsonDecode(content) as Map<String, dynamic>;
+      final importPlan = await BackupSyncService.prepareImport(data);
+      if (importPlan.decision == BackupImportDecision.invalidChecksum) {
+        if (!context.mounted) {
+          return;
+        }
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(language.backupImportError)));
+        return;
+      }
+      if (importPlan.decision == BackupImportDecision.skipOlder) {
+        if (!context.mounted) {
+          return;
+        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(language.autoBackupLastLabel('local is newer')),
+          ),
+        );
+        return;
+      }
+
       final repo = ref.read(lessonRepositoryProvider);
-      await repo.importBackup(data);
+      await _savePreImportSafetySnapshot(repo);
+      await repo.importBackup(importPlan.payload);
+      await BackupSyncService.markImportApplied(importPlan.incomingExportedAt);
+      refreshBackupStatus(ref);
       ref.invalidate(lessonMetaProvider);
       if (!context.mounted) {
         return;
@@ -468,6 +496,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         context,
       ).showSnackBar(SnackBar(content: Text(language.backupImportError)));
     }
+  }
+
+  Future<void> _savePreImportSafetySnapshot(LessonRepository repo) async {
+    final snapshot = await repo.exportBackup();
+    final envelope = await BackupSyncService.buildExportEnvelope(snapshot);
+    final jsonText = const JsonEncoder.withIndent('  ').convert(envelope);
+    final backupDir = await _ensureBackupDir();
+    final timestamp = DateTime.now().toIso8601String().replaceAll(':', '-');
+    final file = File(
+      p.join(backupDir.path, 'jpstudy_pre_import_$timestamp.json'),
+    );
+    await file.writeAsString(jsonText, flush: true);
+    await _cleanupOldBackups(backupDir, keep: 10);
   }
 
   Future<void> _loadReminderPrefs() async {
@@ -591,6 +632,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     } else {
       _autoBackupTimer?.cancel();
     }
+    refreshBackupStatus(ref);
   }
 
   void _scheduleInAppReminder() {
@@ -644,26 +686,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Future<void> _performAutoBackup(AppLanguage language) async {
     final prefs = _prefs ?? await SharedPreferences.getInstance();
     final todayKey = _dateKey(DateTime.now());
-    final lastKey = prefs.getString(_prefAutoBackupLast);
-    if (lastKey == todayKey) {
+    final lastRaw = prefs.getString(_prefAutoBackupLast);
+    if (_dateKeyFromStored(lastRaw) == todayKey) {
       return;
     }
     try {
       final repo = ref.read(lessonRepositoryProvider);
       final data = await repo.exportBackup();
-      final jsonText = const JsonEncoder.withIndent('  ').convert(data);
-      final directory = await getApplicationDocumentsDirectory();
-      final backupDir = Directory(p.join(directory.path, 'backups'));
-      if (!backupDir.existsSync()) {
-        backupDir.createSync(recursive: true);
-      }
+      final envelope = await BackupSyncService.buildExportEnvelope(data);
+      final jsonText = const JsonEncoder.withIndent('  ').convert(envelope);
+      final backupDir = await _ensureBackupDir();
       final timestamp = DateTime.now();
       final fileName =
           'jpstudy_auto_backup_${timestamp.toIso8601String().replaceAll(':', '-')}.json';
       final file = File(p.join(backupDir.path, fileName));
       await file.writeAsString(jsonText, flush: true);
-      await prefs.setString(_prefAutoBackupLast, todayKey);
+      await prefs.setString(_prefAutoBackupLast, timestamp.toIso8601String());
       _lastAutoBackup = timestamp;
+      refreshBackupStatus(ref);
       await _cleanupOldBackups(backupDir, keep: 7);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -677,6 +717,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ).showSnackBar(SnackBar(content: Text(language.autoBackupErrorLabel)));
       }
     }
+  }
+
+  Future<Directory> _ensureBackupDir() async {
+    final directory = await getApplicationDocumentsDirectory();
+    final backupDir = Directory(p.join(directory.path, 'backups'));
+    if (!backupDir.existsSync()) {
+      backupDir.createSync(recursive: true);
+    }
+    return backupDir;
   }
 
   Future<void> _cleanupOldBackups(Directory backupDir, {int keep = 7}) async {
@@ -701,6 +750,20 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return '${time.year.toString().padLeft(4, '0')}-'
         '${time.month.toString().padLeft(2, '0')}-'
         '${time.day.toString().padLeft(2, '0')}';
+  }
+
+  String? _dateKeyFromStored(String? raw) {
+    if (raw == null || raw.isEmpty) {
+      return null;
+    }
+    final parsed = DateTime.tryParse(raw);
+    if (parsed != null) {
+      return _dateKey(parsed);
+    }
+    if (raw.length >= 10) {
+      return raw.substring(0, 10);
+    }
+    return raw;
   }
 
   void _showInAppReminder(AppLanguage language) {

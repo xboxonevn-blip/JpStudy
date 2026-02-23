@@ -58,6 +58,40 @@ class HandwritingCharacterResult {
 class HandwritingEvaluator {
   const HandwritingEvaluator._();
 
+  static const Map<String, _ThresholdOverride> _characterOverrides = {
+    '未': _ThresholdOverride(
+      requiredScoreDelta: 0.02,
+      minOrderScoreDelta: 0.04,
+      minTemplateScoreDelta: 0.05,
+    ),
+    '末': _ThresholdOverride(
+      requiredScoreDelta: 0.02,
+      minOrderScoreDelta: 0.04,
+      minTemplateScoreDelta: 0.05,
+    ),
+    '土': _ThresholdOverride(
+      requiredScoreDelta: 0.01,
+      minOrderScoreDelta: 0.03,
+      minTemplateScoreDelta: 0.04,
+    ),
+    '士': _ThresholdOverride(
+      requiredScoreDelta: 0.01,
+      minOrderScoreDelta: 0.03,
+      minTemplateScoreDelta: 0.04,
+    ),
+    '口': _ThresholdOverride(
+      requiredScoreDelta: 0.01,
+      minStrokeScoreDelta: 0.01,
+      minShapeScoreDelta: 0.03,
+      minTemplateScoreDelta: 0.03,
+    ),
+    '日': _ThresholdOverride(
+      requiredScoreDelta: 0.01,
+      minShapeScoreDelta: 0.03,
+      minTemplateScoreDelta: 0.04,
+    ),
+  };
+
   static HandwritingEvaluationResult evaluate({
     required List<List<Offset>> strokes,
     required int expectedStrokes,
@@ -103,9 +137,15 @@ class HandwritingEvaluator {
     );
 
     final tier = _resolveTier(template);
-    final profile = _profileForTier(
+    final baseProfile = _profileForTier(
       tier: tier,
       showGuide: showGuide,
+      version: scoringVersion,
+    );
+    final profile = _applyPerKanjiTuning(
+      baseProfile,
+      tier: tier,
+      template: template,
       version: scoringVersion,
     );
 
@@ -251,11 +291,11 @@ class HandwritingEvaluator {
           shapeWeight: 0.19,
           orderWeight: 0.15,
           templateWeight: 0.32,
-          requiredScore: showGuide ? 0.60 : 0.70,
+          requiredScore: showGuide ? 0.61 : 0.71,
           minStrokeScore: 0.50,
-          minShapeScore: 0.45,
-          minOrderScore: 0.70,
-          minTemplateScore: 0.65,
+          minShapeScore: 0.46,
+          minOrderScore: 0.72,
+          minTemplateScore: 0.66,
         );
       case HandwritingQualityTier.curated:
         return _TierProfile(
@@ -369,6 +409,55 @@ class HandwritingEvaluator {
     }
     return total;
   }
+
+  static _TierProfile _applyPerKanjiTuning(
+    _TierProfile profile, {
+    required HandwritingQualityTier tier,
+    required KanjiStrokeTemplate? template,
+    required HandwritingScoringVersion version,
+  }) {
+    if (version != HandwritingScoringVersion.v2 || template == null) {
+      return profile;
+    }
+
+    final strokeComplexity = ((template.strokes.length - 4).clamp(0, 12) / 12)
+        .toDouble();
+    final complexityTuned = switch (tier) {
+      HandwritingQualityTier.manual => profile.copyWith(
+        requiredScore: profile.requiredScore + (0.02 * strokeComplexity),
+        minTemplateScore: profile.minTemplateScore + (0.03 * strokeComplexity),
+        minOrderScore: profile.minOrderScore + (0.02 * strokeComplexity),
+      ),
+      HandwritingQualityTier.curated => profile.copyWith(
+        requiredScore: profile.requiredScore + (0.015 * strokeComplexity),
+        minTemplateScore: profile.minTemplateScore + (0.025 * strokeComplexity),
+        minOrderScore: profile.minOrderScore + (0.015 * strokeComplexity),
+      ),
+      HandwritingQualityTier.generated => profile.copyWith(
+        requiredScore: profile.requiredScore + (0.01 * strokeComplexity),
+        minTemplateScore: profile.minTemplateScore + (0.02 * strokeComplexity),
+        minOrderScore: profile.minOrderScore + (0.01 * strokeComplexity),
+      ),
+      HandwritingQualityTier.none => profile,
+    };
+
+    final override = _characterOverrides[template.character];
+    if (override == null) {
+      return complexityTuned;
+    }
+    return complexityTuned.copyWith(
+      requiredScore:
+          complexityTuned.requiredScore + override.requiredScoreDelta,
+      minStrokeScore:
+          complexityTuned.minStrokeScore + override.minStrokeScoreDelta,
+      minShapeScore:
+          complexityTuned.minShapeScore + override.minShapeScoreDelta,
+      minOrderScore:
+          complexityTuned.minOrderScore + override.minOrderScoreDelta,
+      minTemplateScore:
+          complexityTuned.minTemplateScore + override.minTemplateScoreDelta,
+    );
+  }
 }
 
 class _TierProfile {
@@ -397,4 +486,43 @@ class _TierProfile {
   final double minTemplateScore;
 
   bool get requiresTemplateGate => templateWeight > 0;
+
+  _TierProfile copyWith({
+    double? requiredScore,
+    double? minStrokeScore,
+    double? minShapeScore,
+    double? minOrderScore,
+    double? minTemplateScore,
+  }) {
+    return _TierProfile(
+      strokeWeight: strokeWeight,
+      lengthWeight: lengthWeight,
+      shapeWeight: shapeWeight,
+      orderWeight: orderWeight,
+      templateWeight: templateWeight,
+      requiredScore: _clamp(requiredScore ?? this.requiredScore),
+      minStrokeScore: _clamp(minStrokeScore ?? this.minStrokeScore),
+      minShapeScore: _clamp(minShapeScore ?? this.minShapeScore),
+      minOrderScore: _clamp(minOrderScore ?? this.minOrderScore),
+      minTemplateScore: _clamp(minTemplateScore ?? this.minTemplateScore),
+    );
+  }
+
+  static double _clamp(double value) => value.clamp(0.0, 0.95).toDouble();
+}
+
+class _ThresholdOverride {
+  const _ThresholdOverride({
+    this.requiredScoreDelta = 0.0,
+    this.minStrokeScoreDelta = 0.0,
+    this.minShapeScoreDelta = 0.0,
+    this.minOrderScoreDelta = 0.0,
+    this.minTemplateScoreDelta = 0.0,
+  });
+
+  final double requiredScoreDelta;
+  final double minStrokeScoreDelta;
+  final double minShapeScoreDelta;
+  final double minOrderScoreDelta;
+  final double minTemplateScoreDelta;
 }

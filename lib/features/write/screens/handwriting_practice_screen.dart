@@ -1428,14 +1428,16 @@ class _HandwritingPracticeScreenState
     final mistakeRepo = ref.read(mistakeRepositoryProvider);
     final evaluation = _evaluation!;
     final target = _currentTarget;
-    final isCorrect = evaluation.isCorrect;
-    final grade = isCorrect ? (_showGuide ? 3 : 4) : 1;
+    final softPass = _isSoftPassForLenientTier(evaluation);
+    final isSuccessful = evaluation.isCorrect || softPass;
+    final isLenientTier = _isLenientTemplateQuality(evaluation.templateQuality);
+    final grade = isSuccessful ? (_showGuide ? 3 : 4) : (isLenientTier ? 2 : 1);
 
     for (final kanjiId in target.reviewKanjiIds) {
       await repo.saveKanjiReview(kanjiId: kanjiId, grade: grade);
     }
 
-    if (isCorrect) {
+    if (isSuccessful) {
       for (final kanjiId in target.reviewKanjiIds) {
         await mistakeRepo.markCorrect(type: 'kanji', itemId: kanjiId);
       }
@@ -1477,6 +1479,22 @@ class _HandwritingPracticeScreenState
         },
       ),
     );
+  }
+
+  bool _isLenientTemplateQuality(String quality) {
+    final normalized = quality.toLowerCase().trim();
+    return normalized == 'curated' || normalized == 'generated';
+  }
+
+  bool _isSoftPassForLenientTier(HandwritingEvaluationResult evaluation) {
+    if (evaluation.isCorrect ||
+        !_isLenientTemplateQuality(evaluation.templateQuality)) {
+      return false;
+    }
+    final scoreGate = _showGuide ? 0.56 : 0.62;
+    return evaluation.score >= scoreGate &&
+        evaluation.strokeScore >= 0.50 &&
+        evaluation.templateScore >= 0.35;
   }
 
   Future<void> _showSummary() async {

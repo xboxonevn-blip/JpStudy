@@ -50,6 +50,7 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
         child: Column(
           children: [
             InkWell(
+              key: const ValueKey('discover_practice_toggle'),
               onTap: () {
                 setState(() {
                   _expanded = !_expanded;
@@ -134,6 +135,7 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
               ),
             ),
             AnimatedCrossFade(
+              key: const ValueKey('discover_practice_body'),
               duration: const Duration(milliseconds: 180),
               crossFadeState: _expanded
                   ? CrossFadeState.showSecond

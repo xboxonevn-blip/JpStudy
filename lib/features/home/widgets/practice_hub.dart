@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/features/grammar/grammar_providers.dart';
 import 'package:jpstudy/features/home/models/practice_destination.dart';
 import 'package:jpstudy/features/home/widgets/home_surface.dart';
@@ -20,11 +21,19 @@ class PracticeHub extends ConsumerWidget {
         .maybeWhen(data: (count) => count, orElse: () => 0);
     final dashboard = ref.watch(dashboardProvider).valueOrNull;
     final mistakeCount = dashboard?.totalMistakeCount ?? 0;
+    final totalDue =
+        (dashboard?.vocabDue ?? 0) +
+        (dashboard?.grammarDue ?? 0) +
+        (dashboard?.kanjiDue ?? 0);
+    final level = ref.watch(studyLevelProvider);
 
     final tiles = buildPracticeDestinations(
       language: language,
       ghostCount: ghostCount,
       mistakeCount: mistakeCount,
+      dueReviewCount: totalDue,
+      level: level,
+      preferImmersion: totalDue == 0 && mistakeCount == 0 && ghostCount == 0,
     );
 
     return Padding(

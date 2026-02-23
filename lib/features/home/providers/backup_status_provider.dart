@@ -4,18 +4,32 @@ import 'package:shared_preferences/shared_preferences.dart';
 const backupAutoEnabledPrefKey = 'backup.auto.enabled';
 const backupAutoLastPrefKey = 'backup.auto.last';
 
-final backupStatusProvider = StreamProvider<BackupStatus>((ref) async* {
+final backupStatusRefreshProvider = StateProvider<int>((ref) => 0);
+
+final _backupStatusClockProvider = StreamProvider<DateTime>((ref) async* {
+  yield DateTime.now();
   while (true) {
-    final prefs = await SharedPreferences.getInstance();
-    final enabled = prefs.getBool(backupAutoEnabledPrefKey) ?? false;
-    final lastRaw = prefs.getString(backupAutoLastPrefKey);
-    yield BackupStatus(
-      enabled: enabled,
-      lastBackupAt: lastRaw == null ? null : DateTime.tryParse(lastRaw),
-    );
-    await Future<void>.delayed(const Duration(seconds: 20));
+    await Future<void>.delayed(const Duration(hours: 1));
+    yield DateTime.now();
   }
 });
+
+final backupStatusProvider = FutureProvider<BackupStatus>((ref) async {
+  ref.watch(backupStatusRefreshProvider);
+  ref.watch(_backupStatusClockProvider);
+  final prefs = await SharedPreferences.getInstance();
+  final enabled = prefs.getBool(backupAutoEnabledPrefKey) ?? false;
+  final lastRaw = prefs.getString(backupAutoLastPrefKey);
+  return BackupStatus(
+    enabled: enabled,
+    lastBackupAt: lastRaw == null ? null : DateTime.tryParse(lastRaw),
+  );
+});
+
+void refreshBackupStatus(WidgetRef ref) {
+  final current = ref.read(backupStatusRefreshProvider);
+  ref.read(backupStatusRefreshProvider.notifier).state = current + 1;
+}
 
 class BackupStatus {
   const BackupStatus({required this.enabled, required this.lastBackupAt});

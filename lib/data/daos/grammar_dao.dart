@@ -89,6 +89,18 @@ class GrammarDao extends DatabaseAccessor<AppDatabase> with _$GrammarDaoMixin {
     )..where((t) => t.nextReviewAt.isSmallerOrEqualValue(now))).get();
   }
 
+  /// Reactive due count for dashboard/home.
+  Stream<int> watchDueReviewCount() {
+    final countExpr = grammarSrsState.grammarId.count();
+    return (selectOnly(grammarSrsState)
+          ..addColumns([countExpr])
+          ..where(
+            grammarSrsState.nextReviewAt.isSmallerOrEqualValue(DateTime.now()),
+          ))
+        .map((row) => row.read(countExpr) ?? 0)
+        .watchSingle();
+  }
+
   /// Get all ghost reviews (items with ghostReviewsDue > 0)
   Future<List<GrammarSrsStateData>> getGhostReviews() {
     return (select(

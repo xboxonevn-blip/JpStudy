@@ -7,40 +7,67 @@ import 'package:jpstudy/features/grammar/grammar_providers.dart';
 import 'package:jpstudy/features/grammar/screens/grammar_practice_screen.dart';
 import 'package:jpstudy/features/home/providers/backup_status_provider.dart';
 import 'package:jpstudy/features/home/providers/continue_provider.dart';
+import 'package:jpstudy/features/home/providers/daily_session_progress_provider.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/home/widgets/home_surface.dart';
 
-class DailySessionCard extends ConsumerWidget {
+class DailySessionCard extends ConsumerStatefulWidget {
   const DailySessionCard({super.key, this.compact = false});
 
   final bool compact;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<DailySessionCard> createState() => _DailySessionCardState();
+}
+
+class _DailySessionCardState extends ConsumerState<DailySessionCard> {
+  bool _isSyncingDerivedProgress = false;
+
+  @override
+  Widget build(BuildContext context) {
     final language = ref.watch(appLanguageProvider);
     final dashboard = ref.watch(dashboardProvider).valueOrNull;
     final ghostCount = ref
         .watch(grammarGhostCountProvider)
         .maybeWhen(data: (count) => count, orElse: () => 0);
     final continueAction = ref.watch(continueActionProvider).valueOrNull;
+    final progress = ref.watch(dailySessionProgressProvider).valueOrNull;
 
     final totalDue =
         (dashboard?.vocabDue ?? 0) +
         (dashboard?.grammarDue ?? 0) +
         (dashboard?.kanjiDue ?? 0);
     final totalFix = (dashboard?.totalMistakeCount ?? 0) + ghostCount;
-    final immersionReady = totalDue == 0 && totalFix == 0;
+
+    final step1Done = totalDue == 0;
+    final step2Done = totalFix == 0;
+    final persistedDone = progress?.doneSteps ?? const <int>{};
+    final effectiveDone = <int>{
+      ...persistedDone,
+      if (step1Done) 1,
+      if (step2Done) 2,
+    };
+    final completionPercent = ((effectiveDone.length.clamp(0, 3) / 3) * 100)
+        .round();
+
+    final isInProgress =
+        (progress?.started ?? false) && completionPercent < 100;
+    final ctaLabel = isInProgress
+        ? language.resumeButtonLabel
+        : language.startPracticeLabel;
+
+    _syncDerivedProgress(step1Done: step1Done, step2Done: step2Done);
 
     return Padding(
       padding: EdgeInsets.fromLTRB(
         HomeSurface.pageHorizontalPadding,
-        compact ? 0 : 6,
+        widget.compact ? 0 : 6,
         HomeSurface.pageHorizontalPadding,
-        compact ? 8 : 10,
+        widget.compact ? 8 : 10,
       ),
       child: Container(
         width: double.infinity,
-        padding: EdgeInsets.fromLTRB(16, compact ? 14 : 16, 16, 16),
+        padding: EdgeInsets.fromLTRB(16, widget.compact ? 14 : 16, 16, 16),
         decoration: BoxDecoration(
           gradient: const LinearGradient(
             colors: [Color(0xFF0F172A), Color(0xFF134E4A), Color(0xFF1D4ED8)],
@@ -79,7 +106,7 @@ class DailySessionCard extends ConsumerWidget {
                         '15-20 min | ${language.reviewsLabel} -> '
                         '${language.fixMistakesLabel} -> '
                         '${language.practiceImmersionLabel}',
-                        maxLines: compact ? 1 : 2,
+                        maxLines: widget.compact ? 1 : 2,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
                           color: Colors.white,
@@ -93,16 +120,20 @@ class DailySessionCard extends ConsumerWidget {
                 ),
                 const SizedBox(width: 12),
                 SizedBox(
-                  height: compact ? 42 : 46,
+                  height: widget.compact ? 42 : 46,
                   child: FilledButton.icon(
-                    onPressed: () => _startDailySession(
-                      context,
-                      dashboard,
-                      ghostCount: ghostCount,
-                      continueAction: continueAction,
-                    ),
+                    key: const ValueKey('daily_session_cta'),
+                    onPressed: () async {
+                      await _startDailySession(
+                        context,
+                        dashboard,
+                        ghostCount: ghostCount,
+                        continueAction: continueAction,
+                        progress: progress,
+                      );
+                    },
                     icon: const Icon(Icons.play_arrow_rounded),
-                    label: Text(language.startPracticeLabel),
+                    label: Text(ctaLabel),
                     style: FilledButton.styleFrom(
                       backgroundColor: Colors.white,
                       foregroundColor: const Color(0xFF0F172A),
@@ -116,7 +147,17 @@ class DailySessionCard extends ConsumerWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 10),
+            Text(
+              '${language.progressTitle}: $completionPercent%',
+              key: const ValueKey('daily_session_completion'),
+              style: const TextStyle(
+                color: Color(0xFFDBEAFE),
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 8),
             Wrap(
               spacing: 8,
               runSpacing: 8,
@@ -125,19 +166,19 @@ class DailySessionCard extends ConsumerWidget {
                   index: 1,
                   label: language.reviewsLabel,
                   count: totalDue,
-                  done: totalDue == 0,
+                  done: step1Done || effectiveDone.contains(1),
                 ),
                 _SessionStep(
                   index: 2,
                   label: language.fixMistakesLabel,
                   count: totalFix,
-                  done: totalFix == 0,
+                  done: step2Done || effectiveDone.contains(2),
                 ),
                 _SessionStep(
                   index: 3,
                   label: language.practiceImmersionLabel,
                   count: 1,
-                  done: immersionReady,
+                  done: effectiveDone.contains(3),
                 ),
               ],
             ),
@@ -149,11 +190,81 @@ class DailySessionCard extends ConsumerWidget {
     );
   }
 
-  void _startDailySession(
+  Future<void> _syncDerivedProgress({
+    required bool step1Done,
+    required bool step2Done,
+  }) async {
+    if (_isSyncingDerivedProgress) {
+      return;
+    }
+    final progress = ref.read(dailySessionProgressProvider).valueOrNull;
+    if (progress == null) {
+      return;
+    }
+    final shouldMark1 = step1Done && !progress.doneSteps.contains(1);
+    final shouldMark2 = step2Done && !progress.doneSteps.contains(2);
+    if (!shouldMark1 && !shouldMark2) {
+      return;
+    }
+
+    _isSyncingDerivedProgress = true;
+    try {
+      if (shouldMark1) {
+        await DailySessionProgressStore.markStepDone(1);
+      }
+      if (shouldMark2) {
+        await DailySessionProgressStore.markStepDone(2);
+      }
+      if (!mounted) {
+        return;
+      }
+      refreshDailySessionProgress(ref);
+    } finally {
+      _isSyncingDerivedProgress = false;
+    }
+  }
+
+  Future<void> _startDailySession(
     BuildContext context,
     DashboardState? dashboard, {
     required int ghostCount,
     required ContinueAction? continueAction,
+    required DailySessionProgress? progress,
+  }) async {
+    final next = _nextDailyRoute(
+      dashboard,
+      ghostCount: ghostCount,
+      continueAction: continueAction,
+      progress: progress,
+    );
+
+    await DailySessionProgressStore.startSession(route: next.route);
+    if (next.step >= 1) {
+      await DailySessionProgressStore.markStepDone(1);
+    }
+    if (next.step >= 2) {
+      await DailySessionProgressStore.markStepDone(2);
+    }
+    if (next.step == 3 && next.route == '/immersion') {
+      await DailySessionProgressStore.markStepDone(3);
+    }
+
+    if (!context.mounted) {
+      return;
+    }
+    refreshDailySessionProgress(ref);
+    if (next.extra != null) {
+      context.push(next.route, extra: next.extra);
+    } else {
+      context.push(next.route);
+    }
+  }
+
+  _DailyRoute _nextDailyRoute(
+    DashboardState? dashboard, {
+    required int ghostCount,
+    required ContinueAction? continueAction,
+    required DailySessionProgress? progress,
   }) {
     final totalDue =
         (dashboard?.vocabDue ?? 0) +
@@ -162,57 +273,64 @@ class DailySessionCard extends ConsumerWidget {
     final totalMistakes = dashboard?.totalMistakeCount ?? 0;
 
     if (totalDue > 0) {
-      _openDueRoute(context, dashboard, continueAction: continueAction);
-      return;
+      return _openDueRoute(dashboard, continueAction: continueAction);
     }
 
     if (ghostCount > 0) {
-      context.push('/grammar-practice', extra: GrammarPracticeMode.ghost);
-      return;
+      return const _DailyRoute(
+        route: '/grammar-practice',
+        extra: GrammarPracticeMode.ghost,
+        step: 2,
+      );
     }
 
     if (totalMistakes > 0) {
-      context.push('/mistakes');
-      return;
+      return const _DailyRoute(route: '/mistakes', step: 2);
     }
 
-    context.push('/immersion');
+    final lastRoute = progress?.lastRoute;
+    if (lastRoute != null && lastRoute.isNotEmpty && !progress!.isComplete) {
+      return _DailyRoute(route: lastRoute, step: 3);
+    }
+
+    return const _DailyRoute(route: '/immersion', step: 3);
   }
 
-  void _openDueRoute(
-    BuildContext context,
+  _DailyRoute _openDueRoute(
     DashboardState? dashboard, {
     required ContinueAction? continueAction,
   }) {
     switch (continueAction?.type) {
       case ContinueActionType.grammarReview:
-        context.push('/grammar');
-        return;
+        return const _DailyRoute(route: '/grammar', step: 1);
       case ContinueActionType.vocabReview:
-        context.push('/vocab/review');
-        return;
+        return const _DailyRoute(route: '/vocab/review', step: 1);
       case ContinueActionType.kanjiReview:
         final lessonId = continueAction?.data;
         if (lessonId is int) {
-          context.push('/lesson/$lessonId');
-        } else {
-          context.push('/kanji-dash');
+          return _DailyRoute(route: '/lesson/$lessonId', step: 1);
         }
-        return;
+        return const _DailyRoute(route: '/kanji-dash', step: 1);
       default:
         break;
     }
 
     if ((dashboard?.grammarDue ?? 0) > 0) {
-      context.push('/grammar');
-      return;
+      return const _DailyRoute(route: '/grammar', step: 1);
     }
     if ((dashboard?.vocabDue ?? 0) > 0) {
-      context.push('/vocab/review');
-      return;
+      return const _DailyRoute(route: '/vocab/review', step: 1);
     }
-    context.push('/kanji-dash');
+    return const _DailyRoute(route: '/kanji-dash', step: 1);
   }
+}
+
+class _DailyRoute {
+  const _DailyRoute({required this.route, required this.step, this.extra});
+
+  final String route;
+  final int step;
+  final Object? extra;
 }
 
 class _SessionStep extends StatelessWidget {
