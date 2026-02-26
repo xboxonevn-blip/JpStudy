@@ -123,6 +123,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     await prefs.setBool(prefOnboardingCompleted, true);
     await prefs.setString(prefOnboardingLevel, level.name);
     await prefs.setString(prefOnboardingGoal, goal.name);
+    if (!mounted) return;
     ref.read(studyGoalProvider.notifier).state = goal;
     _setLevel(level); // also applies language guard (N3 → allow Japanese UI)
     ref.read(onboardingDoneProvider.notifier).state = true;
@@ -131,6 +132,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Future<void> _resetOnboarding() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(prefOnboardingCompleted, false);
+    if (!mounted) return;
     ref.read(onboardingDoneProvider.notifier).state = false;
   }
 
