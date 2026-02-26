@@ -6,6 +6,7 @@ import 'package:jpstudy/core/services/session_storage_provider.dart';
 import 'package:jpstudy/data/daos/achievement_dao.dart';
 import 'package:jpstudy/data/daos/learn_dao.dart';
 import 'package:jpstudy/data/db/database_provider.dart';
+import 'package:jpstudy/features/home/widgets/next_step_suggestions.dart';
 import '../models/achievement.dart';
 import '../models/learn_session.dart';
 import '../services/learn_session_service.dart';
@@ -114,7 +115,12 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
               // Performance breakdown
               _buildPerformanceBreakdown(context, language),
 
-              const SizedBox(height: 40),
+              const SizedBox(height: 32),
+
+              // Next step suggestions
+              const NextStepSuggestions(),
+
+              const SizedBox(height: 32),
 
               // Action buttons
               _buildActionButtons(context, language),

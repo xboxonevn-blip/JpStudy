@@ -11,7 +11,7 @@ import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
 import '../../../core/level_provider.dart';
 import '../../../core/study_level.dart';
-import '../../../core/widgets/juicy_button.dart';
+import '../../common/widgets/clay_button.dart';
 import 'logic/match_engine.dart';
 
 /// Match Game for a specific lesson
@@ -260,11 +260,12 @@ class _LessonMatchScreenState extends ConsumerState<LessonMatchScreen> {
             ).textTheme.bodyLarge?.copyWith(color: Colors.grey),
           ),
           const SizedBox(height: 24),
-          JuicyButton(
+          ClayButton(
             label: language.startGameLabel,
             onPressed: () => _startGame(items),
             icon: Icons.play_circle_filled,
             height: 64,
+            style: ClayButtonStyle.primary,
           ),
         ],
       ),
@@ -290,10 +291,12 @@ class _LessonMatchScreenState extends ConsumerState<LessonMatchScreen> {
             ).textTheme.titleLarge?.copyWith(color: Colors.deepPurple),
           ),
           const SizedBox(height: 24),
-          JuicyButton(
+          ClayButton(
             label: language.playAgainLabel,
             onPressed: () => _startGame(items),
             icon: Icons.refresh,
+            style: ClayButtonStyle.primary,
+            isExpanded: true,
           ),
           const SizedBox(height: 12),
           TextButton(

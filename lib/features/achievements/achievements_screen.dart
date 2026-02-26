@@ -184,6 +184,12 @@ class _AchievementCard extends StatelessWidget {
           return 'Mastery hoàn tất';
         case learn.AchievementType.speedDemon:
           return 'Tốc độ thần sầu';
+        case learn.AchievementType.firstLesson:
+          return 'Bước đầu tiên';
+        case learn.AchievementType.kanjiMaster:
+          return 'Thánh Kanji';
+        case learn.AchievementType.articleReader:
+          return 'Mọt sách';
       }
     }
     if (language == AppLanguage.ja) {
@@ -198,6 +204,12 @@ class _AchievementCard extends StatelessWidget {
           return '完全習得';
         case learn.AchievementType.speedDemon:
           return 'スピード達人';
+        case learn.AchievementType.firstLesson:
+          return '最初の一歩';
+        case learn.AchievementType.kanjiMaster:
+          return '漢字マスター';
+        case learn.AchievementType.articleReader:
+          return '読書家';
       }
     }
     return type.title;
@@ -220,6 +232,12 @@ class _AchievementCard extends StatelessWidget {
           return 'Hoàn thành mastery của bài học.';
         case learn.AchievementType.speedDemon:
           return 'Hoàn thành bài trong thời gian rất nhanh.';
+        case learn.AchievementType.firstLesson:
+          return 'Hoàn thành bài học đầu tiên!';
+        case learn.AchievementType.kanjiMaster:
+          return 'Thành thạo $value kanji qua SRS!';
+        case learn.AchievementType.articleReader:
+          return 'Đọc $value bài immersion!';
       }
     }
     if (language == AppLanguage.ja) {
@@ -234,6 +252,12 @@ class _AchievementCard extends StatelessWidget {
           return 'レッスンの完全習得。';
         case learn.AchievementType.speedDemon:
           return '短時間で完了。';
+        case learn.AchievementType.firstLesson:
+          return '最初のレッスンを完了！';
+        case learn.AchievementType.kanjiMaster:
+          return 'SRSで$value個の漢字を習得！';
+        case learn.AchievementType.articleReader:
+          return '$value本の記事を読了！';
       }
     }
     return learn.Achievement(

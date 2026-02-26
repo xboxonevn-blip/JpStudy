@@ -7,7 +7,7 @@ import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
-import 'package:jpstudy/core/widgets/juicy_button.dart';
+import 'package:jpstudy/features/common/widgets/clay_button.dart';
 import 'package:jpstudy/data/models/mistake_context.dart';
 import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/repositories/content_repository.dart';
@@ -256,11 +256,12 @@ class _KanjiDashScreenState extends ConsumerState<KanjiDashScreen> {
                   ),
                 ),
                 const SizedBox(height: 32),
-                JuicyButton(
+                ClayButton(
                   label: language.kanjiDashStart,
                   onPressed: () => _startGame(items),
                   icon: Icons.play_arrow,
                   height: 64,
+                  style: ClayButtonStyle.primary,
                 ),
               ],
             ),
@@ -393,7 +394,7 @@ class _KanjiDashScreenState extends ConsumerState<KanjiDashScreen> {
             ),
           ),
           const SizedBox(height: 32),
-          JuicyButton(
+          ClayButton(
             label: language.kanjiDashPlayAgain,
             onPressed: () {
               final vocabAsync = ref.read(
@@ -408,6 +409,8 @@ class _KanjiDashScreenState extends ConsumerState<KanjiDashScreen> {
               });
             },
             icon: Icons.refresh,
+            style: ClayButtonStyle.primary,
+            isExpanded: true,
           ),
         ],
       ),

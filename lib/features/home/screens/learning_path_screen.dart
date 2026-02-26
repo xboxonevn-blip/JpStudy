@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/theme/app_breakpoints.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/widgets/empty_state_widget.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/features/common/widgets/japanese_background.dart';
 import 'package:jpstudy/features/home/models/lesson_node.dart';
@@ -39,12 +41,18 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen> {
             : allUnits.where((u) => u.id == selectedLevel.shortLabel).toList();
 
         if (units.isEmpty) {
-          return Center(child: Text(language.noLessonsForLevelLabel));
+          return Center(
+            child: EmptyStateWidget(
+              icon: Icons.school_outlined,
+              title: language.noLessonsForLevelLabel,
+              subtitle: language.changeLevelLabel,
+            ),
+          );
         }
 
         return LayoutBuilder(
           builder: (context, constraints) {
-            final isDesktop = constraints.maxWidth >= 1100;
+            final isDesktop = constraints.maxWidth >= AppBreakpoints.desktop;
             return JapaneseBackground(
               child: SafeArea(
                 child: Padding(
@@ -139,7 +147,7 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen> {
       case _HomeMenuSection.today:
         return Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 1100),
+            constraints: const BoxConstraints(maxWidth: AppBreakpoints.desktop),
             child: ListView(
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 90),
               children: const [

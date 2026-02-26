@@ -487,6 +487,33 @@ class LessonRepository {
     return rows.map(_mapContentVocabToItem).toList();
   }
 
+  /// Fetch VocabItems by IDs: user lesson terms first, fallback to content DB.
+  Future<List<VocabItem>> fetchVocabTermsByIds(List<int> ids) async {
+    if (ids.isEmpty) return const [];
+    final terms = await (_db.select(
+      _db.userLessonTerm,
+    )..where((t) => t.id.isIn(ids))).get();
+    final found = terms
+        .map(
+          (t) => VocabItem(
+            id: t.id,
+            term: t.term,
+            reading: t.reading,
+            meaning: t.definition,
+            meaningEn: t.definitionEn,
+            level: 'N5',
+          ),
+        )
+        .toList();
+    final foundIds = found.map((v) => v.id).toSet();
+    final missingIds = ids.where((id) => !foundIds.contains(id)).toList();
+    if (missingIds.isNotEmpty) {
+      final contentItems = await fetchContentVocabByIds(missingIds);
+      found.addAll(contentItems);
+    }
+    return found;
+  }
+
   VocabItem _mapContentVocabToItem(VocabData item) {
     return VocabItem(
       id: item.id,
@@ -1829,7 +1856,7 @@ class LessonRepository {
   }
 
   /// Process an SRS review for a specific term
-  Future<void> saveTermReview({
+  Future<FsrsReviewResult?> saveTermReview({
     required int termId,
     required int quality,
   }) async {
@@ -1845,7 +1872,7 @@ class LessonRepository {
       srsState = await _db.srsDao.getSrsState(termId);
     }
 
-    if (srsState == null) return; // Should not happen
+    if (srsState == null) return null;
 
     final result = _fsrsService.review(
       grade: quality,
@@ -1865,6 +1892,8 @@ class LessonRepository {
       lastConfidence: quality,
       nextReviewAt: result.nextReviewAt,
     );
+
+    return result;
   }
 
   Future<void> ensureSrsStateForTerm(int termId) async {

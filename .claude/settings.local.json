@@ -1,7 +1,14 @@
 {
   "permissions": {
     "allow": [
-      "Bash(gh pr list)"
+      "Bash(gh pr list)",
+      "Bash(flutter analyze lib/)",
+      "Bash(xargs grep -l \"result\\\\|Result\\\\|summary\\\\|Summary\")",
+      "Bash(find /c/Users/xboxo/Documents/GitHub/JpStudy-v2/lib/features -type f -name \"*.dart\" -exec grep -l \"Session.*complete\\\\|Complete.*screen\\\\|Result.*screen\\\\|Summary.*screen\" {} ;)",
+      "Bash(flutter analyze lib/features/onboarding/onboarding_screen.dart)",
+      "Bash(git add lib/features/onboarding/)",
+      "Bash(git commit:*)",
+      "Bash(git add lib/features/home/home_screen.dart)"
     ]
   }
 }

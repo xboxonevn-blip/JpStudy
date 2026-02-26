@@ -7,6 +7,12 @@ enum AchievementType {
   levelUp,
   masteryComplete,
   speedDemon,
+  /// Completed your very first lesson — triggered once, on first session save.
+  firstLesson,
+  /// Mastered 100 kanji via SRS — triggered from kanji review flow.
+  kanjiMaster,
+  /// Read 5 immersion articles — triggered from immersion reader.
+  articleReader,
 }
 
 extension AchievementTypeExtension on AchievementType {
@@ -22,6 +28,12 @@ extension AchievementTypeExtension on AchievementType {
         return 'Mastery Complete!';
       case AchievementType.speedDemon:
         return 'Speed Demon!';
+      case AchievementType.firstLesson:
+        return 'First Steps!';
+      case AchievementType.kanjiMaster:
+        return 'Kanji Master!';
+      case AchievementType.articleReader:
+        return 'Avid Reader!';
     }
   }
 
@@ -37,6 +49,12 @@ extension AchievementTypeExtension on AchievementType {
         return '🎓';
       case AchievementType.speedDemon:
         return '⚡';
+      case AchievementType.firstLesson:
+        return '🎌';
+      case AchievementType.kanjiMaster:
+        return '📚';
+      case AchievementType.articleReader:
+        return '📖';
     }
   }
 
@@ -52,6 +70,12 @@ extension AchievementTypeExtension on AchievementType {
         return Colors.green;
       case AchievementType.speedDemon:
         return Colors.blue;
+      case AchievementType.firstLesson:
+        return Colors.teal;
+      case AchievementType.kanjiMaster:
+        return Colors.indigo;
+      case AchievementType.articleReader:
+        return Colors.cyan;
     }
   }
 }
@@ -86,6 +110,12 @@ class Achievement {
         return 'Mastered all terms in lesson!';
       case AchievementType.speedDemon:
         return 'Completed in record time!';
+      case AchievementType.firstLesson:
+        return 'Completed your very first lesson!';
+      case AchievementType.kanjiMaster:
+        return 'Mastered $value kanji through SRS!';
+      case AchievementType.articleReader:
+        return 'Read $value immersion articles!';
     }
   }
 
@@ -101,6 +131,12 @@ class Achievement {
         return 75;
       case AchievementType.speedDemon:
         return 25;
+      case AchievementType.firstLesson:
+        return 50;
+      case AchievementType.kanjiMaster:
+        return 200;
+      case AchievementType.articleReader:
+        return 100;
     }
   }
 }

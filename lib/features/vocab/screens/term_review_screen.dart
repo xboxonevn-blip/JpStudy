@@ -284,6 +284,29 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
     );
   }
 
+  void _showNextReviewToast(DateTime? nextReviewAt, ConfidenceLevel level) {
+    if (nextReviewAt == null || !mounted) return;
+    final now = DateTime.now();
+    final days = nextReviewAt.difference(now).inDays;
+    final label = days == 0
+        ? 'Today'
+        : days == 1
+            ? 'Tomorrow'
+            : 'In $days days';
+    final color = level == ConfidenceLevel.again || level == ConfidenceLevel.hard
+        ? Colors.orange
+        : Colors.green;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Next review: $label'),
+        backgroundColor: color,
+        duration: const Duration(seconds: 2),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      ),
+    );
+  }
+
   Future<void> _handleRating(
     ConfidenceLevel levelEnum,
     UserLessonTermData term,
@@ -293,7 +316,11 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
     final repo = ref.read(lessonRepositoryProvider);
     final mistakeRepo = ref.read(mistakeRepositoryProvider);
 
-    await repo.saveTermReview(termId: term.id, quality: levelEnum.value);
+    final fsrsResult = await repo.saveTermReview(
+      termId: term.id,
+      quality: levelEnum.value,
+    );
+    _showNextReviewToast(fsrsResult?.nextReviewAt, levelEnum);
 
     if (levelEnum == ConfidenceLevel.again ||
         levelEnum == ConfidenceLevel.hard) {

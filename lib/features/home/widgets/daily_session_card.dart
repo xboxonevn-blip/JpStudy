@@ -6,6 +6,7 @@ import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/features/grammar/grammar_providers.dart';
 import 'package:jpstudy/features/grammar/screens/grammar_practice_screen.dart';
 import 'package:jpstudy/features/home/providers/backup_status_provider.dart';
+import 'package:jpstudy/features/vocab/vocab_ghost_providers.dart';
 import 'package:jpstudy/features/home/providers/continue_provider.dart';
 import 'package:jpstudy/features/home/providers/daily_session_progress_provider.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
@@ -27,9 +28,13 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard> {
   Widget build(BuildContext context) {
     final language = ref.watch(appLanguageProvider);
     final dashboard = ref.watch(dashboardProvider).valueOrNull;
-    final ghostCount = ref
+    final grammarGhostCount = ref
         .watch(grammarGhostCountProvider)
         .maybeWhen(data: (count) => count, orElse: () => 0);
+    final vocabGhostCount = ref
+        .watch(vocabGhostCountProvider)
+        .maybeWhen(data: (count) => count, orElse: () => 0);
+    final ghostCount = grammarGhostCount + vocabGhostCount;
     final continueAction = ref.watch(continueActionProvider).valueOrNull;
     final progress = ref.watch(dailySessionProgressProvider).valueOrNull;
 
@@ -103,9 +108,11 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard> {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        '15-20 min | ${language.reviewsLabel} -> '
-                        '${language.fixMistakesLabel} -> '
-                        '${language.practiceImmersionLabel}',
+                        _buildSubtitle(
+                          totalDue: totalDue,
+                          totalFix: totalFix,
+                          language: language,
+                        ),
                         maxLines: widget.compact ? 1 : 2,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
@@ -188,6 +195,21 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard> {
         ),
       ),
     );
+  }
+
+  String _buildSubtitle({
+    required int totalDue,
+    required int totalFix,
+    required AppLanguage language,
+  }) {
+    if (totalDue == 0 && totalFix == 0) {
+      return '✅ All caught up! ${language.practiceImmersionLabel}';
+    }
+    final parts = <String>[];
+    if (totalDue > 0) parts.add('📚 $totalDue ${language.reviewsLabel}');
+    if (totalFix > 0) parts.add('👻 $totalFix ${language.fixMistakesLabel}');
+    parts.add('✨ ${language.practiceImmersionLabel}');
+    return parts.join(' · ');
   }
 
   Future<void> _syncDerivedProgress({

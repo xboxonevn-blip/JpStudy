@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
-import 'package:jpstudy/core/widgets/juicy_button.dart';
+import 'package:jpstudy/features/common/widgets/clay_button.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/data/models/mistake_context.dart';
@@ -445,10 +445,12 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
                   ).textTheme.titleLarge?.copyWith(color: Colors.deepPurple),
                 ),
                 const SizedBox(height: 24),
-                JuicyButton(
+                ClayButton(
                   label: language.playAgainLabel,
                   onPressed: () => _startGame(items, _mode),
                   icon: Icons.refresh,
+                  style: ClayButtonStyle.primary,
+                  isExpanded: true,
                 ),
               ],
             ),
@@ -460,11 +462,12 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                JuicyButton(
+                ClayButton(
                   label: language.startMatchGameLabel,
                   onPressed: () => _startGame(items, MatchGameMode.classic),
                   icon: Icons.play_circle_filled,
                   height: 64,
+                  style: ClayButtonStyle.primary,
                 ),
                 const SizedBox(height: 12),
                 Text(
@@ -473,11 +476,12 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
                   style: TextStyle(color: Colors.grey[600]),
                 ),
                 const SizedBox(height: 12),
-                JuicyButton(
+                ClayButton(
                   label: language.startTimeAttackLabel,
                   onPressed: () => _startGame(items, MatchGameMode.timeAttack),
                   icon: Icons.bolt_rounded,
                   height: 56,
+                  style: ClayButtonStyle.secondary,
                 ),
               ],
             ),

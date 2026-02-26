@@ -476,7 +476,26 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
     final repo = ref.read(lessonRepositoryProvider);
     final mistakeRepo = ref.read(mistakeRepositoryProvider);
     // Use the comprehensive saveTermReview method which handles SRS calculation
-    await repo.saveTermReview(termId: term.id, quality: quality);
+    final fsrsResult = await repo.saveTermReview(
+      termId: term.id,
+      quality: quality,
+    );
+    if (mounted && fsrsResult != null) {
+      final days = fsrsResult.nextReviewAt.difference(DateTime.now()).inDays;
+      final label =
+          days == 0 ? 'Today' : days == 1 ? 'Tomorrow' : 'In $days days';
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Next review: $label'),
+          backgroundColor: quality <= 2 ? Colors.orange : Colors.green,
+          duration: const Duration(seconds: 2),
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+      );
+    }
 
     if (quality <= 2) {
       final language = ref.read(appLanguageProvider);

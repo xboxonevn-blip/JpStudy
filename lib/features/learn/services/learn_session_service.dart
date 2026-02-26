@@ -119,6 +119,26 @@ class LearnSessionService {
         ),
       );
     }
+
+    // First lesson — awarded once when the achievement table is otherwise empty.
+    final existing = await _achievementDao.getAchievements();
+    final alreadyAwarded = existing.any(
+      (a) => a.type == model.AchievementType.firstLesson.name,
+    );
+    if (!alreadyAwarded) {
+      await _achievementDao.addAchievement(
+        AchievementsCompanion(
+          type: Value(model.AchievementType.firstLesson.name),
+          value: const Value(1),
+          earnedAt: Value(DateTime.now()),
+          lessonId: Value(session.lessonId),
+          sessionId: Value(session.sessionId),
+          isNotified: const Value(false),
+        ),
+      );
+    }
+    // D2: kanjiMaster — trigger from kanji SRS review flow when mastered count crosses 100.
+    // D2: articleReader — trigger from immersion reader when completed article count crosses 5.
   }
 
   /// Calculate user's current level based on total XP

@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../data/db/app_database.dart' as app_db;
 import '../../../data/db/database_provider.dart';
 
+import '../../home/widgets/next_step_suggestions.dart';
 import '../../learn/models/question_type.dart';
 import '../models/test_session.dart';
 import '../services/test_export_service.dart';
@@ -132,7 +133,13 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
 
               // Lesson recommendations
               _buildLessonRecommendations(context, language),
-              if (session.weakTermIds.isNotEmpty) const SizedBox(height: 32),
+
+              const SizedBox(height: 32),
+
+              // Next step suggestions
+              const NextStepSuggestions(),
+
+              const SizedBox(height: 32),
 
               // Action buttons
               _buildActionButtons(context, language),

@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/// Legacy primary-action button with squish + haptic animation.
+///
+/// Prefer [ClayButton] (`features/common/widgets/clay_button.dart`) for new
+/// code — it is the project-standard button with 5 style variants and
+/// consistent clay-morphism aesthetics.
+@Deprecated('Use ClayButton instead.')
 class JuicyButton extends StatefulWidget {
   const JuicyButton({
     super.key,

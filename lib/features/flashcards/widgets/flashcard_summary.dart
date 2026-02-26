@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../data/models/vocab_item.dart';
+import '../../../features/home/widgets/next_step_suggestions.dart';
 import '../models/flashcard_session.dart';
+import '../screens/enhanced_flashcard_screen.dart';
 
 class FlashcardSummaryScreen extends ConsumerWidget {
   final FlashcardSession session;
-  final VoidCallback? onPracticeAgain;
   final VoidCallback? onDone;
+  // If provided, enables the "Practice Again" button using the summary's own context.
+  final List<VocabItem>? practiceItems;
+  final String? lessonTitle;
 
   const FlashcardSummaryScreen({
     super.key,
     required this.session,
-    this.onPracticeAgain,
     this.onDone,
+    this.practiceItems,
+    this.lessonTitle,
   });
 
   @override
@@ -45,7 +51,12 @@ class FlashcardSummaryScreen extends ConsumerWidget {
               // XP Earned Card
               _buildXPCard(context, xpEarned),
 
-              const SizedBox(height: 40),
+              const SizedBox(height: 32),
+
+              // Next step suggestions
+              const NextStepSuggestions(),
+
+              const SizedBox(height: 32),
 
               // Action Buttons
               _buildActionButtons(context),
@@ -181,21 +192,27 @@ class FlashcardSummaryScreen extends ConsumerWidget {
   }
 
   Widget _buildActionButtons(BuildContext context) {
+    final hasPracticeItems = practiceItems != null && practiceItems!.isNotEmpty;
     return Column(
       children: [
-        if (session.needPracticeTermIds.isNotEmpty)
+        if (hasPracticeItems)
           SizedBox(
             width: double.infinity,
             height: 56,
             child: ElevatedButton.icon(
-              onPressed: onPracticeAgain,
-              icon: const Icon(Icons.replay_rounded),
-              label: Text(
-                'Practice Again (${session.needPracticeTermIds.length} terms)',
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
+              onPressed: () => Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (_) => EnhancedFlashcardScreen(
+                    items: practiceItems!,
+                    lessonId: session.lessonId,
+                    lessonTitle: lessonTitle ?? '',
+                  ),
                 ),
+              ),
+              icon: const Icon(Icons.replay_rounded),
+              label: const Text(
+                'Practice Again',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.orange,
@@ -206,7 +223,7 @@ class FlashcardSummaryScreen extends ConsumerWidget {
               ),
             ),
           ),
-        if (session.needPracticeTermIds.isNotEmpty) const SizedBox(height: 12),
+        if (hasPracticeItems) const SizedBox(height: 12),
         SizedBox(
           width: double.infinity,
           height: 56,

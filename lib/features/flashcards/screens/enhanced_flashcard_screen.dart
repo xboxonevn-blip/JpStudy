@@ -3,9 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/language_provider.dart';
 import '../../../data/models/vocab_item.dart';
+import '../models/flashcard_session.dart';
 import '../models/flashcard_settings.dart';
 import '../widgets/enhanced_flashcard.dart';
 import '../widgets/flashcard_settings_dialog.dart';
+import '../widgets/flashcard_summary.dart';
 
 class EnhancedFlashcardScreen extends ConsumerStatefulWidget {
   final List<VocabItem> items;
@@ -29,10 +31,13 @@ class _EnhancedFlashcardScreenState
   int _currentIndex = 0;
   late List<VocabItem> _displayItems;
   FlashcardSettings _settings = const FlashcardSettings();
+  final Set<int> _flippedIndices = {};
+  late final DateTime _sessionStart;
 
   @override
   void initState() {
     super.initState();
+    _sessionStart = DateTime.now();
     _initSession();
   }
 
@@ -73,6 +78,7 @@ class _EnhancedFlashcardScreenState
                 item: currentItem,
                 showTermFirst: _settings.showTermFirst,
                 language: language,
+                onFlip: () => setState(() => _flippedIndices.add(_currentIndex)),
               ),
             ),
           ),
@@ -193,7 +199,30 @@ class _EnhancedFlashcardScreenState
   }
 
   void _showSummary() {
-    // Simply pop back to lesson detail when done
-    Navigator.of(context).pop();
+    final flippedItems =
+        _flippedIndices.map((i) => _displayItems[i].id).toList();
+    final skippedItems = List.generate(_displayItems.length, (i) => i)
+        .where((i) => !_flippedIndices.contains(i))
+        .map((i) => _displayItems[i].id)
+        .toList();
+
+    final session = FlashcardSession(
+      sessionId: 'fc_${DateTime.now().millisecondsSinceEpoch}',
+      lessonId: widget.lessonId,
+      startedAt: _sessionStart,
+      completedAt: DateTime.now(),
+      knownTermIds: flippedItems,
+      skippedTermIds: skippedItems,
+    );
+
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (_) => FlashcardSummaryScreen(
+          session: session,
+          practiceItems: widget.items,
+          lessonTitle: widget.lessonTitle,
+        ),
+      ),
+    );
   }
 }

@@ -100,6 +100,9 @@ class HeaderBar extends StatelessWidget {
   }
 }
 
+// Daily XP target — reaching this marks the day's micro-goal as complete.
+const int _kDailyXpGoal = 50;
+
 class _HeaderStats extends ConsumerWidget {
   const _HeaderStats({required this.level, required this.language});
 
@@ -115,21 +118,34 @@ class _HeaderStats extends ConsumerWidget {
     final xp = stats?.todayXp ?? 0;
     final due = (stats?.vocabDue ?? 0) + (stats?.grammarDue ?? 0);
 
+    // Streak is "at risk" when user has an active streak but hasn't earned
+    // any XP today — they need to study to keep it alive.
+    final streakAtRisk = streak > 0 && xp == 0;
+    final streakColor =
+        streakAtRisk ? const Color(0xFFEF4444) : const Color(0xFFF97316);
+
+    // XP micro-goal: show "done/goal" until target is reached, then just done.
+    final xpGoalReached = xp >= _kDailyXpGoal;
+    final xpColor =
+        xpGoalReached ? const Color(0xFF22C55E) : const Color(0xFFEAB308);
+    final xpLabel = xpGoalReached ? '$xp' : '$xp/$_kDailyXpGoal';
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
         children: [
           _StatCapsule(
             icon: Icons.local_fire_department_rounded,
-            color: const Color(0xFFF97316),
+            color: streakColor,
             label: streak.toString(),
             tooltip: language.streakLabel,
+            urgent: streakAtRisk,
           ),
           const SizedBox(width: 6),
           _StatCapsule(
             icon: Icons.bolt_rounded,
-            color: const Color(0xFFEAB308),
-            label: xp.toString(),
+            color: xpColor,
+            label: xpLabel,
             tooltip: language.xpLabel,
           ),
           const SizedBox(width: 6),
@@ -162,6 +178,7 @@ class _StatCapsule extends StatelessWidget {
     required this.label,
     required this.tooltip,
     this.showPlus = false,
+    this.urgent = false,
   });
 
   final IconData icon;
@@ -169,6 +186,7 @@ class _StatCapsule extends StatelessWidget {
   final String label;
   final String tooltip;
   final bool showPlus;
+  final bool urgent;
 
   @override
   Widget build(BuildContext context) {
@@ -177,9 +195,13 @@ class _StatCapsule extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
         decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: 0.94),
+          color: urgent
+              ? const Color(0xFFFEE2E2)
+              : Colors.white.withValues(alpha: 0.94),
           borderRadius: BorderRadius.circular(999),
-          border: Border.all(color: const Color(0xFFDCE8F8)),
+          border: Border.all(
+            color: urgent ? const Color(0xFFFCA5A5) : const Color(0xFFDCE8F8),
+          ),
           boxShadow: const [
             BoxShadow(
               color: Color(0x0D2F3D54),

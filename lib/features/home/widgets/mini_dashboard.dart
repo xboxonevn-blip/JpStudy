@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
+import '../../../core/widgets/empty_state_widget.dart';
 import '../../grammar/grammar_providers.dart';
 import '../providers/dashboard_provider.dart';
 import 'home_surface.dart';
@@ -27,7 +28,11 @@ class MiniDashboard extends ConsumerWidget {
         height: 88,
         child: Center(child: CircularProgressIndicator()),
       ),
-      error: (err, stack) => const SizedBox.shrink(),
+      error: (err, stack) => EmptyStateWidget(
+        icon: Icons.cloud_off_rounded,
+        title: ref.watch(appLanguageProvider).loadErrorLabel,
+        compact: true,
+      ),
     );
   }
 
