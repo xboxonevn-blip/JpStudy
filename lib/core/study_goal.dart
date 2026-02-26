@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'app_language.dart';
+import 'package:jpstudy/core/app_language.dart';
 
 enum StudyGoal { jlpt, reading, writing }
 
