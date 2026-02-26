@@ -5519,4 +5519,81 @@ extension AppLanguageLabels on AppLanguage {
         return 'このレベルで使える語彙がありません。';
     }
   }
+
+  String get onboardingWelcomeTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Welcome to JpStudy!';
+      case AppLanguage.vi:
+        return 'Chào mừng đến JpStudy!';
+      case AppLanguage.ja:
+        return 'JpStudyへようこそ！';
+    }
+  }
+
+  String get onboardingWelcomeSubtitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Let\'s start your Japanese learning journey';
+      case AppLanguage.vi:
+        return 'Hãy bắt đầu hành trình học tiếng Nhật';
+      case AppLanguage.ja:
+        return '日本語学習の旅を始めましょう';
+    }
+  }
+
+  String get onboardingLevelTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Choose your JLPT level';
+      case AppLanguage.vi:
+        return 'Chọn cấp độ JLPT của bạn';
+      case AppLanguage.ja:
+        return 'JLPTレベルを選んでください';
+    }
+  }
+
+  String get onboardingGoalTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'What\'s your learning goal?';
+      case AppLanguage.vi:
+        return 'Mục tiêu học của bạn?';
+      case AppLanguage.ja:
+        return '学習目標は何ですか？';
+    }
+  }
+
+  String get onboardingReadyTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'You\'re all set!';
+      case AppLanguage.vi:
+        return 'Sẵn sàng rồi!';
+      case AppLanguage.ja:
+        return '準備完了！';
+    }
+  }
+
+  String get onboardingStartButton {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Start Learning!';
+      case AppLanguage.vi:
+        return 'Bắt đầu học!';
+      case AppLanguage.ja:
+        return '学習開始！';
+    }
+  }
+
+  String get onboardingNextButton {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Continue';
+      case AppLanguage.vi:
+        return 'Tiếp tục';
+      case AppLanguage.ja:
+        return '次へ';
+    }
+  }
 } // End extension
