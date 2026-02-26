@@ -14,14 +14,16 @@ import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/core/theme_provider.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
-import 'package:jpstudy/features/common/widgets/japanese_background.dart';
 import 'package:jpstudy/features/home/providers/backup_status_provider.dart';
 import 'package:jpstudy/features/home/screens/learning_path_screen.dart';
 import 'package:jpstudy/features/home/widgets/header_bar.dart';
-import 'package:jpstudy/features/home/widgets/level_gate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
+import 'package:jpstudy/core/goal_provider.dart';
+import 'package:jpstudy/core/onboarding_provider.dart';
+import 'package:jpstudy/core/study_goal.dart';
+import 'package:jpstudy/features/onboarding/onboarding_screen.dart';
 
 const _prefDailyReminder = 'notifications.daily';
 const _prefDailyReminderTime = 'notifications.daily.time';
@@ -65,13 +67,29 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final level = ref.watch(studyLevelProvider);
+    // Trigger init on first build; result tracked via onboardingDoneProvider.
+    ref.watch(appInitProvider);
+    final onboardingDone = ref.watch(onboardingDoneProvider);
     final language = ref.watch(appLanguageProvider);
+    final level = ref.watch(studyLevelProvider);
 
+    // Loading: still reading SharedPreferences
+    if (onboardingDone == null) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
+    // First install: show onboarding wizard
+    if (!onboardingDone) {
+      return OnboardingScreen(onComplete: _handleOnboardingComplete);
+    }
+
+    // Normal: main app
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        toolbarHeight: 80, // Taller for floating look
+        toolbarHeight: 80,
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
         titleSpacing: 20,
@@ -85,16 +103,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         elevation: 0,
         scrolledUnderElevation: 0,
       ),
-      body: level == null
-          ? JapaneseBackground(
-              child: SafeArea(
-                child: LevelGate(
-                  language: language,
-                  onSelected: (selected) => _setLevel(selected),
-                ),
-              ),
-            )
-          : const LearningPathScreen(),
+      body: const LearningPathScreen(),
     );
   }
 
@@ -104,6 +113,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ref.read(appLanguageProvider) == AppLanguage.ja) {
       ref.read(appLanguageProvider.notifier).state = AppLanguage.en;
     }
+  }
+
+  Future<void> _handleOnboardingComplete(
+    StudyLevel level,
+    StudyGoal goal,
+  ) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(prefOnboardingCompleted, true);
+    await prefs.setString(prefOnboardingLevel, level.name);
+    await prefs.setString(prefOnboardingGoal, goal.name);
+    ref.read(studyGoalProvider.notifier).state = goal;
+    _setLevel(level); // also applies language guard (N3 → allow Japanese UI)
+    ref.read(onboardingDoneProvider.notifier).state = true;
+  }
+
+  Future<void> _resetOnboarding() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(prefOnboardingCompleted, false);
+    ref.read(onboardingDoneProvider.notifier).state = false;
   }
 
   void _showLanguageSheet(BuildContext context) {
@@ -181,8 +209,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         leading: const Icon(Icons.school_outlined),
                         title: Text(language.levelMenuTitle),
                         onTap: () {
-                          ref.read(studyLevelProvider.notifier).state = null;
                           Navigator.of(context).pop();
+                          _resetOnboarding();
                         },
                       ),
                       ListTile(
