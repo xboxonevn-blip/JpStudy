@@ -55,6 +55,10 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard> {
     final completionPercent = ((effectiveDone.length.clamp(0, 3) / 3) * 100)
         .round();
 
+    final streakAtRisk = (dashboard?.streak ?? 0) > 0 &&
+        (dashboard?.todayXp ?? 0) == 0 &&
+        DateTime.now().hour >= 20;
+
     final isInProgress =
         (progress?.started ?? false) && completionPercent < 100;
     final ctaLabel = isInProgress
@@ -189,6 +193,29 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard> {
                 ),
               ],
             ),
+            if (streakAtRisk) ...[
+              const SizedBox(height: 6),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.local_fire_department_rounded,
+                    size: 14,
+                    color: Color(0xFFFF6B00),
+                  ),
+                  const SizedBox(width: 6),
+                  Expanded(
+                    child: Text(
+                      '${dashboard!.streak}-day streak at risk — practice now to keep it!',
+                      style: const TextStyle(
+                        color: Color(0xFFFF6B00),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
             const SizedBox(height: 12),
             _BackupStatusLine(language: language),
           ],
