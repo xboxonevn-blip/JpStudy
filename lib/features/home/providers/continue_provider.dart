@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import '../../../../core/level_provider.dart';
+import '../../../data/repositories/grammar_repository.dart';
 import '../../../data/repositories/lesson_repository.dart';
 import 'dashboard_provider.dart';
 
@@ -24,10 +25,14 @@ final continueActionProvider = StreamProvider<ContinueAction>((ref) async* {
 
   // Priority 1: Grammar Due
   if (dashboard.grammarDue > 0) {
+    final grammarRepo = ref.watch(grammarRepositoryProvider);
+    final duePoints = await grammarRepo.fetchDuePoints();
+    final dueIds = duePoints.map((p) => p.id).toList();
     yield ContinueAction(
       type: ContinueActionType.grammarReview,
       label: language.reviewGrammarLabel,
       count: dashboard.grammarDue,
+      data: dueIds,
     );
     return;
   }

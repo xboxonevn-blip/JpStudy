@@ -112,7 +112,12 @@ class NextStepSuggestions extends ConsumerWidget {
   ) {
     switch (action?.type) {
       case ContinueActionType.grammarReview:
-        context.push('/grammar');
+        final ids = action?.data;
+        if (ids is List && ids.isNotEmpty) {
+          context.push('/grammar-practice', extra: List<int>.from(ids));
+        } else {
+          context.push('/grammar');
+        }
         return;
       case ContinueActionType.vocabReview:
         context.push('/vocab/review');

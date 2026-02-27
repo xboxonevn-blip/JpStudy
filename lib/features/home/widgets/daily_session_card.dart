@@ -324,6 +324,14 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard> {
   }) {
     switch (continueAction?.type) {
       case ContinueActionType.grammarReview:
+        final ids = continueAction?.data;
+        if (ids is List && ids.isNotEmpty) {
+          return _DailyRoute(
+            route: '/grammar-practice',
+            extra: List<int>.from(ids),
+            step: 1,
+          );
+        }
         return const _DailyRoute(route: '/grammar', step: 1);
       case ContinueActionType.vocabReview:
         return const _DailyRoute(route: '/vocab/review', step: 1);
