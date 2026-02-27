@@ -309,17 +309,21 @@ class _NextReviewChip extends StatelessWidget {
       text = 'Complete a lesson to activate spaced review';
     } else {
       final diff = nextReviewAt!.difference(DateTime.now());
-      final String timing;
-      if (diff.inMinutes < 60) {
-        timing = '${diff.inMinutes}m';
-      } else if (diff.inHours < 24) {
-        final h = diff.inHours;
-        final m = diff.inMinutes % 60;
-        timing = m > 0 ? '${h}h ${m}m' : '${h}h';
+      if (diff.isNegative) {
+        text = '✅  Review is ready now!';
       } else {
-        timing = 'in ${diff.inDays} day${diff.inDays == 1 ? '' : 's'}';
+        final String timing;
+        if (diff.inMinutes < 60) {
+          timing = '${diff.inMinutes}m';
+        } else if (diff.inHours < 24) {
+          final h = diff.inHours;
+          final m = diff.inMinutes % 60;
+          timing = m > 0 ? '${h}h ${m}m' : '${h}h';
+        } else {
+          timing = 'in ${diff.inDays} day${diff.inDays == 1 ? '' : 's'}';
+        }
+        text = '✅  All caught up! Next review $timing';
       }
-      text = '✅  All caught up! Next review $timing';
     }
 
     return Text(

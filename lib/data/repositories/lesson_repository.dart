@@ -64,10 +64,12 @@ final allDueTermsProvider = FutureProvider<List<UserLessonTermData>>((
   return repo.fetchAllDueTerms();
 });
 
-/// Returns the nearest future vocab review date, or null if no SRS state exists.
-final nextVocabReviewProvider = FutureProvider<DateTime?>((ref) async {
+/// Returns the nearest future vocab review date, refreshing whenever SRS state changes.
+final nextVocabReviewProvider = StreamProvider.autoDispose<DateTime?>((ref) async* {
   final db = ref.watch(databaseProvider);
-  return db.srsDao.getNextScheduledReview();
+  await for (final _ in db.srsDao.watchDueReviewCount()) {
+    yield await db.srsDao.getNextScheduledReview();
+  }
 });
 
 final progressSummaryProvider = FutureProvider<ProgressSummary>((ref) async {
