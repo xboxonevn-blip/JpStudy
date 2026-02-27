@@ -59,6 +59,17 @@ class SrsDao extends DatabaseAccessor<AppDatabase> with _$SrsDaoMixin {
         .get();
   }
 
+  /// Returns the nearest future review date (minimum nextReviewAt > now).
+  /// Returns null if no SRS state exists yet.
+  Future<DateTime?> getNextScheduledReview() async {
+    final row = await (select(srsState)
+          ..where((t) => t.nextReviewAt.isBiggerThanValue(DateTime.now()))
+          ..orderBy([(t) => OrderingTerm.asc(t.nextReviewAt)])
+          ..limit(1))
+        .getSingleOrNull();
+    return row?.nextReviewAt;
+  }
+
   /// Reactive due count used by dashboard and home indicators.
   Stream<int> watchDueReviewCount() {
     final countExpr = srsState.vocabId.count();

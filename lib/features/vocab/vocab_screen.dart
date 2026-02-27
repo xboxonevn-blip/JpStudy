@@ -80,6 +80,7 @@ class _VocabContent extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final vocabAsync = ref.watch(vocabPreviewProvider(level.shortLabel));
     final dueTermsAsync = ref.watch(allDueTermsProvider);
+    final nextReviewAsync = ref.watch(nextVocabReviewProvider);
 
     return vocabAsync.when(
       data: (dataItems) {
@@ -114,6 +115,11 @@ class _VocabContent extends ConsumerWidget {
                   isExpanded: true,
                   onPressed: () => context.push('/vocab/review'),
                 ),
+              ),
+            if (dueTermsAsync.hasValue && dueTermsAsync.value!.isEmpty)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+                child: _NextReviewChip(nextReviewAt: nextReviewAsync.valueOrNull),
               ),
             Expanded(
               child: isFlashcardMode
@@ -286,6 +292,42 @@ class _FlashcardViewState extends ConsumerState<_FlashcardView> {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _NextReviewChip extends StatelessWidget {
+  const _NextReviewChip({required this.nextReviewAt});
+
+  final DateTime? nextReviewAt;
+
+  @override
+  Widget build(BuildContext context) {
+    final String text;
+    if (nextReviewAt == null) {
+      text = 'Complete a lesson to activate spaced review';
+    } else {
+      final diff = nextReviewAt!.difference(DateTime.now());
+      final String timing;
+      if (diff.inMinutes < 60) {
+        timing = '${diff.inMinutes}m';
+      } else if (diff.inHours < 24) {
+        final h = diff.inHours;
+        final m = diff.inMinutes % 60;
+        timing = m > 0 ? '${h}h ${m}m' : '${h}h';
+      } else {
+        timing = 'in ${diff.inDays} day${diff.inDays == 1 ? '' : 's'}';
+      }
+      text = '✅  All caught up! Next review $timing';
+    }
+
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: 13,
+        fontWeight: FontWeight.w600,
+        color: AppThemeV2.textSub,
       ),
     );
   }
