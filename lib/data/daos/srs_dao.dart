@@ -4,6 +4,20 @@ import '../db/tables.dart';
 
 part 'srs_dao.g.dart';
 
+class SrsStageBreakdown {
+  const SrsStageBreakdown({
+    required this.learning,
+    required this.young,
+    required this.mature,
+  });
+
+  final int learning; // stability < 1.0
+  final int young;    // 1.0 ≤ stability < 21.0
+  final int mature;   // stability ≥ 21.0
+
+  int get total => learning + young + mature;
+}
+
 @DriftAccessor(tables: [SrsState])
 class SrsDao extends DatabaseAccessor<AppDatabase> with _$SrsDaoMixin {
   SrsDao(super.db);
@@ -78,5 +92,23 @@ class SrsDao extends DatabaseAccessor<AppDatabase> with _$SrsDaoMixin {
           ..where(srsState.nextReviewAt.isSmallerOrEqualValue(DateTime.now())))
         .map((row) => row.read(countExpr) ?? 0)
         .watchSingle();
+  }
+
+  /// Returns counts of SRS items in each FSRS stability bracket.
+  /// Only items that have been reviewed at least once are counted.
+  Future<SrsStageBreakdown> getStageBreakdown() async {
+    final rows = await select(srsState).get();
+    int learning = 0, young = 0, mature = 0;
+    for (final r in rows) {
+      final s = r.stability;
+      if (s < 1.0) {
+        learning++;
+      } else if (s < 21.0) {
+        young++;
+      } else {
+        mature++;
+      }
+    }
+    return SrsStageBreakdown(learning: learning, young: young, mature: mature);
   }
 }

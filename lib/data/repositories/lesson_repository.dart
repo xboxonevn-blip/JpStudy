@@ -3,6 +3,7 @@ import 'package:drift/drift.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/core/services/fsrs_service.dart';
+import 'package:jpstudy/data/daos/srs_dao.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/db/database_provider.dart';
 
@@ -102,6 +103,11 @@ final attemptHistoryProvider = FutureProvider<List<AttemptSummary>>((
 ) async {
   final repo = ref.watch(lessonRepositoryProvider);
   return repo.fetchAttemptHistory();
+});
+
+final srsRetentionProvider = FutureProvider<SrsStageBreakdown>((ref) async {
+  final db = ref.watch(databaseProvider);
+  return db.srsDao.getStageBreakdown();
 });
 
 class LessonTitleArgs {

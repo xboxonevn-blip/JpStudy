@@ -28,6 +28,8 @@ class ProgressScreen extends ConsumerWidget {
             children: [
               _ActivityCalendar(streak: summary.streak),
               const SizedBox(height: 16),
+              const _SrsRetentionCard(),
+              const SizedBox(height: 16),
               _StatCard(
                 label: language.progressStreakLabel,
                 value: summary.streak.toString(),
@@ -128,6 +130,123 @@ class _StatCard extends StatelessWidget {
           Text(value, style: const TextStyle(fontWeight: FontWeight.w700)),
         ],
       ),
+    );
+  }
+}
+
+class _SrsRetentionCard extends ConsumerWidget {
+  const _SrsRetentionCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final breakdownAsync = ref.watch(srsRetentionProvider);
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFFE8ECF5)),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x0A2E3A59),
+            blurRadius: 18,
+            offset: Offset(0, 6),
+          ),
+        ],
+      ),
+      child: breakdownAsync.when(
+        data: (bd) => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Vocabulary SRS',
+              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              '${bd.total} items reviewed via SRS',
+              style: const TextStyle(fontSize: 12, color: Color(0xFF6B7390)),
+            ),
+            const SizedBox(height: 10),
+            if (bd.total > 0) ...[
+              ClipRRect(
+                borderRadius: BorderRadius.circular(4),
+                child: SizedBox(
+                  height: 12,
+                  child: Row(
+                    children: [
+                      if (bd.learning > 0)
+                        Expanded(
+                          flex: bd.learning,
+                          child: Container(color: const Color(0xFFEF4444)),
+                        ),
+                      if (bd.young > 0)
+                        Expanded(
+                          flex: bd.young,
+                          child: Container(color: const Color(0xFFEAB308)),
+                        ),
+                      if (bd.mature > 0)
+                        Expanded(
+                          flex: bd.mature,
+                          child: Container(color: const Color(0xFF22C55E)),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+            ],
+            Wrap(
+              spacing: 12,
+              children: [
+                _StageLabel(label: 'Learning', count: bd.learning, color: const Color(0xFFEF4444)),
+                _StageLabel(label: 'Young', count: bd.young, color: const Color(0xFFEAB308)),
+                _StageLabel(label: 'Mature', count: bd.mature, color: const Color(0xFF22C55E)),
+              ],
+            ),
+          ],
+        ),
+        loading: () => const SizedBox(
+          height: 60,
+          child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
+        ),
+        error: (_, _) => const SizedBox(height: 60),
+      ),
+    );
+  }
+}
+
+class _StageLabel extends StatelessWidget {
+  const _StageLabel({
+    required this.label,
+    required this.count,
+    required this.color,
+  });
+
+  final String label;
+  final int count;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 10,
+          height: 10,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(2),
+          ),
+        ),
+        const SizedBox(width: 4),
+        Text(
+          '$label $count',
+          style: const TextStyle(fontSize: 11, color: Color(0xFF6B7390)),
+        ),
+      ],
     );
   }
 }
