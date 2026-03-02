@@ -90,6 +90,13 @@ final reviewHistoryProvider = FutureProvider<List<ReviewDaySummary>>((
   return repo.fetchReviewHistory();
 });
 
+final activityCalendarProvider = FutureProvider<List<ReviewDaySummary>>((
+  ref,
+) async {
+  final repo = ref.watch(lessonRepositoryProvider);
+  return repo.fetchReviewHistory(limit: 112);
+});
+
 final attemptHistoryProvider = FutureProvider<List<AttemptSummary>>((
   ref,
 ) async {
