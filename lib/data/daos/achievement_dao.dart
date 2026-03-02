@@ -35,4 +35,12 @@ class AchievementDao extends DatabaseAccessor<AppDatabase>
       const AchievementsCompanion(isNotified: Value(true)),
     );
   }
+
+  /// Returns true if an achievement of the given type and value already exists.
+  Future<bool> hasAchievement(String type, int value) async {
+    final row = await (select(achievements)
+          ..where((t) => t.type.equals(type) & t.value.equals(value)))
+        .getSingleOrNull();
+    return row != null;
+  }
 }

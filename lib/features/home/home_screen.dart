@@ -24,6 +24,14 @@ import 'package:jpstudy/core/goal_provider.dart';
 import 'package:jpstudy/core/onboarding_provider.dart';
 import 'package:jpstudy/core/study_goal.dart';
 import 'package:jpstudy/features/onboarding/onboarding_screen.dart';
+import 'package:drift/drift.dart' hide Column;
+import 'package:jpstudy/data/db/app_database.dart';
+import 'package:jpstudy/data/db/database_provider.dart';
+import 'package:jpstudy/data/daos/learn_dao.dart';
+import 'package:jpstudy/data/daos/achievement_dao.dart';
+import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
+import 'package:jpstudy/features/learn/models/achievement.dart' as model;
+import 'package:jpstudy/features/learn/services/learn_session_service.dart';
 
 const _prefDailyReminder = 'notifications.daily';
 const _prefDailyReminderTime = 'notifications.daily.time';
@@ -50,12 +58,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   TimeOfDay _autoBackupTime = const TimeOfDay(hour: 2, minute: 0);
   bool _autoBackupEnabled = false;
   DateTime? _lastAutoBackup;
+  int? _lastKnownLevel;
 
   @override
   void initState() {
     super.initState();
     _loadReminderPrefs();
     _loadBackupPrefs();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _showPendingAchievements();
+      _initLevelTracking();
+    });
   }
 
   @override
@@ -69,6 +82,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     // Trigger init on first build; result tracked via onboardingDoneProvider.
     ref.watch(appInitProvider);
+    ref.listen<AsyncValue<DashboardState>>(dashboardProvider, (_, next) {
+      next.whenData((state) => _checkMilestones(state));
+    });
     final onboardingDone = ref.watch(onboardingDoneProvider);
     final language = ref.watch(appLanguageProvider);
     final level = ref.watch(studyLevelProvider);
@@ -105,6 +121,92 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
       body: const LearningPathScreen(),
     );
+  }
+
+  Future<void> _initLevelTracking() async {
+    if (!mounted) return;
+    final repo = ref.read(lessonRepositoryProvider);
+    final progress = await repo.fetchProgressSummary();
+    if (!mounted) return;
+    final service = LearnSessionService(
+      LearnDao(ref.read(databaseProvider)),
+      AchievementDao(ref.read(databaseProvider)),
+    );
+    _lastKnownLevel = service.calculateLevel(progress.totalXp);
+  }
+
+  Future<void> _checkMilestones(DashboardState state) async {
+    if (!mounted) return;
+    final db = ref.read(databaseProvider);
+    final achievementDao = AchievementDao(db);
+
+    // Streak milestones
+    const milestones = [7, 14, 30, 60, 100];
+    if (milestones.contains(state.streak)) {
+      final already = await achievementDao.hasAchievement(
+        model.AchievementType.streak.name,
+        state.streak,
+      );
+      if (!already) {
+        await achievementDao.addAchievement(
+          AchievementsCompanion(
+            type: Value(model.AchievementType.streak.name),
+            value: Value(state.streak),
+            earnedAt: Value(DateTime.now()),
+            isNotified: const Value(false),
+          ),
+        );
+      }
+    }
+
+    // Level-up milestone
+    if (_lastKnownLevel != null) {
+      final repo = ref.read(lessonRepositoryProvider);
+      final progress = await repo.fetchProgressSummary();
+      final service = LearnSessionService(LearnDao(db), AchievementDao(db));
+      final newLevel = service.calculateLevel(progress.totalXp);
+      if (newLevel > _lastKnownLevel!) {
+        final already = await achievementDao.hasAchievement(
+          model.AchievementType.levelUp.name,
+          newLevel,
+        );
+        if (!already) {
+          await achievementDao.addAchievement(
+            AchievementsCompanion(
+              type: Value(model.AchievementType.levelUp.name),
+              value: Value(newLevel),
+              earnedAt: Value(DateTime.now()),
+              isNotified: const Value(false),
+            ),
+          );
+        }
+        _lastKnownLevel = newLevel;
+      }
+    }
+
+    if (!mounted) return;
+    await _showPendingAchievements();
+  }
+
+  Future<void> _showPendingAchievements() async {
+    if (!mounted) return;
+    final db = ref.read(databaseProvider);
+    final service = LearnSessionService(LearnDao(db), AchievementDao(db));
+    final achievements = await service.getPendingAchievements();
+    if (!mounted || achievements.isEmpty) return;
+
+    final language = ref.read(appLanguageProvider);
+    for (final achievement in achievements) {
+      if (!mounted) return;
+      await showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => _AchievementDialog(
+          achievement: achievement,
+          language: language,
+        ),
+      );
+    }
   }
 
   void _setLevel(StudyLevel selected) {
@@ -807,6 +909,53 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   String _formatTime(TimeOfDay time, BuildContext context) {
     return MaterialLocalizations.of(context).formatTimeOfDay(time);
+  }
+}
+
+class _AchievementDialog extends StatelessWidget {
+  const _AchievementDialog({
+    required this.achievement,
+    required this.language,
+  });
+
+  final model.Achievement achievement;
+  final AppLanguage language;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text(language.achievementUnlockedTitle),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            achievement.type.emoji,
+            style: const TextStyle(fontSize: 48),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            achievement.type.title,
+            style: const TextStyle(fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(height: 4),
+          Text(achievement.description),
+          const SizedBox(height: 8),
+          Text(
+            '+${achievement.bonusXP} XP',
+            style: TextStyle(
+              color: achievement.type.color,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+        ],
+      ),
+      actions: [
+        ElevatedButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Awesome!'),
+        ),
+      ],
+    );
   }
 }
 
