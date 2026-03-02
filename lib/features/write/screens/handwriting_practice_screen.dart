@@ -31,6 +31,7 @@ class HandwritingPracticeScreen extends ConsumerStatefulWidget {
     this.includeCompoundWords = true,
     this.maxCompoundsPerKanji = -1,
     this.initialKanjiId,
+    this.headerWidget,
   });
 
   final String lessonTitle;
@@ -38,6 +39,7 @@ class HandwritingPracticeScreen extends ConsumerStatefulWidget {
   final bool includeCompoundWords;
   final int maxCompoundsPerKanji;
   final int? initialKanjiId;
+  final Widget? headerWidget;
 
   @override
   ConsumerState<HandwritingPracticeScreen> createState() =>
@@ -121,6 +123,12 @@ class _HandwritingPracticeScreenState
       backgroundColor: _screenBackgroundColor,
       appBar: AppBar(
         title: Text('${language.handwritingLabel}: ${widget.lessonTitle}'),
+        bottom: widget.headerWidget != null
+            ? PreferredSize(
+                preferredSize: const Size.fromHeight(36),
+                child: widget.headerWidget!,
+              )
+            : null,
       ),
       bottomNavigationBar: Material(
         color: _surfaceCardColor,

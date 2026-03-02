@@ -59,6 +59,17 @@ class KanjiSrsDao extends DatabaseAccessor<AppDatabase>
     )..where((t) => t.nextReviewAt.isSmallerOrEqualValue(now))).get();
   }
 
+  /// Returns the nearest future review date (nextReviewAt > now).
+  /// Returns null if all reviews are past-due or no state exists.
+  Future<DateTime?> getNextScheduledReview() async {
+    final row = await (select(kanjiSrsState)
+          ..where((t) => t.nextReviewAt.isBiggerThanValue(DateTime.now()))
+          ..orderBy([(t) => OrderingTerm.asc(t.nextReviewAt)])
+          ..limit(1))
+        .getSingleOrNull();
+    return row?.nextReviewAt;
+  }
+
   /// Reactive due count for dashboard/home.
   Stream<int> watchDueReviewCount() {
     final countExpr = kanjiSrsState.kanjiId.count();

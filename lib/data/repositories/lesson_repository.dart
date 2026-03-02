@@ -73,6 +73,14 @@ final nextVocabReviewProvider = StreamProvider.autoDispose<DateTime?>((ref) asyn
   }
 });
 
+/// Returns the nearest future kanji review date, refreshing whenever kanji SRS state changes.
+final nextKanjiReviewProvider = StreamProvider.autoDispose<DateTime?>((ref) async* {
+  final db = ref.watch(databaseProvider);
+  await for (final _ in db.kanjiSrsDao.watchDueReviewCount()) {
+    yield await db.kanjiSrsDao.getNextScheduledReview();
+  }
+});
+
 final progressSummaryProvider = FutureProvider<ProgressSummary>((ref) async {
   final repo = ref.watch(lessonRepositoryProvider);
   return repo.fetchProgressSummary();
