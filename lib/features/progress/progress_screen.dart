@@ -26,7 +26,7 @@ class ProgressScreen extends ConsumerWidget {
           return ListView(
             padding: const EdgeInsets.all(20),
             children: [
-              const _ActivityCalendar(),
+              _ActivityCalendar(streak: summary.streak),
               const SizedBox(height: 16),
               _StatCard(
                 label: language.progressStreakLabel,
@@ -339,7 +339,9 @@ class _MiniChip extends StatelessWidget {
 }
 
 class _ActivityCalendar extends ConsumerWidget {
-  const _ActivityCalendar();
+  const _ActivityCalendar({required this.streak});
+
+  final int streak;
 
   static const int _weeks = 16;
   static const double _cellSize = 10;
@@ -366,10 +368,18 @@ class _ActivityCalendar extends ConsumerWidget {
     return m[month - 1];
   }
 
+  String _tr(AppLanguage language, String en, String vi, String ja) {
+    switch (language) {
+      case AppLanguage.en: return en;
+      case AppLanguage.vi: return vi;
+      case AppLanguage.ja: return ja;
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final language = ref.watch(appLanguageProvider);
     final calendarAsync = ref.watch(activityCalendarProvider);
-    final streak = ref.watch(progressSummaryProvider).asData?.value.streak ?? 0;
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -384,13 +394,13 @@ class _ActivityCalendar extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Activity',
-            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
+          Text(
+            _tr(language, 'Activity', 'Hoạt động', '活動'),
+            style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
           ),
           const SizedBox(height: 10),
           calendarAsync.when(
-            data: (history) => _buildGrid(context, history),
+            data: (history) => _buildGrid(context, history, language),
             loading: () => const SizedBox(
               height: 88,
               child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
@@ -398,13 +408,13 @@ class _ActivityCalendar extends ConsumerWidget {
             error: (_, _) => const SizedBox(height: 88),
           ),
           const SizedBox(height: 10),
-          _buildBottomRow(streak),
+          _buildBottomRow(streak, language),
         ],
       ),
     );
   }
 
-  Widget _buildGrid(BuildContext context, List<ReviewDaySummary> history) {
+  Widget _buildGrid(BuildContext context, List<ReviewDaySummary> history, AppLanguage language) {
     // Build sparse lookup map
     final map = <String, int>{};
     for (final s in history) {
@@ -444,7 +454,7 @@ class _ActivityCalendar extends ConsumerWidget {
           const SizedBox(width: _cellGap + 2),
           // Week columns
           for (int col = 0; col < _weeks; col++) ...[
-            _buildWeekColumn(context, col, startDate, map, today),
+            _buildWeekColumn(context, col, startDate, map, today, language),
             if (col < _weeks - 1) const SizedBox(width: _cellGap),
           ],
         ],
@@ -458,6 +468,7 @@ class _ActivityCalendar extends ConsumerWidget {
     DateTime startDate,
     Map<String, int> map,
     DateTime today,
+    AppLanguage language,
   ) {
     final weekMonday = startDate.add(Duration(days: col * 7));
 
@@ -489,7 +500,7 @@ class _ActivityCalendar extends ConsumerWidget {
               : null,
         ),
         for (int row = 0; row < 7; row++) ...[
-          _buildCell(context, weekMonday.add(Duration(days: row)), map, today),
+          _buildCell(context, weekMonday.add(Duration(days: row)), map, today, language),
           if (row < 6) const SizedBox(height: _cellGap),
         ],
       ],
@@ -501,6 +512,7 @@ class _ActivityCalendar extends ConsumerWidget {
     DateTime date,
     Map<String, int> map,
     DateTime today,
+    AppLanguage language,
   ) {
     final todayOnly = DateTime(today.year, today.month, today.day);
     final dateOnly = DateTime(date.year, date.month, date.day);
@@ -525,7 +537,9 @@ class _ActivityCalendar extends ConsumerWidget {
 
     final localizations = MaterialLocalizations.of(context);
     final dateLabel = localizations.formatMediumDate(date);
-    final tooltip = reviewed > 0 ? '$dateLabel — $reviewed reviews' : dateLabel;
+    final tooltip = reviewed > 0
+        ? _tr(language, '$dateLabel — $reviewed reviews', '$dateLabel — $reviewed lượt ôn', '$dateLabel — $reviewed回復習')
+        : dateLabel;
 
     return Tooltip(
       message: tooltip,
@@ -534,7 +548,7 @@ class _ActivityCalendar extends ConsumerWidget {
     );
   }
 
-  Widget _buildBottomRow(int streak) {
+  Widget _buildBottomRow(int streak, AppLanguage language) {
     return Row(
       children: [
         const Icon(
@@ -544,7 +558,7 @@ class _ActivityCalendar extends ConsumerWidget {
         ),
         const SizedBox(width: 4),
         Text(
-          '$streak-day streak',
+          _tr(language, '$streak-day streak', 'Chuỗi $streak ngày', '$streak日連続'),
           style: const TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w700,
@@ -552,20 +566,27 @@ class _ActivityCalendar extends ConsumerWidget {
           ),
         ),
         const Spacer(),
-        const Text('Ít', style: TextStyle(fontSize: 10, color: Color(0xFF6B7390))),
+        Text(
+          _tr(language, 'Less', 'Ít', '少'),
+          style: const TextStyle(fontSize: 10, color: Color(0xFF6B7390)),
+        ),
         const SizedBox(width: 4),
-        for (final color in _palette) ...[
+        for (int i = 0; i < _palette.length; i++) ...[
           Container(
             width: _cellSize,
             height: _cellSize,
             decoration: BoxDecoration(
-              color: color,
+              color: _palette[i],
               borderRadius: BorderRadius.circular(3),
             ),
           ),
-          const SizedBox(width: _cellGap),
+          if (i < _palette.length - 1) const SizedBox(width: _cellGap),
         ],
-        const Text('Nhiều', style: TextStyle(fontSize: 10, color: Color(0xFF6B7390))),
+        const SizedBox(width: 4),
+        Text(
+          _tr(language, 'More', 'Nhiều', '多'),
+          style: const TextStyle(fontSize: 10, color: Color(0xFF6B7390)),
+        ),
       ],
     );
   }
