@@ -118,6 +118,39 @@ final srsRetentionProvider = FutureProvider<SrsStageBreakdown>((ref) async {
   return db.srsDao.getStageBreakdown();
 });
 
+class WeekSummary {
+  const WeekSummary({
+    required this.totalReviewed,
+    required this.accuracy,
+    required this.daysStudied,
+  });
+
+  final int totalReviewed;
+  final int accuracy; // percentage 0–100
+  final int daysStudied;
+}
+
+final weekSummaryProvider = FutureProvider<WeekSummary>((ref) async {
+  final repo = ref.watch(lessonRepositoryProvider);
+  final history = await repo.fetchReviewHistory(limit: 7);
+  final attempts = await repo.fetchAttemptHistory(limit: 50);
+  final cutoff = DateTime.now().subtract(const Duration(days: 7));
+
+  final totalReviewed = history.fold(0, (s, d) => s + d.reviewed);
+  final daysStudied = history.where((d) => d.reviewed > 0).length;
+
+  final weekAttempts = attempts.where((a) => a.startedAt.isAfter(cutoff)).toList();
+  final totalCorrect = weekAttempts.fold(0, (s, a) => s + a.score);
+  final totalQ = weekAttempts.fold(0, (s, a) => s + a.total);
+  final accuracy = totalQ == 0 ? 0 : (totalCorrect / totalQ * 100).round();
+
+  return WeekSummary(
+    totalReviewed: totalReviewed,
+    accuracy: accuracy,
+    daysStudied: daysStudied,
+  );
+});
+
 class LessonTitleArgs {
   const LessonTitleArgs(this.lessonId, this.fallback);
 

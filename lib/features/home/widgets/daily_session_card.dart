@@ -10,6 +10,7 @@ import 'package:jpstudy/features/vocab/vocab_ghost_providers.dart';
 import 'package:jpstudy/features/home/providers/continue_provider.dart';
 import 'package:jpstudy/features/home/providers/daily_session_progress_provider.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
+import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/home/widgets/home_surface.dart';
 
 class DailySessionCard extends ConsumerStatefulWidget {
@@ -218,6 +219,7 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard> {
             ],
             const SizedBox(height: 12),
             _BackupStatusLine(language: language),
+            const _WeekSummaryRow(),
           ],
         ),
       ),
@@ -523,6 +525,50 @@ class _BackupStatusLine extends ConsumerWidget {
           fontWeight: FontWeight.w600,
         ),
       ),
+    );
+  }
+}
+
+class _WeekSummaryRow extends ConsumerWidget {
+  const _WeekSummaryRow();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final summaryAsync = ref.watch(weekSummaryProvider);
+
+    return summaryAsync.when(
+      data: (summary) {
+        if (summary.totalReviewed == 0) return const SizedBox.shrink();
+        return Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: GestureDetector(
+            onTap: () => context.push('/progress'),
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.calendar_today_rounded,
+                  size: 13,
+                  color: Color(0xFFDBEAFE),
+                ),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    'This week: ${summary.totalReviewed} reviews · ${summary.accuracy}% accuracy · ${summary.daysStudied}/7 days',
+                    style: const TextStyle(
+                      color: Color(0xFFDBEAFE),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+      loading: () => const SizedBox.shrink(),
+      error: (_, _) => const SizedBox.shrink(),
     );
   }
 }
