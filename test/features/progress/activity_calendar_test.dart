@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
+import 'package:jpstudy/data/daos/srs_dao.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/progress/progress_screen.dart';
 
@@ -36,6 +37,13 @@ void main() {
           ),
           attemptHistoryProvider.overrideWith(
             (_) async => <AttemptSummary>[],
+          ),
+          srsRetentionProvider.overrideWith(
+            (_) async => const SrsStageBreakdown(
+              learning: 0,
+              young: 0,
+              mature: 0,
+            ),
           ),
         ],
         child: const MaterialApp(
