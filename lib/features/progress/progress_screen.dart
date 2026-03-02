@@ -527,7 +527,11 @@ class _ActivityCalendar extends ConsumerWidget {
     final dateLabel = localizations.formatMediumDate(date);
     final tooltip = reviewed > 0 ? '$dateLabel — $reviewed reviews' : dateLabel;
 
-    return Tooltip(message: tooltip, child: box);
+    return Tooltip(
+      message: tooltip,
+      triggerMode: TooltipTriggerMode.tap,
+      child: box,
+    );
   }
 
   Widget _buildBottomRow(int streak) {
