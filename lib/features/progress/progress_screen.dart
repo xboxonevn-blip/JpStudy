@@ -26,6 +26,8 @@ class ProgressScreen extends ConsumerWidget {
           return ListView(
             padding: const EdgeInsets.all(20),
             children: [
+              const _ActivityCalendar(),
+              const SizedBox(height: 16),
               _StatCard(
                 label: language.progressStreakLabel,
                 value: summary.streak.toString(),
@@ -332,6 +334,235 @@ class _MiniChip extends StatelessWidget {
         '$label: $value',
         style: const TextStyle(fontSize: 12, color: Color(0xFF6B7390)),
       ),
+    );
+  }
+}
+
+class _ActivityCalendar extends ConsumerWidget {
+  const _ActivityCalendar();
+
+  static const int _weeks = 16;
+  static const double _cellSize = 10;
+  static const double _cellGap = 3;
+  static const List<Color> _palette = [
+    Color(0xFFE8ECF5), // 0 reviews
+    Color(0xFFBDD5F5), // 1–5
+    Color(0xFF5B9FE8), // 6–15
+    Color(0xFF1A6FD8), // 16+
+  ];
+
+  Color _color(int reviewed) {
+    if (reviewed <= 0) return _palette[0];
+    if (reviewed <= 5) return _palette[1];
+    if (reviewed <= 15) return _palette[2];
+    return _palette[3];
+  }
+
+  String _dateKey(DateTime d) =>
+      '${d.year}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}';
+
+  String _shortMonth(int month) {
+    const m = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return m[month - 1];
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final calendarAsync = ref.watch(activityCalendarProvider);
+    final streak = ref.watch(progressSummaryProvider).asData?.value.streak ?? 0;
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFFE8ECF5)),
+        boxShadow: const [
+          BoxShadow(color: Color(0x0A2E3A59), blurRadius: 18, offset: Offset(0, 6)),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Activity',
+            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
+          ),
+          const SizedBox(height: 10),
+          calendarAsync.when(
+            data: (history) => _buildGrid(context, history),
+            loading: () => const SizedBox(
+              height: 88,
+              child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
+            ),
+            error: (_, _) => const SizedBox(height: 88),
+          ),
+          const SizedBox(height: 10),
+          _buildBottomRow(streak),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildGrid(BuildContext context, List<ReviewDaySummary> history) {
+    // Build sparse lookup map
+    final map = <String, int>{};
+    for (final s in history) {
+      map[_dateKey(s.day)] = s.reviewed;
+    }
+
+    final today = DateTime.now();
+    // Monday of current week
+    final mondayThisWeek = today.subtract(Duration(days: today.weekday - 1));
+    // Start = Monday 15 weeks ago
+    final startDate = mondayThisWeek.subtract(const Duration(days: 15 * 7));
+
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Day labels (M T W T F S S)
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              const SizedBox(height: 14), // spacer for month row
+              for (final label in const ['M', 'T', 'W', 'T', 'F', 'S', 'S']) ...[
+                SizedBox(
+                  height: _cellSize,
+                  width: 12,
+                  child: Text(
+                    label,
+                    style: const TextStyle(fontSize: 8, color: Color(0xFF6B7390)),
+                    textAlign: TextAlign.right,
+                  ),
+                ),
+                const SizedBox(height: _cellGap),
+              ],
+            ],
+          ),
+          const SizedBox(width: _cellGap + 2),
+          // Week columns
+          for (int col = 0; col < _weeks; col++) ...[
+            _buildWeekColumn(context, col, startDate, map, today),
+            if (col < _weeks - 1) const SizedBox(width: _cellGap),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildWeekColumn(
+    BuildContext context,
+    int col,
+    DateTime startDate,
+    Map<String, int> map,
+    DateTime today,
+  ) {
+    final weekMonday = startDate.add(Duration(days: col * 7));
+
+    // Month label: show when this column starts a new month
+    String? monthLabel;
+    if (col == 0) {
+      monthLabel = _shortMonth(weekMonday.month);
+    } else {
+      final prevMonday = startDate.add(Duration(days: (col - 1) * 7));
+      if (weekMonday.month != prevMonday.month) {
+        monthLabel = _shortMonth(weekMonday.month);
+      }
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: 14,
+          child: monthLabel != null
+              ? Text(
+                  monthLabel,
+                  style: const TextStyle(
+                    fontSize: 8,
+                    color: Color(0xFF6B7390),
+                    fontWeight: FontWeight.w600,
+                  ),
+                )
+              : null,
+        ),
+        for (int row = 0; row < 7; row++) ...[
+          _buildCell(context, weekMonday.add(Duration(days: row)), map, today),
+          if (row < 6) const SizedBox(height: _cellGap),
+        ],
+      ],
+    );
+  }
+
+  Widget _buildCell(
+    BuildContext context,
+    DateTime date,
+    Map<String, int> map,
+    DateTime today,
+  ) {
+    final todayOnly = DateTime(today.year, today.month, today.day);
+    final dateOnly = DateTime(date.year, date.month, date.day);
+    final isFuture = dateOnly.isAfter(todayOnly);
+    final isToday = dateOnly == todayOnly;
+    final key = _dateKey(date);
+    final reviewed = isFuture ? 0 : (map[key] ?? 0);
+
+    final box = Container(
+      width: _cellSize,
+      height: _cellSize,
+      decoration: BoxDecoration(
+        color: isFuture ? Colors.transparent : _color(reviewed),
+        borderRadius: BorderRadius.circular(3),
+        border: isToday
+            ? Border.all(color: const Color(0xFF1A6FD8), width: 1.5)
+            : null,
+      ),
+    );
+
+    if (isFuture) return box;
+
+    final localizations = MaterialLocalizations.of(context);
+    final dateLabel = localizations.formatMediumDate(date);
+    final tooltip = reviewed > 0 ? '$dateLabel — $reviewed reviews' : dateLabel;
+
+    return Tooltip(message: tooltip, child: box);
+  }
+
+  Widget _buildBottomRow(int streak) {
+    return Row(
+      children: [
+        const Icon(
+          Icons.local_fire_department_rounded,
+          size: 14,
+          color: Color(0xFFF97316),
+        ),
+        const SizedBox(width: 4),
+        Text(
+          '$streak-day streak',
+          style: const TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w700,
+            color: Color(0xFFF97316),
+          ),
+        ),
+        const Spacer(),
+        const Text('Ít', style: TextStyle(fontSize: 10, color: Color(0xFF6B7390))),
+        const SizedBox(width: 4),
+        for (final color in _palette) ...[
+          Container(
+            width: _cellSize,
+            height: _cellSize,
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.circular(3),
+            ),
+          ),
+          const SizedBox(width: _cellGap),
+        ],
+        const Text('Nhiều', style: TextStyle(fontSize: 10, color: Color(0xFF6B7390))),
+      ],
     );
   }
 }
