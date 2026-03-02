@@ -363,9 +363,15 @@ class _ActivityCalendar extends ConsumerWidget {
   String _dateKey(DateTime d) =>
       '${d.year}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}';
 
-  String _shortMonth(int month) {
-    const m = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    return m[month - 1];
+  String _shortMonth(int month, AppLanguage language) {
+    const en = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const vi = ['Th1','Th2','Th3','Th4','Th5','Th6','Th7','Th8','Th9','Th10','Th11','Th12'];
+    const ja = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+    switch (language) {
+      case AppLanguage.en: return en[month - 1];
+      case AppLanguage.vi: return vi[month - 1];
+      case AppLanguage.ja: return ja[month - 1];
+    }
   }
 
   String _tr(AppLanguage language, String en, String vi, String ja) {
@@ -475,11 +481,11 @@ class _ActivityCalendar extends ConsumerWidget {
     // Month label: show when this column starts a new month
     String? monthLabel;
     if (col == 0) {
-      monthLabel = _shortMonth(weekMonday.month);
+      monthLabel = _shortMonth(weekMonday.month, language);
     } else {
       final prevMonday = startDate.add(Duration(days: (col - 1) * 7));
       if (weekMonday.month != prevMonday.month) {
-        monthLabel = _shortMonth(weekMonday.month);
+        monthLabel = _shortMonth(weekMonday.month, language);
       }
     }
 
