@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/language_provider.dart';
 import '../../../data/models/vocab_item.dart';
 import '../../flashcards/widgets/enhanced_flashcard.dart';
+import '../../../data/repositories/lesson_repository.dart';
 import '../../mistakes/repositories/mistake_repository.dart';
 
 class VocabGhostReviewScreen extends ConsumerStatefulWidget {
@@ -31,11 +32,15 @@ class _VocabGhostReviewScreenState
   Future<void> _handleGotIt() async {
     final repo = ref.read(mistakeRepositoryProvider);
     await repo.markCorrect(type: 'vocab', itemId: _currentItem.id);
+    final lessonRepo = ref.read(lessonRepositoryProvider);
+    await lessonRepo.saveTermReview(termId: _currentItem.id, quality: 3);
     setState(() => _gotItCount++);
     _advance();
   }
 
   Future<void> _handleStillLearning() async {
+    final lessonRepo = ref.read(lessonRepositoryProvider);
+    await lessonRepo.saveTermReview(termId: _currentItem.id, quality: 1);
     setState(() => _stillLearningCount++);
     _advance();
   }
@@ -49,6 +54,46 @@ class _VocabGhostReviewScreenState
       _currentIndex++;
       _isFlipped = false;
     });
+  }
+
+  void _showHint(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.lightbulb_rounded,
+                    color: Colors.amber, size: 24),
+                const SizedBox(width: 8),
+                Text(
+                  'Mnemonic Hint',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              _currentItem.mnemonicVi!.trim(),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyLarge
+                  ?.copyWith(height: 1.5),
+            ),
+            const SizedBox(height: 24),
+          ],
+        ),
+      ),
+    );
   }
 
   void _showSummary() {
@@ -113,14 +158,43 @@ class _VocabGhostReviewScreenState
           if (!_isFlipped)
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
-              child: SizedBox(
-                width: double.infinity,
-                height: 52,
-                child: OutlinedButton.icon(
-                  onPressed: null, // tap the card to flip
-                  icon: const Icon(Icons.touch_app_rounded),
-                  label: const Text('Tap card to reveal'),
-                ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: SizedBox(
+                      height: 52,
+                      child: OutlinedButton.icon(
+                        onPressed: null,
+                        icon: const Icon(Icons.touch_app_rounded),
+                        label: const Text('Tap card to reveal'),
+                      ),
+                    ),
+                  ),
+                  if (_currentItem.mnemonicVi != null &&
+                      _currentItem.mnemonicVi!.trim().isNotEmpty) ...[
+                    const SizedBox(width: 8),
+                    SizedBox(
+                      height: 52,
+                      child: OutlinedButton.icon(
+                        onPressed: () => _showHint(context),
+                        icon: const Icon(
+                          Icons.lightbulb_outline_rounded,
+                          color: Colors.amber,
+                        ),
+                        label: const Text(
+                          'Hint',
+                          style: TextStyle(color: Colors.amber),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: Colors.amber),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ],
               ),
             )
           else
