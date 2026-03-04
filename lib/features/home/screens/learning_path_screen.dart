@@ -5,6 +5,7 @@ import 'package:jpstudy/app/theme/app_breakpoints.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/widgets/empty_state_widget.dart';
+import 'package:jpstudy/core/widgets/japanese_divider.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/features/common/widgets/japanese_background.dart';
 import 'package:jpstudy/features/home/models/lesson_node.dart';
@@ -170,9 +171,9 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen> {
                       padding: EdgeInsets.zero,
                       children: const [
                         DailySessionCard(compact: true),
-                        SizedBox(height: 10),
+                        JapaneseDivider(),
                         MiniDashboard(),
-                        SizedBox(height: 10),
+                        JapaneseDivider(),
                         DiscoverPracticePanel(initiallyExpanded: true),
                       ],
                     ),
