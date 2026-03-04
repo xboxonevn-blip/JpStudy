@@ -8,6 +8,7 @@ import 'package:jpstudy/features/common/widgets/japanese_background.dart';
 import 'models/immersion_article.dart';
 import 'providers/immersion_providers.dart';
 import 'screens/immersion_reader_screen.dart';
+import 'services/difficulty_estimator.dart';
 import 'services/immersion_service.dart';
 
 class ImmersionHomeScreen extends ConsumerStatefulWidget {
@@ -513,7 +514,7 @@ class _ArticleCard extends StatelessWidget {
                 runSpacing: 6,
                 children: [
                   _Tag(label: article.source),
-                  _Tag(label: article.level),
+                  _DifficultyBadge(article: article),
                   _Tag(label: dateLabel),
                   if (isRead) _Tag(label: language.doneLabel),
                 ],
@@ -545,6 +546,37 @@ class _Tag extends StatelessWidget {
           fontSize: 11,
           fontWeight: FontWeight.w700,
           color: Color(0xFF475569),
+        ),
+      ),
+    );
+  }
+}
+
+class _DifficultyBadge extends StatelessWidget {
+  const _DifficultyBadge({required this.article});
+
+  final ImmersionArticle article;
+
+  @override
+  Widget build(BuildContext context) {
+    final level = article.paragraphs.isNotEmpty
+        ? DifficultyEstimator.estimate(article.paragraphs)
+        : article.level;
+    final color = DifficultyEstimator.colorForLevel(level);
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.15),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: color.withValues(alpha: 0.4)),
+      ),
+      child: Text(
+        level,
+        style: TextStyle(
+          color: color,
+          fontSize: 12,
+          fontWeight: FontWeight.w700,
         ),
       ),
     );
