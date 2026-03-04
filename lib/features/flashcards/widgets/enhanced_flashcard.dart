@@ -12,12 +12,14 @@ class EnhancedFlashcard extends StatefulWidget {
     required this.language,
     this.onFlip,
     this.showTermFirst = true,
+    this.retrievability,
   });
 
   final VocabItem item;
   final VoidCallback? onFlip;
   final bool showTermFirst;
   final AppLanguage language;
+  final double? retrievability;
 
   @override
   State<EnhancedFlashcard> createState() => _EnhancedFlashcardState();
@@ -190,6 +192,10 @@ class _EnhancedFlashcardState extends State<EnhancedFlashcard> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            if (widget.retrievability != null) ...[
+              _RetrievabilityChip(value: widget.retrievability!),
+              const SizedBox(height: 16),
+            ],
             Text(
               widget.language == AppLanguage.en
                   ? widget.language.meaningEnLabel
@@ -261,6 +267,46 @@ class _EnhancedFlashcardState extends State<EnhancedFlashcard> {
             ],
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _RetrievabilityChip extends StatelessWidget {
+  const _RetrievabilityChip({required this.value});
+
+  final double value;
+
+  @override
+  Widget build(BuildContext context) {
+    final pct = (value * 100).round();
+    final color = value > 0.8
+        ? const Color(0xFF22C55E) // green
+        : value > 0.5
+            ? const Color(0xFFF59E0B) // amber
+            : const Color(0xFFEF4444); // red
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.psychology_rounded, size: 16, color: color),
+          const SizedBox(width: 4),
+          Text(
+            'Memory: $pct%',
+            style: TextStyle(
+              color: color,
+              fontSize: 12,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ],
       ),
     );
   }

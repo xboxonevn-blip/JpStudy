@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/language_provider.dart';
+import '../../../core/services/fsrs_service.dart';
 import '../../../data/models/vocab_item.dart';
+import '../../../data/repositories/lesson_repository.dart';
 import '../models/flashcard_session.dart';
 import '../models/flashcard_settings.dart';
 import '../widgets/enhanced_flashcard.dart';
@@ -51,6 +53,15 @@ class _EnhancedFlashcardScreenState
   Widget build(BuildContext context) {
     final language = ref.watch(appLanguageProvider);
     final currentItem = _displayItems[_currentIndex];
+    final srsAsync = ref.watch(srsStateProvider(currentItem.id));
+    final fsrs = FsrsService();
+    final retrievability = srsAsync.whenOrNull(data: (srs) {
+      if (srs == null) return null;
+      return fsrs.retrievability(
+        stability: srs.stability,
+        lastReviewedAt: srs.lastReviewedAt,
+      );
+    });
     final progress = (_currentIndex + 1) / _displayItems.length;
 
     return Scaffold(
@@ -79,6 +90,7 @@ class _EnhancedFlashcardScreenState
                 showTermFirst: _settings.showTermFirst,
                 language: language,
                 onFlip: () => setState(() => _flippedIndices.add(_currentIndex)),
+                retrievability: retrievability,
               ),
             ),
           ),
