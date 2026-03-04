@@ -5596,4 +5596,25 @@ extension AppLanguageLabels on AppLanguage {
         return '次へ';
     }
   }
+  String get practiceKanjiReadingLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Kanji Reading';
+      case AppLanguage.vi:
+        return 'Kanji Reading';
+      case AppLanguage.ja:
+        return '漢字読みクイズ';
+    }
+  }
+
+  String get practiceKanjiReadingSubtitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Pick the correct reading or kanji.';
+      case AppLanguage.vi:
+        return 'Chọn cách đọc hoặc kanji đúng.';
+      case AppLanguage.ja:
+        return '正しい読みまたは漢字を選ぼう。';
+    }
+  }
 } // End extension

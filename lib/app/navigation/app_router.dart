@@ -24,6 +24,7 @@ import 'package:jpstudy/features/mistakes/screens/mistake_screen.dart';
 import 'package:jpstudy/features/immersion/immersion_home_screen.dart';
 import 'package:jpstudy/features/achievements/achievements_screen.dart';
 import 'package:jpstudy/features/design_lab/design_lab_screen.dart';
+import 'package:jpstudy/features/kanji_reading/screens/home_kanji_reading_screen.dart';
 import 'package:jpstudy/features/write/screens/home_handwriting_practice_screen.dart';
 import 'package:jpstudy/features/test/screens/home_mock_exam_screen.dart';
 import 'package:jpstudy/features/jlpt/screens/jlpt_coach_screen.dart';
@@ -230,6 +231,10 @@ class AppRouter {
       GoRoute(
         path: '/practice/handwriting',
         builder: (context, state) => const HomeHandwritingPracticeScreen(),
+      ),
+      GoRoute(
+        path: '/practice/kanji-reading',
+        builder: (context, state) => const HomeKanjiReadingScreen(),
       ),
       GoRoute(
         path: '/practice/mock-exam',

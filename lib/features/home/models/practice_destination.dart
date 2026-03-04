@@ -77,6 +77,14 @@ List<PracticeDestination> buildPracticeDestinations({
       route: '/practice/handwriting',
     ),
     PracticeDestination(
+      id: 'kanji_reading',
+      title: language.practiceKanjiReadingLabel,
+      subtitle: language.practiceKanjiReadingSubtitle,
+      icon: Icons.menu_book_rounded,
+      color: const Color(0xFF7C3AED),
+      route: '/practice/kanji-reading',
+    ),
+    PracticeDestination(
       id: 'mock_exam',
       title: language.practiceExamCardLabel,
       subtitle: language.practiceExamSubtitle,
