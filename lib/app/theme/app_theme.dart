@@ -19,6 +19,7 @@ class AppTheme {
     );
 
     final fontName = GoogleFonts.notoSansJp().fontFamily;
+    final displayFontName = GoogleFonts.zenAntiqueSoft().fontFamily;
 
     return ThemeData(
       colorScheme: colorScheme,
@@ -78,12 +79,12 @@ class AppTheme {
       ),
       textTheme: TextTheme(
         displayLarge: TextStyle(
-          fontFamily: fontName,
+          fontFamily: displayFontName,
           fontWeight: FontWeight.w900,
           color: const Color(0xFF1E293B),
         ),
         titleLarge: TextStyle(
-          fontFamily: fontName,
+          fontFamily: displayFontName,
           fontWeight: FontWeight.w800,
           color: const Color(0xFF1E293B),
         ),
@@ -112,6 +113,7 @@ class AppTheme {
     const scaffoldBg = Color(0xFF0F172A);
     const cardBg = Color(0xFF1B2636);
     final fontName = GoogleFonts.notoSansJp().fontFamily;
+    final displayFontName = GoogleFonts.zenAntiqueSoft().fontFamily;
 
     return ThemeData(
       useMaterial3: true,
@@ -149,6 +151,20 @@ class AppTheme {
             borderRadius: BorderRadius.circular(24),
           ),
         ),
+      ),
+      textTheme: TextTheme(
+        displayLarge: TextStyle(
+          fontFamily: displayFontName,
+          fontWeight: FontWeight.w900,
+          color: Colors.white,
+        ),
+        titleLarge: TextStyle(
+          fontFamily: displayFontName,
+          fontWeight: FontWeight.w800,
+          color: Colors.white,
+        ),
+        bodyLarge: TextStyle(fontFamily: fontName, color: const Color(0xFFCBD5E1)),
+        bodyMedium: TextStyle(fontFamily: fontName, color: const Color(0xFF94A3B8)),
       ),
     );
   }
