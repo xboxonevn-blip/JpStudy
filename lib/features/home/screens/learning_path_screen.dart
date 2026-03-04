@@ -10,6 +10,7 @@ import 'package:jpstudy/features/common/widgets/japanese_background.dart';
 import 'package:jpstudy/features/home/models/lesson_node.dart';
 import 'package:jpstudy/features/home/models/unit.dart';
 import 'package:jpstudy/features/home/viewmodels/learning_path_viewmodel.dart';
+import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/home/widgets/daily_session_card.dart';
 import 'package:jpstudy/features/home/widgets/discover_practice_panel.dart';
 import 'package:jpstudy/features/home/widgets/home_surface.dart';
@@ -148,15 +149,36 @@ class _LearningPathScreenState extends ConsumerState<LearningPathScreen> {
         return Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: AppBreakpoints.desktop),
-            child: ListView(
+            child: Padding(
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 90),
-              children: const [
-                DailySessionCard(compact: true),
-                SizedBox(height: 10),
-                MiniDashboard(),
-                SizedBox(height: 10),
-                DiscoverPracticePanel(initiallyExpanded: true),
-              ],
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 280,
+                    child: DecoratedBox(
+                      decoration: HomeSurface.softPanel(),
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+                        child: _DesktopSidebar(),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: ListView(
+                      padding: EdgeInsets.zero,
+                      children: const [
+                        DailySessionCard(compact: true),
+                        SizedBox(height: 10),
+                        MiniDashboard(),
+                        SizedBox(height: 10),
+                        DiscoverPracticePanel(initiallyExpanded: true),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );
@@ -356,6 +378,104 @@ class _TabButton extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _DesktopSidebar extends ConsumerWidget {
+  const _DesktopSidebar();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final dashboardAsync = ref.watch(dashboardProvider);
+    final language = ref.watch(appLanguageProvider);
+
+    return dashboardAsync.when(
+      data: (state) {
+        final totalDue = state.vocabDue + state.grammarDue + state.kanjiDue;
+        return Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image.asset(
+                'assets/images/mascot_fox_transparent.png',
+                width: 120,
+                height: 120,
+                fit: BoxFit.contain,
+              ),
+            ),
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.local_fire_department_rounded,
+                    color: Color(0xFFEF4444), size: 28),
+                const SizedBox(width: 6),
+                Text(
+                  '${state.streak} ${language.dayStreakLabel}',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w800,
+                      ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            const Divider(height: 1),
+            const SizedBox(height: 16),
+            _SidebarStat(
+              icon: Icons.bolt_rounded,
+              color: const Color(0xFFF59E0B),
+              label: 'XP Today',
+              value: '${state.todayXp}',
+            ),
+            const SizedBox(height: 12),
+            _SidebarStat(
+              icon: Icons.rate_review_rounded,
+              color: const Color(0xFF3B82F6),
+              label: 'Due Reviews',
+              value: '$totalDue',
+            ),
+          ],
+        );
+      },
+      loading: () => const SizedBox(
+        height: 200,
+        child: Center(child: CircularProgressIndicator()),
+      ),
+      error: (_, _) => const SizedBox.shrink(),
+    );
+  }
+}
+
+class _SidebarStat extends StatelessWidget {
+  const _SidebarStat({
+    required this.icon,
+    required this.color,
+    required this.label,
+    required this.value,
+  });
+
+  final IconData icon;
+  final Color color;
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(icon, color: color, size: 20),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Text(label, style: Theme.of(context).textTheme.bodyMedium),
+        ),
+        Text(
+          value,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
+        ),
+      ],
     );
   }
 }
