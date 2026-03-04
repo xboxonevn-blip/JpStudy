@@ -91,16 +91,29 @@ class _WavePatternPainter extends CustomPainter {
     final paint = Paint()
       ..color = color
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 1;
-    const spacing = 56.0;
-    const radius = 18.0;
+      ..strokeWidth = 0.8;
+
+    const cellSize = 40.0;
+    const arcs = 4;
+
     var row = 0;
-    for (double y = -spacing; y < size.height + spacing; y += spacing) {
-      final xOffset = row.isEven ? 0.0 : spacing / 2;
-      for (double x = -spacing; x < size.width + spacing; x += spacing) {
-        canvas.drawCircle(Offset(x + xOffset, y), radius, paint);
+    for (double y = -cellSize; y < size.height + cellSize * 2; y += cellSize) {
+      final xShift = row.isEven ? 0.0 : cellSize;
+      for (double x = -cellSize * 2; x < size.width + cellSize * 2; x += cellSize * 2) {
+        final cx = x + xShift;
+        final cy = y;
+        for (var i = 1; i <= arcs; i++) {
+          final r = cellSize * i / arcs;
+          canvas.drawArc(
+            Rect.fromCircle(center: Offset(cx, cy), radius: r),
+            3.14159, // pi — start from bottom
+            3.14159, // pi — sweep half circle
+            false,
+            paint,
+          );
+        }
       }
-      row += 1;
+      row++;
     }
   }
 
