@@ -1504,38 +1504,71 @@ class _AchievementDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(language.achievementUnlockedTitle),
-      content: Column(
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            achievement.type.emoji,
-            style: const TextStyle(fontSize: 48),
+          // Hanko stamp
+          Transform.rotate(
+            angle: -0.09, // ~5 degrees tilt
+            child: Container(
+              width: 160,
+              height: 160,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: const Color(0xFFD1493F),
+                border: Border.all(
+                  color: const Color(0xFFB03A32),
+                  width: 4,
+                ),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color(0x33000000),
+                    blurRadius: 12,
+                    offset: Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Text(
+                    achievement.description,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w900,
+                      height: 1.2,
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 20),
           Text(
             achievement.type.title,
-            style: const TextStyle(fontWeight: FontWeight.w700),
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                ),
           ),
-          const SizedBox(height: 4),
-          Text(achievement.description),
-          const SizedBox(height: 8),
-          Text(
-            '+${achievement.bonusXP} XP',
-            style: TextStyle(
-              color: achievement.type.color,
-              fontWeight: FontWeight.w800,
+          const SizedBox(height: 24),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(
+              'OK',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+              ),
             ),
           ),
         ],
       ),
-      actions: [
-        ElevatedButton(
-          onPressed: () => Navigator.of(context).pop(),
-          child: const Text('Awesome!'),
-        ),
-      ],
     );
   }
 }
