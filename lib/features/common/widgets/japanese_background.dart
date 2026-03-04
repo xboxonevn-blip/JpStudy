@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jpstudy/features/common/widgets/sakura_particles.dart';
 
 class JapaneseBackground extends StatelessWidget {
   const JapaneseBackground({super.key, required this.child});
@@ -53,6 +54,14 @@ class JapaneseBackground extends StatelessWidget {
             colors: isDark
                 ? const [Color(0x4034D399), Color(0x000F172A)]
                 : const [Color(0x5538BDF8), Color(0x00BFDBFE)],
+          ),
+        ),
+        Positioned.fill(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              if (constraints.maxWidth < 900) return const SizedBox.shrink();
+              return const SakuraParticles();
+            },
           ),
         ),
         Positioned.fill(child: child),
