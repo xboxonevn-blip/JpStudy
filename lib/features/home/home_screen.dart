@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/services/backup_sync_service.dart';
+import 'package:jpstudy/core/services/cloud_sync_service.dart';
 import 'package:jpstudy/core/notifications/notification_service.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/language_provider.dart';
@@ -15,6 +16,7 @@ import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/core/theme_provider.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/home/providers/backup_status_provider.dart';
+import 'package:jpstudy/features/home/providers/cloud_sync_status_provider.dart';
 import 'package:jpstudy/features/home/screens/learning_path_screen.dart';
 import 'package:jpstudy/features/home/widgets/header_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -257,10 +259,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  void _showSettingsSheet(BuildContext context) {
+  void _showSettingsSheet(BuildContext rootContext) {
     final language = ref.read(appLanguageProvider);
     showModalBottomSheet<void>(
-      context: context,
+      context: rootContext,
       showDragHandle: true,
       builder: (context) {
         return FutureBuilder<SharedPreferences>(
@@ -276,6 +278,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             final supportsNotifications =
                 NotificationService.instance.isSupported;
             final themeMode = ref.watch(themeModeProvider);
+            final cloudStatusAsync = ref.watch(cloudSyncStatusProvider);
             var reminderEnabled = prefs.getBool(_prefDailyReminder) ?? false;
             var strokeGuideDefaultExpanded =
                 prefs.getBool(_prefStrokeGuideDefaultExpanded) ?? true;
@@ -499,6 +502,29 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ),
                       const Divider(),
                       ListTile(
+                        leading: const Icon(Icons.cloud_sync_outlined),
+                        title: Text(_cloudSyncLabel(language)),
+                        subtitle: Text(
+                          cloudStatusAsync.when(
+                            data: (status) => _cloudSyncStatusSubtitle(
+                              context,
+                              language,
+                              status,
+                            ),
+                            loading: () => _cloudSyncLoadingLabel(language),
+                            error: (_, _) => _cloudSyncLoadingLabel(language),
+                          ),
+                        ),
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          Future<void>.delayed(
+                            Duration.zero,
+                            () => _showCloudSyncSheet(rootContext),
+                          );
+                        },
+                      ),
+                      const Divider(),
+                      ListTile(
                         leading: const Icon(Icons.save_alt_outlined),
                         title: Text(language.backupExportLabel),
                         onTap: () => _exportBackup(context, language),
@@ -519,10 +545,307 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  Future<void> _exportBackup(BuildContext context, AppLanguage language) async {
+  void _showCloudSyncSheet(BuildContext rootContext) {
+    showModalBottomSheet<void>(
+      context: rootContext,
+      showDragHandle: true,
+      builder: (context) {
+        return Consumer(
+          builder: (context, ref, _) {
+            final language = ref.watch(appLanguageProvider);
+            final statusAsync = ref.watch(cloudSyncStatusProvider);
+            return statusAsync.when(
+              data: (status) {
+                final localizations = MaterialLocalizations.of(context);
+                final linkedSubtitle = status.isLinked
+                    ? _cloudSyncLinkedLabel(
+                        language,
+                        status.target!.displayName,
+                      )
+                    : _cloudSyncNotLinkedLabel(language);
+                final lastSyncLabel = status.lastSyncedAt == null
+                    ? _cloudSyncCreateHint(language)
+                    : _cloudSyncLastSyncedLabel(
+                        language,
+                        _formatDateTime(status.lastSyncedAt!, localizations),
+                        status.lastDirection,
+                      );
+                return SafeArea(
+                  child: ListView(
+                    padding: const EdgeInsets.all(16),
+                    shrinkWrap: true,
+                    children: [
+                      Text(
+                        _cloudSyncLabel(language),
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        linkedSubtitle,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        lastSyncLabel,
+                        style: const TextStyle(color: Color(0xFF6B7390)),
+                      ),
+                      const SizedBox(height: 12),
+                      ListTile(
+                        leading: const Icon(Icons.folder_open_outlined),
+                        title: Text(_cloudSyncChooseFileLabel(language)),
+                        onTap: () => _linkExistingCloudSyncFile(
+                          context,
+                          language,
+                        ),
+                      ),
+                      ListTile(
+                        leading: const Icon(Icons.note_add_outlined),
+                        title: Text(_cloudSyncCreateFileLabel(language)),
+                        onTap: () => _createCloudSyncFile(
+                          context,
+                          language,
+                        ),
+                      ),
+                      ListTile(
+                        leading: const Icon(Icons.cloud_upload_outlined),
+                        title: Text(_cloudSyncUploadLabel(language)),
+                        enabled: status.isLinked,
+                        onTap: status.isLinked
+                            ? () => _uploadToCloudFile(context, language)
+                            : null,
+                      ),
+                      ListTile(
+                        leading: const Icon(Icons.cloud_download_outlined),
+                        title: Text(_cloudSyncDownloadLabel(language)),
+                        enabled: status.isLinked,
+                        onTap: status.isLinked
+                            ? () => _downloadFromCloudFile(context, language)
+                            : null,
+                      ),
+                      if (status.isLinked)
+                        ListTile(
+                          leading: const Icon(Icons.link_off_outlined),
+                          title: Text(_cloudSyncUnlinkLabel(language)),
+                          onTap: () => _unlinkCloudSyncFile(context, language),
+                        ),
+                    ],
+                  ),
+                );
+              },
+              loading: () => const SizedBox(
+                height: 120,
+                child: Center(child: CircularProgressIndicator()),
+              ),
+              error: (_, _) => SizedBox(
+                height: 120,
+                child: Center(
+                  child: Text(_cloudSyncLoadingLabel(language)),
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Future<void> _linkExistingCloudSyncFile(
+    BuildContext context,
+    AppLanguage language,
+  ) async {
+    final file = await openFile(
+      acceptedTypeGroups: const [
+        XTypeGroup(label: 'JSON', extensions: ['json']),
+      ],
+    );
+    if (file == null) {
+      return;
+    }
+    await CloudSyncService.linkTarget(
+      path: file.path,
+      displayName: p.basename(file.path),
+    );
+    refreshCloudSyncStatus(ref);
+    if (!context.mounted) {
+      return;
+    }
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(_cloudSyncLinkedSuccessLabel(language))));
+  }
+
+  Future<void> _createCloudSyncFile(
+    BuildContext context,
+    AppLanguage language,
+  ) async {
+    final location = await getSaveLocation(
+      suggestedName: 'jpstudy_cloud_sync.json',
+      acceptedTypeGroups: const [
+        XTypeGroup(label: 'JSON', extensions: ['json']),
+      ],
+    );
+    if (location == null) {
+      return;
+    }
+    await CloudSyncService.linkTarget(
+      path: location.path,
+      displayName: p.basename(location.path),
+    );
+    refreshCloudSyncStatus(ref);
+    await _uploadToCloudFile(context, language);
+  }
+
+  Future<void> _unlinkCloudSyncFile(
+    BuildContext context,
+    AppLanguage language,
+  ) async {
+    await CloudSyncService.unlinkTarget();
+    refreshCloudSyncStatus(ref);
+    if (!context.mounted) {
+      return;
+    }
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(_cloudSyncUnlinkedSuccessLabel(language))));
+  }
+
+  Future<void> _uploadToCloudFile(
+    BuildContext context,
+    AppLanguage language,
+  ) async {
+    final envelope = await _buildBackupEnvelope();
+    final result = await CloudSyncService.uploadEnvelope(envelope);
+    refreshCloudSyncStatus(ref);
+    if (!context.mounted) {
+      return;
+    }
+    final message = switch (result.decision) {
+      CloudSyncUploadDecision.uploaded => _cloudSyncUploadSuccessLabel(language),
+      CloudSyncUploadDecision.missingTarget =>
+        _cloudSyncLinkRequiredLabel(language),
+      CloudSyncUploadDecision.writeFailed => _cloudSyncUploadErrorLabel(language),
+    };
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  Future<void> _downloadFromCloudFile(
+    BuildContext context,
+    AppLanguage language,
+  ) async {
+    final result = await CloudSyncService.prepareDownload();
+    if (!context.mounted) {
+      return;
+    }
+
+    switch (result.decision) {
+      case CloudSyncDownloadDecision.apply:
+        final confirmed = await _confirmImport(context, language);
+        if (!context.mounted || confirmed != true || result.payload == null) {
+          return;
+        }
+        await _applyImportedPayload(
+          context,
+          language,
+          payload: result.payload!,
+          incomingExportedAt: result.remoteExportedAt,
+          onApplied: CloudSyncService.markDownloadApplied,
+          successMessage: _cloudSyncDownloadSuccessLabel(language),
+        );
+        return;
+      case CloudSyncDownloadDecision.skipOlder:
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(_cloudSyncSkipOlderLabel(language))),
+        );
+        return;
+      case CloudSyncDownloadDecision.invalidChecksum:
+      case CloudSyncDownloadDecision.invalidFormat:
+      case CloudSyncDownloadDecision.readFailed:
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(_cloudSyncDownloadErrorLabel(language))),
+        );
+        return;
+      case CloudSyncDownloadDecision.missingTarget:
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(_cloudSyncLinkRequiredLabel(language))),
+        );
+        return;
+      case CloudSyncDownloadDecision.missingRemoteFile:
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(_cloudSyncMissingRemoteLabel(language))),
+        );
+        return;
+    }
+  }
+
+  Future<Map<String, dynamic>> _buildBackupEnvelope() async {
     final repo = ref.read(lessonRepositoryProvider);
     final data = await repo.exportBackup();
-    final envelope = await BackupSyncService.buildExportEnvelope(data);
+    return BackupSyncService.buildExportEnvelope(data);
+  }
+
+  Future<bool?> _confirmImport(
+    BuildContext context,
+    AppLanguage language,
+  ) async {
+    return showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(language.backupImportTitle),
+        content: Text(language.backupImportBody),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text(language.backupImportConfirmLabel),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _applyImportedPayload(
+    BuildContext context,
+    AppLanguage language, {
+    required Map<String, dynamic> payload,
+    required DateTime? incomingExportedAt,
+    required Future<void> Function(DateTime? incomingExportedAt) onApplied,
+    required String successMessage,
+  }) async {
+    try {
+      final repo = ref.read(lessonRepositoryProvider);
+      await _savePreImportSafetySnapshot(repo);
+      await repo.importBackup(payload);
+      await onApplied(incomingExportedAt);
+      refreshBackupStatus(ref);
+      refreshCloudSyncStatus(ref);
+      ref.invalidate(lessonMetaProvider);
+      if (!context.mounted) {
+        return;
+      }
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(successMessage)));
+    } catch (_) {
+      if (!context.mounted) {
+        return;
+      }
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(language.backupImportError)));
+    }
+  }
+
+  Future<void> _exportBackup(BuildContext context, AppLanguage language) async {
+    final envelope = await _buildBackupEnvelope();
     final jsonText = const JsonEncoder.withIndent('  ').convert(envelope);
     final location = await getSaveLocation(
       suggestedName: 'jpstudy_backup.json',
@@ -560,26 +883,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     if (file == null) {
       return;
     }
-    if (!context.mounted) {
-      return;
-    }
-    final shouldImport = await showDialog<bool>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(language.backupImportTitle),
-        content: Text(language.backupImportBody),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
-          ),
-          ElevatedButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: Text(language.backupImportConfirmLabel),
-          ),
-        ],
-      ),
-    );
+    final shouldImport = await _confirmImport(context, language);
     if (shouldImport != true) {
       return;
     }
@@ -601,25 +905,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           return;
         }
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(language.autoBackupLastLabel('local is newer')),
-          ),
+          SnackBar(content: Text(_cloudSyncSkipOlderLabel(language))),
         );
         return;
       }
 
-      final repo = ref.read(lessonRepositoryProvider);
-      await _savePreImportSafetySnapshot(repo);
-      await repo.importBackup(importPlan.payload);
-      await BackupSyncService.markImportApplied(importPlan.incomingExportedAt);
-      refreshBackupStatus(ref);
-      ref.invalidate(lessonMetaProvider);
-      if (!context.mounted) {
-        return;
-      }
-      ScaffoldMessenger.of(
+      await _applyImportedPayload(
         context,
-      ).showSnackBar(SnackBar(content: Text(language.backupImportSuccess)));
+        language,
+        payload: importPlan.payload,
+        incomingExportedAt: importPlan.incomingExportedAt,
+        onApplied: BackupSyncService.markImportApplied,
+        successMessage: language.backupImportSuccess,
+      );
     } catch (_) {
       if (!context.mounted) {
         return;
@@ -909,6 +1207,289 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   String _formatTime(TimeOfDay time, BuildContext context) {
     return MaterialLocalizations.of(context).formatTimeOfDay(time);
+  }
+
+  String _formatDateTime(
+    DateTime value,
+    MaterialLocalizations localizations,
+  ) {
+    final date = localizations.formatMediumDate(value);
+    final time = localizations.formatTimeOfDay(TimeOfDay.fromDateTime(value));
+    return '$date $time';
+  }
+
+  String _cloudSyncLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Cloud sync';
+      case AppLanguage.vi:
+        return 'Dong bo dam may';
+      case AppLanguage.ja:
+        return 'Cloud sync';
+    }
+  }
+
+  String _cloudSyncLoadingLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Loading cloud sync status...';
+      case AppLanguage.vi:
+        return 'Dang tai trang thai dong bo...';
+      case AppLanguage.ja:
+        return 'Cloud sync loading...';
+    }
+  }
+
+  String _cloudSyncNotLinkedLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'No linked cloud file yet.';
+      case AppLanguage.vi:
+        return 'Chua lien ket file sync.';
+      case AppLanguage.ja:
+        return 'Linked cloud file not set.';
+    }
+  }
+
+  String _cloudSyncLinkedLabel(AppLanguage language, String fileName) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Linked file: $fileName';
+      case AppLanguage.vi:
+        return 'File da lien ket: $fileName';
+      case AppLanguage.ja:
+        return 'Linked file: $fileName';
+    }
+  }
+
+  String _cloudSyncChooseFileLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Choose existing sync file';
+      case AppLanguage.vi:
+        return 'Chon file sync co san';
+      case AppLanguage.ja:
+        return 'Choose existing sync file';
+    }
+  }
+
+  String _cloudSyncCreateFileLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Create new sync file';
+      case AppLanguage.vi:
+        return 'Tao file sync moi';
+      case AppLanguage.ja:
+        return 'Create new sync file';
+    }
+  }
+
+  String _cloudSyncUploadLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Upload to cloud file';
+      case AppLanguage.vi:
+        return 'Tai len file cloud';
+      case AppLanguage.ja:
+        return 'Upload to cloud file';
+    }
+  }
+
+  String _cloudSyncDownloadLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Download from cloud file';
+      case AppLanguage.vi:
+        return 'Tai xuong tu file cloud';
+      case AppLanguage.ja:
+        return 'Download from cloud file';
+    }
+  }
+
+  String _cloudSyncUnlinkLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Remove linked file';
+      case AppLanguage.vi:
+        return 'Go lien ket file';
+      case AppLanguage.ja:
+        return 'Remove linked file';
+    }
+  }
+
+  String _cloudSyncCreateHint(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Create or choose a JSON file inside a synced folder.';
+      case AppLanguage.vi:
+        return 'Tao hoac chon file JSON trong thu muc dang duoc sync.';
+      case AppLanguage.ja:
+        return 'Create or choose a JSON file inside a synced folder.';
+    }
+  }
+
+  String _cloudSyncStatusSubtitle(
+    BuildContext context,
+    AppLanguage language,
+    CloudSyncStatus status,
+  ) {
+    if (!status.isLinked) {
+      return _cloudSyncNotLinkedLabel(language);
+    }
+    if (status.lastSyncedAt == null) {
+      return _cloudSyncLinkedLabel(language, status.target!.displayName);
+    }
+    final localizations = MaterialLocalizations.of(context);
+    final lastSync = _cloudSyncLastSyncedLabel(
+      language,
+      _formatDateTime(status.lastSyncedAt!, localizations),
+      status.lastDirection,
+    );
+    return '${status.target!.displayName} - $lastSync';
+  }
+
+  String _cloudSyncLastSyncedLabel(
+    AppLanguage language,
+    String dateText,
+    CloudSyncDirection? direction,
+  ) {
+    final directionLabel = _cloudSyncDirectionLabel(language, direction);
+    switch (language) {
+      case AppLanguage.en:
+        return 'Last sync: $dateText${directionLabel.isEmpty ? '' : ' ($directionLabel)'}';
+      case AppLanguage.vi:
+        return 'Lan sync cuoi: $dateText${directionLabel.isEmpty ? '' : ' ($directionLabel)'}';
+      case AppLanguage.ja:
+        return 'Last sync: $dateText${directionLabel.isEmpty ? '' : ' ($directionLabel)'}';
+    }
+  }
+
+  String _cloudSyncDirectionLabel(
+    AppLanguage language,
+    CloudSyncDirection? direction,
+  ) {
+    if (direction == null) {
+      return '';
+    }
+    switch (direction) {
+      case CloudSyncDirection.upload:
+        switch (language) {
+          case AppLanguage.en:
+            return 'upload';
+          case AppLanguage.vi:
+            return 'tai len';
+          case AppLanguage.ja:
+            return 'upload';
+        }
+      case CloudSyncDirection.download:
+        switch (language) {
+          case AppLanguage.en:
+            return 'download';
+          case AppLanguage.vi:
+            return 'tai xuong';
+          case AppLanguage.ja:
+            return 'download';
+        }
+    }
+  }
+
+  String _cloudSyncLinkedSuccessLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Linked cloud file updated.';
+      case AppLanguage.vi:
+        return 'Da cap nhat lien ket file cloud.';
+      case AppLanguage.ja:
+        return 'Linked cloud file updated.';
+    }
+  }
+
+  String _cloudSyncUnlinkedSuccessLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Linked cloud file removed.';
+      case AppLanguage.vi:
+        return 'Da go lien ket file cloud.';
+      case AppLanguage.ja:
+        return 'Linked cloud file removed.';
+    }
+  }
+
+  String _cloudSyncLinkRequiredLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Choose or create a linked cloud file first.';
+      case AppLanguage.vi:
+        return 'Hay chon hoac tao file cloud truoc.';
+      case AppLanguage.ja:
+        return 'Choose or create a linked cloud file first.';
+    }
+  }
+
+  String _cloudSyncUploadSuccessLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Uploaded backup to linked cloud file.';
+      case AppLanguage.vi:
+        return 'Da tai ban sao luu len file cloud.';
+      case AppLanguage.ja:
+        return 'Uploaded backup to linked cloud file.';
+    }
+  }
+
+  String _cloudSyncUploadErrorLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Failed to write linked cloud file.';
+      case AppLanguage.vi:
+        return 'Khong ghi duoc file cloud.';
+      case AppLanguage.ja:
+        return 'Failed to write linked cloud file.';
+    }
+  }
+
+  String _cloudSyncDownloadSuccessLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Downloaded backup from linked cloud file.';
+      case AppLanguage.vi:
+        return 'Da tai ban sao luu tu file cloud.';
+      case AppLanguage.ja:
+        return 'Downloaded backup from linked cloud file.';
+    }
+  }
+
+  String _cloudSyncDownloadErrorLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Cloud file is invalid or unreadable.';
+      case AppLanguage.vi:
+        return 'File cloud khong hop le hoac khong doc duoc.';
+      case AppLanguage.ja:
+        return 'Cloud file is invalid or unreadable.';
+    }
+  }
+
+  String _cloudSyncMissingRemoteLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Linked cloud file does not exist yet.';
+      case AppLanguage.vi:
+        return 'File cloud da lien ket chua ton tai.';
+      case AppLanguage.ja:
+        return 'Linked cloud file does not exist yet.';
+    }
+  }
+
+  String _cloudSyncSkipOlderLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Skipped because the incoming backup is older than local data.';
+      case AppLanguage.vi:
+        return 'Bo qua vi ban sao luu sap nhap cu hon du lieu hien tai.';
+      case AppLanguage.ja:
+        return 'Skipped because the incoming backup is older than local data.';
+    }
   }
 }
 
