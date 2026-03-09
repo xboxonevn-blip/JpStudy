@@ -115,7 +115,7 @@ class _LearnScreenState extends ConsumerState<LearnScreen> {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => LearnSummaryScreen(session: session),
+            builder: (context) => LearnSummaryScreen(session: session, lessonTitle: widget.lessonTitle),
           ),
         );
       });

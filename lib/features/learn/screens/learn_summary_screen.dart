@@ -10,11 +10,13 @@ import 'package:jpstudy/features/home/widgets/next_step_suggestions.dart';
 import '../models/achievement.dart';
 import '../models/learn_session.dart';
 import '../services/learn_session_service.dart';
+import 'learn_screen.dart';
 
 class LearnSummaryScreen extends ConsumerStatefulWidget {
   final LearnSession session;
+  final String lessonTitle;
 
-  const LearnSummaryScreen({super.key, required this.session});
+  const LearnSummaryScreen({super.key, required this.session, required this.lessonTitle});
 
   @override
   ConsumerState<LearnSummaryScreen> createState() => _LearnSummaryScreenState();
@@ -324,7 +326,27 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
             height: 56,
             child: ElevatedButton.icon(
               onPressed: () {
-                Navigator.pop(context);
+                final weakIds = session.weakTermIds;
+                final weakItems = session.questions
+                    .where((q) => weakIds.contains(q.targetItem.id))
+                    .map((q) => q.targetItem)
+                    .toList();
+                // Remove duplicates
+                final seen = <int>{};
+                final uniqueItems = weakItems.where((item) => seen.add(item.id)).toList();
+
+                if (uniqueItems.isNotEmpty) {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => LearnScreen(
+                        items: uniqueItems,
+                        lessonId: session.lessonId,
+                        lessonTitle: widget.lessonTitle,
+                      ),
+                    ),
+                  );
+                }
               },
               icon: const Icon(Icons.replay),
               label: Text(
