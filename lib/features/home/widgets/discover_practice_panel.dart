@@ -45,10 +45,10 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
         .maybeWhen(data: (count) => count, orElse: () => 0);
     final dashboard = ref.watch(dashboardProvider).valueOrNull;
     final mistakeCount = dashboard?.totalMistakeCount ?? 0;
-    final totalDue =
-        (dashboard?.vocabDue ?? 0) +
-        (dashboard?.grammarDue ?? 0) +
-        (dashboard?.kanjiDue ?? 0);
+    final vocabDue = dashboard?.vocabDue ?? 0;
+    final grammarDue = dashboard?.grammarDue ?? 0;
+    final kanjiDue = dashboard?.kanjiDue ?? 0;
+    final totalDue = vocabDue + grammarDue + kanjiDue;
     final highlightCount = ghostCount + mistakeCount;
     final hubPrefs = ref.watch(practiceHubPreferencesProvider);
 
@@ -57,6 +57,9 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
       ghostCount: ghostCount,
       mistakeCount: mistakeCount,
       dueReviewCount: totalDue,
+      vocabDue: vocabDue,
+      grammarDue: grammarDue,
+      kanjiDue: kanjiDue,
       level: level,
       preferImmersion: totalDue == 0 && mistakeCount == 0 && ghostCount == 0,
     );

@@ -31,10 +31,10 @@ class PracticeHub extends ConsumerWidget {
         .maybeWhen(data: (count) => count, orElse: () => 0);
     final dashboard = ref.watch(dashboardProvider).valueOrNull;
     final mistakeCount = dashboard?.totalMistakeCount ?? 0;
-    final totalDue =
-        (dashboard?.vocabDue ?? 0) +
-        (dashboard?.grammarDue ?? 0) +
-        (dashboard?.kanjiDue ?? 0);
+    final vocabDue = dashboard?.vocabDue ?? 0;
+    final grammarDue = dashboard?.grammarDue ?? 0;
+    final kanjiDue = dashboard?.kanjiDue ?? 0;
+    final totalDue = vocabDue + grammarDue + kanjiDue;
     final level = ref.watch(studyLevelProvider);
 
     final tiles = buildPracticeDestinations(
@@ -42,6 +42,9 @@ class PracticeHub extends ConsumerWidget {
       ghostCount: ghostCount,
       mistakeCount: mistakeCount,
       dueReviewCount: totalDue,
+      vocabDue: vocabDue,
+      grammarDue: grammarDue,
+      kanjiDue: kanjiDue,
       level: level,
       preferImmersion: totalDue == 0 && mistakeCount == 0 && ghostCount == 0,
     );
@@ -344,6 +347,18 @@ class _PracticeTile extends StatelessWidget {
                   color: const Color(0xFF64748B),
                 ),
               ),
+              if (item.estimatedMinutes != null &&
+                  item.estimatedMinutes! > 0) ...[
+                const SizedBox(height: 4),
+                Text(
+                  '~${item.estimatedMinutes} min',
+                  style: TextStyle(
+                    fontSize: compact ? 10.5 : 11,
+                    color: const Color(0xFF94A3B8),
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
             ],
           ),
         ),

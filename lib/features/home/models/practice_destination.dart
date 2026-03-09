@@ -13,6 +13,7 @@ class PracticeDestination {
     required this.route,
     this.extra,
     this.badgeCount,
+    this.estimatedMinutes,
   });
 
   final String id;
@@ -23,6 +24,7 @@ class PracticeDestination {
   final String route;
   final Object? extra;
   final int? badgeCount;
+  final int? estimatedMinutes;
 }
 
 List<PracticeDestination> buildPracticeDestinations({
@@ -30,6 +32,9 @@ List<PracticeDestination> buildPracticeDestinations({
   int ghostCount = 0,
   int mistakeCount = 0,
   int dueReviewCount = 0,
+  int vocabDue = 0,
+  int grammarDue = 0,
+  int kanjiDue = 0,
   StudyLevel? level,
   bool preferImmersion = false,
 }) {
@@ -49,6 +54,7 @@ List<PracticeDestination> buildPracticeDestinations({
       icon: Icons.extension_rounded,
       color: const Color(0xFF0EA5E9),
       route: '/match',
+      estimatedMinutes: vocabDue > 0 ? (vocabDue * 8 / 60).ceil() : null,
     ),
     PracticeDestination(
       id: 'ghost',
@@ -59,6 +65,7 @@ List<PracticeDestination> buildPracticeDestinations({
       route: '/grammar-practice',
       extra: GrammarPracticeMode.ghost,
       badgeCount: ghostCount > 0 ? ghostCount : null,
+      estimatedMinutes: ghostCount > 0 ? (ghostCount * 12 / 60).ceil() : null,
     ),
     PracticeDestination(
       id: 'kanji_dash',
@@ -67,6 +74,7 @@ List<PracticeDestination> buildPracticeDestinations({
       icon: Icons.flash_on_rounded,
       color: const Color(0xFFF59E0B),
       route: '/kanji-dash',
+      estimatedMinutes: kanjiDue > 0 ? (kanjiDue * 6 / 60).ceil() : null,
     ),
     PracticeDestination(
       id: 'handwriting',
@@ -83,6 +91,7 @@ List<PracticeDestination> buildPracticeDestinations({
       icon: Icons.menu_book_rounded,
       color: const Color(0xFF7C3AED),
       route: '/practice/kanji-reading',
+      estimatedMinutes: kanjiDue > 0 ? (kanjiDue * 6 / 60).ceil() : null,
     ),
     PracticeDestination(
       id: 'mock_exam',
@@ -108,6 +117,8 @@ List<PracticeDestination> buildPracticeDestinations({
       color: const Color(0xFFDC2626),
       route: '/mistakes',
       badgeCount: mistakeCount > 0 ? mistakeCount : null,
+      estimatedMinutes:
+          mistakeCount > 0 ? (mistakeCount * 12 / 60).ceil() : null,
     ),
   ];
 
