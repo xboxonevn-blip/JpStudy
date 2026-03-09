@@ -55,19 +55,6 @@ class _KanjiReadingQuizScreenState
       );
     }
 
-    // Auto-advance after short delay
-    await Future.delayed(const Duration(milliseconds: 800));
-    if (!mounted) return;
-
-    if (_isLast) {
-      _showSummary();
-    } else {
-      setState(() {
-        _current++;
-        _selectedIndex = null;
-        _answered = false;
-      });
-    }
   }
 
   void _showSummary() {
@@ -129,11 +116,11 @@ class _KanjiReadingQuizScreenState
         ),
       ),
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
           child: Column(
             children: [
-              const Spacer(),
+              const SizedBox(height: 40),
               // Prompt label
               Text(
                 _question.promptLabel,
@@ -157,7 +144,7 @@ class _KanjiReadingQuizScreenState
                 style: theme.textTheme.bodyLarge
                     ?.copyWith(color: Colors.grey[500]),
               ),
-              const Spacer(),
+              const SizedBox(height: 40),
               // 2x2 option grid
               GridView.count(
                 crossAxisCount: 2,
@@ -209,7 +196,67 @@ class _KanjiReadingQuizScreenState
                   );
                 }),
               ),
-              const SizedBox(height: 24),
+              // Compound words + Next button (shown after answering)
+              if (_answered) ...[
+                const SizedBox(height: 16),
+                if (_question.target.examples.isNotEmpty) ...[
+                  Text(
+                    '熟語 Compound Words',
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: Colors.grey[500],
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  ...(_question.target.examples.take(3).map((ex) => Padding(
+                    padding: const EdgeInsets.only(bottom: 4),
+                    child: Text.rich(
+                      TextSpan(children: [
+                        TextSpan(
+                          text: ex.word,
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '  ${ex.reading}',
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                        TextSpan(
+                          text: '  ${ex.meaning}',
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: Colors.grey[500],
+                            fontStyle: FontStyle.italic,
+                          ),
+                        ),
+                      ]),
+                      textAlign: TextAlign.center,
+                    ),
+                  ))),
+                ],
+                const SizedBox(height: 16),
+                SizedBox(
+                  width: 160,
+                  height: 48,
+                  child: FilledButton(
+                    onPressed: () {
+                      if (_isLast) {
+                        _showSummary();
+                      } else {
+                        setState(() {
+                          _current++;
+                          _selectedIndex = null;
+                          _answered = false;
+                        });
+                      }
+                    },
+                    child: Text(_isLast ? 'Finish' : 'Next →'),
+                  ),
+                ),
+              ] else
+                const SizedBox(height: 24),
             ],
           ),
         ),
