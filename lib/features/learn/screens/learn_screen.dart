@@ -42,6 +42,7 @@ class _LearnScreenState extends ConsumerState<LearnScreen> {
   bool _isCorrect = false;
   final Set<String> _contextHintsShown = {};
   final Set<String> _contextHintsRequeued = {};
+  final Set<String> _wrongRequeued = {};
 
   @override
   void initState() {
@@ -359,6 +360,13 @@ class _LearnScreenState extends ConsumerState<LearnScreen> {
             .read(learnSessionProvider.notifier)
             .requeueQuestion(result.question);
         _contextHintsRequeued.add(result.question.id);
+      }
+      // Also requeue wrong answers for a second chance
+      if (!result.isCorrect && !_wrongRequeued.contains(result.question.id)) {
+        ref
+            .read(learnSessionProvider.notifier)
+            .requeueQuestion(result.question);
+        _wrongRequeued.add(result.question.id);
       }
       setState(() {
         _showResult = true;
