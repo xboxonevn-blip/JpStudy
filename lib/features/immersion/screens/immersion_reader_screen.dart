@@ -46,6 +46,7 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
   DateTime? _readingStartedAt;
   double _readingProgress = 0;
   int _readingTotalChars = 0;
+  bool _summaryShown = false;
 
   final ScrollController _scrollController = ScrollController();
   Timer? _autoScrollTimer;
@@ -196,6 +197,68 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
     }
     final chars = _estimatedReadChars(isRead: isRead);
     return chars / elapsed.inSeconds * 60;
+  }
+
+  Future<bool> _showReadingSummary() async {
+    final elapsed = _readingElapsed();
+    if (_summaryShown || elapsed.inSeconds < 30) {
+      return true;
+    }
+    _summaryShown = true;
+
+    final speed = _charsPerMinute(isRead: false).round();
+    final totalChars = _estimatedReadChars(isRead: false);
+
+    final badge =
+        speed > 200
+            ? 'Fast Reader!'
+            : speed > 100
+                ? 'Good Pace'
+                : 'Steady Reader';
+    final badgeColor =
+        speed > 200
+            ? Colors.green
+            : speed > 100
+                ? Colors.blue
+                : Colors.orange;
+
+    if (!mounted) return true;
+
+    await showDialog<void>(
+      context: context,
+      builder: (_) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: const Text('Reading Summary'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              badge,
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: badgeColor,
+              ),
+            ),
+            const SizedBox(height: 16),
+            _SummaryStat(label: 'Characters read', value: '$totalChars'),
+            _SummaryStat(
+              label: 'Time spent',
+              value:
+                  '${elapsed.inMinutes}m ${elapsed.inSeconds % 60}s',
+            ),
+            _SummaryStat(label: 'Speed', value: '$speed chars/min'),
+          ],
+        ),
+        actions: [
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Done'),
+          ),
+        ],
+      ),
+    );
+    return true;
   }
 
   void _ensureArticleSession(ImmersionArticle article, AppLanguage language) {
@@ -968,8 +1031,9 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
     final readIds = ref.watch(readArticlesProvider);
     final isRead = readIds.contains(widget.article.id);
 
+    Widget child;
     if (_detailFuture != null) {
-      return FutureBuilder<ImmersionArticle?>(
+      child = FutureBuilder<ImmersionArticle?>(
         future: _detailFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -986,9 +1050,20 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
           );
         },
       );
+    } else {
+      child = _buildArticleScaffold(context, language, widget.article, isRead);
     }
 
-    return _buildArticleScaffold(context, language, widget.article, isRead);
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, _) async {
+        if (didPop) return;
+        await _showReadingSummary();
+        // ignore: use_build_context_synchronously
+        if (mounted) Navigator.of(context).pop();
+      },
+      child: child,
+    );
   }
 
   SystemUiOverlayStyle _overlayStyle(BuildContext context) {
@@ -2190,4 +2265,25 @@ class _QuizVocab {
 
   final ImmersionToken token;
   final String meaning;
+}
+
+class _SummaryStat extends StatelessWidget {
+  const _SummaryStat({required this.label, required this.value});
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(label, style: const TextStyle(color: Colors.grey)),
+          Text(value, style: const TextStyle(fontWeight: FontWeight.w600)),
+        ],
+      ),
+    );
+  }
 }
