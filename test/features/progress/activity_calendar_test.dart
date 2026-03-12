@@ -6,6 +6,7 @@ import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/data/daos/srs_dao.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
+import 'package:jpstudy/features/home/providers/weakness_radar_provider.dart';
 import 'package:jpstudy/features/progress/progress_screen.dart';
 
 void main() {
@@ -45,6 +46,7 @@ void main() {
               mature: 0,
             ),
           ),
+          weaknessRadarProvider.overrideWith((_) async => const []),
         ],
         child: const MaterialApp(
           home: ProgressScreen(),

@@ -5617,4 +5617,119 @@ extension AppLanguageLabels on AppLanguage {
         return '正しい読みまたは漢字を選ぼう。';
     }
   }
+  // --- F1: Vocab Review Preview ---
+
+  String get reviewReadyTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Review Session';
+      case AppLanguage.vi:
+        return 'Phiên ôn tập';
+      case AppLanguage.ja:
+        return '復習セッション';
+    }
+  }
+
+  String reviewTermsDueLabel(int count) {
+    switch (this) {
+      case AppLanguage.en:
+        return '$count terms due';
+      case AppLanguage.vi:
+        return '$count từ đến hạn';
+      case AppLanguage.ja:
+        return '$count件の復習';
+    }
+  }
+
+  String reviewEstimateLabel(int minutes) {
+    switch (this) {
+      case AppLanguage.en:
+        return '~$minutes min';
+      case AppLanguage.vi:
+        return '~$minutes phút';
+      case AppLanguage.ja:
+        return '約$minutes分';
+    }
+  }
+
+  String get startReviewButton {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Start Review';
+      case AppLanguage.vi:
+        return 'Bắt đầu ôn tập';
+      case AppLanguage.ja:
+        return '復習を始める';
+    }
+  }
+
+  // --- F2: Requeue Indicator ---
+
+  String get willRetryLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Will retry later';
+      case AppLanguage.vi:
+        return 'Sẽ ôn lại sau';
+      case AppLanguage.ja:
+        return 'あとでもう一度';
+    }
+  }
+
+  String get requeueRetryChip {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Retry';
+      case AppLanguage.vi:
+        return 'Ôn lại';
+      case AppLanguage.ja:
+        return 'リトライ';
+    }
+  }
+
+  // --- F4: Settings Sections ---
+
+  String get settingsLearningSection {
+    switch (this) {
+      case AppLanguage.en:
+        return 'LEARNING';
+      case AppLanguage.vi:
+        return 'HỌC TẬP';
+      case AppLanguage.ja:
+        return '学習';
+    }
+  }
+
+  String get settingsAppearanceSection {
+    switch (this) {
+      case AppLanguage.en:
+        return 'APPEARANCE';
+      case AppLanguage.vi:
+        return 'GIAO DIỆN';
+      case AppLanguage.ja:
+        return '外観';
+    }
+  }
+
+  String get settingsReminderSection {
+    switch (this) {
+      case AppLanguage.en:
+        return 'REMINDERS';
+      case AppLanguage.vi:
+        return 'NHẮC NHỞ';
+      case AppLanguage.ja:
+        return 'リマインダー';
+    }
+  }
+
+  String get settingsDataSection {
+    switch (this) {
+      case AppLanguage.en:
+        return 'DATA';
+      case AppLanguage.vi:
+        return 'DỮ LIỆU';
+      case AppLanguage.ja:
+        return 'データ';
+    }
+  }
 } // End extension

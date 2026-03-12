@@ -4,7 +4,7 @@ import 'package:jpstudy/core/app_language.dart';
 
 import '../../common/widgets/clay_button.dart';
 import '../../common/widgets/clay_card.dart';
-import '../../../theme/app_theme_v2.dart';
+import '../../../app/theme/app_theme.dart';
 
 class SentenceBuilderWidget extends StatefulWidget {
   final AppLanguage language;
@@ -82,10 +82,10 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
   Widget build(BuildContext context) {
     var targetColor = Colors.white;
     if (_isLastCorrect == true) {
-      targetColor = AppThemeV2.secondary.withValues(alpha: 0.2);
+      targetColor = AppTheme.secondary.withValues(alpha: 0.2);
     }
     if (_isLastCorrect == false) {
-      targetColor = AppThemeV2.error.withValues(alpha: 0.1);
+      targetColor = AppTheme.error.withValues(alpha: 0.1);
     }
 
     return Stack(
@@ -97,10 +97,10 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
               margin: const EdgeInsets.only(bottom: 16),
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: AppThemeV2.primary.withValues(alpha: 0.05),
+                color: AppTheme.primary.withValues(alpha: 0.05),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
-                  color: AppThemeV2.primary.withValues(alpha: 0.1),
+                  color: AppTheme.primary.withValues(alpha: 0.1),
                 ),
               ),
               child: Column(
@@ -113,7 +113,7 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
                       ja: '\u6587\u3092\u4e26\u3073\u66ff\u3048\u3066\u304f\u3060\u3055\u3044:',
                     ),
                     style: TextStyle(
-                      color: AppThemeV2.textSub,
+                      color: AppTheme.textSub,
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 0.5,
@@ -124,7 +124,7 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
                     widget.prompt,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: AppThemeV2.textMain,
+                      color: AppTheme.textMain,
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
                     ),

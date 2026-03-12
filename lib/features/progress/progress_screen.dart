@@ -4,6 +4,8 @@ import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
+import 'package:jpstudy/features/common/widgets/error_state_widget.dart';
+import 'package:jpstudy/features/home/widgets/weakness_radar_card.dart';
 
 class ProgressScreen extends ConsumerWidget {
   const ProgressScreen({super.key});
@@ -29,6 +31,8 @@ class ProgressScreen extends ConsumerWidget {
               _ActivityCalendar(streak: summary.streak),
               const SizedBox(height: 16),
               const _SrsRetentionCard(),
+              const SizedBox(height: 16),
+              const WeaknessRadarCard(compact: true),
               const SizedBox(height: 16),
               _StatCard(
                 label: language.progressStreakLabel,
@@ -68,7 +72,7 @@ class ProgressScreen extends ConsumerWidget {
                         ],
                       ),
                 loading: () => const Center(child: CircularProgressIndicator()),
-                error: (_, _) => Center(child: Text(language.loadErrorLabel)),
+                error: (e, _) => ErrorStateWidget(error: e, compact: true),
               ),
               const SizedBox(height: 16),
               _SectionHeader(label: language.attemptHistoryLabel),
@@ -88,13 +92,13 @@ class ProgressScreen extends ConsumerWidget {
                         ],
                       ),
                 loading: () => const Center(child: CircularProgressIndicator()),
-                error: (_, _) => Center(child: Text(language.loadErrorLabel)),
+                error: (e, _) => ErrorStateWidget(error: e, compact: true),
               ),
             ],
           );
         },
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (_, _) => Center(child: Text(language.loadErrorLabel)),
+        error: (e, _) => ErrorStateWidget(error: e, compact: true),
       ),
     );
   }
@@ -211,7 +215,7 @@ class _SrsRetentionCard extends ConsumerWidget {
           height: 60,
           child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
         ),
-        error: (_, _) => const SizedBox(height: 60),
+        error: (e, _) => ErrorStateWidget(error: e, compact: true),
       ),
     );
   }
@@ -530,7 +534,7 @@ class _ActivityCalendar extends ConsumerWidget {
               height: 88,
               child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
             ),
-            error: (_, _) => const SizedBox(height: 88),
+            error: (e, _) => ErrorStateWidget(error: e, compact: true),
           ),
           const SizedBox(height: 10),
           _buildBottomRow(streak, language),

@@ -1,9 +1,12 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
+import 'package:jpstudy/features/games/match_game/lesson_match_screen.dart';
+import 'package:jpstudy/features/learn/integration/learn_mode_integration.dart';
+import 'package:jpstudy/features/test/integration/test_mode_integration.dart';
+import 'package:jpstudy/features/learn/integration/write_mode_integration.dart';
 
 enum LessonPracticeMode { learn, test, match, write }
 
@@ -38,54 +41,29 @@ class LessonPracticeScreen extends ConsumerWidget {
     final titleAsync = ref.watch(
       lessonTitleProvider(LessonTitleArgs(lessonId, fallbackTitle)),
     );
-    final title = titleAsync.maybeWhen(
+    final lessonTitle = titleAsync.maybeWhen(
       data: (value) => value,
       orElse: () => fallbackTitle,
     );
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('${_modeLabel(language, mode)} - $title'),
-        leading: IconButton(
-          icon: const Icon(Icons.chevron_left),
-          onPressed: () => context.pop(),
-        ),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.handyman, size: 64, color: Colors.orange),
-            const SizedBox(height: 16),
-            Text(
-              language.lessonModeTemporarilyDisabledLabel(
-                _modeLabel(language, mode),
-              ),
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            const SizedBox(height: 8),
-            Text(language.lessonPracticeMaintenanceLabel),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => context.pop(),
-              child: Text(language.backToLessonLabel),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  String _modeLabel(AppLanguage language, LessonPracticeMode mode) {
     switch (mode) {
       case LessonPracticeMode.learn:
-        return language.learnModeLabel;
+        return LearnModeIntegration(
+          lessonId: lessonId,
+          lessonTitle: lessonTitle,
+        );
       case LessonPracticeMode.test:
-        return language.testModeLabel;
+        return TestModeIntegration(
+          lessonId: lessonId,
+          lessonTitle: lessonTitle,
+        );
       case LessonPracticeMode.match:
-        return language.matchModeLabel;
+        return LessonMatchScreen(lessonId: lessonId, lessonTitle: lessonTitle);
       case LessonPracticeMode.write:
-        return language.writeModeLabel;
+        return WriteModeIntegration(
+          lessonId: lessonId,
+          lessonTitle: lessonTitle,
+        );
     }
   }
 }

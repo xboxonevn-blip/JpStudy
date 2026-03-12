@@ -7,11 +7,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../data/db/app_database.dart' as app_db;
 import '../../../data/db/database_provider.dart';
 
+import '../../home/providers/recovery_pack_provider.dart';
 import '../../home/widgets/next_step_suggestions.dart';
 import '../../learn/models/question_type.dart';
 import '../models/test_session.dart';
 import '../services/test_export_service.dart';
 import 'test_review_screen.dart';
+import '../../../features/me/providers/personal_best_provider.dart';
 
 class TestResultsScreen extends ConsumerStatefulWidget {
   final TestSession session;
@@ -31,6 +33,7 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
   static const String _prefPinnedLessonKey = 'test_results_pinned_lesson_id';
 
   int? _pinnedLessonId;
+  bool _isPersonalBest = false;
 
   TestSession get session => widget.session;
   String get lessonTitle => widget.lessonTitle;
@@ -39,6 +42,20 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
   void initState() {
     super.initState();
     _loadPinnedLesson();
+    _checkPersonalBest();
+  }
+
+  Future<void> _checkPersonalBest() async {
+    final db = ref.read(databaseProvider);
+    final isBest = await isNewPersonalBest(
+      db,
+      mode: 'test',
+      level: session.lessonId.toString(),
+      score: session.correctCount,
+      total: session.totalQuestions,
+    );
+    if (!mounted) return;
+    setState(() => _isPersonalBest = isBest);
   }
 
   Future<void> _loadPinnedLesson() async {
@@ -71,6 +88,12 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
   @override
   Widget build(BuildContext context) {
     final language = ref.watch(appLanguageProvider);
+    final hasRecoveryPack = ref
+        .watch(recoveryPackProvider)
+        .maybeWhen(
+          data: (pack) => pack != null && pack.termIds.isNotEmpty,
+          orElse: () => session.weakTermIds.isNotEmpty,
+        );
     return Scaffold(
       appBar: AppBar(
         title: Text(language.testResultsTitle),
@@ -111,6 +134,10 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
 
               // Score summary
               _buildScoreSummary(context, language),
+              if (_isPersonalBest) ...[
+                const SizedBox(height: 16),
+                _PersonalBestBanner(language: language),
+              ],
               const SizedBox(height: 32),
 
               // Stats grid
@@ -127,7 +154,11 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
 
               // Weak terms
               if (session.weakTermIds.isNotEmpty) ...[
-                _buildWeakTermsCard(context, language),
+                _buildWeakTermsCard(
+                  context,
+                  language,
+                  hasRecoveryPack: hasRecoveryPack,
+                ),
                 const SizedBox(height: 32),
               ],
 
@@ -142,7 +173,11 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
               const SizedBox(height: 32),
 
               // Action buttons
-              _buildActionButtons(context, language),
+              _buildActionButtons(
+                context,
+                language,
+                hasRecoveryPack: hasRecoveryPack,
+              ),
             ],
           ),
         ),
@@ -342,7 +377,11 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
     );
   }
 
-  Widget _buildWeakTermsCard(BuildContext context, AppLanguage language) {
+  Widget _buildWeakTermsCard(
+    BuildContext context,
+    AppLanguage language, {
+    required bool hasRecoveryPack,
+  }) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -372,12 +411,27 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
             language.termsNeedPracticeHint,
             style: TextStyle(fontSize: 14, color: Colors.grey[600]),
           ),
+          if (hasRecoveryPack) ...[
+            const SizedBox(height: 8),
+            Text(
+              _recoveryPackReadyLabel(language),
+              style: const TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
+                color: Color(0xFF1D4ED8),
+              ),
+            ),
+          ],
         ],
       ),
     );
   }
 
-  Widget _buildActionButtons(BuildContext context, AppLanguage language) {
+  Widget _buildActionButtons(
+    BuildContext context,
+    AppLanguage language, {
+    required bool hasRecoveryPack,
+  }) {
     return Column(
       children: [
         SizedBox(
@@ -401,6 +455,31 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
             ),
           ),
         ),
+        if (session.weakTermIds.isNotEmpty && hasRecoveryPack) ...[
+          const SizedBox(height: 12),
+          SizedBox(
+            width: double.infinity,
+            height: 56,
+            child: ElevatedButton.icon(
+              onPressed: () => context.push('/learn/recovery-pack'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF1D4ED8),
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
+              icon: const Icon(Icons.healing_outlined),
+              label: Text(
+                _startRecoveryPackLabel(language),
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ),
+        ],
         const SizedBox(height: 12),
         SizedBox(
           width: double.infinity,
@@ -786,5 +865,79 @@ class _StatCard extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+String _recoveryPackReadyLabel(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'A recovery pack has been prepared from these weak terms.';
+    case AppLanguage.vi:
+      return 'Đã tạo gói phục hồi từ các mục yếu này.';
+    case AppLanguage.ja:
+      return 'A recovery pack has been prepared from these weak terms.';
+  }
+}
+
+String _startRecoveryPackLabel(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Start recovery pack';
+    case AppLanguage.vi:
+      return 'Bắt đầu gói phục hồi';
+    case AppLanguage.ja:
+      return 'Start recovery pack';
+  }
+}
+
+class _PersonalBestBanner extends StatelessWidget {
+  const _PersonalBestBanner({required this.language});
+
+  final AppLanguage language;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Color(0xFFFBBF24), Color(0xFFF59E0B)],
+        ),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFFFBBF24).withValues(alpha: 0.4),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text('🏆', style: TextStyle(fontSize: 24)),
+          const SizedBox(width: 10),
+          Text(
+            _label,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w800,
+              color: Colors.white,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String get _label {
+    switch (language) {
+      case AppLanguage.en:
+        return 'New Personal Best!';
+      case AppLanguage.vi:
+        return 'Kỷ lục mới!';
+      case AppLanguage.ja:
+        return '自己ベスト更新！';
+    }
   }
 }

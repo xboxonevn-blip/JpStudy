@@ -7,6 +7,10 @@ import 'package:jpstudy/features/write/services/kanji_stroke_template_service.da
 
 import 'handwriting_scoring_test_utils.dart';
 
+const _printStrokeBenchmark = bool.fromEnvironment(
+  'JPSTUDY_PRINT_STROKE_BENCHMARK',
+);
+
 void main() {
   test('offline benchmark reports before/after metrics by quality tier', () {
     const canvas = Size(220, 220);
@@ -20,9 +24,10 @@ void main() {
     };
 
     for (final tier in tierPlan.keys) {
-      final templates = (templatesByQuality[tier] ?? const <KanjiStrokeTemplate>[])
-          .take(tierPlan[tier]!)
-          .toList();
+      final templates =
+          (templatesByQuality[tier] ?? const <KanjiStrokeTemplate>[])
+              .take(tierPlan[tier]!)
+              .toList();
       expect(templates, isNotEmpty, reason: 'Missing templates for tier=$tier');
 
       final legacy = _runBenchmark(
@@ -54,11 +59,10 @@ void main() {
       );
     }
 
-    // Keep the benchmark output visible in CI/local logs.
-    // ignore: avoid_print
-    print(
-      'stroke_check_v2_benchmark=${jsonEncode(report)}',
-    );
+    if (_printStrokeBenchmark) {
+      // ignore: avoid_print
+      print('stroke_check_v2_benchmark=${jsonEncode(report)}');
+    }
   });
 }
 
@@ -90,7 +94,9 @@ _BenchmarkMetrics _runBenchmark({
         scaleY: 1.08,
       ),
     ];
-    final negatives = buildRegressionNegativeCases(template).values.take(10).toList();
+    final negatives = buildRegressionNegativeCases(
+      template,
+    ).values.take(10).toList();
 
     for (final sample in positives) {
       final result = HandwritingEvaluator.evaluate(

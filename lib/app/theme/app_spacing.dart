@@ -39,4 +39,24 @@ abstract final class AppSpacing {
 
   /// Bottom padding so content clears the floating bottom nav / FAB area.
   static const double pageBottom = 100;
+
+  // ── Border radius tokens ──────────────────────────────────────────────
+
+  /// 8 px — small chips, badges
+  static const double radiusSm = 8;
+
+  /// 12 px — buttons, input fields
+  static const double radiusMd = 12;
+
+  /// 16 px — cards, dialogs
+  static const double radiusLg = 16;
+
+  /// 20 px — panels, modals
+  static const double radiusXl = 20;
+
+  /// 24 px — hero cards, large containers
+  static const double radiusXxl = 24;
+
+  /// 999 px — fully rounded (pills, circular badges)
+  static const double radiusPill = 999;
 }

@@ -21,7 +21,7 @@ class PracticeHubPreferences {
 
   const PracticeHubPreferences.initial()
     : orderIds = const <String>[],
-      focusModeEnabled = false,
+      focusModeEnabled = true,
       loaded = false;
 
   final List<String> orderIds;
@@ -50,7 +50,7 @@ class PracticeHubPreferencesNotifier
     final prefs = await SharedPreferences.getInstance();
     final ids =
         prefs.getStringList(_practiceHubOrderPrefKey) ?? const <String>[];
-    final focus = prefs.getBool(_practiceHubFocusModePrefKey) ?? false;
+    final focus = prefs.getBool(_practiceHubFocusModePrefKey) ?? true;
     state = PracticeHubPreferences(
       orderIds: List<String>.unmodifiable(ids),
       focusModeEnabled: focus,

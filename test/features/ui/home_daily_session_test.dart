@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/grammar/grammar_providers.dart';
 import 'package:jpstudy/features/home/providers/backup_status_provider.dart';
 import 'package:jpstudy/features/home/providers/continue_provider.dart';
 import 'package:jpstudy/features/home/providers/daily_session_progress_provider.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/home/widgets/daily_session_card.dart';
+import 'package:jpstudy/features/vocab/vocab_ghost_providers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -85,6 +87,17 @@ void main() {
             (_) => Stream.value(buildDashboard(grammarDue: 3)),
           ),
           grammarGhostCountProvider.overrideWith((_) async => 0),
+          vocabGhostCountProvider.overrideWith((_) async => 0),
+          nextVocabReviewProvider.overrideWith((_) => Stream.value(null)),
+          nextKanjiReviewProvider.overrideWith((_) => Stream.value(null)),
+          nextGrammarReviewProvider.overrideWith((_) => Stream.value(null)),
+          weekSummaryProvider.overrideWith(
+            (_) async => const WeekSummary(
+              totalReviewed: 0,
+              accuracy: 0,
+              daysStudied: 0,
+            ),
+          ),
           continueActionProvider.overrideWith(
             (_) => Stream.value(
               ContinueAction(
@@ -117,6 +130,17 @@ void main() {
         overrides: [
           dashboardProvider.overrideWith((_) => Stream.value(buildDashboard())),
           grammarGhostCountProvider.overrideWith((_) async => 2),
+          vocabGhostCountProvider.overrideWith((_) async => 0),
+          nextVocabReviewProvider.overrideWith((_) => Stream.value(null)),
+          nextKanjiReviewProvider.overrideWith((_) => Stream.value(null)),
+          nextGrammarReviewProvider.overrideWith((_) => Stream.value(null)),
+          weekSummaryProvider.overrideWith(
+            (_) async => const WeekSummary(
+              totalReviewed: 0,
+              accuracy: 0,
+              daysStudied: 0,
+            ),
+          ),
           continueActionProvider.overrideWith(
             (_) => Stream.value(
               const ContinueAction(
@@ -150,6 +174,17 @@ void main() {
         overrides: [
           dashboardProvider.overrideWith((_) => Stream.value(buildDashboard())),
           grammarGhostCountProvider.overrideWith((_) async => 0),
+          vocabGhostCountProvider.overrideWith((_) async => 0),
+          nextVocabReviewProvider.overrideWith((_) => Stream.value(null)),
+          nextKanjiReviewProvider.overrideWith((_) => Stream.value(null)),
+          nextGrammarReviewProvider.overrideWith((_) => Stream.value(null)),
+          weekSummaryProvider.overrideWith(
+            (_) async => const WeekSummary(
+              totalReviewed: 0,
+              accuracy: 0,
+              daysStudied: 0,
+            ),
+          ),
           continueActionProvider.overrideWith(
             (_) => Stream.value(
               const ContinueAction(

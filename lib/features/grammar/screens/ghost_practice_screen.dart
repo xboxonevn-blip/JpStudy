@@ -8,7 +8,7 @@ import '../../../core/language_provider.dart';
 import '../../../data/db/app_database.dart';
 import '../../../data/repositories/lesson_repository.dart' as lesson_repo;
 import '../../../features/grammar/grammar_providers.dart' as grammar_providers;
-import '../../../theme/app_theme_v2.dart';
+import '../../../app/theme/app_theme.dart';
 import '../../common/widgets/clay_card.dart';
 import '../models/grammar_point_data.dart';
 
@@ -118,7 +118,7 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        backgroundColor: AppThemeV2.surface,
+        backgroundColor: AppTheme.surface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         title: Text(
           language.ghostPracticeCompleteTitle,
@@ -149,7 +149,7 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
               style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: AppThemeV2.textMain,
+                color: AppTheme.textMain,
               ),
             ),
             if (_score == total)
@@ -199,7 +199,7 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
     final language = ref.watch(appLanguageProvider);
 
     return Scaffold(
-      backgroundColor: AppThemeV2.surface,
+      backgroundColor: AppTheme.surface,
       appBar: AppBar(
         title: Text(
           language.ghostPracticeTitle,
@@ -208,7 +208,7 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        foregroundColor: AppThemeV2.textMain,
+        foregroundColor: AppTheme.textMain,
       ),
       body: Stack(
         children: [
@@ -250,7 +250,7 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
                       borderRadius: BorderRadius.circular(6),
                       backgroundColor: Colors.grey.shade200,
                       valueColor: const AlwaysStoppedAnimation<Color>(
-                        AppThemeV2.primary,
+                        AppTheme.primary,
                       ),
                     ),
                     const SizedBox(height: 24),
@@ -258,7 +258,7 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
                       child: Text(
                         language.ghostPracticeQuestionLabel(_currentIndex + 1),
                         style: TextStyle(
-                          color: AppThemeV2.textSub,
+                          color: AppTheme.textSub,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -270,7 +270,7 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: AppThemeV2.textMain,
+                        color: AppTheme.textMain,
                       ),
                     ),
                     const SizedBox(height: 24),
@@ -344,7 +344,7 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
                                 fontWeight: FontWeight.bold,
                                 color: _answered && (isCorrect || isSelected)
                                     ? Colors.black87
-                                    : AppThemeV2.textMain,
+                                    : AppTheme.textMain,
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -360,7 +360,7 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
                           ElevatedButton(
                             onPressed: () => _nextQuestion(quizItems.length),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: AppThemeV2.primary,
+                              backgroundColor: AppTheme.primary,
                               foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 16),
                               shape: RoundedRectangleBorder(

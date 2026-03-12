@@ -20,6 +20,13 @@ class GrammarRepository {
     return _db.grammarDao.getGrammarPointsByLevel(level);
   }
 
+  Future<List<GrammarPoint>> fetchPointsByIds(List<int> ids) {
+    if (ids.isEmpty) {
+      return Future.value(const []);
+    }
+    return (_db.select(_db.grammarPoints)..where((t) => t.id.isIn(ids))).get();
+  }
+
   /// Fetch all grammar points due for review
   Future<List<GrammarPoint>> fetchDuePoints() async {
     final dueStates = await _db.grammarDao.getDueReviews();

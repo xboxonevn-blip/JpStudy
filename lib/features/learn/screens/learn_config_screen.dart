@@ -3,45 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
+import '../models/learn_config.dart';
 import '../models/question_type.dart';
 import '../../../core/services/session_storage.dart';
-
-/// Settings for a Learn Mode session
-class LearnConfig {
-  final int questionCount;
-  final List<QuestionType> enabledTypes;
-  final bool shuffleQuestions;
-  final bool enableHints;
-  final bool showCorrectAnswer;
-
-  const LearnConfig({
-    this.questionCount = 20,
-    this.enabledTypes = const [
-      QuestionType.multipleChoice,
-      QuestionType.trueFalse,
-      QuestionType.fillBlank,
-    ],
-    this.shuffleQuestions = true,
-    this.enableHints = true,
-    this.showCorrectAnswer = true,
-  });
-
-  LearnConfig copyWith({
-    int? questionCount,
-    List<QuestionType>? enabledTypes,
-    bool? shuffleQuestions,
-    bool? enableHints,
-    bool? showCorrectAnswer,
-  }) {
-    return LearnConfig(
-      questionCount: questionCount ?? this.questionCount,
-      enabledTypes: enabledTypes ?? this.enabledTypes,
-      shuffleQuestions: shuffleQuestions ?? this.shuffleQuestions,
-      enableHints: enableHints ?? this.enableHints,
-      showCorrectAnswer: showCorrectAnswer ?? this.showCorrectAnswer,
-    );
-  }
-}
 
 class LearnConfigScreen extends ConsumerStatefulWidget {
   final int lessonId;
@@ -74,7 +38,9 @@ class _LearnConfigScreenState extends ConsumerState<LearnConfigScreen> {
   @override
   void initState() {
     super.initState();
-    _config = LearnConfig(questionCount: widget.maxTerms.clamp(10, 50));
+    final safeMax = widget.maxTerms < 1 ? 1 : widget.maxTerms;
+    final resumeConfig = widget.resumeSnapshot?.config ?? const LearnConfig();
+    _config = resumeConfig.normalized(maxQuestions: safeMax);
     _resumeSnapshot = widget.resumeSnapshot;
   }
 
@@ -223,7 +189,7 @@ class _LearnConfigScreenState extends ConsumerState<LearnConfigScreen> {
         const SizedBox(height: 12),
         Wrap(
           spacing: 8,
-          children: [10, 20, 30, widget.maxTerms]
+          children: [5, 10, 20, 30, widget.maxTerms]
               .where((n) => n <= widget.maxTerms)
               .toSet()
               .map(

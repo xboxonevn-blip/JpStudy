@@ -12,7 +12,8 @@ import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/vocab/widgets/flashcard_widget.dart';
 import '../common/widgets/clay_button.dart';
 import '../common/widgets/clay_card.dart';
-import '../../theme/app_theme_v2.dart';
+import '../common/widgets/error_state_widget.dart';
+import '../../app/theme/app_theme.dart';
 
 class VocabScreen extends ConsumerStatefulWidget {
   const VocabScreen({super.key});
@@ -130,8 +131,7 @@ class _VocabContent extends ConsumerWidget {
         );
       },
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, stackTrace) =>
-          Center(child: Text(language.loadErrorLabel)),
+      error: (e, _) => ErrorStateWidget(error: e),
     );
   }
 }
@@ -184,7 +184,7 @@ class _ListView extends StatelessWidget {
                 showReading
                     ? '${item.reading!.trim()} • $meaningText'
                     : meaningText,
-                style: TextStyle(color: AppThemeV2.textSub),
+                style: TextStyle(color: AppTheme.textSub),
               ),
             ),
           ),
@@ -235,7 +235,7 @@ class _FlashcardViewState extends ConsumerState<_FlashcardView> {
         Text(
           '${_currentIndex + 1} / ${widget.items.length}',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: AppThemeV2.textSub,
+            color: AppTheme.textSub,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -272,7 +272,7 @@ class _FlashcardViewState extends ConsumerState<_FlashcardView> {
       height: 16,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppThemeV2.neutral,
+        color: AppTheme.neutral,
         borderRadius: BorderRadius.circular(12),
       ),
       child: FractionallySizedBox(
@@ -280,7 +280,7 @@ class _FlashcardViewState extends ConsumerState<_FlashcardView> {
         widthFactor: progress,
         child: Container(
           decoration: BoxDecoration(
-            color: AppThemeV2.secondary,
+            color: AppTheme.secondary,
             borderRadius: BorderRadius.circular(12),
             gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -331,7 +331,7 @@ class _NextReviewChip extends StatelessWidget {
       style: TextStyle(
         fontSize: 13,
         fontWeight: FontWeight.w600,
-        color: AppThemeV2.textSub,
+        color: AppTheme.textSub,
       ),
     );
   }

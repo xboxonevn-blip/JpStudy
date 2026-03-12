@@ -3,7 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:jpstudy/core/app_language.dart';
 import '../../common/widgets/clay_button.dart';
 import '../../common/widgets/clay_card.dart';
-import '../../../theme/app_theme_v2.dart';
+import '../../../app/theme/app_theme.dart';
 
 class ClozeTestWidget extends StatefulWidget {
   final AppLanguage language;
@@ -61,7 +61,7 @@ class _ClozeTestWidgetState extends State<ClozeTestWidget> {
               text: TextSpan(
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   height: 1.5,
-                  color: AppThemeV2.textMain,
+                  color: AppTheme.textMain,
                   fontWeight: FontWeight.w600,
                 ),
                 children: [
@@ -77,17 +77,17 @@ class _ClozeTestWidgetState extends State<ClozeTestWidget> {
                       ),
                       decoration: BoxDecoration(
                         color: _isCorrect == null
-                            ? AppThemeV2.neutral.withValues(alpha: 0.5)
+                            ? AppTheme.neutral.withValues(alpha: 0.5)
                             : (_isCorrect!
-                                  ? AppThemeV2.secondary.withValues(alpha: 0.2)
-                                  : AppThemeV2.error.withValues(alpha: 0.2)),
+                                  ? AppTheme.secondary.withValues(alpha: 0.2)
+                                  : AppTheme.error.withValues(alpha: 0.2)),
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(
                           color: _isCorrect == null
-                              ? AppThemeV2.primary
+                              ? AppTheme.primary
                               : (_isCorrect!
-                                    ? AppThemeV2.secondary
-                                    : AppThemeV2.error),
+                                    ? AppTheme.secondary
+                                    : AppTheme.error),
                           width: 2,
                         ),
                       ),
@@ -95,10 +95,10 @@ class _ClozeTestWidgetState extends State<ClozeTestWidget> {
                         _selectedOption ?? "   ?   ",
                         style: TextStyle(
                           color: _isCorrect == null
-                              ? AppThemeV2.primary
+                              ? AppTheme.primary
                               : (_isCorrect!
-                                    ? AppThemeV2.secondary
-                                    : AppThemeV2.error),
+                                    ? AppTheme.secondary
+                                    : AppTheme.error),
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                         ),

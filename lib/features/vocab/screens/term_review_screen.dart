@@ -11,6 +11,7 @@ import '../../flashcards/widgets/enhanced_flashcard.dart';
 import '../../../data/models/mistake_context.dart';
 import '../../../core/services/fsrs_service.dart';
 import '../../mistakes/repositories/mistake_repository.dart';
+import '../../common/widgets/clay_button.dart';
 
 class TermReviewScreen extends ConsumerStatefulWidget {
   const TermReviewScreen({super.key});
@@ -23,6 +24,7 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
     with SingleTickerProviderStateMixin {
   int _currentIndex = 0;
   bool _isSessionComplete = false;
+  bool _sessionStarted = false;
   late AnimationController _animController;
   late Animation<double> _scaleAnimation;
   final FsrsService _fsrsService = FsrsService();
@@ -69,6 +71,9 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
         data: (terms) {
           if (terms.isEmpty) {
             return _buildEmptyState(language);
+          }
+          if (!_sessionStarted) {
+            return _buildPreview(language, terms.length);
           }
           if (_isSessionComplete) {
             return _buildSummary(language, terms.length);
@@ -162,6 +167,82 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
         },
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, stack) => Center(child: Text(language.loadErrorLabel)),
+      ),
+    );
+  }
+
+  Widget _buildPreview(AppLanguage language, int termCount) {
+    final estimatedMinutes = (termCount * 8 / 60).ceil();
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(32.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.style_outlined,
+              size: 80,
+              color: Theme.of(context).colorScheme.primary.withAlpha(180),
+            ),
+            const SizedBox(height: 24),
+            Text(
+              language.reviewReadyTitle,
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildPreviewChip(
+                  Icons.library_books_outlined,
+                  language.reviewTermsDueLabel(termCount),
+                  Theme.of(context).colorScheme.primary,
+                ),
+                const SizedBox(width: 12),
+                _buildPreviewChip(
+                  Icons.timer_outlined,
+                  language.reviewEstimateLabel(estimatedMinutes),
+                  Colors.orange[700]!,
+                ),
+              ],
+            ),
+            const SizedBox(height: 40),
+            SizedBox(
+              width: 220,
+              height: 52,
+              child: ClayButton(
+                label: language.startReviewButton,
+                onPressed: () => setState(() => _sessionStarted = true),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPreviewChip(IconData icon, String label, Color color) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      decoration: BoxDecoration(
+        color: color.withAlpha(25),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: color.withAlpha(60)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 18, color: color),
+          const SizedBox(width: 6),
+          Text(
+            label,
+            style: TextStyle(
+              color: color,
+              fontWeight: FontWeight.w600,
+              fontSize: 14,
+            ),
+          ),
+        ],
       ),
     );
   }

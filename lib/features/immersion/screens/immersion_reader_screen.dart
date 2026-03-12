@@ -209,18 +209,16 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
     final speed = _charsPerMinute(isRead: false).round();
     final totalChars = _estimatedReadChars(isRead: false);
 
-    final badge =
-        speed > 200
-            ? 'Fast Reader!'
-            : speed > 100
-                ? 'Good Pace'
-                : 'Steady Reader';
-    final badgeColor =
-        speed > 200
-            ? Colors.green
-            : speed > 100
-                ? Colors.blue
-                : Colors.orange;
+    final badge = speed > 200
+        ? 'Fast Reader!'
+        : speed > 100
+        ? 'Good Pace'
+        : 'Steady Reader';
+    final badgeColor = speed > 200
+        ? Colors.green
+        : speed > 100
+        ? Colors.blue
+        : Colors.orange;
 
     if (!mounted) return true;
 
@@ -244,8 +242,7 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
             _SummaryStat(label: 'Characters read', value: '$totalChars'),
             _SummaryStat(
               label: 'Time spent',
-              value:
-                  '${elapsed.inMinutes}m ${elapsed.inSeconds % 60}s',
+              value: '${elapsed.inMinutes}m ${elapsed.inSeconds % 60}s',
             ),
             _SummaryStat(label: 'Speed', value: '$speed chars/min'),
           ],
@@ -749,7 +746,7 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
       case AppLanguage.en:
         return 'Progress: $percent%';
       case AppLanguage.vi:
-        return 'Tien do: $percent%';
+        return 'Tiến độ: $percent%';
       case AppLanguage.ja:
         return '進捗: $percent%';
     }
@@ -1696,12 +1693,63 @@ class _TokenChip extends StatelessWidget {
         ? const Color(0xFFDCFCE7)
         : hasMeaning
         ? const Color(0xFFE0F2FE)
-        : const Color(0xFFF8FAFC);
+        : Colors.transparent;
     final border = isSaved
         ? const Color(0xFF86EFAC)
         : hasMeaning
         ? const Color(0xFFBAE6FD)
-        : const Color(0xFFE2E8F0);
+        : Colors.transparent;
+
+    final child = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 5),
+      decoration: BoxDecoration(
+        color: bg,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: border),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (showFurigana &&
+              token.reading != null &&
+              token.reading!.isNotEmpty)
+            Text(
+              token.reading!,
+              style: const TextStyle(fontSize: 10, color: Color(0xFF64748B)),
+            ),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                token.surface,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: hasMeaning ? FontWeight.w700 : FontWeight.w400,
+                  color: hasMeaning
+                      ? const Color(0xFF0F172A)
+                      : const Color(0xFF475569),
+                  decoration: hasMeaning && !isSaved
+                      ? TextDecoration.underline
+                      : TextDecoration.none,
+                  decorationStyle: TextDecorationStyle.dotted,
+                  decorationColor: const Color(0xFF93C5FD),
+                ),
+              ),
+              if (isSaved) ...[
+                const SizedBox(width: 3),
+                const Icon(
+                  Icons.check_circle_rounded,
+                  size: 12,
+                  color: Color(0xFF16A34A),
+                ),
+              ],
+            ],
+          ),
+        ],
+      ),
+    );
+
+    if (!hasMeaning) return child;
 
     return Material(
       color: Colors.transparent,
@@ -1709,52 +1757,7 @@ class _TokenChip extends StatelessWidget {
         onTap: onTap,
         onLongPress: onLongPress,
         borderRadius: BorderRadius.circular(10),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 5),
-          decoration: BoxDecoration(
-            color: bg,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: border),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (showFurigana &&
-                  token.reading != null &&
-                  token.reading!.isNotEmpty)
-                Text(
-                  token.reading!,
-                  style: const TextStyle(
-                    fontSize: 10,
-                    color: Color(0xFF64748B),
-                  ),
-                ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    token.surface,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: hasMeaning
-                          ? FontWeight.w700
-                          : FontWeight.w500,
-                      color: const Color(0xFF0F172A),
-                    ),
-                  ),
-                  if (isSaved) ...[
-                    const SizedBox(width: 3),
-                    const Icon(
-                      Icons.check_circle_rounded,
-                      size: 12,
-                      color: Color(0xFF16A34A),
-                    ),
-                  ],
-                ],
-              ),
-            ],
-          ),
-        ),
+        child: child,
       ),
     );
   }

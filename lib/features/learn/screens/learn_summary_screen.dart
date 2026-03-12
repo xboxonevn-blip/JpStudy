@@ -2,21 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/services/recovery_pack_service.dart';
 import 'package:jpstudy/core/services/session_storage_provider.dart';
 import 'package:jpstudy/data/daos/achievement_dao.dart';
 import 'package:jpstudy/data/daos/learn_dao.dart';
 import 'package:jpstudy/data/db/database_provider.dart';
+import 'package:jpstudy/features/home/providers/recovery_pack_provider.dart';
 import 'package:jpstudy/features/home/widgets/next_step_suggestions.dart';
 import '../models/achievement.dart';
+import '../models/learn_config.dart';
 import '../models/learn_session.dart';
 import '../services/learn_session_service.dart';
+import '../../me/providers/personal_best_provider.dart';
 import 'learn_screen.dart';
 
 class LearnSummaryScreen extends ConsumerStatefulWidget {
   final LearnSession session;
   final String lessonTitle;
+  final LearnConfig config;
 
-  const LearnSummaryScreen({super.key, required this.session, required this.lessonTitle});
+  const LearnSummaryScreen({
+    super.key,
+    required this.session,
+    required this.lessonTitle,
+    required this.config,
+  });
 
   @override
   ConsumerState<LearnSummaryScreen> createState() => _LearnSummaryScreenState();
@@ -24,6 +34,7 @@ class LearnSummaryScreen extends ConsumerStatefulWidget {
 
 class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
   LearnSession get session => widget.session;
+  bool _isPersonalBest = false;
 
   @override
   void initState() {
@@ -31,7 +42,21 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _showPendingAchievements();
       _clearSavedSession();
+      _checkPersonalBest();
     });
+  }
+
+  Future<void> _checkPersonalBest() async {
+    final db = ref.read(databaseProvider);
+    final isBest = await isNewPersonalBest(
+      db,
+      mode: 'learn',
+      level: session.lessonId.toString(),
+      score: session.correctCount,
+      total: session.totalQuestions,
+    );
+    if (!mounted) return;
+    setState(() => _isPersonalBest = isBest);
   }
 
   Future<void> _showPendingAchievements() async {
@@ -80,6 +105,10 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
   Future<void> _clearSavedSession() async {
     final storage = ref.read(sessionStorageProvider);
     await storage.clearLearnSession(session.lessonId);
+    if (session.lessonId == RecoveryPackService.recoveryLessonId) {
+      await RecoveryPackService.clear();
+      refreshRecoveryPack(ref);
+    }
   }
 
   @override
@@ -101,6 +130,11 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
 
               // Accuracy circle
               _buildAccuracyCircle(context, accuracyPercent, language),
+
+              if (_isPersonalBest) ...[
+                const SizedBox(height: 16),
+                _buildPersonalBestBanner(language),
+              ],
 
               const SizedBox(height: 40),
 
@@ -333,7 +367,9 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
                     .toList();
                 // Remove duplicates
                 final seen = <int>{};
-                final uniqueItems = weakItems.where((item) => seen.add(item.id)).toList();
+                final uniqueItems = weakItems
+                    .where((item) => seen.add(item.id))
+                    .toList();
 
                 if (uniqueItems.isNotEmpty) {
                   Navigator.pushReplacement(
@@ -343,6 +379,9 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
                         items: uniqueItems,
                         lessonId: session.lessonId,
                         lessonTitle: widget.lessonTitle,
+                        config: widget.config.normalized(
+                          maxQuestions: uniqueItems.length,
+                        ),
                       ),
                     ),
                   );
@@ -384,6 +423,45 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildPersonalBestBanner(AppLanguage language) {
+    final label = switch (language) {
+      AppLanguage.en => 'New Personal Best!',
+      AppLanguage.vi => 'Kỷ lục mới!',
+      AppLanguage.ja => '自己ベスト更新！',
+    };
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Color(0xFFFBBF24), Color(0xFFF59E0B)],
+        ),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFFFBBF24).withValues(alpha: 0.4),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text('🏆', style: TextStyle(fontSize: 24)),
+          const SizedBox(width: 10),
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w800,
+              color: Colors.white,
+            ),
+          ),
+        ],
+      ),
     );
   }
 

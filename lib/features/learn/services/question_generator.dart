@@ -19,14 +19,18 @@ class QuestionGenerator {
     required List<QuestionType> enabledTypes,
     int count = 20,
     AppLanguage language = AppLanguage.en,
+    bool shuffleItems = true,
   }) {
     if (items.isEmpty || enabledTypes.isEmpty) return [];
 
     final questions = <Question>[];
-    final shuffledItems = List<VocabItem>.from(items)..shuffle(_random);
+    final candidateItems = List<VocabItem>.from(items);
+    if (shuffleItems) {
+      candidateItems.shuffle(_random);
+    }
 
-    for (int i = 0; i < count && i < shuffledItems.length; i++) {
-      final item = shuffledItems[i];
+    for (int i = 0; i < count && i < candidateItems.length; i++) {
+      final item = candidateItems[i];
       final type = enabledTypes[_random.nextInt(enabledTypes.length)];
 
       final question = _generateQuestion(

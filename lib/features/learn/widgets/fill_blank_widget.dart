@@ -8,6 +8,9 @@ class FillBlankWidget extends StatefulWidget {
   final Question question;
   final bool showResult;
   final bool isCorrect;
+  final bool revealCorrectAnswer;
+  final bool allowHint;
+  final String? initialAnswer;
   final AppLanguage language;
   final Function(String) onSubmit;
 
@@ -16,6 +19,9 @@ class FillBlankWidget extends StatefulWidget {
     required this.question,
     this.showResult = false,
     this.isCorrect = false,
+    this.revealCorrectAnswer = true,
+    this.allowHint = true,
+    this.initialAnswer,
     required this.language,
     required this.onSubmit,
   });
@@ -28,6 +34,22 @@ class _FillBlankWidgetState extends State<FillBlankWidget> {
   final _controller = TextEditingController();
   final _focusNode = FocusNode();
   bool _showHint = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _syncController();
+  }
+
+  @override
+  void didUpdateWidget(covariant FillBlankWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.question.id != widget.question.id ||
+        oldWidget.initialAnswer != widget.initialAnswer) {
+      _showHint = false;
+      _syncController();
+    }
+  }
 
   @override
   void dispose() {
@@ -126,7 +148,9 @@ class _FillBlankWidgetState extends State<FillBlankWidget> {
         const SizedBox(height: 16),
 
         // Hint button
-        if (!widget.showResult && widget.question.hint != null)
+        if (!widget.showResult &&
+            widget.allowHint &&
+            widget.question.hint != null)
           TextButton.icon(
             onPressed: () {
               setState(() {
@@ -142,7 +166,9 @@ class _FillBlankWidgetState extends State<FillBlankWidget> {
           ),
 
         // Show correct answer if wrong
-        if (widget.showResult && !widget.isCorrect) ...[
+        if (widget.showResult &&
+            !widget.isCorrect &&
+            widget.revealCorrectAnswer) ...[
           const SizedBox(height: 16),
           Container(
             padding: const EdgeInsets.all(16),
@@ -190,5 +216,12 @@ class _FillBlankWidgetState extends State<FillBlankWidget> {
           ),
       ],
     );
+  }
+
+  void _syncController() {
+    final nextText = widget.initialAnswer ?? '';
+    _controller
+      ..text = nextText
+      ..selection = TextSelection.collapsed(offset: nextText.length);
   }
 }

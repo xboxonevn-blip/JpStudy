@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../theme/app_theme_v2.dart';
+import '../../../app/theme/app_theme.dart';
 
 enum ClayButtonStyle { primary, secondary, tertiary, neutral, error }
 
@@ -39,22 +39,22 @@ class _ClayButtonState extends State<ClayButton> {
   Color get _baseColor {
     switch (widget.style) {
       case ClayButtonStyle.primary:
-        return AppThemeV2.primary;
+        return AppTheme.primary;
       case ClayButtonStyle.secondary:
-        return AppThemeV2.secondary;
+        return AppTheme.secondary;
       case ClayButtonStyle.tertiary:
-        return AppThemeV2.tertiary;
+        return AppTheme.tertiary;
       case ClayButtonStyle.neutral:
         return Colors.white;
       case ClayButtonStyle.error:
-        return AppThemeV2.error;
+        return AppTheme.error;
     }
   }
 
   Color get _textColor {
     switch (widget.style) {
       case ClayButtonStyle.neutral:
-        return AppThemeV2.textSub;
+        return AppTheme.textSub;
       default:
         return Colors.white;
     }
@@ -63,11 +63,11 @@ class _ClayButtonState extends State<ClayButton> {
   @override
   Widget build(BuildContext context) {
     final baseColor = _baseColor;
-    final depthColor = AppThemeV2.getDepthColor(
-      baseColor == Colors.white ? AppThemeV2.neutral : baseColor,
+    final depthColor = AppTheme.getDepthColor(
+      baseColor == Colors.white ? AppTheme.neutral : baseColor,
     );
     final borderColor = baseColor == Colors.white
-        ? AppThemeV2.neutral
+        ? AppTheme.neutral
         : depthColor;
 
     // When pressed, we translate Y by 4px and remove shadow to simulate depression
@@ -96,7 +96,11 @@ class _ClayButtonState extends State<ClayButton> {
       content = Center(child: content);
     }
 
-    return GestureDetector(
+    return Semantics(
+      button: true,
+      enabled: widget.onPressed != null,
+      label: widget.label,
+      child: GestureDetector(
       onTapDown: (_) => setState(() => _isPressed = true),
       onTapUp: (_) => setState(() => _isPressed = false),
       onTapCancel: () => setState(() => _isPressed = false),
@@ -130,6 +134,7 @@ class _ClayButtonState extends State<ClayButton> {
               : content,
         ),
       ),
+    ),
     );
   }
 }

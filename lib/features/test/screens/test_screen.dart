@@ -6,22 +6,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
+import '../../../core/services/recovery_pack_service.dart';
+import '../../../core/services/session_storage.dart';
+import '../../../core/services/session_storage_provider.dart';
 import '../../../data/models/vocab_item.dart';
+import '../../../data/models/mistake_context.dart';
+import '../../../data/repositories/lesson_repository.dart';
+import '../../home/providers/recovery_pack_provider.dart';
 import '../../learn/models/question.dart';
 import '../../learn/models/question_type.dart';
 import '../../learn/services/question_generator.dart';
 import '../../learn/widgets/fill_blank_widget.dart';
 import '../../learn/widgets/multiple_choice_widget.dart';
 import '../../learn/widgets/true_false_widget.dart';
-import '../../../data/repositories/lesson_repository.dart';
-import '../../mistakes/repositories/mistake_repository.dart';
-import '../../../data/models/mistake_context.dart';
 import '../models/test_config.dart';
 import '../models/test_session.dart';
 import '../providers/test_providers.dart';
+import '../../mistakes/repositories/mistake_repository.dart';
 import 'test_results_screen.dart';
-import '../../../core/services/session_storage_provider.dart';
-import '../../../core/services/session_storage.dart';
 
 class TestScreen extends ConsumerStatefulWidget {
   final List<VocabItem> items;
@@ -87,11 +89,8 @@ class _TestScreenState extends ConsumerState<TestScreen> {
       enabledTypes: widget.config.enabledTypes,
       count: widget.config.questionCount,
       language: language,
+      shuffleItems: widget.config.shuffleQuestions,
     );
-
-    if (widget.config.shuffleQuestions) {
-      questions.shuffle();
-    }
 
     _adaptiveAdded = 0;
     _adaptiveRepeatCount.clear();
@@ -358,12 +357,15 @@ class _TestScreenState extends ConsumerState<TestScreen> {
   }
 
   Widget _buildQuestionContent(Question question, AppLanguage language) {
+    final revealCorrectAnswer =
+        _showResult && (_isCorrect || widget.config.showCorrectAfterWrong);
     switch (question.type) {
       case QuestionType.multipleChoice:
         return MultipleChoiceWidget(
           question: question,
           selectedAnswer: _selectedAnswer,
-          showResult: _showResult && widget.config.showCorrectAfterWrong,
+          showResult: _showResult,
+          revealCorrectAnswer: revealCorrectAnswer,
           language: language,
           onSelect: _handleMultipleChoiceSelect,
         );
@@ -372,7 +374,8 @@ class _TestScreenState extends ConsumerState<TestScreen> {
         return TrueFalseWidget(
           question: question,
           selectedAnswer: _selectedTrueFalse,
-          showResult: _showResult && widget.config.showCorrectAfterWrong,
+          showResult: _showResult,
+          revealCorrectAnswer: revealCorrectAnswer,
           language: language,
           onSelect: _handleTrueFalseSelect,
         );
@@ -380,8 +383,10 @@ class _TestScreenState extends ConsumerState<TestScreen> {
       case QuestionType.fillBlank:
         return FillBlankWidget(
           question: question,
-          showResult: _showResult && widget.config.showCorrectAfterWrong,
+          showResult: _showResult,
           isCorrect: _isCorrect,
+          revealCorrectAnswer: revealCorrectAnswer,
+          initialAnswer: _selectedAnswer,
           language: language,
           onSubmit: _handleFillBlankSubmit,
         );
@@ -455,6 +460,7 @@ class _TestScreenState extends ConsumerState<TestScreen> {
   void _handleFillBlankSubmit(String answer) {
     _session.submitAnswer(answer);
     setState(() {
+      _selectedAnswer = answer;
       _showResult = true;
       _isCorrect = _session.currentQuestion!.checkAnswer(answer);
     });
@@ -607,6 +613,17 @@ class _TestScreenState extends ConsumerState<TestScreen> {
         );
       }
     }
+
+    final weakTermIds = _session.weakTermIds.toSet().toList(growable: false);
+    if (weakTermIds.isEmpty) {
+      await RecoveryPackService.clear();
+    } else {
+      await RecoveryPackService.saveExamPack(
+        lessonTitle: widget.lessonTitle,
+        termIds: weakTermIds,
+      );
+    }
+    refreshRecoveryPack(ref);
 
     // Save to database
     await ref.read(testHistoryServiceProvider).saveTest(_session);

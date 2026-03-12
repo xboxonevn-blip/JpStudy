@@ -8,6 +8,7 @@ class MultipleChoiceWidget extends StatelessWidget {
   final Question question;
   final String? selectedAnswer;
   final bool showResult;
+  final bool revealCorrectAnswer;
   final AppLanguage language;
   final Function(String) onSelect;
 
@@ -16,6 +17,7 @@ class MultipleChoiceWidget extends StatelessWidget {
     required this.question,
     this.selectedAnswer,
     this.showResult = false,
+    this.revealCorrectAnswer = false,
     required this.language,
     required this.onSelect,
   });
@@ -68,7 +70,8 @@ class MultipleChoiceWidget extends StatelessWidget {
             child: _OptionButton(
               text: option,
               isSelected: selectedAnswer == option,
-              isCorrect: showResult && option == question.correctAnswer,
+              isCorrect:
+                  revealCorrectAnswer && option == question.correctAnswer,
               isWrong:
                   showResult &&
                   selectedAnswer == option &&

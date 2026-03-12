@@ -5,7 +5,7 @@ import '../../../core/language_provider.dart';
 import '../../../features/grammar/grammar_providers.dart';
 import '../../../features/mistakes/repositories/mistake_repository.dart';
 import '../../../data/db/app_database.dart';
-import '../../../theme/app_theme_v2.dart';
+import '../../../app/theme/app_theme.dart';
 import '../../common/widgets/clay_card.dart';
 import '../models/grammar_point_data.dart';
 import 'ghost_practice_screen.dart';
@@ -20,7 +20,7 @@ class GhostReviewScreen extends ConsumerWidget {
     final mistakesAsync = ref.watch(mistakesByTypeProvider('grammar'));
 
     return Scaffold(
-      backgroundColor: AppThemeV2.surface,
+      backgroundColor: AppTheme.surface,
       appBar: AppBar(
         title: Text(
           language.ghostReviewsLabel,
@@ -29,7 +29,7 @@ class GhostReviewScreen extends ConsumerWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        foregroundColor: AppThemeV2.textMain,
+        foregroundColor: AppTheme.textMain,
         actions: [
           IconButton(
             icon: const Icon(Icons.info_outline),
@@ -56,7 +56,7 @@ class GhostReviewScreen extends ConsumerWidget {
                   const Icon(
                     Icons.check_circle_outline,
                     size: 80,
-                    color: AppThemeV2.primary,
+                    color: AppTheme.primary,
                   ),
                   const SizedBox(height: 16),
                   Text(
@@ -64,14 +64,14 @@ class GhostReviewScreen extends ConsumerWidget {
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: AppThemeV2.textMain,
+                      color: AppTheme.textMain,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     language.ghostReviewEmptySubtitle,
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: AppThemeV2.textSub),
+                    style: TextStyle(color: AppTheme.textSub),
                   ),
                 ],
               ),
@@ -108,7 +108,7 @@ class GhostReviewScreen extends ConsumerWidget {
           ? Container(
               margin: const EdgeInsets.only(bottom: 16),
               child: FloatingActionButton.extended(
-                backgroundColor: AppThemeV2.primary,
+                backgroundColor: AppTheme.primary,
                 foregroundColor: Colors.white,
                 onPressed: () {
                   Navigator.of(context).push(
@@ -198,7 +198,7 @@ class _GhostClayCardState extends State<_GhostClayCard> {
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: AppThemeV2.textMain,
+                        color: AppTheme.textMain,
                       ),
                     ),
                     const SizedBox(height: 4),
@@ -206,7 +206,7 @@ class _GhostClayCardState extends State<_GhostClayCard> {
                       title,
                       style: const TextStyle(
                         fontSize: 14,
-                        color: AppThemeV2.textSub,
+                        color: AppTheme.textSub,
                       ),
                     ),
                   ],
@@ -216,7 +216,7 @@ class _GhostClayCardState extends State<_GhostClayCard> {
                 _isExpanded
                     ? Icons.keyboard_arrow_up_rounded
                     : Icons.keyboard_arrow_down_rounded,
-                color: AppThemeV2.textSub,
+                color: AppTheme.textSub,
               ),
             ],
           ),
@@ -231,14 +231,14 @@ class _GhostClayCardState extends State<_GhostClayCard> {
               connection,
               style: const TextStyle(
                 fontFamily: 'Monospace',
-                color: AppThemeV2.textMain,
+                color: AppTheme.textMain,
               ),
             ),
             const SizedBox(height: 16),
             _buildLabel(language.grammarExplanationLabel),
             Text(
               explanation,
-              style: const TextStyle(color: AppThemeV2.textMain, height: 1.4),
+              style: const TextStyle(color: AppTheme.textMain, height: 1.4),
             ),
             if (widget.mistake != null) ...[
               const SizedBox(height: 16),
@@ -253,7 +253,7 @@ class _GhostClayCardState extends State<_GhostClayCard> {
                 child: Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: AppThemeV2.surface,
+                    color: AppTheme.surface,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Column(
@@ -275,7 +275,7 @@ class _GhostClayCardState extends State<_GhostClayCard> {
                         },
                         style: TextStyle(
                           fontSize: 13,
-                          color: AppThemeV2.textSub,
+                          color: AppTheme.textSub,
                         ),
                       ),
                     ],
@@ -297,7 +297,7 @@ class _GhostClayCardState extends State<_GhostClayCard> {
         style: const TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.bold,
-          color: AppThemeV2.primary,
+          color: AppTheme.primary,
           letterSpacing: 0.5,
         ),
       ),
@@ -323,7 +323,7 @@ class _GhostClayCardState extends State<_GhostClayCard> {
     if (rows.isEmpty) {
       return Text(
         language.mistakeContextEmptyLabel,
-        style: const TextStyle(color: AppThemeV2.textSub),
+        style: const TextStyle(color: AppTheme.textSub),
       );
     }
 
@@ -349,14 +349,14 @@ class _GhostClayCardState extends State<_GhostClayCard> {
             style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              color: AppThemeV2.textSub,
+              color: AppTheme.textSub,
             ),
           ),
         ),
         Expanded(
           child: Text(
             value,
-            style: const TextStyle(fontSize: 12, color: AppThemeV2.textMain),
+            style: const TextStyle(fontSize: 12, color: AppTheme.textMain),
           ),
         ),
       ],

@@ -2,6 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
+  // Component palette (used by ClayButton, ClayCard, grammar widgets, etc.)
+  static const Color primary = Color(0xFF5B4DFF);
+  static const Color secondary = Color(0xFF58CC02);
+  static const Color tertiary = Color(0xFFFF9600);
+  static const Color error = Color(0xFFFF4B4B);
+  static const Color neutral = Color(0xFFE5E7EB);
+  static const Color surface = Color(0xFFF5F7FB);
+  static const Color textMain = Color(0xFF1F2937);
+  static const Color textSub = Color(0xFF6B7280);
+
+  static Color getDepthColor(Color color) {
+    final hsl = HSLColor.fromColor(color);
+    return hsl.withLightness((hsl.lightness - 0.15).clamp(0.0, 1.0)).toColor();
+  }
+
   static ThemeData light() {
     const appBackground = Color(0xFFF7F2E8); // Warm ivory
     const primaryColor = Color(0xFF1E3A5F); // Aizome indigo

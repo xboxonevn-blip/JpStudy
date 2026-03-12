@@ -5,6 +5,7 @@ import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
 import '../../../data/models/vocab_item.dart';
 import '../../../data/models/kanji_item.dart';
+import '../../learn/models/learn_config.dart';
 import '../../learn/models/question_type.dart';
 import '../../learn/screens/learn_screen.dart';
 import 'handwriting_practice_screen.dart';
@@ -50,7 +51,10 @@ class WriteModeScreen extends ConsumerWidget {
         lessonId: lessonId,
         lessonTitle: lessonTitle,
         items: activeVocabItems,
-        enabledTypes: const [QuestionType.fillBlank],
+        config: LearnConfig(
+          questionCount: activeVocabItems.length,
+          enabledTypes: const [QuestionType.fillBlank],
+        ).normalized(maxQuestions: activeVocabItems.length),
       );
     }
 
@@ -88,7 +92,10 @@ class WriteModeScreen extends ConsumerWidget {
                     lessonId: lessonId,
                     lessonTitle: lessonTitle,
                     items: activeVocabItems,
-                    enabledTypes: const [QuestionType.fillBlank],
+                    config: LearnConfig(
+                      questionCount: activeVocabItems.length,
+                      enabledTypes: const [QuestionType.fillBlank],
+                    ).normalized(maxQuestions: activeVocabItems.length),
                   ),
                 ),
               );

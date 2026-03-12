@@ -8,6 +8,7 @@ class TrueFalseWidget extends StatelessWidget {
   final Question question;
   final bool? selectedAnswer;
   final bool showResult;
+  final bool revealCorrectAnswer;
   final AppLanguage language;
   final Function(bool) onSelect;
 
@@ -16,14 +17,17 @@ class TrueFalseWidget extends StatelessWidget {
     required this.question,
     this.selectedAnswer,
     this.showResult = false,
+    this.revealCorrectAnswer = false,
     required this.language,
     required this.onSelect,
   });
 
   @override
   Widget build(BuildContext context) {
-    final isCorrectTrue = question.isStatementTrue == true;
-    final isCorrectFalse = question.isStatementTrue == false;
+    final isCorrectTrue =
+        revealCorrectAnswer && question.isStatementTrue == true;
+    final isCorrectFalse =
+        revealCorrectAnswer && question.isStatementTrue == false;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,

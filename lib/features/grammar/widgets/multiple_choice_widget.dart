@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jpstudy/core/app_language.dart';
-import 'package:jpstudy/theme/app_theme_v2.dart';
+import 'package:jpstudy/app/theme/app_theme.dart';
 import '../../common/widgets/clay_button.dart';
 
 class MultipleChoiceWidget extends StatefulWidget {
@@ -54,19 +54,19 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
             borderRadius: BorderRadius.circular(24),
             boxShadow: [
               BoxShadow(
-                color: AppThemeV2.textMain.withValues(alpha: 0.1),
+                color: AppTheme.textMain.withValues(alpha: 0.1),
                 blurRadius: 12,
                 offset: const Offset(0, 4),
               ),
             ],
-            border: Border.all(color: AppThemeV2.neutral, width: 2),
+            border: Border.all(color: AppTheme.neutral, width: 2),
           ),
           child: Text(
             widget.question,
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: AppThemeV2.textMain,
+              color: AppTheme.textMain,
             ),
             textAlign: TextAlign.center,
           ),

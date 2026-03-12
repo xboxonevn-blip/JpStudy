@@ -48,7 +48,7 @@ class TestModeIntegration extends ConsumerWidget {
         }
 
         // Convert to VocabItem
-        final vocabItems = _convertToVocabItems(terms);
+        final vocabItems = _convertToVocabItems(terms, level.shortLabel);
 
         final storage = ref.read(sessionStorageProvider);
         return FutureBuilder<TestSessionSnapshot?>(
@@ -109,7 +109,10 @@ class TestModeIntegration extends ConsumerWidget {
     );
   }
 
-  List<VocabItem> _convertToVocabItems(List<UserLessonTermData> terms) {
+  List<VocabItem> _convertToVocabItems(
+    List<UserLessonTermData> terms,
+    String levelLabel,
+  ) {
     return terms
         .map(
           (term) => VocabItem(
@@ -118,7 +121,7 @@ class TestModeIntegration extends ConsumerWidget {
             reading: term.reading,
             meaning: term.definition,
             meaningEn: term.definitionEn,
-            level: 'N5', // Default level
+            level: levelLabel,
           ),
         )
         .toList();

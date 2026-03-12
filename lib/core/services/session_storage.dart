@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../data/models/vocab_item.dart';
+import '../../features/learn/models/learn_config.dart';
 import '../../features/learn/models/question.dart';
 import '../../features/learn/models/question_type.dart';
 import '../../features/learn/models/learn_session.dart';
@@ -71,9 +72,10 @@ class LearnSessionSnapshot {
     required this.currentQuestionIndex,
     required this.questions,
     required this.results,
-    required this.enabledTypes,
+    required this.config,
     required this.contextHintsShown,
     required this.contextHintsRequeued,
+    required this.wrongRequeued,
     required this.lastSavedAt,
   });
 
@@ -84,9 +86,10 @@ class LearnSessionSnapshot {
   final int currentQuestionIndex;
   final List<Question> questions;
   final List<QuestionResult> results;
-  final List<QuestionType> enabledTypes;
+  final LearnConfig config;
   final Set<String> contextHintsShown;
   final Set<String> contextHintsRequeued;
+  final Set<String> wrongRequeued;
   final DateTime lastSavedAt;
 
   int get totalQuestions => questions.length;
@@ -94,7 +97,7 @@ class LearnSessionSnapshot {
 
   Map<String, dynamic> toJson() {
     return {
-      'version': 1,
+      'version': 2,
       'lessonId': lessonId,
       'sessionId': sessionId,
       'startedAt': startedAt.toIso8601String(),
@@ -102,14 +105,33 @@ class LearnSessionSnapshot {
       'currentQuestionIndex': currentQuestionIndex,
       'questions': questions.map(QuestionSerializer.toJson).toList(),
       'results': results.map(QuestionResultSerializer.toJson).toList(),
-      'enabledTypes': enabledTypes.map((e) => e.name).toList(),
+      'config': config.toJson(),
       'contextHintsShown': contextHintsShown.toList(),
       'contextHintsRequeued': contextHintsRequeued.toList(),
+      'wrongRequeued': wrongRequeued.toList(),
       'lastSavedAt': lastSavedAt.toIso8601String(),
     };
   }
 
   static LearnSessionSnapshot fromJson(Map<String, dynamic> json) {
+    final legacyEnabledTypes =
+        (json['enabledTypes'] as List<dynamic>? ?? const [])
+            .map((value) => value.toString())
+            .map(
+              (value) => QuestionType.values.firstWhere(
+                (type) => type.name == value,
+                orElse: () => QuestionType.multipleChoice,
+              ),
+            )
+            .toList();
+    final rawConfig = json['config'];
+    final parsedConfig = rawConfig is Map
+        ? LearnConfig.fromJson(Map<String, dynamic>.from(rawConfig))
+        : LearnConfig(
+            questionCount:
+                (json['questions'] as List<dynamic>? ?? const []).length,
+            enabledTypes: legacyEnabledTypes,
+          );
     return LearnSessionSnapshot(
       lessonId: json['lessonId'] as int,
       sessionId: json['sessionId'] as String,
@@ -126,15 +148,9 @@ class LearnSessionSnapshot {
           .map((e) => QuestionResultSerializer.fromJson(e))
           .whereType<QuestionResult>()
           .toList(),
-      enabledTypes: (json['enabledTypes'] as List<dynamic>? ?? const [])
-          .map((e) => e.toString())
-          .map(
-            (value) => QuestionType.values.firstWhere(
-              (t) => t.name == value,
-              orElse: () => QuestionType.multipleChoice,
-            ),
-          )
-          .toList(),
+      config: parsedConfig.normalized(
+        maxQuestions: (json['questions'] as List<dynamic>? ?? const []).length,
+      ),
       contextHintsShown:
           (json['contextHintsShown'] as List<dynamic>? ?? const [])
               .map((e) => e.toString())
@@ -143,6 +159,9 @@ class LearnSessionSnapshot {
           (json['contextHintsRequeued'] as List<dynamic>? ?? const [])
               .map((e) => e.toString())
               .toSet(),
+      wrongRequeued: (json['wrongRequeued'] as List<dynamic>? ?? const [])
+          .map((e) => e.toString())
+          .toSet(),
       lastSavedAt: DateTime.parse(json['lastSavedAt'] as String),
     );
   }

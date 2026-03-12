@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
-import 'package:jpstudy/theme/app_theme_v2.dart';
+import 'package:jpstudy/app/theme/app_theme.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/study_goal.dart';
 import 'package:jpstudy/core/study_level.dart';
+import 'package:jpstudy/data/models/vocab_item.dart';
+import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/common/widgets/clay_button.dart';
 import 'package:jpstudy/features/common/widgets/japanese_background.dart';
 
@@ -70,7 +72,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                       onNext: () => _goToPage(2),
                       onBack: () => _goToPage(0),
                     ),
-                    _ReadyPage(
+                    _FirstWinPage(
                       language: language,
                       level: _selectedLevel,
                       goal: _selectedGoal,
@@ -88,10 +90,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   }
 }
 
-// ─── Progress Dots ────────────────────────────────────────────────────────────
-
 class _ProgressDots extends StatelessWidget {
   const _ProgressDots({required this.current, required this.total});
+
   final int current;
   final int total;
 
@@ -107,7 +108,7 @@ class _ProgressDots extends StatelessWidget {
           width: active ? 24 : 8,
           height: 8,
           decoration: BoxDecoration(
-            color: active ? AppThemeV2.primary : AppThemeV2.neutral,
+            color: active ? AppTheme.primary : AppTheme.neutral,
             borderRadius: BorderRadius.circular(4),
           ),
         );
@@ -116,10 +117,9 @@ class _ProgressDots extends StatelessWidget {
   }
 }
 
-// ─── Page 1: Level Selection ──────────────────────────────────────────────────
-
 class _LevelPage extends StatelessWidget {
   const _LevelPage({required this.language, required this.onSelected});
+
   final AppLanguage language;
   final ValueChanged<StudyLevel> onSelected;
 
@@ -134,16 +134,13 @@ class _LevelPage extends StatelessWidget {
           style: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.w800,
-            color: AppThemeV2.textMain,
+            color: AppTheme.textMain,
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
         Text(
           language.onboardingWelcomeSubtitle,
-          style: const TextStyle(
-            fontSize: 15,
-            color: AppThemeV2.textSub,
-          ),
+          style: const TextStyle(fontSize: 15, color: AppTheme.textSub),
         ),
         const SizedBox(height: AppSpacing.xxl),
         Text(
@@ -151,7 +148,7 @@ class _LevelPage extends StatelessWidget {
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w700,
-            color: AppThemeV2.textMain,
+            color: AppTheme.textMain,
           ),
         ),
         const SizedBox(height: AppSpacing.md),
@@ -173,6 +170,7 @@ class _OnboardingLevelCard extends StatelessWidget {
     required this.language,
     required this.onSelected,
   });
+
   final StudyLevel level;
   final AppLanguage language;
   final ValueChanged<StudyLevel> onSelected;
@@ -194,7 +192,7 @@ class _OnboardingLevelCard extends StatelessWidget {
             color: const Color(0xFFEFF2FF),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: const Icon(Icons.folder_open, color: AppThemeV2.primary),
+          child: const Icon(Icons.folder_open, color: AppTheme.primary),
         ),
         title: Text(
           level.shortLabel,
@@ -202,7 +200,7 @@ class _OnboardingLevelCard extends StatelessWidget {
         ),
         subtitle: Text(
           level.description(language),
-          style: const TextStyle(color: AppThemeV2.textSub),
+          style: const TextStyle(color: AppTheme.textSub),
         ),
         trailing: const Icon(Icons.chevron_right),
         onTap: () => onSelected(level),
@@ -210,8 +208,6 @@ class _OnboardingLevelCard extends StatelessWidget {
     );
   }
 }
-
-// ─── Page 2: Goal Selection ───────────────────────────────────────────────────
 
 class _GoalPage extends StatelessWidget {
   const _GoalPage({
@@ -221,6 +217,7 @@ class _GoalPage extends StatelessWidget {
     required this.onNext,
     required this.onBack,
   });
+
   final AppLanguage language;
   final StudyGoal? selected;
   final ValueChanged<StudyGoal> onSelected;
@@ -241,7 +238,7 @@ class _GoalPage extends StatelessWidget {
                 child: const Icon(
                   Icons.arrow_back_ios_new,
                   size: 20,
-                  color: AppThemeV2.textSub,
+                  color: AppTheme.textSub,
                 ),
               ),
               const SizedBox(width: AppSpacing.sm),
@@ -250,7 +247,7 @@ class _GoalPage extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
-                  color: AppThemeV2.textMain,
+                  color: AppTheme.textMain,
                 ),
               ),
             ],
@@ -266,6 +263,7 @@ class _GoalPage extends StatelessWidget {
           ),
           const Spacer(),
           ClayButton(
+            key: const ValueKey('onboarding_goal_next'),
             label: language.onboardingNextButton,
             style: ClayButtonStyle.primary,
             isExpanded: true,
@@ -285,6 +283,7 @@ class _GoalCard extends StatelessWidget {
     required this.isSelected,
     required this.onTap,
   });
+
   final StudyGoal goal;
   final AppLanguage language;
   final bool isSelected;
@@ -300,11 +299,11 @@ class _GoalCard extends StatelessWidget {
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
           color: isSelected
-              ? AppThemeV2.primary.withValues(alpha: 0.08)
+              ? AppTheme.primary.withValues(alpha: 0.08)
               : Colors.white,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: isSelected ? AppThemeV2.primary : const Color(0xFFE8ECF5),
+            color: isSelected ? AppTheme.primary : const Color(0xFFE8ECF5),
             width: isSelected ? 2 : 1,
           ),
         ),
@@ -315,15 +314,13 @@ class _GoalCard extends StatelessWidget {
               height: 44,
               decoration: BoxDecoration(
                 color: isSelected
-                    ? AppThemeV2.primary.withValues(alpha: 0.15)
+                    ? AppTheme.primary.withValues(alpha: 0.15)
                     : const Color(0xFFEFF2FF),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(
                 goal.icon,
-                color: isSelected
-                    ? AppThemeV2.primary
-                    : const Color(0xFF4255FF),
+                color: isSelected ? AppTheme.primary : const Color(0xFF4255FF),
               ),
             ),
             const SizedBox(width: AppSpacing.md),
@@ -335,23 +332,21 @@ class _GoalCard extends StatelessWidget {
                     goal.label(language),
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      color: isSelected
-                          ? AppThemeV2.primary
-                          : AppThemeV2.textMain,
+                      color: isSelected ? AppTheme.primary : AppTheme.textMain,
                     ),
                   ),
                   Text(
                     goal.description(language),
                     style: const TextStyle(
                       fontSize: 12,
-                      color: AppThemeV2.textSub,
+                      color: AppTheme.textSub,
                     ),
                   ),
                 ],
               ),
             ),
             if (isSelected)
-              const Icon(Icons.check_circle, color: AppThemeV2.primary),
+              const Icon(Icons.check_circle, color: AppTheme.primary),
           ],
         ),
       ),
@@ -359,72 +354,548 @@ class _GoalCard extends StatelessWidget {
   }
 }
 
-// ─── Page 3: Ready ────────────────────────────────────────────────────────────
-
-class _ReadyPage extends StatelessWidget {
-  const _ReadyPage({
+class _FirstWinPage extends ConsumerStatefulWidget {
+  const _FirstWinPage({
     required this.language,
     required this.level,
     required this.goal,
     required this.onStart,
   });
+
   final AppLanguage language;
   final StudyLevel? level;
   final StudyGoal? goal;
   final VoidCallback onStart;
 
   @override
+  ConsumerState<_FirstWinPage> createState() => _FirstWinPageState();
+}
+
+class _FirstWinPageState extends ConsumerState<_FirstWinPage> {
+  int? _selectedOption;
+  bool _answered = false;
+  bool _isCorrect = false;
+  late Future<List<VocabItem>> _previewFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _previewFuture = _loadPreviewItems();
+  }
+
+  @override
+  void didUpdateWidget(covariant _FirstWinPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.level != widget.level || oldWidget.goal != widget.goal) {
+      _selectedOption = null;
+      _answered = false;
+      _isCorrect = false;
+      _previewFuture = _loadPreviewItems();
+    }
+  }
+
+  Future<List<VocabItem>> _loadPreviewItems() async {
+    final level = widget.level;
+    if (level == null) {
+      return const [];
+    }
+    return ref.read(lessonRepositoryProvider).getVocabByLevel(level.shortLabel);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final level = widget.level;
+    final goal = widget.goal;
+
+    if (level == null || goal == null) {
+      return const SizedBox.shrink();
+    }
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+      child: LayoutBuilder(
+        builder: (context, constraints) => FutureBuilder<List<VocabItem>>(
+          future: _previewFuture,
+          builder: (context, snapshot) {
+            final preview = _buildPreviewItems(snapshot.data, widget.language);
+            final showLoadingHint =
+                snapshot.connectionState != ConnectionState.done &&
+                !(snapshot.hasData && (snapshot.data?.isNotEmpty ?? false));
+
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: AppSpacing.lg),
+                    Text(
+                      _firstWinTitle(widget.language),
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w800,
+                        color: AppTheme.textMain,
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.sm),
+                    Text(
+                      _firstWinSubtitle(widget.language),
+                      style: const TextStyle(
+                        fontSize: 15,
+                        color: AppTheme.textSub,
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.lg),
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(AppSpacing.md),
+                      decoration: BoxDecoration(
+                        color: AppTheme.primary.withValues(alpha: 0.06),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Text(
+                        '${level.shortLabel} | ${goal.label(widget.language)}',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w700,
+                          color: AppTheme.primary,
+                        ),
+                      ),
+                    ),
+                    if (showLoadingHint) ...[
+                      const SizedBox(height: AppSpacing.sm),
+                      Text(
+                        _loadingHint(widget.language),
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: AppTheme.textSub,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                    const SizedBox(height: AppSpacing.lg),
+                    _PreviewQuestionCard(
+                      language: widget.language,
+                      target: preview.target,
+                      options: preview.options,
+                      selectedOption: _selectedOption,
+                      answered: _answered,
+                      isCorrect: _isCorrect,
+                      onSelect: (index) {
+                        if (_answered) {
+                          return;
+                        }
+                        setState(() {
+                          _selectedOption = index;
+                          _answered = true;
+                          _isCorrect = index == 0;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: AppSpacing.lg),
+                    _SessionPreview(language: widget.language),
+                    const SizedBox(height: AppSpacing.lg),
+                    if (!_answered)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+                        child: Text(
+                          _unlockHint(widget.language),
+                          key: const ValueKey('onboarding_first_win_hint'),
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: AppTheme.textSub,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ClayButton(
+                      key: const ValueKey('onboarding_first_win_start'),
+                      label: widget.language.onboardingStartButton,
+                      style: ClayButtonStyle.primary,
+                      isExpanded: true,
+                      icon: Icons.play_arrow_rounded,
+                      onPressed: _answered ? widget.onStart : null,
+                    ),
+                    const SizedBox(height: AppSpacing.lg),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  ({VocabItem target, List<String> options}) _buildPreviewItems(
+    List<VocabItem>? items,
+    AppLanguage language,
+  ) {
+    const fallbackItems = <VocabItem>[
+      VocabItem(
+        id: -1,
+        term: '\u65e5\u672c',
+        reading: '\u306b\u307b\u3093',
+        meaning: 'Nhật Bản',
+        meaningEn: 'Japan',
+        level: 'N5',
+      ),
+      VocabItem(
+        id: -2,
+        term: '\u5b66\u751f',
+        reading: '\u304c\u304f\u305b\u3044',
+        meaning: 'Học sinh',
+        meaningEn: 'Student',
+        level: 'N5',
+      ),
+      VocabItem(
+        id: -3,
+        term: '\u6c34',
+        reading: '\u307f\u305a',
+        meaning: 'Nước',
+        meaningEn: 'Water',
+        level: 'N5',
+      ),
+    ];
+
+    final source = items == null || items.length < 3
+        ? fallbackItems
+        : items.take(3).toList(growable: false);
+    final target = source.first;
+    final options = <String>[
+      target.displayMeaning(language),
+      ...source.skip(1).map((item) => item.displayMeaning(language)),
+    ];
+    return (target: target, options: options);
+  }
+
+  String _firstWinTitle(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Get one quick win first';
+      case AppLanguage.vi:
+        return 'Kiếm một chiến thắng nhỏ trước đã';
+      case AppLanguage.ja:
+        return 'Get one quick win first';
+    }
+  }
+
+  String _firstWinSubtitle(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Try one tiny question now, then jump into your first guided session.';
+      case AppLanguage.vi:
+        return 'Thử một câu hỏi nhỏ ngay bây giờ, rồi vào phiên học đầu tiên có hướng dẫn.';
+      case AppLanguage.ja:
+        return 'Try one tiny question now, then jump into your first guided session.';
+    }
+  }
+
+  String _loadingHint(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Preparing a sample from your level...';
+      case AppLanguage.vi:
+        return 'Đang chuẩn bị một ví dụ theo trình độ của bạn...';
+      case AppLanguage.ja:
+        return 'Preparing a sample from your level...';
+    }
+  }
+
+  String _unlockHint(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Answer this one preview question to unlock your first session.';
+      case AppLanguage.vi:
+        return 'Trả lời câu hỏi xem trước này để mở khóa phiên học đầu tiên.';
+      case AppLanguage.ja:
+        return 'Answer this one preview question to unlock your first session.';
+    }
+  }
+}
+
+class _PreviewQuestionCard extends StatelessWidget {
+  const _PreviewQuestionCard({
+    required this.language,
+    required this.target,
+    required this.options,
+    required this.selectedOption,
+    required this.answered,
+    required this.isCorrect,
+    required this.onSelect,
+  });
+
+  final AppLanguage language;
+  final VocabItem target;
+  final List<String> options;
+  final int? selectedOption;
+  final bool answered;
+  final bool isCorrect;
+  final ValueChanged<int> onSelect;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: const Color(0xFFE8ECF5)),
+      ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('🎌', style: TextStyle(fontSize: 72)),
-          const SizedBox(height: AppSpacing.xl),
           Text(
-            language.onboardingReadyTitle,
+            _questionLabel(language),
             style: const TextStyle(
-              fontSize: 28,
-              fontWeight: FontWeight.w800,
-              color: AppThemeV2.textMain,
+              fontSize: 13,
+              fontWeight: FontWeight.w700,
+              color: AppTheme.textSub,
             ),
           ),
           const SizedBox(height: AppSpacing.md),
-          if (level != null && goal != null) ...[
-            Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.lg,
-                vertical: AppSpacing.md,
+          Text(
+            target.term,
+            style: const TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.w800,
+              color: AppTheme.textMain,
+            ),
+          ),
+          if (target.hasDisplayReading) ...[
+            const SizedBox(height: 4),
+            Text(
+              target.reading ?? '',
+              style: const TextStyle(color: AppTheme.textSub),
+            ),
+          ],
+          const SizedBox(height: AppSpacing.lg),
+          for (var i = 0; i < options.length; i++)
+            Padding(
+              padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+              child: _PreviewOptionTile(
+                key: ValueKey('onboarding_preview_option_$i'),
+                label: options[i],
+                selected: selectedOption == i,
+                correct: answered && i == 0,
+                wrong: answered && selectedOption == i && !isCorrect,
+                onTap: () => onSelect(i),
               ),
-              decoration: BoxDecoration(
-                color: AppThemeV2.primary.withValues(alpha: 0.06),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    '${level!.shortLabel}  •  ${goal!.label(language)}',
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: AppThemeV2.primary,
-                    ),
-                  ),
-                ],
+            ),
+          if (answered) ...[
+            const SizedBox(height: AppSpacing.sm),
+            Text(
+              isCorrect
+                  ? _successLabel(language)
+                  : _answerLabel(language, options.first),
+              style: TextStyle(
+                color: isCorrect ? const Color(0xFF15803D) : AppTheme.textSub,
+                fontWeight: FontWeight.w700,
               ),
             ),
           ],
-          const SizedBox(height: AppSpacing.xxxl),
-          ClayButton(
-            label: language.onboardingStartButton,
-            style: ClayButtonStyle.primary,
-            isExpanded: true,
-            icon: Icons.play_arrow_rounded,
-            onPressed: onStart,
-          ),
         ],
+      ),
+    );
+  }
+
+  String _questionLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'What does this mean?';
+      case AppLanguage.vi:
+        return 'Từ này nghĩa là gì?';
+      case AppLanguage.ja:
+        return 'What does this mean?';
+    }
+  }
+
+  String _successLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Nice. This is the kind of quick win your first session will give you.';
+      case AppLanguage.vi:
+        return 'Tốt. Đây là kiểu chiến thắng nhỏ mà phiên học đầu tiên sẽ đem lại.';
+      case AppLanguage.ja:
+        return 'Nice. This is the kind of quick win your first session will give you.';
+    }
+  }
+
+  String _answerLabel(AppLanguage language, String answer) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Correct answer: $answer';
+      case AppLanguage.vi:
+        return 'Đáp án đúng: $answer';
+      case AppLanguage.ja:
+        return 'Correct answer: $answer';
+    }
+  }
+}
+
+class _PreviewOptionTile extends StatelessWidget {
+  const _PreviewOptionTile({
+    super.key,
+    required this.label,
+    required this.selected,
+    required this.correct,
+    required this.wrong,
+    required this.onTap,
+  });
+
+  final String label;
+  final bool selected;
+  final bool correct;
+  final bool wrong;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final borderColor = correct
+        ? const Color(0xFF22C55E)
+        : wrong
+        ? const Color(0xFFEF4444)
+        : selected
+        ? AppTheme.primary
+        : const Color(0xFFE8ECF5);
+    final background = correct
+        ? const Color(0xFFF0FDF4)
+        : wrong
+        ? const Color(0xFFFEF2F2)
+        : selected
+        ? AppTheme.primary.withValues(alpha: 0.06)
+        : Colors.white;
+
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 150),
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.md,
+          vertical: AppSpacing.md,
+        ),
+        decoration: BoxDecoration(
+          color: background,
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: borderColor, width: selected ? 2 : 1),
+        ),
+        child: Text(
+          label,
+          style: const TextStyle(
+            fontWeight: FontWeight.w600,
+            color: AppTheme.textMain,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SessionPreview extends StatelessWidget {
+  const _SessionPreview({required this.language});
+
+  final AppLanguage language;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppSpacing.md),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF8FAFC),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            _title(language),
+            style: const TextStyle(
+              fontWeight: FontWeight.w800,
+              color: AppTheme.textMain,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          _PreviewChip(label: _step1(language)),
+          const SizedBox(height: AppSpacing.xs),
+          _PreviewChip(label: _step2(language)),
+          const SizedBox(height: AppSpacing.xs),
+          _PreviewChip(label: _step3(language)),
+        ],
+      ),
+    );
+  }
+
+  String _title(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Your first guided session';
+      case AppLanguage.vi:
+        return 'Phiên học đầu tiên của bạn';
+      case AppLanguage.ja:
+        return 'Your first guided session';
+    }
+  }
+
+  String _step1(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return '1. Clear quick reviews first';
+      case AppLanguage.vi:
+        return '1. Dọn lượt ôn ngắn trước';
+      case AppLanguage.ja:
+        return '1. Clear quick reviews first';
+    }
+  }
+
+  String _step2(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return '2. Fix weak terms while they are fresh';
+      case AppLanguage.vi:
+        return '2. Sửa điểm yếu khi lỗi còn mới';
+      case AppLanguage.ja:
+        return '2. Fix weak terms while they are fresh';
+    }
+  }
+
+  String _step3(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return '3. Finish with one deeper study task';
+      case AppLanguage.vi:
+        return '3. Kết phiên bằng một nhiệm vụ học sâu hơn';
+      case AppLanguage.ja:
+        return '3. Finish with one deeper study task';
+    }
+  }
+}
+
+class _PreviewChip extends StatelessWidget {
+  const _PreviewChip({required this.label});
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.sm,
+        vertical: AppSpacing.sm,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Text(
+        label,
+        style: const TextStyle(
+          fontSize: 13,
+          fontWeight: FontWeight.w600,
+          color: AppTheme.textMain,
+        ),
       ),
     );
   }

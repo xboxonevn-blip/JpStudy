@@ -22,6 +22,15 @@ final grammarGhostCountProvider = FutureProvider<int>((ref) async {
   return points.length;
 });
 
+final nextGrammarReviewProvider = StreamProvider.autoDispose<DateTime?>((
+  ref,
+) async* {
+  final repo = ref.watch(grammarRepositoryProvider);
+  await for (final _ in repo.db.grammarDao.watchDueReviewCount()) {
+    yield await repo.db.grammarDao.getNextScheduledReview();
+  }
+});
+
 final grammarGhostsProvider = FutureProvider<List<GrammarPointData>>((
   ref,
 ) async {

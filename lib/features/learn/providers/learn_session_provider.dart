@@ -29,6 +29,8 @@ class LearnSessionNotifier extends StateNotifier<LearnSession?> {
   void startSession({
     required int lessonId,
     required List<VocabItem> items,
+    int questionCount = 20,
+    bool shuffleQuestions = true,
     AppLanguage language = AppLanguage.en,
     List<QuestionType> enabledTypes = const [
       QuestionType.multipleChoice,
@@ -39,8 +41,9 @@ class LearnSessionNotifier extends StateNotifier<LearnSession?> {
     final questions = _questionGenerator.generateQuestions(
       items: items,
       enabledTypes: enabledTypes,
-      count: items.length,
+      count: questionCount,
       language: language,
+      shuffleItems: shuffleQuestions,
     );
 
     state = LearnSession(
