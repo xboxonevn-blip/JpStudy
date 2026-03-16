@@ -6,7 +6,7 @@ Lesson kanji JSON is the source of truth. This script:
   when older lesson rows do not have embedded data yet
 - syncs `decomposition.hanViet` with the canonical label derived from
   `row["meaning"]`
-- rewrites `assets/data/kanji/decomposition.json` as a derived compatibility
+- rewrites `assets/data/support/kanji/decomposition.json` as a derived compatibility
   export from the embedded lesson data
 """
 
@@ -18,7 +18,7 @@ from typing import Dict, List, Tuple
 
 
 ROOT = Path(__file__).resolve().parents[1]
-KANJI_ROOT = ROOT / "assets" / "data" / "kanji"
+KANJI_ROOT = ROOT / "assets" / "data" / "content" / "kanji"
 DECOMPOSITION_PATH = KANJI_ROOT / "decomposition.json"
 
 

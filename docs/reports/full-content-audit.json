@@ -61,33 +61,8 @@
       },
       "N3": {
         "expectedLessons": 25,
-        "presentLessons": 1,
-        "missingLessons": [
-          52,
-          53,
-          54,
-          55,
-          56,
-          57,
-          58,
-          59,
-          60,
-          61,
-          62,
-          63,
-          64,
-          65,
-          66,
-          67,
-          68,
-          69,
-          70,
-          71,
-          72,
-          73,
-          74,
-          75
-        ]
+        "presentLessons": 25,
+        "missingLessons": []
       }
     }
   },
@@ -105,64 +80,218 @@
       },
       "N3": {
         "expectedLessons": 25,
-        "presentLessons": 1,
-        "missingLessons": [
-          52,
-          53,
-          54,
-          55,
-          56,
-          57,
-          58,
-          59,
-          60,
-          61,
-          62,
-          63,
-          64,
-          65,
-          66,
-          67,
-          68,
-          69,
-          70,
-          71,
-          72,
-          73,
-          74,
-          75
-        ]
+        "presentLessons": 25,
+        "missingLessons": []
       }
     }
   },
-  "localFixes": {
-    "kanjiExampleBackfill": {
-      "examples_scanned": 953,
-      "examples_without_ref": 0,
-      "examples_backfilled": 0,
-      "examples_missing_required_fields": 0,
-      "lessons_updated": 0,
-      "new_vocab_rows": 0,
-      "new_sense_rows": 0
-    },
-    "n4n5Coverage": {
-      "kanjiRows": 326,
-      "kanjiUnique": 295,
-      "missingSingleBefore": 0,
-      "missingCompoundBefore": 0,
-      "webSingleAdded": 0,
-      "webCompoundAdded": 0,
-      "fallbackSingleAdded": 0,
-      "singleSkippedNoSource": 0,
-      "compoundSkippedNoSource": 0,
-      "newMasterRows": 0,
-      "newSenseRows": 0,
-      "kanjiExampleRowsUpdated": 0,
-      "missingSingleAfter": 0,
-      "missingCompoundAfter": 0,
-      "kanjiExampleFilesUpdated": 0
+  "grammar": {
+    "levels": {
+      "N5": {
+        "expectedLessons": 25,
+        "presentLessons": 25,
+        "missingLessons": [],
+        "emptyLessons": [],
+        "pointsPerLesson": {
+          "1": 6,
+          "2": 6,
+          "3": 6,
+          "4": 4,
+          "5": 6,
+          "6": 7,
+          "7": 5,
+          "8": 7,
+          "9": 6,
+          "10": 5,
+          "11": 4,
+          "12": 4,
+          "13": 4,
+          "14": 4,
+          "15": 4,
+          "16": 4,
+          "17": 4,
+          "18": 4,
+          "19": 4,
+          "20": 4,
+          "21": 4,
+          "22": 4,
+          "23": 4,
+          "24": 4,
+          "25": 4
+        }
+      },
+      "N4": {
+        "expectedLessons": 25,
+        "presentLessons": 25,
+        "missingLessons": [],
+        "emptyLessons": [],
+        "pointsPerLesson": {
+          "26": 4,
+          "27": 4,
+          "28": 4,
+          "29": 4,
+          "30": 4,
+          "31": 4,
+          "32": 4,
+          "33": 4,
+          "34": 4,
+          "35": 4,
+          "36": 4,
+          "37": 4,
+          "38": 4,
+          "39": 4,
+          "40": 4,
+          "41": 4,
+          "42": 4,
+          "43": 4,
+          "44": 4,
+          "45": 4,
+          "46": 4,
+          "47": 4,
+          "48": 4,
+          "49": 4,
+          "50": 4
+        }
+      },
+      "N3": {
+        "expectedLessons": 25,
+        "presentLessons": 25,
+        "missingLessons": [],
+        "emptyLessons": [],
+        "pointsPerLesson": {
+          "51": 4,
+          "52": 4,
+          "53": 4,
+          "54": 4,
+          "55": 4,
+          "56": 4,
+          "57": 4,
+          "58": 4,
+          "59": 4,
+          "60": 4,
+          "61": 4,
+          "62": 4,
+          "63": 4,
+          "64": 4,
+          "65": 4,
+          "66": 4,
+          "67": 4,
+          "68": 4,
+          "69": 4,
+          "70": 4,
+          "71": 4,
+          "72": 4,
+          "73": 4,
+          "74": 4,
+          "75": 4
+        }
+      }
     }
   },
+  "grammarExamples": {
+    "levels": {
+      "N5": {
+        "expectedLessons": 25,
+        "presentLessons": 25,
+        "missingLessons": [],
+        "emptyLessons": [],
+        "examplesPerLesson": {
+          "1": 60,
+          "2": 60,
+          "3": 56,
+          "4": 40,
+          "5": 60,
+          "6": 70,
+          "7": 50,
+          "8": 68,
+          "9": 60,
+          "10": 50,
+          "11": 40,
+          "12": 40,
+          "13": 32,
+          "14": 40,
+          "15": 32,
+          "16": 40,
+          "17": 40,
+          "18": 40,
+          "19": 40,
+          "20": 40,
+          "21": 32,
+          "22": 24,
+          "23": 32,
+          "24": 40,
+          "25": 29
+        }
+      },
+      "N4": {
+        "expectedLessons": 25,
+        "presentLessons": 25,
+        "missingLessons": [],
+        "emptyLessons": [],
+        "examplesPerLesson": {
+          "26": 32,
+          "27": 24,
+          "28": 32,
+          "29": 24,
+          "30": 24,
+          "31": 32,
+          "32": 32,
+          "33": 40,
+          "34": 32,
+          "35": 24,
+          "36": 32,
+          "37": 32,
+          "38": 32,
+          "39": 24,
+          "40": 32,
+          "41": 32,
+          "42": 24,
+          "43": 24,
+          "44": 32,
+          "45": 24,
+          "46": 32,
+          "47": 24,
+          "48": 32,
+          "49": 24,
+          "50": 24
+        }
+      },
+      "N3": {
+        "expectedLessons": 25,
+        "presentLessons": 25,
+        "missingLessons": [],
+        "emptyLessons": [],
+        "examplesPerLesson": {
+          "51": 8,
+          "52": 8,
+          "53": 8,
+          "54": 8,
+          "55": 8,
+          "56": 8,
+          "57": 8,
+          "58": 8,
+          "59": 8,
+          "60": 8,
+          "61": 8,
+          "62": 8,
+          "63": 8,
+          "64": 8,
+          "65": 8,
+          "66": 8,
+          "67": 8,
+          "68": 8,
+          "69": 8,
+          "70": 8,
+          "71": 8,
+          "72": 8,
+          "73": 8,
+          "74": 8,
+          "75": 8
+        }
+      }
+    }
+  },
+  "localFixes": {},
   "validatorSnapshot": {
     "summary": {
       "vocabLessons": 50,
@@ -187,30 +316,12 @@
     },
     "canonical": {
       "exists": true,
-      "vocabEntries": 2817,
-      "kanjiEntries": 337,
-      "vocabEntriesOverlapLegacy": 2817,
-      "kanjiEntriesOverlapLegacy": 337,
-      "issueCounts": {
-        "canonical_vocab_count_mismatch": 1,
-        "canonical_kanji_count_mismatch": 1
-      },
-      "samples": {
-        "canonical_vocab_count_mismatch": [
-          {
-            "expected": 2805,
-            "actual": 2817,
-            "canonicalTotal": 2817
-          }
-        ],
-        "canonical_kanji_count_mismatch": [
-          {
-            "expected": 326,
-            "actual": 337,
-            "canonicalTotal": 337
-          }
-        ]
-      }
+      "vocabEntries": 3105,
+      "kanjiEntries": 529,
+      "vocabEntriesOverlapLegacy": 2805,
+      "kanjiEntriesOverlapLegacy": 326,
+      "issueCounts": {},
+      "samples": {}
     }
   }
 }

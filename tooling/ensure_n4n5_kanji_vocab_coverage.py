@@ -25,8 +25,8 @@ from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 
 
 ROOT = Path(__file__).resolve().parents[1]
-KANJI_ROOT = ROOT / "assets" / "data" / "kanji"
-VOCAB_ROOT = ROOT / "assets" / "data" / "vocab"
+KANJI_ROOT = ROOT / "assets" / "data" / "archive" / "kanji"
+VOCAB_ROOT = ROOT / "assets" / "data" / "archive" / "vocab"
 REPORT_PATH = ROOT / "docs" / "reports" / "n4n5-kanji-vocab-coverage-report.json"
 
 KANJI_RE = re.compile(r"[\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF]")

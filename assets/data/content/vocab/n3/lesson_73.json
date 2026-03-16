@@ -1,0 +1,662 @@
+{
+  "schemaVersion": 2,
+  "dataset": "vocab",
+  "series": "quartet-jmdict-kanjidic-draft",
+  "level": "N3",
+  "lessonId": 73,
+  "entryCount": 12,
+  "entries": [
+    {
+      "entryId": "n3_l73_s001",
+      "lessonId": 73,
+      "level": "N3",
+      "order": 1,
+      "tags": [
+        "quartet-theme",
+        "history",
+        "noun",
+        "quartet_23",
+        "theme_73"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l73_v001",
+        "term": "歴史",
+        "reading": "れきし",
+        "kanji": [
+          "歴",
+          "史"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l73_s001",
+        "meaningVi": "lịch sử",
+        "meaningEn": "history"
+      },
+      "search": {
+        "termNoAccent": "歴史",
+        "readingNoAccent": "れきし",
+        "meaningViNoAccent": "lich su",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l73_v001",
+        "sourceSenseId": "n3_l73_s001",
+        "sourceEntrySeq": "1558050"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 23,
+        "themeEn": "History and politics",
+        "themeVi": "Lịch sử và chính trị"
+      }
+    },
+    {
+      "entryId": "n3_l73_s002",
+      "lessonId": 73,
+      "level": "N3",
+      "order": 2,
+      "tags": [
+        "quartet-theme",
+        "history",
+        "noun",
+        "quartet_23",
+        "theme_73"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l73_v002",
+        "term": "政治",
+        "reading": "せいじ",
+        "kanji": [
+          "政",
+          "治"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l73_s002",
+        "meaningVi": "chính trị",
+        "meaningEn": "politics; government"
+      },
+      "search": {
+        "termNoAccent": "政治",
+        "readingNoAccent": "せいじ",
+        "meaningViNoAccent": "chinh tri",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l73_v002",
+        "sourceSenseId": "n3_l73_s002",
+        "sourceEntrySeq": "1375970"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 23,
+        "themeEn": "History and politics",
+        "themeVi": "Lịch sử và chính trị"
+      }
+    },
+    {
+      "entryId": "n3_l73_s003",
+      "lessonId": 73,
+      "level": "N3",
+      "order": 3,
+      "tags": [
+        "quartet-theme",
+        "history",
+        "noun",
+        "suru",
+        "quartet_23",
+        "theme_73"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l73_v003",
+        "term": "戦争",
+        "reading": "せんそう",
+        "kanji": [
+          "戦",
+          "争"
+        ],
+        "labels": {
+          "hanViet": "chiến"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l73_s003",
+        "meaningVi": "chiến tranh",
+        "meaningEn": "war; fighting"
+      },
+      "search": {
+        "termNoAccent": "戦争",
+        "readingNoAccent": "せんそう",
+        "meaningViNoAccent": "chien tranh",
+        "hanVietNoAccent": "chien"
+      },
+      "links": {
+        "sourceVocabId": "n3_l73_v003",
+        "sourceSenseId": "n3_l73_s003",
+        "sourceEntrySeq": "1390360"
+      },
+      "legacy": {
+        "kanjiMeaning": "chiến"
+      },
+      "theme": {
+        "quartetLesson": 23,
+        "themeEn": "History and politics",
+        "themeVi": "Lịch sử và chính trị"
+      }
+    },
+    {
+      "entryId": "n3_l73_s004",
+      "lessonId": 73,
+      "level": "N3",
+      "order": 4,
+      "tags": [
+        "quartet-theme",
+        "history",
+        "noun",
+        "quartet_23",
+        "theme_73"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l73_v004",
+        "term": "平和",
+        "reading": "へいわ",
+        "kanji": [
+          "平",
+          "和"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l73_s004",
+        "meaningVi": "hòa bình",
+        "meaningEn": "peace; harmony"
+      },
+      "search": {
+        "termNoAccent": "平和",
+        "readingNoAccent": "へいわ",
+        "meaningViNoAccent": "hoa binh",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l73_v004",
+        "sourceSenseId": "n3_l73_s004",
+        "sourceEntrySeq": "1508070"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 23,
+        "themeEn": "History and politics",
+        "themeVi": "Lịch sử và chính trị"
+      }
+    },
+    {
+      "entryId": "n3_l73_s005",
+      "lessonId": 73,
+      "level": "N3",
+      "order": 5,
+      "tags": [
+        "quartet-theme",
+        "history",
+        "noun",
+        "quartet_23",
+        "theme_73"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l73_v005",
+        "term": "民主",
+        "reading": "みんしゅ",
+        "kanji": [
+          "民",
+          "主"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l73_s005",
+        "meaningVi": "dân chủ",
+        "meaningEn": "democracy; popular sovereignty"
+      },
+      "search": {
+        "termNoAccent": "民主",
+        "readingNoAccent": "みんしゅ",
+        "meaningViNoAccent": "dan chu",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l73_v005",
+        "sourceSenseId": "n3_l73_s005",
+        "sourceEntrySeq": "1528790"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 23,
+        "themeEn": "History and politics",
+        "themeVi": "Lịch sử và chính trị"
+      }
+    },
+    {
+      "entryId": "n3_l73_s006",
+      "lessonId": 73,
+      "level": "N3",
+      "order": 6,
+      "tags": [
+        "quartet-theme",
+        "history",
+        "noun",
+        "suru",
+        "quartet_23",
+        "theme_73"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l73_v006",
+        "term": "選挙",
+        "reading": "せんきょ",
+        "kanji": [
+          "選",
+          "挙"
+        ],
+        "labels": {
+          "hanViet": "Tuyển cử"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l73_s006",
+        "meaningVi": "bầu cử",
+        "meaningEn": "election"
+      },
+      "search": {
+        "termNoAccent": "選挙",
+        "readingNoAccent": "せんきょ",
+        "meaningViNoAccent": "bau cu",
+        "hanVietNoAccent": "tuyen cu"
+      },
+      "links": {
+        "sourceVocabId": "n3_l73_v006",
+        "sourceSenseId": "n3_l73_s006",
+        "sourceEntrySeq": "1392190"
+      },
+      "legacy": {
+        "kanjiMeaning": "Tuyển cử"
+      },
+      "theme": {
+        "quartetLesson": 23,
+        "themeEn": "History and politics",
+        "themeVi": "Lịch sử và chính trị"
+      }
+    },
+    {
+      "entryId": "n3_l73_s007",
+      "lessonId": 73,
+      "level": "N3",
+      "order": 7,
+      "tags": [
+        "quartet-theme",
+        "history",
+        "noun",
+        "quartet_23",
+        "theme_73"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l73_v007",
+        "term": "革命",
+        "reading": "かくめい",
+        "kanji": [
+          "革",
+          "命"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l73_s007",
+        "meaningVi": "cách mạng",
+        "meaningEn": "revolution; 58th year of the sexagenary cycle (in Onmyōdō)"
+      },
+      "search": {
+        "termNoAccent": "革命",
+        "readingNoAccent": "かくめい",
+        "meaningViNoAccent": "cach mang",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l73_v007",
+        "sourceSenseId": "n3_l73_s007",
+        "sourceEntrySeq": "1206500"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 23,
+        "themeEn": "History and politics",
+        "themeVi": "Lịch sử và chính trị"
+      }
+    },
+    {
+      "entryId": "n3_l73_s008",
+      "lessonId": 73,
+      "level": "N3",
+      "order": 8,
+      "tags": [
+        "quartet-theme",
+        "history",
+        "noun",
+        "quartet_23",
+        "theme_73"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l73_v008",
+        "term": "文明",
+        "reading": "ぶんめい",
+        "kanji": [
+          "文",
+          "明"
+        ],
+        "labels": {
+          "hanViet": "Văn Minh"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l73_s008",
+        "meaningVi": "văn minh",
+        "meaningEn": "civilization; civilisation"
+      },
+      "search": {
+        "termNoAccent": "文明",
+        "readingNoAccent": "ぶんめい",
+        "meaningViNoAccent": "van minh",
+        "hanVietNoAccent": "van minh"
+      },
+      "links": {
+        "sourceVocabId": "n3_l73_v008",
+        "sourceSenseId": "n3_l73_s008",
+        "sourceEntrySeq": "1505650"
+      },
+      "legacy": {
+        "kanjiMeaning": "Văn Minh"
+      },
+      "theme": {
+        "quartetLesson": 23,
+        "themeEn": "History and politics",
+        "themeVi": "Lịch sử và chính trị"
+      }
+    },
+    {
+      "entryId": "n3_l73_s009",
+      "lessonId": 73,
+      "level": "N3",
+      "order": 9,
+      "tags": [
+        "quartet-theme",
+        "history",
+        "noun",
+        "suru",
+        "quartet_23",
+        "theme_73"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l73_v009",
+        "term": "独立",
+        "reading": "どくりつ",
+        "kanji": [
+          "独",
+          "立"
+        ],
+        "labels": {
+          "hanViet": "Lập"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l73_s009",
+        "meaningVi": "độc lập",
+        "meaningEn": "independence; self-reliance"
+      },
+      "search": {
+        "termNoAccent": "独立",
+        "readingNoAccent": "どくりつ",
+        "meaningViNoAccent": "doc lap",
+        "hanVietNoAccent": "lap"
+      },
+      "links": {
+        "sourceVocabId": "n3_l73_v009",
+        "sourceSenseId": "n3_l73_s009",
+        "sourceEntrySeq": "1456040"
+      },
+      "legacy": {
+        "kanjiMeaning": "Lập"
+      },
+      "theme": {
+        "quartetLesson": 23,
+        "themeEn": "History and politics",
+        "themeVi": "Lịch sử và chính trị"
+      }
+    },
+    {
+      "entryId": "n3_l73_s010",
+      "lessonId": 73,
+      "level": "N3",
+      "order": 10,
+      "tags": [
+        "quartet-theme",
+        "history",
+        "noun",
+        "quartet_23",
+        "theme_73"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l73_v010",
+        "term": "条約",
+        "reading": "じょうやく",
+        "kanji": [
+          "条",
+          "約"
+        ],
+        "labels": {
+          "hanViet": "Ước"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l73_s010",
+        "meaningVi": "điều ước",
+        "meaningEn": "treaty; pact"
+      },
+      "search": {
+        "termNoAccent": "条約",
+        "readingNoAccent": "じょうやく",
+        "meaningViNoAccent": "dieu uoc",
+        "hanVietNoAccent": "uoc"
+      },
+      "links": {
+        "sourceVocabId": "n3_l73_v010",
+        "sourceSenseId": "n3_l73_s010",
+        "sourceEntrySeq": "1356580"
+      },
+      "legacy": {
+        "kanjiMeaning": "Ước"
+      },
+      "theme": {
+        "quartetLesson": 23,
+        "themeEn": "History and politics",
+        "themeVi": "Lịch sử và chính trị"
+      }
+    },
+    {
+      "entryId": "n3_l73_s011",
+      "lessonId": 73,
+      "level": "N3",
+      "order": 11,
+      "tags": [
+        "quartet-theme",
+        "history",
+        "noun",
+        "quartet_23",
+        "theme_73"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l73_v011",
+        "term": "外交",
+        "reading": "がいこう",
+        "kanji": [
+          "外",
+          "交"
+        ],
+        "labels": {
+          "hanViet": "Ngoại"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l73_s011",
+        "meaningVi": "ngoại giao",
+        "meaningEn": "diplomacy; selling (e.g. door-to-door)"
+      },
+      "search": {
+        "termNoAccent": "外交",
+        "readingNoAccent": "がいこう",
+        "meaningViNoAccent": "ngoai giao",
+        "hanVietNoAccent": "ngoai"
+      },
+      "links": {
+        "sourceVocabId": "n3_l73_v011",
+        "sourceSenseId": "n3_l73_s011",
+        "sourceEntrySeq": "1203540"
+      },
+      "legacy": {
+        "kanjiMeaning": "Ngoại"
+      },
+      "theme": {
+        "quartetLesson": 23,
+        "themeEn": "History and politics",
+        "themeVi": "Lịch sử và chính trị"
+      }
+    },
+    {
+      "entryId": "n3_l73_s012",
+      "lessonId": 73,
+      "level": "N3",
+      "order": 12,
+      "tags": [
+        "quartet-theme",
+        "history",
+        "noun",
+        "quartet_23",
+        "theme_73"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l73_v012",
+        "term": "大統領",
+        "reading": "だいとうりょう",
+        "kanji": [
+          "大",
+          "統",
+          "領"
+        ],
+        "labels": {
+          "hanViet": "Đại"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l73_s012",
+        "meaningVi": "tổng thống",
+        "meaningEn": "president (of a country); big man"
+      },
+      "search": {
+        "termNoAccent": "大統領",
+        "readingNoAccent": "だいとうりょう",
+        "meaningViNoAccent": "tong thong",
+        "hanVietNoAccent": "dai"
+      },
+      "links": {
+        "sourceVocabId": "n3_l73_v012",
+        "sourceSenseId": "n3_l73_s012",
+        "sourceEntrySeq": "1414650"
+      },
+      "legacy": {
+        "kanjiMeaning": "Đại"
+      },
+      "theme": {
+        "quartetLesson": 23,
+        "themeEn": "History and politics",
+        "themeVi": "Lịch sử và chính trị"
+      }
+    }
+  ]
+}

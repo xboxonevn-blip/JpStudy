@@ -62,6 +62,17 @@ flutter analyze
 flutter test
 ```
 
+## Where to Look First
+
+- Repo map: `PROJECT_STRUCTURE.md`
+- Data layout: `assets/data/README.md`
+- Runtime content/support schema: `assets/data/content/README.md`, `assets/data/support/README.md`
+- App architecture: `lib/README.md`
+- Tooling index: `tooling/README.md`
+- Test strategy: `test/README.md`
+- Docs index: `docs/README.md`
+- Main roadmap: `ROADMAP.md`
+
 ## Tooling Workflows
 
 ### Kanji Template / Promotion
@@ -91,16 +102,16 @@ Reports:
 - `tooling/reports/n4_promotion_history.json`
 - `tooling/reports/n4_promotion_schedule_state.json`
 
-### Canonical Content Schema v2
+### Content Schema v2
 
 ```bash
-# Embed decomposition into kanji lesson data and regenerate legacy export
+# Sync decomposition and regenerate support export
 python tooling/sync_kanji_decomposition_labels.py
 
-# Export canonical vocab + kanji lesson assets
+# Export runtime content vocab + kanji lesson assets
 python tooling/build_canonical_content_v2.py
 
-# Validate legacy + canonical content integrity
+# Validate archive + runtime content integrity
 python tooling/validate_content_assets_v2.py
 ```
 
@@ -117,17 +128,21 @@ References:
 
 ## Project Structure
 
+For the current repo map, use `PROJECT_STRUCTURE.md`.
+
+Quick summary:
+
 ```text
-lib/
-  app/        app config and routing
-  core/       shared systems (i18n, theme, widgets, gamification)
-  data/       drift tables, DAOs, repositories
-  features/   learning flows (flashcard, grammar, immersion, write, exam, games)
-tooling/      data/template generation and promotion automation scripts
-assets/       vocab, grammar, kanji, immersion datasets and UI assets
+lib/          app source code
+test/         automated tests
+tooling/      data generation, migration, and validation scripts
+assets/       bundled runtime content, support assets, and archive data
+docs/         plans, reports, notes, specs, and reference docs
 ```
 
 ## Roadmap
 
 - Main roadmap: `ROADMAP.md`
 - Tooling usage details: `tooling/README.md`
+- Architecture guide: `lib/README.md`
+- Test guide: `test/README.md`

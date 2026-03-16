@@ -1,0 +1,666 @@
+{
+  "schemaVersion": 2,
+  "dataset": "vocab",
+  "series": "quartet-jmdict-kanjidic-draft",
+  "level": "N3",
+  "lessonId": 64,
+  "entryCount": 12,
+  "entries": [
+    {
+      "entryId": "n3_l64_s001",
+      "lessonId": 64,
+      "level": "N3",
+      "order": 1,
+      "tags": [
+        "quartet-theme",
+        "family",
+        "noun",
+        "quartet_14",
+        "theme_64"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l64_v001",
+        "term": "家族",
+        "reading": "かぞく",
+        "kanji": [
+          "家",
+          "族"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l64_s001",
+        "meaningVi": "gia đình",
+        "meaningEn": "family"
+      },
+      "search": {
+        "termNoAccent": "家族",
+        "readingNoAccent": "かぞく",
+        "meaningViNoAccent": "gia dinh",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l64_v001",
+        "sourceSenseId": "n3_l64_s001",
+        "sourceEntrySeq": "1192150"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 14,
+        "themeEn": "Family and relationships",
+        "themeVi": "Gia đình và các mối quan hệ"
+      }
+    },
+    {
+      "entryId": "n3_l64_s002",
+      "lessonId": 64,
+      "level": "N3",
+      "order": 2,
+      "tags": [
+        "quartet-theme",
+        "family",
+        "noun",
+        "quartet_14",
+        "theme_64"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l64_v002",
+        "term": "親戚",
+        "reading": "しんせき",
+        "kanji": [
+          "親",
+          "戚"
+        ],
+        "labels": {
+          "hanViet": "Thân"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l64_s002",
+        "meaningVi": "họ hàng",
+        "meaningEn": "relative; relation"
+      },
+      "search": {
+        "termNoAccent": "親戚",
+        "readingNoAccent": "しんせき",
+        "meaningViNoAccent": "ho hang",
+        "hanVietNoAccent": "than"
+      },
+      "links": {
+        "sourceVocabId": "n3_l64_v002",
+        "sourceSenseId": "n3_l64_s002",
+        "sourceEntrySeq": "1365230"
+      },
+      "legacy": {
+        "kanjiMeaning": "Thân"
+      },
+      "theme": {
+        "quartetLesson": 14,
+        "themeEn": "Family and relationships",
+        "themeVi": "Gia đình và các mối quan hệ"
+      }
+    },
+    {
+      "entryId": "n3_l64_s003",
+      "lessonId": 64,
+      "level": "N3",
+      "order": 3,
+      "tags": [
+        "quartet-theme",
+        "family",
+        "noun",
+        "quartet_14",
+        "theme_64"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l64_v003",
+        "term": "夫婦",
+        "reading": "ふうふ",
+        "kanji": [
+          "夫",
+          "婦"
+        ],
+        "labels": {
+          "hanViet": "Phu"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l64_s003",
+        "meaningVi": "vợ chồng",
+        "meaningEn": "married couple; husband and wife"
+      },
+      "search": {
+        "termNoAccent": "夫婦",
+        "readingNoAccent": "ふうふ",
+        "meaningViNoAccent": "vo chong",
+        "hanVietNoAccent": "phu"
+      },
+      "links": {
+        "sourceVocabId": "n3_l64_v003",
+        "sourceSenseId": "n3_l64_s003",
+        "sourceEntrySeq": "1583640"
+      },
+      "legacy": {
+        "kanjiMeaning": "Phu"
+      },
+      "theme": {
+        "quartetLesson": 14,
+        "themeEn": "Family and relationships",
+        "themeVi": "Gia đình và các mối quan hệ"
+      }
+    },
+    {
+      "entryId": "n3_l64_s004",
+      "lessonId": 64,
+      "level": "N3",
+      "order": 4,
+      "tags": [
+        "quartet-theme",
+        "family",
+        "noun",
+        "suru",
+        "quartet_14",
+        "theme_64"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l64_v004",
+        "term": "育児",
+        "reading": "いくじ",
+        "kanji": [
+          "育",
+          "児"
+        ],
+        "labels": {
+          "hanViet": "Dục"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l64_s004",
+        "meaningVi": "nuôi dạy con nhỏ",
+        "meaningEn": "childcare; child-rearing"
+      },
+      "search": {
+        "termNoAccent": "育児",
+        "readingNoAccent": "いくじ",
+        "meaningViNoAccent": "nuoi day con nho",
+        "hanVietNoAccent": "duc"
+      },
+      "links": {
+        "sourceVocabId": "n3_l64_v004",
+        "sourceSenseId": "n3_l64_s004",
+        "sourceEntrySeq": "1160630"
+      },
+      "legacy": {
+        "kanjiMeaning": "Dục"
+      },
+      "theme": {
+        "quartetLesson": 14,
+        "themeEn": "Family and relationships",
+        "themeVi": "Gia đình và các mối quan hệ"
+      }
+    },
+    {
+      "entryId": "n3_l64_s005",
+      "lessonId": 64,
+      "level": "N3",
+      "order": 5,
+      "tags": [
+        "quartet-theme",
+        "family",
+        "noun",
+        "suru",
+        "quartet_14",
+        "theme_64"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l64_v005",
+        "term": "結婚",
+        "reading": "けっこん",
+        "kanji": [
+          "結",
+          "婚"
+        ],
+        "labels": {
+          "hanViet": "hôn"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l64_s005",
+        "meaningVi": "kết hôn",
+        "meaningEn": "marriage"
+      },
+      "search": {
+        "termNoAccent": "結婚",
+        "readingNoAccent": "けっこん",
+        "meaningViNoAccent": "ket hon",
+        "hanVietNoAccent": "hon"
+      },
+      "links": {
+        "sourceVocabId": "n3_l64_v005",
+        "sourceSenseId": "n3_l64_s005",
+        "sourceEntrySeq": "1254790"
+      },
+      "legacy": {
+        "kanjiMeaning": "hôn"
+      },
+      "theme": {
+        "quartetLesson": 14,
+        "themeEn": "Family and relationships",
+        "themeVi": "Gia đình và các mối quan hệ"
+      }
+    },
+    {
+      "entryId": "n3_l64_s006",
+      "lessonId": 64,
+      "level": "N3",
+      "order": 6,
+      "tags": [
+        "quartet-theme",
+        "family",
+        "noun",
+        "suru",
+        "quartet_14",
+        "theme_64"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l64_v006",
+        "term": "離婚",
+        "reading": "りこん",
+        "kanji": [
+          "離",
+          "婚"
+        ],
+        "labels": {
+          "hanViet": "hôn"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l64_s006",
+        "meaningVi": "ly hôn",
+        "meaningEn": "divorce"
+      },
+      "search": {
+        "termNoAccent": "離婚",
+        "readingNoAccent": "りこん",
+        "meaningViNoAccent": "ly hon",
+        "hanVietNoAccent": "hon"
+      },
+      "links": {
+        "sourceVocabId": "n3_l64_v006",
+        "sourceSenseId": "n3_l64_s006",
+        "sourceEntrySeq": "1550880"
+      },
+      "legacy": {
+        "kanjiMeaning": "hôn"
+      },
+      "theme": {
+        "quartetLesson": 14,
+        "themeEn": "Family and relationships",
+        "themeVi": "Gia đình và các mối quan hệ"
+      }
+    },
+    {
+      "entryId": "n3_l64_s007",
+      "lessonId": 64,
+      "level": "N3",
+      "order": 7,
+      "tags": [
+        "quartet-theme",
+        "family",
+        "noun",
+        "quartet_14",
+        "theme_64"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l64_v007",
+        "term": "世代",
+        "reading": "せだい",
+        "kanji": [
+          "世",
+          "代"
+        ],
+        "labels": {
+          "hanViet": "Đại"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l64_s007",
+        "meaningVi": "thế hệ",
+        "meaningEn": "generation"
+      },
+      "search": {
+        "termNoAccent": "世代",
+        "readingNoAccent": "せだい",
+        "meaningViNoAccent": "the he",
+        "hanVietNoAccent": "dai"
+      },
+      "links": {
+        "sourceVocabId": "n3_l64_v007",
+        "sourceSenseId": "n3_l64_s007",
+        "sourceEntrySeq": "1374190"
+      },
+      "legacy": {
+        "kanjiMeaning": "Đại"
+      },
+      "theme": {
+        "quartetLesson": 14,
+        "themeEn": "Family and relationships",
+        "themeVi": "Gia đình và các mối quan hệ"
+      }
+    },
+    {
+      "entryId": "n3_l64_s008",
+      "lessonId": 64,
+      "level": "N3",
+      "order": 8,
+      "tags": [
+        "quartet-theme",
+        "family",
+        "noun",
+        "suru",
+        "quartet_14",
+        "theme_64"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l64_v008",
+        "term": "関係",
+        "reading": "かんけい",
+        "kanji": [
+          "関",
+          "係"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l64_s008",
+        "meaningVi": "mối quan hệ",
+        "meaningEn": "relation; relationship"
+      },
+      "search": {
+        "termNoAccent": "関係",
+        "readingNoAccent": "かんけい",
+        "meaningViNoAccent": "moi quan he",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l64_v008",
+        "sourceSenseId": "n3_l64_s008",
+        "sourceEntrySeq": "1215810"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 14,
+        "themeEn": "Family and relationships",
+        "themeVi": "Gia đình và các mối quan hệ"
+      }
+    },
+    {
+      "entryId": "n3_l64_s009",
+      "lessonId": 64,
+      "level": "N3",
+      "order": 9,
+      "tags": [
+        "quartet-theme",
+        "family",
+        "noun",
+        "suru",
+        "quartet_14",
+        "theme_64"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l64_v009",
+        "term": "会話",
+        "reading": "かいわ",
+        "kanji": [
+          "会",
+          "話"
+        ],
+        "labels": {
+          "hanViet": "Hội Thoại"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l64_s009",
+        "meaningVi": "trò chuyện, hội thoại",
+        "meaningEn": "conversation; talk"
+      },
+      "search": {
+        "termNoAccent": "会話",
+        "readingNoAccent": "かいわ",
+        "meaningViNoAccent": "tro chuyen, hoi thoai",
+        "hanVietNoAccent": "hoi thoai"
+      },
+      "links": {
+        "sourceVocabId": "n3_l64_v009",
+        "sourceSenseId": "n3_l64_s009",
+        "sourceEntrySeq": "1198880"
+      },
+      "legacy": {
+        "kanjiMeaning": "Hội Thoại"
+      },
+      "theme": {
+        "quartetLesson": 14,
+        "themeEn": "Family and relationships",
+        "themeVi": "Gia đình và các mối quan hệ"
+      }
+    },
+    {
+      "entryId": "n3_l64_s010",
+      "lessonId": 64,
+      "level": "N3",
+      "order": 10,
+      "tags": [
+        "quartet-theme",
+        "family",
+        "noun",
+        "suru",
+        "quartet_14",
+        "theme_64"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l64_v010",
+        "term": "対話",
+        "reading": "たいわ",
+        "kanji": [
+          "対",
+          "話"
+        ],
+        "labels": {
+          "hanViet": "đối Thoại"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l64_s010",
+        "meaningVi": "đối thoại",
+        "meaningEn": "dialogue; conversation"
+      },
+      "search": {
+        "termNoAccent": "対話",
+        "readingNoAccent": "たいわ",
+        "meaningViNoAccent": "doi thoai",
+        "hanVietNoAccent": "doi thoai"
+      },
+      "links": {
+        "sourceVocabId": "n3_l64_v010",
+        "sourceSenseId": "n3_l64_s010",
+        "sourceEntrySeq": "1410300"
+      },
+      "legacy": {
+        "kanjiMeaning": "đối Thoại"
+      },
+      "theme": {
+        "quartetLesson": 14,
+        "themeEn": "Family and relationships",
+        "themeVi": "Gia đình và các mối quan hệ"
+      }
+    },
+    {
+      "entryId": "n3_l64_s011",
+      "lessonId": 64,
+      "level": "N3",
+      "order": 11,
+      "tags": [
+        "quartet-theme",
+        "family",
+        "noun",
+        "suru",
+        "quartet_14",
+        "theme_64"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l64_v011",
+        "term": "支援",
+        "reading": "しえん",
+        "kanji": [
+          "支",
+          "援"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l64_s011",
+        "meaningVi": "hỗ trợ",
+        "meaningEn": "support; backing"
+      },
+      "search": {
+        "termNoAccent": "支援",
+        "readingNoAccent": "しえん",
+        "meaningViNoAccent": "ho tro",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l64_v011",
+        "sourceSenseId": "n3_l64_s011",
+        "sourceEntrySeq": "1310100"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 14,
+        "themeEn": "Family and relationships",
+        "themeVi": "Gia đình và các mối quan hệ"
+      }
+    },
+    {
+      "entryId": "n3_l64_s012",
+      "lessonId": 64,
+      "level": "N3",
+      "order": 12,
+      "tags": [
+        "quartet-theme",
+        "family",
+        "noun",
+        "suru",
+        "quartet_14",
+        "theme_64"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l64_v012",
+        "term": "信頼",
+        "reading": "しんらい",
+        "kanji": [
+          "信",
+          "頼"
+        ],
+        "labels": {
+          "hanViet": "Tín Lại"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l64_s012",
+        "meaningVi": "tin cậy",
+        "meaningEn": "trust (in); confidence"
+      },
+      "search": {
+        "termNoAccent": "信頼",
+        "readingNoAccent": "しんらい",
+        "meaningViNoAccent": "tin cay",
+        "hanVietNoAccent": "tin lai"
+      },
+      "links": {
+        "sourceVocabId": "n3_l64_v012",
+        "sourceSenseId": "n3_l64_s012",
+        "sourceEntrySeq": "1359730"
+      },
+      "legacy": {
+        "kanjiMeaning": "Tín Lại"
+      },
+      "theme": {
+        "quartetLesson": 14,
+        "themeEn": "Family and relationships",
+        "themeVi": "Gia đình và các mối quan hệ"
+      }
+    }
+  ]
+}

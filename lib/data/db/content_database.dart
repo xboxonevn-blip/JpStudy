@@ -99,6 +99,7 @@ class ContentDatabase extends _$ContentDatabase {
       },
       beforeOpen: (details) async {
         await _ensureMinnaVocabularySeeded();
+        await _ensureMinnaGrammarSeeded();
         await _ensureMinnaKanjiSeeded();
       },
     );
@@ -166,76 +167,34 @@ class ContentDatabase extends _$ContentDatabase {
     }
   }
 
+  Future<void> _ensureMinnaGrammarSeeded() async {
+    for (final spec in _contentSeedSpecs) {
+      final levelCountExpr = grammarPoint.id.count();
+      final levelQuery = selectOnly(grammarPoint)
+        ..addColumns([levelCountExpr])
+        ..where(grammarPoint.level.equals(spec.levelLabel));
+      final levelRow = await levelQuery.getSingle();
+      final levelCount = levelRow.read(levelCountExpr) ?? 0;
+      if (levelCount == 0) {
+        await _seedMinnaGrammar();
+        return;
+      }
+    }
+  }
+
   Future<void> _seedMinnaGrammar() async {
     // Clear existing data to prevent duplicates and ensure fresh data
     await delete(grammarExample).go();
     await delete(grammarPoint).go();
 
-    // Seeding Minna Grammar Lessons 1-5 (Batch 1)
-    final List<String> grammarFiles = [
-      // ... list remains same in implementation, just showing logic change ...
-      'assets/data/grammar/n5/grammar_n5_1.json',
-      'assets/data/grammar/n5/grammar_n5_2.json',
-      'assets/data/grammar/n5/grammar_n5_3.json',
-      'assets/data/grammar/n5/grammar_n5_4.json',
-      'assets/data/grammar/n5/grammar_n5_5.json',
-      // Batch 1: Lessons 6-10
-      'assets/data/grammar/n5/grammar_n5_6.json',
-      'assets/data/grammar/n5/grammar_n5_7.json',
-      'assets/data/grammar/n5/grammar_n5_8.json',
-      'assets/data/grammar/n5/grammar_n5_9.json',
-      'assets/data/grammar/n5/grammar_n5_10.json',
-      // Batch 2: Lessons 11-15
-      'assets/data/grammar/n5/grammar_n5_11.json',
-      'assets/data/grammar/n5/grammar_n5_12.json',
-      'assets/data/grammar/n5/grammar_n5_13.json',
-      'assets/data/grammar/n5/grammar_n5_14.json',
-      'assets/data/grammar/n5/grammar_n5_15.json',
-      // Batch 3: Lessons 16-20
-      'assets/data/grammar/n5/grammar_n5_16.json',
-      'assets/data/grammar/n5/grammar_n5_17.json',
-      'assets/data/grammar/n5/grammar_n5_18.json',
-      'assets/data/grammar/n5/grammar_n5_19.json',
-      'assets/data/grammar/n5/grammar_n5_20.json',
-      // Batch 4: Lessons 21-25
-      'assets/data/grammar/n5/grammar_n5_21.json',
-      'assets/data/grammar/n5/grammar_n5_22.json',
-      'assets/data/grammar/n5/grammar_n5_23.json',
-      'assets/data/grammar/n5/grammar_n5_24.json',
-      'assets/data/grammar/n5/grammar_n5_25.json',
-
-      // -- N4 Grammar --
-      // Batch 1: Lessons 26-30
-      'assets/data/grammar/n4/grammar_n4_26.json',
-      'assets/data/grammar/n4/grammar_n4_27.json',
-      'assets/data/grammar/n4/grammar_n4_28.json',
-      'assets/data/grammar/n4/grammar_n4_29.json',
-      'assets/data/grammar/n4/grammar_n4_30.json',
-      // Batch 2: Lessons 31-35
-      'assets/data/grammar/n4/grammar_n4_31.json',
-      'assets/data/grammar/n4/grammar_n4_32.json',
-      'assets/data/grammar/n4/grammar_n4_33.json',
-      'assets/data/grammar/n4/grammar_n4_34.json',
-      'assets/data/grammar/n4/grammar_n4_35.json',
-      // Batch 3: Lessons 36-40
-      'assets/data/grammar/n4/grammar_n4_36.json',
-      'assets/data/grammar/n4/grammar_n4_37.json',
-      'assets/data/grammar/n4/grammar_n4_38.json',
-      'assets/data/grammar/n4/grammar_n4_39.json',
-      'assets/data/grammar/n4/grammar_n4_40.json',
-      // Batch 4: Lessons 41-45
-      'assets/data/grammar/n4/grammar_n4_41.json',
-      'assets/data/grammar/n4/grammar_n4_42.json',
-      'assets/data/grammar/n4/grammar_n4_43.json',
-      'assets/data/grammar/n4/grammar_n4_44.json',
-      'assets/data/grammar/n4/grammar_n4_45.json',
-      // Batch 5: Lessons 46-50
-      'assets/data/grammar/n4/grammar_n4_46.json',
-      'assets/data/grammar/n4/grammar_n4_47.json',
-      'assets/data/grammar/n4/grammar_n4_48.json',
-      'assets/data/grammar/n4/grammar_n4_49.json',
-      'assets/data/grammar/n4/grammar_n4_50.json',
-    ];
+    final grammarFiles = <String>[];
+    for (final spec in _contentSeedSpecs) {
+      for (var lessonId = spec.startLesson; lessonId <= spec.endLesson; lessonId++) {
+        grammarFiles.add(
+          'assets/data/content/grammar/${spec.levelLower}/grammar_${spec.levelLower}_$lessonId.json',
+        );
+      }
+    }
 
     for (final file in grammarFiles) {
       try {
@@ -248,14 +207,14 @@ class ContentDatabase extends _$ContentDatabase {
         Map<String, List<dynamic>> extraExamplesMap = {};
         try {
           // Infer lesson and level from first point or file path
-          // File path: assets/data/grammar/n5/grammar_n5_1.json
+          // File path: assets/data/content/grammar/n5/grammar_n5_1.json
           // We can parse file path string usually, or take from point data
           final firstPoint = points.first;
           final lessonId = firstPoint['lessonId'] as int;
           final level = (firstPoint['level'] as String).toLowerCase(); // 'n5'
 
           final examplesFile =
-              'assets/data/grammar/examples/$level/lesson_$lessonId.json';
+              'assets/data/content/grammar_examples/$level/lesson_$lessonId.json';
           final exJsonString = await rootBundle.loadString(examplesFile);
           final List<dynamic> exList = json.decode(exJsonString);
 
@@ -313,7 +272,6 @@ class ContentDatabase extends _$ContentDatabase {
 
   Future<void> _seedVocabularyLevel(_ContentSeedSpec spec) async {
     final level = spec.levelLabel;
-    final levelLower = spec.levelLower;
     final startLesson = spec.startLesson;
     final endLesson = spec.endLesson;
 
@@ -323,44 +281,14 @@ class ContentDatabase extends _$ContentDatabase {
         level: level,
         lessonId: lessonId,
       );
-      if (canonicalRows.isNotEmpty) {
-        allRows.addAll(
-          _mergeLessonRows(
-            preferred: canonicalRows,
-            fallback: const [],
-            level: level,
-            lessonId: lessonId,
-          ),
-        );
+      if (canonicalRows.isEmpty) {
         continue;
       }
 
-      final normalizedRows = await _loadNormalizedVocabRows(
-        level: level,
-        lessonId: lessonId,
-      );
-
-      // Prefer normalized rows when present; legacy files are only a fallback.
-      if (normalizedRows.isNotEmpty) {
-        allRows.addAll(
-          _mergeLessonRows(
-            preferred: normalizedRows,
-            fallback: const [],
-            level: level,
-            lessonId: lessonId,
-          ),
-        );
-        continue;
-      }
-
-      final legacyRows = await _loadLegacyVocabRows(
-        levelLower: levelLower,
-        lessonId: lessonId,
-      );
       allRows.addAll(
         _mergeLessonRows(
-          preferred: const [],
-          fallback: legacyRows,
+          preferred: canonicalRows,
+          fallback: const [],
           level: level,
           lessonId: lessonId,
         ),
@@ -393,7 +321,7 @@ class ContentDatabase extends _$ContentDatabase {
     final levelLower = level.toLowerCase();
     final paddedLessonId = lessonId.toString().padLeft(2, '0');
     final path =
-        'assets/data/canonical/vocab/$levelLower/lesson_$paddedLessonId.json';
+        'assets/data/content/vocab/$levelLower/lesson_$paddedLessonId.json';
 
     try {
       final raw = await rootBundle.loadString(path);
@@ -452,118 +380,6 @@ class ContentDatabase extends _$ContentDatabase {
     }
   }
 
-  Future<List<Map<String, dynamic>>> _loadLegacyVocabRows({
-    required String levelLower,
-    required int lessonId,
-  }) async {
-    final path =
-        'assets/data/vocab/$levelLower/vocab_${levelLower}_$lessonId.json';
-    try {
-      final jsonString = await rootBundle.loadString(path);
-      final List<dynamic> list = json.decode(jsonString);
-      return list
-          .map((item) => _asMap(item))
-          .whereType<Map<String, dynamic>>()
-          .toList();
-    } catch (_) {
-      return const [];
-    }
-  }
-
-  Future<List<Map<String, dynamic>>> _loadNormalizedVocabRows({
-    required String level,
-    required int lessonId,
-  }) async {
-    final levelLower = level.toLowerCase();
-    final paddedLessonId = lessonId.toString().padLeft(2, '0');
-    final basePath = 'assets/data/vocab/$levelLower/lesson_$paddedLessonId';
-
-    try {
-      final masterJson = await rootBundle.loadString('$basePath/master.json');
-      final senseJson = await rootBundle.loadString('$basePath/sense.json');
-      final mapJson = await rootBundle.loadString('$basePath/map.json');
-
-      final masterList = json.decode(masterJson) as List<dynamic>;
-      final senseList = json.decode(senseJson) as List<dynamic>;
-      final lessonMap = json.decode(mapJson) as List<dynamic>;
-
-      final masterById = <String, Map<String, dynamic>>{};
-      for (final raw in masterList) {
-        final item = _asMap(raw);
-        if (item == null) continue;
-        final vocabId = _readText(item, 'vocabId');
-        if (vocabId.isEmpty) continue;
-        masterById[vocabId] = item;
-      }
-
-      final senseById = <String, Map<String, dynamic>>{};
-      for (final raw in senseList) {
-        final item = _asMap(raw);
-        if (item == null) continue;
-        final senseId = _readText(item, 'senseId');
-        if (senseId.isEmpty) continue;
-        senseById[senseId] = item;
-      }
-
-      final mapRows =
-          lessonMap
-              .map((row) => _asMap(row))
-              .whereType<Map<String, dynamic>>()
-              .toList()
-            ..sort((a, b) {
-              final aOrder = _readInt(a, 'order') ?? 0;
-              final bOrder = _readInt(b, 'order') ?? 0;
-              return aOrder.compareTo(bOrder);
-            });
-
-      final normalizedRows = <Map<String, dynamic>>[];
-      for (final mapRow in mapRows) {
-        final senseId = _readText(mapRow, 'senseId');
-        if (senseId.isEmpty) continue;
-
-        final sense = senseById[senseId];
-        if (sense == null) continue;
-
-        final vocabId = _readText(sense, 'vocabId');
-        if (vocabId.isEmpty) continue;
-
-        final lemma = masterById[vocabId];
-        if (lemma == null) continue;
-
-        final term = _readText(lemma, 'term');
-        if (term.isEmpty) continue;
-
-        final meaningVi = _readText(sense, 'meaningVi');
-        if (meaningVi.isEmpty) continue;
-
-        final mappedLesson = _readInt(mapRow, 'lessonId') ?? lessonId;
-        final tag = _firstNonEmpty([
-          _readText(mapRow, 'tag'),
-          _readText(sense, 'tag'),
-          _readText(lemma, 'tag'),
-        ]);
-        final tags = tag.isEmpty
-            ? 'minna_$mappedLesson'
-            : 'minna_$mappedLesson,$tag';
-
-        normalizedRows.add({
-          'term': term,
-          'reading': _readNullableText(lemma, 'reading'),
-          'kanjiMeaning': _readNullableText(lemma, 'kanjiMeaning'),
-          'sourceVocabId': vocabId,
-          'sourceSenseId': senseId,
-          'meaning_vi': meaningVi,
-          'meaning_en': _readNullableText(sense, 'meaningEn'),
-          'level': level,
-          'tags': tags,
-        });
-      }
-
-      return normalizedRows;
-    } catch (_) {
-      return const [];
-    }
-  }
 
   List<Map<String, dynamic>> _mergeLessonRows({
     required List<Map<String, dynamic>> preferred,
@@ -757,7 +573,7 @@ class ContentDatabase extends _$ContentDatabase {
   }) async {
     final paddedLessonId = lessonId.toString().padLeft(2, '0');
     final path =
-        'assets/data/canonical/kanji/$levelLower/lesson_$paddedLessonId.json';
+        'assets/data/content/kanji/$levelLower/lesson_$paddedLessonId.json';
 
     try {
       final raw = await rootBundle.loadString(path);
@@ -864,17 +680,6 @@ class ContentDatabase extends _$ContentDatabase {
         lessonId: lessonId,
       );
       if (rows.isEmpty) {
-        final file =
-            'assets/data/kanji/${spec.levelLower}/kanji_${spec.levelLower}_$lessonId.json';
-        try {
-          final jsonString = await rootBundle.loadString(file);
-          final legacyRows = json.decode(jsonString);
-          if (legacyRows is List) {
-            await _insertKanjiRows(legacyRows);
-          }
-        } catch (_) {
-          // Ignore missing lesson assets.
-        }
         continue;
       }
       await _insertKanjiRows(rows);

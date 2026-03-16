@@ -9,7 +9,7 @@ import '../models/immersion_article.dart';
 enum ImmersionSource { local, nhkEasy }
 
 class ImmersionService {
-  static const _assetPath = 'assets/data/immersion/immersion_samples.json';
+  static const _assetPath = 'assets/data/content/immersion/immersion_samples.json';
   static const nhkSourceLabel = 'NHK Easy';
   static const nhkLevelLabel = 'Easy';
   static const watanocSourceLabel = 'Watanoc';
@@ -61,7 +61,7 @@ class ImmersionService {
       final endLesson = entry.value[1];
       for (int i = startLesson; i <= endLesson; i++) {
         final paddedId = i.toString().padLeft(2, '0');
-        final path = 'assets/data/immersion/$level/lesson_$paddedId.json';
+        final path = 'assets/data/content/immersion/$level/lesson_$paddedId.json';
         try {
           final raw = await rootBundle.loadString(path);
           final json = jsonDecode(raw);

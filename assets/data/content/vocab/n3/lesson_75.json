@@ -1,0 +1,661 @@
+{
+  "schemaVersion": 2,
+  "dataset": "vocab",
+  "series": "quartet-jmdict-kanjidic-draft",
+  "level": "N3",
+  "lessonId": 75,
+  "entryCount": 12,
+  "entries": [
+    {
+      "entryId": "n3_l75_s001",
+      "lessonId": 75,
+      "level": "N3",
+      "order": 1,
+      "tags": [
+        "quartet-theme",
+        "global",
+        "noun",
+        "quartet_25",
+        "theme_75"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l75_v001",
+        "term": "国際",
+        "reading": "こくさい",
+        "kanji": [
+          "国",
+          "際"
+        ],
+        "labels": {
+          "hanViet": "Quốc tế"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l75_s001",
+        "meaningVi": "quốc tế",
+        "meaningEn": "international; diplomatic intercourse"
+      },
+      "search": {
+        "termNoAccent": "国際",
+        "readingNoAccent": "こくさい",
+        "meaningViNoAccent": "quoc te",
+        "hanVietNoAccent": "quoc te"
+      },
+      "links": {
+        "sourceVocabId": "n3_l75_v001",
+        "sourceSenseId": "n3_l75_s001",
+        "sourceEntrySeq": "1286400"
+      },
+      "legacy": {
+        "kanjiMeaning": "Quốc tế"
+      },
+      "theme": {
+        "quartetLesson": 25,
+        "themeEn": "Global issues and volunteering",
+        "themeVi": "Vấn đề toàn cầu và tình nguyện"
+      }
+    },
+    {
+      "entryId": "n3_l75_s002",
+      "lessonId": 75,
+      "level": "N3",
+      "order": 2,
+      "tags": [
+        "quartet-theme",
+        "global",
+        "noun",
+        "quartet_25",
+        "theme_75"
+      ],
+      "classification": {
+        "script": "kana_or_other",
+        "hasKanji": false,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l75_v002",
+        "term": "ボランティア",
+        "reading": "ぼらんてぃあ",
+        "kanji": [],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l75_s002",
+        "meaningVi": "tình nguyện viên",
+        "meaningEn": "volunteer"
+      },
+      "search": {
+        "termNoAccent": "ボランティア",
+        "readingNoAccent": "ぼらんてぃあ",
+        "meaningViNoAccent": "tinh nguyen vien",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l75_v002",
+        "sourceSenseId": "n3_l75_s002",
+        "sourceEntrySeq": "1124300"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 25,
+        "themeEn": "Global issues and volunteering",
+        "themeVi": "Vấn đề toàn cầu và tình nguyện"
+      }
+    },
+    {
+      "entryId": "n3_l75_s003",
+      "lessonId": 75,
+      "level": "N3",
+      "order": 3,
+      "tags": [
+        "quartet-theme",
+        "global",
+        "noun",
+        "suru",
+        "quartet_25",
+        "theme_75"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l75_v003",
+        "term": "支援",
+        "reading": "しえん",
+        "kanji": [
+          "支",
+          "援"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l75_s003",
+        "meaningVi": "hỗ trợ",
+        "meaningEn": "support; backing"
+      },
+      "search": {
+        "termNoAccent": "支援",
+        "readingNoAccent": "しえん",
+        "meaningViNoAccent": "ho tro",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l75_v003",
+        "sourceSenseId": "n3_l75_s003",
+        "sourceEntrySeq": "1310100"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 25,
+        "themeEn": "Global issues and volunteering",
+        "themeVi": "Vấn đề toàn cầu và tình nguyện"
+      }
+    },
+    {
+      "entryId": "n3_l75_s004",
+      "lessonId": 75,
+      "level": "N3",
+      "order": 4,
+      "tags": [
+        "quartet-theme",
+        "global",
+        "noun",
+        "quartet_25",
+        "theme_75"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l75_v004",
+        "term": "貧困",
+        "reading": "ひんこん",
+        "kanji": [
+          "貧",
+          "困"
+        ],
+        "labels": {
+          "hanViet": "Khốn"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l75_s004",
+        "meaningVi": "nghèo đói",
+        "meaningEn": "poverty; penury"
+      },
+      "search": {
+        "termNoAccent": "貧困",
+        "readingNoAccent": "ひんこん",
+        "meaningViNoAccent": "ngheo doi",
+        "hanVietNoAccent": "khon"
+      },
+      "links": {
+        "sourceVocabId": "n3_l75_v004",
+        "sourceSenseId": "n3_l75_s004",
+        "sourceEntrySeq": "1490830"
+      },
+      "legacy": {
+        "kanjiMeaning": "Khốn"
+      },
+      "theme": {
+        "quartetLesson": 25,
+        "themeEn": "Global issues and volunteering",
+        "themeVi": "Vấn đề toàn cầu và tình nguyện"
+      }
+    },
+    {
+      "entryId": "n3_l75_s005",
+      "lessonId": 75,
+      "level": "N3",
+      "order": 5,
+      "tags": [
+        "quartet-theme",
+        "global",
+        "noun",
+        "quartet_25",
+        "theme_75"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l75_v005",
+        "term": "難民",
+        "reading": "なんみん",
+        "kanji": [
+          "難",
+          "民"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l75_s005",
+        "meaningVi": "người tị nạn",
+        "meaningEn": "refugee; displaced person"
+      },
+      "search": {
+        "termNoAccent": "難民",
+        "readingNoAccent": "なんみん",
+        "meaningViNoAccent": "nguoi ti nan",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l75_v005",
+        "sourceSenseId": "n3_l75_s005",
+        "sourceEntrySeq": "1461110"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 25,
+        "themeEn": "Global issues and volunteering",
+        "themeVi": "Vấn đề toàn cầu và tình nguyện"
+      }
+    },
+    {
+      "entryId": "n3_l75_s006",
+      "lessonId": 75,
+      "level": "N3",
+      "order": 6,
+      "tags": [
+        "quartet-theme",
+        "global",
+        "noun",
+        "suru",
+        "quartet_25",
+        "theme_75"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l75_v006",
+        "term": "共存",
+        "reading": "きょうぞん",
+        "kanji": [
+          "共",
+          "存"
+        ],
+        "labels": {
+          "hanViet": "Tồn"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l75_s006",
+        "meaningVi": "cùng tồn tại",
+        "meaningEn": "coexistence"
+      },
+      "search": {
+        "termNoAccent": "共存",
+        "readingNoAccent": "きょうぞん",
+        "meaningViNoAccent": "cung ton tai",
+        "hanVietNoAccent": "ton"
+      },
+      "links": {
+        "sourceVocabId": "n3_l75_v006",
+        "sourceSenseId": "n3_l75_s006",
+        "sourceEntrySeq": "1578050"
+      },
+      "legacy": {
+        "kanjiMeaning": "Tồn"
+      },
+      "theme": {
+        "quartetLesson": 25,
+        "themeEn": "Global issues and volunteering",
+        "themeVi": "Vấn đề toàn cầu và tình nguyện"
+      }
+    },
+    {
+      "entryId": "n3_l75_s007",
+      "lessonId": 75,
+      "level": "N3",
+      "order": 7,
+      "tags": [
+        "quartet-theme",
+        "global",
+        "noun",
+        "suru",
+        "quartet_25",
+        "theme_75"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l75_v007",
+        "term": "汚染",
+        "reading": "おせん",
+        "kanji": [
+          "汚",
+          "染"
+        ],
+        "labels": {
+          "hanViet": "Ô"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l75_s007",
+        "meaningVi": "ô nhiễm",
+        "meaningEn": "pollution; contamination"
+      },
+      "search": {
+        "termNoAccent": "汚染",
+        "readingNoAccent": "おせん",
+        "meaningViNoAccent": "o nhiem",
+        "hanVietNoAccent": "o"
+      },
+      "links": {
+        "sourceVocabId": "n3_l75_v007",
+        "sourceSenseId": "n3_l75_s007",
+        "sourceEntrySeq": "1179040"
+      },
+      "legacy": {
+        "kanjiMeaning": "Ô"
+      },
+      "theme": {
+        "quartetLesson": 25,
+        "themeEn": "Global issues and volunteering",
+        "themeVi": "Vấn đề toàn cầu và tình nguyện"
+      }
+    },
+    {
+      "entryId": "n3_l75_s008",
+      "lessonId": 75,
+      "level": "N3",
+      "order": 8,
+      "tags": [
+        "quartet-theme",
+        "global",
+        "noun",
+        "suru",
+        "quartet_25",
+        "theme_75"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l75_v008",
+        "term": "協力",
+        "reading": "きょうりょく",
+        "kanji": [
+          "協",
+          "力"
+        ],
+        "labels": {
+          "hanViet": "Lực"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l75_s008",
+        "meaningVi": "hợp tác",
+        "meaningEn": "cooperation; collaboration"
+      },
+      "search": {
+        "termNoAccent": "協力",
+        "readingNoAccent": "きょうりょく",
+        "meaningViNoAccent": "hop tac",
+        "hanVietNoAccent": "luc"
+      },
+      "links": {
+        "sourceVocabId": "n3_l75_v008",
+        "sourceSenseId": "n3_l75_s008",
+        "sourceEntrySeq": "1591720"
+      },
+      "legacy": {
+        "kanjiMeaning": "Lực"
+      },
+      "theme": {
+        "quartetLesson": 25,
+        "themeEn": "Global issues and volunteering",
+        "themeVi": "Vấn đề toàn cầu và tình nguyện"
+      }
+    },
+    {
+      "entryId": "n3_l75_s009",
+      "lessonId": 75,
+      "level": "N3",
+      "order": 9,
+      "tags": [
+        "quartet-theme",
+        "global",
+        "noun",
+        "na-adjective",
+        "quartet_25",
+        "theme_75"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l75_v009",
+        "term": "平等",
+        "reading": "びょうどう",
+        "kanji": [
+          "平",
+          "等"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l75_s009",
+        "meaningVi": "bình đẳng",
+        "meaningEn": "equality; impartiality"
+      },
+      "search": {
+        "termNoAccent": "平等",
+        "readingNoAccent": "びょうどう",
+        "meaningViNoAccent": "binh dang",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l75_v009",
+        "sourceSenseId": "n3_l75_s009",
+        "sourceEntrySeq": "1507670"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 25,
+        "themeEn": "Global issues and volunteering",
+        "themeVi": "Vấn đề toàn cầu và tình nguyện"
+      }
+    },
+    {
+      "entryId": "n3_l75_s010",
+      "lessonId": 75,
+      "level": "N3",
+      "order": 10,
+      "tags": [
+        "quartet-theme",
+        "global",
+        "noun",
+        "quartet_25",
+        "theme_75"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l75_v010",
+        "term": "人権",
+        "reading": "じんけん",
+        "kanji": [
+          "人",
+          "権"
+        ],
+        "labels": {
+          "hanViet": "Nhân"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l75_s010",
+        "meaningVi": "nhân quyền",
+        "meaningEn": "human rights; civil liberties"
+      },
+      "search": {
+        "termNoAccent": "人権",
+        "readingNoAccent": "じんけん",
+        "meaningViNoAccent": "nhan quyen",
+        "hanVietNoAccent": "nhan"
+      },
+      "links": {
+        "sourceVocabId": "n3_l75_v010",
+        "sourceSenseId": "n3_l75_s010",
+        "sourceEntrySeq": "1367200"
+      },
+      "legacy": {
+        "kanjiMeaning": "Nhân"
+      },
+      "theme": {
+        "quartetLesson": 25,
+        "themeEn": "Global issues and volunteering",
+        "themeVi": "Vấn đề toàn cầu và tình nguyện"
+      }
+    },
+    {
+      "entryId": "n3_l75_s011",
+      "lessonId": 75,
+      "level": "N3",
+      "order": 11,
+      "tags": [
+        "quartet-theme",
+        "global",
+        "noun",
+        "quartet_25",
+        "theme_75"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l75_v011",
+        "term": "対策",
+        "reading": "たいさく",
+        "kanji": [
+          "対",
+          "策"
+        ],
+        "labels": {
+          "hanViet": "đối"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l75_s011",
+        "meaningVi": "đối sách, biện pháp",
+        "meaningEn": "measure; step"
+      },
+      "search": {
+        "termNoAccent": "対策",
+        "readingNoAccent": "たいさく",
+        "meaningViNoAccent": "doi sach, bien phap",
+        "hanVietNoAccent": "doi"
+      },
+      "links": {
+        "sourceVocabId": "n3_l75_v011",
+        "sourceSenseId": "n3_l75_s011",
+        "sourceEntrySeq": "1410050"
+      },
+      "legacy": {
+        "kanjiMeaning": "đối"
+      },
+      "theme": {
+        "quartetLesson": 25,
+        "themeEn": "Global issues and volunteering",
+        "themeVi": "Vấn đề toàn cầu và tình nguyện"
+      }
+    },
+    {
+      "entryId": "n3_l75_s012",
+      "lessonId": 75,
+      "level": "N3",
+      "order": 12,
+      "tags": [
+        "quartet-theme",
+        "global",
+        "noun",
+        "suru",
+        "quartet_25",
+        "theme_75"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l75_v012",
+        "term": "寄付",
+        "reading": "きふ",
+        "kanji": [
+          "寄",
+          "付"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l75_s012",
+        "meaningVi": "quyên góp",
+        "meaningEn": "contribution; donation"
+      },
+      "search": {
+        "termNoAccent": "寄付",
+        "readingNoAccent": "きふ",
+        "meaningViNoAccent": "quyen gop",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l75_v012",
+        "sourceSenseId": "n3_l75_s012",
+        "sourceEntrySeq": "1591400"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 25,
+        "themeEn": "Global issues and volunteering",
+        "themeVi": "Vấn đề toàn cầu và tình nguyện"
+      }
+    }
+  ]
+}

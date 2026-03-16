@@ -13,9 +13,9 @@ from pathlib import Path
 from typing import Dict, List, Tuple
 
 ROOT = Path(__file__).resolve().parents[1]
-TEMPLATE_PATH = ROOT / "assets" / "data" / "kanji" / "stroke_templates.json"
+TEMPLATE_PATH = ROOT / "assets" / "data" / "support" / "kanji" / "stroke_templates.json"
 OVERRIDES_PATH = (
-    ROOT / "assets" / "data" / "kanji" / "stroke_template_overrides.json"
+    ROOT / "assets" / "data" / "support" / "kanji" / "stroke_template_overrides.json"
 )
 KANJI_LEVEL_DIRS = ["n5", "n4"]
 
@@ -78,7 +78,7 @@ def _load_kanji_chars() -> Tuple[List[str], Dict[str, dict]]:
     seen = set()
 
     for level in KANJI_LEVEL_DIRS:
-        level_dir = ROOT / "assets" / "data" / "kanji" / level
+        level_dir = ROOT / "assets" / "data" / "archive" / "kanji" / level
         files = sorted(level_dir.glob("*.json"), key=_natural_key)
         for file in files:
             data = json.loads(file.read_text(encoding="utf-8"))

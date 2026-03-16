@@ -2,10 +2,10 @@
 
 ## What was missing
 
-- `assets/data/vocab/n3/` and `assets/data/kanji/n3/` were empty.
+- `assets/data/archive/vocab/n3/` and `assets/data/archive/kanji/n3/` were empty.
 - `ContentDatabase` still seeded only `N5` and `N4`.
 - `AppDatabase` only pre-created lessons `1-50`, so `N3` lesson meta could stay empty on existing installs.
-- Canonical asset bundle declarations did not include `assets/data/canonical/vocab/n3/` and `assets/data/canonical/kanji/n3/` explicitly.
+- Canonical asset bundle declarations did not include `assets/data/content/vocab/n3/` and `assets/data/content/kanji/n3/` explicitly.
 
 ## Source policy used
 

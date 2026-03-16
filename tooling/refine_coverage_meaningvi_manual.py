@@ -8,7 +8,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-VOCAB_ROOT = ROOT / "assets" / "data" / "vocab"
+VOCAB_ROOT = ROOT / "assets" / "data" / "archive" / "vocab"
 REPORT_PATH = ROOT / "docs" / "reports" / "n4n5-coverage-meaningvi-manual-refine-report.json"
 
 

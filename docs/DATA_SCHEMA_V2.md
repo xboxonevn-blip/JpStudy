@@ -4,7 +4,7 @@
 
 `v2` defines a cleaner canonical schema for vocab and kanji without breaking the
 current app. The existing lesson assets remain supported, but the app can now
-prefer canonical exports under `assets/data/canonical/`.
+prefer canonical exports under `assets/data/content/`.
 
 ## Why This Exists
 
@@ -27,8 +27,8 @@ The previous lesson schema was practical but mixed multiple concerns:
 
 Path:
 
-- `assets/data/canonical/vocab/n5/lesson_01.json`
-- `assets/data/canonical/vocab/n4/lesson_26.json`
+- `assets/data/content/vocab/n5/lesson_01.json`
+- `assets/data/content/vocab/n4/lesson_26.json`
 
 Shape:
 
@@ -96,8 +96,8 @@ Shape:
 
 Path:
 
-- `assets/data/canonical/kanji/n5/lesson_01.json`
-- `assets/data/canonical/kanji/n4/lesson_26.json`
+- `assets/data/content/kanji/n5/lesson_01.json`
+- `assets/data/content/kanji/n4/lesson_26.json`
 
 Shape:
 
@@ -168,7 +168,7 @@ Shape:
 - `labels.meaningViDisplay`: compatibility display string.
 - `decomposition`: embedded structural metadata, so canonical kanji no longer
   needs a separate join at read time.
-- `assets/data/kanji/decomposition.json`: generated compatibility export derived
+- `assets/data/support/kanji/decomposition.json`: generated compatibility export derived
   from the embedded lesson kanji decomposition data.
 
 ## Source Of Truth Policy
@@ -177,7 +177,7 @@ Current transition policy:
 
 1. Vocabulary lesson assets and kanji lesson assets remain editable.
 2. Kanji lesson assets embed their own `decomposition` blocks.
-3. `assets/data/kanji/decomposition.json` is now a derived compatibility file.
+3. `assets/data/support/kanji/decomposition.json` is now a derived compatibility file.
 4. `tooling/build_canonical_content_v2.py` exports canonical `v2`.
 5. Runtime loaders may prefer canonical `v2` and fall back to legacy files.
 6. `tooling/validate_content_assets_v2.py` checks both legacy and canonical

@@ -913,90 +913,22 @@ class LessonRepository {
       levelLower: levelLower,
       lessonId: lessonId,
     );
-    if (canonicalRows.isNotEmpty) {
-      final result = <String, int>{};
-      for (final row in canonicalRows) {
-        final term = (row['term'] ?? '').toString();
-        final reading = (row['reading'] ?? '').toString();
-        final meaning = (row['meaningVi'] ?? '').toString();
-        final order = row['order'] as int? ?? 0;
-        if (term.trim().isEmpty || meaning.trim().isEmpty || order <= 0) {
-          continue;
-        }
-        result[_vocabKeyWithMeaning(term, reading, meaning)] = order;
-      }
-      return result;
-    }
-
-    // Only available for lesson-structured vocab (N4/N5 currently).
-    final paddedLessonId = lessonId.toString().padLeft(2, '0');
-    final basePath = 'assets/data/vocab/$levelLower/lesson_$paddedLessonId';
-
-    try {
-      final masterJson = await rootBundle.loadString('$basePath/master.json');
-      final senseJson = await rootBundle.loadString('$basePath/sense.json');
-      final mapJson = await rootBundle.loadString('$basePath/map.json');
-
-      final masterList = json.decode(masterJson) as List<dynamic>;
-      final senseList = json.decode(senseJson) as List<dynamic>;
-      final mapList = json.decode(mapJson) as List<dynamic>;
-
-      final masterById = <String, Map<String, dynamic>>{};
-      for (final raw in masterList) {
-        if (raw is! Map) continue;
-        final item = raw.map((k, v) => MapEntry(k.toString(), v));
-        final vocabId = (item['vocabId'] ?? '').toString().trim();
-        if (vocabId.isEmpty) continue;
-        masterById[vocabId] = item;
-      }
-
-      final senseById = <String, Map<String, dynamic>>{};
-      for (final raw in senseList) {
-        if (raw is! Map) continue;
-        final item = raw.map((k, v) => MapEntry(k.toString(), v));
-        final senseId = (item['senseId'] ?? '').toString().trim();
-        if (senseId.isEmpty) continue;
-        senseById[senseId] = item;
-      }
-
-      final mapRows =
-          mapList
-              .whereType<Map>()
-              .map((row) => row.map((k, v) => MapEntry(k.toString(), v)))
-              .toList()
-            ..sort((a, b) {
-              final aOrder =
-                  int.tryParse((a['order'] ?? '').toString().trim()) ?? 0;
-              final bOrder =
-                  int.tryParse((b['order'] ?? '').toString().trim()) ?? 0;
-              return aOrder.compareTo(bOrder);
-            });
-
-      final result = <String, int>{};
-      var i = 0;
-      for (final mapRow in mapRows) {
-        final senseId = (mapRow['senseId'] ?? '').toString().trim();
-        if (senseId.isEmpty) continue;
-        final sense = senseById[senseId];
-        if (sense == null) continue;
-        final vocabId = (sense['vocabId'] ?? '').toString().trim();
-        if (vocabId.isEmpty) continue;
-        final lemma = masterById[vocabId];
-        if (lemma == null) continue;
-
-        final term = (lemma['term'] ?? '').toString();
-        final reading = (lemma['reading'] ?? '').toString();
-        final meaning = (sense['meaningVi'] ?? '').toString();
-        if (term.trim().isEmpty || meaning.trim().isEmpty) continue;
-
-        i += 1;
-        result[_vocabKeyWithMeaning(term, reading, meaning)] = i;
-      }
-
-      return result;
-    } catch (_) {
+    if (canonicalRows.isEmpty) {
       return const {};
     }
+
+    final result = <String, int>{};
+    for (final row in canonicalRows) {
+      final term = (row['term'] ?? '').toString();
+      final reading = (row['reading'] ?? '').toString();
+      final meaning = (row['meaningVi'] ?? '').toString();
+      final order = row['order'] as int? ?? 0;
+      if (term.trim().isEmpty || meaning.trim().isEmpty || order <= 0) {
+        continue;
+      }
+      result[_vocabKeyWithMeaning(term, reading, meaning)] = order;
+    }
+    return result;
   }
 
   Future<List<VocabData>> _loadLessonVocabRowsFromAssets({
@@ -1008,132 +940,42 @@ class LessonRepository {
       levelLower: levelLower,
       lessonId: lessonId,
     );
-    if (canonicalRows.isNotEmpty) {
-      final out = <VocabData>[];
-      var syntheticId = -(lessonId * 10000);
-      for (final row in canonicalRows) {
-        final term = (row['term'] ?? '').toString().trim();
-        final meaningVi = (row['meaningVi'] ?? '').toString().trim();
-        if (term.isEmpty || meaningVi.isEmpty) continue;
-
-        syntheticId -= 1;
-        final tags = row['tags'] is List
-            ? (row['tags'] as List)
-                  .map((tag) => tag.toString().trim())
-                  .where((tag) => tag.isNotEmpty)
-                  .join(',')
-            : '';
-        final mergedTags = tags.isEmpty
-            ? 'minna_$lessonId'
-            : 'minna_$lessonId,$tags';
-
-        out.add(
-          VocabData(
-            id: syntheticId,
-            term: term,
-            reading: _nullableLessonText(row['reading']),
-            meaning: meaningVi,
-            meaningEn: _nullableLessonText(row['meaningEn']),
-            kanjiMeaning: _nullableLessonText(row['kanjiMeaning']),
-            level: currentLevelLabel.toUpperCase(),
-            tags: mergedTags,
-          ),
-        );
-      }
-      return out;
-    }
-
-    final paddedLessonId = lessonId.toString().padLeft(2, '0');
-    final basePath = 'assets/data/vocab/$levelLower/lesson_$paddedLessonId';
-
-    try {
-      final masterJson = await rootBundle.loadString('$basePath/master.json');
-      final senseJson = await rootBundle.loadString('$basePath/sense.json');
-      final mapJson = await rootBundle.loadString('$basePath/map.json');
-
-      final masterList = json.decode(masterJson) as List<dynamic>;
-      final senseList = json.decode(senseJson) as List<dynamic>;
-      final mapList = json.decode(mapJson) as List<dynamic>;
-
-      final masterById = <String, Map<String, dynamic>>{};
-      for (final raw in masterList) {
-        if (raw is! Map) continue;
-        final item = raw.map((k, v) => MapEntry(k.toString(), v));
-        final vocabId = (item['vocabId'] ?? '').toString().trim();
-        if (vocabId.isEmpty) continue;
-        masterById[vocabId] = item;
-      }
-
-      final senseById = <String, Map<String, dynamic>>{};
-      for (final raw in senseList) {
-        if (raw is! Map) continue;
-        final item = raw.map((k, v) => MapEntry(k.toString(), v));
-        final senseId = (item['senseId'] ?? '').toString().trim();
-        if (senseId.isEmpty) continue;
-        senseById[senseId] = item;
-      }
-
-      final mapRows =
-          mapList
-              .whereType<Map>()
-              .map((row) => row.map((k, v) => MapEntry(k.toString(), v)))
-              .toList()
-            ..sort((a, b) {
-              final aOrder =
-                  int.tryParse((a['order'] ?? '').toString().trim()) ?? 0;
-              final bOrder =
-                  int.tryParse((b['order'] ?? '').toString().trim()) ?? 0;
-              return aOrder.compareTo(bOrder);
-            });
-
-      final out = <VocabData>[];
-      var syntheticId = -(lessonId * 10000);
-      for (final mapRow in mapRows) {
-        final senseId = (mapRow['senseId'] ?? '').toString().trim();
-        if (senseId.isEmpty) continue;
-        final sense = senseById[senseId];
-        if (sense == null) continue;
-        final vocabId = (sense['vocabId'] ?? '').toString().trim();
-        if (vocabId.isEmpty) continue;
-        final lemma = masterById[vocabId];
-        if (lemma == null) continue;
-
-        final term = (lemma['term'] ?? '').toString().trim();
-        final meaningVi = (sense['meaningVi'] ?? '').toString().trim();
-        if (term.isEmpty || meaningVi.isEmpty) continue;
-
-        final reading = (lemma['reading'] ?? '').toString().trim();
-        final kanjiMeaning = (lemma['kanjiMeaning'] ?? '').toString().trim();
-        final meaningEn = (sense['meaningEn'] ?? '').toString().trim();
-        final lessonTag =
-            int.tryParse((mapRow['lessonId'] ?? '').toString().trim()) ??
-            lessonId;
-        final extraTag = (mapRow['tag'] ?? sense['tag'] ?? lemma['tag'] ?? '')
-            .toString()
-            .trim();
-        final tags = extraTag.isEmpty
-            ? 'minna_$lessonTag'
-            : 'minna_$lessonTag,$extraTag';
-
-        syntheticId -= 1;
-        out.add(
-          VocabData(
-            id: syntheticId,
-            term: term,
-            reading: reading.isEmpty ? null : reading,
-            meaning: meaningVi,
-            meaningEn: meaningEn.isEmpty ? null : meaningEn,
-            kanjiMeaning: kanjiMeaning.isEmpty ? null : kanjiMeaning,
-            level: currentLevelLabel.toUpperCase(),
-            tags: tags,
-          ),
-        );
-      }
-
-      return out;
-    } catch (_) {
+    if (canonicalRows.isEmpty) {
       return const [];
     }
+
+    final out = <VocabData>[];
+    var syntheticId = -(lessonId * 10000);
+    for (final row in canonicalRows) {
+      final term = (row['term'] ?? '').toString().trim();
+      final meaningVi = (row['meaningVi'] ?? '').toString().trim();
+      if (term.isEmpty || meaningVi.isEmpty) continue;
+
+      syntheticId -= 1;
+      final tags = row['tags'] is List
+          ? (row['tags'] as List)
+                .map((tag) => tag.toString().trim())
+                .where((tag) => tag.isNotEmpty)
+                .join(',')
+          : '';
+      final mergedTags = tags.isEmpty
+          ? 'minna_$lessonId'
+          : 'minna_$lessonId,$tags';
+
+      out.add(
+        VocabData(
+          id: syntheticId,
+          term: term,
+          reading: _nullableLessonText(row['reading']),
+          meaning: meaningVi,
+          meaningEn: _nullableLessonText(row['meaningEn']),
+          kanjiMeaning: _nullableLessonText(row['kanjiMeaning']),
+          level: currentLevelLabel.toUpperCase(),
+          tags: mergedTags,
+        ),
+      );
+    }
+    return out;
   }
 
   Future<List<Map<String, dynamic>>> _loadCanonicalLessonVocabEntries({
@@ -1142,7 +984,7 @@ class LessonRepository {
   }) async {
     final paddedLessonId = lessonId.toString().padLeft(2, '0');
     final path =
-        'assets/data/canonical/vocab/$levelLower/lesson_$paddedLessonId.json';
+        'assets/data/content/vocab/$levelLower/lesson_$paddedLessonId.json';
 
     try {
       final raw = await rootBundle.loadString(path);

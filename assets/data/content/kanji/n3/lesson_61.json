@@ -1,0 +1,477 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "quartet-jmdict-kanjidic-draft",
+  "level": "N3",
+  "lessonId": 61,
+  "entryCount": 8,
+  "entries": [
+    {
+      "kanjiId": "n3_l61_k001",
+      "lessonId": 61,
+      "level": "N3",
+      "character": "震",
+      "strokeCount": 15,
+      "labels": {
+        "hanViet": "chấn",
+        "meaningVi": "chấn, rung",
+        "meaningViDisplay": "chấn (chấn, rung)",
+        "meaningEn": "quake, shake"
+      },
+      "readings": {
+        "onyomi": [
+          "シン"
+        ],
+        "kunyomi": [
+          "ふる.う",
+          "ふる.える",
+          "ふる.わせる",
+          "ふる.わす"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji trọng tâm của chủ đề QUARTET 11: Thiên nhiên và thiên tai.",
+        "en": "Core kanji for QUARTET 11: Nature and disasters."
+      },
+      "decomposition": {
+        "hanViet": "chấn",
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "chan",
+        "meaningViNoAccent": "chan, rung",
+        "meaningEnNoAccent": "quake, shake"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n3_l61_v002",
+          "sourceSenseId": "n3_l61_s002",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "chấn (chấn, rung)",
+        "onyomi": "シン",
+        "kunyomi": "ふる.う, ふる.える, ふる.わせる, ふる.わす"
+      },
+      "theme": {
+        "quartetLesson": 11,
+        "themeEn": "Nature and disasters",
+        "themeVi": "Thiên nhiên và thiên tai"
+      }
+    },
+    {
+      "kanjiId": "n3_l61_k002",
+      "lessonId": 61,
+      "level": "N3",
+      "character": "災",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": "",
+        "meaningVi": "tai",
+        "meaningViDisplay": "tai",
+        "meaningEn": "disaster, calamity"
+      },
+      "readings": {
+        "onyomi": [
+          "サイ"
+        ],
+        "kunyomi": [
+          "わざわ.い"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji trọng tâm của chủ đề QUARTET 11: Thiên nhiên và thiên tai.",
+        "en": "Core kanji for QUARTET 11: Nature and disasters."
+      },
+      "decomposition": {
+        "hanViet": "",
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "",
+        "meaningViNoAccent": "tai",
+        "meaningEnNoAccent": "disaster, calamity"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n3_l61_v004",
+          "sourceSenseId": "n3_l61_s004",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "tai",
+        "onyomi": "サイ",
+        "kunyomi": "わざわ.い"
+      },
+      "theme": {
+        "quartetLesson": 11,
+        "themeEn": "Nature and disasters",
+        "themeVi": "Thiên nhiên và thiên tai"
+      }
+    },
+    {
+      "kanjiId": "n3_l61_k003",
+      "lessonId": 61,
+      "level": "N3",
+      "character": "害",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "",
+        "meaningVi": "hại",
+        "meaningViDisplay": "hại",
+        "meaningEn": "harm, injury"
+      },
+      "readings": {
+        "onyomi": [
+          "ガイ"
+        ],
+        "kunyomi": []
+      },
+      "mnemonic": {
+        "vi": "Kanji trọng tâm của chủ đề QUARTET 11: Thiên nhiên và thiên tai.",
+        "en": "Core kanji for QUARTET 11: Nature and disasters."
+      },
+      "decomposition": {
+        "hanViet": "",
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "",
+        "meaningViNoAccent": "hai",
+        "meaningEnNoAccent": "harm, injury"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n3_l61_v004",
+          "sourceSenseId": "n3_l61_s004",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n3_l61_v005",
+          "sourceSenseId": "n3_l61_s005",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "hại",
+        "onyomi": "ガイ",
+        "kunyomi": ""
+      },
+      "theme": {
+        "quartetLesson": 11,
+        "themeEn": "Nature and disasters",
+        "themeVi": "Thiên nhiên và thiên tai"
+      }
+    },
+    {
+      "kanjiId": "n3_l61_k004",
+      "lessonId": 61,
+      "level": "N3",
+      "character": "避",
+      "strokeCount": 16,
+      "labels": {
+        "hanViet": "",
+        "meaningVi": "tị, tránh",
+        "meaningViDisplay": "tị, tránh",
+        "meaningEn": "evade, avoid"
+      },
+      "readings": {
+        "onyomi": [
+          "ヒ"
+        ],
+        "kunyomi": [
+          "さ.ける",
+          "よ.ける"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji trọng tâm của chủ đề QUARTET 11: Thiên nhiên và thiên tai.",
+        "en": "Core kanji for QUARTET 11: Nature and disasters."
+      },
+      "decomposition": {
+        "hanViet": "",
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "",
+        "meaningViNoAccent": "ti, tranh",
+        "meaningEnNoAccent": "evade, avoid"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n3_l61_v006",
+          "sourceSenseId": "n3_l61_s006",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "tị, tránh",
+        "onyomi": "ヒ",
+        "kunyomi": "さ.ける, よ.ける"
+      },
+      "theme": {
+        "quartetLesson": 11,
+        "themeEn": "Nature and disasters",
+        "themeVi": "Thiên nhiên và thiên tai"
+      }
+    },
+    {
+      "kanjiId": "n3_l61_k005",
+      "lessonId": 61,
+      "level": "N3",
+      "character": "難",
+      "strokeCount": 18,
+      "labels": {
+        "hanViet": "",
+        "meaningVi": "nạn, khó khăn",
+        "meaningViDisplay": "nạn, khó khăn",
+        "meaningEn": "difficult, impossible"
+      },
+      "readings": {
+        "onyomi": [
+          "ナン"
+        ],
+        "kunyomi": [
+          "かた.い",
+          "-がた.い",
+          "むずか.しい",
+          "むづか.しい"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji trọng tâm của chủ đề QUARTET 11: Thiên nhiên và thiên tai.",
+        "en": "Core kanji for QUARTET 11: Nature and disasters."
+      },
+      "decomposition": {
+        "hanViet": "",
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "",
+        "meaningViNoAccent": "nan, kho khan",
+        "meaningEnNoAccent": "difficult, impossible"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n3_l61_v006",
+          "sourceSenseId": "n3_l61_s006",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "nạn, khó khăn",
+        "onyomi": "ナン",
+        "kunyomi": "かた.い, -がた.い, むずか.しい, むづか.しい"
+      },
+      "theme": {
+        "quartetLesson": 11,
+        "themeEn": "Nature and disasters",
+        "themeVi": "Thiên nhiên và thiên tai"
+      }
+    },
+    {
+      "kanjiId": "n3_l61_k006",
+      "lessonId": 61,
+      "level": "N3",
+      "character": "洪",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "",
+        "meaningVi": "hồng, lũ lớn",
+        "meaningViDisplay": "hồng, lũ lớn",
+        "meaningEn": "deluge, flood"
+      },
+      "readings": {
+        "onyomi": [
+          "コウ"
+        ],
+        "kunyomi": []
+      },
+      "mnemonic": {
+        "vi": "Kanji trọng tâm của chủ đề QUARTET 11: Thiên nhiên và thiên tai.",
+        "en": "Core kanji for QUARTET 11: Nature and disasters."
+      },
+      "decomposition": {
+        "hanViet": "",
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "",
+        "meaningViNoAccent": "hong, lu lon",
+        "meaningEnNoAccent": "deluge, flood"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n3_l61_v007",
+          "sourceSenseId": "n3_l61_s007",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "hồng, lũ lớn",
+        "onyomi": "コウ",
+        "kunyomi": ""
+      },
+      "theme": {
+        "quartetLesson": 11,
+        "themeEn": "Nature and disasters",
+        "themeVi": "Thiên nhiên và thiên tai"
+      }
+    },
+    {
+      "kanjiId": "n3_l61_k007",
+      "lessonId": 61,
+      "level": "N3",
+      "character": "津",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "tân",
+        "meaningVi": "tân, bến/nước",
+        "meaningViDisplay": "tân (tân, bến/nước)",
+        "meaningEn": "haven, port"
+      },
+      "readings": {
+        "onyomi": [
+          "シン"
+        ],
+        "kunyomi": [
+          "つ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji trọng tâm của chủ đề QUARTET 11: Thiên nhiên và thiên tai.",
+        "en": "Core kanji for QUARTET 11: Nature and disasters."
+      },
+      "decomposition": {
+        "hanViet": "tân",
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "tan",
+        "meaningViNoAccent": "tan, ben/nuoc",
+        "meaningEnNoAccent": "haven, port"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n3_l61_v009",
+          "sourceSenseId": "n3_l61_s009",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "tân (tân, bến/nước)",
+        "onyomi": "シン",
+        "kunyomi": "つ"
+      },
+      "theme": {
+        "quartetLesson": 11,
+        "themeEn": "Nature and disasters",
+        "themeVi": "Thiên nhiên và thiên tai"
+      }
+    },
+    {
+      "kanjiId": "n3_l61_k008",
+      "lessonId": 61,
+      "level": "N3",
+      "character": "警",
+      "strokeCount": 19,
+      "labels": {
+        "hanViet": "",
+        "meaningVi": "cảnh",
+        "meaningViDisplay": "cảnh",
+        "meaningEn": "admonish, commandment"
+      },
+      "readings": {
+        "onyomi": [
+          "ケイ"
+        ],
+        "kunyomi": [
+          "いまし.める"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji trọng tâm của chủ đề QUARTET 11: Thiên nhiên và thiên tai.",
+        "en": "Core kanji for QUARTET 11: Nature and disasters."
+      },
+      "decomposition": {
+        "hanViet": "",
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "",
+        "meaningViNoAccent": "canh",
+        "meaningEnNoAccent": "admonish, commandment"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n3_l61_v012",
+          "sourceSenseId": "n3_l61_s012",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "cảnh",
+        "onyomi": "ケイ",
+        "kunyomi": "いまし.める"
+      },
+      "theme": {
+        "quartetLesson": 11,
+        "themeEn": "Nature and disasters",
+        "themeVi": "Thiên nhiên và thiên tai"
+      }
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 """Build KanjiVG stroke-path dataset for N5/N4 kanji only.
 
 Output:
-  assets/data/kanji/kanjivg_stroke_paths_n5n4.json
+  assets/data/support/kanji/kanjivg_stroke_paths_n5n4.json
 """
 
 from __future__ import annotations
@@ -17,8 +17,8 @@ from pathlib import Path
 from typing import Dict, List, Tuple
 
 ROOT = Path(__file__).resolve().parents[1]
-KANJI_DIRS = [ROOT / "assets" / "data" / "kanji" / "n5", ROOT / "assets" / "data" / "kanji" / "n4"]
-OUTPUT_PATH = ROOT / "assets" / "data" / "kanji" / "kanjivg_stroke_paths_n5n4.json"
+KANJI_DIRS = [ROOT / "assets" / "data" / "archive" / "kanji" / "n5", ROOT / "assets" / "data" / "archive" / "kanji" / "n4"]
+OUTPUT_PATH = ROOT / "assets" / "data" / "support" / "kanji" / "kanjivg_stroke_paths_n5n4.json"
 CACHE_ZIP = ROOT / "tmp_kanjivg_master.zip"
 KANJIVG_ZIP_URL = "https://github.com/KanjiVG/kanjivg/archive/refs/heads/master.zip"
 KVG_NS = "{http://kanjivg.tagaini.net}"

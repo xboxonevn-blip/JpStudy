@@ -1,0 +1,666 @@
+{
+  "schemaVersion": 2,
+  "dataset": "vocab",
+  "series": "quartet-jmdict-kanjidic-draft",
+  "level": "N3",
+  "lessonId": 60,
+  "entryCount": 12,
+  "entries": [
+    {
+      "entryId": "n3_l60_s001",
+      "lessonId": 60,
+      "level": "N3",
+      "order": 1,
+      "tags": [
+        "quartet-theme",
+        "travel",
+        "noun",
+        "suru",
+        "quartet_10",
+        "theme_60"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l60_v001",
+        "term": "旅行",
+        "reading": "りょこう",
+        "kanji": [
+          "旅",
+          "行"
+        ],
+        "labels": {
+          "hanViet": "Lữ Hành"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l60_s001",
+        "meaningVi": "du lịch, chuyến đi",
+        "meaningEn": "travel; trip"
+      },
+      "search": {
+        "termNoAccent": "旅行",
+        "readingNoAccent": "りょこう",
+        "meaningViNoAccent": "du lich, chuyen di",
+        "hanVietNoAccent": "lu hanh"
+      },
+      "links": {
+        "sourceVocabId": "n3_l60_v001",
+        "sourceSenseId": "n3_l60_s001",
+        "sourceEntrySeq": "1553170"
+      },
+      "legacy": {
+        "kanjiMeaning": "Lữ Hành"
+      },
+      "theme": {
+        "quartetLesson": 10,
+        "themeEn": "Travel and transportation",
+        "themeVi": "Du lịch và giao thông"
+      }
+    },
+    {
+      "entryId": "n3_l60_s002",
+      "lessonId": 60,
+      "level": "N3",
+      "order": 2,
+      "tags": [
+        "quartet-theme",
+        "travel",
+        "noun",
+        "suru",
+        "quartet_10",
+        "theme_60"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l60_v002",
+        "term": "観光",
+        "reading": "かんこう",
+        "kanji": [
+          "観",
+          "光"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l60_s002",
+        "meaningVi": "tham quan du lịch",
+        "meaningEn": "sightseeing; tourism"
+      },
+      "search": {
+        "termNoAccent": "観光",
+        "readingNoAccent": "かんこう",
+        "meaningViNoAccent": "tham quan du lich",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l60_v002",
+        "sourceSenseId": "n3_l60_s002",
+        "sourceEntrySeq": "1214840"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 10,
+        "themeEn": "Travel and transportation",
+        "themeVi": "Du lịch và giao thông"
+      }
+    },
+    {
+      "entryId": "n3_l60_s003",
+      "lessonId": 60,
+      "level": "N3",
+      "order": 3,
+      "tags": [
+        "quartet-theme",
+        "travel",
+        "noun",
+        "quartet_10",
+        "theme_60"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l60_v003",
+        "term": "交通",
+        "reading": "こうつう",
+        "kanji": [
+          "交",
+          "通"
+        ],
+        "labels": {
+          "hanViet": "Thông"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l60_s003",
+        "meaningVi": "giao thông",
+        "meaningEn": "traffic; transportation"
+      },
+      "search": {
+        "termNoAccent": "交通",
+        "readingNoAccent": "こうつう",
+        "meaningViNoAccent": "giao thong",
+        "hanVietNoAccent": "thong"
+      },
+      "links": {
+        "sourceVocabId": "n3_l60_v003",
+        "sourceSenseId": "n3_l60_s003",
+        "sourceEntrySeq": "1272280"
+      },
+      "legacy": {
+        "kanjiMeaning": "Thông"
+      },
+      "theme": {
+        "quartetLesson": 10,
+        "themeEn": "Travel and transportation",
+        "themeVi": "Du lịch và giao thông"
+      }
+    },
+    {
+      "entryId": "n3_l60_s004",
+      "lessonId": 60,
+      "level": "N3",
+      "order": 4,
+      "tags": [
+        "quartet-theme",
+        "travel",
+        "noun",
+        "suru",
+        "quartet_10",
+        "theme_60"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l60_v004",
+        "term": "予約",
+        "reading": "よやく",
+        "kanji": [
+          "予",
+          "約"
+        ],
+        "labels": {
+          "hanViet": "Dự Ước"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l60_s004",
+        "meaningVi": "đặt trước",
+        "meaningEn": "reservation; appointment"
+      },
+      "search": {
+        "termNoAccent": "予約",
+        "readingNoAccent": "よやく",
+        "meaningViNoAccent": "dat truoc",
+        "hanVietNoAccent": "du uoc"
+      },
+      "links": {
+        "sourceVocabId": "n3_l60_v004",
+        "sourceSenseId": "n3_l60_s004",
+        "sourceEntrySeq": "1543750"
+      },
+      "legacy": {
+        "kanjiMeaning": "Dự Ước"
+      },
+      "theme": {
+        "quartetLesson": 10,
+        "themeEn": "Travel and transportation",
+        "themeVi": "Du lịch và giao thông"
+      }
+    },
+    {
+      "entryId": "n3_l60_s005",
+      "lessonId": 60,
+      "level": "N3",
+      "order": 5,
+      "tags": [
+        "quartet-theme",
+        "travel",
+        "noun",
+        "suru",
+        "quartet_10",
+        "theme_60"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l60_v005",
+        "term": "宿泊",
+        "reading": "しゅくはく",
+        "kanji": [
+          "宿",
+          "泊"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l60_s005",
+        "meaningVi": "lưu trú",
+        "meaningEn": "accommodation; lodging"
+      },
+      "search": {
+        "termNoAccent": "宿泊",
+        "readingNoAccent": "しゅくはく",
+        "meaningViNoAccent": "luu tru",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l60_v005",
+        "sourceSenseId": "n3_l60_s005",
+        "sourceEntrySeq": "1337300"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 10,
+        "themeEn": "Travel and transportation",
+        "themeVi": "Du lịch và giao thông"
+      }
+    },
+    {
+      "entryId": "n3_l60_s006",
+      "lessonId": 60,
+      "level": "N3",
+      "order": 6,
+      "tags": [
+        "quartet-theme",
+        "travel",
+        "noun",
+        "quartet_10",
+        "theme_60"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l60_v006",
+        "term": "運賃",
+        "reading": "うんちん",
+        "kanji": [
+          "運",
+          "賃"
+        ],
+        "labels": {
+          "hanViet": "Vận nhẫm"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l60_s006",
+        "meaningVi": "cước phí vận chuyển",
+        "meaningEn": "(passenger) fare; freight rates"
+      },
+      "search": {
+        "termNoAccent": "運賃",
+        "readingNoAccent": "うんちん",
+        "meaningViNoAccent": "cuoc phi van chuyen",
+        "hanVietNoAccent": "van nham"
+      },
+      "links": {
+        "sourceVocabId": "n3_l60_v006",
+        "sourceSenseId": "n3_l60_s006",
+        "sourceEntrySeq": "1172820"
+      },
+      "legacy": {
+        "kanjiMeaning": "Vận nhẫm"
+      },
+      "theme": {
+        "quartetLesson": 10,
+        "themeEn": "Travel and transportation",
+        "themeVi": "Du lịch và giao thông"
+      }
+    },
+    {
+      "entryId": "n3_l60_s007",
+      "lessonId": 60,
+      "level": "N3",
+      "order": 7,
+      "tags": [
+        "quartet-theme",
+        "travel",
+        "noun",
+        "suru",
+        "quartet_10",
+        "theme_60"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l60_v007",
+        "term": "案内",
+        "reading": "あんない",
+        "kanji": [
+          "案",
+          "内"
+        ],
+        "labels": {
+          "hanViet": "Nội"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l60_s007",
+        "meaningVi": "hướng dẫn",
+        "meaningEn": "guidance; leading (the way)"
+      },
+      "search": {
+        "termNoAccent": "案内",
+        "readingNoAccent": "あんない",
+        "meaningViNoAccent": "huong dan",
+        "hanVietNoAccent": "noi"
+      },
+      "links": {
+        "sourceVocabId": "n3_l60_v007",
+        "sourceSenseId": "n3_l60_s007",
+        "sourceEntrySeq": "1154860"
+      },
+      "legacy": {
+        "kanjiMeaning": "Nội"
+      },
+      "theme": {
+        "quartetLesson": 10,
+        "themeEn": "Travel and transportation",
+        "themeVi": "Du lịch và giao thông"
+      }
+    },
+    {
+      "entryId": "n3_l60_s008",
+      "lessonId": 60,
+      "level": "N3",
+      "order": 8,
+      "tags": [
+        "quartet-theme",
+        "travel",
+        "noun",
+        "quartet_10",
+        "theme_60"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l60_v008",
+        "term": "地図",
+        "reading": "ちず",
+        "kanji": [
+          "地",
+          "図"
+        ],
+        "labels": {
+          "hanViet": "Địa đồ"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l60_s008",
+        "meaningVi": "bản đồ",
+        "meaningEn": "map; atlas"
+      },
+      "search": {
+        "termNoAccent": "地図",
+        "readingNoAccent": "ちず",
+        "meaningViNoAccent": "ban do",
+        "hanVietNoAccent": "dia do"
+      },
+      "links": {
+        "sourceVocabId": "n3_l60_v008",
+        "sourceSenseId": "n3_l60_s008",
+        "sourceEntrySeq": "1421290"
+      },
+      "legacy": {
+        "kanjiMeaning": "Địa đồ"
+      },
+      "theme": {
+        "quartetLesson": 10,
+        "themeEn": "Travel and transportation",
+        "themeVi": "Du lịch và giao thông"
+      }
+    },
+    {
+      "entryId": "n3_l60_s009",
+      "lessonId": 60,
+      "level": "N3",
+      "order": 9,
+      "tags": [
+        "quartet-theme",
+        "travel",
+        "noun",
+        "suru",
+        "quartet_10",
+        "theme_60"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l60_v009",
+        "term": "出発",
+        "reading": "しゅっぱつ",
+        "kanji": [
+          "出",
+          "発"
+        ],
+        "labels": {
+          "hanViet": "Phát"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l60_s009",
+        "meaningVi": "khởi hành",
+        "meaningEn": "departure; leaving"
+      },
+      "search": {
+        "termNoAccent": "出発",
+        "readingNoAccent": "しゅっぱつ",
+        "meaningViNoAccent": "khoi hanh",
+        "hanVietNoAccent": "phat"
+      },
+      "links": {
+        "sourceVocabId": "n3_l60_v009",
+        "sourceSenseId": "n3_l60_s009",
+        "sourceEntrySeq": "1340000"
+      },
+      "legacy": {
+        "kanjiMeaning": "Phát"
+      },
+      "theme": {
+        "quartetLesson": 10,
+        "themeEn": "Travel and transportation",
+        "themeVi": "Du lịch và giao thông"
+      }
+    },
+    {
+      "entryId": "n3_l60_s010",
+      "lessonId": 60,
+      "level": "N3",
+      "order": 10,
+      "tags": [
+        "quartet-theme",
+        "travel",
+        "noun",
+        "suru",
+        "quartet_10",
+        "theme_60"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l60_v010",
+        "term": "到着",
+        "reading": "とうちゃく",
+        "kanji": [
+          "到",
+          "着"
+        ],
+        "labels": {
+          "hanViet": "Trước"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l60_s010",
+        "meaningVi": "đến nơi",
+        "meaningEn": "arrival"
+      },
+      "search": {
+        "termNoAccent": "到着",
+        "readingNoAccent": "とうちゃく",
+        "meaningViNoAccent": "den noi",
+        "hanVietNoAccent": "truoc"
+      },
+      "links": {
+        "sourceVocabId": "n3_l60_v010",
+        "sourceSenseId": "n3_l60_s010",
+        "sourceEntrySeq": "1449870"
+      },
+      "legacy": {
+        "kanjiMeaning": "Trước"
+      },
+      "theme": {
+        "quartetLesson": 10,
+        "themeEn": "Travel and transportation",
+        "themeVi": "Du lịch và giao thông"
+      }
+    },
+    {
+      "entryId": "n3_l60_s011",
+      "lessonId": 60,
+      "level": "N3",
+      "order": 11,
+      "tags": [
+        "quartet-theme",
+        "travel",
+        "noun",
+        "quartet_10",
+        "theme_60"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l60_v011",
+        "term": "乗客",
+        "reading": "じょうきゃく",
+        "kanji": [
+          "乗",
+          "客"
+        ],
+        "labels": {
+          "hanViet": "thừa"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l60_s011",
+        "meaningVi": "hành khách",
+        "meaningEn": "passenger"
+      },
+      "search": {
+        "termNoAccent": "乗客",
+        "readingNoAccent": "じょうきゃく",
+        "meaningViNoAccent": "hanh khach",
+        "hanVietNoAccent": "thua"
+      },
+      "links": {
+        "sourceVocabId": "n3_l60_v011",
+        "sourceSenseId": "n3_l60_s011",
+        "sourceEntrySeq": "1580490"
+      },
+      "legacy": {
+        "kanjiMeaning": "thừa"
+      },
+      "theme": {
+        "quartetLesson": 10,
+        "themeEn": "Travel and transportation",
+        "themeVi": "Du lịch và giao thông"
+      }
+    },
+    {
+      "entryId": "n3_l60_s012",
+      "lessonId": 60,
+      "level": "N3",
+      "order": 12,
+      "tags": [
+        "quartet-theme",
+        "travel",
+        "noun",
+        "suru",
+        "quartet_10",
+        "theme_60"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l60_v012",
+        "term": "渋滞",
+        "reading": "じゅうたい",
+        "kanji": [
+          "渋",
+          "滞"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l60_s012",
+        "meaningVi": "kẹt xe, ùn tắc",
+        "meaningEn": "(traffic) congestion; traffic jam"
+      },
+      "search": {
+        "termNoAccent": "渋滞",
+        "readingNoAccent": "じゅうたい",
+        "meaningViNoAccent": "ket xe, un tac",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l60_v012",
+        "sourceSenseId": "n3_l60_s012",
+        "sourceEntrySeq": "1335570"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 10,
+        "themeEn": "Travel and transportation",
+        "themeVi": "Du lịch và giao thông"
+      }
+    }
+  ]
+}

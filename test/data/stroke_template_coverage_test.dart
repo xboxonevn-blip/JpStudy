@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   Map<String, int> loadKanjiStrokeCounts(String level) {
-    final dir = Directory('assets/data/kanji/$level');
+    final dir = Directory('assets/data/archive/kanji/$level');
     final files = dir
         .listSync()
         .whereType<File>()
@@ -25,7 +25,7 @@ void main() {
   }
 
   test('stroke template coverage includes all N5 and N4 kanji', () {
-    final raw = File('assets/data/kanji/stroke_templates.json').readAsStringSync();
+    final raw = File('assets/data/support/kanji/stroke_templates.json').readAsStringSync();
     final templates = (jsonDecode(raw) as List<dynamic>)
         .cast<Map<String, dynamic>>();
     final templateChars = templates
@@ -45,7 +45,7 @@ void main() {
   });
 
   test('template strokes match kanji strokeCount for N5/N4 set', () {
-    final raw = File('assets/data/kanji/stroke_templates.json').readAsStringSync();
+    final raw = File('assets/data/support/kanji/stroke_templates.json').readAsStringSync();
     final templates = (jsonDecode(raw) as List<dynamic>)
         .cast<Map<String, dynamic>>();
 
@@ -75,7 +75,7 @@ void main() {
   });
 
   test('high-frequency N5 has a manual template pack baseline', () {
-    final raw = File('assets/data/kanji/stroke_templates.json').readAsStringSync();
+    final raw = File('assets/data/support/kanji/stroke_templates.json').readAsStringSync();
     final templates = (jsonDecode(raw) as List<dynamic>)
         .cast<Map<String, dynamic>>();
     final manualN5 = templates.where((entry) {
@@ -92,7 +92,7 @@ void main() {
   });
 
   test('N4 has curated and manual rollout packs', () {
-    final raw = File('assets/data/kanji/stroke_templates.json').readAsStringSync();
+    final raw = File('assets/data/support/kanji/stroke_templates.json').readAsStringSync();
     final templates = (jsonDecode(raw) as List<dynamic>)
         .cast<Map<String, dynamic>>();
 

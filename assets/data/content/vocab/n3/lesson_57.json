@@ -1,0 +1,666 @@
+{
+  "schemaVersion": 2,
+  "dataset": "vocab",
+  "series": "quartet-jmdict-kanjidic-draft",
+  "level": "N3",
+  "lessonId": 57,
+  "entryCount": 12,
+  "entries": [
+    {
+      "entryId": "n3_l57_s001",
+      "lessonId": 57,
+      "level": "N3",
+      "order": 1,
+      "tags": [
+        "quartet-theme",
+        "health",
+        "noun",
+        "na-adjective",
+        "quartet_7",
+        "theme_57"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l57_v001",
+        "term": "健康",
+        "reading": "けんこう",
+        "kanji": [
+          "健",
+          "康"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l57_s001",
+        "meaningVi": "sức khỏe",
+        "meaningEn": "health; healthy"
+      },
+      "search": {
+        "termNoAccent": "健康",
+        "readingNoAccent": "けんこう",
+        "meaningViNoAccent": "suc khoe",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l57_v001",
+        "sourceSenseId": "n3_l57_s001",
+        "sourceEntrySeq": "1256170"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 7,
+        "themeEn": "Health and lifestyle",
+        "themeVi": "Sức khỏe và lối sống"
+      }
+    },
+    {
+      "entryId": "n3_l57_s002",
+      "lessonId": 57,
+      "level": "N3",
+      "order": 2,
+      "tags": [
+        "quartet-theme",
+        "health",
+        "noun",
+        "suru",
+        "quartet_7",
+        "theme_57"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l57_v002",
+        "term": "運動",
+        "reading": "うんどう",
+        "kanji": [
+          "運",
+          "動"
+        ],
+        "labels": {
+          "hanViet": "Vận Động"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l57_s002",
+        "meaningVi": "vận động, thể dục",
+        "meaningEn": "exercise; physical training"
+      },
+      "search": {
+        "termNoAccent": "運動",
+        "readingNoAccent": "うんどう",
+        "meaningViNoAccent": "van dong, the duc",
+        "hanVietNoAccent": "van dong"
+      },
+      "links": {
+        "sourceVocabId": "n3_l57_v002",
+        "sourceSenseId": "n3_l57_s002",
+        "sourceEntrySeq": "1172910"
+      },
+      "legacy": {
+        "kanjiMeaning": "Vận Động"
+      },
+      "theme": {
+        "quartetLesson": 7,
+        "themeEn": "Health and lifestyle",
+        "themeVi": "Sức khỏe và lối sống"
+      }
+    },
+    {
+      "entryId": "n3_l57_s003",
+      "lessonId": 57,
+      "level": "N3",
+      "order": 3,
+      "tags": [
+        "quartet-theme",
+        "health",
+        "noun",
+        "suru",
+        "quartet_7",
+        "theme_57"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l57_v003",
+        "term": "睡眠",
+        "reading": "すいみん",
+        "kanji": [
+          "睡",
+          "眠"
+        ],
+        "labels": {
+          "hanViet": "Miên"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l57_s003",
+        "meaningVi": "giấc ngủ",
+        "meaningEn": "sleep"
+      },
+      "search": {
+        "termNoAccent": "睡眠",
+        "readingNoAccent": "すいみん",
+        "meaningViNoAccent": "giac ngu",
+        "hanVietNoAccent": "mien"
+      },
+      "links": {
+        "sourceVocabId": "n3_l57_v003",
+        "sourceSenseId": "n3_l57_s003",
+        "sourceEntrySeq": "1372370"
+      },
+      "legacy": {
+        "kanjiMeaning": "Miên"
+      },
+      "theme": {
+        "quartetLesson": 7,
+        "themeEn": "Health and lifestyle",
+        "themeVi": "Sức khỏe và lối sống"
+      }
+    },
+    {
+      "entryId": "n3_l57_s004",
+      "lessonId": 57,
+      "level": "N3",
+      "order": 4,
+      "tags": [
+        "quartet-theme",
+        "health",
+        "noun",
+        "quartet_7",
+        "theme_57"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l57_v004",
+        "term": "栄養",
+        "reading": "えいよう",
+        "kanji": [
+          "栄",
+          "養"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l57_s004",
+        "meaningVi": "dinh dưỡng",
+        "meaningEn": "nutrition; nourishment"
+      },
+      "search": {
+        "termNoAccent": "栄養",
+        "readingNoAccent": "えいよう",
+        "meaningViNoAccent": "dinh duong",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l57_v004",
+        "sourceSenseId": "n3_l57_s004",
+        "sourceEntrySeq": "1173990"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 7,
+        "themeEn": "Health and lifestyle",
+        "themeVi": "Sức khỏe và lối sống"
+      }
+    },
+    {
+      "entryId": "n3_l57_s005",
+      "lessonId": 57,
+      "level": "N3",
+      "order": 5,
+      "tags": [
+        "quartet-theme",
+        "health",
+        "noun",
+        "quartet_7",
+        "theme_57"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l57_v005",
+        "term": "症状",
+        "reading": "しょうじょう",
+        "kanji": [
+          "症",
+          "状"
+        ],
+        "labels": {
+          "hanViet": "trạng"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l57_s005",
+        "meaningVi": "triệu chứng",
+        "meaningEn": "symptoms; condition (of a patient)"
+      },
+      "search": {
+        "termNoAccent": "症状",
+        "readingNoAccent": "しょうじょう",
+        "meaningViNoAccent": "trieu chung",
+        "hanVietNoAccent": "trang"
+      },
+      "links": {
+        "sourceVocabId": "n3_l57_v005",
+        "sourceSenseId": "n3_l57_s005",
+        "sourceEntrySeq": "1351030"
+      },
+      "legacy": {
+        "kanjiMeaning": "trạng"
+      },
+      "theme": {
+        "quartetLesson": 7,
+        "themeEn": "Health and lifestyle",
+        "themeVi": "Sức khỏe và lối sống"
+      }
+    },
+    {
+      "entryId": "n3_l57_s006",
+      "lessonId": 57,
+      "level": "N3",
+      "order": 6,
+      "tags": [
+        "quartet-theme",
+        "health",
+        "noun",
+        "suru",
+        "quartet_7",
+        "theme_57"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l57_v006",
+        "term": "治療",
+        "reading": "ちりょう",
+        "kanji": [
+          "治",
+          "療"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l57_s006",
+        "meaningVi": "điều trị",
+        "meaningEn": "(medical) treatment; care"
+      },
+      "search": {
+        "termNoAccent": "治療",
+        "readingNoAccent": "ちりょう",
+        "meaningViNoAccent": "dieu tri",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l57_v006",
+        "sourceSenseId": "n3_l57_s006",
+        "sourceEntrySeq": "1316890"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 7,
+        "themeEn": "Health and lifestyle",
+        "themeVi": "Sức khỏe và lối sống"
+      }
+    },
+    {
+      "entryId": "n3_l57_s007",
+      "lessonId": 57,
+      "level": "N3",
+      "order": 7,
+      "tags": [
+        "quartet-theme",
+        "health",
+        "noun",
+        "suru",
+        "quartet_7",
+        "theme_57"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l57_v007",
+        "term": "予防",
+        "reading": "よぼう",
+        "kanji": [
+          "予",
+          "防"
+        ],
+        "labels": {
+          "hanViet": "Dự"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l57_s007",
+        "meaningVi": "phòng ngừa",
+        "meaningEn": "prevention; protection (against)"
+      },
+      "search": {
+        "termNoAccent": "予防",
+        "readingNoAccent": "よぼう",
+        "meaningViNoAccent": "phong ngua",
+        "hanVietNoAccent": "du"
+      },
+      "links": {
+        "sourceVocabId": "n3_l57_v007",
+        "sourceSenseId": "n3_l57_s007",
+        "sourceEntrySeq": "1543660"
+      },
+      "legacy": {
+        "kanjiMeaning": "Dự"
+      },
+      "theme": {
+        "quartetLesson": 7,
+        "themeEn": "Health and lifestyle",
+        "themeVi": "Sức khỏe và lối sống"
+      }
+    },
+    {
+      "entryId": "n3_l57_s008",
+      "lessonId": 57,
+      "level": "N3",
+      "order": 8,
+      "tags": [
+        "quartet-theme",
+        "health",
+        "noun",
+        "quartet_7",
+        "theme_57"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l57_v008",
+        "term": "体調",
+        "reading": "たいちょう",
+        "kanji": [
+          "体",
+          "調"
+        ],
+        "labels": {
+          "hanViet": "Thể"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l57_s008",
+        "meaningVi": "thể trạng, tình trạng cơ thể",
+        "meaningEn": "physical condition; state of health"
+      },
+      "search": {
+        "termNoAccent": "体調",
+        "readingNoAccent": "たいちょう",
+        "meaningViNoAccent": "the trang, tinh trang co the",
+        "hanVietNoAccent": "the"
+      },
+      "links": {
+        "sourceVocabId": "n3_l57_v008",
+        "sourceSenseId": "n3_l57_s008",
+        "sourceEntrySeq": "1409610"
+      },
+      "legacy": {
+        "kanjiMeaning": "Thể"
+      },
+      "theme": {
+        "quartetLesson": 7,
+        "themeEn": "Health and lifestyle",
+        "themeVi": "Sức khỏe và lối sống"
+      }
+    },
+    {
+      "entryId": "n3_l57_s009",
+      "lessonId": 57,
+      "level": "N3",
+      "order": 9,
+      "tags": [
+        "quartet-theme",
+        "health",
+        "noun",
+        "suru",
+        "quartet_7",
+        "theme_57"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l57_v009",
+        "term": "疲労",
+        "reading": "ひろう",
+        "kanji": [
+          "疲",
+          "労"
+        ],
+        "labels": {
+          "hanViet": "lao"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l57_s009",
+        "meaningVi": "mệt mỏi",
+        "meaningEn": "fatigue; weariness"
+      },
+      "search": {
+        "termNoAccent": "疲労",
+        "readingNoAccent": "ひろう",
+        "meaningViNoAccent": "met moi",
+        "hanVietNoAccent": "lao"
+      },
+      "links": {
+        "sourceVocabId": "n3_l57_v009",
+        "sourceSenseId": "n3_l57_s009",
+        "sourceEntrySeq": "1483780"
+      },
+      "legacy": {
+        "kanjiMeaning": "lao"
+      },
+      "theme": {
+        "quartetLesson": 7,
+        "themeEn": "Health and lifestyle",
+        "themeVi": "Sức khỏe và lối sống"
+      }
+    },
+    {
+      "entryId": "n3_l57_s010",
+      "lessonId": 57,
+      "level": "N3",
+      "order": 10,
+      "tags": [
+        "quartet-theme",
+        "health",
+        "noun",
+        "suru",
+        "quartet_7",
+        "theme_57"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l57_v010",
+        "term": "回復",
+        "reading": "かいふく",
+        "kanji": [
+          "回",
+          "復"
+        ],
+        "labels": {
+          "hanViet": "Hồi phục"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l57_s010",
+        "meaningVi": "hồi phục",
+        "meaningEn": "restoration; recovery"
+      },
+      "search": {
+        "termNoAccent": "回復",
+        "readingNoAccent": "かいふく",
+        "meaningViNoAccent": "hoi phuc",
+        "hanVietNoAccent": "hoi phuc"
+      },
+      "links": {
+        "sourceVocabId": "n3_l57_v010",
+        "sourceSenseId": "n3_l57_s010",
+        "sourceEntrySeq": "1199720"
+      },
+      "legacy": {
+        "kanjiMeaning": "Hồi phục"
+      },
+      "theme": {
+        "quartetLesson": 7,
+        "themeEn": "Health and lifestyle",
+        "themeVi": "Sức khỏe và lối sống"
+      }
+    },
+    {
+      "entryId": "n3_l57_s011",
+      "lessonId": 57,
+      "level": "N3",
+      "order": 11,
+      "tags": [
+        "quartet-theme",
+        "health",
+        "noun",
+        "suru",
+        "quartet_7",
+        "theme_57"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l57_v011",
+        "term": "検査",
+        "reading": "けんさ",
+        "kanji": [
+          "検",
+          "査"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l57_s011",
+        "meaningVi": "kiểm tra, xét nghiệm",
+        "meaningEn": "inspection (e.g. customs, factory); examination"
+      },
+      "search": {
+        "termNoAccent": "検査",
+        "readingNoAccent": "けんさ",
+        "meaningViNoAccent": "kiem tra, xet nghiem",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l57_v011",
+        "sourceSenseId": "n3_l57_s011",
+        "sourceEntrySeq": "1257890"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 7,
+        "themeEn": "Health and lifestyle",
+        "themeVi": "Sức khỏe và lối sống"
+      }
+    },
+    {
+      "entryId": "n3_l57_s012",
+      "lessonId": 57,
+      "level": "N3",
+      "order": 12,
+      "tags": [
+        "quartet-theme",
+        "health",
+        "noun",
+        "quartet_7",
+        "theme_57"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l57_v012",
+        "term": "病院",
+        "reading": "びょういん",
+        "kanji": [
+          "病",
+          "院"
+        ],
+        "labels": {
+          "hanViet": "Bệnh"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l57_s012",
+        "meaningVi": "bệnh viện",
+        "meaningEn": "hospital; clinic"
+      },
+      "search": {
+        "termNoAccent": "病院",
+        "readingNoAccent": "びょういん",
+        "meaningViNoAccent": "benh vien",
+        "hanVietNoAccent": "benh"
+      },
+      "links": {
+        "sourceVocabId": "n3_l57_v012",
+        "sourceSenseId": "n3_l57_s012",
+        "sourceEntrySeq": "1490220"
+      },
+      "legacy": {
+        "kanjiMeaning": "Bệnh"
+      },
+      "theme": {
+        "quartetLesson": 7,
+        "themeEn": "Health and lifestyle",
+        "themeVi": "Sức khỏe và lối sống"
+      }
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 2,
+  "series": "minna",
+  "datasets": {
+    "vocab": {
+      "lessons": 75,
+      "entries": 3105,
+      "levels": {
+        "N3": {
+          "lessons": 25,
+          "entries": 300
+        },
+        "N4": {
+          "lessons": 25,
+          "entries": 1478
+        },
+        "N5": {
+          "lessons": 25,
+          "entries": 1327
+        }
+      }
+    },
+    "kanji": {
+      "lessons": 75,
+      "entries": 529,
+      "uniqueCharacters": 432,
+      "levels": {
+        "N3": {
+          "lessons": 25,
+          "entries": 203
+        },
+        "N4": {
+          "lessons": 25,
+          "entries": 141
+        },
+        "N5": {
+          "lessons": 25,
+          "entries": 185
+        }
+      }
+    }
+  }
+}

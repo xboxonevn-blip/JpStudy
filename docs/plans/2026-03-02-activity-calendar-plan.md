@@ -1,7 +1,5 @@
 # Activity Calendar Implementation Plan
 
-> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
-
 **Goal:** Add a GitHub-style 16-week activity heatmap (streak calendar) to the top of the Progress screen, showing daily review counts with color intensity, current streak, and a color legend.
 
 **Architecture:** A new `activityCalendarProvider` (wraps existing `fetchReviewHistory(limit:112)`) feeds a pure widget `_ActivityCalendar` added to the top of `ProgressScreen`'s ListView. Grid is built by date-math from today's weekday, coloring cells by reviewed count. Streak count from existing `progressSummaryProvider`.

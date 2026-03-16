@@ -1,0 +1,791 @@
+{
+  "rubric": {
+    "themeFit": 30,
+    "semanticVariety": 25,
+    "exampleNaturalness": 25,
+    "coverageDensity": 20,
+    "total": 100
+  },
+  "summary": {
+    "averageScore": 79.8,
+    "lowestLessons": [
+      51,
+      54,
+      61,
+      67,
+      74
+    ],
+    "highestLessons": [
+      53,
+      56,
+      75,
+      57,
+      60
+    ]
+  },
+  "ranking": [
+    {
+      "lessonId": 51,
+      "quartetLesson": 1,
+      "theme": "Changing the way we spend our free time",
+      "themeVi": "Thay đổi cách sử dụng thời gian rảnh",
+      "score": 67,
+      "subscores": {
+        "themeFit": 14,
+        "semanticVariety": 8,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜ことにする",
+        "〜ようにする",
+        "〜つもりだ",
+        "〜ことにしている"
+      ],
+      "semanticFamilies": [
+        "choice_effort"
+      ],
+      "matchedThemeHints": [
+        "free time"
+      ],
+      "concerns": [
+        "theme-keyword overlap thấp",
+        "semantic variety còn hẹp hoặc trùng family"
+      ],
+      "priority": "high"
+    },
+    {
+      "lessonId": 54,
+      "quartetLesson": 4,
+      "theme": "Studying language and culture through abroad study",
+      "themeVi": "Học ngôn ngữ và văn hóa qua du học",
+      "score": 74,
+      "subscores": {
+        "themeFit": 21,
+        "semanticVariety": 8,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜うちに",
+        "〜たばかり",
+        "〜ところだ",
+        "〜間に"
+      ],
+      "semanticFamilies": [
+        "frequency_timing"
+      ],
+      "matchedThemeHints": [
+        "culture",
+        "language"
+      ],
+      "concerns": [
+        "semantic variety còn hẹp hoặc trùng family"
+      ],
+      "priority": "high"
+    },
+    {
+      "lessonId": 61,
+      "quartetLesson": 11,
+      "theme": "Nature and disasters",
+      "themeVi": "Thiên nhiên và thiên tai",
+      "score": 74,
+      "subscores": {
+        "themeFit": 21,
+        "semanticVariety": 8,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜せいで",
+        "〜おかげで",
+        "〜ため（理由）",
+        "〜可能性がある"
+      ],
+      "semanticFamilies": [
+        "cause_reason"
+      ],
+      "matchedThemeHints": [
+        "disaster",
+        "nature"
+      ],
+      "concerns": [
+        "semantic variety còn hẹp hoặc trùng family"
+      ],
+      "priority": "high"
+    },
+    {
+      "lessonId": 67,
+      "quartetLesson": 17,
+      "theme": "Science and technology",
+      "themeVi": "Khoa học và công nghệ",
+      "score": 74,
+      "subscores": {
+        "themeFit": 21,
+        "semanticVariety": 8,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜という",
+        "〜といわれている",
+        "〜ことから",
+        "〜とされている"
+      ],
+      "semanticFamilies": [
+        "reported_source"
+      ],
+      "matchedThemeHints": [
+        "science",
+        "technology"
+      ],
+      "concerns": [
+        "semantic variety còn hẹp hoặc trùng family"
+      ],
+      "priority": "high"
+    },
+    {
+      "lessonId": 74,
+      "quartetLesson": 24,
+      "theme": "Fashion and personal style",
+      "themeVi": "Thời trang và phong cách cá nhân",
+      "score": 74,
+      "subscores": {
+        "themeFit": 21,
+        "semanticVariety": 8,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜ほど〜ない",
+        "〜というより",
+        "〜より〜のほうが",
+        "〜に比べて"
+      ],
+      "semanticFamilies": [
+        "comparison"
+      ],
+      "matchedThemeHints": [
+        "fashion",
+        "style"
+      ],
+      "concerns": [
+        "semantic variety còn hẹp hoặc trùng family"
+      ],
+      "priority": "high"
+    },
+    {
+      "lessonId": 66,
+      "quartetLesson": 16,
+      "theme": "Sports and competition",
+      "themeVi": "Thể thao và thi đấu",
+      "score": 76,
+      "subscores": {
+        "themeFit": 21,
+        "semanticVariety": 10,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜ようとする",
+        "〜続ける",
+        "〜きる",
+        "〜抜く"
+      ],
+      "semanticFamilies": [],
+      "matchedThemeHints": [
+        "competition",
+        "sports"
+      ],
+      "concerns": [
+        "semantic variety còn hẹp hoặc trùng family"
+      ],
+      "priority": "high"
+    },
+    {
+      "lessonId": 52,
+      "quartetLesson": 2,
+      "theme": "Making your future self from now",
+      "themeVi": "Tạo nên bản thân tương lai từ hiện tại",
+      "score": 77,
+      "subscores": {
+        "themeFit": 21,
+        "semanticVariety": 11,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜ことになる",
+        "〜ようになる",
+        "〜ことになっている",
+        "〜ようになっている"
+      ],
+      "semanticFamilies": [
+        "change_trend"
+      ],
+      "matchedThemeHints": [
+        "future",
+        "self"
+      ],
+      "concerns": [
+        "semantic variety còn hẹp hoặc trùng family"
+      ],
+      "priority": "high"
+    },
+    {
+      "lessonId": 70,
+      "quartetLesson": 20,
+      "theme": "Emotions and psychology",
+      "themeVi": "Cảm xúc và tâm lý",
+      "score": 77,
+      "subscores": {
+        "themeFit": 21,
+        "semanticVariety": 11,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜気がする",
+        "〜ものだ",
+        "〜わけだ",
+        "〜に決まっている"
+      ],
+      "semanticFamilies": [
+        "opinion_inference"
+      ],
+      "matchedThemeHints": [
+        "emotion",
+        "psychology"
+      ],
+      "concerns": [
+        "semantic variety còn hẹp hoặc trùng family"
+      ],
+      "priority": "high"
+    },
+    {
+      "lessonId": 55,
+      "quartetLesson": 5,
+      "theme": "Work and occupations",
+      "themeVi": "Công việc và nghề nghiệp",
+      "score": 78,
+      "subscores": {
+        "themeFit": 21,
+        "semanticVariety": 12,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜はずだ",
+        "〜わけではない",
+        "〜わけにはいかない",
+        "〜はずがない"
+      ],
+      "semanticFamilies": [
+        "cause_reason",
+        "opinion_inference"
+      ],
+      "matchedThemeHints": [
+        "job",
+        "work"
+      ],
+      "concerns": [
+        "semantic variety còn hẹp hoặc trùng family"
+      ],
+      "priority": "medium"
+    },
+    {
+      "lessonId": 58,
+      "quartetLesson": 8,
+      "theme": "Traditions and seasonal events",
+      "themeVi": "Truyền thống và sự kiện theo mùa",
+      "score": 79,
+      "subscores": {
+        "themeFit": 26,
+        "semanticVariety": 8,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜ようだ",
+        "〜らしい",
+        "〜みたいだ",
+        "〜ように見える"
+      ],
+      "semanticFamilies": [
+        "opinion_inference"
+      ],
+      "matchedThemeHints": [
+        "festival",
+        "season",
+        "tradition"
+      ],
+      "concerns": [
+        "semantic variety còn hẹp hoặc trùng family"
+      ],
+      "priority": "medium"
+    },
+    {
+      "lessonId": 59,
+      "quartetLesson": 9,
+      "theme": "Media and information",
+      "themeVi": "Truyền thông và thông tin",
+      "score": 79,
+      "subscores": {
+        "themeFit": 26,
+        "semanticVariety": 8,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜によると",
+        "〜によれば",
+        "〜そうだ（伝聞）",
+        "〜とのことだ"
+      ],
+      "semanticFamilies": [
+        "reported_source"
+      ],
+      "matchedThemeHints": [
+        "information",
+        "media",
+        "news"
+      ],
+      "concerns": [
+        "semantic variety còn hẹp hoặc trùng family"
+      ],
+      "priority": "medium"
+    },
+    {
+      "lessonId": 64,
+      "quartetLesson": 14,
+      "theme": "Family and relationships",
+      "themeVi": "Gia đình và các mối quan hệ",
+      "score": 79,
+      "subscores": {
+        "themeFit": 26,
+        "semanticVariety": 8,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜たらいい",
+        "〜といい",
+        "〜ばよかった",
+        "〜といいな"
+      ],
+      "semanticFamilies": [
+        "advice_hope_regret"
+      ],
+      "matchedThemeHints": [
+        "family",
+        "hope",
+        "relationship"
+      ],
+      "concerns": [
+        "semantic variety còn hẹp hoặc trùng family"
+      ],
+      "priority": "medium"
+    },
+    {
+      "lessonId": 69,
+      "quartetLesson": 19,
+      "theme": "Cooking and food culture",
+      "themeVi": "Nấu ăn và văn hóa ẩm thực",
+      "score": 79,
+      "subscores": {
+        "themeFit": 26,
+        "semanticVariety": 8,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜たとたん",
+        "〜たびに",
+        "〜ついでに",
+        "〜際に"
+      ],
+      "semanticFamilies": [
+        "frequency_timing"
+      ],
+      "matchedThemeHints": [
+        "cooking",
+        "every time",
+        "food"
+      ],
+      "concerns": [
+        "semantic variety còn hẹp hoặc trùng family"
+      ],
+      "priority": "medium"
+    },
+    {
+      "lessonId": 73,
+      "quartetLesson": 23,
+      "theme": "History and politics",
+      "themeVi": "Lịch sử và chính trị",
+      "score": 79,
+      "subscores": {
+        "themeFit": 26,
+        "semanticVariety": 8,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜にとって",
+        "〜として",
+        "〜にかけて",
+        "〜における"
+      ],
+      "semanticFamilies": [
+        "topic_relation"
+      ],
+      "matchedThemeHints": [
+        "history",
+        "politics",
+        "role"
+      ],
+      "concerns": [
+        "semantic variety còn hẹp hoặc trùng family"
+      ],
+      "priority": "medium"
+    },
+    {
+      "lessonId": 63,
+      "quartetLesson": 13,
+      "theme": "Education system and school life",
+      "themeVi": "Hệ thống giáo dục và đời sống học đường",
+      "score": 81,
+      "subscores": {
+        "themeFit": 26,
+        "semanticVariety": 10,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜ことがある",
+        "〜たことがある",
+        "〜ないことはない",
+        "〜ないこともない"
+      ],
+      "semanticFamilies": [],
+      "matchedThemeHints": [
+        "education",
+        "school",
+        "student"
+      ],
+      "concerns": [
+        "semantic variety còn hẹp hoặc trùng family"
+      ],
+      "priority": "medium"
+    },
+    {
+      "lessonId": 65,
+      "quartetLesson": 15,
+      "theme": "Housing and neighborhoods",
+      "themeVi": "Nhà ở và khu dân cư",
+      "score": 81,
+      "subscores": {
+        "themeFit": 26,
+        "semanticVariety": 10,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜てほしい",
+        "〜てもらいたい",
+        "〜てくれると助かる",
+        "〜てもらう"
+      ],
+      "semanticFamilies": [],
+      "matchedThemeHints": [
+        "help",
+        "housing",
+        "neighborhood"
+      ],
+      "concerns": [
+        "semantic variety còn hẹp hoặc trùng family"
+      ],
+      "priority": "medium"
+    },
+    {
+      "lessonId": 68,
+      "quartetLesson": 18,
+      "theme": "Law, rules and society",
+      "themeVi": "Luật pháp, quy tắc và xã hội",
+      "score": 81,
+      "subscores": {
+        "themeFit": 26,
+        "semanticVariety": 10,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜べきだ",
+        "〜べきではない",
+        "〜てはならない",
+        "〜ことになっている"
+      ],
+      "semanticFamilies": [],
+      "matchedThemeHints": [
+        "law",
+        "rule",
+        "society"
+      ],
+      "concerns": [
+        "semantic variety còn hẹp hoặc trùng family"
+      ],
+      "priority": "medium"
+    },
+    {
+      "lessonId": 62,
+      "quartetLesson": 12,
+      "theme": "Art, music and entertainment",
+      "themeVi": "Nghệ thuật, âm nhạc và giải trí",
+      "score": 82,
+      "subscores": {
+        "themeFit": 26,
+        "semanticVariety": 11,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜ほど",
+        "〜くらい / 〜ぐらい",
+        "〜さ",
+        "〜ばかりか"
+      ],
+      "semanticFamilies": [
+        "comparison"
+      ],
+      "matchedThemeHints": [
+        "art",
+        "entertainment",
+        "music"
+      ],
+      "concerns": [
+        "semantic variety còn hẹp hoặc trùng family"
+      ],
+      "priority": "medium"
+    },
+    {
+      "lessonId": 71,
+      "quartetLesson": 21,
+      "theme": "Economy and finance",
+      "themeVi": "Kinh tế và tài chính",
+      "score": 83,
+      "subscores": {
+        "themeFit": 30,
+        "semanticVariety": 8,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜一方だ",
+        "〜つつある",
+        "〜につれて",
+        "〜に伴って"
+      ],
+      "semanticFamilies": [
+        "change_trend"
+      ],
+      "matchedThemeHints": [
+        "burden",
+        "change",
+        "economy",
+        "finance"
+      ],
+      "concerns": [
+        "semantic variety còn hẹp hoặc trùng family"
+      ],
+      "priority": "medium"
+    },
+    {
+      "lessonId": 72,
+      "quartetLesson": 22,
+      "theme": "Communication and expression",
+      "themeVi": "Giao tiếp và diễn đạt",
+      "score": 83,
+      "subscores": {
+        "themeFit": 30,
+        "semanticVariety": 8,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜について",
+        "〜に関して",
+        "〜に対する",
+        "〜をめぐって"
+      ],
+      "semanticFamilies": [
+        "topic_relation"
+      ],
+      "matchedThemeHints": [
+        "communication",
+        "discussion",
+        "expression",
+        "reaction"
+      ],
+      "concerns": [
+        "semantic variety còn hẹp hoặc trùng family"
+      ],
+      "priority": "medium"
+    },
+    {
+      "lessonId": 60,
+      "quartetLesson": 10,
+      "theme": "Travel and transportation",
+      "themeVi": "Du lịch và giao thông",
+      "score": 85,
+      "subscores": {
+        "themeFit": 26,
+        "semanticVariety": 14,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜によって",
+        "〜に対して",
+        "〜ていく",
+        "〜に応じて"
+      ],
+      "semanticFamilies": [
+        "change_trend"
+      ],
+      "matchedThemeHints": [
+        "destination",
+        "transportation",
+        "travel"
+      ],
+      "concerns": [
+        "semantic variety còn hẹp hoặc trùng family"
+      ],
+      "priority": "medium"
+    },
+    {
+      "lessonId": 57,
+      "quartetLesson": 7,
+      "theme": "Health and lifestyle",
+      "themeVi": "Sức khỏe và lối sống",
+      "score": 86,
+      "subscores": {
+        "themeFit": 26,
+        "semanticVariety": 15,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜おそれがある",
+        "〜に違いない",
+        "〜そうにない",
+        "〜ないようにする"
+      ],
+      "semanticFamilies": [
+        "choice_effort",
+        "opinion_inference"
+      ],
+      "matchedThemeHints": [
+        "health",
+        "lifestyle",
+        "risk"
+      ],
+      "concerns": [
+        "semantic variety còn hẹp hoặc trùng family"
+      ],
+      "priority": "medium"
+    },
+    {
+      "lessonId": 53,
+      "quartetLesson": 3,
+      "theme": "A balance between convenience and reducing waste",
+      "themeVi": "Cân bằng giữa tiện lợi và giảm lãng phí",
+      "score": 89,
+      "subscores": {
+        "themeFit": 26,
+        "semanticVariety": 18,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜ために",
+        "〜ように",
+        "〜代わりに",
+        "〜わりに"
+      ],
+      "semanticFamilies": [
+        "cause_reason",
+        "comparison"
+      ],
+      "matchedThemeHints": [
+        "convenience",
+        "reduce",
+        "waste"
+      ],
+      "concerns": [],
+      "priority": "low"
+    },
+    {
+      "lessonId": 56,
+      "quartetLesson": 6,
+      "theme": "Online shopping and consumer behavior",
+      "themeVi": "Mua sắm trực tuyến và hành vi tiêu dùng",
+      "score": 89,
+      "subscores": {
+        "themeFit": 30,
+        "semanticVariety": 14,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜すぎる",
+        "〜てしまう",
+        "〜ことはない",
+        "〜かえって"
+      ],
+      "semanticFamilies": [
+        "advice_hope_regret"
+      ],
+      "matchedThemeHints": [
+        "buy",
+        "consumer",
+        "service",
+        "shopping"
+      ],
+      "concerns": [
+        "semantic variety còn hẹp hoặc trùng family"
+      ],
+      "priority": "low"
+    },
+    {
+      "lessonId": 75,
+      "quartetLesson": 25,
+      "theme": "Global issues and volunteering",
+      "themeVi": "Vấn đề toàn cầu và tình nguyện",
+      "score": 89,
+      "subscores": {
+        "themeFit": 30,
+        "semanticVariety": 14,
+        "exampleNaturalness": 25,
+        "coverageDensity": 20
+      },
+      "titles": [
+        "〜しかない",
+        "〜ばかりでなく",
+        "〜どんなに〜ても",
+        "〜を通して"
+      ],
+      "semanticFamilies": [
+        "choice_effort"
+      ],
+      "matchedThemeHints": [
+        "community",
+        "global",
+        "social",
+        "volunteering"
+      ],
+      "concerns": [
+        "semantic variety còn hẹp hoặc trùng family"
+      ],
+      "priority": "low"
+    }
+  ]
+}

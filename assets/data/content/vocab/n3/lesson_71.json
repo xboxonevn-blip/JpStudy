@@ -1,0 +1,662 @@
+{
+  "schemaVersion": 2,
+  "dataset": "vocab",
+  "series": "quartet-jmdict-kanjidic-draft",
+  "level": "N3",
+  "lessonId": 71,
+  "entryCount": 12,
+  "entries": [
+    {
+      "entryId": "n3_l71_s001",
+      "lessonId": 71,
+      "level": "N3",
+      "order": 1,
+      "tags": [
+        "quartet-theme",
+        "economy",
+        "noun",
+        "quartet_21",
+        "theme_71"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l71_v001",
+        "term": "経済",
+        "reading": "けいざい",
+        "kanji": [
+          "経",
+          "済"
+        ],
+        "labels": {
+          "hanViet": "kinh tể"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l71_s001",
+        "meaningVi": "kinh tế",
+        "meaningEn": "economy; economics"
+      },
+      "search": {
+        "termNoAccent": "経済",
+        "readingNoAccent": "けいざい",
+        "meaningViNoAccent": "kinh te",
+        "hanVietNoAccent": "kinh te"
+      },
+      "links": {
+        "sourceVocabId": "n3_l71_v001",
+        "sourceSenseId": "n3_l71_s001",
+        "sourceEntrySeq": "1251320"
+      },
+      "legacy": {
+        "kanjiMeaning": "kinh tể"
+      },
+      "theme": {
+        "quartetLesson": 21,
+        "themeEn": "Economy and finance",
+        "themeVi": "Kinh tế và tài chính"
+      }
+    },
+    {
+      "entryId": "n3_l71_s002",
+      "lessonId": 71,
+      "level": "N3",
+      "order": 2,
+      "tags": [
+        "quartet-theme",
+        "economy",
+        "noun",
+        "quartet_21",
+        "theme_71"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l71_v002",
+        "term": "技術",
+        "reading": "ぎじゅつ",
+        "kanji": [
+          "技",
+          "術"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l71_s002",
+        "meaningVi": "kỹ thuật",
+        "meaningEn": "technology; engineering"
+      },
+      "search": {
+        "termNoAccent": "技術",
+        "readingNoAccent": "ぎじゅつ",
+        "meaningViNoAccent": "ky thuat",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l71_v002",
+        "sourceSenseId": "n3_l71_s002",
+        "sourceEntrySeq": "1225130"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 21,
+        "themeEn": "Economy and finance",
+        "themeVi": "Kinh tế và tài chính"
+      }
+    },
+    {
+      "entryId": "n3_l71_s003",
+      "lessonId": 71,
+      "level": "N3",
+      "order": 3,
+      "tags": [
+        "quartet-theme",
+        "economy",
+        "noun",
+        "suru",
+        "quartet_21",
+        "theme_71"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l71_v003",
+        "term": "貸出",
+        "reading": "かしだし",
+        "kanji": [
+          "貸",
+          "出"
+        ],
+        "labels": {
+          "hanViet": "Thải"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l71_s003",
+        "meaningVi": "cho vay",
+        "meaningEn": "lending; loaning"
+      },
+      "search": {
+        "termNoAccent": "貸出",
+        "readingNoAccent": "かしだし",
+        "meaningViNoAccent": "cho vay",
+        "hanVietNoAccent": "thai"
+      },
+      "links": {
+        "sourceVocabId": "n3_l71_v003",
+        "sourceSenseId": "n3_l71_s003",
+        "sourceEntrySeq": "1590240"
+      },
+      "legacy": {
+        "kanjiMeaning": "Thải"
+      },
+      "theme": {
+        "quartetLesson": 21,
+        "themeEn": "Economy and finance",
+        "themeVi": "Kinh tế và tài chính"
+      }
+    },
+    {
+      "entryId": "n3_l71_s004",
+      "lessonId": 71,
+      "level": "N3",
+      "order": 4,
+      "tags": [
+        "quartet-theme",
+        "economy",
+        "noun",
+        "quartet_21",
+        "theme_71"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l71_v004",
+        "term": "利益",
+        "reading": "りえき",
+        "kanji": [
+          "利",
+          "益"
+        ],
+        "labels": {
+          "hanViet": "Lợi"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l71_s004",
+        "meaningVi": "lợi nhuận",
+        "meaningEn": "profit; gains"
+      },
+      "search": {
+        "termNoAccent": "利益",
+        "readingNoAccent": "りえき",
+        "meaningViNoAccent": "loi nhuan",
+        "hanVietNoAccent": "loi"
+      },
+      "links": {
+        "sourceVocabId": "n3_l71_v004",
+        "sourceSenseId": "n3_l71_s004",
+        "sourceEntrySeq": "1549470"
+      },
+      "legacy": {
+        "kanjiMeaning": "Lợi"
+      },
+      "theme": {
+        "quartetLesson": 21,
+        "themeEn": "Economy and finance",
+        "themeVi": "Kinh tế và tài chính"
+      }
+    },
+    {
+      "entryId": "n3_l71_s005",
+      "lessonId": 71,
+      "level": "N3",
+      "order": 5,
+      "tags": [
+        "quartet-theme",
+        "economy",
+        "noun",
+        "suru",
+        "quartet_21",
+        "theme_71"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l71_v005",
+        "term": "投資",
+        "reading": "とうし",
+        "kanji": [
+          "投",
+          "資"
+        ],
+        "labels": {
+          "hanViet": "Đầu tư"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l71_s005",
+        "meaningVi": "đầu tư",
+        "meaningEn": "investment"
+      },
+      "search": {
+        "termNoAccent": "投資",
+        "readingNoAccent": "とうし",
+        "meaningViNoAccent": "dau tu",
+        "hanVietNoAccent": "dau tu"
+      },
+      "links": {
+        "sourceVocabId": "n3_l71_v005",
+        "sourceSenseId": "n3_l71_s005",
+        "sourceEntrySeq": "1447230"
+      },
+      "legacy": {
+        "kanjiMeaning": "Đầu tư"
+      },
+      "theme": {
+        "quartetLesson": 21,
+        "themeEn": "Economy and finance",
+        "themeVi": "Kinh tế và tài chính"
+      }
+    },
+    {
+      "entryId": "n3_l71_s006",
+      "lessonId": 71,
+      "level": "N3",
+      "order": 6,
+      "tags": [
+        "quartet-theme",
+        "economy",
+        "noun",
+        "quartet_21",
+        "theme_71"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l71_v006",
+        "term": "収入",
+        "reading": "しゅうにゅう",
+        "kanji": [
+          "収",
+          "入"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l71_s006",
+        "meaningVi": "thu nhập",
+        "meaningEn": "income; earnings"
+      },
+      "search": {
+        "termNoAccent": "収入",
+        "readingNoAccent": "しゅうにゅう",
+        "meaningViNoAccent": "thu nhap",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l71_v006",
+        "sourceSenseId": "n3_l71_s006",
+        "sourceEntrySeq": "1330790"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 21,
+        "themeEn": "Economy and finance",
+        "themeVi": "Kinh tế và tài chính"
+      }
+    },
+    {
+      "entryId": "n3_l71_s007",
+      "lessonId": 71,
+      "level": "N3",
+      "order": 7,
+      "tags": [
+        "quartet-theme",
+        "economy",
+        "noun",
+        "suru",
+        "quartet_21",
+        "theme_71"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l71_v007",
+        "term": "支出",
+        "reading": "ししゅつ",
+        "kanji": [
+          "支",
+          "出"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l71_s007",
+        "meaningVi": "chi tiêu",
+        "meaningEn": "expenditure; disbursement"
+      },
+      "search": {
+        "termNoAccent": "支出",
+        "readingNoAccent": "ししゅつ",
+        "meaningViNoAccent": "chi tieu",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l71_v007",
+        "sourceSenseId": "n3_l71_s007",
+        "sourceEntrySeq": "1310180"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 21,
+        "themeEn": "Economy and finance",
+        "themeVi": "Kinh tế và tài chính"
+      }
+    },
+    {
+      "entryId": "n3_l71_s008",
+      "lessonId": 71,
+      "level": "N3",
+      "order": 8,
+      "tags": [
+        "quartet-theme",
+        "economy",
+        "noun",
+        "quartet_21",
+        "theme_71"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l71_v008",
+        "term": "税金",
+        "reading": "ぜいきん",
+        "kanji": [
+          "税",
+          "金"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l71_s008",
+        "meaningVi": "thuế",
+        "meaningEn": "tax; duty"
+      },
+      "search": {
+        "termNoAccent": "税金",
+        "readingNoAccent": "ぜいきん",
+        "meaningViNoAccent": "thue",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l71_v008",
+        "sourceSenseId": "n3_l71_s008",
+        "sourceEntrySeq": "1382100"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 21,
+        "themeEn": "Economy and finance",
+        "themeVi": "Kinh tế và tài chính"
+      }
+    },
+    {
+      "entryId": "n3_l71_s009",
+      "lessonId": 71,
+      "level": "N3",
+      "order": 9,
+      "tags": [
+        "quartet-theme",
+        "economy",
+        "noun",
+        "quartet_21",
+        "theme_71"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l71_v009",
+        "term": "財布",
+        "reading": "さいふ",
+        "kanji": [
+          "財",
+          "布"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l71_s009",
+        "meaningVi": "ví tiền",
+        "meaningEn": "wallet; purse"
+      },
+      "search": {
+        "termNoAccent": "財布",
+        "readingNoAccent": "さいふ",
+        "meaningViNoAccent": "vi tien",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l71_v009",
+        "sourceSenseId": "n3_l71_s009",
+        "sourceEntrySeq": "1296970"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 21,
+        "themeEn": "Economy and finance",
+        "themeVi": "Kinh tế và tài chính"
+      }
+    },
+    {
+      "entryId": "n3_l71_s010",
+      "lessonId": 71,
+      "level": "N3",
+      "order": 10,
+      "tags": [
+        "quartet-theme",
+        "economy",
+        "noun",
+        "quartet_21",
+        "theme_71"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l71_v010",
+        "term": "貨幣",
+        "reading": "かへい",
+        "kanji": [
+          "貨",
+          "幣"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l71_s010",
+        "meaningVi": "tiền tệ",
+        "meaningEn": "money; currency"
+      },
+      "search": {
+        "termNoAccent": "貨幣",
+        "readingNoAccent": "かへい",
+        "meaningViNoAccent": "tien te",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l71_v010",
+        "sourceSenseId": "n3_l71_s010",
+        "sourceEntrySeq": "1195930"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 21,
+        "themeEn": "Economy and finance",
+        "themeVi": "Kinh tế và tài chính"
+      }
+    },
+    {
+      "entryId": "n3_l71_s011",
+      "lessonId": 71,
+      "level": "N3",
+      "order": 11,
+      "tags": [
+        "quartet-theme",
+        "economy",
+        "noun",
+        "suru",
+        "quartet_21",
+        "theme_71"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l71_v011",
+        "term": "預金",
+        "reading": "よきん",
+        "kanji": [
+          "預",
+          "金"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l71_s011",
+        "meaningVi": "tiền gửi, tiền tiết kiệm",
+        "meaningEn": "deposit; bank account"
+      },
+      "search": {
+        "termNoAccent": "預金",
+        "readingNoAccent": "よきん",
+        "meaningViNoAccent": "tien gui, tien tiet kiem",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l71_v011",
+        "sourceSenseId": "n3_l71_s011",
+        "sourceEntrySeq": "1545020"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 21,
+        "themeEn": "Economy and finance",
+        "themeVi": "Kinh tế và tài chính"
+      }
+    },
+    {
+      "entryId": "n3_l71_s012",
+      "lessonId": 71,
+      "level": "N3",
+      "order": 12,
+      "tags": [
+        "quartet-theme",
+        "economy",
+        "noun",
+        "quartet_21",
+        "theme_71"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l71_v012",
+        "term": "予算",
+        "reading": "よさん",
+        "kanji": [
+          "予",
+          "算"
+        ],
+        "labels": {
+          "hanViet": "Dự"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l71_s012",
+        "meaningVi": "ngân sách",
+        "meaningEn": "estimate (of costs); budget"
+      },
+      "search": {
+        "termNoAccent": "予算",
+        "readingNoAccent": "よさん",
+        "meaningViNoAccent": "ngan sach",
+        "hanVietNoAccent": "du"
+      },
+      "links": {
+        "sourceVocabId": "n3_l71_v012",
+        "sourceSenseId": "n3_l71_s012",
+        "sourceEntrySeq": "1543000"
+      },
+      "legacy": {
+        "kanjiMeaning": "Dự"
+      },
+      "theme": {
+        "quartetLesson": 21,
+        "themeEn": "Economy and finance",
+        "themeVi": "Kinh tế và tài chính"
+      }
+    }
+  ]
+}

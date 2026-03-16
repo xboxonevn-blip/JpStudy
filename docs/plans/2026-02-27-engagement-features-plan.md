@@ -1,7 +1,5 @@
 # Engagement Features Implementation Plan
 
-> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
-
 **Goal:** Wire grammar SRS review to `GrammarPracticeScreen`, show next vocab review timing when nothing is due, and warn users when their streak is at risk.
 
 **Architecture:** Three independent improvements: (1) pass due grammar IDs through `ContinueAction.data` so the "Start" button routes directly to a grammar quiz instead of the list screen; (2) add a `getNextScheduledReview()` query to `SrsDao` and display the timing in the vocab screen; (3) add a one-line danger zone warning to `DailySessionCard` when streak > 0, todayXp == 0, and hour ≥ 20.

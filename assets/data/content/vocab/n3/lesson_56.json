@@ -1,0 +1,665 @@
+{
+  "schemaVersion": 2,
+  "dataset": "vocab",
+  "series": "quartet-jmdict-kanjidic-draft",
+  "level": "N3",
+  "lessonId": 56,
+  "entryCount": 12,
+  "entries": [
+    {
+      "entryId": "n3_l56_s001",
+      "lessonId": 56,
+      "level": "N3",
+      "order": 1,
+      "tags": [
+        "quartet-theme",
+        "shopping",
+        "noun",
+        "suru",
+        "quartet_6",
+        "theme_56"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l56_v001",
+        "term": "注文",
+        "reading": "ちゅうもん",
+        "kanji": [
+          "注",
+          "文"
+        ],
+        "labels": {
+          "hanViet": "Chú Văn"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l56_s001",
+        "meaningVi": "đặt hàng",
+        "meaningEn": "order (for an item); request"
+      },
+      "search": {
+        "termNoAccent": "注文",
+        "readingNoAccent": "ちゅうもん",
+        "meaningViNoAccent": "dat hang",
+        "hanVietNoAccent": "chu van"
+      },
+      "links": {
+        "sourceVocabId": "n3_l56_v001",
+        "sourceSenseId": "n3_l56_s001",
+        "sourceEntrySeq": "1426650"
+      },
+      "legacy": {
+        "kanjiMeaning": "Chú Văn"
+      },
+      "theme": {
+        "quartetLesson": 6,
+        "themeEn": "Online shopping and consumer behavior",
+        "themeVi": "Mua sắm trực tuyến và hành vi tiêu dùng"
+      }
+    },
+    {
+      "entryId": "n3_l56_s002",
+      "lessonId": 56,
+      "level": "N3",
+      "order": 2,
+      "tags": [
+        "quartet-theme",
+        "shopping",
+        "noun",
+        "suru",
+        "quartet_6",
+        "theme_56"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l56_v002",
+        "term": "配送",
+        "reading": "はいそう",
+        "kanji": [
+          "配",
+          "送"
+        ],
+        "labels": {
+          "hanViet": "Phối Tống"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l56_s002",
+        "meaningVi": "giao hàng, vận chuyển",
+        "meaningEn": "delivery"
+      },
+      "search": {
+        "termNoAccent": "配送",
+        "readingNoAccent": "はいそう",
+        "meaningViNoAccent": "giao hang, van chuyen",
+        "hanVietNoAccent": "phoi tong"
+      },
+      "links": {
+        "sourceVocabId": "n3_l56_v002",
+        "sourceSenseId": "n3_l56_s002",
+        "sourceEntrySeq": "1473120"
+      },
+      "legacy": {
+        "kanjiMeaning": "Phối Tống"
+      },
+      "theme": {
+        "quartetLesson": 6,
+        "themeEn": "Online shopping and consumer behavior",
+        "themeVi": "Mua sắm trực tuyến và hành vi tiêu dùng"
+      }
+    },
+    {
+      "entryId": "n3_l56_s003",
+      "lessonId": 56,
+      "level": "N3",
+      "order": 3,
+      "tags": [
+        "quartet-theme",
+        "shopping",
+        "noun",
+        "suru",
+        "quartet_6",
+        "theme_56"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l56_v003",
+        "term": "返品",
+        "reading": "へんぴん",
+        "kanji": [
+          "返",
+          "品"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l56_s003",
+        "meaningVi": "trả hàng",
+        "meaningEn": "returned goods; returning purchased goods"
+      },
+      "search": {
+        "termNoAccent": "返品",
+        "readingNoAccent": "へんぴん",
+        "meaningViNoAccent": "tra hang",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l56_v003",
+        "sourceSenseId": "n3_l56_s003",
+        "sourceEntrySeq": "1512300"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 6,
+        "themeEn": "Online shopping and consumer behavior",
+        "themeVi": "Mua sắm trực tuyến và hành vi tiêu dùng"
+      }
+    },
+    {
+      "entryId": "n3_l56_s004",
+      "lessonId": 56,
+      "level": "N3",
+      "order": 4,
+      "tags": [
+        "quartet-theme",
+        "shopping",
+        "noun",
+        "suru",
+        "quartet_6",
+        "theme_56"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l56_v004",
+        "term": "評価",
+        "reading": "ひょうか",
+        "kanji": [
+          "評",
+          "価"
+        ],
+        "labels": {
+          "hanViet": "giá"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l56_s004",
+        "meaningVi": "đánh giá",
+        "meaningEn": "valuation; appraisal"
+      },
+      "search": {
+        "termNoAccent": "評価",
+        "readingNoAccent": "ひょうか",
+        "meaningViNoAccent": "danh gia",
+        "hanVietNoAccent": "gia"
+      },
+      "links": {
+        "sourceVocabId": "n3_l56_v004",
+        "sourceSenseId": "n3_l56_s004",
+        "sourceEntrySeq": "1490010"
+      },
+      "legacy": {
+        "kanjiMeaning": "giá"
+      },
+      "theme": {
+        "quartetLesson": 6,
+        "themeEn": "Online shopping and consumer behavior",
+        "themeVi": "Mua sắm trực tuyến và hành vi tiêu dùng"
+      }
+    },
+    {
+      "entryId": "n3_l56_s005",
+      "lessonId": 56,
+      "level": "N3",
+      "order": 5,
+      "tags": [
+        "quartet-theme",
+        "shopping",
+        "noun",
+        "suru",
+        "quartet_6",
+        "theme_56"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l56_v005",
+        "term": "割引",
+        "reading": "わりびき",
+        "kanji": [
+          "割",
+          "引"
+        ],
+        "labels": {
+          "hanViet": "Dẫn"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l56_s005",
+        "meaningVi": "giảm giá",
+        "meaningEn": "discount; reduction"
+      },
+      "search": {
+        "termNoAccent": "割引",
+        "readingNoAccent": "わりびき",
+        "meaningViNoAccent": "giam gia",
+        "hanVietNoAccent": "dan"
+      },
+      "links": {
+        "sourceVocabId": "n3_l56_v005",
+        "sourceSenseId": "n3_l56_s005",
+        "sourceEntrySeq": "1606950"
+      },
+      "legacy": {
+        "kanjiMeaning": "Dẫn"
+      },
+      "theme": {
+        "quartetLesson": 6,
+        "themeEn": "Online shopping and consumer behavior",
+        "themeVi": "Mua sắm trực tuyến và hành vi tiêu dùng"
+      }
+    },
+    {
+      "entryId": "n3_l56_s006",
+      "lessonId": 56,
+      "level": "N3",
+      "order": 6,
+      "tags": [
+        "quartet-theme",
+        "shopping",
+        "noun",
+        "quartet_6",
+        "theme_56"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l56_v006",
+        "term": "消費者",
+        "reading": "しょうひしゃ",
+        "kanji": [
+          "消",
+          "費",
+          "者"
+        ],
+        "labels": {
+          "hanViet": "Tiêu Giả"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l56_s006",
+        "meaningVi": "người tiêu dùng",
+        "meaningEn": "consumer (of a product, service, etc.); customer"
+      },
+      "search": {
+        "termNoAccent": "消費者",
+        "readingNoAccent": "しょうひしゃ",
+        "meaningViNoAccent": "nguoi tieu dung",
+        "hanVietNoAccent": "tieu gia"
+      },
+      "links": {
+        "sourceVocabId": "n3_l56_v006",
+        "sourceSenseId": "n3_l56_s006",
+        "sourceEntrySeq": "1350300"
+      },
+      "legacy": {
+        "kanjiMeaning": "Tiêu Giả"
+      },
+      "theme": {
+        "quartetLesson": 6,
+        "themeEn": "Online shopping and consumer behavior",
+        "themeVi": "Mua sắm trực tuyến và hành vi tiêu dùng"
+      }
+    },
+    {
+      "entryId": "n3_l56_s007",
+      "lessonId": 56,
+      "level": "N3",
+      "order": 7,
+      "tags": [
+        "quartet-theme",
+        "shopping",
+        "noun",
+        "quartet_6",
+        "theme_56"
+      ],
+      "classification": {
+        "script": "mixed",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l56_v007",
+        "term": "支払い",
+        "reading": "しはらい",
+        "kanji": [
+          "支",
+          "払"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l56_s007",
+        "meaningVi": "thanh toán",
+        "meaningEn": "payment"
+      },
+      "search": {
+        "termNoAccent": "支払い",
+        "readingNoAccent": "しはらい",
+        "meaningViNoAccent": "thanh toan",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l56_v007",
+        "sourceSenseId": "n3_l56_s007",
+        "sourceEntrySeq": "1594480"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 6,
+        "themeEn": "Online shopping and consumer behavior",
+        "themeVi": "Mua sắm trực tuyến và hành vi tiêu dùng"
+      }
+    },
+    {
+      "entryId": "n3_l56_s008",
+      "lessonId": 56,
+      "level": "N3",
+      "order": 8,
+      "tags": [
+        "quartet-theme",
+        "shopping",
+        "noun",
+        "quartet_6",
+        "theme_56"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l56_v008",
+        "term": "商品",
+        "reading": "しょうひん",
+        "kanji": [
+          "商",
+          "品"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l56_s008",
+        "meaningVi": "sản phẩm, hàng hóa",
+        "meaningEn": "commodity; article of commerce"
+      },
+      "search": {
+        "termNoAccent": "商品",
+        "readingNoAccent": "しょうひん",
+        "meaningViNoAccent": "san pham, hang hoa",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l56_v008",
+        "sourceSenseId": "n3_l56_s008",
+        "sourceEntrySeq": "1347310"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 6,
+        "themeEn": "Online shopping and consumer behavior",
+        "themeVi": "Mua sắm trực tuyến và hành vi tiêu dùng"
+      }
+    },
+    {
+      "entryId": "n3_l56_s009",
+      "lessonId": 56,
+      "level": "N3",
+      "order": 9,
+      "tags": [
+        "quartet-theme",
+        "shopping",
+        "noun",
+        "quartet_6",
+        "theme_56"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l56_v009",
+        "term": "送料",
+        "reading": "そうりょう",
+        "kanji": [
+          "送",
+          "料"
+        ],
+        "labels": {
+          "hanViet": "Tống"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l56_s009",
+        "meaningVi": "phí vận chuyển",
+        "meaningEn": "postage; carriage"
+      },
+      "search": {
+        "termNoAccent": "送料",
+        "readingNoAccent": "そうりょう",
+        "meaningViNoAccent": "phi van chuyen",
+        "hanVietNoAccent": "tong"
+      },
+      "links": {
+        "sourceVocabId": "n3_l56_v009",
+        "sourceSenseId": "n3_l56_s009",
+        "sourceEntrySeq": "1402870"
+      },
+      "legacy": {
+        "kanjiMeaning": "Tống"
+      },
+      "theme": {
+        "quartetLesson": 6,
+        "themeEn": "Online shopping and consumer behavior",
+        "themeVi": "Mua sắm trực tuyến và hành vi tiêu dùng"
+      }
+    },
+    {
+      "entryId": "n3_l56_s010",
+      "lessonId": 56,
+      "level": "N3",
+      "order": 10,
+      "tags": [
+        "quartet-theme",
+        "shopping",
+        "noun",
+        "quartet_6",
+        "theme_56"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l56_v010",
+        "term": "在庫",
+        "reading": "ざいこ",
+        "kanji": [
+          "在",
+          "庫"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l56_s010",
+        "meaningVi": "hàng tồn kho",
+        "meaningEn": "stock; inventory"
+      },
+      "search": {
+        "termNoAccent": "在庫",
+        "readingNoAccent": "ざいこ",
+        "meaningViNoAccent": "hang ton kho",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l56_v010",
+        "sourceSenseId": "n3_l56_s010",
+        "sourceEntrySeq": "1296470"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 6,
+        "themeEn": "Online shopping and consumer behavior",
+        "themeVi": "Mua sắm trực tuyến và hành vi tiêu dùng"
+      }
+    },
+    {
+      "entryId": "n3_l56_s011",
+      "lessonId": 56,
+      "level": "N3",
+      "order": 11,
+      "tags": [
+        "quartet-theme",
+        "shopping",
+        "noun",
+        "suru",
+        "quartet_6",
+        "theme_56"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l56_v011",
+        "term": "比較",
+        "reading": "ひかく",
+        "kanji": [
+          "比",
+          "較"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l56_s011",
+        "meaningVi": "so sánh",
+        "meaningEn": "comparison"
+      },
+      "search": {
+        "termNoAccent": "比較",
+        "readingNoAccent": "ひかく",
+        "meaningViNoAccent": "so sanh",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l56_v011",
+        "sourceSenseId": "n3_l56_s011",
+        "sourceEntrySeq": "1483560"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 6,
+        "themeEn": "Online shopping and consumer behavior",
+        "themeVi": "Mua sắm trực tuyến và hành vi tiêu dùng"
+      }
+    },
+    {
+      "entryId": "n3_l56_s012",
+      "lessonId": 56,
+      "level": "N3",
+      "order": 12,
+      "tags": [
+        "quartet-theme",
+        "shopping",
+        "na-adjective",
+        "quartet_6",
+        "theme_56"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l56_v012",
+        "term": "便利",
+        "reading": "べんり",
+        "kanji": [
+          "便",
+          "利"
+        ],
+        "labels": {
+          "hanViet": "Tiện Lợi"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l56_s012",
+        "meaningVi": "tiện lợi",
+        "meaningEn": "convenient; handy"
+      },
+      "search": {
+        "termNoAccent": "便利",
+        "readingNoAccent": "べんり",
+        "meaningViNoAccent": "tien loi",
+        "hanVietNoAccent": "tien loi"
+      },
+      "links": {
+        "sourceVocabId": "n3_l56_v012",
+        "sourceSenseId": "n3_l56_s012",
+        "sourceEntrySeq": "1512610"
+      },
+      "legacy": {
+        "kanjiMeaning": "Tiện Lợi"
+      },
+      "theme": {
+        "quartetLesson": 6,
+        "themeEn": "Online shopping and consumer behavior",
+        "themeVi": "Mua sắm trực tuyến và hành vi tiêu dùng"
+      }
+    }
+  ]
+}

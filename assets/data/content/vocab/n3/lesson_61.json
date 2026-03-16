@@ -1,0 +1,659 @@
+{
+  "schemaVersion": 2,
+  "dataset": "vocab",
+  "series": "quartet-jmdict-kanjidic-draft",
+  "level": "N3",
+  "lessonId": 61,
+  "entryCount": 12,
+  "entries": [
+    {
+      "entryId": "n3_l61_s001",
+      "lessonId": 61,
+      "level": "N3",
+      "order": 1,
+      "tags": [
+        "quartet-theme",
+        "nature",
+        "noun",
+        "quartet_11",
+        "theme_61"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l61_v001",
+        "term": "自然",
+        "reading": "しぜん",
+        "kanji": [
+          "自",
+          "然"
+        ],
+        "labels": {
+          "hanViet": "Tự"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l61_s001",
+        "meaningVi": "tự nhiên",
+        "meaningEn": "nature; natural"
+      },
+      "search": {
+        "termNoAccent": "自然",
+        "readingNoAccent": "しぜん",
+        "meaningViNoAccent": "tu nhien",
+        "hanVietNoAccent": "tu"
+      },
+      "links": {
+        "sourceVocabId": "n3_l61_v001",
+        "sourceSenseId": "n3_l61_s001",
+        "sourceEntrySeq": "1318090"
+      },
+      "legacy": {
+        "kanjiMeaning": "Tự"
+      },
+      "theme": {
+        "quartetLesson": 11,
+        "themeEn": "Nature and disasters",
+        "themeVi": "Thiên nhiên và thiên tai"
+      }
+    },
+    {
+      "entryId": "n3_l61_s002",
+      "lessonId": 61,
+      "level": "N3",
+      "order": 2,
+      "tags": [
+        "quartet-theme",
+        "nature",
+        "noun",
+        "quartet_11",
+        "theme_61"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l61_v002",
+        "term": "地震",
+        "reading": "じしん",
+        "kanji": [
+          "地",
+          "震"
+        ],
+        "labels": {
+          "hanViet": "Địa chấn"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l61_s002",
+        "meaningVi": "động đất",
+        "meaningEn": "earthquake"
+      },
+      "search": {
+        "termNoAccent": "地震",
+        "readingNoAccent": "じしん",
+        "meaningViNoAccent": "dong dat",
+        "hanVietNoAccent": "dia chan"
+      },
+      "links": {
+        "sourceVocabId": "n3_l61_v002",
+        "sourceSenseId": "n3_l61_s002",
+        "sourceEntrySeq": "1421210"
+      },
+      "legacy": {
+        "kanjiMeaning": "Địa chấn"
+      },
+      "theme": {
+        "quartetLesson": 11,
+        "themeEn": "Nature and disasters",
+        "themeVi": "Thiên nhiên và thiên tai"
+      }
+    },
+    {
+      "entryId": "n3_l61_s003",
+      "lessonId": 61,
+      "level": "N3",
+      "order": 3,
+      "tags": [
+        "quartet-theme",
+        "nature",
+        "noun",
+        "quartet_11",
+        "theme_61"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l61_v003",
+        "term": "台風",
+        "reading": "たいふう",
+        "kanji": [
+          "台",
+          "風"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l61_s003",
+        "meaningVi": "bão",
+        "meaningEn": "typhoon; hurricane"
+      },
+      "search": {
+        "termNoAccent": "台風",
+        "readingNoAccent": "たいふう",
+        "meaningViNoAccent": "bao",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l61_v003",
+        "sourceSenseId": "n3_l61_s003",
+        "sourceEntrySeq": "1596780"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 11,
+        "themeEn": "Nature and disasters",
+        "themeVi": "Thiên nhiên và thiên tai"
+      }
+    },
+    {
+      "entryId": "n3_l61_s004",
+      "lessonId": 61,
+      "level": "N3",
+      "order": 4,
+      "tags": [
+        "quartet-theme",
+        "nature",
+        "noun",
+        "quartet_11",
+        "theme_61"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l61_v004",
+        "term": "災害",
+        "reading": "さいがい",
+        "kanji": [
+          "災",
+          "害"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l61_s004",
+        "meaningVi": "thiên tai, thảm họa",
+        "meaningEn": "calamity; disaster"
+      },
+      "search": {
+        "termNoAccent": "災害",
+        "readingNoAccent": "さいがい",
+        "meaningViNoAccent": "thien tai, tham hoa",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l61_v004",
+        "sourceSenseId": "n3_l61_s004",
+        "sourceEntrySeq": "1295100"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 11,
+        "themeEn": "Nature and disasters",
+        "themeVi": "Thiên nhiên và thiên tai"
+      }
+    },
+    {
+      "entryId": "n3_l61_s005",
+      "lessonId": 61,
+      "level": "N3",
+      "order": 5,
+      "tags": [
+        "quartet-theme",
+        "nature",
+        "noun",
+        "quartet_11",
+        "theme_61"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l61_v005",
+        "term": "被害",
+        "reading": "ひがい",
+        "kanji": [
+          "被",
+          "害"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l61_s005",
+        "meaningVi": "thiệt hại",
+        "meaningEn": "(suffering) damage; injury"
+      },
+      "search": {
+        "termNoAccent": "被害",
+        "readingNoAccent": "ひがい",
+        "meaningViNoAccent": "thiet hai",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l61_v005",
+        "sourceSenseId": "n3_l61_s005",
+        "sourceEntrySeq": "1484350"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 11,
+        "themeEn": "Nature and disasters",
+        "themeVi": "Thiên nhiên và thiên tai"
+      }
+    },
+    {
+      "entryId": "n3_l61_s006",
+      "lessonId": 61,
+      "level": "N3",
+      "order": 6,
+      "tags": [
+        "quartet-theme",
+        "nature",
+        "noun",
+        "suru",
+        "quartet_11",
+        "theme_61"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l61_v006",
+        "term": "避難",
+        "reading": "ひなん",
+        "kanji": [
+          "避",
+          "難"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l61_s006",
+        "meaningVi": "sơ tán, lánh nạn",
+        "meaningEn": "taking refuge; finding shelter"
+      },
+      "search": {
+        "termNoAccent": "避難",
+        "readingNoAccent": "ひなん",
+        "meaningViNoAccent": "so tan, lanh nan",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l61_v006",
+        "sourceSenseId": "n3_l61_s006",
+        "sourceEntrySeq": "1484660"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 11,
+        "themeEn": "Nature and disasters",
+        "themeVi": "Thiên nhiên và thiên tai"
+      }
+    },
+    {
+      "entryId": "n3_l61_s007",
+      "lessonId": 61,
+      "level": "N3",
+      "order": 7,
+      "tags": [
+        "quartet-theme",
+        "nature",
+        "noun",
+        "quartet_11",
+        "theme_61"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l61_v007",
+        "term": "洪水",
+        "reading": "こうずい",
+        "kanji": [
+          "洪",
+          "水"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l61_s007",
+        "meaningVi": "lũ lụt",
+        "meaningEn": "flood; flooding"
+      },
+      "search": {
+        "termNoAccent": "洪水",
+        "readingNoAccent": "こうずい",
+        "meaningViNoAccent": "lu lut",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l61_v007",
+        "sourceSenseId": "n3_l61_s007",
+        "sourceEntrySeq": "1279930"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 11,
+        "themeEn": "Nature and disasters",
+        "themeVi": "Thiên nhiên và thiên tai"
+      }
+    },
+    {
+      "entryId": "n3_l61_s008",
+      "lessonId": 61,
+      "level": "N3",
+      "order": 8,
+      "tags": [
+        "quartet-theme",
+        "nature",
+        "noun",
+        "quartet_11",
+        "theme_61"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l61_v008",
+        "term": "火山",
+        "reading": "かざん",
+        "kanji": [
+          "火",
+          "山"
+        ],
+        "labels": {
+          "hanViet": "Sơn"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l61_s008",
+        "meaningVi": "núi lửa",
+        "meaningEn": "volcano"
+      },
+      "search": {
+        "termNoAccent": "火山",
+        "readingNoAccent": "かざん",
+        "meaningViNoAccent": "nui lua",
+        "hanVietNoAccent": "son"
+      },
+      "links": {
+        "sourceVocabId": "n3_l61_v008",
+        "sourceSenseId": "n3_l61_s008",
+        "sourceEntrySeq": "1193910"
+      },
+      "legacy": {
+        "kanjiMeaning": "Sơn"
+      },
+      "theme": {
+        "quartetLesson": 11,
+        "themeEn": "Nature and disasters",
+        "themeVi": "Thiên nhiên và thiên tai"
+      }
+    },
+    {
+      "entryId": "n3_l61_s009",
+      "lessonId": 61,
+      "level": "N3",
+      "order": 9,
+      "tags": [
+        "quartet-theme",
+        "nature",
+        "noun",
+        "quartet_11",
+        "theme_61"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l61_v009",
+        "term": "津波",
+        "reading": "つなみ",
+        "kanji": [
+          "津",
+          "波"
+        ],
+        "labels": {
+          "hanViet": "tân Ba"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l61_s009",
+        "meaningVi": "sóng thần",
+        "meaningEn": "tsunami; tidal wave"
+      },
+      "search": {
+        "termNoAccent": "津波",
+        "readingNoAccent": "つなみ",
+        "meaningViNoAccent": "song than",
+        "hanVietNoAccent": "tan ba"
+      },
+      "links": {
+        "sourceVocabId": "n3_l61_v009",
+        "sourceSenseId": "n3_l61_s009",
+        "sourceEntrySeq": "1432220"
+      },
+      "legacy": {
+        "kanjiMeaning": "tân Ba"
+      },
+      "theme": {
+        "quartetLesson": 11,
+        "themeEn": "Nature and disasters",
+        "themeVi": "Thiên nhiên và thiên tai"
+      }
+    },
+    {
+      "entryId": "n3_l61_s010",
+      "lessonId": 61,
+      "level": "N3",
+      "order": 10,
+      "tags": [
+        "quartet-theme",
+        "nature",
+        "noun",
+        "quartet_11",
+        "theme_61"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l61_v010",
+        "term": "気温",
+        "reading": "きおん",
+        "kanji": [
+          "気",
+          "温"
+        ],
+        "labels": {
+          "hanViet": "khí"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l61_s010",
+        "meaningVi": "nhiệt độ",
+        "meaningEn": "(air) temperature"
+      },
+      "search": {
+        "termNoAccent": "気温",
+        "readingNoAccent": "きおん",
+        "meaningViNoAccent": "nhiet do",
+        "hanVietNoAccent": "khi"
+      },
+      "links": {
+        "sourceVocabId": "n3_l61_v010",
+        "sourceSenseId": "n3_l61_s010",
+        "sourceEntrySeq": "1221950"
+      },
+      "legacy": {
+        "kanjiMeaning": "khí"
+      },
+      "theme": {
+        "quartetLesson": 11,
+        "themeEn": "Nature and disasters",
+        "themeVi": "Thiên nhiên và thiên tai"
+      }
+    },
+    {
+      "entryId": "n3_l61_s011",
+      "lessonId": 61,
+      "level": "N3",
+      "order": 11,
+      "tags": [
+        "quartet-theme",
+        "nature",
+        "noun",
+        "quartet_11",
+        "theme_61"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l61_v011",
+        "term": "天候",
+        "reading": "てんこう",
+        "kanji": [
+          "天",
+          "候"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l61_s011",
+        "meaningVi": "thời tiết",
+        "meaningEn": "weather"
+      },
+      "search": {
+        "termNoAccent": "天候",
+        "readingNoAccent": "てんこう",
+        "meaningViNoAccent": "thoi tiet",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l61_v011",
+        "sourceSenseId": "n3_l61_s011",
+        "sourceEntrySeq": "1438970"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 11,
+        "themeEn": "Nature and disasters",
+        "themeVi": "Thiên nhiên và thiên tai"
+      }
+    },
+    {
+      "entryId": "n3_l61_s012",
+      "lessonId": 61,
+      "level": "N3",
+      "order": 12,
+      "tags": [
+        "quartet-theme",
+        "nature",
+        "noun",
+        "quartet_11",
+        "theme_61"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l61_v012",
+        "term": "警報",
+        "reading": "けいほう",
+        "kanji": [
+          "警",
+          "報"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l61_s012",
+        "meaningVi": "cảnh báo",
+        "meaningEn": "warning; alarm"
+      },
+      "search": {
+        "termNoAccent": "警報",
+        "readingNoAccent": "けいほう",
+        "meaningViNoAccent": "canh bao",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l61_v012",
+        "sourceSenseId": "n3_l61_s012",
+        "sourceEntrySeq": "1252520"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 11,
+        "themeEn": "Nature and disasters",
+        "themeVi": "Thiên nhiên và thiên tai"
+      }
+    }
+  ]
+}

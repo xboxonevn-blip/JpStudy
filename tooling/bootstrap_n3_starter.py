@@ -1,5 +1,5 @@
 ﻿#!/usr/bin/env python3
-"""Bootstrap the first canonical N3 lesson from open, licensed sources.
+"""Bootstrap the first content N3 lesson from open, licensed sources.
 
 Sources used by this script:
 - https://github.com/jamsinclair/open-anki-jlpt-decks (MIT) for starter N3 term selection
@@ -16,7 +16,7 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CANONICAL_ROOT = ROOT / 'assets' / 'data' / 'canonical'
+CANONICAL_ROOT = ROOT / 'assets' / 'data' / 'content'
 VOCAB_OUT = CANONICAL_ROOT / 'vocab' / 'n3' / 'lesson_51.json'
 KANJI_OUT = CANONICAL_ROOT / 'kanji' / 'n3' / 'lesson_51.json'
 INDEX_OUT = CANONICAL_ROOT / 'index.json'

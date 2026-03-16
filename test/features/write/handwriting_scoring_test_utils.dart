@@ -11,7 +11,7 @@ typedef StrokeSequence = List<StrokePath>;
 Map<String, List<KanjiStrokeTemplate>> loadTemplatesByQuality({
   int maxPerQuality = 0,
 }) {
-  final raw = File('assets/data/kanji/stroke_templates.json')
+  final raw = File('assets/data/support/kanji/stroke_templates.json')
       .readAsStringSync()
       .replaceFirst('\uFEFF', '');
   final decoded = (jsonDecode(raw) as List<dynamic>).cast<Map<String, dynamic>>();

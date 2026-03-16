@@ -3,7 +3,7 @@
 
 This script scans kanji example rows that do not have source references
 (`sourceVocabId` / `sourceSenseId`) and inserts them into the matching lesson
-under assets/data/vocab/{n5,n4}/lesson_XX.
+under assets/data/archive/vocab/{n5,n4}/lesson_XX.
 """
 
 from __future__ import annotations
@@ -16,8 +16,8 @@ from typing import Dict, List, Tuple
 
 
 ROOT = Path(__file__).resolve().parents[1]
-KANJI_ROOT = ROOT / "assets" / "data" / "kanji"
-VOCAB_ROOT = ROOT / "assets" / "data" / "vocab"
+KANJI_ROOT = ROOT / "assets" / "data" / "archive" / "kanji"
+VOCAB_ROOT = ROOT / "assets" / "data" / "archive" / "vocab"
 REPORT_PATH = ROOT / "docs" / "reports" / "kanji-example-vocab-backfill-report.json"
 
 KANJI_RE = re.compile(r"[\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF]")

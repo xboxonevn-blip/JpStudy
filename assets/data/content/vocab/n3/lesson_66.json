@@ -1,0 +1,660 @@
+{
+  "schemaVersion": 2,
+  "dataset": "vocab",
+  "series": "quartet-jmdict-kanjidic-draft",
+  "level": "N3",
+  "lessonId": 66,
+  "entryCount": 12,
+  "entries": [
+    {
+      "entryId": "n3_l66_s001",
+      "lessonId": 66,
+      "level": "N3",
+      "order": 1,
+      "tags": [
+        "quartet-theme",
+        "sports",
+        "noun",
+        "quartet_16",
+        "theme_66"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l66_v001",
+        "term": "試合",
+        "reading": "しあい",
+        "kanji": [
+          "試",
+          "合"
+        ],
+        "labels": {
+          "hanViet": "Hợp"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l66_s001",
+        "meaningVi": "trận đấu",
+        "meaningEn": "match; game"
+      },
+      "search": {
+        "termNoAccent": "試合",
+        "readingNoAccent": "しあい",
+        "meaningViNoAccent": "tran dau",
+        "hanVietNoAccent": "hop"
+      },
+      "links": {
+        "sourceVocabId": "n3_l66_v001",
+        "sourceSenseId": "n3_l66_s001",
+        "sourceEntrySeq": "1312420"
+      },
+      "legacy": {
+        "kanjiMeaning": "Hợp"
+      },
+      "theme": {
+        "quartetLesson": 16,
+        "themeEn": "Sports and competition",
+        "themeVi": "Thể thao và thi đấu"
+      }
+    },
+    {
+      "entryId": "n3_l66_s002",
+      "lessonId": 66,
+      "level": "N3",
+      "order": 2,
+      "tags": [
+        "quartet-theme",
+        "sports",
+        "noun",
+        "quartet_16",
+        "theme_66"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l66_v002",
+        "term": "勝負",
+        "reading": "しょうぶ",
+        "kanji": [
+          "勝",
+          "負"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l66_s002",
+        "meaningVi": "thắng thua",
+        "meaningEn": "victory or defeat; match"
+      },
+      "search": {
+        "termNoAccent": "勝負",
+        "readingNoAccent": "しょうぶ",
+        "meaningViNoAccent": "thang thua",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l66_v002",
+        "sourceSenseId": "n3_l66_s002",
+        "sourceEntrySeq": "1346230"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 16,
+        "themeEn": "Sports and competition",
+        "themeVi": "Thể thao và thi đấu"
+      }
+    },
+    {
+      "entryId": "n3_l66_s003",
+      "lessonId": 66,
+      "level": "N3",
+      "order": 3,
+      "tags": [
+        "quartet-theme",
+        "sports",
+        "noun",
+        "quartet_16",
+        "theme_66"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l66_v003",
+        "term": "選手",
+        "reading": "せんしゅ",
+        "kanji": [
+          "選",
+          "手"
+        ],
+        "labels": {
+          "hanViet": "Tuyển Thủ"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l66_s003",
+        "meaningVi": "vận động viên",
+        "meaningEn": "player (of a sport); athlete"
+      },
+      "search": {
+        "termNoAccent": "選手",
+        "readingNoAccent": "せんしゅ",
+        "meaningViNoAccent": "van dong vien",
+        "hanVietNoAccent": "tuyen thu"
+      },
+      "links": {
+        "sourceVocabId": "n3_l66_v003",
+        "sourceSenseId": "n3_l66_s003",
+        "sourceEntrySeq": "1392250"
+      },
+      "legacy": {
+        "kanjiMeaning": "Tuyển Thủ"
+      },
+      "theme": {
+        "quartetLesson": 16,
+        "themeEn": "Sports and competition",
+        "themeVi": "Thể thao và thi đấu"
+      }
+    },
+    {
+      "entryId": "n3_l66_s004",
+      "lessonId": 66,
+      "level": "N3",
+      "order": 4,
+      "tags": [
+        "quartet-theme",
+        "sports",
+        "noun",
+        "suru",
+        "quartet_16",
+        "theme_66"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l66_v004",
+        "term": "練習",
+        "reading": "れんしゅう",
+        "kanji": [
+          "練",
+          "習"
+        ],
+        "labels": {
+          "hanViet": "Tập"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l66_s004",
+        "meaningVi": "luyện tập",
+        "meaningEn": "practice; training"
+      },
+      "search": {
+        "termNoAccent": "練習",
+        "readingNoAccent": "れんしゅう",
+        "meaningViNoAccent": "luyen tap",
+        "hanVietNoAccent": "tap"
+      },
+      "links": {
+        "sourceVocabId": "n3_l66_v004",
+        "sourceSenseId": "n3_l66_s004",
+        "sourceEntrySeq": "1559160"
+      },
+      "legacy": {
+        "kanjiMeaning": "Tập"
+      },
+      "theme": {
+        "quartetLesson": 16,
+        "themeEn": "Sports and competition",
+        "themeVi": "Thể thao và thi đấu"
+      }
+    },
+    {
+      "entryId": "n3_l66_s005",
+      "lessonId": 66,
+      "level": "N3",
+      "order": 5,
+      "tags": [
+        "quartet-theme",
+        "sports",
+        "noun",
+        "suru",
+        "quartet_16",
+        "theme_66"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l66_v005",
+        "term": "優勝",
+        "reading": "ゆうしょう",
+        "kanji": [
+          "優",
+          "勝"
+        ],
+        "labels": {
+          "hanViet": "ưu"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l66_s005",
+        "meaningVi": "vô địch",
+        "meaningEn": "overall victory; championship"
+      },
+      "search": {
+        "termNoAccent": "優勝",
+        "readingNoAccent": "ゆうしょう",
+        "meaningViNoAccent": "vo dich",
+        "hanVietNoAccent": "uu"
+      },
+      "links": {
+        "sourceVocabId": "n3_l66_v005",
+        "sourceSenseId": "n3_l66_s005",
+        "sourceEntrySeq": "1539280"
+      },
+      "legacy": {
+        "kanjiMeaning": "ưu"
+      },
+      "theme": {
+        "quartetLesson": 16,
+        "themeEn": "Sports and competition",
+        "themeVi": "Thể thao và thi đấu"
+      }
+    },
+    {
+      "entryId": "n3_l66_s006",
+      "lessonId": 66,
+      "level": "N3",
+      "order": 6,
+      "tags": [
+        "quartet-theme",
+        "sports",
+        "noun",
+        "suru",
+        "quartet_16",
+        "theme_66"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l66_v006",
+        "term": "決勝",
+        "reading": "けっしょう",
+        "kanji": [
+          "決",
+          "勝"
+        ],
+        "labels": {
+          "hanViet": "Quyết"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l66_s006",
+        "meaningVi": "trận chung kết",
+        "meaningEn": "decision of a contest; finals (in sports)"
+      },
+      "search": {
+        "termNoAccent": "決勝",
+        "readingNoAccent": "けっしょう",
+        "meaningViNoAccent": "tran chung ket",
+        "hanVietNoAccent": "quyet"
+      },
+      "links": {
+        "sourceVocabId": "n3_l66_v006",
+        "sourceSenseId": "n3_l66_s006",
+        "sourceEntrySeq": "1254320"
+      },
+      "legacy": {
+        "kanjiMeaning": "Quyết"
+      },
+      "theme": {
+        "quartetLesson": 16,
+        "themeEn": "Sports and competition",
+        "themeVi": "Thể thao và thi đấu"
+      }
+    },
+    {
+      "entryId": "n3_l66_s007",
+      "lessonId": 66,
+      "level": "N3",
+      "order": 7,
+      "tags": [
+        "quartet-theme",
+        "sports",
+        "noun",
+        "suru",
+        "quartet_16",
+        "theme_66"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l66_v007",
+        "term": "応援",
+        "reading": "おうえん",
+        "kanji": [
+          "応",
+          "援"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l66_s007",
+        "meaningVi": "cổ vũ, ủng hộ",
+        "meaningEn": "aid; assistance"
+      },
+      "search": {
+        "termNoAccent": "応援",
+        "readingNoAccent": "おうえん",
+        "meaningViNoAccent": "co vu, ung ho",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l66_v007",
+        "sourceSenseId": "n3_l66_s007",
+        "sourceEntrySeq": "1179840"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 16,
+        "themeEn": "Sports and competition",
+        "themeVi": "Thể thao và thi đấu"
+      }
+    },
+    {
+      "entryId": "n3_l66_s008",
+      "lessonId": 66,
+      "level": "N3",
+      "order": 8,
+      "tags": [
+        "quartet-theme",
+        "sports",
+        "noun",
+        "suru",
+        "quartet_16",
+        "theme_66"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l66_v008",
+        "term": "記録",
+        "reading": "きろく",
+        "kanji": [
+          "記",
+          "録"
+        ],
+        "labels": {
+          "hanViet": "lục"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l66_s008",
+        "meaningVi": "kỷ lục",
+        "meaningEn": "record; document"
+      },
+      "search": {
+        "termNoAccent": "記録",
+        "readingNoAccent": "きろく",
+        "meaningViNoAccent": "ky luc",
+        "hanVietNoAccent": "luc"
+      },
+      "links": {
+        "sourceVocabId": "n3_l66_v008",
+        "sourceSenseId": "n3_l66_s008",
+        "sourceEntrySeq": "1223440"
+      },
+      "legacy": {
+        "kanjiMeaning": "lục"
+      },
+      "theme": {
+        "quartetLesson": 16,
+        "themeEn": "Sports and competition",
+        "themeVi": "Thể thao và thi đấu"
+      }
+    },
+    {
+      "entryId": "n3_l66_s009",
+      "lessonId": 66,
+      "level": "N3",
+      "order": 9,
+      "tags": [
+        "quartet-theme",
+        "sports",
+        "noun",
+        "quartet_16",
+        "theme_66"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l66_v009",
+        "term": "体力",
+        "reading": "たいりょく",
+        "kanji": [
+          "体",
+          "力"
+        ],
+        "labels": {
+          "hanViet": "Thể Lực"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l66_s009",
+        "meaningVi": "thể lực",
+        "meaningEn": "physical strength; power"
+      },
+      "search": {
+        "termNoAccent": "体力",
+        "readingNoAccent": "たいりょく",
+        "meaningViNoAccent": "the luc",
+        "hanVietNoAccent": "the luc"
+      },
+      "links": {
+        "sourceVocabId": "n3_l66_v009",
+        "sourceSenseId": "n3_l66_s009",
+        "sourceEntrySeq": "1409760"
+      },
+      "legacy": {
+        "kanjiMeaning": "Thể Lực"
+      },
+      "theme": {
+        "quartetLesson": 16,
+        "themeEn": "Sports and competition",
+        "themeVi": "Thể thao và thi đấu"
+      }
+    },
+    {
+      "entryId": "n3_l66_s010",
+      "lessonId": 66,
+      "level": "N3",
+      "order": 10,
+      "tags": [
+        "quartet-theme",
+        "sports",
+        "noun",
+        "quartet_16",
+        "theme_66"
+      ],
+      "classification": {
+        "script": "kana_or_other",
+        "hasKanji": false,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l66_v010",
+        "term": "チーム",
+        "reading": "ちーむ",
+        "kanji": [],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l66_s010",
+        "meaningVi": "đội, nhóm",
+        "meaningEn": "team"
+      },
+      "search": {
+        "termNoAccent": "チーム",
+        "readingNoAccent": "ちーむ",
+        "meaningViNoAccent": "doi, nhom",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l66_v010",
+        "sourceSenseId": "n3_l66_s010",
+        "sourceEntrySeq": "1077360"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 16,
+        "themeEn": "Sports and competition",
+        "themeVi": "Thể thao và thi đấu"
+      }
+    },
+    {
+      "entryId": "n3_l66_s011",
+      "lessonId": 66,
+      "level": "N3",
+      "order": 11,
+      "tags": [
+        "quartet-theme",
+        "sports",
+        "noun",
+        "quartet_16",
+        "theme_66"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l66_v011",
+        "term": "審判",
+        "reading": "しんぱん",
+        "kanji": [
+          "審",
+          "判"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l66_s011",
+        "meaningVi": "trọng tài",
+        "meaningEn": "judgement; judgment"
+      },
+      "search": {
+        "termNoAccent": "審判",
+        "readingNoAccent": "しんぱん",
+        "meaningViNoAccent": "trong tai",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l66_v011",
+        "sourceSenseId": "n3_l66_s011",
+        "sourceEntrySeq": "1360410"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 16,
+        "themeEn": "Sports and competition",
+        "themeVi": "Thể thao và thi đấu"
+      }
+    },
+    {
+      "entryId": "n3_l66_s012",
+      "lessonId": 66,
+      "level": "N3",
+      "order": 12,
+      "tags": [
+        "quartet-theme",
+        "sports",
+        "noun",
+        "quartet_16",
+        "theme_66"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l66_v012",
+        "term": "大会",
+        "reading": "たいかい",
+        "kanji": [
+          "大",
+          "会"
+        ],
+        "labels": {
+          "hanViet": "Đại Hội"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l66_s012",
+        "meaningVi": "giải đấu, đại hội",
+        "meaningEn": "mass meeting; convention"
+      },
+      "search": {
+        "termNoAccent": "大会",
+        "readingNoAccent": "たいかい",
+        "meaningViNoAccent": "giai dau, dai hoi",
+        "hanVietNoAccent": "dai hoi"
+      },
+      "links": {
+        "sourceVocabId": "n3_l66_v012",
+        "sourceSenseId": "n3_l66_s012",
+        "sourceEntrySeq": "1413180"
+      },
+      "legacy": {
+        "kanjiMeaning": "Đại Hội"
+      },
+      "theme": {
+        "quartetLesson": 16,
+        "themeEn": "Sports and competition",
+        "themeVi": "Thể thao và thi đấu"
+      }
+    }
+  ]
+}

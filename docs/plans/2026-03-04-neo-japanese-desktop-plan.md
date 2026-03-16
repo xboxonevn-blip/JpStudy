@@ -1,7 +1,5 @@
 # Neo-Japanese Desktop UI Implementation Plan
 
-> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
-
 **Goal:** Redesign desktop UI with authentic Japanese aesthetic elements (seigaiha waves, sakura particles, torii dividers, hanko badges) and a 2-column layout to better utilize desktop screen space and appeal to young learners.
 
 **Architecture:** Six independent visual tasks across two batches. Each task modifies or creates a single widget/file. All patterns use CustomPaint (no image assets). Mobile layout is never touched — all changes gate on `isDesktop` or use desktop-only widgets.

@@ -1,7 +1,5 @@
 # Engagement Batch 2 Implementation Plan
 
-> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
-
 **Goal:** Add 4 independent engagement features: achievement streak/level triggers + home popup, SRS retention breakdown card, kanji next-review chip, and home week-summary row.
 
 **Architecture:** Each feature is a self-contained vertical slice (DAO → provider → UI). Features share no state and can be implemented in any order. Features 2–4 follow patterns already established by the vocab next-review chip (A3) and the activity calendar.

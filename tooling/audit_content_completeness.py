@@ -4,7 +4,7 @@
 This script focuses on repo-owned data quality, not external crawling.
 It aggregates:
 - legacy vocab lesson file presence
-- canonical vocab/kanji lesson presence
+- content vocab/kanji lesson presence
 - unresolved kanji example references
 - N4/N5 kanji-vocab coverage status
 - local backfill/self-heal results
@@ -18,9 +18,11 @@ import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-VOCAB_ROOT = ROOT / 'assets' / 'data' / 'vocab'
-KANJI_ROOT = ROOT / 'assets' / 'data' / 'kanji'
-CANONICAL_ROOT = ROOT / 'assets' / 'data' / 'canonical'
+VOCAB_ROOT = ROOT / 'assets' / 'data' / 'archive' / 'vocab'
+KANJI_ROOT = ROOT / 'assets' / 'data' / 'archive' / 'kanji'
+CANONICAL_ROOT = ROOT / 'assets' / 'data' / 'content'
+GRAMMAR_ROOT = ROOT / 'assets' / 'data' / 'content' / 'grammar'
+GRAMMAR_EXAMPLES_ROOT = ROOT / 'assets' / 'data' / 'content' / 'grammar_examples'
 REPORT_PATH = ROOT / 'docs' / 'reports' / 'full-content-audit.json'
 
 LEVEL_RANGES = {
@@ -87,6 +89,86 @@ def _audit_canonical(dataset: str) -> dict:
     return out
 
 
+def _audit_grammar_files() -> dict:
+    out: dict[str, object] = {'levels': {}}
+    for level, (start, end) in LEVEL_RANGES.items():
+        level_root = GRAMMAR_ROOT / level
+        present = sorted(
+            int(path.stem.split('_')[-1])
+            for path in level_root.glob(f'grammar_{level}_*.json')
+        ) if level_root.exists() else []
+        expected = set(range(start, end + 1))
+        missing = sorted(expected - set(present))
+
+        points_per_lesson: dict[str, int] = {}
+        empty_lessons: list[int] = []
+        for lesson_id in present:
+            path = level_root / f'grammar_{level}_{lesson_id}.json'
+            try:
+                payload = _read_json(path)
+            except Exception:
+                empty_lessons.append(lesson_id)
+                points_per_lesson[str(lesson_id)] = 0
+                continue
+
+            point_count = len(payload) if isinstance(payload, list) else 0
+            points_per_lesson[str(lesson_id)] = point_count
+            if point_count == 0:
+                empty_lessons.append(lesson_id)
+
+        out['levels'][level.upper()] = {
+            'expectedLessons': len(expected),
+            'presentLessons': len(present),
+            'missingLessons': missing,
+            'emptyLessons': empty_lessons,
+            'pointsPerLesson': points_per_lesson,
+        }
+    return out
+
+
+def _audit_grammar_examples() -> dict:
+    out: dict[str, object] = {'levels': {}}
+    for level, (start, end) in LEVEL_RANGES.items():
+        level_root = GRAMMAR_EXAMPLES_ROOT / level
+        present = sorted(
+            int(path.stem.split('_')[-1])
+            for path in level_root.glob('lesson_*.json')
+        ) if level_root.exists() else []
+        expected = set(range(start, end + 1))
+        missing = sorted(expected - set(present))
+
+        examples_per_lesson: dict[str, int] = {}
+        empty_lessons: list[int] = []
+        for lesson_id in present:
+            path = level_root / f'lesson_{lesson_id}.json'
+            try:
+                payload = _read_json(path)
+            except Exception:
+                empty_lessons.append(lesson_id)
+                examples_per_lesson[str(lesson_id)] = 0
+                continue
+
+            total_examples = 0
+            if isinstance(payload, list):
+                for item in payload:
+                    examples = item.get('examples', []) if isinstance(item, dict) else []
+                    if isinstance(examples, list):
+                        total_examples += len(examples)
+
+            examples_per_lesson[str(lesson_id)] = total_examples
+            if total_examples == 0:
+                empty_lessons.append(lesson_id)
+
+        out['levels'][level.upper()] = {
+            'expectedLessons': len(expected),
+            'presentLessons': len(present),
+            'missingLessons': missing,
+            'emptyLessons': empty_lessons,
+            'examplesPerLesson': examples_per_lesson,
+        }
+    return out
+
+
 def _run_json_command(command: list[str]) -> dict:
     completed = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, check=True)
     stdout = [line.strip() for line in completed.stdout.splitlines() if line.strip()]
@@ -112,6 +194,8 @@ def main() -> int:
         'legacyVocab': _audit_legacy_vocab(),
         'canonicalVocab': _audit_canonical('vocab'),
         'canonicalKanji': _audit_canonical('kanji'),
+        'grammar': _audit_grammar_files(),
+        'grammarExamples': _audit_grammar_examples(),
         'localFixes': fixes,
         'validatorSnapshot': validation,
     }

@@ -1,0 +1,665 @@
+{
+  "schemaVersion": 2,
+  "dataset": "vocab",
+  "series": "quartet-jmdict-kanjidic-draft",
+  "level": "N3",
+  "lessonId": 54,
+  "entryCount": 12,
+  "entries": [
+    {
+      "entryId": "n3_l54_s001",
+      "lessonId": 54,
+      "level": "N3",
+      "order": 1,
+      "tags": [
+        "quartet-theme",
+        "study-abroad",
+        "noun",
+        "suru",
+        "quartet_4",
+        "theme_54"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l54_v001",
+        "term": "留学",
+        "reading": "りゅうがく",
+        "kanji": [
+          "留",
+          "学"
+        ],
+        "labels": {
+          "hanViet": "Lưu Học"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l54_s001",
+        "meaningVi": "du học",
+        "meaningEn": "studying abroad; (temporarily) studying at another school (to learn a specific skill)"
+      },
+      "search": {
+        "termNoAccent": "留学",
+        "readingNoAccent": "りゅうがく",
+        "meaningViNoAccent": "du hoc",
+        "hanVietNoAccent": "luu hoc"
+      },
+      "links": {
+        "sourceVocabId": "n3_l54_v001",
+        "sourceSenseId": "n3_l54_s001",
+        "sourceEntrySeq": "1552740"
+      },
+      "legacy": {
+        "kanjiMeaning": "Lưu Học"
+      },
+      "theme": {
+        "quartetLesson": 4,
+        "themeEn": "Studying language and culture through abroad study",
+        "themeVi": "Học ngôn ngữ và văn hóa qua du học"
+      }
+    },
+    {
+      "entryId": "n3_l54_s002",
+      "lessonId": 54,
+      "level": "N3",
+      "order": 2,
+      "tags": [
+        "quartet-theme",
+        "study-abroad",
+        "noun",
+        "quartet_4",
+        "theme_54"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l54_v002",
+        "term": "文化",
+        "reading": "ぶんか",
+        "kanji": [
+          "文",
+          "化"
+        ],
+        "labels": {
+          "hanViet": "Văn"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l54_s002",
+        "meaningVi": "văn hóa",
+        "meaningEn": "culture; civilization"
+      },
+      "search": {
+        "termNoAccent": "文化",
+        "readingNoAccent": "ぶんか",
+        "meaningViNoAccent": "van hoa",
+        "hanVietNoAccent": "van"
+      },
+      "links": {
+        "sourceVocabId": "n3_l54_v002",
+        "sourceSenseId": "n3_l54_s002",
+        "sourceEntrySeq": "1505120"
+      },
+      "legacy": {
+        "kanjiMeaning": "Văn"
+      },
+      "theme": {
+        "quartetLesson": 4,
+        "themeEn": "Studying language and culture through abroad study",
+        "themeVi": "Học ngôn ngữ và văn hóa qua du học"
+      }
+    },
+    {
+      "entryId": "n3_l54_s003",
+      "lessonId": 54,
+      "level": "N3",
+      "order": 3,
+      "tags": [
+        "quartet-theme",
+        "study-abroad",
+        "noun",
+        "quartet_4",
+        "theme_54"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l54_v003",
+        "term": "言語",
+        "reading": "げんご",
+        "kanji": [
+          "言",
+          "語"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l54_s003",
+        "meaningVi": "ngôn ngữ",
+        "meaningEn": "language"
+      },
+      "search": {
+        "termNoAccent": "言語",
+        "readingNoAccent": "げんご",
+        "meaningViNoAccent": "ngon ngu",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l54_v003",
+        "sourceSenseId": "n3_l54_s003",
+        "sourceEntrySeq": "1264420"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 4,
+        "themeEn": "Studying language and culture through abroad study",
+        "themeVi": "Học ngôn ngữ và văn hóa qua du học"
+      }
+    },
+    {
+      "entryId": "n3_l54_s004",
+      "lessonId": 54,
+      "level": "N3",
+      "order": 4,
+      "tags": [
+        "quartet-theme",
+        "study-abroad",
+        "noun",
+        "suru",
+        "quartet_4",
+        "theme_54"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l54_v004",
+        "term": "交流",
+        "reading": "こうりゅう",
+        "kanji": [
+          "交",
+          "流"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l54_s004",
+        "meaningVi": "giao lưu",
+        "meaningEn": "exchange (e.g. cultural); interchange"
+      },
+      "search": {
+        "termNoAccent": "交流",
+        "readingNoAccent": "こうりゅう",
+        "meaningViNoAccent": "giao luu",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l54_v004",
+        "sourceSenseId": "n3_l54_s004",
+        "sourceEntrySeq": "1272580"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 4,
+        "themeEn": "Studying language and culture through abroad study",
+        "themeVi": "Học ngôn ngữ và văn hóa qua du học"
+      }
+    },
+    {
+      "entryId": "n3_l54_s005",
+      "lessonId": 54,
+      "level": "N3",
+      "order": 5,
+      "tags": [
+        "quartet-theme",
+        "study-abroad",
+        "noun",
+        "quartet_4",
+        "theme_54"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l54_v005",
+        "term": "授業",
+        "reading": "じゅぎょう",
+        "kanji": [
+          "授",
+          "業"
+        ],
+        "labels": {
+          "hanViet": "Nghiệp"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l54_s005",
+        "meaningVi": "giờ học, lớp học",
+        "meaningEn": "lesson; class"
+      },
+      "search": {
+        "termNoAccent": "授業",
+        "readingNoAccent": "じゅぎょう",
+        "meaningViNoAccent": "gio hoc, lop hoc",
+        "hanVietNoAccent": "nghiep"
+      },
+      "links": {
+        "sourceVocabId": "n3_l54_v005",
+        "sourceSenseId": "n3_l54_s005",
+        "sourceEntrySeq": "1330290"
+      },
+      "legacy": {
+        "kanjiMeaning": "Nghiệp"
+      },
+      "theme": {
+        "quartetLesson": 4,
+        "themeEn": "Studying language and culture through abroad study",
+        "themeVi": "Học ngôn ngữ và văn hóa qua du học"
+      }
+    },
+    {
+      "entryId": "n3_l54_s006",
+      "lessonId": 54,
+      "level": "N3",
+      "order": 6,
+      "tags": [
+        "quartet-theme",
+        "study-abroad",
+        "noun",
+        "quartet_4",
+        "theme_54"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l54_v006",
+        "term": "寮",
+        "reading": "りょう",
+        "kanji": [
+          "寮"
+        ],
+        "labels": {
+          "hanViet": "liêu"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l54_s006",
+        "meaningVi": "ký túc xá",
+        "meaningEn": "hostel; dormitory"
+      },
+      "search": {
+        "termNoAccent": "寮",
+        "readingNoAccent": "りょう",
+        "meaningViNoAccent": "ky tuc xa",
+        "hanVietNoAccent": "lieu"
+      },
+      "links": {
+        "sourceVocabId": "n3_l54_v006",
+        "sourceSenseId": "n3_l54_s006",
+        "sourceEntrySeq": "1554230"
+      },
+      "legacy": {
+        "kanjiMeaning": "liêu"
+      },
+      "theme": {
+        "quartetLesson": 4,
+        "themeEn": "Studying language and culture through abroad study",
+        "themeVi": "Học ngôn ngữ và văn hóa qua du học"
+      }
+    },
+    {
+      "entryId": "n3_l54_s007",
+      "lessonId": 54,
+      "level": "N3",
+      "order": 7,
+      "tags": [
+        "quartet-theme",
+        "study-abroad",
+        "noun",
+        "suru",
+        "quartet_4",
+        "theme_54"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l54_v007",
+        "term": "研究",
+        "reading": "けんきゅう",
+        "kanji": [
+          "研",
+          "究"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l54_s007",
+        "meaningVi": "nghiên cứu",
+        "meaningEn": "research; study"
+      },
+      "search": {
+        "termNoAccent": "研究",
+        "readingNoAccent": "けんきゅう",
+        "meaningViNoAccent": "nghien cuu",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l54_v007",
+        "sourceSenseId": "n3_l54_s007",
+        "sourceEntrySeq": "1258520"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 4,
+        "themeEn": "Studying language and culture through abroad study",
+        "themeVi": "Học ngôn ngữ và văn hóa qua du học"
+      }
+    },
+    {
+      "entryId": "n3_l54_s008",
+      "lessonId": 54,
+      "level": "N3",
+      "order": 8,
+      "tags": [
+        "quartet-theme",
+        "study-abroad",
+        "noun",
+        "suru",
+        "quartet_4",
+        "theme_54"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l54_v008",
+        "term": "発表",
+        "reading": "はっぴょう",
+        "kanji": [
+          "発",
+          "表"
+        ],
+        "labels": {
+          "hanViet": "Phát"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l54_s008",
+        "meaningVi": "phát biểu, thuyết trình",
+        "meaningEn": "announcement; publication"
+      },
+      "search": {
+        "termNoAccent": "発表",
+        "readingNoAccent": "はっぴょう",
+        "meaningViNoAccent": "phat bieu, thuyet trinh",
+        "hanVietNoAccent": "phat"
+      },
+      "links": {
+        "sourceVocabId": "n3_l54_v008",
+        "sourceSenseId": "n3_l54_s008",
+        "sourceEntrySeq": "1477840"
+      },
+      "legacy": {
+        "kanjiMeaning": "Phát"
+      },
+      "theme": {
+        "quartetLesson": 4,
+        "themeEn": "Studying language and culture through abroad study",
+        "themeVi": "Học ngôn ngữ và văn hóa qua du học"
+      }
+    },
+    {
+      "entryId": "n3_l54_s009",
+      "lessonId": 54,
+      "level": "N3",
+      "order": 9,
+      "tags": [
+        "quartet-theme",
+        "study-abroad",
+        "noun",
+        "quartet_4",
+        "theme_54"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l54_v009",
+        "term": "奨学金",
+        "reading": "しょうがくきん",
+        "kanji": [
+          "奨",
+          "学",
+          "金"
+        ],
+        "labels": {
+          "hanViet": "Học"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l54_s009",
+        "meaningVi": "học bổng",
+        "meaningEn": "scholarship; stipend"
+      },
+      "search": {
+        "termNoAccent": "奨学金",
+        "readingNoAccent": "しょうがくきん",
+        "meaningViNoAccent": "hoc bong",
+        "hanVietNoAccent": "hoc"
+      },
+      "links": {
+        "sourceVocabId": "n3_l54_v009",
+        "sourceSenseId": "n3_l54_s009",
+        "sourceEntrySeq": "1347530"
+      },
+      "legacy": {
+        "kanjiMeaning": "Học"
+      },
+      "theme": {
+        "quartetLesson": 4,
+        "themeEn": "Studying language and culture through abroad study",
+        "themeVi": "Học ngôn ngữ và văn hóa qua du học"
+      }
+    },
+    {
+      "entryId": "n3_l54_s010",
+      "lessonId": 54,
+      "level": "N3",
+      "order": 10,
+      "tags": [
+        "quartet-theme",
+        "study-abroad",
+        "noun",
+        "suru",
+        "quartet_4",
+        "theme_54"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l54_v010",
+        "term": "体験",
+        "reading": "たいけん",
+        "kanji": [
+          "体",
+          "験"
+        ],
+        "labels": {
+          "hanViet": "Thể nghiệm"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l54_s010",
+        "meaningVi": "trải nghiệm",
+        "meaningEn": "(practical) experience; personal experience"
+      },
+      "search": {
+        "termNoAccent": "体験",
+        "readingNoAccent": "たいけん",
+        "meaningViNoAccent": "trai nghiem",
+        "hanVietNoAccent": "the nghiem"
+      },
+      "links": {
+        "sourceVocabId": "n3_l54_v010",
+        "sourceSenseId": "n3_l54_s010",
+        "sourceEntrySeq": "1409420"
+      },
+      "legacy": {
+        "kanjiMeaning": "Thể nghiệm"
+      },
+      "theme": {
+        "quartetLesson": 4,
+        "themeEn": "Studying language and culture through abroad study",
+        "themeVi": "Học ngôn ngữ và văn hóa qua du học"
+      }
+    },
+    {
+      "entryId": "n3_l54_s011",
+      "lessonId": 54,
+      "level": "N3",
+      "order": 11,
+      "tags": [
+        "quartet-theme",
+        "study-abroad",
+        "noun",
+        "quartet_4",
+        "theme_54"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l54_v011",
+        "term": "異文化",
+        "reading": "いぶんか",
+        "kanji": [
+          "異",
+          "文",
+          "化"
+        ],
+        "labels": {
+          "hanViet": "Văn"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l54_s011",
+        "meaningVi": "văn hóa khác biệt",
+        "meaningEn": "different culture; foreign culture"
+      },
+      "search": {
+        "termNoAccent": "異文化",
+        "readingNoAccent": "いぶんか",
+        "meaningViNoAccent": "van hoa khac biet",
+        "hanVietNoAccent": "van"
+      },
+      "links": {
+        "sourceVocabId": "n3_l54_v011",
+        "sourceSenseId": "n3_l54_s011",
+        "sourceEntrySeq": "1834500"
+      },
+      "legacy": {
+        "kanjiMeaning": "Văn"
+      },
+      "theme": {
+        "quartetLesson": 4,
+        "themeEn": "Studying language and culture through abroad study",
+        "themeVi": "Học ngôn ngữ và văn hóa qua du học"
+      }
+    },
+    {
+      "entryId": "n3_l54_s012",
+      "lessonId": 54,
+      "level": "N3",
+      "order": 12,
+      "tags": [
+        "quartet-theme",
+        "study-abroad",
+        "noun",
+        "suru",
+        "quartet_4",
+        "theme_54"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l54_v012",
+        "term": "会話",
+        "reading": "かいわ",
+        "kanji": [
+          "会",
+          "話"
+        ],
+        "labels": {
+          "hanViet": "Hội Thoại"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l54_s012",
+        "meaningVi": "hội thoại",
+        "meaningEn": "conversation; talk"
+      },
+      "search": {
+        "termNoAccent": "会話",
+        "readingNoAccent": "かいわ",
+        "meaningViNoAccent": "hoi thoai",
+        "hanVietNoAccent": "hoi thoai"
+      },
+      "links": {
+        "sourceVocabId": "n3_l54_v012",
+        "sourceSenseId": "n3_l54_s012",
+        "sourceEntrySeq": "1198880"
+      },
+      "legacy": {
+        "kanjiMeaning": "Hội Thoại"
+      },
+      "theme": {
+        "quartetLesson": 4,
+        "themeEn": "Studying language and culture through abroad study",
+        "themeVi": "Học ngôn ngữ và văn hóa qua du học"
+      }
+    }
+  ]
+}

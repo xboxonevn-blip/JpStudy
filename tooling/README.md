@@ -1,121 +1,71 @@
-# Tooling Workflows
+# Tooling
 
-## Scheduled N4 Promotion
+`tooling/` contains local scripts and helper assets for content generation, validation, migration, and quality maintenance.
 
-Use `run_promotion_workflow.py` as the release/tooling entrypoint.
+## Folder structure
 
-### Run every app start (but gate to weekly)
+- `reports/`: tooling-specific runtime or workflow reports
+- `_tmpcache/`: local caches for heavy source datasets and intermediate artifacts
+- `*.py`: executable maintenance scripts
+- `*.json`: helper inputs such as manual overrides or theme maps
 
-```bash
-python tooling/run_promotion_workflow.py --schedule app-start --interval-days 7
-```
+## Script groups
 
-### Run from a weekly job (CI / Task Scheduler)
+### Content export and validation
 
-```bash
-python tooling/run_promotion_workflow.py --schedule weekly --interval-days 7
-```
+- `build_canonical_content_v2.py`: exports lesson data into the runtime `assets/data/content/` layout
+- `validate_content_assets_v2.py`: validates content integrity across vocab/kanji datasets
+- `audit_content_completeness.py`: runs broader repo-level completeness and self-heal checks
 
-### Force run now
+### Archive migration and backfill
 
-```bash
-python tooling/run_promotion_workflow.py --force
-```
+- `backfill_vocab_from_kanji_examples.py`: pushes archived kanji example content back into archived vocab lesson structures
+- `link_kanji_examples_to_vocab.py`: links archived kanji examples to archived vocab identifiers
+- `fix_vocab_kanjimeaning_hanviet.py`: repairs archived vocab Han-Viet labels using local/manual/open sources
+- `refine_coverage_meaningvi_manual.py`: manual refinement pass for archived coverage gaps
+- `ensure_n4n5_kanji_vocab_coverage.py`: audits and repairs N4/N5 archive coverage relationships
 
-## Reports
+### Grammar generation and normalization
 
-- Promotion history JSON: `tooling/reports/n4_promotion_history.json`
-- Scheduler state JSON: `tooling/reports/n4_promotion_schedule_state.json`
+- `generate_n3_grammar_scaffold.py`: scaffolds N3 grammar lesson data
+- `normalize_grammar_examples.py`: standardizes grammar example wording/shape
+- `normalize_n3_grammar_semantics.py`: normalizes N3 grammar semantics and labels
+- `upgrade_grammar_quality.py`: improves grammar payload quality and example richness
+- `score_n3_lesson_coherence.py`: scores lesson coherence for N3 grammar/grouping work
 
-Each promotion run appends one entry to the history file, including:
-- run time, mode, promoted count
-- list of promoted characters (lesson/stroke/score)
+### Lesson/theme drafting
 
-## Canonical Content v2
+- `generate_n3_quartet_drafts.py`: drafts N3 lesson/theme structures using the QUARTET mapping approach
+- `bootstrap_n3_starter.py`: creates a starter N3 lesson from open-source references
+- `quartet1_theme_map.json`: lesson/theme grouping input used by drafting scripts
 
-Use the canonical content workflow when you want vocab / kanji data to stay
-normalized, reproducible, and aligned with lesson assets.
+### Kanji support assets
 
-### Sync embedded decomposition
+- `sync_kanji_decomposition_labels.py`: syncs decomposition labels from content kanji files into support exports
+- `generate_kanjivg_stroke_paths.py`: generates `assets/data/support/kanji/kanjivg_stroke_paths_n5n4.json`
+- `generate_stroke_templates.py`: builds handwriting stroke templates
+- `promote_n4_curated_from_mistakes.py`: promotes curated template improvements from mistake-driven review
 
-```bash
-python tooling/sync_kanji_decomposition_labels.py
-```
+### Source cache / external source prep
 
-This updates `decomposition` inside lesson kanji JSON files and rewrites
-`assets/data/kanji/decomposition.json` as a derived compatibility export.
+- `build_jmdict_kanjidic_cache.py`: downloads and parses JMdict + KANJIDIC2 local caches
+- `hanviet_manual_overrides.json`: manual Han-Viet override table used by repair scripts
 
-### Build canonical exports
+### Operational workflow
 
-```bash
-python tooling/build_canonical_content_v2.py
-```
+- `run_promotion_workflow.py`: scheduled/forced promotion workflow entrypoint
 
-Outputs:
-- `assets/data/canonical/index.json`
-- `assets/data/canonical/vocab/n5/lesson_XX.json`
-- `assets/data/canonical/vocab/n4/lesson_XX.json`
-- `assets/data/canonical/kanji/n5/lesson_XX.json`
-- `assets/data/canonical/kanji/n4/lesson_XX.json`
-- `docs/reports/canonical-content-v2-report.json`
+## Conventions
 
-### Validate content integrity
+- Runtime-facing app data should end up under `assets/data/content/` or `assets/data/support/`.
+- Historical import sources belong under `assets/data/archive/`.
+- Generated reports should go under `docs/reports/` unless they are workflow-local and temporary.
+- Large or remote-source caches belong in `tooling/_tmpcache/` and should remain ignored locally.
 
-```bash
-python tooling/validate_content_assets_v2.py
-```
+## Recommended usage order
 
-Validation report:
-- `docs/reports/content-validation-v2.json`
-
-Schema guide:
-- `docs/DATA_SCHEMA_V2.md`
-
-## N3 starter bootstrap
-
-Use this when you want to begin populating `N3` with a reviewed canonical lesson
-instead of bulk-importing an unverified list.
-
-```bash
-python tooling/bootstrap_n3_starter.py
-```
-
-References:
-- `docs/reports/n3-source-audit-2026-03-16.md`
-- `assets/data/canonical/vocab/n3/lesson_51.json`
-- `assets/data/canonical/kanji/n3/lesson_51.json`
-
-## JMdict + KANJIDIC2 pipeline
-
-Build local parsed caches from the official EDRDG source archives:
-
-```bash
-python tooling/build_jmdict_kanjidic_cache.py
-```
-
-Quick validation mode:
-
-```bash
-python tooling/build_jmdict_kanjidic_cache.py --limit 100
-```
-
-Outputs:
-- `tooling/_tmpcache/jmdict_kanjidic/raw/JMdict_e.gz`
-- `tooling/_tmpcache/jmdict_kanjidic/raw/kanjidic2.xml.gz`
-- `tooling/_tmpcache/jmdict_kanjidic/parsed/jmdict_e_min.json`
-- `tooling/_tmpcache/jmdict_kanjidic/parsed/kanjidic2_min.json`
-- `docs/reports/jmdict-kanjidic-cache-report.json`
-
-Supporting theme map:
-- `tooling/quartet1_theme_map.json`
-
-## Full content audit
-
-Run a repo-wide data completeness audit and local self-heal passes:
-
-```bash
-python tooling/audit_content_completeness.py --apply-fixes
-```
-
-Output:
-- `docs/reports/full-content-audit.json`
+For content work, the most common sequence is:
+- build source cache if needed
+- generate or normalize content
+- validate content
+- review `docs/reports/` outputs

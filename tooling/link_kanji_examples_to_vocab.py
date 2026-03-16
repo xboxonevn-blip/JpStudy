@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Link kanji examples to normalized vocab rows to reduce duplicated payload.
 
-For each example in assets/data/kanji/{n5,n4}/kanji_*.json:
+For each example in assets/data/archive/kanji/{n5,n4}/kanji_*.json:
 - Try exact match by (level, word, reading) against normalized vocab.
 - Fallback to global exact match by (word, reading) when level match is absent.
 - If matched, write source refs: sourceVocabId + sourceSenseId.
@@ -20,8 +20,8 @@ from typing import Dict, Iterable, List, Tuple
 
 
 ROOT = Path(__file__).resolve().parents[1]
-VOCAB_ROOT = ROOT / "assets" / "data" / "vocab"
-KANJI_ROOT = ROOT / "assets" / "data" / "kanji"
+VOCAB_ROOT = ROOT / "assets" / "data" / "archive" / "vocab"
+KANJI_ROOT = ROOT / "assets" / "data" / "archive" / "kanji"
 REPORT_PATH = ROOT / "docs" / "reports" / "kanji-vocab-link-report.json"
 
 

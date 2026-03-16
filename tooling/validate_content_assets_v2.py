@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate vocab / kanji content integrity for current and canonical assets."""
+"""Validate vocab / kanji content integrity for current and content assets."""
 
 from __future__ import annotations
 
@@ -11,11 +11,11 @@ from typing import Dict, Iterable, List
 
 
 ROOT = Path(__file__).resolve().parents[1]
-VOCAB_ROOT = ROOT / "assets" / "data" / "vocab"
-KANJI_ROOT = ROOT / "assets" / "data" / "kanji"
-CANONICAL_ROOT = ROOT / "assets" / "data" / "canonical"
+VOCAB_ROOT = ROOT / "assets" / "data" / "archive" / "vocab"
+KANJI_ROOT = ROOT / "assets" / "data" / "archive" / "kanji"
+CANONICAL_ROOT = ROOT / "assets" / "data" / "content"
 REPORT_PATH = ROOT / "docs" / "reports" / "content-validation-v2.json"
-DECOMPOSITION_PATH = KANJI_ROOT / "decomposition.json"
+DECOMPOSITION_PATH = ROOT / "assets" / "data" / "support" / "kanji" / "decomposition.json"
 
 
 def _level_names(root: Path) -> list[str]:

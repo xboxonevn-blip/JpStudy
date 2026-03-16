@@ -23,10 +23,10 @@ Official 3A pages show:
 
 Repo status:
 
-- `assets/data/vocab/n5/lesson_01..25`
-- `assets/data/vocab/n4/lesson_26..50`
-- `assets/data/kanji/n5/kanji_n5_1..25.json`
-- `assets/data/kanji/n4/kanji_n4_26..50.json`
+- `assets/data/archive/vocab/n5/lesson_01..25`
+- `assets/data/archive/vocab/n4/lesson_26..50`
+- `assets/data/archive/kanji/n5/kanji_n5_1..25.json`
+- `assets/data/archive/kanji/n4/kanji_n4_26..50.json`
 
 Conclusion:
 

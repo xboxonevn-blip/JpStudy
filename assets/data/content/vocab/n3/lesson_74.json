@@ -1,0 +1,655 @@
+{
+  "schemaVersion": 2,
+  "dataset": "vocab",
+  "series": "quartet-jmdict-kanjidic-draft",
+  "level": "N3",
+  "lessonId": 74,
+  "entryCount": 12,
+  "entries": [
+    {
+      "entryId": "n3_l74_s001",
+      "lessonId": 74,
+      "level": "N3",
+      "order": 1,
+      "tags": [
+        "quartet-theme",
+        "fashion",
+        "noun",
+        "quartet_24",
+        "theme_74"
+      ],
+      "classification": {
+        "script": "kana_or_other",
+        "hasKanji": false,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l74_v001",
+        "term": "ファッション",
+        "reading": "ふぁっしょん",
+        "kanji": [],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l74_s001",
+        "meaningVi": "thời trang",
+        "meaningEn": "fashion"
+      },
+      "search": {
+        "termNoAccent": "ファッション",
+        "readingNoAccent": "ふぁっしょん",
+        "meaningViNoAccent": "thoi trang",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l74_v001",
+        "sourceSenseId": "n3_l74_s001",
+        "sourceEntrySeq": "1108210"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 24,
+        "themeEn": "Fashion and personal style",
+        "themeVi": "Thời trang và phong cách cá nhân"
+      }
+    },
+    {
+      "entryId": "n3_l74_s002",
+      "lessonId": 74,
+      "level": "N3",
+      "order": 2,
+      "tags": [
+        "quartet-theme",
+        "fashion",
+        "noun",
+        "suru",
+        "quartet_24",
+        "theme_74"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l74_v002",
+        "term": "流行",
+        "reading": "りゅうこう",
+        "kanji": [
+          "流",
+          "行"
+        ],
+        "labels": {
+          "hanViet": "Hành"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l74_s002",
+        "meaningVi": "xu hướng, trào lưu",
+        "meaningEn": "fashion; trend"
+      },
+      "search": {
+        "termNoAccent": "流行",
+        "readingNoAccent": "りゅうこう",
+        "meaningViNoAccent": "xu huong, trao luu",
+        "hanVietNoAccent": "hanh"
+      },
+      "links": {
+        "sourceVocabId": "n3_l74_v002",
+        "sourceSenseId": "n3_l74_s002",
+        "sourceEntrySeq": "1585110"
+      },
+      "legacy": {
+        "kanjiMeaning": "Hành"
+      },
+      "theme": {
+        "quartetLesson": 24,
+        "themeEn": "Fashion and personal style",
+        "themeVi": "Thời trang và phong cách cá nhân"
+      }
+    },
+    {
+      "entryId": "n3_l74_s003",
+      "lessonId": 74,
+      "level": "N3",
+      "order": 3,
+      "tags": [
+        "quartet-theme",
+        "fashion",
+        "noun",
+        "suru",
+        "quartet_24",
+        "theme_74"
+      ],
+      "classification": {
+        "script": "kana_or_other",
+        "hasKanji": false,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l74_v003",
+        "term": "デザイン",
+        "reading": "でざいん",
+        "kanji": [],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l74_s003",
+        "meaningVi": "thiết kế",
+        "meaningEn": "design"
+      },
+      "search": {
+        "termNoAccent": "デザイン",
+        "readingNoAccent": "でざいん",
+        "meaningViNoAccent": "thiet ke",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l74_v003",
+        "sourceSenseId": "n3_l74_s003",
+        "sourceEntrySeq": "1082900"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 24,
+        "themeEn": "Fashion and personal style",
+        "themeVi": "Thời trang và phong cách cá nhân"
+      }
+    },
+    {
+      "entryId": "n3_l74_s004",
+      "lessonId": 74,
+      "level": "N3",
+      "order": 4,
+      "tags": [
+        "quartet-theme",
+        "fashion",
+        "noun",
+        "quartet_24",
+        "theme_74"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l74_v004",
+        "term": "素材",
+        "reading": "そざい",
+        "kanji": [
+          "素",
+          "材"
+        ],
+        "labels": {
+          "hanViet": "tài"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l74_s004",
+        "meaningVi": "chất liệu",
+        "meaningEn": "ingredient; (raw) material"
+      },
+      "search": {
+        "termNoAccent": "素材",
+        "readingNoAccent": "そざい",
+        "meaningViNoAccent": "chat lieu",
+        "hanVietNoAccent": "tai"
+      },
+      "links": {
+        "sourceVocabId": "n3_l74_v004",
+        "sourceSenseId": "n3_l74_s004",
+        "sourceEntrySeq": "1397220"
+      },
+      "legacy": {
+        "kanjiMeaning": "tài"
+      },
+      "theme": {
+        "quartetLesson": 24,
+        "themeEn": "Fashion and personal style",
+        "themeVi": "Thời trang và phong cách cá nhân"
+      }
+    },
+    {
+      "entryId": "n3_l74_s005",
+      "lessonId": 74,
+      "level": "N3",
+      "order": 5,
+      "tags": [
+        "quartet-theme",
+        "fashion",
+        "noun",
+        "suru",
+        "quartet_24",
+        "theme_74"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l74_v005",
+        "term": "試着",
+        "reading": "しちゃく",
+        "kanji": [
+          "試",
+          "着"
+        ],
+        "labels": {
+          "hanViet": "Trước"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l74_s005",
+        "meaningVi": "thử quần áo",
+        "meaningEn": "trying on clothes"
+      },
+      "search": {
+        "termNoAccent": "試着",
+        "readingNoAccent": "しちゃく",
+        "meaningViNoAccent": "thu quan ao",
+        "hanVietNoAccent": "truoc"
+      },
+      "links": {
+        "sourceVocabId": "n3_l74_v005",
+        "sourceSenseId": "n3_l74_s005",
+        "sourceEntrySeq": "1312500"
+      },
+      "legacy": {
+        "kanjiMeaning": "Trước"
+      },
+      "theme": {
+        "quartetLesson": 24,
+        "themeEn": "Fashion and personal style",
+        "themeVi": "Thời trang và phong cách cá nhân"
+      }
+    },
+    {
+      "entryId": "n3_l74_s006",
+      "lessonId": 74,
+      "level": "N3",
+      "order": 6,
+      "tags": [
+        "quartet-theme",
+        "fashion",
+        "noun",
+        "suru",
+        "quartet_24",
+        "theme_74"
+      ],
+      "classification": {
+        "script": "mixed",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l74_v006",
+        "term": "着替え",
+        "reading": "きがえ",
+        "kanji": [
+          "着",
+          "替"
+        ],
+        "labels": {
+          "hanViet": "Trước Thế"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l74_s006",
+        "meaningVi": "thay đồ",
+        "meaningEn": "changing clothes; change of clothes"
+      },
+      "search": {
+        "termNoAccent": "着替え",
+        "readingNoAccent": "きがえ",
+        "meaningViNoAccent": "thay do",
+        "hanVietNoAccent": "truoc the"
+      },
+      "links": {
+        "sourceVocabId": "n3_l74_v006",
+        "sourceSenseId": "n3_l74_s006",
+        "sourceEntrySeq": "1423160"
+      },
+      "legacy": {
+        "kanjiMeaning": "Trước Thế"
+      },
+      "theme": {
+        "quartetLesson": 24,
+        "themeEn": "Fashion and personal style",
+        "themeVi": "Thời trang và phong cách cá nhân"
+      }
+    },
+    {
+      "entryId": "n3_l74_s007",
+      "lessonId": 74,
+      "level": "N3",
+      "order": 7,
+      "tags": [
+        "quartet-theme",
+        "fashion",
+        "noun",
+        "suru",
+        "quartet_24",
+        "theme_74"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l74_v007",
+        "term": "化粧",
+        "reading": "けしょう",
+        "kanji": [
+          "化",
+          "粧"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l74_s007",
+        "meaningVi": "trang điểm",
+        "meaningEn": "make-up; makeup"
+      },
+      "search": {
+        "termNoAccent": "化粧",
+        "readingNoAccent": "けしょう",
+        "meaningViNoAccent": "trang diem",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l74_v007",
+        "sourceSenseId": "n3_l74_s007",
+        "sourceEntrySeq": "1577040"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 24,
+        "themeEn": "Fashion and personal style",
+        "themeVi": "Thời trang và phong cách cá nhân"
+      }
+    },
+    {
+      "entryId": "n3_l74_s008",
+      "lessonId": 74,
+      "level": "N3",
+      "order": 8,
+      "tags": [
+        "quartet-theme",
+        "fashion",
+        "noun",
+        "suru",
+        "quartet_24",
+        "theme_74"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l74_v008",
+        "term": "装飾",
+        "reading": "そうしょく",
+        "kanji": [
+          "装",
+          "飾"
+        ],
+        "labels": {
+          "hanViet": "Sức"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l74_s008",
+        "meaningVi": "trang trí",
+        "meaningEn": "ornament; decoration"
+      },
+      "search": {
+        "termNoAccent": "装飾",
+        "readingNoAccent": "そうしょく",
+        "meaningViNoAccent": "trang tri",
+        "hanVietNoAccent": "suc"
+      },
+      "links": {
+        "sourceVocabId": "n3_l74_v008",
+        "sourceSenseId": "n3_l74_s008",
+        "sourceEntrySeq": "1402340"
+      },
+      "legacy": {
+        "kanjiMeaning": "Sức"
+      },
+      "theme": {
+        "quartetLesson": 24,
+        "themeEn": "Fashion and personal style",
+        "themeVi": "Thời trang và phong cách cá nhân"
+      }
+    },
+    {
+      "entryId": "n3_l74_s009",
+      "lessonId": 74,
+      "level": "N3",
+      "order": 9,
+      "tags": [
+        "quartet-theme",
+        "fashion",
+        "verb",
+        "quartet_24",
+        "theme_74"
+      ],
+      "classification": {
+        "script": "mixed",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l74_v009",
+        "term": "似合う",
+        "reading": "にあう",
+        "kanji": [
+          "似",
+          "合"
+        ],
+        "labels": {
+          "hanViet": "Hợp"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l74_s009",
+        "meaningVi": "hợp, phù hợp",
+        "meaningEn": "to suit; to match"
+      },
+      "search": {
+        "termNoAccent": "似合う",
+        "readingNoAccent": "にあう",
+        "meaningViNoAccent": "hop, phu hop",
+        "hanVietNoAccent": "hop"
+      },
+      "links": {
+        "sourceVocabId": "n3_l74_v009",
+        "sourceSenseId": "n3_l74_s009",
+        "sourceEntrySeq": "1314680"
+      },
+      "legacy": {
+        "kanjiMeaning": "Hợp"
+      },
+      "theme": {
+        "quartetLesson": 24,
+        "themeEn": "Fashion and personal style",
+        "themeVi": "Thời trang và phong cách cá nhân"
+      }
+    },
+    {
+      "entryId": "n3_l74_s010",
+      "lessonId": 74,
+      "level": "N3",
+      "order": 10,
+      "tags": [
+        "quartet-theme",
+        "fashion",
+        "na-adjective",
+        "quartet_24",
+        "theme_74"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l74_v010",
+        "term": "派手",
+        "reading": "はで",
+        "kanji": [
+          "派",
+          "手"
+        ],
+        "labels": {
+          "hanViet": "Thủ"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l74_s010",
+        "meaningVi": "lộng lẫy, hoa lệ",
+        "meaningEn": "showy; loud"
+      },
+      "search": {
+        "termNoAccent": "派手",
+        "readingNoAccent": "はで",
+        "meaningViNoAccent": "long lay, hoa le",
+        "hanVietNoAccent": "thu"
+      },
+      "links": {
+        "sourceVocabId": "n3_l74_v010",
+        "sourceSenseId": "n3_l74_s010",
+        "sourceEntrySeq": "1471140"
+      },
+      "legacy": {
+        "kanjiMeaning": "Thủ"
+      },
+      "theme": {
+        "quartetLesson": 24,
+        "themeEn": "Fashion and personal style",
+        "themeVi": "Thời trang và phong cách cá nhân"
+      }
+    },
+    {
+      "entryId": "n3_l74_s011",
+      "lessonId": 74,
+      "level": "N3",
+      "order": 11,
+      "tags": [
+        "quartet-theme",
+        "fashion",
+        "na-adjective",
+        "quartet_24",
+        "theme_74"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l74_v011",
+        "term": "地味",
+        "reading": "じみ",
+        "kanji": [
+          "地",
+          "味"
+        ],
+        "labels": {
+          "hanViet": "Địa Vị"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l74_s011",
+        "meaningVi": "giản dị, đơn giản",
+        "meaningEn": "plain; simple"
+      },
+      "search": {
+        "termNoAccent": "地味",
+        "readingNoAccent": "じみ",
+        "meaningViNoAccent": "gian di, don gian",
+        "hanVietNoAccent": "dia vi"
+      },
+      "links": {
+        "sourceVocabId": "n3_l74_v011",
+        "sourceSenseId": "n3_l74_s011",
+        "sourceEntrySeq": "1421490"
+      },
+      "legacy": {
+        "kanjiMeaning": "Địa Vị"
+      },
+      "theme": {
+        "quartetLesson": 24,
+        "themeEn": "Fashion and personal style",
+        "themeVi": "Thời trang và phong cách cá nhân"
+      }
+    },
+    {
+      "entryId": "n3_l74_s012",
+      "lessonId": 74,
+      "level": "N3",
+      "order": 12,
+      "tags": [
+        "quartet-theme",
+        "fashion",
+        "noun",
+        "quartet_24",
+        "theme_74"
+      ],
+      "classification": {
+        "script": "kana_or_other",
+        "hasKanji": false,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l74_v012",
+        "term": "ブランド",
+        "reading": "ぶらんど",
+        "kanji": [],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l74_s012",
+        "meaningVi": "thương hiệu",
+        "meaningEn": "brand"
+      },
+      "search": {
+        "termNoAccent": "ブランド",
+        "readingNoAccent": "ぶらんど",
+        "meaningViNoAccent": "thuong hieu",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l74_v012",
+        "sourceSenseId": "n3_l74_s012",
+        "sourceEntrySeq": "1114090"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 24,
+        "themeEn": "Fashion and personal style",
+        "themeVi": "Thời trang và phong cách cá nhân"
+      }
+    }
+  ]
+}

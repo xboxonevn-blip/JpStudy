@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build canonical content schema v2 exports from current lesson assets.
+"""Build content data schema v2 exports from current lesson assets.
 
 The current app keeps backward-compatible lesson files:
 - vocab/{level}/lesson_XX/master.json
@@ -7,12 +7,12 @@ The current app keeps backward-compatible lesson files:
 - vocab/{level}/lesson_XX/map.json
 - kanji/{level}/kanji_{level}_{lesson}.json with embedded `decomposition`
 
-This script exports a cleaner canonical representation under:
-- assets/data/canonical/vocab/{level}/lesson_XX.json
-- assets/data/canonical/kanji/{level}/lesson_XX.json
-- assets/data/canonical/index.json
+This script exports a cleaner content representation under:
+- assets/data/content/vocab/{level}/lesson_XX.json
+- assets/data/content/kanji/{level}/lesson_XX.json
+- assets/data/content/index.json
 
-The canonical files separate labels from display strings, capture search keys,
+The content files separate labels from display strings, capture search keys,
 and embed kanji decomposition so downstream loaders can prefer a single schema.
 """
 
@@ -26,9 +26,9 @@ from typing import Dict, Iterable, List, Tuple
 
 
 ROOT = Path(__file__).resolve().parents[1]
-VOCAB_ROOT = ROOT / "assets" / "data" / "vocab"
-KANJI_ROOT = ROOT / "assets" / "data" / "kanji"
-CANONICAL_ROOT = ROOT / "assets" / "data" / "canonical"
+VOCAB_ROOT = ROOT / "assets" / "data" / "archive" / "vocab"
+KANJI_ROOT = ROOT / "assets" / "data" / "archive" / "kanji"
+CANONICAL_ROOT = ROOT / "assets" / "data" / "content"
 REPORT_PATH = ROOT / "docs" / "reports" / "canonical-content-v2-report.json"
 SCHEMA_VERSION = 2
 
@@ -372,7 +372,7 @@ def main() -> int:
         REPORT_PATH,
         {
             "schemaVersion": SCHEMA_VERSION,
-            "canonicalRoot": str(CANONICAL_ROOT.relative_to(ROOT)).replace("\\", "/"),
+            "contentRoot": str(CANONICAL_ROOT.relative_to(ROOT)).replace("\\", "/"),
             "summary": {
                 "vocab": vocab_summary,
                 "kanji": kanji_summary,

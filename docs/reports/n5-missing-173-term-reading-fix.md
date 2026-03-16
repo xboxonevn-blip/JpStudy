@@ -1,6 +1,6 @@
 # N5 Missing Term/Reading Fix Report (173 items)
 
-- Scope: `assets/data/vocab/n5/lesson_08` to `assets/data/vocab/n5/lesson_25`
+- Scope: `assets/data/archive/vocab/n5/lesson_08` to `assets/data/archive/vocab/n5/lesson_25`
 - Mapping file: `tmp/n5_missing_term_reading_mapping.json`
 - Updated rows: 173
 - Remaining placeholder/empty rows: 0

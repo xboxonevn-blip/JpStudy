@@ -2,7 +2,7 @@
 """Normalize vocab kanjiMeaning to Han-Viet readings.
 
 Data sources (priority):
-1) Local kanji assets meaning (assets/data/kanji/*) for curated mappings.
+1) Local kanji assets meaning (assets/data/archive/kanji/*) for curated mappings.
 2) Unihan kVietnamese (with variant fallback) for broader character coverage.
 """
 
@@ -22,8 +22,8 @@ from typing import Dict, Iterable, List
 
 
 ROOT = Path(__file__).resolve().parents[1]
-VOCAB_ROOT = ROOT / "assets" / "data" / "vocab"
-KANJI_ROOT = ROOT / "assets" / "data" / "kanji"
+VOCAB_ROOT = ROOT / "assets" / "data" / "archive" / "vocab"
+KANJI_ROOT = ROOT / "assets" / "data" / "archive" / "kanji"
 REPORT_PATH = ROOT / "docs" / "reports" / "kanjimeaning-hanviet-fix-report.json"
 CACHE_DIR = ROOT / "tooling" / ".cache"
 HVDIC_CACHE_PATH = CACHE_DIR / "hvdic_hanviet_cache.json"

@@ -49,13 +49,13 @@ class GrammarSeeder {
       try {
         // 1. Definition File
         final defPath =
-            'assets/data/grammar/${level.toLowerCase()}/grammar_${level.toLowerCase()}_$i.json';
+            'assets/data/content/grammar/${level.toLowerCase()}/grammar_${level.toLowerCase()}_$i.json';
         final defString = await rootBundle.loadString(defPath);
         final List<dynamic> defJson = json.decode(defString);
 
         // 2. Example File
         final exPath =
-            'assets/data/grammar/examples/${level.toLowerCase()}/lesson_$i.json';
+            'assets/data/content/grammar_examples/${level.toLowerCase()}/lesson_$i.json';
         String? exString;
         try {
           exString = await rootBundle.loadString(exPath);

@@ -1,7 +1,5 @@
 # D3: Onboarding Flow Implementation Plan
 
-> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
-
 **Goal:** Add a 3-step first-install wizard (level → goal → start) that persists choices to SharedPreferences so subsequent cold starts skip the wizard.
 
 **Architecture:** `appInitProvider` (FutureProvider) reads SharedPreferences on startup and sets `onboardingDoneProvider` (StateProvider<bool?>). `HomeScreen.build()` watches `onboardingDoneProvider`: null=loading spinner, false=OnboardingScreen, true=normal HeaderBar+LearningPathScreen. OnboardingScreen calls `onComplete(level, goal)` callback which saves prefs and directly sets `onboardingDoneProvider = true` — no FutureProvider invalidation, no loading flash.

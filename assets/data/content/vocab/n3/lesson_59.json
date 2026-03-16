@@ -1,0 +1,663 @@
+{
+  "schemaVersion": 2,
+  "dataset": "vocab",
+  "series": "quartet-jmdict-kanjidic-draft",
+  "level": "N3",
+  "lessonId": 59,
+  "entryCount": 12,
+  "entries": [
+    {
+      "entryId": "n3_l59_s001",
+      "lessonId": 59,
+      "level": "N3",
+      "order": 1,
+      "tags": [
+        "quartet-theme",
+        "media",
+        "noun",
+        "quartet_9",
+        "theme_59"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l59_v001",
+        "term": "新聞",
+        "reading": "しんぶん",
+        "kanji": [
+          "新",
+          "聞"
+        ],
+        "labels": {
+          "hanViet": "Tân Văn"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l59_s001",
+        "meaningVi": "báo chí",
+        "meaningEn": "newspaper"
+      },
+      "search": {
+        "termNoAccent": "新聞",
+        "readingNoAccent": "しんぶん",
+        "meaningViNoAccent": "bao chi",
+        "hanVietNoAccent": "tan van"
+      },
+      "links": {
+        "sourceVocabId": "n3_l59_v001",
+        "sourceSenseId": "n3_l59_s001",
+        "sourceEntrySeq": "1362360"
+      },
+      "legacy": {
+        "kanjiMeaning": "Tân Văn"
+      },
+      "theme": {
+        "quartetLesson": 9,
+        "themeEn": "Media and information",
+        "themeVi": "Truyền thông và thông tin"
+      }
+    },
+    {
+      "entryId": "n3_l59_s002",
+      "lessonId": 59,
+      "level": "N3",
+      "order": 2,
+      "tags": [
+        "quartet-theme",
+        "media",
+        "noun",
+        "quartet_9",
+        "theme_59"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l59_v002",
+        "term": "雑誌",
+        "reading": "ざっし",
+        "kanji": [
+          "雑",
+          "誌"
+        ],
+        "labels": {
+          "hanViet": "tạp"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l59_s002",
+        "meaningVi": "tạp chí",
+        "meaningEn": "magazine; journal"
+      },
+      "search": {
+        "termNoAccent": "雑誌",
+        "readingNoAccent": "ざっし",
+        "meaningViNoAccent": "tap chi",
+        "hanVietNoAccent": "tap"
+      },
+      "links": {
+        "sourceVocabId": "n3_l59_v002",
+        "sourceSenseId": "n3_l59_s002",
+        "sourceEntrySeq": "1299400"
+      },
+      "legacy": {
+        "kanjiMeaning": "tạp"
+      },
+      "theme": {
+        "quartetLesson": 9,
+        "themeEn": "Media and information",
+        "themeVi": "Truyền thông và thông tin"
+      }
+    },
+    {
+      "entryId": "n3_l59_s003",
+      "lessonId": 59,
+      "level": "N3",
+      "order": 3,
+      "tags": [
+        "quartet-theme",
+        "media",
+        "noun",
+        "suru",
+        "quartet_9",
+        "theme_59"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l59_v003",
+        "term": "放送",
+        "reading": "ほうそう",
+        "kanji": [
+          "放",
+          "送"
+        ],
+        "labels": {
+          "hanViet": "Tống"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l59_s003",
+        "meaningVi": "phát sóng",
+        "meaningEn": "broadcasting; broadcast"
+      },
+      "search": {
+        "termNoAccent": "放送",
+        "readingNoAccent": "ほうそう",
+        "meaningViNoAccent": "phat song",
+        "hanVietNoAccent": "tong"
+      },
+      "links": {
+        "sourceVocabId": "n3_l59_v003",
+        "sourceSenseId": "n3_l59_s003",
+        "sourceEntrySeq": "1516750"
+      },
+      "legacy": {
+        "kanjiMeaning": "Tống"
+      },
+      "theme": {
+        "quartetLesson": 9,
+        "themeEn": "Media and information",
+        "themeVi": "Truyền thông và thông tin"
+      }
+    },
+    {
+      "entryId": "n3_l59_s004",
+      "lessonId": 59,
+      "level": "N3",
+      "order": 4,
+      "tags": [
+        "quartet-theme",
+        "media",
+        "noun",
+        "suru",
+        "quartet_9",
+        "theme_59"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l59_v004",
+        "term": "広告",
+        "reading": "こうこく",
+        "kanji": [
+          "広",
+          "告"
+        ],
+        "labels": {
+          "hanViet": "Quảng"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l59_s004",
+        "meaningVi": "quảng cáo",
+        "meaningEn": "advertisement; advertising"
+      },
+      "search": {
+        "termNoAccent": "広告",
+        "readingNoAccent": "こうこく",
+        "meaningViNoAccent": "quang cao",
+        "hanVietNoAccent": "quang"
+      },
+      "links": {
+        "sourceVocabId": "n3_l59_v004",
+        "sourceSenseId": "n3_l59_s004",
+        "sourceEntrySeq": "1278510"
+      },
+      "legacy": {
+        "kanjiMeaning": "Quảng"
+      },
+      "theme": {
+        "quartetLesson": 9,
+        "themeEn": "Media and information",
+        "themeVi": "Truyền thông và thông tin"
+      }
+    },
+    {
+      "entryId": "n3_l59_s005",
+      "lessonId": 59,
+      "level": "N3",
+      "order": 5,
+      "tags": [
+        "quartet-theme",
+        "media",
+        "noun",
+        "quartet_9",
+        "theme_59"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l59_v005",
+        "term": "情報",
+        "reading": "じょうほう",
+        "kanji": [
+          "情",
+          "報"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l59_s005",
+        "meaningVi": "thông tin",
+        "meaningEn": "information; news"
+      },
+      "search": {
+        "termNoAccent": "情報",
+        "readingNoAccent": "じょうほう",
+        "meaningViNoAccent": "thong tin",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l59_v005",
+        "sourceSenseId": "n3_l59_s005",
+        "sourceEntrySeq": "1356370"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 9,
+        "themeEn": "Media and information",
+        "themeVi": "Truyền thông và thông tin"
+      }
+    },
+    {
+      "entryId": "n3_l59_s006",
+      "lessonId": 59,
+      "level": "N3",
+      "order": 6,
+      "tags": [
+        "quartet-theme",
+        "media",
+        "noun",
+        "quartet_9",
+        "theme_59"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l59_v006",
+        "term": "記事",
+        "reading": "きじ",
+        "kanji": [
+          "記",
+          "事"
+        ],
+        "labels": {
+          "hanViet": "Sự"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l59_s006",
+        "meaningVi": "bài báo",
+        "meaningEn": "article; news story"
+      },
+      "search": {
+        "termNoAccent": "記事",
+        "readingNoAccent": "きじ",
+        "meaningViNoAccent": "bai bao",
+        "hanVietNoAccent": "su"
+      },
+      "links": {
+        "sourceVocabId": "n3_l59_v006",
+        "sourceSenseId": "n3_l59_s006",
+        "sourceEntrySeq": "1223240"
+      },
+      "legacy": {
+        "kanjiMeaning": "Sự"
+      },
+      "theme": {
+        "quartetLesson": 9,
+        "themeEn": "Media and information",
+        "themeVi": "Truyền thông và thông tin"
+      }
+    },
+    {
+      "entryId": "n3_l59_s007",
+      "lessonId": 59,
+      "level": "N3",
+      "order": 7,
+      "tags": [
+        "quartet-theme",
+        "media",
+        "noun",
+        "suru",
+        "quartet_9",
+        "theme_59"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l59_v007",
+        "term": "取材",
+        "reading": "しゅざい",
+        "kanji": [
+          "取",
+          "材"
+        ],
+        "labels": {
+          "hanViet": "Thủ tài"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l59_s007",
+        "meaningVi": "thu thập tư liệu, tác nghiệp",
+        "meaningEn": "gathering material (for an article, novel, etc.); collecting information"
+      },
+      "search": {
+        "termNoAccent": "取材",
+        "readingNoAccent": "しゅざい",
+        "meaningViNoAccent": "thu thap tu lieu, tac nghiep",
+        "hanVietNoAccent": "thu tai"
+      },
+      "links": {
+        "sourceVocabId": "n3_l59_v007",
+        "sourceSenseId": "n3_l59_s007",
+        "sourceEntrySeq": "1327020"
+      },
+      "legacy": {
+        "kanjiMeaning": "Thủ tài"
+      },
+      "theme": {
+        "quartetLesson": 9,
+        "themeEn": "Media and information",
+        "themeVi": "Truyền thông và thông tin"
+      }
+    },
+    {
+      "entryId": "n3_l59_s008",
+      "lessonId": 59,
+      "level": "N3",
+      "order": 8,
+      "tags": [
+        "quartet-theme",
+        "media",
+        "noun",
+        "suru",
+        "quartet_9",
+        "theme_59"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l59_v008",
+        "term": "報道",
+        "reading": "ほうどう",
+        "kanji": [
+          "報",
+          "道"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l59_s008",
+        "meaningVi": "đưa tin, tường thuật",
+        "meaningEn": "report (of news); reporting"
+      },
+      "search": {
+        "termNoAccent": "報道",
+        "readingNoAccent": "ほうどう",
+        "meaningViNoAccent": "dua tin, tuong thuat",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l59_v008",
+        "sourceSenseId": "n3_l59_s008",
+        "sourceEntrySeq": "1515730"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 9,
+        "themeEn": "Media and information",
+        "themeVi": "Truyền thông và thông tin"
+      }
+    },
+    {
+      "entryId": "n3_l59_s009",
+      "lessonId": 59,
+      "level": "N3",
+      "order": 9,
+      "tags": [
+        "quartet-theme",
+        "media",
+        "noun",
+        "suru",
+        "quartet_9",
+        "theme_59"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l59_v009",
+        "term": "通信",
+        "reading": "つうしん",
+        "kanji": [
+          "通",
+          "信"
+        ],
+        "labels": {
+          "hanViet": "Thông Tín"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l59_s009",
+        "meaningVi": "truyền thông, liên lạc",
+        "meaningEn": "correspondence; communication"
+      },
+      "search": {
+        "termNoAccent": "通信",
+        "readingNoAccent": "つうしん",
+        "meaningViNoAccent": "truyen thong, lien lac",
+        "hanVietNoAccent": "thong tin"
+      },
+      "links": {
+        "sourceVocabId": "n3_l59_v009",
+        "sourceSenseId": "n3_l59_s009",
+        "sourceEntrySeq": "1433330"
+      },
+      "legacy": {
+        "kanjiMeaning": "Thông Tín"
+      },
+      "theme": {
+        "quartetLesson": 9,
+        "themeEn": "Media and information",
+        "themeVi": "Truyền thông và thông tin"
+      }
+    },
+    {
+      "entryId": "n3_l59_s010",
+      "lessonId": 59,
+      "level": "N3",
+      "order": 10,
+      "tags": [
+        "quartet-theme",
+        "media",
+        "noun",
+        "quartet_9",
+        "theme_59"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l59_v010",
+        "term": "番組",
+        "reading": "ばんぐみ",
+        "kanji": [
+          "番",
+          "組"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l59_s010",
+        "meaningVi": "chương trình",
+        "meaningEn": "program (e.g. TV); programme"
+      },
+      "search": {
+        "termNoAccent": "番組",
+        "readingNoAccent": "ばんぐみ",
+        "meaningViNoAccent": "chuong trinh",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l59_v010",
+        "sourceSenseId": "n3_l59_s010",
+        "sourceEntrySeq": "1482340"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 9,
+        "themeEn": "Media and information",
+        "themeVi": "Truyền thông và thông tin"
+      }
+    },
+    {
+      "entryId": "n3_l59_s011",
+      "lessonId": 59,
+      "level": "N3",
+      "order": 11,
+      "tags": [
+        "quartet-theme",
+        "media",
+        "noun",
+        "quartet_9",
+        "theme_59"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l59_v011",
+        "term": "画面",
+        "reading": "がめん",
+        "kanji": [
+          "画",
+          "面"
+        ],
+        "labels": {
+          "hanViet": "diện"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l59_s011",
+        "meaningVi": "màn hình",
+        "meaningEn": "screen (of a TV, computer, etc.); image (on a screen)"
+      },
+      "search": {
+        "termNoAccent": "画面",
+        "readingNoAccent": "がめん",
+        "meaningViNoAccent": "man hinh",
+        "hanVietNoAccent": "dien"
+      },
+      "links": {
+        "sourceVocabId": "n3_l59_v011",
+        "sourceSenseId": "n3_l59_s011",
+        "sourceEntrySeq": "1197610"
+      },
+      "legacy": {
+        "kanjiMeaning": "diện"
+      },
+      "theme": {
+        "quartetLesson": 9,
+        "themeEn": "Media and information",
+        "themeVi": "Truyền thông và thông tin"
+      }
+    },
+    {
+      "entryId": "n3_l59_s012",
+      "lessonId": 59,
+      "level": "N3",
+      "order": 12,
+      "tags": [
+        "quartet-theme",
+        "media",
+        "noun",
+        "quartet_9",
+        "theme_59"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l59_v012",
+        "term": "世論",
+        "reading": "よろん",
+        "kanji": [
+          "世",
+          "論"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l59_s012",
+        "meaningVi": "dư luận",
+        "meaningEn": "public opinion; popular voice"
+      },
+      "search": {
+        "termNoAccent": "世論",
+        "readingNoAccent": "よろん",
+        "meaningViNoAccent": "du luan",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l59_v012",
+        "sourceSenseId": "n3_l59_s012",
+        "sourceEntrySeq": "1606150"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 9,
+        "themeEn": "Media and information",
+        "themeVi": "Truyền thông và thông tin"
+      }
+    }
+  ]
+}

@@ -1,0 +1,669 @@
+{
+  "schemaVersion": 2,
+  "dataset": "vocab",
+  "series": "quartet-jmdict-kanjidic-draft",
+  "level": "N3",
+  "lessonId": 72,
+  "entryCount": 12,
+  "entries": [
+    {
+      "entryId": "n3_l72_s001",
+      "lessonId": 72,
+      "level": "N3",
+      "order": 1,
+      "tags": [
+        "quartet-theme",
+        "communication",
+        "noun",
+        "suru",
+        "quartet_22",
+        "theme_72"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l72_v001",
+        "term": "会話",
+        "reading": "かいわ",
+        "kanji": [
+          "会",
+          "話"
+        ],
+        "labels": {
+          "hanViet": "Hội Thoại"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l72_s001",
+        "meaningVi": "hội thoại",
+        "meaningEn": "conversation; talk"
+      },
+      "search": {
+        "termNoAccent": "会話",
+        "readingNoAccent": "かいわ",
+        "meaningViNoAccent": "hoi thoai",
+        "hanVietNoAccent": "hoi thoai"
+      },
+      "links": {
+        "sourceVocabId": "n3_l72_v001",
+        "sourceSenseId": "n3_l72_s001",
+        "sourceEntrySeq": "1198880"
+      },
+      "legacy": {
+        "kanjiMeaning": "Hội Thoại"
+      },
+      "theme": {
+        "quartetLesson": 22,
+        "themeEn": "Communication and expression",
+        "themeVi": "Giao tiếp và diễn đạt"
+      }
+    },
+    {
+      "entryId": "n3_l72_s002",
+      "lessonId": 72,
+      "level": "N3",
+      "order": 2,
+      "tags": [
+        "quartet-theme",
+        "communication",
+        "noun",
+        "suru",
+        "quartet_22",
+        "theme_72"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l72_v002",
+        "term": "説明",
+        "reading": "せつめい",
+        "kanji": [
+          "説",
+          "明"
+        ],
+        "labels": {
+          "hanViet": "Minh"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l72_s002",
+        "meaningVi": "giải thích",
+        "meaningEn": "explanation; exposition"
+      },
+      "search": {
+        "termNoAccent": "説明",
+        "readingNoAccent": "せつめい",
+        "meaningViNoAccent": "giai thich",
+        "hanVietNoAccent": "minh"
+      },
+      "links": {
+        "sourceVocabId": "n3_l72_v002",
+        "sourceSenseId": "n3_l72_s002",
+        "sourceEntrySeq": "1386460"
+      },
+      "legacy": {
+        "kanjiMeaning": "Minh"
+      },
+      "theme": {
+        "quartetLesson": 22,
+        "themeEn": "Communication and expression",
+        "themeVi": "Giao tiếp và diễn đạt"
+      }
+    },
+    {
+      "entryId": "n3_l72_s003",
+      "lessonId": 72,
+      "level": "N3",
+      "order": 3,
+      "tags": [
+        "quartet-theme",
+        "communication",
+        "noun",
+        "suru",
+        "quartet_22",
+        "theme_72"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l72_v003",
+        "term": "紹介",
+        "reading": "しょうかい",
+        "kanji": [
+          "紹",
+          "介"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l72_s003",
+        "meaningVi": "giới thiệu",
+        "meaningEn": "introduction; presentation"
+      },
+      "search": {
+        "termNoAccent": "紹介",
+        "readingNoAccent": "しょうかい",
+        "meaningViNoAccent": "gioi thieu",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l72_v003",
+        "sourceSenseId": "n3_l72_s003",
+        "sourceEntrySeq": "1351430"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 22,
+        "themeEn": "Communication and expression",
+        "themeVi": "Giao tiếp và diễn đạt"
+      }
+    },
+    {
+      "entryId": "n3_l72_s004",
+      "lessonId": 72,
+      "level": "N3",
+      "order": 4,
+      "tags": [
+        "quartet-theme",
+        "communication",
+        "noun",
+        "suru",
+        "quartet_22",
+        "theme_72"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l72_v004",
+        "term": "謝罪",
+        "reading": "しゃざい",
+        "kanji": [
+          "謝",
+          "罪"
+        ],
+        "labels": {
+          "hanViet": "Tạ"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l72_s004",
+        "meaningVi": "xin lỗi",
+        "meaningEn": "apology"
+      },
+      "search": {
+        "termNoAccent": "謝罪",
+        "readingNoAccent": "しゃざい",
+        "meaningViNoAccent": "xin loi",
+        "hanVietNoAccent": "ta"
+      },
+      "links": {
+        "sourceVocabId": "n3_l72_v004",
+        "sourceSenseId": "n3_l72_s004",
+        "sourceEntrySeq": "1323030"
+      },
+      "legacy": {
+        "kanjiMeaning": "Tạ"
+      },
+      "theme": {
+        "quartetLesson": 22,
+        "themeEn": "Communication and expression",
+        "themeVi": "Giao tiếp và diễn đạt"
+      }
+    },
+    {
+      "entryId": "n3_l72_s005",
+      "lessonId": 72,
+      "level": "N3",
+      "order": 5,
+      "tags": [
+        "quartet-theme",
+        "communication",
+        "noun",
+        "suru",
+        "quartet_22",
+        "theme_72"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l72_v005",
+        "term": "相談",
+        "reading": "そうだん",
+        "kanji": [
+          "相",
+          "談"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l72_s005",
+        "meaningVi": "tham vấn, hỏi ý kiến",
+        "meaningEn": "consultation; discussion"
+      },
+      "search": {
+        "termNoAccent": "相談",
+        "readingNoAccent": "そうだん",
+        "meaningViNoAccent": "tham van, hoi y kien",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l72_v005",
+        "sourceSenseId": "n3_l72_s005",
+        "sourceEntrySeq": "1401210"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 22,
+        "themeEn": "Communication and expression",
+        "themeVi": "Giao tiếp và diễn đạt"
+      }
+    },
+    {
+      "entryId": "n3_l72_s006",
+      "lessonId": 72,
+      "level": "N3",
+      "order": 6,
+      "tags": [
+        "quartet-theme",
+        "communication",
+        "noun",
+        "suru",
+        "quartet_22",
+        "theme_72"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l72_v006",
+        "term": "議論",
+        "reading": "ぎろん",
+        "kanji": [
+          "議",
+          "論"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l72_s006",
+        "meaningVi": "tranh luận, thảo luận",
+        "meaningEn": "argument; discussion"
+      },
+      "search": {
+        "termNoAccent": "議論",
+        "readingNoAccent": "ぎろん",
+        "meaningViNoAccent": "tranh luan, thao luan",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l72_v006",
+        "sourceSenseId": "n3_l72_s006",
+        "sourceEntrySeq": "1226160"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 22,
+        "themeEn": "Communication and expression",
+        "themeVi": "Giao tiếp và diễn đạt"
+      }
+    },
+    {
+      "entryId": "n3_l72_s007",
+      "lessonId": 72,
+      "level": "N3",
+      "order": 7,
+      "tags": [
+        "quartet-theme",
+        "communication",
+        "noun",
+        "suru",
+        "quartet_22",
+        "theme_72"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l72_v007",
+        "term": "表現",
+        "reading": "ひょうげん",
+        "kanji": [
+          "表",
+          "現"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l72_s007",
+        "meaningVi": "biểu đạt, diễn đạt",
+        "meaningEn": "expression; representation"
+      },
+      "search": {
+        "termNoAccent": "表現",
+        "readingNoAccent": "ひょうげん",
+        "meaningViNoAccent": "bieu dat, dien dat",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l72_v007",
+        "sourceSenseId": "n3_l72_s007",
+        "sourceEntrySeq": "1489510"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 22,
+        "themeEn": "Communication and expression",
+        "themeVi": "Giao tiếp và diễn đạt"
+      }
+    },
+    {
+      "entryId": "n3_l72_s008",
+      "lessonId": 72,
+      "level": "N3",
+      "order": 8,
+      "tags": [
+        "quartet-theme",
+        "communication",
+        "noun",
+        "suru",
+        "quartet_22",
+        "theme_72"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l72_v008",
+        "term": "翻訳",
+        "reading": "ほんやく",
+        "kanji": [
+          "翻",
+          "訳"
+        ],
+        "labels": {
+          "hanViet": "phiên dịch"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l72_s008",
+        "meaningVi": "phiên dịch, dịch",
+        "meaningEn": "translation; deciphering"
+      },
+      "search": {
+        "termNoAccent": "翻訳",
+        "readingNoAccent": "ほんやく",
+        "meaningViNoAccent": "phien dich, dich",
+        "hanVietNoAccent": "phien dich"
+      },
+      "links": {
+        "sourceVocabId": "n3_l72_v008",
+        "sourceSenseId": "n3_l72_s008",
+        "sourceEntrySeq": "1523400"
+      },
+      "legacy": {
+        "kanjiMeaning": "phiên dịch"
+      },
+      "theme": {
+        "quartetLesson": 22,
+        "themeEn": "Communication and expression",
+        "themeVi": "Giao tiếp và diễn đạt"
+      }
+    },
+    {
+      "entryId": "n3_l72_s009",
+      "lessonId": 72,
+      "level": "N3",
+      "order": 9,
+      "tags": [
+        "quartet-theme",
+        "communication",
+        "noun",
+        "suru",
+        "quartet_22",
+        "theme_72"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l72_v009",
+        "term": "伝言",
+        "reading": "でんごん",
+        "kanji": [
+          "伝",
+          "言"
+        ],
+        "labels": {
+          "hanViet": "Truyền"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l72_s009",
+        "meaningVi": "lời nhắn, truyền lại",
+        "meaningEn": "(verbal) message; word (from someone)"
+      },
+      "search": {
+        "termNoAccent": "伝言",
+        "readingNoAccent": "でんごん",
+        "meaningViNoAccent": "loi nhan, truyen lai",
+        "hanVietNoAccent": "truyen"
+      },
+      "links": {
+        "sourceVocabId": "n3_l72_v009",
+        "sourceSenseId": "n3_l72_s009",
+        "sourceEntrySeq": "1582180"
+      },
+      "legacy": {
+        "kanjiMeaning": "Truyền"
+      },
+      "theme": {
+        "quartetLesson": 22,
+        "themeEn": "Communication and expression",
+        "themeVi": "Giao tiếp và diễn đạt"
+      }
+    },
+    {
+      "entryId": "n3_l72_s010",
+      "lessonId": 72,
+      "level": "N3",
+      "order": 10,
+      "tags": [
+        "quartet-theme",
+        "communication",
+        "noun",
+        "suru",
+        "quartet_22",
+        "theme_72"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l72_v010",
+        "term": "連絡",
+        "reading": "れんらく",
+        "kanji": [
+          "連",
+          "絡"
+        ],
+        "labels": {
+          "hanViet": "Liên Lạc"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l72_s010",
+        "meaningVi": "liên lạc",
+        "meaningEn": "contacting; (making) contact"
+      },
+      "search": {
+        "termNoAccent": "連絡",
+        "readingNoAccent": "れんらく",
+        "meaningViNoAccent": "lien lac",
+        "hanVietNoAccent": "lien lac"
+      },
+      "links": {
+        "sourceVocabId": "n3_l72_v010",
+        "sourceSenseId": "n3_l72_s010",
+        "sourceEntrySeq": "1559900"
+      },
+      "legacy": {
+        "kanjiMeaning": "Liên Lạc"
+      },
+      "theme": {
+        "quartetLesson": 22,
+        "themeEn": "Communication and expression",
+        "themeVi": "Giao tiếp và diễn đạt"
+      }
+    },
+    {
+      "entryId": "n3_l72_s011",
+      "lessonId": 72,
+      "level": "N3",
+      "order": 11,
+      "tags": [
+        "quartet-theme",
+        "communication",
+        "noun",
+        "quartet_22",
+        "theme_72"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l72_v011",
+        "term": "抱負",
+        "reading": "ほうふ",
+        "kanji": [
+          "抱",
+          "負"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l72_s011",
+        "meaningVi": "khát vọng, hoài bão",
+        "meaningEn": "aspiration; ambition"
+      },
+      "search": {
+        "termNoAccent": "抱負",
+        "readingNoAccent": "ほうふ",
+        "meaningViNoAccent": "khat vong, hoai bao",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l72_v011",
+        "sourceSenseId": "n3_l72_s011",
+        "sourceEntrySeq": "1516420"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      },
+      "theme": {
+        "quartetLesson": 22,
+        "themeEn": "Communication and expression",
+        "themeVi": "Giao tiếp và diễn đạt"
+      }
+    },
+    {
+      "entryId": "n3_l72_s012",
+      "lessonId": 72,
+      "level": "N3",
+      "order": 12,
+      "tags": [
+        "quartet-theme",
+        "communication",
+        "noun",
+        "suru",
+        "quartet_22",
+        "theme_72"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "jmdict_curated_theme_draft"
+      },
+      "lemma": {
+        "vocabId": "n3_l72_v012",
+        "term": "合意",
+        "reading": "ごうい",
+        "kanji": [
+          "合",
+          "意"
+        ],
+        "labels": {
+          "hanViet": "Hợp Ý"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l72_s012",
+        "meaningVi": "đồng ý, thỏa thuận",
+        "meaningEn": "(coming to an) agreement; consent"
+      },
+      "search": {
+        "termNoAccent": "合意",
+        "readingNoAccent": "ごうい",
+        "meaningViNoAccent": "dong y, thoa thuan",
+        "hanVietNoAccent": "hop y"
+      },
+      "links": {
+        "sourceVocabId": "n3_l72_v012",
+        "sourceSenseId": "n3_l72_s012",
+        "sourceEntrySeq": "1284550"
+      },
+      "legacy": {
+        "kanjiMeaning": "Hợp Ý"
+      },
+      "theme": {
+        "quartetLesson": 22,
+        "themeEn": "Communication and expression",
+        "themeVi": "Giao tiếp và diễn đạt"
+      }
+    }
+  ]
+}

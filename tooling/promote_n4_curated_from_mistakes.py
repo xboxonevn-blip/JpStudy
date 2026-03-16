@@ -22,7 +22,7 @@ from typing import Dict, List, Tuple
 
 ROOT = Path(__file__).resolve().parents[1]
 OVERRIDES_PATH = (
-    ROOT / "assets" / "data" / "kanji" / "stroke_template_overrides.json"
+    ROOT / "assets" / "data" / "support" / "kanji" / "stroke_template_overrides.json"
 )
 CONTENT_DB_PATH = Path.home() / "Documents" / "content.sqlite"
 USER_DB_PATH = Path.home() / "Documents" / "jpstudy.sqlite"

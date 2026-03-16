@@ -12,7 +12,7 @@ class KanjiStrokeTemplateService {
   // Test-only override to avoid rootBundle dependency in widget tests.
   static Map<String, KanjiStrokeTemplate>? debugTemplateOverrides;
 
-  static const _assetPath = 'assets/data/kanji/stroke_templates.json';
+  static const _assetPath = 'assets/data/support/kanji/stroke_templates.json';
 
   Map<String, KanjiStrokeTemplate>? _templates;
 

@@ -1,195 +1,113 @@
-# 🧹 Project Cleanup Summary
+# Cleanup Guide
 
-## Cleaned Up - 2026-01-19
+This file tracks cleanup principles for keeping the repository maintainable.
 
-### Files & Folders DELETED ✅
+## Goals
 
-**Development Tools:**
-- ✅ `scripts/` - Empty scripts folder
-- ✅ `tools/tts_proxy/` - Node.js TTS proxy (~80MB with node_modules)
-- ✅ `tools/__pycache__/` - Python cache
-- ✅ `tools/build_db.py` - Old database builder
-- ✅ `tools/validate_content.py` - Content validator
-- ✅ `tools/tts_proxy_win/` - Windows TTS proxy
+- keep the repo easy to navigate
+- reduce stale generated artifacts and redundant files
+- separate runtime content from support assets and archive data
+- keep documentation grouped by purpose
+- avoid reintroducing legacy paths into active runtime code
 
-**IDE & Config Files:**
-- ✅ `.idea/` - IntelliJ IDEA settings (~5MB)
-- ✅ `jpstudy.iml` - IntelliJ module file
-- ✅ `.metadata` - Flutter metadata
+## Current structure conventions
 
-**Log & Temp Files:**
-- ✅ `analysis_errors.txt`
-- ✅ `analysis_final.txt`
-- ✅ `analysis_gamification.txt`
-- ✅ `analysis_output.txt`
-- ✅ `analysis_phase2.txt`
-- ✅ `analysis_phase2_final.txt`
-- ✅ `analyze_utf8.txt`
-- ✅ `tools/tmp_unicode.txt`
+### Repo docs
 
-**Asset Files:**
-- ✅ `assets/db/content.sqlite` - Old database file (~2MB)
-- ✅ `assets/db/` - Empty folder
-- ✅ `assets/paths/` - Empty folder
+Use these locations consistently:
+- `docs/plans/`: active or recent implementation plans
+- `docs/plans/legacy/`: older plan/walkthrough material
+- `docs/reports/`: generated audits and validation outputs
+- `docs/notes/`: one-off design notes and exploration docs
+- `docs/specs/`: feature or product specifications
 
-**Total Saved:** ~100MB+ (primarily from node_modules)
+### Data layout
 
----
+Use these locations consistently:
+- `assets/data/content/`: runtime lesson and learning content
+- `assets/data/support/`: technical support assets used by runtime features
+- `assets/data/archive/`: archived lesson schemas used for migration/tooling only
 
-## Current Project Structure ✨
+Do not reintroduce runtime dependencies on `archive/` data.
 
-```
-JpStudy-v2/
-├── .git/                   # Git repository
-├── .gitignore             # Updated ignore rules
-├── README.md              # ✅ Updated documentation
-├── pubspec.yaml           # Flutter dependencies
-├── pubspec.lock           # Lock file
-│
-├── lib/                   # 📦 Source code (CLEAN)
-│   ├── app/              # App configuration
-│   ├── core/             # Shared utilities
-│   ├── data/             # Data layer
-│   └── features/         # Feature modules
-│
-├── assets/               # 🎨 Assets (MINIMAL)
-│   ├── audio/           # Placeholder for sounds
-│   └── fonts/           # Custom fonts
-│
-├── test/                # ✅ Tests
-│   └── widget_test.dart # Basic widget test
-│
-├── android/             # Android platform
-├── ios/                 # iOS platform  
-├── windows/             # Windows platform
-│
-└── build/              # Build artifacts (gitignored)
-```
+### Code layout
 
----
+Use these locations consistently:
+- `lib/app/`: app bootstrap and routing
+- `lib/core/`: shared non-persistence foundations
+- `lib/data/`: persistence, repositories, seeders, data models
+- `lib/features/`: feature-specific flows and screens
+- `lib/widgets/`: broadly reusable widgets
 
-## What's KEPT (Essential Only) ✅
+## Cleanup rules
 
-### Source Code
-- ✅ `lib/` - All application code
-- ✅ `test/` - Unit & widget tests
+### Safe to remove or ignore
 
-### Platform Specific
-- ✅ `android/` - Android build config
-- ✅ `ios/` - iOS build config
-- ✅ `windows/` - Windows build config
+Usually safe to ignore or delete locally when regenerated:
+- `.dart_tool/`
+- `build/`
+- local caches in `tooling/_tmpcache/`
+- local workspace folders such as `.claude/worktrees/`
+- generated reports only if they are intentionally reproducible and not needed for review history
 
-### Assets (Minimal)
-- ✅ `assets/fonts/` - Custom font files
-- ✅ `assets/audio/` - Placeholder for future sound effects
+### Keep under version control
 
-### Configuration
-- ✅ `pubspec.yaml` - Dependencies
-- ✅ `analysis_options.yaml` - Linter rules
-- ✅ `.gitignore` - Updated with comprehensive rules
-- ✅ `README.md` - Project documentation
+Keep when they describe project intent or stable structure:
+- `README.md`
+- `PROJECT_STRUCTURE.md`
+- `ROADMAP.md`
+- schema/reference docs
+- curated reports that capture meaningful audit snapshots
+- source content in `assets/data/content/`
+- support assets in `assets/data/support/`
 
-### Documentation (Artifacts)
-- ✅ `.gemini/antigravity/brain/` - Planning & documentation
-  - `roadmap.md` - Feature roadmap
-  - `phase1_plan.md` - Implementation plan
-  - `phase1_tasks.md` - Task checklist
-  - Other planning documents
+### Move instead of leaving at root
 
----
+Prefer moving files rather than leaving them scattered:
+- design notes -> `docs/notes/`
+- old plans/walkthroughs -> `docs/plans/legacy/`
+- formal specs -> `docs/specs/`
 
-## .gitignore Improvements ✅
+## Before large refactors
 
-Added comprehensive ignore patterns:
-- IDE files (`.idea/`, `.vscode/`, `*.iml`)
-- Build artifacts (`build/`, `.dart_tool/`)
-- Platform-specific (Android gradle, iOS Pods, etc.)
-- Database files (`*.db`, `*.sqlite`)
-- Temporary files (`analysis_*.txt`, `tmp_*.txt`)
-- Scripts & tools folders
+Check these first:
+- `README.md`
+- `PROJECT_STRUCTURE.md`
+- `docs/README.md`
+- `assets/data/README.md`
+- `lib/README.md`
+- `tooling/README.md`
+- `test/README.md`
 
----
+## After cleanup or refactor work
 
-## Database Migration ✅
+Run at minimum:
 
-**OLD Approach (Removed):**
-```dart
-// Copy from assets/db/content.sqlite
-if (!await file.exists()) {
-  final data = await rootBundle.load('assets/db/content.sqlite');
-  await file.writeAsBytes(data.buffer.asUint8List());
-}
+```bash
+flutter analyze
+flutter test
 ```
 
-**NEW Approach (Current):**
-```dart
-// Create fresh database, migration handles seeding
-final file = File(p.join(directory.path, 'content.sqlite'));
-return NativeDatabase(file);
+For content/data work, also consider:
+
+```bash
+python tooling/validate_content_assets_v2.py
+python tooling/audit_content_completeness.py
 ```
 
-**Benefits:**
-- ✅ No asset file needed (~2MB saved)
-- ✅ Always fresh database with correct schema
-- ✅ Migration automatically seeds 119 vocabulary terms
-- ✅ Version control friendly (no binary files)
+## Anti-patterns to avoid
 
----
+- mixing runtime content with archive data
+- leaving temporary planning docs in the repo root
+- adding generated local cache outputs to version control accidentally
+- putting feature-specific logic into generic shared folders
+- rewriting docs in a way that conflicts with the actual repo layout
 
-## Vocabulary Data ✅
+## Related documents
 
-**Location:** Code-based in `lib/data/db/content_database.dart`
-
-**Structure:**
-```dart
-List<Map<String, String?>> _getMinnaVocab() {
-  return [
-    // 119 terms from Minna No Nihongo Lessons 1-5
-    {'term': '私', 'reading': 'わたし', ...},
-    // ...
-  ];
-}
-```
-
-**Auto-Seeding:**
-- On first launch: `onCreate` migration
-- On schema upgrade: `onUpgrade` migration
-- Always deletes old `minna_*` tags before inserting
-
----
-
-## File Size Comparison
-
-| Category | Before | After | Saved |
-|----------|--------|-------|-------|
-| Assets | ~2MB | ~500KB | ~1.5MB |
-| Tools | ~80MB | 0MB | ~80MB |
-| IDE Config | ~5MB | 0MB | ~5MB |
-| Logs | ~50KB | 0KB | ~50KB |
-| **Total** | **~87MB** | **~500KB** | **~86.5MB** |
-
----
-
-## Code Quality ✅
-
-- ✅ **0 compiler errors**
-- ✅ **0 analyzer warnings** (excluding IDE-specific)
-- ✅ Clean project structure
-- ✅ No unused dependencies
-- ✅ No redundant files
-
----
-
-## Next Steps
-
-1. ✅ App will build with fresh database
-2. ✅ Vocabulary auto-seeds on first launch
-3. ⏳ Test all features work correctly
-4. ⏳ Continue Phase 1 tasks (Achievements, Sound FX)
-
----
-
-**Status:** ✨ CLEAN & OPTIMIZED  
-**Build Size Reduction:** ~86.5MB  
-**Maintainability:** Significantly improved  
-**Last Cleanup:** 2026-01-19 01:20 UTC+7
+- `PROJECT_STRUCTURE.md`
+- `docs/README.md`
+- `assets/data/README.md`
+- `lib/README.md`
+- `tooling/README.md`
+- `test/README.md`
