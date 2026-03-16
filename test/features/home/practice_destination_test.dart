@@ -42,4 +42,19 @@ void main() {
     expect(focus.any((item) => item.route == '/grammar-practice'), isTrue);
     expect(focus.any((item) => item.route == '/mistakes'), isTrue);
   });
+
+  test('buildPracticeDestinations includes recall sprint and prioritizes it when review is due', () {
+    final ranked = buildPracticeDestinations(
+      language: AppLanguage.en,
+      dueReviewCount: 6,
+      vocabDue: 3,
+      grammarDue: 2,
+      kanjiDue: 1,
+      mistakeCount: 0,
+    );
+
+    expect(ranked.any((item) => item.id == 'recall_sprint'), isTrue);
+    expect(ranked.first.id, 'recall_sprint');
+    expect(ranked.first.route, '/practice/recall-sprint');
+  });
 }

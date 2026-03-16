@@ -68,6 +68,16 @@ List<PracticeDestination> buildPracticeDestinations({
       estimatedMinutes: ghostCount > 0 ? (ghostCount * 12 / 60).ceil() : null,
     ),
     PracticeDestination(
+      id: 'recall_sprint',
+      title: language.practiceRecallSprintLabel,
+      subtitle: language.practiceRecallSprintSubtitle,
+      icon: Icons.bolt_rounded,
+      color: const Color(0xFF7C3AED),
+      route: '/practice/recall-sprint',
+      badgeCount: dueReviewCount > 0 ? dueReviewCount : null,
+      estimatedMinutes: dueReviewCount > 0 ? (dueReviewCount * 6 / 60).ceil() : 5,
+    ),
+    PracticeDestination(
       id: 'kanji_dash',
       title: language.practiceKanjiDashLabel,
       subtitle: language.practiceKanjiDashSubtitle,
@@ -117,8 +127,9 @@ List<PracticeDestination> buildPracticeDestinations({
       color: const Color(0xFFDC2626),
       route: '/mistakes',
       badgeCount: mistakeCount > 0 ? mistakeCount : null,
-      estimatedMinutes:
-          mistakeCount > 0 ? (mistakeCount * 12 / 60).ceil() : null,
+      estimatedMinutes: mistakeCount > 0
+          ? (mistakeCount * 12 / 60).ceil()
+          : null,
     ),
   ];
 
@@ -138,6 +149,13 @@ List<PracticeDestination> buildPracticeDestinations({
         break;
       case '/mistakes':
         score += mistakeCount * 3;
+        break;
+      case '/practice/recall-sprint':
+        score += dueReviewCount * 5;
+        score += vocabDue + grammarDue + kanjiDue;
+        if (dueReviewCount > 0) {
+          score += 10;
+        }
         break;
       case '/immersion':
         score += preferImmersion ? 10 : 0;
@@ -244,9 +262,9 @@ String _jlptCoachTitle(AppLanguage language) {
     case AppLanguage.en:
       return 'JLPT Coach';
     case AppLanguage.vi:
-      return 'Tro ly JLPT';
+      return 'Tr? l? JLPT';
     case AppLanguage.ja:
-      return 'JLPTコーチ';
+      return 'JLPTã‚³ãƒ¼ãƒ';
   }
 }
 
@@ -255,7 +273,7 @@ String _jlptCoachSubtitle(AppLanguage language) {
     case AppLanguage.en:
       return 'Reading, mock exam, diagnosis, 7-day plan.';
     case AppLanguage.vi:
-      return 'Doc hieu, mock exam, chan doan, ke hoach 7 ngay.';
+      return 'Đọc hiểu, mock exam, chẩn đoán, kế hoạch 7 ngày.';
     case AppLanguage.ja:
       return '読解、模試、診断、7日プラン。';
   }

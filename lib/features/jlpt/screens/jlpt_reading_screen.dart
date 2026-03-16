@@ -119,13 +119,13 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
   String _areaLabel(AppLanguage language, JlptSkillArea area) {
     switch (area) {
       case JlptSkillArea.vocabulary:
-        return _tr(language, 'Vocabulary', 'Từ vựng', '??');
+        return _tr(language, 'Vocabulary', 'T? v?ng', '??');
       case JlptSkillArea.grammar:
-        return _tr(language, 'Grammar', 'Ngữ pháp', '??');
+        return _tr(language, 'Grammar', 'Ng? ph?p', '??');
       case JlptSkillArea.kanji:
         return _tr(language, 'Kanji', 'Kanji', '??');
       case JlptSkillArea.reading:
-        return _tr(language, 'Reading', 'Đọc hiểu', '??');
+        return _tr(language, 'Reading', '??c hi?u', '??');
     }
   }
 
@@ -140,7 +140,7 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
           _tr(
             language,
             'JLPT Reading Drill',
-            'Luyen doc hieu JLPT',
+            'Luy\u1ec7n \u0111\u1ecdc hi\u1ec3u JLPT',
             'JLPT?????',
           ),
         ),
@@ -153,7 +153,7 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
                   _tr(
                     language,
                     'Choose a passage and finish within the target time.',
-                    'Chọn đoạn văn và hoàn thành trong thời gian mục tiêu.',
+                    'Ch?n ?o?n v?n v? ho?n th?nh trong th?i gian m?c ti?u.',
                     '???????????????????',
                   ),
                   style: const TextStyle(
@@ -327,7 +327,7 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Text(
-                                '${isCorrect ? _tr(language, 'Correct', 'Đúng', '??') : _tr(language, 'Incorrect', 'Sai', '???')}\n${question.explanation}',
+                                '\\n',
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w700,
                                   height: 1.4,
@@ -347,7 +347,7 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
                         ? _submit
                         : null,
                     icon: const Icon(Icons.task_alt_rounded),
-                    label: Text(_tr(language, 'Submit', 'Nộp bài', '??')),
+                    label: Text(_tr(language, 'Submit', 'N?p b?i', '??')),
                   )
                 else ...[
                   Builder(
@@ -369,7 +369,7 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
                           _tr(
                             language,
                             'Score: $correct/$total | Time: ${elapsed.inMinutes}m ${elapsed.inSeconds % 60}s',
-                            'Diem: $correct/$total | Thoi gian: ${elapsed.inMinutes}p ${elapsed.inSeconds % 60}s',
+                            '\u0110i\u1ec3m: $correct/$total | Th\u1eddi gian: ${elapsed.inMinutes}p ${elapsed.inSeconds % 60}s',
                             '???: $correct/$total | ??: ${elapsed.inMinutes}?${elapsed.inSeconds % 60}?',
                           ),
                           style: const TextStyle(
@@ -396,7 +396,7 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
                             _tr(
                               language,
                               'Auto 7-day plan',
-                              'Ke hoach 7 ngay tu dong',
+                              'K? ho?ch 7 ng?y t? ??ng',
                               '??7????',
                             ),
                             style: const TextStyle(fontWeight: FontWeight.w900),
@@ -428,7 +428,7 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
                           onPressed: () => _startPassage(passage),
                           icon: const Icon(Icons.restart_alt_rounded),
                           label: Text(
-                            _tr(language, 'Retry', 'Làm lại', '????'),
+                            _tr(language, 'Retry', 'Làm lại', 'やり直す'),
                           ),
                         ),
                       ),
@@ -450,8 +450,8 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
                             _tr(
                               language,
                               'Back to list',
-                              'Ve danh sach',
-                              '???',
+                              'Về danh sách',
+                              '一覧へ戻る',
                             ),
                           ),
                         ),

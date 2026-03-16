@@ -24,7 +24,7 @@ class GrammarScreen extends ConsumerWidget {
     ); // New provider
 
     return Scaffold(
-      appBar: AppBar(title: Text('${_title(language)}$levelSuffix')), 
+      appBar: AppBar(title: Text('${_title(language)}$levelSuffix')),
       body: pointsAsync.when(
         data: (points) {
           if (points.isEmpty) {

@@ -241,12 +241,18 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            _SummaryStat(label: language.readingCharactersLabel, value: '$totalChars'),
+            _SummaryStat(
+              label: language.readingCharactersLabel,
+              value: '$totalChars',
+            ),
             _SummaryStat(
               label: language.readingTimeSpentLabel,
               value: '${elapsed.inMinutes}m ${elapsed.inSeconds % 60}s',
             ),
-            _SummaryStat(label: language.readingSpeedStatLabel, value: '$speed chars/min'),
+            _SummaryStat(
+              label: language.readingSpeedStatLabel,
+              value: '$speed chars/min',
+            ),
           ],
         ),
         actions: [
@@ -704,7 +710,7 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
       case AppLanguage.en:
         return 'Quick add mode';
       case AppLanguage.vi:
-        return 'Che do them nhanh';
+        return 'Chế độ thêm nhanh';
       case AppLanguage.ja:
         return 'クイック追加モード';
     }
@@ -715,7 +721,7 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
       case AppLanguage.en:
         return 'Reading speed';
       case AppLanguage.vi:
-        return 'Toc do doc';
+        return 'Tốc độ đọc';
       case AppLanguage.ja:
         return '読書速度';
     }
@@ -726,7 +732,7 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
       case AppLanguage.en:
         return 'Speed updates from scroll progress. Enable quick add to save words in one tap.';
       case AppLanguage.vi:
-        return 'Toc do cap nhat theo tien do cuon. Bat them nhanh de luu tu chi voi 1 cham.';
+        return 'Tốc độ cập nhật theo tiến độ cuộn. Bật thêm nhanh để lưu từ chỉ với 1 chạm.';
       case AppLanguage.ja:
         return '速度はスクロール進捗で更新されます。クイック追加を有効にすると1タップで保存できます。';
     }
@@ -737,7 +743,7 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
       case AppLanguage.en:
         return 'Elapsed: ${elapsed.inMinutes}m ${elapsed.inSeconds % 60}s';
       case AppLanguage.vi:
-        return 'Da doc: ${elapsed.inMinutes}p ${elapsed.inSeconds % 60}s';
+        return 'Đã đọc: ${elapsed.inMinutes}p ${elapsed.inSeconds % 60}s';
       case AppLanguage.ja:
         return '経過: ${elapsed.inMinutes}分${elapsed.inSeconds % 60}秒';
     }
@@ -760,7 +766,7 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
       case AppLanguage.en:
         return 'Speed: $value chars/min';
       case AppLanguage.vi:
-        return 'Toc do: $value ky tu/phut';
+        return 'Tốc độ: $value ký tự/phút';
       case AppLanguage.ja:
         return '速度: $value 文字/分';
     }
@@ -1225,7 +1231,8 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
               title: article.title,
               titleFurigana: article.titleFurigana,
               source: article.source,
-              level: article.level,
+              officialLevel: article.officialLevel,
+              estimatedDifficulty: article.estimatedDifficulty,
               dateLabel: dateLabel,
               showFurigana: _showFurigana,
               isRead: isRead,
@@ -1520,7 +1527,8 @@ class _ArticleHeaderCard extends StatelessWidget {
     required this.title,
     required this.titleFurigana,
     required this.source,
-    required this.level,
+    required this.officialLevel,
+    required this.estimatedDifficulty,
     required this.dateLabel,
     required this.showFurigana,
     required this.isRead,
@@ -1530,7 +1538,8 @@ class _ArticleHeaderCard extends StatelessWidget {
   final String title;
   final String? titleFurigana;
   final String source;
-  final String level;
+  final String officialLevel;
+  final String? estimatedDifficulty;
   final String dateLabel;
   final bool showFurigana;
   final bool isRead;
@@ -1541,6 +1550,15 @@ class _ArticleHeaderCard extends StatelessWidget {
     final heading = (titleFurigana?.trim().isNotEmpty == true && showFurigana)
         ? titleFurigana!
         : title;
+    final levelTags = <Widget>[
+      if (estimatedDifficulty != null && estimatedDifficulty!.trim().isNotEmpty)
+        _TinyTag(
+          label: language.immersionEstimatedDifficultyLabel(
+            estimatedDifficulty!,
+          ),
+        ),
+      _TinyTag(label: language.immersionOfficialLevelLabel(officialLevel)),
+    ];
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -1571,7 +1589,7 @@ class _ArticleHeaderCard extends StatelessWidget {
             runSpacing: 6,
             children: [
               _TinyTag(label: source),
-              _TinyTag(label: level),
+              ...levelTags,
               _TinyTag(label: dateLabel),
               _TinyTag(
                 label: isRead

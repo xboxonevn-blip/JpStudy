@@ -107,8 +107,8 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
                                 _tr(
                                   language,
                                   'No due mistakes for 1-3-7 right now.',
-                                  'Hien chua co loi den han 1-3-7.',
-                                  '現在、1-3-7の期限ミスはありません。',
+                                  'Hi\u1ec7n ch\u01b0a c\u00f3 l\u1ed7i \u0111\u1ebfn h\u1ea1n 1-3-7.',
+                                  'ç¾åœ¨ã€1-3-7ã®æœŸé™ãƒŸã‚¹ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚',
                                 ),
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
@@ -322,7 +322,7 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
                   _tr(
                     language,
                     '1-3-7 due review',
-                    'On den han 1-3-7',
+                    'Ôn đến hạn 1-3-7',
                     '1-3-7期限レビュー',
                   ),
                   style: const TextStyle(
@@ -339,11 +339,11 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
                 },
                 child: Text(
                   _showDueOnly
-                      ? _tr(language, 'Show all', 'Hien tat ca', 'すべて表示')
+                      ? _tr(language, 'Show all', 'Hiện tất cả', 'すべて表示')
                       : _tr(
                           language,
                           'Show due only',
-                          'Chi hien den han',
+                          'Chỉ hiện đến hạn',
                           '期限のみ表示',
                         ),
                 ),
@@ -355,7 +355,7 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
             _tr(
               language,
               'Due now: D1 ${buckets.due1d} | D3 ${buckets.due3d} | D7 ${buckets.due7d} | New ${buckets.notDue}',
-              'Den han: D1 ${buckets.due1d} | D3 ${buckets.due3d} | D7 ${buckets.due7d} | Moi ${buckets.notDue}',
+              'Đến hạn: D1 ${buckets.due1d} | D3 ${buckets.due3d} | D7 ${buckets.due7d} | Mới ${buckets.notDue}',
               '期限: D1 ${buckets.due1d} | D3 ${buckets.due3d} | D7 ${buckets.due7d} | 新規 ${buckets.notDue}',
             ),
             style: const TextStyle(
@@ -376,15 +376,15 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
   String _dueCheckpointLabel(DateTime lastMistakeAt, AppLanguage language) {
     final age = DateTime.now().difference(lastMistakeAt);
     if (age.inHours < 24) {
-      return _tr(language, 'Not due (new)', 'Chua den han (moi)', '未期限(新規)');
+      return _tr(language, 'Not due (new)', 'Chưa đến hạn (mới)', '未期限(新規)');
     }
     if (age.inHours < 72) {
-      return _tr(language, 'D1 due', 'Den han D1', 'D1期限');
+      return _tr(language, 'D1 due', 'Đến hạn D1', 'D1期限');
     }
     if (age.inHours < 24 * 7) {
-      return _tr(language, 'D3 due', 'Den han D3', 'D3期限');
+      return _tr(language, 'D3 due', 'Đến hạn D3', 'D3期限');
     }
-    return _tr(language, 'D7 due', 'Den han D7', 'D7期限');
+    return _tr(language, 'D7 due', 'Đến hạn D7', 'D7期限');
   }
 
   String _tr(AppLanguage language, String en, String vi, String ja) {
@@ -662,7 +662,7 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
   List<String> _buildContextLines(UserMistake mistake, AppLanguage language) {
     final lines = <String>[];
     lines.add(
-      '${_tr(language, 'Review checkpoint', 'Moc on', '復習チェックポイント')}: '
+      '${_tr(language, 'Review checkpoint', 'Moc on', 'å¾©ç¿’ãƒã‚§ãƒƒã‚¯ãƒã‚¤ãƒ³ãƒˆ')}: '
       '${_dueCheckpointLabel(mistake.lastMistakeAt, language)}',
     );
     final prompt = (mistake.prompt ?? '').trim();

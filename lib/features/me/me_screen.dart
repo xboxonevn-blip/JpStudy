@@ -10,6 +10,7 @@ import 'package:jpstudy/core/onboarding_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/core/theme_provider.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
+import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/common/widgets/japanese_background.dart';
 import 'package:jpstudy/features/home/providers/cloud_sync_status_provider.dart';
 import 'package:jpstudy/features/home/widgets/home_surface.dart';
@@ -64,40 +65,40 @@ class _MeScreenState extends ConsumerState<MeScreen> {
               96,
             ),
             children: [
-              Container(
-                decoration: HomeSurface.softPanel(
-                  colors: const [Color(0xFFF8FCFF), Color(0xFFFEFCE8)],
-                  radius: 28,
+              progressAsync.when(
+                data: (summary) => AppFeatureCard(
+                  icon: Icons.person_rounded,
+                  title: _title(language),
+                  subtitle: _summaryCaption(language, summary),
+                  primaryLabel: _manageDataLabel(language),
+                  onPrimaryTap: () => context.push('/me/data'),
+                  secondaryLabel: switch (language) {
+                    AppLanguage.en => 'Progress',
+                    AppLanguage.vi => 'Tiến độ',
+                    AppLanguage.ja => '進捗',
+                  },
+                  onSecondaryTap: () => context.push('/progress'),
+                  status: AppStatusChip(
+                    label: level.shortLabel,
+                    tone: AppStatusTone.primary,
+                  ),
                 ),
-                padding: const EdgeInsets.all(20),
-                child: progressAsync.when(
-                  data: (summary) => Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '${level.shortLabel} ${_focusLabel(language)}',
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        _summaryCaption(language, summary),
-                        style: const TextStyle(color: Color(0xFF64748B)),
-                      ),
-                    ],
+                loading: () => AppFeatureCard(
+                  icon: Icons.person_rounded,
+                  title: _title(language),
+                  subtitle: _toolsLabel(language),
+                  status: AppStatusChip(
+                    label: level.shortLabel,
+                    tone: AppStatusTone.primary,
                   ),
-                  loading: () => Text(
-                    _title(language),
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  error: (error, stackTrace) => Text(
-                    _title(language),
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.w800,
-                    ),
+                ),
+                error: (error, stackTrace) => AppFeatureCard(
+                  icon: Icons.person_rounded,
+                  title: _title(language),
+                  subtitle: _toolsLabel(language),
+                  status: AppStatusChip(
+                    label: level.shortLabel,
+                    tone: AppStatusTone.primary,
                   ),
                 ),
               ),
@@ -381,17 +382,6 @@ class _MeScreenState extends ConsumerState<MeScreen> {
         return 'Cá nhân';
       case AppLanguage.ja:
         return 'Me';
-    }
-  }
-
-  String _focusLabel(AppLanguage language) {
-    switch (language) {
-      case AppLanguage.en:
-        return 'profile';
-      case AppLanguage.vi:
-        return 'cá nhân';
-      case AppLanguage.ja:
-        return 'profile';
     }
   }
 

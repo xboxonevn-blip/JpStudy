@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/mistakes/repositories/mistake_repository.dart';
 
 import '../models/jlpt_coach_models.dart';
@@ -11,30 +12,6 @@ import '../services/jlpt_coach_service.dart';
 class JlptCoachScreen extends ConsumerWidget {
   const JlptCoachScreen({super.key});
 
-  String _tr(AppLanguage language, String en, String vi, String ja) {
-    switch (language) {
-      case AppLanguage.en:
-        return en;
-      case AppLanguage.vi:
-        return vi;
-      case AppLanguage.ja:
-        return ja;
-    }
-  }
-
-  String _areaLabel(AppLanguage language, JlptSkillArea area) {
-    switch (area) {
-      case JlptSkillArea.vocabulary:
-        return _tr(language, 'Vocabulary', 'Từ vựng', '??');
-      case JlptSkillArea.grammar:
-        return _tr(language, 'Grammar', 'Ngữ pháp', '??');
-      case JlptSkillArea.kanji:
-        return _tr(language, 'Kanji', 'Kanji', '??');
-      case JlptSkillArea.reading:
-        return _tr(language, 'Reading', 'Đọc hiểu', '??');
-    }
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final language = ref.watch(appLanguageProvider);
@@ -42,134 +19,32 @@ class JlptCoachScreen extends ConsumerWidget {
     final mistakeRepo = ref.watch(mistakeRepositoryProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(_tr(language, 'JLPT Coach', 'Trợ lý JLPT', 'JLPT???')),
-      ),
+      appBar: AppBar(title: Text(_title(language))),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
         children: [
-          _FeatureCard(
-            icon: Icons.menu_book_rounded,
-            title: _tr(
-              language,
-              '1) Reading comprehension drills',
-              '1) Luyen doc hieu',
-              '1) ?????',
+          AppFeatureCard(
+            icon: Icons.school_rounded,
+            title: _title(language),
+            subtitle: _subtitle(language),
+            primaryLabel: _primaryLabel(language),
+            onPrimaryTap: () => context.push('/jlpt/reading'),
+            secondaryLabel: _secondaryLabel(language),
+            onSecondaryTap: () => context.push('/jlpt/mock-pro'),
+            status: AppStatusChip(
+              label: _heroStatus(language, snapshotAsync.valueOrNull),
+              tone: snapshotAsync.valueOrNull == null
+                  ? AppStatusTone.neutral
+                  : AppStatusTone.primary,
             ),
-            subtitle: _tr(
-              language,
-              'JLPT-style passages, timer, and answer explanations.',
-              'Doan van kieu JLPT, co gio va giai thich dap an.',
-              'JLPT????????????????',
-            ),
-            actionLabel: _tr(language, 'Start reading', 'Bắt đầu đọc', '?????'),
-            onTap: () => context.push('/jlpt/reading'),
+          ),
+          const SizedBox(height: 20),
+          AppSectionHeader(
+            title: _focusTitle(language),
+            caption: _focusCaption(language),
           ),
           const SizedBox(height: 10),
-          _FeatureCard(
-            icon: Icons.fact_check_rounded,
-            title: _tr(
-              language,
-              '2) Full-format mock exam',
-              '2) Mock exam day du section',
-              '2) ???????',
-            ),
-            subtitle: _tr(
-              language,
-              'Section timing + per-section score + pass prediction.',
-              'Gio tung section + diem tung section + du doan dau.',
-              '????????? + ????????? + ?????',
-            ),
-            actionLabel: _tr(language, 'Start mock', 'Bắt đầu mock', '?????'),
-            onTap: () => context.push('/jlpt/mock-pro'),
-          ),
-          const SizedBox(height: 10),
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: const Color(0xFFDCE8F8)),
-            ),
-            child: snapshotAsync.when(
-              data: (snapshot) {
-                if (snapshot == null) {
-                  return Text(
-                    _tr(
-                      language,
-                      '3) Weakness diagnosis + 7-day plan will appear after your first reading/mock attempt.',
-                      '3) Chan doan diem yeu + ke hoach 7 ngay se hien sau bai dau tien.',
-                      '3) ?????7??????????????????',
-                    ),
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFF475569),
-                    ),
-                  );
-                }
-
-                final weakest = snapshot.profile
-                    .weakestFirst()
-                    .take(3)
-                    .toList();
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      _tr(
-                        language,
-                        '3) Auto weakness diagnosis + 7-day plan',
-                        '3) Chan doan diem yeu + ke hoach 7 ngay tu dong',
-                        '3) ?????? + 7????',
-                      ),
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w900,
-                        color: Color(0xFF0F172A),
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    ...weakest.map((stat) {
-                      final percent = (stat.accuracy * 100).round();
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 5),
-                        child: Text(
-                          '${_areaLabel(language, stat.area)}: $percent% (${stat.correct}/${stat.total})',
-                          style: const TextStyle(
-                            color: Color(0xFF334155),
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      );
-                    }),
-                    const SizedBox(height: 8),
-                    ...snapshot.plan.items
-                        .take(4)
-                        .map(
-                          (item) => Padding(
-                            padding: const EdgeInsets.only(bottom: 5),
-                            child: Text(
-                              'D${item.dayOffset + 1} - ${_areaLabel(language, item.area)} - ${item.minutes}m: ${item.action}',
-                              style: const TextStyle(
-                                fontSize: 12.5,
-                                color: Color(0xFF475569),
-                              ),
-                            ),
-                          ),
-                        ),
-                  ],
-                );
-              },
-              loading: () => const Center(child: CircularProgressIndicator()),
-              error: (_, _) => Text(
-                _tr(
-                  language,
-                  'Unable to load diagnosis',
-                  'Khong tai duoc chan doan',
-                  '??????????',
-                ),
-              ),
-            ),
-          ),
+          _DiagnosisCard(snapshotAsync: snapshotAsync, language: language),
           const SizedBox(height: 10),
           StreamBuilder(
             stream: mistakeRepo.watchAllMistakes(),
@@ -179,126 +54,255 @@ class JlptCoachScreen extends ConsumerWidget {
                 mistakes,
                 DateTime.now(),
               );
-              return _FeatureCard(
+              return AppCompactRow(
                 icon: Icons.warning_amber_rounded,
-                title: _tr(
-                  language,
-                  '4) Mistake notebook 1-3-7',
-                  '4) So tay loi sai 1-3-7',
-                  '4) ????? 1-3-7',
-                ),
-                subtitle: _tr(
-                  language,
-                  'Due now: D1 ${buckets.due1d} | D3 ${buckets.due3d} | D7 ${buckets.due7d}',
-                  'Den han: D1 ${buckets.due1d} | D3 ${buckets.due3d} | D7 ${buckets.due7d}',
-                  '??: D1 ${buckets.due1d} | D3 ${buckets.due3d} | D7 ${buckets.due7d}',
-                ),
-                actionLabel: _tr(
-                  language,
-                  'Open notebook',
-                  'Mo notebook',
-                  '??????',
+                title: _mistakesTitle(language),
+                subtitle: _mistakesSubtitle(language, buckets),
+                status: AppStatusChip(
+                  label: '${mistakes.length}',
+                  tone: mistakes.isNotEmpty
+                      ? AppStatusTone.warning
+                      : AppStatusTone.success,
                 ),
                 onTap: () => context.push('/mistakes'),
               );
             },
           ),
           const SizedBox(height: 10),
-          _FeatureCard(
+          AppCompactRow(
             icon: Icons.speed_rounded,
-            title: _tr(
-              language,
-              '5) Reading speed + context vocab',
-              '5) Toc do doc + tu vung theo ngu canh',
-              '5) ???? + ????',
-            ),
-            subtitle: _tr(
-              language,
-              'Immersion Reader now tracks speed and supports quick-add words to SRS.',
-              'Immersion Reader theo doi toc do va cho phep them tu nhanh vao SRS.',
-              'Immersion Reader??????SRS??????????????',
-            ),
-            actionLabel: _tr(
-              language,
-              'Open immersion',
-              'Mo immersion',
-              'Immersion???',
-            ),
+            title: _immersionTitle(language),
+            subtitle: _immersionSubtitle(language),
             onTap: () => context.push('/immersion'),
+          ),
+          const SizedBox(height: 20),
+          AppSectionHeader(
+            title: _moreTitle(language),
+            caption: _moreCaption(language),
+          ),
+          const SizedBox(height: 10),
+          AppCompactRow(
+            icon: Icons.menu_book_rounded,
+            title: _readingTitle(language),
+            subtitle: _readingSubtitle(language),
+            onTap: () => context.push('/jlpt/reading'),
+          ),
+          const SizedBox(height: 10),
+          AppCompactRow(
+            icon: Icons.fact_check_rounded,
+            title: _mockTitle(language),
+            subtitle: _mockSubtitle(language),
+            onTap: () => context.push('/jlpt/mock-pro'),
           ),
         ],
       ),
     );
   }
+
+  String _title(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'JLPT Coach',
+    AppLanguage.vi => 'JLPT Coach',
+    AppLanguage.ja => 'JLPTコーチ',
+  };
+  String _subtitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Reading, mock exam, diagnosis, and a short plan.',
+    AppLanguage.vi => 'Đọc hiểu, mock exam, chẩn đoán, và kế hoạch ngắn.',
+    AppLanguage.ja => '読解、模試、診断、短い計画。',
+  };
+  String _primaryLabel(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Start reading',
+    AppLanguage.vi => 'Bắt đầu đọc',
+    AppLanguage.ja => '読み始める',
+  };
+  String _secondaryLabel(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Mock exam',
+    AppLanguage.vi => 'Thi thử',
+    AppLanguage.ja => '模試',
+  };
+  String _heroStatus(AppLanguage language, JlptCoachSnapshot? snapshot) =>
+      switch (language) {
+        AppLanguage.en => snapshot == null ? 'Not ready' : 'Ready',
+        AppLanguage.vi => snapshot == null ? 'Chưa có dữ liệu' : 'Sẵn sàng',
+        AppLanguage.ja => snapshot == null ? '未準備' : '準備完了',
+      };
+  String _focusTitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Focus',
+    AppLanguage.vi => 'Trọng tâm',
+    AppLanguage.ja => '重点',
+  };
+  String _focusCaption(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'One main route, a few support routes',
+    AppLanguage.vi => 'Một lối chính, vài lối hỗ trợ',
+    AppLanguage.ja => '主ルートひとつ、補助ルート少し',
+  };
+  String _mistakesTitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Mistake notebook',
+    AppLanguage.vi => 'Sổ tay lỗi sai',
+    AppLanguage.ja => 'ミスノート',
+  };
+  String _mistakesSubtitle(AppLanguage language, MistakeDueBuckets buckets) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'D1 ${buckets.due1d} · D3 ${buckets.due3d} · D7 ${buckets.due7d}';
+      case AppLanguage.vi:
+        return 'D1 ${buckets.due1d} · D3 ${buckets.due3d} · D7 ${buckets.due7d}';
+      case AppLanguage.ja:
+        return 'D1 ${buckets.due1d} · D3 ${buckets.due3d} · D7 ${buckets.due7d}';
+    }
+  }
+
+  String _immersionTitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Reading speed',
+    AppLanguage.vi => 'Tốc độ đọc',
+    AppLanguage.ja => '読む速さ',
+  };
+  String _immersionSubtitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Use immersion to read, save words, and measure speed.',
+    AppLanguage.vi => 'Dùng immersion để đọc, lưu từ, và đo tốc độ.',
+    AppLanguage.ja => '多読で読んで、単語を保存して、速さを測る。',
+  };
+  String _moreTitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Routes',
+    AppLanguage.vi => 'Lối vào',
+    AppLanguage.ja => '入口',
+  };
+  String _moreCaption(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Compact access to the rest',
+    AppLanguage.vi => 'Lối vào gọn cho phần còn lại',
+    AppLanguage.ja => '残りへのショートカット',
+  };
+  String _readingTitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Reading drills',
+    AppLanguage.vi => 'Luyện đọc hiểu',
+    AppLanguage.ja => '読解ドリル',
+  };
+  String _readingSubtitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'JLPT-style passages with timing.',
+    AppLanguage.vi => 'Đoạn văn kiểu JLPT có bấm giờ.',
+    AppLanguage.ja => '制限時間つきのJLPT読解。',
+  };
+  String _mockTitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Full mock',
+    AppLanguage.vi => 'Mock đầy đủ',
+    AppLanguage.ja => 'フル模試',
+  };
+  String _mockSubtitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Section score, timer, and pass estimate.',
+    AppLanguage.vi => 'Điểm từng phần, giờ, và dự đoán đậu.',
+    AppLanguage.ja => 'セクション別得点、時間、合格予測。',
+  };
 }
 
-class _FeatureCard extends StatelessWidget {
-  const _FeatureCard({
-    required this.icon,
-    required this.title,
-    required this.subtitle,
-    required this.actionLabel,
-    required this.onTap,
-  });
+class _DiagnosisCard extends StatelessWidget {
+  const _DiagnosisCard({required this.snapshotAsync, required this.language});
 
-  final IconData icon;
-  final String title;
-  final String subtitle;
-  final String actionLabel;
-  final VoidCallback onTap;
+  final AsyncValue<JlptCoachSnapshot?> snapshotAsync;
+  final AppLanguage language;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(18),
         border: Border.all(color: const Color(0xFFDCE8F8)),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                width: 30,
-                height: 30,
-                decoration: BoxDecoration(
-                  color: const Color(0xFFE0F2FE),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Icon(icon, size: 18, color: const Color(0xFF0369A1)),
+      child: snapshotAsync.when(
+        data: (snapshot) {
+          if (snapshot == null) {
+            return Text(
+              switch (language) {
+                AppLanguage.en =>
+                  'Diagnosis appears after your first reading or mock attempt.',
+                AppLanguage.vi =>
+                  'Chẩn đoán sẽ hiện sau lượt đọc hiểu hoặc mock đầu tiên.',
+                AppLanguage.ja => '最初の読解または模試のあとに診断が表示されます。',
+              },
+              style: const TextStyle(
+                fontWeight: FontWeight.w700,
+                color: Color(0xFF475569),
               ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w900,
-                    color: Color(0xFF0F172A),
+            );
+          }
+          final weakest = snapshot.profile.weakestFirst().take(3).toList();
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                switch (language) {
+                  AppLanguage.en => '7-day plan',
+                  AppLanguage.vi => 'Kế hoạch 7 ngày',
+                  AppLanguage.ja => '7日プラン',
+                },
+                style: const TextStyle(
+                  fontWeight: FontWeight.w900,
+                  color: Color(0xFF0F172A),
+                ),
+              ),
+              const SizedBox(height: 8),
+              ...weakest.map(
+                (stat) => Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: Text(
+                    '${_areaLabel(language, stat.area)} · ${(stat.accuracy * 100).round()}%',
+                    style: const TextStyle(
+                      color: Color(0xFF334155),
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               ),
+              const SizedBox(height: 8),
+              ...snapshot.plan.items
+                  .take(3)
+                  .map(
+                    (item) => Padding(
+                      padding: const EdgeInsets.only(bottom: 5),
+                      child: Text(
+                        'D${item.dayOffset + 1} · ${_areaLabel(language, item.area)} · ${item.minutes}m',
+                        style: const TextStyle(
+                          fontSize: 12.5,
+                          color: Color(0xFF475569),
+                        ),
+                      ),
+                    ),
+                  ),
             ],
-          ),
-          const SizedBox(height: 7),
-          Text(
-            subtitle,
-            style: const TextStyle(
-              color: Color(0xFF475569),
-              fontWeight: FontWeight.w600,
-              height: 1.35,
-            ),
-          ),
-          const SizedBox(height: 8),
-          FilledButton.icon(
-            onPressed: onTap,
-            icon: const Icon(Icons.arrow_forward_rounded),
-            label: Text(actionLabel),
-          ),
-        ],
+          );
+        },
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (_, _) => Text(switch (language) {
+          AppLanguage.en => 'Unable to load diagnosis.',
+          AppLanguage.vi => 'Không tải được chẩn đoán.',
+          AppLanguage.ja => '診断を読み込めません。',
+        }),
       ),
     );
+  }
+
+  static String _areaLabel(AppLanguage language, JlptSkillArea area) {
+    switch (area) {
+      case JlptSkillArea.vocabulary:
+        return switch (language) {
+          AppLanguage.en => 'Vocabulary',
+          AppLanguage.vi => 'Từ vựng',
+          AppLanguage.ja => '語彙',
+        };
+      case JlptSkillArea.grammar:
+        return switch (language) {
+          AppLanguage.en => 'Grammar',
+          AppLanguage.vi => 'Ngữ pháp',
+          AppLanguage.ja => '文法',
+        };
+      case JlptSkillArea.kanji:
+        return 'Kanji';
+      case JlptSkillArea.reading:
+        return switch (language) {
+          AppLanguage.en => 'Reading',
+          AppLanguage.vi => 'Đọc hiểu',
+          AppLanguage.ja => '読解',
+        };
+    }
   }
 }

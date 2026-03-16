@@ -117,24 +117,19 @@ class AppShellScaffold extends ConsumerWidget {
   List<_ShellItem> _buildItems(AppLanguage language) {
     return [
       _ShellItem(
-        label: _todayLabel(language),
-        icon: Icons.today_outlined,
-        selectedIcon: Icons.today_rounded,
+        label: _homeLabel(language),
+        icon: Icons.home_outlined,
+        selectedIcon: Icons.home_rounded,
       ),
       _ShellItem(
-        label: _practiceLabel(language),
-        icon: Icons.explore_outlined,
-        selectedIcon: Icons.explore_rounded,
+        label: _studyLabel(language),
+        icon: Icons.play_lesson_outlined,
+        selectedIcon: Icons.play_lesson_rounded,
       ),
       _ShellItem(
         label: _libraryLabel(language),
         icon: Icons.layers_outlined,
         selectedIcon: Icons.layers_rounded,
-      ),
-      _ShellItem(
-        label: _progressLabel(language),
-        icon: Icons.insights_outlined,
-        selectedIcon: Icons.insights_rounded,
       ),
       _ShellItem(
         label: _meLabel(language),
@@ -144,25 +139,25 @@ class AppShellScaffold extends ConsumerWidget {
     ];
   }
 
-  String _todayLabel(AppLanguage language) {
+  String _homeLabel(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Today';
+        return 'Home';
       case AppLanguage.vi:
-        return 'Hôm nay';
+        return 'Trang chủ';
       case AppLanguage.ja:
-        return 'Today';
+        return 'ホーム';
     }
   }
 
-  String _practiceLabel(AppLanguage language) {
+  String _studyLabel(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Practice';
+        return 'Study';
       case AppLanguage.vi:
-        return 'Luyện';
+        return 'Học';
       case AppLanguage.ja:
-        return 'Practice';
+        return '学習';
     }
   }
 
@@ -173,18 +168,7 @@ class AppShellScaffold extends ConsumerWidget {
       case AppLanguage.vi:
         return 'Thư viện';
       case AppLanguage.ja:
-        return 'Library';
-    }
-  }
-
-  String _progressLabel(AppLanguage language) {
-    switch (language) {
-      case AppLanguage.en:
-        return 'Progress';
-      case AppLanguage.vi:
-        return 'Tiến độ';
-      case AppLanguage.ja:
-        return 'Progress';
+        return 'ライブラリ';
     }
   }
 
@@ -195,7 +179,7 @@ class AppShellScaffold extends ConsumerWidget {
       case AppLanguage.vi:
         return 'Tôi';
       case AppLanguage.ja:
-        return 'Me';
+        return '自分';
     }
   }
 }

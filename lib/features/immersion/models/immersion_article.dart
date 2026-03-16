@@ -39,7 +39,8 @@ class ImmersionArticle {
     required this.id,
     required this.title,
     this.titleFurigana,
-    required this.level,
+    required this.officialLevel,
+    this.estimatedDifficulty,
     required this.source,
     required this.publishedAt,
     required this.paragraphs,
@@ -49,11 +50,20 @@ class ImmersionArticle {
   final String id;
   final String title;
   final String? titleFurigana;
-  final String level;
+  final String officialLevel;
+  final String? estimatedDifficulty;
   final String source;
   final DateTime publishedAt;
   final List<List<ImmersionToken>> paragraphs;
   final String? translation;
+
+  String get level => officialLevel;
+
+  bool get hasEstimatedDifficulty =>
+      estimatedDifficulty != null && estimatedDifficulty!.trim().isNotEmpty;
+
+  String get effectiveDifficulty =>
+      hasEstimatedDifficulty ? estimatedDifficulty! : officialLevel;
 
   factory ImmersionArticle.fromJson(Map<String, dynamic> json) {
     final paragraphsRaw = json['paragraphs'] as List<dynamic>? ?? const [];
@@ -64,11 +74,19 @@ class ImmersionArticle {
               .toList(),
         )
         .toList();
+    final estimatedDifficulty = json['estimatedDifficulty']?.toString();
     return ImmersionArticle(
       id: json['id']?.toString() ?? '',
       title: json['title']?.toString() ?? '',
       titleFurigana: json['titleFurigana']?.toString(),
-      level: json['level']?.toString() ?? 'N5',
+      officialLevel:
+          json['officialLevel']?.toString() ??
+          json['level']?.toString() ??
+          'N5',
+      estimatedDifficulty:
+          estimatedDifficulty == null || estimatedDifficulty.trim().isEmpty
+          ? null
+          : estimatedDifficulty,
       source: json['source']?.toString() ?? 'Sample',
       publishedAt:
           DateTime.tryParse(json['publishedAt']?.toString() ?? '') ??
@@ -83,7 +101,9 @@ class ImmersionArticle {
       'id': id,
       'title': title,
       'titleFurigana': titleFurigana,
-      'level': level,
+      'officialLevel': officialLevel,
+      'estimatedDifficulty': estimatedDifficulty,
+      'level': officialLevel,
       'source': source,
       'publishedAt': publishedAt.toIso8601String(),
       'paragraphs': paragraphs

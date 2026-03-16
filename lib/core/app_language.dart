@@ -1,4 +1,4 @@
-﻿enum AppLanguage { en, vi, ja }
+enum AppLanguage { en, vi, ja }
 
 extension AppLanguageLabels on AppLanguage {
   String get label {
@@ -964,7 +964,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Streak';
       case AppLanguage.vi:
-        return 'Chuá»—i';
+        return 'Chu\u1ed7i';
       case AppLanguage.ja:
         return 'ストリーク';
     }
@@ -986,7 +986,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Practice';
       case AppLanguage.vi:
-        return 'Luyện tập';
+        return 'Luy\u1ec7n t\u1eadp';
       case AppLanguage.ja:
         return 'ç·´ç¿\'';
     }
@@ -997,7 +997,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Next Step';
       case AppLanguage.vi:
-        return 'Bước tiếp theo';
+        return 'B\u01b0\u1edbc ti\u1ebfp theo';
       case AppLanguage.ja:
         return '次のステップ';
     }
@@ -1008,7 +1008,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return '$count items';
       case AppLanguage.vi:
-        return '$count mục';
+        return '$count m\u1ee5c';
       case AppLanguage.ja:
         return '$countä»¶';
     }
@@ -1019,7 +1019,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Mistakes';
       case AppLanguage.vi:
-        return 'Lá»—i sai';
+        return 'L\u1ed7i sai';
       case AppLanguage.ja:
         return '間違い';
     }
@@ -1734,7 +1734,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Practice mode';
       case AppLanguage.vi:
-        return 'Chế độ luyện';
+        return 'Ch\u1ebf \u0111\u1ed9 luy\u1ec7n';
       case AppLanguage.ja:
         return '練習モード';
     }
@@ -1745,7 +1745,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Single';
       case AppLanguage.vi:
-        return 'Từ đơn';
+        return 'T\u1eeb \u0111\u01a1n';
       case AppLanguage.ja:
         return '単体';
     }
@@ -1756,7 +1756,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Compound';
       case AppLanguage.vi:
-        return 'Từ ghép';
+        return 'T\u1eeb gh\u00e9p';
       case AppLanguage.ja:
         return '熟語';
     }
@@ -1767,7 +1767,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Mixed';
       case AppLanguage.vi:
-        return 'Trá»™n';
+        return 'Tr\u1ed9n';
       case AppLanguage.ja:
         return 'ミックス';
     }
@@ -1778,7 +1778,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Compound mode: draw each kanji from left to right.';
       case AppLanguage.vi:
-        return 'Chế độ từ ghép: viết từng kanji từ trái sang phải.';
+        return 'Ch\u1ebf \u0111\u1ed9 t\u1eeb gh\u00e9p: vi\u1ebft t\u1eebng kanji t\u1eeb tr\u00e1i sang ph\u1ea3i.';
       case AppLanguage.ja:
         return '熟語モード:左から右へ1文字ずつ書きます。';
     }
@@ -1822,7 +1822,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return '$count strokes';
       case AppLanguage.vi:
-        return '$count nét';
+        return '$count n\u00e9t';
       case AppLanguage.ja:
         return '$countç"»';
     }
@@ -1877,7 +1877,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Stroke $current/$total';
       case AppLanguage.vi:
-        return 'Nét $current/$total';
+        return 'N\u00e9t $current/$total';
       case AppLanguage.ja:
         return '$current/$totalç"»';
     }
@@ -1932,7 +1932,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Word progress: $done/$total';
       case AppLanguage.vi:
-        return 'Tiến độ từ: $done/$total';
+        return 'Ti\u1ebfn \u0111\u1ed9 t\u1eeb: $done/$total';
       case AppLanguage.ja:
         return '単語進捗: $done/$total';
     }
@@ -1943,7 +1943,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Character progress: $done/$total';
       case AppLanguage.vi:
-        return 'Tiến độ chữ: $done/$total';
+        return 'Ti\u1ebfn \u0111\u1ed9 ch\u1eef: $done/$total';
       case AppLanguage.ja:
         return '文字進捗: $done/$total';
     }
@@ -1954,7 +1954,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'New';
       case AppLanguage.vi:
-        return 'Má»›i';
+        return 'M\u1edbi';
       case AppLanguage.ja:
         return '新規';
     }
@@ -1965,7 +1965,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Review now';
       case AppLanguage.vi:
-        return 'Ôn tập';
+        return '\u00d4n t\u1eadp';
       case AppLanguage.ja:
         return '復習';
     }
@@ -1976,7 +1976,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Weak';
       case AppLanguage.vi:
-        return 'Yếu';
+        return 'Y\u1ebfu';
       case AppLanguage.ja:
         return '弱点';
     }
@@ -3855,13 +3855,29 @@ extension AppLanguageLabels on AppLanguage {
   String kanjiStructureType(String type) {
     switch (type) {
       case 'left-right':
-        return this == AppLanguage.vi ? 'Trái – Phải' : this == AppLanguage.ja ? '左右' : 'Left – Right';
+        return this == AppLanguage.vi
+            ? 'Trái – Phải'
+            : this == AppLanguage.ja
+            ? '左右'
+            : 'Left – Right';
       case 'top-bottom':
-        return this == AppLanguage.vi ? 'Trên – Dưới' : this == AppLanguage.ja ? '上下' : 'Top – Bottom';
+        return this == AppLanguage.vi
+            ? 'Trên – Dưới'
+            : this == AppLanguage.ja
+            ? '上下'
+            : 'Top – Bottom';
       case 'enclosure':
-        return this == AppLanguage.vi ? 'Bao quanh' : this == AppLanguage.ja ? '囲み' : 'Enclosure';
+        return this == AppLanguage.vi
+            ? 'Bao quanh'
+            : this == AppLanguage.ja
+            ? '囲み'
+            : 'Enclosure';
       case 'standalone':
-        return this == AppLanguage.vi ? 'Độc lập' : this == AppLanguage.ja ? '単独' : 'Standalone';
+        return this == AppLanguage.vi
+            ? 'Độc lập'
+            : this == AppLanguage.ja
+            ? '単独'
+            : 'Standalone';
       default:
         return type;
     }
@@ -4532,7 +4548,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Submit';
       case AppLanguage.vi:
-        return 'Ná»™p';
+        return 'N\u1ed9p';
       case AppLanguage.ja:
         return '送信';
     }
@@ -4752,7 +4768,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Wrong $wrongCount - $percent% of mistakes';
       case AppLanguage.vi:
-        return 'Sai $wrongCount - $percent% lá»—i';
+        return 'Sai $wrongCount - $percent% l\u1ed7i';
       case AppLanguage.ja:
         return '誤り $wrongCount - ミスの$percent%';
     }
@@ -4907,7 +4923,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Fix Mistakes';
       case AppLanguage.vi:
-        return 'Sá»­a lá»—i';
+        return 'S\u1eeda l\u1ed7i';
       case AppLanguage.ja:
         return 'ミス修正';
     }
@@ -4918,7 +4934,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Fix Mistakes ($count)';
       case AppLanguage.vi:
-        return 'Sá»­a lá»—i ($count)';
+        return 'S\u1eeda l\u1ed7i ($count)';
       case AppLanguage.ja:
         return 'ミス修正 ($count)';
     }
@@ -5248,7 +5264,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Mock Exam';
       case AppLanguage.vi:
-        return 'Thi thá»­';
+        return 'Thi th\u1eed';
       case AppLanguage.ja:
         return '模擬試験';
     }
@@ -5663,6 +5679,28 @@ extension AppLanguageLabels on AppLanguage {
         return '\u0110\u1ecdc v\u00e0 l\u01b0u t\u1eeb m\u1edbi.';
       case AppLanguage.ja:
         return '\u8aad\u3093\u3067\u5358\u8a9e\u3092\u4fdd\u5b58\u3002';
+    }
+  }
+
+  String immersionOfficialLevelLabel(String level) {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Level $level';
+      case AppLanguage.vi:
+        return '\u004d\u1ee9c $level';
+      case AppLanguage.ja:
+        return '\u30ec\u30d9\u30eb $level';
+    }
+  }
+
+  String immersionEstimatedDifficultyLabel(String level) {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Est. $level';
+      case AppLanguage.vi:
+        return '\u01af\u1edbc l\u01b0\u1ee3ng $level';
+      case AppLanguage.ja:
+        return '\u63a8\u5b9a $level';
     }
   }
 
@@ -6150,6 +6188,7 @@ extension AppLanguageLabels on AppLanguage {
         return '次へ';
     }
   }
+
   String get practiceKanjiReadingLabel {
     switch (this) {
       case AppLanguage.en:
@@ -6169,6 +6208,28 @@ extension AppLanguageLabels on AppLanguage {
         return 'Chọn cách đọc hoặc kanji đúng.';
       case AppLanguage.ja:
         return '正しい読みまたは漢字を選ぼう。';
+    }
+  }
+
+  String get practiceRecallSprintLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Recall Sprint';
+      case AppLanguage.vi:
+        return 'Recall Sprint';
+      case AppLanguage.ja:
+        return 'リコールスプリント';
+    }
+  }
+
+  String get practiceRecallSprintSubtitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Mixed grammar, vocab, and kanji in one quick retry-first session.';
+      case AppLanguage.vi:
+        return 'Ôn nhanh ngữ pháp, từ vựng và kanji trong một lượt có ôn lại lỗi ngay.';
+      case AppLanguage.ja:
+        return '文法・語彙・漢字をまとめて短く復習し、間違いはすぐ再挑戦。';
     }
   }
   // --- F1: Vocab Review Preview ---
@@ -6287,4 +6348,3 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 } // End extension
-

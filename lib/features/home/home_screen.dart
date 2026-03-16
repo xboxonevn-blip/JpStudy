@@ -34,17 +34,17 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   int? _lastKnownLevel;
+  late final AppSettingsController _appSettingsController;
+  late final DataSettingsController _dataSettingsController;
 
   @override
   void initState() {
     super.initState();
+    _appSettingsController = ref.read(appSettingsControllerProvider.notifier);
+    _dataSettingsController = ref.read(dataSettingsControllerProvider.notifier);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref
-          .read(appSettingsControllerProvider.notifier)
-          .initialize(hostContext: context);
-      ref
-          .read(dataSettingsControllerProvider.notifier)
-          .initialize(hostContext: context);
+      _appSettingsController.initialize(hostContext: context);
+      _dataSettingsController.initialize(hostContext: context);
       _showPendingAchievements();
       _initLevelTracking();
     });
@@ -53,16 +53,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    ref.read(appSettingsControllerProvider.notifier).bindHostContext(context);
-    ref.read(dataSettingsControllerProvider.notifier).bindHostContext(context);
+    _appSettingsController.bindHostContext(context);
+    _dataSettingsController.bindHostContext(context);
   }
 
   @override
   void dispose() {
-    ref.read(appSettingsControllerProvider.notifier).unbindHostContext(context);
-    ref
-        .read(dataSettingsControllerProvider.notifier)
-        .unbindHostContext(context);
+    _appSettingsController.unbindHostContext(context);
+    _dataSettingsController.unbindHostContext(context);
     super.dispose();
   }
 

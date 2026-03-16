@@ -32,6 +32,7 @@ import 'package:jpstudy/features/me/me_screen.dart';
 import 'package:jpstudy/features/me/screens/data_settings_screen.dart';
 import 'package:jpstudy/features/mistakes/screens/mistake_screen.dart';
 import 'package:jpstudy/features/practice/practice_screen.dart';
+import 'package:jpstudy/features/practice/screens/recall_sprint_screen.dart';
 import 'package:jpstudy/features/progress/progress_screen.dart';
 import 'package:jpstudy/features/search/search_screen.dart';
 import 'package:jpstudy/features/test/integration/test_mode_integration.dart';
@@ -69,6 +70,10 @@ class AppRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
+                path: '/study',
+                builder: (context, state) => const PracticeScreen(),
+              ),
+              GoRoute(
                 path: '/practice',
                 builder: (context, state) => const PracticeScreen(),
               ),
@@ -104,6 +109,10 @@ class AppRouter {
               GoRoute(
                 path: '/practice/mock-exam',
                 builder: (context, state) => const HomeMockExamScreen(),
+              ),
+              GoRoute(
+                path: '/practice/recall-sprint',
+                builder: (context, state) => const RecallSprintScreen(),
               ),
               GoRoute(
                 path: '/jlpt/coach',
@@ -245,16 +254,12 @@ class AppRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: '/progress',
-                builder: (context, state) => const ProgressScreen(),
-              ),
-            ],
-          ),
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
                 path: '/me',
                 builder: (context, state) => const MeScreen(),
+              ),
+              GoRoute(
+                path: '/progress',
+                builder: (context, state) => const ProgressScreen(),
               ),
               GoRoute(
                 path: '/me/data',

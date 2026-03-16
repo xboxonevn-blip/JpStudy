@@ -800,13 +800,13 @@ class _GrammarPointCardState extends State<_GrammarPointCard> {
                                   ? _tr(
                                       widget.language,
                                       en: 'Mastered',
-                                      vi: 'Da thuoc',
+                                      vi: '?? thu?c',
                                       ja: '????',
                                     )
                                   : _tr(
                                       widget.language,
                                       en: 'Learning',
-                                      vi: 'Dang hoc',
+                                      vi: '?ang h?c',
                                       ja: '???',
                                     ),
                               fg: point.isLearned
@@ -820,8 +820,8 @@ class _GrammarPointCardState extends State<_GrammarPointCard> {
                               _tr(
                                 widget.language,
                                 en: '${widget.data.examples.length} Examples',
-                                vi: '${widget.data.examples.length} vi du',
-                                ja: '?? ${widget.data.examples.length}',
+                                vi: '${widget.data.examples.length} v? d?',
+                                ja: '${widget.data.examples.length} ??',
                               ),
                               fg: const Color(0xFF0F766E),
                               bg: const Color(0xFFF0FDFA),
@@ -914,8 +914,8 @@ class _GrammarPointCardState extends State<_GrammarPointCard> {
                         _tr(
                           widget.language,
                           en: 'Drill this grammar point',
-                          vi: 'Luyen diem ngu phap nay',
-                          ja: '??????????',
+                          vi: 'Luy\u1ec7n \u0111i\u1ec3m ng\u1eef ph\u00e1p n\u00e0y',
+                          ja: '?????????',
                         ),
                       ),
                     ),

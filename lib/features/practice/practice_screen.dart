@@ -3,9 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/level_provider.dart';
+import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/common/widgets/japanese_background.dart';
-import 'package:jpstudy/features/home/widgets/discover_practice_panel.dart';
-import 'package:jpstudy/features/home/widgets/home_surface.dart';
+import 'package:jpstudy/features/home/models/practice_destination.dart';
+import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 
 class PracticeScreen extends ConsumerWidget {
   const PracticeScreen({super.key});
@@ -13,37 +15,131 @@ class PracticeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final language = ref.watch(appLanguageProvider);
+    final level = ref.watch(studyLevelProvider);
+    final dashboard = ref.watch(dashboardProvider).valueOrNull;
+    final vocabDue = dashboard?.vocabDue ?? 0;
+    final grammarDue = dashboard?.grammarDue ?? 0;
+    final kanjiDue = dashboard?.kanjiDue ?? 0;
+    final dueCount = vocabDue + grammarDue + kanjiDue;
+    final mistakeCount = dashboard?.totalMistakeCount ?? 0;
+    final items = buildPracticeDestinations(
+      language: language,
+      dueReviewCount: dueCount,
+      vocabDue: vocabDue,
+      grammarDue: grammarDue,
+      kanjiDue: kanjiDue,
+      mistakeCount: mistakeCount,
+      level: level,
+      preferImmersion: dueCount == 0 && mistakeCount == 0,
+    );
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(_title(language)),
-        actions: [
-          IconButton(
-            tooltip: _searchLabel(language),
-            onPressed: () => context.push('/search'),
-            icon: const Icon(Icons.search_rounded),
-          ),
-        ],
-      ),
+      appBar: AppBar(title: Text(_title(language))),
       body: JapaneseBackground(
         child: SafeArea(
           top: false,
           child: ListView(
-            padding: const EdgeInsets.fromLTRB(
-              HomeSurface.pageHorizontalPadding,
-              16,
-              HomeSurface.pageHorizontalPadding,
-              96,
-            ),
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 96),
             children: [
-              _IntroPanel(
+              AppFeatureCard(
+                icon: Icons.play_lesson_rounded,
                 title: _title(language),
                 subtitle: _subtitle(language),
-                ctaLabel: _searchLabel(language),
-                onTap: () => context.push('/search'),
+                primaryLabel: _primaryCta(language),
+                onPrimaryTap: () =>
+                    _openPrimaryGoal(context, dueCount, mistakeCount),
+                secondaryLabel: _searchLabel(language),
+                onSecondaryTap: () => context.push('/search'),
+                status: AppStatusChip(
+                  label: dueCount > 0
+                      ? _dueBadge(language, dueCount)
+                      : _readyBadge(language),
+                  tone: dueCount > 0
+                      ? AppStatusTone.warning
+                      : AppStatusTone.success,
+                ),
               ),
-              const SizedBox(height: 16),
-              const DiscoverPracticePanel(initiallyExpanded: true),
+              const SizedBox(height: 20),
+              AppSectionHeader(
+                title: _goalsTitle(language),
+                caption: _goalsCaption(language),
+              ),
+              const SizedBox(height: 10),
+              _GoalTile(
+                icon: Icons.schedule_rounded,
+                title: _goalDueTitle(language),
+                subtitle: _goalDueSubtitle(language, dueCount),
+                onTap: () => _openPrimaryGoal(context, dueCount, mistakeCount),
+                status: AppStatusChip(
+                  label: '$dueCount',
+                  tone: dueCount > 0
+                      ? AppStatusTone.warning
+                      : AppStatusTone.neutral,
+                ),
+              ),
+              const SizedBox(height: 10),
+              _GoalTile(
+                icon: Icons.auto_fix_high_rounded,
+                title: _goalFixTitle(language),
+                subtitle: _goalFixSubtitle(language, mistakeCount),
+                onTap: () => context.push('/mistakes'),
+                status: AppStatusChip(
+                  label: '$mistakeCount',
+                  tone: mistakeCount > 0
+                      ? AppStatusTone.warning
+                      : AppStatusTone.neutral,
+                ),
+              ),
+              const SizedBox(height: 10),
+              _GoalTile(
+                icon: Icons.speed_rounded,
+                title: _goalSpeedTitle(language),
+                subtitle: _goalSpeedSubtitle(language),
+                onTap: () => context.push('/immersion'),
+              ),
+              const SizedBox(height: 10),
+              _GoalTile(
+                icon: Icons.quiz_rounded,
+                title: _goalTestTitle(language),
+                subtitle: _goalTestSubtitle(language),
+                onTap: () => context.push('/jlpt/coach'),
+              ),
+              const SizedBox(height: 20),
+              AppSectionHeader(
+                title: _toolsTitle(language),
+                caption: _toolsCaption(language),
+              ),
+              const SizedBox(height: 10),
+              ...items
+                  .take(4)
+                  .map(
+                    (item) => Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: AppCompactRow(
+                        icon: item.icon,
+                        title: item.title,
+                        subtitle: item.subtitle,
+                        status: item.badgeCount != null
+                            ? AppStatusChip(
+                                label: '${item.badgeCount}',
+                                tone: AppStatusTone.warning,
+                              )
+                            : item.estimatedMinutes != null
+                            ? AppStatusChip(
+                                label: '~${item.estimatedMinutes}m',
+                                tone: AppStatusTone.neutral,
+                              )
+                            : null,
+                        onTap: () {
+                          if (item.extra != null) {
+                            context.push(item.route, extra: item.extra);
+                          } else {
+                            context.push(item.route);
+                          }
+                        },
+                      ),
+                    ),
+                  ),
             ],
           ),
         ),
@@ -51,103 +147,147 @@ class PracticeScreen extends ConsumerWidget {
     );
   }
 
-  String _title(AppLanguage language) {
-    switch (language) {
-      case AppLanguage.en:
-        return 'Practice';
-      case AppLanguage.vi:
-        return 'Luyện tập';
-      case AppLanguage.ja:
-        return 'Practice';
+  void _openPrimaryGoal(BuildContext context, int dueCount, int mistakeCount) {
+    if (dueCount > 0) {
+      context.push('/vocab/review');
+      return;
     }
+    if (mistakeCount > 0) {
+      context.push('/mistakes');
+      return;
+    }
+    context.push('/immersion');
   }
 
-  String _subtitle(AppLanguage language) {
-    switch (language) {
-      case AppLanguage.en:
-        return 'One place for review, drills, exam prep, and skill training.';
-      case AppLanguage.vi:
-        return 'Một nơi để ôn tập, luyện bài, thi thử và rèn kỹ năng.';
-      case AppLanguage.ja:
-        return 'Review, drills, exam prep, and skill training in one place.';
-    }
-  }
-
-  String _searchLabel(AppLanguage language) {
-    switch (language) {
-      case AppLanguage.en:
-        return 'Search';
-      case AppLanguage.vi:
-        return 'Tìm kiếm';
-      case AppLanguage.ja:
-        return 'Search';
-    }
-  }
+  String _title(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Study',
+    AppLanguage.vi => 'Học',
+    AppLanguage.ja => '学習',
+  };
+  String _subtitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Pick one clear goal and keep moving.',
+    AppLanguage.vi => 'Chọn một mục tiêu rõ ràng rồi học tiếp.',
+    AppLanguage.ja => '目的をひとつ選んで進めましょう。',
+  };
+  String _primaryCta(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Start now',
+    AppLanguage.vi => 'Bắt đầu',
+    AppLanguage.ja => '始める',
+  };
+  String _searchLabel(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Search',
+    AppLanguage.vi => 'Tìm kiếm',
+    AppLanguage.ja => '検索',
+  };
+  String _dueBadge(AppLanguage language, int dueCount) => switch (language) {
+    AppLanguage.en => '$dueCount due',
+    AppLanguage.vi => '$dueCount đến hạn',
+    AppLanguage.ja => '$dueCount 件',
+  };
+  String _readyBadge(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Ready',
+    AppLanguage.vi => 'Sẵn sàng',
+    AppLanguage.ja => '準備完了',
+  };
+  String _goalsTitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Goals',
+    AppLanguage.vi => 'Mục tiêu',
+    AppLanguage.ja => '目標',
+  };
+  String _goalsCaption(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Choose by outcome, not by feature',
+    AppLanguage.vi => 'Chọn theo kết quả, không theo tính năng',
+    AppLanguage.ja => '機能ではなく結果で選ぶ',
+  };
+  String _goalDueTitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Due review',
+    AppLanguage.vi => 'Ôn đến hạn',
+    AppLanguage.ja => '期限の復習',
+  };
+  String _goalDueSubtitle(
+    AppLanguage language,
+    int dueCount,
+  ) => switch (language) {
+    AppLanguage.en =>
+      dueCount > 0
+          ? '$dueCount items are waiting now.'
+          : 'No due review right now.',
+    AppLanguage.vi =>
+      dueCount > 0 ? '$dueCount mục đang chờ ôn.' : 'Hiện chưa có mục đến hạn.',
+    AppLanguage.ja => dueCount > 0 ? '$dueCount 件が待っています。' : '今は期限の復習はありません。',
+  };
+  String _goalFixTitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Fix weak points',
+    AppLanguage.vi => 'Sửa điểm yếu',
+    AppLanguage.ja => '苦手を直す',
+  };
+  String _goalFixSubtitle(AppLanguage language, int count) =>
+      switch (language) {
+        AppLanguage.en =>
+          count > 0
+              ? '$count weak items still need work.'
+              : 'No weak items are waiting.',
+        AppLanguage.vi =>
+          count > 0
+              ? '$count mục yếu vẫn cần xử lý.'
+              : 'Hiện chưa có mục yếu chờ xử lý.',
+        AppLanguage.ja => count > 0 ? '$count 件の苦手項目が残っています。' : '苦手項目はありません。',
+      };
+  String _goalSpeedTitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Build speed',
+    AppLanguage.vi => 'Tăng tốc độ',
+    AppLanguage.ja => '読む速さ',
+  };
+  String _goalSpeedSubtitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Read, save words, and measure progress.',
+    AppLanguage.vi => 'Đọc, lưu từ, và đo tiến độ.',
+    AppLanguage.ja => '読んで、単語を保存して、進みを測る。',
+  };
+  String _goalTestTitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Mock exam',
+    AppLanguage.vi => 'Thi thử',
+    AppLanguage.ja => '模試',
+  };
+  String _goalTestSubtitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Reading, mock, diagnosis, and plan.',
+    AppLanguage.vi => 'Đọc hiểu, mock, chẩn đoán, kèm kế hoạch.',
+    AppLanguage.ja => '読解、模試、診断、計画。',
+  };
+  String _toolsTitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Tools',
+    AppLanguage.vi => 'Công cụ',
+    AppLanguage.ja => 'ツール',
+  };
+  String _toolsCaption(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Compact routes for the rest',
+    AppLanguage.vi => 'Lối vào gọn cho các phần còn lại',
+    AppLanguage.ja => '残りの入口をまとめる',
+  };
 }
 
-class _IntroPanel extends StatelessWidget {
-  const _IntroPanel({
+class _GoalTile extends StatelessWidget {
+  const _GoalTile({
+    required this.icon,
     required this.title,
     required this.subtitle,
-    required this.ctaLabel,
     required this.onTap,
+    this.status,
   });
 
+  final IconData icon;
   final String title;
   final String subtitle;
-  final String ctaLabel;
   final VoidCallback onTap;
+  final Widget? status;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: HomeSurface.softPanel(
-        colors: const [Color(0xFFF8FCFF), Color(0xFFFFF7ED)],
-        radius: 28,
-      ),
-      padding: const EdgeInsets.all(20),
-      child: Row(
-        children: [
-          Container(
-            width: 52,
-            height: 52,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              gradient: const LinearGradient(
-                colors: [Color(0xFF0EA5E9), Color(0xFFF59E0B)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
-            child: const Icon(Icons.rocket_launch_rounded, color: Colors.white),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  subtitle,
-                  style: const TextStyle(color: Color(0xFF64748B), height: 1.4),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 12),
-          FilledButton.icon(
-            onPressed: onTap,
-            icon: const Icon(Icons.search_rounded),
-            label: Text(ctaLabel),
-          ),
-        ],
-      ),
+    return AppCompactRow(
+      icon: icon,
+      title: title,
+      subtitle: subtitle,
+      status: status,
+      onTap: onTap,
     );
   }
 }

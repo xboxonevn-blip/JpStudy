@@ -96,7 +96,7 @@ void main() {
   final fallbackArticle = ImmersionArticle(
     id: 'fallback_1',
     title: 'Fallback article',
-    level: 'N5',
+    officialLevel: 'N5',
     source: 'Watanoc',
     publishedAt: DateTime(2026, 2, 4),
     paragraphs: [
@@ -120,7 +120,7 @@ void main() {
     id: 'local_1',
     title: 'Local article',
     titleFurigana: 'ろーかる',
-    level: 'N5',
+    officialLevel: 'N5',
     source: 'Local',
     publishedAt: DateTime(2026, 2, 4),
     paragraphs: repeatedParagraphs,

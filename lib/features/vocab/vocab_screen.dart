@@ -10,7 +10,7 @@ import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/repositories/content_repository.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/vocab/widgets/flashcard_widget.dart';
-import '../common/widgets/clay_button.dart';
+import '../common/widgets/compact_ui.dart';
 import '../common/widgets/clay_card.dart';
 import '../common/widgets/error_state_widget.dart';
 import '../../app/theme/app_theme.dart';
@@ -62,6 +62,7 @@ class _VocabScreenState extends ConsumerState<VocabScreen> {
             ),
     );
   }
+
   String _title(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
@@ -80,7 +81,9 @@ class _VocabScreenState extends ConsumerState<VocabScreen> {
       case AppLanguage.vi:
         return isFlashcardMode ? 'Xem danh s\u00e1ch' : 'Xem th\u1ebb';
       case AppLanguage.ja:
-        return isFlashcardMode ? '\u4e00\u89a7\u8868\u793a' : '\u30ab\u30fc\u30c9\u8868\u793a';
+        return isFlashcardMode
+            ? '\u4e00\u89a7\u8868\u793a'
+            : '\u30ab\u30fc\u30c9\u8868\u793a';
     }
   }
 }
@@ -122,26 +125,75 @@ class _VocabContent extends ConsumerWidget {
             )
             .toList();
 
-        return Column(
+        return ListView(
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 96),
           children: [
+            AppFeatureCard(
+              icon: Icons.translate_rounded,
+              title: switch (language) {
+                AppLanguage.en => 'Vocab',
+                AppLanguage.vi => 'Từ vựng',
+                AppLanguage.ja => '語彙',
+              },
+              subtitle: switch (language) {
+                AppLanguage.en =>
+                  'Review due words or browse the current level.',
+                AppLanguage.vi =>
+                  'Ôn từ đến hạn hoặc duyệt từ của cấp hiện tại.',
+                AppLanguage.ja => '期限の語彙を復習するか、現在のレベルを確認します。',
+              },
+              primaryLabel:
+                  dueTermsAsync.hasValue && dueTermsAsync.value!.isNotEmpty
+                  ? language.reviewAction
+                  : (switch (language) {
+                      AppLanguage.en => 'Browse',
+                      AppLanguage.vi => 'Duyệt',
+                      AppLanguage.ja => '見る',
+                    }),
+              onPrimaryTap:
+                  dueTermsAsync.hasValue && dueTermsAsync.value!.isNotEmpty
+                  ? () => context.push('/vocab/review')
+                  : null,
+              secondaryLabel: switch (language) {
+                AppLanguage.en => isFlashcardMode ? 'List' : 'Cards',
+                AppLanguage.vi => isFlashcardMode ? 'Danh sách' : 'Thẻ',
+                AppLanguage.ja => isFlashcardMode ? '一覧' : 'カード',
+              },
+              onSecondaryTap: null,
+              status: AppStatusChip(
+                label: level.shortLabel,
+                tone: AppStatusTone.primary,
+              ),
+            ),
+            const SizedBox(height: 16),
             if (dueTermsAsync.hasValue && dueTermsAsync.value!.isNotEmpty)
               Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: ClayButton(
-                  label:
-                      '${language.reviewAction} (${dueTermsAsync.value!.length})',
-                  icon: Icons.rate_review,
-                  style: ClayButtonStyle.primary,
-                  isExpanded: true,
-                  onPressed: () => context.push('/vocab/review'),
+                padding: const EdgeInsets.only(bottom: 12),
+                child: AppCompactRow(
+                  icon: Icons.schedule_rounded,
+                  title: language.reviewAction,
+                  subtitle: switch (language) {
+                    AppLanguage.en =>
+                      '${dueTermsAsync.value!.length} words are due now.',
+                    AppLanguage.vi =>
+                      '${dueTermsAsync.value!.length} từ đang đến hạn.',
+                    AppLanguage.ja => '${dueTermsAsync.value!.length} 件が期限です。',
+                  },
+                  status: AppStatusChip(
+                    label: '${dueTermsAsync.value!.length}',
+                    tone: AppStatusTone.warning,
+                  ),
+                  onTap: () => context.push('/vocab/review'),
                 ),
               ),
             if (dueTermsAsync.hasValue && dueTermsAsync.value!.isEmpty)
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-                child: _NextReviewChip(nextReviewAt: nextReviewAsync.valueOrNull),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child: _NextReviewChip(
+                  nextReviewAt: nextReviewAsync.valueOrNull,
+                ),
               ),
-            Expanded(
+            SizedBox(
               child: isFlashcardMode
                   ? _FlashcardView(items: items)
                   : _ListView(items: items, language: language),

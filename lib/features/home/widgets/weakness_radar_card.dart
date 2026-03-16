@@ -101,7 +101,7 @@ class WeaknessRadarCard extends ConsumerWidget {
       case AppLanguage.en:
         return 'Weakness Radar';
       case AppLanguage.vi:
-        return 'Radar diem yeu';
+        return 'Radar ?i?m y?u';
       case AppLanguage.ja:
         return 'Weakness Radar';
     }
@@ -112,7 +112,7 @@ class WeaknessRadarCard extends ConsumerWidget {
       case AppLanguage.en:
         return 'The three most useful fixes right now.';
       case AppLanguage.vi:
-        return 'Ba diem can xu ly ngay bay gio.';
+        return 'Ba ?i?m c?n x? l? ngay b?y gi?.';
       case AppLanguage.ja:
         return 'The three most useful fixes right now.';
     }

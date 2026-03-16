@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/common/widgets/japanese_background.dart';
 
 import 'models/immersion_article.dart';
@@ -22,6 +23,7 @@ class ImmersionHomeScreen extends ConsumerStatefulWidget {
 class _ImmersionHomeScreenState extends ConsumerState<ImmersionHomeScreen> {
   late Future<_ImmersionLoadState> _future;
   ImmersionSource _source = ImmersionSource.local;
+  List<ImmersionArticle> _latestArticles = const [];
 
   @override
   void initState() {
@@ -39,6 +41,7 @@ class _ImmersionHomeScreenState extends ConsumerState<ImmersionHomeScreen> {
           forceRefresh: forceRefresh,
         );
         if (nhk.isNotEmpty) {
+          _latestArticles = nhk;
           final isFallback =
               nhk.first.source != ImmersionService.nhkSourceLabel;
           return _ImmersionLoadState(
@@ -47,12 +50,12 @@ class _ImmersionHomeScreenState extends ConsumerState<ImmersionHomeScreen> {
           );
         }
         final local = await service.loadLocalSamples();
+        _latestArticles = local;
         return _ImmersionLoadState(articles: local, usedLocalFallback: true);
       case ImmersionSource.local:
-        return _ImmersionLoadState(
-          articles: await service.loadLocalSamples(),
-          usedLocalFallback: false,
-        );
+        final local = await service.loadLocalSamples();
+        _latestArticles = local;
+        return _ImmersionLoadState(articles: local, usedLocalFallback: false);
     }
   }
 
@@ -70,6 +73,14 @@ class _ImmersionHomeScreenState extends ConsumerState<ImmersionHomeScreen> {
       _future = nextFuture;
     });
     await nextFuture;
+  }
+
+  void _openArticle(BuildContext context, ImmersionArticle article) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => ImmersionReaderScreen(article: article),
+      ),
+    );
   }
 
   @override
@@ -119,6 +130,15 @@ class _ImmersionHomeScreenState extends ConsumerState<ImmersionHomeScreen> {
                   language: language,
                   readCount: readIds.length,
                   source: _source,
+                  hasArticle: _latestArticles.isNotEmpty,
+                  onPrimaryTap: _latestArticles.isEmpty
+                      ? null
+                      : () => _openArticle(context, _latestArticles.first),
+                  onSecondaryTap: () => _setSource(
+                    _source == ImmersionSource.local
+                        ? ImmersionSource.nhkEasy
+                        : ImmersionSource.local,
+                  ),
                 ),
               ),
               Padding(
@@ -172,14 +192,7 @@ class _ImmersionHomeScreenState extends ConsumerState<ImmersionHomeScreen> {
                                 language: language,
                                 isRead: readIds.contains(article.id),
                                 onTap: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          ImmersionReaderScreen(
-                                            article: article,
-                                          ),
-                                    ),
-                                  );
+                                  _openArticle(context, article);
                                 },
                               ),
                             );
@@ -203,141 +216,59 @@ class _HeroCard extends StatelessWidget {
     required this.language,
     required this.readCount,
     required this.source,
+    required this.hasArticle,
+    required this.onPrimaryTap,
+    required this.onSecondaryTap,
   });
 
   final AppLanguage language;
   final int readCount;
   final ImmersionSource source;
+  final bool hasArticle;
+  final VoidCallback? onPrimaryTap;
+  final VoidCallback onSecondaryTap;
 
   @override
   Widget build(BuildContext context) {
     final sourceLabel = source == ImmersionSource.nhkEasy
         ? language.immersionSourceNhkLabel
         : language.immersionSourceLocalLabel;
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFF0F172A), Color(0xFF0F766E), Color(0xFF1D4ED8)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x1F1E3A56),
-            blurRadius: 16,
-            offset: Offset(0, 10),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  language.immersionSubtitle,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 15,
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Row(
-                  children: [
-                    _MetaPill(label: sourceLabel),
-                    const SizedBox(width: 8),
-                    _MetaPill(label: '${language.doneLabel}: $readCount'),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Container(
-            width: 64,
-            height: 64,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white.withValues(alpha: 0.14),
-              border: Border.all(color: Colors.white.withValues(alpha: 0.26)),
-            ),
-            child: const Icon(
-              Icons.auto_stories_rounded,
-              color: Color(0xFFE0F2FE),
-              size: 30,
-            ),
-          ),
-        ],
-      ),
+    return AppFeatureCard(
+      icon: Icons.article_rounded,
+      title: _title(language),
+      subtitle: _subtitle(language),
+      primaryLabel: _primaryLabel(language),
+      onPrimaryTap: onPrimaryTap,
+      secondaryLabel: _secondaryLabel(language),
+      onSecondaryTap: onSecondaryTap,
+      status: AppStatusChip(label: sourceLabel, tone: AppStatusTone.primary),
     );
   }
-}
 
-class _FallbackNotice extends StatelessWidget {
-  const _FallbackNotice({required this.language});
+  String _title(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Read now',
+    AppLanguage.vi => 'Đọc ngay',
+    AppLanguage.ja => '今すぐ読む',
+  };
 
-  final AppLanguage language;
+  String _subtitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Read, save words, and track progress. $readCount read.',
+    AppLanguage.vi =>
+      'Đọc, lưu từ, và theo dõi tiến độ. Đã đọc $readCount bài.',
+    AppLanguage.ja => '読んで、単語を保存して、進みを追います。$readCount 本読了。',
+  };
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-      decoration: BoxDecoration(
-        color: const Color(0xFFFFF7ED),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFFBD38D)),
-      ),
-      child: Row(
-        children: [
-          const Icon(
-            Icons.wifi_off_rounded,
-            color: Color(0xFFB45309),
-            size: 18,
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Text(
-              language.immersionFallbackToLocalLabel,
-              style: const TextStyle(
-                fontSize: 12.5,
-                fontWeight: FontWeight.w700,
-                color: Color(0xFF92400E),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+  String _primaryLabel(AppLanguage language) => switch (language) {
+    AppLanguage.en => hasArticle ? 'Start reading' : 'Loading',
+    AppLanguage.vi => hasArticle ? 'Bắt đầu đọc' : 'Đang tải',
+    AppLanguage.ja => hasArticle ? '読み始める' : '読み込み中',
+  };
 
-class _MetaPill extends StatelessWidget {
-  const _MetaPill({required this.label});
-
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.16),
-        borderRadius: BorderRadius.circular(999),
-      ),
-      child: Text(
-        label,
-        style: const TextStyle(
-          color: Color(0xFFDBF4FF),
-          fontWeight: FontWeight.w700,
-          fontSize: 11,
-        ),
-      ),
-    );
-  }
+  String _secondaryLabel(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Change source',
+    AppLanguage.vi => 'Đổi nguồn',
+    AppLanguage.ja => 'ソース変更',
+  };
 }
 
 class _SourcePicker extends StatelessWidget {
@@ -514,7 +445,7 @@ class _ArticleCard extends StatelessWidget {
                 runSpacing: 6,
                 children: [
                   _Tag(label: article.source),
-                  _DifficultyBadge(article: article),
+                  _DifficultyBadge(article: article, language: language),
                   _Tag(label: dateLabel),
                   if (isRead) _Tag(label: language.doneLabel),
                 ],
@@ -553,17 +484,38 @@ class _Tag extends StatelessWidget {
 }
 
 class _DifficultyBadge extends StatelessWidget {
-  const _DifficultyBadge({required this.article});
+  const _DifficultyBadge({required this.article, required this.language});
 
   final ImmersionArticle article;
+  final AppLanguage language;
 
   @override
   Widget build(BuildContext context) {
-    final level = article.paragraphs.isNotEmpty
-        ? DifficultyEstimator.estimate(article.paragraphs)
-        : article.level;
-    final color = DifficultyEstimator.colorForLevel(level);
+    final tags = <Widget>[];
 
+    if (article.hasEstimatedDifficulty) {
+      tags.add(
+        _buildBadge(
+          label: language.immersionEstimatedDifficultyLabel(
+            article.estimatedDifficulty!,
+          ),
+          toneLevel: article.estimatedDifficulty!,
+        ),
+      );
+    }
+
+    tags.add(
+      _buildBadge(
+        label: language.immersionOfficialLevelLabel(article.officialLevel),
+        toneLevel: article.officialLevel,
+      ),
+    );
+
+    return Wrap(spacing: 6, runSpacing: 6, children: tags);
+  }
+
+  Widget _buildBadge({required String label, required String toneLevel}) {
+    final color = DifficultyEstimator.colorForLevel(toneLevel);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
@@ -572,12 +524,50 @@ class _DifficultyBadge extends StatelessWidget {
         border: Border.all(color: color.withValues(alpha: 0.4)),
       ),
       child: Text(
-        level,
+        label,
         style: TextStyle(
           color: color,
           fontSize: 12,
           fontWeight: FontWeight.w700,
         ),
+      ),
+    );
+  }
+}
+
+class _FallbackNotice extends StatelessWidget {
+  const _FallbackNotice({required this.language});
+
+  final AppLanguage language;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xFFFFFBEB),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: const Color(0xFFFDE68A)),
+      ),
+      child: Row(
+        children: [
+          const Icon(
+            Icons.info_outline_rounded,
+            color: Color(0xFFB45309),
+            size: 18,
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              language.immersionFallbackToLocalLabel,
+              style: const TextStyle(
+                color: Color(0xFF92400E),
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

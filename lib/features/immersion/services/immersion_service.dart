@@ -5,11 +5,13 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/immersion_article.dart';
+import 'difficulty_estimator.dart';
 
 enum ImmersionSource { local, nhkEasy }
 
 class ImmersionService {
-  static const _assetPath = 'assets/data/content/immersion/immersion_samples.json';
+  static const _assetPath =
+      'assets/data/content/immersion/immersion_samples.json';
   static const nhkSourceLabel = 'NHK Easy';
   static const nhkLevelLabel = 'Easy';
   static const watanocSourceLabel = 'Watanoc';
@@ -61,7 +63,8 @@ class ImmersionService {
       final endLesson = entry.value[1];
       for (int i = startLesson; i <= endLesson; i++) {
         final paddedId = i.toString().padLeft(2, '0');
-        final path = 'assets/data/content/immersion/$level/lesson_$paddedId.json';
+        final path =
+            'assets/data/content/immersion/$level/lesson_$paddedId.json';
         try {
           final raw = await rootBundle.loadString(path);
           final json = jsonDecode(raw);
@@ -123,7 +126,7 @@ class ImmersionService {
           id: id,
           title: title,
           titleFurigana: null,
-          level: nhkLevelLabel,
+          officialLevel: nhkLevelLabel,
           source: nhkSourceLabel,
           publishedAt: publishedAt,
           paragraphs: const [],
@@ -204,7 +207,8 @@ class ImmersionService {
           id: 'watanoc_$id',
           title: title,
           titleFurigana: null,
-          level: watanocLevelLabel,
+          officialLevel: watanocLevelLabel,
+          estimatedDifficulty: DifficultyEstimator.estimate(paragraphs),
           source: watanocSourceLabel,
           publishedAt: publishedAt,
           paragraphs: paragraphs,
@@ -257,7 +261,8 @@ class ImmersionService {
           id: 'matcha_$id',
           title: title,
           titleFurigana: null,
-          level: matchaLevelLabel,
+          officialLevel: matchaLevelLabel,
+          estimatedDifficulty: DifficultyEstimator.estimate(paragraphs),
           source: matchaSourceLabel,
           publishedAt: publishedAt,
           paragraphs: paragraphs,
@@ -310,7 +315,8 @@ class ImmersionService {
           id: 'tadoku_$id',
           title: title,
           titleFurigana: null,
-          level: level ?? tadokuLevelLabel,
+          officialLevel: level ?? tadokuLevelLabel,
+          estimatedDifficulty: DifficultyEstimator.estimate(paragraphs),
           source: tadokuSourceLabel,
           publishedAt: publishedAt,
           paragraphs: paragraphs,
@@ -510,7 +516,10 @@ class ImmersionService {
       id: id,
       title: title,
       titleFurigana: titleFurigana,
-      level: nhkLevelLabel,
+      officialLevel: nhkLevelLabel,
+      estimatedDifficulty: paragraphs.isEmpty
+          ? null
+          : DifficultyEstimator.estimate(paragraphs),
       source: nhkSourceLabel,
       publishedAt: publishedAt,
       paragraphs: paragraphs,

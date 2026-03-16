@@ -25,7 +25,10 @@ final searchIndexProvider = FutureProvider<List<_SearchEntry>>((ref) async {
       _SearchEntry(
         kind: isKanaOnly(item.term) ? _SearchKind.kana : _SearchKind.vocab,
         title: item.term,
-        subtitle: _buildVocabSubtitle(item.reading, item.displayMeaning(language)),
+        subtitle: _buildVocabSubtitle(
+          item.reading,
+          item.displayMeaning(language),
+        ),
         keywords: [
           item.term,
           item.reading ?? '',
@@ -75,7 +78,9 @@ String _buildKanjiSubtitle(KanjiItem item, AppLanguage language) {
   final meaning = switch (language) {
     AppLanguage.vi => item.meaning,
     AppLanguage.en || AppLanguage.ja =>
-      (item.meaningEn?.trim().isNotEmpty ?? false) ? item.meaningEn!.trim() : item.meaning,
+      (item.meaningEn?.trim().isNotEmpty ?? false)
+          ? item.meaningEn!.trim()
+          : item.meaning,
   };
   return [
     if (readings.isNotEmpty) readings,
@@ -99,7 +104,6 @@ String _normalizeSearchText(String value) {
   }
   return buffer.toString();
 }
-
 
 class SearchScreen extends ConsumerStatefulWidget {
   const SearchScreen({super.key});
@@ -217,16 +221,18 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               const SizedBox(height: 16),
               indexAsync.when(
                 data: (entries) {
-                  final results = entries.where((entry) {
-                    if (_filter != _SearchFilter.all &&
-                        entry.kind.filter != _filter) {
-                      return false;
-                    }
-                    if (_debouncedQuery.isEmpty) {
-                      return true;
-                    }
-                    return entry.matches(_debouncedQuery);
-                  }).toList(growable: false);
+                  final results = entries
+                      .where((entry) {
+                        if (_filter != _SearchFilter.all &&
+                            entry.kind.filter != _filter) {
+                          return false;
+                        }
+                        if (_debouncedQuery.isEmpty) {
+                          return true;
+                        }
+                        return entry.matches(_debouncedQuery);
+                      })
+                      .toList(growable: false);
 
                   if (_debouncedQuery.isNotEmpty) {
                     return _buildSearchResults(
@@ -298,12 +304,15 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
         return;
       }
 
-      final allItems =
-          entries.where((entry) => entry.kind == kind).toList(growable: false);
+      final allItems = entries
+          .where((entry) => entry.kind == kind)
+          .toList(growable: false);
       if (allItems.isEmpty) return;
 
       final expanded = _expandedSections.contains(kind);
-      final visibleItems = expanded ? allItems : allItems.take(previewLimit).toList();
+      final visibleItems = expanded
+          ? allItems
+          : allItems.take(previewLimit).toList();
       final showToggle = allItems.length > previewLimit;
 
       sections.add(
@@ -555,10 +564,7 @@ class _SearchSection extends StatelessWidget {
                 ),
               ),
               if (actionLabel != null && onActionTap != null)
-                TextButton(
-                  onPressed: onActionTap,
-                  child: Text(actionLabel!),
-                ),
+                TextButton(onPressed: onActionTap, child: Text(actionLabel!)),
             ],
           ),
           const SizedBox(height: 8),

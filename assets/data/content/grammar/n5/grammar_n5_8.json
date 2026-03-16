@@ -1,12 +1,12 @@
 [
   {
     "lessonId": 8,
-    "title": "Tính từ (Adjectives)",
+    "title": "Tính từ i / na",
     "titleEn": "Adjectives (i/na)",
-    "structure": "Aい (Tính từ đuôi i) / Aた (Tính từ đuôi na)",
+    "structure": "Aい (tính từ i) / Aな (tính từ na)",
     "structureEn": "A-i (i-adjectives) / A-na (na-adjectives)",
-    "explanation": "Tính từ bổ nghĩa cho danh từ hoặc làm vị ngữ. * **Tính từ đuôi i**: Kết thúc bằng `i` (đẹp, ngon...).\n* **Tính từ đuôi na**: Kết thúc bằng `na` (nhưng khi đứng một mình thường bỏ `na`).",
-    "explanationEn": "Adjectives modify nouns or act as predicates. * **i-adjectives**: End with `i`.\n* **na-adjectives**: End with `na` (often dropped when standing alone).",
+    "explanation": "Tính từ dùng để miêu tả sự vật, trạng thái hoặc làm vị ngữ. * **Tính từ i**: Thường kết thúc bằng `い` khi ở dạng từ điển.\n* **Tính từ na**: Khi bổ nghĩa cho danh từ thì thêm `な`, còn khi đứng cuối câu thì không dùng `な`.",
+    "explanationEn": "Adjectives describe things or states and can also be used as predicates. * **i-adjectives**: Usually end in `い` in dictionary form.\n* **na-adjectives**: Add `な` before a noun, but do not use `な` at the end of a sentence.",
     "level": "N5"
   },
   {
@@ -15,8 +15,8 @@
     "titleEn": "Negative Adjectives",
     "structure": "Aい -> Aくないです / Aな -> Aじゃありません",
     "structureEn": "A-i -> A-kunai desu / A-na -> A-ja arimasen",
-    "explanation": "Dạng phủ định của tính từ. * `Aい`: Bỏ `i` thêm `くないです`.\n* `Aな`: Thêm `じゃありません` (như danh từ).",
-    "explanationEn": "Negative form of adjectives. * `Aい`: Drop `i`, add `くないです`.\n* `Aな`: Add `じゃありません` (like nouns).",
+    "explanation": "Dùng để nói một tính chất nào đó không đúng. * `Aい`: Bỏ `い`, rồi thêm `くないです`.\n* `Aな`: Dùng `じゃありません` giống danh từ.",
+    "explanationEn": "Used to say that an adjective does not apply. * `Aい`: Drop `い` and add `くないです`.\n* `Aな`: Use `じゃありません`, just like with nouns.",
     "level": "N5"
   },
   {
@@ -25,8 +25,8 @@
     "titleEn": "Modifying Nouns with Adjectives",
     "structure": "Aな + N / Aい + N",
     "structureEn": "A-na + N / A-i + N",
-    "explanation": "Tính từ bổ nghĩa cho danh từ. * `Aい`: Giữ nguyên `i` + N.\n* `Aな`: Thêm `な` + N.",
-    "explanationEn": "Adjectives modifying nouns. * `Aい`: Keep `i` + N.\n* `Aな`: Add `な` + N.",
+    "explanation": "Mẫu này dùng khi tính từ đứng trước danh từ. * `Aい`: Giữ nguyên rồi đặt trước danh từ.\n* `Aな`: Thêm `な` trước danh từ.",
+    "explanationEn": "Use this pattern when an adjective comes before a noun. * `Aい`: Keep it as is before the noun.\n* `Aな`: Add `な` before the noun.",
     "level": "N5"
   },
   {
@@ -35,8 +35,8 @@
     "titleEn": "..., but ... (Particle ga)",
     "structure": "S1 が、 S2",
     "structureEn": "S1 ga, S2",
-    "explanation": "Trợ từ `が` nối hai vế có ý trái ngược nhau (tuy... nhưng...).",
-    "explanationEn": "Particle `が` connects two contrasting sentences (..., but ...).",
+    "explanation": "`が` nối hai vế khi vế sau mang ý đối lập hoặc trái kỳ vọng so với vế trước.",
+    "explanationEn": "`が` connects two clauses when the second contrasts with or goes against the expectation of the first.",
     "level": "N5"
   },
   {
@@ -45,8 +45,8 @@
     "titleEn": "Very / Not very (Degree Adverbs)",
     "structure": "とても A (khẳng định) / あまり A (phủ định)",
     "structureEn": "totemo A (affirmative) / amari A (negative)",
-    "explanation": "Phó từ chỉ mức độ. * `とても`: Rất (đi với khẳng định).\n* `あまり`: Không ... lắm (đi với phủ định).",
-    "explanationEn": "Adverbs of degree. * `とても`: Very (with affirmative).\n* `あまり`: Not very (with negative).",
+    "explanation": "Đây là hai phó từ chỉ mức độ thường gặp. * `とても`: rất, dùng trong câu khẳng định.\n* `あまり`: không... lắm, thường đi với câu phủ định.",
+    "explanationEn": "These are common adverbs of degree. * `とても`: very, used with affirmative statements.\n* `あまり`: not very, usually used with negative statements.",
     "level": "N5"
   },
   {
@@ -55,8 +55,8 @@
     "titleEn": "How is...? (Dou desu ka)",
     "structure": "N は どうですか",
     "structureEn": "N wa dou desu ka",
-    "explanation": "Câu hỏi về tính chất, trạng thái hoặc ý kiến về N.",
-    "explanationEn": "Ask about the state, quality, or opinion of N (How is...?).",
+    "explanation": "Mẫu này dùng để hỏi cảm nhận, tình trạng hoặc đặc điểm của một sự vật, nơi chốn hay người nào đó.",
+    "explanationEn": "Use this pattern to ask about the impression, condition, or quality of a thing, place, or person.",
     "level": "N5"
   },
   {
@@ -65,8 +65,8 @@
     "titleEn": "What kind of N?",
     "structure": "どんな N ですか",
     "structureEn": "donna N desu ka",
-    "explanation": "Hỏi về tính chất cụ thể của danh từ (N như thế nào/loại N nào).",
-    "explanationEn": "Ask for description or kind of N (What kind of N?).",
+    "explanation": "Dùng để hỏi cụ thể một người hay vật thuộc kiểu nào, có đặc điểm ra sao.",
+    "explanationEn": "Use this to ask what kind of person or thing something is, or what characteristics it has.",
     "level": "N5"
   }
 ]

@@ -5,6 +5,7 @@ import 'package:jpstudy/core/language_provider.dart';
 
 import '../../../data/db/app_database.dart';
 import '../../../data/repositories/grammar_repository.dart';
+import '../../common/widgets/compact_ui.dart';
 import '../widgets/grammar_example_widget.dart';
 
 class GrammarDetailScreen extends ConsumerWidget {
@@ -36,8 +37,31 @@ class GrammarDetailScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildHeader(context, point, meaning),
-                const SizedBox(height: 24),
+                AppFeatureCard(
+                  icon: Icons.auto_stories_rounded,
+                  title: point.grammarPoint,
+                  subtitle: meaning,
+                  status: AppStatusChip(
+                    label: point.jlptLevel,
+                    tone: AppStatusTone.primary,
+                  ),
+                  primaryLabel: point.isLearned
+                      ? null
+                      : _markLearnedLabel(language),
+                  onPrimaryTap: point.isLearned
+                      ? null
+                      : () async {
+                          await ref
+                              .read(grammarRepositoryProvider)
+                              .markAsLearned(grammarId);
+                          ref.invalidate(grammarDetailProvider(grammarId));
+                          if (!context.mounted) return;
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(_markedToast(language))),
+                          );
+                        },
+                ),
+                const SizedBox(height: 20),
                 _buildSectionTitle(context, language.grammarConnectionLabel),
                 const SizedBox(height: 8),
                 Text(
@@ -63,73 +87,7 @@ class GrammarDetailScreen extends ConsumerWidget {
         error: (err, stack) =>
             Center(child: Text('${language.loadErrorLabel}: $err')),
       ),
-      floatingActionButton: grammarAsync.when(
-        data: (data) {
-          if (data == null || data.point.isLearned) return null;
-          return FloatingActionButton.extended(
-            onPressed: () async {
-              await ref
-                  .read(grammarRepositoryProvider)
-                  .markAsLearned(grammarId);
-              ref.invalidate(grammarDetailProvider(grammarId));
-              if (!context.mounted) return;
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(SnackBar(content: Text(_markedToast(language))));
-            },
-            icon: const Icon(Icons.check),
-            label: Text(_markLearnedLabel(language)),
-          );
-        },
-        loading: () => null,
-        error: (_, _) => null,
-      ),
-    );
-  }
-
-  Widget _buildHeader(
-    BuildContext context,
-    GrammarPoint point,
-    String meaning,
-  ) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.secondaryContainer,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Text(
-                point.jlptLevel,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSecondaryContainer,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: Text(
-                point.grammarPoint,
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 8),
-        Text(
-          meaning,
-          style: Theme.of(
-            context,
-          ).textTheme.titleLarge?.copyWith(color: Colors.grey[700]),
-        ),
-      ],
+      floatingActionButton: null,
     );
   }
 

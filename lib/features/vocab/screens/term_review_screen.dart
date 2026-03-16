@@ -11,7 +11,7 @@ import '../../flashcards/widgets/enhanced_flashcard.dart';
 import '../../../data/models/mistake_context.dart';
 import '../../../core/services/fsrs_service.dart';
 import '../../mistakes/repositories/mistake_repository.dart';
-import '../../common/widgets/clay_button.dart';
+import '../../common/widgets/compact_ui.dart';
 
 class TermReviewScreen extends ConsumerStatefulWidget {
   const TermReviewScreen({super.key});
@@ -174,48 +174,43 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
   Widget _buildPreview(AppLanguage language, int termCount) {
     final estimatedMinutes = (termCount * 8 / 60).ceil();
     return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(32.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.style_outlined,
-              size: 80,
-              color: Theme.of(context).colorScheme.primary.withAlpha(180),
-            ),
-            const SizedBox(height: 24),
-            Text(
-              language.reviewReadyTitle,
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            const SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildPreviewChip(
-                  Icons.library_books_outlined,
-                  language.reviewTermsDueLabel(termCount),
-                  Theme.of(context).colorScheme.primary,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 420),
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AppFeatureCard(
+                icon: Icons.rate_review_rounded,
+                title: language.reviewAction,
+                subtitle: language.reviewReadyTitle,
+                primaryLabel: language.startReviewButton,
+                onPrimaryTap: () => setState(() => _sessionStarted = true),
+                status: AppStatusChip(
+                  label: language.reviewTermsDueLabel(termCount),
+                  tone: AppStatusTone.warning,
                 ),
-                const SizedBox(width: 12),
-                _buildPreviewChip(
-                  Icons.timer_outlined,
-                  language.reviewEstimateLabel(estimatedMinutes),
-                  Colors.orange[700]!,
-                ),
-              ],
-            ),
-            const SizedBox(height: 40),
-            SizedBox(
-              width: 220,
-              height: 52,
-              child: ClayButton(
-                label: language.startReviewButton,
-                onPressed: () => setState(() => _sessionStarted = true),
               ),
-            ),
-          ],
+              const SizedBox(height: 12),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _buildPreviewChip(
+                    Icons.library_books_outlined,
+                    language.reviewTermsDueLabel(termCount),
+                    Theme.of(context).colorScheme.primary,
+                  ),
+                  const SizedBox(width: 12),
+                  _buildPreviewChip(
+                    Icons.timer_outlined,
+                    language.reviewEstimateLabel(estimatedMinutes),
+                    Colors.orange[700]!,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -376,9 +371,10 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
     final label = days == 0
         ? _toastToday(language)
         : days == 1
-            ? _toastTomorrow(language)
-            : _toastInDays(language, days);
-    final color = level == ConfidenceLevel.again || level == ConfidenceLevel.hard
+        ? _toastTomorrow(language)
+        : _toastInDays(language, days);
+    final color =
+        level == ConfidenceLevel.again || level == ConfidenceLevel.hard
         ? Colors.orange
         : Colors.green;
     ScaffoldMessenger.of(context).showSnackBar(
@@ -395,26 +391,27 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
   String _toastToday(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Today',
     AppLanguage.vi => 'Hôm nay',
-    AppLanguage.ja => '??',
+    AppLanguage.ja => '今日',
   };
 
   String _toastTomorrow(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Tomorrow',
     AppLanguage.vi => 'Ngày mai',
-    AppLanguage.ja => '??',
+    AppLanguage.ja => '明日',
   };
 
   String _toastInDays(AppLanguage language, int days) => switch (language) {
     AppLanguage.en => 'In $days days',
     AppLanguage.vi => '$days ngày nữa',
-    AppLanguage.ja => '$days??',
+    AppLanguage.ja => '$days日後',
   };
 
-  String _nextReviewToast(AppLanguage language, String label) => switch (language) {
-    AppLanguage.en => 'Next review: $label',
-    AppLanguage.vi => 'Lần ôn tiếp theo: $label',
-    AppLanguage.ja => '????: $label',
-  };
+  String _nextReviewToast(AppLanguage language, String label) =>
+      switch (language) {
+        AppLanguage.en => 'Next review: $label',
+        AppLanguage.vi => 'Lần ôn tiếp theo: $label',
+        AppLanguage.ja => '次回の復習: $label',
+      };
 
   Future<void> _handleRating(
     ConfidenceLevel levelEnum,
@@ -434,7 +431,7 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
     if (levelEnum == ConfidenceLevel.again ||
         levelEnum == ConfidenceLevel.hard) {
       final prompt = term.reading.isNotEmpty
-          ? '${term.term} • ${term.reading}'
+          ? '${term.term} â€¢ ${term.reading}'
           : term.term;
       final correctAnswer = language == AppLanguage.en
           ? (term.definitionEn.isNotEmpty ? term.definitionEn : term.definition)
