@@ -222,11 +222,13 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
 
     if (!mounted) return true;
 
+    final language = ref.read(appLanguageProvider);
+
     await showDialog<void>(
       context: context,
       builder: (_) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: const Text('Reading Summary'),
+        title: Text(language.readingSummaryTitle),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -239,18 +241,18 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            _SummaryStat(label: 'Characters read', value: '$totalChars'),
+            _SummaryStat(label: language.readingCharactersLabel, value: '$totalChars'),
             _SummaryStat(
-              label: 'Time spent',
+              label: language.readingTimeSpentLabel,
               value: '${elapsed.inMinutes}m ${elapsed.inSeconds % 60}s',
             ),
-            _SummaryStat(label: 'Speed', value: '$speed chars/min'),
+            _SummaryStat(label: language.readingSpeedStatLabel, value: '$speed chars/min'),
           ],
         ),
         actions: [
           FilledButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Done'),
+            child: Text(language.doneLabel),
           ),
         ],
       ),

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
 import '../../../data/models/vocab_item.dart';
-import '../../flashcards/widgets/enhanced_flashcard.dart';
 import '../../../data/repositories/lesson_repository.dart';
+import '../../flashcards/widgets/enhanced_flashcard.dart';
 import '../../mistakes/repositories/mistake_repository.dart';
 
 class VocabGhostReviewScreen extends ConsumerStatefulWidget {
@@ -57,6 +58,7 @@ class _VocabGhostReviewScreenState
   }
 
   void _showHint(BuildContext context) {
+    final language = ref.read(appLanguageProvider);
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
@@ -70,11 +72,14 @@ class _VocabGhostReviewScreenState
           children: [
             Row(
               children: [
-                const Icon(Icons.lightbulb_rounded,
-                    color: Colors.amber, size: 24),
+                const Icon(
+                  Icons.lightbulb_rounded,
+                  color: Colors.amber,
+                  size: 24,
+                ),
                 const SizedBox(width: 8),
                 Text(
-                  'Mnemonic Hint',
+                  language.mnemonicHintLabel,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
@@ -105,8 +110,8 @@ class _VocabGhostReviewScreenState
         gotIt: _gotItCount,
         stillLearning: _stillLearningCount,
         onDone: () {
-          Navigator.of(context).pop(); // close dialog
-          Navigator.of(context).pop(); // back to home
+          Navigator.of(context).pop();
+          Navigator.of(context).pop();
         },
       ),
     );
@@ -120,15 +125,13 @@ class _VocabGhostReviewScreenState
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('👻 Vocab Review'),
+        title: Text(language.reviewVocabLabel),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(6),
           child: LinearProgressIndicator(
             value: progress,
             backgroundColor: Colors.grey[200],
-            valueColor: AlwaysStoppedAnimation<Color>(
-              theme.colorScheme.error,
-            ),
+            valueColor: AlwaysStoppedAnimation<Color>(theme.colorScheme.error),
           ),
         ),
       ),
@@ -166,7 +169,7 @@ class _VocabGhostReviewScreenState
                       child: OutlinedButton.icon(
                         onPressed: null,
                         icon: const Icon(Icons.touch_app_rounded),
-                        label: const Text('Tap card to reveal'),
+                        label: Text(language.tapCardToRevealLabel),
                       ),
                     ),
                   ),
@@ -181,9 +184,9 @@ class _VocabGhostReviewScreenState
                           Icons.lightbulb_outline_rounded,
                           color: Colors.amber,
                         ),
-                        label: const Text(
-                          'Hint',
-                          style: TextStyle(color: Colors.amber),
+                        label: Text(
+                          language.mnemonicHintLabel,
+                          style: const TextStyle(color: Colors.amber),
                         ),
                         style: OutlinedButton.styleFrom(
                           side: const BorderSide(color: Colors.amber),
@@ -211,9 +214,9 @@ class _VocabGhostReviewScreenState
                           Icons.refresh_rounded,
                           color: Colors.orange,
                         ),
-                        label: const Text(
-                          'Still learning',
-                          style: TextStyle(color: Colors.orange),
+                        label: Text(
+                          language.stillLearningLabel,
+                          style: const TextStyle(color: Colors.orange),
                         ),
                         style: OutlinedButton.styleFrom(
                           side: const BorderSide(color: Colors.orange),
@@ -231,7 +234,7 @@ class _VocabGhostReviewScreenState
                       child: FilledButton.icon(
                         onPressed: _handleGotIt,
                         icon: const Icon(Icons.check_rounded),
-                        label: const Text('Got it!'),
+                        label: Text(language.gotItLabel),
                         style: FilledButton.styleFrom(
                           backgroundColor: Colors.green,
                           shape: RoundedRectangleBorder(
@@ -250,7 +253,7 @@ class _VocabGhostReviewScreenState
   }
 }
 
-class _SummaryDialog extends StatelessWidget {
+class _SummaryDialog extends ConsumerWidget {
   const _SummaryDialog({
     required this.total,
     required this.gotIt,
@@ -264,11 +267,12 @@ class _SummaryDialog extends StatelessWidget {
   final VoidCallback onDone;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final language = ref.watch(appLanguageProvider);
     final accuracyPct = total > 0 ? (gotIt / total * 100).round() : 0;
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      title: const Text('Review complete! 👻'),
+      title: Text(language.reviewCompleteLabel),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -281,11 +285,11 @@ class _SummaryDialog extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          Text('$gotIt / $total vocab cleared from mistake bank'),
+          Text(language.vocabClearedLabel(gotIt, total)),
           if (stillLearning > 0) ...[
             const SizedBox(height: 4),
             Text(
-              '$stillLearning still in your ghost queue',
+              language.stillInReviewQueueLabel(stillLearning),
               style: const TextStyle(color: Colors.orange),
             ),
           ],
@@ -294,7 +298,7 @@ class _SummaryDialog extends StatelessWidget {
       actions: [
         FilledButton(
           onPressed: onDone,
-          child: const Text('Done'),
+          child: Text(language.doneLabel),
         ),
       ],
     );

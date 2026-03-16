@@ -24,7 +24,7 @@ class GrammarScreen extends ConsumerWidget {
     ); // New provider
 
     return Scaffold(
-      appBar: AppBar(title: Text('${language.grammarTitle}$levelSuffix')),
+      appBar: AppBar(title: Text('${_title(language)}$levelSuffix')), 
       body: pointsAsync.when(
         data: (points) {
           if (points.isEmpty) {
@@ -37,9 +37,9 @@ class GrammarScreen extends ConsumerWidget {
                   Text(
                     _tr(
                       language,
-                      en: 'No grammar points for $levelStr yet.',
-                      vi: 'Chưa có điểm ngữ pháp cho $levelStr.',
-                      ja: '$levelStr の文法ポイントはまだありません。',
+                      en: 'No grammar for $levelStr yet.',
+                      vi: 'Ch\u01b0a c\u00f3 ng\u1eef ph\u00e1p cho $levelStr.',
+                      ja: '$levelStr \u306e\u6587\u6cd5\u306f\u307e\u3060\u3042\u308a\u307e\u305b\u3093\u3002',
                     ),
                   ),
                 ],
@@ -211,6 +211,17 @@ class GrammarScreen extends ConsumerWidget {
             error: (_, _) => null,
           ),
     );
+  }
+
+  String _title(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Grammar';
+      case AppLanguage.vi:
+        return 'Ng\u1eef ph\u00e1p';
+      case AppLanguage.ja:
+        return '\u6587\u6cd5';
+    }
   }
 
   String _tr(

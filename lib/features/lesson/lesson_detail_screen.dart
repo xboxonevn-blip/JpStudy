@@ -481,12 +481,13 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
       quality: quality,
     );
     if (mounted && fsrsResult != null) {
+      final language = ref.read(appLanguageProvider);
       final days = fsrsResult.nextReviewAt.difference(DateTime.now()).inDays;
       final label =
-          days == 0 ? 'Today' : days == 1 ? 'Tomorrow' : 'In $days days';
+          days == 0 ? language.todayLabel : days == 1 ? language.tomorrowLabel : language.inDaysLabel(days);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Next review: $label'),
+          content: Text(language.nextReviewToastLabel(label)),
           backgroundColor: quality <= 2 ? Colors.orange : Colors.green,
           duration: const Duration(seconds: 2),
           behavior: SnackBarBehavior.floating,

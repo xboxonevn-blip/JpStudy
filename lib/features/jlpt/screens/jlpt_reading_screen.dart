@@ -119,13 +119,13 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
   String _areaLabel(AppLanguage language, JlptSkillArea area) {
     switch (area) {
       case JlptSkillArea.vocabulary:
-        return _tr(language, 'Vocabulary', 'Tu vung', '??');
+        return _tr(language, 'Vocabulary', 'Từ vựng', '??');
       case JlptSkillArea.grammar:
-        return _tr(language, 'Grammar', 'Ngu phap', '??');
+        return _tr(language, 'Grammar', 'Ngữ pháp', '??');
       case JlptSkillArea.kanji:
         return _tr(language, 'Kanji', 'Kanji', '??');
       case JlptSkillArea.reading:
-        return _tr(language, 'Reading', 'Doc hieu', '??');
+        return _tr(language, 'Reading', 'Đọc hiểu', '??');
     }
   }
 
@@ -153,7 +153,7 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
                   _tr(
                     language,
                     'Choose a passage and finish within the target time.',
-                    'Chon doan van va hoan thanh trong thoi gian muc tieu.',
+                    'Chọn đoạn văn và hoàn thành trong thời gian mục tiêu.',
                     '???????????????????',
                   ),
                   style: const TextStyle(
@@ -327,7 +327,7 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Text(
-                                '${isCorrect ? _tr(language, 'Correct', 'Dung', '??') : _tr(language, 'Incorrect', 'Sai', '???')}\n${question.explanation}',
+                                '${isCorrect ? _tr(language, 'Correct', 'Đúng', '??') : _tr(language, 'Incorrect', 'Sai', '???')}\n${question.explanation}',
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w700,
                                   height: 1.4,
@@ -347,7 +347,7 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
                         ? _submit
                         : null,
                     icon: const Icon(Icons.task_alt_rounded),
-                    label: Text(_tr(language, 'Submit', 'Nop bai', '??')),
+                    label: Text(_tr(language, 'Submit', 'Nộp bài', '??')),
                   )
                 else ...[
                   Builder(
@@ -428,7 +428,7 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
                           onPressed: () => _startPassage(passage),
                           icon: const Icon(Icons.restart_alt_rounded),
                           label: Text(
-                            _tr(language, 'Retry', 'Lam lai', '????'),
+                            _tr(language, 'Retry', 'Làm lại', '????'),
                           ),
                         ),
                       ),

@@ -365,21 +365,25 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
     );
   }
 
-  void _showNextReviewToast(DateTime? nextReviewAt, ConfidenceLevel level) {
+  void _showNextReviewToast(
+    DateTime? nextReviewAt,
+    ConfidenceLevel level,
+    AppLanguage language,
+  ) {
     if (nextReviewAt == null || !mounted) return;
     final now = DateTime.now();
     final days = nextReviewAt.difference(now).inDays;
     final label = days == 0
-        ? 'Today'
+        ? _toastToday(language)
         : days == 1
-            ? 'Tomorrow'
-            : 'In $days days';
+            ? _toastTomorrow(language)
+            : _toastInDays(language, days);
     final color = level == ConfidenceLevel.again || level == ConfidenceLevel.hard
         ? Colors.orange
         : Colors.green;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Next review: $label'),
+        content: Text(_nextReviewToast(language, label)),
         backgroundColor: color,
         duration: const Duration(seconds: 2),
         behavior: SnackBarBehavior.floating,
@@ -387,6 +391,30 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
       ),
     );
   }
+
+  String _toastToday(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Today',
+    AppLanguage.vi => 'Hôm nay',
+    AppLanguage.ja => '??',
+  };
+
+  String _toastTomorrow(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Tomorrow',
+    AppLanguage.vi => 'Ngày mai',
+    AppLanguage.ja => '??',
+  };
+
+  String _toastInDays(AppLanguage language, int days) => switch (language) {
+    AppLanguage.en => 'In $days days',
+    AppLanguage.vi => '$days ngày nữa',
+    AppLanguage.ja => '$days??',
+  };
+
+  String _nextReviewToast(AppLanguage language, String label) => switch (language) {
+    AppLanguage.en => 'Next review: $label',
+    AppLanguage.vi => 'Lần ôn tiếp theo: $label',
+    AppLanguage.ja => '????: $label',
+  };
 
   Future<void> _handleRating(
     ConfidenceLevel levelEnum,
@@ -401,7 +429,7 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
       termId: term.id,
       quality: levelEnum.value,
     );
-    _showNextReviewToast(fsrsResult?.nextReviewAt, levelEnum);
+    _showNextReviewToast(fsrsResult?.nextReviewAt, levelEnum, language);
 
     if (levelEnum == ConfidenceLevel.again ||
         levelEnum == ConfidenceLevel.hard) {

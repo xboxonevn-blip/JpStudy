@@ -84,3 +84,8 @@ app.*.map.json
 .claude/worktrees/
 .playwright-mcp/
 tooling/_tmpcache/
+
+# Local localization tooling
+.venv_localize/
+tooling/reports/suspicious_locale_literals*.txt
+docs/reports/string-literal-audit-latest.md

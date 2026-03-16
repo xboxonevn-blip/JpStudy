@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/app_language.dart';
+import '../../../core/language_provider.dart';
 import '../models/flashcard_session.dart';
 
-/// Widget displaying real-time round statistics during a flashcard session
-class RoundStatisticsWidget extends StatelessWidget {
+class RoundStatisticsWidget extends ConsumerWidget {
   final FlashcardSession session;
   final int currentIndex;
   final int totalCards;
@@ -16,7 +18,8 @@ class RoundStatisticsWidget extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final language = ref.watch(appLanguageProvider);
     final remainingCards = totalCards - (currentIndex + 1);
 
     return Container(
@@ -36,27 +39,24 @@ class RoundStatisticsWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Round Progress',
-                style: Theme.of(
-                  context,
-                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                language.roundProgressTitle,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(fontWeight: FontWeight.bold),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 4,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
-                  '$remainingCards remaining',
+                  language.remainingCardsLabel(remainingCards),
                   style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.w600,
@@ -67,14 +67,12 @@ class RoundStatisticsWidget extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-
-          // Progress buckets
           Row(
             children: [
               Expanded(
                 child: _BucketIndicator(
                   icon: Icons.check_circle_rounded,
-                  label: 'Known',
+                  label: language.knownLabel,
                   count: session.knownTermIds.length,
                   color: Colors.green,
                   total: totalCards,
@@ -84,7 +82,7 @@ class RoundStatisticsWidget extends StatelessWidget {
               Expanded(
                 child: _BucketIndicator(
                   icon: Icons.replay_rounded,
-                  label: 'Practice',
+                  label: language.practiceLabel,
                   count: session.needPracticeTermIds.length,
                   color: Colors.orange,
                   total: totalCards,
@@ -94,7 +92,7 @@ class RoundStatisticsWidget extends StatelessWidget {
               Expanded(
                 child: _BucketIndicator(
                   icon: Icons.star_rounded,
-                  label: 'Starred',
+                  label: language.starredLabel,
                   count: session.starredTermIds.length,
                   color: Colors.amber,
                   total: totalCards,
@@ -103,9 +101,8 @@ class RoundStatisticsWidget extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-
-          // Accuracy bar
           _AccuracyBar(
+            label: language.accuracyLabel,
             knownCount: session.knownTermIds.length,
             practiceCount: session.needPracticeTermIds.length,
             total: session.totalSeen,
@@ -155,8 +152,17 @@ class _BucketIndicator extends StatelessWidget {
             ),
           ),
           Text(
+            label,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 2),
+          Text(
             '$percentage%',
-            style: TextStyle(fontSize: 11, color: color.withValues(alpha: 0.8)),
+            style: TextStyle(
+              fontSize: 10,
+              color: color.withValues(alpha: 0.8),
+            ),
           ),
         ],
       ),
@@ -165,11 +171,13 @@ class _BucketIndicator extends StatelessWidget {
 }
 
 class _AccuracyBar extends StatelessWidget {
+  final String label;
   final int knownCount;
   final int practiceCount;
   final int total;
 
   const _AccuracyBar({
+    required this.label,
     required this.knownCount,
     required this.practiceCount,
     required this.total,
@@ -177,10 +185,6 @@ class _AccuracyBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (total == 0) return const SizedBox.shrink();
-
-    final knownRatio = knownCount / total;
-    final practiceRatio = practiceCount / total;
     final accuracy = total > 0 ? (knownCount / total * 100).toInt() : 0;
 
     return Column(
@@ -190,46 +194,38 @@ class _AccuracyBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Accuracy',
-              style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+              label,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(fontWeight: FontWeight.w600),
             ),
             Text(
               '$accuracy%',
               style: TextStyle(
-                fontSize: 12,
+                color: _getAccuracyColor(accuracy),
                 fontWeight: FontWeight.bold,
-                color: accuracy >= 70 ? Colors.green : Colors.orange,
               ),
             ),
           ],
         ),
         const SizedBox(height: 8),
         ClipRRect(
-          borderRadius: BorderRadius.circular(4),
-          child: SizedBox(
-            height: 8,
-            child: Row(
-              children: [
-                Expanded(
-                  flex: (knownRatio * 100).toInt(),
-                  child: Container(color: Colors.green),
-                ),
-                Expanded(
-                  flex: (practiceRatio * 100).toInt(),
-                  child: Container(color: Colors.orange),
-                ),
-                Expanded(
-                  flex:
-                      100 -
-                      (knownRatio * 100).toInt() -
-                      (practiceRatio * 100).toInt(),
-                  child: Container(color: Colors.grey[300]),
-                ),
-              ],
-            ),
+          borderRadius: BorderRadius.circular(8),
+          child: LinearProgressIndicator(
+            value: total > 0 ? knownCount / total : 0,
+            minHeight: 8,
+            backgroundColor: Colors.grey.withValues(alpha: 0.2),
+            valueColor: AlwaysStoppedAnimation<Color>(_getAccuracyColor(accuracy)),
           ),
         ),
       ],
     );
+  }
+
+  Color _getAccuracyColor(int accuracy) {
+    if (accuracy >= 80) return Colors.green;
+    if (accuracy >= 60) return Colors.orange;
+    return Colors.red;
   }
 }

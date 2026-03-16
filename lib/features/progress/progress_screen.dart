@@ -143,6 +143,7 @@ class _SrsRetentionCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final language = ref.watch(appLanguageProvider);
     final breakdownAsync = ref.watch(srsRetentionProvider);
 
     return Container(
@@ -163,13 +164,13 @@ class _SrsRetentionCard extends ConsumerWidget {
         data: (bd) => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Vocabulary SRS',
+            Text(
+              language.vocabularySrsTitle,
               style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
             ),
             const SizedBox(height: 6),
             Text(
-              '${bd.total} items reviewed via SRS',
+              language.itemsReviewedViaSrsLabel(bd.total),
               style: const TextStyle(fontSize: 12, color: Color(0xFF6B7390)),
             ),
             const SizedBox(height: 10),
@@ -204,9 +205,9 @@ class _SrsRetentionCard extends ConsumerWidget {
             Wrap(
               spacing: 12,
               children: [
-                _StageLabel(label: 'Learning', count: bd.learning, color: const Color(0xFFEF4444)),
-                _StageLabel(label: 'Young', count: bd.young, color: const Color(0xFFEAB308)),
-                _StageLabel(label: 'Mature', count: bd.mature, color: const Color(0xFF22C55E)),
+                _StageLabel(label: language.progressLearningStageLabel, count: bd.learning, color: const Color(0xFFEF4444)),
+                _StageLabel(label: language.progressYoungStageLabel, count: bd.young, color: const Color(0xFFEAB308)),
+                _StageLabel(label: language.progressMatureStageLabel, count: bd.mature, color: const Color(0xFF22C55E)),
               ],
             ),
           ],

@@ -1,72 +1,72 @@
 [
-    {
-        "lessonId": 8,
-        "title": "Tính từ (Adjectives)",
-        "titleEn": "Adjectives (i/na)",
-        "structure": "Aい (Tính từ đuôi i) / Aた (Tính từ đuôi na)",
-        "structureEn": "A-i (i-adjectives) / A-na (na-adjectives)",
-        "explanation": "Tính từ bổ nghĩa cho danh từ hoặc làm vị ngữ.\n\n*   **Tính từ đuôi i**: Kết thúc bằng `i` (đẹp, ngon...).\n*   **Tính từ đuôi na**: Kết thúc bằng `na` (nhưng khi đứng một mình thường bỏ `na`).",
-        "explanationEn": "Adjectives modify nouns or act as predicates.\n\n*   **i-adjectives**: End with `i`.\n*   **na-adjectives**: End with `na` (often dropped when standing alone).",
-        "level": "N5"
-    },
-    {
-        "lessonId": 8,
-        "title": "Aくない / Aじゃない (Phủ định tính từ)",
-        "titleEn": "Negative Adjectives",
-        "structure": "Aい -> Aくないです / Aな -> Aじゃありません",
-        "structureEn": "A-i -> A-kunai desu / A-na -> A-ja arimasen",
-        "explanation": "Dạng phủ định của tính từ.\n\n*   `Aい`: Bỏ `i` thêm `くないです`.\n*   `Aな`: Thêm `じゃありません` (như danh từ).",
-        "explanationEn": "Negative form of adjectives.\n\n*   `Aい`: Drop `i`, add `くないです`.\n*   `Aな`: Add `じゃありません` (like nouns).",
-        "level": "N5"
-    },
-    {
-        "lessonId": 8,
-        "title": "Aな N / Aい N",
-        "titleEn": "Modifying Nouns with Adjectives",
-        "structure": "Aな + N / Aい + N",
-        "structureEn": "A-na + N / A-i + N",
-        "explanation": "Tính từ bổ nghĩa cho danh từ.\n\n*   `Aい`: Giữ nguyên `i` + N.\n*   `Aな`: Thêm `な` + N.",
-        "explanationEn": "Adjectives modifying nouns.\n\n*   `Aい`: Keep `i` + N.\n*   `Aな`: Add `な` + N.",
-        "level": "N5"
-    },
-    {
-        "lessonId": 8,
-        "title": "～が、～ (Nhưng)",
-        "titleEn": "..., but ... (Particle ga)",
-        "structure": "S1 が、 S2",
-        "structureEn": "S1 ga, S2",
-        "explanation": "Trợ từ `が` nối hai vế câu có ý nghĩa trái ngược nhau (Tuy ... nhưng ...).",
-        "explanationEn": "Particle `が` connects two contrasting sentences (..., but ...).",
-        "level": "N5"
-    },
-    {
-        "lessonId": 8,
-        "title": "とても / あまり (Mức độ)",
-        "titleEn": "Very / Not very (Degree Adverbs)",
-        "structure": "とても A (khẳng định) / あまり A (phủ định)",
-        "structureEn": "totemo A (affirmative) / amari A (negative)",
-        "explanation": "Phó từ chỉ mức độ.\n\n*   `とても`: Rất (đi với khẳng định).\n*   `あまり`: Không ... lắm (đi với phủ định).",
-        "explanationEn": "Adverbs of degree.\n\n*   `とても`: Very (with affirmative).\n*   `あまり`: Not very (with negative).",
-        "level": "N5"
-    },
-    {
-        "lessonId": 8,
-        "title": "どうですか (Như thế nào)",
-        "titleEn": "How is...? (Dou desu ka)",
-        "structure": "N は どうですか",
-        "structureEn": "N wa dou desu ka",
-        "explanation": "Câu hỏi về tính chất, trạng thái hoặc ý kiến về N.",
-        "explanationEn": "Ask about the state, quality, or opinion of N (How is...?).",
-        "level": "N5"
-    },
-    {
-        "lessonId": 8,
-        "title": "どんな N",
-        "titleEn": "What kind of N?",
-        "structure": "どんな N ですか",
-        "structureEn": "donna N desu ka",
-        "explanation": "Hỏi về tính chất cụ thể của danh từ (N như thế nào/loại N nào).",
-        "explanationEn": "Ask for description or kind of N (What kind of N?).",
-        "level": "N5"
-    }
+  {
+    "lessonId": 8,
+    "title": "Tính từ (Adjectives)",
+    "titleEn": "Adjectives (i/na)",
+    "structure": "Aい (Tính từ đuôi i) / Aた (Tính từ đuôi na)",
+    "structureEn": "A-i (i-adjectives) / A-na (na-adjectives)",
+    "explanation": "Tính từ bổ nghĩa cho danh từ hoặc làm vị ngữ. * **Tính từ đuôi i**: Kết thúc bằng `i` (đẹp, ngon...).\n* **Tính từ đuôi na**: Kết thúc bằng `na` (nhưng khi đứng một mình thường bỏ `na`).",
+    "explanationEn": "Adjectives modify nouns or act as predicates. * **i-adjectives**: End with `i`.\n* **na-adjectives**: End with `na` (often dropped when standing alone).",
+    "level": "N5"
+  },
+  {
+    "lessonId": 8,
+    "title": "Aくない, Aじゃない (Phủ định tính từ)",
+    "titleEn": "Negative Adjectives",
+    "structure": "Aい -> Aくないです / Aな -> Aじゃありません",
+    "structureEn": "A-i -> A-kunai desu / A-na -> A-ja arimasen",
+    "explanation": "Dạng phủ định của tính từ. * `Aい`: Bỏ `i` thêm `くないです`.\n* `Aな`: Thêm `じゃありません` (như danh từ).",
+    "explanationEn": "Negative form of adjectives. * `Aい`: Drop `i`, add `くないです`.\n* `Aな`: Add `じゃありません` (like nouns).",
+    "level": "N5"
+  },
+  {
+    "lessonId": 8,
+    "title": "Aな N, Aい N",
+    "titleEn": "Modifying Nouns with Adjectives",
+    "structure": "Aな + N / Aい + N",
+    "structureEn": "A-na + N / A-i + N",
+    "explanation": "Tính từ bổ nghĩa cho danh từ. * `Aい`: Giữ nguyên `i` + N.\n* `Aな`: Thêm `な` + N.",
+    "explanationEn": "Adjectives modifying nouns. * `Aい`: Keep `i` + N.\n* `Aな`: Add `な` + N.",
+    "level": "N5"
+  },
+  {
+    "lessonId": 8,
+    "title": "～が、～ (Nhưng)",
+    "titleEn": "..., but ... (Particle ga)",
+    "structure": "S1 が、 S2",
+    "structureEn": "S1 ga, S2",
+    "explanation": "Trợ từ `が` nối hai vế có ý trái ngược nhau (tuy... nhưng...).",
+    "explanationEn": "Particle `が` connects two contrasting sentences (..., but ...).",
+    "level": "N5"
+  },
+  {
+    "lessonId": 8,
+    "title": "とても, あまり (Mức độ)",
+    "titleEn": "Very / Not very (Degree Adverbs)",
+    "structure": "とても A (khẳng định) / あまり A (phủ định)",
+    "structureEn": "totemo A (affirmative) / amari A (negative)",
+    "explanation": "Phó từ chỉ mức độ. * `とても`: Rất (đi với khẳng định).\n* `あまり`: Không ... lắm (đi với phủ định).",
+    "explanationEn": "Adverbs of degree. * `とても`: Very (with affirmative).\n* `あまり`: Not very (with negative).",
+    "level": "N5"
+  },
+  {
+    "lessonId": 8,
+    "title": "どうですか (Như thế nào)",
+    "titleEn": "How is...? (Dou desu ka)",
+    "structure": "N は どうですか",
+    "structureEn": "N wa dou desu ka",
+    "explanation": "Câu hỏi về tính chất, trạng thái hoặc ý kiến về N.",
+    "explanationEn": "Ask about the state, quality, or opinion of N (How is...?).",
+    "level": "N5"
+  },
+  {
+    "lessonId": 8,
+    "title": "どんな N",
+    "titleEn": "What kind of N?",
+    "structure": "どんな N ですか",
+    "structureEn": "donna N desu ka",
+    "explanation": "Hỏi về tính chất cụ thể của danh từ (N như thế nào/loại N nào).",
+    "explanationEn": "Ask for description or kind of N (What kind of N?).",
+    "level": "N5"
+  }
 ]

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
 import '../../../core/services/fsrs_service.dart';
 import '../../../data/models/vocab_item.dart';
@@ -71,7 +72,7 @@ class _EnhancedFlashcardScreenState
           IconButton(
             icon: const Icon(Icons.settings_rounded),
             onPressed: _showSettings,
-            tooltip: 'Settings',
+            tooltip: language.settingsLabel,
           ),
         ],
       ),

@@ -1,0 +1,7 @@
+﻿#!/usr/bin/env bash
+set -euo pipefail
+
+python tooling/audit_ui_string_literals.py --check --max-candidates 0
+flutter analyze
+
+

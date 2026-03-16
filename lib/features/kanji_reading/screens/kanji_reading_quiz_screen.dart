@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/language_provider.dart';
 import '../../../data/db/database_provider.dart';
 import '../../../core/services/fsrs_service.dart';
 import '../models/kanji_reading_question.dart';
@@ -64,7 +66,7 @@ class _KanjiReadingQuizScreenState
       barrierDismissible: false,
       builder: (_) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: const Text('Quiz Complete!'),
+        title: Text(ref.watch(appLanguageProvider).quizCompleteTitle),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -81,7 +83,7 @@ class _KanjiReadingQuizScreenState
               ),
             ),
             const SizedBox(height: 8),
-            Text('$_correct / ${widget.questions.length} correct'),
+            Text(ref.watch(appLanguageProvider).correctCountLabel(_correct, widget.questions.length)),
           ],
         ),
         actions: [
@@ -90,7 +92,7 @@ class _KanjiReadingQuizScreenState
               Navigator.of(context).pop(); // close dialog
               Navigator.of(context).pop(); // back to entry
             },
-            child: const Text('Done'),
+            child: Text(ref.watch(appLanguageProvider).doneLabel),
           ),
         ],
       ),

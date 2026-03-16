@@ -1,222 +1,222 @@
 [
-    {
-        "grammarPoint": "Thời gian (Giờ / Phút)",
-        "examples": [
-            {
-                "sentence": "今、何時ですか。…７時１０分です。",
-                "translation": "Bây giờ là mấy giờ? ...7 giờ 10 phút.",
-                "translationEn": "What time is it now? ...It's 7:10."
-            },
-            {
-                "sentence": "今、４時半です。",
-                "translation": "Bây giờ là 4 giờ rưỡi.",
-                "translationEn": "It's 4:30 right now."
-            },
-            {
-                "sentence": "ロンドンは今、午前３時です。",
-                "translation": "London bây giờ là 3 giờ sáng.",
-                "translationEn": "It's 3 AM in London right now."
-            },
-            {
-                "sentence": "会議は２時からですか。",
-                "translation": "Cuộc họp bắt đầu từ 2 giờ phải không?",
-                "translationEn": "Does the meeting start at 2 o'clock?"
-            },
-            {
-                "sentence": "今、９時１５分です。",
-                "translation": "Bây giờ là 9 giờ 15 phút.",
-                "translationEn": "It's 9:15 right now."
-            },
-            {
-                "sentence": "昼休みは１２時からです。",
-                "translation": "Giờ nghỉ trưa bắt đầu từ 12 giờ.",
-                "translationEn": "Lunch break starts at 12:00."
-            },
-            {
-                "sentence": "今、何時ですか。…６時です。",
-                "translation": "Bây giờ là mấy giờ? ...6 giờ.",
-                "translationEn": "What time is it? ...It's 6 o'clock."
-            },
-            {
-                "sentence": "銀行は９時半からです。",
-                "translation": "Ngân hàng mở cửa từ 9 giờ rưỡi.",
-                "translationEn": "The bank opens at 9:30."
-            },
-            {
-                "sentence": "ニューヨークは今、午後８時です。",
-                "translation": "New York bây giờ là 8 giờ tối.",
-                "translationEn": "It is 8 PM in New York right now."
-            },
-            {
-                "sentence": "今、５時５分前です。",
-                "translation": "Bây giờ là 5 giờ kém 5.",
-                "translationEn": "It's 5 minutes to 5."
-            }
-        ]
-    },
-    {
-        "grammarPoint": "Động từ Vます",
-        "examples": [
-            {
-                "sentence": "私は毎日勉強します。",
-                "translation": "Tôi học bài mỗi ngày.",
-                "translationEn": "I study every day."
-            },
-            {
-                "sentence": "明日働きません。",
-                "translation": "Ngày mai tôi sẽ không làm việc.",
-                "translationEn": "I will not work tomorrow."
-            },
-            {
-                "sentence": "昨日勉強しました。",
-                "translation": "Hôm qua tôi đã học bài.",
-                "translationEn": "I studied yesterday."
-            },
-            {
-                "sentence": "今日は働きません。",
-                "translation": "Hôm nay tôi không làm việc.",
-                "translationEn": "I am not working today."
-            },
-            {
-                "sentence": "毎朝６時に起きます。",
-                "translation": "Tôi dậy lúc 6 giờ mỗi sáng.",
-                "translationEn": "I get up at 6 every morning."
-            },
-            {
-                "sentence": "昨日の晩、寝ませんでした。",
-                "translation": "Tối qua tôi không ngủ.",
-                "translationEn": "I didn't sleep last night."
-            },
-            {
-                "sentence": "毎晩１１時に寝ます。",
-                "translation": "Tôi ngủ lúc 11 giờ mỗi tối.",
-                "translationEn": "I go to bed at 11 every night."
-            },
-            {
-                "sentence": "明日の朝、６時に起きますか。",
-                "translation": "Sáng mai bạn dậy lúc 6 giờ à?",
-                "translationEn": "Will you get up at 6 tomorrow morning?"
-            },
-            {
-                "sentence": "田中さんは昨日働きませんでした。",
-                "translation": "Anh Tanaka đã không làm việc hôm qua.",
-                "translationEn": "Mr. Tanaka didn't work yesterday."
-            },
-            {
-                "sentence": "土曜日は働きません。",
-                "translation": "Thứ 7 tôi không làm việc.",
-                "translationEn": "I don't work on Saturdays."
-            }
-        ]
-    },
-    {
-        "grammarPoint": "N1 から N2 まで",
-        "examples": [
-            {
-                "sentence": "銀行は９時から３時までです。",
-                "translation": "Ngân hàng mở cửa từ 9 giờ đến 3 giờ.",
-                "translationEn": "The bank is open from 9:00 to 3:00."
-            },
-            {
-                "sentence": "昼休みは１２時から１時までです。",
-                "translation": "Giờ nghỉ trưa từ 12 giờ đến 1 giờ.",
-                "translationEn": "Lunch break is from 12:00 to 1:00."
-            },
-            {
-                "sentence": "勉強は９時から５時までです。",
-                "translation": "Việc học từ 9 giờ đến 5 giờ.",
-                "translationEn": "Studying is from 9:00 to 5:00."
-            },
-            {
-                "sentence": "大阪から東京まで３時間かかります。",
-                "translation": "Từ Osaka đến Tokyo mất 3 tiếng.",
-                "translationEn": "It takes 3 hours from Osaka to Tokyo."
-            },
-            {
-                "sentence": "会議は１時から３時までです。",
-                "translation": "Cuộc họp từ 1 giờ đến 3 giờ.",
-                "translationEn": "The meeting is from 1:00 to 3:00."
-            },
-            {
-                "sentence": "月曜日から金曜日まで働きます。",
-                "translation": "Tôi làm việc từ thứ 2 đến thứ 6.",
-                "translationEn": "I work from Monday to Friday."
-            },
-            {
-                "sentence": "夏休みはいつからいつまでですか。",
-                "translation": "Kỳ nghỉ hè từ khi nào đến khi nào?",
-                "translationEn": "When does summer vacation start and end?"
-            },
-            {
-                "sentence": "９時から働きます。",
-                "translation": "Tôi làm việc từ 9 giờ.",
-                "translationEn": "I work from 9:00."
-            },
-            {
-                "sentence": "映画は７時から９時までです。",
-                "translation": "Phim chiếu từ 7 giờ đến 9 giờ.",
-                "translationEn": "The movie is from 7:00 to 9:00."
-            },
-            {
-                "sentence": "ここから駅まで歩いて行きます。",
-                "translation": "Tôi đi bộ từ đây đến nhà ga.",
-                "translationEn": "I walk from here to the station."
-            }
-        ]
-    },
-    {
-        "grammarPoint": "N1 と N2",
-        "examples": [
-            {
-                "sentence": "土曜日と日曜日は休みです。",
-                "translation": "Thứ 7 và chủ nhật là ngày nghỉ.",
-                "translationEn": "Saturday and Sunday are holidays."
-            },
-            {
-                "sentence": "銀行の休みは土曜日と日曜日です。",
-                "translation": "Ngày nghỉ của ngân hàng là thứ 7 và chủ nhật.",
-                "translationEn": "Bank holidays are Saturday and Sunday."
-            },
-            {
-                "sentence": "机の上に本と辞書があります。",
-                "translation": "Trên bàn có sách và từ điển.",
-                "translationEn": "There is a book and a dictionary on the desk."
-            },
-            {
-                "sentence": "日本語と英語を勉強します。",
-                "translation": "Tôi học tiếng Nhật và tiếng Anh.",
-                "translationEn": "I study Japanese and English."
-            },
-            {
-                "sentence": "昨日、田中さんと鈴木さんに会いました。",
-                "translation": "Hôm qua tôi đã gặp anh Tanaka và anh Suzuki.",
-                "translationEn": "I met Mr. Tanaka and Mr. Suzuki yesterday."
-            },
-            {
-                "sentence": "スーパーで魚と肉を買いました。",
-                "translation": "Tôi đã mua cá và thịt ở siêu thị.",
-                "translationEn": "I bought fish and meat at the supermarket."
-            },
-            {
-                "sentence": "私の国は７月と８月が暑いです。",
-                "translation": "Nước tôi nóng vào tháng 7 và tháng 8.",
-                "translationEn": "My country is hot in July and August."
-            },
-            {
-                "sentence": "朝ごはんはパンと卵です。",
-                "translation": "Bữa sáng là bánh mì và trứng.",
-                "translationEn": "Breakfast is bread and eggs."
-            },
-            {
-                "sentence": "かばんの中に財布と鍵があります。",
-                "translation": "Trong cặp có ví và chìa khóa.",
-                "translationEn": "There is a wallet and a key in the bag."
-            },
-            {
-                "sentence": "今日と明日は雨です。",
-                "translation": "Hôm nay và ngày mai trời mưa.",
-                "translationEn": "It will rain today and tomorrow."
-            }
-        ]
-    }
+  {
+    "grammarPoint": "Thời gian (Giờ, Phút)",
+    "examples": [
+      {
+        "sentence": "今、何時ですか。…７時１０分です。",
+        "translation": "Bây giờ là mấy giờ? ...7 giờ 10 phút.",
+        "translationEn": "What time is it now? ...It's 7:10."
+      },
+      {
+        "sentence": "今、４時半です。",
+        "translation": "Bây giờ là 4 giờ rưỡi.",
+        "translationEn": "It's 4:30 right now."
+      },
+      {
+        "sentence": "ロンドンは今、午前３時です。",
+        "translation": "London bây giờ là 3 giờ sáng.",
+        "translationEn": "It's 3 AM in London right now."
+      },
+      {
+        "sentence": "会議は２時からですか。",
+        "translation": "Cuộc họp bắt đầu từ 2 giờ phải không?",
+        "translationEn": "Does the meeting start at 2 o'clock?"
+      },
+      {
+        "sentence": "今、９時１５分です。",
+        "translation": "Bây giờ là 9 giờ 15 phút.",
+        "translationEn": "It's 9:15 right now."
+      },
+      {
+        "sentence": "昼休みは１２時からです。",
+        "translation": "Giờ nghỉ trưa bắt đầu từ 12 giờ.",
+        "translationEn": "Lunch break starts at 12:00."
+      },
+      {
+        "sentence": "今、何時ですか。…６時です。",
+        "translation": "Bây giờ là mấy giờ? ...6 giờ.",
+        "translationEn": "What time is it? ...It's 6 o'clock."
+      },
+      {
+        "sentence": "銀行は９時半からです。",
+        "translation": "Ngân hàng mở cửa từ 9 giờ rưỡi.",
+        "translationEn": "The bank opens at 9:30."
+      },
+      {
+        "sentence": "ニューヨークは今、午後８時です。",
+        "translation": "New York bây giờ là 8 giờ tối.",
+        "translationEn": "It is 8 PM in New York right now."
+      },
+      {
+        "sentence": "今、５時５分前です。",
+        "translation": "Bây giờ là 5 giờ kém 5.",
+        "translationEn": "It's 5 minutes to 5."
+      }
+    ]
+  },
+  {
+    "grammarPoint": "Động từ Vます",
+    "examples": [
+      {
+        "sentence": "私は毎日勉強します。",
+        "translation": "Tôi học bài mỗi ngày.",
+        "translationEn": "I study every day."
+      },
+      {
+        "sentence": "明日働きません。",
+        "translation": "Ngày mai tôi sẽ không làm việc.",
+        "translationEn": "I will not work tomorrow."
+      },
+      {
+        "sentence": "昨日勉強しました。",
+        "translation": "Hôm qua tôi đã học bài.",
+        "translationEn": "I studied yesterday."
+      },
+      {
+        "sentence": "今日は働きません。",
+        "translation": "Hôm nay tôi không làm việc.",
+        "translationEn": "I am not working today."
+      },
+      {
+        "sentence": "毎朝６時に起きます。",
+        "translation": "Tôi dậy lúc 6 giờ mỗi sáng.",
+        "translationEn": "I get up at 6 every morning."
+      },
+      {
+        "sentence": "昨日の晩、寝ませんでした。",
+        "translation": "Tối qua tôi không ngủ.",
+        "translationEn": "I didn't sleep last night."
+      },
+      {
+        "sentence": "毎晩１１時に寝ます。",
+        "translation": "Tôi ngủ lúc 11 giờ mỗi tối.",
+        "translationEn": "I go to bed at 11 every night."
+      },
+      {
+        "sentence": "明日の朝、６時に起きますか。",
+        "translation": "Sáng mai bạn dậy lúc 6 giờ à?",
+        "translationEn": "Will you get up at 6 tomorrow morning?"
+      },
+      {
+        "sentence": "田中さんは昨日働きませんでした。",
+        "translation": "Anh Tanaka đã không làm việc hôm qua.",
+        "translationEn": "Mr. Tanaka didn't work yesterday."
+      },
+      {
+        "sentence": "土曜日は働きません。",
+        "translation": "Thứ 7 tôi không làm việc.",
+        "translationEn": "I don't work on Saturdays."
+      }
+    ]
+  },
+  {
+    "grammarPoint": "N1 から N2 まで",
+    "examples": [
+      {
+        "sentence": "銀行は９時から３時までです。",
+        "translation": "Ngân hàng mở cửa từ 9 giờ đến 3 giờ.",
+        "translationEn": "The bank is open from 9:00 to 3:00."
+      },
+      {
+        "sentence": "昼休みは１２時から１時までです。",
+        "translation": "Giờ nghỉ trưa từ 12 giờ đến 1 giờ.",
+        "translationEn": "Lunch break is from 12:00 to 1:00."
+      },
+      {
+        "sentence": "勉強は９時から５時までです。",
+        "translation": "Việc học từ 9 giờ đến 5 giờ.",
+        "translationEn": "Studying is from 9:00 to 5:00."
+      },
+      {
+        "sentence": "大阪から東京まで３時間かかります。",
+        "translation": "Từ Osaka đến Tokyo mất 3 tiếng.",
+        "translationEn": "It takes 3 hours from Osaka to Tokyo."
+      },
+      {
+        "sentence": "会議は１時から３時までです。",
+        "translation": "Cuộc họp từ 1 giờ đến 3 giờ.",
+        "translationEn": "The meeting is from 1:00 to 3:00."
+      },
+      {
+        "sentence": "月曜日から金曜日まで働きます。",
+        "translation": "Tôi làm việc từ thứ 2 đến thứ 6.",
+        "translationEn": "I work from Monday to Friday."
+      },
+      {
+        "sentence": "夏休みはいつからいつまでですか。",
+        "translation": "Kỳ nghỉ hè từ khi nào đến khi nào?",
+        "translationEn": "When does summer vacation start and end?"
+      },
+      {
+        "sentence": "９時から働きます。",
+        "translation": "Tôi làm việc từ 9 giờ.",
+        "translationEn": "I work from 9:00."
+      },
+      {
+        "sentence": "映画は７時から９時までです。",
+        "translation": "Phim chiếu từ 7 giờ đến 9 giờ.",
+        "translationEn": "The movie is from 7:00 to 9:00."
+      },
+      {
+        "sentence": "ここから駅まで歩いて行きます。",
+        "translation": "Tôi đi bộ từ đây đến nhà ga.",
+        "translationEn": "I walk from here to the station."
+      }
+    ]
+  },
+  {
+    "grammarPoint": "N1 と N2",
+    "examples": [
+      {
+        "sentence": "土曜日と日曜日は休みです。",
+        "translation": "Thứ 7 và chủ nhật là ngày nghỉ.",
+        "translationEn": "Saturday and Sunday are holidays."
+      },
+      {
+        "sentence": "銀行の休みは土曜日と日曜日です。",
+        "translation": "Ngày nghỉ của ngân hàng là thứ 7 và chủ nhật.",
+        "translationEn": "Bank holidays are Saturday and Sunday."
+      },
+      {
+        "sentence": "机の上に本と辞書があります。",
+        "translation": "Trên bàn có sách và từ điển.",
+        "translationEn": "There is a book and a dictionary on the desk."
+      },
+      {
+        "sentence": "日本語と英語を勉強します。",
+        "translation": "Tôi học tiếng Nhật và tiếng Anh.",
+        "translationEn": "I study Japanese and English."
+      },
+      {
+        "sentence": "昨日、田中さんと鈴木さんに会いました。",
+        "translation": "Hôm qua tôi đã gặp anh Tanaka và anh Suzuki.",
+        "translationEn": "I met Mr. Tanaka and Mr. Suzuki yesterday."
+      },
+      {
+        "sentence": "スーパーで魚と肉を買いました。",
+        "translation": "Tôi đã mua cá và thịt ở siêu thị.",
+        "translationEn": "I bought fish and meat at the supermarket."
+      },
+      {
+        "sentence": "私の国は７月と８月が暑いです。",
+        "translation": "Nước tôi nóng vào tháng 7 và tháng 8.",
+        "translationEn": "My country is hot in July and August."
+      },
+      {
+        "sentence": "朝ごはんはパンと卵です。",
+        "translation": "Bữa sáng là bánh mì và trứng.",
+        "translationEn": "Breakfast is bread and eggs."
+      },
+      {
+        "sentence": "かばんの中に財布と鍵があります。",
+        "translation": "Trong cặp có ví và chìa khóa.",
+        "translationEn": "There is a wallet and a key in the bag."
+      },
+      {
+        "sentence": "今日と明日は雨です。",
+        "translation": "Hôm nay và ngày mai trời mưa.",
+        "translationEn": "It will rain today and tomorrow."
+      }
+    ]
+  }
 ]

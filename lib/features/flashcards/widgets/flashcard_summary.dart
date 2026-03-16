@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/language_provider.dart';
 
 import '../../../data/models/vocab_item.dart';
 import '../../../features/home/widgets/next_step_suggestions.dart';
@@ -9,7 +11,6 @@ import '../screens/enhanced_flashcard_screen.dart';
 class FlashcardSummaryScreen extends ConsumerWidget {
   final FlashcardSession session;
   final VoidCallback? onDone;
-  // If provided, enables the "Practice Again" button using the summary's own context.
   final List<VocabItem>? practiceItems;
   final String? lessonTitle;
 
@@ -23,12 +24,13 @@ class FlashcardSummaryScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final language = ref.watch(appLanguageProvider);
     final xpEarned = session.calculateXP();
     final accuracyPercent = (session.accuracy * 100).toInt();
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Session Complete! 🎉'),
+        title: Text(language.learnSummaryTitle),
         automaticallyImplyLeading: false,
       ),
       body: SafeArea(
@@ -37,30 +39,15 @@ class FlashcardSummaryScreen extends ConsumerWidget {
           child: Column(
             children: [
               const SizedBox(height: 20),
-
-              // Accuracy Circle
-              _buildAccuracyCircle(context, accuracyPercent),
-
+              _buildAccuracyCircle(context, language, accuracyPercent),
               const SizedBox(height: 40),
-
-              // Stats Grid
-              _buildStatsGrid(context),
-
+              _buildStatsGrid(language),
               const SizedBox(height: 40),
-
-              // XP Earned Card
-              _buildXPCard(context, xpEarned),
-
+              _buildXPCard(language, xpEarned),
               const SizedBox(height: 32),
-
-              // Next step suggestions
               const NextStepSuggestions(),
-
               const SizedBox(height: 32),
-
-              // Action Buttons
-              _buildActionButtons(context),
-
+              _buildActionButtons(context, language),
               const SizedBox(height: 20),
             ],
           ),
@@ -69,7 +56,11 @@ class FlashcardSummaryScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildAccuracyCircle(BuildContext context, int accuracyPercent) {
+  Widget _buildAccuracyCircle(
+    BuildContext context,
+    AppLanguage language,
+    int accuracyPercent,
+  ) {
     return Container(
       width: 200,
       height: 200,
@@ -103,9 +94,9 @@ class FlashcardSummaryScreen extends ConsumerWidget {
                 color: Colors.white,
               ),
             ),
-            const Text(
-              'Accuracy',
-              style: TextStyle(
+            Text(
+              language.accuracyLabel,
+              style: const TextStyle(
                 fontSize: 18,
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
@@ -117,14 +108,14 @@ class FlashcardSummaryScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildStatsGrid(BuildContext context) {
+  Widget _buildStatsGrid(AppLanguage language) {
     return Row(
       children: [
         Expanded(
           child: _StatCard(
             icon: Icons.check_circle_rounded,
             value: session.knownTermIds.length,
-            label: 'Known',
+            label: language.knownLabel,
             color: Colors.green,
           ),
         ),
@@ -133,7 +124,7 @@ class FlashcardSummaryScreen extends ConsumerWidget {
           child: _StatCard(
             icon: Icons.replay_rounded,
             value: session.needPracticeTermIds.length,
-            label: 'Practice',
+            label: language.practiceLabel,
             color: Colors.orange,
           ),
         ),
@@ -142,7 +133,7 @@ class FlashcardSummaryScreen extends ConsumerWidget {
           child: _StatCard(
             icon: Icons.star_rounded,
             value: session.starredTermIds.length,
-            label: 'Starred',
+            label: language.starredLabel,
             color: Colors.amber,
           ),
         ),
@@ -150,7 +141,7 @@ class FlashcardSummaryScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildXPCard(BuildContext context, int xpEarned) {
+  Widget _buildXPCard(AppLanguage language, int xpEarned) {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
@@ -182,16 +173,16 @@ class FlashcardSummaryScreen extends ConsumerWidget {
             ),
           ),
           const SizedBox(width: 8),
-          const Text(
-            'Earned!',
-            style: TextStyle(fontSize: 18, color: Colors.white70),
+          Text(
+            language.earnedLabel,
+            style: const TextStyle(fontSize: 18, color: Colors.white70),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildActionButtons(BuildContext context) {
+  Widget _buildActionButtons(BuildContext context, AppLanguage language) {
     final hasPracticeItems = practiceItems != null && practiceItems!.isNotEmpty;
     return Column(
       children: [
@@ -210,9 +201,12 @@ class FlashcardSummaryScreen extends ConsumerWidget {
                 ),
               ),
               icon: const Icon(Icons.replay_rounded),
-              label: const Text(
-                'Practice Again',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              label: Text(
+                language.practiceAgainLabel,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.orange,
@@ -235,9 +229,9 @@ class FlashcardSummaryScreen extends ConsumerWidget {
               ),
               side: BorderSide(color: Theme.of(context).primaryColor, width: 2),
             ),
-            child: const Text(
-              'Done',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            child: Text(
+              language.doneLabel,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
           ),
         ),

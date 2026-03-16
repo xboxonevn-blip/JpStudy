@@ -1,222 +1,222 @@
 [
-    {
-        "grammarPoint": "Chia động từ thể Te (Vて)",
-        "examples": [
-            {
-                "sentence": "書いて",
-                "translation": "Viết (thể Te)",
-                "translationEn": "Write (Te-form)"
-            },
-            {
-                "sentence": "食べて",
-                "translation": "Ăn (thể Te)",
-                "translationEn": "Eat (Te-form)"
-            },
-            {
-                "sentence": "読んで",
-                "translation": "Đọc (thể Te)",
-                "translationEn": "Read (Te-form)"
-            },
-            {
-                "sentence": "待って",
-                "translation": "Đợi (thể Te)",
-                "translationEn": "Wait (Te-form)"
-            },
-            {
-                "sentence": "急いで",
-                "translation": "Vội (thể Te)",
-                "translationEn": "Hurry (Te-form)"
-            },
-            {
-                "sentence": "遊んで",
-                "translation": "Chơi (thể Te)",
-                "translationEn": "Play (Te-form)"
-            },
-            {
-                "sentence": "話して",
-                "translation": "Nói chuyện (thể Te)",
-                "translationEn": "Speak (Te-form)"
-            },
-            {
-                "sentence": "来て",
-                "translation": "Đến (thể Te)",
-                "translationEn": "Come (Te-form)"
-            },
-            {
-                "sentence": "して",
-                "translation": "Làm (thể Te)",
-                "translationEn": "Do (Te-form)"
-            },
-            {
-                "sentence": "行って",
-                "translation": "Đi (thể Te - Đặc biệt)",
-                "translationEn": "Go (Te-form - Exception)"
-            }
-        ]
-    },
-    {
-        "grammarPoint": "Vて ください (Yêu cầu)",
-        "examples": [
-            {
-                "sentence": "ちょっと待ってください。",
-                "translation": "Vui lòng chờ một chút.",
-                "translationEn": "Please wait a moment."
-            },
-            {
-                "sentence": "辞書を貸してください。",
-                "translation": "Vui lòng cho tôi mượn từ điển.",
-                "translationEn": "Please lend me a dictionary."
-            },
-            {
-                "sentence": "ゆっくり話してください。",
-                "translation": "Vui lòng nói chậm lại.",
-                "translationEn": "Please speak slowly."
-            },
-            {
-                "sentence": "ここに名前と住所を書いてください。",
-                "translation": "Vui lòng viết tên và địa chỉ vào đây.",
-                "translationEn": "Please write your name and address here."
-            },
-            {
-                "sentence": "ボールペンで書いてください。",
-                "translation": "Vui lòng viết bằng bút bi.",
-                "translationEn": "Please write with a ballpoint pen."
-            },
-            {
-                "sentence": "窓を開けてください。",
-                "translation": "Vui lòng mở cửa sổ.",
-                "translationEn": "Please open the window."
-            },
-            {
-                "sentence": "この荷物を送ってください。",
-                "translation": "Vui lòng gửi hành lý này giúp tôi.",
-                "translationEn": "Please send this luggage."
-            },
-            {
-                "sentence": "みかんを３つください。",
-                "translation": "Cho tôi 3 quả quýt (biến thể N o kudasai).",
-                "translationEn": "Please give me 3 tangerines."
-            },
-            {
-                "sentence": "見てください。",
-                "translation": "Hãy nhìn kìa.",
-                "translationEn": "Please look."
-            },
-            {
-                "sentence": "明日来てください。",
-                "translation": "Ngày mai hãy đến nhé.",
-                "translationEn": "Please come tomorrow."
-            }
-        ]
-    },
-    {
-        "grammarPoint": "Vて います (Đang làm)",
-        "examples": [
-            {
-                "sentence": "今電話をかけています。",
-                "translation": "Bây giờ tôi đang gọi điện thoại.",
-                "translationEn": "I am making a phone call now."
-            },
-            {
-                "sentence": "ミラーさんは今レポートを読んでいます。",
-                "translation": "Anh Miller đang đọc báo cáo.",
-                "translationEn": "Mr. Miller is reading a report now."
-            },
-            {
-                "sentence": "雨が降っています。",
-                "translation": "Trời đang mưa.",
-                "translationEn": "It is raining."
-            },
-            {
-                "sentence": "子供たちは公園で遊んでいます。",
-                "translation": "Bọn trẻ đang chơi ở công viên.",
-                "translationEn": "The children are playing in the park."
-            },
-            {
-                "sentence": "何をしていますか。",
-                "translation": "Bạn đang làm gì vậy?",
-                "translationEn": "What are you doing?"
-            },
-            {
-                "sentence": "テレビを見ています。",
-                "translation": "Tôi đang xem TV.",
-                "translationEn": "I am watching TV."
-            },
-            {
-                "sentence": "音楽を聞いています。",
-                "translation": "Tôi đang nghe nhạc.",
-                "translationEn": "I am listening to music."
-            },
-            {
-                "sentence": "日本語を勉強しています。",
-                "translation": "Tôi đang học tiếng Nhật.",
-                "translationEn": "I am studying Japanese."
-            },
-            {
-                "sentence": "彼は寝ています。",
-                "translation": "Anh ấy đang ngủ.",
-                "translationEn": "He is sleeping."
-            },
-            {
-                "sentence": "母は料理を作っています。",
-                "translation": "Mẹ tôi đang nấu ăn.",
-                "translationEn": "My mother is cooking."
-            }
-        ]
-    },
-    {
-        "grammarPoint": "Vましょうか (Đề nghị giúp đỡ)",
-        "examples": [
-            {
-                "sentence": "窓を開けましょうか。",
-                "translation": "Tôi mở cửa sổ giúp bạn nhé?",
-                "translationEn": "Shall I open the window?"
-            },
-            {
-                "sentence": "駅まで迎えに行きましょうか。",
-                "translation": "Tôi ra ga đón bạn nhé?",
-                "translationEn": "Shall I go to the station to pick you up?"
-            },
-            {
-                "sentence": "荷物を持ちましょうか。",
-                "translation": "Tôi mang hành lý giúp bạn nhé?",
-                "translationEn": "Shall I carry your luggage?"
-            },
-            {
-                "sentence": "地図を描きましょうか。",
-                "translation": "Tôi vẽ bản đồ giúp bạn nhé?",
-                "translationEn": "Shall I draw a map?"
-            },
-            {
-                "sentence": "エアコンをつけましょうか。",
-                "translation": "Tôi bật điều hòa nhé?",
-                "translationEn": "Shall I turn on the air conditioner?"
-            },
-            {
-                "sentence": "タクシーを呼びましょうか。",
-                "translation": "Tôi gọi taxi nhé?",
-                "translationEn": "Shall I call a taxi?"
-            },
-            {
-                "sentence": "写真を撮りましょうか。",
-                "translation": "Tôi chụp ảnh giúp bạn nhé?",
-                "translationEn": "Shall I take a photo for you?"
-            },
-            {
-                "sentence": "手伝いましょうか。",
-                "translation": "Tôi giúp bạn một tay nhé?",
-                "translationEn": "Shall I help you?"
-            },
-            {
-                "sentence": "ええ、お願いします。",
-                "translation": "Vâng, nhờ bạn.",
-                "translationEn": "Yes, please."
-            },
-            {
-                "sentence": "いいえ、結構です。",
-                "translation": "Không, tôi làm được rồi (Từ chối lịch sự).",
-                "translationEn": "No, thank you."
-            }
-        ]
-    }
+  {
+    "grammarPoint": "Chia động từ thể Te (Vて)",
+    "examples": [
+      {
+        "sentence": "書いて",
+        "translation": "Viết (thể Te)",
+        "translationEn": "Write (Te-form)"
+      },
+      {
+        "sentence": "食べて",
+        "translation": "Ăn (thể Te)",
+        "translationEn": "Eat (Te-form)"
+      },
+      {
+        "sentence": "読んで",
+        "translation": "Đọc (thể Te)",
+        "translationEn": "Read (Te-form)"
+      },
+      {
+        "sentence": "待って",
+        "translation": "Đợi (thể Te)",
+        "translationEn": "Wait (Te-form)"
+      },
+      {
+        "sentence": "急いで",
+        "translation": "Vội (thể Te)",
+        "translationEn": "Hurry (Te-form)"
+      },
+      {
+        "sentence": "遊んで",
+        "translation": "Chơi (thể Te)",
+        "translationEn": "Play (Te-form)"
+      },
+      {
+        "sentence": "話して",
+        "translation": "Nói chuyện (thể Te)",
+        "translationEn": "Speak (Te-form)"
+      },
+      {
+        "sentence": "来て",
+        "translation": "Đến (thể Te)",
+        "translationEn": "Come (Te-form)"
+      },
+      {
+        "sentence": "して",
+        "translation": "Làm (thể Te)",
+        "translationEn": "Do (Te-form)"
+      },
+      {
+        "sentence": "行って",
+        "translation": "Đi (thể Te - Đặc biệt)",
+        "translationEn": "Go (Te-form - Exception)"
+      }
+    ]
+  },
+  {
+    "grammarPoint": "Vて ください (Yêu cầu)",
+    "examples": [
+      {
+        "sentence": "ちょっと待ってください。",
+        "translation": "Vui lòng chờ một chút.",
+        "translationEn": "Please wait a moment."
+      },
+      {
+        "sentence": "辞書を貸してください。",
+        "translation": "Vui lòng cho tôi mượn từ điển.",
+        "translationEn": "Please lend me a dictionary."
+      },
+      {
+        "sentence": "ゆっくり話してください。",
+        "translation": "Vui lòng nói chậm lại.",
+        "translationEn": "Please speak slowly."
+      },
+      {
+        "sentence": "ここに名前と住所を書いてください。",
+        "translation": "Vui lòng viết tên và địa chỉ vào đây.",
+        "translationEn": "Please write your name and address here."
+      },
+      {
+        "sentence": "ボールペンで書いてください。",
+        "translation": "Vui lòng viết bằng bút bi.",
+        "translationEn": "Please write with a ballpoint pen."
+      },
+      {
+        "sentence": "窓を開けてください。",
+        "translation": "Vui lòng mở cửa sổ.",
+        "translationEn": "Please open the window."
+      },
+      {
+        "sentence": "この荷物を送ってください。",
+        "translation": "Vui lòng gửi hành lý này giúp tôi.",
+        "translationEn": "Please send this luggage."
+      },
+      {
+        "sentence": "みかんを３つください。",
+        "translation": "Cho tôi 3 quả quýt (biến thể N o kudasai).",
+        "translationEn": "Please give me 3 tangerines."
+      },
+      {
+        "sentence": "見てください。",
+        "translation": "Hãy nhìn kia.",
+        "translationEn": "Please look."
+      },
+      {
+        "sentence": "明日来てください。",
+        "translation": "Ngày mai hãy đến nhé.",
+        "translationEn": "Please come tomorrow."
+      }
+    ]
+  },
+  {
+    "grammarPoint": "Vて います (Đang làm)",
+    "examples": [
+      {
+        "sentence": "今電話をかけています。",
+        "translation": "Bây giờ tôi đang gọi điện thoại.",
+        "translationEn": "I am making a phone call now."
+      },
+      {
+        "sentence": "ミラーさんは今レポートを読んでいます。",
+        "translation": "Anh Miller đang đọc báo cáo.",
+        "translationEn": "Mr. Miller is reading a report now."
+      },
+      {
+        "sentence": "雨が降っています。",
+        "translation": "Trời đang mưa.",
+        "translationEn": "It is raining."
+      },
+      {
+        "sentence": "子供たちは公園で遊んでいます。",
+        "translation": "Bọn trẻ đang chơi ở công viên.",
+        "translationEn": "The children are playing in the park."
+      },
+      {
+        "sentence": "何をしていますか。",
+        "translation": "Bạn đang làm gì vậy?",
+        "translationEn": "What are you doing?"
+      },
+      {
+        "sentence": "テレビを見ています。",
+        "translation": "Tôi đang xem TV.",
+        "translationEn": "I am watching TV."
+      },
+      {
+        "sentence": "音楽を聞いています。",
+        "translation": "Tôi đang nghe nhạc.",
+        "translationEn": "I am listening to music."
+      },
+      {
+        "sentence": "日本語を勉強しています。",
+        "translation": "Tôi đang học tiếng Nhật.",
+        "translationEn": "I am studying Japanese."
+      },
+      {
+        "sentence": "彼は寝ています。",
+        "translation": "Anh ấy đang ngủ.",
+        "translationEn": "He is sleeping."
+      },
+      {
+        "sentence": "母は料理を作っています。",
+        "translation": "Mẹ tôi đang nấu ăn.",
+        "translationEn": "My mother is cooking."
+      }
+    ]
+  },
+  {
+    "grammarPoint": "Vましょうか (Đề nghị giúp đỡ)",
+    "examples": [
+      {
+        "sentence": "窓を開けましょうか。",
+        "translation": "Tôi mở cửa sổ giúp bạn nhé?",
+        "translationEn": "Shall I open the window?"
+      },
+      {
+        "sentence": "駅まで迎えに行きましょうか。",
+        "translation": "Tôi ra ga đón bạn nhé?",
+        "translationEn": "Shall I go to the station to pick you up?"
+      },
+      {
+        "sentence": "荷物を持ちましょうか。",
+        "translation": "Tôi mang hành lý giúp bạn nhé?",
+        "translationEn": "Shall I carry your luggage?"
+      },
+      {
+        "sentence": "地図を描きましょうか。",
+        "translation": "Tôi vẽ bản đồ giúp bạn nhé?",
+        "translationEn": "Shall I draw a map?"
+      },
+      {
+        "sentence": "エアコンをつけましょうか。",
+        "translation": "Tôi bật điều hòa nhé?",
+        "translationEn": "Shall I turn on the air conditioner?"
+      },
+      {
+        "sentence": "タクシーを呼びましょうか。",
+        "translation": "Tôi gọi taxi nhé?",
+        "translationEn": "Shall I call a taxi?"
+      },
+      {
+        "sentence": "写真を撮りましょうか。",
+        "translation": "Tôi chụp ảnh giúp bạn nhé?",
+        "translationEn": "Shall I take a photo for you?"
+      },
+      {
+        "sentence": "手伝いましょうか。",
+        "translation": "Tôi giúp bạn một tay nhé?",
+        "translationEn": "Shall I help you?"
+      },
+      {
+        "sentence": "ええ、お願いします。",
+        "translation": "Vâng, nhờ bạn.",
+        "translationEn": "Yes, please."
+      },
+      {
+        "sentence": "いいえ、結構です。",
+        "translation": "Không, tôi làm được rồi (Từ chối lịch sự).",
+        "translationEn": "No, thank you."
+      }
+    ]
+  }
 ]

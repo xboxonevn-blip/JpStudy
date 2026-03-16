@@ -153,7 +153,7 @@ class DailySessionSummaryScreen extends ConsumerWidget {
       case AppLanguage.ja:
         return 'Daily Coach Summary';
       case AppLanguage.vi:
-        return 'T?ng k?t Daily Coach';
+        return 'Tổng kết Daily Coach';
     }
   }
 
@@ -163,7 +163,7 @@ class DailySessionSummaryScreen extends ConsumerWidget {
       case AppLanguage.ja:
         return 'You closed $percent% of today\'s guided session.';
       case AppLanguage.vi:
-        return 'B?n ?? ho?n th?nh $percent% l? tr?nh h?m nay.';
+        return 'Bạn đã hoàn thành $percent% lộ trình hôm nay.';
     }
   }
 
@@ -173,7 +173,7 @@ class DailySessionSummaryScreen extends ConsumerWidget {
       case AppLanguage.ja:
         return 'What improved today';
       case AppLanguage.vi:
-        return '?i?u ?? c?i thi?n h?m nay';
+        return 'Điều đã cải thiện hôm nay';
     }
   }
 
@@ -183,7 +183,7 @@ class DailySessionSummaryScreen extends ConsumerWidget {
       case AppLanguage.ja:
         return 'Tomorrow cue';
       case AppLanguage.vi:
-        return 'G?i ? cho ng?y mai';
+        return 'Gợi ý cho ngày mai';
     }
   }
 
@@ -197,9 +197,9 @@ class DailySessionSummaryScreen extends ConsumerWidget {
         return 'Some items are still waiting. Start tomorrow by clearing due reviews, then clean up weak spots.';
       case AppLanguage.vi:
         if (totalDue == 0 && totalFix == 0) {
-          return 'H?ng ??i ?? s?ch. Ng?y mai c? th? b?t ??u b?ng b?i m?i ho?c immersion s?u h?n.';
+          return 'Hàng đợi đã sạch. Ngày mai có thể bắt đầu bằng bài mới hoặc immersion sâu hơn.';
         }
-        return 'V?n c?n m?c ch? x? l?. Ng?y mai h?y d?n review ??n h?n tr??c, r?i x? l? ?i?m y?u.';
+        return 'Vẫn còn mục chưa xử lý. Ngày mai hãy dọn review đến hạn trước, rồi xử lý điểm yếu.';
     }
   }
 }

@@ -1,332 +1,332 @@
 [
-    {
-        "grammarPoint": "Động từ di chuyển (行きます / 来ます / 帰ります)",
-        "examples": [
-            {
-                "sentence": "私は京都へ行きます。",
-                "translation": "Tôi đi Kyoto.",
-                "translationEn": "I am going to Kyoto."
-            },
-            {
-                "sentence": "日本へ来ました。",
-                "translation": "Tôi đã đến Nhật Bản.",
-                "translationEn": "I came to Japan."
-            },
-            {
-                "sentence": "うちへ帰ります。",
-                "translation": "Tôi về nhà.",
-                "translationEn": "I am going home."
-            },
-            {
-                "sentence": "明日、どこへ行きますか。",
-                "translation": "Ngày mai bạn đi đâu?",
-                "translationEn": "Where are you going tomorrow?"
-            },
-            {
-                "sentence": "来週、国へ帰ります。",
-                "translation": "Tuần sau tôi về nước.",
-                "translationEn": "I am returning to my country next week."
-            },
-            {
-                "sentence": "日曜日、スーパーへ行きました。",
-                "translation": "Chủ nhật tôi đã đi siêu thị.",
-                "translationEn": "I went to the supermarket on Sunday."
-            },
-            {
-                "sentence": "昨日、学校へ行きませんでした。",
-                "translation": "Hôm qua tôi đã không đến trường.",
-                "translationEn": "I did not go to school yesterday."
-            },
-            {
-                "sentence": "いつ大阪へ行きますか。",
-                "translation": "Khi nào bạn đi Osaka?",
-                "translationEn": "When are you going to Osaka?"
-            },
-            {
-                "sentence": "去年、日本へ来ました。",
-                "translation": "Tôi đã đến Nhật năm ngoái.",
-                "translationEn": "I came to Japan last year."
-            },
-            {
-                "sentence": "友達が私のうちへ来ました。",
-                "translation": "Bạn tôi đã đến nhà tôi.",
-                "translationEn": "My friend came to my house."
-            }
-        ]
-    },
-    {
-        "grammarPoint": "Phủ định hoàn toàn (どこも / 何も)",
-        "examples": [
-            {
-                "sentence": "どこも行きません。",
-                "translation": "Tôi không đi đâu cả.",
-                "translationEn": "I'm not going anywhere."
-            },
-            {
-                "sentence": "何も食べません。",
-                "translation": "Tôi không ăn gì cả.",
-                "translationEn": "I'm not eating anything."
-            },
-            {
-                "sentence": "昨日はどこも行きませんでした。",
-                "translation": "Hôm qua tôi đã không đi đâu cả.",
-                "translationEn": "I didn't go anywhere yesterday."
-            },
-            {
-                "sentence": "週末はどこも行きません。",
-                "translation": "Cuối tuần tôi không đi đâu cả.",
-                "translationEn": "I'm not going anywhere this weekend."
-            },
-            {
-                "sentence": "誰もいません。",
-                "translation": "Không có ai cả.",
-                "translationEn": "There is no one here."
-            },
-            {
-                "sentence": "何も買いませんでした。",
-                "translation": "Tôi đã không mua gì cả.",
-                "translationEn": "I didn't buy anything."
-            },
-            {
-                "sentence": "日曜日どこへ行きましたか。…どこも行きませんでした。",
-                "translation": "Chủ nhật bạn đã đi đâu? ...Tôi không đi đâu cả.",
-                "translationEn": "Where did you go on Sunday? ...I didn't go anywhere."
-            },
-            {
-                "sentence": "何を飲みますか。…何も飲みません。",
-                "translation": "Bạn uống gì? ...Tôi không uống gì cả.",
-                "translationEn": "What will you drink? ...I won't drink anything."
-            },
-            {
-                "sentence": "朝ごはんを食べましたか。…いいえ、何も食べませんでした。",
-                "translation": "Bạn đã ăn sáng chưa? ...Không, tôi chưa ăn gì cả.",
-                "translationEn": "Did you eat breakfast? ...No, I didn't eat anything."
-            },
-            {
-                "sentence": "何もほしくないです。",
-                "translation": "Tôi không muốn gì cả.",
-                "translationEn": "I don't want anything."
-            }
-        ]
-    },
-    {
-        "grammarPoint": "Phương tiện di chuyển (N で)",
-        "examples": [
-            {
-                "sentence": "電車で行きます。",
-                "translation": "Tôi đi bằng tàu điện.",
-                "translationEn": "I go by train."
-            },
-            {
-                "sentence": "タクシーで来ました。",
-                "translation": "Tôi đã đến bằng taxi.",
-                "translationEn": "I came by taxi."
-            },
-            {
-                "sentence": "自転車で学校へ行きます。",
-                "translation": "Tôi đi xe đạp đến trường.",
-                "translationEn": "I go to school by bicycle."
-            },
-            {
-                "sentence": "バスで会社へ行きます。",
-                "translation": "Tôi đi xe buýt đến công ty.",
-                "translationEn": "I go to work by bus."
-            },
-            {
-                "sentence": "新幹線で東京へ行きました。",
-                "translation": "Tôi đã đi Shinkansen đến Tokyo.",
-                "translationEn": "I went to Tokyo by Shinkansen."
-            },
-            {
-                "sentence": "飛行機で国へ帰ります。",
-                "translation": "Tôi về nước bằng máy bay.",
-                "translationEn": "I return to my country by plane."
-            },
-            {
-                "sentence": "何で京都へ行きますか。",
-                "translation": "Bạn đi Kyoto bằng gì?",
-                "translationEn": "How will you go to Kyoto?"
-            },
-            {
-                "sentence": "地下鉄で病院へ行きます。",
-                "translation": "Tôi đi tàu điện ngầm đến bệnh viện.",
-                "translationEn": "I go to the hospital by subway."
-            },
-            {
-                "sentence": "車で海へ行きました。",
-                "translation": "Tôi đã lái xe ô tô đi biển.",
-                "translationEn": "I went to the sea by car."
-            },
-            {
-                "sentence": "船で旅行します。",
-                "translation": "Tôi đi du lịch bằng tàu thủy.",
-                "translationEn": "I travel by ship."
-            }
-        ]
-    },
-    {
-        "grammarPoint": "歩いて (Đi bộ)",
-        "examples": [
-            {
-                "sentence": "駅から歩いて帰りました。",
-                "translation": "Tôi đã đi bộ từ nhà ga về.",
-                "translationEn": "I walked home from the station."
-            },
-            {
-                "sentence": "歩いて学校へ行きます。",
-                "translation": "Tôi đi bộ đến trường.",
-                "translationEn": "I walk to school."
-            },
-            {
-                "sentence": "ここから駅まで歩いて行きます。",
-                "translation": "Tôi đi bộ từ đây đến nhà ga.",
-                "translationEn": "I walk from here to the station."
-            },
-            {
-                "sentence": "スーパーまで歩いて１０分です。",
-                "translation": "Đi bộ đến siêu thị mất 10 phút.",
-                "translationEn": "It takes 10 minutes to walk to the supermarket."
-            },
-            {
-                "sentence": "歩いてアパートへ帰ります。",
-                "translation": "Tôi đi bộ về căn hộ.",
-                "translationEn": "I walk back to the apartment."
-            },
-            {
-                "sentence": "会社までどうやって行きますか。…歩いて行きます。",
-                "translation": "Bạn đi đến công ty bằng cách nào? ...Tôi đi bộ.",
-                "translationEn": "How do you go to work? ...I walk."
-            },
-            {
-                "sentence": "昨日は歩いてうちへ帰りました。",
-                "translation": "Hôm qua tôi đã đi bộ về nhà.",
-                "translationEn": "I walked home yesterday."
-            },
-            {
-                "sentence": "雨ですから、歩いて行きません。",
-                "translation": "Vì trời mưa nên tôi không đi bộ.",
-                "translationEn": "Since it's raining, I won't walk."
-            },
-            {
-                "sentence": "歩いて散歩します。",
-                "translation": "Tôi đi dạo bộ.",
-                "translationEn": "I take a walk."
-            },
-            {
-                "sentence": "いつも歩いてコンビニへ行きます。",
-                "translation": "Tôi luôn đi bộ đến cửa hàng tiện lợi.",
-                "translationEn": "I always walk to the convenience store."
-            }
-        ]
-    },
-    {
-        "grammarPoint": "Làm gì cùng ai (N と)",
-        "examples": [
-            {
-                "sentence": "家族と日本へ来ました。",
-                "translation": "Tôi đã đến Nhật cùng gia đình.",
-                "translationEn": "I came to Japan with my family."
-            },
-            {
-                "sentence": "一人で東京へ行きます。",
-                "translation": "Tôi đi Tokyo một mình.",
-                "translationEn": "I am going to Tokyo alone."
-            },
-            {
-                "sentence": "友達と映画を見ました。",
-                "translation": "Tôi đã xem phim cùng bạn.",
-                "translationEn": "I watched a movie with my friend."
-            },
-            {
-                "sentence": "彼女と食事しました。",
-                "translation": "Tôi đã đi ăn cùng cô ấy.",
-                "translationEn": "I had a meal with her."
-            },
-            {
-                "sentence": "誰と行きますか。",
-                "translation": "Bạn đi cùng ai?",
-                "translationEn": "Who are you going with?"
-            },
-            {
-                "sentence": "猫と遊びました。",
-                "translation": "Tôi đã chơi với mèo.",
-                "translationEn": "I played with the cat."
-            },
-            {
-                "sentence": "週末、子供と公園へ行きます。",
-                "translation": "Cuối tuần tôi đi công viên với con.",
-                "translationEn": "I go to the park with my child on weekends."
-            },
-            {
-                "sentence": "一人で図書館へ行きました。",
-                "translation": "Tôi đã đi thư viện một mình.",
-                "translationEn": "I went to the library alone."
-            },
-            {
-                "sentence": "田中さんと大阪へ行きます。",
-                "translation": "Tôi đi Osaka cùng anh Tanaka.",
-                "translationEn": "I'm going to Osaka with Mr. Tanaka."
-            },
-            {
-                "sentence": "誰と日本へ来ましたか。",
-                "translation": "Bạn đến Nhật cùng ai?",
-                "translationEn": "Who did you come to Japan with?"
-            }
-        ]
-    },
-    {
-        "grammarPoint": "Khi nào (いつ)",
-        "examples": [
-            {
-                "sentence": "いつ日本へ来ましたか。…３月２５日に来ました。",
-                "translation": "Bạn đến Nhật bao giờ? ...Tôi đến vào ngày 25 tháng 3.",
-                "translationEn": "When did you come to Japan? ...I came on March 25th."
-            },
-            {
-                "sentence": "誕生日はいつですか。",
-                "translation": "Sinh nhật của bạn là khi nào?",
-                "translationEn": "When is your birthday?"
-            },
-            {
-                "sentence": "いつ国へ帰りますか。",
-                "translation": "Khi nào bạn về nước?",
-                "translationEn": "When will you go back to your country?"
-            },
-            {
-                "sentence": "いつ勉強しますか。",
-                "translation": "Khi nào bạn học bài?",
-                "translationEn": "When do you study?"
-            },
-            {
-                "sentence": "夏休みはいつですか。",
-                "translation": "Kỳ nghỉ hè là khi nào?",
-                "translationEn": "When is summer vacation?"
-            },
-            {
-                "sentence": "いつ広島へ行きますか。",
-                "translation": "Khi nào bạn đi Hiroshima?",
-                "translationEn": "When are you going to Hiroshima?"
-            },
-            {
-                "sentence": "次の会議はいつですか。",
-                "translation": "Cuộc họp tiếp theo là khi nào?",
-                "translationEn": "When is the next meeting?"
-            },
-            {
-                "sentence": "いつ結婚しましたか。",
-                "translation": "Bạn kết hôn khi nào?",
-                "translationEn": "When did you get married?"
-            },
-            {
-                "sentence": "パーティーはいつですか。",
-                "translation": "Buổi tiệc là khi nào?",
-                "translationEn": "When is the party?"
-            },
-            {
-                "sentence": "いつ宿題をしますか。",
-                "translation": "Khi nào bạn làm bài tập?",
-                "translationEn": "When will you do your homework?"
-            }
-        ]
-    }
+  {
+    "grammarPoint": "Động từ di chuyển (行きます, 来ます, 帰ります)",
+    "examples": [
+      {
+        "sentence": "私は京都へ行きます。",
+        "translation": "Tôi đi Kyoto.",
+        "translationEn": "I am going to Kyoto."
+      },
+      {
+        "sentence": "日本へ来ました。",
+        "translation": "Tôi đã đến Nhật Bản.",
+        "translationEn": "I came to Japan."
+      },
+      {
+        "sentence": "うちへ帰ります。",
+        "translation": "Tôi về nhà.",
+        "translationEn": "I am going home."
+      },
+      {
+        "sentence": "明日、どこへ行きますか。",
+        "translation": "Ngày mai bạn đi đâu?",
+        "translationEn": "Where are you going tomorrow?"
+      },
+      {
+        "sentence": "来週、国へ帰ります。",
+        "translation": "Tuần sau tôi về nước.",
+        "translationEn": "I am returning to my country next week."
+      },
+      {
+        "sentence": "日曜日、スーパーへ行きました。",
+        "translation": "Chủ nhật tôi đã đi siêu thị.",
+        "translationEn": "I went to the supermarket on Sunday."
+      },
+      {
+        "sentence": "昨日、学校へ行きませんでした。",
+        "translation": "Hôm qua tôi đã không đến trường.",
+        "translationEn": "I did not go to school yesterday."
+      },
+      {
+        "sentence": "いつ大阪へ行きますか。",
+        "translation": "Khi nào bạn đi Osaka?",
+        "translationEn": "When are you going to Osaka?"
+      },
+      {
+        "sentence": "去年、日本へ来ました。",
+        "translation": "Tôi đã đến Nhật năm ngoái.",
+        "translationEn": "I came to Japan last year."
+      },
+      {
+        "sentence": "友達が私のうちへ来ました。",
+        "translation": "Bạn tôi đã đến nhà tôi.",
+        "translationEn": "My friend came to my house."
+      }
+    ]
+  },
+  {
+    "grammarPoint": "Phủ định hoàn toàn (どこも, 何も)",
+    "examples": [
+      {
+        "sentence": "どこも行きません。",
+        "translation": "Tôi không đi đâu cả.",
+        "translationEn": "I'm not going anywhere."
+      },
+      {
+        "sentence": "何も食べません。",
+        "translation": "Tôi không ăn gì cả.",
+        "translationEn": "I'm not eating anything."
+      },
+      {
+        "sentence": "昨日はどこも行きませんでした。",
+        "translation": "Hôm qua tôi đã không đi đâu cả.",
+        "translationEn": "I didn't go anywhere yesterday."
+      },
+      {
+        "sentence": "週末はどこも行きません。",
+        "translation": "Cuối tuần tôi không đi đâu cả.",
+        "translationEn": "I'm not going anywhere this weekend."
+      },
+      {
+        "sentence": "誰もいません。",
+        "translation": "Không có ai cả.",
+        "translationEn": "There is no one here."
+      },
+      {
+        "sentence": "何も買いませんでした。",
+        "translation": "Tôi đã không mua gì cả.",
+        "translationEn": "I didn't buy anything."
+      },
+      {
+        "sentence": "日曜日どこへ行きましたか。…どこも行きませんでした。",
+        "translation": "Chủ nhật bạn đã đi đâu? ...Tôi không đi đâu cả.",
+        "translationEn": "Where did you go on Sunday? ...I didn't go anywhere."
+      },
+      {
+        "sentence": "何を飲みますか。…何も飲みません。",
+        "translation": "Bạn uống gì? ...Tôi không uống gì cả.",
+        "translationEn": "What will you drink? ...I won't drink anything."
+      },
+      {
+        "sentence": "朝ごはんを食べましたか。…いいえ、何も食べませんでした。",
+        "translation": "Bạn đã ăn sáng chưa? ...Không, tôi chưa ăn gì cả.",
+        "translationEn": "Did you eat breakfast? ...No, I didn't eat anything."
+      },
+      {
+        "sentence": "何もほしくないです。",
+        "translation": "Tôi không muốn gì cả.",
+        "translationEn": "I don't want anything."
+      }
+    ]
+  },
+  {
+    "grammarPoint": "Phương tiện di chuyển (N で)",
+    "examples": [
+      {
+        "sentence": "電車で行きます。",
+        "translation": "Tôi đi bằng tàu điện.",
+        "translationEn": "I go by train."
+      },
+      {
+        "sentence": "タクシーで来ました。",
+        "translation": "Tôi đã đến bằng taxi.",
+        "translationEn": "I came by taxi."
+      },
+      {
+        "sentence": "自転車で学校へ行きます。",
+        "translation": "Tôi đi xe đạp đến trường.",
+        "translationEn": "I go to school by bicycle."
+      },
+      {
+        "sentence": "バスで会社へ行きます。",
+        "translation": "Tôi đi xe buýt đến công ty.",
+        "translationEn": "I go to work by bus."
+      },
+      {
+        "sentence": "新幹線で東京へ行きました。",
+        "translation": "Tôi đã đi Shinkansen đến Tokyo.",
+        "translationEn": "I went to Tokyo by Shinkansen."
+      },
+      {
+        "sentence": "飛行機で国へ帰ります。",
+        "translation": "Tôi về nước bằng máy bay.",
+        "translationEn": "I return to my country by plane."
+      },
+      {
+        "sentence": "何で京都へ行きますか。",
+        "translation": "Bạn đi Kyoto bằng gì?",
+        "translationEn": "How will you go to Kyoto?"
+      },
+      {
+        "sentence": "地下鉄で病院へ行きます。",
+        "translation": "Tôi đi tàu điện ngầm đến bệnh viện.",
+        "translationEn": "I go to the hospital by subway."
+      },
+      {
+        "sentence": "車で海へ行きました。",
+        "translation": "Tôi đã lái xe ô tô đi biển.",
+        "translationEn": "I went to the sea by car."
+      },
+      {
+        "sentence": "船で旅行します。",
+        "translation": "Tôi đi du lịch bằng tàu thủy.",
+        "translationEn": "I travel by ship."
+      }
+    ]
+  },
+  {
+    "grammarPoint": "歩いて (Đi bộ)",
+    "examples": [
+      {
+        "sentence": "駅から歩いて帰りました。",
+        "translation": "Tôi đã đi bộ từ nhà ga về.",
+        "translationEn": "I walked home from the station."
+      },
+      {
+        "sentence": "歩いて学校へ行きます。",
+        "translation": "Tôi đi bộ đến trường.",
+        "translationEn": "I walk to school."
+      },
+      {
+        "sentence": "ここから駅まで歩いて行きます。",
+        "translation": "Tôi đi bộ từ đây đến nhà ga.",
+        "translationEn": "I walk from here to the station."
+      },
+      {
+        "sentence": "スーパーまで歩いて１０分です。",
+        "translation": "Đi bộ đến siêu thị mất 10 phút.",
+        "translationEn": "It takes 10 minutes to walk to the supermarket."
+      },
+      {
+        "sentence": "歩いてアパートへ帰ります。",
+        "translation": "Tôi đi bộ về căn hộ.",
+        "translationEn": "I walk back to the apartment."
+      },
+      {
+        "sentence": "会社までどうやって行きますか。…歩いて行きます。",
+        "translation": "Bạn đi đến công ty bằng cách nào? ...Tôi đi bộ.",
+        "translationEn": "How do you go to work? ...I walk."
+      },
+      {
+        "sentence": "昨日は歩いてうちへ帰りました。",
+        "translation": "Hôm qua tôi đã đi bộ về nhà.",
+        "translationEn": "I walked home yesterday."
+      },
+      {
+        "sentence": "雨ですから、歩いて行きません。",
+        "translation": "Vì trời mưa nên tôi không đi bộ.",
+        "translationEn": "Since it's raining, I won't walk."
+      },
+      {
+        "sentence": "歩いて散歩します。",
+        "translation": "Tôi đi dạo bộ.",
+        "translationEn": "I take a walk."
+      },
+      {
+        "sentence": "いつも歩いてコンビニへ行きます。",
+        "translation": "Tôi luôn đi bộ đến cửa hàng tiện lợi.",
+        "translationEn": "I always walk to the convenience store."
+      }
+    ]
+  },
+  {
+    "grammarPoint": "Làm gì cùng ai (N と)",
+    "examples": [
+      {
+        "sentence": "家族と日本へ来ました。",
+        "translation": "Tôi đã đến Nhật cùng gia đình.",
+        "translationEn": "I came to Japan with my family."
+      },
+      {
+        "sentence": "一人で東京へ行きます。",
+        "translation": "Tôi đi Tokyo một mình.",
+        "translationEn": "I am going to Tokyo alone."
+      },
+      {
+        "sentence": "友達と映画を見ました。",
+        "translation": "Tôi đã xem phim cùng bạn.",
+        "translationEn": "I watched a movie with my friend."
+      },
+      {
+        "sentence": "彼女と食事しました。",
+        "translation": "Tôi đã đi ăn cùng cô ấy.",
+        "translationEn": "I had a meal with her."
+      },
+      {
+        "sentence": "誰と行きますか。",
+        "translation": "Bạn đi cùng ai?",
+        "translationEn": "Who are you going with?"
+      },
+      {
+        "sentence": "猫と遊びました。",
+        "translation": "Tôi đã chơi với mèo.",
+        "translationEn": "I played with the cat."
+      },
+      {
+        "sentence": "週末、子供と公園へ行きます。",
+        "translation": "Cuối tuần tôi đi công viên với con.",
+        "translationEn": "I go to the park with my child on weekends."
+      },
+      {
+        "sentence": "一人で図書館へ行きました。",
+        "translation": "Tôi đã đi thư viện một mình.",
+        "translationEn": "I went to the library alone."
+      },
+      {
+        "sentence": "田中さんと大阪へ行きます。",
+        "translation": "Tôi đi Osaka cùng anh Tanaka.",
+        "translationEn": "I'm going to Osaka with Mr. Tanaka."
+      },
+      {
+        "sentence": "誰と日本へ来ましたか。",
+        "translation": "Bạn đến Nhật cùng ai?",
+        "translationEn": "Who did you come to Japan with?"
+      }
+    ]
+  },
+  {
+    "grammarPoint": "Khi nào (いつ)",
+    "examples": [
+      {
+        "sentence": "いつ日本へ来ましたか。…３月２５日に来ました。",
+        "translation": "Bạn đến Nhật bao giờ? ...Tôi đến vào ngày 25 tháng 3.",
+        "translationEn": "When did you come to Japan? ...I came on March 25th."
+      },
+      {
+        "sentence": "誕生日はいつですか。",
+        "translation": "Sinh nhật của bạn là khi nào?",
+        "translationEn": "When is your birthday?"
+      },
+      {
+        "sentence": "いつ国へ帰りますか。",
+        "translation": "Khi nào bạn về nước?",
+        "translationEn": "When will you go back to your country?"
+      },
+      {
+        "sentence": "いつ勉強しますか。",
+        "translation": "Khi nào bạn học bài?",
+        "translationEn": "When do you study?"
+      },
+      {
+        "sentence": "夏休みはいつですか。",
+        "translation": "Kỳ nghỉ hè là khi nào?",
+        "translationEn": "When is summer vacation?"
+      },
+      {
+        "sentence": "いつ広島へ行きますか。",
+        "translation": "Khi nào bạn đi Hiroshima?",
+        "translationEn": "When are you going to Hiroshima?"
+      },
+      {
+        "sentence": "次の会議はいつですか。",
+        "translation": "Cuộc họp tiếp theo là khi nào?",
+        "translationEn": "When is the next meeting?"
+      },
+      {
+        "sentence": "いつ結婚しましたか。",
+        "translation": "Bạn kết hôn khi nào?",
+        "translationEn": "When did you get married?"
+      },
+      {
+        "sentence": "パーティーはいつですか。",
+        "translation": "Buổi tiệc là khi nào?",
+        "translationEn": "When is the party?"
+      },
+      {
+        "sentence": "いつ宿題をしますか。",
+        "translation": "Khi nào bạn làm bài tập?",
+        "translationEn": "When will you do your homework?"
+      }
+    ]
+  }
 ]

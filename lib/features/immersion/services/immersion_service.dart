@@ -1080,7 +1080,7 @@ class ImmersionService {
   bool _isWhitespace(String char) => char.trim().isEmpty || char == '\u00A0';
 
   bool _isPunctuation(String char) {
-    const punctuation = '。、！？.,!?「」『』（）()[]{}・：:；;…';
+    const punctuation = '。、!?.,!?「」『』()()[]{}・::;;…';
     return punctuation.contains(char);
   }
 }

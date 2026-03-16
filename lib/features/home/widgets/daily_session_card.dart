@@ -820,7 +820,7 @@ class _CoachStepList extends StatelessWidget {
         case AppLanguage.ja:
           return 'All reviews cleared';
         case AppLanguage.vi:
-          return '?? ?n xong t?t c?';
+          return 'Đã ôn xong tất cả';
       }
     }
     switch (language) {
@@ -828,7 +828,7 @@ class _CoachStepList extends StatelessWidget {
       case AppLanguage.ja:
         return 'Review $totalDue due items';
       case AppLanguage.vi:
-        return '?n $totalDue m?c ??n h?n';
+        return 'Ôn $totalDue mục đến hạn';
     }
   }
 
@@ -839,7 +839,7 @@ class _CoachStepList extends StatelessWidget {
         case AppLanguage.ja:
           return 'No weak spots left';
         case AppLanguage.vi:
-          return 'Kh?ng c?n ?i?m y?u';
+          return 'Không còn điểm yếu';
       }
     }
     switch (language) {
@@ -847,7 +847,7 @@ class _CoachStepList extends StatelessWidget {
       case AppLanguage.ja:
         return 'Fix $totalFix weak spots';
       case AppLanguage.vi:
-        return 'S?a $totalFix ?i?m y?u';
+        return 'Sửa $totalFix điểm yếu';
     }
   }
 }

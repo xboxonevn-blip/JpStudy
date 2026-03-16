@@ -18,7 +18,7 @@ class HomeKanjiReadingScreen extends ConsumerWidget {
     final level = ref.watch(studyLevelProvider);
     if (level == null) {
       return Scaffold(
-        appBar: AppBar(title: const Text('Kanji Reading Quiz')),
+        appBar: AppBar(title: Text(ref.watch(appLanguageProvider).kanjiReadingQuizTitle)),
         body: Center(child: Text(language.levelMenuTitle)),
       );
     }
@@ -29,7 +29,7 @@ class HomeKanjiReadingScreen extends ConsumerWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
-            appBar: AppBar(title: Text('Kanji Reading ${level.shortLabel}')),
+            appBar: AppBar(title: Text('${ref.watch(appLanguageProvider).kanjiReadingQuizTitle} ${level.shortLabel}')),
             body: const Center(child: CircularProgressIndicator()),
           );
         }
@@ -37,13 +37,13 @@ class HomeKanjiReadingScreen extends ConsumerWidget {
         final items = snapshot.data ?? const [];
         if (items.isEmpty || items.length < 4) {
           return Scaffold(
-            appBar: AppBar(title: Text('Kanji Reading ${level.shortLabel}')),
+            appBar: AppBar(title: Text('${ref.watch(appLanguageProvider).kanjiReadingQuizTitle} ${level.shortLabel}')),
             body: Center(child: Text(language.noTermsAvailableLabel)),
           );
         }
 
         return Scaffold(
-          appBar: AppBar(title: Text('Kanji Reading ${level.shortLabel}')),
+          appBar: AppBar(title: Text('${ref.watch(appLanguageProvider).kanjiReadingQuizTitle} ${level.shortLabel}')),
           body: Center(
             child: Padding(
               padding: const EdgeInsets.all(32),
@@ -54,7 +54,7 @@ class HomeKanjiReadingScreen extends ConsumerWidget {
                       size: 64, color: Color(0xFF1E3A5F)),
                   const SizedBox(height: 24),
                   Text(
-                    'Kanji Reading Quiz',
+                    language.kanjiReadingQuizTitle,
                     style: Theme.of(context)
                         .textTheme
                         .headlineMedium
@@ -62,7 +62,7 @@ class HomeKanjiReadingScreen extends ConsumerWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    '${items.length} kanji available',
+                    language.kanjiAvailableLabel(items.length),
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge
@@ -123,7 +123,7 @@ class HomeKanjiReadingScreen extends ConsumerWidget {
                                   }
                                 },
                                 icon: const Icon(Icons.rate_review_rounded),
-                                label: Text('$count due for review'),
+                                label: Text(language.dueForReviewLabel(count)),
                               ),
                             ),
                           );
@@ -148,7 +148,7 @@ class HomeKanjiReadingScreen extends ConsumerWidget {
                           ),
                         );
                       },
-                      child: const Text('Start Quiz'),
+                      child: Text(language.startQuizLabel),
                     ),
                   ),
                 ],

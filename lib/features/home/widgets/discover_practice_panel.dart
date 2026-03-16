@@ -375,7 +375,7 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
   String _reorderTitle(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Reorder Practice Cards';
+        return 'Reorder cards';
       case AppLanguage.vi:
         return 'Sắp xếp thẻ luyện tập';
       case AppLanguage.ja:
@@ -386,7 +386,7 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
   String _reorderSubtitle(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Drag to reorder quick practice cards.';
+        return 'Drag to reorder cards.';
       case AppLanguage.vi:
         return 'Kéo thả để đổi thứ tự thẻ luyện tập nhanh.';
       case AppLanguage.ja:

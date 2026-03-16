@@ -7,12 +7,7 @@ import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/common/widgets/japanese_background.dart';
-import 'package:jpstudy/features/home/models/unit.dart';
-import 'package:jpstudy/features/home/viewmodels/learning_path_viewmodel.dart';
 import 'package:jpstudy/features/home/widgets/home_surface.dart';
-import 'package:jpstudy/features/home/widgets/unit_map_widget.dart';
-
-enum _LibrarySection { lessons, path }
 
 class LibraryScreen extends ConsumerStatefulWidget {
   const LibraryScreen({super.key});
@@ -22,8 +17,6 @@ class LibraryScreen extends ConsumerStatefulWidget {
 }
 
 class _LibraryScreenState extends ConsumerState<LibraryScreen> {
-  _LibrarySection _section = _LibrarySection.lessons;
-
   @override
   Widget build(BuildContext context) {
     final language = ref.watch(appLanguageProvider);
@@ -31,7 +24,6 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
     final lessonsAsync = ref.watch(
       lessonMetaProvider(selectedLevel.shortLabel),
     );
-    final pathAsync = ref.watch(learningPathViewModelProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -59,24 +51,7 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
               const SizedBox(height: 16),
               _QuickAccessRow(language: language),
               const SizedBox(height: 16),
-              _SectionSwitcher(
-                language: language,
-                selected: _section,
-                onSelected: (section) {
-                  setState(() {
-                    _section = section;
-                  });
-                },
-              ),
-              const SizedBox(height: 16),
-              if (_section == _LibrarySection.lessons)
-                _LessonSection(language: language, lessonsAsync: lessonsAsync)
-              else
-                _PathSection(
-                  language: language,
-                  selectedLevel: selectedLevel,
-                  pathAsync: pathAsync,
-                ),
+              _LessonSection(language: language, lessonsAsync: lessonsAsync),
             ],
           ),
         ),
@@ -87,11 +62,11 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
   String _title(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Library';
+        return 'Study';
       case AppLanguage.vi:
-        return 'Thu vien';
+        return 'Học';
       case AppLanguage.ja:
-        return 'Library';
+        return '学習';
     }
   }
 
@@ -100,9 +75,9 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
       case AppLanguage.en:
         return 'Search';
       case AppLanguage.vi:
-        return 'Tim kiem';
+        return 'Tìm kiếm';
       case AppLanguage.ja:
-        return 'Search';
+        return '検索';
     }
   }
 }
@@ -163,11 +138,11 @@ class _LibraryHero extends ConsumerWidget {
   String _focusLabel(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Library';
+        return 'Study';
       case AppLanguage.vi:
-        return 'Thu vien';
+        return 'Học';
       case AppLanguage.ja:
-        return 'Library';
+        return '学習';
     }
   }
 }
@@ -207,20 +182,20 @@ class _QuickAccessRow extends StatelessWidget {
       case AppLanguage.en:
         return 'Vocab';
       case AppLanguage.vi:
-        return 'Tu vung';
+        return 'Từ vựng';
       case AppLanguage.ja:
-        return 'Vocab';
+        return '単語';
     }
   }
 
   String _vocabHint(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Browse terms by level';
+        return 'Terms by level';
       case AppLanguage.vi:
-        return 'Xem tu vung theo cap do';
+        return 'Từ theo cấp độ';
       case AppLanguage.ja:
-        return 'Browse terms by level';
+        return 'レベル別の単語';
     }
   }
 
@@ -229,122 +204,21 @@ class _QuickAccessRow extends StatelessWidget {
       case AppLanguage.en:
         return 'Grammar';
       case AppLanguage.vi:
-        return 'Ngu phap';
+        return 'Ngữ pháp';
       case AppLanguage.ja:
-        return 'Grammar';
+        return '文法';
     }
   }
 
   String _grammarHint(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Review points and examples';
+        return 'Points and examples';
       case AppLanguage.vi:
-        return 'On lai diem ngu phap va vi du';
+        return 'Mẫu và ví dụ';
       case AppLanguage.ja:
-        return 'Review points and examples';
+        return 'パターンと例文';
     }
-  }
-}
-
-class _SectionSwitcher extends StatelessWidget {
-  const _SectionSwitcher({
-    required this.language,
-    required this.selected,
-    required this.onSelected,
-  });
-
-  final AppLanguage language;
-  final _LibrarySection selected;
-  final ValueChanged<_LibrarySection> onSelected;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: HomeSurface.softPanel(),
-      padding: const EdgeInsets.all(6),
-      child: Row(
-        children: [
-          Expanded(
-            child: _SectionButton(
-              label: _lessonsLabel(language),
-              selected: selected == _LibrarySection.lessons,
-              onTap: () => onSelected(_LibrarySection.lessons),
-            ),
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: _SectionButton(
-              label: _pathLabel(language),
-              selected: selected == _LibrarySection.path,
-              onTap: () => onSelected(_LibrarySection.path),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  String _lessonsLabel(AppLanguage language) {
-    switch (language) {
-      case AppLanguage.en:
-        return 'Lessons';
-      case AppLanguage.vi:
-        return 'Bai hoc';
-      case AppLanguage.ja:
-        return 'Lessons';
-    }
-  }
-
-  String _pathLabel(AppLanguage language) {
-    switch (language) {
-      case AppLanguage.en:
-        return 'Path';
-      case AppLanguage.vi:
-        return 'Lo trinh';
-      case AppLanguage.ja:
-        return 'Path';
-    }
-  }
-}
-
-class _SectionButton extends StatelessWidget {
-  const _SectionButton({
-    required this.label,
-    required this.selected,
-    required this.onTap,
-  });
-
-  final String label;
-  final bool selected;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(16),
-      onTap: onTap,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 160),
-        curve: Curves.easeOutCubic,
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-        decoration: BoxDecoration(
-          color: selected ? const Color(0xFFE0F2FE) : Colors.transparent,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: selected ? const Color(0xFFBAE6FD) : Colors.transparent,
-          ),
-        ),
-        child: Text(
-          label,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontWeight: FontWeight.w800,
-            color: selected ? const Color(0xFF0F172A) : const Color(0xFF64748B),
-          ),
-        ),
-      ),
-    );
   }
 }
 
@@ -367,57 +241,9 @@ class _LessonSection extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),
                 child: _LessonTile(
+                  language: language,
                   lesson: lesson,
                   onTap: () => context.push('/lesson/${lesson.id}'),
-                ),
-              ),
-          ],
-        );
-      },
-      loading: () => const Padding(
-        padding: EdgeInsets.all(24),
-        child: Center(child: CircularProgressIndicator()),
-      ),
-      error: (error, stackTrace) => Padding(
-        padding: const EdgeInsets.all(24),
-        child: Text(language.loadErrorLabel),
-      ),
-    );
-  }
-}
-
-class _PathSection extends StatelessWidget {
-  const _PathSection({
-    required this.language,
-    required this.selectedLevel,
-    required this.pathAsync,
-  });
-
-  final AppLanguage language;
-  final StudyLevel selectedLevel;
-  final AsyncValue<List<Unit>> pathAsync;
-
-  @override
-  Widget build(BuildContext context) {
-    return pathAsync.when(
-      data: (units) {
-        final filteredUnits = units
-            .where((unit) => unit.id == selectedLevel.shortLabel)
-            .toList(growable: false);
-
-        if (filteredUnits.isEmpty) {
-          return _EmptyPath(language: language);
-        }
-
-        return Column(
-          children: [
-            for (final unit in filteredUnits)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 14),
-                child: UnitMapWidget(
-                  unit: unit,
-                  onNodeTap: (node) =>
-                      context.push('/lesson/${node.lesson.id}'),
                 ),
               ),
           ],
@@ -478,8 +304,13 @@ class _QuickCard extends StatelessWidget {
 }
 
 class _LessonTile extends StatelessWidget {
-  const _LessonTile({required this.lesson, required this.onTap});
+  const _LessonTile({
+    required this.language,
+    required this.lesson,
+    required this.onTap,
+  });
 
+  final AppLanguage language;
   final LessonMeta lesson;
   final VoidCallback onTap;
 
@@ -488,6 +319,29 @@ class _LessonTile extends StatelessWidget {
     final progress = lesson.termCount == 0
         ? 0.0
         : lesson.completedCount / lesson.termCount;
+
+
+    String dueLabel(AppLanguage language, int count) {
+      switch (language) {
+        case AppLanguage.en:
+          return '$count due';
+        case AppLanguage.vi:
+          return '$count đến hạn';
+        case AppLanguage.ja:
+          return '$count 件';
+      }
+    }
+
+    String progressLabel(AppLanguage language, int completed, int total) {
+      switch (language) {
+        case AppLanguage.en:
+          return '$completed/$total complete';
+        case AppLanguage.vi:
+          return '$completed/$total hoàn thành';
+        case AppLanguage.ja:
+          return '$completed/$total 完了';
+      }
+    }
 
     return Material(
       color: Colors.transparent,
@@ -521,7 +375,7 @@ class _LessonTile extends StatelessWidget {
                         borderRadius: BorderRadius.circular(999),
                       ),
                       child: Text(
-                        '${lesson.dueCount} due',
+                        dueLabel(language, lesson.dueCount),
                         style: const TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w700,
@@ -533,7 +387,7 @@ class _LessonTile extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                '${lesson.completedCount}/${lesson.termCount} items complete',
+                progressLabel(language, lesson.completedCount, lesson.termCount),
                 style: const TextStyle(color: Color(0xFF64748B), fontSize: 12),
               ),
               const SizedBox(height: 10),
@@ -565,29 +419,12 @@ class _EmptyLibrary extends StatelessWidget {
       decoration: HomeSurface.softPanel(),
       padding: const EdgeInsets.all(24),
       child: Text(switch (language) {
-        AppLanguage.en => 'No lessons available for this level yet.',
-        AppLanguage.vi => 'Chua co bai hoc cho cap do nay.',
-        AppLanguage.ja => 'No lessons available for this level yet.',
+        AppLanguage.en => 'No lessons for this level yet.',
+        AppLanguage.vi => 'Chưa có bài học cho cấp độ này.',
+        AppLanguage.ja => 'このレベルにはまだレッスンがありません。',
       }),
     );
   }
 }
 
-class _EmptyPath extends StatelessWidget {
-  const _EmptyPath({required this.language});
 
-  final AppLanguage language;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: HomeSurface.softPanel(),
-      padding: const EdgeInsets.all(24),
-      child: Text(switch (language) {
-        AppLanguage.en => 'No path data available for this level yet.',
-        AppLanguage.vi => 'Chua co lo trinh hoc cho cap do nay.',
-        AppLanguage.ja => 'No path data available for this level yet.',
-      }),
-    );
-  }
-}

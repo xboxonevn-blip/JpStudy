@@ -56,7 +56,7 @@ class PracticeScreen extends ConsumerWidget {
       case AppLanguage.en:
         return 'Practice';
       case AppLanguage.vi:
-        return 'Luyen tap';
+        return 'Luyện tập';
       case AppLanguage.ja:
         return 'Practice';
     }
@@ -67,7 +67,7 @@ class PracticeScreen extends ConsumerWidget {
       case AppLanguage.en:
         return 'One place for review, drills, exam prep, and skill training.';
       case AppLanguage.vi:
-        return 'Mot noi de on tap, luyen bai, thi thu va ren ky nang.';
+        return 'Một nơi để ôn tập, luyện bài, thi thử và rèn kỹ năng.';
       case AppLanguage.ja:
         return 'Review, drills, exam prep, and skill training in one place.';
     }
@@ -78,7 +78,7 @@ class PracticeScreen extends ConsumerWidget {
       case AppLanguage.en:
         return 'Search';
       case AppLanguage.vi:
-        return 'Tim kiem';
+        return 'Tìm kiếm';
       case AppLanguage.ja:
         return 'Search';
     }

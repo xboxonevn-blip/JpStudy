@@ -204,7 +204,7 @@ class GrammarDetailScreen extends ConsumerWidget {
 
   String _title(AppLanguage language) {
     return switch (language) {
-      AppLanguage.en => 'Grammar Point',
+      AppLanguage.en => 'Grammar',
       AppLanguage.vi => 'Điểm ngữ pháp',
       AppLanguage.ja => '文法ポイント',
     };
@@ -220,7 +220,7 @@ class GrammarDetailScreen extends ConsumerWidget {
 
   String _markLearnedLabel(AppLanguage language) {
     return switch (language) {
-      AppLanguage.en => 'Mark Learned',
+      AppLanguage.en => 'Mark done',
       AppLanguage.vi => 'Đánh dấu đã học',
       AppLanguage.ja => '学習済みにする',
     };

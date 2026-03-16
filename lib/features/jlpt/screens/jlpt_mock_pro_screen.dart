@@ -54,13 +54,13 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
   String _areaLabel(AppLanguage language, JlptSkillArea area) {
     switch (area) {
       case JlptSkillArea.vocabulary:
-        return _tr(language, 'Vocabulary', 'Tu vung', '??');
+        return _tr(language, 'Vocabulary', 'Từ vựng', '??');
       case JlptSkillArea.grammar:
-        return _tr(language, 'Grammar', 'Ngu phap', '??');
+        return _tr(language, 'Grammar', 'Ngữ pháp', '??');
       case JlptSkillArea.kanji:
         return _tr(language, 'Kanji', 'Kanji', '??');
       case JlptSkillArea.reading:
-        return _tr(language, 'Reading', 'Doc hieu', '??');
+        return _tr(language, 'Reading', 'Đọc hiểu', '??');
     }
   }
 
@@ -226,7 +226,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
       return Scaffold(
         appBar: AppBar(
           title: Text(
-            _tr(language, 'JLPT Mock Pro', 'De thi thu JLPT Pro', 'JLPT?? Pro'),
+            _tr(language, 'JLPT Mock Pro', 'Đề thi thử JLPT Pro', 'JLPT?? Pro'),
           ),
         ),
         body: ListView(
@@ -285,7 +285,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
           : DateTime.now().difference(_startedAt!);
       return Scaffold(
         appBar: AppBar(
-          title: Text(_tr(language, 'Mock result', 'Ket qua mock', '????')),
+          title: Text(_tr(language, 'Mock result', 'Kết quả mock', '????')),
         ),
         body: ListView(
           padding: const EdgeInsets.all(16),
@@ -300,7 +300,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
                 _tr(
                   language,
                   'Overall: $overall% | ${pass ? 'Predicted PASS' : 'Predicted FAIL'} | Time ${elapsed.inMinutes}m ${elapsed.inSeconds % 60}s',
-                  'Tong diem: $overall% | ${pass ? 'Du doan DAU' : 'Du doan CHUA DAU'} | Thoi gian ${elapsed.inMinutes}p ${elapsed.inSeconds % 60}s',
+                  'Tổng điểm: $overall% | ${pass ? 'Dự đoán ĐẬt' : 'Dự đoán CHƯA ĐẬt'} | Thoi gian ${elapsed.inMinutes}p ${elapsed.inSeconds % 60}s',
                   '??: $overall% | ${pass ? '????' : '?????'} | ?? ${elapsed.inMinutes}?${elapsed.inSeconds % 60}?',
                 ),
                 style: const TextStyle(
@@ -383,7 +383,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
             FilledButton.icon(
               onPressed: _startExam,
               icon: const Icon(Icons.refresh_rounded),
-              label: Text(_tr(language, 'Run again', 'Thi lai', '??????')),
+              label: Text(_tr(language, 'Run again', 'Thi lại', '??????')),
             ),
           ],
         ),
@@ -396,7 +396,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          _tr(language, 'JLPT Mock Pro', 'De thi thu JLPT Pro', 'JLPT?? Pro'),
+          _tr(language, 'JLPT Mock Pro', 'Đề thi thử JLPT Pro', 'JLPT?? Pro'),
         ),
       ),
       body: ListView(
@@ -531,7 +531,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
                   onPressed: _finishExam,
                   icon: const Icon(Icons.flag_rounded),
                   label: Text(
-                    _tr(language, 'Finish now', 'Ket thuc ngay', '?????'),
+                    _tr(language, 'Finish now', 'Kết thúc ngay', '?????'),
                   ),
                 ),
               ),

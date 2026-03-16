@@ -1,4 +1,4 @@
-enum AppLanguage { en, vi, ja }
+﻿enum AppLanguage { en, vi, ja }
 
 extension AppLanguageLabels on AppLanguage {
   String get label {
@@ -739,6 +739,127 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get noInternetErrorLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'No internet connection. Please try again.';
+      case AppLanguage.vi:
+        return 'Kh\u00f4ng c\u00f3 k\u1ebft n\u1ed1i m\u1ea1ng. Vui l\u00f2ng th\u1eed l\u1ea1i.';
+      case AppLanguage.ja:
+        return '\u30a4\u30f3\u30bf\u30fc\u30cd\u30c3\u30c8\u306b\u63a5\u7d9a\u3067\u304d\u307e\u305b\u3093\u3002\u3082\u3046\u4e00\u5ea6\u304a\u8a66\u3057\u304f\u3060\u3055\u3044\u3002';
+    }
+  }
+
+  String get timeoutErrorLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Request timed out. Please try again.';
+      case AppLanguage.vi:
+        return 'Y\u00eau c\u1ea7u \u0111\u00e3 h\u1ebft th\u1eddi gian. Vui l\u00f2ng th\u1eed l\u1ea1i.';
+      case AppLanguage.ja:
+        return '\u30ea\u30af\u30a8\u30b9\u30c8\u304c\u30bf\u30a4\u30e0\u30a2\u30a6\u30c8\u3057\u307e\u3057\u305f\u3002\u3082\u3046\u4e00\u5ea6\u304a\u8a66\u3057\u304f\u3060\u3055\u3044\u3002';
+    }
+  }
+
+  String get genericErrorLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Something went wrong. Please try again.';
+      case AppLanguage.vi:
+        return 'C\u00f3 l\u1ed7i x\u1ea3y ra. Vui l\u00f2ng th\u1eed l\u1ea1i.';
+      case AppLanguage.ja:
+        return '\u554f\u984c\u304c\u767a\u751f\u3057\u307e\u3057\u305f\u3002\u3082\u3046\u4e00\u5ea6\u304a\u8a66\u3057\u304f\u3060\u3055\u3044\u3002';
+    }
+  }
+
+  String get cancelLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Cancel';
+      case AppLanguage.vi:
+        return 'H\u1ee7y';
+      case AppLanguage.ja:
+        return '\u30ad\u30e3\u30f3\u30bb\u30eb';
+    }
+  }
+
+  String get saveLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Save';
+      case AppLanguage.vi:
+        return 'L\u01b0u';
+      case AppLanguage.ja:
+        return '\u4fdd\u5b58';
+    }
+  }
+
+  String get todayLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Today';
+      case AppLanguage.vi:
+        return 'H\u00f4m nay';
+      case AppLanguage.ja:
+        return '\u4eca\u65e5';
+    }
+  }
+
+  String get tomorrowLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Tomorrow';
+      case AppLanguage.vi:
+        return 'Ng\u00e0y mai';
+      case AppLanguage.ja:
+        return '\u660e\u65e5';
+    }
+  }
+
+  String inDaysLabel(int days) {
+    switch (this) {
+      case AppLanguage.en:
+        return 'In $days days';
+      case AppLanguage.vi:
+        return '$days ng\u00e0y n\u1eefa';
+      case AppLanguage.ja:
+        return '$days\u65e5\u5f8c';
+    }
+  }
+
+  String nextReviewToastLabel(String label) {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Next review: $label';
+      case AppLanguage.vi:
+        return 'L\u1ea7n \u00f4n ti\u1ebfp theo: $label';
+      case AppLanguage.ja:
+        return '\u6b21\u306e\u5fa9\u7fd2: $label';
+    }
+  }
+
+  String get mnemonicHintLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Hint';
+      case AppLanguage.vi:
+        return 'G\u1ee3i nh\u1edb';
+      case AppLanguage.ja:
+        return '\u30d2\u30f3\u30c8';
+    }
+  }
+
+  String get tapCardToRevealLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Tap card to reveal';
+      case AppLanguage.vi:
+        return 'Ch\u1ea1m th\u1ebb \u0111\u1ec3 m\u1edf';
+      case AppLanguage.ja:
+        return '\u30ab\u30fc\u30c9\u3092\u30bf\u30c3\u30d7\u3057\u3066\u8868\u793a';
+    }
+  }
+
   String get restartLabel {
     switch (this) {
       case AppLanguage.en:
@@ -843,7 +964,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Streak';
       case AppLanguage.vi:
-        return 'Chuỗi';
+        return 'Chuá»—i';
       case AppLanguage.ja:
         return 'ストリーク';
     }
@@ -867,7 +988,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.vi:
         return 'Luyện tập';
       case AppLanguage.ja:
-        return '練習';
+        return 'ç·´ç¿\'';
     }
   }
 
@@ -889,7 +1010,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.vi:
         return '$count mục';
       case AppLanguage.ja:
-        return '$count件';
+        return '$countä»¶';
     }
   }
 
@@ -898,7 +1019,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Mistakes';
       case AppLanguage.vi:
-        return 'Lỗi sai';
+        return 'Lá»—i sai';
       case AppLanguage.ja:
         return '間違い';
     }
@@ -933,7 +1054,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.vi:
         return 'Bạn đã bắt kịp hết. Tiếp tục nhé!';
       case AppLanguage.ja:
-        return '今のところ順調です。このまま続けましょう！';
+        return '今のところ順調です。このまま続けましょう!';
     }
   }
 
@@ -955,7 +1076,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.vi:
         return 'Mục #$id';
       case AppLanguage.ja:
-        return '項目 #$id';
+        return 'é …ç›® #$id';
     }
   }
 
@@ -1083,7 +1204,7 @@ extension AppLanguageLabels on AppLanguage {
   String get mistakeSourceReviewLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Review';
+        return 'Review now';
       case AppLanguage.vi:
         return 'Ôn';
       case AppLanguage.ja:
@@ -1457,11 +1578,11 @@ extension AppLanguageLabels on AppLanguage {
   String get reviewAction {
     switch (this) {
       case AppLanguage.en:
-        return 'Review';
+        return 'Review now';
       case AppLanguage.vi:
-        return '\u00d4n t\u1eadp';
+        return '\u00d4n ngay';
       case AppLanguage.ja:
-        return '\u5fa9\u7fd2';
+        return '\u4eca\u3059\u3050\u5fa9\u7fd2';
     }
   }
 
@@ -1646,7 +1767,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Mixed';
       case AppLanguage.vi:
-        return 'Trộn';
+        return 'Trá»™n';
       case AppLanguage.ja:
         return 'ミックス';
     }
@@ -1659,7 +1780,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.vi:
         return 'Chế độ từ ghép: viết từng kanji từ trái sang phải.';
       case AppLanguage.ja:
-        return '熟語モード：左から右へ1文字ずつ書きます。';
+        return '熟語モード:左から右へ1文字ずつ書きます。';
     }
   }
 
@@ -1703,7 +1824,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.vi:
         return '$count nét';
       case AppLanguage.ja:
-        return '$count画';
+        return '$countç"»';
     }
   }
 
@@ -1758,7 +1879,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.vi:
         return 'Nét $current/$total';
       case AppLanguage.ja:
-        return '$current/$total画';
+        return '$current/$totalç"»';
     }
   }
 
@@ -1833,7 +1954,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'New';
       case AppLanguage.vi:
-        return 'Mới';
+        return 'Má»›i';
       case AppLanguage.ja:
         return '新規';
     }
@@ -1842,7 +1963,7 @@ extension AppLanguageLabels on AppLanguage {
   String get handwritingStatusReviewLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Review';
+        return 'Review now';
       case AppLanguage.vi:
         return 'Ôn tập';
       case AppLanguage.ja:
@@ -2378,6 +2499,149 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get roundProgressTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Round progress';
+      case AppLanguage.vi:
+        return 'Ti\u1ebfn \u0111\u1ed9 v\u00f2ng';
+      case AppLanguage.ja:
+        return '\u30e9\u30a6\u30f3\u30c9\u9032\u6357';
+    }
+  }
+
+  String remainingCardsLabel(int count) {
+    switch (this) {
+      case AppLanguage.en:
+        return '$count left';
+      case AppLanguage.vi:
+        return 'C\u00f2n $count';
+      case AppLanguage.ja:
+        return '\u6b8b\u308a $count';
+    }
+  }
+
+  String get vocabularySrsTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Words SRS';
+      case AppLanguage.vi:
+        return 'SRS t\u1eeb v\u1ef1ng';
+      case AppLanguage.ja:
+        return '\u5358\u8a9e SRS';
+    }
+  }
+
+  String itemsReviewedViaSrsLabel(int count) {
+    switch (this) {
+      case AppLanguage.en:
+        return '$count items reviewed via SRS';
+      case AppLanguage.vi:
+        return '$count m\u1ee5c \u0111\u00e3 \u00f4n qua SRS';
+      case AppLanguage.ja:
+        return 'SRS \u3067\u5fa9\u7fd2\u3057\u305f\u9805\u76ee $count \u4ef6';
+    }
+  }
+
+  String get progressLearningStageLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Learning';
+      case AppLanguage.vi:
+        return '\u0110ang h\u1ecdc';
+      case AppLanguage.ja:
+        return '\u5b66\u7fd2\u4e2d';
+    }
+  }
+
+  String get progressYoungStageLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Young';
+      case AppLanguage.vi:
+        return 'M\u1edbi nh\u1edb';
+      case AppLanguage.ja:
+        return '\u521d\u671f';
+    }
+  }
+
+  String get progressMatureStageLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Mature';
+      case AppLanguage.vi:
+        return '\u0110\u00e3 v\u1eefng';
+      case AppLanguage.ja:
+        return '\u5b9a\u7740';
+    }
+  }
+
+  String get databaseResetTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Reset Data';
+      case AppLanguage.vi:
+        return '\u0110\u1eb7t l\u1ea1i d\u1eef li\u1ec7u';
+      case AppLanguage.ja:
+        return '\u30c7\u30fc\u30bf\u3092\u30ea\u30bb\u30c3\u30c8';
+    }
+  }
+
+  String get databaseResetWebMessage {
+    switch (this) {
+      case AppLanguage.en:
+        return 'On web, clear browser site data to reset the database.';
+      case AppLanguage.vi:
+        return 'Tr\u00ean web, h\u00e3y x\u00f3a d\u1eef li\u1ec7u trang trong tr\u00ecnh duy\u1ec7t \u0111\u1ec3 \u0111\u1eb7t l\u1ea1i d\u1eef li\u1ec7u.';
+      case AppLanguage.ja:
+        return 'Web \u3067\u306f\u30d6\u30e9\u30a6\u30b6\u306e\u30b5\u30a4\u30c8\u30c7\u30fc\u30bf\u3092\u524a\u9664\u3057\u3066\u30c7\u30fc\u30bf\u30d9\u30fc\u30b9\u3092\u30ea\u30bb\u30c3\u30c8\u3057\u3066\u304f\u3060\u3055\u3044\u3002';
+    }
+  }
+
+  String get databaseResetWarningMessage {
+    switch (this) {
+      case AppLanguage.en:
+        return 'This deletes all progress, including learned terms, SRS reviews, custom edits, and bookmarks. The app starts again with fresh data. Are you sure?';
+      case AppLanguage.vi:
+        return 'Thao t\u00e1c n\u00e0y s\u1ebd x\u00f3a to\u00e0n b\u1ed9 ti\u1ebfn \u0111\u1ed9, g\u1ed3m t\u1eeb \u0111\u00e3 h\u1ecdc, l\u1ecbch SRS, ch\u1ec9nh s\u1eeda t\u00f9y ch\u1ec9nh v\u00e0 d\u1ea5u sao. \u1ee8ng d\u1ee5ng s\u1ebd b\u1eaft \u0111\u1ea7u l\u1ea1i v\u1edbi d\u1eef li\u1ec7u m\u1edbi. B\u1ea1n c\u00f3 ch\u1eafc kh\u00f4ng?';
+      case AppLanguage.ja:
+        return '\u5b66\u7fd2\u6e08\u307f\u306e\u8a9e\u5f59\u3001SRS \u5fa9\u7fd2\u3001\u30ab\u30b9\u30bf\u30e0\u7de8\u96c6\u3001\u30d6\u30c3\u30af\u30de\u30fc\u30af\u3092\u542b\u3080\u9032\u6357\u304c\u3059\u3079\u3066\u524a\u9664\u3055\u308c\u307e\u3059\u3002\u30a2\u30d7\u30ea\u306f\u65b0\u3057\u3044\u30c7\u30fc\u30bf\u3067\u518d\u958b\u3057\u307e\u3059\u3002\u3088\u308d\u3057\u3044\u3067\u3059\u304b\uff1f';
+    }
+  }
+
+  String get deleteAllDataLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Delete all';
+      case AppLanguage.vi:
+        return 'X\u00f3a t\u1ea5t c\u1ea3';
+      case AppLanguage.ja:
+        return '\u3059\u3079\u3066\u524a\u9664';
+    }
+  }
+
+  String get databaseResetSuccessMessage {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Data reset. Please restart the app.';
+      case AppLanguage.vi:
+        return '\u0110\u00e3 \u0111\u1eb7t l\u1ea1i d\u1eef li\u1ec7u. H\u00e3y kh\u1edfi \u0111\u1ed9ng l\u1ea1i \u1ee9ng d\u1ee5ng.';
+      case AppLanguage.ja:
+        return '\u30c7\u30fc\u30bf\u3092\u30ea\u30bb\u30c3\u30c8\u3057\u307e\u3057\u305f\u3002\u30a2\u30d7\u30ea\u3092\u518d\u8d77\u52d5\u3057\u3066\u304f\u3060\u3055\u3044\u3002';
+    }
+  }
+
+  String get databaseResetMissingMessage {
+    switch (this) {
+      case AppLanguage.en:
+        return 'No database found to reset.';
+      case AppLanguage.vi:
+        return 'Kh\u00f4ng t\u00ecm th\u1ea5y d\u1eef li\u1ec7u \u0111\u1ec3 x\u00f3a.';
+      case AppLanguage.ja:
+        return '\u524a\u9664\u3059\u308b\u30c7\u30fc\u30bf\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3002';
+    }
+  }
+
   String get settingsLabel {
     switch (this) {
       case AppLanguage.en:
@@ -2656,9 +2920,9 @@ extension AppLanguageLabels on AppLanguage {
   String get reviewVocabLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Review Vocab';
+        return 'Words Review';
       case AppLanguage.vi:
-        return '\u00d4n t\u1eeb v\u1eefng';
+        return '\u00d4n t\u1eeb v\u1ef1ng';
       case AppLanguage.ja:
         return '\u5358\u8a9e\u5fa9\u7fd2';
     }
@@ -2667,7 +2931,7 @@ extension AppLanguageLabels on AppLanguage {
   String get reviewGrammarLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Review Grammar';
+        return 'Grammar Review';
       case AppLanguage.vi:
         return '\u00d4n ng\u1eef ph\u00e1p';
       case AppLanguage.ja:
@@ -2700,11 +2964,11 @@ extension AppLanguageLabels on AppLanguage {
   String get continueJourneyLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Continue Journey';
+        return 'Next';
       case AppLanguage.vi:
-        return 'Ti\u1ebfp t\u1ee5c h\u1ecdc';
+        return 'Ti\u1ebfp';
       case AppLanguage.ja:
-        return '\u5b66\u7fd2\u3092\u7d9a\u3051\u308b';
+        return '\u6b21\u3078';
     }
   }
 
@@ -2755,11 +3019,11 @@ extension AppLanguageLabels on AppLanguage {
   String get startPracticeLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Start Practice';
+        return 'Start';
       case AppLanguage.vi:
-        return 'B\u1eaft \u0111\u1ea7u luy\u1ec7n t\u1eadp';
+        return 'B\u1eaft \u0111\u1ea7u';
       case AppLanguage.ja:
-        return '\u7df4\u7fd2\u3092\u958b\u59cb';
+        return '\u958b\u59cb';
     }
   }
 
@@ -2821,11 +3085,11 @@ extension AppLanguageLabels on AppLanguage {
   String reviewCountLabel(int count) {
     switch (this) {
       case AppLanguage.en:
-        return '$count reviews due';
+        return '$count due';
       case AppLanguage.vi:
-        return '$count t\u1eeb \u0111\u1ebfn h\u1ea1n \u00f4n t\u1eadp';
+        return '$count \u0111\u1ebfn h\u1ea1n';
       case AppLanguage.ja:
-        return '\u672c\u65e5\u306e\u5fa9\u7fd2: $count';
+        return '$count\u4ef6';
     }
   }
 
@@ -2854,11 +3118,11 @@ extension AppLanguageLabels on AppLanguage {
   String sessionReviewCountLabel(int total) {
     switch (this) {
       case AppLanguage.en:
-        return 'You reviewed $total items.';
+        return '$total reviewed';
       case AppLanguage.vi:
-        return 'B\u1ea1n \u0111\u00e3 \u00f4n $total m\u1ee5c.';
+        return '\u0110\u00e3 \u00f4n $total m\u1ee5c';
       case AppLanguage.ja:
-        return '$total\u4ef6\u3092\u5fa9\u7fd2\u3057\u307e\u3057\u305f\u3002';
+        return '$total\u4ef6\u5fa9\u7fd2';
     }
   }
 
@@ -2942,11 +3206,11 @@ extension AppLanguageLabels on AppLanguage {
   String get vocabTitle {
     switch (this) {
       case AppLanguage.en:
-        return 'Flashcards + SRS';
+        return 'Words';
       case AppLanguage.vi:
-        return 'Flashcard + SRS';
+        return 'T\u1eeb v\u1ef1ng';
       case AppLanguage.ja:
-        return '\u30d5\u30e9\u30c3\u30b7\u30e5\u30ab\u30fc\u30c9 + SRS';
+        return '\u5358\u8a9e';
     }
   }
 
@@ -2964,11 +3228,11 @@ extension AppLanguageLabels on AppLanguage {
   String get grammarTitle {
     switch (this) {
       case AppLanguage.en:
-        return 'Grammar Quiz';
+        return 'Grammar';
       case AppLanguage.vi:
-        return 'Quiz ng\u1eef ph\xe1p';
+        return 'Ng\u1eef ph\u00e1p';
       case AppLanguage.ja:
-        return '\u6587\u6cd5\u30af\u30a4\u30ba';
+        return '\u6587\u6cd5';
     }
   }
 
@@ -3250,22 +3514,22 @@ extension AppLanguageLabels on AppLanguage {
   String get vocabScreenBody {
     switch (this) {
       case AppLanguage.en:
-        return 'Vocab review flow will live here.';
+        return 'No words for this level yet.';
       case AppLanguage.vi:
-        return 'Lu\u1ed3ng \xf4n t\u1eeb v\u1ef1ng s\u1ebd hi\u1ec3n th\u1ecb \u1edf \u0111\xe2y.';
+        return 'Ch\u01b0a c\u00f3 t\u1eeb cho c\u1ea5p \u0111\u1ed9 n\u00e0y.';
       case AppLanguage.ja:
-        return '\u8a9e\u5f59\u5fa9\u7fd2\u30d5\u30ed\u30fc\u306f\u3053\u3053\u306b\u8868\u793a\u3055\u308c\u307e\u3059\u3002';
+        return '\u3053\u306e\u30ec\u30d9\u30eb\u306e\u5358\u8a9e\u306f\u307e\u3060\u3042\u308a\u307e\u305b\u3093\u3002';
     }
   }
 
   String get selectLevelToViewVocab {
     switch (this) {
       case AppLanguage.en:
-        return 'Select a level to see vocab.';
+        return 'Choose a level to see words.';
       case AppLanguage.vi:
-        return 'H\xe3y ch\u1ecdn c\u1ea5p \u0111\u1ec3 xem t\u1eeb v\u1ef1ng.';
+        return 'Ch\u1ecdn c\u1ea5p \u0111\u1ed9 \u0111\u1ec3 xem t\u1eeb.';
       case AppLanguage.ja:
-        return '\u5358\u8a9e\u3092\u898b\u308b\u306b\u306f\u30ec\u30d9\u30eb\u3092\u9078\u629e\u3057\u3066\u304f\u3060\u3055\u3044\u3002';
+        return '\u5358\u8a9e\u3092\u898b\u308b\u306b\u306f\u30ec\u30d9\u30eb\u3092\u9078\u3093\u3067\u304f\u3060\u3055\u3044\u3002';
     }
   }
 
@@ -3360,9 +3624,9 @@ extension AppLanguageLabels on AppLanguage {
   String get continueLearningLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'CONTINUE LEARNING';
+        return 'Continue learning';
       case AppLanguage.vi:
-        return 'H\u1eccC TI\u1ebeP';
+        return 'H\u1ecdc ti\u1ebfp';
       case AppLanguage.ja:
         return '\u5b66\u7fd2\u3092\u7d9a\u3051\u308b';
     }
@@ -3408,7 +3672,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.vi:
         return 'Chạm để tạo học phần đầu tiên!';
       case AppLanguage.ja:
-        return 'タップして最初のセットを作成！';
+        return 'タップして最初のセットを作成!';
     }
   }
 
@@ -3474,7 +3738,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.vi:
         return 'Từ đơn: $character ($strokeCount nét)';
       case AppLanguage.ja:
-        return '単体: $character（$strokeCount画）';
+        return '単体: $character($strokeCount画)';
     }
   }
 
@@ -4004,9 +4268,9 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'What does "$term" mean?';
       case AppLanguage.vi:
-        return '"$term" nghĩa là gì?';
+        return '"$term" ngh\u0129a l\u00e0 g\u00ec?';
       case AppLanguage.ja:
-        return '「$term」の意味は？';
+        return '\u300c$term\u300d\u306e\u610f\u5473\u306f\uff1f';
     }
   }
 
@@ -4244,11 +4508,11 @@ extension AppLanguageLabels on AppLanguage {
   String get submitTestTitle {
     switch (this) {
       case AppLanguage.en:
-        return 'Submit Test?';
+        return 'Submit test?';
       case AppLanguage.vi:
-        return 'Nộp bài?';
+        return 'N\u1ed9p b\u00e0i?';
       case AppLanguage.ja:
-        return 'テストを送信しますか？';
+        return '\u30c6\u30b9\u30c8\u3092\u9001\u4fe1\u3057\u307e\u3059\u304b\uff1f';
     }
   }
 
@@ -4257,9 +4521,9 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'You have $count unanswered questions. Submit anyway?';
       case AppLanguage.vi:
-        return 'Bạn còn $count câu chưa trả lời. Vẫn nộp bài?';
+        return 'B\u1ea1n c\u00f2n $count c\u00e2u ch\u01b0a tr\u1ea3 l\u1eddi. V\u1eabn n\u1ed9p b\u00e0i?';
       case AppLanguage.ja:
-        return '$count問未回答です。送信しますか？';
+        return '$count\u554f\u304c\u672a\u56de\u7b54\u3067\u3059\u3002\u9001\u4fe1\u3057\u307e\u3059\u304b\uff1f';
     }
   }
 
@@ -4268,7 +4532,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Submit';
       case AppLanguage.vi:
-        return 'Nộp';
+        return 'Ná»™p';
       case AppLanguage.ja:
         return '送信';
     }
@@ -4277,7 +4541,7 @@ extension AppLanguageLabels on AppLanguage {
   String get continueLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Continue';
+        return 'Next';
       case AppLanguage.vi:
         return 'Tiếp tục';
       case AppLanguage.ja:
@@ -4380,7 +4644,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.vi:
         return 'Đã sao chép kết quả!';
       case AppLanguage.ja:
-        return '結果をコピーしました！';
+        return '結果をコピーしました!';
     }
   }
 
@@ -4442,7 +4706,7 @@ extension AppLanguageLabels on AppLanguage {
   String get lessonRecommendationsLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Recommended Lessons';
+        return 'Next lessons';
       case AppLanguage.vi:
         return 'Gợi ý bài học';
       case AppLanguage.ja:
@@ -4488,7 +4752,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Wrong $wrongCount - $percent% of mistakes';
       case AppLanguage.vi:
-        return 'Sai $wrongCount - $percent% lỗi';
+        return 'Sai $wrongCount - $percent% lá»—i';
       case AppLanguage.ja:
         return '誤り $wrongCount - ミスの$percent%';
     }
@@ -4600,7 +4864,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.vi:
         return 'Kết thúc Time Attack!';
       case AppLanguage.ja:
-        return 'タイムアップ！';
+        return 'タイムアップ!';
     }
   }
 
@@ -4608,7 +4872,7 @@ extension AppLanguageLabels on AppLanguage {
   String get practiceHubTitle {
     switch (this) {
       case AppLanguage.en:
-        return 'Practice Hub';
+        return 'Practice';
       case AppLanguage.vi:
         return 'Trung tâm Luyện tập';
       case AppLanguage.ja:
@@ -4619,7 +4883,7 @@ extension AppLanguageLabels on AppLanguage {
   String get practiceHubSubtitle {
     switch (this) {
       case AppLanguage.en:
-        return 'Quick access to training modes.';
+        return 'Quick practice modes.';
       case AppLanguage.vi:
         return 'Truy cập nhanh các chế độ luyện.';
       case AppLanguage.ja:
@@ -4630,7 +4894,7 @@ extension AppLanguageLabels on AppLanguage {
   String get ghostReviewsLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Ghost Reviews';
+        return 'Mistake Review';
       case AppLanguage.vi:
         return 'Ôn lỗi';
       case AppLanguage.ja:
@@ -4643,7 +4907,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Fix Mistakes';
       case AppLanguage.vi:
-        return 'Sửa lỗi';
+        return 'Sá»­a lá»—i';
       case AppLanguage.ja:
         return 'ミス修正';
     }
@@ -4654,7 +4918,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Fix Mistakes ($count)';
       case AppLanguage.vi:
-        return 'Sửa lỗi ($count)';
+        return 'Sá»­a lá»—i ($count)';
       case AppLanguage.ja:
         return 'ミス修正 ($count)';
     }
@@ -4674,7 +4938,7 @@ extension AppLanguageLabels on AppLanguage {
   String get ghostReviewBannerActionLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Review';
+        return 'Review now';
       case AppLanguage.vi:
         return 'Ôn ngay';
       case AppLanguage.ja:
@@ -4685,11 +4949,11 @@ extension AppLanguageLabels on AppLanguage {
   String get ghostReviewAllClearTitle {
     switch (this) {
       case AppLanguage.en:
-        return 'All caught up!';
+        return 'All clear';
       case AppLanguage.vi:
         return 'Đã ổn hết!';
       case AppLanguage.ja:
-        return 'すべて完了！';
+        return 'すべて完了!';
     }
   }
 
@@ -4707,7 +4971,7 @@ extension AppLanguageLabels on AppLanguage {
   String get ghostReviewInfoLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Review grammar points you missed recently.';
+        return 'Review grammar you missed recently.';
       case AppLanguage.vi:
         return 'Ôn lại các điểm ngữ pháp bạn vừa sai.';
       case AppLanguage.ja:
@@ -4718,7 +4982,7 @@ extension AppLanguageLabels on AppLanguage {
   String get ghostReviewEmptyTitle {
     switch (this) {
       case AppLanguage.en:
-        return 'No ghosts yet';
+        return 'No mistakes yet';
       case AppLanguage.vi:
         return 'Chưa có ghost nào';
       case AppLanguage.ja:
@@ -4729,7 +4993,7 @@ extension AppLanguageLabels on AppLanguage {
   String get ghostReviewEmptySubtitle {
     switch (this) {
       case AppLanguage.en:
-        return 'You have not missed any grammar points yet.';
+        return 'You have not missed any grammar yet.';
       case AppLanguage.vi:
         return 'Bạn chưa sai điểm ngữ pháp nào.';
       case AppLanguage.ja:
@@ -4740,18 +5004,18 @@ extension AppLanguageLabels on AppLanguage {
   String get practiceGhostsLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Practice Ghosts';
+        return 'Practice';
       case AppLanguage.vi:
-        return 'Luy\u1ec7n Ghost';
+        return 'Luy\u1ec7n';
       case AppLanguage.ja:
-        return '\u30b4\u30fc\u30b9\u30c8\u7df4\u7fd2';
+        return '\u7df4\u7fd2';
     }
   }
 
   String get ghostPracticeTitle {
     switch (this) {
       case AppLanguage.en:
-        return 'Ghost Practice';
+        return 'Practice';
       case AppLanguage.vi:
         return 'Luyện Ghost';
       case AppLanguage.ja:
@@ -4788,7 +5052,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.vi:
         return 'Hoàn hảo! Đã xử lý hết ghost!';
       case AppLanguage.ja:
-        return '満点！ゴーストを撃破！';
+        return '満点!ゴーストを撃破!';
     }
   }
 
@@ -4832,7 +5096,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.vi:
         return 'Điểm ngữ pháp nào khớp với giải thích này?';
       case AppLanguage.ja:
-        return 'この説明に合う文法はどれですか？';
+        return 'この説明に合う文法はどれですか?';
     }
   }
 
@@ -4854,7 +5118,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.vi:
         return 'Đánh dấu đã thuộc (xóa Ghost)';
       case AppLanguage.ja:
-        return '習得済みにする（ゴースト解除）';
+        return '習得済みにする(ゴースト解除)';
     }
   }
 
@@ -4916,22 +5180,22 @@ extension AppLanguageLabels on AppLanguage {
   String get practiceGhostLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Ghost Review';
+        return 'Mistakes';
       case AppLanguage.vi:
-        return '\u00d4n l\u1ed7i ng\u1eef ph\u00e1p';
+        return '\u00d4n l\u1ed7i';
       case AppLanguage.ja:
-        return '\u30b4\u30fc\u30b9\u30c8\u5fa9\u7fd2';
+        return '\u30df\u30b9\u5fa9\u7fd2';
     }
   }
 
   String get practiceGhostSubtitle {
     switch (this) {
       case AppLanguage.en:
-        return 'Review and fix your recent grammar mistakes.';
+        return 'Review recent grammar mistakes.';
       case AppLanguage.vi:
-        return '\u00d4n l\u1ea1i v\u00e0 s\u1eeda c\u00e1c l\u1ed7i ng\u1eef ph\u00e1p g\u1ea7n \u0111\u00e2y.';
+        return '\u00d4n l\u1ea1i l\u1ed7i ng\u1eef ph\u00e1p g\u1ea7n \u0111\u00e2y.';
       case AppLanguage.ja:
-        return '\u6700\u8fd1\u306e\u6587\u6cd5\u30df\u30b9\u3092\u5fa9\u7fd2\u3057\u3066\u4fee\u6b63\u3002';
+        return '\u6700\u8fd1\u306e\u6587\u6cd5\u30df\u30b9\u3092\u5fa9\u7fd2\u3002';
     }
   }
 
@@ -4940,20 +5204,20 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Match';
       case AppLanguage.vi:
-        return 'Gh\u00e9p th\u1ebb';
+        return 'Gh\u00e9p';
       case AppLanguage.ja:
-        return 'マッチ';
+        return '\u30de\u30c3\u30c1';
     }
   }
 
   String get practiceMatchSubtitle {
     switch (this) {
       case AppLanguage.en:
-        return 'Match card pairs as fast as you can.';
+        return 'Match pairs fast.';
       case AppLanguage.vi:
-        return 'Gh\u00e9p c\u1eb7p th\u1ebb c\u00e0ng nhanh c\u00e0ng t\u1ed1t.';
+        return 'Gh\u00e9p c\u1eb7p th\u1eadt nhanh.';
       case AppLanguage.ja:
-        return '\u30ab\u30fc\u30c9\u3092\u7d20\u65e9\u304f\u30da\u30a2\u306b\u3057\u3088\u3046\u3002';
+        return '\u30da\u30a2\u3092\u3059\u3070\u3084\u304f\u63c3\u3048\u308b\u3002';
     }
   }
 
@@ -4971,11 +5235,11 @@ extension AppLanguageLabels on AppLanguage {
   String get practiceKanjiDashSubtitle {
     switch (this) {
       case AppLanguage.en:
-        return 'Rapid kanji reaction training.';
+        return 'Fast kanji drills.';
       case AppLanguage.vi:
-        return 'Luy\u1ec7n ph\u1ea3n x\u1ea1 kanji t\u1ed1c \u0111\u1ed9 cao.';
+        return 'Luy\u1ec7n ph\u1ea3n x\u1ea1 kanji nhanh.';
       case AppLanguage.ja:
-        return '\u6f22\u5b57\u306e\u53cd\u5fdc\u901f\u5ea6\u30c8\u30ec\u30fc\u30cb\u30f3\u30b0\u3002';
+        return '\u6f22\u5b57\u3092\u3059\u3070\u3084\u304f\u7df4\u7fd2\u3002';
     }
   }
 
@@ -4984,7 +5248,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Mock Exam';
       case AppLanguage.vi:
-        return 'Thi thử';
+        return 'Thi thá»­';
       case AppLanguage.ja:
         return '模擬試験';
     }
@@ -4993,9 +5257,9 @@ extension AppLanguageLabels on AppLanguage {
   String get practiceExamCardLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'JLPT Mock Exam';
+        return 'JLPT Mock';
       case AppLanguage.vi:
-        return 'JLPT Thi th\u1eed';
+        return 'Thi th\u1eed JLPT';
       case AppLanguage.ja:
         return 'JLPT \u6a21\u8a66';
     }
@@ -5138,7 +5402,7 @@ extension AppLanguageLabels on AppLanguage {
   String get autoBackupHint {
     switch (this) {
       case AppLanguage.en:
-        return 'Save a local backup daily.';
+        return 'Save a local backup each day.';
       case AppLanguage.vi:
         return 'Sao lưu cục bộ mỗi ngày.';
       case AppLanguage.ja:
@@ -5160,7 +5424,7 @@ extension AppLanguageLabels on AppLanguage {
   String autoBackupLastLabel(String date) {
     switch (this) {
       case AppLanguage.en:
-        return 'Last backup: $date';
+        return 'Last: $date';
       case AppLanguage.vi:
         return 'Sao lưu gần nhất: $date';
       case AppLanguage.ja:
@@ -5171,7 +5435,7 @@ extension AppLanguageLabels on AppLanguage {
   String get autoBackupSuccessLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Auto backup completed.';
+        return 'Backup done.';
       case AppLanguage.vi:
         return 'Đã sao lưu tự động.';
       case AppLanguage.ja:
@@ -5182,7 +5446,7 @@ extension AppLanguageLabels on AppLanguage {
   String get autoBackupErrorLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Auto backup failed.';
+        return 'Backup failed.';
       case AppLanguage.vi:
         return 'Sao lưu tự động thất bại.';
       case AppLanguage.ja:
@@ -5194,7 +5458,7 @@ extension AppLanguageLabels on AppLanguage {
   String get achievementsTitle {
     switch (this) {
       case AppLanguage.en:
-        return 'Achievements';
+        return 'Awards';
       case AppLanguage.vi:
         return 'Thành tích';
       case AppLanguage.ja:
@@ -5205,7 +5469,7 @@ extension AppLanguageLabels on AppLanguage {
   String get achievementsEmptyLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'No achievements yet.';
+        return 'No awards yet.';
       case AppLanguage.vi:
         return 'Chưa có thành tích.';
       case AppLanguage.ja:
@@ -5276,7 +5540,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.vi:
         return 'Hoàn thành phiên học!';
       case AppLanguage.ja:
-        return 'セッション完了！';
+        return 'セッション完了!';
     }
   }
 
@@ -5287,7 +5551,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.vi:
         return 'Tuyệt vời! Không có từ yếu!';
       case AppLanguage.ja:
-        return '完璧！弱点なし！';
+        return '完璧!弱点なし!';
     }
   }
 
@@ -5427,7 +5691,7 @@ extension AppLanguageLabels on AppLanguage {
   String get immersionMarkReadLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Mark as read';
+        return 'Mark read';
       case AppLanguage.vi:
         return '\u0110\u00e1nh d\u1ea5u \u0111\u00e3 \u0111\u1ecdc';
       case AppLanguage.ja:
@@ -5449,7 +5713,7 @@ extension AppLanguageLabels on AppLanguage {
   String get immersionTranslateLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Translation';
+        return 'Translate';
       case AppLanguage.vi:
         return 'B\u1ea3n d\u1ecbch';
       case AppLanguage.ja:
@@ -5460,7 +5724,7 @@ extension AppLanguageLabels on AppLanguage {
   String get immersionAddSrsLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Add to SRS';
+        return 'Add SRS';
       case AppLanguage.vi:
         return 'Th\u00eam v\u00e0o SRS';
       case AppLanguage.ja:
@@ -5468,10 +5732,230 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get flashcardSettingsTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Card settings';
+      case AppLanguage.vi:
+        return 'C\u00e0i \u0111\u1eb7t th\u1ebb';
+      case AppLanguage.ja:
+        return '\u30ab\u30fc\u30c9\u8a2d\u5b9a';
+    }
+  }
+
+  String get reviewCompleteLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Review complete';
+      case AppLanguage.vi:
+        return '\u00d4n xong';
+      case AppLanguage.ja:
+        return '\u5fa9\u7fd2\u5b8c\u4e86';
+    }
+  }
+
+  String vocabClearedLabel(int cleared, int total) {
+    switch (this) {
+      case AppLanguage.en:
+        return '$cleared / $total cleared';
+      case AppLanguage.vi:
+        return '$cleared / $total \u0111\u00e3 \u00f4n xong';
+      case AppLanguage.ja:
+        return '$cleared / $total \u5b8c\u4e86';
+    }
+  }
+
+  String get stillLearningLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Still learning';
+      case AppLanguage.vi:
+        return 'Ch\u01b0a nh\u1edb';
+      case AppLanguage.ja:
+        return '\u307e\u3060\u5b66\u7fd2\u4e2d';
+    }
+  }
+
+  String stillInReviewQueueLabel(int count) {
+    switch (this) {
+      case AppLanguage.en:
+        return '$count still in review queue';
+      case AppLanguage.vi:
+        return '$count m\u1ee5c c\u00f2n trong h\u00e0ng \u0111\u1ee3i \u00f4n';
+      case AppLanguage.ja:
+        return '$count \u4ef6\u304c\u5fa9\u7fd2\u5f85\u3061';
+    }
+  }
+
+  String get accuracyLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Accuracy';
+      case AppLanguage.vi:
+        return '\u0110\u1ed9 \u0111\u00fang';
+      case AppLanguage.ja:
+        return '\u6b63\u7b54\u7387';
+    }
+  }
+
+  String get knownLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Known';
+      case AppLanguage.vi:
+        return '\u0110\u00e3 nh\u1edb';
+      case AppLanguage.ja:
+        return '\u7fd2\u5f97';
+    }
+  }
+
+  String get starredLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Starred';
+      case AppLanguage.vi:
+        return '\u0110\u00e3 l\u01b0u';
+      case AppLanguage.ja:
+        return '\u4fdd\u5b58\u6e08\u307f';
+    }
+  }
+
+  String get earnedLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Earned';
+      case AppLanguage.vi:
+        return 'Nh\u1eadn \u0111\u01b0\u1ee3c';
+      case AppLanguage.ja:
+        return '\u7372\u5f97';
+    }
+  }
+
+  String get practiceAgainLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Practice again';
+      case AppLanguage.vi:
+        return 'Luy\u1ec7n l\u1ea1i';
+      case AppLanguage.ja:
+        return '\u3082\u3046\u4e00\u5ea6\u7df4\u7fd2';
+    }
+  }
+
+  String get kanjiReadingQuizTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Read Kanji';
+      case AppLanguage.vi:
+        return '\u0110\u1ecdc kanji';
+      case AppLanguage.ja:
+        return '\u6f22\u5b57\u3092\u8aad\u3080';
+    }
+  }
+
+  String kanjiAvailableLabel(int count) {
+    switch (this) {
+      case AppLanguage.en:
+        return '$count kanji ready';
+      case AppLanguage.vi:
+        return '$count kanji c\u00f3 s\u1eb5n';
+      case AppLanguage.ja:
+        return '$count \u5b57';
+    }
+  }
+
+  String dueForReviewLabel(int count) {
+    switch (this) {
+      case AppLanguage.en:
+        return '$count due';
+      case AppLanguage.vi:
+        return '$count \u0111\u1ebfn h\u1ea1n';
+      case AppLanguage.ja:
+        return '$count\u4ef6';
+    }
+  }
+
+  String get startQuizLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Start';
+      case AppLanguage.vi:
+        return 'B\u1eaft \u0111\u1ea7u';
+      case AppLanguage.ja:
+        return '\u958b\u59cb';
+    }
+  }
+
+  String get quizCompleteTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Quiz complete';
+      case AppLanguage.vi:
+        return 'L\u00e0m xong';
+      case AppLanguage.ja:
+        return '\u30af\u30a4\u30ba\u5b8c\u4e86';
+    }
+  }
+
+  String correctCountLabel(int correct, int total) {
+    switch (this) {
+      case AppLanguage.en:
+        return '$correct / $total correct';
+      case AppLanguage.vi:
+        return '$correct / $total \u0111\u00fang';
+      case AppLanguage.ja:
+        return '$correct / $total \u6b63\u89e3';
+    }
+  }
+
+  String get readingSummaryTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Reading summary';
+      case AppLanguage.vi:
+        return 'T\u00f3m t\u1eaft \u0111\u1ecdc';
+      case AppLanguage.ja:
+        return '\u8aad\u66f8\u30b5\u30de\u30ea\u30fc';
+    }
+  }
+
+  String get readingCharactersLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Characters';
+      case AppLanguage.vi:
+        return 'S\u1ed1 k\u00fd t\u1ef1';
+      case AppLanguage.ja:
+        return '\u6587\u5b57\u6570';
+    }
+  }
+
+  String get readingTimeSpentLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Time';
+      case AppLanguage.vi:
+        return 'Th\u1eddi gian';
+      case AppLanguage.ja:
+        return '\u6642\u9593';
+    }
+  }
+
+  String get readingSpeedStatLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Speed';
+      case AppLanguage.vi:
+        return 'T\u1ed1c \u0111\u1ed9';
+      case AppLanguage.ja:
+        return '\u901f\u5ea6';
+    }
+  }
+
   String get immersionAddedLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Added to SRS.';
+        return 'Added.';
       case AppLanguage.vi:
         return '\u0110\u00e3 th\u00eam v\u00e0o SRS.';
       case AppLanguage.ja:
@@ -5482,7 +5966,7 @@ extension AppLanguageLabels on AppLanguage {
   String get immersionAlreadyAddedLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Already in SRS.';
+        return 'Already added.';
       case AppLanguage.vi:
         return '\u0110\u00e3 c\u00f3 trong SRS.';
       case AppLanguage.ja:
@@ -5509,7 +5993,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.vi:
         return 'Trả lời nhanh để thêm thời gian!\n+3s nếu đúng, -2s nếu sai';
       case AppLanguage.ja:
-        return '早く答えて時間を延ばそう！\n正解で+3秒、不正解で-2秒';
+        return '早く答えて時間を延ばそう!\n正解で+3秒、不正解で-2秒';
     }
   }
 
@@ -5593,11 +6077,11 @@ extension AppLanguageLabels on AppLanguage {
   String get onboardingWelcomeTitle {
     switch (this) {
       case AppLanguage.en:
-        return 'Welcome to JpStudy!';
+        return 'Welcome';
       case AppLanguage.vi:
         return 'Chào mừng đến JpStudy!';
       case AppLanguage.ja:
-        return 'JpStudyへようこそ！';
+        return 'JpStudyへようこそ!';
     }
   }
 
@@ -5615,7 +6099,7 @@ extension AppLanguageLabels on AppLanguage {
   String get onboardingLevelTitle {
     switch (this) {
       case AppLanguage.en:
-        return 'Choose your JLPT level';
+        return 'Choose your level';
       case AppLanguage.vi:
         return 'Chọn cấp độ JLPT của bạn';
       case AppLanguage.ja:
@@ -5628,9 +6112,9 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'What\'s your learning goal?';
       case AppLanguage.vi:
-        return 'Mục tiêu học của bạn?';
+        return 'M\u1ee5c ti\u00eau h\u1ecdc c\u1ee7a b\u1ea1n?';
       case AppLanguage.ja:
-        return '学習目標は何ですか？';
+        return '\u5b66\u7fd2\u76ee\u6a19\u306f\u4f55\u3067\u3059\u304b\uff1f';
     }
   }
 
@@ -5641,25 +6125,25 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.vi:
         return 'Sẵn sàng rồi!';
       case AppLanguage.ja:
-        return '準備完了！';
+        return '準備完了!';
     }
   }
 
   String get onboardingStartButton {
     switch (this) {
       case AppLanguage.en:
-        return 'Start Learning!';
+        return 'Start';
       case AppLanguage.vi:
         return 'Bắt đầu học!';
       case AppLanguage.ja:
-        return '学習開始！';
+        return '学習開始!';
     }
   }
 
   String get onboardingNextButton {
     switch (this) {
       case AppLanguage.en:
-        return 'Continue';
+        return 'Next';
       case AppLanguage.vi:
         return 'Tiếp tục';
       case AppLanguage.ja:
@@ -5669,9 +6153,9 @@ extension AppLanguageLabels on AppLanguage {
   String get practiceKanjiReadingLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Kanji Reading';
+        return 'Read Kanji';
       case AppLanguage.vi:
-        return 'Kanji Reading';
+        return 'Read Kanji';
       case AppLanguage.ja:
         return '漢字読みクイズ';
     }
@@ -5680,7 +6164,7 @@ extension AppLanguageLabels on AppLanguage {
   String get practiceKanjiReadingSubtitle {
     switch (this) {
       case AppLanguage.en:
-        return 'Pick the correct reading or kanji.';
+        return 'Pick the right reading or kanji.';
       case AppLanguage.vi:
         return 'Chọn cách đọc hoặc kanji đúng.';
       case AppLanguage.ja:
@@ -5725,7 +6209,7 @@ extension AppLanguageLabels on AppLanguage {
   String get startReviewButton {
     switch (this) {
       case AppLanguage.en:
-        return 'Start Review';
+        return 'Start';
       case AppLanguage.vi:
         return 'Bắt đầu ôn tập';
       case AppLanguage.ja:
@@ -5762,7 +6246,7 @@ extension AppLanguageLabels on AppLanguage {
   String get settingsLearningSection {
     switch (this) {
       case AppLanguage.en:
-        return 'LEARNING';
+        return 'Learning';
       case AppLanguage.vi:
         return 'HỌC TẬP';
       case AppLanguage.ja:
@@ -5773,7 +6257,7 @@ extension AppLanguageLabels on AppLanguage {
   String get settingsAppearanceSection {
     switch (this) {
       case AppLanguage.en:
-        return 'APPEARANCE';
+        return 'Display';
       case AppLanguage.vi:
         return 'GIAO DIỆN';
       case AppLanguage.ja:
@@ -5784,7 +6268,7 @@ extension AppLanguageLabels on AppLanguage {
   String get settingsReminderSection {
     switch (this) {
       case AppLanguage.en:
-        return 'REMINDERS';
+        return 'Reminders';
       case AppLanguage.vi:
         return 'NHẮC NHỞ';
       case AppLanguage.ja:
@@ -5795,7 +6279,7 @@ extension AppLanguageLabels on AppLanguage {
   String get settingsDataSection {
     switch (this) {
       case AppLanguage.en:
-        return 'DATA';
+        return 'Data';
       case AppLanguage.vi:
         return 'DỮ LIỆU';
       case AppLanguage.ja:
@@ -5803,3 +6287,4 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 } // End extension
+

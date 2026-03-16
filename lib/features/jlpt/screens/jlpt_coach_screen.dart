@@ -25,13 +25,13 @@ class JlptCoachScreen extends ConsumerWidget {
   String _areaLabel(AppLanguage language, JlptSkillArea area) {
     switch (area) {
       case JlptSkillArea.vocabulary:
-        return _tr(language, 'Vocabulary', 'Tu vung', '??');
+        return _tr(language, 'Vocabulary', 'Từ vựng', '??');
       case JlptSkillArea.grammar:
-        return _tr(language, 'Grammar', 'Ngu phap', '??');
+        return _tr(language, 'Grammar', 'Ngữ pháp', '??');
       case JlptSkillArea.kanji:
         return _tr(language, 'Kanji', 'Kanji', '??');
       case JlptSkillArea.reading:
-        return _tr(language, 'Reading', 'Doc hieu', '??');
+        return _tr(language, 'Reading', 'Đọc hiểu', '??');
     }
   }
 
@@ -43,7 +43,7 @@ class JlptCoachScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(_tr(language, 'JLPT Coach', 'Tro ly JLPT', 'JLPT???')),
+        title: Text(_tr(language, 'JLPT Coach', 'Trợ lý JLPT', 'JLPT???')),
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
@@ -62,7 +62,7 @@ class JlptCoachScreen extends ConsumerWidget {
               'Doan van kieu JLPT, co gio va giai thich dap an.',
               'JLPT????????????????',
             ),
-            actionLabel: _tr(language, 'Start reading', 'Bat dau doc', '?????'),
+            actionLabel: _tr(language, 'Start reading', 'Bắt đầu đọc', '?????'),
             onTap: () => context.push('/jlpt/reading'),
           ),
           const SizedBox(height: 10),
@@ -80,7 +80,7 @@ class JlptCoachScreen extends ConsumerWidget {
               'Gio tung section + diem tung section + du doan dau.',
               '????????? + ????????? + ?????',
             ),
-            actionLabel: _tr(language, 'Start mock', 'Bat dau mock', '?????'),
+            actionLabel: _tr(language, 'Start mock', 'Bắt đầu mock', '?????'),
             onTap: () => context.push('/jlpt/mock-pro'),
           ),
           const SizedBox(height: 10),

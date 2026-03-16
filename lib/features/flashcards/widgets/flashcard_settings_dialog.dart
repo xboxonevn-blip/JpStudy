@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/language_provider.dart';
 
 import '../models/flashcard_settings.dart';
 
-class FlashcardSettingsDialog extends StatefulWidget {
+class FlashcardSettingsDialog extends ConsumerStatefulWidget {
   final FlashcardSettings currentSettings;
   final Function(FlashcardSettings) onSave;
 
@@ -13,11 +16,11 @@ class FlashcardSettingsDialog extends StatefulWidget {
   });
 
   @override
-  State<FlashcardSettingsDialog> createState() =>
+  ConsumerState<FlashcardSettingsDialog> createState() =>
       _FlashcardSettingsDialogState();
 }
 
-class _FlashcardSettingsDialogState extends State<FlashcardSettingsDialog> {
+class _FlashcardSettingsDialogState extends ConsumerState<FlashcardSettingsDialog> {
   late FlashcardSettings _settings;
 
   @override
@@ -33,7 +36,7 @@ class _FlashcardSettingsDialogState extends State<FlashcardSettingsDialog> {
         children: [
           Icon(Icons.settings_rounded, color: Theme.of(context).primaryColor),
           const SizedBox(width: 12),
-          const Text('Flashcard Settings'),
+          Text(ref.watch(appLanguageProvider).flashcardSettingsTitle),
         ],
       ),
       content: SingleChildScrollView(
@@ -89,14 +92,14 @@ class _FlashcardSettingsDialogState extends State<FlashcardSettingsDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: const Text('Cancel'),
+          child: Text(ref.watch(appLanguageProvider).cancelLabel),
         ),
         ElevatedButton(
           onPressed: () {
             widget.onSave(_settings);
             Navigator.of(context).pop();
           },
-          child: const Text('Save'),
+          child: Text(ref.watch(appLanguageProvider).saveLabel),
         ),
       ],
     );

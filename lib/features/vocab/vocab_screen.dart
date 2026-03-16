@@ -34,7 +34,7 @@ class _VocabScreenState extends ConsumerState<VocabScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('${language.vocabTitle}$levelSuffix'),
+        title: Text('${_title(language)}$levelSuffix'),
         actions: [
           if (level != null)
             Padding(
@@ -43,9 +43,7 @@ class _VocabScreenState extends ConsumerState<VocabScreen> {
                 icon: Icon(
                   _isFlashcardMode ? Icons.list_rounded : Icons.style_rounded,
                 ),
-                tooltip: _isFlashcardMode
-                    ? 'Switch to List View'
-                    : 'Switch to Flashcards',
+                tooltip: _toggleTooltip(language, _isFlashcardMode),
                 onPressed: () {
                   setState(() {
                     _isFlashcardMode = !_isFlashcardMode;
@@ -63,6 +61,27 @@ class _VocabScreenState extends ConsumerState<VocabScreen> {
               isFlashcardMode: _isFlashcardMode,
             ),
     );
+  }
+  String _title(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Words';
+      case AppLanguage.vi:
+        return 'T\u1eeb';
+      case AppLanguage.ja:
+        return '\u5358\u8a9e';
+    }
+  }
+
+  String _toggleTooltip(AppLanguage language, bool isFlashcardMode) {
+    switch (language) {
+      case AppLanguage.en:
+        return isFlashcardMode ? 'Show list' : 'Show cards';
+      case AppLanguage.vi:
+        return isFlashcardMode ? 'Xem danh s\u00e1ch' : 'Xem th\u1ebb';
+      case AppLanguage.ja:
+        return isFlashcardMode ? '\u4e00\u89a7\u8868\u793a' : '\u30ab\u30fc\u30c9\u8868\u793a';
+    }
   }
 }
 
@@ -297,20 +316,21 @@ class _FlashcardViewState extends ConsumerState<_FlashcardView> {
   }
 }
 
-class _NextReviewChip extends StatelessWidget {
+class _NextReviewChip extends ConsumerWidget {
   const _NextReviewChip({required this.nextReviewAt});
 
   final DateTime? nextReviewAt;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final language = ref.watch(appLanguageProvider);
     final String text;
     if (nextReviewAt == null) {
-      text = 'Complete a lesson to activate spaced review';
+      text = _noReviewText(language);
     } else {
       final diff = nextReviewAt!.difference(DateTime.now());
       if (diff.isNegative) {
-        text = '✅  Review is ready now!';
+        text = _readyText(language);
       } else {
         final String timing;
         if (diff.inMinutes < 60) {
@@ -320,9 +340,9 @@ class _NextReviewChip extends StatelessWidget {
           final m = diff.inMinutes % 60;
           timing = m > 0 ? '${h}h ${m}m' : '${h}h';
         } else {
-          timing = 'in ${diff.inDays} day${diff.inDays == 1 ? '' : 's'}';
+          timing = _dayTiming(language, diff.inDays);
         }
-        text = '✅  All caught up! Next review $timing';
+        text = _nextReviewText(language, timing);
       }
     }
 
@@ -334,5 +354,49 @@ class _NextReviewChip extends StatelessWidget {
         color: AppTheme.textSub,
       ),
     );
+  }
+
+  String _noReviewText(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Finish a lesson to start review';
+      case AppLanguage.vi:
+        return 'H\u1ecdc xong b\u00e0i \u0111\u1ec3 m\u1edf \u00f4n t\u1eadp';
+      case AppLanguage.ja:
+        return '\u5fa9\u7fd2\u3092\u59cb\u3081\u308b\u306b\u306f\u30ec\u30c3\u30b9\u30f3\u3092\u5b8c\u4e86\u3057\u3066\u304f\u3060\u3055\u3044';
+    }
+  }
+
+  String _readyText(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return '✅ Review ready';
+      case AppLanguage.vi:
+        return '✅ \u0110\u00e3 s\u1eb5n s\u00e0ng \u00f4n';
+      case AppLanguage.ja:
+        return '✅ \u5fa9\u7fd2\u3067\u304d\u307e\u3059';
+    }
+  }
+
+  String _dayTiming(AppLanguage language, int days) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'in $days day${days == 1 ? '' : 's'}';
+      case AppLanguage.vi:
+        return '$days ng\u00e0y n\u1eefa';
+      case AppLanguage.ja:
+        return '$days\u65e5\u5f8c';
+    }
+  }
+
+  String _nextReviewText(AppLanguage language, String timing) {
+    switch (language) {
+      case AppLanguage.en:
+        return '✅ Next review $timing';
+      case AppLanguage.vi:
+        return '✅ L\u1ea7n \u00f4n ti\u1ebfp theo: $timing';
+      case AppLanguage.ja:
+        return '✅ \u6b21\u306e\u5fa9\u7fd2: $timing';
+    }
   }
 }

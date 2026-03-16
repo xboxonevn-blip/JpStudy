@@ -1,12 +1,13 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// Conditional import: only used on non-web platforms
-import 'database_reset_native.dart' if (dart.library.js_interop) 'database_reset_web.dart' as reset_impl;
+import '../core/app_language.dart';
+import '../core/language_provider.dart';
+import 'database_reset_native.dart'
+    if (dart.library.js_interop) 'database_reset_web.dart' as reset_impl;
 
-/// Reset Database Utility Widget
-/// Call this from Settings or Debug menu
-class DatabaseResetDialog extends StatelessWidget {
+class DatabaseResetDialog extends ConsumerWidget {
   const DatabaseResetDialog({super.key});
 
   static Future<void> show(BuildContext context) {
@@ -18,31 +19,26 @@ class DatabaseResetDialog extends StatelessWidget {
 
   static Future<bool> resetDatabase() async {
     if (kIsWeb) {
-      // On web, we can't delete files. Show message to clear browser storage.
       return false;
     }
     return reset_impl.resetDatabaseFiles();
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final language = ref.watch(appLanguageProvider);
+
     return AlertDialog(
-      title: const Text('Reset Database'),
+      title: Text(language.databaseResetTitle),
       content: Text(
         kIsWeb
-            ? 'On web, please clear your browser\'s site data to reset the database.'
-            : 'This will DELETE ALL your progress, including:\n'
-                '• Learned terms\n'
-                '• SRS review data\n'
-                '• Custom term edits\n'
-                '• Stars and bookmarks\n\n'
-                'The app will restart with fresh data.\n\n'
-                'Are you sure?',
+            ? language.databaseResetWebMessage
+            : language.databaseResetWarningMessage,
       ),
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: const Text('Cancel'),
+          child: Text(language.cancelLabel),
         ),
         if (!kIsWeb)
           FilledButton(
@@ -55,15 +51,15 @@ class DatabaseResetDialog extends StatelessWidget {
                   SnackBar(
                     content: Text(
                       success
-                          ? '✅ Database reset! Please restart the app.'
-                          : '⚠️ Database not found or already deleted.',
+                          ? language.databaseResetSuccessMessage
+                          : language.databaseResetMissingMessage,
                     ),
                     duration: const Duration(seconds: 5),
                   ),
                 );
               }
             },
-            child: const Text('Delete All Data'),
+            child: Text(language.deleteAllDataLabel),
           ),
       ],
     );

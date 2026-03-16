@@ -1,332 +1,332 @@
 [
-    {
-        "grammarPoint": "N1 は N2 です",
-        "examples": [
-            {
-                "sentence": "私は学生です。",
-                "translation": "Tôi là học sinh.",
-                "translationEn": "I am a student."
-            },
-            {
-                "sentence": "ワンさんは医者です。",
-                "translation": "Anh Wang là bác sĩ.",
-                "translationEn": "Mr. Wang is a doctor."
-            },
-            {
-                "sentence": "カリナさんは先生です。",
-                "translation": "Chị Karina là giáo viên.",
-                "translationEn": "Ms. Karina is a teacher."
-            },
-            {
-                "sentence": "山田さんは日本人です。",
-                "translation": "Anh Yamada là người Nhật.",
-                "translationEn": "Mr. Yamada is Japanese."
-            },
-            {
-                "sentence": "私は会社員です。",
-                "translation": "Tôi là nhân viên công ty.",
-                "translationEn": "I am a company employee."
-            },
-            {
-                "sentence": "サントスさんはブラジル人です。",
-                "translation": "Anh Santos là người Brazil.",
-                "translationEn": "Mr. Santos is Brazilian."
-            },
-            {
-                "sentence": "ミラーさんはアメリカ人です。",
-                "translation": "Anh Miller là người Mỹ.",
-                "translationEn": "Mr. Miller is American."
-            },
-            {
-                "sentence": "これは本です。",
-                "translation": "Đây là quyển sách.",
-                "translationEn": "This is a book."
-            },
-            {
-                "sentence": "それは辞書です。",
-                "translation": "Đó là từ điển.",
-                "translationEn": "That is a dictionary."
-            },
-            {
-                "sentence": "あれは時計です。",
-                "translation": "Kia là cái đồng hồ.",
-                "translationEn": "That (over there) is a clock."
-            }
-        ]
-    },
-    {
-        "grammarPoint": "N1 は N2 じゃありません",
-        "examples": [
-            {
-                "sentence": "サントスさんは学生じゃありません。",
-                "translation": "Anh Santos không phải là học sinh.",
-                "translationEn": "Mr. Santos is not a student."
-            },
-            {
-                "sentence": "私は会社員じゃありません。",
-                "translation": "Tôi không phải là nhân viên công ty.",
-                "translationEn": "I am not a company employee."
-            },
-            {
-                "sentence": "山田さんはエンジニアじゃありません。",
-                "translation": "Anh Yamada không phải là kỹ sư.",
-                "translationEn": "Mr. Yamada is not an engineer."
-            },
-            {
-                "sentence": "ワンさんは日本人じゃありません。",
-                "translation": "Anh Wang không phải là người Nhật.",
-                "translationEn": "Mr. Wang is not Japanese."
-            },
-            {
-                "sentence": "カリナさんは医者じゃありません。",
-                "translation": "Chị Karina không phải là bác sĩ.",
-                "translationEn": "Ms. Karina is not a doctor."
-            },
-            {
-                "sentence": "ミラーさんは先生じゃありません。",
-                "translation": "Anh Miller không phải là giáo viên.",
-                "translationEn": "Mr. Miller is not a teacher."
-            },
-            {
-                "sentence": "これは本じゃありません。",
-                "translation": "Đây không phải là sách.",
-                "translationEn": "This is not a book."
-            },
-            {
-                "sentence": "それは辞書じゃありません。",
-                "translation": "Đó không phải là từ điển.",
-                "translationEn": "That is not a dictionary."
-            },
-            {
-                "sentence": "あれは時計じゃありません。",
-                "translation": "Kia không phải là đồng hồ.",
-                "translationEn": "That is not a clock."
-            },
-            {
-                "sentence": "私はアメリカ人じゃありません。",
-                "translation": "Tôi không phải là người Mỹ.",
-                "translationEn": "I am not American."
-            }
-        ]
-    },
-    {
-        "grammarPoint": "S か",
-        "examples": [
-            {
-                "sentence": "ミラーさんは会社員ですか。",
-                "translation": "Anh Miller có phải là nhân viên công ty không?",
-                "translationEn": "Is Mr. Miller a company employee?"
-            },
-            {
-                "sentence": "あの方はどなたですか。",
-                "translation": "Vị kia là ai vậy?",
-                "translationEn": "Who is that person?"
-            },
-            {
-                "sentence": "グプタさんは研究者ですか。",
-                "translation": "Anh Gupta có phải là nhà nghiên cứu không?",
-                "translationEn": "Is Mr. Gupta a researcher?"
-            },
-            {
-                "sentence": "あなたは学生ですか。",
-                "translation": "Bạn là học sinh phải không?",
-                "translationEn": "Are you a student?"
-            },
-            {
-                "sentence": "ワンさんは医者ですか。",
-                "translation": "Ông Wang là bác sĩ phải không?",
-                "translationEn": "Is Mr. Wang a doctor?"
-            },
-            {
-                "sentence": "山田さんは銀⾏員ですか。",
-                "translation": "Ông Yamada là nhân viên ngân hàng phải không?",
-                "translationEn": "Is Mr. Yamada a bank employee?"
-            },
-            {
-                "sentence": "ワットさんは先生ですか。",
-                "translation": "Ông Watt là giáo viên phải không?",
-                "translationEn": "Is Mr. Watt a teacher?"
-            },
-            {
-                "sentence": "あの方は松本さんですか。",
-                "translation": "Vị kia là ông Matsumoto phải không?",
-                "translationEn": "Is that person Mr. Matsumoto?"
-            },
-            {
-                "sentence": "これはボールペンですか。",
-                "translation": "Đây là bút bi phải không?",
-                "translationEn": "Is this a ballpoint pen?"
-            },
-            {
-                "sentence": "それはノートですか。",
-                "translation": "Đó là vở phải không?",
-                "translationEn": "Is that a notebook?"
-            }
-        ]
-    },
-    {
-        "grammarPoint": "N も",
-        "examples": [
-            {
-                "sentence": "あの方も日本人です。",
-                "translation": "Vị kia cũng là người Nhật.",
-                "translationEn": "That person is also Japanese."
-            },
-            {
-                "sentence": "グプタさんも会社員です。",
-                "translation": "Anh Gupta cũng là nhân viên công ty.",
-                "translationEn": "Mr. Gupta is also a company employee."
-            },
-            {
-                "sentence": "イーさんも研究者ですか。",
-                "translation": "Anh Lee cũng là nhà nghiên cứu à?",
-                "translationEn": "Is Mr. Lee also a researcher?"
-            },
-            {
-                "sentence": "私も学生です。",
-                "translation": "Tôi cũng là học sinh.",
-                "translationEn": "I am also a student."
-            },
-            {
-                "sentence": "山田さんもエンジニアです。",
-                "translation": "Chị Yamada cũng là kỹ sư.",
-                "translationEn": "Ms. Yamada is also an engineer."
-            },
-            {
-                "sentence": "ワンさんも医者です。",
-                "translation": "Ông Wang cũng là bác sĩ.",
-                "translationEn": "Mr. Wang is also a doctor."
-            },
-            {
-                "sentence": "これも日本の本です。",
-                "translation": "Cái này cũng là sách Nhật Bản.",
-                "translationEn": "This is also a Japanese book."
-            },
-            {
-                "sentence": "それも辞書ですか。",
-                "translation": "Cái đó cũng là từ điển à?",
-                "translationEn": "Is that also a dictionary?"
-            },
-            {
-                "sentence": "ミラーさんもアメリカ人ですか。",
-                "translation": "Anh Miller cũng là người Mỹ à?",
-                "translationEn": "Is Mr. Miller also American?"
-            },
-            {
-                "sentence": "カリナさんも大学の先生です。",
-                "translation": "Chị Karina cũng là giáo viên đại học.",
-                "translationEn": "Ms. Karina is also a university teacher."
-            }
-        ]
-    },
-    {
-        "grammarPoint": "N1 の N2",
-        "examples": [
-            {
-                "sentence": "ブラジルのコーヒー",
-                "translation": "Cà phê của Brazil.",
-                "translationEn": "Brazilian coffee."
-            },
-            {
-                "sentence": "東京大学の学生",
-                "translation": "Sinh viên đại học Tokyo.",
-                "translationEn": "Student of Tokyo University."
-            },
-            {
-                "sentence": "私の先生",
-                "translation": "Giáo viên của tôi.",
-                "translationEn": "My teacher."
-            },
-            {
-                "sentence": "IMCの社員",
-                "translation": "Nhân viên công ty IMC.",
-                "translationEn": "IMC employee."
-            },
-            {
-                "sentence": "私の本",
-                "translation": "Sách của tôi.",
-                "translationEn": "My book."
-            },
-            {
-                "sentence": "英語の辞書",
-                "translation": "Từ điển tiếng Anh.",
-                "translationEn": "English dictionary."
-            },
-            {
-                "sentence": "日本語の先生",
-                "translation": "Giáo viên tiếng Nhật.",
-                "translationEn": "Japanese teacher."
-            },
-            {
-                "sentence": "父の車",
-                "translation": "Xe của bố tôi.",
-                "translationEn": "My father's car."
-            },
-            {
-                "sentence": "会社の電話",
-                "translation": "Điện thoại của công ty.",
-                "translationEn": "Company phone."
-            },
-            {
-                "sentence": "大学の図書館",
-                "translation": "Thư viện của trường đại học.",
-                "translationEn": "University library."
-            }
-        ]
-    },
-    {
-        "grammarPoint": "~さん",
-        "examples": [
-            {
-                "sentence": "あの方はワットさんです。",
-                "translation": "Vị kia là ông Watt.",
-                "translationEn": "That person is Mr. Watt."
-            },
-            {
-                "sentence": "失礼ですが、お名前は？",
-                "translation": "Xin lỗi, tên bạn là gì?",
-                "translationEn": "Excuse me, what is your name?"
-            },
-            {
-                "sentence": "ミラーさんは学生ですか。",
-                "translation": "Anh Miller là học sinh phải không?",
-                "translationEn": "Is Mr. Miller a student?"
-            },
-            {
-                "sentence": "こちらは山田さんです。",
-                "translation": "Vị này là ông Yamada.",
-                "translationEn": "This is Mr. Yamada."
-            },
-            {
-                "sentence": "サントスさんはあちらです。",
-                "translation": "Anh Santos ở đằng kia.",
-                "translationEn": "Mr. Santos is over there."
-            },
-            {
-                "sentence": "これはカリナさんの本です。",
-                "translation": "Đây là sách của chị Karina.",
-                "translationEn": "This is Ms. Karina's book."
-            },
-            {
-                "sentence": "松本さんは先生じゃありません。",
-                "translation": "Ông Matsumoto không phải là giáo viên.",
-                "translationEn": "Mr. Matsumoto is not a teacher."
-            },
-            {
-                "sentence": "あの方はイーさんですか。",
-                "translation": "Vị kia là anh Lee phải không?",
-                "translationEn": "Is that person Mr. Lee?"
-            },
-            {
-                "sentence": "グプタさんも一緒ですか。",
-                "translation": "Anh Gupta cũng đi cùng à?",
-                "translationEn": "Is Mr. Gupta coming too?"
-            },
-            {
-                "sentence": "初めまして、マイク・ミラーさん。",
-                "translation": "Rất vui được gặp, anh Mike Miller.",
-                "translationEn": "Nice to meet you, Mr. Mike Miller."
-            }
-        ]
-    }
+  {
+    "grammarPoint": "N1 は N2 です",
+    "examples": [
+      {
+        "sentence": "私は学生です。",
+        "translation": "Tôi là học sinh.",
+        "translationEn": "I am a student."
+      },
+      {
+        "sentence": "ワンさんは医者です。",
+        "translation": "Anh Wang là bác sĩ.",
+        "translationEn": "Mr. Wang is a doctor."
+      },
+      {
+        "sentence": "カリナさんは先生です。",
+        "translation": "Chị Karina là giáo viên.",
+        "translationEn": "Ms. Karina is a teacher."
+      },
+      {
+        "sentence": "山田さんは日本人です。",
+        "translation": "Anh Yamada là người Nhật.",
+        "translationEn": "Mr. Yamada is Japanese."
+      },
+      {
+        "sentence": "私は会社員です。",
+        "translation": "Tôi là nhân viên công ty.",
+        "translationEn": "I am a company employee."
+      },
+      {
+        "sentence": "サントスさんはブラジル人です。",
+        "translation": "Anh Santos là người Brazil.",
+        "translationEn": "Mr. Santos is Brazilian."
+      },
+      {
+        "sentence": "ミラーさんはアメリカ人です。",
+        "translation": "Anh Miller là người Mỹ.",
+        "translationEn": "Mr. Miller is American."
+      },
+      {
+        "sentence": "これは本です。",
+        "translation": "Đây là quyển sách.",
+        "translationEn": "This is a book."
+      },
+      {
+        "sentence": "それは辞書です。",
+        "translation": "Đó là từ điển.",
+        "translationEn": "That is a dictionary."
+      },
+      {
+        "sentence": "あれは時計です。",
+        "translation": "Kia là cái đồng hồ.",
+        "translationEn": "That (over there) is a clock."
+      }
+    ]
+  },
+  {
+    "grammarPoint": "N1 は N2 じゃありません",
+    "examples": [
+      {
+        "sentence": "サントスさんは学生じゃありません。",
+        "translation": "Anh Santos không phải là học sinh.",
+        "translationEn": "Mr. Santos is not a student."
+      },
+      {
+        "sentence": "私は会社員じゃありません。",
+        "translation": "Tôi không phải là nhân viên công ty.",
+        "translationEn": "I am not a company employee."
+      },
+      {
+        "sentence": "山田さんはエンジニアじゃありません。",
+        "translation": "Anh Yamada không phải là kỹ sư.",
+        "translationEn": "Mr. Yamada is not an engineer."
+      },
+      {
+        "sentence": "ワンさんは日本人じゃありません。",
+        "translation": "Anh Wang không phải là người Nhật.",
+        "translationEn": "Mr. Wang is not Japanese."
+      },
+      {
+        "sentence": "カリナさんは医者じゃありません。",
+        "translation": "Chị Karina không phải là bác sĩ.",
+        "translationEn": "Ms. Karina is not a doctor."
+      },
+      {
+        "sentence": "ミラーさんは先生じゃありません。",
+        "translation": "Anh Miller không phải là giáo viên.",
+        "translationEn": "Mr. Miller is not a teacher."
+      },
+      {
+        "sentence": "これは本じゃありません。",
+        "translation": "Đây không phải là sách.",
+        "translationEn": "This is not a book."
+      },
+      {
+        "sentence": "それは辞書じゃありません。",
+        "translation": "Đó không phải là từ điển.",
+        "translationEn": "That is not a dictionary."
+      },
+      {
+        "sentence": "あれは時計じゃありません。",
+        "translation": "Kia không phải là đồng hồ.",
+        "translationEn": "That is not a clock."
+      },
+      {
+        "sentence": "私はアメリカ人じゃありません。",
+        "translation": "Tôi không phải là người Mỹ.",
+        "translationEn": "I am not American."
+      }
+    ]
+  },
+  {
+    "grammarPoint": "S か",
+    "examples": [
+      {
+        "sentence": "ミラーさんは会社員ですか。",
+        "translation": "Anh Miller có phải là nhân viên công ty không?",
+        "translationEn": "Is Mr. Miller a company employee?"
+      },
+      {
+        "sentence": "あの方はどなたですか。",
+        "translation": "Vị kia là ai vậy?",
+        "translationEn": "Who is that person?"
+      },
+      {
+        "sentence": "グプタさんは研究者ですか。",
+        "translation": "Anh Gupta có phải là nhà nghiên cứu không?",
+        "translationEn": "Is Mr. Gupta a researcher?"
+      },
+      {
+        "sentence": "あなたは学生ですか。",
+        "translation": "Bạn là học sinh phải không?",
+        "translationEn": "Are you a student?"
+      },
+      {
+        "sentence": "ワンさんは医者ですか。",
+        "translation": "Ông Wang là bác sĩ phải không?",
+        "translationEn": "Is Mr. Wang a doctor?"
+      },
+      {
+        "sentence": "山田さんは銀⾏員ですか。",
+        "translation": "Ông Yamada là nhân viên ngân hàng phải không?",
+        "translationEn": "Is Mr. Yamada a bank employee?"
+      },
+      {
+        "sentence": "ワットさんは先生ですか。",
+        "translation": "Ông Watt là giáo viên phải không ạ?",
+        "translationEn": "Is Mr. Watt a teacher?"
+      },
+      {
+        "sentence": "あの方は松本さんですか。",
+        "translation": "Vị kia là ông Matsumoto phải không?",
+        "translationEn": "Is that person Mr. Matsumoto?"
+      },
+      {
+        "sentence": "これはボールペンですか。",
+        "translation": "Đây là bút bi phải không?",
+        "translationEn": "Is this a ballpoint pen?"
+      },
+      {
+        "sentence": "それはノートですか。",
+        "translation": "Đó là vở phải không?",
+        "translationEn": "Is that a notebook?"
+      }
+    ]
+  },
+  {
+    "grammarPoint": "N も",
+    "examples": [
+      {
+        "sentence": "あの方も日本人です。",
+        "translation": "Vị kia cũng là người Nhật.",
+        "translationEn": "That person is also Japanese."
+      },
+      {
+        "sentence": "グプタさんも会社員です。",
+        "translation": "Anh Gupta cũng là nhân viên công ty.",
+        "translationEn": "Mr. Gupta is also a company employee."
+      },
+      {
+        "sentence": "イーさんも研究者ですか。",
+        "translation": "Anh Lee cũng là nhà nghiên cứu à?",
+        "translationEn": "Is Mr. Lee also a researcher?"
+      },
+      {
+        "sentence": "私も学生です。",
+        "translation": "Tôi cũng là học sinh.",
+        "translationEn": "I am also a student."
+      },
+      {
+        "sentence": "山田さんもエンジニアです。",
+        "translation": "Chị Yamada cũng là kỹ sư.",
+        "translationEn": "Ms. Yamada is also an engineer."
+      },
+      {
+        "sentence": "ワンさんも医者です。",
+        "translation": "Ông Wang cũng là bác sĩ.",
+        "translationEn": "Mr. Wang is also a doctor."
+      },
+      {
+        "sentence": "これも日本の本です。",
+        "translation": "Cái này cũng là sách Nhật Bản.",
+        "translationEn": "This is also a Japanese book."
+      },
+      {
+        "sentence": "それも辞書ですか。",
+        "translation": "Cái đó cũng là từ điển à?",
+        "translationEn": "Is that also a dictionary?"
+      },
+      {
+        "sentence": "ミラーさんもアメリカ人ですか。",
+        "translation": "Anh Miller cũng là người Mỹ à?",
+        "translationEn": "Is Mr. Miller also American?"
+      },
+      {
+        "sentence": "カリナさんも大学の先生です。",
+        "translation": "Chị Karina cũng là giáo viên đại học.",
+        "translationEn": "Ms. Karina is also a university teacher."
+      }
+    ]
+  },
+  {
+    "grammarPoint": "N1 の N2",
+    "examples": [
+      {
+        "sentence": "ブラジルのコーヒー",
+        "translation": "Cà phê của Brazil.",
+        "translationEn": "Brazilian coffee."
+      },
+      {
+        "sentence": "東京大学の学生",
+        "translation": "Sinh viên đại học Tokyo.",
+        "translationEn": "Student of Tokyo University."
+      },
+      {
+        "sentence": "私の先生",
+        "translation": "Giáo viên của tôi.",
+        "translationEn": "My teacher."
+      },
+      {
+        "sentence": "IMCの社員",
+        "translation": "Nhân viên công ty IMC.",
+        "translationEn": "IMC employee."
+      },
+      {
+        "sentence": "私の本",
+        "translation": "Sách của tôi.",
+        "translationEn": "My book."
+      },
+      {
+        "sentence": "英語の辞書",
+        "translation": "Từ điển tiếng Anh.",
+        "translationEn": "English dictionary."
+      },
+      {
+        "sentence": "日本語の先生",
+        "translation": "Giáo viên tiếng Nhật.",
+        "translationEn": "Japanese teacher."
+      },
+      {
+        "sentence": "父の車",
+        "translation": "Xe của bố tôi.",
+        "translationEn": "My father's car."
+      },
+      {
+        "sentence": "会社の電話",
+        "translation": "Điện thoại của công ty.",
+        "translationEn": "Company phone."
+      },
+      {
+        "sentence": "大学の図書館",
+        "translation": "Thư viện của trường đại học.",
+        "translationEn": "University library."
+      }
+    ]
+  },
+  {
+    "grammarPoint": "~さん",
+    "examples": [
+      {
+        "sentence": "あの方はワットさんです。",
+        "translation": "Người kia là ông Watt.",
+        "translationEn": "That person is Mr. Watt."
+      },
+      {
+        "sentence": "失礼ですが、お名前は？",
+        "translation": "Xin lỗi, tên bạn là gì?",
+        "translationEn": "Excuse me, what is your name?"
+      },
+      {
+        "sentence": "ミラーさんは学生ですか。",
+        "translation": "Anh Miller là học sinh phải không?",
+        "translationEn": "Is Mr. Miller a student?"
+      },
+      {
+        "sentence": "こちらは山田さんです。",
+        "translation": "Vị này là ông Yamada.",
+        "translationEn": "This is Mr. Yamada."
+      },
+      {
+        "sentence": "サントスさんはあちらです。",
+        "translation": "Anh Santos ở đằng kia.",
+        "translationEn": "Mr. Santos is over there."
+      },
+      {
+        "sentence": "これはカリナさんの本です。",
+        "translation": "Đây là sách của chị Karina.",
+        "translationEn": "This is Ms. Karina's book."
+      },
+      {
+        "sentence": "松本さんは先生じゃありません。",
+        "translation": "Ông Matsumoto không phải là giáo viên.",
+        "translationEn": "Mr. Matsumoto is not a teacher."
+      },
+      {
+        "sentence": "あの方はイーさんですか。",
+        "translation": "Vị kia là anh Lee phải không?",
+        "translationEn": "Is that person Mr. Lee?"
+      },
+      {
+        "sentence": "グプタさんも一緒ですか。",
+        "translation": "Anh Gupta cũng đi cùng à?",
+        "translationEn": "Is Mr. Gupta coming too?"
+      },
+      {
+        "sentence": "初めまして、マイク・ミラーさん。",
+        "translation": "Rất vui được gặp, anh Mike Miller.",
+        "translationEn": "Nice to meet you, Mr. Mike Miller."
+      }
+    ]
+  }
 ]
