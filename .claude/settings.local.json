@@ -3,7 +3,23 @@
     "allow": [
       "Bash(flutter test:*)",
       "Skill(claude-api)",
-      "Skill(claude-api:*)"
+      "Skill(claude-api:*)",
+      "Bash(python -m pytest tests/test_models.py -q)",
+      "Bash(python -m pip install pytest -q)",
+      "Bash(source .venv_coding_agent/Scripts/activate)",
+      "Bash(pip install:*)",
+      "Bash(/c/Users/xboxo/Documents/GitHub/JpStudy-v2/.venv_coding_agent/bin/pip install:*)",
+      "Bash(/c/Users/xboxo/Documents/GitHub/JpStudy-v2/.venv_coding_agent/bin/python -m pytest tests/test_models.py -q)",
+      "Bash(/c/Users/xboxo/Documents/GitHub/JpStudy-v2/.venv_coding_agent/bin/python -m pytest tests/test_models.py -v)",
+      "Bash(git -C \"c:/Users/xboxo/Documents/GitHub/JpStudy-v2/.claude/worktrees/agent-a0efb9be\" log --oneline -10)",
+      "Bash(git -C \"c:/Users/xboxo/Documents/GitHub/JpStudy-v2/.claude/worktrees/agent-a0efb9be\" log --oneline --all)",
+      "Bash(git -C \"c:/Users/xboxo/Documents/GitHub/JpStudy-v2/.claude/worktrees/agent-a0efb9be\" branch -a)",
+      "Bash(git -C c:/Users/xboxo/Documents/GitHub/JpStudy-v2/.claude/worktrees/agent-a0efb9be log --oneline worktree-agent-a0efb9be...main)",
+      "Bash(git -C \"c:/Users/xboxo/Documents/GitHub/JpStudy-v2/.claude/worktrees/agent-a0efb9be\" log --oneline -20 worktree-agent-a0efb9be)",
+      "Bash(git -C \"c:/Users/xboxo/Documents/GitHub/JpStudy-v2/.claude/worktrees/agent-a0efb9be\" status)",
+      "Bash(\".venv_coding_agent/bin/python\" -m pytest tests/test_models.py -q)",
+      "Bash(\".venv_coding_agent/bin/python\" -m pytest tests/test_models.py -v --tb=short)",
+      "Bash(\".venv_coding_agent/bin/python\" -m py_compile coding_agent/__init__.py coding_agent/models.py tests/test_models.py)"
     ]
   },
   "enabledPlugins": {
