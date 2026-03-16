@@ -45,22 +45,22 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    expect(find.text('LEARNING'), findsOneWidget);
-    expect(find.text('APPEARANCE'), findsOneWidget);
+    expect(find.text('Learning'), findsOneWidget);
+    expect(find.text('Display'), findsOneWidget);
     await tester.scrollUntilVisible(
-      find.text('REMINDERS'),
+      find.text('Reminders'),
       300,
       scrollable: find.byType(Scrollable).first,
     );
     await tester.pumpAndSettle();
-    expect(find.text('REMINDERS'), findsOneWidget);
+    expect(find.text('Reminders'), findsOneWidget);
     await tester.scrollUntilVisible(
-      find.text('DATA'),
+      find.text('Data'),
       300,
       scrollable: find.byType(Scrollable).first,
     );
     await tester.pumpAndSettle();
-    expect(find.text('DATA'), findsOneWidget);
+    expect(find.text('Data'), findsOneWidget);
     expect(find.text('Linked sync file'), findsOneWidget);
   });
 }

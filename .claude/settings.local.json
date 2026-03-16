@@ -20,7 +20,10 @@
       "Bash(\".venv_coding_agent/bin/python\" -m pytest tests/test_models.py -q)",
       "Bash(\".venv_coding_agent/bin/python\" -m pytest tests/test_models.py -v --tb=short)",
       "Bash(\".venv_coding_agent/bin/python\" -m py_compile coding_agent/__init__.py coding_agent/models.py tests/test_models.py)",
-      "Bash(pytest tests/test_models.py -q)"
+      "Bash(pytest tests/test_models.py -q)",
+      "Bash(flutter analyze:*)",
+      "Bash(printf \"ALL_TESTS_PASSED\")",
+      "Bash(\"test/features/ui/simple_command_center_test.dart\")"
     ]
   },
   "enabledPlugins": {

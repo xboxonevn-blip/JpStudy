@@ -1,3 +1,4 @@
+import 'package:drift/native.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -8,6 +9,7 @@ import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/onboarding_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/data/db/app_database.dart';
+import 'package:jpstudy/data/db/database_provider.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/home/providers/continue_provider.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
@@ -361,6 +363,73 @@ void main() {
     expect(find.text('Choose the best meaning for 食べる.'), findsOneWidget);
   });
 
+  testWidgets('RecallSprintScreen shows completion state after finishing retry pass', (tester) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+        ],
+        child: const MaterialApp(home: RecallSprintScreen()),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Start sprint'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('to drink'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Next'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('to drink'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Next'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('to eat'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Next'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Sprint complete'), findsOneWidget);
+    expect(find.text('Nice run.'), findsOneWidget);
+    expect(find.text('Run again'), findsOneWidget);
+    expect(find.text('Choose the best meaning for 食べる.'), findsNothing);
+  });
+
+  testWidgets('RecallSprintScreen can restart after completion', (tester) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+        ],
+        child: const MaterialApp(home: RecallSprintScreen()),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Start sprint'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('to eat'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Next'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('to drink'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Next'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Sprint complete'), findsOneWidget);
+    await tester.tap(find.text('Run again'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Question 1 of 5'), findsOneWidget);
+    expect(find.text('Choose the best meaning for 食べる.'), findsOneWidget);
+  });
+
   testWidgets('SearchScreen keeps search as utility screen', (tester) async {
     await tester.pumpWidget(
       ProviderScope(
@@ -380,9 +449,13 @@ void main() {
   });
 
   testWidgets('MeScreen shows compact profile hero', (tester) async {
+    final db = AppDatabase(executor: NativeDatabase.memory());
+    addTearDown(db.close);
+
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
+          databaseProvider.overrideWithValue(db),
           appLanguageProvider.overrideWith((ref) => AppLanguage.en),
           studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
         ],
