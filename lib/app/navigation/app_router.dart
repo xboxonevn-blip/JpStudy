@@ -12,6 +12,7 @@ import 'package:jpstudy/features/grammar/screens/grammar_detail_screen.dart';
 import 'package:jpstudy/features/grammar/screens/grammar_practice_screen.dart';
 import 'package:jpstudy/features/grammar/services/grammar_question_generator.dart';
 import 'package:jpstudy/features/home/home_screen.dart';
+import 'package:jpstudy/features/home/screens/daily_session_summary_screen.dart';
 import 'package:jpstudy/features/immersion/immersion_home_screen.dart';
 import 'package:jpstudy/features/jlpt/screens/jlpt_coach_screen.dart';
 import 'package:jpstudy/features/jlpt/screens/jlpt_mock_pro_screen.dart';
@@ -58,6 +59,10 @@ class AppRouter {
               GoRoute(
                 path: '/today',
                 builder: (context, state) => const HomeScreen(),
+              ),
+              GoRoute(
+                path: '/today/session-summary',
+                builder: (context, state) => const DailySessionSummaryScreen(),
               ),
             ],
           ),

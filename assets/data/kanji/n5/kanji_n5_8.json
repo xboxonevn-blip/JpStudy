@@ -23,7 +23,15 @@
         "sourceSenseId": "n5_l08_s067"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Lương",
+      "structure": "standalone",
+      "relatedKanji": [
+        "食",
+        "娘"
+      ]
+    }
   },
   {
     "lessonId": 8,
@@ -49,7 +57,25 @@
         "sourceSenseId": "n5_l08_s024"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Cao",
+      "structure": "top-bottom",
+      "components": [
+        "亠",
+        "口",
+        "冂"
+      ],
+      "componentNames": [
+        "Đầu (nắp đậy)",
+        "Khẩu (miệng)",
+        "Quynh (vây quanh)"
+      ],
+      "relatedKanji": [
+        "京",
+        "景"
+      ]
+    }
   },
   {
     "lessonId": 8,
@@ -75,7 +101,24 @@
         "sourceSenseId": "n5_l08_s025"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "An",
+      "structure": "top-bottom",
+      "components": [
+        "宀",
+        "女"
+      ],
+      "componentNames": [
+        "Miên (mái nhà)",
+        "Nữ (phụ nữ)"
+      ],
+      "relatedKanji": [
+        "女",
+        "字",
+        "宅"
+      ]
+    }
   },
   {
     "lessonId": 8,
@@ -101,7 +144,16 @@
         "sourceSenseId": "n5_l08_s011"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Đại",
+      "structure": "standalone",
+      "relatedKanji": [
+        "人",
+        "夫",
+        "天"
+      ]
+    }
   },
   {
     "lessonId": 8,
@@ -127,7 +179,15 @@
         "sourceSenseId": "n5_l08_s012"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Tiểu",
+      "structure": "standalone",
+      "relatedKanji": [
+        "大",
+        "少"
+      ]
+    }
   },
   {
     "lessonId": 8,
@@ -153,7 +213,28 @@
         "sourceSenseId": "n5_l08_s013"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Tân",
+      "structure": "left-right",
+      "components": [
+        "立",
+        "木",
+        "斤"
+      ],
+      "componentNames": [
+        "Lập (đứng)",
+        "Mộc (cây)",
+        "Cân (rìu)"
+      ],
+      "relatedKanji": [
+        "立",
+        "木",
+        "親",
+        "所",
+        "折"
+      ]
+    }
   },
   {
     "lessonId": 8,
@@ -179,6 +260,22 @@
         "sourceSenseId": "n5_l08_s014"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Cổ",
+      "structure": "top-bottom",
+      "components": [
+        "十",
+        "口"
+      ],
+      "componentNames": [
+        "Thập (mười)",
+        "Khẩu (miệng)"
+      ],
+      "relatedKanji": [
+        "十",
+        "口"
+      ]
+    }
   }
 ]

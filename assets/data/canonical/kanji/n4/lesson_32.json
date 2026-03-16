@@ -1,0 +1,453 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N4",
+  "lessonId": 32,
+  "entryCount": 6,
+  "entries": [
+    {
+      "kanjiId": "n4_l32_k001",
+      "lessonId": 32,
+      "level": "N4",
+      "character": "運",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Vận",
+        "meaningVi": "vận chuyển",
+        "meaningViDisplay": "Vận (vận chuyển)",
+        "meaningEn": "Transport, Luck"
+      },
+      "readings": {
+        "onyomi": [
+          "UN"
+        ],
+        "kunyomi": [
+          "hako-bu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Đi (Sước 辶) trên con đường với những vật dụng quân sự (Quân 込) để VẬN chuyển.",
+        "en": "Traveling (辶) with vehicles/gear (軍) to TRANSPORT."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "軍",
+          "辶"
+        ],
+        "componentNames": [
+          "Quân (quân đội)",
+          "Sước (đi)"
+        ],
+        "relatedKanji": [
+          "送",
+          "通",
+          "連",
+          "選"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "van",
+        "meaningViNoAccent": "van chuyen",
+        "meaningEnNoAccent": "transport, luck"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l32_v068",
+          "sourceSenseId": "n4_l32_s068",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l32_v001",
+          "sourceSenseId": "n4_l32_s001",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l34_v057",
+          "sourceSenseId": "n4_l34_s057",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Vận (vận chuyển)",
+        "onyomi": "UN",
+        "kunyomi": "hako-bu"
+      }
+    },
+    {
+      "kanjiId": "n4_l32_k002",
+      "lessonId": 32,
+      "level": "N4",
+      "character": "動",
+      "strokeCount": 11,
+      "labels": {
+        "hanViet": "Động",
+        "meaningVi": "chuyển động",
+        "meaningViDisplay": "Động (chuyển động)",
+        "meaningEn": "Move"
+      },
+      "readings": {
+        "onyomi": [
+          "DOU"
+        ],
+        "kunyomi": [
+          "ugo-ku"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng Sức lực (Lực 力) để gánh vật nặng (Trọng 重) là Chuyển ĐỘNG.",
+        "en": "Using strength (力) to move something heavy (重)."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "重",
+          "力"
+        ],
+        "componentNames": [
+          "Trọng (nặng)",
+          "Lực (sức mạnh)"
+        ],
+        "relatedKanji": [
+          "重",
+          "力",
+          "男"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "dong",
+        "meaningViNoAccent": "chuyen dong",
+        "meaningEnNoAccent": "move"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l32_v065",
+          "sourceSenseId": "n4_l32_s065",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l32_v001",
+          "sourceSenseId": "n4_l32_s001",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l31_v018",
+          "sourceSenseId": "n4_l31_s018",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Động (chuyển động)",
+        "onyomi": "DOU",
+        "kunyomi": "ugo-ku"
+      }
+    },
+    {
+      "kanjiId": "n4_l32_k003",
+      "lessonId": 32,
+      "level": "N4",
+      "character": "禁",
+      "strokeCount": 13,
+      "labels": {
+        "hanViet": "Cấm",
+        "meaningVi": "nghiêm cấm",
+        "meaningViDisplay": "Cấm (nghiêm cấm)",
+        "meaningEn": "Prohibit"
+      },
+      "readings": {
+        "onyomi": [
+          "KIN"
+        ],
+        "kunyomi": []
+      },
+      "mnemonic": {
+        "vi": "Trong rừng (Lâm 林) cần sự chỉ dẫn của thần linh (Thị 示) để BIẾT CÁC ĐIỀU CẤM.",
+        "en": "Spirits (示) warning against entering the forest (林)."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "林",
+          "示"
+        ],
+        "componentNames": [
+          "Lâm (rừng)",
+          "Thị (bày tỏ)"
+        ],
+        "relatedKanji": [
+          "木",
+          "礼"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "cam",
+        "meaningViNoAccent": "nghiem cam",
+        "meaningEnNoAccent": "prohibit"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l32_v067",
+          "sourceSenseId": "n4_l32_s067",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l32_v064",
+          "sourceSenseId": "n4_l32_s064",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l33_v019",
+          "sourceSenseId": "n4_l33_s019",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Cấm (nghiêm cấm)",
+        "onyomi": "KIN",
+        "kunyomi": null
+      }
+    },
+    {
+      "kanjiId": "n4_l32_k004",
+      "lessonId": 32,
+      "level": "N4",
+      "character": "煙",
+      "strokeCount": 13,
+      "labels": {
+        "hanViet": "Yên",
+        "meaningVi": "khói",
+        "meaningViDisplay": "Yên (khói)",
+        "meaningEn": "Smoke"
+      },
+      "readings": {
+        "onyomi": [
+          "EN"
+        ],
+        "kunyomi": [
+          "kemuri"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Lửa (Hỏa 火) bốc lên từ phương Tây (Tây 西) dưới mái nhà tạo ra KHÓI.",
+        "en": "Fire (火) combined with other elements creates SMOKE."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "火",
+          "因"
+        ],
+        "componentNames": [
+          "Hỏa (lửa)",
+          "Nhân biến thể (nguyên nhân)"
+        ],
+        "relatedKanji": [
+          "焼",
+          "熱"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "yen",
+        "meaningViNoAccent": "khoi",
+        "meaningEnNoAccent": "smoke"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l41_v054",
+          "sourceSenseId": "n4_l41_s054",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l17_v018",
+          "sourceSenseId": "n5_l17_s018",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Yên (khói)",
+        "onyomi": "EN",
+        "kunyomi": "kemuri"
+      }
+    },
+    {
+      "kanjiId": "n4_l32_k005",
+      "lessonId": 32,
+      "level": "N4",
+      "character": "静",
+      "strokeCount": 14,
+      "labels": {
+        "hanViet": "Tĩnh",
+        "meaningVi": "yên tĩnh",
+        "meaningViDisplay": "Tĩnh (yên tĩnh)",
+        "meaningEn": "Quiet"
+      },
+      "readings": {
+        "onyomi": [
+          "SEI"
+        ],
+        "kunyomi": [
+          "shizu-ka"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Màu xanh (Thanh 青) của thiên nhiên mang lại cảm giác YÊN TĨNH.",
+        "en": "Deep green/blue (青) nature brings QUIET."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "青",
+          "争"
+        ],
+        "componentNames": [
+          "Thanh (xanh)",
+          "Tranh (tranh đấu)"
+        ],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "tinh",
+        "meaningViNoAccent": "yen tinh",
+        "meaningEnNoAccent": "quiet"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l32_v069",
+          "sourceSenseId": "n4_l32_s069",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l32_v070",
+          "sourceSenseId": "n4_l32_s070",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l08_v003",
+          "sourceSenseId": "n5_l08_s003",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tĩnh (yên tĩnh)",
+        "onyomi": "SEI",
+        "kunyomi": "shizu-ka"
+      }
+    },
+    {
+      "kanjiId": "n4_l32_k006",
+      "lessonId": 32,
+      "level": "N4",
+      "character": "危",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Nguy",
+        "meaningVi": "nguy hiểm",
+        "meaningViDisplay": "Nguy (nguy hiểm)",
+        "meaningEn": "Dangerous"
+      },
+      "readings": {
+        "onyomi": [
+          "KI"
+        ],
+        "kunyomi": [
+          "abu-nai"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Người đứng bên bờ vực thẳm - NGUY HIỂM.",
+        "en": "A person on a cliff's edge - DANGER."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "⺈",
+          "厄"
+        ],
+        "componentNames": [
+          "Đao biến thể (trên)",
+          "Ách (tai ương)"
+        ],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "nguy",
+        "meaningViNoAccent": "nguy hiem",
+        "meaningEnNoAccent": "dangerous"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l32_v066",
+          "sourceSenseId": "n4_l32_s066",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l33_v048",
+          "sourceSenseId": "n4_l33_s048",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l40_v008",
+          "sourceSenseId": "n4_l40_s008",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Nguy (nguy hiểm)",
+        "onyomi": "KI",
+        "kunyomi": "abu-nai"
+      }
+    }
+  ]
+}

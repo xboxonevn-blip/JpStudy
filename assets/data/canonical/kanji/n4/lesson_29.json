@@ -1,0 +1,475 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N4",
+  "lessonId": 29,
+  "entryCount": 6,
+  "entries": [
+    {
+      "kanjiId": "n4_l29_k001",
+      "lessonId": 29,
+      "level": "N4",
+      "character": "閉",
+      "strokeCount": 11,
+      "labels": {
+        "hanViet": "Bế",
+        "meaningVi": "đóng",
+        "meaningViDisplay": "Bế (đóng)",
+        "meaningEn": "Close"
+      },
+      "readings": {
+        "onyomi": [
+          "HEI"
+        ],
+        "kunyomi": [
+          "shi-maru",
+          "shi-meru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng then cài (Tài 才) để ĐÓNG Cửa (Môn 門).",
+        "en": "Putting a bar across the gate (門) to CLOSE it."
+      },
+      "decomposition": {
+        "structure": "enclosure",
+        "components": [
+          "門",
+          "才"
+        ],
+        "componentNames": [
+          "Môn (cửa)",
+          "Tài (tài năng)"
+        ],
+        "relatedKanji": [
+          "門",
+          "開",
+          "間",
+          "聞",
+          "問"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "be",
+        "meaningViNoAccent": "dong",
+        "meaningEnNoAccent": "close"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l29_v063",
+          "sourceSenseId": "n4_l29_s063",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l29_v068",
+          "sourceSenseId": "n4_l29_s068",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l29_v002",
+          "sourceSenseId": "n4_l29_s002",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Bế (đóng)",
+        "onyomi": "HEI",
+        "kunyomi": "shi-maru, shi-meru"
+      }
+    },
+    {
+      "kanjiId": "n4_l29_k002",
+      "lessonId": 29,
+      "level": "N4",
+      "character": "壊",
+      "strokeCount": 16,
+      "labels": {
+        "hanViet": "Hoại",
+        "meaningVi": "hỏng",
+        "meaningViDisplay": "Hoại (hỏng)",
+        "meaningEn": "Break"
+      },
+      "readings": {
+        "onyomi": [
+          "KAI"
+        ],
+        "kunyomi": [
+          "kowa-reru",
+          "kowa-su"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Vật làm từ Đất (Thổ 土) rơi xuống con mắt nhìn chằm chằm là bị HỎNG.",
+        "en": "Something made of earth (土) BREAKING apart."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "土",
+          "懐"
+        ],
+        "componentNames": [
+          "Thổ (đất)",
+          "Hoài biến thể (nhớ)"
+        ],
+        "relatedKanji": [
+          "土",
+          "地"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "hoai",
+        "meaningViNoAccent": "hong",
+        "meaningEnNoAccent": "break"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l29_v059",
+          "sourceSenseId": "n4_l29_s059",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l29_v064",
+          "sourceSenseId": "n4_l29_s064",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l29_v007",
+          "sourceSenseId": "n4_l29_s007",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Hoại (hỏng)",
+        "onyomi": "KAI",
+        "kunyomi": "kowa-reru, kowa-su"
+      }
+    },
+    {
+      "kanjiId": "n4_l29_k003",
+      "lessonId": 29,
+      "level": "N4",
+      "character": "消",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Tiêu",
+        "meaningVi": "tắt, biến mất",
+        "meaningViDisplay": "Tiêu (tắt, biến mất)",
+        "meaningEn": "Extinguish, Disappear"
+      },
+      "readings": {
+        "onyomi": [
+          "SHOU"
+        ],
+        "kunyomi": [
+          "ki-eru",
+          "ke-su"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng Nước (Thủy 氵) để dập tắt ngọn lửa nhỏ (Xiao 肖).",
+        "en": "Water (氵) making things DISAPPEAR/extinguish."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "氵",
+          "肖"
+        ],
+        "componentNames": [
+          "Thủy (nước)",
+          "Tiêu (giống nhau)"
+        ],
+        "relatedKanji": [
+          "洗",
+          "法"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "tieu",
+        "meaningViNoAccent": "tat, bien mat",
+        "meaningEnNoAccent": "extinguish, disappear"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l29_v061",
+          "sourceSenseId": "n4_l29_s061",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l29_v066",
+          "sourceSenseId": "n4_l29_s066",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l29_v004",
+          "sourceSenseId": "n4_l29_s004",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tiêu (tắt, biến mất)",
+        "onyomi": "SHOU",
+        "kunyomi": "ki-eru, ke-su"
+      }
+    },
+    {
+      "kanjiId": "n4_l29_k004",
+      "lessonId": 29,
+      "level": "N4",
+      "character": "汚",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Ô",
+        "meaningVi": "bẩn",
+        "meaningViDisplay": "Ô (bẩn)",
+        "meaningEn": "Dirty"
+      },
+      "readings": {
+        "onyomi": [
+          "O"
+        ],
+        "kunyomi": [
+          "yogore-ru",
+          "kitana-i"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Nước (Thủy 氵) đục ngầu do con số 5 (Ngũ 亏) dính BẨN.",
+        "en": "Water (氵) that has become DIRTY."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "氵",
+          "亏"
+        ],
+        "componentNames": [
+          "Thủy (nước)",
+          "Vu biến thể"
+        ],
+        "relatedKanji": [
+          "洗",
+          "消"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "o",
+        "meaningViNoAccent": "ban",
+        "meaningEnNoAccent": "dirty"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l29_v060",
+          "sourceSenseId": "n4_l29_s060",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l29_v065",
+          "sourceSenseId": "n4_l29_s065",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l29_v011",
+          "sourceSenseId": "n4_l29_s011",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Ô (bẩn)",
+        "onyomi": "O",
+        "kunyomi": "yogore-ru, kitana-i"
+      }
+    },
+    {
+      "kanjiId": "n4_l29_k005",
+      "lessonId": 29,
+      "level": "N4",
+      "character": "袋",
+      "strokeCount": 11,
+      "labels": {
+        "hanViet": "Đại",
+        "meaningVi": "cái túi",
+        "meaningViDisplay": "Đại (cái túi)",
+        "meaningEn": "Bag, Sack"
+      },
+      "readings": {
+        "onyomi": [
+          "TAI"
+        ],
+        "kunyomi": [
+          "fukuro"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Quần áo (Y 衣) được đựng trong cái TÚI (Đại 代).",
+        "en": "Clothing (衣) inside a BAG."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "代",
+          "衣"
+        ],
+        "componentNames": [
+          "Đại (thay thế)",
+          "Y (áo)"
+        ],
+        "relatedKanji": [
+          "代"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "dai",
+        "meaningViNoAccent": "cai tui",
+        "meaningEnNoAccent": "bag, sack"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l29_v022",
+          "sourceSenseId": "n4_l29_s022",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l41_v024",
+          "sourceSenseId": "n4_l41_s024",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l42_v027",
+          "sourceSenseId": "n4_l42_s027",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Đại (cái túi)",
+        "onyomi": "TAI",
+        "kunyomi": "fukuro"
+      }
+    },
+    {
+      "kanjiId": "n4_l29_k006",
+      "lessonId": 29,
+      "level": "N4",
+      "character": "落",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Lạc",
+        "meaningVi": "rơi",
+        "meaningViDisplay": "Lạc (rơi)",
+        "meaningEn": "Fall, Drop"
+      },
+      "readings": {
+        "onyomi": [
+          "RAKU"
+        ],
+        "kunyomi": [
+          "o-chiru",
+          "o-tosu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Cỏ (Thảo 艹) dưới Nước (Thủy 氵) rụng RƠI lá.",
+        "en": "Leaves from herbs (艹) DROPPING into water (氵)."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "艹",
+          "氵",
+          "各"
+        ],
+        "componentNames": [
+          "Thảo (cỏ)",
+          "Thủy (nước)",
+          "Các (mỗi)"
+        ],
+        "relatedKanji": [
+          "楽",
+          "薬"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "lac",
+        "meaningViNoAccent": "roi",
+        "meaningEnNoAccent": "fall, drop"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l29_v062",
+          "sourceSenseId": "n4_l29_s062",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l29_v067",
+          "sourceSenseId": "n4_l29_s067",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l29_v016",
+          "sourceSenseId": "n4_l29_s016",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Lạc (rơi)",
+        "onyomi": "RAKU",
+        "kunyomi": "o-chiru, o-tosu"
+      }
+    }
+  ]
+}

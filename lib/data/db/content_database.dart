@@ -1,12 +1,9 @@
 import 'dart:convert';
 import 'dart:collection';
-import 'dart:io';
 
 import 'package:drift/drift.dart';
-import 'package:drift/native.dart';
+import 'package:drift_flutter/drift_flutter.dart';
 import 'package:flutter/services.dart';
-import 'package:path/path.dart' as p;
-import 'package:path_provider/path_provider.dart';
 
 import 'content_tables.dart';
 
@@ -30,7 +27,7 @@ class ContentDatabase extends _$ContentDatabase {
     : super(executor ?? _openContentConnection());
 
   @override
-  int get schemaVersion => 19;
+  int get schemaVersion => 20;
 
   @override
   MigrationStrategy get migration {
@@ -95,9 +92,14 @@ class ContentDatabase extends _$ContentDatabase {
           // Populate new source IDs for existing installs.
           await _reseedMinnaVocabulary();
         }
+        if (from < 20) {
+          await _addColumn(m, kanji, kanji.decompositionJson);
+          await _backfillKanjiDecompositionFromCanonical();
+        }
       },
       beforeOpen: (details) async {
         await _ensureMinnaVocabularySeeded();
+        await _ensureMinnaKanjiSeeded();
       },
     );
   }
@@ -105,23 +107,23 @@ class ContentDatabase extends _$ContentDatabase {
   // ... (reseed methods)
 
   Future<void> _reseedMinnaVocabulary() async {
-    // Delete all old Minna vocabulary (both N5 and N4)
+    // Delete all old Minna vocabulary rows before rebuilding supported levels.
     await (delete(vocab)..where((tbl) => tbl.tags.like('%minna_%'))).go();
 
-    // Seed new vocabulary
     await _seedMinnaVocabulary();
   }
 
   Future<void> _ensureMinnaVocabularySeeded() async {
-    final minnaCountExpr = vocab.id.count();
-    final query = selectOnly(vocab)
-      ..addColumns([minnaCountExpr])
-      ..where(vocab.tags.like('%minna_%'));
-    final row = await query.getSingle();
-    final minnaCount = row.read(minnaCountExpr) ?? 0;
-    if (minnaCount == 0) {
-      await _seedMinnaVocabulary();
-      return;
+    for (final spec in _contentSeedSpecs) {
+      final levelCountExpr = vocab.id.count();
+      final levelQuery = selectOnly(vocab)
+        ..addColumns([levelCountExpr])
+        ..where(vocab.level.equals(spec.levelLabel));
+      final levelRow = await levelQuery.getSingle();
+      final levelCount = levelRow.read(levelCountExpr) ?? 0;
+      if (levelCount == 0) {
+        await _seedVocabularyLevel(spec);
+      }
     }
 
     // Self-heal old seeded DBs that still contain placeholder/garbled rows.
@@ -145,11 +147,23 @@ class ContentDatabase extends _$ContentDatabase {
   }
 
   Future<void> _seedMinnaVocabulary() async {
-    // Seed N5 Vocabulary from JSON files
-    await _seedFromJsonFiles(isN5: true);
+    for (final spec in _contentSeedSpecs) {
+      await _seedVocabularyLevel(spec);
+    }
+  }
 
-    // Seed N4 Vocabulary from JSON files
-    await _seedFromJsonFiles(isN5: false);
+  Future<void> _ensureMinnaKanjiSeeded() async {
+    for (final spec in _contentSeedSpecs) {
+      final levelCountExpr = kanji.id.count();
+      final levelQuery = selectOnly(kanji)
+        ..addColumns([levelCountExpr])
+        ..where(kanji.jlptLevel.equals(spec.levelLabel));
+      final levelRow = await levelQuery.getSingle();
+      final levelCount = levelRow.read(levelCountExpr) ?? 0;
+      if (levelCount == 0) {
+        await _seedKanjiLevel(spec);
+      }
+    }
   }
 
   Future<void> _seedMinnaGrammar() async {
@@ -297,14 +311,30 @@ class ContentDatabase extends _$ContentDatabase {
     }
   }
 
-  Future<void> _seedFromJsonFiles({bool isN5 = false}) async {
-    final level = isN5 ? 'N5' : 'N4';
-    final levelLower = level.toLowerCase();
-    final startLesson = isN5 ? 1 : 26;
-    final endLesson = isN5 ? 25 : 50;
+  Future<void> _seedVocabularyLevel(_ContentSeedSpec spec) async {
+    final level = spec.levelLabel;
+    final levelLower = spec.levelLower;
+    final startLesson = spec.startLesson;
+    final endLesson = spec.endLesson;
 
     final allRows = <Map<String, dynamic>>[];
     for (int lessonId = startLesson; lessonId <= endLesson; lessonId++) {
+      final canonicalRows = await _loadCanonicalVocabRows(
+        level: level,
+        lessonId: lessonId,
+      );
+      if (canonicalRows.isNotEmpty) {
+        allRows.addAll(
+          _mergeLessonRows(
+            preferred: canonicalRows,
+            fallback: const [],
+            level: level,
+            lessonId: lessonId,
+          ),
+        );
+        continue;
+      }
+
       final normalizedRows = await _loadNormalizedVocabRows(
         level: level,
         lessonId: lessonId,
@@ -353,6 +383,72 @@ class ContentDatabase extends _$ContentDatabase {
         ),
         mode: InsertMode.insertOrIgnore,
       );
+    }
+  }
+
+  Future<List<Map<String, dynamic>>> _loadCanonicalVocabRows({
+    required String level,
+    required int lessonId,
+  }) async {
+    final levelLower = level.toLowerCase();
+    final paddedLessonId = lessonId.toString().padLeft(2, '0');
+    final path =
+        'assets/data/canonical/vocab/$levelLower/lesson_$paddedLessonId.json';
+
+    try {
+      final raw = await rootBundle.loadString(path);
+      final payload = _asMap(json.decode(raw));
+      final entries = payload?['entries'];
+      if (entries is! List) {
+        return const [];
+      }
+
+      final rows = <Map<String, dynamic>>[];
+      for (final rawEntry in entries) {
+        final entry = _asMap(rawEntry);
+        if (entry == null) continue;
+        final lemma = _asMap(entry['lemma']);
+        final sense = _asMap(entry['sense']);
+        final links = _asMap(entry['links']);
+        if (lemma == null || sense == null) continue;
+
+        final term = _readText(lemma, 'term');
+        final meaningVi = _readText(sense, 'meaningVi');
+        if (term.isEmpty || meaningVi.isEmpty) continue;
+
+        final labels = _asMap(lemma['labels']);
+        final tags = (entry['tags'] is List)
+            ? (entry['tags'] as List)
+                  .map((tag) => tag.toString().trim())
+                  .where((tag) => tag.isNotEmpty)
+                  .join(',')
+            : '';
+        final mergedTags = tags.isEmpty
+            ? 'minna_$lessonId'
+            : 'minna_$lessonId,$tags';
+
+        rows.add({
+          'term': term,
+          'reading': _readNullableText(lemma, 'reading'),
+          'kanjiMeaning': labels == null
+              ? _readNullableText(entry, 'kanjiMeaning')
+              : _readNullableText(labels, 'hanViet'),
+          'sourceVocabId': links == null
+              ? _readNullableText(entry, 'sourceVocabId')
+              : _readNullableText(links, 'sourceVocabId'),
+          'sourceSenseId': links == null
+              ? _readNullableText(entry, 'sourceSenseId')
+              : _readNullableText(links, 'sourceSenseId'),
+          'meaning_vi': meaningVi,
+          'meaning_en': _readNullableText(sense, 'meaningEn'),
+          'level': level,
+          'tags': mergedTags,
+        });
+      }
+
+      return rows;
+    } catch (_) {
+      return const [];
     }
   }
 
@@ -611,51 +707,177 @@ class ContentDatabase extends _$ContentDatabase {
     // Delete all existing Kanji data to prevent duplicates or stale data
     await delete(kanji).go();
 
-    // Seed new Kanji data
     await _seedMinnaKanji();
   }
 
   Future<void> _seedMinnaKanji() async {
-    final List<String> kanjiFiles = [];
-
-    // N5: Lesson 1 to 25
-    for (int i = 1; i <= 25; i++) {
-      kanjiFiles.add('assets/data/kanji/n5/kanji_n5_$i.json');
+    for (final spec in _contentSeedSpecs) {
+      await _seedKanjiLevel(spec);
     }
+  }
 
-    // N4: Lesson 26 to 50
-    for (int i = 26; i <= 50; i++) {
-      kanjiFiles.add('assets/data/kanji/n4/kanji_n4_$i.json');
-    }
-
-    for (final file in kanjiFiles) {
-      try {
-        final jsonString = await rootBundle.loadString(file);
-        final List<dynamic> jsonList = json.decode(jsonString);
+  Future<void> _backfillKanjiDecompositionFromCanonical() async {
+    for (final spec in _contentSeedSpecs) {
+      for (var lessonId = spec.startLesson; lessonId <= spec.endLesson; lessonId++) {
+        final rows = await _loadCanonicalKanjiRows(
+          levelLower: spec.levelLower,
+          lessonId: lessonId,
+        );
+        if (rows.isEmpty) {
+          continue;
+        }
 
         await batch((batch) {
-          for (final item in jsonList) {
-            batch.insert(
+          for (final row in rows) {
+            final character = _readText(row, 'character');
+            final decompositionJson = _readNullableText(
+              row,
+              'decomposition_json',
+            );
+            if (character.isEmpty || decompositionJson == null) {
+              continue;
+            }
+
+            batch.update(
               kanji,
-              KanjiCompanion.insert(
-                lessonId: item['lessonId'],
-                character: item['character'],
-                strokeCount: item['strokeCount'],
-                onyomi: Value(item['onyomi']),
-                kunyomi: Value(item['kunyomi']),
-                meaning: item['meaning'],
-                meaningEn: Value(item['meaningEn']),
-                mnemonicVi: Value(item['mnemonic_vi']),
-                mnemonicEn: Value(item['mnemonic_en']),
-                examplesJson: json.encode(item['examples']),
-                jlptLevel: item['jlptLevel'],
-              ),
+              KanjiCompanion(decompositionJson: Value(decompositionJson)),
+              where: (tbl) =>
+                  tbl.lessonId.equals(lessonId) &
+                  tbl.character.equals(character),
             );
           }
         });
-      } catch (e) {
-        // print('Error seeding Kanji file $file: $e');
       }
+    }
+  }
+
+  Future<List<Map<String, dynamic>>> _loadCanonicalKanjiRows({
+    required String levelLower,
+    required int lessonId,
+  }) async {
+    final paddedLessonId = lessonId.toString().padLeft(2, '0');
+    final path =
+        'assets/data/canonical/kanji/$levelLower/lesson_$paddedLessonId.json';
+
+    try {
+      final raw = await rootBundle.loadString(path);
+      final payload = _asMap(json.decode(raw));
+      final entries = payload?['entries'];
+      if (entries is! List) {
+        return const [];
+      }
+
+      final rows = <Map<String, dynamic>>[];
+      for (final rawEntry in entries) {
+        final entry = _asMap(rawEntry);
+        if (entry == null) continue;
+        final labels = _asMap(entry['labels']);
+        final readings = _asMap(entry['readings']);
+        final mnemonic = _asMap(entry['mnemonic']);
+        final legacy = _asMap(entry['legacy']);
+        final examples = entry['examples'];
+        final character = _readText(entry, 'character');
+        final meaning = labels == null
+            ? _readNullableText(legacy ?? const {}, 'meaning')
+            : _readNullableText(labels, 'meaningViDisplay');
+        if (character.isEmpty || meaning == null || meaning.isEmpty) continue;
+
+        rows.add({
+          'lessonId': _readInt(entry, 'lessonId') ?? lessonId,
+          'character': character,
+          'strokeCount': _readInt(entry, 'strokeCount') ?? 0,
+          'onyomi': readings == null
+              ? _readNullableText(legacy ?? const {}, 'onyomi')
+              : (readings['onyomi'] is List
+                    ? (readings['onyomi'] as List)
+                          .map((item) => item.toString().trim())
+                          .where((item) => item.isNotEmpty)
+                          .join(', ')
+                    : null),
+          'kunyomi': readings == null
+              ? _readNullableText(legacy ?? const {}, 'kunyomi')
+              : (readings['kunyomi'] is List
+                    ? (readings['kunyomi'] as List)
+                          .map((item) => item.toString().trim())
+                          .where((item) => item.isNotEmpty)
+                          .join(', ')
+                    : null),
+          'meaning': meaning,
+          'meaningEn': labels == null
+              ? null
+              : _readNullableText(labels, 'meaningEn'),
+          'mnemonic_vi': mnemonic == null
+              ? null
+              : _readNullableText(mnemonic, 'vi'),
+          'mnemonic_en': mnemonic == null
+              ? null
+              : _readNullableText(mnemonic, 'en'),
+          'decomposition_json': entry['decomposition'] is Map
+              ? json.encode(entry['decomposition'])
+              : null,
+          'examples': examples is List ? examples : const [],
+          'jlptLevel': _readText(entry, 'level'),
+        });
+      }
+
+      return rows;
+    } catch (_) {
+      return const [];
+    }
+  }
+
+  Future<void> _insertKanjiRows(List<dynamic> rows) async {
+    await batch((batch) {
+      for (final raw in rows) {
+        final item = _asMap(raw);
+        if (item == null) continue;
+        batch.insert(
+          kanji,
+          KanjiCompanion.insert(
+            lessonId: _readInt(item, 'lessonId') ?? 0,
+            character: _readText(item, 'character'),
+            strokeCount: _readInt(item, 'strokeCount') ?? 0,
+            onyomi: Value(_readNullableText(item, 'onyomi')),
+            kunyomi: Value(_readNullableText(item, 'kunyomi')),
+            meaning: _readText(item, 'meaning'),
+            meaningEn: Value(_readNullableText(item, 'meaningEn')),
+            mnemonicVi: Value(_readNullableText(item, 'mnemonic_vi')),
+            mnemonicEn: Value(_readNullableText(item, 'mnemonic_en')),
+            decompositionJson: Value(
+              _readNullableText(item, 'decomposition_json') ??
+                  (item['decomposition'] is Map
+                      ? json.encode(item['decomposition'])
+                      : null),
+            ),
+            examplesJson: json.encode(item['examples'] ?? const []),
+            jlptLevel: _readText(item, 'jlptLevel'),
+          ),
+        );
+      }
+    });
+  }
+
+  Future<void> _seedKanjiLevel(_ContentSeedSpec spec) async {
+    for (var lessonId = spec.startLesson; lessonId <= spec.endLesson; lessonId++) {
+      final rows = await _loadCanonicalKanjiRows(
+        levelLower: spec.levelLower,
+        lessonId: lessonId,
+      );
+      if (rows.isEmpty) {
+        final file =
+            'assets/data/kanji/${spec.levelLower}/kanji_${spec.levelLower}_$lessonId.json';
+        try {
+          final jsonString = await rootBundle.loadString(file);
+          final legacyRows = json.decode(jsonString);
+          if (legacyRows is List) {
+            await _insertKanjiRows(legacyRows);
+          }
+        } catch (_) {
+          // Ignore missing lesson assets.
+        }
+        continue;
+      }
+      await _insertKanjiRows(rows);
     }
   }
 }
@@ -738,12 +960,35 @@ class _SeedVocabAggregate {
       }
     }
   }
+
 }
 
-LazyDatabase _openContentConnection() {
-  return LazyDatabase(() async {
-    final directory = await getApplicationDocumentsDirectory();
-    final file = File(p.join(directory.path, 'content.sqlite'));
-    return NativeDatabase(file);
-  });
+class _ContentSeedSpec {
+  const _ContentSeedSpec(
+    this.levelLabel,
+    this.levelLower,
+    this.startLesson,
+    this.endLesson,
+  );
+
+  final String levelLabel;
+  final String levelLower;
+  final int startLesson;
+  final int endLesson;
+}
+
+const _contentSeedSpecs = <_ContentSeedSpec>[
+  _ContentSeedSpec('N5', 'n5', 1, 25),
+  _ContentSeedSpec('N4', 'n4', 26, 50),
+  _ContentSeedSpec('N3', 'n3', 51, 75),
+];
+
+QueryExecutor _openContentConnection() {
+  return driftDatabase(
+    name: 'content',
+    web: DriftWebOptions(
+      sqlite3Wasm: Uri.parse('sqlite3.wasm'),
+      driftWorker: Uri.parse('drift_worker.js'),
+    ),
+  );
 }

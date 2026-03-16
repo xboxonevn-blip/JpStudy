@@ -23,7 +23,11 @@
         "sourceSenseId": "n4_l34_s056"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Dĩ",
+      "structure": "standalone"
+    }
   },
   {
     "lessonId": 34,
@@ -49,7 +53,23 @@
         "sourceSenseId": "n5_l23_s046"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Ốc",
+      "structure": "mixed",
+      "components": [
+        "尸",
+        "至"
+      ],
+      "componentNames": [
+        "Thi (thi thể, mái che)",
+        "Chí (đến)"
+      ],
+      "relatedKanji": [
+        "府",
+        "届"
+      ]
+    }
   },
   {
     "lessonId": 34,
@@ -75,7 +95,25 @@
         "sourceSenseId": "n4_l32_s001"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Vận",
+      "structure": "mixed",
+      "components": [
+        "軍",
+        "辶"
+      ],
+      "componentNames": [
+        "Quân (quân đội)",
+        "Sước (đi)"
+      ],
+      "relatedKanji": [
+        "送",
+        "通",
+        "連",
+        "選"
+      ]
+    }
   },
   {
     "lessonId": 34,
@@ -101,6 +139,21 @@
         "sourceSenseId": "n5_l25_s001"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Khảo",
+      "structure": "top-bottom",
+      "components": [
+        "耂",
+        "丂"
+      ],
+      "componentNames": [
+        "Lão (già)",
+        "Khảo (uốn cong)"
+      ],
+      "relatedKanji": [
+        "者"
+      ]
+    }
   }
 ]

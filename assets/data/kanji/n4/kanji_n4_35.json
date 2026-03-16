@@ -23,7 +23,11 @@
         "sourceSenseId": "n4_l31_s008"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Văn",
+      "structure": "standalone"
+    }
   },
   {
     "lessonId": 35,
@@ -49,7 +53,23 @@
         "sourceSenseId": "n4_l41_s014"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Pháp",
+      "structure": "left-right",
+      "components": [
+        "氵",
+        "去"
+      ],
+      "componentNames": [
+        "Thủy (nước)",
+        "Khứ (đi)"
+      ],
+      "relatedKanji": [
+        "洗",
+        "消"
+      ]
+    }
   },
   {
     "lessonId": 35,
@@ -75,7 +95,24 @@
         "sourceSenseId": "n4_l36_s056"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Ý",
+      "structure": "top-bottom",
+      "components": [
+        "音",
+        "心"
+      ],
+      "componentNames": [
+        "Âm (âm thanh)",
+        "Tâm (trái tim)"
+      ],
+      "relatedKanji": [
+        "音",
+        "心",
+        "悪"
+      ]
+    }
   },
   {
     "lessonId": 35,
@@ -101,6 +138,22 @@
         "sourceSenseId": "n4_l47_s006"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Vị",
+      "structure": "left-right",
+      "components": [
+        "口",
+        "未"
+      ],
+      "componentNames": [
+        "Khẩu (miệng)",
+        "Vị (chưa)"
+      ],
+      "relatedKanji": [
+        "口",
+        "妹"
+      ]
+    }
   }
 ]

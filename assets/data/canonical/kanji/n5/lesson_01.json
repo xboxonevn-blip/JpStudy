@@ -1,0 +1,1061 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N5",
+  "lessonId": 1,
+  "entryCount": 14,
+  "entries": [
+    {
+      "kanjiId": "n5_l01_k001",
+      "lessonId": 1,
+      "level": "N5",
+      "character": "人",
+      "strokeCount": 2,
+      "labels": {
+        "hanViet": "Nhân",
+        "meaningVi": "người",
+        "meaningViDisplay": "Nhân (người)",
+        "meaningEn": "Person"
+      },
+      "readings": {
+        "onyomi": [
+          "JIN",
+          "NIN"
+        ],
+        "kunyomi": [
+          "hito"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Hãy tưởng tượng một người đang đứng nghiêng, dang hai chân ra để giữ thăng bằng. Chỉ có 2 nét thôi!",
+        "en": "A person standing on two legs. Simple and direct!"
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "大",
+          "会",
+          "入"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "nhan",
+        "meaningViNoAccent": "nguoi",
+        "meaningEnNoAccent": "person"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l05_v016",
+          "sourceSenseId": "n5_l05_s016",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l01_v041",
+          "sourceSenseId": "n5_l01_s041",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l01_v042",
+          "sourceSenseId": "n5_l01_s042",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Nhân (người)",
+        "onyomi": "JIN, NIN",
+        "kunyomi": "hito"
+      }
+    },
+    {
+      "kanjiId": "n5_l01_k002",
+      "lessonId": 1,
+      "level": "N5",
+      "character": "名",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Danh",
+        "meaningVi": "tên",
+        "meaningViDisplay": "Danh (tên)",
+        "meaningEn": "Name"
+      },
+      "readings": {
+        "onyomi": [
+          "MEI",
+          "MYOU"
+        ],
+        "kunyomi": [
+          "na"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Bên trên là bộ Tịch (夕 - tối), bên dưới là bộ Khẩu (口 - miệng). Buổi tối tối trời không nhìn thấy mặt nhau, phải dùng Miệng để gọi Tên nhau.",
+        "en": "In the evening (夕), you use your mouth (口) to call someone's name."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "夕",
+          "口"
+        ],
+        "componentNames": [
+          "Tịch (chiều tối)",
+          "Khẩu (miệng)"
+        ],
+        "relatedKanji": [
+          "夕",
+          "口",
+          "外",
+          "多"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "danh",
+        "meaningViNoAccent": "ten",
+        "meaningEnNoAccent": "name"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l01_v045",
+          "sourceSenseId": "n5_l01_s045",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l01_v027",
+          "sourceSenseId": "n5_l01_s027",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l02_v013",
+          "sourceSenseId": "n5_l02_s013",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Danh (tên)",
+        "onyomi": "MEI, MYOU",
+        "kunyomi": "na"
+      }
+    },
+    {
+      "kanjiId": "n5_l01_k003",
+      "lessonId": 1,
+      "level": "N5",
+      "character": "方",
+      "strokeCount": 4,
+      "labels": {
+        "hanViet": "Phương",
+        "meaningVi": "người, vị",
+        "meaningViDisplay": "Phương (người, vị)",
+        "meaningEn": "Direction, Person (polite)"
+      },
+      "readings": {
+        "onyomi": [
+          "HOU"
+        ],
+        "kunyomi": [
+          "kata"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Một người (bộ Đầu 亠) đang cầm một cái cày (bộ Lực 力) quay về một Hướng nhất định để làm việc.",
+        "en": "A person (head 亠) with a tool (power 力) pointing in a specific direction."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "万",
+          "放"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "phuong",
+        "meaningViNoAccent": "nguoi, vi",
+        "meaningEnNoAccent": "direction, person (polite)"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l29_v042",
+          "sourceSenseId": "n4_l29_s042",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l14_v026",
+          "sourceSenseId": "n5_l14_s026",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l01_v005",
+          "sourceSenseId": "n5_l01_s005",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Phương (người, vị)",
+        "onyomi": "HOU",
+        "kunyomi": "kata"
+      }
+    },
+    {
+      "kanjiId": "n5_l01_k004",
+      "lessonId": 1,
+      "level": "N5",
+      "character": "本",
+      "strokeCount": 5,
+      "labels": {
+        "hanViet": "Bản",
+        "meaningVi": "sách, gốc",
+        "meaningViDisplay": "Bản (sách, gốc)",
+        "meaningEn": "Book, Origin"
+      },
+      "readings": {
+        "onyomi": [
+          "HON"
+        ],
+        "kunyomi": [
+          "moto"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Đây là chữ Mộc (木 - cây), ta gạch một nét ngang ở dưới Gốc cây để đánh dấu, đó chính là căn Bản. Từ thân cây ta làm ra Sách.",
+        "en": "A tree (木) with a mark at its base (root/origin). Books are made from trees."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "木",
+          "一"
+        ],
+        "componentNames": [
+          "Mộc (cây)",
+          "Nhất (một, nét ngang gốc)"
+        ],
+        "relatedKanji": [
+          "木",
+          "体"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "ban",
+        "meaningViNoAccent": "sach, goc",
+        "meaningEnNoAccent": "book, origin"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l02_v007",
+          "sourceSenseId": "n5_l02_s007",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l01_v038",
+          "sourceSenseId": "n5_l01_s038",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l01_v041",
+          "sourceSenseId": "n5_l01_s041",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Bản (sách, gốc)",
+        "onyomi": "HON",
+        "kunyomi": "moto"
+      }
+    },
+    {
+      "kanjiId": "n5_l01_k005",
+      "lessonId": 1,
+      "level": "N5",
+      "character": "日",
+      "strokeCount": 4,
+      "labels": {
+        "hanViet": "Nhật",
+        "meaningVi": "ngày, mặt trời",
+        "meaningViDisplay": "Nhật (ngày, mặt trời)",
+        "meaningEn": "Day, Sun"
+      },
+      "readings": {
+        "onyomi": [
+          "NICHI",
+          "JITSU"
+        ],
+        "kunyomi": [
+          "hi",
+          "-ka"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Hình dáng mặt trời hình chữ nhật với một vạch ở giữa chia đôi ngày và đêm.",
+        "en": "A rectangular sun with a line in the middle dividing day and night."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "明",
+          "早",
+          "間",
+          "朝"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "nhat",
+        "meaningViNoAccent": "ngay, mat troi",
+        "meaningEnNoAccent": "day, sun"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l05_v056",
+          "sourceSenseId": "n5_l05_s056",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l01_v038",
+          "sourceSenseId": "n5_l01_s038",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l01_v041",
+          "sourceSenseId": "n5_l01_s041",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Nhật (ngày, mặt trời)",
+        "onyomi": "NICHI, JITSU",
+        "kunyomi": "hi, -ka"
+      }
+    },
+    {
+      "kanjiId": "n5_l01_k006",
+      "lessonId": 1,
+      "level": "N5",
+      "character": "何",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": "Hà",
+        "meaningVi": "cái gì",
+        "meaningViDisplay": "Hà (cái gì)",
+        "meaningEn": "What"
+      },
+      "readings": {
+        "onyomi": [
+          "KA"
+        ],
+        "kunyomi": [
+          "nani",
+          "nan"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Một người (nhân 亻) đang vác một cái vật gì đó (Khả 可). 'Cái gì' thế nhỉ?",
+        "en": "A person (亻) carrying something (可). 'What' is it?"
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "亻",
+          "可"
+        ],
+        "componentNames": [
+          "Nhân (người)",
+          "Khả (có thể)"
+        ],
+        "relatedKanji": [
+          "人",
+          "歌"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "ha",
+        "meaningViNoAccent": "cai gi",
+        "meaningEnNoAccent": "what"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l02_v037",
+          "sourceSenseId": "n5_l02_s037",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l01_v022",
+          "sourceSenseId": "n5_l01_s022",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l06_v041",
+          "sourceSenseId": "n5_l06_s041",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Hà (cái gì)",
+        "onyomi": "KA",
+        "kunyomi": "nani, nan"
+      }
+    },
+    {
+      "kanjiId": "n5_l01_k007",
+      "lessonId": 1,
+      "level": "N5",
+      "character": "大",
+      "strokeCount": 3,
+      "labels": {
+        "hanViet": "Đại",
+        "meaningVi": "to lớn",
+        "meaningViDisplay": "Đại (to lớn)",
+        "meaningEn": "Big, Large"
+      },
+      "readings": {
+        "onyomi": [
+          "DAI",
+          "TAI"
+        ],
+        "kunyomi": [
+          "oo-kii"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Một người đang dang rộng hai tay và hai chân để thể hiện sự To lớn.",
+        "en": "A person stretching their arms and legs to show how BIG they are."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "人",
+          "夫",
+          "天"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "dai",
+        "meaningViNoAccent": "to lon",
+        "meaningEnNoAccent": "big, large"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l01_v046",
+          "sourceSenseId": "n5_l01_s046",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l01_v016",
+          "sourceSenseId": "n5_l01_s016",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l03_v053",
+          "sourceSenseId": "n5_l03_s053",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Đại (to lớn)",
+        "onyomi": "DAI, TAI",
+        "kunyomi": "oo-kii"
+      }
+    },
+    {
+      "kanjiId": "n5_l01_k008",
+      "lessonId": 1,
+      "level": "N5",
+      "character": "学",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Học",
+        "meaningVi": "học tập",
+        "meaningViDisplay": "Học (học tập)",
+        "meaningEn": "Study"
+      },
+      "readings": {
+        "onyomi": [
+          "GAKU"
+        ],
+        "kunyomi": [
+          "mana-bu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Một đứa trẻ (Tử 子) đang đội mũ dưới mái nhà để đi Học.",
+        "en": "A child (子) wearing a cap under a roof to study."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "⺍",
+          "冖",
+          "子"
+        ],
+        "componentNames": [
+          "Tú (chấm nhỏ)",
+          "Mịch (nắp đậy)",
+          "Tử (con)"
+        ],
+        "relatedKanji": [
+          "子",
+          "字"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "hoc",
+        "meaningViNoAccent": "hoc tap",
+        "meaningEnNoAccent": "study"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l01_v047",
+          "sourceSenseId": "n5_l01_s047",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l01_v009",
+          "sourceSenseId": "n5_l01_s009",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l01_v016",
+          "sourceSenseId": "n5_l01_s016",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Học (học tập)",
+        "onyomi": "GAKU",
+        "kunyomi": "mana-bu"
+      }
+    },
+    {
+      "kanjiId": "n5_l01_k009",
+      "lessonId": 1,
+      "level": "N5",
+      "character": "会",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Hội",
+        "meaningVi": "gặp gỡ, công ty",
+        "meaningViDisplay": "Hội (gặp gỡ, công ty)",
+        "meaningEn": "Meeting, Association"
+      },
+      "readings": {
+        "onyomi": [
+          "KAI"
+        ],
+        "kunyomi": [
+          "a-u"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Ba người gặp nhau dưới một mái nhà để tham gia Đại hội.",
+        "en": "People meeting together under one roof."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "亼",
+          "云"
+        ],
+        "componentNames": [
+          "Tập (hội tụ)",
+          "Vân (mây)"
+        ],
+        "relatedKanji": [
+          "合",
+          "人"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "hoi",
+        "meaningViNoAccent": "gap go, cong ty",
+        "meaningEnNoAccent": "meeting, association"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l01_v043",
+          "sourceSenseId": "n5_l01_s043",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l01_v010",
+          "sourceSenseId": "n5_l01_s010",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l03_v012",
+          "sourceSenseId": "n5_l03_s012",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Hội (gặp gỡ, công ty)",
+        "onyomi": "KAI",
+        "kunyomi": "a-u"
+      }
+    },
+    {
+      "kanjiId": "n5_l01_k010",
+      "lessonId": 1,
+      "level": "N5",
+      "character": "先",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Tiên",
+        "meaningVi": "trước",
+        "meaningViDisplay": "Tiên (trước)",
+        "meaningEn": "Previous, Ahead"
+      },
+      "readings": {
+        "onyomi": [
+          "SEN"
+        ],
+        "kunyomi": [
+          "saki"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Một người đang chạy về phía trước (nét chân ở dưới) để dẫn đầu (Tiên).",
+        "en": "Feet (legs) moving forward to be ahead (previous/first)."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "⺧",
+          "儿"
+        ],
+        "componentNames": [
+          "Thổ biến thể (trên)",
+          "Nhi (chân người)"
+        ],
+        "relatedKanji": [
+          "生",
+          "洗"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "tien",
+        "meaningViNoAccent": "truoc",
+        "meaningEnNoAccent": "previous, ahead"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l01_v044",
+          "sourceSenseId": "n5_l01_s044",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l01_v007",
+          "sourceSenseId": "n5_l01_s007",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l05_v022",
+          "sourceSenseId": "n5_l05_s022",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tiên (trước)",
+        "onyomi": "SEN",
+        "kunyomi": "saki"
+      }
+    },
+    {
+      "kanjiId": "n5_l01_k011",
+      "lessonId": 1,
+      "level": "N5",
+      "character": "生",
+      "strokeCount": 5,
+      "labels": {
+        "hanViet": "Sinh",
+        "meaningVi": "sinh ra, sống",
+        "meaningViDisplay": "Sinh (sinh ra, sống)",
+        "meaningEn": "Life, Birth"
+      },
+      "readings": {
+        "onyomi": [
+          "SEI",
+          "SHOU"
+        ],
+        "kunyomi": [
+          "i-kiru",
+          "u-mareru",
+          "nama"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Hình ảnh một mầm cây đang nhú lên khỏi mặt đất (nét ngang dưới cùng), thể hiện sự SỐNG và SINH sôi.",
+        "en": "A plant growing up from the ground, representing LIFE and BIRTH."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "先",
+          "姓"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "sinh",
+        "meaningViNoAccent": "sinh ra, song",
+        "meaningEnNoAccent": "life, birth"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l01_v049",
+          "sourceSenseId": "n5_l01_s049",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l01_v007",
+          "sourceSenseId": "n5_l01_s007",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l01_v009",
+          "sourceSenseId": "n5_l01_s009",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Sinh (sinh ra, sống)",
+        "onyomi": "SEI, SHOU",
+        "kunyomi": "i-kiru, u-mareru, nama"
+      }
+    },
+    {
+      "kanjiId": "n5_l01_k012",
+      "lessonId": 1,
+      "level": "N5",
+      "character": "行",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Hành",
+        "meaningVi": "đi",
+        "meaningViDisplay": "Hành (đi)",
+        "meaningEn": "Go"
+      },
+      "readings": {
+        "onyomi": [
+          "KOU",
+          "GYOU"
+        ],
+        "kunyomi": [
+          "i-ku",
+          "okona-u"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Hình ảnh một ngã tư đường hoặc những bước chân đang chuyển động, thể hiện sự đi lại.",
+        "en": "A crossroads or steps in motion, representing the act of GOING."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "彳",
+          "亍"
+        ],
+        "componentNames": [
+          "Sách (bước chân trái)",
+          "Sật (bước chân phải)"
+        ],
+        "relatedKanji": [
+          "待",
+          "後"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "hanh",
+        "meaningViNoAccent": "di",
+        "meaningEnNoAccent": "go"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l01_v051",
+          "sourceSenseId": "n5_l01_s051",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l01_v012",
+          "sourceSenseId": "n5_l01_s012",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l04_v008",
+          "sourceSenseId": "n5_l04_s008",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Hành (đi)",
+        "onyomi": "KOU, GYOU",
+        "kunyomi": "i-ku, okona-u"
+      }
+    },
+    {
+      "kanjiId": "n5_l01_k013",
+      "lessonId": 1,
+      "level": "N5",
+      "character": "来",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": "Lai",
+        "meaningVi": "đến",
+        "meaningViDisplay": "Lai (đến)",
+        "meaningEn": "Come"
+      },
+      "readings": {
+        "onyomi": [
+          "RAI"
+        ],
+        "kunyomi": [
+          "ku-ru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Một cái cây (木) nhưng có thêm vài nét ở trên, giống như có ai đó đang đi ĐẾN phía cái cây.",
+        "en": "A modified tree (木) symbol representing someone COMING towards it."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "木"
+        ],
+        "componentNames": [
+          "Mộc biến thể (cây)"
+        ],
+        "relatedKanji": [
+          "木",
+          "本"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "lai",
+        "meaningViNoAccent": "den",
+        "meaningEnNoAccent": "come"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l01_v048",
+          "sourceSenseId": "n5_l01_s048",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l05_v024",
+          "sourceSenseId": "n5_l05_s024",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l05_v027",
+          "sourceSenseId": "n5_l05_s027",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Lai (đến)",
+        "onyomi": "RAI",
+        "kunyomi": "ku-ru"
+      }
+    },
+    {
+      "kanjiId": "n5_l01_k014",
+      "lessonId": 1,
+      "level": "N5",
+      "character": "社",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": "Xã",
+        "meaningVi": "công ty, đền",
+        "meaningViDisplay": "Xã (công ty, đền)",
+        "meaningEn": "Company, Shrine"
+      },
+      "readings": {
+        "onyomi": [
+          "SHA"
+        ],
+        "kunyomi": [
+          "yashiro"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kết hợp bộ Thị (礻- thần linh/đền thờ) và bộ Thổ (土 - đất). Nơi thờ thần đất của một cộng đồng (Xã), nay dùng chỉ Công ty.",
+        "en": "A shrine for the land god (土). Symbols of spirit (礻) and land (土) meeting together."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "礻",
+          "土"
+        ],
+        "componentNames": [
+          "Thị (thần linh)",
+          "Thổ (đất)"
+        ],
+        "relatedKanji": [
+          "地",
+          "場"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "xa",
+        "meaningViNoAccent": "cong ty, den",
+        "meaningEnNoAccent": "company, shrine"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l01_v050",
+          "sourceSenseId": "n5_l01_s050",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l01_v010",
+          "sourceSenseId": "n5_l01_s010",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l01_v011",
+          "sourceSenseId": "n5_l01_s011",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Xã (công ty, đền)",
+        "onyomi": "SHA",
+        "kunyomi": "yashiro"
+      }
+    }
+  ]
+}

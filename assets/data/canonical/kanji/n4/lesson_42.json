@@ -1,0 +1,534 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N4",
+  "lessonId": 42,
+  "entryCount": 7,
+  "entries": [
+    {
+      "kanjiId": "n4_l42_k001",
+      "lessonId": 42,
+      "level": "N4",
+      "character": "包",
+      "strokeCount": 5,
+      "labels": {
+        "hanViet": "Bao",
+        "meaningVi": "bao bọc",
+        "meaningViDisplay": "Bao (bao bọc)",
+        "meaningEn": "Wrap"
+      },
+      "readings": {
+        "onyomi": [
+          "HOU"
+        ],
+        "kunyomi": [
+          "tsutsu-mu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Hình ảnh bào thai trong bụng mẹ được BAO BỌC.",
+        "en": "An infant enclosed/WRAPped up."
+      },
+      "decomposition": {
+        "structure": "enclosure",
+        "components": [
+          "勹",
+          "巳"
+        ],
+        "componentNames": [
+          "Bao (bao bọc)",
+          "Tị (rắn)"
+        ],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "bao",
+        "meaningViNoAccent": "bao boc",
+        "meaningEnNoAccent": "wrap"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l42_v071",
+          "sourceSenseId": "n4_l42_s071",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l42_v076",
+          "sourceSenseId": "n4_l42_s076",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l42_v001",
+          "sourceSenseId": "n4_l42_s001",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Bao (bao bọc)",
+        "onyomi": "HOU",
+        "kunyomi": "tsutsu-mu"
+      }
+    },
+    {
+      "kanjiId": "n4_l42_k002",
+      "lessonId": 42,
+      "level": "N4",
+      "character": "沸",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Phí",
+        "meaningVi": "sôi",
+        "meaningViDisplay": "Phí (sôi)",
+        "meaningEn": "Boil"
+      },
+      "readings": {
+        "onyomi": [
+          "FUTSU"
+        ],
+        "kunyomi": [
+          "wa-kasu",
+          "wa-ku"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Nước (Thủy 氵) sùng sục (Phất 弗) là đang SÔI.",
+        "en": "Water (氵) bubbling as it BOILS."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "氵",
+          "弗"
+        ],
+        "componentNames": [
+          "Thủy (nước)",
+          "Phất (không)"
+        ],
+        "relatedKanji": [
+          "洗",
+          "消"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "phi",
+        "meaningViNoAccent": "soi",
+        "meaningEnNoAccent": "boil"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l42_v073",
+          "sourceSenseId": "n4_l42_s073",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l42_v078",
+          "sourceSenseId": "n4_l42_s078",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l42_v002",
+          "sourceSenseId": "n4_l42_s002",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Phí (sôi)",
+        "onyomi": "FUTSU",
+        "kunyomi": "wa-kasu, wa-ku"
+      }
+    },
+    {
+      "kanjiId": "n4_l42_k003",
+      "lessonId": 42,
+      "level": "N4",
+      "character": "混",
+      "strokeCount": 11,
+      "labels": {
+        "hanViet": "Hỗn",
+        "meaningVi": "trộn",
+        "meaningViDisplay": "Hỗn (trộn)",
+        "meaningEn": "Mix"
+      },
+      "readings": {
+        "onyomi": [
+          "KON"
+        ],
+        "kunyomi": [
+          "ma-zeru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Nước (Thủy 氵) chảy qua ranh giới (Con 昆) bị TRỘN lẫn.",
+        "en": "Water (氵) and other elements getting MIXed."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "氵",
+          "昆"
+        ],
+        "componentNames": [
+          "Thủy (nước)",
+          "Côn (cùng nhau)"
+        ],
+        "relatedKanji": [
+          "洗",
+          "消"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "hon",
+        "meaningViNoAccent": "tron",
+        "meaningEnNoAccent": "mix"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l42_v074",
+          "sourceSenseId": "n4_l42_s074",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l42_v079",
+          "sourceSenseId": "n4_l42_s079",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l42_v003",
+          "sourceSenseId": "n4_l42_s003",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Hỗn (trộn)",
+        "onyomi": "KON",
+        "kunyomi": "ma-zeru"
+      }
+    },
+    {
+      "kanjiId": "n4_l42_k004",
+      "lessonId": 42,
+      "level": "N4",
+      "character": "厚",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Hậu",
+        "meaningVi": "dày",
+        "meaningViDisplay": "Hậu (dày)",
+        "meaningEn": "Thick"
+      },
+      "readings": {
+        "onyomi": [
+          "KOU"
+        ],
+        "kunyomi": [
+          "atsu-i"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dưới vách núi (Hán 厂) có mặt trời (Nhật 日) và đứa trẻ (Tử 子) - tấm lòng DÀY dạn/HẬU đãi.",
+        "en": "Something with a solid base like a cliff being THICK."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "厂",
+          "日",
+          "子"
+        ],
+        "componentNames": [
+          "Hán (vách núi)",
+          "Nhật (ngày)",
+          "Tử (con)"
+        ],
+        "relatedKanji": [
+          "石",
+          "原",
+          "薄"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "hau",
+        "meaningViNoAccent": "day",
+        "meaningEnNoAccent": "thick"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l42_v072",
+          "sourceSenseId": "n4_l42_s072",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l42_v077",
+          "sourceSenseId": "n4_l42_s077",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l42_v049",
+          "sourceSenseId": "n4_l42_s049",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Hậu (dày)",
+        "onyomi": "KOU",
+        "kunyomi": "atsu-i"
+      }
+    },
+    {
+      "kanjiId": "n4_l42_k005",
+      "lessonId": 42,
+      "level": "N4",
+      "character": "薄",
+      "strokeCount": 16,
+      "labels": {
+        "hanViet": "Bạc",
+        "meaningVi": "mỏng",
+        "meaningViDisplay": "Bạc (mỏng)",
+        "meaningEn": "Thin"
+      },
+      "readings": {
+        "onyomi": [
+          "HAKU"
+        ],
+        "kunyomi": [
+          "usu-i"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Cỏ (Thảo 艹) dưới Nước (Thủy 氵) trông MỎNG manh.",
+        "en": "Grass (艹) and water (氵) forming a THIN layer."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "艹",
+          "氵",
+          "甫"
+        ],
+        "componentNames": [
+          "Thảo (cỏ)",
+          "Thủy (nước)",
+          "Phủ (lớn)"
+        ],
+        "relatedKanji": [
+          "厚",
+          "落",
+          "薬"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "bac",
+        "meaningViNoAccent": "mong",
+        "meaningEnNoAccent": "thin"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l42_v075",
+          "sourceSenseId": "n4_l42_s075",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l42_v080",
+          "sourceSenseId": "n4_l42_s080",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l42_v050",
+          "sourceSenseId": "n4_l42_s050",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Bạc (mỏng)",
+        "onyomi": "HAKU",
+        "kunyomi": "usu-i"
+      }
+    },
+    {
+      "kanjiId": "n4_l42_k006",
+      "lessonId": 42,
+      "level": "N4",
+      "character": "倍",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Bội",
+        "meaningVi": "gấp bội",
+        "meaningViDisplay": "Bội (gấp bội)",
+        "meaningEn": "Double, Times"
+      },
+      "readings": {
+        "onyomi": [
+          "BAI"
+        ],
+        "kunyomi": []
+      },
+      "mnemonic": {
+        "vi": "Người (Nhân 亻) đứng cạnh nhổ (Phủ 咅) ra những điều GẤP BỘI.",
+        "en": "A person (亻) standing by a pedestal to DOUBLE things."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "亻",
+          "咅"
+        ],
+        "componentNames": [
+          "Nhân (người)",
+          "Phủ (phun ra)"
+        ],
+        "relatedKanji": [
+          "人"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "boi",
+        "meaningViNoAccent": "gap boi",
+        "meaningEnNoAccent": "double, times"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l44_v042",
+          "sourceSenseId": "n4_l44_s042",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l42_v070",
+          "sourceSenseId": "n4_l42_s070",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l44_v020",
+          "sourceSenseId": "n4_l44_s020",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Bội (gấp bội)",
+        "onyomi": "BAI",
+        "kunyomi": null
+      }
+    },
+    {
+      "kanjiId": "n4_l42_k007",
+      "lessonId": 42,
+      "level": "N4",
+      "character": "量",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Lượng",
+        "meaningVi": "số lượng",
+        "meaningViDisplay": "Lượng (số lượng)",
+        "meaningEn": "Quantity"
+      },
+      "readings": {
+        "onyomi": [
+          "RYOU"
+        ],
+        "kunyomi": [
+          "haka-ru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng cân để đong đếm SỐ LƯỢNG vật phẩm.",
+        "en": "Measuring the weight/QUANTITY."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "旦",
+          "里"
+        ],
+        "componentNames": [
+          "Đán (bình minh)",
+          "Lý (dặm)"
+        ],
+        "relatedKanji": [
+          "重"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "luong",
+        "meaningViNoAccent": "so luong",
+        "meaningEnNoAccent": "quantity"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l44_v019",
+          "sourceSenseId": "n4_l44_s019",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l42_v081",
+          "sourceSenseId": "n4_l42_s081",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Lượng (số lượng)",
+        "onyomi": "RYOU",
+        "kunyomi": "haka-ru"
+      }
+    }
+  ]
+}

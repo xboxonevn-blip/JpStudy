@@ -23,7 +23,11 @@
         "sourceSenseId": "n4_l36_s050"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Phi",
+      "structure": "standalone"
+    }
   },
   {
     "lessonId": 41,
@@ -49,7 +53,23 @@
         "sourceSenseId": "n4_l33_s016"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Cơ",
+      "structure": "left-right",
+      "components": [
+        "木",
+        "幾"
+      ],
+      "componentNames": [
+        "Mộc (cây)",
+        "Kỷ (mấy)"
+      ],
+      "relatedKanji": [
+        "木",
+        "本"
+      ]
+    }
   },
   {
     "lessonId": 41,
@@ -75,7 +95,23 @@
         "sourceSenseId": "n4_l49_s022"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Thất",
+      "structure": "mixed",
+      "components": [
+        "大",
+        "丿"
+      ],
+      "componentNames": [
+        "Đại biến thể (to lớn)",
+        "Phiệt (nét phẩy)"
+      ],
+      "relatedKanji": [
+        "大",
+        "夫"
+      ]
+    }
   },
   {
     "lessonId": 41,
@@ -101,7 +137,22 @@
         "sourceSenseId": "n4_l49_s022"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Lễ",
+      "structure": "left-right",
+      "components": [
+        "礻",
+        "乚"
+      ],
+      "componentNames": [
+        "Thị (thần linh)",
+        "Ất (uốn cong)"
+      ],
+      "relatedKanji": [
+        "社"
+      ]
+    }
   },
   {
     "lessonId": 41,
@@ -127,7 +178,25 @@
         "sourceSenseId": "n4_l28_s041"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Nguyện",
+      "structure": "left-right",
+      "components": [
+        "原",
+        "頁"
+      ],
+      "componentNames": [
+        "Nguyên (nguồn gốc)",
+        "Hiệt (đầu, trang)"
+      ],
+      "relatedKanji": [
+        "原",
+        "頭",
+        "顔",
+        "頼"
+      ]
+    }
   },
   {
     "lessonId": 41,
@@ -153,6 +222,23 @@
         "sourceSenseId": "n4_l35_s003"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Khốn",
+      "structure": "enclosure",
+      "components": [
+        "囗",
+        "木"
+      ],
+      "componentNames": [
+        "Vi (vây quanh)",
+        "Mộc (cây)"
+      ],
+      "relatedKanji": [
+        "国",
+        "回",
+        "園"
+      ]
+    }
   }
 ]

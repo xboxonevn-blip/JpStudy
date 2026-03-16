@@ -1,0 +1,620 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N5",
+  "lessonId": 9,
+  "entryCount": 8,
+  "entries": [
+    {
+      "kanjiId": "n5_l09_k001",
+      "lessonId": 9,
+      "level": "N5",
+      "character": "好",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Hảo",
+        "meaningVi": "thích",
+        "meaningViDisplay": "Hảo (thích)",
+        "meaningEn": "Like"
+      },
+      "readings": {
+        "onyomi": [
+          "KOU"
+        ],
+        "kunyomi": [
+          "su-ki"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Mẹ (Nữ 女) yêu con (Tử 子) là điều tốt (Hảo/Thích).",
+        "en": "A mother (女) with her child (子) - a GOOD thing you LIKE."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "女",
+          "子"
+        ],
+        "componentNames": [
+          "Nữ (phụ nữ)",
+          "Tử (con)"
+        ],
+        "relatedKanji": [
+          "女",
+          "子",
+          "姉",
+          "妹"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "hao",
+        "meaningViNoAccent": "thich",
+        "meaningEnNoAccent": "like"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l09_v057",
+          "sourceSenseId": "n5_l09_s057",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l27_v040",
+          "sourceSenseId": "n4_l27_s040",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l09_v003",
+          "sourceSenseId": "n5_l09_s003",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Hảo (thích)",
+        "onyomi": "KOU",
+        "kunyomi": "su-ki"
+      }
+    },
+    {
+      "kanjiId": "n5_l09_k002",
+      "lessonId": 9,
+      "level": "N5",
+      "character": "歌",
+      "strokeCount": 14,
+      "labels": {
+        "hanViet": "Ca",
+        "meaningVi": "bài hát",
+        "meaningViDisplay": "Ca (bài hát)",
+        "meaningEn": "Song"
+      },
+      "readings": {
+        "onyomi": [
+          "KA"
+        ],
+        "kunyomi": [
+          "uta"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Hai người (Khả 可) đang mở miệng (Khiếm 欠) để Hát.",
+        "en": "Two people (可) opening their mouths (欠) to sing a SONG."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "哥",
+          "欠"
+        ],
+        "componentNames": [
+          "Ca (anh, hát)",
+          "Khiếm (há miệng)"
+        ],
+        "relatedKanji": [
+          "飲",
+          "何"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "ca",
+        "meaningViNoAccent": "bai hat",
+        "meaningEnNoAccent": "song"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l09_v013",
+          "sourceSenseId": "n5_l09_s013",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l09_v018",
+          "sourceSenseId": "n5_l09_s018",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l18_v004",
+          "sourceSenseId": "n5_l18_s004",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Ca (bài hát)",
+        "onyomi": "KA",
+        "kunyomi": "uta"
+      }
+    },
+    {
+      "kanjiId": "n5_l09_k003",
+      "lessonId": 9,
+      "level": "N5",
+      "character": "音",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Âm",
+        "meaningVi": "âm thanh",
+        "meaningViDisplay": "Âm (âm thanh)",
+        "meaningEn": "Sound"
+      },
+      "readings": {
+        "onyomi": [
+          "ON"
+        ],
+        "kunyomi": [
+          "oto"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Mặt trời (Nhật 日) đứng (Lập 立) trên mặt đất phát ra Âm thanh ngày mới.",
+        "en": "The sun (日) standing (立) up to make SOUND."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "立",
+          "日"
+        ],
+        "componentNames": [
+          "Lập (đứng)",
+          "Nhật (ngày)"
+        ],
+        "relatedKanji": [
+          "日",
+          "立",
+          "暗",
+          "意"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "am",
+        "meaningViNoAccent": "am thanh",
+        "meaningEnNoAccent": "sound"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l23_v015",
+          "sourceSenseId": "n5_l23_s015",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l09_v012",
+          "sourceSenseId": "n5_l09_s012",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l47_v004",
+          "sourceSenseId": "n4_l47_s004",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Âm (âm thanh)",
+        "onyomi": "ON",
+        "kunyomi": "oto"
+      }
+    },
+    {
+      "kanjiId": "n5_l09_k004",
+      "lessonId": 9,
+      "level": "N5",
+      "character": "楽",
+      "strokeCount": 13,
+      "labels": {
+        "hanViet": "Lạc/Nhạc",
+        "meaningVi": "vui, nhạc",
+        "meaningViDisplay": "Lạc/Nhạc (vui, nhạc)",
+        "meaningEn": "Fun, Music"
+      },
+      "readings": {
+        "onyomi": [
+          "GAKU",
+          "RAKU"
+        ],
+        "kunyomi": [
+          "tano-shii"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Cái cây (木) mang lại niềm vui khi nghe Nhạc.",
+        "en": "Instruments made of wood (木) used for FUN MUSIC."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "白",
+          "木"
+        ],
+        "componentNames": [
+          "Bạch biến thể (trắng)",
+          "Mộc (cây)"
+        ],
+        "relatedKanji": [
+          "木",
+          "薬"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "lac/nhac",
+        "meaningViNoAccent": "vui, nhac",
+        "meaningEnNoAccent": "fun, music"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l35_v007",
+          "sourceSenseId": "n4_l35_s007",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l09_v012",
+          "sourceSenseId": "n5_l09_s012",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l08_v030",
+          "sourceSenseId": "n5_l08_s030",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Lạc/Nhạc (vui, nhạc)",
+        "onyomi": "GAKU, RAKU",
+        "kunyomi": "tano-shii"
+      }
+    },
+    {
+      "kanjiId": "n5_l09_k005",
+      "lessonId": 9,
+      "level": "N5",
+      "character": "絵",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Hội",
+        "meaningVi": "tranh",
+        "meaningViDisplay": "Hội (tranh)",
+        "meaningEn": "Picture"
+      },
+      "readings": {
+        "onyomi": [
+          "KAI",
+          "E"
+        ],
+        "kunyomi": []
+      },
+      "mnemonic": {
+        "vi": "Dùng sợi tơ (糸) thêu thành bức Tranh (Hội).",
+        "en": "Using silk threads (糸) to create a PICTURE."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "糸",
+          "会"
+        ],
+        "componentNames": [
+          "Mịch (sợi tơ)",
+          "Hội (gặp gỡ)"
+        ],
+        "relatedKanji": [
+          "糸",
+          "会",
+          "終",
+          "線",
+          "約",
+          "絡"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "hoi",
+        "meaningViNoAccent": "tranh",
+        "meaningEnNoAccent": "picture"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l09_v019",
+          "sourceSenseId": "n5_l09_s019",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l41_v019",
+          "sourceSenseId": "n4_l41_s019",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l41_v020",
+          "sourceSenseId": "n4_l41_s020",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Hội (tranh)",
+        "onyomi": "KAI, E",
+        "kunyomi": null
+      }
+    },
+    {
+      "kanjiId": "n5_l09_k006",
+      "lessonId": 9,
+      "level": "N5",
+      "character": "字",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Tự",
+        "meaningVi": "chữ",
+        "meaningViDisplay": "Tự (chữ)",
+        "meaningEn": "Character"
+      },
+      "readings": {
+        "onyomi": [
+          "JI"
+        ],
+        "kunyomi": []
+      },
+      "mnemonic": {
+        "vi": "Đứa trẻ (Tử 子) được dạy chữ dưới mái nhà (Miên 宀).",
+        "en": "A child (子) learning characters under a roof (宀)."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "宀",
+          "子"
+        ],
+        "componentNames": [
+          "Miên (mái nhà)",
+          "Tử (con)"
+        ],
+        "relatedKanji": [
+          "子",
+          "安",
+          "学",
+          "守",
+          "宅"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "tu",
+        "meaningViNoAccent": "chu",
+        "meaningEnNoAccent": "character"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l09_v020",
+          "sourceSenseId": "n5_l09_s020",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l09_v021",
+          "sourceSenseId": "n5_l09_s021",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l09_v024",
+          "sourceSenseId": "n5_l09_s024",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tự (chữ)",
+        "onyomi": "JI",
+        "kunyomi": null
+      }
+    },
+    {
+      "kanjiId": "n5_l09_k007",
+      "lessonId": 9,
+      "level": "N5",
+      "character": "漢",
+      "strokeCount": 13,
+      "labels": {
+        "hanViet": "Hán",
+        "meaningVi": null,
+        "meaningViDisplay": "Hán",
+        "meaningEn": "China, Han"
+      },
+      "readings": {
+        "onyomi": [
+          "KAN"
+        ],
+        "kunyomi": []
+      },
+      "mnemonic": {
+        "vi": "Nước (Thủy 氵) chảy qua vùng đất của người Hán.",
+        "en": "Water (氵) flowing through the land of the HAN."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "氵",
+          "𦰩"
+        ],
+        "componentNames": [
+          "Thủy (nước)",
+          "Hán phải (biến thể)"
+        ],
+        "relatedKanji": [
+          "洗",
+          "消",
+          "法"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "han",
+        "meaningViNoAccent": "",
+        "meaningEnNoAccent": "china, han"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l09_v058",
+          "sourceSenseId": "n5_l09_s058",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l09_v021",
+          "sourceSenseId": "n5_l09_s021",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Hán",
+        "onyomi": "KAN",
+        "kunyomi": null
+      }
+    },
+    {
+      "kanjiId": "n5_l09_k008",
+      "lessonId": 9,
+      "level": "N5",
+      "character": "旅",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Lữ",
+        "meaningVi": "du lịch",
+        "meaningViDisplay": "Lữ (du lịch)",
+        "meaningEn": "Travel"
+      },
+      "readings": {
+        "onyomi": [
+          "RYO"
+        ],
+        "kunyomi": [
+          "tabi"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Một đoàn người cầm Cờ để đi du Lữ.",
+        "en": "People carrying a flag to TRAVEL."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "方",
+          "𠂉",
+          "人"
+        ],
+        "componentNames": [
+          "Phương (hướng)",
+          "Nét phẩy",
+          "Nhân (người)"
+        ],
+        "relatedKanji": [
+          "方",
+          "族"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "lu",
+        "meaningViNoAccent": "du lich",
+        "meaningEnNoAccent": "travel"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l09_v056",
+          "sourceSenseId": "n5_l09_s056",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l07_v050",
+          "sourceSenseId": "n5_l07_s050",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l35_v041",
+          "sourceSenseId": "n4_l35_s041",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Lữ (du lịch)",
+        "onyomi": "RYO",
+        "kunyomi": "tabi"
+      }
+    }
+  ]
+}

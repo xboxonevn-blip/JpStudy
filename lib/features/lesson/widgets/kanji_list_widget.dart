@@ -149,6 +149,7 @@ class _KanjiListWidgetState extends ConsumerState<KanjiListWidget> {
     required List<_CompoundGuideEntry> compounds,
   }) {
     final englishMeaning = (item.meaningEn ?? '').trim();
+    final decomp = item.decomposition;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -192,6 +193,15 @@ class _KanjiListWidgetState extends ConsumerState<KanjiListWidget> {
                 ),
               ],
             ),
+          ),
+        ],
+        if (decomp != null && decomp.hasContent) ...[
+          const SizedBox(height: 12),
+          _buildDecompositionSection(
+            context,
+            item: item,
+            decomp: decomp,
+            language: language,
           ),
         ],
         const SizedBox(height: 12),
@@ -244,6 +254,137 @@ class _KanjiListWidgetState extends ConsumerState<KanjiListWidget> {
           }),
         ],
       ],
+    );
+  }
+
+  Widget _buildDecompositionSection(
+    BuildContext context, {
+    required KanjiItem item,
+    required KanjiDecomposition decomp,
+    required AppLanguage language,
+  }) {
+    final decompositionLabel = _decompositionLabel(item, decomp);
+    final components = decomp.components;
+    final componentNames = decomp.componentNames;
+    final relatedKanji = decomp.relatedKanji;
+    final structure = decomp.structure?.trim() ?? '';
+
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF3F0FF),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFD5CCFF)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(
+                Icons.account_tree_rounded,
+                size: 18,
+                color: Color(0xFF7C4DFF),
+              ),
+              const SizedBox(width: 6),
+              Text(
+                language.kanjiDecompositionTitle,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xFF7C4DFF),
+                ),
+              ),
+              if (decompositionLabel.isNotEmpty) ...[
+                const Spacer(),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 2,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF7C4DFF).withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Text(
+                    decompositionLabel,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                      color: Color(0xFF7C4DFF),
+                    ),
+                  ),
+                ),
+              ],
+            ],
+          ),
+          if (structure.isNotEmpty && structure != 'standalone') ...[
+            const SizedBox(height: 8),
+            Text(
+              '${language.kanjiStructureLabel}: ${language.kanjiStructureType(structure)}',
+              style: const TextStyle(fontSize: 13),
+            ),
+          ],
+          if (components.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            Text(
+              language.kanjiComponentsLabel,
+              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
+            ),
+            const SizedBox(height: 4),
+            Wrap(
+              spacing: 8,
+              runSpacing: 6,
+              children: [
+                for (var i = 0; i < components.length; i++)
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: const Color(0xFFD5CCFF)),
+                    ),
+                    child: Text(
+                      i < componentNames.length
+                          ? '${components[i]}  ${componentNames[i]}'
+                          : components[i],
+                      style: const TextStyle(fontSize: 13),
+                    ),
+                  ),
+              ],
+            ),
+          ],
+          if (relatedKanji.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            Text(
+              language.kanjiRelatedLabel,
+              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
+            ),
+            const SizedBox(height: 4),
+            Wrap(
+              spacing: 6,
+              children: relatedKanji
+                  .map(
+                    (k) => Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 2,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(6),
+                        border: Border.all(color: const Color(0xFFD5CCFF)),
+                      ),
+                      child: Text(k, style: const TextStyle(fontSize: 15)),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ],
+        ],
+      ),
     );
   }
 
@@ -324,6 +465,14 @@ class _KanjiListWidgetState extends ConsumerState<KanjiListWidget> {
       }
     }
     return item.meaning;
+  }
+
+  String _decompositionLabel(KanjiItem item, KanjiDecomposition decomp) {
+    final canonical = (decomp.hanViet ?? '').trim();
+    if (canonical.isNotEmpty) {
+      return canonical;
+    }
+    return item.meaning.split('(').first.trim();
   }
 
   String _subtitle(KanjiItem item, AppLanguage language) {

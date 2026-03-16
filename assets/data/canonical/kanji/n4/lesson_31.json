@@ -1,0 +1,457 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N4",
+  "lessonId": 31,
+  "entryCount": 6,
+  "entries": [
+    {
+      "kanjiId": "n4_l31_k001",
+      "lessonId": 31,
+      "level": "N4",
+      "character": "考",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Khảo",
+        "meaningVi": "suy nghĩ",
+        "meaningViDisplay": "Khảo (suy nghĩ)",
+        "meaningEn": "Think, Consider"
+      },
+      "readings": {
+        "onyomi": [
+          "KOU"
+        ],
+        "kunyomi": [
+          "kan-gaeru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Người già (Lão 耂) đang chống gậy SUY NGHĨ (Khảo).",
+        "en": "An elder (耂) thinking over time."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "耂",
+          "丂"
+        ],
+        "componentNames": [
+          "Lão (già)",
+          "Khảo (uốn cong)"
+        ],
+        "relatedKanji": [
+          "者"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "khao",
+        "meaningViNoAccent": "suy nghi",
+        "meaningEnNoAccent": "think, consider"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l25_v031",
+          "sourceSenseId": "n5_l25_s031",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l25_v030",
+          "sourceSenseId": "n5_l25_s030",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l25_v001",
+          "sourceSenseId": "n5_l25_s001",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Khảo (suy nghĩ)",
+        "onyomi": "KOU",
+        "kunyomi": "kan-gaeru"
+      }
+    },
+    {
+      "kanjiId": "n4_l31_k002",
+      "lessonId": 31,
+      "level": "N4",
+      "character": "着",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Trước",
+        "meaningVi": "mặc, đến",
+        "meaningViDisplay": "Trước (mặc, đến)",
+        "meaningEn": "Wear, Arrive"
+      },
+      "readings": {
+        "onyomi": [
+          "CHAKU"
+        ],
+        "kunyomi": [
+          "ki-ru",
+          "tsu-ku"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Sử dụng len cừu (Dương 羊) để làm áo MẶC.",
+        "en": "Using wool (羊) to make clothes to WEAR."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "羊",
+          "目"
+        ],
+        "componentNames": [
+          "Dương biến thể (cừu)",
+          "Mục (mắt)"
+        ],
+        "relatedKanji": [
+          "目"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "truoc",
+        "meaningViNoAccent": "mac, den",
+        "meaningEnNoAccent": "wear, arrive"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l31_v049",
+          "sourceSenseId": "n4_l31_s049",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l40_v006",
+          "sourceSenseId": "n4_l40_s006",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l42_v077",
+          "sourceSenseId": "n4_l42_s077",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Trước (mặc, đến)",
+        "onyomi": "CHAKU",
+        "kunyomi": "ki-ru, tsu-ku"
+      }
+    },
+    {
+      "kanjiId": "n4_l31_k003",
+      "lessonId": 31,
+      "level": "N4",
+      "character": "空",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Không",
+        "meaningVi": "bầu trời, trống",
+        "meaningViDisplay": "Không (bầu trời, trống)",
+        "meaningEn": "Sky, Empty"
+      },
+      "readings": {
+        "onyomi": [
+          "KUU"
+        ],
+        "kunyomi": [
+          "sora"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Trên là hang động (Huyệt 穴), dưới là dụng cụ thủ công (Công 工) tạo ra khoảng KHÔNG.",
+        "en": "A hole (穴) in the ground creating EMPTY space."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "穴",
+          "工"
+        ],
+        "componentNames": [
+          "Huyệt (hang)",
+          "Công (dụng cụ)"
+        ],
+        "relatedKanji": [
+          "左"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "khong",
+        "meaningViNoAccent": "bau troi, trong",
+        "meaningEnNoAccent": "sky, empty"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l31_v032",
+          "sourceSenseId": "n4_l31_s032",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l27_v030",
+          "sourceSenseId": "n4_l27_s030",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l32_v023",
+          "sourceSenseId": "n4_l32_s023",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Không (bầu trời, trống)",
+        "onyomi": "KUU",
+        "kunyomi": "sora"
+      }
+    },
+    {
+      "kanjiId": "n4_l31_k004",
+      "lessonId": 31,
+      "level": "N4",
+      "character": "港",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Cảng",
+        "meaningVi": "bến cảng",
+        "meaningViDisplay": "Cảng (bến cảng)",
+        "meaningEn": "Port"
+      },
+      "readings": {
+        "onyomi": [
+          "KOU"
+        ],
+        "kunyomi": [
+          "minato"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dòng nước (Thủy 氵) chảy vào một nơi như cái hầm (Hạng 巷) là BẾN CẢNG.",
+        "en": "Water (氵) meeting the dock area."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "氵",
+          "巷"
+        ],
+        "componentNames": [
+          "Thủy (nước)",
+          "Hạng (ngõ hẻm)"
+        ],
+        "relatedKanji": [
+          "洗",
+          "消"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "cang",
+        "meaningViNoAccent": "ben cang",
+        "meaningEnNoAccent": "port"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l35_v014",
+          "sourceSenseId": "n4_l35_s014",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l27_v030",
+          "sourceSenseId": "n4_l27_s030",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l12_v027",
+          "sourceSenseId": "n5_l12_s027",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Cảng (bến cảng)",
+        "onyomi": "KOU",
+        "kunyomi": "minato"
+      }
+    },
+    {
+      "kanjiId": "n4_l31_k005",
+      "lessonId": 31,
+      "level": "N4",
+      "character": "歳",
+      "strokeCount": 13,
+      "labels": {
+        "hanViet": "Tuế",
+        "meaningVi": "tuổi",
+        "meaningViDisplay": "Tuế (tuổi)",
+        "meaningEn": "Age"
+      },
+      "readings": {
+        "onyomi": [
+          "SAI"
+        ],
+        "kunyomi": []
+      },
+      "mnemonic": {
+        "vi": "Dừng lại (Chỉ 止) quan sát những gì đã qua trong một năm (Tuế).",
+        "en": "Steps (止) taken through the years."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "止",
+          "戊",
+          "小"
+        ],
+        "componentNames": [
+          "Chỉ (dừng)",
+          "Mậu (biến thể)",
+          "Tiểu (nhỏ)"
+        ],
+        "relatedKanji": [
+          "止",
+          "歩"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "tue",
+        "meaningViNoAccent": "tuoi",
+        "meaningEnNoAccent": "age"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l01_v021",
+          "sourceSenseId": "n5_l01_s021",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l01_v022",
+          "sourceSenseId": "n5_l01_s022",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tuế (tuổi)",
+        "onyomi": "SAI",
+        "kunyomi": null
+      }
+    },
+    {
+      "kanjiId": "n4_l31_k006",
+      "lessonId": 31,
+      "level": "N4",
+      "character": "続",
+      "strokeCount": 13,
+      "labels": {
+        "hanViet": "Tục",
+        "meaningVi": "tiếp tục",
+        "meaningViDisplay": "Tục (tiếp tục)",
+        "meaningEn": "Continue"
+      },
+      "readings": {
+        "onyomi": [
+          "ZOKU"
+        ],
+        "kunyomi": [
+          "tsuzu-ku"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng sợi tơ (Mịch 糸) để nối dài (Mại 売) sự TIẾP TỤC.",
+        "en": "Thread (糸) extending out to CONTINUE."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "糸",
+          "売"
+        ],
+        "componentNames": [
+          "Mịch (sợi tơ)",
+          "Mại (bán)"
+        ],
+        "relatedKanji": [
+          "糸",
+          "売",
+          "終"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "tuc",
+        "meaningViNoAccent": "tiep tuc",
+        "meaningEnNoAccent": "continue"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l31_v050",
+          "sourceSenseId": "n4_l31_s050",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l31_v051",
+          "sourceSenseId": "n4_l31_s051",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l31_v001",
+          "sourceSenseId": "n4_l31_s001",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tục (tiếp tục)",
+        "onyomi": "ZOKU",
+        "kunyomi": "tsuzu-ku"
+      }
+    }
+  ]
+}

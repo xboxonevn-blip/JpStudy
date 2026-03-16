@@ -1,0 +1,842 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N5",
+  "lessonId": 15,
+  "entryCount": 11,
+  "entries": [
+    {
+      "kanjiId": "n5_l15_k001",
+      "lessonId": 15,
+      "level": "N5",
+      "character": "明",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Minh",
+        "meaningVi": "sáng",
+        "meaningViDisplay": "Minh (sáng)",
+        "meaningEn": "Bright"
+      },
+      "readings": {
+        "onyomi": [
+          "MEI",
+          "MYOU"
+        ],
+        "kunyomi": [
+          "aka-rui"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Mặt trời (Nhật 日) và Mặt trăng (Nguyệt 月) cùng chiếu Sáng.",
+        "en": "The sun (日) and the moon (月) together are BRIGHT."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "日",
+          "月"
+        ],
+        "componentNames": [
+          "Nhật (mặt trời)",
+          "Nguyệt (mặt trăng)"
+        ],
+        "relatedKanji": [
+          "日",
+          "月",
+          "朝"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "minh",
+        "meaningViNoAccent": "sang",
+        "meaningEnNoAccent": "bright"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l15_v036",
+          "sourceSenseId": "n5_l15_s036",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l16_v071",
+          "sourceSenseId": "n5_l16_s071",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l24_v007",
+          "sourceSenseId": "n5_l24_s007",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Minh (sáng)",
+        "onyomi": "MEI, MYOU",
+        "kunyomi": "aka-rui"
+      }
+    },
+    {
+      "kanjiId": "n5_l15_k002",
+      "lessonId": 15,
+      "level": "N5",
+      "character": "暗",
+      "strokeCount": 13,
+      "labels": {
+        "hanViet": "Ám",
+        "meaningVi": "tối",
+        "meaningViDisplay": "Ám (tối)",
+        "meaningEn": "Dark"
+      },
+      "readings": {
+        "onyomi": [
+          "AN"
+        ],
+        "kunyomi": [
+          "kura-i"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Mặt trời (Nhật 日) phát ra âm thanh (Âm 音) nhưng trời vẫn Tối.",
+        "en": "The sun (日) making sounds but it's still DARK."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "日",
+          "音"
+        ],
+        "componentNames": [
+          "Nhật (mặt trời)",
+          "Âm (âm thanh)"
+        ],
+        "relatedKanji": [
+          "日",
+          "音",
+          "明"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "am",
+        "meaningViNoAccent": "toi",
+        "meaningEnNoAccent": "dark"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l15_v037",
+          "sourceSenseId": "n5_l15_s037",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l16_v047",
+          "sourceSenseId": "n5_l16_s047",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l16_v019",
+          "sourceSenseId": "n5_l16_s019",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Ám (tối)",
+        "onyomi": "AN",
+        "kunyomi": "kura-i"
+      }
+    },
+    {
+      "kanjiId": "n5_l15_k003",
+      "lessonId": 15,
+      "level": "N5",
+      "character": "広",
+      "strokeCount": 5,
+      "labels": {
+        "hanViet": "Quảng",
+        "meaningVi": "rộng",
+        "meaningViDisplay": "Quảng (rộng)",
+        "meaningEn": "Wide"
+      },
+      "readings": {
+        "onyomi": [
+          "KOU"
+        ],
+        "kunyomi": [
+          "hiro-i"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Tòa nhà (Nghiễm 广) xây trên vùng đất Rộng (Hoàng 黄).",
+        "en": "A wide building structure."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "广",
+          "ム"
+        ],
+        "componentNames": [
+          "Nghiễm (mái nhà lớn)",
+          "Khư (riêng tư)"
+        ],
+        "relatedKanji": [
+          "府",
+          "屋"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "quang",
+        "meaningViNoAccent": "rong",
+        "meaningEnNoAccent": "wide"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l15_v033",
+          "sourceSenseId": "n5_l15_s033",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l15_v030",
+          "sourceSenseId": "n5_l15_s030",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l13_v015",
+          "sourceSenseId": "n5_l13_s015",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Quảng (rộng)",
+        "onyomi": "KOU",
+        "kunyomi": "hiro-i"
+      }
+    },
+    {
+      "kanjiId": "n5_l15_k004",
+      "lessonId": 15,
+      "level": "N5",
+      "character": "多",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Đa",
+        "meaningVi": "nhiều",
+        "meaningViDisplay": "Đa (nhiều)",
+        "meaningEn": "Many"
+      },
+      "readings": {
+        "onyomi": [
+          "TA"
+        ],
+        "kunyomi": [
+          "oo-i"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Hai buổi tối (Tịch 夕) cộng lại là NHIỀU đêm.",
+        "en": "Two evenings (夕) mean MANY nights."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "夕",
+          "夕"
+        ],
+        "componentNames": [
+          "Tịch (chiều tối)",
+          "Tịch (chiều tối)"
+        ],
+        "relatedKanji": [
+          "夕",
+          "外",
+          "名"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "da",
+        "meaningViNoAccent": "nhieu",
+        "meaningEnNoAccent": "many"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l15_v031",
+          "sourceSenseId": "n5_l15_s031",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l15_v042",
+          "sourceSenseId": "n5_l15_s042",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l12_v007",
+          "sourceSenseId": "n5_l12_s007",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Đa (nhiều)",
+        "onyomi": "TA",
+        "kunyomi": "oo-i"
+      }
+    },
+    {
+      "kanjiId": "n5_l15_k005",
+      "lessonId": 15,
+      "level": "N5",
+      "character": "少",
+      "strokeCount": 4,
+      "labels": {
+        "hanViet": "Thiểu",
+        "meaningVi": "ít",
+        "meaningViDisplay": "Thiểu (ít)",
+        "meaningEn": "Few, Little"
+      },
+      "readings": {
+        "onyomi": [
+          "SHOU"
+        ],
+        "kunyomi": [
+          "suku-nai",
+          "suko-shi"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Chữ Tiểu (nhỏ 小) bị gạch bớt một nét càng thêm ÍT.",
+        "en": "Smaller than small (小) means FEW."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "小",
+          "丿"
+        ],
+        "componentNames": [
+          "Tiểu (nhỏ)",
+          "Phiệt (nét phẩy)"
+        ],
+        "relatedKanji": [
+          "小"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "thieu",
+        "meaningViNoAccent": "it",
+        "meaningEnNoAccent": "few, little"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l15_v032",
+          "sourceSenseId": "n5_l15_s032",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l13_v037",
+          "sourceSenseId": "n5_l13_s037",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l14_v032",
+          "sourceSenseId": "n5_l14_s032",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Thiểu (ít)",
+        "onyomi": "SHOU",
+        "kunyomi": "suku-nai, suko-shi"
+      }
+    },
+    {
+      "kanjiId": "n5_l15_k006",
+      "lessonId": 15,
+      "level": "N5",
+      "character": "長",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Trường",
+        "meaningVi": "dài",
+        "meaningViDisplay": "Trường (dài)",
+        "meaningEn": "Long"
+      },
+      "readings": {
+        "onyomi": [
+          "CHOU"
+        ],
+        "kunyomi": [
+          "naga-i"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Người có mái tóc DÀI làm thủ lĩnh.",
+        "en": "Long hair representing a leader."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "短",
+          "張"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "truong",
+        "meaningViNoAccent": "dai",
+        "meaningEnNoAccent": "long"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l15_v041",
+          "sourceSenseId": "n5_l15_s041",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l18_v018",
+          "sourceSenseId": "n5_l18_s018",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l18_v019",
+          "sourceSenseId": "n5_l18_s019",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Trường (dài)",
+        "onyomi": "CHOU",
+        "kunyomi": "naga-i"
+      }
+    },
+    {
+      "kanjiId": "n5_l15_k007",
+      "lessonId": 15,
+      "level": "N5",
+      "character": "短",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Đoản",
+        "meaningVi": "ngắn",
+        "meaningViDisplay": "Đoản (ngắn)",
+        "meaningEn": "Short"
+      },
+      "readings": {
+        "onyomi": [
+          "TAN"
+        ],
+        "kunyomi": [
+          "mijika-i"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Mũi tên (Thỉ 矢) bắn trúng cái đậu (Đậu 豆) Ngắn.",
+        "en": "A short arrow hitting a small bean."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "矢",
+          "豆"
+        ],
+        "componentNames": [
+          "Thỉ (mũi tên)",
+          "Đậu (hạt đậu)"
+        ],
+        "relatedKanji": [
+          "長",
+          "頭"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "doan",
+        "meaningViNoAccent": "ngan",
+        "meaningEnNoAccent": "short"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l15_v038",
+          "sourceSenseId": "n5_l15_s038",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l15_v043",
+          "sourceSenseId": "n5_l15_s043",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l16_v017",
+          "sourceSenseId": "n5_l16_s017",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Đoản (ngắn)",
+        "onyomi": "TAN",
+        "kunyomi": "mijika-i"
+      }
+    },
+    {
+      "kanjiId": "n5_l15_k008",
+      "lessonId": 15,
+      "level": "N5",
+      "character": "悪",
+      "strokeCount": 11,
+      "labels": {
+        "hanViet": "Ác",
+        "meaningVi": "xấu",
+        "meaningViDisplay": "Ác (xấu)",
+        "meaningEn": "Bad"
+      },
+      "readings": {
+        "onyomi": [
+          "AKU"
+        ],
+        "kunyomi": [
+          "waru-i"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Trái tim (Tâm 心) ở dưới cái nắp (Á 亜) là người Xấu.",
+        "en": "A heart (心) under a cover (亚) feeling BAD."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "亜",
+          "心"
+        ],
+        "componentNames": [
+          "Á (thứ hai)",
+          "Tâm (trái tim)"
+        ],
+        "relatedKanji": [
+          "心",
+          "意"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "ac",
+        "meaningViNoAccent": "xau",
+        "meaningEnNoAccent": "bad"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l15_v034",
+          "sourceSenseId": "n5_l15_s034",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l19_v031",
+          "sourceSenseId": "n5_l19_s031",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l08_v017",
+          "sourceSenseId": "n5_l08_s017",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Ác (xấu)",
+        "onyomi": "AKU",
+        "kunyomi": "waru-i"
+      }
+    },
+    {
+      "kanjiId": "n5_l15_k009",
+      "lessonId": 15,
+      "level": "N5",
+      "character": "重",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Trọng",
+        "meaningVi": "nặng",
+        "meaningViDisplay": "Trọng (nặng)",
+        "meaningEn": "Heavy"
+      },
+      "readings": {
+        "onyomi": [
+          "JUU"
+        ],
+        "kunyomi": [
+          "omo-i"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Ngàn (Thiên 千) dặm đường (Lý 里) thật là NẶNG nề.",
+        "en": "Thousand (千) miles (里) feel HEAVY."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "動",
+          "軽"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "trong",
+        "meaningViNoAccent": "nang",
+        "meaningEnNoAccent": "heavy"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l15_v040",
+          "sourceSenseId": "n5_l15_s040",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l33_v049",
+          "sourceSenseId": "n4_l33_s049",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l12_v014",
+          "sourceSenseId": "n5_l12_s014",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Trọng (nặng)",
+        "onyomi": "JUU",
+        "kunyomi": "omo-i"
+      }
+    },
+    {
+      "kanjiId": "n5_l15_k010",
+      "lessonId": 15,
+      "level": "N5",
+      "character": "軽",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Khinh",
+        "meaningVi": "nhẹ",
+        "meaningViDisplay": "Khinh (nhẹ)",
+        "meaningEn": "Light"
+      },
+      "readings": {
+        "onyomi": [
+          "KEI"
+        ],
+        "kunyomi": [
+          "karu-i"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Chiếc xe (Xa 車) chạy thật NHẸ nhàng.",
+        "en": "A light carriage."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "車",
+          "圣"
+        ],
+        "componentNames": [
+          "Xa (xe)",
+          "Khinh phải (biến thể)"
+        ],
+        "relatedKanji": [
+          "車",
+          "重",
+          "転",
+          "連",
+          "輸"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "khinh",
+        "meaningViNoAccent": "nhe",
+        "meaningEnNoAccent": "light"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l15_v039",
+          "sourceSenseId": "n5_l15_s039",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l15_v044",
+          "sourceSenseId": "n5_l15_s044",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l12_v015",
+          "sourceSenseId": "n5_l12_s015",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Khinh (nhẹ)",
+        "onyomi": "KEI",
+        "kunyomi": "karu-i"
+      }
+    },
+    {
+      "kanjiId": "n5_l15_k011",
+      "lessonId": 15,
+      "level": "N5",
+      "character": "早",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Tảo",
+        "meaningVi": "sớm",
+        "meaningViDisplay": "Tảo (sớm)",
+        "meaningEn": "Early"
+      },
+      "readings": {
+        "onyomi": [
+          "SOU"
+        ],
+        "kunyomi": [
+          "haya-i"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Mặt trời (Nhật 日) mọc trên ngọn cỏ vào sáng SỚM (Thập 十).",
+        "en": "The sun (日) rising early."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "日",
+          "十"
+        ],
+        "componentNames": [
+          "Nhật (mặt trời)",
+          "Thập (mười)"
+        ],
+        "relatedKanji": [
+          "日",
+          "十",
+          "草"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "tao",
+        "meaningViNoAccent": "som",
+        "meaningEnNoAccent": "early"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l15_v035",
+          "sourceSenseId": "n5_l15_s035",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l39_v051",
+          "sourceSenseId": "n4_l39_s051",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l12_v005",
+          "sourceSenseId": "n5_l12_s005",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tảo (sớm)",
+        "onyomi": "SOU",
+        "kunyomi": "haya-i"
+      }
+    }
+  ]
+}

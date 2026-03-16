@@ -23,7 +23,14 @@
         "sourceSenseId": "n4_l27_s044"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Bất",
+      "structure": "standalone",
+      "relatedKanji": [
+        "下"
+      ]
+    }
   },
   {
     "lessonId": 23,
@@ -49,7 +56,23 @@
         "sourceSenseId": "n5_l11_s032"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Tiện",
+      "structure": "left-right",
+      "components": [
+        "亻",
+        "更"
+      ],
+      "componentNames": [
+        "Nhân (người)",
+        "Canh (đổi, thêm)"
+      ],
+      "relatedKanji": [
+        "人",
+        "使"
+      ]
+    }
   },
   {
     "lessonId": 23,
@@ -75,7 +98,24 @@
         "sourceSenseId": "n4_l33_s056"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Lợi",
+      "structure": "left-right",
+      "components": [
+        "禾",
+        "刂"
+      ],
+      "componentNames": [
+        "Hòa (lúa)",
+        "Đao (dao)"
+      ],
+      "relatedKanji": [
+        "科",
+        "私",
+        "別"
+      ]
+    }
   },
   {
     "lessonId": 23,
@@ -97,7 +137,23 @@
         "sourceSenseId": "n5_l08_s005"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Hữu",
+      "structure": "mixed",
+      "components": [
+        "ナ",
+        "月"
+      ],
+      "componentNames": [
+        "Tay (nét tay)",
+        "Nguyệt (tháng, thịt)"
+      ],
+      "relatedKanji": [
+        "友",
+        "明"
+      ]
+    }
   },
   {
     "lessonId": 23,
@@ -123,7 +179,26 @@
         "sourceSenseId": "n5_l08_s006"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Thân",
+      "structure": "left-right",
+      "components": [
+        "立",
+        "木",
+        "見"
+      ],
+      "componentNames": [
+        "Lập (đứng)",
+        "Mộc (cây)",
+        "Kiến (nhìn)"
+      ],
+      "relatedKanji": [
+        "新",
+        "見",
+        "立"
+      ]
+    }
   },
   {
     "lessonId": 23,
@@ -149,6 +224,22 @@
         "sourceSenseId": "n5_l11_s026"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Thiết",
+      "structure": "left-right",
+      "components": [
+        "七",
+        "刀"
+      ],
+      "componentNames": [
+        "Thất (bảy)",
+        "Đao (dao)"
+      ],
+      "relatedKanji": [
+        "七",
+        "別"
+      ]
+    }
   }
 ]

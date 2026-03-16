@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:convert';
 
 import 'package:csv/csv.dart';
 import 'package:file_selector/file_selector.dart';
@@ -415,8 +415,13 @@ class _LessonEditScreenState extends ConsumerState<LessonEditScreen> {
       return;
     }
     try {
-      final file = File(location.path);
-      await file.writeAsString(csv, flush: true);
+      final xfile = XFile.fromData(
+        utf8.encode(csv),
+        mimeType: 'text/csv',
+        name: 'lesson_export.csv',
+        path: location.path,
+      );
+      await xfile.saveTo(location.path);
       if (!mounted) {
         return;
       }
@@ -447,7 +452,7 @@ class _LessonEditScreenState extends ConsumerState<LessonEditScreen> {
       return;
     }
     try {
-      final content = await File(file.path).readAsString();
+      final content = await file.readAsString();
       final rows = const CsvToListConverter(
         shouldParseNumbers: false,
         eol: '\n',

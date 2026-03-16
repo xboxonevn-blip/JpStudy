@@ -1,0 +1,2309 @@
+{
+  "schemaVersion": 2,
+  "dataset": "vocab",
+  "series": "minna",
+  "level": "N5",
+  "lessonId": 10,
+  "entryCount": 54,
+  "entries": [
+    {
+      "entryId": "n5_l10_s001",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 1,
+      "tags": [
+        "verb"
+      ],
+      "classification": {
+        "script": "kana_or_other",
+        "hasKanji": false,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v001",
+        "term": "います",
+        "reading": "います",
+        "kanji": [],
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s001",
+        "meaningVi": "có (người / động vật)",
+        "meaningEn": "exist / be (animate)"
+      },
+      "search": {
+        "termNoAccent": "います",
+        "readingNoAccent": "います",
+        "meaningViNoAccent": "co (nguoi / dong vat)",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v001",
+        "sourceSenseId": "n5_l10_s001"
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n5_l10_s002",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 2,
+      "tags": [
+        "verb"
+      ],
+      "classification": {
+        "script": "kana_or_other",
+        "hasKanji": false,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v002",
+        "term": "あります",
+        "reading": "あります",
+        "kanji": [],
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s002",
+        "meaningVi": "có (đồ vật)",
+        "meaningEn": "exist / be (inanimate)"
+      },
+      "search": {
+        "termNoAccent": "あります",
+        "readingNoAccent": "あります",
+        "meaningViNoAccent": "co (do vat)",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v002",
+        "sourceSenseId": "n5_l10_s002"
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n5_l10_s003",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 3,
+      "tags": [
+        "adj_na"
+      ],
+      "classification": {
+        "script": "kana_or_other",
+        "hasKanji": false,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v003",
+        "term": "いろいろ",
+        "reading": "いろいろ",
+        "kanji": [],
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s003",
+        "meaningVi": "nhiều thứ khác nhau",
+        "meaningEn": "various"
+      },
+      "search": {
+        "termNoAccent": "いろいろ",
+        "readingNoAccent": "いろいろ",
+        "meaningViNoAccent": "nhieu thu khac nhau",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v003",
+        "sourceSenseId": "n5_l10_s003"
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n5_l10_s004",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 4,
+      "tags": [
+        "noun"
+      ],
+      "classification": {
+        "script": "mixed",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v004",
+        "term": "男の人",
+        "reading": "おとこのひと",
+        "kanji": [
+          "男",
+          "人"
+        ],
+        "labels": {
+          "hanViet": "nam nhân"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s004",
+        "meaningVi": "người đàn ông",
+        "meaningEn": "man"
+      },
+      "search": {
+        "termNoAccent": "男の人",
+        "readingNoAccent": "おとこのひと",
+        "meaningViNoAccent": "nguoi dan ong",
+        "hanVietNoAccent": "nam nhan"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v004",
+        "sourceSenseId": "n5_l10_s004"
+      },
+      "legacy": {
+        "kanjiMeaning": "nam nhân"
+      }
+    },
+    {
+      "entryId": "n5_l10_s005",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 5,
+      "tags": [
+        "noun"
+      ],
+      "classification": {
+        "script": "mixed",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v005",
+        "term": "女の人",
+        "reading": "おんなのひと",
+        "kanji": [
+          "女",
+          "人"
+        ],
+        "labels": {
+          "hanViet": "nữ nhân"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s005",
+        "meaningVi": "người đàn bà",
+        "meaningEn": "woman"
+      },
+      "search": {
+        "termNoAccent": "女の人",
+        "readingNoAccent": "おんなのひと",
+        "meaningViNoAccent": "nguoi dan ba",
+        "hanVietNoAccent": "nu nhan"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v005",
+        "sourceSenseId": "n5_l10_s005"
+      },
+      "legacy": {
+        "kanjiMeaning": "nữ nhân"
+      }
+    },
+    {
+      "entryId": "n5_l10_s006",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 6,
+      "tags": [
+        "noun"
+      ],
+      "classification": {
+        "script": "mixed",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v006",
+        "term": "男の子",
+        "reading": "おとこのこ",
+        "kanji": [
+          "男",
+          "子"
+        ],
+        "labels": {
+          "hanViet": "nam tử"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s006",
+        "meaningVi": "bé trai / con trai",
+        "meaningEn": "boy"
+      },
+      "search": {
+        "termNoAccent": "男の子",
+        "readingNoAccent": "おとこのこ",
+        "meaningViNoAccent": "be trai / con trai",
+        "hanVietNoAccent": "nam tu"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v006",
+        "sourceSenseId": "n5_l10_s006"
+      },
+      "legacy": {
+        "kanjiMeaning": "nam tử"
+      }
+    },
+    {
+      "entryId": "n5_l10_s007",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 7,
+      "tags": [
+        "noun"
+      ],
+      "classification": {
+        "script": "mixed",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v007",
+        "term": "女の子",
+        "reading": "おんなのこ",
+        "kanji": [
+          "女",
+          "子"
+        ],
+        "labels": {
+          "hanViet": "nữ tử"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s007",
+        "meaningVi": "bé gái / con gái",
+        "meaningEn": "girl"
+      },
+      "search": {
+        "termNoAccent": "女の子",
+        "readingNoAccent": "おんなのこ",
+        "meaningViNoAccent": "be gai / con gai",
+        "hanVietNoAccent": "nu tu"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v007",
+        "sourceSenseId": "n5_l10_s007"
+      },
+      "legacy": {
+        "kanjiMeaning": "nữ tử"
+      }
+    },
+    {
+      "entryId": "n5_l10_s008",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 8,
+      "tags": [
+        "animal"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v008",
+        "term": "犬",
+        "reading": "いぬ",
+        "kanji": [
+          "犬"
+        ],
+        "labels": {
+          "hanViet": "khuyển"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s008",
+        "meaningVi": "con chó",
+        "meaningEn": "dog"
+      },
+      "search": {
+        "termNoAccent": "犬",
+        "readingNoAccent": "いぬ",
+        "meaningViNoAccent": "con cho",
+        "hanVietNoAccent": "khuyen"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v008",
+        "sourceSenseId": "n5_l10_s008"
+      },
+      "legacy": {
+        "kanjiMeaning": "khuyển"
+      }
+    },
+    {
+      "entryId": "n5_l10_s009",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 9,
+      "tags": [
+        "animal"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v009",
+        "term": "猫",
+        "reading": "ねこ",
+        "kanji": [
+          "猫"
+        ],
+        "labels": {
+          "hanViet": "mèo"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s009",
+        "meaningVi": "con mèo",
+        "meaningEn": "cat"
+      },
+      "search": {
+        "termNoAccent": "猫",
+        "readingNoAccent": "ねこ",
+        "meaningViNoAccent": "con meo",
+        "hanVietNoAccent": "meo"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v009",
+        "sourceSenseId": "n5_l10_s009"
+      },
+      "legacy": {
+        "kanjiMeaning": "mèo"
+      }
+    },
+    {
+      "entryId": "n5_l10_s010",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 10,
+      "tags": [
+        "animal"
+      ],
+      "classification": {
+        "script": "kana_or_other",
+        "hasKanji": false,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v010",
+        "term": "パンダ",
+        "reading": "ぱんだ",
+        "kanji": [],
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s010",
+        "meaningVi": "gấu trúc",
+        "meaningEn": "panda"
+      },
+      "search": {
+        "termNoAccent": "ハンタ",
+        "readingNoAccent": "はんた",
+        "meaningViNoAccent": "gau truc",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v010",
+        "sourceSenseId": "n5_l10_s010"
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n5_l10_s011",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 11,
+      "tags": [
+        "animal"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v011",
+        "term": "象",
+        "reading": "ぞう",
+        "kanji": [
+          "象"
+        ],
+        "labels": {
+          "hanViet": "tượng"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s011",
+        "meaningVi": "con voi",
+        "meaningEn": "elephant"
+      },
+      "search": {
+        "termNoAccent": "象",
+        "readingNoAccent": "そう",
+        "meaningViNoAccent": "con voi",
+        "hanVietNoAccent": "tuong"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v011",
+        "sourceSenseId": "n5_l10_s011"
+      },
+      "legacy": {
+        "kanjiMeaning": "tượng"
+      }
+    },
+    {
+      "entryId": "n5_l10_s012",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 12,
+      "tags": [
+        "noun"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v012",
+        "term": "木",
+        "reading": "き",
+        "kanji": [
+          "木"
+        ],
+        "labels": {
+          "hanViet": "mộc"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s012",
+        "meaningVi": "cây",
+        "meaningEn": "tree / wood"
+      },
+      "search": {
+        "termNoAccent": "木",
+        "readingNoAccent": "き",
+        "meaningViNoAccent": "cay",
+        "hanVietNoAccent": "moc"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v012",
+        "sourceSenseId": "n5_l10_s012"
+      },
+      "legacy": {
+        "kanjiMeaning": "mộc"
+      }
+    },
+    {
+      "entryId": "n5_l10_s013",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 13,
+      "tags": [
+        "noun"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v013",
+        "term": "物",
+        "reading": "もの",
+        "kanji": [
+          "物"
+        ],
+        "labels": {
+          "hanViet": "vật"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s013",
+        "meaningVi": "vật / đồ vật",
+        "meaningEn": "thing"
+      },
+      "search": {
+        "termNoAccent": "物",
+        "readingNoAccent": "もの",
+        "meaningViNoAccent": "vat / do vat",
+        "hanVietNoAccent": "vat"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v013",
+        "sourceSenseId": "n5_l10_s013"
+      },
+      "legacy": {
+        "kanjiMeaning": "vật"
+      }
+    },
+    {
+      "entryId": "n5_l10_s014",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 14,
+      "tags": [
+        "things"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v014",
+        "term": "電池",
+        "reading": "でんち",
+        "kanji": [
+          "電",
+          "池"
+        ],
+        "labels": {
+          "hanViet": "điện trì"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s014",
+        "meaningVi": "pin",
+        "meaningEn": "battery"
+      },
+      "search": {
+        "termNoAccent": "電池",
+        "readingNoAccent": "てんち",
+        "meaningViNoAccent": "pin",
+        "hanVietNoAccent": "dien tri"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v014",
+        "sourceSenseId": "n5_l10_s014"
+      },
+      "legacy": {
+        "kanjiMeaning": "điện trì"
+      }
+    },
+    {
+      "entryId": "n5_l10_s015",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 15,
+      "tags": [
+        "things"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v015",
+        "term": "箱",
+        "reading": "はこ",
+        "kanji": [
+          "箱"
+        ],
+        "labels": {
+          "hanViet": "rương"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s015",
+        "meaningVi": "hộp",
+        "meaningEn": "box"
+      },
+      "search": {
+        "termNoAccent": "箱",
+        "readingNoAccent": "はこ",
+        "meaningViNoAccent": "hop",
+        "hanVietNoAccent": "ruong"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v015",
+        "sourceSenseId": "n5_l10_s015"
+      },
+      "legacy": {
+        "kanjiMeaning": "rương"
+      }
+    },
+    {
+      "entryId": "n5_l10_s016",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 16,
+      "tags": [
+        "things"
+      ],
+      "classification": {
+        "script": "kana_or_other",
+        "hasKanji": false,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v016",
+        "term": "スイッチ",
+        "reading": "すいっち",
+        "kanji": [],
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s016",
+        "meaningVi": "công tắc",
+        "meaningEn": "switch"
+      },
+      "search": {
+        "termNoAccent": "スイッチ",
+        "readingNoAccent": "すいっち",
+        "meaningViNoAccent": "cong tac",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v016",
+        "sourceSenseId": "n5_l10_s016"
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n5_l10_s017",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 17,
+      "tags": [
+        "electronics"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v017",
+        "term": "冷蔵庫",
+        "reading": "れいぞうこ",
+        "kanji": [
+          "冷",
+          "蔵",
+          "庫"
+        ],
+        "labels": {
+          "hanViet": "lãnh tàng kho"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s017",
+        "meaningVi": "tủ lạnh",
+        "meaningEn": "refrigerator"
+      },
+      "search": {
+        "termNoAccent": "冷蔵庫",
+        "readingNoAccent": "れいそうこ",
+        "meaningViNoAccent": "tu lanh",
+        "hanVietNoAccent": "lanh tang kho"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v017",
+        "sourceSenseId": "n5_l10_s017"
+      },
+      "legacy": {
+        "kanjiMeaning": "lãnh tàng kho"
+      }
+    },
+    {
+      "entryId": "n5_l10_s018",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 18,
+      "tags": [
+        "furniture"
+      ],
+      "classification": {
+        "script": "kana_or_other",
+        "hasKanji": false,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v018",
+        "term": "テーブル",
+        "reading": "てーぶる",
+        "kanji": [],
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s018",
+        "meaningVi": "bàn (ăn)",
+        "meaningEn": "table"
+      },
+      "search": {
+        "termNoAccent": "テーフル",
+        "readingNoAccent": "てーふる",
+        "meaningViNoAccent": "ban (an)",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v018",
+        "sourceSenseId": "n5_l10_s018"
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n5_l10_s019",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 19,
+      "tags": [
+        "furniture"
+      ],
+      "classification": {
+        "script": "kana_or_other",
+        "hasKanji": false,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v019",
+        "term": "ベッド",
+        "reading": "べっど",
+        "kanji": [],
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s019",
+        "meaningVi": "giường",
+        "meaningEn": "bed"
+      },
+      "search": {
+        "termNoAccent": "ヘット",
+        "readingNoAccent": "へっと",
+        "meaningViNoAccent": "giuong",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v019",
+        "sourceSenseId": "n5_l10_s019"
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n5_l10_s020",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 20,
+      "tags": [
+        "furniture"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v020",
+        "term": "棚",
+        "reading": "たな",
+        "kanji": [
+          "棚"
+        ],
+        "labels": {
+          "hanViet": "bằng"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s020",
+        "meaningVi": "giá sách / kệ",
+        "meaningEn": "shelf"
+      },
+      "search": {
+        "termNoAccent": "棚",
+        "readingNoAccent": "たな",
+        "meaningViNoAccent": "gia sach / ke",
+        "hanVietNoAccent": "bang"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v020",
+        "sourceSenseId": "n5_l10_s020"
+      },
+      "legacy": {
+        "kanjiMeaning": "bằng"
+      }
+    },
+    {
+      "entryId": "n5_l10_s021",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 21,
+      "tags": [
+        "place"
+      ],
+      "classification": {
+        "script": "kana_or_other",
+        "hasKanji": false,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v021",
+        "term": "ドア",
+        "reading": "どあ",
+        "kanji": [],
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s021",
+        "meaningVi": "cửa (ra vào)",
+        "meaningEn": "door"
+      },
+      "search": {
+        "termNoAccent": "トア",
+        "readingNoAccent": "とあ",
+        "meaningViNoAccent": "cua (ra vao)",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v021",
+        "sourceSenseId": "n5_l10_s021"
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n5_l10_s022",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 22,
+      "tags": [
+        "place"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v022",
+        "term": "窓",
+        "reading": "まど",
+        "kanji": [
+          "窓"
+        ],
+        "labels": {
+          "hanViet": "song"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s022",
+        "meaningVi": "cửa sổ",
+        "meaningEn": "window"
+      },
+      "search": {
+        "termNoAccent": "窓",
+        "readingNoAccent": "まと",
+        "meaningViNoAccent": "cua so",
+        "hanVietNoAccent": "song"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v022",
+        "sourceSenseId": "n5_l10_s022"
+      },
+      "legacy": {
+        "kanjiMeaning": "song"
+      }
+    },
+    {
+      "entryId": "n5_l10_s023",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 23,
+      "tags": [
+        "place"
+      ],
+      "classification": {
+        "script": "kana_or_other",
+        "hasKanji": false,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v023",
+        "term": "ポスト",
+        "reading": "ぽすと",
+        "kanji": [],
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s023",
+        "meaningVi": "hộp thư",
+        "meaningEn": "mailbox / postbox"
+      },
+      "search": {
+        "termNoAccent": "ホスト",
+        "readingNoAccent": "ほすと",
+        "meaningViNoAccent": "hop thu",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v023",
+        "sourceSenseId": "n5_l10_s023"
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n5_l10_s024",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 24,
+      "tags": [
+        "place"
+      ],
+      "classification": {
+        "script": "kana_or_other",
+        "hasKanji": false,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v024",
+        "term": "ビル",
+        "reading": "びる",
+        "kanji": [],
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s024",
+        "meaningVi": "tòa nhà",
+        "meaningEn": "building"
+      },
+      "search": {
+        "termNoAccent": "ヒル",
+        "readingNoAccent": "ひる",
+        "meaningViNoAccent": "toa nha",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v024",
+        "sourceSenseId": "n5_l10_s024"
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n5_l10_s025",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 25,
+      "tags": [
+        "place"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v025",
+        "term": "公園",
+        "reading": "こうえん",
+        "kanji": [
+          "公",
+          "園"
+        ],
+        "labels": {
+          "hanViet": "công viên"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s025",
+        "meaningVi": "công viên",
+        "meaningEn": "park"
+      },
+      "search": {
+        "termNoAccent": "公園",
+        "readingNoAccent": "こうえん",
+        "meaningViNoAccent": "cong vien",
+        "hanVietNoAccent": "cong vien"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v025",
+        "sourceSenseId": "n5_l10_s025"
+      },
+      "legacy": {
+        "kanjiMeaning": "công viên"
+      }
+    },
+    {
+      "entryId": "n5_l10_s026",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 26,
+      "tags": [
+        "place"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v026",
+        "term": "喫茶店",
+        "reading": "きっさてん",
+        "kanji": [
+          "喫",
+          "茶",
+          "店"
+        ],
+        "labels": {
+          "hanViet": "khịt trà điếm"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s026",
+        "meaningVi": "quán giải khát / quán cà phê",
+        "meaningEn": "coffee shop"
+      },
+      "search": {
+        "termNoAccent": "喫茶店",
+        "readingNoAccent": "きっさてん",
+        "meaningViNoAccent": "quan giai khat / quan ca phe",
+        "hanVietNoAccent": "khit tra diem"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v026",
+        "sourceSenseId": "n5_l10_s026"
+      },
+      "legacy": {
+        "kanjiMeaning": "khịt trà điếm"
+      }
+    },
+    {
+      "entryId": "n5_l10_s027",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 27,
+      "tags": [
+        "place"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v027",
+        "term": "本屋",
+        "reading": "ほんや",
+        "kanji": [
+          "本",
+          "屋"
+        ],
+        "labels": {
+          "hanViet": "bản ốc"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s027",
+        "meaningVi": "hiệu sách",
+        "meaningEn": "bookstore"
+      },
+      "search": {
+        "termNoAccent": "本屋",
+        "readingNoAccent": "ほんや",
+        "meaningViNoAccent": "hieu sach",
+        "hanVietNoAccent": "ban oc"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v027",
+        "sourceSenseId": "n5_l10_s027"
+      },
+      "legacy": {
+        "kanjiMeaning": "bản ốc"
+      }
+    },
+    {
+      "entryId": "n5_l10_s028",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 28,
+      "tags": [
+        "suffix"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v028",
+        "term": "屋",
+        "reading": "や",
+        "kanji": [
+          "屋"
+        ],
+        "labels": {
+          "hanViet": "ốc"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s028",
+        "meaningVi": "cửa hàng ~",
+        "meaningEn": "~ store"
+      },
+      "search": {
+        "termNoAccent": "屋",
+        "readingNoAccent": "や",
+        "meaningViNoAccent": "cua hang ~",
+        "hanVietNoAccent": "oc"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v028",
+        "sourceSenseId": "n5_l10_s028"
+      },
+      "legacy": {
+        "kanjiMeaning": "ốc"
+      }
+    },
+    {
+      "entryId": "n5_l10_s029",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 29,
+      "tags": [
+        "place"
+      ],
+      "classification": {
+        "script": "mixed",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v029",
+        "term": "乗り場",
+        "reading": "のりば",
+        "kanji": [
+          "乗",
+          "場"
+        ],
+        "labels": {
+          "hanViet": "thặng trường"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s029",
+        "meaningVi": "bến xe / điểm lên xe",
+        "meaningEn": "boarding place"
+      },
+      "search": {
+        "termNoAccent": "乗り場",
+        "readingNoAccent": "のりは",
+        "meaningViNoAccent": "ben xe / diem len xe",
+        "hanVietNoAccent": "thang truong"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v029",
+        "sourceSenseId": "n5_l10_s029"
+      },
+      "legacy": {
+        "kanjiMeaning": "thặng trường"
+      }
+    },
+    {
+      "entryId": "n5_l10_s030",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 30,
+      "tags": [
+        "place"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v030",
+        "term": "県",
+        "reading": "けん",
+        "kanji": [
+          "県"
+        ],
+        "labels": {
+          "hanViet": "huyện"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s030",
+        "meaningVi": "tỉnh / huyện",
+        "meaningEn": "prefecture"
+      },
+      "search": {
+        "termNoAccent": "県",
+        "readingNoAccent": "けん",
+        "meaningViNoAccent": "tinh / huyen",
+        "hanVietNoAccent": "huyen"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v030",
+        "sourceSenseId": "n5_l10_s030"
+      },
+      "legacy": {
+        "kanjiMeaning": "huyện"
+      }
+    },
+    {
+      "entryId": "n5_l10_s031",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 31,
+      "tags": [
+        "position"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v031",
+        "term": "上",
+        "reading": "うえ",
+        "kanji": [
+          "上"
+        ],
+        "labels": {
+          "hanViet": "thượng"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s031",
+        "meaningVi": "trên",
+        "meaningEn": "up / above"
+      },
+      "search": {
+        "termNoAccent": "上",
+        "readingNoAccent": "うえ",
+        "meaningViNoAccent": "tren",
+        "hanVietNoAccent": "thuong"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v031",
+        "sourceSenseId": "n5_l10_s031"
+      },
+      "legacy": {
+        "kanjiMeaning": "thượng"
+      }
+    },
+    {
+      "entryId": "n5_l10_s032",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 32,
+      "tags": [
+        "position"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v032",
+        "term": "下",
+        "reading": "した",
+        "kanji": [
+          "下"
+        ],
+        "labels": {
+          "hanViet": "hạ"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s032",
+        "meaningVi": "dưới",
+        "meaningEn": "down / below"
+      },
+      "search": {
+        "termNoAccent": "下",
+        "readingNoAccent": "した",
+        "meaningViNoAccent": "duoi",
+        "hanVietNoAccent": "ha"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v032",
+        "sourceSenseId": "n5_l10_s032"
+      },
+      "legacy": {
+        "kanjiMeaning": "hạ"
+      }
+    },
+    {
+      "entryId": "n5_l10_s033",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 33,
+      "tags": [
+        "position"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v033",
+        "term": "前",
+        "reading": "まえ",
+        "kanji": [
+          "前"
+        ],
+        "labels": {
+          "hanViet": "tiền"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s033",
+        "meaningVi": "trước",
+        "meaningEn": "front"
+      },
+      "search": {
+        "termNoAccent": "前",
+        "readingNoAccent": "まえ",
+        "meaningViNoAccent": "truoc",
+        "hanVietNoAccent": "tien"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v033",
+        "sourceSenseId": "n5_l10_s033"
+      },
+      "legacy": {
+        "kanjiMeaning": "tiền"
+      }
+    },
+    {
+      "entryId": "n5_l10_s034",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 34,
+      "tags": [
+        "position"
+      ],
+      "classification": {
+        "script": "kana_or_other",
+        "hasKanji": false,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v034",
+        "term": "うしろ",
+        "reading": "うしろ",
+        "kanji": [],
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s034",
+        "meaningVi": "sau",
+        "meaningEn": "back / behind"
+      },
+      "search": {
+        "termNoAccent": "うしろ",
+        "readingNoAccent": "うしろ",
+        "meaningViNoAccent": "sau",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v034",
+        "sourceSenseId": "n5_l10_s034"
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n5_l10_s035",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 35,
+      "tags": [
+        "position"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v035",
+        "term": "右",
+        "reading": "みぎ",
+        "kanji": [
+          "右"
+        ],
+        "labels": {
+          "hanViet": "hữu"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s035",
+        "meaningVi": "phải",
+        "meaningEn": "right"
+      },
+      "search": {
+        "termNoAccent": "右",
+        "readingNoAccent": "みき",
+        "meaningViNoAccent": "phai",
+        "hanVietNoAccent": "huu"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v035",
+        "sourceSenseId": "n5_l10_s035"
+      },
+      "legacy": {
+        "kanjiMeaning": "hữu"
+      }
+    },
+    {
+      "entryId": "n5_l10_s036",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 36,
+      "tags": [
+        "position"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v036",
+        "term": "左",
+        "reading": "ひだり",
+        "kanji": [
+          "左"
+        ],
+        "labels": {
+          "hanViet": "tả"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s036",
+        "meaningVi": "trái",
+        "meaningEn": "left"
+      },
+      "search": {
+        "termNoAccent": "左",
+        "readingNoAccent": "ひたり",
+        "meaningViNoAccent": "trai",
+        "hanVietNoAccent": "ta"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v036",
+        "sourceSenseId": "n5_l10_s036"
+      },
+      "legacy": {
+        "kanjiMeaning": "tả"
+      }
+    },
+    {
+      "entryId": "n5_l10_s037",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 37,
+      "tags": [
+        "position"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v037",
+        "term": "中",
+        "reading": "なか",
+        "kanji": [
+          "中"
+        ],
+        "labels": {
+          "hanViet": "trung"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s037",
+        "meaningVi": "trong",
+        "meaningEn": "inside"
+      },
+      "search": {
+        "termNoAccent": "中",
+        "readingNoAccent": "なか",
+        "meaningViNoAccent": "trong",
+        "hanVietNoAccent": "trung"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v037",
+        "sourceSenseId": "n5_l10_s037"
+      },
+      "legacy": {
+        "kanjiMeaning": "trung"
+      }
+    },
+    {
+      "entryId": "n5_l10_s038",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 38,
+      "tags": [
+        "position"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v038",
+        "term": "外",
+        "reading": "そと",
+        "kanji": [
+          "外"
+        ],
+        "labels": {
+          "hanViet": "ngoại"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s038",
+        "meaningVi": "ngoài",
+        "meaningEn": "outside"
+      },
+      "search": {
+        "termNoAccent": "外",
+        "readingNoAccent": "そと",
+        "meaningViNoAccent": "ngoai",
+        "hanVietNoAccent": "ngoai"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v038",
+        "sourceSenseId": "n5_l10_s038"
+      },
+      "legacy": {
+        "kanjiMeaning": "ngoại"
+      }
+    },
+    {
+      "entryId": "n5_l10_s039",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 39,
+      "tags": [
+        "position"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v039",
+        "term": "隣",
+        "reading": "となり",
+        "kanji": [
+          "隣"
+        ],
+        "labels": {
+          "hanViet": "lân"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s039",
+        "meaningVi": "bên cạnh (cùng loại)",
+        "meaningEn": "next to"
+      },
+      "search": {
+        "termNoAccent": "隣",
+        "readingNoAccent": "となり",
+        "meaningViNoAccent": "ben canh (cung loai)",
+        "hanVietNoAccent": "lan"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v039",
+        "sourceSenseId": "n5_l10_s039"
+      },
+      "legacy": {
+        "kanjiMeaning": "lân"
+      }
+    },
+    {
+      "entryId": "n5_l10_s040",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 40,
+      "tags": [
+        "position"
+      ],
+      "classification": {
+        "script": "mixed",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v040",
+        "term": "近く",
+        "reading": "ちかく",
+        "kanji": [
+          "近"
+        ],
+        "labels": {
+          "hanViet": "cận"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s040",
+        "meaningVi": "gần",
+        "meaningEn": "near / neighborhood"
+      },
+      "search": {
+        "termNoAccent": "近く",
+        "readingNoAccent": "ちかく",
+        "meaningViNoAccent": "gan",
+        "hanVietNoAccent": "can"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v040",
+        "sourceSenseId": "n5_l10_s040"
+      },
+      "legacy": {
+        "kanjiMeaning": "cận"
+      }
+    },
+    {
+      "entryId": "n5_l10_s041",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 41,
+      "tags": [
+        "position"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v041",
+        "term": "間",
+        "reading": "あいだ",
+        "kanji": [
+          "間"
+        ],
+        "labels": {
+          "hanViet": "gian"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s041",
+        "meaningVi": "giữa",
+        "meaningEn": "between"
+      },
+      "search": {
+        "termNoAccent": "間",
+        "readingNoAccent": "あいた",
+        "meaningViNoAccent": "giua",
+        "hanVietNoAccent": "gian"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v041",
+        "sourceSenseId": "n5_l10_s041"
+      },
+      "legacy": {
+        "kanjiMeaning": "gian"
+      }
+    },
+    {
+      "entryId": "n5_l10_s042",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 42,
+      "tags": [
+        "particle"
+      ],
+      "classification": {
+        "script": "kana_or_other",
+        "hasKanji": false,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v042",
+        "term": "～や～など",
+        "reading": "やなど",
+        "kanji": [],
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s042",
+        "meaningVi": "~ và ~ (vân vân)",
+        "meaningEn": "~ and ~, etc."
+      },
+      "search": {
+        "termNoAccent": "～や～なと",
+        "readingNoAccent": "やなと",
+        "meaningViNoAccent": "~ va ~ (van van)",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v042",
+        "sourceSenseId": "n5_l10_s042"
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n5_l10_s043",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 43,
+      "tags": [
+        "adverb"
+      ],
+      "classification": {
+        "script": "kana_or_other",
+        "hasKanji": false,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v043",
+        "term": "いちばん～",
+        "reading": "いちばん",
+        "kanji": [],
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s043",
+        "meaningVi": "~ nhất",
+        "meaningEn": "the most ~"
+      },
+      "search": {
+        "termNoAccent": "いちはん～",
+        "readingNoAccent": "いちはん",
+        "meaningViNoAccent": "~ nhat",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v043",
+        "sourceSenseId": "n5_l10_s043"
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n5_l10_s044",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 44,
+      "tags": [
+        "food"
+      ],
+      "classification": {
+        "script": "kana_or_other",
+        "hasKanji": false,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v044",
+        "term": "チリソース",
+        "reading": "ちりそーす",
+        "kanji": [],
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s044",
+        "meaningVi": "tương ớt",
+        "meaningEn": "Chili sauce"
+      },
+      "search": {
+        "termNoAccent": "チリソース",
+        "readingNoAccent": "ちりそーす",
+        "meaningViNoAccent": "tuong ot",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v044",
+        "sourceSenseId": "n5_l10_s044"
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n5_l10_s045",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 45,
+      "tags": [
+        "things"
+      ],
+      "classification": {
+        "script": "kana_or_other",
+        "hasKanji": false,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v045",
+        "term": "フィルム",
+        "reading": "ふぃるむ",
+        "kanji": [],
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s045",
+        "meaningVi": "phim",
+        "meaningEn": "film"
+      },
+      "search": {
+        "termNoAccent": "フィルム",
+        "readingNoAccent": "ふぃるむ",
+        "meaningViNoAccent": "phim",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v045",
+        "sourceSenseId": "n5_l10_s045"
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n5_l10_s046",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 46,
+      "tags": [
+        "suffix"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v046",
+        "term": "階",
+        "reading": "かい",
+        "kanji": [
+          "階"
+        ],
+        "labels": {
+          "hanViet": "giai"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s046",
+        "meaningVi": "cấp độ/cấp bậc",
+        "meaningEn": "level / tier"
+      },
+      "search": {
+        "termNoAccent": "階",
+        "readingNoAccent": "かい",
+        "meaningViNoAccent": "cap do/cap bac",
+        "hanVietNoAccent": "giai"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v046",
+        "sourceSenseId": "n5_l10_s046"
+      },
+      "legacy": {
+        "kanjiMeaning": "giai"
+      }
+    },
+    {
+      "entryId": "n5_l10_s047",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 47,
+      "tags": [
+        "place"
+      ],
+      "classification": {
+        "script": "kana_or_other",
+        "hasKanji": false,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v047",
+        "term": "コーナー",
+        "reading": "こーなー",
+        "kanji": [],
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s047",
+        "meaningVi": "góc / khu",
+        "meaningEn": "corner / section"
+      },
+      "search": {
+        "termNoAccent": "コーナー",
+        "readingNoAccent": "こーなー",
+        "meaningViNoAccent": "goc / khu",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v047",
+        "sourceSenseId": "n5_l10_s047"
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n5_l10_s048",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 48,
+      "tags": [
+        "position"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v048",
+        "term": "奥",
+        "reading": "おく",
+        "kanji": [
+          "奥"
+        ],
+        "labels": {
+          "hanViet": "áo"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s048",
+        "meaningVi": "mặt sau/phần bên trong",
+        "meaningEn": "back / inner part"
+      },
+      "search": {
+        "termNoAccent": "奥",
+        "readingNoAccent": "おく",
+        "meaningViNoAccent": "mat sau/phan ben trong",
+        "hanVietNoAccent": "ao"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v048",
+        "sourceSenseId": "n5_l10_s048"
+      },
+      "legacy": {
+        "kanjiMeaning": "áo"
+      }
+    },
+    {
+      "entryId": "n5_l10_s049",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 49,
+      "tags": [
+        "food"
+      ],
+      "classification": {
+        "script": "kana_or_other",
+        "hasKanji": false,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v049",
+        "term": "スパイス",
+        "reading": "すぱいす",
+        "kanji": [],
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s049",
+        "meaningVi": "gia vị",
+        "meaningEn": "spice"
+      },
+      "search": {
+        "termNoAccent": "スハイス",
+        "readingNoAccent": "すはいす",
+        "meaningViNoAccent": "gia vi",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v049",
+        "sourceSenseId": "n5_l10_s049"
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n5_l10_s050",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 50,
+      "tags": [
+        "suffix"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v050",
+        "term": "目",
+        "reading": "め",
+        "kanji": [
+          "目"
+        ],
+        "labels": {
+          "hanViet": "mục"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s050",
+        "meaningVi": "-th (điểm đánh dấu thứ tự)",
+        "meaningEn": "-th (ordinal marker)"
+      },
+      "search": {
+        "termNoAccent": "目",
+        "readingNoAccent": "め",
+        "meaningViNoAccent": "-th (diem danh dau thu tu)",
+        "hanVietNoAccent": "muc"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v050",
+        "sourceSenseId": "n5_l10_s050"
+      },
+      "legacy": {
+        "kanjiMeaning": "mục"
+      }
+    },
+    {
+      "entryId": "n5_l10_s051",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 51,
+      "tags": [
+        "phrase"
+      ],
+      "classification": {
+        "script": "kana_or_other",
+        "hasKanji": false,
+        "origin": "lesson_tagged"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v051",
+        "term": "どうもすみません",
+        "reading": "どうもすみません",
+        "kanji": [],
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s051",
+        "meaningVi": "Tôi rất xin lỗi/cảm ơn bạn rất nhiều",
+        "meaningEn": "I am very sorry / thank you very much"
+      },
+      "search": {
+        "termNoAccent": "とうもすみません",
+        "readingNoAccent": "とうもすみません",
+        "meaningViNoAccent": "toi rat xin loi/cam on ban rat nhieu",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v051",
+        "sourceSenseId": "n5_l10_s051"
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n5_l10_s052",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 52,
+      "tags": [
+        "kanji-example"
+      ],
+      "classification": {
+        "script": "mixed",
+        "hasKanji": true,
+        "origin": "generated_example_backfill"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v052",
+        "term": "後ろ",
+        "reading": "うしろ",
+        "kanji": [
+          "後"
+        ],
+        "labels": {
+          "hanViet": "hậu"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s052",
+        "meaningVi": "Phía sau",
+        "meaningEn": "Behind"
+      },
+      "search": {
+        "termNoAccent": "後ろ",
+        "readingNoAccent": "うしろ",
+        "meaningViNoAccent": "phia sau",
+        "hanVietNoAccent": "hau"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v052",
+        "sourceSenseId": "n5_l10_s052"
+      },
+      "legacy": {
+        "kanjiMeaning": "hậu"
+      }
+    },
+    {
+      "entryId": "n5_l10_s053",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 53,
+      "tags": [
+        "kanji-coverage"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "generated_coverage"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v053",
+        "term": "後",
+        "reading": "あと",
+        "kanji": [
+          "後"
+        ],
+        "labels": {
+          "hanViet": "hậu"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s053",
+        "meaningVi": "sau",
+        "meaningEn": "Back, After"
+      },
+      "search": {
+        "termNoAccent": "後",
+        "readingNoAccent": "あと",
+        "meaningViNoAccent": "sau",
+        "hanVietNoAccent": "hau"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v053",
+        "sourceSenseId": "n5_l10_s053"
+      },
+      "legacy": {
+        "kanjiMeaning": "hậu"
+      }
+    },
+    {
+      "entryId": "n5_l10_s054",
+      "lessonId": 10,
+      "level": "N5",
+      "order": 54,
+      "tags": [
+        "kanji-coverage-web"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "generated_coverage"
+      },
+      "lemma": {
+        "vocabId": "n5_l10_v054",
+        "term": "左右",
+        "reading": "さゆう",
+        "kanji": [
+          "左",
+          "右"
+        ],
+        "labels": {
+          "hanViet": "tả hữu"
+        }
+      },
+      "sense": {
+        "senseId": "n5_l10_s054",
+        "meaningVi": "trái phải, tả hữu",
+        "meaningEn": "left and right, right and left"
+      },
+      "search": {
+        "termNoAccent": "左右",
+        "readingNoAccent": "さゆう",
+        "meaningViNoAccent": "trai phai, ta huu",
+        "hanVietNoAccent": "ta huu"
+      },
+      "links": {
+        "sourceVocabId": "n5_l10_v054",
+        "sourceSenseId": "n5_l10_s054"
+      },
+      "legacy": {
+        "kanjiMeaning": "tả hữu"
+      }
+    }
+  ]
+}

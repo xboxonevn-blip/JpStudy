@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N4",
+  "lessonId": 50,
+  "entryCount": 1,
+  "entries": [
+    {
+      "kanjiId": "n4_l50_k001",
+      "lessonId": 50,
+      "level": "N4",
+      "character": "参",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Tham",
+        "meaningVi": "tham gia, đi",
+        "meaningViDisplay": "Tham (tham gia, đi)",
+        "meaningEn": "Participate, Visit"
+      },
+      "readings": {
+        "onyomi": [
+          "SAN"
+        ],
+        "kunyomi": [
+          "mai-rimasu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Những ngôi sao trên trời rủ nhau THAM GIA buổi lễ.",
+        "en": "Stars in the sky PARTICIPATING together."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "厶",
+          "大",
+          "彡"
+        ],
+        "componentNames": [
+          "Khư (riêng tư)",
+          "Đại (to lớn)",
+          "Sam (lông)"
+        ],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "tham",
+        "meaningViNoAccent": "tham gia, di",
+        "meaningEnNoAccent": "participate, visit"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l50_v049",
+          "sourceSenseId": "n4_l50_s049",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l50_v048",
+          "sourceSenseId": "n4_l50_s048",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l50_v001",
+          "sourceSenseId": "n4_l50_s001",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tham (tham gia, đi)",
+        "onyomi": "SAN",
+        "kunyomi": "mai-rimasu"
+      }
+    }
+  ]
+}

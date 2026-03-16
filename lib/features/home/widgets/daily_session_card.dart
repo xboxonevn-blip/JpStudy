@@ -16,6 +16,8 @@ import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/core/models/streak_milestone.dart';
 import 'package:jpstudy/features/home/widgets/home_surface.dart';
 
+import 'package:jpstudy/features/home/providers/coach_session_provider.dart';
+
 class DailySessionCard extends ConsumerStatefulWidget {
   const DailySessionCard({super.key, this.compact = false});
 
@@ -69,6 +71,8 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
     final nextKanjiReview = ref.watch(nextKanjiReviewProvider).valueOrNull;
     final nextGrammarReview = ref.watch(nextGrammarReviewProvider).valueOrNull;
 
+    final coachPlan = ref.watch(coachSessionPlanProvider).valueOrNull;
+
     final totalDue =
         (dashboard?.vocabDue ?? 0) +
         (dashboard?.grammarDue ?? 0) +
@@ -109,6 +113,7 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
       deepeningTask: deepeningTask,
       recoveryPack: recoveryPack,
     );
+    final isComplete = completionPercent >= 100;
     final nextReviewAt = _earliestDate([
       nextVocabReview,
       nextGrammarReview,
@@ -198,6 +203,10 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
                   child: FilledButton.icon(
                     key: const ValueKey('daily_session_cta'),
                     onPressed: () async {
+                      if (isComplete) {
+                        context.push('/today/session-summary');
+                        return;
+                      }
                       await _startDailySession(
                         context,
                         dashboard,
@@ -206,7 +215,11 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
                         progress: progress,
                       );
                     },
-                    icon: const Icon(Icons.play_arrow_rounded),
+                    icon: Icon(
+                      isComplete
+                          ? Icons.insights_rounded
+                          : Icons.play_arrow_rounded,
+                    ),
                     label: Text(ctaLabel),
                     style: FilledButton.styleFrom(
                       backgroundColor: Colors.white,
@@ -241,6 +254,7 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
               effectiveDone: effectiveDone,
               step1Done: step1Done,
               step2Done: step2Done,
+              coachPlan: coachPlan,
             ),
             if (completionPercent >= 100) ...[
               const SizedBox(height: 10),
@@ -757,6 +771,7 @@ class _CoachStepList extends StatelessWidget {
     required this.effectiveDone,
     required this.step1Done,
     required this.step2Done,
+    this.coachPlan,
   });
 
   final AppLanguage language;
@@ -767,40 +782,45 @@ class _CoachStepList extends StatelessWidget {
   final Set<int> effectiveDone;
   final bool step1Done;
   final bool step2Done;
+  final CoachSessionPlan? coachPlan;
 
   @override
   Widget build(BuildContext context) {
+    final plan = coachPlan;
     return Column(
       children: [
         _CoachStep(
           index: 1,
-          target: _step1Target,
+          target: plan?.step1.target ?? _step1Fallback,
+          detail: plan?.step1.detail,
           done: step1Done || effectiveDone.contains(1),
         ),
         const SizedBox(height: 6),
         _CoachStep(
           index: 2,
-          target: _step2Target,
+          target: plan?.step2.target ?? _step2Fallback,
+          detail: plan?.step2.detail,
           done: step2Done || effectiveDone.contains(2),
         ),
         const SizedBox(height: 6),
         _CoachStep(
           index: 3,
-          target: _step3Target,
+          target: plan?.step3.target ?? deepeningLabel,
+          detail: plan?.step3.detail,
           done: effectiveDone.contains(3),
         ),
       ],
     );
   }
 
-  String get _step1Target {
+  String get _step1Fallback {
     if (totalDue == 0) {
       switch (language) {
         case AppLanguage.en:
         case AppLanguage.ja:
           return 'All reviews cleared';
         case AppLanguage.vi:
-          return 'Đã ôn xong tất cả';
+          return '?? ?n xong t?t c?';
       }
     }
     switch (language) {
@@ -808,18 +828,18 @@ class _CoachStepList extends StatelessWidget {
       case AppLanguage.ja:
         return 'Review $totalDue due items';
       case AppLanguage.vi:
-        return 'Ôn $totalDue mục đến hạn';
+        return '?n $totalDue m?c ??n h?n';
     }
   }
 
-  String get _step2Target {
+  String get _step2Fallback {
     if (totalFix == 0) {
       switch (language) {
         case AppLanguage.en:
         case AppLanguage.ja:
           return 'No weak spots left';
         case AppLanguage.vi:
-          return 'Không còn điểm yếu';
+          return 'Kh?ng c?n ?i?m y?u';
       }
     }
     switch (language) {
@@ -827,15 +847,8 @@ class _CoachStepList extends StatelessWidget {
       case AppLanguage.ja:
         return 'Fix $totalFix weak spots';
       case AppLanguage.vi:
-        return 'Sửa $totalFix điểm yếu';
+        return 'S?a $totalFix ?i?m y?u';
     }
-  }
-
-  String get _step3Target {
-    if (deepeningCount == 0) {
-      return deepeningLabel;
-    }
-    return deepeningLabel;
   }
 }
 
@@ -844,54 +857,82 @@ class _CoachStep extends StatelessWidget {
     required this.index,
     required this.target,
     required this.done,
+    this.detail,
   });
 
   final int index;
   final String target;
+  final String? detail;
   final bool done;
 
   @override
   Widget build(BuildContext context) {
     return Semantics(
-      label: 'Step $index: $target${done ? ' (completed)' : ''}',
+      label: 'Step $index: $target${done ? ' ' 'completed' : ''}',
       child: Row(
+        crossAxisAlignment:
+            detail != null ? CrossAxisAlignment.start : CrossAxisAlignment.center,
         children: [
-          Container(
-            width: 22,
-            height: 22,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: done
-                  ? const Color(0xFF16A34A).withValues(alpha: 0.45)
-                  : Colors.white.withValues(alpha: 0.14),
-            ),
-            child: done
-                ? const Icon(
-                    Icons.check_rounded,
-                    size: 13,
-                    color: Color(0xFFDCFCE7),
-                  )
-                : Text(
-                    '$index',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w800,
+          Padding(
+            padding: EdgeInsets.only(top: detail != null ? 2 : 0),
+            child: Container(
+              width: 22,
+              height: 22,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: done
+                    ? const Color(0xFF16A34A).withValues(alpha: 0.45)
+                    : Colors.white.withValues(alpha: 0.14),
+              ),
+              child: done
+                  ? const Icon(
+                      Icons.check_rounded,
+                      size: 13,
+                      color: Color(0xFFDCFCE7),
+                    )
+                  : Text(
+                      '$index',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
-                  ),
+            ),
           ),
           const SizedBox(width: 10),
           Expanded(
-            child: Text(
-              target,
-              style: TextStyle(
-                color: done ? const Color(0xFFBBF7D0) : const Color(0xFFE2E8F0),
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
-                decoration: done ? TextDecoration.lineThrough : null,
-                decorationColor: const Color(0xFFBBF7D0),
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  target,
+                  style: TextStyle(
+                    color: done
+                        ? const Color(0xFFBBF7D0)
+                        : const Color(0xFFE2E8F0),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    decoration: done ? TextDecoration.lineThrough : null,
+                    decorationColor: const Color(0xFFBBF7D0),
+                  ),
+                ),
+                if (detail != null && !done)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 2),
+                    child: Text(
+                      detail!,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: Color(0xFF94A3B8),
+                        fontSize: 11,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+              ],
             ),
           ),
         ],

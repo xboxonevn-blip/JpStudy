@@ -1,0 +1,458 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N4",
+  "lessonId": 48,
+  "entryCount": 6,
+  "entries": [
+    {
+      "kanjiId": "n4_l48_k001",
+      "lessonId": 48,
+      "level": "N4",
+      "character": "配",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Phối",
+        "meaningVi": "phân phát, lo lắng",
+        "meaningViDisplay": "Phối (phân phát, lo lắng)",
+        "meaningEn": "Distribute"
+      },
+      "readings": {
+        "onyomi": [
+          "HAI"
+        ],
+        "kunyomi": [
+          "kuba-ru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Rót Rượu (Dậu 酉) chia cho người bên cạnh (Kỷ 己) - PHÂN PHÁT.",
+        "en": "Handing out sake (酉) to the person (己) next to you."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "酉",
+          "己"
+        ],
+        "componentNames": [
+          "Dậu (rượu)",
+          "Kỷ (mình)"
+        ],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "phoi",
+        "meaningViNoAccent": "phan phat, lo lang",
+        "meaningEnNoAccent": "distribute"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l48_v038",
+          "sourceSenseId": "n4_l48_s038",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l46_v035",
+          "sourceSenseId": "n4_l46_s035",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l48_v030",
+          "sourceSenseId": "n4_l48_s030",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Phối (phân phát, lo lắng)",
+        "onyomi": "HAI",
+        "kunyomi": "kuba-ru"
+      }
+    },
+    {
+      "kanjiId": "n4_l48_k002",
+      "lessonId": 48,
+      "level": "N4",
+      "character": "届",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Giới",
+        "meaningVi": "gửi đến, chạm tới",
+        "meaningViDisplay": "Giới (gửi đến, chạm tới)",
+        "meaningEn": "Deliver, Reach"
+      },
+      "readings": {
+        "onyomi": [
+          "KAI"
+        ],
+        "kunyomi": [
+          "todo-ku",
+          "todo-keru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Thi thể người (Xác 尸) đi (Sách 彳 - biến thể) đến đích - GỬI ĐẾN.",
+        "en": "A person arriving at the destination - DELIVER."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "尸",
+          "由"
+        ],
+        "componentNames": [
+          "Thi (thi thể, mái che)",
+          "Do (do, bởi)"
+        ],
+        "relatedKanji": [
+          "屋",
+          "油"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "gioi",
+        "meaningViNoAccent": "gui den, cham toi",
+        "meaningEnNoAccent": "deliver, reach"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l48_v034",
+          "sourceSenseId": "n4_l48_s034",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l48_v039",
+          "sourceSenseId": "n4_l48_s039",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l48_v002",
+          "sourceSenseId": "n4_l48_s002",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Giới (gửi đến, chạm tới)",
+        "onyomi": "KAI",
+        "kunyomi": "todo-ku, todo-keru"
+      }
+    },
+    {
+      "kanjiId": "n4_l48_k003",
+      "lessonId": 48,
+      "level": "N4",
+      "character": "渡",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Độ",
+        "meaningVi": "qua, trao",
+        "meaningViDisplay": "Độ (qua, trao)",
+        "meaningEn": "Cross, Hand over"
+      },
+      "readings": {
+        "onyomi": [
+          "TO"
+        ],
+        "kunyomi": [
+          "wata-ru",
+          "wata-su"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng Nước (Thủy 氵) và Tay (Hựu 又) để vượt qua - BĂNG QUA.",
+        "en": "Using water (氵) and hands (又) to CROSS."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "氵",
+          "度"
+        ],
+        "componentNames": [
+          "Thủy (nước)",
+          "Độ (mức độ)"
+        ],
+        "relatedKanji": [
+          "洗"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "do",
+        "meaningViNoAccent": "qua, trao",
+        "meaningEnNoAccent": "cross, hand over"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l48_v035",
+          "sourceSenseId": "n4_l48_s035",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l48_v040",
+          "sourceSenseId": "n4_l48_s040",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l46_v002",
+          "sourceSenseId": "n4_l46_s002",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Độ (qua, trao)",
+        "onyomi": "TO",
+        "kunyomi": "wata-ru, wata-su"
+      }
+    },
+    {
+      "kanjiId": "n4_l48_k004",
+      "lessonId": 48,
+      "level": "N4",
+      "character": "荷",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Hà",
+        "meaningVi": "hành lý",
+        "meaningViDisplay": "Hà (hành lý)",
+        "meaningEn": "Luggage, Load"
+      },
+      "readings": {
+        "onyomi": [
+          "KA"
+        ],
+        "kunyomi": [
+          "ni"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng Cỏ (Thảo 艹) để bọc cho vật người mang vác - HÀNH LÝ.",
+        "en": "Herbs (艹) carried by a person - LUGGAGE."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "艹",
+          "何"
+        ],
+        "componentNames": [
+          "Thảo (cỏ)",
+          "Hà (cái gì)"
+        ],
+        "relatedKanji": [
+          "何",
+          "落",
+          "薬"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "ha",
+        "meaningViNoAccent": "hanh ly",
+        "meaningEnNoAccent": "luggage, load"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l48_v036",
+          "sourceSenseId": "n4_l48_s036",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l07_v028",
+          "sourceSenseId": "n5_l07_s028",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Hà (hành lý)",
+        "onyomi": "KA",
+        "kunyomi": "ni"
+      }
+    },
+    {
+      "kanjiId": "n4_l48_k005",
+      "lessonId": 48,
+      "level": "N4",
+      "character": "宅",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Trạch",
+        "meaningVi": "nhà",
+        "meaningViDisplay": "Trạch (nhà)",
+        "meaningEn": "House, Home"
+      },
+      "readings": {
+        "onyomi": [
+          "TAKU"
+        ],
+        "kunyomi": []
+      },
+      "mnemonic": {
+        "vi": "Dưới mái nhà (Miên 宀) người ta sống nương tựa vào nhau - TRẠCH (nhà).",
+        "en": "A person resting under a roof (宀) - HOME."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "宀",
+          "乇"
+        ],
+        "componentNames": [
+          "Miên (mái nhà)",
+          "Thác (gửi)"
+        ],
+        "relatedKanji": [
+          "安",
+          "字",
+          "守"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "trach",
+        "meaningViNoAccent": "nha",
+        "meaningEnNoAccent": "house, home"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l48_v033",
+          "sourceSenseId": "n4_l48_s033",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l48_v032",
+          "sourceSenseId": "n4_l48_s032",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l46_v006",
+          "sourceSenseId": "n4_l46_s006",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Trạch (nhà)",
+        "onyomi": "TAKU",
+        "kunyomi": null
+      }
+    },
+    {
+      "kanjiId": "n4_l48_k006",
+      "lessonId": 48,
+      "level": "N4",
+      "character": "速",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Tốc",
+        "meaningVi": "nhanh",
+        "meaningViDisplay": "Tốc (nhanh)",
+        "meaningEn": "Fast"
+      },
+      "readings": {
+        "onyomi": [
+          "SOKU"
+        ],
+        "kunyomi": [
+          "haya-i"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Đi (Sước 辶) như một bó (Thúc 束) tên bắn - NHANH.",
+        "en": "Moving (辶) like a bundle (束) of arrows - FAST."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "束",
+          "辶"
+        ],
+        "componentNames": [
+          "Thúc (bó)",
+          "Sước (đi)"
+        ],
+        "relatedKanji": [
+          "束",
+          "送",
+          "通",
+          "運"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "toc",
+        "meaningViNoAccent": "nhanh",
+        "meaningEnNoAccent": "fast"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l48_v037",
+          "sourceSenseId": "n4_l48_s037",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l11_v029",
+          "sourceSenseId": "n5_l11_s029",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l12_v004",
+          "sourceSenseId": "n5_l12_s004",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tốc (nhanh)",
+        "onyomi": "SOKU",
+        "kunyomi": "haya-i"
+      }
+    }
+  ]
+}

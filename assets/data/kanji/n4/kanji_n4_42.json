@@ -23,7 +23,19 @@
         "sourceSenseId": "n4_l42_s001"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Bao",
+      "structure": "enclosure",
+      "components": [
+        "勹",
+        "巳"
+      ],
+      "componentNames": [
+        "Bao (bao bọc)",
+        "Tị (rắn)"
+      ]
+    }
   },
   {
     "lessonId": 42,
@@ -49,7 +61,23 @@
         "sourceSenseId": "n4_l42_s002"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Phí",
+      "structure": "left-right",
+      "components": [
+        "氵",
+        "弗"
+      ],
+      "componentNames": [
+        "Thủy (nước)",
+        "Phất (không)"
+      ],
+      "relatedKanji": [
+        "洗",
+        "消"
+      ]
+    }
   },
   {
     "lessonId": 42,
@@ -75,7 +103,23 @@
         "sourceSenseId": "n4_l42_s003"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Hỗn",
+      "structure": "left-right",
+      "components": [
+        "氵",
+        "昆"
+      ],
+      "componentNames": [
+        "Thủy (nước)",
+        "Côn (cùng nhau)"
+      ],
+      "relatedKanji": [
+        "洗",
+        "消"
+      ]
+    }
   },
   {
     "lessonId": 42,
@@ -101,7 +145,26 @@
         "sourceSenseId": "n4_l42_s049"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Hậu",
+      "structure": "mixed",
+      "components": [
+        "厂",
+        "日",
+        "子"
+      ],
+      "componentNames": [
+        "Hán (vách núi)",
+        "Nhật (ngày)",
+        "Tử (con)"
+      ],
+      "relatedKanji": [
+        "石",
+        "原",
+        "薄"
+      ]
+    }
   },
   {
     "lessonId": 42,
@@ -127,7 +190,26 @@
         "sourceSenseId": "n4_l42_s050"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Bạc",
+      "structure": "top-bottom",
+      "components": [
+        "艹",
+        "氵",
+        "甫"
+      ],
+      "componentNames": [
+        "Thảo (cỏ)",
+        "Thủy (nước)",
+        "Phủ (lớn)"
+      ],
+      "relatedKanji": [
+        "厚",
+        "落",
+        "薬"
+      ]
+    }
   },
   {
     "lessonId": 42,
@@ -153,7 +235,22 @@
         "sourceSenseId": "n4_l44_s020"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Bội",
+      "structure": "left-right",
+      "components": [
+        "亻",
+        "咅"
+      ],
+      "componentNames": [
+        "Nhân (người)",
+        "Phủ (phun ra)"
+      ],
+      "relatedKanji": [
+        "人"
+      ]
+    }
   },
   {
     "lessonId": 42,
@@ -175,6 +272,21 @@
         "sourceSenseId": "n4_l42_s081"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Lượng",
+      "structure": "top-bottom",
+      "components": [
+        "旦",
+        "里"
+      ],
+      "componentNames": [
+        "Đán (bình minh)",
+        "Lý (dặm)"
+      ],
+      "relatedKanji": [
+        "重"
+      ]
+    }
   }
 ]

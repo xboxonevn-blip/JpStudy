@@ -1,0 +1,540 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N5",
+  "lessonId": 17,
+  "entryCount": 7,
+  "entries": [
+    {
+      "kanjiId": "n5_l17_k001",
+      "lessonId": 17,
+      "level": "N5",
+      "character": "朝",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Triều",
+        "meaningVi": "buổi sáng",
+        "meaningViDisplay": "Triều (buổi sáng)",
+        "meaningEn": "Morning"
+      },
+      "readings": {
+        "onyomi": [
+          "CHOU"
+        ],
+        "kunyomi": [
+          "asa"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Thập Nhật Thập (10 ngày 10) và Nguyệt (mặt trăng) - mặt trăng lặn lúc sáng sớm.",
+        "en": "The sun rising between plants while the moon is still visible."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "十",
+          "日",
+          "十",
+          "月"
+        ],
+        "componentNames": [
+          "Thập (mười)",
+          "Nhật (ngày)",
+          "Thập (mười)",
+          "Nguyệt (tháng)"
+        ],
+        "relatedKanji": [
+          "明",
+          "日",
+          "月"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "trieu",
+        "meaningViNoAccent": "buoi sang",
+        "meaningEnNoAccent": "morning"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l04_v020",
+          "sourceSenseId": "n5_l04_s020",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l06_v013",
+          "sourceSenseId": "n5_l06_s013",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l17_v042",
+          "sourceSenseId": "n5_l17_s042",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Triều (buổi sáng)",
+        "onyomi": "CHOU",
+        "kunyomi": "asa"
+      }
+    },
+    {
+      "kanjiId": "n5_l17_k002",
+      "lessonId": 17,
+      "level": "N5",
+      "character": "昼",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Trú",
+        "meaningVi": "buổi trưa",
+        "meaningViDisplay": "Trú (buổi trưa)",
+        "meaningEn": "Noon, Daytime"
+      },
+      "readings": {
+        "onyomi": [
+          "CHU"
+        ],
+        "kunyomi": [
+          "hiru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dưới mái nhà (Xác 尸) mặt trời (Nhật 日) lên cao nhất lúc TRƯA.",
+        "en": "The sun (日) high up at NOON."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "尸",
+          "旦"
+        ],
+        "componentNames": [
+          "Thi (thi thể)",
+          "Đán (bình minh)"
+        ],
+        "relatedKanji": [
+          "日",
+          "朝",
+          "夜"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "tru",
+        "meaningViNoAccent": "buoi trua",
+        "meaningEnNoAccent": "noon, daytime"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l04_v021",
+          "sourceSenseId": "n5_l04_s021",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l06_v014",
+          "sourceSenseId": "n5_l06_s014",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l17_v043",
+          "sourceSenseId": "n5_l17_s043",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Trú (buổi trưa)",
+        "onyomi": "CHU",
+        "kunyomi": "hiru"
+      }
+    },
+    {
+      "kanjiId": "n5_l17_k003",
+      "lessonId": 17,
+      "level": "N5",
+      "character": "夜",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Dạ",
+        "meaningVi": "đêm",
+        "meaningViDisplay": "Dạ (đêm)",
+        "meaningEn": "Night"
+      },
+      "readings": {
+        "onyomi": [
+          "YA"
+        ],
+        "kunyomi": [
+          "yoru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Mái nhà dưới vầng trăng - buổi ĐÊM.",
+        "en": "People resting in the evening."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "亠",
+          "亻",
+          "夕"
+        ],
+        "componentNames": [
+          "Đầu (nắp đậy)",
+          "Nhân (người)",
+          "Tịch (chiều tối)"
+        ],
+        "relatedKanji": [
+          "夕",
+          "朝",
+          "昼"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "da",
+        "meaningViNoAccent": "dem",
+        "meaningEnNoAccent": "night"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l04_v023",
+          "sourceSenseId": "n5_l04_s023",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l32_v035",
+          "sourceSenseId": "n4_l32_s035",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l35_v040",
+          "sourceSenseId": "n4_l35_s040",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Dạ (đêm)",
+        "onyomi": "YA",
+        "kunyomi": "yoru"
+      }
+    },
+    {
+      "kanjiId": "n5_l17_k004",
+      "lessonId": 17,
+      "level": "N5",
+      "character": "夕",
+      "strokeCount": 3,
+      "labels": {
+        "hanViet": "Tịch",
+        "meaningVi": "chiều tối",
+        "meaningViDisplay": "Tịch (chiều tối)",
+        "meaningEn": "Evening"
+      },
+      "readings": {
+        "onyomi": [
+          "SEKI"
+        ],
+        "kunyomi": [
+          "yuu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Mặt trăng (Nguyệt 月) bị thiếu một nét - trăng mới lên lúc CHIỀU TỐI.",
+        "en": "The moon just appearing as the sun sets."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "名",
+          "外",
+          "多",
+          "夜",
+          "夢"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "tich",
+        "meaningViNoAccent": "chieu toi",
+        "meaningEnNoAccent": "evening"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l17_v044",
+          "sourceSenseId": "n5_l17_s044",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l32_v036",
+          "sourceSenseId": "n4_l32_s036",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tịch (chiều tối)",
+        "onyomi": "SEKI",
+        "kunyomi": "yuu"
+      }
+    },
+    {
+      "kanjiId": "n5_l17_k005",
+      "lessonId": 17,
+      "level": "N5",
+      "character": "晩",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Vãn",
+        "meaningVi": "tối",
+        "meaningViDisplay": "Vãn (tối)",
+        "meaningEn": "Night, Evening"
+      },
+      "readings": {
+        "onyomi": [
+          "BAN"
+        ],
+        "kunyomi": []
+      },
+      "mnemonic": {
+        "vi": "Mặt trời (Nhật 日) đã lặn, đến lúc nghỉ ngơi buổi TỐI.",
+        "en": "The sun has set for the EVENING."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "日",
+          "免"
+        ],
+        "componentNames": [
+          "Nhật (mặt trời)",
+          "Miễn (miễn)"
+        ],
+        "relatedKanji": [
+          "日",
+          "夕"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "van",
+        "meaningViNoAccent": "toi",
+        "meaningEnNoAccent": "night, evening"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l04_v022",
+          "sourceSenseId": "n5_l04_s022",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l06_v015",
+          "sourceSenseId": "n5_l06_s015",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l04_v030",
+          "sourceSenseId": "n5_l04_s030",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Vãn (tối)",
+        "onyomi": "BAN",
+        "kunyomi": null
+      }
+    },
+    {
+      "kanjiId": "n5_l17_k006",
+      "lessonId": 17,
+      "level": "N5",
+      "character": "始",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Thủy",
+        "meaningVi": "bắt đầu",
+        "meaningViDisplay": "Thủy (bắt đầu)",
+        "meaningEn": "Begin, Start"
+      },
+      "readings": {
+        "onyomi": [
+          "SHI"
+        ],
+        "kunyomi": [
+          "haji-meru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Phụ nữ (Nữ 女) dựng Đài (Thai 台) để BẮT ĐẦU buổi lễ.",
+        "en": "A woman (女) on a platform (台) to START a performance."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "女",
+          "台"
+        ],
+        "componentNames": [
+          "Nữ (phụ nữ)",
+          "Thai (đài)"
+        ],
+        "relatedKanji": [
+          "女",
+          "終"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "thuy",
+        "meaningViNoAccent": "bat dau",
+        "meaningEnNoAccent": "begin, start"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l17_v045",
+          "sourceSenseId": "n5_l17_s045",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l17_v047",
+          "sourceSenseId": "n5_l17_s047",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l16_v012",
+          "sourceSenseId": "n5_l16_s012",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Thủy (bắt đầu)",
+        "onyomi": "SHI",
+        "kunyomi": "haji-meru"
+      }
+    },
+    {
+      "kanjiId": "n5_l17_k007",
+      "lessonId": 17,
+      "level": "N5",
+      "character": "終",
+      "strokeCount": 11,
+      "labels": {
+        "hanViet": "Chung",
+        "meaningVi": "kết thúc",
+        "meaningViDisplay": "Chung (kết thúc)",
+        "meaningEn": "End, Finish"
+      },
+      "readings": {
+        "onyomi": [
+          "SHUU"
+        ],
+        "kunyomi": [
+          "o-waru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Sợi tơ (Mịch 糸) đã được quấn vào mùa Đông (Đông 冬) - KẾT THÚC công việc.",
+        "en": "Silk threads (糸) finished in winter (冬)."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "糸",
+          "冬"
+        ],
+        "componentNames": [
+          "Mịch (sợi tơ)",
+          "Đông (mùa đông)"
+        ],
+        "relatedKanji": [
+          "始",
+          "糸",
+          "紙",
+          "絵"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "chung",
+        "meaningViNoAccent": "ket thuc",
+        "meaningEnNoAccent": "end, finish"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l17_v046",
+          "sourceSenseId": "n5_l17_s046",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l17_v047",
+          "sourceSenseId": "n5_l17_s047",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l17_v048",
+          "sourceSenseId": "n5_l17_s048",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Chung (kết thúc)",
+        "onyomi": "SHUU",
+        "kunyomi": "o-waru"
+      }
+    }
+  ]
+}

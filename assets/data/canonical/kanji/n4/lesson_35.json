@@ -1,0 +1,301 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N4",
+  "lessonId": 35,
+  "entryCount": 4,
+  "entries": [
+    {
+      "kanjiId": "n4_l35_k001",
+      "lessonId": 35,
+      "level": "N4",
+      "character": "文",
+      "strokeCount": 4,
+      "labels": {
+        "hanViet": "Văn",
+        "meaningVi": "văn chương",
+        "meaningViDisplay": "Văn (văn chương)",
+        "meaningEn": "Sentence, Literature"
+      },
+      "readings": {
+        "onyomi": [
+          "BUN",
+          "MON"
+        ],
+        "kunyomi": []
+      },
+      "mnemonic": {
+        "vi": "Một người đang đứng dang chân để viết VĂN.",
+        "en": "A person displaying their thoughts - LITERATURE."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "van",
+        "meaningViNoAccent": "van chuong",
+        "meaningEnNoAccent": "sentence, literature"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l35_v051",
+          "sourceSenseId": "n4_l35_s051",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l36_v057",
+          "sourceSenseId": "n4_l36_s057",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l31_v008",
+          "sourceSenseId": "n4_l31_s008",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Văn (văn chương)",
+        "onyomi": "BUN, MON",
+        "kunyomi": null
+      }
+    },
+    {
+      "kanjiId": "n4_l35_k002",
+      "lessonId": 35,
+      "level": "N4",
+      "character": "法",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Pháp",
+        "meaningVi": "phương pháp",
+        "meaningViDisplay": "Pháp (phương pháp)",
+        "meaningEn": "Law, Method"
+      },
+      "readings": {
+        "onyomi": [
+          "HOU"
+        ],
+        "kunyomi": []
+      },
+      "mnemonic": {
+        "vi": "Lẽ phải (Khứ 去) như dòng Nước (Thủy 氵) chảy - PHÁP luật.",
+        "en": "The flow (氵) of what is right (去) - LAW."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "氵",
+          "去"
+        ],
+        "componentNames": [
+          "Thủy (nước)",
+          "Khứ (đi)"
+        ],
+        "relatedKanji": [
+          "洗",
+          "消"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "phap",
+        "meaningViNoAccent": "phuong phap",
+        "meaningEnNoAccent": "law, method"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l35_v052",
+          "sourceSenseId": "n4_l35_s052",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l35_v024",
+          "sourceSenseId": "n4_l35_s024",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l41_v014",
+          "sourceSenseId": "n4_l41_s014",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Pháp (phương pháp)",
+        "onyomi": "HOU",
+        "kunyomi": null
+      }
+    },
+    {
+      "kanjiId": "n4_l35_k003",
+      "lessonId": 35,
+      "level": "N4",
+      "character": "意",
+      "strokeCount": 13,
+      "labels": {
+        "hanViet": "Ý",
+        "meaningVi": "ý nghĩa",
+        "meaningViDisplay": "Ý (ý nghĩa)",
+        "meaningEn": "Mind, Meaning"
+      },
+      "readings": {
+        "onyomi": [
+          "I"
+        ],
+        "kunyomi": []
+      },
+      "mnemonic": {
+        "vi": "Âm thanh (Âm 音) phát ra từ trái tim (Tâm 心) là Ý nghĩa.",
+        "en": "Sounds (音) from the heart (心) carry MEANING."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "音",
+          "心"
+        ],
+        "componentNames": [
+          "Âm (âm thanh)",
+          "Tâm (trái tim)"
+        ],
+        "relatedKanji": [
+          "音",
+          "心",
+          "悪"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "y",
+        "meaningViNoAccent": "y nghia",
+        "meaningEnNoAccent": "mind, meaning"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l35_v050",
+          "sourceSenseId": "n4_l35_s050",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l35_v049",
+          "sourceSenseId": "n4_l35_s049",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l36_v056",
+          "sourceSenseId": "n4_l36_s056",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Ý (ý nghĩa)",
+        "onyomi": "I",
+        "kunyomi": null
+      }
+    },
+    {
+      "kanjiId": "n4_l35_k004",
+      "lessonId": 35,
+      "level": "N4",
+      "character": "味",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Vị",
+        "meaningVi": "hương vị",
+        "meaningViDisplay": "Vị (hương vị)",
+        "meaningEn": "Taste"
+      },
+      "readings": {
+        "onyomi": [
+          "MI"
+        ],
+        "kunyomi": [
+          "aji"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng Miệng (Khẩu 口) để nếm vật chưa (Vị 未) chín - HƯƠNG VỊ.",
+        "en": "Using the mouth (口) for something not yet (未) ripe - TASTE."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "口",
+          "未"
+        ],
+        "componentNames": [
+          "Khẩu (miệng)",
+          "Vị (chưa)"
+        ],
+        "relatedKanji": [
+          "口",
+          "妹"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "vi",
+        "meaningViNoAccent": "huong vi",
+        "meaningEnNoAccent": "taste"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l28_v019",
+          "sourceSenseId": "n4_l28_s019",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l34_v046",
+          "sourceSenseId": "n4_l34_s046",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l47_v006",
+          "sourceSenseId": "n4_l47_s006",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Vị (hương vị)",
+        "onyomi": "MI",
+        "kunyomi": "aji"
+      }
+    }
+  ]
+}

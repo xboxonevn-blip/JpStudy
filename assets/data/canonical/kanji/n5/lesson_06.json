@@ -1,0 +1,627 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N5",
+  "lessonId": 6,
+  "entryCount": 8,
+  "entries": [
+    {
+      "kanjiId": "n5_l06_k001",
+      "lessonId": 6,
+      "level": "N5",
+      "character": "食",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Thực",
+        "meaningVi": "ăn",
+        "meaningViDisplay": "Thực (ăn)",
+        "meaningEn": "Eat, Food"
+      },
+      "readings": {
+        "onyomi": [
+          "SHOKU"
+        ],
+        "kunyomi": [
+          "ta-bemasu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Một người (Nhân 亻) đang ăn thức ăn dưới mái nhà lương thực.",
+        "en": "A person (亻) eating food under a roof."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "亼",
+          "良"
+        ],
+        "componentNames": [
+          "Tập (nắp đậy)",
+          "Lương biến thể (tốt)"
+        ],
+        "relatedKanji": [
+          "飲",
+          "飼",
+          "飾"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "thuc",
+        "meaningViNoAccent": "an",
+        "meaningEnNoAccent": "eat, food"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l06_v061",
+          "sourceSenseId": "n5_l06_s061",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l08_v038",
+          "sourceSenseId": "n5_l08_s038",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l06_v001",
+          "sourceSenseId": "n5_l06_s001",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Thực (ăn)",
+        "onyomi": "SHOKU",
+        "kunyomi": "ta-bemasu"
+      }
+    },
+    {
+      "kanjiId": "n5_l06_k002",
+      "lessonId": 6,
+      "level": "N5",
+      "character": "飲",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Ẩm",
+        "meaningVi": "uống",
+        "meaningViDisplay": "Ẩm (uống)",
+        "meaningEn": "Drink"
+      },
+      "readings": {
+        "onyomi": [
+          "IN"
+        ],
+        "kunyomi": [
+          "no-mimasu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Một người đang há miệng (Khiếm 欠) để Uống nước.",
+        "en": "A person opening their mouth (欠) to drink."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "食",
+          "欠"
+        ],
+        "componentNames": [
+          "Thực (ăn)",
+          "Khiếm (há miệng)"
+        ],
+        "relatedKanji": [
+          "食",
+          "歌"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "am",
+        "meaningViNoAccent": "uong",
+        "meaningEnNoAccent": "drink"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l06_v062",
+          "sourceSenseId": "n5_l06_s062",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l09_v008",
+          "sourceSenseId": "n5_l09_s008",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l06_v002",
+          "sourceSenseId": "n5_l06_s002",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Ẩm (uống)",
+        "onyomi": "IN",
+        "kunyomi": "no-mimasu"
+      }
+    },
+    {
+      "kanjiId": "n5_l06_k003",
+      "lessonId": 6,
+      "level": "N5",
+      "character": "買",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Mãi",
+        "meaningVi": "mua",
+        "meaningViDisplay": "Mãi (mua)",
+        "meaningEn": "Buy"
+      },
+      "readings": {
+        "onyomi": [
+          "BAI"
+        ],
+        "kunyomi": [
+          "ka-imasu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dưới cái lưới (网) là tiền (Bối 貝). Dùng tiền để chuộc đồ ra (Mua).",
+        "en": "Using money (貝) under a net (网) to buy things."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "罒",
+          "貝"
+        ],
+        "componentNames": [
+          "Võng (lưới)",
+          "Bối (vỏ sò, tiền)"
+        ],
+        "relatedKanji": [
+          "売",
+          "貸",
+          "読"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "mai",
+        "meaningViNoAccent": "mua",
+        "meaningEnNoAccent": "buy"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l06_v060",
+          "sourceSenseId": "n5_l06_s060",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l06_v054",
+          "sourceSenseId": "n5_l06_s054",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l06_v008",
+          "sourceSenseId": "n5_l06_s008",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Mãi (mua)",
+        "onyomi": "BAI",
+        "kunyomi": "ka-imasu"
+      }
+    },
+    {
+      "kanjiId": "n5_l06_k004",
+      "lessonId": 6,
+      "level": "N5",
+      "character": "見",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": "Kiến",
+        "meaningVi": "nhìn",
+        "meaningViDisplay": "Kiến (nhìn)",
+        "meaningEn": "See, Look"
+      },
+      "readings": {
+        "onyomi": [
+          "KEN"
+        ],
+        "kunyomi": [
+          "mi-masu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Mắt (目) có chân (儿) để đi xem.",
+        "en": "An eye (目) on legs (儿) going to see."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "目",
+          "儿"
+        ],
+        "componentNames": [
+          "Mục (mắt)",
+          "Nhi (chân người)"
+        ],
+        "relatedKanji": [
+          "目",
+          "親"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "kien",
+        "meaningViNoAccent": "nhin",
+        "meaningEnNoAccent": "see, look"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l06_v058",
+          "sourceSenseId": "n5_l06_s058",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l06_v040",
+          "sourceSenseId": "n5_l06_s040",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l06_v004",
+          "sourceSenseId": "n5_l06_s004",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Kiến (nhìn)",
+        "onyomi": "KEN",
+        "kunyomi": "mi-masu"
+      }
+    },
+    {
+      "kanjiId": "n5_l06_k005",
+      "lessonId": 6,
+      "level": "N5",
+      "character": "聞",
+      "strokeCount": 14,
+      "labels": {
+        "hanViet": "Văn",
+        "meaningVi": "nghe",
+        "meaningViDisplay": "Văn (nghe)",
+        "meaningEn": "Hear, Listen"
+      },
+      "readings": {
+        "onyomi": [
+          "BUN",
+          "MON"
+        ],
+        "kunyomi": [
+          "ki-kimasu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Đưa tai (Nhĩ 耳) vào khe Cửa (門) để nghe lén.",
+        "en": "Putting an ear (耳) between the gates (門) to listen."
+      },
+      "decomposition": {
+        "structure": "enclosure",
+        "components": [
+          "門",
+          "耳"
+        ],
+        "componentNames": [
+          "Môn (cửa)",
+          "Nhĩ (tai)"
+        ],
+        "relatedKanji": [
+          "門",
+          "耳",
+          "間",
+          "問",
+          "開",
+          "閉"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "van",
+        "meaningViNoAccent": "nghe",
+        "meaningEnNoAccent": "hear, listen"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l06_v057",
+          "sourceSenseId": "n5_l06_s057",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l02_v010",
+          "sourceSenseId": "n5_l02_s010",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l06_v005",
+          "sourceSenseId": "n5_l06_s005",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Văn (nghe)",
+        "onyomi": "BUN, MON",
+        "kunyomi": "ki-kimasu"
+      }
+    },
+    {
+      "kanjiId": "n5_l06_k006",
+      "lessonId": 6,
+      "level": "N5",
+      "character": "読",
+      "strokeCount": 14,
+      "labels": {
+        "hanViet": "Độc",
+        "meaningVi": "đọc",
+        "meaningViDisplay": "Độc (đọc)",
+        "meaningEn": "Read"
+      },
+      "readings": {
+        "onyomi": [
+          "DOKU"
+        ],
+        "kunyomi": [
+          "yo-mimasu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng Lời nói (言) để trao đổi (Mại 賣) kiến thức từ việc Đọc.",
+        "en": "Words (言) used to sell/exchange (賣) what you read."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "言",
+          "売"
+        ],
+        "componentNames": [
+          "Ngôn (lời nói)",
+          "Mại (bán)"
+        ],
+        "relatedKanji": [
+          "言",
+          "話",
+          "売"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "doc",
+        "meaningViNoAccent": "doc",
+        "meaningEnNoAccent": "read"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l06_v059",
+          "sourceSenseId": "n5_l06_s059",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l06_v055",
+          "sourceSenseId": "n5_l06_s055",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l06_v006",
+          "sourceSenseId": "n5_l06_s006",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Độc (đọc)",
+        "onyomi": "DOKU",
+        "kunyomi": "yo-mimasu"
+      }
+    },
+    {
+      "kanjiId": "n5_l06_k007",
+      "lessonId": 6,
+      "level": "N5",
+      "character": "書",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Thư",
+        "meaningVi": "viết",
+        "meaningViDisplay": "Thư (viết)",
+        "meaningEn": "Write"
+      },
+      "readings": {
+        "onyomi": [
+          "SHO"
+        ],
+        "kunyomi": [
+          "ka-kimasu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Tay cầm cây bút (聿) để Viết.",
+        "en": "A hand holding a brush (聿) to write."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "聿",
+          "日"
+        ],
+        "componentNames": [
+          "Duật (cây bút)",
+          "Nhật (ngày)"
+        ],
+        "relatedKanji": [
+          "日",
+          "事"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "thu",
+        "meaningViNoAccent": "viet",
+        "meaningEnNoAccent": "write"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l06_v056",
+          "sourceSenseId": "n5_l06_s056",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l06_v055",
+          "sourceSenseId": "n5_l06_s055",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l06_v007",
+          "sourceSenseId": "n5_l06_s007",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Thư (viết)",
+        "onyomi": "SHO",
+        "kunyomi": "ka-kimasu"
+      }
+    },
+    {
+      "kanjiId": "n5_l06_k008",
+      "lessonId": 6,
+      "level": "N5",
+      "character": "話",
+      "strokeCount": 13,
+      "labels": {
+        "hanViet": "Thoại",
+        "meaningVi": "nói chuyện",
+        "meaningViDisplay": "Thoại (nói chuyện)",
+        "meaningEn": "Speak, Talk"
+      },
+      "readings": {
+        "onyomi": [
+          "WA"
+        ],
+        "kunyomi": [
+          "hana-shimasu",
+          "hanashi"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Lời nói (言) phát ra từ cái Lưỡi (Thiệt 舌).",
+        "en": "Words (言) coming from a tongue (舌)."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "言",
+          "舌"
+        ],
+        "componentNames": [
+          "Ngôn (lời nói)",
+          "Thiệt (lưỡi)"
+        ],
+        "relatedKanji": [
+          "言",
+          "読"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "thoai",
+        "meaningViNoAccent": "noi chuyen",
+        "meaningEnNoAccent": "speak, talk"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l21_v035",
+          "sourceSenseId": "n5_l21_s035",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l04_v057",
+          "sourceSenseId": "n5_l04_s057",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l03_v024",
+          "sourceSenseId": "n5_l03_s024",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Thoại (nói chuyện)",
+        "onyomi": "WA",
+        "kunyomi": "hana-shimasu, hanashi"
+      }
+    }
+  ]
+}

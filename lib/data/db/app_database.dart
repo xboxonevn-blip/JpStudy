@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import '../daos/learn_dao.dart';
 import '../daos/test_dao.dart';
 import '../daos/srs_dao.dart';
@@ -9,9 +7,7 @@ import '../daos/mistake_dao.dart';
 import '../daos/kanji_srs_dao.dart';
 
 import 'package:drift/drift.dart';
-import 'package:drift/native.dart';
-import 'package:path/path.dart' as p;
-import 'package:path_provider/path_provider.dart';
+import 'package:drift_flutter/drift_flutter.dart';
 
 import 'settings_tables.dart';
 import 'study_tables.dart';
@@ -258,38 +254,27 @@ class AppDatabase extends _$AppDatabase {
         );
       }
     },
+    beforeOpen: (details) async {
+      await _seedLessons();
+    },
   );
 
   Future<void> _seedLessons() async {
-    // Seed lessons 1-25 (N5)
-    for (var i = 1; i <= 25; i++) {
-      await into(userLesson).insert(
-        UserLessonCompanion.insert(
-          id: Value(i),
-          level: 'N5',
-          title: 'Lesson $i',
-          description: const Value(''),
-          isPublic: const Value(true),
-          isCustomTitle: const Value(false),
-          updatedAt: Value(DateTime.now()),
-        ),
-        mode: InsertMode.insertOrIgnore,
-      );
-    }
-    // Seed lessons 26-50 (N4)
-    for (var i = 26; i <= 50; i++) {
-      await into(userLesson).insert(
-        UserLessonCompanion.insert(
-          id: Value(i),
-          level: 'N4',
-          title: 'Lesson $i',
-          description: const Value(''),
-          isPublic: const Value(true),
-          isCustomTitle: const Value(false),
-          updatedAt: Value(DateTime.now()),
-        ),
-        mode: InsertMode.insertOrIgnore,
-      );
+    for (final spec in _lessonSeedSpecs) {
+      for (var i = spec.startLesson; i <= spec.endLesson; i++) {
+        await into(userLesson).insert(
+          UserLessonCompanion.insert(
+            id: Value(i),
+            level: spec.level,
+            title: 'Lesson $i',
+            description: const Value(''),
+            isPublic: const Value(true),
+            isCustomTitle: const Value(false),
+            updatedAt: Value(DateTime.now()),
+          ),
+          mode: InsertMode.insertOrIgnore,
+        );
+      }
     }
   }
 
@@ -323,10 +308,26 @@ class AppDatabase extends _$AppDatabase {
   }
 }
 
-LazyDatabase _openConnection() {
-  return LazyDatabase(() async {
-    final dbFolder = await getApplicationDocumentsDirectory();
-    final file = File(p.join(dbFolder.path, 'jpstudy.sqlite'));
-    return NativeDatabase(file);
-  });
+class _LessonSeedSpec {
+  const _LessonSeedSpec(this.level, this.startLesson, this.endLesson);
+
+  final String level;
+  final int startLesson;
+  final int endLesson;
+}
+
+const _lessonSeedSpecs = <_LessonSeedSpec>[
+  _LessonSeedSpec('N5', 1, 25),
+  _LessonSeedSpec('N4', 26, 50),
+  _LessonSeedSpec('N3', 51, 75),
+];
+
+QueryExecutor _openConnection() {
+  return driftDatabase(
+    name: 'jpstudy',
+    web: DriftWebOptions(
+      sqlite3Wasm: Uri.parse('sqlite3.wasm'),
+      driftWorker: Uri.parse('drift_worker.js'),
+    ),
+  );
 }

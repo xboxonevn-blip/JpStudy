@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N5",
+  "lessonId": 25,
+  "entryCount": 1,
+  "entries": [
+    {
+      "kanjiId": "n5_l25_k001",
+      "lessonId": 25,
+      "level": "N5",
+      "character": "考",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Khảo",
+        "meaningVi": "suy nghĩ",
+        "meaningViDisplay": "Khảo (suy nghĩ)",
+        "meaningEn": "Think, Consider"
+      },
+      "readings": {
+        "onyomi": [
+          "KOU"
+        ],
+        "kunyomi": [
+          "kan-gaemasu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Người già (Lão 耂) đang chống gậy (Dư 丂) để SUY NGHĨ.",
+        "en": "An elder (耂) leaning on a cane to THINK."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "耂",
+          "丂"
+        ],
+        "componentNames": [
+          "Lão (già)",
+          "Khảo (uốn cong)"
+        ],
+        "relatedKanji": [
+          "者"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "khao",
+        "meaningViNoAccent": "suy nghi",
+        "meaningEnNoAccent": "think, consider"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l25_v031",
+          "sourceSenseId": "n5_l25_s031",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l25_v030",
+          "sourceSenseId": "n5_l25_s030",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l25_v001",
+          "sourceSenseId": "n5_l25_s001",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Khảo (suy nghĩ)",
+        "onyomi": "KOU",
+        "kunyomi": "kan-gaemasu"
+      }
+    }
+  ]
+}

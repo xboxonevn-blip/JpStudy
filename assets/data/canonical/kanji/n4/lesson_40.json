@@ -1,0 +1,381 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N4",
+  "lessonId": 40,
+  "entryCount": 5,
+  "entries": [
+    {
+      "kanjiId": "n4_l40_k001",
+      "lessonId": 40,
+      "level": "N4",
+      "character": "数",
+      "strokeCount": 13,
+      "labels": {
+        "hanViet": "Số",
+        "meaningVi": "đếm, số lượng",
+        "meaningViDisplay": "Số (đếm, số lượng)",
+        "meaningEn": "Number, Count"
+      },
+      "readings": {
+        "onyomi": [
+          "SUU"
+        ],
+        "kunyomi": [
+          "kazu",
+          "kazo-eru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Người phụ nữ (Nữ 女) dùng tay (Phọc 攵) gõ lúa (Mễ 米) để ĐẾM.",
+        "en": "Counting rice (米) with a tool."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "米",
+          "女",
+          "攵"
+        ],
+        "componentNames": [
+          "Mễ (gạo)",
+          "Nữ biến thể (phụ nữ)",
+          "Phọc (đánh)"
+        ],
+        "relatedKanji": [
+          "教"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "so",
+        "meaningViNoAccent": "dem, so luong",
+        "meaningEnNoAccent": "number, count"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l40_v064",
+          "sourceSenseId": "n4_l40_s064",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l40_v062",
+          "sourceSenseId": "n4_l40_s062",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l40_v001",
+          "sourceSenseId": "n4_l40_s001",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Số (đếm, số lượng)",
+        "onyomi": "SUU",
+        "kunyomi": "kazu, kazo-eru"
+      }
+    },
+    {
+      "kanjiId": "n4_l40_k002",
+      "lessonId": 40,
+      "level": "N4",
+      "character": "測",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Trắc",
+        "meaningVi": "đo đạc",
+        "meaningViDisplay": "Trắc (đo đạc)",
+        "meaningEn": "Measure"
+      },
+      "readings": {
+        "onyomi": [
+          "SOKU"
+        ],
+        "kunyomi": [
+          "haka-ru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng Nước (Thủy 氵) và vỏ bối (Tắc 則) để ĐO ĐẠC.",
+        "en": "Water (氵) and rules (則) used to MEASURE."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "氵",
+          "則"
+        ],
+        "componentNames": [
+          "Thủy (nước)",
+          "Tắc (quy tắc)"
+        ],
+        "relatedKanji": [
+          "洗"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "trac",
+        "meaningViNoAccent": "do dac",
+        "meaningEnNoAccent": "measure"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l40_v065",
+          "sourceSenseId": "n4_l40_s065",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l40_v068",
+          "sourceSenseId": "n4_l40_s068",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l40_v002",
+          "sourceSenseId": "n4_l40_s002",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Trắc (đo đạc)",
+        "onyomi": "SOKU",
+        "kunyomi": "haka-ru"
+      }
+    },
+    {
+      "kanjiId": "n4_l40_k003",
+      "lessonId": 40,
+      "level": "N4",
+      "character": "式",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Thức",
+        "meaningVi": "hình thức, lễ",
+        "meaningViDisplay": "Thức (hình thức, lễ)",
+        "meaningEn": "Ceremony, Style"
+      },
+      "readings": {
+        "onyomi": [
+          "SHIKI"
+        ],
+        "kunyomi": []
+      },
+      "mnemonic": {
+        "vi": "Dùng dụng cụ công (Công 工) để bắn tên (Phát 弋) trong LỄ nghi.",
+        "en": "A ritual involving a craft (工)."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "弋",
+          "工"
+        ],
+        "componentNames": [
+          "Dặc (bắn tên)",
+          "Công (dụng cụ)"
+        ],
+        "relatedKanji": [
+          "代"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "thuc",
+        "meaningViNoAccent": "hinh thuc, le",
+        "meaningEnNoAccent": "ceremony, style"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l31_v013",
+          "sourceSenseId": "n4_l31_s013",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l40_v063",
+          "sourceSenseId": "n4_l40_s063",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l39_v048",
+          "sourceSenseId": "n4_l39_s048",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Thức (hình thức, lễ)",
+        "onyomi": "SHIKI",
+        "kunyomi": null
+      }
+    },
+    {
+      "kanjiId": "n4_l40_k004",
+      "lessonId": 40,
+      "level": "N4",
+      "character": "確",
+      "strokeCount": 15,
+      "labels": {
+        "hanViet": "Xác",
+        "meaningVi": "chính xác",
+        "meaningViDisplay": "Xác (chính xác)",
+        "meaningEn": "Certain"
+      },
+      "readings": {
+        "onyomi": [
+          "KAKU"
+        ],
+        "kunyomi": [
+          "tashi-kamesu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng Đá (Thạch 石) làm bệ để chim bay (Hạc 隺) là điều CHÍNH XÁC.",
+        "en": "Finding the bird on the rock - SURE/CERTAIN."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "石",
+          "隺"
+        ],
+        "componentNames": [
+          "Thạch (đá)",
+          "Hạc (chim hạc)"
+        ],
+        "relatedKanji": [
+          "石"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "xac",
+        "meaningViNoAccent": "chinh xac",
+        "meaningEnNoAccent": "certain"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l40_v066",
+          "sourceSenseId": "n4_l40_s066",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l16_v049",
+          "sourceSenseId": "n5_l16_s049",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l40_v003",
+          "sourceSenseId": "n4_l40_s003",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Xác (chính xác)",
+        "onyomi": "KAKU",
+        "kunyomi": "tashi-kamesu"
+      }
+    },
+    {
+      "kanjiId": "n4_l40_k005",
+      "lessonId": 40,
+      "level": "N4",
+      "character": "認",
+      "strokeCount": 14,
+      "labels": {
+        "hanViet": "Nhận",
+        "meaningVi": "công nhận",
+        "meaningViDisplay": "Nhận (công nhận)",
+        "meaningEn": "Recognize"
+      },
+      "readings": {
+        "onyomi": [
+          "NIN"
+        ],
+        "kunyomi": [
+          "mito-meru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Lời nói (Ngôn 言) nhẫn nại (Nhẫn 忍) là để CÔNG NHẬN.",
+        "en": "Speech (言) that is patient (忍) leads to RECOGNITION."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "言",
+          "忍"
+        ],
+        "componentNames": [
+          "Ngôn (lời nói)",
+          "Nhẫn (nhẫn nại)"
+        ],
+        "relatedKanji": [
+          "話",
+          "読",
+          "謝",
+          "信"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "nhan",
+        "meaningViNoAccent": "cong nhan",
+        "meaningEnNoAccent": "recognize"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l40_v067",
+          "sourceSenseId": "n4_l40_s067",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l16_v049",
+          "sourceSenseId": "n5_l16_s049",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Nhận (công nhận)",
+        "onyomi": "NIN",
+        "kunyomi": "mito-meru"
+      }
+    }
+  ]
+}

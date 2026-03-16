@@ -66,7 +66,9 @@ final allDueTermsProvider = FutureProvider<List<UserLessonTermData>>((
 });
 
 /// Returns the nearest future vocab review date, refreshing whenever SRS state changes.
-final nextVocabReviewProvider = StreamProvider.autoDispose<DateTime?>((ref) async* {
+final nextVocabReviewProvider = StreamProvider.autoDispose<DateTime?>((
+  ref,
+) async* {
   final db = ref.watch(databaseProvider);
   await for (final _ in db.srsDao.watchDueReviewCount()) {
     yield await db.srsDao.getNextScheduledReview();
@@ -74,7 +76,9 @@ final nextVocabReviewProvider = StreamProvider.autoDispose<DateTime?>((ref) asyn
 });
 
 /// Returns the nearest future kanji review date, refreshing whenever kanji SRS state changes.
-final nextKanjiReviewProvider = StreamProvider.autoDispose<DateTime?>((ref) async* {
+final nextKanjiReviewProvider = StreamProvider.autoDispose<DateTime?>((
+  ref,
+) async* {
   final db = ref.watch(databaseProvider);
   await for (final _ in db.kanjiSrsDao.watchDueReviewCount()) {
     yield await db.kanjiSrsDao.getNextScheduledReview();
@@ -139,7 +143,9 @@ final weekSummaryProvider = FutureProvider<WeekSummary>((ref) async {
   final totalReviewed = history.fold(0, (s, d) => s + d.reviewed);
   final daysStudied = history.where((d) => d.reviewed > 0).length;
 
-  final weekAttempts = attempts.where((a) => a.startedAt.isAfter(cutoff)).toList();
+  final weekAttempts = attempts
+      .where((a) => a.startedAt.isAfter(cutoff))
+      .toList();
   final totalCorrect = weekAttempts.fold(0, (s, a) => s + a.score);
   final totalQ = weekAttempts.fold(0, (s, a) => s + a.total);
   final accuracy = totalQ == 0 ? 0 : (totalCorrect / totalQ * 100).round();
@@ -903,6 +909,25 @@ class LessonRepository {
     required String levelLower,
     required int lessonId,
   }) async {
+    final canonicalRows = await _loadCanonicalLessonVocabEntries(
+      levelLower: levelLower,
+      lessonId: lessonId,
+    );
+    if (canonicalRows.isNotEmpty) {
+      final result = <String, int>{};
+      for (final row in canonicalRows) {
+        final term = (row['term'] ?? '').toString();
+        final reading = (row['reading'] ?? '').toString();
+        final meaning = (row['meaningVi'] ?? '').toString();
+        final order = row['order'] as int? ?? 0;
+        if (term.trim().isEmpty || meaning.trim().isEmpty || order <= 0) {
+          continue;
+        }
+        result[_vocabKeyWithMeaning(term, reading, meaning)] = order;
+      }
+      return result;
+    }
+
     // Only available for lesson-structured vocab (N4/N5 currently).
     final paddedLessonId = lessonId.toString().padLeft(2, '0');
     final basePath = 'assets/data/vocab/$levelLower/lesson_$paddedLessonId';
@@ -979,6 +1004,45 @@ class LessonRepository {
     required String currentLevelLabel,
   }) async {
     final levelLower = currentLevelLabel.toLowerCase().trim();
+    final canonicalRows = await _loadCanonicalLessonVocabEntries(
+      levelLower: levelLower,
+      lessonId: lessonId,
+    );
+    if (canonicalRows.isNotEmpty) {
+      final out = <VocabData>[];
+      var syntheticId = -(lessonId * 10000);
+      for (final row in canonicalRows) {
+        final term = (row['term'] ?? '').toString().trim();
+        final meaningVi = (row['meaningVi'] ?? '').toString().trim();
+        if (term.isEmpty || meaningVi.isEmpty) continue;
+
+        syntheticId -= 1;
+        final tags = row['tags'] is List
+            ? (row['tags'] as List)
+                  .map((tag) => tag.toString().trim())
+                  .where((tag) => tag.isNotEmpty)
+                  .join(',')
+            : '';
+        final mergedTags = tags.isEmpty
+            ? 'minna_$lessonId'
+            : 'minna_$lessonId,$tags';
+
+        out.add(
+          VocabData(
+            id: syntheticId,
+            term: term,
+            reading: _nullableLessonText(row['reading']),
+            meaning: meaningVi,
+            meaningEn: _nullableLessonText(row['meaningEn']),
+            kanjiMeaning: _nullableLessonText(row['kanjiMeaning']),
+            level: currentLevelLabel.toUpperCase(),
+            tags: mergedTags,
+          ),
+        );
+      }
+      return out;
+    }
+
     final paddedLessonId = lessonId.toString().padLeft(2, '0');
     final basePath = 'assets/data/vocab/$levelLower/lesson_$paddedLessonId';
 
@@ -1070,6 +1134,56 @@ class LessonRepository {
     } catch (_) {
       return const [];
     }
+  }
+
+  Future<List<Map<String, dynamic>>> _loadCanonicalLessonVocabEntries({
+    required String levelLower,
+    required int lessonId,
+  }) async {
+    final paddedLessonId = lessonId.toString().padLeft(2, '0');
+    final path =
+        'assets/data/canonical/vocab/$levelLower/lesson_$paddedLessonId.json';
+
+    try {
+      final raw = await rootBundle.loadString(path);
+      final payload = json.decode(raw);
+      if (payload is! Map) return const [];
+      final entries = payload['entries'];
+      if (entries is! List) return const [];
+
+      final out = <Map<String, dynamic>>[];
+      for (final rawEntry in entries) {
+        if (rawEntry is! Map) continue;
+        final entry = rawEntry.map((k, v) => MapEntry(k.toString(), v));
+        final lemmaRaw = entry['lemma'];
+        final senseRaw = entry['sense'];
+        if (lemmaRaw is! Map || senseRaw is! Map) continue;
+        final lemma = lemmaRaw.map((k, v) => MapEntry(k.toString(), v));
+        final sense = senseRaw.map((k, v) => MapEntry(k.toString(), v));
+        final labelsRaw = lemma['labels'];
+        final labels = labelsRaw is Map
+            ? labelsRaw.map((k, v) => MapEntry(k.toString(), v))
+            : const <String, dynamic>{};
+
+        out.add({
+          'term': (lemma['term'] ?? '').toString().trim(),
+          'reading': _nullableLessonText(lemma['reading']),
+          'kanjiMeaning': _nullableLessonText(labels['hanViet']),
+          'meaningVi': (sense['meaningVi'] ?? '').toString().trim(),
+          'meaningEn': _nullableLessonText(sense['meaningEn']),
+          'order': int.tryParse((entry['order'] ?? '').toString().trim()) ?? 0,
+          'tags': entry['tags'],
+        });
+      }
+      return out;
+    } catch (_) {
+      return const [];
+    }
+  }
+
+  String? _nullableLessonText(Object? value) {
+    final text = (value ?? '').toString().trim();
+    return text.isEmpty ? null : text;
   }
 
   Future<List<GrammarPointData>> fetchGrammar(int lessonId) async {
@@ -1351,10 +1465,40 @@ class LessonRepository {
         kunyomi: row.kunyomi,
         meaning: row.meaning,
         meaningEn: row.meaningEn,
+        mnemonicVi: row.mnemonicVi,
+        mnemonicEn: row.mnemonicEn,
+        decomposition: _decodeKanjiDecomposition(row.decompositionJson),
         examples: examples,
         jlptLevel: row.jlptLevel,
       );
     }).toList();
+  }
+
+  KanjiDecomposition? _decodeKanjiDecomposition(String? rawJson) {
+    final text = rawJson?.trim() ?? '';
+    if (text.isEmpty) {
+      return null;
+    }
+
+    dynamic decoded;
+    try {
+      decoded = json.decode(text);
+    } catch (_) {
+      return null;
+    }
+
+    if (decoded is Map<String, dynamic>) {
+      final decomposition = KanjiDecomposition.fromJson(decoded);
+      return decomposition.hasContent ? decomposition : null;
+    }
+    if (decoded is Map) {
+      final normalized = decoded.map(
+        (key, value) => MapEntry(key.toString(), value),
+      );
+      final decomposition = KanjiDecomposition.fromJson(normalized);
+      return decomposition.hasContent ? decomposition : null;
+    }
+    return null;
   }
 
   List<KanjiExample> _decodeKanjiExamples(String examplesJson) {

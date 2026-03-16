@@ -1,0 +1,388 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N4",
+  "lessonId": 33,
+  "entryCount": 5,
+  "entries": [
+    {
+      "kanjiId": "n4_l33_k001",
+      "lessonId": 33,
+      "level": "N4",
+      "character": "彼",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Bỉ",
+        "meaningVi": "anh ấy",
+        "meaningViDisplay": "Bỉ (anh ấy)",
+        "meaningEn": "He"
+      },
+      "readings": {
+        "onyomi": [
+          "HI"
+        ],
+        "kunyomi": [
+          "kare"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Người đàn ông đang đi bộ (Sách 彳) cùng con vật (Bì 皮).",
+        "en": "A man (彳) walking with his character/skin (皮)."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "彳",
+          "皮"
+        ],
+        "componentNames": [
+          "Sách (bước chân)",
+          "Bì (da)"
+        ],
+        "relatedKanji": [
+          "行",
+          "後",
+          "波",
+          "破"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "bi",
+        "meaningViNoAccent": "anh ay",
+        "meaningEnNoAccent": "he"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l05_v018",
+          "sourceSenseId": "n5_l05_s018",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l05_v019",
+          "sourceSenseId": "n5_l05_s019",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Bỉ (anh ấy)",
+        "onyomi": "HI",
+        "kunyomi": "kare"
+      }
+    },
+    {
+      "kanjiId": "n4_l33_k002",
+      "lessonId": 33,
+      "level": "N4",
+      "character": "留",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Lưu",
+        "meaningVi": "lưu lại",
+        "meaningViDisplay": "Lưu (lưu lại)",
+        "meaningEn": "Stay, Keep"
+      },
+      "readings": {
+        "onyomi": [
+          "RYUU"
+        ],
+        "kunyomi": [
+          "to-maru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Cày cuốc trên cánh đồng (Điền 田) rồi LƯU lại đó.",
+        "en": "Occupying a field (田) to STAY."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "卯",
+          "田"
+        ],
+        "componentNames": [
+          "Mão (biến thể)",
+          "Điền (ruộng)"
+        ],
+        "relatedKanji": [
+          "田",
+          "男"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "luu",
+        "meaningViNoAccent": "luu lai",
+        "meaningEnNoAccent": "stay, keep"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l33_v063",
+          "sourceSenseId": "n4_l33_s063",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l33_v051",
+          "sourceSenseId": "n4_l33_s051",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l33_v052",
+          "sourceSenseId": "n4_l33_s052",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Lưu (lưu lại)",
+        "onyomi": "RYUU",
+        "kunyomi": "to-maru"
+      }
+    },
+    {
+      "kanjiId": "n4_l33_k003",
+      "lessonId": 33,
+      "level": "N4",
+      "character": "守",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Thủ",
+        "meaningVi": "bảo vệ",
+        "meaningViDisplay": "Thủ (bảo vệ)",
+        "meaningEn": "Protect"
+      },
+      "readings": {
+        "onyomi": [
+          "SHU",
+          "SU"
+        ],
+        "kunyomi": [
+          "mamo-ru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dưới mái nhà (Miên 宀) có một tấc (Thốn 寸) đất cần BẢO VỆ.",
+        "en": "Guarding an inch (寸) of land under a roof (宀)."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "宀",
+          "寸"
+        ],
+        "componentNames": [
+          "Miên (mái nhà)",
+          "Thốn (tấc)"
+        ],
+        "relatedKanji": [
+          "安",
+          "字",
+          "宅",
+          "村"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "thu",
+        "meaningViNoAccent": "bao ve",
+        "meaningEnNoAccent": "protect"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l33_v061",
+          "sourceSenseId": "n4_l33_s061",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l33_v051",
+          "sourceSenseId": "n4_l33_s051",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l33_v052",
+          "sourceSenseId": "n4_l33_s052",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Thủ (bảo vệ)",
+        "onyomi": "SHU, SU",
+        "kunyomi": "mamo-ru"
+      }
+    },
+    {
+      "kanjiId": "n4_l33_k004",
+      "lessonId": 33,
+      "level": "N4",
+      "character": "待",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Đãi",
+        "meaningVi": "chờ đợi",
+        "meaningViDisplay": "Đãi (chờ đợi)",
+        "meaningEn": "Wait"
+      },
+      "readings": {
+        "onyomi": [
+          "TAI"
+        ],
+        "kunyomi": [
+          "ma-tsu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Người (Nhân 亻) đứng trước chùa (Tự 寺) CHỜ ĐỢI một điều gì đó.",
+        "en": "A person (彳) waiting at a temple (寺)."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "彳",
+          "寺"
+        ],
+        "componentNames": [
+          "Sách (bước chân)",
+          "Tự (chùa)"
+        ],
+        "relatedKanji": [
+          "特",
+          "行"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "dai",
+        "meaningViNoAccent": "cho doi",
+        "meaningEnNoAccent": "wait"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l33_v062",
+          "sourceSenseId": "n4_l33_s062",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l37_v005",
+          "sourceSenseId": "n4_l37_s005",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l46_v022",
+          "sourceSenseId": "n4_l46_s022",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Đãi (chờ đợi)",
+        "onyomi": "TAI",
+        "kunyomi": "ma-tsu"
+      }
+    },
+    {
+      "kanjiId": "n4_l33_k005",
+      "lessonId": 33,
+      "level": "N4",
+      "character": "合",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Hợp",
+        "meaningVi": "phù hợp, gặp",
+        "meaningViDisplay": "Hợp (phù hợp, gặp)",
+        "meaningEn": "Fit, Match"
+      },
+      "readings": {
+        "onyomi": [
+          "GOU"
+        ],
+        "kunyomi": [
+          "a-u"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Ba người cùng một cái miệng - HỢP nhau.",
+        "en": "Three people with one mouth - they MATCH."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "亼",
+          "口"
+        ],
+        "componentNames": [
+          "Tập (hội tụ)",
+          "Khẩu (miệng)"
+        ],
+        "relatedKanji": [
+          "会",
+          "答",
+          "拾"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "hop",
+        "meaningViNoAccent": "phu hop, gap",
+        "meaningEnNoAccent": "fit, match"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l33_v060",
+          "sourceSenseId": "n4_l33_s060",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l32_v004",
+          "sourceSenseId": "n4_l32_s004",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l39_v028",
+          "sourceSenseId": "n4_l39_s028",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Hợp (phù hợp, gặp)",
+        "onyomi": "GOU",
+        "kunyomi": "a-u"
+      }
+    }
+  ]
+}

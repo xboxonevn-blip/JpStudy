@@ -1,0 +1,534 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N5",
+  "lessonId": 8,
+  "entryCount": 7,
+  "entries": [
+    {
+      "kanjiId": "n5_l08_k001",
+      "lessonId": 8,
+      "level": "N5",
+      "character": "良",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": "Lương",
+        "meaningVi": "tốt",
+        "meaningViDisplay": "Lương (tốt)",
+        "meaningEn": "Good"
+      },
+      "readings": {
+        "onyomi": [
+          "RYOU"
+        ],
+        "kunyomi": [
+          "yo-i"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Một người đang đội mũ che nắng, cảm thấy rất Tốt/Lương thiện.",
+        "en": "A person wearing a sun hat, feeling GOOD."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "食",
+          "娘"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "luong",
+        "meaningViNoAccent": "tot",
+        "meaningEnNoAccent": "good"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l08_v073",
+          "sourceSenseId": "n5_l08_s073",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l35_v047",
+          "sourceSenseId": "n4_l35_s047",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l08_v067",
+          "sourceSenseId": "n5_l08_s067",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Lương (tốt)",
+        "onyomi": "RYOU",
+        "kunyomi": "yo-i"
+      }
+    },
+    {
+      "kanjiId": "n5_l08_k002",
+      "lessonId": 8,
+      "level": "N5",
+      "character": "高",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Cao",
+        "meaningVi": "cao, đắt",
+        "meaningViDisplay": "Cao (cao, đắt)",
+        "meaningEn": "High, Expensive"
+      },
+      "readings": {
+        "onyomi": [
+          "KOU"
+        ],
+        "kunyomi": [
+          "taka-i"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Hình ảnh một tòa tháp cao có mái che và cửa sổ.",
+        "en": "A tall tower with a roof and windows."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "亠",
+          "口",
+          "冂"
+        ],
+        "componentNames": [
+          "Đầu (nắp đậy)",
+          "Khẩu (miệng)",
+          "Quynh (vây quanh)"
+        ],
+        "relatedKanji": [
+          "京",
+          "景"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "cao",
+        "meaningViNoAccent": "cao, dat",
+        "meaningEnNoAccent": "high, expensive"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l08_v074",
+          "sourceSenseId": "n5_l08_s074",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l15_v024",
+          "sourceSenseId": "n5_l15_s024",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l08_v024",
+          "sourceSenseId": "n5_l08_s024",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Cao (cao, đắt)",
+        "onyomi": "KOU",
+        "kunyomi": "taka-i"
+      }
+    },
+    {
+      "kanjiId": "n5_l08_k003",
+      "lessonId": 8,
+      "level": "N5",
+      "character": "安",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "An",
+        "meaningVi": "rẻ, an toàn",
+        "meaningViDisplay": "An (rẻ, an toàn)",
+        "meaningEn": "Cheap, Safe"
+      },
+      "readings": {
+        "onyomi": [
+          "AN"
+        ],
+        "kunyomi": [
+          "yasu-i"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Một người phụ nữ (Nữ 女) ở dưới mái nhà (Miên 宀) thì cảm thấy An toàn.",
+        "en": "A woman (女) under a roof (宀) feels SAFE."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "宀",
+          "女"
+        ],
+        "componentNames": [
+          "Miên (mái nhà)",
+          "Nữ (phụ nữ)"
+        ],
+        "relatedKanji": [
+          "女",
+          "字",
+          "宅"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "an",
+        "meaningViNoAccent": "re, an toan",
+        "meaningEnNoAccent": "cheap, safe"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l08_v070",
+          "sourceSenseId": "n5_l08_s070",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l08_v068",
+          "sourceSenseId": "n5_l08_s068",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l08_v025",
+          "sourceSenseId": "n5_l08_s025",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "An (rẻ, an toàn)",
+        "onyomi": "AN",
+        "kunyomi": "yasu-i"
+      }
+    },
+    {
+      "kanjiId": "n5_l08_k004",
+      "lessonId": 8,
+      "level": "N5",
+      "character": "大",
+      "strokeCount": 3,
+      "labels": {
+        "hanViet": "Đại",
+        "meaningVi": "to lớn",
+        "meaningViDisplay": "Đại (to lớn)",
+        "meaningEn": "Big"
+      },
+      "readings": {
+        "onyomi": [
+          "DAI",
+          "TAI"
+        ],
+        "kunyomi": [
+          "oo-kii"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Một người đang dang rộng hai tay và hai chân để thể hiện sự To lớn.",
+        "en": "A person stretching their arms and legs to show how BIG they are."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "人",
+          "夫",
+          "天"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "dai",
+        "meaningViNoAccent": "to lon",
+        "meaningEnNoAccent": "big"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l01_v046",
+          "sourceSenseId": "n5_l01_s046",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l04_v053",
+          "sourceSenseId": "n5_l04_s053",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l08_v011",
+          "sourceSenseId": "n5_l08_s011",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Đại (to lớn)",
+        "onyomi": "DAI, TAI",
+        "kunyomi": "oo-kii"
+      }
+    },
+    {
+      "kanjiId": "n5_l08_k005",
+      "lessonId": 8,
+      "level": "N5",
+      "character": "小",
+      "strokeCount": 3,
+      "labels": {
+        "hanViet": "Tiểu",
+        "meaningVi": "nhỏ",
+        "meaningViDisplay": "Tiểu (nhỏ)",
+        "meaningEn": "Small"
+      },
+      "readings": {
+        "onyomi": [
+          "SHOU"
+        ],
+        "kunyomi": [
+          "chii-sai"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Hình ảnh một vật nhỏ bị chia làm đôi bởi một vạch ở giữa.",
+        "en": "A small object split down the middle."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "大",
+          "少"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "tieu",
+        "meaningViNoAccent": "nho",
+        "meaningEnNoAccent": "small"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l08_v071",
+          "sourceSenseId": "n5_l08_s071",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l27_v058",
+          "sourceSenseId": "n4_l27_s058",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l08_v012",
+          "sourceSenseId": "n5_l08_s012",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tiểu (nhỏ)",
+        "onyomi": "SHOU",
+        "kunyomi": "chii-sai"
+      }
+    },
+    {
+      "kanjiId": "n5_l08_k006",
+      "lessonId": 8,
+      "level": "N5",
+      "character": "新",
+      "strokeCount": 13,
+      "labels": {
+        "hanViet": "Tân",
+        "meaningVi": "mới",
+        "meaningViDisplay": "Tân (mới)",
+        "meaningEn": "New"
+      },
+      "readings": {
+        "onyomi": [
+          "SHIN"
+        ],
+        "kunyomi": [
+          "atara-shii"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Lập (立-đứng) trên Cây (木) cầm Rìu (Can 斤) để chặt gỗ làm nhà Mới.",
+        "en": "Standing (立) on a tree (木) with an axe (斤) to build something NEW."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "立",
+          "木",
+          "斤"
+        ],
+        "componentNames": [
+          "Lập (đứng)",
+          "Mộc (cây)",
+          "Cân (rìu)"
+        ],
+        "relatedKanji": [
+          "立",
+          "木",
+          "親",
+          "所",
+          "折"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "tan",
+        "meaningViNoAccent": "moi",
+        "meaningEnNoAccent": "new"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l08_v072",
+          "sourceSenseId": "n5_l08_s072",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l05_v011",
+          "sourceSenseId": "n5_l05_s011",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l08_v013",
+          "sourceSenseId": "n5_l08_s013",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tân (mới)",
+        "onyomi": "SHIN",
+        "kunyomi": "atara-shii"
+      }
+    },
+    {
+      "kanjiId": "n5_l08_k007",
+      "lessonId": 8,
+      "level": "N5",
+      "character": "古",
+      "strokeCount": 5,
+      "labels": {
+        "hanViet": "Cổ",
+        "meaningVi": "cũ",
+        "meaningViDisplay": "Cổ (cũ)",
+        "meaningEn": "Old"
+      },
+      "readings": {
+        "onyomi": [
+          "KO"
+        ],
+        "kunyomi": [
+          "furu-i"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Lời nói từ mười (Thập 十) cái miệng (Khẩu 口) truyền lại từ ngày Xưa (Cổ).",
+        "en": "Words passed down through ten (十) mouths (口) from OLD times."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "十",
+          "口"
+        ],
+        "componentNames": [
+          "Thập (mười)",
+          "Khẩu (miệng)"
+        ],
+        "relatedKanji": [
+          "十",
+          "口"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "co",
+        "meaningViNoAccent": "cu",
+        "meaningEnNoAccent": "old"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l08_v069",
+          "sourceSenseId": "n5_l08_s069",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l08_v075",
+          "sourceSenseId": "n5_l08_s075",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l08_v014",
+          "sourceSenseId": "n5_l08_s014",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Cổ (cũ)",
+        "onyomi": "KO",
+        "kunyomi": "furu-i"
+      }
+    }
+  ]
+}

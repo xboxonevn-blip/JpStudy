@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N5",
+  "lessonId": 20,
+  "entryCount": 3,
+  "entries": [
+    {
+      "kanjiId": "n5_l20_k001",
+      "lessonId": 20,
+      "level": "N5",
+      "character": "止",
+      "strokeCount": 4,
+      "labels": {
+        "hanViet": "Chỉ",
+        "meaningVi": "dừng",
+        "meaningViDisplay": "Chỉ (dừng)",
+        "meaningEn": "Stop"
+      },
+      "readings": {
+        "onyomi": [
+          "SHI"
+        ],
+        "kunyomi": [
+          "to-maru",
+          "to-meru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Bàn chân dẫm xuống đất để DỪNG lại.",
+        "en": "A foot flat on the ground to STOP."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "歩",
+          "走",
+          "足",
+          "正"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "chi",
+        "meaningViNoAccent": "dung",
+        "meaningEnNoAccent": "stop"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l20_v035",
+          "sourceSenseId": "n5_l20_s035",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l32_v064",
+          "sourceSenseId": "n4_l32_s064",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l14_v007",
+          "sourceSenseId": "n5_l14_s007",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Chỉ (dừng)",
+        "onyomi": "SHI",
+        "kunyomi": "to-maru, to-meru"
+      }
+    },
+    {
+      "kanjiId": "n5_l20_k002",
+      "lessonId": 20,
+      "level": "N5",
+      "character": "雨",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Vũ",
+        "meaningVi": "mưa",
+        "meaningViDisplay": "Vũ (mưa)",
+        "meaningEn": "Rain"
+      },
+      "readings": {
+        "onyomi": [
+          "U"
+        ],
+        "kunyomi": [
+          "ame"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Bầu trời với những giọt MƯA rơi xuống.",
+        "en": "Clouds with rain drops falling."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "雪",
+          "雲"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "vu",
+        "meaningViNoAccent": "mua",
+        "meaningEnNoAccent": "rain"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l14_v042",
+          "sourceSenseId": "n5_l14_s042",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l20_v036",
+          "sourceSenseId": "n5_l20_s036",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l12_v023",
+          "sourceSenseId": "n5_l12_s023",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Vũ (mưa)",
+        "onyomi": "U",
+        "kunyomi": "ame"
+      }
+    },
+    {
+      "kanjiId": "n5_l20_k003",
+      "lessonId": 20,
+      "level": "N5",
+      "character": "雪",
+      "strokeCount": 11,
+      "labels": {
+        "hanViet": "Tuyết",
+        "meaningVi": null,
+        "meaningViDisplay": "Tuyết",
+        "meaningEn": "Snow"
+      },
+      "readings": {
+        "onyomi": [
+          "SETSU"
+        ],
+        "kunyomi": [
+          "yuki"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Mưa (Vũ 雨) rơi xuống rồi tan (Kệ 彐) tạo thành TUYẾT.",
+        "en": "Rain (雨) falling and staying on the ground as SNOW."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "雨",
+          "彐"
+        ],
+        "componentNames": [
+          "Vũ (mưa)",
+          "Kệ (tay nhỏ)"
+        ],
+        "relatedKanji": [
+          "雨"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "tuyet",
+        "meaningViNoAccent": "",
+        "meaningEnNoAccent": "snow"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l12_v024",
+          "sourceSenseId": "n5_l12_s024",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l20_v037",
+          "sourceSenseId": "n5_l20_s037",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tuyết",
+        "onyomi": "SETSU",
+        "kunyomi": "yuki"
+      }
+    }
+  ]
+}

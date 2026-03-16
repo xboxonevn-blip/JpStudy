@@ -1,0 +1,467 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N4",
+  "lessonId": 47,
+  "entryCount": 6,
+  "entries": [
+    {
+      "kanjiId": "n4_l47_k001",
+      "lessonId": 47,
+      "level": "N4",
+      "character": "集",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Tập",
+        "meaningVi": "tập hợp",
+        "meaningViDisplay": "Tập (tập hợp)",
+        "meaningEn": "Gather"
+      },
+      "readings": {
+        "onyomi": [
+          "SHUU"
+        ],
+        "kunyomi": [
+          "atsu-maru",
+          "atsu-meru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Những con chim (Chuy 隹) đậu trên cây (Mộc 木) - TẬP HỢP.",
+        "en": "Birds (隹) gathering on a tree (木)."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "隹",
+          "木"
+        ],
+        "componentNames": [
+          "Chuy (chim ngắn đuôi)",
+          "Mộc (cây)"
+        ],
+        "relatedKanji": [
+          "木"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "tap",
+        "meaningViNoAccent": "tap hop",
+        "meaningEnNoAccent": "gather"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l47_v049",
+          "sourceSenseId": "n4_l47_s049",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l47_v054",
+          "sourceSenseId": "n4_l47_s054",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l47_v001",
+          "sourceSenseId": "n4_l47_s001",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tập (tập hợp)",
+        "onyomi": "SHUU",
+        "kunyomi": "atsu-maru, atsu-meru"
+      }
+    },
+    {
+      "kanjiId": "n4_l47_k002",
+      "lessonId": 47,
+      "level": "N4",
+      "character": "別",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": "Biệt",
+        "meaningVi": "chia tay, khác",
+        "meaningViDisplay": "Biệt (chia tay, khác)",
+        "meaningEn": "Separate, Another"
+      },
+      "readings": {
+        "onyomi": [
+          "BETSU"
+        ],
+        "kunyomi": [
+          "waka-reru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng Dao (Đao 刂) để CHIA vật ra làm 10 mảnh - BIỆT lập.",
+        "en": "Using a blade (刂) to SEPARATE things."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "口",
+          "万",
+          "刂"
+        ],
+        "componentNames": [
+          "Khẩu biến thể",
+          "Vạn biến thể",
+          "Đao (dao)"
+        ],
+        "relatedKanji": [
+          "利",
+          "切"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "biet",
+        "meaningViNoAccent": "chia tay, khac",
+        "meaningEnNoAccent": "separate, another"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l47_v045",
+          "sourceSenseId": "n4_l47_s045",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l36_v022",
+          "sourceSenseId": "n4_l36_s022",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l47_v002",
+          "sourceSenseId": "n4_l47_s002",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Biệt (chia tay, khác)",
+        "onyomi": "BETSU",
+        "kunyomi": "waka-reru"
+      }
+    },
+    {
+      "kanjiId": "n4_l47_k003",
+      "lessonId": 47,
+      "level": "N4",
+      "character": "喜",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Hỉ",
+        "meaningVi": "vui mừng",
+        "meaningViDisplay": "Hỉ (vui mừng)",
+        "meaningEn": "Rejoice"
+      },
+      "readings": {
+        "onyomi": [
+          "KI"
+        ],
+        "kunyomi": [
+          "yoroko-bu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Miệng (Khẩu 口) cười tươi khi nhận được món quà (Sĩ ⺶ - biến thể) - VUI MỪNG.",
+        "en": "A face showing joy - REJOICE."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "士",
+          "口",
+          "豆"
+        ],
+        "componentNames": [
+          "Sĩ (kẻ sĩ)",
+          "Khẩu (miệng)",
+          "Đậu (hạt đậu)"
+        ],
+        "relatedKanji": [
+          "口"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "hi",
+        "meaningViNoAccent": "vui mung",
+        "meaningEnNoAccent": "rejoice"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l47_v046",
+          "sourceSenseId": "n4_l47_s046",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l47_v051",
+          "sourceSenseId": "n4_l47_s051",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l47_v042",
+          "sourceSenseId": "n4_l47_s042",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Hỉ (vui mừng)",
+        "onyomi": "KI",
+        "kunyomi": "yoroko-bu"
+      }
+    },
+    {
+      "kanjiId": "n4_l47_k004",
+      "lessonId": 47,
+      "level": "N4",
+      "character": "驚",
+      "strokeCount": 22,
+      "labels": {
+        "hanViet": "Kinh",
+        "meaningVi": "ngạc nhiên",
+        "meaningViDisplay": "Kinh (ngạc nhiên)",
+        "meaningEn": "Surprise"
+      },
+      "readings": {
+        "onyomi": [
+          "KYO"
+        ],
+        "kunyomi": [
+          "odoro-ku"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Con ngựa (Mã 馬) khi đến Kinh đô (Kinh 京) thấy rất NGẠC NHIÊN.",
+        "en": "A horse (馬) at the capital (京) being SURPRISED."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "敬",
+          "馬"
+        ],
+        "componentNames": [
+          "Kính (kính trọng)",
+          "Mã (ngựa)"
+        ],
+        "relatedKanji": [
+          "京"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "kinh",
+        "meaningViNoAccent": "ngac nhien",
+        "meaningEnNoAccent": "surprise"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l47_v050",
+          "sourceSenseId": "n4_l47_s050",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l47_v055",
+          "sourceSenseId": "n4_l47_s055",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l47_v043",
+          "sourceSenseId": "n4_l47_s043",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Kinh (ngạc nhiên)",
+        "onyomi": "KYO",
+        "kunyomi": "odoro-ku"
+      }
+    },
+    {
+      "kanjiId": "n4_l47_k005",
+      "lessonId": 47,
+      "level": "N4",
+      "character": "怒",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Nộ",
+        "meaningVi": "tức giận",
+        "meaningViDisplay": "Nộ (tức giận)",
+        "meaningEn": "Angry"
+      },
+      "readings": {
+        "onyomi": [
+          "DO"
+        ],
+        "kunyomi": [
+          "oko-ru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Trái tim (Tâm 心) của một người phụ nữ (Nữ 女) khi bị làm nô lệ (Nô 奴) - TỨC GIẬN.",
+        "en": "Heart (心) feeling ANGRY like a slave (奴)."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "奴",
+          "心"
+        ],
+        "componentNames": [
+          "Nô (nô lệ)",
+          "Tâm (trái tim)"
+        ],
+        "relatedKanji": [
+          "心",
+          "女"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "no",
+        "meaningViNoAccent": "tuc gian",
+        "meaningEnNoAccent": "angry"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l47_v047",
+          "sourceSenseId": "n4_l47_s047",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l47_v052",
+          "sourceSenseId": "n4_l47_s052",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l47_v044",
+          "sourceSenseId": "n4_l47_s044",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Nộ (tức giận)",
+        "onyomi": "DO",
+        "kunyomi": "oko-ru"
+      }
+    },
+    {
+      "kanjiId": "n4_l47_k006",
+      "lessonId": 47,
+      "level": "N4",
+      "character": "悲",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Bi",
+        "meaningVi": "buồn",
+        "meaningViDisplay": "Bi (buồn)",
+        "meaningEn": "Sad"
+      },
+      "readings": {
+        "onyomi": [
+          "HI"
+        ],
+        "kunyomi": [
+          "kana-shii"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Trái tim (Tâm 心) cảm thấy không (Phi 非) ổn - BUỒN bã.",
+        "en": "Heart (心) feeling a 'no' (非) - SAD."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "非",
+          "心"
+        ],
+        "componentNames": [
+          "Phi (không phải)",
+          "Tâm (trái tim)"
+        ],
+        "relatedKanji": [
+          "心"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "bi",
+        "meaningViNoAccent": "buon",
+        "meaningEnNoAccent": "sad"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l47_v048",
+          "sourceSenseId": "n4_l47_s048",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l47_v053",
+          "sourceSenseId": "n4_l47_s053",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l39_v018",
+          "sourceSenseId": "n4_l39_s018",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Bi (buồn)",
+        "onyomi": "HI",
+        "kunyomi": "kana-shii"
+      }
+    }
+  ]
+}

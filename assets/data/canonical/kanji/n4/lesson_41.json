@@ -1,0 +1,455 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N4",
+  "lessonId": 41,
+  "entryCount": 6,
+  "entries": [
+    {
+      "kanjiId": "n4_l41_k001",
+      "lessonId": 41,
+      "level": "N4",
+      "character": "飛",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Phi",
+        "meaningVi": "bay",
+        "meaningViDisplay": "Phi (bay)",
+        "meaningEn": "Fly"
+      },
+      "readings": {
+        "onyomi": [
+          "HI"
+        ],
+        "kunyomi": [
+          "to-bu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Hình ảnh con chim đang dang rộng đôi cánh để BAY.",
+        "en": "The shape of a bird spreading its wings to FLY."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "phi",
+        "meaningViNoAccent": "bay",
+        "meaningEnNoAccent": "fly"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l41_v074",
+          "sourceSenseId": "n4_l41_s074",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l26_v045",
+          "sourceSenseId": "n4_l26_s045",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l36_v050",
+          "sourceSenseId": "n4_l36_s050",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Phi (bay)",
+        "onyomi": "HI",
+        "kunyomi": "to-bu"
+      }
+    },
+    {
+      "kanjiId": "n4_l41_k002",
+      "lessonId": 41,
+      "level": "N4",
+      "character": "機",
+      "strokeCount": 16,
+      "labels": {
+        "hanViet": "Cơ",
+        "meaningVi": "máy móc",
+        "meaningViDisplay": "Cơ (máy móc)",
+        "meaningEn": "Machine"
+      },
+      "readings": {
+        "onyomi": [
+          "KI"
+        ],
+        "kunyomi": []
+      },
+      "mnemonic": {
+        "vi": "Dùng Cây (Mộc 木) để làm khung cho MÁY MÓC (Kỷ 幾).",
+        "en": "Using wood (木) for the frame of a MACHINE."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "木",
+          "幾"
+        ],
+        "componentNames": [
+          "Mộc (cây)",
+          "Kỷ (mấy)"
+        ],
+        "relatedKanji": [
+          "木",
+          "本"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "co",
+        "meaningViNoAccent": "may moc",
+        "meaningEnNoAccent": "machine"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l41_v071",
+          "sourceSenseId": "n4_l41_s071",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l35_v020",
+          "sourceSenseId": "n4_l35_s020",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l33_v016",
+          "sourceSenseId": "n4_l33_s016",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Cơ (máy móc)",
+        "onyomi": "KI",
+        "kunyomi": null
+      }
+    },
+    {
+      "kanjiId": "n4_l41_k003",
+      "lessonId": 41,
+      "level": "N4",
+      "character": "失",
+      "strokeCount": 5,
+      "labels": {
+        "hanViet": "Thất",
+        "meaningVi": "mất, sai lầm",
+        "meaningViDisplay": "Thất (mất, sai lầm)",
+        "meaningEn": "Lose, Error"
+      },
+      "readings": {
+        "onyomi": [
+          "SHITSU"
+        ],
+        "kunyomi": [
+          "ushina-u"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Người dang tay nhỡ đánh rơi vật phẩm - MẤT.",
+        "en": "Wait/Person dropping something from their hand - LOSE."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "大",
+          "丿"
+        ],
+        "componentNames": [
+          "Đại biến thể (to lớn)",
+          "Phiệt (nét phẩy)"
+        ],
+        "relatedKanji": [
+          "大",
+          "夫"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "that",
+        "meaningViNoAccent": "mat, sai lam",
+        "meaningEnNoAccent": "lose, error"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l41_v070",
+          "sourceSenseId": "n4_l41_s070",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l41_v067",
+          "sourceSenseId": "n4_l41_s067",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l49_v022",
+          "sourceSenseId": "n4_l49_s022",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Thất (mất, sai lầm)",
+        "onyomi": "SHITSU",
+        "kunyomi": "ushina-u"
+      }
+    },
+    {
+      "kanjiId": "n4_l41_k004",
+      "lessonId": 41,
+      "level": "N4",
+      "character": "礼",
+      "strokeCount": 5,
+      "labels": {
+        "hanViet": "Lễ",
+        "meaningVi": "lễ nghi",
+        "meaningViDisplay": "Lễ (lễ nghi)",
+        "meaningEn": "Bow, Gratitude"
+      },
+      "readings": {
+        "onyomi": [
+          "REI"
+        ],
+        "kunyomi": []
+      },
+      "mnemonic": {
+        "vi": "Thần linh (Thị 示) ban cho sự sung túc (Lễ) cần phải biết LỄ nghi.",
+        "en": "Spirits (示) being honored with ceremony."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "礻",
+          "乚"
+        ],
+        "componentNames": [
+          "Thị (thần linh)",
+          "Ất (uốn cong)"
+        ],
+        "relatedKanji": [
+          "社"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "le",
+        "meaningViNoAccent": "le nghi",
+        "meaningEnNoAccent": "bow, gratitude"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l41_v072",
+          "sourceSenseId": "n4_l41_s072",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l41_v068",
+          "sourceSenseId": "n4_l41_s068",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l49_v022",
+          "sourceSenseId": "n4_l49_s022",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Lễ (lễ nghi)",
+        "onyomi": "REI",
+        "kunyomi": null
+      }
+    },
+    {
+      "kanjiId": "n4_l41_k005",
+      "lessonId": 41,
+      "level": "N4",
+      "character": "願",
+      "strokeCount": 19,
+      "labels": {
+        "hanViet": "Nguyện",
+        "meaningVi": "mong muốn",
+        "meaningViDisplay": "Nguyện (mong muốn)",
+        "meaningEn": "Wish, Request"
+      },
+      "readings": {
+        "onyomi": [
+          "GAN"
+        ],
+        "kunyomi": [
+          "nega-u"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Nguồn gốc (Nguyên 原) từ trái tim (Tâm 心 - biến thể đầu) là sự CẦU NGUYỆN.",
+        "en": "Heading (頁) towards an origin (原) with a WISH."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "原",
+          "頁"
+        ],
+        "componentNames": [
+          "Nguyên (nguồn gốc)",
+          "Hiệt (đầu, trang)"
+        ],
+        "relatedKanji": [
+          "原",
+          "頭",
+          "顔",
+          "頼"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "nguyen",
+        "meaningViNoAccent": "mong muon",
+        "meaningEnNoAccent": "wish, request"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l41_v073",
+          "sourceSenseId": "n4_l41_s073",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l41_v076",
+          "sourceSenseId": "n4_l41_s076",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l28_v041",
+          "sourceSenseId": "n4_l28_s041",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Nguyện (mong muốn)",
+        "onyomi": "GAN",
+        "kunyomi": "nega-u"
+      }
+    },
+    {
+      "kanjiId": "n4_l41_k006",
+      "lessonId": 41,
+      "level": "N4",
+      "character": "困",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": "Khốn",
+        "meaningVi": "khó khăn",
+        "meaningViDisplay": "Khốn (khó khăn)",
+        "meaningEn": "Trouble"
+      },
+      "readings": {
+        "onyomi": [
+          "KON"
+        ],
+        "kunyomi": [
+          "koma-ru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Cái Cây (Mộc 木) bị nhốt trong khung (Vi 囗) nên gặp KHÓ KHĂN.",
+        "en": "A tree (木) trapped in a box (囗) is in TROUBLE."
+      },
+      "decomposition": {
+        "structure": "enclosure",
+        "components": [
+          "囗",
+          "木"
+        ],
+        "componentNames": [
+          "Vi (vây quanh)",
+          "Mộc (cây)"
+        ],
+        "relatedKanji": [
+          "国",
+          "回",
+          "園"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "khon",
+        "meaningViNoAccent": "kho khan",
+        "meaningEnNoAccent": "trouble"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l41_v069",
+          "sourceSenseId": "n4_l41_s069",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l41_v075",
+          "sourceSenseId": "n4_l41_s075",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l35_v003",
+          "sourceSenseId": "n4_l35_s003",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Khốn (khó khăn)",
+        "onyomi": "KON",
+        "kunyomi": "koma-ru"
+      }
+    }
+  ]
+}

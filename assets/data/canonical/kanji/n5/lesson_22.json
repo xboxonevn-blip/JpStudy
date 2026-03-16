@@ -1,0 +1,390 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N5",
+  "lessonId": 22,
+  "entryCount": 5,
+  "entries": [
+    {
+      "kanjiId": "n5_l22_k001",
+      "lessonId": 22,
+      "level": "N5",
+      "character": "特",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Đặc",
+        "meaningVi": "đặc biệt",
+        "meaningViDisplay": "Đặc (đặc biệt)",
+        "meaningEn": "Special"
+      },
+      "readings": {
+        "onyomi": [
+          "TOKU"
+        ],
+        "kunyomi": []
+      },
+      "mnemonic": {
+        "vi": "Con Bò (Ngưu 牛) ở trong Chùa (Tự 寺) là một điều ĐẶC BIỆT.",
+        "en": "A Cow (牛) in a Temple (寺) is EXTRA SPECIAL."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "牛",
+          "寺"
+        ],
+        "componentNames": [
+          "Ngưu (con bò)",
+          "Tự (chùa)"
+        ],
+        "relatedKanji": [
+          "待",
+          "持"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "dac",
+        "meaningViNoAccent": "dac biet",
+        "meaningEnNoAccent": "special"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l22_v031",
+          "sourceSenseId": "n5_l22_s031",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l05_v051",
+          "sourceSenseId": "n5_l05_s051",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l15_v020",
+          "sourceSenseId": "n5_l15_s020",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Đặc (đặc biệt)",
+        "onyomi": "TOKU",
+        "kunyomi": null
+      }
+    },
+    {
+      "kanjiId": "n5_l22_k002",
+      "lessonId": 22,
+      "level": "N5",
+      "character": "急",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Cấp",
+        "meaningVi": "khẩn cấp, vội",
+        "meaningViDisplay": "Cấp (khẩn cấp, vội)",
+        "meaningEn": "Hurry, Emergency"
+      },
+      "readings": {
+        "onyomi": [
+          "KYUU"
+        ],
+        "kunyomi": [
+          "iso-gu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Tay cầm cây quạt che chắn cho Trái tim (Tâm 心) đang VỘI vã.",
+        "en": "Heart (心) rushing in a hurry."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "⺈",
+          "ヨ",
+          "心"
+        ],
+        "componentNames": [
+          "Đao (dao)",
+          "Phần giữa",
+          "Tâm (trái tim)"
+        ],
+        "relatedKanji": [
+          "心"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "cap",
+        "meaningViNoAccent": "khan cap, voi",
+        "meaningEnNoAccent": "hurry, emergency"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l22_v030",
+          "sourceSenseId": "n5_l22_s030",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l05_v050",
+          "sourceSenseId": "n5_l05_s050",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l05_v051",
+          "sourceSenseId": "n5_l05_s051",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Cấp (khẩn cấp, vội)",
+        "onyomi": "KYUU",
+        "kunyomi": "iso-gu"
+      }
+    },
+    {
+      "kanjiId": "n5_l22_k003",
+      "lessonId": 22,
+      "level": "N5",
+      "character": "線",
+      "strokeCount": 15,
+      "labels": {
+        "hanViet": "Tuyến",
+        "meaningVi": "đường dây",
+        "meaningViDisplay": "Tuyến (đường dây)",
+        "meaningEn": "Line"
+      },
+      "readings": {
+        "onyomi": [
+          "SEN"
+        ],
+        "kunyomi": []
+      },
+      "mnemonic": {
+        "vi": "Sợi tơ (Mịch 糸) trắng (Bạch 白) chảy qua như dòng suối (Thủy 水) tạo ra đường TUYẾN.",
+        "en": "A white (白) thread (糸) like flowing water (水) forming a LINE."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "糸",
+          "泉"
+        ],
+        "componentNames": [
+          "Mịch (sợi tơ)",
+          "Tuyền (suối)"
+        ],
+        "relatedKanji": [
+          "糸",
+          "紙",
+          "終",
+          "絵"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "tuyen",
+        "meaningViNoAccent": "duong day",
+        "meaningEnNoAccent": "line"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l34_v018",
+          "sourceSenseId": "n4_l34_s018",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l05_v011",
+          "sourceSenseId": "n5_l05_s011",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l05_v054",
+          "sourceSenseId": "n5_l05_s054",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tuyến (đường dây)",
+        "onyomi": "SEN",
+        "kunyomi": null
+      }
+    },
+    {
+      "kanjiId": "n5_l22_k004",
+      "lessonId": 22,
+      "level": "N5",
+      "character": "回",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Hồi",
+        "meaningVi": "xoay, lần",
+        "meaningViDisplay": "Hồi (xoay, lần)",
+        "meaningEn": "Turn, Times"
+      },
+      "readings": {
+        "onyomi": [
+          "KAI"
+        ],
+        "kunyomi": [
+          "mawa-ru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Cái vòng nhỏ nằm trong cái vòng lớn - XOAY tròn.",
+        "en": "A circle within a circle representing a TURN."
+      },
+      "decomposition": {
+        "structure": "enclosure",
+        "components": [
+          "囗",
+          "口"
+        ],
+        "componentNames": [
+          "Vi (vây quanh)",
+          "Khẩu (miệng)"
+        ],
+        "relatedKanji": [
+          "国",
+          "四"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "hoi",
+        "meaningViNoAccent": "xoay, lan",
+        "meaningEnNoAccent": "turn, times"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l22_v029",
+          "sourceSenseId": "n5_l22_s029",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l22_v028",
+          "sourceSenseId": "n5_l22_s028",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l19_v024",
+          "sourceSenseId": "n5_l19_s024",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Hồi (xoay, lần)",
+        "onyomi": "KAI",
+        "kunyomi": "mawa-ru"
+      }
+    },
+    {
+      "kanjiId": "n5_l22_k005",
+      "lessonId": 22,
+      "level": "N5",
+      "character": "転",
+      "strokeCount": 11,
+      "labels": {
+        "hanViet": "Chuyển",
+        "meaningVi": "lăn, chuyển động",
+        "meaningViDisplay": "Chuyển (lăn, chuyển động)",
+        "meaningEn": "Revolve, Turn"
+      },
+      "readings": {
+        "onyomi": [
+          "TEN"
+        ],
+        "kunyomi": [
+          "koro-bu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Chiếc xe (Xa 車) CHUYỂN động nhờ bánh xe quay tròn.",
+        "en": "A vehicle (車) turning its wheels to REVOLVE."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "車",
+          "云"
+        ],
+        "componentNames": [
+          "Xa (xe)",
+          "Vân (mây)"
+        ],
+        "relatedKanji": [
+          "車",
+          "軽",
+          "連"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "chuyen",
+        "meaningViNoAccent": "lan, chuyen dong",
+        "meaningEnNoAccent": "revolve, turn"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l22_v032",
+          "sourceSenseId": "n5_l22_s032",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l25_v012",
+          "sourceSenseId": "n5_l25_s012",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l18_v008",
+          "sourceSenseId": "n5_l18_s008",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Chuyển (lăn, chuyển động)",
+        "onyomi": "TEN",
+        "kunyomi": "koro-bu"
+      }
+    }
+  ]
+}

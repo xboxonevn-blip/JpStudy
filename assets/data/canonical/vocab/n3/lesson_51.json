@@ -1,0 +1,556 @@
+{
+  "schemaVersion": 2,
+  "dataset": "vocab",
+  "series": "starter-open-source",
+  "level": "N3",
+  "lessonId": 51,
+  "entryCount": 12,
+  "entries": [
+    {
+      "entryId": "n3_l51_s001",
+      "lessonId": 51,
+      "level": "N3",
+      "order": 1,
+      "tags": [
+        "starter",
+        "open-source-bootstrap",
+        "noun"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "open_source_bootstrap"
+      },
+      "lemma": {
+        "vocabId": "n3_l51_v001",
+        "term": "作法",
+        "reading": "さほう",
+        "kanji": [
+          "作",
+          "法"
+        ],
+        "labels": {
+          "hanViet": "Tác pháp"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l51_s001",
+        "meaningVi": "lễ nghi, phép tắc",
+        "meaningEn": "manners, etiquette, propriety"
+      },
+      "search": {
+        "termNoAccent": "作法",
+        "readingNoAccent": "さほう",
+        "meaningViNoAccent": "le nghi, phep tac",
+        "hanVietNoAccent": "tac phap"
+      },
+      "links": {
+        "sourceVocabId": "n3_l51_v001",
+        "sourceSenseId": "n3_l51_s001"
+      },
+      "legacy": {
+        "kanjiMeaning": "Tác pháp"
+      }
+    },
+    {
+      "entryId": "n3_l51_s002",
+      "lessonId": 51,
+      "level": "N3",
+      "order": 2,
+      "tags": [
+        "starter",
+        "open-source-bootstrap",
+        "na-adjective"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "open_source_bootstrap"
+      },
+      "lemma": {
+        "vocabId": "n3_l51_v002",
+        "term": "様々",
+        "reading": "さまざま",
+        "kanji": [
+          "様"
+        ],
+        "labels": {
+          "hanViet": "Dạng"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l51_s002",
+        "meaningVi": "đa dạng, nhiều loại",
+        "meaningEn": "varied, various"
+      },
+      "search": {
+        "termNoAccent": "様々",
+        "readingNoAccent": "さまざま",
+        "meaningViNoAccent": "da dang, nhieu loai",
+        "hanVietNoAccent": "dang"
+      },
+      "links": {
+        "sourceVocabId": "n3_l51_v002",
+        "sourceSenseId": "n3_l51_s002"
+      },
+      "legacy": {
+        "kanjiMeaning": "Dạng"
+      }
+    },
+    {
+      "entryId": "n3_l51_s003",
+      "lessonId": 51,
+      "level": "N3",
+      "order": 3,
+      "tags": [
+        "starter",
+        "open-source-bootstrap",
+        "verb"
+      ],
+      "classification": {
+        "script": "mixed",
+        "hasKanji": true,
+        "origin": "open_source_bootstrap"
+      },
+      "lemma": {
+        "vocabId": "n3_l51_v003",
+        "term": "冷ます",
+        "reading": "さます",
+        "kanji": [
+          "冷"
+        ],
+        "labels": {
+          "hanViet": "Lãnh"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l51_s003",
+        "meaningVi": "làm nguội",
+        "meaningEn": "to cool, to let cool"
+      },
+      "search": {
+        "termNoAccent": "冷ます",
+        "readingNoAccent": "さます",
+        "meaningViNoAccent": "lam nguoi",
+        "hanVietNoAccent": "lanh"
+      },
+      "links": {
+        "sourceVocabId": "n3_l51_v003",
+        "sourceSenseId": "n3_l51_s003"
+      },
+      "legacy": {
+        "kanjiMeaning": "Lãnh"
+      }
+    },
+    {
+      "entryId": "n3_l51_s004",
+      "lessonId": 51,
+      "level": "N3",
+      "order": 4,
+      "tags": [
+        "starter",
+        "open-source-bootstrap",
+        "verb"
+      ],
+      "classification": {
+        "script": "mixed",
+        "hasKanji": true,
+        "origin": "open_source_bootstrap"
+      },
+      "lemma": {
+        "vocabId": "n3_l51_v004",
+        "term": "覚ます",
+        "reading": "さます",
+        "kanji": [
+          "覚"
+        ],
+        "labels": {
+          "hanViet": "Giác"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l51_s004",
+        "meaningVi": "đánh thức, làm tỉnh",
+        "meaningEn": "to awaken"
+      },
+      "search": {
+        "termNoAccent": "覚ます",
+        "readingNoAccent": "さます",
+        "meaningViNoAccent": "danh thuc, lam tinh",
+        "hanVietNoAccent": "giac"
+      },
+      "links": {
+        "sourceVocabId": "n3_l51_v004",
+        "sourceSenseId": "n3_l51_s004"
+      },
+      "legacy": {
+        "kanjiMeaning": "Giác"
+      }
+    },
+    {
+      "entryId": "n3_l51_s005",
+      "lessonId": 51,
+      "level": "N3",
+      "order": 5,
+      "tags": [
+        "starter",
+        "open-source-bootstrap",
+        "verb"
+      ],
+      "classification": {
+        "script": "mixed",
+        "hasKanji": true,
+        "origin": "open_source_bootstrap"
+      },
+      "lemma": {
+        "vocabId": "n3_l51_v005",
+        "term": "冷める",
+        "reading": "さめる",
+        "kanji": [
+          "冷"
+        ],
+        "labels": {
+          "hanViet": "Lãnh"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l51_s005",
+        "meaningVi": "nguội đi, tan dần",
+        "meaningEn": "to become cool, to wear off"
+      },
+      "search": {
+        "termNoAccent": "冷める",
+        "readingNoAccent": "さめる",
+        "meaningViNoAccent": "nguoi di, tan dan",
+        "hanVietNoAccent": "lanh"
+      },
+      "links": {
+        "sourceVocabId": "n3_l51_v005",
+        "sourceSenseId": "n3_l51_s005"
+      },
+      "legacy": {
+        "kanjiMeaning": "Lãnh"
+      }
+    },
+    {
+      "entryId": "n3_l51_s006",
+      "lessonId": 51,
+      "level": "N3",
+      "order": 6,
+      "tags": [
+        "starter",
+        "open-source-bootstrap",
+        "verb"
+      ],
+      "classification": {
+        "script": "mixed",
+        "hasKanji": true,
+        "origin": "open_source_bootstrap"
+      },
+      "lemma": {
+        "vocabId": "n3_l51_v006",
+        "term": "覚める",
+        "reading": "さめる",
+        "kanji": [
+          "覚"
+        ],
+        "labels": {
+          "hanViet": "Giác"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l51_s006",
+        "meaningVi": "tỉnh giấc, tỉnh ra",
+        "meaningEn": "to wake, to wake up"
+      },
+      "search": {
+        "termNoAccent": "覚める",
+        "readingNoAccent": "さめる",
+        "meaningViNoAccent": "tinh giac, tinh ra",
+        "hanVietNoAccent": "giac"
+      },
+      "links": {
+        "sourceVocabId": "n3_l51_v006",
+        "sourceSenseId": "n3_l51_s006"
+      },
+      "legacy": {
+        "kanjiMeaning": "Giác"
+      }
+    },
+    {
+      "entryId": "n3_l51_s007",
+      "lessonId": 51,
+      "level": "N3",
+      "order": 7,
+      "tags": [
+        "starter",
+        "open-source-bootstrap",
+        "noun"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "open_source_bootstrap"
+      },
+      "lemma": {
+        "vocabId": "n3_l51_v007",
+        "term": "左右",
+        "reading": "さゆう",
+        "kanji": [
+          "左",
+          "右"
+        ],
+        "labels": {
+          "hanViet": "Tả hữu"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l51_s007",
+        "meaningVi": "trái phải; ảnh hưởng, chi phối",
+        "meaningEn": "left and right; influence"
+      },
+      "search": {
+        "termNoAccent": "左右",
+        "readingNoAccent": "さゆう",
+        "meaningViNoAccent": "trai phai; anh huong, chi phoi",
+        "hanVietNoAccent": "ta huu"
+      },
+      "links": {
+        "sourceVocabId": "n3_l51_v007",
+        "sourceSenseId": "n3_l51_s007"
+      },
+      "legacy": {
+        "kanjiMeaning": "Tả hữu"
+      }
+    },
+    {
+      "entryId": "n3_l51_s008",
+      "lessonId": 51,
+      "level": "N3",
+      "order": 8,
+      "tags": [
+        "starter",
+        "open-source-bootstrap",
+        "noun"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "open_source_bootstrap"
+      },
+      "lemma": {
+        "vocabId": "n3_l51_v008",
+        "term": "皿",
+        "reading": "さら",
+        "kanji": [
+          "皿"
+        ],
+        "labels": {
+          "hanViet": ""
+        }
+      },
+      "sense": {
+        "senseId": "n3_l51_s008",
+        "meaningVi": "cái đĩa",
+        "meaningEn": "plate, dish"
+      },
+      "search": {
+        "termNoAccent": "皿",
+        "readingNoAccent": "さら",
+        "meaningViNoAccent": "cai dia",
+        "hanVietNoAccent": ""
+      },
+      "links": {
+        "sourceVocabId": "n3_l51_v008",
+        "sourceSenseId": "n3_l51_s008"
+      },
+      "legacy": {
+        "kanjiMeaning": ""
+      }
+    },
+    {
+      "entryId": "n3_l51_s009",
+      "lessonId": 51,
+      "level": "N3",
+      "order": 9,
+      "tags": [
+        "starter",
+        "open-source-bootstrap",
+        "adverb"
+      ],
+      "classification": {
+        "script": "mixed",
+        "hasKanji": true,
+        "origin": "open_source_bootstrap"
+      },
+      "lemma": {
+        "vocabId": "n3_l51_v009",
+        "term": "更に",
+        "reading": "さらに",
+        "kanji": [
+          "更"
+        ],
+        "labels": {
+          "hanViet": "Canh"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l51_s009",
+        "meaningVi": "hơn nữa, thêm nữa",
+        "meaningEn": "furthermore, moreover"
+      },
+      "search": {
+        "termNoAccent": "更に",
+        "readingNoAccent": "さらに",
+        "meaningViNoAccent": "hon nua, them nua",
+        "hanVietNoAccent": "canh"
+      },
+      "links": {
+        "sourceVocabId": "n3_l51_v009",
+        "sourceSenseId": "n3_l51_s009"
+      },
+      "legacy": {
+        "kanjiMeaning": "Canh"
+      }
+    },
+    {
+      "entryId": "n3_l51_s010",
+      "lessonId": 51,
+      "level": "N3",
+      "order": 10,
+      "tags": [
+        "starter",
+        "open-source-bootstrap",
+        "noun",
+        "suru"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "open_source_bootstrap"
+      },
+      "lemma": {
+        "vocabId": "n3_l51_v010",
+        "term": "参加",
+        "reading": "さんか",
+        "kanji": [
+          "参"
+        ],
+        "labels": {
+          "hanViet": "Tham gia"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l51_s010",
+        "meaningVi": "tham gia",
+        "meaningEn": "participation"
+      },
+      "search": {
+        "termNoAccent": "参加",
+        "readingNoAccent": "さんか",
+        "meaningViNoAccent": "tham gia",
+        "hanVietNoAccent": "tham gia"
+      },
+      "links": {
+        "sourceVocabId": "n3_l51_v010",
+        "sourceSenseId": "n3_l51_s010"
+      },
+      "legacy": {
+        "kanjiMeaning": "Tham gia"
+      }
+    },
+    {
+      "entryId": "n3_l51_s011",
+      "lessonId": 51,
+      "level": "N3",
+      "order": 11,
+      "tags": [
+        "starter",
+        "open-source-bootstrap",
+        "noun",
+        "suru"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "open_source_bootstrap"
+      },
+      "lemma": {
+        "vocabId": "n3_l51_v011",
+        "term": "参考",
+        "reading": "さんこう",
+        "kanji": [
+          "参",
+          "考"
+        ],
+        "labels": {
+          "hanViet": "Tham khảo"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l51_s011",
+        "meaningVi": "tham khảo",
+        "meaningEn": "reference, consultation"
+      },
+      "search": {
+        "termNoAccent": "参考",
+        "readingNoAccent": "さんこう",
+        "meaningViNoAccent": "tham khao",
+        "hanVietNoAccent": "tham khao"
+      },
+      "links": {
+        "sourceVocabId": "n3_l51_v011",
+        "sourceSenseId": "n3_l51_s011"
+      },
+      "legacy": {
+        "kanjiMeaning": "Tham khảo"
+      }
+    },
+    {
+      "entryId": "n3_l51_s012",
+      "lessonId": 51,
+      "level": "N3",
+      "order": 12,
+      "tags": [
+        "starter",
+        "open-source-bootstrap",
+        "noun",
+        "suru"
+      ],
+      "classification": {
+        "script": "kanji",
+        "hasKanji": true,
+        "origin": "open_source_bootstrap"
+      },
+      "lemma": {
+        "vocabId": "n3_l51_v012",
+        "term": "賛成",
+        "reading": "さんせい",
+        "kanji": [
+          "賛"
+        ],
+        "labels": {
+          "hanViet": "Tán thành"
+        }
+      },
+      "sense": {
+        "senseId": "n3_l51_s012",
+        "meaningVi": "tán thành, đồng ý",
+        "meaningEn": "approval, agreement"
+      },
+      "search": {
+        "termNoAccent": "賛成",
+        "readingNoAccent": "さんせい",
+        "meaningViNoAccent": "tan thanh, dong y",
+        "hanVietNoAccent": "tan thanh"
+      },
+      "links": {
+        "sourceVocabId": "n3_l51_v012",
+        "sourceSenseId": "n3_l51_s012"
+      },
+      "legacy": {
+        "kanjiMeaning": "Tán thành"
+      }
+    }
+  ]
+}

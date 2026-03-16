@@ -1,0 +1,1018 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N5",
+  "lessonId": 2,
+  "entryCount": 14,
+  "entries": [
+    {
+      "kanjiId": "n5_l02_k001",
+      "lessonId": 2,
+      "level": "N5",
+      "character": "二",
+      "strokeCount": 2,
+      "labels": {
+        "hanViet": "Hai",
+        "meaningVi": null,
+        "meaningViDisplay": "Hai",
+        "meaningEn": "Two"
+      },
+      "readings": {
+        "onyomi": [
+          "NI"
+        ],
+        "kunyomi": [
+          "futa"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Hai nét ngang đại diện cho số 2.",
+        "en": "Two horizontal lines representing the number 2."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "一",
+          "三",
+          "十"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "hai",
+        "meaningViNoAccent": "",
+        "meaningEnNoAccent": "two"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l02_v048",
+          "sourceSenseId": "n5_l02_s048",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l02_v049",
+          "sourceSenseId": "n5_l02_s049",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l05_v034",
+          "sourceSenseId": "n5_l05_s034",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Hai",
+        "onyomi": "NI",
+        "kunyomi": "futa"
+      }
+    },
+    {
+      "kanjiId": "n5_l02_k002",
+      "lessonId": 2,
+      "level": "N5",
+      "character": "三",
+      "strokeCount": 3,
+      "labels": {
+        "hanViet": "Ba",
+        "meaningVi": null,
+        "meaningViDisplay": "Ba",
+        "meaningEn": "Three"
+      },
+      "readings": {
+        "onyomi": [
+          "SAN"
+        ],
+        "kunyomi": [
+          "mi"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Ba nét ngang đại diện cho số 3.",
+        "en": "Three horizontal lines representing the number 3."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "一",
+          "二",
+          "十"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "ba",
+        "meaningViNoAccent": "",
+        "meaningEnNoAccent": "three"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l02_v050",
+          "sourceSenseId": "n5_l02_s050",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l01_v042",
+          "sourceSenseId": "n5_l01_s042",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l05_v035",
+          "sourceSenseId": "n5_l05_s035",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Ba",
+        "onyomi": "SAN",
+        "kunyomi": "mi"
+      }
+    },
+    {
+      "kanjiId": "n5_l02_k003",
+      "lessonId": 2,
+      "level": "N5",
+      "character": "一",
+      "strokeCount": 1,
+      "labels": {
+        "hanViet": "Nhất",
+        "meaningVi": "một",
+        "meaningViDisplay": "Nhất (một)",
+        "meaningEn": "One"
+      },
+      "readings": {
+        "onyomi": [
+          "ICHI",
+          "ITSU"
+        ],
+        "kunyomi": [
+          "hito"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Một nét ngang đại diện cho số 1.",
+        "en": "One horizontal line representing the number 1."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "二",
+          "三",
+          "十",
+          "百"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "nhat",
+        "meaningViNoAccent": "mot",
+        "meaningEnNoAccent": "one"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l02_v051",
+          "sourceSenseId": "n5_l02_s051",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l02_v059",
+          "sourceSenseId": "n5_l02_s059",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l04_v024",
+          "sourceSenseId": "n5_l04_s024",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Nhất (một)",
+        "onyomi": "ICHI, ITSU",
+        "kunyomi": "hito"
+      }
+    },
+    {
+      "kanjiId": "n5_l02_k004",
+      "lessonId": 2,
+      "level": "N5",
+      "character": "四",
+      "strokeCount": 5,
+      "labels": {
+        "hanViet": "Tứ",
+        "meaningVi": "bốn",
+        "meaningViDisplay": "Tứ (bốn)",
+        "meaningEn": "Four"
+      },
+      "readings": {
+        "onyomi": [
+          "SHI"
+        ],
+        "kunyomi": [
+          "yon",
+          "yo"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Hình ảnh một cái cửa sổ có rèm che (các nét bên trong).",
+        "en": "Imagine a window with curtains inside."
+      },
+      "decomposition": {
+        "structure": "enclosure",
+        "components": [
+          "囗",
+          "儿"
+        ],
+        "componentNames": [
+          "Vi (vây quanh)",
+          "Nhi (chân người)"
+        ],
+        "relatedKanji": [
+          "国",
+          "回",
+          "園"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "tu",
+        "meaningViNoAccent": "bon",
+        "meaningEnNoAccent": "four"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l02_v052",
+          "sourceSenseId": "n5_l02_s052",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l04_v063",
+          "sourceSenseId": "n5_l04_s063",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l04_v062",
+          "sourceSenseId": "n5_l04_s062",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tứ (bốn)",
+        "onyomi": "SHI",
+        "kunyomi": "yon, yo"
+      }
+    },
+    {
+      "kanjiId": "n5_l02_k005",
+      "lessonId": 2,
+      "level": "N5",
+      "character": "五",
+      "strokeCount": 4,
+      "labels": {
+        "hanViet": "Ngũ",
+        "meaningVi": "năm",
+        "meaningViDisplay": "Ngũ (năm)",
+        "meaningEn": "Five"
+      },
+      "readings": {
+        "onyomi": [
+          "GO"
+        ],
+        "kunyomi": [
+          "itsu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Một người đang đứng với tư thế giống số 5.",
+        "en": "A person standing in a pose that looks like the number 5."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "一",
+          "二",
+          "三"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "ngu",
+        "meaningViNoAccent": "nam",
+        "meaningEnNoAccent": "five"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l02_v053",
+          "sourceSenseId": "n5_l02_s053",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l04_v065",
+          "sourceSenseId": "n5_l04_s065",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l04_v064",
+          "sourceSenseId": "n5_l04_s064",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Ngũ (năm)",
+        "onyomi": "GO",
+        "kunyomi": "itsu"
+      }
+    },
+    {
+      "kanjiId": "n5_l02_k006",
+      "lessonId": 2,
+      "level": "N5",
+      "character": "六",
+      "strokeCount": 4,
+      "labels": {
+        "hanViet": "Lục",
+        "meaningVi": "sáu",
+        "meaningViDisplay": "Lục (sáu)",
+        "meaningEn": "Six"
+      },
+      "readings": {
+        "onyomi": [
+          "ROKU"
+        ],
+        "kunyomi": [
+          "mu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Hình ảnh một người đang đứng dang tay và chân.",
+        "en": "A person stretching out arms and legs."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "亠",
+          "八"
+        ],
+        "componentNames": [
+          "Đầu (nắp đậy)",
+          "Bát (tám, chia ra)"
+        ],
+        "relatedKanji": [
+          "八",
+          "公"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "luc",
+        "meaningViNoAccent": "sau",
+        "meaningEnNoAccent": "six"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l02_v054",
+          "sourceSenseId": "n5_l02_s054",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l04_v067",
+          "sourceSenseId": "n5_l04_s067",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l04_v066",
+          "sourceSenseId": "n5_l04_s066",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Lục (sáu)",
+        "onyomi": "ROKU",
+        "kunyomi": "mu"
+      }
+    },
+    {
+      "kanjiId": "n5_l02_k007",
+      "lessonId": 2,
+      "level": "N5",
+      "character": "七",
+      "strokeCount": 2,
+      "labels": {
+        "hanViet": "Thất",
+        "meaningVi": "bảy",
+        "meaningViDisplay": "Thất (bảy)",
+        "meaningEn": "Seven"
+      },
+      "readings": {
+        "onyomi": [
+          "SHICHI"
+        ],
+        "kunyomi": [
+          "nana"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dạng giống số 7 lộn ngược.",
+        "en": "Looks like an upside-down number 7."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "切"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "that",
+        "meaningViNoAccent": "bay",
+        "meaningEnNoAccent": "seven"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l02_v055",
+          "sourceSenseId": "n5_l02_s055",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l05_v039",
+          "sourceSenseId": "n5_l05_s039",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l05_v057",
+          "sourceSenseId": "n5_l05_s057",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Thất (bảy)",
+        "onyomi": "SHICHI",
+        "kunyomi": "nana"
+      }
+    },
+    {
+      "kanjiId": "n5_l02_k008",
+      "lessonId": 2,
+      "level": "N5",
+      "character": "八",
+      "strokeCount": 2,
+      "labels": {
+        "hanViet": "Bát",
+        "meaningVi": "tám",
+        "meaningViDisplay": "Bát (tám)",
+        "meaningEn": "Eight"
+      },
+      "readings": {
+        "onyomi": [
+          "HACHI"
+        ],
+        "kunyomi": [
+          "ya"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Hai nét xòe ra như chân của số 8.",
+        "en": "Two lines spreading out like the legs of the number 8."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "六",
+          "公"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "bat",
+        "meaningViNoAccent": "tam",
+        "meaningEnNoAccent": "eight"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l02_v056",
+          "sourceSenseId": "n5_l02_s056",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l05_v040",
+          "sourceSenseId": "n5_l05_s040",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l05_v059",
+          "sourceSenseId": "n5_l05_s059",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Bát (tám)",
+        "onyomi": "HACHI",
+        "kunyomi": "ya"
+      }
+    },
+    {
+      "kanjiId": "n5_l02_k009",
+      "lessonId": 2,
+      "level": "N5",
+      "character": "九",
+      "strokeCount": 2,
+      "labels": {
+        "hanViet": "Cửu",
+        "meaningVi": "chín",
+        "meaningViDisplay": "Cửu (chín)",
+        "meaningEn": "Nine"
+      },
+      "readings": {
+        "onyomi": [
+          "KYUU"
+        ],
+        "kunyomi": [
+          "kokono"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Một cái móc câu lớn.",
+        "en": "Imagine a big hook."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "丸"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "cuu",
+        "meaningViNoAccent": "chin",
+        "meaningEnNoAccent": "nine"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l02_v057",
+          "sourceSenseId": "n5_l02_s057",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l05_v041",
+          "sourceSenseId": "n5_l05_s041",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l05_v061",
+          "sourceSenseId": "n5_l05_s061",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Cửu (chín)",
+        "onyomi": "KYUU",
+        "kunyomi": "kokono"
+      }
+    },
+    {
+      "kanjiId": "n5_l02_k010",
+      "lessonId": 2,
+      "level": "N5",
+      "character": "十",
+      "strokeCount": 2,
+      "labels": {
+        "hanViet": "Thập",
+        "meaningVi": "mười",
+        "meaningViDisplay": "Thập (mười)",
+        "meaningEn": "Ten"
+      },
+      "readings": {
+        "onyomi": [
+          "JUU"
+        ],
+        "kunyomi": [
+          "tou"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Một cái dấu cộng (thập tự).",
+        "en": "A simple plus sign (cross)."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "千",
+          "古",
+          "早"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "thap",
+        "meaningViNoAccent": "muoi",
+        "meaningEnNoAccent": "ten"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l02_v058",
+          "sourceSenseId": "n5_l02_s058",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l05_v042",
+          "sourceSenseId": "n5_l05_s042",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l05_v063",
+          "sourceSenseId": "n5_l05_s063",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Thập (mười)",
+        "onyomi": "JUU",
+        "kunyomi": "tou"
+      }
+    },
+    {
+      "kanjiId": "n5_l02_k011",
+      "lessonId": 2,
+      "level": "N5",
+      "character": "百",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Bách",
+        "meaningVi": "trăm",
+        "meaningViDisplay": "Bách (trăm)",
+        "meaningEn": "Hundred"
+      },
+      "readings": {
+        "onyomi": [
+          "HYAKU"
+        ],
+        "kunyomi": []
+      },
+      "mnemonic": {
+        "vi": "Chữ Bạch (trắng 白) thêm một nét ngang ở trên. Trắng tay sau khi tiêu hết 100 đồng.",
+        "en": "White (白) with a line on top. Going 'white' (empty) after spending 100 yen."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "一",
+          "白"
+        ],
+        "componentNames": [
+          "Nhất (một)",
+          "Bạch (trắng)"
+        ],
+        "relatedKanji": [
+          "白",
+          "千",
+          "万"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "bach",
+        "meaningViNoAccent": "tram",
+        "meaningEnNoAccent": "hundred"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l03_v035",
+          "sourceSenseId": "n5_l03_s035",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l02_v060",
+          "sourceSenseId": "n5_l02_s060",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l04_v067",
+          "sourceSenseId": "n5_l04_s067",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Bách (trăm)",
+        "onyomi": "HYAKU",
+        "kunyomi": null
+      }
+    },
+    {
+      "kanjiId": "n5_l02_k012",
+      "lessonId": 2,
+      "level": "N5",
+      "character": "千",
+      "strokeCount": 3,
+      "labels": {
+        "hanViet": "Thiên",
+        "meaningVi": "nghìn",
+        "meaningViDisplay": "Thiên (nghìn)",
+        "meaningEn": "Thousand"
+      },
+      "readings": {
+        "onyomi": [
+          "SEN"
+        ],
+        "kunyomi": [
+          "chi"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Chữ Thập (十) thêm một nét gạch chéo ở trên.",
+        "en": "A cross (十) with a stroke on top."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "丿",
+          "十"
+        ],
+        "componentNames": [
+          "Phiệt (nét phẩy)",
+          "Thập (mười)"
+        ],
+        "relatedKanji": [
+          "十",
+          "百",
+          "万"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "thien",
+        "meaningViNoAccent": "nghin",
+        "meaningEnNoAccent": "thousand"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l03_v036",
+          "sourceSenseId": "n5_l03_s036",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l02_v061",
+          "sourceSenseId": "n5_l02_s061",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Thiên (nghìn)",
+        "onyomi": "SEN",
+        "kunyomi": "chi"
+      }
+    },
+    {
+      "kanjiId": "n5_l02_k013",
+      "lessonId": 2,
+      "level": "N5",
+      "character": "万",
+      "strokeCount": 3,
+      "labels": {
+        "hanViet": "Vạn",
+        "meaningVi": "mười nghìn",
+        "meaningViDisplay": "Vạn (mười nghìn)",
+        "meaningEn": "Ten thousand"
+      },
+      "readings": {
+        "onyomi": [
+          "MAN"
+        ],
+        "kunyomi": []
+      },
+      "mnemonic": {
+        "vi": "Một người đang vung tay mạnh mẽ ra sau để vặn (vạn) mình.",
+        "en": "A person swinging arms back powerfully."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "千",
+          "百",
+          "方"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "van",
+        "meaningViNoAccent": "muoi nghin",
+        "meaningEnNoAccent": "ten thousand"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l03_v037",
+          "sourceSenseId": "n5_l03_s037",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l02_v059",
+          "sourceSenseId": "n5_l02_s059",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l37_v055",
+          "sourceSenseId": "n4_l37_s055",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Vạn (mười nghìn)",
+        "onyomi": "MAN",
+        "kunyomi": null
+      }
+    },
+    {
+      "kanjiId": "n5_l02_k014",
+      "lessonId": 2,
+      "level": "N5",
+      "character": "円",
+      "strokeCount": 4,
+      "labels": {
+        "hanViet": "Viên",
+        "meaningVi": "yên, tròn",
+        "meaningViDisplay": "Viên (yên, tròn)",
+        "meaningEn": "Yen, Circle"
+      },
+      "readings": {
+        "onyomi": [
+          "EN"
+        ],
+        "kunyomi": [
+          "maru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Một cái hộp chứa tiền xu bên trong.",
+        "en": "A box containing coins inside."
+      },
+      "decomposition": {
+        "structure": "enclosure",
+        "components": [
+          "冂",
+          "丨"
+        ],
+        "componentNames": [
+          "Quynh (vây quanh)",
+          "Cổn (nét sổ)"
+        ],
+        "relatedKanji": [
+          "内",
+          "回"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "vien",
+        "meaningViNoAccent": "yen, tron",
+        "meaningEnNoAccent": "yen, circle"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l03_v033",
+          "sourceSenseId": "n5_l03_s033",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l02_v060",
+          "sourceSenseId": "n5_l02_s060",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l45_v039",
+          "sourceSenseId": "n4_l45_s039",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Viên (yên, tròn)",
+        "onyomi": "EN",
+        "kunyomi": "maru"
+      }
+    }
+  ]
+}

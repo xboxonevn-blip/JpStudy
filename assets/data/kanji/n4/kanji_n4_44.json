@@ -23,7 +23,23 @@
         "sourceSenseId": "n4_l44_s001"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Khấp",
+      "structure": "left-right",
+      "components": [
+        "氵",
+        "立"
+      ],
+      "componentNames": [
+        "Thủy (nước)",
+        "Lập (đứng)"
+      ],
+      "relatedKanji": [
+        "立",
+        "洗"
+      ]
+    }
   },
   {
     "lessonId": 44,
@@ -49,7 +65,23 @@
         "sourceSenseId": "n4_l44_s002"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Tiếu",
+      "structure": "top-bottom",
+      "components": [
+        "⺮",
+        "夭"
+      ],
+      "componentNames": [
+        "Trúc (tre)",
+        "Yêu (non trẻ)"
+      ],
+      "relatedKanji": [
+        "答",
+        "簡"
+      ]
+    }
   },
   {
     "lessonId": 44,
@@ -75,7 +107,23 @@
         "sourceSenseId": "n4_l44_s003"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Miên",
+      "structure": "left-right",
+      "components": [
+        "目",
+        "民"
+      ],
+      "componentNames": [
+        "Mục (mắt)",
+        "Dân (dân)"
+      ],
+      "relatedKanji": [
+        "目",
+        "見"
+      ]
+    }
   },
   {
     "lessonId": 44,
@@ -101,7 +149,11 @@
         "sourceSenseId": "n4_l44_s004"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Can",
+      "structure": "standalone"
+    }
   },
   {
     "lessonId": 44,
@@ -123,7 +175,24 @@
         "sourceSenseId": "n5_l12_s001"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Giản",
+      "structure": "top-bottom",
+      "components": [
+        "⺮",
+        "間"
+      ],
+      "componentNames": [
+        "Trúc (tre)",
+        "Gian (giữa)"
+      ],
+      "relatedKanji": [
+        "間",
+        "答",
+        "笑"
+      ]
+    }
   },
   {
     "lessonId": 44,
@@ -145,6 +214,13 @@
         "sourceSenseId": "n5_l12_s001"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Đơn",
+      "structure": "standalone",
+      "relatedKanji": [
+        "簡"
+      ]
+    }
   }
 ]

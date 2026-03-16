@@ -1,0 +1,469 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N4",
+  "lessonId": 37,
+  "entryCount": 6,
+  "entries": [
+    {
+      "kanjiId": "n4_l37_k001",
+      "lessonId": 37,
+      "level": "N4",
+      "character": "育",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Dục",
+        "meaningVi": "nuôi dạy",
+        "meaningViDisplay": "Dục (nuôi dạy)",
+        "meaningEn": "Raise, Grow"
+      },
+      "readings": {
+        "onyomi": [
+          "IKU"
+        ],
+        "kunyomi": [
+          "soda-tsu",
+          "soda-teru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Thịt (Nguyệt 月) lớn lên từ đứa trẻ lộn ngược (vân) - NUÔI DẠY.",
+        "en": "Child developing body/flesh (月) - GROWING up."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "𠒇",
+          "月"
+        ],
+        "componentNames": [
+          "Tử biến thể (trẻ em)",
+          "Nguyệt (tháng, thịt)"
+        ],
+        "relatedKanji": [
+          "教"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "duc",
+        "meaningViNoAccent": "nuoi day",
+        "meaningEnNoAccent": "raise, grow"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l37_v052",
+          "sourceSenseId": "n4_l37_s052",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l42_v012",
+          "sourceSenseId": "n4_l42_s012",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l28_v048",
+          "sourceSenseId": "n4_l28_s048",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Dục (nuôi dạy)",
+        "onyomi": "IKU",
+        "kunyomi": "soda-tsu, soda-teru"
+      }
+    },
+    {
+      "kanjiId": "n4_l37_k002",
+      "lessonId": 37,
+      "level": "N4",
+      "character": "降",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Giáng",
+        "meaningVi": "xuống, rơi",
+        "meaningViDisplay": "Giáng (xuống, rơi)",
+        "meaningEn": "Descend, Precipitate"
+      },
+      "readings": {
+        "onyomi": [
+          "KOU"
+        ],
+        "kunyomi": [
+          "o-riru",
+          "fu-ru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Đi bộ trên gò đất (Ấp 阝) để XUỐNG núi.",
+        "en": "Walking down a hill (阝) - DESCEND."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "阝",
+          "夅"
+        ],
+        "componentNames": [
+          "Ấp (gò đất)",
+          "Giáng (đi xuống)"
+        ],
+        "relatedKanji": [
+          "都"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "giang",
+        "meaningViNoAccent": "xuong, roi",
+        "meaningEnNoAccent": "descend, precipitate"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l37_v054",
+          "sourceSenseId": "n4_l37_s054",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l37_v057",
+          "sourceSenseId": "n4_l37_s057",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l48_v001",
+          "sourceSenseId": "n4_l48_s001",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Giáng (xuống, rơi)",
+        "onyomi": "KOU",
+        "kunyomi": "o-riru, fu-ru"
+      }
+    },
+    {
+      "kanjiId": "n4_l37_k003",
+      "lessonId": 37,
+      "level": "N4",
+      "character": "若",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Nhược",
+        "meaningVi": "trẻ",
+        "meaningViDisplay": "Nhược (trẻ)",
+        "meaningEn": "Young"
+      },
+      "readings": {
+        "onyomi": [
+          "JAKU"
+        ],
+        "kunyomi": [
+          "waka-i"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Phụ nữ (Nữ 女) ăn cỏ (Thảo 艹) thì vẫn còn TRẺ.",
+        "en": "A woman (女) as fresh as grass (艹) - YOUNG."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "艹",
+          "右"
+        ],
+        "componentNames": [
+          "Thảo (cỏ)",
+          "Hữu biến thể (phải)"
+        ],
+        "relatedKanji": [
+          "薬",
+          "落"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "nhuoc",
+        "meaningViNoAccent": "tre",
+        "meaningEnNoAccent": "young"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l37_v053",
+          "sourceSenseId": "n4_l37_s053",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l37_v056",
+          "sourceSenseId": "n4_l37_s056",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l16_v015",
+          "sourceSenseId": "n5_l16_s015",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Nhược (trẻ)",
+        "onyomi": "JAKU",
+        "kunyomi": "waka-i"
+      }
+    },
+    {
+      "kanjiId": "n4_l37_k004",
+      "lessonId": 37,
+      "level": "N4",
+      "character": "取",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Thủ",
+        "meaningVi": "lấy",
+        "meaningViDisplay": "Thủ (lấy)",
+        "meaningEn": "Take"
+      },
+      "readings": {
+        "onyomi": [
+          "SHU"
+        ],
+        "kunyomi": [
+          "to-ru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng Tay (Hựu 又) để nắm cái Tai (Nhĩ 耳) mà LẤY.",
+        "en": "Using a hand (又) to grab an ear (耳) - TAKE."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "耳",
+          "又"
+        ],
+        "componentNames": [
+          "Nhĩ (tai)",
+          "Hựu (tay)"
+        ],
+        "relatedKanji": [
+          "耳",
+          "友"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "thu",
+        "meaningViNoAccent": "lay",
+        "meaningEnNoAccent": "take"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l37_v049",
+          "sourceSenseId": "n4_l37_s049",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l41_v058",
+          "sourceSenseId": "n4_l41_s058",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l37_v008",
+          "sourceSenseId": "n4_l37_s008",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Thủ (lấy)",
+        "onyomi": "SHU",
+        "kunyomi": "to-ru"
+      }
+    },
+    {
+      "kanjiId": "n4_l37_k005",
+      "lessonId": 37,
+      "level": "N4",
+      "character": "拾",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Thập",
+        "meaningVi": "nhặt",
+        "meaningViDisplay": "Thập (nhặt)",
+        "meaningEn": "Pick up"
+      },
+      "readings": {
+        "onyomi": [
+          "SHUU"
+        ],
+        "kunyomi": [
+          "hiro-u"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng Tay (Thủ 扌) NHẶT mười (Thập 十) vật phẩm rồi cất vào hộp (Hợp 合).",
+        "en": "Hand (扌) gathering things together (合)."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "扌",
+          "合"
+        ],
+        "componentNames": [
+          "Thủ (tay)",
+          "Hợp (phù hợp)"
+        ],
+        "relatedKanji": [
+          "手",
+          "合",
+          "掛",
+          "押"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "thap",
+        "meaningViNoAccent": "nhat",
+        "meaningEnNoAccent": "pick up"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l37_v051",
+          "sourceSenseId": "n4_l37_s051",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l37_v055",
+          "sourceSenseId": "n4_l37_s055",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l35_v005",
+          "sourceSenseId": "n4_l35_s005",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Thập (nhặt)",
+        "onyomi": "SHUU",
+        "kunyomi": "hiro-u"
+      }
+    },
+    {
+      "kanjiId": "n4_l37_k006",
+      "lessonId": 37,
+      "level": "N4",
+      "character": "押",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Áp",
+        "meaningVi": "ấn, đẩy",
+        "meaningViDisplay": "Áp (ấn, đẩy)",
+        "meaningEn": "Push"
+      },
+      "readings": {
+        "onyomi": [
+          "OU"
+        ],
+        "kunyomi": [
+          "o-su"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng Tay (Thủ 扌) ÁP vào tấm giáp (Giáp 甲).",
+        "en": "Hand (扌) exerting pressure on a surface (甲)."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "扌",
+          "甲"
+        ],
+        "componentNames": [
+          "Thủ (tay)",
+          "Giáp (giáp)"
+        ],
+        "relatedKanji": [
+          "手",
+          "招",
+          "打"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "ap",
+        "meaningViNoAccent": "an, day",
+        "meaningEnNoAccent": "push"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l37_v050",
+          "sourceSenseId": "n4_l37_s050",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l22_v016",
+          "sourceSenseId": "n5_l22_s016",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l38_v032",
+          "sourceSenseId": "n4_l38_s032",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Áp (ấn, đẩy)",
+        "onyomi": "OU",
+        "kunyomi": "o-su"
+      }
+    }
+  ]
+}

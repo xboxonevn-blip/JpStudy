@@ -1,0 +1,474 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N4",
+  "lessonId": 46,
+  "entryCount": 6,
+  "entries": [
+    {
+      "kanjiId": "n4_l46_k001",
+      "lessonId": 46,
+      "level": "N4",
+      "character": "約",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Ước",
+        "meaningVi": "lời hứa, khoảng",
+        "meaningViDisplay": "Ước (lời hứa, khoảng)",
+        "meaningEn": "Promise, Approx"
+      },
+      "readings": {
+        "onyomi": [
+          "YAKU"
+        ],
+        "kunyomi": []
+      },
+      "mnemonic": {
+        "vi": "Dùng sợi tơ (Mịch 糸) để buộc chặt một điều gì đó - LỜI HỨA.",
+        "en": "Thread (糸) used to bind a PROMISE."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "糸",
+          "勺"
+        ],
+        "componentNames": [
+          "Mịch (sợi tơ)",
+          "Chước (cái muỗng)"
+        ],
+        "relatedKanji": [
+          "糸",
+          "終",
+          "線",
+          "絡"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "uoc",
+        "meaningViNoAccent": "loi hua, khoang",
+        "meaningEnNoAccent": "promise, approx"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l46_v044",
+          "sourceSenseId": "n4_l46_s044",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l47_v025",
+          "sourceSenseId": "n4_l47_s025",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l18_v009",
+          "sourceSenseId": "n5_l18_s009",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Ước (lời hứa, khoảng)",
+        "onyomi": "YAKU",
+        "kunyomi": null
+      }
+    },
+    {
+      "kanjiId": "n4_l46_k002",
+      "lessonId": 46,
+      "level": "N4",
+      "character": "束",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": "Thúc",
+        "meaningVi": "bó, buộc",
+        "meaningViDisplay": "Thúc (bó, buộc)",
+        "meaningEn": "Bundle"
+      },
+      "readings": {
+        "onyomi": [
+          "SOKU"
+        ],
+        "kunyomi": [
+          "taba"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng dây buộc quanh cái Cây (Mộc 木) thành một BÓ.",
+        "en": "A rope tied around a tree (木) to form a BUNDLE."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "木",
+          "口"
+        ],
+        "componentNames": [
+          "Mộc (cây)",
+          "Khẩu biến thể (vòng buộc)"
+        ],
+        "relatedKanji": [
+          "木",
+          "速",
+          "頼"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "thuc",
+        "meaningViNoAccent": "bo, buoc",
+        "meaningEnNoAccent": "bundle"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l46_v042",
+          "sourceSenseId": "n4_l46_s042",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l46_v039",
+          "sourceSenseId": "n4_l46_s039",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l09_v029",
+          "sourceSenseId": "n5_l09_s029",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Thúc (bó, buộc)",
+        "onyomi": "SOKU",
+        "kunyomi": "taba"
+      }
+    },
+    {
+      "kanjiId": "n4_l46_k003",
+      "lessonId": 46,
+      "level": "N4",
+      "character": "守",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Thủ",
+        "meaningVi": "giữ, bảo vệ",
+        "meaningViDisplay": "Thủ (giữ, bảo vệ)",
+        "meaningEn": "Protect, Keep"
+      },
+      "readings": {
+        "onyomi": [
+          "SHU"
+        ],
+        "kunyomi": [
+          "mamo-ru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dưới mái nhà (Miên 宀) bảo vệ từng tấc (Thốn 寸) đất - GIỮ GÌN.",
+        "en": "Guarding an inch (寸) of land under a roof (宀)."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "宀",
+          "寸"
+        ],
+        "componentNames": [
+          "Miên (mái nhà)",
+          "Thốn (tấc)"
+        ],
+        "relatedKanji": [
+          "安",
+          "字",
+          "宅",
+          "村"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "thu",
+        "meaningViNoAccent": "giu, bao ve",
+        "meaningEnNoAccent": "protect, keep"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l33_v061",
+          "sourceSenseId": "n4_l33_s061",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l46_v005",
+          "sourceSenseId": "n4_l46_s005",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l33_v051",
+          "sourceSenseId": "n4_l33_s051",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Thủ (giữ, bảo vệ)",
+        "onyomi": "SHU",
+        "kunyomi": "mamo-ru"
+      }
+    },
+    {
+      "kanjiId": "n4_l46_k004",
+      "lessonId": 46,
+      "level": "N4",
+      "character": "破",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Phá",
+        "meaningVi": "làm rách, phá vỡ",
+        "meaningViDisplay": "Phá (làm rách, phá vỡ)",
+        "meaningEn": "Tear, Break"
+      },
+      "readings": {
+        "onyomi": [
+          "HA"
+        ],
+        "kunyomi": [
+          "yabu-ru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng Đá (Thạch 石) đập vào làm rách lớp da (Bì 皮) - PHÁ VỠ.",
+        "en": "A stone (石) tearing through skin (皮) - BREAK."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "石",
+          "皮"
+        ],
+        "componentNames": [
+          "Thạch (đá)",
+          "Bì (da)"
+        ],
+        "relatedKanji": [
+          "石",
+          "波",
+          "彼"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "pha",
+        "meaningViNoAccent": "lam rach, pha vo",
+        "meaningEnNoAccent": "tear, break"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l46_v043",
+          "sourceSenseId": "n4_l46_s043",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l46_v047",
+          "sourceSenseId": "n4_l46_s047",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l46_v040",
+          "sourceSenseId": "n4_l46_s040",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Phá (làm rách, phá vỡ)",
+        "onyomi": "HA",
+        "kunyomi": "yabu-ru"
+      }
+    },
+    {
+      "kanjiId": "n4_l46_k005",
+      "lessonId": 46,
+      "level": "N4",
+      "character": "連",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Liên",
+        "meaningVi": "dẫn đi, liên lạc",
+        "meaningViDisplay": "Liên (dẫn đi, liên lạc)",
+        "meaningEn": "Take along, Connect"
+      },
+      "readings": {
+        "onyomi": [
+          "REN"
+        ],
+        "kunyomi": [
+          "tsu-reru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Chiếc xe (Xa 車) đi (Sước 辶) nối đuôi nhau - LIÊN tục/LIÊN lạc.",
+        "en": "Vehicles (車) following each other on the road (辶)."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "車",
+          "辶"
+        ],
+        "componentNames": [
+          "Xa (xe)",
+          "Sước (đi)"
+        ],
+        "relatedKanji": [
+          "車",
+          "転",
+          "軽",
+          "運"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "lien",
+        "meaningViNoAccent": "dan di, lien lac",
+        "meaningEnNoAccent": "take along, connect"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l46_v046",
+          "sourceSenseId": "n4_l46_s046",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l46_v041",
+          "sourceSenseId": "n4_l46_s041",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l42_v036",
+          "sourceSenseId": "n4_l42_s036",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Liên (dẫn đi, liên lạc)",
+        "onyomi": "REN",
+        "kunyomi": "tsu-reru"
+      }
+    },
+    {
+      "kanjiId": "n4_l46_k006",
+      "lessonId": 46,
+      "level": "N4",
+      "character": "絡",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Lạc",
+        "meaningVi": "liên lạc",
+        "meaningViDisplay": "Lạc (liên lạc)",
+        "meaningEn": "Entwine, Contact"
+      },
+      "readings": {
+        "onyomi": [
+          "RAKU"
+        ],
+        "kunyomi": [
+          "kara-mu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng sợi tơ (Mịch 糸) để kết nối - LIÊN LẠC.",
+        "en": "Using thread (糸) to CONNECT things."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "糸",
+          "各"
+        ],
+        "componentNames": [
+          "Mịch (sợi tơ)",
+          "Các (mỗi)"
+        ],
+        "relatedKanji": [
+          "糸",
+          "約",
+          "終",
+          "落"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "lac",
+        "meaningViNoAccent": "lien lac",
+        "meaningEnNoAccent": "entwine, contact"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l46_v045",
+          "sourceSenseId": "n4_l46_s045",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l46_v041",
+          "sourceSenseId": "n4_l46_s041",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l26_v038",
+          "sourceSenseId": "n4_l26_s038",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Lạc (liên lạc)",
+        "onyomi": "RAKU",
+        "kunyomi": "kara-mu"
+      }
+    }
+  ]
+}

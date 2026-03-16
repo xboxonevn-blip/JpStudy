@@ -91,6 +91,24 @@ Reports:
 - `tooling/reports/n4_promotion_history.json`
 - `tooling/reports/n4_promotion_schedule_state.json`
 
+### Canonical Content Schema v2
+
+```bash
+# Embed decomposition into kanji lesson data and regenerate legacy export
+python tooling/sync_kanji_decomposition_labels.py
+
+# Export canonical vocab + kanji lesson assets
+python tooling/build_canonical_content_v2.py
+
+# Validate legacy + canonical content integrity
+python tooling/validate_content_assets_v2.py
+```
+
+References:
+- `docs/DATA_SCHEMA_V2.md`
+- `docs/reports/canonical-content-v2-report.json`
+- `docs/reports/content-validation-v2.json`
+
 ## UI/UX Process Visibility
 
 - Open in app: Settings -> `Design Lab` (route: `/design-lab`).

@@ -1,0 +1,688 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N5",
+  "lessonId": 10,
+  "entryCount": 9,
+  "entries": [
+    {
+      "kanjiId": "n5_l10_k001",
+      "lessonId": 10,
+      "level": "N5",
+      "character": "上",
+      "strokeCount": 3,
+      "labels": {
+        "hanViet": "Thượng",
+        "meaningVi": "trên",
+        "meaningViDisplay": "Thượng (trên)",
+        "meaningEn": "Up, Above"
+      },
+      "readings": {
+        "onyomi": [
+          "JOU"
+        ],
+        "kunyomi": [
+          "ue"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Vạch kẻ chỉ hướng lên TRÊN.",
+        "en": "A line pointing UPWARDS."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "下",
+          "止"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "thuong",
+        "meaningViNoAccent": "tren",
+        "meaningEnNoAccent": "up, above"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l10_v031",
+          "sourceSenseId": "n5_l10_s031",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l09_v005",
+          "sourceSenseId": "n5_l09_s005",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l08_v056",
+          "sourceSenseId": "n5_l08_s056",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Thượng (trên)",
+        "onyomi": "JOU",
+        "kunyomi": "ue"
+      }
+    },
+    {
+      "kanjiId": "n5_l10_k002",
+      "lessonId": 10,
+      "level": "N5",
+      "character": "下",
+      "strokeCount": 3,
+      "labels": {
+        "hanViet": "Hạ",
+        "meaningVi": "dưới",
+        "meaningViDisplay": "Hạ (dưới)",
+        "meaningEn": "Down, Below"
+      },
+      "readings": {
+        "onyomi": [
+          "KA",
+          "GE"
+        ],
+        "kunyomi": [
+          "shita"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Vạch kẻ chỉ hướng xuống DƯỚI.",
+        "en": "A line pointing DOWNWARDS."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "上",
+          "不"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "ha",
+        "meaningViNoAccent": "duoi",
+        "meaningEnNoAccent": "down, below"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l10_v032",
+          "sourceSenseId": "n5_l10_s032",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l09_v006",
+          "sourceSenseId": "n5_l09_s006",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l05_v010",
+          "sourceSenseId": "n5_l05_s010",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Hạ (dưới)",
+        "onyomi": "KA, GE",
+        "kunyomi": "shita"
+      }
+    },
+    {
+      "kanjiId": "n5_l10_k003",
+      "lessonId": 10,
+      "level": "N5",
+      "character": "前",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Tiền",
+        "meaningVi": "trước",
+        "meaningViDisplay": "Tiền (trước)",
+        "meaningEn": "Front, Before"
+      },
+      "readings": {
+        "onyomi": [
+          "ZEN"
+        ],
+        "kunyomi": [
+          "mae"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Một người cầm dao (Đao 刂) đứng trước mặt để bảo vệ.",
+        "en": "A person with a knife (刂) standing in FRONT."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "䒑",
+          "月",
+          "刂"
+        ],
+        "componentNames": [
+          "Thảo biến thể (trên)",
+          "Nguyệt (tháng)",
+          "Đao (dao)"
+        ],
+        "relatedKanji": [
+          "後",
+          "明"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "tien",
+        "meaningViNoAccent": "truoc",
+        "meaningEnNoAccent": "front, before"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l10_v033",
+          "sourceSenseId": "n5_l10_s033",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l14_v021",
+          "sourceSenseId": "n5_l14_s021",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l04_v018",
+          "sourceSenseId": "n5_l04_s018",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tiền (trước)",
+        "onyomi": "ZEN",
+        "kunyomi": "mae"
+      }
+    },
+    {
+      "kanjiId": "n5_l10_k004",
+      "lessonId": 10,
+      "level": "N5",
+      "character": "後",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Hậu",
+        "meaningVi": "sau",
+        "meaningViDisplay": "Hậu (sau)",
+        "meaningEn": "Back, After"
+      },
+      "readings": {
+        "onyomi": [
+          "GO",
+          "KOU"
+        ],
+        "kunyomi": [
+          "usho-ro",
+          "ato"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Người đang đi bộ chậm rãi ở phía SAU.",
+        "en": "Someone walking slowly BEHIND."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "彳",
+          "幺",
+          "夂"
+        ],
+        "componentNames": [
+          "Sách (bước chân)",
+          "Yêu (nhỏ)",
+          "Truy (đi chậm)"
+        ],
+        "relatedKanji": [
+          "前",
+          "行"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "hau",
+        "meaningViNoAccent": "sau",
+        "meaningEnNoAccent": "back, after"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l10_v053",
+          "sourceSenseId": "n5_l10_s053",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l04_v019",
+          "sourceSenseId": "n5_l04_s019",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l10_v052",
+          "sourceSenseId": "n5_l10_s052",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Hậu (sau)",
+        "onyomi": "GO, KOU",
+        "kunyomi": "usho-ro, ato"
+      }
+    },
+    {
+      "kanjiId": "n5_l10_k005",
+      "lessonId": 10,
+      "level": "N5",
+      "character": "右",
+      "strokeCount": 5,
+      "labels": {
+        "hanViet": "Hữu",
+        "meaningVi": "phải",
+        "meaningViDisplay": "Hữu (phải)",
+        "meaningEn": "Right"
+      },
+      "readings": {
+        "onyomi": [
+          "U",
+          "YUU"
+        ],
+        "kunyomi": [
+          "migi"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng Tay (Khâu 口) đưa thức ăn vào Miệng bên PHẢI.",
+        "en": "Hand taking food to the mouth (口) on the RIGHT side."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "ナ",
+          "口"
+        ],
+        "componentNames": [
+          "Tay (nét tay)",
+          "Khẩu (miệng)"
+        ],
+        "relatedKanji": [
+          "左",
+          "口",
+          "有"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "huu",
+        "meaningViNoAccent": "phai",
+        "meaningEnNoAccent": "right"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l10_v035",
+          "sourceSenseId": "n5_l10_s035",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l10_v054",
+          "sourceSenseId": "n5_l10_s054",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l14_v041",
+          "sourceSenseId": "n5_l14_s041",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Hữu (phải)",
+        "onyomi": "U, YUU",
+        "kunyomi": "migi"
+      }
+    },
+    {
+      "kanjiId": "n5_l10_k006",
+      "lessonId": 10,
+      "level": "N5",
+      "character": "左",
+      "strokeCount": 5,
+      "labels": {
+        "hanViet": "Tả",
+        "meaningVi": "trái",
+        "meaningViDisplay": "Tả (trái)",
+        "meaningEn": "Left"
+      },
+      "readings": {
+        "onyomi": [
+          "SA"
+        ],
+        "kunyomi": [
+          "hidari"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Tay cầm thước đo (Công 工) ở bên TRÁI.",
+        "en": "Hand holding a square tool (工) on the LEFT side."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "ナ",
+          "工"
+        ],
+        "componentNames": [
+          "Tay (nét tay)",
+          "Công (dụng cụ)"
+        ],
+        "relatedKanji": [
+          "右",
+          "工"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "ta",
+        "meaningViNoAccent": "trai",
+        "meaningEnNoAccent": "left"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l10_v036",
+          "sourceSenseId": "n5_l10_s036",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l10_v054",
+          "sourceSenseId": "n5_l10_s054",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tả (trái)",
+        "onyomi": "SA",
+        "kunyomi": "hidari"
+      }
+    },
+    {
+      "kanjiId": "n5_l10_k007",
+      "lessonId": 10,
+      "level": "N5",
+      "character": "中",
+      "strokeCount": 4,
+      "labels": {
+        "hanViet": "Trung",
+        "meaningVi": "trong, giữa",
+        "meaningViDisplay": "Trung (trong, giữa)",
+        "meaningEn": "Inside, Middle"
+      },
+      "readings": {
+        "onyomi": [
+          "CHUU"
+        ],
+        "kunyomi": [
+          "naka"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Một mũi tên đâm xuyên qua GIỮA mục tiêu.",
+        "en": "An arrow piercing through the MIDDLE."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "口",
+          "丨"
+        ],
+        "componentNames": [
+          "Khẩu (miệng)",
+          "Cổn (nét sổ)"
+        ],
+        "relatedKanji": [
+          "申"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "trung",
+        "meaningViNoAccent": "trong, giua",
+        "meaningEnNoAccent": "inside, middle"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l10_v037",
+          "sourceSenseId": "n5_l10_s037",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l01_v036",
+          "sourceSenseId": "n5_l01_s036",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l27_v063",
+          "sourceSenseId": "n4_l27_s063",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Trung (trong, giữa)",
+        "onyomi": "CHUU",
+        "kunyomi": "naka"
+      }
+    },
+    {
+      "kanjiId": "n5_l10_k008",
+      "lessonId": 10,
+      "level": "N5",
+      "character": "外",
+      "strokeCount": 5,
+      "labels": {
+        "hanViet": "Ngoại",
+        "meaningVi": "ngoài",
+        "meaningViDisplay": "Ngoại (ngoài)",
+        "meaningEn": "Outside"
+      },
+      "readings": {
+        "onyomi": [
+          "GAI"
+        ],
+        "kunyomi": [
+          "soto"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Buổi tối (Tịch 夕) dùng dao (Bặc 卜) để săn bắn bên NGOÀI.",
+        "en": "Hunting OUTSIDE in the evening (夕)."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "夕",
+          "卜"
+        ],
+        "componentNames": [
+          "Tịch (chiều tối)",
+          "Bặc (bói)"
+        ],
+        "relatedKanji": [
+          "夕",
+          "名",
+          "多"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "ngoai",
+        "meaningViNoAccent": "ngoai",
+        "meaningEnNoAccent": "outside"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l10_v038",
+          "sourceSenseId": "n5_l10_s038",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l11_v044",
+          "sourceSenseId": "n5_l11_s044",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l11_v066",
+          "sourceSenseId": "n5_l11_s066",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Ngoại (ngoài)",
+        "onyomi": "GAI",
+        "kunyomi": "soto"
+      }
+    },
+    {
+      "kanjiId": "n5_l10_k009",
+      "lessonId": 10,
+      "level": "N5",
+      "character": "間",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Gian",
+        "meaningVi": "giữa",
+        "meaningViDisplay": "Gian (giữa)",
+        "meaningEn": "Between, Interval"
+      },
+      "readings": {
+        "onyomi": [
+          "KAN"
+        ],
+        "kunyomi": [
+          "aida"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Ánh sáng Mặt trời (Nhật 日) lọt qua khe Cửa (Môn 門).",
+        "en": "The sun (日) shining through the gates (門)."
+      },
+      "decomposition": {
+        "structure": "enclosure",
+        "components": [
+          "門",
+          "日"
+        ],
+        "componentNames": [
+          "Môn (cửa)",
+          "Nhật (ngày)"
+        ],
+        "relatedKanji": [
+          "門",
+          "日",
+          "聞",
+          "問",
+          "開",
+          "閉",
+          "簡"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "gian",
+        "meaningViNoAccent": "giua",
+        "meaningEnNoAccent": "between, interval"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l10_v041",
+          "sourceSenseId": "n5_l10_s041",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l09_v027",
+          "sourceSenseId": "n5_l09_s027",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l11_v045",
+          "sourceSenseId": "n5_l11_s045",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Gian (giữa)",
+        "onyomi": "KAN",
+        "kunyomi": "aida"
+      }
+    }
+  ]
+}

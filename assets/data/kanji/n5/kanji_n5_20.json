@@ -23,7 +23,17 @@
         "sourceSenseId": "n5_l14_s007"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Chỉ",
+      "structure": "standalone",
+      "relatedKanji": [
+        "歩",
+        "走",
+        "足",
+        "正"
+      ]
+    }
   },
   {
     "lessonId": 20,
@@ -49,7 +59,15 @@
         "sourceSenseId": "n5_l12_s023"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Vũ",
+      "structure": "standalone",
+      "relatedKanji": [
+        "雪",
+        "雲"
+      ]
+    }
   },
   {
     "lessonId": 20,
@@ -71,6 +89,21 @@
         "sourceSenseId": "n5_l20_s037"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Tuyết",
+      "structure": "top-bottom",
+      "components": [
+        "雨",
+        "彐"
+      ],
+      "componentNames": [
+        "Vũ (mưa)",
+        "Kệ (tay nhỏ)"
+      ],
+      "relatedKanji": [
+        "雨"
+      ]
+    }
   }
 ]

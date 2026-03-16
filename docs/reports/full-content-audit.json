@@ -1,0 +1,216 @@
+{
+  "legacyVocab": {
+    "levels": {
+      "N5": {
+        "expectedLessons": 25,
+        "populatedLessons": 25,
+        "missingLessons": [],
+        "missingFiles": []
+      },
+      "N4": {
+        "expectedLessons": 25,
+        "populatedLessons": 25,
+        "missingLessons": [],
+        "missingFiles": []
+      },
+      "N3": {
+        "expectedLessons": 25,
+        "populatedLessons": 0,
+        "missingLessons": [
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75
+        ],
+        "missingFiles": []
+      }
+    }
+  },
+  "canonicalVocab": {
+    "levels": {
+      "N5": {
+        "expectedLessons": 25,
+        "presentLessons": 25,
+        "missingLessons": []
+      },
+      "N4": {
+        "expectedLessons": 25,
+        "presentLessons": 25,
+        "missingLessons": []
+      },
+      "N3": {
+        "expectedLessons": 25,
+        "presentLessons": 1,
+        "missingLessons": [
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75
+        ]
+      }
+    }
+  },
+  "canonicalKanji": {
+    "levels": {
+      "N5": {
+        "expectedLessons": 25,
+        "presentLessons": 25,
+        "missingLessons": []
+      },
+      "N4": {
+        "expectedLessons": 25,
+        "presentLessons": 25,
+        "missingLessons": []
+      },
+      "N3": {
+        "expectedLessons": 25,
+        "presentLessons": 1,
+        "missingLessons": [
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75
+        ]
+      }
+    }
+  },
+  "localFixes": {
+    "kanjiExampleBackfill": {
+      "examples_scanned": 953,
+      "examples_without_ref": 0,
+      "examples_backfilled": 0,
+      "examples_missing_required_fields": 0,
+      "lessons_updated": 0,
+      "new_vocab_rows": 0,
+      "new_sense_rows": 0
+    },
+    "n4n5Coverage": {
+      "kanjiRows": 326,
+      "kanjiUnique": 295,
+      "missingSingleBefore": 0,
+      "missingCompoundBefore": 0,
+      "webSingleAdded": 0,
+      "webCompoundAdded": 0,
+      "fallbackSingleAdded": 0,
+      "singleSkippedNoSource": 0,
+      "compoundSkippedNoSource": 0,
+      "newMasterRows": 0,
+      "newSenseRows": 0,
+      "kanjiExampleRowsUpdated": 0,
+      "missingSingleAfter": 0,
+      "missingCompoundAfter": 0,
+      "kanjiExampleFilesUpdated": 0
+    }
+  },
+  "validatorSnapshot": {
+    "summary": {
+      "vocabLessons": 50,
+      "vocabMappedEntries": 2805,
+      "kanjiLessons": 50,
+      "kanjiEntries": 326,
+      "kanjiUniqueCharacters": 295,
+      "canonicalExists": true
+    },
+    "vocab": {
+      "lessons": 50,
+      "mappedEntries": 2805,
+      "issueCounts": {},
+      "samples": {}
+    },
+    "kanji": {
+      "lessons": 50,
+      "entries": 326,
+      "uniqueCharacters": 295,
+      "issueCounts": {},
+      "samples": {}
+    },
+    "canonical": {
+      "exists": true,
+      "vocabEntries": 2817,
+      "kanjiEntries": 337,
+      "vocabEntriesOverlapLegacy": 2817,
+      "kanjiEntriesOverlapLegacy": 337,
+      "issueCounts": {
+        "canonical_vocab_count_mismatch": 1,
+        "canonical_kanji_count_mismatch": 1
+      },
+      "samples": {
+        "canonical_vocab_count_mismatch": [
+          {
+            "expected": 2805,
+            "actual": 2817,
+            "canonicalTotal": 2817
+          }
+        ],
+        "canonical_kanji_count_mismatch": [
+          {
+            "expected": 326,
+            "actual": 337,
+            "canonicalTotal": 337
+          }
+        ]
+      }
+    }
+  }
+}

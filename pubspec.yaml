@@ -54,6 +54,7 @@ dependencies:
   share_plus: ^12.0.1
   rive: ^0.14.1
   path_drawing: ^1.0.1
+  drift_flutter: ^0.2.8
 
 dev_dependencies:
   flutter_test:
@@ -148,11 +149,21 @@ flutter:
     - assets/data/vocab/n3/
     - assets/data/vocab/n2/
     - assets/data/vocab/n1/
+    - assets/data/canonical/
+    - assets/data/canonical/vocab/
+    - assets/data/canonical/vocab/n5/
+    - assets/data/canonical/vocab/n4/
+    - assets/data/canonical/vocab/n3/
+    - assets/data/canonical/kanji/
+    - assets/data/canonical/kanji/n5/
+    - assets/data/canonical/kanji/n4/
+    - assets/data/canonical/kanji/n3/
     - assets/data/kanji/n5/
     - assets/data/kanji/n4/
     - assets/data/kanji/n3/
     - assets/data/kanji/n2/
     - assets/data/kanji/n1/
+    - assets/data/kanji/decomposition.json
     - assets/data/kanji/stroke_templates.json
     - assets/data/kanji/stroke_template_overrides.json
     - assets/data/kanji/kanjivg_stroke_paths_n5n4.json

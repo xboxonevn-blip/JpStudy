@@ -1,0 +1,311 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N4",
+  "lessonId": 39,
+  "entryCount": 4,
+  "entries": [
+    {
+      "kanjiId": "n4_l39_k001",
+      "lessonId": 39,
+      "level": "N4",
+      "character": "答",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Đáp",
+        "meaningVi": "trả lời",
+        "meaningViDisplay": "Đáp (trả lời)",
+        "meaningEn": "Answer"
+      },
+      "readings": {
+        "onyomi": [
+          "TOU"
+        ],
+        "kunyomi": [
+          "kota-eru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng thẻ tre (Trúc ⺮) để viết lời ĐÁP phù hợp (Hợp 合).",
+        "en": "Writing a matching (合) response on bamboo (⺮)."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "⺮",
+          "合"
+        ],
+        "componentNames": [
+          "Trúc (tre)",
+          "Hợp (phù hợp)"
+        ],
+        "relatedKanji": [
+          "合",
+          "簡",
+          "笑"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "dap",
+        "meaningViNoAccent": "tra loi",
+        "meaningEnNoAccent": "answer"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l39_v059",
+          "sourceSenseId": "n4_l39_s059",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l45_v025",
+          "sourceSenseId": "n4_l45_s025",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l39_v001",
+          "sourceSenseId": "n4_l39_s001",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Đáp (trả lời)",
+        "onyomi": "TOU",
+        "kunyomi": "kota-eru"
+      }
+    },
+    {
+      "kanjiId": "n4_l39_k002",
+      "lessonId": 39,
+      "level": "N4",
+      "character": "死",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Tử",
+        "meaningVi": "chết",
+        "meaningViDisplay": "Tử (chết)",
+        "meaningEn": "Death"
+      },
+      "readings": {
+        "onyomi": [
+          "SHI"
+        ],
+        "kunyomi": [
+          "shi-nu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Mảnh xương khô một mình - cái CHẾT.",
+        "en": "The end of life - DEATH."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "歹",
+          "匕"
+        ],
+        "componentNames": [
+          "Ngạt (xương chết)",
+          "Tỷ (thìa)"
+        ],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "tu",
+        "meaningViNoAccent": "chet",
+        "meaningEnNoAccent": "death"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l39_v057",
+          "sourceSenseId": "n4_l39_s057",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l39_v061",
+          "sourceSenseId": "n4_l39_s061",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l39_v004",
+          "sourceSenseId": "n4_l39_s004",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tử (chết)",
+        "onyomi": "SHI",
+        "kunyomi": "shi-nu"
+      }
+    },
+    {
+      "kanjiId": "n4_l39_k003",
+      "lessonId": 39,
+      "level": "N4",
+      "character": "焼",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Thiêu",
+        "meaningVi": "nướng, đốt",
+        "meaningViDisplay": "Thiêu (nướng, đốt)",
+        "meaningEn": "Burn, Bake"
+      },
+      "readings": {
+        "onyomi": [
+          "SHOU"
+        ],
+        "kunyomi": [
+          "ya-ku"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Lửa (Hỏa 火) dùng để THIÊU nướng thức ăn cao (Nghiêu 尭).",
+        "en": "Fire (火) used to BAKE or BURN."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "火",
+          "尭"
+        ],
+        "componentNames": [
+          "Hỏa (lửa)",
+          "Nghiêu (cao)"
+        ],
+        "relatedKanji": [
+          "熱",
+          "煙"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "thieu",
+        "meaningViNoAccent": "nuong, dot",
+        "meaningEnNoAccent": "burn, bake"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l39_v058",
+          "sourceSenseId": "n4_l39_s058",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l39_v062",
+          "sourceSenseId": "n4_l39_s062",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l39_v049",
+          "sourceSenseId": "n4_l39_s049",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Thiêu (nướng, đốt)",
+        "onyomi": "SHOU",
+        "kunyomi": "ya-ku"
+      }
+    },
+    {
+      "kanjiId": "n4_l39_k004",
+      "lessonId": 39,
+      "level": "N4",
+      "character": "倒",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Đảo",
+        "meaningVi": "đổ, ngã",
+        "meaningViDisplay": "Đảo (đổ, ngã)",
+        "meaningEn": "Fall down"
+      },
+      "readings": {
+        "onyomi": [
+          "TOU"
+        ],
+        "kunyomi": [
+          "tao-reru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Người (Nhân 亻) đến (Đáo 到) đích rồi bị NGÃ.",
+        "en": "A person (亻) arriving (到) and falling over."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "亻",
+          "到"
+        ],
+        "componentNames": [
+          "Nhân (người)",
+          "Đáo (đến)"
+        ],
+        "relatedKanji": [
+          "人"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "dao",
+        "meaningViNoAccent": "do, nga",
+        "meaningEnNoAccent": "fall down"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l39_v056",
+          "sourceSenseId": "n4_l39_s056",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l39_v060",
+          "sourceSenseId": "n4_l39_s060",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l39_v002",
+          "sourceSenseId": "n4_l39_s002",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Đảo (đổ, ngã)",
+        "onyomi": "TOU",
+        "kunyomi": "tao-reru"
+      }
+    }
+  ]
+}

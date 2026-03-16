@@ -1,0 +1,617 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N4",
+  "lessonId": 36,
+  "entryCount": 8,
+  "entries": [
+    {
+      "kanjiId": "n4_l36_k001",
+      "lessonId": 36,
+      "level": "N4",
+      "character": "石",
+      "strokeCount": 5,
+      "labels": {
+        "hanViet": "Thạch",
+        "meaningVi": "đá",
+        "meaningViDisplay": "Thạch (đá)",
+        "meaningEn": "Stone"
+      },
+      "readings": {
+        "onyomi": [
+          "SEKI"
+        ],
+        "kunyomi": [
+          "ishi"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Một vật nằm dưới vách núi (Hán 厂) có miệng (Khẩu 口) là hòn ĐÁ.",
+        "en": "Something under a cliff (厂) that looks like a mouth - a STONE."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "厂",
+          "口"
+        ],
+        "componentNames": [
+          "Hán (vách núi)",
+          "Khẩu (miệng)"
+        ],
+        "relatedKanji": [
+          "確",
+          "破"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "thach",
+        "meaningViNoAccent": "da",
+        "meaningEnNoAccent": "stone"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l32_v057",
+          "sourceSenseId": "n4_l32_s057",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l37_v021",
+          "sourceSenseId": "n4_l37_s021",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l42_v055",
+          "sourceSenseId": "n4_l42_s055",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Thạch (đá)",
+        "onyomi": "SEKI",
+        "kunyomi": "ishi"
+      }
+    },
+    {
+      "kanjiId": "n4_l36_k002",
+      "lessonId": 36,
+      "level": "N4",
+      "character": "油",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Du",
+        "meaningVi": "dầu",
+        "meaningViDisplay": "Du (dầu)",
+        "meaningEn": "Oil"
+      },
+      "readings": {
+        "onyomi": [
+          "YU"
+        ],
+        "kunyomi": [
+          "abura"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Nước (Thủy 氵) chảy ra từ bình (Do 由) là DẦU.",
+        "en": "Liquid (氵) coming from a container (由) - OIL."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "氵",
+          "由"
+        ],
+        "componentNames": [
+          "Thủy (nước)",
+          "Do (do, bởi)"
+        ],
+        "relatedKanji": [
+          "洗",
+          "消"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "du",
+        "meaningViNoAccent": "dau",
+        "meaningEnNoAccent": "oil"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l36_v052",
+          "sourceSenseId": "n4_l36_s052",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l37_v021",
+          "sourceSenseId": "n4_l37_s021",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l36_v053",
+          "sourceSenseId": "n4_l36_s053",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Du (dầu)",
+        "onyomi": "YU",
+        "kunyomi": "abura"
+      }
+    },
+    {
+      "kanjiId": "n4_l36_k003",
+      "lessonId": 36,
+      "level": "N4",
+      "character": "原",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Nguyên",
+        "meaningVi": "cánh đồng, nguyên nhân",
+        "meaningViDisplay": "Nguyên (cánh đồng, nguyên nhân)",
+        "meaningEn": "Field, Origin"
+      },
+      "readings": {
+        "onyomi": [
+          "GEN"
+        ],
+        "kunyomi": [
+          "hara"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Nguồn nước (Bạch 白 - biến thể) chảy ra từ dưới vách núi là NGUYÊN nhân.",
+        "en": "A spring flowing from under a cliff (厂) - ORIGIN."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "厂",
+          "白",
+          "小"
+        ],
+        "componentNames": [
+          "Hán (vách núi)",
+          "Bạch (trắng)",
+          "Tiểu (nhỏ)"
+        ],
+        "relatedKanji": [
+          "石",
+          "願"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "nguyen",
+        "meaningViNoAccent": "canh dong, nguyen nhan",
+        "meaningEnNoAccent": "field, origin"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l36_v058",
+          "sourceSenseId": "n4_l36_s058",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l37_v022",
+          "sourceSenseId": "n4_l37_s022",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l38_v024",
+          "sourceSenseId": "n4_l38_s024",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Nguyên (cánh đồng, nguyên nhân)",
+        "onyomi": "GEN",
+        "kunyomi": "hara"
+      }
+    },
+    {
+      "kanjiId": "n4_l36_k004",
+      "lessonId": 36,
+      "level": "N4",
+      "character": "輸",
+      "strokeCount": 16,
+      "labels": {
+        "hanViet": "Du",
+        "meaningVi": "vận chuyển",
+        "meaningViDisplay": "Du (vận chuyển)",
+        "meaningEn": "Transport"
+      },
+      "readings": {
+        "onyomi": [
+          "YU"
+        ],
+        "kunyomi": []
+      },
+      "mnemonic": {
+        "vi": "Chiếc xe (Xa 車) chở vật phẩm đi theo nhóm (Du 兪) để VẬN CHUYỂN.",
+        "en": "A vehicle (車) used for TRANSPORTING goods."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "車",
+          "兪"
+        ],
+        "componentNames": [
+          "Xa (xe)",
+          "Du (biến thể)"
+        ],
+        "relatedKanji": [
+          "車",
+          "軽",
+          "転",
+          "連"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "du",
+        "meaningViNoAccent": "van chuyen",
+        "meaningEnNoAccent": "transport"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l36_v062",
+          "sourceSenseId": "n4_l36_s062",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l36_v054",
+          "sourceSenseId": "n4_l36_s054",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l36_v055",
+          "sourceSenseId": "n4_l36_s055",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Du (vận chuyển)",
+        "onyomi": "YU",
+        "kunyomi": null
+      }
+    },
+    {
+      "kanjiId": "n4_l36_k005",
+      "lessonId": 36,
+      "level": "N4",
+      "character": "呼",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Hô",
+        "meaningVi": "gọi",
+        "meaningViDisplay": "Hô (gọi)",
+        "meaningEn": "Call"
+      },
+      "readings": {
+        "onyomi": [
+          "KO"
+        ],
+        "kunyomi": [
+          "yo-bu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng Miệng (Khẩu 口) để hét to (Hồ 乎) là GỌI.",
+        "en": "Using the mouth (口) to give a loud CALL."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "口",
+          "乎"
+        ],
+        "componentNames": [
+          "Khẩu (miệng)",
+          "Hồ (vậy thay)"
+        ],
+        "relatedKanji": [
+          "口",
+          "味",
+          "加"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "ho",
+        "meaningViNoAccent": "goi",
+        "meaningEnNoAccent": "call"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l36_v059",
+          "sourceSenseId": "n4_l36_s059",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l36_v064",
+          "sourceSenseId": "n4_l36_s064",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l41_v057",
+          "sourceSenseId": "n4_l41_s057",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Hô (gọi)",
+        "onyomi": "KO",
+        "kunyomi": "yo-bu"
+      }
+    },
+    {
+      "kanjiId": "n4_l36_k006",
+      "lessonId": 36,
+      "level": "N4",
+      "character": "頼",
+      "strokeCount": 16,
+      "labels": {
+        "hanViet": "Lại",
+        "meaningVi": "nhờ cậy",
+        "meaningViDisplay": "Lại (nhờ cậy)",
+        "meaningEn": "Request, Rely"
+      },
+      "readings": {
+        "onyomi": [
+          "RAI"
+        ],
+        "kunyomi": [
+          "tano-mu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Bó lúa (Thúc 束) quý giá ngang vỏ sò (Bối 貝) nên cần NHỜ CẬY bảo vệ.",
+        "en": "Counting on someone to guard the bundle (束)."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "束",
+          "頁"
+        ],
+        "componentNames": [
+          "Thúc (bó)",
+          "Hiệt (đầu, trang)"
+        ],
+        "relatedKanji": [
+          "束",
+          "頭",
+          "顔",
+          "願"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "lai",
+        "meaningViNoAccent": "nho cay",
+        "meaningEnNoAccent": "request, rely"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l36_v063",
+          "sourceSenseId": "n4_l36_s063",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l36_v065",
+          "sourceSenseId": "n4_l36_s065",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l37_v006",
+          "sourceSenseId": "n4_l37_s006",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Lại (nhờ cậy)",
+        "onyomi": "RAI",
+        "kunyomi": "tano-mu"
+      }
+    },
+    {
+      "kanjiId": "n4_l36_k007",
+      "lessonId": 36,
+      "level": "N4",
+      "character": "注",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Chú",
+        "meaningVi": "rót, chú ý",
+        "meaningViDisplay": "Chú (rót, chú ý)",
+        "meaningEn": "Pour, Caution"
+      },
+      "readings": {
+        "onyomi": [
+          "CHUU"
+        ],
+        "kunyomi": [
+          "soso-gu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Rót Nước (Thủy 氵) vào đèn (Chủ 主) cần sự CHÚ Ý.",
+        "en": "Pouring water (氵) with focus like a candle flame (主)."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "氵",
+          "主"
+        ],
+        "componentNames": [
+          "Thủy (nước)",
+          "Chủ (chủ nhân)"
+        ],
+        "relatedKanji": [
+          "住",
+          "洗"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "chu",
+        "meaningViNoAccent": "rot, chu y",
+        "meaningEnNoAccent": "pour, caution"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l36_v061",
+          "sourceSenseId": "n4_l36_s061",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l36_v056",
+          "sourceSenseId": "n4_l36_s056",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l36_v057",
+          "sourceSenseId": "n4_l36_s057",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Chú (rót, chú ý)",
+        "onyomi": "CHUU",
+        "kunyomi": "soso-gu"
+      }
+    },
+    {
+      "kanjiId": "n4_l36_k008",
+      "lessonId": 36,
+      "level": "N4",
+      "character": "招",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Chiêu",
+        "meaningVi": "mời",
+        "meaningViDisplay": "Chiêu (mời)",
+        "meaningEn": "Invite"
+      },
+      "readings": {
+        "onyomi": [
+          "SHOU"
+        ],
+        "kunyomi": [
+          "mane-ku"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng Tay (Thủ 扌) cầm đao (Chiêu 召) để MỜI khách.",
+        "en": "Using a hand (扌) to beckon or INVITE."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "扌",
+          "召"
+        ],
+        "componentNames": [
+          "Thủ (tay)",
+          "Triệu (gọi)"
+        ],
+        "relatedKanji": [
+          "手",
+          "召",
+          "打",
+          "押"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "chieu",
+        "meaningViNoAccent": "moi",
+        "meaningEnNoAccent": "invite"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l36_v060",
+          "sourceSenseId": "n4_l36_s060",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l37_v005",
+          "sourceSenseId": "n4_l37_s005",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Chiêu (mời)",
+        "onyomi": "SHOU",
+        "kunyomi": "mane-ku"
+      }
+    }
+  ]
+}

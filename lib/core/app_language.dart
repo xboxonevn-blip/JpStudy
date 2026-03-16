@@ -3533,6 +3533,76 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get kanjiDecompositionTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Decomposition';
+      case AppLanguage.vi:
+        return 'Chiết tự';
+      case AppLanguage.ja:
+        return '字源分解';
+    }
+  }
+
+  String get kanjiHanVietLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Hán Việt';
+      case AppLanguage.vi:
+        return 'Hán Việt';
+      case AppLanguage.ja:
+        return '漢越';
+    }
+  }
+
+  String get kanjiComponentsLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Components';
+      case AppLanguage.vi:
+        return 'Thành phần';
+      case AppLanguage.ja:
+        return '構成要素';
+    }
+  }
+
+  String get kanjiStructureLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Structure';
+      case AppLanguage.vi:
+        return 'Cấu trúc';
+      case AppLanguage.ja:
+        return '構造';
+    }
+  }
+
+  String get kanjiRelatedLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Related kanji';
+      case AppLanguage.vi:
+        return 'Kanji liên quan';
+      case AppLanguage.ja:
+        return '関連漢字';
+    }
+  }
+
+  String kanjiStructureType(String type) {
+    switch (type) {
+      case 'left-right':
+        return this == AppLanguage.vi ? 'Trái – Phải' : this == AppLanguage.ja ? '左右' : 'Left – Right';
+      case 'top-bottom':
+        return this == AppLanguage.vi ? 'Trên – Dưới' : this == AppLanguage.ja ? '上下' : 'Top – Bottom';
+      case 'enclosure':
+        return this == AppLanguage.vi ? 'Bao quanh' : this == AppLanguage.ja ? '囲み' : 'Enclosure';
+      case 'standalone':
+        return this == AppLanguage.vi ? 'Độc lập' : this == AppLanguage.ja ? '単独' : 'Standalone';
+      default:
+        return type;
+    }
+  }
+
   String get mockExamSubtitle {
     switch (this) {
       case AppLanguage.en:

@@ -1,0 +1,472 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N4",
+  "lessonId": 45,
+  "entryCount": 6,
+  "entries": [
+    {
+      "kanjiId": "n4_l45_k001",
+      "lessonId": 45,
+      "level": "N4",
+      "character": "謝",
+      "strokeCount": 17,
+      "labels": {
+        "hanViet": "Tạ",
+        "meaningVi": "xin lỗi, cảm tạ",
+        "meaningViDisplay": "Tạ (xin lỗi, cảm tạ)",
+        "meaningEn": "Apologize, Thank"
+      },
+      "readings": {
+        "onyomi": [
+          "SHA"
+        ],
+        "kunyomi": [
+          "ayama-ru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng Lời nói (Ngôn 言) để bắn đi cái tôi (Thân 身 - biến thể) - XIN LỖI.",
+        "en": "Using words (言) to express the self (身) - APOLOGIZE."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "言",
+          "射"
+        ],
+        "componentNames": [
+          "Ngôn (lời nói)",
+          "Xạ (bắn)"
+        ],
+        "relatedKanji": [
+          "話",
+          "読",
+          "認"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "ta",
+        "meaningViNoAccent": "xin loi, cam ta",
+        "meaningEnNoAccent": "apologize, thank"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l45_v051",
+          "sourceSenseId": "n4_l45_s051",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l45_v043",
+          "sourceSenseId": "n4_l45_s043",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l45_v031",
+          "sourceSenseId": "n4_l45_s031",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tạ (xin lỗi, cảm tạ)",
+        "onyomi": "SHA",
+        "kunyomi": "ayama-ru"
+      }
+    },
+    {
+      "kanjiId": "n4_l45_k002",
+      "lessonId": 45,
+      "level": "N4",
+      "character": "信",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Tín",
+        "meaningVi": "tin tưởng",
+        "meaningViDisplay": "Tín (tin tưởng)",
+        "meaningEn": "Believe, Trust"
+      },
+      "readings": {
+        "onyomi": [
+          "SHIN"
+        ],
+        "kunyomi": [
+          "shin-jiru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Lời nói (Ngôn 言) của Con người (Nhân 亻) cần được TIN TƯỞNG.",
+        "en": "The words (言) of a person (亻) you BELIEVE."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "亻",
+          "言"
+        ],
+        "componentNames": [
+          "Nhân (người)",
+          "Ngôn (lời nói)"
+        ],
+        "relatedKanji": [
+          "人",
+          "話",
+          "読"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "tin",
+        "meaningViNoAccent": "tin tuong",
+        "meaningEnNoAccent": "believe, trust"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l45_v046",
+          "sourceSenseId": "n4_l45_s046",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l27_v019",
+          "sourceSenseId": "n4_l27_s019",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l45_v001",
+          "sourceSenseId": "n4_l45_s001",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tín (tin tưởng)",
+        "onyomi": "SHIN",
+        "kunyomi": "shin-jiru"
+      }
+    },
+    {
+      "kanjiId": "n4_l45_k003",
+      "lessonId": 45,
+      "level": "N4",
+      "character": "疑",
+      "strokeCount": 14,
+      "labels": {
+        "hanViet": "Nghi",
+        "meaningVi": "nghi ngờ",
+        "meaningViDisplay": "Nghi (nghi ngờ)",
+        "meaningEn": "Doubt"
+      },
+      "readings": {
+        "onyomi": [
+          "GI"
+        ],
+        "kunyomi": [
+          "utaga-u"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Con dao (Tí 匕) cắm vào đất cạnh đứa trẻ - NÊU NGHI VẤN.",
+        "en": "Questioning what's on the ground - DOUBT."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "匕",
+          "矢",
+          "𠤎",
+          "疋"
+        ],
+        "componentNames": [
+          "Tỷ (thìa)",
+          "Thỉ (mũi tên)",
+          "Biến thể",
+          "Sơ (chân)"
+        ],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "nghi",
+        "meaningViNoAccent": "nghi ngo",
+        "meaningEnNoAccent": "doubt"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l45_v050",
+          "sourceSenseId": "n4_l45_s050",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l45_v054",
+          "sourceSenseId": "n4_l45_s054",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l45_v044",
+          "sourceSenseId": "n4_l45_s044",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Nghi (nghi ngờ)",
+        "onyomi": "GI",
+        "kunyomi": "utaga-u"
+      }
+    },
+    {
+      "kanjiId": "n4_l45_k004",
+      "lessonId": 45,
+      "level": "N4",
+      "character": "折",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": "Chiết",
+        "meaningVi": "bẻ, gãy",
+        "meaningViDisplay": "Chiết (bẻ, gãy)",
+        "meaningEn": "Break, Fold"
+      },
+      "readings": {
+        "onyomi": [
+          "SETSU"
+        ],
+        "kunyomi": [
+          "o-ru",
+          "o-reru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng Tay (Thủ 扌) cầm Rìu (Can 斤) để CHẶT GÃY.",
+        "en": "Using a hand (扌) and an axe (斤) to BREAK."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "扌",
+          "斤"
+        ],
+        "componentNames": [
+          "Thủ (tay)",
+          "Cân (rìu)"
+        ],
+        "relatedKanji": [
+          "手",
+          "新",
+          "所"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "chiet",
+        "meaningViNoAccent": "be, gay",
+        "meaningEnNoAccent": "break, fold"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l45_v049",
+          "sourceSenseId": "n4_l45_s049",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l45_v045",
+          "sourceSenseId": "n4_l45_s045",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l34_v003",
+          "sourceSenseId": "n4_l34_s003",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Chiết (bẻ, gãy)",
+        "onyomi": "SETSU",
+        "kunyomi": "o-ru, o-reru"
+      }
+    },
+    {
+      "kanjiId": "n4_l45_k005",
+      "lessonId": 45,
+      "level": "N4",
+      "character": "打",
+      "strokeCount": 5,
+      "labels": {
+        "hanViet": "Đả",
+        "meaningVi": "đánh",
+        "meaningViDisplay": "Đả (đánh)",
+        "meaningEn": "Hit, Strike"
+      },
+      "readings": {
+        "onyomi": [
+          "DA"
+        ],
+        "kunyomi": [
+          "u-tsu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng Tay (Thủ 扌) đóng Đinh (Đinh 丁) là ĐÁNH.",
+        "en": "Hand (扌) hitting a nail (丁) - STRIKE."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "扌",
+          "丁"
+        ],
+        "componentNames": [
+          "Thủ (tay)",
+          "Đinh (đỉnh)"
+        ],
+        "relatedKanji": [
+          "手",
+          "町",
+          "押"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "da",
+        "meaningViNoAccent": "danh",
+        "meaningEnNoAccent": "hit, strike"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l45_v047",
+          "sourceSenseId": "n4_l45_s047",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l45_v052",
+          "sourceSenseId": "n4_l45_s052",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l36_v041",
+          "sourceSenseId": "n4_l36_s041",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Đả (đánh)",
+        "onyomi": "DA",
+        "kunyomi": "u-tsu"
+      }
+    },
+    {
+      "kanjiId": "n4_l45_k006",
+      "lessonId": 45,
+      "level": "N4",
+      "character": "投",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": "Đầu",
+        "meaningVi": "ném",
+        "meaningViDisplay": "Đầu (ném)",
+        "meaningEn": "Throw"
+      },
+      "readings": {
+        "onyomi": [
+          "TOU"
+        ],
+        "kunyomi": [
+          "na-geru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng Tay (Thủ 扌) NÉM đồ vật (Thù 殳 - binh khí).",
+        "en": "Hand (扌) using a weapon (殳) to THROW."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "扌",
+          "殳"
+        ],
+        "componentNames": [
+          "Thủ (tay)",
+          "Thù (binh khí)"
+        ],
+        "relatedKanji": [
+          "手",
+          "打"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "dau",
+        "meaningViNoAccent": "nem",
+        "meaningEnNoAccent": "throw"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l45_v048",
+          "sourceSenseId": "n4_l45_s048",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l45_v053",
+          "sourceSenseId": "n4_l45_s053",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l33_v004",
+          "sourceSenseId": "n4_l33_s004",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Đầu (ném)",
+        "onyomi": "TOU",
+        "kunyomi": "na-geru"
+      }
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N4",
+  "lessonId": 26,
+  "entryCount": 2,
+  "entries": [
+    {
+      "kanjiId": "n4_l26_k001",
+      "lessonId": 26,
+      "level": "N4",
+      "character": "私",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": "Tư",
+        "meaningVi": "tôi",
+        "meaningViDisplay": "Tư (tôi)",
+        "meaningEn": "I, Me"
+      },
+      "readings": {
+        "onyomi": [
+          "SHI"
+        ],
+        "kunyomi": [
+          "watashi"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Sở hữu lúa gạo (Hòa 禾) cho riêng mình (Khư 厶) là TƯ nhân/tôi.",
+        "en": "Grain (禾) that is mine (厶) personally."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "禾",
+          "厶"
+        ],
+        "componentNames": [
+          "Hòa (lúa)",
+          "Khư (riêng tư)"
+        ],
+        "relatedKanji": [
+          "科",
+          "利"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "tu",
+        "meaningViNoAccent": "toi",
+        "meaningEnNoAccent": "i, me"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l50_v012",
+          "sourceSenseId": "n4_l50_s012",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l26_v067",
+          "sourceSenseId": "n4_l26_s067",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l01_v001",
+          "sourceSenseId": "n5_l01_s001",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tư (tôi)",
+        "onyomi": "SHI",
+        "kunyomi": "watashi"
+      }
+    },
+    {
+      "kanjiId": "n4_l26_k002",
+      "lessonId": 26,
+      "level": "N4",
+      "character": "夫",
+      "strokeCount": 4,
+      "labels": {
+        "hanViet": "Phu",
+        "meaningVi": "chồng",
+        "meaningViDisplay": "Phu (chồng)",
+        "meaningEn": "Husband"
+      },
+      "readings": {
+        "onyomi": [
+          "FU"
+        ],
+        "kunyomi": [
+          "otto"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Người đàn ông (Đại 大) đội mũ (Nhất 一) là người CHỒNG/trượng phu.",
+        "en": "A big man (大) with a hairpin (一) representing a HUSBAND."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "大",
+          "一"
+        ],
+        "componentNames": [
+          "Đại (to lớn)",
+          "Nhất (một, nét ngang)"
+        ],
+        "relatedKanji": [
+          "大",
+          "替"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "phu",
+        "meaningViNoAccent": "chong",
+        "meaningEnNoAccent": "husband"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l09_v031",
+          "sourceSenseId": "n5_l09_s031",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l26_v068",
+          "sourceSenseId": "n4_l26_s068",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l42_v006",
+          "sourceSenseId": "n4_l42_s006",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Phu (chồng)",
+        "onyomi": "FU",
+        "kunyomi": "otto"
+      }
+    }
+  ]
+}

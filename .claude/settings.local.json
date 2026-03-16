@@ -23,7 +23,8 @@
       "Bash(flutter test test/data/repositories/week_summary_test.dart -v)",
       "Bash(git add lib/data/repositories/lesson_repository.dart lib/features/home/widgets/daily_session_card.dart test/data/repositories/week_summary_test.dart)",
       "Bash(flutter test --reporter expanded)",
-      "Bash(xargs grep -l \"TODO\\\\|FIXME\\\\|WIP\\\\|INCOMPLETE\\\\|XXX\")"
+      "Bash(xargs grep -l \"TODO\\\\|FIXME\\\\|WIP\\\\|INCOMPLETE\\\\|XXX\")",
+      "mcp__plugin_playwright_playwright__browser_navigate"
     ]
   }
 }

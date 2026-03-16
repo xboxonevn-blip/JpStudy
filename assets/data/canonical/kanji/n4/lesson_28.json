@@ -1,0 +1,626 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N4",
+  "lessonId": 28,
+  "entryCount": 8,
+  "entries": [
+    {
+      "kanjiId": "n4_l28_k001",
+      "lessonId": 28,
+      "level": "N4",
+      "character": "売",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": "Mại",
+        "meaningVi": "bán",
+        "meaningViDisplay": "Mại (bán)",
+        "meaningEn": "Sell"
+      },
+      "readings": {
+        "onyomi": [
+          "BAI"
+        ],
+        "kunyomi": [
+          "u-ru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng lời nói (Sĩ 土 - biến thể) để trao đổi vật phẩm (Bối 貝) là BÁN hàng.",
+        "en": "Giving away items (貝) to others by selling."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "士",
+          "冖",
+          "儿"
+        ],
+        "componentNames": [
+          "Sĩ (kẻ sĩ)",
+          "Mịch (nắp đậy)",
+          "Nhi (chân người)"
+        ],
+        "relatedKanji": [
+          "買",
+          "読",
+          "続"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "mai",
+        "meaningViNoAccent": "ban",
+        "meaningEnNoAccent": "sell"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l28_v056",
+          "sourceSenseId": "n4_l28_s056",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l28_v053",
+          "sourceSenseId": "n4_l28_s053",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l28_v001",
+          "sourceSenseId": "n4_l28_s001",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Mại (bán)",
+        "onyomi": "BAI",
+        "kunyomi": "u-ru"
+      }
+    },
+    {
+      "kanjiId": "n4_l28_k002",
+      "lessonId": 28,
+      "level": "N4",
+      "character": "踊",
+      "strokeCount": 14,
+      "labels": {
+        "hanViet": "Dũng",
+        "meaningVi": "nhảy múa",
+        "meaningViDisplay": "Dũng (nhảy múa)",
+        "meaningEn": "Dance"
+      },
+      "readings": {
+        "onyomi": [
+          "YOU"
+        ],
+        "kunyomi": [
+          "odo-ru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Cái chân (Túc 足) nhún nhảy (Dũng 勇) theo điệu nhạc.",
+        "en": "Feet (足) moving energetically (勇) to DANCE."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "足",
+          "勇"
+        ],
+        "componentNames": [
+          "Túc (chân)",
+          "Dũng (dũng cảm)"
+        ],
+        "relatedKanji": [
+          "足"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "dung",
+        "meaningViNoAccent": "nhay mua",
+        "meaningEnNoAccent": "dance"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l28_v058",
+          "sourceSenseId": "n4_l28_s058",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l26_v055",
+          "sourceSenseId": "n4_l26_s055",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l28_v002",
+          "sourceSenseId": "n4_l28_s002",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Dũng (nhảy múa)",
+        "onyomi": "YOU",
+        "kunyomi": "odo-ru"
+      }
+    },
+    {
+      "kanjiId": "n4_l28_k003",
+      "lessonId": 28,
+      "level": "N4",
+      "character": "選",
+      "strokeCount": 15,
+      "labels": {
+        "hanViet": "Tuyển",
+        "meaningVi": "chọn",
+        "meaningViDisplay": "Tuyển (chọn)",
+        "meaningEn": "Choose"
+      },
+      "readings": {
+        "onyomi": [
+          "SEN"
+        ],
+        "kunyomi": [
+          "era-bu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Đi (Sước 辶) tìm những vật phẩm sáng giá (Tốn 巽) để CHỌN.",
+        "en": "Moving (辶) to search and SELECT the best."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "巽",
+          "辶"
+        ],
+        "componentNames": [
+          "Tốn (khiêm nhường)",
+          "Sước (đi)"
+        ],
+        "relatedKanji": [
+          "送",
+          "通",
+          "運",
+          "連"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "tuyen",
+        "meaningViNoAccent": "chon",
+        "meaningEnNoAccent": "choose"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l28_v060",
+          "sourceSenseId": "n4_l28_s060",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l28_v062",
+          "sourceSenseId": "n4_l28_s062",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l28_v004",
+          "sourceSenseId": "n4_l28_s004",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tuyển (chọn)",
+        "onyomi": "SEN",
+        "kunyomi": "era-bu"
+      }
+    },
+    {
+      "kanjiId": "n4_l28_k004",
+      "lessonId": 28,
+      "level": "N4",
+      "character": "通",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Thông",
+        "meaningVi": "đi lại, thông qua",
+        "meaningViDisplay": "Thông (đi lại, thông qua)",
+        "meaningEn": "Commute, Pass"
+      },
+      "readings": {
+        "onyomi": [
+          "TSUU"
+        ],
+        "kunyomi": [
+          "kayo-u",
+          "too-ru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Đi (Sước 辶) qua con đường có hàng rào (Dụng 用) bao quanh.",
+        "en": "Traveling (辶) through a common (用) path."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "甬",
+          "辶"
+        ],
+        "componentNames": [
+          "Dũng (cái ống)",
+          "Sước (đi)"
+        ],
+        "relatedKanji": [
+          "送",
+          "運",
+          "連",
+          "選"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "thong",
+        "meaningViNoAccent": "di lai, thong qua",
+        "meaningEnNoAccent": "commute, pass"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l28_v059",
+          "sourceSenseId": "n4_l28_s059",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l27_v019",
+          "sourceSenseId": "n4_l27_s019",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l28_v005",
+          "sourceSenseId": "n4_l28_s005",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Thông (đi lại, thông qua)",
+        "onyomi": "TSUU",
+        "kunyomi": "kayo-u, too-ru"
+      }
+    },
+    {
+      "kanjiId": "n4_l28_k005",
+      "lessonId": 28,
+      "level": "N4",
+      "character": "真",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Chân",
+        "meaningVi": "thật",
+        "meaningViDisplay": "Chân (thật)",
+        "meaningEn": "True"
+      },
+      "readings": {
+        "onyomi": [
+          "SHIN"
+        ],
+        "kunyomi": [
+          "ma"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Mười (Thập 十) con mắt (Mục 目) nhìn vào sự THẬT trên đôi chân.",
+        "en": "Searching for TRUTH with ten eyes."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "十",
+          "具"
+        ],
+        "componentNames": [
+          "Thập (mười)",
+          "Cụ biến thể (dụng cụ)"
+        ],
+        "relatedKanji": [
+          "目",
+          "具"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "chan",
+        "meaningViNoAccent": "that",
+        "meaningEnNoAccent": "true"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l28_v057",
+          "sourceSenseId": "n4_l28_s057",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l28_v007",
+          "sourceSenseId": "n4_l28_s007",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l30_v037",
+          "sourceSenseId": "n4_l30_s037",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Chân (thật)",
+        "onyomi": "SHIN",
+        "kunyomi": "ma"
+      }
+    },
+    {
+      "kanjiId": "n4_l28_k006",
+      "lessonId": 28,
+      "level": "N4",
+      "character": "実",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Thực",
+        "meaningVi": "sự thật, quả",
+        "meaningViDisplay": "Thực (sự thật, quả)",
+        "meaningEn": "Truth, Reality"
+      },
+      "readings": {
+        "onyomi": [
+          "JITSU"
+        ],
+        "kunyomi": [
+          "mi",
+          "mino-ru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dưới mái nhà (Miên 宀) ngập tràn tiền bạc (Bối 貝) là THỰC tế giàu có.",
+        "en": "Wealth (貝) under a roof (宀) is REALITY."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "宀",
+          "大",
+          "二"
+        ],
+        "componentNames": [
+          "Miên (mái nhà)",
+          "Đại biến thể (to lớn)",
+          "Nhị (hai)"
+        ],
+        "relatedKanji": [
+          "安",
+          "確"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "thuc",
+        "meaningViNoAccent": "su that, qua",
+        "meaningEnNoAccent": "truth, reality"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l19_v022",
+          "sourceSenseId": "n5_l19_s022",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l47_v012",
+          "sourceSenseId": "n4_l47_s012",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l19_v032",
+          "sourceSenseId": "n5_l19_s032",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Thực (sự thật, quả)",
+        "onyomi": "JITSU",
+        "kunyomi": "mi, mino-ru"
+      }
+    },
+    {
+      "kanjiId": "n4_l28_k007",
+      "lessonId": 28,
+      "level": "N4",
+      "character": "熱",
+      "strokeCount": 15,
+      "labels": {
+        "hanViet": "Nhiệt",
+        "meaningVi": "nóng, sốt",
+        "meaningViDisplay": "Nhiệt (nóng, sốt)",
+        "meaningEn": "Heat, Fever"
+      },
+      "readings": {
+        "onyomi": [
+          "NETSU"
+        ],
+        "kunyomi": [
+          "atsu-i"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Trên là những hạt đậu (Đậu 豆) bị đun nóng bởi lửa (Hỏa 灬) ở dưới.",
+        "en": "Things getting hot over a fire (灬)."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "埶",
+          "灬"
+        ],
+        "componentNames": [
+          "Nghệ (trồng cây)",
+          "Hỏa (lửa)"
+        ],
+        "relatedKanji": [
+          "焼"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "nhiet",
+        "meaningViNoAccent": "nong, sot",
+        "meaningEnNoAccent": "heat, fever"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l17_v020",
+          "sourceSenseId": "n5_l17_s020",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l28_v008",
+          "sourceSenseId": "n4_l28_s008",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l49_v034",
+          "sourceSenseId": "n4_l49_s034",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Nhiệt (nóng, sốt)",
+        "onyomi": "NETSU",
+        "kunyomi": "atsu-i"
+      }
+    },
+    {
+      "kanjiId": "n4_l28_k008",
+      "lessonId": 28,
+      "level": "N4",
+      "character": "偉",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Vĩ",
+        "meaningVi": "vĩ đại",
+        "meaningViDisplay": "Vĩ (vĩ đại)",
+        "meaningEn": "Great"
+      },
+      "readings": {
+        "onyomi": [
+          "I"
+        ],
+        "kunyomi": [
+          "era-i"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Người (Nhân 亻) có da (Vi 韋 - da mềm) thuộc hàng quý tộc VĨ ĐẠI.",
+        "en": "A noble person (亻) being GREAT."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "亻",
+          "韋"
+        ],
+        "componentNames": [
+          "Nhân (người)",
+          "Vi (da mềm)"
+        ],
+        "relatedKanji": [
+          "人"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "vi",
+        "meaningViNoAccent": "vi dai",
+        "meaningEnNoAccent": "great"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n4_l28_v055",
+          "sourceSenseId": "n4_l28_s055",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l28_v061",
+          "sourceSenseId": "n4_l28_s061",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l28_v009",
+          "sourceSenseId": "n4_l28_s009",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Vĩ (vĩ đại)",
+        "onyomi": "I",
+        "kunyomi": "era-i"
+      }
+    }
+  ]
+}

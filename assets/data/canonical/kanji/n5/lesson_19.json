@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N5",
+  "lessonId": 19,
+  "entryCount": 2,
+  "entries": [
+    {
+      "kanjiId": "n5_l19_k001",
+      "lessonId": 19,
+      "level": "N5",
+      "character": "山",
+      "strokeCount": 3,
+      "labels": {
+        "hanViet": "Sơn",
+        "meaningVi": "núi",
+        "meaningViDisplay": "Sơn (núi)",
+        "meaningEn": "Mountain"
+      },
+      "readings": {
+        "onyomi": [
+          "SAN"
+        ],
+        "kunyomi": [
+          "yama"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Ba ngọn núi đứng cạnh nhau.",
+        "en": "Three peaks of a mountain."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "出",
+          "岩"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "son",
+        "meaningViNoAccent": "nui",
+        "meaningEnNoAccent": "mountain"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l08_v036",
+          "sourceSenseId": "n5_l08_s036",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l08_v055",
+          "sourceSenseId": "n5_l08_s055",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l08_v060",
+          "sourceSenseId": "n5_l08_s060",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Sơn (núi)",
+        "onyomi": "SAN",
+        "kunyomi": "yama"
+      }
+    },
+    {
+      "kanjiId": "n5_l19_k002",
+      "lessonId": 19,
+      "level": "N5",
+      "character": "成",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Thành",
+        "meaningVi": "trở thành",
+        "meaningViDisplay": "Thành (trở thành)",
+        "meaningEn": "Become"
+      },
+      "readings": {
+        "onyomi": [
+          "SEI"
+        ],
+        "kunyomi": [
+          "na-ru"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Những thanh giáo (Mâu 矛) được rèn THÀNH công.",
+        "en": "Tools being finished and BECOMING weapons."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "城"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "thanh",
+        "meaningViNoAccent": "tro thanh",
+        "meaningEnNoAccent": "become"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l19_v034",
+          "sourceSenseId": "n5_l19_s034",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l32_v002",
+          "sourceSenseId": "n4_l32_s002",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l39_v048",
+          "sourceSenseId": "n4_l39_s048",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Thành (trở thành)",
+        "onyomi": "SEI",
+        "kunyomi": "na-ru"
+      }
+    }
+  ]
+}

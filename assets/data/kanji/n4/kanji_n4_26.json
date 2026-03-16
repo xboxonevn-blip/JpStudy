@@ -23,7 +23,23 @@
         "sourceSenseId": "n5_l01_s001"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Tư",
+      "structure": "left-right",
+      "components": [
+        "禾",
+        "厶"
+      ],
+      "componentNames": [
+        "Hòa (lúa)",
+        "Khư (riêng tư)"
+      ],
+      "relatedKanji": [
+        "科",
+        "利"
+      ]
+    }
   },
   {
     "lessonId": 26,
@@ -49,6 +65,22 @@
         "sourceSenseId": "n4_l42_s006"
       }
     ],
-    "jlptLevel": "N4"
+    "jlptLevel": "N4",
+    "decomposition": {
+      "hanViet": "Phu",
+      "structure": "mixed",
+      "components": [
+        "大",
+        "一"
+      ],
+      "componentNames": [
+        "Đại (to lớn)",
+        "Nhất (một, nét ngang)"
+      ],
+      "relatedKanji": [
+        "大",
+        "替"
+      ]
+    }
   }
 ]

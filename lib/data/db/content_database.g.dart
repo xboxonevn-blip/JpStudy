@@ -3445,6 +3445,18 @@ class $KanjiTable extends Kanji with TableInfo<$KanjiTable, KanjiData> {
     type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
+  static const VerificationMeta _decompositionJsonMeta = const VerificationMeta(
+    'decompositionJson',
+  );
+  @override
+  late final GeneratedColumn<String> decompositionJson =
+      GeneratedColumn<String>(
+        'decomposition_json',
+        aliasedName,
+        true,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+      );
   static const VerificationMeta _examplesJsonMeta = const VerificationMeta(
     'examplesJson',
   );
@@ -3479,6 +3491,7 @@ class $KanjiTable extends Kanji with TableInfo<$KanjiTable, KanjiData> {
     meaningEn,
     mnemonicVi,
     mnemonicEn,
+    decompositionJson,
     examplesJson,
     jlptLevel,
   ];
@@ -3562,6 +3575,15 @@ class $KanjiTable extends Kanji with TableInfo<$KanjiTable, KanjiData> {
         mnemonicEn.isAcceptableOrUnknown(data['mnemonic_en']!, _mnemonicEnMeta),
       );
     }
+    if (data.containsKey('decomposition_json')) {
+      context.handle(
+        _decompositionJsonMeta,
+        decompositionJson.isAcceptableOrUnknown(
+          data['decomposition_json']!,
+          _decompositionJsonMeta,
+        ),
+      );
+    }
     if (data.containsKey('examples_json')) {
       context.handle(
         _examplesJsonMeta,
@@ -3630,6 +3652,10 @@ class $KanjiTable extends Kanji with TableInfo<$KanjiTable, KanjiData> {
         DriftSqlType.string,
         data['${effectivePrefix}mnemonic_en'],
       ),
+      decompositionJson: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}decomposition_json'],
+      ),
       examplesJson: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}examples_json'],
@@ -3658,6 +3684,7 @@ class KanjiData extends DataClass implements Insertable<KanjiData> {
   final String? meaningEn;
   final String? mnemonicVi;
   final String? mnemonicEn;
+  final String? decompositionJson;
   final String examplesJson;
   final String jlptLevel;
   const KanjiData({
@@ -3671,6 +3698,7 @@ class KanjiData extends DataClass implements Insertable<KanjiData> {
     this.meaningEn,
     this.mnemonicVi,
     this.mnemonicEn,
+    this.decompositionJson,
     required this.examplesJson,
     required this.jlptLevel,
   });
@@ -3696,6 +3724,9 @@ class KanjiData extends DataClass implements Insertable<KanjiData> {
     }
     if (!nullToAbsent || mnemonicEn != null) {
       map['mnemonic_en'] = Variable<String>(mnemonicEn);
+    }
+    if (!nullToAbsent || decompositionJson != null) {
+      map['decomposition_json'] = Variable<String>(decompositionJson);
     }
     map['examples_json'] = Variable<String>(examplesJson);
     map['jlpt_level'] = Variable<String>(jlptLevel);
@@ -3724,6 +3755,9 @@ class KanjiData extends DataClass implements Insertable<KanjiData> {
       mnemonicEn: mnemonicEn == null && nullToAbsent
           ? const Value.absent()
           : Value(mnemonicEn),
+      decompositionJson: decompositionJson == null && nullToAbsent
+          ? const Value.absent()
+          : Value(decompositionJson),
       examplesJson: Value(examplesJson),
       jlptLevel: Value(jlptLevel),
     );
@@ -3745,6 +3779,9 @@ class KanjiData extends DataClass implements Insertable<KanjiData> {
       meaningEn: serializer.fromJson<String?>(json['meaningEn']),
       mnemonicVi: serializer.fromJson<String?>(json['mnemonicVi']),
       mnemonicEn: serializer.fromJson<String?>(json['mnemonicEn']),
+      decompositionJson: serializer.fromJson<String?>(
+        json['decompositionJson'],
+      ),
       examplesJson: serializer.fromJson<String>(json['examplesJson']),
       jlptLevel: serializer.fromJson<String>(json['jlptLevel']),
     );
@@ -3763,6 +3800,7 @@ class KanjiData extends DataClass implements Insertable<KanjiData> {
       'meaningEn': serializer.toJson<String?>(meaningEn),
       'mnemonicVi': serializer.toJson<String?>(mnemonicVi),
       'mnemonicEn': serializer.toJson<String?>(mnemonicEn),
+      'decompositionJson': serializer.toJson<String?>(decompositionJson),
       'examplesJson': serializer.toJson<String>(examplesJson),
       'jlptLevel': serializer.toJson<String>(jlptLevel),
     };
@@ -3779,6 +3817,7 @@ class KanjiData extends DataClass implements Insertable<KanjiData> {
     Value<String?> meaningEn = const Value.absent(),
     Value<String?> mnemonicVi = const Value.absent(),
     Value<String?> mnemonicEn = const Value.absent(),
+    Value<String?> decompositionJson = const Value.absent(),
     String? examplesJson,
     String? jlptLevel,
   }) => KanjiData(
@@ -3792,6 +3831,9 @@ class KanjiData extends DataClass implements Insertable<KanjiData> {
     meaningEn: meaningEn.present ? meaningEn.value : this.meaningEn,
     mnemonicVi: mnemonicVi.present ? mnemonicVi.value : this.mnemonicVi,
     mnemonicEn: mnemonicEn.present ? mnemonicEn.value : this.mnemonicEn,
+    decompositionJson: decompositionJson.present
+        ? decompositionJson.value
+        : this.decompositionJson,
     examplesJson: examplesJson ?? this.examplesJson,
     jlptLevel: jlptLevel ?? this.jlptLevel,
   );
@@ -3813,6 +3855,9 @@ class KanjiData extends DataClass implements Insertable<KanjiData> {
       mnemonicEn: data.mnemonicEn.present
           ? data.mnemonicEn.value
           : this.mnemonicEn,
+      decompositionJson: data.decompositionJson.present
+          ? data.decompositionJson.value
+          : this.decompositionJson,
       examplesJson: data.examplesJson.present
           ? data.examplesJson.value
           : this.examplesJson,
@@ -3833,6 +3878,7 @@ class KanjiData extends DataClass implements Insertable<KanjiData> {
           ..write('meaningEn: $meaningEn, ')
           ..write('mnemonicVi: $mnemonicVi, ')
           ..write('mnemonicEn: $mnemonicEn, ')
+          ..write('decompositionJson: $decompositionJson, ')
           ..write('examplesJson: $examplesJson, ')
           ..write('jlptLevel: $jlptLevel')
           ..write(')'))
@@ -3851,6 +3897,7 @@ class KanjiData extends DataClass implements Insertable<KanjiData> {
     meaningEn,
     mnemonicVi,
     mnemonicEn,
+    decompositionJson,
     examplesJson,
     jlptLevel,
   );
@@ -3868,6 +3915,7 @@ class KanjiData extends DataClass implements Insertable<KanjiData> {
           other.meaningEn == this.meaningEn &&
           other.mnemonicVi == this.mnemonicVi &&
           other.mnemonicEn == this.mnemonicEn &&
+          other.decompositionJson == this.decompositionJson &&
           other.examplesJson == this.examplesJson &&
           other.jlptLevel == this.jlptLevel);
 }
@@ -3883,6 +3931,7 @@ class KanjiCompanion extends UpdateCompanion<KanjiData> {
   final Value<String?> meaningEn;
   final Value<String?> mnemonicVi;
   final Value<String?> mnemonicEn;
+  final Value<String?> decompositionJson;
   final Value<String> examplesJson;
   final Value<String> jlptLevel;
   const KanjiCompanion({
@@ -3896,6 +3945,7 @@ class KanjiCompanion extends UpdateCompanion<KanjiData> {
     this.meaningEn = const Value.absent(),
     this.mnemonicVi = const Value.absent(),
     this.mnemonicEn = const Value.absent(),
+    this.decompositionJson = const Value.absent(),
     this.examplesJson = const Value.absent(),
     this.jlptLevel = const Value.absent(),
   });
@@ -3910,6 +3960,7 @@ class KanjiCompanion extends UpdateCompanion<KanjiData> {
     this.meaningEn = const Value.absent(),
     this.mnemonicVi = const Value.absent(),
     this.mnemonicEn = const Value.absent(),
+    this.decompositionJson = const Value.absent(),
     required String examplesJson,
     required String jlptLevel,
   }) : lessonId = Value(lessonId),
@@ -3929,6 +3980,7 @@ class KanjiCompanion extends UpdateCompanion<KanjiData> {
     Expression<String>? meaningEn,
     Expression<String>? mnemonicVi,
     Expression<String>? mnemonicEn,
+    Expression<String>? decompositionJson,
     Expression<String>? examplesJson,
     Expression<String>? jlptLevel,
   }) {
@@ -3943,6 +3995,7 @@ class KanjiCompanion extends UpdateCompanion<KanjiData> {
       if (meaningEn != null) 'meaning_en': meaningEn,
       if (mnemonicVi != null) 'mnemonic_vi': mnemonicVi,
       if (mnemonicEn != null) 'mnemonic_en': mnemonicEn,
+      if (decompositionJson != null) 'decomposition_json': decompositionJson,
       if (examplesJson != null) 'examples_json': examplesJson,
       if (jlptLevel != null) 'jlpt_level': jlptLevel,
     });
@@ -3959,6 +4012,7 @@ class KanjiCompanion extends UpdateCompanion<KanjiData> {
     Value<String?>? meaningEn,
     Value<String?>? mnemonicVi,
     Value<String?>? mnemonicEn,
+    Value<String?>? decompositionJson,
     Value<String>? examplesJson,
     Value<String>? jlptLevel,
   }) {
@@ -3973,6 +4027,7 @@ class KanjiCompanion extends UpdateCompanion<KanjiData> {
       meaningEn: meaningEn ?? this.meaningEn,
       mnemonicVi: mnemonicVi ?? this.mnemonicVi,
       mnemonicEn: mnemonicEn ?? this.mnemonicEn,
+      decompositionJson: decompositionJson ?? this.decompositionJson,
       examplesJson: examplesJson ?? this.examplesJson,
       jlptLevel: jlptLevel ?? this.jlptLevel,
     );
@@ -4011,6 +4066,9 @@ class KanjiCompanion extends UpdateCompanion<KanjiData> {
     if (mnemonicEn.present) {
       map['mnemonic_en'] = Variable<String>(mnemonicEn.value);
     }
+    if (decompositionJson.present) {
+      map['decomposition_json'] = Variable<String>(decompositionJson.value);
+    }
     if (examplesJson.present) {
       map['examples_json'] = Variable<String>(examplesJson.value);
     }
@@ -4033,6 +4091,7 @@ class KanjiCompanion extends UpdateCompanion<KanjiData> {
           ..write('meaningEn: $meaningEn, ')
           ..write('mnemonicVi: $mnemonicVi, ')
           ..write('mnemonicEn: $mnemonicEn, ')
+          ..write('decompositionJson: $decompositionJson, ')
           ..write('examplesJson: $examplesJson, ')
           ..write('jlptLevel: $jlptLevel')
           ..write(')'))
@@ -6341,6 +6400,7 @@ typedef $$KanjiTableCreateCompanionBuilder =
       Value<String?> meaningEn,
       Value<String?> mnemonicVi,
       Value<String?> mnemonicEn,
+      Value<String?> decompositionJson,
       required String examplesJson,
       required String jlptLevel,
     });
@@ -6356,6 +6416,7 @@ typedef $$KanjiTableUpdateCompanionBuilder =
       Value<String?> meaningEn,
       Value<String?> mnemonicVi,
       Value<String?> mnemonicEn,
+      Value<String?> decompositionJson,
       Value<String> examplesJson,
       Value<String> jlptLevel,
     });
@@ -6416,6 +6477,11 @@ class $$KanjiTableFilterComposer
 
   ColumnFilters<String> get mnemonicEn => $composableBuilder(
     column: $table.mnemonicEn,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get decompositionJson => $composableBuilder(
+    column: $table.decompositionJson,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -6489,6 +6555,11 @@ class $$KanjiTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<String> get decompositionJson => $composableBuilder(
+    column: $table.decompositionJson,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<String> get examplesJson => $composableBuilder(
     column: $table.examplesJson,
     builder: (column) => ColumnOrderings(column),
@@ -6545,6 +6616,11 @@ class $$KanjiTableAnnotationComposer
     builder: (column) => column,
   );
 
+  GeneratedColumn<String> get decompositionJson => $composableBuilder(
+    column: $table.decompositionJson,
+    builder: (column) => column,
+  );
+
   GeneratedColumn<String> get examplesJson => $composableBuilder(
     column: $table.examplesJson,
     builder: (column) => column,
@@ -6595,6 +6671,7 @@ class $$KanjiTableTableManager
                 Value<String?> meaningEn = const Value.absent(),
                 Value<String?> mnemonicVi = const Value.absent(),
                 Value<String?> mnemonicEn = const Value.absent(),
+                Value<String?> decompositionJson = const Value.absent(),
                 Value<String> examplesJson = const Value.absent(),
                 Value<String> jlptLevel = const Value.absent(),
               }) => KanjiCompanion(
@@ -6608,6 +6685,7 @@ class $$KanjiTableTableManager
                 meaningEn: meaningEn,
                 mnemonicVi: mnemonicVi,
                 mnemonicEn: mnemonicEn,
+                decompositionJson: decompositionJson,
                 examplesJson: examplesJson,
                 jlptLevel: jlptLevel,
               ),
@@ -6623,6 +6701,7 @@ class $$KanjiTableTableManager
                 Value<String?> meaningEn = const Value.absent(),
                 Value<String?> mnemonicVi = const Value.absent(),
                 Value<String?> mnemonicEn = const Value.absent(),
+                Value<String?> decompositionJson = const Value.absent(),
                 required String examplesJson,
                 required String jlptLevel,
               }) => KanjiCompanion.insert(
@@ -6636,6 +6715,7 @@ class $$KanjiTableTableManager
                 meaningEn: meaningEn,
                 mnemonicVi: mnemonicVi,
                 mnemonicEn: mnemonicEn,
+                decompositionJson: decompositionJson,
                 examplesJson: examplesJson,
                 jlptLevel: jlptLevel,
               ),

@@ -1,10 +1,7 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/immersion_article.dart';
@@ -29,8 +26,6 @@ class ImmersionService {
   static const _matchaEasyFeedUrl = 'https://matcha-jp.com/easy/feed';
   static const _tadokuBookFeedUrl =
       'https://tadoku.org/japanese/?post_type=book&feed=rss2';
-  static const _cacheDirName = 'immersion_cache';
-  static const _listCacheFile = 'nhk_list.json';
   static const Duration _listCacheTtl = Duration(hours: 6);
   static const Duration _articleCacheTtl = Duration(days: 7);
   static const Duration _requestTimeout = Duration(seconds: 8);
@@ -809,23 +804,16 @@ class ImmersionService {
     return _parseHtmlParagraphs(section);
   }
 
-  Future<Directory> _getCacheDir() async {
-    final docs = await getApplicationDocumentsDirectory();
-    final dir = Directory(p.join(docs.path, _cacheDirName));
-    if (!dir.existsSync()) {
-      dir.createSync(recursive: true);
-    }
-    return dir;
-  }
+  static const _cacheListKey = 'immersion_cache_list';
+  static const _cacheArticlePrefix = 'immersion_cache_article_';
 
   Future<List<ImmersionArticle>?> _readCacheList({
     bool ignoreTtl = false,
   }) async {
-    final dir = await _getCacheDir();
-    final file = File(p.join(dir.path, _listCacheFile));
-    if (!file.existsSync()) return null;
+    final prefs = await SharedPreferences.getInstance();
+    final raw = prefs.getString(_cacheListKey);
+    if (raw == null) return null;
     try {
-      final raw = await file.readAsString();
       final decoded = jsonDecode(raw) as Map<String, dynamic>;
       final savedAt = DateTime.tryParse(decoded['savedAt']?.toString() ?? '');
       if (!ignoreTtl &&
@@ -843,24 +831,22 @@ class ImmersionService {
   }
 
   Future<void> _writeCacheList(List<ImmersionArticle> articles) async {
-    final dir = await _getCacheDir();
-    final file = File(p.join(dir.path, _listCacheFile));
+    final prefs = await SharedPreferences.getInstance();
     final payload = {
       'savedAt': DateTime.now().toIso8601String(),
       'data': articles.map((a) => a.toJson()).toList(),
     };
-    await file.writeAsString(jsonEncode(payload), flush: true);
+    await prefs.setString(_cacheListKey, jsonEncode(payload));
   }
 
   Future<ImmersionArticle?> _readCacheArticle(
     String id, {
     bool ignoreTtl = false,
   }) async {
-    final dir = await _getCacheDir();
-    final file = File(p.join(dir.path, 'nhk_$id.json'));
-    if (!file.existsSync()) return null;
+    final prefs = await SharedPreferences.getInstance();
+    final raw = prefs.getString('$_cacheArticlePrefix$id');
+    if (raw == null) return null;
     try {
-      final raw = await file.readAsString();
       final decoded = jsonDecode(raw) as Map<String, dynamic>;
       final savedAt = DateTime.tryParse(decoded['savedAt']?.toString() ?? '');
       if (!ignoreTtl &&
@@ -876,13 +862,15 @@ class ImmersionService {
   }
 
   Future<void> _writeCacheArticle(ImmersionArticle article) async {
-    final dir = await _getCacheDir();
-    final file = File(p.join(dir.path, 'nhk_${article.id}.json'));
+    final prefs = await SharedPreferences.getInstance();
     final payload = {
       'savedAt': DateTime.now().toIso8601String(),
       'data': article.toJson(),
     };
-    await file.writeAsString(jsonEncode(payload), flush: true);
+    await prefs.setString(
+      '$_cacheArticlePrefix${article.id}',
+      jsonEncode(payload),
+    );
   }
 
   // --- Read Status Management ---

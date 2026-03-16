@@ -23,7 +23,15 @@
         "sourceSenseId": "n5_l08_s056"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Thượng",
+      "structure": "standalone",
+      "relatedKanji": [
+        "下",
+        "止"
+      ]
+    }
   },
   {
     "lessonId": 10,
@@ -49,7 +57,15 @@
         "sourceSenseId": "n5_l05_s010"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Hạ",
+      "structure": "standalone",
+      "relatedKanji": [
+        "上",
+        "不"
+      ]
+    }
   },
   {
     "lessonId": 10,
@@ -75,7 +91,25 @@
         "sourceSenseId": "n5_l04_s018"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Tiền",
+      "structure": "mixed",
+      "components": [
+        "䒑",
+        "月",
+        "刂"
+      ],
+      "componentNames": [
+        "Thảo biến thể (trên)",
+        "Nguyệt (tháng)",
+        "Đao (dao)"
+      ],
+      "relatedKanji": [
+        "後",
+        "明"
+      ]
+    }
   },
   {
     "lessonId": 10,
@@ -101,7 +135,25 @@
         "sourceSenseId": "n5_l10_s052"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Hậu",
+      "structure": "mixed",
+      "components": [
+        "彳",
+        "幺",
+        "夂"
+      ],
+      "componentNames": [
+        "Sách (bước chân)",
+        "Yêu (nhỏ)",
+        "Truy (đi chậm)"
+      ],
+      "relatedKanji": [
+        "前",
+        "行"
+      ]
+    }
   },
   {
     "lessonId": 10,
@@ -127,7 +179,24 @@
         "sourceSenseId": "n5_l14_s041"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Hữu",
+      "structure": "mixed",
+      "components": [
+        "ナ",
+        "口"
+      ],
+      "componentNames": [
+        "Tay (nét tay)",
+        "Khẩu (miệng)"
+      ],
+      "relatedKanji": [
+        "左",
+        "口",
+        "有"
+      ]
+    }
   },
   {
     "lessonId": 10,
@@ -149,7 +218,23 @@
         "sourceSenseId": "n5_l10_s054"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Tả",
+      "structure": "mixed",
+      "components": [
+        "ナ",
+        "工"
+      ],
+      "componentNames": [
+        "Tay (nét tay)",
+        "Công (dụng cụ)"
+      ],
+      "relatedKanji": [
+        "右",
+        "工"
+      ]
+    }
   },
   {
     "lessonId": 10,
@@ -175,7 +260,22 @@
         "sourceSenseId": "n4_l27_s063"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Trung",
+      "structure": "mixed",
+      "components": [
+        "口",
+        "丨"
+      ],
+      "componentNames": [
+        "Khẩu (miệng)",
+        "Cổn (nét sổ)"
+      ],
+      "relatedKanji": [
+        "申"
+      ]
+    }
   },
   {
     "lessonId": 10,
@@ -201,7 +301,24 @@
         "sourceSenseId": "n5_l11_s066"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Ngoại",
+      "structure": "left-right",
+      "components": [
+        "夕",
+        "卜"
+      ],
+      "componentNames": [
+        "Tịch (chiều tối)",
+        "Bặc (bói)"
+      ],
+      "relatedKanji": [
+        "夕",
+        "名",
+        "多"
+      ]
+    }
   },
   {
     "lessonId": 10,
@@ -227,6 +344,27 @@
         "sourceSenseId": "n5_l11_s045"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Gian",
+      "structure": "enclosure",
+      "components": [
+        "門",
+        "日"
+      ],
+      "componentNames": [
+        "Môn (cửa)",
+        "Nhật (ngày)"
+      ],
+      "relatedKanji": [
+        "門",
+        "日",
+        "聞",
+        "問",
+        "開",
+        "閉",
+        "簡"
+      ]
+    }
   }
 ]

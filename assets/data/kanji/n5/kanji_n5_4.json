@@ -23,7 +23,24 @@
         "sourceSenseId": "n5_l02_s052"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Tứ",
+      "structure": "enclosure",
+      "components": [
+        "囗",
+        "儿"
+      ],
+      "componentNames": [
+        "Vi (vây quanh)",
+        "Nhi (chân người)"
+      ],
+      "relatedKanji": [
+        "国",
+        "回",
+        "園"
+      ]
+    }
   },
   {
     "lessonId": 4,
@@ -49,7 +66,16 @@
         "sourceSenseId": "n5_l02_s053"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Ngũ",
+      "structure": "standalone",
+      "relatedKanji": [
+        "一",
+        "二",
+        "三"
+      ]
+    }
   },
   {
     "lessonId": 4,
@@ -75,6 +101,22 @@
         "sourceSenseId": "n5_l02_s054"
       }
     ],
-    "jlptLevel": "N5"
+    "jlptLevel": "N5",
+    "decomposition": {
+      "hanViet": "Lục",
+      "structure": "top-bottom",
+      "components": [
+        "亠",
+        "八"
+      ],
+      "componentNames": [
+        "Đầu (nắp đậy)",
+        "Bát (tám, chia ra)"
+      ],
+      "relatedKanji": [
+        "八",
+        "公"
+      ]
+    }
   }
 ]

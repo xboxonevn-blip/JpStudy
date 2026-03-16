@@ -10,6 +10,7 @@ class KanjiItem {
     this.meaningEn,
     this.mnemonicVi,
     this.mnemonicEn,
+    this.decomposition,
     required this.examples,
     required this.jlptLevel,
   });
@@ -24,8 +25,69 @@ class KanjiItem {
   final String? meaningEn;
   final String? mnemonicVi;
   final String? mnemonicEn;
+  final KanjiDecomposition? decomposition;
   final List<KanjiExample> examples;
   final String jlptLevel;
+}
+
+class KanjiDecomposition {
+  const KanjiDecomposition({
+    this.hanViet,
+    this.structure,
+    this.components = const [],
+    this.componentNames = const [],
+    this.relatedKanji = const [],
+  });
+
+  final String? hanViet;
+  final String? structure;
+  final List<String> components;
+  final List<String> componentNames;
+  final List<String> relatedKanji;
+
+  bool get hasContent =>
+      (hanViet?.trim().isNotEmpty ?? false) ||
+      (structure?.trim().isNotEmpty ?? false) ||
+      components.isNotEmpty ||
+      componentNames.isNotEmpty ||
+      relatedKanji.isNotEmpty;
+
+  factory KanjiDecomposition.fromJson(Map<String, dynamic> json) {
+    List<String> readStringList(String key) {
+      final raw = json[key];
+      if (raw is! List) {
+        return const [];
+      }
+      return raw
+          .map((item) => item.toString().trim())
+          .where((item) => item.isNotEmpty)
+          .toList();
+    }
+
+    String? readOptional(String key) {
+      final raw = json[key];
+      if (raw == null) return null;
+      final text = raw.toString().trim();
+      return text.isEmpty ? null : text;
+    }
+
+    return KanjiDecomposition(
+      hanViet: readOptional('hanViet'),
+      structure: readOptional('structure'),
+      components: readStringList('components'),
+      componentNames: readStringList('componentNames'),
+      relatedKanji: readStringList('relatedKanji'),
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+    if (hanViet != null && hanViet!.trim().isNotEmpty) 'hanViet': hanViet,
+    if (structure != null && structure!.trim().isNotEmpty)
+      'structure': structure,
+    if (components.isNotEmpty) 'components': components,
+    if (componentNames.isNotEmpty) 'componentNames': componentNames,
+    if (relatedKanji.isNotEmpty) 'relatedKanji': relatedKanji,
+  };
 }
 
 class KanjiExample {

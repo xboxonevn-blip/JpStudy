@@ -1,0 +1,694 @@
+{
+  "schemaVersion": 2,
+  "dataset": "kanji",
+  "series": "minna",
+  "level": "N5",
+  "lessonId": 7,
+  "entryCount": 9,
+  "entries": [
+    {
+      "kanjiId": "n5_l07_k001",
+      "lessonId": 7,
+      "level": "N5",
+      "character": "会",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Hội",
+        "meaningVi": "gặp",
+        "meaningViDisplay": "Hội (gặp)",
+        "meaningEn": "Meet"
+      },
+      "readings": {
+        "onyomi": [
+          "KAI"
+        ],
+        "kunyomi": [
+          "a-imasu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Ba người gặp nhau dưới một mái nhà.",
+        "en": "People meeting together under one roof."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "亼",
+          "云"
+        ],
+        "componentNames": [
+          "Tập (hội tụ)",
+          "Vân (mây)"
+        ],
+        "relatedKanji": [
+          "合",
+          "人"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "hoi",
+        "meaningViNoAccent": "gap",
+        "meaningEnNoAccent": "meet"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l01_v043",
+          "sourceSenseId": "n5_l01_s043",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l04_v034",
+          "sourceSenseId": "n5_l04_s034",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l03_v012",
+          "sourceSenseId": "n5_l03_s012",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Hội (gặp)",
+        "onyomi": "KAI",
+        "kunyomi": "a-imasu"
+      }
+    },
+    {
+      "kanjiId": "n5_l07_k002",
+      "lessonId": 7,
+      "level": "N5",
+      "character": "教",
+      "strokeCount": 11,
+      "labels": {
+        "hanViet": "Giáo",
+        "meaningVi": "dạy",
+        "meaningViDisplay": "Giáo (dạy)",
+        "meaningEn": "Teach"
+      },
+      "readings": {
+        "onyomi": [
+          "KYOU"
+        ],
+        "kunyomi": [
+          "oshi-emasu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Một đứa trẻ (子) đang bị dạy bảo (攵) để nên người.",
+        "en": "A child (子) being taught/disciplined (攵)."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "孝",
+          "攵"
+        ],
+        "componentNames": [
+          "Hiếu (hiếu thảo)",
+          "Phọc (đánh, dạy)"
+        ],
+        "relatedKanji": [
+          "学",
+          "数"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "giao",
+        "meaningViNoAccent": "day",
+        "meaningEnNoAccent": "teach"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l07_v058",
+          "sourceSenseId": "n5_l07_s058",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l03_v009",
+          "sourceSenseId": "n5_l03_s009",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l07_v007",
+          "sourceSenseId": "n5_l07_s007",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Giáo (dạy)",
+        "onyomi": "KYOU",
+        "kunyomi": "oshi-emasu"
+      }
+    },
+    {
+      "kanjiId": "n5_l07_k003",
+      "lessonId": 7,
+      "level": "N5",
+      "character": "習",
+      "strokeCount": 11,
+      "labels": {
+        "hanViet": "Tập",
+        "meaningVi": "học tập",
+        "meaningViDisplay": "Tập (học tập)",
+        "meaningEn": "Learn"
+      },
+      "readings": {
+        "onyomi": [
+          "SHUU"
+        ],
+        "kunyomi": [
+          "nara-imasu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dưới đôi cánh chim (Vũ 羽) là sự nỗ lực trắng (Bạch 白). Chim non tập bay.",
+        "en": "White (白) feathers (羽) of a young bird learning to fly."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "羽",
+          "白"
+        ],
+        "componentNames": [
+          "Vũ (lông vũ)",
+          "Bạch (trắng)"
+        ],
+        "relatedKanji": [
+          "白",
+          "集"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "tap",
+        "meaningViNoAccent": "hoc tap",
+        "meaningEnNoAccent": "learn"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l07_v059",
+          "sourceSenseId": "n5_l07_s059",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l07_v054",
+          "sourceSenseId": "n5_l07_s054",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l07_v008",
+          "sourceSenseId": "n5_l07_s008",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tập (học tập)",
+        "onyomi": "SHUU",
+        "kunyomi": "nara-imasu"
+      }
+    },
+    {
+      "kanjiId": "n5_l07_k004",
+      "lessonId": 7,
+      "level": "N5",
+      "character": "貸",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Thải",
+        "meaningVi": "cho vay",
+        "meaningViDisplay": "Thải (cho vay)",
+        "meaningEn": "Lend"
+      },
+      "readings": {
+        "onyomi": [
+          "TAI"
+        ],
+        "kunyomi": [
+          "ka-shimasu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Thay đổi (代) tiền bạc (贝) là cho người khác mượn.",
+        "en": "Substituting (代) money (贝) for someone else (lending)."
+      },
+      "decomposition": {
+        "structure": "top-bottom",
+        "components": [
+          "代",
+          "貝"
+        ],
+        "componentNames": [
+          "Đại (thay thế)",
+          "Bối (vỏ sò, tiền)"
+        ],
+        "relatedKanji": [
+          "代",
+          "買",
+          "借"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "thai",
+        "meaningViNoAccent": "cho vay",
+        "meaningEnNoAccent": "lend"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l07_v060",
+          "sourceSenseId": "n5_l07_s060",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l07_v063",
+          "sourceSenseId": "n5_l07_s063",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l07_v005",
+          "sourceSenseId": "n5_l07_s005",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Thải (cho vay)",
+        "onyomi": "TAI",
+        "kunyomi": "ka-shimasu"
+      }
+    },
+    {
+      "kanjiId": "n5_l07_k005",
+      "lessonId": 7,
+      "level": "N5",
+      "character": "借",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Tá",
+        "meaningVi": "vay mượn",
+        "meaningViDisplay": "Tá (vay mượn)",
+        "meaningEn": "Borrow"
+      },
+      "readings": {
+        "onyomi": [
+          "SHAKU"
+        ],
+        "kunyomi": [
+          "ka-rimasu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Người (亻) của ngày Xưa (昔) thường đi vay mượn.",
+        "en": "People (亻) since ancient times (昔) have borrowed things."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "亻",
+          "昔"
+        ],
+        "componentNames": [
+          "Nhân (người)",
+          "Tích (ngày xưa)"
+        ],
+        "relatedKanji": [
+          "人",
+          "昔",
+          "貸"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "ta",
+        "meaningViNoAccent": "vay muon",
+        "meaningEnNoAccent": "borrow"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l07_v056",
+          "sourceSenseId": "n5_l07_s056",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l07_v062",
+          "sourceSenseId": "n5_l07_s062",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l07_v006",
+          "sourceSenseId": "n5_l07_s006",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tá (vay mượn)",
+        "onyomi": "SHAKU",
+        "kunyomi": "ka-rimasu"
+      }
+    },
+    {
+      "kanjiId": "n5_l07_k006",
+      "lessonId": 7,
+      "level": "N5",
+      "character": "送",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Tống",
+        "meaningVi": "gửi",
+        "meaningViDisplay": "Tống (gửi)",
+        "meaningEn": "Send"
+      },
+      "readings": {
+        "onyomi": [
+          "SOU"
+        ],
+        "kunyomi": [
+          "oku-rimasu"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Đi (辶) trên đường để mang quà đi Gửi.",
+        "en": "Walking on the road (辶) to send something."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "关",
+          "辶"
+        ],
+        "componentNames": [
+          "Quan biến thể (trên)",
+          "Sước (đi)"
+        ],
+        "relatedKanji": [
+          "通",
+          "運",
+          "連"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "tong",
+        "meaningViNoAccent": "gui",
+        "meaningEnNoAccent": "send"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l07_v061",
+          "sourceSenseId": "n5_l07_s061",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n4_l50_v025",
+          "sourceSenseId": "n4_l50_s025",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l07_v002",
+          "sourceSenseId": "n5_l07_s002",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Tống (gửi)",
+        "onyomi": "SOU",
+        "kunyomi": "oku-rimasu"
+      }
+    },
+    {
+      "kanjiId": "n5_l07_k007",
+      "lessonId": 7,
+      "level": "N5",
+      "character": "手",
+      "strokeCount": 4,
+      "labels": {
+        "hanViet": "Thủ",
+        "meaningVi": "tay",
+        "meaningViDisplay": "Thủ (tay)",
+        "meaningEn": "Hand"
+      },
+      "readings": {
+        "onyomi": [
+          "SHU"
+        ],
+        "kunyomi": [
+          "te"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Hình dáng một bàn tay với bàn tay và các ngón.",
+        "en": "The shape of a hand."
+      },
+      "decomposition": {
+        "structure": "standalone",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": [
+          "打",
+          "押",
+          "招"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "thu",
+        "meaningViNoAccent": "tay",
+        "meaningEnNoAccent": "hand"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l07_v010",
+          "sourceSenseId": "n5_l07_s010",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l06_v031",
+          "sourceSenseId": "n5_l06_s031",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l09_v005",
+          "sourceSenseId": "n5_l09_s005",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Thủ (tay)",
+        "onyomi": "SHU",
+        "kunyomi": "te"
+      }
+    },
+    {
+      "kanjiId": "n5_l07_k008",
+      "lessonId": 7,
+      "level": "N5",
+      "character": "紙",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Chỉ",
+        "meaningVi": "giấy",
+        "meaningViDisplay": "Chỉ (giấy)",
+        "meaningEn": "Paper"
+      },
+      "readings": {
+        "onyomi": [
+          "SHI"
+        ],
+        "kunyomi": [
+          "kami"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Dùng sợi tơ (糸) làm thành vật dụng cho dòng họ (氏) - đó là Giấy.",
+        "en": "Using fibers (糸) for a family/clan (氏) - it's paper."
+      },
+      "decomposition": {
+        "structure": "left-right",
+        "components": [
+          "糸",
+          "氏"
+        ],
+        "componentNames": [
+          "Mịch (sợi tơ)",
+          "Thị (dòng họ)"
+        ],
+        "relatedKanji": [
+          "糸",
+          "姉",
+          "終",
+          "線"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "chi",
+        "meaningViNoAccent": "giay",
+        "meaningEnNoAccent": "paper"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l07_v024",
+          "sourceSenseId": "n5_l07_s024",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l06_v031",
+          "sourceSenseId": "n5_l06_s031",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l13_v039",
+          "sourceSenseId": "n5_l13_s039",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Chỉ (giấy)",
+        "onyomi": "SHI",
+        "kunyomi": "kami"
+      }
+    },
+    {
+      "kanjiId": "n5_l07_k009",
+      "lessonId": 7,
+      "level": "N5",
+      "character": "友",
+      "strokeCount": 4,
+      "labels": {
+        "hanViet": "Hữu",
+        "meaningVi": "bạn bè",
+        "meaningViDisplay": "Hữu (bạn bè)",
+        "meaningEn": "Friend"
+      },
+      "readings": {
+        "onyomi": [
+          "YUU"
+        ],
+        "kunyomi": [
+          "tomo"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Hai cánh tay (Hựu 又) đan vào nhau chứng tỏ sự gắn kết bạn bè.",
+        "en": "Hands (又) joined together representing friendship."
+      },
+      "decomposition": {
+        "structure": "mixed",
+        "components": [
+          "ナ",
+          "又"
+        ],
+        "componentNames": [
+          "Nét trên",
+          "Hựu (tay)"
+        ],
+        "relatedKanji": [
+          "有",
+          "取"
+        ]
+      },
+      "search": {
+        "hanVietNoAccent": "huu",
+        "meaningViNoAccent": "ban be",
+        "meaningEnNoAccent": "friend"
+      },
+      "examples": [
+        {
+          "sourceVocabId": "n5_l07_v057",
+          "sourceSenseId": "n5_l07_s057",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l07_v055",
+          "sourceSenseId": "n5_l07_s055",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        },
+        {
+          "sourceVocabId": "n5_l05_v017",
+          "sourceSenseId": "n5_l05_s017",
+          "word": null,
+          "reading": null,
+          "meaningVi": null,
+          "meaningEn": null
+        }
+      ],
+      "legacy": {
+        "meaning": "Hữu (bạn bè)",
+        "onyomi": "YUU",
+        "kunyomi": "tomo"
+      }
+    }
+  ]
+}
