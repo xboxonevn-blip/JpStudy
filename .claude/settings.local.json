@@ -19,7 +19,8 @@
       "Bash(git -C \"c:/Users/xboxo/Documents/GitHub/JpStudy-v2/.claude/worktrees/agent-a0efb9be\" status)",
       "Bash(\".venv_coding_agent/bin/python\" -m pytest tests/test_models.py -q)",
       "Bash(\".venv_coding_agent/bin/python\" -m pytest tests/test_models.py -v --tb=short)",
-      "Bash(\".venv_coding_agent/bin/python\" -m py_compile coding_agent/__init__.py coding_agent/models.py tests/test_models.py)"
+      "Bash(\".venv_coding_agent/bin/python\" -m py_compile coding_agent/__init__.py coding_agent/models.py tests/test_models.py)",
+      "Bash(pytest tests/test_models.py -q)"
     ]
   },
   "enabledPlugins": {
