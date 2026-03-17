@@ -46,7 +46,15 @@ void main() {
     );
 
     await tester.pump();
-    await tester.pump(const Duration(seconds: 1));
+    for (var i = 0; i < 20; i++) {
+      await tester.pump(const Duration(milliseconds: 200));
+      if (find
+          .text('Chọn đoạn văn và hoàn thành trong thời gian mục tiêu.')
+          .evaluate()
+          .isNotEmpty) {
+        break;
+      }
+    }
 
     expect(find.text('Luyện đọc hiểu JLPT'), findsWidgets);
     expect(

@@ -553,13 +553,13 @@
     {
       "level": "N3",
       "fileCount": 25,
-      "nonPunctuationTokenCount": 1911,
+      "nonPunctuationTokenCount": 1914,
       "glossableTokenCount": 940,
-      "readingCoverage": 0.9995,
-      "meaningCoverage": 0.7227,
-      "glossableMeaningCoverage": 0.9074,
-      "shortKanaWithoutMeaningRatio": 0.2318,
-      "avgTokensPerParagraph": 15.29,
+      "readingCoverage": 0.778,
+      "meaningCoverage": 0.778,
+      "glossableMeaningCoverage": 1.0,
+      "shortKanaWithoutMeaningRatio": 0.222,
+      "avgTokensPerParagraph": 15.31,
       "titleFuriganaMissingCount": 0,
       "topEmptyMeaningSurfaces": [
         [
@@ -595,226 +595,29 @@
           8
         ],
         [
-          "なる",
-          4
-        ],
-        [
-          "しまう",
-          3
-        ],
-        [
           "くる",
           2
         ],
         [
-          "考え",
-          2
-        ],
-        [
-          "身",
-          2
-        ],
-        [
-          "され",
-          2
-        ],
-        [
-          "など",
-          2
-        ],
-        [
-          "つながっ",
-          2
-        ],
-        [
-          "みる",
-          2
-        ],
-        [
-          "なっ",
+          "い",
           1
         ],
         [
-          "やりたい",
-          1
-        ],
-        [
-          "未来",
-          1
-        ],
-        [
-          "家庭",
-          1
-        ],
-        [
-          "過剰",
-          1
-        ],
-        [
-          "片づける",
-          1
-        ],
-        [
-          "その後",
-          1
-        ],
-        [
-          "学び",
-          1
-        ],
-        [
-          "違い",
-          1
-        ],
-        [
-          "交換",
-          1
-        ],
-        [
-          "言う",
-          1
-        ],
-        [
-          "作り",
-          1
-        ],
-        [
-          "ネット",
+          "むだ",
           1
         ]
       ],
-      "topMissingGlossableSurfaces": [
-        [
-          "しまう",
-          3
-        ],
-        [
-          "考え",
-          2
-        ],
-        [
-          "身",
-          2
-        ],
-        [
-          "つながっ",
-          2
-        ],
-        [
-          "やりたい",
-          1
-        ],
-        [
-          "未来",
-          1
-        ],
-        [
-          "家庭",
-          1
-        ],
-        [
-          "過剰",
-          1
-        ],
-        [
-          "片づける",
-          1
-        ],
-        [
-          "その後",
-          1
-        ],
-        [
-          "学び",
-          1
-        ],
-        [
-          "違い",
-          1
-        ],
-        [
-          "交換",
-          1
-        ],
-        [
-          "言う",
-          1
-        ],
-        [
-          "作り",
-          1
-        ],
-        [
-          "ネット",
-          1
-        ],
-        [
-          "通販",
-          1
-        ],
-        [
-          "買いすぎ",
-          1
-        ],
-        [
-          "引かれず",
-          1
-        ],
-        [
-          "くずしやすい",
-          1
-        ],
-        [
-          "スマホ",
-          1
-        ],
-        [
-          "子ども",
-          1
-        ],
-        [
-          "を通して",
-          1
-        ],
-        [
-          "支える",
-          1
-        ],
-        [
-          "早め",
-          1
-        ],
-        [
-          "当日",
-          1
-        ],
-        [
-          "持たせ",
-          1
-        ],
-        [
-          "しがちだ",
-          1
-        ],
-        [
-          "まとめ",
-          1
-        ],
-        [
-          "動けるよう",
-          1
-        ]
-      ],
+      "topMissingGlossableSurfaces": [],
       "lowestCoverageLessons": [
         {
-          "path": "assets/data/content/immersion/n3/lesson_64.json",
-          "id": "n3-lesson-64",
-          "title": "家族との距離感",
-          "translation": "Khoảng cách phù hợp với gia đình",
+          "path": "assets/data/content/immersion/n3/lesson_52.json",
+          "id": "n3-lesson-52",
+          "title": "将来の自分のために",
+          "translation": "Vì bản thân trong tương lai",
           "paragraphCount": 5,
-          "tokenCoverage": 0.6375,
-          "glossableCoverage": 0.8235,
-          "fragmentRatio": 0.2875
+          "tokenCoverage": 0.7286,
+          "glossableCoverage": 1.0,
+          "fragmentRatio": 0.2714
         },
         {
           "path": "assets/data/content/immersion/n3/lesson_74.json",
@@ -822,69 +625,19 @@
           "title": "自分らしい服選び",
           "translation": "Chọn trang phục mang cá tính của mình",
           "paragraphCount": 5,
-          "tokenCoverage": 0.6375,
-          "glossableCoverage": 0.825,
-          "fragmentRatio": 0.275
+          "tokenCoverage": 0.7375,
+          "glossableCoverage": 1.0,
+          "fragmentRatio": 0.2625
         },
         {
-          "path": "assets/data/content/immersion/n3/lesson_65.json",
-          "id": "n3-lesson-65",
-          "title": "住みやすい町",
-          "translation": "Một thành phố đáng sống",
+          "path": "assets/data/content/immersion/n3/lesson_64.json",
+          "id": "n3-lesson-64",
+          "title": "家族との距離感",
+          "translation": "Khoảng cách phù hợp với gia đình",
           "paragraphCount": 5,
-          "tokenCoverage": 0.7284,
-          "glossableCoverage": 0.825,
-          "fragmentRatio": 0.1852
-        },
-        {
-          "path": "assets/data/content/immersion/n3/lesson_72.json",
-          "id": "n3-lesson-72",
-          "title": "分かりやすく伝える",
-          "translation": "Truyền đạt dễ hiểu",
-          "paragraphCount": 5,
-          "tokenCoverage": 0.6857,
-          "glossableCoverage": 0.8378,
-          "fragmentRatio": 0.2286
-        },
-        {
-          "path": "assets/data/content/immersion/n3/lesson_63.json",
-          "id": "n3-lesson-63",
-          "title": "学校で伸びる力",
-          "translation": "Năng lực được phát triển ở trường",
-          "paragraphCount": 5,
-          "tokenCoverage": 0.6883,
-          "glossableCoverage": 0.8529,
-          "fragmentRatio": 0.2468
-        },
-        {
-          "path": "assets/data/content/immersion/n3/lesson_71.json",
-          "id": "n3-lesson-71",
-          "title": "お金の使い方",
-          "translation": "Cách sử dụng tiền bạc",
-          "paragraphCount": 5,
-          "tokenCoverage": 0.6901,
-          "glossableCoverage": 0.8529,
-          "fragmentRatio": 0.2394
-        },
-        {
-          "path": "assets/data/content/immersion/n3/lesson_54.json",
-          "id": "n3-lesson-54",
-          "title": "留学で学んだこと",
-          "translation": "Những điều học được từ du học",
-          "paragraphCount": 5,
-          "tokenCoverage": 0.72,
-          "glossableCoverage": 0.8537,
-          "fragmentRatio": 0.2
-        },
-        {
-          "path": "assets/data/content/immersion/n3/lesson_56.json",
-          "id": "n3-lesson-56",
-          "title": "ネット通販の工夫",
-          "translation": "Mẹo mua sắm trực tuyến",
-          "paragraphCount": 5,
-          "tokenCoverage": 0.7162,
-          "glossableCoverage": 0.8684,
-          "fragmentRatio": 0.2162
+          "tokenCoverage": 0.7407,
+          "glossableCoverage": 1.0,
+          "fragmentRatio": 0.2593
         },
         {
           "path": "assets/data/content/immersion/n3/lesson_67.json",
@@ -892,25 +645,74 @@
           "title": "技術と暮らし",
           "translation": "Công nghệ và đời sống",
           "paragraphCount": 5,
-          "tokenCoverage": 0.6711,
-          "glossableCoverage": 0.8718,
-          "fragmentRatio": 0.2632
+          "tokenCoverage": 0.75,
+          "glossableCoverage": 1.0,
+          "fragmentRatio": 0.25
         },
         {
-          "path": "assets/data/content/immersion/n3/lesson_66.json",
-          "id": "n3-lesson-66",
-          "title": "試合から学ぶ",
-          "translation": "Học được từ trận đấu",
+          "path": "assets/data/content/immersion/n3/lesson_55.json",
+          "id": "n3-lesson-55",
+          "title": "働く上で大切なこと",
+          "translation": "Điều quan trọng khi làm việc",
           "paragraphCount": 5,
-          "tokenCoverage": 0.7733,
-          "glossableCoverage": 0.8824,
-          "fragmentRatio": 0.1733
+          "tokenCoverage": 0.7532,
+          "glossableCoverage": 1.0,
+          "fragmentRatio": 0.2468
+        },
+        {
+          "path": "assets/data/content/immersion/n3/lesson_60.json",
+          "id": "n3-lesson-60",
+          "title": "旅行前の準備",
+          "translation": "Chuẩn bị trước chuyến đi",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.7532,
+          "glossableCoverage": 1.0,
+          "fragmentRatio": 0.2468
+        },
+        {
+          "path": "assets/data/content/immersion/n3/lesson_51.json",
+          "id": "n3-lesson-51",
+          "title": "余暇の使い方",
+          "translation": "Cách sử dụng thời gian rảnh",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.7536,
+          "glossableCoverage": 1.0,
+          "fragmentRatio": 0.2464
+        },
+        {
+          "path": "assets/data/content/immersion/n3/lesson_57.json",
+          "id": "n3-lesson-57",
+          "title": "健康的な生活習慣",
+          "translation": "Thói quen sống lành mạnh",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.7538,
+          "glossableCoverage": 1.0,
+          "fragmentRatio": 0.2462
+        },
+        {
+          "path": "assets/data/content/immersion/n3/lesson_61.json",
+          "id": "n3-lesson-61",
+          "title": "災害に備える",
+          "translation": "Chuẩn bị cho thiên tai",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.7564,
+          "glossableCoverage": 1.0,
+          "fragmentRatio": 0.2436
+        },
+        {
+          "path": "assets/data/content/immersion/n3/lesson_53.json",
+          "id": "n3-lesson-53",
+          "title": "便利さとごみの問題",
+          "translation": "Tiện lợi và vấn đề rác thải",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.7571,
+          "glossableCoverage": 1.0,
+          "fragmentRatio": 0.2429
         }
       ]
     }
   ],
   "recommendations": [
-    "N3 glossable meaning coverage is materially below N4/N5. Build a shared gloss lexicon and require every new N3 article to pass a minimum content-word coverage threshold.",
     "Prefer one canonical content contract: article text, normalized glossable tokens, and optional grammar fragments. Avoid mixing phrase-level and morpheme-level tokenization across levels.",
     "Keep generator + audit together. Every batch should regenerate lessons, run this audit, and fail if fragmentation or coverage regresses."
   ]

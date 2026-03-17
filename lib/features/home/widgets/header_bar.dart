@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/study_level.dart';
 
@@ -24,26 +25,30 @@ class HeaderBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return ClipRRect(
-      borderRadius: BorderRadius.circular(22),
+      borderRadius: BorderRadius.circular(26),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 14, sigmaY: 14),
         child: Container(
-          height: 56,
+          height: 58,
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [Color(0xF7FFFFFF), Color(0xECF7FCFF)],
+            gradient: LinearGradient(
+              colors: [
+                palette.elevated.withValues(alpha: 0.92),
+                palette.base.withValues(alpha: 0.88),
+              ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
-            borderRadius: BorderRadius.circular(22),
-            border: Border.all(color: const Color(0xFFDDEAF8), width: 1),
-            boxShadow: const [
+            borderRadius: BorderRadius.circular(26),
+            border: Border.all(color: palette.outline, width: 1),
+            boxShadow: [
               BoxShadow(
-                color: Color(0x12203A53),
-                blurRadius: 14,
-                offset: Offset(0, 6),
+                color: palette.primary.withValues(alpha: 0.10),
+                blurRadius: 18,
+                offset: const Offset(0, 8),
               ),
             ],
           ),
@@ -83,12 +88,12 @@ class HeaderBar extends StatelessWidget {
                 onPressed: onSettingsTap,
                 tooltip: language.settingsLabel,
                 style: IconButton.styleFrom(
-                  backgroundColor: const Color(0xFFF1F6FF),
+                  backgroundColor: palette.surface,
                   shape: const CircleBorder(),
                 ),
-                icon: const Icon(
+                icon: Icon(
                   Icons.settings_rounded,
-                  color: Color(0xFF3A4A63),
+                  color: palette.ink.withValues(alpha: 0.82),
                   size: 20,
                 ),
               ),
@@ -111,6 +116,7 @@ class _HeaderStats extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final palette = context.appPalette;
     final dashboardAsync = ref.watch(dashboardProvider);
     final stats = dashboardAsync.asData?.value;
 
@@ -121,13 +127,11 @@ class _HeaderStats extends ConsumerWidget {
     // Streak is "at risk" when user has an active streak but hasn't earned
     // any XP today — they need to study to keep it alive.
     final streakAtRisk = streak > 0 && xp == 0;
-    final streakColor =
-        streakAtRisk ? const Color(0xFFEF4444) : const Color(0xFFF97316);
+    final streakColor = streakAtRisk ? palette.error : palette.accent;
 
     // XP micro-goal: show "done/goal" until target is reached, then just done.
     final xpGoalReached = xp >= _kDailyXpGoal;
-    final xpColor =
-        xpGoalReached ? const Color(0xFF22C55E) : const Color(0xFFEAB308);
+    final xpColor = xpGoalReached ? palette.success : palette.warning;
     final xpLabel = xpGoalReached ? '$xp' : '$xp/$_kDailyXpGoal';
 
     return SingleChildScrollView(
@@ -151,7 +155,7 @@ class _HeaderStats extends ConsumerWidget {
           const SizedBox(width: 6),
           _StatCapsule(
             icon: Icons.history_edu_rounded,
-            color: const Color(0xFF0EA5E9),
+            color: palette.info,
             label: due.toString(),
             tooltip: language.reviewsLabel,
             showPlus: due > 99,
@@ -160,7 +164,7 @@ class _HeaderStats extends ConsumerWidget {
             const SizedBox(width: 6),
             _StatCapsule(
               icon: Icons.flag_rounded,
-              color: const Color(0xFF14B8A6),
+              color: palette.secondary,
               label: level!.shortLabel,
               tooltip: language.levelMenuTitle,
             ),
@@ -190,23 +194,26 @@ class _StatCapsule extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Tooltip(
       message: tooltip,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
         decoration: BoxDecoration(
           color: urgent
-              ? const Color(0xFFFEE2E2)
-              : Colors.white.withValues(alpha: 0.94),
+              ? palette.error.withValues(alpha: 0.12)
+              : palette.elevated.withValues(alpha: 0.94),
           borderRadius: BorderRadius.circular(999),
           border: Border.all(
-            color: urgent ? const Color(0xFFFCA5A5) : const Color(0xFFDCE8F8),
+            color: urgent
+                ? palette.error.withValues(alpha: 0.28)
+                : palette.outline,
           ),
-          boxShadow: const [
+          boxShadow: [
             BoxShadow(
-              color: Color(0x0D2F3D54),
+              color: palette.primary.withValues(alpha: 0.06),
               blurRadius: 8,
-              offset: Offset(0, 2),
+              offset: const Offset(0, 2),
             ),
           ],
         ),
@@ -217,8 +224,8 @@ class _StatCapsule extends StatelessWidget {
             const SizedBox(width: 5),
             Text(
               showPlus ? '$label+' : label,
-              style: const TextStyle(
-                color: Color(0xFF1F2937),
+              style: TextStyle(
+                color: palette.ink,
                 fontWeight: FontWeight.w800,
                 fontSize: 12,
               ),
@@ -245,6 +252,7 @@ class _ActionPill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Tooltip(
       message: tooltip,
       child: InkWell(
@@ -253,18 +261,18 @@ class _ActionPill extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
           decoration: BoxDecoration(
-            color: const Color(0xFFF1F6FF),
+            color: palette.surface,
             borderRadius: BorderRadius.circular(999),
-            border: Border.all(color: const Color(0xFFDCE8F8)),
+            border: Border.all(color: palette.outline),
           ),
           child: Row(
             children: [
-              Icon(icon, size: 15, color: const Color(0xFF3A4A63)),
+              Icon(icon, size: 15, color: palette.primary),
               const SizedBox(width: 5),
               Text(
                 label,
-                style: const TextStyle(
-                  color: Color(0xFF334155),
+                style: TextStyle(
+                  color: palette.ink.withValues(alpha: 0.86),
                   fontSize: 12,
                   fontWeight: FontWeight.w800,
                 ),
@@ -285,22 +293,23 @@ class _MenuPill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
       child: Container(
         decoration: BoxDecoration(
-          color: const Color(0xFFEFFCF8),
+          color: palette.secondary.withValues(alpha: 0.10),
           borderRadius: BorderRadius.circular(999),
-          border: Border.all(color: const Color(0xFFCBEBDD)),
+          border: Border.all(color: palette.secondary.withValues(alpha: 0.22)),
         ),
         child: Row(
           children: [
-            Icon(icon, size: 15, color: const Color(0xFF0F766E)),
+            Icon(icon, size: 15, color: palette.secondary),
             const SizedBox(width: 5),
             Text(
               label,
-              style: const TextStyle(
-                color: Color(0xFF0F766E),
+              style: TextStyle(
+                color: palette.secondary,
                 fontSize: 12,
                 fontWeight: FontWeight.w900,
               ),

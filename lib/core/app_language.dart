@@ -5641,11 +5641,11 @@ extension AppLanguageLabels on AppLanguage {
   String get immersionSourceLocalLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Sample articles';
+        return 'Reading bank';
       case AppLanguage.vi:
-        return 'B\u00e0i m\u1eabu';
+        return 'Ng\u00e2n h\u00e0ng b\u00e0i \u0111\u1ecdc';
       case AppLanguage.ja:
-        return '\u30b5\u30f3\u30d7\u30eb\u8a18\u4e8b';
+        return '\u6559\u6750\u30d0\u30f3\u30af';
     }
   }
 
@@ -5674,11 +5674,11 @@ extension AppLanguageLabels on AppLanguage {
   String get immersionSubtitle {
     switch (this) {
       case AppLanguage.en:
-        return 'Read and save new words.';
+        return 'Read, tap words, and build speed.';
       case AppLanguage.vi:
-        return '\u0110\u1ecdc v\u00e0 l\u01b0u t\u1eeb m\u1edbi.';
+        return '\u0110\u1ecdc, ch\u1ea1m t\u1eeb, v\u00e0 t\u0103ng t\u1ed1c.';
       case AppLanguage.ja:
-        return '\u8aad\u3093\u3067\u5358\u8a9e\u3092\u4fdd\u5b58\u3002';
+        return '\u8aad\u307f\u306a\u304c\u3089\u5358\u8a9e\u3092\u78ba\u8a8d\u3057\u3001\u901f\u5ea6\u3092\u4f38\u3070\u3059\u3002';
     }
   }
 
@@ -5707,11 +5707,11 @@ extension AppLanguageLabels on AppLanguage {
   String get immersionEmptyLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'No articles available.';
+        return 'No reading decks available.';
       case AppLanguage.vi:
-        return 'Ch\u01b0a c\u00f3 b\u00e0i \u0111\u1ecdc.';
+        return 'Ch\u01b0a c\u00f3 deck b\u00e0i \u0111\u1ecdc.';
       case AppLanguage.ja:
-        return '\u8a18\u4e8b\u304c\u3042\u308a\u307e\u305b\u3093\u3002';
+        return '\u8aad\u89e3\u30c7\u30c3\u30ad\u304c\u3042\u308a\u307e\u305b\u3093\u3002';
     }
   }
 

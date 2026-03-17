@@ -676,6 +676,14 @@ MANUAL_GLOSSARY = {
     '例': ('れい', 'ví dụ', 'example'),
     '入れる': ('いれる', 'đưa vào', 'put in'),
     '増やす': ('ふやす', 'tăng lên', 'increase'),
+    'うまく': ('うまく', 'một cách khéo léo', 'skillfully'),
+    '言いたい': ('いいたい', 'muốn nói', 'want to say'),
+    '言えない': ('いえない', 'không thể nói', 'cannot say'),
+    'にとって': ('にとって', 'đối với', 'for'),
+    '覚える': ('おぼえる', 'ghi nhớ', 'remember'),
+    '現在': ('げんざい', 'hiện tại', 'present'),
+    '完璧': ('かんぺき', 'hoàn hảo', 'perfect'),
+    'かけ': ('かけ', 'bỏ thời gian hoặc công sức', 'spend time or effort'),
 }
 
 
@@ -818,7 +826,7 @@ def _lookup_token(
         if key in manual_lexicon:
             item = manual_lexicon[key]
             return {
-                'reading': item['reading'] or reading,
+                'reading': item['reading'] if key == surface else (reading or item['reading']),
                 'meaningVi': item['meaningVi'],
                 'meaningEn': item['meaningEn'],
             }
@@ -826,7 +834,7 @@ def _lookup_token(
         if key in immersion_lexicon:
             item = immersion_lexicon[key]
             return {
-                'reading': item['reading'] or reading,
+                'reading': item['reading'] if key == surface else (reading or item['reading']),
                 'meaningVi': item['meaningVi'],
                 'meaningEn': item['meaningEn'],
             }
@@ -834,7 +842,7 @@ def _lookup_token(
         if key in vocab_lexicon:
             item = vocab_lexicon[key]
             return {
-                'reading': item['reading'] or reading,
+                'reading': item['reading'] if key == surface else (reading or item['reading']),
                 'meaningVi': item['meaningVi'],
                 'meaningEn': item['meaningEn'],
             }

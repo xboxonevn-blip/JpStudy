@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/theme/app_breakpoints.dart';
@@ -22,55 +22,81 @@ class AppShellScaffold extends ConsumerWidget {
         final useRail = constraints.maxWidth >= AppBreakpoints.desktop;
         if (useRail) {
           return Scaffold(
+            backgroundColor: palette.bg,
             body: Row(
               children: [
-                NavigationRail(
-                  selectedIndex: navigationShell.currentIndex,
-                  onDestinationSelected: (index) => _goToBranch(index),
-                  labelType: NavigationRailLabelType.all,
-                  groupAlignment: -0.85,
-                  backgroundColor: palette.base,
-                  indicatorColor: palette.primary.withValues(alpha: 0.12),
-                  leading: Padding(
-                    padding: const EdgeInsets.fromLTRB(12, 16, 12, 24),
-                    child: Column(
-                      children: [
-                        Container(
-                          width: 48,
-                          height: 48,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            gradient: LinearGradient(
-                              colors: palette.heroGradient,
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                            ),
-                          ),
-                          child: const Icon(
-                            Icons.auto_stories_rounded,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        Text(
-                          'JpStudy',
-                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            fontWeight: FontWeight.w800,
-                          ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(14, 14, 0, 14),
+                  child: Container(
+                    width: 112,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [palette.elevated, palette.base],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(32),
+                      border: Border.all(color: palette.outline),
+                      boxShadow: [
+                        BoxShadow(
+                          color: palette.primary.withValues(alpha: 0.08),
+                          blurRadius: 24,
+                          offset: const Offset(0, 14),
                         ),
                       ],
                     ),
-                  ),
-                  destinations: [
-                    for (final item in items)
-                      NavigationRailDestination(
-                        icon: Icon(item.icon),
-                        selectedIcon: Icon(item.selectedIcon),
-                        label: Text(item.label),
+                    child: NavigationRail(
+                      selectedIndex: navigationShell.currentIndex,
+                      onDestinationSelected: (index) => _goToBranch(index),
+                      labelType: NavigationRailLabelType.all,
+                      groupAlignment: -0.82,
+                      backgroundColor: Colors.transparent,
+                      indicatorColor: palette.primary.withValues(alpha: 0.14),
+                      leading: Padding(
+                        padding: const EdgeInsets.fromLTRB(12, 18, 12, 24),
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 54,
+                              height: 54,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(18),
+                                gradient: LinearGradient(
+                                  colors: [palette.primary, palette.secondary],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                              ),
+                              child: const Icon(
+                                Icons.auto_stories_rounded,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(height: 14),
+                            Text(
+                              'JpStudy\n日本語',
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.titleSmall
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.w900,
+                                    height: 1.1,
+                                  ),
+                            ),
+                          ],
+                        ),
                       ),
-                  ],
+                      destinations: [
+                        for (final item in items)
+                          NavigationRailDestination(
+                            icon: Icon(item.icon),
+                            selectedIcon: Icon(item.selectedIcon),
+                            label: Text(item.label),
+                          ),
+                      ],
+                    ),
+                  ),
                 ),
-                VerticalDivider(width: 1, color: palette.outline),
+                const SizedBox(width: 14),
                 Expanded(child: navigationShell),
               ],
             ),
@@ -78,32 +104,44 @@ class AppShellScaffold extends ConsumerWidget {
         }
 
         return Scaffold(
+          backgroundColor: palette.bg,
+          extendBody: true,
           body: navigationShell,
-          bottomNavigationBar: Container(
-            decoration: BoxDecoration(
-              border: Border(top: BorderSide(color: palette.outline)),
-              boxShadow: const [
-                BoxShadow(
-                  color: Color(0x102C3F59),
-                  blurRadius: 10,
-                  offset: Offset(0, -2),
+          bottomNavigationBar: SafeArea(
+            top: false,
+            minimum: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [palette.elevated, palette.base],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
-              ],
-            ),
-            child: NavigationBar(
-              selectedIndex: navigationShell.currentIndex,
-              onDestinationSelected: (index) => _goToBranch(index),
-              height: 72,
-              backgroundColor: palette.base,
-              indicatorColor: palette.primary.withValues(alpha: 0.12),
-              destinations: [
-                for (final item in items)
-                  NavigationDestination(
-                    icon: Icon(item.icon),
-                    selectedIcon: Icon(item.selectedIcon),
-                    label: item.label,
+                borderRadius: BorderRadius.circular(30),
+                border: Border.all(color: palette.outline),
+                boxShadow: [
+                  BoxShadow(
+                    color: palette.primary.withValues(alpha: 0.10),
+                    blurRadius: 24,
+                    offset: const Offset(0, 12),
                   ),
-              ],
+                ],
+              ),
+              child: NavigationBar(
+                selectedIndex: navigationShell.currentIndex,
+                onDestinationSelected: (index) => _goToBranch(index),
+                height: 82,
+                backgroundColor: Colors.transparent,
+                indicatorColor: palette.primary.withValues(alpha: 0.14),
+                destinations: [
+                  for (final item in items)
+                    NavigationDestination(
+                      icon: Icon(item.icon),
+                      selectedIcon: Icon(item.selectedIcon),
+                      label: item.label,
+                    ),
+                ],
+              ),
             ),
           ),
         );

@@ -4,14 +4,14 @@ import 'package:jpstudy/app/theme/app_theme_palette.dart';
 
 class AppTheme {
   // Component palette (used by ClayButton, ClayCard, grammar widgets, etc.)
-  static const Color primary = Color(0xFF5B4DFF);
-  static const Color secondary = Color(0xFF58CC02);
-  static const Color tertiary = Color(0xFFFF9600);
-  static const Color error = Color(0xFFFF4B4B);
-  static const Color neutral = Color(0xFFE5E7EB);
-  static const Color surface = Color(0xFFF5F7FB);
-  static const Color textMain = Color(0xFF1F2937);
-  static const Color textSub = Color(0xFF6B7280);
+  static const Color primary = Color(0xFF17324D);
+  static const Color secondary = Color(0xFF20675B);
+  static const Color tertiary = Color(0xFFD66A3D);
+  static const Color error = Color(0xFFC44F59);
+  static const Color neutral = Color(0xFFE5D7C4);
+  static const Color surface = Color(0xFFFCF7F0);
+  static const Color textMain = Color(0xFF15202B);
+  static const Color textSub = Color(0xFF61707F);
 
   static Color getDepthColor(Color color) {
     final hsl = HSLColor.fromColor(color);
@@ -31,8 +31,8 @@ class AppTheme {
       tertiary: palette.accent,
     );
 
-    final fontName = GoogleFonts.notoSansJp().fontFamily;
-    final displayFontName = GoogleFonts.zenAntiqueSoft().fontFamily;
+    final fontName = GoogleFonts.mPlusRounded1c().fontFamily;
+    final displayFontName = GoogleFonts.zenMaruGothic().fontFamily;
 
     return ThemeData(
       colorScheme: colorScheme,
@@ -43,18 +43,18 @@ class AppTheme {
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        centerTitle: true,
+        centerTitle: false,
         foregroundColor: colorScheme.onSurface,
         titleTextStyle: TextStyle(
-          fontFamily: fontName,
-          fontSize: 20,
-          fontWeight: FontWeight.w800, // Extra bold for "Juicy" feel
+          fontFamily: displayFontName,
+          fontSize: 24,
+          fontWeight: FontWeight.w800,
           color: palette.ink,
         ),
       ),
       navigationBarTheme: NavigationBarThemeData(
-        backgroundColor: palette.base,
-        indicatorColor: palette.primary.withValues(alpha: 0.12),
+        backgroundColor: Colors.transparent,
+        indicatorColor: palette.primary.withValues(alpha: 0.14),
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
           return TextStyle(
             fontWeight: states.contains(WidgetState.selected)
@@ -62,7 +62,7 @@ class AppTheme {
                 : FontWeight.w700,
             color: states.contains(WidgetState.selected)
                 ? palette.primary
-                : const Color(0xFF6B7280),
+                : palette.ink.withValues(alpha: 0.64),
           );
         }),
       ),
@@ -70,7 +70,7 @@ class AppTheme {
         color: colorScheme.surface,
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(28),
           side: BorderSide(color: palette.outline, width: 1.1),
         ),
       ),
@@ -79,7 +79,7 @@ class AppTheme {
           elevation: 0,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(18),
           ),
           backgroundColor: palette.primary,
           foregroundColor: Colors.white,
@@ -93,9 +93,12 @@ class AppTheme {
           backgroundColor: palette.primary,
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(18),
           ),
-          textStyle: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15.5),
+          textStyle: const TextStyle(
+            fontWeight: FontWeight.w800,
+            fontSize: 15.5,
+          ),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
@@ -104,27 +107,27 @@ class AppTheme {
           side: BorderSide(color: palette.outline),
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(18),
           ),
           textStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: palette.base,
+        fillColor: palette.elevated,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(22),
           borderSide: BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(22),
           borderSide: BorderSide(color: palette.outline),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(22),
           borderSide: BorderSide(color: palette.primary, width: 2),
         ),
-        hintStyle: const TextStyle(color: Color(0xFF94A3B8)),
+        hintStyle: TextStyle(color: palette.ink.withValues(alpha: 0.42)),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 20,
           vertical: 16,
@@ -143,7 +146,7 @@ class AppTheme {
         ),
         titleMedium: TextStyle(
           fontFamily: fontName,
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.w800,
           color: palette.ink,
         ),
         bodyLarge: TextStyle(
@@ -155,7 +158,7 @@ class AppTheme {
           color: palette.ink.withValues(alpha: 0.74),
         ),
       ),
-      iconTheme: const IconThemeData(color: Color(0xFF64748B)),
+      iconTheme: IconThemeData(color: palette.ink.withValues(alpha: 0.68)),
     );
   }
 
@@ -165,8 +168,8 @@ class AppTheme {
     const accentColor = Color(0xFFF9735B);
     const scaffoldBg = Color(0xFF0F172A);
     const cardBg = Color(0xFF1B2636);
-    final fontName = GoogleFonts.notoSansJp().fontFamily;
-    final displayFontName = GoogleFonts.zenAntiqueSoft().fontFamily;
+    final fontName = GoogleFonts.mPlusRounded1c().fontFamily;
+    final displayFontName = GoogleFonts.zenMaruGothic().fontFamily;
 
     return ThemeData(
       useMaterial3: true,
@@ -184,11 +187,11 @@ class AppTheme {
       appBarTheme: AppBarTheme(
         backgroundColor: scaffoldBg,
         elevation: 0,
-        centerTitle: true,
+        centerTitle: false,
         titleTextStyle: TextStyle(
-          fontFamily: fontName,
-          fontSize: 20,
-          fontWeight: FontWeight.w700,
+          fontFamily: displayFontName,
+          fontSize: 24,
+          fontWeight: FontWeight.w800,
           color: Colors.white,
         ),
       ),
@@ -217,8 +220,14 @@ class AppTheme {
           fontWeight: FontWeight.w800,
           color: Colors.white,
         ),
-        bodyLarge: TextStyle(fontFamily: fontName, color: const Color(0xFFCBD5E1)),
-        bodyMedium: TextStyle(fontFamily: fontName, color: const Color(0xFF94A3B8)),
+        bodyLarge: TextStyle(
+          fontFamily: fontName,
+          color: const Color(0xFFCBD5E1),
+        ),
+        bodyMedium: TextStyle(
+          fontFamily: fontName,
+          color: const Color(0xFF94A3B8),
+        ),
       ),
     );
   }
