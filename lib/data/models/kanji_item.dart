@@ -1,3 +1,5 @@
+import 'package:jpstudy/core/app_language.dart';
+
 class KanjiItem {
   const KanjiItem({
     required this.id,
@@ -28,6 +30,18 @@ class KanjiItem {
   final KanjiDecomposition? decomposition;
   final List<KanjiExample> examples;
   final String jlptLevel;
+
+  String? displayMnemonic(AppLanguage language) {
+    final vi = mnemonicVi?.trim();
+    final en = mnemonicEn?.trim();
+    switch (language) {
+      case AppLanguage.vi:
+        return vi != null && vi.isNotEmpty ? vi : null;
+      case AppLanguage.en:
+      case AppLanguage.ja:
+        return en != null && en.isNotEmpty ? en : null;
+    }
+  }
 }
 
 class KanjiDecomposition {

@@ -39,4 +39,16 @@ class VocabItem {
         return english.isNotEmpty ? english : meaning;
     }
   }
+
+  String? displayMnemonic(AppLanguage language) {
+    final vi = mnemonicVi?.trim();
+    final en = mnemonicEn?.trim();
+    switch (language) {
+      case AppLanguage.vi:
+        return vi != null && vi.isNotEmpty ? vi : null;
+      case AppLanguage.en:
+      case AppLanguage.ja:
+        return en != null && en.isNotEmpty ? en : null;
+    }
+  }
 }

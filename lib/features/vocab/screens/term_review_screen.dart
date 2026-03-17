@@ -12,6 +12,7 @@ import '../../../data/models/mistake_context.dart';
 import '../../../core/services/fsrs_service.dart';
 import '../../mistakes/repositories/mistake_repository.dart';
 import '../../common/widgets/compact_ui.dart';
+import '../../../app/theme/app_theme_palette.dart';
 
 class TermReviewScreen extends ConsumerStatefulWidget {
   const TermReviewScreen({super.key});
@@ -173,45 +174,38 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
 
   Widget _buildPreview(AppLanguage language, int termCount) {
     final estimatedMinutes = (termCount * 8 / 60).ceil();
-    return Center(
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 420),
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
+    return AppPageShell(
+      child: Column(
+        children: [
+          AppFeatureCard(
+            icon: Icons.rate_review_rounded,
+            title: language.reviewAction,
+            subtitle: language.reviewReadyTitle,
+            primaryLabel: language.startReviewButton,
+            onPrimaryTap: () => setState(() => _sessionStarted = true),
+            status: AppStatusChip(
+              label: language.reviewTermsDueLabel(termCount),
+              tone: AppStatusTone.warning,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              AppFeatureCard(
-                icon: Icons.rate_review_rounded,
-                title: language.reviewAction,
-                subtitle: language.reviewReadyTitle,
-                primaryLabel: language.startReviewButton,
-                onPrimaryTap: () => setState(() => _sessionStarted = true),
-                status: AppStatusChip(
-                  label: language.reviewTermsDueLabel(termCount),
-                  tone: AppStatusTone.warning,
-                ),
+              _buildPreviewChip(
+                Icons.library_books_outlined,
+                language.reviewTermsDueLabel(termCount),
+                Theme.of(context).colorScheme.primary,
               ),
-              const SizedBox(height: 12),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _buildPreviewChip(
-                    Icons.library_books_outlined,
-                    language.reviewTermsDueLabel(termCount),
-                    Theme.of(context).colorScheme.primary,
-                  ),
-                  const SizedBox(width: 12),
-                  _buildPreviewChip(
-                    Icons.timer_outlined,
-                    language.reviewEstimateLabel(estimatedMinutes),
-                    Colors.orange[700]!,
-                  ),
-                ],
+              const SizedBox(width: 12),
+              _buildPreviewChip(
+                Icons.timer_outlined,
+                language.reviewEstimateLabel(estimatedMinutes),
+                Colors.orange[700]!,
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }
@@ -243,77 +237,50 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
   }
 
   Widget _buildEmptyState(AppLanguage language) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Icon(Icons.check_circle_outline, size: 80, color: Colors.green),
-          const SizedBox(height: 16),
-          Text(
-            language.reviewEmptyLabel,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 8),
-          ElevatedButton(
-            onPressed: () => context.pop(),
-            child: Text(MaterialLocalizations.of(context).backButtonTooltip),
-          ),
-        ],
+    return AppPageShell(
+      child: AppFeatureCard(
+        icon: Icons.check_circle_outline_rounded,
+        title: language.reviewEmptyLabel,
+        subtitle: language.sessionCompleteTitle,
+        secondaryLabel: MaterialLocalizations.of(context).backButtonTooltip,
+        onSecondaryTap: () => context.pop(),
+        status: const AppStatusChip(label: '0', tone: AppStatusTone.success),
       ),
     );
   }
 
   Widget _buildSummary(AppLanguage language, int total) {
     _animController.forward();
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ScaleTransition(
-              scale: _scaleAnimation,
-              child: const Icon(
-                Icons.celebration,
-                size: 100,
-                color: Colors.blue,
-              ),
+    final palette = context.appPalette;
+    return AppPageShell(
+      child: Column(
+        children: [
+          ScaleTransition(
+            scale: _scaleAnimation,
+            child: Icon(
+              Icons.celebration_rounded,
+              size: 88,
+              color: palette.accent,
             ),
-            const SizedBox(height: 24),
-            Text(
-              language.sessionCompleteTitle,
-              style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          const SizedBox(height: 20),
+          AppFeatureCard(
+            icon: Icons.check_circle_rounded,
+            title: language.sessionCompleteTitle,
+            subtitle: language.sessionReviewCountLabel(total),
+            primaryLabel: language.doneLabel,
+            onPrimaryTap: () => context.pop(),
+            status: AppStatusChip(
+              label: language.reviewGoodLabel,
+              tone: AppStatusTone.success,
             ),
-            const SizedBox(height: 8),
-            Text(
-              language.sessionReviewCountLabel(total),
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            const SizedBox(height: 32),
-            _buildSummaryRow(
-              language.reviewAgainLabel,
-              _againCount,
-              Colors.red,
-            ),
-            _buildSummaryRow(
-              language.reviewHardLabel,
-              _hardCount,
-              Colors.orange,
-            ),
-            _buildSummaryRow(language.reviewGoodLabel, _goodCount, Colors.blue),
-            _buildSummaryRow(
-              language.reviewEasyLabel,
-              _easyCount,
-              Colors.green,
-            ),
-            const SizedBox(height: 48),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(minimumSize: const Size(200, 50)),
-              onPressed: () => context.pop(),
-              child: Text(language.doneLabel),
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 16),
+          _buildSummaryRow(language.reviewAgainLabel, _againCount, Colors.red),
+          _buildSummaryRow(language.reviewHardLabel, _hardCount, Colors.orange),
+          _buildSummaryRow(language.reviewGoodLabel, _goodCount, Colors.blue),
+          _buildSummaryRow(language.reviewEasyLabel, _easyCount, Colors.green),
+        ],
       ),
     );
   }
@@ -431,7 +398,7 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
     if (levelEnum == ConfidenceLevel.again ||
         levelEnum == ConfidenceLevel.hard) {
       final prompt = term.reading.isNotEmpty
-          ? '${term.term} â€¢ ${term.reading}'
+          ? '${term.term} ? ${term.reading}'
           : term.term;
       final correctAnswer = language == AppLanguage.en
           ? (term.definitionEn.isNotEmpty ? term.definitionEn : term.definition)

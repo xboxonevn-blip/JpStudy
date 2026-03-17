@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
@@ -716,6 +717,17 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
     }
   }
 
+  String _toggleStateLabel(AppLanguage language, bool enabled) {
+    switch (language) {
+      case AppLanguage.en:
+        return enabled ? 'On' : 'Off';
+      case AppLanguage.vi:
+        return enabled ? 'Bật' : 'Tắt';
+      case AppLanguage.ja:
+        return enabled ? 'オン' : 'オフ';
+    }
+  }
+
   String _readingStatsTitle(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
@@ -1246,6 +1258,7 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
               progressLabel: _readingProgressLabel(language, progressPercent),
               speedLabel: _readingSpeedLabel(language, charsPerMinute),
               quickAddModeLabel: _quickAddModeLabel(language),
+              quickAddStateLabel: _toggleStateLabel(language, _quickAddMode),
               quickAddEnabled: _quickAddMode,
             ),
             if (_unknownQueue.isNotEmpty) ...[
@@ -1352,35 +1365,40 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
             ],
             if (article.translation != null && _showTranslation) ...[
               const SizedBox(height: 8),
-              Container(
-                padding: const EdgeInsets.all(14),
-                decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.95),
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: const Color(0xFFDCE8F8)),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      language.immersionTranslateLabel,
-                      style: const TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w800,
-                        color: Color(0xFF0F172A),
-                      ),
+              Builder(
+                builder: (context) {
+                  final palette = context.appPalette;
+                  return Container(
+                    padding: const EdgeInsets.all(14),
+                    decoration: BoxDecoration(
+                      color: palette.base,
+                      borderRadius: BorderRadius.circular(18),
+                      border: Border.all(color: palette.outlineSoft),
                     ),
-                    const SizedBox(height: 6),
-                    Text(
-                      article.translation!,
-                      style: const TextStyle(
-                        fontSize: 13,
-                        height: 1.45,
-                        color: Color(0xFF334155),
-                      ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          language.immersionTranslateLabel,
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w800,
+                            color: palette.ink,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          article.translation!,
+                          style: TextStyle(
+                            fontSize: 13,
+                            height: 1.55,
+                            color: palette.ink.withValues(alpha: 0.82),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  );
+                },
               ),
             ],
           ],
@@ -1560,26 +1578,28 @@ class _ArticleHeaderCard extends StatelessWidget {
       _TinyTag(label: language.immersionOfficialLevelLabel(officialLevel)),
     ];
 
+    final palette = context.appPalette;
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFFFFFFFF), Color(0xFFF5FAFF)],
+        gradient: LinearGradient(
+          colors: [palette.base, palette.elevated],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: const Color(0xFFDCE8F8)),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: palette.outline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             heading,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 21,
               fontWeight: FontWeight.w900,
-              color: Color(0xFF0F172A),
+              color: palette.ink,
               height: 1.28,
             ),
           ),
@@ -1613,6 +1633,7 @@ class _ReadingSpeedCard extends StatelessWidget {
     required this.progressLabel,
     required this.speedLabel,
     required this.quickAddModeLabel,
+    required this.quickAddStateLabel,
     required this.quickAddEnabled,
   });
 
@@ -1622,33 +1643,33 @@ class _ReadingSpeedCard extends StatelessWidget {
   final String progressLabel;
   final String speedLabel;
   final String quickAddModeLabel;
+  final String quickAddStateLabel;
   final bool quickAddEnabled;
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
+
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.95),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFDCE8F8)),
+        color: palette.elevated,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: palette.outlineSoft),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             title,
-            style: const TextStyle(
-              fontWeight: FontWeight.w900,
-              color: Color(0xFF0F172A),
-            ),
+            style: TextStyle(fontWeight: FontWeight.w900, color: palette.ink),
           ),
           const SizedBox(height: 4),
           Text(
             hint,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 12.5,
-              color: Color(0xFF64748B),
+              color: palette.ink.withValues(alpha: 0.68),
               height: 1.35,
             ),
           ),
@@ -1661,7 +1682,7 @@ class _ReadingSpeedCard extends StatelessWidget {
               _TinyTag(label: progressLabel),
               _TinyTag(label: speedLabel),
               _TinyTag(
-                label: '$quickAddModeLabel: ${quickAddEnabled ? 'ON' : 'OFF'}',
+                label: '$quickAddModeLabel: $quickAddStateLabel',
                 emphasize: quickAddEnabled,
               ),
             ],
@@ -1679,12 +1700,14 @@ class _ParagraphCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
+
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.95),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFDCE8F8)),
+        color: palette.elevated,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: palette.outlineSoft),
       ),
       child: Wrap(spacing: 4, runSpacing: 6, children: children),
     );
@@ -1709,15 +1732,16 @@ class _TokenChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final hasMeaning = token.hasMeaning;
+    final palette = context.appPalette;
     final bg = isSaved
-        ? const Color(0xFFDCFCE7)
+        ? palette.success.withValues(alpha: 0.14)
         : hasMeaning
-        ? const Color(0xFFE0F2FE)
+        ? palette.primary.withValues(alpha: 0.10)
         : Colors.transparent;
     final border = isSaved
-        ? const Color(0xFF86EFAC)
+        ? palette.success.withValues(alpha: 0.32)
         : hasMeaning
-        ? const Color(0xFFBAE6FD)
+        ? palette.primary.withValues(alpha: 0.24)
         : Colors.transparent;
 
     final child = Container(
@@ -1735,7 +1759,10 @@ class _TokenChip extends StatelessWidget {
               token.reading!.isNotEmpty)
             Text(
               token.reading!,
-              style: const TextStyle(fontSize: 10, color: Color(0xFF64748B)),
+              style: TextStyle(
+                fontSize: 10,
+                color: palette.ink.withValues(alpha: 0.58),
+              ),
             ),
           Row(
             mainAxisSize: MainAxisSize.min,
@@ -1746,21 +1773,21 @@ class _TokenChip extends StatelessWidget {
                   fontSize: 16,
                   fontWeight: hasMeaning ? FontWeight.w700 : FontWeight.w400,
                   color: hasMeaning
-                      ? const Color(0xFF0F172A)
-                      : const Color(0xFF475569),
+                      ? palette.ink
+                      : palette.ink.withValues(alpha: 0.68),
                   decoration: hasMeaning && !isSaved
                       ? TextDecoration.underline
                       : TextDecoration.none,
                   decorationStyle: TextDecorationStyle.dotted,
-                  decorationColor: const Color(0xFF93C5FD),
+                  decorationColor: palette.primary.withValues(alpha: 0.45),
                 ),
               ),
               if (isSaved) ...[
                 const SizedBox(width: 3),
-                const Icon(
+                Icon(
                   Icons.check_circle_rounded,
                   size: 12,
-                  color: Color(0xFF16A34A),
+                  color: palette.success,
                 ),
               ],
             ],
@@ -1791,18 +1818,28 @@ class _TinyTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
-        color: emphasize ? const Color(0xFFDCFCE7) : const Color(0xFFF1F5F9),
+        color: emphasize
+            ? palette.success.withValues(alpha: 0.12)
+            : palette.base,
         borderRadius: BorderRadius.circular(999),
+        border: Border.all(
+          color: emphasize
+              ? palette.success.withValues(alpha: 0.22)
+              : palette.outlineSoft,
+        ),
       ),
       child: Text(
         label,
         style: TextStyle(
           fontSize: 11,
           fontWeight: FontWeight.w700,
-          color: emphasize ? const Color(0xFF166534) : const Color(0xFF475569),
+          color: emphasize
+              ? palette.success
+              : palette.ink.withValues(alpha: 0.72),
         ),
       ),
     );
@@ -2303,8 +2340,27 @@ class _SummaryStat extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: const TextStyle(color: Colors.grey)),
-          Text(value, style: const TextStyle(fontWeight: FontWeight.w600)),
+          Builder(
+            builder: (context) {
+              final palette = context.appPalette;
+              return Text(
+                label,
+                style: TextStyle(color: palette.ink.withValues(alpha: 0.62)),
+              );
+            },
+          ),
+          Builder(
+            builder: (context) {
+              final palette = context.appPalette;
+              return Text(
+                value,
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  color: palette.ink,
+                ),
+              );
+            },
+          ),
         ],
       ),
     );

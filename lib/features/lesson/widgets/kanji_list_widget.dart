@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/data/models/kanji_item.dart';
@@ -50,76 +51,139 @@ class _KanjiListWidgetState extends ConsumerState<KanjiListWidget> {
             );
             final expanded = _expandedIds.contains(item.id);
 
-            return Card(
-              margin: const EdgeInsets.only(bottom: 12),
+            final palette = context.appPalette;
+
+            return Container(
+              margin: const EdgeInsets.only(bottom: 14),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [palette.base, palette.elevated],
+                ),
+                borderRadius: BorderRadius.circular(22),
+                border: Border.all(color: palette.outline),
+                boxShadow: [
+                  BoxShadow(
+                    color: palette.ink.withValues(alpha: 0.06),
+                    blurRadius: 18,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
+              ),
               child: Column(
                 children: [
-                  InkWell(
-                    borderRadius: BorderRadius.circular(12),
-                    onTap: () {
-                      setState(() {
-                        if (expanded) {
-                          _expandedIds.remove(item.id);
-                        } else {
-                          _expandedIds.add(item.id);
-                        }
-                      });
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: Theme.of(
-                                context,
-                              ).primaryColor.withValues(alpha: 0.12),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            alignment: Alignment.center,
-                            child: Text(
-                              item.character,
-                              style: const TextStyle(
-                                fontSize: 28,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  primaryMeaning,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(22),
+                      onTap: () {
+                        setState(() {
+                          if (expanded) {
+                            _expandedIds.remove(item.id);
+                          } else {
+                            _expandedIds.add(item.id);
+                          }
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(14, 14, 14, 14),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 62,
+                              height: 62,
+                              decoration: BoxDecoration(
+                                color: palette.primary.withValues(alpha: 0.10),
+                                borderRadius: BorderRadius.circular(18),
+                                border: Border.all(
+                                  color: palette.primary.withValues(
+                                    alpha: 0.15,
                                   ),
                                 ),
-                                const SizedBox(height: 2),
-                                Text(subtitle),
-                              ],
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(
+                                item.character,
+                                style: TextStyle(
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.w800,
+                                  color: palette.ink,
+                                ),
+                              ),
                             ),
-                          ),
-                          AnimatedRotation(
-                            turns: expanded ? 0.5 : 0,
-                            duration: const Duration(milliseconds: 180),
-                            child: const Icon(Icons.expand_more_rounded),
-                          ),
-                        ],
+                            const SizedBox(width: 14),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    primaryMeaning,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 17,
+                                      color: palette.ink,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    subtitle,
+                                    style: TextStyle(
+                                      color: palette.ink.withValues(
+                                        alpha: 0.68,
+                                      ),
+                                      height: 1.35,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Wrap(
+                                    spacing: 8,
+                                    runSpacing: 8,
+                                    children: [
+                                      _buildMetaPill(
+                                        context,
+                                        icon: Icons.brush_rounded,
+                                        label: language
+                                            .handwritingStrokeShortLabel(
+                                              item.strokeCount,
+                                            ),
+                                        color: palette.accent,
+                                      ),
+                                      if ((item.onyomi ?? '').trim().isNotEmpty)
+                                        _buildMetaPill(
+                                          context,
+                                          icon: Icons.graphic_eq_rounded,
+                                          label:
+                                              '${language.kanjiOnyomiLabel}: ${item.onyomi!.trim()}',
+                                          color: palette.primary,
+                                        ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            AnimatedRotation(
+                              turns: expanded ? 0.5 : 0,
+                              duration: const Duration(milliseconds: 180),
+                              child: Icon(
+                                Icons.expand_more_rounded,
+                                color: palette.primary,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                   AnimatedCrossFade(
-                    duration: const Duration(milliseconds: 200),
+                    duration: const Duration(milliseconds: 220),
                     crossFadeState: expanded
                         ? CrossFadeState.showSecond
                         : CrossFadeState.showFirst,
                     firstChild: const SizedBox.shrink(),
                     secondChild: Padding(
-                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                      padding: const EdgeInsets.fromLTRB(14, 0, 14, 14),
                       child: _buildExpandedBody(
                         context,
                         language: language,
@@ -148,112 +212,202 @@ class _KanjiListWidgetState extends ConsumerState<KanjiListWidget> {
     required List<KanjiItem> allItems,
     required List<_CompoundGuideEntry> compounds,
   }) {
+    final palette = context.appPalette;
     final englishMeaning = (item.meaningEn ?? '').trim();
+    final mnemonic = item.displayMnemonic(language)?.trim();
     final decomp = item.decomposition;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Text('${language.meaningLabel}: ${_primaryMeaning(item, language)}'),
-        if (language != AppLanguage.en && englishMeaning.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.only(top: 6),
-            child: Text('${language.meaningEnLabel}: $englishMeaning'),
-          ),
-        Padding(
-          padding: const EdgeInsets.only(top: 6),
-          child: Text(language.handwritingStrokeShortLabel(item.strokeCount)),
-        ),
-        if (item.mnemonicVi != null && item.mnemonicVi!.trim().isNotEmpty) ...[
-          const SizedBox(height: 12),
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: palette.surface,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: palette.outlineSoft),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
           Container(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.amber.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.amber.withValues(alpha: 0.2)),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  palette.primary.withValues(alpha: 0.10),
+                  palette.secondary.withValues(alpha: 0.08),
+                ],
+              ),
+              borderRadius: BorderRadius.circular(18),
+              border: Border.all(color: palette.outlineSoft),
             ),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Icon(
-                  Icons.lightbulb_outline,
-                  color: Colors.amber,
-                  size: 20,
-                ),
-                const SizedBox(width: 8),
-                Expanded(
+                Container(
+                  width: 74,
+                  height: 74,
+                  decoration: BoxDecoration(
+                    color: palette.elevated,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: palette.outline),
+                  ),
+                  alignment: Alignment.center,
                   child: Text(
-                    item.mnemonicVi!,
+                    item.character,
                     style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.amber[900],
-                      fontStyle: FontStyle.italic,
+                      fontSize: 38,
+                      fontWeight: FontWeight.w800,
+                      color: palette.ink,
                     ),
+                  ),
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        _primaryMeaning(item, language),
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.w800,
+                          color: palette.ink,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: [
+                          _buildMetaPill(
+                            context,
+                            icon: Icons.graphic_eq_rounded,
+                            label:
+                                '${language.kanjiOnyomiLabel}: ${((item.onyomi ?? '').trim().isEmpty) ? '-' : item.onyomi!.trim()}',
+                            color: palette.primary,
+                          ),
+                          _buildMetaPill(
+                            context,
+                            icon: Icons.translate_rounded,
+                            label:
+                                '${language.kanjiKunyomiLabel}: ${((item.kunyomi ?? '').trim().isEmpty) ? '-' : item.kunyomi!.trim()}',
+                            color: palette.secondary,
+                          ),
+                          _buildMetaPill(
+                            context,
+                            icon: Icons.brush_rounded,
+                            label: language.handwritingStrokeShortLabel(
+                              item.strokeCount,
+                            ),
+                            color: palette.accent,
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
           ),
-        ],
-        if (decomp != null && decomp.hasContent) ...[
-          const SizedBox(height: 12),
-          _buildDecompositionSection(
-            context,
-            item: item,
-            decomp: decomp,
-            language: language,
-          ),
-        ],
-        const SizedBox(height: 12),
-        _buildWritingGuide(
-          context,
-          item: item,
-          allItems: allItems,
-          compounds: compounds,
-          language: language,
-        ),
-        if (item.examples.isNotEmpty) ...[
-          const SizedBox(height: 12),
-          Text(
-            language.kanjiExamplesLabel,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-          ...item.examples.map((ex) {
-            final displayWord = ex.word.trim().isNotEmpty
-                ? ex.word
-                : (ex.sourceSenseId ?? ex.sourceVocabId ?? '-');
-            final displayReading = ex.reading.trim();
-            final displayMeaning = _exampleMeaning(ex, language);
-
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4),
+          if (language != AppLanguage.en && englishMeaning.isNotEmpty) ...[
+            const SizedBox(height: 14),
+            _buildMetaPill(
+              context,
+              icon: Icons.language_rounded,
+              label: '${language.meaningEnLabel}: $englishMeaning',
+              color: palette.info,
+              expanded: true,
+            ),
+          ],
+          if (mnemonic != null && mnemonic.isNotEmpty) ...[
+            const SizedBox(height: 14),
+            Container(
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: palette.accent.withValues(alpha: 0.10),
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(
+                  color: palette.accent.withValues(alpha: 0.20),
+                ),
+              ),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    displayWord,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
+                  Icon(
+                    Icons.lightbulb_outline_rounded,
+                    color: palette.accent,
+                    size: 20,
                   ),
-                  if (displayReading.isNotEmpty) ...[
-                    const SizedBox(width: 8),
-                    Text('($displayReading)'),
-                  ],
-                  const Spacer(),
-                  Flexible(
-                    child: Text(
-                      displayMeaning,
-                      textAlign: TextAlign.right,
-                      overflow: TextOverflow.ellipsis,
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          language.mnemonicHintLabel,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w800,
+                            color: palette.accent,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          mnemonic,
+                          style: TextStyle(color: palette.ink, height: 1.45),
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
-            );
-          }),
+            ),
+          ],
+          if (decomp != null && decomp.hasContent) ...[
+            const SizedBox(height: 14),
+            _buildDecompositionSection(
+              context,
+              item: item,
+              decomp: decomp,
+              language: language,
+            ),
+          ],
+          const SizedBox(height: 14),
+          _buildWritingGuide(
+            context,
+            item: item,
+            allItems: allItems,
+            compounds: compounds,
+            language: language,
+          ),
+          if (item.examples.isNotEmpty) ...[
+            const SizedBox(height: 14),
+            Text(
+              language.kanjiExamplesLabel,
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w800,
+                color: palette.ink,
+              ),
+            ),
+            const SizedBox(height: 10),
+            ...item.examples.map((ex) {
+              final displayWord = ex.word.trim().isNotEmpty
+                  ? ex.word
+                  : (ex.sourceSenseId ?? ex.sourceVocabId ?? '-');
+              final displayReading = ex.reading.trim();
+              final displayMeaning = _exampleMeaning(ex, language);
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: _buildExampleCard(
+                  context,
+                  word: displayWord,
+                  reading: displayReading,
+                  meaning: displayMeaning,
+                ),
+              );
+            }),
+          ],
         ],
-      ],
+      ),
     );
   }
 
@@ -263,6 +417,7 @@ class _KanjiListWidgetState extends ConsumerState<KanjiListWidget> {
     required KanjiDecomposition decomp,
     required AppLanguage language,
   }) {
+    final palette = context.appPalette;
     final decompositionLabel = _decompositionLabel(item, decomp);
     final components = decomp.components;
     final componentNames = decomp.componentNames;
@@ -270,114 +425,131 @@ class _KanjiListWidgetState extends ConsumerState<KanjiListWidget> {
     final structure = decomp.structure?.trim() ?? '';
 
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFF3F0FF),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFD5CCFF)),
+        color: palette.primary.withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: palette.primary.withValues(alpha: 0.14)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.account_tree_rounded,
                 size: 18,
-                color: Color(0xFF7C4DFF),
+                color: palette.primary,
               ),
-              const SizedBox(width: 6),
-              Text(
-                language.kanjiDecompositionTitle,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w700,
-                  color: Color(0xFF7C4DFF),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  language.kanjiDecompositionTitle,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    color: palette.primary,
+                  ),
                 ),
               ),
-              if (decompositionLabel.isNotEmpty) ...[
-                const Spacer(),
+              if (decompositionLabel.isNotEmpty)
                 Container(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 2,
+                    horizontal: 10,
+                    vertical: 5,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF7C4DFF).withValues(alpha: 0.12),
-                    borderRadius: BorderRadius.circular(6),
+                    color: palette.elevated,
+                    borderRadius: BorderRadius.circular(999),
+                    border: Border.all(color: palette.outline),
                   ),
                   child: Text(
                     decompositionLabel,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13,
-                      color: Color(0xFF7C4DFF),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      color: palette.ink,
                     ),
                   ),
                 ),
-              ],
             ],
           ),
           if (structure.isNotEmpty && structure != 'standalone') ...[
-            const SizedBox(height: 8),
+            const SizedBox(height: 10),
             Text(
               '${language.kanjiStructureLabel}: ${language.kanjiStructureType(structure)}',
-              style: const TextStyle(fontSize: 13),
+              style: TextStyle(
+                fontSize: 13,
+                color: palette.ink.withValues(alpha: 0.78),
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ],
           if (components.isNotEmpty) ...[
-            const SizedBox(height: 8),
+            const SizedBox(height: 12),
             Text(
               language.kanjiComponentsLabel,
-              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
+              style: TextStyle(fontWeight: FontWeight.w700, color: palette.ink),
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 8),
             Wrap(
               spacing: 8,
-              runSpacing: 6,
+              runSpacing: 8,
               children: [
                 for (var i = 0; i < components.length; i++)
                   Container(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 4,
+                      horizontal: 12,
+                      vertical: 8,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: const Color(0xFFD5CCFF)),
+                      color: palette.elevated,
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(color: palette.outline),
                     ),
                     child: Text(
-                      i < componentNames.length
+                      i < componentNames.length &&
+                              componentNames[i].trim().isNotEmpty
                           ? '${components[i]}  ${componentNames[i]}'
                           : components[i],
-                      style: const TextStyle(fontSize: 13),
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: palette.ink,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
               ],
             ),
           ],
           if (relatedKanji.isNotEmpty) ...[
-            const SizedBox(height: 8),
+            const SizedBox(height: 12),
             Text(
               language.kanjiRelatedLabel,
-              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
+              style: TextStyle(fontWeight: FontWeight.w700, color: palette.ink),
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 8),
             Wrap(
-              spacing: 6,
+              spacing: 8,
+              runSpacing: 8,
               children: relatedKanji
                   .map(
                     (k) => Container(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 2,
+                        horizontal: 10,
+                        vertical: 6,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(6),
-                        border: Border.all(color: const Color(0xFFD5CCFF)),
+                        color: palette.elevated,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: palette.outline),
                       ),
-                      child: Text(k, style: const TextStyle(fontSize: 15)),
+                      child: Text(
+                        k,
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                          color: palette.ink,
+                        ),
+                      ),
                     ),
                   )
                   .toList(),
@@ -395,45 +567,75 @@ class _KanjiListWidgetState extends ConsumerState<KanjiListWidget> {
     required List<_CompoundGuideEntry> compounds,
     required AppLanguage language,
   }) {
+    final palette = context.appPalette;
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFFF7F9FF),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFDDE5FF)),
+        color: palette.secondary.withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: palette.secondary.withValues(alpha: 0.16)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            language.kanjiWritingGuideTitle,
-            style: const TextStyle(fontWeight: FontWeight.w700),
+          Row(
+            children: [
+              Icon(Icons.edit_note_rounded, color: palette.secondary),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  language.kanjiWritingGuideTitle,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    color: palette.ink,
+                  ),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 8),
           Text(
             language.kanjiWritingSingleLabel(item.character, item.strokeCount),
+            style: TextStyle(
+              color: palette.ink.withValues(alpha: 0.82),
+              height: 1.4,
+            ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 10),
           if (compounds.isEmpty)
             Text(
               language.kanjiWritingNoCompoundLabel,
-              style: TextStyle(fontSize: 12, color: Color(0xFF6B7390)),
+              style: TextStyle(
+                fontSize: 12,
+                color: palette.ink.withValues(alpha: 0.60),
+              ),
             )
           else
             ...compounds.map(
               (compound) => Padding(
-                padding: const EdgeInsets.only(bottom: 6),
-                child: Text(
-                  '${compound.word}${compound.reading.isEmpty ? '' : ' (${compound.reading})'}'
-                  ' - ${compound.meaning}'
-                  '${compound.totalStrokes == null ? '' : ' | ${language.handwritingStrokeShortLabel(compound.totalStrokes!)}'}',
+                padding: const EdgeInsets.only(bottom: 8),
+                child: _buildCompoundCard(
+                  context,
+                  compound,
+                  language: language,
                 ),
               ),
             ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 10),
           Align(
             alignment: Alignment.centerLeft,
-            child: OutlinedButton.icon(
+            child: FilledButton.icon(
+              style: FilledButton.styleFrom(
+                backgroundColor: palette.primary,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+              ),
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -448,10 +650,172 @@ class _KanjiListWidgetState extends ConsumerState<KanjiListWidget> {
                   ),
                 );
               },
-              icon: const Icon(Icons.edit_note_rounded),
+              icon: const Icon(Icons.draw_rounded),
               label: Text(language.kanjiPracticeWritingLabel),
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMetaPill(
+    BuildContext context, {
+    required IconData icon,
+    required String label,
+    required Color color,
+    bool expanded = false,
+  }) {
+    final textWidget = Text(
+      label,
+      style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: color),
+      overflow: expanded ? TextOverflow.visible : TextOverflow.ellipsis,
+      softWrap: expanded,
+    );
+
+    return Container(
+      width: expanded ? double.infinity : null,
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: color.withValues(alpha: 0.15)),
+      ),
+      child: Row(
+        mainAxisSize: expanded ? MainAxisSize.max : MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(icon, size: 16, color: color),
+          const SizedBox(width: 8),
+          if (expanded)
+            Expanded(child: textWidget)
+          else
+            Flexible(child: textWidget),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildExampleCard(
+    BuildContext context, {
+    required String word,
+    required String reading,
+    required String meaning,
+  }) {
+    final palette = context.appPalette;
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: palette.elevated,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: palette.outlineSoft),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  word,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 17,
+                    color: palette.ink,
+                  ),
+                ),
+                if (reading.isNotEmpty) ...[
+                  const SizedBox(height: 4),
+                  Text(
+                    reading,
+                    style: TextStyle(
+                      color: palette.ink.withValues(alpha: 0.62),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+          const SizedBox(width: 12),
+          Flexible(
+            child: Text(
+              meaning,
+              textAlign: TextAlign.right,
+              style: TextStyle(
+                color: palette.ink.withValues(alpha: 0.82),
+                height: 1.35,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCompoundCard(
+    BuildContext context,
+    _CompoundGuideEntry compound, {
+    required AppLanguage language,
+  }) {
+    final palette = context.appPalette;
+    final meta = compound.totalStrokes == null
+        ? null
+        : context.appPalette.accent;
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: palette.elevated,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: palette.outline),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            compound.word,
+            style: TextStyle(
+              fontWeight: FontWeight.w800,
+              fontSize: 16,
+              color: palette.ink,
+            ),
+          ),
+          if (compound.reading.isNotEmpty) ...[
+            const SizedBox(height: 2),
+            Text(
+              compound.reading,
+              style: TextStyle(color: palette.ink.withValues(alpha: 0.62)),
+            ),
+          ],
+          const SizedBox(height: 6),
+          Text(
+            compound.meaning,
+            style: TextStyle(
+              color: palette.ink.withValues(alpha: 0.82),
+              height: 1.35,
+            ),
+          ),
+          if (compound.totalStrokes != null) ...[
+            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              decoration: BoxDecoration(
+                color: meta!.withValues(alpha: 0.10),
+                borderRadius: BorderRadius.circular(999),
+                border: Border.all(color: meta.withValues(alpha: 0.18)),
+              ),
+              child: Text(
+                language.handwritingStrokeShortLabel(compound.totalStrokes!),
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: meta,
+                ),
+              ),
+            ),
+          ],
         ],
       ),
     );

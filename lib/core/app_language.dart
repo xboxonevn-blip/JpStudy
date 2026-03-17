@@ -953,9 +953,9 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Learn terms';
       case AppLanguage.vi:
-        return 'Learn: số từ';
+        return 'Số từ học';
       case AppLanguage.ja:
-        return 'Learnの数';
+        return '学習する語数';
     }
   }
 
@@ -964,7 +964,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Streak';
       case AppLanguage.vi:
-        return 'Chu\u1ed7i';
+        return 'Chuỗi';
       case AppLanguage.ja:
         return 'ストリーク';
     }
@@ -986,9 +986,9 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Practice';
       case AppLanguage.vi:
-        return 'Luy\u1ec7n t\u1eadp';
+        return 'Luyện tập';
       case AppLanguage.ja:
-        return 'ç·´ç¿\'';
+        return '練習';
     }
   }
 
@@ -997,7 +997,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Next Step';
       case AppLanguage.vi:
-        return 'B\u01b0\u1edbc ti\u1ebfp theo';
+        return 'Bước tiếp theo';
       case AppLanguage.ja:
         return '次のステップ';
     }
@@ -1008,9 +1008,9 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return '$count items';
       case AppLanguage.vi:
-        return '$count m\u1ee5c';
+        return '$count mục';
       case AppLanguage.ja:
-        return '$countä»¶';
+        return '$count件';
     }
   }
 
@@ -1019,9 +1019,20 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Mistakes';
       case AppLanguage.vi:
-        return 'L\u1ed7i sai';
+        return 'Lỗi sai';
       case AppLanguage.ja:
         return '間違い';
+    }
+  }
+
+  String mistakeItemIdLabel(int id) {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Item #$id';
+      case AppLanguage.vi:
+        return 'Mục #$id';
+      case AppLanguage.ja:
+        return '項目 #$id';
     }
   }
 
@@ -1066,17 +1077,6 @@ extension AppLanguageLabels on AppLanguage {
         return 'Cần đúng thêm $count lần';
       case AppLanguage.ja:
         return 'あと$count回正解が必要';
-    }
-  }
-
-  String mistakeItemIdLabel(int id) {
-    switch (this) {
-      case AppLanguage.en:
-        return 'Item #$id';
-      case AppLanguage.vi:
-        return 'Mục #$id';
-      case AppLanguage.ja:
-        return 'é …ç›® #$id';
     }
   }
 
@@ -1822,9 +1822,9 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return '$count strokes';
       case AppLanguage.vi:
-        return '$count n\u00e9t';
+        return '$count nét';
       case AppLanguage.ja:
-        return '$countç"»';
+        return '$count画';
     }
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 
 class AppTheme {
   // Component palette (used by ClayButton, ClayCard, grammar widgets, etc.)
@@ -18,19 +19,16 @@ class AppTheme {
   }
 
   static ThemeData light() {
-    const appBackground = Color(0xFFF7F2E8); // Warm ivory
-    const primaryColor = Color(0xFF1E3A5F); // Aizome indigo
-    const secondaryColor = Color(0xFF2F7A64); // Matcha green
-    const accentColor = Color(0xFFD1493F); // Vermilion
+    final palette = AppThemePalette.light;
 
-    final colorScheme = const ColorScheme.light(
-      primary: primaryColor,
-      secondary: secondaryColor,
-      surface: Color(0xFFFFFBF5),
+    final colorScheme = ColorScheme.light(
+      primary: palette.primary,
+      secondary: palette.secondary,
+      surface: palette.surface,
       onPrimary: Color(0xFFFFFFFF),
-      onSurface: Color(0xFF1E293B), // Slate 800
-      error: Color(0xFFEF4444),
-      tertiary: accentColor,
+      onSurface: palette.ink,
+      error: palette.error,
+      tertiary: palette.accent,
     );
 
     final fontName = GoogleFonts.notoSansJp().fontFamily;
@@ -38,11 +36,12 @@ class AppTheme {
 
     return ThemeData(
       colorScheme: colorScheme,
+      extensions: const [AppThemePalette.light],
       useMaterial3: true,
       fontFamily: fontName,
-      scaffoldBackgroundColor: appBackground,
+      scaffoldBackgroundColor: palette.bg,
       appBarTheme: AppBarTheme(
-        backgroundColor: Colors.transparent, // For gradient backgrounds
+        backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
         foregroundColor: colorScheme.onSurface,
@@ -50,15 +49,29 @@ class AppTheme {
           fontFamily: fontName,
           fontSize: 20,
           fontWeight: FontWeight.w800, // Extra bold for "Juicy" feel
-          color: const Color(0xFF1E293B),
+          color: palette.ink,
         ),
+      ),
+      navigationBarTheme: NavigationBarThemeData(
+        backgroundColor: palette.base,
+        indicatorColor: palette.primary.withValues(alpha: 0.12),
+        labelTextStyle: WidgetStateProperty.resolveWith((states) {
+          return TextStyle(
+            fontWeight: states.contains(WidgetState.selected)
+                ? FontWeight.w800
+                : FontWeight.w700,
+            color: states.contains(WidgetState.selected)
+                ? palette.primary
+                : const Color(0xFF6B7280),
+          );
+        }),
       ),
       cardTheme: CardThemeData(
         color: colorScheme.surface,
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24), // Increased radius
-          side: const BorderSide(color: Color(0xFFE5DED2), width: 1.2),
+          borderRadius: BorderRadius.circular(24),
+          side: BorderSide(color: palette.outline, width: 1.1),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -68,23 +81,48 @@ class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          textStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
+          backgroundColor: palette.primary,
+          foregroundColor: Colors.white,
+          textStyle: const TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
+        ),
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          elevation: 0,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          backgroundColor: palette.primary,
+          foregroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          textStyle: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15.5),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: palette.ink,
+          side: BorderSide(color: palette.outline),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          textStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: const Color(0xFFF3EEE6),
+        fillColor: palette.base,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
-          borderSide: const BorderSide(color: Color(0xFFE5DED2)),
+          borderSide: BorderSide(color: palette.outline),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
-          borderSide: const BorderSide(color: primaryColor, width: 2),
+          borderSide: BorderSide(color: palette.primary, width: 2),
         ),
         hintStyle: const TextStyle(color: Color(0xFF94A3B8)),
         contentPadding: const EdgeInsets.symmetric(
@@ -96,25 +134,25 @@ class AppTheme {
         displayLarge: TextStyle(
           fontFamily: displayFontName,
           fontWeight: FontWeight.w900,
-          color: const Color(0xFF1E293B),
+          color: palette.ink,
         ),
         titleLarge: TextStyle(
           fontFamily: displayFontName,
           fontWeight: FontWeight.w800,
-          color: const Color(0xFF1E293B),
+          color: palette.ink,
         ),
         titleMedium: TextStyle(
           fontFamily: fontName,
           fontWeight: FontWeight.w700,
-          color: const Color(0xFF1E293B),
+          color: palette.ink,
         ),
         bodyLarge: TextStyle(
           fontFamily: fontName,
-          color: const Color(0xFF334155),
+          color: palette.ink.withValues(alpha: 0.88),
         ),
         bodyMedium: TextStyle(
           fontFamily: fontName,
-          color: const Color(0xFF475569),
+          color: palette.ink.withValues(alpha: 0.74),
         ),
       ),
       iconTheme: const IconThemeData(color: Color(0xFF64748B)),
@@ -133,6 +171,7 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
+      extensions: const [AppThemePalette.dark],
       fontFamily: fontName,
       colorScheme: const ColorScheme.dark(
         primary: primaryColor,

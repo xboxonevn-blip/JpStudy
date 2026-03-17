@@ -88,7 +88,7 @@ class _VocabGhostReviewScreenState
             ),
             const SizedBox(height: 16),
             Text(
-              _currentItem.mnemonicVi!.trim(),
+              _currentItem.displayMnemonic(language)!.trim(),
               style: Theme.of(context)
                   .textTheme
                   .bodyLarge
@@ -173,8 +173,8 @@ class _VocabGhostReviewScreenState
                       ),
                     ),
                   ),
-                  if (_currentItem.mnemonicVi != null &&
-                      _currentItem.mnemonicVi!.trim().isNotEmpty) ...[
+                  if ((_currentItem.displayMnemonic(language)?.trim().isNotEmpty ??
+                      false)) ...[
                     const SizedBox(width: 8),
                     SizedBox(
                       height: 52,

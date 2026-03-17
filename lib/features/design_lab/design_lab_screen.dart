@@ -1,22 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/language_provider.dart';
 
 enum LabStage { discover, visual, validate }
 
-class DesignLabScreen extends StatefulWidget {
+class DesignLabScreen extends ConsumerStatefulWidget {
   const DesignLabScreen({super.key});
 
   @override
-  State<DesignLabScreen> createState() => _DesignLabScreenState();
+  ConsumerState<DesignLabScreen> createState() => _DesignLabScreenState();
 }
 
-class _DesignLabScreenState extends State<DesignLabScreen> {
+class _DesignLabScreenState extends ConsumerState<DesignLabScreen> {
   LabStage _stage = LabStage.discover;
   final Set<int> _checkedTaskIds = {1, 2};
 
+  String _tr(AppLanguage language, String en, String vi, String ja) {
+    switch (language) {
+      case AppLanguage.en:
+        return en;
+      case AppLanguage.vi:
+        return vi;
+      case AppLanguage.ja:
+        return ja;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final language = ref.watch(appLanguageProvider);
     return Scaffold(
-      appBar: AppBar(title: const Text('Design Lab')),
+      appBar: AppBar(
+        title: Text(_tr(language, 'Design Lab', 'Phòng thí nghiệm thiết kế', 'デザインラボ')),
+      ),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -30,13 +47,13 @@ class _DesignLabScreenState extends State<DesignLabScreen> {
             builder: (context, constraints) {
               final isWide = constraints.maxWidth >= 920;
               final content = <Widget>[
-                _heroCard(),
+                _heroCard(language),
                 const SizedBox(height: 16),
-                _stageSwitch(),
+                _stageSwitch(language),
                 const SizedBox(height: 16),
-                _stageCanvas(),
+                _stageCanvas(language),
                 const SizedBox(height: 16),
-                _progressChecklist(),
+                _progressChecklist(language),
               ];
 
               if (isWide) {
@@ -71,7 +88,7 @@ class _DesignLabScreenState extends State<DesignLabScreen> {
     );
   }
 
-  Widget _heroCard() {
+  Widget _heroCard(AppLanguage language) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -87,29 +104,33 @@ class _DesignLabScreenState extends State<DesignLabScreen> {
           ),
         ],
       ),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Live UI/UX Workflow',
-            style: TextStyle(
+            _tr(language, 'Live UI/UX Workflow', 'Quy trình UI/UX trực tiếp', 'ライブ UI/UX ワークフロー'),
+            style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w800,
               fontSize: 22,
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(
-            'Use this screen to review wireframe -> visual -> validation flow '
-            'before shipping a real screen.',
-            style: TextStyle(color: Color(0xFFD9E7FF), height: 1.35),
+            _tr(
+              language,
+              'Use this screen to review wireframe -> visual -> validation flow before shipping a real screen.',
+              'Dùng màn hình này để rà luồng wireframe -> visual -> validation trước khi đưa màn hình thật vào app.',
+              'この画面で wireframe -> visual -> validation の流れを確認してから本番画面へ反映します。',
+            ),
+            style: const TextStyle(color: Color(0xFFD9E7FF), height: 1.35),
           ),
         ],
       ),
     );
   }
 
-  Widget _stageSwitch() {
+  Widget _stageSwitch(AppLanguage language) {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -120,27 +141,27 @@ class _DesignLabScreenState extends State<DesignLabScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Current Stage',
-            style: TextStyle(fontWeight: FontWeight.w700),
+          Text(
+            _tr(language, 'Current Stage', 'Giai đoạn hiện tại', '現在のステージ'),
+            style: const TextStyle(fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 8),
           SegmentedButton<LabStage>(
-            segments: const [
+            segments: [
               ButtonSegment(
                 value: LabStage.discover,
                 icon: Icon(Icons.grid_view_rounded),
-                label: Text('Discover'),
+                label: Text(_tr(language, 'Discover', 'Khám phá', '発見')),
               ),
               ButtonSegment(
                 value: LabStage.visual,
                 icon: Icon(Icons.palette_outlined),
-                label: Text('Visual'),
+                label: Text(_tr(language, 'Visual', 'Hình ảnh', 'ビジュアル')),
               ),
               ButtonSegment(
                 value: LabStage.validate,
                 icon: Icon(Icons.task_alt_outlined),
-                label: Text('Validate'),
+                label: Text(_tr(language, 'Validate', 'Kiểm tra', '検証')),
               ),
             ],
             selected: {_stage},
@@ -153,12 +174,12 @@ class _DesignLabScreenState extends State<DesignLabScreen> {
     );
   }
 
-  Widget _stageCanvas() {
+  Widget _stageCanvas(AppLanguage language) {
     switch (_stage) {
       case LabStage.discover:
         return _panel(
-          title: 'Wireframe Snapshot',
-          subtitle: 'Block-level layout before visual polish.',
+          title: _tr(language, 'Wireframe Snapshot', 'Ảnh chụp wireframe', 'ワイヤーフレームのスナップショット'),
+          subtitle: _tr(language, 'Block-level layout before visual polish.', 'Bố cục ở mức khối trước khi polish giao diện.', 'ビジュアル調整前のブロックレベルのレイアウトです。'),
           child: Column(
             children: [
               _skeletonBlock(height: 36),
@@ -177,8 +198,8 @@ class _DesignLabScreenState extends State<DesignLabScreen> {
         );
       case LabStage.visual:
         return _panel(
-          title: 'Visual Direction',
-          subtitle: 'Color, spacing, and card rhythm review.',
+          title: _tr(language, 'Visual Direction', 'Định hướng hình ảnh', 'ビジュアル方針'),
+          subtitle: _tr(language, 'Color, spacing, and card rhythm review.', 'Rà màu sắc, khoảng cách và nhịp điệu thẻ.', '色・余白・カードのリズムを確認します。'),
           child: Column(
             children: [
               Container(
@@ -194,15 +215,15 @@ class _DesignLabScreenState extends State<DesignLabScreen> {
               Row(
                 children: [
                   Expanded(
-                    child: _swatchCard('Primary', const Color(0xFF0F766E)),
+                    child: _swatchCard(_tr(language, 'Primary', 'Chính', 'メイン'), const Color(0xFF0F766E)),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
-                    child: _swatchCard('Accent', const Color(0xFFFB7185)),
+                    child: _swatchCard(_tr(language, 'Accent', 'Nhấn', 'アクセント'), const Color(0xFFFB7185)),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
-                    child: _swatchCard('Neutral', const Color(0xFF334155)),
+                    child: _swatchCard(_tr(language, 'Neutral', 'Trung tính', 'ニュートラル'), const Color(0xFF334155)),
                   ),
                 ],
               ),
@@ -211,34 +232,34 @@ class _DesignLabScreenState extends State<DesignLabScreen> {
         );
       case LabStage.validate:
         return _panel(
-          title: 'Validation Notes',
-          subtitle: 'Quick quality readout before merge.',
+          title: _tr(language, 'Validation Notes', 'Ghi chú kiểm tra', '検証メモ'),
+          subtitle: _tr(language, 'Quick quality readout before merge.', 'Tóm tắt chất lượng nhanh trước khi merge.', 'マージ前の品質チェックを素早く確認します。'),
           child: Wrap(
             spacing: 8,
             runSpacing: 8,
-            children: const [
-              _MetricChip(label: 'Tap targets >= 44px', ok: true),
-              _MetricChip(label: 'Text contrast pass', ok: true),
-              _MetricChip(label: 'Scroll behavior checked', ok: true),
-              _MetricChip(label: 'Animation intensity reviewed', ok: false),
-              _MetricChip(label: 'QA walkthrough pass', ok: false),
+            children: [
+              _MetricChip(label: _tr(language, 'Tap targets >= 44px', 'Vùng chạm >= 44px', 'タップ領域 >= 44px'), ok: true),
+              _MetricChip(label: _tr(language, 'Text contrast pass', 'Độ tương phản chữ đạt', '文字コントラスト合格'), ok: true),
+              _MetricChip(label: _tr(language, 'Scroll behavior checked', 'Đã kiểm tra cuộn', 'スクロール挙動確認済み'), ok: true),
+              _MetricChip(label: _tr(language, 'Animation intensity reviewed', 'Đã rà cường độ animation', 'アニメーション強度を確認済み'), ok: false),
+              _MetricChip(label: _tr(language, 'QA walkthrough pass', 'Walkthrough QA đạt', 'QA ウォークスルー合格'), ok: false),
             ],
           ),
         );
     }
   }
 
-  Widget _progressChecklist() {
-    final tasks = const [
-      (1, 'Wireframe approved in team review'),
-      (2, 'Visual style tokenized (color/spacing/type)'),
-      (3, 'Prototype tested on desktop + mobile'),
-      (4, 'Feedback log written in docs/uiux-progress.md'),
-      (5, 'Ready for handoff to production screen'),
+  Widget _progressChecklist(AppLanguage language) {
+    final tasks = [
+      (1, _tr(language, 'Wireframe approved in team review', 'Wireframe đã được duyệt trong buổi review', 'ワイヤーフレームがレビューで承認済み')),
+      (2, _tr(language, 'Visual style tokenized (color/spacing/type)', 'Visual style đã token hóa (màu/khoảng cách/chữ)', 'ビジュアルスタイルをトークン化済み（色・余白・文字）')),
+      (3, _tr(language, 'Prototype tested on desktop + mobile', 'Prototype đã test trên desktop + mobile', 'プロトタイプを desktop + mobile で確認済み')),
+      (4, _tr(language, 'Feedback log written in docs/uiux-progress.md', 'Đã ghi log phản hồi trong docs/uiux-progress.md', 'docs/uiux-progress.md にフィードバックを記録済み')),
+      (5, _tr(language, 'Ready for handoff to production screen', 'Sẵn sàng bàn giao sang màn hình production', '本番画面への引き継ぎ準備完了')),
     ];
     return _panel(
-      title: 'Process Checklist',
-      subtitle: 'Track each iteration in one place.',
+      title: _tr(language, 'Process Checklist', 'Checklist quy trình', 'プロセスチェックリスト'),
+      subtitle: _tr(language, 'Track each iteration in one place.', 'Theo dõi từng iteration ở một nơi.', '各イテレーションを一箇所で管理します。'),
       child: Column(
         children: [
           for (final (id, label) in tasks)
@@ -260,7 +281,7 @@ class _DesignLabScreenState extends State<DesignLabScreen> {
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              'Next: update docs/uiux-progress.md and docs/uiux-review-checklist.md',
+              _tr(language, 'Next: update docs/uiux-progress.md and docs/uiux-review-checklist.md', 'Tiếp theo: cập nhật docs/uiux-progress.md và docs/uiux-review-checklist.md', '次: docs/uiux-progress.md と docs/uiux-review-checklist.md を更新'),
               style: TextStyle(
                 color: Colors.blueGrey.shade700,
                 fontWeight: FontWeight.w600,

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 
@@ -30,7 +31,6 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
   JlptCoachSnapshot? _snapshot;
 
   JlptMockSection get _currentSection => jlptMockSections[_sectionIndex];
-
   JlptMockQuestion get _currentQuestion =>
       _currentSection.questions[_questionIndex];
 
@@ -54,13 +54,13 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
   String _areaLabel(AppLanguage language, JlptSkillArea area) {
     switch (area) {
       case JlptSkillArea.vocabulary:
-        return _tr(language, 'Vocabulary', 'T? v?ng', '??');
+        return _tr(language, 'Vocabulary', 'Từ vựng', '語彙');
       case JlptSkillArea.grammar:
-        return _tr(language, 'Grammar', 'Ng? ph?p', '??');
+        return _tr(language, 'Grammar', 'Ngữ pháp', '文法');
       case JlptSkillArea.kanji:
-        return _tr(language, 'Kanji', 'Kanji', '??');
+        return _tr(language, 'Kanji', 'Kanji', '漢字');
       case JlptSkillArea.reading:
-        return _tr(language, 'Reading', '??c hi?u', '??');
+        return _tr(language, 'Reading', 'Đọc hiểu', '読解');
     }
   }
 
@@ -114,17 +114,13 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
   }
 
   void _nextQuestion() {
-    if (_finished) {
-      return;
-    }
-
+    if (_finished) return;
     if (_questionIndex < _currentSection.questions.length - 1) {
       setState(() {
         _questionIndex += 1;
       });
       return;
     }
-
     _moveToNextSectionOrFinish();
   }
 
@@ -141,9 +137,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
   }
 
   Future<void> _finishExam() async {
-    if (_finished) {
-      return;
-    }
+    if (_finished) return;
     _timer?.cancel();
 
     final signals = <JlptSkillSignal>[];
@@ -162,10 +156,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
         .read(jlptCoachServiceProvider)
         .saveFromSignals(source: 'jlpt_mock_pro', signals: signals);
 
-    if (!mounted) {
-      return;
-    }
-
+    if (!mounted) return;
     setState(() {
       _finished = true;
       _snapshot = snapshot;
@@ -184,9 +175,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
   }
 
   double _sectionScore(JlptMockSection section) {
-    if (section.questions.isEmpty) {
-      return 0;
-    }
+    if (section.questions.isEmpty) return 0;
     return _correctCountInSection(section) / section.questions.length;
   }
 
@@ -195,9 +184,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
       0,
       (sum, section) => sum + section.questions.length,
     );
-    if (totalQuestions == 0) {
-      return 0;
-    }
+    if (totalQuestions == 0) return 0;
     final totalCorrect = jlptMockSections.fold<int>(
       0,
       (sum, section) => sum + _correctCountInSection(section),
@@ -207,55 +194,74 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
 
   bool _predictedPass() {
     final overall = _overallScore();
-    if (overall < 0.60) {
-      return false;
-    }
+    if (overall < 0.60) return false;
     for (final section in jlptMockSections) {
-      if (_sectionScore(section) < 0.40) {
-        return false;
-      }
+      if (_sectionScore(section) < 0.40) return false;
     }
     return true;
   }
 
+  String _title(AppLanguage language) =>
+      _tr(language, 'JLPT Mock Pro', 'Đề thi thử JLPT Pro', 'JLPT模試 Pro');
+
+  String _intro(AppLanguage language) => _tr(
+    language,
+    'Full-format simulation with section timing and pass prediction.',
+    'Mô phỏng đủ phần thi, có bấm giờ theo từng section và dự đoán khả năng đậu.',
+    'セクションごとの制限時間と合否予測付きのフル模試です。',
+  );
+
+  String _startLabel(AppLanguage language) =>
+      _tr(language, 'Start full mock', 'Bắt đầu thi thử đầy đủ', 'フル模試を開始');
+
+  String _finishNowLabel(AppLanguage language) =>
+      _tr(language, 'Finish now', 'Kết thúc ngay', '今すぐ終了');
+
+  String _nextLabel(AppLanguage language) =>
+      _tr(language, 'Next', 'Câu tiếp', '次へ');
+
+  String _submitLabel(AppLanguage language) =>
+      _tr(language, 'Submit', 'Nộp bài', '提出');
+
+  String _resultTitle(AppLanguage language) =>
+      _tr(language, 'Mock result', 'Kết quả thi thử', '模試結果');
+
+  String _resultSummary(
+    AppLanguage language,
+    int overall,
+    bool pass,
+    Duration elapsed,
+  ) => _tr(
+    language,
+    'Overall: $overall% • ${pass ? 'Predicted PASS' : 'Predicted FAIL'} • Time ${elapsed.inMinutes}m ${elapsed.inSeconds % 60}s',
+    'Tổng điểm: $overall% • ${pass ? 'Dự đoán đạt' : 'Dự đoán chưa đạt'} • Thời gian ${elapsed.inMinutes}p ${elapsed.inSeconds % 60}s',
+    '総合: $overall% • ${pass ? '合格予測' : '不合格予測'} • 時間 ${elapsed.inMinutes}分 ${elapsed.inSeconds % 60}秒',
+  );
+
   @override
   Widget build(BuildContext context) {
     final language = ref.watch(appLanguageProvider);
+    final palette = context.appPalette;
 
     if (!_started) {
       return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            _tr(language, 'JLPT Mock Pro', '?? thi th? JLPT Pro', 'JLPT?? Pro'),
-          ),
-        ),
+        backgroundColor: palette.bg,
+        appBar: AppBar(title: Text(_title(language))),
         body: ListView(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
           children: [
-            Text(
-              _tr(
-                language,
-                'Full-format simulation with section timing and pass prediction.',
-                'M? ph?ng theo section c? gi? v? d? ?o?n kh? n?ng ??u.',
-                '??????????????????????????',
-              ),
-              style: const TextStyle(
-                fontWeight: FontWeight.w600,
-                color: Color(0xFF475569),
-              ),
+            _MockHero(
+              title: _title(language),
+              subtitle: _intro(language),
+              icon: Icons.fact_check_rounded,
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 16),
             ...jlptMockSections.map(
               (section) => Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Card(
-                  child: ListTile(
-                    title: Text(section.title),
-                    subtitle: Text(
-                      '${section.questions.length}Q | ${section.minutes}m',
-                    ),
-                    leading: const Icon(Icons.fact_check_rounded),
-                  ),
+                padding: const EdgeInsets.only(bottom: 12),
+                child: _SectionPreviewCard(
+                  title: section.title,
+                  meta: '${section.questions.length}Q • ${section.minutes}m',
                 ),
               ),
             ),
@@ -263,9 +269,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
             FilledButton.icon(
               onPressed: _startExam,
               icon: const Icon(Icons.play_arrow_rounded),
-              label: Text(
-                _tr(language, 'Start full mock', 'B?t ??u mock ??y ??', '????'),
-              ),
+              label: Text(_startLabel(language)),
             ),
           ],
         ),
@@ -279,106 +283,54 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
           ? Duration.zero
           : DateTime.now().difference(_startedAt!);
       return Scaffold(
-        appBar: AppBar(
-          title: Text(_tr(language, 'Mock result', 'K?t qu? mock', '??')),
-        ),
+        backgroundColor: palette.bg,
+        appBar: AppBar(title: Text(_resultTitle(language))),
         body: ListView(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
           children: [
-            Container(
-              padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(
-                color: pass ? const Color(0xFFDCFCE7) : const Color(0xFFFEE2E2),
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: Text(
-                _tr(
-                  language,
-                  'Overall: $overall% | ${pass ? 'Predicted PASS' : 'Predicted FAIL'} | Time ${elapsed.inMinutes}m ${elapsed.inSeconds % 60}s',
-                  '\u0054\u1ed5ng \u0111i\u1ec3m: $overall% | ${pass ? '\u0044\u1ef1 \u0111o\u00e1n \u0110\u1ea1t' : '\u0044\u1ef1 \u0111o\u00e1n Ch\u01b0a \u0111\u1ea1t'} | Th\u1eddi gian ${elapsed.inMinutes}p ${elapsed.inSeconds % 60}s',
-                  '??: % |  | ?? ??',
-                ),
-                style: const TextStyle(
-                  fontWeight: FontWeight.w900,
-                  color: Color(0xFF1E293B),
-                ),
-              ),
+            _MockHero(
+              title: _resultTitle(language),
+              subtitle: _resultSummary(language, overall, pass, elapsed),
+              icon: pass ? Icons.verified_rounded : Icons.flag_circle_rounded,
+              accent: pass ? palette.success : palette.error,
             ),
             const SizedBox(height: 12),
             ...jlptMockSections.map((section) {
               final score = (_sectionScore(section) * 100).round();
               final correct = _correctCountInSection(section);
               return Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: const Color(0xFFDCE8F8)),
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          section.title,
-                          style: const TextStyle(fontWeight: FontWeight.w800),
-                        ),
-                      ),
-                      Text(
-                        '$correct/${section.questions.length} ($score%)',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w800,
-                          color: Color(0xFF0F172A),
-                        ),
-                      ),
-                    ],
-                  ),
+                padding: const EdgeInsets.only(bottom: 12),
+                child: _SectionResultCard(
+                  title: section.title,
+                  summary: '$correct/${section.questions.length} ($score%)',
+                  accent: score >= 60 ? palette.success : palette.warning,
                 ),
               );
             }),
-            const SizedBox(height: 8),
-            if (_snapshot != null)
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFF8FAFC),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFFE2E8F0)),
+            if (_snapshot != null) ...[
+              const SizedBox(height: 4),
+              _DiagnosisPanel(
+                title: _tr(language, 'Diagnosis', 'Chẩn đoán', '診断'),
+                stats: JlptSkillArea.values
+                    .map((area) => _snapshot!.profile.statFor(area))
+                    .toList(growable: false),
+                areaLabel: (area) => _areaLabel(language, area),
+                planTitle: _tr(
+                  language,
+                  '7-day focus',
+                  'Kế hoạch 7 ngày',
+                  '7日プラン',
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      _tr(
-                        language,
-                        '7-day action plan',
-                        'K? ho?ch h?nh ??ng 7 ng?y',
-                        '7?????????',
-                      ),
-                      style: const TextStyle(fontWeight: FontWeight.w900),
-                    ),
-                    const SizedBox(height: 8),
-                    ..._snapshot!.plan.items.map(
-                      (item) => Padding(
-                        padding: const EdgeInsets.only(bottom: 6),
-                        child: Text(
-                          'D${item.dayOffset + 1} - ${_areaLabel(language, item.area)} - ${item.minutes}m: ${item.action}',
-                          style: const TextStyle(
-                            fontSize: 12.5,
-                            color: Color(0xFF334155),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                planItems: _snapshot!.plan.items
+                    .take(4)
+                    .toList(growable: false),
               ),
-            const SizedBox(height: 10),
+            ],
+            const SizedBox(height: 12),
             FilledButton.icon(
               onPressed: _startExam,
-              icon: const Icon(Icons.refresh_rounded),
-              label: Text(_tr(language, 'Run again', 'Thi lại', 'もう一度')),
+              icon: const Icon(Icons.restart_alt_rounded),
+              label: Text(_startLabel(language)),
             ),
           ],
         ),
@@ -389,148 +341,60 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
     final selected = _answers[question.id];
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          _tr(language, 'JLPT Mock Pro', '?? thi th? JLPT Pro', 'JLPT?? Pro'),
-        ),
-      ),
+      backgroundColor: palette.bg,
+      appBar: AppBar(title: Text(_title(language))),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFEFF6FF),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    '${_currentSection.title} | Q${_questionIndex + 1}/${_currentSection.questions.length}',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w800,
-                      color: Color(0xFF1E3A8A),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 6,
-                ),
-                decoration: BoxDecoration(
-                  color: _sectionSeconds <= 60
-                      ? const Color(0xFFFEE2E2)
-                      : const Color(0xFFECFEFF),
-                  borderRadius: BorderRadius.circular(999),
-                ),
-                child: Text(
-                  _formatTimer(_sectionSeconds),
-                  style: TextStyle(
-                    fontWeight: FontWeight.w900,
-                    color: _sectionSeconds <= 60
-                        ? const Color(0xFFB91C1C)
-                        : const Color(0xFF0F766E),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 6),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 6,
-                ),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFF1F5F9),
-                  borderRadius: BorderRadius.circular(999),
-                ),
-                child: Text(
-                  _formatTimer(_totalSeconds),
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w900,
-                    color: Color(0xFF334155),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: const Color(0xFFDCE8F8)),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+          _MockHero(
+            title: _currentSection.title,
+            subtitle:
+                '${_sectionIndex + 1}/${jlptMockSections.length} • ${_questionIndex + 1}/${_currentSection.questions.length}',
+            icon: Icons.timer_outlined,
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  question.prompt,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w800,
-                    height: 1.35,
-                  ),
+                _TimerBadge(
+                  label: _formatTimer(_sectionSeconds),
+                  danger: _sectionSeconds <= 60,
                 ),
-                const SizedBox(height: 8),
-                ...List.generate(question.options.length, (index) {
-                  final isSelected = selected == index;
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 6),
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          _answers[question.id] = index;
-                        });
-                      },
-                      borderRadius: BorderRadius.circular(10),
-                      child: Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 10,
-                        ),
-                        decoration: BoxDecoration(
-                          color: isSelected
-                              ? const Color(0xFFE0E7FF)
-                              : const Color(0xFFF8FAFC),
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: isSelected
-                                ? const Color(0xFFA5B4FC)
-                                : const Color(0xFFE2E8F0),
-                          ),
-                        ),
-                        child: Text(
-                          question.options[index],
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFF1E293B),
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                }),
+                const SizedBox(width: 8),
+                _TimerBadge(label: _formatTimer(_totalSeconds), danger: false),
               ],
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: jlptMockSections.asMap().entries.map((entry) {
+              final active = entry.key == _sectionIndex;
+              return _MiniSectionChip(label: entry.value.title, active: active);
+            }).toList(),
+          ),
+          const SizedBox(height: 12),
+          _MockQuestionCard(
+            areaLabel: _areaLabel(language, question.area),
+            prompt: question.prompt,
+            options: question.options,
+            selectedIndex: selected,
+            onSelect: (index) {
+              setState(() {
+                _answers[question.id] = index;
+              });
+            },
+          ),
+          const SizedBox(height: 12),
           Row(
             children: [
               Expanded(
                 child: OutlinedButton.icon(
                   onPressed: _finishExam,
                   icon: const Icon(Icons.flag_rounded),
-                  label: Text(
-                    _tr(language, 'Finish now', 'K?t th?c ngay', '?????'),
-                  ),
+                  label: Text(_finishNowLabel(language)),
                 ),
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 10),
               Expanded(
                 child: FilledButton.icon(
                   onPressed: _nextQuestion,
@@ -539,13 +403,416 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
                     _sectionIndex == jlptMockSections.length - 1 &&
                             _questionIndex ==
                                 _currentSection.questions.length - 1
-                        ? _tr(language, 'Submit', 'N?p b?i', '??')
-                        : _tr(language, 'Next', 'C?u ti?p', '??'),
+                        ? _submitLabel(language)
+                        : _nextLabel(language),
                   ),
                 ),
               ),
             ],
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class _MockHero extends StatelessWidget {
+  const _MockHero({
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+    this.accent,
+    this.trailing,
+  });
+
+  final String title;
+  final String subtitle;
+  final IconData icon;
+  final Color? accent;
+  final Widget? trailing;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    final tone = accent ?? palette.primary;
+    return Container(
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [tone.withValues(alpha: 0.12), palette.base],
+        ),
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: palette.outline),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: palette.elevated,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: palette.outlineSoft),
+            ),
+            child: Icon(icon, color: tone),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w900,
+                    color: palette.ink,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    color: palette.ink.withValues(alpha: 0.74),
+                    height: 1.4,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          if (trailing != null) ...[const SizedBox(width: 10), trailing!],
+        ],
+      ),
+    );
+  }
+}
+
+class _SectionPreviewCard extends StatelessWidget {
+  const _SectionPreviewCard({required this.title, required this.meta});
+
+  final String title;
+  final String meta;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: palette.elevated,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: palette.outlineSoft),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: palette.primary.withValues(alpha: 0.10),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: Icon(Icons.fact_check_rounded, color: palette.primary),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    color: palette.ink,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  meta,
+                  style: TextStyle(color: palette.ink.withValues(alpha: 0.64)),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SectionResultCard extends StatelessWidget {
+  const _SectionResultCard({
+    required this.title,
+    required this.summary,
+    required this.accent,
+  });
+
+  final String title;
+  final String summary;
+  final Color accent;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: accent.withValues(alpha: 0.10),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: accent.withValues(alpha: 0.20)),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              title,
+              style: TextStyle(fontWeight: FontWeight.w800, color: accent),
+            ),
+          ),
+          Text(
+            summary,
+            style: TextStyle(fontWeight: FontWeight.w900, color: accent),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _MockQuestionCard extends StatelessWidget {
+  const _MockQuestionCard({
+    required this.areaLabel,
+    required this.prompt,
+    required this.options,
+    required this.selectedIndex,
+    required this.onSelect,
+  });
+
+  final String areaLabel;
+  final String prompt;
+  final List<String> options;
+  final int? selectedIndex;
+  final ValueChanged<int> onSelect;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: palette.elevated,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: palette.outlineSoft),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            decoration: BoxDecoration(
+              color: palette.secondary.withValues(alpha: 0.10),
+              borderRadius: BorderRadius.circular(999),
+            ),
+            child: Text(
+              areaLabel,
+              style: TextStyle(
+                color: palette.secondary,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            prompt,
+            style: TextStyle(
+              fontWeight: FontWeight.w800,
+              height: 1.4,
+              color: palette.ink,
+            ),
+          ),
+          const SizedBox(height: 12),
+          ...List.generate(options.length, (index) {
+            final isSelected = selectedIndex == index;
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () => onSelect(index),
+                  borderRadius: BorderRadius.circular(14),
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 12,
+                    ),
+                    decoration: BoxDecoration(
+                      color: isSelected
+                          ? palette.primary.withValues(alpha: 0.12)
+                          : palette.base,
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(
+                        color: isSelected
+                            ? palette.primary.withValues(alpha: 0.35)
+                            : palette.outlineSoft,
+                      ),
+                    ),
+                    child: Text(
+                      options[index],
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: palette.ink,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          }),
+        ],
+      ),
+    );
+  }
+}
+
+class _MiniSectionChip extends StatelessWidget {
+  const _MiniSectionChip({required this.label, required this.active});
+
+  final String label;
+  final bool active;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    final color = active
+        ? palette.primary
+        : palette.ink.withValues(alpha: 0.55);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: active ? palette.primary.withValues(alpha: 0.10) : palette.base,
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(
+          color: active
+              ? palette.primary.withValues(alpha: 0.25)
+              : palette.outlineSoft,
+        ),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(color: color, fontWeight: FontWeight.w700),
+      ),
+    );
+  }
+}
+
+class _TimerBadge extends StatelessWidget {
+  const _TimerBadge({required this.label, required this.danger});
+
+  final String label;
+  final bool danger;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    final color = danger ? palette.error : palette.secondary;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(color: color.withValues(alpha: 0.24)),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(fontWeight: FontWeight.w900, color: color),
+      ),
+    );
+  }
+}
+
+class _DiagnosisPanel extends StatelessWidget {
+  const _DiagnosisPanel({
+    required this.title,
+    required this.stats,
+    required this.areaLabel,
+    required this.planTitle,
+    required this.planItems,
+  });
+
+  final String title;
+  final List<JlptAreaStat> stats;
+  final String Function(JlptSkillArea area) areaLabel;
+  final String planTitle;
+  final List<JlptPlanItem> planItems;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: palette.elevated,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: palette.outlineSoft),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(fontWeight: FontWeight.w900, color: palette.ink),
+          ),
+          const SizedBox(height: 12),
+          ...stats.map((stat) {
+            final ratio = stat.total == 0 ? 0.0 : stat.correct / stat.total;
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${areaLabel(stat.area)} • ${stat.correct}/${stat.total}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      color: palette.ink,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(999),
+                    child: LinearProgressIndicator(
+                      value: ratio,
+                      minHeight: 8,
+                      backgroundColor: palette.base,
+                      color: ratio >= 0.6 ? palette.success : palette.warning,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
+          if (planItems.isNotEmpty) ...[
+            const SizedBox(height: 6),
+            Text(
+              planTitle,
+              style: TextStyle(fontWeight: FontWeight.w800, color: palette.ink),
+            ),
+            const SizedBox(height: 8),
+            ...planItems.map(
+              (item) => Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Text(
+                  '• ${item.focus} — ${item.action}',
+                  style: TextStyle(
+                    color: palette.ink.withValues(alpha: 0.74),
+                    height: 1.4,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ],
       ),
     );

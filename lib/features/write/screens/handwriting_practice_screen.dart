@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../app/theme/app_theme_palette.dart';
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
 import '../../../data/models/kanji_item.dart';
@@ -197,16 +198,6 @@ class _HandwritingPracticeScreenState
                 children: [
                   _buildProgress(language, target, progress),
                   _buildSessionMiniBar(language, progress),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
-                    child: Text(
-                      language.handwritingInstructionLabel,
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: Color(0xFF6B7390),
-                      ),
-                    ),
-                  ),
                   if (_hasCompounds)
                     Padding(
                       padding: const EdgeInsets.fromLTRB(16, 0, 16, 4),
@@ -274,6 +265,7 @@ class _HandwritingPracticeScreenState
     _PracticeTarget target,
     _ProgressStats progressStats,
   ) {
+    final palette = context.appPalette;
     final completedTargetCount = _checked ? (_currentIndex + 1) : _currentIndex;
     final wordProgress = _targets.isEmpty
         ? 0.0
@@ -286,16 +278,23 @@ class _HandwritingPracticeScreenState
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
       child: Container(
-        padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 14),
         decoration: BoxDecoration(
-          color: _surfaceCardColor,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: _surfaceBorderColor),
-          boxShadow: const [
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              palette.primary.withValues(alpha: 0.10),
+              palette.secondary.withValues(alpha: 0.10),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: palette.outline),
+          boxShadow: [
             BoxShadow(
-              color: Color(0x0B2F3A59),
-              blurRadius: 14,
-              offset: Offset(0, 6),
+              color: palette.ink.withValues(alpha: 0.07),
+              blurRadius: 16,
+              offset: const Offset(0, 8),
             ),
           ],
         ),
@@ -303,31 +302,50 @@ class _HandwritingPracticeScreenState
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  child: Text(
-                    language.handwritingWordProgressLabel(
-                      _currentIndex + 1,
-                      _targets.length,
-                    ),
-                    style: const TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFF27314B),
-                    ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        language.handwritingWordProgressLabel(
+                          _currentIndex + 1,
+                          _targets.length,
+                        ),
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w800,
+                          color: palette.ink,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        language.practiceProgressLabel(
+                          _currentIndex + 1,
+                          _targets.length,
+                        ),
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: palette.ink.withValues(alpha: 0.68),
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
+                const SizedBox(width: 12),
                 badge,
               ],
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 14),
             ClipRRect(
               borderRadius: BorderRadius.circular(999),
               child: LinearProgressIndicator(
                 value: wordProgress,
-                minHeight: 8,
-                backgroundColor: const Color(0xFFE5EAF4),
-                color: const Color(0xFF1D4ED8),
+                minHeight: 9,
+                backgroundColor: palette.elevated.withValues(alpha: 0.85),
+                color: palette.primary,
               ),
             ),
             const SizedBox(height: 12),
@@ -336,10 +354,10 @@ class _HandwritingPracticeScreenState
                 progressStats.doneCharacters,
                 progressStats.totalCharacters,
               ),
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 12,
-                color: _surfaceMutedTextColor,
-                fontWeight: FontWeight.w600,
+                color: palette.ink.withValues(alpha: 0.74),
+                fontWeight: FontWeight.w700,
               ),
             ),
             const SizedBox(height: 6),
@@ -347,43 +365,32 @@ class _HandwritingPracticeScreenState
               borderRadius: BorderRadius.circular(999),
               child: LinearProgressIndicator(
                 value: characterProgress,
-                minHeight: 6,
-                backgroundColor: const Color(0xFFE5EAF4),
-                color: const Color(0xFF0F766E),
+                minHeight: 7,
+                backgroundColor: palette.elevated.withValues(alpha: 0.85),
+                color: palette.secondary,
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 12),
             Wrap(
               spacing: 8,
-              runSpacing: 6,
+              runSpacing: 8,
               children: [
                 _buildStatusCountChip(
                   label: language.handwritingStatusNewLabel,
                   count: progressStats.newItems,
-                  color: const Color(0xFF2563EB),
+                  color: palette.primary,
                 ),
                 _buildStatusCountChip(
                   label: language.handwritingStatusReviewLabel,
                   count: progressStats.reviewItems,
-                  color: const Color(0xFF4D7C0F),
+                  color: palette.secondary,
                 ),
                 _buildStatusCountChip(
                   label: language.handwritingStatusWeakLabel,
                   count: progressStats.weakItems,
-                  color: const Color(0xFFB91C1C),
+                  color: palette.error,
                 ),
               ],
-            ),
-            const SizedBox(height: 8),
-            Text(
-              language.practiceProgressLabel(
-                _currentIndex + 1,
-                _targets.length,
-              ),
-              style: const TextStyle(
-                fontSize: 12,
-                color: _surfaceMutedTextColor,
-              ),
             ),
           ],
         ),
@@ -395,9 +402,15 @@ class _HandwritingPracticeScreenState
     AppLanguage language,
     _ProgressStats progressStats,
   ) {
+    final palette = context.appPalette;
     final completedTargetCount = _checked ? (_currentIndex + 1) : _currentIndex;
     final remaining = max(0, _targets.length - completedTargetCount);
     final weakButton = FilledButton.tonalIcon(
+      style: FilledButton.styleFrom(
+        backgroundColor: palette.accent.withValues(alpha: 0.12),
+        foregroundColor: palette.accent,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      ),
       onPressed: progressStats.weakItems <= 0
           ? null
           : () => _practiceWeakItems(limit: 10),
@@ -410,31 +423,31 @@ class _HandwritingPracticeScreenState
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: _surfaceCardColor,
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: _surfaceBorderColor),
+          color: palette.base,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: palette.outlineSoft),
         ),
         child: LayoutBuilder(
           builder: (context, constraints) {
             final isCompact = constraints.maxWidth < 720;
             final chips = Wrap(
               spacing: 8,
-              runSpacing: 6,
+              runSpacing: 8,
               children: [
                 _buildStatusCountChip(
                   label: language.correctLabel,
                   count: _correctCount,
-                  color: const Color(0xFF15803D),
+                  color: palette.success,
                 ),
                 _buildStatusCountChip(
                   label: language.handwritingRemainingLabel,
                   count: remaining,
-                  color: const Color(0xFF334155),
+                  color: palette.ink,
                 ),
                 _buildStatusCountChip(
                   label: language.handwritingStatusWeakLabel,
                   count: progressStats.weakItems,
-                  color: const Color(0xFFB91C1C),
+                  color: palette.error,
                 ),
               ],
             );
@@ -465,77 +478,119 @@ class _HandwritingPracticeScreenState
     required double canvasHeight,
     required int slotCount,
   }) {
+    final palette = context.appPalette;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: _surfaceCardColor,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: _surfaceBorderColor),
-            boxShadow: const [
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [palette.base, palette.elevated],
+            ),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: palette.outline),
+            boxShadow: [
               BoxShadow(
-                color: Color(0x0B2F3A59),
-                blurRadius: 12,
-                offset: Offset(0, 5),
+                color: palette.ink.withValues(alpha: 0.06),
+                blurRadius: 14,
+                offset: const Offset(0, 6),
               ),
             ],
           ),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: SizedBox(
-              width: canvasWidth,
-              height: canvasHeight,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(14),
-                child: Listener(
-                  onPointerDown: (_) {
-                    if (_canvasPointerActive) return;
-                    setState(() {
-                      _canvasPointerActive = true;
-                    });
-                  },
-                  onPointerUp: (_) {
-                    if (!_canvasPointerActive) return;
-                    setState(() {
-                      _canvasPointerActive = false;
-                    });
-                  },
-                  onPointerCancel: (_) {
-                    if (!_canvasPointerActive) return;
-                    setState(() {
-                      _canvasPointerActive = false;
-                    });
-                  },
-                  child: HandwritingCanvas(
-                    strokes: _strokes,
-                    showGuide: _showGuide,
-                    guideText: target.text,
-                    guideSlotCount: slotCount,
-                    enabled: !_checked,
-                    onStrokeStart: _handleStrokeStart,
-                    onStrokeUpdate: _handleStrokeUpdate,
-                    onStrokeEnd: _handleStrokeEnd,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
+                decoration: BoxDecoration(
+                  color: palette.primary.withValues(alpha: 0.08),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.draw_rounded, size: 16, color: palette.primary),
+                    const SizedBox(width: 8),
+                    Text(
+                      language.handwritingInstructionLabel,
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700,
+                        color: palette.primary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: SizedBox(
+                  width: canvasWidth,
+                  height: canvasHeight,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(18),
+                    child: Listener(
+                      onPointerDown: (_) {
+                        if (_canvasPointerActive) return;
+                        setState(() {
+                          _canvasPointerActive = true;
+                        });
+                      },
+                      onPointerUp: (_) {
+                        if (!_canvasPointerActive) return;
+                        setState(() {
+                          _canvasPointerActive = false;
+                        });
+                      },
+                      onPointerCancel: (_) {
+                        if (!_canvasPointerActive) return;
+                        setState(() {
+                          _canvasPointerActive = false;
+                        });
+                      },
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(18),
+                          border: Border.all(color: palette.outlineSoft),
+                        ),
+                        child: HandwritingCanvas(
+                          strokes: _strokes,
+                          showGuide: _showGuide,
+                          guideText: target.text,
+                          guideSlotCount: slotCount,
+                          enabled: !_checked,
+                          onStrokeStart: _handleStrokeStart,
+                          onStrokeUpdate: _handleStrokeUpdate,
+                          onStrokeEnd: _handleStrokeEnd,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 12),
         Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: _surfaceCardColor,
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: _surfaceBorderColor),
+            color: palette.base,
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(color: palette.outlineSoft),
           ),
           child: _buildControls(language, target),
         ),
         if (_evaluation != null) ...[
-          const SizedBox(height: 10),
+          const SizedBox(height: 12),
           _buildResult(language, _evaluation!),
         ],
       ],
@@ -658,19 +713,30 @@ class _HandwritingPracticeScreenState
     required Color color,
   }) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.10),
         borderRadius: BorderRadius.circular(999),
         border: Border.all(color: color.withValues(alpha: 0.20)),
       ),
-      child: Text(
-        '$label: $count',
-        style: TextStyle(
-          fontSize: 11,
-          fontWeight: FontWeight.w600,
-          color: color,
-        ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 6,
+            height: 6,
+            decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+          ),
+          const SizedBox(width: 6),
+          Text(
+            '$label: $count',
+            style: TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.w700,
+              color: color,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -1906,17 +1972,23 @@ class _PracticeHeader extends StatelessWidget {
     final item = target.anchorItem;
     final kanjiFontSize = target.text.runes.length > 2 ? 34.0 : 42.0;
 
+    final palette = context.appPalette;
+
     return Container(
       padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: _surfaceBorderColor),
-        boxShadow: const [
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [palette.base, palette.elevated],
+        ),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: palette.outline),
+        boxShadow: [
           BoxShadow(
-            color: Color(0x0A2E3A59),
-            blurRadius: 10,
-            offset: Offset(0, 4),
+            color: palette.ink.withValues(alpha: 0.05),
+            blurRadius: 12,
+            offset: const Offset(0, 5),
           ),
         ],
       ),
@@ -1927,7 +1999,7 @@ class _PracticeHeader extends StatelessWidget {
             style: TextStyle(
               fontSize: kanjiFontSize,
               fontWeight: FontWeight.w800,
-              color: const Color(0xFF334155),
+              color: palette.ink,
               height: 1.05,
             ),
           ),
@@ -1986,9 +2058,11 @@ class _PracticeHeader extends StatelessWidget {
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFEFF6FF),
+                    color: palette.primary.withValues(alpha: 0.10),
                     borderRadius: BorderRadius.circular(999),
-                    border: Border.all(color: const Color(0xFFBFDBFE)),
+                    border: Border.all(
+                      color: palette.primary.withValues(alpha: 0.20),
+                    ),
                   ),
                   child: Text(
                     language.handwritingStrokeCountLabel(

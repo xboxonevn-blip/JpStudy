@@ -1,19 +1,16 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/core/app_language.dart';
-import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
+import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/utils/japanese_text.dart';
 import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/repositories/content_repository.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
+import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/vocab/widgets/flashcard_widget.dart';
-import '../common/widgets/compact_ui.dart';
-import '../common/widgets/clay_card.dart';
-import '../common/widgets/error_state_widget.dart';
-import '../../app/theme/app_theme.dart';
 
 class VocabScreen extends ConsumerStatefulWidget {
   const VocabScreen({super.key});
@@ -38,7 +35,7 @@ class _VocabScreenState extends ConsumerState<VocabScreen> {
         actions: [
           if (level != null)
             Padding(
-              padding: const EdgeInsets.only(right: 8.0),
+              padding: const EdgeInsets.only(right: 8),
               child: IconButton(
                 icon: Icon(
                   _isFlashcardMode ? Icons.list_rounded : Icons.style_rounded,
@@ -59,6 +56,11 @@ class _VocabScreenState extends ConsumerState<VocabScreen> {
               language: language,
               level: level,
               isFlashcardMode: _isFlashcardMode,
+              onToggleMode: () {
+                setState(() {
+                  _isFlashcardMode = !_isFlashcardMode;
+                });
+              },
             ),
     );
   }
@@ -68,9 +70,9 @@ class _VocabScreenState extends ConsumerState<VocabScreen> {
       case AppLanguage.en:
         return 'Words';
       case AppLanguage.vi:
-        return 'T\u1eeb';
+        return 'Từ';
       case AppLanguage.ja:
-        return '\u5358\u8a9e';
+        return '単語';
     }
   }
 
@@ -79,11 +81,9 @@ class _VocabScreenState extends ConsumerState<VocabScreen> {
       case AppLanguage.en:
         return isFlashcardMode ? 'Show list' : 'Show cards';
       case AppLanguage.vi:
-        return isFlashcardMode ? 'Xem danh s\u00e1ch' : 'Xem th\u1ebb';
+        return isFlashcardMode ? 'Xem danh sách' : 'Xem thẻ';
       case AppLanguage.ja:
-        return isFlashcardMode
-            ? '\u4e00\u89a7\u8868\u793a'
-            : '\u30ab\u30fc\u30c9\u8868\u793a';
+        return isFlashcardMode ? '一覧表示' : 'カード表示';
     }
   }
 }
@@ -93,11 +93,13 @@ class _VocabContent extends ConsumerWidget {
     required this.language,
     required this.level,
     required this.isFlashcardMode,
+    required this.onToggleMode,
   });
 
   final AppLanguage language;
   final StudyLevel level;
   final bool isFlashcardMode;
+  final VoidCallback onToggleMode;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -107,10 +109,6 @@ class _VocabContent extends ConsumerWidget {
 
     return vocabAsync.when(
       data: (dataItems) {
-        if (dataItems.isEmpty) {
-          return Center(child: Text(language.vocabScreenBody));
-        }
-        // Map database entities (VocabData) to domain models (VocabItem)
         final items = dataItems
             .map(
               (e) => VocabItem(
@@ -125,330 +123,244 @@ class _VocabContent extends ConsumerWidget {
             )
             .toList();
 
-        return ListView(
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 96),
-          children: [
-            AppFeatureCard(
+        final dueTerms = dueTermsAsync.valueOrNull ?? const [];
+        final nextReview = nextReviewAsync.valueOrNull;
+        final preview = items.take(6).toList();
+
+        if (items.isEmpty) {
+          return AppPageShell(
+            child: AppFeatureCard(
               icon: Icons.translate_rounded,
-              title: switch (language) {
-                AppLanguage.en => 'Vocab',
-                AppLanguage.vi => 'Từ vựng',
-                AppLanguage.ja => '語彙',
-              },
-              subtitle: switch (language) {
-                AppLanguage.en =>
-                  'Review due words or browse the current level.',
-                AppLanguage.vi =>
-                  'Ôn từ đến hạn hoặc duyệt từ của cấp hiện tại.',
-                AppLanguage.ja => '期限の語彙を復習するか、現在のレベルを確認します。',
-              },
-              primaryLabel:
-                  dueTermsAsync.hasValue && dueTermsAsync.value!.isNotEmpty
-                  ? language.reviewAction
-                  : (switch (language) {
-                      AppLanguage.en => 'Browse',
-                      AppLanguage.vi => 'Duyệt',
-                      AppLanguage.ja => '見る',
-                    }),
-              onPrimaryTap:
-                  dueTermsAsync.hasValue && dueTermsAsync.value!.isNotEmpty
-                  ? () => context.push('/vocab/review')
-                  : null,
-              secondaryLabel: switch (language) {
-                AppLanguage.en => isFlashcardMode ? 'List' : 'Cards',
-                AppLanguage.vi => isFlashcardMode ? 'Danh sách' : 'Thẻ',
-                AppLanguage.ja => isFlashcardMode ? '一覧' : 'カード',
-              },
-              onSecondaryTap: null,
-              status: AppStatusChip(
-                label: level.shortLabel,
-                tone: AppStatusTone.primary,
-              ),
-            ),
-            const SizedBox(height: 16),
-            if (dueTermsAsync.hasValue && dueTermsAsync.value!.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 12),
-                child: AppCompactRow(
-                  icon: Icons.schedule_rounded,
-                  title: language.reviewAction,
-                  subtitle: switch (language) {
-                    AppLanguage.en =>
-                      '${dueTermsAsync.value!.length} words are due now.',
-                    AppLanguage.vi =>
-                      '${dueTermsAsync.value!.length} từ đang đến hạn.',
-                    AppLanguage.ja => '${dueTermsAsync.value!.length} 件が期限です。',
-                  },
-                  status: AppStatusChip(
-                    label: '${dueTermsAsync.value!.length}',
-                    tone: AppStatusTone.warning,
-                  ),
-                  onTap: () => context.push('/vocab/review'),
-                ),
-              ),
-            if (dueTermsAsync.hasValue && dueTermsAsync.value!.isEmpty)
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                child: _NextReviewChip(
-                  nextReviewAt: nextReviewAsync.valueOrNull,
-                ),
-              ),
-            SizedBox(
-              child: isFlashcardMode
-                  ? _FlashcardView(items: items)
-                  : _ListView(items: items, language: language),
-            ),
-          ],
-        );
-      },
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (e, _) => ErrorStateWidget(error: e),
-    );
-  }
-}
-
-class _ListView extends StatelessWidget {
-  const _ListView({required this.items, required this.language});
-
-  final List<VocabItem> items;
-  final AppLanguage language;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: const EdgeInsets.all(16),
-      itemCount: items.length + 1, // Title + items
-      itemBuilder: (context, index) {
-        if (index == 0) {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 12),
-            child: Text(
-              language.vocabPreviewTitle,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+              title: _heroTitle(language),
+              subtitle: _emptySubtitle(language),
+              secondaryLabel: _goLibraryLabel(language),
+              onSecondaryTap: () => context.push('/library'),
             ),
           );
         }
-        final item = items[index - 1];
-        final meaningText = language == AppLanguage.en
-            ? (item.meaningEn ?? item.meaning)
-            : item.meaning;
-        final showReading = shouldShowReading(
-          term: item.term,
-          reading: item.reading,
-        );
 
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 12),
-          child: ClayCard(
-            color: Colors.white,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            child: ListTile(
-              contentPadding: EdgeInsets.zero,
-              title: Text(
-                item.term,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+        return AppPageShell(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppFeatureCard(
+                icon: Icons.translate_rounded,
+                title: _heroTitle(language),
+                subtitle: _heroSubtitle(language, itemCount: items.length, dueCount: dueTerms.length),
+                primaryLabel: language.reviewAction,
+                onPrimaryTap: () => context.push('/vocab/review'),
+                secondaryLabel: _toggleLabel(language, isFlashcardMode),
+                onSecondaryTap: () {},
+                status: AppStatusChip(
+                  label: dueTerms.isNotEmpty
+                      ? language.reviewTermsDueLabel(dueTerms.length)
+                      : _nextReviewLabel(language, nextReview),
+                  tone: dueTerms.isNotEmpty ? AppStatusTone.warning : AppStatusTone.neutral,
                 ),
               ),
-              subtitle: Text(
-                showReading
-                    ? '${item.reading!.trim()} • $meaningText'
-                    : meaningText,
-                style: TextStyle(color: AppTheme.textSub),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Expanded(
+                    child: AppMetricPill(
+                      label: _metricCollectionLabel(language),
+                      value: '${items.length}',
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: AppMetricPill(
+                      label: _metricDueLabel(language),
+                      value: '${dueTerms.length}',
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: AppMetricPill(
+                      label: _metricModeLabel(language),
+                      value: isFlashcardMode ? _cardsModeLabel(language) : _listModeLabel(language),
+                    ),
+                  ),
+                ],
               ),
-            ),
+              const SizedBox(height: 20),
+              AppSectionHeader(
+                title: _sectionTitle(language),
+                caption: _sectionCaption(language, isFlashcardMode),
+                actionLabel: _switchModeAction(language, isFlashcardMode),
+                onActionTap: onToggleMode,
+              ),
+              const SizedBox(height: 10),
+              if (isFlashcardMode)
+                ...preview.map(
+                  (item) => Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: FlashcardWidget(item: item, language: language),
+                  ),
+                )
+              else
+                ...preview.map(
+                  (item) => Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: AppCompactRow(
+                      icon: Icons.translate_rounded,
+                      title: item.term,
+                      subtitle: _subtitleForItem(item, language),
+                      status: shouldShowReading(term: item.term, reading: item.reading)
+                          ? AppStatusChip(label: item.reading!.trim())
+                          : null,
+                      onTap: () => context.push('/vocab/review'),
+                    ),
+                  ),
+                ),
+            ],
           ),
         );
       },
-    );
-  }
-}
-
-class _FlashcardView extends ConsumerStatefulWidget {
-  const _FlashcardView({required this.items});
-
-  final List<VocabItem> items;
-
-  @override
-  ConsumerState<_FlashcardView> createState() => _FlashcardViewState();
-}
-
-class _FlashcardViewState extends ConsumerState<_FlashcardView> {
-  late PageController _pageController;
-  int _currentIndex = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    _pageController = PageController(viewportFraction: 0.9);
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final language = ref.watch(appLanguageProvider);
-    final progress = (_currentIndex + 1) / widget.items.length;
-
-    return Column(
-      children: [
-        const SizedBox(height: 12),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: _buildProgressBar(progress),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          '${_currentIndex + 1} / ${widget.items.length}',
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: AppTheme.textSub,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        const SizedBox(height: 12),
-        Expanded(
-          child: PageView.builder(
-            controller: _pageController,
-            itemCount: widget.items.length,
-            onPageChanged: (index) {
-              setState(() {
-                _currentIndex = index;
-              });
-            },
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4),
-                child: Center(
-                  child: FlashcardWidget(
-                    item: widget.items[index],
-                    language: language,
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-        const SizedBox(height: 20),
-      ],
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stack) => Center(child: Text(language.loadErrorLabel)),
     );
   }
 
-  Widget _buildProgressBar(double progress) {
-    return Container(
-      height: 16,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: AppTheme.neutral,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: FractionallySizedBox(
-        alignment: Alignment.centerLeft,
-        widthFactor: progress,
-        child: Container(
-          decoration: BoxDecoration(
-            color: AppTheme.secondary,
-            borderRadius: BorderRadius.circular(12),
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Colors.white.withValues(alpha: 0.3),
-                Colors.white.withValues(alpha: 0.0),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _NextReviewChip extends ConsumerWidget {
-  const _NextReviewChip({required this.nextReviewAt});
-
-  final DateTime? nextReviewAt;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final language = ref.watch(appLanguageProvider);
-    final String text;
-    if (nextReviewAt == null) {
-      text = _noReviewText(language);
-    } else {
-      final diff = nextReviewAt!.difference(DateTime.now());
-      if (diff.isNegative) {
-        text = _readyText(language);
-      } else {
-        final String timing;
-        if (diff.inMinutes < 60) {
-          timing = '${diff.inMinutes}m';
-        } else if (diff.inHours < 24) {
-          final h = diff.inHours;
-          final m = diff.inMinutes % 60;
-          timing = m > 0 ? '${h}h ${m}m' : '${h}h';
-        } else {
-          timing = _dayTiming(language, diff.inDays);
-        }
-        text = _nextReviewText(language, timing);
-      }
-    }
-
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: 13,
-        fontWeight: FontWeight.w600,
-        color: AppTheme.textSub,
-      ),
-    );
-  }
-
-  String _noReviewText(AppLanguage language) {
+  String _heroTitle(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Finish a lesson to start review';
+        return 'Vocab';
       case AppLanguage.vi:
-        return 'H\u1ecdc xong b\u00e0i \u0111\u1ec3 m\u1edf \u00f4n t\u1eadp';
+        return 'Từ vựng';
       case AppLanguage.ja:
-        return '\u5fa9\u7fd2\u3092\u59cb\u3081\u308b\u306b\u306f\u30ec\u30c3\u30b9\u30f3\u3092\u5b8c\u4e86\u3057\u3066\u304f\u3060\u3055\u3044';
+        return '語彙';
     }
   }
 
-  String _readyText(AppLanguage language) {
+  String _heroSubtitle(AppLanguage language, {required int itemCount, required int dueCount}) {
     switch (language) {
       case AppLanguage.en:
-        return '✅ Review ready';
+        return dueCount > 0
+            ? '$dueCount due words are waiting. Review first, then browse the current level set of $itemCount words.'
+            : 'Browse the current level set of $itemCount words or flip through cards in a calmer study surface.';
       case AppLanguage.vi:
-        return '✅ \u0110\u00e3 s\u1eb5n s\u00e0ng \u00f4n';
+        return dueCount > 0
+            ? 'Có $dueCount từ đến hạn đang chờ. Ôn trước rồi duyệt bộ $itemCount từ của cấp hiện tại.'
+            : 'Duyệt bộ $itemCount từ của cấp hiện tại hoặc chuyển sang chế độ thẻ để học nhẹ và tập trung hơn.';
       case AppLanguage.ja:
-        return '✅ \u5fa9\u7fd2\u3067\u304d\u307e\u3059';
+        return dueCount > 0
+            ? '$dueCount 件の期限語彙が待っています。先に復習してから現在レベルの $itemCount 語を確認しましょう。'
+            : '現在レベルの $itemCount 語を一覧で見たり、カードで落ち着いて学べます。';
     }
   }
 
-  String _dayTiming(AppLanguage language, int days) {
+  String _emptySubtitle(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'in $days day${days == 1 ? '' : 's'}';
+        return 'No words are available for this level yet.';
       case AppLanguage.vi:
-        return '$days ng\u00e0y n\u1eefa';
+        return 'Hiện chưa có từ nào cho cấp này.';
       case AppLanguage.ja:
-        return '$days\u65e5\u5f8c';
+        return 'このレベルで利用できる単語はまだありません。';
     }
   }
 
-  String _nextReviewText(AppLanguage language, String timing) {
+  String _goLibraryLabel(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return '✅ Next review $timing';
+        return 'Open library';
       case AppLanguage.vi:
-        return '✅ L\u1ea7n \u00f4n ti\u1ebfp theo: $timing';
+        return 'Mở thư viện';
       case AppLanguage.ja:
-        return '✅ \u6b21\u306e\u5fa9\u7fd2: $timing';
+        return 'ライブラリを開く';
     }
+  }
+
+  String _toggleLabel(AppLanguage language, bool isFlashcardMode) {
+    switch (language) {
+      case AppLanguage.en:
+        return isFlashcardMode ? 'Cards mode' : 'List mode';
+      case AppLanguage.vi:
+        return isFlashcardMode ? 'Chế độ thẻ' : 'Chế độ danh sách';
+      case AppLanguage.ja:
+        return isFlashcardMode ? 'カード表示' : '一覧表示';
+    }
+  }
+
+  String _metricCollectionLabel(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Collection',
+    AppLanguage.vi => 'Bộ từ',
+    AppLanguage.ja => '収録',
+  };
+
+  String _metricDueLabel(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Due',
+    AppLanguage.vi => 'Đến hạn',
+    AppLanguage.ja => '期限',
+  };
+
+  String _metricModeLabel(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Mode',
+    AppLanguage.vi => 'Chế độ',
+    AppLanguage.ja => '表示',
+  };
+
+  String _cardsModeLabel(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Cards',
+    AppLanguage.vi => 'Thẻ',
+    AppLanguage.ja => 'カード',
+  };
+
+  String _listModeLabel(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'List',
+    AppLanguage.vi => 'Danh sách',
+    AppLanguage.ja => '一覧',
+  };
+
+  String _sectionTitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Preview',
+    AppLanguage.vi => 'Xem trước',
+    AppLanguage.ja => 'プレビュー',
+  };
+
+  String _sectionCaption(AppLanguage language, bool isFlashcardMode) => switch (language) {
+    AppLanguage.en => isFlashcardMode ? 'Flip a few cards before the real review session.' : 'Scan a few entries before jumping into review.',
+    AppLanguage.vi => isFlashcardMode ? 'Lật thử vài thẻ trước khi vào phiên review thật.' : 'Lướt vài mục trước khi vào phiên review.',
+    AppLanguage.ja => isFlashcardMode ? '本番の復習前に数枚だけカードをめくれます。' : '本番の復習前に数件だけ眺められます。',
+  };
+
+  String _switchModeAction(AppLanguage language, bool isFlashcardMode) => switch (language) {
+    AppLanguage.en => isFlashcardMode ? 'Show list' : 'Show cards',
+    AppLanguage.vi => isFlashcardMode ? 'Xem danh sách' : 'Xem thẻ',
+    AppLanguage.ja => isFlashcardMode ? '一覧表示' : 'カード表示',
+  };
+
+  String _nextReviewLabel(AppLanguage language, DateTime? nextReview) {
+    if (nextReview == null) {
+      return switch (language) {
+        AppLanguage.en => 'Ready now',
+        AppLanguage.vi => 'Sẵn sàng',
+        AppLanguage.ja => '準備完了',
+      };
+    }
+    final now = DateTime.now();
+    final days = nextReview.difference(now).inDays;
+    if (days <= 0) {
+      return switch (language) {
+        AppLanguage.en => 'Today',
+        AppLanguage.vi => 'Hôm nay',
+        AppLanguage.ja => '今日',
+      };
+    }
+    return switch (language) {
+      AppLanguage.en => 'in $days day${days == 1 ? '' : 's'}',
+      AppLanguage.vi => 'sau $days ngày',
+      AppLanguage.ja => '$days 日後',
+    };
+  }
+
+  String _subtitleForItem(VocabItem item, AppLanguage language) {
+    final meaning = item.displayMeaning(language).trim();
+    final reading = item.reading?.trim() ?? '';
+    if (reading.isNotEmpty && shouldShowReading(term: item.term, reading: item.reading)) {
+      return '$meaning • $reading';
+    }
+    return meaning;
   }
 }

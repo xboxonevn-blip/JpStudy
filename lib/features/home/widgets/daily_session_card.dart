@@ -700,11 +700,11 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
   String _deepeningCue(AppLanguage language, String deepeningLabel) {
     switch (language) {
       case AppLanguage.en:
-        return 'Use step 3 for a deeper pass: $deepeningLabel.';
+        return 'ステップ3でさらに深く学べます: $deepeningLabel。';
       case AppLanguage.vi:
         return 'Dùng bước 3 để học sâu hơn: $deepeningLabel.';
       case AppLanguage.ja:
-        return 'Use step 3 for a deeper pass: $deepeningLabel.';
+        return 'ステップ3でさらに深く学べます: $deepeningLabel。';
     }
   }
 
@@ -868,10 +868,13 @@ class _CoachStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Semantics(
-      label: 'Step $index: $target${done ? ' ' 'completed' : ''}',
+      label:
+          'Step $index: $target${done ? ' '
+                    'completed' : ''}',
       child: Row(
-        crossAxisAlignment:
-            detail != null ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+        crossAxisAlignment: detail != null
+            ? CrossAxisAlignment.start
+            : CrossAxisAlignment.center,
         children: [
           Padding(
             padding: EdgeInsets.only(top: detail != null ? 2 : 0),
@@ -953,8 +956,9 @@ class _DailyCompleteBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final label = switch (language) {
-      AppLanguage.en || AppLanguage.ja => 'Daily Complete! +25 XP',
+      AppLanguage.en => 'Daily Complete! +25 XP',
       AppLanguage.vi => 'Hoàn thành ngày! +25 XP',
+      AppLanguage.ja => 'デイリー達成！ +25 XP',
     };
     return ScaleTransition(
       scale: scaleAnimation,
@@ -970,7 +974,11 @@ class _DailyCompleteBanner extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.celebration_rounded, color: Colors.white, size: 18),
+            const Icon(
+              Icons.celebration_rounded,
+              color: Colors.white,
+              size: 18,
+            ),
             const SizedBox(width: 8),
             Text(
               label,
@@ -1160,10 +1168,7 @@ class _StreakBadge extends StatelessWidget {
           ),
           if (milestone != null) ...[
             const SizedBox(width: 3),
-            Text(
-              milestone.emoji,
-              style: const TextStyle(fontSize: 10),
-            ),
+            Text(milestone.emoji, style: const TextStyle(fontSize: 10)),
           ],
         ],
       ),

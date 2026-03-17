@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 
@@ -19,12 +20,19 @@ class JlptReadingScreen extends ConsumerStatefulWidget {
 
 class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
   JlptReadingPassage? _activePassage;
+  late Future<List<JlptReadingPassage>> _passagesFuture;
   final Map<String, int> _answers = <String, int>{};
   bool _submitted = false;
   int _secondsRemaining = 0;
   Timer? _timer;
   DateTime? _startedAt;
   JlptCoachSnapshot? _snapshot;
+
+  @override
+  void initState() {
+    super.initState();
+    _passagesFuture = loadJlptReadingBank();
+  }
 
   @override
   void dispose() {
@@ -119,348 +127,799 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
   String _areaLabel(AppLanguage language, JlptSkillArea area) {
     switch (area) {
       case JlptSkillArea.vocabulary:
-        return _tr(language, 'Vocabulary', 'T? v?ng', '??');
+        return _tr(language, 'Vocabulary', 'Từ vựng', '語彙');
       case JlptSkillArea.grammar:
-        return _tr(language, 'Grammar', 'Ng? ph?p', '??');
+        return _tr(language, 'Grammar', 'Ngữ pháp', '文法');
       case JlptSkillArea.kanji:
-        return _tr(language, 'Kanji', 'Kanji', '??');
+        return _tr(language, 'Kanji', 'Kanji', '漢字');
       case JlptSkillArea.reading:
-        return _tr(language, 'Reading', '??c hi?u', '??');
+        return _tr(language, 'Reading', 'Đọc hiểu', '読解');
     }
   }
+
+  String _questionTypeLabel(
+    AppLanguage language,
+    JlptReadingQuestionType type,
+  ) {
+    switch (type) {
+      case JlptReadingQuestionType.mainIdea:
+        return _tr(language, 'Main idea', 'Ý chính', '主旨');
+      case JlptReadingQuestionType.detail:
+        return _tr(language, 'Detail', 'Chi tiết', '詳細');
+      case JlptReadingQuestionType.inference:
+        return _tr(language, 'Inference', 'Suy luận', '推論');
+    }
+  }
+
+  String _title(AppLanguage language) =>
+      _tr(language, 'JLPT Reading Drill', 'Luyện đọc hiểu JLPT', 'JLPT読解ドリル');
+
+  String _intro(AppLanguage language) => _tr(
+    language,
+    'Choose a passage and finish within the target time.',
+    'Chọn đoạn văn và hoàn thành trong thời gian mục tiêu.',
+    '読解を選び、目標時間内で完了しましょう。',
+  );
+
+  String _seriousHint(AppLanguage language) => _tr(
+    language,
+    'Serious mode: timer, score, and diagnosis appear in one focused flow.',
+    'Chế độ nghiêm túc: timer, điểm số và chẩn đoán nằm trong một luồng tập trung.',
+    '集中モード: タイマー、得点、診断を1つの流れで確認できます。',
+  );
+
+  String _startLabel(AppLanguage language) =>
+      _tr(language, 'Start reading set', 'Bắt đầu bài đọc', '読解セットを開始');
+
+  String _submitLabel(AppLanguage language) =>
+      _tr(language, 'Submit', 'Nộp bài', '提出');
+
+  String _restartLabel(AppLanguage language) =>
+      _tr(language, 'Try another passage', 'Đổi bài đọc khác', '別の読解を試す');
+
+  String _backLabel(AppLanguage language) =>
+      _tr(language, 'Back to list', 'Quay lại danh sách', '一覧に戻る');
+
+  String _scoreSummary(AppLanguage language, int correct, int total) => _tr(
+    language,
+    'Score $correct/$total',
+    'Điểm $correct/$total',
+    '得点 $correct/$total',
+  );
+
+  String _timeSpentLabel(AppLanguage language, Duration elapsed) => _tr(
+    language,
+    'Time ${elapsed.inMinutes}m ${elapsed.inSeconds % 60}s',
+    'Thời gian ${elapsed.inMinutes}p ${elapsed.inSeconds % 60}s',
+    '時間 ${elapsed.inMinutes}分 ${elapsed.inSeconds % 60}秒',
+  );
 
   @override
   Widget build(BuildContext context) {
     final language = ref.watch(appLanguageProvider);
     final passage = _activePassage;
+    final palette = context.appPalette;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          _tr(
-            language,
-            'JLPT Reading Drill',
-            'Luy\u1ec7n \u0111\u1ecdc hi\u1ec3u JLPT',
-            'JLPT?????',
+      backgroundColor: palette.bg,
+      appBar: AppBar(title: Text(_title(language))),
+      body: passage == null
+          ? FutureBuilder<List<JlptReadingPassage>>(
+              future: _passagesFuture,
+              builder: (context, snapshot) {
+                return ListView(
+                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+                  children: [
+                    _HeaderHero(
+                      title: _title(language),
+                      subtitle: _intro(language),
+                      hint: _seriousHint(language),
+                      icon: Icons.menu_book_rounded,
+                    ),
+                    const SizedBox(height: 16),
+                    if (snapshot.connectionState == ConnectionState.waiting)
+                      const Center(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: 24),
+                          child: CircularProgressIndicator(),
+                        ),
+                      )
+                    else if (snapshot.hasError)
+                      _InlineNoticeCard(
+                        title: _tr(
+                          language,
+                          'Unable to load reading sets',
+                          'Không tải được bộ bài đọc',
+                          '読解セットを読み込めません',
+                        ),
+                        message: _tr(
+                          language,
+                          'Please try again. If the issue continues, check the immersion lesson files.',
+                          'Hãy thử lại. Nếu lỗi còn tiếp tục, cần kiểm tra các file lesson immersion.',
+                          '再試行してください。問題が続く場合は immersion lesson ファイルを確認してください。',
+                        ),
+                        actionLabel: _tr(language, 'Retry', 'Thử lại', '再読み込み'),
+                        onTap: () {
+                          setState(() {
+                            _passagesFuture = loadJlptReadingBank();
+                          });
+                        },
+                      )
+                    else if ((snapshot.data ?? const <JlptReadingPassage>[])
+                        .isEmpty)
+                      _InlineNoticeCard(
+                        title: _tr(
+                          language,
+                          'No reading sets yet',
+                          'Chưa có bộ bài đọc',
+                          '読解セットはまだありません',
+                        ),
+                        message: _tr(
+                          language,
+                          'Add immersion lesson files to populate this screen.',
+                          'Hãy thêm các file lesson immersion để màn này có dữ liệu.',
+                          'immersion lesson ファイルを追加すると、この画面に表示されます。',
+                        ),
+                      )
+                    else
+                      ...snapshot.data!.map(
+                        (entry) => Padding(
+                          padding: const EdgeInsets.only(bottom: 12),
+                          child: _ReadingPassageCard(
+                            title: entry.title,
+                            meta:
+                                '${entry.level} • ${entry.questions.length}Q • ${entry.recommendedMinutes}m',
+                            buttonLabel: _startLabel(language),
+                            onTap: () => _startPassage(entry),
+                          ),
+                        ),
+                      ),
+                  ],
+                );
+              },
+            )
+          : _buildPassageView(context, language, passage),
+    );
+  }
+
+  Widget _buildPassageView(
+    BuildContext context,
+    AppLanguage language,
+    JlptReadingPassage passage,
+  ) {
+    final palette = context.appPalette;
+    final correct = _score(passage);
+    final elapsed = _startedAt == null
+        ? Duration.zero
+        : DateTime.now().difference(_startedAt!);
+
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
+      children: [
+        _HeaderHero(
+          title: passage.title,
+          subtitle: '${passage.level} • ${passage.questions.length}Q',
+          hint: _seriousHint(language),
+          icon: Icons.auto_stories_rounded,
+          trailing: _TimerBadge(
+            label: _formatTime(_secondsRemaining),
+            danger: _secondsRemaining <= 60,
           ),
         ),
-      ),
-      body: passage == null
-          ? ListView(
-              padding: const EdgeInsets.all(16),
-              children: [
-                Text(
-                  _tr(
-                    language,
-                    'Choose a passage and finish within the target time.',
-                    'Ch?n ?o?n v?n v? ho?n th?nh trong th?i gian m?c ti?u.',
-                    '???????????????????',
-                  ),
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF475569),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                ...jlptReadingBank.map(
-                  (entry) => Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: Card(
-                      child: ListTile(
-                        title: Text(entry.title),
-                        subtitle: Text(
-                          '${entry.level} | ${entry.questions.length}Q | ${entry.recommendedMinutes}m',
-                        ),
-                        trailing: const Icon(Icons.play_arrow_rounded),
-                        onTap: () => _startPassage(entry),
-                      ),
-                    ),
-                  ),
-                ),
+        const SizedBox(height: 12),
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: palette.base,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: palette.outline),
+          ),
+          child: Text(
+            passage.body,
+            style: TextStyle(fontSize: 15, height: 1.75, color: palette.ink),
+          ),
+        ),
+        const SizedBox(height: 14),
+        ...List.generate(passage.questions.length, (index) {
+          final question = passage.questions[index];
+          final selected = _answers[question.id];
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 14),
+            child: _QuestionCard(
+              index: index + 1,
+              typeLabel: _questionTypeLabel(language, question.type),
+              prompt: question.prompt,
+              options: question.options,
+              selectedIndex: selected,
+              submitted: _submitted,
+              correctIndex: question.correctIndex,
+              explanation: _submitted ? question.explanation : null,
+              onSelect: (optionIndex) {
+                if (_submitted) return;
+                setState(() {
+                  _answers[question.id] = optionIndex;
+                });
+              },
+            ),
+          );
+        }),
+        if (_submitted) ...[
+          _ResultCard(
+            title: _scoreSummary(language, correct, passage.questions.length),
+            subtitle: _timeSpentLabel(language, elapsed),
+            accent: correct / passage.questions.length >= 0.6
+                ? palette.success
+                : palette.warning,
+          ),
+          const SizedBox(height: 12),
+          if (_snapshot != null)
+            _DiagnosisCard(
+              title: _tr(
+                language,
+                'Reading diagnosis',
+                'Chẩn đoán đọc hiểu',
+                '読解診断',
+              ),
+              stats: [
+                _snapshot!.profile.statFor(JlptSkillArea.reading),
+                ...JlptSkillArea.values
+                    .where((area) => area != JlptSkillArea.reading)
+                    .map(_snapshot!.profile.statFor),
               ],
-            )
-          : ListView(
-              padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: const Color(0xFFDCE8F8)),
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              passage.title,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w900,
-                                fontSize: 17,
-                              ),
-                            ),
-                            const SizedBox(height: 2),
-                            Text(
-                              '${passage.level} | ${passage.questions.length}Q',
-                              style: const TextStyle(
-                                color: Color(0xFF64748B),
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 6,
-                        ),
-                        decoration: BoxDecoration(
-                          color: _secondsRemaining <= 60
-                              ? const Color(0xFFFEE2E2)
-                              : const Color(0xFFECFEFF),
-                          borderRadius: BorderRadius.circular(999),
-                        ),
-                        child: Text(
-                          _formatTime(_secondsRemaining),
-                          style: TextStyle(
-                            fontWeight: FontWeight.w900,
-                            color: _secondsRemaining <= 60
-                                ? const Color(0xFFB91C1C)
-                                : const Color(0xFF0F766E),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+              areaLabel: (area) => _areaLabel(language, area),
+              planTitle: _tr(
+                language,
+                'Next 3 actions',
+                '3 bước tiếp theo',
+                '次の3アクション',
+              ),
+              planItems: _snapshot!.plan.items.take(3).toList(growable: false),
+            ),
+          const SizedBox(height: 12),
+        ],
+        Row(
+          children: [
+            Expanded(
+              child: OutlinedButton.icon(
+                onPressed: () {
+                  _timer?.cancel();
+                  setState(() {
+                    _activePassage = null;
+                    _submitted = false;
+                    _snapshot = null;
+                  });
+                },
+                icon: const Icon(Icons.arrow_back_rounded),
+                label: Text(_backLabel(language)),
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: FilledButton.icon(
+                onPressed: _submitted ? () => _startPassage(passage) : _submit,
+                icon: Icon(
+                  _submitted
+                      ? Icons.restart_alt_rounded
+                      : Icons.task_alt_rounded,
                 ),
-                const SizedBox(height: 12),
-                Container(
-                  padding: const EdgeInsets.all(14),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: const Color(0xFFDCE8F8)),
-                  ),
-                  child: Text(
-                    passage.body,
-                    style: const TextStyle(height: 1.5, fontSize: 15),
-                  ),
+                label: Text(
+                  _submitted ? _restartLabel(language) : _submitLabel(language),
                 ),
-                const SizedBox(height: 12),
-                ...passage.questions.map((question) {
-                  final selected = _answers[question.id];
-                  final isCorrect = selected == question.correctIndex;
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: const Color(0xFFDCE8F8)),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            question.prompt,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w800,
-                              height: 1.35,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          ...List.generate(question.options.length, (index) {
-                            final isSelected = selected == index;
-                            return Padding(
-                              padding: const EdgeInsets.only(bottom: 6),
-                              child: InkWell(
-                                onTap: _submitted
-                                    ? null
-                                    : () {
-                                        setState(() {
-                                          _answers[question.id] = index;
-                                        });
-                                      },
-                                borderRadius: BorderRadius.circular(10),
-                                child: Container(
-                                  width: double.infinity,
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 10,
-                                    vertical: 10,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: isSelected
-                                        ? const Color(0xFFE0E7FF)
-                                        : const Color(0xFFF8FAFC),
-                                    borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(
-                                      color: isSelected
-                                          ? const Color(0xFFA5B4FC)
-                                          : const Color(0xFFE2E8F0),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    question.options[index],
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      color: Color(0xFF1E293B),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            );
-                          }),
-                          if (_submitted) ...[
-                            const SizedBox(height: 6),
-                            Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                color: isCorrect
-                                    ? const Color(0xFFDCFCE7)
-                                    : const Color(0xFFFEE2E2),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Text(
-                                '\\n',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  height: 1.4,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ],
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _HeaderHero extends StatelessWidget {
+  const _HeaderHero({
+    required this.title,
+    required this.subtitle,
+    required this.hint,
+    required this.icon,
+    this.trailing,
+  });
+
+  final String title;
+  final String subtitle;
+  final String hint;
+  final IconData icon;
+  final Widget? trailing;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return Container(
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [palette.primary.withValues(alpha: 0.12), palette.base],
+        ),
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: palette.outline),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: palette.elevated,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: palette.outlineSoft),
+                ),
+                child: Icon(icon, color: palette.primary),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 21,
+                        fontWeight: FontWeight.w900,
+                        color: palette.ink,
                       ),
                     ),
-                  );
-                }),
-                const SizedBox(height: 4),
-                if (!_submitted)
-                  FilledButton.icon(
-                    onPressed: _answers.length == passage.questions.length
-                        ? _submit
-                        : null,
-                    icon: const Icon(Icons.task_alt_rounded),
-                    label: Text(_tr(language, 'Submit', 'N?p b?i', '??')),
-                  )
-                else ...[
-                  Builder(
-                    builder: (context) {
-                      final correct = _score(passage);
-                      final total = passage.questions.length;
-                      final elapsed = _startedAt == null
-                          ? Duration.zero
-                          : DateTime.now().difference(_startedAt!);
-                      return Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFEFF6FF),
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: const Color(0xFFBFDBFE)),
-                        ),
-                        child: Text(
-                          _tr(
-                            language,
-                            'Score: $correct/$total | Time: ${elapsed.inMinutes}m ${elapsed.inSeconds % 60}s',
-                            '\u0110i\u1ec3m: $correct/$total | Th\u1eddi gian: ${elapsed.inMinutes}p ${elapsed.inSeconds % 60}s',
-                            '???: $correct/$total | ??: ${elapsed.inMinutes}?${elapsed.inSeconds % 60}?',
-                          ),
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w800,
-                            color: Color(0xFF1E3A8A),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                  if (_snapshot != null) ...[
-                    const SizedBox(height: 10),
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFF8FAFC),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: const Color(0xFFE2E8F0)),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            _tr(
-                              language,
-                              'Auto 7-day plan',
-                              'K? ho?ch 7 ng?y t? ??ng',
-                              '??7????',
-                            ),
-                            style: const TextStyle(fontWeight: FontWeight.w900),
-                          ),
-                          const SizedBox(height: 8),
-                          ..._snapshot!.plan.items
-                              .take(3)
-                              .map(
-                                (item) => Padding(
-                                  padding: const EdgeInsets.only(bottom: 6),
-                                  child: Text(
-                                    'D${item.dayOffset + 1} - ${_areaLabel(language, item.area)} - ${item.minutes}m: ${item.action}',
-                                    style: const TextStyle(
-                                      fontSize: 12.5,
-                                      color: Color(0xFF334155),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                        ],
+                    const SizedBox(height: 6),
+                    Text(
+                      subtitle,
+                      style: TextStyle(
+                        color: palette.ink.withValues(alpha: 0.76),
+                        fontWeight: FontWeight.w600,
+                        height: 1.4,
                       ),
                     ),
                   ],
-                  const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: OutlinedButton.icon(
-                          onPressed: () => _startPassage(passage),
-                          icon: const Icon(Icons.restart_alt_rounded),
-                          label: Text(
-                            _tr(language, 'Retry', 'Làm lại', 'やり直す'),
-                          ),
-                        ),
+                ),
+              ),
+              if (trailing != null) ...[const SizedBox(width: 10), trailing!],
+            ],
+          ),
+          const SizedBox(height: 12),
+          Text(
+            hint,
+            style: TextStyle(
+              color: palette.ink.withValues(alpha: 0.72),
+              height: 1.4,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ReadingPassageCard extends StatelessWidget {
+  const _ReadingPassageCard({
+    required this.title,
+    required this.meta,
+    required this.buttonLabel,
+    required this.onTap,
+  });
+
+  final String title;
+  final String meta;
+  final String buttonLabel;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: palette.elevated,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: palette.outlineSoft),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontWeight: FontWeight.w800,
+              fontSize: 16,
+              color: palette.ink,
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            meta,
+            style: TextStyle(
+              color: palette.ink.withValues(alpha: 0.64),
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: FilledButton.icon(
+              onPressed: onTap,
+              icon: const Icon(Icons.play_arrow_rounded),
+              label: Text(buttonLabel),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _QuestionCard extends StatelessWidget {
+  const _QuestionCard({
+    required this.index,
+    required this.typeLabel,
+    required this.prompt,
+    required this.options,
+    required this.selectedIndex,
+    required this.submitted,
+    required this.correctIndex,
+    required this.onSelect,
+    this.explanation,
+  });
+
+  final int index;
+  final String typeLabel;
+  final String prompt;
+  final List<String> options;
+  final int? selectedIndex;
+  final bool submitted;
+  final int correctIndex;
+  final ValueChanged<int> onSelect;
+  final String? explanation;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: palette.elevated,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: palette.outlineSoft),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  color: palette.primary.withValues(alpha: 0.10),
+                  borderRadius: BorderRadius.circular(999),
+                ),
+                child: Text(
+                  '$index',
+                  style: TextStyle(
+                    color: palette.primary,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  color: palette.secondary.withValues(alpha: 0.10),
+                  borderRadius: BorderRadius.circular(999),
+                ),
+                child: Text(
+                  typeLabel,
+                  style: TextStyle(
+                    color: palette.secondary,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Text(
+            prompt,
+            style: TextStyle(
+              fontWeight: FontWeight.w800,
+              color: palette.ink,
+              height: 1.4,
+            ),
+          ),
+          const SizedBox(height: 10),
+          ...List.generate(options.length, (optionIndex) {
+            final selected = selectedIndex == optionIndex;
+            final isCorrect = optionIndex == correctIndex;
+            final bgColor = submitted
+                ? (isCorrect
+                      ? palette.success.withValues(alpha: 0.12)
+                      : (selected
+                            ? palette.error.withValues(alpha: 0.12)
+                            : palette.base))
+                : (selected
+                      ? palette.primary.withValues(alpha: 0.12)
+                      : palette.base);
+            final borderColor = submitted
+                ? (isCorrect
+                      ? palette.success.withValues(alpha: 0.35)
+                      : (selected
+                            ? palette.error.withValues(alpha: 0.35)
+                            : palette.outlineSoft))
+                : (selected
+                      ? palette.primary.withValues(alpha: 0.35)
+                      : palette.outlineSoft);
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: submitted ? null : () => onSelect(optionIndex),
+                  borderRadius: BorderRadius.circular(14),
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: bgColor,
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(color: borderColor),
+                    ),
+                    child: Text(
+                      options[optionIndex],
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: palette.ink,
+                        height: 1.35,
                       ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: FilledButton.icon(
-                          onPressed: () {
-                            _timer?.cancel();
-                            setState(() {
-                              _activePassage = null;
-                              _answers.clear();
-                              _submitted = false;
-                              _secondsRemaining = 0;
-                              _startedAt = null;
-                            });
-                          },
-                          icon: const Icon(Icons.list_rounded),
-                          label: Text(
-                            _tr(
-                              language,
-                              'Back to list',
-                              'Về danh sách',
-                              '一覧へ戻る',
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
+                  ),
+                ),
+              ),
+            );
+          }),
+          if (submitted &&
+              explanation != null &&
+              explanation!.trim().isNotEmpty) ...[
+            const SizedBox(height: 8),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: palette.base,
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(color: palette.outline),
+              ),
+              child: Text(
+                explanation!,
+                style: TextStyle(
+                  color: palette.ink.withValues(alpha: 0.78),
+                  height: 1.4,
+                ),
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _TimerBadge extends StatelessWidget {
+  const _TimerBadge({required this.label, required this.danger});
+
+  final String label;
+  final bool danger;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    final color = danger ? palette.error : palette.secondary;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(color: color.withValues(alpha: 0.25)),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(fontWeight: FontWeight.w900, color: color),
+      ),
+    );
+  }
+}
+
+class _ResultCard extends StatelessWidget {
+  const _ResultCard({
+    required this.title,
+    required this.subtitle,
+    required this.accent,
+  });
+
+  final String title;
+  final String subtitle;
+  final Color accent;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: accent.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: accent.withValues(alpha: 0.22)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(fontWeight: FontWeight.w900, color: accent),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            subtitle,
+            style: TextStyle(color: accent.withValues(alpha: 0.86)),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DiagnosisCard extends StatelessWidget {
+  const _DiagnosisCard({
+    required this.title,
+    required this.stats,
+    required this.areaLabel,
+    required this.planTitle,
+    required this.planItems,
+  });
+
+  final String title;
+  final List<JlptAreaStat> stats;
+  final String Function(JlptSkillArea area) areaLabel;
+  final String planTitle;
+  final List<JlptPlanItem> planItems;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: palette.elevated,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: palette.outlineSoft),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(fontWeight: FontWeight.w900, color: palette.ink),
+          ),
+          const SizedBox(height: 12),
+          ...stats.take(4).map((stat) {
+            final accuracy = stat.total == 0
+                ? 0.0
+                : (stat.correct / stat.total);
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${areaLabel(stat.area)} • ${stat.correct}/${stat.total}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      color: palette.ink.withValues(alpha: 0.84),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(999),
+                    child: LinearProgressIndicator(
+                      value: accuracy,
+                      minHeight: 8,
+                      backgroundColor: palette.base,
+                      color: accuracy >= 0.6
+                          ? palette.success
+                          : palette.warning,
+                    ),
                   ),
                 ],
-              ],
+              ),
+            );
+          }),
+          if (planItems.isNotEmpty) ...[
+            const SizedBox(height: 4),
+            Text(
+              planTitle,
+              style: TextStyle(fontWeight: FontWeight.w800, color: palette.ink),
             ),
+            const SizedBox(height: 8),
+            ...planItems.map(
+              (item) => Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Text(
+                  '• ${item.focus} — ${item.action}',
+                  style: TextStyle(
+                    color: palette.ink.withValues(alpha: 0.76),
+                    height: 1.4,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _InlineNoticeCard extends StatelessWidget {
+  const _InlineNoticeCard({
+    required this.title,
+    required this.message,
+    this.actionLabel,
+    this.onTap,
+  });
+
+  final String title;
+  final String message;
+  final String? actionLabel;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: palette.elevated,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: palette.outlineSoft),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(fontWeight: FontWeight.w900, color: palette.ink),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            message,
+            style: TextStyle(
+              color: palette.ink.withValues(alpha: 0.74),
+              height: 1.4,
+            ),
+          ),
+          if (actionLabel != null && onTap != null) ...[
+            const SizedBox(height: 12),
+            OutlinedButton.icon(
+              onPressed: onTap,
+              icon: const Icon(Icons.refresh_rounded),
+              label: Text(actionLabel!),
+            ),
+          ],
+        ],
+      ),
     );
   }
 }

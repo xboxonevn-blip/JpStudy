@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/theme/app_breakpoints.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 
@@ -14,6 +15,7 @@ class AppShellScaffold extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final language = ref.watch(appLanguageProvider);
     final items = _buildItems(language);
+    final palette = context.appPalette;
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -27,7 +29,8 @@ class AppShellScaffold extends ConsumerWidget {
                   onDestinationSelected: (index) => _goToBranch(index),
                   labelType: NavigationRailLabelType.all,
                   groupAlignment: -0.85,
-                  backgroundColor: const Color(0xFFF8FBFF),
+                  backgroundColor: palette.base,
+                  indicatorColor: palette.primary.withValues(alpha: 0.12),
                   leading: Padding(
                     padding: const EdgeInsets.fromLTRB(12, 16, 12, 24),
                     child: Column(
@@ -37,22 +40,23 @@ class AppShellScaffold extends ConsumerWidget {
                           height: 48,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16),
-                            gradient: const LinearGradient(
-                              colors: [Color(0xFFE0F2FE), Color(0xFFFDE68A)],
+                            gradient: LinearGradient(
+                              colors: palette.heroGradient,
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                             ),
                           ),
                           child: const Icon(
                             Icons.auto_stories_rounded,
-                            color: Color(0xFF0F172A),
+                            color: Colors.white,
                           ),
                         ),
                         const SizedBox(height: 12),
                         Text(
                           'JpStudy',
-                          style: Theme.of(context).textTheme.titleSmall
-                              ?.copyWith(fontWeight: FontWeight.w800),
+                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                            fontWeight: FontWeight.w800,
+                          ),
                         ),
                       ],
                     ),
@@ -66,7 +70,7 @@ class AppShellScaffold extends ConsumerWidget {
                       ),
                   ],
                 ),
-                const VerticalDivider(width: 1),
+                VerticalDivider(width: 1, color: palette.outline),
                 Expanded(child: navigationShell),
               ],
             ),
@@ -76,9 +80,9 @@ class AppShellScaffold extends ConsumerWidget {
         return Scaffold(
           body: navigationShell,
           bottomNavigationBar: Container(
-            decoration: const BoxDecoration(
-              border: Border(top: BorderSide(color: Color(0xFFDCE8F8))),
-              boxShadow: [
+            decoration: BoxDecoration(
+              border: Border(top: BorderSide(color: palette.outline)),
+              boxShadow: const [
                 BoxShadow(
                   color: Color(0x102C3F59),
                   blurRadius: 10,
@@ -90,8 +94,8 @@ class AppShellScaffold extends ConsumerWidget {
               selectedIndex: navigationShell.currentIndex,
               onDestinationSelected: (index) => _goToBranch(index),
               height: 72,
-              backgroundColor: const Color(0xFFFDFEFF),
-              indicatorColor: const Color(0xFFDFF3FF),
+              backgroundColor: palette.base,
+              indicatorColor: palette.primary.withValues(alpha: 0.12),
               destinations: [
                 for (final item in items)
                   NavigationDestination(

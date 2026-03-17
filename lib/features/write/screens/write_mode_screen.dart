@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../../core/app_language.dart';
-import '../../../core/language_provider.dart';
-import '../../../data/models/vocab_item.dart';
-import '../../../data/models/kanji_item.dart';
-import '../../learn/models/learn_config.dart';
-import '../../learn/models/question_type.dart';
-import '../../learn/screens/learn_screen.dart';
-import 'handwriting_practice_screen.dart';
+import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/data/models/kanji_item.dart';
+import 'package:jpstudy/data/models/vocab_item.dart';
+import 'package:jpstudy/features/common/widgets/compact_ui.dart';
+import 'package:jpstudy/features/learn/models/learn_config.dart';
+import 'package:jpstudy/features/learn/models/question_type.dart';
+import 'package:jpstudy/features/learn/screens/learn_screen.dart';
+import 'package:jpstudy/features/write/screens/handwriting_practice_screen.dart';
 
 class WriteModeScreen extends ConsumerWidget {
   const WriteModeScreen({
@@ -67,63 +67,85 @@ class WriteModeScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text('${language.writeModeLabel}: $lessonTitle')),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          Text(
-            language.practiceHubSubtitle,
-            style: const TextStyle(fontSize: 13, color: Color(0xFF6B7390)),
-          ),
-          const SizedBox(height: 16),
-          _WriteModeCard(
-            icon: Icons.keyboard_rounded,
-            color: const Color(0xFF2563EB),
-            title: language.writeModeTypingLabel,
-            subtitle: language.writeModeTypingSubtitle,
-            countLabel: _buildCountLabel(
-              language: language,
-              dueCount: dueVocabItems.length,
-              totalLabel: language.termsCountLabel(vocabItems.length),
-            ),
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => LearnScreen(
-                    lessonId: lessonId,
-                    lessonTitle: lessonTitle,
-                    items: activeVocabItems,
-                    config: LearnConfig(
-                      questionCount: activeVocabItems.length,
-                      enabledTypes: const [QuestionType.fillBlank],
-                    ).normalized(maxQuestions: activeVocabItems.length),
-                  ),
+      body: AppPageShell(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AppFeatureCard(
+              icon: Icons.edit_note_rounded,
+              title: language.writeModeLabel,
+              subtitle: _heroSubtitle(
+                language,
+                vocabCount: activeVocabItems.length,
+                kanjiCount: activeKanjiItems.length,
+              ),
+              status: AppStatusChip(
+                label: _statusLabel(
+                  language,
+                  dueVocab: dueVocabItems.length,
+                  dueKanji: dueKanjiItems.length,
                 ),
-              );
-            },
-          ),
-          const SizedBox(height: 12),
-          _WriteModeCard(
-            icon: Icons.edit_rounded,
-            color: const Color(0xFF7C3AED),
-            title: language.writeModeHandwritingLabel,
-            subtitle: language.writeModeHandwritingSubtitle,
-            countLabel: _buildCountLabel(
-              language: language,
-              dueCount: dueKanjiItems.length,
-              totalLabel: language.kanjiCountLabel(kanjiItems.length),
+                tone: dueVocabItems.isNotEmpty || dueKanjiItems.isNotEmpty
+                    ? AppStatusTone.warning
+                    : AppStatusTone.neutral,
+              ),
             ),
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => HandwritingPracticeScreen(
-                    lessonTitle: lessonTitle,
-                    items: activeKanjiItems,
+            const SizedBox(height: 20),
+            AppSectionHeader(
+              title: _modeTitle(language),
+              caption: _modeCaption(language),
+            ),
+            const SizedBox(height: 10),
+            _WriteModeCard(
+              icon: Icons.keyboard_rounded,
+              title: language.writeModeTypingLabel,
+              subtitle: language.writeModeTypingSubtitle,
+              countLabel: _buildCountLabel(
+                language: language,
+                dueCount: dueVocabItems.length,
+                totalLabel: language.termsCountLabel(vocabItems.length),
+              ),
+              tone: AppStatusTone.primary,
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => LearnScreen(
+                      lessonId: lessonId,
+                      lessonTitle: lessonTitle,
+                      items: activeVocabItems,
+                      config: LearnConfig(
+                        questionCount: activeVocabItems.length,
+                        enabledTypes: const [QuestionType.fillBlank],
+                      ).normalized(maxQuestions: activeVocabItems.length),
+                    ),
                   ),
-                ),
-              );
-            },
-          ),
-        ],
+                );
+              },
+            ),
+            const SizedBox(height: 12),
+            _WriteModeCard(
+              icon: Icons.edit_rounded,
+              title: language.writeModeHandwritingLabel,
+              subtitle: language.writeModeHandwritingSubtitle,
+              countLabel: _buildCountLabel(
+                language: language,
+                dueCount: dueKanjiItems.length,
+                totalLabel: language.kanjiCountLabel(kanjiItems.length),
+              ),
+              tone: AppStatusTone.warning,
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => HandwritingPracticeScreen(
+                      lessonTitle: lessonTitle,
+                      items: activeKanjiItems,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -136,85 +158,84 @@ class WriteModeScreen extends ConsumerWidget {
     if (dueCount <= 0) {
       return totalLabel;
     }
-    return '${language.dueCountLabel(dueCount)} - $totalLabel';
+    return '${language.dueCountLabel(dueCount)} • $totalLabel';
   }
+
+  String _heroSubtitle(
+    AppLanguage language, {
+    required int vocabCount,
+    required int kanjiCount,
+  }) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Choose typing for recall speed or handwriting for stroke memory. $vocabCount vocab items and $kanjiCount kanji are ready.';
+      case AppLanguage.vi:
+        return 'Chọn typing để tăng recall tốc độ hoặc handwriting để khóa trí nhớ nét viết. Hiện có $vocabCount mục vocab và $kanjiCount kanji sẵn sàng.';
+      case AppLanguage.ja:
+        return 'typing で想起速度を上げるか、handwriting で筆順記憶を固めるかを選べます。$vocabCount 件の語彙と $kanjiCount 件の漢字が準備できています。';
+    }
+  }
+
+  String _statusLabel(
+    AppLanguage language, {
+    required int dueVocab,
+    required int dueKanji,
+  }) {
+    final totalDue = dueVocab + dueKanji;
+    if (totalDue <= 0) {
+      return switch (language) {
+        AppLanguage.en => 'Ready',
+        AppLanguage.vi => 'Sẵn sàng',
+        AppLanguage.ja => '準備完了',
+      };
+    }
+    return switch (language) {
+      AppLanguage.en => '$totalDue due',
+      AppLanguage.vi => '$totalDue đến hạn',
+      AppLanguage.ja => '$totalDue 件',
+    };
+  }
+
+  String _modeTitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Modes',
+    AppLanguage.vi => 'Chế độ',
+    AppLanguage.ja => 'モード',
+  };
+
+  String _modeCaption(AppLanguage language) => switch (language) {
+    AppLanguage.en =>
+      'One entry for typing recall, one entry for handwriting focus.',
+    AppLanguage.vi =>
+      'Một lối vào cho typing recall, một lối vào cho handwriting tập trung.',
+    AppLanguage.ja => 'typing 想起用と handwriting 集中用の 2 つの入口です。',
+  };
 }
 
 class _WriteModeCard extends StatelessWidget {
   const _WriteModeCard({
     required this.icon,
-    required this.color,
     required this.title,
     required this.subtitle,
     required this.countLabel,
+    required this.tone,
     required this.onTap,
   });
 
   final IconData icon;
-  final Color color;
   final String title;
   final String subtitle;
   final String countLabel;
+  final AppStatusTone tone;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(18),
-        onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.all(18),
-          child: Row(
-            children: [
-              Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: color.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: Icon(icon, color: color),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      subtitle,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Color(0xFF6B7390),
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      countLabel,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: color,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const Icon(Icons.arrow_forward_ios_rounded, size: 16),
-            ],
-          ),
-        ),
-      ),
+    return AppCompactRow(
+      icon: icon,
+      title: title,
+      subtitle: subtitle,
+      status: AppStatusChip(label: countLabel, tone: tone),
+      onTap: onTap,
     );
   }
 }

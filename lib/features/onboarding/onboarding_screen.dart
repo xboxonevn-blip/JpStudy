@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/study_goal.dart';
@@ -180,16 +181,16 @@ class _OnboardingLevelCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: AppSpacing.md),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE8ECF5)),
+        color: context.appPalette.elevated,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: context.appPalette.outline),
       ),
       child: ListTile(
         leading: Container(
           width: 44,
           height: 44,
           decoration: BoxDecoration(
-            color: const Color(0xFFEFF2FF),
+            color: context.appPalette.primary.withValues(alpha: 0.10),
             borderRadius: BorderRadius.circular(12),
           ),
           child: const Icon(Icons.folder_open, color: AppTheme.primary),
@@ -303,7 +304,7 @@ class _GoalCard extends StatelessWidget {
               : Colors.white,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: isSelected ? AppTheme.primary : const Color(0xFFE8ECF5),
+            color: isSelected ? AppTheme.primary : context.appPalette.outline,
             width: isSelected ? 2 : 1,
           ),
         ),
@@ -315,7 +316,7 @@ class _GoalCard extends StatelessWidget {
               decoration: BoxDecoration(
                 color: isSelected
                     ? AppTheme.primary.withValues(alpha: 0.15)
-                    : const Color(0xFFEFF2FF),
+                    : context.appPalette.primary.withValues(alpha: 0.10),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(
@@ -575,7 +576,7 @@ class _FirstWinPageState extends ConsumerState<_FirstWinPage> {
       case AppLanguage.vi:
         return 'Kiếm một chiến thắng nhỏ trước đã';
       case AppLanguage.ja:
-        return 'Get one quick win first';
+        return '最初に小さな成功をひとつ';
     }
   }
 
@@ -586,7 +587,7 @@ class _FirstWinPageState extends ConsumerState<_FirstWinPage> {
       case AppLanguage.vi:
         return 'Thử một câu hỏi nhỏ ngay bây giờ, rồi vào phiên học đầu tiên có hướng dẫn.';
       case AppLanguage.ja:
-        return 'Try one tiny question now, then jump into your first guided session.';
+        return '今すぐ小さな問題を1つ解いて、そのまま最初のガイド付きセッションへ進みましょう。';
     }
   }
 
@@ -597,7 +598,7 @@ class _FirstWinPageState extends ConsumerState<_FirstWinPage> {
       case AppLanguage.vi:
         return 'Đang chuẩn bị một ví dụ theo trình độ của bạn...';
       case AppLanguage.ja:
-        return 'Preparing a sample from your level...';
+        return 'あなたのレベルに合う例題を準備しています...';
     }
   }
 
@@ -608,7 +609,7 @@ class _FirstWinPageState extends ConsumerState<_FirstWinPage> {
       case AppLanguage.vi:
         return 'Trả lời câu hỏi xem trước này để mở khóa phiên học đầu tiên.';
       case AppLanguage.ja:
-        return 'Answer this one preview question to unlock your first session.';
+        return 'このプレビュー問題に答えて、最初のセッションを解放しましょう。';
     }
   }
 }
@@ -638,9 +639,9 @@ class _PreviewQuestionCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.appPalette.elevated,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFFE8ECF5)),
+        border: Border.all(color: context.appPalette.outline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -706,7 +707,7 @@ class _PreviewQuestionCard extends StatelessWidget {
       case AppLanguage.vi:
         return 'Từ này nghĩa là gì?';
       case AppLanguage.ja:
-        return 'What does this mean?';
+        return 'この言葉の意味は？';
     }
   }
 
@@ -717,7 +718,7 @@ class _PreviewQuestionCard extends StatelessWidget {
       case AppLanguage.vi:
         return 'Tốt. Đây là kiểu chiến thắng nhỏ mà phiên học đầu tiên sẽ đem lại.';
       case AppLanguage.ja:
-        return 'Nice. This is the kind of quick win your first session will give you.';
+        return 'いいですね。最初のセッションでは、こんな小さな達成を積み重ねていきます。';
     }
   }
 
@@ -728,7 +729,7 @@ class _PreviewQuestionCard extends StatelessWidget {
       case AppLanguage.vi:
         return 'Đáp án đúng: $answer';
       case AppLanguage.ja:
-        return 'Correct answer: $answer';
+        return '正解: $answer';
     }
   }
 }
@@ -764,7 +765,7 @@ class _PreviewOptionTile extends StatelessWidget {
         ? const Color(0xFFFEF2F2)
         : selected
         ? AppTheme.primary.withValues(alpha: 0.06)
-        : Colors.white;
+        : context.appPalette.elevated;
 
     return GestureDetector(
       onTap: onTap,
@@ -802,9 +803,9 @@ class _SessionPreview extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: const Color(0xFFF8FAFC),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE2E8F0)),
+        color: context.appPalette.base,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: context.appPalette.outline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -830,7 +831,7 @@ class _SessionPreview extends StatelessWidget {
   String _title(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Your first guided session';
+        return '最初のガイド付きセッション';
       case AppLanguage.vi:
         return 'Phiên học đầu tiên của bạn';
       case AppLanguage.ja:
@@ -841,7 +842,7 @@ class _SessionPreview extends StatelessWidget {
   String _step1(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return '1. Clear quick reviews first';
+        return '1. まず短い復習を終える';
       case AppLanguage.vi:
         return '1. Dọn lượt ôn ngắn trước';
       case AppLanguage.ja:
@@ -852,7 +853,7 @@ class _SessionPreview extends StatelessWidget {
   String _step2(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return '2. Fix weak terms while they are fresh';
+        return '2. まだ新しいうちに弱点を直す';
       case AppLanguage.vi:
         return '2. Sửa điểm yếu khi lỗi còn mới';
       case AppLanguage.ja:
@@ -863,7 +864,7 @@ class _SessionPreview extends StatelessWidget {
   String _step3(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return '3. Finish with one deeper study task';
+        return '3. 最後に1つ深い学習タスクで締める';
       case AppLanguage.vi:
         return '3. Kết phiên bằng một nhiệm vụ học sâu hơn';
       case AppLanguage.ja:
@@ -886,8 +887,9 @@ class _PreviewChip extends StatelessWidget {
         vertical: AppSpacing.sm,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        color: context.appPalette.elevated,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: context.appPalette.outlineSoft),
       ),
       child: Text(
         label,

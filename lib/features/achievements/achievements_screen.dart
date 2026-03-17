@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/models/streak_milestone.dart';
 import 'package:jpstudy/data/daos/achievement_dao.dart';
 import 'package:jpstudy/data/db/database_provider.dart';
-import 'package:jpstudy/features/common/widgets/clay_card.dart';
+import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/common/widgets/error_state_widget.dart';
-import 'package:jpstudy/features/learn/models/achievement.dart' as learn;
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
+import 'package:jpstudy/features/learn/models/achievement.dart' as learn;
 
-final achievementsProvider = FutureProvider<_AchievementWallData>((
-  ref,
-) async {
+final achievementsProvider = FutureProvider<_AchievementWallData>((ref) async {
   final db = ref.watch(databaseProvider);
   final dao = AchievementDao(db);
   final rows = await dao.getAchievements();
@@ -24,7 +23,6 @@ final achievementsProvider = FutureProvider<_AchievementWallData>((
       (t) => t.name == row.type,
       orElse: () => learn.AchievementType.perfectRound,
     );
-    // Keep the highest value per type for display.
     if (!earned.containsKey(type) || row.value > earned[type]!.value) {
       earned[type] = _AchievementEntry(
         type: type,
@@ -34,10 +32,7 @@ final achievementsProvider = FutureProvider<_AchievementWallData>((
     }
   }
 
-  return _AchievementWallData(
-    earned: earned,
-    streak: dashboard?.streak ?? 0,
-  );
+  return _AchievementWallData(earned: earned, streak: dashboard?.streak ?? 0);
 });
 
 class AchievementsScreen extends ConsumerWidget {
@@ -53,7 +48,7 @@ class AchievementsScreen extends ConsumerWidget {
       body: wallAsync.when(
         data: (data) => _AchievementWall(data: data, language: language),
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (err, stack) => ErrorStateWidget(error: err),
+        error: (error, stackTrace) => ErrorStateWidget(error: error),
       ),
     );
   }
@@ -69,56 +64,55 @@ class _AchievementWall extends StatelessWidget {
   Widget build(BuildContext context) {
     final unlockedCount = data.earned.length;
     final totalCount = learn.AchievementType.values.length;
-
-    // Group by category.
     final categories = _buildCategories();
 
-    return ListView(
-      padding: const EdgeInsets.fromLTRB(16, 8, 16, 96),
-      children: [
-        // Counter badge
-        _CounterBadge(unlocked: unlockedCount, total: totalCount),
-        const SizedBox(height: 16),
-        // Category sections
-        for (final category in categories) ...[
-          _CategoryHeader(
-            label: _categoryLabel(category.name, language),
-            icon: category.icon,
+    return AppPageShell(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _CounterBadge(
+            unlocked: unlockedCount,
+            total: totalCount,
+            language: language,
           ),
-          const SizedBox(height: 8),
-          GridView.count(
-            crossAxisCount: 2,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12,
-            childAspectRatio: 0.85,
-            children: category.types.map((type) {
-              final entry = data.earned[type];
-              return _AchievementTile(
-                type: type,
-                entry: entry,
-                unlocked: entry != null,
-                language: language,
-                progress: _progressFor(type, data),
-              );
-            }).toList(),
-          ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 16),
+          for (final category in categories) ...[
+            _CategoryHeader(
+              label: _categoryLabel(category.name, language),
+              icon: category.icon,
+            ),
+            const SizedBox(height: 8),
+            GridView.count(
+              crossAxisCount: 2,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              mainAxisSpacing: 12,
+              crossAxisSpacing: 12,
+              childAspectRatio: 0.85,
+              children: category.types.map((type) {
+                final entry = data.earned[type];
+                return _AchievementTile(
+                  type: type,
+                  entry: entry,
+                  unlocked: entry != null,
+                  language: language,
+                  progress: _progressFor(type, data),
+                );
+              }).toList(),
+            ),
+            const SizedBox(height: 20),
+          ],
         ],
-      ],
+      ),
     );
   }
 
   List<_Category> _buildCategories() {
-    return [
+    return const [
       _Category(
         name: 'milestones',
         icon: Icons.flag_rounded,
-        types: [
-          learn.AchievementType.streak,
-          learn.AchievementType.levelUp,
-        ],
+        types: [learn.AchievementType.streak, learn.AchievementType.levelUp],
       ),
       _Category(
         name: 'mastery',
@@ -179,41 +173,56 @@ class _AchievementWall extends StatelessWidget {
     learn.AchievementType type,
     _AchievementWallData data,
   ) {
-    if (type == learn.AchievementType.streak) {
-      final next = StreakMilestone.nextMilestone(data.streak);
-      if (next != null) {
-        return _ProgressInfo(
-          current: data.streak,
-          target: next.threshold,
-          label: '${data.streak}/${next.threshold}',
-        );
-      }
+    if (type != learn.AchievementType.streak) {
+      return null;
     }
-    return null;
+
+    final next = StreakMilestone.nextMilestone(data.streak);
+    if (next == null) {
+      return null;
+    }
+
+    return _ProgressInfo(
+      current: data.streak,
+      target: next.threshold,
+      label: '${data.streak}/${next.threshold}',
+    );
   }
 }
 
-// ─── Counter Badge ───────────────────────────
-
 class _CounterBadge extends StatelessWidget {
-  const _CounterBadge({required this.unlocked, required this.total});
+  const _CounterBadge({
+    required this.unlocked,
+    required this.total,
+    required this.language,
+  });
 
   final int unlocked;
   final int total;
+  final AppLanguage language;
+
+  String _unlockedLabel() {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Unlocked';
+      case AppLanguage.vi:
+        return 'Đã mở';
+      case AppLanguage.ja:
+        return '解除済み';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            const Color(0xFFF0FDF4),
-            const Color(0xFFECFDF5),
-          ],
+          colors: [palette.success.withValues(alpha: 0.10), palette.base],
         ),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF86EFAC)),
+        border: Border.all(color: palette.success.withValues(alpha: 0.22)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -234,11 +243,11 @@ class _CounterBadge extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           Text(
-            'Unlocked',
+            _unlockedLabel(),
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: const Color(0xFF16A34A).withValues(alpha: 0.7),
+              color: palette.success.withValues(alpha: 0.7),
             ),
           ),
         ],
@@ -246,8 +255,6 @@ class _CounterBadge extends StatelessWidget {
     );
   }
 }
-
-// ─── Category Header ─────────────────────────
 
 class _CategoryHeader extends StatelessWidget {
   const _CategoryHeader({required this.label, required this.icon});
@@ -257,24 +264,23 @@ class _CategoryHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Row(
       children: [
-        Icon(icon, size: 20, color: const Color(0xFF64748B)),
+        Icon(icon, size: 20, color: palette.ink.withValues(alpha: 0.64)),
         const SizedBox(width: 8),
         Text(
           label,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w700,
-            color: Color(0xFF374151),
+            color: palette.ink,
           ),
         ),
       ],
     );
   }
 }
-
-// ─── Achievement Tile ────────────────────────
 
 class _AchievementTile extends StatelessWidget {
   const _AchievementTile({
@@ -293,19 +299,18 @@ class _AchievementTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = unlocked ? type.color : Colors.grey.shade400;
+    final palette = context.appPalette;
+    final color = unlocked ? type.color : palette.ink.withValues(alpha: 0.25);
     final title = _titleFor(type, language);
     final hint = unlocked
         ? _descriptionFor(type, entry!.value, language)
         : _hintFor(type, language);
 
-    return ClayCard(
-      color: unlocked ? Colors.white : const Color(0xFFF1F5F9),
+    return AppSectionCard(
       padding: const EdgeInsets.all(14),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Icon circle
           Container(
             width: 56,
             height: 56,
@@ -318,13 +323,12 @@ class _AchievementTile extends StatelessWidget {
                 unlocked ? type.emoji : '?',
                 style: TextStyle(
                   fontSize: unlocked ? 28 : 24,
-                  color: unlocked ? null : Colors.grey.shade500,
+                  color: unlocked ? null : palette.ink.withValues(alpha: 0.40),
                 ),
               ),
             ),
           ),
           const SizedBox(height: 10),
-          // Title
           Text(
             title,
             textAlign: TextAlign.center,
@@ -334,12 +338,11 @@ class _AchievementTile extends StatelessWidget {
               fontSize: 13,
               fontWeight: FontWeight.w700,
               color: unlocked
-                  ? const Color(0xFF374151)
-                  : const Color(0xFF9CA3AF),
+                  ? palette.ink
+                  : palette.ink.withValues(alpha: 0.45),
             ),
           ),
           const SizedBox(height: 4),
-          // Hint / description
           Text(
             hint,
             textAlign: TextAlign.center,
@@ -348,17 +351,15 @@ class _AchievementTile extends StatelessWidget {
             style: TextStyle(
               fontSize: 11,
               color: unlocked
-                  ? const Color(0xFF6B7280)
-                  : const Color(0xFFBCC3CE),
+                  ? palette.ink.withValues(alpha: 0.70)
+                  : palette.ink.withValues(alpha: 0.42),
               height: 1.3,
             ),
           ),
-          // Progress bar (for streak)
           if (progress != null && !unlocked) ...[
             const SizedBox(height: 8),
             _MiniProgress(info: progress!),
           ],
-          // Earned date
           if (unlocked && entry?.earnedAt != null) ...[
             const Spacer(),
             Row(
@@ -372,9 +373,9 @@ class _AchievementTile extends StatelessWidget {
                 const SizedBox(width: 4),
                 Text(
                   _formatDate(context, entry!.earnedAt!),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 10,
-                    color: Color(0xFF9CA3AF),
+                    color: palette.ink.withValues(alpha: 0.42),
                   ),
                 ),
               ],
@@ -407,7 +408,7 @@ class _AchievementTile extends StatelessWidget {
         case learn.AchievementType.kanjiMaster:
           return 'Kanji Master';
         case learn.AchievementType.articleReader:
-          return 'Mọt sách';
+          return 'Đọc bài';
       }
     }
     if (language == AppLanguage.ja) {
@@ -526,6 +527,7 @@ class _AchievementTile extends StatelessWidget {
           return '5本の記事を読む';
       }
     }
+
     switch (type) {
       case learn.AchievementType.perfectRound:
         return 'Answer all questions correctly';
@@ -547,8 +549,6 @@ class _AchievementTile extends StatelessWidget {
   }
 }
 
-// ─── Mini Progress Bar ───────────────────────
-
 class _MiniProgress extends StatelessWidget {
   const _MiniProgress({required this.info});
 
@@ -556,6 +556,7 @@ class _MiniProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Column(
       children: [
         ClipRRect(
@@ -564,26 +565,24 @@ class _MiniProgress extends StatelessWidget {
             height: 6,
             child: LinearProgressIndicator(
               value: info.current / info.target,
-              backgroundColor: const Color(0xFFE2E8F0),
-              valueColor: const AlwaysStoppedAnimation(Color(0xFF3B82F6)),
+              backgroundColor: palette.outlineSoft,
+              valueColor: AlwaysStoppedAnimation<Color>(palette.accent),
             ),
           ),
         ),
         const SizedBox(height: 4),
         Text(
           info.label,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 10,
             fontWeight: FontWeight.w600,
-            color: Color(0xFF94A3B8),
+            color: palette.ink.withValues(alpha: 0.48),
           ),
         ),
       ],
     );
   }
 }
-
-// ─── Data Models ─────────────────────────────
 
 class _AchievementWallData {
   const _AchievementWallData({required this.earned, required this.streak});
@@ -604,18 +603,6 @@ class _AchievementEntry {
   final DateTime? earnedAt;
 }
 
-class _Category {
-  const _Category({
-    required this.name,
-    required this.icon,
-    required this.types,
-  });
-
-  final String name;
-  final IconData icon;
-  final List<learn.AchievementType> types;
-}
-
 class _ProgressInfo {
   const _ProgressInfo({
     required this.current,
@@ -626,4 +613,16 @@ class _ProgressInfo {
   final int current;
   final int target;
   final String label;
+}
+
+class _Category {
+  const _Category({
+    required this.name,
+    required this.icon,
+    required this.types,
+  });
+
+  final String name;
+  final IconData icon;
+  final List<learn.AchievementType> types;
 }

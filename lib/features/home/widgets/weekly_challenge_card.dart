@@ -15,10 +15,8 @@ class WeeklyChallengeCard extends ConsumerWidget {
     final language = ref.watch(appLanguageProvider);
 
     return challengeAsync.when(
-      data: (challenge) => _ChallengeContent(
-        challenge: challenge,
-        language: language,
-      ),
+      data: (challenge) =>
+          _ChallengeContent(challenge: challenge, language: language),
       loading: () => const SizedBox.shrink(),
       error: (_, _) => const SizedBox.shrink(),
     );
@@ -26,10 +24,7 @@ class WeeklyChallengeCard extends ConsumerWidget {
 }
 
 class _ChallengeContent extends StatelessWidget {
-  const _ChallengeContent({
-    required this.challenge,
-    required this.language,
-  });
+  const _ChallengeContent({required this.challenge, required this.language});
 
   final WeeklyChallenge challenge;
   final AppLanguage language;
@@ -39,12 +34,14 @@ class _ChallengeContent extends StatelessWidget {
     final description = _challengeDescription(challenge, language);
     final daysLeft = challenge.daysLeft;
     final daysLabel = switch (language) {
-      AppLanguage.en || AppLanguage.ja => '$daysLeft days left',
+      AppLanguage.en => '$daysLeft days left',
       AppLanguage.vi => 'Còn $daysLeft ngày',
+      AppLanguage.ja => '残り$daysLeft日',
     };
     final headerLabel = switch (language) {
-      AppLanguage.en || AppLanguage.ja => 'WEEKLY CHALLENGE',
+      AppLanguage.en => 'WEEKLY CHALLENGE',
       AppLanguage.vi => 'THỬ THÁCH TUẦN',
+      AppLanguage.ja => '週間チャレンジ',
     };
 
     return Padding(
@@ -151,10 +148,11 @@ class _ChallengeContent extends StatelessWidget {
               const SizedBox(height: 8),
               Text(
                 switch (language) {
-                  AppLanguage.en ||
-                  AppLanguage.ja => 'Challenge complete! +${WeeklyChallenge.bonusXp} XP',
+                  AppLanguage.en =>
+                    'Challenge complete! +${WeeklyChallenge.bonusXp} XP',
                   AppLanguage.vi =>
                     'Hoàn thành thử thách! +${WeeklyChallenge.bonusXp} XP',
+                  AppLanguage.ja => 'チャレンジ達成！ +${WeeklyChallenge.bonusXp} XP',
                 },
                 style: const TextStyle(
                   color: Color(0xFFA7F3D0),
@@ -169,34 +167,40 @@ class _ChallengeContent extends StatelessWidget {
     );
   }
 
-  String _challengeDescription(WeeklyChallenge c, AppLanguage lang) {
-    switch (c.type) {
+  String _challengeDescription(
+    WeeklyChallenge challenge,
+    AppLanguage language,
+  ) {
+    switch (challenge.type) {
       case ChallengeType.reviewCount:
-        return switch (lang) {
-          AppLanguage.en || AppLanguage.ja => 'Review ${c.target} items this week',
-          AppLanguage.vi => 'Ôn ${c.target} mục trong tuần này',
+        return switch (language) {
+          AppLanguage.en => 'Review ${challenge.target} items this week',
+          AppLanguage.vi => 'Ôn ${challenge.target} mục trong tuần này',
+          AppLanguage.ja => '今週は ${challenge.target} 件を復習',
         };
       case ChallengeType.accuracy:
-        return switch (lang) {
-          AppLanguage.en ||
-          AppLanguage.ja => 'Maintain ${c.target}% accuracy this week',
-          AppLanguage.vi => 'Duy trì ${c.target}% chính xác trong tuần',
+        return switch (language) {
+          AppLanguage.en => 'Maintain ${challenge.target}% accuracy this week',
+          AppLanguage.vi => 'Duy trì ${challenge.target}% chính xác trong tuần',
+          AppLanguage.ja => '今週は正答率 ${challenge.target}% を維持',
         };
       case ChallengeType.streakDays:
-        return switch (lang) {
-          AppLanguage.en || AppLanguage.ja => 'Study ${c.target} days this week',
-          AppLanguage.vi => 'Học ${c.target} ngày trong tuần này',
+        return switch (language) {
+          AppLanguage.en => 'Study ${challenge.target} days this week',
+          AppLanguage.vi => 'Học ${challenge.target} ngày trong tuần này',
+          AppLanguage.ja => '今週は ${challenge.target} 日学習',
         };
       case ChallengeType.xpTarget:
-        return switch (lang) {
-          AppLanguage.en || AppLanguage.ja => 'Earn ${c.target} XP this week',
-          AppLanguage.vi => 'Kiếm ${c.target} XP trong tuần này',
+        return switch (language) {
+          AppLanguage.en => 'Earn ${challenge.target} XP this week',
+          AppLanguage.vi => 'Kiếm ${challenge.target} XP trong tuần này',
+          AppLanguage.ja => '今週は ${challenge.target} XP を獲得',
         };
       case ChallengeType.lessonCount:
-        return switch (lang) {
-          AppLanguage.en ||
-          AppLanguage.ja => 'Complete ${c.target} lessons this week',
-          AppLanguage.vi => 'Hoàn thành ${c.target} bài trong tuần này',
+        return switch (language) {
+          AppLanguage.en => 'Complete ${challenge.target} lessons this week',
+          AppLanguage.vi => 'Hoàn thành ${challenge.target} bài trong tuần này',
+          AppLanguage.ja => '今週は ${challenge.target} レッスン完了',
         };
     }
   }

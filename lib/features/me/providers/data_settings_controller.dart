@@ -371,7 +371,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
       case AppLanguage.vi:
         return 'File đồng bộ liên kết';
       case AppLanguage.ja:
-        return 'Linked sync file';
+        return 'リンク済み同期ファイル';
     }
   }
 
@@ -382,7 +382,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
       case AppLanguage.vi:
         return 'Đang tải trạng thái file liên kết...';
       case AppLanguage.ja:
-        return 'Loading linked file status...';
+        return 'リンク済みファイルの状態を読み込み中...';
     }
   }
 
@@ -393,7 +393,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
       case AppLanguage.vi:
         return 'Chưa liên kết file đồng bộ nào.';
       case AppLanguage.ja:
-        return 'No linked sync file yet.';
+        return 'まだリンク済み同期ファイルはありません。';
     }
   }
 
@@ -404,7 +404,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
       case AppLanguage.vi:
         return 'File đã liên kết: $fileName';
       case AppLanguage.ja:
-        return 'Linked file: $fileName';
+        return 'リンク済みファイル: $fileName';
     }
   }
 
@@ -415,7 +415,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
       case AppLanguage.vi:
         return 'Chọn file có sẵn';
       case AppLanguage.ja:
-        return 'Choose existing file';
+        return '既存ファイルを選ぶ';
     }
   }
 
@@ -426,7 +426,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
       case AppLanguage.vi:
         return 'Tạo file mới';
       case AppLanguage.ja:
-        return 'Create new file';
+        return '新しいファイルを作成';
     }
   }
 
@@ -437,7 +437,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
       case AppLanguage.vi:
         return 'Tải lên file liên kết';
       case AppLanguage.ja:
-        return 'Upload to linked file';
+        return 'リンク済みファイルへアップロード';
     }
   }
 
@@ -448,7 +448,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
       case AppLanguage.vi:
         return 'Tải xuống từ file liên kết';
       case AppLanguage.ja:
-        return 'Download from linked file';
+        return 'リンク済みファイルからダウンロード';
     }
   }
 
@@ -459,7 +459,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
       case AppLanguage.vi:
         return 'Gỡ liên kết file';
       case AppLanguage.ja:
-        return 'Remove linked file';
+        return 'リンクを解除';
     }
   }
 
@@ -470,7 +470,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
       case AppLanguage.vi:
         return 'Hãy trỏ tới một file JSON trong Dropbox, Drive, Syncthing hoặc thư mục đang được đồng bộ.';
       case AppLanguage.ja:
-        return 'Point this at a JSON file inside Dropbox, Drive, Syncthing, or another synced folder.';
+        return 'Dropbox、Drive、Syncthing、または同期フォルダ内のJSONファイルを指定してください。';
     }
   }
 
@@ -506,7 +506,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
       case AppLanguage.vi:
         return 'Lần đồng bộ file cuối: $dateText${directionLabel.isEmpty ? '' : ' ($directionLabel)'}';
       case AppLanguage.ja:
-        return 'Last file sync: $dateText${directionLabel.isEmpty ? '' : ' ($directionLabel)'}';
+        return '最終ファイル同期: $dateText${directionLabel.isEmpty ? '' : ' ($directionLabel)'}';
     }
   }
 
@@ -517,7 +517,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
       case AppLanguage.vi:
         return 'Đã cập nhật file đồng bộ liên kết.';
       case AppLanguage.ja:
-        return 'Linked sync file updated.';
+        return 'リンク済み同期ファイルを更新しました。';
     }
   }
 
@@ -528,7 +528,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
       case AppLanguage.vi:
         return 'Đã gỡ file đồng bộ liên kết.';
       case AppLanguage.ja:
-        return 'Linked sync file removed.';
+        return 'リンク済み同期ファイルを削除しました。';
     }
   }
 
@@ -539,7 +539,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
       case AppLanguage.vi:
         return 'Hãy chọn hoặc tạo file đồng bộ liên kết trước.';
       case AppLanguage.ja:
-        return 'Choose or create a linked sync file first.';
+        return '先にリンク済み同期ファイルを選ぶか作成してください。';
     }
   }
 
@@ -550,7 +550,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
       case AppLanguage.vi:
         return 'Đã tải bản sao lưu lên file đồng bộ liên kết.';
       case AppLanguage.ja:
-        return 'Uploaded backup to linked sync file.';
+        return 'バックアップをリンク済み同期ファイルへアップロードしました。';
     }
   }
 
@@ -561,7 +561,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
       case AppLanguage.vi:
         return 'Không ghi được file đồng bộ liên kết.';
       case AppLanguage.ja:
-        return 'Failed to write linked sync file.';
+        return 'リンク済み同期ファイルへ書き込めませんでした。';
     }
   }
 
@@ -572,7 +572,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
       case AppLanguage.vi:
         return 'Đã tải bản sao lưu từ file đồng bộ liên kết.';
       case AppLanguage.ja:
-        return 'Downloaded backup from linked sync file.';
+        return 'リンク済み同期ファイルからバックアップを取得しました。';
     }
   }
 
@@ -583,7 +583,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
       case AppLanguage.vi:
         return 'File đồng bộ liên kết không hợp lệ hoặc không đọc được.';
       case AppLanguage.ja:
-        return 'Linked sync file is invalid or unreadable.';
+        return 'リンク済み同期ファイルが無効か、読み取れません。';
     }
   }
 
@@ -594,7 +594,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
       case AppLanguage.vi:
         return 'File đồng bộ liên kết chưa tồn tại.';
       case AppLanguage.ja:
-        return 'Linked sync file does not exist yet.';
+        return 'リンク済み同期ファイルはまだ存在しません。';
     }
   }
 
@@ -605,7 +605,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
       case AppLanguage.vi:
         return 'Bỏ qua vì file sắp nhập cũ hơn dữ liệu hiện tại.';
       case AppLanguage.ja:
-        return 'Skipped because the incoming file is older than local data.';
+        return '受信ファイルがローカルデータより古いためスキップしました。';
     }
   }
 

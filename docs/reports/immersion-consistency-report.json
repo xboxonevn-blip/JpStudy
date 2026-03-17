@@ -1,0 +1,917 @@
+{
+  "schemaVersion": 1,
+  "dataset": "immersion",
+  "levels": [
+    {
+      "level": "N5",
+      "fileCount": 25,
+      "nonPunctuationTokenCount": 759,
+      "glossableTokenCount": 453,
+      "readingCoverage": 0.4295,
+      "meaningCoverage": 0.7128,
+      "glossableMeaningCoverage": 0.9669,
+      "shortKanaWithoutMeaningRatio": 0.2675,
+      "avgTokensPerParagraph": 5.2,
+      "titleFuriganaMissingCount": 0,
+      "topEmptyMeaningSurfaces": [
+        [
+          "は",
+          47
+        ],
+        [
+          "です",
+          41
+        ],
+        [
+          "を",
+          34
+        ],
+        [
+          "が",
+          17
+        ],
+        [
+          "に",
+          11
+        ],
+        [
+          "の",
+          9
+        ],
+        [
+          "お",
+          8
+        ],
+        [
+          "と",
+          5
+        ],
+        [
+          "で",
+          5
+        ],
+        [
+          "か",
+          4
+        ],
+        [
+          "へ",
+          3
+        ],
+        [
+          "でした",
+          3
+        ],
+        [
+          "き",
+          3
+        ],
+        [
+          "って",
+          3
+        ],
+        [
+          "ります",
+          3
+        ],
+        [
+          "ですか",
+          2
+        ],
+        [
+          "あります",
+          2
+        ],
+        [
+          "しい",
+          2
+        ],
+        [
+          "い",
+          2
+        ],
+        [
+          "ます",
+          2
+        ],
+        [
+          "し",
+          2
+        ],
+        [
+          "きい",
+          1
+        ],
+        [
+          "くない",
+          1
+        ],
+        [
+          "く",
+          1
+        ],
+        [
+          "きます",
+          1
+        ],
+        [
+          "べます",
+          1
+        ],
+        [
+          "り",
+          1
+        ],
+        [
+          "う",
+          1
+        ],
+        [
+          "かります",
+          1
+        ],
+        [
+          "がって",
+          1
+        ]
+      ],
+      "topMissingGlossableSurfaces": [
+        [
+          "でした",
+          3
+        ],
+        [
+          "ります",
+          3
+        ],
+        [
+          "ですか",
+          2
+        ],
+        [
+          "あります",
+          2
+        ],
+        [
+          "くない",
+          1
+        ],
+        [
+          "きます",
+          1
+        ],
+        [
+          "べます",
+          1
+        ],
+        [
+          "かります",
+          1
+        ],
+        [
+          "がって",
+          1
+        ]
+      ],
+      "lowestCoverageLessons": [
+        {
+          "path": "assets/data/content/immersion/n5/lesson_11.json",
+          "id": "n5-lesson-11",
+          "title": "私の部屋",
+          "translation": "Phòng của tôi",
+          "paragraphCount": 6,
+          "tokenCoverage": 0.5385,
+          "glossableCoverage": 0.8571,
+          "fragmentRatio": 0.3846
+        },
+        {
+          "path": "assets/data/content/immersion/n5/lesson_05.json",
+          "id": "n5-lesson-05",
+          "title": "今日の天気",
+          "translation": "Thời tiết hôm nay",
+          "paragraphCount": 6,
+          "tokenCoverage": 0.56,
+          "glossableCoverage": 0.9231,
+          "fragmentRatio": 0.4
+        },
+        {
+          "path": "assets/data/content/immersion/n5/lesson_07.json",
+          "id": "n5-lesson-07",
+          "title": "駅で",
+          "translation": "Tại nhà ga",
+          "paragraphCount": 7,
+          "tokenCoverage": 0.6818,
+          "glossableCoverage": 0.9231,
+          "fragmentRatio": 0.2727
+        },
+        {
+          "path": "assets/data/content/immersion/n5/lesson_08.json",
+          "id": "n5-lesson-08",
+          "title": "レストラン",
+          "translation": "Nhà hàng",
+          "paragraphCount": 8,
+          "tokenCoverage": 0.68,
+          "glossableCoverage": 0.9286,
+          "fragmentRatio": 0.28
+        },
+        {
+          "path": "assets/data/content/immersion/n5/lesson_21.json",
+          "id": "n5-lesson-21",
+          "title": "お正月",
+          "translation": "Tết (Oshogatsu)",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.6667,
+          "glossableCoverage": 0.9412,
+          "fragmentRatio": 0.303
+        },
+        {
+          "path": "assets/data/content/immersion/n5/lesson_04.json",
+          "id": "n5-lesson-04",
+          "title": "スーパーで買い物",
+          "translation": "Mua sắm tại siêu thị",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.72,
+          "glossableCoverage": 0.9444,
+          "fragmentRatio": 0.24
+        },
+        {
+          "path": "assets/data/content/immersion/n5/lesson_20.json",
+          "id": "n5-lesson-20",
+          "title": "冬休み",
+          "translation": "Kỳ nghỉ đông",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.7353,
+          "glossableCoverage": 0.9444,
+          "fragmentRatio": 0.2353
+        },
+        {
+          "path": "assets/data/content/immersion/n5/lesson_18.json",
+          "id": "n5-lesson-18",
+          "title": "電話",
+          "translation": "Điện thoại",
+          "paragraphCount": 8,
+          "tokenCoverage": 0.8667,
+          "glossableCoverage": 0.9444,
+          "fragmentRatio": 0.1
+        },
+        {
+          "path": "assets/data/content/immersion/n5/lesson_23.json",
+          "id": "n5-lesson-23",
+          "title": "道を尋ねる",
+          "translation": "Hỏi đường",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.8621,
+          "glossableCoverage": 0.9474,
+          "fragmentRatio": 0.1034
+        },
+        {
+          "path": "assets/data/content/immersion/n5/lesson_12.json",
+          "id": "n5-lesson-12",
+          "title": "昨日の日記",
+          "translation": "Nhật ký hôm qua",
+          "paragraphCount": 6,
+          "tokenCoverage": 0.6897,
+          "glossableCoverage": 0.95,
+          "fragmentRatio": 0.2759
+        }
+      ]
+    },
+    {
+      "level": "N4",
+      "fileCount": 25,
+      "nonPunctuationTokenCount": 1030,
+      "glossableTokenCount": 566,
+      "readingCoverage": 0.4146,
+      "meaningCoverage": 0.7563,
+      "glossableMeaningCoverage": 0.9823,
+      "shortKanaWithoutMeaningRatio": 0.234,
+      "avgTokensPerParagraph": 8.8,
+      "titleFuriganaMissingCount": 0,
+      "topEmptyMeaningSurfaces": [
+        [
+          "は",
+          43
+        ],
+        [
+          "を",
+          37
+        ],
+        [
+          "が",
+          32
+        ],
+        [
+          "に",
+          18
+        ],
+        [
+          "お",
+          10
+        ],
+        [
+          "の",
+          9
+        ],
+        [
+          "しい",
+          8
+        ],
+        [
+          "く",
+          7
+        ],
+        [
+          "な",
+          5
+        ],
+        [
+          "って",
+          5
+        ],
+        [
+          "です",
+          4
+        ],
+        [
+          "と",
+          4
+        ],
+        [
+          "る",
+          4
+        ],
+        [
+          "ます",
+          4
+        ],
+        [
+          "える",
+          4
+        ],
+        [
+          "か",
+          3
+        ],
+        [
+          "れ",
+          3
+        ],
+        [
+          "くて",
+          2
+        ],
+        [
+          "しみ",
+          2
+        ],
+        [
+          "ら",
+          2
+        ],
+        [
+          "す",
+          2
+        ],
+        [
+          "きます",
+          2
+        ],
+        [
+          "べ",
+          2
+        ],
+        [
+          "れて",
+          2
+        ],
+        [
+          "い",
+          2
+        ],
+        [
+          "まる",
+          2
+        ],
+        [
+          "しく",
+          2
+        ],
+        [
+          "れる",
+          2
+        ],
+        [
+          "り",
+          1
+        ],
+        [
+          "えて",
+          1
+        ]
+      ],
+      "topMissingGlossableSurfaces": [
+        [
+          "きます",
+          2
+        ],
+        [
+          "ります",
+          1
+        ],
+        [
+          "めます",
+          1
+        ],
+        [
+          "れます",
+          1
+        ],
+        [
+          "よると",
+          1
+        ],
+        [
+          "ください",
+          1
+        ],
+        [
+          "わります",
+          1
+        ],
+        [
+          "みます",
+          1
+        ],
+        [
+          "かって",
+          1
+        ]
+      ],
+      "lowestCoverageLessons": [
+        {
+          "path": "assets/data/content/immersion/n4/lesson_32.json",
+          "id": "n4-lesson-32",
+          "title": "料理を作る",
+          "translation": "Nấu ăn",
+          "paragraphCount": 6,
+          "tokenCoverage": 0.6842,
+          "glossableCoverage": 0.8636,
+          "fragmentRatio": 0.2368
+        },
+        {
+          "path": "assets/data/content/immersion/n4/lesson_38.json",
+          "id": "n4-lesson-38",
+          "title": "ゴミの出し方",
+          "translation": "Cách vứt rác",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.7692,
+          "glossableCoverage": 0.9333,
+          "fragmentRatio": 0.2051
+        },
+        {
+          "path": "assets/data/content/immersion/n4/lesson_37.json",
+          "id": "n4-lesson-37",
+          "title": "台風",
+          "translation": "Bão",
+          "paragraphCount": 4,
+          "tokenCoverage": 0.6923,
+          "glossableCoverage": 0.95,
+          "fragmentRatio": 0.2821
+        },
+        {
+          "path": "assets/data/content/immersion/n4/lesson_39.json",
+          "id": "n4-lesson-39",
+          "title": "美容院",
+          "translation": "Tiệm cắt tóc (Làm đẹp)",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.7297,
+          "glossableCoverage": 0.9545,
+          "fragmentRatio": 0.2432
+        },
+        {
+          "path": "assets/data/content/immersion/n4/lesson_50.json",
+          "id": "n4-lesson-50",
+          "title": "卒業式",
+          "translation": "Lễ tốt nghiệp",
+          "paragraphCount": 4,
+          "tokenCoverage": 0.7317,
+          "glossableCoverage": 0.9545,
+          "fragmentRatio": 0.2439
+        },
+        {
+          "path": "assets/data/content/immersion/n4/lesson_43.json",
+          "id": "n4-lesson-43",
+          "title": "日本の電車",
+          "translation": "Tàu điện Nhật Bản",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.7805,
+          "glossableCoverage": 0.9565,
+          "fragmentRatio": 0.1951
+        },
+        {
+          "path": "assets/data/content/immersion/n4/lesson_31.json",
+          "id": "n4-lesson-31",
+          "title": "日本のマナー",
+          "translation": "Quy tắc ứng xử Nhật Bản",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.7234,
+          "glossableCoverage": 0.96,
+          "fragmentRatio": 0.2553
+        },
+        {
+          "path": "assets/data/content/immersion/n4/lesson_42.json",
+          "id": "n4-lesson-42",
+          "title": "桜の季節",
+          "translation": "Mùa hoa anh đào",
+          "paragraphCount": 4,
+          "tokenCoverage": 0.7347,
+          "glossableCoverage": 0.9615,
+          "fragmentRatio": 0.2449
+        },
+        {
+          "path": "assets/data/content/immersion/n4/lesson_40.json",
+          "id": "n4-lesson-40",
+          "title": "温泉",
+          "translation": "Suối nước nóng",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.6591,
+          "glossableCoverage": 1.0,
+          "fragmentRatio": 0.3409
+        },
+        {
+          "path": "assets/data/content/immersion/n4/lesson_27.json",
+          "id": "n4-lesson-27",
+          "title": "アルバイト",
+          "translation": "Việc làm thêm",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.6596,
+          "glossableCoverage": 1.0,
+          "fragmentRatio": 0.3404
+        }
+      ]
+    },
+    {
+      "level": "N3",
+      "fileCount": 25,
+      "nonPunctuationTokenCount": 1911,
+      "glossableTokenCount": 940,
+      "readingCoverage": 0.9995,
+      "meaningCoverage": 0.7227,
+      "glossableMeaningCoverage": 0.9074,
+      "shortKanaWithoutMeaningRatio": 0.2318,
+      "avgTokensPerParagraph": 15.29,
+      "titleFuriganaMissingCount": 0,
+      "topEmptyMeaningSurfaces": [
+        [
+          "に",
+          111
+        ],
+        [
+          "を",
+          94
+        ],
+        [
+          "は",
+          77
+        ],
+        [
+          "が",
+          62
+        ],
+        [
+          "いる",
+          31
+        ],
+        [
+          "し",
+          25
+        ],
+        [
+          "な",
+          13
+        ],
+        [
+          "か",
+          8
+        ],
+        [
+          "なる",
+          4
+        ],
+        [
+          "しまう",
+          3
+        ],
+        [
+          "くる",
+          2
+        ],
+        [
+          "考え",
+          2
+        ],
+        [
+          "身",
+          2
+        ],
+        [
+          "され",
+          2
+        ],
+        [
+          "など",
+          2
+        ],
+        [
+          "つながっ",
+          2
+        ],
+        [
+          "みる",
+          2
+        ],
+        [
+          "なっ",
+          1
+        ],
+        [
+          "やりたい",
+          1
+        ],
+        [
+          "未来",
+          1
+        ],
+        [
+          "家庭",
+          1
+        ],
+        [
+          "過剰",
+          1
+        ],
+        [
+          "片づける",
+          1
+        ],
+        [
+          "その後",
+          1
+        ],
+        [
+          "学び",
+          1
+        ],
+        [
+          "違い",
+          1
+        ],
+        [
+          "交換",
+          1
+        ],
+        [
+          "言う",
+          1
+        ],
+        [
+          "作り",
+          1
+        ],
+        [
+          "ネット",
+          1
+        ]
+      ],
+      "topMissingGlossableSurfaces": [
+        [
+          "しまう",
+          3
+        ],
+        [
+          "考え",
+          2
+        ],
+        [
+          "身",
+          2
+        ],
+        [
+          "つながっ",
+          2
+        ],
+        [
+          "やりたい",
+          1
+        ],
+        [
+          "未来",
+          1
+        ],
+        [
+          "家庭",
+          1
+        ],
+        [
+          "過剰",
+          1
+        ],
+        [
+          "片づける",
+          1
+        ],
+        [
+          "その後",
+          1
+        ],
+        [
+          "学び",
+          1
+        ],
+        [
+          "違い",
+          1
+        ],
+        [
+          "交換",
+          1
+        ],
+        [
+          "言う",
+          1
+        ],
+        [
+          "作り",
+          1
+        ],
+        [
+          "ネット",
+          1
+        ],
+        [
+          "通販",
+          1
+        ],
+        [
+          "買いすぎ",
+          1
+        ],
+        [
+          "引かれず",
+          1
+        ],
+        [
+          "くずしやすい",
+          1
+        ],
+        [
+          "スマホ",
+          1
+        ],
+        [
+          "子ども",
+          1
+        ],
+        [
+          "を通して",
+          1
+        ],
+        [
+          "支える",
+          1
+        ],
+        [
+          "早め",
+          1
+        ],
+        [
+          "当日",
+          1
+        ],
+        [
+          "持たせ",
+          1
+        ],
+        [
+          "しがちだ",
+          1
+        ],
+        [
+          "まとめ",
+          1
+        ],
+        [
+          "動けるよう",
+          1
+        ]
+      ],
+      "lowestCoverageLessons": [
+        {
+          "path": "assets/data/content/immersion/n3/lesson_64.json",
+          "id": "n3-lesson-64",
+          "title": "家族との距離感",
+          "translation": "Khoảng cách phù hợp với gia đình",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.6375,
+          "glossableCoverage": 0.8235,
+          "fragmentRatio": 0.2875
+        },
+        {
+          "path": "assets/data/content/immersion/n3/lesson_74.json",
+          "id": "n3-lesson-74",
+          "title": "自分らしい服選び",
+          "translation": "Chọn trang phục mang cá tính của mình",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.6375,
+          "glossableCoverage": 0.825,
+          "fragmentRatio": 0.275
+        },
+        {
+          "path": "assets/data/content/immersion/n3/lesson_65.json",
+          "id": "n3-lesson-65",
+          "title": "住みやすい町",
+          "translation": "Một thành phố đáng sống",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.7284,
+          "glossableCoverage": 0.825,
+          "fragmentRatio": 0.1852
+        },
+        {
+          "path": "assets/data/content/immersion/n3/lesson_72.json",
+          "id": "n3-lesson-72",
+          "title": "分かりやすく伝える",
+          "translation": "Truyền đạt dễ hiểu",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.6857,
+          "glossableCoverage": 0.8378,
+          "fragmentRatio": 0.2286
+        },
+        {
+          "path": "assets/data/content/immersion/n3/lesson_63.json",
+          "id": "n3-lesson-63",
+          "title": "学校で伸びる力",
+          "translation": "Năng lực được phát triển ở trường",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.6883,
+          "glossableCoverage": 0.8529,
+          "fragmentRatio": 0.2468
+        },
+        {
+          "path": "assets/data/content/immersion/n3/lesson_71.json",
+          "id": "n3-lesson-71",
+          "title": "お金の使い方",
+          "translation": "Cách sử dụng tiền bạc",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.6901,
+          "glossableCoverage": 0.8529,
+          "fragmentRatio": 0.2394
+        },
+        {
+          "path": "assets/data/content/immersion/n3/lesson_54.json",
+          "id": "n3-lesson-54",
+          "title": "留学で学んだこと",
+          "translation": "Những điều học được từ du học",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.72,
+          "glossableCoverage": 0.8537,
+          "fragmentRatio": 0.2
+        },
+        {
+          "path": "assets/data/content/immersion/n3/lesson_56.json",
+          "id": "n3-lesson-56",
+          "title": "ネット通販の工夫",
+          "translation": "Mẹo mua sắm trực tuyến",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.7162,
+          "glossableCoverage": 0.8684,
+          "fragmentRatio": 0.2162
+        },
+        {
+          "path": "assets/data/content/immersion/n3/lesson_67.json",
+          "id": "n3-lesson-67",
+          "title": "技術と暮らし",
+          "translation": "Công nghệ và đời sống",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.6711,
+          "glossableCoverage": 0.8718,
+          "fragmentRatio": 0.2632
+        },
+        {
+          "path": "assets/data/content/immersion/n3/lesson_66.json",
+          "id": "n3-lesson-66",
+          "title": "試合から学ぶ",
+          "translation": "Học được từ trận đấu",
+          "paragraphCount": 5,
+          "tokenCoverage": 0.7733,
+          "glossableCoverage": 0.8824,
+          "fragmentRatio": 0.1733
+        }
+      ]
+    }
+  ],
+  "recommendations": [
+    "N3 glossable meaning coverage is materially below N4/N5. Build a shared gloss lexicon and require every new N3 article to pass a minimum content-word coverage threshold.",
+    "Prefer one canonical content contract: article text, normalized glossable tokens, and optional grammar fragments. Avoid mixing phrase-level and morpheme-level tokenization across levels.",
+    "Keep generator + audit together. Every batch should regenerate lessons, run this audit, and fail if fragmentation or coverage regresses."
+  ]
+}

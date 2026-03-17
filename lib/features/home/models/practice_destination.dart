@@ -262,7 +262,7 @@ String _jlptCoachTitle(AppLanguage language) {
     case AppLanguage.en:
       return 'JLPT Coach';
     case AppLanguage.vi:
-      return 'Tr? l? JLPT';
+      return 'Trợ lý JLPT';
     case AppLanguage.ja:
       return 'JLPTã‚³ãƒ¼ãƒ';
   }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
+import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/common/widgets/error_state_widget.dart';
 import 'package:jpstudy/features/home/widgets/weakness_radar_card.dart';
 
@@ -25,76 +27,142 @@ class ProgressScreen extends ConsumerWidget {
           final accuracy = summary.totalQuestions == 0
               ? 0
               : (summary.totalCorrect / summary.totalQuestions * 100).round();
-          return ListView(
-            padding: const EdgeInsets.all(20),
-            children: [
-              _ActivityCalendar(streak: summary.streak),
-              const SizedBox(height: 16),
-              const _SrsRetentionCard(),
-              const SizedBox(height: 16),
-              const WeaknessRadarCard(compact: true),
-              const SizedBox(height: 16),
-              _StatCard(
-                label: language.progressStreakLabel,
-                value: summary.streak.toString(),
-              ),
-              _StatCard(
-                label: language.progressTodayXpLabel,
-                value: summary.todayXp.toString(),
-              ),
-              _StatCard(
-                label: language.progressTotalXpLabel,
-                value: summary.totalXp.toString(),
-              ),
-              _StatCard(
-                label: language.progressAttemptsLabel,
-                value: summary.totalAttempts.toString(),
-              ),
-              _StatCard(
-                label: language.progressAccuracyLabel,
-                value: '$accuracy%',
-              ),
-              const SizedBox(height: 16),
-              _SectionHeader(label: language.reviewHistoryLabel),
-              reviewHistoryAsync.when(
-                data: (history) => history.isEmpty
-                    ? _EmptyState(label: language.reviewHistoryEmptyLabel)
-                    : Column(
+          final accuracyRatio = summary.totalQuestions == 0
+              ? 0.0
+              : summary.totalCorrect / summary.totalQuestions;
+          return AppPageShell(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppFeatureCard(
+                  icon: Icons.insights_rounded,
+                  title: '${language.progressTitle}$levelSuffix',
+                  subtitle: _progressHeroSubtitle(language, summary, accuracy),
+                  status: AppStatusChip(
+                    label: '${summary.streak}',
+                    tone: AppStatusTone.warning,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                AppSectionCard(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AppSectionHeader(
+                        title: _overviewTitle(language),
+                        caption: _overviewCaption(language),
+                      ),
+                      const SizedBox(height: 14),
+                      AppProgressStrip(
+                        value: accuracyRatio,
+                        label: language.progressAccuracyLabel,
+                      ),
+                      const SizedBox(height: 14),
+                      Wrap(
+                        spacing: 12,
+                        runSpacing: 12,
                         children: [
-                          for (final day in history)
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 12),
-                              child: _ReviewHistoryCard(
-                                language: language,
-                                summary: day,
-                              ),
-                            ),
+                          _StatCard(
+                            label: language.progressStreakLabel,
+                            value: summary.streak.toString(),
+                          ),
+                          _StatCard(
+                            label: language.progressTodayXpLabel,
+                            value: summary.todayXp.toString(),
+                          ),
+                          _StatCard(
+                            label: language.progressTotalXpLabel,
+                            value: summary.totalXp.toString(),
+                          ),
+                          _StatCard(
+                            label: language.progressAttemptsLabel,
+                            value: summary.totalAttempts.toString(),
+                          ),
+                          _StatCard(
+                            label: language.progressAccuracyLabel,
+                            value: '$accuracy%',
+                          ),
                         ],
                       ),
-                loading: () => const Center(child: CircularProgressIndicator()),
-                error: (e, _) => ErrorStateWidget(error: e, compact: true),
-              ),
-              const SizedBox(height: 16),
-              _SectionHeader(label: language.attemptHistoryLabel),
-              attemptHistoryAsync.when(
-                data: (attempts) => attempts.isEmpty
-                    ? _EmptyState(label: language.attemptHistoryEmptyLabel)
-                    : Column(
-                        children: [
-                          for (final attempt in attempts)
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 12),
-                              child: _AttemptHistoryCard(
-                                language: language,
-                                attempt: attempt,
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+                _ActivityCalendar(streak: summary.streak),
+                const SizedBox(height: 16),
+                const _SrsRetentionCard(),
+                const SizedBox(height: 16),
+                const WeaknessRadarCard(compact: true),
+                const SizedBox(height: 16),
+                AppSectionCard(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AppSectionHeader(title: language.reviewHistoryLabel),
+                      const SizedBox(height: 12),
+                      reviewHistoryAsync.when(
+                        data: (history) => history.isEmpty
+                            ? _EmptyState(
+                                label: language.reviewHistoryEmptyLabel,
+                              )
+                            : Column(
+                                children: [
+                                  for (final day in history)
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                        bottom: 12,
+                                      ),
+                                      child: _ReviewHistoryCard(
+                                        language: language,
+                                        summary: day,
+                                      ),
+                                    ),
+                                ],
                               ),
-                            ),
-                        ],
+                        loading: () =>
+                            const Center(child: CircularProgressIndicator()),
+                        error: (e, _) =>
+                            ErrorStateWidget(error: e, compact: true),
                       ),
-                loading: () => const Center(child: CircularProgressIndicator()),
-                error: (e, _) => ErrorStateWidget(error: e, compact: true),
-              ),
-            ],
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+                AppSectionCard(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AppSectionHeader(title: language.attemptHistoryLabel),
+                      const SizedBox(height: 12),
+                      attemptHistoryAsync.when(
+                        data: (attempts) => attempts.isEmpty
+                            ? _EmptyState(
+                                label: language.attemptHistoryEmptyLabel,
+                              )
+                            : Column(
+                                children: [
+                                  for (final attempt in attempts)
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                        bottom: 12,
+                                      ),
+                                      child: _AttemptHistoryCard(
+                                        language: language,
+                                        attempt: attempt,
+                                      ),
+                                    ),
+                                ],
+                              ),
+                        loading: () =>
+                            const Center(child: CircularProgressIndicator()),
+                        error: (e, _) =>
+                            ErrorStateWidget(error: e, compact: true),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           );
         },
         loading: () => const Center(child: CircularProgressIndicator()),
@@ -112,26 +180,34 @@ class _StatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
+      constraints: const BoxConstraints(minWidth: 148),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE8ECF5)),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x0A2E3A59),
-            blurRadius: 18,
-            offset: Offset(0, 6),
-          ),
-        ],
+        color: palette.base,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: palette.outlineSoft),
       ),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label, style: const TextStyle(fontWeight: FontWeight.w600)),
-          const Spacer(),
-          Text(value, style: const TextStyle(fontWeight: FontWeight.w700)),
+          Text(
+            label,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: palette.ink.withValues(alpha: 0.68),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            value,
+            style: TextStyle(
+              fontWeight: FontWeight.w900,
+              fontSize: 20,
+              color: palette.ink,
+            ),
+          ),
         ],
       ),
     );
@@ -146,32 +222,27 @@ class _SrsRetentionCard extends ConsumerWidget {
     final language = ref.watch(appLanguageProvider);
     final breakdownAsync = ref.watch(srsRetentionProvider);
 
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE8ECF5)),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x0A2E3A59),
-            blurRadius: 18,
-            offset: Offset(0, 6),
-          ),
-        ],
-      ),
+    final palette = context.appPalette;
+    return AppSectionCard(
       child: breakdownAsync.when(
         data: (bd) => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               language.vocabularySrsTitle,
-              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
+              style: TextStyle(
+                fontWeight: FontWeight.w800,
+                fontSize: 14,
+                color: palette.ink,
+              ),
             ),
             const SizedBox(height: 6),
             Text(
               language.itemsReviewedViaSrsLabel(bd.total),
-              style: const TextStyle(fontSize: 12, color: Color(0xFF6B7390)),
+              style: TextStyle(
+                fontSize: 12,
+                color: palette.ink.withValues(alpha: 0.64),
+              ),
             ),
             const SizedBox(height: 10),
             if (bd.total > 0) ...[
@@ -205,9 +276,21 @@ class _SrsRetentionCard extends ConsumerWidget {
             Wrap(
               spacing: 12,
               children: [
-                _StageLabel(label: language.progressLearningStageLabel, count: bd.learning, color: const Color(0xFFEF4444)),
-                _StageLabel(label: language.progressYoungStageLabel, count: bd.young, color: const Color(0xFFEAB308)),
-                _StageLabel(label: language.progressMatureStageLabel, count: bd.mature, color: const Color(0xFF22C55E)),
+                _StageLabel(
+                  label: language.progressLearningStageLabel,
+                  count: bd.learning,
+                  color: const Color(0xFFEF4444),
+                ),
+                _StageLabel(
+                  label: language.progressYoungStageLabel,
+                  count: bd.young,
+                  color: const Color(0xFFEAB308),
+                ),
+                _StageLabel(
+                  label: language.progressMatureStageLabel,
+                  count: bd.mature,
+                  color: const Color(0xFF22C55E),
+                ),
               ],
             ),
           ],
@@ -256,20 +339,40 @@ class _StageLabel extends StatelessWidget {
   }
 }
 
-class _SectionHeader extends StatelessWidget {
-  const _SectionHeader({required this.label});
+String _progressHeroSubtitle(
+  AppLanguage language,
+  ProgressSummary summary,
+  int accuracy,
+) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Today ${summary.todayXp} XP ? ${summary.streak}-day streak ? $accuracy% accuracy';
+    case AppLanguage.vi:
+      return 'Hôm nay ${summary.todayXp} XP ? chuỗi ${summary.streak} ngày ? chính xác $accuracy%';
+    case AppLanguage.ja:
+      return '今日 ${summary.todayXp} XP ? ${summary.streak}日連続 ? 正答率 $accuracy%';
+  }
+}
 
-  final String label;
+String _overviewTitle(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Overview';
+    case AppLanguage.vi:
+      return 'Tổng quan';
+    case AppLanguage.ja:
+      return '概要';
+  }
+}
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Text(
-        label,
-        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-      ),
-    );
+String _overviewCaption(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Track streak, XP, attempts, and long-term retention in one place.';
+    case AppLanguage.vi:
+      return 'Theo dõi chuỗi học, XP, số lần luyện và độ nhớ dài hạn trong một màn hình.';
+    case AppLanguage.ja:
+      return '1画面でストリーク、XP、試行回数、長期記憶をまとめて追跡します。';
   }
 }
 
@@ -281,9 +384,20 @@ class _EmptyState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 12),
-      alignment: Alignment.centerLeft,
-      child: Text(label, style: const TextStyle(color: Color(0xFF6B7390))),
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFFE8ECF5)),
+      ),
+      child: Text(
+        label,
+        style: const TextStyle(
+          color: Color(0xFF6B7390),
+          fontWeight: FontWeight.w600,
+        ),
+      ),
     );
   }
 }
@@ -296,39 +410,20 @@ class _ReviewHistoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dateLabel = MaterialLocalizations.of(
-      context,
-    ).formatMediumDate(summary.day);
-    return _HistoryCard(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Text(
-                dateLabel,
-                style: const TextStyle(fontWeight: FontWeight.w600),
-              ),
-              const Spacer(),
-              Text(
-                '${language.reviewedLabel}: ${summary.reviewed}',
-                style: const TextStyle(fontWeight: FontWeight.w600),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Wrap(
-            spacing: 8,
-            runSpacing: 6,
-            children: [
-              _MiniChip(label: language.reviewAgainLabel, value: summary.again),
-              _MiniChip(label: language.reviewHardLabel, value: summary.hard),
-              _MiniChip(label: language.reviewGoodLabel, value: summary.good),
-              _MiniChip(label: language.reviewEasyLabel, value: summary.easy),
-            ],
-          ),
-        ],
-      ),
+    final localizations = MaterialLocalizations.of(context);
+    final date = localizations.formatMediumDate(summary.day);
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      title: Text(date),
+      subtitle: Text(switch (language) {
+        AppLanguage.en =>
+          '${summary.reviewed} reviews ? Again ${summary.again} ? Hard ${summary.hard}',
+        AppLanguage.vi =>
+          '${summary.reviewed} l??t ?n ? Sai ${summary.again} ? Kh? ${summary.hard}',
+        AppLanguage.ja =>
+          '${summary.reviewed}??? ? ???? ${summary.again} ? ??? ${summary.hard}',
+      }),
+      trailing: Text('${summary.good + summary.easy}/${summary.reviewed}'),
     );
   }
 }
@@ -341,123 +436,16 @@ class _AttemptHistoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dateLabel = MaterialLocalizations.of(
-      context,
-    ).formatMediumDate(attempt.startedAt);
-    final accuracy = attempt.total == 0
-        ? 0
-        : (attempt.score / attempt.total * 100).round();
-    final scoreLabel = language.attemptScoreLabel(
-      attempt.score,
-      attempt.total,
-      accuracy,
+    final localizations = MaterialLocalizations.of(context);
+    final date = localizations.formatMediumDate(attempt.startedAt);
+    final time = localizations.formatTimeOfDay(
+      TimeOfDay.fromDateTime(attempt.startedAt),
     );
-    final modeLabel = _modeLabel(language, attempt.mode);
-    final durationLabel = attempt.duration == null
-        ? '-'
-        : _formatDuration(attempt.duration!);
-    return _HistoryCard(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Text(
-                dateLabel,
-                style: const TextStyle(fontWeight: FontWeight.w600),
-              ),
-              const Spacer(),
-              Text(
-                scoreLabel,
-                style: const TextStyle(fontWeight: FontWeight.w600),
-              ),
-            ],
-          ),
-          const SizedBox(height: 6),
-          Text(
-            '${language.attemptModeLabel}: $modeLabel (${attempt.level})',
-            style: const TextStyle(color: Color(0xFF6B7390)),
-          ),
-          const SizedBox(height: 2),
-          Text(
-            '${language.attemptDurationLabel}: $durationLabel',
-            style: const TextStyle(color: Color(0xFF6B7390)),
-          ),
-        ],
-      ),
-    );
-  }
-
-  String _modeLabel(AppLanguage language, String mode) {
-    switch (mode) {
-      case 'learn':
-        return language.learnModeLabel;
-      case 'test':
-        return language.testModeLabel;
-      case 'match':
-        return language.matchModeLabel;
-      case 'write':
-        return language.writeModeLabel;
-      case 'spell':
-        return language.spellModeLabel;
-    }
-    return mode;
-  }
-
-  String _formatDuration(Duration duration) {
-    final minutes = duration.inMinutes;
-    final seconds = duration.inSeconds % 60;
-    final minuteText = minutes.toString().padLeft(2, '0');
-    final secondText = seconds.toString().padLeft(2, '0');
-    return '$minuteText:$secondText';
-  }
-}
-
-class _HistoryCard extends StatelessWidget {
-  const _HistoryCard({required this.child});
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE8ECF5)),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x0A2E3A59),
-            blurRadius: 18,
-            offset: Offset(0, 6),
-          ),
-        ],
-      ),
-      child: child,
-    );
-  }
-}
-
-class _MiniChip extends StatelessWidget {
-  const _MiniChip({required this.label, required this.value});
-
-  final String label;
-  final int value;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF7F9FC),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFE1E6F0)),
-      ),
-      child: Text(
-        '$label: $value',
-        style: const TextStyle(fontSize: 12, color: Color(0xFF6B7390)),
-      ),
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      title: Text('${attempt.mode} ? ${attempt.level}'),
+      subtitle: Text('$date $time'),
+      trailing: Text('${attempt.score}/${attempt.total}'),
     );
   }
 }
@@ -488,21 +476,66 @@ class _ActivityCalendar extends ConsumerWidget {
       '${d.year}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}';
 
   String _shortMonth(int month, AppLanguage language) {
-    const en = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    const vi = ['Th1','Th2','Th3','Th4','Th5','Th6','Th7','Th8','Th9','Th10','Th11','Th12'];
-    const ja = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+    const en = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
+    const vi = [
+      'Th1',
+      'Th2',
+      'Th3',
+      'Th4',
+      'Th5',
+      'Th6',
+      'Th7',
+      'Th8',
+      'Th9',
+      'Th10',
+      'Th11',
+      'Th12',
+    ];
+    const ja = [
+      '1月',
+      '2月',
+      '3月',
+      '4月',
+      '5月',
+      '6月',
+      '7月',
+      '8月',
+      '9月',
+      '10月',
+      '11月',
+      '12月',
+    ];
     switch (language) {
-      case AppLanguage.en: return en[month - 1];
-      case AppLanguage.vi: return vi[month - 1];
-      case AppLanguage.ja: return ja[month - 1];
+      case AppLanguage.en:
+        return en[month - 1];
+      case AppLanguage.vi:
+        return vi[month - 1];
+      case AppLanguage.ja:
+        return ja[month - 1];
     }
   }
 
   String _tr(AppLanguage language, String en, String vi, String ja) {
     switch (language) {
-      case AppLanguage.en: return en;
-      case AppLanguage.vi: return vi;
-      case AppLanguage.ja: return ja;
+      case AppLanguage.en:
+        return en;
+      case AppLanguage.vi:
+        return vi;
+      case AppLanguage.ja:
+        return ja;
     }
   }
 
@@ -518,7 +551,11 @@ class _ActivityCalendar extends ConsumerWidget {
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: const Color(0xFFE8ECF5)),
         boxShadow: const [
-          BoxShadow(color: Color(0x0A2E3A59), blurRadius: 18, offset: Offset(0, 6)),
+          BoxShadow(
+            color: Color(0x0A2E3A59),
+            blurRadius: 18,
+            offset: Offset(0, 6),
+          ),
         ],
       ),
       child: Column(
@@ -544,7 +581,11 @@ class _ActivityCalendar extends ConsumerWidget {
     );
   }
 
-  Widget _buildGrid(BuildContext context, List<ReviewDaySummary> history, AppLanguage language) {
+  Widget _buildGrid(
+    BuildContext context,
+    List<ReviewDaySummary> history,
+    AppLanguage language,
+  ) {
     // Build sparse lookup map
     final map = <String, int>{};
     for (final s in history) {
@@ -567,13 +608,24 @@ class _ActivityCalendar extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               const SizedBox(height: 14), // spacer for month row
-              for (final label in const ['M', 'T', 'W', 'T', 'F', 'S', 'S']) ...[
+              for (final label in const [
+                'M',
+                'T',
+                'W',
+                'T',
+                'F',
+                'S',
+                'S',
+              ]) ...[
                 SizedBox(
                   height: _cellSize,
                   width: 12,
                   child: Text(
                     label,
-                    style: const TextStyle(fontSize: 8, color: Color(0xFF6B7390)),
+                    style: const TextStyle(
+                      fontSize: 8,
+                      color: Color(0xFF6B7390),
+                    ),
                     textAlign: TextAlign.right,
                   ),
                 ),
@@ -630,7 +682,13 @@ class _ActivityCalendar extends ConsumerWidget {
               : null,
         ),
         for (int row = 0; row < 7; row++) ...[
-          _buildCell(context, weekMonday.add(Duration(days: row)), map, today, language),
+          _buildCell(
+            context,
+            weekMonday.add(Duration(days: row)),
+            map,
+            today,
+            language,
+          ),
           if (row < 6) const SizedBox(height: _cellGap),
         ],
       ],
@@ -668,7 +726,12 @@ class _ActivityCalendar extends ConsumerWidget {
     final localizations = MaterialLocalizations.of(context);
     final dateLabel = localizations.formatMediumDate(date);
     final tooltip = reviewed > 0
-        ? _tr(language, '$dateLabel — $reviewed reviews', '$dateLabel — $reviewed lượt ôn', '$dateLabel — $reviewed回復習')
+        ? _tr(
+            language,
+            '$dateLabel — $reviewed reviews',
+            '$dateLabel — $reviewed lượt ôn',
+            '$dateLabel — $reviewed回復習',
+          )
         : dateLabel;
 
     return Tooltip(
@@ -688,7 +751,12 @@ class _ActivityCalendar extends ConsumerWidget {
         ),
         const SizedBox(width: 4),
         Text(
-          _tr(language, '$streak-day streak', 'Chuỗi $streak ngày', '$streak日連続'),
+          _tr(
+            language,
+            '$streak-day streak',
+            'Chuỗi $streak ngày',
+            '$streak日連続',
+          ),
           style: const TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w700,

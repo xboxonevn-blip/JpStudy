@@ -383,9 +383,9 @@ class _MascotRiveState extends ConsumerState<MascotRive>
   String _fallbackEncouragement(AppLanguage language) {
     switch (language) {
       case AppLanguage.vi:
-        return 'On do, tiep tuc nhe!';
+        return 'Ổn đó, tiếp tục nhé!';
       case AppLanguage.ja:
-        return 'Sono choshi!';
+        return 'その調子！';
       case AppLanguage.en:
         return 'Nice pace, keep going!';
     }
@@ -394,9 +394,9 @@ class _MascotRiveState extends ConsumerState<MascotRive>
   String _sleepMessage(AppLanguage language) {
     switch (language) {
       case AppLanguage.vi:
-        return 'Nghi mot nhip nhe...';
+        return 'Nghỉ một nhịp nhé...';
       case AppLanguage.ja:
-        return 'Chotto hitoyasumi...';
+        return 'ちょっとひと休み...';
       case AppLanguage.en:
         return 'Quick breather...';
     }
@@ -405,9 +405,9 @@ class _MascotRiveState extends ConsumerState<MascotRive>
   String _oopsMessage(AppLanguage language) {
     switch (language) {
       case AppLanguage.vi:
-        return 'Oi, sua lai phat nao!';
+        return 'Ôi, sửa lại phát nào!';
       case AppLanguage.ja:
-        return 'Otto, mou ikkai!';
+        return 'おっと、もう一回！';
       case AppLanguage.en:
         return 'Oops, let us fix that!';
     }

@@ -1,17 +1,15 @@
 import 'dart:convert';
 
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/immersion_article.dart';
 import 'difficulty_estimator.dart';
+import 'shared_reading_library.dart';
 
 enum ImmersionSource { local, nhkEasy }
 
 class ImmersionService {
-  static const _assetPath =
-      'assets/data/content/immersion/immersion_samples.json';
   static const nhkSourceLabel = 'NHK Easy';
   static const nhkLevelLabel = 'Easy';
   static const watanocSourceLabel = 'Watanoc';
@@ -36,61 +34,11 @@ class ImmersionService {
     'User-Agent': 'JpStudy/2.0',
   };
 
+  final SharedReadingLibrary _sharedReadingLibrary =
+      const SharedReadingLibrary();
+
   Future<List<ImmersionArticle>> loadLocalSamples() async {
-    final articles = <ImmersionArticle>[];
-    const lessonRanges = <String, List<int>>{
-      'n5': [1, 25],
-      'n4': [26, 50],
-      'n3': [51, 75],
-      'n2': [76, 90],
-      'n1': [91, 100],
-    };
-
-    // 1. Load legacy sample file if exists (optional, keeping for backward compat)
-    try {
-      final raw = await rootBundle.loadString(_assetPath);
-      final json = jsonDecode(raw) as Map<String, dynamic>;
-      final list = json['articles'] as List<dynamic>? ?? const [];
-      articles.addAll(list.map((e) => ImmersionArticle.fromJson(e)).toList());
-    } catch (_) {
-      // Ignore if missing
-    }
-
-    // 2. Load new structured lessons (lesson_01.json ... lesson_100.json)
-    for (final entry in lessonRanges.entries) {
-      final level = entry.key;
-      final startLesson = entry.value[0];
-      final endLesson = entry.value[1];
-      for (int i = startLesson; i <= endLesson; i++) {
-        final paddedId = i.toString().padLeft(2, '0');
-        final path =
-            'assets/data/content/immersion/$level/lesson_$paddedId.json';
-        try {
-          final raw = await rootBundle.loadString(path);
-          final json = jsonDecode(raw);
-          // Support both single object and wrapper format
-          if (json is Map<String, dynamic>) {
-            if (json.containsKey('articles')) {
-              final list = json['articles'] as List;
-              articles.addAll(
-                list.map((e) => ImmersionArticle.fromJson(e)).toList(),
-              );
-            } else {
-              // Single article file
-              articles.add(ImmersionArticle.fromJson(json));
-            }
-          }
-        } catch (_) {
-          // File doesn't exist, skip
-          continue;
-        }
-      }
-    }
-
-    // Sort by ID or Level/PublishedAt if needed
-    // articles.sort((a, b) => b.publishedAt.compareTo(a.publishedAt));
-
-    return articles;
+    return _sharedReadingLibrary.loadImmersionArticles();
   }
 
   Future<List<ImmersionArticle>> loadNhkEasySummaries({
