@@ -30,6 +30,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   flutter_riverpod: ^2.5.1
   drift: ^2.25.0
   path: ^1.9.0
@@ -100,6 +102,7 @@ flutter:
     - assets/data/content/immersion/n2/
     - assets/data/content/immersion/n3/
     - assets/data/content/immersion/n4/
+    - assets/data/content/immersion/n4/lesson_29.json
     - assets/data/content/immersion/n5/
     - assets/data/content/kanji/n3/
     - assets/data/content/kanji/n4/

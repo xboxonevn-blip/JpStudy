@@ -24,8 +24,8 @@ class MiniDashboard extends ConsumerWidget {
     return dashboardAsync.when(
       data: (state) =>
           _buildContent(state, language, ghostCount, compact: compact),
-      loading: () => const SizedBox(
-        height: 88,
+      loading: () => SizedBox(
+        height: compact ? 62 : 88,
         child: Center(child: CircularProgressIndicator()),
       ),
       error: (err, stack) => EmptyStateWidget(
@@ -46,33 +46,140 @@ class MiniDashboard extends ConsumerWidget {
     final focusCount = state.totalMistakeCount + ghostCount;
     final headerTitle = language.progressTitle;
     final headerSubtitle = language.continueJourneyLabel;
+    final compactStats = [
+      _CompactStatCard(
+        icon: Icons.local_fire_department_rounded,
+        iconColor: const Color(0xFFF97316),
+        value: '${state.streak}',
+        label: language.streakLabel,
+      ),
+      _CompactStatCard(
+        icon: Icons.star_rounded,
+        iconColor: const Color(0xFFF59E0B),
+        value: '${state.todayXp}',
+        label: language.xpLabel,
+      ),
+      _CompactStatCard(
+        icon: Icons.history_edu_rounded,
+        iconColor: const Color(0xFF0EA5E9),
+        value: '$totalDue',
+        label: language.reviewsLabel,
+      ),
+      _CompactStatCard(
+        icon: Icons.tips_and_updates_rounded,
+        iconColor: const Color(0xFFEC4899),
+        value: '$focusCount',
+        label: language.fixMistakesLabel,
+      ),
+    ];
+
+    if (compact) {
+      return Container(
+        padding: const EdgeInsets.fromLTRB(12, 12, 12, 11),
+        decoration: HomeSurface.softPanel(
+          colors: const [Color(0xFFFFFFFF), Color(0xFFF7FBFF)],
+          radius: 18,
+        ),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final statColumns = constraints.maxWidth >= 760
+                ? 4
+                : constraints.maxWidth >= 360
+                ? 2
+                : 1;
+            final spacing = 8.0;
+            final statWidth = statColumns == 1
+                ? constraints.maxWidth
+                : (constraints.maxWidth - (spacing * (statColumns - 1))) /
+                      statColumns;
+
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      width: 32,
+                      height: 32,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(11),
+                        gradient: const LinearGradient(
+                          colors: [Color(0xFFFFEDD5), Color(0xFFFFFBEB)],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        border: Border.all(color: const Color(0xFFFED7AA)),
+                      ),
+                      child: const Icon(
+                        Icons.insights_rounded,
+                        color: Color(0xFFEA580C),
+                        size: 18,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            _compactEyebrow(language),
+                            style: const TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w800,
+                              letterSpacing: 0.22,
+                              color: Color(0xFF64748B),
+                            ),
+                          ),
+                          const SizedBox(height: 1),
+                          Text(
+                            headerTitle,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w900,
+                              color: Color(0xFF0F172A),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Wrap(
+                  spacing: spacing,
+                  runSpacing: spacing,
+                  children: [
+                    for (final stat in compactStats)
+                      SizedBox(width: statWidth, child: stat),
+                  ],
+                ),
+              ],
+            );
+          },
+        ),
+      );
+    }
 
     return Padding(
       padding: EdgeInsets.fromLTRB(
-        compact ? 0 : HomeSurface.pageHorizontalPadding,
-        compact ? 0 : 10,
-        compact ? 0 : HomeSurface.pageHorizontalPadding,
-        compact ? 0 : 12,
+        HomeSurface.pageHorizontalPadding,
+        10,
+        HomeSurface.pageHorizontalPadding,
+        12,
       ),
       child: LayoutBuilder(
         builder: (context, constraints) {
-          final crossAxisCount = compact
-              ? (constraints.maxWidth >= 340 ? 2 : 1)
-              : constraints.maxWidth >= 880
+          final crossAxisCount = constraints.maxWidth >= 880
               ? 4
               : constraints.maxWidth >= 560
               ? 2
               : 1;
           return Container(
-            padding: EdgeInsets.fromLTRB(
-              compact ? 14 : 16,
-              compact ? 14 : 16,
-              compact ? 14 : 16,
-              compact ? 14 : 16,
-            ),
+            padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
             decoration: HomeSurface.softPanel(
               colors: const [Color(0xFFFFFFFF), Color(0xFFF4FAFF)],
-              radius: compact ? 24 : 28,
+              radius: 28,
             ),
             child: Column(
               children: [
@@ -92,13 +199,13 @@ class MiniDashboard extends ConsumerWidget {
                               color: Color(0xFF4B5563),
                             ),
                           ),
-                          SizedBox(height: compact ? 2 : 4),
+                          const SizedBox(height: 4),
                           Text(
                             headerTitle,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: compact ? 19 : 22,
+                            style: const TextStyle(
+                              fontSize: 22,
                               fontWeight: FontWeight.w800,
                               color: Color(0xFF0F172A),
                             ),
@@ -107,10 +214,10 @@ class MiniDashboard extends ConsumerWidget {
                       ),
                     ),
                     Container(
-                      width: compact ? 38 : 44,
-                      height: compact ? 38 : 44,
+                      width: 44,
+                      height: 44,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(compact ? 12 : 14),
+                        borderRadius: BorderRadius.circular(14),
                         gradient: const LinearGradient(
                           colors: [Color(0xFFFFEDD5), Color(0xFFFFFBEB)],
                           begin: Alignment.topLeft,
@@ -120,20 +227,20 @@ class MiniDashboard extends ConsumerWidget {
                       ),
                       child: Icon(
                         Icons.local_fire_department_rounded,
-                        color: Color(0xFFEA580C),
-                        size: compact ? 20 : 22,
+                        color: const Color(0xFFEA580C),
+                        size: 22,
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: compact ? 10 : 14),
+                const SizedBox(height: 14),
                 GridView.count(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   crossAxisCount: crossAxisCount,
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
-                  childAspectRatio: compact ? 2.12 : 2.45,
+                  childAspectRatio: 2.45,
                   children: [
                     _StatTile(
                       icon: Icons.local_fire_department_rounded,
@@ -165,6 +272,83 @@ class MiniDashboard extends ConsumerWidget {
             ),
           );
         },
+      ),
+    );
+  }
+
+  String _compactEyebrow(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Today snapshot',
+    AppLanguage.vi => 'Tổng quan hôm nay',
+    AppLanguage.ja => '今日のスナップショット',
+  };
+}
+
+class _CompactStatCard extends StatelessWidget {
+  const _CompactStatCard({
+    required this.icon,
+    required this.iconColor,
+    required this.value,
+    required this.label,
+  });
+
+  final IconData icon;
+  final Color iconColor;
+  final String value;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(10, 9, 10, 9),
+      decoration: BoxDecoration(
+        color: iconColor.withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: iconColor.withValues(alpha: 0.18)),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 26,
+            height: 26,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(9),
+              color: Colors.white.withValues(alpha: 0.86),
+            ),
+            child: Icon(icon, size: 14, color: iconColor),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontSize: 9.8,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFF64748B),
+                    letterSpacing: 0.12,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  value,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontSize: 17,
+                    height: 1,
+                    fontWeight: FontWeight.w900,
+                    color: Color(0xFF0F172A),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

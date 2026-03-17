@@ -86,10 +86,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        toolbarHeight: 80,
+        toolbarHeight: 72,
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
-        titleSpacing: 20,
+        titleSpacing: 16,
         title: HeaderBar(
           level: level,
           language: language,

@@ -43,34 +43,59 @@ void main() {
     expect(focus.any((item) => item.route == '/mistakes'), isTrue);
   });
 
-  test('buildPracticeDestinations includes recall sprint and prioritizes it when review is due', () {
-    final ranked = buildPracticeDestinations(
-      language: AppLanguage.en,
-      dueReviewCount: 6,
-      vocabDue: 3,
-      grammarDue: 2,
-      kanjiDue: 1,
-      mistakeCount: 0,
-    );
+  test(
+    'buildPracticeDestinations includes recall sprint and prioritizes it when review is due',
+    () {
+      final ranked = buildPracticeDestinations(
+        language: AppLanguage.en,
+        dueReviewCount: 6,
+        vocabDue: 3,
+        grammarDue: 2,
+        kanjiDue: 1,
+        mistakeCount: 0,
+      );
 
-    expect(ranked.any((item) => item.id == 'recall_sprint'), isTrue);
-    expect(ranked.first.id, 'recall_sprint');
-    expect(ranked.first.route, '/practice/recall-sprint');
-  });
+      expect(ranked.any((item) => item.id == 'recall_sprint'), isTrue);
+      expect(ranked.first.id, 'recall_sprint');
+      expect(ranked.first.route, '/practice/recall-sprint');
+    },
+  );
 
-  test('buildPracticeDestinations renders JLPT Coach labels correctly in Vietnamese', () {
-    final ranked = buildPracticeDestinations(
-      language: AppLanguage.vi,
-      dueReviewCount: 0,
-      mistakeCount: 1,
-      ghostCount: 1,
-    );
+  test(
+    'buildPracticeDestinations renders JLPT Coach labels correctly in Vietnamese',
+    () {
+      final ranked = buildPracticeDestinations(
+        language: AppLanguage.vi,
+        dueReviewCount: 0,
+        mistakeCount: 1,
+        ghostCount: 1,
+      );
 
-    final jlptCoach = ranked.firstWhere((item) => item.id == 'jlpt_coach');
-    expect(jlptCoach.title, '\u0054r\u1ee3 l\u00fd JLPT');
-    expect(
-      jlptCoach.subtitle,
-      '\u0110\u1ecdc hi\u1ec3u, mock exam, ch\u1ea9n \u0111o\u00e1n, k\u1ebf ho\u1ea1ch 7 ng\u00e0y.',
-    );
-  });
+      final jlptCoach = ranked.firstWhere((item) => item.id == 'jlpt_coach');
+      expect(jlptCoach.title, '\u0054r\u1ee3 l\u00fd JLPT');
+      expect(
+        jlptCoach.subtitle,
+        '\u0110\u1ecdc hi\u1ec3u, mock exam, ch\u1ea9n \u0111o\u00e1n, k\u1ebf ho\u1ea1ch 7 ng\u00e0y.',
+      );
+    },
+  );
+
+  test(
+    'buildPracticeDestinations keeps grammar repair and weak points distinct',
+    () {
+      final ranked = buildPracticeDestinations(
+        language: AppLanguage.en,
+        dueReviewCount: 0,
+        ghostCount: 2,
+        mistakeCount: 3,
+      );
+
+      final grammarRepair = ranked.firstWhere((item) => item.id == 'ghost');
+      final weakPoints = ranked.firstWhere((item) => item.id == 'mistakes');
+
+      expect(grammarRepair.title, 'Grammar repair');
+      expect(weakPoints.title, 'Weak points');
+      expect(grammarRepair.title, isNot(weakPoints.title));
+    },
+  );
 }

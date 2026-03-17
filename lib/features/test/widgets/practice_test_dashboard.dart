@@ -67,13 +67,15 @@ class PracticeTestDashboard extends ConsumerWidget {
           ? EdgeInsets.zero
           : const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       elevation: embedded ? 0 : 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(embedded ? 16 : 20),
+      ),
       child: InkWell(
         onTap: () => _startLevelTest(context, ref, level, language),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(embedded ? 16 : 20),
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(embedded ? 16 : 20),
             gradient: LinearGradient(
               colors: [color.withValues(alpha: 0.85), color],
               begin: Alignment.topLeft,
@@ -85,24 +87,24 @@ class PracticeTestDashboard extends ConsumerWidget {
                 blurRadius: 8,
                 offset: const Offset(0, 4),
               ),
-            ],
-          ),
-          padding: EdgeInsets.all(embedded ? 16 : 20),
+              ],
+            ),
+          padding: EdgeInsets.all(embedded ? 12 : 20),
           child: Row(
             children: [
               Container(
-                padding: EdgeInsets.all(embedded ? 10 : 12),
+                padding: EdgeInsets.all(embedded ? 8 : 12),
                 decoration: BoxDecoration(
                   color: Colors.white.withValues(alpha: 0.2),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.school_rounded,
-                  size: 32,
+                  size: embedded ? 24 : 32,
                   color: Colors.white,
                 ),
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: embedded ? 12 : 16),
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -111,25 +113,26 @@ class PracticeTestDashboard extends ConsumerWidget {
                     Text(
                       language.mockExamTitle(level),
                       style: TextStyle(
-                        fontSize: embedded ? 18 : 20,
+                        fontSize: embedded ? 15.5 : 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: embedded ? 2 : 4),
                     Text(
                       language.mockExamSubtitle,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white70,
-                        fontSize: 13,
+                        fontSize: embedded ? 11.5 : 13,
                       ),
                     ),
                   ],
                 ),
               ),
-              const Icon(
+              Icon(
                 Icons.arrow_forward_ios_rounded,
                 color: Colors.white70,
+                size: embedded ? 16 : 24,
               ),
             ],
           ),

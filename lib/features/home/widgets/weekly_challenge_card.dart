@@ -7,7 +7,9 @@ import 'package:jpstudy/features/home/providers/weekly_challenge_provider.dart';
 import 'package:jpstudy/features/home/widgets/home_surface.dart';
 
 class WeeklyChallengeCard extends ConsumerWidget {
-  const WeeklyChallengeCard({super.key});
+  const WeeklyChallengeCard({super.key, this.compact = false});
+
+  final bool compact;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -15,8 +17,11 @@ class WeeklyChallengeCard extends ConsumerWidget {
     final language = ref.watch(appLanguageProvider);
 
     return challengeAsync.when(
-      data: (challenge) =>
-          _ChallengeContent(challenge: challenge, language: language),
+      data: (challenge) => _ChallengeContent(
+        challenge: challenge,
+        language: language,
+        compact: compact,
+      ),
       loading: () => const SizedBox.shrink(),
       error: (_, _) => const SizedBox.shrink(),
     );
@@ -24,10 +29,15 @@ class WeeklyChallengeCard extends ConsumerWidget {
 }
 
 class _ChallengeContent extends StatelessWidget {
-  const _ChallengeContent({required this.challenge, required this.language});
+  const _ChallengeContent({
+    required this.challenge,
+    required this.language,
+    required this.compact,
+  });
 
   final WeeklyChallenge challenge;
   final AppLanguage language;
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
@@ -46,11 +56,11 @@ class _ChallengeContent extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: HomeSurface.pageHorizontalPadding,
+        horizontal: compact ? 14 : HomeSurface.pageHorizontalPadding,
       ),
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.all(14),
+        padding: EdgeInsets.all(compact ? 12 : 14),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: challenge.isComplete
@@ -63,8 +73,8 @@ class _ChallengeContent extends StatelessWidget {
           boxShadow: const [
             BoxShadow(
               color: Color(0x1A000000),
-              blurRadius: 10,
-              offset: Offset(0, 4),
+              blurRadius: 8,
+              offset: Offset(0, 3),
             ),
           ],
         ),
@@ -80,16 +90,16 @@ class _ChallengeContent extends StatelessWidget {
                   color: challenge.isComplete
                       ? const Color(0xFFFDE68A)
                       : const Color(0xFFC4B5FD),
-                  size: 16,
+                  size: compact ? 15 : 16,
                 ),
-                const SizedBox(width: 6),
+                SizedBox(width: compact ? 5 : 6),
                 Text(
                   headerLabel,
                   style: TextStyle(
                     color: challenge.isComplete
                         ? const Color(0xFFA7F3D0)
                         : const Color(0xFFC4B5FD),
-                    fontSize: 11,
+                    fontSize: compact ? 10.5 : 11,
                     fontWeight: FontWeight.w800,
                     letterSpacing: 0.8,
                   ),
@@ -98,24 +108,24 @@ class _ChallengeContent extends StatelessWidget {
                 if (!challenge.isComplete)
                   Text(
                     daysLabel,
-                    style: const TextStyle(
-                      color: Color(0xFFA5B4FC),
-                      fontSize: 11,
+                    style: TextStyle(
+                      color: const Color(0xFFA5B4FC),
+                      fontSize: compact ? 10.5 : 11,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
               ],
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: compact ? 6 : 8),
             Text(
               description,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white,
-                fontSize: 14,
+                fontSize: compact ? 13 : 14,
                 fontWeight: FontWeight.w700,
               ),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: compact ? 8 : 10),
             Row(
               children: [
                 Expanded(
@@ -123,7 +133,7 @@ class _ChallengeContent extends StatelessWidget {
                     borderRadius: BorderRadius.circular(999),
                     child: LinearProgressIndicator(
                       value: challenge.progress,
-                      minHeight: 6,
+                      minHeight: compact ? 5 : 6,
                       backgroundColor: Colors.white.withValues(alpha: 0.15),
                       valueColor: AlwaysStoppedAnimation(
                         challenge.isComplete
@@ -133,19 +143,19 @@ class _ChallengeContent extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: 12),
+                SizedBox(width: compact ? 10 : 12),
                 Text(
                   '${challenge.current}/${challenge.target}',
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
-                    fontSize: 13,
+                    fontSize: compact ? 12 : 13,
                     fontWeight: FontWeight.w800,
                   ),
                 ),
               ],
             ),
             if (challenge.isComplete) ...[
-              const SizedBox(height: 8),
+              SizedBox(height: compact ? 6 : 8),
               Text(
                 switch (language) {
                   AppLanguage.en =>
@@ -154,9 +164,9 @@ class _ChallengeContent extends StatelessWidget {
                     'Hoàn thành thử thách! +${WeeklyChallenge.bonusXp} XP',
                   AppLanguage.ja => 'チャレンジ達成！ +${WeeklyChallenge.bonusXp} XP',
                 },
-                style: const TextStyle(
-                  color: Color(0xFFA7F3D0),
-                  fontSize: 12,
+                style: TextStyle(
+                  color: const Color(0xFFA7F3D0),
+                  fontSize: compact ? 11.5 : 12,
                   fontWeight: FontWeight.w700,
                 ),
               ),

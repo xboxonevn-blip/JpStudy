@@ -16,7 +16,8 @@ void main() {
       ),
     );
 
-    await tester.pumpAndSettle();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
 
     expect(find.text('Đề thi thử JLPT Pro'), findsWidgets);
     expect(
@@ -25,9 +26,15 @@ void main() {
       ),
       findsOneWidget,
     );
-    expect(find.text('Bắt đầu thi thử đầy đủ'), findsOneWidget);
+    await tester.scrollUntilVisible(
+      find.text('Bắt đầu thi thử đầy đủ'),
+      300,
+      scrollable: find.byType(Scrollable).first,
+    );
+    final startButton = find.text('Bắt đầu thi thử đầy đủ');
+    expect(startButton, findsOneWidget);
 
-    await tester.tap(find.text('Bắt đầu thi thử đầy đủ'));
+    await tester.tap(startButton);
     await tester.pump();
 
     expect(find.text('Kết thúc ngay'), findsOneWidget);

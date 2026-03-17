@@ -15,7 +15,6 @@ import 'models/immersion_article.dart';
 import 'providers/immersion_providers.dart';
 import 'screens/immersion_reader_screen.dart';
 import 'services/difficulty_estimator.dart';
-import 'services/immersion_service.dart';
 
 class ImmersionHomeScreen extends ConsumerStatefulWidget {
   const ImmersionHomeScreen({super.key});
@@ -26,8 +25,7 @@ class ImmersionHomeScreen extends ConsumerStatefulWidget {
 }
 
 class _ImmersionHomeScreenState extends ConsumerState<ImmersionHomeScreen> {
-  late Future<_ImmersionLoadState> _future;
-  ImmersionSource _source = ImmersionSource.local;
+  late Future<List<ImmersionArticle>> _future;
   List<ImmersionArticle> _latestArticles = const [];
 
   void _rememberArticles(List<ImmersionArticle> articles) {
@@ -46,40 +44,13 @@ class _ImmersionHomeScreenState extends ConsumerState<ImmersionHomeScreen> {
     _future = _loadArticles(forceRefresh: false);
   }
 
-  Future<_ImmersionLoadState> _loadArticles({
+  Future<List<ImmersionArticle>> _loadArticles({
     required bool forceRefresh,
   }) async {
     final service = ref.read(immersionServiceProvider);
-    switch (_source) {
-      case ImmersionSource.nhkEasy:
-        final nhk = await service.loadNhkEasySummaries(
-          forceRefresh: forceRefresh,
-        );
-        if (nhk.isNotEmpty) {
-          _rememberArticles(nhk);
-          final isFallback =
-              nhk.first.source != ImmersionService.nhkSourceLabel;
-          return _ImmersionLoadState(
-            articles: nhk,
-            usedLocalFallback: isFallback,
-          );
-        }
-        final local = await service.loadLocalSamples();
-        _rememberArticles(local);
-        return _ImmersionLoadState(articles: local, usedLocalFallback: true);
-      case ImmersionSource.local:
-        final local = await service.loadLocalSamples();
-        _rememberArticles(local);
-        return _ImmersionLoadState(articles: local, usedLocalFallback: false);
-    }
-  }
-
-  void _setSource(ImmersionSource next) {
-    if (_source == next) return;
-    setState(() {
-      _source = next;
-      _future = _loadArticles(forceRefresh: false);
-    });
+    final local = await service.loadLocalSamples();
+    _rememberArticles(local);
+    return local;
   }
 
   Future<void> _refreshArticles() async {
@@ -285,114 +256,79 @@ class _ImmersionHomeScreenState extends ConsumerState<ImmersionHomeScreen> {
             color: theme.colorScheme.onSurface,
           ),
         ),
-        actions: [
-          IconButton(
-            onPressed: _source == ImmersionSource.nhkEasy
-                ? _refreshArticles
-                : null,
-            icon: const Icon(Icons.refresh_rounded),
-            tooltip: language.immersionRefreshLabel,
-          ),
-          const SizedBox(width: 6),
-        ],
       ),
       body: JapaneseBackground(
         child: SafeArea(
           top: false,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 2, 16, 0),
-                child: _HeroCard(
-                  language: language,
-                  currentLevel: level.shortLabel,
-                  readCount: readIds.length,
-                  source: _source,
-                  hasArticle: nextArticle != null,
-                  onPrimaryTap: nextArticle == null
-                      ? null
-                      : () => _openArticle(context, nextArticle),
-                  onSecondaryTap: () => context.push('/jlpt/coach'),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 12, 16, 10),
-                child: _SourcePicker(
-                  language: language,
-                  currentSource: _source,
-                  onSourceChanged: _setSource,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
-                child: _ReadingOverviewCard(
-                  language: language,
-                  articles: _latestArticles,
-                  readIds: readIds,
-                  currentLevel: level.shortLabel,
-                ),
-              ).animate(delay: 120.ms).fadeIn(duration: 320.ms),
-              Expanded(
-                child: FutureBuilder<_ImmersionLoadState>(
-                  future: _future,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                    if (snapshot.hasError) {
-                      return _ErrorState(
-                        language: language,
-                        onRetry: _source == ImmersionSource.nhkEasy
-                            ? _refreshArticles
-                            : null,
-                      );
-                    }
+          child: FutureBuilder<List<ImmersionArticle>>(
+            future: _future,
+            builder: (context, snapshot) {
+              final articles = snapshot.data ?? const <ImmersionArticle>[];
+              final overviewArticles = articles.isNotEmpty
+                  ? articles
+                  : _latestArticles;
+              final sections = _buildSections(
+                articles,
+                readIds,
+                level,
+                language,
+              );
 
-                    final loadState =
-                        snapshot.data ?? const _ImmersionLoadState.empty();
-                    final articles = loadState.articles;
-                    final sections = _buildSections(
-                      articles,
-                      readIds,
-                      level,
-                      language,
-                    );
-                    if (articles.isEmpty) {
-                      return _EmptyState(language: language);
-                    }
-
-                    return RefreshIndicator(
-                      onRefresh: _refreshArticles,
-                      child: ListView(
-                        padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
-                        children: [
-                          if (loadState.usedLocalFallback) ...[
-                            _FallbackNotice(language: language),
-                            const SizedBox(height: 12),
-                          ],
-                          ...List.generate(sections.length, (index) {
-                            final section = sections[index];
-                            return Padding(
-                              padding: EdgeInsets.only(
-                                bottom: index == sections.length - 1 ? 0 : 16,
-                              ),
-                              child: _ReadingDeckSection(
-                                section: section,
-                                language: language,
-                                readIds: readIds,
-                                onArticleTap: (article) {
-                                  _openArticle(context, article);
-                                },
-                              ),
-                            );
-                          }),
-                        ],
-                      ),
-                    );
-                  },
+              return RefreshIndicator(
+                onRefresh: _refreshArticles,
+                child: ListView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  padding: const EdgeInsets.fromLTRB(16, 2, 16, 24),
+                  children: [
+                    _HeroCard(
+                      language: language,
+                      currentLevel: level.shortLabel,
+                      readCount: readIds.length,
+                      hasArticle: nextArticle != null,
+                      onPrimaryTap: nextArticle == null
+                          ? null
+                          : () => _openArticle(context, nextArticle),
+                      onSecondaryTap: () => context.push('/jlpt/coach'),
+                    ),
+                    const SizedBox(height: 12),
+                    _ReadingOverviewCard(
+                      language: language,
+                      articles: overviewArticles,
+                      readIds: readIds,
+                      currentLevel: level.shortLabel,
+                    ).animate(delay: 120.ms).fadeIn(duration: 320.ms),
+                    const SizedBox(height: 12),
+                    if (snapshot.connectionState == ConnectionState.waiting)
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 28),
+                        child: Center(child: CircularProgressIndicator()),
+                      )
+                    else if (snapshot.hasError)
+                      _ErrorState(language: language, onRetry: _refreshArticles)
+                    else if (articles.isEmpty)
+                      _EmptyState(language: language)
+                    else ...[
+                      ...List.generate(sections.length, (index) {
+                        final section = sections[index];
+                        return Padding(
+                          padding: EdgeInsets.only(
+                            bottom: index == sections.length - 1 ? 0 : 16,
+                          ),
+                          child: _ReadingDeckSection(
+                            section: section,
+                            language: language,
+                            readIds: readIds,
+                            onArticleTap: (article) {
+                              _openArticle(context, article);
+                            },
+                          ),
+                        );
+                      }),
+                    ],
+                  ],
                 ),
-              ),
-            ],
+              );
+            },
           ),
         ),
       ),
@@ -405,7 +341,6 @@ class _HeroCard extends StatelessWidget {
     required this.language,
     required this.currentLevel,
     required this.readCount,
-    required this.source,
     required this.hasArticle,
     required this.onPrimaryTap,
     required this.onSecondaryTap,
@@ -414,16 +349,12 @@ class _HeroCard extends StatelessWidget {
   final AppLanguage language;
   final String currentLevel;
   final int readCount;
-  final ImmersionSource source;
   final bool hasArticle;
   final VoidCallback? onPrimaryTap;
   final VoidCallback onSecondaryTap;
 
   @override
   Widget build(BuildContext context) {
-    final sourceLabel = source == ImmersionSource.nhkEasy
-        ? language.immersionSourceNhkLabel
-        : language.immersionSourceLocalLabel;
     return AppFeatureCard(
       icon: Icons.auto_stories_rounded,
       title: _title(language),
@@ -433,7 +364,7 @@ class _HeroCard extends StatelessWidget {
       secondaryLabel: _secondaryLabel(language),
       onSecondaryTap: onSecondaryTap,
       status: AppStatusChip(
-        label: '$currentLevel • $sourceLabel',
+        label: _statusLabel(language, currentLevel),
         tone: AppStatusTone.primary,
       ),
     );
@@ -464,95 +395,13 @@ class _HeroCard extends StatelessWidget {
     AppLanguage.vi => 'Đọc hiểu JLPT',
     AppLanguage.ja => 'JLPT読解',
   };
-}
 
-class _SourcePicker extends StatelessWidget {
-  const _SourcePicker({
-    required this.language,
-    required this.currentSource,
-    required this.onSourceChanged,
-  });
-
-  final AppLanguage language;
-  final ImmersionSource currentSource;
-  final ValueChanged<ImmersionSource> onSourceChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.95),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFDCE8F8)),
-      ),
-      padding: const EdgeInsets.all(4),
-      child: Row(
-        children: [
-          Expanded(
-            child: _SourceTab(
-              label: language.immersionSourceNhkLabel,
-              isSelected: currentSource == ImmersionSource.nhkEasy,
-              onTap: () => onSourceChanged(ImmersionSource.nhkEasy),
-            ),
-          ),
-          const SizedBox(width: 6),
-          Expanded(
-            child: _SourceTab(
-              label: language.immersionSourceLocalLabel,
-              isSelected: currentSource == ImmersionSource.local,
-              onTap: () => onSourceChanged(ImmersionSource.local),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _SourceTab extends StatelessWidget {
-  const _SourceTab({
-    required this.label,
-    required this.isSelected,
-    required this.onTap,
-  });
-
-  final String label;
-  final bool isSelected;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(12),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 180),
-        alignment: Alignment.center,
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          gradient: isSelected
-              ? const LinearGradient(
-                  colors: [Color(0xFFE0F2FE), Color(0xFFDCFCE7)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                )
-              : null,
-          color: isSelected ? null : Colors.transparent,
-        ),
-        child: Text(
-          label,
-          style: TextStyle(
-            fontSize: 12.5,
-            fontWeight: FontWeight.w800,
-            color: isSelected
-                ? const Color(0xFF0F172A)
-                : const Color(0xFF64748B),
-          ),
-        ),
-      ),
-    );
-  }
+  String _statusLabel(AppLanguage language, String currentLevel) =>
+      switch (language) {
+        AppLanguage.en => '$currentLevel track',
+        AppLanguage.vi => 'Track $currentLevel',
+        AppLanguage.ja => '$currentLevel トラック',
+      };
 }
 
 class _ReadingOverviewCard extends StatelessWidget {
@@ -1093,44 +942,6 @@ class _DifficultyBadge extends StatelessWidget {
   }
 }
 
-class _FallbackNotice extends StatelessWidget {
-  const _FallbackNotice({required this.language});
-
-  final AppLanguage language;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: const Color(0xFFFFFBEB),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFFDE68A)),
-      ),
-      child: Row(
-        children: [
-          const Icon(
-            Icons.info_outline_rounded,
-            color: Color(0xFFB45309),
-            size: 18,
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Text(
-              language.immersionFallbackToLocalLabel,
-              style: const TextStyle(
-                color: Color(0xFF92400E),
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class _EmptyState extends StatelessWidget {
   const _EmptyState({required this.language});
 
@@ -1213,18 +1024,4 @@ class _ReadingLevelSection {
   final String title;
   final String subtitle;
   final List<ImmersionArticle> articles;
-}
-
-class _ImmersionLoadState {
-  const _ImmersionLoadState({
-    required this.articles,
-    required this.usedLocalFallback,
-  });
-
-  const _ImmersionLoadState.empty()
-    : articles = const [],
-      usedLocalFallback = false;
-
-  final List<ImmersionArticle> articles;
-  final bool usedLocalFallback;
 }

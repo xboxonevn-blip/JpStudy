@@ -112,17 +112,17 @@ class _PracticeHubContent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (focusModeEnabled && showFocusHint) ...[
-            _FocusModeHint(language: language),
-            SizedBox(height: embedded ? 8 : 10),
+            _FocusModeHint(language: language, embedded: embedded),
+            SizedBox(height: embedded ? 6 : 10),
           ],
           if (showHeader) ...[
             Row(
               children: [
                 Container(
-                  width: 38,
-                  height: 38,
+                  width: embedded ? 32 : 38,
+                  height: embedded ? 32 : 38,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(embedded ? 10 : 12),
                     gradient: const LinearGradient(
                       colors: [Color(0xFFE0F2FE), Color(0xFFDCFCE7)],
                       begin: Alignment.topLeft,
@@ -132,9 +132,10 @@ class _PracticeHubContent extends StatelessWidget {
                   child: const Icon(
                     Icons.rocket_launch_rounded,
                     color: Color(0xFF0F766E),
+                    size: 18,
                   ),
                 ),
-                const SizedBox(width: 10),
+                SizedBox(width: embedded ? 8 : 10),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,25 +143,27 @@ class _PracticeHubContent extends StatelessWidget {
                       Text(
                         language.practiceHubTitle,
                         style: TextStyle(
-                          fontSize: embedded ? 16 : 18,
+                          fontSize: embedded ? 14 : 18,
                           fontWeight: FontWeight.w800,
                           color: const Color(0xFF0F172A),
                         ),
                       ),
-                      const SizedBox(height: 2),
-                      Text(
-                        language.practiceHubSubtitle,
-                        style: TextStyle(
-                          fontSize: embedded ? 12 : 12.5,
-                          color: const Color(0xFF64748B),
+                      if (!embedded) ...[
+                        const SizedBox(height: 2),
+                        Text(
+                          language.practiceHubSubtitle,
+                          style: const TextStyle(
+                            fontSize: 12.5,
+                            color: Color(0xFF64748B),
+                          ),
                         ),
-                      ),
+                      ],
                     ],
                   ),
                 ),
               ],
             ),
-            SizedBox(height: embedded ? 10 : 14),
+            SizedBox(height: embedded ? 8 : 14),
           ],
           LayoutBuilder(
             builder: (context, constraints) {
@@ -169,22 +172,53 @@ class _PracticeHubContent extends StatelessWidget {
                   : constraints.maxWidth >= 620
                   ? 2
                   : 1;
-              final tileHeight = embedded ? 112.0 : 124.0;
+              final spacing = embedded ? 8.0 : 10.0;
+
+              if (embedded) {
+                final tileWidth = crossAxisCount == 1
+                    ? constraints.maxWidth
+                    : (constraints.maxWidth -
+                              (spacing * (crossAxisCount - 1))) /
+                          crossAxisCount;
+
+                return Wrap(
+                  spacing: spacing,
+                  runSpacing: spacing,
+                  children: [
+                    for (final item in tiles)
+                      SizedBox(
+                        width: tileWidth,
+                        child: _PracticeTile(
+                          item: item,
+                          compact: true,
+                          onTap: () {
+                            if (item.extra != null) {
+                              context.push(item.route, extra: item.extra);
+                            } else {
+                              context.push(item.route);
+                            }
+                          },
+                        ),
+                      ),
+                  ],
+                );
+              }
+
               return GridView.builder(
                 itemCount: tiles.length,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: crossAxisCount,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  mainAxisExtent: tileHeight,
+                  mainAxisSpacing: spacing,
+                  crossAxisSpacing: spacing,
+                  mainAxisExtent: 124,
                 ),
                 itemBuilder: (context, index) {
                   final item = tiles[index];
                   return _PracticeTile(
                     item: item,
-                    compact: embedded,
+                    compact: false,
                     onTap: () {
                       if (item.extra != null) {
                         context.push(item.route, extra: item.extra);
@@ -204,34 +238,38 @@ class _PracticeHubContent extends StatelessWidget {
 }
 
 class _FocusModeHint extends StatelessWidget {
-  const _FocusModeHint({required this.language});
+  const _FocusModeHint({required this.language, required this.embedded});
 
   final AppLanguage language;
+  final bool embedded;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      padding: EdgeInsets.symmetric(
+        horizontal: embedded ? 8 : 10,
+        vertical: embedded ? 6 : 8,
+      ),
       decoration: BoxDecoration(
         color: const Color(0xFFFFFBEB),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(embedded ? 10 : 12),
         border: Border.all(color: const Color(0xFFFDE68A)),
       ),
       child: Row(
         children: [
-          const Icon(
+          Icon(
             Icons.filter_alt_rounded,
-            size: 16,
-            color: Color(0xFFB45309),
+            size: embedded ? 14 : 16,
+            color: const Color(0xFFB45309),
           ),
-          const SizedBox(width: 6),
+          SizedBox(width: embedded ? 5 : 6),
           Expanded(
             child: Text(
               _focusHintLabel(language),
-              style: const TextStyle(
+              style: TextStyle(
                 color: Color(0xFF92400E),
-                fontSize: 12,
+                fontSize: embedded ? 11 : 12,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -268,15 +306,15 @@ class _PracticeTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: Colors.transparent,
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(compact ? 14 : 16),
       child: InkWell(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(compact ? 14 : 16),
         onTap: onTap,
         child: Container(
-          padding: EdgeInsets.all(compact ? 10 : 12),
+          padding: EdgeInsets.all(compact ? 8 : 12),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(compact ? 14 : 16),
             border: Border.all(color: HomeSurface.panelBorder),
             boxShadow: const [
               BoxShadow(
@@ -287,29 +325,30 @@ class _PracticeTile extends StatelessWidget {
             ],
           ),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
                   Container(
-                    width: compact ? 30 : 34,
-                    height: compact ? 30 : 34,
+                    width: compact ? 26 : 34,
+                    height: compact ? 26 : 34,
                     decoration: BoxDecoration(
                       color: item.color.withValues(alpha: 0.14),
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(compact ? 8 : 10),
                     ),
                     child: Icon(
                       item.icon,
                       color: item.color,
-                      size: compact ? 18 : 20,
+                      size: compact ? 15 : 20,
                     ),
                   ),
                   const Spacer(),
                   if (item.badgeCount != null && item.badgeCount! > 0)
                     Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 7,
-                        vertical: 2,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: compact ? 6 : 7,
+                        vertical: compact ? 1.5 : 2,
                       ),
                       decoration: BoxDecoration(
                         color: const Color(0xFFEF4444),
@@ -317,43 +356,44 @@ class _PracticeTile extends StatelessWidget {
                       ),
                       child: Text(
                         '${item.badgeCount}',
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
-                          fontSize: 11,
+                          fontSize: compact ? 10 : 11,
                           fontWeight: FontWeight.w800,
                         ),
                       ),
                     ),
                 ],
               ),
-              SizedBox(height: compact ? 8 : 10),
+              SizedBox(height: compact ? 6 : 10),
               Text(
                 item.title,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontWeight: FontWeight.w800,
-                  fontSize: compact ? 13 : 14,
+                  fontSize: compact ? 12.2 : 14,
                   color: const Color(0xFF0F172A),
                 ),
               ),
-              const SizedBox(height: 2),
+              SizedBox(height: compact ? 1 : 2),
               Text(
                 item.subtitle,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  fontSize: compact ? 11.2 : 12,
+                  fontSize: compact ? 10.6 : 12,
                   color: const Color(0xFF64748B),
+                  height: 1.15,
                 ),
               ),
               if (item.estimatedMinutes != null &&
                   item.estimatedMinutes! > 0) ...[
-                const SizedBox(height: 4),
+                SizedBox(height: compact ? 2 : 4),
                 Text(
                   '~${item.estimatedMinutes} min',
                   style: TextStyle(
-                    fontSize: compact ? 10.5 : 11,
+                    fontSize: compact ? 9.8 : 11,
                     color: const Color(0xFF94A3B8),
                     fontWeight: FontWeight.w600,
                   ),

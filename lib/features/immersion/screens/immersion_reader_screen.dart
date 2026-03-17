@@ -33,7 +33,6 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
   bool _showTranslation = true;
   bool _isAutoScrolling = false;
   bool _quickAddMode = false;
-  Future<ImmersionArticle?>? _detailFuture;
   Set<String> _savedTokens = {};
   Map<String, ImmersionToken> _unknownQueue = {};
   List<_ImmersionQuizQuestion> _quizQuestions = const [];
@@ -57,7 +56,6 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
   void initState() {
     super.initState();
     _scrollController.addListener(_handleScrollProgress);
-    _ensureDetailLoaded();
     _loadSavedTokens();
   }
 
@@ -68,14 +66,6 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
     _scrollController.removeListener(_handleScrollProgress);
     _scrollController.dispose();
     super.dispose();
-  }
-
-  void _ensureDetailLoaded({bool forceRefresh = false}) {
-    if (widget.article.paragraphs.isNotEmpty) return;
-    if (widget.article.source != ImmersionService.nhkSourceLabel) return;
-    _detailFuture = ref
-        .read(immersionServiceProvider)
-        .loadNhkArticleDetail(widget.article.id, forceRefresh: forceRefresh);
   }
 
   Future<void> _loadSavedTokens() async {
@@ -1048,28 +1038,12 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
     final readIds = ref.watch(readArticlesProvider);
     final isRead = readIds.contains(widget.article.id);
 
-    Widget child;
-    if (_detailFuture != null) {
-      child = FutureBuilder<ImmersionArticle?>(
-        future: _detailFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return _buildLoading(context, language);
-          }
-          if (snapshot.hasError || snapshot.data == null) {
-            return _buildError(context, language);
-          }
-          return _buildArticleScaffold(
-            context,
-            language,
-            snapshot.data!,
-            isRead,
-          );
-        },
-      );
-    } else {
-      child = _buildArticleScaffold(context, language, widget.article, isRead);
-    }
+    final child = _buildArticleScaffold(
+      context,
+      language,
+      widget.article,
+      isRead,
+    );
 
     return PopScope(
       canPop: false,
@@ -1101,45 +1075,6 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
       systemOverlayStyle: _overlayStyle(context),
       title: Text(language.immersionTitle),
       actions: actions,
-    );
-  }
-
-  Scaffold _buildLoading(BuildContext context, AppLanguage language) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: _buildAppBar(context, language),
-      body: const Center(child: CircularProgressIndicator()),
-    );
-  }
-
-  Scaffold _buildError(BuildContext context, AppLanguage language) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: _buildAppBar(context, language),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                language.immersionFallbackToLocalLabel,
-                textAlign: TextAlign.center,
-              ),
-            ),
-            const SizedBox(height: 10),
-            FilledButton.icon(
-              onPressed: () {
-                setState(() {
-                  _ensureDetailLoaded(forceRefresh: true);
-                });
-              },
-              icon: const Icon(Icons.refresh_rounded),
-              label: Text(language.retryLabel),
-            ),
-          ],
-        ),
-      ),
     );
   }
 

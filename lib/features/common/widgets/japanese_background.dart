@@ -59,8 +59,12 @@ class JapaneseBackground extends StatelessWidget {
         Positioned.fill(
           child: LayoutBuilder(
             builder: (context, constraints) {
-              if (constraints.maxWidth < 900) return const SizedBox.shrink();
-              return const SakuraParticles();
+              final petalCount = constraints.maxWidth >= 1200
+                  ? 34
+                  : constraints.maxWidth >= 800
+                  ? 28
+                  : 20;
+              return SakuraParticles(petalCount: petalCount);
             },
           ),
         ),
@@ -108,7 +112,11 @@ class _WavePatternPainter extends CustomPainter {
     var row = 0;
     for (double y = -cellSize; y < size.height + cellSize * 2; y += cellSize) {
       final xShift = row.isEven ? 0.0 : cellSize;
-      for (double x = -cellSize * 2; x < size.width + cellSize * 2; x += cellSize * 2) {
+      for (
+        double x = -cellSize * 2;
+        x < size.width + cellSize * 2;
+        x += cellSize * 2
+      ) {
         final cx = x + xShift;
         final cy = y;
         for (var i = 1; i <= arcs; i++) {

@@ -27,12 +27,12 @@ class HeaderBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final palette = context.appPalette;
     return ClipRRect(
-      borderRadius: BorderRadius.circular(26),
+      borderRadius: BorderRadius.circular(22),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 14, sigmaY: 14),
         child: Container(
-          height: 58,
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          height: 54,
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
@@ -42,13 +42,13 @@ class HeaderBar extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
-            borderRadius: BorderRadius.circular(26),
+            borderRadius: BorderRadius.circular(22),
             border: Border.all(color: palette.outline, width: 1),
             boxShadow: [
               BoxShadow(
                 color: palette.primary.withValues(alpha: 0.10),
-                blurRadius: 18,
-                offset: const Offset(0, 8),
+                blurRadius: 14,
+                offset: const Offset(0, 6),
               ),
             ],
           ),
@@ -57,14 +57,14 @@ class HeaderBar extends StatelessWidget {
               Expanded(
                 child: _HeaderStats(level: level, language: language),
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 6),
               _ActionPill(
                 icon: Icons.language_rounded,
                 label: language.shortCode,
                 tooltip: language.languageMenuLabel,
                 onTap: onLanguageTap,
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 6),
               PopupMenuButton<StudyLevel>(
                 tooltip: language.changeLevelLabel,
                 onSelected: onLevelChanged,
@@ -83,7 +83,7 @@ class HeaderBar extends StatelessWidget {
                   label: level?.shortLabel ?? 'JLPT',
                 ),
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 6),
               IconButton(
                 onPressed: onSettingsTap,
                 tooltip: language.settingsLabel,
@@ -94,7 +94,7 @@ class HeaderBar extends StatelessWidget {
                 icon: Icon(
                   Icons.settings_rounded,
                   color: palette.ink.withValues(alpha: 0.82),
-                  size: 20,
+                  size: 18,
                 ),
               ),
             ],
@@ -198,7 +198,7 @@ class _StatCapsule extends StatelessWidget {
     return Tooltip(
       message: tooltip,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         decoration: BoxDecoration(
           color: urgent
               ? palette.error.withValues(alpha: 0.12)
@@ -220,14 +220,14 @@ class _StatCapsule extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, size: 15, color: color),
-            const SizedBox(width: 5),
+            Icon(icon, size: 14, color: color),
+            const SizedBox(width: 4),
             Text(
               showPlus ? '$label+' : label,
               style: TextStyle(
                 color: palette.ink,
                 fontWeight: FontWeight.w800,
-                fontSize: 12,
+                fontSize: 11.5,
               ),
             ),
           ],
@@ -259,7 +259,7 @@ class _ActionPill extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(999),
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+          padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
           decoration: BoxDecoration(
             color: palette.surface,
             borderRadius: BorderRadius.circular(999),
@@ -267,13 +267,13 @@ class _ActionPill extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Icon(icon, size: 15, color: palette.primary),
-              const SizedBox(width: 5),
+              Icon(icon, size: 14, color: palette.primary),
+              const SizedBox(width: 4),
               Text(
                 label,
                 style: TextStyle(
                   color: palette.ink.withValues(alpha: 0.86),
-                  fontSize: 12,
+                  fontSize: 11.5,
                   fontWeight: FontWeight.w800,
                 ),
               ),
@@ -295,7 +295,7 @@ class _MenuPill extends StatelessWidget {
   Widget build(BuildContext context) {
     final palette = context.appPalette;
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+      padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
       child: Container(
         decoration: BoxDecoration(
           color: palette.secondary.withValues(alpha: 0.10),
@@ -304,13 +304,13 @@ class _MenuPill extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(icon, size: 15, color: palette.secondary),
-            const SizedBox(width: 5),
+            Icon(icon, size: 14, color: palette.secondary),
+            const SizedBox(width: 4),
             Text(
               label,
               style: TextStyle(
                 color: palette.secondary,
-                fontSize: 12,
+                fontSize: 11.5,
                 fontWeight: FontWeight.w900,
               ),
             ),

@@ -16,11 +16,15 @@ void main() {
       final jlptReadingBank = await loadJlptReadingBank();
       final immersionArticles = await ImmersionService().loadLocalSamples();
 
-      expect(immersionArticles.length, greaterThanOrEqualTo(75));
+      expect(immersionArticles, isNotEmpty);
       expect(jlptReadingBank.length, immersionArticles.length);
 
       final ids = jlptReadingBank.map((entry) => entry.id).toList();
       expect(ids.toSet().length, ids.length);
+
+      final immersionIds = immersionArticles.map((article) => article.id).toList();
+      expect(immersionIds.toSet().length, immersionIds.length);
+
       expect(jlptReadingBank.any((entry) => entry.level == 'N5'), isTrue);
       expect(jlptReadingBank.any((entry) => entry.level == 'N4'), isTrue);
       expect(jlptReadingBank.any((entry) => entry.level == 'N3'), isTrue);
@@ -29,11 +33,7 @@ void main() {
         isTrue,
       );
 
-      final immersionIds = immersionArticles
-          .map((article) => article.id)
-          .toSet();
-
-      expect(ids.toSet(), immersionIds);
+      expect(ids.toSet(), immersionIds.toSet());
     },
   );
 

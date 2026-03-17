@@ -1,6 +1,27 @@
+import 'package:flutter/widgets.dart';
+
 enum AppLanguage { en, vi, ja }
 
+const List<Locale> supportedAppLocales = <Locale>[
+  Locale('en'),
+  Locale('vi', 'VN'),
+  Locale('ja'),
+];
+
 extension AppLanguageLabels on AppLanguage {
+  Locale get locale {
+    switch (this) {
+      case AppLanguage.en:
+        return supportedAppLocales[0];
+      case AppLanguage.vi:
+        return supportedAppLocales[1];
+      case AppLanguage.ja:
+        return supportedAppLocales[2];
+    }
+  }
+
+  bool get usesJapaneseTypography => this == AppLanguage.ja;
+
   String get label {
     switch (this) {
       case AppLanguage.en:
@@ -4910,33 +4931,33 @@ extension AppLanguageLabels on AppLanguage {
   String get ghostReviewsLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Mistake Review';
+        return 'Grammar Repair';
       case AppLanguage.vi:
-        return 'Ôn lỗi';
+        return 'Ôn lỗi ngữ pháp';
       case AppLanguage.ja:
-        return 'ゴースト復習';
+        return '文法ミス復習';
     }
   }
 
   String get ghostReviewTitle {
     switch (this) {
       case AppLanguage.en:
-        return 'Fix Mistakes';
+        return 'Grammar Repair';
       case AppLanguage.vi:
-        return 'S\u1eeda l\u1ed7i';
+        return 'Ôn lỗi ngữ pháp';
       case AppLanguage.ja:
-        return 'ミス修正';
+        return '文法ミス復習';
     }
   }
 
   String ghostReviewBannerTitle(int count) {
     switch (this) {
       case AppLanguage.en:
-        return 'Fix Mistakes ($count)';
+        return 'Grammar Repair ($count)';
       case AppLanguage.vi:
-        return 'S\u1eeda l\u1ed7i ($count)';
+        return 'Ôn lỗi ngữ pháp ($count)';
       case AppLanguage.ja:
-        return 'ミス修正 ($count)';
+        return '文法ミス復習 ($count)';
     }
   }
 
@@ -5196,20 +5217,20 @@ extension AppLanguageLabels on AppLanguage {
   String get practiceGhostLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Mistakes';
+        return 'Grammar repair';
       case AppLanguage.vi:
-        return '\u00d4n l\u1ed7i';
+        return 'Ôn lỗi ngữ pháp';
       case AppLanguage.ja:
-        return '\u30df\u30b9\u5fa9\u7fd2';
+        return '文法修正';
     }
   }
 
   String get practiceGhostSubtitle {
     switch (this) {
       case AppLanguage.en:
-        return 'Review recent grammar mistakes.';
+        return 'Review recent grammar slip-ups.';
       case AppLanguage.vi:
-        return '\u00d4n l\u1ea1i l\u1ed7i ng\u1eef ph\u00e1p g\u1ea7n \u0111\u00e2y.';
+        return 'Ôn lại lỗi ngữ pháp gần đây.';
       case AppLanguage.ja:
         return '\u6700\u8fd1\u306e\u6587\u6cd5\u30df\u30b9\u3092\u5fa9\u7fd2\u3002';
     }
@@ -5317,22 +5338,22 @@ extension AppLanguageLabels on AppLanguage {
   String get practiceMistakesLabel {
     switch (this) {
       case AppLanguage.en:
-        return 'Mistakes';
+        return 'Weak points';
       case AppLanguage.vi:
-        return 'S\u1eeda l\u1ed7i';
+        return 'Điểm yếu';
       case AppLanguage.ja:
-        return 'ミス修正';
+        return '弱点補強';
     }
   }
 
   String get practiceMistakesSubtitle {
     switch (this) {
       case AppLanguage.en:
-        return 'Practice your weak points.';
+        return 'Practice vocab, kanji, and grammar weak points.';
       case AppLanguage.vi:
-        return 'Luy\u1ec7n l\u1ea1i c\u00e1c \u0111i\u1ec3m c\u00f2n y\u1ebfu.';
+        return 'Luyện lại các điểm yếu ở từ vựng, kanji và ngữ pháp.';
       case AppLanguage.ja:
-        return '\u82e6\u624b\u5206\u91ce\u3092\u91cd\u70b9\u7684\u306b\u7df4\u7fd2\u3002';
+        return '語彙・漢字・文法の弱点を重点的に練習。';
     }
   }
 
@@ -5613,61 +5634,6 @@ extension AppLanguageLabels on AppLanguage {
         return '\u0110\u1ecdc m\u1edf r\u1ed9ng';
       case AppLanguage.ja:
         return '\u591a\u8aad\u30ea\u30fc\u30c0\u30fc';
-    }
-  }
-
-  String get immersionSourceLabel {
-    switch (this) {
-      case AppLanguage.en:
-        return 'Source';
-      case AppLanguage.vi:
-        return 'Nguồn';
-      case AppLanguage.ja:
-        return 'ソース';
-    }
-  }
-
-  String get immersionSourceNhkLabel {
-    switch (this) {
-      case AppLanguage.en:
-        return 'NHK Easy';
-      case AppLanguage.vi:
-        return 'NHK Easy';
-      case AppLanguage.ja:
-        return 'NHK Easy';
-    }
-  }
-
-  String get immersionSourceLocalLabel {
-    switch (this) {
-      case AppLanguage.en:
-        return 'Reading bank';
-      case AppLanguage.vi:
-        return 'Ng\u00e2n h\u00e0ng b\u00e0i \u0111\u1ecdc';
-      case AppLanguage.ja:
-        return '\u6559\u6750\u30d0\u30f3\u30af';
-    }
-  }
-
-  String get immersionRefreshLabel {
-    switch (this) {
-      case AppLanguage.en:
-        return 'Refresh';
-      case AppLanguage.vi:
-        return 'L\u00e0m m\u1edbi';
-      case AppLanguage.ja:
-        return '\u66f4\u65b0';
-    }
-  }
-
-  String get immersionFallbackToLocalLabel {
-    switch (this) {
-      case AppLanguage.en:
-        return 'NHK is currently unavailable. Showing fallback articles.';
-      case AppLanguage.vi:
-        return 'NHK hi\u1ec7n kh\u00f4ng kh\u1ea3 d\u1ee5ng. \u0110ang hi\u1ec3n th\u1ecb b\u00e0i thay th\u1ebf.';
-      case AppLanguage.ja:
-        return 'NHK\u304c\u5229\u7528\u3067\u304d\u306a\u3044\u305f\u3081\u3001\u4ee3\u66ff\u8a18\u4e8b\u3092\u8868\u793a\u3057\u3066\u3044\u307e\u3059\u3002';
     }
   }
 

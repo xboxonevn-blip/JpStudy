@@ -15,12 +15,10 @@ import 'package:jpstudy/features/immersion/services/immersion_service.dart';
 class FakeImmersionService extends ImmersionService {
   FakeImmersionService({
     required this.localArticles,
-    required this.nhkArticles,
     Set<String>? initialReadIds,
   }) : _readIds = {...?initialReadIds};
 
   final List<ImmersionArticle> localArticles;
-  final List<ImmersionArticle> nhkArticles;
   final Set<String> _readIds;
   final Map<String, List<ImmersionQuizAttempt>> _history = {};
 
@@ -36,7 +34,7 @@ class FakeImmersionService extends ImmersionService {
     bool forceRefresh = false,
     int limit = 12,
   }) async {
-    return nhkArticles.take(limit).toList();
+    return const [];
   }
 
   @override
@@ -76,7 +74,9 @@ class FakeImmersionService extends ImmersionService {
     required int total,
     int keep = 20,
   }) async {
-    final current = [...(_history[articleId] ?? const <ImmersionQuizAttempt>[])];
+    final current = [
+      ...(_history[articleId] ?? const <ImmersionQuizAttempt>[]),
+    ];
     current.insert(
       0,
       ImmersionQuizAttempt(
@@ -93,17 +93,6 @@ class FakeImmersionService extends ImmersionService {
 }
 
 void main() {
-  final fallbackArticle = ImmersionArticle(
-    id: 'fallback_1',
-    title: 'Fallback article',
-    officialLevel: 'N5',
-    source: 'Watanoc',
-    publishedAt: DateTime(2026, 2, 4),
-    paragraphs: [
-      [ImmersionToken(surface: '学ぶ', reading: 'まなぶ', meaningEn: 'learn')],
-    ],
-  );
-
   final repeatedParagraphs = List<List<ImmersionToken>>.generate(
     30,
     (_) => const [
@@ -127,92 +116,83 @@ void main() {
     translation: 'This is a local translation.',
   );
 
-  testWidgets('Immersion home shows NHK fallback notice and still loads articles', (
-    tester,
-  ) async {
-    final fakeService = FakeImmersionService(
-      localArticles: [localArticle],
-      nhkArticles: [fallbackArticle],
-    );
+  testWidgets(
+    'Immersion home removes NHK Easy and loads reading bank articles',
+    (tester) async {
+      final fakeService = FakeImmersionService(localArticles: [localArticle]);
 
-    await tester.pumpWidget(
-      ProviderScope(
-        overrides: [
-          immersionServiceProvider.overrideWithValue(fakeService),
-        ],
-        child: const MaterialApp(home: ImmersionHomeScreen()),
-      ),
-    );
-
-    await tester.pumpAndSettle();
-    await tester.tap(find.text(AppLanguage.en.immersionSourceNhkLabel).first);
-    await tester.pumpAndSettle();
-
-    expect(find.text(AppLanguage.en.immersionFallbackToLocalLabel), findsOneWidget);
-    expect(find.text('Fallback article'), findsOneWidget);
-  });
-
-  testWidgets('Immersion reader walkthrough: furigana/translation/read status/SRS/auto-scroll', (
-    tester,
-  ) async {
-    final fakeService = FakeImmersionService(
-      localArticles: [localArticle],
-      nhkArticles: [fallbackArticle],
-    );
-    final db = AppDatabase(executor: NativeDatabase.memory());
-    final contentDb = ContentDatabase(executor: NativeDatabase.memory());
-    final repo = LessonRepository(db, contentDb);
-    addTearDown(() async {
-      await contentDb.close();
-      await db.close();
-    });
-
-    await tester.pumpWidget(
-      ProviderScope(
-        overrides: [
-          lessonRepositoryProvider.overrideWithValue(repo),
-          immersionServiceProvider.overrideWithValue(fakeService),
-        ],
-        child: MaterialApp(
-          home: ImmersionReaderScreen(article: localArticle),
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [immersionServiceProvider.overrideWithValue(fakeService)],
+          child: const MaterialApp(home: ImmersionHomeScreen()),
         ),
-      ),
-    );
+      );
 
-    await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
+      expect(find.text('NHK Easy'), findsNothing);
+      expect(find.text('Local article', skipOffstage: false), findsWidgets);
+    },
+  );
 
-    // Furigana on by default.
-    expect(find.text('にほんご'), findsWidgets);
-    await tester.tap(find.byTooltip(AppLanguage.en.immersionFuriganaLabel));
-    await tester.pumpAndSettle();
-    expect(find.text('にほんご'), findsNothing);
+  testWidgets(
+    'Immersion reader walkthrough: furigana/translation/read status/SRS/auto-scroll',
+    (tester) async {
+      final fakeService = FakeImmersionService(localArticles: [localArticle]);
+      final db = AppDatabase(executor: NativeDatabase.memory());
+      final contentDb = ContentDatabase(executor: NativeDatabase.memory());
+      final repo = LessonRepository(db, contentDb);
+      addTearDown(() async {
+        await contentDb.close();
+        await db.close();
+      });
 
-    // Translation toggle in app bar.
-    await tester.tap(find.byTooltip(AppLanguage.en.immersionTranslateLabel));
-    await tester.pumpAndSettle();
-    await tester.tap(find.byTooltip(AppLanguage.en.immersionTranslateLabel));
-    await tester.pumpAndSettle();
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            lessonRepositoryProvider.overrideWithValue(repo),
+            immersionServiceProvider.overrideWithValue(fakeService),
+          ],
+          child: MaterialApp(
+            home: ImmersionReaderScreen(article: localArticle),
+          ),
+        ),
+      );
 
-    // Mark as learned/read.
-    await tester.tap(find.byTooltip(AppLanguage.en.immersionMarkReadLabel));
-    await tester.pumpAndSettle();
-    expect(fakeService.readIds.contains(localArticle.id), isTrue);
+      await tester.pumpAndSettle();
 
-    // Tap token, then add to SRS.
-    await tester.tap(find.text('日本語').first);
-    await tester.pumpAndSettle();
-    await tester.tap(find.text(AppLanguage.en.immersionAddSrsLabel));
-    await tester.pumpAndSettle();
-    final saved = await repo.findTermInLesson(9999, '日本語', 'にほんご');
-    expect(saved, isNotNull);
+      // Furigana on by default.
+      expect(find.text('にほんご'), findsWidgets);
+      await tester.tap(find.byTooltip(AppLanguage.en.immersionFuriganaLabel));
+      await tester.pumpAndSettle();
+      expect(find.text('にほんご'), findsNothing);
 
-    // Auto-scroll toggle from FAB.
-    await tester.tap(find.byIcon(Icons.play_arrow_rounded));
-    await tester.pump(const Duration(milliseconds: 120));
-    expect(find.byIcon(Icons.pause_rounded), findsOneWidget);
+      // Translation toggle in app bar.
+      await tester.tap(find.byTooltip(AppLanguage.en.immersionTranslateLabel));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byTooltip(AppLanguage.en.immersionTranslateLabel));
+      await tester.pumpAndSettle();
 
-    await tester.tap(find.byIcon(Icons.pause_rounded));
-    await tester.pump(const Duration(milliseconds: 120));
-    expect(find.byIcon(Icons.play_arrow_rounded), findsOneWidget);
-  });
+      // Mark as learned/read.
+      await tester.tap(find.byTooltip(AppLanguage.en.immersionMarkReadLabel));
+      await tester.pumpAndSettle();
+      expect(fakeService.readIds.contains(localArticle.id), isTrue);
+
+      // Tap token, then add to SRS.
+      await tester.tap(find.text('日本語').first);
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(AppLanguage.en.immersionAddSrsLabel));
+      await tester.pumpAndSettle();
+      final saved = await repo.findTermInLesson(9999, '日本語', 'にほんご');
+      expect(saved, isNotNull);
+
+      // Auto-scroll toggle from FAB.
+      await tester.tap(find.byIcon(Icons.play_arrow_rounded));
+      await tester.pump(const Duration(milliseconds: 120));
+      expect(find.byIcon(Icons.pause_rounded), findsOneWidget);
+
+      await tester.tap(find.byIcon(Icons.pause_rounded));
+      await tester.pump(const Duration(milliseconds: 120));
+      expect(find.byIcon(Icons.play_arrow_rounded), findsOneWidget);
+    },
+  );
 }

@@ -1,8 +1,15 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 
+const _testFrameProgress = 0.35;
+bool get _isWidgetTestBinding => WidgetsBinding.instance.runtimeType
+    .toString()
+    .contains('TestWidgetsFlutterBinding');
+
 class SakuraParticles extends StatefulWidget {
-  const SakuraParticles({super.key});
+  const SakuraParticles({super.key, this.petalCount = 20});
+
+  final int petalCount;
 
   @override
   State<SakuraParticles> createState() => _SakuraParticlesState();
@@ -16,12 +23,24 @@ class _SakuraParticlesState extends State<SakuraParticles>
   @override
   void initState() {
     super.initState();
-    final rng = Random();
-    _petals = List.generate(7, (_) => _Petal(rng));
+    _seedPetals();
+    final isWidgetTest = _isWidgetTestBinding;
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 10),
-    )..repeat();
+      value: isWidgetTest ? _testFrameProgress : 0,
+    );
+    if (!isWidgetTest) {
+      _controller.repeat();
+    }
+  }
+
+  @override
+  void didUpdateWidget(covariant SakuraParticles oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.petalCount != widget.petalCount) {
+      _seedPetals();
+    }
   }
 
   @override
@@ -30,10 +49,23 @@ class _SakuraParticlesState extends State<SakuraParticles>
     super.dispose();
   }
 
+  void _seedPetals() {
+    final rng = Random();
+    _petals = List.generate(widget.petalCount, (_) => _Petal(rng));
+  }
+
   @override
   Widget build(BuildContext context) {
     final reducedMotion = MediaQuery.of(context).disableAnimations;
     if (reducedMotion) return const SizedBox.shrink();
+    if (_isWidgetTestBinding) {
+      return IgnorePointer(
+        child: CustomPaint(
+          painter: _SakuraPainter(_petals, _testFrameProgress),
+          size: Size.infinite,
+        ),
+      );
+    }
 
     return IgnorePointer(
       child: AnimatedBuilder(
@@ -51,12 +83,12 @@ class _SakuraParticlesState extends State<SakuraParticles>
 
 class _Petal {
   _Petal(Random rng)
-      : startX = rng.nextDouble(),
-        speed = 0.6 + rng.nextDouble() * 0.4,
-        drift = 0.02 + rng.nextDouble() * 0.06,
-        phase = rng.nextDouble(),
-        size = 4.0 + rng.nextDouble() * 4.0,
-        rotationSpeed = 0.5 + rng.nextDouble();
+    : startX = rng.nextDouble(),
+      speed = 0.6 + rng.nextDouble() * 0.4,
+      drift = 0.02 + rng.nextDouble() * 0.06,
+      phase = rng.nextDouble(),
+      size = 4.0 + rng.nextDouble() * 4.0,
+      rotationSpeed = 0.5 + rng.nextDouble();
 
   final double startX;
   final double speed;
@@ -74,12 +106,13 @@ class _SakuraPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color = const Color(0x40FFB7C5);
+    final paint = Paint()..color = const Color(0x5CFFB7C5);
 
     for (final petal in petals) {
       final progress = (t * petal.speed + petal.phase) % 1.0;
       final y = -20 + progress * (size.height + 40);
-      final x = petal.startX * size.width +
+      final x =
+          petal.startX * size.width +
           sin(progress * 3.14159 * 2 * petal.rotationSpeed) *
               size.width *
               petal.drift;

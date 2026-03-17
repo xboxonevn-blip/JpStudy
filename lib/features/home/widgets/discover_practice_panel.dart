@@ -76,7 +76,7 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
         0,
       ),
       child: Container(
-        decoration: HomeSurface.softPanel(),
+        decoration: HomeSurface.softPanel(radius: widget.dense ? 18 : 24),
         child: Column(
           children: [
             InkWell(
@@ -89,18 +89,20 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
               borderRadius: BorderRadius.circular(HomeSurface.panelRadius),
               child: Padding(
                 padding: EdgeInsets.fromLTRB(
-                  widget.dense ? 12 : 14,
-                  widget.dense ? 12 : 14,
-                  widget.dense ? 12 : 14,
-                  widget.dense ? 12 : 14,
+                  widget.dense ? 10 : 14,
+                  widget.dense ? 10 : 14,
+                  widget.dense ? 10 : 14,
+                  widget.dense ? 10 : 14,
                 ),
                 child: Row(
                   children: [
                     Container(
-                      width: widget.dense ? 34 : 36,
-                      height: widget.dense ? 34 : 36,
+                      width: widget.dense ? 28 : 36,
+                      height: widget.dense ? 28 : 36,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(
+                          widget.dense ? 10 : 12,
+                        ),
                         gradient: const LinearGradient(
                           colors: [Color(0xFFE0F2FE), Color(0xFFFFEDD5)],
                           begin: Alignment.topLeft,
@@ -110,33 +112,36 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
                       child: const Icon(
                         Icons.explore_rounded,
                         color: Color(0xFF0F766E),
-                        size: 20,
+                        size: 17,
                       ),
                     ),
-                    const SizedBox(width: 10),
+                    SizedBox(width: widget.dense ? 8 : 10),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
                             language.practiceHubTitle,
                             style: TextStyle(
-                              fontSize: widget.dense ? 15 : 16,
+                              fontSize: widget.dense ? 13.5 : 16,
                               fontWeight: FontWeight.w800,
                               color: const Color(0xFF0F172A),
                             ),
                           ),
-                          Text(
-                            language.practiceHubSubtitle,
-                            style: TextStyle(
-                              fontSize: widget.dense ? 11.5 : 12,
-                              color: const Color(0xFF64748B),
+                          if (!widget.dense) ...[
+                            Text(
+                              language.practiceHubSubtitle,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Color(0xFF64748B),
+                              ),
                             ),
-                          ),
+                          ],
                         ],
                       ),
                     ),
-                    const SizedBox(width: 6),
+                    SizedBox(width: widget.dense ? 4 : 6),
                     _FocusChip(
                       enabled: hubPrefs.focusModeEnabled,
                       label: _focusChipLabel(language),
@@ -147,7 +152,7 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
                             .setFocusMode(!hubPrefs.focusModeEnabled);
                       },
                     ),
-                    const SizedBox(width: 4),
+                    SizedBox(width: widget.dense ? 2 : 4),
                     IconButton(
                       tooltip: _reorderTooltipLabel(language),
                       onPressed: orderedTiles.isEmpty
@@ -156,14 +161,22 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
                               language: language,
                               orderedTiles: orderedTiles,
                             ),
-                      icon: const Icon(Icons.drag_indicator_rounded, size: 20),
+                      icon: Icon(
+                        Icons.drag_indicator_rounded,
+                        size: widget.dense ? 18 : 20,
+                      ),
                       color: const Color(0xFF334155),
                       style: IconButton.styleFrom(
-                        minimumSize: const Size(34, 34),
+                        minimumSize: Size(
+                          widget.dense ? 28 : 34,
+                          widget.dense ? 28 : 34,
+                        ),
                         padding: EdgeInsets.zero,
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(
+                            widget.dense ? 8 : 10,
+                          ),
                           side: const BorderSide(color: Color(0xFFDCE8F8)),
                         ),
                         backgroundColor: const Color(0xFFF8FBFF),
@@ -172,8 +185,8 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
                     if (highlightCount > 0) ...[
                       Container(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 3,
+                          horizontal: 7,
+                          vertical: 2,
                         ),
                         decoration: BoxDecoration(
                           color: const Color(0xFFEF4444),
@@ -181,21 +194,22 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
                         ),
                         child: Text(
                           '$highlightCount',
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white,
-                            fontSize: 11,
+                            fontSize: widget.dense ? 10 : 11,
                             fontWeight: FontWeight.w800,
                           ),
                         ),
                       ),
-                      const SizedBox(width: 8),
+                      SizedBox(width: widget.dense ? 6 : 8),
                     ],
                     AnimatedRotation(
                       turns: _expanded ? 0.5 : 0,
                       duration: const Duration(milliseconds: 160),
-                      child: const Icon(
+                      child: Icon(
                         Icons.keyboard_arrow_down_rounded,
                         color: Color(0xFF334155),
+                        size: widget.dense ? 18 : 24,
                       ),
                     ),
                   ],
@@ -211,17 +225,17 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
               firstChild: SizedBox(height: widget.dense ? 2 : 4),
               secondChild: Padding(
                 padding: EdgeInsets.fromLTRB(
-                  widget.dense ? 12 : 14,
+                  widget.dense ? 10 : 14,
                   0,
-                  widget.dense ? 12 : 14,
-                  widget.dense ? 12 : 10,
+                  widget.dense ? 10 : 14,
+                  widget.dense ? 10 : 10,
                 ),
                 child: const Column(
                   children: [
                     GhostReviewBanner(embedded: true),
-                    SizedBox(height: 6),
+                    SizedBox(height: 2),
                     PracticeTestDashboard(embedded: true),
-                    SizedBox(height: 10),
+                    SizedBox(height: 6),
                     PracticeHub(
                       embedded: true,
                       showHeader: false,
@@ -425,8 +439,8 @@ class _FocusChip extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.symmetric(
-          horizontal: compact ? 7 : 8,
-          vertical: compact ? 4 : 5,
+          horizontal: compact ? 6 : 8,
+          vertical: compact ? 3 : 5,
         ),
         decoration: BoxDecoration(
           color: enabled ? const Color(0xFFFEF3C7) : const Color(0xFFF8FAFC),
@@ -439,7 +453,7 @@ class _FocusChip extends StatelessWidget {
           children: [
             Icon(
               Icons.filter_alt_rounded,
-              size: compact ? 12 : 13,
+              size: compact ? 11 : 13,
               color: enabled
                   ? const Color(0xFFB45309)
                   : const Color(0xFF64748B),
@@ -452,7 +466,7 @@ class _FocusChip extends StatelessWidget {
                   color: enabled
                       ? const Color(0xFF92400E)
                       : const Color(0xFF475569),
-                  fontSize: 11.5,
+                  fontSize: 11,
                   fontWeight: FontWeight.w800,
                 ),
               ),

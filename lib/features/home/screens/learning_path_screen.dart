@@ -42,10 +42,10 @@ class LearningPathScreen extends ConsumerWidget {
       child: SafeArea(
         top: false,
         child: ListView(
-          padding: const EdgeInsets.fromLTRB(0, 108, 0, AppSpacing.pageBottom),
+          padding: const EdgeInsets.fromLTRB(0, 100, 0, AppSpacing.pageBottom),
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 14),
               child: _DojoHeroCard(
                 language: language,
                 level: level,
@@ -60,23 +60,23 @@ class LearningPathScreen extends ConsumerWidget {
                 onSecondaryTap: () => context.push('/jlpt/coach'),
               ),
             ).animate().fadeIn(duration: 360.ms).slideY(begin: 0.08, end: 0),
-            const SizedBox(height: 14),
-            const DailySessionCard()
+            const SizedBox(height: 10),
+            const DailySessionCard(compact: true)
                 .animate(delay: 80.ms)
                 .fadeIn(duration: 340.ms)
                 .slideY(begin: 0.06, end: 0),
-            const SizedBox(height: 14),
+            const SizedBox(height: 10),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 14),
               child: const MiniDashboard(compact: true),
             ).animate(delay: 140.ms).fadeIn(duration: 320.ms),
-            const SizedBox(height: 14),
-            const WeeklyChallengeCard()
+            const SizedBox(height: 10),
+            const WeeklyChallengeCard(compact: true)
                 .animate(delay: 180.ms)
                 .fadeIn(duration: 320.ms),
-            const SizedBox(height: 14),
+            const SizedBox(height: 10),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 14),
               child: _LearningLanesPanel(
                 language: language,
                 level: level,
@@ -84,23 +84,24 @@ class LearningPathScreen extends ConsumerWidget {
                 weakCount: weakCount,
               ),
             ).animate(delay: 220.ms).fadeIn(duration: 340.ms),
-            const SizedBox(height: 14),
+            const SizedBox(height: 10),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 14),
               child: const WeaknessRadarCard(compact: true),
             ).animate(delay: 280.ms).fadeIn(duration: 320.ms),
-            const SizedBox(height: 14),
+            const SizedBox(height: 10),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 14),
               child: const DiscoverPracticePanel(
-                initiallyExpanded: true,
+                initiallyExpanded: false,
                 dense: true,
               ),
             ).animate(delay: 340.ms).fadeIn(duration: 360.ms),
-            const SizedBox(height: 8),
+            const SizedBox(height: 6),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 14),
               child: AppSectionCard(
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -108,7 +109,7 @@ class LearningPathScreen extends ConsumerWidget {
                       title: _studyPromptTitle(language),
                       caption: _studyPromptSubtitle(language),
                     ),
-                    const SizedBox(height: 14),
+                    const SizedBox(height: 10),
                     AppProgressStrip(
                       value: hasStartedToday
                           ? (todayXp / 30).clamp(0.18, 1.0)
@@ -118,10 +119,10 @@ class LearningPathScreen extends ConsumerWidget {
                         hasStartedToday: hasStartedToday,
                       ),
                     ),
-                    const SizedBox(height: 14),
+                    const SizedBox(height: 10),
                     Wrap(
-                      spacing: 10,
-                      runSpacing: 10,
+                      spacing: 8,
+                      runSpacing: 8,
                       children: [
                         _FocusChip(
                           icon: Icons.menu_book_rounded,
@@ -289,25 +290,25 @@ class _DojoHeroCard extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(32),
+        borderRadius: BorderRadius.circular(26),
         boxShadow: [
           BoxShadow(
             color: palette.primary.withValues(alpha: 0.22),
-            blurRadius: 24,
-            offset: const Offset(0, 12),
+            blurRadius: 18,
+            offset: const Offset(0, 10),
           ),
         ],
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(32),
+        borderRadius: BorderRadius.circular(26),
         child: Stack(
           children: [
             Positioned(
-              top: -26,
-              right: -18,
+              top: -18,
+              right: -10,
               child: Container(
-                width: 150,
-                height: 150,
+                width: 112,
+                height: 112,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.white.withValues(alpha: 0.11),
@@ -315,11 +316,11 @@ class _DojoHeroCard extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom: -34,
-              left: -12,
+              bottom: -22,
+              left: -10,
               child: Container(
-                width: 120,
-                height: 120,
+                width: 88,
+                height: 88,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.white.withValues(alpha: 0.08),
@@ -327,18 +328,18 @@ class _DojoHeroCard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
                       Container(
-                        width: 46,
-                        height: 46,
+                        width: 40,
+                        height: 40,
                         decoration: BoxDecoration(
                           color: Colors.white.withValues(alpha: 0.16),
-                          borderRadius: BorderRadius.circular(16),
+                          borderRadius: BorderRadius.circular(14),
                           border: Border.all(
                             color: Colors.white.withValues(alpha: 0.16),
                           ),
@@ -346,10 +347,10 @@ class _DojoHeroCard extends StatelessWidget {
                         child: const Icon(
                           Icons.spa_rounded,
                           color: Colors.white,
-                          size: 24,
+                          size: 20,
                         ),
                       ),
-                      const SizedBox(width: 12),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -358,23 +359,24 @@ class _DojoHeroCard extends StatelessWidget {
                               _eyebrow(language),
                               style: const TextStyle(
                                 color: Color(0xFFFFF7ED),
-                                fontSize: 11,
+                                fontSize: 10,
                                 fontWeight: FontWeight.w900,
-                                letterSpacing: 1,
+                                letterSpacing: 0.8,
                               ),
                             ),
-                            const SizedBox(height: 4),
+                            const SizedBox(height: 3),
                             Text(
                               _title(
                                 language,
                                 dueCount: dueCount,
                                 weakCount: weakCount,
                               ),
-                              style: Theme.of(context).textTheme.displaySmall
+                              style: Theme.of(context).textTheme.titleLarge
                                   ?.copyWith(
+                                    fontSize: 20,
                                     color: Colors.white,
                                     fontWeight: FontWeight.w900,
-                                    height: 1.08,
+                                    height: 1.1,
                                   ),
                             ),
                           ],
@@ -386,7 +388,7 @@ class _DojoHeroCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 12),
                   Text(
                     _subtitle(
                       language,
@@ -396,22 +398,22 @@ class _DojoHeroCard extends StatelessWidget {
                     ),
                     style: const TextStyle(
                       color: Color(0xFFF8FAFC),
-                      fontSize: 14,
-                      height: 1.45,
+                      fontSize: 13,
+                      height: 1.35,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                   if (missionLabel != null &&
                       missionLabel!.trim().isNotEmpty) ...[
-                    const SizedBox(height: 14),
+                    const SizedBox(height: 10),
                     Container(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 10,
+                        horizontal: 10,
+                        vertical: 8,
                       ),
                       decoration: BoxDecoration(
                         color: Colors.white.withValues(alpha: 0.12),
-                        borderRadius: BorderRadius.circular(18),
+                        borderRadius: BorderRadius.circular(14),
                         border: Border.all(
                           color: Colors.white.withValues(alpha: 0.16),
                         ),
@@ -421,9 +423,9 @@ class _DojoHeroCard extends StatelessWidget {
                           const Icon(
                             Icons.flag_circle_rounded,
                             color: Color(0xFFFFE4BF),
-                            size: 18,
+                            size: 16,
                           ),
-                          const SizedBox(width: 8),
+                          const SizedBox(width: 6),
                           Expanded(
                             child: Text(
                               missionLabel!,
@@ -431,6 +433,7 @@ class _DojoHeroCard extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
                                 color: Colors.white,
+                                fontSize: 12.5,
                                 fontWeight: FontWeight.w800,
                               ),
                             ),
@@ -439,10 +442,10 @@ class _DojoHeroCard extends StatelessWidget {
                       ),
                     ),
                   ],
-                  const SizedBox(height: 14),
+                  const SizedBox(height: 10),
                   Wrap(
-                    spacing: 10,
-                    runSpacing: 10,
+                    spacing: 8,
+                    runSpacing: 8,
                     children: [
                       _DojoStatChip(
                         icon: Icons.local_fire_department_rounded,
@@ -466,18 +469,27 @@ class _DojoHeroCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 12),
                   Wrap(
-                    spacing: 10,
-                    runSpacing: 10,
+                    spacing: 8,
+                    runSpacing: 8,
                     children: [
                       FilledButton.icon(
                         onPressed: onPrimaryTap,
                         style: FilledButton.styleFrom(
                           backgroundColor: Colors.white,
                           foregroundColor: const Color(0xFF12324B),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 10,
+                          ),
+                          textStyle: const TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w800,
+                          ),
+                          visualDensity: VisualDensity.compact,
                         ),
-                        icon: const Icon(Icons.play_arrow_rounded),
+                        icon: const Icon(Icons.play_arrow_rounded, size: 18),
                         label: Text(_primaryLabel(language)),
                       ),
                       OutlinedButton.icon(
@@ -487,8 +499,17 @@ class _DojoHeroCard extends StatelessWidget {
                           side: BorderSide(
                             color: Colors.white.withValues(alpha: 0.32),
                           ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 10,
+                          ),
+                          textStyle: const TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w800,
+                          ),
+                          visualDensity: VisualDensity.compact,
                         ),
-                        icon: const Icon(Icons.quiz_rounded),
+                        icon: const Icon(Icons.quiz_rounded, size: 18),
                         label: Text(_secondaryLabel(language)),
                       ),
                     ],
@@ -625,17 +646,17 @@ class _DojoStatChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
         color: Colors.white.withValues(alpha: 0.12),
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(14),
         border: Border.all(color: Colors.white.withValues(alpha: 0.14)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 16, color: const Color(0xFFFFE4BF)),
-          const SizedBox(width: 8),
+          Icon(icon, size: 14, color: const Color(0xFFFFE4BF)),
+          const SizedBox(width: 6),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -644,7 +665,7 @@ class _DojoStatChip extends StatelessWidget {
                 label,
                 style: const TextStyle(
                   color: Color(0xFFE2E8F0),
-                  fontSize: 10.5,
+                  fontSize: 9.5,
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -652,7 +673,7 @@ class _DojoStatChip extends StatelessWidget {
                 value,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 13,
+                  fontSize: 12,
                   fontWeight: FontWeight.w900,
                 ),
               ),
@@ -682,6 +703,7 @@ class _LearningLanesPanel extends StatelessWidget {
     final palette = context.appPalette;
 
     return AppSectionCard(
+      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -689,56 +711,50 @@ class _LearningLanesPanel extends StatelessWidget {
             title: _title(language),
             caption: _subtitle(language),
           ),
-          const SizedBox(height: 14),
+          const SizedBox(height: 10),
           LayoutBuilder(
             builder: (context, constraints) {
               final isWide = constraints.maxWidth >= 760;
               final cards = [
-                Expanded(
-                  child: _LaneCard(
-                    icon: Icons.hub_rounded,
-                    title: _studyLaneTitle(language),
-                    subtitle: _studyLaneSubtitle(language, dueCount),
-                    ctaLabel: _openLaneLabel(language),
-                    chipLabel: dueCount > 0
-                        ? _dueChip(language, dueCount)
-                        : _readyChip(language),
-                    color: palette.primary,
-                    onTap: () => context.push('/study'),
-                  ),
+                _LaneCard(
+                  icon: Icons.hub_rounded,
+                  title: _studyLaneTitle(language),
+                  subtitle: _studyLaneSubtitle(language, dueCount),
+                  ctaLabel: _openLaneLabel(language),
+                  chipLabel: dueCount > 0
+                      ? _dueChip(language, dueCount)
+                      : _readyChip(language),
+                  color: palette.primary,
+                  onTap: () => context.push('/study'),
                 ),
-                Expanded(
-                  child: _LaneCard(
-                    icon: Icons.quiz_rounded,
-                    title: _jlptLaneTitle(language),
-                    subtitle: _jlptLaneSubtitle(language, level),
-                    ctaLabel: _openLaneLabel(language),
-                    chipLabel: level.shortLabel,
-                    color: palette.accent,
-                    onTap: () => context.push('/jlpt/coach'),
-                  ),
+                _LaneCard(
+                  icon: Icons.quiz_rounded,
+                  title: _jlptLaneTitle(language),
+                  subtitle: _jlptLaneSubtitle(language, level),
+                  ctaLabel: _openLaneLabel(language),
+                  chipLabel: level.shortLabel,
+                  color: palette.accent,
+                  onTap: () => context.push('/jlpt/coach'),
                 ),
-                Expanded(
-                  child: _LaneCard(
-                    icon: Icons.auto_stories_rounded,
-                    title: _immersionLaneTitle(language),
-                    subtitle: _immersionLaneSubtitle(language, weakCount),
-                    ctaLabel: _openLaneLabel(language),
-                    chipLabel: _immersionChip(language),
-                    color: palette.secondary,
-                    onTap: () => context.push('/immersion'),
-                  ),
+                _LaneCard(
+                  icon: Icons.auto_stories_rounded,
+                  title: _immersionLaneTitle(language),
+                  subtitle: _immersionLaneSubtitle(language, weakCount),
+                  ctaLabel: _openLaneLabel(language),
+                  chipLabel: _immersionChip(language),
+                  color: palette.secondary,
+                  onTap: () => context.push('/immersion'),
                 ),
               ];
 
               if (isWide) {
                 return Row(
                   children: [
-                    cards[0],
-                    const SizedBox(width: 12),
-                    cards[1],
-                    const SizedBox(width: 12),
-                    cards[2],
+                    Expanded(child: cards[0]),
+                    const SizedBox(width: 10),
+                    Expanded(child: cards[1]),
+                    const SizedBox(width: 10),
+                    Expanded(child: cards[2]),
                   ],
                 );
               }
@@ -746,9 +762,9 @@ class _LearningLanesPanel extends StatelessWidget {
               return Column(
                 children: [
                   cards[0],
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 10),
                   cards[1],
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 10),
                   cards[2],
                 ],
               );
@@ -885,19 +901,19 @@ class _LaneCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: Colors.transparent,
-      borderRadius: BorderRadius.circular(24),
+      borderRadius: BorderRadius.circular(20),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(20),
         child: Ink(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [color.withValues(alpha: 0.16), Colors.white],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: BorderRadius.circular(20),
             border: Border.all(color: color.withValues(alpha: 0.28)),
           ),
           child: Column(
@@ -906,19 +922,19 @@ class _LaneCard extends StatelessWidget {
               Row(
                 children: [
                   Container(
-                    width: 42,
-                    height: 42,
+                    width: 36,
+                    height: 36,
                     decoration: BoxDecoration(
                       color: color.withValues(alpha: 0.14),
-                      borderRadius: BorderRadius.circular(14),
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Icon(icon, color: color),
+                    child: Icon(icon, color: color, size: 19),
                   ),
                   const Spacer(),
                   Container(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 6,
+                      horizontal: 8,
+                      vertical: 5,
                     ),
                     decoration: BoxDecoration(
                       color: Colors.white.withValues(alpha: 0.9),
@@ -928,32 +944,35 @@ class _LaneCard extends StatelessWidget {
                       chipLabel,
                       style: TextStyle(
                         color: color,
-                        fontSize: 11,
+                        fontSize: 10.5,
                         fontWeight: FontWeight.w800,
                       ),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 10),
               Text(
                 title,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontSize: 16,
                   color: const Color(0xFF0F172A),
                   fontWeight: FontWeight.w900,
                 ),
               ),
-              const SizedBox(height: 6),
+              const SizedBox(height: 4),
               Text(
                 subtitle,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   color: Color(0xFF475569),
-                  fontSize: 12.5,
-                  height: 1.45,
+                  fontSize: 11.5,
+                  height: 1.35,
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 10),
               Row(
                 children: [
                   Expanded(
@@ -961,11 +980,12 @@ class _LaneCard extends StatelessWidget {
                       ctaLabel,
                       style: TextStyle(
                         color: color,
+                        fontSize: 12.5,
                         fontWeight: FontWeight.w900,
                       ),
                     ),
                   ),
-                  Icon(Icons.arrow_outward_rounded, color: color, size: 18),
+                  Icon(Icons.arrow_outward_rounded, color: color, size: 16),
                 ],
               ),
             ],
@@ -990,23 +1010,23 @@ class _FocusChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(14),
         border: Border.all(color: color.withValues(alpha: 0.2)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 16, color: color),
-          const SizedBox(width: 8),
+          Icon(icon, size: 14, color: color),
+          const SizedBox(width: 6),
           Text(
             label,
             style: TextStyle(
               color: color,
               fontWeight: FontWeight.w800,
-              fontSize: 12,
+              fontSize: 11.5,
             ),
           ),
         ],

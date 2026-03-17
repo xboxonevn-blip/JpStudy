@@ -29,39 +29,43 @@ class GhostReviewBanner extends ConsumerWidget {
     if (totalCount == 0) {
       return Container(
         margin: cardMargin,
-        padding: const EdgeInsets.all(14),
+        padding: EdgeInsets.all(embedded ? 10 : 14),
         decoration: BoxDecoration(
           color: Colors.white.withValues(alpha: 0.9),
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(embedded ? 14 : 18),
           border: Border.all(color: const Color(0xFFE5F5EB)),
           boxShadow: [
             BoxShadow(
               color: const Color(0xFF16A34A).withValues(alpha: 0.08),
-              blurRadius: 16,
-              offset: const Offset(0, 6),
+              blurRadius: embedded ? 10 : 16,
+              offset: Offset(0, embedded ? 4 : 6),
             ),
           ],
         ),
         child: Row(
           children: [
-            const Icon(Icons.check_circle_rounded, color: Color(0xFF16A34A)),
-            const SizedBox(width: 10),
+            Icon(
+              Icons.check_circle_rounded,
+              color: const Color(0xFF16A34A),
+              size: embedded ? 18 : 24,
+            ),
+            SizedBox(width: embedded ? 8 : 10),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     language.ghostReviewAllClearTitle,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 14,
+                      fontSize: embedded ? 13 : 14,
                     ),
                   ),
                   Text(
                     language.ghostReviewAllClearSubtitle,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Color(0xFF6B7390),
+                    style: TextStyle(
+                      fontSize: embedded ? 11 : 12,
+                      color: const Color(0xFF6B7390),
                     ),
                   ),
                 ],
@@ -74,20 +78,20 @@ class GhostReviewBanner extends ConsumerWidget {
 
     return Container(
       margin: cardMargin,
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(embedded ? 12 : 16),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [Color(0xFFFFF1F2), Color(0xFFFFE4E6)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(embedded ? 16 : 20),
         border: Border.all(color: const Color(0xFFFECACA)),
         boxShadow: [
           BoxShadow(
             color: const Color(0xFFF87171).withValues(alpha: 0.2),
-            blurRadius: 16,
-            offset: const Offset(0, 8),
+            blurRadius: embedded ? 10 : 16,
+            offset: Offset(0, embedded ? 5 : 8),
           ),
         ],
       ),
@@ -96,29 +100,30 @@ class GhostReviewBanner extends ConsumerWidget {
         children: [
           Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.warning_amber_rounded,
                 color: Color(0xFFDC2626),
+                size: embedded ? 18 : 24,
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: embedded ? 8 : 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       language.ghostReviewBannerTitle(totalCount),
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.w700,
-                        fontSize: 15,
-                        color: Color(0xFF7F1D1D),
+                        fontSize: embedded ? 13.5 : 15,
+                        color: const Color(0xFF7F1D1D),
                       ),
                     ),
-                    const SizedBox(height: 2),
+                    SizedBox(height: embedded ? 1 : 2),
                     Text(
                       language.ghostReviewBannerSubtitle,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Color(0xFF9F1239),
+                      style: TextStyle(
+                        fontSize: embedded ? 11 : 12,
+                        color: const Color(0xFF9F1239),
                       ),
                     ),
                   ],
@@ -126,7 +131,7 @@ class GhostReviewBanner extends ConsumerWidget {
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: embedded ? 8 : 12),
           Row(
             children: [
               if (grammarCount > 0)
@@ -139,12 +144,17 @@ class GhostReviewBanner extends ConsumerWidget {
                     icon: const Icon(Icons.edit_note_rounded, size: 18),
                     label: Text(
                       'Grammar ($grammarCount)',
-                      style: const TextStyle(fontSize: 13),
+                      style: TextStyle(fontSize: embedded ? 12 : 13),
                     ),
                     style: FilledButton.styleFrom(
                       backgroundColor: const Color(0xFFDC2626),
                       foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      padding: EdgeInsets.symmetric(
+                        vertical: embedded ? 8 : 10,
+                      ),
+                      visualDensity: embedded
+                          ? VisualDensity.compact
+                          : VisualDensity.standard,
                     ),
                   ),
                 ),
@@ -165,12 +175,17 @@ class GhostReviewBanner extends ConsumerWidget {
                     icon: const Icon(Icons.translate_rounded, size: 18),
                     label: Text(
                       'Vocab ($vocabCount)',
-                      style: const TextStyle(fontSize: 13),
+                      style: TextStyle(fontSize: embedded ? 12 : 13),
                     ),
                     style: FilledButton.styleFrom(
                       backgroundColor: const Color(0xFFEA580C),
                       foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      padding: EdgeInsets.symmetric(
+                        vertical: embedded ? 8 : 10,
+                      ),
+                      visualDensity: embedded
+                          ? VisualDensity.compact
+                          : VisualDensity.standard,
                     ),
                   ),
                 ),

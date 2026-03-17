@@ -2,9 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/study_level.dart';
+import 'package:jpstudy/features/common/widgets/compact_ui.dart';
+import 'package:jpstudy/features/common/widgets/japanese_background.dart';
 
 import '../data/jlpt_mock_bank.dart';
 import '../models/jlpt_coach_models.dart';
@@ -34,6 +39,14 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
   JlptMockQuestion get _currentQuestion =>
       _currentSection.questions[_questionIndex];
 
+  int get _totalQuestions => jlptMockSections.fold<int>(
+    0,
+    (sum, section) => sum + section.questions.length,
+  );
+
+  int get _totalMinutes =>
+      jlptMockSections.fold<int>(0, (sum, section) => sum + section.minutes);
+
   @override
   void dispose() {
     _timer?.cancel();
@@ -61,6 +74,70 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
         return _tr(language, 'Kanji', 'Kanji', '漢字');
       case JlptSkillArea.reading:
         return _tr(language, 'Reading', 'Đọc hiểu', '読解');
+    }
+  }
+
+  String _romajiLabel(JlptMockSection section) {
+    switch (section.id) {
+      case 'vocab':
+        return 'Goi';
+      case 'grammar':
+        return 'Bunpo';
+      case 'kanji':
+        return 'Kanji';
+      case 'reading':
+        return 'Dokkai';
+      default:
+        return section.title;
+    }
+  }
+
+  JlptSkillArea _sectionArea(JlptMockSection section) {
+    if (section.questions.isNotEmpty) {
+      return section.questions.first.area;
+    }
+    switch (section.id) {
+      case 'vocab':
+        return JlptSkillArea.vocabulary;
+      case 'grammar':
+        return JlptSkillArea.grammar;
+      case 'kanji':
+        return JlptSkillArea.kanji;
+      case 'reading':
+        return JlptSkillArea.reading;
+      default:
+        return JlptSkillArea.reading;
+    }
+  }
+
+  String _sectionTitle(AppLanguage language, JlptMockSection section) {
+    return _areaLabel(language, _sectionArea(section));
+  }
+
+  IconData _sectionIcon(JlptSkillArea area) {
+    switch (area) {
+      case JlptSkillArea.vocabulary:
+        return Icons.translate_rounded;
+      case JlptSkillArea.grammar:
+        return Icons.auto_fix_high_rounded;
+      case JlptSkillArea.kanji:
+        return Icons.draw_rounded;
+      case JlptSkillArea.reading:
+        return Icons.menu_book_rounded;
+    }
+  }
+
+  Color _sectionColor(BuildContext context, JlptSkillArea area) {
+    final palette = context.appPalette;
+    switch (area) {
+      case JlptSkillArea.vocabulary:
+        return palette.info;
+      case JlptSkillArea.grammar:
+        return palette.accent;
+      case JlptSkillArea.kanji:
+        return palette.warning;
+      case JlptSkillArea.reading:
+        return palette.secondary;
     }
   }
 
@@ -201,156 +278,616 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
     return true;
   }
 
-  String _title(AppLanguage language) =>
-      _tr(language, 'JLPT Mock Pro', 'Đề thi thử JLPT Pro', 'JLPT模試 Pro');
+  bool _snapshotLooksReady(JlptCoachSnapshot snapshot) {
+    if (snapshot.profile.overallAccuracy < 0.60) {
+      return false;
+    }
+    for (final area in JlptSkillArea.values) {
+      if (snapshot.profile.statFor(area).accuracy < 0.40) {
+        return false;
+      }
+    }
+    return true;
+  }
 
-  String _intro(AppLanguage language) => _tr(
+  double _snapshotAccuracyForSection(
+    JlptCoachSnapshot snapshot,
+    JlptMockSection section,
+  ) {
+    return snapshot.profile.statFor(_sectionArea(section)).accuracy;
+  }
+
+  String _snapshotSourceLabel(AppLanguage language, String source) {
+    switch (source) {
+      case 'jlpt_mock_pro':
+        return _tr(language, 'from Mock Pro', 'từ Mock Pro', '模試から');
+      case 'jlpt_reading':
+        return _tr(language, 'from Reading Drill', 'từ Luyện đọc', '読解ドリルから');
+      default:
+        return _tr(language, 'from JLPT Coach', 'từ JLPT Coach', 'JLPTコーチから');
+    }
+  }
+
+  String _levelLabel(AppLanguage language, StudyLevel level) => _tr(
     language,
-    'Full-format simulation with section timing and pass prediction.',
-    'Mô phỏng đủ phần thi, có bấm giờ theo từng section và dự đoán khả năng đậu.',
-    'セクションごとの制限時間と合否予測付きのフル模試です。',
+    '${level.shortLabel} target',
+    'Mục tiêu ${level.shortLabel}',
+    '${level.shortLabel} 対策',
   );
 
-  String _startLabel(AppLanguage language) =>
-      _tr(language, 'Start full mock', 'Bắt đầu thi thử đầy đủ', 'フル模試を開始');
+  String _mockOverviewLabel(
+    AppLanguage language, {
+    required int questionCount,
+    required int totalMinutes,
+  }) => _tr(
+    language,
+    '$questionCount questions • $totalMinutes minutes • ${jlptMockSections.length} sections',
+    '$questionCount câu • $totalMinutes phút • ${jlptMockSections.length} phần',
+    '$questionCount問 • $totalMinutes分 • ${jlptMockSections.length}セクション',
+  );
 
-  String _finishNowLabel(AppLanguage language) =>
-      _tr(language, 'Finish now', 'Kết thúc ngay', '今すぐ終了');
+  String _passRuleLabel(AppLanguage language) => _tr(
+    language,
+    'Pass rule: overall 60% and no section under 40%',
+    'Mốc đạt: tổng 60% và không phần nào dưới 40%',
+    '合格目安: 総合60%以上、各セクション40%以上',
+  );
 
-  String _nextLabel(AppLanguage language) =>
-      _tr(language, 'Next', 'Câu tiếp', '次へ');
+  String _readinessStatus(AppLanguage language, JlptCoachSnapshot? snapshot) {
+    if (snapshot == null) {
+      return _tr(language, 'No baseline yet', 'Chưa có baseline', 'まだ基準なし');
+    }
+    final overall = (snapshot.profile.overallAccuracy * 100).round();
+    return _tr(
+      language,
+      '$overall% readiness',
+      '$overall% độ sẵn sàng',
+      '準備度 $overall%',
+    );
+  }
 
-  String _submitLabel(AppLanguage language) =>
-      _tr(language, 'Submit', 'Nộp bài', '提出');
-
-  String _resultTitle(AppLanguage language) =>
-      _tr(language, 'Mock result', 'Kết quả thi thử', '模試結果');
-
-  String _resultSummary(
+  String _readinessProgressLabel(
     AppLanguage language,
-    int overall,
-    bool pass,
-    Duration elapsed,
-  ) => _tr(
+    JlptCoachSnapshot snapshot,
+  ) {
+    final overall = (snapshot.profile.overallAccuracy * 100).round();
+    final predicted = _snapshotLooksReady(snapshot);
+    return _tr(
+      language,
+      'Current profile: $overall% • ${predicted ? 'projected pass' : 'needs more work'}',
+      'Profile hiện tại: $overall% • ${predicted ? 'đang ở ngưỡng đậu' : 'cần luyện thêm'}',
+      '現在のプロファイル: $overall% • ${predicted ? '合格圏' : '補強が必要'}',
+    );
+  }
+
+  String _latestAccuracyLabel(
+    AppLanguage language,
+    JlptCoachSnapshot? snapshot,
+    JlptMockSection section,
+  ) {
+    if (snapshot == null) {
+      return _tr(language, 'First run', 'Chạy lần đầu', '初回');
+    }
+    final score = (_snapshotAccuracyForSection(snapshot, section) * 100)
+        .round();
+    return _tr(language, 'Latest $score%', 'Gần nhất $score%', '直近 $score%');
+  }
+
+  String _readinessTitle(AppLanguage language) =>
+      _tr(language, 'Readiness', 'Mức sẵn sàng', '準備状況');
+
+  String _readinessCaption(AppLanguage language) => _tr(
     language,
-    'Overall: $overall% • ${pass ? 'Predicted PASS' : 'Predicted FAIL'} • Time ${elapsed.inMinutes}m ${elapsed.inSeconds % 60}s',
-    'Tổng điểm: $overall% • ${pass ? 'Dự đoán đạt' : 'Dự đoán chưa đạt'} • Thời gian ${elapsed.inMinutes}p ${elapsed.inSeconds % 60}s',
-    '総合: $overall% • ${pass ? '合格予測' : '不合格予測'} • 時間 ${elapsed.inMinutes}分 ${elapsed.inSeconds % 60}秒',
+    'Use your latest JLPT Coach data before starting.',
+    'Dùng dữ liệu JLPT Coach gần nhất để vào đề có định hướng.',
+    '直近のJLPTコーチデータを使って模試へ入ります。',
   );
 
-  @override
-  Widget build(BuildContext context) {
-    final language = ref.watch(appLanguageProvider);
-    final palette = context.appPalette;
+  String _readinessEmptyTitle(AppLanguage language) => _tr(
+    language,
+    'Your first run will create the baseline',
+    'Lần chạy đầu sẽ tạo baseline',
+    '初回で基準データを作成します',
+  );
 
-    if (!_started) {
-      return Scaffold(
-        backgroundColor: palette.bg,
-        appBar: AppBar(title: Text(_title(language))),
-        body: ListView(
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
-          children: [
-            _MockHero(
-              title: _title(language),
-              subtitle: _intro(language),
-              icon: Icons.fact_check_rounded,
+  String _readinessEmptyBody(AppLanguage language) => _tr(
+    language,
+    'Mock Pro already saves diagnosis into JLPT Coach, then builds a 7-day plan automatically.',
+    'Mock Pro sẽ tự lưu chẩn đoán vào JLPT Coach và tạo kế hoạch 7 ngày sau bài làm.',
+    '模試後に診断がJLPTコーチへ保存され、7日プランも自動生成されます。',
+  );
+
+  String _sectionFlowTitle(AppLanguage language) =>
+      _tr(language, 'Section flow', 'Luồng đề thi', 'セクション構成');
+
+  String _sectionFlowCaption(AppLanguage language) => _tr(
+    language,
+    'Every section uses the current in-app mock bank.',
+    'Mỗi phần đều dùng dữ liệu mock hiện có trong app.',
+    '各セクションは現在のアプリ内模試データを使います。',
+  );
+
+  String _breakdownTitle(AppLanguage language) =>
+      _tr(language, 'Section results', 'Kết quả từng phần', 'セクション結果');
+
+  String _breakdownCaption(AppLanguage language) => _tr(
+    language,
+    'Real scores from this run, section by section.',
+    'Điểm thật của lần làm này, theo từng phần.',
+    '今回の結果をセクションごとに表示します。',
+  );
+
+  String _progressSummaryLabel(AppLanguage language) =>
+      _tr(language, 'Overall progress', 'Tiến độ toàn bài', '全体進捗');
+
+  String _resultActionTitle(AppLanguage language) =>
+      _tr(language, 'Next focus', 'Trọng tâm tiếp theo', '次の重点');
+
+  String _resultActionCaption(AppLanguage language) => _tr(
+    language,
+    'This run updates JLPT Coach immediately.',
+    'Bài làm này cập nhật JLPT Coach ngay lập tức.',
+    'この結果はすぐにJLPTコーチへ反映されます。',
+  );
+
+  Widget _buildLandingView(
+    BuildContext context,
+    AppLanguage language,
+    StudyLevel level,
+    AsyncValue<JlptCoachSnapshot?> snapshotAsync,
+  ) {
+    final snapshot = snapshotAsync.valueOrNull;
+    return JapaneseBackground(
+      child: ListView(
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+        children: [
+          _MockOverviewHero(
+            eyebrow: _tr(
+              language,
+              'MOCK PRO • JLPT FLOW',
+              'MOCK PRO • LUỒNG THI JLPT',
+              'MOCK PRO • JLPTフロー',
             ),
-            const SizedBox(height: 16),
-            ...jlptMockSections.map(
-              (section) => Padding(
-                padding: const EdgeInsets.only(bottom: 12),
-                child: _SectionPreviewCard(
-                  title: section.title,
-                  meta: '${section.questions.length}Q • ${section.minutes}m',
+            title: _title(language),
+            subtitle: _intro(language),
+            hint: _passRuleLabel(language),
+            icon: Icons.fact_check_rounded,
+            chips: [
+              _OverviewChip(
+                icon: Icons.flag_circle_rounded,
+                label: _levelLabel(language, level),
+              ),
+              _OverviewChip(
+                icon: Icons.quiz_rounded,
+                label: _mockOverviewLabel(
+                  language,
+                  questionCount: _totalQuestions,
+                  totalMinutes: _totalMinutes,
                 ),
               ),
-            ),
-            const SizedBox(height: 8),
-            FilledButton.icon(
-              onPressed: _startExam,
-              icon: const Icon(Icons.play_arrow_rounded),
-              label: Text(_startLabel(language)),
-            ),
-          ],
-        ),
-      );
-    }
-
-    if (_finished) {
-      final overall = (_overallScore() * 100).round();
-      final pass = _predictedPass();
-      final elapsed = _startedAt == null
-          ? Duration.zero
-          : DateTime.now().difference(_startedAt!);
-      return Scaffold(
-        backgroundColor: palette.bg,
-        appBar: AppBar(title: Text(_resultTitle(language))),
-        body: ListView(
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
-          children: [
-            _MockHero(
-              title: _resultTitle(language),
-              subtitle: _resultSummary(language, overall, pass, elapsed),
-              icon: pass ? Icons.verified_rounded : Icons.flag_circle_rounded,
-              accent: pass ? palette.success : palette.error,
-            ),
-            const SizedBox(height: 12),
-            ...jlptMockSections.map((section) {
-              final score = (_sectionScore(section) * 100).round();
-              final correct = _correctCountInSection(section);
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 12),
-                child: _SectionResultCard(
-                  title: section.title,
-                  summary: '$correct/${section.questions.length} ($score%)',
-                  accent: score >= 60 ? palette.success : palette.warning,
-                ),
-              );
-            }),
-            if (_snapshot != null) ...[
-              const SizedBox(height: 4),
-              _DiagnosisPanel(
-                title: _tr(language, 'Diagnosis', 'Chẩn đoán', '診断'),
-                stats: JlptSkillArea.values
-                    .map((area) => _snapshot!.profile.statFor(area))
-                    .toList(growable: false),
-                areaLabel: (area) => _areaLabel(language, area),
-                planTitle: _tr(
-                  language,
-                  '7-day focus',
-                  'Kế hoạch 7 ngày',
-                  '7日プラン',
-                ),
-                planItems: _snapshot!.plan.items
-                    .take(4)
-                    .toList(growable: false),
+              _OverviewChip(
+                icon: Icons.insights_rounded,
+                label: _readinessStatus(language, snapshot),
               ),
             ],
-            const SizedBox(height: 12),
-            FilledButton.icon(
-              onPressed: _startExam,
-              icon: const Icon(Icons.restart_alt_rounded),
-              label: Text(_startLabel(language)),
-            ),
-          ],
-        ),
-      );
-    }
+          ),
+          const SizedBox(height: 16),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final wide = constraints.maxWidth >= 980;
+              final flowPanel = _buildSectionFlowPanel(
+                context,
+                language,
+                snapshot,
+              );
+              final readinessPanel = _buildReadinessPanel(
+                context,
+                language,
+                snapshotAsync,
+              );
+              if (!wide) {
+                return Column(
+                  children: [
+                    flowPanel,
+                    const SizedBox(height: 12),
+                    readinessPanel,
+                  ],
+                );
+              }
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(flex: 7, child: flowPanel),
+                  const SizedBox(width: 12),
+                  Expanded(flex: 5, child: readinessPanel),
+                ],
+              );
+            },
+          ),
+          const SizedBox(height: 14),
+          FilledButton.icon(
+            onPressed: _startExam,
+            icon: const Icon(Icons.play_arrow_rounded),
+            label: Text(_startLabel(language)),
+          ),
+        ],
+      ),
+    );
+  }
 
+  Widget _buildSectionFlowPanel(
+    BuildContext context,
+    AppLanguage language,
+    JlptCoachSnapshot? snapshot,
+  ) {
+    return AppSectionCard(
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AppSectionHeader(
+            title: _sectionFlowTitle(language),
+            caption: _sectionFlowCaption(language),
+          ),
+          const SizedBox(height: 12),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final columns = constraints.maxWidth >= 620 ? 2 : 1;
+              final width = columns == 1
+                  ? constraints.maxWidth
+                  : (constraints.maxWidth - AppSpacing.md) / columns;
+              return Wrap(
+                spacing: AppSpacing.md,
+                runSpacing: AppSpacing.md,
+                children: [
+                  for (final section in jlptMockSections)
+                    SizedBox(
+                      width: width,
+                      child: _SectionPreviewCard(
+                        eyebrow: _romajiLabel(section),
+                        title: _sectionTitle(language, section),
+                        icon: _sectionIcon(_sectionArea(section)),
+                        meta:
+                            '${section.questions.length}Q • ${section.minutes}m',
+                        status: _latestAccuracyLabel(
+                          language,
+                          snapshot,
+                          section,
+                        ),
+                        accent: _sectionColor(context, _sectionArea(section)),
+                        progress: snapshot == null
+                            ? null
+                            : _snapshotAccuracyForSection(snapshot, section),
+                      ),
+                    ),
+                ],
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildReadinessPanel(
+    BuildContext context,
+    AppLanguage language,
+    AsyncValue<JlptCoachSnapshot?> snapshotAsync,
+  ) {
+    return AppSectionCard(
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      child: snapshotAsync.when(
+        data: (snapshot) {
+          if (snapshot == null) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppSectionHeader(
+                  title: _readinessTitle(language),
+                  caption: _readinessCaption(language),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  _readinessEmptyTitle(language),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w900,
+                    color: Color(0xFF0F172A),
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  _readinessEmptyBody(language),
+                  style: const TextStyle(
+                    color: Color(0xFF475569),
+                    height: 1.45,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                _OverviewChip(
+                  icon: Icons.rule_folder_rounded,
+                  label: _passRuleLabel(language),
+                ),
+              ],
+            );
+          }
+
+          final weakest = snapshot.profile.weakestFirst().take(3).toList();
+          final predicted = _snapshotLooksReady(snapshot);
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppSectionHeader(
+                title: _readinessTitle(language),
+                caption: _readinessCaption(language),
+              ),
+              const SizedBox(height: 12),
+              AppProgressStrip(
+                value: snapshot.profile.overallAccuracy.clamp(0.08, 1.0),
+                label: _readinessProgressLabel(language, snapshot),
+              ),
+              const SizedBox(height: 12),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  _OverviewChip(
+                    icon: Icons.track_changes_rounded,
+                    label: predicted
+                        ? _tr(
+                            language,
+                            'Projected pass',
+                            'Đang ở ngưỡng đậu',
+                            '合格圏',
+                          )
+                        : _tr(
+                            language,
+                            'Needs more work',
+                            'Cần luyện thêm',
+                            '補強が必要',
+                          ),
+                  ),
+                  _OverviewChip(
+                    icon: Icons.history_rounded,
+                    label: _snapshotSourceLabel(
+                      language,
+                      snapshot.profile.source,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 14),
+              ...weakest.map(
+                (stat) => Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: _SkillReadinessRow(
+                    label: _areaLabel(language, stat.area),
+                    valueLabel: '${(stat.accuracy * 100).round()}%',
+                    value: stat.accuracy,
+                    accent: _sectionColor(context, stat.area),
+                  ),
+                ),
+              ),
+              if (snapshot.plan.items.isNotEmpty) ...[
+                const SizedBox(height: 6),
+                Text(
+                  _tr(language, '7-day focus', 'Kế hoạch 7 ngày', '7日プラン'),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w900,
+                    color: Color(0xFF0F172A),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                ...snapshot.plan.items
+                    .take(3)
+                    .map(
+                      (item) => Padding(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        child: Text(
+                          'D${item.dayOffset + 1} • ${_areaLabel(language, item.area)} • ${item.minutes}m',
+                          style: const TextStyle(
+                            color: Color(0xFF475569),
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ),
+              ],
+            ],
+          );
+        },
+        loading: () => const Padding(
+          padding: EdgeInsets.symmetric(vertical: 20),
+          child: Center(child: CircularProgressIndicator()),
+        ),
+        error: (_, _) => Text(
+          _tr(
+            language,
+            'Unable to load JLPT readiness.',
+            'Không tải được mức sẵn sàng JLPT.',
+            'JLPTの準備状況を読み込めません。',
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildResultView(BuildContext context, AppLanguage language) {
+    final palette = context.appPalette;
+    final overall = (_overallScore() * 100).round();
+    final pass = _predictedPass();
+    final elapsed = _startedAt == null
+        ? Duration.zero
+        : DateTime.now().difference(_startedAt!);
+
+    return JapaneseBackground(
+      child: ListView(
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+        children: [
+          _MockOverviewHero(
+            eyebrow: _tr(
+              language,
+              'RESULT • JLPT MOCK PRO',
+              'KẾT QUẢ • JLPT MOCK PRO',
+              '結果 • JLPT MOCK PRO',
+            ),
+            title: _resultTitle(language),
+            subtitle: _resultSummary(language, overall, pass, elapsed),
+            hint: _passRuleLabel(language),
+            icon: pass ? Icons.verified_rounded : Icons.flag_circle_rounded,
+            accent: pass ? palette.success : palette.error,
+            chips: [
+              _OverviewChip(icon: Icons.grade_rounded, label: '$overall%'),
+              _OverviewChip(
+                icon: Icons.timer_rounded,
+                label: _timeSpentLabel(language, elapsed),
+              ),
+              _OverviewChip(
+                icon: pass ? Icons.check_circle_rounded : Icons.warning_rounded,
+                label: pass
+                    ? _tr(language, 'Predicted pass', 'Dự đoán đạt', '合格予測')
+                    : _tr(
+                        language,
+                        'Predicted fail',
+                        'Dự đoán chưa đạt',
+                        '不合格予測',
+                      ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final wide = constraints.maxWidth >= 980;
+              final resultPanel = AppSectionCard(
+                padding: const EdgeInsets.all(AppSpacing.lg),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AppSectionHeader(
+                      title: _breakdownTitle(language),
+                      caption: _breakdownCaption(language),
+                    ),
+                    const SizedBox(height: 12),
+                    LayoutBuilder(
+                      builder: (context, inner) {
+                        final columns = inner.maxWidth >= 620 ? 2 : 1;
+                        final width = columns == 1
+                            ? inner.maxWidth
+                            : (inner.maxWidth - AppSpacing.md) / columns;
+                        return Wrap(
+                          spacing: AppSpacing.md,
+                          runSpacing: AppSpacing.md,
+                          children: [
+                            for (final section in jlptMockSections)
+                              SizedBox(
+                                width: width,
+                                child: _SectionResultCard(
+                                  eyebrow: _romajiLabel(section),
+                                  title: _sectionTitle(language, section),
+                                  icon: _sectionIcon(_sectionArea(section)),
+                                  summary:
+                                      '${_correctCountInSection(section)}/${section.questions.length}',
+                                  meta:
+                                      '${(_sectionScore(section) * 100).round()}% • ${section.minutes}m',
+                                  accent: _sectionScore(section) >= 0.60
+                                      ? palette.success
+                                      : palette.warning,
+                                  progress: _sectionScore(section),
+                                ),
+                              ),
+                          ],
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              );
+              final diagnosisPanel = _snapshot == null
+                  ? const SizedBox.shrink()
+                  : AppSectionCard(
+                      padding: const EdgeInsets.all(AppSpacing.lg),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AppSectionHeader(
+                            title: _resultActionTitle(language),
+                            caption: _resultActionCaption(language),
+                          ),
+                          const SizedBox(height: 12),
+                          _DiagnosisPanel(
+                            title: _tr(
+                              language,
+                              'Diagnosis',
+                              'Chẩn đoán',
+                              '診断',
+                            ),
+                            stats: JlptSkillArea.values
+                                .map((area) => _snapshot!.profile.statFor(area))
+                                .toList(growable: false),
+                            areaLabel: (area) => _areaLabel(language, area),
+                            planTitle: _tr(
+                              language,
+                              '7-day focus',
+                              'Kế hoạch 7 ngày',
+                              '7日プラン',
+                            ),
+                            planItems: _snapshot!.plan.items
+                                .take(4)
+                                .toList(growable: false),
+                          ),
+                        ],
+                      ),
+                    );
+              if (!wide || _snapshot == null) {
+                return Column(
+                  children: [
+                    resultPanel,
+                    if (_snapshot != null) ...[
+                      const SizedBox(height: 12),
+                      diagnosisPanel,
+                    ],
+                  ],
+                );
+              }
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(flex: 7, child: resultPanel),
+                  const SizedBox(width: 12),
+                  Expanded(flex: 5, child: diagnosisPanel),
+                ],
+              );
+            },
+          ),
+          const SizedBox(height: 12),
+          FilledButton.icon(
+            onPressed: _startExam,
+            icon: const Icon(Icons.restart_alt_rounded),
+            label: Text(_startLabel(language)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildActiveView(BuildContext context, AppLanguage language) {
     final question = _currentQuestion;
     final selected = _answers[question.id];
+    final answeredCount = _answers.length;
 
-    return Scaffold(
-      backgroundColor: palette.bg,
-      appBar: AppBar(title: Text(_title(language))),
-      body: ListView(
+    return JapaneseBackground(
+      child: ListView(
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
         children: [
           _MockHero(
-            title: _currentSection.title,
+            title:
+                '${_romajiLabel(_currentSection)} • ${_sectionTitle(language, _currentSection)}',
             subtitle:
                 '${_sectionIndex + 1}/${jlptMockSections.length} • ${_questionIndex + 1}/${_currentSection.questions.length}',
             icon: Icons.timer_outlined,
+            accent: _sectionColor(context, question.area),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -364,13 +901,36 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
             ),
           ),
           const SizedBox(height: 12),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: jlptMockSections.asMap().entries.map((entry) {
-              final active = entry.key == _sectionIndex;
-              return _MiniSectionChip(label: entry.value.title, active: active);
-            }).toList(),
+          AppSectionCard(
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppProgressStrip(
+                  value: answeredCount == 0
+                      ? 0.04
+                      : answeredCount / _totalQuestions,
+                  label: _tr(
+                    language,
+                    '${_progressSummaryLabel(language)} • $answeredCount/$_totalQuestions answered',
+                    '${_progressSummaryLabel(language)} • $answeredCount/$_totalQuestions đã làm',
+                    '${_progressSummaryLabel(language)} • $answeredCount/$_totalQuestions 回答済み',
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: jlptMockSections.asMap().entries.map((entry) {
+                    final active = entry.key == _sectionIndex;
+                    return _MiniSectionChip(
+                      label: _romajiLabel(entry.value),
+                      active: active,
+                    );
+                  }).toList(),
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 12),
           _MockQuestionCard(
@@ -412,6 +972,80 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  String _title(AppLanguage language) =>
+      _tr(language, 'JLPT Mock Pro', 'Đề thi thử JLPT Pro', 'JLPT模試 Pro');
+
+  String _intro(AppLanguage language) => _tr(
+    language,
+    'Full-format simulation with section timing and pass prediction.',
+    'Mô phỏng đủ phần thi, có bấm giờ theo từng section và dự đoán khả năng đậu.',
+    'セクションごとの制限時間と合否予測付きのフル模試です。',
+  );
+
+  String _startLabel(AppLanguage language) =>
+      _tr(language, 'Start full mock', 'Bắt đầu thi thử đầy đủ', 'フル模試を開始');
+
+  String _finishNowLabel(AppLanguage language) =>
+      _tr(language, 'Finish now', 'Kết thúc ngay', '今すぐ終了');
+
+  String _nextLabel(AppLanguage language) =>
+      _tr(language, 'Next', 'Câu tiếp', '次へ');
+
+  String _submitLabel(AppLanguage language) =>
+      _tr(language, 'Submit', 'Nộp bài', '提出');
+
+  String _resultTitle(AppLanguage language) =>
+      _tr(language, 'Mock result', 'Kết quả thi thử', '模試結果');
+
+  String _resultSummary(
+    AppLanguage language,
+    int overall,
+    bool pass,
+    Duration elapsed,
+  ) => _tr(
+    language,
+    'Overall: $overall% • ${pass ? 'Predicted PASS' : 'Predicted FAIL'} • Time ${elapsed.inMinutes}m ${elapsed.inSeconds % 60}s',
+    'Tổng điểm: $overall% • ${pass ? 'Dự đoán đạt' : 'Dự đoán chưa đạt'} • Thời gian ${elapsed.inMinutes}p ${elapsed.inSeconds % 60}s',
+    '総合: $overall% • ${pass ? '合格予測' : '不合格予測'} • 時間 ${elapsed.inMinutes}分 ${elapsed.inSeconds % 60}秒',
+  );
+
+  String _timeSpentLabel(AppLanguage language, Duration elapsed) => _tr(
+    language,
+    'Time ${elapsed.inMinutes}m ${elapsed.inSeconds % 60}s',
+    'Thời gian ${elapsed.inMinutes}p ${elapsed.inSeconds % 60}s',
+    '時間 ${elapsed.inMinutes}分 ${elapsed.inSeconds % 60}秒',
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    final language = ref.watch(appLanguageProvider);
+    final level = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
+    final snapshotAsync = ref.watch(jlptCoachSnapshotProvider);
+    final palette = context.appPalette;
+
+    if (!_started) {
+      return Scaffold(
+        backgroundColor: palette.bg,
+        appBar: AppBar(title: Text(_title(language))),
+        body: _buildLandingView(context, language, level, snapshotAsync),
+      );
+    }
+
+    if (_finished) {
+      return Scaffold(
+        backgroundColor: palette.bg,
+        appBar: AppBar(title: Text(_resultTitle(language))),
+        body: _buildResultView(context, language),
+      );
+    }
+
+    return Scaffold(
+      backgroundColor: palette.bg,
+      appBar: AppBar(title: Text(_title(language))),
+      body: _buildActiveView(context, language),
     );
   }
 }
@@ -490,50 +1124,185 @@ class _MockHero extends StatelessWidget {
   }
 }
 
-class _SectionPreviewCard extends StatelessWidget {
-  const _SectionPreviewCard({required this.title, required this.meta});
+class _MockOverviewHero extends StatelessWidget {
+  const _MockOverviewHero({
+    required this.eyebrow,
+    required this.title,
+    required this.subtitle,
+    required this.hint,
+    required this.icon,
+    required this.chips,
+    this.accent,
+  });
 
+  final String eyebrow;
   final String title;
-  final String meta;
+  final String subtitle;
+  final String hint;
+  final IconData icon;
+  final List<Widget> chips;
+  final Color? accent;
 
   @override
   Widget build(BuildContext context) {
     final palette = context.appPalette;
+    final tone = accent ?? palette.accent;
+    final highlight = Color.lerp(palette.heroGradient.last, tone, 0.45) ?? tone;
+
     return Container(
-      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: palette.elevated,
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: palette.outlineSoft),
-      ),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: palette.primary.withValues(alpha: 0.10),
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: Icon(Icons.fact_check_rounded, color: palette.primary),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [palette.heroGradient.first, highlight],
+        ),
+        borderRadius: BorderRadius.circular(30),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.10)),
+        boxShadow: [
+          BoxShadow(
+            color: palette.primary.withValues(alpha: 0.14),
+            blurRadius: 26,
+            offset: const Offset(0, 16),
           ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w800,
-                    color: palette.ink,
+        ],
+      ),
+      child: Stack(
+        children: [
+          Positioned(
+            top: -32,
+            right: -20,
+            child: IgnorePointer(
+              child: Container(
+                width: 132,
+                height: 132,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      Colors.white.withValues(alpha: 0.18),
+                      Colors.white.withValues(alpha: 0.02),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 4),
-                Text(
-                  meta,
-                  style: TextStyle(color: palette.ink.withValues(alpha: 0.64)),
-                ),
-              ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(AppSpacing.xl),
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final wide = constraints.maxWidth >= 760;
+                final iconBlock = Container(
+                  width: wide ? 96 : 72,
+                  height: wide ? 96 : 72,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white.withValues(alpha: 0.10),
+                    border: Border.all(
+                      color: Colors.white.withValues(alpha: 0.14),
+                    ),
+                  ),
+                  alignment: Alignment.center,
+                  child: Icon(icon, color: Colors.white, size: wide ? 46 : 34),
+                );
+
+                final content = Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      eyebrow,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w800,
+                        letterSpacing: 1.1,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: wide ? 30 : 24,
+                        height: 1.1,
+                        fontWeight: FontWeight.w900,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxWidth: wide ? 620 : constraints.maxWidth,
+                      ),
+                      child: Text(
+                        subtitle,
+                        style: TextStyle(
+                          color: Colors.white.withValues(alpha: 0.84),
+                          height: 1.5,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 14),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 12,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.08),
+                        borderRadius: BorderRadius.circular(18),
+                        border: Border.all(
+                          color: Colors.white.withValues(alpha: 0.10),
+                        ),
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 1),
+                            child: Icon(
+                              Icons.rule_folder_rounded,
+                              size: 18,
+                              color: Colors.white.withValues(alpha: 0.86),
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              hint,
+                              style: TextStyle(
+                                color: Colors.white.withValues(alpha: 0.84),
+                                height: 1.45,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    if (chips.isNotEmpty) ...[
+                      const SizedBox(height: 14),
+                      Wrap(spacing: 8, runSpacing: 8, children: chips),
+                    ],
+                  ],
+                );
+
+                if (!wide) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [iconBlock, const SizedBox(height: 18), content],
+                  );
+                }
+
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(child: content),
+                    const SizedBox(width: AppSpacing.lg),
+                    iconBlock,
+                  ],
+                );
+              },
             ),
           ),
         ],
@@ -542,37 +1311,346 @@ class _SectionPreviewCard extends StatelessWidget {
   }
 }
 
-class _SectionResultCard extends StatelessWidget {
-  const _SectionResultCard({
-    required this.title,
-    required this.summary,
+class _OverviewChip extends StatelessWidget {
+  const _OverviewChip({
+    required this.icon,
+    required this.label,
+    this.foreground,
+    this.background,
+    this.borderColor,
+  });
+
+  final IconData icon;
+  final String label;
+  final Color? foreground;
+  final Color? background;
+  final Color? borderColor;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    final fg = foreground ?? palette.ink.withValues(alpha: 0.82);
+    final bg = background ?? palette.base;
+    final border = borderColor ?? palette.outlineSoft;
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      decoration: BoxDecoration(
+        color: bg,
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(color: border),
+      ),
+      child: Wrap(
+        spacing: 8,
+        runSpacing: 4,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          Icon(icon, size: 16, color: fg),
+          Text(
+            label,
+            style: TextStyle(
+              color: fg,
+              fontWeight: FontWeight.w800,
+              height: 1.25,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SkillReadinessRow extends StatelessWidget {
+  const _SkillReadinessRow({
+    required this.label,
+    required this.valueLabel,
+    required this.value,
     required this.accent,
   });
 
-  final String title;
-  final String summary;
+  final String label;
+  final String valueLabel;
+  final double value;
   final Color accent;
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    final normalized = value.clamp(0.0, 1.0);
+
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: accent.withValues(alpha: 0.10),
+        color: accent.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: accent.withValues(alpha: 0.20)),
+        border: Border.all(color: accent.withValues(alpha: 0.18)),
       ),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: Text(
-              title,
-              style: TextStyle(fontWeight: FontWeight.w800, color: accent),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  label,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    color: palette.ink,
+                  ),
+                ),
+              ),
+              Text(
+                valueLabel,
+                style: TextStyle(fontWeight: FontWeight.w900, color: accent),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(999),
+            child: LinearProgressIndicator(
+              value: normalized,
+              minHeight: 8,
+              backgroundColor: palette.base,
+              color: accent,
             ),
           ),
-          Text(
-            summary,
-            style: TextStyle(fontWeight: FontWeight.w900, color: accent),
+        ],
+      ),
+    );
+  }
+}
+
+class _SectionPreviewCard extends StatelessWidget {
+  const _SectionPreviewCard({
+    required this.eyebrow,
+    required this.title,
+    required this.icon,
+    required this.meta,
+    required this.status,
+    required this.accent,
+    this.progress,
+  });
+
+  final String eyebrow;
+  final String title;
+  final IconData icon;
+  final String meta;
+  final String status;
+  final Color accent;
+  final double? progress;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [accent.withValues(alpha: 0.12), palette.elevated],
+        ),
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: accent.withValues(alpha: 0.16)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: accent.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                alignment: Alignment.center,
+                child: Icon(icon, color: accent),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      eyebrow,
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w800,
+                        color: accent,
+                        letterSpacing: 0.6,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        color: palette.ink,
+                        height: 1.2,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              _OverviewChip(
+                icon: Icons.quiz_outlined,
+                label: meta,
+                foreground: palette.ink.withValues(alpha: 0.78),
+                background: palette.base.withValues(alpha: 0.82),
+                borderColor: palette.outlineSoft,
+              ),
+              _OverviewChip(
+                icon: progress == null
+                    ? Icons.play_circle_outline_rounded
+                    : Icons.show_chart_rounded,
+                label: status,
+                foreground: accent,
+                background: accent.withValues(alpha: 0.10),
+                borderColor: accent.withValues(alpha: 0.16),
+              ),
+            ],
+          ),
+          if (progress != null) ...[
+            const SizedBox(height: 12),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(999),
+              child: LinearProgressIndicator(
+                value: progress!.clamp(0.0, 1.0),
+                minHeight: 8,
+                backgroundColor: palette.base,
+                color: accent,
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _SectionResultCard extends StatelessWidget {
+  const _SectionResultCard({
+    required this.eyebrow,
+    required this.title,
+    required this.icon,
+    required this.summary,
+    required this.meta,
+    required this.accent,
+    required this.progress,
+  });
+
+  final String eyebrow;
+  final String title;
+  final IconData icon;
+  final String summary;
+  final String meta;
+  final Color accent;
+  final double progress;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [accent.withValues(alpha: 0.12), palette.elevated],
+        ),
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: accent.withValues(alpha: 0.18)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: accent.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                alignment: Alignment.center,
+                child: Icon(icon, color: accent),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      eyebrow,
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w800,
+                        color: accent,
+                        letterSpacing: 0.6,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        color: palette.ink,
+                        height: 1.2,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      meta,
+                      style: TextStyle(
+                        color: palette.ink.withValues(alpha: 0.66),
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 12),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
+                decoration: BoxDecoration(
+                  color: accent.withValues(alpha: 0.10),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: accent.withValues(alpha: 0.14)),
+                ),
+                child: Text(
+                  summary,
+                  style: TextStyle(fontWeight: FontWeight.w900, color: accent),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(999),
+            child: LinearProgressIndicator(
+              value: progress.clamp(0.0, 1.0),
+              minHeight: 8,
+              backgroundColor: palette.base,
+              color: accent,
+            ),
           ),
         ],
       ),
