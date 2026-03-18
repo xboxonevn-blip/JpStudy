@@ -2113,6 +2113,149 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String handwritingCurrentSetLabel(String setLabel) {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Set: $setLabel';
+      case AppLanguage.vi:
+        return 'Bộ hiện tại: $setLabel';
+      case AppLanguage.ja:
+        return '現在セット: $setLabel';
+    }
+  }
+
+  String get handwritingSessionAllItemsLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'All items';
+      case AppLanguage.vi:
+        return 'Toàn bộ mục';
+      case AppLanguage.ja:
+        return '全項目';
+    }
+  }
+
+  String get handwritingSessionWeakSetLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Weak set';
+      case AppLanguage.vi:
+        return 'Bộ mục yếu';
+      case AppLanguage.ja:
+        return '弱点セット';
+    }
+  }
+
+  String get handwritingSessionWrongOnlySetLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Wrong-only set';
+      case AppLanguage.vi:
+        return 'Bộ chữ sai';
+      case AppLanguage.ja:
+        return '誤答セット';
+    }
+  }
+
+  String get handwritingDueSessionTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Due for review';
+      case AppLanguage.vi:
+        return 'Ôn tập hôm nay';
+      case AppLanguage.ja:
+        return '今日の復習';
+    }
+  }
+
+  String get handwritingNewBatchTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'New kanji to learn';
+      case AppLanguage.vi:
+        return 'Học kanji mới';
+      case AppLanguage.ja:
+        return '新しい漢字';
+    }
+  }
+
+  String get handwritingFreePracticeLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Free practice';
+      case AppLanguage.vi:
+        return 'Luyện tập tự do';
+      case AppLanguage.ja:
+        return '自由練習';
+    }
+  }
+
+  String get handwritingNothingDueLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'All caught up — nothing due today';
+      case AppLanguage.vi:
+        return 'Không có gì cần ôn hôm nay';
+      case AppLanguage.ja:
+        return '今日の復習はありません';
+    }
+  }
+
+  String get handwritingNewBatchSubtitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'New batch';
+      case AppLanguage.vi:
+        return 'Lô mới';
+      case AppLanguage.ja:
+        return '新しいバッチ';
+    }
+  }
+
+  String handwritingReviewDueLabel(int count) {
+    switch (this) {
+      case AppLanguage.en:
+        return '$count kanji due for review';
+      case AppLanguage.vi:
+        return '$count kanji đến hạn ôn';
+      case AppLanguage.ja:
+        return '復習期限の漢字 $count 件';
+    }
+  }
+
+  String get handwritingAllCaughtUpLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'All caught up';
+      case AppLanguage.vi:
+        return 'Đã bắt kịp hết';
+      case AppLanguage.ja:
+        return 'すべて追いついています';
+    }
+  }
+
+  String get handwritingReviewReadyNowLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Review ready now';
+      case AppLanguage.vi:
+        return 'Có thể ôn ngay';
+      case AppLanguage.ja:
+        return '今すぐ復習できます';
+    }
+  }
+
+  String handwritingNextReviewInLabel(String timeLabel) {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Next review in $timeLabel';
+      case AppLanguage.vi:
+        return 'Lần ôn tiếp theo sau $timeLabel';
+      case AppLanguage.ja:
+        return '次の復習まで $timeLabel';
+    }
+  }
+
   String handwritingGuideCharacterCounterLabel(int current, int total) {
     switch (this) {
       case AppLanguage.en:

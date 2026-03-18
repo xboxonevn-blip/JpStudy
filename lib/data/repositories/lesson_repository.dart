@@ -12,6 +12,7 @@ import 'package:jpstudy/data/db/content_database.dart'
 import 'package:jpstudy/data/db/content_database_provider.dart';
 import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/models/kanji_item.dart';
+import 'package:jpstudy/data/utils/grammar_english_notation.dart';
 
 final lessonRepositoryProvider = Provider<LessonRepository>((ref) {
   return LessonRepository(
@@ -1133,13 +1134,20 @@ class LessonRepository {
     bool needsResync = existingPoints.isEmpty;
     if (!needsResync && existingPoints.isNotEmpty) {
       // Check if any point is missing English explanation or title
-      needsResync = existingPoints.any(
-        (p) =>
-            p.explanationEn == null ||
+      needsResync = existingPoints.any((p) {
+        final currentMeaningEn = (p.meaningEn ?? p.titleEn ?? '').trim();
+        final currentConnectionEn = (p.connectionEn ?? '').trim();
+        return p.explanationEn == null ||
             p.explanationEn!.isEmpty ||
             p.titleEn == null ||
-            p.titleEn!.isEmpty,
-      );
+            p.titleEn!.isEmpty ||
+            (currentMeaningEn.isNotEmpty &&
+                normalizeGrammarTitleEn(currentMeaningEn) !=
+                    currentMeaningEn) ||
+            (currentConnectionEn.isNotEmpty &&
+                normalizeGrammarStructureEn(currentConnectionEn) !=
+                    currentConnectionEn);
+      });
     }
 
     if (!needsResync) {
@@ -1163,6 +1171,9 @@ class LessonRepository {
     }
 
     for (final cp in contentPoints) {
+      final titleEn = normalizeGrammarTitleEn(cp.titleEn);
+      final structureEn = normalizeGrammarStructureEn(cp.structureEn);
+
       // Insert Point with proper English data from ContentDB
       final pointId = await _db
           .into(_db.grammarPoints)
@@ -1170,12 +1181,12 @@ class LessonRepository {
             GrammarPointsCompanion.insert(
               lessonId: Value(lessonId),
               grammarPoint: cp.title,
-              titleEn: Value(cp.titleEn), // Copy English title
+              titleEn: Value(titleEn.isEmpty ? null : titleEn),
               meaning: cp.title,
               meaningVi: Value(cp.title),
-              meaningEn: Value(cp.titleEn ?? cp.title),
+              meaningEn: Value(titleEn.isEmpty ? cp.title : titleEn),
               connection: cp.structure,
-              connectionEn: Value(cp.structureEn), // Copy English structure
+              connectionEn: Value(structureEn.isEmpty ? null : structureEn),
               explanation: cp.explanation,
               explanationVi: Value(cp.explanation),
               explanationEn: Value(cp.explanationEn),
@@ -1231,6 +1242,51 @@ class LessonRepository {
       if (byLesson != 0) return byLesson;
       return a.id.compareTo(b.id);
     });
+    return _mapKanjiRows(rows);
+  }
+
+  /// Returns kanji at [level] whose SRS state is currently due (nextReviewAt <= now).
+  /// Kanji with no SRS state row are excluded — they are "unseen", not "due".
+  Future<List<KanjiItem>> fetchDueKanjiByLevel(String level) async {
+    final dueStates = await _db.kanjiSrsDao.getDueReviews();
+    if (dueStates.isEmpty) return const [];
+
+    final dueIds = dueStates.map((s) => s.kanjiId).toList();
+    final rows =
+        await (_contentDb.select(_contentDb.kanji)
+              ..where(
+                (tbl) => tbl.jlptLevel.equals(level) & tbl.id.isIn(dueIds),
+              )
+              ..orderBy([
+                (tbl) => OrderingTerm.asc(tbl.lessonId),
+                (tbl) => OrderingTerm.asc(tbl.id),
+              ]))
+            .get();
+
+    return _mapKanjiRows(rows);
+  }
+
+  /// Returns up to [limit] kanji at [level] that have never been practiced
+  /// (no row exists in KanjiSrsState for them), ordered by lesson then id.
+  Future<List<KanjiItem>> fetchUnseenKanjiByLevel(
+    String level, {
+    int limit = 15,
+  }) async {
+    final seenIds = await _db.kanjiSrsDao.getAllSeenKanjiIds();
+
+    final query = _contentDb.select(_contentDb.kanji)
+      ..where((tbl) {
+        final byLevel = tbl.jlptLevel.equals(level);
+        if (seenIds.isEmpty) return byLevel;
+        return byLevel & tbl.id.isNotIn(seenIds);
+      })
+      ..orderBy([
+        (tbl) => OrderingTerm.asc(tbl.lessonId),
+        (tbl) => OrderingTerm.asc(tbl.id),
+      ])
+      ..limit(limit);
+
+    final rows = await query.get();
     return _mapKanjiRows(rows);
   }
 

@@ -62,12 +62,34 @@ class KanjiSrsDao extends DatabaseAccessor<AppDatabase>
   /// Returns the nearest future review date (nextReviewAt > now).
   /// Returns null if all reviews are past-due or no state exists.
   Future<DateTime?> getNextScheduledReview() async {
-    final row = await (select(kanjiSrsState)
-          ..where((t) => t.nextReviewAt.isBiggerThanValue(DateTime.now()))
-          ..orderBy([(t) => OrderingTerm.asc(t.nextReviewAt)])
-          ..limit(1))
-        .getSingleOrNull();
+    final row =
+        await (select(kanjiSrsState)
+              ..where((t) => t.nextReviewAt.isBiggerThanValue(DateTime.now()))
+              ..orderBy([(t) => OrderingTerm.asc(t.nextReviewAt)])
+              ..limit(1))
+            .getSingleOrNull();
     return row?.nextReviewAt;
+  }
+
+  /// Returns all kanjiIds that have an SRS state row.
+  Future<List<int>> getAllSeenKanjiIds() {
+    return (selectOnly(kanjiSrsState)..addColumns([kanjiSrsState.kanjiId]))
+        .map((row) => row.read(kanjiSrsState.kanjiId)!)
+        .get();
+  }
+
+  /// Test helper — inserts a state row with a specific nextReviewAt.
+  Future<void> insertTestState({
+    required int kanjiId,
+    required DateTime nextReviewAt,
+  }) {
+    return into(kanjiSrsState).insert(
+      KanjiSrsStateCompanion.insert(
+        kanjiId: kanjiId,
+        nextReviewAt: nextReviewAt,
+      ),
+      mode: InsertMode.insertOrReplace,
+    );
   }
 
   /// Reactive due count for dashboard/home.
