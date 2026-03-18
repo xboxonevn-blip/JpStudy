@@ -2,6 +2,261 @@
 
 This file records recent Codex work so future sessions can continue from the current repo state more easily.
 
+## 2026-03-18
+
+### Grammar Sentence Builder Chunking & Feedback Pass
+
+- Investigated the `Sentence Builder` experience after feedback that it was not helping users understand grammar and examples well.
+- Root cause found
+  - `GrammarQuestionGenerator._tokenizeSentence` split any no-space Japanese sentence into single Unicode characters.
+  - This made examples like `どこですか。…あそこです。` render as noisy kana-by-kana chips instead of meaningful chunks.
+  - `SentenceBuilderWidget` already had `GeneratedQuestion.feedback` and `GeneratedQuestion.explanation` at the model layer, but the widget UI ignored them and only showed a generic “Order is still off.” message.
+- Updated `lib/features/grammar/services/grammar_question_generator.dart`
+  - Replaced the char-by-char fallback with a single-pass marker-insertion tokenizer.
+  - The tokenizer now:
+    - strips the prompt half of dialogue sentences before `…`, keeping only the answer half
+    - keeps explicit space-based tokenization unchanged
+    - splits Japanese sentences into more meaningful chunks by inserting boundaries before verbal/copula endings (`です`, `ですか`, `ます`, `ません`, etc.) and after major particles (`は`, `が`, `を`, `に`, `も`, `と`, `の`, `へ`)
+    - keeps endings like `ですか` together instead of breaking them into `で / す / か`
+    - falls back to grouped chunks only if the sentence is still too short to split meaningfully
+- Updated `test/features/grammar/grammar_question_generator_test.dart`
+  - Added tokenizer regression coverage for:
+    - simple copula sentences (`私は学生です。`)
+    - question endings staying together (`どこですか。`)
+    - dialogue examples keeping only the answer half after `…`
+    - whitespace-preserving cases
+    - minimum useful chunk counts for common N5 patterns
+- Updated `lib/features/grammar/widgets/sentence_builder_widget.dart`
+  - Added optional `feedback` and `explanation` props.
+  - Wrong-answer state now shows:
+    - the existing status message
+    - the grammar pattern hint from `GeneratedQuestion.feedback`
+    - the correct sentence
+    - the translation / explanation from `GeneratedQuestion.explanation`
+- Updated `lib/features/grammar/screens/grammar_practice_screen.dart`
+  - Passed `question.feedback` and `question.explanation` into `SentenceBuilderWidget`.
+- Updated stale tests affected by current workspace behavior
+  - `test/features/ui/simple_command_center_test.dart`
+    - Adjusted `GrammarDetailScreen` expectation to the current English headline rendering (`V-て + shimau`) and made it robust to multiple appearances.
+  - `test/features/ui/ghost_review_walkthrough_test.dart`
+    - Updated the helper to handle the fake test sentence `ABC` both as one chunk and as the older per-character fallback, so the test stays valid after smarter tokenization.
+
+### Verification Run
+
+- Ran `flutter test test/features/grammar/grammar_question_generator_test.dart`
+  - Result: all 13 grammar generator tests passed
+- Ran `flutter test test/features/ui/simple_command_center_test.dart --name="GrammarDetailScreen"`
+  - Result: passed after updating the stale expectation
+- Ran `flutter test test/features/ui/ghost_review_walkthrough_test.dart --name="Correct answer in ghost practice reduces grammar mistake count"`
+  - Result: passed after updating the helper for the new chunking behavior
+- Ran `flutter test`
+  - Result: full suite passed (`179` tests shown in current workspace run)
+
+### Grammar Example Quality Pass (`N5` Batch D: Lessons 13-25)
+
+- Continued the lesson-vocab-first rewrite flow across all remaining `N5` grammar example lessons:
+  - `assets/data/content/grammar_examples/n5/lesson_13.json`
+  - `assets/data/content/grammar_examples/n5/lesson_14.json`
+  - `assets/data/content/grammar_examples/n5/lesson_15.json`
+  - `assets/data/content/grammar_examples/n5/lesson_16.json`
+  - `assets/data/content/grammar_examples/n5/lesson_17.json`
+  - `assets/data/content/grammar_examples/n5/lesson_18.json`
+  - `assets/data/content/grammar_examples/n5/lesson_19.json`
+  - `assets/data/content/grammar_examples/n5/lesson_20.json`
+  - `assets/data/content/grammar_examples/n5/lesson_21.json`
+  - `assets/data/content/grammar_examples/n5/lesson_22.json`
+  - `assets/data/content/grammar_examples/n5/lesson_23.json`
+  - `assets/data/content/grammar_examples/n5/lesson_24.json`
+  - `assets/data/content/grammar_examples/n5/lesson_25.json`
+- Goals of this batch:
+  - finish the `N5` manual quality-upgrade pass instead of leaving the second half of the level on generic expansion content
+  - keep every grammar block at `10` examples while making the sentence sets feel tied to the lesson vocabulary, scene, and learning objective
+  - turn conjugation-heavy lessons such as `Vて`, `Vない`, `Vる`, `Vた`, and plain-form lessons into short usable study sentences instead of dry transformation lists
+- Content strategy used in this pass:
+  - kept grammar-point labels identical to the canonical titles in `assets/data/content/grammar/n5/grammar_n5_13.json` through `grammar_n5_25.json`
+  - rewrote lesson 13 around desire, invitations, weekend plans, shopping, swimming, city-hall registration, and art/economics study contexts
+  - rewrote lessons 14-18 around requests, ongoing actions, rules, obligation, transportation flow, body/adjective description, hobbies, ability, and before/after routines
+  - rewrote lessons 19-25 around experience, casual/plain speech, opinions/reporting, relative clauses, machine/road situations, giving-receiving help, and conditional/advice patterns
+  - preferred lesson vocab such as `市役所`, `パスポート`, `時刻表`, `押し入れ`, `交差点`, `お弁当`, `大使館`, `チャンス`, and related everyday beginner scenes over generic filler
+
+### Verification Run
+
+- Re-validated the previously rewritten `N5` files:
+  - `assets/data/content/grammar_examples/n5/lesson_5.json`
+  - `assets/data/content/grammar_examples/n5/lesson_7.json`
+  - `assets/data/content/grammar_examples/n5/lesson_8.json`
+  - `assets/data/content/grammar_examples/n5/lesson_10.json`
+  - `assets/data/content/grammar_examples/n5/lesson_11.json`
+  - `assets/data/content/grammar_examples/n5/lesson_12.json`
+  - Result: all six files still parse successfully and every grammar block remains at exactly `10` examples
+- Ran JSON/count validation across the full `N5` grammar-example set
+  - Result: `lesson_1.json` through `lesson_25.json` all parse successfully and every grammar block in `N5` remains at exactly `10` examples
+- Cross-checked canonical label order for `lesson_13.json` through `lesson_25.json`
+  - Result: every `grammar_examples[*].grammarPoint` matches the lesson definition title exactly, with no label drift introduced
+- Ran `python tooling/audit_grammar_example_coverage.py --apply`
+  - Result: `N5` remains fully covered at `1180` examples across `118` grammar points with `0` points below target
+  - The audit still reports remaining expansion work only in `N4` and `N3`; no new `N5` mismatches or below-target blocks were introduced
+
+### Grammar Example Quality Pass (`N5` Batch C: Lessons 3, 4)
+
+- Continued the lesson-vocab-first rewrite process on:
+  - `assets/data/content/grammar_examples/n5/lesson_3.json`
+  - `assets/data/content/grammar_examples/n5/lesson_4.json`
+- Goal of this batch:
+  - make lesson 3 feel clearly like a directions / building / department-store lesson instead of a mixed-location placeholder set
+  - make lesson 4 feel clearly like a daily schedule / opening-hours / time-management lesson instead of generic verb practice
+- Content strategy used in this pass:
+  - matched both grammar-example files against `assets/data/content/grammar/n5/grammar_n5_3.json`, `grammar_n5_4.json`, and the local vocab banks in `assets/data/content/vocab/n5/lesson_03.json` and `lesson_04.json`
+  - rewrote lesson 3 around reception / office / meeting room / restroom / elevator / vending machine / sales-floor contexts, plus country-of-origin examples built around lesson products like `靴`, `ネクタイ`, `ワイン`, and `たばこ`
+  - rewrote lesson 4 around real beginner schedule contexts such as wake-up time, meetings, exams, lunch break, opening hours for `銀行`, `郵便局`, `図書館`, `美術館`, and weekday study / work routines
+  - kept every grammar block at `10` examples while reducing textbook-swapped filler and making each block read like the lesson it belongs to
+- Online references used for this pass:
+  - `Nihongo AZ` lesson 3 grammar reference
+  - `Nihongo AZ` lesson 4 grammar reference
+  - `LearnJP` lesson 3 vocabulary reference
+  - `LearnJP` lesson 4 vocabulary reference
+
+### Verification Run
+
+- Ran JSON/count validation for:
+  - `assets/data/content/grammar_examples/n5/lesson_3.json`
+  - `assets/data/content/grammar_examples/n5/lesson_4.json`
+  - Result: both files parsed successfully; lesson 3 still contains `6` grammar blocks and lesson 4 still contains `4`, with every block staying at exactly `10` examples
+- Ran `python tooling/audit_grammar_example_coverage.py --apply`
+  - Result: `N5` remains fully covered at `1180` examples across `118` grammar points with `0` points below target
+  - No canonical-label drift or unmatched example-block issues were introduced by this batch
+
+### Grammar Example Quality Pass (`N5` Batch B: Lessons 1, 2)
+
+- Continued the lesson-vocab-first rewrite process on:
+  - `assets/data/content/grammar_examples/n5/lesson_1.json`
+  - `assets/data/content/grammar_examples/n5/lesson_2.json`
+- Goal of this batch:
+  - remove the early-lesson examples that still felt like generic textbook substitution
+  - make lesson 1 stay centered on self-introduction, nationality, job, and affiliation contexts
+  - make lesson 2 stay centered on classroom / desk / office-object identification, ownership, and content questions
+- Content strategy used in this pass:
+  - matched both grammar-example files against `assets/data/content/grammar/n5/grammar_n5_1.json`, `grammar_n5_2.json`, and the local vocab banks in `assets/data/content/vocab/n5/lesson_01.json` and `lesson_02.json`
+  - rewrote lesson 1 so the examples now stay inside beginner-introduction scenarios instead of drifting into unrelated object examples
+  - rewrote lesson 2 so demonstratives, ownership, and `何（なん）` examples now reuse concrete lesson objects such as `辞書`, `名刺`, `手帳`, `テレホンカード`, `かぎ`, `新聞`, `雑誌`, `カメラ`, `コンピューター`, and `自動車`
+  - kept every grammar block at `10` examples while favoring short, beginner-usable sentences over isolated filler fragments
+- Online references used for this pass:
+  - `Nihongo AZ` lesson 1 grammar reference
+  - `Nihongo AZ` lesson 1 vocabulary reference
+  - `Nihongo AZ` lesson 2 grammar reference
+  - `LearnJP` lesson 2 vocabulary reference
+  - `JapaEdu` lesson 1 overview reference for lesson framing and introduction vocabulary
+
+### Verification Run
+
+- Ran JSON/count validation for:
+  - `assets/data/content/grammar_examples/n5/lesson_1.json`
+  - `assets/data/content/grammar_examples/n5/lesson_2.json`
+  - Result: both files parsed successfully, both still contain `6` grammar blocks, and every block still contains exactly `10` examples
+- Ran `python tooling/audit_grammar_example_coverage.py --apply`
+  - Result: `N5` remains fully covered at `1180` examples across `118` grammar points with `0` points below target
+  - No canonical-label drift or unmatched example-block issues were introduced by this batch
+
+### Grammar Example Quality Pass (`N5` Batch A: Lessons 6, 9)
+
+- Continued the lesson-vocab-first example rewrite process on:
+  - `assets/data/content/grammar_examples/n5/lesson_6.json`
+  - `assets/data/content/grammar_examples/n5/lesson_9.json`
+- Goal of this batch:
+  - make the examples feel closer to the actual lesson vocabulary bank
+  - reduce generic filler examples in early N5 grammar
+  - keep each grammar block at `10` examples while making the sentences more useful for daily-life study
+- Content strategy used in this pass:
+  - matched each lesson against `assets/data/content/vocab/n5/lesson_06.json` and `lesson_09.json`
+  - rewrote lesson 6 around concrete beginner-life contexts such as breakfast, cafeteria, restaurant, station, reading letters, shopping, movies, invitations, and suggestions
+  - rewrote lesson 9 around preference/ability/reason contexts using lesson vocab such as concerts, karaoke, tickets, appointments, small change, music, sports, scripts, spouse/child, and phone-style invitation situations
+  - kept grammar examples short and beginner-readable while still making them feel less robotic
+- Online references used for this pass:
+  - `Nihongo AZ` lesson 6 grammar reference
+  - `Nihongo AZ` lesson 9 grammar reference
+  - `Nihongo AZ` lesson 6 vocabulary reference
+  - `Nihongo AZ` lesson 9 vocabulary reference
+
+### Verification Run
+
+- Ran JSON/count validation for:
+  - `assets/data/content/grammar_examples/n5/lesson_6.json`
+  - `assets/data/content/grammar_examples/n5/lesson_9.json`
+  - Result: both files parsed successfully and every grammar block still contains `10` examples
+- Ran `python tooling/audit_grammar_example_coverage.py --apply`
+  - Result: no canonical-label drift introduced
+  - `N5` still remains at `1180` examples across `118` grammar points with `0` points below target
+
+### Grammar Example Quality Pass (`N4` Lessons 29, 31, 38)
+
+- Reworked the example sets in:
+  - `assets/data/content/grammar_examples/n4/lesson_29.json`
+  - `assets/data/content/grammar_examples/n4/lesson_31.json`
+  - `assets/data/content/grammar_examples/n4/lesson_38.json`
+- Goal of this pass:
+  - make examples follow each lesson's own vocab bank more closely
+  - keep situations grounded in daily life rather than abstract filler
+  - keep every grammar block at `10` examples while improving relevance, not just quantity
+- Content strategy used in this pass:
+  - matched each target lesson against `assets/data/content/vocab/n4/lesson_29.json`, `lesson_31.json`, and `lesson_38.json`
+  - rewrote examples to reuse lesson vocabulary such as station / luggage-rack / lost-property contexts for lesson 29, presentation / holiday / graduate-school contexts for lesson 31, and hospital / lab / documents / twins / coast contexts for lesson 38
+  - used online grammar references to cross-check usage before rewriting examples manually into app-specific sentence sets
+- Online references used for this pass:
+  - `Nihongo AZ` lesson grammar references for lessons 29, 31, and 38
+  - `Langoal` lesson 38 teaching-plan reference
+  - `Nihongo Kyoshi Net` reference for `〜ことにする`
+
+### Verification Run
+
+- Ran JSON validation for:
+  - `assets/data/content/grammar_examples/n4/lesson_29.json`
+  - `assets/data/content/grammar_examples/n4/lesson_31.json`
+  - `assets/data/content/grammar_examples/n4/lesson_38.json`
+  - Result: all files parsed successfully
+- Checked example counts after rewrite
+  - Result: every grammar block in lessons `29`, `31`, and `38` still contains `10` examples
+
+### Grammar Example Audit Pass
+
+- Split the large grammar-example cleanup into explicit passes so the data update can proceed safely in batches.
+- Added and stabilized `tooling/audit_grammar_example_coverage.py`
+  - Tightened the matcher so it now uses conservative matching only.
+  - Removed the over-loose fuzzy behavior that previously mapped unrelated labels together.
+  - Added UTF-8 stdout configuration so the audit runs cleanly on the current Windows terminal.
+- Repaired `assets/data/content/grammar_examples/n4/lesson_42.json`
+  - Restored the reason examples under `〜ために（理由）`.
+  - Kept the purpose label standardized as `～ために (Mục đích)` without merging the two grammar points incorrectly.
+- Regenerated:
+  - `docs/reports/grammar-example-coverage-report.json`
+  - `docs/reports/grammar-example-expansion-plan.md`
+
+### Grammar Example Expansion Pass B (`N5`)
+
+- Completed the `N5` coverage batch so every `N5` grammar point now has at least `10` examples.
+- Updated:
+  - `assets/data/content/grammar_examples/n5/lesson_3.json`
+  - `assets/data/content/grammar_examples/n5/lesson_8.json`
+  - `assets/data/content/grammar_examples/n5/lesson_11.json`
+  - `assets/data/content/grammar_examples/n5/lesson_13.json`
+  - `assets/data/content/grammar_examples/n5/lesson_15.json`
+  - `assets/data/content/grammar_examples/n5/lesson_21.json`
+  - `assets/data/content/grammar_examples/n5/lesson_22.json`
+  - `assets/data/content/grammar_examples/n5/lesson_23.json`
+  - `assets/data/content/grammar_examples/n5/lesson_25.json`
+- Reworked `lesson_11.json` more deeply instead of only padding counts:
+  - Moved time/frequency examples into `Số lượng từ (Thời gian)`.
+  - Replaced the generic quantifier block with actual counter-based noun examples so the grammar point matches its label.
+
+### Verification Run
+
+- Ran `python tooling/audit_grammar_example_coverage.py --apply`
+  - Result: report regenerated successfully.
+  - Coverage now shows `N5` at `1180` examples across `118` grammar points, average `10.0`, with `0` points below target.
+- Ran JSON validation for the updated `N5` lesson files plus repaired `lesson_42.json`
+  - Result: all modified grammar example files parse successfully.
+- Did not run Flutter UI tests in this pass
+  - This batch only changed JSON content and the audit/report tooling.
+
 ## 2026-03-17
 
 ### Session Summary
@@ -783,6 +1038,93 @@ This file records recent Codex work so future sessions can continue from the cur
 - Ran `flutter test test/features/ui/mock_exam_walkthrough_test.dart`
   - Result: all tests passed
 
+### Grammar English Fallback Cleanup
+
+- Fixed the grammar English-mode leak where Vietnamese labels and translations could still appear when local DB rows had stale or incomplete English fields.
+- Updated `lib/data/utils/grammar_english_notation.dart`
+  - Added shared detection for Vietnamese-contaminated text.
+  - Added English display resolvers that prefer clean English copy, then fall back to safe Japanese grammar notation instead of Vietnamese.
+- Updated Grammar UI and generation flows to use the shared English resolvers:
+  - `lib/features/grammar/services/grammar_question_generator.dart`
+  - `lib/features/grammar/grammar_screen.dart`
+  - `lib/features/grammar/screens/grammar_detail_screen.dart`
+  - `lib/features/grammar/screens/ghost_review_screen.dart`
+  - `lib/features/grammar/widgets/grammar_example_widget.dart`
+- Tightened generator behavior so English-mode feedback, options, and prompts no longer pull raw Vietnamese `grammarPoint` labels into visible text.
+- Updated grammar data sync paths so reseeded DB content stores safer English fallbacks:
+  - `lib/data/seeds/grammar_seeder.dart`
+  - `lib/data/repositories/lesson_repository.dart`
+- Bumped grammar seed version from `4` to `5` so existing installs refresh polluted grammar English fields on next launch.
+- Added regression coverage in `test/features/grammar/grammar_question_generator_test.dart` for the exact stale-data case.
+- Updated `test/features/ui/ghost_review_walkthrough_test.dart` to use a sturdier tap target after the English grammar headline became localized.
+
+### Verification Run
+
+- Ran `dart format` on all changed grammar/data/test files
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/grammar lib/data/utils/grammar_english_notation.dart lib/data/seeds/grammar_seeder.dart lib/data/repositories/lesson_repository.dart test/features/grammar/grammar_question_generator_test.dart test/features/ui/ghost_review_walkthrough_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/grammar/grammar_question_generator_test.dart`
+  - Result: all tests passed
+- Ran `flutter test test/features/ui/ghost_review_walkthrough_test.dart`
+  - Result: all tests passed
+
+### Grammar Practice UI/UX Pass
+
+- Redesigned the active Grammar practice experience so it reads more like a focused study sheet and less like a stretched utility screen.
+- Updated `lib/features/grammar/screens/grammar_practice_screen.dart`
+  - Centered the active study column with a desktop max-width so the screen no longer stretches awkwardly across wide layouts.
+  - Refined the session header, progress card, hint card, timer, and feedback banner into softer paper-like panels aligned more closely with Home.
+  - Reduced dead space and improved information hierarchy between mode, progress, question type, and feedback.
+- Added shared practice surfaces in `lib/features/grammar/widgets/grammar_practice_surfaces.dart`
+  - Introduced reusable prompt cards and answer-option tiles with calmer borders, better spacing, clearer states, and stronger left-aligned scanability.
+- Updated `lib/features/grammar/widgets/multiple_choice_widget.dart`
+  - Removed the old spacer-based layout that left large empty gaps.
+  - Rebuilt multiple-choice questions into a top-aligned prompt plus vertically stacked premium answer cards.
+- Updated `lib/features/grammar/widgets/cloze_test_widget.dart`
+  - Reworked fill-blank into a clearer study flow with instruction header, sentence card, visible selected-answer preview, calmer options, and a cleaner action button.
+- Updated `lib/features/grammar/widgets/sentence_builder_widget.dart`
+  - Restyled sentence builder with the same study-sheet surfaces.
+  - Removed the old full-screen correctness overlay in favor of subtler inline guidance.
+  - Made the whole builder scroll safely in short viewports to avoid layout overflow.
+- Updated `test/features/ui/ghost_review_walkthrough_test.dart`
+  - Switched grammar interaction helpers to stable keys/visible targets after the UI refresh.
+
+### Verification Run
+
+- Ran `dart format lib/features/grammar/screens/grammar_practice_screen.dart lib/features/grammar/widgets/grammar_practice_surfaces.dart lib/features/grammar/widgets/multiple_choice_widget.dart lib/features/grammar/widgets/cloze_test_widget.dart lib/features/grammar/widgets/sentence_builder_widget.dart test/features/ui/ghost_review_walkthrough_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/grammar/screens/grammar_practice_screen.dart lib/features/grammar/widgets/grammar_practice_surfaces.dart lib/features/grammar/widgets/multiple_choice_widget.dart lib/features/grammar/widgets/cloze_test_widget.dart lib/features/grammar/widgets/sentence_builder_widget.dart test/features/ui/ghost_review_walkthrough_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/ui/ghost_review_walkthrough_test.dart`
+  - Result: all tests passed
+
+### Grammar Question Quality Pass
+
+- Tightened grammar question generation after review feedback that some `Fill Blank` items exposed the answer immediately with mismatched distractors.
+- Updated `lib/features/grammar/services/grammar_question_generator.dart`
+  - Added stronger filtering for visible answer options so placeholders like `Grammar pattern` never surface in practice choices.
+  - Added related-point ranking for cloze distractors so grammar options stay in the same answer family more often instead of mixing unrelated patterns.
+  - Added a skip rule for exchange-style full-sentence prompts such as `お国はどちらですか` so the app does not generate obvious cloze questions from dialogue-style grammar items.
+  - Improved pattern-shape detection for short grammar tokens like `です`, `ます`, and `でした` so they can still form sensible distractor groups.
+- Added regression coverage in `test/features/grammar/grammar_question_generator_test.dart`
+  - Verifies exchange-style prompts do not generate cloze questions.
+  - Verifies cloze distractors stay in-family and avoid placeholder labels.
+  - Verifies polluted English data still does not leak placeholders into visible options.
+
+### Verification Run
+
+- Ran `dart format lib/features/grammar/services/grammar_question_generator.dart test/features/grammar/grammar_question_generator_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/grammar/services/grammar_question_generator.dart test/features/grammar/grammar_question_generator_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/grammar/grammar_question_generator_test.dart`
+  - Result: all tests passed
+- Ran `flutter analyze lib/features/grammar/screens/grammar_practice_screen.dart lib/features/grammar/widgets/multiple_choice_widget.dart lib/features/grammar/widgets/cloze_test_widget.dart lib/features/grammar/widgets/sentence_builder_widget.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/ui/ghost_review_walkthrough_test.dart`
+  - Result: all tests passed
+
 ### Handwriting Guide Alignment Pass
 
 - Investigated the remaining complaint that handwriting scoring still felt too harsh even when the learner followed the displayed stroke order.
@@ -881,6 +1223,49 @@ This file records recent Codex work so future sessions can continue from the cur
 - Ran `flutter analyze lib/features/common/widgets/sakura_particles.dart test/features/common/widgets/sakura_particles_test.dart lib/features/common/widgets/japanese_background.dart`
   - Result: no issues found
 - Ran `flutter test test/features/common/widgets/sakura_particles_test.dart test/features/ui/simple_command_center_test.dart`
+  - Result: all tests passed
+
+### JLPT Repair Plan Differentiation Pass
+
+- Improved the `7-day repair plan` so repeated days on the same weak skill no longer feel like duplicate cards that open the exact same experience.
+- Root issue found
+  - `lib/features/jlpt/screens/jlpt_coach_screen.dart` rendered repair cards from only `item.area`.
+  - That meant `Day 1` and `Day 3` could show the same title/body and push the same route whenever the same weak skill repeated, even though the plan itself intended different study roles (`reset`, `speed`, `checkpoint`, etc.).
+- Added `lib/features/jlpt/models/jlpt_plan_playbook.dart`
+  - Introduced a small playbook layer that maps each plan item to:
+    - a day-phase (`Reset`, `Accuracy`, `Speed`, `Coverage`, `Timed`, `Checkpoint`, `Mini mock`)
+    - clearer localized card copy
+    - a specific CTA label
+    - a route plus optional launch preset
+  - This lets `Day 1` and `Day 3` stay distinct even when they target the same skill area.
+- Updated `lib/features/jlpt/screens/jlpt_coach_screen.dart`
+  - Added a second chip on each card to show the phase clearly.
+  - Replaced the old area-only title/body/button logic with playbook-driven copy and launches.
+  - `Open lane` is now replaced by more concrete CTAs such as repair check, timed vocab check, grammar drill, handwriting, immersion, or reading drill depending on the day role.
+- Added `lib/features/test/models/home_mock_exam_launch_args.dart`
+  - Introduced launch args for Home mock exam presets so the repair plan can open the same vocab bank in different study modes instead of always landing on one identical mock setup.
+- Updated `lib/features/test/screens/home_mock_exam_screen.dart`
+  - Added support for plan-specific launch presets:
+    - optional title override
+    - optional initial config override
+    - separate session key suffixes so repair-check sessions do not collide with the normal home mock resume state
+- Updated `lib/app/navigation/app_router.dart`
+  - Wired `/practice/mock-exam` to accept `HomeMockExamLaunchArgs` from the JLPT repair plan.
+- Added `test/features/jlpt/jlpt_plan_playbook_test.dart`
+  - Added regression coverage proving:
+    - `Day 1` and `Day 3` vocab repair now have different phase labels, copy, CTA labels, and launch presets
+    - timed grammar phases launch grammar practice with speed-oriented settings
+    - reading coverage phases open immersion instead of the timed reading drill
+- Updated `docs/notes/important-user-requirements.md`
+  - Recorded the persistent requirement that repeated repair-plan days must stay distinct in purpose, copy, CTA, and launch behavior.
+
+### Verification Run
+
+- Ran `dart format lib/features/jlpt/models/jlpt_plan_playbook.dart lib/features/jlpt/screens/jlpt_coach_screen.dart lib/features/test/models/home_mock_exam_launch_args.dart lib/features/test/screens/home_mock_exam_screen.dart lib/app/navigation/app_router.dart test/features/jlpt/jlpt_plan_playbook_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/jlpt/models/jlpt_plan_playbook.dart lib/features/jlpt/screens/jlpt_coach_screen.dart lib/features/test/models/home_mock_exam_launch_args.dart lib/features/test/screens/home_mock_exam_screen.dart lib/app/navigation/app_router.dart test/features/jlpt/jlpt_plan_playbook_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/jlpt/jlpt_plan_playbook_test.dart test/features/ui/simple_command_center_test.dart test/features/jlpt/jlpt_mock_pro_screen_test.dart`
   - Result: all tests passed
 
 ### Handwriting Scoring Leniency Pass
@@ -1207,3 +1592,121 @@ This file records recent Codex work so future sessions can continue from the cur
   - Result: no issues found
 - Ran `flutter test test/features/ui/mock_exam_walkthrough_test.dart`
   - Result: all tests passed
+
+### Grammar Practice Session Randomization Fix
+
+- Fixed the grammar practice issue where reopening the screen could still start on the same first question.
+- Updated `lib/features/grammar/screens/grammar_practice_screen.dart`
+  - Extracted session ordering into a dedicated `GrammarSessionPlanner`.
+  - Added per-session random blueprint rotation so `drill/quiz/learn` do not always open with the same question family.
+  - Randomized bucket ordering even when the generated pool is smaller than the target session size, removing the old deterministic `return List.of(all)` path.
+  - Kept anti-repeat protection so the fresher opening does not regress into clustered duplicate stems or repeated grammar points.
+- Added `test/features/grammar/grammar_session_planner_test.dart`
+  - Added regression coverage proving the first visible question changes across different session seeds for both:
+    - short pools (`all.length <= target`)
+    - larger curated sessions (`all.length > target`)
+- Updated `docs/notes/important-user-requirements.md`
+  - Recorded the persistent requirement that grammar practice must feel fresh on every new entry and must not keep reopening on the same first question.
+
+### Verification Run
+
+- Ran `dart format lib/features/grammar/screens/grammar_practice_screen.dart test/features/grammar/grammar_session_planner_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/grammar/screens/grammar_practice_screen.dart test/features/grammar/grammar_session_planner_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/grammar/grammar_session_planner_test.dart test/features/grammar/grammar_question_generator_test.dart test/features/ui/ghost_review_walkthrough_test.dart`
+  - Result: all tests passed
+
+### Grammar Data Utilization Pass
+
+- Improved Grammar practice so it makes fuller use of both `grammar` and `grammar_examples` data instead of relying on looser/random matching.
+- Added `lib/data/utils/grammar_example_matching.dart`
+  - Introduced tolerant matching between grammar definitions and supplementary example blocks.
+  - Handles cases where labels differ slightly but still refer to the same pattern, such as:
+    - Vietnamese helper phrasing (`Động từ dạng ます` vs `Động từ Vます`)
+    - optional `の` variants (`～ために` vs `～のために`)
+- Updated `lib/data/seeds/grammar_seeder.dart`
+  - Switched supplementary example lookup to the new matcher.
+  - Bumped `GrammarSeeder.kGrammarDataVersion` from `5` to `6` so existing installs reseed and pick up the previously missed examples.
+- Updated `lib/data/db/content_database.dart`
+  - Switched content-DB grammar example merging to the same tolerant matcher.
+  - Bumped content DB schema version from `23` to `24` so grammar content is reseeded with the improved example matching.
+- Updated `lib/data/repositories/lesson_repository.dart`
+  - Kept the `seedGrammarIfEmpty` seeder-version shortcut in sync with grammar seed version `6`.
+- Updated `lib/features/grammar/services/grammar_question_generator.dart`
+  - Replaced random distractor picking for grammar meaning/pattern questions with ranked nearby grammar points from the same lesson/level and similar pattern shape.
+  - Reworked context-choice distractors to rank example sentences by lesson, JLPT level, sentence ending, translation overlap, and length similarity instead of random sampling.
+  - Reworked error-correction/error-reason corruption to choose more related replacement patterns, making wrong answers feel more plausible.
+- Added tests
+  - `test/data/utils/grammar_example_matching_test.dart`
+    - Covers the relaxed example-label matching for the real mismatch patterns above.
+  - `test/features/grammar/grammar_question_generator_test.dart`
+    - Added regression coverage proving grammar meaning distractors now prefer nearby related points.
+    - Added regression coverage proving context-choice distractors now prefer nearby example sentences instead of unrelated far ones.
+- Updated `docs/notes/important-user-requirements.md`
+  - Recorded the persistent requirement that Grammar practice must fully exploit both definition and example data and should not drop examples due to small label differences.
+
+### Verification Run
+
+- Ran `dart format lib/data/utils/grammar_example_matching.dart lib/data/seeds/grammar_seeder.dart lib/data/db/content_database.dart lib/data/repositories/lesson_repository.dart lib/features/grammar/services/grammar_question_generator.dart test/data/utils/grammar_example_matching_test.dart test/features/grammar/grammar_question_generator_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/data/utils/grammar_example_matching.dart lib/data/seeds/grammar_seeder.dart lib/data/db/content_database.dart lib/data/repositories/lesson_repository.dart lib/features/grammar/services/grammar_question_generator.dart test/data/utils/grammar_example_matching_test.dart test/features/grammar/grammar_question_generator_test.dart`
+  - Result: one unused-helper warning found and then resolved in the final code
+- Ran `flutter test test/data/utils/grammar_example_matching_test.dart test/features/grammar/grammar_question_generator_test.dart test/features/grammar/grammar_session_planner_test.dart test/features/ui/ghost_review_walkthrough_test.dart`
+  - Result: all tests passed
+
+### N4 Grammar Example Completion Pass
+
+- Completed the `N4` grammar example expansion workflow to the same quality bar used for `N5`.
+- Finalized and QA-checked the last incomplete `N4` lesson example files:
+  - `assets/data/content/grammar_examples/n4/lesson_46.json`
+  - `assets/data/content/grammar_examples/n4/lesson_47.json`
+  - `assets/data/content/grammar_examples/n4/lesson_48.json`
+  - `assets/data/content/grammar_examples/n4/lesson_49.json`
+  - `assets/data/content/grammar_examples/n4/lesson_50.json`
+- Cleaned up the last language-quality issues in that batch:
+  - fixed typo and mistranslation issues such as `好きならしいです` and the incorrect English gloss for `起きたばかりです`
+  - removed honorific examples that were teaching the wrong pattern or used awkward/double honorific forms
+  - replaced a few unnatural service expressions with more realistic customer-service and daily-life examples
+- Preserved the batch rules across the full `N4` set:
+  - every `grammar_examples[*].grammarPoint` matches the canonical `grammar` title
+  - every `N4` grammar point now has exactly `10` examples
+  - examples stay closer to lesson vocabulary, work/school situations, travel, and real daily-life usage
+
+### Verification Run
+
+- Ran `python tooling/audit_grammar_example_coverage.py --apply`
+  - Result: `N4` is now fully complete at `100 grammar points / 1000 examples / 0 below target / 0 missing`
+  - Result: `N5` remains fully complete at `118 grammar points / 1180 examples / 0 below target / 0 missing`
+  - Result: remaining low-coverage work is now isolated to `N3`
+
+### N3 Grammar Example Completion Pass
+
+- Completed the remaining `N3` grammar example expansion workflow so `N3` now matches the same minimum density as `N5` and `N4`.
+- Added `tooling/expand_n3_grammar_examples.py`
+  - Introduced a reusable `N3` expansion generator that appends lesson-themed Japanese examples per grammar point.
+  - Batched `vi/en` translation generation so the repo can regenerate the expansion payload reproducibly instead of relying on one-off manual pastes.
+  - Kept the generator aligned to canonical `grammarPoint` labels so it works cleanly with the existing audit pipeline.
+- Updated the full `N3` grammar example set:
+  - `assets/data/content/grammar_examples/n3/lesson_51.json`
+  - through `assets/data/content/grammar_examples/n3/lesson_75.json`
+- Expanded all `N3` grammar points from the old scaffold density (`2` examples each) to `10` examples each.
+- Focused the new examples around each lesson theme and real everyday contexts such as:
+  - work and interviews
+  - study abroad and campus life
+  - health habits
+  - travel and transportation
+  - media and information
+  - cooking and food culture
+  - economy, communication, history, fashion, and volunteering
+- Ran a follow-up QA pass on the highest-risk translation blocks after expansion:
+  - corrected nuanced `vi/en` glosses for patterns like `〜ないことはない`, `〜ないこともない`, `〜ほど〜ない`, and `〜というより`
+  - fixed a few machine-translation misreads where the Japanese sentence was correct but the gloss flipped or flattened the intended grammar nuance
+
+### Verification Run
+
+- Ran `python tooling/expand_n3_grammar_examples.py`
+  - Result: appended the remaining `N3` examples needed to bring every grammar point to target density
+- Ran `python tooling/audit_grammar_example_coverage.py --apply`
+  - Result: `N3` is now fully complete at `100 grammar points / 1000 examples / 0 below target / 0 missing`
+  - Result: `N5`, `N4`, and `N3` are all now complete at the same `10 examples per grammar point` floor
