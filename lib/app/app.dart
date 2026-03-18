@@ -23,6 +23,11 @@ class App extends ConsumerWidget {
       theme: AppTheme.light(language),
       darkTheme: AppTheme.dark(language),
       themeMode: themeMode,
+      // Language changes swap fontFamily entirely (e.g. Manrope ↔ Yu Gothic UI).
+      // AnimatedTheme cannot lerp TextStyles with incompatible font families,
+      // causing "Failed to interpolate TextStyles with different inherit values".
+      // Disable the animation so theme swaps are instant and crash-free.
+      themeAnimationDuration: Duration.zero,
       routerConfig: AppRouter.router,
     );
   }
