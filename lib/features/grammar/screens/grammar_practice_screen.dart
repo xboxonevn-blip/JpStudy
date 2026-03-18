@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../app/theme/app_theme_palette.dart';
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
 import '../../../data/db/app_database.dart';
@@ -23,231 +25,47 @@ enum GrammarPracticeBlueprint { learn, drill, quiz }
 
 enum GrammarGoalProfile { balanced, accuracy, speed }
 
-class GrammarPracticeScreen extends ConsumerStatefulWidget {
-  const GrammarPracticeScreen({
-    super.key,
-    this.initialIds,
-    this.mode = GrammarPracticeMode.normal,
-    this.sessionType = GrammarSessionType.mastery,
-    this.blueprint = GrammarPracticeBlueprint.quiz,
-    this.goalProfile = GrammarGoalProfile.balanced,
-    this.allowedTypes,
-  });
+class GrammarSessionPlanner {
+  GrammarSessionPlanner({Random? random}) : _random = random ?? Random();
 
-  final List<int>? initialIds;
-  final GrammarPracticeMode mode;
-  final GrammarSessionType sessionType;
-  final GrammarPracticeBlueprint blueprint;
-  final GrammarGoalProfile goalProfile;
-  final List<GrammarQuestionType>? allowedTypes;
+  final Random _random;
 
-  @override
-  ConsumerState<GrammarPracticeScreen> createState() =>
-      _GrammarPracticeScreenState();
-}
-
-class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
-  int _currentIndex = 0;
-  final List<GeneratedQuestion> _questions = [];
-  final Set<String> _requeuedQuestions = {};
-  final Set<int> _wrongPointIds = {};
-
-  bool _isLoading = true;
-  bool _isAnswered = false;
-  bool _summaryShown = false;
-
-  int _score = 0;
-  String? _feedbackMessage;
-  bool? _feedbackCorrect;
-
-  Timer? _timer;
-  int? _remainingSeconds;
-  late GrammarSessionType _sessionType;
-  late GrammarPracticeBlueprint _blueprint;
-  late GrammarGoalProfile _goalProfile;
-  Set<GrammarQuestionType>? _activeAllowedTypes;
-  bool _isWeakDrill = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _sessionType = widget.sessionType;
-    _blueprint = widget.blueprint;
-    _goalProfile = widget.goalProfile;
-    _activeAllowedTypes = widget.allowedTypes?.toSet();
-    _loadQuestions();
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
-  }
-
-  Future<void> _loadQuestions({List<int>? overrideIds}) async {
-    _timer?.cancel();
-    if (mounted) {
-      setState(() {
-        _isLoading = true;
-        _questions.clear();
-        _currentIndex = 0;
-        _isAnswered = false;
-        _score = 0;
-        _feedbackMessage = null;
-        _feedbackCorrect = null;
-        _summaryShown = false;
-        _remainingSeconds = null;
-        _requeuedQuestions.clear();
-        _wrongPointIds.clear();
-      });
+  List<GeneratedQuestion> build({
+    required List<GeneratedQuestion> allQuestions,
+    required int targetCount,
+    required GrammarPracticeBlueprint blueprint,
+    required GrammarGoalProfile goalProfile,
+    required int antiRepeatWindow,
+  }) {
+    if (allQuestions.isEmpty || targetCount <= 0) {
+      return const [];
     }
 
-    final repo = ref.read(grammarRepositoryProvider);
-    final ids = overrideIds ?? widget.initialIds;
-    List<GrammarPoint> points;
-
-    if (ids != null && ids.isNotEmpty) {
-      points = await (repo.db.select(
-        repo.db.grammarPoints,
-      )..where((t) => t.id.isIn(ids))).get();
-    } else if (widget.mode == GrammarPracticeMode.ghost) {
-      points = await repo.fetchGhostPoints();
-    } else {
-      points = await repo.fetchDuePoints();
-      if (points.isEmpty) {
-        points = await repo.fetchPointsByLevel('N5');
-        points = points.take(20).toList(growable: false);
-      }
-    }
-
-    final details = <({GrammarPoint point, List<GrammarExample> examples})>[];
-    for (final point in points) {
-      final detail = await repo.getGrammarDetail(point.id);
-      if (detail != null && detail.examples.isNotEmpty) {
-        details.add(detail);
-      }
-    }
-
-    final levels = points
-        .map((p) => p.jlptLevel)
-        .toSet()
-        .toList(growable: false);
-    final distractorPool = <GrammarPoint>[];
-    for (final level in levels) {
-      final levelPoints = await repo.fetchPointsByLevel(level);
-      distractorPool.addAll(levelPoints);
-    }
-
-    final language = ref.read(appLanguageProvider);
-    var generated = GrammarQuestionGenerator.generateQuestions(
-      details,
-      allPoints: distractorPool,
-      language: language,
-    );
-
-    if (_activeAllowedTypes != null && _activeAllowedTypes!.isNotEmpty) {
-      generated = generated
-          .where((question) => _activeAllowedTypes!.contains(question.type))
-          .toList(growable: false);
-    }
-
-    if (widget.mode == GrammarPracticeMode.ghost) {
-      generated.sort((a, b) {
-        final aPriority = _ghostPriority(a.type);
-        final bPriority = _ghostPriority(b.type);
-        return aPriority.compareTo(bPriority);
-      });
-    }
-
-    final targetCount = _sessionQuestionCount(_sessionType);
-    final selectedRaw = _selectSessionQuestions(
-      generated,
+    final sequence = _blueprintSequence(blueprint);
+    final ordered = _applyBlueprintOrdering(allQuestions, sequence);
+    final selected = _selectSessionQuestions(
+      ordered,
       targetCount,
-      _blueprint,
-      _goalProfile,
-    );
-    final selected = _applyAntiRepeat(
-      selectedRaw,
-      window: _blueprint == GrammarPracticeBlueprint.quiz ? 10 : 8,
+      sequence,
+      blueprint,
+      goalProfile,
     );
 
-    if (!mounted) return;
-    setState(() {
-      _questions.addAll(selected);
-      _isLoading = false;
-      if (_sessionType == GrammarSessionType.mock && _questions.isNotEmpty) {
-        _remainingSeconds = (_questions.length * 25).clamp(180, 1200);
-      }
-    });
-
-    if (_remainingSeconds != null) {
-      _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-        if (!mounted || _summaryShown) {
-          timer.cancel();
-          return;
-        }
-        final current = _remainingSeconds ?? 0;
-        if (current <= 1) {
-          timer.cancel();
-          _remainingSeconds = 0;
-          _showSummary(timedOut: true);
-          return;
-        }
-        setState(() {
-          _remainingSeconds = current - 1;
-        });
-      });
-    }
-  }
-
-  int _sessionQuestionCount(GrammarSessionType sessionType) {
-    switch (sessionType) {
-      case GrammarSessionType.quick:
-        return 10;
-      case GrammarSessionType.mastery:
-        return 25;
-      case GrammarSessionType.mock:
-        return 35;
-    }
-  }
-
-  int _ghostPriority(GrammarQuestionType type) {
-    switch (type) {
-      case GrammarQuestionType.errorCorrection:
-        return 0;
-      case GrammarQuestionType.errorReason:
-        return 1;
-      case GrammarQuestionType.cloze:
-        return 2;
-      case GrammarQuestionType.contextChoice:
-        return 3;
-      case GrammarQuestionType.transformation:
-        return 4;
-      case GrammarQuestionType.pairContrast:
-        return 5;
-      case GrammarQuestionType.multipleChoice:
-        return 6;
-      case GrammarQuestionType.reverseMultipleChoice:
-        return 7;
-      case GrammarQuestionType.sentenceBuilder:
-        return 8;
-    }
+    return _applyAntiRepeat(selected, window: antiRepeatWindow);
   }
 
   List<GeneratedQuestion> _applyBlueprintOrdering(
     List<GeneratedQuestion> source,
-    GrammarPracticeBlueprint blueprint,
+    List<GrammarQuestionType> sequence,
   ) {
     if (source.isEmpty) return const [];
-
-    final sequence = _blueprintSequence(blueprint);
 
     final buckets = <GrammarQuestionType, List<GeneratedQuestion>>{};
     for (final question in source) {
       buckets.putIfAbsent(question.type, () => []).add(question);
     }
     for (final bucket in buckets.values) {
-      bucket.shuffle();
+      bucket.shuffle(_random);
     }
 
     final ordered = <GeneratedQuestion>[];
@@ -262,24 +80,23 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
       }
     }
 
-    final leftovers =
-        buckets.values.expand((value) => value).toList(growable: false)
-          ..shuffle();
+    final leftovers = buckets.values.expand((value) => value).toList()
+      ..shuffle(_random);
     ordered.addAll(leftovers);
     return ordered;
   }
 
   List<GeneratedQuestion> _selectSessionQuestions(
-    List<GeneratedQuestion> all,
+    List<GeneratedQuestion> ordered,
     int target,
+    List<GrammarQuestionType> sequence,
     GrammarPracticeBlueprint blueprint,
     GrammarGoalProfile goalProfile,
   ) {
-    if (all.length <= target) {
-      return List<GeneratedQuestion>.of(all);
+    if (ordered.length <= target) {
+      return List<GeneratedQuestion>.of(ordered);
     }
 
-    final ordered = _applyBlueprintOrdering(all, blueprint);
     final ratios = _blueprintRatios(blueprint, goalProfile);
     final buckets = <GrammarQuestionType, List<GeneratedQuestion>>{};
     for (final question in ordered) {
@@ -296,7 +113,7 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
       selectedByType[type] = (selectedByType[type] ?? 0) + 1;
     }
 
-    for (final type in _blueprintSequence(blueprint)) {
+    for (final type in sequence) {
       final ratio = ratios[type] ?? 0.0;
       if (ratio <= 0) continue;
       final bucket = buckets[type];
@@ -315,7 +132,7 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
 
     while (selected.length < target) {
       var progressed = false;
-      for (final type in _blueprintSequence(blueprint)) {
+      for (final type in sequence) {
         if (selected.length >= target) break;
         final desired = (target * (ratios[type] ?? 0.0)).ceil();
         final current = selectedByType[type] ?? 0;
@@ -329,19 +146,21 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
     }
 
     if (selected.length < target) {
-      final leftovers = buckets.values.expand((value) => value);
+      final leftovers = buckets.values.expand((value) => value).toList()
+        ..shuffle(_random);
       for (final question in leftovers) {
         selected.add(question);
         if (selected.length >= target) break;
       }
     }
+
     return selected;
   }
 
   List<GrammarQuestionType> _blueprintSequence(
     GrammarPracticeBlueprint blueprint,
   ) {
-    return switch (blueprint) {
+    final base = switch (blueprint) {
       GrammarPracticeBlueprint.learn => const [
         GrammarQuestionType.reverseMultipleChoice,
         GrammarQuestionType.multipleChoice,
@@ -370,6 +189,13 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
         GrammarQuestionType.sentenceBuilder,
       ],
     };
+
+    if (base.length <= 1) {
+      return List<GrammarQuestionType>.of(base);
+    }
+
+    final offset = _random.nextInt(base.length);
+    return <GrammarQuestionType>[...base.skip(offset), ...base.take(offset)];
   }
 
   Map<GrammarQuestionType, double> _blueprintRatios(
@@ -513,6 +339,229 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
       }
     }
     return sameTypeCount >= 2;
+  }
+}
+
+class GrammarPracticeScreen extends ConsumerStatefulWidget {
+  const GrammarPracticeScreen({
+    super.key,
+    this.initialIds,
+    this.mode = GrammarPracticeMode.normal,
+    this.sessionType = GrammarSessionType.mastery,
+    this.blueprint = GrammarPracticeBlueprint.quiz,
+    this.goalProfile = GrammarGoalProfile.balanced,
+    this.allowedTypes,
+  });
+
+  final List<int>? initialIds;
+  final GrammarPracticeMode mode;
+  final GrammarSessionType sessionType;
+  final GrammarPracticeBlueprint blueprint;
+  final GrammarGoalProfile goalProfile;
+  final List<GrammarQuestionType>? allowedTypes;
+
+  @override
+  ConsumerState<GrammarPracticeScreen> createState() =>
+      _GrammarPracticeScreenState();
+}
+
+class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
+  static const int _sessionSeedMixer = 0x9E3779B9;
+
+  int _currentIndex = 0;
+  final List<GeneratedQuestion> _questions = [];
+  final Set<String> _requeuedQuestions = {};
+  final Set<int> _wrongPointIds = {};
+
+  bool _isLoading = true;
+  bool _isAnswered = false;
+  bool _summaryShown = false;
+
+  int _score = 0;
+  String? _feedbackMessage;
+  bool? _feedbackCorrect;
+
+  Timer? _timer;
+  int? _remainingSeconds;
+  int _sessionNonce = 0;
+  late GrammarSessionType _sessionType;
+  late GrammarPracticeBlueprint _blueprint;
+  late GrammarGoalProfile _goalProfile;
+  Set<GrammarQuestionType>? _activeAllowedTypes;
+  bool _isWeakDrill = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _sessionType = widget.sessionType;
+    _blueprint = widget.blueprint;
+    _goalProfile = widget.goalProfile;
+    _activeAllowedTypes = widget.allowedTypes?.toSet();
+    _loadQuestions();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  Future<void> _loadQuestions({List<int>? overrideIds}) async {
+    _timer?.cancel();
+    if (mounted) {
+      setState(() {
+        _isLoading = true;
+        _questions.clear();
+        _currentIndex = 0;
+        _isAnswered = false;
+        _score = 0;
+        _feedbackMessage = null;
+        _feedbackCorrect = null;
+        _summaryShown = false;
+        _remainingSeconds = null;
+        _requeuedQuestions.clear();
+        _wrongPointIds.clear();
+      });
+    }
+
+    final repo = ref.read(grammarRepositoryProvider);
+    final ids = overrideIds ?? widget.initialIds;
+    List<GrammarPoint> points;
+
+    if (ids != null && ids.isNotEmpty) {
+      points = await (repo.db.select(
+        repo.db.grammarPoints,
+      )..where((t) => t.id.isIn(ids))).get();
+    } else if (widget.mode == GrammarPracticeMode.ghost) {
+      points = await repo.fetchGhostPoints();
+    } else {
+      points = await repo.fetchDuePoints();
+      if (points.isEmpty) {
+        points = await repo.fetchPointsByLevel('N5');
+        points = points.take(20).toList(growable: false);
+      }
+    }
+
+    final details = <({GrammarPoint point, List<GrammarExample> examples})>[];
+    for (final point in points) {
+      final detail = await repo.getGrammarDetail(point.id);
+      if (detail != null && detail.examples.isNotEmpty) {
+        details.add(detail);
+      }
+    }
+
+    final levels = points
+        .map((p) => p.jlptLevel)
+        .toSet()
+        .toList(growable: false);
+    final distractorPool = <GrammarPoint>[];
+    for (final level in levels) {
+      final levelPoints = await repo.fetchPointsByLevel(level);
+      distractorPool.addAll(levelPoints);
+    }
+
+    final language = ref.read(appLanguageProvider);
+    var generated = GrammarQuestionGenerator.generateQuestions(
+      details,
+      allPoints: distractorPool,
+      language: language,
+    );
+
+    if (_activeAllowedTypes != null && _activeAllowedTypes!.isNotEmpty) {
+      generated = generated
+          .where((question) => _activeAllowedTypes!.contains(question.type))
+          .toList(growable: false);
+    }
+
+    if (widget.mode == GrammarPracticeMode.ghost) {
+      generated.sort((a, b) {
+        final aPriority = _ghostPriority(a.type);
+        final bPriority = _ghostPriority(b.type);
+        return aPriority.compareTo(bPriority);
+      });
+    }
+
+    final targetCount = _sessionQuestionCount(_sessionType);
+    final planner = GrammarSessionPlanner(random: _createSessionRandom());
+    final selected = planner.build(
+      allQuestions: generated,
+      targetCount: targetCount,
+      blueprint: _blueprint,
+      goalProfile: _goalProfile,
+      antiRepeatWindow: _blueprint == GrammarPracticeBlueprint.quiz ? 10 : 8,
+    );
+
+    if (!mounted) return;
+    setState(() {
+      _questions.addAll(selected);
+      _isLoading = false;
+      if (_sessionType == GrammarSessionType.mock && _questions.isNotEmpty) {
+        _remainingSeconds = (_questions.length * 25).clamp(180, 1200);
+      }
+    });
+
+    if (_remainingSeconds != null) {
+      _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+        if (!mounted || _summaryShown) {
+          timer.cancel();
+          return;
+        }
+        final current = _remainingSeconds ?? 0;
+        if (current <= 1) {
+          timer.cancel();
+          _remainingSeconds = 0;
+          _showSummary(timedOut: true);
+          return;
+        }
+        setState(() {
+          _remainingSeconds = current - 1;
+        });
+      });
+    }
+  }
+
+  int _sessionQuestionCount(GrammarSessionType sessionType) {
+    switch (sessionType) {
+      case GrammarSessionType.quick:
+        return 10;
+      case GrammarSessionType.mastery:
+        return 25;
+      case GrammarSessionType.mock:
+        return 35;
+    }
+  }
+
+  Random _createSessionRandom() {
+    _sessionNonce += 1;
+    final timestampSeed = DateTime.now().microsecondsSinceEpoch;
+    final mixedSeed =
+        timestampSeed ^
+        (_sessionNonce * _sessionSeedMixer) ^
+        identityHashCode(this);
+    return Random(mixedSeed);
+  }
+
+  int _ghostPriority(GrammarQuestionType type) {
+    switch (type) {
+      case GrammarQuestionType.errorCorrection:
+        return 0;
+      case GrammarQuestionType.errorReason:
+        return 1;
+      case GrammarQuestionType.cloze:
+        return 2;
+      case GrammarQuestionType.contextChoice:
+        return 3;
+      case GrammarQuestionType.transformation:
+        return 4;
+      case GrammarQuestionType.pairContrast:
+        return 5;
+      case GrammarQuestionType.multipleChoice:
+        return 6;
+      case GrammarQuestionType.reverseMultipleChoice:
+        return 7;
+      case GrammarQuestionType.sentenceBuilder:
+        return 8;
+    }
   }
 
   void _onAnswer(bool isCorrect, {String? userAnswer}) async {
@@ -790,36 +839,55 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
         ),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-          child: Column(
-            children: [
-              _buildModeBanner(language),
-              const SizedBox(height: 10),
-              _buildTopStats(language, progress, question),
-              if (_blueprint == GrammarPracticeBlueprint.learn &&
-                  (question.explanation ?? '').trim().isNotEmpty) ...[
-                const SizedBox(height: 10),
-                _buildLearnHint(question, language),
-              ],
-              if (_remainingSeconds != null) ...[
-                const SizedBox(height: 10),
-                _buildTimer(language),
-              ],
-              if (_feedbackMessage != null) ...[
-                const SizedBox(height: 10),
-                _buildFeedbackBanner(),
-              ],
-              const SizedBox(height: 12),
-              Expanded(child: _buildQuestionContent(question, language)),
-            ],
-          ),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final maxWidth = constraints.maxWidth >= 1180
+                ? 940.0
+                : constraints.maxWidth >= 900
+                ? 880.0
+                : double.infinity;
+
+            return Center(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: maxWidth),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 10, 16, 14),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      _buildModeBanner(language),
+                      const SizedBox(height: 12),
+                      _buildTopStats(language, progress, question),
+                      if (_blueprint == GrammarPracticeBlueprint.learn &&
+                          (question.explanation ?? '').trim().isNotEmpty) ...[
+                        const SizedBox(height: 12),
+                        _buildLearnHint(question, language),
+                      ],
+                      if (_remainingSeconds != null) ...[
+                        const SizedBox(height: 12),
+                        _buildTimer(language),
+                      ],
+                      if (_feedbackMessage != null) ...[
+                        const SizedBox(height: 12),
+                        _buildFeedbackBanner(language),
+                      ],
+                      const SizedBox(height: 14),
+                      Expanded(
+                        child: _buildQuestionContent(question, language),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
   }
 
   Widget _buildModeBanner(AppLanguage language) {
+    final palette = context.appPalette;
     final color = _modeColor();
     final icon = switch (_blueprint) {
       GrammarPracticeBlueprint.learn => Icons.menu_book_rounded,
@@ -846,6 +914,26 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
         ja: 'クイズモード: 試験に近い流れ、長いヒントなし。',
       ),
     };
+    final title = switch (_blueprint) {
+      GrammarPracticeBlueprint.learn => _tr(
+        language,
+        en: 'Learn mode',
+        vi: 'Chế độ học',
+        ja: '学習モード',
+      ),
+      GrammarPracticeBlueprint.drill => _tr(
+        language,
+        en: 'Drill mode',
+        vi: 'Chế độ luyện',
+        ja: 'ドリルモード',
+      ),
+      GrammarPracticeBlueprint.quiz => _tr(
+        language,
+        en: 'Quiz mode',
+        vi: 'Chế độ kiểm tra',
+        ja: 'クイズモード',
+      ),
+    };
     final goalLabel = switch (_goalProfile) {
       GrammarGoalProfile.balanced => _tr(
         language,
@@ -869,39 +957,69 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
+      padding: const EdgeInsets.fromLTRB(14, 14, 14, 14),
       decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.10),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: color.withValues(alpha: 0.35)),
+        gradient: LinearGradient(
+          colors: [color.withValues(alpha: 0.16), palette.elevated],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: color.withValues(alpha: 0.25)),
+        boxShadow: [
+          BoxShadow(
+            color: palette.ink.withValues(alpha: 0.06),
+            blurRadius: 18,
+            offset: const Offset(0, 8),
+          ),
+        ],
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, size: 18, color: color),
-          const SizedBox(width: 8),
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: color.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: Icon(icon, size: 20, color: color),
+          ),
+          const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  subtitle,
+                  title,
                   style: TextStyle(
                     color: color,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
-                const SizedBox(height: 2),
+                const SizedBox(height: 4),
                 Text(
-                  goalLabel,
+                  subtitle,
                   style: TextStyle(
-                    color: color.withValues(alpha: 0.88),
-                    fontSize: 11,
+                    color: palette.ink.withValues(alpha: 0.76),
+                    fontSize: 12.5,
                     fontWeight: FontWeight.w600,
+                    height: 1.4,
                   ),
                 ),
               ],
             ),
+          ),
+          const SizedBox(width: 12),
+          _pill(
+            label: _isWeakDrill
+                ? _tr(language, en: 'Weak only', vi: 'Chỉ điểm yếu', ja: '弱点のみ')
+                : goalLabel,
+            fg: color,
+            bg: color.withValues(alpha: 0.08),
+            border: color.withValues(alpha: 0.18),
           ),
         ],
       ),
@@ -914,54 +1032,114 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
     GeneratedQuestion question,
   ) {
     final color = _modeColor();
+    final palette = context.appPalette;
     return Container(
-      padding: const EdgeInsets.fromLTRB(12, 12, 12, 10),
+      padding: const EdgeInsets.fromLTRB(16, 15, 16, 14),
       decoration: BoxDecoration(
-        color: const Color(0xFFFFFFFF),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE2E8F0)),
+        color: palette.elevated,
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: palette.outline),
+        boxShadow: [
+          BoxShadow(
+            color: palette.ink.withValues(alpha: 0.06),
+            blurRadius: 18,
+            offset: const Offset(0, 8),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                child: Text(
-                  '${_currentIndex + 1}/${_questions.length}',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w700,
-                    color: Color(0xFF334155),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      _tr(
+                        language,
+                        en: 'Question ${_currentIndex + 1} of ${_questions.length}',
+                        vi: 'Câu ${_currentIndex + 1}/${_questions.length}',
+                        ja: '${_currentIndex + 1} / ${_questions.length} 問目',
+                      ),
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        color: palette.ink.withValues(alpha: 0.62),
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      qTypeLabel(language, question.type),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
+                        color: palette.ink,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 12),
+              Wrap(
+                spacing: 6,
+                runSpacing: 6,
+                alignment: WrapAlignment.end,
+                children: [
+                  _pill(
+                    label: question.point.jlptLevel,
+                    fg: palette.ink.withValues(alpha: 0.82),
+                    bg: palette.surface,
+                    border: palette.outlineSoft,
                   ),
-                ),
-              ),
-              _pill(
-                label: _tr(
-                  language,
-                  en: 'Score $_score',
-                  vi: 'Điểm: $_score',
-                  ja: 'スコア $_score',
-                ),
-                fg: const Color(0xFF1E3A8A),
-                bg: const Color(0xFFEFF6FF),
-                border: const Color(0xFFBFDBFE),
-              ),
-              const SizedBox(width: 6),
-              _pill(
-                label: qTypeLabel(language, question.type),
-                fg: color,
-                bg: color.withValues(alpha: 0.10),
-                border: color.withValues(alpha: 0.35),
+                  _pill(
+                    label: _tr(
+                      language,
+                      en: 'Score $_score',
+                      vi: 'Điểm $_score',
+                      ja: 'スコア $_score',
+                    ),
+                    fg: const Color(0xFF1E3A8A),
+                    bg: const Color(0xFFEFF6FF),
+                    border: const Color(0xFFBFDBFE),
+                  ),
+                  _pill(
+                    label: switch (_blueprint) {
+                      GrammarPracticeBlueprint.learn => _tr(
+                        language,
+                        en: 'Learn',
+                        vi: 'Học',
+                        ja: '学習',
+                      ),
+                      GrammarPracticeBlueprint.drill => _tr(
+                        language,
+                        en: 'Drill',
+                        vi: 'Luyện',
+                        ja: 'ドリル',
+                      ),
+                      GrammarPracticeBlueprint.quiz => _tr(
+                        language,
+                        en: 'Quiz',
+                        vi: 'Kiểm tra',
+                        ja: 'クイズ',
+                      ),
+                    },
+                    fg: color,
+                    bg: color.withValues(alpha: 0.10),
+                    border: color.withValues(alpha: 0.20),
+                  ),
+                ],
               ),
             ],
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 14),
           ClipRRect(
             borderRadius: BorderRadius.circular(999),
             child: LinearProgressIndicator(
               value: progress,
-              minHeight: 8,
-              backgroundColor: const Color(0xFFE2E8F0),
+              minHeight: 9,
+              backgroundColor: palette.surface,
               color: color,
             ),
           ),
@@ -971,13 +1149,14 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
   }
 
   Widget _buildLearnHint(GeneratedQuestion question, AppLanguage language) {
+    final palette = context.appPalette;
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
+      padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
       decoration: BoxDecoration(
-        color: const Color(0xFFF8FAFC),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color(0xFFE2E8F0)),
+        color: palette.elevated,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: palette.outline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -985,18 +1164,20 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
           Text(
             _tr(language, en: 'Hint', vi: 'Gợi ý', ja: 'ヒント'),
             style: TextStyle(
-              fontSize: 11,
+              fontSize: 11.5,
               fontWeight: FontWeight.w800,
               color: _modeColor(),
+              letterSpacing: 0.2,
             ),
           ),
-          const SizedBox(height: 4),
+          const SizedBox(height: 6),
           Text(
             question.explanation ?? '',
-            style: const TextStyle(
-              color: Color(0xFF334155),
-              fontSize: 12,
+            style: TextStyle(
+              color: palette.ink.withValues(alpha: 0.76),
+              fontSize: 12.5,
               fontWeight: FontWeight.w600,
+              height: 1.45,
             ),
           ),
         ],
@@ -1005,18 +1186,19 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
   }
 
   Widget _buildTimer(AppLanguage language) {
+    final palette = context.appPalette;
     final seconds = _remainingSeconds ?? 0;
     final mm = (seconds ~/ 60).toString().padLeft(2, '0');
     final ss = (seconds % 60).toString().padLeft(2, '0');
     final isUrgent = seconds <= 60;
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
       decoration: BoxDecoration(
-        color: isUrgent ? const Color(0xFFFEF2F2) : const Color(0xFFF8FAFC),
+        color: isUrgent ? const Color(0xFFFEF2F2) : palette.elevated,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
-          color: isUrgent ? const Color(0xFFFECACA) : const Color(0xFFE2E8F0),
+          color: isUrgent ? const Color(0xFFFECACA) : palette.outline,
         ),
       ),
       child: Row(
@@ -1046,7 +1228,8 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
     );
   }
 
-  Widget _buildFeedbackBanner() {
+  Widget _buildFeedbackBanner(AppLanguage language) {
+    final palette = context.appPalette;
     final isCorrect = _feedbackCorrect == true;
     final fg = isCorrect ? const Color(0xFF166534) : const Color(0xFF991B1B);
     final bg = isCorrect ? const Color(0xFFF0FDF4) : const Color(0xFFFEF2F2);
@@ -1056,15 +1239,59 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       decoration: BoxDecoration(
         color: bg,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(18),
         border: Border.all(color: border),
       ),
-      child: Text(
-        _feedbackMessage ?? '',
-        style: TextStyle(color: fg, fontSize: 12, fontWeight: FontWeight.w600),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(
+            isCorrect ? Icons.check_circle_rounded : Icons.error_rounded,
+            color: fg,
+            size: 20,
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  isCorrect
+                      ? _tr(
+                          language,
+                          en: 'Answer locked in',
+                          vi: 'Đã ghi nhận đáp án',
+                          ja: '回答を記録しました',
+                        )
+                      : _tr(
+                          language,
+                          en: 'Review this point',
+                          vi: 'Xem lại điểm này',
+                          ja: 'この点を見直しましょう',
+                        ),
+                  style: TextStyle(
+                    color: fg,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  _feedbackMessage ?? '',
+                  style: TextStyle(
+                    color: isCorrect ? fg : palette.ink.withValues(alpha: 0.82),
+                    fontSize: 12.5,
+                    height: 1.45,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -1086,6 +1313,8 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
           onCheck: (isCorrect, userSentence) =>
               _onAnswer(isCorrect, userAnswer: userSentence),
           onReset: () {},
+          feedback: question.feedback,
+          explanation: question.explanation,
         );
       case GrammarQuestionType.cloze:
         return ClozeTestWidget(

@@ -609,7 +609,7 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    expect(find.text('〜てしまう'), findsOneWidget);
+    expect(find.text('V-て + shimau'), findsAtLeastNWidgets(1));
     expect(find.text('Mark done'), findsOneWidget);
     expect(find.byType(FloatingActionButton), findsNothing);
   });

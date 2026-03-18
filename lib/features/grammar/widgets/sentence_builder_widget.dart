@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 
-import '../../common/widgets/clay_button.dart';
-import '../../common/widgets/clay_card.dart';
-import '../../../app/theme/app_theme.dart';
+import 'grammar_practice_surfaces.dart';
 
 class SentenceBuilderWidget extends StatefulWidget {
   final AppLanguage language;
@@ -13,6 +11,8 @@ class SentenceBuilderWidget extends StatefulWidget {
   final List<String> shuffledWords;
   final void Function(bool isCorrect, String userAnswer) onCheck;
   final VoidCallback onReset;
+  final String? feedback;
+  final String? explanation;
 
   const SentenceBuilderWidget({
     super.key,
@@ -22,6 +22,8 @@ class SentenceBuilderWidget extends StatefulWidget {
     required this.shuffledWords,
     required this.onCheck,
     required this.onReset,
+    this.feedback,
+    this.explanation,
   });
 
   @override
@@ -80,173 +82,294 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var targetColor = Colors.white;
-    if (_isLastCorrect == true) {
-      targetColor = AppTheme.secondary.withValues(alpha: 0.2);
-    }
-    if (_isLastCorrect == false) {
-      targetColor = AppTheme.error.withValues(alpha: 0.1);
-    }
+    final palette = context.appPalette;
 
-    return Stack(
-      children: [
-        Column(
-          children: [
-            Container(
-              width: double.infinity,
-              margin: const EdgeInsets.only(bottom: 16),
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: AppTheme.primary.withValues(alpha: 0.05),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: AppTheme.primary.withValues(alpha: 0.1),
-                ),
-              ),
-              child: Column(
-                children: [
-                  Text(
-                    _tr(
-                      widget.language,
-                      en: 'Arrange the sentence:',
-                      vi: 'Gh\u00e9p c\u00e2u ho\u00e0n ch\u1ec9nh:',
-                      ja: '\u6587\u3092\u4e26\u3073\u66ff\u3048\u3066\u304f\u3060\u3055\u3044:',
-                    ),
-                    style: TextStyle(
-                      color: AppTheme.textSub,
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 0.5,
-                    ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return SingleChildScrollView(
+          padding: const EdgeInsets.only(bottom: 4),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: constraints.maxHeight),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                GrammarPromptCard(
+                  eyebrow: _tr(
+                    widget.language,
+                    en: 'Arrange the sentence',
+                    vi: 'Sắp xếp thành câu hoàn chỉnh',
+                    ja: '文を並び替えてください',
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    widget.prompt,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: AppTheme.textMain,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
+                  title: widget.prompt,
+                  detail: _tr(
+                    widget.language,
+                    en: 'Tap each chunk in order, then check once when the full sentence feels natural.',
+                    vi: 'Chạm từng mảnh theo đúng thứ tự, rồi kiểm tra khi câu đã tự nhiên và hoàn chỉnh.',
+                    ja: '語句を順番にタップし、自然な文になったら確認してください。',
+                  ),
+                ),
+                const SizedBox(height: 14),
+                GrammarPracticePanel(
+                  backgroundColor: _trayBackground(palette),
+                  borderColor: _trayBorder(palette),
+                  shadowColor: _trayBorder(palette).withValues(alpha: 0.18),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        _tr(
+                          widget.language,
+                          en: 'Your sentence',
+                          vi: 'Câu của bạn',
+                          ja: '作成中の文',
+                        ),
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          color: palette.primary,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Container(
+                        constraints: const BoxConstraints(minHeight: 88),
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(14),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.72),
+                          borderRadius: BorderRadius.circular(18),
+                          border: Border.all(color: _trayBorder(palette)),
+                        ),
+                        child: _selectedWords.isEmpty
+                            ? Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  _tr(
+                                    widget.language,
+                                    en: 'Build the answer here.',
+                                    vi: 'Ghép câu trả lời ở đây.',
+                                    ja: 'ここに文を組み立てます。',
+                                  ),
+                                  style: Theme.of(context).textTheme.bodyMedium
+                                      ?.copyWith(
+                                        color: palette.ink.withValues(
+                                          alpha: 0.48,
+                                        ),
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                ),
+                              )
+                            : Wrap(
+                                spacing: 8,
+                                runSpacing: 10,
+                                children: _selectedWords.asMap().entries.map((
+                                  entry,
+                                ) {
+                                  return _WordChip(
+                                    word: entry.value,
+                                    onTap: () => _deselectWord(entry.key),
+                                    selected: true,
+                                  );
+                                }).toList(),
+                              ),
+                      ),
+                    ],
+                  ),
+                ),
+                if (_isLastCorrect != null) ...[
+                  const SizedBox(height: 12),
+                  GrammarPracticePanel(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 12,
+                    ),
+                    backgroundColor: _isLastCorrect == true
+                        ? const Color(0xFFF1FBF6)
+                        : const Color(0xFFFFF5F5),
+                    borderColor: _isLastCorrect == true
+                        ? const Color(0xFFB9E6CE)
+                        : const Color(0xFFF2C2C8),
+                    shadowColor: Colors.transparent,
+                    radius: 18,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Icon(
+                              _isLastCorrect == true
+                                  ? Icons.check_circle_rounded
+                                  : Icons.error_rounded,
+                              color: _isLastCorrect == true
+                                  ? const Color(0xFF2D8A63)
+                                  : const Color(0xFFC44F59),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: Text(
+                                _isLastCorrect == true
+                                    ? _tr(
+                                        widget.language,
+                                        en: 'Nice. The sentence order is correct.',
+                                        vi: 'Tốt rồi. Thứ tự câu đã đúng.',
+                                        ja: 'いいですね。語順は正しいです。',
+                                      )
+                                    : _tr(
+                                        widget.language,
+                                        en: 'Order is still off. Review the chunks once more.',
+                                        vi: 'Thứ tự vẫn chưa ổn. Hãy nhìn lại các mảnh một lần nữa.',
+                                        ja: 'まだ語順が違います。もう一度語句を見直してください。',
+                                      ),
+                                style: Theme.of(context).textTheme.bodyMedium
+                                    ?.copyWith(fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                          ],
+                        ),
+                        if (_isLastCorrect == false) ...[
+                          if (widget.feedback != null &&
+                              widget.feedback!.isNotEmpty) ...[
+                            const SizedBox(height: 10),
+                            const Divider(height: 1),
+                            const SizedBox(height: 10),
+                            Text(
+                              widget.feedback!,
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(
+                                    color: const Color(0xFFC44F59),
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                            ),
+                          ],
+                          if (widget.explanation != null &&
+                              widget.explanation!.isNotEmpty) ...[
+                            const SizedBox(height: 6),
+                            Text(
+                              '✓ ${widget.correctSentence}',
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(
+                                    color: const Color(0xFF6B7280),
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              widget.explanation!,
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(
+                                    color: const Color(0xFF9CA3AF),
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                            ),
+                          ],
+                        ],
+                      ],
                     ),
                   ),
                 ],
-              ),
-            ),
-            ClayCard(
-              color: targetColor,
-              child: Container(
-                constraints: const BoxConstraints(minHeight: 96),
-                width: double.infinity,
-                alignment: Alignment.centerLeft,
-                child: Wrap(
-                  spacing: 8,
-                  runSpacing: 12,
-                  children: _selectedWords.asMap().entries.map((entry) {
-                    return _ClayWordTile(
-                      word: entry.value,
-                      onTap: () => _deselectWord(entry.key),
-                      isSelected: true,
-                    ).animate().scale(duration: 200.ms).fadeIn();
-                  }).toList(),
-                ),
-              ),
-            ),
-            const SizedBox(height: 18),
-            Wrap(
-              spacing: 12,
-              runSpacing: 16,
-              alignment: WrapAlignment.center,
-              children: _remainingWords.asMap().entries.map((entry) {
-                return _ClayWordTile(
-                  word: entry.value,
-                  onTap: () => _selectWord(entry.key),
-                  isSelected: false,
-                ).animate().fadeIn(delay: 50.ms * entry.key);
-              }).toList(),
-            ),
-            const SizedBox(height: 10),
-            Row(
-              children: [
-                Expanded(
-                  child: ClayButton(
-                    label: _tr(
-                      widget.language,
-                      en: 'Reset',
-                      vi: 'X\u00f3a & l\u00e0m l\u1ea1i',
-                      ja: '\u30ea\u30bb\u30c3\u30c8',
-                    ),
-                    icon: Icons.refresh,
-                    style: ClayButtonStyle.neutral,
-                    onPressed: _reset,
-                    isExpanded: true,
+                const SizedBox(height: 14),
+                GrammarPracticePanel(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        _tr(
+                          widget.language,
+                          en: 'Available chunks',
+                          vi: 'Mảnh câu có sẵn',
+                          ja: '使える語句',
+                        ),
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          color: palette.accent,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Wrap(
+                        spacing: 10,
+                        runSpacing: 12,
+                        children: _remainingWords.asMap().entries.map((entry) {
+                          return _WordChip(
+                            word: entry.value,
+                            onTap: () => _selectWord(entry.key),
+                            selected: false,
+                          );
+                        }).toList(),
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: ClayButton(
-                    label: _tr(
-                      widget.language,
-                      en: 'Check',
-                      vi: 'Ki\u1ec3m tra',
-                      ja: '\u78ba\u8a8d',
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    Expanded(
+                      child: OutlinedButton.icon(
+                        onPressed: _reset,
+                        icon: const Icon(Icons.refresh_rounded),
+                        label: Text(
+                          _tr(
+                            widget.language,
+                            en: 'Reset',
+                            vi: 'Làm lại',
+                            ja: 'リセット',
+                          ),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          minimumSize: const Size.fromHeight(54),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18),
+                          ),
+                        ),
+                      ),
                     ),
-                    icon: Icons.check_circle,
-                    style: _isLastCorrect == true
-                        ? ClayButtonStyle.secondary
-                        : ClayButtonStyle.primary,
-                    onPressed: _selectedWords.isEmpty ? null : _check,
-                    isExpanded: true,
-                  ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: FilledButton.icon(
+                        onPressed: _selectedWords.isEmpty ? null : _check,
+                        icon: const Icon(Icons.check_circle_rounded),
+                        label: Text(
+                          _tr(
+                            widget.language,
+                            en: 'Check',
+                            vi: 'Kiểm tra',
+                            ja: '確認',
+                          ),
+                        ),
+                        style: FilledButton.styleFrom(
+                          minimumSize: const Size.fromHeight(54),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
-        if (_isLastCorrect != null)
-          Positioned.fill(
-            child: Container(
-              color: Colors.white.withValues(alpha: 0.8),
-              child: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      _isLastCorrect! ? Icons.check_circle : Icons.cancel,
-                      color: _isLastCorrect! ? Colors.green : Colors.red,
-                      size: 80,
-                    ).animate().scale(
-                      duration: 300.ms,
-                      curve: Curves.elasticOut,
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      _isLastCorrect!
-                          ? _tr(
-                              widget.language,
-                              en: 'CORRECT!',
-                              vi: 'CH\u00cdNH X\u00c1C!',
-                              ja: '\u6b63\u89e3\uff01',
-                            )
-                          : _tr(
-                              widget.language,
-                              en: 'TRY AGAIN',
-                              vi: 'TH\u1eec L\u1ea0I NH\u00c9!',
-                              ja: '\u3082\u3046\u4e00\u5ea6',
-                            ),
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.w900,
-                        color: _isLastCorrect! ? Colors.green : Colors.red,
-                        letterSpacing: 2,
-                      ),
-                    ).animate().fadeIn(delay: 200.ms).moveY(begin: 20, end: 0),
-                  ],
-                ),
-              ),
-            ),
           ),
-      ],
+        );
+      },
     );
+  }
+
+  Color _trayBackground(AppThemePalette palette) {
+    if (_isLastCorrect == true) {
+      return const Color(0xFFF6FCF8);
+    }
+    if (_isLastCorrect == false) {
+      return const Color(0xFFFFF7F7);
+    }
+    return palette.elevated;
+  }
+
+  Color _trayBorder(AppThemePalette palette) {
+    if (_isLastCorrect == true) {
+      return const Color(0xFFB9E6CE);
+    }
+    if (_isLastCorrect == false) {
+      return const Color(0xFFF2C2C8);
+    }
+    return palette.outline;
   }
 
   String _tr(
@@ -266,25 +389,56 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
   }
 }
 
-class _ClayWordTile extends StatelessWidget {
-  final String word;
-  final VoidCallback onTap;
-  final bool isSelected;
-
-  const _ClayWordTile({
+class _WordChip extends StatelessWidget {
+  const _WordChip({
     required this.word,
     required this.onTap,
-    required this.isSelected,
+    required this.selected,
   });
+
+  final String word;
+  final VoidCallback onTap;
+  final bool selected;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: ClayButton(
-        label: word,
-        onPressed: onTap,
-        style: isSelected ? ClayButtonStyle.primary : ClayButtonStyle.neutral,
+    final palette = context.appPalette;
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(16),
+        onTap: onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 160),
+          curve: Curves.easeOut,
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
+          decoration: BoxDecoration(
+            color: selected
+                ? palette.primary.withValues(alpha: 0.08)
+                : Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: selected
+                  ? palette.primary.withValues(alpha: 0.22)
+                  : palette.outline,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: palette.ink.withValues(alpha: 0.05),
+                blurRadius: 12,
+                offset: const Offset(0, 6),
+              ),
+            ],
+          ),
+          child: Text(
+            word,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              color: selected ? palette.primary : palette.ink,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+        ),
       ),
     );
   }

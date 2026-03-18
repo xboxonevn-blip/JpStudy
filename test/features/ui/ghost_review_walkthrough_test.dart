@@ -7,7 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/db/database_provider.dart';
-import 'package:jpstudy/features/common/widgets/clay_button.dart';
+import 'package:jpstudy/features/common/widgets/clay_card.dart';
 import 'package:jpstudy/features/grammar/grammar_screen.dart';
 import 'package:jpstudy/features/grammar/screens/ghost_review_screen.dart';
 import 'package:jpstudy/features/grammar/screens/grammar_practice_screen.dart';
@@ -18,33 +18,37 @@ import 'package:jpstudy/features/grammar/widgets/sentence_builder_widget.dart';
 
 void main() {
   Future<int> seedGhostGrammar(AppDatabase db) async {
-    final grammarId = await db.into(db.grammarPoints).insert(
-      GrammarPointsCompanion.insert(
-        lessonId: const Value(1),
-        grammarPoint: 'です',
-        titleEn: const Value('desu'),
-        meaning: 'is',
-        meaningVi: const Value('la'),
-        meaningEn: const Value('is'),
-        connection: 'Noun + です',
-        connectionEn: const Value('Noun + desu'),
-        explanation: 'polite copula',
-        explanationVi: const Value('tro dong tu lich su'),
-        explanationEn: const Value('polite copula'),
-        jlptLevel: 'N5',
-        isLearned: const Value(true),
-      ),
-    );
+    final grammarId = await db
+        .into(db.grammarPoints)
+        .insert(
+          GrammarPointsCompanion.insert(
+            lessonId: const Value(1),
+            grammarPoint: 'です',
+            titleEn: const Value('desu'),
+            meaning: 'is',
+            meaningVi: const Value('la'),
+            meaningEn: const Value('is'),
+            connection: 'Noun + です',
+            connectionEn: const Value('Noun + desu'),
+            explanation: 'polite copula',
+            explanationVi: const Value('tro dong tu lich su'),
+            explanationEn: const Value('polite copula'),
+            jlptLevel: 'N5',
+            isLearned: const Value(true),
+          ),
+        );
 
-    await db.into(db.grammarExamples).insert(
-      GrammarExamplesCompanion.insert(
-        grammarId: grammarId,
-        japanese: 'ABC',
-        translation: 'Sample sentence',
-        translationVi: const Value('Cau vi du'),
-        translationEn: const Value('Sample sentence'),
-      ),
-    );
+    await db
+        .into(db.grammarExamples)
+        .insert(
+          GrammarExamplesCompanion.insert(
+            grammarId: grammarId,
+            japanese: 'ABC',
+            translation: 'Sample sentence',
+            translationVi: const Value('Cau vi du'),
+            translationEn: const Value('Sample sentence'),
+          ),
+        );
 
     await db.grammarDao.initializeSrsState(grammarId);
     await db.grammarDao.updateSrsState(
@@ -93,29 +97,47 @@ void main() {
   Future<void> answerCurrentQuestionCorrectly(WidgetTester tester) async {
     if (find.byType(SentenceBuilderWidget).evaluate().isNotEmpty) {
       final scope = find.byType(SentenceBuilderWidget);
-      for (final char in ['A', 'B', 'C']) {
-        await tester.tap(find.descendant(of: scope, matching: find.text(char)).first);
+
+      // New tokenizer may keep the fake test sentence "ABC" as one chunk
+      // instead of splitting it into A / B / C. Prefer the full chunk when
+      // present, then fall back to the older per-character taps.
+      final fullChunk = find.descendant(of: scope, matching: find.text('ABC'));
+      if (fullChunk.evaluate().isNotEmpty) {
+        await tester.ensureVisible(fullChunk.first);
+        await tester.tap(fullChunk.first, warnIfMissed: false);
         await tester.pump(const Duration(milliseconds: 30));
+      } else {
+        for (final char in ['A', 'B', 'C']) {
+          final finder = find.descendant(of: scope, matching: find.text(char));
+          if (finder.evaluate().isEmpty) continue;
+          await tester.ensureVisible(finder.first);
+          await tester.tap(finder.first, warnIfMissed: false);
+          await tester.pump(const Duration(milliseconds: 30));
+        }
       }
-      await tester.tap(find.descendant(of: scope, matching: find.text('CHECK')).first);
+
+      final checkFinder = find
+          .descendant(of: scope, matching: find.text('Check'))
+          .first;
+      await tester.ensureVisible(checkFinder);
+      await tester.tap(checkFinder, warnIfMissed: false);
       await tester.pump(const Duration(milliseconds: 100));
       return;
     }
 
     if (find.byType(ClozeTestWidget).evaluate().isNotEmpty) {
-      final scope = find.byType(ClozeTestWidget);
-      await tester.tap(find.descendant(of: scope, matching: find.byType(ClayButton)).first);
+      await tester.tap(find.byKey(const ValueKey('grammar_cloze_option_0')));
       await tester.pump(const Duration(milliseconds: 30));
-      await tester.tap(
-        find.descendant(of: scope, matching: find.text('CHECK ANSWER')).first,
-      );
+      await tester.tap(find.byKey(const ValueKey('grammar_cloze_check')));
       await tester.pump(const Duration(milliseconds: 100));
       return;
     }
 
-    if (find.byType(grammar_widgets.MultipleChoiceWidget).evaluate().isNotEmpty) {
-      final scope = find.byType(grammar_widgets.MultipleChoiceWidget);
-      await tester.tap(find.descendant(of: scope, matching: find.byType(ClayButton)).first);
+    if (find
+        .byType(grammar_widgets.MultipleChoiceWidget)
+        .evaluate()
+        .isNotEmpty) {
+      await tester.tap(find.byKey(const ValueKey('grammar_mc_option_0')));
       await tester.pump(const Duration(milliseconds: 100));
       return;
     }
@@ -123,7 +145,9 @@ void main() {
     fail('Unsupported grammar question widget in ghost walkthrough.');
   }
 
-  testWidgets('Ghost banner opens grammar practice (ghost mode)', (tester) async {
+  testWidgets('Ghost banner opens grammar practice (ghost mode)', (
+    tester,
+  ) async {
     final db = AppDatabase(executor: NativeDatabase.memory());
     addTearDown(() async {
       await db.close();
@@ -161,7 +185,7 @@ void main() {
     );
 
     await tester.pumpAndSettle();
-    await tester.tap(find.text('です'));
+    await tester.tap(find.byType(ClayCard).first);
     await tester.pumpAndSettle();
 
     expect(find.text(AppLanguage.en.mistakePromptLabel), findsOneWidget);
@@ -171,39 +195,43 @@ void main() {
     expect(find.text('Prompt ghost'), findsOneWidget);
     expect(find.text('wrong'), findsOneWidget);
     expect(find.text('is'), findsOneWidget);
-    expect(find.text(AppLanguage.en.mistakeSourceGrammarPracticeLabel), findsOneWidget);
-  });
-
-  testWidgets('Correct answer in ghost practice reduces grammar mistake count', (
-    tester,
-  ) async {
-    final db = AppDatabase(executor: NativeDatabase.memory());
-    addTearDown(() async {
-      await db.close();
-    });
-    final grammarId = await seedGhostGrammar(db);
-
-    await tester.pumpWidget(
-      ProviderScope(
-        overrides: [databaseProvider.overrideWithValue(db)],
-        child: const MaterialApp(
-          home: GrammarPracticeScreen(mode: GrammarPracticeMode.ghost),
-        ),
-      ),
+    expect(
+      find.text(AppLanguage.en.mistakeSourceGrammarPracticeLabel),
+      findsOneWidget,
     );
-
-    await tester.pumpAndSettle();
-    await answerCurrentQuestionCorrectly(tester);
-    await tester.pump(const Duration(milliseconds: 200));
-
-    final mistakes = await db.mistakeDao.getMistakesByType('grammar');
-    final target = mistakes.where((m) => m.itemId == grammarId).toList();
-    expect(target, hasLength(1));
-    expect(target.first.wrongCount, equals(1));
-
-    // Let delayed transition timer in GrammarPracticeScreen complete.
-    await tester.pumpAndSettle(const Duration(seconds: 2));
-    await tester.pumpWidget(const SizedBox.shrink());
-    await tester.pumpAndSettle();
   });
+
+  testWidgets(
+    'Correct answer in ghost practice reduces grammar mistake count',
+    (tester) async {
+      final db = AppDatabase(executor: NativeDatabase.memory());
+      addTearDown(() async {
+        await db.close();
+      });
+      final grammarId = await seedGhostGrammar(db);
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [databaseProvider.overrideWithValue(db)],
+          child: const MaterialApp(
+            home: GrammarPracticeScreen(mode: GrammarPracticeMode.ghost),
+          ),
+        ),
+      );
+
+      await tester.pumpAndSettle();
+      await answerCurrentQuestionCorrectly(tester);
+      await tester.pump(const Duration(milliseconds: 200));
+
+      final mistakes = await db.mistakeDao.getMistakesByType('grammar');
+      final target = mistakes.where((m) => m.itemId == grammarId).toList();
+      expect(target, hasLength(1));
+      expect(target.first.wrongCount, equals(1));
+
+      // Let delayed transition timer in GrammarPracticeScreen complete.
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+      await tester.pumpWidget(const SizedBox.shrink());
+      await tester.pumpAndSettle();
+    },
+  );
 }
