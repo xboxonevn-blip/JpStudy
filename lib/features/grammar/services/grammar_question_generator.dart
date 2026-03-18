@@ -1,4 +1,5 @@
 import 'package:jpstudy/data/db/app_database.dart';
+import 'package:jpstudy/data/utils/grammar_english_notation.dart';
 
 import '../../../core/app_language.dart';
 
@@ -141,7 +142,7 @@ class GrammarQuestionGenerator {
               explanation: localizedTranslation,
               feedback: _tr(
                 language,
-                en: 'Target pattern: ${point.grammarPoint}. ${pointExplanation.trim()}',
+                en: 'Target pattern: ${_localizedPatternFormula(point, language)}. ${pointExplanation.trim()}',
                 vi: 'Mẫu ngữ pháp: ${point.grammarPoint}. ${pointExplanation.trim()}',
                 ja: '使うべき文型: ${point.grammarPoint}。${pointExplanation.trim()}',
               ),
@@ -157,6 +158,7 @@ class GrammarQuestionGenerator {
             pointMeaning: pointMeaning,
             pointExplanation: pointExplanation,
             example: example,
+            examplePool: examplePool,
             allPoints: allPoints,
             language: language,
           ),
@@ -241,14 +243,16 @@ class GrammarQuestionGenerator {
   }) {
     if (allPoints == null || allPoints.isEmpty) return null;
 
-    final distractors = _pickOtherGrammarPoints(
-      allPoints,
-      point.id,
-      3,
-    ).map((p) => p.grammarPoint).toList(growable: false);
+    final patternLabel = _localizedPatternLabel(point, language);
+    final distractors = _pickRelatedGrammarPoints(
+      target: point,
+      pool: allPoints,
+      count: 3,
+      language: language,
+    ).map((p) => _localizedPatternLabel(p, language)).toList(growable: false);
     if (distractors.length < 2) return null;
 
-    final options = _uniqueShuffled([point.grammarPoint, ...distractors]);
+    final options = _uniqueShuffled([patternLabel, ...distractors]);
     if (options.length < 3) return null;
 
     final questionText = _tr(
@@ -262,7 +266,7 @@ class GrammarQuestionGenerator {
       type: GrammarQuestionType.reverseMultipleChoice,
       point: point,
       question: questionText,
-      correctAnswer: point.grammarPoint,
+      correctAnswer: patternLabel,
       options: options,
       familyKey: 'reverse_meaning_${point.id}',
       stemKey: _normalizeStem(questionText),
@@ -270,9 +274,9 @@ class GrammarQuestionGenerator {
       explanation: pointExplanation,
       feedback: _tr(
         language,
-        en: 'Use ${point.grammarPoint} when you mean: $pointMeaning.',
-        vi: 'Dùng ${point.grammarPoint} để diễn đạt: $pointMeaning.',
-        ja: '$pointMeaning を表すときは ${point.grammarPoint} を使います。',
+        en: 'Use $patternLabel when you mean: $pointMeaning.',
+        vi: 'Dùng $patternLabel để diễn đạt: $pointMeaning.',
+        ja: '$pointMeaning を表すときは $patternLabel を使います。',
       ),
     );
   }
@@ -286,10 +290,12 @@ class GrammarQuestionGenerator {
   }) {
     if (allPoints == null || allPoints.isEmpty) return null;
 
-    final distractors = _pickOtherGrammarPoints(
-      allPoints,
-      point.id,
-      3,
+    final patternLabel = _localizedPatternLabel(point, language);
+    final distractors = _pickRelatedGrammarPoints(
+      target: point,
+      pool: allPoints,
+      count: 3,
+      language: language,
     ).map((p) => _localizedPointMeaning(p, language)).toList(growable: false);
     if (distractors.length < 2) return null;
 
@@ -298,9 +304,9 @@ class GrammarQuestionGenerator {
 
     final questionText = _tr(
       language,
-      en: 'What is the best meaning of "${point.grammarPoint}"?',
-      vi: '"${point.grammarPoint}" có nghĩa là gì?',
-      ja: '「${point.grammarPoint}」の意味として最も適切なのはどれですか？',
+      en: 'What is the best meaning of "$patternLabel"?',
+      vi: '"$patternLabel" có nghĩa là gì?',
+      ja: '「$patternLabel」の意味として最も適切なのはどれですか？',
     );
 
     return GeneratedQuestion(
@@ -329,28 +335,27 @@ class GrammarQuestionGenerator {
 
     final contrast = _pickContrastPoint(point, allPoints);
     if (contrast == null) return null;
+    final patternLabel = _localizedPatternLabel(point, language);
+    final contrastLabel = _localizedPatternLabel(contrast, language);
 
     final context = primaryExample == null
         ? pointMeaning
         : _localizedExampleTranslation(primaryExample, language);
     final questionText = _tr(
       language,
-      en: 'Contrast drill\nA: ${point.grammarPoint}  vs  B: ${contrast.grammarPoint}\nContext: $context\nWhich pattern fits better?',
-      vi: 'Phân biệt mẫu\nA: ${point.grammarPoint}  vs  B: ${contrast.grammarPoint}\nNgữ cảnh: $context\nChọn đáp án phù hợp.',
-      ja: '対比ドリル\nA: ${point.grammarPoint}  vs  B: ${contrast.grammarPoint}\n文脈: $context\nより適切な文型はどれですか？',
+      en: 'Contrast drill\nA: $patternLabel  vs  B: $contrastLabel\nContext: $context\nWhich pattern fits better?',
+      vi: 'Phân biệt mẫu\nA: $patternLabel  vs  B: $contrastLabel\nNgữ cảnh: $context\nChọn đáp án phù hợp.',
+      ja: '対比ドリル\nA: $patternLabel  vs  B: $contrastLabel\n文脈: $context\nより適切な文型はどれですか？',
     );
 
-    final options = _uniqueShuffled([
-      point.grammarPoint,
-      contrast.grammarPoint,
-    ]);
+    final options = _uniqueShuffled([patternLabel, contrastLabel]);
     if (options.length < 2) return null;
 
     return GeneratedQuestion(
       type: GrammarQuestionType.pairContrast,
       point: point,
       question: questionText,
-      correctAnswer: point.grammarPoint,
+      correctAnswer: patternLabel,
       options: options,
       familyKey: 'contrast_${point.id}_${contrast.id}',
       stemKey: _normalizeStem(questionText),
@@ -358,9 +363,9 @@ class GrammarQuestionGenerator {
       explanation: pointExplanation,
       feedback: _tr(
         language,
-        en: 'Pick ${point.grammarPoint} for this nuance. Contrast option: ${contrast.grammarPoint} (minimal pair).',
-        vi: 'Sắc thái này nên dùng ${point.grammarPoint}. Mẫu đối chiếu là ${contrast.grammarPoint}.',
-        ja: 'このニュアンスでは ${point.grammarPoint} が適切です。対比候補は ${contrast.grammarPoint} です。',
+        en: 'Pick $patternLabel for this nuance. Contrast option: $contrastLabel (minimal pair).',
+        vi: 'Sắc thái này nên dùng $patternLabel. Mẫu đối chiếu là $contrastLabel.',
+        ja: 'このニュアンスでは $patternLabel が適切です。対比候補は $contrastLabel です。',
       ),
     );
   }
@@ -405,19 +410,27 @@ class GrammarQuestionGenerator {
     required String pointMeaning,
     required String pointExplanation,
     required GrammarExample example,
+    required List<({GrammarPoint point, GrammarExample example})> examplePool,
     required List<GrammarPoint>? allPoints,
     required AppLanguage language,
   }) {
     if (!example.japanese.contains(point.grammarPoint)) return null;
     if (allPoints == null || allPoints.isEmpty) return null;
 
-    final distractors = _pickOtherGrammarPoints(
-      allPoints,
-      point.id,
-      3,
-    ).map((p) => p.grammarPoint).toList(growable: false);
+    final patternFormula = _localizedPatternFormula(point, language);
+    if (!_isUsablePatternChoice(patternFormula)) return null;
+    if (_shouldSkipClozeForPattern(point, example, patternFormula)) return null;
 
-    final options = _uniqueShuffled([point.grammarPoint, ...distractors]);
+    final distractors = _buildClozeDistractors(
+      point: point,
+      example: example,
+      examplePool: examplePool,
+      allPoints: allPoints,
+      language: language,
+      targetFormula: patternFormula,
+    );
+
+    final options = _uniqueShuffled([patternFormula, ...distractors]);
     if (options.length < 3) return null;
 
     final questionText = example.japanese.replaceFirst(
@@ -429,7 +442,7 @@ class GrammarQuestionGenerator {
       type: GrammarQuestionType.cloze,
       point: point,
       question: questionText,
-      correctAnswer: point.grammarPoint,
+      correctAnswer: patternFormula,
       options: options,
       familyKey: 'cloze_${point.id}',
       stemKey: _normalizeStem(questionText),
@@ -437,7 +450,7 @@ class GrammarQuestionGenerator {
       explanation: pointMeaning,
       feedback: _tr(
         language,
-        en: 'Expected ${point.grammarPoint}. It matches "$pointMeaning". ${pointExplanation.trim()}',
+        en: 'Expected $patternFormula. It matches "$pointMeaning". ${pointExplanation.trim()}',
         vi: 'Đáp án đúng là ${point.grammarPoint}. Mẫu này khớp với "$pointMeaning". ${pointExplanation.trim()}',
         ja: '正解は ${point.grammarPoint} です。「$pointMeaning」に合います。${pointExplanation.trim()}',
       ),
@@ -454,20 +467,14 @@ class GrammarQuestionGenerator {
   }) {
     final prompt = _localizedExampleTranslation(targetExample, language).trim();
     if (prompt.isEmpty) return null;
+    final patternFormula = _localizedPatternFormula(point, language);
 
-    final distractors = <String>[];
-    final shuffledPool =
-        List<({GrammarPoint point, GrammarExample example})>.of(examplePool)
-          ..shuffle();
-    for (final item in shuffledPool) {
-      if (item.point.id == point.id) continue;
-      final sentence = item.example.japanese.trim();
-      if (sentence.isEmpty || sentence == targetExample.japanese.trim()) {
-        continue;
-      }
-      distractors.add(sentence);
-      if (distractors.length >= 3) break;
-    }
+    final distractors = _pickContextDistractorSentences(
+      point: point,
+      targetExample: targetExample,
+      examplePool: examplePool,
+      language: language,
+    );
     if (distractors.length < 2) return null;
 
     final options = _uniqueShuffled([targetExample.japanese, ...distractors]);
@@ -492,7 +499,7 @@ class GrammarQuestionGenerator {
       explanation: pointExplanation,
       feedback: _tr(
         language,
-        en: 'Correct because it uses ${point.grammarPoint} in context.',
+        en: 'Correct because it uses $patternFormula in context.',
         vi: 'Đúng vì câu này dùng ${point.grammarPoint} đúng ngữ cảnh.',
         ja: '文脈に合う ${point.grammarPoint} が使われているため正解です。',
       ),
@@ -511,13 +518,21 @@ class GrammarQuestionGenerator {
       point: point,
       example: example,
       allPoints: allPoints,
+      language: language,
     );
     if (corrupted == null) return null;
 
+    final patternFormula = _localizedPatternFormula(point, language);
+    final replacementFormula = _localizedPatternFormula(
+      corrupted.replacementPoint,
+      language,
+    );
     final options = _uniqueShuffled([
-      point.grammarPoint,
-      corrupted.replacement,
-      ...corrupted.alternativePatterns.take(2),
+      patternFormula,
+      replacementFormula,
+      ...corrupted.alternativePoints
+          .map((item) => _localizedPatternFormula(item, language))
+          .take(2),
     ]);
     if (options.length < 3) return null;
 
@@ -532,7 +547,7 @@ class GrammarQuestionGenerator {
       type: GrammarQuestionType.errorCorrection,
       point: point,
       question: questionText,
-      correctAnswer: point.grammarPoint,
+      correctAnswer: patternFormula,
       options: options,
       familyKey: 'error_fix_${point.id}',
       stemKey: _normalizeStem(corrupted.wrongSentence),
@@ -540,7 +555,7 @@ class GrammarQuestionGenerator {
       explanation: pointMeaning,
       feedback: _tr(
         language,
-        en: 'Use ${point.grammarPoint}. Correct sentence: ${corrupted.correctSentence}',
+        en: 'Use $patternFormula. Correct sentence: ${corrupted.correctSentence}',
         vi: 'Nên dùng ${point.grammarPoint}. Câu đúng: ${corrupted.correctSentence}',
         ja: '${point.grammarPoint} を使います。正しい文: ${corrupted.correctSentence}',
       ),
@@ -559,12 +574,18 @@ class GrammarQuestionGenerator {
       point: point,
       example: example,
       allPoints: allPoints,
+      language: language,
     );
     if (corrupted == null) return null;
 
+    final patternFormula = _localizedPatternFormula(point, language);
+    final replacementFormula = _localizedPatternFormula(
+      corrupted.replacementPoint,
+      language,
+    );
     final correctReason = _tr(
       language,
-      en: 'The pattern "${corrupted.replacement}" does not match this meaning. Use "${point.grammarPoint}".',
+      en: 'The pattern "$replacementFormula" does not match this meaning. Use "$patternFormula".',
       vi: 'Mẫu "${corrupted.replacement}" không hợp nghĩa. Cần dùng "${point.grammarPoint}".',
       ja: '「${corrupted.replacement}」はこの意味に合いません。「${point.grammarPoint}」を使います。',
     );
@@ -666,18 +687,30 @@ class GrammarQuestionGenerator {
     required GrammarPoint point,
     required GrammarExample example,
     required List<GrammarPoint>? allPoints,
+    required AppLanguage language,
   }) {
     if (allPoints == null || allPoints.isEmpty) return null;
     if (!example.japanese.contains(point.grammarPoint)) return null;
 
-    final alternatives = _pickOtherGrammarPoints(allPoints, point.id, 5);
+    final alternatives = _pickRelatedGrammarPoints(
+      target: point,
+      pool: allPoints,
+      count: 5,
+      language: language,
+    );
     String? replacement;
     for (final value in alternatives.map((p) => p.grammarPoint)) {
-      if (value.trim().isEmpty) continue;
+      if (value.trim().isEmpty || containsVietnameseGrammarText(value)) {
+        continue;
+      }
       replacement = value;
       break;
     }
     if (replacement == null) return null;
+
+    final replacementPoint = alternatives.firstWhere(
+      (item) => item.grammarPoint == replacement,
+    );
 
     return _CorruptedSentence(
       wrongSentence: example.japanese.replaceFirst(
@@ -686,9 +719,9 @@ class GrammarQuestionGenerator {
       ),
       correctSentence: example.japanese,
       replacement: replacement,
-      alternativePatterns: alternatives
-          .map((item) => item.grammarPoint)
-          .where((value) => value.trim().isNotEmpty)
+      replacementPoint: replacementPoint,
+      alternativePoints: alternatives
+          .where((item) => item.grammarPoint.trim().isNotEmpty)
           .toList(growable: false),
     );
   }
@@ -735,6 +768,17 @@ class GrammarQuestionGenerator {
   static List<String> _tokenizeSentence(String sentence) {
     final trimmed = sentence.trim();
     if (trimmed.isEmpty) return const [];
+
+    // Dialogue sentences like「Q。…A。」— tokenize only the answer part.
+    if (trimmed.contains('…')) {
+      final parts = trimmed.split('…');
+      final answer = parts.last.trim();
+      if (answer.isNotEmpty) {
+        return _tokenizeSentence(answer);
+      }
+    }
+
+    // Sentences with explicit spaces — split on whitespace.
     if (trimmed.contains(' ')) {
       return trimmed
           .split(RegExp(r'\s+'))
@@ -742,17 +786,474 @@ class GrammarQuestionGenerator {
           .toList(growable: false);
     }
 
-    return trimmed.runes.map(String.fromCharCode).toList(growable: false);
+    // Japanese morpheme-boundary chunking.
+    // Single-pass: use a regex with alternation (longest patterns first) to
+    // insert a split-marker (\x00) before each verbal/copula ending and after
+    // each postpositional particle. Because it's one pass, longer patterns
+    // like「ですか」are matched before their substrings like「です」.
+    const splitMark = '\x00';
+
+    // Verbal/copula endings — longest alternatives first so the regex engine
+    // matches「ですか」before trying「です」etc.
+    final verbalEndingRe = RegExp(
+      'じゃありません|ではありません|じゃないです'
+      '|なければなりません|なくてもいいです|かもしれません'
+      '|てはいけません|てはいけない|てもいいです'
+      '|ていただけます|ていただきます|ていません'
+      '|ています|てあります|ていました|ていた|てある|てきます'
+      '|でしょう|ましょう|ください'
+      '|ません|ました|ますか|ますね|ますよ|ます'
+      '|ですか|ですね|ですよ|です',
+    );
+
+    // Insert split markers before each verbal ending (single pass)
+    var work = trimmed.replaceAllMapped(
+      verbalEndingRe,
+      (m) => '$splitMark${m.group(0)}',
+    );
+
+    // Postpositional particles: insert split marker after each.
+    // 「で」excluded — it's a substring of「です」and would corrupt endings
+    // already split in the previous step.
+    for (final particle in ['は', 'が', 'を', 'に', 'も', 'と', 'の', 'へ']) {
+      work = work.replaceAll(particle, '$particle$splitMark');
+    }
+
+    // Remove any split mark that immediately precedes sentence-final punctuation
+    work = work.replaceAllMapped(
+      RegExp('$splitMark([。、！？])'),
+      (m) => m.group(1)!,
+    );
+
+    final rawChunks = work
+        .split(splitMark)
+        .map((c) => c.trim())
+        .where((c) => c.isNotEmpty)
+        .toList(growable: true);
+
+    // Merge very short stray fragments with the preceding chunk.
+    final merged = <String>[];
+    for (final chunk in rawChunks) {
+      if (merged.isNotEmpty && chunk.runes.length <= 1) {
+        merged[merged.length - 1] = merged.last + chunk;
+      } else {
+        merged.add(chunk);
+      }
+    }
+
+    if (merged.length >= 2) return merged;
+
+    // Fallback: split into 3-character groups for very short sentences.
+    final runes = trimmed.runes.toList();
+    final pairs = <String>[];
+    const step = 3;
+    for (var i = 0; i < runes.length; i += step) {
+      final end = (i + step).clamp(0, runes.length);
+      pairs.add(String.fromCharCodes(runes.sublist(i, end)));
+    }
+    return pairs.isEmpty ? [trimmed] : pairs;
   }
 
-  static List<GrammarPoint> _pickOtherGrammarPoints(
-    List<GrammarPoint> points,
-    int id,
-    int count,
-  ) {
-    final pool = points.where((p) => p.id != id).toList(growable: false)
+  static List<GrammarPoint> _pickRelatedGrammarPoints({
+    required GrammarPoint target,
+    required List<GrammarPoint> pool,
+    required int count,
+    required AppLanguage language,
+  }) {
+    final ranked = _rankRelatedGrammarPoints(
+      target: target,
+      pool: pool,
+      language: language,
+      targetFormula: _localizedPatternFormula(target, language),
+    );
+    return ranked.take(count).toList(growable: false);
+  }
+
+  static List<String> _pickContextDistractorSentences({
+    required GrammarPoint point,
+    required GrammarExample targetExample,
+    required List<({GrammarPoint point, GrammarExample example})> examplePool,
+    required AppLanguage language,
+  }) {
+    final targetSentence = targetExample.japanese.trim();
+    final targetPrompt = _localizedExampleTranslation(
+      targetExample,
+      language,
+    ).trim();
+
+    final ranked = <({String sentence, int score})>[];
+    for (final item in examplePool) {
+      final sentence = item.example.japanese.trim();
+      if (item.point.id == point.id) continue;
+      if (sentence.isEmpty || sentence == targetSentence) continue;
+
+      final prompt = _localizedExampleTranslation(
+        item.example,
+        language,
+      ).trim();
+      if (prompt.isEmpty) continue;
+
+      ranked.add((
+        sentence: sentence,
+        score: _contextDistractorScore(
+          targetPoint: point,
+          targetExample: targetExample,
+          targetPrompt: targetPrompt,
+          candidatePoint: item.point,
+          candidateExample: item.example,
+          candidatePrompt: prompt,
+        ),
+      ));
+    }
+
+    ranked.sort((a, b) {
+      final byScore = b.score.compareTo(a.score);
+      if (byScore != 0) return byScore;
+      return a.sentence.compareTo(b.sentence);
+    });
+
+    final used = <String>{};
+    final result = <String>[];
+    for (final item in ranked) {
+      if (!used.add(item.sentence)) continue;
+      result.add(item.sentence);
+      if (result.length >= 3) break;
+    }
+    return result;
+  }
+
+  static int _contextDistractorScore({
+    required GrammarPoint targetPoint,
+    required GrammarExample targetExample,
+    required String targetPrompt,
+    required GrammarPoint candidatePoint,
+    required GrammarExample candidateExample,
+    required String candidatePrompt,
+  }) {
+    var score = 0;
+
+    if (candidatePoint.lessonId != null &&
+        candidatePoint.lessonId == targetPoint.lessonId) {
+      score += 5;
+    }
+    if (candidatePoint.jlptLevel == targetPoint.jlptLevel) {
+      score += 3;
+    }
+    if (_hasSimilarSentenceEnding(
+      targetExample.japanese,
+      candidateExample.japanese,
+    )) {
+      score += 4;
+    }
+
+    final translationOverlap = _meaningTokenOverlap(
+      targetPrompt,
+      candidatePrompt,
+    );
+    score += translationOverlap * 2;
+
+    final translationDelta = (targetPrompt.length - candidatePrompt.length)
+        .abs();
+    if (translationDelta <= 12) {
+      score += 2;
+    } else if (translationDelta <= 24) {
+      score += 1;
+    }
+
+    final sentenceDelta =
+        (targetExample.japanese.length - candidateExample.japanese.length)
+            .abs();
+    if (sentenceDelta <= 6) {
+      score += 2;
+    } else if (sentenceDelta <= 12) {
+      score += 1;
+    }
+
+    return score;
+  }
+
+  static int _meaningTokenOverlap(String left, String right) {
+    final leftTokens = _meaningTokens(left);
+    final rightTokens = _meaningTokens(right);
+    if (leftTokens.isEmpty || rightTokens.isEmpty) return 0;
+    return leftTokens.intersection(rightTokens).length;
+  }
+
+  static Set<String> _meaningTokens(String value) {
+    final normalized = value.trim().toLowerCase();
+    if (normalized.isEmpty) return const <String>{};
+
+    final wordTokens = normalized
+        .split(RegExp(r'[^a-z0-9\u00c0-\u1ef9]+'))
+        .where((token) => token.length >= 2)
+        .toSet();
+    if (wordTokens.isNotEmpty) {
+      return wordTokens;
+    }
+
+    final compact = normalized.replaceAll(RegExp(r'\s+'), '');
+    if (compact.runes.length < 2) {
+      return compact.isEmpty ? const <String>{} : {compact};
+    }
+
+    final chars = compact.runes
+        .map(String.fromCharCode)
+        .toList(growable: false);
+    final bigrams = <String>{};
+    for (var i = 0; i < chars.length - 1; i++) {
+      bigrams.add('${chars[i]}${chars[i + 1]}');
+    }
+    return bigrams;
+  }
+
+  static List<String> _buildClozeDistractors({
+    required GrammarPoint point,
+    required GrammarExample example,
+    required List<({GrammarPoint point, GrammarExample example})> examplePool,
+    required List<GrammarPoint> allPoints,
+    required AppLanguage language,
+    required String targetFormula,
+  }) {
+    final distractors = <String>{};
+
+    if (_looksLikeStandaloneSentence(targetFormula)) {
+      final sentenceDistractors = _candidateSentenceDistractors(
+        point: point,
+        example: example,
+        examplePool: examplePool,
+      );
+      distractors.addAll(sentenceDistractors);
+    }
+
+    final rankedPoints = _rankRelatedGrammarPoints(
+      target: point,
+      pool: allPoints,
+      language: language,
+      targetFormula: targetFormula,
+    );
+
+    for (final candidate in rankedPoints) {
+      final candidateFormula = _localizedPatternFormula(candidate, language);
+      if (!_isUsablePatternChoice(candidateFormula)) continue;
+      if (!_matchesClozeProfile(targetFormula, candidateFormula)) continue;
+      distractors.add(candidateFormula);
+      if (distractors.length >= 3) break;
+    }
+
+    return distractors.take(3).toList(growable: false);
+  }
+
+  static List<String> _candidateSentenceDistractors({
+    required GrammarPoint point,
+    required GrammarExample example,
+    required List<({GrammarPoint point, GrammarExample example})> examplePool,
+  }) {
+    final targetLead = _leadingSentenceClause(example.japanese);
+    if (targetLead.isEmpty) return const [];
+
+    final candidates = <String>{};
+    for (final item in examplePool) {
+      if (item.example.japanese.trim() == example.japanese.trim()) continue;
+      final lead = _leadingSentenceClause(item.example.japanese);
+      if (lead.isEmpty || lead == targetLead) continue;
+      if (!_looksLikeStandaloneSentence(lead)) continue;
+      if (!_hasSimilarSentenceEnding(targetLead, lead)) continue;
+      candidates.add(lead);
+      if (candidates.length >= 3) break;
+    }
+    return candidates.toList(growable: false);
+  }
+
+  static List<GrammarPoint> _rankRelatedGrammarPoints({
+    required GrammarPoint target,
+    required List<GrammarPoint> pool,
+    required AppLanguage language,
+    required String targetFormula,
+  }) {
+    final candidates = pool.where((item) => item.id != target.id).toList()
       ..shuffle();
-    return pool.take(count).toList(growable: false);
+
+    candidates.sort((a, b) {
+      final scoreB = _relatedPointScore(
+        target: target,
+        candidate: b,
+        language: language,
+        targetFormula: targetFormula,
+      );
+      final scoreA = _relatedPointScore(
+        target: target,
+        candidate: a,
+        language: language,
+        targetFormula: targetFormula,
+      );
+      return scoreB.compareTo(scoreA);
+    });
+
+    return candidates;
+  }
+
+  static int _relatedPointScore({
+    required GrammarPoint target,
+    required GrammarPoint candidate,
+    required AppLanguage language,
+    required String targetFormula,
+  }) {
+    final candidateFormula = _localizedPatternFormula(candidate, language);
+    var score = 0;
+
+    if (candidate.lessonId != null && candidate.lessonId == target.lessonId) {
+      score += 5;
+    }
+    if (candidate.jlptLevel == target.jlptLevel) {
+      score += 3;
+    }
+    if (_matchesClozeProfile(targetFormula, candidateFormula)) {
+      score += 4;
+    }
+    if (_hasSimilarSentenceEnding(targetFormula, candidateFormula)) {
+      score += 3;
+    }
+    if (_placeholderCount(targetFormula) ==
+        _placeholderCount(candidateFormula)) {
+      score += 2;
+    }
+    final targetType = _patternShapeType(targetFormula);
+    final candidateType = _patternShapeType(candidateFormula);
+    if (targetType == candidateType) {
+      score += 2;
+    }
+    return score;
+  }
+
+  static bool _matchesClozeProfile(String target, String candidate) {
+    if (!_isUsablePatternChoice(candidate)) return false;
+    final targetType = _patternShapeType(target);
+    final candidateType = _patternShapeType(candidate);
+    if (targetType != candidateType) return false;
+
+    if (_looksLikeStandaloneSentence(target)) {
+      return _hasSimilarSentenceEnding(target, candidate);
+    }
+
+    final targetPlaceholders = _placeholderCount(target);
+    final candidatePlaceholders = _placeholderCount(candidate);
+    if (targetPlaceholders > 0 || candidatePlaceholders > 0) {
+      return (targetPlaceholders - candidatePlaceholders).abs() <= 1;
+    }
+
+    return (target.length - candidate.length).abs() <= 10;
+  }
+
+  static bool _shouldSkipClozeForPattern(
+    GrammarPoint point,
+    GrammarExample example,
+    String patternFormula,
+  ) {
+    if (!_isUsablePatternChoice(patternFormula)) return true;
+    final rawPattern = point.grammarPoint.trim();
+    if (rawPattern.isEmpty) return true;
+
+    final exampleText = example.japanese.trim();
+    if (_looksLikeExchangePrompt(rawPattern) &&
+        exampleText.startsWith(rawPattern)) {
+      return true;
+    }
+
+    final blanked = exampleText.replaceFirst(rawPattern, '{blank}');
+    if (blanked == exampleText || blanked.trim() == '{blank}') {
+      return true;
+    }
+
+    return false;
+  }
+
+  static bool _isUsablePatternChoice(String value) {
+    final trimmed = value.trim();
+    if (trimmed.isEmpty) return false;
+    if (containsVietnameseGrammarText(trimmed)) return false;
+    const blocked = <String>{
+      'Grammar pattern',
+      'Target pattern',
+      'Question pattern',
+    };
+    return !blocked.contains(trimmed);
+  }
+
+  static bool _looksLikeExchangePrompt(String value) {
+    final trimmed = value.trim();
+    return _looksLikeStandaloneSentence(trimmed) &&
+        (trimmed.contains('ですか') ||
+            trimmed.endsWith('か') ||
+            trimmed.contains('どちら') ||
+            trimmed.contains('どこ') ||
+            trimmed.contains('何'));
+  }
+
+  static bool _looksLikeStandaloneSentence(String value) {
+    final trimmed = value.trim();
+    if (trimmed.isEmpty) return false;
+    if (_placeholderCount(trimmed) > 0) return false;
+    if (trimmed.runes.length <= 4 &&
+        !trimmed.contains('。') &&
+        !trimmed.contains('？') &&
+        !trimmed.contains('?')) {
+      return false;
+    }
+    return trimmed.contains('。') ||
+        trimmed.contains('？') ||
+        trimmed.contains('?') ||
+        trimmed.endsWith('です') ||
+        trimmed.endsWith('ます') ||
+        trimmed.endsWith('ですか') ||
+        trimmed.endsWith('ますか') ||
+        trimmed.endsWith('か');
+  }
+
+  static int _placeholderCount(String value) {
+    final matches = RegExp(
+      r'(^|[^A-Za-z])(N\d*|V\d*|A\d*|S\d*)(?=$|[^A-Za-z])',
+    ).allMatches(value).length;
+    return matches;
+  }
+
+  static String _patternShapeType(String value) {
+    final trimmed = value.trim();
+    if (_looksLikeStandaloneSentence(trimmed)) return 'sentence';
+    if (_placeholderCount(trimmed) > 0) return 'formula';
+    if (trimmed.length <= 5 && !trimmed.contains(' ')) return 'token';
+    return 'phrase';
+  }
+
+  static String _leadingSentenceClause(String sentence) {
+    final trimmed = sentence.trim();
+    if (trimmed.isEmpty) return '';
+    final firstPeriod = trimmed.indexOf('。');
+    if (firstPeriod > 0) {
+      return trimmed.substring(0, firstPeriod).trim();
+    }
+    return trimmed;
+  }
+
+  static bool _hasSimilarSentenceEnding(String a, String b) {
+    final left = a.trim();
+    final right = b.trim();
+    if (left.isEmpty || right.isEmpty) return false;
+    final endings = <String>[
+      'どちらですか',
+      'どこですか',
+      '何ですか',
+      'ですか',
+      'ますか',
+      'です',
+      'ます',
+      'なら',
+    ];
+    for (final ending in endings) {
+      if (left.endsWith(ending) && right.endsWith(ending)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   static List<String> _uniqueShuffled(List<String> values) {
@@ -783,11 +1284,62 @@ class GrammarQuestionGenerator {
       case AppLanguage.vi:
         return (point.meaningVi ?? point.meaning).trim();
       case AppLanguage.en:
-        return (point.meaningEn ?? point.meaning).trim();
+        return resolveEnglishGrammarMeaning(
+          meaningEn: point.meaningEn,
+          titleEn: point.titleEn,
+          connectionEn: point.connectionEn,
+          connection: point.connection,
+          grammarPoint: point.grammarPoint,
+        );
       case AppLanguage.ja:
         return point.meaning.trim().isEmpty
             ? point.grammarPoint
             : point.meaning.trim();
+    }
+  }
+
+  static String _localizedPatternLabel(
+    GrammarPoint point,
+    AppLanguage language,
+  ) {
+    switch (language) {
+      case AppLanguage.vi:
+        return point.grammarPoint.trim();
+      case AppLanguage.en:
+        return resolveEnglishGrammarLabel(
+          titleEn: point.titleEn,
+          meaningEn: point.meaningEn,
+          connectionEn: point.connectionEn,
+          connection: point.connection,
+          grammarPoint: point.grammarPoint,
+        );
+      case AppLanguage.ja:
+        return point.grammarPoint.trim();
+    }
+  }
+
+  static String _localizedPatternFormula(
+    GrammarPoint point,
+    AppLanguage language,
+  ) {
+    switch (language) {
+      case AppLanguage.vi:
+        return point.grammarPoint.trim();
+      case AppLanguage.en:
+        final rawPattern = point.grammarPoint.trim();
+        if (rawPattern.isNotEmpty &&
+            !containsVietnameseGrammarText(rawPattern)) {
+          return normalizeGrammarStructureEn(rawPattern);
+        }
+        return resolveEnglishGrammarConnection(
+          connectionEn: point.connectionEn,
+          connection: point.connection,
+          grammarPoint: point.grammarPoint,
+          titleEn: point.titleEn,
+          meaningEn: point.meaningEn,
+        );
+      case AppLanguage.ja:
+        return point.grammarPoint.trim();
     }
   }
 
@@ -799,7 +1351,11 @@ class GrammarQuestionGenerator {
       case AppLanguage.vi:
         return (point.explanationVi ?? point.explanation).trim();
       case AppLanguage.en:
-        return (point.explanationEn ?? point.explanation).trim();
+        return resolveEnglishGrammarExplanation(
+          explanationEn: point.explanationEn,
+          explanation: point.explanation,
+          label: _localizedPatternLabel(point, language),
+        );
       case AppLanguage.ja:
         return point.explanation.trim();
     }
@@ -813,7 +1369,11 @@ class GrammarQuestionGenerator {
       case AppLanguage.vi:
         return (example.translationVi ?? example.translation).trim();
       case AppLanguage.en:
-        return (example.translationEn ?? example.translation).trim();
+        return resolveEnglishGrammarExampleTranslation(
+          japanese: example.japanese,
+          translationEn: example.translationEn,
+          translation: example.translation,
+        );
       case AppLanguage.ja:
         return example.translation.trim();
     }
@@ -841,11 +1401,13 @@ class _CorruptedSentence {
     required this.wrongSentence,
     required this.correctSentence,
     required this.replacement,
-    required this.alternativePatterns,
+    required this.replacementPoint,
+    required this.alternativePoints,
   });
 
   final String wrongSentence;
   final String correctSentence;
   final String replacement;
-  final List<String> alternativePatterns;
+  final GrammarPoint replacementPoint;
+  final List<GrammarPoint> alternativePoints;
 }
