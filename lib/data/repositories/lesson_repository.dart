@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:drift/drift.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jpstudy/core/services/fsrs_service.dart';
 import 'package:jpstudy/data/daos/srs_dao.dart';
 import 'package:jpstudy/data/db/app_database.dart';
@@ -208,13 +209,6 @@ final srsStateProvider = FutureProvider.family<SrsStateData?, int>((
 ) async {
   final repo = ref.watch(lessonRepositoryProvider);
   return repo.getSrsState(termId);
-});
-
-final grammarGhostsProvider = FutureProvider<List<GrammarPointData>>((
-  ref,
-) async {
-  final repo = ref.watch(lessonRepositoryProvider);
-  return repo.fetchGrammarGhosts();
 });
 
 class GrammarPointData {
@@ -1129,6 +1123,25 @@ class LessonRepository {
   }
 
   Future<void> seedGrammarIfEmpty(int lessonId, String level) async {
+    // If GrammarSeeder has already run at the current version, its data is
+    // authoritative and up-to-date — skip the resync check entirely.
+    // This also prevents the two concurrent paths (GrammarSeeder transaction
+    // + seedGrammarIfEmpty) from racing on first launch.
+    final prefs = await SharedPreferences.getInstance();
+    final seededVersion = prefs.getInt('grammar_data_version') ?? 0;
+    // 4 = GrammarSeeder.kGrammarDataVersion — keep in sync when bumping
+    if (seededVersion >= 4) {
+      // Data is fresh from the seeder; only do a lightweight insert if the
+      // lesson has no rows at all (brand new install mid-seeder-run edge case).
+      final count =
+          await (_db.selectOnly(_db.grammarPoints)
+                ..addColumns([_db.grammarPoints.id.count()])
+                ..where(_db.grammarPoints.lessonId.equals(lessonId)))
+              .map((row) => row.read(_db.grammarPoints.id.count()) ?? 0)
+              .getSingle();
+      if (count > 0) return;
+    }
+
     // Check if grammar already exists for this lesson
     final existingPoints = await (_db.select(
       _db.grammarPoints,

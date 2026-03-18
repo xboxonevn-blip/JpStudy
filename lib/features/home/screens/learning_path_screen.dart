@@ -71,9 +71,9 @@ class LearningPathScreen extends ConsumerWidget {
               child: const MiniDashboard(compact: true),
             ).animate(delay: 140.ms).fadeIn(duration: 320.ms),
             const SizedBox(height: 10),
-            const WeeklyChallengeCard(compact: true)
-                .animate(delay: 180.ms)
-                .fadeIn(duration: 320.ms),
+            const WeeklyChallengeCard(
+              compact: true,
+            ).animate(delay: 180.ms).fadeIn(duration: 320.ms),
             const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -626,9 +626,9 @@ class _DojoHeroCard extends StatelessWidget {
   };
 
   static String _secondaryLabel(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'JLPT coach',
-    AppLanguage.vi => 'JLPT coach',
-    AppLanguage.ja => 'JLPTコーチ',
+    AppLanguage.en => 'JLPT prep',
+    AppLanguage.vi => 'Ôn thi JLPT',
+    AppLanguage.ja => 'JLPT試験対策',
   };
 }
 
@@ -812,9 +812,9 @@ class _LearningLanesPanel extends StatelessWidget {
   };
 
   static String _jlptLaneTitle(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'JLPT studio',
-    AppLanguage.vi => 'Studio JLPT',
-    AppLanguage.ja => 'JLPTスタジオ',
+    AppLanguage.en => 'JLPT prep',
+    AppLanguage.vi => 'Ôn thi JLPT',
+    AppLanguage.ja => 'JLPT試験対策',
   };
 
   static String _jlptLaneSubtitle(
@@ -822,10 +822,10 @@ class _LearningLanesPanel extends StatelessWidget {
     StudyLevel level,
   ) => switch (language) {
     AppLanguage.en =>
-      'Stay exam-shaped for ${level.shortLabel} with reading sets, diagnosis, and mock flow.',
+      'Keep ${level.shortLabel} exam shape with full mock, reading drills, diagnosis, and a repair plan.',
     AppLanguage.vi =>
-      'Giữ form thi ${level.shortLabel} bằng đọc hiểu, chẩn đoán và luồng mock test.',
-    AppLanguage.ja => '${level.shortLabel} 対策として、読解セット・診断・模試フローをまとめて練習できます。',
+      'Giữ form thi ${level.shortLabel} bằng full mock, đọc hiểu, chẩn đoán và kế hoạch vá lỗ hổng.',
+    AppLanguage.ja => '${level.shortLabel} 対策として、フル模試・読解・診断・補強プランをまとめて回せます。',
   };
 
   static String _immersionLaneTitle(AppLanguage language) => switch (language) {
@@ -909,7 +909,10 @@ class _LaneCard extends StatelessWidget {
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [color.withValues(alpha: 0.16), Colors.white],
+              colors: [
+                color.withValues(alpha: 0.16),
+                Theme.of(context).colorScheme.surface,
+              ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),

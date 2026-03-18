@@ -16,6 +16,8 @@ final grammarDueCountProvider = FutureProvider<int>((ref) async {
   return points.length;
 });
 
+// Count is derived from grammarRepository.fetchGhostPoints() (ghostReviewsDue > 0),
+// same source as grammarGhostsProvider and GhostReviewScreen — badge and screen agree.
 final grammarGhostCountProvider = FutureProvider<int>((ref) async {
   final repo = ref.watch(grammarRepositoryProvider);
   final points = await repo.fetchGhostPoints();
