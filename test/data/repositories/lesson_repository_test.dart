@@ -82,4 +82,62 @@ void main() {
     final terms = await db.select(db.userLessonTerm).get();
     expect(terms.every((t) => t.isLearned), true);
   });
+
+  test('fetchVocabTermsByIds returns correct level from parent lesson', () async {
+    // Arrange: N4 lesson with one term
+    const lessonId = 10;
+    await db.into(db.userLesson).insert(
+          UserLessonCompanion.insert(
+            id: const Value(lessonId),
+            level: 'N4',
+            title: 'N4 Lesson',
+            updatedAt: Value(DateTime.now()),
+          ),
+          mode: InsertMode.insertOrReplace,
+        );
+
+    await db.into(db.userLessonTerm).insert(
+          UserLessonTermCompanion.insert(
+            id: const Value(201),
+            lessonId: lessonId,
+            term: const Value('走る'),
+            reading: const Value('はしる'),
+            definition: const Value('chạy'),
+            orderIndex: const Value(1),
+          ),
+        );
+
+    // Also add an N3 lesson with a term
+    const lessonIdN3 = 11;
+    await db.into(db.userLesson).insert(
+          UserLessonCompanion.insert(
+            id: const Value(lessonIdN3),
+            level: 'N3',
+            title: 'N3 Lesson',
+            updatedAt: Value(DateTime.now()),
+          ),
+          mode: InsertMode.insertOrReplace,
+        );
+
+    await db.into(db.userLessonTerm).insert(
+          UserLessonTermCompanion.insert(
+            id: const Value(202),
+            lessonId: lessonIdN3,
+            term: const Value('確認'),
+            reading: const Value('かくにん'),
+            definition: const Value('xác nhận'),
+            orderIndex: const Value(1),
+          ),
+        );
+
+    // Act
+    final results = await repository.fetchVocabTermsByIds([201, 202]);
+
+    // Assert
+    expect(results.length, 2);
+    final n4Item = results.firstWhere((v) => v.id == 201);
+    final n3Item = results.firstWhere((v) => v.id == 202);
+    expect(n4Item.level, 'N4', reason: 'N4 lesson term must not be misclassified as N5');
+    expect(n3Item.level, 'N3', reason: 'N3 lesson term must not be misclassified as N5');
+  });
 }

@@ -41,8 +41,8 @@ class WriteModeIntegration extends ConsumerWidget {
           final dueTerms =
               dueTermsAsync.valueOrNull ?? const <UserLessonTermData>[];
           final dueKanji = dueKanjiAsync.valueOrNull ?? const <KanjiItem>[];
-          final vocabItems = _convertToVocabItems(terms);
-          final dueVocabItems = _convertToVocabItems(dueTerms);
+          final vocabItems = _convertToVocabItems(terms, level.shortLabel);
+          final dueVocabItems = _convertToVocabItems(dueTerms, level.shortLabel);
           return WriteModeScreen(
             lessonId: lessonId,
             lessonTitle: lessonTitle,
@@ -76,7 +76,7 @@ class WriteModeIntegration extends ConsumerWidget {
     );
   }
 
-  List<VocabItem> _convertToVocabItems(List<UserLessonTermData> terms) {
+  List<VocabItem> _convertToVocabItems(List<UserLessonTermData> terms, String level) {
     return terms
         .map(
           (term) => VocabItem(
@@ -85,7 +85,7 @@ class WriteModeIntegration extends ConsumerWidget {
             reading: term.reading,
             meaning: term.definition,
             meaningEn: term.definitionEn,
-            level: 'N5', // Default level
+            level: level,
           ),
         )
         .toList();

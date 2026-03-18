@@ -53,11 +53,9 @@ void main() {
         databaseProvider.overrideWithValue(db),
         dashboardProvider.overrideWith((_) => Stream.value(dashboard())),
         continueActionProvider.overrideWith(
-          (_) => Stream.value(
-            const ContinueAction(
-              type: ContinueActionType.practiceMixed,
-              label: 'practice',
-            ),
+          (_) async => const ContinueAction(
+            type: ContinueActionType.practiceMixed,
+            label: 'practice',
           ),
         ),
         grammarGhostCountProvider.overrideWith((_) async => 0),
@@ -122,10 +120,8 @@ void main() {
       routes: [
         GoRoute(
           path: '/',
-          builder: (context, state) => TestResultsScreen(
-            session: session,
-            lessonTitle: 'Lesson 1',
-          ),
+          builder: (context, state) =>
+              TestResultsScreen(session: session, lessonTitle: 'Lesson 1'),
         ),
         GoRoute(
           path: '/learn/recovery-pack',

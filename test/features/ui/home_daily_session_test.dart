@@ -99,12 +99,10 @@ void main() {
             ),
           ),
           continueActionProvider.overrideWith(
-            (_) => Stream.value(
-              ContinueAction(
-                type: ContinueActionType.grammarReview,
-                label: 'grammar',
-                count: 3,
-              ),
+            (_) async => ContinueAction(
+              type: ContinueActionType.grammarReview,
+              label: 'grammar',
+              count: 3,
             ),
           ),
           dailySessionProgressProvider.overrideWith(
@@ -142,11 +140,9 @@ void main() {
             ),
           ),
           continueActionProvider.overrideWith(
-            (_) => Stream.value(
-              const ContinueAction(
-                type: ContinueActionType.practiceMixed,
-                label: 'practice',
-              ),
+            (_) async => const ContinueAction(
+              type: ContinueActionType.practiceMixed,
+              label: 'practice',
             ),
           ),
           dailySessionProgressProvider.overrideWith(
@@ -186,11 +182,9 @@ void main() {
             ),
           ),
           continueActionProvider.overrideWith(
-            (_) => Stream.value(
-              const ContinueAction(
-                type: ContinueActionType.practiceMixed,
-                label: 'practice',
-              ),
+            (_) async => const ContinueAction(
+              type: ContinueActionType.practiceMixed,
+              label: 'practice',
             ),
           ),
           dailySessionProgressProvider.overrideWith(

@@ -2,6 +2,7 @@ import 'package:drift/native.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/navigation/app_router.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
@@ -55,12 +56,10 @@ void main() {
             ),
           ),
           continueActionProvider.overrideWith(
-            (ref) => Stream.value(
-              const ContinueAction(
-                type: ContinueActionType.vocabReview,
-                label: 'Review vocab',
-                count: 3,
-              ),
+            (ref) async => const ContinueAction(
+              type: ContinueActionType.vocabReview,
+              label: 'Review vocab',
+              count: 3,
             ),
           ),
           dailySessionProgressProvider.overrideWith(
@@ -79,9 +78,9 @@ void main() {
 
     expect(find.text('Review vocab'), findsOneWidget);
     expect(find.text('Start session'), findsOneWidget);
-    expect(find.text('JLPT coach'), findsOneWidget);
+    expect(find.text('JLPT prep'), findsAtLeastNWidgets(1));
     expect(find.widgetWithText(FilledButton, 'Start session'), findsOneWidget);
-    expect(find.widgetWithText(OutlinedButton, 'JLPT coach'), findsOneWidget);
+    expect(find.widgetWithText(OutlinedButton, 'JLPT prep'), findsOneWidget);
     expect(find.text('Clear the review queue first'), findsOneWidget);
   });
 
@@ -109,11 +108,9 @@ void main() {
             ),
           ),
           continueActionProvider.overrideWith(
-            (ref) => Stream.value(
-              const ContinueAction(
-                type: ContinueActionType.practiceMixed,
-                label: 'practice',
-              ),
+            (ref) async => const ContinueAction(
+              type: ContinueActionType.practiceMixed,
+              label: 'practice',
             ),
           ),
           dailySessionProgressProvider.overrideWith(
@@ -167,7 +164,7 @@ void main() {
     expect(find.text('Due review'), findsOneWidget);
     expect(find.text('Fix weak points'), findsOneWidget);
     expect(find.text('Build speed'), findsOneWidget);
-    expect(find.text('Mock exam'), findsOneWidget);
+    expect(find.text('JLPT prep'), findsAtLeastNWidgets(1));
     expect(find.byType(FilledButton), findsOneWidget);
   });
 
@@ -515,6 +512,61 @@ void main() {
     expect(find.text('Library'), findsAtLeastNWidgets(1));
     expect(find.text('Sections'), findsOneWidget);
     expect(find.text('Lessons'), findsOneWidget);
+  });
+
+  testWidgets('LibraryScreen opens the first lesson for the selected level', (
+    tester,
+  ) async {
+    Widget marker(String route) => Material(
+      child: Center(child: Text(route, textDirection: TextDirection.ltr)),
+    );
+
+    final router = GoRouter(
+      routes: [
+        GoRoute(path: '/', builder: (context, state) => const LibraryScreen()),
+        GoRoute(
+          path: '/search',
+          builder: (context, state) => marker('/search'),
+        ),
+        GoRoute(
+          path: '/lesson/:id',
+          builder: (context, state) =>
+              marker('/lesson/${state.pathParameters['id']}'),
+        ),
+      ],
+    );
+    addTearDown(router.dispose);
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          studyLevelProvider.overrideWith((ref) => StudyLevel.n4),
+          lessonMetaProvider('N4').overrideWith(
+            (ref) async => const [
+              LessonMeta(
+                id: 26,
+                level: 'N4',
+                title: 'Lesson 26',
+                isCustomTitle: false,
+                tags: '',
+                termCount: 10,
+                completedCount: 0,
+                dueCount: 0,
+                updatedAt: null,
+              ),
+            ],
+          ),
+        ],
+        child: MaterialApp.router(routerConfig: router),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Open lessons'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('/lesson/26'), findsOneWidget);
   });
 
   testWidgets('GrammarDetailScreen shows hero and no FAB', (tester) async {

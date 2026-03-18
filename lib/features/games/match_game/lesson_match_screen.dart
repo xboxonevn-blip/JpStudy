@@ -221,7 +221,7 @@ class _LessonMatchScreenState extends ConsumerState<LessonMatchScreen> {
           }
 
           // Convert to VocabItem
-          final items = _convertToVocabItems(terms, language);
+          final items = _convertToVocabItems(terms, language, level.shortLabel);
 
           if (_isGameOver) {
             return _buildGameOverScreen(items);
@@ -395,6 +395,7 @@ class _LessonMatchScreenState extends ConsumerState<LessonMatchScreen> {
   List<VocabItem> _convertToVocabItems(
     List<UserLessonTermData> terms,
     AppLanguage language,
+    String level,
   ) {
     return terms
         .map(
@@ -408,7 +409,7 @@ class _LessonMatchScreenState extends ConsumerState<LessonMatchScreen> {
               meaningEn: term.definitionEn,
             ),
             meaningEn: term.definitionEn,
-            level: 'N5',
+            level: level,
           ),
         )
         .toList();

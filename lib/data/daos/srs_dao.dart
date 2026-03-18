@@ -12,8 +12,8 @@ class SrsStageBreakdown {
   });
 
   final int learning; // stability < 1.0
-  final int young;    // 1.0 ≤ stability < 21.0
-  final int mature;   // stability ≥ 21.0
+  final int young; // 1.0 ≤ stability < 21.0
+  final int mature; // stability ≥ 21.0
 
   int get total => learning + young + mature;
 }
@@ -76,11 +76,12 @@ class SrsDao extends DatabaseAccessor<AppDatabase> with _$SrsDaoMixin {
   /// Returns the nearest future review date (minimum nextReviewAt > now).
   /// Returns null if no SRS state exists yet.
   Future<DateTime?> getNextScheduledReview() async {
-    final row = await (select(srsState)
-          ..where((t) => t.nextReviewAt.isBiggerThanValue(DateTime.now()))
-          ..orderBy([(t) => OrderingTerm.asc(t.nextReviewAt)])
-          ..limit(1))
-        .getSingleOrNull();
+    final row =
+        await (select(srsState)
+              ..where((t) => t.nextReviewAt.isBiggerThanValue(DateTime.now()))
+              ..orderBy([(t) => OrderingTerm.asc(t.nextReviewAt)])
+              ..limit(1))
+            .getSingleOrNull();
     return row?.nextReviewAt;
   }
 
@@ -97,7 +98,9 @@ class SrsDao extends DatabaseAccessor<AppDatabase> with _$SrsDaoMixin {
   /// Returns counts of SRS items in each FSRS stability bracket.
   /// Only items that have been reviewed at least once are counted.
   Future<SrsStageBreakdown> getStageBreakdown() async {
-    final rows = await select(srsState).get();
+    final rows = await (select(
+      srsState,
+    )..where((t) => t.lastReviewedAt.isNotNull())).get();
     int learning = 0, young = 0, mature = 0;
     for (final r in rows) {
       final s = r.stability;

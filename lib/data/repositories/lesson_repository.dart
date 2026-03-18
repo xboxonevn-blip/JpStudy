@@ -559,21 +559,25 @@ class LessonRepository {
   /// Fetch VocabItems by IDs: user lesson terms first, fallback to content DB.
   Future<List<VocabItem>> fetchVocabTermsByIds(List<int> ids) async {
     if (ids.isEmpty) return const [];
-    final terms = await (_db.select(
-      _db.userLessonTerm,
-    )..where((t) => t.id.isIn(ids))).get();
-    final found = terms
-        .map(
-          (t) => VocabItem(
-            id: t.id,
-            term: t.term,
-            reading: t.reading,
-            meaning: t.definition,
-            meaningEn: t.definitionEn,
-            level: 'N5',
-          ),
-        )
-        .toList();
+    final query = _db.select(_db.userLessonTerm).join([
+      leftOuterJoin(
+        _db.userLesson,
+        _db.userLesson.id.equalsExp(_db.userLessonTerm.lessonId),
+      ),
+    ])..where(_db.userLessonTerm.id.isIn(ids));
+    final rows = await query.get();
+    final found = rows.map((row) {
+      final t = row.readTable(_db.userLessonTerm);
+      final lesson = row.readTableOrNull(_db.userLesson);
+      return VocabItem(
+        id: t.id,
+        term: t.term,
+        reading: t.reading,
+        meaning: t.definition,
+        meaningEn: t.definitionEn,
+        level: lesson?.level ?? 'N5',
+      );
+    }).toList();
     final foundIds = found.map((v) => v.id).toSet();
     final missingIds = ids.where((id) => !foundIds.contains(id)).toList();
     if (missingIds.isNotEmpty) {
@@ -1154,13 +1158,6 @@ class LessonRepository {
       return;
     }
 
-    // Delete old data if resyncing
-    if (existingPoints.isNotEmpty) {
-      await (_db.delete(
-        _db.grammarPoints,
-      )..where((tbl) => tbl.lessonId.equals(lessonId))).go();
-    }
-
     // Fetch from Content DB
     final contentPoints = await (_contentDb.select(
       _contentDb.grammarPoint,
@@ -1170,48 +1167,90 @@ class LessonRepository {
       return;
     }
 
+    // Update in-place instead of delete+insert to preserve GrammarSrsState
+    // rows (which cascade-delete when GrammarPoints rows are deleted). This
+    // prevents users from losing their SRS review history on lesson re-opens.
+    final existingByTitle = {for (final p in existingPoints) p.grammarPoint: p};
+
     for (final cp in contentPoints) {
       final titleEn = normalizeGrammarTitleEn(cp.titleEn);
       final structureEn = normalizeGrammarStructureEn(cp.structureEn);
 
-      // Insert Point with proper English data from ContentDB
-      final pointId = await _db
-          .into(_db.grammarPoints)
-          .insert(
-            GrammarPointsCompanion.insert(
-              lessonId: Value(lessonId),
-              grammarPoint: cp.title,
-              titleEn: Value(titleEn.isEmpty ? null : titleEn),
-              meaning: cp.title,
-              meaningVi: Value(cp.title),
-              meaningEn: Value(titleEn.isEmpty ? cp.title : titleEn),
-              connection: cp.structure,
-              connectionEn: Value(structureEn.isEmpty ? null : structureEn),
-              explanation: cp.explanation,
-              explanationVi: Value(cp.explanation),
-              explanationEn: Value(cp.explanationEn),
-              jlptLevel: cp.level,
-              isLearned: const Value(false),
-            ),
-          );
+      final existing = existingByTitle[cp.title];
+      if (existing != null) {
+        // UPDATE English fields in-place — row id and SRS state unchanged
+        await (_db.update(
+          _db.grammarPoints,
+        )..where((tbl) => tbl.id.equals(existing.id))).write(
+          GrammarPointsCompanion(
+            titleEn: Value(titleEn.isEmpty ? null : titleEn),
+            meaningEn: Value(titleEn.isEmpty ? cp.title : titleEn),
+            connectionEn: Value(structureEn.isEmpty ? null : structureEn),
+            explanationEn: Value(cp.explanationEn),
+          ),
+        );
 
-      // Fetch Examples with English translations
-      final examples = await (_contentDb.select(
-        _contentDb.grammarExample,
-      )..where((tbl) => tbl.grammarPointId.equals(cp.id))).get();
+        // Refresh examples (safe: examples don't carry SRS state)
+        await (_db.delete(
+          _db.grammarExamples,
+        )..where((tbl) => tbl.grammarId.equals(existing.id))).go();
 
-      for (final ex in examples) {
-        await _db
-            .into(_db.grammarExamples)
+        final examples = await (_contentDb.select(
+          _contentDb.grammarExample,
+        )..where((tbl) => tbl.grammarPointId.equals(cp.id))).get();
+
+        for (final ex in examples) {
+          await _db
+              .into(_db.grammarExamples)
+              .insert(
+                GrammarExamplesCompanion.insert(
+                  grammarId: existing.id,
+                  japanese: ex.sentence,
+                  translation: ex.translation,
+                  translationVi: Value(ex.translation),
+                  translationEn: Value(ex.translationEn),
+                ),
+              );
+        }
+      } else {
+        // INSERT new grammar point not previously in the app DB
+        final pointId = await _db
+            .into(_db.grammarPoints)
             .insert(
-              GrammarExamplesCompanion.insert(
-                grammarId: pointId,
-                japanese: ex.sentence,
-                translation: ex.translation,
-                translationVi: Value(ex.translation),
-                translationEn: Value(ex.translationEn),
+              GrammarPointsCompanion.insert(
+                lessonId: Value(lessonId),
+                grammarPoint: cp.title,
+                titleEn: Value(titleEn.isEmpty ? null : titleEn),
+                meaning: cp.title,
+                meaningVi: Value(cp.title),
+                meaningEn: Value(titleEn.isEmpty ? cp.title : titleEn),
+                connection: cp.structure,
+                connectionEn: Value(structureEn.isEmpty ? null : structureEn),
+                explanation: cp.explanation,
+                explanationVi: Value(cp.explanation),
+                explanationEn: Value(cp.explanationEn),
+                jlptLevel: cp.level,
+                isLearned: const Value(false),
               ),
             );
+
+        final examples = await (_contentDb.select(
+          _contentDb.grammarExample,
+        )..where((tbl) => tbl.grammarPointId.equals(cp.id))).get();
+
+        for (final ex in examples) {
+          await _db
+              .into(_db.grammarExamples)
+              .insert(
+                GrammarExamplesCompanion.insert(
+                  grammarId: pointId,
+                  japanese: ex.sentence,
+                  translation: ex.translation,
+                  translationVi: Value(ex.translation),
+                  translationEn: Value(ex.translationEn),
+                ),
+              );
+        }
       }
     }
   }
