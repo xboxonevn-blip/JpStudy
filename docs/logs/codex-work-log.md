@@ -1098,6 +1098,51 @@ This file records recent Codex work so future sessions can continue from the cur
 - Ran `flutter test test/features/jlpt/jlpt_reading_screen_test.dart`
   - Result: all tests passed
 
+### Full App Audit & Bug Fix Pass
+
+- Ran a comprehensive code review of the entire app covering logic correctness, UX/flow consistency, data integrity, and code quality.
+- Identified 4 Critical, 8 Important, and 6 Minor issues.
+- Fixed all Critical and high-priority Important issues in this session.
+
+**Critical fixes:**
+
+- **C1 — `fetchVocabTermsByIds` hardcoded `level: 'N5'`**
+  - `lib/data/repositories/lesson_repository.dart`: changed from hardcoded string to JOIN `UserLessonTerm → UserLesson` to get the real `jlptLevel`. Fallback `'N5'` only if no lesson row found.
+  - Same fix in `lib/features/games/match_game/lesson_match_screen.dart` and `lib/features/learn/integration/write_mode_integration.dart`.
+
+- **C2 — `jlptPrepOverviewProvider` hardcoded `AppLanguage.en`**
+  - `lib/features/jlpt/screens/jlpt_coach_screen.dart`: passed `ref.watch(appLanguageProvider)` instead. Ensures Vietnamese users see accurate question counts in JLPT Prep overview.
+
+- **C3 — `seedGrammarIfEmpty` deleted grammar points → cascade-deleted SRS state**
+  - `lib/data/repositories/lesson_repository.dart`: replaced the destructive delete+insert pattern with UPDATE in-place for existing grammar points (keyed by `grammarPoint` title). Grammar examples are still refreshed (safe — they have no SRS state). New grammar points are inserted normally. This preserves `GrammarSrsState` rows which FK-cascade-delete on `GrammarPoints` deletion.
+
+**Important fixes:**
+
+- **I5 — `continueActionProvider` was a non-reactive `StreamProvider`**
+  - `lib/features/home/providers/continue_provider.dart`: converted from `StreamProvider<ContinueAction>` (`async*`/`yield`/`return`) to `FutureProvider<ContinueAction>` (`async`/`return`). Riverpod now re-runs the provider whenever `dashboardProvider` changes. The Continue button on Home now updates mid-session.
+  - Also moved `ref.watch(grammarRepositoryProvider)` to unconditional top position.
+  - Updated 3 test files with `Stream.value` overrides to use `async =>` instead.
+
+- **I11 — `SrsDao.getStageBreakdown` counted unreviewed items**
+  - `lib/data/daos/srs_dao.dart`: added `.where((t) => t.lastReviewedAt.isNotNull())` filter. Stage breakdown (learning/young/mature) now correctly excludes vocab items that have been seeded but never reviewed.
+
+**Minor fixes:**
+
+- Removed dead `KanjiReviewChip` class from `lib/features/write/screens/home_handwriting_practice_screen.dart` (was unused after SRS-first session rework).
+
+**Items confirmed as already correct (audit false positives):**
+
+- I8 (Immersion level filter): Already implemented via `_articlesForLevel` filtering by `article.officialLevel == level.shortLabel`.
+
+### Verification Run
+
+- Ran `dart format` on all changed files
+  - Result: formatting completed successfully
+- Ran `flutter analyze` on changed files
+  - Result: no issues found
+- Ran `flutter test`
+  - Result: 162 tests passed
+
 ### Handwriting SRS-First Session
 
 - Reworked `HomeHandwritingPracticeScreen` after feedback that loading all 284 kanji at once gave no clear sense of completion.
