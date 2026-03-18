@@ -1098,6 +1098,27 @@ This file records recent Codex work so future sessions can continue from the cur
 - Ran `flutter test test/features/jlpt/jlpt_reading_screen_test.dart`
   - Result: all tests passed
 
+### Audit Follow-up Fix Pass
+
+- Fixed remaining issues from the full app audit.
+
+**Fixes:**
+
+- **I9 — Ghost review count inconsistency (dead duplicate provider)**
+  - `lib/data/repositories/lesson_repository.dart`: Removed dead `grammarGhostsProvider` that was never imported by any screen. `ghost_review_screen` and `ghost_practice_screen` both already import from `grammar_providers.dart`. `grammarGhostCountProvider` now uses `fetchGhostPoints()` as single source of truth so badge count and review screen list always match.
+
+- **C4+I12 — `seedGrammarIfEmpty` race condition + perpetual resync**
+  - `lib/data/repositories/lesson_repository.dart`: Added SharedPreferences version check at the top of `seedGrammarIfEmpty`. When `GrammarSeeder` has already run at current version (`grammar_data_version >= 4`), only a lightweight row-count check is done instead of the full normalizer resync loop. This eliminates the first-launch race between `GrammarSeeder` transaction and `seedGrammarIfEmpty`, and stops the perpetual resync triggered by non-idempotent normalizer regex patterns.
+
+- **Minor — `Colors.white` hardcode in dark mode**
+  - `lib/features/home/screens/learning_path_screen.dart`: `_LaneCard` gradient now uses `Theme.of(context).colorScheme.surface` instead of `Colors.white` so the card looks correct in dark mode.
+
+### Verification Run
+
+- Ran `dart format` on changed files: formatting completed successfully
+- Ran `flutter analyze`: no issues found
+- Ran `flutter test`: 162 tests passed
+
 ### Full App Audit & Bug Fix Pass
 
 - Ran a comprehensive code review of the entire app covering logic correctness, UX/flow consistency, data integrity, and code quality.
