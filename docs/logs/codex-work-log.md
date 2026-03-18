@@ -19,6 +19,24 @@ This file records recent Codex work so future sessions can continue from the cur
 - Ran `flutter test test/features/jlpt/jlpt_reading_screen_test.dart`
   - Result: all tests passed
 
+### JLPT Grammar Language Consistency Fix
+
+- Fixed a language-mixing bug in the rebuilt JLPT mock flow after English mode still showed Vietnamese grammar answer options from raw lesson fields.
+- Updated `lib/features/jlpt/data/jlpt_mock_bank.dart`
+  - Added dedicated grammar display helpers so English mode now prefers `titleEn` and `structureEn` before falling back.
+  - Wired grammar option labels, grammar prompts, and grammar context blocks to those localized helpers instead of raw Vietnamese source fields.
+- Updated `test/features/jlpt/jlpt_mock_bank_test.dart`
+  - Added regression coverage proving English grammar labels/structures resolve to English while Vietnamese still keeps the original Vietnamese display text.
+
+### Verification Run
+
+- Ran `flutter analyze lib/features/jlpt/data/jlpt_mock_bank.dart test/features/jlpt/jlpt_mock_bank_test.dart lib/features/jlpt/screens/jlpt_mock_pro_screen.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/jlpt/jlpt_mock_bank_test.dart`
+  - Result: all tests passed
+- Ran `flutter test test/features/jlpt/jlpt_mock_pro_screen_test.dart`
+  - Result: all tests passed
+
 ### Notes
 
 - Added this log file to preserve progress and verification history.
@@ -240,6 +258,140 @@ This file records recent Codex work so future sessions can continue from the cur
   - Switched Latin-based languages to the bundled `Manrope` font family.
   - Added an explicit Japanese fallback stack for mixed-script rendering.
   - Moved Japanese UI typography to a stable platform fallback stack instead of runtime `google_fonts` loading in the app theme.
+
+### Grammar `structureEn` Authenticity Pass
+
+- Cleaned up grammar asset data so English-mode `structureEn` now keeps real Japanese grammar notation instead of mixed romaji placeholders.
+- Updated grammar JSON assets across `assets/data/content/grammar/n5`, `assets/data/content/grammar/n4`, and a small set of `n3` files.
+  - Replaced romaji particles and helpers such as `wa`, `ga`, `ni`, `de`, `to`, `no`, `desu`, `koto`, `toki`, `you ni`, `tsumori desu`, and similar patterns with proper Japanese forms like `は`, `が`, `に`, `で`, `と`, `の`, `です`, `こと`, `とき`, `ように`, `つもりです`.
+  - Corrected mixed formulas such as `V-て mo ii desu ka`, `V-て wa ikemasen`, `V-る koto ga dekimasu`, `V-た koto ga arimasu`, `N1 と N2 to dochira ga A desu ka`, and `\"~\" wa [Language] de nan desu ka`.
+  - Fixed the remaining causative permission formula to `V-使役形 + ていただけませんか`.
+- Preserved English-side study labels like `Plain Form`, `Potential`, and `V-stem` where they are acting as teaching labels, while making the actual Japanese grammar pieces display in Japanese script.
+
+### Verification Run
+
+- Ran a UTF-8 grammar asset scan for suspicious romaji in `structureEn`
+  - Result: only intentional teaching labels such as `V-stem` remained; no romaji particle/conjugation placeholders were left in `structureEn`.
+
+### Grammar English Data Refresh Fix
+
+- Tracked down a follow-up bug after the UI still showed stale romaji strings like `kore / sore / are wa nan desu ka` even though the JSON assets had already been corrected.
+- Root cause found
+  - `JLPT Mock Pro` was reading grammar from `ContentDatabase`, which keeps a seeded local copy and was not being refreshed after grammar asset edits.
+  - `AppDatabase` grammar seeding also lagged behind because the old grammar seeder version check skipped refreshes and did not fully populate normalized English fields.
+- Updated `lib/data/utils/grammar_english_notation.dart`
+  - Added a shared normalizer for stale English grammar labels and formula strings so old romaji-rich values are converted to Japanese notation such as `何 / なん / なに`, `そうです`, `V-ています`, and `N (Tool) で V`.
+- Updated `lib/data/db/content_database.dart`
+  - Bumped the schema version to force a grammar reseed for existing installs.
+  - Normalized `titleEn` and `structureEn` while seeding grammar content into the content database.
+- Updated `lib/data/seeds/grammar_seeder.dart`
+  - Bumped the grammar seed version so the app database refreshes stale grammar data.
+  - Expanded the grammar seed through `N3`.
+  - Switched the seeder to update existing grammar rows in place and refresh examples instead of silently leaving stale English fields behind.
+- Updated `lib/features/jlpt/data/jlpt_mock_bank.dart`
+  - Applied the grammar normalizer at read time so even stale cached DB rows render correctly in the JLPT mock UI before or during reseed rollout.
+- Updated grammar asset files under `assets/data/content/grammar/**`
+  - Cleaned additional `titleEn` values that still contained romaji forms such as `nan/nani`, `Sou desu`, `Particle de`, `V-te imasu`, `tsumori`, `yotei`, `youni`, `tokoro`, and similar labels.
+  - Confirmed `Lesson 02` now stores `What? (何 / なん / なに)` and `これ / それ / あれ は 何ですか`.
+
+### Verification Run
+
+- Ran `flutter analyze lib/data/utils/grammar_english_notation.dart lib/data/seeds/grammar_seeder.dart lib/data/db/content_database.dart lib/features/jlpt/data/jlpt_mock_bank.dart test/features/jlpt/jlpt_mock_bank_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/jlpt/jlpt_mock_bank_test.dart`
+  - Result: all tests passed
+- Ran `flutter test test/features/jlpt/jlpt_mock_pro_screen_test.dart`
+  - Result: all tests passed
+
+### JLPT Mock Randomization Pass
+
+- Fixed the `JLPT Mock Pro` issue where exiting and reopening the screen kept producing the same question set.
+- Updated `lib/features/jlpt/data/jlpt_mock_bank.dart`
+  - Replaced deterministic spread/rotation logic with randomized selection for vocabulary, grammar, kanji, and reading.
+  - Added run-time randomization for:
+    - which source items are sampled into each section
+    - which distractors are chosen
+    - option order inside each question
+    - question order inside each section
+    - reading passage selection
+  - Kept the overall section structure and total question counts stable so the mock still feels curated rather than chaotic.
+- Updated `lib/features/jlpt/screens/jlpt_mock_pro_screen.dart`
+  - Changed the restart flow so pressing restart creates a fresh mock bank instead of reusing the old `_sections` already stored in widget state.
+  - Added a lightweight loading state while preparing a new mock and a fallback snackbar if refresh fails.
+
+### Verification Run
+
+- Ran `flutter analyze lib/features/jlpt/data/jlpt_mock_bank.dart lib/features/jlpt/screens/jlpt_mock_pro_screen.dart test/features/jlpt/jlpt_mock_bank_test.dart test/features/jlpt/jlpt_mock_pro_screen_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/jlpt/jlpt_mock_bank_test.dart`
+  - Result: all tests passed
+- Ran `flutter test test/features/jlpt/jlpt_mock_pro_screen_test.dart`
+  - Result: all tests passed
+
+### Grammar English Notation Cleanup Pass 2
+
+- Tracked down the remaining romaji that still leaked into English grammar labels and structures after the earlier normalization pass.
+- Updated grammar JSON assets under `assets/data/content/grammar/**`
+  - Fixed the last confirmed stale values such as `Time + mae に`, `Adverbs of Degree (yoku, daitai, etc.)`, `And, and (shi)`, `After ... (ato de)`, `yaru`, `kudasaru / kudasaimashita`, and `itadaku / itadakimashita`.
+- Updated `lib/data/utils/grammar_english_notation.dart`
+  - Added normalization coverage for the remaining stale title/structure patterns, including `mae`, `ato de`, and the honorific give/receive labels.
+- Updated `lib/data/db/content_database.dart`
+  - Bumped the content DB schema again so existing installs reseed grammar content with the corrected English notation.
+- Updated `lib/data/seeds/grammar_seeder.dart`
+  - Bumped the grammar data seed version again so existing app DB rows are refreshed too.
+- Updated `lib/data/repositories/lesson_repository.dart`
+  - Added stale-notation detection to lesson grammar sync so old English grammar rows resync instead of being treated as valid forever.
+  - Normalized copied English grammar meaning/structure during lesson seeding.
+- Updated grammar-facing screens/services
+  - `lib/features/grammar/screens/ghost_review_screen.dart`
+  - `lib/features/grammar/screens/grammar_detail_screen.dart`
+  - `lib/features/grammar/grammar_screen.dart`
+  - `lib/features/lesson/widgets/grammar_list_widget.dart`
+  - `lib/features/grammar/services/grammar_question_generator.dart`
+  - `lib/features/mistakes/screens/mistake_screen.dart`
+  - These now normalize English grammar text at render/use time so stale cached rows no longer leak romaji before reseed completes.
+- Updated `test/features/jlpt/jlpt_mock_bank_test.dart`
+  - Added regression coverage for the remaining `mae` structure case and the honorific `kudasaru` label case.
+
+### Verification Run
+
+- Ran `dart format` on all modified Dart files
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/data/utils/grammar_english_notation.dart lib/data/seeds/grammar_seeder.dart lib/data/db/content_database.dart lib/data/repositories/lesson_repository.dart lib/features/grammar/screens/ghost_review_screen.dart lib/features/grammar/screens/grammar_detail_screen.dart lib/features/lesson/widgets/grammar_list_widget.dart lib/features/grammar/grammar_screen.dart lib/features/grammar/services/grammar_question_generator.dart lib/features/mistakes/screens/mistake_screen.dart test/features/jlpt/jlpt_mock_bank_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/jlpt/jlpt_mock_bank_test.dart`
+  - Result: all tests passed
+- Ran `flutter test test/features/jlpt/jlpt_mock_pro_screen_test.dart`
+  - Result: all tests passed
+
+### Grammar English Notation Cleanup Pass 3
+
+- Fixed the remaining romaji case visible in `JLPT Mock Pro` for `N5 • Lesson 16`.
+- Updated `assets/data/content/grammar/n5/grammar_n5_16.json`
+  - Corrected `titleEn` from `Connecting verbs (V-te, V-te)` to `Connecting verbs (V-て, V-て)`.
+- Updated `lib/data/utils/grammar_english_notation.dart`
+  - Added token-level normalization for stale title patterns such as `V-te`, `V-ta`, `V-ru`, `V-nai`, `A-na`, and `A-i` so old DB rows still render with Japanese notation.
+- Updated `lib/data/seeds/grammar_seeder.dart`
+  - Bumped the grammar data seed version again so existing app DB installs refresh the corrected grammar title.
+- Updated `lib/data/db/content_database.dart`
+  - Bumped the content DB schema again so the content grammar cache reseeds the corrected lesson data too.
+- Updated `lib/features/grammar/services/grammar_question_generator.dart`
+  - Stopped English grammar prompts from blindly using `grammarPoint` labels when a localized `titleEn` exists.
+  - Added a display helper so English prompts and contrast options now use normalized English grammar labels instead of stale mixed-script titles.
+- Updated tests
+  - `test/features/jlpt/jlpt_mock_bank_test.dart`
+    - Added a regression for the stale `Connecting verbs (V-te, V-te)` case.
+  - `test/features/grammar/grammar_question_generator_test.dart`
+    - Added coverage proving English grammar question prompts use normalized English pattern labels.
+
+### Verification Run
+
+- Ran `flutter analyze lib/data/utils/grammar_english_notation.dart lib/data/seeds/grammar_seeder.dart lib/data/db/content_database.dart lib/features/grammar/services/grammar_question_generator.dart test/features/jlpt/jlpt_mock_bank_test.dart test/features/grammar/grammar_question_generator_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/jlpt/jlpt_mock_bank_test.dart`
+  - Result: all tests passed
+- Ran `flutter test test/features/grammar/grammar_question_generator_test.dart`
+  - Result: all tests passed
 - Updated `lib/core/app_language.dart`
   - Added canonical app locales, including `Locale('vi', 'VN')`.
   - Added a typography hint so the app can branch cleanly by language.
@@ -416,3 +568,576 @@ This file records recent Codex work so future sessions can continue from the cur
   - Result: all tests passed
 - Ran `flutter test`
   - Result: full test suite passed
+
+### Strict Level Filtering For Study + Lesson
+
+- Tightened the Study/Lesson level behavior after feedback that selecting `N5` in Home still allowed `Immersion` to show `N4` and `N3`.
+- Updated `lib/features/immersion/immersion_home_screen.dart`
+  - Filtered the reading bank so Immersion now shows only articles whose `officialLevel` matches the currently selected `studyLevelProvider`.
+  - Changed the next-deck logic to pick only from the visible level-filtered article pool instead of the full mixed article list.
+  - Simplified section titles and copy so the screen no longer talks about warm-up/stretch/explore lanes around the current level.
+- Updated `lib/features/library/library_screen.dart`
+  - Removed the hard-coded `/lesson/1` hero action.
+  - Library now opens the first lesson for the currently selected level, using loaded lesson metadata when available and a safe per-level fallback (`1`, `26`, `51`) otherwise.
+- Updated `test/features/ui/immersion_walkthrough_test.dart`
+  - Added coverage proving Immersion hides `N4` and `N3` articles when the selected level is `N5`.
+- Updated `test/features/ui/simple_command_center_test.dart`
+  - Added coverage proving Library opens `/lesson/26` when the selected level is `N4`, preventing regression back to `N5` lesson routing.
+- Updated `docs/notes/important-user-requirements.md`
+  - Added a persistent requirement that Study, Lesson, and Immersion must respect the selected JLPT level strictly.
+
+### Verification Run
+
+- Ran `dart format lib/features/immersion/immersion_home_screen.dart lib/features/library/library_screen.dart test/features/ui/immersion_walkthrough_test.dart test/features/ui/simple_command_center_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/immersion/immersion_home_screen.dart lib/features/library/library_screen.dart test/features/ui/immersion_walkthrough_test.dart test/features/ui/simple_command_center_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/ui/immersion_walkthrough_test.dart`
+  - Result: all tests passed
+- Ran `flutter test test/features/ui/simple_command_center_test.dart`
+  - Result: all tests passed
+- Ran `flutter test`
+  - Result: full test suite passed
+
+### JLPT Prep Hub Consolidation
+
+- Reworked the JLPT entry experience after feedback that `JLPT Coach` and `JLPT Mock` still felt like two disconnected features.
+- Updated `lib/features/jlpt/screens/jlpt_coach_screen.dart`
+  - Rebuilt the screen into a unified `JLPT Prep` hub with a Home-aligned hero, real readiness metrics, full mock access, quick mock access, reading drill access, support lanes, and a 7-day repair plan.
+  - Wired the hub to real in-app data using the current level, JLPT snapshot data, dashboard counts, mistake buckets, mock-bank totals, and reading-bank totals.
+  - Cleaned the Vietnamese copy on the new hub so the visible labels are readable and more standardized.
+- Updated `lib/features/home/models/practice_destination.dart`
+  - Removed the separate `JLPT Mock` destination card so Study now surfaces one unified JLPT prep entry point instead of duplicating the exam flow.
+  - Renamed the surviving JLPT destination to `JLPT Prep` / `Ôn thi JLPT` and updated the subtitle to reflect the merged feature scope.
+- Updated `lib/features/practice/practice_screen.dart`
+  - Changed the JLPT goal card and hero CTA copy from `coach` framing to the new unified JLPT prep framing.
+- Updated `lib/features/home/screens/learning_path_screen.dart`
+  - Renamed the JLPT lane and CTA labels to the unified JLPT prep terminology so Home and Study now speak the same product language.
+- Updated `lib/features/jlpt/screens/jlpt_mock_pro_screen.dart`
+  - Adjusted supporting copy so Mock Pro now talks about saving into `JLPT Prep` instead of the old `JLPT Coach` wording.
+- Updated `test/features/home/practice_destination_test.dart`
+  - Added coverage proving the separate `JLPT Mock` destination no longer appears and that the Vietnamese JLPT entry copy reflects the merged hub.
+- Updated `test/features/ui/simple_command_center_test.dart`
+  - Refreshed Study/Home expectations to the new `JLPT prep` naming so routing and layout checks match the redesigned experience.
+- Updated `docs/notes/important-user-requirements.md`
+  - Added a persistent requirement that JLPT prep should remain one cohesive feature instead of split `Coach` and `Mock` entry points.
+
+### Verification Run
+
+- Ran `dart format lib/features/jlpt/screens/jlpt_coach_screen.dart lib/features/home/models/practice_destination.dart lib/features/practice/practice_screen.dart lib/features/home/screens/learning_path_screen.dart lib/features/jlpt/screens/jlpt_mock_pro_screen.dart test/features/home/practice_destination_test.dart test/features/ui/simple_command_center_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/jlpt/screens/jlpt_coach_screen.dart lib/features/home/models/practice_destination.dart lib/features/practice/practice_screen.dart lib/features/home/screens/learning_path_screen.dart lib/features/jlpt/screens/jlpt_mock_pro_screen.dart test/features/home/practice_destination_test.dart test/features/ui/simple_command_center_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/home/practice_destination_test.dart`
+  - Result: all tests passed
+- Ran `flutter test test/features/ui/simple_command_center_test.dart`
+  - Result: all tests passed
+- Ran `flutter test test/features/jlpt/jlpt_mock_pro_screen_test.dart`
+  - Result: all tests passed
+
+### JLPT Prep Visual Polish Pass
+
+- Ran a dedicated visual-polish pass on the unified JLPT prep hub to bring it closer to the Home screen's tone and finish.
+- Updated `lib/features/jlpt/screens/jlpt_coach_screen.dart`
+  - Replaced the heavier generic section feel with softer Home-style paper panels for the main JLPT prep sections.
+  - Refined the hero so the snapshot metrics now sit inside a tighter summary sheet instead of floating like separate utility pills.
+  - Polished the exam mode cards with softer surfaces, slimmer accent lines, calmer icon treatment, and tighter typography/spacing.
+  - Polished the 7-day plan cards to feel less like raw dashboard tiles and more like curated premium action cards.
+  - Added subtle section accent rules so the screen has a clearer reading rhythm without becoming noisy.
+- Updated `docs/notes/important-user-requirements.md`
+  - Added a persistent note that JLPT prep should visually align with Home using compact spacing, paper-like surfaces, and restrained premium styling.
+
+### Verification Run
+
+- Ran `dart format lib/features/jlpt/screens/jlpt_coach_screen.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/jlpt/screens/jlpt_coach_screen.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/home/practice_destination_test.dart`
+  - Result: all tests passed
+- Ran `flutter test test/features/ui/simple_command_center_test.dart`
+  - Result: all tests passed
+
+### JLPT Mock Data Source Rebuild
+
+- Reworked `JLPT Mock Pro` after confirming the exam screen was still reading hard-coded placeholder questions instead of real app data.
+- Updated `lib/features/jlpt/data/jlpt_mock_bank.dart`
+  - Replaced the static `jlptMockSections` constant with a dynamic bank builder and `jlptMockSectionsProvider`.
+  - The mock now composes `Vocabulary`, `Grammar`, `Kanji`, and `Reading` sections from current in-app data for the selected level.
+  - `Vocabulary` now comes from level-filtered content vocab, `Grammar` from level-filtered grammar points/examples, `Kanji` from level-filtered kanji data, and `Reading` from the immersion-backed JLPT reading bank.
+  - Added question source/context metadata so the mock UI can show lesson/passages behind each question instead of feeling disconnected from app data.
+- Updated `lib/features/jlpt/models/jlpt_mock_models.dart`
+  - Extended JLPT mock question models with optional context/source fields for richer, data-backed exam cards.
+- Updated `lib/features/jlpt/screens/jlpt_mock_pro_screen.dart`
+  - Switched the landing flow to load the current JLPT bank asynchronously from real in-app data.
+  - Disabled exam start while the current bank is loading or unavailable, and surfaced clear error/empty copy instead of silently falling back.
+  - Locked the selected bank into widget state when an exam starts so the active exam cannot drift if level/language changes mid-run.
+  - Updated section counts, timing, flow cards, result cards, and active question cards to use the dynamic bank instead of the old placeholder bank.
+  - Added source/context presentation inside question cards so reading passages and lesson provenance are visible during the exam.
+- Updated `lib/features/jlpt/screens/jlpt_coach_screen.dart`
+  - JLPT Prep overview counts for the full mock now come from the rebuilt dynamic mock bank instead of the removed hard-coded section list.
+- Updated `test/features/jlpt/jlpt_mock_pro_screen_test.dart`
+  - Overrode the dynamic JLPT bank provider with a small deterministic test bank so the screen test stays stable without depending on real database/assets.
+- Updated `test/features/jlpt/jlpt_reading_screen_test.dart`
+  - Added an explicit widget cleanup step so the screen test no longer fails on leftover `flutter_animate` timers during teardown.
+- Updated `docs/notes/important-user-requirements.md`
+  - Added a persistent requirement that JLPT mock/prep must use real in-app level-filtered data instead of hard-coded placeholder questions.
+
+### Verification Run
+
+- Ran `dart format lib/features/jlpt/models/jlpt_mock_models.dart lib/features/jlpt/data/jlpt_mock_bank.dart lib/features/jlpt/screens/jlpt_mock_pro_screen.dart lib/features/jlpt/screens/jlpt_coach_screen.dart test/features/jlpt/jlpt_mock_pro_screen_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/jlpt/data/jlpt_mock_bank.dart lib/features/jlpt/screens/jlpt_mock_pro_screen.dart lib/features/jlpt/screens/jlpt_coach_screen.dart test/features/jlpt/jlpt_mock_pro_screen_test.dart`
+  - Result: no issues found
+- Ran `flutter analyze lib/features/jlpt/data/jlpt_mock_bank.dart lib/features/jlpt/screens/jlpt_mock_pro_screen.dart lib/features/jlpt/screens/jlpt_coach_screen.dart test/features/jlpt/jlpt_mock_pro_screen_test.dart test/features/jlpt/jlpt_reading_screen_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/jlpt/jlpt_mock_pro_screen_test.dart`
+  - Result: all tests passed
+- Ran `flutter test test/features/home/practice_destination_test.dart`
+  - Result: all tests passed
+- Ran `flutter test test/features/ui/simple_command_center_test.dart`
+  - Result: all tests passed
+- Ran `flutter test test/features/jlpt/jlpt_reading_screen_test.dart`
+  - Result: all tests passed
+
+### Test Study UI/UX Learning Pass
+
+- Continued the legacy `Test` / `Study` exam flow redesign after confirming this was the screen the user was unhappy with.
+- Verified the in-progress `Test` shell redesign and finished the missing question-area polish so the learning experience is clearer and more consistent with `Home`.
+- Added `lib/features/learn/widgets/question_surface.dart`
+  - Introduced shared prompt, answer-choice, and feedback surfaces with the app's paper-like palette and tighter spacing.
+- Updated `lib/features/learn/widgets/multiple_choice_widget.dart`
+  - Rebuilt the question header into a clearer term / reading / prompt hierarchy.
+  - Replaced the old plain answer rows with cleaner premium choice cards and letter anchors for faster scanning.
+- Updated `lib/features/learn/widgets/true_false_widget.dart`
+  - Matched the new prompt-card treatment.
+  - Reworked true/false actions into cleaner responsive choice tiles so mobile no longer wastes as much vertical space.
+- Updated `lib/features/learn/widgets/fill_blank_widget.dart`
+  - Tightened the answer field styling and hierarchy.
+  - Reworked hint reveal into a proper support card instead of bloating the button label.
+  - Reworked correct-answer feedback into a clearer study card while preserving the hidden-answer exam behavior.
+- Updated `lib/features/test/models/test_config.dart`
+  - Fixed mock-exam question count clamping so smaller available pools do not get forced to the old minimum of `10`.
+- Updated `lib/features/test/screens/test_config_screen.dart`
+  - Fixed preset question-count handling to respect the actual available pool.
+  - Verified the larger config redesign now compiles cleanly after the earlier unfinished pass.
+- Verified the current `lib/features/test/screens/test_screen.dart` redesign compiles cleanly alongside the new shared question widgets.
+  - Removed the duplicated progress line above the question body and replaced it with quieter level / flagged-state context chips.
+- Updated `docs/notes/important-user-requirements.md`
+  - Added a persistent requirement that test/quiz question UIs must prioritize learning clarity, clean hierarchy, and low dead space.
+
+### Verification Run
+
+- Ran `dart format lib/features/learn/widgets/question_surface.dart lib/features/learn/widgets/multiple_choice_widget.dart lib/features/learn/widgets/true_false_widget.dart lib/features/learn/widgets/fill_blank_widget.dart lib/features/test/models/test_config.dart lib/features/test/screens/test_config_screen.dart lib/features/test/screens/test_screen.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/learn/widgets/question_surface.dart lib/features/learn/widgets/multiple_choice_widget.dart lib/features/learn/widgets/true_false_widget.dart lib/features/learn/widgets/fill_blank_widget.dart lib/features/test/models/test_config.dart lib/features/test/screens/test_config_screen.dart lib/features/test/screens/test_screen.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/learn/learn_mode_config_test.dart`
+  - Result: all tests passed
+- Ran `flutter test test/features/test/test_screen_feedback_test.dart`
+  - Result: all tests passed
+- Ran `flutter test test/features/ui/mock_exam_walkthrough_test.dart`
+  - Result: all tests passed
+
+### Test Desktop Overflow Fix
+
+- Fixed the remaining desktop overflow regression reported from the live mock-exam screen.
+- Updated `lib/features/test/screens/test_screen.dart`
+  - Made the right-side desktop panel scroll independently so large question maps and long run-mode details no longer overflow the viewport.
+- Updated `test/features/ui/mock_exam_walkthrough_test.dart`
+  - Added a desktop-width regression test with a `50` question mock to ensure the side panel does not overflow again.
+
+### Verification Run
+
+- Ran `dart format lib/features/test/screens/test_screen.dart test/features/ui/mock_exam_walkthrough_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/test/screens/test_screen.dart test/features/ui/mock_exam_walkthrough_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/ui/mock_exam_walkthrough_test.dart`
+  - Result: all tests passed
+
+### Study Style Preset Rationalization
+
+- Reworked the `Study Style` section in the test config so it behaves like a real learning-mode chooser instead of three vague preset cards.
+- Updated `lib/features/test/screens/test_config_screen.dart`
+  - Replaced the old `Quick warm-up / Balanced review / Exam focus` framing with clearer goal-based modes:
+    - `Memory check`
+    - `Active review`
+    - `Exam simulation`
+  - Rebuilt each preset card to show:
+    - what the mode is for
+    - the practical setup it applies
+    - the learning tradeoff behind it
+  - Added selected-state styling so the current preset is visually obvious.
+  - Added preset matching in the summary panel and a `Custom mix` state when the user fine-tunes settings away from a preset.
+  - Adjusted the medium preset to a more realistic learning workload (`20-24` questions depending on available pool) instead of a blanket `30`.
+- Updated `docs/notes/important-user-requirements.md`
+  - Added a persistent requirement that test presets should map to clear learning intents rather than arbitrary card labels.
+
+### Verification Run
+
+- Ran `dart format lib/features/test/screens/test_config_screen.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/test/screens/test_config_screen.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/ui/mock_exam_walkthrough_test.dart`
+  - Result: all tests passed
+
+### Handwriting Guide Alignment Pass
+
+- Investigated the remaining complaint that handwriting scoring still felt too harsh even when the learner followed the displayed stroke order.
+- Root cause found
+  - The visible stroke guide and the scoring template for `四` were materially misaligned.
+  - The old `四` template in `assets/data/support/kanji/stroke_templates.json` described a tall, center-heavy shape that did not match the KanjiVG guide shown in the UI.
+  - This mismatch made guide-faithful writing lose points on template and shape gates even when stroke order was correct.
+- Updated `assets/data/support/kanji/stroke_templates.json`
+  - Replaced the `四` manual template stroke endpoints with guide-aligned geometry.
+  - Corrected the `四` target shape profile to a wider enclosure-like form (`targetArea` and `targetAspect`).
+- Updated `assets/data/support/kanji/stroke_template_overrides.json`
+  - Mirrored the same `四` correction so future template regenerations keep the fix.
+- Updated `lib/features/write/services/handwriting_evaluator.dart`
+  - Added a guarded guide-visible near-correct pass for `manual` and `curated` handwriting scoring.
+  - This only applies when the learner is in guided mode and the writing is already close on score, shape, order, template, and direction.
+  - Added slightly more forgiveness for enclosure-like kanji such as `四`, `日`, and `口` without weakening obvious wrong-direction rejects like the existing `人` regression.
+- Updated `test/features/write/handwriting_evaluator_regression_test.dart`
+  - Replaced the old `四` regression with a more guide-aligned `四` sketch so the test now reflects what the user actually sees on screen.
+  - Added an assertion that guide-aligned `四` writing earns a healthier template score instead of being dragged down by the old mismatch.
+- Updated `docs/notes/important-user-requirements.md`
+  - Recorded the persistent requirement that the visible handwriting guide and evaluator template must stay aligned.
+
+### Verification Run
+
+- Ran `dart format lib/features/write/services/handwriting_evaluator.dart test/features/write/handwriting_evaluator_regression_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/write/services/handwriting_evaluator.dart test/features/write/handwriting_evaluator_regression_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/write/handwriting_evaluator_regression_test.dart test/features/write/handwriting_template_matcher_test.dart test/features/write/handwriting_walkthrough_test.dart`
+  - Result: all tests passed
+- Ran `flutter test test/features/write/handwriting_stroke_check_v2_benchmark_test.dart`
+  - Result: all tests passed
+- Ran `flutter test test/data/stroke_template_coverage_test.dart`
+  - Result: all tests passed
+
+### Handwriting Unified Guide-Scoring Pipeline Pass
+
+- Reworked the handwriting template runtime so the app no longer depends only on a separate endpoint template set for scoring when vector stroke-guide data already exists.
+- Root cause addressed
+  - Handwriting previously used two geometry sources:
+    - `KanjiStrokeVectorService` for the visible guide
+    - `KanjiStrokeTemplateService` for the scoring template
+  - This made the system fragile because any mismatch between the two sources forced follow-up per-character patches like the earlier `四` fix.
+- Updated `lib/features/write/services/kanji_stroke_vector_layout.dart`
+  - Added a shared vector-layout helper so guide rendering and vector-to-template projection use the same padding and centering math.
+- Updated `lib/features/write/widgets/kanji_stroke_animator.dart`
+  - Switched the guide animator to use the shared vector-layout helper instead of keeping its own private copy of the layout logic.
+- Updated `lib/features/write/services/kanji_stroke_template_service.dart`
+  - Added runtime projection from `KanjiStrokeVector` to `KanjiStrokeTemplate`.
+  - The projected template now derives:
+    - normalized stroke start/end geometry from the guide path
+    - shape metrics from the same guide-aligned geometry
+  - Added runtime merge logic so, when vector data exists:
+    - the app replaces stale scoring stroke geometry with guide-derived geometry
+    - existing template quality labels like `manual` and `curated` are preserved
+    - existing shape tuning is kept when the old template already agrees closely with the guide
+    - guide-derived shape metrics are used automatically when the old template is clearly inconsistent
+  - Added a cache reset helper for deterministic testing of projected templates.
+- Added `test/features/write/kanji_stroke_template_service_test.dart`
+  - Proves projected templates normalize guide geometry correctly.
+  - Proves the runtime service prefers debug vector geometry over stale debug template geometry while preserving template quality.
+  - Proves the live vector-derived `四` template accepts guide-faithful rough writing, validating the new architecture instead of relying only on a per-character patch.
+- Updated `docs/notes/important-user-requirements.md`
+  - Recorded the persistent requirement that handwriting should prefer one geometry pipeline over ongoing one-off kanji patches.
+
+### Verification Run
+
+- Ran `dart format lib/features/write/services/kanji_stroke_template_service.dart lib/features/write/services/kanji_stroke_vector_layout.dart lib/features/write/widgets/kanji_stroke_animator.dart test/features/write/kanji_stroke_template_service_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/write/services/kanji_stroke_template_service.dart lib/features/write/services/kanji_stroke_vector_layout.dart lib/features/write/widgets/kanji_stroke_animator.dart test/features/write/kanji_stroke_template_service_test.dart test/features/write/handwriting_evaluator_regression_test.dart test/features/write/handwriting_walkthrough_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/write/kanji_stroke_template_service_test.dart test/features/write/handwriting_evaluator_regression_test.dart test/features/write/handwriting_template_matcher_test.dart test/features/write/handwriting_walkthrough_test.dart`
+  - Result: all tests passed
+- Ran `flutter test test/features/write/handwriting_stroke_check_v2_benchmark_test.dart test/data/stroke_template_coverage_test.dart`
+  - Result: all tests passed
+
+### Sakura Background Crash Fix
+
+- Investigated a new red-screen crash reported after navigating to screens that use `JapaneseBackground`.
+- Root cause found
+  - `lib/features/common/widgets/japanese_background.dart` uses a `LayoutBuilder` to adjust sakura density by viewport width.
+  - `lib/features/common/widgets/sakura_particles.dart` reseeded petals in `didUpdateWidget` when `petalCount` changed.
+  - The `_petals` field was declared as `late final`, so the second reseed threw `LateInitializationError: Field '_petals...' has already been initialized.`
+  - Once that exception fired, Flutter showed the red error background across the screen.
+- Updated `lib/features/common/widgets/sakura_particles.dart`
+  - Changed `_petals` from `late final` to mutable `late` storage so responsive reseeding is safe when `petalCount` changes.
+- Added `test/features/common/widgets/sakura_particles_test.dart`
+  - Added regression coverage proving `SakuraParticles` can rebuild with a different `petalCount` without throwing an exception.
+- Updated `docs/notes/important-user-requirements.md`
+  - Recorded that responsive sakura density changes must never crash the app or trigger the red error screen.
+
+### Verification Run
+
+- Ran `dart format lib/features/common/widgets/sakura_particles.dart test/features/common/widgets/sakura_particles_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/common/widgets/sakura_particles.dart test/features/common/widgets/sakura_particles_test.dart lib/features/common/widgets/japanese_background.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/common/widgets/sakura_particles_test.dart test/features/ui/simple_command_center_test.dart`
+  - Result: all tests passed
+
+### Handwriting Scoring Leniency Pass
+
+- Softened handwriting scoring slightly after feedback that the drawing evaluator felt too strict for recognizably correct answers.
+- Updated `lib/features/write/services/handwriting_evaluator.dart`
+  - Relaxed the base `manual` template profile a little so near-correct kanji are less likely to fail on tiny template mismatches.
+  - Added more forgiving per-character tuning for boxed kanji, especially `日`, where the straight-vector template was over-penalizing learner-style bent closing strokes.
+  - Kept the stricter rejection path for obvious wrong-direction writing such as the earlier `人` reversal regression.
+- Updated `test/features/write/handwriting_evaluator_regression_test.dart`
+  - Added a regression proving a slightly rough but structurally correct `日` sketch is accepted.
+  - Kept the existing regression proving reversed `人` still fails.
+- Updated `docs/notes/important-user-requirements.md`
+  - Recorded the standing preference that handwriting should be forgiving for near-correct writing while still rejecting clearly wrong stroke direction/structure.
+
+### Verification Run
+
+- Ran `dart format lib/features/write/services/handwriting_evaluator.dart test/features/write/handwriting_evaluator_regression_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/write/services/handwriting_evaluator.dart test/features/write/handwriting_evaluator_regression_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/write/handwriting_template_matcher_test.dart test/features/write/handwriting_evaluator_regression_test.dart test/features/write/handwriting_walkthrough_test.dart`
+  - Result: all tests passed
+- Ran `flutter test test/features/write/handwriting_stroke_check_v2_benchmark_test.dart --dart-define=JPSTUDY_PRINT_STROKE_BENCHMARK=true`
+  - Result: all tests passed
+  - Benchmark snapshot: manual tier positive pass rate stayed `0.975`, while manual false-positive rate moved from `0.185` to `0.2075`, which is still far below legacy `0.98`.
+
+### Handwriting Black Screen Completion Fix
+
+- Investigated a new regression where finishing a handwriting item could leave the app on a black screen after dismissing the completion dialog.
+- Root cause found
+  - `lib/features/write/screens/handwriting_practice_screen.dart` was calling `Navigator.pop()` twice from inside the summary dialog action.
+  - That worked for pushed routes, but on the shell-based `/practice/handwriting` route it could pop away the active screen stack and expose a blank black surface.
+- Updated `lib/features/write/screens/handwriting_practice_screen.dart`
+  - Changed the summary dialog so the button only closes the dialog itself.
+  - Added a safe post-summary exit handler:
+    - pop the screen when there is a real back stack
+    - otherwise route back to `/practice` through `go_router`
+    - otherwise restart the session safely in standalone contexts
+- Updated `test/features/write/handwriting_walkthrough_test.dart`
+  - Added a regression proving that completing a one-item handwriting session from `/practice/handwriting` returns to a `Practice hub` route instead of leaving a black screen.
+- Updated `docs/notes/important-user-requirements.md`
+  - Recorded that handwriting completion must always return to a valid screen and never leave a black screen.
+
+### Verification Run
+
+- Ran `dart format lib/features/write/screens/handwriting_practice_screen.dart test/features/write/handwriting_walkthrough_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/write/screens/handwriting_practice_screen.dart test/features/write/handwriting_walkthrough_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/write/handwriting_walkthrough_test.dart`
+  - Result: all tests passed
+
+### Handwriting Session Randomization
+
+- Fixed the issue where entering Home Handwriting kept starting on the same first kanji every time, making the session feel static and predictable.
+- Updated `lib/features/write/screens/home_handwriting_practice_screen.dart`
+  - Added a per-session shuffle seed for the Home handwriting route.
+  - The seed refreshes when a new Home handwriting session is created or when the selected JLPT level changes.
+- Updated `lib/features/write/screens/handwriting_practice_screen.dart`
+  - Added optional session-order randomization support.
+  - When enabled and no `initialKanjiId` is forcing a specific target, the incoming kanji list is shuffled once per session and then kept stable for the rest of that session.
+  - This keeps the first visible kanji fresh on each new entry without causing mid-session reordering during rebuilds.
+- Updated `test/features/write/handwriting_walkthrough_test.dart`
+  - Added regression coverage proving handwriting can start from a shuffled session order with a deterministic test seed.
+- Updated `docs/notes/important-user-requirements.md`
+  - Recorded that Home Handwriting should not always reopen on the same first kanji.
+
+### Verification Run
+
+- Ran `dart format lib/features/write/screens/home_handwriting_practice_screen.dart lib/features/write/screens/handwriting_practice_screen.dart test/features/write/handwriting_walkthrough_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/write/screens/home_handwriting_practice_screen.dart lib/features/write/screens/handwriting_practice_screen.dart test/features/write/handwriting_walkthrough_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/write/handwriting_walkthrough_test.dart test/features/write/handwriting_evaluator_regression_test.dart`
+  - Result: all tests passed
+
+### Handwriting Session Scope Labels
+
+- Clarified the handwriting UX after feedback that sessions sometimes looked like they only contained a tiny number of kanji.
+- Root cause found
+  - The screen summary and progress UI were correctly showing `_targets.length`, but they did not explain whether `_targets` currently represented:
+    - the normal all-items session
+    - a weak-items subset
+    - a wrong-only retry subset
+  - This made `1/1` look like the whole `N5` handwriting pool only had one kanji left, even when the app had intentionally switched into a narrow retry set.
+- Updated `lib/core/app_language.dart`
+  - Added localized labels for `All items`, `Weak set`, `Wrong-only set`, and the `Set: ...` wrapper.
+- Updated `lib/features/write/screens/handwriting_practice_screen.dart`
+  - Added explicit session-set state tracking for `allItems`, `weakSet`, and `wrongOnly`.
+  - Surfaced the current set label directly in the progress card so the user can immediately see what kind of handwriting session is active.
+  - Added the same set label to the completion dialog so summaries like `Correct 1 / 1` are clearly framed as a subset session when appropriate.
+- Updated `test/features/write/handwriting_walkthrough_test.dart`
+  - Added assertions proving the default handwriting flow shows `Set: All items`.
+  - Added assertions proving the retry flow switches the UI label to `Set: Wrong-only set`.
+- Updated `docs/notes/important-user-requirements.md`
+  - Recorded that handwriting must label subset sessions explicitly to avoid confusion with the full N-level pool.
+
+### Verification Run
+
+- Ran `dart format lib/core/app_language.dart lib/features/write/screens/handwriting_practice_screen.dart test/features/write/handwriting_walkthrough_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/core/app_language.dart lib/features/write/screens/handwriting_practice_screen.dart test/features/write/handwriting_walkthrough_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/write/handwriting_walkthrough_test.dart test/features/write/handwriting_evaluator_regression_test.dart`
+  - Result: all tests passed
+
+### Handwriting Next Navigation Fix
+
+- Investigated the report that tapping `Next` in handwriting could leave the screen on the same word instead of advancing.
+- Updated `lib/features/write/screens/home_handwriting_practice_screen.dart`
+  - Memoized the level-specific kanji future so dashboard/review updates do not recreate the handwriting item list on every rebuild.
+  - Moved the review status chip to its own `ConsumerWidget` so review-state refreshes stay local instead of rebuilding the whole parent screen.
+- Updated `lib/features/write/screens/handwriting_practice_screen.dart`
+  - Replaced the fragile `oldWidget.items != widget.items` check with semantic comparison so a fresh but equivalent item list does not reset the current handwriting target.
+  - This preserves the current index when the parent rebuilds with the same logical kanji data.
+- Updated `test/features/write/handwriting_walkthrough_test.dart`
+  - Added a regression test covering the exact rebuild case: move to the second handwriting item, rebuild the parent with a new-but-equivalent list, and verify the screen stays on item `2/2`.
+  - Switched the regression harness to in-memory repository/database overrides so the test measures navigation behavior directly without unrelated seeding noise.
+- Updated `docs/notes/important-user-requirements.md`
+  - Recorded the persistent requirement that handwriting `Next` must always advance reliably and must not jump back on rebuild.
+
+### Verification Run
+
+- Ran `dart format lib/features/write/screens/home_handwriting_practice_screen.dart lib/features/write/screens/handwriting_practice_screen.dart test/features/write/handwriting_walkthrough_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/write/screens/home_handwriting_practice_screen.dart lib/features/write/screens/handwriting_practice_screen.dart test/features/write/handwriting_walkthrough_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/write/handwriting_walkthrough_test.dart`
+  - Result: all tests passed
+
+### JLPT Reading Drill UX Pass
+
+- Reworked `JLPT Reading Drill` so the screen supports learning and passage selection more intentionally instead of showing sparse list cards and a flat reading flow.
+- Updated `lib/features/jlpt/screens/jlpt_reading_screen.dart`
+  - Filtered the drill to the currently selected JLPT level so the reading list stays on the active study track.
+  - Upgraded the list hero with current-track metrics and clearer context.
+  - Rebuilt reading-set cards with:
+    - current level
+    - question/time metadata
+    - question-type tags
+    - a real passage preview
+  - Reworked the active drill into a clearer two-column desktop layout:
+    - left side for passage paragraphs with explicit paragraph tags
+    - right side for question flow and answering
+  - Added a focused question header with answered progress.
+  - Improved answer option hierarchy with letter badges, clearer selected/correct/wrong states, and labeled explanation blocks.
+  - Improved timer urgency styling.
+- Updated `lib/features/immersion/services/shared_reading_library.dart`
+  - Restricted fallback immersion asset scanning to the currently supported in-app JLPT levels (`N5`, `N4`, `N3`) so the reading bank no longer probes missing `N2/N1` assets in tests.
+- Updated `test/features/jlpt/jlpt_reading_screen_test.dart`
+  - Added regression coverage proving the screen follows the selected JLPT track (`N4 track` in the test case).
+- Updated `docs/notes/important-user-requirements.md`
+  - Added a persistent note that `JLPT Reading Drill` should help users choose and read with intent using previews, current-level context, and clear passage/question hierarchy.
+
+### Handwriting Practice UI/UX Pass
+
+- Reworked the `Handwriting` screen so the writing experience feels more like a focused study surface and less like a raw utility panel.
+- Updated `lib/features/write/screens/handwriting_practice_screen.dart`
+  - Moved the optional review chip out of the app bar and into the page flow for a cleaner header.
+  - Wrapped the page with the shared Japanese background and rebuilt the layout around compact paper-like panels.
+  - Merged progress, session stats, weak-practice CTA, and mode selection into one cohesive session card.
+  - Redesigned the current target card so kanji, meaning, reading, stroke count, and mode are easier to scan.
+  - Recentered and enlarged the handwriting canvas area, added a simple study flow (`guide -> write -> check`), and tightened the control panel below it.
+  - Polished result feedback and the stroke-guide panel so they match the Home/JLPT visual language more closely.
+- Updated `lib/features/write/screens/home_handwriting_practice_screen.dart`
+  - Restyled the handwriting review chip into a softer compact status card.
+  - Localized the review-state copy instead of leaving it hard-coded in English.
+- Updated `lib/core/app_language.dart`
+  - Added localized handwriting review status strings used by the Home handwriting header.
+- Updated `test/features/write/handwriting_walkthrough_test.dart`
+  - Adjusted widget tests to scroll to the canvas/guide where needed now that the layout is denser and more structured.
+
+### Verification Run
+
+- Ran `dart format lib/features/write/screens/handwriting_practice_screen.dart lib/features/write/screens/home_handwriting_practice_screen.dart lib/core/app_language.dart test/features/write/handwriting_walkthrough_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/write/screens/handwriting_practice_screen.dart lib/features/write/screens/home_handwriting_practice_screen.dart lib/core/app_language.dart test/features/write/handwriting_walkthrough_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/write/handwriting_walkthrough_test.dart`
+  - Result: all tests passed
+
+### Handwriting Scoring False-Positive Fix
+
+- Tightened handwriting evaluation after feedback that clearly wrong writing could still be marked correct when the stroke count happened to match.
+- Updated `lib/features/write/services/handwriting_template_matcher.dart`
+  - Added a dedicated `templateDirectionScore` so stroke direction can be judged independently from overall start/end placement.
+- Updated `lib/features/write/services/handwriting_evaluator.dart`
+  - Added a direction gate to template-backed handwriting scoring.
+  - Manual templates now require a stronger stroke-direction match, with slightly softer thresholds for curated/generated templates.
+  - This specifically blocks cases like drawing `人` with a reversed opening stroke from passing only because total stroke count and rough placement looked acceptable.
+- Updated tests
+  - `test/features/write/handwriting_template_matcher_test.dart`
+    - Added regression coverage proving the direction score drops when a stroke is drawn backwards.
+  - `test/features/write/handwriting_evaluator_regression_test.dart`
+    - Added a focused regression for `人` proving a reversed opening stroke is rejected even with the guide visible.
+
+### Verification Run
+
+- Ran `dart format lib/features/write/services/handwriting_evaluator.dart lib/features/write/services/handwriting_template_matcher.dart test/features/write/handwriting_evaluator_regression_test.dart test/features/write/handwriting_template_matcher_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/write/services/handwriting_evaluator.dart lib/features/write/services/handwriting_template_matcher.dart test/features/write/handwriting_evaluator_regression_test.dart test/features/write/handwriting_template_matcher_test.dart lib/features/write/screens/handwriting_practice_screen.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/write/handwriting_template_matcher_test.dart test/features/write/handwriting_evaluator_regression_test.dart test/features/write/handwriting_walkthrough_test.dart`
+  - Result: all tests passed
+- Ran `flutter test test/features/write/handwriting_stroke_check_v2_benchmark_test.dart`
+  - Result: all tests passed
+
+### Verification Run
+
+- Ran `dart format lib/features/jlpt/screens/jlpt_reading_screen.dart test/features/jlpt/jlpt_reading_screen_test.dart lib/features/immersion/services/shared_reading_library.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/jlpt/screens/jlpt_reading_screen.dart test/features/jlpt/jlpt_reading_screen_test.dart lib/features/immersion/services/shared_reading_library.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/jlpt/jlpt_reading_screen_test.dart`
+  - Result: all tests passed
+
+### Handwriting SRS-First Session
+
+- Reworked `HomeHandwritingPracticeScreen` after feedback that loading all 284 kanji at once gave no clear sense of completion.
+- Root cause: `HomeHandwritingPracticeScreen` previously called `fetchKanjiByLevel(level)` which loads every kanji regardless of SRS state, unlike Recall Sprint and Ghost Review which correctly limit to due items.
+- Added `getAllSeenKanjiIds()` and `insertTestState()` helpers to `KanjiSrsDao`.
+- Added `fetchDueKanjiByLevel(level)` and `fetchUnseenKanjiByLevel(level, limit)` to `LessonRepository`:
+  - Due = has a KanjiSrsState row with `nextReviewAt <= now`
+  - Unseen = no KanjiSrsState row at all
+- Reworked `HomeHandwritingPracticeScreen` into a 3-state session loader:
+  1. Due items (SRS-scheduled reviews) — shown first, matches Recall Sprint/Ghost behavior
+  2. New batch (15 unseen kanji) — fallback when nothing is due
+  3. AllCaughtUp screen with "Free practice" button — shown when all kanji have been seen and none are due
+- Added `_SessionHeader` widget inside the handwriting scroll body showing session type and a "Free practice" escape hatch.
+- Added localized strings: `handwritingDueSessionTitle`, `handwritingNewBatchTitle`, `handwritingFreePracticeLabel`, `handwritingNothingDueLabel`, `handwritingNewBatchSubtitle`.
+
+### Verification Run
+
+- Ran `dart format` on all changed files
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/data/daos/kanji_srs_dao.dart lib/data/repositories/lesson_repository.dart lib/core/app_language.dart lib/features/write/screens/home_handwriting_practice_screen.dart`
+  - Result: no issues found
+- Ran `flutter test`
+  - Result: full test suite passed (161 tests)
+
+### Study Style Visual Tightening
+
+- Ran a dedicated aesthetic pass on the three `Study Style` preset cards to make them feel more premium and compact without changing preset behavior.
+- Updated `lib/features/test/screens/test_config_screen.dart`
+  - Tightened the spacing between cards so the section reads as one curated control group instead of three loose tiles.
+  - Reworked the card surface into a softer paper-like gradient with lighter borders and a calmer selected shadow.
+  - Reduced the icon badge and replaced the louder selected pill with a quieter circular check.
+  - Reframed the top overline into a subtle editorial label instead of a utility badge.
+  - Reworked the metadata chips so they feel lighter and less dashboard-like.
+  - Restyled the preset note into a slim editorial callout strip so the cards feel more refined and less bulky.
+
+### Verification Run
+
+- Ran `dart format lib/features/test/screens/test_config_screen.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/test/screens/test_config_screen.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/ui/mock_exam_walkthrough_test.dart`
+  - Result: all tests passed
