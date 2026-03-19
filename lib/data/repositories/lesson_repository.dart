@@ -1129,8 +1129,8 @@ class LessonRepository {
     // + seedGrammarIfEmpty) from racing on first launch.
     final prefs = await SharedPreferences.getInstance();
     final seededVersion = prefs.getInt('grammar_data_version') ?? 0;
-    // 4 = GrammarSeeder.kGrammarDataVersion — keep in sync when bumping
-    if (seededVersion >= 4) {
+    // 7 = GrammarSeeder.kGrammarDataVersion — keep in sync when bumping
+    if (seededVersion >= 7) {
       // Data is fresh from the seeder; only do a lightweight insert if the
       // lesson has no rows at all (brand new install mid-seeder-run edge case).
       final count =
@@ -1158,6 +1158,10 @@ class LessonRepository {
             p.explanationEn!.isEmpty ||
             p.titleEn == null ||
             p.titleEn!.isEmpty ||
+            containsVietnameseGrammarText(p.titleEn) ||
+            containsVietnameseGrammarText(currentMeaningEn) ||
+            containsVietnameseGrammarText(currentConnectionEn) ||
+            containsVietnameseGrammarText(p.explanationEn) ||
             (currentMeaningEn.isNotEmpty &&
                 normalizeGrammarTitleEn(currentMeaningEn) !=
                     currentMeaningEn) ||
@@ -1186,8 +1190,36 @@ class LessonRepository {
     final existingByTitle = {for (final p in existingPoints) p.grammarPoint: p};
 
     for (final cp in contentPoints) {
-      final titleEn = normalizeGrammarTitleEn(cp.titleEn);
-      final structureEn = normalizeGrammarStructureEn(cp.structureEn);
+      final englishLabel = resolveEnglishGrammarLabel(
+        titleEn: cp.titleEn,
+        meaningEn: cp.titleEn,
+        connectionEn: cp.structureEn,
+        connection: cp.structure,
+        grammarPoint: cp.title,
+      );
+      final englishMeaning = resolveEnglishGrammarMeaning(
+        meaningEn: cp.titleEn,
+        titleEn: cp.titleEn,
+        connectionEn: cp.structureEn,
+        connection: cp.structure,
+        grammarPoint: cp.title,
+      );
+      final englishConnection = resolveEnglishGrammarConnection(
+        connectionEn: cp.structureEn,
+        connection: cp.structure,
+        grammarPoint: cp.title,
+        titleEn: cp.titleEn,
+        meaningEn: cp.titleEn,
+      );
+      final storedTitleEn = englishLabel == 'Target pattern'
+          ? null
+          : englishLabel;
+      final storedMeaningEn = englishMeaning == 'Target pattern'
+          ? null
+          : englishMeaning;
+      final storedConnectionEn = englishConnection == 'Grammar pattern'
+          ? null
+          : englishConnection;
 
       final existing = existingByTitle[cp.title];
       if (existing != null) {
@@ -1196,9 +1228,9 @@ class LessonRepository {
           _db.grammarPoints,
         )..where((tbl) => tbl.id.equals(existing.id))).write(
           GrammarPointsCompanion(
-            titleEn: Value(titleEn.isEmpty ? null : titleEn),
-            meaningEn: Value(titleEn.isEmpty ? cp.title : titleEn),
-            connectionEn: Value(structureEn.isEmpty ? null : structureEn),
+            titleEn: Value(storedTitleEn),
+            meaningEn: Value(storedMeaningEn),
+            connectionEn: Value(storedConnectionEn),
             explanationEn: Value(cp.explanationEn),
           ),
         );
@@ -1233,12 +1265,12 @@ class LessonRepository {
               GrammarPointsCompanion.insert(
                 lessonId: Value(lessonId),
                 grammarPoint: cp.title,
-                titleEn: Value(titleEn.isEmpty ? null : titleEn),
+                titleEn: Value(storedTitleEn),
                 meaning: cp.title,
                 meaningVi: Value(cp.title),
-                meaningEn: Value(titleEn.isEmpty ? cp.title : titleEn),
+                meaningEn: Value(storedMeaningEn),
                 connection: cp.structure,
-                connectionEn: Value(structureEn.isEmpty ? null : structureEn),
+                connectionEn: Value(storedConnectionEn),
                 explanation: cp.explanation,
                 explanationVi: Value(cp.explanation),
                 explanationEn: Value(cp.explanationEn),

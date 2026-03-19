@@ -1,152 +1,987 @@
+import 'dart:math';
+
+import 'package:drift/drift.dart' show OrderingTerm;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/study_level.dart';
+import 'package:jpstudy/data/db/content_database.dart' as content;
+import 'package:jpstudy/data/db/content_database_provider.dart';
+import 'package:jpstudy/data/models/kanji_item.dart';
+import 'package:jpstudy/data/models/vocab_item.dart';
+import 'package:jpstudy/data/repositories/lesson_repository.dart';
+import 'package:jpstudy/data/utils/grammar_english_notation.dart';
+
 import '../models/jlpt_coach_models.dart';
 import '../models/jlpt_mock_models.dart';
+import '../models/jlpt_reading_models.dart';
+import 'jlpt_reading_bank.dart';
 
-const jlptMockSections = <JlptMockSection>[
-  JlptMockSection(
+typedef JlptMockBankArgs = ({StudyLevel level, AppLanguage language});
+
+final jlptMockSectionsProvider = FutureProvider.autoDispose
+    .family<List<JlptMockSection>, JlptMockBankArgs>((ref, args) async {
+      final contentDb = ref.watch(contentDatabaseProvider);
+      final lessonRepo = ref.watch(lessonRepositoryProvider);
+      return buildJlptMockSections(
+        level: args.level,
+        language: args.language,
+        contentDb: contentDb,
+        lessonRepo: lessonRepo,
+      );
+    });
+
+Future<List<JlptMockSection>> buildJlptMockSections({
+  required StudyLevel level,
+  required AppLanguage language,
+  required content.ContentDatabase contentDb,
+  required LessonRepository lessonRepo,
+  Random? random,
+}) async {
+  final rng =
+      random ??
+      Random(
+        DateTime.now().microsecondsSinceEpoch ^
+            level.index ^
+            (language.index << 8),
+      );
+  final sections = <JlptMockSection>[];
+
+  final vocabItems = await lessonRepo.getVocabByLevel(level.shortLabel);
+  final vocabSection = _buildVocabularySection(
+    items: vocabItems,
+    level: level,
+    language: language,
+    random: rng,
+  );
+  if (vocabSection != null) {
+    sections.add(vocabSection);
+  }
+
+  final grammarSection = await _buildGrammarSection(
+    contentDb: contentDb,
+    level: level,
+    language: language,
+    random: rng,
+  );
+  if (grammarSection != null) {
+    sections.add(grammarSection);
+  }
+
+  final kanjiItems = await lessonRepo.fetchKanjiByLevel(level.shortLabel);
+  final kanjiSection = _buildKanjiSection(
+    items: kanjiItems,
+    level: level,
+    language: language,
+    random: rng,
+  );
+  if (kanjiSection != null) {
+    sections.add(kanjiSection);
+  }
+
+  final readingSection = await _buildReadingSection(
+    level: level,
+    language: language,
+    random: rng,
+  );
+  if (readingSection != null) {
+    sections.add(readingSection);
+  }
+
+  return sections;
+}
+
+JlptMockSection? _buildVocabularySection({
+  required List<VocabItem> items,
+  required StudyLevel level,
+  required AppLanguage language,
+  required Random random,
+}) {
+  final pool = items
+      .where(
+        (item) =>
+            item.term.trim().isNotEmpty &&
+            item.displayMeaning(language).trim().isNotEmpty,
+      )
+      .toList(growable: false);
+  final selected = _selectSpread(pool, 5, random: random);
+  if (selected.isEmpty) {
+    return null;
+  }
+
+  final questions = <JlptMockQuestion>[];
+  for (var i = 0; i < selected.length; i++) {
+    final target = selected[i];
+    final targetIndex = pool.indexOf(target);
+    if (targetIndex < 0) {
+      continue;
+    }
+
+    final meaning = target.displayMeaning(language).trim();
+    if (meaning.isEmpty) {
+      continue;
+    }
+
+    if (i.isEven) {
+      final distractors = _selectDistinctCandidates(
+        pool: pool,
+        targetIndex: targetIndex,
+        targetKey: (item) => item.id.toString(),
+        optionLabel: (item) => item.displayMeaning(language),
+        random: random,
+      );
+      if (distractors.length < 3) {
+        continue;
+      }
+
+      final rawOptions = <String>[
+        meaning,
+        ...distractors
+            .take(3)
+            .map((item) => item.displayMeaning(language).trim()),
+      ];
+      final options = _shuffleOptions(rawOptions, random: random);
+      final correctIndex = options.indexOf(meaning);
+      if (correctIndex < 0) {
+        continue;
+      }
+
+      questions.add(
+        JlptMockQuestion(
+          id: 'vocab-${target.id}-meaning',
+          area: JlptSkillArea.vocabulary,
+          prompt: _vocabMeaningPrompt(language, target.term),
+          options: options,
+          correctIndex: correctIndex,
+          explanation: _vocabMeaningExplanation(language, target.term, meaning),
+          contextTitle: target.hasDisplayReading
+              ? _readingLabel(language)
+              : null,
+          contextBody: target.hasDisplayReading ? target.reading?.trim() : null,
+          sourceLabel: _vocabSourceLabel(language, level, target),
+        ),
+      );
+      continue;
+    }
+
+    final distractors = _selectDistinctCandidates(
+      pool: pool,
+      targetIndex: targetIndex,
+      targetKey: (item) => item.id.toString(),
+      optionLabel: (item) => item.term,
+      random: random,
+    );
+    if (distractors.length < 3) {
+      continue;
+    }
+
+    final rawOptions = <String>[
+      target.term,
+      ...distractors.take(3).map((item) => item.term.trim()),
+    ];
+    final options = _shuffleOptions(rawOptions, random: random);
+    final correctIndex = options.indexOf(target.term);
+    if (correctIndex < 0) {
+      continue;
+    }
+
+    questions.add(
+      JlptMockQuestion(
+        id: 'vocab-${target.id}-term',
+        area: JlptSkillArea.vocabulary,
+        prompt: _vocabTermPrompt(language, meaning),
+        options: options,
+        correctIndex: correctIndex,
+        explanation: _vocabTermExplanation(language, target.term, meaning),
+        sourceLabel: _vocabSourceLabel(language, level, target),
+      ),
+    );
+  }
+
+  if (questions.isEmpty) {
+    return null;
+  }
+  questions.shuffle(random);
+
+  return JlptMockSection(
     id: 'vocab',
-    title: 'Goi (Vocabulary)',
-    minutes: 8,
-    questions: [
+    title: 'Vocabulary',
+    minutes: _sectionMinutes(questionCount: questions.length, baseMinutes: 8),
+    questions: questions,
+  );
+}
+
+Future<JlptMockSection?> _buildGrammarSection({
+  required content.ContentDatabase contentDb,
+  required StudyLevel level,
+  required AppLanguage language,
+  required Random random,
+}) async {
+  final pointRows =
+      await (contentDb.select(contentDb.grammarPoint)
+            ..where((tbl) => tbl.level.equals(level.shortLabel))
+            ..orderBy([
+              (tbl) => OrderingTerm(expression: tbl.lessonId),
+              (tbl) => OrderingTerm(expression: tbl.id),
+            ]))
+          .get();
+  if (pointRows.isEmpty) {
+    return null;
+  }
+
+  final exampleRows =
+      await (contentDb.select(contentDb.grammarExample)
+            ..where(
+              (tbl) => tbl.grammarPointId.isIn(
+                pointRows.map((row) => row.id).toList(),
+              ),
+            )
+            ..orderBy([
+              (tbl) => OrderingTerm(expression: tbl.grammarPointId),
+              (tbl) => OrderingTerm(expression: tbl.id),
+            ]))
+          .get();
+  final examplesByPoint = <int, List<content.GrammarExampleData>>{};
+  for (final example in exampleRows) {
+    examplesByPoint
+        .putIfAbsent(
+          example.grammarPointId,
+          () => <content.GrammarExampleData>[],
+        )
+        .add(example);
+  }
+
+  final usablePoints = pointRows
+      .where((row) => _grammarMeaning(row, language).trim().isNotEmpty)
+      .toList(growable: false);
+  final selected = _selectSpread(usablePoints, 5, random: random);
+  if (selected.isEmpty) {
+    return null;
+  }
+
+  final questions = <JlptMockQuestion>[];
+  for (var i = 0; i < selected.length; i++) {
+    final target = selected[i];
+    final targetIndex = usablePoints.indexOf(target);
+    if (targetIndex < 0) {
+      continue;
+    }
+
+    final examples =
+        examplesByPoint[target.id] ?? const <content.GrammarExampleData>[];
+    if (i.isOdd && examples.isNotEmpty) {
+      final distractors = _selectDistinctCandidates(
+        pool: usablePoints,
+        targetIndex: targetIndex,
+        targetKey: (row) => row.id.toString(),
+        optionLabel: (row) => jlptMockGrammarPatternLabel(row, language),
+        random: random,
+      );
+      if (distractors.length < 3) {
+        continue;
+      }
+
+      final patternLabel = jlptMockGrammarPatternLabel(target, language);
+      final rawOptions = <String>[
+        patternLabel,
+        ...distractors
+            .take(3)
+            .map((row) => jlptMockGrammarPatternLabel(row, language)),
+      ];
+      final options = _shuffleOptions(rawOptions, random: random);
+      final correctIndex = options.indexOf(patternLabel);
+      if (correctIndex < 0) {
+        continue;
+      }
+
+      final example = examples.first;
+      questions.add(
+        JlptMockQuestion(
+          id: 'grammar-${target.id}-pattern',
+          area: JlptSkillArea.grammar,
+          prompt: _grammarPatternPrompt(language),
+          options: options,
+          correctIndex: correctIndex,
+          explanation: _grammarExplanation(target, language),
+          contextTitle: _exampleLabel(language),
+          contextBody:
+              '${example.sentence.trim()}\n${_grammarExampleTranslation(example, language)}',
+          sourceLabel: _lessonSourceLabel(
+            language,
+            level.shortLabel,
+            target.lessonId,
+          ),
+        ),
+      );
+      continue;
+    }
+
+    final meaning = _grammarMeaning(target, language);
+    final distractors = _selectDistinctCandidates(
+      pool: usablePoints,
+      targetIndex: targetIndex,
+      targetKey: (row) => row.id.toString(),
+      optionLabel: (row) => _grammarMeaning(row, language),
+      random: random,
+    );
+    if (distractors.length < 3) {
+      continue;
+    }
+
+    final rawOptions = <String>[
+      meaning,
+      ...distractors.take(3).map((row) => _grammarMeaning(row, language)),
+    ];
+    final options = _shuffleOptions(rawOptions, random: random);
+    final correctIndex = options.indexOf(meaning);
+    if (correctIndex < 0) {
+      continue;
+    }
+
+    questions.add(
       JlptMockQuestion(
-        id: 'v1',
-        area: JlptSkillArea.vocabulary,
-        prompt: 'Yoyaku means:',
-        options: [
-          'Book in advance',
-          'Cancel schedule',
-          'Leave quickly',
-          'Borrow money',
-        ],
-        correctIndex: 0,
-        explanation: 'Yoyaku means to reserve beforehand.',
+        id: 'grammar-${target.id}-meaning',
+        area: JlptSkillArea.grammar,
+        prompt: _grammarMeaningPrompt(
+          language,
+          jlptMockGrammarPatternLabel(target, language),
+        ),
+        options: options,
+        correctIndex: correctIndex,
+        explanation: _grammarExplanation(target, language),
+        contextTitle: jlptMockGrammarStructureLabel(target, language).isNotEmpty
+            ? _structureLabel(language)
+            : null,
+        contextBody: jlptMockGrammarStructureLabel(target, language).isNotEmpty
+            ? jlptMockGrammarStructureLabel(target, language)
+            : null,
+        sourceLabel: _lessonSourceLabel(
+          language,
+          level.shortLabel,
+          target.lessonId,
+        ),
       ),
-      JlptMockQuestion(
-        id: 'v2',
-        area: JlptSkillArea.vocabulary,
-        prompt: 'The opposite of chikoku is closest to:',
-        options: ['Early leave', 'Departure', 'On time', 'Absent'],
-        correctIndex: 2,
-        explanation: 'Chikoku is being late. Opposite is being on time.',
-      ),
-      JlptMockQuestion(
-        id: 'v3',
-        area: JlptSkillArea.vocabulary,
-        prompt: 'Correct usage of kakunin suru is:',
-        options: [
-          'Check an email',
-          'Check a park',
-          'Check a sound',
-          'Walk a check',
-        ],
-        correctIndex: 0,
-        explanation: 'Kakunin suru is used for checking information/content.',
-      ),
-    ],
-  ),
-  JlptMockSection(
+    );
+  }
+
+  if (questions.isEmpty) {
+    return null;
+  }
+  questions.shuffle(random);
+
+  return JlptMockSection(
     id: 'grammar',
-    title: 'Bunpo (Grammar)',
-    minutes: 10,
-    questions: [
+    title: 'Grammar',
+    minutes: _sectionMinutes(questionCount: questions.length, baseMinutes: 10),
+    questions: questions,
+  );
+}
+
+JlptMockSection? _buildKanjiSection({
+  required List<KanjiItem> items,
+  required StudyLevel level,
+  required AppLanguage language,
+  required Random random,
+}) {
+  final pool = items
+      .where(
+        (item) =>
+            item.character.trim().isNotEmpty &&
+            (_kanjiMeaning(item, language).trim().isNotEmpty ||
+                _primaryKanjiReading(item).isNotEmpty),
+      )
+      .toList(growable: false);
+  final selected = _selectSpread(pool, 5, random: random);
+  if (selected.isEmpty) {
+    return null;
+  }
+
+  final questions = <JlptMockQuestion>[];
+  for (var i = 0; i < selected.length; i++) {
+    final target = selected[i];
+    final targetIndex = pool.indexOf(target);
+    if (targetIndex < 0) {
+      continue;
+    }
+
+    final askReading = i.isEven && _primaryKanjiReading(target).isNotEmpty;
+    if (askReading) {
+      final distractors = _selectDistinctCandidates(
+        pool: pool,
+        targetIndex: targetIndex,
+        targetKey: (item) => item.id.toString(),
+        optionLabel: _primaryKanjiReading,
+        random: random,
+      );
+      if (distractors.length < 3) {
+        continue;
+      }
+
+      final correct = _primaryKanjiReading(target);
+      final rawOptions = <String>[
+        correct,
+        ...distractors.take(3).map(_primaryKanjiReading),
+      ];
+      final options = _shuffleOptions(rawOptions, random: random);
+      final correctIndex = options.indexOf(correct);
+      if (correctIndex < 0) {
+        continue;
+      }
+
+      questions.add(
+        JlptMockQuestion(
+          id: 'kanji-${target.id}-reading',
+          area: JlptSkillArea.kanji,
+          prompt: _kanjiReadingPrompt(language, target.character),
+          options: options,
+          correctIndex: correctIndex,
+          explanation: _kanjiReadingExplanation(
+            language,
+            target.character,
+            correct,
+          ),
+          sourceLabel: _lessonSourceLabel(
+            language,
+            level.shortLabel,
+            target.lessonId,
+          ),
+        ),
+      );
+      continue;
+    }
+
+    final meaning = _kanjiMeaning(target, language);
+    final distractors = _selectDistinctCandidates(
+      pool: pool,
+      targetIndex: targetIndex,
+      targetKey: (item) => item.id.toString(),
+      optionLabel: (item) => _kanjiMeaning(item, language),
+      random: random,
+    );
+    if (distractors.length < 3) {
+      continue;
+    }
+
+    final rawOptions = <String>[
+      meaning,
+      ...distractors.take(3).map((item) => _kanjiMeaning(item, language)),
+    ];
+    final options = _shuffleOptions(rawOptions, random: random);
+    final correctIndex = options.indexOf(meaning);
+    if (correctIndex < 0) {
+      continue;
+    }
+
+    questions.add(
       JlptMockQuestion(
-        id: 'g1',
-        area: JlptSkillArea.grammar,
-        prompt: 'Mainichi benkyo suru ___ jouzu ni narimasu.',
-        options: ['shika', 'hodo', 'to', 'demo'],
-        correctIndex: 2,
-        explanation: 'Conditional pattern uses to in this sentence.',
+        id: 'kanji-${target.id}-meaning',
+        area: JlptSkillArea.kanji,
+        prompt: _kanjiMeaningPrompt(language, target.character),
+        options: options,
+        correctIndex: correctIndex,
+        explanation: _kanjiMeaningExplanation(
+          language,
+          target.character,
+          meaning,
+        ),
+        sourceLabel: _lessonSourceLabel(
+          language,
+          level.shortLabel,
+          target.lessonId,
+        ),
       ),
-      JlptMockQuestion(
-        id: 'g2',
-        area: JlptSkillArea.grammar,
-        prompt: 'Ame ___ shiai wa chushi ni narimashita.',
-        options: ['node', 'karani', 'niwa', 'made'],
-        correctIndex: 0,
-        explanation: 'Node naturally expresses reason/cause here.',
-      ),
-      JlptMockQuestion(
-        id: 'g3',
-        area: JlptSkillArea.grammar,
-        prompt: 'Kono kusuri wa shokugo ni nomanakutewa ___ .',
-        options: ['narimasen', 'nai', 'ikemasen', 'naranai'],
-        correctIndex: 0,
-        explanation: 'Nomanakutewa narimasen is obligation form.',
-      ),
-    ],
-  ),
-  JlptMockSection(
+    );
+  }
+
+  if (questions.isEmpty) {
+    return null;
+  }
+  questions.shuffle(random);
+
+  return JlptMockSection(
     id: 'kanji',
     title: 'Kanji',
-    minutes: 7,
-    questions: [
-      JlptMockQuestion(
-        id: 'k1',
-        area: JlptSkillArea.kanji,
-        prompt: 'Reading of eki (station) is:',
-        options: ['eki', 'machi', 'en', 'michi'],
-        correctIndex: 0,
-        explanation: 'Station kanji is read as eki.',
-      ),
-      JlptMockQuestion(
-        id: 'k2',
-        area: JlptSkillArea.kanji,
-        prompt: 'Correct kanji for atarashii is:',
-        options: ['Shitashii', 'Atarashii(new)', 'Zanshii', 'Shinshii'],
-        correctIndex: 1,
-        explanation: 'Atarashii uses the kanji for new.',
-      ),
-      JlptMockQuestion(
-        id: 'k3',
-        area: JlptSkillArea.kanji,
-        prompt: 'Maishu means:',
-        options: ['Every day', 'Every month', 'Every year', 'Every week'],
-        correctIndex: 3,
-        explanation: 'Maishu means every week.',
-      ),
-    ],
-  ),
-  JlptMockSection(
+    minutes: _sectionMinutes(questionCount: questions.length, baseMinutes: 8),
+    questions: questions,
+  );
+}
+
+Future<JlptMockSection?> _buildReadingSection({
+  required StudyLevel level,
+  required AppLanguage language,
+  required Random random,
+}) async {
+  final passages = await loadJlptReadingBank();
+  final levelPassages = passages
+      .where((entry) => entry.level == level.shortLabel)
+      .toList(growable: false);
+  if (levelPassages.isEmpty) {
+    return null;
+  }
+
+  final selectedPassage = _selectSpread(levelPassages, 1, random: random).first;
+  final questions = selectedPassage.questions
+      .map(
+        (question) => JlptMockQuestion(
+          id: 'reading-${selectedPassage.id}-${question.id}',
+          area: JlptSkillArea.reading,
+          prompt: question.prompt,
+          options: question.options,
+          correctIndex: question.correctIndex,
+          explanation: question.explanation,
+          contextTitle: '${_passageLabel(language)} • ${selectedPassage.title}',
+          contextBody: selectedPassage.body,
+          sourceLabel: _readingSourceLabel(
+            language,
+            level.shortLabel,
+            selectedPassage,
+          ),
+        ),
+      )
+      .toList(growable: false);
+  if (questions.isEmpty) {
+    return null;
+  }
+
+  return JlptMockSection(
     id: 'reading',
-    title: 'Dokkai (Reading)',
-    minutes: 12,
-    questions: [
-      JlptMockQuestion(
-        id: 'r1',
-        area: JlptSkillArea.reading,
-        prompt:
-            'Notice: Tomorrow meeting starts at 10:00. Please distribute docs by 9:45. Which is correct?',
-        options: [
-          'Meeting starts at 9:45',
-          'Docs can be shared by 10:00',
-          'Meeting starts at 10:00',
-          'Meeting is canceled',
-        ],
-        correctIndex: 2,
-        explanation: 'The notice clearly states start time is 10:00.',
-      ),
-      JlptMockQuestion(
-        id: 'r2',
-        area: JlptSkillArea.reading,
-        prompt:
-            'Mail: The train is delayed, so arrival will be 15 minutes late. What is true?',
-        options: [
-          'Already arrived',
-          'Running behind schedule',
-          'Not using train',
-          'Will arrive 15 minutes early',
-        ],
-        correctIndex: 1,
-        explanation: 'The message explicitly says arrival is delayed.',
-      ),
-      JlptMockQuestion(
-        id: 'r3',
-        area: JlptSkillArea.reading,
-        prompt:
-            'Class rule: Food is not allowed. Drinks are allowed only with lid. Which is allowed?',
-        options: ['Bread', 'Water bottle with lid', 'Onigiri', 'Ice cream'],
-        correctIndex: 1,
-        explanation: 'Only drinks with lid are allowed.',
-      ),
-    ],
-  ),
-];
+    title: 'Reading',
+    minutes: max(8, selectedPassage.recommendedMinutes + 2),
+    questions: questions,
+  );
+}
+
+List<T> _selectSpread<T>(List<T> items, int count, {required Random random}) {
+  if (items.isEmpty || count <= 0) {
+    return const [];
+  }
+  if (items.length <= count) {
+    final shuffled = List<T>.from(items);
+    shuffled.shuffle(random);
+    return shuffled;
+  }
+
+  final selected = <T>[];
+  for (var i = 0; i < count; i++) {
+    final start = (i * items.length) ~/ count;
+    final endExclusive = ((i + 1) * items.length) ~/ count;
+    final width = max(1, endExclusive - start);
+    final pick = start + random.nextInt(width);
+    selected.add(items[pick.clamp(0, items.length - 1)]);
+  }
+  selected.shuffle(random);
+  return selected;
+}
+
+List<T> _selectDistinctCandidates<T>({
+  required List<T> pool,
+  required int targetIndex,
+  required String Function(T item) targetKey,
+  required String Function(T item) optionLabel,
+  required Random random,
+  int count = 3,
+}) {
+  if (pool.isEmpty || targetIndex < 0 || targetIndex >= pool.length) {
+    return const [];
+  }
+
+  final target = pool[targetIndex];
+  final seen = <String>{_normalizeKey(optionLabel(target))};
+  final targetId = targetKey(target);
+  final selected = <T>[];
+  final candidates = <T>[
+    for (var index = 0; index < pool.length; index++)
+      if (index != targetIndex) pool[index],
+  ];
+  candidates.shuffle(random);
+
+  for (final candidate in candidates) {
+    if (targetKey(candidate) == targetId) {
+      continue;
+    }
+    final labelKey = _normalizeKey(optionLabel(candidate));
+    if (labelKey.isEmpty || seen.contains(labelKey)) {
+      continue;
+    }
+    seen.add(labelKey);
+    selected.add(candidate);
+  }
+  return selected;
+}
+
+List<String> _shuffleOptions(
+  List<String> rawOptions, {
+  required Random random,
+}) {
+  final options = <String>[];
+  final seen = <String>{};
+  for (final option in rawOptions) {
+    final trimmed = option.trim();
+    if (trimmed.isEmpty) {
+      continue;
+    }
+    final key = _normalizeKey(trimmed);
+    if (seen.add(key)) {
+      options.add(trimmed);
+    }
+  }
+  if (options.length <= 1) {
+    return options;
+  }
+  options.shuffle(random);
+  return options;
+}
+
+String _normalizeKey(String value) => value.trim().toLowerCase();
+
+int _sectionMinutes({required int questionCount, required int baseMinutes}) {
+  return max(baseMinutes, questionCount * 2);
+}
+
+String _readingLabel(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Reading';
+    case AppLanguage.vi:
+      return 'Cách đọc';
+    case AppLanguage.ja:
+      return '読み';
+  }
+}
+
+String _exampleLabel(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Example';
+    case AppLanguage.vi:
+      return 'Ví dụ';
+    case AppLanguage.ja:
+      return '例文';
+  }
+}
+
+String _structureLabel(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Structure';
+    case AppLanguage.vi:
+      return 'Cấu trúc';
+    case AppLanguage.ja:
+      return '構文';
+  }
+}
+
+String _passageLabel(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Passage';
+    case AppLanguage.vi:
+      return 'Đoạn đọc';
+    case AppLanguage.ja:
+      return '本文';
+  }
+}
+
+String _vocabMeaningPrompt(AppLanguage language, String term) {
+  switch (language) {
+    case AppLanguage.en:
+      return '$term means:';
+    case AppLanguage.vi:
+      return '"$term" có nghĩa gần nhất là gì?';
+    case AppLanguage.ja:
+      return '「$term」の意味として最も近いものはどれですか。';
+  }
+}
+
+String _vocabTermPrompt(AppLanguage language, String meaning) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Which term matches "$meaning"?';
+    case AppLanguage.vi:
+      return 'Từ nào khớp với nghĩa "$meaning"?';
+    case AppLanguage.ja:
+      return '「$meaning」に合う語はどれですか。';
+  }
+}
+
+String _vocabMeaningExplanation(
+  AppLanguage language,
+  String term,
+  String meaning,
+) {
+  switch (language) {
+    case AppLanguage.en:
+      return '$term = $meaning.';
+    case AppLanguage.vi:
+      return '$term = $meaning.';
+    case AppLanguage.ja:
+      return '$term は「$meaning」です。';
+  }
+}
+
+String _vocabTermExplanation(
+  AppLanguage language,
+  String term,
+  String meaning,
+) {
+  switch (language) {
+    case AppLanguage.en:
+      return '"$meaning" matches $term.';
+    case AppLanguage.vi:
+      return '"$meaning" tương ứng với $term.';
+    case AppLanguage.ja:
+      return '「$meaning」に合う語は $term です。';
+  }
+}
+
+String _grammarMeaningPrompt(AppLanguage language, String pattern) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'What is the best meaning of "$pattern"?';
+    case AppLanguage.vi:
+      return '"$pattern" diễn tả ý nào gần nhất?';
+    case AppLanguage.ja:
+      return '「$pattern」の意味として最も近いものはどれですか。';
+  }
+}
+
+String _grammarPatternPrompt(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Which grammar pattern fits the example below?';
+    case AppLanguage.vi:
+      return 'Ví dụ dưới đây đang dùng mẫu ngữ pháp nào?';
+    case AppLanguage.ja:
+      return '次の例文に合う文型はどれですか。';
+  }
+}
+
+String _kanjiReadingPrompt(AppLanguage language, String character) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Reading of "$character" is:';
+    case AppLanguage.vi:
+      return 'Cách đọc của "$character" là gì?';
+    case AppLanguage.ja:
+      return '「$character」の読みとして正しいものはどれですか。';
+  }
+}
+
+String _kanjiMeaningPrompt(AppLanguage language, String character) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Meaning of "$character" is:';
+    case AppLanguage.vi:
+      return 'Kanji "$character" có nghĩa là gì?';
+    case AppLanguage.ja:
+      return '「$character」の意味として正しいものはどれですか。';
+  }
+}
+
+String _kanjiReadingExplanation(
+  AppLanguage language,
+  String character,
+  String reading,
+) {
+  switch (language) {
+    case AppLanguage.en:
+      return '$character is read as $reading.';
+    case AppLanguage.vi:
+      return '$character được đọc là $reading.';
+    case AppLanguage.ja:
+      return '$character の読みは $reading です。';
+  }
+}
+
+String _kanjiMeaningExplanation(
+  AppLanguage language,
+  String character,
+  String meaning,
+) {
+  switch (language) {
+    case AppLanguage.en:
+      return '$character means $meaning.';
+    case AppLanguage.vi:
+      return '$character có nghĩa là $meaning.';
+    case AppLanguage.ja:
+      return '$character の意味は $meaning です。';
+  }
+}
+
+String _vocabSourceLabel(
+  AppLanguage language,
+  StudyLevel level,
+  VocabItem item,
+) {
+  final lessonId = _extractLessonIdFromVocab(item);
+  return _lessonSourceLabel(language, level.shortLabel, lessonId);
+}
+
+String _readingSourceLabel(
+  AppLanguage language,
+  String levelLabel,
+  JlptReadingPassage passage,
+) {
+  final lessonId = _extractLessonId(passage.id);
+  return _lessonSourceLabel(language, levelLabel, lessonId);
+}
+
+String _lessonSourceLabel(
+  AppLanguage language,
+  String levelLabel,
+  int? lessonId,
+) {
+  if (lessonId == null) {
+    return levelLabel;
+  }
+  final padded = lessonId.toString().padLeft(2, '0');
+  switch (language) {
+    case AppLanguage.en:
+      return '$levelLabel • Lesson $padded';
+    case AppLanguage.vi:
+      return '$levelLabel • Bài $padded';
+    case AppLanguage.ja:
+      return '$levelLabel • 第$padded課';
+  }
+}
+
+int? _extractLessonIdFromVocab(VocabItem item) {
+  final tags = item.tags ?? const <String>[];
+  for (final tag in tags) {
+    final lessonId = _extractLessonId(tag);
+    if (lessonId != null) {
+      return lessonId;
+    }
+  }
+  return null;
+}
+
+int? _extractLessonId(String raw) {
+  final match = RegExp(r'(\d+)').firstMatch(raw);
+  return match == null ? null : int.tryParse(match.group(1)!);
+}
+
+String jlptMockGrammarPatternLabel(
+  content.GrammarPointData point,
+  AppLanguage language,
+) {
+  if (language == AppLanguage.vi) {
+    return point.title.trim();
+  }
+
+  final english = point.titleEn?.trim();
+  if (english != null && english.isNotEmpty) {
+    return normalizeGrammarTitleEn(english);
+  }
+
+  final structureEn = point.structureEn?.trim();
+  if (structureEn != null && structureEn.isNotEmpty) {
+    return normalizeGrammarStructureEn(structureEn);
+  }
+
+  return point.title.trim();
+}
+
+String jlptMockGrammarStructureLabel(
+  content.GrammarPointData point,
+  AppLanguage language,
+) {
+  if (language == AppLanguage.vi) {
+    return point.structure.trim();
+  }
+
+  final english = point.structureEn?.trim();
+  if (english != null && english.isNotEmpty) {
+    return normalizeGrammarStructureEn(english);
+  }
+
+  final patternEnglish = point.titleEn?.trim();
+  if (patternEnglish != null && patternEnglish.isNotEmpty) {
+    return normalizeGrammarTitleEn(patternEnglish);
+  }
+
+  return point.structure.trim();
+}
+
+String _grammarMeaning(content.GrammarPointData point, AppLanguage language) {
+  if (language == AppLanguage.vi) {
+    final firstLine = point.explanation
+        .split('\n')
+        .first
+        .split('.')
+        .first
+        .trim();
+    if (firstLine.isNotEmpty) {
+      return firstLine;
+    }
+  }
+
+  final english = point.titleEn?.trim();
+  if (english != null && english.isNotEmpty) {
+    return normalizeGrammarTitleEn(english);
+  }
+
+  final structureEn = point.structureEn?.trim();
+  if (structureEn != null && structureEn.isNotEmpty) {
+    return normalizeGrammarStructureEn(structureEn);
+  }
+
+  return point.title.trim();
+}
+
+String _grammarExplanation(
+  content.GrammarPointData point,
+  AppLanguage language,
+) {
+  if (language == AppLanguage.vi) {
+    return point.explanation.trim();
+  }
+  final english = point.explanationEn?.trim();
+  if (english != null && english.isNotEmpty) {
+    return english;
+  }
+  return point.explanation.trim();
+}
+
+String _grammarExampleTranslation(
+  content.GrammarExampleData example,
+  AppLanguage language,
+) {
+  if (language == AppLanguage.vi) {
+    return example.translation.trim();
+  }
+  final english = example.translationEn?.trim();
+  if (english != null && english.isNotEmpty) {
+    return english;
+  }
+  return example.translation.trim();
+}
+
+String _kanjiMeaning(KanjiItem item, AppLanguage language) {
+  switch (language) {
+    case AppLanguage.vi:
+      return item.meaning.trim();
+    case AppLanguage.en:
+    case AppLanguage.ja:
+      final english = item.meaningEn?.trim();
+      return english != null && english.isNotEmpty
+          ? english
+          : item.meaning.trim();
+  }
+}
+
+String _primaryKanjiReading(KanjiItem item) {
+  for (final raw in [item.onyomi, item.kunyomi]) {
+    final value = raw?.trim() ?? '';
+    if (value.isEmpty) {
+      continue;
+    }
+    final parts = value
+        .split(RegExp(r'[,/、\s]+'))
+        .map((part) => part.trim())
+        .where((part) => part.isNotEmpty);
+    if (parts.isNotEmpty) {
+      return parts.first;
+    }
+  }
+  return '';
+}

@@ -4,7 +4,7 @@
     "title": "Giờ và phút",
     "titleEn": "Time (Hours / Minutes)",
     "structure": "今、～時～分 です",
-    "structureEn": "Ima, ~ji ~fun/pun desu",
+    "structureEn": "今、~時 ~分です",
     "explanation": "Mẫu này dùng để nói giờ hiện tại. * `いま`: bây giờ.\n* `～じ`: giờ.\n* `～ふん / ぷん`: phút.",
     "explanationEn": "Use this pattern to tell the current time. * `いま`: now.\n* `～じ`: hour / o'clock.\n* `～ふん / ぷん`: minute.",
     "level": "N5"
@@ -14,7 +14,7 @@
     "title": "Động từ dạng ます",
     "titleEn": "Verb -masu form",
     "structure": "Vます / Vません / Vました / Vませんでした",
-    "structureEn": "V-masu / V-masen / V-mashita / V-masen deshita",
+    "structureEn": "V-ます / V-ません / V-ました / V-ませんでした",
     "explanation": "Đây là các dạng lịch sự cơ bản của động từ. * `ます`: hiện tại / tương lai khẳng định.\n* `ません`: hiện tại / tương lai phủ định.\n* `ました`: quá khứ khẳng định.\n* `ませんでした`: quá khứ phủ định.",
     "explanationEn": "These are the basic polite verb forms. * `ます`: present / future affirmative.\n* `ません`: present / future negative.\n* `ました`: past affirmative.\n* `ませんでした`: past negative.",
     "level": "N5"
@@ -24,7 +24,7 @@
     "title": "N1 から N2 まで",
     "titleEn": "From N1 to N2 (Time/Place)",
     "structure": "N1 (Thời gian / Địa điểm) から N2 まで",
-    "structureEn": "N1 kara N2 made",
+    "structureEn": "N1 から N2 まで",
     "explanation": "Mẫu này diễn tả phạm vi từ điểm bắt đầu đến điểm kết thúc, về thời gian hoặc địa điểm. * `から`: điểm bắt đầu.\n* `まで`: điểm kết thúc.",
     "explanationEn": "This pattern expresses a range from a starting point to an end point in time or place. * `から`: starting point.\n* `まで`: end point.",
     "level": "N5"
@@ -32,9 +32,9 @@
   {
     "lessonId": 4,
     "title": "N1 と N2",
-    "titleEn": "N1 and N2 (Particle to)",
+    "titleEn": "N1 and N2 (Particle と)",
     "structure": "N1 と N2",
-    "structureEn": "N1 to N2",
+    "structureEn": "N1 と N2",
     "explanation": "`と` nghĩa là “và”, dùng để nối hai hay nhiều danh từ trong cùng một nhóm liệt kê.",
     "explanationEn": "`と` means “and” and is used to connect two or more nouns in the same list.",
     "level": "N5"

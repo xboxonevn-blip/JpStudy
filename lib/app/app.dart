@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/navigation/app_router.dart';
+import 'package:jpstudy/app/app_scroll_behavior.dart';
 import 'package:jpstudy/app/theme/app_theme.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
@@ -17,12 +18,14 @@ class App extends ConsumerWidget {
 
     return MaterialApp.router(
       title: 'JpStudy',
+      debugShowCheckedModeBanner: false,
       locale: language.locale,
       supportedLocales: supportedAppLocales,
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
       theme: AppTheme.light(language),
       darkTheme: AppTheme.dark(language),
       themeMode: themeMode,
+      scrollBehavior: const AppScrollBehavior(),
       // Language changes swap fontFamily entirely (e.g. Manrope ↔ Yu Gothic UI).
       // AnimatedTheme cannot lerp TextStyles with incompatible font families,
       // causing "Failed to interpolate TextStyles with different inherit values".

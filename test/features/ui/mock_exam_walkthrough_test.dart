@@ -182,6 +182,61 @@ void main() {
   });
 
   testWidgets(
+    'Mock exam desktop layout does not overflow with long side panel',
+    (tester) async {
+      SharedPreferences.setMockInitialValues({});
+      await tester.binding.setSurfaceSize(const Size(1400, 900));
+      addTearDown(() async {
+        await tester.binding.setSurfaceSize(null);
+      });
+
+      final db = AppDatabase(executor: NativeDatabase.memory());
+      final contentDb = ContentDatabase(executor: NativeDatabase.memory());
+      final repo = LessonRepository(db, contentDb);
+      addTearDown(() async {
+        await contentDb.close();
+        await db.close();
+      });
+
+      final items = buildItems(startId: 5000, count: 50, level: 'N5');
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            databaseProvider.overrideWithValue(db),
+            lessonRepositoryProvider.overrideWithValue(repo),
+          ],
+          child: MaterialApp(
+            home: TestScreen(
+              items: items,
+              lessonId: -1,
+              lessonTitle: AppLanguage.en.mockExamTitle('N5'),
+              config: const TestConfig(
+                questionCount: 50,
+                enabledTypes: [
+                  QuestionType.multipleChoice,
+                  QuestionType.trueFalse,
+                  QuestionType.fillBlank,
+                ],
+                shuffleQuestions: false,
+                showCorrectAfterWrong: false,
+                adaptiveTesting: false,
+              ),
+              sessionKey: 'mock_n5_desktop_no_overflow',
+            ),
+          ),
+        ),
+      );
+
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 200));
+
+      expect(find.text('Run mode'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets(
     'Mock exam flow reaches results screen',
     (tester) async {
       SharedPreferences.setMockInitialValues({});

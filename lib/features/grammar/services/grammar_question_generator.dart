@@ -1,4 +1,5 @@
 import 'package:jpstudy/data/db/app_database.dart';
+import 'package:jpstudy/data/utils/grammar_example_quality.dart';
 import 'package:jpstudy/data/utils/grammar_english_notation.dart';
 
 import '../../../core/app_language.dart';
@@ -73,9 +74,40 @@ class GrammarQuestionGenerator {
       final point = detail.point;
       final pointMeaning = _localizedPointMeaning(point, language);
       final pointExplanation = _localizedPointExplanation(point, language);
-      final primaryExample = detail.examples.isEmpty
-          ? null
-          : detail.examples.first;
+      final exampleQuality = GrammarExampleQualityAssessor.assessBlock(
+        grammarPoint: point.grammarPoint,
+        examples: detail.examples.map(_toQualitySeed).toList(growable: false),
+        locale: _qualityLocaleFor(language),
+      );
+      final primaryExample = _bestExampleForBlock(
+        detail.examples,
+        exampleQuality,
+      );
+      final sentenceBuilderExamples = _prioritizedExamplesForKind(
+        detail.examples,
+        exampleQuality,
+        GrammarExampleQuestionKind.sentenceBuilder,
+      );
+      final clozeExamples = _prioritizedExamplesForKind(
+        detail.examples,
+        exampleQuality,
+        GrammarExampleQuestionKind.cloze,
+      );
+      final contextExamples = _prioritizedExamplesForKind(
+        detail.examples,
+        exampleQuality,
+        GrammarExampleQuestionKind.contextChoice,
+      );
+      final replacementExamples = _prioritizedExamplesForKind(
+        detail.examples,
+        exampleQuality,
+        GrammarExampleQuestionKind.errorCorrection,
+      );
+      final transformationExamples = _prioritizedExamplesForKind(
+        detail.examples,
+        exampleQuality,
+        GrammarExampleQuestionKind.transformation,
+      );
 
       _addQuestion(
         questions,
@@ -114,7 +146,7 @@ class GrammarQuestionGenerator {
         ),
       );
 
-      for (final example in detail.examples) {
+      for (final example in sentenceBuilderExamples) {
         final localizedTranslation = _localizedExampleTranslation(
           example,
           language,
@@ -149,7 +181,9 @@ class GrammarQuestionGenerator {
             ),
           );
         }
+      }
 
+      for (final example in clozeExamples) {
         _addQuestion(
           questions,
           dedupeKeys,
@@ -163,7 +197,9 @@ class GrammarQuestionGenerator {
             language: language,
           ),
         );
+      }
 
+      for (final example in contextExamples) {
         _addQuestion(
           questions,
           dedupeKeys,
@@ -176,7 +212,9 @@ class GrammarQuestionGenerator {
             language: language,
           ),
         );
+      }
 
+      for (final example in replacementExamples) {
         _addQuestion(
           questions,
           dedupeKeys,
@@ -202,7 +240,9 @@ class GrammarQuestionGenerator {
             language: language,
           ),
         );
+      }
 
+      for (final example in transformationExamples) {
         _addQuestion(
           questions,
           dedupeKeys,
@@ -231,6 +271,68 @@ class GrammarQuestionGenerator {
     final key = '${question.type}:${question.point.id}:${question.question}';
     if (dedupeKeys.add(key)) {
       out.add(question);
+    }
+  }
+
+  static GrammarExampleSeedData _toQualitySeed(GrammarExample example) {
+    return GrammarExampleSeedData(
+      sentence: example.japanese,
+      translation: example.translation,
+      translationEn: example.translationEn,
+      translationVi: example.translationVi,
+    );
+  }
+
+  static GrammarExampleLocale _qualityLocaleFor(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return GrammarExampleLocale.en;
+      case AppLanguage.vi:
+        return GrammarExampleLocale.vi;
+      case AppLanguage.ja:
+        return GrammarExampleLocale.ja;
+    }
+  }
+
+  static GrammarExample? _bestExampleForBlock(
+    List<GrammarExample> examples,
+    GrammarExampleBlockQualityAssessment quality,
+  ) {
+    final best = quality.bestOverall;
+    if (best == null || best.index < 0 || best.index >= examples.length) {
+      return examples.isEmpty ? null : examples.first;
+    }
+    return examples[best.index];
+  }
+
+  static List<GrammarExample> _prioritizedExamplesForKind(
+    List<GrammarExample> examples,
+    GrammarExampleBlockQualityAssessment quality,
+    GrammarExampleQuestionKind kind,
+  ) {
+    final limit = _exampleLimitFor(kind);
+    final prioritized = <GrammarExample>[];
+    for (final item in quality.prioritizedFor(kind, limit: limit)) {
+      if (item.index < 0 || item.index >= examples.length) continue;
+      prioritized.add(examples[item.index]);
+    }
+    return prioritized;
+  }
+
+  static int _exampleLimitFor(GrammarExampleQuestionKind kind) {
+    switch (kind) {
+      case GrammarExampleQuestionKind.sentenceBuilder:
+        return 4;
+      case GrammarExampleQuestionKind.cloze:
+        return 4;
+      case GrammarExampleQuestionKind.contextChoice:
+        return 3;
+      case GrammarExampleQuestionKind.errorCorrection:
+        return 3;
+      case GrammarExampleQuestionKind.errorReason:
+        return 3;
+      case GrammarExampleQuestionKind.transformation:
+        return 2;
     }
   }
 
@@ -466,7 +568,12 @@ class GrammarQuestionGenerator {
     required AppLanguage language,
   }) {
     final prompt = _localizedExampleTranslation(targetExample, language).trim();
-    if (prompt.isEmpty) return null;
+    if (_shouldSkipContextChoiceForExample(
+      example: targetExample,
+      prompt: prompt,
+    )) {
+      return null;
+    }
     final patternFormula = _localizedPatternFormula(point, language);
 
     final distractors = _pickContextDistractorSentences(
@@ -514,6 +621,15 @@ class GrammarQuestionGenerator {
     required List<GrammarPoint>? allPoints,
     required AppLanguage language,
   }) {
+    final patternFormula = _localizedPatternFormula(point, language);
+    if (_shouldSkipReplacementQuestionForPattern(
+      point,
+      example,
+      patternFormula,
+    )) {
+      return null;
+    }
+
     final corrupted = _buildCorruptedSentence(
       point: point,
       example: example,
@@ -522,7 +638,6 @@ class GrammarQuestionGenerator {
     );
     if (corrupted == null) return null;
 
-    final patternFormula = _localizedPatternFormula(point, language);
     final replacementFormula = _localizedPatternFormula(
       corrupted.replacementPoint,
       language,
@@ -570,6 +685,15 @@ class GrammarQuestionGenerator {
     required List<GrammarPoint>? allPoints,
     required AppLanguage language,
   }) {
+    final patternFormula = _localizedPatternFormula(point, language);
+    if (_shouldSkipReplacementQuestionForPattern(
+      point,
+      example,
+      patternFormula,
+    )) {
+      return null;
+    }
+
     final corrupted = _buildCorruptedSentence(
       point: point,
       example: example,
@@ -578,7 +702,6 @@ class GrammarQuestionGenerator {
     );
     if (corrupted == null) return null;
 
-    final patternFormula = _localizedPatternFormula(point, language);
     final replacementFormula = _localizedPatternFormula(
       corrupted.replacementPoint,
       language,
@@ -646,6 +769,8 @@ class GrammarQuestionGenerator {
     required GrammarExample example,
     required AppLanguage language,
   }) {
+    if (_shouldSkipTransformationForExample(example)) return null;
+
     final transformed = _transformToNegative(example.japanese);
     if (transformed == null || transformed == example.japanese) return null;
 
@@ -690,7 +815,10 @@ class GrammarQuestionGenerator {
     required AppLanguage language,
   }) {
     if (allPoints == null || allPoints.isEmpty) return null;
-    if (!example.japanese.contains(point.grammarPoint)) return null;
+    final targetPattern = point.grammarPoint.trim();
+    if (targetPattern.isEmpty) return null;
+    if (!_isEmbeddableSurfacePattern(targetPattern)) return null;
+    if (!example.japanese.contains(targetPattern)) return null;
 
     final alternatives = _pickRelatedGrammarPoints(
       target: point,
@@ -700,10 +828,11 @@ class GrammarQuestionGenerator {
     );
     String? replacement;
     for (final value in alternatives.map((p) => p.grammarPoint)) {
-      if (value.trim().isEmpty || containsVietnameseGrammarText(value)) {
+      final candidate = value.trim();
+      if (!_isEmbeddableSurfacePattern(candidate)) {
         continue;
       }
-      replacement = value;
+      replacement = candidate;
       break;
     }
     if (replacement == null) return null;
@@ -713,10 +842,7 @@ class GrammarQuestionGenerator {
     );
 
     return _CorruptedSentence(
-      wrongSentence: example.japanese.replaceFirst(
-        point.grammarPoint,
-        replacement,
-      ),
+      wrongSentence: example.japanese.replaceFirst(targetPattern, replacement),
       correctSentence: example.japanese,
       replacement: replacement,
       replacementPoint: replacementPoint,
@@ -891,7 +1017,7 @@ class GrammarQuestionGenerator {
         item.example,
         language,
       ).trim();
-      if (prompt.isEmpty) continue;
+      if (!_hasUsableContextPrompt(prompt, sentence)) continue;
 
       ranked.add((
         sentence: sentence,
@@ -931,6 +1057,8 @@ class GrammarQuestionGenerator {
     required String candidatePrompt,
   }) {
     var score = 0;
+    final targetSurface = _exampleSurfaceFamily(targetExample.japanese);
+    final candidateSurface = _exampleSurfaceFamily(candidateExample.japanese);
 
     if (candidatePoint.lessonId != null &&
         candidatePoint.lessonId == targetPoint.lessonId) {
@@ -944,6 +1072,12 @@ class GrammarQuestionGenerator {
       candidateExample.japanese,
     )) {
       score += 4;
+    }
+    if (targetSurface == candidateSurface) {
+      score += 4;
+    } else if (targetSurface != 'statement' ||
+        candidateSurface != 'statement') {
+      score -= 3;
     }
 
     final translationOverlap = _meaningTokenOverlap(
@@ -1167,6 +1301,51 @@ class GrammarQuestionGenerator {
     return false;
   }
 
+  static bool _shouldSkipReplacementQuestionForPattern(
+    GrammarPoint point,
+    GrammarExample example,
+    String patternFormula,
+  ) {
+    if (!_isUsablePatternChoice(patternFormula)) return true;
+    final rawPattern = point.grammarPoint.trim();
+    if (!_isEmbeddableSurfacePattern(rawPattern)) return true;
+
+    final exampleText = example.japanese.trim();
+    if (_looksLikeStandaloneSentence(rawPattern) &&
+        exampleText.startsWith(rawPattern)) {
+      return true;
+    }
+
+    final replaced = exampleText.replaceFirst(rawPattern, '{replacement}');
+    if (replaced == exampleText || replaced.trim() == '{replacement}') {
+      return true;
+    }
+
+    return false;
+  }
+
+  static bool _shouldSkipContextChoiceForExample({
+    required GrammarExample example,
+    required String prompt,
+  }) {
+    final sentence = example.japanese.trim();
+    if (!_hasUsableContextPrompt(prompt, sentence)) return true;
+    return _isDialogueSentence(sentence);
+  }
+
+  static bool _hasUsableContextPrompt(String prompt, String sentence) {
+    return GrammarExampleQualityAssessor.hasUsableContextPrompt(
+      prompt,
+      sentence,
+    );
+  }
+
+  static bool _shouldSkipTransformationForExample(GrammarExample example) {
+    return !GrammarExampleQualityAssessor.supportsTransformation(
+      example.japanese,
+    );
+  }
+
   static bool _isUsablePatternChoice(String value) {
     final trimmed = value.trim();
     if (trimmed.isEmpty) return false;
@@ -1177,6 +1356,19 @@ class GrammarQuestionGenerator {
       'Question pattern',
     };
     return !blocked.contains(trimmed);
+  }
+
+  static bool _isEmbeddableSurfacePattern(String value) {
+    final trimmed = value.trim();
+    if (trimmed.isEmpty) return false;
+    if (containsVietnameseGrammarText(trimmed)) return false;
+    if (_placeholderCount(trimmed) > 0) return false;
+    return !RegExp(r'[~～〜〇○◯□△◇_＿/／]').hasMatch(trimmed);
+  }
+
+  static bool _isDialogueSentence(String value) {
+    return GrammarExampleQualityAssessor.surfaceFamilyForSentence(value) ==
+        GrammarExampleSurfaceFamily.dialogue;
   }
 
   static bool _looksLikeExchangePrompt(String value) {
@@ -1227,11 +1419,27 @@ class GrammarQuestionGenerator {
   static String _leadingSentenceClause(String sentence) {
     final trimmed = sentence.trim();
     if (trimmed.isEmpty) return '';
+    if (trimmed.contains('…')) {
+      final parts = trimmed.split('…');
+      final lead = parts.first.trim();
+      if (lead.isNotEmpty) return lead;
+    }
     final firstPeriod = trimmed.indexOf('。');
     if (firstPeriod > 0) {
       return trimmed.substring(0, firstPeriod).trim();
     }
     return trimmed;
+  }
+
+  static String _exampleSurfaceFamily(String sentence) {
+    switch (GrammarExampleQualityAssessor.surfaceFamilyForSentence(sentence)) {
+      case GrammarExampleSurfaceFamily.dialogue:
+        return 'dialogue';
+      case GrammarExampleSurfaceFamily.question:
+        return 'question';
+      case GrammarExampleSurfaceFamily.statement:
+        return 'statement';
+    }
   }
 
   static bool _hasSimilarSentenceEnding(String a, String b) {

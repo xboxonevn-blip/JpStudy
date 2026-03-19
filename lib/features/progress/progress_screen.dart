@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_breakpoints.dart';
+import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/level_provider.dart';
@@ -30,138 +32,201 @@ class ProgressScreen extends ConsumerWidget {
           final accuracyRatio = summary.totalQuestions == 0
               ? 0.0
               : summary.totalCorrect / summary.totalQuestions;
-          return AppPageShell(
+          final overviewSection = AppSectionCard(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AppFeatureCard(
-                  icon: Icons.insights_rounded,
-                  title: '${language.progressTitle}$levelSuffix',
-                  subtitle: _progressHeroSubtitle(language, summary, accuracy),
-                  status: AppStatusChip(
-                    label: '${summary.streak}',
-                    tone: AppStatusTone.warning,
-                  ),
+                AppSectionHeader(
+                  title: _overviewTitle(language),
+                  caption: _overviewCaption(language),
                 ),
-                const SizedBox(height: 16),
-                AppSectionCard(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AppSectionHeader(
-                        title: _overviewTitle(language),
-                        caption: _overviewCaption(language),
-                      ),
-                      const SizedBox(height: 14),
-                      AppProgressStrip(
-                        value: accuracyRatio,
-                        label: language.progressAccuracyLabel,
-                      ),
-                      const SizedBox(height: 14),
-                      Wrap(
-                        spacing: 12,
-                        runSpacing: 12,
-                        children: [
-                          _StatCard(
-                            label: language.progressStreakLabel,
-                            value: summary.streak.toString(),
-                          ),
-                          _StatCard(
-                            label: language.progressTodayXpLabel,
-                            value: summary.todayXp.toString(),
-                          ),
-                          _StatCard(
-                            label: language.progressTotalXpLabel,
-                            value: summary.totalXp.toString(),
-                          ),
-                          _StatCard(
-                            label: language.progressAttemptsLabel,
-                            value: summary.totalAttempts.toString(),
-                          ),
-                          _StatCard(
-                            label: language.progressAccuracyLabel,
-                            value: '$accuracy%',
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                const SizedBox(height: 14),
+                AppProgressStrip(
+                  value: accuracyRatio,
+                  label: language.progressAccuracyLabel,
                 ),
-                const SizedBox(height: 16),
-                _ActivityCalendar(streak: summary.streak),
-                const SizedBox(height: 16),
-                const _SrsRetentionCard(),
-                const SizedBox(height: 16),
-                const WeaknessRadarCard(compact: true),
-                const SizedBox(height: 16),
-                AppSectionCard(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AppSectionHeader(title: language.reviewHistoryLabel),
-                      const SizedBox(height: 12),
-                      reviewHistoryAsync.when(
-                        data: (history) => history.isEmpty
-                            ? _EmptyState(
-                                label: language.reviewHistoryEmptyLabel,
-                              )
-                            : Column(
-                                children: [
-                                  for (final day in history)
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                        bottom: 12,
-                                      ),
-                                      child: _ReviewHistoryCard(
-                                        language: language,
-                                        summary: day,
-                                      ),
-                                    ),
-                                ],
-                              ),
-                        loading: () =>
-                            const Center(child: CircularProgressIndicator()),
-                        error: (e, _) =>
-                            ErrorStateWidget(error: e, compact: true),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 16),
-                AppSectionCard(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AppSectionHeader(title: language.attemptHistoryLabel),
-                      const SizedBox(height: 12),
-                      attemptHistoryAsync.when(
-                        data: (attempts) => attempts.isEmpty
-                            ? _EmptyState(
-                                label: language.attemptHistoryEmptyLabel,
-                              )
-                            : Column(
-                                children: [
-                                  for (final attempt in attempts)
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                        bottom: 12,
-                                      ),
-                                      child: _AttemptHistoryCard(
-                                        language: language,
-                                        attempt: attempt,
-                                      ),
-                                    ),
-                                ],
-                              ),
-                        loading: () =>
-                            const Center(child: CircularProgressIndicator()),
-                        error: (e, _) =>
-                            ErrorStateWidget(error: e, compact: true),
-                      ),
-                    ],
-                  ),
+                const SizedBox(height: 14),
+                Wrap(
+                  spacing: 12,
+                  runSpacing: 12,
+                  children: [
+                    _StatCard(
+                      label: language.progressStreakLabel,
+                      value: summary.streak.toString(),
+                    ),
+                    _StatCard(
+                      label: language.progressTodayXpLabel,
+                      value: summary.todayXp.toString(),
+                    ),
+                    _StatCard(
+                      label: language.progressTotalXpLabel,
+                      value: summary.totalXp.toString(),
+                    ),
+                    _StatCard(
+                      label: language.progressAttemptsLabel,
+                      value: summary.totalAttempts.toString(),
+                    ),
+                    _StatCard(
+                      label: language.progressAccuracyLabel,
+                      value: '$accuracy%',
+                    ),
+                  ],
                 ),
               ],
+            ),
+          );
+          final reviewSection = AppSectionCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppSectionHeader(title: language.reviewHistoryLabel),
+                const SizedBox(height: 12),
+                reviewHistoryAsync.when(
+                  data: (history) => history.isEmpty
+                      ? _EmptyState(label: language.reviewHistoryEmptyLabel)
+                      : Column(
+                          children: [
+                            for (final day in history)
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 12),
+                                child: _ReviewHistoryCard(
+                                  language: language,
+                                  summary: day,
+                                ),
+                              ),
+                          ],
+                        ),
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  error: (e, _) => ErrorStateWidget(error: e, compact: true),
+                ),
+              ],
+            ),
+          );
+          final attemptSection = AppSectionCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppSectionHeader(title: language.attemptHistoryLabel),
+                const SizedBox(height: 12),
+                attemptHistoryAsync.when(
+                  data: (attempts) => attempts.isEmpty
+                      ? _EmptyState(label: language.attemptHistoryEmptyLabel)
+                      : Column(
+                          children: [
+                            for (final attempt in attempts)
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 12),
+                                child: _AttemptHistoryCard(
+                                  language: language,
+                                  attempt: attempt,
+                                ),
+                              ),
+                          ],
+                        ),
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  error: (e, _) => ErrorStateWidget(error: e, compact: true),
+                ),
+              ],
+            ),
+          );
+
+          return AppPageShell(
+            topPadding: AppSpacing.lg,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final useDesktopSplit =
+                    constraints.maxWidth >= AppBreakpoints.desktop;
+
+                if (!useDesktopSplit) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AppFeatureCard(
+                        icon: Icons.insights_rounded,
+                        title: '${language.progressTitle}$levelSuffix',
+                        subtitle: _progressHeroSubtitle(
+                          language,
+                          summary,
+                          accuracy,
+                        ),
+                        status: AppStatusChip(
+                          label: '${summary.streak}',
+                          tone: AppStatusTone.warning,
+                        ),
+                      ),
+                      const SizedBox(height: AppSpacing.lg),
+                      overviewSection,
+                      const SizedBox(height: AppSpacing.lg),
+                      _ActivityCalendar(streak: summary.streak),
+                      const SizedBox(height: AppSpacing.lg),
+                      const _SrsRetentionCard(),
+                      const SizedBox(height: AppSpacing.lg),
+                      const WeaknessRadarCard(compact: true),
+                      const SizedBox(height: AppSpacing.lg),
+                      reviewSection,
+                      const SizedBox(height: AppSpacing.lg),
+                      attemptSection,
+                    ],
+                  );
+                }
+
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AppFeatureCard(
+                      icon: Icons.insights_rounded,
+                      title: '${language.progressTitle}$levelSuffix',
+                      subtitle: _progressHeroSubtitle(
+                        language,
+                        summary,
+                        accuracy,
+                      ),
+                      status: AppStatusChip(
+                        label: '${summary.streak}',
+                        tone: AppStatusTone.warning,
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.lg),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          flex: 7,
+                          child: Column(
+                            children: [
+                              overviewSection,
+                              const SizedBox(height: AppSpacing.lg),
+                              _ActivityCalendar(streak: summary.streak),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: AppSpacing.lg),
+                        const Expanded(
+                          flex: 5,
+                          child: Column(
+                            children: [
+                              _SrsRetentionCard(),
+                              SizedBox(height: AppSpacing.lg),
+                              WeaknessRadarCard(compact: true),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: AppSpacing.lg),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(child: reviewSection),
+                        const SizedBox(width: AppSpacing.lg),
+                        Expanded(child: attemptSection),
+                      ],
+                    ),
+                  ],
+                );
+              },
             ),
           );
         },
@@ -346,11 +411,11 @@ String _progressHeroSubtitle(
 ) {
   switch (language) {
     case AppLanguage.en:
-      return 'Today ${summary.todayXp} XP ? ${summary.streak}-day streak ? $accuracy% accuracy';
+      return 'Today ${summary.todayXp} XP / ${summary.streak}-day streak / $accuracy% accuracy';
     case AppLanguage.vi:
-      return 'Hôm nay ${summary.todayXp} XP ? chuỗi ${summary.streak} ngày ? chính xác $accuracy%';
+      return 'Hôm nay ${summary.todayXp} XP / chuỗi ${summary.streak} ngày / chính xác $accuracy%';
     case AppLanguage.ja:
-      return '今日 ${summary.todayXp} XP ? ${summary.streak}日連続 ? 正答率 $accuracy%';
+      return '今日 ${summary.todayXp} XP / ${summary.streak}日連続 / 正答率 $accuracy%';
   }
 }
 
@@ -417,11 +482,11 @@ class _ReviewHistoryCard extends StatelessWidget {
       title: Text(date),
       subtitle: Text(switch (language) {
         AppLanguage.en =>
-          '${summary.reviewed} reviews ? Again ${summary.again} ? Hard ${summary.hard}',
+          '${summary.reviewed} reviews / Again ${summary.again} / Hard ${summary.hard}',
         AppLanguage.vi =>
-          '${summary.reviewed} l??t ?n ? Sai ${summary.again} ? Kh? ${summary.hard}',
+          '${summary.reviewed} lượt ôn / Sai ${summary.again} / Khó ${summary.hard}',
         AppLanguage.ja =>
-          '${summary.reviewed}??? ? ???? ${summary.again} ? ??? ${summary.hard}',
+          '${summary.reviewed}回復習 / もう一度 ${summary.again} / 難しい ${summary.hard}',
       }),
       trailing: Text('${summary.good + summary.easy}/${summary.reviewed}'),
     );
@@ -443,7 +508,7 @@ class _AttemptHistoryCard extends StatelessWidget {
     );
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      title: Text('${attempt.mode} ? ${attempt.level}'),
+      title: Text('${attempt.mode} / ${attempt.level}'),
       subtitle: Text('$date $time'),
       trailing: Text('${attempt.score}/${attempt.total}'),
     );

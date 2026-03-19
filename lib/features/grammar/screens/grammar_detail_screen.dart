@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/data/utils/grammar_english_notation.dart';
 
 import '../../../data/db/app_database.dart';
 import '../../../data/repositories/grammar_repository.dart';
@@ -28,6 +29,7 @@ class GrammarDetailScreen extends ConsumerWidget {
 
           final point = data.point;
           final examples = data.examples;
+          final headline = _resolveHeadline(point, language);
           final meaning = _resolveMeaning(point, language);
           final connection = _resolveConnection(point, language);
           final explanation = _resolveExplanation(point, language);
@@ -39,7 +41,7 @@ class GrammarDetailScreen extends ConsumerWidget {
               children: [
                 AppFeatureCard(
                   icon: Icons.auto_stories_rounded,
-                  title: point.grammarPoint,
+                  title: headline,
                   subtitle: meaning,
                   status: AppStatusChip(
                     label: point.jlptLevel,
@@ -138,15 +140,41 @@ class GrammarDetailScreen extends ConsumerWidget {
 
   String _resolveMeaning(GrammarPoint point, AppLanguage language) {
     return switch (language) {
-      AppLanguage.en => (point.meaningEn ?? point.meaning).trim(),
+      AppLanguage.en => resolveEnglishGrammarMeaning(
+        meaningEn: point.meaningEn,
+        titleEn: point.titleEn,
+        connectionEn: point.connectionEn,
+        connection: point.connection,
+        grammarPoint: point.grammarPoint,
+      ),
       AppLanguage.vi => (point.meaningVi ?? point.meaning).trim(),
       AppLanguage.ja => point.meaning.trim(),
     };
   }
 
+  String _resolveHeadline(GrammarPoint point, AppLanguage language) {
+    return switch (language) {
+      AppLanguage.en => resolveEnglishGrammarConnection(
+        connectionEn: point.connectionEn,
+        connection: point.connection,
+        grammarPoint: point.grammarPoint,
+        titleEn: point.titleEn,
+        meaningEn: point.meaningEn,
+      ),
+      AppLanguage.vi => point.grammarPoint.trim(),
+      AppLanguage.ja => point.grammarPoint.trim(),
+    };
+  }
+
   String _resolveConnection(GrammarPoint point, AppLanguage language) {
     return switch (language) {
-      AppLanguage.en => (point.connectionEn ?? point.connection).trim(),
+      AppLanguage.en => resolveEnglishGrammarConnection(
+        connectionEn: point.connectionEn,
+        connection: point.connection,
+        grammarPoint: point.grammarPoint,
+        titleEn: point.titleEn,
+        meaningEn: point.meaningEn,
+      ),
       AppLanguage.vi => point.connection.trim(),
       AppLanguage.ja => point.connection.trim(),
     };
@@ -154,7 +182,11 @@ class GrammarDetailScreen extends ConsumerWidget {
 
   String _resolveExplanation(GrammarPoint point, AppLanguage language) {
     return switch (language) {
-      AppLanguage.en => (point.explanationEn ?? point.explanation).trim(),
+      AppLanguage.en => resolveEnglishGrammarExplanation(
+        explanationEn: point.explanationEn,
+        explanation: point.explanation,
+        label: _resolveMeaning(point, language),
+      ),
       AppLanguage.vi => (point.explanationVi ?? point.explanation).trim(),
       AppLanguage.ja => point.explanation.trim(),
     };

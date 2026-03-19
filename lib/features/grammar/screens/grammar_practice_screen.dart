@@ -36,6 +36,7 @@ class GrammarSessionPlanner {
     required GrammarPracticeBlueprint blueprint,
     required GrammarGoalProfile goalProfile,
     required int antiRepeatWindow,
+    int? maxQuestionsPerPoint,
   }) {
     if (allQuestions.isEmpty || targetCount <= 0) {
       return const [];
@@ -49,6 +50,7 @@ class GrammarSessionPlanner {
       sequence,
       blueprint,
       goalProfile,
+      maxQuestionsPerPoint,
     );
 
     return _applyAntiRepeat(selected, window: antiRepeatWindow);
@@ -92,8 +94,9 @@ class GrammarSessionPlanner {
     List<GrammarQuestionType> sequence,
     GrammarPracticeBlueprint blueprint,
     GrammarGoalProfile goalProfile,
+    int? maxQuestionsPerPoint,
   ) {
-    if (ordered.length <= target) {
+    if (ordered.length <= target && maxQuestionsPerPoint == null) {
       return List<GeneratedQuestion>.of(ordered);
     }
 
@@ -105,12 +108,25 @@ class GrammarSessionPlanner {
 
     final selected = <GeneratedQuestion>[];
     final selectedByType = <GrammarQuestionType, int>{};
+    final selectedByPoint = <int, int>{};
 
-    void pickFromBucket(GrammarQuestionType type) {
+    bool canPick(GeneratedQuestion question) {
+      if (maxQuestionsPerPoint == null) return true;
+      final count = selectedByPoint[question.point.id] ?? 0;
+      return count < maxQuestionsPerPoint;
+    }
+
+    bool pickFromBucket(GrammarQuestionType type) {
       final bucket = buckets[type];
-      if (bucket == null || bucket.isEmpty) return;
-      selected.add(bucket.removeAt(0));
+      if (bucket == null || bucket.isEmpty) return false;
+      final pickIndex = bucket.indexWhere(canPick);
+      if (pickIndex < 0) return false;
+      final picked = bucket.removeAt(pickIndex);
+      selected.add(picked);
       selectedByType[type] = (selectedByType[type] ?? 0) + 1;
+      selectedByPoint[picked.point.id] =
+          (selectedByPoint[picked.point.id] ?? 0) + 1;
+      return true;
     }
 
     for (final type in sequence) {
@@ -123,7 +139,8 @@ class GrammarSessionPlanner {
       if (quota == 0) quota = 1;
       final take = quota.clamp(0, bucket.length);
       for (var i = 0; i < take; i++) {
-        pickFromBucket(type);
+        final picked = pickFromBucket(type);
+        if (!picked) break;
         if (selected.length >= target) {
           return selected;
         }
@@ -139,8 +156,10 @@ class GrammarSessionPlanner {
         final bucket = buckets[type];
         if (bucket == null || bucket.isEmpty) continue;
         if (desired > 0 && current >= desired) continue;
-        pickFromBucket(type);
-        progressed = true;
+        final picked = pickFromBucket(type);
+        if (picked) {
+          progressed = true;
+        }
       }
       if (!progressed) break;
     }
@@ -149,7 +168,10 @@ class GrammarSessionPlanner {
       final leftovers = buckets.values.expand((value) => value).toList()
         ..shuffle(_random);
       for (final question in leftovers) {
+        if (!canPick(question)) continue;
         selected.add(question);
+        selectedByPoint[question.point.id] =
+            (selectedByPoint[question.point.id] ?? 0) + 1;
         if (selected.length >= target) break;
       }
     }
@@ -370,6 +392,7 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
 
   int _currentIndex = 0;
   final List<GeneratedQuestion> _questions = [];
+  final List<GeneratedQuestion> _questionBank = [];
   final Set<String> _requeuedQuestions = {};
   final Set<int> _wrongPointIds = {};
 
@@ -412,6 +435,7 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
       setState(() {
         _isLoading = true;
         _questions.clear();
+        _questionBank.clear();
         _currentIndex = 0;
         _isAnswered = false;
         _score = 0;
@@ -481,7 +505,8 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
       });
     }
 
-    final targetCount = _sessionQuestionCount(_sessionType);
+    final targetCount = _effectiveSessionQuestionCount(generated);
+    final maxQuestionsPerPoint = _maxQuestionsPerPointForSession(generated);
     final planner = GrammarSessionPlanner(random: _createSessionRandom());
     final selected = planner.build(
       allQuestions: generated,
@@ -489,10 +514,12 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
       blueprint: _blueprint,
       goalProfile: _goalProfile,
       antiRepeatWindow: _blueprint == GrammarPracticeBlueprint.quiz ? 10 : 8,
+      maxQuestionsPerPoint: maxQuestionsPerPoint,
     );
 
     if (!mounted) return;
     setState(() {
+      _questionBank.addAll(generated);
       _questions.addAll(selected);
       _isLoading = false;
       if (_sessionType == GrammarSessionType.mock && _questions.isNotEmpty) {
@@ -531,6 +558,38 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
     }
   }
 
+  int _effectiveSessionQuestionCount(List<GeneratedQuestion> generated) {
+    final baseTarget = _sessionQuestionCount(_sessionType);
+    if (generated.isEmpty) return 0;
+
+    final maxQuestionsPerPoint = _maxQuestionsPerPointForSession(generated);
+    final uniquePointCount = generated.map((q) => q.point.id).toSet().length;
+    final cappedTarget = uniquePointCount * maxQuestionsPerPoint;
+    return min(baseTarget, min(generated.length, cappedTarget));
+  }
+
+  int _maxQuestionsPerPointForSession(List<GeneratedQuestion> generated) {
+    final uniquePointCount = generated.map((q) => q.point.id).toSet().length;
+    if (uniquePointCount <= 0) return 1;
+
+    if (_isWeakDrill) {
+      if (uniquePointCount == 1) return 4;
+      if (uniquePointCount == 2) return 3;
+      if (uniquePointCount <= 4) return 2;
+      return 1;
+    }
+
+    if (_blueprint == GrammarPracticeBlueprint.drill) {
+      if (uniquePointCount <= 2) return 3;
+      if (uniquePointCount <= 5) return 2;
+      return 1;
+    }
+
+    if (uniquePointCount <= 3) return 3;
+    if (uniquePointCount <= 6) return 2;
+    return 1;
+  }
+
   Random _createSessionRandom() {
     _sessionNonce += 1;
     final timestampSeed = DateTime.now().microsecondsSinceEpoch;
@@ -539,6 +598,49 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
         (_sessionNonce * _sessionSeedMixer) ^
         identityHashCode(this);
     return Random(mixedSeed);
+  }
+
+  String _questionReplayKey(GeneratedQuestion question) {
+    return '${question.point.id}_${question.type.name}_${question.stemKey}_${question.correctAnswer}';
+  }
+
+  GeneratedQuestion? _pickFollowUpQuestion(GeneratedQuestion source) {
+    final scheduledKeys = _questions.map(_questionReplayKey).toSet();
+    final candidates = _questionBank
+        .where((candidate) {
+          if (candidate.point.id != source.point.id) return false;
+          if (_questionReplayKey(candidate) == _questionReplayKey(source)) {
+            return false;
+          }
+          if (scheduledKeys.contains(_questionReplayKey(candidate))) {
+            return false;
+          }
+          if (_requeuedQuestions.contains(_questionReplayKey(candidate))) {
+            return false;
+          }
+          return candidate.stemKey != source.stemKey ||
+              candidate.type != source.type;
+        })
+        .toList(growable: false);
+
+    if (candidates.isEmpty) return null;
+
+    final ranked = candidates.toList(growable: false)
+      ..shuffle(_createSessionRandom())
+      ..sort(
+        (a, b) =>
+            _followUpScore(b, source).compareTo(_followUpScore(a, source)),
+      );
+    return ranked.first;
+  }
+
+  int _followUpScore(GeneratedQuestion candidate, GeneratedQuestion source) {
+    var score = 0;
+    if (candidate.type != source.type) score += 4;
+    if (candidate.stemKey != source.stemKey) score += 3;
+    if (candidate.familyKey != source.familyKey) score += 2;
+    if (candidate.answerShapeKey != source.answerShapeKey) score += 1;
+    return score;
   }
 
   int _ghostPriority(GrammarQuestionType type) {
@@ -604,11 +706,13 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
 
       final shouldRequeue = _blueprint != GrammarPracticeBlueprint.quiz;
       if (shouldRequeue) {
-        final key =
-            '${question.point.id}_${question.type}_${question.question}';
-        if (!_requeuedQuestions.contains(key)) {
-          _requeuedQuestions.add(key);
-          _questions.add(question);
+        final followUp = _pickFollowUpQuestion(question);
+        if (followUp != null) {
+          final key = _questionReplayKey(followUp);
+          if (!_requeuedQuestions.contains(key)) {
+            _requeuedQuestions.add(key);
+            _questions.add(followUp);
+          }
         }
       }
     }
@@ -642,6 +746,19 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
     required GeneratedQuestion question,
     required bool isCorrect,
   }) {
+    final typedBase = _repairFeedbackMessage(
+      language: language,
+      question: question,
+      isCorrect: isCorrect,
+    );
+    if (typedBase != null) {
+      final detail = (question.feedback ?? question.explanation ?? '').trim();
+      if (_blueprint == GrammarPracticeBlueprint.quiz || detail.isEmpty) {
+        return typedBase;
+      }
+      return '$typedBase  $detail';
+    }
+
     if (_blueprint == GrammarPracticeBlueprint.quiz) {
       return isCorrect
           ? _tr(language, en: 'Correct.', vi: 'Đúng rồi!', ja: '正解です。')
@@ -665,6 +782,45 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
     final detail = (question.feedback ?? question.explanation ?? '').trim();
     if (detail.isEmpty) return base;
     return '$base  $detail';
+  }
+
+  String? _repairFeedbackMessage({
+    required AppLanguage language,
+    required GeneratedQuestion question,
+    required bool isCorrect,
+  }) {
+    switch (question.type) {
+      case GrammarQuestionType.errorCorrection:
+        return isCorrect
+            ? _tr(
+                language,
+                en: 'Good repair. That is the pattern that fixes the sentence.',
+                vi: 'Sửa đúng rồi. Đây là mẫu ngữ pháp sửa được câu này.',
+                ja: 'よく直せました。この文を直す文型はそれです。',
+              )
+            : _tr(
+                language,
+                en: 'Not yet. Use this pattern: ${question.correctAnswer}',
+                vi: 'Chưa đúng. Hãy dùng mẫu này: ${question.correctAnswer}',
+                ja: 'まだ違います。使うべき文型: ${question.correctAnswer}',
+              );
+      case GrammarQuestionType.errorReason:
+        return isCorrect
+            ? _tr(
+                language,
+                en: 'Good catch. That is the main grammar issue here.',
+                vi: 'Bắt lỗi đúng rồi. Đây là lý do ngữ pháp chính khiến câu sai.',
+                ja: 'その通りです。これが主な文法上の誤りです。',
+              )
+            : _tr(
+                language,
+                en: 'That is not the main issue. Best answer: ${question.correctAnswer}',
+                vi: 'Đó chưa phải lỗi chính. Đáp án phù hợp nhất: ${question.correctAnswer}',
+                ja: 'それは主な理由ではありません。正解: ${question.correctAnswer}',
+              );
+      default:
+        return null;
+    }
   }
 
   void _showSummary({bool timedOut = false}) {
@@ -934,26 +1090,12 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
         ja: 'クイズモード',
       ),
     };
-    final goalLabel = switch (_goalProfile) {
-      GrammarGoalProfile.balanced => _tr(
-        language,
-        en: 'Goal: Balanced JLPT',
-        vi: 'Mục tiêu: Toàn diện',
-        ja: '目標: JLPTバランス重視',
-      ),
-      GrammarGoalProfile.accuracy => _tr(
-        language,
-        en: 'Goal: Accuracy first',
-        vi: 'Mục tiêu: Độ chính xác',
-        ja: '目標: 正確さ優先',
-      ),
-      GrammarGoalProfile.speed => _tr(
-        language,
-        en: 'Goal: Speed first',
-        vi: 'Mục tiêu: Tốc độ',
-        ja: '目標: 速度優先',
-      ),
-    };
+    final infoPills = <String>[
+      _sessionInfoLabel(language),
+      _sourceInfoLabel(language),
+      _scopeInfoLabel(language),
+      _goalInfoLabel(language),
+    ];
 
     return Container(
       width: double.infinity,
@@ -1009,17 +1151,22 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
                     height: 1.4,
                   ),
                 ),
+                const SizedBox(height: 10),
+                Wrap(
+                  spacing: 7,
+                  runSpacing: 7,
+                  children: [
+                    for (final label in infoPills)
+                      _pill(
+                        label: label,
+                        fg: color,
+                        bg: color.withValues(alpha: 0.08),
+                        border: color.withValues(alpha: 0.18),
+                      ),
+                  ],
+                ),
               ],
             ),
-          ),
-          const SizedBox(width: 12),
-          _pill(
-            label: _isWeakDrill
-                ? _tr(language, en: 'Weak only', vi: 'Chỉ điểm yếu', ja: '弱点のみ')
-                : goalLabel,
-            fg: color,
-            bg: color.withValues(alpha: 0.08),
-            border: color.withValues(alpha: 0.18),
           ),
         ],
       ),
@@ -1129,6 +1276,36 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
                     bg: color.withValues(alpha: 0.10),
                     border: color.withValues(alpha: 0.20),
                   ),
+                  _pill(
+                    label: _sessionTypeChipLabel(language),
+                    fg: palette.ink.withValues(alpha: 0.78),
+                    bg: palette.surface,
+                    border: palette.outlineSoft,
+                  ),
+                  if (widget.mode == GrammarPracticeMode.ghost)
+                    _pill(
+                      label: _tr(
+                        language,
+                        en: 'Ghost',
+                        vi: 'Ôn quên',
+                        ja: 'ゴースト',
+                      ),
+                      fg: const Color(0xFF7C2D12),
+                      bg: const Color(0xFFFFF7ED),
+                      border: const Color(0xFFFED7AA),
+                    ),
+                  if (_isWeakDrill)
+                    _pill(
+                      label: _tr(
+                        language,
+                        en: 'Weak only',
+                        vi: 'Chỉ phần yếu',
+                        ja: '弱点のみ',
+                      ),
+                      fg: const Color(0xFF92400E),
+                      bg: const Color(0xFFFEF3C7),
+                      border: const Color(0xFFFCD34D),
+                    ),
                 ],
               ),
             ],
@@ -1333,7 +1510,11 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
       case GrammarQuestionType.pairContrast:
       case GrammarQuestionType.errorReason:
         return MultipleChoiceWidget(
+          key: ValueKey(
+            'grammar_mc_${question.type.name}_${question.stemKey}_${question.correctAnswer}',
+          ),
           language: language,
+          questionType: question.type,
           question: question.question,
           options: question.options,
           correctAnswer: question.correctAnswer,
@@ -1371,6 +1552,101 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
     };
   }
 
+  String _sessionTypeChipLabel(AppLanguage language) {
+    switch (_sessionType) {
+      case GrammarSessionType.quick:
+        return _tr(language, en: 'Quick', vi: '10 câu nhanh', ja: 'クイック');
+      case GrammarSessionType.mastery:
+        return _tr(language, en: 'Mastery', vi: 'Chắc bài', ja: 'マスタリー');
+      case GrammarSessionType.mock:
+        return _tr(language, en: 'Mock', vi: 'Mini JLPT', ja: '模試');
+    }
+  }
+
+  String _sessionInfoLabel(AppLanguage language) {
+    switch (_sessionType) {
+      case GrammarSessionType.quick:
+        return _tr(
+          language,
+          en: 'Session: Quick 10',
+          vi: 'Buổi học: 10 câu nhanh',
+          ja: 'セッション: クイック10',
+        );
+      case GrammarSessionType.mastery:
+        return _tr(
+          language,
+          en: 'Session: Mastery',
+          vi: 'Buổi học: Luyện chắc bài',
+          ja: 'セッション: マスタリー',
+        );
+      case GrammarSessionType.mock:
+        return _tr(
+          language,
+          en: 'Session: Mock',
+          vi: 'Buổi học: Mini JLPT',
+          ja: 'セッション: 模試',
+        );
+    }
+  }
+
+  String _sourceInfoLabel(AppLanguage language) {
+    return widget.mode == GrammarPracticeMode.ghost
+        ? _tr(
+            language,
+            en: 'Source: Ghost review',
+            vi: 'Nguồn câu hỏi: Ôn phần vừa quên',
+            ja: '出題元: ゴースト復習',
+          )
+        : _tr(
+            language,
+            en: 'Source: Practice queue',
+            vi: 'Nguồn câu hỏi: Bộ luyện hiện tại',
+            ja: '出題元: 練習キュー',
+          );
+  }
+
+  String _scopeInfoLabel(AppLanguage language) {
+    return _isWeakDrill
+        ? _tr(
+            language,
+            en: 'Scope: Weak only',
+            vi: 'Phạm vi: Chỉ phần còn yếu',
+            ja: '範囲: 弱点のみ',
+          )
+        : _tr(
+            language,
+            en: 'Scope: Full mix',
+            vi: 'Phạm vi: Trộn nhiều dạng',
+            ja: '範囲: 全体ミックス',
+          );
+  }
+
+  String _goalInfoLabel(AppLanguage language) {
+    switch (_goalProfile) {
+      case GrammarGoalProfile.balanced:
+        return _tr(
+          language,
+          en: 'Goal: Balanced JLPT',
+          vi: 'Mục tiêu: Ôn đều các dạng',
+          ja: '目標: JLPTバランス重視',
+        );
+      case GrammarGoalProfile.accuracy:
+        return _tr(
+          language,
+          en: 'Goal: Accuracy first',
+          vi: 'Mục tiêu: Ưu tiên làm đúng',
+          ja: '目標: 正確さ優先',
+        );
+      case GrammarGoalProfile.speed:
+        return _tr(
+          language,
+          en: 'Goal: Speed first',
+          vi: 'Mục tiêu: Ưu tiên tốc độ',
+          ja: '目標: 速度優先',
+        );
+    }
+  }
+
   String qTypeLabel(AppLanguage language, GrammarQuestionType type) {
     switch (type) {
       case GrammarQuestionType.sentenceBuilder:
@@ -1384,13 +1660,18 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
       case GrammarQuestionType.contextChoice:
         return _tr(language, en: 'Context', vi: 'Ngữ cảnh', ja: '文脈');
       case GrammarQuestionType.errorCorrection:
-        return _tr(language, en: 'Fix Error', vi: 'Sửa lỗi', ja: '誤り修正');
+        return _tr(
+          language,
+          en: 'Repair Sentence',
+          vi: 'Sửa câu sai',
+          ja: '文を修正',
+        );
       case GrammarQuestionType.transformation:
         return _tr(language, en: 'Transform', vi: 'Biến đổi', ja: '変換');
       case GrammarQuestionType.pairContrast:
         return _tr(language, en: 'Contrast', vi: 'Phân biệt', ja: '対比');
       case GrammarQuestionType.errorReason:
-        return _tr(language, en: 'Reason', vi: 'Lý do sai', ja: '誤りの理由');
+        return _tr(language, en: 'Why Wrong', vi: 'Vì sao sai', ja: 'なぜ誤りか');
     }
   }
 

@@ -10,6 +10,7 @@ import '../../../data/db/database_provider.dart';
 import '../../../data/models/vocab_item.dart';
 import '../../../data/models/kanji_item.dart';
 import '../../../data/repositories/lesson_repository.dart';
+import '../../../data/utils/grammar_english_notation.dart';
 import '../../learn/models/learn_session_args.dart';
 import 'package:go_router/go_router.dart';
 import '../../../data/db/app_database.dart';
@@ -642,7 +643,10 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
     final grammar = details.grammar[mistake.itemId];
     final grammarPreferred = switch (language) {
       AppLanguage.vi => grammar?.meaningVi,
-      AppLanguage.en => grammar?.meaningEn,
+      AppLanguage.en =>
+        grammar == null
+            ? null
+            : normalizeGrammarTitleEn(grammar.meaningEn ?? grammar.meaning),
       AppLanguage.ja => grammar?.meaning,
     };
     final meaning = _resolveMeaning(

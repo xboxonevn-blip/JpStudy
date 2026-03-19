@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/data/utils/grammar_english_notation.dart';
 
 class GrammarExampleWidget extends StatelessWidget {
   final AppLanguage language;
@@ -57,7 +58,11 @@ class GrammarExampleWidget extends StatelessWidget {
     }
     switch (language) {
       case AppLanguage.en:
-        return (translationEn ?? translation).trim();
+        return resolveEnglishGrammarExampleTranslation(
+          japanese: japanese,
+          translationEn: translationEn,
+          translation: translation,
+        );
       case AppLanguage.vi:
         return (translationVi ?? translation).trim();
       case AppLanguage.ja:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jpstudy/app/layout/app_responsive_frame.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/features/common/widgets/japanese_background.dart';
@@ -23,13 +24,8 @@ class AppPageShell extends StatelessWidget {
       child: SafeArea(
         top: false,
         child: ListView(
-          padding: EdgeInsets.fromLTRB(
-            AppSpacing.pageInset,
-            topPadding,
-            AppSpacing.pageInset,
-            bottomPadding,
-          ),
-          children: [child],
+          padding: EdgeInsets.only(top: topPadding, bottom: bottomPadding),
+          children: [AppResponsiveFrame(child: child)],
         ),
       ),
     );

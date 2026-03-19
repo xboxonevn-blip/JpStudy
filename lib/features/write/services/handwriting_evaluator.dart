@@ -79,16 +79,11 @@ class HandwritingEvaluator {
       minOrderScoreDelta: 0.03,
       minTemplateScoreDelta: 0.04,
     ),
-    '口': _ThresholdOverride(
-      requiredScoreDelta: 0.01,
-      minStrokeScoreDelta: 0.01,
-      minShapeScoreDelta: 0.03,
-      minTemplateScoreDelta: 0.03,
-    ),
+    '口': _ThresholdOverride(minTemplateScoreDelta: -0.04),
     '日': _ThresholdOverride(
-      requiredScoreDelta: 0.01,
-      minShapeScoreDelta: 0.03,
-      minTemplateScoreDelta: 0.04,
+      minOrderScoreDelta: -0.03,
+      minTemplateScoreDelta: -0.06,
+      minDirectionScoreDelta: -0.18,
     ),
   };
 
@@ -122,6 +117,12 @@ class HandwritingEvaluator {
     final templateScore = template == null
         ? 0.0
         : HandwritingTemplateMatcher.templateScore(
+            strokes: meaningfulStrokes,
+            template: template,
+          );
+    final directionScore = template == null
+        ? 1.0
+        : HandwritingTemplateMatcher.templateDirectionScore(
             strokes: meaningfulStrokes,
             template: template,
           );
@@ -159,12 +160,29 @@ class HandwritingEvaluator {
     final templateGatePass =
         !profile.requiresTemplateGate ||
         templateScore >= profile.minTemplateScore;
+    final directionGatePass =
+        !profile.requiresDirectionGate ||
+        directionScore >= profile.minDirectionScore;
+    final guidedNearCorrectPass = _passesGuidedNearCorrectOverride(
+      showGuide: showGuide,
+      tier: tier,
+      profile: profile,
+      template: template,
+      totalScore: totalScore,
+      strokeScore: strokeScore,
+      shapeScore: shapeScore,
+      orderScore: orderScore,
+      templateScore: templateScore,
+      directionScore: directionScore,
+    );
     final isCorrect =
-        totalScore >= profile.requiredScore &&
-        strokeScore >= profile.minStrokeScore &&
-        shapeScore >= profile.minShapeScore &&
-        orderScore >= profile.minOrderScore &&
-        templateGatePass;
+        (totalScore >= profile.requiredScore &&
+            strokeScore >= profile.minStrokeScore &&
+            shapeScore >= profile.minShapeScore &&
+            orderScore >= profile.minOrderScore &&
+            templateGatePass &&
+            directionGatePass) ||
+        guidedNearCorrectPass;
 
     return HandwritingEvaluationResult(
       expectedStrokes: expectedStrokes,
@@ -223,6 +241,7 @@ class HandwritingEvaluator {
           minShapeScore: 0.0,
           minOrderScore: 0.0,
           minTemplateScore: 0.0,
+          minDirectionScore: 0.0,
         );
       case HandwritingQualityTier.manual:
         return _TierProfile(
@@ -236,6 +255,7 @@ class HandwritingEvaluator {
           minShapeScore: 0.0,
           minOrderScore: 0.0,
           minTemplateScore: 0.35,
+          minDirectionScore: 0.0,
         );
       case HandwritingQualityTier.curated:
         return _TierProfile(
@@ -249,6 +269,7 @@ class HandwritingEvaluator {
           minShapeScore: 0.0,
           minOrderScore: 0.0,
           minTemplateScore: 0.22,
+          minDirectionScore: 0.0,
         );
       case HandwritingQualityTier.generated:
         return _TierProfile(
@@ -262,6 +283,7 @@ class HandwritingEvaluator {
           minShapeScore: 0.0,
           minOrderScore: 0.0,
           minTemplateScore: 0.0,
+          minDirectionScore: 0.0,
         );
     }
   }
@@ -283,6 +305,7 @@ class HandwritingEvaluator {
           minShapeScore: 0.0,
           minOrderScore: 0.0,
           minTemplateScore: 0.0,
+          minDirectionScore: 0.0,
         );
       case HandwritingQualityTier.manual:
         return _TierProfile(
@@ -291,11 +314,12 @@ class HandwritingEvaluator {
           shapeWeight: 0.19,
           orderWeight: 0.15,
           templateWeight: 0.32,
-          requiredScore: showGuide ? 0.61 : 0.71,
+          requiredScore: showGuide ? 0.60 : 0.70,
           minStrokeScore: 0.50,
-          minShapeScore: 0.46,
-          minOrderScore: 0.72,
-          minTemplateScore: 0.66,
+          minShapeScore: 0.44,
+          minOrderScore: 0.70,
+          minTemplateScore: 0.62,
+          minDirectionScore: showGuide ? 0.76 : 0.82,
         );
       case HandwritingQualityTier.curated:
         return _TierProfile(
@@ -309,6 +333,7 @@ class HandwritingEvaluator {
           minShapeScore: 0.40,
           minOrderScore: 0.60,
           minTemplateScore: 0.48,
+          minDirectionScore: showGuide ? 0.68 : 0.74,
         );
       case HandwritingQualityTier.generated:
         return _TierProfile(
@@ -322,6 +347,7 @@ class HandwritingEvaluator {
           minShapeScore: 0.38,
           minOrderScore: 0.48,
           minTemplateScore: 0.42,
+          minDirectionScore: showGuide ? 0.58 : 0.64,
         );
     }
   }
@@ -448,16 +474,62 @@ class HandwritingEvaluator {
     return complexityTuned.copyWith(
       requiredScore:
           complexityTuned.requiredScore + override.requiredScoreDelta,
-      minStrokeScore:
-          complexityTuned.minStrokeScore + override.minStrokeScoreDelta,
-      minShapeScore:
-          complexityTuned.minShapeScore + override.minShapeScoreDelta,
       minOrderScore:
           complexityTuned.minOrderScore + override.minOrderScoreDelta,
       minTemplateScore:
           complexityTuned.minTemplateScore + override.minTemplateScoreDelta,
+      minDirectionScore:
+          complexityTuned.minDirectionScore + override.minDirectionScoreDelta,
     );
   }
+
+  static bool _passesGuidedNearCorrectOverride({
+    required bool showGuide,
+    required HandwritingQualityTier tier,
+    required _TierProfile profile,
+    required KanjiStrokeTemplate? template,
+    required double totalScore,
+    required double strokeScore,
+    required double shapeScore,
+    required double orderScore,
+    required double templateScore,
+    required double directionScore,
+  }) {
+    if (!showGuide || template == null) {
+      return false;
+    }
+    if (tier != HandwritingQualityTier.manual &&
+        tier != HandwritingQualityTier.curated) {
+      return false;
+    }
+
+    final isEnclosureLike = _guidedEnclosureCharacters.contains(
+      template.character,
+    );
+    final totalSlack = tier == HandwritingQualityTier.manual ? 0.08 : 0.06;
+    final templateSlack = isEnclosureLike ? 0.18 : 0.14;
+    final directionSlack = isEnclosureLike ? 0.18 : 0.12;
+    final minShapeFloor = isEnclosureLike ? 0.34 : 0.36;
+    final minOrderFloor = isEnclosureLike ? 0.60 : 0.64;
+
+    return totalScore >= max(0.0, profile.requiredScore - totalSlack) &&
+        strokeScore >= max(0.50, profile.minStrokeScore - 0.04) &&
+        shapeScore >= max(minShapeFloor, profile.minShapeScore - 0.10) &&
+        orderScore >= max(minOrderFloor, profile.minOrderScore - 0.10) &&
+        templateScore >= max(0.44, profile.minTemplateScore - templateSlack) &&
+        directionScore >= max(0.58, profile.minDirectionScore - directionSlack);
+  }
+
+  static const Set<String> _guidedEnclosureCharacters = {
+    '口',
+    '日',
+    '目',
+    '田',
+    '四',
+    '回',
+    '国',
+    '囲',
+  };
 }
 
 class _TierProfile {
@@ -472,6 +544,7 @@ class _TierProfile {
     required this.minShapeScore,
     required this.minOrderScore,
     required this.minTemplateScore,
+    required this.minDirectionScore,
   });
 
   final double strokeWeight;
@@ -484,8 +557,10 @@ class _TierProfile {
   final double minShapeScore;
   final double minOrderScore;
   final double minTemplateScore;
+  final double minDirectionScore;
 
   bool get requiresTemplateGate => templateWeight > 0;
+  bool get requiresDirectionGate => minDirectionScore > 0;
 
   _TierProfile copyWith({
     double? requiredScore,
@@ -493,6 +568,7 @@ class _TierProfile {
     double? minShapeScore,
     double? minOrderScore,
     double? minTemplateScore,
+    double? minDirectionScore,
   }) {
     return _TierProfile(
       strokeWeight: strokeWeight,
@@ -505,6 +581,7 @@ class _TierProfile {
       minShapeScore: _clamp(minShapeScore ?? this.minShapeScore),
       minOrderScore: _clamp(minOrderScore ?? this.minOrderScore),
       minTemplateScore: _clamp(minTemplateScore ?? this.minTemplateScore),
+      minDirectionScore: _clamp(minDirectionScore ?? this.minDirectionScore),
     );
   }
 
@@ -514,15 +591,13 @@ class _TierProfile {
 class _ThresholdOverride {
   const _ThresholdOverride({
     this.requiredScoreDelta = 0.0,
-    this.minStrokeScoreDelta = 0.0,
-    this.minShapeScoreDelta = 0.0,
     this.minOrderScoreDelta = 0.0,
     this.minTemplateScoreDelta = 0.0,
+    this.minDirectionScoreDelta = 0.0,
   });
 
   final double requiredScoreDelta;
-  final double minStrokeScoreDelta;
-  final double minShapeScoreDelta;
   final double minOrderScoreDelta;
   final double minTemplateScoreDelta;
+  final double minDirectionScoreDelta;
 }

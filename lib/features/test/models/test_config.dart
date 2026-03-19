@@ -23,7 +23,7 @@ class TestConfig {
   });
 
   static TestConfig mockExam({required int questionCount}) {
-    final count = questionCount.clamp(10, 50);
+    final count = questionCount.clamp(1, 50);
     final timeLimit = (count * 0.5).round().clamp(5, 30);
     return TestConfig(
       questionCount: count,

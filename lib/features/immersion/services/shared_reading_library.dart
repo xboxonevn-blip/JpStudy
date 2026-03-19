@@ -67,8 +67,6 @@ class SharedReadingLibrary {
       'n5': [1, 25],
       'n4': [26, 50],
       'n3': [51, 75],
-      'n2': [76, 90],
-      'n1': [91, 100],
     };
     final paths = <String>[];
     for (final entry in lessonRanges.entries) {

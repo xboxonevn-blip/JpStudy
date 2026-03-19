@@ -5,6 +5,7 @@ import 'package:path_drawing/path_drawing.dart';
 
 import '../../../core/app_language.dart';
 import '../services/kanji_stroke_template_service.dart';
+import '../services/kanji_stroke_vector_layout.dart';
 import '../services/kanji_stroke_vector_service.dart';
 
 class KanjiStrokeAnimator extends StatefulWidget {
@@ -546,7 +547,7 @@ class _KanjiStrokeAnimatorPainter extends CustomPainter {
   }
 
   void _drawVectorStrokes(Canvas canvas, Size size, KanjiStrokeVector vector) {
-    final layout = _computeVectorLayout(vector, size);
+    final layout = computeKanjiStrokeVectorLayout(vector, size);
     final paths = vector.strokes
         .map(parseSvgPathData)
         .map((path) => path.transform(layout.matrix.storage))
@@ -613,38 +614,11 @@ class _KanjiStrokeAnimatorPainter extends CustomPainter {
     return _palette[index % _palette.length];
   }
 
-  _VectorLayout _computeVectorLayout(KanjiStrokeVector vector, Size size) {
-    final viewBoxWidth = vector.width <= 0 ? 109.0 : vector.width;
-    final viewBoxHeight = vector.height <= 0 ? 109.0 : vector.height;
-    final padding = size.shortestSide * 0.09;
-    final usableWidth = math.max(1.0, size.width - (padding * 2));
-    final usableHeight = math.max(1.0, size.height - (padding * 2));
-    final scale = math.min(
-      usableWidth / viewBoxWidth,
-      usableHeight / viewBoxHeight,
-    );
-    final drawWidth = viewBoxWidth * scale;
-    final drawHeight = viewBoxHeight * scale;
-    final translateX = (size.width - drawWidth) / 2 - (vector.minX * scale);
-    final translateY = (size.height - drawHeight) / 2 - (vector.minY * scale);
-    final matrix = Matrix4.identity()
-      ..setEntry(0, 0, scale)
-      ..setEntry(1, 1, scale)
-      ..setEntry(0, 3, translateX)
-      ..setEntry(1, 3, translateY);
-    return _VectorLayout(
-      scale: scale,
-      translateX: translateX,
-      translateY: translateY,
-      matrix: matrix,
-    );
-  }
-
   Offset _vectorNumberAnchor(
     KanjiStrokeVector vector,
     int index,
     Path path,
-    _VectorLayout layout,
+    KanjiStrokeVectorLayout layout,
   ) {
     if (index < vector.numberPositions.length) {
       final pos = vector.numberPositions[index];
@@ -732,18 +706,4 @@ class _KanjiStrokeAnimatorPainter extends CustomPainter {
         oldDelegate.showStrokeNumbers != showStrokeNumbers ||
         oldDelegate.highlightRadical != highlightRadical;
   }
-}
-
-class _VectorLayout {
-  const _VectorLayout({
-    required this.scale,
-    required this.translateX,
-    required this.translateY,
-    required this.matrix,
-  });
-
-  final double scale;
-  final double translateX;
-  final double translateY;
-  final Matrix4 matrix;
 }

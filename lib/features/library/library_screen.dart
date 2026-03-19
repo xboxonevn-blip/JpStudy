@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/theme/app_breakpoints.dart';
+import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
-import 'package:jpstudy/features/common/widgets/japanese_background.dart';
 import 'package:jpstudy/features/home/widgets/home_surface.dart';
 
 class LibraryScreen extends ConsumerStatefulWidget {
@@ -25,6 +26,10 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
     final lessonsAsync = ref.watch(
       lessonMetaProvider(selectedLevel.shortLabel),
     );
+    final lessons = lessonsAsync.valueOrNull ?? const <LessonMeta>[];
+    final primaryLessonId = lessons.isNotEmpty
+        ? lessons.first.id
+        : _firstLessonIdForLevel(selectedLevel);
 
     return Scaffold(
       appBar: AppBar(
@@ -37,47 +42,55 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
           ),
         ],
       ),
-      body: JapaneseBackground(
-        child: SafeArea(
-          top: false,
-          child: ListView(
-            padding: const EdgeInsets.fromLTRB(
-              HomeSurface.pageHorizontalPadding,
-              16,
-              HomeSurface.pageHorizontalPadding,
-              96,
+      body: AppPageShell(
+        topPadding: AppSpacing.lg,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _LibraryHero(
+              level: selectedLevel,
+              language: language,
+              onPrimaryTap: () => context.push('/lesson/$primaryLessonId'),
             ),
-            children: [
-              _LibraryHero(level: selectedLevel, language: language),
-              const SizedBox(height: 16),
-              AppSectionHeader(
-                title: _sectionsTitle(language),
-                caption: _sectionsCaption(language),
-              ),
-              const SizedBox(height: 10),
-              _QuickAccessRow(language: language),
-              const SizedBox(height: 20),
-              AppSectionHeader(
-                title: _lessonsTitle(language),
-                caption: selectedLevel.shortLabel,
-              ),
-              const SizedBox(height: 10),
-              _LessonSection(language: language, lessonsAsync: lessonsAsync),
-            ],
-          ),
+            const SizedBox(height: AppSpacing.lg),
+            AppSectionHeader(
+              title: _sectionsTitle(language),
+              caption: _sectionsCaption(language),
+            ),
+            const SizedBox(height: AppSpacing.md),
+            _QuickAccessRow(language: language),
+            const SizedBox(height: AppSpacing.xl),
+            AppSectionHeader(
+              title: _lessonsTitle(language),
+              caption: selectedLevel.shortLabel,
+            ),
+            const SizedBox(height: AppSpacing.md),
+            _LessonSection(language: language, lessonsAsync: lessonsAsync),
+          ],
         ),
       ),
     );
   }
 
+  int _firstLessonIdForLevel(StudyLevel level) {
+    switch (level) {
+      case StudyLevel.n5:
+        return 1;
+      case StudyLevel.n4:
+        return 26;
+      case StudyLevel.n3:
+        return 51;
+    }
+  }
+
   String _title(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Study';
+        return 'Library';
       case AppLanguage.vi:
-        return 'Học';
+        return 'Thư viện';
       case AppLanguage.ja:
-        return '学習';
+        return 'ライブラリ';
     }
   }
 
@@ -112,10 +125,15 @@ String _lessonsTitle(AppLanguage language) => switch (language) {
 };
 
 class _LibraryHero extends ConsumerWidget {
-  const _LibraryHero({required this.level, required this.language});
+  const _LibraryHero({
+    required this.level,
+    required this.language,
+    required this.onPrimaryTap,
+  });
 
   final StudyLevel level;
   final AppLanguage language;
+  final VoidCallback onPrimaryTap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -124,7 +142,7 @@ class _LibraryHero extends ConsumerWidget {
       title: _title(language),
       subtitle: level.description(language),
       primaryLabel: _primaryLabel(language),
-      onPrimaryTap: () => context.push('/lesson/1'),
+      onPrimaryTap: onPrimaryTap,
       status: AppStatusChip(
         label: level.shortLabel,
         tone: AppStatusTone.primary,
@@ -152,22 +170,42 @@ class _QuickAccessRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        AppCompactRow(
-          icon: Icons.translate_rounded,
-          title: _vocabLabel(language),
-          subtitle: _vocabHint(language),
-          onTap: () => context.push('/vocab'),
-        ),
-        const SizedBox(height: 10),
-        AppCompactRow(
-          icon: Icons.auto_stories_rounded,
-          title: _grammarLabel(language),
-          subtitle: _grammarHint(language),
-          onTap: () => context.push('/grammar'),
-        ),
-      ],
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final useTwoColumns = constraints.maxWidth >= AppBreakpoints.tablet;
+        final cards = [
+          AppCompactRow(
+            icon: Icons.translate_rounded,
+            title: _vocabLabel(language),
+            subtitle: _vocabHint(language),
+            onTap: () => context.push('/vocab'),
+          ),
+          AppCompactRow(
+            icon: Icons.auto_stories_rounded,
+            title: _grammarLabel(language),
+            subtitle: _grammarHint(language),
+            onTap: () => context.push('/grammar'),
+          ),
+        ];
+
+        if (!useTwoColumns) {
+          return Column(
+            children: [
+              cards[0],
+              const SizedBox(height: AppSpacing.md),
+              cards[1],
+            ],
+          );
+        }
+
+        return Row(
+          children: [
+            Expanded(child: cards[0]),
+            const SizedBox(width: AppSpacing.md),
+            Expanded(child: cards[1]),
+          ],
+        );
+      },
     );
   }
 
@@ -229,18 +267,32 @@ class _LessonSection extends StatelessWidget {
         if (lessons.isEmpty) {
           return _EmptyLibrary(language: language);
         }
-        return Column(
-          children: [
-            for (final lesson in lessons)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: _LessonTile(
-                  language: language,
-                  lesson: lesson,
-                  onTap: () => context.push('/lesson/${lesson.id}'),
-                ),
-              ),
-          ],
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            final columns = constraints.maxWidth >= AppBreakpoints.desktop
+                ? 2
+                : 1;
+            final spacing = AppSpacing.md;
+            final itemWidth = columns == 1
+                ? constraints.maxWidth
+                : (constraints.maxWidth - spacing) / columns;
+
+            return Wrap(
+              spacing: spacing,
+              runSpacing: spacing,
+              children: [
+                for (final lesson in lessons)
+                  SizedBox(
+                    width: itemWidth,
+                    child: _LessonTile(
+                      language: language,
+                      lesson: lesson,
+                      onTap: () => context.push('/lesson/${lesson.id}'),
+                    ),
+                  ),
+              ],
+            );
+          },
         );
       },
       loading: () => const Padding(

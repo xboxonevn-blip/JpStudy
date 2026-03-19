@@ -4,6 +4,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../app/theme/app_spacing.dart';
+import '../../../app/theme/app_theme_palette.dart';
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
 import '../../../core/services/recovery_pack_service.dart';
@@ -19,6 +21,7 @@ import '../../learn/services/question_generator.dart';
 import '../../learn/widgets/fill_blank_widget.dart';
 import '../../learn/widgets/multiple_choice_widget.dart';
 import '../../learn/widgets/true_false_widget.dart';
+import '../../common/widgets/japanese_background.dart';
 import '../models/test_config.dart';
 import '../models/test_session.dart';
 import '../providers/test_providers.dart';
@@ -181,7 +184,11 @@ class _TestScreenState extends ConsumerState<TestScreen> {
     }
 
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
+        elevation: 0,
         title: Text('${language.testModeLabel}: ${widget.lessonTitle}'),
         actions: [
           // Timer display
@@ -210,49 +217,77 @@ class _TestScreenState extends ConsumerState<TestScreen> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          // Progress bar
-          SizedBox(
-            height: 6,
-            child: LinearProgressIndicator(
-              value: _session.progress,
-              backgroundColor: Colors.grey[200],
-            ),
-          ),
-
-          // Question navigator
-          _buildQuestionNavigator(),
-
-          // Question content
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(16),
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 300),
-                transitionBuilder: (child, animation) {
-                  return FadeTransition(
-                    opacity: animation,
-                    child: SlideTransition(
-                      position: Tween<Offset>(
-                        begin: const Offset(0.0, 0.1),
-                        end: Offset.zero,
-                      ).animate(animation),
-                      child: child,
-                    ),
-                  );
-                },
-                child: KeyedSubtree(
-                  key: ValueKey(question.id),
-                  child: _buildQuestionWidget(question, language),
+      body: JapaneseBackground(
+        child: SafeArea(
+          top: false,
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final wide = constraints.maxWidth >= 1180;
+              return Padding(
+                padding: const EdgeInsets.fromLTRB(
+                  AppSpacing.lg,
+                  AppSpacing.sm,
+                  AppSpacing.lg,
+                  AppSpacing.lg,
                 ),
-              ),
-            ),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 1360),
+                    child: Column(
+                      children: [
+                        _buildSessionOverview(language, question),
+                        const SizedBox(height: AppSpacing.md),
+                        Expanded(
+                          child: wide
+                              ? Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      flex: 9,
+                                      child: Column(
+                                        children: [
+                                          Expanded(
+                                            child: _buildQuestionStage(
+                                              question,
+                                              language,
+                                              wide: true,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(width: AppSpacing.lg),
+                                    SizedBox(
+                                      width: 320,
+                                      child: _buildSidePanel(language),
+                                    ),
+                                  ],
+                                )
+                              : Column(
+                                  children: [
+                                    _buildQuestionNavigatorCard(),
+                                    const SizedBox(height: AppSpacing.md),
+                                    Expanded(
+                                      child: _buildQuestionStage(
+                                        question,
+                                        language,
+                                        wide: false,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                        ),
+                        const SizedBox(height: AppSpacing.md),
+                        _buildNavigationButtons(language),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
           ),
-
-          // Navigation buttons
-          _buildNavigationButtons(language),
-        ],
+        ),
       ),
     );
   }
@@ -287,73 +322,464 @@ class _TestScreenState extends ConsumerState<TestScreen> {
     );
   }
 
-  Widget _buildQuestionNavigator() {
+  Widget _buildQuestionNavigatorCard() {
+    final palette = context.appPalette;
     return Container(
-      height: 50,
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        itemCount: _session.totalQuestions,
-        itemBuilder: (context, index) {
-          final isAnswered =
-              index < _session.answers.length &&
-              _session.answers[index].userAnswer != null;
-          final isCurrent = index == _session.currentQuestionIndex;
-          final isFlagged = _session.isFlagged(index);
-
-          return Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: GestureDetector(
-              onTap: () => _goToQuestion(index),
-              child: Container(
-                width: 36,
-                decoration: BoxDecoration(
-                  color: isCurrent
-                      ? Theme.of(context).primaryColor
-                      : isAnswered
-                      ? Colors.green.withValues(alpha: 0.2)
-                      : Colors.grey.withValues(alpha: 0.2),
-                  borderRadius: BorderRadius.circular(8),
-                  border: isFlagged
-                      ? Border.all(color: Colors.orange, width: 2)
-                      : null,
-                ),
-                child: Center(
-                  child: Text(
-                    '${index + 1}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: isCurrent ? Colors.white : null,
-                    ),
-                  ),
-                ),
-              ),
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppSpacing.md),
+      decoration: BoxDecoration(
+        color: palette.elevated.withValues(alpha: 0.96),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+        border: Border.all(color: palette.outlineSoft),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            _tr(
+              ref.read(appLanguageProvider),
+              'Question map',
+              'Bản đồ câu hỏi',
+              '問題マップ',
             ),
-          );
-        },
+            style: TextStyle(fontWeight: FontWeight.w800, color: palette.ink),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          SizedBox(
+            height: 42,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: _session.totalQuestions,
+              separatorBuilder: (_, _) => const SizedBox(width: AppSpacing.sm),
+              itemBuilder: (context, index) => _buildQuestionMapButton(index),
+            ),
+          ),
+        ],
       ),
     );
   }
 
   Widget _buildQuestionWidget(Question question, AppLanguage language) {
+    final chips = <Widget>[
+      _buildStageChip(
+        icon: Icons.school_rounded,
+        label: question.targetItem.level,
+        color: context.appPalette.secondary,
+      ),
+    ];
+    if (_session.isFlagged(_session.currentQuestionIndex)) {
+      chips.add(
+        _buildStageChip(
+          icon: Icons.flag_rounded,
+          label: _tr(
+            language,
+            'Flagged for review',
+            'Đã gắn cờ ôn lại',
+            '復習フラグあり',
+          ),
+          color: context.appPalette.warning,
+        ),
+      );
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Question number
-        Text(
-          language.testProgressLabel(
-            _session.currentQuestionIndex + 1,
-            _session.totalQuestions,
-          ),
-          style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+        Wrap(
+          spacing: AppSpacing.sm,
+          runSpacing: AppSpacing.sm,
+          children: chips,
         ),
-        const SizedBox(height: 16),
-
-        // Question content
+        const SizedBox(height: AppSpacing.md),
         _buildQuestionContent(question, language),
       ],
     );
+  }
+
+  Widget _buildQuestionStage(
+    Question question,
+    AppLanguage language, {
+    required bool wide,
+  }) {
+    final palette = context.appPalette;
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: palette.elevated.withValues(alpha: 0.96),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
+        border: Border.all(color: palette.outlineSoft),
+      ),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(AppSpacing.lg),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: wide ? 860 : 760),
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              transitionBuilder: (child, animation) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: SlideTransition(
+                    position: Tween<Offset>(
+                      begin: const Offset(0.0, 0.06),
+                      end: Offset.zero,
+                    ).animate(animation),
+                    child: child,
+                  ),
+                );
+              },
+              child: KeyedSubtree(
+                key: ValueKey(question.id),
+                child: _buildQuestionWidget(question, language),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSessionOverview(AppLanguage language, Question question) {
+    final palette = context.appPalette;
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      decoration: BoxDecoration(
+        color: palette.elevated.withValues(alpha: 0.96),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
+        border: Border.all(color: palette.outlineSoft),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      language.testProgressLabel(
+                        _session.currentQuestionIndex + 1,
+                        _session.totalQuestions,
+                      ),
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
+                        color: palette.ink.withValues(alpha: 0.62),
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.xs),
+                    Text(
+                      _questionTypeLabel(language, question.type),
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w900,
+                        color: palette.ink,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Wrap(
+                spacing: AppSpacing.sm,
+                runSpacing: AppSpacing.sm,
+                children: [
+                  _buildMetricChip(
+                    icon: Icons.check_circle_outline_rounded,
+                    label: _tr(
+                      language,
+                      'Answered ${_session.answeredCount}',
+                      'Đã làm ${_session.answeredCount}',
+                      '回答済み ${_session.answeredCount}',
+                    ),
+                    color: palette.secondary,
+                  ),
+                  _buildMetricChip(
+                    icon: Icons.flag_outlined,
+                    label: _tr(
+                      language,
+                      'Flagged ${_session.flaggedQuestions.length}',
+                      'Gắn cờ ${_session.flaggedQuestions.length}',
+                      'フラグ ${_session.flaggedQuestions.length}',
+                    ),
+                    color: palette.warning,
+                  ),
+                  _buildMetricChip(
+                    icon: Icons.insights_rounded,
+                    label: _tr(
+                      language,
+                      'Correct ${_session.correctCount}',
+                      'Đúng ${_session.correctCount}',
+                      '正解 ${_session.correctCount}',
+                    ),
+                    color: palette.info,
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.md),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
+            child: LinearProgressIndicator(
+              value: _session.progress,
+              minHeight: 8,
+              backgroundColor: palette.base,
+              color: palette.primary,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSidePanel(AppLanguage language) {
+    final palette = context.appPalette;
+    return SingleChildScrollView(
+      padding: const EdgeInsets.only(right: AppSpacing.xs),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            decoration: BoxDecoration(
+              color: palette.elevated.withValues(alpha: 0.96),
+              borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
+              border: Border.all(color: palette.outlineSoft),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  _tr(language, 'Question map', 'Bản đồ câu hỏi', '問題マップ'),
+                  style: TextStyle(
+                    fontWeight: FontWeight.w900,
+                    color: palette.ink,
+                  ),
+                ),
+                const SizedBox(height: AppSpacing.sm),
+                Wrap(
+                  spacing: AppSpacing.sm,
+                  runSpacing: AppSpacing.sm,
+                  children: List.generate(
+                    _session.totalQuestions,
+                    _buildQuestionMapButton,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            decoration: BoxDecoration(
+              color: palette.elevated.withValues(alpha: 0.96),
+              borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
+              border: Border.all(color: palette.outlineSoft),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  _tr(language, 'Run mode', 'Chế độ làm bài', '実行モード'),
+                  style: TextStyle(
+                    fontWeight: FontWeight.w900,
+                    color: palette.ink,
+                  ),
+                ),
+                const SizedBox(height: AppSpacing.sm),
+                _buildSideInfoRow(
+                  _tr(language, 'Questions', 'Số câu', '問題数'),
+                  '${widget.config.questionCount}',
+                ),
+                _buildSideInfoRow(
+                  _tr(language, 'Types', 'Dạng câu', '形式'),
+                  widget.config.enabledTypes
+                      .map((type) => _questionTypeLabel(language, type))
+                      .join(', '),
+                ),
+                _buildSideInfoRow(
+                  _tr(language, 'Timer', 'Thời gian', '時間'),
+                  widget.config.timeLimitMinutes == null
+                      ? _tr(language, 'Off', 'Tắt', 'オフ')
+                      : '${widget.config.timeLimitMinutes} min',
+                ),
+                _buildSideInfoRow(
+                  _tr(language, 'Review', 'Phản hồi', '復習'),
+                  widget.config.showCorrectAfterWrong
+                      ? _tr(
+                          language,
+                          'Show after wrong',
+                          'Hiện sau câu sai',
+                          '誤答後に表示',
+                        )
+                      : _tr(language, 'Exam style', 'Kiểu thi', '試験スタイル'),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildQuestionMapButton(int index) {
+    final palette = context.appPalette;
+    final isAnswered =
+        index < _session.answers.length &&
+        _session.answers[index].userAnswer != null;
+    final isCurrent = index == _session.currentQuestionIndex;
+    final isFlagged = _session.isFlagged(index);
+    return GestureDetector(
+      onTap: () => _goToQuestion(index),
+      child: Container(
+        width: 40,
+        height: 40,
+        decoration: BoxDecoration(
+          color: isCurrent
+              ? palette.primary
+              : isAnswered
+              ? palette.secondary.withValues(alpha: 0.12)
+              : palette.base,
+          borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+          border: Border.all(
+            color: isFlagged
+                ? palette.warning
+                : isCurrent
+                ? palette.primary
+                : palette.outlineSoft,
+            width: isFlagged ? 2 : 1,
+          ),
+        ),
+        alignment: Alignment.center,
+        child: Text(
+          '${index + 1}',
+          style: TextStyle(
+            fontWeight: FontWeight.w800,
+            color: isCurrent
+                ? Colors.white
+                : isAnswered
+                ? palette.secondary
+                : palette.ink.withValues(alpha: 0.72),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMetricChip({
+    required IconData icon,
+    required String label,
+    required Color color,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
+      ),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.10),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
+        border: Border.all(color: color.withValues(alpha: 0.18)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 16, color: color),
+          const SizedBox(width: AppSpacing.xs),
+          Text(
+            label,
+            style: TextStyle(color: color, fontWeight: FontWeight.w800),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStageChip({
+    required IconData icon,
+    required String label,
+    required Color color,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
+      ),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.10),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
+        border: Border.all(color: color.withValues(alpha: 0.18)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 15, color: color),
+          const SizedBox(width: AppSpacing.xs),
+          Text(
+            label,
+            style: TextStyle(color: color, fontWeight: FontWeight.w800),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSideInfoRow(String label, String value) {
+    final palette = context.appPalette;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: AppSpacing.md),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w700,
+              color: palette.ink.withValues(alpha: 0.56),
+            ),
+          ),
+          const SizedBox(height: AppSpacing.xs),
+          Text(
+            value,
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w700,
+              height: 1.4,
+              color: palette.ink,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _questionTypeLabel(AppLanguage language, QuestionType type) {
+    return switch (type) {
+      QuestionType.multipleChoice => _tr(
+        language,
+        'Multiple choice',
+        'Trắc nghiệm',
+        '選択問題',
+      ),
+      QuestionType.trueFalse => _tr(
+        language,
+        'True / False',
+        'Đúng / Sai',
+        '正誤問題',
+      ),
+      QuestionType.fillBlank => _tr(
+        language,
+        'Fill in the blank',
+        'Điền chỗ trống',
+        '穴埋め',
+      ),
+    };
   }
 
   Widget _buildQuestionContent(Question question, AppLanguage language) {
@@ -394,35 +820,37 @@ class _TestScreenState extends ConsumerState<TestScreen> {
   }
 
   Widget _buildNavigationButtons(AppLanguage language) {
+    final palette = context.appPalette;
     final isFirst = _session.currentQuestionIndex == 0;
     final isLast = _session.currentQuestionIndex == _session.totalQuestions - 1;
 
     return Container(
-      padding: const EdgeInsets.all(16),
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      decoration: BoxDecoration(
+        color: palette.elevated.withValues(alpha: 0.96),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
+        border: Border.all(color: palette.outlineSoft),
+      ),
       child: Row(
         children: [
-          if (!isFirst)
-            Expanded(
-              child: OutlinedButton.icon(
-                onPressed: _previousQuestion,
-                icon: const Icon(Icons.arrow_back),
-                label: Text(language.previousLabel),
-              ),
+          Expanded(
+            child: OutlinedButton.icon(
+              onPressed: isFirst ? null : _previousQuestion,
+              icon: const Icon(Icons.arrow_back_rounded),
+              label: Text(language.previousLabel),
             ),
-          if (!isFirst) const SizedBox(width: 12),
+          ),
+          const SizedBox(width: AppSpacing.md),
           Expanded(
             flex: 2,
-            child: ElevatedButton(
+            child: FilledButton.icon(
               onPressed: isLast ? _showSubmitDialog : _nextQuestion,
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 16),
+              icon: Icon(
+                isLast ? Icons.verified_rounded : Icons.arrow_forward_rounded,
               ),
-              child: Text(
+              label: Text(
                 isLast ? language.submitTestLabel : language.nextLabel,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
               ),
             ),
           ),
@@ -672,5 +1100,16 @@ class _TestScreenState extends ConsumerState<TestScreen> {
   Future<void> _clearSavedSession() async {
     final storage = ref.read(sessionStorageProvider);
     await storage.clearTestSession(widget.sessionKey);
+  }
+
+  String _tr(AppLanguage language, String en, String vi, String ja) {
+    switch (language) {
+      case AppLanguage.en:
+        return en;
+      case AppLanguage.vi:
+        return vi;
+      case AppLanguage.ja:
+        return ja;
+    }
   }
 }

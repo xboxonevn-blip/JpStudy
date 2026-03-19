@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_breakpoints.dart';
+import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
@@ -9,7 +11,7 @@ import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/core/utils/japanese_text.dart';
 import 'package:jpstudy/data/models/kanji_item.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
-import 'package:jpstudy/features/common/widgets/japanese_background.dart';
+import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/home/widgets/home_surface.dart';
 
 final searchIndexProvider = FutureProvider<List<_SearchEntry>>((ref) async {
@@ -127,6 +129,9 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   }
 
   void _onQueryChanged(String value) {
+    if (mounted) {
+      setState(() {});
+    }
     _debounce?.cancel();
     _debounce = Timer(const Duration(milliseconds: 180), () {
       if (!mounted) return;
@@ -149,112 +154,201 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     final language = ref.watch(appLanguageProvider);
     final level = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
     final indexAsync = ref.watch(searchIndexProvider);
+    final indexEntries = indexAsync.valueOrNull ?? const <_SearchEntry>[];
+    final vocabCount = indexEntries
+        .where((entry) => entry.kind == _SearchKind.vocab)
+        .length;
+    final kanjiCount = indexEntries
+        .where((entry) => entry.kind == _SearchKind.kanji)
+        .length;
+    final kanaCount = indexEntries
+        .where((entry) => entry.kind == _SearchKind.kana)
+        .length;
 
     return Scaffold(
       appBar: AppBar(title: Text(_title(language))),
-      body: JapaneseBackground(
-        child: SafeArea(
-          top: false,
-          child: ListView(
-            padding: const EdgeInsets.fromLTRB(
-              HomeSurface.pageHorizontalPadding,
-              16,
-              HomeSurface.pageHorizontalPadding,
-              96,
-            ),
-            children: [
-              Container(
-                decoration: HomeSurface.softPanel(),
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextField(
-                      controller: _queryController,
-                      onChanged: _onQueryChanged,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.search_rounded),
-                        suffixIcon: _queryController.text.trim().isEmpty
-                            ? null
-                            : IconButton(
-                                onPressed: _clearQuery,
-                                icon: const Icon(Icons.close_rounded),
-                              ),
-                        hintText: _hint(language, level),
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16),
-                          borderSide: BorderSide.none,
+      body: AppPageShell(
+        topPadding: AppSpacing.lg,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AppSectionCard(
+              padding: const EdgeInsets.all(AppSpacing.lg),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final useWideHero =
+                      constraints.maxWidth >= AppBreakpoints.desktop;
+                  final controls = Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  _title(language),
+                                  style: Theme.of(context).textTheme.titleLarge
+                                      ?.copyWith(fontWeight: FontWeight.w900),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  _scopeNote(language, level),
+                                  style: const TextStyle(
+                                    color: Color(0xFF64748B),
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: AppSpacing.sm),
+                          AppStatusChip(
+                            label: level.shortLabel,
+                            tone: AppStatusTone.primary,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: AppSpacing.lg),
+                      TextField(
+                        controller: _queryController,
+                        onChanged: _onQueryChanged,
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.search_rounded),
+                          suffixIcon: _queryController.text.trim().isEmpty
+                              ? null
+                              : IconButton(
+                                  onPressed: _clearQuery,
+                                  icon: const Icon(Icons.close_rounded),
+                                ),
+                          hintText: _hint(language, level),
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            borderSide: BorderSide.none,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 12),
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: [
-                        for (final filter in _SearchFilter.values)
-                          ChoiceChip(
-                            label: Text(_filterLabel(language, filter)),
-                            selected: _filter == filter,
-                            onSelected: (_) {
-                              setState(() {
-                                _filter = filter;
-                              });
-                            },
-                          ),
-                      ],
-                    ),
-                    const SizedBox(height: 12),
-                    Text(
-                      _scopeNote(language, level),
-                      style: const TextStyle(
-                        color: Color(0xFF64748B),
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
+                      const SizedBox(height: AppSpacing.md),
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: [
+                          for (final filter in _SearchFilter.values)
+                            ChoiceChip(
+                              label: Text(_filterLabel(language, filter)),
+                              selected: _filter == filter,
+                              onSelected: (_) {
+                                setState(() {
+                                  _filter = filter;
+                                });
+                              },
+                            ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-              indexAsync.when(
-                data: (entries) {
-                  final results = entries
-                      .where((entry) {
-                        if (_filter != _SearchFilter.all &&
-                            entry.kind.filter != _filter) {
-                          return false;
-                        }
-                        if (_debouncedQuery.isEmpty) {
-                          return true;
-                        }
-                        return entry.matches(_debouncedQuery);
-                      })
-                      .toList(growable: false);
+                    ],
+                  );
+                  final stats = Wrap(
+                    spacing: AppSpacing.sm,
+                    runSpacing: AppSpacing.sm,
+                    children: [
+                      AppMetricPill(
+                        label: _filterLabel(language, _SearchFilter.vocab),
+                        value: '$vocabCount',
+                      ),
+                      AppMetricPill(
+                        label: _filterLabel(language, _SearchFilter.kanji),
+                        value: '$kanjiCount',
+                      ),
+                      AppMetricPill(
+                        label: _filterLabel(language, _SearchFilter.kana),
+                        value: '$kanaCount',
+                      ),
+                    ],
+                  );
 
-                  if (_debouncedQuery.isNotEmpty) {
-                    return _buildSearchResults(
-                      language,
-                      _debouncedQuery,
-                      results,
+                  if (!useWideHero) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        controls,
+                        const SizedBox(height: AppSpacing.md),
+                        stats,
+                      ],
                     );
                   }
 
-                  return _buildDiscoveryView(language, entries);
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(flex: 8, child: controls),
+                      const SizedBox(width: AppSpacing.lg),
+                      Expanded(
+                        flex: 5,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              switch (language) {
+                                AppLanguage.en => 'Current search bank',
+                                AppLanguage.vi => 'Kho tra cứu hiện tại',
+                                AppLanguage.ja => '現在の検索バンク',
+                              },
+                              style: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w800,
+                                color: Color(0xFF475569),
+                              ),
+                            ),
+                            const SizedBox(height: AppSpacing.sm),
+                            stats,
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
                 },
-                loading: () => const Padding(
-                  padding: EdgeInsets.all(24),
-                  child: Center(child: CircularProgressIndicator()),
-                ),
-                error: (error, stackTrace) => Padding(
-                  padding: const EdgeInsets.all(24),
-                  child: Text(language.loadErrorLabel),
-                ),
               ),
-            ],
-          ),
+            ),
+            const SizedBox(height: AppSpacing.lg),
+            indexAsync.when(
+              data: (entries) {
+                final results = entries
+                    .where((entry) {
+                      if (_filter != _SearchFilter.all &&
+                          entry.kind.filter != _filter) {
+                        return false;
+                      }
+                      if (_debouncedQuery.isEmpty) {
+                        return true;
+                      }
+                      return entry.matches(_debouncedQuery);
+                    })
+                    .toList(growable: false);
+
+                if (_debouncedQuery.isNotEmpty) {
+                  return _buildSearchResults(
+                    language,
+                    _debouncedQuery,
+                    results,
+                  );
+                }
+
+                return _buildDiscoveryView(language, entries);
+              },
+              loading: () => const Padding(
+                padding: EdgeInsets.all(24),
+                child: Center(child: CircularProgressIndicator()),
+              ),
+              error: (error, stackTrace) => Padding(
+                padding: const EdgeInsets.all(24),
+                child: Text(language.loadErrorLabel),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -273,26 +367,43 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
       );
     }
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(bottom: 12),
-          child: Text(
-            _resultSummary(language, results.length, query),
-            style: const TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w700,
-              color: Color(0xFF64748B),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final columns = constraints.maxWidth >= 1240
+            ? 3
+            : constraints.maxWidth >= AppBreakpoints.tablet
+            ? 2
+            : 1;
+        final itemWidth = _itemWidth(constraints.maxWidth, columns);
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: Text(
+                _resultSummary(language, results.length, query),
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xFF64748B),
+                ),
+              ),
             ),
-          ),
-        ),
-        for (final entry in results)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: _SearchTile(entry: entry),
-          ),
-      ],
+            Wrap(
+              spacing: AppSpacing.md,
+              runSpacing: AppSpacing.md,
+              children: [
+                for (final entry in results)
+                  SizedBox(
+                    width: itemWidth,
+                    child: _SearchTile(entry: entry),
+                  ),
+              ],
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -350,7 +461,32 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     addSection(_SearchKind.kanji, 6);
     addSection(_SearchKind.kana, 6);
 
-    return Column(children: sections);
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final columns = constraints.maxWidth >= 1320
+            ? 3
+            : constraints.maxWidth >= AppBreakpoints.tablet
+            ? 2
+            : 1;
+        final itemWidth = _itemWidth(constraints.maxWidth, columns);
+
+        return Wrap(
+          spacing: AppSpacing.lg,
+          runSpacing: AppSpacing.lg,
+          children: [
+            for (final section in sections)
+              SizedBox(width: itemWidth, child: section),
+          ],
+        );
+      },
+    );
+  }
+
+  double _itemWidth(double maxWidth, int columns) {
+    if (columns <= 1) {
+      return maxWidth;
+    }
+    return (maxWidth - (AppSpacing.lg * (columns - 1))) / columns;
   }
 
   String _title(AppLanguage language) {

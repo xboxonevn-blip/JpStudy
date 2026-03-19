@@ -23,7 +23,11 @@
       "Bash(pytest tests/test_models.py -q)",
       "Bash(flutter analyze:*)",
       "Bash(printf \"ALL_TESTS_PASSED\")",
-      "Bash(\"test/features/ui/simple_command_center_test.dart\")"
+      "Bash(\"test/features/ui/simple_command_center_test.dart\")",
+      "Bash(dart format:*)",
+      "Bash(wc -l /c/Users/xboxo/Documents/GitHub/JpStudy-v2/assets/data/support/kanji/*.json)",
+      "Bash(grep -r \"const \\\\[\" /c/Users/xboxo/Documents/GitHub/JpStudy-v2/lib/features/*/screens --include=\"*.dart\")",
+      "Bash(python -:*)"
     ]
   },
   "enabledPlugins": {

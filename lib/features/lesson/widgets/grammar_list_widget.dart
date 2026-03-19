@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
+import 'package:jpstudy/data/utils/grammar_english_notation.dart';
 import 'package:jpstudy/features/grammar/grammar_providers.dart';
 import 'package:jpstudy/features/grammar/screens/grammar_practice_screen.dart';
 import 'package:jpstudy/features/grammar/services/grammar_question_generator.dart';
@@ -1027,7 +1028,7 @@ class _GrammarPointCardState extends State<_GrammarPointCard> {
       case AppLanguage.vi:
         return point.meaningVi ?? point.meaning;
       case AppLanguage.en:
-        return point.meaningEn ?? point.meaning;
+        return normalizeGrammarTitleEn(point.meaningEn ?? point.meaning);
       case AppLanguage.ja:
         return point.meaning;
     }
@@ -1036,7 +1037,9 @@ class _GrammarPointCardState extends State<_GrammarPointCard> {
   String _resolveStructure(GrammarPoint point) {
     switch (widget.language) {
       case AppLanguage.en:
-        return point.connectionEn ?? point.connection;
+        return normalizeGrammarStructureEn(
+          point.connectionEn ?? point.connection,
+        );
       case AppLanguage.vi:
       case AppLanguage.ja:
         return point.connection;

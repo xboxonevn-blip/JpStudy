@@ -3,9 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/features/common/widgets/japanese_background.dart';
 
 import '../data/jlpt_reading_bank.dart';
@@ -203,9 +206,136 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
     '時間 ${elapsed.inMinutes}分 ${elapsed.inSeconds % 60}秒',
   );
 
+  String _trackLabel(AppLanguage language, String level) =>
+      _tr(language, '$level track', 'Lộ trình $level', '$level トラック');
+
+  String _setsCountLabel(AppLanguage language, int count) =>
+      _tr(language, '$count sets', '$count bộ đọc', '$count セット');
+
+  String _perSetQuestionLabel(AppLanguage language, int count) => _tr(
+    language,
+    '$count questions each',
+    '$count câu mỗi bài',
+    '各セット$count問',
+  );
+
+  String _targetTimeLabel(AppLanguage language, int minutes) => _tr(
+    language,
+    '$minutes min target',
+    'Mục tiêu $minutes phút',
+    '$minutes分目安',
+  );
+
+  String _pickerGuideLabel(AppLanguage language) => _tr(
+    language,
+    'Pick a set by length and question mix, then read the full passage before answering.',
+    'Chọn bài theo độ dài và dạng câu hỏi, rồi đọc hết đoạn trước khi trả lời.',
+    '長さと設問タイプで選び、答える前に本文全体を読みましょう。',
+  );
+
+  String _questionsHeaderLabel(AppLanguage language, int total) =>
+      _tr(language, 'Questions ($total)', 'Câu hỏi ($total)', '設問 ($total)');
+
+  String _questionsGuideLabel(AppLanguage language) => _tr(
+    language,
+    'Answer after reading. Use the paragraph tags on the left to re-check details.',
+    'Trả lời sau khi đọc xong. Dùng tag đoạn ở bên trái để rà lại câu chi tiết.',
+    '読み終えてから答え、詳細問題は左の段落タグで確認しましょう。',
+  );
+
+  String _answeredProgressLabel(
+    AppLanguage language,
+    int answered,
+    int total,
+  ) => _tr(
+    language,
+    '$answered / $total answered',
+    '$answered / $total đã chọn',
+    '$answered / $total 回答済み',
+  );
+
+  String _passagePanelTitle(AppLanguage language) =>
+      _tr(language, 'Passage', 'Đoạn đọc', '本文');
+
+  String _paragraphLabel(AppLanguage language, int index) =>
+      _tr(language, 'P$index', 'Đoạn $index', '第$index段落');
+
+  String _readingFocusTitle(AppLanguage language) =>
+      _tr(language, 'Reading focus', 'Điểm cần chú ý', '読みのポイント');
+
+  String _readingFocusHint(
+    AppLanguage language,
+    JlptReadingPassage passage,
+  ) => _tr(
+    language,
+    'This set asks for theme, detail, and inference across ${passage.questions.length} questions.',
+    'Bài này kiểm tra ý chính, chi tiết và suy luận trong ${passage.questions.length} câu.',
+    'このセットでは主旨・詳細・推論を ${passage.questions.length} 問で確認します。',
+  );
+
+  String _previewLabel(AppLanguage language) =>
+      _tr(language, 'Preview', 'Xem trước', 'プレビュー');
+
+  String _startHintLabel(AppLanguage language) => _tr(
+    language,
+    'Read title + preview first',
+    'Xem tiêu đề + preview trước',
+    'タイトルとプレビューを先に確認',
+  );
+
+  String _whyLabel(AppLanguage language) =>
+      _tr(language, 'Why this answer', 'Vì sao đáp án này đúng', '解説');
+
+  String _selectedAnswerStateLabel(AppLanguage language) =>
+      _tr(language, 'Selected', 'Đã chọn', '選択済み');
+
+  int _answeredCount(JlptReadingPassage passage) {
+    var count = 0;
+    for (final question in passage.questions) {
+      if (_answers.containsKey(question.id)) {
+        count += 1;
+      }
+    }
+    return count;
+  }
+
+  List<JlptReadingPassage> _filterPassagesForLevel(
+    List<JlptReadingPassage> passages,
+    StudyLevel level,
+  ) {
+    return passages
+        .where((entry) => entry.level == level.shortLabel)
+        .toList(growable: false);
+  }
+
+  String _passagePreview(JlptReadingPassage passage) {
+    final paragraphs = passage.body
+        .split('\n')
+        .map((line) => line.trim())
+        .where((line) => line.isNotEmpty)
+        .take(2)
+        .toList(growable: false);
+    return paragraphs.join(' ');
+  }
+
+  List<String> _questionTypeTags(
+    AppLanguage language,
+    JlptReadingPassage passage,
+  ) {
+    final labels = <String>[];
+    for (final question in passage.questions) {
+      final label = _questionTypeLabel(language, question.type);
+      if (!labels.contains(label)) {
+        labels.add(label);
+      }
+    }
+    return labels;
+  }
+
   @override
   Widget build(BuildContext context) {
     final language = ref.watch(appLanguageProvider);
+    final selectedLevel = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
     final passage = _activePassage;
     final palette = context.appPalette;
 
@@ -217,8 +347,25 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
             ? FutureBuilder<List<JlptReadingPassage>>(
                 future: _passagesFuture,
                 builder: (context, snapshot) {
+                  final allPassages =
+                      snapshot.data ?? const <JlptReadingPassage>[];
+                  final visiblePassages = _filterPassagesForLevel(
+                    allPassages,
+                    selectedLevel,
+                  );
+                  final shortestTarget = visiblePassages.isEmpty
+                      ? 0
+                      : visiblePassages
+                            .map((entry) => entry.recommendedMinutes)
+                            .reduce((a, b) => a < b ? a : b);
+
                   return ListView(
-                    padding: const EdgeInsets.fromLTRB(18, 18, 18, 28),
+                    padding: const EdgeInsets.fromLTRB(
+                      AppSpacing.lg,
+                      AppSpacing.lg,
+                      AppSpacing.lg,
+                      AppSpacing.pageBottom,
+                    ),
                     children: [
                       _HeaderHero(
                             eyebrow: _dojoEyebrow(language),
@@ -226,11 +373,48 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
                             subtitle: _intro(language),
                             hint: _seriousHint(language),
                             icon: Icons.menu_book_rounded,
+                            footer: Wrap(
+                              spacing: AppSpacing.sm,
+                              runSpacing: AppSpacing.sm,
+                              children: [
+                                _InfoPill(
+                                  label: _trackLabel(
+                                    language,
+                                    selectedLevel.shortLabel,
+                                  ),
+                                  color: Colors.white,
+                                ),
+                                if (visiblePassages.isNotEmpty)
+                                  _InfoPill(
+                                    label: _setsCountLabel(
+                                      language,
+                                      visiblePassages.length,
+                                    ),
+                                    color: Colors.white,
+                                  ),
+                                if (visiblePassages.isNotEmpty)
+                                  _InfoPill(
+                                    label: _perSetQuestionLabel(
+                                      language,
+                                      visiblePassages.first.questions.length,
+                                    ),
+                                    color: Colors.white,
+                                  ),
+                                if (shortestTarget > 0)
+                                  _InfoPill(
+                                    label: _targetTimeLabel(
+                                      language,
+                                      shortestTarget,
+                                    ),
+                                    color: Colors.white,
+                                  ),
+                              ],
+                            ),
                           )
                           .animate()
                           .fadeIn(duration: 360.ms)
                           .slideY(begin: 0.08, end: 0),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: AppSpacing.lg),
                       if (snapshot.connectionState == ConnectionState.waiting)
                         const Center(
                           child: Padding(
@@ -264,8 +448,7 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
                             });
                           },
                         )
-                      else if ((snapshot.data ?? const <JlptReadingPassage>[])
-                          .isEmpty)
+                      else if (allPassages.isEmpty)
                         _InlineNoticeCard(
                           title: _tr(
                             language,
@@ -280,29 +463,90 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
                             'immersion lesson ファイルを追加すると、この画面に表示されます。',
                           ),
                         )
-                      else
-                        ...snapshot.data!.map(
-                          (entry) =>
-                              Padding(
-                                    padding: const EdgeInsets.only(bottom: 12),
-                                    child: _ReadingPassageCard(
-                                      title: entry.title,
-                                      meta:
-                                          '${entry.level} • ${entry.questions.length}Q • ${entry.recommendedMinutes}m',
-                                      buttonLabel: _startLabel(language),
-                                      onTap: () => _startPassage(entry),
-                                    ),
-                                  )
-                                  .animate(
-                                    delay: Duration(
-                                      milliseconds:
-                                          120 +
-                                          (snapshot.data!.indexOf(entry) * 45),
-                                    ),
-                                  )
-                                  .fadeIn(duration: 280.ms)
-                                  .slideY(begin: 0.06, end: 0),
+                      else if (visiblePassages.isEmpty)
+                        _InlineNoticeCard(
+                          title: _tr(
+                            language,
+                            'No reading sets for this level',
+                            'Chưa có bài đọc cho cấp này',
+                            'このレベルの読解セットはまだありません',
+                          ),
+                          message: _tr(
+                            language,
+                            'Switch the JLPT level or add passages for this track.',
+                            'Hãy đổi cấp JLPT hoặc bổ sung bài đọc cho track này.',
+                            'JLPTレベルを変更するか、このトラックの読解を追加してください。',
+                          ),
+                        )
+                      else ...[
+                        _InlineNoticeCard(
+                          title: _tr(
+                            language,
+                            'Choose a focused reading set',
+                            'Chọn một bài đọc phù hợp',
+                            '集中して取り組むセットを選びましょう',
+                          ),
+                          message: _pickerGuideLabel(language),
                         ),
+                        const SizedBox(height: AppSpacing.md),
+                        LayoutBuilder(
+                          builder: (context, constraints) {
+                            final columns = constraints.maxWidth >= 1180
+                                ? 2
+                                : 1;
+                            final width = columns == 2
+                                ? (constraints.maxWidth - AppSpacing.md) / 2
+                                : constraints.maxWidth;
+                            return Wrap(
+                              spacing: AppSpacing.md,
+                              runSpacing: AppSpacing.md,
+                              children: [
+                                for (var i = 0; i < visiblePassages.length; i++)
+                                  SizedBox(
+                                    width: width,
+                                    child:
+                                        _ReadingPassageCard(
+                                              title: visiblePassages[i].title,
+                                              level: visiblePassages[i].level,
+                                              questionCount: visiblePassages[i]
+                                                  .questions
+                                                  .length,
+                                              recommendedMinutes:
+                                                  visiblePassages[i]
+                                                      .recommendedMinutes,
+                                              preview: _passagePreview(
+                                                visiblePassages[i],
+                                              ),
+                                              previewLabel: _previewLabel(
+                                                language,
+                                              ),
+                                              startHint: _startHintLabel(
+                                                language,
+                                              ),
+                                              questionTypes: _questionTypeTags(
+                                                language,
+                                                visiblePassages[i],
+                                              ),
+                                              buttonLabel: _startLabel(
+                                                language,
+                                              ),
+                                              onTap: () => _startPassage(
+                                                visiblePassages[i],
+                                              ),
+                                            )
+                                            .animate(
+                                              delay: Duration(
+                                                milliseconds: 120 + (i * 45),
+                                              ),
+                                            )
+                                            .fadeIn(duration: 280.ms)
+                                            .slideY(begin: 0.06, end: 0),
+                                  ),
+                              ],
+                            );
+                          },
+                        ),
+                      ],
                     ],
                   );
                 },
@@ -322,134 +566,224 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
     final elapsed = _startedAt == null
         ? Duration.zero
         : DateTime.now().difference(_startedAt!);
+    final answered = _answeredCount(passage);
+    final questionTags = _questionTypeTags(language, passage);
+    final paragraphs = passage.body
+        .split('\n')
+        .map((line) => line.trim())
+        .where((line) => line.isNotEmpty)
+        .toList(growable: false);
 
     return ListView(
-      padding: const EdgeInsets.fromLTRB(18, 14, 18, 28),
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.lg,
+        AppSpacing.md,
+        AppSpacing.lg,
+        AppSpacing.pageBottom,
+      ),
       children: [
         _HeaderHero(
           eyebrow: _dojoEyebrow(language),
           title: passage.title,
-          subtitle: '${passage.level} • ${passage.questions.length}Q',
+          subtitle: _tr(
+            language,
+            '${passage.level} • ${passage.questions.length} questions',
+            '${passage.level} • ${passage.questions.length} câu',
+            '${passage.level} • ${passage.questions.length}問',
+          ),
           hint: _seriousHint(language),
           icon: Icons.auto_stories_rounded,
           trailing: _TimerBadge(
             label: _formatTime(_secondsRemaining),
             danger: _secondsRemaining <= 60,
           ),
-        ).animate().fadeIn(duration: 320.ms).slideY(begin: 0.06, end: 0),
-        const SizedBox(height: 12),
-        Container(
-          padding: const EdgeInsets.all(18),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [palette.elevated, palette.surface],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(26),
-            border: Border.all(color: palette.outline),
-            boxShadow: [
-              BoxShadow(
-                color: palette.primary.withValues(alpha: 0.06),
-                blurRadius: 22,
-                offset: const Offset(0, 12),
+          footer: Wrap(
+            spacing: AppSpacing.sm,
+            runSpacing: AppSpacing.sm,
+            children: [
+              _InfoPill(
+                label: _answeredProgressLabel(
+                  language,
+                  answered,
+                  passage.questions.length,
+                ),
+                color: Colors.white,
               ),
+              _InfoPill(
+                label: _targetTimeLabel(language, passage.recommendedMinutes),
+                color: Colors.white,
+              ),
+              for (final tag in questionTags)
+                _InfoPill(label: tag, color: Colors.white),
             ],
           ),
-          child: Text(
-            passage.body,
-            style: TextStyle(fontSize: 15, height: 1.75, color: palette.ink),
-          ),
-        ),
-        const SizedBox(height: 14),
-        ...List.generate(passage.questions.length, (index) {
-          final question = passage.questions[index];
-          final selected = _answers[question.id];
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 14),
-            child: _QuestionCard(
-              index: index + 1,
-              typeLabel: _questionTypeLabel(language, question.type),
-              prompt: question.prompt,
-              options: question.options,
-              selectedIndex: selected,
-              submitted: _submitted,
-              correctIndex: question.correctIndex,
-              explanation: _submitted ? question.explanation : null,
-              onSelect: (optionIndex) {
-                if (_submitted) return;
-                setState(() {
-                  _answers[question.id] = optionIndex;
-                });
-              },
-            ),
-          );
-        }),
-        if (_submitted) ...[
-          _ResultCard(
-            title: _scoreSummary(language, correct, passage.questions.length),
-            subtitle: _timeSpentLabel(language, elapsed),
-            accent: correct / passage.questions.length >= 0.6
-                ? palette.success
-                : palette.warning,
-          ),
-          const SizedBox(height: 12),
-          if (_snapshot != null)
-            _DiagnosisCard(
-              title: _tr(
-                language,
-                'Reading diagnosis',
-                'Chẩn đoán đọc hiểu',
-                '読解診断',
-              ),
-              stats: [
-                _snapshot!.profile.statFor(JlptSkillArea.reading),
-                ...JlptSkillArea.values
-                    .where((area) => area != JlptSkillArea.reading)
-                    .map(_snapshot!.profile.statFor),
+        ).animate().fadeIn(duration: 320.ms).slideY(begin: 0.06, end: 0),
+        const SizedBox(height: AppSpacing.md),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final wide = constraints.maxWidth >= 1140;
+
+            final passageColumn = Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _PassagePanel(
+                  title: _passagePanelTitle(language),
+                  level: passage.level,
+                  paragraphs: paragraphs,
+                  paragraphLabel: (index) => _paragraphLabel(language, index),
+                ),
+                const SizedBox(height: AppSpacing.md),
+                _ReadingFocusCard(
+                  title: _readingFocusTitle(language),
+                  hint: _readingFocusHint(language, passage),
+                  tags: questionTags,
+                  timeLabel: _targetTimeLabel(
+                    language,
+                    passage.recommendedMinutes,
+                  ),
+                ),
               ],
-              areaLabel: (area) => _areaLabel(language, area),
-              planTitle: _tr(
-                language,
-                'Next 3 actions',
-                '3 bước tiếp theo',
-                '次の3アクション',
-              ),
-              planItems: _snapshot!.plan.items.take(3).toList(growable: false),
-            ),
-          const SizedBox(height: 12),
-        ],
-        Row(
-          children: [
-            Expanded(
-              child: OutlinedButton.icon(
-                onPressed: () {
-                  _timer?.cancel();
-                  setState(() {
-                    _activePassage = null;
-                    _submitted = false;
-                    _snapshot = null;
-                  });
-                },
-                icon: const Icon(Icons.arrow_back_rounded),
-                label: Text(_backLabel(language)),
-              ),
-            ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: FilledButton.icon(
-                onPressed: _submitted ? () => _startPassage(passage) : _submit,
-                icon: Icon(
-                  _submitted
-                      ? Icons.restart_alt_rounded
-                      : Icons.task_alt_rounded,
+            );
+
+            final questionColumn = Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _QuestionSectionHeader(
+                  title: _questionsHeaderLabel(
+                    language,
+                    passage.questions.length,
+                  ),
+                  subtitle: _questionsGuideLabel(language),
+                  progressLabel: _answeredProgressLabel(
+                    language,
+                    answered,
+                    passage.questions.length,
+                  ),
                 ),
-                label: Text(
-                  _submitted ? _restartLabel(language) : _submitLabel(language),
+                const SizedBox(height: AppSpacing.md),
+                ...List.generate(passage.questions.length, (index) {
+                  final question = passage.questions[index];
+                  final selected = _answers[question.id];
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: AppSpacing.md),
+                    child: _QuestionCard(
+                      index: index + 1,
+                      typeLabel: _questionTypeLabel(language, question.type),
+                      prompt: question.prompt,
+                      options: question.options,
+                      selectedIndex: selected,
+                      selectedStateLabel: _selectedAnswerStateLabel(language),
+                      whyLabel: _whyLabel(language),
+                      submitted: _submitted,
+                      correctIndex: question.correctIndex,
+                      explanation: _submitted ? question.explanation : null,
+                      onSelect: (optionIndex) {
+                        if (_submitted) return;
+                        setState(() {
+                          _answers[question.id] = optionIndex;
+                        });
+                      },
+                    ),
+                  );
+                }),
+                if (_submitted) ...[
+                  _ResultCard(
+                    title: _scoreSummary(
+                      language,
+                      correct,
+                      passage.questions.length,
+                    ),
+                    subtitle: _timeSpentLabel(language, elapsed),
+                    accent: correct / passage.questions.length >= 0.6
+                        ? palette.success
+                        : palette.warning,
+                  ),
+                  const SizedBox(height: AppSpacing.md),
+                  if (_snapshot != null)
+                    _DiagnosisCard(
+                      title: _tr(
+                        language,
+                        'Reading diagnosis',
+                        'Chẩn đoán đọc hiểu',
+                        '読解診断',
+                      ),
+                      stats: [
+                        _snapshot!.profile.statFor(JlptSkillArea.reading),
+                        ...JlptSkillArea.values
+                            .where((area) => area != JlptSkillArea.reading)
+                            .map(_snapshot!.profile.statFor),
+                      ],
+                      areaLabel: (area) => _areaLabel(language, area),
+                      planTitle: _tr(
+                        language,
+                        'Next 3 actions',
+                        '3 bước tiếp theo',
+                        '次の3アクション',
+                      ),
+                      planItems: _snapshot!.plan.items
+                          .take(3)
+                          .toList(growable: false),
+                    ),
+                  const SizedBox(height: AppSpacing.md),
+                ],
+                Row(
+                  children: [
+                    Expanded(
+                      child: OutlinedButton.icon(
+                        onPressed: () {
+                          _timer?.cancel();
+                          setState(() {
+                            _activePassage = null;
+                            _submitted = false;
+                            _snapshot = null;
+                          });
+                        },
+                        icon: const Icon(Icons.arrow_back_rounded),
+                        label: Text(_backLabel(language)),
+                      ),
+                    ),
+                    const SizedBox(width: AppSpacing.sm),
+                    Expanded(
+                      child: FilledButton.icon(
+                        onPressed: _submitted
+                            ? () => _startPassage(passage)
+                            : _submit,
+                        icon: Icon(
+                          _submitted
+                              ? Icons.restart_alt_rounded
+                              : Icons.task_alt_rounded,
+                        ),
+                        label: Text(
+                          _submitted
+                              ? _restartLabel(language)
+                              : _submitLabel(language),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ),
-          ],
+              ],
+            );
+
+            if (!wide) {
+              return Column(
+                children: [
+                  passageColumn,
+                  const SizedBox(height: AppSpacing.md),
+                  questionColumn,
+                ],
+              );
+            }
+
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(width: 420, child: passageColumn),
+                const SizedBox(width: AppSpacing.md),
+                Expanded(child: questionColumn),
+              ],
+            );
+          },
         ),
       ],
     );
@@ -464,6 +798,7 @@ class _HeaderHero extends StatelessWidget {
     required this.hint,
     required this.icon,
     this.trailing,
+    this.footer,
   });
 
   final String eyebrow;
@@ -472,6 +807,7 @@ class _HeaderHero extends StatelessWidget {
   final String hint;
   final IconData icon;
   final Widget? trailing;
+  final Widget? footer;
 
   @override
   Widget build(BuildContext context) {
@@ -557,6 +893,10 @@ class _HeaderHero extends StatelessWidget {
               height: 1.4,
             ),
           ),
+          if (footer != null) ...[
+            const SizedBox(height: AppSpacing.md),
+            footer!,
+          ],
         ],
       ),
     );
@@ -566,13 +906,25 @@ class _HeaderHero extends StatelessWidget {
 class _ReadingPassageCard extends StatelessWidget {
   const _ReadingPassageCard({
     required this.title,
-    required this.meta,
+    required this.level,
+    required this.questionCount,
+    required this.recommendedMinutes,
+    required this.preview,
+    required this.previewLabel,
+    required this.startHint,
+    required this.questionTypes,
     required this.buttonLabel,
     required this.onTap,
   });
 
   final String title;
-  final String meta;
+  final String level;
+  final int questionCount;
+  final int recommendedMinutes;
+  final String preview;
+  final String previewLabel;
+  final String startHint;
+  final List<String> questionTypes;
   final String buttonLabel;
   final VoidCallback onTap;
 
@@ -580,7 +932,7 @@ class _ReadingPassageCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final palette = context.appPalette;
     return Container(
-      padding: const EdgeInsets.all(18),
+      padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [palette.elevated, palette.base],
@@ -601,6 +953,7 @@ class _ReadingPassageCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 width: 42,
@@ -617,42 +970,109 @@ class _ReadingPassageCard extends StatelessWidget {
                   size: 20,
                 ),
               ),
-              const SizedBox(width: 12),
+              const SizedBox(width: AppSpacing.md),
               Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 17,
+                        color: palette.ink,
+                        height: 1.2,
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.xs),
+                    Text(
+                      startHint,
+                      style: TextStyle(
+                        color: palette.ink.withValues(alpha: 0.56),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12,
+                        height: 1.35,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: AppSpacing.sm),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.sm,
+                  vertical: AppSpacing.xs,
+                ),
+                decoration: BoxDecoration(
+                  color: palette.primary.withValues(alpha: 0.08),
+                  borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
+                ),
                 child: Text(
-                  title,
+                  level,
                   style: TextStyle(
-                    fontWeight: FontWeight.w900,
-                    fontSize: 17,
-                    color: palette.ink,
-                    height: 1.2,
+                    color: palette.primary,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSpacing.md),
+          Wrap(
+            spacing: AppSpacing.sm,
+            runSpacing: AppSpacing.sm,
+            children: [
+              _MetaPill(label: '$questionCount Q', color: palette.secondary),
+              _MetaPill(label: '$recommendedMinutes m', color: palette.info),
+              for (final type in questionTypes.take(3))
+                _MetaPill(label: type, color: palette.accent),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.md),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+            width: double.infinity,
+            padding: const EdgeInsets.all(AppSpacing.md),
             decoration: BoxDecoration(
-              color: palette.primary.withValues(alpha: 0.08),
-              borderRadius: BorderRadius.circular(999),
+              color: palette.base,
+              borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+              border: Border.all(color: palette.outlineSoft),
             ),
-            child: Text(
-              meta,
-              style: TextStyle(
-                color: palette.primary,
-                fontWeight: FontWeight.w800,
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  previewLabel,
+                  style: TextStyle(
+                    color: palette.ink.withValues(alpha: 0.54),
+                    fontSize: 11,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 0.45,
+                  ),
+                ),
+                const SizedBox(height: AppSpacing.xs),
+                Text(
+                  preview,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: palette.ink.withValues(alpha: 0.82),
+                    height: 1.55,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
             ),
           ),
-          const SizedBox(height: 14),
-          Align(
-            alignment: Alignment.centerLeft,
+          const SizedBox(height: AppSpacing.md),
+          SizedBox(
+            width: double.infinity,
             child: FilledButton.icon(
               onPressed: onTap,
               icon: const Icon(Icons.play_arrow_rounded),
               label: Text(buttonLabel),
+              style: FilledButton.styleFrom(
+                minimumSize: const Size.fromHeight(48),
+              ),
             ),
           ),
         ],
@@ -668,6 +1088,8 @@ class _QuestionCard extends StatelessWidget {
     required this.prompt,
     required this.options,
     required this.selectedIndex,
+    required this.selectedStateLabel,
+    required this.whyLabel,
     required this.submitted,
     required this.correctIndex,
     required this.onSelect,
@@ -679,6 +1101,8 @@ class _QuestionCard extends StatelessWidget {
   final String prompt;
   final List<String> options;
   final int? selectedIndex;
+  final String selectedStateLabel;
+  final String whyLabel;
   final bool submitted;
   final int correctIndex;
   final ValueChanged<int> onSelect;
@@ -688,7 +1112,7 @@ class _QuestionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final palette = context.appPalette;
     return Container(
-      padding: const EdgeInsets.all(18),
+      padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [palette.elevated, palette.base],
@@ -712,8 +1136,8 @@ class _QuestionCard extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 6,
+                  horizontal: AppSpacing.sm,
+                  vertical: AppSpacing.sm,
                 ),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -722,7 +1146,7 @@ class _QuestionCard extends StatelessWidget {
                       palette.primary.withValues(alpha: 0.08),
                     ],
                   ),
-                  borderRadius: BorderRadius.circular(999),
+                  borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
                 ),
                 child: Text(
                   '$index',
@@ -732,15 +1156,15 @@ class _QuestionCard extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: AppSpacing.sm),
               Container(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 6,
+                  horizontal: AppSpacing.sm,
+                  vertical: AppSpacing.sm,
                 ),
                 decoration: BoxDecoration(
                   color: palette.secondary.withValues(alpha: 0.10),
-                  borderRadius: BorderRadius.circular(999),
+                  borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
                 ),
                 child: Text(
                   typeLabel,
@@ -750,9 +1174,19 @@ class _QuestionCard extends StatelessWidget {
                   ),
                 ),
               ),
+              const Spacer(),
+              if (selectedIndex != null && !submitted)
+                Text(
+                  selectedStateLabel,
+                  style: TextStyle(
+                    color: palette.ink.withValues(alpha: 0.54),
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
             ],
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSpacing.md),
           Text(
             prompt,
             style: TextStyle(
@@ -761,10 +1195,11 @@ class _QuestionCard extends StatelessWidget {
               height: 1.4,
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: AppSpacing.md),
           ...List.generate(options.length, (optionIndex) {
             final selected = selectedIndex == optionIndex;
             final isCorrect = optionIndex == correctIndex;
+            final optionLabel = String.fromCharCode(65 + optionIndex);
             final bgColor = submitted
                 ? (isCorrect
                       ? palette.success.withValues(alpha: 0.12)
@@ -784,27 +1219,83 @@ class _QuestionCard extends StatelessWidget {
                       ? palette.primary.withValues(alpha: 0.35)
                       : palette.outlineSoft);
             return Padding(
-              padding: const EdgeInsets.only(bottom: 8),
+              padding: const EdgeInsets.only(bottom: AppSpacing.sm),
               child: Material(
                 color: Colors.transparent,
                 child: InkWell(
                   onTap: submitted ? null : () => onSelect(optionIndex),
-                  borderRadius: BorderRadius.circular(14),
+                  borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
                   child: Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.all(14),
+                    padding: const EdgeInsets.all(AppSpacing.md),
                     decoration: BoxDecoration(
                       color: bgColor,
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
                       border: Border.all(color: borderColor),
                     ),
-                    child: Text(
-                      options[optionIndex],
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: palette.ink,
-                        height: 1.35,
-                      ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 28,
+                          height: 28,
+                          decoration: BoxDecoration(
+                            color: submitted
+                                ? (isCorrect
+                                      ? palette.success.withValues(alpha: 0.14)
+                                      : selected
+                                      ? palette.error.withValues(alpha: 0.14)
+                                      : palette.base)
+                                : selected
+                                ? palette.primary.withValues(alpha: 0.14)
+                                : palette.base,
+                            borderRadius: BorderRadius.circular(
+                              AppSpacing.radiusMd,
+                            ),
+                            border: Border.all(color: borderColor),
+                          ),
+                          alignment: Alignment.center,
+                          child: Text(
+                            optionLabel,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w800,
+                              color: submitted
+                                  ? (isCorrect
+                                        ? palette.success
+                                        : selected
+                                        ? palette.error
+                                        : palette.ink.withValues(alpha: 0.62))
+                                  : selected
+                                  ? palette.primary
+                                  : palette.ink.withValues(alpha: 0.62),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: AppSpacing.md),
+                        Expanded(
+                          child: Text(
+                            options[optionIndex],
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: palette.ink,
+                              height: 1.4,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: AppSpacing.sm),
+                        if (submitted && isCorrect)
+                          Icon(
+                            Icons.check_circle_rounded,
+                            color: palette.success,
+                          )
+                        else if (submitted && selected && !isCorrect)
+                          Icon(Icons.cancel_rounded, color: palette.error)
+                        else if (!submitted && selected)
+                          Icon(
+                            Icons.radio_button_checked_rounded,
+                            color: palette.primary,
+                          ),
+                      ],
                     ),
                   ),
                 ),
@@ -814,25 +1305,304 @@ class _QuestionCard extends StatelessWidget {
           if (submitted &&
               explanation != null &&
               explanation!.trim().isNotEmpty) ...[
-            const SizedBox(height: 8),
+            const SizedBox(height: AppSpacing.sm),
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(14),
+              padding: const EdgeInsets.all(AppSpacing.md),
               decoration: BoxDecoration(
                 color: palette.base,
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
                 border: Border.all(color: palette.outline),
               ),
-              child: Text(
-                explanation!,
-                style: TextStyle(
-                  color: palette.ink.withValues(alpha: 0.78),
-                  height: 1.4,
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    whyLabel,
+                    style: TextStyle(
+                      color: palette.ink.withValues(alpha: 0.54),
+                      fontWeight: FontWeight.w800,
+                      fontSize: 11,
+                      letterSpacing: 0.45,
+                    ),
+                  ),
+                  const SizedBox(height: AppSpacing.xs),
+                  Text(
+                    explanation!,
+                    style: TextStyle(
+                      color: palette.ink.withValues(alpha: 0.78),
+                      height: 1.45,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
         ],
+      ),
+    );
+  }
+}
+
+class _PassagePanel extends StatelessWidget {
+  const _PassagePanel({
+    required this.title,
+    required this.level,
+    required this.paragraphs,
+    required this.paragraphLabel,
+  });
+
+  final String title;
+  final String level;
+  final List<String> paragraphs;
+  final String Function(int index) paragraphLabel;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [palette.elevated, palette.surface],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusXxl),
+        border: Border.all(color: palette.outline),
+        boxShadow: [
+          BoxShadow(
+            color: palette.primary.withValues(alpha: 0.06),
+            blurRadius: 22,
+            offset: const Offset(0, 12),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 18,
+                  color: palette.ink,
+                ),
+              ),
+              const Spacer(),
+              _MetaPill(label: level, color: palette.primary),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.md),
+          for (var i = 0; i < paragraphs.length; i++) ...[
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(AppSpacing.md),
+              decoration: BoxDecoration(
+                color: palette.base,
+                borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+                border: Border.all(color: palette.outlineSoft),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _MetaPill(
+                    label: paragraphLabel(i + 1),
+                    color: palette.secondary,
+                  ),
+                  const SizedBox(height: AppSpacing.sm),
+                  Text(
+                    paragraphs[i],
+                    style: TextStyle(
+                      fontSize: 15,
+                      height: 1.8,
+                      color: palette.ink,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            if (i < paragraphs.length - 1)
+              const SizedBox(height: AppSpacing.sm),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _ReadingFocusCard extends StatelessWidget {
+  const _ReadingFocusCard({
+    required this.title,
+    required this.hint,
+    required this.tags,
+    required this.timeLabel,
+  });
+
+  final String title;
+  final String hint;
+  final List<String> tags;
+  final String timeLabel;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [palette.elevated, palette.base],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
+        border: Border.all(color: palette.outlineSoft),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(fontWeight: FontWeight.w900, color: palette.ink),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Text(
+            hint,
+            style: TextStyle(
+              color: palette.ink.withValues(alpha: 0.72),
+              height: 1.45,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          Wrap(
+            spacing: AppSpacing.sm,
+            runSpacing: AppSpacing.sm,
+            children: [
+              _MetaPill(label: timeLabel, color: palette.info),
+              for (final tag in tags)
+                _MetaPill(label: tag, color: palette.accent),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _QuestionSectionHeader extends StatelessWidget {
+  const _QuestionSectionHeader({
+    required this.title,
+    required this.subtitle,
+    required this.progressLabel,
+  });
+
+  final String title;
+  final String subtitle;
+  final String progressLabel;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [palette.elevated, palette.base],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
+        border: Border.all(color: palette.outlineSoft),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w900,
+                    fontSize: 18,
+                    color: palette.ink,
+                  ),
+                ),
+              ),
+              _MetaPill(label: progressLabel, color: palette.primary),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Text(
+            subtitle,
+            style: TextStyle(
+              color: palette.ink.withValues(alpha: 0.72),
+              height: 1.45,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _MetaPill extends StatelessWidget {
+  const _MetaPill({required this.label, required this.color});
+
+  final String label;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.sm,
+        vertical: AppSpacing.xs,
+      ),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.10),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
+        border: Border.all(color: color.withValues(alpha: 0.14)),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(
+          color: color,
+          fontWeight: FontWeight.w800,
+          fontSize: 11,
+        ),
+      ),
+    );
+  }
+}
+
+class _InfoPill extends StatelessWidget {
+  const _InfoPill({required this.label, required this.color});
+
+  final String label;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
+      ),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
+        border: Border.all(color: color.withValues(alpha: 0.18)),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(fontWeight: FontWeight.w800, color: color),
       ),
     );
   }
@@ -846,16 +1616,17 @@ class _TimerBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tint = danger ? const Color(0xFFFFD7D7) : Colors.white;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 9),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.12),
+        color: tint.withValues(alpha: danger ? 0.18 : 0.12),
         borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.20)),
+        border: Border.all(color: tint.withValues(alpha: 0.24)),
       ),
       child: Text(
         label,
-        style: TextStyle(fontWeight: FontWeight.w900, color: Colors.white),
+        style: TextStyle(fontWeight: FontWeight.w900, color: tint),
       ),
     );
   }

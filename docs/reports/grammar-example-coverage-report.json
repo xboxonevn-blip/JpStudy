@@ -1,0 +1,61 @@
+{
+  "targetMinimumExamples": 10,
+  "summaryByLevel": [
+    {
+      "level": "N5",
+      "grammarPoints": 118,
+      "exampleBlocks": 118,
+      "totalExamples": 1180,
+      "averageExamplesPerPoint": 10.0,
+      "belowTargetCount": 0,
+      "missingToTarget": 0
+    },
+    {
+      "level": "N4",
+      "grammarPoints": 100,
+      "exampleBlocks": 100,
+      "totalExamples": 1000,
+      "averageExamplesPerPoint": 10.0,
+      "belowTargetCount": 0,
+      "missingToTarget": 0
+    },
+    {
+      "level": "N3",
+      "grammarPoints": 100,
+      "exampleBlocks": 100,
+      "totalExamples": 1000,
+      "averageExamplesPerPoint": 10.0,
+      "belowTargetCount": 0,
+      "missingToTarget": 0
+    }
+  ],
+  "batchSummary": [
+    {
+      "batch": "Pass A",
+      "scope": "Canonicalize grammarPoint labels in grammar_examples",
+      "renamedBlocks": 0,
+      "unmatchedBlocks": 0
+    },
+    {
+      "batch": "Pass B",
+      "scope": "Fill N5 grammar points to 10 examples",
+      "pointsBelowTarget": 0,
+      "missingExamples": 0
+    },
+    {
+      "batch": "Pass C",
+      "scope": "Fill N4 grammar points to 10 examples",
+      "pointsBelowTarget": 0,
+      "missingExamples": 0
+    },
+    {
+      "batch": "Pass D",
+      "scope": "Fill N3 grammar points to 10 examples",
+      "pointsBelowTarget": 0,
+      "missingExamples": 0
+    }
+  ],
+  "renamedExampleBlocks": [],
+  "unmatchedExampleBlocks": [],
+  "lowCoverage": []
+}

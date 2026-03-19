@@ -62,7 +62,7 @@ void main() {
   );
 
   test(
-    'buildPracticeDestinations renders JLPT Coach labels correctly in Vietnamese',
+    'buildPracticeDestinations renders JLPT Prep labels correctly in Vietnamese',
     () {
       final ranked = buildPracticeDestinations(
         language: AppLanguage.vi,
@@ -72,10 +72,28 @@ void main() {
       );
 
       final jlptCoach = ranked.firstWhere((item) => item.id == 'jlpt_coach');
-      expect(jlptCoach.title, '\u0054r\u1ee3 l\u00fd JLPT');
+      expect(jlptCoach.title, 'Ôn thi JLPT');
       expect(
         jlptCoach.subtitle,
-        '\u0110\u1ecdc hi\u1ec3u, mock exam, ch\u1ea9n \u0111o\u00e1n, k\u1ebf ho\u1ea1ch 7 ng\u00e0y.',
+        'Thi thử đầy đủ, kiểm tra nhanh, đọc hiểu, chẩn đoán, kế hoạch 7 ngày.',
+      );
+    },
+  );
+
+  test(
+    'buildPracticeDestinations no longer surfaces a separate JLPT Mock card',
+    () {
+      final ranked = buildPracticeDestinations(
+        language: AppLanguage.en,
+        dueReviewCount: 0,
+        mistakeCount: 0,
+        ghostCount: 0,
+      );
+
+      expect(ranked.any((item) => item.id == 'mock_exam'), isFalse);
+      expect(
+        ranked.any((item) => item.route == '/practice/mock-exam'),
+        isFalse,
       );
     },
   );

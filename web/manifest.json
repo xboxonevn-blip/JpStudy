@@ -3,10 +3,11 @@
     "short_name": "JpStudy",
     "start_url": ".",
     "display": "standalone",
+    "display_override": ["window-controls-overlay", "standalone", "browser"],
     "background_color": "#F5F0E8",
-    "theme_color": "#5B9BD5",
+    "theme_color": "#17324D",
     "description": "Ứng dụng học tiếng Nhật toàn diện: Kanji, Từ vựng, Ngữ pháp, Đọc hiểu, Viết tay",
-    "orientation": "portrait-primary",
+    "orientation": "any",
     "prefer_related_applications": false,
     "icons": [
         {

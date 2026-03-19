@@ -26,6 +26,7 @@ class JlptMockProScreen extends ConsumerStatefulWidget {
 class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
   bool _started = false;
   bool _finished = false;
+  bool _isRefreshingBank = false;
   int _sectionIndex = 0;
   int _questionIndex = 0;
   int _sectionSeconds = 0;
@@ -34,18 +35,14 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
   Timer? _timer;
   final Map<String, int> _answers = <String, int>{};
   JlptCoachSnapshot? _snapshot;
+  List<JlptMockSection> _sections = const <JlptMockSection>[];
 
-  JlptMockSection get _currentSection => jlptMockSections[_sectionIndex];
+  JlptMockSection get _currentSection => _sections[_sectionIndex];
   JlptMockQuestion get _currentQuestion =>
       _currentSection.questions[_questionIndex];
 
-  int get _totalQuestions => jlptMockSections.fold<int>(
-    0,
-    (sum, section) => sum + section.questions.length,
-  );
-
-  int get _totalMinutes =>
-      jlptMockSections.fold<int>(0, (sum, section) => sum + section.minutes);
+  int get _totalQuestions =>
+      _sections.fold<int>(0, (sum, section) => sum + section.questions.length);
 
   @override
   void dispose() {
@@ -147,13 +144,17 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
     return '$m:$s';
   }
 
-  void _startExam() {
+  void _startExam(List<JlptMockSection> sections) {
+    if (sections.isEmpty) {
+      return;
+    }
     _timer?.cancel();
-    final totalMinutes = jlptMockSections.fold<int>(
+    final totalMinutes = sections.fold<int>(
       0,
       (sum, item) => sum + item.minutes,
     );
     setState(() {
+      _sections = List<JlptMockSection>.unmodifiable(sections);
       _started = true;
       _finished = false;
       _sectionIndex = 0;
@@ -161,7 +162,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
       _answers.clear();
       _snapshot = null;
       _startedAt = DateTime.now();
-      _sectionSeconds = jlptMockSections.first.minutes * 60;
+      _sectionSeconds = sections.first.minutes * 60;
       _totalSeconds = totalMinutes * 60;
     });
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -190,6 +191,48 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
     });
   }
 
+  Future<void> _restartExamWithFreshBank() async {
+    if (_isRefreshingBank) {
+      return;
+    }
+    final language = ref.read(appLanguageProvider);
+    final level = ref.read(studyLevelProvider) ?? StudyLevel.n5;
+    setState(() {
+      _isRefreshingBank = true;
+    });
+    try {
+      final sections = await ref.refresh(
+        jlptMockSectionsProvider((level: level, language: language)).future,
+      );
+      if (!mounted) {
+        return;
+      }
+      _startExam(sections);
+    } catch (_) {
+      if (!mounted) {
+        return;
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            _tr(
+              language,
+              'Unable to prepare a fresh mock right now.',
+              'Chưa thể tạo bộ đề mới ngay lúc này.',
+              '新しい模試を準備できませんでした。',
+            ),
+          ),
+        ),
+      );
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isRefreshingBank = false;
+        });
+      }
+    }
+  }
+
   void _nextQuestion() {
     if (_finished) return;
     if (_questionIndex < _currentSection.questions.length - 1) {
@@ -202,14 +245,14 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
   }
 
   void _moveToNextSectionOrFinish() {
-    if (_sectionIndex >= jlptMockSections.length - 1) {
+    if (_sectionIndex >= _sections.length - 1) {
       _finishExam();
       return;
     }
     setState(() {
       _sectionIndex += 1;
       _questionIndex = 0;
-      _sectionSeconds = jlptMockSections[_sectionIndex].minutes * 60;
+      _sectionSeconds = _sections[_sectionIndex].minutes * 60;
     });
   }
 
@@ -218,7 +261,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
     _timer?.cancel();
 
     final signals = <JlptSkillSignal>[];
-    for (final section in jlptMockSections) {
+    for (final section in _sections) {
       for (final question in section.questions) {
         signals.add(
           JlptSkillSignal(
@@ -257,12 +300,12 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
   }
 
   double _overallScore() {
-    final totalQuestions = jlptMockSections.fold<int>(
+    final totalQuestions = _sections.fold<int>(
       0,
       (sum, section) => sum + section.questions.length,
     );
     if (totalQuestions == 0) return 0;
-    final totalCorrect = jlptMockSections.fold<int>(
+    final totalCorrect = _sections.fold<int>(
       0,
       (sum, section) => sum + _correctCountInSection(section),
     );
@@ -272,7 +315,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
   bool _predictedPass() {
     final overall = _overallScore();
     if (overall < 0.60) return false;
-    for (final section in jlptMockSections) {
+    for (final section in _sections) {
       if (_sectionScore(section) < 0.40) return false;
     }
     return true;
@@ -304,7 +347,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
       case 'jlpt_reading':
         return _tr(language, 'from Reading Drill', 'từ Luyện đọc', '読解ドリルから');
       default:
-        return _tr(language, 'from JLPT Coach', 'từ JLPT Coach', 'JLPTコーチから');
+        return _tr(language, 'from JLPT Prep', 'từ JLPT Prep', 'JLPT対策から');
     }
   }
 
@@ -319,11 +362,12 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
     AppLanguage language, {
     required int questionCount,
     required int totalMinutes,
+    required int sectionCount,
   }) => _tr(
     language,
-    '$questionCount questions • $totalMinutes minutes • ${jlptMockSections.length} sections',
-    '$questionCount câu • $totalMinutes phút • ${jlptMockSections.length} phần',
-    '$questionCount問 • $totalMinutes分 • ${jlptMockSections.length}セクション',
+    '$questionCount questions • $totalMinutes minutes • $sectionCount sections',
+    '$questionCount câu • $totalMinutes phút • $sectionCount phần',
+    '$questionCount問 • $totalMinutes分 • $sectionCountセクション',
   );
 
   String _passRuleLabel(AppLanguage language) => _tr(
@@ -378,9 +422,9 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
 
   String _readinessCaption(AppLanguage language) => _tr(
     language,
-    'Use your latest JLPT Coach data before starting.',
-    'Dùng dữ liệu JLPT Coach gần nhất để vào đề có định hướng.',
-    '直近のJLPTコーチデータを使って模試へ入ります。',
+    'Use your latest JLPT Prep data before starting.',
+    'Dùng dữ liệu JLPT Prep gần nhất để vào đề có định hướng.',
+    '直近のJLPT対策データを使って模試へ入ります。',
   );
 
   String _readinessEmptyTitle(AppLanguage language) => _tr(
@@ -392,9 +436,9 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
 
   String _readinessEmptyBody(AppLanguage language) => _tr(
     language,
-    'Mock Pro already saves diagnosis into JLPT Coach, then builds a 7-day plan automatically.',
-    'Mock Pro sẽ tự lưu chẩn đoán vào JLPT Coach và tạo kế hoạch 7 ngày sau bài làm.',
-    '模試後に診断がJLPTコーチへ保存され、7日プランも自動生成されます。',
+    'Mock Pro already saves diagnosis into JLPT Prep, then builds a 7-day plan automatically.',
+    'Mock Pro sẽ tự lưu chẩn đoán vào JLPT Prep và tạo kế hoạch 7 ngày sau bài làm.',
+    '模試後に診断がJLPT対策へ保存され、7日プランも自動生成されます。',
   );
 
   String _sectionFlowTitle(AppLanguage language) =>
@@ -402,9 +446,30 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
 
   String _sectionFlowCaption(AppLanguage language) => _tr(
     language,
-    'Every section uses the current in-app mock bank.',
-    'Mỗi phần đều dùng dữ liệu mock hiện có trong app.',
-    '各セクションは現在のアプリ内模試データを使います。',
+    'Every section uses current in-app data for the selected level.',
+    'Mỗi phần đều dùng dữ liệu thật trong app theo level đang chọn.',
+    '各セクションは選択中レベルのアプリ内データを使います。',
+  );
+
+  String _loadingBankLabel(AppLanguage language) => _tr(
+    language,
+    'Loading current exam bank...',
+    'Đang tải bộ đề hiện tại...',
+    '現在の問題バンクを読み込み中...',
+  );
+
+  String _emptyBankLabel(AppLanguage language) => _tr(
+    language,
+    'The current level does not have enough in-app exam data yet.',
+    'Level hiện tại chưa có đủ dữ liệu trong app để dựng đề.',
+    '現在のレベルには模試を組むためのデータがまだ足りません。',
+  );
+
+  String _bankErrorLabel(AppLanguage language) => _tr(
+    language,
+    'Unable to build the JLPT exam from in-app data.',
+    'Không dựng được đề JLPT từ dữ liệu hiện có trong app.',
+    'アプリ内データからJLPT模試を構築できませんでした。',
   );
 
   String _breakdownTitle(AppLanguage language) =>
@@ -425,9 +490,9 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
 
   String _resultActionCaption(AppLanguage language) => _tr(
     language,
-    'This run updates JLPT Coach immediately.',
-    'Bài làm này cập nhật JLPT Coach ngay lập tức.',
-    'この結果はすぐにJLPTコーチへ反映されます。',
+    'This run updates JLPT Prep immediately.',
+    'Bài làm này cập nhật JLPT Prep ngay lập tức.',
+    'この結果はすぐにJLPT対策へ反映されます。',
   );
 
   Widget _buildLandingView(
@@ -435,8 +500,18 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
     AppLanguage language,
     StudyLevel level,
     AsyncValue<JlptCoachSnapshot?> snapshotAsync,
+    AsyncValue<List<JlptMockSection>> bankAsync,
+    List<JlptMockSection> sections,
   ) {
     final snapshot = snapshotAsync.valueOrNull;
+    final questionCount = sections.fold<int>(
+      0,
+      (sum, section) => sum + section.questions.length,
+    );
+    final totalMinutes = sections.fold<int>(
+      0,
+      (sum, section) => sum + section.minutes,
+    );
     return JapaneseBackground(
       child: ListView(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
@@ -459,11 +534,14 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
               ),
               _OverviewChip(
                 icon: Icons.quiz_rounded,
-                label: _mockOverviewLabel(
-                  language,
-                  questionCount: _totalQuestions,
-                  totalMinutes: _totalMinutes,
-                ),
+                label: bankAsync.isLoading && sections.isEmpty
+                    ? _loadingBankLabel(language)
+                    : _mockOverviewLabel(
+                        language,
+                        questionCount: questionCount,
+                        totalMinutes: totalMinutes,
+                        sectionCount: sections.length,
+                      ),
               ),
               _OverviewChip(
                 icon: Icons.insights_rounded,
@@ -479,6 +557,8 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
                 context,
                 language,
                 snapshot,
+                bankAsync,
+                sections,
               );
               final readinessPanel = _buildReadinessPanel(
                 context,
@@ -506,10 +586,33 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
           ),
           const SizedBox(height: 14),
           FilledButton.icon(
-            onPressed: _startExam,
+            onPressed: sections.isEmpty ? null : () => _startExam(sections),
             icon: const Icon(Icons.play_arrow_rounded),
-            label: Text(_startLabel(language)),
+            label: Text(
+              bankAsync.isLoading && sections.isEmpty
+                  ? _loadingBankLabel(language)
+                  : _startLabel(language),
+            ),
           ),
+          if (bankAsync.hasError) ...[
+            const SizedBox(height: 10),
+            Text(
+              _bankErrorLabel(language),
+              style: TextStyle(
+                color: context.appPalette.error,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ] else if (!bankAsync.isLoading && sections.isEmpty) ...[
+            const SizedBox(height: 10),
+            Text(
+              _emptyBankLabel(language),
+              style: TextStyle(
+                color: context.appPalette.ink.withValues(alpha: 0.68),
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ],
         ],
       ),
     );
@@ -519,6 +622,8 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
     BuildContext context,
     AppLanguage language,
     JlptCoachSnapshot? snapshot,
+    AsyncValue<List<JlptMockSection>> bankAsync,
+    List<JlptMockSection> sections,
   ) {
     return AppSectionCard(
       padding: const EdgeInsets.all(AppSpacing.lg),
@@ -530,40 +635,56 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
             caption: _sectionFlowCaption(language),
           ),
           const SizedBox(height: 12),
-          LayoutBuilder(
-            builder: (context, constraints) {
-              final columns = constraints.maxWidth >= 620 ? 2 : 1;
-              final width = columns == 1
-                  ? constraints.maxWidth
-                  : (constraints.maxWidth - AppSpacing.md) / columns;
-              return Wrap(
-                spacing: AppSpacing.md,
-                runSpacing: AppSpacing.md,
-                children: [
-                  for (final section in jlptMockSections)
-                    SizedBox(
-                      width: width,
-                      child: _SectionPreviewCard(
-                        eyebrow: _romajiLabel(section),
-                        title: _sectionTitle(language, section),
-                        icon: _sectionIcon(_sectionArea(section)),
-                        meta:
-                            '${section.questions.length}Q • ${section.minutes}m',
-                        status: _latestAccuracyLabel(
-                          language,
-                          snapshot,
-                          section,
+          if (bankAsync.isLoading && sections.isEmpty)
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 12),
+              child: Center(child: CircularProgressIndicator()),
+            )
+          else if (sections.isEmpty)
+            Text(
+              bankAsync.hasError
+                  ? _bankErrorLabel(language)
+                  : _emptyBankLabel(language),
+              style: TextStyle(
+                color: context.appPalette.ink.withValues(alpha: 0.72),
+                fontWeight: FontWeight.w700,
+              ),
+            )
+          else
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final columns = constraints.maxWidth >= 620 ? 2 : 1;
+                final width = columns == 1
+                    ? constraints.maxWidth
+                    : (constraints.maxWidth - AppSpacing.md) / columns;
+                return Wrap(
+                  spacing: AppSpacing.md,
+                  runSpacing: AppSpacing.md,
+                  children: [
+                    for (final section in sections)
+                      SizedBox(
+                        width: width,
+                        child: _SectionPreviewCard(
+                          eyebrow: _romajiLabel(section),
+                          title: _sectionTitle(language, section),
+                          icon: _sectionIcon(_sectionArea(section)),
+                          meta:
+                              '${section.questions.length}Q • ${section.minutes}m',
+                          status: _latestAccuracyLabel(
+                            language,
+                            snapshot,
+                            section,
+                          ),
+                          accent: _sectionColor(context, _sectionArea(section)),
+                          progress: snapshot == null
+                              ? null
+                              : _snapshotAccuracyForSection(snapshot, section),
                         ),
-                        accent: _sectionColor(context, _sectionArea(section)),
-                        progress: snapshot == null
-                            ? null
-                            : _snapshotAccuracyForSection(snapshot, section),
                       ),
-                    ),
-                ],
-              );
-            },
-          ),
+                  ],
+                );
+              },
+            ),
         ],
       ),
     );
@@ -780,7 +901,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
                           spacing: AppSpacing.md,
                           runSpacing: AppSpacing.md,
                           children: [
-                            for (final section in jlptMockSections)
+                            for (final section in _sections)
                               SizedBox(
                                 width: width,
                                 child: _SectionResultCard(
@@ -863,9 +984,20 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
           ),
           const SizedBox(height: 12),
           FilledButton.icon(
-            onPressed: _startExam,
+            onPressed: _sections.isEmpty || _isRefreshingBank
+                ? null
+                : _restartExamWithFreshBank,
             icon: const Icon(Icons.restart_alt_rounded),
-            label: Text(_startLabel(language)),
+            label: Text(
+              _isRefreshingBank
+                  ? _tr(
+                      language,
+                      'Preparing new mock...',
+                      'Đang tạo đề mới...',
+                      '新しい模試を準備中...',
+                    )
+                  : _startLabel(language),
+            ),
           ),
         ],
       ),
@@ -885,7 +1017,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
             title:
                 '${_romajiLabel(_currentSection)} • ${_sectionTitle(language, _currentSection)}',
             subtitle:
-                '${_sectionIndex + 1}/${jlptMockSections.length} • ${_questionIndex + 1}/${_currentSection.questions.length}',
+                '${_sectionIndex + 1}/${_sections.length} • ${_questionIndex + 1}/${_currentSection.questions.length}',
             icon: Icons.timer_outlined,
             accent: _sectionColor(context, question.area),
             trailing: Row(
@@ -921,7 +1053,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
                 Wrap(
                   spacing: 8,
                   runSpacing: 8,
-                  children: jlptMockSections.asMap().entries.map((entry) {
+                  children: _sections.asMap().entries.map((entry) {
                     final active = entry.key == _sectionIndex;
                     return _MiniSectionChip(
                       label: _romajiLabel(entry.value),
@@ -937,7 +1069,10 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
             areaLabel: _areaLabel(language, question.area),
             prompt: question.prompt,
             options: question.options,
+            contextTitle: question.contextTitle,
+            contextBody: question.contextBody,
             selectedIndex: selected,
+            sourceLabel: question.sourceLabel,
             onSelect: (index) {
               setState(() {
                 _answers[question.id] = index;
@@ -960,7 +1095,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
                   onPressed: _nextQuestion,
                   icon: const Icon(Icons.navigate_next_rounded),
                   label: Text(
-                    _sectionIndex == jlptMockSections.length - 1 &&
+                    _sectionIndex == _sections.length - 1 &&
                             _questionIndex ==
                                 _currentSection.questions.length - 1
                         ? _submitLabel(language)
@@ -1024,13 +1159,24 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
     final language = ref.watch(appLanguageProvider);
     final level = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
     final snapshotAsync = ref.watch(jlptCoachSnapshotProvider);
+    final bankAsync = ref.watch(
+      jlptMockSectionsProvider((level: level, language: language)),
+    );
     final palette = context.appPalette;
+    final previewSections = bankAsync.valueOrNull ?? const <JlptMockSection>[];
 
     if (!_started) {
       return Scaffold(
         backgroundColor: palette.bg,
         appBar: AppBar(title: Text(_title(language))),
-        body: _buildLandingView(context, language, level, snapshotAsync),
+        body: _buildLandingView(
+          context,
+          language,
+          level,
+          snapshotAsync,
+          bankAsync,
+          previewSections,
+        ),
       );
     }
 
@@ -1664,6 +1810,9 @@ class _MockQuestionCard extends StatelessWidget {
     required this.prompt,
     required this.options,
     required this.selectedIndex,
+    this.contextTitle,
+    this.contextBody,
+    this.sourceLabel,
     required this.onSelect,
   });
 
@@ -1671,6 +1820,9 @@ class _MockQuestionCard extends StatelessWidget {
   final String prompt;
   final List<String> options;
   final int? selectedIndex;
+  final String? contextTitle;
+  final String? contextBody;
+  final String? sourceLabel;
   final ValueChanged<int> onSelect;
 
   @override
@@ -1686,20 +1838,85 @@ class _MockQuestionCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-            decoration: BoxDecoration(
-              color: palette.secondary.withValues(alpha: 0.10),
-              borderRadius: BorderRadius.circular(999),
-            ),
-            child: Text(
-              areaLabel,
-              style: TextStyle(
-                color: palette.secondary,
-                fontWeight: FontWeight.w800,
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  color: palette.secondary.withValues(alpha: 0.10),
+                  borderRadius: BorderRadius.circular(999),
+                ),
+                child: Text(
+                  areaLabel,
+                  style: TextStyle(
+                    color: palette.secondary,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+              if (sourceLabel != null && sourceLabel!.trim().isNotEmpty)
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: palette.base,
+                    borderRadius: BorderRadius.circular(999),
+                    border: Border.all(color: palette.outlineSoft),
+                  ),
+                  child: Text(
+                    sourceLabel!,
+                    style: TextStyle(
+                      color: palette.ink.withValues(alpha: 0.72),
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+            ],
+          ),
+          if (contextBody != null && contextBody!.trim().isNotEmpty) ...[
+            const SizedBox(height: 12),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: palette.base,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: palette.outlineSoft),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (contextTitle != null &&
+                      contextTitle!.trim().isNotEmpty) ...[
+                    Text(
+                      contextTitle!,
+                      style: TextStyle(
+                        color: palette.ink.withValues(alpha: 0.64),
+                        fontWeight: FontWeight.w800,
+                        fontSize: 12,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                  ],
+                  Text(
+                    contextBody!,
+                    style: TextStyle(
+                      color: palette.ink.withValues(alpha: 0.86),
+                      height: 1.5,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
               ),
             ),
-          ),
+          ],
           const SizedBox(height: 12),
           Text(
             prompt,

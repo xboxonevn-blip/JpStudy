@@ -4,6 +4,93 @@ This file records recent Codex work so future sessions can continue from the cur
 
 ## 2026-03-18
 
+### Grammar Practice Replacement-Drill Guardrail Pass
+
+- Investigated a reported `Grammar Practice` issue where `Fix Error` in English mode could generate visually broken prompts such as full question formulas being injected straight into learner sentences.
+- Root cause found
+  - `GrammarQuestionGenerator._buildErrorCorrectionQuestion` and `_buildErrorReasonQuestion` relied on `_buildCorruptedSentence(...)` without first checking whether the target grammar point was a sentence-ready subpattern or a full dialogue-style prompt.
+  - `_buildCorruptedSentence(...)` could also pick raw `grammarPoint` strings that were still formula notation (`〜`, `〇〇`, `N1`, etc.) and splice them directly into the wrong sentence.
+- Updated `lib/features/grammar/services/grammar_question_generator.dart`
+  - added `_shouldSkipReplacementQuestionForPattern(...)` so replacement-based drills are skipped for full standalone prompt patterns that begin the example sentence
+  - added `_isEmbeddableSurfacePattern(...)` so only real surface-form Japanese can be injected into a corrupted sentence
+  - filtered `_buildCorruptedSentence(...)` to reject placeholder-style replacement candidates before building `Fix Error` / `Why wrong` items
+- Updated `test/features/grammar/grammar_question_generator_test.dart`
+  - expanded the existing exchange-prompt regression to assert that both `cloze` and replacement-based drills are skipped for `お国はどちらですか`
+  - added a new regression ensuring formula-style candidates like `〜は〇〇語で何ですか` and `N1 は N2 が A` do not produce replacement drills for a normal sentence such as `わたしは学生です。`
+- Verification run
+  - `flutter analyze lib/features/grammar/services/grammar_question_generator.dart test/features/grammar/grammar_question_generator_test.dart`
+    - Result: no issues found
+  - `flutter test test/features/grammar/grammar_question_generator_test.dart`
+    - Result: all 14 tests passed
+  - `flutter test`
+    - Result: full suite passed (`180` tests in the current workspace run)
+
+### Grammar Practice Example-Aware Eligibility Pass
+
+- Continued a dedicated follow-up pass focused on using `grammar_examples` as quality signals, not just raw text sources, when deciding which drill types to generate.
+- Root problems addressed
+  - `contextChoice` could still appear in English mode even when the example had no real English translation and the prompt silently fell back to the original Japanese sentence.
+  - `transformation` could still be generated for dialogue snippets or question sentences, producing unnatural drills such as negating `どこですか`-style prompts.
+  - context distractors did not explicitly prefer the same surface family of example (`statement`, `question`, `dialogue`).
+- Updated `lib/features/grammar/services/grammar_question_generator.dart`
+  - added a `contextChoice` eligibility guard so the prompt must be a usable localized translation instead of a raw Japanese fallback
+  - skipped `contextChoice` for dialogue examples (`…`) to avoid noisy whole-exchange matching
+  - skipped `transformation` for dialogue and question examples
+  - added example surface-family scoring so context distractors prefer the same kind of example sentence
+  - filtered context distractors whose localized prompt also falls back to the source Japanese sentence
+- Updated `test/features/grammar/grammar_question_generator_test.dart`
+  - expanded the exchange-style regression to also assert that `contextChoice` and `transformation` are not generated for `お国はどちらですか。…日本です。`
+  - added a regression ensuring English-mode `contextChoice` is skipped when the example lacks a usable translated prompt
+  - added a regression ensuring standalone question examples do not produce transformation drills
+- Verification run
+  - `flutter analyze lib/features/grammar/services/grammar_question_generator.dart test/features/grammar/grammar_question_generator_test.dart`
+    - Result: no issues found
+  - `flutter test test/features/grammar/grammar_question_generator_test.dart`
+    - Result: all 16 tests passed
+  - `flutter test`
+    - Result: full suite passed (`182` tests in the current workspace run)
+
+### Grammar Example Quality Audit + Question-Type Prioritization Pass
+
+- Added a dedicated data-side quality layer for `grammar_examples` so block quality and example eligibility are evaluated explicitly instead of being inferred ad hoc inside the generator.
+- Added `lib/data/utils/grammar_example_quality.dart`
+  - introduced a pure-Dart `GrammarExampleQualityAssessor` that scores each example block and each example by:
+    - surface family (`statement`, `question`, `dialogue`)
+    - localized prompt quality
+    - suitability for `sentenceBuilder`, `cloze`, `contextChoice`, `errorCorrection`, `errorReason`, and `transformation`
+  - exposed per-type prioritization so the app can prefer the strongest examples for each drill family instead of attempting every question type on every example
+- Updated `lib/features/grammar/services/grammar_question_generator.dart`
+  - Grammar Practice now builds a block quality assessment per grammar point before generating questions
+  - each question family now draws only from prioritized eligible examples:
+    - `sentenceBuilder`: top 4
+    - `cloze`: top 4
+    - `contextChoice`: top 3
+    - `errorCorrection` / `errorReason`: top 3 shared replacement-ready examples
+    - `transformation`: top 2
+  - pair-contrast now prefers the best overall example for that grammar block instead of blindly taking the first raw example row
+  - aligned remaining context/transformation eligibility checks with the shared assessor heuristics
+- Added `tooling/audit_grammar_example_quality.dart`
+  - generates `docs/reports/grammar-example-quality-report.json`
+  - reports block score, per-type coverage counts, prioritized examples by question family, and per-example notes / score breakdowns
+- Added `test/data/utils/grammar_example_quality_test.dart`
+  - verifies statement examples outrank question/dialogue examples for replacement/transformation
+  - verifies prompt-fallback examples are rejected for context-choice eligibility
+- Generated `docs/reports/grammar-example-quality-report.json`
+  - current English-locale summary:
+    - `N5`: avg block score `92.75`, missing context-ready blocks `12`, missing replacement-ready blocks `117`, missing transformation-ready blocks `34`
+    - `N4`: avg block score `95.66`, missing context-ready blocks `0`, missing replacement-ready blocks `100`, missing transformation-ready blocks `15`
+    - `N3`: avg block score `92.25`, missing context-ready blocks `0`, missing replacement-ready blocks `100`, missing transformation-ready blocks `44`
+  - high replacement-gap counts currently reflect that many grammar blocks are formula-style patterns not suitable for sentence-splice correction drills, which is now surfaced explicitly instead of being hidden inside noisy runtime generation
+- Verification run
+  - `flutter analyze lib/data/utils/grammar_example_quality.dart lib/features/grammar/services/grammar_question_generator.dart test/data/utils/grammar_example_quality_test.dart test/features/grammar/grammar_question_generator_test.dart`
+    - Result: no issues found
+  - `flutter test test/data/utils/grammar_example_quality_test.dart test/features/grammar/grammar_question_generator_test.dart`
+    - Result: all 18 focused tests passed
+  - `dart run tooling/audit_grammar_example_quality.dart --locale en`
+    - Result: generated `docs/reports/grammar-example-quality-report.json`
+  - `flutter test`
+    - Result: full suite passed (`184` tests in the current workspace run)
+
 ### Grammar Sentence Builder Chunking & Feedback Pass
 
 - Investigated the `Sentence Builder` experience after feedback that it was not helping users understand grammar and examples well.
@@ -1710,3 +1797,272 @@ This file records recent Codex work so future sessions can continue from the cur
 - Ran `python tooling/audit_grammar_example_coverage.py --apply`
   - Result: `N3` is now fully complete at `100 grammar points / 1000 examples / 0 below target / 0 missing`
   - Result: `N5`, `N4`, and `N3` are all now complete at the same `10 examples per grammar point` floor
+
+### Grammar Repair UI/UX Pass
+
+- Updated `lib/features/grammar/widgets/multiple_choice_widget.dart`
+  - Added `questionType` awareness so `errorCorrection` and `errorReason` no longer render as undifferentiated generic multiple choice prompts.
+  - Introduced a repair-focused prompt surface that separates:
+    - the task header
+    - the broken sentence under inspection
+    - the guidance copy for how to answer
+  - Added type-specific labels, badges, and coaching copy so `repair sentence` and `why wrong` feel like different learning tasks.
+- Updated `lib/features/grammar/screens/grammar_practice_screen.dart`
+  - Passed `questionType` into the grammar multiple-choice widget.
+  - Renamed the visible type labels for repair flows to clearer learning-facing labels:
+    - `Repair Sentence`
+    - `Why Wrong`
+  - Reworked repair feedback so correct/incorrect responses read like coaching instead of generic quiz feedback.
+- Added tests
+  - `test/features/grammar/widgets/multiple_choice_widget_test.dart`
+    - Covers the repair-specific surface for both `errorCorrection` and `errorReason`.
+    - Confirms the broken sentence gets its own dedicated panel and that support copy changes by question type.
+
+### Verification Run
+
+- Ran `dart format lib/features/grammar/widgets/multiple_choice_widget.dart lib/features/grammar/screens/grammar_practice_screen.dart test/features/grammar/widgets/multiple_choice_widget_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/grammar/widgets/multiple_choice_widget.dart lib/features/grammar/screens/grammar_practice_screen.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/grammar/widgets/multiple_choice_widget_test.dart`
+  - Result: all tests passed
+- Ran `flutter test test/features/ui/ghost_review_walkthrough_test.dart`
+  - Result: all tests passed
+
+### Grammar Repair Visual Polish Pass
+
+- Updated `lib/features/grammar/widgets/multiple_choice_widget.dart`
+  - Refined the repair header into a more Home-aligned paper surface with tighter spacing, softer borders, and pill-based metadata instead of a plain generic prompt block.
+  - Added a compact coaching hint card so the answer guidance feels intentional and easier to scan on entry.
+  - Reworked the broken-sentence panel into a clearer study flow with:
+    - a small step marker
+    - a subline that explains what to inspect
+    - a paper-style inner slab for the actual sentence
+  - Added adaptive scrolling for the prompt/hint region so the repair UI no longer overflows on tighter viewport heights while keeping the answer list visible.
+
+### Verification Run
+
+- Ran `dart format lib/features/grammar/widgets/multiple_choice_widget.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/grammar/widgets/multiple_choice_widget.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/grammar/widgets/multiple_choice_widget_test.dart test/features/ui/ghost_review_walkthrough_test.dart`
+  - Result: all tests passed
+
+### Grammar Session Repeat + Seed Refresh Pass
+
+- Investigated a report that Grammar Drill / Weak-only kept looping similar prompts and did not feel like it was using the expanded `grammar` / `grammar_examples` data well.
+- Confirmed two root causes:
+  - session behavior: weak/drill mode could overfill a session with too many questions from the same grammar point, and wrong answers were being requeued as the exact same prompt object
+  - data freshness: grammar asset updates could stay invisible in-app because the grammar seed version had not been bumped, leaving older DB rows in place
+- Updated `lib/features/grammar/screens/grammar_practice_screen.dart`
+  - added a per-session cap for how many questions one grammar point can occupy, with tighter caps for `Weak only`
+  - reduced session size automatically when the available weak-point pool is too small, so the app no longer pads the run with excessive same-point repetition
+  - replaced exact requeueing with follow-up selection from a broader session question bank, preferring a different stem/type from the same weak grammar point when available
+- Updated `lib/features/grammar/screens/grammar_practice_screen.dart` planner logic
+  - added optional `maxQuestionsPerPoint` support inside `GrammarSessionPlanner`
+  - fixed the planner loop so capped buckets cannot get stuck in a false-progress loop
+- Updated grammar seed freshness
+  - `lib/data/seeds/grammar_seeder.dart`
+    - bumped `kGrammarDataVersion` to `7` so app grammar data reseeds from the latest JSON bundle
+  - `lib/data/repositories/lesson_repository.dart`
+    - kept the seed-version gate in sync with grammar seed version `7`
+  - `lib/data/db/content_database.dart`
+    - bumped content schema to `25` and added another grammar reseed step so content DB-backed lesson sync also refreshes newer grammar/example assets
+- Added tests
+  - `test/features/grammar/grammar_session_planner_test.dart`
+    - added coverage proving one grammar point cannot monopolize the whole session when a per-point cap is applied
+
+### Verification Run
+
+- Ran `dart format lib/features/grammar/screens/grammar_practice_screen.dart lib/data/seeds/grammar_seeder.dart lib/data/repositories/lesson_repository.dart lib/data/db/content_database.dart test/features/grammar/grammar_session_planner_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/grammar/screens/grammar_practice_screen.dart lib/data/seeds/grammar_seeder.dart lib/data/repositories/lesson_repository.dart lib/data/db/content_database.dart test/features/grammar/grammar_session_planner_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/grammar/grammar_session_planner_test.dart`
+  - Result: all tests passed
+- Ran `flutter test test/features/grammar/widgets/multiple_choice_widget_test.dart test/features/ui/ghost_review_walkthrough_test.dart`
+  - Result: all tests passed
+
+### Grammar Mode-Visibility Pass
+
+- Updated `lib/features/grammar/screens/grammar_practice_screen.dart`
+  - made the mode banner explicitly show:
+    - current session type
+    - current source
+    - current scope
+    - current goal
+  - added compact top-stat chips for quick scanning:
+    - session type
+    - `Ghost` when in ghost review mode
+    - `Weak only` when in weak-drill scope
+- Updated `test/features/ui/ghost_review_walkthrough_test.dart`
+  - added regression coverage proving ghost practice now visibly labels `Source: Ghost review`, `Session: Mastery`, and `Ghost`
+
+### Verification Run
+
+- Ran `dart format lib/features/grammar/screens/grammar_practice_screen.dart test/features/ui/ghost_review_walkthrough_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/grammar/screens/grammar_practice_screen.dart test/features/ui/ghost_review_walkthrough_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/ui/ghost_review_walkthrough_test.dart test/features/grammar/widgets/multiple_choice_widget_test.dart test/features/grammar/grammar_session_planner_test.dart`
+  - Result: all tests passed
+
+### Grammar Mode Copy Polish (Vietnamese)
+
+- Updated `lib/features/grammar/screens/grammar_practice_screen.dart`
+  - rewrote the Vietnamese mode/status copy to sound more learner-facing and less like internal debug labels
+  - examples:
+    - `Phiên: Nhanh 10` -> `Buổi học: 10 câu nhanh`
+    - `Nguồn: Ghost review` -> `Nguồn câu hỏi: Ôn phần vừa quên`
+    - `Phạm vi: Chỉ điểm yếu` -> `Phạm vi: Chỉ phần còn yếu`
+    - `Mục tiêu: Độ chính xác` -> `Mục tiêu: Ưu tiên làm đúng`
+  - also adjusted the compact chips to match the same tone:
+    - `Ghost` -> `Ôn quên`
+    - `Chỉ điểm yếu` -> `Chỉ phần yếu`
+
+### Verification Run
+
+- Ran `dart format lib/features/grammar/screens/grammar_practice_screen.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/grammar/screens/grammar_practice_screen.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/ui/ghost_review_walkthrough_test.dart test/features/grammar/widgets/multiple_choice_widget_test.dart test/features/grammar/grammar_session_planner_test.dart`
+  - Result: all tests passed
+
+### Web Foundation Pass 1
+
+- Verified baseline web support
+  - confirmed the repo already contains a `web/` target
+  - confirmed `flutter build web` succeeds on the current codebase
+  - confirmed Chrome/Edge web devices are available locally
+- Updated `lib/app/app.dart`
+  - disabled the debug banner for cleaner browser presentation
+  - applied a shared custom scroll behavior so desktop web gets more natural mouse/trackpad interaction
+- Added `lib/app/app_scroll_behavior.dart`
+  - enables drag devices beyond touch for browser/desktop usage
+  - shows scrollbars on desktop-class platforms for better web usability
+- Updated `web/index.html`
+  - added a branded browser loading shell so web no longer opens on a blank page while Flutter boots
+  - aligned the shell visuals with the app's paper-like / Japanese-inspired palette
+  - added browser meta such as `theme-color` and `color-scheme`
+  - hides the loading shell on `flutter-first-frame`
+- Updated `web/manifest.json`
+  - aligned `theme_color` with the actual app palette
+  - relaxed orientation from `portrait-primary` to `any` for browser use
+  - added `display_override` so installed web behavior can adapt better across browsers
+
+### Verification Run
+
+- Ran `dart format lib/app/app.dart lib/app/app_scroll_behavior.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/app/app.dart lib/app/app_scroll_behavior.dart`
+  - Result: no issues found
+- Ran `flutter build web`
+  - Result: build completed successfully and regenerated `build/web`
+
+### Grammar Multiple-Choice State Reset Fix
+
+- Investigated a reported issue where a new grammar question could appear with an option already marked as chosen/correct before the user tapped anything.
+- Root cause found
+  - `MultipleChoiceWidget` is stateful and was preserving `_selectedOption` / `_isAnswered` across question changes when Flutter reused the widget instance for the next question.
+- Updated `lib/features/grammar/widgets/multiple_choice_widget.dart`
+  - added `didUpdateWidget(...)` so the widget resets its local answer state whenever the question payload changes
+  - compared question text, answer, type, and option list before resetting, so normal rebuilds of the same question do not wipe state
+- Updated `lib/features/grammar/screens/grammar_practice_screen.dart`
+  - added a question-specific `ValueKey` to `MultipleChoiceWidget` so each grammar multiple-choice item gets a fresh widget identity when the session advances
+- Updated `test/features/grammar/widgets/multiple_choice_widget_test.dart`
+  - added a regression that answers one transform question, rebuilds with a different transform question, and verifies the new question starts with no preselected/correct option state
+
+### Verification Run
+
+- Ran `dart format lib/features/grammar/widgets/multiple_choice_widget.dart lib/features/grammar/screens/grammar_practice_screen.dart test/features/grammar/widgets/multiple_choice_widget_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/grammar/widgets/multiple_choice_widget.dart lib/features/grammar/screens/grammar_practice_screen.dart test/features/grammar/widgets/multiple_choice_widget_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/grammar/widgets/multiple_choice_widget_test.dart test/features/ui/ghost_review_walkthrough_test.dart`
+  - Result: all tests passed
+
+### Web Desktop Responsive Pass 2
+
+- Continued the web buildout after the browser-ready foundation pass, focusing on making the app feel like a deliberate desktop/web product instead of a stretched mobile layout.
+- Added `lib/app/layout/app_responsive_frame.dart`
+  - introduced shared viewport metrics for:
+    - browser gutters
+    - centered content max widths
+    - wider desktop shell framing
+  - added `AppResponsiveFrame` so screens can share the same constrained desktop canvas behavior
+- Updated `lib/features/common/widgets/compact_ui.dart`
+  - `AppPageShell` now routes its content through the shared responsive frame so web/tablet screens using that shell no longer expand edge-to-edge
+- Updated `lib/app/navigation/app_shell_scaffold.dart`
+  - wrapped the desktop rail layout in a centered, max-width shell frame
+  - turned the main content area into a rounded browser-style canvas with border/shadow treatment
+  - constrained the bottom navigation width on non-rail layouts so tablet/browser widths feel more intentional
+- Updated `lib/features/home/screens/learning_path_screen.dart`
+  - centered Home inside the shared responsive canvas
+  - added a desktop composition pass so Home no longer reads as one endlessly stretched stack:
+    - hero stays full width
+    - daily session now pairs with dashboard / challenge on large screens
+    - learning lanes now pair with the study momentum card on large screens
+- Updated `lib/features/practice/practice_screen.dart`
+  - tuned Study layout breakpoints for desktop
+  - expanded the goals area to 4 columns on wide screens
+  - converted the remaining tools list into a 2-column responsive wrap on desktop
+- Updated `lib/features/library/library_screen.dart`
+  - moved Library onto `AppPageShell` so it inherits the same centered web canvas
+  - corrected the app-bar title to actual `Library` / `Thư viện` / `ライブラリ`
+  - made quick-access cards sit side-by-side on wider layouts
+  - made lesson rows flow into a 2-column desktop grid
+- Updated `docs/notes/important-user-requirements.md`
+  - recorded the persistent requirement that web desktop must stay centered and curated instead of feeling like a stretched phone UI
+
+### Verification Run
+
+- Ran `dart format lib/app/layout/app_responsive_frame.dart lib/app/navigation/app_shell_scaffold.dart lib/features/common/widgets/compact_ui.dart lib/features/home/screens/learning_path_screen.dart lib/features/practice/practice_screen.dart lib/features/library/library_screen.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/app/layout/app_responsive_frame.dart lib/app/navigation/app_shell_scaffold.dart lib/features/common/widgets/compact_ui.dart lib/features/home/screens/learning_path_screen.dart lib/features/practice/practice_screen.dart lib/features/library/library_screen.dart`
+  - Result: no issues found
+- Ran `flutter build web`
+  - Result: build completed successfully and regenerated `build/web`
+
+### Web Utility Screens Pass 3
+
+- Continued the web buildout by extending the desktop/web layout language beyond the main tabs into the utility and profile flows that users still hit frequently in browser sessions.
+- Updated `lib/features/me/me_screen.dart`
+  - moved `Me` onto the shared centered `AppPageShell`
+  - reorganized the screen into a two-column desktop composition instead of a long single mobile stack
+  - kept learning, appearance, reminder, data, and tools grouped into clearer desktop columns
+  - polished some Japanese copy so profile/data labels no longer fall back to raw English
+- Updated `lib/features/me/screens/data_settings_screen.dart`
+  - moved data settings onto the shared web page shell
+  - replaced the old custom hero container with a Home-aligned feature card
+  - split desktop layout into:
+    - backup controls + manual backup on one side
+    - cloud sync controls on the other side
+  - improved Japanese copy for the data-management surface
+- Updated `lib/features/search/search_screen.dart`
+  - moved search onto the shared web page shell
+  - rebuilt the top search controls into a proper desktop search surface with:
+    - level badge
+    - real-time search field
+    - filter chips
+    - live bank counts for vocab / kanji / kana
+  - made search results render as a responsive grid on wider browsers instead of one endless single-column list
+  - made the discovery sections render as responsive multi-column panels on desktop/tablet
+  - fixed the clear-button UX so the search field chrome updates immediately while the actual filtering still stays debounced
+- Updated `lib/features/progress/progress_screen.dart`
+  - turned Progress into a desktop analytics layout rather than one tall mobile column
+  - split the top area into overview/activity and retention/weakness columns on wide screens
+  - placed review history and attempt history side by side on desktop
+  - cleaned up a few progress strings so browser rendering does not show awkward separator artifacts
+- Updated `docs/notes/important-user-requirements.md`
+  - recorded that web utility screens must follow the same centered, responsive desktop language as the core learning screens
+
+### Verification Run
+
+- Ran `dart format lib/features/me/me_screen.dart lib/features/me/screens/data_settings_screen.dart lib/features/search/search_screen.dart lib/features/progress/progress_screen.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/me/me_screen.dart lib/features/me/screens/data_settings_screen.dart lib/features/search/search_screen.dart lib/features/progress/progress_screen.dart`
+  - Result: no issues found
+- Ran `flutter build web`
+  - Result: build completed successfully and regenerated `build/web`

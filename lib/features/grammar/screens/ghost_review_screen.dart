@@ -5,6 +5,7 @@ import '../../../core/language_provider.dart';
 import '../../../features/grammar/grammar_providers.dart';
 import '../../../features/mistakes/repositories/mistake_repository.dart';
 import '../../../data/db/app_database.dart';
+import '../../../data/utils/grammar_english_notation.dart';
 import '../../../app/theme/app_theme.dart';
 import '../../common/widgets/clay_card.dart';
 import '../models/grammar_point_data.dart';
@@ -152,18 +153,45 @@ class _GhostClayCardState extends State<_GhostClayCard> {
   Widget build(BuildContext context) {
     final point = widget.data.point;
     final language = widget.language;
+    final headline = switch (language) {
+      AppLanguage.en => resolveEnglishGrammarConnection(
+        connectionEn: point.connectionEn,
+        connection: point.connection,
+        grammarPoint: point.grammarPoint,
+        titleEn: point.titleEn,
+        meaningEn: point.meaningEn,
+      ),
+      AppLanguage.vi => point.grammarPoint,
+      AppLanguage.ja => point.grammarPoint,
+    };
     final title = switch (language) {
-      AppLanguage.en => point.titleEn ?? point.grammarPoint,
+      AppLanguage.en => resolveEnglishGrammarLabel(
+        titleEn: point.titleEn,
+        meaningEn: point.meaningEn,
+        connectionEn: point.connectionEn,
+        connection: point.connection,
+        grammarPoint: point.grammarPoint,
+      ),
       AppLanguage.vi => point.meaningVi ?? point.meaning,
       AppLanguage.ja => point.meaning,
     };
     final explanation = switch (language) {
-      AppLanguage.en => point.explanationEn ?? point.explanation,
+      AppLanguage.en => resolveEnglishGrammarExplanation(
+        explanationEn: point.explanationEn,
+        explanation: point.explanation,
+        label: title,
+      ),
       AppLanguage.vi => point.explanationVi ?? point.explanation,
       AppLanguage.ja => point.explanation,
     };
     final connection = switch (language) {
-      AppLanguage.en => point.connectionEn ?? point.connection,
+      AppLanguage.en => resolveEnglishGrammarConnection(
+        connectionEn: point.connectionEn,
+        connection: point.connection,
+        grammarPoint: point.grammarPoint,
+        titleEn: point.titleEn,
+        meaningEn: point.meaningEn,
+      ),
       AppLanguage.vi => point.connection,
       AppLanguage.ja => point.connection,
     };
@@ -194,7 +222,7 @@ class _GhostClayCardState extends State<_GhostClayCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      point.grammarPoint,
+                      headline,
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -269,14 +297,16 @@ class _GhostClayCardState extends State<_GhostClayCard> {
                       const SizedBox(height: 4),
                       Text(
                         switch (language) {
-                          AppLanguage.en => ex.translationEn ?? ex.translation,
+                          AppLanguage.en =>
+                            resolveEnglishGrammarExampleTranslation(
+                              japanese: ex.japanese,
+                              translationEn: ex.translationEn,
+                              translation: ex.translation,
+                            ),
                           AppLanguage.vi => ex.translationVi ?? ex.translation,
                           AppLanguage.ja => ex.translation,
                         },
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: AppTheme.textSub,
-                        ),
+                        style: TextStyle(fontSize: 13, color: AppTheme.textSub),
                       ),
                     ],
                   ),

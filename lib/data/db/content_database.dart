@@ -6,6 +6,8 @@ import 'package:drift_flutter/drift_flutter.dart';
 import 'package:flutter/services.dart';
 
 import 'content_tables.dart';
+import '../utils/grammar_example_matching.dart';
+import '../utils/grammar_english_notation.dart';
 
 part 'content_database.g.dart';
 
@@ -27,7 +29,7 @@ class ContentDatabase extends _$ContentDatabase {
     : super(executor ?? _openContentConnection());
 
   @override
-  int get schemaVersion => 20;
+  int get schemaVersion => 25;
 
   @override
   MigrationStrategy get migration {
@@ -95,6 +97,21 @@ class ContentDatabase extends _$ContentDatabase {
         if (from < 20) {
           await _addColumn(m, kanji, kanji.decompositionJson);
           await _backfillKanjiDecompositionFromCanonical();
+        }
+        if (from < 21) {
+          await _seedMinnaGrammar();
+        }
+        if (from < 22) {
+          await _seedMinnaGrammar();
+        }
+        if (from < 23) {
+          await _seedMinnaGrammar();
+        }
+        if (from < 24) {
+          await _seedMinnaGrammar();
+        }
+        if (from < 25) {
+          await _seedMinnaGrammar();
         }
       },
       beforeOpen: (details) async {
@@ -189,7 +206,11 @@ class ContentDatabase extends _$ContentDatabase {
 
     final grammarFiles = <String>[];
     for (final spec in _contentSeedSpecs) {
-      for (var lessonId = spec.startLesson; lessonId <= spec.endLesson; lessonId++) {
+      for (
+        var lessonId = spec.startLesson;
+        lessonId <= spec.endLesson;
+        lessonId++
+      ) {
         grammarFiles.add(
           'assets/data/content/grammar/${spec.levelLower}/grammar_${spec.levelLower}_$lessonId.json',
         );
@@ -204,7 +225,7 @@ class ContentDatabase extends _$ContentDatabase {
         if (points.isEmpty) continue;
 
         // Try load supplementary examples
-        Map<String, List<dynamic>> extraExamplesMap = {};
+        final extraExampleBlocks = <dynamic>[];
         try {
           // Infer lesson and level from first point or file path
           // File path: assets/data/content/grammar/n5/grammar_n5_1.json
@@ -216,12 +237,7 @@ class ContentDatabase extends _$ContentDatabase {
           final examplesFile =
               'assets/data/content/grammar_examples/$level/lesson_$lessonId.json';
           final exJsonString = await rootBundle.loadString(examplesFile);
-          final List<dynamic> exList = json.decode(exJsonString);
-
-          for (final item in exList) {
-            final gp = item['grammarPoint'] as String;
-            extraExamplesMap[gp] = item['examples'] as List<dynamic>;
-          }
+          extraExampleBlocks.addAll(json.decode(exJsonString) as List<dynamic>);
         } catch (_) {
           // No supplementary file or parse error, ignore
         }
@@ -232,9 +248,15 @@ class ContentDatabase extends _$ContentDatabase {
             GrammarPointCompanion.insert(
               lessonId: pointData['lessonId'] as int,
               title: pointData['title'] as String,
-              titleEn: Value(pointData['titleEn'] as String?),
+              titleEn: Value(
+                normalizeGrammarTitleEn(pointData['titleEn'] as String?),
+              ),
               structure: pointData['structure'] as String,
-              structureEn: Value(pointData['structureEn'] as String?),
+              structureEn: Value(
+                normalizeGrammarStructureEn(
+                  pointData['structureEn'] as String?,
+                ),
+              ),
               explanation: pointData['explanation'] as String,
               explanationEn: Value(pointData['explanationEn'] as String?),
               level: pointData['level'] as String,
@@ -247,9 +269,13 @@ class ContentDatabase extends _$ContentDatabase {
           final List<dynamic> examples = [...(pointData['examples'] ?? [])];
 
           // Merge Supplementary Examples
-          final titleKey = pointData['title'] as String;
-          if (extraExamplesMap.containsKey(titleKey)) {
-            examples.addAll(extraExamplesMap[titleKey]!);
+          final extraExamples = findGrammarExamplesForDefinition(
+            exampleBlocks: extraExampleBlocks,
+            title: pointData['title'] as String?,
+            grammarPoint: pointData['grammarPoint'] as String?,
+          );
+          if (extraExamples != null) {
+            examples.addAll(extraExamples);
           }
 
           for (final ex in examples) {
@@ -379,7 +405,6 @@ class ContentDatabase extends _$ContentDatabase {
       return const [];
     }
   }
-
 
   List<Map<String, dynamic>> _mergeLessonRows({
     required List<Map<String, dynamic>> preferred,
@@ -534,7 +559,11 @@ class ContentDatabase extends _$ContentDatabase {
 
   Future<void> _backfillKanjiDecompositionFromCanonical() async {
     for (final spec in _contentSeedSpecs) {
-      for (var lessonId = spec.startLesson; lessonId <= spec.endLesson; lessonId++) {
+      for (
+        var lessonId = spec.startLesson;
+        lessonId <= spec.endLesson;
+        lessonId++
+      ) {
         final rows = await _loadCanonicalKanjiRows(
           levelLower: spec.levelLower,
           lessonId: lessonId,
@@ -674,7 +703,11 @@ class ContentDatabase extends _$ContentDatabase {
   }
 
   Future<void> _seedKanjiLevel(_ContentSeedSpec spec) async {
-    for (var lessonId = spec.startLesson; lessonId <= spec.endLesson; lessonId++) {
+    for (
+      var lessonId = spec.startLesson;
+      lessonId <= spec.endLesson;
+      lessonId++
+    ) {
       final rows = await _loadCanonicalKanjiRows(
         levelLower: spec.levelLower,
         lessonId: lessonId,
@@ -765,7 +798,6 @@ class _SeedVocabAggregate {
       }
     }
   }
-
 }
 
 class _ContentSeedSpec {

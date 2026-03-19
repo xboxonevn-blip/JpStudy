@@ -6,12 +6,15 @@ import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/services/session_storage_provider.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 
+import '../models/home_mock_exam_launch_args.dart';
 import '../models/test_config.dart';
 import '../screens/test_config_screen.dart';
 import '../screens/test_screen.dart';
 
 class HomeMockExamScreen extends ConsumerWidget {
-  const HomeMockExamScreen({super.key});
+  const HomeMockExamScreen({super.key, this.launchArgs});
+
+  final HomeMockExamLaunchArgs? launchArgs;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -27,20 +30,22 @@ class HomeMockExamScreen extends ConsumerWidget {
 
     final levelLabel = level.shortLabel;
     final repo = ref.read(lessonRepositoryProvider);
+    final screenTitle =
+        launchArgs?.titleOverride ?? language.mockExamTitle(levelLabel);
 
     return FutureBuilder(
       future: repo.getVocabByLevel(levelLabel),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
-            appBar: AppBar(title: Text(language.mockExamTitle(levelLabel))),
+            appBar: AppBar(title: Text(screenTitle)),
             body: const Center(child: CircularProgressIndicator()),
           );
         }
 
         if (snapshot.hasError) {
           return Scaffold(
-            appBar: AppBar(title: Text(language.mockExamTitle(levelLabel))),
+            appBar: AppBar(title: Text(screenTitle)),
             body: Center(child: Text(language.loadErrorLabel)),
           );
         }
@@ -48,15 +53,18 @@ class HomeMockExamScreen extends ConsumerWidget {
         final allVocab = snapshot.data ?? const [];
         if (allVocab.isEmpty) {
           return Scaffold(
-            appBar: AppBar(title: Text(language.mockExamTitle(levelLabel))),
+            appBar: AppBar(title: Text(screenTitle)),
             body: Center(child: Text(language.noTermsAvailableLabel)),
           );
         }
 
-        final sessionKey = 'mock_$levelLabel';
-        final initialConfig = TestConfig.mockExam(
-          questionCount: allVocab.length,
-        );
+        final suffix = launchArgs?.sessionKeySuffix?.trim();
+        final sessionKey = (suffix == null || suffix.isEmpty)
+            ? 'mock_$levelLabel'
+            : 'mock_${suffix}_$levelLabel';
+        final initialConfig =
+            launchArgs?.initialConfig ??
+            TestConfig.mockExam(questionCount: allVocab.length);
         final storage = ref.read(sessionStorageProvider);
 
         return FutureBuilder(
@@ -65,7 +73,7 @@ class HomeMockExamScreen extends ConsumerWidget {
             final resume = resumeSnapshot.data;
             return TestConfigScreen(
               lessonId: -1,
-              lessonTitle: language.mockExamTitle(levelLabel),
+              lessonTitle: screenTitle,
               maxQuestions: allVocab.length,
               initialConfig: initialConfig,
               resumeSnapshot: resume,
@@ -77,7 +85,7 @@ class HomeMockExamScreen extends ConsumerWidget {
                           builder: (context) => TestScreen(
                             items: allVocab,
                             lessonId: -1,
-                            lessonTitle: language.mockExamTitle(levelLabel),
+                            lessonTitle: screenTitle,
                             config: resume.config,
                             resumeSnapshot: resume,
                             sessionKey: sessionKey,
@@ -96,7 +104,7 @@ class HomeMockExamScreen extends ConsumerWidget {
                     builder: (context) => TestScreen(
                       items: allVocab,
                       lessonId: -1,
-                      lessonTitle: language.mockExamTitle(levelLabel),
+                      lessonTitle: screenTitle,
                       config: config,
                       sessionKey: sessionKey,
                     ),

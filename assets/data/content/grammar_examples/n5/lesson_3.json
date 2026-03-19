@@ -1,312 +1,332 @@
 [
-    {
-        "grammarPoint": "ここ・そこ・あそこ",
-        "examples": [
-            {
-                "sentence": "ここは食堂です。",
-                "translation": "Đây là nhà ăn.",
-                "translationEn": "This is the cafeteria."
-            },
-            {
-                "sentence": "そこは受付です。",
-                "translation": "Đó là quầy lễ tân.",
-                "translationEn": "That is the reception desk."
-            },
-            {
-                "sentence": "あそこは会議室です。",
-                "translation": "Kia là phòng họp.",
-                "translationEn": "That is the conference room."
-            },
-            {
-                "sentence": "トイレはここです。",
-                "translation": "Nhà vệ sinh ở đây.",
-                "translationEn": "The restroom is here."
-            },
-            {
-                "sentence": "教室はそこです。",
-                "translation": "Lớp học ở đó.",
-                "translationEn": "The classroom is there."
-            },
-            {
-                "sentence": "事務所はあそこです。",
-                "translation": "Văn phòng ở kia.",
-                "translationEn": "The office is over there."
-            },
-            {
-                "sentence": "ここは新大阪ですか。",
-                "translation": "Đây có phải là Shin-Osaka không?",
-                "translationEn": "Is this Shin-Osaka?"
-            },
-            {
-                "sentence": "そこは誰の部屋ですか。",
-                "translation": "Đó là phòng của ai?",
-                "translationEn": "Whose room is that?"
-            },
-            {
-                "sentence": "あそこは公園です。",
-                "translation": "Kia là công viên.",
-                "translationEn": "That is a park."
-            },
-            {
-                "sentence": "ここは病院です。",
-                "translation": "Đây là bệnh viện.",
-                "translationEn": "This is a hospital."
-            }
-        ]
-    },
-    {
-        "grammarPoint": "こちら・そちら・あちら",
-        "examples": [
-            {
-                "sentence": "ロビーはこちらです。",
-                "translation": "Hành lang ở phía này.",
-                "translationEn": "The lobby is this way."
-            },
-            {
-                "sentence": "エレベーターはそちらです。",
-                "translation": "Thang máy ở phía đó.",
-                "translationEn": "The elevator is that way."
-            },
-            {
-                "sentence": "階段はあちらです。",
-                "translation": "Cầu thang ở phía kia.",
-                "translationEn": "The stairs are that way."
-            },
-            {
-                "sentence": "こちらはミラーさんです。",
-                "translation": "Đây là ngài Miller.",
-                "translationEn": "This is Mr. Miller."
-            },
-            {
-                "sentence": "そちらは誰ですか。",
-                "translation": "Vị đó là ai?",
-                "translationEn": "Who is that person?"
-            },
-            {
-                "sentence": "あちらは社長です。",
-                "translation": "Vị kia là giám đốc.",
-                "translationEn": "That person is the president."
-            },
-            {
-                "sentence": "電話はこちらです。",
-                "translation": "Điện thoại ở đây (phía này).",
-                "translationEn": "The phone is this way."
-            },
-            {
-                "sentence": "受付はあちらです。",
-                "translation": "Quầy lễ tân ở phía kia.",
-                "translationEn": "The reception is over there."
-            },
-            {
-                "sentence": "会議室はそちらですか。",
-                "translation": "Phòng họp ở phía đó phải không?",
-                "translationEn": "Is the conference room that way?"
-            },
-            {
-                "sentence": "こちらは私の会社です。",
-                "translation": "Đây là công ty của tôi.",
-                "translationEn": "This is my company."
-            }
-        ]
-    },
-    {
-        "grammarPoint": "N1 は N2 (địa điểm) です",
-        "examples": [
-            {
-                "sentence": "トイレはどこですか。…あそこです。",
-                "translation": "Nhà vệ sinh ở đâu ạ? — Ở đằng kia.",
-                "translationEn": "Where is the restroom? ...It's over there."
-            },
-            {
-                "sentence": "ミラーさんは会議室です。",
-                "translation": "Anh Miller ở phòng họp.",
-                "translationEn": "Mr. Miller is in the conference room."
-            },
-            {
-                "sentence": "先生は教室です。",
-                "translation": "Giáo viên ở lớp học.",
-                "translationEn": "The teacher is in the classroom."
-            },
-            {
-                "sentence": "受付は一階です。",
-                "translation": "Quầy lễ tân ở tầng 1.",
-                "translationEn": "Reception is on the first floor."
-            },
-            {
-                "sentence": "食堂は地下です。",
-                "translation": "Nhà ăn ở dưới tầng hầm.",
-                "translationEn": "The cafeteria is in the basement."
-            },
-            {
-                "sentence": "コンピューター売り場は５階です。",
-                "translation": "Quầy bán máy tính ở tầng 5.",
-                "translationEn": "The computer department is on the 5th floor."
-            },
-            {
-                "sentence": "あなたの部屋は２０５号室です。",
-                "translation": "Phòng của bạn là phòng 205.",
-                "translationEn": "Your room is 205."
-            },
-            {
-                "sentence": "郵便局はロビーです。",
-                "translation": "Bưu điện ở sảnh.",
-                "translationEn": "The post office is in the lobby."
-            },
-            {
-                "sentence": "電話はどこですか。…そこです。",
-                "translation": "Điện thoại ở đâu? — Ở chỗ đó.",
-                "translationEn": "Where is the phone? ...It's there."
-            },
-            {
-                "sentence": "山田さんは事務所です。",
-                "translation": "Anh Yamada ở văn phòng.",
-                "translationEn": "Mr. Yamada is in the office."
-            }
-        ]
-    },
-    {
-        "grammarPoint": "どこ・どちら",
-        "examples": [
-            {
-                "sentence": "エレベーターはどちらですか。",
-                "translation": "Thang máy ở phía nào vậy ạ?",
-                "translationEn": "Where (which way) is the elevator?"
-            },
-            {
-                "sentence": "学校はどこですか。",
-                "translation": "Trường học ở đâu?",
-                "translationEn": "Where is the school?"
-            },
-            {
-                "sentence": "トイレはどこですか。",
-                "translation": "Nhà vệ sinh ở đâu?",
-                "translationEn": "Where is the restroom?"
-            },
-            {
-                "sentence": "会議室はどちらですか。",
-                "translation": "Phòng họp ở hướng nào?",
-                "translationEn": "Which way is the conference room?"
-            },
-            {
-                "sentence": "事務所はどこですか。",
-                "translation": "Văn phòng ở đâu?",
-                "translationEn": "Where is the office?"
-            },
-            {
-                "sentence": "スーパーはどちらですか。",
-                "translation": "Siêu thị ở hướng nào?",
-                "translationEn": "Which way is the supermarket?"
-            },
-            {
-                "sentence": "カメラ売り場はどこですか。",
-                "translation": "Quầy bán máy ảnh ở đâu?",
-                "translationEn": "Where is the camera section?"
-            },
-            {
-                "sentence": "あなたの会社はどちらですか。",
-                "translation": "Công ty bạn ở đâu (lịch sự)?",
-                "translationEn": "Where is your company?"
-            },
-            {
-                "sentence": "国はどちらですか。",
-                "translation": "Nước bạn là nước nào?",
-                "translationEn": "Where are you from?"
-            },
-            {
-                "sentence": "自動販売機はどこですか。",
-                "translation": "Máy bán hàng tự động ở đâu?",
-                "translationEn": "Where is the vending machine?"
-            }
-        ]
-    },
-    {
-        "grammarPoint": "N1 の N2 (Xuất xứ)",
-        "examples": [
-            {
-                "sentence": "これはどこの時計ですか。…スイスの時計です。",
-                "translation": "Đây là đồng hồ của nước nào? — Đồng hồ Thụy Sĩ.",
-                "translationEn": "Where is this watch from? ...It's a Swiss watch."
-            },
-            {
-                "sentence": "それは日本の車ですか。",
-                "translation": "Đó là xe ô tô Nhật Bản phải không?",
-                "translationEn": "Is that a Japanese car?"
-            },
-            {
-                "sentence": "あれはドイツのカメラです。",
-                "translation": "Kia là máy ảnh Đức.",
-                "translationEn": "That is a German camera."
-            },
-            {
-                "sentence": "これはアメリカのパソコンです。",
-                "translation": "Đây là máy tính Mỹ.",
-                "translationEn": "This is an American PC."
-            },
-            {
-                "sentence": "それは韓国の服ですか。",
-                "translation": "Đó là quần áo Hàn Quốc phải không?",
-                "translationEn": "Are those Korean clothes?"
-            },
-            {
-                "sentence": "これはイタリアの靴です。",
-                "translation": "Đây là giày Ý.",
-                "translationEn": "These are Italian shoes."
-            },
-            {
-                "sentence": "あれはどこのワインですか。…フランスのワインです。",
-                "translation": "Kia là rượu vang của nước nào? — Rượu vang Pháp.",
-                "translationEn": "Where is that wine from? ...It's French wine."
-            },
-            {
-                "sentence": "これは中国のお茶です。",
-                "translation": "Đây là trà Trung Quốc.",
-                "translationEn": "This is Chinese tea."
-            },
-            {
-                "sentence": "それは日本の雑誌ですか。",
-                "translation": "Đó là tạp chí Nhật phải không?",
-                "translationEn": "Is that a Japanese magazine?"
-            },
-            {
-                "sentence": "これはどこのネクタイですか。",
-                "translation": "Cà vạt này xuất xứ ở đâu?",
-                "translationEn": "Where is this tie from?"
-            }
-        ]
-    },
-    {
-        "grammarPoint": "お国はどちらですか",
-        "examples": [
-            {
-                "sentence": "お国はどちらですか。…アメリカです。",
-                "translation": "Anh/chị đến từ nước nào? — Mỹ.",
-                "translationEn": "Where are you from? ...America."
-            },
-            {
-                "sentence": "お国はどちらですか。…ベトナムです。",
-                "translation": "Bạn đến từ nước nào? — Việt Nam.",
-                "translationEn": "Where are you from? ...Vietnam."
-            },
-            {
-                "sentence": "お国はどちらですか。…日本です。",
-                "translation": "Anh/chị đến từ nước nào? — Nhật Bản.",
-                "translationEn": "Where are you from? ...Japan."
-            },
-            {
-                "sentence": "お国はどちらですか。…韓国です。",
-                "translation": "Bạn đến từ nước nào? — Hàn Quốc.",
-                "translationEn": "Where are you from? ...Korea."
-            },
-            {
-                "sentence": "お国はどちらですか。…中国です。",
-                "translation": "Quê bạn ở đâu? — Trung Quốc.",
-                "translationEn": "Where are you from? ...China."
-            },
-            {
-                "sentence": "失礼ですが、お国はどちらですか。",
-                "translation": "Xin lỗi, anh/chị là người nước nào?",
-                "translationEn": "Excuse me, where are you from?"
-            }
-        ]
-    }
+  {
+    "grammarPoint": "ここ・そこ・あそこ",
+    "examples": [
+      {
+        "sentence": "ここは受付です。",
+        "translation": "Đây là quầy lễ tân.",
+        "translationEn": "This is the reception desk."
+      },
+      {
+        "sentence": "そこは教室です。",
+        "translation": "Đó là lớp học.",
+        "translationEn": "That is the classroom."
+      },
+      {
+        "sentence": "あそこは食堂です。",
+        "translation": "Kia là nhà ăn.",
+        "translationEn": "That over there is the dining hall."
+      },
+      {
+        "sentence": "ここはロビーです。",
+        "translation": "Đây là đại sảnh.",
+        "translationEn": "This is the lobby."
+      },
+      {
+        "sentence": "そこは事務所です。",
+        "translation": "Đó là văn phòng.",
+        "translationEn": "That is the office."
+      },
+      {
+        "sentence": "あそこは会議室です。",
+        "translation": "Kia là phòng họp.",
+        "translationEn": "That over there is the meeting room."
+      },
+      {
+        "sentence": "ここは会社です。",
+        "translation": "Đây là công ty.",
+        "translationEn": "This is the company."
+      },
+      {
+        "sentence": "そこは部屋です。",
+        "translation": "Đó là căn phòng.",
+        "translationEn": "That is the room."
+      },
+      {
+        "sentence": "あそこはお手洗いです。",
+        "translation": "Kia là nhà vệ sinh.",
+        "translationEn": "That over there is the restroom."
+      },
+      {
+        "sentence": "ここはうちです。",
+        "translation": "Đây là nhà tôi.",
+        "translationEn": "This is my home."
+      }
+    ]
+  },
+  {
+    "grammarPoint": "こちら・そちら・あちら",
+    "examples": [
+      {
+        "sentence": "受付はこちらです。",
+        "translation": "Quầy lễ tân ở phía này.",
+        "translationEn": "The reception desk is this way."
+      },
+      {
+        "sentence": "お手洗いはあちらです。",
+        "translation": "Nhà vệ sinh ở phía kia.",
+        "translationEn": "The restroom is over there."
+      },
+      {
+        "sentence": "エレベーターはそちらです。",
+        "translation": "Thang máy ở phía đó.",
+        "translationEn": "The elevator is that way."
+      },
+      {
+        "sentence": "階段はこちらです。",
+        "translation": "Cầu thang ở phía này.",
+        "translationEn": "The stairs are this way."
+      },
+      {
+        "sentence": "食堂はあちらです。",
+        "translation": "Nhà ăn ở phía kia.",
+        "translationEn": "The dining hall is over there."
+      },
+      {
+        "sentence": "事務所はそちらですか。",
+        "translation": "Văn phòng ở phía đó phải không?",
+        "translationEn": "Is the office that way?"
+      },
+      {
+        "sentence": "売り場はあちらです。",
+        "translation": "Quầy bán hàng ở phía kia.",
+        "translationEn": "The sales floor is over there."
+      },
+      {
+        "sentence": "電話はこちらです。",
+        "translation": "Điện thoại ở phía này.",
+        "translationEn": "The telephone is this way."
+      },
+      {
+        "sentence": "こちらはミラーさんです。",
+        "translation": "Đây là anh Miller.",
+        "translationEn": "This is Mr. Miller."
+      },
+      {
+        "sentence": "あちらは受付の田中さんです。",
+        "translation": "Vị phía kia là anh Tanaka ở quầy lễ tân.",
+        "translationEn": "That person over there is Mr. Tanaka from reception."
+      }
+    ]
+  },
+  {
+    "grammarPoint": "N1 は N2 (địa điểm) です",
+    "examples": [
+      {
+        "sentence": "受付は１階です。",
+        "translation": "Quầy lễ tân ở tầng 1.",
+        "translationEn": "The reception desk is on the first floor."
+      },
+      {
+        "sentence": "食堂は地下です。",
+        "translation": "Nhà ăn ở tầng hầm.",
+        "translationEn": "The dining hall is in the basement."
+      },
+      {
+        "sentence": "事務所は２階です。",
+        "translation": "Văn phòng ở tầng 2.",
+        "translationEn": "The office is on the second floor."
+      },
+      {
+        "sentence": "会議室は３階です。",
+        "translation": "Phòng họp ở tầng 3.",
+        "translationEn": "The meeting room is on the third floor."
+      },
+      {
+        "sentence": "お手洗いはあそこです。",
+        "translation": "Nhà vệ sinh ở đằng kia.",
+        "translationEn": "The restroom is over there."
+      },
+      {
+        "sentence": "ロビーはここです。",
+        "translation": "Đại sảnh ở đây.",
+        "translationEn": "The lobby is here."
+      },
+      {
+        "sentence": "自動販売機は地下です。",
+        "translation": "Máy bán hàng tự động ở tầng hầm.",
+        "translationEn": "The vending machine is in the basement."
+      },
+      {
+        "sentence": "靴の売り場は４階です。",
+        "translation": "Quầy bán giày ở tầng 4.",
+        "translationEn": "The shoe section is on the fourth floor."
+      },
+      {
+        "sentence": "ネクタイの売り場は５階です。",
+        "translation": "Quầy bán cà vạt ở tầng 5.",
+        "translationEn": "The necktie section is on the fifth floor."
+      },
+      {
+        "sentence": "ミラーさんは会議室です。",
+        "translation": "Anh Miller đang ở phòng họp.",
+        "translationEn": "Mr. Miller is in the meeting room."
+      }
+    ]
+  },
+  {
+    "grammarPoint": "どこ・どちら",
+    "examples": [
+      {
+        "sentence": "受付はどこですか。",
+        "translation": "Quầy lễ tân ở đâu vậy?",
+        "translationEn": "Where is the reception desk?"
+      },
+      {
+        "sentence": "お手洗いはどちらですか。",
+        "translation": "Nhà vệ sinh ở phía nào ạ?",
+        "translationEn": "Which way is the restroom?"
+      },
+      {
+        "sentence": "食堂はどこですか。",
+        "translation": "Nhà ăn ở đâu?",
+        "translationEn": "Where is the dining hall?"
+      },
+      {
+        "sentence": "エレベーターはどちらですか。",
+        "translation": "Thang máy ở phía nào vậy ạ?",
+        "translationEn": "Which way is the elevator?"
+      },
+      {
+        "sentence": "会議室はどこですか。",
+        "translation": "Phòng họp ở đâu?",
+        "translationEn": "Where is the meeting room?"
+      },
+      {
+        "sentence": "靴の売り場はどこですか。",
+        "translation": "Quầy bán giày ở đâu?",
+        "translationEn": "Where is the shoe section?"
+      },
+      {
+        "sentence": "自動販売機はどこですか。",
+        "translation": "Máy bán hàng tự động ở đâu?",
+        "translationEn": "Where is the vending machine?"
+      },
+      {
+        "sentence": "会社はどちらですか。",
+        "translation": "Công ty của bạn là công ty nào ạ?",
+        "translationEn": "Which company do you work for?"
+      },
+      {
+        "sentence": "お国はどちらですか。",
+        "translation": "Anh/chị đến từ nước nào ạ?",
+        "translationEn": "Where are you from?"
+      },
+      {
+        "sentence": "ミラーさんの部屋はどこですか。",
+        "translation": "Phòng của anh Miller ở đâu?",
+        "translationEn": "Where is Mr. Miller's room?"
+      }
+    ]
+  },
+  {
+    "grammarPoint": "N1 の N2 (Xuất xứ)",
+    "examples": [
+      {
+        "sentence": "これはどこのワインですか。…フランスのワインです。",
+        "translation": "Đây là rượu vang của nước nào? — Là rượu vang Pháp.",
+        "translationEn": "Where is this wine from? ...It is French wine."
+      },
+      {
+        "sentence": "それはイタリアの靴です。",
+        "translation": "Đó là giày Ý.",
+        "translationEn": "Those are Italian shoes."
+      },
+      {
+        "sentence": "あれはスイスの時計です。",
+        "translation": "Kia là đồng hồ Thụy Sĩ.",
+        "translationEn": "That over there is a Swiss watch."
+      },
+      {
+        "sentence": "これは日本のコンピューターです。",
+        "translation": "Đây là máy tính Nhật Bản.",
+        "translationEn": "This is a Japanese computer."
+      },
+      {
+        "sentence": "それはどこのネクタイですか。…イタリアのネクタイです。",
+        "translation": "Cà vạt đó của nước nào? — Là cà vạt Ý.",
+        "translationEn": "Where is that necktie from? ...It is an Italian necktie."
+      },
+      {
+        "sentence": "あれはフランスのワインですか。",
+        "translation": "Kia là rượu vang Pháp phải không?",
+        "translationEn": "Is that over there French wine?"
+      },
+      {
+        "sentence": "これはどこのカメラですか。…日本のカメラです。",
+        "translation": "Đây là máy ảnh của nước nào? — Là máy ảnh Nhật Bản.",
+        "translationEn": "Where is this camera from? ...It is a Japanese camera."
+      },
+      {
+        "sentence": "それはスイスの時計ですか。",
+        "translation": "Đó là đồng hồ Thụy Sĩ phải không?",
+        "translationEn": "Is that a Swiss watch?"
+      },
+      {
+        "sentence": "あれはどこのたばこですか。…日本のたばこです。",
+        "translation": "Kia là thuốc lá của nước nào? — Là thuốc lá Nhật Bản.",
+        "translationEn": "Where is that tobacco from? ...It is Japanese tobacco."
+      },
+      {
+        "sentence": "これはフランスのワインじゃありません。",
+        "translation": "Đây không phải là rượu vang Pháp.",
+        "translationEn": "This is not French wine."
+      }
+    ]
+  },
+  {
+    "grammarPoint": "お国はどちらですか",
+    "examples": [
+      {
+        "sentence": "お国はどちらですか。…アメリカです。",
+        "translation": "Anh/chị đến từ nước nào? — Mỹ.",
+        "translationEn": "Where are you from? ...America."
+      },
+      {
+        "sentence": "お国はどちらですか。…日本です。",
+        "translation": "Anh/chị đến từ nước nào? — Nhật Bản.",
+        "translationEn": "Where are you from? ...Japan."
+      },
+      {
+        "sentence": "お国はどちらですか。…中国です。",
+        "translation": "Anh/chị đến từ nước nào? — Trung Quốc.",
+        "translationEn": "Where are you from? ...China."
+      },
+      {
+        "sentence": "お国はどちらですか。…韓国です。",
+        "translation": "Anh/chị đến từ nước nào? — Hàn Quốc.",
+        "translationEn": "Where are you from? ...South Korea."
+      },
+      {
+        "sentence": "お国はどちらですか。…タイです。",
+        "translation": "Anh/chị đến từ nước nào? — Thái Lan.",
+        "translationEn": "Where are you from? ...Thailand."
+      },
+      {
+        "sentence": "お国はどちらですか。…インドです。",
+        "translation": "Anh/chị đến từ nước nào? — Ấn Độ.",
+        "translationEn": "Where are you from? ...India."
+      },
+      {
+        "sentence": "お国はどちらですか。…ブラジルです。",
+        "translation": "Anh/chị đến từ nước nào? — Brazil.",
+        "translationEn": "Where are you from? ...Brazil."
+      },
+      {
+        "sentence": "失礼ですが、お国はどちらですか。",
+        "translation": "Xin lỗi, anh/chị là người nước nào ạ?",
+        "translationEn": "Excuse me, where are you from?"
+      },
+      {
+        "sentence": "ミラーさん、お国はどちらですか。…アメリカです。",
+        "translation": "Anh Miller, anh đến từ nước nào? — Mỹ.",
+        "translationEn": "Mr. Miller, where are you from? ...America."
+      },
+      {
+        "sentence": "サントスさん、お国はどちらですか。…ブラジルです。",
+        "translation": "Anh Santos, anh đến từ nước nào? — Brazil.",
+        "translationEn": "Mr. Santos, where are you from? ...Brazil."
+      }
+    ]
+  }
 ]

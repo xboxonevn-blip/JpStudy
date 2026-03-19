@@ -4,7 +4,7 @@
     "title": "Động từ di chuyển (行きます, 来ます, 帰ります)",
     "titleEn": "Movement Verbs (Go/Come/Return)",
     "structure": "N (địa điểm) へ 行きます / 来ます / 帰ります",
-    "structureEn": "N (Place) e ikimasu / kimasu / kaerimasu",
+    "structureEn": "N (Place) へ いきます / きます / かえります",
     "explanation": "Diễn tả hành động di chuyển. * Trợ từ `へ` (đọc là 'e') chỉ hướng đi.\n* `行きます` (ikimasu): Đi (rời xa người nói).\n* `来ます` (kimasu): Đến (hướng về người nói).\n* `帰ります` (kaerimasu): Về (nhà, quê hương).",
     "explanationEn": "Expresses movement. * Particle `へ` (read 'e') indicates direction.\n* `行きます`: To go (away from speaker).\n* `来ます`: To come (towards speaker).\n* `帰ります`: To return (home).",
     "level": "N5"
@@ -14,7 +14,7 @@
     "title": "Phủ định hoàn toàn (どこも, 何も)",
     "titleEn": "Total Negation (Nowhere / Nothing)",
     "structure": "どこ [へ] も 行きません",
-    "structureEn": "Doko [e] mo ikimasen",
+    "structureEn": "どこ [へ] も いきません",
     "explanation": "Phủ định hoàn toàn với từ để hỏi + `も` + Động từ phủ định. * `どこ[へ]も`: Không đi đâu cả.\n* `なにも`: Không ăn/làm gì cả.",
     "explanationEn": "Total negation with Question Word + `も` + Negative Verb. * `どこ[へ]も`: Go nowhere.\n* `なにも`: Do/eat nothing.",
     "level": "N5"
@@ -22,9 +22,9 @@
   {
     "lessonId": 5,
     "title": "Phương tiện di chuyển (N で)",
-    "titleEn": "By means of transport (Particle de)",
+    "titleEn": "By means of transport (Particle で)",
     "structure": "N (phương tiện) で 行きます / 来ます / 帰ります",
-    "structureEn": "N (Transport) de ikimasu / kimasu / kaerimasu",
+    "structureEn": "N (Transport) で いきます / きます / かえります",
     "explanation": "Trợ từ `để` chỉ phương tiện, cách thức. * Đi bằng cái gì (Taxi, Xe buýt, Tàu điện...).",
     "explanationEn": "Particle `で` indicates means of transport. * Go by taxi, bus, train, etc.",
     "level": "N5"
@@ -32,9 +32,9 @@
   {
     "lessonId": 5,
     "title": "歩いて (Đi bộ)",
-    "titleEn": "Going on foot (aruite)",
+    "titleEn": "Going on foot (歩いて)",
     "structure": "歩いて (aruite) 行きます",
-    "structureEn": "aruite ikimasu",
+    "structureEn": "歩いて いきます",
     "explanation": "Trường hợp đặc biệt: Đi bộ dùng `歩いて` (không dùng trợ từ `để`).",
     "explanationEn": "Special case: `歩いて` (on foot). Do not use particle `で`.",
     "level": "N5"
@@ -42,9 +42,9 @@
   {
     "lessonId": 5,
     "title": "Làm gì cùng ai (N と)",
-    "titleEn": "Doing with someone (Particle to)",
+    "titleEn": "Doing with someone (Particle と)",
     "structure": "N (người/động vật) と V",
-    "structureEn": "N (Person) to V",
+    "structureEn": "N (Person) と V",
     "explanation": "Trợ từ `と` chỉ đối tượng cùng thực hiện hành động (với). * `一人で` (hitoride): Một mình (trường hợp đặc biệt, không dùng `と`).",
     "explanationEn": "Particle `と` indicates the person you do the action with (with). * `一人で` (alone): Special case, no `と`.",
     "level": "N5"
@@ -52,9 +52,9 @@
   {
     "lessonId": 5,
     "title": "Khi nào (いつ)",
-    "titleEn": "When (itsu)",
+    "titleEn": "When (いつ)",
     "structure": "いつ V ます か",
-    "structureEn": "itsu V-masu ka",
+    "structureEn": "いつ V-ますか",
     "explanation": "Từ để hỏi về thời gian. Không dùng trợ từ `に` sau `いつ`.",
     "explanationEn": "Question word for time (When). Do not use particle `に` after `いつ`.",
     "level": "N5"

@@ -166,6 +166,9 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byType(GrammarPracticeScreen), findsOneWidget);
+    expect(find.text('Source: Ghost review'), findsOneWidget);
+    expect(find.text('Session: Mastery'), findsOneWidget);
+    expect(find.text('Ghost'), findsOneWidget);
   });
 
   testWidgets('Ghost review shows mistake context (prompt/answer/source)', (

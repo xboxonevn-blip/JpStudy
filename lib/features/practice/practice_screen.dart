@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/theme/app_breakpoints.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
@@ -52,13 +53,21 @@ class PracticeScreen extends ConsumerWidget {
         topPadding: AppSpacing.sm,
         child: LayoutBuilder(
           builder: (context, constraints) {
-            final featuredColumns = constraints.maxWidth >= 900
+            final featuredColumns =
+                constraints.maxWidth >= AppBreakpoints.desktop
                 ? 3
-                : constraints.maxWidth >= 560
+                : constraints.maxWidth >= 680
                 ? 2
                 : 1;
             final featuredLimit = featuredColumns == 2 ? 4 : 3;
-            final goalColumns = constraints.maxWidth >= 760 ? 2 : 1;
+            final goalColumns = constraints.maxWidth >= 1180
+                ? 4
+                : constraints.maxWidth >= AppBreakpoints.tablet
+                ? 2
+                : 1;
+            final toolColumns = constraints.maxWidth >= AppBreakpoints.desktop
+                ? 2
+                : 1;
             final featuredTools = selectFocusPracticeDestinations(
               rankedDestinations: items,
               limit: featuredLimit,
@@ -224,31 +233,33 @@ class PracticeScreen extends ConsumerWidget {
                   _StudyPanel(
                     title: _toolsTitle(language),
                     caption: _toolsCaption(language),
-                    child: Column(
-                      children: [
-                        for (
-                          var index = 0;
-                          index < remainingTools.length;
-                          index++
-                        )
-                          Padding(
-                            padding: EdgeInsets.only(
-                              bottom: index == remainingTools.length - 1
-                                  ? 0
-                                  : AppSpacing.md,
-                            ),
-                            child: AppCompactRow(
-                              icon: remainingTools[index].icon,
-                              title: remainingTools[index].title,
-                              subtitle: remainingTools[index].subtitle,
-                              status: _toolStatusChip(remainingTools[index]),
-                              onTap: () => context.push(
-                                remainingTools[index].route,
-                                extra: remainingTools[index].extra,
+                    child: LayoutBuilder(
+                      builder: (context, sectionConstraints) {
+                        final itemWidth = _itemWidth(
+                          sectionConstraints.maxWidth,
+                          toolColumns,
+                        );
+                        return Wrap(
+                          spacing: AppSpacing.md,
+                          runSpacing: AppSpacing.md,
+                          children: [
+                            for (final item in remainingTools)
+                              SizedBox(
+                                width: itemWidth,
+                                child: AppCompactRow(
+                                  icon: item.icon,
+                                  title: item.title,
+                                  subtitle: item.subtitle,
+                                  status: _toolStatusChip(item),
+                                  onTap: () => context.push(
+                                    item.route,
+                                    extra: item.extra,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                      ],
+                          ],
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -476,15 +487,17 @@ class PracticeScreen extends ConsumerWidget {
   };
 
   String _goalTestTitle(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Mock exam',
-    AppLanguage.vi => 'Thi thử',
-    AppLanguage.ja => '模試',
+    AppLanguage.en => 'JLPT prep',
+    AppLanguage.vi => 'Ôn thi JLPT',
+    AppLanguage.ja => 'JLPT試験対策',
   };
 
   String _goalTestSubtitle(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Reading, mock, diagnosis, and plan.',
-    AppLanguage.vi => 'Đọc hiểu, mock, chẩn đoán, kèm kế hoạch.',
-    AppLanguage.ja => '読解、模試、診断、計画。',
+    AppLanguage.en =>
+      'Full mock, quick mock, reading drill, diagnosis, and plan.',
+    AppLanguage.vi =>
+      'Thi thử đầy đủ, kiểm tra nhanh, đọc hiểu, chẩn đoán và kế hoạch.',
+    AppLanguage.ja => 'フル模試、クイック模試、読解、診断、計画。',
   };
 
   String _goalTestDetail(
@@ -492,10 +505,10 @@ class PracticeScreen extends ConsumerWidget {
     StudyLevel? level,
   ) => switch (language) {
     AppLanguage.en =>
-      'Open the coach when you want a more structured test-driven session for ${level?.shortLabel ?? 'N5'}.',
+      'Open JLPT prep when you want one exam-focused hub for ${level?.shortLabel ?? 'N5'}.',
     AppLanguage.vi =>
-      'Mở coach khi bạn muốn một buổi học có cấu trúc và bám theo bài thi cho ${level?.shortLabel ?? 'N5'}.',
-    AppLanguage.ja => '${level?.shortLabel ?? 'N5'} 向けに、試験ベースで構成された学習へ入る入口です。',
+      'Mở ôn thi JLPT khi bạn muốn một hub tập trung hoàn toàn vào bài thi ${level?.shortLabel ?? 'N5'}.',
+    AppLanguage.ja => '${level?.shortLabel ?? 'N5'} 向けの試験対策ハブへ入る入口です。',
   };
 
   String _toolsTitle(AppLanguage language) => switch (language) {
@@ -964,9 +977,9 @@ class _StudyHero extends StatelessWidget {
   };
 
   String _secondaryLabel(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'JLPT coach',
-    AppLanguage.vi => 'JLPT coach',
-    AppLanguage.ja => 'JLPTコーチ',
+    AppLanguage.en => 'JLPT prep',
+    AppLanguage.vi => 'Ôn thi JLPT',
+    AppLanguage.ja => 'JLPT試験対策',
   };
 }
 

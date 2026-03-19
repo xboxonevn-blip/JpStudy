@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:jpstudy/app/theme/app_breakpoints.dart';
+import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
@@ -12,9 +14,7 @@ import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/core/theme_provider.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
-import 'package:jpstudy/features/common/widgets/japanese_background.dart';
 import 'package:jpstudy/features/home/providers/cloud_sync_status_provider.dart';
-import 'package:jpstudy/features/home/widgets/home_surface.dart';
 import 'package:jpstudy/features/me/providers/app_settings_controller.dart';
 import 'package:jpstudy/features/me/providers/data_settings_controller.dart';
 import 'package:jpstudy/features/me/widgets/challenge_history_card.dart';
@@ -52,310 +52,334 @@ class _MeScreenState extends ConsumerState<MeScreen> {
       dataSettingsControllerProvider.notifier,
     );
     final cloudStatusAsync = ref.watch(cloudSyncStatusProvider);
+    final profileHero = progressAsync.when(
+      data: (summary) => AppFeatureCard(
+        icon: Icons.person_rounded,
+        title: _title(language),
+        subtitle: _summaryCaption(language, summary),
+        primaryLabel: _manageDataLabel(language),
+        onPrimaryTap: () => context.push('/me/data'),
+        secondaryLabel: switch (language) {
+          AppLanguage.en => 'Progress',
+          AppLanguage.vi => 'Tiến độ',
+          AppLanguage.ja => '進捗',
+        },
+        onSecondaryTap: () => context.push('/progress'),
+        status: AppStatusChip(
+          label: level.shortLabel,
+          tone: AppStatusTone.primary,
+        ),
+      ),
+      loading: () => AppFeatureCard(
+        icon: Icons.person_rounded,
+        title: _title(language),
+        subtitle: _toolsLabel(language),
+        status: AppStatusChip(
+          label: level.shortLabel,
+          tone: AppStatusTone.primary,
+        ),
+      ),
+      error: (error, stackTrace) => AppFeatureCard(
+        icon: Icons.person_rounded,
+        title: _title(language),
+        subtitle: _toolsLabel(language),
+        status: AppStatusChip(
+          label: level.shortLabel,
+          tone: AppStatusTone.primary,
+        ),
+      ),
+    );
+    final learningSection = _SectionCard(
+      title: language.settingsLearningSection,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              for (final candidate in StudyLevel.values)
+                ChoiceChip(
+                  label: Text(candidate.shortLabel),
+                  selected: candidate == level,
+                  onSelected: (_) {
+                    ref.read(studyLevelProvider.notifier).state = candidate;
+                    if (candidate != StudyLevel.n3 &&
+                        ref.read(appLanguageProvider) == AppLanguage.ja) {
+                      ref.read(appLanguageProvider.notifier).state =
+                          AppLanguage.en;
+                    }
+                  },
+                ),
+            ],
+          ),
+          const SizedBox(height: 14),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              for (final appLanguage in AppLanguage.values)
+                ChoiceChip(
+                  label: Text(appLanguage.shortCode),
+                  selected: appLanguage == language,
+                  onSelected:
+                      appLanguage == AppLanguage.ja && level != StudyLevel.n3
+                      ? null
+                      : (_) {
+                          ref.read(appLanguageProvider.notifier).state =
+                              appLanguage;
+                        },
+                ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          _InlineActionTile(
+            icon: Icons.school_outlined,
+            title: language.levelMenuTitle,
+            subtitle: language.changeLevelLabel,
+            onTap: () => _resetOnboarding(context),
+          ),
+        ],
+      ),
+    );
+    final appearanceSection = _SectionCard(
+      title: language.settingsAppearanceSection,
+      child: Column(
+        children: [
+          SwitchListTile(
+            value: themeMode == ThemeMode.dark,
+            onChanged: (value) {
+              ref
+                  .read(themeModeProvider.notifier)
+                  .setThemeMode(value ? ThemeMode.dark : ThemeMode.light);
+            },
+            contentPadding: EdgeInsets.zero,
+            title: Text(language.darkModeLabel),
+            subtitle: Text(language.darkModeHint),
+          ),
+          SwitchListTile(
+            value: appSettings.strokeGuideDefaultExpanded,
+            onChanged: appSettings.isReady
+                ? (value) =>
+                      appSettingsController.setStrokeGuideDefaultExpanded(value)
+                : null,
+            contentPadding: EdgeInsets.zero,
+            title: Text(language.handwritingStrokeGuideDefaultLabel),
+            subtitle: Text(language.handwritingStrokeGuideDefaultHint),
+          ),
+        ],
+      ),
+    );
+    final reminderSection = _SectionCard(
+      title: language.settingsReminderSection,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SwitchListTile(
+            value: appSettings.reminderEnabled,
+            onChanged: appSettings.isReady
+                ? (value) async {
+                    await appSettingsController.setDailyReminder(
+                      value,
+                      language,
+                    );
+                    if (!appSettingsController.supportsNotifications &&
+                        value &&
+                        context.mounted) {
+                      final picked = await showTimePicker(
+                        context: context,
+                        initialTime: appSettings.reminderTime,
+                      );
+                      if (picked != null) {
+                        await appSettingsController.setReminderTime(picked);
+                      }
+                    }
+                  }
+                : null,
+            contentPadding: EdgeInsets.zero,
+            title: Text(language.reminderDailyLabel),
+            subtitle: Text(language.reminderDailyHint),
+          ),
+          if (!appSettingsController.supportsNotifications) ...[
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Text(
+                language.reminderUnsupportedLabel,
+                style: const TextStyle(color: Color(0xFF64748B)),
+              ),
+            ),
+            _InlineActionTile(
+              icon: Icons.schedule_outlined,
+              title: language.reminderTimeLabel,
+              subtitle: _formatTime(appSettings.reminderTime),
+              onTap: !appSettings.reminderEnabled || !appSettings.isReady
+                  ? null
+                  : () async {
+                      final picked = await showTimePicker(
+                        context: context,
+                        initialTime: appSettings.reminderTime,
+                      );
+                      if (picked != null) {
+                        await appSettingsController.setReminderTime(picked);
+                      }
+                    },
+            ),
+          ],
+          const SizedBox(height: 8),
+          TextButton.icon(
+            onPressed: appSettings.isReady
+                ? () => appSettingsController.testReminder(
+                    language,
+                    context: context,
+                  )
+                : null,
+            icon: const Icon(Icons.notifications_active_outlined),
+            label: Text(language.reminderTestLabel),
+          ),
+        ],
+      ),
+    );
+    final dataSection = _SectionCard(
+      title: language.settingsDataSection,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _InlineActionTile(
+            icon: Icons.schedule_outlined,
+            title: language.autoBackupLabel,
+            subtitle: _autoBackupSubtitle(language, dataSettings),
+            onTap: () => context.push('/me/data'),
+          ),
+          const SizedBox(height: 10),
+          cloudStatusAsync.when(
+            data: (status) => _InlineActionTile(
+              icon: Icons.cloud_sync_outlined,
+              title: dataSettingsController.cloudSyncLabel(language),
+              subtitle: dataSettingsController.cloudSyncStatusSubtitle(
+                context,
+                language,
+                status,
+              ),
+              onTap: () => context.push('/me/data'),
+            ),
+            loading: () => _InlineActionTile(
+              icon: Icons.cloud_sync_outlined,
+              title: dataSettingsController.cloudSyncLabel(language),
+              subtitle: dataSettingsController.cloudSyncLoadingLabel(language),
+              onTap: () => context.push('/me/data'),
+            ),
+            error: (error, stackTrace) => _InlineActionTile(
+              icon: Icons.cloud_sync_outlined,
+              title: dataSettingsController.cloudSyncLabel(language),
+              subtitle: dataSettingsController.cloudSyncLoadingLabel(language),
+              onTap: () => context.push('/me/data'),
+            ),
+          ),
+          const SizedBox(height: 12),
+          FilledButton.icon(
+            onPressed: () => context.push('/me/data'),
+            icon: const Icon(Icons.storage_rounded),
+            label: Text(_manageDataLabel(language)),
+          ),
+        ],
+      ),
+    );
+    final toolsSection = _SectionCard(
+      title: _toolsLabel(language),
+      child: Column(
+        children: [
+          _ActionTile(
+            icon: Icons.insights_outlined,
+            title: language.progressTitle,
+            subtitle: _progressHint(language),
+            onTap: () => context.push('/progress'),
+          ),
+          const SizedBox(height: 10),
+          _ActionTile(
+            icon: Icons.emoji_events_outlined,
+            title: language.achievementsTitle,
+            subtitle: _achievementsHint(language),
+            onTap: () => context.push('/achievements'),
+          ),
+          const SizedBox(height: 10),
+          _ActionTile(
+            icon: Icons.design_services_outlined,
+            title: language.designLabLabel,
+            subtitle: language.designLabSubtitle,
+            onTap: () => context.push('/design-lab'),
+          ),
+        ],
+      ),
+    );
 
     return Scaffold(
       appBar: AppBar(title: Text(_title(language))),
-      body: JapaneseBackground(
-        child: SafeArea(
-          top: false,
-          child: ListView(
-            padding: const EdgeInsets.fromLTRB(
-              HomeSurface.pageHorizontalPadding,
-              16,
-              HomeSurface.pageHorizontalPadding,
-              96,
-            ),
-            children: [
-              progressAsync.when(
-                data: (summary) => AppFeatureCard(
-                  icon: Icons.person_rounded,
-                  title: _title(language),
-                  subtitle: _summaryCaption(language, summary),
-                  primaryLabel: _manageDataLabel(language),
-                  onPrimaryTap: () => context.push('/me/data'),
-                  secondaryLabel: switch (language) {
-                    AppLanguage.en => 'Progress',
-                    AppLanguage.vi => 'Tiến độ',
-                    AppLanguage.ja => '進捗',
-                  },
-                  onSecondaryTap: () => context.push('/progress'),
-                  status: AppStatusChip(
-                    label: level.shortLabel,
-                    tone: AppStatusTone.primary,
-                  ),
-                ),
-                loading: () => AppFeatureCard(
-                  icon: Icons.person_rounded,
-                  title: _title(language),
-                  subtitle: _toolsLabel(language),
-                  status: AppStatusChip(
-                    label: level.shortLabel,
-                    tone: AppStatusTone.primary,
-                  ),
-                ),
-                error: (error, stackTrace) => AppFeatureCard(
-                  icon: Icons.person_rounded,
-                  title: _title(language),
-                  subtitle: _toolsLabel(language),
-                  status: AppStatusChip(
-                    label: level.shortLabel,
-                    tone: AppStatusTone.primary,
-                  ),
-                ),
-              ),
-              if (!appSettings.isReady || !dataSettings.isReady) ...[
-                const SizedBox(height: 16),
-                const LinearProgressIndicator(minHeight: 3),
+      body: AppPageShell(
+        topPadding: AppSpacing.lg,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final useDesktopGrid =
+                constraints.maxWidth >= AppBreakpoints.desktop;
+            final leftColumn = Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                learningSection,
+                const SizedBox(height: AppSpacing.lg),
+                appearanceSection,
+                const SizedBox(height: AppSpacing.lg),
+                reminderSection,
               ],
-              const SizedBox(height: 16),
-              _SectionCard(
-                title: language.settingsLearningSection,
-                child: Column(
+            );
+            final rightColumn = Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                dataSection,
+                const SizedBox(height: AppSpacing.lg),
+                const PersonalBestsCard(),
+                const SizedBox(height: AppSpacing.lg),
+                const ChallengeHistoryCard(),
+                const SizedBox(height: AppSpacing.lg),
+                toolsSection,
+              ],
+            );
+
+            if (!useDesktopGrid) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  profileHero,
+                  if (!appSettings.isReady || !dataSettings.isReady) ...[
+                    const SizedBox(height: AppSpacing.lg),
+                    const LinearProgressIndicator(minHeight: 3),
+                  ],
+                  const SizedBox(height: AppSpacing.lg),
+                  leftColumn,
+                  const SizedBox(height: AppSpacing.lg),
+                  rightColumn,
+                ],
+              );
+            }
+
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                profileHero,
+                if (!appSettings.isReady || !dataSettings.isReady) ...[
+                  const SizedBox(height: AppSpacing.lg),
+                  const LinearProgressIndicator(minHeight: 3),
+                ],
+                const SizedBox(height: AppSpacing.lg),
+                Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: [
-                        for (final candidate in StudyLevel.values)
-                          ChoiceChip(
-                            label: Text(candidate.shortLabel),
-                            selected: candidate == level,
-                            onSelected: (_) {
-                              ref.read(studyLevelProvider.notifier).state =
-                                  candidate;
-                              if (candidate != StudyLevel.n3 &&
-                                  ref.read(appLanguageProvider) ==
-                                      AppLanguage.ja) {
-                                ref.read(appLanguageProvider.notifier).state =
-                                    AppLanguage.en;
-                              }
-                            },
-                          ),
-                      ],
-                    ),
-                    const SizedBox(height: 14),
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: [
-                        for (final appLanguage in AppLanguage.values)
-                          ChoiceChip(
-                            label: Text(appLanguage.shortCode),
-                            selected: appLanguage == language,
-                            onSelected:
-                                appLanguage == AppLanguage.ja &&
-                                    level != StudyLevel.n3
-                                ? null
-                                : (_) {
-                                    ref
-                                            .read(appLanguageProvider.notifier)
-                                            .state =
-                                        appLanguage;
-                                  },
-                          ),
-                      ],
-                    ),
-                    const SizedBox(height: 12),
-                    _InlineActionTile(
-                      icon: Icons.school_outlined,
-                      title: language.levelMenuTitle,
-                      subtitle: language.changeLevelLabel,
-                      onTap: () => _resetOnboarding(context),
-                    ),
+                    Expanded(flex: 6, child: leftColumn),
+                    const SizedBox(width: AppSpacing.lg),
+                    Expanded(flex: 5, child: rightColumn),
                   ],
                 ),
-              ),
-              const SizedBox(height: 16),
-              _SectionCard(
-                title: language.settingsAppearanceSection,
-                child: Column(
-                  children: [
-                    SwitchListTile(
-                      value: themeMode == ThemeMode.dark,
-                      onChanged: (value) {
-                        ref
-                            .read(themeModeProvider.notifier)
-                            .setThemeMode(
-                              value ? ThemeMode.dark : ThemeMode.light,
-                            );
-                      },
-                      contentPadding: EdgeInsets.zero,
-                      title: Text(language.darkModeLabel),
-                      subtitle: Text(language.darkModeHint),
-                    ),
-                    SwitchListTile(
-                      value: appSettings.strokeGuideDefaultExpanded,
-                      onChanged: appSettings.isReady
-                          ? (value) => appSettingsController
-                                .setStrokeGuideDefaultExpanded(value)
-                          : null,
-                      contentPadding: EdgeInsets.zero,
-                      title: Text(language.handwritingStrokeGuideDefaultLabel),
-                      subtitle: Text(
-                        language.handwritingStrokeGuideDefaultHint,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-              _SectionCard(
-                title: language.settingsReminderSection,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SwitchListTile(
-                      value: appSettings.reminderEnabled,
-                      onChanged: appSettings.isReady
-                          ? (value) async {
-                              await appSettingsController.setDailyReminder(
-                                value,
-                                language,
-                              );
-                              if (!appSettingsController
-                                      .supportsNotifications &&
-                                  value &&
-                                  context.mounted) {
-                                final picked = await showTimePicker(
-                                  context: context,
-                                  initialTime: appSettings.reminderTime,
-                                );
-                                if (picked != null) {
-                                  await appSettingsController.setReminderTime(
-                                    picked,
-                                  );
-                                }
-                              }
-                            }
-                          : null,
-                      contentPadding: EdgeInsets.zero,
-                      title: Text(language.reminderDailyLabel),
-                      subtitle: Text(language.reminderDailyHint),
-                    ),
-                    if (!appSettingsController.supportsNotifications) ...[
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 8),
-                        child: Text(
-                          language.reminderUnsupportedLabel,
-                          style: const TextStyle(color: Color(0xFF64748B)),
-                        ),
-                      ),
-                      _InlineActionTile(
-                        icon: Icons.schedule_outlined,
-                        title: language.reminderTimeLabel,
-                        subtitle: _formatTime(appSettings.reminderTime),
-                        onTap:
-                            !appSettings.reminderEnabled || !appSettings.isReady
-                            ? null
-                            : () async {
-                                final picked = await showTimePicker(
-                                  context: context,
-                                  initialTime: appSettings.reminderTime,
-                                );
-                                if (picked != null) {
-                                  await appSettingsController.setReminderTime(
-                                    picked,
-                                  );
-                                }
-                              },
-                      ),
-                    ],
-                    const SizedBox(height: 8),
-                    TextButton.icon(
-                      onPressed: appSettings.isReady
-                          ? () => appSettingsController.testReminder(
-                              language,
-                              context: context,
-                            )
-                          : null,
-                      icon: const Icon(Icons.notifications_active_outlined),
-                      label: Text(language.reminderTestLabel),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-              _SectionCard(
-                title: language.settingsDataSection,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _InlineActionTile(
-                      icon: Icons.schedule_outlined,
-                      title: language.autoBackupLabel,
-                      subtitle: _autoBackupSubtitle(language, dataSettings),
-                      onTap: () => context.push('/me/data'),
-                    ),
-                    const SizedBox(height: 10),
-                    cloudStatusAsync.when(
-                      data: (status) => _InlineActionTile(
-                        icon: Icons.cloud_sync_outlined,
-                        title: dataSettingsController.cloudSyncLabel(language),
-                        subtitle: dataSettingsController
-                            .cloudSyncStatusSubtitle(context, language, status),
-                        onTap: () => context.push('/me/data'),
-                      ),
-                      loading: () => _InlineActionTile(
-                        icon: Icons.cloud_sync_outlined,
-                        title: dataSettingsController.cloudSyncLabel(language),
-                        subtitle: dataSettingsController.cloudSyncLoadingLabel(
-                          language,
-                        ),
-                        onTap: () => context.push('/me/data'),
-                      ),
-                      error: (error, stackTrace) => _InlineActionTile(
-                        icon: Icons.cloud_sync_outlined,
-                        title: dataSettingsController.cloudSyncLabel(language),
-                        subtitle: dataSettingsController.cloudSyncLoadingLabel(
-                          language,
-                        ),
-                        onTap: () => context.push('/me/data'),
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    FilledButton.icon(
-                      onPressed: () => context.push('/me/data'),
-                      icon: const Icon(Icons.storage_rounded),
-                      label: Text(_manageDataLabel(language)),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-              const PersonalBestsCard(),
-              const SizedBox(height: 16),
-              const ChallengeHistoryCard(),
-              const SizedBox(height: 16),
-              _SectionCard(
-                title: _toolsLabel(language),
-                child: Column(
-                  children: [
-                    _ActionTile(
-                      icon: Icons.insights_outlined,
-                      title: language.progressTitle,
-                      subtitle: _progressHint(language),
-                      onTap: () => context.push('/progress'),
-                    ),
-                    const SizedBox(height: 10),
-                    _ActionTile(
-                      icon: Icons.emoji_events_outlined,
-                      title: language.achievementsTitle,
-                      subtitle: _achievementsHint(language),
-                      onTap: () => context.push('/achievements'),
-                    ),
-                    const SizedBox(height: 10),
-                    _ActionTile(
-                      icon: Icons.design_services_outlined,
-                      title: language.designLabLabel,
-                      subtitle: language.designLabSubtitle,
-                      onTap: () => context.push('/design-lab'),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+              ],
+            );
+          },
         ),
       ),
     );
@@ -382,7 +406,7 @@ class _MeScreenState extends ConsumerState<MeScreen> {
       case AppLanguage.vi:
         return 'Cá nhân';
       case AppLanguage.ja:
-        return 'Me';
+        return 'マイページ';
     }
   }
 
@@ -393,7 +417,7 @@ class _MeScreenState extends ConsumerState<MeScreen> {
       case AppLanguage.vi:
         return 'Quản lý dữ liệu';
       case AppLanguage.ja:
-        return 'Manage data';
+        return 'データ管理';
     }
   }
 
@@ -417,7 +441,7 @@ class _MeScreenState extends ConsumerState<MeScreen> {
       case AppLanguage.vi:
         return 'Tiến độ và công cụ';
       case AppLanguage.ja:
-        return 'Progress and tools';
+        return '進捗とツール';
     }
   }
 
@@ -428,7 +452,7 @@ class _MeScreenState extends ConsumerState<MeScreen> {
       case AppLanguage.vi:
         return 'Xem streak, XP, retention và lịch sử.';
       case AppLanguage.ja:
-        return 'Review streaks, XP, retention, and history.';
+        return '連続学習、XP、定着率、履歴をまとめて確認します。';
     }
   }
 
@@ -446,11 +470,11 @@ class _MeScreenState extends ConsumerState<MeScreen> {
   String _summaryCaption(AppLanguage language, ProgressSummary summary) {
     switch (language) {
       case AppLanguage.en:
-        return '${summary.todayXp} XP today ? ${summary.streak} day streak';
+        return '${summary.todayXp} XP today / ${summary.streak} day streak';
       case AppLanguage.vi:
-        return '${summary.todayXp} XP hôm nay ? chuỗi ${summary.streak} ngày';
+        return '${summary.todayXp} XP hôm nay / chuỗi ${summary.streak} ngày';
       case AppLanguage.ja:
-        return '今日 ${summary.todayXp} XP ? ${summary.streak}日連続';
+        return '今日 ${summary.todayXp} XP / ${summary.streak}日連続';
     }
   }
 }

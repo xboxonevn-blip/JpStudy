@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/layout/app_responsive_frame.dart';
+import 'package:jpstudy/app/theme/app_breakpoints.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
@@ -37,6 +39,51 @@ class LearningPathScreen extends ConsumerWidget {
         (dashboard?.kanjiDue ?? 0);
     final weakCount = dashboard?.totalMistakeCount ?? 0;
     final hasStartedToday = todayXp > 0;
+    final studyPromptCard = Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 14),
+      child: AppSectionCard(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AppSectionHeader(
+              title: _studyPromptTitle(language),
+              caption: _studyPromptSubtitle(language),
+            ),
+            const SizedBox(height: 10),
+            AppProgressStrip(
+              value: hasStartedToday ? (todayXp / 30).clamp(0.18, 1.0) : 0.08,
+              label: _studyPromptProgressLabel(
+                language,
+                hasStartedToday: hasStartedToday,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                _FocusChip(
+                  icon: Icons.menu_book_rounded,
+                  label: _focusChipLabel(language, dueCount),
+                  color: palette.primary,
+                ),
+                _FocusChip(
+                  icon: Icons.auto_fix_high_rounded,
+                  label: _repairChipLabel(language, weakCount),
+                  color: palette.accent,
+                ),
+                _FocusChip(
+                  icon: Icons.rocket_launch_rounded,
+                  label: _momentumChipLabel(language, level),
+                  color: palette.secondary,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
 
     return JapaneseBackground(
       child: SafeArea(
@@ -44,107 +91,150 @@ class LearningPathScreen extends ConsumerWidget {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(0, 100, 0, AppSpacing.pageBottom),
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: _DojoHeroCard(
-                language: language,
-                level: level,
-                streak: streak,
-                todayXp: todayXp,
-                dueCount: dueCount,
-                weakCount: weakCount,
-                hasStartedToday: hasStartedToday,
-                missionLabel: continueAction?.label,
-                onPrimaryTap: () =>
-                    _openContinueAction(context, continueAction),
-                onSecondaryTap: () => context.push('/jlpt/coach'),
-              ),
-            ).animate().fadeIn(duration: 360.ms).slideY(begin: 0.08, end: 0),
-            const SizedBox(height: 10),
-            const DailySessionCard(compact: true)
-                .animate(delay: 80.ms)
-                .fadeIn(duration: 340.ms)
-                .slideY(begin: 0.06, end: 0),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: const MiniDashboard(compact: true),
-            ).animate(delay: 140.ms).fadeIn(duration: 320.ms),
-            const SizedBox(height: 10),
-            const WeeklyChallengeCard(
-              compact: true,
-            ).animate(delay: 180.ms).fadeIn(duration: 320.ms),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: _LearningLanesPanel(
-                language: language,
-                level: level,
-                dueCount: dueCount,
-                weakCount: weakCount,
-              ),
-            ).animate(delay: 220.ms).fadeIn(duration: 340.ms),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: const WeaknessRadarCard(compact: true),
-            ).animate(delay: 280.ms).fadeIn(duration: 320.ms),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: const DiscoverPracticePanel(
-                initiallyExpanded: false,
-                dense: true,
-              ),
-            ).animate(delay: 340.ms).fadeIn(duration: 360.ms),
-            const SizedBox(height: 6),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: AppSectionCard(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AppSectionHeader(
-                      title: _studyPromptTitle(language),
-                      caption: _studyPromptSubtitle(language),
-                    ),
-                    const SizedBox(height: 10),
-                    AppProgressStrip(
-                      value: hasStartedToday
-                          ? (todayXp / 30).clamp(0.18, 1.0)
-                          : 0.08,
-                      label: _studyPromptProgressLabel(
-                        language,
-                        hasStartedToday: hasStartedToday,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
+            AppResponsiveFrame(
+              maxWidth: 1240,
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final useDesktopGrid =
+                      constraints.maxWidth >= AppBreakpoints.desktop;
+
+                  final hero =
+                      Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 14),
+                            child: _DojoHeroCard(
+                              language: language,
+                              level: level,
+                              streak: streak,
+                              todayXp: todayXp,
+                              dueCount: dueCount,
+                              weakCount: weakCount,
+                              hasStartedToday: hasStartedToday,
+                              missionLabel: continueAction?.label,
+                              onPrimaryTap: () =>
+                                  _openContinueAction(context, continueAction),
+                              onSecondaryTap: () => context.push('/jlpt/coach'),
+                            ),
+                          )
+                          .animate()
+                          .fadeIn(duration: 360.ms)
+                          .slideY(begin: 0.08, end: 0);
+
+                  if (!useDesktopGrid) {
+                    return Column(
                       children: [
-                        _FocusChip(
-                          icon: Icons.menu_book_rounded,
-                          label: _focusChipLabel(language, dueCount),
-                          color: palette.primary,
-                        ),
-                        _FocusChip(
-                          icon: Icons.auto_fix_high_rounded,
-                          label: _repairChipLabel(language, weakCount),
-                          color: palette.accent,
-                        ),
-                        _FocusChip(
-                          icon: Icons.rocket_launch_rounded,
-                          label: _momentumChipLabel(language, level),
-                          color: palette.secondary,
-                        ),
+                        hero,
+                        const SizedBox(height: 10),
+                        const DailySessionCard(compact: true)
+                            .animate(delay: 80.ms)
+                            .fadeIn(duration: 340.ms)
+                            .slideY(begin: 0.06, end: 0),
+                        const SizedBox(height: 10),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 14),
+                          child: const MiniDashboard(compact: true),
+                        ).animate(delay: 140.ms).fadeIn(duration: 320.ms),
+                        const SizedBox(height: 10),
+                        const WeeklyChallengeCard(
+                          compact: true,
+                        ).animate(delay: 180.ms).fadeIn(duration: 320.ms),
+                        const SizedBox(height: 10),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 14),
+                          child: _LearningLanesPanel(
+                            language: language,
+                            level: level,
+                            dueCount: dueCount,
+                            weakCount: weakCount,
+                          ),
+                        ).animate(delay: 220.ms).fadeIn(duration: 340.ms),
+                        const SizedBox(height: 10),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 14),
+                          child: const WeaknessRadarCard(compact: true),
+                        ).animate(delay: 280.ms).fadeIn(duration: 320.ms),
+                        const SizedBox(height: 10),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 14),
+                          child: const DiscoverPracticePanel(
+                            initiallyExpanded: false,
+                            dense: true,
+                          ),
+                        ).animate(delay: 340.ms).fadeIn(duration: 360.ms),
+                        const SizedBox(height: 6),
+                        studyPromptCard
+                            .animate(delay: 400.ms)
+                            .fadeIn(duration: 320.ms),
                       ],
-                    ),
-                  ],
-                ),
+                    );
+                  }
+
+                  return Column(
+                    children: [
+                      hero,
+                      const SizedBox(height: 12),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Expanded(
+                            flex: 8,
+                            child: DailySessionCard(compact: true),
+                          ),
+                          const SizedBox(width: AppSpacing.md),
+                          Expanded(
+                            flex: 5,
+                            child: Column(
+                              children: const [
+                                Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 14),
+                                  child: MiniDashboard(compact: true),
+                                ),
+                                SizedBox(height: 10),
+                                WeeklyChallengeCard(compact: true),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ).animate(delay: 80.ms).fadeIn(duration: 340.ms),
+                      const SizedBox(height: 12),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 8,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 14,
+                              ),
+                              child: _LearningLanesPanel(
+                                language: language,
+                                level: level,
+                                dueCount: dueCount,
+                                weakCount: weakCount,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: AppSpacing.md),
+                          Expanded(flex: 5, child: studyPromptCard),
+                        ],
+                      ).animate(delay: 180.ms).fadeIn(duration: 340.ms),
+                      const SizedBox(height: 12),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 14),
+                        child: const WeaknessRadarCard(compact: true),
+                      ).animate(delay: 260.ms).fadeIn(duration: 320.ms),
+                      const SizedBox(height: 12),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 14),
+                        child: const DiscoverPracticePanel(
+                          initiallyExpanded: false,
+                          dense: true,
+                        ),
+                      ).animate(delay: 320.ms).fadeIn(duration: 320.ms),
+                    ],
+                  );
+                },
               ),
-            ).animate(delay: 400.ms).fadeIn(duration: 320.ms),
+            ),
           ],
         ),
       ),

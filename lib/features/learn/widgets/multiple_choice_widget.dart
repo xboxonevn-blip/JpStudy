@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../app/theme/app_spacing.dart';
+import '../../../app/theme/app_theme_palette.dart';
 import '../../../core/app_language.dart';
 import '../models/question.dart';
+import 'question_surface.dart';
 
 /// Multiple choice question widget
 class MultipleChoiceWidget extends StatelessWidget {
@@ -24,137 +27,40 @@ class MultipleChoiceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    final options = question.options ?? const <String>[];
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        // Question text
-        Container(
-          padding: const EdgeInsets.all(24),
-          decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Column(
-            children: [
-              Text(
-                question.targetItem.term,
-                style: const TextStyle(
-                  fontSize: 48,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              if (question.targetItem.hasDisplayReading) ...[
-                const SizedBox(height: 8),
-                Text(
-                  question.targetItem.reading!.trim(),
-                  style: TextStyle(fontSize: 20, color: Colors.grey[600]),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-              const SizedBox(height: 16),
-              Text(
-                question.questionText,
-                style: Theme.of(context).textTheme.titleMedium,
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
+        QuestionPromptCard(
+          label: language.multipleChoiceLabel,
+          title: question.targetItem.term,
+          subtitle: question.targetItem.hasDisplayReading
+              ? question.targetItem.reading!.trim()
+              : null,
+          prompt: question.questionText,
+          icon: Icons.layers_rounded,
+          accentColor: palette.info,
         ),
-        const SizedBox(height: 24),
-
-        // Options
-        ...question.options!.map(
-          (option) => Padding(
-            padding: const EdgeInsets.only(bottom: 12),
-            child: _OptionButton(
-              text: option,
-              isSelected: selectedAnswer == option,
-              isCorrect:
-                  revealCorrectAnswer && option == question.correctAnswer,
-              isWrong:
-                  showResult &&
-                  selectedAnswer == option &&
-                  option != question.correctAnswer,
-              onTap: showResult ? null : () => onSelect(option),
-            ),
+        const SizedBox(height: AppSpacing.lg),
+        for (var index = 0; index < options.length; index++) ...[
+          QuestionChoiceTile(
+            title: options[index],
+            leadingLabel: String.fromCharCode(65 + index),
+            accentColor: palette.primary,
+            isSelected: selectedAnswer == options[index],
+            isCorrect:
+                revealCorrectAnswer && options[index] == question.correctAnswer,
+            isWrong:
+                showResult &&
+                selectedAnswer == options[index] &&
+                options[index] != question.correctAnswer,
+            onTap: showResult ? null : () => onSelect(options[index]),
           ),
-        ),
+          if (index < options.length - 1) const SizedBox(height: AppSpacing.md),
+        ],
       ],
-    );
-  }
-}
-
-class _OptionButton extends StatelessWidget {
-  final String text;
-  final bool isSelected;
-  final bool isCorrect;
-  final bool isWrong;
-  final VoidCallback? onTap;
-
-  const _OptionButton({
-    required this.text,
-    this.isSelected = false,
-    this.isCorrect = false,
-    this.isWrong = false,
-    this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    Color backgroundColor;
-    Color borderColor;
-    Color textColor;
-
-    if (isCorrect) {
-      backgroundColor = Colors.green.withValues(alpha: 0.2);
-      borderColor = Colors.green;
-      textColor = Colors.green[800]!;
-    } else if (isWrong) {
-      backgroundColor = Colors.red.withValues(alpha: 0.2);
-      borderColor = Colors.red;
-      textColor = Colors.red[800]!;
-    } else if (isSelected) {
-      backgroundColor = Theme.of(context).primaryColor.withValues(alpha: 0.2);
-      borderColor = Theme.of(context).primaryColor;
-      textColor = Theme.of(context).primaryColor;
-    } else {
-      backgroundColor = Colors.grey.withValues(alpha: 0.1);
-      borderColor = Colors.grey.withValues(alpha: 0.3);
-      textColor = Theme.of(context).textTheme.bodyLarge!.color!;
-    }
-
-    return Material(
-      color: backgroundColor,
-      borderRadius: BorderRadius.circular(12),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(12),
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: borderColor, width: 2),
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: Text(
-                  text,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: textColor,
-                  ),
-                ),
-              ),
-              if (isCorrect)
-                const Icon(Icons.check_circle, color: Colors.green),
-              if (isWrong) const Icon(Icons.cancel, color: Colors.red),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

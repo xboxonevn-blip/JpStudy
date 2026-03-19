@@ -100,7 +100,7 @@
       {
         "sentence": "故障の原因はエンジンのようです。",
         "translation": "Nguyên nhân hỏng hóc hình như là do động cơ.",
-        "translationEn": "Subject seems to be the engine."
+        "translationEn": "The cause of the trouble seems to be the engine."
       },
       {
         "sentence": "彼女は合格したようです。",
@@ -113,14 +113,54 @@
     "grammarPoint": "〜らしい",
     "examples": [
       {
-        "sentence": "彼は来月結婚するらしいです。",
-        "translation": "Nghe nói anh ấy tháng sau sẽ kết hôn.",
-        "translationEn": "Apparently he will get married next month."
+        "sentence": "田中さんは来月婚約するらしいです。",
+        "translation": "Nghe nói anh Tanaka sẽ đính hôn vào tháng sau.",
+        "translationEn": "Apparently Mr. Tanaka is going to get engaged next month."
       },
       {
-        "sentence": "あの店のラーメンは安くておいしいらしいです。",
-        "translation": "Nghe nói mì ramen của quán kia rẻ mà ngon.",
-        "translationEn": "Apparently the ramen at that shop is cheap and delicious."
+        "sentence": "ニュースによると、大統領が来日するらしいです。",
+        "translation": "Theo tin tức thì nghe nói tổng thống sẽ thăm Nhật.",
+        "translationEn": "According to the news, the president is apparently coming to Japan."
+      },
+      {
+        "sentence": "あの病院の先生は医学に詳しいらしいです。",
+        "translation": "Nghe nói bác sĩ ở bệnh viện đó rất rành y học.",
+        "translationEn": "Apparently the doctor at that hospital knows medicine well."
+      },
+      {
+        "sentence": "この町は人口が増えているらしいです。",
+        "translation": "Nghe nói dân số ở thị trấn này đang tăng.",
+        "translationEn": "Apparently the population of this town is increasing."
+      },
+      {
+        "sentence": "あの二人はもう別れたらしいです。",
+        "translation": "Nghe nói hai người đó đã chia tay rồi.",
+        "translationEn": "Apparently those two have already broken up."
+      },
+      {
+        "sentence": "この店のケーキはおいしいらしいです。",
+        "translation": "Nghe nói bánh ở cửa hàng này ngon.",
+        "translationEn": "Apparently the cakes at this shop are delicious."
+      },
+      {
+        "sentence": "彼は科学より文学が好きらしいです。",
+        "translation": "Nghe nói anh ấy thích văn học hơn khoa học.",
+        "translationEn": "Apparently he likes literature more than science."
+      },
+      {
+        "sentence": "外でパトカーの音がしたので、近くで事故があったらしいです。",
+        "translation": "Vì nghe tiếng xe cảnh sát nên có lẽ gần đây đã xảy ra tai nạn.",
+        "translationEn": "I heard a police car outside, so apparently there was an accident nearby."
+      },
+      {
+        "sentence": "この薬は長生きにいいらしいです。",
+        "translation": "Nghe nói loại thuốc này tốt cho sức khỏe lâu dài.",
+        "translationEn": "Apparently this medicine is good for longevity."
+      },
+      {
+        "sentence": "彼は恋人とよく会っているらしいです。",
+        "translation": "Nghe nói anh ấy thường gặp người yêu.",
+        "translationEn": "Apparently he often meets his partner."
       }
     ]
   },
@@ -129,13 +169,53 @@
     "examples": [
       {
         "sentence": "外は雪みたいです。",
-        "translation": "Bên ngoài hình như có tuyết.",
+        "translation": "Ngoài kia trông như tuyết vậy.",
         "translationEn": "It looks like snow outside."
       },
       {
-        "sentence": "外は少し寒いみたいです。",
-        "translation": "Bên ngoài hình như hơi lạnh.",
-        "translationEn": "It seems a little cold outside."
+        "sentence": "このスープは変な匂いがするので、古いみたいです。",
+        "translation": "Món súp này có mùi lạ nên có vẻ đã cũ.",
+        "translationEn": "This soup smells strange, so it seems old."
+      },
+      {
+        "sentence": "あの人の声は先生みたいです。",
+        "translation": "Giọng của người kia nghe giống giáo viên.",
+        "translationEn": "That person’s voice sounds like the teacher’s."
+      },
+      {
+        "sentence": "救急車の音ですから、近くで事故があったみたいです。",
+        "translation": "Vì là tiếng xe cứu thương nên có vẻ gần đây đã có tai nạn.",
+        "translationEn": "That is an ambulance, so it seems there was an accident nearby."
+      },
+      {
+        "sentence": "彼は厳しいみたいですが、やさしいところもあります。",
+        "translation": "Anh ấy có vẻ nghiêm nhưng cũng có mặt dịu dàng.",
+        "translationEn": "He seems strict, but he also has a kind side."
+      },
+      {
+        "sentence": "このデータは少し間違っているみたいです。",
+        "translation": "Dữ liệu này có vẻ hơi sai.",
+        "translationEn": "This data seems to be a little wrong."
+      },
+      {
+        "sentence": "彼女はその案に反対みたいです。",
+        "translation": "Cô ấy có vẻ phản đối kế hoạch đó.",
+        "translationEn": "She seems to be against that idea."
+      },
+      {
+        "sentence": "このパンは石みたいに硬いです。",
+        "translation": "Ổ bánh này cứng như đá.",
+        "translationEn": "This bread is as hard as a rock."
+      },
+      {
+        "sentence": "あの人は恋人と別れたみたいです。",
+        "translation": "Người đó có vẻ đã chia tay người yêu.",
+        "translationEn": "That person seems to have broken up with their partner."
+      },
+      {
+        "sentence": "このニュースは本当みたいです。",
+        "translation": "Tin tức này có vẻ là thật.",
+        "translationEn": "This news seems to be true."
       }
     ]
   }

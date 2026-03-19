@@ -69,16 +69,39 @@ class _ImmersionHomeScreenState extends ConsumerState<ImmersionHomeScreen> {
     );
   }
 
-  ImmersionArticle? _nextArticle(Set<String> readIds) {
-    if (_latestArticles.isEmpty) {
+  List<ImmersionArticle> _articlesForLevel(
+    List<ImmersionArticle> articles,
+    Set<String> readIds,
+    StudyLevel level,
+  ) {
+    final filtered = articles
+        .where((article) => article.officialLevel == level.shortLabel)
+        .toList(growable: false);
+    final sorted = [...filtered];
+    sorted.sort((a, b) {
+      final aUnread = readIds.contains(a.id) ? 1 : 0;
+      final bUnread = readIds.contains(b.id) ? 1 : 0;
+      if (aUnread != bUnread) {
+        return aUnread.compareTo(bUnread);
+      }
+      return b.publishedAt.compareTo(a.publishedAt);
+    });
+    return sorted;
+  }
+
+  ImmersionArticle? _nextArticle(
+    List<ImmersionArticle> articles,
+    Set<String> readIds,
+  ) {
+    if (articles.isEmpty) {
       return null;
     }
-    for (final article in _latestArticles) {
+    for (final article in articles) {
       if (!readIds.contains(article.id)) {
         return article;
       }
     }
-    return _latestArticles.first;
+    return articles.first;
   }
 
   List<_ReadingLevelSection> _buildSections(
@@ -87,147 +110,35 @@ class _ImmersionHomeScreenState extends ConsumerState<ImmersionHomeScreen> {
     StudyLevel level,
     AppLanguage language,
   ) {
-    final grouped = <String, List<ImmersionArticle>>{};
-    for (final article in articles) {
-      grouped.putIfAbsent(article.officialLevel, () => []).add(article);
-    }
-
-    for (final entry in grouped.entries) {
-      entry.value.sort((a, b) {
-        final aUnread = readIds.contains(a.id) ? 1 : 0;
-        final bUnread = readIds.contains(b.id) ? 1 : 0;
-        if (aUnread != bUnread) {
-          return aUnread.compareTo(bUnread);
-        }
-        return b.publishedAt.compareTo(a.publishedAt);
-      });
-    }
-
     final current = level.shortLabel;
-    final previous = switch (current) {
-      'N4' => 'N5',
-      'N3' => 'N4',
-      'N2' => 'N3',
-      'N1' => 'N2',
-      _ => null,
-    };
-    final next = switch (current) {
-      'N5' => 'N4',
-      'N4' => 'N3',
-      'N3' => 'N2',
-      'N2' => 'N1',
-      _ => null,
-    };
-
-    final orderedLevels = <String>[];
-    void addLevel(String? candidate) {
-      if (candidate == null) return;
-      if (!grouped.containsKey(candidate)) return;
-      if (orderedLevels.contains(candidate)) return;
-      orderedLevels.add(candidate);
+    final filtered = _articlesForLevel(articles, readIds, level);
+    if (filtered.isEmpty) {
+      return const [];
     }
-
-    addLevel(current);
-    addLevel(previous);
-    addLevel(next);
-    for (final levelLabel in const ['N5', 'N4', 'N3', 'N2', 'N1']) {
-      addLevel(levelLabel);
-    }
-
-    return orderedLevels
-        .map(
-          (levelLabel) => _ReadingLevelSection(
-            levelLabel: levelLabel,
-            title: _sectionTitle(
-              language,
-              levelLabel: levelLabel,
-              currentLevel: current,
-              previousLevel: previous,
-              nextLevel: next,
-            ),
-            subtitle: _sectionSubtitle(
-              language,
-              levelLabel: levelLabel,
-              currentLevel: current,
-              previousLevel: previous,
-              nextLevel: next,
-            ),
-            articles: grouped[levelLabel] ?? const [],
-          ),
-        )
-        .where((section) => section.articles.isNotEmpty)
-        .toList();
+    return [
+      _ReadingLevelSection(
+        levelLabel: current,
+        title: _sectionTitle(language, current),
+        subtitle: _sectionSubtitle(language, current),
+        articles: filtered,
+      ),
+    ];
   }
 
-  String _sectionTitle(
-    AppLanguage language, {
-    required String levelLabel,
-    required String currentLevel,
-    required String? previousLevel,
-    required String? nextLevel,
-  }) {
-    if (levelLabel == currentLevel) {
-      return switch (language) {
-        AppLanguage.en => 'Main track $levelLabel',
-        AppLanguage.vi => 'Track chính $levelLabel',
-        AppLanguage.ja => 'メイントラック $levelLabel',
+  String _sectionTitle(AppLanguage language, String levelLabel) =>
+      switch (language) {
+        AppLanguage.en => '$levelLabel reading deck',
+        AppLanguage.vi => 'Deck đọc $levelLabel',
+        AppLanguage.ja => '$levelLabel 読解デッキ',
       };
-    }
-    if (levelLabel == previousLevel) {
-      return switch (language) {
-        AppLanguage.en => 'Warm-up lane $levelLabel',
-        AppLanguage.vi => 'Lane khởi động $levelLabel',
-        AppLanguage.ja => 'ウォームアップ $levelLabel',
-      };
-    }
-    if (levelLabel == nextLevel) {
-      return switch (language) {
-        AppLanguage.en => 'Stretch lane $levelLabel',
-        AppLanguage.vi => 'Lane vươn lên $levelLabel',
-        AppLanguage.ja => 'ストレッチレーン $levelLabel',
-      };
-    }
-    return switch (language) {
-      AppLanguage.en => 'Explore $levelLabel',
-      AppLanguage.vi => 'Khám phá $levelLabel',
-      AppLanguage.ja => '$levelLabel を探索',
-    };
-  }
 
-  String _sectionSubtitle(
-    AppLanguage language, {
-    required String levelLabel,
-    required String currentLevel,
-    required String? previousLevel,
-    required String? nextLevel,
-  }) {
-    if (levelLabel == currentLevel) {
-      return switch (language) {
-        AppLanguage.en => 'The best lane for your current JLPT rhythm.',
-        AppLanguage.vi => 'Lane phù hợp nhất với nhịp JLPT hiện tại của bạn.',
-        AppLanguage.ja => '今のJLPTレベルにいちばん合う読解レーンです。',
+  String _sectionSubtitle(AppLanguage language, String levelLabel) =>
+      switch (language) {
+        AppLanguage.en =>
+          'Only articles tagged for $levelLabel are shown here.',
+        AppLanguage.vi => 'Chỉ hiển thị các bài đọc gắn với level $levelLabel.',
+        AppLanguage.ja => '$levelLabel に紐づく記事だけを表示します。',
       };
-    }
-    if (levelLabel == previousLevel) {
-      return switch (language) {
-        AppLanguage.en => 'Use these to warm up before a harder set.',
-        AppLanguage.vi => 'Dùng để khởi động trước khi vào set khó hơn.',
-        AppLanguage.ja => '少し軽めに入りたい時のウォームアップ用です。',
-      };
-    }
-    if (levelLabel == nextLevel) {
-      return switch (language) {
-        AppLanguage.en => 'Step up here when you want exam pressure.',
-        AppLanguage.vi => 'Đi lên lane này khi bạn muốn tăng áp lực đề thi.',
-        AppLanguage.ja => '試験感を上げたい時に一段上へ進むレーンです。',
-      };
-    }
-    return switch (language) {
-      AppLanguage.en => 'Extra reading decks beyond your main track.',
-      AppLanguage.vi => 'Các deck đọc thêm ngoài track chính.',
-      AppLanguage.ja => 'メイントラック以外の追加読解デッキです。',
-    };
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -238,7 +149,6 @@ class _ImmersionHomeScreenState extends ConsumerState<ImmersionHomeScreen> {
     final overlayStyle = theme.brightness == Brightness.dark
         ? SystemUiOverlayStyle.light
         : SystemUiOverlayStyle.dark;
-    final nextArticle = _nextArticle(readIds);
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
@@ -263,12 +173,19 @@ class _ImmersionHomeScreenState extends ConsumerState<ImmersionHomeScreen> {
           child: FutureBuilder<List<ImmersionArticle>>(
             future: _future,
             builder: (context, snapshot) {
-              final articles = snapshot.data ?? const <ImmersionArticle>[];
-              final overviewArticles = articles.isNotEmpty
-                  ? articles
+              final loadedArticles =
+                  snapshot.data ?? const <ImmersionArticle>[];
+              final sourceArticles = loadedArticles.isNotEmpty
+                  ? loadedArticles
                   : _latestArticles;
+              final overviewArticles = _articlesForLevel(
+                sourceArticles,
+                readIds,
+                level,
+              );
+              final nextArticle = _nextArticle(overviewArticles, readIds);
               final sections = _buildSections(
-                articles,
+                overviewArticles,
                 readIds,
                 level,
                 language,
@@ -305,7 +222,7 @@ class _ImmersionHomeScreenState extends ConsumerState<ImmersionHomeScreen> {
                       )
                     else if (snapshot.hasError)
                       _ErrorState(language: language, onRetry: _refreshArticles)
-                    else if (articles.isEmpty)
+                    else if (overviewArticles.isEmpty)
                       _EmptyState(language: language)
                     else ...[
                       ...List.generate(sections.length, (index) {
@@ -492,10 +409,10 @@ class _ReadingOverviewCard extends StatelessWidget {
     String currentLevel,
   ) => switch (language) {
     AppLanguage.en =>
-      'Your current track is centered around $currentLevel, with warm-up and stretch lanes around it.',
+      'Only $currentLevel reading decks are shown for your current study level.',
     AppLanguage.vi =>
-      'Track hiện tại xoay quanh $currentLevel, có lane khởi động và lane vươn lên bao quanh.',
-    AppLanguage.ja => '現在の中心レベルは $currentLevel で、その前後にウォームアップとストレッチを配置しています。',
+      'Chỉ hiển thị deck đọc $currentLevel theo level học hiện tại của bạn.',
+    AppLanguage.ja => '現在の学習レベルに合わせて、$currentLevel の読解デッキだけを表示します。',
   };
 
   String _availableLabel(AppLanguage language) => switch (language) {

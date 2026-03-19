@@ -88,9 +88,9 @@
         "translationEn": "Non-smoking seats are over there."
       },
       {
-        "sentence": "よろしいでございますか。",
-        "translation": "Có được không ạ? (Lịch sự của いいですか).",
-        "translationEn": "Is it okay?"
+        "sentence": "お時間はまだございますか。",
+        "translation": "Quý khách vẫn còn thời gian chứ ạ?",
+        "translationEn": "Do you still have time?"
       },
       {
         "sentence": "お飲み物は何がございますか。",
@@ -114,13 +114,53 @@
     "examples": [
       {
         "sentence": "荷物をお持ちします。",
-        "translation": "Tôi xin mang hành lý giúp ạ.",
-        "translationEn": "I will carry your luggage."
+        "translation": "Tôi xin mang hành lý giúp quý khách.",
+        "translationEn": "I will carry your luggage for you."
       },
       {
-        "sentence": "私が駅までご案内します。",
-        "translation": "Tôi xin hướng dẫn bạn đến ga.",
+        "sentence": "駅までご案内します。",
+        "translation": "Tôi xin dẫn quý khách đến ga.",
         "translationEn": "I will guide you to the station."
+      },
+      {
+        "sentence": "資料をご説明します。",
+        "translation": "Tôi xin giải thích tài liệu này.",
+        "translationEn": "I will explain the materials."
+      },
+      {
+        "sentence": "スケジュールをお知らせします。",
+        "translation": "Tôi xin thông báo lịch trình.",
+        "translationEn": "I will inform you of the schedule."
+      },
+      {
+        "sentence": "お宅までお送りします。",
+        "translation": "Tôi xin đưa quý khách đến tận nhà.",
+        "translationEn": "I will take you to your home."
+      },
+      {
+        "sentence": "アルバムをお見せします。",
+        "translation": "Tôi xin cho quý khách xem album.",
+        "translationEn": "I will show you the album."
+      },
+      {
+        "sentence": "再来週の予定をご確認します。",
+        "translation": "Tôi xin xác nhận lịch của tuần sau nữa.",
+        "translationEn": "I will confirm the schedule for the week after next."
+      },
+      {
+        "sentence": "記念写真をお撮りします。",
+        "translation": "Tôi xin chụp ảnh lưu niệm cho quý khách.",
+        "translationEn": "I will take a commemorative photo for you."
+      },
+      {
+        "sentence": "先生によろしくお伝えします。",
+        "translation": "Tôi xin gửi lời thăm đến giáo viên.",
+        "translationEn": "I will give my regards to the teacher."
+      },
+      {
+        "sentence": "後でこちらからお電話します。",
+        "translation": "Lát nữa tôi sẽ gọi điện lại từ phía chúng tôi.",
+        "translationEn": "I will call you back later from our side."
       }
     ]
   },
@@ -133,9 +173,49 @@
         "translationEn": "This is the material."
       },
       {
-        "sentence": "こちらが新しいメニューでございます。",
-        "translation": "Đây là thực đơn mới ạ.",
-        "translationEn": "This is the new menu."
+        "sentence": "私は田中でございます。",
+        "translation": "Tôi là Tanaka ạ.",
+        "translationEn": "I am Tanaka."
+      },
+      {
+        "sentence": "ただ今先生は会議中でございます。",
+        "translation": "Hiện giờ giáo viên đang họp ạ.",
+        "translationEn": "The teacher is currently in a meeting."
+      },
+      {
+        "sentence": "次は京都でございます。",
+        "translation": "Điểm tiếp theo là Kyoto ạ.",
+        "translationEn": "The next stop is Kyoto."
+      },
+      {
+        "sentence": "こちらがお客様のお宅でございます。",
+        "translation": "Đây là nhà của quý khách ạ.",
+        "translationEn": "This is the customer’s home."
+      },
+      {
+        "sentence": "半年後の予定でございます。",
+        "translation": "Đó là kế hoạch cho nửa năm sau ạ.",
+        "translationEn": "That is the plan for six months later."
+      },
+      {
+        "sentence": "こちらが最初のページでございます。",
+        "translation": "Đây là trang đầu tiên ạ.",
+        "translationEn": "This is the first page."
+      },
+      {
+        "sentence": "ガイドの山田でございます。",
+        "translation": "Tôi là Yamada, hướng dẫn viên ạ.",
+        "translationEn": "I am Yamada, your guide."
+      },
+      {
+        "sentence": "ご質問がございましたら、お聞きください。",
+        "translation": "Nếu có câu hỏi xin quý khách cứ hỏi ạ.",
+        "translationEn": "If you have any questions, please ask."
+      },
+      {
+        "sentence": "次の放送は再来週でございます。",
+        "translation": "Buổi phát sóng tiếp theo là vào tuần sau nữa ạ.",
+        "translationEn": "The next broadcast will be the week after next."
       }
     ]
   }

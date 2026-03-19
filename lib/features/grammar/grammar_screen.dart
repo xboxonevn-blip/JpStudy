@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
+import 'package:jpstudy/data/utils/grammar_english_notation.dart';
 
 import 'package:jpstudy/features/grammar/grammar_providers.dart';
 import 'package:jpstudy/features/grammar/screens/grammar_practice_screen.dart';
@@ -167,19 +168,37 @@ class GrammarScreen extends ConsumerWidget {
                       const Divider(height: 1),
                   itemBuilder: (context, index) {
                     final point = points[index];
+                    final headline = switch (language) {
+                      AppLanguage.en => resolveEnglishGrammarConnection(
+                        connectionEn: point.connectionEn,
+                        connection: point.connection,
+                        grammarPoint: point.grammarPoint,
+                        titleEn: point.titleEn,
+                        meaningEn: point.meaningEn,
+                      ),
+                      AppLanguage.vi => point.grammarPoint,
+                      AppLanguage.ja => point.grammarPoint,
+                    };
+                    final subtitle = switch (language) {
+                      AppLanguage.en => resolveEnglishGrammarMeaning(
+                        meaningEn: point.meaningEn,
+                        titleEn: point.titleEn,
+                        connectionEn: point.connectionEn,
+                        connection: point.connection,
+                        grammarPoint: point.grammarPoint,
+                      ),
+                      AppLanguage.vi => point.meaningVi ?? point.meaning,
+                      AppLanguage.ja => point.meaning,
+                    };
                     return ListTile(
                       title: Text(
-                        point.grammarPoint,
+                        headline,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
                         ),
                       ),
-                      subtitle: Text(switch (language) {
-                        AppLanguage.en => point.meaningEn ?? point.meaning,
-                        AppLanguage.vi => point.meaningVi ?? point.meaning,
-                        AppLanguage.ja => point.meaning,
-                      }),
+                      subtitle: Text(subtitle),
                       trailing: point.isLearned
                           ? const Icon(Icons.check_circle, color: Colors.green)
                           : Icon(Icons.chevron_right, color: Colors.grey[400]),

@@ -44,7 +44,7 @@ List<PracticeDestination> buildPracticeDestinations({
       title: _jlptCoachTitle(language),
       subtitle: _jlptCoachSubtitle(language),
       icon: Icons.school_rounded,
-      color: const Color(0xFF2563EB),
+      color: const Color(0xFF17324D),
       route: '/jlpt/coach',
     ),
     PracticeDestination(
@@ -75,7 +75,9 @@ List<PracticeDestination> buildPracticeDestinations({
       color: const Color(0xFF7C3AED),
       route: '/practice/recall-sprint',
       badgeCount: dueReviewCount > 0 ? dueReviewCount : null,
-      estimatedMinutes: dueReviewCount > 0 ? (dueReviewCount * 6 / 60).ceil() : 5,
+      estimatedMinutes: dueReviewCount > 0
+          ? (dueReviewCount * 6 / 60).ceil()
+          : 5,
     ),
     PracticeDestination(
       id: 'kanji_dash',
@@ -104,14 +106,6 @@ List<PracticeDestination> buildPracticeDestinations({
       estimatedMinutes: kanjiDue > 0 ? (kanjiDue * 6 / 60).ceil() : null,
     ),
     PracticeDestination(
-      id: 'mock_exam',
-      title: language.practiceExamCardLabel,
-      subtitle: language.practiceExamSubtitle,
-      icon: Icons.quiz_rounded,
-      color: const Color(0xFF14B8A6),
-      route: '/practice/mock-exam',
-    ),
-    PracticeDestination(
       id: 'immersion',
       title: language.practiceImmersionLabel,
       subtitle: language.practiceImmersionSubtitle,
@@ -133,13 +127,7 @@ List<PracticeDestination> buildPracticeDestinations({
     ),
   ];
 
-  final visible = list.where((item) {
-    // Mock exam currently ships for N5/N4 flows; hide from N3 quick panel.
-    if (item.route == '/practice/mock-exam' && level == StudyLevel.n3) {
-      return false;
-    }
-    return true;
-  });
+  final visible = list;
 
   final scored = visible.map((item) {
     var score = 10;
@@ -171,11 +159,6 @@ List<PracticeDestination> buildPracticeDestinations({
       case '/kanji-dash':
         if (dueReviewCount > 0) {
           score += 3;
-        }
-        break;
-      case '/practice/mock-exam':
-        if (dueReviewCount == 0) {
-          score += 2;
         }
         break;
       case '/jlpt/coach':
@@ -260,22 +243,22 @@ bool _isFocusRoute(String route) {
 String _jlptCoachTitle(AppLanguage language) {
   switch (language) {
     case AppLanguage.en:
-      return 'JLPT Coach';
+      return 'JLPT Prep';
     case AppLanguage.vi:
-      return 'Trợ lý JLPT';
+      return 'Ôn thi JLPT';
     case AppLanguage.ja:
-      return 'JLPTã‚³ãƒ¼ãƒ';
+      return 'JLPT試験対策';
   }
 }
 
 String _jlptCoachSubtitle(AppLanguage language) {
   switch (language) {
     case AppLanguage.en:
-      return 'Reading, mock exam, diagnosis, 7-day plan.';
+      return 'Full mock, quick mock, reading drills, diagnosis, 7-day plan.';
     case AppLanguage.vi:
-      return 'Đọc hiểu, mock exam, chẩn đoán, kế hoạch 7 ngày.';
+      return 'Thi thử đầy đủ, kiểm tra nhanh, đọc hiểu, chẩn đoán, kế hoạch 7 ngày.';
     case AppLanguage.ja:
-      return '読解、模試、診断、7日プラン。';
+      return 'フル模試、クイック模試、読解、診断、7日プラン。';
   }
 }
 

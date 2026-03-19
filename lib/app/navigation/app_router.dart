@@ -36,6 +36,7 @@ import 'package:jpstudy/features/practice/screens/recall_sprint_screen.dart';
 import 'package:jpstudy/features/progress/progress_screen.dart';
 import 'package:jpstudy/features/search/search_screen.dart';
 import 'package:jpstudy/features/test/integration/test_mode_integration.dart';
+import 'package:jpstudy/features/test/models/home_mock_exam_launch_args.dart';
 import 'package:jpstudy/features/test/screens/home_mock_exam_screen.dart';
 import 'package:jpstudy/features/test/screens/test_history_screen.dart';
 import 'package:jpstudy/features/vocab/screens/term_review_screen.dart';
@@ -108,7 +109,11 @@ class AppRouter {
               ),
               GoRoute(
                 path: '/practice/mock-exam',
-                builder: (context, state) => const HomeMockExamScreen(),
+                builder: (context, state) => HomeMockExamScreen(
+                  launchArgs: state.extra is HomeMockExamLaunchArgs
+                      ? state.extra as HomeMockExamLaunchArgs
+                      : null,
+                ),
               ),
               GoRoute(
                 path: '/practice/recall-sprint',

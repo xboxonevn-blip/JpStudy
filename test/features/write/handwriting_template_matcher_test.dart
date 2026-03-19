@@ -50,6 +50,20 @@ void main() {
     expect(orderScore, lessThan(0.5));
   });
 
+  test('direction score drops when one stroke is drawn backwards', () {
+    final template = buildTwoStrokeTemplate();
+    final reversedFirst = const [
+      [Offset(10, 90), Offset(10, 10)],
+      [Offset(90, 10), Offset(90, 90)],
+    ];
+    final directionScore = HandwritingTemplateMatcher.templateDirectionScore(
+      strokes: reversedFirst,
+      template: template,
+    );
+
+    expect(directionScore, lessThan(0.75));
+  });
+
   test('template score drops for wrong direction and endpoints', () {
     final template = buildTwoStrokeTemplate();
     final badShape = const [

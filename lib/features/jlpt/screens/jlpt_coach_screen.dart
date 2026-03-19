@@ -18,6 +18,7 @@ import 'package:jpstudy/features/mistakes/repositories/mistake_repository.dart';
 import '../data/jlpt_mock_bank.dart';
 import '../data/jlpt_reading_bank.dart';
 import '../models/jlpt_coach_models.dart';
+import '../models/jlpt_plan_playbook.dart';
 import '../services/jlpt_coach_service.dart';
 
 final jlptPrepOverviewProvider =
@@ -1192,6 +1193,10 @@ class _PlanCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final palette = context.appPalette;
     final accent = _areaColor(context, item.area);
+    final presentation = buildJlptPlanPresentation(
+      language: language,
+      item: item,
+    );
 
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
@@ -1231,6 +1236,26 @@ class _PlanCard extends StatelessWidget {
                   style: TextStyle(color: accent, fontWeight: FontWeight.w900),
                 ),
               ),
+              const SizedBox(width: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  color: palette.elevated,
+                  borderRadius: BorderRadius.circular(999),
+                  border: Border.all(color: accent.withValues(alpha: 0.18)),
+                ),
+                child: Text(
+                  presentation.phaseLabel,
+                  style: TextStyle(
+                    color: palette.ink.withValues(alpha: 0.72),
+                    fontWeight: FontWeight.w800,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
               const Spacer(),
               Text(
                 '${item.minutes}m',
@@ -1243,7 +1268,7 @@ class _PlanCard extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.md),
           Text(
-            _planItemTitle(language, item.area),
+            presentation.title,
             style: TextStyle(
               color: palette.ink,
               fontSize: 18,
@@ -1253,7 +1278,7 @@ class _PlanCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            _planItemBody(language, item.area, item.minutes),
+            presentation.body,
             style: TextStyle(
               color: palette.ink.withValues(alpha: 0.72),
               height: 1.48,
@@ -1262,9 +1287,12 @@ class _PlanCard extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.md),
           OutlinedButton.icon(
-            onPressed: () => context.push(_routeForArea(item.area)),
+            onPressed: () => context.push(
+              presentation.launchTarget.route,
+              extra: presentation.launchTarget.extra,
+            ),
             icon: Icon(_iconForArea(item.area), color: accent),
-            label: Text(_planActionLabel(language)),
+            label: Text(presentation.actionLabel),
           ),
         ],
       ),
@@ -1683,73 +1711,6 @@ String _planDayLabel(AppLanguage language, int dayOffset) => switch (language) {
   AppLanguage.ja => '${dayOffset + 1}日目',
 };
 
-String _planItemTitle(AppLanguage language, JlptSkillArea area) =>
-    switch (area) {
-      JlptSkillArea.vocabulary => switch (language) {
-        AppLanguage.en => 'Tighten the vocab bank',
-        AppLanguage.vi => 'Siết lại bank từ vựng',
-        AppLanguage.ja => '語彙バンクを締め直す',
-      },
-      JlptSkillArea.grammar => switch (language) {
-        AppLanguage.en => 'Repair grammar accuracy',
-        AppLanguage.vi => 'Sửa độ chính xác ngữ pháp',
-        AppLanguage.ja => '文法精度を補強する',
-      },
-      JlptSkillArea.kanji => switch (language) {
-        AppLanguage.en => 'Stabilize kanji recall',
-        AppLanguage.vi => 'Ổn định trí nhớ kanji',
-        AppLanguage.ja => '漢字の想起を安定させる',
-      },
-      JlptSkillArea.reading => switch (language) {
-        AppLanguage.en => 'Stretch reading stamina',
-        AppLanguage.vi => 'Kéo sức bền đọc hiểu',
-        AppLanguage.ja => '読解の持久力を伸ばす',
-      },
-    };
-
-String _planItemBody(AppLanguage language, JlptSkillArea area, int minutes) {
-  switch (area) {
-    case JlptSkillArea.vocabulary:
-      return switch (language) {
-        AppLanguage.en =>
-          'Use about $minutes minutes to run a shorter timed check and re-lock the words that still slip.',
-        AppLanguage.vi =>
-          'Dùng khoảng $minutes phút cho một bài check ngắn có bấm giờ để khóa lại những từ vẫn dễ rơi.',
-        AppLanguage.ja => '$minutes 分ほどの短い時間制チェックで、抜けやすい語彙を締め直します。',
-      };
-    case JlptSkillArea.grammar:
-      return switch (language) {
-        AppLanguage.en =>
-          'Spend $minutes minutes on focused grammar repair so mistakes do not repeat in the next exam block.',
-        AppLanguage.vi =>
-          'Dành $minutes phút để sửa ngữ pháp tập trung, tránh lặp lại lỗi ở block thi tiếp theo.',
-        AppLanguage.ja => '$minutes 分の集中補強で、次の試験ブロックで同じ文法ミスを繰り返さないようにします。',
-      };
-    case JlptSkillArea.kanji:
-      return switch (language) {
-        AppLanguage.en =>
-          'Use $minutes minutes to rewrite, reread, and rebuild confidence around the kanji that fell apart.',
-        AppLanguage.vi =>
-          'Dùng $minutes phút để viết lại, đọc lại và dựng lại sự chắc chắn quanh những kanji đang vỡ.',
-        AppLanguage.ja => '$minutes 分で書き直しと読み直しを行い、崩れた漢字の手応えを戻します。',
-      };
-    case JlptSkillArea.reading:
-      return switch (language) {
-        AppLanguage.en =>
-          'Keep a $minutes-minute reading block with the timer on so comprehension and pace stay calm under pressure.',
-        AppLanguage.vi =>
-          'Giữ một block đọc $minutes phút có bật timer để tốc độ và hiểu bài ổn định hơn khi vào đề.',
-        AppLanguage.ja => '$minutes 分の時間つき読解で、プレッシャー下でも理解と速度を安定させます。',
-      };
-  }
-}
-
-String _planActionLabel(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Open lane',
-  AppLanguage.vi => 'Mở lane',
-  AppLanguage.ja => 'レーンを開く',
-};
-
 String _openLaneLabel(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Open lane',
   AppLanguage.vi => 'Mở lane',
@@ -1784,19 +1745,6 @@ String _areaLabel(AppLanguage language, JlptSkillArea area) => switch (area) {
     AppLanguage.ja => '読解',
   },
 };
-
-String _routeForArea(JlptSkillArea area) {
-  switch (area) {
-    case JlptSkillArea.vocabulary:
-      return '/practice/mock-exam';
-    case JlptSkillArea.grammar:
-      return '/grammar-practice';
-    case JlptSkillArea.kanji:
-      return '/practice/handwriting';
-    case JlptSkillArea.reading:
-      return '/jlpt/reading';
-  }
-}
 
 IconData _iconForArea(JlptSkillArea area) {
   switch (area) {

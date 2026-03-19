@@ -1,222 +1,222 @@
 [
-    {
-        "grammarPoint": "Thể Thông thường (Plain Form)",
-        "examples": [
-            {
-                "sentence": "明日東京へ行く？ うん、行く。",
-                "translation": "Mai đi Tokyo không? Ừ, đi.",
-                "translationEn": "Going to Tokyo tomorrow? Yeah, going."
-            },
-            {
-                "sentence": "毎日忙しい？ うん、忙しい。",
-                "translation": "Mỗi ngày đều bận hả? Ừ, bận.",
-                "translationEn": "Busy every day? Yeah, busy."
-            },
-            {
-                "sentence": "今日暇？ ううん、暇じゃない。",
-                "translation": "Hôm nay rảnh không? Không, không rảnh.",
-                "translationEn": "Free today? No, not free."
-            },
-            {
-                "sentence": "それ、食べる？ ううん、食べない。",
-                "translation": "Cái đó ăn không? Không, không ăn.",
-                "translationEn": "Eat that? No, won't eat."
-            },
-            {
-                "sentence": "昨日、マリアさんに会った？ ううん、会わなかった。",
-                "translation": "Hôm qua gặp Maria không? Không, không gặp.",
-                "translationEn": "Did you meet Maria yesterday? No, didn't meet."
-            },
-            {
-                "sentence": "カレーライス、好き？ うん、好き。",
-                "translation": "Thích cơm cà ri không? Ừ, thích.",
-                "translationEn": "Like curry rice? Yeah, like it."
-            },
-            {
-                "sentence": "今、お金ある？ ううん、ない。",
-                "translation": "Giờ có tiền không? Không, không có.",
-                "translationEn": "Have money now? No, don't."
-            },
-            {
-                "sentence": "明日休み？ うん、休みだよ。",
-                "translation": "Mai nghỉ hả? Ừ, nghỉ đó.",
-                "translationEn": "Day off tomorrow? Yeah, day off."
-            },
-            {
-                "sentence": "お酒、飲む？ ううん、飲まない。",
-                "translation": "Uống rượu không? Không, không uống.",
-                "translationEn": "Drink alcohol? No, won't drink."
-            },
-            {
-                "sentence": "もう昼ごはん食べた？ まだ。",
-                "translation": "Ăn trưa chưa? Chưa.",
-                "translationEn": "Ate lunch already? Not yet."
-            }
-        ]
-    },
-    {
-        "grammarPoint": "Câu hỏi trong thể thông thường",
-        "examples": [
-            {
-                "sentence": "コーヒー、飲む？",
-                "translation": "Uống cà phê không?",
-                "translationEn": "Drink coffee?"
-            },
-            {
-                "sentence": "うん、飲む。",
-                "translation": "Ừ, uống.",
-                "translationEn": "Yeah, drink."
-            },
-            {
-                "sentence": "大阪、行く？",
-                "translation": "Đi Osaka không?",
-                "translationEn": "Go to Osaka?"
-            },
-            {
-                "sentence": "元気？",
-                "translation": "Khỏe không?",
-                "translationEn": "How are you?"
-            },
-            {
-                "sentence": "大丈夫？",
-                "translation": "Ổn không?",
-                "translationEn": "Are you okay?"
-            },
-            {
-                "sentence": "何してるの？",
-                "translation": "Đang làm gì đó?",
-                "translationEn": "What are you doing?"
-            },
-            {
-                "sentence": "映画、見る？",
-                "translation": "Xem phim không?",
-                "translationEn": "Watch a movie?"
-            },
-            {
-                "sentence": "一緒に帰る？",
-                "translation": "Về cùng không?",
-                "translationEn": "Go home together?"
-            },
-            {
-                "sentence": "それ、おいしい？",
-                "translation": "Cái đó ngon không?",
-                "translationEn": "Is that tasty?"
-            },
-            {
-                "sentence": "どこ行くの？",
-                "translation": "Đi đâu đó?",
-                "translationEn": "Where are you going?"
-            }
-        ]
-    },
-    {
-        "grammarPoint": "Bỏ trợ từ trong văn nói",
-        "examples": [
-            {
-                "sentence": "ご飯食べる？",
-                "translation": "Ăn cơm không? (Bỏ o)",
-                "translationEn": "Eat rice?"
-            },
-            {
-                "sentence": "明日、京都行く。",
-                "translation": "Mai đi Kyoto. (Bỏ e)",
-                "translationEn": "Going to Kyoto tomorrow."
-            },
-            {
-                "sentence": "ここ、座っていい？",
-                "translation": "Ngồi đây được không? (Bỏ ni)",
-                "translationEn": "Sit here okay?"
-            },
-            {
-                "sentence": "喉、渇いた。",
-                "translation": "Khát nước. (Bỏ ga)",
-                "translationEn": "Thirsty."
-            },
-            {
-                "sentence": "これ、ください。",
-                "translation": "Cho tôi cái này. (Bỏ o)",
-                "translationEn": "Please give me this."
-            },
-            {
-                "sentence": "私、行く。",
-                "translation": "Tôi đi. (Bỏ wa)",
-                "translationEn": "I go."
-            },
-            {
-                "sentence": "それ、何？",
-                "translation": "Cái đó là gì? (Bỏ wa)",
-                "translationEn": "What is that?"
-            },
-            {
-                "sentence": "今、何時？",
-                "translation": "Giờ mấy giờ? (Bỏ wa)",
-                "translationEn": "What time is it now?"
-            },
-            {
-                "sentence": "自転車、ある？",
-                "translation": "Có xe đạp không? (Bỏ ga)",
-                "translationEn": "Have a bicycle?"
-            },
-            {
-                "sentence": "明日、友達、来る。",
-                "translation": "Mai bạn đến. (Bỏ ga)",
-                "translationEn": "Friend coming tomorrow."
-            }
-        ]
-    },
-    {
-        "grammarPoint": "kedo (Nhưng - Thân mật)",
-        "examples": [
-            {
-                "sentence": "チケットがあるけど、一緒に行かない？",
-                "translation": "Tôi có vé này, đi cùng không?",
-                "translationEn": "I have tickets, won't you go with me?"
-            },
-            {
-                "sentence": "その映画、見たけど、面白くなかった。",
-                "translation": "Phim đó xem rồi nhưng không hay.",
-                "translationEn": "I saw that movie, but it wasn't interesting."
-            },
-            {
-                "sentence": "日本語は難しいけど、面白い。",
-                "translation": "Tiếng Nhật khó nhưng thú vị.",
-                "translationEn": "Japanese is difficult but interesting."
-            },
-            {
-                "sentence": "行きたいけど、時間がない。",
-                "translation": "Muốn đi nhưng không có thời gian.",
-                "translationEn": "I want to go but don't have time."
-            },
-            {
-                "sentence": "高いけど、買う。",
-                "translation": "Đắt nhưng sẽ mua.",
-                "translationEn": "Expensive but I'll buy it."
-            },
-            {
-                "sentence": "雨降ってるけど、大丈夫？",
-                "translation": "Trời đang mưa đó, ổn không?",
-                "translationEn": "It's raining, are you okay?"
-            },
-            {
-                "sentence": "美味しいけど、辛い。",
-                "translation": "Ngon nhưng cay.",
-                "translationEn": "Tasty but spicy."
-            },
-            {
-                "sentence": "約束があるけど、遅れそう。",
-                "translation": "Có hẹn nhưng chắc sẽ muộn.",
-                "translationEn": "I have an appointment but might be late."
-            },
-            {
-                "sentence": "頭痛いけど、薬飲む。",
-                "translation": "Đau đầu nhưng sẽ uống thuốc.",
-                "translationEn": "Head hurts but I'll take medicine."
-            },
-            {
-                "sentence": "眠いけど、勉強する。",
-                "translation": "Buồn ngủ nhưng sẽ học.",
-                "translationEn": "Sleepy but I'll study."
-            }
-        ]
-    }
+  {
+    "grammarPoint": "Thể Thông thường (Plain Form)",
+    "examples": [
+      {
+        "sentence": "明日ビザを取りに行く。",
+        "translation": "Ngày mai tôi đi lấy visa.",
+        "translationEn": "I am going to get my visa tomorrow."
+      },
+      {
+        "sentence": "僕はこのことばを知らない。",
+        "translation": "Tôi không biết từ này.",
+        "translationEn": "I do not know this word."
+      },
+      {
+        "sentence": "君はあの店へ行った。",
+        "translation": "Bạn đã đến cửa hàng đó rồi.",
+        "translationEn": "You went to that shop."
+      },
+      {
+        "sentence": "この町の物価は高い。",
+        "translation": "Giá cả ở thị trấn này cao.",
+        "translationEn": "Prices in this town are high."
+      },
+      {
+        "sentence": "この着物はきれいだ。",
+        "translation": "Bộ kimono này đẹp.",
+        "translationEn": "This kimono is pretty."
+      },
+      {
+        "sentence": "仕事はもう終わった。",
+        "translation": "Công việc đã xong rồi.",
+        "translationEn": "The work already finished."
+      },
+      {
+        "sentence": "今日は電話しない。",
+        "translation": "Hôm nay tôi không gọi điện.",
+        "translationEn": "I am not calling today."
+      },
+      {
+        "sentence": "あっちは静かだ。",
+        "translation": "Đằng kia yên tĩnh.",
+        "translationEn": "It is quiet over there."
+      },
+      {
+        "sentence": "サラリーマンの友達がいる。",
+        "translation": "Tôi có một người bạn làm nhân viên văn phòng.",
+        "translationEn": "I have a salaryman friend."
+      },
+      {
+        "sentence": "そのパーティーは七時からだ。",
+        "translation": "Bữa tiệc đó bắt đầu từ bảy giờ.",
+        "translationEn": "That party starts at seven."
+      }
+    ]
+  },
+  {
+    "grammarPoint": "Câu hỏi trong thể thông thường",
+    "examples": [
+      {
+        "sentence": "これ、要る？",
+        "translation": "Cái này có cần không?",
+        "translationEn": "Do you need this?"
+      },
+      {
+        "sentence": "日本語、わかる？",
+        "translation": "Bạn hiểu tiếng Nhật không?",
+        "translationEn": "Do you understand Japanese?"
+      },
+      {
+        "sentence": "君、電話した？",
+        "translation": "Bạn gọi điện rồi à?",
+        "translationEn": "Did you call?"
+      },
+      {
+        "sentence": "あっちへ行く？",
+        "translation": "Bạn có đi đằng kia không?",
+        "translationEn": "Are you going over there?"
+      },
+      {
+        "sentence": "この着物、きれい？",
+        "translation": "Bộ kimono này đẹp không?",
+        "translationEn": "Is this kimono pretty?"
+      },
+      {
+        "sentence": "ビザ、もう取った？",
+        "translation": "Bạn lấy visa rồi à?",
+        "translationEn": "Did you get your visa already?"
+      },
+      {
+        "sentence": "どっちがいい？",
+        "translation": "Cái nào tốt hơn?",
+        "translationEn": "Which one is better?"
+      },
+      {
+        "sentence": "明日暇？",
+        "translation": "Ngày mai rảnh không?",
+        "translationEn": "Are you free tomorrow?"
+      },
+      {
+        "sentence": "そのことば、知ってる？",
+        "translation": "Bạn biết từ đó không?",
+        "translationEn": "Do you know that word?"
+      },
+      {
+        "sentence": "パーティーに来る？",
+        "translation": "Bạn có đến bữa tiệc không?",
+        "translationEn": "Are you coming to the party?"
+      }
+    ]
+  },
+  {
+    "grammarPoint": "Bỏ trợ từ trong văn nói",
+    "examples": [
+      {
+        "sentence": "駅行く？",
+        "translation": "Đi ga không?",
+        "translationEn": "Are you going to the station?"
+      },
+      {
+        "sentence": "もうご飯食べた？",
+        "translation": "Ăn cơm chưa?",
+        "translationEn": "Did you eat already?"
+      },
+      {
+        "sentence": "先生に電話した？",
+        "translation": "Gọi cho giáo viên chưa?",
+        "translationEn": "Did you call the teacher?"
+      },
+      {
+        "sentence": "この着物着る？",
+        "translation": "Mặc bộ kimono này không?",
+        "translationEn": "Will you wear this kimono?"
+      },
+      {
+        "sentence": "こっち来て。",
+        "translation": "Lại đây.",
+        "translationEn": "Come here."
+      },
+      {
+        "sentence": "あっち座って。",
+        "translation": "Ngồi bên kia đi.",
+        "translationEn": "Sit over there."
+      },
+      {
+        "sentence": "ビザもう取った？",
+        "translation": "Lấy visa rồi à?",
+        "translationEn": "Did you get your visa already?"
+      },
+      {
+        "sentence": "それ直せる？",
+        "translation": "Sửa cái đó được không?",
+        "translationEn": "Can you fix that?"
+      },
+      {
+        "sentence": "友達うち来る？",
+        "translation": "Bạn có đến nhà tôi không?",
+        "translationEn": "Is your friend coming to my house?"
+      },
+      {
+        "sentence": "みんなで映画見る？",
+        "translation": "Mọi người cùng xem phim không?",
+        "translationEn": "Shall we all watch a movie?"
+      }
+    ]
+  },
+  {
+    "grammarPoint": "kedo (Nhưng - Thân mật)",
+    "examples": [
+      {
+        "sentence": "この着物、きれいだけど、高い。",
+        "translation": "Bộ kimono này đẹp nhưng đắt.",
+        "translationEn": "This kimono is pretty, but it is expensive."
+      },
+      {
+        "sentence": "行きたいけど、時間がない。",
+        "translation": "Tôi muốn đi nhưng không có thời gian.",
+        "translationEn": "I want to go, but I do not have time."
+      },
+      {
+        "sentence": "ビザはあるけど、お金がない。",
+        "translation": "Có visa rồi nhưng không có tiền.",
+        "translationEn": "I have a visa, but I do not have money."
+      },
+      {
+        "sentence": "僕はコーヒーが好きだけど、君は？",
+        "translation": "Tôi thích cà phê, còn bạn thì sao?",
+        "translationEn": "I like coffee, but how about you?"
+      },
+      {
+        "sentence": "仕事は終わったけど、もう少し確認しよう。",
+        "translation": "Công việc xong rồi nhưng cùng kiểm tra thêm chút nhé.",
+        "translationEn": "The work is finished, but let us check a bit more."
+      },
+      {
+        "sentence": "こっちの店は安いけど、あっちは高い。",
+        "translation": "Cửa hàng bên này rẻ nhưng bên kia đắt.",
+        "translationEn": "This shop is cheap, but that one is expensive."
+      },
+      {
+        "sentence": "電話したけど、出なかった。",
+        "translation": "Tôi gọi rồi nhưng không ai nghe máy.",
+        "translationEn": "I called, but no one answered."
+      },
+      {
+        "sentence": "サラリーマンだけど、日本語を勉強している。",
+        "translation": "Tôi là nhân viên văn phòng nhưng vẫn đang học tiếng Nhật.",
+        "translationEn": "I am a salaryman, but I am studying Japanese."
+      },
+      {
+        "sentence": "雨だけど、行く？",
+        "translation": "Trời mưa nhưng vẫn đi chứ?",
+        "translationEn": "It is raining, but are you still going?"
+      },
+      {
+        "sentence": "疲れたけど、まだ帰らない。",
+        "translation": "Mệt rồi nhưng tôi vẫn chưa về.",
+        "translationEn": "I am tired, but I am not going home yet."
+      }
+    ]
+  }
 ]

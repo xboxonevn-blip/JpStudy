@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../app/theme/app_spacing.dart';
+import '../../../app/theme/app_theme_palette.dart';
 import '../../../core/app_language.dart';
 import '../models/question.dart';
+import 'question_surface.dart';
 
 /// Fill in the blank question widget
 class FillBlankWidget extends StatefulWidget {
@@ -60,158 +63,158 @@ class _FillBlankWidgetState extends State<FillBlankWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    final accentColor = widget.question.expectsReading == true
+        ? palette.secondary
+        : palette.primary;
+    final borderColor = widget.showResult
+        ? (widget.isCorrect ? palette.success : palette.error)
+        : accentColor;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        // Question card
-        Container(
-          padding: const EdgeInsets.all(24),
-          decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Column(
-            children: [
-              Text(
-                widget.question.targetItem.term,
-                style: const TextStyle(
-                  fontSize: 48,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              if (widget.question.expectsReading != true &&
-                  widget.question.targetItem.hasDisplayReading) ...[
-                const SizedBox(height: 8),
-                Text(
-                  widget.question.targetItem.reading!.trim(),
-                  style: TextStyle(fontSize: 20, color: Colors.grey[600]),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-              const SizedBox(height: 16),
-              Text(
-                widget.question.questionText,
-                style: Theme.of(context).textTheme.titleMedium,
-                textAlign: TextAlign.center,
-              ),
-            ],
+        QuestionPromptCard(
+          label: widget.language.fillBlankLabel,
+          title: widget.question.targetItem.term,
+          subtitle:
+              widget.question.expectsReading != true &&
+                  widget.question.targetItem.hasDisplayReading
+              ? widget.question.targetItem.reading!.trim()
+              : null,
+          prompt: widget.question.questionText,
+          icon: Icons.edit_note_rounded,
+          accentColor: accentColor,
+        ),
+        const SizedBox(height: AppSpacing.lg),
+        Text(
+          widget.language.yourAnswerLabel,
+          style: TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w800,
+            color: palette.ink.withValues(alpha: 0.62),
           ),
         ),
-        const SizedBox(height: 32),
-
-        // Answer input
+        const SizedBox(height: AppSpacing.sm),
         TextField(
           controller: _controller,
           focusNode: _focusNode,
           enabled: !widget.showResult,
           autofocus: true,
           textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 24),
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w700,
+            color: palette.ink,
+          ),
           decoration: InputDecoration(
             hintText: widget.language.typeYourAnswerHint,
-            hintStyle: TextStyle(color: Colors.grey[400]),
+            hintStyle: TextStyle(color: palette.ink.withValues(alpha: 0.34)),
             filled: true,
             fillColor: widget.showResult
                 ? (widget.isCorrect
-                      ? Colors.green.withValues(alpha: 0.1)
-                      : Colors.red.withValues(alpha: 0.1))
-                : Colors.grey.withValues(alpha: 0.1),
+                      ? palette.success.withValues(alpha: 0.08)
+                      : palette.error.withValues(alpha: 0.08))
+                : palette.base,
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.xl,
+              vertical: AppSpacing.lg,
+            ),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+              borderSide: BorderSide(
+                color: borderColor.withValues(alpha: 0.24),
+              ),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
               borderSide: BorderSide(
-                color: Colors.grey.withValues(alpha: 0.3),
+                color: widget.showResult
+                    ? borderColor.withValues(alpha: 0.24)
+                    : palette.outlineSoft,
                 width: 2,
               ),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide(
-                color: Theme.of(context).primaryColor,
-                width: 2,
-              ),
+              borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+              borderSide: BorderSide(color: accentColor, width: 2),
             ),
             suffixIcon: widget.showResult
-                ? Icon(
-                    widget.isCorrect ? Icons.check_circle : Icons.cancel,
-                    color: widget.isCorrect ? Colors.green : Colors.red,
-                    size: 28,
+                ? Padding(
+                    padding: const EdgeInsets.all(AppSpacing.md),
+                    child: Icon(
+                      widget.isCorrect
+                          ? Icons.check_circle_rounded
+                          : Icons.cancel_rounded,
+                      color: widget.isCorrect ? palette.success : palette.error,
+                      size: 26,
+                    ),
                   )
                 : null,
           ),
           onSubmitted: widget.showResult ? null : widget.onSubmit,
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: AppSpacing.md),
 
-        // Hint button
         if (!widget.showResult &&
             widget.allowHint &&
-            widget.question.hint != null)
-          TextButton.icon(
-            onPressed: () {
-              setState(() {
-                _showHint = true;
-              });
-            },
-            icon: const Icon(Icons.lightbulb_outline),
-            label: Text(
-              _showHint
-                  ? widget.language.hintWithValue(widget.question.hint!)
-                  : widget.language.showHintLabel,
+            widget.question.hint != null) ...[
+          Align(
+            alignment: Alignment.centerLeft,
+            child: OutlinedButton.icon(
+              onPressed: _showHint
+                  ? null
+                  : () {
+                      setState(() {
+                        _showHint = true;
+                      });
+                    },
+              icon: Icon(
+                _showHint
+                    ? Icons.lightbulb_rounded
+                    : Icons.lightbulb_outline_rounded,
+              ),
+              label: Text(widget.language.showHintLabel),
             ),
           ),
+          if (_showHint) ...[
+            const SizedBox(height: AppSpacing.md),
+            QuestionInfoCard(
+              label: widget.language.showHintLabel,
+              value: widget.question.hint!,
+              icon: Icons.tips_and_updates_outlined,
+              color: palette.warning,
+            ),
+          ],
+        ],
 
-        // Show correct answer if wrong
         if (widget.showResult &&
             !widget.isCorrect &&
             widget.revealCorrectAnswer) ...[
-          const SizedBox(height: 16),
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.green.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.green, width: 2),
-            ),
-            child: Column(
-              children: [
-                Text(
-                  widget.language.correctAnswerLabel,
-                  style: const TextStyle(fontSize: 14, color: Colors.green),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  widget.question.correctAnswer,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green,
-                  ),
-                ),
-              ],
-            ),
+          const SizedBox(height: AppSpacing.md),
+          QuestionInfoCard(
+            label: widget.language.correctAnswerLabel,
+            value: widget.question.correctAnswer,
+            icon: Icons.check_circle_outline_rounded,
+            color: palette.success,
           ),
         ],
 
-        const SizedBox(height: 24),
+        const SizedBox(height: AppSpacing.lg),
 
-        // Submit button
         if (!widget.showResult)
-          ElevatedButton(
+          FilledButton.icon(
             onPressed: () => widget.onSubmit(_controller.text),
-            style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            child: Text(
+            icon: const Icon(Icons.arrow_forward_rounded),
+            label: Text(
               widget.language.checkAnswerLabel,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
+            ),
+            style: FilledButton.styleFrom(
+              minimumSize: const Size.fromHeight(54),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+              ),
             ),
           ),
       ],

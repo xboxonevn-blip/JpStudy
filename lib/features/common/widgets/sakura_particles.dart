@@ -18,7 +18,7 @@ class SakuraParticles extends StatefulWidget {
 class _SakuraParticlesState extends State<SakuraParticles>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
-  late final List<_Petal> _petals;
+  late List<_Petal> _petals;
 
   @override
   void initState() {

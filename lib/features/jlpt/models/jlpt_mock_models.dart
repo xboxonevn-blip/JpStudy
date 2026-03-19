@@ -8,6 +8,9 @@ class JlptMockQuestion {
     required this.options,
     required this.correctIndex,
     required this.explanation,
+    this.contextTitle,
+    this.contextBody,
+    this.sourceLabel,
   });
 
   final String id;
@@ -16,6 +19,9 @@ class JlptMockQuestion {
   final List<String> options;
   final int correctIndex;
   final String explanation;
+  final String? contextTitle;
+  final String? contextBody;
+  final String? sourceLabel;
 }
 
 class JlptMockSection {

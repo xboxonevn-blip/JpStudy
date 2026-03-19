@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/features/immersion/services/immersion_service.dart';
 import 'package:jpstudy/features/jlpt/data/jlpt_reading_bank.dart';
 import 'package:jpstudy/features/jlpt/screens/jlpt_reading_screen.dart';
@@ -22,7 +24,9 @@ void main() {
       final ids = jlptReadingBank.map((entry) => entry.id).toList();
       expect(ids.toSet().length, ids.length);
 
-      final immersionIds = immersionArticles.map((article) => article.id).toList();
+      final immersionIds = immersionArticles
+          .map((article) => article.id)
+          .toList();
       expect(immersionIds.toSet().length, immersionIds.length);
 
       expect(jlptReadingBank.any((entry) => entry.level == 'N5'), isTrue);
@@ -61,5 +65,35 @@ void main() {
       find.text('Chọn đoạn văn và hoàn thành trong thời gian mục tiêu.'),
       findsOneWidget,
     );
+
+    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('JlptReadingScreen follows the selected JLPT track', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          studyLevelProvider.overrideWith((ref) => StudyLevel.n4),
+        ],
+        child: const MaterialApp(home: JlptReadingScreen()),
+      ),
+    );
+
+    await tester.pump();
+    for (var i = 0; i < 20; i++) {
+      await tester.pump(const Duration(milliseconds: 200));
+      if (find.text('N4 track').evaluate().isNotEmpty) {
+        break;
+      }
+    }
+
+    expect(find.text('N4 track'), findsOneWidget);
+
+    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.pumpAndSettle();
   });
 }

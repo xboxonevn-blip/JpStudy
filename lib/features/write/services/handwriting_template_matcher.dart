@@ -24,21 +24,31 @@ class HandwritingTemplateMatcher {
     for (var i = 0; i < paired; i++) {
       final user = normalizedUser[i];
       final spec = template.strokes[i];
-      final startDistance = _pointDistance(user.start, spec.start.x, spec.start.y);
+      final startDistance = _pointDistance(
+        user.start,
+        spec.start.x,
+        spec.start.y,
+      );
       final endDistance = _pointDistance(user.end, spec.end.x, spec.end.y);
       final startEndScore =
-          1.0 - ((startDistance + endDistance) / (2 * maxDistance)).clamp(0.0, 1.0);
+          1.0 -
+          ((startDistance + endDistance) / (2 * maxDistance)).clamp(0.0, 1.0);
 
-      final userVector =
-          Offset(user.end.dx - user.start.dx, user.end.dy - user.start.dy);
-      final templateVector =
-          Offset(spec.end.x - spec.start.x, spec.end.y - spec.start.y);
+      final userVector = Offset(
+        user.end.dx - user.start.dx,
+        user.end.dy - user.start.dy,
+      );
+      final templateVector = Offset(
+        spec.end.x - spec.start.x,
+        spec.end.y - spec.start.y,
+      );
       final directionScore = _directionSimilarity(userVector, templateVector);
       pairScore += (startEndScore * 0.7) + (directionScore * 0.3);
     }
     pairScore /= paired;
     final countPenalty =
-        1.0 - (strokes.length - expected).abs() / max(1.0, expected.toDouble() + 1.0);
+        1.0 -
+        (strokes.length - expected).abs() / max(1.0, expected.toDouble() + 1.0);
     return (pairScore * 0.85) + (countPenalty.clamp(0.0, 1.0) * 0.15);
   }
 
@@ -61,12 +71,38 @@ class HandwritingTemplateMatcher {
     return total / paired;
   }
 
-  static List<_StrokeEndpoints> _normalizeStrokeEndpoints(List<List<Offset>> strokes) {
+  static double templateDirectionScore({
+    required List<List<Offset>> strokes,
+    required KanjiStrokeTemplate template,
+  }) {
+    if (strokes.isEmpty || template.strokes.isEmpty) return 0;
+    final normalizedUser = _normalizeStrokeEndpoints(strokes);
+    final paired = min(normalizedUser.length, template.strokes.length);
+    if (paired == 0) return 0;
+
+    double total = 0;
+    for (var i = 0; i < paired; i++) {
+      final user = normalizedUser[i];
+      final spec = template.strokes[i];
+      final userVector = Offset(
+        user.end.dx - user.start.dx,
+        user.end.dy - user.start.dy,
+      );
+      final templateVector = Offset(
+        spec.end.x - spec.start.x,
+        spec.end.y - spec.start.y,
+      );
+      total += _directionSimilarity(userVector, templateVector);
+    }
+    return total / paired;
+  }
+
+  static List<_StrokeEndpoints> _normalizeStrokeEndpoints(
+    List<List<Offset>> strokes,
+  ) {
     final meaningful = strokes.where((stroke) => stroke.length > 1).toList();
     if (meaningful.isEmpty) return const [];
-    final points = <Offset>[
-      for (final stroke in meaningful) ...stroke,
-    ];
+    final points = <Offset>[for (final stroke in meaningful) ...stroke];
     final minX = points.map((p) => p.dx).reduce(min);
     final maxX = points.map((p) => p.dx).reduce(max);
     final minY = points.map((p) => p.dy).reduce(min);
@@ -106,10 +142,7 @@ class HandwritingTemplateMatcher {
 }
 
 class _StrokeEndpoints {
-  const _StrokeEndpoints({
-    required this.start,
-    required this.end,
-  });
+  const _StrokeEndpoints({required this.start, required this.end});
 
   final Offset start;
   final Offset end;

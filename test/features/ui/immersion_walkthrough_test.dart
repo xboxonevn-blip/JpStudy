@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/level_provider.dart';
+import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/db/content_database.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
@@ -116,14 +118,37 @@ void main() {
     translation: 'This is a local translation.',
   );
 
+  final n4Article = ImmersionArticle(
+    id: 'local_2',
+    title: 'N4 article',
+    officialLevel: 'N4',
+    source: 'Local',
+    publishedAt: DateTime(2026, 2, 5),
+    paragraphs: repeatedParagraphs,
+  );
+
+  final n3Article = ImmersionArticle(
+    id: 'local_3',
+    title: 'N3 article',
+    officialLevel: 'N3',
+    source: 'Local',
+    publishedAt: DateTime(2026, 2, 6),
+    paragraphs: repeatedParagraphs,
+  );
+
   testWidgets(
-    'Immersion home removes NHK Easy and loads reading bank articles',
+    'Immersion home only shows articles for the selected JLPT level',
     (tester) async {
-      final fakeService = FakeImmersionService(localArticles: [localArticle]);
+      final fakeService = FakeImmersionService(
+        localArticles: [localArticle, n4Article, n3Article],
+      );
 
       await tester.pumpWidget(
         ProviderScope(
-          overrides: [immersionServiceProvider.overrideWithValue(fakeService)],
+          overrides: [
+            immersionServiceProvider.overrideWithValue(fakeService),
+            studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+          ],
           child: const MaterialApp(home: ImmersionHomeScreen()),
         ),
       );
@@ -131,6 +156,8 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('NHK Easy'), findsNothing);
       expect(find.text('Local article', skipOffstage: false), findsWidgets);
+      expect(find.text('N4 article', skipOffstage: false), findsNothing);
+      expect(find.text('N3 article', skipOffstage: false), findsNothing);
     },
   );
 

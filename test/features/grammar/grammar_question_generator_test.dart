@@ -366,81 +366,183 @@ void main() {
       },
     );
 
-    test('skips cloze for full exchange-style grammar prompts', () {
-      const point1 = GrammarPoint(
-        id: 41,
-        lessonId: 3,
-        grammarPoint: 'お国はどちらですか',
-        titleEn: 'Where are you from? (Polite)',
-        meaning: 'Hỏi lịch sự về quê quán',
-        meaningEn: 'Where are you from? (Polite)',
-        meaningVi: 'Hỏi lịch sự về quê quán',
-        connection: 'お国はどちらですか',
-        connectionEn: 'お国はどちらですか',
-        explanation: 'Câu hỏi lịch sự về quốc tịch/quê quán.',
-        explanationEn: 'Polite question about country or hometown.',
-        explanationVi: 'Câu hỏi lịch sự về quốc tịch/quê quán.',
-        jlptLevel: 'N5',
-        isLearned: false,
-      );
-      const point2 = GrammarPoint(
-        id: 42,
-        lessonId: 3,
-        grammarPoint: 'どこ・どちら',
-        titleEn: 'Where / Which way (どこ / どちら)',
-        meaning: 'Hỏi nơi chốn',
-        meaningEn: 'Where / Which way (どこ / どちら)',
-        meaningVi: 'Hỏi nơi chốn',
-        connection: 'N は どこ / どちら ですか',
-        connectionEn: 'N は どこ / どちら ですか',
-        explanation: 'Hỏi nơi chốn.',
-        explanationEn: 'Question words for place or direction.',
-        explanationVi: 'Hỏi nơi chốn.',
-        jlptLevel: 'N5',
-        isLearned: false,
-      );
-      const point3 = GrammarPoint(
-        id: 43,
-        lessonId: 3,
-        grammarPoint: 'こちら・そちら・あちら',
-        titleEn: 'This/That way (Polite Direction)',
-        meaning: 'Chỉ phương hướng lịch sự',
-        meaningEn: 'This/That way (Polite Direction)',
-        meaningVi: 'Chỉ phương hướng lịch sự',
-        connection: 'こちら / そちら / あちら は N です',
-        connectionEn: 'こちら / そちら / あちら は N です',
-        explanation: 'Chỉ phương hướng lịch sự.',
-        explanationEn: 'Polite demonstratives for direction or location.',
-        explanationVi: 'Chỉ phương hướng lịch sự.',
-        jlptLevel: 'N5',
-        isLearned: false,
-      );
+    test(
+      'skips cloze, context, replacement, and transformation drills for full exchange-style grammar prompts',
+      () {
+        const point1 = GrammarPoint(
+          id: 41,
+          lessonId: 3,
+          grammarPoint: 'お国はどちらですか',
+          titleEn: 'Where are you from? (Polite)',
+          meaning: 'Hỏi lịch sự về quê quán',
+          meaningEn: 'Where are you from? (Polite)',
+          meaningVi: 'Hỏi lịch sự về quê quán',
+          connection: 'お国はどちらですか',
+          connectionEn: 'お国はどちらですか',
+          explanation: 'Câu hỏi lịch sự về quốc tịch/quê quán.',
+          explanationEn: 'Polite question about country or hometown.',
+          explanationVi: 'Câu hỏi lịch sự về quốc tịch/quê quán.',
+          jlptLevel: 'N5',
+          isLearned: false,
+        );
+        const point2 = GrammarPoint(
+          id: 42,
+          lessonId: 3,
+          grammarPoint: 'どこ・どちら',
+          titleEn: 'Where / Which way (どこ / どちら)',
+          meaning: 'Hỏi nơi chốn',
+          meaningEn: 'Where / Which way (どこ / どちら)',
+          meaningVi: 'Hỏi nơi chốn',
+          connection: 'N は どこ / どちら ですか',
+          connectionEn: 'N は どこ / どちら ですか',
+          explanation: 'Hỏi nơi chốn.',
+          explanationEn: 'Question words for place or direction.',
+          explanationVi: 'Hỏi nơi chốn.',
+          jlptLevel: 'N5',
+          isLearned: false,
+        );
+        const point3 = GrammarPoint(
+          id: 43,
+          lessonId: 3,
+          grammarPoint: 'こちら・そちら・あちら',
+          titleEn: 'This/That way (Polite Direction)',
+          meaning: 'Chỉ phương hướng lịch sự',
+          meaningEn: 'This/That way (Polite Direction)',
+          meaningVi: 'Chỉ phương hướng lịch sự',
+          connection: 'こちら / そちら / あちら は N です',
+          connectionEn: 'こちら / そちら / あちら は N です',
+          explanation: 'Chỉ phương hướng lịch sự.',
+          explanationEn: 'Polite demonstratives for direction or location.',
+          explanationVi: 'Chỉ phương hướng lịch sự.',
+          jlptLevel: 'N5',
+          isLearned: false,
+        );
 
-      final questions = GrammarQuestionGenerator.generateQuestions(
-        const [
-          (
-            point: point1,
-            examples: [
-              GrammarExample(
-                id: 41,
-                grammarId: 41,
-                japanese: 'お国はどちらですか。…日本です。',
-                translation: 'Where are you from? ...Japan.',
-                translationEn: 'Where are you from? ...Japan.',
-                translationVi: 'Bạn đến từ đâu? ... Nhật Bản.',
-              ),
-            ],
-          ),
-        ],
-        allPoints: const [point1, point2, point3],
-        language: AppLanguage.en,
-      );
+        final questions = GrammarQuestionGenerator.generateQuestions(
+          const [
+            (
+              point: point1,
+              examples: [
+                GrammarExample(
+                  id: 41,
+                  grammarId: 41,
+                  japanese: 'お国はどちらですか。…日本です。',
+                  translation: 'Where are you from? ...Japan.',
+                  translationEn: 'Where are you from? ...Japan.',
+                  translationVi: 'Bạn đến từ đâu? ... Nhật Bản.',
+                ),
+              ],
+            ),
+          ],
+          allPoints: const [point1, point2, point3],
+          language: AppLanguage.en,
+        );
 
-      expect(
-        questions.where((q) => q.type == GrammarQuestionType.cloze),
-        isEmpty,
-      );
-    });
+        expect(
+          questions.where((q) => q.type == GrammarQuestionType.cloze),
+          isEmpty,
+        );
+        expect(
+          questions.where((q) => q.type == GrammarQuestionType.contextChoice),
+          isEmpty,
+        );
+        expect(
+          questions.where((q) => q.type == GrammarQuestionType.errorCorrection),
+          isEmpty,
+        );
+        expect(
+          questions.where((q) => q.type == GrammarQuestionType.errorReason),
+          isEmpty,
+        );
+        expect(
+          questions.where((q) => q.type == GrammarQuestionType.transformation),
+          isEmpty,
+        );
+      },
+    );
+
+    test(
+      'skips replacement drills when only formula-style replacements are available',
+      () {
+        const point1 = GrammarPoint(
+          id: 44,
+          lessonId: 1,
+          grammarPoint: 'です',
+          titleEn: 'Copula (です)',
+          meaning: 'là',
+          meaningEn: 'to be',
+          meaningVi: 'là',
+          connection: 'N は N です',
+          connectionEn: 'N は N です',
+          explanation: 'Câu khẳng định cơ bản.',
+          explanationEn: 'Basic copula sentence.',
+          explanationVi: 'Câu khẳng định cơ bản.',
+          jlptLevel: 'N5',
+          isLearned: false,
+        );
+        const point2 = GrammarPoint(
+          id: 45,
+          lessonId: 1,
+          grammarPoint: '〜は〇〇語で何ですか',
+          titleEn: 'How do you say ... in ...?',
+          meaning: 'Hỏi cách nói bằng ngôn ngữ khác',
+          meaningEn: 'How do you say ... in ...?',
+          meaningVi: 'Hỏi cách nói bằng ngôn ngữ khác',
+          connection: '〜は〇〇語で何ですか',
+          connectionEn: '〜は〇〇語で何ですか',
+          explanation: 'Hỏi cách nói một từ bằng ngôn ngữ khác.',
+          explanationEn: 'Asks how to say something in another language.',
+          explanationVi: 'Hỏi cách nói một từ bằng ngôn ngữ khác.',
+          jlptLevel: 'N5',
+          isLearned: false,
+        );
+        const point3 = GrammarPoint(
+          id: 46,
+          lessonId: 1,
+          grammarPoint: 'N1 は N2 が A',
+          titleEn: 'N1 has A N2',
+          meaning: 'N1 có N2 mang tính chất A',
+          meaningEn: 'N1 has A N2',
+          meaningVi: 'N1 có N2 mang tính chất A',
+          connection: 'N1 は N2 が A',
+          connectionEn: 'N1 は N2 が A',
+          explanation: 'Mô tả đặc điểm.',
+          explanationEn: 'Describes a characteristic.',
+          explanationVi: 'Mô tả đặc điểm.',
+          jlptLevel: 'N5',
+          isLearned: false,
+        );
+
+        final questions = GrammarQuestionGenerator.generateQuestions(
+          const [
+            (
+              point: point1,
+              examples: [
+                GrammarExample(
+                  id: 44,
+                  grammarId: 44,
+                  japanese: 'わたしは学生です。',
+                  translation: 'I am a student.',
+                  translationEn: 'I am a student.',
+                  translationVi: 'Tôi là học sinh.',
+                ),
+              ],
+            ),
+          ],
+          allPoints: const [point1, point2, point3],
+          language: AppLanguage.en,
+        );
+
+        expect(
+          questions.where((q) => q.type == GrammarQuestionType.errorCorrection),
+          isEmpty,
+        );
+        expect(
+          questions.where((q) => q.type == GrammarQuestionType.errorReason),
+          isEmpty,
+        );
+      },
+    );
 
     test(
       'cloze options stay in the same answer family and avoid placeholders',
@@ -867,6 +969,189 @@ void main() {
         expect(contextQuestion.options, isNot(contains('りんごだけ食べます。')));
       },
     );
+
+    test(
+      'skips context choice when English prompt falls back to Japanese example text',
+      () {
+        const point1 = GrammarPoint(
+          id: 77,
+          lessonId: 10,
+          grammarPoint: 'に',
+          titleEn: 'Particle に',
+          meaning: 'trợ từ chỉ đích đến',
+          meaningEn: 'destination marker',
+          meaningVi: 'trợ từ chỉ đích đến',
+          connection: 'N に',
+          connectionEn: 'N に',
+          explanation: 'Chỉ đích đến hoặc thời điểm.',
+          explanationEn: 'Marks destination or time.',
+          explanationVi: 'Chỉ đích đến hoặc thời điểm.',
+          jlptLevel: 'N5',
+          isLearned: false,
+        );
+        const point2 = GrammarPoint(
+          id: 78,
+          lessonId: 10,
+          grammarPoint: 'で',
+          titleEn: 'Particle で',
+          meaning: 'trợ từ chỉ nơi xảy ra hành động',
+          meaningEn: 'location of action',
+          meaningVi: 'trợ từ chỉ nơi xảy ra hành động',
+          connection: 'N で',
+          connectionEn: 'N で',
+          explanation: 'Chỉ nơi hành động diễn ra.',
+          explanationEn: 'Marks where an action takes place.',
+          explanationVi: 'Chỉ nơi hành động diễn ra.',
+          jlptLevel: 'N5',
+          isLearned: false,
+        );
+        const point3 = GrammarPoint(
+          id: 79,
+          lessonId: 10,
+          grammarPoint: 'へ',
+          titleEn: 'Particle へ',
+          meaning: 'trợ từ chỉ hướng',
+          meaningEn: 'direction marker',
+          meaningVi: 'trợ từ chỉ hướng',
+          connection: 'N へ',
+          connectionEn: 'N へ',
+          explanation: 'Chỉ hướng đi.',
+          explanationEn: 'Marks direction.',
+          explanationVi: 'Chỉ hướng đi.',
+          jlptLevel: 'N5',
+          isLearned: false,
+        );
+
+        final questions = GrammarQuestionGenerator.generateQuestions(
+          const [
+            (
+              point: point1,
+              examples: [
+                GrammarExample(
+                  id: 77,
+                  grammarId: 77,
+                  japanese: '学校に行きます。',
+                  translation: '',
+                  translationEn: '',
+                  translationVi: 'Tôi đi đến trường.',
+                ),
+              ],
+            ),
+            (
+              point: point2,
+              examples: [
+                GrammarExample(
+                  id: 78,
+                  grammarId: 78,
+                  japanese: '図書館で勉強します。',
+                  translation: 'I study at the library.',
+                  translationEn: 'I study at the library.',
+                  translationVi: 'Tôi học ở thư viện.',
+                ),
+              ],
+            ),
+            (
+              point: point3,
+              examples: [
+                GrammarExample(
+                  id: 79,
+                  grammarId: 79,
+                  japanese: '東京へ行きます。',
+                  translation: 'I go to Tokyo.',
+                  translationEn: 'I go to Tokyo.',
+                  translationVi: 'Tôi đi đến Tokyo.',
+                ),
+              ],
+            ),
+          ],
+          allPoints: const [point1, point2, point3],
+          language: AppLanguage.en,
+        );
+
+        expect(
+          questions
+              .where((q) => q.point.id == point1.id)
+              .where((q) => q.type == GrammarQuestionType.contextChoice),
+          isEmpty,
+        );
+      },
+    );
+
+    test('transformation skips standalone question examples', () {
+      const point1 = GrammarPoint(
+        id: 80,
+        lessonId: 3,
+        grammarPoint: 'どこ',
+        titleEn: 'Where (どこ)',
+        meaning: 'ở đâu',
+        meaningEn: 'where',
+        meaningVi: 'ở đâu',
+        connection: 'N は どこ ですか',
+        connectionEn: 'N は どこ ですか',
+        explanation: 'Hỏi nơi chốn.',
+        explanationEn: 'Asks about location.',
+        explanationVi: 'Hỏi nơi chốn.',
+        jlptLevel: 'N5',
+        isLearned: false,
+      );
+      const point2 = GrammarPoint(
+        id: 81,
+        lessonId: 3,
+        grammarPoint: 'です',
+        titleEn: 'Copula (です)',
+        meaning: 'là',
+        meaningEn: 'to be',
+        meaningVi: 'là',
+        connection: 'N は N です',
+        connectionEn: 'N は N です',
+        explanation: 'Câu khẳng định cơ bản.',
+        explanationEn: 'Basic copula sentence.',
+        explanationVi: 'Câu khẳng định cơ bản.',
+        jlptLevel: 'N5',
+        isLearned: false,
+      );
+      const point3 = GrammarPoint(
+        id: 82,
+        lessonId: 3,
+        grammarPoint: 'ます',
+        titleEn: 'Polite ending (ます)',
+        meaning: 'đuôi lịch sự',
+        meaningEn: 'polite verb ending',
+        meaningVi: 'đuôi lịch sự',
+        connection: 'V-ます',
+        connectionEn: 'V-ます',
+        explanation: 'Động từ lịch sự.',
+        explanationEn: 'Polite verb ending.',
+        explanationVi: 'Động từ lịch sự.',
+        jlptLevel: 'N5',
+        isLearned: false,
+      );
+
+      final questions = GrammarQuestionGenerator.generateQuestions(
+        const [
+          (
+            point: point1,
+            examples: [
+              GrammarExample(
+                id: 80,
+                grammarId: 80,
+                japanese: 'お手洗いはどこですか。',
+                translation: 'Where is the restroom?',
+                translationEn: 'Where is the restroom?',
+                translationVi: 'Nhà vệ sinh ở đâu?',
+              ),
+            ],
+          ),
+        ],
+        allPoints: const [point1, point2, point3],
+        language: AppLanguage.en,
+      );
+
+      expect(
+        questions.where((q) => q.type == GrammarQuestionType.transformation),
+        isEmpty,
+      );
+    });
   });
 
   group('_tokenizeSentence (via sentenceBuilder questions)', () {

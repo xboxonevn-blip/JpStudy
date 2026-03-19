@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../app/theme/app_spacing.dart';
+import '../../../app/theme/app_theme_palette.dart';
 import '../../../core/app_language.dart';
 import '../models/question.dart';
+import 'question_surface.dart';
 
 /// True/False question widget
 class TrueFalseWidget extends StatelessWidget {
@@ -24,6 +27,7 @@ class TrueFalseWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     final isCorrectTrue =
         revealCorrectAnswer && question.isStatementTrue == true;
     final isCorrectFalse =
@@ -32,140 +36,59 @@ class TrueFalseWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        // Statement
-        Container(
-          padding: const EdgeInsets.all(24),
-          decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Column(
-            children: [
-              const Icon(
-                Icons.help_outline_rounded,
-                size: 48,
-                color: Colors.grey,
-              ),
-              const SizedBox(height: 16),
-              Text(
-                question.questionText,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
+        QuestionPromptCard(
+          label: language.trueFalseChoiceLabel,
+          title: question.targetItem.term,
+          subtitle: question.targetItem.hasDisplayReading
+              ? question.targetItem.reading!.trim()
+              : null,
+          prompt: question.questionText,
+          icon: Icons.rule_rounded,
+          accentColor: palette.accent,
         ),
-        const SizedBox(height: 32),
+        const SizedBox(height: AppSpacing.lg),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final vertical = constraints.maxWidth < 560;
+            final trueTile = QuestionChoiceTile(
+              title: language.trueLabel,
+              leadingIcon: Icons.check_rounded,
+              accentColor: palette.success,
+              isSelected: selectedAnswer == true,
+              isCorrect: showResult && isCorrectTrue,
+              isWrong: showResult && selectedAnswer == true && !isCorrectTrue,
+              onTap: showResult ? null : () => onSelect(true),
+            );
+            final falseTile = QuestionChoiceTile(
+              title: language.falseLabel,
+              leadingIcon: Icons.close_rounded,
+              accentColor: palette.error,
+              isSelected: selectedAnswer == false,
+              isCorrect: showResult && isCorrectFalse,
+              isWrong: showResult && selectedAnswer == false && !isCorrectFalse,
+              onTap: showResult ? null : () => onSelect(false),
+            );
 
-        // True/False buttons
-        Row(
-          children: [
-            Expanded(
-              child: _AnswerButton(
-                label: language.trueLabel,
-                icon: Icons.check_circle_outline,
-                isSelected: selectedAnswer == true,
-                isCorrect: showResult && isCorrectTrue,
-                isWrong: showResult && selectedAnswer == true && !isCorrectTrue,
-                color: Colors.green,
-                onTap: showResult ? null : () => onSelect(true),
-              ),
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: _AnswerButton(
-                label: language.falseLabel,
-                icon: Icons.cancel_outlined,
-                isSelected: selectedAnswer == false,
-                isCorrect: showResult && isCorrectFalse,
-                isWrong:
-                    showResult && selectedAnswer == false && !isCorrectFalse,
-                color: Colors.red,
-                onTap: showResult ? null : () => onSelect(false),
-              ),
-            ),
-          ],
+            if (vertical) {
+              return Column(
+                children: [
+                  trueTile,
+                  const SizedBox(height: AppSpacing.md),
+                  falseTile,
+                ],
+              );
+            }
+
+            return Row(
+              children: [
+                Expanded(child: trueTile),
+                const SizedBox(width: AppSpacing.md),
+                Expanded(child: falseTile),
+              ],
+            );
+          },
         ),
       ],
-    );
-  }
-}
-
-class _AnswerButton extends StatelessWidget {
-  final String label;
-  final IconData icon;
-  final bool isSelected;
-  final bool isCorrect;
-  final bool isWrong;
-  final Color color;
-  final VoidCallback? onTap;
-
-  const _AnswerButton({
-    required this.label,
-    required this.icon,
-    this.isSelected = false,
-    this.isCorrect = false,
-    this.isWrong = false,
-    required this.color,
-    this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    Color backgroundColor;
-    Color borderColor;
-
-    if (isCorrect) {
-      backgroundColor = color.withValues(alpha: 0.3);
-      borderColor = color;
-    } else if (isWrong) {
-      backgroundColor = Colors.grey.withValues(alpha: 0.3);
-      borderColor = Colors.grey;
-    } else if (isSelected) {
-      backgroundColor = color.withValues(alpha: 0.2);
-      borderColor = color;
-    } else {
-      backgroundColor = Colors.grey.withValues(alpha: 0.1);
-      borderColor = Colors.grey.withValues(alpha: 0.3);
-    }
-
-    return Material(
-      color: backgroundColor,
-      borderRadius: BorderRadius.circular(16),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(16),
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 32),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: borderColor, width: 3),
-          ),
-          child: Column(
-            children: [
-              Icon(
-                isCorrect
-                    ? Icons.check_circle
-                    : (isWrong ? Icons.cancel : icon),
-                size: 48,
-                color: isCorrect || isSelected ? color : Colors.grey,
-              ),
-              const SizedBox(height: 12),
-              Text(
-                label,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: isCorrect || isSelected ? color : Colors.grey,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
