@@ -18,8 +18,8 @@ Build a Japanese learning app that combines:
 | :--- | :--- | :--- | :--- |
 | Phase 1 | Learning foundation | Completed | Done |
 | Phase 2 | App structure and UI system | Completed | Done |
-| Phase 3 | Immersion + handwriting quality | In progress | 2026 |
-| Phase 4 | Cloud sync ecosystem | Early | Q2 2026 |
+| Phase 3 | Grammar Practice + Handwriting reliability | In progress | 2026-03 to 2026-04 |
+| Phase 4 | Cloud sync ecosystem | Parked behind core hardening | Later |
 
 ## Phase summary
 
@@ -39,23 +39,25 @@ Completed structural work includes:
 - reusable screens/components for major study flows
 - improved navigation and test coverage for core experiences
 
-### Phase 3 ? Immersion and handwriting
+### Phase 3 ? Core learning quality hardening
 
 Primary goal:
-- improve learning quality through better review context, immersion support, and handwriting accuracy
+- improve learning quality through stronger Grammar Practice sessions and more reliable handwriting evaluation
 
 Completed / active items:
 - Ghost Review captures mistakes with context
 - FSRS is the active scheduling model
-- immersion reader includes progress-oriented UX improvements
+- immersion reader cleanup is largely complete and is now maintenance-only unless new regressions appear
+- Grammar Practice is the current active hardening milestone
 - handwriting uses support assets for stroke templates and stroke vector data
 - N5/N4 handwriting template coverage and promotion workflow are in place
 - content/data layout has been refactored into runtime content, support assets, and archive data
 
 Remaining direction:
+- harden Grammar Practice from canonical grammar ingest through question generation and session UX
 - improve handwriting scoring quality and confidence further
-- continue refining immersion learning loops and review integration
-- keep lesson/data quality audits active for N3/N4/N5
+- keep immersion regression-safe without reopening a large cleanup program
+- keep lesson/data quality audits active for the canonical report set
 
 ### Phase 4 ? Cloud sync ecosystem
 
@@ -71,15 +73,16 @@ Near-term targets:
 
 ### Now
 
-- stabilize the current data/content architecture
-- keep immersion and handwriting flows regression-safe
-- improve data quality, lesson coherence, and grammar coverage where needed
+- keep the repo baseline green with `flutter analyze`, `flutter test`, and `flutter build web`
+- finish Grammar Practice hardening as the active milestone
+- continue the handwriting reliability pass immediately after Grammar Practice
+- keep immersion in maintenance mode and fix only regressions / residual data defects
 
 ### Next
 
-- continue cloud backup/sync groundwork
-- improve exam/review analytics and polish
-- strengthen tooling repeatability for content generation and validation
+- refresh the canonical grammar quality report and keep tooling/report semantics aligned with actual app behavior
+- extend route smoke / regression coverage for the main learning surfaces
+- resume cloud backup/sync groundwork only after the core learning flows are steadier
 
 ### Later
 

@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import '../../../app/theme/app_theme_palette.dart';
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
+import '../../../core/level_provider.dart';
 import '../../../data/db/app_database.dart';
 import '../../../data/models/mistake_context.dart';
 import '../../../data/repositories/grammar_repository.dart';
@@ -407,11 +408,13 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
   Timer? _timer;
   int? _remainingSeconds;
   int _sessionNonce = 0;
+  int _sessionRenderToken = 0;
   late GrammarSessionType _sessionType;
   late GrammarPracticeBlueprint _blueprint;
   late GrammarGoalProfile _goalProfile;
   Set<GrammarQuestionType>? _activeAllowedTypes;
   bool _isWeakDrill = false;
+  String _activeScopeLabel = 'N5';
 
   @override
   void initState() {
@@ -450,6 +453,8 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
 
     final repo = ref.read(grammarRepositoryProvider);
     final ids = overrideIds ?? widget.initialIds;
+    final selectedLevel = ref.read(studyLevelProvider)?.shortLabel ?? 'N5';
+    final constrainToSelectedLevel = ids == null || ids.isEmpty;
     List<GrammarPoint> points;
 
     if (ids != null && ids.isNotEmpty) {
@@ -460,10 +465,17 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
       points = await repo.fetchGhostPoints();
     } else {
       points = await repo.fetchDuePoints();
-      if (points.isEmpty) {
-        points = await repo.fetchPointsByLevel('N5');
-        points = points.take(20).toList(growable: false);
-      }
+    }
+
+    if (constrainToSelectedLevel) {
+      points = _filterPointsToLevel(points, selectedLevel);
+    }
+
+    if (points.isEmpty &&
+        widget.mode != GrammarPracticeMode.ghost &&
+        constrainToSelectedLevel) {
+      points = await repo.fetchPointsByLevel(selectedLevel);
+      points = points.take(20).toList(growable: false);
     }
 
     final details = <({GrammarPoint point, List<GrammarExample> examples})>[];
@@ -474,10 +486,12 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
       }
     }
 
-    final levels = points
-        .map((p) => p.jlptLevel)
-        .toSet()
-        .toList(growable: false);
+    final levels =
+        (constrainToSelectedLevel
+                ? <String>{selectedLevel}
+                : points.map((p) => p.jlptLevel).toSet())
+            .where((level) => level.trim().isNotEmpty)
+            .toList(growable: false);
     final distractorPool = <GrammarPoint>[];
     for (final level in levels) {
       final levelPoints = await repo.fetchPointsByLevel(level);
@@ -507,7 +521,8 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
 
     final targetCount = _effectiveSessionQuestionCount(generated);
     final maxQuestionsPerPoint = _maxQuestionsPerPointForSession(generated);
-    final planner = GrammarSessionPlanner(random: _createSessionRandom());
+    final plannerRandom = _createSessionRandom();
+    final planner = GrammarSessionPlanner(random: plannerRandom);
     final selected = planner.build(
       allQuestions: generated,
       targetCount: targetCount,
@@ -516,12 +531,23 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
       antiRepeatWindow: _blueprint == GrammarPracticeBlueprint.quiz ? 10 : 8,
       maxQuestionsPerPoint: maxQuestionsPerPoint,
     );
+    final prepared = _prepareSessionQuestions(
+      selected,
+      random: _createSessionRandom(),
+    );
+    final nextSessionRenderToken = _sessionRenderToken + 1;
 
     if (!mounted) return;
     setState(() {
       _questionBank.addAll(generated);
-      _questions.addAll(selected);
+      _questions.addAll(prepared);
       _isLoading = false;
+      _sessionRenderToken = nextSessionRenderToken;
+      _activeScopeLabel = _resolveActiveScopeLabel(
+        points,
+        fallbackLevel: selectedLevel,
+        constrainedToSelectedLevel: constrainToSelectedLevel,
+      );
       if (_sessionType == GrammarSessionType.mock && _questions.isNotEmpty) {
         _remainingSeconds = (_questions.length * 25).clamp(180, 1200);
       }
@@ -588,6 +614,75 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
     if (uniquePointCount <= 3) return 3;
     if (uniquePointCount <= 6) return 2;
     return 1;
+  }
+
+  List<GrammarPoint> _filterPointsToLevel(
+    List<GrammarPoint> points,
+    String level,
+  ) {
+    final normalizedLevel = level.trim().toUpperCase();
+    return points
+        .where(
+          (point) => point.jlptLevel.trim().toUpperCase() == normalizedLevel,
+        )
+        .toList(growable: false);
+  }
+
+  String _resolveActiveScopeLabel(
+    List<GrammarPoint> points, {
+    required String fallbackLevel,
+    required bool constrainedToSelectedLevel,
+  }) {
+    if (constrainedToSelectedLevel) {
+      return fallbackLevel;
+    }
+
+    final levels =
+        points
+            .map((point) => point.jlptLevel.trim())
+            .where((level) => level.isNotEmpty)
+            .toSet()
+            .toList(growable: false)
+          ..sort();
+    if (levels.isEmpty) {
+      return fallbackLevel;
+    }
+    if (levels.length == 1) {
+      return levels.first;
+    }
+    return levels.join(' / ');
+  }
+
+  List<GeneratedQuestion> _prepareSessionQuestions(
+    List<GeneratedQuestion> source, {
+    required Random random,
+  }) {
+    return source
+        .map((question) => _questionWithShuffledOptions(question, random))
+        .toList(growable: false);
+  }
+
+  GeneratedQuestion _questionWithShuffledOptions(
+    GeneratedQuestion question,
+    Random random,
+  ) {
+    final options = List<String>.of(question.options);
+    if (options.length > 1) {
+      options.shuffle(random);
+    }
+
+    return GeneratedQuestion(
+      type: question.type,
+      point: question.point,
+      question: question.question,
+      correctAnswer: question.correctAnswer,
+      options: options,
+      familyKey: question.familyKey,
+      stemKey: question.stemKey,
+      answerShapeKey: question.answerShapeKey,
+      explanation: question.explanation,
+      feedback: question.feedback,
+    );
   }
 
   Random _createSessionRandom() {
@@ -1095,6 +1190,7 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
       _sourceInfoLabel(language),
       _scopeInfoLabel(language),
       _goalInfoLabel(language),
+      _modeInfoLabel(language),
     ];
 
     return Container(
@@ -1480,13 +1576,15 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
     switch (question.type) {
       case GrammarQuestionType.sentenceBuilder:
         return SentenceBuilderWidget(
-          key: ValueKey(_currentIndex),
+          key: ValueKey(
+            'grammar_builder_${_sessionRenderToken}_${question.stemKey}_${question.correctAnswer}',
+          ),
           language: language,
           prompt: (question.explanation ?? question.question).trim().isEmpty
               ? question.question
               : (question.explanation ?? question.question),
           correctSentence: question.correctAnswer,
-          shuffledWords: List.of(question.options)..shuffle(),
+          shuffledWords: question.options,
           onCheck: (isCorrect, userSentence) =>
               _onAnswer(isCorrect, userAnswer: userSentence),
           onReset: () {},
@@ -1495,6 +1593,9 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
         );
       case GrammarQuestionType.cloze:
         return ClozeTestWidget(
+          key: ValueKey(
+            'grammar_cloze_${_sessionRenderToken}_${question.stemKey}_${question.correctAnswer}',
+          ),
           language: language,
           sentenceTemplate: question.question,
           options: question.options,
@@ -1511,7 +1612,7 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
       case GrammarQuestionType.errorReason:
         return MultipleChoiceWidget(
           key: ValueKey(
-            'grammar_mc_${question.type.name}_${question.stemKey}_${question.correctAnswer}',
+            'grammar_mc_${_sessionRenderToken}_${question.type.name}_${question.stemKey}_${question.correctAnswer}',
           ),
           language: language,
           questionType: question.type,
@@ -1609,15 +1710,15 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
     return _isWeakDrill
         ? _tr(
             language,
-            en: 'Scope: Weak only',
-            vi: 'Phạm vi: Chỉ phần còn yếu',
-            ja: '範囲: 弱点のみ',
+            en: 'Scope: $_activeScopeLabel weak set',
+            vi: 'Phạm vi: $_activeScopeLabel, chỉ phần yếu',
+            ja: '範囲: $_activeScopeLabel の弱点のみ',
           )
         : _tr(
             language,
-            en: 'Scope: Full mix',
-            vi: 'Phạm vi: Trộn nhiều dạng',
-            ja: '範囲: 全体ミックス',
+            en: 'Scope: $_activeScopeLabel full mix',
+            vi: 'Phạm vi: $_activeScopeLabel, trộn toàn bộ',
+            ja: '範囲: $_activeScopeLabel 全体ミックス',
           );
   }
 
@@ -1643,6 +1744,32 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
           en: 'Goal: Speed first',
           vi: 'Mục tiêu: Ưu tiên tốc độ',
           ja: '目標: 速度優先',
+        );
+    }
+  }
+
+  String _modeInfoLabel(AppLanguage language) {
+    switch (_blueprint) {
+      case GrammarPracticeBlueprint.learn:
+        return _tr(
+          language,
+          en: 'Mode: Learn',
+          vi: 'Chế độ: Học',
+          ja: 'モード: 学習',
+        );
+      case GrammarPracticeBlueprint.drill:
+        return _tr(
+          language,
+          en: 'Mode: Drill',
+          vi: 'Chế độ: Luyện',
+          ja: 'モード: ドリル',
+        );
+      case GrammarPracticeBlueprint.quiz:
+        return _tr(
+          language,
+          en: 'Mode: Quiz',
+          vi: 'Chế độ: Kiểm tra',
+          ja: 'モード: クイズ',
         );
     }
   }

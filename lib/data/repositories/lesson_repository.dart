@@ -13,6 +13,7 @@ import 'package:jpstudy/data/db/content_database.dart'
 import 'package:jpstudy/data/db/content_database_provider.dart';
 import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/models/kanji_item.dart';
+import 'package:jpstudy/data/seeds/grammar_seeder.dart';
 import 'package:jpstudy/data/utils/grammar_english_notation.dart';
 
 final lessonRepositoryProvider = Provider<LessonRepository>((ref) {
@@ -1129,8 +1130,7 @@ class LessonRepository {
     // + seedGrammarIfEmpty) from racing on first launch.
     final prefs = await SharedPreferences.getInstance();
     final seededVersion = prefs.getInt('grammar_data_version') ?? 0;
-    // 7 = GrammarSeeder.kGrammarDataVersion — keep in sync when bumping
-    if (seededVersion >= 7) {
+    if (seededVersion >= GrammarSeeder.kGrammarDataVersion) {
       // Data is fresh from the seeder; only do a lightweight insert if the
       // lesson has no rows at all (brand new install mid-seeder-run edge case).
       final count =

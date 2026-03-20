@@ -21,22 +21,10 @@
         "meaningEn": ""
       },
       {
-        "surface": "どう",
-        "reading": "",
-        "meaningVi": "sao/thế nào",
-        "meaningEn": "how"
-      },
-      {
-        "surface": "しました",
-        "reading": "",
-        "meaningVi": "bị làm sao",
-        "meaningEn": "what happened"
-      },
-      {
-        "surface": "か",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
+        "surface": "どうしましたか",
+        "reading": "どうしましたか",
+        "meaningVi": "bị làm sao vậy",
+        "meaningEn": "what seems to be the problem?"
       },
       {
         "surface": "。",
@@ -66,39 +54,27 @@
       },
       {
         "surface": "から",
-        "reading": "",
+        "reading": "から",
         "meaningVi": "từ",
         "meaningEn": "from"
       },
       {
-        "surface": "お",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
-      },
-      {
-        "surface": "腹",
-        "reading": "なか",
+        "surface": "お腹",
+        "reading": "おなか",
         "meaningVi": "bụng",
         "meaningEn": "stomach"
       },
       {
         "surface": "が",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
+        "reading": "が",
+        "meaningVi": "chủ ngữ",
+        "meaningEn": "subject marker"
       },
       {
-        "surface": "痛",
-        "reading": "いた",
-        "meaningVi": "đau",
-        "meaningEn": "pain"
-      },
-      {
-        "surface": "くて",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
+        "surface": "痛くて",
+        "reading": "いたくて",
+        "meaningVi": "đau và",
+        "meaningEn": "hurt and"
       },
       {
         "surface": "、",
@@ -114,15 +90,15 @@
       },
       {
         "surface": "も",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
+        "reading": "も",
+        "meaningVi": "cũng",
+        "meaningEn": "also"
       },
       {
         "surface": "あるんです",
-        "reading": "",
-        "meaningVi": "có (giải thích)",
-        "meaningEn": "have (explanatory)"
+        "reading": "あるんです",
+        "meaningVi": "có nữa đấy / là đang có",
+        "meaningEn": "I also have it / there is (explanatory tone)"
       },
       {
         "surface": "。",
@@ -146,9 +122,9 @@
       },
       {
         "surface": "そうですか",
-        "reading": "",
+        "reading": "そうですか",
         "meaningVi": "vậy à",
-        "meaningEn": "is that so"
+        "meaningEn": "I see"
       },
       {
         "surface": "。",
@@ -158,21 +134,15 @@
       },
       {
         "surface": "ちょっと",
-        "reading": "",
+        "reading": "ちょっと",
         "meaningVi": "một chút",
         "meaningEn": "a little"
       },
       {
-        "surface": "拝見",
-        "reading": "はいけん",
-        "meaningVi": "xem (khiêm nhường ngữ)",
-        "meaningEn": "look (humble)"
-      },
-      {
-        "surface": "します",
-        "reading": "",
-        "meaningVi": "làm",
-        "meaningEn": "do"
+        "surface": "拝見します",
+        "reading": "はいけんします",
+        "meaningVi": "để tôi xem một chút",
+        "meaningEn": "let me take a look"
       },
       {
         "surface": "。",
@@ -188,27 +158,15 @@
       },
       {
         "surface": "を",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
+        "reading": "を",
+        "meaningVi": "tân ngữ",
+        "meaningEn": "object marker"
       },
       {
-        "surface": "開",
-        "reading": "あ",
-        "meaningVi": "mở",
-        "meaningEn": "open"
-      },
-      {
-        "surface": "けて",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
-      },
-      {
-        "surface": "ください",
-        "reading": "",
-        "meaningVi": "hãy",
-        "meaningEn": "please"
+        "surface": "開けてください",
+        "reading": "あけてください",
+        "meaningVi": "hãy mở ra",
+        "meaningEn": "please open"
       },
       {
         "surface": "。",
@@ -219,16 +177,10 @@
     ],
     [
       {
-        "surface": "風邪",
-        "reading": "かぜ",
-        "meaningVi": "cảm",
-        "meaningEn": "cold"
-      },
-      {
-        "surface": "ですね",
-        "reading": "",
-        "meaningVi": "nhỉ/đấy",
-        "meaningEn": "is it"
+        "surface": "風邪ですね",
+        "reading": "かぜですね",
+        "meaningVi": "có vẻ là cảm rồi",
+        "meaningEn": "it looks like a cold"
       },
       {
         "surface": "。",
@@ -244,31 +196,19 @@
       },
       {
         "surface": "を",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
+        "reading": "を",
+        "meaningVi": "tân ngữ",
+        "meaningEn": "object marker"
       },
       {
-        "surface": "出",
-        "reading": "だ",
-        "meaningVi": "kê/đưa ra",
-        "meaningEn": "prescribe"
-      },
-      {
-        "surface": "して",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
-      },
-      {
-        "surface": "おきます",
-        "reading": "",
-        "meaningVi": "làm sẵn",
-        "meaningEn": "in advance"
+        "surface": "出しておきます",
+        "reading": "だしておきます",
+        "meaningVi": "sẽ kê sẵn",
+        "meaningEn": "will prescribe in advance"
       },
       {
         "surface": "から",
-        "reading": "",
+        "reading": "から",
         "meaningVi": "vì/nên",
         "meaningEn": "so"
       },
@@ -286,27 +226,15 @@
       },
       {
         "surface": "に",
-        "reading": "",
+        "reading": "に",
         "meaningVi": "vào",
         "meaningEn": "in"
       },
       {
-        "surface": "飲",
-        "reading": "の",
-        "meaningVi": "uống",
-        "meaningEn": "drink"
-      },
-      {
-        "surface": "んで",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
-      },
-      {
-        "surface": "ください",
-        "reading": "",
-        "meaningVi": "hãy",
-        "meaningEn": "please"
+        "surface": "飲んでください",
+        "reading": "のんでください",
+        "meaningVi": "hãy uống",
+        "meaningEn": "please take it"
       },
       {
         "surface": "。",
@@ -324,69 +252,27 @@
       },
       {
         "surface": "は",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
+        "reading": "は",
+        "meaningVi": "thì/về",
+        "meaningEn": "topic marker"
       },
       {
-        "surface": "お",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
-      },
-      {
-        "surface": "風呂",
-        "reading": "ふろ",
+        "surface": "お風呂",
+        "reading": "おふろ",
         "meaningVi": "bồn tắm",
         "meaningEn": "bath"
       },
       {
         "surface": "に",
-        "reading": "",
+        "reading": "に",
         "meaningVi": "vào",
         "meaningEn": "in"
       },
       {
-        "surface": "入",
-        "reading": "はい",
-        "meaningVi": "vào",
-        "meaningEn": "enter"
-      },
-      {
-        "surface": "ら",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
-      },
-      {
-        "surface": "ない",
-        "reading": "",
-        "meaningVi": "không",
-        "meaningEn": "not"
-      },
-      {
-        "surface": "ほう",
-        "reading": "",
-        "meaningVi": "nên/phía",
-        "meaningEn": "should/side"
-      },
-      {
-        "surface": "が",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
-      },
-      {
-        "surface": "いい",
-        "reading": "",
-        "meaningVi": "tốt",
-        "meaningEn": "good"
-      },
-      {
-        "surface": "ですよ",
-        "reading": "",
-        "meaningVi": "đấy",
-        "meaningEn": "you know"
+        "surface": "入らないほうがいいですよ",
+        "reading": "はいらないほうがいいですよ",
+        "meaningVi": "hôm nay tốt hơn là đừng tắm / ngâm bồn",
+        "meaningEn": "you'd better not take a bath today"
       },
       {
         "surface": "。",
@@ -410,7 +296,7 @@
       },
       {
         "surface": "わかりました",
-        "reading": "",
+        "reading": "わかりました",
         "meaningVi": "đã hiểu",
         "meaningEn": "understood"
       },
@@ -422,7 +308,7 @@
       },
       {
         "surface": "ありがとうございました",
-        "reading": "",
+        "reading": "ありがとうございました",
         "meaningVi": "cảm ơn",
         "meaningEn": "thank you"
       },

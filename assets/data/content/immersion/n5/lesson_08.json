@@ -10,7 +10,7 @@
     [
       {
         "surface": "いらっしゃいませ",
-        "reading": "",
+        "reading": "いらっしゃいませ",
         "meaningVi": "kính chào quý khách",
         "meaningEn": "welcome"
       },
@@ -23,28 +23,10 @@
     ],
     [
       {
-        "surface": "何",
-        "reading": "なに",
-        "meaningVi": "cái gì",
-        "meaningEn": "what"
-      },
-      {
-        "surface": "名",
-        "reading": "めい",
-        "meaningVi": "người (kính ngữ)",
-        "meaningEn": "people"
-      },
-      {
-        "surface": "様",
-        "reading": "さま",
-        "meaningVi": "quý khách",
-        "meaningEn": "honific suffix"
-      },
-      {
-        "surface": "ですか",
-        "reading": "",
-        "meaningVi": "là",
-        "meaningEn": "is it?"
+        "surface": "何名様ですか",
+        "reading": "なんめいさまですか",
+        "meaningVi": "mấy người ạ",
+        "meaningEn": "how many people?"
       },
       {
         "surface": "。",
@@ -55,16 +37,10 @@
     ],
     [
       {
-        "surface": "２人",
-        "reading": "ふたり",
-        "meaningVi": "2 người",
-        "meaningEn": "2 people"
-      },
-      {
-        "surface": "です",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
+        "surface": "２人です",
+        "reading": "ふたりです",
+        "meaningVi": "2 người ạ",
+        "meaningEn": "two people"
       },
       {
         "surface": "。",
@@ -75,22 +51,10 @@
     ],
     [
       {
-        "surface": "こちら",
-        "reading": "",
-        "meaningVi": "đằng này/chỗ này",
-        "meaningEn": "this way"
-      },
-      {
-        "surface": "へ",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
-      },
-      {
-        "surface": "どうぞ",
-        "reading": "",
-        "meaningVi": "xin mời",
-        "meaningEn": "please"
+        "surface": "こちらへどうぞ",
+        "reading": "こちらへどうぞ",
+        "meaningVi": "xin mời đi lối này",
+        "meaningEn": "this way, please"
       },
       {
         "surface": "。",
@@ -108,15 +72,15 @@
       },
       {
         "surface": "を",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
+        "reading": "を",
+        "meaningVi": "tân ngữ",
+        "meaningEn": "object marker"
       },
       {
         "surface": "お願いします",
         "reading": "おねがいします",
-        "meaningVi": "xin vui lòng cho tôi",
-        "meaningEn": "please"
+        "meaningVi": "cho tôi xin với",
+        "meaningEn": "please / I'd like one"
       },
       {
         "surface": "。",
@@ -127,28 +91,10 @@
     ],
     [
       {
-        "surface": "これ",
-        "reading": "",
-        "meaningVi": "cái này",
-        "meaningEn": "this"
-      },
-      {
-        "surface": "は",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
-      },
-      {
-        "surface": "何",
-        "reading": "なん",
-        "meaningVi": "cái gì",
-        "meaningEn": "what"
-      },
-      {
-        "surface": "ですか",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
+        "surface": "これは何ですか",
+        "reading": "これはなんですか",
+        "meaningVi": "cái này là món gì vậy",
+        "meaningEn": "what is this?"
       },
       {
         "surface": "。",
@@ -159,28 +105,10 @@
     ],
     [
       {
-        "surface": "それ",
-        "reading": "",
-        "meaningVi": "cái đó",
-        "meaningEn": "that"
-      },
-      {
-        "surface": "は",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
-      },
-      {
-        "surface": "天ぷら",
-        "reading": "てんぷら",
-        "meaningVi": "Tempura (món chiên)",
-        "meaningEn": "Tempura"
-      },
-      {
-        "surface": "です",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
+        "surface": "それは天ぷらです",
+        "reading": "それはてんぷらです",
+        "meaningVi": "đó là món tempura",
+        "meaningEn": "that's tempura"
       },
       {
         "surface": "。",
@@ -192,7 +120,7 @@
     [
       {
         "surface": "じゃ",
-        "reading": "",
+        "reading": "じゃ",
         "meaningVi": "vậy thì",
         "meaningEn": "then"
       },
@@ -203,22 +131,10 @@
         "meaningEn": ""
       },
       {
-        "surface": "これ",
-        "reading": "",
-        "meaningVi": "cái này",
-        "meaningEn": "this"
-      },
-      {
-        "surface": "を",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
-      },
-      {
-        "surface": "ください",
-        "reading": "",
-        "meaningVi": "cho tôi",
-        "meaningEn": "please give me"
+        "surface": "これをください",
+        "reading": "これをください",
+        "meaningVi": "cho tôi món này",
+        "meaningEn": "I'll have this, please"
       },
       {
         "surface": "。",

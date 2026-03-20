@@ -271,6 +271,102 @@ String normalizeGrammarStructureEn(String? raw) {
   return value.replaceAll(RegExp(r'\s{2,}'), ' ').trim();
 }
 
+String resolveCanonicalGrammarPointSource({
+  String? grammarPoint,
+  String? structure,
+  String? title,
+  String? structureEn,
+  String? titleEn,
+}) {
+  final japaneseFirstCandidates = <String>[
+    _cleanCanonicalGrammarCandidate(grammarPoint),
+    _cleanCanonicalGrammarCandidate(structure),
+    _cleanCanonicalGrammarCandidate(title),
+  ];
+
+  for (final candidate in japaneseFirstCandidates) {
+    if (candidate.isEmpty) continue;
+    if (containsVietnameseGrammarText(candidate)) continue;
+    if (_hasJapaneseOrGrammarPlaceholder(candidate)) {
+      return candidate;
+    }
+  }
+
+  for (final candidate in japaneseFirstCandidates) {
+    if (candidate.isEmpty) continue;
+    if (!containsVietnameseGrammarText(candidate)) {
+      return candidate;
+    }
+  }
+
+  final englishFallbacks = <String>[
+    normalizeGrammarStructureEn(structureEn),
+    normalizeGrammarTitleEn(titleEn),
+  ];
+  for (final candidate in englishFallbacks) {
+    if (candidate.isEmpty) continue;
+    if (!containsVietnameseGrammarText(candidate)) {
+      return candidate;
+    }
+  }
+
+  final rawFallbacks = <String>[
+    (grammarPoint ?? '').trim(),
+    (structure ?? '').trim(),
+    (title ?? '').trim(),
+  ];
+  for (final candidate in rawFallbacks) {
+    if (candidate.isNotEmpty) {
+      return candidate;
+    }
+  }
+
+  return '';
+}
+
+String stripNonCanonicalGrammarNotes(String? raw) {
+  var value = (raw ?? '').trim();
+  if (value.isEmpty) {
+    return value;
+  }
+
+  value = value.replaceAllMapped(RegExp(r'[（(]([^()（）]*)[)）]'), (match) {
+    final inner = (match.group(1) ?? '').trim();
+    if (inner.isEmpty) {
+      return '';
+    }
+    if (_containsLatin(inner) || containsVietnameseGrammarText(inner)) {
+      return '';
+    }
+    return match.group(0) ?? '';
+  });
+
+  const replacements = <String, String>{
+    'Số lượng từ': '数量詞',
+    'số lượng từ': '数量詞',
+    '（数量詞）': '',
+    '(数量詞)': '',
+    '（Only）': '',
+    '(Only)': '',
+    '（Tồn tại）': '',
+    '(Tồn tại)': '',
+    '（Vân vân）': '',
+    '(Vân vân)': '',
+  };
+  replacements.forEach((from, to) {
+    value = value.replaceAll(from, to);
+  });
+
+  value = value
+      .replaceAllMapped(RegExp(r'\s*/\s*'), (_) => ' / ')
+      .replaceAllMapped(RegExp(r'\s*,\s*'), (_) => ', ')
+      .replaceAllMapped(RegExp(r'\s*\+\s*'), (_) => ' + ')
+      .replaceAll(RegExp(r'\s{2,}'), ' ')
+      .trim();
+
+  return value;
+}
+
 final RegExp _vietnameseGrammarTextPattern = RegExp(
   r'[ăâđêôơưĂÂĐÊÔƠƯáàảãạấầẩẫậắằẳẵặéèẻẽẹếềểễệ'
   r'íìỉĩịóòỏõọốồổỗộớờởỡợúùủũụứừửữựýỳỷỹỵ]',
@@ -310,6 +406,19 @@ bool containsVietnameseGrammarText(String? raw) {
 
   final lowered = value.toLowerCase();
   return _vietnameseGrammarKeywords.any(lowered.contains);
+}
+
+bool _containsLatin(String value) => RegExp(r'[A-Za-z]').hasMatch(value);
+
+bool _hasJapaneseOrGrammarPlaceholder(String value) {
+  return RegExp(
+    r'[ぁ-ゖァ-ヶ一-龯々ー]|(^|[^A-Za-z])(N\d*|V\d*|A\d*|S\d*)(?=$|[^A-Za-z])',
+  ).hasMatch(value);
+}
+
+String _cleanCanonicalGrammarCandidate(String? raw) {
+  final value = stripNonCanonicalGrammarNotes(raw);
+  return value.replaceAll(RegExp(r'\s{2,}'), ' ').trim();
 }
 
 String resolveEnglishGrammarLabel({

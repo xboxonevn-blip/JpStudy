@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/utils/japanese_text.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/common/widgets/japanese_background.dart';
 
@@ -979,7 +980,10 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
                             ),
                             subtitle: Text(
                               [
-                                if (token.reading?.isNotEmpty == true)
+                                if (shouldShowReading(
+                                  term: token.surface,
+                                  reading: token.reading,
+                                ))
                                   token.reading!,
                                 if (meaning.isNotEmpty) meaning,
                               ].join(' | '),
@@ -1369,7 +1373,10 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
                   fontWeight: FontWeight.w800,
                 ),
               ),
-              if (token.reading != null && token.reading!.isNotEmpty) ...[
+              if (shouldShowReading(
+                term: token.surface,
+                reading: token.reading,
+              )) ...[
                 const SizedBox(height: 4),
                 Text(
                   token.reading!,
@@ -1690,8 +1697,7 @@ class _TokenChip extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (showFurigana &&
-              token.reading != null &&
-              token.reading!.isNotEmpty)
+              shouldShowReading(term: token.surface, reading: token.reading))
             Text(
               token.reading!,
               style: TextStyle(

@@ -160,10 +160,28 @@ class HandwritingEvaluator {
     final templateGatePass =
         !profile.requiresTemplateGate ||
         templateScore >= profile.minTemplateScore;
+    final simpleTemplateGatePass = _passesSimpleTemplateGate(
+      showGuide: showGuide,
+      tier: tier,
+      template: template,
+      templateScore: templateScore,
+    );
     final directionGatePass =
         !profile.requiresDirectionGate ||
         directionScore >= profile.minDirectionScore;
     final guidedNearCorrectPass = _passesGuidedNearCorrectOverride(
+      showGuide: showGuide,
+      tier: tier,
+      profile: profile,
+      template: template,
+      totalScore: totalScore,
+      strokeScore: strokeScore,
+      shapeScore: shapeScore,
+      orderScore: orderScore,
+      templateScore: templateScore,
+      directionScore: directionScore,
+    );
+    final enclosureNearCorrectPass = _passesUnguidedEnclosureOverride(
       showGuide: showGuide,
       tier: tier,
       profile: profile,
@@ -181,8 +199,10 @@ class HandwritingEvaluator {
             shapeScore >= profile.minShapeScore &&
             orderScore >= profile.minOrderScore &&
             templateGatePass &&
+            simpleTemplateGatePass &&
             directionGatePass) ||
-        guidedNearCorrectPass;
+        guidedNearCorrectPass ||
+        enclosureNearCorrectPass;
 
     return HandwritingEvaluationResult(
       expectedStrokes: expectedStrokes,
@@ -394,13 +414,31 @@ class HandwritingEvaluator {
     required Size canvasSize,
     required KanjiStrokeTemplate? template,
   }) {
-    if (template != null &&
-        (template.isHighConfidence || template.isMediumConfidence)) {
-      return HandwritingTemplateMatcher.templateOrderScore(
+    if (template != null) {
+      final templateOrderScore = HandwritingTemplateMatcher.templateOrderScore(
         strokes: strokes,
         template: template,
       );
+      if (template.isHighConfidence || template.isMediumConfidence) {
+        return templateOrderScore;
+      }
+
+      final heuristicOrderScore = _heuristicOrderScore(
+        strokes,
+        canvasSize: canvasSize,
+      );
+      return ((templateOrderScore * 0.72) + (heuristicOrderScore * 0.28)).clamp(
+        0.0,
+        1.0,
+      );
     }
+    return _heuristicOrderScore(strokes, canvasSize: canvasSize);
+  }
+
+  static double _heuristicOrderScore(
+    List<List<Offset>> strokes, {
+    required Size canvasSize,
+  }) {
     if (strokes.length <= 1) return 1;
     final starts = strokes.map((stroke) => stroke.first).toList();
     final yThreshold = max(8.0, canvasSize.height * 0.04);
@@ -448,7 +486,7 @@ class HandwritingEvaluator {
 
     final strokeComplexity = ((template.strokes.length - 4).clamp(0, 12) / 12)
         .toDouble();
-    final complexityTuned = switch (tier) {
+    var tuned = switch (tier) {
       HandwritingQualityTier.manual => profile.copyWith(
         requiredScore: profile.requiredScore + (0.02 * strokeComplexity),
         minTemplateScore: profile.minTemplateScore + (0.03 * strokeComplexity),
@@ -467,19 +505,41 @@ class HandwritingEvaluator {
       HandwritingQualityTier.none => profile,
     };
 
+    final simpleStrokeTemplate = template.strokes.length <= 2;
+    if (simpleStrokeTemplate) {
+      tuned = switch (tier) {
+        HandwritingQualityTier.manual => tuned.copyWith(
+          requiredScore: tuned.requiredScore + 0.02,
+          minOrderScore: tuned.minOrderScore + 0.02,
+          minTemplateScore: tuned.minTemplateScore + 0.05,
+          minDirectionScore: tuned.minDirectionScore + 0.02,
+        ),
+        HandwritingQualityTier.curated => tuned.copyWith(
+          requiredScore: tuned.requiredScore + 0.02,
+          minOrderScore: tuned.minOrderScore + 0.02,
+          minTemplateScore: tuned.minTemplateScore + 0.04,
+          minDirectionScore: tuned.minDirectionScore + 0.02,
+        ),
+        HandwritingQualityTier.generated => tuned.copyWith(
+          requiredScore: tuned.requiredScore + 0.01,
+          minOrderScore: tuned.minOrderScore + 0.01,
+          minTemplateScore: tuned.minTemplateScore + 0.03,
+          minDirectionScore: tuned.minDirectionScore + 0.01,
+        ),
+        HandwritingQualityTier.none => tuned,
+      };
+    }
+
     final override = _characterOverrides[template.character];
     if (override == null) {
-      return complexityTuned;
+      return tuned;
     }
-    return complexityTuned.copyWith(
-      requiredScore:
-          complexityTuned.requiredScore + override.requiredScoreDelta,
-      minOrderScore:
-          complexityTuned.minOrderScore + override.minOrderScoreDelta,
-      minTemplateScore:
-          complexityTuned.minTemplateScore + override.minTemplateScoreDelta,
+    return tuned.copyWith(
+      requiredScore: tuned.requiredScore + override.requiredScoreDelta,
+      minOrderScore: tuned.minOrderScore + override.minOrderScoreDelta,
+      minTemplateScore: tuned.minTemplateScore + override.minTemplateScoreDelta,
       minDirectionScore:
-          complexityTuned.minDirectionScore + override.minDirectionScoreDelta,
+          tuned.minDirectionScore + override.minDirectionScoreDelta,
     );
   }
 
@@ -518,6 +578,58 @@ class HandwritingEvaluator {
         orderScore >= max(minOrderFloor, profile.minOrderScore - 0.10) &&
         templateScore >= max(0.44, profile.minTemplateScore - templateSlack) &&
         directionScore >= max(0.58, profile.minDirectionScore - directionSlack);
+  }
+
+  static bool _passesUnguidedEnclosureOverride({
+    required bool showGuide,
+    required HandwritingQualityTier tier,
+    required _TierProfile profile,
+    required KanjiStrokeTemplate? template,
+    required double totalScore,
+    required double strokeScore,
+    required double shapeScore,
+    required double orderScore,
+    required double templateScore,
+    required double directionScore,
+  }) {
+    if (showGuide || template == null) {
+      return false;
+    }
+    if (!_guidedEnclosureCharacters.contains(template.character)) {
+      return false;
+    }
+    if (tier != HandwritingQualityTier.manual &&
+        tier != HandwritingQualityTier.curated) {
+      return false;
+    }
+
+    return totalScore >= max(0.0, profile.requiredScore - 0.01) &&
+        strokeScore >= max(0.56, profile.minStrokeScore - 0.02) &&
+        shapeScore >= max(0.54, profile.minShapeScore - 0.08) &&
+        orderScore >= max(0.46, profile.minOrderScore - 0.24) &&
+        templateScore >= max(0.52, profile.minTemplateScore - 0.08) &&
+        directionScore >= max(0.62, profile.minDirectionScore - 0.06);
+  }
+
+  static bool _passesSimpleTemplateGate({
+    required bool showGuide,
+    required HandwritingQualityTier tier,
+    required KanjiStrokeTemplate? template,
+    required double templateScore,
+  }) {
+    if (showGuide || template == null || template.strokes.length > 2) {
+      return true;
+    }
+
+    switch (tier) {
+      case HandwritingQualityTier.manual:
+        return templateScore >= 0.90;
+      case HandwritingQualityTier.curated:
+        return templateScore >= 0.84;
+      case HandwritingQualityTier.generated:
+      case HandwritingQualityTier.none:
+        return true;
+    }
   }
 
   static const Set<String> _guidedEnclosureCharacters = {

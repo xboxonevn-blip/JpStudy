@@ -38,6 +38,19 @@ void main() {
     );
   }
 
+  KanjiStrokeTemplate buildGateTemplate(String quality) {
+    return KanjiStrokeTemplate(
+      character: '門',
+      quality: quality,
+      targetArea: 0.34,
+      targetAspect: 0.95,
+      strokes: const [
+        StrokeTemplate(start: Point(0.0, 0.0), end: Point(0.0, 1.0)),
+        StrokeTemplate(start: Point(1.0, 0.0), end: Point(1.0, 1.0)),
+      ],
+    );
+  }
+
   KanjiStrokeTemplate buildSunTemplate(String quality) {
     return KanjiStrokeTemplate(
       character: '日',
@@ -201,6 +214,76 @@ void main() {
           'template=${reversedResult.templateScore.toStringAsFixed(3)}',
     );
   });
+
+  test(
+    'rejects a bowed gate stroke that keeps endpoints but breaks the shape path',
+    () {
+      const canvas = Size(220, 220);
+      final template = buildGateTemplate('manual');
+      final correct = const <List<Offset>>[
+        [
+          Offset(42, 24),
+          Offset(42, 68),
+          Offset(42, 112),
+          Offset(42, 156),
+          Offset(42, 194),
+        ],
+        [
+          Offset(178, 24),
+          Offset(178, 68),
+          Offset(178, 112),
+          Offset(178, 156),
+          Offset(178, 194),
+        ],
+      ];
+      final bowed = const <List<Offset>>[
+        [
+          Offset(42, 24),
+          Offset(86, 64),
+          Offset(92, 108),
+          Offset(70, 152),
+          Offset(42, 194),
+        ],
+        [
+          Offset(178, 24),
+          Offset(178, 68),
+          Offset(178, 112),
+          Offset(178, 156),
+          Offset(178, 194),
+        ],
+      ];
+
+      final correctResult = HandwritingEvaluator.evaluate(
+        strokes: correct,
+        expectedStrokes: template.strokes.length,
+        canvasSize: canvas,
+        showGuide: false,
+        template: template,
+        scoringVersion: HandwritingScoringVersion.v2,
+      );
+      final bowedResult = HandwritingEvaluator.evaluate(
+        strokes: bowed,
+        expectedStrokes: template.strokes.length,
+        canvasSize: canvas,
+        showGuide: false,
+        template: template,
+        scoringVersion: HandwritingScoringVersion.v2,
+      );
+
+      expect(correctResult.isCorrect, isTrue);
+      expect(
+        bowedResult.isCorrect,
+        isFalse,
+        reason:
+            'A stroke that keeps the same endpoints but bows far out of the '
+            'template path should fail: '
+            'score=${bowedResult.score.toStringAsFixed(3)} '
+            'shape=${bowedResult.shapeScore.toStringAsFixed(3)} '
+            'order=${bowedResult.orderScore.toStringAsFixed(3)} '
+            'template=${bowedResult.templateScore.toStringAsFixed(3)}',
+      );
+    },
+  );
 
   test(
     'accepts a slightly rough 日 sketch when the structure is still right',

@@ -12,7 +12,7 @@ class GrammarSeeder {
   final GrammarDao _dao;
 
   // Tăng version này lên khi thay đổi file JSON data
-  static const int kGrammarDataVersion = 7;
+  static const int kGrammarDataVersion = 8;
   static const String kKeyGrammarVersion = 'grammar_data_version';
 
   GrammarSeeder(this._dao);
@@ -70,15 +70,25 @@ class GrammarSeeder {
             : null;
 
         for (final item in defJson) {
-          final grammarPointLabel =
-              (item['grammarPoint'] ?? item['title'] ?? '').toString().trim();
-          final titleVi = (item['title'] ?? item['meaning_vi'] ?? '')
-              .toString()
-              .trim();
+          final rawGrammarPoint = item['grammarPoint'] as String?;
+          final rawTitle = item['title'] as String?;
           final rawTitleEn = item['titleEn'] as String?;
-          final structure = (item['structure'] ?? item['connection'] ?? '')
+          final rawStructure = (item['structure'] ?? item['connection'] ?? '')
               .toString()
               .trim();
+          final grammarPointLabel = resolveCanonicalGrammarPointSource(
+            grammarPoint: rawGrammarPoint,
+            structure: rawStructure,
+            title: rawTitle,
+            structureEn: item['structureEn'] as String?,
+            titleEn: rawTitleEn,
+          );
+          final structure = stripNonCanonicalGrammarNotes(
+            rawStructure.isEmpty ? grammarPointLabel : rawStructure,
+          );
+          final titleVi =
+              ((item['title'] ?? item['meaning_vi'] ?? '').toString().trim())
+                  .trim();
           final structureEn = normalizeGrammarStructureEn(
             item['structureEn'] as String?,
           );
@@ -125,13 +135,15 @@ class GrammarSeeder {
               ? null
               : englishConnection;
 
-          final existing =
-              await (_dao.db.select(_dao.db.grammarPoints)..where(
-                    (tbl) =>
-                        tbl.lessonId.equals(i) &
-                        tbl.grammarPoint.equals(grammarPointLabel),
-                  ))
-                  .getSingleOrNull();
+          final existing = _findExistingPoint(
+            await (_dao.db.select(
+              _dao.db.grammarPoints,
+            )..where((tbl) => tbl.lessonId.equals(i))).get(),
+            grammarPointLabel: grammarPointLabel,
+            rawGrammarPoint: rawGrammarPoint,
+            rawTitle: rawTitle,
+            rawStructure: rawStructure,
+          );
 
           final companion = GrammarPointsCompanion(
             lessonId: Value(i),
@@ -185,8 +197,8 @@ class GrammarSeeder {
           if (exJson != null) {
             final examples = findGrammarExamplesForDefinition(
               exampleBlocks: exJson,
-              title: item['title'] as String?,
-              grammarPoint: item['grammarPoint'] as String?,
+              title: rawTitle,
+              grammarPoint: grammarPointLabel,
             );
 
             if (examples != null) {
@@ -213,5 +225,55 @@ class GrammarSeeder {
         debugPrint('   -> Error seeding Lesson $i: $e');
       }
     }
+  }
+
+  GrammarPoint? _findExistingPoint(
+    List<GrammarPoint> rows, {
+    required String grammarPointLabel,
+    required String? rawGrammarPoint,
+    required String? rawTitle,
+    required String rawStructure,
+  }) {
+    if (rows.isEmpty) return null;
+
+    final candidateKeys = <String>{
+      ..._buildGrammarSeedKeys(grammarPointLabel),
+      ..._buildGrammarSeedKeys(rawGrammarPoint),
+      ..._buildGrammarSeedKeys(rawTitle),
+      ..._buildGrammarSeedKeys(rawStructure),
+    };
+    if (candidateKeys.isEmpty) return null;
+
+    for (final row in rows) {
+      final rowKeys = <String>{
+        ..._buildGrammarSeedKeys(row.grammarPoint),
+        ..._buildGrammarSeedKeys(row.connection),
+        ..._buildGrammarSeedKeys(row.meaningVi ?? row.meaning),
+      };
+      if (rowKeys.any(candidateKeys.contains)) {
+        return row;
+      }
+    }
+
+    return null;
+  }
+
+  Set<String> _buildGrammarSeedKeys(String? rawValue) {
+    final raw = (rawValue ?? '').trim();
+    if (raw.isEmpty) return const <String>{};
+
+    final normalized = stripNonCanonicalGrammarNotes(
+      raw,
+    ).replaceAll(RegExp(r'[~～]'), '〜').trim();
+    final compact = normalized
+        .toLowerCase()
+        .replaceAll(RegExp(r'[\s\u3000\(\)（）\[\]【】「」『』:：,，.．/／・\-\+]+'), '')
+        .trim();
+    final japaneseCore = normalized
+        .replaceAll(RegExp(r'[^〜ぁ-ゖァ-ヶ一-龯々ー]'), '')
+        .trim();
+
+    return <String>{raw, normalized, compact, japaneseCore}
+      ..removeWhere((value) => value.isEmpty);
   }
 }

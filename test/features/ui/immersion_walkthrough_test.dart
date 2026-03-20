@@ -32,22 +32,6 @@ class FakeImmersionService extends ImmersionService {
   }
 
   @override
-  Future<List<ImmersionArticle>> loadNhkEasySummaries({
-    bool forceRefresh = false,
-    int limit = 12,
-  }) async {
-    return const [];
-  }
-
-  @override
-  Future<ImmersionArticle?> loadNhkArticleDetail(
-    String newsId, {
-    bool forceRefresh = false,
-  }) async {
-    return null;
-  }
-
-  @override
   Future<Set<String>> getReadArticleIds() async {
     return {..._readIds};
   }
@@ -112,7 +96,7 @@ void main() {
     title: 'Local article',
     titleFurigana: 'ろーかる',
     officialLevel: 'N5',
-    source: 'Local',
+    source: ImmersionArticle.localSourceLabel,
     publishedAt: DateTime(2026, 2, 4),
     paragraphs: repeatedParagraphs,
     translation: 'This is a local translation.',
@@ -122,7 +106,7 @@ void main() {
     id: 'local_2',
     title: 'N4 article',
     officialLevel: 'N4',
-    source: 'Local',
+    source: ImmersionArticle.localSourceLabel,
     publishedAt: DateTime(2026, 2, 5),
     paragraphs: repeatedParagraphs,
   );
@@ -131,7 +115,7 @@ void main() {
     id: 'local_3',
     title: 'N3 article',
     officialLevel: 'N3',
-    source: 'Local',
+    source: ImmersionArticle.localSourceLabel,
     publishedAt: DateTime(2026, 2, 6),
     paragraphs: repeatedParagraphs,
   );

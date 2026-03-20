@@ -109,6 +109,10 @@ void main() {
     expect(find.text('Grammar repair'), findsNothing);
     expect(find.text('Sentence to repair'), findsNothing);
     expect(find.byType(GrammarPracticePanel), findsOneWidget);
+    expect(find.byIcon(Icons.check_circle_rounded), findsNothing);
+    expect(find.byIcon(Icons.cancel_rounded), findsNothing);
+    expect(find.byIcon(Icons.radio_button_checked_rounded), findsNothing);
+    expect(find.byIcon(Icons.radio_button_unchecked_rounded), findsNWidgets(3));
   });
 
   testWidgets('new question resets prior multiple-choice selection state', (
@@ -159,4 +163,42 @@ void main() {
     expect(find.byIcon(Icons.radio_button_checked_rounded), findsNothing);
     expect(find.byIcon(Icons.radio_button_unchecked_rounded), findsNWidgets(3));
   });
+
+  testWidgets(
+    'same question in a new session key resets prior selection state',
+    (tester) async {
+      Widget buildQuestion(String sessionKey) {
+        return buildHarness(
+          KeyedSubtree(
+            key: ValueKey(sessionKey),
+            child: MultipleChoiceWidget(
+              language: AppLanguage.en,
+              questionType: GrammarQuestionType.multipleChoice,
+              question: 'Which pattern matches "while doing"?',
+              options: const ['ながら', 'だけ', 'しか'],
+              correctAnswer: 'ながら',
+              onAnswer: (isCorrect, selected) {},
+            ),
+          ),
+        );
+      }
+
+      await tester.pumpWidget(buildQuestion('session_1'));
+      await tester.tap(find.byKey(const ValueKey('grammar_mc_option_0')));
+      await tester.pump();
+
+      expect(find.byIcon(Icons.check_circle_rounded), findsOneWidget);
+
+      await tester.pumpWidget(buildQuestion('session_2'));
+      await tester.pump();
+
+      expect(find.byIcon(Icons.check_circle_rounded), findsNothing);
+      expect(find.byIcon(Icons.cancel_rounded), findsNothing);
+      expect(find.byIcon(Icons.radio_button_checked_rounded), findsNothing);
+      expect(
+        find.byIcon(Icons.radio_button_unchecked_rounded),
+        findsNWidgets(3),
+      );
+    },
+  );
 }

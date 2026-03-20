@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:jpstudy/data/utils/grammar_example_quality.dart';
+import 'package:jpstudy/data/utils/grammar_english_notation.dart';
 
 final _levels = <String>['n5', 'n4', 'n3'];
 
@@ -31,15 +32,23 @@ void main(List<String> args) {
       'grammar_examples${Platform.pathSeparator}$level',
     );
 
-    final grammarFiles = grammarDir.listSync().whereType<File>().where(
-      (file) => file.path.endsWith('.json'),
-    )..toList();
+    final grammarFiles = grammarDir
+        .listSync()
+        .whereType<File>()
+        .where((file) => file.path.endsWith('.json'))
+        .toList(growable: false);
 
     var levelScoreTotal = 0;
     var levelBlocks = 0;
     var blocksMissingContext = 0;
     var blocksMissingReplacement = 0;
     var blocksMissingTransformation = 0;
+    var blocksWithExpectedMissing = 0;
+    var blocksWithRealQualityGap = 0;
+    var blocksMissingReplacementExpected = 0;
+    var blocksMissingReplacementReal = 0;
+    var blocksMissingTransformationExpected = 0;
+    var blocksMissingTransformationReal = 0;
 
     for (final grammarFile in grammarFiles) {
       final lesson = _lessonNumberFromPath(grammarFile.path);
@@ -54,9 +63,16 @@ void main(List<String> args) {
       for (final block in exampleBlocks) {
         final blockLabel = '${block['grammarPoint'] ?? ''}'.trim();
         final definition = _matchDefinition(definitions, blockLabel);
-        final rawPattern = '${definition?['grammarPoint'] ?? blockLabel}'
-            .trim();
-        final title = '${definition?['title'] ?? blockLabel}'.trim();
+        final rawPattern = resolveCanonicalGrammarPointSource(
+          grammarPoint: definition?['grammarPoint']?.toString(),
+          structure: definition?['structure']?.toString(),
+          title: definition?['title']?.toString() ?? blockLabel,
+          structureEn: definition?['structureEn']?.toString(),
+          titleEn: definition?['titleEn']?.toString(),
+        );
+        final title = stripNonCanonicalGrammarNotes(
+          '${definition?['title'] ?? blockLabel}'.trim(),
+        );
         final examplesRaw = (block['examples'] as List<dynamic>? ?? const []);
         final examples = examplesRaw
             .whereType<Map>()
@@ -88,24 +104,16 @@ void main(List<String> args) {
                 .toList(growable: false),
         };
 
-        final reasons = <String>[
-          if ((quality.coverageCounts[GrammarExampleQuestionKind
-                      .contextChoice] ??
-                  0) ==
-              0)
-            'missing_context_ready_examples',
-          if ((quality.coverageCounts[GrammarExampleQuestionKind
-                      .errorCorrection] ??
-                  0) ==
-              0)
-            'missing_replacement_ready_examples',
-          if ((quality.coverageCounts[GrammarExampleQuestionKind
-                      .transformation] ??
-                  0) ==
-              0)
-            'missing_transformation_ready_examples',
-          if (quality.blockScore < 70) 'low_block_score',
-        ];
+        final reasons = _classifyFlaggedReasons(
+          grammarPoint: rawPattern,
+          quality: quality,
+        );
+        final hasExpectedMissing = reasons.any(
+          (reason) => reason['classification'] == 'expected-missing',
+        );
+        final hasRealQualityGap = reasons.any(
+          (reason) => reason['classification'] == 'real-quality-gap',
+        );
 
         if (reasons.isNotEmpty) {
           flaggedBlocks.add({
@@ -114,8 +122,17 @@ void main(List<String> args) {
             'title': title,
             'grammarPoint': rawPattern,
             'blockScore': quality.blockScore,
+            'hasExpectedMissing': hasExpectedMissing,
+            'hasRealQualityGap': hasRealQualityGap,
             'reasons': reasons,
           });
+        }
+
+        if (hasExpectedMissing) {
+          blocksWithExpectedMissing += 1;
+        }
+        if (hasRealQualityGap) {
+          blocksWithRealQualityGap += 1;
         }
 
         if ((quality.coverageCounts[GrammarExampleQuestionKind.contextChoice] ??
@@ -128,12 +145,33 @@ void main(List<String> args) {
                 0) ==
             0) {
           blocksMissingReplacement += 1;
+          final replacementReason = reasons.firstWhere(
+            (reason) => reason['code'] == 'missing_replacement_ready_examples',
+            orElse: () => const <String, Object?>{},
+          );
+          if (replacementReason['classification'] == 'expected-missing') {
+            blocksMissingReplacementExpected += 1;
+          } else if (replacementReason['classification'] ==
+              'real-quality-gap') {
+            blocksMissingReplacementReal += 1;
+          }
         }
         if ((quality.coverageCounts[GrammarExampleQuestionKind
                     .transformation] ??
                 0) ==
             0) {
           blocksMissingTransformation += 1;
+          final transformationReason = reasons.firstWhere(
+            (reason) =>
+                reason['code'] == 'missing_transformation_ready_examples',
+            orElse: () => const <String, Object?>{},
+          );
+          if (transformationReason['classification'] == 'expected-missing') {
+            blocksMissingTransformationExpected += 1;
+          } else if (transformationReason['classification'] ==
+              'real-quality-gap') {
+            blocksMissingTransformationReal += 1;
+          }
         }
 
         levelBlocks += 1;
@@ -181,7 +219,14 @@ void main(List<String> args) {
           : double.parse((levelScoreTotal / levelBlocks).toStringAsFixed(2)),
       'blocksMissingContextChoice': blocksMissingContext,
       'blocksMissingReplacement': blocksMissingReplacement,
+      'blocksMissingReplacementExpected': blocksMissingReplacementExpected,
+      'blocksMissingReplacementReal': blocksMissingReplacementReal,
       'blocksMissingTransformation': blocksMissingTransformation,
+      'blocksMissingTransformationExpected':
+          blocksMissingTransformationExpected,
+      'blocksMissingTransformationReal': blocksMissingTransformationReal,
+      'blocksWithExpectedMissing': blocksWithExpectedMissing,
+      'blocksWithRealQualityGap': blocksWithRealQualityGap,
     });
   }
 
@@ -195,9 +240,101 @@ void main(List<String> args) {
 
   reportPath.parent.createSync(recursive: true);
   reportPath.writeAsStringSync(
-    const JsonEncoder.withIndent('  ').convert(report) + '\n',
+    '${const JsonEncoder.withIndent('  ').convert(report)}\n',
   );
   stdout.writeln('Wrote ${_relativePath(root, reportPath)}');
+}
+
+List<Map<String, Object?>> _classifyFlaggedReasons({
+  required String grammarPoint,
+  required GrammarExampleBlockQualityAssessment quality,
+}) {
+  final reasons = <Map<String, Object?>>[];
+
+  if ((quality.coverageCounts[GrammarExampleQuestionKind.contextChoice] ?? 0) ==
+      0) {
+    reasons.add({
+      'code': 'missing_context_ready_examples',
+      'classification': 'real-quality-gap',
+      'questionType': GrammarExampleQuestionKind.contextChoice.name,
+    });
+  }
+
+  if ((quality.coverageCounts[GrammarExampleQuestionKind.errorCorrection] ??
+          0) ==
+      0) {
+    reasons.add({
+      'code': 'missing_replacement_ready_examples',
+      'classification': _isExpectedReplacementGap(grammarPoint, quality)
+          ? 'expected-missing'
+          : 'real-quality-gap',
+      'questionType': GrammarExampleQuestionKind.errorCorrection.name,
+    });
+  }
+
+  if ((quality.coverageCounts[GrammarExampleQuestionKind.transformation] ??
+          0) ==
+      0) {
+    reasons.add({
+      'code': 'missing_transformation_ready_examples',
+      'classification': _isExpectedTransformationGap(grammarPoint, quality)
+          ? 'expected-missing'
+          : 'real-quality-gap',
+      'questionType': GrammarExampleQuestionKind.transformation.name,
+    });
+  }
+
+  if (quality.blockScore < 70) {
+    reasons.add({
+      'code': 'low_block_score',
+      'classification': 'real-quality-gap',
+    });
+  }
+
+  return reasons;
+}
+
+bool _isExpectedReplacementGap(
+  String grammarPoint,
+  GrammarExampleBlockQualityAssessment quality,
+) {
+  final normalizedPattern = grammarPoint.trim();
+  if (normalizedPattern.isEmpty) {
+    return false;
+  }
+
+  if (!GrammarExampleQualityAssessor.isEmbeddableSurfacePattern(
+    normalizedPattern,
+  )) {
+    return true;
+  }
+
+  if (GrammarExampleQualityAssessor.looksLikeExchangePrompt(
+    normalizedPattern,
+  )) {
+    return true;
+  }
+
+  return quality.examples.every(
+    (item) => item.surfaceFamily == GrammarExampleSurfaceFamily.dialogue,
+  );
+}
+
+bool _isExpectedTransformationGap(
+  String grammarPoint,
+  GrammarExampleBlockQualityAssessment quality,
+) {
+  final normalizedPattern = grammarPoint.trim();
+  if (normalizedPattern.isNotEmpty &&
+      GrammarExampleQualityAssessor.looksLikeExchangePrompt(
+        normalizedPattern,
+      )) {
+    return true;
+  }
+
+  return quality.examples.every(
+    (item) => item.surfaceFamily != GrammarExampleSurfaceFamily.statement,
+  );
 }
 
 GrammarExampleLocale _parseLocale(List<String> args) {

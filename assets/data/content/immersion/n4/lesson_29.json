@@ -22,7 +22,7 @@
       },
       {
         "surface": "すみません",
-        "reading": "",
+        "reading": "すみません",
         "meaningVi": "xin lỗi",
         "meaningEn": "excuse me"
       },
@@ -34,7 +34,7 @@
       },
       {
         "surface": "この",
-        "reading": "",
+        "reading": "この",
         "meaningVi": "này",
         "meaningEn": "this"
       },
@@ -46,39 +46,27 @@
       },
       {
         "surface": "は",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
+        "reading": "は",
+        "meaningVi": "thì/về",
+        "meaningEn": "topic marker"
       },
       {
-        "surface": "東京",
-        "reading": "とうきょう",
-        "meaningVi": "Tokyo",
-        "meaningEn": "Tokyo"
-      },
-      {
-        "surface": "駅",
-        "reading": "えき",
-        "meaningVi": "ga",
-        "meaningEn": "station"
+        "surface": "東京駅",
+        "reading": "とうきょうえき",
+        "meaningVi": "ga Tokyo",
+        "meaningEn": "Tokyo Station"
       },
       {
         "surface": "に",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
+        "reading": "に",
+        "meaningVi": "ở / tại",
+        "meaningEn": "at"
       },
       {
-        "surface": "止まります",
-        "reading": "とまります",
-        "meaningVi": "dừng",
-        "meaningEn": "stop"
-      },
-      {
-        "surface": "か",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
+        "surface": "止まりますか",
+        "reading": "とまりますか",
+        "meaningVi": "có dừng không",
+        "meaningEn": "does it stop there?"
       },
       {
         "surface": "。",
@@ -102,7 +90,7 @@
       },
       {
         "surface": "いいえ",
-        "reading": "",
+        "reading": "いいえ",
         "meaningVi": "không",
         "meaningEn": "no"
       },
@@ -114,9 +102,9 @@
       },
       {
         "surface": "これは",
-        "reading": "",
+        "reading": "これは",
         "meaningVi": "cái này",
-        "meaningEn": "this"
+        "meaningEn": "this train"
       },
       {
         "surface": "急行",
@@ -126,9 +114,9 @@
       },
       {
         "surface": "ですから",
-        "reading": "",
+        "reading": "ですから",
         "meaningVi": "vì là",
-        "meaningEn": "because"
+        "meaningEn": "since it is"
       },
       {
         "surface": "、",
@@ -144,7 +132,7 @@
       },
       {
         "surface": "よ",
-        "reading": "",
+        "reading": "よ",
         "meaningVi": "đấy",
         "meaningEn": "you know"
       },
@@ -164,45 +152,27 @@
       },
       {
         "surface": "の",
-        "reading": "",
+        "reading": "の",
         "meaningVi": "của",
         "meaningEn": "of"
       },
       {
-        "surface": "各駅",
-        "reading": "かくえき",
-        "meaningVi": "các ga",
-        "meaningEn": "every station"
-      },
-      {
-        "surface": "停車",
-        "reading": "ていしゃ",
-        "meaningVi": "dừng xe",
-        "meaningEn": "stop"
+        "surface": "各駅停車",
+        "reading": "かくえきていしゃ",
+        "meaningVi": "tàu dừng mọi ga",
+        "meaningEn": "local train"
       },
       {
         "surface": "に",
-        "reading": "",
+        "reading": "に",
         "meaningVi": "lên",
         "meaningEn": "on"
       },
       {
-        "surface": "乗",
-        "reading": "の",
-        "meaningVi": "lên (xe)",
-        "meaningEn": "ride"
-      },
-      {
-        "surface": "って",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
-      },
-      {
-        "surface": "ください",
-        "reading": "",
-        "meaningVi": "hãy",
-        "meaningEn": "please"
+        "surface": "乗ってください",
+        "reading": "のってください",
+        "meaningVi": "hãy lên / hãy đi bằng",
+        "meaningEn": "please take it"
       },
       {
         "surface": "。",
@@ -225,22 +195,10 @@
         "meaningEn": ""
       },
       {
-        "surface": "何",
-        "reading": "なん",
-        "meaningVi": "mấy/gì",
-        "meaningEn": "what"
-      },
-      {
-        "surface": "番線",
-        "reading": "ばんせん",
-        "meaningVi": "tuyến số",
-        "meaningEn": "track number"
-      },
-      {
-        "surface": "ですか",
-        "reading": "",
-        "meaningVi": "là",
-        "meaningEn": "is it"
+        "surface": "何番線ですか",
+        "reading": "なんばんせんですか",
+        "meaningVi": "ở sân ga số mấy",
+        "meaningEn": "which platform is it?"
       },
       {
         "surface": "。",
@@ -265,12 +223,12 @@
       {
         "surface": "３番線",
         "reading": "さんばんせん",
-        "meaningVi": "tuyến số 3",
-        "meaningEn": "Track 3"
+        "meaningVi": "sân ga số 3",
+        "meaningEn": "Platform 3"
       },
       {
         "surface": "です",
-        "reading": "",
+        "reading": "です",
         "meaningVi": "là",
         "meaningEn": "is"
       },
@@ -296,7 +254,7 @@
       },
       {
         "surface": "どうも",
-        "reading": "",
+        "reading": "どうも",
         "meaningVi": "cảm ơn",
         "meaningEn": "thanks"
       },
@@ -316,7 +274,7 @@
       },
       {
         "surface": "に",
-        "reading": "",
+        "reading": "に",
         "meaningVi": "lên/tại",
         "meaningEn": "on"
       },
@@ -328,25 +286,19 @@
       },
       {
         "surface": "を",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
+        "reading": "を",
+        "meaningVi": "tân ngữ",
+        "meaningEn": "object marker"
       },
       {
-        "surface": "置",
-        "reading": "お",
-        "meaningVi": "đặt/để",
+        "surface": "置く",
+        "reading": "おく",
+        "meaningVi": "đặt / để",
         "meaningEn": "put"
       },
       {
-        "surface": "く",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
-      },
-      {
         "surface": "とき",
-        "reading": "",
+        "reading": "とき",
         "meaningVi": "khi",
         "meaningEn": "when"
       },
@@ -357,38 +309,14 @@
         "meaningEn": ""
       },
       {
-        "surface": "忘",
-        "reading": "わす",
-        "meaningVi": "quên",
-        "meaningEn": "forget"
-      },
-      {
-        "surface": "れない",
-        "reading": "",
-        "meaningVi": "không",
-        "meaningEn": "do not"
-      },
-      {
-        "surface": "ように",
-        "reading": "",
-        "meaningVi": "để/sao cho",
-        "meaningEn": "so that"
-      },
-      {
-        "surface": "して",
-        "reading": "",
-        "meaningVi": "làm",
-        "meaningEn": "do"
-      },
-      {
-        "surface": "ください",
-        "reading": "",
-        "meaningVi": "hãy",
-        "meaningEn": "please"
+        "surface": "忘れないようにしてください",
+        "reading": "わすれないようにしてください",
+        "meaningVi": "hãy cẩn thận để đừng quên",
+        "meaningEn": "please be careful not to forget it"
       },
       {
         "surface": "ね",
-        "reading": "",
+        "reading": "ね",
         "meaningVi": "nhé",
         "meaningEn": "okay?"
       },

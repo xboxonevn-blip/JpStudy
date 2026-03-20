@@ -57,6 +57,19 @@ void main() {
         greaterThanOrEqualTo(0.70),
         reason: 'Expected positive pass rate >= 70% for tier=$tier',
       );
+      final maxAcceptedFalsePositiveRate = switch (tier) {
+        'manual' => 0.08,
+        'curated' => 0.25,
+        'generated' => 0.25,
+        _ => 0.25,
+      };
+      expect(
+        v2.falsePositiveRate,
+        lessThanOrEqualTo(maxAcceptedFalsePositiveRate),
+        reason:
+            'Expected stronger false-positive ceiling for tier=$tier, '
+            'got ${v2.falsePositiveRate.toStringAsFixed(4)}',
+      );
     }
 
     if (_printStrokeBenchmark) {

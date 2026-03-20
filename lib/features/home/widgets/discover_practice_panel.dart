@@ -67,6 +67,7 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
       rankedDestinations: rankedTiles,
       preferredOrder: hubPrefs.orderIds,
     );
+    final panelRadius = widget.dense ? 18.0 : HomeSurface.panelRadius;
 
     return Padding(
       padding: EdgeInsets.fromLTRB(
@@ -75,177 +76,180 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
         widget.dense ? 0 : HomeSurface.pageHorizontalPadding,
         0,
       ),
-      child: Container(
-        decoration: HomeSurface.softPanel(radius: widget.dense ? 18 : 24),
-        child: Column(
-          children: [
-            InkWell(
-              key: const ValueKey('discover_practice_toggle'),
-              onTap: () {
-                setState(() {
-                  _expanded = !_expanded;
-                });
-              },
-              borderRadius: BorderRadius.circular(HomeSurface.panelRadius),
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(
-                  widget.dense ? 10 : 14,
-                  widget.dense ? 10 : 14,
-                  widget.dense ? 10 : 14,
-                  widget.dense ? 10 : 14,
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      width: widget.dense ? 28 : 36,
-                      height: widget.dense ? 28 : 36,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                          widget.dense ? 10 : 12,
-                        ),
-                        gradient: const LinearGradient(
-                          colors: [Color(0xFFE0F2FE), Color(0xFFFFEDD5)],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                      ),
-                      child: const Icon(
-                        Icons.explore_rounded,
-                        color: Color(0xFF0F766E),
-                        size: 17,
-                      ),
-                    ),
-                    SizedBox(width: widget.dense ? 8 : 10),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            language.practiceHubTitle,
-                            style: TextStyle(
-                              fontSize: widget.dense ? 13.5 : 16,
-                              fontWeight: FontWeight.w800,
-                              color: const Color(0xFF0F172A),
-                            ),
+      child: Material(
+        color: Colors.transparent,
+        child: Ink(
+          decoration: HomeSurface.softPanel(radius: panelRadius),
+          child: Column(
+            children: [
+              InkWell(
+                key: const ValueKey('discover_practice_toggle'),
+                onTap: () {
+                  setState(() {
+                    _expanded = !_expanded;
+                  });
+                },
+                borderRadius: BorderRadius.circular(panelRadius),
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(
+                    widget.dense ? 10 : 14,
+                    widget.dense ? 10 : 14,
+                    widget.dense ? 10 : 14,
+                    widget.dense ? 10 : 14,
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: widget.dense ? 28 : 36,
+                        height: widget.dense ? 28 : 36,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            widget.dense ? 10 : 12,
                           ),
-                          if (!widget.dense) ...[
+                          gradient: const LinearGradient(
+                            colors: [Color(0xFFE0F2FE), Color(0xFFFFEDD5)],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                        ),
+                        child: const Icon(
+                          Icons.explore_rounded,
+                          color: Color(0xFF0F766E),
+                          size: 17,
+                        ),
+                      ),
+                      SizedBox(width: widget.dense ? 8 : 10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
                             Text(
-                              language.practiceHubSubtitle,
-                              style: const TextStyle(
-                                fontSize: 12,
-                                color: Color(0xFF64748B),
+                              language.practiceHubTitle,
+                              style: TextStyle(
+                                fontSize: widget.dense ? 13.5 : 16,
+                                fontWeight: FontWeight.w800,
+                                color: const Color(0xFF0F172A),
                               ),
                             ),
+                            if (!widget.dense) ...[
+                              Text(
+                                language.practiceHubSubtitle,
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Color(0xFF64748B),
+                                ),
+                              ),
+                            ],
                           ],
-                        ],
+                        ),
                       ),
-                    ),
-                    SizedBox(width: widget.dense ? 4 : 6),
-                    _FocusChip(
-                      enabled: hubPrefs.focusModeEnabled,
-                      label: _focusChipLabel(language),
-                      compact: widget.dense,
-                      onTap: () {
-                        ref
-                            .read(practiceHubPreferencesProvider.notifier)
-                            .setFocusMode(!hubPrefs.focusModeEnabled);
-                      },
-                    ),
-                    SizedBox(width: widget.dense ? 2 : 4),
-                    IconButton(
-                      tooltip: _reorderTooltipLabel(language),
-                      onPressed: orderedTiles.isEmpty
-                          ? null
-                          : () => _showReorderSheet(
-                              language: language,
-                              orderedTiles: orderedTiles,
+                      SizedBox(width: widget.dense ? 4 : 6),
+                      _FocusChip(
+                        enabled: hubPrefs.focusModeEnabled,
+                        label: _focusChipLabel(language),
+                        compact: widget.dense,
+                        onTap: () {
+                          ref
+                              .read(practiceHubPreferencesProvider.notifier)
+                              .setFocusMode(!hubPrefs.focusModeEnabled);
+                        },
+                      ),
+                      SizedBox(width: widget.dense ? 2 : 4),
+                      IconButton(
+                        tooltip: _reorderTooltipLabel(language),
+                        onPressed: orderedTiles.isEmpty
+                            ? null
+                            : () => _showReorderSheet(
+                                language: language,
+                                orderedTiles: orderedTiles,
+                              ),
+                        icon: Icon(
+                          Icons.drag_indicator_rounded,
+                          size: widget.dense ? 18 : 20,
+                        ),
+                        color: const Color(0xFF334155),
+                        style: IconButton.styleFrom(
+                          minimumSize: Size(
+                            widget.dense ? 28 : 34,
+                            widget.dense ? 28 : 34,
+                          ),
+                          padding: EdgeInsets.zero,
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              widget.dense ? 8 : 10,
                             ),
-                      icon: Icon(
-                        Icons.drag_indicator_rounded,
-                        size: widget.dense ? 18 : 20,
-                      ),
-                      color: const Color(0xFF334155),
-                      style: IconButton.styleFrom(
-                        minimumSize: Size(
-                          widget.dense ? 28 : 34,
-                          widget.dense ? 28 : 34,
-                        ),
-                        padding: EdgeInsets.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                            widget.dense ? 8 : 10,
+                            side: const BorderSide(color: Color(0xFFDCE8F8)),
                           ),
-                          side: const BorderSide(color: Color(0xFFDCE8F8)),
+                          backgroundColor: const Color(0xFFF8FBFF),
                         ),
-                        backgroundColor: const Color(0xFFF8FBFF),
                       ),
-                    ),
-                    if (highlightCount > 0) ...[
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 7,
-                          vertical: 2,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFEF4444),
-                          borderRadius: BorderRadius.circular(999),
-                        ),
-                        child: Text(
-                          '$highlightCount',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: widget.dense ? 10 : 11,
-                            fontWeight: FontWeight.w800,
+                      if (highlightCount > 0) ...[
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 7,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFEF4444),
+                            borderRadius: BorderRadius.circular(999),
+                          ),
+                          child: Text(
+                            '$highlightCount',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: widget.dense ? 10 : 11,
+                              fontWeight: FontWeight.w800,
+                            ),
                           ),
                         ),
+                        SizedBox(width: widget.dense ? 6 : 8),
+                      ],
+                      AnimatedRotation(
+                        turns: _expanded ? 0.5 : 0,
+                        duration: const Duration(milliseconds: 160),
+                        child: Icon(
+                          Icons.keyboard_arrow_down_rounded,
+                          color: Color(0xFF334155),
+                          size: widget.dense ? 18 : 24,
+                        ),
                       ),
-                      SizedBox(width: widget.dense ? 6 : 8),
                     ],
-                    AnimatedRotation(
-                      turns: _expanded ? 0.5 : 0,
-                      duration: const Duration(milliseconds: 160),
-                      child: Icon(
-                        Icons.keyboard_arrow_down_rounded,
-                        color: Color(0xFF334155),
-                        size: widget.dense ? 18 : 24,
+                  ),
+                ),
+              ),
+              AnimatedCrossFade(
+                key: const ValueKey('discover_practice_body'),
+                duration: const Duration(milliseconds: 180),
+                crossFadeState: _expanded
+                    ? CrossFadeState.showSecond
+                    : CrossFadeState.showFirst,
+                firstChild: SizedBox(height: widget.dense ? 2 : 4),
+                secondChild: Padding(
+                  padding: EdgeInsets.fromLTRB(
+                    widget.dense ? 10 : 14,
+                    0,
+                    widget.dense ? 10 : 14,
+                    widget.dense ? 10 : 10,
+                  ),
+                  child: const Column(
+                    children: [
+                      GhostReviewBanner(embedded: true),
+                      SizedBox(height: 2),
+                      PracticeTestDashboard(embedded: true),
+                      SizedBox(height: 6),
+                      PracticeHub(
+                        embedded: true,
+                        showHeader: false,
+                        showFocusHint: false,
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-            AnimatedCrossFade(
-              key: const ValueKey('discover_practice_body'),
-              duration: const Duration(milliseconds: 180),
-              crossFadeState: _expanded
-                  ? CrossFadeState.showSecond
-                  : CrossFadeState.showFirst,
-              firstChild: SizedBox(height: widget.dense ? 2 : 4),
-              secondChild: Padding(
-                padding: EdgeInsets.fromLTRB(
-                  widget.dense ? 10 : 14,
-                  0,
-                  widget.dense ? 10 : 14,
-                  widget.dense ? 10 : 10,
-                ),
-                child: const Column(
-                  children: [
-                    GhostReviewBanner(embedded: true),
-                    SizedBox(height: 2),
-                    PracticeTestDashboard(embedded: true),
-                    SizedBox(height: 6),
-                    PracticeHub(
-                      embedded: true,
-                      showHeader: false,
-                      showFocusHint: false,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

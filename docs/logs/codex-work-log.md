@@ -2066,3 +2066,1077 @@ This file records recent Codex work so future sessions can continue from the cur
   - Result: no issues found
 - Ran `flutter build web`
   - Result: build completed successfully and regenerated `build/web`
+
+## 2026-03-19
+
+### Core Stability Baseline Pass
+
+- Implemented the first requested audit-plan execution pass with focus on `P0` baseline quality and the minimum `P2/P3` support needed to keep that baseline stable.
+- Updated `lib/features/home/widgets/discover_practice_panel.dart`
+  - replaced the outer decorated `Container` with `Material + Ink` so the expand/collapse `InkWell` has a valid `Material` ancestor
+  - kept the existing Home visual treatment while fixing the regression that was breaking the widget test suite
+- Updated `tooling/audit_grammar_example_quality.dart`
+  - removed the remaining repo-wide analyzer issue
+  - cleaned the grammar-file list construction and the report write call so `flutter analyze` is fully clean again
+- Updated `.github/workflows/ui-string-guard.yml`
+  - extended the CI contract beyond string-literal checks
+  - added mandatory `flutter test`
+  - added mandatory `flutter build web`
+- Added `test/features/search/search_screen_test.dart`
+  - introduced a dedicated smoke test for the responsive Search utility screen
+  - verifies the desktop lookup shell renders and the query chrome updates immediately when text is entered
+- Added `test/features/progress/progress_screen_test.dart`
+  - introduced a dedicated smoke test for the wide-screen Progress analytics layout
+  - verifies the overview, activity, history, and SRS panels render together without provider/layout regressions
+- Updated `docs/reports/README.md`
+  - documented the canonical active reports to use for release/content decisions
+  - explicitly marked `full-content-audit.json` as a stale/legacy snapshot until regenerated
+- Updated `docs/notes/important-user-requirements.md`
+  - recorded the persistent release contract: `flutter analyze` + `flutter test` + `flutter build web`
+  - recorded the need for route/screen smoke coverage on main app surfaces
+  - recorded the canonical-report rule for future audit decisions
+
+### Verification Run
+
+- Ran `dart format lib/features/home/widgets/discover_practice_panel.dart tooling/audit_grammar_example_quality.dart test/features/search/search_screen_test.dart test/features/progress/progress_screen_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/home/widgets/discover_practice_panel.dart tooling/audit_grammar_example_quality.dart test/features/search/search_screen_test.dart test/features/progress/progress_screen_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/ui/simple_command_center_test.dart`
+  - Result: passed after the `DiscoverPracticePanel` material fix
+- Ran `flutter test test/features/search/search_screen_test.dart test/features/progress/progress_screen_test.dart`
+  - Result: both new smoke tests passed
+- Ran `flutter analyze`
+  - Result: full repo passed with no issues
+- Ran `flutter test`
+  - Result: full suite passed (`191` tests in the current workspace run)
+- Ran `flutter build web`
+  - Result: build completed successfully and regenerated `build/web`
+
+### Handwriting False-Positive Guard Pass
+
+- Continued the roadmap into `P1` core learning quality, focusing this pass on handwriting evaluation quality rather than adding more feature surface.
+- Root problem addressed
+  - the handwriting evaluator could still be too permissive for very simple, high-confidence templates where a learner kept roughly the same stroke endpoints but bent the path into the wrong structure
+  - at the same time, the app already had intentional tolerance for enclosure-like kanji such as `日` and `四`, so the fix needed to be stricter for simple templates without reintroducing the older “too harsh” behavior on boxed forms
+- Updated `lib/features/write/services/handwriting_template_matcher.dart`
+  - expanded template matching beyond just start/end and direction
+  - added normalized stroke center and stroke-length similarity into template scoring
+  - kept a stricter path-shape weighting only for low-stroke templates (`<= 2` strokes) so obvious bowed/simple-shape misses lose more score where the template geometry is trustworthy
+  - kept complex/multi-stroke matching softer so enclosure-like characters are not punished by overly literal path assumptions
+- Updated `lib/features/write/services/handwriting_evaluator.dart`
+  - added a stricter pass/fail gate for unguided low-stroke manual/curated templates
+  - this makes simple high-confidence characters less likely to pass when the path is structurally wrong even if overall shape/order stats still look superficially acceptable
+  - left the existing near-correct relaxation for enclosure-like characters intact
+- Updated `test/features/write/handwriting_template_matcher_test.dart`
+  - added regression coverage for:
+    - a slightly wobbly but still correct stroke path
+    - a bowed stroke that keeps endpoints but scores meaningfully worse than the straight reference
+- Updated `test/features/write/handwriting_evaluator_regression_test.dart`
+  - added a regression proving a bowed low-stroke manual template now fails end-to-end
+  - kept coverage proving rough-but-recognizable `日` and guide-aligned `四` still pass
+
+### Verification Run
+
+- Ran `dart format lib/features/write/services/handwriting_template_matcher.dart lib/features/write/services/handwriting_evaluator.dart test/features/write/handwriting_template_matcher_test.dart test/features/write/handwriting_evaluator_regression_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/write/services/handwriting_template_matcher.dart lib/features/write/services/handwriting_evaluator.dart test/features/write/handwriting_template_matcher_test.dart test/features/write/handwriting_evaluator_regression_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/write/handwriting_template_matcher_test.dart test/features/write/handwriting_evaluator_regression_test.dart`
+  - Result: all matcher/evaluator regressions passed
+- Ran `flutter test test/features/write/handwriting_walkthrough_test.dart test/features/write/handwriting_template_matcher_test.dart test/features/write/handwriting_evaluator_regression_test.dart`
+  - Result: all write-flow regression tests passed
+- Ran `flutter analyze`
+  - Result: full repo passed with no issues
+- Ran `flutter test`
+  - Result: full suite passed (`194` tests in the current workspace run)
+- Ran `flutter build web`
+  - Result: build completed successfully and regenerated `build/web`
+
+### Immersion Local-First Cleanup & Level Consistency Pass
+
+- Continued the roadmap into `P1` with the user-selected priority on `Immersion`, focusing on removing stale source layers and making level/source metadata consistent from the local asset pipeline outward.
+- Root problems addressed
+  - `ImmersionService` still carried a large unused external-source stack (`NHK Easy`, `Watanoc`, `MATCHA Easy`, `Tadoku`) even though the actual app flow already reads bundled immersion assets.
+  - local immersion metadata consistency still depended too much on each JSON file being perfectly clean instead of being normalized by the model/service layer.
+  - test coverage did not yet lock the new intended contract: local-first source data, canonical source label, and strict level normalization.
+- Updated `lib/features/immersion/models/immersion_article.dart`
+  - added canonical local source support via `ImmersionArticle.localSourceLabel`
+  - added normalization helpers for JLPT level and source labels
+  - normalized `fromJson(...)` so lowercase / noisy local metadata resolves consistently
+  - added `copyWith(...)` to support future pipeline-level normalization without rebuilding articles manually
+- Updated `lib/features/immersion/services/shared_reading_library.dart`
+  - derived expected JLPT level from the asset path under `assets/data/content/immersion/{n5|n4|n3}/...`
+  - normalized all loaded local articles through `ImmersionArticle.fromJson(...)`
+  - enforced canonical fallback source metadata of `JpStudy Original` for the local reading bank
+- Rebuilt `lib/features/immersion/services/immersion_service.dart`
+  - removed the old external fetch / parse / cache layer entirely
+  - kept the service local-first with:
+    - `loadReadingBank()`
+    - `loadLocalSamples()` compatibility alias
+    - read-status persistence
+    - quiz-history persistence
+- Updated `test/features/ui/immersion_walkthrough_test.dart`
+  - removed fake overrides for deleted external-source methods
+  - aligned fake local article source labels with the canonical local source label
+- Added `test/features/immersion/immersion_service_test.dart`
+  - added regression coverage for:
+    - JLPT level normalization
+    - canonical local source normalization
+    - local immersion bank metadata integrity
+    - read-status and quiz-history persistence after the service cleanup
+
+### Verification Run
+
+- Ran `dart format lib/features/immersion/models/immersion_article.dart lib/features/immersion/services/shared_reading_library.dart lib/features/immersion/services/immersion_service.dart test/features/ui/immersion_walkthrough_test.dart test/features/immersion/immersion_service_test.dart`
+  - Result: formatting completed successfully
+- Ran `flutter analyze lib/features/immersion/models/immersion_article.dart lib/features/immersion/services/shared_reading_library.dart lib/features/immersion/services/immersion_service.dart test/features/immersion/immersion_service_test.dart test/features/ui/immersion_walkthrough_test.dart test/features/jlpt/jlpt_reading_screen_test.dart`
+  - Result: no issues found
+- Ran `flutter test test/features/immersion/immersion_service_test.dart`
+  - Result: all new immersion service tests passed
+- Ran `flutter test test/features/ui/immersion_walkthrough_test.dart`
+  - Result: immersion walkthrough regressions passed
+- Ran `flutter test test/features/jlpt/jlpt_reading_screen_test.dart`
+  - Result: JLPT reading integration with immersion lessons still passed
+
+### Immersion Reading Normalization Pass (Dataset-Wide Kana Reading Fill + UI Guard)
+
+- Continued immediately after the `N3` tail pass to close the remaining dataset inconsistency around `readingCoverage`.
+- Found an important UX caveat before doing the large data pass
+  - `ImmersionReaderScreen` was rendering furigana whenever `reading` was non-empty
+  - that behavior would make a broad `reading` cleanup visually noisy for kana-only tokens and surface-equals-reading tokens
+- Applied a UI guard first
+  - updated `lib/features/immersion/screens/immersion_reader_screen.dart` to use `shouldShowReading(...)` in:
+    - inline token furigana rendering
+    - token detail sheet
+    - token subtitle summary
+  - this aligns Immersion with the same reading-display contract already used in vocab/lesson flows
+- Applied a broad data-side normalization pass after the UI guard
+  - automatically filled missing `reading` values for kana-only immersion tokens across the asset bank
+  - scope:
+    - `assets/data/content/immersion/n5/*.json`
+    - `assets/data/content/immersion/n4/*.json`
+    - `assets/data/content/immersion/n3/*.json`
+  - result:
+    - `71` immersion lesson files updated
+    - `1079` token `reading` fields filled safely from surface-form kana
+  - also patched the final real non-kana gap:
+    - `assets/data/content/immersion/n4/lesson_35.json`
+    - `JLPT` -> `じぇいえるぴーてぃー`
+- Regenerated `docs/reports/immersion-consistency-report.json`
+  - dataset state after this pass:
+    - `N5`: `readingCoverage 1.0000`, `meaningCoverage 1.0000`, `shortKanaWithoutMeaningRatio 0.0000`
+    - `N4`: `readingCoverage 1.0000`, `meaningCoverage 1.0000`, `shortKanaWithoutMeaningRatio 0.0000`
+    - `N3`: `readingCoverage 1.0000`, `meaningCoverage 1.0000`, `shortKanaWithoutMeaningRatio 0.0000`
+  - this effectively closes the current immersion consistency backlog at the report level for all three active JLPT banks
+
+### Verification Run
+
+- Ran `python tooling/audit_immersion_consistency.py` with UTF-8 console output
+  - Result: canonical immersion report is now fully green across `N5` / `N4` / `N3`
+- Ran `flutter test test/features/ui/immersion_walkthrough_test.dart`
+  - Result: immersion walkthrough regressions still passed after the furigana display guard and dataset-wide normalization
+- Ran `flutter test test/features/jlpt/jlpt_reading_screen_test.dart`
+  - Result: JLPT reading integration with immersion lessons still passed after the normalization pass
+
+### Immersion Dialogue Quality Pass (`N4` Conversation Lessons)
+
+- Started a learner-quality pass after the coverage cleanup, focusing on dialogue-heavy `N4` lessons where token coverage was already green but the learning experience still felt fragmented or overly literal.
+- Targeted lessons in this batch
+  - `assets/data/content/immersion/n4/lesson_28.json`
+  - `assets/data/content/immersion/n4/lesson_29.json`
+  - `assets/data/content/immersion/n4/lesson_39.json`
+- Cleanup strategy used in this pass
+  - merged conversational chunks that should be learned as one natural unit instead of several small mechanical tokens
+  - rewrote learner-facing `meaningEn` / `meaningVi` glosses so they sound like usable Japanese rather than dictionary fragments
+- Representative unit upgrades in this batch
+  - `どうしましたか`
+  - `開けてください`
+  - `風邪ですね`
+  - `飲んでください`
+  - `入らないほうがいいですよ`
+  - `止まりますか`
+  - `乗ってください`
+  - `何番線ですか`
+  - `忘れないようにしてください`
+  - `どうしますか`
+  - `短くしてください`
+- Representative gloss improvements in this batch
+  - `あるんです` -> explanatory symptom statement instead of a flat placeholder gloss
+  - `そうですか` -> `I see`
+  - `これは` in station dialogue -> `this train`
+  - `３番線` -> `Platform 3`
+  - `切ってもらいました` -> `had my hair cut`
+  - `んですが` -> softened request / intention gloss instead of `explanatory`
+- Regenerated `docs/reports/immersion-consistency-report.json`
+  - consistency stayed fully green:
+    - `N5`: `readingCoverage 1.0000`, `meaningCoverage 1.0000`
+    - `N4`: `readingCoverage 1.0000`, `meaningCoverage 1.0000`
+    - `N3`: `readingCoverage 1.0000`, `meaningCoverage 1.0000`
+  - `N4` token totals became slightly leaner because several broken conversational units were normalized into single study chunks
+
+### Verification Run
+
+- Ran a focused empty-meaning sweep for the 3 edited `N4` lesson assets
+  - Result: no remaining non-punctuation empty `meaning` fields in the edited files
+- Ran `python tooling/audit_immersion_consistency.py`
+  - Result: canonical immersion report remained fully green after the dialogue-quality pass
+- Ran `flutter test test/features/ui/immersion_walkthrough_test.dart`
+  - Result: passed
+- Ran `flutter test test/features/jlpt/jlpt_reading_screen_test.dart`
+  - Result: passed
+
+### Immersion Quality Pass (`N5` Letter / Winter / New Year + `N4` Vending / Karaoke)
+
+- Continued the same no-stop polish workflow on another mixed batch of daily-life lessons.
+- Targeted lessons in this batch
+  - `assets/data/content/immersion/n5/lesson_19.json`
+  - `assets/data/content/immersion/n5/lesson_20.json`
+  - `assets/data/content/immersion/n5/lesson_21.json`
+  - `assets/data/content/immersion/n4/lesson_44.json`
+  - `assets/data/content/immersion/n4/lesson_45.json`
+- Cleanup strategy used in this pass
+  - merged short descriptive or formulaic chunks into learner-friendly units
+  - improved glosses where the previous copy still felt too literal, too fragmented, or too “dictionary-like”
+- Representative unit upgrades in this batch
+  - `元気に`
+  - `楽しいです`
+  - `とてもきれいでした`
+  - `それでは、また`
+  - `冬休みです`
+  - `多いです`
+  - `スキーができます`
+  - `スキーが好きです`
+  - `おいしいラーメン`
+  - `食べたいです`
+  - `１月１日は`
+  - `お正月です`
+  - `と言います`
+  - `お祈りをします`
+  - `温かい飲み物`
+  - `冷たい飲み物`
+  - `ICカード`
+  - `買えるので`
+  - `飲んだりするのは`
+  - `一人で行く`
+  - `ストレス解消`
+  - `いいそうです`
+- Representative gloss improvements in this batch
+  - `元気に過ごしています` now reads closer to “I’m doing well”
+  - `それでは、また` now works like a natural letter sign-off
+  - `お正月です` and `と言います` now read more naturally in the New Year explanation flow
+  - `買えるので` in vending-machine copy now explains the causal flow instead of leaving a bare grammar fragment
+  - karaoke explanation lines now sound more like actual explanatory Japanese than a split grammar exercise
+- Regenerated `docs/reports/immersion-consistency-report.json`
+  - consistency remained fully green:
+    - `N5`: `readingCoverage 1.0000`, `meaningCoverage 1.0000`
+    - `N4`: `readingCoverage 1.0000`, `meaningCoverage 1.0000`
+    - `N3`: `readingCoverage 1.0000`, `meaningCoverage 1.0000`
+  - token banks became leaner again after the additional chunk normalization:
+    - `N5 nonPunctuationTokenCount`: `657` -> `635`
+    - `N4 nonPunctuationTokenCount`: `809` -> `809`
+
+### Verification Run
+
+- Ran a focused empty-field sweep for the 5 edited lesson assets
+  - Result: no remaining non-punctuation empty `reading` or `meaning` fields in the edited files
+- Ran `python tooling/audit_immersion_consistency.py`
+  - Result: canonical immersion report stayed fully green after the batch
+- Ran `flutter test`
+  - Result: full suite passed
+
+### Immersion Quality Pass (`N5` Seasonal / Letter Copy + `N4` Convenience / Leisure Copy)
+
+- Continued the same polish workflow on another set of learner-facing everyday lessons, this time focused on letter writing, seasonal plans, New Year customs, vending machines, and karaoke.
+- Targeted lessons in this batch
+  - `assets/data/content/immersion/n5/lesson_19.json`
+  - `assets/data/content/immersion/n5/lesson_20.json`
+  - `assets/data/content/immersion/n5/lesson_21.json`
+  - `assets/data/content/immersion/n4/lesson_44.json`
+  - `assets/data/content/immersion/n4/lesson_45.json`
+- Cleanup strategy used in this pass
+  - merged short descriptive chunks into study units that read more naturally
+  - improved glosses that still felt too literal or too fragmentary for actual learners
+- Representative unit upgrades in this batch
+  - `元気に`
+  - `楽しいです`
+  - `とてもきれいでした`
+  - `それでは、また`
+  - `冬休みです`
+  - `多いです`
+  - `スキーができます`
+  - `スキーが好きです`
+  - `おいしいラーメン`
+  - `食べたいです`
+  - `１月１日は`
+  - `お正月です`
+  - `と言います`
+  - `お祈りをします`
+  - `温かい飲み物`
+  - `冷たい飲み物`
+  - `ICカード`
+  - `買えるので`
+  - `ストレス解消`
+  - `いいそうです`
+- Representative gloss improvements in this batch
+  - `元気に過ごしています` flow now reads more like “I’m doing well” than a stiff literal decomposition
+  - `それでは、また` now closes the letter like a real sign-off
+  - `お正月です` and `と言います` now read more naturally in the New Year explanation flow
+  - `便利です` in vending machine copy now reads as a natural statement instead of a bare dictionary tag
+  - karaoke lines now sound closer to real explanatory Japanese instead of fragmented grammar labels
+- Regenerated `docs/reports/immersion-consistency-report.json`
+  - consistency remained fully green:
+    - `N5`: `readingCoverage 1.0000`, `meaningCoverage 1.0000`
+    - `N4`: `readingCoverage 1.0000`, `meaningCoverage 1.0000`
+    - `N3`: `readingCoverage 1.0000`, `meaningCoverage 1.0000`
+  - token banks became leaner again after additional chunk normalization:
+    - `N5 nonPunctuationTokenCount`: `657` -> `635`
+    - `N4 nonPunctuationTokenCount`: `822` -> `809`
+
+### Verification Run
+
+- Ran a focused empty-field sweep for the 5 edited lesson assets
+  - Result: no remaining non-punctuation empty `reading` or `meaning` fields in the edited files
+- Ran `python tooling/audit_immersion_consistency.py`
+  - Result: canonical immersion report stayed fully green after the batch
+- Ran `flutter test test/features/ui/immersion_walkthrough_test.dart`
+  - Result: passed
+- Ran `flutter test test/features/jlpt/jlpt_reading_screen_test.dart`
+  - Result: passed
+
+### Immersion Quality Pass (`N5` Phone / Convenience + `N4` Public-Life Copy)
+
+- Continued the learner-quality pass with another mixed batch that covered common daily Japanese scenarios: phone calls, convenience stores, train etiquette, and onsen descriptions.
+- Targeted lessons in this batch
+  - `assets/data/content/immersion/n5/lesson_18.json`
+  - `assets/data/content/immersion/n5/lesson_22.json`
+  - `assets/data/content/immersion/n4/lesson_40.json`
+  - `assets/data/content/immersion/n4/lesson_43.json`
+- Cleanup strategy used in this pass
+  - merged polite daily-life chunks into reusable speaking/listening units
+  - improved contextual glosses where the old version was too literal, too fragmented, or too dictionary-like
+- Representative unit upgrades in this batch
+  - `田中です`
+  - `木村さんのお宅ですか`
+  - `何時ごろ戻りますか`
+  - `６時ごろです`
+  - `またかけます`
+  - `便利です`
+  - `買うことができます`
+  - `コピーもできます`
+  - `多い国です`
+  - `暖かくなります`
+  - `泊まるのは`
+  - `いい経験`
+  - `正確です`
+  - `ほとんど遅れません`
+  - `押すこともあります`
+  - `話さないようにしましょう`
+- Representative gloss improvements in this batch
+  - `田中です` -> `this is Tanaka speaking`
+  - `木村さんのお宅ですか` -> `is this the Kimura residence?`
+  - `お願いします` in the convenience-store flow -> contextualized as a natural checkout response
+  - `多い国です` -> `is a country with many hot springs`
+  - `正確です` -> `are very punctual`
+  - `話さないようにしましょう` -> `let's avoid talking on the phone`
+- Regenerated `docs/reports/immersion-consistency-report.json`
+  - consistency remained fully green:
+    - `N5`: `readingCoverage 1.0000`, `meaningCoverage 1.0000`
+    - `N4`: `readingCoverage 1.0000`, `meaningCoverage 1.0000`
+    - `N3`: `readingCoverage 1.0000`, `meaningCoverage 1.0000`
+  - token banks became slightly leaner again after removing more fragmented chunks:
+    - `N5 nonPunctuationTokenCount`: `675` -> `657`
+    - `N4 nonPunctuationTokenCount`: `837` -> `822`
+
+### Verification Run
+
+- Ran a focused empty-field sweep for the 4 edited lesson assets
+  - Result: no remaining non-punctuation empty `reading` or `meaning` fields in the edited files
+- Ran `python tooling/audit_immersion_consistency.py`
+  - Result: canonical immersion report stayed fully green after the batch
+- Ran `flutter test test/features/ui/immersion_walkthrough_test.dart`
+  - Result: passed
+- Ran `flutter test test/features/jlpt/jlpt_reading_screen_test.dart`
+  - Result: passed
+  - Note: first attempt hit a transient local socket/buffer error from the Flutter test runner, but the immediate rerun passed cleanly with no app-side regression
+
+### Immersion Dialogue Quality Pass (`N5` Core Conversation Lessons)
+
+- Continued the learner-quality pass on the core `N5` dialogue set where the content was already valid but still felt too literal or too fragmented in real study use.
+- Targeted lessons in this batch
+  - `assets/data/content/immersion/n5/lesson_07.json`
+  - `assets/data/content/immersion/n5/lesson_08.json`
+  - `assets/data/content/immersion/n5/lesson_23.json`
+  - `assets/data/content/immersion/n5/lesson_24.json`
+- Cleanup strategy used in this pass
+  - merged short everyday dialogue chunks into study units that match how learners actually hear and reuse them
+  - improved `meaningVi` / `meaningEn` so restaurant/station/library/direction dialogue sounds natural instead of looking like dictionary fragments
+- Representative unit upgrades in this batch
+  - `切符売り場`
+  - `どこですか`
+  - `あそこです`
+  - `いくらですか`
+  - `２００円です`
+  - `何名様ですか`
+  - `こちらへどうぞ`
+  - `これは何ですか`
+  - `それは天ぷらです`
+  - `これをください`
+  - `右へ曲がってください`
+  - `左にありますよ`
+  - `借りたいんですが`
+  - `持っていますか`
+  - `名前と住所`
+  - `書いてください`
+- Representative gloss improvements in this batch
+  - `切符売り場` -> `ticket counter`
+  - `お願いします` -> contextualized to `please / I'd like one`
+  - `これをください` -> `I'll have this, please`
+  - `持っていますか` -> `do you have your card with you?`
+  - `持っていません` -> `I don't have it with me`
+- Regenerated `docs/reports/immersion-consistency-report.json`
+  - consistency remained fully green:
+    - `N5`: `readingCoverage 1.0000`, `meaningCoverage 1.0000`
+    - `N4`: `readingCoverage 1.0000`, `meaningCoverage 1.0000`
+    - `N3`: `readingCoverage 1.0000`, `meaningCoverage 1.0000`
+  - `N5` became slightly leaner after merging broken conversation chunks:
+    - `nonPunctuationTokenCount`: `706` -> `675`
+    - `glossableTokenCount`: `427` -> `415`
+
+### Verification Run
+
+- Ran a focused empty-meaning sweep for the 4 edited `N5` lesson assets
+  - Result: no remaining non-punctuation empty `reading` or `meaning` fields in the edited files
+- Ran `python tooling/audit_immersion_consistency.py`
+  - Result: canonical immersion report remained fully green after the `N5` dialogue pass
+- Ran `flutter test test/features/ui/immersion_walkthrough_test.dart`
+  - Result: passed
+- Ran `flutter test test/features/jlpt/jlpt_reading_screen_test.dart`
+  - Result: passed
+
+### Immersion Data Cleanup Pass (`N3` Final Tail Normalization)
+
+- Closed the remaining weak `N3` tail directly in the asset bank instead of touching services again.
+- Targeted final tail lessons from the previous audit
+  - `lesson_70`
+  - `lesson_69`
+  - `lesson_66`
+  - `lesson_58`
+- Cleanup strategy used in this pass
+  - filled the last learner-facing empty particles/helper tokens with both `reading` and bilingual meaning so the reader UI no longer hits blank gloss slots on these lessons
+  - merged broken study units into the shapes learners should actually study:
+    - `書いてみる`
+    - `考えすぎていた`
+    - `だけでなく`
+    - `使われている`
+    - `見るようにしている`
+    - `されてきた`
+    - `以外にも`
+    - `焦って`
+    - `深呼吸して`
+    - `落ち着くようにしている`
+    - `表れている`
+    - `分かってきた`
+    - `一緒に`
+  - corrected several learner-facing glosses/readings that were misleading in context, such as:
+    - `時` -> `とき` / `when`
+    - `日` -> `ひ` / `day`
+    - `違うと` -> conditional sense `if / when`
+    - `参加する` -> verb gloss `participate`
+    - `大会` -> `tournament`
+    - `理解したい` -> `want to understand more`
+- Updated asset files
+  - `assets/data/content/immersion/n3/lesson_70.json`
+  - `assets/data/content/immersion/n3/lesson_69.json`
+  - `assets/data/content/immersion/n3/lesson_66.json`
+  - `assets/data/content/immersion/n3/lesson_58.json`
+- Regenerated `docs/reports/immersion-consistency-report.json`
+  - `N3` improved from the last pre-tail baseline:
+    - `readingCoverage`: `0.8183` -> `0.8454`
+    - `meaningCoverage`: `0.9689` -> `1.0000`
+    - `glossableMeaningCoverage`: `1.0000` -> `1.0000`
+    - `shortKanaWithoutMeaningRatio`: `0.0311` -> `0.0000`
+  - the report now shows the `N3` lesson set fully normalized at the token/meaning level, with `lowestCoverageLessons` rolling forward onto clean `1.0` lesson entries rather than exposing any remaining broken tail file
+
+### Verification Run
+
+- Ran an empty-token sweep across the 4 edited `N3` lesson assets
+  - Result: all 4 files report no remaining non-punctuation empty `reading` or `meaning` fields
+- Ran `python tooling/audit_immersion_consistency.py` with UTF-8 console output
+  - Result: regenerated `docs/reports/immersion-consistency-report.json` and closed the remaining `N3` consistency tail
+- Ran `flutter test test/features/ui/immersion_walkthrough_test.dart`
+  - Result: immersion walkthrough regressions passed
+- Ran `flutter test test/features/jlpt/jlpt_reading_screen_test.dart`
+  - Result: JLPT reading integration with immersion lessons still passed
+
+### Immersion Data Cleanup Pass (`N3` Weakest Lessons Batch H)
+
+- Continued the `P1` Immersion cleanup on the weakest `N3` lessons exposed after the earlier N3 report refresh.
+- Audit-first scope selection for this batch
+  - `lesson_51`, `lesson_57`, `lesson_61`, `lesson_53`, `lesson_59`, `lesson_71`
+- Cleanup strategy used in this batch
+  - filled remaining learner-facing empty particles and helper tokens such as `は`, `が`, `を`, `に`, `か`
+  - merged broken study units and auxiliary chains that should read as one phrase, including:
+    - `増えている`, `過ごして`, `なって`, `決めるようにした`, `前向きに`, `参考にしながら`
+    - `特別な`, `ではなく`, `見ないようにし`, `ことにしている`, `無理な`
+    - `生活している`, `話し合っておく`, `落ち着いて`, `動けるように`
+    - `便利な`, `一方で`, `多くなっている`, `必要な`, `選ぶようにしている`, `大切にしながら`
+    - `気になる`, `比べるようにしている`, `大切にしたい`
+    - `どうか`, `無意識のむだ`, `だけでなく`
+  - corrected multiple learner-facing glosses/readings that were misleading, for example:
+    - `そこで` -> `so / therefore`
+    - `時` in context -> `when`
+    - `一か所` -> `one place`
+    - `使わなかった` -> `didn't use`
+    - `我慢する` -> `hold back / endure`
+    - `考えたい` / `選びたい` -> intent-style glosses instead of noun-like English
+- Updated asset files
+  - `assets/data/content/immersion/n3/lesson_51.json`
+  - `assets/data/content/immersion/n3/lesson_57.json`
+  - `assets/data/content/immersion/n3/lesson_61.json`
+  - `assets/data/content/immersion/n3/lesson_53.json`
+  - `assets/data/content/immersion/n3/lesson_59.json`
+  - `assets/data/content/immersion/n3/lesson_71.json`
+- Regenerated `docs/reports/immersion-consistency-report.json`
+  - `N3` improved from the previous N3 checkpoint:
+    - `readingCoverage`: `0.7920` -> `0.8061`
+    - `meaningCoverage`: `0.8337` -> `0.8873`
+    - `glossableMeaningCoverage`: `1.0000` -> `1.0000`
+    - `shortKanaWithoutMeaningRatio`: `0.1663` -> `0.1127`
+  - weakest `N3` lessons rolled forward to:
+    - `lesson_75`, `lesson_63`, `lesson_73`, `lesson_72`, `lesson_62`, `lesson_56`
+
+### Immersion Data Cleanup Pass (`N3` Weakest Lessons Batch I)
+
+- Continued immediately into the new N3 tail set instead of switching away from immersion.
+- Audit-first scope selection for this batch
+  - `lesson_75`, `lesson_63`, `lesson_72`
+- Cleanup strategy used in this batch
+  - filled the next exposed empty glue tokens in the current weakest lessons
+  - merged more learner-facing phrase units so the content is less fragmented, including:
+    - `大きすぎて`, `気になった`, `調べるようにしている`, `その上で`, `小さくても`
+    - `身につく`, `遠慮しないで`, `質問するようにしている`, `持って`
+    - `だけでなく`, `見えにくくなってしまう`, `確認するようにしている`, `理解してもらいやすい`
+  - corrected several bad glosses/readings, including:
+    - `長すぎる` reading
+    - `伝え方` reading
+    - `届く` -> `reach`
+    - `できない` -> `cannot do`
+    - `話` -> learner-facing `what they say`
+- Updated asset files
+  - `assets/data/content/immersion/n3/lesson_75.json`
+  - `assets/data/content/immersion/n3/lesson_63.json`
+  - `assets/data/content/immersion/n3/lesson_72.json`
+- Regenerated `docs/reports/immersion-consistency-report.json`
+  - `N3` improved again from the Batch H baseline:
+    - `readingCoverage`: `0.8061` -> `0.8098`
+    - `meaningCoverage`: `0.8873` -> `0.9157`
+    - `glossableMeaningCoverage`: `1.0000` -> `1.0000`
+    - `shortKanaWithoutMeaningRatio`: `0.1127` -> `0.0843`
+  - newly exposed next-priority `N3` lessons:
+    - `lesson_73`, `lesson_62`, `lesson_56`, `lesson_54`, `lesson_68`, `lesson_65`
+
+### Verification Run
+
+- Ran a UTF-8 JSON parse + empty-meaning sweep for the latest edited `N3` files
+  - Result: all edited files in Batch H and Batch I parsed successfully
+  - Result: `lesson_51`, `lesson_57`, `lesson_61`, `lesson_53`, `lesson_59`, `lesson_71`, `lesson_75`, `lesson_63`, `lesson_72` now report no remaining non-punctuation empty meanings
+- Ran `python tooling/audit_immersion_consistency.py`
+  - Result: regenerated `docs/reports/immersion-consistency-report.json` and pushed `N3 meaningCoverage` above `0.91`
+- Ran `flutter test test/features/ui/immersion_walkthrough_test.dart`
+  - Result: immersion walkthrough regressions passed
+- Ran `flutter test test/features/jlpt/jlpt_reading_screen_test.dart`
+  - Result: JLPT reading integration with immersion lessons still passed
+
+### Immersion Data Cleanup Pass (`N5` / `N4` Residual Tail Batch F)
+
+- Continued immediately after Batch E instead of stopping at a partial plateau, because the regenerated report showed a small remaining residual tail that was still concentrated in a finite set of untouched `N5` / `N4` lessons.
+- Audit-first scope selection for this batch
+  - `N5`: `lesson_23`, `lesson_22`, `lesson_04`, `lesson_18`, `lesson_13`
+  - `N4`: `lesson_48`, `lesson_42`, `lesson_43`, `lesson_45`, `lesson_47`, `lesson_31`
+- Cleanup strategy used in this batch
+  - filled the final learner-facing particle/question-marker gaps in the selected files
+  - merged several remaining fixed phrases and auxiliary splits that were still creating unnecessary fragment noise
+  - concrete normalization examples in this batch:
+    - `高かったです`
+    - `志望動機`, `聞かれます`, `失礼のない`, `正しく`, `使いたい`
+    - `といえば`
+    - `生まれました`, `一緒に`, `歌ったり`, `飲んだり`, `楽しい`, `行く`
+    - `留学生活`, `楽しみ`, `いろいろな`
+- Updated asset files
+  - `assets/data/content/immersion/n5/lesson_23.json`
+  - `assets/data/content/immersion/n5/lesson_22.json`
+  - `assets/data/content/immersion/n5/lesson_04.json`
+  - `assets/data/content/immersion/n5/lesson_18.json`
+  - `assets/data/content/immersion/n5/lesson_13.json`
+  - `assets/data/content/immersion/n4/lesson_48.json`
+  - `assets/data/content/immersion/n4/lesson_42.json`
+  - `assets/data/content/immersion/n4/lesson_43.json`
+  - `assets/data/content/immersion/n4/lesson_45.json`
+  - `assets/data/content/immersion/n4/lesson_47.json`
+  - `assets/data/content/immersion/n4/lesson_31.json`
+- Regenerated `docs/reports/immersion-consistency-report.json`
+  - `N5` improved from the Batch E baseline:
+    - `readingCoverage`: `0.4597` -> `0.4603`
+    - `meaningCoverage`: `0.9844` -> `1.0000`
+    - `glossableMeaningCoverage`: `1.0000` -> `1.0000`
+    - `shortKanaWithoutMeaningRatio`: `0.0156` -> `0.0000`
+  - `N4` improved from the Batch E baseline:
+    - `readingCoverage`: `0.4755` -> `0.4820`
+    - `meaningCoverage`: `0.9488` -> `0.9838`
+    - `glossableMeaningCoverage`: `1.0000` -> `1.0000`
+    - `shortKanaWithoutMeaningRatio`: `0.0512` -> `0.0162`
+  - after Batch F, `N5` reached a fully clean audit state while `N4` was reduced to one last tiny residual set
+- Newly exposed next-priority lessons after Batch F
+  - `N4`: `lesson_28`, `lesson_29`, `lesson_40`, `lesson_30`
+  - cross-level next major frontier after this cleanup: `N3`
+
+### Verification Run
+
+- Ran a JSON parse + non-punctuation empty-meaning sweep across the 11 edited Batch F lesson assets
+  - Result: all 11 files parsed successfully and reported no remaining non-punctuation empty-meaning tokens
+- Ran `python tooling/audit_immersion_consistency.py` with UTF-8 console output
+  - Result: `N5` reached `meaningCoverage 1.0` and `shortKanaWithoutMeaningRatio 0.0`, while `N4` moved into a very small final residual tail
+
+### Immersion Data Cleanup Pass (`N4` Final Residual Batch G)
+
+- Continued one more focused micro-batch for `N4` so the cleanup would end on a clean boundary instead of leaving a last handful of fragmented lessons half-done.
+- Audit-first scope selection for this batch
+  - `N4`: `lesson_28`, `lesson_29`, `lesson_40`, `lesson_30`
+- Cleanup strategy used in this batch
+  - filled the last remaining learner-facing empty tokens in the residual `N4` set
+  - merged the last natural study units that were still split across helper fragments
+  - concrete normalization examples in this batch:
+    - `拝見します`, `出しておきます`
+    - `東京駅`, `各駅停車`, `乗って`, `置く`, `忘れない`
+- Updated asset files
+  - `assets/data/content/immersion/n4/lesson_28.json`
+  - `assets/data/content/immersion/n4/lesson_29.json`
+  - `assets/data/content/immersion/n4/lesson_40.json`
+  - `assets/data/content/immersion/n4/lesson_30.json`
+- Regenerated `docs/reports/immersion-consistency-report.json`
+  - `N5` stayed clean:
+    - `readingCoverage`: `0.4603` -> `0.4603`
+    - `meaningCoverage`: `1.0000` -> `1.0000`
+    - `glossableMeaningCoverage`: `1.0000` -> `1.0000`
+    - `shortKanaWithoutMeaningRatio`: `0.0000` -> `0.0000`
+  - `N4` improved from the Batch F baseline:
+    - `readingCoverage`: `0.4820` -> `0.4836`
+    - `meaningCoverage`: `0.9838` -> `1.0000`
+    - `glossableMeaningCoverage`: `1.0000` -> `1.0000`
+    - `shortKanaWithoutMeaningRatio`: `0.0162` -> `0.0000`
+  - after Batch G, both `N5` and `N4` reached a fully clean audit state:
+    - `meaningCoverage = 1.0`
+    - `glossableMeaningCoverage = 1.0`
+    - `shortKanaWithoutMeaningRatio = 0.0`
+    - `lowestCoverageLessons` no longer contain partial residuals; the current next frontier is clearly `N3`
+- Newly exposed next-priority lessons after Batch G
+  - `N3`: `lesson_52`, `lesson_74`, `lesson_64`, `lesson_67`, `lesson_55`, `lesson_60`
+
+### Verification Run
+
+- Ran a JSON parse + non-punctuation empty-meaning sweep across the 4 edited Batch G lesson assets
+  - Result: all 4 files parsed successfully and reported no remaining non-punctuation empty-meaning tokens
+- Ran `python tooling/audit_immersion_consistency.py` with UTF-8 console output
+  - Result: both `N5` and `N4` now report `meaningCoverage 1.0` and `shortKanaWithoutMeaningRatio 0.0`
+- Ran `flutter test test/features/ui/immersion_walkthrough_test.dart`
+  - Result: immersion walkthrough regressions passed
+- Ran `flutter test test/features/jlpt/jlpt_reading_screen_test.dart`
+  - Result: JLPT reading integration with immersion lessons still passed
+
+### Immersion Data Cleanup Pass (`N5` / `N4` Weakest Lessons Batch E)
+
+- Continued directly with the next weakest immersion asset batch exposed by the Batch D audit.
+- Audit-first scope selection for this batch
+  - `N5`: `lesson_05`, `lesson_20`, `lesson_24`, `lesson_21`, `lesson_19`, `lesson_07`
+  - `N4`: `lesson_49`, `lesson_38`, `lesson_50`, `lesson_34`, `lesson_44`, `lesson_39`
+- Cleanup strategy used in this batch
+  - kept the same learner-first rule:
+    - fill remaining learner-facing empty function / glue tokens in the weakest residual lessons
+    - merge broken fixed phrases and conjugated units when the current tokenization was fighting the learning experience
+  - concrete normalization examples in this batch:
+    - `あけましておめでとうございます`, `お元気ですか`, `過ごしています`
+    - `お世話になった`, `仲の良かった`, `本当に`
+    - `狭くて`, `遠い`, `探しています`, `見せてもらいました`, `見つかると`
+    - `至る所`, `だけでなく`, `お菓子`, `売っています`, `温かい`, `冷たい`, `買える`
+    - `短くして`
+  - also normalized remaining particle/question-marker gaps in the selected lessons, including `は`, `を`, `が`, `の`, `か`, and context-specific `に`
+- Updated asset files
+  - `assets/data/content/immersion/n5/lesson_05.json`
+  - `assets/data/content/immersion/n5/lesson_20.json`
+  - `assets/data/content/immersion/n5/lesson_24.json`
+  - `assets/data/content/immersion/n5/lesson_21.json`
+  - `assets/data/content/immersion/n5/lesson_19.json`
+  - `assets/data/content/immersion/n5/lesson_07.json`
+  - `assets/data/content/immersion/n4/lesson_49.json`
+  - `assets/data/content/immersion/n4/lesson_38.json`
+  - `assets/data/content/immersion/n4/lesson_50.json`
+  - `assets/data/content/immersion/n4/lesson_34.json`
+  - `assets/data/content/immersion/n4/lesson_44.json`
+  - `assets/data/content/immersion/n4/lesson_39.json`
+- Regenerated `docs/reports/immersion-consistency-report.json`
+  - `N5` improved from the Batch D baseline:
+    - `readingCoverage`: `0.4577` -> `0.4597`
+    - `meaningCoverage`: `0.9465` -> `0.9844`
+    - `glossableMeaningCoverage`: `1.0000` -> `1.0000`
+    - `shortKanaWithoutMeaningRatio`: `0.0535` -> `0.0156`
+  - `N4` improved from the Batch D baseline:
+    - `readingCoverage`: `0.4667` -> `0.4755`
+    - `meaningCoverage`: `0.9078` -> `0.9488`
+    - `glossableMeaningCoverage`: `1.0000` -> `1.0000`
+    - `shortKanaWithoutMeaningRatio`: `0.0922` -> `0.0512`
+  - after Batch E, the weakest `N5` / `N4` lists rolled forward again onto untouched residual files, which means the current low-coverage tail is no longer centered on the batch that was just cleaned
+- Newly exposed next-priority lessons after Batch E
+  - `N5`: `lesson_23`, `lesson_22`, `lesson_04`, `lesson_18`, `lesson_13`
+  - `N4`: `lesson_48`, `lesson_42`, `lesson_43`, `lesson_45`, `lesson_47`, `lesson_31`
+
+### Verification Run
+
+- Ran a JSON parse + non-punctuation empty-meaning sweep across the 12 edited Batch E lesson assets
+  - Result: all 12 files parsed successfully and reported no remaining non-punctuation empty-meaning tokens
+- Ran `python tooling/audit_immersion_consistency.py` with UTF-8 console output
+  - Result: regenerated `docs/reports/immersion-consistency-report.json` with another jump in `meaningCoverage` and another sharp drop in `shortKanaWithoutMeaningRatio` for both `N5` and `N4`
+- Ran `flutter test test/features/ui/immersion_walkthrough_test.dart`
+  - Result: immersion walkthrough regressions passed
+- Ran `flutter test test/features/jlpt/jlpt_reading_screen_test.dart`
+  - Result: JLPT reading integration with immersion lessons still passed
+- Ran `flutter analyze`
+  - Result: full repo passed with no issues
+- Ran `flutter test`
+  - Result: full suite passed (`197` tests in the current workspace run)
+- Ran `flutter build web`
+  - Result: build completed successfully and regenerated `build/web`
+
+### Immersion Data Cleanup Pass (`N5` / `N4` Weakest Lessons Batch A)
+
+- Continued `P1` on the data side instead of the service side, using the canonical immersion audit report to fix the weakest `N5` / `N4` lesson assets directly.
+- Audit-first scope selection
+  - started from `docs/reports/immersion-consistency-report.json`
+  - targeted lessons that were weak because of visibly broken token units and high fragment ratio, not just low total coverage:
+    - `N5`: `lesson_05`, `lesson_07`, `lesson_08`, `lesson_11`, `lesson_21`
+    - `N4`: `lesson_27`, `lesson_32`, `lesson_37`, `lesson_38`, `lesson_39`, `lesson_40`, `lesson_50`
+- Content cleanup strategy used in this batch
+  - merged broken lexeme + conjugation fragments into learner-usable token units such as:
+    - `広くない`, `好き`, `お正月`, `おせち料理`, `食べます`
+    - `作ろう`, `切ります`, `炒めます`, `入れて`, `煮ます`, `簡単`
+    - `大きい`, `早く`, `強く`, `止まる`, `変える`, `変わります`
+    - `燃える`, `燃えない`, `分けなければなりません`, `出してください`
+    - `疲れ`, `取れます`, `泊まる`, `気持ち`
+    - `お釣り`, `間違えて`, `お客様`, `謝らなければなりません`
+    - `お世話`, `良かった`, `別れる`, `寂しい`, `新しい`, `向かって`, `頑張りたい`, `皆さん`
+  - added or restored missing reading/meaning values where the token itself is the learner-facing unit
+  - normalized a few short dialogue-heavy N5 lessons by filling pedagogically meaningful copula/question tokens such as `です`, `ですか`, and `でした` where they were the main missing signal in the sentence
+- Updated asset files
+  - `assets/data/content/immersion/n5/lesson_05.json`
+  - `assets/data/content/immersion/n5/lesson_07.json`
+  - `assets/data/content/immersion/n5/lesson_08.json`
+  - `assets/data/content/immersion/n5/lesson_11.json`
+  - `assets/data/content/immersion/n5/lesson_21.json`
+  - `assets/data/content/immersion/n4/lesson_27.json`
+  - `assets/data/content/immersion/n4/lesson_32.json`
+  - `assets/data/content/immersion/n4/lesson_37.json`
+  - `assets/data/content/immersion/n4/lesson_38.json`
+  - `assets/data/content/immersion/n4/lesson_39.json`
+  - `assets/data/content/immersion/n4/lesson_40.json`
+  - `assets/data/content/immersion/n4/lesson_50.json`
+- Regenerated `docs/reports/immersion-consistency-report.json`
+  - `N5` improved from:
+    - `meaningCoverage`: `0.7128` -> `0.7409`
+    - `glossableMeaningCoverage`: `0.9669` -> `0.9821`
+    - `shortKanaWithoutMeaningRatio`: `0.2675` -> `0.2483`
+  - `N4` improved from:
+    - `meaningCoverage`: `0.7563` -> `0.7777`
+    - `glossableMeaningCoverage`: `0.9823` -> `0.9946`
+    - `shortKanaWithoutMeaningRatio`: `0.2340` -> `0.2193`
+  - the previously highlighted weak lessons `N5 lesson_05 / 07 / 08 / 11 / 21` and `N4 lesson_32 / 37 / 38 / 39 / 50` dropped out of the current `lowestCoverageLessons` set after cleanup
+  - `N4 lesson_27` and `N4 lesson_40` still appear in the new tail set, but both improved materially and are now cleaner than before
+- Newly exposed next-priority lessons after this batch
+  - `N5`: `lesson_04`, `lesson_12`, `lesson_18`, `lesson_19`, `lesson_20`, `lesson_22`, `lesson_23`, `lesson_24`
+  - `N4`: `lesson_31`, `lesson_42`, `lesson_43`, `lesson_46`, `lesson_49`
+
+### Verification Run
+
+- Ran JSON parse validation on all edited immersion lesson files
+  - Result: all edited `N5` / `N4` lesson assets parsed successfully
+- Ran `python tooling/audit_immersion_consistency.py` with UTF-8 console output
+  - Result: regenerated `docs/reports/immersion-consistency-report.json` with improved `N5` / `N4` coverage and reduced fragmentation
+- Ran `flutter test test/features/ui/immersion_walkthrough_test.dart`
+  - Result: immersion walkthrough regressions passed
+- Ran `flutter test test/features/jlpt/jlpt_reading_screen_test.dart`
+  - Result: JLPT reading still loads directly from immersion lessons and all tests passed
+  - Note: Flutter emitted a post-test cleanup warning for `build\\unit_test_assets`, but the test results themselves still passed successfully
+
+### Immersion Data Cleanup Pass (`N5` / `N4` Weakest Lessons Batch B)
+
+- Continued the immersion asset cleanup immediately after Batch A, again using the regenerated audit report instead of manual guessing.
+- Audit-first scope selection after Batch A
+  - `N5`: `lesson_04`, `lesson_12`, `lesson_18`, `lesson_19`, `lesson_20`, `lesson_22`, `lesson_23`, `lesson_24`
+  - `N4`: `lesson_31`, `lesson_42`, `lesson_43`, `lesson_46`, `lesson_49`
+- Cleanup strategy used in this batch
+  - kept the same learner-first normalization rule: if a token should function as one study unit, merge it instead of leaving split stems/endings in the asset
+  - merged many broken surface units such as:
+    - `お元気`, `見ました`, `送ります`, `行きます`, `多い`, `好き`, `食べたい`
+    - `開いています`, `お弁当`, `買う`, `温めますか`, `お願いします`, `助かります`
+    - `曲がって`, `借ります`, `借りたい`, `持っています`, `持っていません`, `書いて`
+    - `入る`, `脱がなければなりません`, `脱いで`, `履きます`, `食べ終わったら`, `大切な`
+    - `終わり`, `初めに`, `咲きます`, `行って`, `お花見`, `食べたり`, `お酒`, `飲んだり`
+    - `遅れません`, `混みます`, `押す`, `話さない`
+    - `覚える`, `書いて`, `忘れて`, `読み方`, `読む`, `楽しく`
+    - `教える`, `難しい`, `楽しい`, `いろいろな`, `触れる`, `誰か`, `役に立つ`, `嬉しい`
+  - also filled a few remaining learner-facing copula/time-summary tokens in `N5` where the audit was still being dragged down by `でした` / similar sentence-ending units
+  - removed a duplicated `役に立つ` representation in `n4/lesson_49.json` so the paragraph token stream is cleaner for both audit and UI tap-gloss behavior
+- Updated asset files
+  - `assets/data/content/immersion/n5/lesson_04.json`
+  - `assets/data/content/immersion/n5/lesson_12.json`
+  - `assets/data/content/immersion/n5/lesson_18.json`
+  - `assets/data/content/immersion/n5/lesson_19.json`
+  - `assets/data/content/immersion/n5/lesson_20.json`
+  - `assets/data/content/immersion/n5/lesson_22.json`
+  - `assets/data/content/immersion/n5/lesson_23.json`
+  - `assets/data/content/immersion/n5/lesson_24.json`
+  - `assets/data/content/immersion/n4/lesson_31.json`
+  - `assets/data/content/immersion/n4/lesson_42.json`
+  - `assets/data/content/immersion/n4/lesson_43.json`
+  - `assets/data/content/immersion/n4/lesson_46.json`
+  - `assets/data/content/immersion/n4/lesson_49.json`
+- Regenerated `docs/reports/immersion-consistency-report.json`
+  - `N5` improved from the Batch A baseline:
+    - `readingCoverage`: `0.4349` -> `0.4500`
+    - `meaningCoverage`: `0.7409` -> `0.7625`
+    - `glossableMeaningCoverage`: `0.9821` -> `1.0000`
+    - `shortKanaWithoutMeaningRatio`: `0.2483` -> `0.2375`
+  - `N4` improved from the Batch A baseline:
+    - `readingCoverage`: `0.4315` -> `0.4474`
+    - `meaningCoverage`: `0.7777` -> `0.8002`
+    - `glossableMeaningCoverage`: `0.9946` -> `1.0000`
+    - `shortKanaWithoutMeaningRatio`: `0.2193` -> `0.1998`
+  - after Batch B, the top-10 weak lists shifted almost entirely onto untouched lessons, which confirms the cleanup is moving the actual bottlenecks rather than just reshuffling the same files
+- Newly exposed next-priority lessons after Batch B
+  - `N5`: `lesson_02`, `lesson_03`, `lesson_06`, `lesson_09`, `lesson_10`, `lesson_11`, `lesson_13`, `lesson_15`, `lesson_16`
+  - `N4`: `lesson_27`, `lesson_28`, `lesson_30`, `lesson_35`, `lesson_40`, `lesson_41`
+
+### Verification Run
+
+- Ran JSON parse validation on all edited Batch B lesson assets
+  - Result: all edited `N5` / `N4` lesson files parsed successfully
+- Ran `python tooling/audit_immersion_consistency.py` with UTF-8 console output
+  - Result: regenerated `docs/reports/immersion-consistency-report.json` with `N5` / `N4` improved again and both levels now at `1.0` glossable meaning coverage
+- Ran `flutter test test/features/ui/immersion_walkthrough_test.dart`
+  - Result: immersion walkthrough regressions passed
+  - Note: Flutter emitted a post-test cleanup warning for `build\\unit_test_assets`, but the test itself passed successfully
+- Ran `flutter test test/features/jlpt/jlpt_reading_screen_test.dart`
+  - Result: JLPT reading integration with immersion lessons still passed
+  - Note: Flutter emitted the same post-test cleanup warning for `build\\unit_test_assets`, but the test itself passed successfully
+
+### Immersion Data Cleanup Pass (`N5` / `N4` Weakest Lessons Batch C)
+
+- Continued directly into the next weakest immersion asset batch from the regenerated audit report after Batch B.
+- Audit-first scope selection for this batch
+  - `N5`: `lesson_02`, `lesson_03`, `lesson_06`, `lesson_09`, `lesson_10`, `lesson_11`, `lesson_13`, `lesson_15`, `lesson_16`
+  - `N4`: `lesson_27`, `lesson_28`, `lesson_30`, `lesson_35`, `lesson_40`, `lesson_41`
+- Cleanup strategy used in this batch
+  - kept the same learner-first rule: merge only when the current asset was splitting one natural study unit into broken fragments
+  - focused this pass on two concrete cleanup types:
+    - filling learner-facing empty function/glue tokens in the weakest lessons: `は`, `を`, `が`, `の`, `に`, `です`, `か`
+    - merging broken compounds/conjugated units that were still artificially fragmented, such as:
+      - `特に`, `入って`, `好き`
+      - `お腹`, `痛くて`, `開けて`, `出して`, `飲んで`, `お風呂`, `入らない`
+      - `働く`, `話す`, `使わなければなりません`, `難しい`, `使う`
+      - `休み`, `行こう`, `古い`, `お寺`, `お菓子`, `食べたい`
+      - `気をつけよう`, `温泉旅館`
+  - also corrected one wrong learner-facing English gloss in `n5/lesson_10.json`
+    - `洗濯.meaningEn`: `lulling` -> `laundry`
+- Updated asset files
+  - `assets/data/content/immersion/n5/lesson_02.json`
+  - `assets/data/content/immersion/n5/lesson_03.json`
+  - `assets/data/content/immersion/n5/lesson_06.json`
+  - `assets/data/content/immersion/n5/lesson_09.json`
+  - `assets/data/content/immersion/n5/lesson_10.json`
+  - `assets/data/content/immersion/n5/lesson_11.json`
+  - `assets/data/content/immersion/n5/lesson_13.json`
+  - `assets/data/content/immersion/n5/lesson_15.json`
+  - `assets/data/content/immersion/n5/lesson_16.json`
+  - `assets/data/content/immersion/n4/lesson_27.json`
+  - `assets/data/content/immersion/n4/lesson_28.json`
+  - `assets/data/content/immersion/n4/lesson_30.json`
+  - `assets/data/content/immersion/n4/lesson_35.json`
+  - `assets/data/content/immersion/n4/lesson_40.json`
+  - `assets/data/content/immersion/n4/lesson_41.json`
+- Regenerated `docs/reports/immersion-consistency-report.json`
+  - `N5` improved from the Batch B baseline:
+    - `readingCoverage`: `0.4500` -> `0.4513`
+    - `meaningCoverage`: `0.7625` -> `0.8900`
+    - `glossableMeaningCoverage`: `1.0000` -> `1.0000`
+    - `shortKanaWithoutMeaningRatio`: `0.2375` -> `0.1100`
+  - `N4` improved from the Batch B baseline:
+    - `readingCoverage`: `0.4474` -> `0.4585`
+    - `meaningCoverage`: `0.8002` -> `0.8592`
+    - `glossableMeaningCoverage`: `1.0000` -> `1.0000`
+    - `shortKanaWithoutMeaningRatio`: `0.1998` -> `0.1408`
+  - after Batch C, the `lowestCoverageLessons` sets for both `N5` and `N4` rolled forward entirely onto untouched lessons, which means this pass removed the current bottlenecks instead of just redistributing the same weak files
+- Newly exposed next-priority lessons after Batch C
+  - `N5`: `lesson_12`, `lesson_14`, `lesson_25`, `lesson_17`, `lesson_08`, `lesson_01`
+  - `N4`: `lesson_32`, `lesson_26`, `lesson_33`, `lesson_46`, `lesson_36`, `lesson_37`
+
+### Verification Run
+
+- Ran JSON parse validation on all edited Batch C lesson assets
+  - Result: all 15 edited `N5` / `N4` lesson files parsed successfully
+- Ran `python tooling/audit_immersion_consistency.py` with UTF-8 console output
+  - Result: regenerated `docs/reports/immersion-consistency-report.json` with a strong jump in `meaningCoverage` and a large drop in `shortKanaWithoutMeaningRatio` for both `N5` and `N4`
+- Ran `flutter test test/features/ui/immersion_walkthrough_test.dart`
+  - Result: immersion walkthrough regressions passed
+- Ran `flutter test test/features/jlpt/jlpt_reading_screen_test.dart`
+  - Result: JLPT reading integration with immersion lessons still passed
+  - Note: Flutter emitted a post-test cleanup warning for `build\\unit_test_assets`, but the test results themselves still passed successfully
+
+### Immersion Data Cleanup Pass (`N5` / `N4` Weakest Lessons Batch D)
+
+- Continued immediately with the next weakest immersion lessons exposed by the Batch C audit.
+- Audit-first scope selection for this batch
+  - `N5`: `lesson_12`, `lesson_14`, `lesson_25`, `lesson_17`, `lesson_08`, `lesson_01`
+  - `N4`: `lesson_32`, `lesson_26`, `lesson_33`, `lesson_46`, `lesson_36`, `lesson_37`
+- Cleanup strategy used in this batch
+  - kept the same learner-first policy:
+    - fill remaining learner-facing empty glue/function tokens in the current weakest lessons
+    - merge obviously broken conjugation / compound splits when they should present as one study unit
+  - concrete normalization examples in this batch:
+    - `少し`, `難しい`, `面白い`, `覚えました`, `頑張りましょう`
+    - `行って`, `もらいました`
+    - `安くて`, `楽しみ`
+    - `新しい`, `来ました`, `話しました`, `一緒に`
+    - `お祭り`, `着た`, `焼きそば`, `買って`, `食べました`, `上がりました`
+    - `来て`, `帰った`, `気をつけて`
+  - also filled the remaining learner-facing particles/copula tokens across the selected `N5` / `N4` lessons so the batch is now clean at the file-local empty-meaning level
+- Updated asset files
+  - `assets/data/content/immersion/n5/lesson_12.json`
+  - `assets/data/content/immersion/n5/lesson_14.json`
+  - `assets/data/content/immersion/n5/lesson_25.json`
+  - `assets/data/content/immersion/n5/lesson_17.json`
+  - `assets/data/content/immersion/n5/lesson_08.json`
+  - `assets/data/content/immersion/n5/lesson_01.json`
+  - `assets/data/content/immersion/n4/lesson_32.json`
+  - `assets/data/content/immersion/n4/lesson_26.json`
+  - `assets/data/content/immersion/n4/lesson_33.json`
+  - `assets/data/content/immersion/n4/lesson_46.json`
+  - `assets/data/content/immersion/n4/lesson_36.json`
+  - `assets/data/content/immersion/n4/lesson_37.json`
+- Regenerated `docs/reports/immersion-consistency-report.json`
+  - `N5` improved from the Batch C baseline:
+    - `readingCoverage`: `0.4513` -> `0.4577`
+    - `meaningCoverage`: `0.8900` -> `0.9465`
+    - `glossableMeaningCoverage`: `1.0000` -> `1.0000`
+    - `shortKanaWithoutMeaningRatio`: `0.1100` -> `0.0535`
+  - `N4` improved from the Batch C baseline:
+    - `readingCoverage`: `0.4585` -> `0.4667`
+    - `meaningCoverage`: `0.8592` -> `0.9078`
+    - `glossableMeaningCoverage`: `1.0000` -> `1.0000`
+    - `shortKanaWithoutMeaningRatio`: `0.1408` -> `0.0922`
+  - after Batch D, both `N5` and `N4` moved into a much smaller residual tail set; the weakest lists are now mostly older partially-clean lessons rather than the major fragmented files that were targeted here
+- Newly exposed next-priority lessons after Batch D
+  - `N5`: `lesson_05`, `lesson_20`, `lesson_24`, `lesson_21`, `lesson_19`, `lesson_07`
+  - `N4`: `lesson_49`, `lesson_38`, `lesson_50`, `lesson_34`, `lesson_44`, `lesson_39`
+
+### Verification Run
+
+- Ran JSON parse validation on all edited Batch D lesson assets
+  - Result: all 12 edited `N5` / `N4` lesson files parsed successfully
+- Ran an empty-meaning sweep across the 12 edited lesson assets
+  - Result: all 12 files now report `no-empty-meaning-tokens`
+- Ran `python tooling/audit_immersion_consistency.py` with UTF-8 console output
+  - Result: regenerated `docs/reports/immersion-consistency-report.json` with another strong jump in both `meaningCoverage` and `shortKanaWithoutMeaningRatio`
+- Ran `flutter test test/features/ui/immersion_walkthrough_test.dart`
+  - Result: immersion walkthrough regressions passed
+- Ran `flutter test test/features/jlpt/jlpt_reading_screen_test.dart`
+  - Result: JLPT reading integration with immersion lessons still passed
+
+### Repo Audit Follow-up (`2026-03-19`)
+
+- Saved the active execution contract to `docs/plans/next-execution-plan-2026-03-19.md` to keep the next milestone from drifting between passes.
+- Chose `Grammar Practice hardening` as the next active milestone after confirming the repo baseline is green and immersion is now maintenance-only.
+- Locked the working order for the next pass:
+  - preserve the current immersion + CI + smoke-test baseline
+  - harden Grammar Practice from the data and question-generation contract upward
+  - continue the handwriting reliability pass after Grammar Practice
+  - update release-truth docs so the repo status matches the real app state
+
+### Grammar Practice Hardening Pass 1 (`2026-03-19`)
+
+- Hardened grammar ingest at the seed layer instead of only patching UI symptoms.
+  - `GrammarSeeder` now canonicalizes `grammarPoint` with Japanese-first resolution and strips Vietnamese / English helper notes from the canonical label before storing it in the app DB.
+  - bumped grammar seed version to `8`
+  - added tolerant existing-row matching so reseeding updates polluted legacy rows instead of blindly creating duplicates for the same lesson point
+  - synced `LessonRepository.seedGrammarIfEmpty` to `GrammarSeeder.kGrammarDataVersion` instead of leaving a stale hard-coded version gate
+- Hardened Grammar Practice session behavior.
+  - default / ghost queue selection now respects the currently selected JLPT level when no explicit point IDs are passed in
+  - session metadata now exposes `Session`, `Source`, `Scope`, `Goal`, and `Mode` together in the banner
+  - session render tokens now force question widgets to reset cleanly between sessions so prior selection state does not leak into the next run
+  - prepared session questions now reshuffle option order per session while keeping the in-session order stable
+- Hardened grammar audit/report semantics.
+  - regenerated `docs/reports/grammar-example-quality-report.json`
+  - updated `tooling/audit_grammar_example_quality.dart` so missing capability flags are classified as `expected-missing` vs `real-quality-gap`
+  - updated `docs/reports/README.md` to document the new flag meaning
+- Updated release-truth docs.
+  - refreshed `README.md`
+  - refreshed `ROADMAP.md`
+  - both now reflect: baseline green, immersion maintenance-only, active milestone = `Grammar Practice hardening`, next milestone = `Handwriting reliability`
+- Added regression coverage for this pass.
+  - `test/data/utils/grammar_english_notation_test.dart`
+  - `test/features/grammar/grammar_practice_screen_test.dart`
+  - extended `test/features/grammar/widgets/multiple_choice_widget_test.dart`
+- Verification gates completed.
+  - `flutter analyze`
+  - `flutter test`
+  - `flutter build web`
+  - all passed after the pass landed
+
+### Handwriting Reliability Pass 1 (`2026-03-19`)
+
+- Hardened the shared handwriting geometry and order pipeline instead of adding more per-character patches.
+  - fixed `_distanceToSegment` projection math in `lib/features/write/services/handwriting_template_matcher.dart` so segment distance checks no longer skew template alignment
+  - upgraded `templateOrderScore()` to blend start / end / center similarity with a stronger best-template alignment penalty, which makes stroke reordering harder to pass accidentally
+  - updated `lib/features/write/services/handwriting_evaluator.dart` so generated-tier order scoring uses the stronger template-based order signal instead of leaning only on heuristic order checks
+- Added a narrow tolerance improvement for recognizably correct enclosure-like kanji.
+  - boxed forms such as `日` / `口` now have a small unguided near-correct escape hatch when the drawn shape is materially right, reducing avoidable false negatives without opening a broad bypass
+- Extended regression coverage for both matcher quality and benchmark safety.
+  - `test/features/write/handwriting_template_matcher_test.dart` now includes a 3-stroke scramble regression
+  - `test/features/write/handwriting_stroke_check_v2_benchmark_test.dart` now enforces explicit v2 false-positive ceilings
+  - `test/features/grammar/grammar_practice_screen_test.dart` was adjusted to tolerate intentional session randomization introduced by the grammar hardening pass
+- Benchmarks improved after the pass.
+  - manual v2 `falsePositiveRate`: `0.045`
+  - curated v2 `falsePositiveRate`: `0.20`
+  - generated v2 `falsePositiveRate`: `0.20`
+- Verification gates completed again after the reliability pass.
+  - `flutter analyze`
+  - `flutter test`
+  - `flutter build web`
+  - all passed after the pass landed
+
+### Route Smoke Hardening Pass 1 (`2026-03-19`)
+
+- Audited the current release gates and confirmed the repo CI workflow already runs the full local contract:
+  - `flutter analyze`
+  - `flutter test`
+  - `flutter build web`
+- Added a new route-level integration smoke suite at `test/features/ui/app_route_smoke_test.dart`.
+  - the test boots the real `App` + `AppRouter` with a controlled in-memory app DB / content DB and minimal seeded grammar + immersion data
+  - it walks the shell through the core routes that matter most for release stability on wide layout:
+    - `/`
+    - `/study`
+    - `/library`
+    - `/search`
+    - `/progress`
+    - `/me`
+    - `/me/data`
+    - `/immersion`
+    - `/grammar-practice`
+  - this closes the gap between isolated widget tests and actual route wiring by validating shell navigation, provider overrides, and screen mountability together
+- Kept the new grammar-practice route smoke deterministic.
+  - seeded a small `N5` grammar bank in memory
+  - routed into `/grammar-practice` with `reverseMultipleChoice` to avoid unsupported/randomized empty-session behavior in smoke mode
+- Verification after the smoke hardening pass:
+  - `flutter test test/features/ui/app_route_smoke_test.dart`
+  - `flutter analyze`
+  - `flutter test`
+  - `flutter build web`
+  - all passed

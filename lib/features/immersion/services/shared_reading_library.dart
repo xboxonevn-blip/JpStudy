@@ -11,6 +11,7 @@ class SharedReadingLibrary {
     final assetPaths = await _loadLessonAssetPaths();
     final articles = <ImmersionArticle>[];
     for (final path in assetPaths) {
+      final expectedLevel = _levelFromAssetPath(path);
       try {
         final raw = await rootBundle.loadString(path);
         final decoded = jsonDecode(raw);
@@ -19,11 +20,21 @@ class SharedReadingLibrary {
           if (wrappedArticles is List) {
             articles.addAll(
               wrappedArticles.whereType<Map>().map(
-                (item) => ImmersionArticle.fromJson(_asMap(item)),
+                (item) => ImmersionArticle.fromJson(
+                  _asMap(item),
+                  expectedLevel: expectedLevel,
+                  fallbackSource: ImmersionArticle.localSourceLabel,
+                ),
               ),
             );
           } else {
-            articles.add(ImmersionArticle.fromJson(decoded));
+            articles.add(
+              ImmersionArticle.fromJson(
+                decoded,
+                expectedLevel: expectedLevel,
+                fallbackSource: ImmersionArticle.localSourceLabel,
+              ),
+            );
           }
         }
       } catch (_) {
@@ -251,6 +262,16 @@ class SharedReadingLibrary {
 
   Map<String, dynamic> _asMap(Map item) {
     return item.map((key, value) => MapEntry('$key', value));
+  }
+
+  String? _levelFromAssetPath(String path) {
+    final normalizedPath = path.replaceAll('\\', '/');
+    final match = RegExp(r'/immersion/(n[1-5])/').firstMatch(normalizedPath);
+    final rawLevel = match?.group(1);
+    if (rawLevel == null) {
+      return null;
+    }
+    return ImmersionArticle.normalizeOfficialLevel(rawLevel);
   }
 
   int _comparePassages(JlptReadingPassage a, JlptReadingPassage b) {

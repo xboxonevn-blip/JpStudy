@@ -48,6 +48,8 @@ Update this file whenever the user gives a persistent preference, constraint, or
   Prefer real diagnostics, counts, sections, progress, and current user context over placeholder panels or decorative filler UI.
 - Immersion should not surface `NHK Easy` anymore.
   Keep the reading experience focused on the in-app reading bank instead of showing NHK source tabs or fallback notices.
+- Immersion should stay local-first at the data/service layer.
+  Use the in-app reading bank as the canonical source, normalize local source labels to `JpStudy Original`, and avoid leaving stale external-source fetch paths around when the app is meant to read from bundled content.
 - Study, Lesson, and Immersion should respect the currently selected JLPT level strictly.
   If Home is set to `N5`, these screens should show `N5` content only instead of mixing adjacent levels like `N4` or `N3`.
 - JLPT exam prep should feel like one complete feature instead of separate `JLPT Coach` and `JLPT Mock` cards.
@@ -98,3 +100,11 @@ Update this file whenever the user gives a persistent preference, constraint, or
   Avoid stretched mobile screens on large browsers; prefer a constrained content canvas, a framed desktop shell, and responsive multi-column composition on Home, Study, and Library.
 - Web utility screens should follow the same desktop language as core learning screens.
   `Me`, `Data`, `Search`, and `Progress` should also use centered page shells, responsive column layouts, and avoid long single-column mobile stacking on large browsers.
+- Repo baseline must stay green before large feature work continues.
+  Treat `flutter analyze`, `flutter test`, and `flutter build web` as the minimum release contract for major passes.
+- Main app surfaces should keep smoke coverage at route or screen level.
+  At minimum, Home, Study, Library, Search, Progress, Me, and Data flows should have a lightweight widget or route smoke test to catch layout and provider regressions early.
+- Report decisions must use canonical active audits only.
+  Prefer the active report set in `docs/reports/README.md`, and treat legacy snapshots like `full-content-audit.json` as stale until regenerated.
+- Active execution plans must be saved in-repo.
+  Keep the current working plan in a file under `docs/plans/` so major multi-pass work does not lose direction between sessions.

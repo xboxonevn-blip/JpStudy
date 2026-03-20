@@ -2,35 +2,46 @@
 
 JpStudy-v2 is a Flutter app for Japanese learning with FSRS scheduling, immersion reading, handwriting practice, and exam-style review.
 
-## Current Status (as of 2026-02-03)
+## Current Status (as of 2026-03-19)
 
 | Phase | Focus | Status | Target |
 | :--- | :--- | :--- | :--- |
 | Phase 1 | Foundation (Anki-like learning core) | 100% | Completed |
 | Phase 2 | Structure and UI system | 100% | Completed |
-| Phase 3 | Smart Immersion + Handwriting | 98% | Feb 2026 |
-| Phase 4 | Cloud Sync ecosystem | 10% | Q2 2026 |
+| Phase 3 | Core quality hardening (Grammar + Handwriting) | Active | Mar-Apr 2026 |
+| Phase 4 | Cloud Sync ecosystem | Parked until core is steadier | Later |
 
 ## Implemented Highlights
 
 - FSRS replaced SM-2 for vocab, grammar, and kanji scheduling.
 - Ghost Review 2.0 auto-captures mistakes with context.
-- Immersion Reader supports local content + NHK Easy style flow, mark-as-learned, and auto-scroll.
+- Immersion Reader is now local-first and uses the bundled reading bank as the canonical source.
 - Handwriting includes stroke/order/shape heuristics with template quality tiers (`manual`, `curated`, `generated`).
 - N5 and N4 kanji template coverage is in place, with curated-to-manual promotion workflow.
 - Mock Exam flow for N5/N4 exists with timer, scoring, and review.
 - Export/Import JSON backup includes progress, attempts, sessions, settings, mistakes, grammar SRS, and kanji SRS.
+- Local release baseline is currently green on `flutter analyze`, `flutter test`, and `flutter build web`.
 
 ## Current Priorities (from roadmap)
 
-### NOW (2026-02-03 -> 2026-02-10)
-- Close Phase 3 with Stroke Check v2 quality improvements and regression benchmarks.
+### NOW
+- Grammar Practice hardening:
+  - canonical grammar ingest
+  - data-first question eligibility from `grammar_examples`
+  - cleaner session state, level scoping, and replay freshness
+- Keep the baseline green while these changes land:
+  - `flutter analyze`
+  - `flutter test`
+  - `flutter build web`
 
-### NEXT (2026-02-10 -> 2026-02-24)
-- Google Drive Backup MVP for Android and Windows.
+### NEXT
+- Handwriting reliability pass:
+  - reduce false negatives / false positives
+  - keep `Next`, completion flow, and randomized session scope stable
 
-### LATER (after 2026-02-24)
-- Mock Exam polish (time pressure mode + deeper review analytics).
+### LATER
+- Cloud sync / backup expansion after Grammar Practice + Handwriting are steadier
+- Additional exam analytics and release polish
 
 ## Tech Stack
 

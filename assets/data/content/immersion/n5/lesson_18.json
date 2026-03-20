@@ -10,7 +10,7 @@
     [
       {
         "surface": "もしもし",
-        "reading": "",
+        "reading": "もしもし",
         "meaningVi": "Alô",
         "meaningEn": "Hello (on phone)"
       },
@@ -21,16 +21,10 @@
         "meaningEn": ""
       },
       {
-        "surface": "田中",
-        "reading": "たなか",
-        "meaningVi": "Tanaka",
-        "meaningEn": "Tanaka"
-      },
-      {
-        "surface": "です",
-        "reading": "",
-        "meaningVi": "là",
-        "meaningEn": "is"
+        "surface": "田中です",
+        "reading": "たなかです",
+        "meaningVi": "tôi là Tanaka đây ạ",
+        "meaningEn": "this is Tanaka speaking"
       },
       {
         "surface": "。",
@@ -41,40 +35,10 @@
     ],
     [
       {
-        "surface": "木村",
-        "reading": "きむら",
-        "meaningVi": "Kimura",
-        "meaningEn": "Kimura"
-      },
-      {
-        "surface": "さん",
-        "reading": "",
-        "meaningVi": "anh/chị",
-        "meaningEn": "Mr./Ms."
-      },
-      {
-        "surface": "の",
-        "reading": "",
-        "meaningVi": "của",
-        "meaningEn": "of"
-      },
-      {
-        "surface": "お",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
-      },
-      {
-        "surface": "宅",
-        "reading": "たく",
-        "meaningVi": "nhà",
-        "meaningEn": "home"
-      },
-      {
-        "surface": "ですか",
-        "reading": "",
-        "meaningVi": "phải không",
-        "meaningEn": "is it"
+        "surface": "木村さんのお宅ですか",
+        "reading": "きむらさんのおたくですか",
+        "meaningVi": "đây có phải nhà anh/chị Kimura không ạ",
+        "meaningEn": "is this the Kimura residence?"
       },
       {
         "surface": "。",
@@ -86,7 +50,7 @@
     [
       {
         "surface": "はい",
-        "reading": "",
+        "reading": "はい",
         "meaningVi": "vâng",
         "meaningEn": "yes"
       },
@@ -98,7 +62,7 @@
       },
       {
         "surface": "そうです",
-        "reading": "",
+        "reading": "そうです",
         "meaningVi": "đúng vậy",
         "meaningEn": "that's right"
       },
@@ -111,28 +75,22 @@
     ],
     [
       {
-        "surface": "花子",
-        "reading": "はなこ",
-        "meaningVi": "Hanako",
+        "surface": "花子さん",
+        "reading": "はなこさん",
+        "meaningVi": "chị/bạn Hanako",
         "meaningEn": "Hanako"
       },
       {
-        "surface": "さん",
-        "reading": "",
-        "meaningVi": "cô/bạn",
-        "meaningEn": "Ms."
-      },
-      {
         "surface": "は",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
+        "reading": "は",
+        "meaningVi": "thì / còn",
+        "meaningEn": "topic marker"
       },
       {
         "surface": "いらっしゃいますか",
-        "reading": "",
-        "meaningVi": "có nhà không (kính ngữ)",
-        "meaningEn": "is (she) there"
+        "reading": "いらっしゃいますか",
+        "meaningVi": "có ở nhà không ạ",
+        "meaningEn": "is she there?"
       },
       {
         "surface": "。",
@@ -144,7 +102,7 @@
     [
       {
         "surface": "すみません",
-        "reading": "",
+        "reading": "すみません",
         "meaningVi": "xin lỗi",
         "meaningEn": "sorry"
       },
@@ -161,14 +119,8 @@
         "meaningEn": "now"
       },
       {
-        "surface": "出",
-        "reading": "で",
-        "meaningVi": "ra",
-        "meaningEn": "go out"
-      },
-      {
-        "surface": "かけています",
-        "reading": "",
+        "surface": "出かけています",
+        "reading": "でかけています",
         "meaningVi": "đang đi vắng",
         "meaningEn": "is out"
       },
@@ -181,34 +133,10 @@
     ],
     [
       {
-        "surface": "何時",
-        "reading": "なんじ",
-        "meaningVi": "mấy giờ",
-        "meaningEn": "what time"
-      },
-      {
-        "surface": "ごろ",
-        "reading": "",
-        "meaningVi": "khoảng",
-        "meaningEn": "around"
-      },
-      {
-        "surface": "戻",
-        "reading": "もど",
-        "meaningVi": "quay lại",
-        "meaningEn": "return"
-      },
-      {
-        "surface": "ります",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
-      },
-      {
-        "surface": "か",
-        "reading": "",
-        "meaningVi": "",
-        "meaningEn": ""
+        "surface": "何時ごろ戻りますか",
+        "reading": "なんじごろもどりますか",
+        "meaningVi": "khoảng mấy giờ thì cô ấy về",
+        "meaningEn": "about what time will she be back?"
       },
       {
         "surface": "。",
@@ -219,22 +147,10 @@
     ],
     [
       {
-        "surface": "６時",
-        "reading": "ろくじ",
-        "meaningVi": "6 giờ",
-        "meaningEn": "6 o'clock"
-      },
-      {
-        "surface": "ごろ",
-        "reading": "",
-        "meaningVi": "khoảng",
-        "meaningEn": "around"
-      },
-      {
-        "surface": "です",
-        "reading": "",
-        "meaningVi": "là",
-        "meaningEn": "is"
+        "surface": "６時ごろです",
+        "reading": "ろくじごろです",
+        "meaningVi": "khoảng 6 giờ ạ",
+        "meaningEn": "around six o'clock"
       },
       {
         "surface": "。",
@@ -246,7 +162,7 @@
     [
       {
         "surface": "じゃあ",
-        "reading": "",
+        "reading": "じゃあ",
         "meaningVi": "vậy thì",
         "meaningEn": "well then"
       },
@@ -257,16 +173,10 @@
         "meaningEn": ""
       },
       {
-        "surface": "また",
-        "reading": "",
-        "meaningVi": "lại",
-        "meaningEn": "again"
-      },
-      {
-        "surface": "かけます",
-        "reading": "",
-        "meaningVi": "gọi",
-        "meaningEn": "call"
+        "surface": "またかけます",
+        "reading": "またかけます",
+        "meaningVi": "vậy tôi sẽ gọi lại sau",
+        "meaningEn": "I'll call again later"
       },
       {
         "surface": "。",
