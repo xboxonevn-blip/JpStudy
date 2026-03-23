@@ -77,3 +77,19 @@ Track each design iteration so everyone can review the process, not just the fin
 - Verification:
   - `flutter analyze`
   - `flutter test`
+
+## Iteration 005 - Grammar Hub Refresh (2026-03-20)
+
+- Goal: Turn Grammar into a clearer daily-use hub instead of a plain list + banner screen.
+- Scope:
+  - Add a responsive hero with deck metrics, due review visibility, and weak-spot status.
+  - Replace the old banner/FAB flow with stronger review cards while preserving existing practice routes.
+  - Restyle the grammar point list into a more readable bank of tappable study rows.
+- Output:
+  - `lib/features/grammar/grammar_screen.dart`
+  - `docs/uiux-progress.md`
+- Notes:
+  - Implemented directly in Flutter because the live Pencil desktop bridge was unavailable during this pass.
+- Verification:
+  - `dart format lib/features/grammar/grammar_screen.dart`
+  - `flutter test test/features/ui/ghost_review_walkthrough_test.dart`

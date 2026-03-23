@@ -1,13 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/theme/app_breakpoints.dart';
+import 'package:jpstudy/app/theme/app_spacing.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
+import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/utils/grammar_english_notation.dart';
-
+import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/grammar/grammar_providers.dart';
 import 'package:jpstudy/features/grammar/screens/grammar_practice_screen.dart';
+
+String _tr(
+  AppLanguage language, {
+  required String en,
+  required String vi,
+  required String ja,
+}) {
+  switch (language) {
+    case AppLanguage.en:
+      return en;
+    case AppLanguage.vi:
+      return vi;
+    case AppLanguage.ja:
+      return ja;
+  }
+}
 
 class GrammarScreen extends ConsumerWidget {
   const GrammarScreen({super.key});
@@ -16,246 +36,687 @@ class GrammarScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final language = ref.watch(appLanguageProvider);
     final level = ref.watch(studyLevelProvider);
-    final levelSuffix = level == null ? '' : ' (${level.shortLabel})';
-
-    final levelStr = level?.shortLabel ?? 'N5';
-    final pointsAsync = ref.watch(grammarPointsProvider(levelStr));
-    final ghostCountAsync = ref.watch(
-      grammarGhostCountProvider,
-    ); // New provider
+    final levelLabel = level?.shortLabel ?? 'N5';
+    final pointsAsync = ref.watch(grammarPointsProvider(levelLabel));
+    final dueCount = ref.watch(grammarDueCountProvider).valueOrNull ?? 0;
+    final ghostCount = ref.watch(grammarGhostCountProvider).valueOrNull ?? 0;
 
     return Scaffold(
-      appBar: AppBar(title: Text('${_title(language)}$levelSuffix')),
-      body: pointsAsync.when(
-        data: (points) {
-          if (points.isEmpty) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.auto_stories, size: 64, color: Colors.grey),
-                  const SizedBox(height: 16),
-                  Text(
-                    _tr(
-                      language,
-                      en: 'No grammar for $levelStr yet.',
-                      vi: 'Ch\u01b0a c\u00f3 ng\u1eef ph\u00e1p cho $levelStr.',
-                      ja: '$levelStr \u306e\u6587\u6cd5\u306f\u307e\u3060\u3042\u308a\u307e\u305b\u3093\u3002',
-                    ),
-                  ),
-                ],
-              ),
-            );
-          }
-
-          return Column(
-            children: [
-              // Ghost Review Alert
-              ghostCountAsync.when(
-                data: (ghostCount) {
-                  if (ghostCount == 0) {
-                    // Empty State - "All caught up"
-                    return Container(
-                      margin: const EdgeInsets.all(16),
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: Colors.green[50],
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: Colors.green[200]!),
-                      ),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.check_circle_outline,
-                            color: Colors.green,
-                            size: 28,
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  language.ghostReviewAllClearTitle,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.green[900],
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                Text(
-                                  language.ghostReviewAllClearSubtitle,
-                                  style: TextStyle(
-                                    color: Colors.green[700],
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }
-
-                  // Active State - "Fix Mistakes"
-                  return Container(
-                    margin: const EdgeInsets.all(16),
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.red[50],
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: Colors.red[200]!),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.warning_amber_rounded,
-                          color: Colors.red,
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                language.ghostReviewBannerTitle(ghostCount),
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.red[900],
-                                ),
-                              ),
-                              Text(
-                                language.ghostReviewBannerSubtitle,
-                                style: TextStyle(
-                                  color: Colors.red[700],
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        FilledButton(
-                          onPressed: () {
-                            // We need to pass the enum, but it's in grammar_practice.dart
-                            // To avoid circular dep if it was weird, we could use int or string.
-                            // But here we can import it.
-                            // Assuming we add import 'package:jpstudy/features/grammar/screens/grammar_practice_screen.dart';
-                            context.push(
-                              '/grammar-practice',
-                              extra: GrammarPracticeMode.ghost,
-                            );
-                          },
-                          style: FilledButton.styleFrom(
-                            backgroundColor: Colors.red,
-                            foregroundColor: Colors.white,
-                          ),
-                          child: Text(language.ghostReviewBannerActionLabel),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-                loading: () => const SizedBox.shrink(),
-                error: (_, _) => const SizedBox.shrink(),
-              ),
-
-              Expanded(
-                child: ListView.separated(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  itemCount: points.length,
-                  separatorBuilder: (context, index) =>
-                      const Divider(height: 1),
-                  itemBuilder: (context, index) {
-                    final point = points[index];
-                    final headline = switch (language) {
-                      AppLanguage.en => resolveEnglishGrammarConnection(
-                        connectionEn: point.connectionEn,
-                        connection: point.connection,
-                        grammarPoint: point.grammarPoint,
-                        titleEn: point.titleEn,
-                        meaningEn: point.meaningEn,
-                      ),
-                      AppLanguage.vi => point.grammarPoint,
-                      AppLanguage.ja => point.grammarPoint,
-                    };
-                    final subtitle = switch (language) {
-                      AppLanguage.en => resolveEnglishGrammarMeaning(
-                        meaningEn: point.meaningEn,
-                        titleEn: point.titleEn,
-                        connectionEn: point.connectionEn,
-                        connection: point.connection,
-                        grammarPoint: point.grammarPoint,
-                      ),
-                      AppLanguage.vi => point.meaningVi ?? point.meaning,
-                      AppLanguage.ja => point.meaning,
-                    };
-                    return ListTile(
-                      title: Text(
-                        headline,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
-                      ),
-                      subtitle: Text(subtitle),
-                      trailing: point.isLearned
-                          ? const Icon(Icons.check_circle, color: Colors.green)
-                          : Icon(Icons.chevron_right, color: Colors.grey[400]),
-                      onTap: () => context.push('/grammar/${point.id}'),
-                    );
-                  },
-                ),
-              ),
-            ],
-          );
-        },
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (err, stack) =>
-            Center(child: Text('${language.loadErrorLabel}: $err')),
+      appBar: AppBar(
+        title: Text(
+          level == null
+              ? _tr(
+                  language,
+                  en: 'Grammar',
+                  vi: 'Ng\u1eef ph\u00e1p',
+                  ja: '\u6587\u6cd5',
+                )
+              : '${_tr(language, en: 'Grammar', vi: 'Ng\u1eef ph\u00e1p', ja: '\u6587\u6cd5')} (${level.shortLabel})',
+        ),
       ),
-      floatingActionButton: ref
-          .watch(grammarDueCountProvider)
-          .when(
-            data: (count) => count > 0
-                ? FloatingActionButton.extended(
-                    onPressed: () => context.push('/grammar-practice'),
-                    icon: const Icon(Icons.psychology),
-                    label: Text(language.reviewCountLabel(count)),
-                    backgroundColor: Colors.orange[700],
-                    foregroundColor: Colors.white,
-                  )
-                : null,
-            loading: () => null,
-            error: (_, _) => null,
+      body: pointsAsync.when(
+        data: (points) => AppPageShell(
+          topPadding: AppSpacing.sm,
+          child: _GrammarHubContent(
+            language: language,
+            levelLabel: levelLabel,
+            points: points,
+            dueCount: dueCount,
+            ghostCount: ghostCount,
           ),
+        ),
+        loading: () => const _GrammarAsyncState(
+          icon: Icons.auto_stories_rounded,
+          child: CircularProgressIndicator(),
+        ),
+        error: (err, _) => _GrammarAsyncState(
+          icon: Icons.error_outline_rounded,
+          child: Text('${language.loadErrorLabel}: $err'),
+        ),
+      ),
     );
   }
+}
 
-  String _title(AppLanguage language) {
-    switch (language) {
-      case AppLanguage.en:
-        return 'Grammar';
-      case AppLanguage.vi:
-        return 'Ng\u1eef ph\u00e1p';
-      case AppLanguage.ja:
-        return '\u6587\u6cd5';
-    }
+class _GrammarHubContent extends StatelessWidget {
+  const _GrammarHubContent({
+    required this.language,
+    required this.levelLabel,
+    required this.points,
+    required this.dueCount,
+    required this.ghostCount,
+  });
+
+  final AppLanguage language;
+  final String levelLabel;
+  final List<GrammarPoint> points;
+  final int dueCount;
+  final int ghostCount;
+
+  @override
+  Widget build(BuildContext context) {
+    final learnedCount = points.where((point) => point.isLearned).length;
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final columns = constraints.maxWidth >= 1180
+            ? 3
+            : constraints.maxWidth >= AppBreakpoints.tablet
+            ? 2
+            : 1;
+        final itemWidth = columns <= 1
+            ? constraints.maxWidth
+            : (constraints.maxWidth - AppSpacing.md * (columns - 1)) / columns;
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _GrammarHeroCard(
+              language: language,
+              levelLabel: levelLabel,
+              totalCount: points.length,
+              learnedCount: learnedCount,
+              dueCount: dueCount,
+              ghostCount: ghostCount,
+              primaryActionLabel: ghostCount > 0
+                  ? language.ghostReviewBannerActionLabel
+                  : dueCount > 0
+                  ? _tr(
+                      language,
+                      en: 'Review $dueCount now',
+                      vi: '\u00d4n $dueCount m\u1ee5c ngay',
+                      ja: '$dueCount \u4ef6\u3092\u4eca\u3059\u3050\u5fa9\u7fd2',
+                    )
+                  : _tr(
+                      language,
+                      en: 'Run a light drill',
+                      vi: 'L\u00e0m m\u1ed9t phi\u00ean nh\u1eb9',
+                      ja: '\u8efd\u3044\u30c9\u30ea\u30eb\u3092\u59cb\u3081\u308b',
+                    ),
+              onPrimaryActionTap: () {
+                if (ghostCount > 0) {
+                  context.push(
+                    '/grammar-practice',
+                    extra: GrammarPracticeMode.ghost,
+                  );
+                  return;
+                }
+                context.push('/grammar-practice');
+              },
+            ),
+            const SizedBox(height: AppSpacing.md),
+            Wrap(
+              spacing: AppSpacing.md,
+              runSpacing: AppSpacing.md,
+              children: [
+                SizedBox(
+                  width: itemWidth,
+                  child: AppFeatureCard(
+                    icon: Icons.psychology_alt_rounded,
+                    title: _tr(
+                      language,
+                      en: 'Today\'s review lane',
+                      vi: 'L\u01b0\u1ee3t \u00f4n h\u00f4m nay',
+                      ja: '\u4eca\u65e5\u306e\u5fa9\u7fd2\u30ec\u30fc\u30f3',
+                    ),
+                    subtitle: dueCount > 0
+                        ? _tr(
+                            language,
+                            en: 'Keep grammar active with a focused review session before the queue piles up.',
+                            vi: 'Gi\u1eef ng\u1eef ph\u00e1p lu\u00f4n t\u01b0\u01a1i b\u1eb1ng m\u1ed9t phi\u00ean \u00f4n t\u1eadp ng\u1eafn tr\u01b0\u1edbc khi h\u00e0ng ch\u1edd d\u1ed3n l\u1ea1i.',
+                            ja: '\u30ad\u30e5\u30fc\u304c\u3075\u304f\u3089\u3080\u524d\u306b\u3001\u77ed\u3044\u5fa9\u7fd2\u3067\u6587\u6cd5\u3092\u7dad\u6301\u3057\u307e\u3057\u3087\u3046\u3002',
+                          )
+                        : _tr(
+                            language,
+                            en: 'No grammar is due right now, so this is a good moment for a light drill or quick check-in.',
+                            vi: 'Hi\u1ec7n ch\u01b0a c\u00f3 ng\u1eef ph\u00e1p \u0111\u1ebfn h\u1ea1n, v\u00ec v\u1eady b\u1ea1n c\u00f3 th\u1ec3 l\u00e0m m\u1ed9t phi\u00ean luy\u1ec7n nh\u1eb9 ho\u1eb7c ki\u1ec3m tra nhanh.',
+                            ja: '\u4eca\u306f\u5fa9\u7fd2\u4e88\u5b9a\u306e\u6587\u6cd5\u306f\u306a\u3044\u306e\u3067\u3001\u8efd\u3044\u30c9\u30ea\u30eb\u3067\u611f\u899a\u3092\u4fdd\u3066\u307e\u3059\u3002',
+                          ),
+                    status: AppStatusChip(
+                      label: dueCount > 0
+                          ? _tr(
+                              language,
+                              en: '$dueCount ready',
+                              vi: '$dueCount \u0111ang ch\u1edd',
+                              ja: '$dueCount \u4ef6\u5f85\u6a5f\u4e2d',
+                            )
+                          : _tr(
+                              language,
+                              en: 'All clear',
+                              vi: '\u0110\u00e3 xong',
+                              ja: '\u30aa\u30fc\u30eb\u30af\u30ea\u30a2',
+                            ),
+                      tone: dueCount > 0
+                          ? AppStatusTone.warning
+                          : AppStatusTone.success,
+                    ),
+                    primaryLabel: dueCount > 0
+                        ? _tr(
+                            language,
+                            en: 'Review $dueCount now',
+                            vi: '\u00d4n $dueCount m\u1ee5c ngay',
+                            ja: '$dueCount \u4ef6\u3092\u4eca\u3059\u3050\u5fa9\u7fd2',
+                          )
+                        : _tr(
+                            language,
+                            en: 'Run a light drill',
+                            vi: 'L\u00e0m m\u1ed9t phi\u00ean nh\u1eb9',
+                            ja: '\u8efd\u3044\u30c9\u30ea\u30eb\u3092\u59cb\u3081\u308b',
+                          ),
+                    onPrimaryTap: () => context.push('/grammar-practice'),
+                  ),
+                ),
+                SizedBox(
+                  width: itemWidth,
+                  child: AppFeatureCard(
+                    icon: Icons.auto_fix_high_rounded,
+                    title: ghostCount > 0
+                        ? language.ghostReviewBannerTitle(ghostCount)
+                        : language.ghostReviewAllClearTitle,
+                    subtitle: ghostCount > 0
+                        ? language.ghostReviewBannerSubtitle
+                        : language.ghostReviewAllClearSubtitle,
+                    status: AppStatusChip(
+                      label: ghostCount > 0
+                          ? _tr(
+                              language,
+                              en: '$ghostCount weak spots',
+                              vi: '$ghostCount \u0111i\u1ec3m y\u1ebfu',
+                              ja: '$ghostCount \u4ef6\u306e\u5f31\u70b9',
+                            )
+                          : _tr(
+                              language,
+                              en: 'All clear',
+                              vi: '\u0110\u00e3 xong',
+                              ja: '\u30aa\u30fc\u30eb\u30af\u30ea\u30a2',
+                            ),
+                      tone: ghostCount > 0
+                          ? AppStatusTone.warning
+                          : AppStatusTone.success,
+                    ),
+                    primaryLabel: ghostCount == 0
+                        ? _tr(
+                            language,
+                            en: 'Browse the bank',
+                            vi: 'M\u1edf kho ng\u1eef ph\u00e1p',
+                            ja: '\u30d0\u30f3\u30af\u3092\u898b\u308b',
+                          )
+                        : null,
+                    onPrimaryTap: ghostCount == 0 && points.isNotEmpty
+                        ? () => context.push('/grammar/${points.first.id}')
+                        : null,
+                  ),
+                ),
+                SizedBox(
+                  width: itemWidth,
+                  child: AppFeatureCard(
+                    icon: Icons.library_books_rounded,
+                    title: _tr(
+                      language,
+                      en: '$levelLabel grammar bank',
+                      vi: 'Kho ng\u1eef ph\u00e1p $levelLabel',
+                      ja: '$levelLabel \u6587\u6cd5\u30d0\u30f3\u30af',
+                    ),
+                    subtitle: _tr(
+                      language,
+                      en: 'Browse ${points.length} patterns, meanings, and detail pages whenever you want a slower study pass.',
+                      vi: 'Duy\u1ec7t ${points.length} m\u1eabu ng\u1eef ph\u00e1p, \u00fd ngh\u0129a v\u00e0 trang chi ti\u1ebft b\u1ea5t c\u1ee9 l\u00fac n\u00e0o b\u1ea1n mu\u1ed1n h\u1ecdc ch\u1eadm h\u01a1n.',
+                      ja: '${points.length} \u500b\u306e\u6587\u6cd5\u30d1\u30bf\u30fc\u30f3\u3068\u610f\u5473\u3001\u8a73\u7d30\u30da\u30fc\u30b8\u3092\u3001\u843d\u3061\u7740\u3044\u3066\u898b\u8fd4\u305b\u307e\u3059\u3002',
+                    ),
+                    status: AppStatusChip(label: levelLabel),
+                    primaryLabel: _tr(
+                      language,
+                      en: 'Browse the bank',
+                      vi: 'M\u1edf kho ng\u1eef ph\u00e1p',
+                      ja: '\u30d0\u30f3\u30af\u3092\u898b\u308b',
+                    ),
+                    onPrimaryTap: points.isNotEmpty
+                        ? () => context.push('/grammar/${points.first.id}')
+                        : null,
+                    secondaryLabel: dueCount > 0
+                        ? _tr(
+                            language,
+                            en: 'Start review',
+                            vi: 'B\u1eaft \u0111\u1ea7u \u00f4n',
+                            ja: '\u5fa9\u7fd2\u3092\u59cb\u3081\u308b',
+                          )
+                        : null,
+                    onSecondaryTap: dueCount > 0
+                        ? () => context.push('/grammar-practice')
+                        : null,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: AppSpacing.md),
+            AppSectionCard(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppSectionHeader(
+                    title: _tr(
+                      language,
+                      en: 'Grammar bank',
+                      vi: 'Kho ng\u1eef ph\u00e1p',
+                      ja: '\u6587\u6cd5\u30d0\u30f3\u30af',
+                    ),
+                    caption: _tr(
+                      language,
+                      en: '$learnedCount of ${points.length} points marked learned in this lane.',
+                      vi: '\u0110\u00e3 \u0111\u00e1nh d\u1ea5u h\u1ecdc xong $learnedCount / ${points.length} \u0111i\u1ec3m ng\u1eef ph\u00e1p trong lane n\u00e0y.',
+                      ja: '\u3053\u306e\u30ec\u30fc\u30f3\u3067 ${points.length} \u9805\u76ee\u4e2d $learnedCount \u9805\u76ee\u3092\u5b66\u7fd2\u6e08\u307f\u306b\u3057\u3066\u3044\u307e\u3059\u3002',
+                    ),
+                    actionLabel: dueCount > 0
+                        ? _tr(
+                            language,
+                            en: 'Start review',
+                            vi: 'B\u1eaft \u0111\u1ea7u \u00f4n',
+                            ja: '\u5fa9\u7fd2\u3092\u59cb\u3081\u308b',
+                          )
+                        : null,
+                    onActionTap: dueCount > 0
+                        ? () => context.push('/grammar-practice')
+                        : null,
+                  ),
+                  const SizedBox(height: AppSpacing.lg),
+                  if (points.isEmpty)
+                    _EmptyGrammarBank(
+                      language: language,
+                      levelLabel: levelLabel,
+                    )
+                  else ...[
+                    Text(
+                      _tr(
+                        language,
+                        en: 'Tap any point to open examples, explanations, and practice entry points.',
+                        vi: 'Ch\u1ea1m v\u00e0o b\u1ea5t k\u1ef3 \u0111i\u1ec3m n\u00e0o \u0111\u1ec3 m\u1edf v\u00ed d\u1ee5, gi\u1ea3i th\u00edch v\u00e0 l\u1ed1i v\u00e0o b\u00e0i luy\u1ec7n.',
+                        ja: '\u5404\u9805\u76ee\u3092\u30bf\u30c3\u30d7\u3059\u308b\u3068\u3001\u4f8b\u6587\u30fb\u89e3\u8aac\u30fb\u7df4\u7fd2\u3078\u9032\u3081\u307e\u3059\u3002',
+                      ),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: context.appPalette.ink.withValues(alpha: 0.7),
+                        fontWeight: FontWeight.w700,
+                        height: 1.45,
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.md),
+                    for (var index = 0; index < points.length; index++) ...[
+                      _GrammarPointRow(
+                        language: language,
+                        point: points[index],
+                      ),
+                      if (index != points.length - 1)
+                        const SizedBox(height: AppSpacing.sm),
+                    ],
+                  ],
+                ],
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
+}
 
-  String _tr(
-    AppLanguage language, {
-    required String en,
-    required String vi,
-    required String ja,
-  }) {
-    switch (language) {
-      case AppLanguage.en:
-        return en;
-      case AppLanguage.vi:
-        return vi;
-      case AppLanguage.ja:
-        return ja;
-    }
+class _GrammarHeroCard extends StatelessWidget {
+  const _GrammarHeroCard({
+    required this.language,
+    required this.levelLabel,
+    required this.totalCount,
+    required this.learnedCount,
+    required this.dueCount,
+    required this.ghostCount,
+    required this.primaryActionLabel,
+    required this.onPrimaryActionTap,
+  });
+
+  final AppLanguage language;
+  final String levelLabel;
+  final int totalCount;
+  final int learnedCount;
+  final int dueCount;
+  final int ghostCount;
+  final String primaryActionLabel;
+  final VoidCallback onPrimaryActionTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.xxl),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(32),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [palette.heroGradient.first, palette.heroGradient.last],
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: palette.primary.withValues(alpha: 0.22),
+            blurRadius: 30,
+            offset: const Offset(0, 18),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.md,
+              vertical: AppSpacing.sm,
+            ),
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.14),
+              borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
+              border: Border.all(color: Colors.white.withValues(alpha: 0.12)),
+            ),
+            child: Text(
+              _tr(
+                language,
+                en: '$levelLabel lane',
+                vi: 'Lane $levelLabel',
+                ja: '$levelLabel \u30ec\u30fc\u30f3',
+              ),
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.w800,
+                letterSpacing: 0.3,
+              ),
+            ),
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          Text(
+            _tr(
+              language,
+              en: 'Build $levelLabel grammar that sticks',
+              vi: 'X\u00e2y n\u1ec1n ng\u1eef ph\u00e1p $levelLabel th\u1eadt v\u1eefng',
+              ja: '$levelLabel \u6587\u6cd5\u3092\u5b9a\u7740\u3055\u305b\u308b',
+            ),
+            style: Theme.of(context).textTheme.displaySmall?.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.w900,
+              height: 1.05,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          Text(
+            dueCount > 0 && ghostCount > 0
+                ? _tr(
+                    language,
+                    en: 'You have $dueCount reviews ready and $ghostCount weak spots to repair before they turn into habits.',
+                    vi: 'B\u1ea1n c\u00f3 $dueCount l\u01b0\u1ee3t \u00f4n s\u1eb5n s\u00e0ng v\u00e0 $ghostCount \u0111i\u1ec3m y\u1ebfu c\u1ea7n s\u1eeda tr\u01b0\u1edbc khi ch\u00fang th\u00e0nh th\u00f3i quen.',
+                    ja: '$dueCount \u4ef6\u306e\u5fa9\u7fd2\u3068\u3001\u7fd2\u6163\u5316\u3059\u308b\u524d\u306b\u76f4\u3057\u305f\u3044 $ghostCount \u4ef6\u306e\u5f31\u70b9\u304c\u3042\u308a\u307e\u3059\u3002',
+                  )
+                : dueCount > 0
+                ? _tr(
+                    language,
+                    en: 'You have $dueCount reviews waiting. Clear them while the patterns are still fresh.',
+                    vi: 'B\u1ea1n c\u00f3 $dueCount l\u01b0\u1ee3t \u00f4n \u0111ang ch\u1edd. H\u00e3y x\u1eed l\u00fd khi c\u00e1c m\u1eabu v\u1eabn c\u00f2n m\u1edbi.',
+                    ja: '$dueCount \u4ef6\u306e\u5fa9\u7fd2\u304c\u5f85\u3063\u3066\u3044\u307e\u3059\u3002\u611f\u899a\u304c\u6b8b\u3063\u3066\u3044\u308b\u3046\u3061\u306b\u7d42\u308f\u3089\u305b\u307e\u3057\u3087\u3046\u3002',
+                  )
+                : ghostCount > 0
+                ? _tr(
+                    language,
+                    en: 'Your main queue is calm, but $ghostCount weak spots still deserve a repair pass.',
+                    vi: 'H\u00e0ng ch\u1edd ch\u00ednh \u0111ang \u1ecfn, nh\u01b0ng $ghostCount \u0111i\u1ec3m y\u1ebfu v\u1eabn c\u1ea7n m\u1ed9t l\u01b0\u1ee3t s\u1eeda l\u1ea1i.',
+                    ja: '\u4e3b\u306a\u30ad\u30e5\u30fc\u306f\u843d\u3061\u7740\u3044\u3066\u3044\u307e\u3059\u304c\u3001$ghostCount \u4ef6\u306e\u5f31\u70b9\u306f\u307e\u3060\u88dc\u5f37\u3059\u308b\u4fa1\u5024\u304c\u3042\u308a\u307e\u3059\u3002',
+                  )
+                : _tr(
+                    language,
+                    en: 'Everything is calm right now. Browse the bank, read a few examples, or run a short drill to keep momentum.',
+                    vi: 'Hi\u1ec7n m\u1ecdi th\u1ee9 \u0111ang \u1ecfn. H\u00e3y duy\u1ec7t kho ng\u1eef ph\u00e1p, xem m\u1ed9t v\u00e0i v\u00ed d\u1ee5 ho\u1eb7c l\u00e0m m\u1ed9t phi\u00ean ng\u1eafn \u0111\u1ec3 gi\u1eef nh\u1ecbp.',
+                    ja: '\u4eca\u306f\u843d\u3061\u7740\u3044\u3066\u3044\u307e\u3059\u3002\u6587\u6cd5\u30d0\u30f3\u30af\u3092\u898b\u308b\u304b\u3001\u4f8b\u6587\u3092\u8aad\u3080\u304b\u3001\u77ed\u3044\u30c9\u30ea\u30eb\u3067\u30da\u30fc\u30b9\u3092\u4fdd\u3061\u307e\u3057\u3087\u3046\u3002',
+                  ),
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              color: Colors.white.withValues(alpha: 0.86),
+              fontWeight: FontWeight.w600,
+              height: 1.55,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          FilledButton(
+            onPressed: onPrimaryActionTap,
+            style: FilledButton.styleFrom(
+              backgroundColor: Colors.white,
+              foregroundColor: palette.primary,
+            ),
+            child: Text(primaryActionLabel),
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          Wrap(
+            spacing: AppSpacing.sm,
+            runSpacing: AppSpacing.sm,
+            children: [
+              _HeroMetricTile(
+                label: _tr(
+                  language,
+                  en: 'Deck size',
+                  vi: 'T\u1ed5ng m\u1ee5c',
+                  ja: '\u9805\u76ee\u6570',
+                ),
+                value: '$totalCount',
+              ),
+              _HeroMetricTile(
+                label: _tr(
+                  language,
+                  en: 'Learned',
+                  vi: '\u0110\u00e3 h\u1ecdc',
+                  ja: '\u5b66\u7fd2\u6e08\u307f',
+                ),
+                value: '$learnedCount',
+              ),
+              _HeroMetricTile(
+                label: _tr(
+                  language,
+                  en: 'Ready now',
+                  vi: 'S\u1eb5n s\u00e0ng',
+                  ja: '\u4eca\u3059\u3050',
+                ),
+                value: '$dueCount',
+              ),
+              _HeroMetricTile(
+                label: _tr(
+                  language,
+                  en: 'Weak spots',
+                  vi: '\u0110i\u1ec3m y\u1ebfu',
+                  ja: '\u5f31\u70b9',
+                ),
+                value: '$ghostCount',
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _HeroMetricTile extends StatelessWidget {
+  const _HeroMetricTile({required this.label, required this.value});
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      constraints: const BoxConstraints(minWidth: 112),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.12)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: Colors.white.withValues(alpha: 0.72),
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            value,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _GrammarPointRow extends StatelessWidget {
+  const _GrammarPointRow({required this.language, required this.point});
+
+  final AppLanguage language;
+  final GrammarPoint point;
+
+  @override
+  Widget build(BuildContext context) {
+    final headline = switch (language) {
+      AppLanguage.en => resolveEnglishGrammarConnection(
+        connectionEn: point.connectionEn,
+        connection: point.connection,
+        grammarPoint: point.grammarPoint,
+        titleEn: point.titleEn,
+        meaningEn: point.meaningEn,
+      ),
+      AppLanguage.vi => point.grammarPoint,
+      AppLanguage.ja => point.grammarPoint,
+    };
+    final subtitle = switch (language) {
+      AppLanguage.en => resolveEnglishGrammarMeaning(
+        meaningEn: point.meaningEn,
+        titleEn: point.titleEn,
+        connectionEn: point.connectionEn,
+        connection: point.connection,
+        grammarPoint: point.grammarPoint,
+      ),
+      AppLanguage.vi => point.meaningVi ?? point.meaning,
+      AppLanguage.ja => point.meaning,
+    };
+
+    return AppCompactRow(
+      icon: point.isLearned
+          ? Icons.check_circle_outline_rounded
+          : Icons.auto_stories_rounded,
+      title: headline,
+      subtitle: subtitle,
+      status: AppStatusChip(
+        label: point.isLearned
+            ? _tr(
+                language,
+                en: 'Learned',
+                vi: '\u0110\u00e3 h\u1ecdc',
+                ja: '\u5b66\u7fd2\u6e08\u307f',
+              )
+            : _tr(language, en: 'New', vi: 'M\u1edbi', ja: '\u65b0\u898f'),
+        tone: point.isLearned ? AppStatusTone.success : AppStatusTone.neutral,
+      ),
+      onTap: () => context.push('/grammar/${point.id}'),
+    );
+  }
+}
+
+class _EmptyGrammarBank extends StatelessWidget {
+  const _EmptyGrammarBank({required this.language, required this.levelLabel});
+
+  final AppLanguage language;
+  final String levelLabel;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppSpacing.xl),
+      decoration: BoxDecoration(
+        color: palette.surface,
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: palette.outline),
+      ),
+      child: Column(
+        children: [
+          Icon(
+            Icons.auto_stories_rounded,
+            size: 42,
+            color: palette.ink.withValues(alpha: 0.52),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          Text(
+            _tr(
+              language,
+              en: 'No grammar loaded for $levelLabel yet',
+              vi: 'Ch\u01b0a c\u00f3 ng\u1eef ph\u00e1p cho $levelLabel',
+              ja: '$levelLabel \u306e\u6587\u6cd5\u306f\u307e\u3060\u3042\u308a\u307e\u305b\u3093',
+            ),
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              color: palette.ink,
+              fontWeight: FontWeight.w800,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Text(
+            _tr(
+              language,
+              en: 'When content for this lane is added, it will appear here with detail pages and practice entry points.',
+              vi: 'Khi n\u1ed9i dung cho lane n\u00e0y \u0111\u01b0\u1ee3c th\u00eam, n\u00f3 s\u1ebd xu\u1ea5t hi\u1ec7n t\u1ea1i \u0111\u00e2y c\u00f9ng trang chi ti\u1ebft v\u00e0 l\u1ed1i v\u00e0o b\u00e0i luy\u1ec7n.',
+              ja: '\u3053\u306e\u30ec\u30fc\u30f3\u306e\u30b3\u30f3\u30c6\u30f3\u30c4\u304c\u8ffd\u52a0\u3055\u308c\u308b\u3068\u3001\u8a73\u7d30\u30da\u30fc\u30b8\u3068\u7df4\u7fd2\u5165\u308a\u53e3\u3068\u4e00\u7dd2\u306b\u3053\u3053\u306b\u8868\u793a\u3055\u308c\u307e\u3059\u3002',
+            ),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: palette.ink.withValues(alpha: 0.66),
+              fontWeight: FontWeight.w600,
+              height: 1.5,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _GrammarAsyncState extends StatelessWidget {
+  const _GrammarAsyncState({required this.icon, required this.child});
+
+  final IconData icon;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return Center(
+      child: Container(
+        constraints: const BoxConstraints(maxWidth: 420),
+        padding: const EdgeInsets.all(AppSpacing.xl),
+        decoration: BoxDecoration(
+          color: palette.elevated,
+          borderRadius: BorderRadius.circular(28),
+          border: Border.all(color: palette.outline),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: 40, color: palette.ink.withValues(alpha: 0.52)),
+            const SizedBox(height: AppSpacing.md),
+            child,
+          ],
+        ),
+      ),
+    );
   }
 }
