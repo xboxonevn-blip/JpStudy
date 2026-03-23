@@ -8,7 +8,7 @@ import '../../../core/language_provider.dart';
 import '../../../data/db/app_database.dart';
 import '../../../data/repositories/lesson_repository.dart' as lesson_repo;
 import '../../../features/grammar/grammar_providers.dart' as grammar_providers;
-import '../../../app/theme/app_theme.dart';
+import '../../../app/theme/app_theme_palette.dart';
 import '../../common/widgets/clay_card.dart';
 import '../models/grammar_point_data.dart';
 
@@ -118,7 +118,7 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        backgroundColor: AppTheme.surface,
+        backgroundColor: context.appPalette.base,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         title: Text(
           language.ghostPracticeCompleteTitle,
@@ -146,10 +146,10 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
             const SizedBox(height: 16),
             Text(
               language.ghostPracticeScoreLabel(_score, total),
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: AppTheme.textMain,
+                color: context.appPalette.ink,
               ),
             ),
             if (_score == total)
@@ -199,7 +199,7 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
     final language = ref.watch(appLanguageProvider);
 
     return Scaffold(
-      backgroundColor: AppTheme.surface,
+      backgroundColor: context.appPalette.base,
       appBar: AppBar(
         title: Text(
           language.ghostPracticeTitle,
@@ -208,7 +208,7 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        foregroundColor: AppTheme.textMain,
+        foregroundColor: context.appPalette.ink,
       ),
       body: Stack(
         children: [
@@ -249,8 +249,8 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
                       minHeight: 12,
                       borderRadius: BorderRadius.circular(6),
                       backgroundColor: Colors.grey.shade200,
-                      valueColor: const AlwaysStoppedAnimation<Color>(
-                        AppTheme.primary,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        context.appPalette.primary,
                       ),
                     ),
                     const SizedBox(height: 24),
@@ -258,7 +258,7 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
                       child: Text(
                         language.ghostPracticeQuestionLabel(_currentIndex + 1),
                         style: TextStyle(
-                          color: AppTheme.textSub,
+                          color: context.appPalette.ink.withValues(alpha: 0.55),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -267,10 +267,10 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
                     Text(
                       language.ghostPracticePromptLabel,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: AppTheme.textMain,
+                        color: context.appPalette.ink,
                       ),
                     ),
                     const SizedBox(height: 24),
@@ -281,10 +281,10 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
                         alignment: Alignment.center,
                         child: Text(
                           questionText,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 18,
                             height: 1.4,
-                            color: Color(0xFF2C3E50),
+                            color: context.appPalette.ink,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -344,7 +344,7 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
                                 fontWeight: FontWeight.bold,
                                 color: _answered && (isCorrect || isSelected)
                                     ? Colors.black87
-                                    : AppTheme.textMain,
+                                    : context.appPalette.ink,
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -360,7 +360,7 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
                           ElevatedButton(
                             onPressed: () => _nextQuestion(quizItems.length),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: AppTheme.primary,
+                              backgroundColor: context.appPalette.primary,
                               foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 16),
                               shape: RoundedRectangleBorder(
