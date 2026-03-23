@@ -109,7 +109,7 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
                                   language,
                                   'No due mistakes for 1-3-7 right now.',
                                   'Hi\u1ec7n ch\u01b0a c\u00f3 l\u1ed7i \u0111\u1ebfn h\u1ea1n 1-3-7.',
-                                  'ç¾åœ¨ã€1-3-7ã®æœŸé™ãƒŸã‚¹ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚',
+                                  '現在、1-3-7の期限ミスはありません。',
                                 ),
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
