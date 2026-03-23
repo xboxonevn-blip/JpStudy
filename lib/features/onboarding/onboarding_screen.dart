@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
-import 'package:jpstudy/app/theme/app_theme.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
@@ -109,7 +108,7 @@ class _ProgressDots extends StatelessWidget {
           width: active ? 24 : 8,
           height: 8,
           decoration: BoxDecoration(
-            color: active ? AppTheme.primary : AppTheme.neutral,
+            color: active ? context.appPalette.primary : context.appPalette.outline,
             borderRadius: BorderRadius.circular(4),
           ),
         );
@@ -132,24 +131,24 @@ class _LevelPage extends StatelessWidget {
         const SizedBox(height: AppSpacing.lg),
         Text(
           language.onboardingWelcomeTitle,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.w800,
-            color: AppTheme.textMain,
+            color: context.appPalette.ink,
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
         Text(
           language.onboardingWelcomeSubtitle,
-          style: const TextStyle(fontSize: 15, color: AppTheme.textSub),
+          style: TextStyle(fontSize: 15, color: context.appPalette.ink.withValues(alpha: 0.55)),
         ),
         const SizedBox(height: AppSpacing.xxl),
         Text(
           language.onboardingLevelTitle,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w700,
-            color: AppTheme.textMain,
+            color: context.appPalette.ink,
           ),
         ),
         const SizedBox(height: AppSpacing.md),
@@ -193,15 +192,15 @@ class _OnboardingLevelCard extends StatelessWidget {
             color: context.appPalette.primary.withValues(alpha: 0.10),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: const Icon(Icons.folder_open, color: AppTheme.primary),
+          child: Icon(Icons.folder_open, color: context.appPalette.primary),
         ),
         title: Text(
           level.shortLabel,
-          style: const TextStyle(fontWeight: FontWeight.w700),
+          style: TextStyle(fontWeight: FontWeight.w700),
         ),
         subtitle: Text(
           level.description(language),
-          style: const TextStyle(color: AppTheme.textSub),
+          style: TextStyle(color: context.appPalette.ink.withValues(alpha: 0.55)),
         ),
         trailing: const Icon(Icons.chevron_right),
         onTap: () => onSelected(level),
@@ -236,19 +235,19 @@ class _GoalPage extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: onBack,
-                child: const Icon(
+                child: Icon(
                   Icons.arrow_back_ios_new,
                   size: 20,
-                  color: AppTheme.textSub,
+                  color: context.appPalette.ink.withValues(alpha: 0.55),
                 ),
               ),
               const SizedBox(width: AppSpacing.sm),
               Text(
                 language.onboardingGoalTitle,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
-                  color: AppTheme.textMain,
+                  color: context.appPalette.ink,
                 ),
               ),
             ],
@@ -300,11 +299,11 @@ class _GoalCard extends StatelessWidget {
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
           color: isSelected
-              ? AppTheme.primary.withValues(alpha: 0.08)
+              ? context.appPalette.primary.withValues(alpha: 0.08)
               : Colors.white,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: isSelected ? AppTheme.primary : context.appPalette.outline,
+            color: isSelected ? context.appPalette.primary : context.appPalette.outline,
             width: isSelected ? 2 : 1,
           ),
         ),
@@ -315,13 +314,13 @@ class _GoalCard extends StatelessWidget {
               height: 44,
               decoration: BoxDecoration(
                 color: isSelected
-                    ? AppTheme.primary.withValues(alpha: 0.15)
+                    ? context.appPalette.primary.withValues(alpha: 0.15)
                     : context.appPalette.primary.withValues(alpha: 0.10),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(
                 goal.icon,
-                color: isSelected ? AppTheme.primary : const Color(0xFF4255FF),
+                color: isSelected ? context.appPalette.primary : const Color(0xFF4255FF),
               ),
             ),
             const SizedBox(width: AppSpacing.md),
@@ -333,21 +332,21 @@ class _GoalCard extends StatelessWidget {
                     goal.label(language),
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      color: isSelected ? AppTheme.primary : AppTheme.textMain,
+                      color: isSelected ? context.appPalette.primary : context.appPalette.ink,
                     ),
                   ),
                   Text(
                     goal.description(language),
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
-                      color: AppTheme.textSub,
+                      color: context.appPalette.ink.withValues(alpha: 0.55),
                     ),
                   ),
                 ],
               ),
             ),
             if (isSelected)
-              const Icon(Icons.check_circle, color: AppTheme.primary),
+              Icon(Icons.check_circle, color: context.appPalette.primary),
           ],
         ),
       ),
@@ -432,18 +431,18 @@ class _FirstWinPageState extends ConsumerState<_FirstWinPage> {
                     const SizedBox(height: AppSpacing.lg),
                     Text(
                       _firstWinTitle(widget.language),
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w800,
-                        color: AppTheme.textMain,
+                        color: context.appPalette.ink,
                       ),
                     ),
                     const SizedBox(height: AppSpacing.sm),
                     Text(
                       _firstWinSubtitle(widget.language),
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 15,
-                        color: AppTheme.textSub,
+                        color: context.appPalette.ink.withValues(alpha: 0.55),
                       ),
                     ),
                     const SizedBox(height: AppSpacing.lg),
@@ -451,14 +450,14 @@ class _FirstWinPageState extends ConsumerState<_FirstWinPage> {
                       width: double.infinity,
                       padding: const EdgeInsets.all(AppSpacing.md),
                       decoration: BoxDecoration(
-                        color: AppTheme.primary.withValues(alpha: 0.06),
+                        color: context.appPalette.primary.withValues(alpha: 0.06),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Text(
                         '${level.shortLabel} | ${goal.label(widget.language)}',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          color: AppTheme.primary,
+                          color: context.appPalette.primary,
                         ),
                       ),
                     ),
@@ -466,9 +465,9 @@ class _FirstWinPageState extends ConsumerState<_FirstWinPage> {
                       const SizedBox(height: AppSpacing.sm),
                       Text(
                         _loadingHint(widget.language),
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 12,
-                          color: AppTheme.textSub,
+                          color: context.appPalette.ink.withValues(alpha: 0.55),
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -501,9 +500,9 @@ class _FirstWinPageState extends ConsumerState<_FirstWinPage> {
                         child: Text(
                           _unlockHint(widget.language),
                           key: const ValueKey('onboarding_first_win_hint'),
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 12,
-                            color: AppTheme.textSub,
+                            color: context.appPalette.ink.withValues(alpha: 0.55),
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -648,26 +647,26 @@ class _PreviewQuestionCard extends StatelessWidget {
         children: [
           Text(
             _questionLabel(language),
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w700,
-              color: AppTheme.textSub,
+              color: context.appPalette.ink.withValues(alpha: 0.55),
             ),
           ),
           const SizedBox(height: AppSpacing.md),
           Text(
             target.term,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.w800,
-              color: AppTheme.textMain,
+              color: context.appPalette.ink,
             ),
           ),
           if (target.hasDisplayReading) ...[
             const SizedBox(height: 4),
             Text(
               target.reading ?? '',
-              style: const TextStyle(color: AppTheme.textSub),
+              style: TextStyle(color: context.appPalette.ink.withValues(alpha: 0.55)),
             ),
           ],
           const SizedBox(height: AppSpacing.lg),
@@ -690,7 +689,7 @@ class _PreviewQuestionCard extends StatelessWidget {
                   ? _successLabel(language)
                   : _answerLabel(language, options.first),
               style: TextStyle(
-                color: isCorrect ? const Color(0xFF15803D) : AppTheme.textSub,
+                color: isCorrect ? const Color(0xFF15803D) : context.appPalette.ink.withValues(alpha: 0.55),
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -757,14 +756,14 @@ class _PreviewOptionTile extends StatelessWidget {
         : wrong
         ? const Color(0xFFEF4444)
         : selected
-        ? AppTheme.primary
+        ? context.appPalette.primary
         : const Color(0xFFE8ECF5);
     final background = correct
         ? const Color(0xFFF0FDF4)
         : wrong
         ? const Color(0xFFFEF2F2)
         : selected
-        ? AppTheme.primary.withValues(alpha: 0.06)
+        ? context.appPalette.primary.withValues(alpha: 0.06)
         : context.appPalette.elevated;
 
     return GestureDetector(
@@ -782,9 +781,9 @@ class _PreviewOptionTile extends StatelessWidget {
         ),
         child: Text(
           label,
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.w600,
-            color: AppTheme.textMain,
+            color: context.appPalette.ink,
           ),
         ),
       ),
@@ -812,9 +811,9 @@ class _SessionPreview extends StatelessWidget {
         children: [
           Text(
             _title(language),
-            style: const TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.w800,
-              color: AppTheme.textMain,
+              color: context.appPalette.ink,
             ),
           ),
           const SizedBox(height: AppSpacing.sm),
@@ -893,10 +892,10 @@ class _PreviewChip extends StatelessWidget {
       ),
       child: Text(
         label,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 13,
           fontWeight: FontWeight.w600,
-          color: AppTheme.textMain,
+          color: context.appPalette.ink,
         ),
       ),
     );
