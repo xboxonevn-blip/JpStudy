@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../app/theme/app_theme_palette.dart';
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
 import '../../../features/grammar/grammar_providers.dart';
 import '../../../features/mistakes/repositories/mistake_repository.dart';
 import '../../../data/db/app_database.dart';
 import '../../../data/utils/grammar_english_notation.dart';
-import '../../../app/theme/app_theme.dart';
 import '../../common/widgets/clay_card.dart';
 import '../models/grammar_point_data.dart';
 import 'ghost_practice_screen.dart';
@@ -19,18 +19,12 @@ class GhostReviewScreen extends ConsumerWidget {
     final language = ref.watch(appLanguageProvider);
     final ghostsAsync = ref.watch(grammarGhostsProvider);
     final mistakesAsync = ref.watch(mistakesByTypeProvider('grammar'));
+    final palette = context.appPalette;
 
     return Scaffold(
-      backgroundColor: AppTheme.surface,
+      backgroundColor: palette.base,
       appBar: AppBar(
-        title: Text(
-          language.ghostReviewsLabel,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-        foregroundColor: AppTheme.textMain,
+        title: Text(language.ghostReviewsLabel),
         actions: [
           IconButton(
             icon: const Icon(Icons.info_outline),
@@ -53,11 +47,10 @@ class GhostReviewScreen extends ConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Placeholder for Mascot
-                  const Icon(
+                  Icon(
                     Icons.check_circle_outline,
                     size: 80,
-                    color: AppTheme.primary,
+                    color: palette.primary,
                   ),
                   const SizedBox(height: 16),
                   Text(
@@ -65,14 +58,14 @@ class GhostReviewScreen extends ConsumerWidget {
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: AppTheme.textMain,
+                      color: palette.ink,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     language.ghostReviewEmptySubtitle,
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: AppTheme.textSub),
+                    style: TextStyle(color: palette.ink.withValues(alpha: 0.55)),
                   ),
                 ],
               ),
@@ -109,7 +102,7 @@ class GhostReviewScreen extends ConsumerWidget {
           ? Container(
               margin: const EdgeInsets.only(bottom: 16),
               child: FloatingActionButton.extended(
-                backgroundColor: AppTheme.primary,
+                backgroundColor: context.appPalette.primary,
                 foregroundColor: Colors.white,
                 onPressed: () {
                   Navigator.of(context).push(
@@ -151,6 +144,7 @@ class _GhostClayCardState extends State<_GhostClayCard> {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     final point = widget.data.point;
     final language = widget.language;
     final headline = switch (language) {
@@ -197,7 +191,7 @@ class _GhostClayCardState extends State<_GhostClayCard> {
     };
 
     return ClayCard(
-      color: Colors.white,
+      color: palette.elevated,
       onTap: () => setState(() => _isExpanded = !_isExpanded),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -210,11 +204,7 @@ class _GhostClayCardState extends State<_GhostClayCard> {
                   color: Colors.red.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Icon(
-                  Icons.pest_control,
-                  size: 24,
-                  color: Colors.red,
-                ), // Fixed Icon
+                child: const Icon(Icons.pest_control, size: 24, color: Colors.red),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -223,18 +213,18 @@ class _GhostClayCardState extends State<_GhostClayCard> {
                   children: [
                     Text(
                       headline,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: AppTheme.textMain,
+                        color: palette.ink,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       title,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 14,
-                        color: AppTheme.textSub,
+                        color: palette.ink.withValues(alpha: 0.55),
                       ),
                     ),
                   ],
@@ -244,7 +234,7 @@ class _GhostClayCardState extends State<_GhostClayCard> {
                 _isExpanded
                     ? Icons.keyboard_arrow_up_rounded
                     : Icons.keyboard_arrow_down_rounded,
-                color: AppTheme.textSub,
+                color: palette.ink.withValues(alpha: 0.55),
               ),
             ],
           ),
@@ -254,34 +244,31 @@ class _GhostClayCardState extends State<_GhostClayCard> {
               padding: EdgeInsets.symmetric(vertical: 16),
               child: Divider(height: 1),
             ),
-            _buildLabel(language.grammarConnectionLabel),
+            _buildLabel(language.grammarConnectionLabel, palette),
             Text(
               connection,
-              style: const TextStyle(
-                fontFamily: 'Monospace',
-                color: AppTheme.textMain,
-              ),
+              style: TextStyle(fontFamily: 'Monospace', color: palette.ink),
             ),
             const SizedBox(height: 16),
-            _buildLabel(language.grammarExplanationLabel),
+            _buildLabel(language.grammarExplanationLabel, palette),
             Text(
               explanation,
-              style: const TextStyle(color: AppTheme.textMain, height: 1.4),
+              style: TextStyle(color: palette.ink, height: 1.4),
             ),
             if (widget.mistake != null) ...[
               const SizedBox(height: 16),
-              _buildLabel(language.mistakeContextTitle),
-              _buildMistakeContext(language, widget.mistake!),
+              _buildLabel(language.mistakeContextTitle, palette),
+              _buildMistakeContext(language, widget.mistake!, palette),
             ],
             const SizedBox(height: 16),
-            _buildLabel(language.grammarExamplesLabel),
+            _buildLabel(language.grammarExamplesLabel, palette),
             ...widget.data.examples.map(
               (ex) => Padding(
                 padding: const EdgeInsets.only(top: 12.0),
                 child: Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: AppTheme.surface,
+                    color: palette.base,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Column(
@@ -289,9 +276,10 @@ class _GhostClayCardState extends State<_GhostClayCard> {
                     children: [
                       Text(
                         ex.japanese,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 15,
+                          color: palette.ink,
                         ),
                       ),
                       const SizedBox(height: 4),
@@ -306,7 +294,10 @@ class _GhostClayCardState extends State<_GhostClayCard> {
                           AppLanguage.vi => ex.translationVi ?? ex.translation,
                           AppLanguage.ja => ex.translation,
                         },
-                        style: TextStyle(fontSize: 13, color: AppTheme.textSub),
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: palette.ink.withValues(alpha: 0.55),
+                        ),
                       ),
                     ],
                   ),
@@ -319,27 +310,31 @@ class _GhostClayCardState extends State<_GhostClayCard> {
     );
   }
 
-  Widget _buildLabel(String text) {
+  Widget _buildLabel(String text, AppThemePalette palette) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 4),
       child: Text(
         text.toUpperCase(),
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.bold,
-          color: AppTheme.primary,
+          color: palette.primary,
           letterSpacing: 0.5,
         ),
       ),
     );
   }
 
-  Widget _buildMistakeContext(AppLanguage language, UserMistake mistake) {
+  Widget _buildMistakeContext(
+    AppLanguage language,
+    UserMistake mistake,
+    AppThemePalette palette,
+  ) {
     final rows = <Widget>[];
     void addRow(String label, String? value) {
       final cleaned = (value ?? '').trim();
       if (cleaned.isEmpty) return;
-      rows.add(_buildContextRow(label, cleaned));
+      rows.add(_buildContextRow(label, cleaned, palette));
     }
 
     addRow(language.mistakePromptLabel, mistake.prompt);
@@ -347,13 +342,13 @@ class _GhostClayCardState extends State<_GhostClayCard> {
     addRow(language.mistakeCorrectAnswerLabel, mistake.correctAnswer);
     final sourceLabel = _sourceLabel(language, mistake.source);
     if (sourceLabel.isNotEmpty) {
-      rows.add(_buildContextRow(language.mistakeSourceLabel, sourceLabel));
+      rows.add(_buildContextRow(language.mistakeSourceLabel, sourceLabel, palette));
     }
 
     if (rows.isEmpty) {
       return Text(
         language.mistakeContextEmptyLabel,
-        style: const TextStyle(color: AppTheme.textSub),
+        style: TextStyle(color: palette.ink.withValues(alpha: 0.55)),
       );
     }
 
@@ -368,7 +363,7 @@ class _GhostClayCardState extends State<_GhostClayCard> {
     );
   }
 
-  Widget _buildContextRow(String label, String value) {
+  Widget _buildContextRow(String label, String value, AppThemePalette palette) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -376,17 +371,17 @@ class _GhostClayCardState extends State<_GhostClayCard> {
           width: 90,
           child: Text(
             label,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              color: AppTheme.textSub,
+              color: palette.ink.withValues(alpha: 0.55),
             ),
           ),
         ),
         Expanded(
           child: Text(
             value,
-            style: const TextStyle(fontSize: 12, color: AppTheme.textMain),
+            style: TextStyle(fontSize: 12, color: palette.ink),
           ),
         ),
       ],
