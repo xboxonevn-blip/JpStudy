@@ -6011,6 +6011,17 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get kanjiAllCaughtUpLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'All caught up!';
+      case AppLanguage.vi:
+        return '\u0110\u00e3 \u00f4n h\u1ebft r\u1ed3i!';
+      case AppLanguage.ja:
+        return '\u5168\u90e8\u5b8c\u4e86\uff01';
+    }
+  }
+
   String dueForReviewLabel(int count) {
     switch (this) {
       case AppLanguage.en:

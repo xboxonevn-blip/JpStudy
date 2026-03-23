@@ -93,3 +93,22 @@ Track each design iteration so everyone can review the process, not just the fin
 - Verification:
   - `dart format lib/features/grammar/grammar_screen.dart`
   - `flutter test test/features/ui/ghost_review_walkthrough_test.dart`
+
+## Iteration 006 - Kanji Reading Hub Refresh (2026-03-23)
+
+- Goal: Bring Kanji Reading hub up to the same design language as Grammar and Vocab screens.
+- Scope:
+  - Replace FutureBuilder + raw Navigator with Riverpod providers + design system widgets.
+  - Add `kanjiByLevelProvider` and `kanjiReadingDueItemsProvider` to eliminate inline async logic.
+  - Render hero card with due-count badge, primary Start Quiz action, and conditional Review Due action.
+  - Add compact kanji list preview (up to 8 items) below the hero.
+  - Add `kanjiAllCaughtUpLabel` localization (EN/VI/JA).
+  - Fix unrelated bug: Vocab screen secondary toggle button was a no-op (`() {}`).
+- Output:
+  - `lib/features/kanji_reading/screens/home_kanji_reading_screen.dart`
+  - `lib/features/kanji_reading/providers/kanji_reading_providers.dart`
+  - `lib/core/app_language.dart`
+  - `lib/features/vocab/vocab_screen.dart` (bug fix)
+- Verification:
+  - `flutter analyze lib/features/kanji_reading/ lib/core/app_language.dart`
+  - `flutter test`
