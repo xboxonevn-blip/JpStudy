@@ -150,7 +150,7 @@ class _VocabContent extends ConsumerWidget {
                 primaryLabel: language.reviewAction,
                 onPrimaryTap: () => context.push('/vocab/review'),
                 secondaryLabel: _toggleLabel(language, isFlashcardMode),
-                onSecondaryTap: () {},
+                onSecondaryTap: onToggleMode,
                 status: AppStatusChip(
                   label: dueTerms.isNotEmpty
                       ? language.reviewTermsDueLabel(dueTerms.length)
