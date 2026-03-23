@@ -112,3 +112,21 @@ Track each design iteration so everyone can review the process, not just the fin
 - Verification:
   - `flutter analyze lib/features/kanji_reading/ lib/core/app_language.dart`
   - `flutter test`
+
+## Iteration 007 - Recall Sprint — real vocab data (2026-03-23)
+
+- Goal: Replace hardcoded questions (食べる/飲む) with live data from the SRS review queue.
+- Scope:
+  - Add `recallSprintQuestionsProvider` (FutureProvider) that picks up to 5 due terms and builds 4-choice MCQs.
+  - Export `SprintQuestion` model for test overriding.
+  - Fix bug: progress label said "of 5" when `_totalQuestions = 2`.
+  - Refactor body into `_SprintBody` stateless widget; remove 110 blank lines.
+  - Adopt `AppSectionCard`/`AppPageShell`/`AppThemePalette` for consistent styling.
+  - Update `simple_command_center_test.dart`: add `_sprintOverride()` fixture helper; fix assertion strings.
+- Output:
+  - `lib/features/practice/screens/recall_sprint_screen.dart`
+  - `test/features/ui/simple_command_center_test.dart`
+  - `docs/uiux-progress.md`
+- Verification:
+  - `flutter analyze lib/features/practice/`
+  - `flutter test` → 206/206 pass

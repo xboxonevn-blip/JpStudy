@@ -1,8 +1,63 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_spacing.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
-import 'package:jpstudy/features/common/widgets/japanese_background.dart';
+import 'package:jpstudy/data/db/app_database.dart';
+import 'package:jpstudy/data/repositories/lesson_repository.dart';
+import 'package:jpstudy/features/common/widgets/compact_ui.dart';
+
+const _kBatchSize = 5;
+
+// ---------------------------------------------------------------------------
+// Provider — picks _kBatchSize random due terms and builds MCQ choices
+// ---------------------------------------------------------------------------
+
+@immutable
+class SprintQuestion {
+  const SprintQuestion({
+    required this.term,
+    required this.correct,
+    required this.options,
+  });
+  final String term;
+  final String correct;
+  final List<String> options;
+}
+
+final recallSprintQuestionsProvider =
+    FutureProvider.autoDispose<List<SprintQuestion>>((ref) async {
+  final repo = ref.read(lessonRepositoryProvider);
+  final due = await repo.fetchAllDueTerms();
+  if (due.length < 4) return const [];
+
+  final rng = Random();
+  final shuffled = List<UserLessonTermData>.from(due)..shuffle(rng);
+  final batch = shuffled.take(_kBatchSize).toList();
+
+  return batch.map((q) {
+    final distractors = due
+        .where((t) => t.id != q.id)
+        .toList()
+      ..shuffle(rng);
+    final choices = [
+      q,
+      ...distractors.take(3),
+    ]..shuffle(rng);
+    return SprintQuestion(
+      term: q.term,
+      correct: q.definition,
+      options: choices.map((t) => t.definition).toList(),
+    );
+  }).toList();
+});
+
+// ---------------------------------------------------------------------------
+// Screen
+// ---------------------------------------------------------------------------
 
 class RecallSprintScreen extends ConsumerStatefulWidget {
   const RecallSprintScreen({super.key});
@@ -12,8 +67,6 @@ class RecallSprintScreen extends ConsumerStatefulWidget {
 }
 
 class _RecallSprintScreenState extends ConsumerState<RecallSprintScreen> {
-  static const _totalQuestions = 2;
-
   bool _started = false;
   bool _completed = false;
   int _questionIndex = 0;
@@ -28,231 +81,62 @@ class _RecallSprintScreenState extends ConsumerState<RecallSprintScreen> {
   @override
   Widget build(BuildContext context) {
     final language = ref.watch(appLanguageProvider);
+    final questionsAsync = ref.watch(recallSprintQuestionsProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text(_title(language))),
-      body: JapaneseBackground(
-        child: SafeArea(
-          top: false,
-          child: ListView(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
-            children: [
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: const Color(0xFFDCE8F8)),
-                ),
-                child: _started
-                    ? _completed
-                        ? Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                _completedLabel(language),
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w800,
-                                  color: Color(0xFF475569),
-                                ),
-                              ),
-                              const SizedBox(height: 10),
-                              Text(
-                                _completedTitle(language),
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w900,
-                                  color: Color(0xFF0F172A),
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                _completedBody(language),
-                                style: const TextStyle(
-                                  color: Color(0xFF475569),
-                                  fontWeight: FontWeight.w700,
-                                  height: 1.35,
-                                ),
-                              ),
-                              const SizedBox(height: 16),
-                              FilledButton(
-                                onPressed: _restart,
-                                child: Text(_restartLabel(language)),
-                              ),
-                            ],
-                          )
-                        : Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                _retrying
-                                    ? _retryProgressLabel(language)
-                                    : _progressLabel(language),
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w800,
-                                  color: Color(0xFF475569),
-                                ),
-                              ),
-                              const SizedBox(height: 10),
-                              Text(
-                                _sessionIntro(language),
-                                style: const TextStyle(
-                                  color: Color(0xFF0F172A),
-                                  fontWeight: FontWeight.w700,
-                                  height: 1.35,
-                                ),
-                              ),
-                              const SizedBox(height: 16),
-                              Text(
-                                _questionPromptFor(language, _effectiveIndex),
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w900,
-                                  color: Color(0xFF0F172A),
-                                ),
-                              ),
-                              const SizedBox(height: 12),
-                              ..._questionOptionsFor(language, _effectiveIndex).map(
-                                (option) => Padding(
-                                  padding: const EdgeInsets.only(bottom: 10),
-                                  child: OutlinedButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        _selectedAnswer = option;
-                                      });
-                                    },
-                                    style: OutlinedButton.styleFrom(
-                                      alignment: Alignment.centerLeft,
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 14,
-                                        vertical: 14,
-                                      ),
-                                      side: const BorderSide(
-                                        color: Color(0xFFDCE8F8),
-                                      ),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(16),
-                                      ),
-                                    ),
-                                    child: Text(option),
-                                  ),
-                                ),
-                              ),
-                              if (_selectedAnswer != null &&
-                                  _selectedAnswer ==
-                                      _correctAnswerFor(
-                                        language,
-                                        _effectiveIndex,
-                                      )) ...[
-                                const SizedBox(height: 8),
-                                Text(
-                                  _correctAnswerTitle(language),
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w900,
-                                    color: Color(0xFF15803D),
-                                  ),
-                                ),
-                                const SizedBox(height: 6),
-                                Text(
-                                  _correctAnswerBodyFor(
-                                    language,
-                                    _effectiveIndex,
-                                  ),
-                                  style: const TextStyle(
-                                    color: Color(0xFF475569),
-                                    fontWeight: FontWeight.w700,
-                                    height: 1.35,
-                                  ),
-                                ),
-                              ],
-                              if (_selectedAnswer != null &&
-                                  _selectedAnswer !=
-                                      _correctAnswerFor(
-                                        language,
-                                        _effectiveIndex,
-                                      )) ...[
-                                const SizedBox(height: 8),
-                                Text(
-                                  _wrongAnswerTitle(language),
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w900,
-                                    color: Color(0xFFB45309),
-                                  ),
-                                ),
-                                const SizedBox(height: 6),
-                                Text(
-                                  _wrongAnswerBodyFor(
-                                    language,
-                                    _effectiveIndex,
-                                  ),
-                                  style: const TextStyle(
-                                    color: Color(0xFF475569),
-                                    fontWeight: FontWeight.w700,
-                                    height: 1.35,
-                                  ),
-                                ),
-                              ],
-                              if (_selectedAnswer != null) ...[
-                                const SizedBox(height: 16),
-                                FilledButton(
-                                  onPressed: _onNext,
-                                  child: Text(_nextLabel(language)),
-                                ),
-                              ],
-                            ],
-                          )
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            _title(language),
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w900,
-                              color: Color(0xFF0F172A),
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            language.practiceRecallSprintSubtitle,
-                            style: const TextStyle(
-                              color: Color(0xFF64748B),
-                              fontWeight: FontWeight.w600,
-                              height: 1.35,
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          FilledButton(
-                            onPressed: () {
-                              setState(() {
-                                _started = true;
-                                _questionIndex = 0;
-                                _selectedAnswer = null;
-                                _missed.clear();
-                                _retrying = false;
-                                _retryIndex = 0;
-                              });
-                            },
-                            child: Text(_startLabel(language)),
-                          ),
-                        ],
-                      ),
+      appBar: AppBar(title: Text(language.practiceRecallSprintLabel)),
+      body: questionsAsync.when(
+        data: (questions) {
+          if (questions.isEmpty) {
+            return AppPageShell(
+              child: AppFeatureCard(
+                icon: Icons.bolt_rounded,
+                title: language.practiceRecallSprintLabel,
+                subtitle: _notEnoughTermsLabel(language),
               ),
-            ],
-          ),
-        ),
+            );
+          }
+          return _SprintBody(
+            language: language,
+            questions: questions,
+            started: _started,
+            completed: _completed,
+            questionIndex: _questionIndex,
+            selectedAnswer: _selectedAnswer,
+            missed: _missed,
+            retrying: _retrying,
+            retryIndex: _retryIndex,
+            effectiveIndex: _effectiveIndex,
+            onStart: () => setState(() {
+              _started = true;
+              _questionIndex = 0;
+              _selectedAnswer = null;
+              _missed.clear();
+              _retrying = false;
+              _retryIndex = 0;
+            }),
+            onSelect: (answer) =>
+                setState(() => _selectedAnswer = answer),
+            onNext: () => _onNext(questions),
+            onRestart: () => setState(() {
+              _completed = false;
+              _questionIndex = 0;
+              _selectedAnswer = null;
+              _missed.clear();
+              _retrying = false;
+              _retryIndex = 0;
+            }),
+          );
+        },
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (e, st) => Center(child: Text(e.toString())),
       ),
     );
   }
 
-  void _onNext() {
-    final language = ref.read(appLanguageProvider);
-    final wasCorrect =
-        _selectedAnswer == _correctAnswerFor(language, _effectiveIndex);
+  void _onNext(List<SprintQuestion> questions) {
+    final q = questions[_effectiveIndex];
+    final wasCorrect = _selectedAnswer == q.correct;
 
     setState(() {
       if (_retrying) {
@@ -265,10 +149,8 @@ class _RecallSprintScreenState extends ConsumerState<RecallSprintScreen> {
           _selectedAnswer = null;
         }
       } else {
-        if (!wasCorrect) {
-          _missed.add(_questionIndex);
-        }
-        if (_questionIndex < _totalQuestions - 1) {
+        if (!wasCorrect) _missed.add(_questionIndex);
+        if (_questionIndex < questions.length - 1) {
           _questionIndex += 1;
           _selectedAnswer = null;
         } else if (_missed.isNotEmpty) {
@@ -283,268 +165,340 @@ class _RecallSprintScreenState extends ConsumerState<RecallSprintScreen> {
     });
   }
 
-  void _restart() {
-    setState(() {
-      _completed = false;
-      _questionIndex = 0;
-      _selectedAnswer = null;
-      _missed.clear();
-      _retrying = false;
-      _retryIndex = 0;
-    });
+  String _notEnoughTermsLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Study at least 4 terms first to unlock Recall Sprint.';
+      case AppLanguage.vi:
+        return 'Hãy học ít nhất 4 từ để mở khóa Recall Sprint.';
+      case AppLanguage.ja:
+        return 'リコールスプリントを使うには4つ以上の単語を学習してください。';
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Body widget (stateless, receives all state from parent)
+// ---------------------------------------------------------------------------
+
+class _SprintBody extends StatelessWidget {
+  const _SprintBody({
+    required this.language,
+    required this.questions,
+    required this.started,
+    required this.completed,
+    required this.questionIndex,
+    required this.selectedAnswer,
+    required this.missed,
+    required this.retrying,
+    required this.retryIndex,
+    required this.effectiveIndex,
+    required this.onStart,
+    required this.onSelect,
+    required this.onNext,
+    required this.onRestart,
+  });
+
+  final AppLanguage language;
+  final List<SprintQuestion> questions;
+  final bool started;
+  final bool completed;
+  final int questionIndex;
+  final String? selectedAnswer;
+  final List<int> missed;
+  final bool retrying;
+  final int retryIndex;
+  final int effectiveIndex;
+  final VoidCallback onStart;
+  final void Function(String) onSelect;
+  final VoidCallback onNext;
+  final VoidCallback onRestart;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return AppPageShell(
+      topPadding: AppSpacing.sm,
+      child: AppSectionCard(
+        child: !started
+            ? _buildIntro(context, palette)
+            : completed
+            ? _buildCompleted(context, palette)
+            : _buildQuestion(context, palette),
+      ),
+    );
   }
 
-  String _completedLabel(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Sprint complete',
-    AppLanguage.vi => 'Hoàn thành sprint',
-    AppLanguage.ja => 'スプリント完了',
+  Widget _buildIntro(BuildContext context, AppThemePalette palette) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          language.practiceRecallSprintLabel,
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w900,
+            color: palette.ink,
+          ),
+        ),
+        const SizedBox(height: AppSpacing.sm),
+        Text(
+          language.practiceRecallSprintSubtitle,
+          style: TextStyle(
+            color: palette.ink.withValues(alpha: 0.65),
+            fontWeight: FontWeight.w600,
+            height: 1.35,
+          ),
+        ),
+        const SizedBox(height: AppSpacing.lg),
+        Text(
+          _batchSizeLabel(language, questions.length),
+          style: TextStyle(
+            fontSize: 13,
+            color: palette.ink.withValues(alpha: 0.5),
+          ),
+        ),
+        const SizedBox(height: AppSpacing.md),
+        FilledButton(
+          onPressed: onStart,
+          child: Text(_startLabel(language)),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCompleted(BuildContext context, AppThemePalette palette) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          _completedLabel(language),
+          style: TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w800,
+            color: palette.ink.withValues(alpha: 0.55),
+          ),
+        ),
+        const SizedBox(height: AppSpacing.xs),
+        Text(
+          _completedTitle(language),
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w900,
+            color: palette.ink,
+          ),
+        ),
+        const SizedBox(height: AppSpacing.sm),
+        Text(
+          _completedBody(language),
+          style: TextStyle(
+            color: palette.ink.withValues(alpha: 0.65),
+            fontWeight: FontWeight.w700,
+            height: 1.35,
+          ),
+        ),
+        const SizedBox(height: AppSpacing.lg),
+        FilledButton(onPressed: onRestart, child: Text(_restartLabel(language))),
+      ],
+    );
+  }
+
+  Widget _buildQuestion(BuildContext context, AppThemePalette palette) {
+    final q = questions[effectiveIndex];
+    final isCorrect = selectedAnswer != null && selectedAnswer == q.correct;
+    final isWrong = selectedAnswer != null && selectedAnswer != q.correct;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          retrying
+              ? _retryProgressLabel(language, retryIndex, missed.length)
+              : _progressLabel(language, questionIndex, questions.length),
+          style: TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w800,
+            color: palette.ink.withValues(alpha: 0.55),
+          ),
+        ),
+        const SizedBox(height: AppSpacing.sm),
+        Text(
+          _questionPrompt(language, q.term),
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w900,
+            color: palette.ink,
+          ),
+        ),
+        const SizedBox(height: AppSpacing.md),
+        ...q.options.map(
+          (option) => Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: OutlinedButton(
+              onPressed: selectedAnswer == null
+                  ? () => onSelect(option)
+                  : null,
+              style: OutlinedButton.styleFrom(
+                alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 14,
+                ),
+                side: BorderSide(
+                  color: selectedAnswer == option
+                      ? (option == q.correct
+                          ? Colors.green
+                          : palette.primary)
+                      : palette.outline,
+                ),
+                backgroundColor: selectedAnswer == option
+                    ? (option == q.correct
+                        ? Colors.green.withValues(alpha: 0.08)
+                        : palette.primary.withValues(alpha: 0.06))
+                    : null,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
+              child: Text(option),
+            ),
+          ),
+        ),
+        if (isCorrect) ...[
+          const SizedBox(height: AppSpacing.sm),
+          Text(
+            _correctTitle(language),
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w900,
+              color: palette.success,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            _correctBody(language),
+            style: TextStyle(
+              color: palette.ink.withValues(alpha: 0.65),
+              fontWeight: FontWeight.w700,
+              height: 1.35,
+            ),
+          ),
+        ],
+        if (isWrong) ...[
+          const SizedBox(height: AppSpacing.sm),
+          Text(
+            _wrongTitle(language),
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w900,
+              color: palette.warning,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            _wrongBody(language, q.term, q.correct),
+            style: TextStyle(
+              color: palette.ink.withValues(alpha: 0.65),
+              fontWeight: FontWeight.w700,
+              height: 1.35,
+            ),
+          ),
+        ],
+        if (selectedAnswer != null) ...[
+          const SizedBox(height: AppSpacing.lg),
+          FilledButton(onPressed: onNext, child: Text(_nextLabel(language))),
+        ],
+      ],
+    );
+  }
+
+  // ---- Labels ----
+
+  String _batchSizeLabel(AppLanguage l, int count) => switch (l) {
+    AppLanguage.en => '$count questions from your review queue',
+    AppLanguage.vi => '$count câu hỏi từ hàng đợi ôn tập của bạn',
+    AppLanguage.ja => 'レビューキューから$count問',
   };
 
-  String _completedTitle(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Nice run.',
-    AppLanguage.vi => 'Lượt làm tốt lắm.',
-    AppLanguage.ja => 'いい流れでした。',
-  };
-
-  String _completedBody(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'You cleared the current recall set. Run it again to build speed.',
-    AppLanguage.vi => 'Bạn đã hoàn thành lượt recall hiện tại. Chạy lại để tăng tốc độ.',
-    AppLanguage.ja => '現在のリコールセットを完了しました。もう一度行ってスピードを上げましょう。',
-  };
-
-  String _restartLabel(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Run again',
-    AppLanguage.vi => 'Chạy lại',
-    AppLanguage.ja => 'もう一度',
-  };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  String _title(AppLanguage language) => language.practiceRecallSprintLabel;
-
-  String _startLabel(AppLanguage language) => switch (language) {
+  String _startLabel(AppLanguage l) => switch (l) {
     AppLanguage.en => 'Start sprint',
     AppLanguage.vi => 'Bắt đầu sprint',
     AppLanguage.ja => 'スプリント開始',
   };
 
-  String _nextLabel(AppLanguage language) => switch (language) {
+  String _completedLabel(AppLanguage l) => switch (l) {
+    AppLanguage.en => 'Sprint complete',
+    AppLanguage.vi => 'Hoàn thành sprint',
+    AppLanguage.ja => 'スプリント完了',
+  };
+
+  String _completedTitle(AppLanguage l) => switch (l) {
+    AppLanguage.en => 'Nice run.',
+    AppLanguage.vi => 'Lượt làm tốt lắm.',
+    AppLanguage.ja => 'いい流れでした。',
+  };
+
+  String _completedBody(AppLanguage l) => switch (l) {
+    AppLanguage.en =>
+      'You cleared the current recall set. Run it again to build speed.',
+    AppLanguage.vi =>
+      'Bạn đã hoàn thành lượt recall hiện tại. Chạy lại để tăng tốc độ.',
+    AppLanguage.ja =>
+      '現在のリコールセットを完了しました。もう一度行ってスピードを上げましょう。',
+  };
+
+  String _restartLabel(AppLanguage l) => switch (l) {
+    AppLanguage.en => 'Run again',
+    AppLanguage.vi => 'Chạy lại',
+    AppLanguage.ja => 'もう一度',
+  };
+
+  String _progressLabel(AppLanguage l, int index, int total) => switch (l) {
+    AppLanguage.en => 'Question ${index + 1} of $total',
+    AppLanguage.vi => 'Câu ${index + 1} / $total',
+    AppLanguage.ja => '${index + 1} / $total 問目',
+  };
+
+  String _retryProgressLabel(AppLanguage l, int index, int total) =>
+      switch (l) {
+        AppLanguage.en => 'Retry ${index + 1} of $total',
+        AppLanguage.vi => 'Thử lại ${index + 1} / $total',
+        AppLanguage.ja => 'リトライ ${index + 1} / $total',
+      };
+
+  String _questionPrompt(AppLanguage l, String term) => switch (l) {
+    AppLanguage.en => 'Choose the best meaning for $term.',
+    AppLanguage.vi => 'Chọn nghĩa đúng nhất cho $term.',
+    AppLanguage.ja => '$term の意味として最も近いものを選んでください。',
+  };
+
+  String _nextLabel(AppLanguage l) => switch (l) {
     AppLanguage.en => 'Next',
     AppLanguage.vi => 'Tiếp theo',
     AppLanguage.ja => '次へ',
   };
 
-  String _progressLabel(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Question ${_questionIndex + 1} of 5',
-    AppLanguage.vi => 'Câu ${_questionIndex + 1} / 5',
-    AppLanguage.ja => '${_questionIndex + 1} / 5 問目',
-  };
-
-  String _retryProgressLabel(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Retry ${_retryIndex + 1} of ${_missed.length}',
-    AppLanguage.vi => 'Thử lại ${_retryIndex + 1} / ${_missed.length}',
-    AppLanguage.ja => 'リトライ ${_retryIndex + 1} / ${_missed.length}',
-  };
-
-  String _sessionIntro(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Warm up your mixed recall run.',
-    AppLanguage.vi => 'Khởi động lượt ôn recall tổng hợp của bạn.',
-    AppLanguage.ja => '混合リコールのウォームアップを始めましょう。',
-  };
-
-  String _questionPromptFor(AppLanguage language, int index) =>
-      switch (language) {
-        AppLanguage.en => switch (index) {
-          0 => 'Choose the best meaning for 食べる.',
-          _ => 'Choose the best meaning for 飲む.',
-        },
-        AppLanguage.vi => switch (index) {
-          0 => 'Chọn nghĩa đúng nhất cho 食べる.',
-          _ => 'Chọn nghĩa đúng nhất cho 飲む.',
-        },
-        AppLanguage.ja => switch (index) {
-          0 => '食べる の意味として最も近いものを選んでください。',
-          _ => '飲む の意味として最も近いものを選んでください。',
-        },
-      };
-
-  List<String> _questionOptionsFor(AppLanguage language, int index) =>
-      switch (language) {
-        AppLanguage.en => switch (index) {
-          0 => const ['to eat', 'to drink', 'to read', 'to sleep'],
-          _ => const ['to drink', 'to eat', 'to write', 'to wait'],
-        },
-        AppLanguage.vi => switch (index) {
-          0 => const ['ăn', 'uống', 'đọc', 'ngủ'],
-          _ => const ['uống', 'ăn', 'viết', 'đợi'],
-        },
-        AppLanguage.ja => switch (index) {
-          0 => const ['食べる', '飲む', '読む', '寝る'],
-          _ => const ['飲む', '食べる', '書く', '待つ'],
-        },
-      };
-
-  String _correctAnswerFor(AppLanguage language, int index) =>
-      switch (language) {
-        AppLanguage.en => switch (index) {
-          0 => 'to eat',
-          _ => 'to drink',
-        },
-        AppLanguage.vi => switch (index) {
-          0 => 'ăn',
-          _ => 'uống',
-        },
-        AppLanguage.ja => switch (index) {
-          0 => '食べる',
-          _ => '飲む',
-        },
-      };
-
-  String _correctAnswerTitle(AppLanguage language) => switch (language) {
+  String _correctTitle(AppLanguage l) => switch (l) {
     AppLanguage.en => 'Nice',
     AppLanguage.vi => 'Tốt lắm',
     AppLanguage.ja => 'いいね',
   };
 
-  String _correctAnswerBodyFor(AppLanguage language, int index) =>
-      switch (language) {
-        AppLanguage.en => 'That is the right meaning.',
-        AppLanguage.vi => 'Đó là nghĩa đúng.',
-        AppLanguage.ja => 'その意味で正解です。',
-      };
+  String _correctBody(AppLanguage l) => switch (l) {
+    AppLanguage.en => 'That is the right meaning.',
+    AppLanguage.vi => 'Đó là nghĩa đúng.',
+    AppLanguage.ja => 'その意味で正解です。',
+  };
 
-  String _wrongAnswerTitle(AppLanguage language) => switch (language) {
+  String _wrongTitle(AppLanguage l) => switch (l) {
     AppLanguage.en => 'Not quite',
     AppLanguage.vi => 'Chưa đúng',
     AppLanguage.ja => 'おしい',
   };
 
-  String _wrongAnswerBodyFor(AppLanguage language, int index) =>
-      switch (language) {
-        AppLanguage.en => switch (index) {
-          0 => '食べる means to eat.',
-          _ => '飲む means to drink.',
-        },
-        AppLanguage.vi => switch (index) {
-          0 => '食べる có nghĩa là ăn.',
-          _ => '飲む có nghĩa là uống.',
-        },
-        AppLanguage.ja => switch (index) {
-          0 => '食べる は「eat」という意味です。',
-          _ => '飲む は「drink」という意味です。',
-        },
-      };
+  String _wrongBody(AppLanguage l, String term, String correct) => switch (l) {
+    AppLanguage.en => '$term means "$correct".',
+    AppLanguage.vi => '$term có nghĩa là "$correct".',
+    AppLanguage.ja => '$term の意味は「$correct」です。',
+  };
 }

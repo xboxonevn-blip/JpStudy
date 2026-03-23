@@ -28,6 +28,24 @@ import 'package:jpstudy/features/vocab/screens/term_review_screen.dart';
 import 'package:jpstudy/features/common/widgets/japanese_background.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+// Deterministic fixture questions for RecallSprint widget tests.
+const _fixtureSprintQuestions = [
+  SprintQuestion(
+    term: '食べる',
+    correct: 'to eat',
+    options: ['to eat', 'to drink', 'to read', 'to sleep'],
+  ),
+  SprintQuestion(
+    term: '飲む',
+    correct: 'to drink',
+    options: ['to drink', 'to eat', 'to write', 'to wait'],
+  ),
+];
+
+Override _sprintOverride() => recallSprintQuestionsProvider.overrideWith(
+      (ref) async => _fixtureSprintQuestions,
+    );
+
 void main() {
   setUp(() {
     SharedPreferences.setMockInitialValues({});
@@ -120,6 +138,7 @@ void main() {
             (ref) async =>
                 const BackupStatus(enabled: false, lastBackupAt: null),
           ),
+          _sprintOverride(),
         ],
         child: MaterialApp.router(routerConfig: AppRouter.router),
       ),
@@ -211,7 +230,10 @@ void main() {
   testWidgets('RecallSprintScreen shows a start CTA', (tester) async {
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [appLanguageProvider.overrideWith((ref) => AppLanguage.en)],
+        overrides: [
+          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          _sprintOverride(),
+        ],
         child: const MaterialApp(home: RecallSprintScreen()),
       ),
     );
@@ -230,6 +252,7 @@ void main() {
         ProviderScope(
           overrides: [
             appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+            _sprintOverride(),
           ],
           child: const MaterialApp(home: RecallSprintScreen()),
         ),
@@ -240,8 +263,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Start sprint'), findsNothing);
-      expect(find.text('Question 1 of 5'), findsOneWidget);
-      expect(find.text('Warm up your mixed recall run.'), findsOneWidget);
+      expect(find.text('Question 1 of 2'), findsOneWidget);
     },
   );
 
@@ -252,6 +274,7 @@ void main() {
         ProviderScope(
           overrides: [
             appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+            _sprintOverride(),
           ],
           child: const MaterialApp(home: RecallSprintScreen()),
         ),
@@ -276,6 +299,7 @@ void main() {
         ProviderScope(
           overrides: [
             appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+            _sprintOverride(),
           ],
           child: const MaterialApp(home: RecallSprintScreen()),
         ),
@@ -288,7 +312,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Not quite'), findsOneWidget);
-      expect(find.text('食べる means to eat.'), findsOneWidget);
+      expect(find.text('食べる means "to eat".'), findsOneWidget);
     },
   );
 
@@ -299,6 +323,7 @@ void main() {
         ProviderScope(
           overrides: [
             appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+            _sprintOverride(),
           ],
           child: const MaterialApp(home: RecallSprintScreen()),
         ),
@@ -320,7 +345,10 @@ void main() {
   ) async {
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [appLanguageProvider.overrideWith((ref) => AppLanguage.en)],
+        overrides: [
+          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          _sprintOverride(),
+        ],
         child: const MaterialApp(home: RecallSprintScreen()),
       ),
     );
@@ -339,7 +367,10 @@ void main() {
   ) async {
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [appLanguageProvider.overrideWith((ref) => AppLanguage.en)],
+        overrides: [
+          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          _sprintOverride(),
+        ],
         child: const MaterialApp(home: RecallSprintScreen()),
       ),
     );
@@ -352,7 +383,7 @@ void main() {
     await tester.tap(find.text('Next'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Question 2 of 5'), findsOneWidget);
+    expect(find.text('Question 2 of 2'), findsOneWidget);
     expect(find.text('Choose the best meaning for 飲む.'), findsOneWidget);
     expect(find.text('to drink'), findsOneWidget);
   });
@@ -362,7 +393,10 @@ void main() {
   ) async {
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [appLanguageProvider.overrideWith((ref) => AppLanguage.en)],
+        overrides: [
+          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          _sprintOverride(),
+        ],
         child: const MaterialApp(home: RecallSprintScreen()),
       ),
     );
@@ -392,6 +426,7 @@ void main() {
         ProviderScope(
           overrides: [
             appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+            _sprintOverride(),
           ],
           child: const MaterialApp(home: RecallSprintScreen()),
         ),
@@ -428,7 +463,10 @@ void main() {
   ) async {
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [appLanguageProvider.overrideWith((ref) => AppLanguage.en)],
+        overrides: [
+          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          _sprintOverride(),
+        ],
         child: const MaterialApp(home: RecallSprintScreen()),
       ),
     );
@@ -451,7 +489,7 @@ void main() {
     await tester.tap(find.text('Run again'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Question 1 of 5'), findsOneWidget);
+    expect(find.text('Question 1 of 2'), findsOneWidget);
     expect(find.text('Choose the best meaning for 食べる.'), findsOneWidget);
   });
 
