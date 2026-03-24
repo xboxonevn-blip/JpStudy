@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../app/theme/app_theme.dart';
+import '../../../app/theme/app_theme_palette.dart';
 
 class ClayCard extends StatelessWidget {
   final Widget child;
@@ -15,15 +15,18 @@ class ClayCard extends StatelessWidget {
     this.onTap,
   });
 
+  static Color _depthColor(Color color) {
+    final hsl = HSLColor.fromColor(color);
+    return hsl.withLightness((hsl.lightness - 0.15).clamp(0.0, 1.0)).toColor();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final baseColor = color ?? Colors.white;
-    final depthColor = AppTheme.getDepthColor(
-      baseColor == Colors.white ? AppTheme.neutral : baseColor,
-    );
-    final borderColor = baseColor == Colors.white
-        ? AppTheme.neutral
-        : depthColor;
+    final palette = context.appPalette;
+    final baseColor = color ?? palette.elevated;
+    final isDefault = color == null;
+    final depthColor = _depthColor(isDefault ? palette.outline : baseColor);
+    final borderColor = isDefault ? palette.outline : depthColor;
 
     return Semantics(
       container: true,
