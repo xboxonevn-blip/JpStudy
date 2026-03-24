@@ -197,6 +197,97 @@ class StudyHubScreen extends ConsumerWidget {
                 ),
             const SizedBox(height: AppSpacing.lg),
 
+            // ── Onboarding Roadmap ────────────────────────────────────────
+            AppSectionHeader(title: _roadmapSectionTitle(language)),
+            const SizedBox(height: AppSpacing.sm),
+            AppSectionCard(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.lg,
+                vertical: AppSpacing.sm,
+              ),
+              child: Column(
+                children: onboardingSteps.map((step) {
+                  final done = hub.doneOnboardingSteps.contains(step.id);
+                  return CheckboxListTile(
+                    value: done,
+                    onChanged: (_) => ref
+                        .read(studyHubProvider.notifier)
+                        .toggleOnboardingStep(step.id),
+                    title: Text(
+                      step.title,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        decoration: done ? TextDecoration.lineThrough : null,
+                        color: done
+                            ? context.appPalette.ink.withValues(alpha: 0.45)
+                            : context.appPalette.ink,
+                      ),
+                    ),
+                    subtitle: Text(
+                      step.description,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: context.appPalette.ink.withValues(alpha: 0.55),
+                      ),
+                    ),
+                    controlAffinity: ListTileControlAffinity.leading,
+                    contentPadding: EdgeInsets.zero,
+                    dense: true,
+                    activeColor: context.appPalette.primary,
+                  );
+                }).toList(),
+              ),
+            ),
+            const SizedBox(height: AppSpacing.lg),
+
+            // ── Exam Date ──────────────────────────────────────────────────
+            AppSectionHeader(title: _examDateSectionTitle(language)),
+            const SizedBox(height: AppSpacing.sm),
+            AppSectionCard(
+              padding: const EdgeInsets.all(AppSpacing.lg),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    hub.examDate == null
+                        ? _examDateEmptyLabel(language)
+                        : _examDateValueLabel(language, hub.examDate!),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      color: context.appPalette.ink,
+                    ),
+                  ),
+                  const SizedBox(height: AppSpacing.xs),
+                  Text(
+                    _examDateHintLabel(language),
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: context.appPalette.ink.withValues(alpha: 0.55),
+                    ),
+                  ),
+                  const SizedBox(height: AppSpacing.sm),
+                  Wrap(
+                    spacing: 8,
+                    children: [
+                      OutlinedButton.icon(
+                        onPressed: () => ref
+                            .read(studyHubProvider.notifier)
+                            .setExamDate(DateTime.now().add(const Duration(days: 90))),
+                        icon: const Icon(Icons.event_rounded, size: 16),
+                        label: Text(_setExamDateLabel(language)),
+                      ),
+                      if (hub.examDate != null)
+                        TextButton(
+                          onPressed: () => ref.read(studyHubProvider.notifier).setExamDate(null),
+                          child: Text(_clearExamDateLabel(language)),
+                        ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: AppSpacing.lg),
+
             // ── Exam Checklist ────────────────────────────────────────────
             AppSectionHeader(title: _checklistSectionTitle(language)),
             const SizedBox(height: AppSpacing.sm),
@@ -442,6 +533,47 @@ class StudyHubScreen extends ConsumerWidget {
 
   String _filterLabelLabel(AppLanguage l) =>
       _tr(l, en: 'Labels', vi: 'Nhãn', ja: 'ラベル');
+
+  String _roadmapSectionTitle(AppLanguage l) => _tr(
+    l,
+    en: 'Onboarding Roadmap',
+    vi: 'Lộ trình khởi động',
+    ja: '学習ロードマップ',
+  );
+
+  String _examDateSectionTitle(AppLanguage l) => _tr(
+    l,
+    en: 'Target Exam Date',
+    vi: 'Ngày thi mục tiêu',
+    ja: '目標試験日',
+  );
+
+  String _examDateEmptyLabel(AppLanguage l) => _tr(
+    l,
+    en: 'No target exam date set yet.',
+    vi: 'Chưa đặt ngày thi mục tiêu.',
+    ja: 'まだ目標試験日が設定されていません。',
+  );
+
+  String _examDateValueLabel(AppLanguage l, DateTime date) => _tr(
+    l,
+    en: 'Target: ${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}',
+    vi: 'Mục tiêu: ${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year}',
+    ja: '目標: ${date.year}/${date.month.toString().padLeft(2, '0')}/${date.day.toString().padLeft(2, '0')}',
+  );
+
+  String _examDateHintLabel(AppLanguage l) => _tr(
+    l,
+    en: 'Set a rough date so the checklist and study pace stay concrete.',
+    vi: 'Đặt ngày gần đúng để checklist và nhịp học rõ ràng hơn.',
+    ja: 'おおよその日程を決めると、チェックリストと学習ペースが具体的になります。',
+  );
+
+  String _setExamDateLabel(AppLanguage l) =>
+      _tr(l, en: 'Set +90 days', vi: 'Đặt +90 ngày', ja: '+90日を設定');
+
+  String _clearExamDateLabel(AppLanguage l) =>
+      _tr(l, en: 'Clear date', vi: 'Xoá ngày', ja: '日付をクリア');
 
   String _topicLabel(AppLanguage l, StudyResourceTopic topic) => switch (topic) {
         StudyResourceTopic.grammar => _tr(l, en: 'Grammar', vi: 'Ngữ pháp', ja: '文法'),
