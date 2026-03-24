@@ -43,6 +43,7 @@ import 'package:jpstudy/features/vocab/screens/term_review_screen.dart';
 import 'package:jpstudy/features/vocab/vocab_screen.dart';
 import 'package:jpstudy/features/write/screens/home_handwriting_practice_screen.dart';
 import 'package:jpstudy/features/kanji_reading/screens/home_kanji_reading_screen.dart';
+import 'package:jpstudy/features/study_hub/study_hub_screen.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -118,6 +119,10 @@ class AppRouter {
               GoRoute(
                 path: '/practice/recall-sprint',
                 builder: (context, state) => const RecallSprintScreen(),
+              ),
+              GoRoute(
+                path: '/study-hub',
+                builder: (context, state) => const StudyHubScreen(),
               ),
               GoRoute(
                 path: '/jlpt/coach',

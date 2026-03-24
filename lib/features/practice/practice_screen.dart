@@ -228,6 +228,17 @@ class PracticeScreen extends ConsumerWidget {
                     },
                   ),
                 ),
+                const SizedBox(height: AppSpacing.md),
+                _StudyPanel(
+                  title: _studyHubTitle(language),
+                  caption: _studyHubCaption(language),
+                  child: AppCompactRow(
+                    icon: Icons.library_books_rounded,
+                    title: _studyHubLabel(language),
+                    subtitle: _studyHubSubtitle(language),
+                    onTap: () => context.push('/study-hub'),
+                  ),
+                ),
                 if (remainingTools.isNotEmpty) ...[
                   const SizedBox(height: AppSpacing.md),
                   _StudyPanel(
@@ -521,6 +532,30 @@ class PracticeScreen extends ConsumerWidget {
     AppLanguage.en => 'Everything else is still here, but out of the way.',
     AppLanguage.vi => 'Các phần còn lại vẫn ở đây, nhưng gọn và đỡ rối hơn.',
     AppLanguage.ja => 'そのほかの入口も、散らからない形で残しています。',
+  };
+
+  String _studyHubTitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Study Hub',
+    AppLanguage.vi => 'Trung tâm học tập',
+    AppLanguage.ja => 'スタディHub',
+  };
+
+  String _studyHubCaption(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Resources, textbook tracker, and exam checklist.',
+    AppLanguage.vi => 'Tài nguyên, theo dõi giáo trình và danh sách chuẩn bị thi.',
+    AppLanguage.ja => 'リソース、教材トラッカー、試験チェックリスト。',
+  };
+
+  String _studyHubLabel(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Open Study Hub',
+    AppLanguage.vi => 'Mở Trung tâm học tập',
+    AppLanguage.ja => 'スタディHubを開く',
+  };
+
+  String _studyHubSubtitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Textbooks, guides, JLPT prep, and your exam checklist.',
+    AppLanguage.vi => 'Giáo trình, hướng dẫn, ôn JLPT và danh sách thi.',
+    AppLanguage.ja => '教材・ガイド・JLPT対策・試験チェックリスト。',
   };
 }
 
