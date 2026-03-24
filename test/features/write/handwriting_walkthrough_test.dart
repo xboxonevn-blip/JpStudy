@@ -784,6 +784,100 @@ void main() {
       expect(find.byType(HandwritingPracticeScreen), findsNothing);
     },
   );
+
+  testWidgets(
+    'Handwriting summary still pops back to caller in push-based flows',
+    (tester) async {
+      KanjiStrokeTemplateService.setDebugTemplateOverrides({});
+      addTearDown(() {
+        KanjiStrokeTemplateService.setDebugTemplateOverrides(null);
+      });
+
+      final db = AppDatabase(executor: NativeDatabase.memory());
+      final contentDb = ContentDatabase(executor: NativeDatabase.memory());
+      final repo = LessonRepository(db, contentDb);
+      addTearDown(() async {
+        await contentDb.close();
+        await db.close();
+      });
+
+      const item = KanjiItem(
+        id: 1,
+        lessonId: 1,
+        character: '\u4E00',
+        strokeCount: 1,
+        meaning: 'mot',
+        meaningEn: 'one',
+        examples: [],
+        jlptLevel: 'N5',
+      );
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            databaseProvider.overrideWithValue(db),
+            lessonRepositoryProvider.overrideWithValue(repo),
+          ],
+          child: MaterialApp(
+            home: Builder(
+              builder: (context) => Scaffold(
+                body: Center(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => const HandwritingPracticeScreen(
+                            lessonTitle: 'Lesson 1',
+                            items: [item],
+                          ),
+                        ),
+                      );
+                    },
+                    child: const Text('open handwriting'),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('open handwriting'));
+      await tester.pumpAndSettle();
+
+      final canvas = find.byType(HandwritingCanvas, skipOffstage: false);
+      expect(canvas, findsOneWidget);
+      final rect = tester.getRect(canvas);
+
+      final gesture = await tester.startGesture(
+        rect.centerLeft + const Offset(24, 0),
+      );
+      await tester.pump(const Duration(milliseconds: 16));
+      await gesture.moveTo(rect.centerRight - const Offset(24, 0));
+      await tester.pump(const Duration(milliseconds: 16));
+      await gesture.up();
+      await tester.pumpAndSettle();
+
+      final checkButton = find
+          .text(AppLanguage.en.handwritingCheckLabel, skipOffstage: false)
+          .last;
+      await tester.ensureVisible(checkButton);
+      await tester.tap(checkButton);
+      await tester.pumpAndSettle();
+
+      final nextButton = find
+          .text(AppLanguage.en.nextLabel, skipOffstage: false)
+          .last;
+      await tester.ensureVisible(nextButton);
+      await tester.tap(nextButton);
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text(AppLanguage.en.doneLabel));
+      await tester.pumpAndSettle();
+
+      expect(find.text('open handwriting'), findsOneWidget);
+      expect(find.byType(HandwritingPracticeScreen), findsNothing);
+    },
+  );
 }
 
 class _HandwritingRebuildHost extends StatefulWidget {

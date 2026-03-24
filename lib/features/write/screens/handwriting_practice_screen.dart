@@ -1695,13 +1695,20 @@ class _HandwritingPracticeScreenState
   }
 
   void _finishAfterSummary() {
+    final router = GoRouter.maybeOf(context);
+    final routePath = router?.routeInformationProvider.value.uri.path;
+
+    if (router != null && routePath == '/practice/handwriting') {
+      context.go('/practice');
+      return;
+    }
+
     final navigator = Navigator.of(context);
     if (navigator.canPop()) {
       navigator.pop();
       return;
     }
 
-    final router = GoRouter.maybeOf(context);
     if (router != null) {
       context.go('/practice');
       return;
