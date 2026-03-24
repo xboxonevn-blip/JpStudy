@@ -269,13 +269,40 @@ class GrammarExampleQualityAssessor {
   }
 
   static bool supportsTransformation(String sentence) {
+    return transformToNegative(sentence) != null;
+  }
+
+  static String? transformToNegative(String sentence) {
     final trimmed = sentence.trim();
-    if (trimmed.isEmpty) return false;
+    if (trimmed.isEmpty) return null;
     if (surfaceFamilyForSentence(trimmed) !=
         GrammarExampleSurfaceFamily.statement) {
-      return false;
+      return null;
     }
-    return _transformableEnding(trimmed) != null;
+
+    final punctuation = _terminalPunctuation(trimmed);
+    final core = punctuation == null
+        ? trimmed
+        : trimmed.substring(0, trimmed.length - punctuation.length);
+    if (core.isEmpty || _isRequestLikeCore(core) || _isAlreadyNegativeCore(core)) {
+      return null;
+    }
+
+    final transformed = _transformCoreToNegative(core);
+    if (transformed == null || transformed == core) {
+      return null;
+    }
+    return punctuation == null ? transformed : '$transformed$punctuation';
+  }
+
+  static bool isAlreadyNegativeStatement(String sentence) {
+    final trimmed = sentence.trim();
+    if (trimmed.isEmpty) return false;
+    final punctuation = _terminalPunctuation(trimmed);
+    final core = punctuation == null
+        ? trimmed
+        : trimmed.substring(0, trimmed.length - punctuation.length);
+    return _isAlreadyNegativeCore(core);
   }
 
   static int _sentenceBuilderScore({
@@ -484,26 +511,241 @@ class GrammarExampleQualityAssessor {
   }
 
   static String? _transformableEnding(String sentence) {
-    final trimmed = sentence.trim();
-    const endings = <String>[
-      'ました。',
-      'ます。',
-      'でした。',
-      'です。',
-      'だ。',
-      'ました',
-      'ます',
-      'でした',
-      'です',
-      'だ',
+    final transformed = transformToNegative(sentence);
+    if (transformed == null) return null;
+    return transformed;
+  }
+
+  static String? _transformCoreToNegative(String core) {
+    if (_isRequestLikeCore(core)) {
+      return null;
+    }
+
+    const directRules = <MapEntry<String, String>>[
+      MapEntry('でございました', 'ではございませんでした'),
+      MapEntry('ございました', 'ございませんでした'),
+      MapEntry('ていました', 'ていませんでした'),
+      MapEntry('ました', 'ませんでした'),
+      MapEntry('でした', 'ではありませんでした'),
+      MapEntry('でございます', 'ではございません'),
+      MapEntry('ございます', 'ございません'),
+      MapEntry('ています', 'ていません'),
+      MapEntry('ていた', 'ていなかった'),
+      MapEntry('ている', 'ていない'),
+      MapEntry('ます', 'ません'),
+      MapEntry('です', 'ではありません'),
+      MapEntry('でしたら', 'ではありませんでしたら'),
+      MapEntry('する', 'しない'),
+      MapEntry('した', 'しなかった'),
+      MapEntry('来る', '来ない'),
+      MapEntry('来た', '来なかった'),
+      MapEntry('くる', 'こない'),
+      MapEntry('きた', 'こなかった'),
+      MapEntry('ある', 'ない'),
+      MapEntry('いい', 'よくない'),
+      MapEntry('よい', 'よくない'),
     ];
-    for (final ending in endings) {
-      if (trimmed.endsWith(ending)) {
-        return ending;
+
+    for (final rule in directRules) {
+      if (core.endsWith(rule.key)) {
+        return '${core.substring(0, core.length - rule.key.length)}${rule.value}';
+      }
+    }
+
+    if (core.endsWith('たい')) {
+      return '${core.substring(0, core.length - 1)}くない';
+    }
+    if (core.endsWith('かった') && !_isAlreadyNegativeCore(core)) {
+      return '${core.substring(0, core.length - 2)}くなかった';
+    }
+
+    if (core.endsWith('た') && _looksLikeIchidanPast(core)) {
+      return '${core.substring(0, core.length - 1)}なかった';
+    }
+
+    if (core.endsWith('る') && _looksLikeIchidanDictionary(core)) {
+      return '${core.substring(0, core.length - 1)}ない';
+    }
+
+    const godanRules = <MapEntry<String, String>>[
+      MapEntry('う', 'わない'),
+      MapEntry('く', 'かない'),
+      MapEntry('ぐ', 'がない'),
+      MapEntry('す', 'さない'),
+      MapEntry('つ', 'たない'),
+      MapEntry('ぬ', 'なない'),
+      MapEntry('ぶ', 'ばない'),
+      MapEntry('む', 'まない'),
+      MapEntry('る', 'らない'),
+    ];
+    for (final rule in godanRules) {
+      if (core.endsWith(rule.key)) {
+        return '${core.substring(0, core.length - rule.key.length)}${rule.value}';
+      }
+    }
+
+    if (core.endsWith('い')) {
+      return '${core.substring(0, core.length - 1)}くない';
+    }
+
+    if (core.endsWith('だ')) {
+      return '${core.substring(0, core.length - 1)}ではない';
+    }
+
+    return null;
+  }
+
+  static String? _terminalPunctuation(String value) {
+    if (value.isEmpty) return null;
+    const punctuation = <String>{'。', '！', '？', '!', '?'};
+    final last = String.fromCharCode(value.runes.last);
+    return punctuation.contains(last) ? last : null;
+  }
+
+  static bool _isAlreadyNegativeCore(String core) {
+    const endings = <String>[
+      'ではありませんでした',
+      'じゃありませんでした',
+      'ませんでした',
+      'ていませんでした',
+      'ではございませんでした',
+      'ではありません',
+      'じゃありません',
+      'ございません',
+      'ていません',
+      'ません',
+      'ではない',
+      'じゃない',
+      'ていない',
+      'くなかった',
+      'なかった',
+      'くない',
+    ];
+    if (endings.any(core.endsWith)) {
+      return true;
+    }
+
+    const expectedNegativePhrases = <String>[
+      'はずがない',
+      'わけではない',
+      'わけにはいかない',
+      'ことはない',
+      'そうにない',
+      'に違いない',
+      'ことがない',
+      '可能性がない',
+    ];
+    if (expectedNegativePhrases.any(core.endsWith)) {
+      return true;
+    }
+
+    if (!core.endsWith('ない')) {
+      return false;
+    }
+
+    final stem = core.substring(0, core.length - 2);
+    final last = _lastNonPunctuationChar(stem);
+    if (last == null) return false;
+    const aRowNegativeKana = {'わ', 'か', 'が', 'さ', 'た', 'な', 'ば', 'ま'};
+    if (aRowNegativeKana.contains(last)) {
+      return true;
+    }
+    if (_ichidanKana.contains(last)) {
+      return true;
+    }
+    return last == 'し' || last == 'こ' || last == '来' || stem.endsWith('てい');
+  }
+
+  static bool _isRequestLikeCore(String core) {
+    const endings = <String>[
+      'ください',
+      'くださいませ',
+      'ましょう',
+      'ましょうか',
+      'てもかまいません',
+      'なくてもかまいません',
+      'てはいけません',
+      'ないでください',
+      'なければなりません',
+      'なくてはいけません',
+      'べきではない',
+      'てはならない',
+    ];
+    return endings.any(core.endsWith);
+  }
+
+  static bool _looksLikeIchidanPast(String core) {
+    if (!core.endsWith('た') || core.runes.length < 2) return false;
+    final previous = _lastNonPunctuationChar(core.substring(0, core.length - 1));
+    if (previous == null) return false;
+    if (_ichidanKana.contains(previous)) return true;
+    return false;
+  }
+
+  static bool _looksLikeIchidanDictionary(String core) {
+    if (!core.endsWith('る') || core.runes.length < 2) return false;
+    if (_godanRuExceptions.any(core.endsWith)) return false;
+    final previous = _lastNonPunctuationChar(core.substring(0, core.length - 1));
+    if (previous == null) return false;
+    if (_ichidanKana.contains(previous)) return true;
+    return false;
+  }
+
+  static String? _lastNonPunctuationChar(String value) {
+    final chars = value.runes.map(String.fromCharCode).toList(growable: false);
+    for (var i = chars.length - 1; i >= 0; i--) {
+      if (!RegExp(r'[\s\u3000。！？?!]').hasMatch(chars[i])) {
+        return chars[i];
       }
     }
     return null;
   }
+
+  static const Set<String> _ichidanKana = {
+    'い',
+    'き',
+    'ぎ',
+    'し',
+    'じ',
+    'ち',
+    'ぢ',
+    'に',
+    'ひ',
+    'び',
+    'ぴ',
+    'み',
+    'り',
+    'え',
+    'け',
+    'げ',
+    'せ',
+    'ぜ',
+    'て',
+    'で',
+    'ね',
+    'へ',
+    'べ',
+    'ぺ',
+    'め',
+    'れ',
+  };
+
+  static const List<String> _godanRuExceptions = [
+    '帰る',
+    '入る',
+    '走る',
+    '切る',
+    '知る',
+    '要る',
+    '限る',
+    '滑る',
+    '焦る',
+    '参る',
+    '交じる',
+    '交る',
+    '握る',
+    'しゃべる',
+  ];
 
   static String _normalizePromptCompare(String input) {
     return input.replaceAll(RegExp(r'[\s\u3000。！？?!….,，．]'), '').trim();

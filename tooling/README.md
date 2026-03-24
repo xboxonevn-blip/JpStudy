@@ -17,6 +17,10 @@
 - `validate_content_assets_v2.py`: validates content integrity across vocab/kanji datasets
 - `audit_content_completeness.py`: runs broader repo-level completeness and self-heal checks
 
+### Grammar quality audit
+
+- `audit_grammar_example_quality.dart`: audits grammar example readiness for `contextChoice`, `errorCorrection`, and `transformation`, and writes `docs/reports/grammar-example-quality-report.json`
+
 ### Archive migration and backfill
 
 - `backfill_vocab_from_kanji_examples.py`: pushes archived kanji example content back into archived vocab lesson structures
@@ -69,3 +73,9 @@ For content work, the most common sequence is:
 - generate or normalize content
 - validate content
 - review `docs/reports/` outputs
+
+For grammar hardening work, the common sequence is:
+- edit only grammar blocks that the audit marks as `real-quality-gap`
+- run `dart run tooling/audit_grammar_example_quality.dart --locale en`
+- run `python tooling/validate_content_assets_v2.py`
+- review `docs/reports/grammar-example-quality-report.json` before treating the pass as done

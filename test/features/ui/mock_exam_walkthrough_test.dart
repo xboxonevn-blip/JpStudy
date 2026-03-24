@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/core/services/session_storage.dart';
@@ -15,7 +16,6 @@ import 'package:jpstudy/features/learn/models/question.dart';
 import 'package:jpstudy/features/learn/models/question_type.dart';
 import 'package:jpstudy/features/test/models/test_config.dart';
 import 'package:jpstudy/features/test/screens/test_config_screen.dart';
-import 'package:jpstudy/features/test/screens/test_results_screen.dart';
 import 'package:jpstudy/features/test/screens/test_screen.dart';
 import 'package:jpstudy/features/test/widgets/practice_test_dashboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,10 +28,16 @@ class FakeMockLessonRepository extends LessonRepository {
   });
 
   final Map<String, List<VocabItem>> itemsByLevel;
+  int recordedXp = 0;
 
   @override
   Future<List<VocabItem>> getVocabByLevel(String level) async {
     return itemsByLevel[level] ?? const [];
+  }
+
+  @override
+  Future<void> recordStudyActivity({required int xpDelta}) async {
+    recordedXp += xpDelta;
   }
 }
 
@@ -236,67 +242,93 @@ void main() {
     },
   );
 
-  testWidgets(
-    'Mock exam flow reaches results screen',
-    (tester) async {
-      SharedPreferences.setMockInitialValues({});
+  testWidgets('Mock exam last question opens submit confirmation dialog', (
+    tester,
+  ) async {
+    SharedPreferences.setMockInitialValues({});
 
-      final db = AppDatabase(executor: NativeDatabase.memory());
-      final contentDb = ContentDatabase(executor: NativeDatabase.memory());
-      final repo = LessonRepository(db, contentDb);
-      addTearDown(() async {
-        await contentDb.close();
-        await db.close();
-      });
+    const item = VocabItem(
+      id: 3000,
+      term: '水',
+      reading: 'みず',
+      meaning: 'Nuoc',
+      meaningEn: 'Water',
+      level: 'N5',
+    );
+    const config = TestConfig(
+      questionCount: 1,
+      enabledTypes: [QuestionType.multipleChoice],
+      shuffleQuestions: false,
+      showCorrectAfterWrong: false,
+      adaptiveTesting: false,
+    );
+    final question = Question(
+      id: 'submit_regression_q1',
+      type: QuestionType.multipleChoice,
+      targetItem: item,
+      questionText: 'What does 水 mean?',
+      correctAnswer: 'Water',
+      options: const ['Water', 'Rice', 'Fire'],
+    );
+    const sessionKey = 'mock_n5_submit_regression';
+    final resumeSnapshot = TestSessionSnapshot(
+      sessionKey: sessionKey,
+      sessionId: 'session_submit_regression',
+      lessonId: -1,
+      startedAt: DateTime(2026, 3, 24, 9),
+      currentQuestionIndex: 0,
+      questions: [question],
+      answers: const [],
+      flaggedQuestions: const {},
+      config: config,
+      adaptiveAdded: 0,
+      adaptiveMaxExtra: 0,
+      usedTypesByItem: const {},
+      adaptiveRepeatCount: const {},
+      adaptiveCorrectStreak: const {},
+      adaptiveCompleted: const {},
+      lastSavedAt: DateTime(2026, 3, 24, 9, 1),
+    );
+    final storage = SessionStorage();
+    await storage.saveTestSession(snapshot: resumeSnapshot);
 
-      final items = buildItems(startId: 3000, count: 3, level: 'N5');
-
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            databaseProvider.overrideWithValue(db),
-            lessonRepositoryProvider.overrideWithValue(repo),
-          ],
-          child: MaterialApp(
-            home: TestScreen(
-              items: items,
-              lessonId: -1,
-              lessonTitle: AppLanguage.en.mockExamTitle('N5'),
-              config: const TestConfig(
-                questionCount: 3,
-                enabledTypes: [QuestionType.multipleChoice],
-                shuffleQuestions: false,
-                showCorrectAfterWrong: false,
-                adaptiveTesting: false,
-              ),
-              sessionKey: 'mock_n5_walkthrough_no_timer',
-            ),
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [appLanguageProvider.overrideWith((ref) => AppLanguage.en)],
+        child: MaterialApp(
+          home: TestScreen(
+            items: const [item],
+            lessonId: -1,
+            lessonTitle: AppLanguage.en.mockExamTitle('N5'),
+            config: config,
+            sessionKey: sessionKey,
+            resumeSnapshot: resumeSnapshot,
           ),
         ),
-      );
+      ),
+    );
 
-      await tester.pump();
-      await tester.pump(const Duration(milliseconds: 200));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
 
-      await tester.tap(find.text(AppLanguage.en.nextLabel));
-      await tester.pump();
-      await tester.pump(const Duration(milliseconds: 200));
-      await tester.tap(find.text(AppLanguage.en.nextLabel));
-      await tester.pump();
-      await tester.pump(const Duration(milliseconds: 200));
-      await tester.tap(find.text(AppLanguage.en.submitTestLabel));
-      await tester.pump();
-      await tester.pump(const Duration(milliseconds: 200));
-      await tester.tap(find.text(AppLanguage.en.submitTestConfirmLabel));
-      await tester.pump(const Duration(milliseconds: 400));
-      await tester.pump(const Duration(milliseconds: 200));
+    expect(find.text(AppLanguage.en.submitTestLabel), findsOneWidget);
+    await tester.ensureVisible(find.text(AppLanguage.en.submitTestLabel));
+    await tester.tap(find.text(AppLanguage.en.submitTestLabel));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 250));
 
-      expect(find.byType(TestResultsScreen), findsOneWidget);
-      expect(find.text(AppLanguage.en.testResultsTitle), findsOneWidget);
-    },
-    // Legacy submit walkthrough remains flaky; covered by focused tests instead.
-    skip: true,
-  );
+    expect(find.text(AppLanguage.en.submitTestTitle), findsOneWidget);
+    expect(find.text(AppLanguage.en.unansweredSubmitLabel(1)), findsOneWidget);
+    expect(find.text(AppLanguage.en.submitTestConfirmLabel), findsOneWidget);
+
+    await tester.tap(find.text('Cancel'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 250));
+
+    expect(find.text(AppLanguage.en.submitTestTitle), findsNothing);
+    expect(await storage.loadTestSession(sessionKey), isNotNull);
+    expect(find.text(AppLanguage.en.submitTestLabel), findsOneWidget);
+  });
 
   testWidgets('Mock exam config shows resume card and resume action', (
     tester,

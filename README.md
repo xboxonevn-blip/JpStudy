@@ -2,13 +2,13 @@
 
 JpStudy-v2 is a Flutter app for Japanese learning with FSRS scheduling, immersion reading, handwriting practice, and exam-style review.
 
-## Current Status (as of 2026-03-19)
+## Current Status (as of 2026-03-24)
 
 | Phase | Focus | Status | Target |
 | :--- | :--- | :--- | :--- |
 | Phase 1 | Foundation (Anki-like learning core) | 100% | Completed |
 | Phase 2 | Structure and UI system | 100% | Completed |
-| Phase 3 | Core quality hardening (Grammar + Handwriting) | Active | Mar-Apr 2026 |
+| Phase 3 | Core quality hardening (Grammar complete, Handwriting + release hardening active) | Active | Mar-Apr 2026 |
 | Phase 4 | Cloud Sync ecosystem | Parked until core is steadier | Later |
 
 ## Implemented Highlights
@@ -20,24 +20,30 @@ JpStudy-v2 is a Flutter app for Japanese learning with FSRS scheduling, immersio
 - N5 and N4 kanji template coverage is in place, with curated-to-manual promotion workflow.
 - Mock Exam flow for N5/N4 exists with timer, scoring, and review.
 - Export/Import JSON backup includes progress, attempts, sessions, settings, mistakes, grammar SRS, and kanji SRS.
+- Grammar example quality audit is green across `N5`, `N4`, and `N3`, with `0` real quality gaps in `docs/reports/grammar-example-quality-report.json` as of `2026-03-24`.
 - Local release baseline is currently green on `flutter analyze`, `flutter test`, and `flutter build web`.
 
 ## Current Priorities (from roadmap)
 
 ### NOW
-- Grammar Practice hardening:
-  - canonical grammar ingest
-  - data-first question eligibility from `grammar_examples`
-  - cleaner session state, level scoping, and replay freshness
 - Keep the baseline green while these changes land:
   - `flutter analyze`
   - `flutter test`
   - `flutter build web`
-
-### NEXT
-- Handwriting reliability pass:
+- Keep grammar hardening green:
+  - treat `docs/reports/grammar-example-quality-report.json` as the canonical grammar quality report
+  - use `dart run tooling/audit_grammar_example_quality.dart --locale en` after grammar data or heuristic changes
+  - keep `python tooling/validate_content_assets_v2.py` in the release-truth content pass
+- Continue the handwriting reliability pass:
   - reduce false negatives / false positives
   - keep `Next`, completion flow, and randomized session scope stable
+- Continue route / release hardening:
+  - prefer focused stable regressions over long flaky walkthroughs
+  - keep main study and mock-exam surfaces regression-safe
+
+### NEXT
+- grow route smoke and focused UI regressions where core learning flows still have coverage gaps
+- schedule dependency refresh as a separate plan once the current hardening branch is settled
 
 ### LATER
 - Cloud sync / backup expansion after Grammar Practice + Handwriting are steadier
@@ -116,6 +122,9 @@ Reports:
 ### Content Schema v2
 
 ```bash
+# Audit grammar example readiness and refresh the canonical report
+dart run tooling/audit_grammar_example_quality.dart --locale en
+
 # Sync decomposition and regenerate support export
 python tooling/sync_kanji_decomposition_labels.py
 
@@ -130,6 +139,7 @@ References:
 - `docs/DATA_SCHEMA_V2.md`
 - `docs/reports/canonical-content-v2-report.json`
 - `docs/reports/content-validation-v2.json`
+- `docs/reports/grammar-example-quality-report.json`
 
 ## UI/UX Process Visibility
 
@@ -154,6 +164,7 @@ docs/         plans, reports, notes, specs, and reference docs
 ## Roadmap
 
 - Main roadmap: `ROADMAP.md`
+- Active execution plan: `docs/plans/2026-03-24-grammar-hardening-execution-plan.md`
 - Tooling usage details: `tooling/README.md`
 - Architecture guide: `lib/README.md`
 - Test guide: `test/README.md`

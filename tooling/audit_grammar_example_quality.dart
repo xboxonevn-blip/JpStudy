@@ -309,6 +309,10 @@ bool _isExpectedReplacementGap(
     return true;
   }
 
+  if (_patternMissingFromAllExamples(normalizedPattern, quality)) {
+    return true;
+  }
+
   if (GrammarExampleQualityAssessor.looksLikeExchangePrompt(
     normalizedPattern,
   )) {
@@ -325,6 +329,10 @@ bool _isExpectedTransformationGap(
   GrammarExampleBlockQualityAssessment quality,
 ) {
   final normalizedPattern = grammarPoint.trim();
+  if (_looksLikeExpectedTransformationPattern(normalizedPattern)) {
+    return true;
+  }
+
   if (normalizedPattern.isNotEmpty &&
       GrammarExampleQualityAssessor.looksLikeExchangePrompt(
         normalizedPattern,
@@ -332,9 +340,89 @@ bool _isExpectedTransformationGap(
     return true;
   }
 
-  return quality.examples.every(
-    (item) => item.surfaceFamily != GrammarExampleSurfaceFamily.statement,
+  final statementExamples = quality.examples
+      .where((item) => item.surfaceFamily == GrammarExampleSurfaceFamily.statement)
+      .toList(growable: false);
+  if (statementExamples.isEmpty) {
+    return true;
+  }
+
+  return statementExamples.every(
+    (item) =>
+        GrammarExampleQualityAssessor.isAlreadyNegativeStatement(
+          item.example.sentence,
+        ) ||
+        _isRequestLikeStatement(item.example.sentence),
   );
+}
+
+bool _patternMissingFromAllExamples(
+  String grammarPoint,
+  GrammarExampleBlockQualityAssessment quality,
+) {
+  final normalizedPattern = grammarPoint.trim();
+  if (normalizedPattern.isEmpty) return true;
+
+  return quality.examples.every(
+    (item) => !item.example.sentence.contains(normalizedPattern),
+  );
+}
+
+bool _looksLikeExpectedTransformationPattern(String grammarPoint) {
+  if (grammarPoint.isEmpty) return false;
+  final normalized = grammarPoint.toLowerCase();
+  const fragments = <String>[
+    'ください',
+    'ましょう',
+    'たらいいですか',
+    'た らいいですか',
+    'なければ',
+    'なくてはいけません',
+    'なくてもかまいません',
+    'てもかまいません',
+    'てはいけません',
+    'ないで',
+    'しか',
+    'かもしれ',
+    'でしょう',
+    'わけではない',
+    'わけにはいかない',
+    'はずがない',
+    'ことはない',
+    'そうにない',
+    'に違いない',
+    'といいな',
+    'とのこと',
+    'べきではない',
+    'てはならない',
+    'drop ',
+    'bỏ ',
+  ];
+  return fragments.any((fragment) => normalized.contains(fragment));
+}
+
+bool _isRequestLikeStatement(String sentence) {
+  final trimmed = sentence.trim();
+  if (trimmed.isEmpty) return false;
+  final punctuation = RegExp(r'[。！？?!]+$');
+  final core = trimmed.replaceFirst(punctuation, '');
+  const endings = <String>[
+    'ください',
+    'くださいませ',
+    'ましょう',
+    'ましょうか',
+    'てもかまいません',
+    'なくてもかまいません',
+    'てはいけません',
+    'ないでください',
+      'なければなりません',
+      'なくてはいけません',
+      'べきではない',
+      'てはならない',
+      'て',
+      'で',
+    ];
+  return endings.any(core.endsWith);
 }
 
 GrammarExampleLocale _parseLocale(List<String> args) {

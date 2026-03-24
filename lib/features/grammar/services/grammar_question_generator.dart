@@ -779,6 +779,8 @@ class GrammarQuestionGenerator {
       example.japanese,
       _softVariant(example.japanese),
       _softVariant(transformed),
+      _trimSentencePunctuation(example.japanese),
+      _trimSentencePunctuation(transformed),
     ]);
     if (options.length < 3) return null;
 
@@ -853,28 +855,7 @@ class GrammarQuestionGenerator {
   }
 
   static String? _transformToNegative(String sentence) {
-    final s = sentence.trim();
-    if (s.isEmpty) return null;
-
-    final rules = <MapEntry<String, String>>[
-      const MapEntry('ました。', 'ませんでした。'),
-      const MapEntry('ます。', 'ません。'),
-      const MapEntry('でした。', 'ではありませんでした。'),
-      const MapEntry('です。', 'ではありません。'),
-      const MapEntry('だ。', 'ではない。'),
-      const MapEntry('ました', 'ませんでした'),
-      const MapEntry('ます', 'ません'),
-      const MapEntry('でした', 'ではありませんでした'),
-      const MapEntry('です', 'ではありません'),
-      const MapEntry('だ', 'ではない'),
-    ];
-
-    for (final rule in rules) {
-      if (s.endsWith(rule.key)) {
-        return '${s.substring(0, s.length - rule.key.length)}${rule.value}';
-      }
-    }
-    return null;
+    return GrammarExampleQualityAssessor.transformToNegative(sentence);
   }
 
   static String _softVariant(String sentence) {
@@ -888,7 +869,14 @@ class GrammarQuestionGenerator {
     if (value.endsWith('ます')) {
       return '$valueか';
     }
-    return '$value。';
+    if (value.endsWith('ない')) {
+      return '$valueか';
+    }
+    return value;
+  }
+
+  static String _trimSentencePunctuation(String sentence) {
+    return sentence.trim().replaceFirst(RegExp(r'[。！？?!]+$'), '');
   }
 
   static List<String> _tokenizeSentence(String sentence) {

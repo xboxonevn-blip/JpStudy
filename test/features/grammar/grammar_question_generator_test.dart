@@ -1152,6 +1152,107 @@ void main() {
         isEmpty,
       );
     });
+
+    test('builds transformation questions for te-iru and plain-form statements', () {
+      const point1 = GrammarPoint(
+        id: 90,
+        lessonId: 51,
+        grammarPoint: '〜ことにしている',
+        titleEn: 'keep as a habit',
+        meaning: 'coi như thói quen',
+        meaningEn: 'keep as a habit',
+        meaningVi: 'coi như thói quen',
+        connection: 'V辞書 / Vない + ことにしている',
+        connectionEn: 'V dictionary / V nai + ことにしている',
+        explanation: 'Diễn tả thói quen đã quyết định.',
+        explanationEn: 'Describes a habit or policy one has decided on.',
+        explanationVi: 'Diễn tả thói quen đã quyết định.',
+        jlptLevel: 'N3',
+        isLearned: false,
+      );
+      const point2 = GrammarPoint(
+        id: 91,
+        lessonId: 20,
+        grammarPoint: '行く',
+        titleEn: 'go',
+        meaning: 'đi',
+        meaningEn: 'go',
+        meaningVi: 'đi',
+        connection: 'V辞書',
+        connectionEn: 'dictionary form',
+        explanation: 'Động từ thể từ điển.',
+        explanationEn: 'Dictionary-form verb.',
+        explanationVi: 'Động từ thể từ điển.',
+        jlptLevel: 'N5',
+        isLearned: false,
+      );
+      const point3 = GrammarPoint(
+        id: 92,
+        lessonId: 20,
+        grammarPoint: 'です',
+        titleEn: 'copula',
+        meaning: 'là',
+        meaningEn: 'to be',
+        meaningVi: 'là',
+        connection: 'N は N です',
+        connectionEn: 'N は N です',
+        explanation: 'Câu khẳng định cơ bản.',
+        explanationEn: 'Basic copula sentence.',
+        explanationVi: 'Câu khẳng định cơ bản.',
+        jlptLevel: 'N5',
+        isLearned: false,
+      );
+
+      final questions = GrammarQuestionGenerator.generateQuestions(
+        const [
+          (
+            point: point1,
+            examples: [
+              GrammarExample(
+                id: 90,
+                grammarId: 90,
+                japanese: '毎朝散歩することにしている。',
+                translation: 'Tôi quyết định đi dạo mỗi sáng.',
+                translationEn: 'I make it a habit to take a walk every morning.',
+                translationVi: 'Tôi quyết định đi dạo mỗi sáng.',
+              ),
+            ],
+          ),
+          (
+            point: point2,
+            examples: [
+              GrammarExample(
+                id: 91,
+                grammarId: 91,
+                japanese: '明日ビザを取りに行く。',
+                translation: 'Ngày mai tôi đi lấy visa.',
+                translationEn: 'I will go pick up my visa tomorrow.',
+                translationVi: 'Ngày mai tôi đi lấy visa.',
+              ),
+            ],
+          ),
+        ],
+        allPoints: const [point1, point2, point3],
+        language: AppLanguage.en,
+      );
+
+      expect(
+        questions.any(
+          (q) =>
+              q.type == GrammarQuestionType.transformation &&
+              q.correctAnswer == '毎朝散歩することにしていない。',
+        ),
+        isTrue,
+      );
+      expect(
+        questions.any(
+          (q) =>
+              q.type == GrammarQuestionType.transformation &&
+              q.correctAnswer == '明日ビザを取りに行かない。',
+        ),
+        isTrue,
+      );
+    });
   });
 
   group('_tokenizeSentence (via sentenceBuilder questions)', () {
