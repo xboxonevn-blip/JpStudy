@@ -130,3 +130,22 @@ Track each design iteration so everyone can review the process, not just the fin
 - Verification:
   - `flutter analyze lib/features/practice/`
   - `flutter test` → 206/206 pass
+
+## Iteration 008 - Study Hub Screen (2026-03-24)
+
+- Goal: Build StudyHubScreen to surface the existing study_hub provider data that had no UI.
+- Scope:
+  - Create `lib/features/study_hub/study_hub_screen.dart`.
+  - JLPT Prep hero card linking to `/jlpt/coach`.
+  - Textbook Tracker with lesson +/- stepper persisted via `StudyHubNotifier`.
+  - Resource Library showing top 8 filterable study guides with topic icons.
+  - Exam Checklist with 5-item toggle list persisted via `StudyHubNotifier`.
+  - Add `/study-hub` route in `app_router.dart`.
+  - Add "Study Hub" panel entry point in `PracticeScreen`.
+- Output:
+  - `lib/features/study_hub/study_hub_screen.dart`
+  - `lib/app/navigation/app_router.dart`
+  - `lib/features/practice/practice_screen.dart`
+- Verification:
+  - `flutter analyze lib/features/study_hub/ lib/app/navigation/app_router.dart lib/features/practice/practice_screen.dart`
+  - `flutter test` → 240/240 pass

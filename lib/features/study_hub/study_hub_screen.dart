@@ -66,7 +66,8 @@ class StudyHubScreen extends ConsumerWidget {
       appBar: AppBar(title: Text(_screenTitle(language))),
       body: AppPageShell(
         topPadding: AppSpacing.sm,
-        child: ListView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // ── JLPT Coach hero card ──────────────────────────────────────
             AppFeatureCard(
@@ -188,11 +189,151 @@ class StudyHubScreen extends ConsumerWidget {
                 }).toList(),
               ),
             ),
+            const SizedBox(height: AppSpacing.lg),
+
+            // ── Q&A Community ─────────────────────────────────────────────
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AppSectionHeader(title: _qaSectionTitle(language)),
+                TextButton.icon(
+                  onPressed: () => _showAskDialog(context, ref, language),
+                  icon: const Icon(Icons.add_rounded, size: 16),
+                  label: Text(_qaAskLabel(language)),
+                  style: TextButton.styleFrom(
+                    visualDensity: VisualDensity.compact,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.sm,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            if (hub.threads.isEmpty)
+              AppSectionCard(
+                padding: const EdgeInsets.all(AppSpacing.lg),
+                child: Text(
+                  _qaEmptyLabel(language),
+                  style: TextStyle(
+                    color: context.appPalette.ink.withValues(alpha: 0.55),
+                  ),
+                ),
+              )
+            else
+              ...hub.threads.take(10).map(
+                    (thread) => Padding(
+                      padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+                      child: _QaThreadCard(
+                        thread: thread,
+                        language: language,
+                        onUpvote: () => ref
+                            .read(studyHubProvider.notifier)
+                            .upvoteThread(thread.id),
+                        onToggleResolved: () => ref
+                            .read(studyHubProvider.notifier)
+                            .toggleResolved(thread.id),
+                        onAnswer: () =>
+                            _showAnswerDialog(context, ref, language, thread.id),
+                      ),
+                    ),
+                  ),
             const SizedBox(height: AppSpacing.xl),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> _showAskDialog(
+    BuildContext context,
+    WidgetRef ref,
+    AppLanguage language,
+  ) async {
+    final titleCtrl = TextEditingController();
+    final bodyCtrl = TextEditingController();
+    await showDialog<void>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(_qaAskDialogTitle(language)),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: titleCtrl,
+              decoration: InputDecoration(
+                labelText: _qaTitleHint(language),
+              ),
+              textInputAction: TextInputAction.next,
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: bodyCtrl,
+              decoration: InputDecoration(
+                labelText: _qaBodyHint(language),
+              ),
+              maxLines: 3,
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: Text(_cancelLabel(language)),
+          ),
+          FilledButton(
+            onPressed: () {
+              ref.read(studyHubProvider.notifier).addQuestion(
+                    title: titleCtrl.text,
+                    body: bodyCtrl.text,
+                    tags: const [],
+                  );
+              Navigator.of(ctx).pop();
+            },
+            child: Text(_qaPostLabel(language)),
+          ),
+        ],
+      ),
+    );
+    titleCtrl.dispose();
+    bodyCtrl.dispose();
+  }
+
+  Future<void> _showAnswerDialog(
+    BuildContext context,
+    WidgetRef ref,
+    AppLanguage language,
+    String threadId,
+  ) async {
+    final ctrl = TextEditingController();
+    await showDialog<void>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(_qaAnswerDialogTitle(language)),
+        content: TextField(
+          controller: ctrl,
+          decoration: InputDecoration(labelText: _qaBodyHint(language)),
+          maxLines: 4,
+          autofocus: true,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: Text(_cancelLabel(language)),
+          ),
+          FilledButton(
+            onPressed: () {
+              ref
+                  .read(studyHubProvider.notifier)
+                  .addAnswer(threadId: threadId, body: ctrl.text);
+              Navigator.of(ctx).pop();
+            },
+            child: Text(_qaPostLabel(language)),
+          ),
+        ],
+      ),
+    );
+    ctrl.dispose();
   }
 
   IconData _topicIcon(StudyResourceTopic topic) => switch (topic) {
@@ -211,6 +352,35 @@ class StudyHubScreen extends ConsumerWidget {
         StudyResourceLevel.intermediate => AppStatusTone.warning,
         StudyResourceLevel.advanced => AppStatusTone.warning,
       };
+
+  String _qaSectionTitle(AppLanguage l) =>
+      _tr(l, en: 'Community Q&A', vi: 'Hỏi & Đáp cộng đồng', ja: 'Q&A');
+
+  String _qaAskLabel(AppLanguage l) =>
+      _tr(l, en: 'Ask', vi: 'Hỏi', ja: '質問する');
+
+  String _qaEmptyLabel(AppLanguage l) => _tr(l,
+      en: 'No questions yet. Be the first to ask.',
+      vi: 'Chưa có câu hỏi nào. Hãy là người đầu tiên đặt câu hỏi.',
+      ja: 'まだ質問がありません。最初に質問してみましょう。');
+
+  String _qaAskDialogTitle(AppLanguage l) =>
+      _tr(l, en: 'Ask a question', vi: 'Đặt câu hỏi', ja: '質問する');
+
+  String _qaAnswerDialogTitle(AppLanguage l) =>
+      _tr(l, en: 'Add an answer', vi: 'Thêm câu trả lời', ja: '回答を追加');
+
+  String _qaTitleHint(AppLanguage l) =>
+      _tr(l, en: 'Title', vi: 'Tiêu đề', ja: 'タイトル');
+
+  String _qaBodyHint(AppLanguage l) =>
+      _tr(l, en: 'Details', vi: 'Chi tiết', ja: '詳細');
+
+  String _qaPostLabel(AppLanguage l) =>
+      _tr(l, en: 'Post', vi: 'Đăng', ja: '投稿');
+
+  String _cancelLabel(AppLanguage l) =>
+      _tr(l, en: 'Cancel', vi: 'Huỷ', ja: 'キャンセル');
 }
 
 // ---------------------------------------------------------------------------
@@ -294,6 +464,196 @@ class _TextbookRow extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Q&A thread card
+// ---------------------------------------------------------------------------
+class _QaThreadCard extends StatefulWidget {
+  const _QaThreadCard({
+    required this.thread,
+    required this.language,
+    required this.onUpvote,
+    required this.onToggleResolved,
+    required this.onAnswer,
+  });
+
+  final QaThread thread;
+  final AppLanguage language;
+  final VoidCallback onUpvote;
+  final VoidCallback onToggleResolved;
+  final VoidCallback onAnswer;
+
+  @override
+  State<_QaThreadCard> createState() => _QaThreadCardState();
+}
+
+class _QaThreadCardState extends State<_QaThreadCard> {
+  bool _expanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    final thread = widget.thread;
+    final l = widget.language;
+
+    return AppSectionCard(
+      padding: const EdgeInsets.all(AppSpacing.md),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Header row
+          GestureDetector(
+            onTap: () => setState(() => _expanded = !_expanded),
+            behavior: HitTestBehavior.opaque,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (thread.resolved)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 6, top: 2),
+                    child: Icon(Icons.check_circle_rounded,
+                        size: 16, color: palette.success),
+                  ),
+                Expanded(
+                  child: Text(
+                    thread.title,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      color: palette.ink,
+                    ),
+                  ),
+                ),
+                Icon(
+                  _expanded
+                      ? Icons.keyboard_arrow_up_rounded
+                      : Icons.keyboard_arrow_down_rounded,
+                  size: 18,
+                  color: palette.ink.withValues(alpha: 0.45),
+                ),
+              ],
+            ),
+          ),
+
+          // Tags
+          if (thread.tags.isNotEmpty) ...[
+            const SizedBox(height: 4),
+            Wrap(
+              spacing: 4,
+              children: thread.tags
+                  .map((tag) => Chip(
+                        label: Text(tag,
+                            style: const TextStyle(fontSize: 10)),
+                        padding: EdgeInsets.zero,
+                        materialTapTargetSize:
+                            MaterialTapTargetSize.shrinkWrap,
+                        visualDensity: VisualDensity.compact,
+                      ))
+                  .toList(),
+            ),
+          ],
+
+          // Expanded body + answers
+          if (_expanded) ...[
+            const SizedBox(height: 8),
+            Text(
+              thread.body,
+              style: TextStyle(
+                  color: palette.ink.withValues(alpha: 0.75), height: 1.4),
+            ),
+            if (thread.answers.isNotEmpty) ...[
+              const SizedBox(height: 12),
+              ...thread.answers.map(
+                (answer) => Container(
+                  margin: const EdgeInsets.only(bottom: 6),
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: palette.surface,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Text(
+                    answer.body,
+                    style: TextStyle(
+                        fontSize: 13,
+                        color: palette.ink.withValues(alpha: 0.85)),
+                  ),
+                ),
+              ),
+            ],
+          ],
+
+          // Action row
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              InkWell(
+                onTap: widget.onUpvote,
+                borderRadius: BorderRadius.circular(6),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 6, vertical: 2),
+                  child: Row(
+                    children: [
+                      Icon(Icons.arrow_upward_rounded,
+                          size: 14,
+                          color: palette.ink.withValues(alpha: 0.55)),
+                      const SizedBox(width: 3),
+                      Text(
+                        '${thread.upvotes}',
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: palette.ink.withValues(alpha: 0.55)),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              InkWell(
+                onTap: widget.onAnswer,
+                borderRadius: BorderRadius.circular(6),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 6, vertical: 2),
+                  child: Text(
+                    _tr(l, en: 'Answer', vi: 'Trả lời', ja: '回答'),
+                    style: TextStyle(
+                        fontSize: 12, color: palette.primary),
+                  ),
+                ),
+              ),
+              const Spacer(),
+              InkWell(
+                onTap: widget.onToggleResolved,
+                borderRadius: BorderRadius.circular(6),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 6, vertical: 2),
+                  child: Text(
+                    thread.resolved
+                        ? _tr(l,
+                            en: 'Reopen',
+                            vi: 'Mở lại',
+                            ja: '再オープン')
+                        : _tr(l,
+                            en: 'Mark solved',
+                            vi: 'Đánh dấu đã giải quyết',
+                            ja: '解決済みにする'),
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: thread.resolved
+                          ? palette.ink.withValues(alpha: 0.4)
+                          : palette.success,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
