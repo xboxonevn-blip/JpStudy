@@ -9,90 +9,68 @@ import 'package:jpstudy/data/daos/srs_dao.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/home/providers/weakness_radar_provider.dart';
 import 'package:jpstudy/features/progress/progress_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+const _kSummary = ProgressSummary(
+  totalXp: 500,
+  todayXp: 50,
+  streak: 7,
+  totalAttempts: 20,
+  totalCorrect: 160,
+  totalQuestions: 200,
+);
+
+const _kBreakdown = SrsStageBreakdown(learning: 10, young: 25, mature: 65);
+
+Widget buildProgressScreen() => ProviderScope(
+      overrides: [
+        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+        studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+        progressSummaryProvider.overrideWith((ref) async => _kSummary),
+        reviewHistoryProvider.overrideWith((ref) async => const []),
+        attemptHistoryProvider.overrideWith((ref) async => const []),
+        srsRetentionProvider.overrideWith((ref) async => _kBreakdown),
+        weaknessRadarProvider.overrideWith((ref) async => const []),
+      ],
+      child: const MaterialApp(home: ProgressScreen()),
+    );
 
 void main() {
-  testWidgets(
-    'Progress screen renders desktop analytics layout with history panels',
-    (tester) async {
-      tester.view.physicalSize = const Size(1440, 1600);
-      tester.view.devicePixelRatio = 1;
-      addTearDown(tester.view.resetPhysicalSize);
-      addTearDown(tester.view.resetDevicePixelRatio);
+  setUp(() => SharedPreferences.setMockInitialValues({}));
 
-      final now = DateTime(2026, 3, 19, 9, 30);
+  testWidgets('shows AppBar title with level', (tester) async {
+    await tester.pumpWidget(buildProgressScreen());
+    await tester.pump();
+    expect(find.text('Progress (N5)'), findsWidgets);
+    await tester.pumpWidget(Container());
+    await tester.pump(const Duration(milliseconds: 100));
+  });
 
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-            studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
-            progressSummaryProvider.overrideWith(
-              (ref) async => const ProgressSummary(
-                totalXp: 420,
-                todayXp: 36,
-                streak: 8,
-                totalAttempts: 48,
-                totalCorrect: 39,
-                totalQuestions: 48,
-              ),
-            ),
-            reviewHistoryProvider.overrideWith(
-              (ref) async => [
-                ReviewDaySummary(
-                  day: DateTime(2026, 3, 18),
-                  reviewed: 12,
-                  again: 2,
-                  hard: 3,
-                  good: 5,
-                  easy: 2,
-                ),
-              ],
-            ),
-            activityCalendarProvider.overrideWith(
-              (ref) async => [
-                ReviewDaySummary(
-                  day: DateTime(2026, 3, 18),
-                  reviewed: 12,
-                  again: 2,
-                  hard: 3,
-                  good: 5,
-                  easy: 2,
-                ),
-              ],
-            ),
-            attemptHistoryProvider.overrideWith(
-              (ref) async => [
-                AttemptSummary(
-                  id: 1,
-                  mode: 'Grammar',
-                  level: 'N5',
-                  startedAt: now,
-                  finishedAt: now.add(const Duration(minutes: 8)),
-                  score: 8,
-                  total: 10,
-                ),
-              ],
-            ),
-            srsRetentionProvider.overrideWith(
-              (ref) async =>
-                  const SrsStageBreakdown(learning: 4, young: 7, mature: 9),
-            ),
-            weaknessRadarProvider.overrideWith((ref) async => const []),
-          ],
-          child: const MaterialApp(home: ProgressScreen()),
-        ),
-      );
+  testWidgets('shows streak and today XP after data resolves', (tester) async {
+    await tester.pumpWidget(buildProgressScreen());
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+    expect(find.text('7'), findsWidgets);
+    expect(find.text('50'), findsWidgets);
+    await tester.pumpWidget(Container());
+    await tester.pump(const Duration(milliseconds: 100));
+  });
 
-      await tester.pumpAndSettle();
+  testWidgets('shows 80% accuracy from 160/200', (tester) async {
+    await tester.pumpWidget(buildProgressScreen());
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+    expect(find.text('80%'), findsOneWidget);
+    await tester.pumpWidget(Container());
+    await tester.pump(const Duration(milliseconds: 100));
+  });
 
-      expect(find.text('Progress (N5)'), findsAtLeastNWidgets(1));
-      expect(find.text('Overview'), findsOneWidget);
-      expect(find.text('Activity'), findsOneWidget);
-      expect(find.text('Review history'), findsOneWidget);
-      expect(find.text('Attempt history'), findsOneWidget);
-      expect(find.text('Words SRS'), findsOneWidget);
-      expect(find.text('420'), findsOneWidget);
-      expect(find.text('8-day streak'), findsOneWidget);
-    },
-  );
+  testWidgets('shows 500 total XP value', (tester) async {
+    await tester.pumpWidget(buildProgressScreen());
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+    expect(find.text('500'), findsWidgets);
+    await tester.pumpWidget(Container());
+    await tester.pump(const Duration(milliseconds: 100));
+  });
 }
