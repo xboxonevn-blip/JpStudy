@@ -73,4 +73,24 @@ void main() {
     await tester.pumpWidget(Container());
     await tester.pump(const Duration(milliseconds: 100));
   });
+
+  testWidgets('shows empty review and attempt history states', (tester) async {
+    await tester.pumpWidget(buildProgressScreen());
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+    expect(find.text(AppLanguage.en.reviewHistoryEmptyLabel), findsOneWidget);
+    expect(find.text(AppLanguage.en.attemptHistoryEmptyLabel), findsOneWidget);
+    await tester.pumpWidget(Container());
+    await tester.pump(const Duration(milliseconds: 100));
+  });
+
+  testWidgets('shows SRS retention section summary', (tester) async {
+    await tester.pumpWidget(buildProgressScreen());
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+    expect(find.text(AppLanguage.en.vocabularySrsTitle), findsOneWidget);
+    expect(find.text(AppLanguage.en.itemsReviewedViaSrsLabel(_kBreakdown.total)), findsOneWidget);
+    await tester.pumpWidget(Container());
+    await tester.pump(const Duration(milliseconds: 100));
+  });
 }

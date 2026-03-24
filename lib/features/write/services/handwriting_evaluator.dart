@@ -603,10 +603,16 @@ class HandwritingEvaluator {
       return false;
     }
 
+    final minEnclosureOrderFloor = template.character == '日' ? 0.48 : 0.52;
+    final enclosureOrderSlack = template.character == '日' ? 0.20 : 0.16;
+
     return totalScore >= max(0.0, profile.requiredScore - 0.01) &&
         strokeScore >= max(0.56, profile.minStrokeScore - 0.02) &&
         shapeScore >= max(0.54, profile.minShapeScore - 0.08) &&
-        orderScore >= max(0.46, profile.minOrderScore - 0.24) &&
+        orderScore >= max(
+          minEnclosureOrderFloor,
+          profile.minOrderScore - enclosureOrderSlack,
+        ) &&
         templateScore >= max(0.52, profile.minTemplateScore - 0.08) &&
         directionScore >= max(0.62, profile.minDirectionScore - 0.06);
   }
@@ -627,6 +633,7 @@ class HandwritingEvaluator {
       case HandwritingQualityTier.curated:
         return templateScore >= 0.84;
       case HandwritingQualityTier.generated:
+        return templateScore >= 0.66;
       case HandwritingQualityTier.none:
         return true;
     }

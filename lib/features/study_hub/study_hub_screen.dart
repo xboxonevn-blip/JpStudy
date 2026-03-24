@@ -335,7 +335,9 @@ class StudyHubScreen extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppSectionHeader(title: _qaSectionTitle(language)),
+                Expanded(
+                  child: AppSectionHeader(title: _qaSectionTitle(language)),
+                ),
                 TextButton.icon(
                   onPressed: () => _showAskDialog(context, ref, language),
                   icon: const Icon(Icons.add_rounded, size: 16),

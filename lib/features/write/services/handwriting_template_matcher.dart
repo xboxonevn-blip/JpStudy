@@ -81,7 +81,7 @@ class HandwritingTemplateMatcher {
     final countPenalty =
         1.0 -
         (strokes.length - expected).abs() / max(1.0, expected.toDouble() + 1.0);
-    return (pairScore * 0.85) + (countPenalty.clamp(0.0, 1.0) * 0.15);
+    return (pairScore * 0.75) + (countPenalty.clamp(0.0, 1.0) * 0.25);
   }
 
   static double templateOrderScore({
