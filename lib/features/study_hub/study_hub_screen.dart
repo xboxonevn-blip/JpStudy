@@ -130,8 +130,57 @@ class StudyHubScreen extends ConsumerWidget {
             const SizedBox(height: AppSpacing.lg),
 
             // ── Resource Library ─────────────────────────────────────────
-            AppSectionHeader(title: _resourceSectionTitle(language)),
+            Row(
+              children: [
+                Expanded(
+                  child: AppSectionHeader(title: _resourceSectionTitle(language)),
+                ),
+                if (hub.selectedLevels.isNotEmpty ||
+                    hub.selectedTopics.isNotEmpty ||
+                    hub.selectedLabels.isNotEmpty)
+                  TextButton(
+                    onPressed: () => ref.read(studyHubProvider.notifier).clearFilters(),
+                    child: Text(_clearFiltersLabel(language)),
+                  ),
+              ],
+            ),
             const SizedBox(height: AppSpacing.sm),
+            _FilterWrap(
+              title: _filterLevelLabel(language),
+              children: StudyResourceLevel.values.map((levelOption) {
+                final selected = hub.selectedLevels.contains(levelOption);
+                return ChoiceChip(
+                  label: Text(_levelLabel(levelOption)),
+                  selected: selected,
+                  onSelected: (_) => ref.read(studyHubProvider.notifier).toggleLevel(levelOption),
+                );
+              }).toList(growable: false),
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            _FilterWrap(
+              title: _filterTopicLabel(language),
+              children: StudyResourceTopic.values.map((topic) {
+                final selected = hub.selectedTopics.contains(topic);
+                return ChoiceChip(
+                  label: Text(_topicLabel(language, topic)),
+                  selected: selected,
+                  onSelected: (_) => ref.read(studyHubProvider.notifier).toggleTopic(topic),
+                );
+              }).toList(growable: false),
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            _FilterWrap(
+              title: _filterLabelLabel(language),
+              children: availableLabels().take(8).map((label) {
+                final selected = hub.selectedLabels.contains(label);
+                return ChoiceChip(
+                  label: Text(label),
+                  selected: selected,
+                  onSelected: (_) => ref.read(studyHubProvider.notifier).toggleLabel(label),
+                );
+              }).toList(growable: false),
+            ),
+            const SizedBox(height: AppSpacing.md),
             ...resources.take(8).map(
                   (resource) => Padding(
                     padding: const EdgeInsets.only(bottom: AppSpacing.sm),
@@ -381,6 +430,29 @@ class StudyHubScreen extends ConsumerWidget {
 
   String _cancelLabel(AppLanguage l) =>
       _tr(l, en: 'Cancel', vi: 'Huỷ', ja: 'キャンセル');
+
+  String _clearFiltersLabel(AppLanguage l) =>
+      _tr(l, en: 'Clear', vi: 'Xoá lọc', ja: 'クリア');
+
+  String _filterLevelLabel(AppLanguage l) =>
+      _tr(l, en: 'Level', vi: 'Cấp độ', ja: 'レベル');
+
+  String _filterTopicLabel(AppLanguage l) =>
+      _tr(l, en: 'Topic', vi: 'Chủ đề', ja: 'トピック');
+
+  String _filterLabelLabel(AppLanguage l) =>
+      _tr(l, en: 'Labels', vi: 'Nhãn', ja: 'ラベル');
+
+  String _topicLabel(AppLanguage l, StudyResourceTopic topic) => switch (topic) {
+        StudyResourceTopic.grammar => _tr(l, en: 'Grammar', vi: 'Ngữ pháp', ja: '文法'),
+        StudyResourceTopic.kanji => _tr(l, en: 'Kanji', vi: 'Kanji', ja: '漢字'),
+        StudyResourceTopic.vocabulary => _tr(l, en: 'Vocabulary', vi: 'Từ vựng', ja: '語彙'),
+        StudyResourceTopic.reading => _tr(l, en: 'Reading', vi: 'Đọc hiểu', ja: '読解'),
+        StudyResourceTopic.listening => _tr(l, en: 'Listening', vi: 'Nghe', ja: '聴解'),
+        StudyResourceTopic.exam => _tr(l, en: 'Exam', vi: 'Thi cử', ja: '試験'),
+        StudyResourceTopic.selfStudy => _tr(l, en: 'Self-study', vi: 'Tự học', ja: '独学'),
+        StudyResourceTopic.tools => _tr(l, en: 'Tools', vi: 'Công cụ', ja: 'ツール'),
+      };
 }
 
 // ---------------------------------------------------------------------------
@@ -462,6 +534,37 @@ class _TextbookRow extends StatelessWidget {
               progress >= 1.0 ? palette.success : palette.primary,
             ),
           ),
+        ),
+      ],
+    );
+  }
+}
+
+class _FilterWrap extends StatelessWidget {
+  const _FilterWrap({required this.title, required this.children});
+
+  final String title;
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w700,
+            color: palette.ink.withValues(alpha: 0.6),
+          ),
+        ),
+        const SizedBox(height: 6),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: children,
         ),
       ],
     );
