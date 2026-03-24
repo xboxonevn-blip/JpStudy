@@ -45,8 +45,8 @@ void main() {
     ]));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));
-    expect(find.text(AppLanguage.en.startMatchGameLabel), findsOneWidget);
-    expect(find.text(AppLanguage.en.startTimeAttackLabel), findsOneWidget);
+    expect(find.text(AppLanguage.en.startMatchGameLabel.toUpperCase()), findsOneWidget);
+    expect(find.text(AppLanguage.en.startTimeAttackLabel.toUpperCase()), findsOneWidget);
   });
 
   testWidgets('shows empty-state when no vocab exists', (tester) async {
