@@ -149,3 +149,18 @@ Track each design iteration so everyone can review the process, not just the fin
 - Verification:
   - `flutter analyze lib/features/study_hub/ lib/app/navigation/app_router.dart lib/features/practice/practice_screen.dart`
   - `flutter test` → 240/240 pass
+
+## Iteration 009 - Study Hub Expansion (2026-03-24)
+
+- Goal: Turn the first Study Hub release into a more actionable planning surface by exposing the rest of the persisted provider state.
+- Scope:
+  - Add Q&A thread cards with expand/collapse, upvote, answer, and solved-state actions wired to `StudyHubNotifier`.
+  - Add filter chips for resource level, topic, and labels plus a clear-filters action.
+  - Add Onboarding Roadmap checklist wired to `toggleOnboardingStep()`.
+  - Add Target Exam Date card wired to `setExamDate()` / clear.
+- Output:
+  - `lib/features/study_hub/study_hub_screen.dart`
+  - `docs/uiux-progress.md`
+- Verification:
+  - `flutter analyze lib/features/study_hub/study_hub_screen.dart`
+  - `flutter test` → 255/255 pass
