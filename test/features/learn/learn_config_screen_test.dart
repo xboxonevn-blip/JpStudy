@@ -12,17 +12,14 @@ Widget buildConfigScreen({
   int maxTerms = 20,
   LearnConfig? startedWith,
 }) {
-  LearnConfig? captured;
   return ProviderScope(
-    overrides: [
-      appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-    ],
+    overrides: [appLanguageProvider.overrideWith((ref) => AppLanguage.en)],
     child: MaterialApp(
       home: LearnConfigScreen(
         lessonId: 1,
         lessonTitle: lessonTitle,
         maxTerms: maxTerms,
-        onStart: (config) => captured = config,
+        onStart: (_) {},
       ),
     ),
   );
@@ -47,9 +44,7 @@ void main() {
     LearnConfig? captured;
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-        ],
+        overrides: [appLanguageProvider.overrideWith((ref) => AppLanguage.en)],
         child: MaterialApp(
           home: LearnConfigScreen(
             lessonId: 1,

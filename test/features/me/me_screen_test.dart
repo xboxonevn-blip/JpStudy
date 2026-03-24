@@ -31,23 +31,17 @@ const _kSummary = ProgressSummary(
 );
 
 Widget buildMeScreen() => ProviderScope(
-      overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-        studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
-        themeModeProvider.overrideWith((ref) => ThemeModeNotifier()),
-        progressSummaryProvider.overrideWith((ref) async => _kSummary),
-        cloudSyncStatusProvider.overrideWith(
-          (ref) async => _kEmptyCloudStatus,
-        ),
-        appSettingsControllerProvider.overrideWith(
-          () => AppSettingsController(),
-        ),
-        dataSettingsControllerProvider.overrideWith(
-          () => DataSettingsController(),
-        ),
-      ],
-      child: const MaterialApp(home: MeScreen()),
-    );
+  overrides: [
+    appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+    studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+    themeModeProvider.overrideWith((ref) => ThemeModeNotifier()),
+    progressSummaryProvider.overrideWith((ref) async => _kSummary),
+    cloudSyncStatusProvider.overrideWith((ref) async => _kEmptyCloudStatus),
+    appSettingsControllerProvider.overrideWith(() => AppSettingsController()),
+    dataSettingsControllerProvider.overrideWith(() => DataSettingsController()),
+  ],
+  child: const MaterialApp(home: MeScreen()),
+);
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
@@ -57,7 +51,9 @@ void main() {
     await tester.pump();
     expect(find.text('Me'), findsWidgets);
     await tester.pumpWidget(Container());
-    for (var i = 0; i < 5; i++) await tester.pump(Duration.zero);
+    for (var i = 0; i < 5; i++) {
+      await tester.pump(Duration.zero);
+    }
   });
 
   testWidgets('shows achievements tile', (tester) async {
@@ -66,6 +62,8 @@ void main() {
     await tester.pump(const Duration(milliseconds: 100));
     expect(find.text('Awards'), findsWidgets);
     await tester.pumpWidget(Container());
-    for (var i = 0; i < 5; i++) await tester.pump(Duration.zero);
+    for (var i = 0; i < 5; i++) {
+      await tester.pump(Duration.zero);
+    }
   });
 }

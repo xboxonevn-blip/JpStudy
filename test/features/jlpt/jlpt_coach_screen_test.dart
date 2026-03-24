@@ -10,7 +10,6 @@ import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart'
     show dashboardProvider, DashboardState;
-import 'package:jpstudy/features/jlpt/models/jlpt_coach_models.dart';
 import 'package:jpstudy/features/jlpt/screens/jlpt_coach_screen.dart';
 import 'package:jpstudy/features/jlpt/services/jlpt_coach_service.dart';
 import 'package:jpstudy/features/mistakes/repositories/mistake_repository.dart';
@@ -37,23 +36,29 @@ const _kOverview = JlptPrepOverview(
   fullMockSectionCount: 4,
 );
 
-final _router = GoRouter(routes: [
-  GoRoute(path: '/', builder: (_, __) => const JlptCoachScreen()),
-  GoRoute(path: '/jlpt/mock-pro', builder: (_, __) => const Scaffold()),
-  GoRoute(path: '/jlpt/reading', builder: (_, __) => const Scaffold()),
-]);
+final _router = GoRouter(
+  routes: [
+    GoRoute(path: '/', builder: (_, _) => const JlptCoachScreen()),
+    GoRoute(path: '/jlpt/mock-pro', builder: (_, _) => const Scaffold()),
+    GoRoute(path: '/jlpt/reading', builder: (_, _) => const Scaffold()),
+  ],
+);
 
 Widget buildCoach(AppDatabase db) => ProviderScope(
-      overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-        studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
-        dashboardProvider.overrideWith((ref) => Stream.value(_kDashboard)),
-        jlptCoachSnapshotProvider.overrideWith((ref) async => null),
-        jlptPrepOverviewProvider(StudyLevel.n5).overrideWith((ref) async => _kOverview),
-        mistakeRepositoryProvider.overrideWithValue(MistakeRepository(db.mistakeDao)),
-      ],
-      child: MaterialApp.router(routerConfig: _router),
-    );
+  overrides: [
+    appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+    studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+    dashboardProvider.overrideWith((ref) => Stream.value(_kDashboard)),
+    jlptCoachSnapshotProvider.overrideWith((ref) async => null),
+    jlptPrepOverviewProvider(
+      StudyLevel.n5,
+    ).overrideWith((ref) async => _kOverview),
+    mistakeRepositoryProvider.overrideWithValue(
+      MistakeRepository(db.mistakeDao),
+    ),
+  ],
+  child: MaterialApp.router(routerConfig: _router),
+);
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));

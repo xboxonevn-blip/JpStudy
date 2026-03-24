@@ -59,21 +59,23 @@ const _kContinueAction = ContinueAction(
   label: 'Practice',
 );
 
-final _router = GoRouter(routes: [
-  GoRoute(path: '/', builder: (_, __) => const DailySessionSummaryScreen()),
-]);
+final _router = GoRouter(
+  routes: [
+    GoRoute(path: '/', builder: (_, _) => const DailySessionSummaryScreen()),
+  ],
+);
 
 Widget buildScreen() => ProviderScope(
-      overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-        dashboardProvider.overrideWith((ref) => Stream.value(_kDashboard)),
-        dailySessionProgressProvider.overrideWith((ref) async => _kProgress),
-        coachSessionPlanProvider.overrideWith((ref) async => _kCoachPlan),
-        continueActionProvider.overrideWith((ref) async => _kContinueAction),
-        vocabGhostsProvider.overrideWith((ref) async => const []),
-      ],
-      child: MaterialApp.router(routerConfig: _router),
-    );
+  overrides: [
+    appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+    dashboardProvider.overrideWith((ref) => Stream.value(_kDashboard)),
+    dailySessionProgressProvider.overrideWith((ref) async => _kProgress),
+    coachSessionPlanProvider.overrideWith((ref) async => _kCoachPlan),
+    continueActionProvider.overrideWith((ref) async => _kContinueAction),
+    vocabGhostsProvider.overrideWith((ref) async => const []),
+  ],
+  child: MaterialApp.router(routerConfig: _router),
+);
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
@@ -98,7 +100,10 @@ void main() {
     await tester.pumpWidget(buildScreen());
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 200));
-    expect(find.text("You closed 67% of today's guided session."), findsOneWidget);
+    expect(
+      find.text("You closed 67% of today's guided session."),
+      findsOneWidget,
+    );
     await tester.pumpWidget(Container());
     await tester.pump(const Duration(milliseconds: 100));
   });

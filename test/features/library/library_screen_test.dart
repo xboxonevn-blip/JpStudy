@@ -22,11 +22,13 @@ const _kLesson = LessonMeta(
   updatedAt: null,
 );
 
-final _router = GoRouter(routes: [
-  GoRoute(path: '/', builder: (_, __) => const LibraryScreen()),
-  GoRoute(path: '/lesson/:id', builder: (_, __) => const Scaffold()),
-  GoRoute(path: '/search', builder: (_, __) => const Scaffold()),
-]);
+final _router = GoRouter(
+  routes: [
+    GoRoute(path: '/', builder: (_, _) => const LibraryScreen()),
+    GoRoute(path: '/lesson/:id', builder: (_, _) => const Scaffold()),
+    GoRoute(path: '/search', builder: (_, _) => const Scaffold()),
+  ],
+);
 
 Widget buildLibraryScreen({List<LessonMeta> lessons = const [_kLesson]}) =>
     ProviderScope(
