@@ -18,6 +18,10 @@ class KanjiStrokeVectorService {
     instance._vectors = vectors;
   }
 
+  static void clearCache() {
+    instance._vectors = null;
+  }
+
   Future<KanjiStrokeVector?> getVector(String character) async {
     await _ensureLoaded();
     return _vectors?[character];

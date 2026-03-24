@@ -23,6 +23,7 @@ void main() {
     KanjiStrokeTemplateService.setDebugTemplateOverrides(null);
     KanjiStrokeTemplateService.clearCache();
     KanjiStrokeVectorService.setDebugVectorOverrides(null);
+    KanjiStrokeVectorService.clearCache();
   });
 
   test(
@@ -81,6 +82,34 @@ void main() {
       expect(merged!.quality, equals('manual'));
       expect(merged.strokes[0].start.x, closeTo(0.0, 0.001));
       expect(merged.strokes[1].start.x, closeTo(1.0, 0.001));
+    },
+  );
+
+  test(
+    'vector clearCache drops stale debug vectors between runs',
+    () async {
+      KanjiStrokeVectorService.setDebugVectorOverrides({
+        'X': const KanjiStrokeVector(
+          character: 'X',
+          strokes: ['M0,0 L100,100'],
+          viewBox: [0, 0, 100, 100],
+        ),
+      });
+
+      final first = await KanjiStrokeVectorService.instance.getVector('X');
+      expect(first, isNotNull);
+      expect(first!.strokes, hasLength(1));
+
+      KanjiStrokeVectorService.setDebugVectorOverrides(null);
+      KanjiStrokeVectorService.clearCache();
+
+      final second = await KanjiStrokeVectorService.instance.getVector('X');
+      expect(
+        second,
+        isNull,
+        reason: 'Clearing the cache after removing debug overrides must not '
+            'retain stale vector data from a previous run.',
+      );
     },
   );
 
