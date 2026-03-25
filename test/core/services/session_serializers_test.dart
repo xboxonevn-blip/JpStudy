@@ -12,11 +12,11 @@ void main() {
   // Helpers
   // ---------------------------------------------------------------------------
 
-  VocabItem _vocab({int id = 1, String term = '食べる', String meaning = 'to eat'}) {
+  VocabItem vocab({int id = 1, String term = '食べる', String meaning = 'to eat'}) {
     return VocabItem(id: id, term: term, meaning: meaning, level: 'N5');
   }
 
-  Question _question({
+  Question question({
     String id = 'q1',
     QuestionType type = QuestionType.multipleChoice,
     int vocabId = 1,
@@ -28,7 +28,7 @@ void main() {
     return Question(
       id: id,
       type: type,
-      targetItem: _vocab(id: vocabId),
+      targetItem: vocab(id: vocabId),
       questionText: text,
       correctAnswer: correct,
       options: options ?? ['to eat', 'to drink', 'to sleep'],
@@ -143,7 +143,7 @@ void main() {
 
   group('QuestionSerializer', () {
     test('toJson / fromJson round-trip for multipleChoice', () {
-      final q = _question(
+      final q = question(
         id: 'mc1',
         type: QuestionType.multipleChoice,
         options: ['to eat', 'to drink', 'to sleep'],
@@ -161,7 +161,7 @@ void main() {
     });
 
     test('toJson / fromJson round-trip for trueFalse', () {
-      final q = _question(
+      final q = question(
         id: 'tf1',
         type: QuestionType.trueFalse,
         isStatementTrue: true,
@@ -201,7 +201,7 @@ void main() {
     });
 
     test('hydrate replaces target item from vocabMap', () {
-      final q = _question(vocabId: 42);
+      final q = question(vocabId: 42);
       final richVocab = VocabItem(
         id: 42,
         term: '飲む',
@@ -215,8 +215,8 @@ void main() {
     });
 
     test('hydrate returns null when vocabId is not in map', () {
-      final q = _question(vocabId: 999);
-      final hydrated = QuestionSerializer.hydrate(q, {1: _vocab()});
+      final q = question(vocabId: 999);
+      final hydrated = QuestionSerializer.hydrate(q, {1: vocab()});
       expect(hydrated, isNull);
     });
   });

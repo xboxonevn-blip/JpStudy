@@ -88,7 +88,7 @@ void main() {
   // ---------------------------------------------------------------------------
 
   group('JlptDiagnosisProfile', () {
-    JlptDiagnosisProfile _buildProfile({
+    JlptDiagnosisProfile buildProfile({
       int vocabCorrect = 5,
       int vocabTotal = 10,
       int grammarCorrect = 3,
@@ -137,7 +137,7 @@ void main() {
 
     test('overallAccuracy aggregates across all areas', () {
       // vocab: 5/10, grammar: 3/10 → total: 8/20 = 0.4
-      final profile = _buildProfile(
+      final profile = buildProfile(
         vocabCorrect: 5,
         vocabTotal: 10,
         grammarCorrect: 3,
@@ -159,14 +159,14 @@ void main() {
     });
 
     test('weakestFirst returns all four areas', () {
-      final profile = _buildProfile();
+      final profile = buildProfile();
       final weakest = profile.weakestFirst();
       expect(weakest, hasLength(4));
     });
 
     test('weakestFirst orders by accuracy ascending (weakest first)', () {
       // grammar: 3/10 = 0.3, vocab: 5/10 = 0.5
-      final profile = _buildProfile(
+      final profile = buildProfile(
         vocabCorrect: 5,
         vocabTotal: 10,
         grammarCorrect: 3,
@@ -182,7 +182,7 @@ void main() {
     });
 
     test('toJson / fromJson round-trip preserves all stats', () {
-      final profile = _buildProfile(
+      final profile = buildProfile(
         vocabCorrect: 8,
         vocabTotal: 10,
         grammarCorrect: 4,
@@ -310,7 +310,7 @@ void main() {
   // ---------------------------------------------------------------------------
 
   group('computeMistakeDueBuckets', () {
-    UserMistake _mistake(DateTime lastMistakeAt) {
+    UserMistake mistake0(DateTime lastMistakeAt) {
       return UserMistake(
         id: 1,
         type: 'vocab',
@@ -332,29 +332,29 @@ void main() {
     });
 
     test('< 24 h old → notDue', () {
-      final mistake = _mistake(now.subtract(const Duration(hours: 12)));
+      final mistake = mistake0(now.subtract(const Duration(hours: 12)));
       final buckets = computeMistakeDueBuckets([mistake], now);
       expect(buckets.notDue, 1);
       expect(buckets.due1d, 0);
     });
 
     test('24–72 h old → due1d', () {
-      final mistake24 = _mistake(now.subtract(const Duration(hours: 24)));
-      final mistake71 = _mistake(now.subtract(const Duration(hours: 71)));
+      final mistake24 = mistake0(now.subtract(const Duration(hours: 24)));
+      final mistake71 = mistake0(now.subtract(const Duration(hours: 71)));
       final buckets = computeMistakeDueBuckets([mistake24, mistake71], now);
       expect(buckets.due1d, 2);
       expect(buckets.notDue, 0);
     });
 
     test('72 h – 7 days old → due3d', () {
-      final mistake = _mistake(now.subtract(const Duration(hours: 72)));
+      final mistake = mistake0(now.subtract(const Duration(hours: 72)));
       final buckets = computeMistakeDueBuckets([mistake], now);
       expect(buckets.due3d, 1);
       expect(buckets.due1d, 0);
     });
 
     test('>= 7 days old → due7d', () {
-      final mistake = _mistake(now.subtract(const Duration(days: 7)));
+      final mistake = mistake0(now.subtract(const Duration(days: 7)));
       final buckets = computeMistakeDueBuckets([mistake], now);
       expect(buckets.due7d, 1);
       expect(buckets.due3d, 0);
@@ -362,10 +362,10 @@ void main() {
 
     test('totalDue sums due1d + due3d + due7d (excludes notDue)', () {
       final mistakes = [
-        _mistake(now.subtract(const Duration(hours: 12))), // notDue
-        _mistake(now.subtract(const Duration(hours: 30))), // due1d
-        _mistake(now.subtract(const Duration(hours: 80))), // due3d
-        _mistake(now.subtract(const Duration(days: 10))), // due7d
+        mistake0(now.subtract(const Duration(hours: 12))), // notDue
+        mistake0(now.subtract(const Duration(hours: 30))), // due1d
+        mistake0(now.subtract(const Duration(hours: 80))), // due3d
+        mistake0(now.subtract(const Duration(days: 10))), // due7d
       ];
       final buckets = computeMistakeDueBuckets(mistakes, now);
       expect(buckets.notDue, 1);
@@ -381,7 +381,7 @@ void main() {
   // ---------------------------------------------------------------------------
 
   group('buildJlptSevenDayPlan', () {
-    JlptDiagnosisProfile _profileWithStats(
+    JlptDiagnosisProfile profileWithStats(
       Map<JlptSkillArea, ({int correct, int total})> input,
     ) {
       return JlptDiagnosisProfile(
@@ -399,7 +399,7 @@ void main() {
     }
 
     test('plan has exactly 7 items (one per day)', () {
-      final profile = _profileWithStats({
+      final profile = profileWithStats({
         JlptSkillArea.vocabulary: (correct: 5, total: 10),
         JlptSkillArea.grammar: (correct: 3, total: 10),
         JlptSkillArea.kanji: (correct: 7, total: 10),
@@ -410,7 +410,7 @@ void main() {
     });
 
     test('plan day offsets are 0–6', () {
-      final profile = _profileWithStats({});
+      final profile = profileWithStats({});
       final plan = buildJlptSevenDayPlan(profile);
       final offsets = plan.items.map((i) => i.dayOffset).toList();
       for (var d = 0; d < 7; d++) {
@@ -421,7 +421,7 @@ void main() {
 
     test('weakest area appears most in the plan', () {
       // Grammar is weakest (3/10 = 30%)
-      final profile = _profileWithStats({
+      final profile = profileWithStats({
         JlptSkillArea.vocabulary: (correct: 9, total: 10),
         JlptSkillArea.grammar: (correct: 3, total: 10),
         JlptSkillArea.kanji: (correct: 8, total: 10),

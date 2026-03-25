@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/features/flashcards/models/flashcard_session.dart';
 
 void main() {
-  FlashcardSession _session({
+  FlashcardSession session0({
     List<int> known = const [],
     List<int> needPractice = const [],
     List<int> starred = const [],
@@ -28,12 +28,12 @@ void main() {
 
   group('totalSeen', () {
     test('returns 0 when all lists are empty', () {
-      final session = _session();
+      final session = session0();
       expect(session.totalSeen, 0);
     });
 
     test('counts known + needPractice + skipped (excludes starred)', () {
-      final session = _session(
+      final session = session0(
         known: [1, 2],
         needPractice: [3],
         skipped: [4, 5],
@@ -43,7 +43,7 @@ void main() {
     });
 
     test('only known terms', () {
-      final session = _session(known: [1, 2, 3]);
+      final session = session0(known: [1, 2, 3]);
       expect(session.totalSeen, 3);
     });
   });
@@ -54,23 +54,23 @@ void main() {
 
   group('accuracy', () {
     test('returns 0.0 when totalSeen is 0', () {
-      final session = _session();
+      final session = session0();
       expect(session.accuracy, 0.0);
     });
 
     test('returns 1.0 when all seen terms are known', () {
-      final session = _session(known: [1, 2, 3]);
+      final session = session0(known: [1, 2, 3]);
       expect(session.accuracy, 1.0);
     });
 
     test('returns 0.0 when no known terms but some seen', () {
-      final session = _session(needPractice: [1, 2]);
+      final session = session0(needPractice: [1, 2]);
       expect(session.accuracy, 0.0);
     });
 
     test('returns correct fraction', () {
       // 3 known / (3 known + 1 needPractice + 1 skipped) = 3/5 = 0.6
-      final session = _session(
+      final session = session0(
         known: [1, 2, 3],
         needPractice: [4],
         skipped: [5],
@@ -85,14 +85,14 @@ void main() {
 
   group('duration', () {
     test('returns null when completedAt is null', () {
-      final session = _session();
+      final session = session0();
       expect(session.duration, isNull);
     });
 
     test('returns correct duration when session is completed', () {
       final started = DateTime(2024, 6, 1, 10, 0);
       final ended = DateTime(2024, 6, 1, 10, 8);
-      final session = _session(startedAt: started, completedAt: ended);
+      final session = session0(startedAt: started, completedAt: ended);
       expect(session.duration, const Duration(minutes: 8));
     });
   });
@@ -103,12 +103,12 @@ void main() {
 
   group('isComplete', () {
     test('returns false when completedAt is null', () {
-      final session = _session();
+      final session = session0();
       expect(session.isComplete, isFalse);
     });
 
     test('returns true when completedAt is set', () {
-      final session = _session(completedAt: DateTime.now());
+      final session = session0(completedAt: DateTime.now());
       expect(session.isComplete, isTrue);
     });
   });
@@ -119,20 +119,20 @@ void main() {
 
   group('calculateXP', () {
     test('returns 0 when no known terms', () {
-      final session = _session();
+      final session = session0();
       expect(session.calculateXP(), 0);
     });
 
     test('base XP is 5 per known term with accuracy bonus applied', () {
       // 3 known, 0 others → accuracy = 100% → accuracy bonus of 20 applies
       // base: 3 * 5 = 15, accuracy bonus: +20, no duration → total 35
-      final session = _session(known: [1, 2, 3]);
+      final session = session0(known: [1, 2, 3]);
       expect(session.calculateXP(), 35);
     });
 
     test('adds 20 bonus when accuracy >= 90%', () {
       // 9 known / 10 total = 90% → bonus applies
-      final session = _session(
+      final session = session0(
         known: [1, 2, 3, 4, 5, 6, 7, 8, 9],
         needPractice: [10],
       );
@@ -141,7 +141,7 @@ void main() {
     });
 
     test('no accuracy bonus when accuracy < 90%', () {
-      final session = _session(
+      final session = session0(
         known: [1, 2],
         needPractice: [3, 4, 5], // 2/5 = 40%
       );
@@ -152,7 +152,7 @@ void main() {
     test('adds 10 bonus when session took under 10 minutes', () {
       final started = DateTime(2024, 6, 1, 10, 0);
       final ended = DateTime(2024, 6, 1, 10, 5); // 5 minutes
-      final session = _session(
+      final session = session0(
         known: [1],
         startedAt: started,
         completedAt: ended,
@@ -164,7 +164,7 @@ void main() {
     test('no speed bonus when session took 10+ minutes', () {
       final started = DateTime(2024, 6, 1, 10, 0);
       final ended = DateTime(2024, 6, 1, 10, 15); // 15 minutes
-      final session = _session(
+      final session = session0(
         known: [1],
         startedAt: started,
         completedAt: ended,
@@ -174,7 +174,7 @@ void main() {
     });
 
     test('no speed bonus when duration is null', () {
-      final session = _session(known: [1]);
+      final session = session0(known: [1]);
       // base: 5, accuracy 1/1 = 100% → +20, no speed bonus → 25
       expect(session.calculateXP(), 25);
     });
@@ -186,7 +186,7 @@ void main() {
 
   group('copyWith', () {
     test('creates new session with updated knownTermIds', () {
-      final original = _session(known: [1, 2]);
+      final original = session0(known: [1, 2]);
       final updated = original.copyWith(knownTermIds: [1, 2, 3]);
 
       expect(updated.knownTermIds, [1, 2, 3]);
@@ -194,7 +194,7 @@ void main() {
     });
 
     test('preserves unchanged fields', () {
-      final original = _session(known: [1], needPractice: [2]);
+      final original = session0(known: [1], needPractice: [2]);
       final updated = original.copyWith(knownTermIds: [1, 3]);
 
       expect(updated.needPracticeTermIds, [2]);
@@ -203,7 +203,7 @@ void main() {
     });
 
     test('can set completedAt via copyWith', () {
-      final original = _session();
+      final original = session0();
       expect(original.isComplete, isFalse);
 
       final completed = original.copyWith(completedAt: DateTime.now());

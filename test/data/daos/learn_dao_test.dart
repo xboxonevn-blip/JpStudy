@@ -19,9 +19,9 @@ void main() {
   // Helpers
   // ---------------------------------------------------------------------------
 
-  int _counter = 0;
+  int counter = 0;
 
-  LearnSessionsCompanion _makeSession({
+  LearnSessionsCompanion makeSession({
     String? sessionId,
     int lessonId = 1,
     DateTime? startedAt,
@@ -33,9 +33,9 @@ void main() {
     int xpEarned = 30,
     bool isPerfect = false,
   }) {
-    _counter++;
+    counter++;
     return LearnSessionsCompanion(
-      sessionId: Value(sessionId ?? 'session_$_counter'),
+      sessionId: Value(sessionId ?? 'session_$counter'),
       lessonId: Value(lessonId),
       startedAt: Value(startedAt ?? DateTime.now()),
       completedAt: Value(completedAt),
@@ -48,7 +48,7 @@ void main() {
     );
   }
 
-  LearnAnswersCompanion _makeAnswer({
+  LearnAnswersCompanion makeAnswer({
     required String sessionId,
     int questionIndex = 0,
     int termId = 1,
@@ -76,12 +76,12 @@ void main() {
 
   group('createSession', () {
     test('inserts a session and returns a positive row id', () async {
-      final id = await dao.createSession(_makeSession(sessionId: 'ls-001'));
+      final id = await dao.createSession(makeSession(sessionId: 'ls-001'));
       expect(id, greaterThan(0));
     });
 
     test('inserted session can be retrieved by sessionId', () async {
-      await dao.createSession(_makeSession(sessionId: 'ls-002', lessonId: 5));
+      await dao.createSession(makeSession(sessionId: 'ls-002', lessonId: 5));
       final session = await dao.getSession('ls-002');
       expect(session, isNotNull);
       expect(session!.sessionId, 'ls-002');
@@ -100,8 +100,8 @@ void main() {
     });
 
     test('returns correct session when multiple exist', () async {
-      await dao.createSession(_makeSession(sessionId: 'A', lessonId: 1));
-      await dao.createSession(_makeSession(sessionId: 'B', lessonId: 2));
+      await dao.createSession(makeSession(sessionId: 'A', lessonId: 1));
+      await dao.createSession(makeSession(sessionId: 'B', lessonId: 2));
 
       final session = await dao.getSession('B');
       expect(session, isNotNull);
@@ -116,7 +116,7 @@ void main() {
   group('updateSession', () {
     test('updates correctCount and isPerfect on an existing session', () async {
       await dao.createSession(
-        _makeSession(sessionId: 'upd-01', correctCount: 5, isPerfect: false),
+        makeSession(sessionId: 'upd-01', correctCount: 5, isPerfect: false),
       );
       final existing = await dao.getSession('upd-01');
       expect(existing, isNotNull);
@@ -157,11 +157,11 @@ void main() {
     test('returns incomplete sessions (completedAt is null)', () async {
       // Incomplete session for lesson 1
       await dao.createSession(
-        _makeSession(sessionId: 'inc-1', lessonId: 1, completedAt: null),
+        makeSession(sessionId: 'inc-1', lessonId: 1, completedAt: null),
       );
       // Completed session for lesson 1
       await dao.createSession(
-        _makeSession(
+        makeSession(
           sessionId: 'comp-1',
           lessonId: 1,
           completedAt: DateTime.now(),
@@ -175,10 +175,10 @@ void main() {
 
     test('does not return sessions from other lessons', () async {
       await dao.createSession(
-        _makeSession(sessionId: 'inc-L1', lessonId: 1, completedAt: null),
+        makeSession(sessionId: 'inc-L1', lessonId: 1, completedAt: null),
       );
       await dao.createSession(
-        _makeSession(sessionId: 'inc-L2', lessonId: 2, completedAt: null),
+        makeSession(sessionId: 'inc-L2', lessonId: 2, completedAt: null),
       );
 
       final incomplete = await dao.getIncompleteSessions(1);
@@ -199,14 +199,14 @@ void main() {
 
     test('returns only completed sessions for the specified lesson', () async {
       await dao.createSession(
-        _makeSession(
+        makeSession(
           sessionId: 'hist-done',
           lessonId: 3,
           completedAt: DateTime.now(),
         ),
       );
       await dao.createSession(
-        _makeSession(sessionId: 'hist-pending', lessonId: 3, completedAt: null),
+        makeSession(sessionId: 'hist-pending', lessonId: 3, completedAt: null),
       );
 
       final history = await dao.getSessionHistory(3);
@@ -219,14 +219,14 @@ void main() {
       final newer = DateTime.now();
 
       await dao.createSession(
-        _makeSession(
+        makeSession(
           sessionId: 'old-session',
           lessonId: 4,
           completedAt: older,
         ),
       );
       await dao.createSession(
-        _makeSession(
+        makeSession(
           sessionId: 'new-session',
           lessonId: 4,
           completedAt: newer,
@@ -247,24 +247,24 @@ void main() {
   group('recordAnswer / getSessionAnswers', () {
     test('getSessionAnswers returns empty list when no answers recorded',
         () async {
-      await dao.createSession(_makeSession(sessionId: 'ans-empty'));
+      await dao.createSession(makeSession(sessionId: 'ans-empty'));
       final answers = await dao.getSessionAnswers('ans-empty');
       expect(answers, isEmpty);
     });
 
     test('recordAnswer inserts answer for a session', () async {
-      await dao.createSession(_makeSession(sessionId: 'ans-session'));
+      await dao.createSession(makeSession(sessionId: 'ans-session'));
       final rowId = await dao.recordAnswer(
-        _makeAnswer(sessionId: 'ans-session', termId: 42, isCorrect: true),
+        makeAnswer(sessionId: 'ans-session', termId: 42, isCorrect: true),
       );
       expect(rowId, greaterThan(0));
     });
 
     test('getSessionAnswers returns answers ordered by questionIndex', () async {
-      await dao.createSession(_makeSession(sessionId: 'ans-order'));
+      await dao.createSession(makeSession(sessionId: 'ans-order'));
       for (var i in [2, 0, 1]) {
         await dao.recordAnswer(
-          _makeAnswer(
+          makeAnswer(
             sessionId: 'ans-order',
             questionIndex: i,
             termId: i + 10,
@@ -279,17 +279,17 @@ void main() {
 
     test('getSessionAnswers returns only answers for the specified session',
         () async {
-      await dao.createSession(_makeSession(sessionId: 's-filter-1'));
-      await dao.createSession(_makeSession(sessionId: 's-filter-2'));
+      await dao.createSession(makeSession(sessionId: 's-filter-1'));
+      await dao.createSession(makeSession(sessionId: 's-filter-2'));
 
       await dao.recordAnswer(
-        _makeAnswer(sessionId: 's-filter-1', termId: 1),
+        makeAnswer(sessionId: 's-filter-1', termId: 1),
       );
       await dao.recordAnswer(
-        _makeAnswer(sessionId: 's-filter-2', termId: 2),
+        makeAnswer(sessionId: 's-filter-2', termId: 2),
       );
       await dao.recordAnswer(
-        _makeAnswer(sessionId: 's-filter-1', questionIndex: 1, termId: 3),
+        makeAnswer(sessionId: 's-filter-1', questionIndex: 1, termId: 3),
       );
 
       final session1Answers = await dao.getSessionAnswers('s-filter-1');

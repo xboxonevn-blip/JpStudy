@@ -8,7 +8,7 @@ void main() {
   // ---------------------------------------------------------------------------
 
   group('KanjiItem.displayMnemonic', () {
-    KanjiItem _kanji({String? mnemonicVi, String? mnemonicEn}) {
+    KanjiItem kanji({String? mnemonicVi, String? mnemonicEn}) {
       return KanjiItem(
         id: 1,
         lessonId: 1,
@@ -23,33 +23,33 @@ void main() {
     }
 
     test('AppLanguage.vi returns Vietnamese mnemonic when set', () {
-      final k = _kanji(mnemonicVi: 'Ghi nhớ...', mnemonicEn: 'Remember...');
+      final k = kanji(mnemonicVi: 'Ghi nhớ...', mnemonicEn: 'Remember...');
       expect(k.displayMnemonic(AppLanguage.vi), 'Ghi nhớ...');
     });
 
     test('AppLanguage.en returns English mnemonic when set', () {
-      final k = _kanji(mnemonicVi: 'Ghi nhớ...', mnemonicEn: 'Remember...');
+      final k = kanji(mnemonicVi: 'Ghi nhớ...', mnemonicEn: 'Remember...');
       expect(k.displayMnemonic(AppLanguage.en), 'Remember...');
     });
 
     test('AppLanguage.ja returns English mnemonic when set', () {
-      final k = _kanji(mnemonicVi: 'Ghi nhớ...', mnemonicEn: 'Remember...');
+      final k = kanji(mnemonicVi: 'Ghi nhớ...', mnemonicEn: 'Remember...');
       expect(k.displayMnemonic(AppLanguage.ja), 'Remember...');
     });
 
     test('returns null when mnemonic for the language is null', () {
-      final k = _kanji(mnemonicVi: 'Ghi nhớ...', mnemonicEn: null);
+      final k = kanji(mnemonicVi: 'Ghi nhớ...', mnemonicEn: null);
       expect(k.displayMnemonic(AppLanguage.en), isNull);
     });
 
     test('returns null when mnemonic for the language is blank', () {
-      final k = _kanji(mnemonicVi: '  ', mnemonicEn: '');
+      final k = kanji(mnemonicVi: '  ', mnemonicEn: '');
       expect(k.displayMnemonic(AppLanguage.vi), isNull);
       expect(k.displayMnemonic(AppLanguage.en), isNull);
     });
 
     test('returns null when both mnemonics are null', () {
-      final k = _kanji();
+      final k = kanji();
       expect(k.displayMnemonic(AppLanguage.vi), isNull);
       expect(k.displayMnemonic(AppLanguage.en), isNull);
       expect(k.displayMnemonic(AppLanguage.ja), isNull);

@@ -19,7 +19,7 @@ void main() {
   // Helper
   // ---------------------------------------------------------------------------
 
-  Future<int> _insert({
+  Future<int> insert({
     String type = 'streak',
     int value = 7,
     bool isNotified = false,
@@ -46,19 +46,19 @@ void main() {
     });
 
     test('returns true after inserting matching row', () async {
-      await _insert(type: 'streak', value: 7);
+      await insert(type: 'streak', value: 7);
       final result = await dao.hasAchievement('streak', 7);
       expect(result, isTrue);
     });
 
     test('is false for same type but different value', () async {
-      await _insert(type: 'streak', value: 7);
+      await insert(type: 'streak', value: 7);
       final result = await dao.hasAchievement('streak', 14);
       expect(result, isFalse);
     });
 
     test('is false for same value but different type', () async {
-      await _insert(type: 'streak', value: 7);
+      await insert(type: 'streak', value: 7);
       final result = await dao.hasAchievement('perfect_round', 7);
       expect(result, isFalse);
     });
@@ -75,7 +75,7 @@ void main() {
     });
 
     test('inserts an achievement that appears in getAchievements', () async {
-      await _insert(type: 'streak', value: 7);
+      await insert(type: 'streak', value: 7);
       final all = await dao.getAchievements();
       expect(all, hasLength(1));
       expect(all.first.type, 'streak');
@@ -85,8 +85,8 @@ void main() {
     test('getAchievements orders by earnedAt descending', () async {
       final older = DateTime.now().subtract(const Duration(hours: 5));
       final newer = DateTime.now();
-      await _insert(type: 'streak', value: 7, earnedAt: older);
-      await _insert(type: 'perfect_round', value: 1, earnedAt: newer);
+      await insert(type: 'streak', value: 7, earnedAt: older);
+      await insert(type: 'perfect_round', value: 1, earnedAt: newer);
 
       final all = await dao.getAchievements();
       expect(all.first.type, 'perfect_round');
@@ -94,9 +94,9 @@ void main() {
     });
 
     test('can insert multiple distinct achievements', () async {
-      await _insert(type: 'streak', value: 7);
-      await _insert(type: 'streak', value: 14);
-      await _insert(type: 'level_up', value: 2);
+      await insert(type: 'streak', value: 7);
+      await insert(type: 'streak', value: 14);
+      await insert(type: 'level_up', value: 2);
 
       final all = await dao.getAchievements();
       expect(all, hasLength(3));
@@ -114,8 +114,8 @@ void main() {
     });
 
     test('returns only unnotified achievements', () async {
-      await _insert(type: 'streak', value: 7, isNotified: false);
-      await _insert(type: 'level_up', value: 1, isNotified: true);
+      await insert(type: 'streak', value: 7, isNotified: false);
+      await insert(type: 'level_up', value: 1, isNotified: true);
 
       final unnotified = await dao.getUnnotifiedAchievements();
       expect(unnotified, hasLength(1));
@@ -123,8 +123,8 @@ void main() {
     });
 
     test('returns empty list when all achievements are notified', () async {
-      await _insert(type: 'streak', value: 7, isNotified: true);
-      await _insert(type: 'level_up', value: 1, isNotified: true);
+      await insert(type: 'streak', value: 7, isNotified: true);
+      await insert(type: 'level_up', value: 1, isNotified: true);
 
       final unnotified = await dao.getUnnotifiedAchievements();
       expect(unnotified, isEmpty);
@@ -137,7 +137,7 @@ void main() {
 
   group('markAsNotified', () {
     test('marks a specific achievement as notified', () async {
-      final id = await _insert(type: 'streak', value: 7, isNotified: false);
+      final id = await insert(type: 'streak', value: 7, isNotified: false);
 
       await dao.markAsNotified(id);
 
@@ -149,8 +149,8 @@ void main() {
     });
 
     test('does not affect other achievements when marking one', () async {
-      final id1 = await _insert(type: 'streak', value: 7, isNotified: false);
-      await _insert(type: 'level_up', value: 1, isNotified: false);
+      final id1 = await insert(type: 'streak', value: 7, isNotified: false);
+      await insert(type: 'level_up', value: 1, isNotified: false);
 
       await dao.markAsNotified(id1);
 
@@ -160,7 +160,7 @@ void main() {
     });
 
     test('is a no-op for unknown id', () async {
-      await _insert(type: 'streak', value: 7, isNotified: false);
+      await insert(type: 'streak', value: 7, isNotified: false);
       await dao.markAsNotified(99999); // Unknown id
 
       final unnotified = await dao.getUnnotifiedAchievements();
