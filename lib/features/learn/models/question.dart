@@ -50,7 +50,7 @@ class Question {
     if (raw.isEmpty) return const [''];
 
     final parts = raw
-        .split(RegExp(r'\s*(?:/|／|\\bor\\b|;|\\|)\\s*', caseSensitive: false))
+        .split(RegExp(r'\s*(?:/|／|\bor\b|;|\|)\s*', caseSensitive: false))
         .map((part) => part.trim())
         .where((part) => part.isNotEmpty)
         .toList();
