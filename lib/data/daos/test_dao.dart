@@ -51,8 +51,9 @@ class TestDao extends DatabaseAccessor<AppDatabase> with _$TestDaoMixin {
           ..where((t) => t.completedAt.isNotNull())
           ..orderBy([
             (t) => OrderingTerm(expression: t.score, mode: OrderingMode.desc),
-          ]))
-        .getSingleOrNull(); // getSingleOrNull might return the FIRST one, which is the best due to order
+          ])
+          ..limit(1))
+        .getSingleOrNull();
   }
 
   /// Get all history sorted by date
