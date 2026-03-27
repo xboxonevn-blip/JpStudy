@@ -235,7 +235,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
     AppLanguage language,
   ) async {
     final location = await getSaveLocation(
-      suggestedName: 'jpstudy_cloud_sync.json',
+      suggestedName: 'jpstudy_linked_sync.json',
       acceptedTypeGroups: const [
         XTypeGroup(label: 'JSON', extensions: ['json']),
       ],
@@ -367,33 +367,33 @@ class DataSettingsController extends Notifier<DataSettingsState> {
   String cloudSyncLabel(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Linked sync file';
+        return 'Linked file sync';
       case AppLanguage.vi:
-        return 'File đồng bộ liên kết';
+        return 'Đồng bộ qua file liên kết';
       case AppLanguage.ja:
-        return 'リンク済み同期ファイル';
+        return 'リンクファイル同期';
     }
   }
 
   String cloudSyncLoadingLabel(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Loading linked file status...';
+        return 'Loading linked sync status...';
       case AppLanguage.vi:
-        return 'Đang tải trạng thái file liên kết...';
+        return 'Đang tải trạng thái đồng bộ file liên kết...';
       case AppLanguage.ja:
-        return 'リンク済みファイルの状態を読み込み中...';
+        return 'リンクファイル同期の状態を読み込み中...';
     }
   }
 
   String cloudSyncNotLinkedLabel(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'No linked sync file yet.';
+        return 'No linked file yet.';
       case AppLanguage.vi:
-        return 'Chưa liên kết file đồng bộ nào.';
+        return 'Chưa có file liên kết.';
       case AppLanguage.ja:
-        return 'まだリンク済み同期ファイルはありません。';
+        return 'まだリンク済みファイルはありません。';
     }
   }
 
@@ -411,53 +411,53 @@ class DataSettingsController extends Notifier<DataSettingsState> {
   String cloudSyncChooseFileLabel(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Choose existing file';
+        return 'Choose file';
       case AppLanguage.vi:
-        return 'Chọn file có sẵn';
+        return 'Chọn file';
       case AppLanguage.ja:
-        return '既存ファイルを選ぶ';
+        return 'ファイルを選ぶ';
     }
   }
 
   String cloudSyncCreateFileLabel(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Create new file';
+        return 'Create file';
       case AppLanguage.vi:
-        return 'Tạo file mới';
+        return 'Tạo file';
       case AppLanguage.ja:
-        return '新しいファイルを作成';
+        return 'ファイルを作成';
     }
   }
 
   String cloudSyncUploadLabel(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Upload to linked file';
+        return 'Upload snapshot';
       case AppLanguage.vi:
-        return 'Tải lên file liên kết';
+        return 'Tải snapshot lên';
       case AppLanguage.ja:
-        return 'リンク済みファイルへアップロード';
+        return 'スナップショットをアップロード';
     }
   }
 
   String cloudSyncDownloadLabel(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Download from linked file';
+        return 'Download snapshot';
       case AppLanguage.vi:
-        return 'Tải xuống từ file liên kết';
+        return 'Tải snapshot xuống';
       case AppLanguage.ja:
-        return 'リンク済みファイルからダウンロード';
+        return 'スナップショットをダウンロード';
     }
   }
 
   String cloudSyncUnlinkLabel(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Remove linked file';
+        return 'Remove link';
       case AppLanguage.vi:
-        return 'Gỡ liên kết file';
+        return 'Gỡ liên kết';
       case AppLanguage.ja:
         return 'リンクを解除';
     }
@@ -466,11 +466,11 @@ class DataSettingsController extends Notifier<DataSettingsState> {
   String cloudSyncCreateHint(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Point this at a JSON file inside Dropbox, Drive, Syncthing, or another synced folder.';
+        return 'Point every device at the same JSON file inside Dropbox, Drive, Syncthing, or another shared folder.';
       case AppLanguage.vi:
-        return 'Hãy trỏ tới một file JSON trong Dropbox, Drive, Syncthing hoặc thư mục đang được đồng bộ.';
+        return 'Hãy trỏ mọi thiết bị tới cùng một file JSON trong Dropbox, Drive, Syncthing hoặc thư mục dùng chung.';
       case AppLanguage.ja:
-        return 'Dropbox、Drive、Syncthing、または同期フォルダ内のJSONファイルを指定してください。';
+        return 'すべての端末で、Dropbox・Drive・Syncthing などの共有フォルダ内にある同じJSONファイルを指定してください。';
     }
   }
 
@@ -513,88 +513,88 @@ class DataSettingsController extends Notifier<DataSettingsState> {
   String cloudSyncLinkedSuccessLabel(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Linked sync file updated.';
+        return 'Linked file updated.';
       case AppLanguage.vi:
-        return 'Đã cập nhật file đồng bộ liên kết.';
+        return 'Đã cập nhật file liên kết.';
       case AppLanguage.ja:
-        return 'リンク済み同期ファイルを更新しました。';
+        return 'リンク済みファイルを更新しました。';
     }
   }
 
   String cloudSyncUnlinkedSuccessLabel(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Linked sync file removed.';
+        return 'Linked file removed.';
       case AppLanguage.vi:
-        return 'Đã gỡ file đồng bộ liên kết.';
+        return 'Đã gỡ file liên kết.';
       case AppLanguage.ja:
-        return 'リンク済み同期ファイルを削除しました。';
+        return 'リンク済みファイルを削除しました。';
     }
   }
 
   String cloudSyncLinkRequiredLabel(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Choose or create a linked sync file first.';
+        return 'Choose or create a linked file first.';
       case AppLanguage.vi:
-        return 'Hãy chọn hoặc tạo file đồng bộ liên kết trước.';
+        return 'Hãy chọn hoặc tạo file liên kết trước.';
       case AppLanguage.ja:
-        return '先にリンク済み同期ファイルを選ぶか作成してください。';
+        return '先にリンク済みファイルを選ぶか作成してください。';
     }
   }
 
   String cloudSyncUploadSuccessLabel(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Uploaded backup to linked sync file.';
+        return 'Uploaded backup to linked file.';
       case AppLanguage.vi:
-        return 'Đã tải bản sao lưu lên file đồng bộ liên kết.';
+        return 'Đã tải bản sao lưu lên file liên kết.';
       case AppLanguage.ja:
-        return 'バックアップをリンク済み同期ファイルへアップロードしました。';
+        return 'バックアップをリンク済みファイルへアップロードしました。';
     }
   }
 
   String cloudSyncUploadErrorLabel(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Failed to write linked sync file.';
+        return 'Failed to write linked file.';
       case AppLanguage.vi:
-        return 'Không ghi được file đồng bộ liên kết.';
+        return 'Không ghi được file liên kết.';
       case AppLanguage.ja:
-        return 'リンク済み同期ファイルへ書き込めませんでした。';
+        return 'リンク済みファイルへ書き込めませんでした。';
     }
   }
 
   String cloudSyncDownloadSuccessLabel(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Downloaded backup from linked sync file.';
+        return 'Downloaded backup from linked file.';
       case AppLanguage.vi:
-        return 'Đã tải bản sao lưu từ file đồng bộ liên kết.';
+        return 'Đã tải bản sao lưu từ file liên kết.';
       case AppLanguage.ja:
-        return 'リンク済み同期ファイルからバックアップを取得しました。';
+        return 'リンク済みファイルからバックアップを取得しました。';
     }
   }
 
   String cloudSyncDownloadErrorLabel(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Linked sync file is invalid or unreadable.';
+        return 'Linked file is invalid or unreadable.';
       case AppLanguage.vi:
-        return 'File đồng bộ liên kết không hợp lệ hoặc không đọc được.';
+        return 'File liên kết không hợp lệ hoặc không đọc được.';
       case AppLanguage.ja:
-        return 'リンク済み同期ファイルが無効か、読み取れません。';
+        return 'リンク済みファイルが無効か、読み取れません。';
     }
   }
 
   String cloudSyncMissingRemoteLabel(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Linked sync file does not exist yet.';
+        return 'Linked file does not exist yet.';
       case AppLanguage.vi:
-        return 'File đồng bộ liên kết chưa tồn tại.';
+        return 'File liên kết chưa tồn tại.';
       case AppLanguage.ja:
-        return 'リンク済み同期ファイルはまだ存在しません。';
+        return 'リンク済みファイルはまだ存在しません。';
     }
   }
 

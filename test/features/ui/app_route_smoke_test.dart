@@ -61,33 +61,37 @@ void main() {
     required String sentence,
     required String translationEn,
   }) async {
-    final grammarId = await db.into(db.grammarPoints).insert(
-      GrammarPointsCompanion.insert(
-        lessonId: Value(lessonId),
-        grammarPoint: grammarPoint,
-        titleEn: Value(titleEn),
-        meaning: 'Meaning for $grammarPoint',
-        meaningVi: Value('Meaning for $grammarPoint'),
-        meaningEn: Value('Meaning for $grammarPoint'),
-        connection: grammarPoint,
-        connectionEn: Value(grammarPoint),
-        explanation: 'Use $grammarPoint correctly.',
-        explanationVi: Value('Use $grammarPoint correctly.'),
-        explanationEn: Value('Use $grammarPoint correctly.'),
-        jlptLevel: 'N5',
-        isLearned: const Value(false),
-      ),
-    );
+    final grammarId = await db
+        .into(db.grammarPoints)
+        .insert(
+          GrammarPointsCompanion.insert(
+            lessonId: Value(lessonId),
+            grammarPoint: grammarPoint,
+            titleEn: Value(titleEn),
+            meaning: 'Meaning for $grammarPoint',
+            meaningVi: Value('Meaning for $grammarPoint'),
+            meaningEn: Value('Meaning for $grammarPoint'),
+            connection: grammarPoint,
+            connectionEn: Value(grammarPoint),
+            explanation: 'Use $grammarPoint correctly.',
+            explanationVi: Value('Use $grammarPoint correctly.'),
+            explanationEn: Value('Use $grammarPoint correctly.'),
+            jlptLevel: 'N5',
+            isLearned: const Value(false),
+          ),
+        );
 
-    await db.into(db.grammarExamples).insert(
-      GrammarExamplesCompanion.insert(
-        grammarId: grammarId,
-        japanese: sentence,
-        translation: translationEn,
-        translationVi: Value(translationEn),
-        translationEn: Value(translationEn),
-      ),
-    );
+    await db
+        .into(db.grammarExamples)
+        .insert(
+          GrammarExamplesCompanion.insert(
+            grammarId: grammarId,
+            japanese: sentence,
+            translation: translationEn,
+            translationVi: Value(translationEn),
+            translationEn: Value(translationEn),
+          ),
+        );
   }
 
   testWidgets('App shell routes stay mountable across core study screens', (
@@ -277,8 +281,8 @@ void main() {
 
     AppRouter.router.go('/study');
     await tester.pumpAndSettle();
-    expect(find.text('Goals'), findsOneWidget);
-    expect(find.text('Due review'), findsOneWidget);
+    expect(find.text('Today plan'), findsOneWidget);
+    expect(find.text('Run Recall Sprint first'), findsWidgets);
 
     AppRouter.router.go('/library');
     await tester.pumpAndSettle();

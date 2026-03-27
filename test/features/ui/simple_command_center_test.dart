@@ -12,11 +12,13 @@ import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/db/database_provider.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
+import 'package:jpstudy/features/grammar/grammar_providers.dart';
 import 'package:jpstudy/features/home/providers/continue_provider.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/grammar/screens/grammar_detail_screen.dart';
 import 'package:jpstudy/features/home/screens/learning_path_screen.dart';
 import 'package:jpstudy/features/home/providers/backup_status_provider.dart';
+import 'package:jpstudy/features/home/providers/weakness_radar_provider.dart';
 import 'package:jpstudy/features/library/library_screen.dart';
 import 'package:jpstudy/features/me/me_screen.dart';
 import 'package:jpstudy/features/practice/practice_screen.dart';
@@ -43,8 +45,8 @@ const _fixtureSprintQuestions = [
 ];
 
 Override _sprintOverride() => recallSprintQuestionsProvider.overrideWith(
-      (ref) async => _fixtureSprintQuestions,
-    );
+  (ref) async => _fixtureSprintQuestions,
+);
 
 void main() {
   setUp(() {
@@ -150,7 +152,9 @@ void main() {
     expect(find.text('Recall Sprint'), findsWidgets);
   });
 
-  testWidgets('PracticeScreen uses goal-based study layout', (tester) async {
+  testWidgets('PracticeScreen uses a session-plan study layout', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
@@ -171,6 +175,15 @@ void main() {
               ),
             ),
           ),
+          continueActionProvider.overrideWith(
+            (ref) async => const ContinueAction(
+              type: ContinueActionType.vocabReview,
+              label: 'Review vocab',
+              count: 4,
+            ),
+          ),
+          weaknessRadarProvider.overrideWith((ref) async => const []),
+          grammarGhostCountProvider.overrideWith((ref) async => 0),
         ],
         child: const MaterialApp(home: PracticeScreen()),
       ),
@@ -179,12 +192,11 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Study'), findsAtLeastNWidgets(1));
-    expect(find.text('Goals'), findsOneWidget);
-    expect(find.text('Due review'), findsOneWidget);
-    expect(find.text('Fix weak points'), findsOneWidget);
-    expect(find.text('Build speed'), findsOneWidget);
+    expect(find.text('Today plan'), findsOneWidget);
+    expect(find.text('Clear the vocab queue'), findsAtLeastNWidgets(1));
+    expect(find.text('Clean up the mistake bank'), findsAtLeastNWidgets(1));
     expect(find.text('JLPT prep'), findsAtLeastNWidgets(1));
-    expect(find.byType(FilledButton), findsOneWidget);
+    expect(find.byType(FilledButton), findsAtLeastNWidgets(1));
   });
 
   testWidgets(
@@ -210,6 +222,16 @@ void main() {
                 ),
               ),
             ),
+            continueActionProvider.overrideWith(
+              (ref) async => const ContinueAction(
+                type: ContinueActionType.grammarReview,
+                label: 'Review grammar',
+                count: 2,
+                data: [1, 2],
+              ),
+            ),
+            weaknessRadarProvider.overrideWith((ref) async => const []),
+            grammarGhostCountProvider.overrideWith((ref) async => 0),
           ],
           child: const MaterialApp(home: PracticeScreen()),
         ),

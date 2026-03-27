@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/theme/app_breakpoints.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
@@ -9,7 +10,8 @@ import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/common/widgets/error_state_widget.dart';
-import 'package:jpstudy/features/home/widgets/weakness_radar_card.dart';
+import 'package:jpstudy/features/home/providers/weakness_radar_provider.dart';
+import 'package:jpstudy/features/progress/providers/progress_coach_provider.dart';
 
 class ProgressScreen extends ConsumerWidget {
   const ProgressScreen({super.key});
@@ -22,6 +24,7 @@ class ProgressScreen extends ConsumerWidget {
     final summaryAsync = ref.watch(progressSummaryProvider);
     final reviewHistoryAsync = ref.watch(reviewHistoryProvider);
     final attemptHistoryAsync = ref.watch(attemptHistoryProvider);
+    final coachBoardAsync = ref.watch(progressCoachBoardProvider);
     return Scaffold(
       appBar: AppBar(title: Text('${language.progressTitle}$levelSuffix')),
       body: summaryAsync.when(
@@ -131,6 +134,12 @@ class ProgressScreen extends ConsumerWidget {
               ],
             ),
           );
+          final coachSection = coachBoardAsync.when(
+            data: (board) =>
+                _CoachBoardSection(language: language, board: board),
+            loading: () => _CoachBoardSkeleton(language: language),
+            error: (_, _) => _CoachBoardFallback(language: language),
+          );
 
           return AppPageShell(
             topPadding: AppSpacing.lg,
@@ -157,13 +166,13 @@ class ProgressScreen extends ConsumerWidget {
                         ),
                       ),
                       const SizedBox(height: AppSpacing.lg),
+                      coachSection,
+                      const SizedBox(height: AppSpacing.lg),
                       overviewSection,
                       const SizedBox(height: AppSpacing.lg),
                       _ActivityCalendar(streak: summary.streak),
                       const SizedBox(height: AppSpacing.lg),
                       const _SrsRetentionCard(),
-                      const SizedBox(height: AppSpacing.lg),
-                      const WeaknessRadarCard(compact: true),
                       const SizedBox(height: AppSpacing.lg),
                       reviewSection,
                       const SizedBox(height: AppSpacing.lg),
@@ -189,6 +198,8 @@ class ProgressScreen extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(height: AppSpacing.lg),
+                    coachSection,
+                    const SizedBox(height: AppSpacing.lg),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -203,16 +214,7 @@ class ProgressScreen extends ConsumerWidget {
                           ),
                         ),
                         const SizedBox(width: AppSpacing.lg),
-                        const Expanded(
-                          flex: 5,
-                          child: Column(
-                            children: [
-                              _SrsRetentionCard(),
-                              SizedBox(height: AppSpacing.lg),
-                              WeaknessRadarCard(compact: true),
-                            ],
-                          ),
-                        ),
+                        const Expanded(flex: 5, child: _SrsRetentionCard()),
                       ],
                     ),
                     const SizedBox(height: AppSpacing.lg),
@@ -232,6 +234,589 @@ class ProgressScreen extends ConsumerWidget {
         },
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => ErrorStateWidget(error: e, compact: true),
+      ),
+    );
+  }
+}
+
+class _CoachBoardSection extends StatelessWidget {
+  const _CoachBoardSection({required this.language, required this.board});
+
+  final AppLanguage language;
+  final ProgressCoachBoard board;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+
+    return AppSectionCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      _coachSectionLabel(language).toUpperCase(),
+                      style: TextStyle(
+                        color: palette.primary,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 0.8,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      board.headline,
+                      key: const ValueKey('progress_focus_headline'),
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w900,
+                        color: palette.ink,
+                        height: 1.1,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      board.caption,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: palette.ink.withValues(alpha: 0.7),
+                        fontWeight: FontWeight.w700,
+                        height: 1.35,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              if (board.primaryAction.badge != null) ...[
+                const SizedBox(width: AppSpacing.md),
+                AppStatusChip(
+                  label: board.primaryAction.badge!,
+                  tone: AppStatusTone.primary,
+                ),
+              ],
+            ],
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final useSplit = constraints.maxWidth >= 980;
+              final secondaryColumn = Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _CoachSignalsWrap(signals: board.signals, compact: useSplit),
+                  if (board.recoveryItems.isNotEmpty) ...[
+                    const SizedBox(height: AppSpacing.lg),
+                    _RecoveryPriorityCard(
+                      language: language,
+                      items: board.recoveryItems,
+                    ),
+                  ],
+                ],
+              );
+
+              if (!useSplit) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _PrimaryCoachActionCard(
+                      language: language,
+                      action: board.primaryAction,
+                    ),
+                    const SizedBox(height: AppSpacing.lg),
+                    secondaryColumn,
+                  ],
+                );
+              }
+
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 7,
+                    child: _PrimaryCoachActionCard(
+                      language: language,
+                      action: board.primaryAction,
+                    ),
+                  ),
+                  const SizedBox(width: AppSpacing.lg),
+                  Expanded(flex: 5, child: secondaryColumn),
+                ],
+              );
+            },
+          ),
+          if (board.quickActions.isNotEmpty) ...[
+            const SizedBox(height: AppSpacing.lg),
+            Text(
+              _quickActionsTitle(language),
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w900,
+                color: palette.ink,
+              ),
+            ),
+            const SizedBox(height: AppSpacing.md),
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final columns = constraints.maxWidth >= 1180
+                    ? 3
+                    : constraints.maxWidth >= 720
+                    ? 2
+                    : 1;
+                final width =
+                    (constraints.maxWidth - ((columns - 1) * AppSpacing.md)) /
+                    columns;
+                return Wrap(
+                  spacing: AppSpacing.md,
+                  runSpacing: AppSpacing.md,
+                  children: [
+                    for (final action in board.quickActions)
+                      SizedBox(
+                        width: width,
+                        child: _QuickActionCard(action: action),
+                      ),
+                  ],
+                );
+              },
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  static void openAction(BuildContext context, ProgressCoachAction action) {
+    if (action.extra != null) {
+      context.push(action.route, extra: action.extra);
+    } else {
+      context.push(action.route);
+    }
+  }
+}
+
+class _PrimaryCoachActionCard extends StatelessWidget {
+  const _PrimaryCoachActionCard({required this.language, required this.action});
+
+  final AppLanguage language;
+  final ProgressCoachAction action;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppSpacing.xl),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [action.color.withValues(alpha: 0.16), palette.base],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(26),
+        border: Border.all(color: action.color.withValues(alpha: 0.22)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 54,
+            height: 54,
+            decoration: BoxDecoration(
+              color: action.color.withValues(alpha: 0.14),
+              borderRadius: BorderRadius.circular(18),
+            ),
+            child: Icon(action.icon, color: action.color),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          Text(
+            action.title,
+            key: const ValueKey('progress_primary_action_title'),
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontSize: 26,
+              fontWeight: FontWeight.w900,
+              color: palette.ink,
+              height: 1.1,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Text(
+            action.subtitle,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              color: palette.ink.withValues(alpha: 0.72),
+              fontWeight: FontWeight.w700,
+              height: 1.4,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          FilledButton.icon(
+            key: const ValueKey('progress_primary_action_button'),
+            onPressed: () => _CoachBoardSection.openAction(context, action),
+            icon: const Icon(Icons.arrow_forward_rounded),
+            label: Text(action.ctaLabel),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          Text(
+            _primaryActionFooter(language),
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: palette.ink.withValues(alpha: 0.62),
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CoachSignalsWrap extends StatelessWidget {
+  const _CoachSignalsWrap({required this.signals, required this.compact});
+
+  final List<ProgressCoachSignal> signals;
+  final bool compact;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final columns = compact && constraints.maxWidth >= 320 ? 2 : 1;
+        final width =
+            (constraints.maxWidth - ((columns - 1) * AppSpacing.md)) / columns;
+        return Wrap(
+          spacing: AppSpacing.md,
+          runSpacing: AppSpacing.md,
+          children: [
+            for (final signal in signals)
+              SizedBox(
+                width: width,
+                child: _CoachSignalCard(signal: signal),
+              ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _CoachSignalCard extends StatelessWidget {
+  const _CoachSignalCard({required this.signal});
+
+  final ProgressCoachSignal signal;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      decoration: BoxDecoration(
+        color: palette.base,
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: palette.outlineSoft),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 42,
+            height: 42,
+            decoration: BoxDecoration(
+              color: signal.color.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: Icon(signal.icon, color: signal.color, size: 20),
+          ),
+          const SizedBox(width: AppSpacing.md),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  signal.label,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: palette.ink.withValues(alpha: 0.62),
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  signal.value,
+                  key: ValueKey('progress_signal_${signal.id}'),
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w900,
+                    color: palette.ink,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  signal.detail,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: palette.ink.withValues(alpha: 0.68),
+                    fontWeight: FontWeight.w700,
+                    height: 1.35,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _RecoveryPriorityCard extends StatelessWidget {
+  const _RecoveryPriorityCard({required this.language, required this.items});
+
+  final AppLanguage language;
+  final List<WeaknessRadarItem> items;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      decoration: BoxDecoration(
+        color: palette.base,
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: palette.outlineSoft),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            _recoveryTitle(language),
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w900,
+              color: palette.ink,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Text(
+            _recoveryCaption(language),
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: palette.ink.withValues(alpha: 0.68),
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          for (final item in items)
+            Padding(
+              padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+              child: _RecoveryPriorityTile(item: item, language: language),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class _RecoveryPriorityTile extends StatelessWidget {
+  const _RecoveryPriorityTile({required this.item, required this.language});
+
+  final WeaknessRadarItem item;
+  final AppLanguage language;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: item.color.withValues(alpha: 0.08),
+      borderRadius: BorderRadius.circular(18),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(18),
+        onTap: () {
+          if (item.extra != null) {
+            context.push(item.route, extra: item.extra);
+          } else {
+            context.push(item.route);
+          }
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.md),
+          child: Row(
+            children: [
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: item.color.withValues(alpha: 0.14),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Icon(item.icon, color: item.color, size: 20),
+              ),
+              const SizedBox(width: AppSpacing.md),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item.title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w900,
+                        color: context.appPalette.ink,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      item.subtitle,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: context.appPalette.ink.withValues(alpha: 0.68),
+                        fontWeight: FontWeight.w700,
+                        height: 1.35,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: AppSpacing.sm),
+              Text(
+                _drillNowLabel(language),
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: item.color,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _QuickActionCard extends StatelessWidget {
+  const _QuickActionCard({required this.action});
+
+  final ProgressCoachAction action;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      decoration: BoxDecoration(
+        color: palette.base,
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: palette.outlineSoft),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: action.color.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: Icon(action.icon, color: action.color, size: 20),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          Text(
+            action.title,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.w900,
+              color: palette.ink,
+              height: 1.2,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.xs),
+          Text(
+            action.subtitle,
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: palette.ink.withValues(alpha: 0.68),
+              fontWeight: FontWeight.w700,
+              height: 1.35,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          TextButton.icon(
+            onPressed: () => _CoachBoardSection.openAction(context, action),
+            icon: const Icon(Icons.arrow_forward_rounded, size: 16),
+            label: Text(action.ctaLabel),
+            style: TextButton.styleFrom(padding: EdgeInsets.zero),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CoachBoardSkeleton extends StatelessWidget {
+  const _CoachBoardSkeleton({required this.language});
+
+  final AppLanguage language;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppSectionCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            _coachSectionLabel(language),
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w900),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Text(
+            _coachLoadingLabel(language),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: context.appPalette.ink.withValues(alpha: 0.68),
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          const LinearProgressIndicator(minHeight: 5),
+        ],
+      ),
+    );
+  }
+}
+
+class _CoachBoardFallback extends StatelessWidget {
+  const _CoachBoardFallback({required this.language});
+
+  final AppLanguage language;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppSectionCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            _coachSectionLabel(language),
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w900),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Text(
+            _coachFallbackLabel(language),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: context.appPalette.ink.withValues(alpha: 0.68),
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          TextButton.icon(
+            onPressed: () => context.push('/study'),
+            icon: const Icon(Icons.arrow_forward_rounded),
+            label: Text(_coachFallbackCta(language)),
+          ),
+        ],
       ),
     );
   }
@@ -438,6 +1023,105 @@ String _overviewCaption(AppLanguage language) {
       return 'Theo dõi chuỗi học, XP, số lần luyện và độ nhớ dài hạn trong một màn hình.';
     case AppLanguage.ja:
       return '1画面でストリーク、XP、試行回数、長期記憶をまとめて追跡します。';
+  }
+}
+
+String _coachSectionLabel(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Coach view';
+    case AppLanguage.vi:
+      return 'Góc nhìn huấn luyện';
+    case AppLanguage.ja:
+      return 'コーチ視点';
+  }
+}
+
+String _quickActionsTitle(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Other useful moves';
+    case AppLanguage.vi:
+      return 'Các bước khác cũng hữu ích';
+    case AppLanguage.ja:
+      return '他の有効な一手';
+  }
+}
+
+String _recoveryTitle(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Top recovery priorities';
+    case AppLanguage.vi:
+      return 'Ưu tiên sửa gấp';
+    case AppLanguage.ja:
+      return '優先して補強したい弱点';
+  }
+}
+
+String _recoveryCaption(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'These weak spots have the clearest payoff if you tackle them next.';
+    case AppLanguage.vi:
+      return 'Đây là những điểm yếu cho hiệu quả rõ nhất nếu xử lý tiếp theo.';
+    case AppLanguage.ja:
+      return '次に手を入れると効果が出やすい弱点です。';
+  }
+}
+
+String _drillNowLabel(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Drill now';
+    case AppLanguage.vi:
+      return 'Luyện ngay';
+    case AppLanguage.ja:
+      return '今すぐ補強';
+  }
+}
+
+String _primaryActionFooter(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'The goal is not to do everything. It is to pick the move that changes the dashboard fastest.';
+    case AppLanguage.vi:
+      return 'Mục tiêu không phải làm hết mọi thứ, mà là chọn nước đi đổi dashboard nhanh nhất.';
+    case AppLanguage.ja:
+      return '全部やることではなく、最も早く状況を変える一手を選ぶことが目的です。';
+  }
+}
+
+String _coachLoadingLabel(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Preparing the strongest next move from your progress signals...';
+    case AppLanguage.vi:
+      return 'Đang ghép nước đi tiếp theo mạnh nhất từ các tín hiệu tiến độ...';
+    case AppLanguage.ja:
+      return '進捗シグナルから次の最善手を準備しています...';
+  }
+}
+
+String _coachFallbackLabel(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Progress details are still loading, but you can jump straight into a short study block.';
+    case AppLanguage.vi:
+      return 'Chi tiết tiến độ đang tải, nhưng bạn vẫn có thể vào thẳng một block học ngắn.';
+    case AppLanguage.ja:
+      return '進捗詳細は読み込み中ですが、短い学習ブロックにはすぐ入れます。';
+  }
+}
+
+String _coachFallbackCta(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Open study';
+    case AppLanguage.vi:
+      return 'Mở khu học';
+    case AppLanguage.ja:
+      return '学習へ進む';
   }
 }
 

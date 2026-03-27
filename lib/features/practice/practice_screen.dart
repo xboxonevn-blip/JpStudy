@@ -12,6 +12,7 @@ import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/home/models/practice_destination.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/home/widgets/home_surface.dart';
+import 'package:jpstudy/features/practice/providers/practice_session_board_provider.dart';
 
 class PracticeScreen extends ConsumerWidget {
   const PracticeScreen({super.key});
@@ -21,21 +22,25 @@ class PracticeScreen extends ConsumerWidget {
     final language = ref.watch(appLanguageProvider);
     final level = ref.watch(studyLevelProvider);
     final dashboard = ref.watch(dashboardProvider).valueOrNull;
+    final sessionBoard = ref.watch(practiceSessionBoardProvider);
     final vocabDue = dashboard?.vocabDue ?? 0;
     final grammarDue = dashboard?.grammarDue ?? 0;
     final kanjiDue = dashboard?.kanjiDue ?? 0;
     final dueCount = vocabDue + grammarDue + kanjiDue;
     final mistakeCount = dashboard?.totalMistakeCount ?? 0;
+    final grammarGhostCount = sessionBoard.grammarGhostCount;
+    final repairCount = sessionBoard.repairCount;
 
     final items = buildPracticeDestinations(
       language: language,
+      ghostCount: grammarGhostCount,
       dueReviewCount: dueCount,
       vocabDue: vocabDue,
       grammarDue: grammarDue,
       kanjiDue: kanjiDue,
       mistakeCount: mistakeCount,
       level: level,
-      preferImmersion: dueCount == 0 && mistakeCount == 0,
+      preferImmersion: dueCount == 0 && repairCount == 0,
     );
 
     return Scaffold(
@@ -60,11 +65,6 @@ class PracticeScreen extends ConsumerWidget {
                 ? 2
                 : 1;
             final featuredLimit = featuredColumns == 2 ? 4 : 3;
-            final goalColumns = constraints.maxWidth >= 1180
-                ? 4
-                : constraints.maxWidth >= AppBreakpoints.tablet
-                ? 2
-                : 1;
             final toolColumns = constraints.maxWidth >= AppBreakpoints.desktop
                 ? 2
                 : 1;
@@ -76,7 +76,6 @@ class PracticeScreen extends ConsumerWidget {
             final remainingTools = items
                 .where((item) => !featuredIds.contains(item.id))
                 .toList(growable: false);
-            final bestTool = items.isNotEmpty ? items.first : null;
 
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,14 +84,27 @@ class PracticeScreen extends ConsumerWidget {
                   language: language,
                   level: level,
                   dueCount: dueCount,
-                  mistakeCount: mistakeCount,
+                  repairCount: repairCount,
+                  grammarGhostCount: grammarGhostCount,
                   vocabDue: vocabDue,
                   grammarDue: grammarDue,
                   kanjiDue: kanjiDue,
-                  bestTool: bestTool,
+                  headline: sessionBoard.headline,
+                  caption: sessionBoard.caption,
+                  primaryAction: sessionBoard.primaryAction,
                   onPrimaryTap: () =>
-                      _openPrimaryGoal(context, dueCount, mistakeCount),
+                      _openAction(context, sessionBoard.primaryAction),
                   onSecondaryTap: () => context.push('/jlpt/coach'),
+                ),
+                const SizedBox(height: AppSpacing.md),
+                _StudyPanel(
+                  title: _planTitle(language),
+                  caption: _planCaption(language),
+                  child: _SessionPlanBoard(
+                    language: language,
+                    board: sessionBoard,
+                    onOpenAction: (action) => _openAction(context, action),
+                  ),
                 ),
                 const SizedBox(height: AppSpacing.md),
                 _StudyPanel(
@@ -119,110 +131,6 @@ class PracticeScreen extends ConsumerWidget {
                                     context.push(item.route, extra: item.extra),
                               ),
                             ),
-                        ],
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(height: AppSpacing.md),
-                _StudyPanel(
-                  title: _goalsTitle(language),
-                  caption: _goalsCaption(language),
-                  child: LayoutBuilder(
-                    builder: (context, sectionConstraints) {
-                      final itemWidth = _itemWidth(
-                        sectionConstraints.maxWidth,
-                        goalColumns,
-                      );
-                      return Wrap(
-                        spacing: AppSpacing.md,
-                        runSpacing: AppSpacing.md,
-                        children: [
-                          SizedBox(
-                            width: itemWidth,
-                            child: _GoalCard(
-                              color: context.appPalette.warning,
-                              icon: Icons.schedule_rounded,
-                              title: _goalDueTitle(language),
-                              subtitle: _goalDueSubtitle(language, dueCount),
-                              detail: _goalDueDetail(
-                                language,
-                                dueCount: dueCount,
-                                vocabDue: vocabDue,
-                                grammarDue: grammarDue,
-                                kanjiDue: kanjiDue,
-                              ),
-                              ctaLabel: _openLaneLabel(language),
-                              status: AppStatusChip(
-                                label: dueCount > 0
-                                    ? _dueBadge(language, dueCount)
-                                    : _readyBadge(language),
-                                tone: dueCount > 0
-                                    ? AppStatusTone.warning
-                                    : AppStatusTone.success,
-                              ),
-                              onTap: () => _openPrimaryGoal(
-                                context,
-                                dueCount,
-                                mistakeCount,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: itemWidth,
-                            child: _GoalCard(
-                              color: const Color(0xFFD66A3D),
-                              icon: Icons.auto_fix_high_rounded,
-                              title: _goalFixTitle(language),
-                              subtitle: _goalFixSubtitle(
-                                language,
-                                mistakeCount,
-                              ),
-                              detail: _goalFixDetail(language, mistakeCount),
-                              ctaLabel: _openLaneLabel(language),
-                              status: AppStatusChip(
-                                label: mistakeCount > 0
-                                    ? _weakBadge(language, mistakeCount)
-                                    : _readyBadge(language),
-                                tone: mistakeCount > 0
-                                    ? AppStatusTone.warning
-                                    : AppStatusTone.success,
-                              ),
-                              onTap: () => context.push('/mistakes'),
-                            ),
-                          ),
-                          SizedBox(
-                            width: itemWidth,
-                            child: _GoalCard(
-                              color: context.appPalette.info,
-                              icon: Icons.speed_rounded,
-                              title: _goalSpeedTitle(language),
-                              subtitle: _goalSpeedSubtitle(language),
-                              detail: _goalSpeedDetail(language, dueCount),
-                              ctaLabel: _openLaneLabel(language),
-                              status: AppStatusChip(
-                                label: _speedBadge(language),
-                                tone: AppStatusTone.primary,
-                              ),
-                              onTap: () => context.push('/immersion'),
-                            ),
-                          ),
-                          SizedBox(
-                            width: itemWidth,
-                            child: _GoalCard(
-                              color: context.appPalette.secondary,
-                              icon: Icons.quiz_rounded,
-                              title: _goalTestTitle(language),
-                              subtitle: _goalTestSubtitle(language),
-                              detail: _goalTestDetail(language, level),
-                              ctaLabel: _openLaneLabel(language),
-                              status: AppStatusChip(
-                                label: level?.shortLabel ?? 'N5',
-                                tone: AppStatusTone.neutral,
-                              ),
-                              onTap: () => context.push('/jlpt/coach'),
-                            ),
-                          ),
                         ],
                       );
                     },
@@ -282,16 +190,8 @@ class PracticeScreen extends ConsumerWidget {
     );
   }
 
-  void _openPrimaryGoal(BuildContext context, int dueCount, int mistakeCount) {
-    if (dueCount > 0) {
-      context.push('/practice/recall-sprint');
-      return;
-    }
-    if (mistakeCount > 0) {
-      context.push('/mistakes');
-      return;
-    }
-    context.push('/immersion');
+  void _openAction(BuildContext context, PracticeSessionAction action) {
+    context.push(action.route, extra: action.extra);
   }
 
   Widget? _toolStatusChip(PracticeDestination item) {
@@ -332,194 +232,37 @@ class PracticeScreen extends ConsumerWidget {
   };
 
   String _featuredTitle(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Start here',
-    AppLanguage.vi => 'Bắt đầu từ đây',
-    AppLanguage.ja => 'まずここから',
+    AppLanguage.en => 'Focus tools',
+    AppLanguage.vi => 'Công cụ trọng tâm',
+    AppLanguage.ja => '集中ツール',
   };
 
   String _featuredCaption(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Recommended from your queue, weak points, and level.',
-    AppLanguage.vi => 'Gợi ý theo hàng đợi ôn tập, điểm yếu và level hiện tại.',
-    AppLanguage.ja => '復習キュー、苦手、現在のレベルからおすすめしています。',
+    AppLanguage.en =>
+      'The best lanes to switch into without scanning the full shelf.',
+    AppLanguage.vi =>
+      'Các lane đáng mở nhất nếu bạn muốn đổi nhịp mà không phải quét hết toàn bộ công cụ.',
+    AppLanguage.ja => '全体を見渡さなくても切り替えやすい集中レーンです。',
   };
 
-  String _dueBadge(AppLanguage language, int dueCount) => switch (language) {
-    AppLanguage.en => '$dueCount due',
-    AppLanguage.vi => '$dueCount đến hạn',
-    AppLanguage.ja => '$dueCount 件',
+  String _planTitle(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Today plan',
+    AppLanguage.vi => 'Kế hoạch hôm nay',
+    AppLanguage.ja => '今日のプラン',
   };
 
-  String _weakBadge(AppLanguage language, int count) => switch (language) {
-    AppLanguage.en => '$count weak',
-    AppLanguage.vi => '$count yếu',
-    AppLanguage.ja => '$count 件',
-  };
-
-  String _speedBadge(AppLanguage language) => switch (language) {
-    AppLanguage.en => '15m',
-    AppLanguage.vi => '15p',
-    AppLanguage.ja => '15分',
-  };
-
-  String _readyBadge(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Ready',
-    AppLanguage.vi => 'Sẵn sàng',
-    AppLanguage.ja => '準備完了',
+  String _planCaption(AppLanguage language) => switch (language) {
+    AppLanguage.en =>
+      'A short sequence to protect recall, repair weak spots, and keep momentum.',
+    AppLanguage.vi =>
+      'Một chuỗi ngắn để chặn rơi nhớ, vá điểm yếu, và giữ đà học tiếp.',
+    AppLanguage.ja => '記憶を守り、弱点を補強し、勢いを保つための短い流れです。',
   };
 
   String _openLabel(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Open',
     AppLanguage.vi => 'Mở',
     AppLanguage.ja => '開く',
-  };
-
-  String _openLaneLabel(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Open lane',
-    AppLanguage.vi => 'Mở lane',
-    AppLanguage.ja => 'レーンを開く',
-  };
-
-  String _goalsTitle(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Goals',
-    AppLanguage.vi => 'Mục tiêu',
-    AppLanguage.ja => '目標',
-  };
-
-  String _goalsCaption(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Choose the kind of progress you want next.',
-    AppLanguage.vi => 'Chọn đúng kiểu tiến bộ bạn muốn làm tiếp theo.',
-    AppLanguage.ja => '次に進めたい方向から選べます。',
-  };
-
-  String _goalDueTitle(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Due review',
-    AppLanguage.vi => 'Ôn đến hạn',
-    AppLanguage.ja => '期限の復習',
-  };
-
-  String _goalDueSubtitle(AppLanguage language, int dueCount) =>
-      switch (language) {
-        AppLanguage.en =>
-          dueCount > 0
-              ? '$dueCount items are waiting now.'
-              : 'No review queue is waiting right now.',
-        AppLanguage.vi =>
-          dueCount > 0
-              ? '$dueCount mục đang chờ ôn ngay bây giờ.'
-              : 'Hiện chưa có hàng đợi ôn tập nào đang chờ.',
-        AppLanguage.ja =>
-          dueCount > 0 ? '$dueCount 件が今すぐ待っています。' : '今は復習キューがありません。',
-      };
-
-  String _goalDueDetail(
-    AppLanguage language, {
-    required int dueCount,
-    required int vocabDue,
-    required int grammarDue,
-    required int kanjiDue,
-  }) {
-    if (dueCount == 0) {
-      return switch (language) {
-        AppLanguage.en =>
-          'Use this lane whenever the queue returns. Until then, move into reading or drills.',
-        AppLanguage.vi =>
-          'Khi hàng đợi quay lại thì ưu tiên lane này. Còn hiện tại bạn có thể chuyển sang đọc hoặc drill.',
-        AppLanguage.ja => 'キューが戻ったらここを優先。今は読解やドリルへ進めます。',
-      };
-    }
-    return switch (language) {
-      AppLanguage.en =>
-        '$vocabDue vocab • $grammarDue grammar • $kanjiDue kanji. Start with the fastest sweep first.',
-      AppLanguage.vi =>
-        '$vocabDue từ vựng • $grammarDue ngữ pháp • $kanjiDue kanji. Hãy quét nhanh phần đến hạn trước.',
-      AppLanguage.ja =>
-        '語彙 $vocabDue ・文法 $grammarDue ・漢字 $kanjiDue。まずは短く一周しましょう。',
-    };
-  }
-
-  String _goalFixTitle(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Fix weak points',
-    AppLanguage.vi => 'Sửa điểm yếu',
-    AppLanguage.ja => '苦手を直す',
-  };
-
-  String _goalFixSubtitle(AppLanguage language, int count) =>
-      switch (language) {
-        AppLanguage.en =>
-          count > 0
-              ? '$count weak items still need work.'
-              : 'No weak items are waiting.',
-        AppLanguage.vi =>
-          count > 0
-              ? '$count mục yếu vẫn cần xử lý.'
-              : 'Hiện chưa có mục yếu nào đang chờ.',
-        AppLanguage.ja => count > 0 ? '$count 件の苦手項目が残っています。' : '苦手項目はありません。',
-      };
-
-  String _goalFixDetail(AppLanguage language, int count) => switch (language) {
-    AppLanguage.en =>
-      count > 0
-          ? 'Review the freshest misses first so they do not harden into habits.'
-          : 'Keep this lane as your safety net after a rough lesson or mock exam.',
-    AppLanguage.vi =>
-      count > 0
-          ? 'Xử lý các lỗi mới nhất trước để chúng không kịp thành thói quen xấu.'
-          : 'Giữ lane này làm lưới an toàn sau các buổi học hoặc mock exam bị hụt.',
-    AppLanguage.ja =>
-      count > 0 ? '新しいミスから先に直して、癖になる前に止めましょう。' : 'レッスンや模試で崩れた後の安全網として使えます。',
-  };
-
-  String _goalSpeedTitle(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Build speed',
-    AppLanguage.vi => 'Tăng tốc độ',
-    AppLanguage.ja => '読む速度',
-  };
-
-  String _goalSpeedSubtitle(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Read, save words, and measure progress.',
-    AppLanguage.vi => 'Đọc, lưu từ, và đo tiến độ.',
-    AppLanguage.ja => '読んで、単語を保存して、進みを測る。',
-  };
-
-  String _goalSpeedDetail(
-    AppLanguage language,
-    int dueCount,
-  ) => switch (language) {
-    AppLanguage.en =>
-      dueCount == 0
-          ? 'Your queue is calm enough for a focused reading block.'
-          : 'Use reading after the queue is clear to keep comprehension moving.',
-    AppLanguage.vi =>
-      dueCount == 0
-          ? 'Hàng đợi đang đủ nhẹ để vào một block đọc tập trung.'
-          : 'Sau khi dọn xong hàng đợi, hãy dùng phần đọc để giữ nhịp hiểu bài.',
-    AppLanguage.ja =>
-      dueCount == 0 ? '今は読解ブロックに入りやすい状態です。' : '復習を片づけた後に読むと、理解の流れを保てます。',
-  };
-
-  String _goalTestTitle(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'JLPT prep',
-    AppLanguage.vi => 'Ôn thi JLPT',
-    AppLanguage.ja => 'JLPT試験対策',
-  };
-
-  String _goalTestSubtitle(AppLanguage language) => switch (language) {
-    AppLanguage.en =>
-      'Full mock, quick mock, reading drill, diagnosis, and plan.',
-    AppLanguage.vi =>
-      'Thi thử đầy đủ, kiểm tra nhanh, đọc hiểu, chẩn đoán và kế hoạch.',
-    AppLanguage.ja => 'フル模試、クイック模試、読解、診断、計画。',
-  };
-
-  String _goalTestDetail(
-    AppLanguage language,
-    StudyLevel? level,
-  ) => switch (language) {
-    AppLanguage.en =>
-      'Open JLPT prep when you want one exam-focused hub for ${level?.shortLabel ?? 'N5'}.',
-    AppLanguage.vi =>
-      'Mở ôn thi JLPT khi bạn muốn một hub tập trung hoàn toàn vào bài thi ${level?.shortLabel ?? 'N5'}.',
-    AppLanguage.ja => '${level?.shortLabel ?? 'N5'} 向けの試験対策ハブへ入る入口です。',
   };
 
   String _toolsTitle(AppLanguage language) => switch (language) {
@@ -542,7 +285,8 @@ class PracticeScreen extends ConsumerWidget {
 
   String _studyHubCaption(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Resources, textbook tracker, and exam checklist.',
-    AppLanguage.vi => 'Tài nguyên, theo dõi giáo trình và danh sách chuẩn bị thi.',
+    AppLanguage.vi =>
+      'Tài nguyên, theo dõi giáo trình và danh sách chuẩn bị thi.',
     AppLanguage.ja => 'リソース、教材トラッカー、試験チェックリスト。',
   };
 
@@ -592,11 +336,14 @@ class _StudyHero extends StatelessWidget {
     required this.language,
     required this.level,
     required this.dueCount,
-    required this.mistakeCount,
+    required this.repairCount,
+    required this.grammarGhostCount,
     required this.vocabDue,
     required this.grammarDue,
     required this.kanjiDue,
-    required this.bestTool,
+    required this.headline,
+    required this.caption,
+    required this.primaryAction,
     required this.onPrimaryTap,
     required this.onSecondaryTap,
   });
@@ -604,11 +351,14 @@ class _StudyHero extends StatelessWidget {
   final AppLanguage language;
   final StudyLevel? level;
   final int dueCount;
-  final int mistakeCount;
+  final int repairCount;
+  final int grammarGhostCount;
   final int vocabDue;
   final int grammarDue;
   final int kanjiDue;
-  final PracticeDestination? bestTool;
+  final String headline;
+  final String caption;
+  final PracticeSessionAction primaryAction;
   final VoidCallback onPrimaryTap;
   final VoidCallback onSecondaryTap;
 
@@ -706,11 +456,7 @@ class _StudyHero extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 3),
                                 Text(
-                                  _headline(
-                                    language,
-                                    dueCount: dueCount,
-                                    mistakeCount: mistakeCount,
-                                  ),
+                                  headline,
                                   style: Theme.of(context).textTheme.titleLarge
                                       ?.copyWith(
                                         fontSize: 20,
@@ -727,12 +473,7 @@ class _StudyHero extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
                       Text(
-                        _subtitle(
-                          language,
-                          dueCount: dueCount,
-                          mistakeCount: mistakeCount,
-                          level: level,
-                        ),
+                        caption,
                         style: const TextStyle(
                           color: Color(0xFFF8FAFC),
                           fontSize: 13,
@@ -740,71 +481,69 @@ class _StudyHero extends StatelessWidget {
                           fontWeight: FontWeight.w700,
                         ),
                       ),
-                      if (bestTool != null) ...[
-                        const SizedBox(height: 10),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 8,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.12),
-                            borderRadius: BorderRadius.circular(14),
-                            border: Border.all(
-                              color: Colors.white.withValues(alpha: 0.16),
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 28,
-                                height: 28,
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withValues(alpha: 0.14),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Icon(
-                                  bestTool!.icon,
-                                  color: Colors.white,
-                                  size: 16,
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      _recommendationLabel(language),
-                                      style: const TextStyle(
-                                        color: Color(0xFFE2E8F0),
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.w800,
-                                      ),
-                                    ),
-                                    Text(
-                                      bestTool!.title,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 12.5,
-                                        fontWeight: FontWeight.w800,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const Icon(
-                                Icons.arrow_forward_rounded,
-                                color: Color(0xFFFFE4BF),
-                                size: 16,
-                              ),
-                            ],
+                      const SizedBox(height: 10),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 8,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.12),
+                          borderRadius: BorderRadius.circular(14),
+                          border: Border.all(
+                            color: Colors.white.withValues(alpha: 0.16),
                           ),
                         ),
-                      ],
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 28,
+                              height: 28,
+                              decoration: BoxDecoration(
+                                color: Colors.white.withValues(alpha: 0.14),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Icon(
+                                primaryAction.icon,
+                                color: Colors.white,
+                                size: 16,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    _recommendationLabel(language),
+                                    style: const TextStyle(
+                                      color: Color(0xFFE2E8F0),
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                                  ),
+                                  Text(
+                                    primaryAction.title,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12.5,
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Icon(
+                              Icons.arrow_forward_rounded,
+                              color: Color(0xFFFFE4BF),
+                              size: 16,
+                            ),
+                          ],
+                        ),
+                      ),
                       const SizedBox(height: 10),
                       Wrap(
                         spacing: 8,
@@ -817,8 +556,8 @@ class _StudyHero extends StatelessWidget {
                           ),
                           _HeroStatChip(
                             icon: Icons.auto_fix_high_rounded,
-                            label: _weakLabel(language),
-                            value: '$mistakeCount',
+                            label: _repairLabel(language),
+                            value: '$repairCount',
                           ),
                           _HeroStatChip(
                             icon: Icons.school_rounded,
@@ -851,7 +590,7 @@ class _StudyHero extends StatelessWidget {
                               Icons.play_arrow_rounded,
                               size: 18,
                             ),
-                            label: Text(_primaryLabel(language)),
+                            label: Text(primaryAction.ctaLabel),
                           ),
                           OutlinedButton.icon(
                             onPressed: onSecondaryTap,
@@ -880,8 +619,9 @@ class _StudyHero extends StatelessWidget {
 
                   final side = _HeroFocusPanel(
                     language: language,
-                    bestTool: bestTool,
+                    primaryAction: primaryAction,
                     dueCount: dueCount,
+                    grammarGhostCount: grammarGhostCount,
                     vocabDue: vocabDue,
                     grammarDue: grammarDue,
                     kanjiDue: kanjiDue,
@@ -921,66 +661,6 @@ class _StudyHero extends StatelessWidget {
     AppLanguage.ja => '学習道場 • 日本語トレーニング',
   };
 
-  String _headline(
-    AppLanguage language, {
-    required int dueCount,
-    required int mistakeCount,
-  }) {
-    if (dueCount > 0) {
-      return switch (language) {
-        AppLanguage.en => 'Clear the review queue first',
-        AppLanguage.vi => 'Dọn hàng review trước',
-        AppLanguage.ja => 'まず復習キューを片づける',
-      };
-    }
-    if (mistakeCount > 0) {
-      return switch (language) {
-        AppLanguage.en => 'Lock in weak points today',
-        AppLanguage.vi => 'Khóa lại điểm yếu hôm nay',
-        AppLanguage.ja => '今日は弱点を締め直す',
-      };
-    }
-    return switch (language) {
-      AppLanguage.en => 'Open a clean Japanese study session',
-      AppLanguage.vi => 'Mở một session học tiếng Nhật thật gọn',
-      AppLanguage.ja => '気持ちよく学習セッションを始める',
-    };
-  }
-
-  String _subtitle(
-    AppLanguage language, {
-    required int dueCount,
-    required int mistakeCount,
-    required StudyLevel? level,
-  }) {
-    if (dueCount > 0) {
-      return switch (language) {
-        AppLanguage.en =>
-          '$dueCount reviews are waiting in ${level?.shortLabel ?? 'N5'}. Finish them early, then the rest of Study feels lighter.',
-        AppLanguage.vi =>
-          'Có $dueCount lượt review đang chờ ở ${level?.shortLabel ?? 'N5'}. Dọn sớm phần này thì toàn bộ màn Study sẽ nhẹ hơn hẳn.',
-        AppLanguage.ja =>
-          '${level?.shortLabel ?? 'N5'} で $dueCount 件の復習が待っています。先に終えると、そのあとの学習がずっと軽くなります。',
-      };
-    }
-    if (mistakeCount > 0) {
-      return switch (language) {
-        AppLanguage.en =>
-          '$mistakeCount weak spots are still warm. Repair them now while recall is still close.',
-        AppLanguage.vi =>
-          'Còn $mistakeCount điểm yếu đang “nóng”. Vá ngay lúc này sẽ nhớ sâu hơn.',
-        AppLanguage.ja => '$mistakeCount 件の弱点がまだ新しいうちに補強すると、記憶が安定しやすくなります。',
-      };
-    }
-    return switch (language) {
-      AppLanguage.en =>
-        'No urgent queue right now. Use this space for reading, timed drills, and more intentional practice.',
-      AppLanguage.vi =>
-        'Hiện chưa có hàng chờ gấp. Đây là lúc đẹp để đọc hiểu, luyện có nhịp và học tập trung hơn.',
-      AppLanguage.ja => '急ぎのキューはありません。今は読解や時間付きドリル、集中した練習に向いています。',
-    };
-  }
-
   String _recommendationLabel(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Recommended now',
     AppLanguage.vi => 'Gợi ý lúc này',
@@ -993,22 +673,16 @@ class _StudyHero extends StatelessWidget {
     AppLanguage.ja => '期限',
   };
 
-  String _weakLabel(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Weak',
-    AppLanguage.vi => 'Điểm yếu',
-    AppLanguage.ja => '苦手',
+  String _repairLabel(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Repair',
+    AppLanguage.vi => 'Sửa',
+    AppLanguage.ja => '補強',
   };
 
   String _levelLabel(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Level',
     AppLanguage.vi => 'Trình độ',
     AppLanguage.ja => 'レベル',
-  };
-
-  String _primaryLabel(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Start session',
-    AppLanguage.vi => 'Bắt đầu session',
-    AppLanguage.ja => 'セッション開始',
   };
 
   String _secondaryLabel(AppLanguage language) => switch (language) {
@@ -1021,16 +695,18 @@ class _StudyHero extends StatelessWidget {
 class _HeroFocusPanel extends StatelessWidget {
   const _HeroFocusPanel({
     required this.language,
-    required this.bestTool,
+    required this.primaryAction,
     required this.dueCount,
+    required this.grammarGhostCount,
     required this.vocabDue,
     required this.grammarDue,
     required this.kanjiDue,
   });
 
   final AppLanguage language;
-  final PracticeDestination? bestTool;
+  final PracticeSessionAction primaryAction;
   final int dueCount;
+  final int grammarGhostCount;
   final int vocabDue;
   final int grammarDue;
   final int kanjiDue;
@@ -1058,7 +734,7 @@ class _HeroFocusPanel extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.xs),
           Text(
-            bestTool?.title ?? _restTitle(language),
+            primaryAction.title,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.w900,
@@ -1067,7 +743,7 @@ class _HeroFocusPanel extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.xs),
           Text(
-            bestTool?.subtitle ?? _restSubtitle(language),
+            primaryAction.subtitle,
             style: const TextStyle(
               color: Color(0xFFE2E8F0),
               fontSize: 12.5,
@@ -1087,7 +763,7 @@ class _HeroFocusPanel extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppSpacing.sm),
-          if (dueCount == 0)
+          if (dueCount == 0 && grammarGhostCount == 0)
             Text(
               _emptyMix(language),
               style: const TextStyle(
@@ -1103,6 +779,14 @@ class _HeroFocusPanel extends StatelessWidget {
             _MixRow(label: _grammar(language), count: grammarDue, light: true),
             const SizedBox(height: AppSpacing.xs),
             _MixRow(label: _kanji(language), count: kanjiDue, light: true),
+            if (grammarGhostCount > 0) ...[
+              const SizedBox(height: AppSpacing.xs),
+              _MixRow(
+                label: _grammarGhosts(language),
+                count: grammarGhostCount,
+                light: true,
+              ),
+            ],
           ],
         ],
       ),
@@ -1115,30 +799,18 @@ class _HeroFocusPanel extends StatelessWidget {
     AppLanguage.ja => '次にやること',
   };
 
-  String _restTitle(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'You are clear to explore',
-    AppLanguage.vi => 'Bạn đang rảnh để mở rộng',
-    AppLanguage.ja => '今は余裕があります',
-  };
-
-  String _restSubtitle(AppLanguage language) => switch (language) {
-    AppLanguage.en =>
-      'When the queue is quiet, use immersion or a mock block to deepen comprehension.',
-    AppLanguage.vi =>
-      'Khi hàng đợi yên, hãy dùng đọc hiểu hoặc một block mock để đào sâu khả năng hiểu bài.',
-    AppLanguage.ja => 'キューが静かな時は、読解や模試で理解を深めるのに向いています。',
-  };
-
   String _mixTitle(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Review mix',
-    AppLanguage.vi => 'Cơ cấu hàng đợi',
-    AppLanguage.ja => '復習の内訳',
+    AppLanguage.en => 'Queue and repair',
+    AppLanguage.vi => 'Hàng đợi và sửa lỗi',
+    AppLanguage.ja => 'キューと補強',
   };
 
   String _emptyMix(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'No due review is waiting right now.',
-    AppLanguage.vi => 'Hiện chưa có mục ôn tập nào đến hạn.',
-    AppLanguage.ja => '今は期限の復習はありません。',
+    AppLanguage.en =>
+      'No active due queue or grammar ghosts are waiting right now.',
+    AppLanguage.vi =>
+      'Hiện chưa có hàng đến hạn hay grammar ghost nào đang chờ.',
+    AppLanguage.ja => '今は期限キューも文法ゴーストも待っていません。',
   };
 
   String _vocab(AppLanguage language) => switch (language) {
@@ -1157,6 +829,12 @@ class _HeroFocusPanel extends StatelessWidget {
     AppLanguage.en => 'Kanji',
     AppLanguage.vi => 'Kanji',
     AppLanguage.ja => '漢字',
+  };
+
+  String _grammarGhosts(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Grammar ghosts',
+    AppLanguage.vi => 'Grammar ghost',
+    AppLanguage.ja => '文法ゴースト',
   };
 }
 
@@ -1235,117 +913,371 @@ class _MixRow extends StatelessWidget {
   }
 }
 
-class _GoalCard extends StatelessWidget {
-  const _GoalCard({
-    required this.color,
-    required this.icon,
-    required this.title,
-    required this.subtitle,
-    required this.detail,
-    required this.ctaLabel,
-    required this.status,
+class _SessionPlanBoard extends StatelessWidget {
+  const _SessionPlanBoard({
+    required this.language,
+    required this.board,
+    required this.onOpenAction,
+  });
+
+  final AppLanguage language;
+  final PracticeSessionBoard board;
+  final ValueChanged<PracticeSessionAction> onOpenAction;
+
+  @override
+  Widget build(BuildContext context) {
+    final followUps = board.steps.skip(1).toList(growable: false);
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final wide = constraints.maxWidth >= AppBreakpoints.tablet;
+        final main = _SessionPrimaryCard(
+          language: language,
+          action: board.primaryAction,
+          onTap: () => onOpenAction(board.primaryAction),
+        );
+        final side = Column(
+          children: [
+            for (var index = 0; index < followUps.length; index++) ...[
+              _SessionStepTile(
+                language: language,
+                action: followUps[index],
+                stageIndex: index + 1,
+                onTap: () => onOpenAction(followUps[index]),
+              ),
+              if (index != followUps.length - 1)
+                const SizedBox(height: AppSpacing.sm),
+            ],
+          ],
+        );
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (wide)
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(flex: 6, child: main),
+                  if (followUps.isNotEmpty) ...[
+                    const SizedBox(width: AppSpacing.md),
+                    Expanded(flex: 5, child: side),
+                  ],
+                ],
+              )
+            else ...[
+              main,
+              if (followUps.isNotEmpty) ...[
+                const SizedBox(height: AppSpacing.md),
+                side,
+              ],
+            ],
+            const SizedBox(height: AppSpacing.md),
+            Wrap(
+              spacing: AppSpacing.md,
+              runSpacing: AppSpacing.md,
+              children: [
+                for (final signal in board.signals)
+                  SizedBox(
+                    width: wide
+                        ? (constraints.maxWidth - (AppSpacing.md * 2)) / 3
+                        : constraints.maxWidth,
+                    child: _SessionSignalTile(signal: signal),
+                  ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _SessionPrimaryCard extends StatelessWidget {
+  const _SessionPrimaryCard({
+    required this.language,
+    required this.action,
     required this.onTap,
   });
 
-  final Color color;
-  final IconData icon;
-  final String title;
-  final String subtitle;
-  final String detail;
-  final String ctaLabel;
-  final Widget status;
+  final AppLanguage language;
+  final PracticeSessionAction action;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      borderRadius: BorderRadius.circular(20),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(20),
-        child: Ink(
-          padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [color.withValues(alpha: 0.16), Colors.white],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: color.withValues(alpha: 0.26)),
-            boxShadow: HomeSurface.panelShadow,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return Container(
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [action.color.withValues(alpha: 0.16), Colors.white],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: action.color.withValues(alpha: 0.24)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
             children: [
-              Row(
-                children: [
-                  Container(
-                    width: 36,
-                    height: 36,
-                    decoration: BoxDecoration(
-                      color: color.withValues(alpha: 0.14),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Icon(icon, color: color, size: 19),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      title,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w900,
-                        color: Color(0xFF0F172A),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: AppSpacing.sm),
-                  status,
-                ],
-              ),
-              const SizedBox(height: 10),
-              Text(
-                subtitle,
-                style: const TextStyle(
-                  color: Color(0xFF0F172A),
-                  fontSize: 13.2,
-                  height: 1.35,
-                  fontWeight: FontWeight.w800,
+              Container(
+                width: 42,
+                height: 42,
+                decoration: BoxDecoration(
+                  color: action.color.withValues(alpha: 0.14),
+                  borderRadius: BorderRadius.circular(14),
                 ),
+                child: Icon(action.icon, color: action.color, size: 20),
               ),
-              const SizedBox(height: 6),
-              Text(
-                detail,
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: Color(0xFF475569),
-                  fontSize: 11.8,
-                  height: 1.42,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(height: 10),
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      ctaLabel,
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      _nowLabel(language),
                       style: TextStyle(
-                        color: color,
-                        fontSize: 12.5,
+                        color: action.color,
+                        fontSize: 10,
                         fontWeight: FontWeight.w900,
+                        letterSpacing: 0.7,
                       ),
                     ),
-                  ),
-                  Icon(Icons.arrow_outward_rounded, color: color, size: 16),
-                ],
+                    const SizedBox(height: 2),
+                    Text(
+                      action.title,
+                      style: const TextStyle(
+                        color: Color(0xFF0F172A),
+                        fontSize: 17,
+                        fontWeight: FontWeight.w900,
+                        height: 1.12,
+                      ),
+                    ),
+                  ],
+                ),
               ),
+              if (action.badge != null)
+                AppStatusChip(
+                  label: action.badge!,
+                  tone: AppStatusTone.primary,
+                ),
             ],
           ),
-        ),
+          const SizedBox(height: 12),
+          Text(
+            action.subtitle,
+            style: const TextStyle(
+              color: Color(0xFF334155),
+              fontSize: 12.7,
+              height: 1.5,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: 14),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              FilledButton.icon(
+                onPressed: onTap,
+                icon: const Icon(Icons.play_arrow_rounded, size: 18),
+                label: Text(action.ctaLabel),
+              ),
+              if (action.estimatedMinutes != null)
+                AppStatusChip(
+                  label: _minutesLabel(language, action.estimatedMinutes!),
+                  tone: AppStatusTone.neutral,
+                ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _nowLabel(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'DO THIS NOW',
+    AppLanguage.vi => 'LÀM NGAY BÂY GIỜ',
+    AppLanguage.ja => '今やること',
+  };
+
+  String _minutesLabel(AppLanguage language, int minutes) => switch (language) {
+    AppLanguage.en => '~${minutes}m',
+    AppLanguage.vi => '~${minutes}p',
+    AppLanguage.ja => '~$minutes分',
+  };
+}
+
+class _SessionStepTile extends StatelessWidget {
+  const _SessionStepTile({
+    required this.language,
+    required this.action,
+    required this.stageIndex,
+    required this.onTap,
+  });
+
+  final AppLanguage language;
+  final PracticeSessionAction action;
+  final int stageIndex;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: HomeSurface.panelBorder),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 36,
+            height: 36,
+            decoration: BoxDecoration(
+              color: action.color.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Center(
+              child: Text(
+                '${stageIndex + 1}',
+                style: TextStyle(
+                  color: action.color,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 14,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  _stageLabel(language, stageIndex),
+                  style: TextStyle(
+                    color: action.color,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 0.6,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  action.title,
+                  style: const TextStyle(
+                    color: Color(0xFF0F172A),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  action.subtitle,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: Color(0xFF475569),
+                    fontSize: 11.7,
+                    height: 1.42,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                TextButton.icon(
+                  onPressed: onTap,
+                  style: TextButton.styleFrom(
+                    foregroundColor: action.color,
+                    padding: EdgeInsets.zero,
+                    minimumSize: const Size(0, 0),
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    visualDensity: VisualDensity.compact,
+                  ),
+                  icon: const Icon(Icons.arrow_outward_rounded, size: 16),
+                  label: Text(action.ctaLabel),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _stageLabel(AppLanguage language, int stageIndex) {
+    if (stageIndex == 1) {
+      return switch (language) {
+        AppLanguage.en => 'NEXT',
+        AppLanguage.vi => 'KẾ TIẾP',
+        AppLanguage.ja => '次',
+      };
+    }
+    return switch (language) {
+      AppLanguage.en => 'THEN',
+      AppLanguage.vi => 'SAU ĐÓ',
+      AppLanguage.ja => 'その後',
+    };
+  }
+}
+
+class _SessionSignalTile extends StatelessWidget {
+  const _SessionSignalTile({required this.signal});
+
+  final PracticeSessionSignal signal;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: HomeSurface.panelBorder),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 36,
+            height: 36,
+            decoration: BoxDecoration(
+              color: signal.color.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(signal.icon, color: signal.color, size: 18),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${signal.label} · ${signal.value}',
+                  style: const TextStyle(
+                    color: Color(0xFF0F172A),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  signal.detail,
+                  style: const TextStyle(
+                    color: Color(0xFF475569),
+                    fontSize: 11.6,
+                    height: 1.4,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

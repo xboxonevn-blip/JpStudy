@@ -29,7 +29,9 @@ void main() {
     };
   }
 
-  Future<String> linkPath([String fileName = 'jpstudy_cloud_sync.json']) async {
+  Future<String> linkPath([
+    String fileName = 'jpstudy_linked_sync.json',
+  ]) async {
     final path = '${tempDir.path}${Platform.pathSeparator}$fileName';
     await CloudSyncService.linkTarget(path: path, displayName: fileName);
     return path;
@@ -43,18 +45,21 @@ void main() {
 
       expect(status.isLinked, isTrue);
       expect(status.target?.path, path);
-      expect(status.target?.displayName, 'jpstudy_cloud_sync.json');
+      expect(status.target?.displayName, 'jpstudy_linked_sync.json');
       expect(status.lastSyncedAt, isNull);
     });
 
-    test('linkTarget falls back to basename when displayName is omitted', () async {
-      final path = '${tempDir.path}${Platform.pathSeparator}custom_name.json';
-      await CloudSyncService.linkTarget(path: path);
+    test(
+      'linkTarget falls back to basename when displayName is omitted',
+      () async {
+        final path = '${tempDir.path}${Platform.pathSeparator}custom_name.json';
+        await CloudSyncService.linkTarget(path: path);
 
-      final target = await CloudSyncService.getLinkedTarget();
-      expect(target, isNotNull);
-      expect(target!.displayName, 'custom_name.json');
-    });
+        final target = await CloudSyncService.getLinkedTarget();
+        expect(target, isNotNull);
+        expect(target!.displayName, 'custom_name.json');
+      },
+    );
 
     test('unlinkTarget clears target and sync metadata', () async {
       await linkPath();
@@ -133,9 +138,11 @@ void main() {
 
     test('returns invalidChecksum for tampered file', () async {
       final path = await linkPath();
-      final envelope = await BackupSyncService.buildExportEnvelope(
-        buildPayload(DateTime(2026, 3, 7, 12, 0)),
-      )..['version'] = 999;
+      final envelope =
+          await BackupSyncService.buildExportEnvelope(
+              buildPayload(DateTime(2026, 3, 7, 12, 0)),
+            )
+            ..['version'] = 999;
       await File(path).writeAsString(
         const JsonEncoder.withIndent('  ').convert(envelope),
         flush: true,
@@ -170,21 +177,29 @@ void main() {
       expect(result.decision, CloudSyncDownloadDecision.missingRemoteFile);
     });
 
-    test('returns invalidFormat when linked file decodes to non-map JSON', () async {
-      final path = await linkPath();
-      await File(path).writeAsString(jsonEncode(['bad', 'shape']), flush: true);
+    test(
+      'returns invalidFormat when linked file decodes to non-map JSON',
+      () async {
+        final path = await linkPath();
+        await File(
+          path,
+        ).writeAsString(jsonEncode(['bad', 'shape']), flush: true);
 
-      final result = await CloudSyncService.prepareDownload();
-      expect(result.decision, CloudSyncDownloadDecision.invalidFormat);
-    });
+        final result = await CloudSyncService.prepareDownload();
+        expect(result.decision, CloudSyncDownloadDecision.invalidFormat);
+      },
+    );
 
-    test('returns readFailed when linked file contains malformed JSON', () async {
-      final path = await linkPath();
-      await File(path).writeAsString('{not-json', flush: true);
+    test(
+      'returns readFailed when linked file contains malformed JSON',
+      () async {
+        final path = await linkPath();
+        await File(path).writeAsString('{not-json', flush: true);
 
-      final result = await CloudSyncService.prepareDownload();
-      expect(result.decision, CloudSyncDownloadDecision.readFailed);
-    });
+        final result = await CloudSyncService.prepareDownload();
+        expect(result.decision, CloudSyncDownloadDecision.readFailed);
+      },
+    );
 
     test('returns remoteExportedAt parsed from payload', () async {
       final path = await linkPath();

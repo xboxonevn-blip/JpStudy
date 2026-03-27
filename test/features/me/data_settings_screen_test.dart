@@ -30,12 +30,22 @@ const _unlinkedStatus = CloudSyncStatus(
 
 const _linkedStatus = CloudSyncStatus(
   target: CloudSyncTarget(
-    path: '/tmp/jpstudy_cloud_sync.json',
-    displayName: 'jpstudy_cloud_sync.json',
+    path: '/tmp/jpstudy_linked_sync.json',
+    displayName: 'jpstudy_linked_sync.json',
   ),
   lastSyncedAt: null,
   lastRemoteExportedAt: null,
   lastDirection: null,
+);
+
+final _downloadedStatus = CloudSyncStatus(
+  target: CloudSyncTarget(
+    path: '/tmp/jpstudy_linked_sync.json',
+    displayName: 'jpstudy_linked_sync.json',
+  ),
+  lastSyncedAt: DateTime(2026, 3, 10, 8),
+  lastRemoteExportedAt: DateTime(2026, 3, 10, 8),
+  lastDirection: CloudSyncDirection.download,
 );
 
 Widget buildScreen({
@@ -62,19 +72,26 @@ void main() {
     SharedPreferences.setMockInitialValues({'backup.auto.enabled': true});
   });
 
-  testWidgets('shows backup and linked file controls', (tester) async {
+  testWidgets('shows backup and linked file sync controls', (tester) async {
     await tester.pumpWidget(buildScreen());
     await tester.pumpAndSettle();
 
     expect(find.text('Data controls'), findsAtLeastNWidgets(1));
-    expect(find.text('Linked sync file'), findsAtLeastNWidgets(1));
+    expect(find.text('Linked file sync'), findsAtLeastNWidgets(1));
+    expect(find.byKey(const ValueKey('linked_sync_headline')), findsOneWidget);
+    expect(find.text('How linked file sync works'), findsOneWidget);
     expect(find.text('Manual backup', skipOffstage: false), findsOneWidget);
   });
 
-  testWidgets('shows loading indicator when settings are not ready', (tester) async {
+  testWidgets('shows loading indicator when settings are not ready', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       buildScreen(
-        state: const DataSettingsState(isReady: false, autoBackupEnabled: false),
+        state: const DataSettingsState(
+          isReady: false,
+          autoBackupEnabled: false,
+        ),
       ),
     );
     await tester.pump();
@@ -93,7 +110,9 @@ void main() {
     expect(find.text('Auto backup on'), findsOneWidget);
   });
 
-  testWidgets('shows manual-only status when auto backup disabled', (tester) async {
+  testWidgets('shows manual-only status when auto backup disabled', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       buildScreen(
         state: const DataSettingsState(isReady: true, autoBackupEnabled: false),
@@ -104,29 +123,63 @@ void main() {
     expect(find.text('Manual only'), findsOneWidget);
   });
 
-  testWidgets('shows unlink button only when cloud file is linked', (tester) async {
+  testWidgets('shows unlink button only when linked file exists', (
+    tester,
+  ) async {
     await tester.pumpWidget(buildScreen(status: _linkedStatus));
     await tester.pumpAndSettle();
 
-    expect(find.text('Remove linked file'), findsOneWidget);
+    expect(find.text('Remove link'), findsOneWidget);
   });
 
-  testWidgets('does not show unlink button when cloud file is not linked',
-      (tester) async {
+  testWidgets('does not show unlink button when linked file is not set', (
+    tester,
+  ) async {
     await tester.pumpWidget(buildScreen(status: _unlinkedStatus));
     await tester.pumpAndSettle();
 
-    expect(find.text('Remove linked file'), findsNothing);
+    expect(find.text('Remove link'), findsNothing);
   });
 
-  testWidgets('shows choose/create/upload/download cloud actions', (tester) async {
+  testWidgets('shows choose/create/upload/download linked actions', (
+    tester,
+  ) async {
     await tester.pumpWidget(buildScreen(status: _linkedStatus));
     await tester.pumpAndSettle();
 
-    expect(find.text('Choose existing file'), findsOneWidget);
-    expect(find.text('Create new file'), findsOneWidget);
-    expect(find.text('Upload to linked file'), findsOneWidget);
-    expect(find.text('Download from linked file'), findsOneWidget);
+    expect(find.text('Choose file'), findsOneWidget);
+    expect(find.text('Create file'), findsOneWidget);
+    expect(find.text('Upload snapshot'), findsOneWidget);
+    expect(find.text('Download snapshot'), findsOneWidget);
+  });
+
+  testWidgets('shows setup recommendation when no file is linked', (
+    tester,
+  ) async {
+    await tester.pumpWidget(buildScreen(status: _unlinkedStatus));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const ValueKey('linked_sync_headline')), findsOneWidget);
+    expect(
+      find.text('Create or choose one shared JSON file first.'),
+      findsOneWidget,
+    );
+    expect(find.text('Create shared file'), findsOneWidget);
+    expect(find.text('Not linked yet'), findsOneWidget);
+  });
+
+  testWidgets('shows upload recommendation after device already downloaded', (
+    tester,
+  ) async {
+    await tester.pumpWidget(buildScreen(status: _downloadedStatus));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.text('This device has already pulled from the shared file.'),
+      findsOneWidget,
+    );
+    expect(find.text('Upload latest snapshot'), findsOneWidget);
+    expect(find.text('jpstudy_linked_sync.json'), findsWidgets);
   });
 
   testWidgets('shows auto backup time row with formatted time', (tester) async {
@@ -145,7 +198,9 @@ void main() {
     expect(find.textContaining('2'), findsWidgets);
   });
 
-  testWidgets('shows last auto backup label when timestamp exists', (tester) async {
+  testWidgets('shows last auto backup label when timestamp exists', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       buildScreen(
         state: DataSettingsState(

@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/theme/app_breakpoints.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/utils/kana_romaji.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
@@ -31,6 +32,8 @@ final searchIndexProvider = FutureProvider<List<_SearchEntry>>((ref) async {
           item.reading,
           item.displayMeaning(language),
         ),
+        reading: item.reading,
+        meaning: item.displayMeaning(language),
         keywords: [
           item.term,
           item.reading ?? '',
@@ -46,6 +49,17 @@ final searchIndexProvider = FutureProvider<List<_SearchEntry>>((ref) async {
         kind: _SearchKind.kanji,
         title: item.character,
         subtitle: _buildKanjiSubtitle(item, language),
+        reading: [item.onyomi, item.kunyomi]
+            .whereType<String>()
+            .where((value) => value.trim().isNotEmpty)
+            .join(' / '),
+        meaning: switch (language) {
+          AppLanguage.vi => item.meaning,
+          AppLanguage.en || AppLanguage.ja =>
+            (item.meaningEn?.trim().isNotEmpty ?? false)
+                ? item.meaningEn!.trim()
+                : item.meaning,
+        },
         keywords: [
           item.character,
           item.onyomi ?? '',
@@ -120,6 +134,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   String _debouncedQuery = '';
   _SearchFilter _filter = _SearchFilter.all;
   final Set<_SearchKind> _expandedSections = <_SearchKind>{};
+  final List<String> _recentQueries = <String>[];
 
   @override
   void dispose() {
@@ -135,8 +150,10 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     _debounce?.cancel();
     _debounce = Timer(const Duration(milliseconds: 180), () {
       if (!mounted) return;
+      final query = value.trim();
       setState(() {
-        _debouncedQuery = value.trim().toLowerCase();
+        _debouncedQuery = query;
+        _rememberQuery(query);
       });
     });
   }
@@ -146,6 +163,34 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     _queryController.clear();
     setState(() {
       _debouncedQuery = '';
+    });
+  }
+
+  void _rememberQuery(String query) {
+    if (query.length < 2) {
+      return;
+    }
+    final existingIndex = _recentQueries.indexWhere(
+      (value) => value.toLowerCase() == query.toLowerCase(),
+    );
+    if (existingIndex != -1) {
+      _recentQueries.removeAt(existingIndex);
+    }
+    _recentQueries.insert(0, query);
+    if (_recentQueries.length > 6) {
+      _recentQueries.removeRange(6, _recentQueries.length);
+    }
+  }
+
+  void _applySuggestedQuery(String query) {
+    _debounce?.cancel();
+    _queryController.value = TextEditingValue(
+      text: query,
+      selection: TextSelection.collapsed(offset: query.length),
+    );
+    setState(() {
+      _debouncedQuery = query;
+      _rememberQuery(query);
     });
   }
 
@@ -316,24 +361,19 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
             const SizedBox(height: AppSpacing.lg),
             indexAsync.when(
               data: (entries) {
-                final results = entries
-                    .where((entry) {
-                      if (_filter != _SearchFilter.all &&
-                          entry.kind.filter != _filter) {
-                        return false;
-                      }
-                      if (_debouncedQuery.isEmpty) {
-                        return true;
-                      }
-                      return entry.matches(_debouncedQuery);
-                    })
-                    .toList(growable: false);
+                final matches = _debouncedQuery.isEmpty
+                    ? const <_SearchMatch>[]
+                    : _buildSearchMatches(
+                        query: _debouncedQuery,
+                        entries: entries,
+                        filter: _filter,
+                      );
 
                 if (_debouncedQuery.isNotEmpty) {
                   return _buildSearchResults(
                     language,
                     _debouncedQuery,
-                    results,
+                    matches,
                   );
                 }
 
@@ -357,58 +397,140 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   Widget _buildSearchResults(
     AppLanguage language,
     String query,
-    List<_SearchEntry> results,
+    List<_SearchMatch> results,
   ) {
     if (results.isEmpty) {
       return Container(
         decoration: HomeSurface.softPanel(),
         padding: const EdgeInsets.all(24),
-        child: Text(_empty(language)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              _empty(language),
+              style: const TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
+                color: Color(0xFF334155),
+              ),
+            ),
+            if (_recentQueries.isNotEmpty) ...[
+              const SizedBox(height: AppSpacing.md),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  for (final item in _recentQueries)
+                    ActionChip(
+                      label: Text(item),
+                      onPressed: () => _applySuggestedQuery(item),
+                    ),
+                ],
+              ),
+            ],
+          ],
+        ),
       );
     }
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final columns = constraints.maxWidth >= 1240
-            ? 3
-            : constraints.maxWidth >= AppBreakpoints.tablet
-            ? 2
-            : 1;
-        final itemWidth = _itemWidth(constraints.maxWidth, columns);
+    final topHit = results.first;
+    final related = results.skip(1).toList(growable: false);
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: Text(
-                _resultSummary(language, results.length, query),
-                style: const TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w700,
-                  color: Color(0xFF64748B),
-                ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _SearchTopHitCard(
+          language: language,
+          summary: _resultSummary(language, results.length, query),
+          match: topHit,
+        ),
+        if (related.isNotEmpty) ...[
+          const SizedBox(height: AppSpacing.lg),
+          _SearchSection(
+            title: _relatedTitle(language),
+            subtitle: _relatedSubtitle(language, related.length),
+            children: [
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final columns = constraints.maxWidth >= 1240
+                      ? 3
+                      : constraints.maxWidth >= AppBreakpoints.tablet
+                      ? 2
+                      : 1;
+                  final itemWidth = _itemWidth(constraints.maxWidth, columns);
+
+                  return Wrap(
+                    spacing: AppSpacing.md,
+                    runSpacing: AppSpacing.md,
+                    children: [
+                      for (final match in related)
+                        SizedBox(
+                          width: itemWidth,
+                          child: _SearchTile(
+                            entry: match.entry,
+                            matchHint: _matchHintLabel(language, match.reason),
+                          ),
+                        ),
+                    ],
+                  );
+                },
               ),
-            ),
-            Wrap(
-              spacing: AppSpacing.md,
-              runSpacing: AppSpacing.md,
-              children: [
-                for (final entry in results)
-                  SizedBox(
-                    width: itemWidth,
-                    child: _SearchTile(entry: entry),
-                  ),
-              ],
-            ),
-          ],
-        );
-      },
+            ],
+          ),
+        ],
+      ],
     );
   }
 
   Widget _buildDiscoveryView(AppLanguage language, List<_SearchEntry> entries) {
     final sections = <Widget>[];
+
+    if (_recentQueries.isNotEmpty) {
+      sections.add(
+        _SearchSection(
+          title: _recentTitle(language),
+          subtitle: _recentSubtitle(language),
+          actionLabel: _clearRecentLabel(language),
+          onActionTap: () {
+            setState(_recentQueries.clear);
+          },
+          children: [
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                for (final query in _recentQueries)
+                  ActionChip(
+                    label: Text(query),
+                    onPressed: () => _applySuggestedQuery(query),
+                  ),
+              ],
+            ),
+          ],
+        ),
+      );
+    } else {
+      final prompts = _defaultPrompts(language);
+      sections.add(
+        _SearchSection(
+          title: _promptTitle(language),
+          subtitle: _promptSubtitle(language),
+          children: [
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                for (final prompt in prompts)
+                  ActionChip(
+                    label: Text(prompt.label),
+                    onPressed: () => _applySuggestedQuery(prompt.query),
+                  ),
+              ],
+            ),
+          ],
+        ),
+      );
+    }
 
     void addSection(_SearchKind kind, int previewLimit) {
       if (_filter != _SearchFilter.all && kind.filter != _filter) {
@@ -649,6 +771,165 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
         return '\u4e00\u81f4\u3059\u308b\u8a9e\u5f59\u30fb\u6f22\u5b57\u30fb\u8aad\u307f\u304c\u3042\u308a\u307e\u305b\u3093\u3002';
     }
   }
+
+  String _relatedTitle(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Related hits';
+      case AppLanguage.vi:
+        return 'Kết quả liên quan';
+      case AppLanguage.ja:
+        return '関連ヒット';
+    }
+  }
+
+  String _relatedSubtitle(AppLanguage language, int count) {
+    switch (language) {
+      case AppLanguage.en:
+        return '$count more result${count == 1 ? '' : 's'} ranked behind the top hit.';
+      case AppLanguage.vi:
+        return '$count kết quả khác xếp sau top hit.';
+      case AppLanguage.ja:
+        return 'トップヒットの後ろに$count件の候補があります。';
+    }
+  }
+
+  String _recentTitle(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Recent lookups';
+      case AppLanguage.vi:
+        return 'Tra cứu gần đây';
+      case AppLanguage.ja:
+        return '最近の検索';
+    }
+  }
+
+  String _recentSubtitle(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Jump back into the last queries you were checking.';
+      case AppLanguage.vi:
+        return 'Mở lại nhanh những truy vấn bạn vừa tra gần đây.';
+      case AppLanguage.ja:
+        return '直近で調べていたクエリにすぐ戻れます。';
+    }
+  }
+
+  String _clearRecentLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Clear';
+      case AppLanguage.vi:
+        return 'Xóa';
+      case AppLanguage.ja:
+        return 'クリア';
+    }
+  }
+
+  String _promptTitle(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Try these';
+      case AppLanguage.vi:
+        return 'Thử tra các mục này';
+      case AppLanguage.ja:
+        return 'まずはここから';
+    }
+  }
+
+  String _promptSubtitle(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Quick prompts to get into the bank faster.';
+      case AppLanguage.vi:
+        return 'Một vài gợi ý nhanh để vào đúng bank tra cứu ngay.';
+      case AppLanguage.ja:
+        return '検索バンクに素早く入るためのショートプロンプトです。';
+    }
+  }
+
+  List<({String query, String label})> _defaultPrompts(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return const [
+          (query: 'taberu', label: 'Romaji: taberu'),
+          (query: 'もり', label: 'Reading: もり'),
+          (query: 'forest', label: 'Meaning: forest'),
+        ];
+      case AppLanguage.vi:
+        return const [
+          (query: 'taberu', label: 'Romaji: taberu'),
+          (query: 'もり', label: 'Cách đọc: もり'),
+          (query: 'forest', label: 'Nghĩa: forest'),
+        ];
+      case AppLanguage.ja:
+        return const [
+          (query: 'taberu', label: 'ローマ字: taberu'),
+          (query: 'もり', label: '読み: もり'),
+          (query: 'forest', label: '意味: forest'),
+        ];
+    }
+  }
+
+  String _matchHintLabel(AppLanguage language, _SearchMatchReason reason) {
+    switch (reason) {
+      case _SearchMatchReason.exactTitle:
+        switch (language) {
+          case AppLanguage.en:
+            return 'Exact term';
+          case AppLanguage.vi:
+            return 'Khớp đúng từ';
+          case AppLanguage.ja:
+            return '完全一致';
+        }
+      case _SearchMatchReason.titlePrefix:
+        switch (language) {
+          case AppLanguage.en:
+            return 'Title prefix';
+          case AppLanguage.vi:
+            return 'Khớp đầu tiêu đề';
+          case AppLanguage.ja:
+            return '前方一致';
+        }
+      case _SearchMatchReason.reading:
+        switch (language) {
+          case AppLanguage.en:
+            return 'Reading match';
+          case AppLanguage.vi:
+            return 'Khớp cách đọc';
+          case AppLanguage.ja:
+            return '読み一致';
+        }
+      case _SearchMatchReason.romaji:
+        switch (language) {
+          case AppLanguage.en:
+            return 'Romaji match';
+          case AppLanguage.vi:
+            return 'Khớp romaji';
+          case AppLanguage.ja:
+            return 'ローマ字一致';
+        }
+      case _SearchMatchReason.meaning:
+        switch (language) {
+          case AppLanguage.en:
+            return 'Meaning match';
+          case AppLanguage.vi:
+            return 'Khớp nghĩa';
+          case AppLanguage.ja:
+            return '意味一致';
+        }
+      case _SearchMatchReason.keyword:
+        switch (language) {
+          case AppLanguage.en:
+            return 'Related keyword';
+          case AppLanguage.vi:
+            return 'Từ khóa liên quan';
+          case AppLanguage.ja:
+            return '関連キーワード';
+        }
+    }
+  }
 }
 
 class _SearchSection extends StatelessWidget {
@@ -711,11 +992,178 @@ class _SearchSection extends StatelessWidget {
   }
 }
 
+class _SearchTopHitCard extends StatelessWidget {
+  const _SearchTopHitCard({
+    required this.language,
+    required this.summary,
+    required this.match,
+  });
+
+  final AppLanguage language;
+  final String summary;
+  final _SearchMatch match;
+
+  @override
+  Widget build(BuildContext context) {
+    final color = match.entry.kind.color;
+
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [color.withValues(alpha: 0.16), Colors.white],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: color.withValues(alpha: 0.24)),
+      ),
+      padding: const EdgeInsets.all(18),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 42,
+                height: 42,
+                decoration: BoxDecoration(
+                  color: color.withValues(alpha: 0.14),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Icon(match.entry.kind.icon, color: color, size: 20),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      _topHitLabel(language),
+                      style: TextStyle(
+                        color: color,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 0.7,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      summary,
+                      style: const TextStyle(
+                        color: Color(0xFF334155),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              AppStatusChip(
+                label: _matchReasonLabel(language, match.reason),
+                tone: AppStatusTone.primary,
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.md),
+          Text(
+            match.entry.title,
+            style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w900,
+              color: Color(0xFF0F172A),
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            match.entry.subtitle,
+            style: const TextStyle(
+              color: Color(0xFF475569),
+              fontSize: 13,
+              height: 1.45,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          if ((match.entry.reading ?? '').trim().isNotEmpty) ...[
+            const SizedBox(height: 10),
+            Text(
+              _readingHint(language, match.entry.reading!),
+              style: const TextStyle(
+                color: Color(0xFF334155),
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  String _topHitLabel(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'TOP HIT',
+    AppLanguage.vi => 'TOP HIT',
+    AppLanguage.ja => 'トップヒット',
+  };
+
+  String _readingHint(AppLanguage language, String reading) =>
+      switch (language) {
+        AppLanguage.en => 'Reading: $reading',
+        AppLanguage.vi => 'Cách đọc: $reading',
+        AppLanguage.ja => '読み: $reading',
+      };
+
+  String _matchReasonLabel(AppLanguage language, _SearchMatchReason reason) {
+    switch (reason) {
+      case _SearchMatchReason.exactTitle:
+        return switch (language) {
+          AppLanguage.en => 'Exact term',
+          AppLanguage.vi => 'Khớp đúng',
+          AppLanguage.ja => '完全一致',
+        };
+      case _SearchMatchReason.titlePrefix:
+        return switch (language) {
+          AppLanguage.en => 'Prefix',
+          AppLanguage.vi => 'Khớp đầu',
+          AppLanguage.ja => '前方一致',
+        };
+      case _SearchMatchReason.reading:
+        return switch (language) {
+          AppLanguage.en => 'Reading',
+          AppLanguage.vi => 'Cách đọc',
+          AppLanguage.ja => '読み',
+        };
+      case _SearchMatchReason.romaji:
+        return switch (language) {
+          AppLanguage.en => 'Romaji',
+          AppLanguage.vi => 'Romaji',
+          AppLanguage.ja => 'ローマ字',
+        };
+      case _SearchMatchReason.meaning:
+        return switch (language) {
+          AppLanguage.en => 'Meaning',
+          AppLanguage.vi => 'Nghĩa',
+          AppLanguage.ja => '意味',
+        };
+      case _SearchMatchReason.keyword:
+        return switch (language) {
+          AppLanguage.en => 'Keyword',
+          AppLanguage.vi => 'Từ khóa',
+          AppLanguage.ja => 'キーワード',
+        };
+    }
+  }
+}
+
 class _SearchTile extends StatelessWidget {
-  const _SearchTile({required this.entry, this.compact = false});
+  const _SearchTile({
+    required this.entry,
+    this.compact = false,
+    this.matchHint,
+  });
 
   final _SearchEntry entry;
   final bool compact;
+  final String? matchHint;
 
   @override
   Widget build(BuildContext context) {
@@ -747,6 +1195,17 @@ class _SearchTile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  if (matchHint != null) ...[
+                    Text(
+                      matchHint!,
+                      style: TextStyle(
+                        color: entry.kind.color,
+                        fontSize: compact ? 10.5 : 11,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                  ],
                   Text(
                     entry.title,
                     maxLines: 1,
@@ -795,18 +1254,160 @@ class _SearchEntry {
     required this.kind,
     required this.title,
     required this.subtitle,
+    required this.meaning,
     required this.keywords,
+    this.reading,
   });
 
   final _SearchKind kind;
   final String title;
   final String subtitle;
+  final String? reading;
+  final String meaning;
   final List<String> keywords;
+}
 
-  bool matches(String query) {
-    final normalizedQuery = _normalizeSearchText(query);
-    return keywords.any(
-      (value) => _normalizeSearchText(value).contains(normalizedQuery),
-    );
+List<_SearchMatch> _buildSearchMatches({
+  required String query,
+  required List<_SearchEntry> entries,
+  required _SearchFilter filter,
+}) {
+  final matches = entries
+      .where(
+        (entry) => filter == _SearchFilter.all || entry.kind.filter == filter,
+      )
+      .map((entry) => _matchEntry(query, entry))
+      .whereType<_SearchMatch>()
+      .toList(growable: false);
+
+  matches.sort((left, right) {
+    final score = right.score.compareTo(left.score);
+    if (score != 0) {
+      return score;
+    }
+    return left.entry.title.compareTo(right.entry.title);
+  });
+  return matches;
+}
+
+_SearchMatch? _matchEntry(String query, _SearchEntry entry) {
+  final normalizedQuery = _normalizeSearchText(query);
+  final romajiQuery = _normalizeRomaji(query);
+  if (normalizedQuery.isEmpty && romajiQuery.isEmpty) {
+    return null;
   }
+
+  var bestScore = -1;
+  _SearchMatchReason? bestReason;
+
+  void consider({
+    required bool condition,
+    required int score,
+    required _SearchMatchReason reason,
+  }) {
+    if (!condition || score <= bestScore) {
+      return;
+    }
+    bestScore = score;
+    bestReason = reason;
+  }
+
+  final normalizedTitle = _normalizeSearchText(entry.title);
+  final normalizedReading = _normalizeSearchText(entry.reading ?? '');
+  final normalizedMeaning = _normalizeSearchText(entry.meaning);
+
+  consider(
+    condition: normalizedTitle == normalizedQuery,
+    score: 130,
+    reason: _SearchMatchReason.exactTitle,
+  );
+  consider(
+    condition:
+        normalizedTitle.startsWith(normalizedQuery) &&
+        normalizedQuery.isNotEmpty,
+    score: 116,
+    reason: _SearchMatchReason.titlePrefix,
+  );
+  consider(
+    condition:
+        normalizedReading == normalizedQuery && normalizedQuery.isNotEmpty,
+    score: 122,
+    reason: _SearchMatchReason.reading,
+  );
+  consider(
+    condition:
+        normalizedReading.startsWith(normalizedQuery) &&
+        normalizedQuery.isNotEmpty,
+    score: 108,
+    reason: _SearchMatchReason.reading,
+  );
+
+  final romajiTerms = <String>[
+    if (entry.title.isNotEmpty) _normalizeRomaji(kanaToRomaji(entry.title)),
+    if ((entry.reading ?? '').isNotEmpty)
+      _normalizeRomaji(kanaToRomaji(entry.reading!)),
+    for (final value in entry.keywords)
+      if (value.isNotEmpty) _normalizeRomaji(kanaToRomaji(value)),
+  ].where((value) => value.isNotEmpty).toSet();
+
+  consider(
+    condition: romajiQuery.isNotEmpty && romajiTerms.contains(romajiQuery),
+    score: 120,
+    reason: _SearchMatchReason.romaji,
+  );
+  consider(
+    condition:
+        romajiQuery.isNotEmpty &&
+        romajiTerms.any((value) => value.startsWith(romajiQuery)),
+    score: 104,
+    reason: _SearchMatchReason.romaji,
+  );
+  consider(
+    condition:
+        normalizedMeaning.isNotEmpty &&
+        normalizedQuery.isNotEmpty &&
+        normalizedMeaning.contains(normalizedQuery),
+    score: 96,
+    reason: _SearchMatchReason.meaning,
+  );
+  consider(
+    condition:
+        normalizedQuery.isNotEmpty &&
+        entry.keywords.any(
+          (value) => _normalizeSearchText(value).contains(normalizedQuery),
+        ),
+    score: 82,
+    reason: _SearchMatchReason.keyword,
+  );
+
+  if (bestReason == null) {
+    return null;
+  }
+
+  return _SearchMatch(entry: entry, score: bestScore, reason: bestReason!);
+}
+
+String _normalizeRomaji(String value) {
+  return value.trim().toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '');
+}
+
+enum _SearchMatchReason {
+  exactTitle,
+  titlePrefix,
+  reading,
+  romaji,
+  meaning,
+  keyword,
+}
+
+class _SearchMatch {
+  const _SearchMatch({
+    required this.entry,
+    required this.score,
+    required this.reason,
+  });
+
+  final _SearchEntry entry;
+  final int score;
+  final _SearchMatchReason reason;
 }

@@ -15,10 +15,10 @@ import 'package:jpstudy/features/search/search_screen.dart';
 
 class _FakeLessonRepository extends LessonRepository {
   _FakeLessonRepository({required this.vocab, required this.kanji})
-      : super(
-          AppDatabase(executor: NativeDatabase.memory()),
-          ContentDatabase(executor: NativeDatabase.memory()),
-        );
+    : super(
+        AppDatabase(executor: NativeDatabase.memory()),
+        ContentDatabase(executor: NativeDatabase.memory()),
+      );
 
   final List<VocabItem> vocab;
   final List<KanjiItem> kanji;
@@ -77,45 +77,44 @@ Widget buildSearchScreen({LessonRepository? repo}) {
 }
 
 void main() {
-  testWidgets(
-    'renders responsive lookup shell and updates query chrome',
-    (tester) async {
-      tester.view.physicalSize = const Size(1440, 1400);
-      tester.view.devicePixelRatio = 1;
-      addTearDown(tester.view.resetPhysicalSize);
-      addTearDown(tester.view.resetDevicePixelRatio);
+  testWidgets('renders responsive lookup shell and updates query chrome', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1440, 1400);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
 
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-            studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
-            searchIndexProvider.overrideWith((ref) async => const []),
-          ],
-          child: const MaterialApp(home: SearchScreen()),
-        ),
-      );
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+          searchIndexProvider.overrideWith((ref) async => const []),
+        ],
+        child: const MaterialApp(home: SearchScreen()),
+      ),
+    );
 
-      await tester.pumpAndSettle();
+    await tester.pumpAndSettle();
 
-      expect(find.text('Lookup'), findsAtLeastNWidgets(1));
-      expect(find.text('Current search bank'), findsOneWidget);
-      expect(find.text('All'), findsOneWidget);
-      expect(find.text('Vocab'), findsAtLeastNWidgets(1));
-      expect(find.text('Kanji'), findsAtLeastNWidgets(1));
-      expect(find.text('Kana'), findsAtLeastNWidgets(1));
-      expect(find.byType(TextField), findsOneWidget);
+    expect(find.text('Lookup'), findsAtLeastNWidgets(1));
+    expect(find.text('Current search bank'), findsOneWidget);
+    expect(find.text('All'), findsOneWidget);
+    expect(find.text('Vocab'), findsAtLeastNWidgets(1));
+    expect(find.text('Kanji'), findsAtLeastNWidgets(1));
+    expect(find.text('Kana'), findsAtLeastNWidgets(1));
+    expect(find.byType(TextField), findsOneWidget);
 
-      await tester.enterText(find.byType(TextField), 'taberu');
-      await tester.pump(const Duration(milliseconds: 220));
+    await tester.enterText(find.byType(TextField), 'taberu');
+    await tester.pump(const Duration(milliseconds: 220));
 
-      expect(find.byIcon(Icons.close_rounded), findsOneWidget);
-      expect(
-        find.text('No matches. Try a word, kanji, or reading.'),
-        findsOneWidget,
-      );
-    },
-  );
+    expect(find.byIcon(Icons.close_rounded), findsOneWidget);
+    expect(
+      find.text('No matches. Try a word, kanji, or reading.'),
+      findsOneWidget,
+    );
+  });
 
   testWidgets('shows categorized discovery sections from repository data', (
     tester,
@@ -140,7 +139,9 @@ void main() {
     expect(find.text('森'), findsOneWidget);
   });
 
-  testWidgets('matches by reading and shows search results summary', (tester) async {
+  testWidgets('matches by reading and shows search results summary', (
+    tester,
+  ) async {
     tester.view.physicalSize = const Size(1440, 1400);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
@@ -162,7 +163,55 @@ void main() {
     expect(find.text('森'), findsNothing);
   });
 
-  testWidgets('kana filter narrows visible results to kana entries', (tester) async {
+  testWidgets('matches romaji queries and promotes a top hit card', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1440, 1400);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      buildSearchScreen(
+        repo: _FakeLessonRepository(vocab: _vocab, kanji: _kanji),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.enterText(find.byType(TextField), 'taberu');
+    await tester.pump(const Duration(milliseconds: 220));
+
+    expect(find.text('TOP HIT'), findsOneWidget);
+    expect(find.text('1 result for "taberu"'), findsOneWidget);
+    expect(find.text('Romaji'), findsOneWidget);
+    expect(find.text('食べる'), findsOneWidget);
+  });
+
+  testWidgets('keeps recent lookups after clearing the query', (tester) async {
+    tester.view.physicalSize = const Size(1440, 1400);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      buildSearchScreen(
+        repo: _FakeLessonRepository(vocab: _vocab, kanji: _kanji),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.enterText(find.byType(TextField), 'taberu');
+    await tester.pump(const Duration(milliseconds: 220));
+    await tester.tap(find.byIcon(Icons.close_rounded));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Recent lookups'), findsOneWidget);
+    expect(find.text('taberu'), findsOneWidget);
+  });
+
+  testWidgets('kana filter narrows visible results to kana entries', (
+    tester,
+  ) async {
     tester.view.physicalSize = const Size(1440, 1400);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
@@ -183,7 +232,9 @@ void main() {
     expect(find.text('森'), findsNothing);
   });
 
-  testWidgets('kanji filter narrows visible results to kanji entries', (tester) async {
+  testWidgets('kanji filter narrows visible results to kanji entries', (
+    tester,
+  ) async {
     tester.view.physicalSize = const Size(1440, 1400);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
@@ -204,7 +255,9 @@ void main() {
     expect(find.text('ねこ'), findsNothing);
   });
 
-  testWidgets('shows load error when search index provider fails', (tester) async {
+  testWidgets('shows load error when search index provider fails', (
+    tester,
+  ) async {
     tester.view.physicalSize = const Size(1440, 1400);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
@@ -215,7 +268,9 @@ void main() {
         overrides: [
           appLanguageProvider.overrideWith((ref) => AppLanguage.en),
           studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
-          searchIndexProvider.overrideWith((ref) async => throw Exception('boom')),
+          searchIndexProvider.overrideWith(
+            (ref) async => throw Exception('boom'),
+          ),
         ],
         child: const MaterialApp(home: SearchScreen()),
       ),

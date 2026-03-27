@@ -5,7 +5,10 @@ import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
+import 'package:jpstudy/features/grammar/grammar_providers.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
+import 'package:jpstudy/features/home/providers/continue_provider.dart';
+import 'package:jpstudy/features/home/providers/weakness_radar_provider.dart';
 import 'package:jpstudy/features/practice/practice_screen.dart';
 
 const _kDashboard = DashboardState(
@@ -20,12 +23,29 @@ const _kDashboard = DashboardState(
   totalMistakeCount: 1,
 );
 
-Widget _buildScreen({DashboardState dashboard = _kDashboard}) {
+Widget _buildScreen({
+  DashboardState dashboard = _kDashboard,
+  ContinueAction? continueAction,
+  List<WeaknessRadarItem> weaknessItems = const [],
+  int grammarGhostCount = 0,
+}) {
   return ProviderScope(
     overrides: [
       appLanguageProvider.overrideWith((ref) => AppLanguage.en),
       studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
       dashboardProvider.overrideWith((ref) => Stream.value(dashboard)),
+      continueActionProvider.overrideWith(
+        (ref) async =>
+            continueAction ??
+            const ContinueAction(
+              type: ContinueActionType.grammarReview,
+              label: 'Review grammar',
+              count: 2,
+              data: [11, 12],
+            ),
+      ),
+      weaknessRadarProvider.overrideWith((ref) async => weaknessItems),
+      grammarGhostCountProvider.overrideWith((ref) async => grammarGhostCount),
     ],
     child: const MaterialApp(home: PracticeScreen()),
   );
@@ -61,20 +81,68 @@ void main() {
       expect(find.text(AppLanguage.en.practiceMatchLabel), findsWidgets);
     });
 
-    testWidgets('renders with zero-due dashboard', (tester) async {
-      await tester.pumpWidget(_buildScreen(
-        dashboard: const DashboardState(
-          streak: 0,
-          todayXp: 0,
-          vocabDue: 0,
-          grammarDue: 0,
-          kanjiDue: 0,
-          vocabMistakeCount: 0,
-          grammarMistakeCount: 0,
-          kanjiMistakeCount: 0,
-          totalMistakeCount: 0,
+    testWidgets('shows a session plan instead of a generic goals grid', (
+      tester,
+    ) async {
+      await tester.pumpWidget(_buildScreen());
+      await tester.pumpAndSettle();
+
+      expect(find.text('Today plan'), findsOneWidget);
+      expect(find.text('Run Recall Sprint first'), findsWidgets);
+      expect(find.text('Clear the grammar queue'), findsAtLeastNWidgets(1));
+      expect(find.text('Focus tools'), findsOneWidget);
+    });
+
+    testWidgets('surfaces grammar ghost repair when no due queue is waiting', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        _buildScreen(
+          dashboard: const DashboardState(
+            streak: 0,
+            todayXp: 0,
+            vocabDue: 0,
+            grammarDue: 0,
+            kanjiDue: 0,
+            vocabMistakeCount: 0,
+            grammarMistakeCount: 0,
+            kanjiMistakeCount: 0,
+            totalMistakeCount: 0,
+          ),
+          continueAction: const ContinueAction(
+            type: ContinueActionType.practiceMixed,
+            label: 'Practice',
+          ),
+          grammarGhostCount: 3,
         ),
-      ));
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('Repair grammar ghosts'), findsWidgets);
+      expect(find.text('Queue and repair'), findsOneWidget);
+    });
+
+    testWidgets('renders with zero-due dashboard', (tester) async {
+      await tester.pumpWidget(
+        _buildScreen(
+          dashboard: const DashboardState(
+            streak: 0,
+            todayXp: 0,
+            vocabDue: 0,
+            grammarDue: 0,
+            kanjiDue: 0,
+            vocabMistakeCount: 0,
+            grammarMistakeCount: 0,
+            kanjiMistakeCount: 0,
+            totalMistakeCount: 0,
+          ),
+          continueAction: const ContinueAction(
+            type: ContinueActionType.nextLesson,
+            label: 'Lesson 12',
+            data: 12,
+          ),
+        ),
+      );
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 100));
       // Screen renders without error

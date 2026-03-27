@@ -65,6 +65,10 @@ Widget buildLibraryScreen({
 }
 
 Future<void> _pumpScreen(WidgetTester tester, Widget widget) async {
+  tester.view.physicalSize = const Size(1400, 1800);
+  tester.view.devicePixelRatio = 1;
+  addTearDown(tester.view.resetPhysicalSize);
+  addTearDown(tester.view.resetDevicePixelRatio);
   await tester.pumpWidget(widget);
   await tester.pump();
   await tester.pump(const Duration(milliseconds: 200));
@@ -109,7 +113,11 @@ void main() {
     await _pumpScreen(tester, buildLibraryScreen());
     expect(find.text('Sections'), findsOneWidget);
     expect(find.text('Lessons'), findsOneWidget);
-    expect(find.text('Open content by area'), findsOneWidget);
+    expect(
+      find.text('Move between lookup, grammar, and the lesson roadmap.'),
+      findsOneWidget,
+    );
+    expect(find.text('Roadmap'), findsOneWidget);
   });
 
   testWidgets('shows quick access cards for vocab and grammar', (tester) async {
@@ -120,45 +128,60 @@ void main() {
     expect(find.text('Points and examples'), findsOneWidget);
   });
 
-  testWidgets('search app bar button navigates to search route', (tester) async {
+  testWidgets('search app bar button navigates to search route', (
+    tester,
+  ) async {
     await _pumpScreen(tester, buildLibraryScreen());
-    await _tapAndWait(tester, find.byIcon(Icons.search_rounded));
+    await _tapAndWait(tester, find.byTooltip('Search'));
     expect(find.text('Search Route'), findsOneWidget);
   });
 
-  testWidgets('hero CTA navigates to first lesson id from provider', (tester) async {
+  testWidgets('hero CTA navigates to first lesson id from provider', (
+    tester,
+  ) async {
     await _pumpScreen(tester, buildLibraryScreen());
     await _tapAndWait(tester, find.text('Open lessons'));
     expect(find.text('Lesson Route 1'), findsOneWidget);
   });
 
-  testWidgets('hero CTA falls back to level default lesson id when no lessons exist',
-      (tester) async {
-    await _pumpScreen(tester, buildLibraryScreen(lessons: const []));
-    await _tapAndWait(tester, find.text('Open lessons'));
-    expect(find.text('Lesson Route 1'), findsOneWidget);
-  });
+  testWidgets(
+    'hero CTA falls back to level default lesson id when no lessons exist',
+    (tester) async {
+      await _pumpScreen(tester, buildLibraryScreen(lessons: const []));
+      await _tapAndWait(tester, find.text('Open lessons'));
+      expect(find.text('Lesson Route 1'), findsOneWidget);
+    },
+  );
 
-  testWidgets('quick access vocab card navigates to vocab route', (tester) async {
+  testWidgets('quick access vocab card navigates to vocab route', (
+    tester,
+  ) async {
     await _pumpScreen(tester, buildLibraryScreen());
-    await _tapAndWait(tester, find.text('Vocab').first);
+    await _tapAndWait(tester, find.text('Vocab'));
     expect(find.text('Vocab Route'), findsOneWidget);
   });
 
-  testWidgets('quick access grammar card navigates to grammar route',
-      (tester) async {
+  testWidgets('quick access grammar card navigates to grammar route', (
+    tester,
+  ) async {
     await _pumpScreen(tester, buildLibraryScreen());
-    await _tapAndWait(tester, find.text('Grammar').first);
+    await _tapAndWait(tester, find.text('Grammar'));
     expect(find.text('Grammar Route'), findsOneWidget);
   });
 
-  testWidgets('lesson tile shows due count when due lessons exist', (tester) async {
+  testWidgets('lesson tile shows due count when due lessons exist', (
+    tester,
+  ) async {
     await _pumpScreen(tester, buildLibraryScreen());
-    expect(find.text('3 due'), findsOneWidget);
+    expect(
+      find.text('8/20 terms are covered and 3 need review now.'),
+      findsOneWidget,
+    );
   });
 
-  testWidgets('lesson tile shows completed progress when due count is zero',
-      (tester) async {
+  testWidgets('lesson tile shows completed progress when due count is zero', (
+    tester,
+  ) async {
     const lesson = LessonMeta(
       id: 2,
       level: 'N5',
@@ -173,6 +196,36 @@ void main() {
 
     await _pumpScreen(tester, buildLibraryScreen(lessons: const [lesson]));
     expect(find.text('4/10'), findsOneWidget);
-    expect(find.text('4/10 complete'), findsOneWidget);
+    expect(
+      find.text(
+        'This lesson is already moving, but still has room before it fully closes.',
+      ),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('due filter narrows the lesson map to due lessons only', (
+    tester,
+  ) async {
+    const freshLesson = LessonMeta(
+      id: 2,
+      level: 'N5',
+      title: 'Lesson 2',
+      isCustomTitle: false,
+      tags: '',
+      termCount: 10,
+      completedCount: 0,
+      dueCount: 0,
+      updatedAt: null,
+    );
+
+    await _pumpScreen(
+      tester,
+      buildLibraryScreen(lessons: const [_kLesson, freshLesson]),
+    );
+    await _tapAndWait(tester, find.widgetWithText(ChoiceChip, 'Due'));
+
+    expect(find.text('Lesson 1'), findsWidgets);
+    expect(find.text('Lesson 2'), findsNothing);
   });
 }
