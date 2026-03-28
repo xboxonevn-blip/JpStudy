@@ -388,6 +388,8 @@ class ProgressSummary {
     required this.totalXp,
     required this.todayXp,
     required this.streak,
+    required this.longestStreak,
+    required this.totalDaysStudied,
     required this.totalAttempts,
     required this.totalCorrect,
     required this.totalQuestions,
@@ -396,6 +398,8 @@ class ProgressSummary {
   final int totalXp;
   final int todayXp;
   final int streak;
+  final int longestStreak;
+  final int totalDaysStudied;
   final int totalAttempts;
   final int totalCorrect;
   final int totalQuestions;
@@ -2372,10 +2376,18 @@ class LessonRepository {
       }
     }
 
-    final totalXpRow = await (_db.selectOnly(
-      _db.userProgress,
-    )..addColumns([_db.userProgress.xp.sum()])).getSingleOrNull();
-    final totalXp = totalXpRow?.read(_db.userProgress.xp.sum()) ?? 0;
+    final progressAgg = await (_db.selectOnly(_db.userProgress)
+          ..addColumns([
+            _db.userProgress.xp.sum(),
+            _db.userProgress.streak.max(),
+            _db.userProgress.id.count(),
+          ]))
+        .getSingleOrNull();
+    final totalXp = progressAgg?.read(_db.userProgress.xp.sum()) ?? 0;
+    final longestStreak =
+        progressAgg?.read(_db.userProgress.streak.max()) ?? 0;
+    final totalDaysStudied =
+        progressAgg?.read(_db.userProgress.id.count()) ?? 0;
 
     final attemptStats =
         await (_db.selectOnly(_db.attempt)..addColumns([
@@ -2392,6 +2404,8 @@ class LessonRepository {
       totalXp: totalXp,
       todayXp: todayRow?.xp ?? 0,
       streak: streak,
+      longestStreak: longestStreak,
+      totalDaysStudied: totalDaysStudied,
       totalAttempts: totalAttempts,
       totalCorrect: totalCorrect,
       totalQuestions: totalQuestions,

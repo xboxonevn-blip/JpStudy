@@ -27,6 +27,8 @@ void main() {
               totalXp: 0,
               todayXp: 0,
               streak: streak,
+              longestStreak: streak,
+              totalDaysStudied: streak,
               totalAttempts: 0,
               totalCorrect: 0,
               totalQuestions: 0,

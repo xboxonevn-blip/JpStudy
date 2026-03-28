@@ -25,6 +25,8 @@ const _kSummary = ProgressSummary(
   totalXp: 0,
   todayXp: 0,
   streak: 0,
+  longestStreak: 0,
+  totalDaysStudied: 0,
   totalAttempts: 0,
   totalCorrect: 0,
   totalQuestions: 0,

@@ -27,6 +27,7 @@ import 'package:jpstudy/features/home/providers/weakness_radar_provider.dart';
 import 'package:jpstudy/features/immersion/models/immersion_article.dart';
 import 'package:jpstudy/features/immersion/providers/immersion_providers.dart';
 import 'package:jpstudy/features/immersion/services/immersion_service.dart';
+import 'package:jpstudy/features/progress/providers/mastery_provider.dart';
 import 'package:jpstudy/features/search/search_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -215,6 +216,8 @@ void main() {
               totalXp: 420,
               todayXp: 36,
               streak: 8,
+              longestStreak: 15,
+              totalDaysStudied: 42,
               totalAttempts: 48,
               totalCorrect: 39,
               totalQuestions: 48,
@@ -262,6 +265,9 @@ void main() {
                 const SrsStageBreakdown(learning: 4, young: 7, mature: 9),
           ),
           weaknessRadarProvider.overrideWith((ref) async => const []),
+          masterySnapshotProvider.overrideWith(
+            (ref) async => const MasterySnapshot(levels: []),
+          ),
           searchIndexProvider.overrideWith((ref) async => const []),
           immersionServiceProvider.overrideWithValue(immersionService),
         ],

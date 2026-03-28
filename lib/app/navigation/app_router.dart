@@ -397,6 +397,10 @@ class AppRouter {
                 builder: (context, state) => const MasteryDashboardScreen(),
               ),
               GoRoute(
+                path: '/me/data',
+                builder: (context, state) => const DataSettingsScreen(),
+              ),
+              GoRoute(
                 path: '/forecast',
                 builder: (context, state) => const ReviewForecastScreen(),
               ),

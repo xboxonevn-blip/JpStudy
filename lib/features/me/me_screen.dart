@@ -462,24 +462,22 @@ class _MeScreenState extends ConsumerState<MeScreen> {
   String _progressHint(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Review streaks, XP, retention, and history.';
+        return 'View streak, XP, retention, and history.';
       case AppLanguage.vi:
-        return 'Xem streak, XP, retention và lịch sử.';
+        return 'Xem streak, XP, retention v? l?ch s?.';
       case AppLanguage.ja:
-        return '連続学習、XP、定着率、履歴をまとめて確認します。';
+        return '?????XP??????????????????';
     }
   }
 
-<<<<<<< HEAD
-=======
   String _masteryTitle(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
         return 'JLPT Mastery';
       case AppLanguage.vi:
-        return 'Tiến độ JLPT';
+        return 'Ti?n ?? JLPT';
       case AppLanguage.ja:
-        return 'JLPT 習熟度';
+        return 'JLPT ???';
     }
   }
 
@@ -488,9 +486,9 @@ class _MeScreenState extends ConsumerState<MeScreen> {
       case AppLanguage.en:
         return 'Track mastery across vocab, grammar, and kanji per level.';
       case AppLanguage.vi:
-        return 'Theo dõi tiến trình từ vựng, ngữ pháp, hán tự theo cấp.';
+        return 'Theo d?i ti?n tr?nh t? v?ng, ng? ph?p, h?n t? theo c?p.';
       case AppLanguage.ja:
-        return 'レベル別に語彙・文法・漢字の習熟度を追跡します。';
+        return '????????????????????????';
     }
   }
 
@@ -499,9 +497,9 @@ class _MeScreenState extends ConsumerState<MeScreen> {
       case AppLanguage.en:
         return 'Review Forecast';
       case AppLanguage.vi:
-        return 'Dự báo ôn tập';
+        return 'D? b?o ?n t?p';
       case AppLanguage.ja:
-        return '復習予報';
+        return '????';
     }
   }
 
@@ -510,13 +508,12 @@ class _MeScreenState extends ConsumerState<MeScreen> {
       case AppLanguage.en:
         return 'See upcoming reviews, memory strength, and SRS analytics.';
       case AppLanguage.vi:
-        return 'Xem lịch ôn tập, sức mạnh trí nhớ và phân tích SRS.';
+        return 'Xem l?ch ?n t?p, s?c m?nh tr? nh? v? ph?n t?ch SRS.';
       case AppLanguage.ja:
-        return '今後の復習予定、記憶の強さ、SRS分析を確認します。';
+        return '??????????????SRS?????????';
     }
   }
 
->>>>>>> 6de2290 (feat(progress): add 14-day review forecast with stability analytics)
   String _achievementsHint(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:

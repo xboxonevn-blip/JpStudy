@@ -15,6 +15,7 @@ import 'package:jpstudy/features/home/widgets/weakness_radar_card.dart';
 import 'package:jpstudy/features/progress/providers/mastery_provider.dart';
 import 'package:jpstudy/features/progress/providers/progress_coach_provider.dart';
 import 'package:jpstudy/features/progress/providers/review_forecast_provider.dart';
+import 'package:go_router/go_router.dart';
 
 class ProgressScreen extends ConsumerWidget {
   const ProgressScreen({super.key});
@@ -59,6 +60,14 @@ class ProgressScreen extends ConsumerWidget {
                     _StatCard(
                       label: language.progressStreakLabel,
                       value: summary.streak.toString(),
+                    ),
+                    _StatCard(
+                      label: _tr(language, 'Best Streak', 'Streak cao nhất', '最長連続'),
+                      value: summary.longestStreak.toString(),
+                    ),
+                    _StatCard(
+                      label: _tr(language, 'Days Studied', 'Số ngày học', '学習日数'),
+                      value: summary.totalDaysStudied.toString(),
                     ),
                     _StatCard(
                       label: language.progressTodayXpLabel,
@@ -1011,6 +1020,17 @@ class _StageLabel extends StatelessWidget {
   }
 }
 
+String _tr(AppLanguage language, String en, String vi, String ja) {
+  switch (language) {
+    case AppLanguage.en:
+      return en;
+    case AppLanguage.vi:
+      return vi;
+    case AppLanguage.ja:
+      return ja;
+  }
+}
+
 String _progressHeroSubtitle(
   AppLanguage language,
   ProgressSummary summary,
@@ -1296,17 +1316,6 @@ class _ActivityCalendar extends ConsumerWidget {
         return vi[month - 1];
       case AppLanguage.ja:
         return ja[month - 1];
-    }
-  }
-
-  String _tr(AppLanguage language, String en, String vi, String ja) {
-    switch (language) {
-      case AppLanguage.en:
-        return en;
-      case AppLanguage.vi:
-        return vi;
-      case AppLanguage.ja:
-        return ja;
     }
   }
 

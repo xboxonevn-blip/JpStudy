@@ -12,6 +12,7 @@ import 'package:jpstudy/features/home/providers/continue_provider.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/home/providers/weakness_radar_provider.dart';
 import 'package:jpstudy/features/progress/providers/progress_coach_provider.dart';
+import 'package:jpstudy/features/progress/providers/mastery_provider.dart';
 import 'package:jpstudy/features/progress/progress_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,6 +20,8 @@ const _kSummary = ProgressSummary(
   totalXp: 500,
   todayXp: 50,
   streak: 7,
+  longestStreak: 14,
+  totalDaysStudied: 30,
   totalAttempts: 20,
   totalCorrect: 160,
   totalQuestions: 200,
@@ -128,12 +131,30 @@ Widget buildProgressScreen({
     dashboardProvider.overrideWith((ref) => Stream.value(dashboard)),
     continueActionProvider.overrideWith((ref) async => continueAction),
     weaknessRadarProvider.overrideWith((ref) async => weaknessItems),
+    masterySnapshotProvider.overrideWith(
+      (ref) async => const MasterySnapshot(levels: []),
+    ),
     progressCoachBoardProvider.overrideWith(
       (ref) async => coachBoard ?? buildCoachBoard(),
     ),
   ],
   child: const MaterialApp(home: ProgressScreen()),
 );
+Widget buildProgressScreen() => ProviderScope(
+      overrides: [
+        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+        studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+        progressSummaryProvider.overrideWith((ref) async => _kSummary),
+        reviewHistoryProvider.overrideWith((ref) async => const []),
+        attemptHistoryProvider.overrideWith((ref) async => const []),
+        srsRetentionProvider.overrideWith((ref) async => _kBreakdown),
+        weaknessRadarProvider.overrideWith((ref) async => const []),
+        masterySnapshotProvider.overrideWith(
+          (ref) async => const MasterySnapshot(levels: []),
+        ),
+      ],
+      child: const MaterialApp(home: ProgressScreen()),
+    );
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
