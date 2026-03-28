@@ -437,8 +437,10 @@ class StudyHubScreen extends ConsumerWidget {
         ],
       ),
     );
-    titleCtrl.dispose();
-    bodyCtrl.dispose();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      titleCtrl.dispose();
+      bodyCtrl.dispose();
+    });
   }
 
   Future<void> _showAnswerDialog(
@@ -475,7 +477,9 @@ class StudyHubScreen extends ConsumerWidget {
         ],
       ),
     );
-    ctrl.dispose();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ctrl.dispose();
+    });
   }
 
   IconData _topicIcon(StudyResourceTopic topic) => switch (topic) {
