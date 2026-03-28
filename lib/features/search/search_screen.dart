@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/theme/app_breakpoints.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/core/app_language.dart';
@@ -32,6 +33,7 @@ final searchIndexProvider = FutureProvider<List<_SearchEntry>>((ref) async {
           item.reading,
           item.displayMeaning(language),
         ),
+        id: item.id,
         reading: item.reading,
         meaning: item.displayMeaning(language),
         keywords: [
@@ -49,6 +51,7 @@ final searchIndexProvider = FutureProvider<List<_SearchEntry>>((ref) async {
         kind: _SearchKind.kanji,
         title: item.character,
         subtitle: _buildKanjiSubtitle(item, language),
+        id: item.id,
         reading: [item.onyomi, item.kunyomi]
             .whereType<String>()
             .where((value) => value.trim().isNotEmpty)
@@ -1165,10 +1168,20 @@ class _SearchTile extends StatelessWidget {
   final bool compact;
   final String? matchHint;
 
+  void _onTap(BuildContext context) {
+    if (entry.id == null) return;
+    if (entry.kind == _SearchKind.vocab || entry.kind == _SearchKind.kana) {
+      context.push('/vocab/${entry.id}');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.transparent,
+      child: InkWell(
+      onTap: entry.id != null ? () => _onTap(context) : null,
+      borderRadius: BorderRadius.circular(16),
       child: Container(
         decoration: HomeSurface.softPanel(),
         padding: EdgeInsets.symmetric(
@@ -1231,6 +1244,7 @@ class _SearchTile extends StatelessWidget {
           ],
         ),
       ),
+      ),
     );
   }
 }
@@ -1256,12 +1270,14 @@ class _SearchEntry {
     required this.subtitle,
     required this.meaning,
     required this.keywords,
+    this.id,
     this.reading,
   });
 
   final _SearchKind kind;
   final String title;
   final String subtitle;
+  final int? id;
   final String? reading;
   final String meaning;
   final List<String> keywords;

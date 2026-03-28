@@ -19,13 +19,10 @@ import 'package:jpstudy/features/immersion/immersion_home_screen.dart';
 import 'package:jpstudy/features/jlpt/screens/jlpt_coach_screen.dart';
 import 'package:jpstudy/features/jlpt/screens/jlpt_mock_pro_screen.dart';
 import 'package:jpstudy/features/jlpt/screens/jlpt_reading_screen.dart';
-<<<<<<< HEAD
+import 'package:jpstudy/features/flashcards/integration/flashcard_mode_integration.dart';
 import 'package:jpstudy/features/kanji_hub/kanji_hub_screen.dart';
 import 'package:jpstudy/features/kanji_reading/screens/home_kanji_reading_screen.dart';
 import 'package:jpstudy/features/leaderboard/leaderboard_screen.dart';
-=======
-import 'package:jpstudy/features/flashcards/integration/flashcard_mode_integration.dart';
->>>>>>> claude/confident-carson
 import 'package:jpstudy/features/learn/integration/learn_mode_integration.dart';
 import 'package:jpstudy/features/learn/integration/write_mode_integration.dart';
 import 'package:jpstudy/features/learn/models/learn_config.dart';
@@ -51,8 +48,9 @@ import 'package:jpstudy/features/test/integration/test_mode_integration.dart';
 import 'package:jpstudy/features/test/models/home_mock_exam_launch_args.dart';
 import 'package:jpstudy/features/test/screens/home_mock_exam_screen.dart';
 import 'package:jpstudy/features/test/screens/test_history_screen.dart';
-import 'package:jpstudy/features/vocab/screens/term_review_screen.dart';
 import 'package:jpstudy/features/vocab/screens/minna_lesson_catalog_screen.dart';
+import 'package:jpstudy/features/vocab/screens/term_review_screen.dart';
+import 'package:jpstudy/features/vocab/screens/vocab_detail_screen.dart';
 import 'package:jpstudy/features/vocab/vocab_screen.dart';
 import 'package:jpstudy/features/write/screens/home_handwriting_practice_screen.dart';
 
@@ -113,6 +111,13 @@ class AppRouter {
                     lessonStart: int.tryParse(query['lessonStart'] ?? '') ?? 1,
                     lessonEnd: int.tryParse(query['lessonEnd'] ?? '') ?? 25,
                   );
+                },
+              ),
+              GoRoute(
+                path: '/vocab/:id',
+                builder: (context, state) {
+                  final id = int.tryParse(state.pathParameters['id'] ?? '');
+                  return VocabDetailScreen(vocabId: id ?? 1);
                 },
               ),
             ],
@@ -229,7 +234,6 @@ class AppRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
-<<<<<<< HEAD
                 path: '/memory',
                 builder: (context, state) => const StudyHubScreen(),
               ),
@@ -240,7 +244,8 @@ class AppRouter {
               GoRoute(
                 path: '/mistakes',
                 builder: (context, state) => const MistakeScreen(),
-=======
+              ),
+              GoRoute(
                 path: '/lesson/:id/flashcards-enhanced',
                 builder: (context, state) {
                   final id = int.tryParse(state.pathParameters['id'] ?? '');
@@ -250,11 +255,6 @@ class AppRouter {
                     lessonTitle: title,
                   );
                 },
-              ),
-              GoRoute(
-                path: '/learn/session',
-                builder: _buildLearnScreenFromArgs,
->>>>>>> claude/confident-carson
               ),
               GoRoute(
                 path: '/learn/recovery-pack',
