@@ -9,6 +9,7 @@ import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
+import 'package:jpstudy/features/practice/models/recall_sprint_strategy.dart';
 
 const _kBatchSize = 5;
 
@@ -28,39 +29,62 @@ class SprintQuestion {
   final List<String> options;
 }
 
-final recallSprintQuestionsProvider =
-    FutureProvider.autoDispose<List<SprintQuestion>>((ref) async {
-  final repo = ref.read(lessonRepositoryProvider);
+Future<List<SprintQuestion>> buildRecallSprintQuestions(
+  LessonRepository repo, {
+  RecallSprintArgs? args,
+}) async {
+  final preferredIds = args?.preferredTermIds.toSet() ?? const <int>{};
+  final batchSize = args?.batchSize ?? _kBatchSize;
+  final rng = Random();
+
   final due = await repo.fetchAllDueTerms();
   if (due.length < 4) return const [];
 
-  final rng = Random();
-  final shuffled = List<UserLessonTermData>.from(due)..shuffle(rng);
-  final batch = shuffled.take(_kBatchSize).toList();
+  final prioritized = <UserLessonTermData>[
+    ...due.where((term) => preferredIds.contains(term.id)),
+    ...due.where((term) => !preferredIds.contains(term.id)),
+  ];
+
+  if (preferredIds.isEmpty) {
+    prioritized.shuffle(rng);
+  }
+
+  final batch = prioritized.take(batchSize).toList(growable: false);
 
   return batch.map((q) {
     final distractors = due
         .where((t) => t.id != q.id)
-        .toList()
+        .toList(growable: false)
       ..shuffle(rng);
-    final choices = [
-      q,
-      ...distractors.take(3),
-    ]..shuffle(rng);
+    final choices = [q, ...distractors.take(3)]..shuffle(rng);
     return SprintQuestion(
       term: q.term,
       correct: q.definition,
-      options: choices.map((t) => t.definition).toList(),
+      options: choices.map((t) => t.definition).toList(growable: false),
     );
-  }).toList();
+  }).toList(growable: false);
+}
+
+final recallSprintQuestionsProvider =
+    FutureProvider.autoDispose<List<SprintQuestion>>((ref) async {
+  final repo = ref.read(lessonRepositoryProvider);
+  return buildRecallSprintQuestions(repo);
 });
+
+final recallSprintQuestionsForArgsProvider = FutureProvider.autoDispose
+    .family<List<SprintQuestion>, RecallSprintArgs>((ref, args) async {
+      final repo = ref.read(lessonRepositoryProvider);
+      return buildRecallSprintQuestions(repo, args: args);
+    });
 
 // ---------------------------------------------------------------------------
 // Screen
 // ---------------------------------------------------------------------------
 
 class RecallSprintScreen extends ConsumerStatefulWidget {
-  const RecallSprintScreen({super.key});
+  const RecallSprintScreen({super.key, this.launchArgs});
+
+  final RecallSprintArgs? launchArgs;
 
   @override
   ConsumerState<RecallSprintScreen> createState() => _RecallSprintScreenState();
@@ -81,7 +105,9 @@ class _RecallSprintScreenState extends ConsumerState<RecallSprintScreen> {
   @override
   Widget build(BuildContext context) {
     final language = ref.watch(appLanguageProvider);
-    final questionsAsync = ref.watch(recallSprintQuestionsProvider);
+    final questionsAsync = widget.launchArgs == null
+        ? ref.watch(recallSprintQuestionsProvider)
+        : ref.watch(recallSprintQuestionsForArgsProvider(widget.launchArgs!));
 
     return Scaffold(
       appBar: AppBar(title: Text(language.practiceRecallSprintLabel)),
@@ -91,7 +117,7 @@ class _RecallSprintScreenState extends ConsumerState<RecallSprintScreen> {
             return AppPageShell(
               child: AppFeatureCard(
                 icon: Icons.bolt_rounded,
-                title: language.practiceRecallSprintLabel,
+                title: widget.launchArgs?.titleOverride ?? language.practiceRecallSprintLabel,
                 subtitle: _notEnoughTermsLabel(language),
               ),
             );
@@ -107,6 +133,7 @@ class _RecallSprintScreenState extends ConsumerState<RecallSprintScreen> {
             retrying: _retrying,
             retryIndex: _retryIndex,
             effectiveIndex: _effectiveIndex,
+            launchArgs: widget.launchArgs,
             onStart: () => setState(() {
               _started = true;
               _questionIndex = 0;
@@ -197,6 +224,7 @@ class _SprintBody extends StatelessWidget {
     required this.onSelect,
     required this.onNext,
     required this.onRestart,
+    this.launchArgs,
   });
 
   final AppLanguage language;
@@ -213,6 +241,7 @@ class _SprintBody extends StatelessWidget {
   final void Function(String) onSelect;
   final VoidCallback onNext;
   final VoidCallback onRestart;
+  final RecallSprintArgs? launchArgs;
 
   @override
   Widget build(BuildContext context) {
@@ -234,7 +263,7 @@ class _SprintBody extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          language.practiceRecallSprintLabel,
+          launchArgs?.titleOverride ?? language.practiceRecallSprintLabel,
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w900,
@@ -243,7 +272,7 @@ class _SprintBody extends StatelessWidget {
         ),
         const SizedBox(height: AppSpacing.sm),
         Text(
-          language.practiceRecallSprintSubtitle,
+          launchArgs?.subtitleOverride ?? language.practiceRecallSprintSubtitle,
           style: TextStyle(
             color: palette.ink.withValues(alpha: 0.65),
             fontWeight: FontWeight.w600,

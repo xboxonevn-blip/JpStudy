@@ -12,6 +12,7 @@ import 'package:jpstudy/data/models/mistake_context.dart';
 import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/repositories/content_repository.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
+import 'package:jpstudy/features/games/providers/game_vocab_pool_provider.dart';
 import 'package:jpstudy/features/games/match_game/logic/match_engine.dart';
 import 'package:jpstudy/features/mistakes/repositories/mistake_repository.dart';
 
@@ -44,21 +45,6 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
   List<VocabItem> _currentItems = [];
   final Map<int, VocabItem> _currentItemById = {};
   final Map<int, int?> _resolvedTermIdByContentId = {};
-
-  String _meaningForLanguage(
-    AppLanguage language, {
-    required String meaningVi,
-    required String? meaningEn,
-  }) {
-    final english = meaningEn?.trim() ?? '';
-    switch (language) {
-      case AppLanguage.vi:
-        return meaningVi;
-      case AppLanguage.en:
-      case AppLanguage.ja:
-        return english.isNotEmpty ? english : meaningVi;
-    }
-  }
 
   @override
   void dispose() {
@@ -374,31 +360,14 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
   }
 
   Widget _buildBody(StudyLevel level) {
-    final vocabAsync = ref.watch(vocabPreviewProvider(level.shortLabel));
+    final vocabAsync = ref.watch(gameVocabPoolProvider);
 
     return vocabAsync.when(
-      data: (dataItems) {
+      data: (items) {
         final language = ref.read(appLanguageProvider);
-        if (dataItems.isEmpty) {
+        if (items.isEmpty) {
           return Center(child: Text(language.noVocabFoundLabel));
         }
-
-        // Map to VocabItem
-        final items = dataItems.map((e) {
-          final meaning = _meaningForLanguage(
-            language,
-            meaningVi: e.meaning,
-            meaningEn: e.meaningEn,
-          );
-          return VocabItem(
-            id: e.id,
-            term: e.term,
-            reading: e.reading,
-            meaning: meaning,
-            meaningEn: e.meaningEn,
-            level: e.level,
-          );
-        }).toList();
 
         final timeAttackTotalScore = _timeAttackScore + _timeAttackBonus;
 

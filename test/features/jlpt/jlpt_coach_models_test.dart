@@ -303,6 +303,33 @@ void main() {
       );
       expect(profile.source, 'mock_exam');
     });
+
+    test('mergeJlptDiagnosisProfiles accumulates prior evidence', () {
+      final existing = buildJlptDiagnosisProfile(
+        source: 'reading',
+        signals: const [
+          JlptSkillSignal(area: JlptSkillArea.reading, correct: true),
+          JlptSkillSignal(area: JlptSkillArea.vocabulary, correct: false),
+        ],
+      );
+
+      final merged = mergeJlptDiagnosisProfiles(
+        source: 'mock_exam',
+        existing: existing,
+        signals: const [
+          JlptSkillSignal(area: JlptSkillArea.vocabulary, correct: true),
+          JlptSkillSignal(area: JlptSkillArea.grammar, correct: true),
+        ],
+      );
+
+      expect(merged.source, 'mock_exam');
+      expect(merged.statFor(JlptSkillArea.reading).total, 1);
+      expect(merged.statFor(JlptSkillArea.reading).correct, 1);
+      expect(merged.statFor(JlptSkillArea.vocabulary).total, 2);
+      expect(merged.statFor(JlptSkillArea.vocabulary).correct, 1);
+      expect(merged.statFor(JlptSkillArea.grammar).total, 1);
+      expect(merged.statFor(JlptSkillArea.grammar).correct, 1);
+    });
   });
 
   // ---------------------------------------------------------------------------

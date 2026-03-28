@@ -8,6 +8,7 @@ import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
+import 'package:jpstudy/features/study_hub/providers/study_hub_board_provider.dart';
 import 'providers/study_hub_provider.dart';
 
 // ---------------------------------------------------------------------------
@@ -29,6 +30,30 @@ String _jlptCardSubtitle(AppLanguage l, StudyLevel level) => _tr(l,
 
 String _textbookSectionTitle(AppLanguage l) => _tr(l,
     en: 'Textbook Tracker', vi: 'Theo dõi giáo trình', ja: '教材トラッカー');
+
+String _lessonDecksSectionTitle(AppLanguage l) => _tr(l,
+    en: 'My Lesson Decks', vi: 'Bộ bài học của tôi', ja: 'マイレッスン');
+
+String _lessonDecksSectionCaption(AppLanguage l) => _tr(l,
+    en: 'Live progress from your actual lessons and due reviews.',
+    vi: 'Tiến độ thật từ các bài học và lượt ôn đến hạn của bạn.',
+    ja: '実際のレッスン進捗と期限レビューを表示します。');
+
+String _nextUpLabel(AppLanguage l) => _tr(l,
+    en: 'Next Up', vi: 'Tiếp theo', ja: '次にやること');
+
+String _continueLessonLabel(AppLanguage l) => _tr(l,
+    en: 'Continue lesson', vi: 'Tiếp tục bài học', ja: 'レッスンを続ける');
+
+String _lessonProgressLabel(AppLanguage l, int percent, int dueCount) => _tr(l,
+    en: '$percent% complete • $dueCount due',
+    vi: 'Hoàn thành $percent% • $dueCount đến hạn',
+    ja: '$percent% 完了 • $dueCount 件期限');
+
+String _lessonDecksEmptyLabel(AppLanguage l) => _tr(l,
+    en: 'Start a lesson or build review progress to unlock live lesson decks here.',
+    vi: 'Hãy bắt đầu bài học hoặc tạo tiến độ ôn tập để mở phần bộ bài học trực tiếp ở đây.',
+    ja: 'レッスンや復習を始めると、ここにライブのレッスン一覧が表示されます。');
 
 String _resourceSectionTitle(AppLanguage l) => _tr(l,
     en: 'Resource Library', vi: 'Thư viện tài nguyên', ja: 'リソースライブラリ');
@@ -58,6 +83,7 @@ class StudyHubScreen extends ConsumerWidget {
     final language = ref.watch(appLanguageProvider);
     final level = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
     final hub = ref.watch(studyHubProvider);
+    final lessonDecksAsync = ref.watch(studyHubDecksProvider);
 
     final filtered = filteredResources(hub);
     final resources = filtered.isNotEmpty ? filtered : studyResources.take(6).toList();
@@ -79,6 +105,99 @@ class StudyHubScreen extends ConsumerWidget {
               status: AppStatusChip(
                 label: level.shortLabel,
                 tone: AppStatusTone.primary,
+              ),
+            ),
+            const SizedBox(height: AppSpacing.lg),
+
+            AppSectionCard(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppSectionHeader(
+                    title: _lessonDecksSectionTitle(language),
+                    caption: _lessonDecksSectionCaption(language),
+                  ),
+                  const SizedBox(height: AppSpacing.sm),
+                  lessonDecksAsync.when(
+                    data: (board) {
+                      if (board.nextUp == null &&
+                          board.activeDecks.isEmpty &&
+                          board.completedDecks.isEmpty) {
+                        return _StudyHubEmptyCopy(
+                          label: _lessonDecksEmptyLabel(language),
+                        );
+                      }
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (board.nextUp != null) ...[
+                            Text(
+                              _nextUpLabel(language),
+                              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                                fontWeight: FontWeight.w800,
+                                color: context.appPalette.ink,
+                              ),
+                            ),
+                            const SizedBox(height: AppSpacing.xs),
+                            AppCompactRow(
+                              icon: Icons.play_circle_fill_rounded,
+                              title: board.nextUp!.title,
+                              subtitle: _lessonProgressLabel(
+                                language,
+                                board.nextUp!.progressPercent,
+                                board.nextUp!.dueCount,
+                              ),
+                              status: AppStatusChip(
+                                label: _continueLessonLabel(language),
+                                tone: board.nextUp!.dueCount > 0
+                                    ? AppStatusTone.warning
+                                    : AppStatusTone.primary,
+                              ),
+                              onTap: () => context.push('/lesson/${board.nextUp!.id}'),
+                            ),
+                            const SizedBox(height: AppSpacing.md),
+                          ],
+                          for (final deck in board.activeDecks.take(4))
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+                              child: AppCompactRow(
+                                icon: deck.dueCount > 0
+                                    ? Icons.schedule_rounded
+                                    : Icons.menu_book_rounded,
+                                title: deck.title,
+                                subtitle: _lessonProgressLabel(
+                                  language,
+                                  deck.progressPercent,
+                                  deck.dueCount,
+                                ),
+                                status: AppStatusChip(
+                                  label: deck.dueCount > 0
+                                      ? '${deck.dueCount}'
+                                      : '${deck.progressPercent}%',
+                                  tone: deck.dueCount > 0
+                                      ? AppStatusTone.warning
+                                      : AppStatusTone.primary,
+                                ),
+                                onTap: () => context.push('/lesson/${deck.id}'),
+                              ),
+                            ),
+                          if (board.completedDecks.isNotEmpty)
+                            Text(
+                              '${board.completedDecks.length} ${_tr(language, en: 'completed', vi: 'đã xong', ja: '完了')}',
+                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                color: context.appPalette.ink.withValues(alpha: 0.6),
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                        ],
+                      );
+                    },
+                    loading: () => const Center(child: CircularProgressIndicator()),
+                    error: (_, _) => _StudyHubEmptyCopy(
+                      label: _lessonDecksEmptyLabel(language),
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: AppSpacing.lg),
@@ -894,6 +1013,31 @@ class _QaThreadCardState extends State<_QaThreadCard> {
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _StudyHubEmptyCopy extends StatelessWidget {
+  const _StudyHubEmptyCopy({required this.label});
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+      child: Center(
+        child: Text(
+          label,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 14,
+            height: 1.5,
+            fontWeight: FontWeight.w600,
+            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
+          ),
+        ),
       ),
     );
   }

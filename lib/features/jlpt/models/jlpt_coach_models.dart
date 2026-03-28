@@ -344,6 +344,40 @@ JlptDiagnosisProfile buildJlptDiagnosisProfile({
   );
 }
 
+JlptDiagnosisProfile mergeJlptDiagnosisProfiles({
+  required String source,
+  JlptDiagnosisProfile? existing,
+  required Iterable<JlptSkillSignal> signals,
+  DateTime? now,
+}) {
+  final incoming = buildJlptDiagnosisProfile(
+    source: source,
+    signals: signals,
+    now: now,
+  );
+
+  if (existing == null) {
+    return incoming;
+  }
+
+  final merged = <JlptSkillArea, JlptAreaStat>{};
+  for (final area in JlptSkillArea.values) {
+    final previous = existing.statFor(area);
+    final next = incoming.statFor(area);
+    merged[area] = JlptAreaStat(
+      area: area,
+      correct: previous.correct + next.correct,
+      total: previous.total + next.total,
+    );
+  }
+
+  return JlptDiagnosisProfile(
+    generatedAt: now ?? DateTime.now(),
+    source: source,
+    stats: merged,
+  );
+}
+
 JlptSevenDayPlan buildJlptSevenDayPlan(JlptDiagnosisProfile profile) {
   final weakAreas = profile.weakestFirst().map((entry) => entry.area).toList();
   final weakest = weakAreas.isNotEmpty ? weakAreas[0] : JlptSkillArea.reading;

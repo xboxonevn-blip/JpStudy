@@ -47,7 +47,12 @@ class JlptCoachService {
     required String source,
     required List<JlptSkillSignal> signals,
   }) async {
-    final profile = buildJlptDiagnosisProfile(source: source, signals: signals);
+    final existing = await loadSnapshot();
+    final profile = mergeJlptDiagnosisProfiles(
+      source: source,
+      existing: existing?.profile,
+      signals: signals,
+    );
     final plan = buildJlptSevenDayPlan(profile);
     final snapshot = JlptCoachSnapshot(profile: profile, plan: plan);
     await saveSnapshot(snapshot);

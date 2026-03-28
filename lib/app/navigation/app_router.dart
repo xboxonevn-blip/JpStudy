@@ -32,6 +32,7 @@ import 'package:jpstudy/features/me/me_screen.dart';
 import 'package:jpstudy/features/me/screens/data_settings_screen.dart';
 import 'package:jpstudy/features/mistakes/screens/mistake_screen.dart';
 import 'package:jpstudy/features/practice/practice_screen.dart';
+import 'package:jpstudy/features/practice/models/recall_sprint_strategy.dart';
 import 'package:jpstudy/features/practice/screens/recall_sprint_screen.dart';
 import 'package:jpstudy/features/progress/progress_screen.dart';
 import 'package:jpstudy/features/search/search_screen.dart';
@@ -118,7 +119,11 @@ class AppRouter {
               ),
               GoRoute(
                 path: '/practice/recall-sprint',
-                builder: (context, state) => const RecallSprintScreen(),
+                builder: (context, state) => RecallSprintScreen(
+                  launchArgs: state.extra is RecallSprintArgs
+                      ? state.extra as RecallSprintArgs
+                      : null,
+                ),
               ),
               GoRoute(
                 path: '/study-hub',

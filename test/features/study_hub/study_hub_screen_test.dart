@@ -6,6 +6,7 @@ import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
+import 'package:jpstudy/features/study_hub/providers/study_hub_board_provider.dart';
 import 'package:jpstudy/features/study_hub/study_hub_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,6 +25,13 @@ Widget _buildScreen() {
     overrides: [
       appLanguageProvider.overrideWith((ref) => AppLanguage.en),
       studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+      studyHubDecksProvider.overrideWith(
+        (ref) async => const StudyHubDecksBoard(
+          nextUp: null,
+          activeDecks: [],
+          completedDecks: [],
+        ),
+      ),
     ],
     child: MaterialApp.router(routerConfig: router),
   );
@@ -40,6 +48,7 @@ void main() {
 
     expect(find.text('Study Hub'), findsOneWidget);
     expect(find.text('JLPT Prep'), findsOneWidget);
+    expect(find.text('My Lesson Decks'), findsOneWidget);
     expect(find.text('Textbook Tracker'), findsOneWidget);
     expect(find.text('Onboarding Roadmap'), findsOneWidget);
     expect(find.text('Exam Checklist'), findsOneWidget);
@@ -59,7 +68,7 @@ void main() {
   testWidgets('resource filters narrow results and clear restores them', (
     tester,
   ) async {
-    tester.view.physicalSize = const Size(1440, 2200);
+    tester.view.physicalSize = const Size(1440, 2600);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
@@ -86,7 +95,7 @@ void main() {
   testWidgets('textbook tracker and exam date controls update UI state', (
     tester,
   ) async {
-    tester.view.physicalSize = const Size(1440, 2200);
+    tester.view.physicalSize = const Size(1440, 3200);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
@@ -98,6 +107,13 @@ void main() {
     await tester.tap(find.byIcon(Icons.add_circle_outline).first);
     await tester.pumpAndSettle();
     expect(find.text('Lesson 1 / 25'), findsOneWidget);
+
+    await tester.scrollUntilVisible(
+      find.text('Set +90 days'),
+      300,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.pumpAndSettle();
 
     expect(find.text('No target exam date set yet.'), findsOneWidget);
     await tester.tap(find.text('Set +90 days'));
@@ -111,7 +127,7 @@ void main() {
   });
 
   testWidgets('Q&A flow can ask and answer a new question', (tester) async {
-    tester.view.physicalSize = const Size(1440, 2400);
+    tester.view.physicalSize = const Size(1440, 2800);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);

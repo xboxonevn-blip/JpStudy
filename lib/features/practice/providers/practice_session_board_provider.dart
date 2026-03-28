@@ -9,6 +9,8 @@ import 'package:jpstudy/features/grammar/screens/grammar_practice_screen.dart';
 import 'package:jpstudy/features/home/providers/continue_provider.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/home/providers/weakness_radar_provider.dart';
+import 'package:jpstudy/features/learn/models/learn_session_args.dart';
+import 'package:jpstudy/features/practice/models/recall_sprint_strategy.dart';
 
 final practiceSessionBoardProvider = Provider<PracticeSessionBoard>((ref) {
   final language = ref.watch(appLanguageProvider);
@@ -68,6 +70,7 @@ PracticeSessionBoard buildPracticeSessionBoard({
           vocabDue: vocabDue,
           grammarDue: grammarDue,
           kanjiDue: kanjiDue,
+          weaknessItems: weaknessItems,
         )
       : specificDueAction;
   final weaknessAction = _weaknessAction(
@@ -242,7 +245,9 @@ PracticeSessionAction _recallSprintAction({
   required int vocabDue,
   required int grammarDue,
   required int kanjiDue,
+  required List<WeaknessRadarItem> weaknessItems,
 }) {
+  final preferredTermIds = _preferredRecallSprintIds(weaknessItems);
   final pieces = <String>[
     if (vocabDue > 0)
       _l(
@@ -280,16 +285,52 @@ PracticeSessionAction _recallSprintAction({
       en: '${pieces.join(' · ')} are all pulling at once. Sweep the mixed queue before choosing a deeper lane.',
       vi: '${pieces.join(' · ')} đang kéo cùng lúc. Quét nhanh hàng đợi tổng hợp trước rồi mới vào lane sâu hơn.',
       ja: '${pieces.join(' · ')} が同時に動いています。先に混合キューを一掃してから深いレーンへ進みましょう。',
-    ),
-    ctaLabel: _l(language, en: 'Open sprint', vi: 'Mở sprint', ja: 'スプリント開始'),
-    route: '/practice/recall-sprint',
-    icon: Icons.bolt_rounded,
-    color: const Color(0xFF7C3AED),
-    badge: _l(language, en: 'Do this now', vi: 'Làm ngay', ja: '今やる'),
-    estimatedMinutes: dueCount > 0
-        ? (dueCount * 6 / 60).ceil().clamp(5, 20)
-        : 5,
-  );
+      ),
+      ctaLabel: _l(language, en: 'Open sprint', vi: 'Mở sprint', ja: 'スプリント開始'),
+      route: '/practice/recall-sprint',
+      extra: RecallSprintArgs(
+        strategy: preferredTermIds.isNotEmpty
+            ? RecallSprintStrategy.weakVocab
+            : RecallSprintStrategy.mixedDue,
+        preferredTermIds: preferredTermIds,
+        batchSize: 5,
+        titleOverride: _l(
+          language,
+          en: 'Recall Sprint',
+          vi: 'Recall Sprint',
+          ja: 'リコールスプリント',
+        ),
+        subtitleOverride: preferredTermIds.isNotEmpty
+            ? _l(
+                language,
+                en: 'Start with the due vocabulary that is still shaky.',
+                vi: 'Bắt đầu từ những từ đến hạn nhưng vẫn chưa chắc.',
+                ja: '期限が来ていて、まだ不安定な語彙から先に入ります。',
+              )
+            : _l(
+                language,
+                en: 'Run a fast mixed pass across the live review queue.',
+                vi: 'Chạy một lượt nhanh trên hàng đợi review đang mở.',
+                ja: '動いているレビューキューを短く横断します。',
+              ),
+      ),
+      icon: Icons.bolt_rounded,
+      color: const Color(0xFF7C3AED),
+      badge: _l(language, en: 'Do this now', vi: 'Làm ngay', ja: '今やる'),
+      estimatedMinutes: dueCount > 0
+          ? (dueCount * 6 / 60).ceil().clamp(5, 20)
+          : 5,
+    );
+  }
+
+List<int> _preferredRecallSprintIds(List<WeaknessRadarItem> weaknessItems) {
+  for (final item in weaknessItems) {
+    final extra = item.extra;
+    if (extra is LearnSessionArgs && extra.items.isNotEmpty) {
+      return extra.items.map((entry) => entry.id).toList(growable: false);
+    }
+  }
+  return const <int>[];
 }
 
 PracticeSessionAction _specificDueAction({

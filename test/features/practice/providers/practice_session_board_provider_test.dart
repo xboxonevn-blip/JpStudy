@@ -6,6 +6,9 @@ import 'package:jpstudy/features/grammar/screens/grammar_practice_screen.dart';
 import 'package:jpstudy/features/home/providers/continue_provider.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/home/providers/weakness_radar_provider.dart';
+import 'package:jpstudy/features/learn/models/learn_session_args.dart';
+import 'package:jpstudy/data/models/vocab_item.dart';
+import 'package:jpstudy/features/practice/models/recall_sprint_strategy.dart';
 import 'package:jpstudy/features/practice/providers/practice_session_board_provider.dart';
 
 void main() {
@@ -36,6 +39,47 @@ void main() {
       expect(board.primaryAction.route, '/practice/recall-sprint');
       expect(board.steps[1].route, '/grammar-practice');
       expect(board.headline, 'Protect the review queue first');
+      expect(board.primaryAction.extra, isA<RecallSprintArgs>());
+    });
+
+    test('recall sprint carries preferred weak vocab ids when available', () {
+      final board = buildPracticeSessionBoard(
+        language: AppLanguage.en,
+        level: StudyLevel.n5,
+        dashboard: const DashboardState(
+          streak: 0,
+          todayXp: 0,
+          vocabDue: 3,
+          grammarDue: 2,
+          kanjiDue: 1,
+          vocabMistakeCount: 0,
+          grammarMistakeCount: 0,
+          kanjiMistakeCount: 0,
+          totalMistakeCount: 1,
+        ),
+        weaknessItems: [
+          WeaknessRadarItem(
+            id: 'vocab_mistakes',
+            title: 'Vocab slipping',
+            subtitle: 'repair',
+            route: '/learn/session',
+            extra: LearnSessionArgs(
+              items: const [
+                VocabItem(id: 11, term: '水', reading: 'みず', meaning: 'water', level: 'N5'),
+                VocabItem(id: 12, term: '火', reading: 'ひ', meaning: 'fire', level: 'N5'),
+              ],
+              lessonId: -1,
+              lessonTitle: 'Recovery',
+            ),
+            icon: Icons.translate,
+            color: const Color(0xFF000000),
+          ),
+        ],
+      );
+
+      final args = board.primaryAction.extra as RecallSprintArgs;
+      expect(args.strategy, RecallSprintStrategy.weakVocab);
+      expect(args.preferredTermIds, [11, 12]);
     });
 
     test('promotes grammar ghost repair when due queue is clear', () {

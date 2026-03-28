@@ -12,6 +12,7 @@ import 'package:jpstudy/features/home/providers/recovery_pack_provider.dart';
 import 'package:jpstudy/features/learn/models/learn_session_args.dart';
 import 'package:jpstudy/features/learn/models/question_type.dart';
 import 'package:jpstudy/features/mistakes/repositories/mistake_repository.dart';
+import 'package:jpstudy/features/home/providers/weakness_radar_priority.dart';
 
 class WeaknessRadarItem {
   const WeaknessRadarItem({
@@ -52,6 +53,7 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
   final srsBreakdown = await ref.watch(srsRetentionProvider.future);
   final mistakes = await mistakeRepo.getAllMistakes();
   final items = <WeaknessRadarItem>[];
+  final now = DateTime.now();
 
   if (recoveryPack != null) {
     items.add(
@@ -68,16 +70,28 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
   }
 
   final vocabMistakes = mistakes.where((item) => item.type == 'vocab').toList()
-    ..sort((left, right) => right.wrongCount.compareTo(left.wrongCount));
+    ..sort(
+      (left, right) => calculateMistakePriority(right, now).compareTo(
+        calculateMistakePriority(left, now),
+      ),
+    );
   if (vocabMistakes.isNotEmpty) {
-    final ids = vocabMistakes.take(5).map((item) => item.itemId).toList();
+    final dueMistakes = vocabMistakes
+        .where((item) => calculateMistakePriority(item, now) > 0)
+        .toList(growable: false);
+    final ids = dueMistakes.take(5).map((item) => item.itemId).toList();
     final vocabItems = await lessonRepo.fetchVocabTermsByIds(ids);
     if (vocabItems.isNotEmpty) {
+      final lead = dueMistakes.first;
       items.add(
         WeaknessRadarItem(
           id: 'vocab_mistakes',
           title: _vocabTitle(language, vocabItems.first.term),
-          subtitle: _vocabSubtitle(language, vocabMistakes.length),
+          subtitle: _vocabSubtitle(
+            language,
+            dueMistakes.length,
+            _dueCheckpointShortLabel(language, lead.lastMistakeAt, now),
+          ),
           route: '/learn/session',
           extra: LearnSessionArgs(
             items: vocabItems,
@@ -90,7 +104,7 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
           ),
           icon: Icons.translate_rounded,
           color: const Color(0xFF0F766E),
-          priority: 100,
+          priority: 80 + calculateMistakePriority(lead, now),
         ),
       );
     }
@@ -98,43 +112,67 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
 
   final grammarMistakes =
       mistakes.where((item) => item.type == 'grammar').toList()
-        ..sort((left, right) => right.wrongCount.compareTo(left.wrongCount));
+        ..sort(
+          (left, right) => calculateMistakePriority(right, now).compareTo(
+            calculateMistakePriority(left, now),
+          ),
+        );
   if (grammarMistakes.isNotEmpty) {
+    final dueMistakes = grammarMistakes
+        .where((item) => calculateMistakePriority(item, now) > 0)
+        .toList(growable: false);
     final points = await grammarRepo.fetchPointsByIds(
-      grammarMistakes.take(3).map((item) => item.itemId).toList(),
+      dueMistakes.take(3).map((item) => item.itemId).toList(),
     );
     if (points.isNotEmpty) {
+      final lead = dueMistakes.first;
       items.add(
         WeaknessRadarItem(
           id: 'grammar_mistakes',
           title: _grammarTitle(language, points.first.grammarPoint),
-          subtitle: _grammarSubtitle(language, grammarMistakes.length),
+          subtitle: _grammarSubtitle(
+            language,
+            dueMistakes.length,
+            _dueCheckpointShortLabel(language, lead.lastMistakeAt, now),
+          ),
           route: '/grammar-practice',
           extra: points.map((point) => point.id).toList(),
           icon: Icons.auto_stories_rounded,
           color: const Color(0xFF7C3AED),
-          priority: 95,
+          priority: 75 + calculateMistakePriority(lead, now),
         ),
       );
     }
   }
 
   final kanjiMistakes = mistakes.where((item) => item.type == 'kanji').toList()
-    ..sort((left, right) => right.wrongCount.compareTo(left.wrongCount));
+    ..sort(
+      (left, right) => calculateMistakePriority(right, now).compareTo(
+        calculateMistakePriority(left, now),
+      ),
+    );
   if (kanjiMistakes.isNotEmpty) {
+    final dueMistakes = kanjiMistakes
+        .where((item) => calculateMistakePriority(item, now) > 0)
+        .toList(growable: false);
     final kanjiItems = await lessonRepo.fetchKanjiByIds(
-      kanjiMistakes.take(5).map((item) => item.itemId).toList(),
+      dueMistakes.take(5).map((item) => item.itemId).toList(),
     );
     if (kanjiItems.isNotEmpty) {
+      final lead = dueMistakes.first;
       items.add(
         WeaknessRadarItem(
           id: 'kanji_mistakes',
           title: _kanjiTitle(language, kanjiItems.first.character),
-          subtitle: _kanjiSubtitle(language, kanjiMistakes.length),
+          subtitle: _kanjiSubtitle(
+            language,
+            dueMistakes.length,
+            _dueCheckpointShortLabel(language, lead.lastMistakeAt, now),
+          ),
           route: '/practice/handwriting',
           icon: Icons.draw_rounded,
           color: const Color(0xFFF59E0B),
-          priority: 90,
+          priority: 70 + calculateMistakePriority(lead, now),
         ),
       );
     }
@@ -213,14 +251,14 @@ String _vocabTitle(AppLanguage language, String term) {
   }
 }
 
-String _vocabSubtitle(AppLanguage language, int count) {
+String _vocabSubtitle(AppLanguage language, int count, String dueLabel) {
   switch (language) {
     case AppLanguage.en:
-      return '$count saved vocab mistakes still need one more pass.';
+      return '$count saved vocab mistakes are ready for a $dueLabel follow-up.';
     case AppLanguage.vi:
-      return '$count lỗi từ vựng đã lưu vẫn cần thêm một lượt nữa.';
+      return '$count lỗi từ vựng đã lưu đang tới lượt ôn $dueLabel.';
     case AppLanguage.ja:
-      return '$count saved vocab mistakes still need one more pass.';
+      return '$count saved vocab mistakes are ready for a $dueLabel follow-up.';
   }
 }
 
@@ -246,14 +284,14 @@ String _grammarTitle(AppLanguage language, String grammarPoint) {
   }
 }
 
-String _grammarSubtitle(AppLanguage language, int count) {
+String _grammarSubtitle(AppLanguage language, int count, String dueLabel) {
   switch (language) {
     case AppLanguage.en:
-      return '$count grammar ghosts or mistakes are still open.';
+      return '$count grammar ghosts are lined up for a $dueLabel repair pass.';
     case AppLanguage.vi:
-      return '$count mục ngữ pháp lỗi vẫn chưa được xử lý xong.';
+      return '$count mục ngữ pháp lỗi đang vào lượt sửa $dueLabel.';
     case AppLanguage.ja:
-      return '$count grammar ghosts or mistakes are still open.';
+      return '$count grammar ghosts are lined up for a $dueLabel repair pass.';
   }
 }
 
@@ -268,15 +306,40 @@ String _kanjiTitle(AppLanguage language, String character) {
   }
 }
 
-String _kanjiSubtitle(AppLanguage language, int count) {
+String _kanjiSubtitle(AppLanguage language, int count, String dueLabel) {
   switch (language) {
     case AppLanguage.en:
-      return '$count kanji mistakes are pushing handwriting practice up.';
+      return '$count kanji mistakes are due for a $dueLabel handwriting reset.';
     case AppLanguage.vi:
-      return '$count lỗi kanji đang đẩy luyện viết tay lên ưu tiên.';
+      return '$count lỗi kanji đang tới lượt $dueLabel để kéo luyện viết tay lên ưu tiên.';
     case AppLanguage.ja:
-      return '$count kanji mistakes are pushing handwriting practice up.';
+      return '$count kanji mistakes are due for a $dueLabel handwriting reset.';
   }
+}
+
+String _dueCheckpointShortLabel(
+  AppLanguage language,
+  DateTime lastMistakeAt,
+  DateTime now,
+) {
+  final age = now.difference(lastMistakeAt);
+  if (age.inHours < 24) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'new';
+      case AppLanguage.vi:
+        return 'mới';
+      case AppLanguage.ja:
+        return 'new';
+    }
+  }
+  if (age.inHours < 72) {
+    return 'D1';
+  }
+  if (age.inHours < 24 * 7) {
+    return 'D3';
+  }
+  return 'D7';
 }
 
 String _retentionTitle(AppLanguage language) {
