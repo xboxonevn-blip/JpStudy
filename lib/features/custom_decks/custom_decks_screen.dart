@@ -233,26 +233,82 @@ class _RecipeQueueCard extends StatelessWidget {
   }
 }
 
-List<_TemplateMetric> _templates(AppLanguage language) => switch (language) {
-      AppLanguage.en => [
-          _TemplateMetric(label: 'Kanji deck', value: '250 cards'),
-          _TemplateMetric(label: 'Grammar drill', value: '12 sets'),
-          _TemplateMetric(label: 'Shadowing', value: 'Audio-ready'),
-          _TemplateMetric(label: 'Sprint pack', value: '15 min'),
-        ],
-      AppLanguage.vi => const [
-          _TemplateMetric(label: 'Deck Hán tự', value: '250 thẻ'),
-          _TemplateMetric(label: 'Drill ngữ pháp', value: '12 bộ'),
-          _TemplateMetric(label: 'Luyện nhại', value: 'Sẵn âm thanh'),
-          _TemplateMetric(label: 'Gói sprint', value: '15 phút'),
-        ],
-      AppLanguage.ja => const [
-          _TemplateMetric(label: '漢字デッキ', value: '250枚'),
-          _TemplateMetric(label: '文法ドリル', value: '12セット'),
-          _TemplateMetric(label: 'シャドーイング', value: '音声対応'),
-          _TemplateMetric(label: 'スプリントパック', value: '15分'),
-        ],
-    };
+List<_TemplateMetric> _templates(AppLanguage language) => [
+      _TemplateMetric(
+        label: _templateLabel(language, _TemplateKind.kanjiDeck),
+        value: _templateValue(language, _TemplateKind.kanjiDeck),
+      ),
+      _TemplateMetric(
+        label: _templateLabel(language, _TemplateKind.grammarDrill),
+        value: _templateValue(language, _TemplateKind.grammarDrill),
+      ),
+      _TemplateMetric(
+        label: _templateLabel(language, _TemplateKind.shadowing),
+        value: _templateValue(language, _TemplateKind.shadowing),
+      ),
+      _TemplateMetric(
+        label: _templateLabel(language, _TemplateKind.sprintPack),
+        value: _templateValue(language, _TemplateKind.sprintPack),
+      ),
+    ];
+
+String _templateLabel(AppLanguage language, _TemplateKind kind) {
+  switch (kind) {
+    case _TemplateKind.kanjiDeck:
+      return switch (language) {
+        AppLanguage.en => 'Kanji deck',
+        AppLanguage.vi => 'Deck Kanji',
+        AppLanguage.ja => '?????',
+      };
+    case _TemplateKind.grammarDrill:
+      return switch (language) {
+        AppLanguage.en => 'Grammar drill',
+        AppLanguage.vi => 'B?i ng? ph?p',
+        AppLanguage.ja => '?????',
+      };
+    case _TemplateKind.shadowing:
+      return switch (language) {
+        AppLanguage.en => 'Shadowing',
+        AppLanguage.vi => 'Luy?n shadowing',
+        AppLanguage.ja => '???????',
+      };
+    case _TemplateKind.sprintPack:
+      return switch (language) {
+        AppLanguage.en => 'Sprint pack',
+        AppLanguage.vi => 'G?i sprint',
+        AppLanguage.ja => '????????',
+      };
+  }
+}
+
+String _templateValue(AppLanguage language, _TemplateKind kind) {
+  switch (kind) {
+    case _TemplateKind.kanjiDeck:
+      return switch (language) {
+        AppLanguage.en => '250 cards',
+        AppLanguage.vi => '250 th?',
+        AppLanguage.ja => '250?',
+      };
+    case _TemplateKind.grammarDrill:
+      return switch (language) {
+        AppLanguage.en => '12 sets',
+        AppLanguage.vi => '12 b?',
+        AppLanguage.ja => '12???',
+      };
+    case _TemplateKind.shadowing:
+      return switch (language) {
+        AppLanguage.en => 'Audio-ready',
+        AppLanguage.vi => 'S?n ?m thanh',
+        AppLanguage.ja => '????',
+      };
+    case _TemplateKind.sprintPack:
+      return switch (language) {
+        AppLanguage.en => '15 min',
+        AppLanguage.vi => '15 ph?t',
+        AppLanguage.ja => '15?',
+      };
+  }
+}
 
 List<_StudyRecipe> _recipes(
   AppLanguage language, {
@@ -520,3 +576,6 @@ class _TemplateMetric {
   final String value;
 }
 
+
+
+enum _TemplateKind { kanjiDeck, grammarDrill, shadowing, sprintPack }

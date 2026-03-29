@@ -853,25 +853,45 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   }
 
   List<({String query, String label})> _defaultPrompts(AppLanguage language) {
-    switch (language) {
-      case AppLanguage.en:
-        return const [
-          (query: 'taberu', label: 'Romaji: taberu'),
-          (query: 'もり', label: 'Reading: もり'),
-          (query: 'forest', label: 'Meaning: forest'),
-        ];
-      case AppLanguage.vi:
-        return const [
-          (query: 'taberu', label: 'Romaji: taberu'),
-          (query: 'もり', label: 'Cách đọc: もり'),
-          (query: 'forest', label: 'Nghĩa: forest'),
-        ];
-      case AppLanguage.ja:
-        return const [
-          (query: 'taberu', label: 'ローマ字: taberu'),
-          (query: 'もり', label: '読み: もり'),
-          (query: 'forest', label: '意味: forest'),
-        ];
+    return [
+      (query: 'taberu', label: _promptLabel(language, kind: _SearchPromptKind.romaji, value: 'taberu')),
+      (query: '??', label: _promptLabel(language, kind: _SearchPromptKind.reading, value: '??')),
+      (query: 'forest', label: _promptLabel(language, kind: _SearchPromptKind.meaning, value: 'forest')),
+    ];
+  }
+
+  String _promptLabel(
+    AppLanguage language, {
+    required _SearchPromptKind kind,
+    required String value,
+  }) {
+    switch (kind) {
+      case _SearchPromptKind.romaji:
+        switch (language) {
+          case AppLanguage.en:
+          case AppLanguage.vi:
+            return 'Romaji: $value';
+          case AppLanguage.ja:
+            return '????: $value';
+        }
+      case _SearchPromptKind.reading:
+        switch (language) {
+          case AppLanguage.en:
+            return 'Reading: $value';
+          case AppLanguage.vi:
+            return 'C?ch ??c: $value';
+          case AppLanguage.ja:
+            return '??: $value';
+        }
+      case _SearchPromptKind.meaning:
+        switch (language) {
+          case AppLanguage.en:
+            return 'Meaning: $value';
+          case AppLanguage.vi:
+            return 'Ngh?a: $value';
+          case AppLanguage.ja:
+            return '??: $value';
+        }
     }
   }
 
@@ -1427,3 +1447,6 @@ class _SearchMatch {
   final int score;
   final _SearchMatchReason reason;
 }
+
+
+enum _SearchPromptKind { romaji, reading, meaning }

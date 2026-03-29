@@ -550,7 +550,7 @@ class _SearchDrawPanelState extends State<_SearchDrawPanel> {
               TextButton.icon(
                 onPressed: _clearCanvas,
                 icon: const Icon(Icons.clear),
-                label: const Text('Clear'),
+                label: Text(_kanjiHubClearLabel(widget.language)),
                 style: TextButton.styleFrom(foregroundColor: palette.ink),
               ),
               ElevatedButton.icon(
@@ -857,7 +857,7 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                                   Padding(
                                     padding: const EdgeInsets.only(right: 6.0),
                                     child: ChoiceChip(
-                                      label: Text('$i n?t', style: const TextStyle(fontSize: 11)),
+                                      label: Text(_kanjiHubStrokeChipLabel(widget.language, i), style: const TextStyle(fontSize: 11)),
                                       selected: _selectedStrokeCount == i,
                                       onSelected: (val) => setState(() => _selectedStrokeCount = val ? i : null),
                                       selectedColor: context.appPalette.accent.withValues(alpha: 0.2),
@@ -922,7 +922,7 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                                   icon: const Icon(Icons.cancel, size: 20),
                                   color: context.appPalette.ink.withValues(alpha: 0.5),
                                   onPressed: _clearLocalFilters,
-                                  tooltip: 'X?a b? l?c',
+                                  tooltip: _kanjiHubClearFiltersLabel(widget.language),
                                 ),
                               ],
                             ),
@@ -1041,7 +1041,7 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                                   icon: const Icon(Icons.cancel, size: 20),
                                   color: context.appPalette.ink.withValues(alpha: 0.5),
                                   onPressed: _clearLocalFilters,
-                                  tooltip: 'X?a b? l?c',
+                                  tooltip: _kanjiHubClearFiltersLabel(widget.language),
                                 ),
                               ],
                             ),
@@ -1416,11 +1416,11 @@ class _FlowHubNodeState extends State<_FlowHubNode> with SingleTickerProviderSta
             ],
           ),
           alignment: Alignment.center,
-          child: const Column(
+          child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text('JP', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24)),
-              Text('Study', style: TextStyle(color: Colors.white70, fontSize: 12)),
+              Text(_kanjiHubStudyWord(_kanjiHubDialogLanguage(context)), style: const TextStyle(color: Colors.white70, fontSize: 12)),
             ],
           ),
         );
@@ -2235,19 +2235,19 @@ class _RadicalKanjiMicroDetailPanel extends StatelessWidget {
                 key: ValueKey('micro_search_${item.character}'),
                 onPressed: onSearch,
                 icon: const Icon(Icons.search_rounded, size: 18),
-                label: const Text('Search'),
+                label: Text(_kanjiHubSearchLabel(_kanjiHubDialogLanguage(context))),
               ),
               OutlinedButton.icon(
                 key: ValueKey('micro_flashcard_${item.character}'),
                 onPressed: onFlashcard,
                 icon: const Icon(Icons.style_outlined, size: 18),
-                label: const Text('Flashcard'),
+                label: Text(_kanjiHubFlashcardLabel(_kanjiHubDialogLanguage(context))),
               ),
               ElevatedButton.icon(
                 key: ValueKey('micro_write_${item.character}'),
                 onPressed: onWrite,
                 icon: const Icon(Icons.edit_outlined, size: 18),
-                label: const Text('Write'),
+                label: Text(_kanjiHubWriteLabel(_kanjiHubDialogLanguage(context))),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: palette.primary,
                   foregroundColor: Colors.white,
@@ -2381,6 +2381,63 @@ String _formatKanjiExample(KanjiExample example) {
   if (reading.isNotEmpty) parts.add('($reading)');
   if (meaning.isNotEmpty) parts.add('? $meaning');
   return parts.join(' ');
+}
+
+
+String _kanjiHubClearLabel(AppLanguage language) {
+  return switch (language) {
+    AppLanguage.en => 'Clear',
+    AppLanguage.vi => 'X?a n?t',
+    AppLanguage.ja => '???',
+  };
+}
+
+String _kanjiHubStrokeChipLabel(AppLanguage language, int count) {
+  return switch (language) {
+    AppLanguage.en => '$count strokes',
+    AppLanguage.vi => '$count n?t',
+    AppLanguage.ja => '$count?',
+  };
+}
+
+String _kanjiHubClearFiltersLabel(AppLanguage language) {
+  return switch (language) {
+    AppLanguage.en => 'Clear filters',
+    AppLanguage.vi => 'X?a b? l?c',
+    AppLanguage.ja => '?????????',
+  };
+}
+
+String _kanjiHubStudyWord(AppLanguage language) {
+  return switch (language) {
+    AppLanguage.en => 'Study',
+    AppLanguage.vi => 'H?c',
+    AppLanguage.ja => '??',
+  };
+}
+
+String _kanjiHubSearchLabel(AppLanguage language) {
+  return switch (language) {
+    AppLanguage.en => 'Search',
+    AppLanguage.vi => 'Tra c?u',
+    AppLanguage.ja => '??',
+  };
+}
+
+String _kanjiHubFlashcardLabel(AppLanguage language) {
+  return switch (language) {
+    AppLanguage.en => 'Flashcard',
+    AppLanguage.vi => 'Flashcard',
+    AppLanguage.ja => '????????',
+  };
+}
+
+String _kanjiHubWriteLabel(AppLanguage language) {
+  return switch (language) {
+    AppLanguage.en => 'Write',
+    AppLanguage.vi => 'Luy?n vi?t',
+    AppLanguage.ja => '??',
+  };
 }
 
 AppLanguage _kanjiHubDialogLanguage(BuildContext context) {

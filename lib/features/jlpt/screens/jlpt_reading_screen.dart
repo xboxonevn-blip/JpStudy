@@ -517,6 +517,7 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
                                               preview: _passagePreview(
                                                 visiblePassages[i],
                                               ),
+                                              language: language,
                                               previewLabel: _previewLabel(
                                                 language,
                                               ),
@@ -903,8 +904,32 @@ class _HeaderHero extends StatelessWidget {
   }
 }
 
+
+String _questionCountPillLabel(AppLanguage language, int count) {
+  switch (language) {
+    case AppLanguage.en:
+      return '$count Q';
+    case AppLanguage.vi:
+      return '$count c?u';
+    case AppLanguage.ja:
+      return '$count?';
+  }
+}
+
+String _minutesPillLabel(AppLanguage language, int minutes) {
+  switch (language) {
+    case AppLanguage.en:
+      return '$minutes min';
+    case AppLanguage.vi:
+      return '$minutes ph?t';
+    case AppLanguage.ja:
+      return '$minutes?';
+  }
+}
+
 class _ReadingPassageCard extends StatelessWidget {
   const _ReadingPassageCard({
+    required this.language,
     required this.title,
     required this.level,
     required this.questionCount,
@@ -917,6 +942,7 @@ class _ReadingPassageCard extends StatelessWidget {
     required this.onTap,
   });
 
+  final AppLanguage language;
   final String title;
   final String level;
   final int questionCount;
@@ -1022,8 +1048,8 @@ class _ReadingPassageCard extends StatelessWidget {
             spacing: AppSpacing.sm,
             runSpacing: AppSpacing.sm,
             children: [
-              _MetaPill(label: '$questionCount Q', color: palette.secondary),
-              _MetaPill(label: '$recommendedMinutes m', color: palette.info),
+              _MetaPill(label: _questionCountPillLabel(language, questionCount), color: palette.secondary),
+              _MetaPill(label: _minutesPillLabel(language, recommendedMinutes), color: palette.info),
               for (final type in questionTypes.take(3))
                 _MetaPill(label: type, color: palette.accent),
             ],
