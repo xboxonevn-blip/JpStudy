@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   Map<String, int> loadKanjiStrokeCounts(String level) {
-    final dir = Directory('assets/data/archive/kanji/$level');
+    final dir = Directory('assets/data/content/kanji/$level');
     final files = dir
         .listSync()
         .whereType<File>()
@@ -15,7 +15,8 @@ void main() {
 
     final result = <String, int>{};
     for (final file in files) {
-      final data = jsonDecode(file.readAsStringSync()) as List<dynamic>;
+      final wrapper = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
+      final data = wrapper['entries'] as List<dynamic>;
       for (final entry in data) {
         final item = entry as Map<String, dynamic>;
         result[item['character'] as String] = item['strokeCount'] as int;
