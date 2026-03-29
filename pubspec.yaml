@@ -1,4 +1,4 @@
-name: jpstudy
+﻿name: jpstudy
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -107,9 +107,18 @@ flutter:
     - assets/data/content/kanji/n3/
     - assets/data/content/kanji/n4/
     - assets/data/content/kanji/n5/
+    - assets/data/content/vocab/n1/
+    - assets/data/content/vocab/n1/hajimete/
+    - assets/data/content/vocab/n2/
+    - assets/data/content/vocab/n2/hajimete/
     - assets/data/content/vocab/n3/
+    - assets/data/content/vocab/n3/hajimete/
     - assets/data/content/vocab/n4/
+    - assets/data/content/vocab/n4/hajimete/
+    - assets/data/content/vocab/n4/minna/
     - assets/data/content/vocab/n5/
+    - assets/data/content/vocab/n5/hajimete/
+    - assets/data/content/vocab/n5/minna/
     - assets/data/support/
     - assets/data/support/kanji/
   fonts:
@@ -142,3 +151,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+

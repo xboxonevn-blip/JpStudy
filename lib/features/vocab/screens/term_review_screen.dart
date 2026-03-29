@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/app_language.dart';
+import '../../../core/level_provider.dart';
 import '../../../core/language_provider.dart';
 import '../../../data/models/vocab_item.dart';
 import '../../../data/db/app_database.dart';
@@ -15,7 +16,20 @@ import '../../common/widgets/compact_ui.dart';
 import '../../../app/theme/app_theme_palette.dart';
 
 class TermReviewScreen extends ConsumerStatefulWidget {
-  const TermReviewScreen({super.key});
+  const TermReviewScreen({
+    super.key,
+    this.sessionTitle,
+    this.sessionSubtitle,
+    this.lessonStart,
+    this.lessonEnd,
+  });
+
+  final String? sessionTitle;
+  final String? sessionSubtitle;
+  final int? lessonStart;
+  final int? lessonEnd;
+
+  bool get hasLessonRange => lessonStart != null && lessonEnd != null;
 
   @override
   ConsumerState<TermReviewScreen> createState() => _TermReviewScreenState();
@@ -58,11 +72,23 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
   @override
   Widget build(BuildContext context) {
     final language = ref.watch(appLanguageProvider);
-    final termsAsync = ref.watch(allDueTermsProvider);
+    final selectedLevel = ref.watch(studyLevelProvider);
+    final levelCode = selectedLevel?.shortLabel ?? _inferLevelCodeFromRange();
+    final termsAsync = widget.hasLessonRange && levelCode != null
+        ? ref.watch(
+            lessonRangeTermsProvider(
+              LessonRangeTermsArgs(
+                level: levelCode,
+                startLesson: widget.lessonStart!,
+                endLesson: widget.lessonEnd!,
+              ),
+            ),
+          )
+        : ref.watch(allDueTermsProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(language.reviewAction),
+        title: Text(widget.sessionTitle ?? language.reviewAction),
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () => context.pop(),
@@ -70,21 +96,22 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
       ),
       body: termsAsync.when(
         data: (terms) {
-          if (terms.isEmpty) {
+          final visibleTerms = _filterTerms(terms);
+          if (visibleTerms.isEmpty) {
             return _buildEmptyState(language);
           }
           if (!_sessionStarted) {
-            return _buildPreview(language, terms.length);
+            return _buildPreview(language, visibleTerms.length);
           }
           if (_isSessionComplete) {
-            return _buildSummary(language, terms.length);
+            return _buildSummary(language, visibleTerms.length);
           }
-          if (_currentIndex >= terms.length) {
+          if (_currentIndex >= visibleTerms.length) {
             // Should be handled by _isSessionComplete, but just in case
             return _buildSummary(language, terms.length);
           }
 
-          final currentTermData = terms[_currentIndex];
+          final currentTermData = visibleTerms[_currentIndex];
           // Map UserLessonTermData to VocabItem explicitly
           final vocabItem = VocabItem(
             id: currentTermData.id,
@@ -101,19 +128,42 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
             children: [
               // Progress
               LinearProgressIndicator(
-                value: (_currentIndex + 1) / terms.length,
+                value: (_currentIndex + 1) / visibleTerms.length,
                 backgroundColor: Colors.grey[200],
                 valueColor: AlwaysStoppedAnimation<Color>(
                   Theme.of(context).primaryColor,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  '${_currentIndex + 1} / ${terms.length}',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleMedium?.copyWith(color: Colors.grey[600]),
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
+                child: Column(
+                  children: [
+                    Text(
+                      '${_currentIndex + 1} / ${visibleTerms.length}',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.grey[600]),
+                    ),
+                    if (_shouldShowSessionMeta) ...[
+                      const SizedBox(height: 10),
+                      Wrap(
+                        alignment: WrapAlignment.center,
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: [
+                          _buildPreviewChip(
+                            Icons.style_rounded,
+                            widget.sessionTitle ?? language.reviewAction,
+                            Theme.of(context).colorScheme.primary,
+                          ),
+                          if (_sessionRangeLabel(language) != null)
+                            _buildPreviewChip(
+                              Icons.segment_rounded,
+                              _sessionRangeLabel(language)!,
+                              Colors.teal,
+                            ),
+                        ],
+                      ),
+                    ],
+                  ],
                 ),
               ),
 
@@ -154,7 +204,7 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
                       onSelect: (level) => _handleRating(
                         level,
                         currentTermData,
-                        terms.length,
+                        visibleTerms.length,
                         language,
                       ),
                       showLabels: true,
@@ -172,6 +222,22 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
     );
   }
 
+  List<UserLessonTermData> _filterTerms(List<UserLessonTermData> terms) {
+    if (!widget.hasLessonRange) return terms;
+    final start = widget.lessonStart!;
+    final end = widget.lessonEnd!;
+    return terms.where((term) => term.lessonId >= start && term.lessonId <= end).toList();
+  }
+
+  String? _inferLevelCodeFromRange() {
+    if (!widget.hasLessonRange) return null;
+    final start = widget.lessonStart!;
+    final end = widget.lessonEnd!;
+    if (start == 1 && end == 25) return 'N5';
+    if (start == 26 && end == 50) return 'N4';
+    return null;
+  }
+
   Widget _buildPreview(AppLanguage language, int termCount) {
     final estimatedMinutes = (termCount * 8 / 60).ceil();
     return AppPageShell(
@@ -179,8 +245,8 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
         children: [
           AppFeatureCard(
             icon: Icons.rate_review_rounded,
-            title: language.reviewAction,
-            subtitle: language.reviewReadyTitle,
+            title: widget.sessionTitle ?? language.reviewAction,
+            subtitle: widget.sessionSubtitle ?? language.reviewReadyTitle,
             primaryLabel: language.startReviewButton,
             onPrimaryTap: () => setState(() => _sessionStarted = true),
             status: AppStatusChip(
@@ -189,22 +255,75 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
             ),
           ),
           const SizedBox(height: 12),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 12,
+            runSpacing: 12,
             children: [
               _buildPreviewChip(
                 Icons.library_books_outlined,
                 language.reviewTermsDueLabel(termCount),
                 Theme.of(context).colorScheme.primary,
               ),
-              const SizedBox(width: 12),
               _buildPreviewChip(
                 Icons.timer_outlined,
                 language.reviewEstimateLabel(estimatedMinutes),
                 Colors.orange[700]!,
               ),
+              if (_sessionRangeLabel(language) != null)
+                _buildPreviewChip(
+                  Icons.layers_rounded,
+                  _sessionRangeLabel(language)!,
+                  Colors.teal[700]!,
+                ),
             ],
           ),
+          if (_shouldShowSessionMeta) ...[
+            const SizedBox(height: 16),
+            AppSectionCard(
+              padding: const EdgeInsets.all(18),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.sessionTitle ?? language.reviewAction,
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w900),
+                  ),
+                  if ((widget.sessionSubtitle ?? '').trim().isNotEmpty) ...[
+                    const SizedBox(height: 8),
+                    Text(
+                      widget.sessionSubtitle!,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            height: 1.5,
+                            color: context.appPalette.ink.withValues(alpha: 0.74),
+                            fontWeight: FontWeight.w700,
+                          ),
+                    ),
+                  ],
+                  const SizedBox(height: 14),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: [
+                      AppStatusChip(
+                        label: _sessionKindLabel(language),
+                        tone: AppStatusTone.primary,
+                      ),
+                      if (_sessionRangeLabel(language) != null)
+                        AppStatusChip(
+                          label: _sessionRangeLabel(language)!,
+                          tone: AppStatusTone.success,
+                        ),
+                      AppStatusChip(
+                        label: language.reviewTermsDueLabel(termCount),
+                        tone: AppStatusTone.warning,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
         ],
       ),
     );
@@ -240,13 +359,49 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
     return AppPageShell(
       child: AppFeatureCard(
         icon: Icons.check_circle_outline_rounded,
-        title: language.reviewEmptyLabel,
-        subtitle: language.sessionCompleteTitle,
+        title: widget.sessionTitle ?? language.reviewEmptyLabel,
+        subtitle: _emptyStateSubtitle(language),
         secondaryLabel: MaterialLocalizations.of(context).backButtonTooltip,
         onSecondaryTap: () => context.pop(),
         status: const AppStatusChip(label: '0', tone: AppStatusTone.success),
       ),
     );
+  }
+
+  bool get _shouldShowSessionMeta =>
+      (widget.sessionTitle ?? '').trim().isNotEmpty ||
+      (widget.sessionSubtitle ?? '').trim().isNotEmpty ||
+      widget.hasLessonRange;
+
+  String? _sessionRangeLabel(AppLanguage language) {
+    if (!widget.hasLessonRange) return null;
+    final start = widget.lessonStart!;
+    final end = widget.lessonEnd!;
+    return switch (language) {
+      AppLanguage.en => 'Lessons $start?$end',
+      AppLanguage.vi => 'B?i $start?$end',
+      AppLanguage.ja => '$start?$end?',
+    };
+  }
+
+  String _sessionKindLabel(AppLanguage language) => switch (language) {
+    AppLanguage.en => 'Companion track',
+    AppLanguage.vi => 'Track ??ng h?nh',
+    AppLanguage.ja => '??????',
+  };
+
+  String _emptyStateSubtitle(AppLanguage language) {
+    final range = _sessionRangeLabel(language);
+    if ((widget.sessionSubtitle ?? '').trim().isNotEmpty && range != null) {
+      return '${widget.sessionSubtitle!} ? $range';
+    }
+    if ((widget.sessionSubtitle ?? '').trim().isNotEmpty) {
+      return widget.sessionSubtitle!;
+    }
+    if (range != null) {
+      return range;
+    }
+    return language.sessionCompleteTitle;
   }
 
   Widget _buildSummary(AppLanguage language, int total) {

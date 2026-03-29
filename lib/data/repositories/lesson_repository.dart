@@ -15,6 +15,7 @@ import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/models/kanji_item.dart';
 import 'package:jpstudy/data/seeds/grammar_seeder.dart';
 import 'package:jpstudy/data/utils/grammar_english_notation.dart';
+import 'package:jpstudy/data/utils/han_viet_lookup.dart';
 
 final lessonRepositoryProvider = Provider<LessonRepository>((ref) {
   return LessonRepository(
@@ -67,6 +68,19 @@ final allDueTermsProvider = FutureProvider<List<UserLessonTermData>>((
   final repo = ref.watch(lessonRepositoryProvider);
   return repo.fetchAllDueTerms();
 });
+
+final lessonRangeTermsProvider =
+    FutureProvider.family<List<UserLessonTermData>, LessonRangeTermsArgs>((
+      ref,
+      args,
+    ) async {
+      final repo = ref.watch(lessonRepositoryProvider);
+      return repo.fetchTermsForLessonRange(
+        args.level,
+        startLesson: args.startLesson,
+        endLesson: args.endLesson,
+      );
+    });
 
 /// Returns the nearest future vocab review date, refreshing whenever SRS state changes.
 final nextVocabReviewProvider = StreamProvider.autoDispose<DateTime?>((
@@ -236,6 +250,29 @@ class LessonTermsArgs {
 
   @override
   int get hashCode => Object.hash(lessonId, level, fallbackTitle);
+}
+
+class LessonRangeTermsArgs {
+  const LessonRangeTermsArgs({
+    required this.level,
+    required this.startLesson,
+    required this.endLesson,
+  });
+
+  final String level;
+  final int startLesson;
+  final int endLesson;
+
+  @override
+  bool operator ==(Object other) {
+    return other is LessonRangeTermsArgs &&
+        other.level == level &&
+        other.startLesson == startLesson &&
+        other.endLesson == endLesson;
+  }
+
+  @override
+  int get hashCode => Object.hash(level, startLesson, endLesson);
 }
 
 class LessonMeta {
@@ -534,13 +571,56 @@ class LessonRepository {
         .toList();
   }
 
-  // Fetch all vocabulary for a specific JLPT level from ContentDatabase
-  Future<List<VocabItem>> getVocabByLevel(String level) async {
-    final items = await (_contentDb.select(
-      _contentDb.vocab,
-    )..where((tbl) => tbl.level.equals(level))).get();
+  // Fetch Minna vocabulary for a JLPT level by default to avoid mixing tracks in legacy flows.
+  Future<List<VocabItem>> getVocabByLevel(String level) {
+    return getVocabByLevelAndSeries(level, 'minna');
+  }
+
+  Future<List<VocabItem>> getVocabByLevelAndSeries(
+    String level,
+    String series,
+  ) async {
+    final items =
+        await (_contentDb.select(_contentDb.vocab)..where(
+              (tbl) => tbl.level.equals(level) & tbl.series.equals(series),
+            ))
+            .get();
 
     return items.map(_mapContentVocabToItem).toList();
+  }
+
+  Future<List<VocabItem>> getVocabByLessonRange(
+    String level, {
+    required int startLesson,
+    required int endLesson,
+    String series = 'minna',
+  }) async {
+    final lessonTags = {
+      for (var lesson = startLesson; lesson <= endLesson; lesson++)
+        'minna_$lesson',
+    };
+
+    final items =
+        await (_contentDb.select(_contentDb.vocab)..where(
+              (tbl) => tbl.level.equals(level) & tbl.series.equals(series),
+            ))
+            .get();
+
+    return items
+        .where((item) {
+          final rawTags = item.tags;
+          if (rawTags == null || rawTags.trim().isEmpty) {
+            return false;
+          }
+          final tags = rawTags
+              .split(',')
+              .map((tag) => tag.trim())
+              .where((tag) => tag.isNotEmpty)
+              .toSet();
+          return tags.any(lessonTags.contains);
+        })
+        .map(_mapContentVocabToItem)
+        .toList();
   }
 
   Future<List<VocabItem>> fetchContentVocabByIds(List<int> ids) async {
@@ -693,6 +773,26 @@ class LessonRepository {
           )
           ..orderBy([(tbl) => OrderingTerm(expression: tbl.orderIndex)]))
         .get();
+  }
+
+  Future<List<UserLessonTermData>> fetchTermsForLessonRange(
+    String level, {
+    required int startLesson,
+    required int endLesson,
+  }) async {
+    final terms = <UserLessonTermData>[];
+    for (int lessonId = startLesson; lessonId <= endLesson; lessonId++) {
+      final title = await getLessonTitle(lessonId, 'Lesson $lessonId');
+      await ensureLesson(lessonId: lessonId, level: level, title: title);
+      await seedTermsIfEmpty(lessonId, level);
+      terms.addAll(await fetchTerms(lessonId));
+    }
+    terms.sort((a, b) {
+      final lessonCompare = a.lessonId.compareTo(b.lessonId);
+      if (lessonCompare != 0) return lessonCompare;
+      return a.orderIndex.compareTo(b.orderIndex);
+    });
+    return terms;
   }
 
   Future<void> seedTermsIfEmpty(int lessonId, String currentLevelLabel) async {
@@ -958,9 +1058,11 @@ class LessonRepository {
                 .where((tag) => tag.isNotEmpty)
                 .join(',')
           : '';
-      final mergedTags = tags.isEmpty
-          ? 'minna_$lessonId'
-          : 'minna_$lessonId,$tags';
+      final series = (row['series'] ?? '').toString().trim().isEmpty
+          ? _seriesForCanonicalLevel(currentLevelLabel.toUpperCase())
+          : (row['series'] ?? '').toString().trim();
+      final tagPrefix = _lessonSeriesTag(series, lessonId);
+      final mergedTags = tags.isEmpty ? tagPrefix : '$tagPrefix,$tags';
 
       out.add(
         VocabData(
@@ -970,6 +1072,7 @@ class LessonRepository {
           meaning: meaningVi,
           meaningEn: _nullableLessonText(row['meaningEn']),
           kanjiMeaning: _nullableLessonText(row['kanjiMeaning']),
+          series: series,
           level: currentLevelLabel.toUpperCase(),
           tags: mergedTags,
         ),
@@ -978,18 +1081,63 @@ class LessonRepository {
     return out;
   }
 
-  Future<List<Map<String, dynamic>>> _loadCanonicalLessonVocabEntries({
+  String _minnaVocabAssetPath(String levelLower, String paddedLessonId) {
+    final nestedPath =
+        'assets/data/content/vocab/$levelLower/minna/lesson_$paddedLessonId.json';
+    if (levelLower == 'n4' || levelLower == 'n5') {
+      return nestedPath;
+    }
+    return 'assets/data/content/vocab/$levelLower/lesson_$paddedLessonId.json';
+  }
+
+  Future<String> _resolveCanonicalVocabAssetPath({
     required String levelLower,
     required int lessonId,
   }) async {
     final paddedLessonId = lessonId.toString().padLeft(2, '0');
-    final path =
-        'assets/data/content/vocab/$levelLower/lesson_$paddedLessonId.json';
+    final shinkanzenIndexPath =
+        'assets/data/content/vocab/$levelLower/ShinKanzen/index.json';
+
+    try {
+      final indexRaw = await rootBundle.loadString(shinkanzenIndexPath);
+      final indexPayload = json.decode(indexRaw);
+      if (indexPayload is Map) {
+        final lessons = indexPayload['lessons'];
+        if (lessons is List) {
+          for (final rawLesson in lessons) {
+            if (rawLesson is! Map) continue;
+            final lesson = rawLesson.map((k, v) => MapEntry(k.toString(), v));
+            final indexedLessonId =
+                int.tryParse((lesson['lessonId'] ?? '').toString().trim()) ?? -1;
+            final fileName = (lesson['file'] ?? '').toString().trim();
+            if (indexedLessonId == lessonId && fileName.isNotEmpty) {
+              return 'assets/data/content/vocab/$levelLower/ShinKanzen/$fileName';
+            }
+          }
+        }
+      }
+    } catch (_) {}
+
+    return _minnaVocabAssetPath(levelLower, paddedLessonId);
+  }
+
+  Future<List<Map<String, dynamic>>> _loadCanonicalLessonVocabEntries({
+    required String levelLower,
+    required int lessonId,
+  }) async {
+    final path = await _resolveCanonicalVocabAssetPath(
+      levelLower: levelLower,
+      lessonId: lessonId,
+    );
 
     try {
       final raw = await rootBundle.loadString(path);
       final payload = json.decode(raw);
       if (payload is! Map) return const [];
+      final payloadSeries =
+          (payload['series'] ?? '').toString().trim().isEmpty
+          ? _seriesForCanonicalLevel(levelLower.toUpperCase())
+          : (payload['series'] ?? '').toString().trim();
       final entries = payload['entries'];
       if (entries is! List) return const [];
 
@@ -1006,14 +1154,22 @@ class LessonRepository {
         final labels = labelsRaw is Map
             ? labelsRaw.map((k, v) => MapEntry(k.toString(), v))
             : const <String, dynamic>{};
+        final term = (lemma['term'] ?? '').toString().trim();
+        final meaningVi = (sense['meaningVi'] ?? '').toString().trim();
+        final hvResolution = await HanVietLookup.resolve(
+          term: term,
+          explicitHanViet: _nullableLessonText(labels['hanViet']),
+          explicitMeaningVi: meaningVi,
+        );
 
         out.add({
-          'term': (lemma['term'] ?? '').toString().trim(),
+          'term': term,
           'reading': _nullableLessonText(lemma['reading']),
-          'kanjiMeaning': _nullableLessonText(labels['hanViet']),
-          'meaningVi': (sense['meaningVi'] ?? '').toString().trim(),
+          'kanjiMeaning': hvResolution.hanViet,
+          'meaningVi': hvResolution.meaningVi ?? meaningVi,
           'meaningEn': _nullableLessonText(sense['meaningEn']),
           'order': int.tryParse((entry['order'] ?? '').toString().trim()) ?? 0,
+          'series': payloadSeries,
           'tags': entry['tags'],
         });
       }
@@ -1021,6 +1177,16 @@ class LessonRepository {
     } catch (_) {
       return const [];
     }
+  }
+
+  String _seriesForCanonicalLevel(String level) {
+    return level == 'N3' ? 'ShinKanzen' : 'minna';
+  }
+
+  String _lessonSeriesTag(String series, int lessonId) {
+    final normalized = series.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]+'), '');
+    final prefix = normalized.isEmpty ? 'lesson' : normalized;
+    return '${prefix}_$lessonId';
   }
 
   String? _nullableLessonText(Object? value) {

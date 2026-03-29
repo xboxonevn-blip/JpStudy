@@ -5,48 +5,69 @@ import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
-import 'package:jpstudy/data/db/content_database.dart';
-import 'package:jpstudy/data/repositories/content_repository.dart';
+import 'package:jpstudy/data/models/vocab_item.dart';
+import 'package:jpstudy/features/common/widgets/clay_button.dart';
 import 'package:jpstudy/features/games/match_game/match_game_screen.dart';
+import 'package:jpstudy/features/games/providers/game_vocab_pool_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-VocabData _vocab(int id, String term, String meaning) => VocabData(
+VocabItem _vocab(int id, String term, String meaning) => VocabItem(
       id: id,
       term: term,
-      reading: null,
+      reading: '',
       meaning: meaning,
       meaningEn: meaning,
       level: 'N5',
     );
 
-Widget buildScreen(List<VocabData> items) => ProviderScope(
+Widget buildScreen(List<VocabItem> items) => ProviderScope(
       overrides: [
         appLanguageProvider.overrideWith((ref) => AppLanguage.en),
         studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
-        vocabPreviewProvider('N5').overrideWith((ref) async => items),
+        gameVocabPoolProvider.overrideWith((ref) async => items),
       ],
       child: const MaterialApp(home: MatchGameScreen()),
     );
+
+Future<void> _pumpReady(WidgetTester tester) async {
+  await tester.pumpWidget(const SizedBox.shrink());
+  await tester.pump();
+}
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
 
   testWidgets('shows Match Game app bar title with level', (tester) async {
-    await tester.pumpWidget(buildScreen([_vocab(1, '火', 'fire')]));
+    await tester.pumpWidget(buildScreen([_vocab(1, '?', 'fire')]));
     await tester.pump();
-    expect(find.text('Match Game (N5)'), findsOneWidget);
+    await tester.pump(const Duration(milliseconds: 50));
+    expect(find.text('${AppLanguage.en.matchGameLabel} (N5)'), findsOneWidget);
+    await _pumpReady(tester);
   });
 
   testWidgets('shows classic and time attack buttons when vocab exists', (tester) async {
     await tester.pumpWidget(buildScreen([
-      _vocab(1, '火', 'fire'),
-      _vocab(2, '水', 'water'),
-      _vocab(3, '木', 'tree'),
+      _vocab(1, '?', 'fire'),
+      _vocab(2, '?', 'water'),
+      _vocab(3, '?', 'tree'),
     ]));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));
-    expect(find.text(AppLanguage.en.startMatchGameLabel.toUpperCase()), findsOneWidget);
-    expect(find.text(AppLanguage.en.startTimeAttackLabel.toUpperCase()), findsOneWidget);
+    expect(
+      find.widgetWithText(
+        ClayButton,
+        AppLanguage.en.startMatchGameLabel.toUpperCase(),
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.widgetWithText(
+        ClayButton,
+        AppLanguage.en.startTimeAttackLabel.toUpperCase(),
+      ),
+      findsOneWidget,
+    );
+    await _pumpReady(tester);
   });
 
   testWidgets('shows empty-state when no vocab exists', (tester) async {
@@ -54,5 +75,6 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));
     expect(find.text(AppLanguage.en.noVocabFoundLabel), findsOneWidget);
+    await _pumpReady(tester);
   });
 }

@@ -13,6 +13,7 @@ class Vocab extends Table {
   // Back-reference to normalized vocab assets for cross-dataset linking.
   TextColumn get sourceVocabId => text().nullable()();
   TextColumn get sourceSenseId => text().nullable()();
+  TextColumn get series => text().withDefault(const Constant('minna'))();
   TextColumn get level => text()();
   TextColumn get tags => text().nullable()();
 

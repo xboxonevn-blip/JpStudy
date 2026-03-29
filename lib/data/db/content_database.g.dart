@@ -92,6 +92,16 @@ class $VocabTable extends Vocab with TableInfo<$VocabTable, VocabData> {
     type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
+  static const VerificationMeta _seriesMeta = const VerificationMeta('series');
+  @override
+  late final GeneratedColumn<String> series = GeneratedColumn<String>(
+    'series',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('minna'),
+  );
   static const VerificationMeta _levelMeta = const VerificationMeta('level');
   @override
   late final GeneratedColumn<String> level = GeneratedColumn<String>(
@@ -120,6 +130,7 @@ class $VocabTable extends Vocab with TableInfo<$VocabTable, VocabData> {
     kanjiMeaning,
     sourceVocabId,
     sourceSenseId,
+    series,
     level,
     tags,
   ];
@@ -193,6 +204,12 @@ class $VocabTable extends Vocab with TableInfo<$VocabTable, VocabData> {
         ),
       );
     }
+    if (data.containsKey('series')) {
+      context.handle(
+        _seriesMeta,
+        series.isAcceptableOrUnknown(data['series']!, _seriesMeta),
+      );
+    }
     if (data.containsKey('level')) {
       context.handle(
         _levelMeta,
@@ -248,6 +265,10 @@ class $VocabTable extends Vocab with TableInfo<$VocabTable, VocabData> {
         DriftSqlType.string,
         data['${effectivePrefix}source_sense_id'],
       ),
+      series: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}series'],
+      )!,
       level: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}level'],
@@ -274,6 +295,7 @@ class VocabData extends DataClass implements Insertable<VocabData> {
   final String? kanjiMeaning;
   final String? sourceVocabId;
   final String? sourceSenseId;
+  final String series;
   final String level;
   final String? tags;
   const VocabData({
@@ -285,6 +307,7 @@ class VocabData extends DataClass implements Insertable<VocabData> {
     this.kanjiMeaning,
     this.sourceVocabId,
     this.sourceSenseId,
+    required this.series,
     required this.level,
     this.tags,
   });
@@ -309,6 +332,7 @@ class VocabData extends DataClass implements Insertable<VocabData> {
     if (!nullToAbsent || sourceSenseId != null) {
       map['source_sense_id'] = Variable<String>(sourceSenseId);
     }
+    map['series'] = Variable<String>(series);
     map['level'] = Variable<String>(level);
     if (!nullToAbsent || tags != null) {
       map['tags'] = Variable<String>(tags);
@@ -336,6 +360,7 @@ class VocabData extends DataClass implements Insertable<VocabData> {
       sourceSenseId: sourceSenseId == null && nullToAbsent
           ? const Value.absent()
           : Value(sourceSenseId),
+      series: Value(series),
       level: Value(level),
       tags: tags == null && nullToAbsent ? const Value.absent() : Value(tags),
     );
@@ -355,6 +380,7 @@ class VocabData extends DataClass implements Insertable<VocabData> {
       kanjiMeaning: serializer.fromJson<String?>(json['kanjiMeaning']),
       sourceVocabId: serializer.fromJson<String?>(json['sourceVocabId']),
       sourceSenseId: serializer.fromJson<String?>(json['sourceSenseId']),
+      series: serializer.fromJson<String>(json['series']),
       level: serializer.fromJson<String>(json['level']),
       tags: serializer.fromJson<String?>(json['tags']),
     );
@@ -371,6 +397,7 @@ class VocabData extends DataClass implements Insertable<VocabData> {
       'kanjiMeaning': serializer.toJson<String?>(kanjiMeaning),
       'sourceVocabId': serializer.toJson<String?>(sourceVocabId),
       'sourceSenseId': serializer.toJson<String?>(sourceSenseId),
+      'series': serializer.toJson<String>(series),
       'level': serializer.toJson<String>(level),
       'tags': serializer.toJson<String?>(tags),
     };
@@ -385,6 +412,7 @@ class VocabData extends DataClass implements Insertable<VocabData> {
     Value<String?> kanjiMeaning = const Value.absent(),
     Value<String?> sourceVocabId = const Value.absent(),
     Value<String?> sourceSenseId = const Value.absent(),
+    String? series,
     String? level,
     Value<String?> tags = const Value.absent(),
   }) => VocabData(
@@ -400,6 +428,7 @@ class VocabData extends DataClass implements Insertable<VocabData> {
     sourceSenseId: sourceSenseId.present
         ? sourceSenseId.value
         : this.sourceSenseId,
+    series: series ?? this.series,
     level: level ?? this.level,
     tags: tags.present ? tags.value : this.tags,
   );
@@ -419,6 +448,7 @@ class VocabData extends DataClass implements Insertable<VocabData> {
       sourceSenseId: data.sourceSenseId.present
           ? data.sourceSenseId.value
           : this.sourceSenseId,
+      series: data.series.present ? data.series.value : this.series,
       level: data.level.present ? data.level.value : this.level,
       tags: data.tags.present ? data.tags.value : this.tags,
     );
@@ -435,6 +465,7 @@ class VocabData extends DataClass implements Insertable<VocabData> {
           ..write('kanjiMeaning: $kanjiMeaning, ')
           ..write('sourceVocabId: $sourceVocabId, ')
           ..write('sourceSenseId: $sourceSenseId, ')
+          ..write('series: $series, ')
           ..write('level: $level, ')
           ..write('tags: $tags')
           ..write(')'))
@@ -451,6 +482,7 @@ class VocabData extends DataClass implements Insertable<VocabData> {
     kanjiMeaning,
     sourceVocabId,
     sourceSenseId,
+    series,
     level,
     tags,
   );
@@ -466,6 +498,7 @@ class VocabData extends DataClass implements Insertable<VocabData> {
           other.kanjiMeaning == this.kanjiMeaning &&
           other.sourceVocabId == this.sourceVocabId &&
           other.sourceSenseId == this.sourceSenseId &&
+          other.series == this.series &&
           other.level == this.level &&
           other.tags == this.tags);
 }
@@ -479,6 +512,7 @@ class VocabCompanion extends UpdateCompanion<VocabData> {
   final Value<String?> kanjiMeaning;
   final Value<String?> sourceVocabId;
   final Value<String?> sourceSenseId;
+  final Value<String> series;
   final Value<String> level;
   final Value<String?> tags;
   const VocabCompanion({
@@ -490,6 +524,7 @@ class VocabCompanion extends UpdateCompanion<VocabData> {
     this.kanjiMeaning = const Value.absent(),
     this.sourceVocabId = const Value.absent(),
     this.sourceSenseId = const Value.absent(),
+    this.series = const Value.absent(),
     this.level = const Value.absent(),
     this.tags = const Value.absent(),
   });
@@ -502,6 +537,7 @@ class VocabCompanion extends UpdateCompanion<VocabData> {
     this.kanjiMeaning = const Value.absent(),
     this.sourceVocabId = const Value.absent(),
     this.sourceSenseId = const Value.absent(),
+    this.series = const Value.absent(),
     required String level,
     this.tags = const Value.absent(),
   }) : term = Value(term),
@@ -516,6 +552,7 @@ class VocabCompanion extends UpdateCompanion<VocabData> {
     Expression<String>? kanjiMeaning,
     Expression<String>? sourceVocabId,
     Expression<String>? sourceSenseId,
+    Expression<String>? series,
     Expression<String>? level,
     Expression<String>? tags,
   }) {
@@ -528,6 +565,7 @@ class VocabCompanion extends UpdateCompanion<VocabData> {
       if (kanjiMeaning != null) 'kanji_meaning': kanjiMeaning,
       if (sourceVocabId != null) 'source_vocab_id': sourceVocabId,
       if (sourceSenseId != null) 'source_sense_id': sourceSenseId,
+      if (series != null) 'series': series,
       if (level != null) 'level': level,
       if (tags != null) 'tags': tags,
     });
@@ -542,6 +580,7 @@ class VocabCompanion extends UpdateCompanion<VocabData> {
     Value<String?>? kanjiMeaning,
     Value<String?>? sourceVocabId,
     Value<String?>? sourceSenseId,
+    Value<String>? series,
     Value<String>? level,
     Value<String?>? tags,
   }) {
@@ -554,6 +593,7 @@ class VocabCompanion extends UpdateCompanion<VocabData> {
       kanjiMeaning: kanjiMeaning ?? this.kanjiMeaning,
       sourceVocabId: sourceVocabId ?? this.sourceVocabId,
       sourceSenseId: sourceSenseId ?? this.sourceSenseId,
+      series: series ?? this.series,
       level: level ?? this.level,
       tags: tags ?? this.tags,
     );
@@ -586,6 +626,9 @@ class VocabCompanion extends UpdateCompanion<VocabData> {
     if (sourceSenseId.present) {
       map['source_sense_id'] = Variable<String>(sourceSenseId.value);
     }
+    if (series.present) {
+      map['series'] = Variable<String>(series.value);
+    }
     if (level.present) {
       map['level'] = Variable<String>(level.value);
     }
@@ -606,6 +649,7 @@ class VocabCompanion extends UpdateCompanion<VocabData> {
           ..write('kanjiMeaning: $kanjiMeaning, ')
           ..write('sourceVocabId: $sourceVocabId, ')
           ..write('sourceSenseId: $sourceSenseId, ')
+          ..write('series: $series, ')
           ..write('level: $level, ')
           ..write('tags: $tags')
           ..write(')'))
@@ -4141,6 +4185,7 @@ typedef $$VocabTableCreateCompanionBuilder =
       Value<String?> kanjiMeaning,
       Value<String?> sourceVocabId,
       Value<String?> sourceSenseId,
+      Value<String> series,
       required String level,
       Value<String?> tags,
     });
@@ -4154,6 +4199,7 @@ typedef $$VocabTableUpdateCompanionBuilder =
       Value<String?> kanjiMeaning,
       Value<String?> sourceVocabId,
       Value<String?> sourceSenseId,
+      Value<String> series,
       Value<String> level,
       Value<String?> tags,
     });
@@ -4227,6 +4273,11 @@ class $$VocabTableFilterComposer
 
   ColumnFilters<String> get sourceSenseId => $composableBuilder(
     column: $table.sourceSenseId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get series => $composableBuilder(
+    column: $table.series,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -4315,6 +4366,11 @@ class $$VocabTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<String> get series => $composableBuilder(
+    column: $table.series,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<String> get level => $composableBuilder(
     column: $table.level,
     builder: (column) => ColumnOrderings(column),
@@ -4364,6 +4420,9 @@ class $$VocabTableAnnotationComposer
     column: $table.sourceSenseId,
     builder: (column) => column,
   );
+
+  GeneratedColumn<String> get series =>
+      $composableBuilder(column: $table.series, builder: (column) => column);
 
   GeneratedColumn<String> get level =>
       $composableBuilder(column: $table.level, builder: (column) => column);
@@ -4433,6 +4492,7 @@ class $$VocabTableTableManager
                 Value<String?> kanjiMeaning = const Value.absent(),
                 Value<String?> sourceVocabId = const Value.absent(),
                 Value<String?> sourceSenseId = const Value.absent(),
+                Value<String> series = const Value.absent(),
                 Value<String> level = const Value.absent(),
                 Value<String?> tags = const Value.absent(),
               }) => VocabCompanion(
@@ -4444,6 +4504,7 @@ class $$VocabTableTableManager
                 kanjiMeaning: kanjiMeaning,
                 sourceVocabId: sourceVocabId,
                 sourceSenseId: sourceSenseId,
+                series: series,
                 level: level,
                 tags: tags,
               ),
@@ -4457,6 +4518,7 @@ class $$VocabTableTableManager
                 Value<String?> kanjiMeaning = const Value.absent(),
                 Value<String?> sourceVocabId = const Value.absent(),
                 Value<String?> sourceSenseId = const Value.absent(),
+                Value<String> series = const Value.absent(),
                 required String level,
                 Value<String?> tags = const Value.absent(),
               }) => VocabCompanion.insert(
@@ -4468,6 +4530,7 @@ class $$VocabTableTableManager
                 kanjiMeaning: kanjiMeaning,
                 sourceVocabId: sourceVocabId,
                 sourceSenseId: sourceSenseId,
+                series: series,
                 level: level,
                 tags: tags,
               ),

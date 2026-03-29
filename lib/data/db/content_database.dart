@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'content_tables.dart';
 import '../utils/grammar_example_matching.dart';
 import '../utils/grammar_english_notation.dart';
+import '../utils/han_viet_lookup.dart';
 
 part 'content_database.g.dart';
 
@@ -29,7 +30,7 @@ class ContentDatabase extends _$ContentDatabase {
     : super(executor ?? _openContentConnection());
 
   @override
-  int get schemaVersion => 25;
+  int get schemaVersion => 27;
 
   @override
   MigrationStrategy get migration {
@@ -37,6 +38,7 @@ class ContentDatabase extends _$ContentDatabase {
       onCreate: (Migrator m) async {
         await m.createAll();
         await _seedMinnaVocabulary();
+        await _seedHajimeteVocabulary();
         await _seedMinnaGrammar();
         await _seedMinnaKanji();
       },
@@ -113,9 +115,20 @@ class ContentDatabase extends _$ContentDatabase {
         if (from < 25) {
           await _seedMinnaGrammar();
         }
+        if (from < 26) {
+          await _addColumn(m, vocab, vocab.series);
+          await customStatement(
+            "UPDATE vocab SET series = 'minna' WHERE series IS NULL OR series = ''",
+          );
+          await _reseedHajimeteVocab();
+        }
+        if (from < 27) {
+          await _reseedMinnaVocabulary();
+        }
       },
       beforeOpen: (details) async {
         await _ensureMinnaVocabularySeeded();
+        await _ensureHajimeteVocabularySeeded();
         await _ensureMinnaGrammarSeeded();
         await _ensureMinnaKanjiSeeded();
       },
@@ -125,8 +138,9 @@ class ContentDatabase extends _$ContentDatabase {
   // ... (reseed methods)
 
   Future<void> _reseedMinnaVocabulary() async {
-    // Delete all old Minna vocabulary rows before rebuilding supported levels.
-    await (delete(vocab)..where((tbl) => tbl.tags.like('%minna_%'))).go();
+    await (delete(vocab)..where(
+      (tbl) => tbl.series.equals('minna') | tbl.series.equals('ShinKanzen'),
+    )).go();
 
     await _seedMinnaVocabulary();
   }
@@ -136,7 +150,9 @@ class ContentDatabase extends _$ContentDatabase {
       final levelCountExpr = vocab.id.count();
       final levelQuery = selectOnly(vocab)
         ..addColumns([levelCountExpr])
-        ..where(vocab.level.equals(spec.levelLabel));
+        ..where(
+          vocab.level.equals(spec.levelLabel) & vocab.series.equals(spec.series),
+        );
       final levelRow = await levelQuery.getSingle();
       final levelCount = levelRow.read(levelCountExpr) ?? 0;
       if (levelCount == 0) {
@@ -148,7 +164,7 @@ class ContentDatabase extends _$ContentDatabase {
     final corruptedCountExpr = vocab.id.count();
     final corruptedQuery = selectOnly(vocab)
       ..addColumns([corruptedCountExpr])
-      ..where(vocab.tags.like('%minna_%'))
+      ..where(vocab.tags.like('%minna_%') | vocab.tags.like('%shinkanzen_%'))
       ..where(
         vocab.term.like('%?%') |
             vocab.reading.like('%?%') |
@@ -167,6 +183,100 @@ class ContentDatabase extends _$ContentDatabase {
   Future<void> _seedMinnaVocabulary() async {
     for (final spec in _contentSeedSpecs) {
       await _seedVocabularyLevel(spec);
+    }
+  }
+
+  Future<void> _ensureHajimeteVocabularySeeded() async {
+    for (final spec in _hajimeteSeedSpecs) {
+      final countExpr = vocab.id.count();
+      final query = selectOnly(vocab)
+        ..addColumns([countExpr])
+        ..where(
+          vocab.level.equals(spec.levelLabel) & vocab.series.equals('hajimete'),
+        );
+      final row = await query.getSingle();
+      final count = row.read(countExpr) ?? 0;
+      if (count == 0) {
+        await _seedHajimeteLevel(spec);
+      }
+    }
+  }
+
+  Future<void> _seedHajimeteVocabulary() async {
+    for (final spec in _hajimeteSeedSpecs) {
+      await _seedHajimeteLevel(spec);
+    }
+  }
+
+  Future<void> _reseedHajimeteVocab() async {
+    await (delete(vocab)..where((tbl) => tbl.series.equals('hajimete'))).go();
+    await _seedHajimeteVocabulary();
+  }
+
+  Future<void> _seedHajimeteLevel(_HajimeteSeedSpec spec) async {
+    final level = spec.levelLabel;
+    for (int chapterId = 1; chapterId <= spec.chapterCount; chapterId++) {
+      final padded = chapterId.toString().padLeft(2, '0');
+      final path = _hajimeteVocabAssetPath(spec.levelLower, padded);
+      try {
+        final raw = await rootBundle.loadString(path);
+        final payload = _asMap(json.decode(raw));
+        final entries = payload?['entries'];
+        if (entries is! List) continue;
+
+        for (final rawEntry in entries) {
+          final entry = _asMap(rawEntry);
+          final lemma = _asMap(entry?['lemma']);
+          final sense = _asMap(entry?['sense']);
+          final labels = _asMap(lemma?['labels']);
+          final links = _asMap(entry?['links']);
+          if (entry == null || lemma == null || sense == null) continue;
+
+          final term = _readText(lemma, 'term');
+          final meaningVi = _readText(sense, 'meaningVi');
+          if (term.isEmpty || meaningVi.isEmpty) continue;
+
+          final tags = entry['tags'] is List
+              ? (entry['tags'] as List).whereType<String>().join(',')
+              : null;
+          final hvResolution = await HanVietLookup.resolve(
+            term: term,
+            explicitHanViet: _readText(
+              labels ?? const <String, dynamic>{},
+              'hanViet',
+            ).nullIfEmpty(),
+            explicitMeaningVi: meaningVi,
+          );
+
+          await into(vocab).insert(
+            VocabCompanion.insert(
+              term: term,
+              reading: Value(_readText(lemma, 'reading').nullIfEmpty()),
+              meaning: hvResolution.meaningVi ?? meaningVi,
+              meaningEn: Value(_readText(sense, 'meaningEn').nullIfEmpty()),
+              kanjiMeaning: Value(hvResolution.hanViet),
+              sourceVocabId: Value(
+                _readText(
+                  links ?? const <String, dynamic>{},
+                  'sourceVocabId',
+                ).nullIfEmpty(),
+              ),
+              sourceSenseId: Value(
+                _readText(
+                  links ?? const <String, dynamic>{},
+                  'sourceSenseId',
+                ).nullIfEmpty(),
+              ),
+              series: const Value('hajimete'),
+              level: level,
+              tags: Value(tags?.nullIfEmpty()),
+            ),
+            mode: InsertMode.insertOrIgnore,
+          );
+        }
+      } catch (_) {
+        // Missing chapter file: skip until that level is implemented.
+      }
     }
   }
 
@@ -332,6 +442,7 @@ class ContentDatabase extends _$ContentDatabase {
           sourceSenseId: Value(item['sourceSenseId'] as String?),
           meaning: item['meaning_vi'] as String,
           meaningEn: Value(item['meaning_en'] as String?),
+          series: Value((item['series'] as String?) ?? 'minna'),
           level: item['level'] as String,
           tags: Value(item['tags'] as String?),
         ),
@@ -340,14 +451,61 @@ class ContentDatabase extends _$ContentDatabase {
     }
   }
 
+  String _minnaVocabAssetPath(String levelLower, String paddedLessonId) {
+    final nestedPath =
+        'assets/data/content/vocab/$levelLower/minna/lesson_$paddedLessonId.json';
+    if (levelLower == 'n4' || levelLower == 'n5') {
+      return nestedPath;
+    }
+    return 'assets/data/content/vocab/$levelLower/lesson_$paddedLessonId.json';
+  }
+
+  Future<String> _resolveCanonicalVocabAssetPath({
+    required String levelLower,
+    required int lessonId,
+  }) async {
+    final paddedLessonId = lessonId.toString().padLeft(2, '0');
+    final shinkanzenIndexPath =
+        'assets/data/content/vocab/$levelLower/ShinKanzen/index.json';
+
+    try {
+      final indexRaw = await rootBundle.loadString(shinkanzenIndexPath);
+      final indexPayload = _asMap(json.decode(indexRaw));
+      final lessons = indexPayload?['lessons'];
+      if (lessons is List) {
+        for (final rawLesson in lessons) {
+          final lesson = _asMap(rawLesson);
+          if (lesson == null) continue;
+          final indexedLessonId = _readInt(lesson, 'lessonId') ?? -1;
+          final fileName = _readText(lesson, 'file');
+          if (indexedLessonId == lessonId && fileName.isNotEmpty) {
+            return 'assets/data/content/vocab/$levelLower/ShinKanzen/$fileName';
+          }
+        }
+      }
+    } catch (_) {}
+
+    return _minnaVocabAssetPath(levelLower, paddedLessonId);
+  }
+
+  String _hajimeteVocabAssetPath(String levelLower, String paddedChapterId) {
+    final nestedPath =
+        'assets/data/content/vocab/$levelLower/hajimete/hajimete_ch$paddedChapterId.json';
+    if (levelLower == 'n4' || levelLower == 'n5') {
+      return nestedPath;
+    }
+    return 'assets/data/content/vocab/$levelLower/hajimete_ch$paddedChapterId.json';
+  }
+
   Future<List<Map<String, dynamic>>> _loadCanonicalVocabRows({
     required String level,
     required int lessonId,
   }) async {
     final levelLower = level.toLowerCase();
-    final paddedLessonId = lessonId.toString().padLeft(2, '0');
-    final path =
-        'assets/data/content/vocab/$levelLower/lesson_$paddedLessonId.json';
+    final path = await _resolveCanonicalVocabAssetPath(
+      levelLower: levelLower,
+      lessonId: lessonId,
+    );
 
     try {
       final raw = await rootBundle.loadString(path);
@@ -371,15 +529,16 @@ class ContentDatabase extends _$ContentDatabase {
         if (term.isEmpty || meaningVi.isEmpty) continue;
 
         final labels = _asMap(lemma['labels']);
+        final payloadSeries = _readText(payload ?? const {}, 'series').nullIfEmpty() ??
+            _seriesForCanonicalLevel(level);
         final tags = (entry['tags'] is List)
             ? (entry['tags'] as List)
                   .map((tag) => tag.toString().trim())
                   .where((tag) => tag.isNotEmpty)
                   .join(',')
             : '';
-        final mergedTags = tags.isEmpty
-            ? 'minna_$lessonId'
-            : 'minna_$lessonId,$tags';
+        final tagPrefix = _lessonSeriesTag(payloadSeries, lessonId);
+        final mergedTags = tags.isEmpty ? tagPrefix : '$tagPrefix,$tags';
 
         rows.add({
           'term': term,
@@ -396,6 +555,7 @@ class ContentDatabase extends _$ContentDatabase {
           'meaning_vi': meaningVi,
           'meaning_en': _readNullableText(sense, 'meaningEn'),
           'level': level,
+          'series': payloadSeries,
           'tags': mergedTags,
         });
       }
@@ -432,7 +592,14 @@ class ContentDatabase extends _$ContentDatabase {
       final sourceSenseId = _readNullableText(raw, 'sourceSenseId');
       final meaningEn = _readNullableText(raw, 'meaning_en');
       final rowLevel = _firstNonEmpty([_readText(raw, 'level'), level]);
-      final tags = _firstNonEmpty([_readText(raw, 'tags'), 'minna_$lessonId']);
+      final series = _firstNonEmpty([
+        _readText(raw, 'series'),
+        _seriesForCanonicalLevel(level),
+      ]);
+      final tags = _firstNonEmpty([
+        _readText(raw, 'tags'),
+        _lessonSeriesTag(series, lessonId),
+      ]);
 
       final normalized = <String, dynamic>{
         'term': term,
@@ -443,6 +610,7 @@ class ContentDatabase extends _$ContentDatabase {
         'meaning_vi': meaningVi,
         'meaning_en': meaningEn,
         'level': rowLevel,
+        'series': series,
         'tags': tags,
       };
 
@@ -529,7 +697,18 @@ class ContentDatabase extends _$ContentDatabase {
     ]);
     final meaningEn = _readText(row, 'meaning_en');
     final level = _readText(row, 'level');
-    return '$term|$reading|$kanjiMeaning|$sourceVocabId|$sourceSenseId|$meaningVi|$meaningEn|$level';
+    final series = _readText(row, 'series');
+    return '$term|$reading|$kanjiMeaning|$sourceVocabId|$sourceSenseId|$meaningVi|$meaningEn|$level|$series';
+  }
+
+  String _seriesForCanonicalLevel(String level) {
+    return level == 'N3' ? 'ShinKanzen' : 'minna';
+  }
+
+  String _lessonSeriesTag(String series, int lessonId) {
+    final normalized = series.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]+'), '');
+    final prefix = normalized.isEmpty ? 'lesson' : normalized;
+    return '${prefix}_$lessonId';
   }
 
   bool _containsPlaceholder(String? value) {
@@ -730,6 +909,7 @@ class _SeedVocabAggregate {
     required this.meaningVi,
     required this.meaningEn,
     required this.level,
+    required this.series,
     required Iterable<String> tags,
   }) : _tags = LinkedHashSet<String>() {
     _mergeTags(tags);
@@ -743,6 +923,7 @@ class _SeedVocabAggregate {
   final String meaningVi;
   final String? meaningEn;
   final String level;
+  final String series;
   final LinkedHashSet<String> _tags;
 
   factory _SeedVocabAggregate.fromRow(Map<String, dynamic> row) {
@@ -755,6 +936,7 @@ class _SeedVocabAggregate {
       meaningVi: row['meaning_vi'] as String,
       meaningEn: row['meaning_en'] as String?,
       level: row['level'] as String,
+      series: (row['series'] as String?) ?? 'minna',
       tags: _splitTags(row['tags'] as String?),
     );
   }
@@ -773,6 +955,7 @@ class _SeedVocabAggregate {
       'meaning_vi': meaningVi,
       'meaning_en': meaningEn,
       'level': level,
+      'series': series,
       'tags': _tags.join(','),
     };
   }
@@ -806,19 +989,41 @@ class _ContentSeedSpec {
     this.levelLower,
     this.startLesson,
     this.endLesson,
+    this.series,
   );
 
   final String levelLabel;
   final String levelLower;
   final int startLesson;
   final int endLesson;
+  final String series;
 }
 
 const _contentSeedSpecs = <_ContentSeedSpec>[
-  _ContentSeedSpec('N5', 'n5', 1, 25),
-  _ContentSeedSpec('N4', 'n4', 26, 50),
-  _ContentSeedSpec('N3', 'n3', 51, 75),
+  _ContentSeedSpec('N5', 'n5', 1, 25, 'minna'),
+  _ContentSeedSpec('N4', 'n4', 26, 50, 'minna'),
+  _ContentSeedSpec('N3', 'n3', 51, 75, 'ShinKanzen'),
 ];
+
+class _HajimeteSeedSpec {
+  const _HajimeteSeedSpec(this.levelLabel, this.levelLower, this.chapterCount);
+
+  final String levelLabel;
+  final String levelLower;
+  final int chapterCount;
+}
+
+const _hajimeteSeedSpecs = <_HajimeteSeedSpec>[
+  _HajimeteSeedSpec('N5', 'n5', 14),
+  _HajimeteSeedSpec('N4', 'n4', 20),
+  _HajimeteSeedSpec('N3', 'n3', 28),
+  _HajimeteSeedSpec('N2', 'n2', 38),
+  _HajimeteSeedSpec('N1', 'n1', 50),
+];
+
+extension _StringNullIfEmpty on String {
+  String? nullIfEmpty() => trim().isEmpty ? null : this;
+}
 
 QueryExecutor _openContentConnection() {
   return driftDatabase(
