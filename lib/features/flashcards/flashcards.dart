@@ -16,3 +16,6 @@ export 'widgets/flashcard_summary.dart';
 
 // Screens
 export 'screens/enhanced_flashcard_screen.dart';
+
+// Integration
+export 'integration/flashcard_mode_integration.dart';

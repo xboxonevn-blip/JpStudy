@@ -19,9 +19,13 @@ import 'package:jpstudy/features/immersion/immersion_home_screen.dart';
 import 'package:jpstudy/features/jlpt/screens/jlpt_coach_screen.dart';
 import 'package:jpstudy/features/jlpt/screens/jlpt_mock_pro_screen.dart';
 import 'package:jpstudy/features/jlpt/screens/jlpt_reading_screen.dart';
+<<<<<<< HEAD
 import 'package:jpstudy/features/kanji_hub/kanji_hub_screen.dart';
 import 'package:jpstudy/features/kanji_reading/screens/home_kanji_reading_screen.dart';
 import 'package:jpstudy/features/leaderboard/leaderboard_screen.dart';
+=======
+import 'package:jpstudy/features/flashcards/integration/flashcard_mode_integration.dart';
+>>>>>>> claude/confident-carson
 import 'package:jpstudy/features/learn/integration/learn_mode_integration.dart';
 import 'package:jpstudy/features/learn/integration/write_mode_integration.dart';
 import 'package:jpstudy/features/learn/models/learn_config.dart';
@@ -225,6 +229,7 @@ class AppRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
+<<<<<<< HEAD
                 path: '/memory',
                 builder: (context, state) => const StudyHubScreen(),
               ),
@@ -235,6 +240,21 @@ class AppRouter {
               GoRoute(
                 path: '/mistakes',
                 builder: (context, state) => const MistakeScreen(),
+=======
+                path: '/lesson/:id/flashcards-enhanced',
+                builder: (context, state) {
+                  final id = int.tryParse(state.pathParameters['id'] ?? '');
+                  final title = state.uri.queryParameters['title'] ?? 'Lesson';
+                  return FlashcardModeIntegration(
+                    lessonId: id ?? 1,
+                    lessonTitle: title,
+                  );
+                },
+              ),
+              GoRoute(
+                path: '/learn/session',
+                builder: _buildLearnScreenFromArgs,
+>>>>>>> claude/confident-carson
               ),
               GoRoute(
                 path: '/learn/recovery-pack',
