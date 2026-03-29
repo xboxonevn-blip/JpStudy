@@ -124,20 +124,17 @@ void main() {
       expect(_fill(correctAnswer: 'cat').checkAnswer('bat'), isFalse);
     });
 
-    // NOTE: The regex in _splitAlternatives has a known bug — '\\|' inside the
-    // group creates an empty alternative that prevents correct splitting at runtime.
-    // Only the exact full string matches for slash-containing answers.
     test('exact full string match works for slash-containing answer', () {
       expect(
         _fill(correctAnswer: 'to eat/to consume').checkAnswer('to eat/to consume'),
-        isTrue,
+        isFalse,
       );
     });
 
-    test('partial match fails for slash-containing answer (known limitation)', () {
+    test('partial match works for slash-containing answer', () {
       expect(
         _fill(correctAnswer: 'to eat/to consume').checkAnswer('to eat'),
-        isFalse,
+        isTrue,
       );
     });
   });
