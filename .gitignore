@@ -10,6 +10,7 @@
 *.class
 
 # Flutter / Dart
+.pytest_cache/
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
@@ -81,11 +82,26 @@ app.*.symbols
 app.*.map.json
 
 # Local agent / tooling workspace
+.venv_coding_agent/
 .claude/worktrees/
 .playwright-mcp/
 tooling/_tmpcache/
+tooling/__pycache__/
 
 # Local localization tooling
 .venv_localize/
 tooling/reports/suspicious_locale_literals*.txt
 docs/reports/string-literal-audit-latest.md
+docs/logs/*.stdout.log
+docs/logs/*.stderr.log
+
+# Local debug dumps / scratch files
+a.txt
+b.txt
+c.txt
+dump.txt
+vocab_dump.txt
+.codex_tmp_audit_output.json
+tmp_shinkanzen_category_vi_cache.json
+tests/
+tmp/
