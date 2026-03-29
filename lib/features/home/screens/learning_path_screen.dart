@@ -14,6 +14,7 @@ import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/common/widgets/japanese_background.dart';
 import 'package:jpstudy/features/home/providers/continue_provider.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
+import 'package:jpstudy/features/home/widgets/daily_plan_card.dart';
 import 'package:jpstudy/features/home/widgets/daily_session_card.dart';
 import 'package:jpstudy/features/home/widgets/discover_practice_panel.dart';
 import 'package:jpstudy/features/home/widgets/mini_dashboard.dart';
@@ -124,8 +125,13 @@ class LearningPathScreen extends ConsumerWidget {
                       children: [
                         hero,
                         const SizedBox(height: 10),
+                        const DailyPlanCard()
+                            .animate(delay: 60.ms)
+                            .fadeIn(duration: 340.ms)
+                            .slideY(begin: 0.06, end: 0),
+                        const SizedBox(height: 10),
                         const DailySessionCard(compact: true)
-                            .animate(delay: 80.ms)
+                            .animate(delay: 120.ms)
                             .fadeIn(duration: 340.ms)
                             .slideY(begin: 0.06, end: 0),
                         const SizedBox(height: 10),
@@ -171,6 +177,10 @@ class LearningPathScreen extends ConsumerWidget {
                   return Column(
                     children: [
                       hero,
+                      const SizedBox(height: 10),
+                      const DailyPlanCard()
+                          .animate(delay: 60.ms)
+                          .fadeIn(duration: 340.ms),
                       const SizedBox(height: 12),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
