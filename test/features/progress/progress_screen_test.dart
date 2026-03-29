@@ -140,22 +140,6 @@ Widget buildProgressScreen({
   ],
   child: const MaterialApp(home: ProgressScreen()),
 );
-Widget buildProgressScreen() => ProviderScope(
-      overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-        studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
-        progressSummaryProvider.overrideWith((ref) async => _kSummary),
-        reviewHistoryProvider.overrideWith((ref) async => const []),
-        attemptHistoryProvider.overrideWith((ref) async => const []),
-        srsRetentionProvider.overrideWith((ref) async => _kBreakdown),
-        weaknessRadarProvider.overrideWith((ref) async => const []),
-        masterySnapshotProvider.overrideWith(
-          (ref) async => const MasterySnapshot(levels: []),
-        ),
-      ],
-      child: const MaterialApp(home: ProgressScreen()),
-    );
-
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
 

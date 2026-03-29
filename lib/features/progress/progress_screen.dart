@@ -15,7 +15,6 @@ import 'package:jpstudy/features/home/widgets/weakness_radar_card.dart';
 import 'package:jpstudy/features/progress/providers/mastery_provider.dart';
 import 'package:jpstudy/features/progress/providers/progress_coach_provider.dart';
 import 'package:jpstudy/features/progress/providers/review_forecast_provider.dart';
-import 'package:go_router/go_router.dart';
 
 class ProgressScreen extends ConsumerWidget {
   const ProgressScreen({super.key});
@@ -62,11 +61,21 @@ class ProgressScreen extends ConsumerWidget {
                       value: summary.streak.toString(),
                     ),
                     _StatCard(
-                      label: _tr(language, 'Best Streak', 'Streak cao nhất', '最長連続'),
+                      label: _tr(
+                        language,
+                        'Best Streak',
+                        'Streak cao nhất',
+                        '最長連続',
+                      ),
                       value: summary.longestStreak.toString(),
                     ),
                     _StatCard(
-                      label: _tr(language, 'Days Studied', 'Số ngày học', '学習日数'),
+                      label: _tr(
+                        language,
+                        'Days Studied',
+                        'Số ngày học',
+                        '学習日数',
+                      ),
                       value: summary.totalDaysStudied.toString(),
                     ),
                     _StatCard(
@@ -1589,8 +1598,9 @@ class _MasterySummaryCard extends ConsumerWidget {
               totalItems += lm.totalItems;
               totalMature += lm.totalMature;
             }
-            final masteryPct =
-                totalItems == 0 ? 0 : (totalMature / totalItems * 100).round();
+            final masteryPct = totalItems == 0
+                ? 0
+                : (totalMature / totalItems * 100).round();
 
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1681,24 +1691,18 @@ class _MasteryMiniBar extends StatelessWidget {
             child: SizedBox(
               height: 8,
               child: mastery.totalItems == 0
-                  ? Container(
-                      color: palette.outline.withValues(alpha: 0.2),
-                    )
+                  ? Container(color: palette.outline.withValues(alpha: 0.2))
                   : Row(
                       children: [
                         if (mastery.totalMature > 0)
                           Expanded(
                             flex: mastery.totalMature,
-                            child: Container(
-                              color: const Color(0xFF22C55E),
-                            ),
+                            child: Container(color: const Color(0xFF22C55E)),
                           ),
                         if (mastery.totalStudied - mastery.totalMature > 0)
                           Expanded(
                             flex: mastery.totalStudied - mastery.totalMature,
-                            child: Container(
-                              color: const Color(0xFFEAB308),
-                            ),
+                            child: Container(color: const Color(0xFFEAB308)),
                           ),
                         if (mastery.totalItems - mastery.totalStudied > 0)
                           Expanded(
@@ -1749,8 +1753,10 @@ class _ForecastPreviewCard extends ConsumerWidget {
         child: forecastAsync.when(
           data: (forecast) {
             final week = forecast.days.take(7).toList();
-            final maxTotal =
-                week.fold<int>(1, (m, d) => d.total > m ? d.total : m);
+            final maxTotal = week.fold<int>(
+              1,
+              (m, d) => d.total > m ? d.total : m,
+            );
 
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1759,10 +1765,12 @@ class _ForecastPreviewCard extends ConsumerWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        _tr(language,
-                            'Review Forecast',
-                            'Dự báo ôn tập',
-                            '復習予報'),
+                        _tr(
+                          language,
+                          'Review Forecast',
+                          'Dự báo ôn tập',
+                          '復習予報',
+                        ),
                         style: TextStyle(
                           fontWeight: FontWeight.w800,
                           fontSize: 14,
@@ -1779,10 +1787,12 @@ class _ForecastPreviewCard extends ConsumerWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  _tr(language,
-                      '${forecast.totalDueNow} due today · ${forecast.totalTracked} tracked',
-                      '${forecast.totalDueNow} đến hạn hôm nay · ${forecast.totalTracked} đang theo dõi',
-                      '今日${forecast.totalDueNow}件 · 追跡中${forecast.totalTracked}件'),
+                  _tr(
+                    language,
+                    '${forecast.totalDueNow} due today · ${forecast.totalTracked} tracked',
+                    '${forecast.totalDueNow} đến hạn hôm nay · ${forecast.totalTracked} đang theo dõi',
+                    '今日${forecast.totalDueNow}件 · 追跡中${forecast.totalTracked}件',
+                  ),
                   style: TextStyle(
                     fontSize: 12,
                     color: palette.ink.withValues(alpha: 0.55),
@@ -1821,8 +1831,9 @@ class _ForecastPreviewCard extends ConsumerWidget {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 9,
-                            fontWeight:
-                                i == 0 ? FontWeight.w800 : FontWeight.w500,
+                            fontWeight: i == 0
+                                ? FontWeight.w800
+                                : FontWeight.w500,
                             color: i == 0
                                 ? palette.accent
                                 : palette.ink.withValues(alpha: 0.40),

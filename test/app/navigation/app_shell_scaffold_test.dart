@@ -59,7 +59,9 @@ Future<void> _seedGrammarPoint(
   required String sentence,
   required String translationEn,
 }) async {
-  final grammarId = await db.into(db.grammarPoints).insert(
+  final grammarId = await db
+      .into(db.grammarPoints)
+      .insert(
         GrammarPointsCompanion.insert(
           lessonId: Value(lessonId),
           grammarPoint: grammarPoint,
@@ -77,7 +79,9 @@ Future<void> _seedGrammarPoint(
         ),
       );
 
-  await db.into(db.grammarExamples).insert(
+  await db
+      .into(db.grammarExamples)
+      .insert(
         GrammarExamplesCompanion.insert(
           grammarId: grammarId,
           japanese: sentence,
@@ -88,10 +92,7 @@ Future<void> _seedGrammarPoint(
       );
 }
 
-Future<void> _pumpShellApp(
-  WidgetTester tester, {
-  required Size size,
-}) async {
+Future<void> _pumpShellApp(WidgetTester tester, {required Size size}) async {
   tester.view.physicalSize = size;
   tester.view.devicePixelRatio = 1;
   addTearDown(tester.view.resetPhysicalSize);
@@ -195,6 +196,8 @@ Future<void> _pumpShellApp(
             totalXp: 420,
             todayXp: 36,
             streak: 8,
+            longestStreak: 8,
+            totalDaysStudied: 8,
             totalAttempts: 48,
             totalCorrect: 39,
             totalQuestions: 48,
@@ -311,4 +314,3 @@ void main() {
     expect(find.text('漢字'), findsWidgets);
   });
 }
-

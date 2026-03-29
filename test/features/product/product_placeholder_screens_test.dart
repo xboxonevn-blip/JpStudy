@@ -14,11 +14,9 @@ import 'package:jpstudy/features/premium/premium_screen.dart';
 import 'package:jpstudy/features/study_hub/providers/study_hub_board_provider.dart';
 
 Widget _wrap(Widget child) => ProviderScope(
-      overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-      ],
-      child: MaterialApp(home: child),
-    );
+  overrides: [appLanguageProvider.overrideWith((ref) => AppLanguage.en)],
+  child: MaterialApp(home: child),
+);
 
 void main() {
   testWidgets('PremiumScreen switches selected plan details', (tester) async {
@@ -32,15 +30,18 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('79.00 / year'), findsOneWidget);
-    expect(find.text('Expanded community events and advanced labs'), findsOneWidget);
+    expect(
+      find.text('Expanded community events and advanced labs'),
+      findsOneWidget,
+    );
   });
 
-  testWidgets('LeaderboardScreen switches ranking range content', (tester) async {
+  testWidgets('LeaderboardScreen switches ranking range content', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-        ],
+        overrides: [appLanguageProvider.overrideWith((ref) => AppLanguage.en)],
         child: const MaterialApp(home: LeaderboardScreen()),
       ),
     );
@@ -56,7 +57,9 @@ void main() {
     expect(find.text('Private'), findsAtLeastNWidgets(1));
   });
 
-  testWidgets('LeaderboardScreen uses provider-backed learner stats', (tester) async {
+  testWidgets('LeaderboardScreen uses provider-backed learner stats', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
@@ -81,6 +84,8 @@ void main() {
               totalXp: 18000,
               todayXp: 30,
               streak: 9,
+              longestStreak: 9,
+              totalDaysStudied: 9,
               totalAttempts: 12,
               totalCorrect: 88,
               totalQuestions: 100,
@@ -122,7 +127,9 @@ void main() {
     expect(find.textContaining('17 reviewed'), findsOneWidget);
   });
 
-  testWidgets('CustomDecksScreen switches study recipe content', (tester) async {
+  testWidgets('CustomDecksScreen switches study recipe content', (
+    tester,
+  ) async {
     await tester.pumpWidget(_wrap(const CustomDecksScreen()));
     await tester.pumpAndSettle();
 
@@ -136,7 +143,9 @@ void main() {
     expect(find.text('18 high-frequency prompts.'), findsOneWidget);
   });
 
-  testWidgets('CustomDecksScreen uses study hub and continue data', (tester) async {
+  testWidgets('CustomDecksScreen uses study hub and continue data', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
@@ -199,23 +208,46 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.textContaining('Lesson 3'), findsAtLeastNWidgets(1));
-    expect(find.textContaining('7 items need quick attention.'), findsOneWidget);
-    expect(find.textContaining('1 active deck available right now.'), findsOneWidget);
+    expect(
+      find.textContaining('7 items need quick attention.'),
+      findsOneWidget,
+    );
+    expect(
+      find.textContaining('1 active deck available right now.'),
+      findsOneWidget,
+    );
   });
 
-  testWidgets('CommunityScreen routes profile and data shortcuts', (tester) async {
+  testWidgets('CommunityScreen routes profile and data shortcuts', (
+    tester,
+  ) async {
     final router = GoRouter(
       initialLocation: '/community',
       routes: [
-        GoRoute(path: '/community', builder: (context, state) => ProviderScope(
-          overrides: [
-            appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-          ],
-          child: const CommunityScreen(),
-        )),
-        GoRoute(path: '/me', builder: (context, state) => const Scaffold(body: Center(child: Text('ME')))),
-        GoRoute(path: '/me/data', builder: (context, state) => const Scaffold(body: Center(child: Text('DATA')))),
-        GoRoute(path: '/design-lab', builder: (context, state) => const Scaffold(body: Center(child: Text('LAB')))),
+        GoRoute(
+          path: '/community',
+          builder: (context, state) => ProviderScope(
+            overrides: [
+              appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+            ],
+            child: const CommunityScreen(),
+          ),
+        ),
+        GoRoute(
+          path: '/me',
+          builder: (context, state) =>
+              const Scaffold(body: Center(child: Text('ME'))),
+        ),
+        GoRoute(
+          path: '/me/data',
+          builder: (context, state) =>
+              const Scaffold(body: Center(child: Text('DATA'))),
+        ),
+        GoRoute(
+          path: '/design-lab',
+          builder: (context, state) =>
+              const Scaffold(body: Center(child: Text('LAB'))),
+        ),
       ],
     );
 
