@@ -42,6 +42,8 @@ import 'package:jpstudy/features/practice/practice_screen.dart';
 import 'package:jpstudy/features/practice/screens/recall_sprint_screen.dart';
 import 'package:jpstudy/features/premium/premium_screen.dart';
 import 'package:jpstudy/features/progress/progress_screen.dart';
+import 'package:jpstudy/features/progress/screens/mastery_dashboard_screen.dart';
+import 'package:jpstudy/features/progress/screens/review_forecast_screen.dart';
 import 'package:jpstudy/features/search/search_screen.dart';
 import 'package:jpstudy/features/study_hub/study_hub_screen.dart';
 import 'package:jpstudy/features/test/integration/test_mode_integration.dart';
@@ -385,6 +387,18 @@ class AppRouter {
               GoRoute(
                 path: '/me',
                 builder: (context, state) => const MeScreen(),
+              ),
+              GoRoute(
+                path: '/progress',
+                builder: (context, state) => const ProgressScreen(),
+              ),
+              GoRoute(
+                path: '/mastery',
+                builder: (context, state) => const MasteryDashboardScreen(),
+              ),
+              GoRoute(
+                path: '/forecast',
+                builder: (context, state) => const ReviewForecastScreen(),
               ),
               GoRoute(
                 path: '/me/data',

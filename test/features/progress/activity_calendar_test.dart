@@ -7,6 +7,8 @@ import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/data/daos/srs_dao.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/home/providers/weakness_radar_provider.dart';
+import 'package:jpstudy/features/progress/providers/mastery_provider.dart';
+import 'package:jpstudy/features/progress/providers/review_forecast_provider.dart';
 import 'package:jpstudy/features/progress/progress_screen.dart';
 
 void main() {
@@ -47,6 +49,19 @@ void main() {
             ),
           ),
           weaknessRadarProvider.overrideWith((_) async => const []),
+          masterySnapshotProvider.overrideWith(
+            (_) async => const MasterySnapshot(levels: []),
+          ),
+          reviewForecastProvider.overrideWith(
+            (_) async => const ReviewForecast(
+              days: [],
+              stabilityBuckets: [],
+              confidence: ConfidenceBreakdown(),
+              totalTracked: 0,
+              totalDueNow: 0,
+              avgStability: 0,
+            ),
+          ),
         ],
         child: const MaterialApp(
           home: ProgressScreen(),

@@ -11,7 +11,10 @@ import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/common/widgets/error_state_widget.dart';
 import 'package:jpstudy/features/home/providers/weakness_radar_provider.dart';
+import 'package:jpstudy/features/home/widgets/weakness_radar_card.dart';
+import 'package:jpstudy/features/progress/providers/mastery_provider.dart';
 import 'package:jpstudy/features/progress/providers/progress_coach_provider.dart';
+import 'package:jpstudy/features/progress/providers/review_forecast_provider.dart';
 
 class ProgressScreen extends ConsumerWidget {
   const ProgressScreen({super.key});
@@ -174,6 +177,12 @@ class ProgressScreen extends ConsumerWidget {
                       const SizedBox(height: AppSpacing.lg),
                       const _SrsRetentionCard(),
                       const SizedBox(height: AppSpacing.lg),
+                      const _MasterySummaryCard(),
+                      const SizedBox(height: AppSpacing.lg),
+                      const _ForecastPreviewCard(),
+                      const SizedBox(height: AppSpacing.lg),
+                      const WeaknessRadarCard(compact: true),
+                      const SizedBox(height: AppSpacing.lg),
                       reviewSection,
                       const SizedBox(height: AppSpacing.lg),
                       attemptSection,
@@ -214,7 +223,20 @@ class ProgressScreen extends ConsumerWidget {
                           ),
                         ),
                         const SizedBox(width: AppSpacing.lg),
-                        const Expanded(flex: 5, child: _SrsRetentionCard()),
+                        const Expanded(
+                          flex: 5,
+                          child: Column(
+                            children: [
+                              _SrsRetentionCard(),
+                              SizedBox(height: AppSpacing.lg),
+                              _MasterySummaryCard(),
+                              SizedBox(height: AppSpacing.lg),
+                              _ForecastPreviewCard(),
+                              SizedBox(height: AppSpacing.lg),
+                              WeaknessRadarCard(compact: true),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                     const SizedBox(height: AppSpacing.lg),
@@ -1533,6 +1555,316 @@ class _ActivityCalendar extends ConsumerWidget {
         Text(
           _tr(language, 'More', 'Nhiều', '多'),
           style: const TextStyle(fontSize: 10, color: Color(0xFF6B7390)),
+        ),
+      ],
+    );
+  }
+}
+
+class _MasterySummaryCard extends ConsumerWidget {
+  const _MasterySummaryCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final language = ref.watch(appLanguageProvider);
+    final snapshotAsync = ref.watch(masterySnapshotProvider);
+    final palette = context.appPalette;
+
+    return GestureDetector(
+      onTap: () => context.push('/mastery'),
+      child: AppSectionCard(
+        child: snapshotAsync.when(
+          data: (snapshot) {
+            int totalItems = 0, totalMature = 0;
+            for (final lm in snapshot.levels) {
+              totalItems += lm.totalItems;
+              totalMature += lm.totalMature;
+            }
+            final masteryPct =
+                totalItems == 0 ? 0 : (totalMature / totalItems * 100).round();
+
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        _tr(
+                          language,
+                          'JLPT Mastery',
+                          'Tiến độ JLPT',
+                          'JLPT 習熟度',
+                        ),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 14,
+                          color: palette.ink,
+                        ),
+                      ),
+                    ),
+                    Icon(
+                      Icons.chevron_right_rounded,
+                      size: 20,
+                      color: palette.ink.withValues(alpha: 0.4),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  _tr(
+                    language,
+                    '$totalMature / $totalItems mastered ($masteryPct%)',
+                    '$totalMature / $totalItems thuộc ($masteryPct%)',
+                    '$totalItems中$totalMature習得 ($masteryPct%)',
+                  ),
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: palette.ink.withValues(alpha: 0.6),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                // Mini bars per level
+                for (final lm in snapshot.levels) ...[
+                  _MasteryMiniBar(mastery: lm, palette: palette),
+                  const SizedBox(height: 6),
+                ],
+              ],
+            );
+          },
+          loading: () => const SizedBox(
+            height: 60,
+            child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
+          ),
+          error: (e, _) => ErrorStateWidget(error: e, compact: true),
+        ),
+      ),
+    );
+  }
+}
+
+class _MasteryMiniBar extends StatelessWidget {
+  const _MasteryMiniBar({required this.mastery, required this.palette});
+
+  final LevelMastery mastery;
+  final AppThemePalette palette;
+
+  @override
+  Widget build(BuildContext context) {
+    final pct = (mastery.overallMasteryRatio * 100).round();
+
+    return Row(
+      children: [
+        SizedBox(
+          width: 26,
+          child: Text(
+            mastery.level,
+            style: TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.w700,
+              color: palette.ink.withValues(alpha: 0.7),
+            ),
+          ),
+        ),
+        Expanded(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(3),
+            child: SizedBox(
+              height: 8,
+              child: mastery.totalItems == 0
+                  ? Container(
+                      color: palette.outline.withValues(alpha: 0.2),
+                    )
+                  : Row(
+                      children: [
+                        if (mastery.totalMature > 0)
+                          Expanded(
+                            flex: mastery.totalMature,
+                            child: Container(
+                              color: const Color(0xFF22C55E),
+                            ),
+                          ),
+                        if (mastery.totalStudied - mastery.totalMature > 0)
+                          Expanded(
+                            flex: mastery.totalStudied - mastery.totalMature,
+                            child: Container(
+                              color: const Color(0xFFEAB308),
+                            ),
+                          ),
+                        if (mastery.totalItems - mastery.totalStudied > 0)
+                          Expanded(
+                            flex: mastery.totalItems - mastery.totalStudied,
+                            child: Container(
+                              color: palette.outline.withValues(alpha: 0.2),
+                            ),
+                          ),
+                      ],
+                    ),
+            ),
+          ),
+        ),
+        const SizedBox(width: 8),
+        SizedBox(
+          width: 32,
+          child: Text(
+            '$pct%',
+            textAlign: TextAlign.right,
+            style: TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.w700,
+              color: palette.ink.withValues(alpha: 0.6),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Forecast preview card — compact 7-day bar chart linking to full screen
+// ---------------------------------------------------------------------------
+
+class _ForecastPreviewCard extends ConsumerWidget {
+  const _ForecastPreviewCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final language = ref.watch(appLanguageProvider);
+    final forecastAsync = ref.watch(reviewForecastProvider);
+    final palette = context.appPalette;
+
+    return GestureDetector(
+      onTap: () => context.push('/forecast'),
+      child: AppSectionCard(
+        child: forecastAsync.when(
+          data: (forecast) {
+            final week = forecast.days.take(7).toList();
+            final maxTotal =
+                week.fold<int>(1, (m, d) => d.total > m ? d.total : m);
+
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        _tr(language,
+                            'Review Forecast',
+                            'Dự báo ôn tập',
+                            '復習予報'),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 14,
+                          color: palette.ink,
+                        ),
+                      ),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 14,
+                      color: palette.ink.withValues(alpha: 0.35),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  _tr(language,
+                      '${forecast.totalDueNow} due today · ${forecast.totalTracked} tracked',
+                      '${forecast.totalDueNow} đến hạn hôm nay · ${forecast.totalTracked} đang theo dõi',
+                      '今日${forecast.totalDueNow}件 · 追跡中${forecast.totalTracked}件'),
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: palette.ink.withValues(alpha: 0.55),
+                  ),
+                ),
+                const SizedBox(height: 14),
+                SizedBox(
+                  height: 48,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      for (int i = 0; i < week.length; i++) ...[
+                        if (i > 0) const SizedBox(width: 6),
+                        Expanded(
+                          child: _MiniBar(
+                            value: week[i].total,
+                            max: maxTotal,
+                            isToday: i == 0,
+                            palette: palette,
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Row(
+                  children: [
+                    for (int i = 0; i < week.length; i++) ...[
+                      if (i > 0) const SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          i == 0
+                              ? _tr(language, 'T', 'H', '今')
+                              : '${week[i].date.day}',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 9,
+                            fontWeight:
+                                i == 0 ? FontWeight.w800 : FontWeight.w500,
+                            color: i == 0
+                                ? palette.accent
+                                : palette.ink.withValues(alpha: 0.40),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+              ],
+            );
+          },
+          loading: () => const SizedBox(
+            height: 80,
+            child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
+          ),
+          error: (_, _) => const SizedBox.shrink(),
+        ),
+      ),
+    );
+  }
+}
+
+class _MiniBar extends StatelessWidget {
+  const _MiniBar({
+    required this.value,
+    required this.max,
+    required this.isToday,
+    required this.palette,
+  });
+
+  final int value;
+  final int max;
+  final bool isToday;
+  final AppThemePalette palette;
+
+  @override
+  Widget build(BuildContext context) {
+    final fraction = max > 0 ? value / max : 0.0;
+    final barHeight = value > 0 ? (fraction * 40).clamp(4.0, 40.0) : 2.0;
+    final color = isToday ? palette.accent : palette.primary;
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Container(
+          height: barHeight,
+          decoration: BoxDecoration(
+            color: color.withValues(alpha: isToday ? 0.85 : 0.50),
+            borderRadius: BorderRadius.circular(3),
+          ),
         ),
       ],
     );

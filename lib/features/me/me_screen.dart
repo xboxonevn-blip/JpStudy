@@ -296,6 +296,20 @@ class _MeScreenState extends ConsumerState<MeScreen> {
           ),
           const SizedBox(height: 10),
           _ActionTile(
+            icon: Icons.military_tech_outlined,
+            title: _masteryTitle(language),
+            subtitle: _masteryHint(language),
+            onTap: () => context.push('/mastery'),
+          ),
+          const SizedBox(height: 10),
+          _ActionTile(
+            icon: Icons.calendar_month_outlined,
+            title: _forecastTitle(language),
+            subtitle: _forecastHint(language),
+            onTap: () => context.push('/forecast'),
+          ),
+          const SizedBox(height: 10),
+          _ActionTile(
             icon: Icons.emoji_events_outlined,
             title: language.achievementsTitle,
             subtitle: _achievementsHint(language),
@@ -456,6 +470,53 @@ class _MeScreenState extends ConsumerState<MeScreen> {
     }
   }
 
+<<<<<<< HEAD
+=======
+  String _masteryTitle(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'JLPT Mastery';
+      case AppLanguage.vi:
+        return 'Tiến độ JLPT';
+      case AppLanguage.ja:
+        return 'JLPT 習熟度';
+    }
+  }
+
+  String _masteryHint(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Track mastery across vocab, grammar, and kanji per level.';
+      case AppLanguage.vi:
+        return 'Theo dõi tiến trình từ vựng, ngữ pháp, hán tự theo cấp.';
+      case AppLanguage.ja:
+        return 'レベル別に語彙・文法・漢字の習熟度を追跡します。';
+    }
+  }
+
+  String _forecastTitle(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Review Forecast';
+      case AppLanguage.vi:
+        return 'Dự báo ôn tập';
+      case AppLanguage.ja:
+        return '復習予報';
+    }
+  }
+
+  String _forecastHint(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'See upcoming reviews, memory strength, and SRS analytics.';
+      case AppLanguage.vi:
+        return 'Xem lịch ôn tập, sức mạnh trí nhớ và phân tích SRS.';
+      case AppLanguage.ja:
+        return '今後の復習予定、記憶の強さ、SRS分析を確認します。';
+    }
+  }
+
+>>>>>>> 6de2290 (feat(progress): add 14-day review forecast with stability analytics)
   String _achievementsHint(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
