@@ -1437,6 +1437,12 @@ class _PracticeActions extends StatelessWidget {
             '/lesson/$lessonId/write-mode?title=${Uri.encodeComponent(lessonTitle)}',
           ),
         ),
+        _PracticeButton(
+          label: language.flashcardsAction,
+          onTap: () => context.push(
+            '/lesson/$lessonId/flashcards-enhanced?title=${Uri.encodeComponent(lessonTitle)}',
+          ),
+        ),
       ],
     );
   }

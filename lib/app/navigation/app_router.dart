@@ -17,6 +17,7 @@ import 'package:jpstudy/features/immersion/immersion_home_screen.dart';
 import 'package:jpstudy/features/jlpt/screens/jlpt_coach_screen.dart';
 import 'package:jpstudy/features/jlpt/screens/jlpt_mock_pro_screen.dart';
 import 'package:jpstudy/features/jlpt/screens/jlpt_reading_screen.dart';
+import 'package:jpstudy/features/flashcards/integration/flashcard_mode_integration.dart';
 import 'package:jpstudy/features/learn/integration/learn_mode_integration.dart';
 import 'package:jpstudy/features/learn/integration/write_mode_integration.dart';
 import 'package:jpstudy/features/learn/models/learn_config.dart';
@@ -242,6 +243,17 @@ class AppRouter {
                   final id = int.tryParse(state.pathParameters['id'] ?? '');
                   final title = state.uri.queryParameters['title'] ?? 'Lesson';
                   return LessonMatchScreen(
+                    lessonId: id ?? 1,
+                    lessonTitle: title,
+                  );
+                },
+              ),
+              GoRoute(
+                path: '/lesson/:id/flashcards-enhanced',
+                builder: (context, state) {
+                  final id = int.tryParse(state.pathParameters['id'] ?? '');
+                  final title = state.uri.queryParameters['title'] ?? 'Lesson';
+                  return FlashcardModeIntegration(
                     lessonId: id ?? 1,
                     lessonTitle: title,
                   );
