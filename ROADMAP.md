@@ -16,10 +16,17 @@ Build a Japanese learning app that combines:
 
 | Phase | Focus | Status | Target |
 | :--- | :--- | :--- | :--- |
+<<<<<<< HEAD
 | Phase 1 | Learning foundation | Completed | Done |
 | Phase 2 | App structure and UI system | Completed | Done |
 | Phase 3 | Learning quality and release hardening | In progress | 2026-03 to 2026-04 |
 | Phase 4 | Cloud sync ecosystem | Parked behind core hardening | Later |
+=======
+| **Phase 1** | **Foundation** (Anki Logic) | ✅ 100% | Completed |
+| **Phase 2** | **Structure & Visuals** (LingoDeer + Clay UI) | ✅ 100% | Completed |
+| **Phase 3** | **Smart Immersion** (FSRS + Handwriting) | ✅ 100% | Feb 2026 |
+| **Phase 4** | **Cloud** (Sync) | 🧪 18% | Q2 2026 |
+>>>>>>> f900c1f (T6: Phase 3 verification & build fix)
 
 ## Phase summary
 
