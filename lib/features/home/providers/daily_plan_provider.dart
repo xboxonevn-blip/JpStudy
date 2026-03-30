@@ -1,6 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/level_provider.dart';
+import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/data/db/database_provider.dart';
+import 'package:jpstudy/features/kanji_hub/models/kanji_practice_args.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
+import 'package:jpstudy/features/vocab/models/vocab_review_args.dart';
+import 'package:jpstudy/features/vocab/vocab_copy.dart';
 
 // ---------------------------------------------------------------------------
 // Models
@@ -14,6 +21,7 @@ class PlanStep {
     required this.count,
     required this.estimatedMinutes,
     required this.route,
+    this.extra,
     this.urgency = 0,
   });
 
@@ -21,6 +29,7 @@ class PlanStep {
   final int count;
   final int estimatedMinutes;
   final String route;
+  final Object? extra;
 
   /// 0 = low, 1 = medium, 2 = high (overdue/mistakes).
   final int urgency;
@@ -60,6 +69,8 @@ class DailyPlan {
 final dailyPlanProvider = FutureProvider<DailyPlan>((ref) async {
   final db = ref.watch(databaseProvider);
   final dashboard = ref.watch(dashboardProvider).valueOrNull;
+  final language = ref.watch(appLanguageProvider);
+  final level = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
 
   if (dashboard == null) {
     return const DailyPlan(
@@ -117,6 +128,17 @@ final dailyPlanProvider = FutureProvider<DailyPlan>((ref) async {
       count: count,
       estimatedMinutes: (count * 0.5).ceil(),
       route: '/vocab/review',
+      extra: VocabReviewArgs(
+        source: 'daily_plan_critical',
+        levelCode: level.shortLabel,
+        title: language.vocabReviewTitle(level.shortLabel),
+        subtitle: _planSubtitle(
+          language,
+          en: 'Critical vocab due now',
+          vi: 'Từ vựng quan trọng cần ôn ngay',
+          ja: '重要な語彙レビューを優先',
+        ),
+      ),
       urgency: 2,
     ));
   }
@@ -136,7 +158,12 @@ final dailyPlanProvider = FutureProvider<DailyPlan>((ref) async {
       type: PlanStepType.kanjiReview,
       count: count,
       estimatedMinutes: (count * 1.0).ceil(),
-      route: '/practice/kanji-reading',
+      route: '/kanji/practice',
+      extra: KanjiPracticeArgs(
+        mode: KanjiPracticeMode.both,
+        levelCode: level.shortLabel,
+        source: 'daily_plan_critical',
+      ),
       urgency: 2,
     ));
   }
@@ -150,6 +177,17 @@ final dailyPlanProvider = FutureProvider<DailyPlan>((ref) async {
       count: count,
       estimatedMinutes: (count * 0.4).ceil(),
       route: '/vocab/review',
+      extra: VocabReviewArgs(
+        source: 'daily_plan_due',
+        levelCode: level.shortLabel,
+        title: language.vocabReviewTitle(level.shortLabel),
+        subtitle: _planSubtitle(
+          language,
+          en: 'Due vocab queue for today',
+          vi: 'Hàng đợi từ vựng đến hạn hôm nay',
+          ja: '今日の語彙レビュー',
+        ),
+      ),
       urgency: 1,
     ));
   }
@@ -171,7 +209,12 @@ final dailyPlanProvider = FutureProvider<DailyPlan>((ref) async {
       type: PlanStepType.kanjiReview,
       count: count,
       estimatedMinutes: (count * 0.8).ceil(),
-      route: '/practice/kanji-reading',
+      route: '/kanji/practice',
+      extra: KanjiPracticeArgs(
+        mode: KanjiPracticeMode.both,
+        levelCode: level.shortLabel,
+        source: 'daily_plan_due',
+      ),
       urgency: 1,
     ));
   }
@@ -205,3 +248,19 @@ final dailyPlanProvider = FutureProvider<DailyPlan>((ref) async {
     completedSteps: const {},
   );
 });
+
+String _planSubtitle(
+  AppLanguage language, {
+  required String en,
+  required String vi,
+  required String ja,
+}) {
+  switch (language) {
+    case AppLanguage.en:
+      return en;
+    case AppLanguage.vi:
+      return vi;
+    case AppLanguage.ja:
+      return ja;
+  }
+}

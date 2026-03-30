@@ -14,6 +14,7 @@ import 'package:jpstudy/data/db/content_database_provider.dart';
 import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/models/kanji_item.dart';
 import 'package:jpstudy/data/seeds/grammar_seeder.dart';
+import 'package:jpstudy/data/utils/hajimete_catalog_loader.dart';
 import 'package:jpstudy/data/utils/grammar_english_notation.dart';
 import 'package:jpstudy/data/utils/han_viet_lookup.dart';
 
@@ -80,6 +81,39 @@ final lessonRangeTermsProvider =
         startLesson: args.startLesson,
         endLesson: args.endLesson,
       );
+    });
+
+final vocabSeriesTermsProvider =
+    FutureProvider.family<List<UserLessonTermData>, VocabSeriesTermsArgs>((
+      ref,
+      args,
+    ) async {
+      final repo = ref.watch(lessonRepositoryProvider);
+      final items = args.hasLessonRange
+          ? await repo.getVocabByLevelSeriesChapterRange(
+              args.level,
+              series: args.series,
+              startChapter: args.startLesson!,
+              endChapter: args.endLesson!,
+            )
+          : await repo.getVocabByLevelAndSeries(args.level, args.series);
+      return [
+        for (var index = 0; index < items.length; index++)
+          UserLessonTermData(
+            id: items[index].id,
+            lessonId: 0,
+            term: items[index].term,
+            reading: items[index].reading ?? '',
+            definition: items[index].meaning,
+            definitionEn: items[index].meaningEn ?? items[index].meaning,
+            mnemonicVi: items[index].mnemonicVi ?? '',
+            mnemonicEn: items[index].mnemonicEn ?? '',
+            kanjiMeaning: items[index].kanjiMeaning ?? '',
+            isStarred: false,
+            isLearned: false,
+            orderIndex: index,
+          ),
+      ];
     });
 
 /// Returns the nearest future vocab review date, refreshing whenever SRS state changes.
@@ -273,6 +307,34 @@ class LessonRangeTermsArgs {
 
   @override
   int get hashCode => Object.hash(level, startLesson, endLesson);
+}
+
+class VocabSeriesTermsArgs {
+  const VocabSeriesTermsArgs({
+    required this.level,
+    required this.series,
+    this.startLesson,
+    this.endLesson,
+  });
+
+  final String level;
+  final String series;
+  final int? startLesson;
+  final int? endLesson;
+
+  bool get hasLessonRange => startLesson != null && endLesson != null;
+
+  @override
+  bool operator ==(Object other) {
+    return other is VocabSeriesTermsArgs &&
+        other.level == level &&
+        other.series == series &&
+        other.startLesson == startLesson &&
+        other.endLesson == endLesson;
+  }
+
+  @override
+  int get hashCode => Object.hash(level, series, startLesson, endLesson);
 }
 
 class LessonMeta {
@@ -593,6 +655,46 @@ class LessonRepository {
     return items.map(_mapContentVocabToItem).toList();
   }
 
+  Future<List<VocabItem>> getVocabByLevelSeriesChapterRange(
+    String level, {
+    required String series,
+    required int startChapter,
+    required int endChapter,
+  }) async {
+    if (series != 'hajimete') {
+      return getVocabByLevelAndSeries(level, series);
+    }
+
+    final catalog = await loadHajimeteChapterCatalog(level);
+    final sourceVocabIds = [
+      for (final chapter in catalog.chapters)
+        if (chapter.chapterId >= startChapter && chapter.chapterId <= endChapter)
+          ...chapter.sourceVocabIds,
+    ];
+    if (sourceVocabIds.isEmpty) {
+      return const [];
+    }
+
+    final rows = await (_contentDb.select(_contentDb.vocab)..where(
+          (tbl) =>
+              tbl.level.equals(level) &
+              tbl.series.equals(series) &
+              tbl.sourceVocabId.isIn(sourceVocabIds),
+        ))
+        .get();
+
+    final bySourceId = {
+      for (final row in rows)
+        if ((row.sourceVocabId ?? '').trim().isNotEmpty) row.sourceVocabId!.trim(): row,
+    };
+
+    return [
+      for (final sourceId in sourceVocabIds)
+        if (bySourceId.containsKey(sourceId))
+          _mapContentVocabToItem(bySourceId[sourceId]!),
+    ];
+  }
+
   Future<List<VocabItem>> getVocabByLessonRange(
     String level, {
     required int startLesson,
@@ -796,6 +898,87 @@ class LessonRepository {
       if (lessonCompare != 0) return lessonCompare;
       return a.orderIndex.compareTo(b.orderIndex);
     });
+    return terms;
+  }
+
+  int hajimeteChapterLessonId(String level, int chapterId) {
+    final normalized = level.trim().toUpperCase();
+    final levelOffset = switch (normalized) {
+      'N5' => 5000,
+      'N4' => 4000,
+      'N3' => 3000,
+      'N2' => 2000,
+      'N1' => 1000,
+      _ => 0,
+    };
+    return -(900000 + levelOffset + chapterId);
+  }
+
+  Future<int> ensureHajimeteChapterLesson({
+    required String level,
+    required int chapterId,
+    String? title,
+  }) async {
+    final lessonId = hajimeteChapterLessonId(level, chapterId);
+    final chapterTitle = title?.trim().isNotEmpty == true
+        ? title!.trim()
+        : 'Hajimete Chapter $chapterId';
+    await ensureLesson(
+      lessonId: lessonId,
+      level: level,
+      title: chapterTitle,
+    );
+
+    final existing = await fetchTerms(lessonId);
+    if (existing.isNotEmpty) {
+      return lessonId;
+    }
+
+    final items = await getVocabByLevelSeriesChapterRange(
+      level,
+      series: 'hajimete',
+      startChapter: chapterId,
+      endChapter: chapterId,
+    );
+    if (items.isEmpty) {
+      return lessonId;
+    }
+
+    await _db.batch((batch) {
+      for (var index = 0; index < items.length; index++) {
+        final item = items[index];
+        batch.insert(
+          _db.userLessonTerm,
+          UserLessonTermCompanion.insert(
+            lessonId: lessonId,
+            term: Value(item.term),
+            reading: Value(item.reading ?? ''),
+            definition: Value(item.meaning),
+            definitionEn: Value(item.meaningEn ?? ''),
+            mnemonicVi: Value(item.mnemonicVi ?? ''),
+            mnemonicEn: Value(item.mnemonicEn ?? ''),
+            kanjiMeaning: Value(item.kanjiMeaning ?? ''),
+            orderIndex: Value(index + 1),
+          ),
+        );
+      }
+    });
+
+    return lessonId;
+  }
+
+  Future<List<UserLessonTermData>> fetchTermsForHajimeteChapter(
+    String level, {
+    required int chapterId,
+    String? title,
+  }) async {
+    final lessonId = await ensureHajimeteChapterLesson(
+      level: level,
+      chapterId: chapterId,
+      title: title,
+    );
+    final terms = await fetchTerms(lessonId);
+    terms.sort((a, b) => a.orderIndex.compareTo(b.orderIndex));
     return terms;
   }
 
@@ -1544,6 +1727,18 @@ class LessonRepository {
     return _mapKanjiRows(rows);
   }
 
+  /// Returns the IDs of all kanji that have ever been seen (have an SRS row).
+  Future<Set<int>> fetchSeenKanjiIds() async {
+    final ids = await _db.kanjiSrsDao.getAllSeenKanjiIds();
+    return ids.toSet();
+  }
+
+  /// Returns the IDs of all kanji that are currently due for review.
+  Future<Set<int>> fetchDueKanjiIds() async {
+    final states = await _db.kanjiSrsDao.getDueReviews();
+    return states.map((s) => s.kanjiId).toSet();
+  }
+
   Future<List<KanjiItem>> _mapKanjiRows(List<KanjiData> rows) async {
     if (rows.isEmpty) return const [];
 
@@ -2259,6 +2454,40 @@ class LessonRepository {
     if (existing == null) {
       await _db.srsDao.initializeSrsState(termId);
     }
+  }
+
+  Future<Map<int, SrsStateData>> getSrsStatesForIds(List<int> termIds) async {
+    final states = <int, SrsStateData>{};
+    for (final termId in termIds.toSet()) {
+      final state = await _db.srsDao.getSrsState(termId);
+      if (state != null) {
+        states[termId] = state;
+      }
+    }
+    return states;
+  }
+
+  Future<void> initializeSrsForTermIds(List<int> termIds) async {
+    if (termIds.isEmpty) return;
+    final now = DateTime.now();
+    await _db.batch((batch) {
+      for (final termId in termIds.toSet()) {
+        batch.insert(
+          _db.srsState,
+          SrsStateCompanion.insert(
+            vocabId: termId,
+            box: const Value(1),
+            repetitions: const Value(0),
+            ease: const Value(2.5),
+            stability: const Value(1.0),
+            difficulty: const Value(5.0),
+            lastReviewedAt: Value(now),
+            nextReviewAt: now,
+          ),
+          mode: InsertMode.insertOrReplace,
+        );
+      }
+    });
   }
 
   Future<int> recordAttempt({

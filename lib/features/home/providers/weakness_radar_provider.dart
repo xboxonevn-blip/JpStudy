@@ -3,16 +3,22 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/services/recovery_pack_service.dart';
+import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/data/repositories/grammar_repository.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/grammar/grammar_providers.dart';
+import 'package:jpstudy/features/kanji_hub/models/kanji_practice_args.dart';
+import 'package:jpstudy/features/home/weakness_radar_copy.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/home/providers/recovery_pack_provider.dart';
 import 'package:jpstudy/features/learn/models/learn_session_args.dart';
 import 'package:jpstudy/features/learn/models/question_type.dart';
 import 'package:jpstudy/features/mistakes/repositories/mistake_repository.dart';
 import 'package:jpstudy/features/home/providers/weakness_radar_priority.dart';
+import 'package:jpstudy/features/vocab/models/vocab_review_args.dart';
+import 'package:jpstudy/features/vocab/vocab_copy.dart';
 
 class WeaknessRadarItem {
   const WeaknessRadarItem({
@@ -41,6 +47,7 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
 ) async {
   final dashboard = ref.watch(dashboardProvider).valueOrNull;
   final language = ref.watch(appLanguageProvider);
+  final level = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
   if (dashboard == null) {
     return const [];
   }
@@ -57,10 +64,10 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
 
   if (recoveryPack != null) {
     items.add(
-      WeaknessRadarItem(
-        id: 'recovery_pack',
-        title: _recoveryTitle(language, recoveryPack.lessonTitle),
-        subtitle: _recoverySubtitle(language, recoveryPack.itemCount),
+        WeaknessRadarItem(
+          id: 'recovery_pack',
+          title: weaknessRecoveryTitle(language, recoveryPack.lessonTitle),
+          subtitle: weaknessRecoverySubtitle(language, recoveryPack.itemCount),
         route: '/learn/recovery-pack',
         icon: Icons.medical_services_outlined,
         color: const Color(0xFF2563EB),
@@ -86,8 +93,8 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
       items.add(
         WeaknessRadarItem(
           id: 'vocab_mistakes',
-          title: _vocabTitle(language, vocabItems.first.term),
-          subtitle: _vocabSubtitle(
+          title: weaknessVocabTitle(language, vocabItems.first.term),
+          subtitle: weaknessVocabSubtitle(
             language,
             dueMistakes.length,
             _dueCheckpointShortLabel(language, lead.lastMistakeAt, now),
@@ -96,7 +103,7 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
           extra: LearnSessionArgs(
             items: vocabItems,
             lessonId: RecoveryPackService.recoveryLessonId,
-            lessonTitle: _vocabSessionTitle(language),
+            lessonTitle: weaknessVocabSessionTitle(language),
             enabledTypes: const [
               QuestionType.multipleChoice,
               QuestionType.fillBlank,
@@ -129,8 +136,8 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
       items.add(
         WeaknessRadarItem(
           id: 'grammar_mistakes',
-          title: _grammarTitle(language, points.first.grammarPoint),
-          subtitle: _grammarSubtitle(
+          title: weaknessGrammarTitle(language, points.first.grammarPoint),
+          subtitle: weaknessGrammarSubtitle(
             language,
             dueMistakes.length,
             _dueCheckpointShortLabel(language, lead.lastMistakeAt, now),
@@ -163,13 +170,20 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
       items.add(
         WeaknessRadarItem(
           id: 'kanji_mistakes',
-          title: _kanjiTitle(language, kanjiItems.first.character),
-          subtitle: _kanjiSubtitle(
+          title: weaknessKanjiTitle(language, kanjiItems.first.character),
+          subtitle: weaknessKanjiSubtitle(
             language,
             dueMistakes.length,
             _dueCheckpointShortLabel(language, lead.lastMistakeAt, now),
           ),
-          route: '/practice/handwriting',
+          route: '/kanji/practice',
+          extra: KanjiPracticeArgs(
+            mode: KanjiPracticeMode.write,
+            levelCode: level.shortLabel,
+            source: 'weakness_radar',
+            kanjiIds: kanjiItems.map((item) => item.id).toList(growable: false),
+            preferredKanjiId: kanjiItems.first.id,
+          ),
           icon: Icons.draw_rounded,
           color: const Color(0xFFF59E0B),
           priority: 70 + calculateMistakePriority(lead, now),
@@ -182,9 +196,20 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
     items.add(
       WeaknessRadarItem(
         id: 'fresh_cards',
-        title: _retentionTitle(language),
-        subtitle: _retentionSubtitle(language, srsBreakdown.learning),
+        title: weaknessRetentionTitle(language),
+        subtitle: weaknessRetentionSubtitle(language, srsBreakdown.learning),
         route: '/vocab/review',
+        extra: VocabReviewArgs(
+          source: 'weakness_radar',
+          levelCode: level.shortLabel,
+          title: language.vocabReviewTitle(level.shortLabel),
+          subtitle: _planHint(
+            language,
+            en: 'Fresh vocab still needs review',
+            vi: 'Nhóm từ mới vẫn cần ôn tiếp',
+            ja: '新しい語彙をもう一度固める',
+          ),
+        ),
         icon: Icons.schedule_rounded,
         color: const Color(0xFFDC2626),
         priority: 70,
@@ -196,16 +221,22 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
     final totalDue =
         dashboard.vocabDue + dashboard.grammarDue + dashboard.kanjiDue;
     if (totalDue > 0) {
+      final dueRoute = _dueRouteSpec(
+        language: language,
+        level: level,
+        dashboard: dashboard,
+      );
       items.add(
         WeaknessRadarItem(
           id: 'due_reviews',
-          title: _dueTitle(language, totalDue),
-          subtitle: _dueSubtitle(
+          title: weaknessDueTitle(language, totalDue),
+          subtitle: weaknessDueSubtitle(
             language,
             dashboard: dashboard,
             nextGrammarReview: nextGrammarReview,
           ),
-          route: _dueRoute(dashboard),
+          route: dueRoute.route,
+          extra: dueRoute.extra,
           icon: Icons.history_edu_rounded,
           color: const Color(0xFF1D4ED8),
           priority: 60,
@@ -218,103 +249,11 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
   return items.take(3).toList(growable: false);
 });
 
-String _recoveryTitle(AppLanguage language, String lessonTitle) {
-  switch (language) {
-    case AppLanguage.en:
-      return 'Recovery pack from $lessonTitle';
-    case AppLanguage.vi:
-      return 'Gói phục hồi từ $lessonTitle';
-    case AppLanguage.ja:
-      return 'Recovery pack from $lessonTitle';
-  }
-}
+class _WeaknessRouteSpec {
+  const _WeaknessRouteSpec({required this.route, this.extra});
 
-String _recoverySubtitle(AppLanguage language, int count) {
-  switch (language) {
-    case AppLanguage.en:
-      return '$count weak terms are ready for a clean-up round.';
-    case AppLanguage.vi:
-      return '$count mục yếu đã sẵn sàng cho một lượt ôn phục hồi.';
-    case AppLanguage.ja:
-      return '$count weak terms are ready for a clean-up round.';
-  }
-}
-
-String _vocabTitle(AppLanguage language, String term) {
-  switch (language) {
-    case AppLanguage.en:
-      return 'Vocab slipping: $term';
-    case AppLanguage.vi:
-      return 'Từ vựng đang trượt: $term';
-    case AppLanguage.ja:
-      return 'Vocab slipping: $term';
-  }
-}
-
-String _vocabSubtitle(AppLanguage language, int count, String dueLabel) {
-  switch (language) {
-    case AppLanguage.en:
-      return '$count saved vocab mistakes are ready for a $dueLabel follow-up.';
-    case AppLanguage.vi:
-      return '$count lỗi từ vựng đã lưu đang tới lượt ôn $dueLabel.';
-    case AppLanguage.ja:
-      return '$count saved vocab mistakes are ready for a $dueLabel follow-up.';
-  }
-}
-
-String _vocabSessionTitle(AppLanguage language) {
-  switch (language) {
-    case AppLanguage.en:
-      return 'Vocab Recovery';
-    case AppLanguage.vi:
-      return 'Phục hồi từ vựng';
-    case AppLanguage.ja:
-      return 'Vocab Recovery';
-  }
-}
-
-String _grammarTitle(AppLanguage language, String grammarPoint) {
-  switch (language) {
-    case AppLanguage.en:
-      return 'Grammar slipping: $grammarPoint';
-    case AppLanguage.vi:
-      return 'Ngữ pháp đang trượt: $grammarPoint';
-    case AppLanguage.ja:
-      return 'Grammar slipping: $grammarPoint';
-  }
-}
-
-String _grammarSubtitle(AppLanguage language, int count, String dueLabel) {
-  switch (language) {
-    case AppLanguage.en:
-      return '$count grammar ghosts are lined up for a $dueLabel repair pass.';
-    case AppLanguage.vi:
-      return '$count mục ngữ pháp lỗi đang vào lượt sửa $dueLabel.';
-    case AppLanguage.ja:
-      return '$count grammar ghosts are lined up for a $dueLabel repair pass.';
-  }
-}
-
-String _kanjiTitle(AppLanguage language, String character) {
-  switch (language) {
-    case AppLanguage.en:
-      return 'Kanji slipping: $character';
-    case AppLanguage.vi:
-      return 'Kanji đang trượt: $character';
-    case AppLanguage.ja:
-      return 'Kanji slipping: $character';
-  }
-}
-
-String _kanjiSubtitle(AppLanguage language, int count, String dueLabel) {
-  switch (language) {
-    case AppLanguage.en:
-      return '$count kanji mistakes are due for a $dueLabel handwriting reset.';
-    case AppLanguage.vi:
-      return '$count lỗi kanji đang tới lượt $dueLabel để kéo luyện viết tay lên ưu tiên.';
-    case AppLanguage.ja:
-      return '$count kanji mistakes are due for a $dueLabel handwriting reset.';
-  }
+  final String route;
+  final Object? extra;
 }
 
 String _dueCheckpointShortLabel(
@@ -322,90 +261,57 @@ String _dueCheckpointShortLabel(
   DateTime lastMistakeAt,
   DateTime now,
 ) {
-  final age = now.difference(lastMistakeAt);
-  if (age.inHours < 24) {
-    switch (language) {
-      case AppLanguage.en:
-        return 'new';
-      case AppLanguage.vi:
-        return 'mới';
-      case AppLanguage.ja:
-        return 'new';
-    }
-  }
-  if (age.inHours < 72) {
-    return 'D1';
-  }
-  if (age.inHours < 24 * 7) {
-    return 'D3';
-  }
-  return 'D7';
+  return weaknessDueCheckpointShortLabel(language, now.difference(lastMistakeAt));
 }
 
-String _retentionTitle(AppLanguage language) {
-  switch (language) {
-    case AppLanguage.en:
-      return 'Fresh cards still look unstable';
-    case AppLanguage.vi:
-      return 'Thẻ mới vẫn chưa ổn định';
-    case AppLanguage.ja:
-      return 'Fresh cards still look unstable';
-  }
-}
-
-String _retentionSubtitle(AppLanguage language, int count) {
-  switch (language) {
-    case AppLanguage.en:
-      return '$count vocab items are still in the fragile learning stage.';
-    case AppLanguage.vi:
-      return '$count từ vẫn còn ở giai đoạn dễ rơi.';
-    case AppLanguage.ja:
-      return '$count vocab items are still in the fragile learning stage.';
-  }
-}
-
-String _dueTitle(AppLanguage language, int totalDue) {
-  switch (language) {
-    case AppLanguage.en:
-      return '$totalDue due reviews are waiting';
-    case AppLanguage.vi:
-      return '$totalDue lượt ôn đang chờ';
-    case AppLanguage.ja:
-      return '$totalDue due reviews are waiting';
-  }
-}
-
-String _dueSubtitle(
-  AppLanguage language, {
+_WeaknessRouteSpec _dueRouteSpec({
+  required AppLanguage language,
+  required StudyLevel level,
   required DashboardState dashboard,
-  required DateTime? nextGrammarReview,
 }) {
-  final grammarHint = switch (language) {
-    AppLanguage.en =>
-      nextGrammarReview == null ? '' : ' Grammar is cycling soon.',
-    AppLanguage.vi =>
-      nextGrammarReview == null ? '' : ' Ngữ pháp sắp quay lại.',
-    AppLanguage.ja =>
-      nextGrammarReview == null ? '' : ' Grammar is cycling soon.',
-  };
-  switch (language) {
-    case AppLanguage.en:
-      return '${dashboard.vocabDue} vocab, ${dashboard.grammarDue} grammar, ${dashboard.kanjiDue} kanji.$grammarHint';
-    case AppLanguage.vi:
-      return '${dashboard.vocabDue} từ, ${dashboard.grammarDue} ngữ pháp, ${dashboard.kanjiDue} kanji đã đến hạn.$grammarHint';
-    case AppLanguage.ja:
-      return '${dashboard.vocabDue} vocab, ${dashboard.grammarDue} grammar, ${dashboard.kanjiDue} kanji.$grammarHint';
-  }
-}
-
-String _dueRoute(DashboardState dashboard) {
   if (dashboard.grammarDue >= dashboard.vocabDue &&
       dashboard.grammarDue >= dashboard.kanjiDue &&
       dashboard.grammarDue > 0) {
-    return '/grammar';
+    return const _WeaknessRouteSpec(route: '/grammar');
   }
   if (dashboard.vocabDue >= dashboard.kanjiDue && dashboard.vocabDue > 0) {
-    return '/vocab/review';
+    return _WeaknessRouteSpec(
+      route: '/vocab/review',
+      extra: VocabReviewArgs(
+        source: 'weakness_radar',
+        levelCode: level.shortLabel,
+        title: language.vocabReviewTitle(level.shortLabel),
+        subtitle: _planHint(
+          language,
+          en: 'Due vocab queue from radar',
+          vi: 'Hàng đợi từ vựng đến hạn từ radar',
+          ja: 'レーダーから開く語彙レビュー',
+        ),
+      ),
+    );
   }
-  return '/kanji-dash';
+  return _WeaknessRouteSpec(
+    route: '/kanji/practice',
+    extra: KanjiPracticeArgs(
+      mode: KanjiPracticeMode.both,
+      levelCode: level.shortLabel,
+      source: 'weakness_radar',
+    ),
+  );
+}
+
+String _planHint(
+  AppLanguage language, {
+  required String en,
+  required String vi,
+  required String ja,
+}) {
+  switch (language) {
+    case AppLanguage.en:
+      return en;
+    case AppLanguage.vi:
+      return vi;
+    case AppLanguage.ja:
+      return ja;
+  }
 }

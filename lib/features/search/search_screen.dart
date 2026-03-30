@@ -384,11 +384,33 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               },
               loading: () => const Padding(
                 padding: EdgeInsets.all(24),
-                child: Center(child: CircularProgressIndicator()),
+                child: AppFeatureCard(
+                  key: ValueKey('search_index_loading'),
+                  icon: Icons.manage_search_rounded,
+                  title: 'Loading search bank',
+                  subtitle:
+                      'Preparing vocab, kanji, and kana for the current JLPT lane.',
+                  status: SizedBox(
+                    width: 18,
+                    height: 18,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  ),
+                  compact: true,
+                ),
               ),
               error: (error, stackTrace) => Padding(
                 padding: const EdgeInsets.all(24),
-                child: Text(language.loadErrorLabel),
+                child: AppFeatureCard(
+                  key: const ValueKey('search_index_error'),
+                  icon: Icons.search_off_rounded,
+                  title: language.loadErrorLabel,
+                  subtitle: _loadErrorSubtitle(language),
+                  primaryLabel: _retryLabel(language),
+                  onPrimaryTap: () => ref.invalidate(searchIndexProvider),
+                  secondaryLabel: _clearSearchLabel(language),
+                  onSecondaryTap: _clearQuery,
+                  compact: true,
+                ),
               ),
             ),
           ],
@@ -403,36 +425,39 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     List<_SearchMatch> results,
   ) {
     if (results.isEmpty) {
-      return Container(
-        decoration: HomeSurface.softPanel(),
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              _empty(language),
-              style: const TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.w700,
-                color: Color(0xFF334155),
-              ),
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AppFeatureCard(
+            key: const ValueKey('search_empty_state'),
+            icon: Icons.search_off_rounded,
+            title: _emptyTitle(language),
+            subtitle: _empty(language),
+            primaryLabel: _clearSearchLabel(language),
+            onPrimaryTap: _clearQuery,
+            secondaryLabel: _showAllLabel(language),
+            onSecondaryTap: () {
+              setState(() {
+                _filter = _SearchFilter.all;
+              });
+            },
+            compact: true,
+          ),
+          if (_recentQueries.isNotEmpty) ...[
+            const SizedBox(height: AppSpacing.md),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                for (final item in _recentQueries)
+                  ActionChip(
+                    label: Text(item),
+                    onPressed: () => _applySuggestedQuery(item),
+                  ),
+              ],
             ),
-            if (_recentQueries.isNotEmpty) ...[
-              const SizedBox(height: AppSpacing.md),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: [
-                  for (final item in _recentQueries)
-                    ActionChip(
-                      label: Text(item),
-                      onPressed: () => _applySuggestedQuery(item),
-                    ),
-                ],
-              ),
-            ],
           ],
-        ),
+        ],
       );
     }
 
@@ -774,6 +799,18 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
         return '\u4e00\u81f4\u3059\u308b\u8a9e\u5f59\u30fb\u6f22\u5b57\u30fb\u8aad\u307f\u304c\u3042\u308a\u307e\u305b\u3093\u3002';
     }
   }
+
+  String _emptyTitle(AppLanguage language) => _searchEmptyTitle(language);
+
+  String _retryLabel(AppLanguage language) => _searchRetryLabel(language);
+
+  String _clearSearchLabel(AppLanguage language) =>
+      _searchClearLabel(language);
+
+  String _showAllLabel(AppLanguage language) => _searchShowAllLabel(language);
+
+  String _loadErrorSubtitle(AppLanguage language) =>
+      _searchLoadErrorSubtitle(language);
 
   String _relatedTitle(AppLanguage language) {
     switch (language) {
@@ -1192,6 +1229,10 @@ class _SearchTile extends StatelessWidget {
     if (entry.id == null) return;
     if (entry.kind == _SearchKind.vocab || entry.kind == _SearchKind.kana) {
       context.push('/vocab/${entry.id}');
+      return;
+    }
+    if (entry.kind == _SearchKind.kanji) {
+      context.push('/kanji?kanjiId=${entry.id}');
     }
   }
 
@@ -1266,6 +1307,61 @@ class _SearchTile extends StatelessWidget {
       ),
       ),
     );
+  }
+}
+
+String _searchEmptyTitle(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Nothing matched yet';
+    case AppLanguage.vi:
+      return 'Chưa tìm thấy mục phù hợp';
+    case AppLanguage.ja:
+      return 'まだ一致する項目がありません';
+  }
+}
+
+String _searchRetryLabel(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Retry';
+    case AppLanguage.vi:
+      return 'Tải lại';
+    case AppLanguage.ja:
+      return '再試行';
+  }
+}
+
+String _searchClearLabel(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Clear search';
+    case AppLanguage.vi:
+      return 'Xóa tìm kiếm';
+    case AppLanguage.ja:
+      return '検索をクリア';
+  }
+}
+
+String _searchShowAllLabel(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Show all lanes';
+    case AppLanguage.vi:
+      return 'Hiện mọi nhóm';
+    case AppLanguage.ja:
+      return 'すべて表示';
+  }
+}
+
+String _searchLoadErrorSubtitle(AppLanguage language) {
+  switch (language) {
+    case AppLanguage.en:
+      return 'Search data could not be prepared right now. Try again or clear the current query.';
+    case AppLanguage.vi:
+      return 'Chưa thể chuẩn bị dữ liệu tra cứu lúc này. Hãy thử lại hoặc xóa truy vấn hiện tại.';
+    case AppLanguage.ja:
+      return '検索データを今は準備できません。再試行するか、現在のクエリをクリアしてください。';
   }
 }
 

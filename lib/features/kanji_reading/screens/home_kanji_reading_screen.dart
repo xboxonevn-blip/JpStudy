@@ -4,15 +4,19 @@ import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/data/models/kanji_item.dart';
 import '../../../core/language_provider.dart';
 import '../../../core/level_provider.dart';
 import '../../../features/common/widgets/compact_ui.dart';
+import '../../kanji_hub/models/kanji_practice_args.dart';
 import '../models/kanji_reading_question.dart';
 import '../providers/kanji_reading_providers.dart';
 import 'kanji_reading_quiz_screen.dart';
 
 class HomeKanjiReadingScreen extends ConsumerWidget {
-  const HomeKanjiReadingScreen({super.key});
+  const HomeKanjiReadingScreen({super.key, this.launchArgs});
+
+  final KanjiPracticeArgs? launchArgs;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -29,7 +33,11 @@ class HomeKanjiReadingScreen extends ConsumerWidget {
       ),
       body: level == null
           ? Center(child: Text(language.levelMenuTitle))
-          : _KanjiHubBody(language: language, levelLabel: level.shortLabel),
+          : _KanjiHubBody(
+              language: language,
+              levelLabel: level.shortLabel,
+              launchArgs: launchArgs,
+            ),
     );
   }
 }
@@ -38,10 +46,12 @@ class _KanjiHubBody extends ConsumerWidget {
   const _KanjiHubBody({
     required this.language,
     required this.levelLabel,
+    this.launchArgs,
   });
 
   final AppLanguage language;
   final String levelLabel;
+  final KanjiPracticeArgs? launchArgs;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,7 +61,8 @@ class _KanjiHubBody extends ConsumerWidget {
 
     return allAsync.when(
       data: (allItems) {
-        if (allItems.length < 4) {
+        final scopedAllItems = _filterItems(allItems);
+        if (scopedAllItems.length < 4) {
           return AppPageShell(
             child: AppFeatureCard(
               icon: Icons.menu_book_rounded,
@@ -71,7 +82,7 @@ class _KanjiHubBody extends ConsumerWidget {
               AppFeatureCard(
                 icon: Icons.menu_book_rounded,
                 title: language.kanjiReadingQuizTitle,
-                subtitle: language.kanjiAvailableLabel(allItems.length),
+                subtitle: _subtitle(scopedAllItems.length),
                 status: AppStatusChip(
                   label: dueCount > 0
                       ? language.dueForReviewLabel(dueCount)
@@ -82,8 +93,10 @@ class _KanjiHubBody extends ConsumerWidget {
                 ),
                 primaryLabel: language.startQuizLabel,
                 onPrimaryTap: () {
-                  final questions =
-                      KanjiReadingQuestion.generate(allItems, count: 10);
+                  final questions = KanjiReadingQuestion.generate(
+                    scopedAllItems,
+                    count: 10,
+                  );
                   if (questions.isEmpty) return;
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -97,7 +110,9 @@ class _KanjiHubBody extends ConsumerWidget {
                     : null,
                 onSecondaryTap: dueCount > 0
                     ? () {
-                        final dueItems = dueAsync.valueOrNull ?? const [];
+                        final dueItems = _filterItems(
+                          dueAsync.valueOrNull ?? const [],
+                        );
                         if (dueItems.length < 4) return;
                         final questions = KanjiReadingQuestion.generate(
                           dueItems,
@@ -123,6 +138,7 @@ class _KanjiHubBody extends ConsumerWidget {
                 ),
                 child: Column(
                   children: allItems
+                      .where((item) => scopedAllItems.contains(item))
                       .take(8)
                       .map(
                         (k) => _KanjiRow(
@@ -162,6 +178,30 @@ class _KanjiHubBody extends ConsumerWidget {
       case AppLanguage.ja:
         return 'このレベルの漢字';
     }
+  }
+
+  List<KanjiItem> _filterItems(List<KanjiItem> items) {
+    final ids = launchArgs?.kanjiIds ?? const <int>[];
+    if (ids.isEmpty) return items;
+    return items.where((item) => ids.contains(item.id)).toList();
+  }
+
+  String _subtitle(int itemCount) {
+    if (launchArgs?.preferredKanjiId != null) {
+      return switch (language) {
+        AppLanguage.en => 'Focused reading drill for a selected kanji.',
+        AppLanguage.vi => 'Drill âm đọc tập trung cho kanji đã chọn.',
+        AppLanguage.ja => '選択した漢字の読みを集中的に練習します。',
+      };
+    }
+    if (launchArgs?.mode == KanjiPracticeMode.both) {
+      return switch (language) {
+        AppLanguage.en => '$itemCount kanji ready. Start here, then continue with writing.',
+        AppLanguage.vi => '$itemCount kanji sẵn sàng. Bắt đầu ở đây rồi tiếp tục sang viết.',
+        AppLanguage.ja => '$itemCount件の漢字が準備できています。ここから始めて次に書きを続けます。',
+      };
+    }
+    return language.kanjiAvailableLabel(itemCount);
   }
 }
 

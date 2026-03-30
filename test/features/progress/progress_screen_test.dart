@@ -83,7 +83,7 @@ ProgressCoachBoard buildCoachBoard({
           id: 'due_reviews',
           title: 'Review 6 due items now',
           subtitle: '3 vocab · 2 grammar · 1 kanji are waiting in the queue.',
-          ctaLabel: 'Open review lane',
+          ctaLabel: 'Start due session',
           route: '/grammar-practice',
           icon: Icons.schedule_rounded,
           color: Color(0xFF1D4ED8),
@@ -279,7 +279,7 @@ void main() {
     );
     expect(find.text('Protect the queue first'), findsOneWidget);
     expect(find.text('Review 6 due items now'), findsOneWidget);
-    expect(find.text('Open review lane'), findsOneWidget);
+    expect(find.text('Start due session'), findsOneWidget);
   });
 
   testWidgets(

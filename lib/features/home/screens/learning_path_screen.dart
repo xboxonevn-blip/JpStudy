@@ -12,6 +12,8 @@ import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/common/widgets/japanese_background.dart';
+import 'package:jpstudy/features/home/home_copy.dart';
+import 'package:jpstudy/features/kanji_hub/models/kanji_practice_args.dart';
 import 'package:jpstudy/features/home/providers/continue_provider.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/home/widgets/daily_plan_card.dart';
@@ -20,6 +22,8 @@ import 'package:jpstudy/features/home/widgets/discover_practice_panel.dart';
 import 'package:jpstudy/features/home/widgets/mini_dashboard.dart';
 import 'package:jpstudy/features/home/widgets/weakness_radar_card.dart';
 import 'package:jpstudy/features/home/widgets/weekly_challenge_card.dart';
+import 'package:jpstudy/features/vocab/models/vocab_review_args.dart';
+import 'package:jpstudy/features/vocab/vocab_copy.dart';
 
 class LearningPathScreen extends ConsumerWidget {
   const LearningPathScreen({super.key});
@@ -112,7 +116,12 @@ class LearningPathScreen extends ConsumerWidget {
                               hasStartedToday: hasStartedToday,
                               missionLabel: continueAction?.label,
                               onPrimaryTap: () =>
-                                  _openContinueAction(context, continueAction),
+                                  _openContinueAction(
+                                    context,
+                                    continueAction,
+                                    language: language,
+                                    level: level,
+                                  ),
                               onSecondaryTap: () => context.push('/jlpt/coach'),
                             ),
                           )
@@ -254,6 +263,10 @@ class LearningPathScreen extends ConsumerWidget {
   static void _openContinueAction(
     BuildContext context,
     ContinueAction? action,
+    {
+    required AppLanguage language,
+    required StudyLevel level,
+  }
   ) {
     if (action == null) {
       context.push('/study');
@@ -264,10 +277,29 @@ class LearningPathScreen extends ConsumerWidget {
         context.push('/grammar-practice', extra: action.data);
         return;
       case ContinueActionType.vocabReview:
-        context.push('/vocab/review');
+        context.push(
+          '/vocab/review',
+          extra: VocabReviewArgs(
+            source: 'learning_path',
+            levelCode: level.shortLabel,
+            title: language.vocabReviewTitle(level.shortLabel),
+            subtitle: switch (language) {
+              AppLanguage.en => 'Due vocab queue for today',
+              AppLanguage.vi => 'Hàng đợi từ vựng đến hạn hôm nay',
+              AppLanguage.ja => '今日の語彙レビュー',
+            },
+          ),
+        );
         return;
       case ContinueActionType.kanjiReview:
-        context.push('/practice/kanji-reading');
+        context.push(
+          '/kanji/practice',
+          extra: KanjiPracticeArgs(
+            mode: KanjiPracticeMode.both,
+            levelCode: level.shortLabel,
+            source: 'learning_path',
+          ),
+        );
         return;
       case ContinueActionType.fixMistakes:
         context.push('/mistakes');
@@ -294,61 +326,21 @@ class LearningPathScreen extends ConsumerWidget {
 
   static String _studyPromptSubtitle(
     AppLanguage language,
-  ) => switch (language) {
-    AppLanguage.en =>
-      'This home screen now leads with sessions, drills, and clear next moves.',
-    AppLanguage.vi =>
-      'Màn hình này giờ ưu tiên session, drill và bước tiếp theo thật rõ ràng.',
-    AppLanguage.ja => 'このホームは記事一覧ではなく、セッションとドリルを先頭に配置します。',
-  };
+  ) => language.learningPathStudyPromptSubtitle();
 
   static String _studyPromptProgressLabel(
     AppLanguage language, {
     required bool hasStartedToday,
-  }) => switch (language) {
-    AppLanguage.en =>
-      hasStartedToday
-          ? 'Today already has momentum.'
-          : 'One short session is enough to open today.',
-    AppLanguage.vi =>
-      hasStartedToday
-          ? 'Hôm nay đã có đà học.'
-          : 'Chỉ cần một session ngắn để mở nhịp hôm nay.',
-    AppLanguage.ja =>
-      hasStartedToday ? '今日はすでに学習の勢いがあります。' : '短い1セッションで今日の流れを作れます。',
-  };
+  }) => language.learningPathProgressLabel(hasStartedToday: hasStartedToday);
 
   static String _focusChipLabel(AppLanguage language, int dueCount) =>
-      switch (language) {
-        AppLanguage.en =>
-          dueCount > 0 ? '$dueCount reviews waiting' : 'Review queue is clear',
-        AppLanguage.vi =>
-          dueCount > 0
-              ? '$dueCount mục review đang chờ'
-              : 'Hàng review đang sạch',
-        AppLanguage.ja => dueCount > 0 ? '$dueCount件の復習が待機中' : '復習キューは空です',
-      };
+      language.learningPathFocusChipLabel(dueCount);
 
   static String _repairChipLabel(AppLanguage language, int weakCount) =>
-      switch (language) {
-        AppLanguage.en =>
-          weakCount > 0
-              ? '$weakCount weak points to repair'
-              : 'Weak points are under control',
-        AppLanguage.vi =>
-          weakCount > 0
-              ? '$weakCount điểm yếu cần sửa'
-              : 'Điểm yếu đang trong tầm kiểm soát',
-        AppLanguage.ja =>
-          weakCount > 0 ? '$weakCount件の弱点を補強' : '弱点は今のところ安定しています',
-      };
+      language.learningPathRepairChipLabel(weakCount);
 
   static String _momentumChipLabel(AppLanguage language, StudyLevel level) =>
-      switch (language) {
-        AppLanguage.en => '${level.shortLabel} momentum lane',
-        AppLanguage.vi => 'Lane tăng lực ${level.shortLabel}',
-        AppLanguage.ja => '${level.shortLabel} の勢いレーン',
-      };
+      language.learningPathMomentumChipLabel(level.shortLabel);
 }
 
 class _DojoHeroCard extends StatelessWidget {
@@ -633,67 +625,18 @@ class _DojoHeroCard extends StatelessWidget {
     AppLanguage language, {
     required int dueCount,
     required int weakCount,
-  }) {
-    if (dueCount > 0) {
-      return switch (language) {
-        AppLanguage.en => 'Clear the review queue first',
-        AppLanguage.vi => 'Dọn hàng review trước',
-        AppLanguage.ja => 'まず復習キューを片づける',
-      };
-    }
-    if (weakCount > 0) {
-      return switch (language) {
-        AppLanguage.en => 'Lock in weak points today',
-        AppLanguage.vi => 'Khóa lại điểm yếu hôm nay',
-        AppLanguage.ja => '今日は弱点を締め直す',
-      };
-    }
-    return switch (language) {
-      AppLanguage.en => 'Open a clean Japanese session',
-      AppLanguage.vi => 'Mở một session tiếng Nhật thật gọn',
-      AppLanguage.ja => '気持ちよく日本語セッションを始める',
-    };
-  }
+  }) => language.learningHeroTitle(dueCount: dueCount, weakCount: weakCount);
 
   static String _subtitle(
     AppLanguage language, {
     required int dueCount,
     required int weakCount,
     required bool hasStartedToday,
-  }) {
-    if (dueCount > 0) {
-      return switch (language) {
-        AppLanguage.en =>
-          '$dueCount reviews are waiting. Finish them early, then drills and reading will feel lighter.',
-        AppLanguage.vi =>
-          'Có $dueCount lượt review đang chờ. Xong phần này sớm thì drill và đọc sẽ nhẹ hơn hẳn.',
-        AppLanguage.ja => '$dueCount件の復習が待っています。先に終えると、そのあとのドリルと読解がずっと軽くなります。',
-      };
-    }
-    if (weakCount > 0) {
-      return switch (language) {
-        AppLanguage.en =>
-          '$weakCount weak spots are still warm. Repair them now while recall is close.',
-        AppLanguage.vi =>
-          'Còn $weakCount điểm yếu đang “nóng”. Vá ngay lúc này sẽ nhớ sâu hơn.',
-        AppLanguage.ja => '$weakCount件の弱点がまだ新しいうちに補強すると、記憶が安定しやすくなります。',
-      };
-    }
-    return switch (language) {
-      AppLanguage.en =>
-        hasStartedToday
-            ? 'Your rhythm is already open. Pick one strong lane and keep the momentum moving.'
-            : 'No urgent queue right now. Start one focused lane to keep Japanese active today.',
-      AppLanguage.vi =>
-        hasStartedToday
-            ? 'Bạn đã mở nhịp rồi. Chọn một lane mạnh và giữ đà học tiếp tục.'
-            : 'Hiện chưa có hàng chờ gấp. Mở một lane tập trung để giữ tiếng Nhật sống hôm nay.',
-      AppLanguage.ja =>
-        hasStartedToday
-            ? '今日はもう流れができています。1つのレーンに集中して勢いを保ちましょう。'
-            : '急ぎのキューはありません。1つの集中レーンで今日の日本語を動かしましょう。',
-    };
-  }
+  }) => language.learningHeroSubtitle(
+    dueCount: dueCount,
+    weakCount: weakCount,
+    hasStartedToday: hasStartedToday,
+  );
 
   static String _streakLabel(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Streak',
@@ -708,28 +651,20 @@ class _DojoHeroCard extends StatelessWidget {
   };
 
   static String _reviewLabel(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Review',
-    AppLanguage.vi => 'Review',
-    AppLanguage.ja => '復習',
+    AppLanguage.en => language.learningHeroReviewLabel(),
+    AppLanguage.vi => language.learningHeroReviewLabel(),
+    AppLanguage.ja => language.learningHeroReviewLabel(),
   };
 
   static String _repairLabel(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Repair',
-    AppLanguage.vi => 'Sửa lỗi',
-    AppLanguage.ja => '補修',
+    AppLanguage.en => language.learningHeroRepairLabel(),
+    AppLanguage.vi => language.learningHeroRepairLabel(),
+    AppLanguage.ja => language.learningHeroRepairLabel(),
   };
 
-  static String _primaryLabel(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Start session',
-    AppLanguage.vi => 'Bắt đầu session',
-    AppLanguage.ja => 'セッション開始',
-  };
+  static String _primaryLabel(AppLanguage language) => language.learningHeroPrimaryLabel();
 
-  static String _secondaryLabel(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'JLPT prep',
-    AppLanguage.vi => 'Ôn thi JLPT',
-    AppLanguage.ja => 'JLPT試験対策',
-  };
+  static String _secondaryLabel(AppLanguage language) => language.learningHeroSecondaryLabel();
 }
 
 class _DojoStatChip extends StatelessWidget {
@@ -876,81 +811,37 @@ class _LearningLanesPanel extends StatelessWidget {
   }
 
   static String _title(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Pick your training lane',
-    AppLanguage.vi => 'Chọn lane luyện tập',
-    AppLanguage.ja => '学習レーンを選ぶ',
+    AppLanguage.en => language.learningLanesTitle(),
+    AppLanguage.vi => language.learningLanesTitle(),
+    AppLanguage.ja => language.learningLanesTitle(),
   };
 
   static String _subtitle(AppLanguage language) => switch (language) {
-    AppLanguage.en =>
-      'Every lane is action-first: drill, exam, or real reading.',
-    AppLanguage.vi =>
-      'Mỗi lane đều hành động trước: drill, thi JLPT, hoặc đọc tiếng Nhật thật.',
-    AppLanguage.ja => '記事一覧ではなく、ドリル・試験・実読の3レーンから始めます。',
+    AppLanguage.en => language.learningLanesSubtitle(),
+    AppLanguage.vi => language.learningLanesSubtitle(),
+    AppLanguage.ja => language.learningLanesSubtitle(),
   };
 
-  static String _studyLaneTitle(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Drill hub',
-    AppLanguage.vi => 'Hub luyện tập',
-    AppLanguage.ja => 'ドリルハブ',
-  };
+  static String _studyLaneTitle(AppLanguage language) => language.learningStudyLaneTitle();
 
   static String _studyLaneSubtitle(
     AppLanguage language,
     int dueCount,
-  ) => switch (language) {
-    AppLanguage.en =>
-      dueCount > 0
-          ? 'Clear due items, fix ghosts, and hit the highest-priority drills.'
-          : 'Jump into vocab, kanji, grammar, and focus drills right away.',
-    AppLanguage.vi =>
-      dueCount > 0
-          ? 'Dọn bài đến hạn, sửa ghost và vào đúng drill ưu tiên ngay.'
-          : 'Nhảy thẳng vào từ vựng, kanji, ngữ pháp và drill tập trung.',
-    AppLanguage.ja =>
-      dueCount > 0 ? '期限項目を処理し、ゴーストを直して、優先ドリルへ入ります。' : '語彙・漢字・文法・集中ドリルへすぐ入れます。',
-  };
+  ) => language.learningStudyLaneSubtitle(dueCount);
 
-  static String _jlptLaneTitle(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'JLPT prep',
-    AppLanguage.vi => 'Ôn thi JLPT',
-    AppLanguage.ja => 'JLPT試験対策',
-  };
+  static String _jlptLaneTitle(AppLanguage language) => language.learningJlptLaneTitle();
 
   static String _jlptLaneSubtitle(
     AppLanguage language,
     StudyLevel level,
-  ) => switch (language) {
-    AppLanguage.en =>
-      'Keep ${level.shortLabel} exam shape with full mock, reading drills, diagnosis, and a repair plan.',
-    AppLanguage.vi =>
-      'Giữ form thi ${level.shortLabel} bằng full mock, đọc hiểu, chẩn đoán và kế hoạch vá lỗ hổng.',
-    AppLanguage.ja => '${level.shortLabel} 対策として、フル模試・読解・診断・補強プランをまとめて回せます。',
-  };
+  ) => language.learningJlptLaneSubtitle(level.shortLabel);
 
-  static String _immersionLaneTitle(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Reading lab',
-    AppLanguage.vi => 'Phòng đọc luyện',
-    AppLanguage.ja => '読解ラボ',
-  };
+  static String _immersionLaneTitle(AppLanguage language) => language.learningImmersionLaneTitle();
 
   static String _immersionLaneSubtitle(
     AppLanguage language,
     int weakCount,
-  ) => switch (language) {
-    AppLanguage.en =>
-      weakCount > 0
-          ? 'Use level-based reading sets to repair recall in real sentences.'
-          : 'Build real Japanese speed with level lanes, saved words, and repeat reads.',
-    AppLanguage.vi =>
-      weakCount > 0
-          ? 'Dùng bài đọc theo level để vá trí nhớ ngay trong câu thật.'
-          : 'Tăng tốc đọc tiếng Nhật thật với lane theo level, lưu từ và đọc lặp.',
-    AppLanguage.ja =>
-      weakCount > 0
-          ? 'レベル別の読解セットで、実際の文の中から記憶を補強します。'
-          : 'レベル別レーンと再読で、本物の日本語スピードを育てます。',
-  };
+  ) => language.learningImmersionLaneSubtitle(weakCount);
 
   static String _dueChip(AppLanguage language, int dueCount) =>
       switch (language) {
@@ -971,11 +862,7 @@ class _LearningLanesPanel extends StatelessWidget {
     AppLanguage.ja => '実際の日本語',
   };
 
-  static String _openLaneLabel(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'Open lane',
-    AppLanguage.vi => 'Mở lane',
-    AppLanguage.ja => 'レーンを開く',
-  };
+  static String _openLaneLabel(AppLanguage language) => language.learningOpenLaneLabel();
 }
 
 class _LaneCard extends StatelessWidget {

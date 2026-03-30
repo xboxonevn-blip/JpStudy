@@ -1,6 +1,8 @@
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/features/grammar/screens/grammar_practice_screen.dart';
+import 'package:jpstudy/features/kanji_hub/models/kanji_practice_args.dart';
 import 'package:jpstudy/features/jlpt/models/jlpt_coach_models.dart';
+import 'package:jpstudy/features/jlpt/models/jlpt_plan_copy.dart';
 import 'package:jpstudy/features/test/models/home_mock_exam_launch_args.dart';
 import 'package:jpstudy/features/test/models/test_config.dart';
 
@@ -185,7 +187,7 @@ String jlptPlanPhaseLabel(AppLanguage language, JlptPlanPhase phase) {
     },
     JlptPlanPhase.miniMock => switch (language) {
       AppLanguage.en => 'Mini mock',
-      AppLanguage.vi => 'Mini mock',
+      AppLanguage.vi => jlptMiniMockPhaseLabel(language),
       AppLanguage.ja => 'ミニ模試',
     },
   };
@@ -210,11 +212,7 @@ JlptPlanPresentation _vocabResetPresentation(
       AppLanguage.ja =>
         '${item.minutes}分ほどの落ち着いた補強チェックで、まず抜けやすい語彙を戻してから速度を上げます。',
     },
-    actionLabel: switch (language) {
-      AppLanguage.en => 'Open repair check',
-      AppLanguage.vi => 'Mở lượt sửa từ vựng',
-      AppLanguage.ja => '補強チェックを開く',
-    },
+    actionLabel: jlptActionOpenRepairCheck(language),
     launchTarget: JlptPlanLaunchTarget(
       route: '/practice/mock-exam',
       extra: HomeMockExamLaunchArgs(
@@ -253,11 +251,7 @@ JlptPlanPresentation _vocabAccuracyPresentation(
         'Dùng ${item.minutes} phút để dọn các từ gần đúng nhưng vẫn hay nhầm, tránh lặp lại trong đề thi.',
       AppLanguage.ja => '${item.minutes}分で、試験中に何度も取り違えそうな語彙のズレを先に整えます。',
     },
-    actionLabel: switch (language) {
-      AppLanguage.en => 'Open precision check',
-      AppLanguage.vi => 'Mở lượt siết độ chính xác',
-      AppLanguage.ja => '精度チェックを開く',
-    },
+    actionLabel: jlptActionOpenPrecisionCheck(language),
     launchTarget: JlptPlanLaunchTarget(
       route: '/practice/mock-exam',
       extra: HomeMockExamLaunchArgs(
@@ -297,11 +291,7 @@ JlptPlanPresentation _vocabSpeedPresentation(
       AppLanguage.ja =>
         '${item.dayOffset + 1}日目は短い時間制ブロックで、ペースが上がっても語彙が保てるかを確かめます。',
     },
-    actionLabel: switch (language) {
-      AppLanguage.en => 'Open timed vocab check',
-      AppLanguage.vi => 'Mở bài check từ vựng có giờ',
-      AppLanguage.ja => '時間つき語彙チェック',
-    },
+    actionLabel: jlptActionOpenTimedCheck(language),
     launchTarget: JlptPlanLaunchTarget(
       route: '/practice/mock-exam',
       extra: HomeMockExamLaunchArgs(
@@ -347,11 +337,7 @@ JlptPlanPresentation _vocabTimedPresentation(
         'Dùng khoảng ${item.minutes} phút để rà lại bank từ vựng theo nhịp thi thật, không chỉ dừng ở cảm giác nhận ra.',
       AppLanguage.ja => '${item.minutes}分ほどで、語彙バンクを「見れば分かる」ではなく試験リズムで回し直します。',
     },
-    actionLabel: switch (language) {
-      AppLanguage.en => 'Open consolidation check',
-      AppLanguage.vi => 'Mở lượt củng cố có giờ',
-      AppLanguage.ja => '固め直しチェック',
-    },
+    actionLabel: jlptActionOpenCoverageCheck(language),
     launchTarget: JlptPlanLaunchTarget(
       route: '/practice/mock-exam',
       extra: HomeMockExamLaunchArgs(
@@ -385,11 +371,7 @@ JlptPlanPresentation _vocabCheckpointPresentation(
         'So sánh checkpoint ${item.minutes} phút hôm nay với lượt sửa trước đó để biết lỗ hổng đã thực sự khép lại chưa.',
       AppLanguage.ja => '${item.minutes}分の再確認で、最初の補強ラウンドと比べて抜けが本当に減ったかを見ます。',
     },
-    actionLabel: switch (language) {
-      AppLanguage.en => 'Open vocab checkpoint',
-      AppLanguage.vi => 'Mở checkpoint từ vựng',
-      AppLanguage.ja => '語彙チェックポイント',
-    },
+    actionLabel: jlptActionOpenCheckpoint(language),
     launchTarget: JlptPlanLaunchTarget(
       route: '/practice/mock-exam',
       extra: HomeMockExamLaunchArgs(
@@ -436,11 +418,7 @@ JlptPlanPresentation _grammarAccuracyPresentation(
       AppLanguage.ja =>
         '${item.minutes}分は文型を正確に当て直し、後半のセクションでも同じ崩れを繰り返さないようにします。',
     },
-    actionLabel: switch (language) {
-      AppLanguage.en => 'Open grammar drill',
-      AppLanguage.vi => 'Mở drill ngữ pháp',
-      AppLanguage.ja => '文法ドリルを開く',
-    },
+    actionLabel: jlptActionOpenGrammarDrill(language),
     launchTarget: const JlptPlanLaunchTarget(
       route: '/grammar-practice',
       extra: {
@@ -471,11 +449,7 @@ JlptPlanPresentation _grammarSpeedPresentation(
       AppLanguage.ja =>
         '補強のあとに${item.minutes}分の速いラウンドで、時間圧の中でも正しい文型を見抜けるか確かめます。',
     },
-    actionLabel: switch (language) {
-      AppLanguage.en => 'Open speed quiz',
-      AppLanguage.vi => 'Mở quiz tốc độ',
-      AppLanguage.ja => 'スピードクイズ',
-    },
+    actionLabel: jlptActionOpenSpeedQuiz(language),
     launchTarget: const JlptPlanLaunchTarget(
       route: '/grammar-practice',
       extra: {
@@ -505,11 +479,7 @@ JlptPlanPresentation _grammarCoveragePresentation(
         'Dùng ${item.minutes} phút để lấp các nhóm mẫu câu bạn hay bỏ sót, để điểm không còn phụ thuộc vào may rủi của đề.',
       AppLanguage.ja => '${item.minutes}分で見落としがちな文型群を埋め、問題の引きに左右されにくい土台を作ります。',
     },
-    actionLabel: switch (language) {
-      AppLanguage.en => 'Open coverage drill',
-      AppLanguage.vi => 'Mở drill phủ kiến thức',
-      AppLanguage.ja => '穴埋めドリル',
-    },
+    actionLabel: jlptActionOpenFillBlankDrill(language),
     launchTarget: const JlptPlanLaunchTarget(
       route: '/grammar-practice',
       extra: {
@@ -540,11 +510,7 @@ JlptPlanPresentation _grammarTimedPresentation(
       AppLanguage.ja =>
         '${item.minutes}分のブロックで本番に近いリズムを作り、速い判断でも補強した文法が崩れないようにします。',
     },
-    actionLabel: switch (language) {
-      AppLanguage.en => 'Open timed grammar',
-      AppLanguage.vi => 'Mở block ngữ pháp có giờ',
-      AppLanguage.ja => '時間つき文法',
-    },
+    actionLabel: jlptActionOpenTimedGrammar(language),
     launchTarget: const JlptPlanLaunchTarget(
       route: '/grammar-practice',
       extra: {
@@ -574,11 +540,7 @@ JlptPlanPresentation _grammarCheckpointPresentation(
         'Kiểm tra lại đúng các cấu trúc yếu trong một lượt ${item.minutes} phút gọn hơn và so xem còn bao nhiêu cấu trúc gãy.',
       AppLanguage.ja => '${item.minutes}分の短い再確認で、補強した文型がどれだけまだ崩れるかを見比べます。',
     },
-    actionLabel: switch (language) {
-      AppLanguage.en => 'Open grammar checkpoint',
-      AppLanguage.vi => 'Mở checkpoint ngữ pháp',
-      AppLanguage.ja => '文法チェックポイント',
-    },
+    actionLabel: jlptActionOpenCheckpoint(language),
     launchTarget: const JlptPlanLaunchTarget(
       route: '/grammar-practice',
       extra: {
@@ -608,12 +570,15 @@ JlptPlanPresentation _kanjiResetPresentation(
         'Dành ${item.minutes} phút viết lại chậm các kanji đang vỡ để hình và thứ tự nét ổn định trở lại.',
       AppLanguage.ja => '${item.minutes}分は崩れた漢字を書き直し、形と書き順の手応えを戻します。',
     },
-    actionLabel: switch (language) {
-      AppLanguage.en => 'Open handwriting',
-      AppLanguage.vi => 'Mở luyện viết tay',
-      AppLanguage.ja => '手書きを開く',
-    },
-    launchTarget: const JlptPlanLaunchTarget(route: '/practice/handwriting'),
+    actionLabel: jlptActionOpenHandwriting(language),
+    launchTarget: const JlptPlanLaunchTarget(
+      route: '/kanji/practice',
+      extra: KanjiPracticeArgs(
+        mode: KanjiPracticeMode.write,
+        levelCode: 'N5',
+        source: 'jlpt_plan',
+      ),
+    ),
   );
 }
 
@@ -643,12 +608,15 @@ JlptPlanPresentation _kanjiSpeedPresentation(
       AppLanguage.ja =>
         '形が安定したら、${item.minutes}分の速い反応ラウンドに切り替えて既知漢字での迷いを減らします。',
     },
-    actionLabel: switch (language) {
-      AppLanguage.en => 'Open kanji dash',
-      AppLanguage.vi => 'Mở kanji dash',
-      AppLanguage.ja => '漢字ダッシュ',
-    },
-    launchTarget: const JlptPlanLaunchTarget(route: '/kanji-dash'),
+    actionLabel: jlptActionOpenKanjiPractice(language),
+    launchTarget: const JlptPlanLaunchTarget(
+      route: '/kanji/practice',
+      extra: KanjiPracticeArgs(
+        mode: KanjiPracticeMode.both,
+        levelCode: 'N5',
+        source: 'jlpt_plan',
+      ),
+    ),
   );
 }
 
@@ -670,12 +638,15 @@ JlptPlanPresentation _kanjiCoveragePresentation(
         'Dùng ${item.minutes} phút để mở rộng độ phủ nhận diện và cách đọc, không chỉ nhớ viết tay.',
       AppLanguage.ja => '${item.minutes}分で、手書き想起だけでなく認識と読みの広がりも整えます。',
     },
-    actionLabel: switch (language) {
-      AppLanguage.en => 'Open kanji reading',
-      AppLanguage.vi => 'Mở đọc kanji',
-      AppLanguage.ja => '漢字読みを開く',
-    },
-    launchTarget: const JlptPlanLaunchTarget(route: '/practice/kanji-reading'),
+    actionLabel: jlptActionOpenKanjiReading(language),
+    launchTarget: const JlptPlanLaunchTarget(
+      route: '/kanji/practice',
+      extra: KanjiPracticeArgs(
+        mode: KanjiPracticeMode.read,
+        levelCode: 'N5',
+        source: 'jlpt_plan',
+      ),
+    ),
   );
 }
 
@@ -733,11 +704,7 @@ JlptPlanPresentation _readingCoveragePresentation(
       AppLanguage.ja =>
         '${item.minutes}分のイマージョンで、重いドリル日の合間にも実際の日本語に目を慣らしておきます。',
     },
-    actionLabel: switch (language) {
-      AppLanguage.en => 'Open immersion',
-      AppLanguage.vi => 'Mở immersion',
-      AppLanguage.ja => 'イマージョンを開く',
-    },
+    actionLabel: jlptActionOpenImmersion(language),
     launchTarget: const JlptPlanLaunchTarget(route: '/immersion'),
   );
 }
@@ -760,11 +727,7 @@ JlptPlanPresentation _readingTimedPresentation(
         'Dùng một bài reading drill ${item.minutes} phút để tốc độ và hiểu bài vẫn giữ được khi thấy đồng hồ.',
       AppLanguage.ja => '${item.minutes}分の読解ドリルで、タイマーが見えていても理解と速度を安定させます。',
     },
-    actionLabel: switch (language) {
-      AppLanguage.en => 'Open reading drill',
-      AppLanguage.vi => 'Mở reading drill',
-      AppLanguage.ja => '読解ドリルを開く',
-    },
+    actionLabel: jlptActionOpenReadingDrill(language),
     launchTarget: const JlptPlanLaunchTarget(route: '/jlpt/reading'),
   );
 }
@@ -795,11 +758,7 @@ JlptPlanPresentation _readingMiniMockPresentation(
       AppLanguage.ja =>
         '${item.minutes}分の読解中心チェックで、今週の補強が本番の動きに変わったかを確かめて締めます。',
     },
-    actionLabel: switch (language) {
-      AppLanguage.en => 'Open final reading check',
-      AppLanguage.vi => 'Mở bài check cuối tuần',
-      AppLanguage.ja => '週末チェックを開く',
-    },
+    actionLabel: jlptActionOpenFinalReadingCheck(language),
     launchTarget: const JlptPlanLaunchTarget(route: '/jlpt/reading'),
   );
 }

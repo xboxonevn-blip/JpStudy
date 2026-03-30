@@ -2,6 +2,7 @@ import 'package:drift/native.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
@@ -73,6 +74,32 @@ Widget buildSearchScreen({LessonRepository? repo}) {
       if (repo != null) lessonRepositoryProvider.overrideWithValue(repo),
     ],
     child: const MaterialApp(home: SearchScreen()),
+  );
+}
+
+Widget buildSearchRouterApp({LessonRepository? repo}) {
+  final router = GoRouter(
+    routes: [
+      GoRoute(path: '/', builder: (context, state) => const SearchScreen()),
+      GoRoute(
+        path: '/vocab/:id',
+        builder: (context, state) => Text('vocab:${state.pathParameters['id']}'),
+      ),
+      GoRoute(
+        path: '/kanji',
+        builder: (context, state) =>
+            Text('kanji:${state.uri.queryParameters['kanjiId']}'),
+      ),
+    ],
+  );
+
+  return ProviderScope(
+    overrides: [
+      appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+      studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+      if (repo != null) lessonRepositoryProvider.overrideWithValue(repo),
+    ],
+    child: MaterialApp.router(routerConfig: router),
   );
 }
 
@@ -279,5 +306,75 @@ void main() {
     await tester.pump(const Duration(milliseconds: 50));
 
     expect(find.text(AppLanguage.en.loadErrorLabel), findsOneWidget);
+    expect(find.byKey(const ValueKey('search_index_error')), findsOneWidget);
+    expect(find.text('Retry'), findsOneWidget);
+    expect(find.text('Clear search'), findsOneWidget);
+  });
+
+  testWidgets('empty search state offers clear and show-all actions', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1440, 1400);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      buildSearchScreen(
+        repo: _FakeLessonRepository(vocab: _vocab, kanji: _kanji),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.enterText(find.byType(TextField), 'zzz');
+    await tester.pump(const Duration(milliseconds: 220));
+
+    expect(find.byKey(const ValueKey('search_empty_state')), findsOneWidget);
+    expect(find.text('Clear search'), findsOneWidget);
+    expect(find.text('Show all lanes'), findsOneWidget);
+  });
+
+  testWidgets('tap vocab result deep-links to vocab detail route', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1440, 1400);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      buildSearchRouterApp(
+        repo: _FakeLessonRepository(vocab: _vocab, kanji: _kanji),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.ensureVisible(find.text('食べる').first);
+    await tester.tap(find.text('食べる').first, warnIfMissed: false);
+    await tester.pumpAndSettle();
+
+    expect(find.text('vocab:1'), findsOneWidget);
+  });
+
+  testWidgets('tap kanji result deep-links to kanji hub query route', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1440, 1400);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(
+      buildSearchRouterApp(
+        repo: _FakeLessonRepository(vocab: _vocab, kanji: _kanji),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.ensureVisible(find.text('森').first);
+    await tester.tap(find.text('森').first, warnIfMissed: false);
+    await tester.pumpAndSettle();
+
+    expect(find.text('kanji:1'), findsOneWidget);
   });
 }

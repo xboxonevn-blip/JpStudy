@@ -21,6 +21,8 @@ import 'package:jpstudy/features/jlpt/screens/jlpt_mock_pro_screen.dart';
 import 'package:jpstudy/features/jlpt/screens/jlpt_reading_screen.dart';
 import 'package:jpstudy/features/flashcards/integration/flashcard_mode_integration.dart';
 import 'package:jpstudy/features/kanji_hub/kanji_hub_screen.dart';
+import 'package:jpstudy/features/kanji_hub/models/kanji_practice_args.dart';
+import 'package:jpstudy/features/kanji_hub/screens/kanji_practice_hub_screen.dart';
 import 'package:jpstudy/features/kanji_reading/screens/home_kanji_reading_screen.dart';
 import 'package:jpstudy/features/leaderboard/leaderboard_screen.dart';
 import 'package:jpstudy/features/learn/integration/learn_mode_integration.dart';
@@ -51,9 +53,14 @@ import 'package:jpstudy/features/test/models/home_mock_exam_launch_args.dart';
 import 'package:jpstudy/features/test/screens/home_mock_exam_screen.dart';
 import 'package:jpstudy/features/test/screens/test_history_screen.dart';
 import 'package:jpstudy/features/vocab/screens/minna_lesson_catalog_screen.dart';
+import 'package:jpstudy/features/vocab/screens/hajimete_chapter_catalog_screen.dart';
+import 'package:jpstudy/features/vocab/screens/hajimete_chapter_detail_screen.dart';
 import 'package:jpstudy/features/vocab/screens/term_review_screen.dart';
 import 'package:jpstudy/features/vocab/screens/vocab_detail_screen.dart';
+import 'package:jpstudy/features/vocab/models/vocab_review_args.dart';
+import 'package:jpstudy/features/vocab/models/vocab_match_session_args.dart';
 import 'package:jpstudy/features/vocab/vocab_screen.dart';
+import 'package:jpstudy/features/vocab/screens/vocab_match_session_screen.dart';
 import 'package:jpstudy/features/write/screens/home_handwriting_practice_screen.dart';
 
 class AppRouter {
@@ -67,16 +74,35 @@ class AppRouter {
             routes: [
               GoRoute(
                 path: '/kanji',
-                builder: (context, state) => const KanjiHubScreen(),
+                builder: (context, state) => KanjiHubScreen(
+                  initialKanjiId: int.tryParse(
+                    state.uri.queryParameters['kanjiId'] ?? '',
+                  ),
+                ),
+              ),
+              GoRoute(
+                path: '/kanji/practice',
+                builder: (context, state) => KanjiPracticeHubScreen(
+                  launchArgs: state.extra is KanjiPracticeArgs
+                      ? state.extra as KanjiPracticeArgs
+                      : null,
+                ),
               ),
               GoRoute(
                 path: '/practice/handwriting',
-                builder: (context, state) =>
-                    const HomeHandwritingPracticeScreen(),
+                builder: (context, state) => HomeHandwritingPracticeScreen(
+                  launchArgs: state.extra is KanjiPracticeArgs
+                      ? state.extra as KanjiPracticeArgs
+                      : null,
+                ),
               ),
               GoRoute(
                 path: '/practice/kanji-reading',
-                builder: (context, state) => const HomeKanjiReadingScreen(),
+                builder: (context, state) => HomeKanjiReadingScreen(
+                  launchArgs: state.extra is KanjiPracticeArgs
+                      ? state.extra as KanjiPracticeArgs
+                      : null,
+                ),
               ),
               GoRoute(
                 path: '/kanji-dash',
@@ -93,12 +119,15 @@ class AppRouter {
               GoRoute(
                 path: '/vocab/review',
                 builder: (context, state) {
-                  final query = state.uri.queryParameters;
+                  final args = state.extra is VocabReviewArgs
+                      ? state.extra as VocabReviewArgs
+                      : VocabReviewArgs.fromLegacyQuery(state.uri.queryParameters);
                   return TermReviewScreen(
-                    sessionTitle: query['title'],
-                    sessionSubtitle: query['subtitle'],
-                    lessonStart: int.tryParse(query['lessonStart'] ?? ''),
-                    lessonEnd: int.tryParse(query['lessonEnd'] ?? ''),
+                    reviewArgs: args,
+                    sessionTitle: args.title,
+                    sessionSubtitle: args.subtitle,
+                    lessonStart: args.lessonStart,
+                    lessonEnd: args.lessonEnd,
                   );
                 },
               ),
@@ -112,6 +141,40 @@ class AppRouter {
                     subtitle: query['subtitle'],
                     lessonStart: int.tryParse(query['lessonStart'] ?? '') ?? 1,
                     lessonEnd: int.tryParse(query['lessonEnd'] ?? '') ?? 25,
+                  );
+                },
+              ),
+              GoRoute(
+                path: '/vocab/hajimete',
+                builder: (context, state) {
+                  final query = state.uri.queryParameters;
+                  return HajimeteChapterCatalogScreen(
+                    levelCode: query['level'] ?? 'N5',
+                    title: query['title'] ?? 'Hajimete no Nihongo Tango',
+                    subtitle: query['subtitle'],
+                  );
+                },
+              ),
+              GoRoute(
+                path: '/vocab/hajimete/chapter',
+                builder: (context, state) {
+                  final query = state.uri.queryParameters;
+                  return HajimeteChapterDetailScreen(
+                    levelCode: query['level'] ?? 'N5',
+                    chapterId: int.tryParse(query['chapterId'] ?? '') ?? 1,
+                    laneTitle: query['title'] ?? 'Hajimete no Nihongo Tango',
+                  );
+                },
+              ),
+              GoRoute(
+                path: '/vocab/match-session',
+                builder: (context, state) {
+                  final args = state.extra;
+                  if (args is VocabMatchSessionArgs) {
+                    return VocabMatchSessionScreen(args: args);
+                  }
+                  return const VocabMatchSessionScreen(
+                    args: VocabMatchSessionArgs(items: [], title: 'Match'),
                   );
                 },
               ),

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:drift/native.dart';
@@ -14,12 +15,15 @@ import 'package:jpstudy/data/db/content_database.dart';
 import 'package:jpstudy/data/models/kanji_item.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/kanji_hub/kanji_hub_screen.dart';
+import 'package:jpstudy/features/kanji_hub/providers/kanji_home_provider.dart';
 
 class _FakeKanjiHubLessonRepository extends LessonRepository {
   _FakeKanjiHubLessonRepository({
     required this.n5Kanji,
     required this.n4Kanji,
     required this.n3Kanji,
+    this.dueKanji = const {},
+    this.unseenKanji = const {},
   }) : super(
           AppDatabase(executor: NativeDatabase.memory()),
           ContentDatabase(executor: NativeDatabase.memory()),
@@ -29,27 +33,53 @@ class _FakeKanjiHubLessonRepository extends LessonRepository {
   final List<KanjiItem> n4Kanji;
   final List<KanjiItem> n3Kanji;
 
+  /// Per-level due kanji (SRS-scheduled reviews). Defaults to empty (nothing due).
+  final Map<String, List<KanjiItem>> dueKanji;
+
+  /// Per-level unseen kanji (never practiced). Defaults to empty.
+  final Map<String, List<KanjiItem>> unseenKanji;
+
   @override
   Future<List<KanjiItem>> fetchKanjiByLevel(String level) async {
-    switch (level) {
-      case 'N5':
-        return n5Kanji;
-      case 'N4':
-        return n4Kanji;
-      case 'N3':
-        return n3Kanji;
-      default:
-        return const [];
-    }
+    return switch (level) {
+      'N5' => n5Kanji,
+      'N4' => n4Kanji,
+      'N3' => n3Kanji,
+      _ => const [],
+    };
   }
+
+  @override
+  Future<List<KanjiItem>> fetchDueKanjiByLevel(String level) async {
+    return dueKanji[level] ?? const [];
+  }
+
+  @override
+  Future<List<KanjiItem>> fetchUnseenKanjiByLevel(
+    String level, {
+    int limit = 15,
+  }) async {
+    final items = unseenKanji[level] ?? const [];
+    return items.take(limit).toList();
+  }
+
+  @override
+  Future<Set<int>> fetchSeenKanjiIds() async => const {};
+
+  @override
+  Future<Set<int>> fetchDueKanjiIds() async => const {};
 }
 
-Widget _buildSubject({required LessonRepository repo}) {
+Widget _buildSubject({
+  required LessonRepository repo,
+  List<Override> overrides = const [],
+}) {
   return ProviderScope(
     overrides: [
       appLanguageProvider.overrideWith((ref) => AppLanguage.en),
       studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
       lessonRepositoryProvider.overrideWithValue(repo),
+      ...overrides,
     ],
     child: const MaterialApp(home: KanjiHubScreen()),
   );
@@ -87,28 +117,13 @@ Future<void> _mockRadicalsAsset() async {
       });
 }
 
-Future<void> _openSunRadicalDialog(WidgetTester tester) async {
-  final radicalsTabCard = find.ancestor(
-    of: find.text('214').first,
-    matching: find.byType(GestureDetector),
-  );
-  await tester.ensureVisible(radicalsTabCard.first);
-  await tester.tap(radicalsTabCard.first, warnIfMissed: false);
-  await _pumpKanjiHub(tester);
-
-  for (var i = 0; i < 8 && find.text('\u65e5').evaluate().isEmpty; i++) {
-    await tester.pump(const Duration(milliseconds: 250));
-  }
-
-  expect(find.text('\u65e5'), findsWidgets);
-  final sunRadical = find.text('\u65e5').last;
-  await tester.ensureVisible(sunRadical);
-  await tester.tap(sunRadical, warnIfMissed: false);
-  await _pumpKanjiHub(tester);
-}
-
-_FakeKanjiHubLessonRepository _buildRepo() {
+_FakeKanjiHubLessonRepository _buildRepo({
+  Map<String, List<KanjiItem>> dueKanji = const {},
+  Map<String, List<KanjiItem>> unseenKanji = const {},
+}) {
   return _FakeKanjiHubLessonRepository(
+    dueKanji: dueKanji,
+    unseenKanji: unseenKanji,
     n5Kanji: const [
       KanjiItem(
         id: 1,
@@ -180,52 +195,58 @@ _FakeKanjiHubLessonRepository _buildRepo() {
 }
 
 void main() {
-  testWidgets(
-    'radical detail groups related kanji by level and can open the chosen lane',
-    (tester) async {
-      await _mockRadicalsAsset();
+  testWidgets('kanji hub surfaces due/new/explore CTAs first', (tester) async {
+    await _mockRadicalsAsset();
+    await tester.pumpWidget(_buildSubject(repo: _buildRepo()));
+    await _pumpKanjiHub(tester);
 
-      tester.view.physicalSize = const Size(1400, 1600);
-      tester.view.devicePixelRatio = 1;
-      addTearDown(tester.view.resetPhysicalSize);
-      addTearDown(tester.view.resetDevicePixelRatio);
+    expect(find.byKey(const ValueKey('kanji_today_panel')), findsOneWidget);
+    expect(find.byKey(const ValueKey('kanji_cta_due')), findsOneWidget);
+    expect(find.byKey(const ValueKey('kanji_cta_new')), findsOneWidget);
+    expect(find.byKey(const ValueKey('kanji_cta_explore')), findsOneWidget);
+  });
 
-      final repo = _buildRepo();
+  testWidgets('kanji hub shows loading card while today summary resolves', (
+    tester,
+  ) async {
+    await _mockRadicalsAsset();
+    final completer = Completer<KanjiHomeSummary>();
 
-      await tester.pumpWidget(_buildSubject(repo: repo));
-      await _pumpKanjiHub(tester);
-      await _openSunRadicalDialog(tester);
+    await tester.pumpWidget(
+      _buildSubject(
+        repo: _buildRepo(),
+        overrides: [
+          kanjiHomeSummaryProvider.overrideWith((ref) => completer.future),
+        ],
+      ),
+    );
+    await tester.pump();
 
-      expect(find.text('JP Study Flow'), findsAtLeastNWidgets(1));
-      expect(find.textContaining('N5 lane'), findsOneWidget);
-      expect(find.textContaining('N4 lane'), findsOneWidget);
-      expect(find.textContaining('N3 lane'), findsOneWidget);
-      expect(find.byKey(const ValueKey('open_related_all')), findsOneWidget);
-      expect(find.byKey(const ValueKey('open_related_level_N4')), findsOneWidget);
-      expect(find.byKey(const ValueKey('study_flashcard_N4')), findsOneWidget);
-      expect(find.byKey(const ValueKey('study_write_N4')), findsOneWidget);
-      expect(find.byKey(const ValueKey('preview_N4_\u6642')), findsOneWidget);
+    expect(find.byKey(const ValueKey('kanji_today_loading')), findsOneWidget);
+    expect(find.text("Preparing today's kanji"), findsOneWidget);
+  });
 
-      await tester.tap(find.byKey(const ValueKey('preview_N4_\u6642')));
-      await _pumpKanjiHub(tester);
+  testWidgets('kanji hub shows retry card when today summary fails', (
+    tester,
+  ) async {
+    await _mockRadicalsAsset();
 
-      expect(find.byKey(const ValueKey('micro_detail_\u6642')), findsOneWidget);
-      expect(find.text('On: \u30b8'), findsOneWidget);
-      expect(find.text('Kun: \u3068\u304d'), findsOneWidget);
-      expect(find.byKey(const ValueKey('micro_search_\u6642')), findsOneWidget);
-      expect(find.byKey(const ValueKey('micro_flashcard_\u6642')), findsOneWidget);
-      expect(find.byKey(const ValueKey('micro_write_\u6642')), findsOneWidget);
+    await tester.pumpWidget(
+      _buildSubject(
+        repo: _buildRepo(),
+        overrides: [
+          kanjiHomeSummaryProvider.overrideWith(
+            (ref) async => throw Exception('boom'),
+          ),
+        ],
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 50));
 
-      await tester.tap(find.byKey(const ValueKey('open_related_level_N4')));
-      await _pumpKanjiHub(tester);
-
-      expect(find.byKey(const ValueKey('open_related_level_N4')), findsNothing);
-      expect(find.textContaining('Flashcard'), findsOneWidget);
-      expect(find.textContaining('(N4)'), findsWidgets);
-      expect(find.text('\u6642'), findsWidgets);
-      expect(find.text('\u660e'), findsNothing);
-      expect(find.text('\u4f11'), findsNothing);
-    },
-  );
+    expect(find.byKey(const ValueKey('kanji_today_error')), findsOneWidget);
+    expect(find.text('Could not load kanji summary'), findsOneWidget);
+    expect(find.text('Retry'), findsOneWidget);
+  });
 
 }

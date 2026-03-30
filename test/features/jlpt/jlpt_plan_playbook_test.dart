@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/features/grammar/screens/grammar_practice_screen.dart';
+import 'package:jpstudy/features/kanji_hub/models/kanji_practice_args.dart';
 import 'package:jpstudy/features/jlpt/models/jlpt_coach_models.dart';
 import 'package:jpstudy/features/jlpt/models/jlpt_plan_playbook.dart';
 import 'package:jpstudy/features/test/models/home_mock_exam_launch_args.dart';
@@ -94,5 +95,52 @@ void main() {
     expect(presentation.phaseLabel, equals('Coverage'));
     expect(presentation.launchTarget.route, equals('/immersion'));
     expect(presentation.actionLabel, equals('Open immersion'));
+  });
+
+  test('Vietnamese mini mock phase uses localized label', () {
+    expect(
+      jlptPlanPhaseLabel(AppLanguage.vi, JlptPlanPhase.miniMock),
+      equals('Thi thử ngắn'),
+    );
+  });
+
+  test('Reading coverage action label is localized in Vietnamese', () {
+    const item = JlptPlanItem(
+      dayOffset: 3,
+      area: JlptSkillArea.reading,
+      minutes: 25,
+      focus: 'Coverage balance',
+      action: 'Fill weakest patterns and keep notes concise.',
+    );
+
+    final presentation = buildJlptPlanPresentation(
+      language: AppLanguage.vi,
+      item: item,
+    );
+
+    expect(presentation.actionLabel, equals('Mở đọc ngữ cảnh'));
+  });
+
+  test('Kanji reset phase launches typed kanji practice args', () {
+    const item = JlptPlanItem(
+      dayOffset: 0,
+      area: JlptSkillArea.kanji,
+      minutes: 20,
+      focus: 'Reset form',
+      action: 'Rewrite unstable kanji.',
+    );
+
+    final presentation = buildJlptPlanPresentation(
+      language: AppLanguage.en,
+      item: item,
+    );
+
+    expect(presentation.launchTarget.route, equals('/kanji/practice'));
+    expect(presentation.actionLabel, equals('Open handwriting'));
+    expect(presentation.launchTarget.extra, isA<KanjiPracticeArgs>());
+
+    final args = presentation.launchTarget.extra as KanjiPracticeArgs;
+    expect(args.mode, KanjiPracticeMode.write);
+    expect(args.source, 'jlpt_plan');
   });
 }

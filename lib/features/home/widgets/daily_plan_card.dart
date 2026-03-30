@@ -43,7 +43,13 @@ class DailyPlanCard extends ConsumerWidget {
                     done: done,
                     language: language,
                     palette: palette,
-                    onTap: () => context.push(step.route),
+                    onTap: () {
+                      if (step.extra != null) {
+                        context.push(step.route, extra: step.extra);
+                      } else {
+                        context.push(step.route);
+                      }
+                    },
                   );
                 }),
               ],

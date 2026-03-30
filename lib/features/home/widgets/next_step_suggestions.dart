@@ -4,9 +4,14 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
+import '../../../core/level_provider.dart';
+import '../../../core/study_level.dart';
 import '../../grammar/grammar_providers.dart';
 import '../../grammar/screens/grammar_practice_screen.dart';
+import '../../kanji_hub/models/kanji_practice_args.dart';
 import '../../vocab/vocab_ghost_providers.dart';
+import '../../vocab/models/vocab_review_args.dart';
+import '../../vocab/vocab_copy.dart';
 import '../../vocab/screens/vocab_ghost_review_screen.dart';
 import '../providers/continue_provider.dart';
 import '../providers/dashboard_provider.dart';
@@ -74,7 +79,7 @@ class NextStepSuggestions extends ConsumerWidget {
           label: language.reviewsLabel,
           count: totalDue,
           color: const Color(0xFF1D4ED8),
-          onTap: () => _navigateToDue(context, continueAction, dashboard),
+          onTap: () => _navigateToDue(context, ref, continueAction, dashboard),
         ),
       );
     }
@@ -107,9 +112,13 @@ class NextStepSuggestions extends ConsumerWidget {
 
   void _navigateToDue(
     BuildContext context,
+    WidgetRef ref,
     ContinueAction? action,
     DashboardState? dashboard,
   ) {
+    final language = ref.read(appLanguageProvider);
+    final level = ref.read(studyLevelProvider) ?? StudyLevel.n5;
+
     switch (action?.type) {
       case ContinueActionType.grammarReview:
         final ids = action?.data;
@@ -120,15 +129,29 @@ class NextStepSuggestions extends ConsumerWidget {
         }
         return;
       case ContinueActionType.vocabReview:
-        context.push('/vocab/review');
+        context.push(
+          '/vocab/review',
+          extra: VocabReviewArgs(
+            source: 'daily_queue',
+            levelCode: level.shortLabel,
+            title: language.vocabReviewTitle(level.shortLabel),
+            subtitle: switch (language) {
+              AppLanguage.en => 'Due queue for today',
+              AppLanguage.vi => 'Hàng đợi đến hạn hôm nay',
+              AppLanguage.ja => '今日の期限レビュー',
+            },
+          ),
+        );
         return;
       case ContinueActionType.kanjiReview:
-        final lessonId = action?.data;
-        if (lessonId is int) {
-          context.push('/lesson/$lessonId');
-        } else {
-          context.push('/kanji-dash');
-        }
+        context.push(
+          '/kanji/practice',
+          extra: KanjiPracticeArgs(
+            mode: KanjiPracticeMode.both,
+            levelCode: level.shortLabel,
+            source: 'due',
+          ),
+        );
         return;
       default:
         break;
@@ -137,9 +160,28 @@ class NextStepSuggestions extends ConsumerWidget {
     if ((dashboard?.grammarDue ?? 0) > 0) {
       context.push('/grammar');
     } else if ((dashboard?.vocabDue ?? 0) > 0) {
-      context.push('/vocab/review');
+      context.push(
+        '/vocab/review',
+        extra: VocabReviewArgs(
+          source: 'daily_queue',
+          levelCode: level.shortLabel,
+          title: language.vocabReviewTitle(level.shortLabel),
+          subtitle: switch (language) {
+            AppLanguage.en => 'Due queue for today',
+            AppLanguage.vi => 'Hàng đợi đến hạn hôm nay',
+            AppLanguage.ja => '今日の期限レビュー',
+          },
+        ),
+      );
     } else {
-      context.push('/kanji-dash');
+      context.push(
+        '/kanji/practice',
+        extra: KanjiPracticeArgs(
+          mode: KanjiPracticeMode.both,
+          levelCode: level.shortLabel,
+          source: 'due',
+        ),
+      );
     }
   }
 }

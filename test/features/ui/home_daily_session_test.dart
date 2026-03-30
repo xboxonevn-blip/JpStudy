@@ -55,8 +55,8 @@ void main() {
           builder: (context, state) => marker('/vocab/review'),
         ),
         GoRoute(
-          path: '/kanji-dash',
-          builder: (context, state) => marker('/kanji-dash'),
+          path: '/kanji/practice',
+          builder: (context, state) => marker('/kanji/practice'),
         ),
         GoRoute(
           path: '/mistakes',
@@ -160,6 +160,96 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('daily_session_cta')));
     await tester.pumpAndSettle();
     expect(find.text('route:/grammar-practice'), findsOneWidget);
+  });
+
+  testWidgets('Daily session routes vocab due work to vocab review session', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          dashboardProvider.overrideWith(
+            (_) => Stream.value(buildDashboard(vocabDue: 4)),
+          ),
+          grammarGhostCountProvider.overrideWith((_) async => 0),
+          vocabGhostCountProvider.overrideWith((_) async => 0),
+          nextVocabReviewProvider.overrideWith((_) => Stream.value(null)),
+          nextKanjiReviewProvider.overrideWith((_) => Stream.value(null)),
+          nextGrammarReviewProvider.overrideWith((_) => Stream.value(null)),
+          weekSummaryProvider.overrideWith(
+            (_) async => const WeekSummary(
+              totalReviewed: 0,
+              accuracy: 0,
+              daysStudied: 0,
+            ),
+          ),
+          continueActionProvider.overrideWith(
+            (_) async => const ContinueAction(
+              type: ContinueActionType.vocabReview,
+              label: 'review vocab',
+              count: 4,
+            ),
+          ),
+          dailySessionProgressProvider.overrideWith(
+            (_) async => DailySessionProgress.empty('2026-02-22'),
+          ),
+          backupStatusProvider.overrideWith(
+            (_) async => const BackupStatus(enabled: true, lastBackupAt: null),
+          ),
+        ],
+        child: MaterialApp.router(routerConfig: buildRouter()),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('daily_session_cta')));
+    await tester.pumpAndSettle();
+    expect(find.text('route:/vocab/review'), findsOneWidget);
+  });
+
+  testWidgets('Daily session routes kanji due work to kanji practice hub', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          dashboardProvider.overrideWith(
+            (_) => Stream.value(buildDashboard(kanjiDue: 2)),
+          ),
+          grammarGhostCountProvider.overrideWith((_) async => 0),
+          vocabGhostCountProvider.overrideWith((_) async => 0),
+          nextVocabReviewProvider.overrideWith((_) => Stream.value(null)),
+          nextKanjiReviewProvider.overrideWith((_) => Stream.value(null)),
+          nextGrammarReviewProvider.overrideWith((_) => Stream.value(null)),
+          weekSummaryProvider.overrideWith(
+            (_) async => const WeekSummary(
+              totalReviewed: 0,
+              accuracy: 0,
+              daysStudied: 0,
+            ),
+          ),
+          continueActionProvider.overrideWith(
+            (_) async => const ContinueAction(
+              type: ContinueActionType.kanjiReview,
+              label: 'review kanji',
+              count: 2,
+            ),
+          ),
+          dailySessionProgressProvider.overrideWith(
+            (_) async => DailySessionProgress.empty('2026-02-22'),
+          ),
+          backupStatusProvider.overrideWith(
+            (_) async => const BackupStatus(enabled: true, lastBackupAt: null),
+          ),
+        ],
+        child: MaterialApp.router(routerConfig: buildRouter()),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('daily_session_cta')));
+    await tester.pumpAndSettle();
+    expect(find.text('route:/kanji/practice'), findsOneWidget);
   });
 
   testWidgets('Daily session resumes stored route when in progress', (

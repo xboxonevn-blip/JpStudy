@@ -4,6 +4,10 @@ import 'package:go_router/go_router.dart';
 
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/level_provider.dart';
+import 'package:jpstudy/features/kanji_hub/models/kanji_practice_args.dart';
+import 'package:jpstudy/features/vocab/models/vocab_review_args.dart';
+import 'package:jpstudy/features/vocab/vocab_copy.dart';
 
 import '../providers/continue_provider.dart';
 
@@ -297,20 +301,38 @@ class _ContinueButtonState extends ConsumerState<ContinueButton> {
   }
 
   void _handleNavigation(BuildContext context, ContinueAction action) {
+    final language = ref.read(appLanguageProvider);
+    final level = ref.read(studyLevelProvider);
+    final levelCode = level?.shortLabel ?? 'N5';
+
     switch (action.type) {
       case ContinueActionType.grammarReview:
         context.push('/grammar');
         break;
       case ContinueActionType.vocabReview:
-        context.push('/vocab/review');
+        context.push(
+          '/vocab/review',
+          extra: VocabReviewArgs(
+            source: 'daily_queue',
+            levelCode: levelCode,
+            title: language.vocabReviewTitle(levelCode),
+            subtitle: switch (language) {
+              AppLanguage.en => 'Today queue',
+              AppLanguage.vi => 'Hàng đợi hôm nay',
+              AppLanguage.ja => '今日のキュー',
+            },
+          ),
+        );
         break;
       case ContinueActionType.kanjiReview:
-        final lessonId = action.data;
-        if (lessonId is int) {
-          context.push('/lesson/$lessonId');
-        } else {
-          context.push('/kanji-dash');
-        }
+        context.push(
+          '/kanji/practice',
+          extra: KanjiPracticeArgs(
+            mode: KanjiPracticeMode.both,
+            levelCode: levelCode,
+            source: 'due',
+          ),
+        );
         break;
       case ContinueActionType.fixMistakes:
         context.push('/mistakes');

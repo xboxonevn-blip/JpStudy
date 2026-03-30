@@ -7,23 +7,39 @@ import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
+import 'package:jpstudy/core/services/fsrs_service.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/db/content_database.dart';
 import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
+import 'package:jpstudy/data/utils/hajimete_catalog_loader.dart';
 import 'package:jpstudy/features/vocab/vocab_screen.dart';
+import 'package:jpstudy/features/vocab/models/vocab_review_args.dart';
+import 'package:jpstudy/features/vocab/screens/hajimete_chapter_catalog_screen.dart';
+import 'package:jpstudy/features/vocab/screens/hajimete_chapter_detail_screen.dart';
+import 'package:jpstudy/features/vocab/screens/hajimete_chapter_detail_support.dart';
 import 'package:jpstudy/features/vocab/screens/minna_lesson_catalog_screen.dart';
 import 'package:jpstudy/features/vocab/screens/term_review_screen.dart';
+import 'package:jpstudy/features/flashcards/widgets/enhanced_flashcard.dart';
+import 'package:jpstudy/shared/widgets/confidence_rating.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class _FakeVocabLessonRepository extends LessonRepository {
-  _FakeVocabLessonRepository({required this.bank})
+  _FakeVocabLessonRepository({
+    required this.bank,
+    this.hajimeteChapterTerms = const {},
+    Map<int, SrsStateData> srsStates = const {},
+  })
     : super(
         AppDatabase(executor: NativeDatabase.memory()),
         ContentDatabase(executor: NativeDatabase.memory()),
-      );
+      ) {
+        this.srsStates = Map<int, SrsStateData>.from(srsStates);
+      }
 
   final Map<String, List<VocabItem>> bank;
+  final Map<String, List<UserLessonTermData>> hajimeteChapterTerms;
+  late final Map<int, SrsStateData> srsStates;
 
   @override
   Future<List<VocabItem>> getVocabByLevel(String level) async {
@@ -36,6 +52,79 @@ class _FakeVocabLessonRepository extends LessonRepository {
     String series,
   ) async {
     return bank[level] ?? const [];
+  }
+
+  @override
+  Future<List<VocabItem>> getVocabByLevelSeriesChapterRange(
+    String level, {
+    required String series,
+    required int startChapter,
+    required int endChapter,
+  }) async {
+    if (series != 'hajimete') {
+      return bank[level] ?? const [];
+    }
+    final terms = hajimeteChapterTerms['$level:$startChapter'] ?? const <UserLessonTermData>[];
+    return [
+      for (final term in terms)
+        VocabItem(
+          id: term.id,
+          term: term.term,
+          reading: term.reading,
+          meaning: term.definition,
+          meaningEn: term.definitionEn,
+          kanjiMeaning: term.kanjiMeaning,
+          level: level,
+        ),
+    ];
+  }
+
+  @override
+  Future<List<UserLessonTermData>> fetchTermsForHajimeteChapter(
+    String level, {
+    required int chapterId,
+    String? title,
+  }) async {
+    return hajimeteChapterTerms['$level:$chapterId'] ?? const <UserLessonTermData>[];
+  }
+
+  @override
+  Future<Map<int, SrsStateData>> getSrsStatesForIds(List<int> termIds) async {
+    return {
+      for (final id in termIds)
+        if (srsStates.containsKey(id)) id: srsStates[id]!,
+    };
+  }
+
+
+  @override
+  Future<FsrsReviewResult?> saveTermReview({
+    required int termId,
+    required int quality,
+  }) async {
+    final previous = srsStates[termId];
+    final nextReviewAt = DateTime.now().add(
+      quality <= 2 ? const Duration(minutes: 10) : const Duration(days: 2),
+    );
+    srsStates[termId] = SrsStateData(
+      id: previous?.id ?? termId,
+      vocabId: termId,
+      box: previous?.box ?? 1,
+      repetitions: (previous?.repetitions ?? 0) + 1,
+      ease: previous?.ease ?? 2.5,
+      stability: previous?.stability ?? 1,
+      difficulty: previous?.difficulty ?? 5,
+      lastConfidence: quality,
+      lastReviewedAt: DateTime.now(),
+      nextReviewAt: nextReviewAt,
+    );
+    return FsrsReviewResult(
+      stability: previous?.stability ?? 1,
+      difficulty: previous?.difficulty ?? 5,
+      retrievability: 0.9,
+      intervalDays: quality <= 2 ? 0.0 : 2.0,
+      nextReviewAt: nextReviewAt,
+    );
   }
 
   @override
@@ -154,6 +243,22 @@ Widget _buildRouterScreen({required LessonRepository repo}) {
         ),
       ),
       GoRoute(
+        path: '/vocab/hajimete',
+        builder: (context, state) => HajimeteChapterCatalogScreen(
+          levelCode: state.uri.queryParameters['level'] ?? 'N5',
+          title: state.uri.queryParameters['title'] ?? 'Hajimete no Nihongo Tango',
+          subtitle: state.uri.queryParameters['subtitle'],
+        ),
+      ),
+      GoRoute(
+        path: '/vocab/hajimete/chapter',
+        builder: (context, state) => HajimeteChapterDetailScreen(
+          levelCode: state.uri.queryParameters['level'] ?? 'N5',
+          chapterId: int.tryParse(state.uri.queryParameters['chapterId'] ?? '') ?? 1,
+          laneTitle: state.uri.queryParameters['title'] ?? 'Hajimete no Nihongo Tango',
+        ),
+      ),
+      GoRoute(
         path: '/lesson/:id',
         builder: (context, state) => Scaffold(
           body: Center(child: Text('LESSON_${state.pathParameters['id']}')),
@@ -239,6 +344,33 @@ void main() {
       find.byKey(const ValueKey('program_n1_advanced_n1')),
       findsOneWidget,
     );
+    expect(find.byKey(const ValueKey('vocab_today_section')), findsOneWidget);
+    expect(find.byKey(const ValueKey('vocab_today_review_cta')), findsOneWidget);
+  });
+
+  testWidgets('VocabScreen prioritizes Today section before catalog', (
+    tester,
+  ) async {
+    final repo = _FakeVocabLessonRepository(
+      bank: {
+        'N5': List.generate(6, (i) => _item(i + 1, 'n5_$i', 'N5')),
+        'N4': List.generate(6, (i) => _item(i + 11, 'n4_$i', 'N4')),
+        'N3': List.generate(6, (i) => _item(i + 21, 'n3_$i', 'N3')),
+        'N2': List.generate(6, (i) => _item(i + 31, 'n2_$i', 'N2')),
+        'N1': List.generate(6, (i) => _item(i + 41, 'n1_$i', 'N1')),
+      },
+    );
+
+    await tester.pumpWidget(_buildScreen(repo: repo));
+    await _pumpCatalog(tester);
+
+    final todayTopLeft = tester.getTopLeft(
+      find.byKey(const ValueKey('vocab_today_section')),
+    );
+    final heroTopLeft = tester.getTopLeft(
+      find.byKey(const ValueKey('vocab_catalog_hero')),
+    );
+    expect(todayTopLeft.dy, lessThan(heroTopLeft.dy));
   });
 
   testWidgets('Vocab companion track opens Minna catalog flow', (tester) async {
@@ -396,7 +528,7 @@ void main() {
     await _pumpCatalog(tester);
 
     expect(find.text('Minna no Nihongo I'), findsWidgets);
-    expect(find.text('Lessons 1?25'), findsWidgets);
+    expect(find.text('Lessons 1–25'), findsWidgets);
   });
 
   testWidgets(
@@ -502,11 +634,11 @@ void main() {
       await _pumpCatalog(tester);
 
       expect(find.text('5 terms due'), findsWidgets);
-      expect(find.text('Lessons 1?25'), findsWidgets);
+      expect(find.text('Lessons 1–25'), findsWidgets);
     },
   );
 
-  testWidgets('VocabScreen opens review flow for active level cards only', (
+  testWidgets('VocabScreen opens Hajimete chapter catalog for active core lane', (
     tester,
   ) async {
     final repo = _FakeVocabLessonRepository(
@@ -530,6 +662,381 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('program_n5_n5_core')));
     await _pumpCatalog(tester);
 
-    expect(find.textContaining('REVIEW_N5_'), findsOneWidget);
+    expect(find.byType(HajimeteChapterCatalogScreen), findsOneWidget);
   });
+
+
+  testWidgets('Hajimete chapter catalog shows saved learned due status', (
+    tester,
+  ) async {
+    final now = DateTime.now();
+    final chapterTerms = [
+      UserLessonTermData(
+        id: 101,
+        lessonId: -905001,
+        term: '????',
+        reading: '????',
+        definition: 'greeting',
+        definitionEn: 'greeting',
+        mnemonicVi: '',
+        mnemonicEn: '',
+        kanjiMeaning: '',
+        isStarred: true,
+        isLearned: true,
+        orderIndex: 1,
+      ),
+      UserLessonTermData(
+        id: 102,
+        lessonId: -905001,
+        term: '?????',
+        reading: '?????',
+        definition: 'thank you',
+        definitionEn: 'thank you',
+        mnemonicVi: '',
+        mnemonicEn: '',
+        kanjiMeaning: '',
+        isStarred: false,
+        isLearned: true,
+        orderIndex: 2,
+      ),
+    ];
+    final repo = _FakeVocabLessonRepository(
+      bank: {
+        'N5': [
+          _item(101, '????', 'N5'),
+          _item(102, '?????', 'N5'),
+        ],
+      },
+      hajimeteChapterTerms: {'N5:1': chapterTerms},
+      srsStates: {
+        101: SrsStateData(
+          id: 1,
+          vocabId: 101,
+          box: 1,
+          repetitions: 1,
+          ease: 2.5,
+          stability: 1,
+          difficulty: 5,
+          lastConfidence: 3,
+          lastReviewedAt: now.subtract(const Duration(days: 1)),
+          nextReviewAt: now.subtract(const Duration(minutes: 5)),
+        ),
+        102: SrsStateData(
+          id: 2,
+          vocabId: 102,
+          box: 1,
+          repetitions: 1,
+          ease: 2.5,
+          stability: 1,
+          difficulty: 5,
+          lastConfidence: 4,
+          lastReviewedAt: now.subtract(const Duration(hours: 2)),
+          nextReviewAt: now.add(const Duration(days: 2)),
+        ),
+      },
+    );
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+          lessonRepositoryProvider.overrideWithValue(repo),
+          hajimeteChapterCatalogProvider.overrideWith(
+            (ref, args) async => const HajimeteChapterCatalog(
+              levelCode: 'N5',
+              chapters: [
+                HajimeteChapterSummary(
+                  chapterId: 1,
+                  title: 'Greetings',
+                  entryCount: 2,
+                  previewTerms: ['????', '?????'],
+                  sourceVocabIds: ['hv1', 'hv2'],
+                ),
+              ],
+            ),
+          ),
+          allDueTermsProvider.overrideWith((ref) async => const []),
+          nextVocabReviewProvider.overrideWith((ref) => Stream.value(null)),
+        ],
+        child: const MaterialApp(
+          home: HajimeteChapterCatalogScreen(
+            levelCode: 'N5',
+            title: 'Hajimete no Nihongo Tango',
+          ),
+        ),
+      ),
+    );
+
+    await _pumpCatalog(tester);
+
+    expect(find.byKey(const ValueKey('hajimete_status_saved_1_1')), findsOneWidget);
+    expect(find.byKey(const ValueKey('hajimete_status_learned_1_2')), findsOneWidget);
+    expect(find.byKey(const ValueKey('hajimete_status_due_1_1')), findsOneWidget);
+  });
+
+
+  testWidgets('Hajimete review stage locks stage layout and action bar', (
+    tester,
+  ) async {
+    final now = DateTime.now();
+    final detail = const HajimeteChapterDetail(
+      levelCode: 'N5',
+      chapterId: 1,
+      title: 'Greetings',
+      entries: [
+        HajimeteChapterEntry(
+          term: '????',
+          reading: '????',
+          meaningVi: 'ch?o h?i',
+          meaningEn: 'greeting',
+        ),
+      ],
+    );
+    final item = _item(101, '????', 'N5');
+    final userTerm = UserLessonTermData(
+      id: 101,
+      lessonId: -905001,
+      term: '????',
+      reading: '????',
+      definition: 'greeting',
+      definitionEn: 'greeting',
+      mnemonicVi: '',
+      mnemonicEn: '',
+      kanjiMeaning: '',
+      isStarred: false,
+      isLearned: true,
+      orderIndex: 1,
+    );
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          lessonRepositoryProvider.overrideWithValue(
+            _FakeVocabLessonRepository(bank: {'N5': [item]}),
+          ),
+          hajimeteChapterDetailProvider.overrideWith((ref, arg) async => detail),
+          hajimeteChapterItemsProvider.overrideWith((ref, arg) async => [item]),
+          hajimeteChapterDueItemsProvider.overrideWith((ref, arg) async => [item]),
+          hajimeteChapterSrsStatesProvider.overrideWith(
+            (ref, arg) async => {
+              101: SrsStateData(
+                id: 1,
+                vocabId: 101,
+                box: 1,
+                repetitions: 1,
+                ease: 2.5,
+                stability: 1,
+                difficulty: 5,
+                lastConfidence: 3,
+                lastReviewedAt: now.subtract(const Duration(hours: 4)),
+                nextReviewAt: now.subtract(const Duration(minutes: 1)),
+              ),
+            },
+          ),
+          hajimeteChapterUserTermsProvider.overrideWith(
+            (ref, arg) async => [userTerm],
+          ),
+          hajimeteKanjiChapterProvider.overrideWith((ref, arg) async => null),
+        ],
+        child: const MaterialApp(
+          home: HajimeteChapterDetailScreen(
+            levelCode: 'N5',
+            chapterId: 1,
+            laneTitle: 'Hajimete no Nihongo Tango',
+          ),
+        ),
+      ),
+    );
+
+    await _pumpCatalog(tester);
+    await tester.tap(find.text('Review now'));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const ValueKey('hajimete_review_stage')), findsOneWidget);
+    expect(tester.getSize(find.byKey(const ValueKey('hajimete_review_stage'))).height, 460);
+    expect(find.byType(ConfidenceRatingWidget), findsOneWidget);
+    expect(find.byType(EnhancedFlashcard), findsOneWidget);
+  });
+
+
+  testWidgets('Hajimete review rating advances due queue and keeps stage locked', (
+    tester,
+  ) async {
+    final now = DateTime.now();
+    final item1 = _item(101, '????', 'N5');
+    final item2 = _item(102, '?????', 'N5');
+    final repo = _FakeVocabLessonRepository(
+      bank: {'N5': [item1, item2]},
+      srsStates: {
+        101: SrsStateData(
+          id: 1,
+          vocabId: 101,
+          box: 1,
+          repetitions: 1,
+          ease: 2.5,
+          stability: 1,
+          difficulty: 5,
+          lastConfidence: 3,
+          lastReviewedAt: now.subtract(const Duration(hours: 1)),
+          nextReviewAt: now.subtract(const Duration(minutes: 5)),
+        ),
+        102: SrsStateData(
+          id: 2,
+          vocabId: 102,
+          box: 1,
+          repetitions: 1,
+          ease: 2.5,
+          stability: 1,
+          difficulty: 5,
+          lastConfidence: 3,
+          lastReviewedAt: now.subtract(const Duration(hours: 1)),
+          nextReviewAt: now.subtract(const Duration(minutes: 4)),
+        ),
+      },
+    );
+    const detail = HajimeteChapterDetail(
+      levelCode: 'N5',
+      chapterId: 1,
+      title: 'Greetings',
+      entries: [
+        HajimeteChapterEntry(
+          term: '????',
+          reading: '????',
+          meaningVi: 'ch?o h?i',
+          meaningEn: 'greeting',
+        ),
+        HajimeteChapterEntry(
+          term: '?????',
+          reading: '?????',
+          meaningVi: 'c?m ?n',
+          meaningEn: 'thank you',
+        ),
+      ],
+    );
+    final userTerms = [
+      UserLessonTermData(
+        id: 101,
+        lessonId: -905001,
+        term: '????',
+        reading: '????',
+        definition: 'greeting',
+        definitionEn: 'greeting',
+        mnemonicVi: '',
+        mnemonicEn: '',
+        kanjiMeaning: '',
+        isStarred: false,
+        isLearned: true,
+        orderIndex: 1,
+      ),
+      UserLessonTermData(
+        id: 102,
+        lessonId: -905001,
+        term: '?????',
+        reading: '?????',
+        definition: 'thank you',
+        definitionEn: 'thank you',
+        mnemonicVi: '',
+        mnemonicEn: '',
+        kanjiMeaning: '',
+        isStarred: false,
+        isLearned: true,
+        orderIndex: 2,
+      ),
+    ];
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          lessonRepositoryProvider.overrideWithValue(repo),
+          hajimeteChapterDetailProvider.overrideWith((ref, arg) async => detail),
+          hajimeteChapterItemsProvider.overrideWith((ref, arg) async => [item1, item2]),
+          hajimeteChapterUserTermsProvider.overrideWith((ref, arg) async => userTerms),
+          hajimeteKanjiChapterProvider.overrideWith((ref, arg) async => null),
+        ],
+        child: const MaterialApp(
+          home: HajimeteChapterDetailScreen(
+            levelCode: 'N5',
+            chapterId: 1,
+            laneTitle: 'Hajimete no Nihongo Tango',
+          ),
+        ),
+      ),
+    );
+
+    await _pumpCatalog(tester);
+    await tester.tap(find.text('Review now'));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const ValueKey('hajimete_review_stage')), findsOneWidget);
+    expect(find.byKey(const ValueKey('hajimete_card_review_101_hint')), findsOneWidget);
+
+    final goodButton = find.descendant(
+      of: find.byType(ConfidenceRatingWidget),
+      matching: find.text('Good'),
+    );
+    await tester.ensureVisible(goodButton);
+    await tester.tap(goodButton, warnIfMissed: false);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 350));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const ValueKey('hajimete_review_stage')), findsOneWidget);
+    expect(find.byType(ConfidenceRatingWidget), findsOneWidget);
+    expect(find.byKey(const ValueKey('hajimete_card_review_102_hint')), findsOneWidget);
+  });
+
+  testWidgets(
+    'Hajimete core lane loads series terms even when due queue is empty',
+    (tester) async {
+      final repo = _FakeVocabLessonRepository(
+        bank: {
+          'N5': List.generate(6, (i) => _item(i + 1, 'hajimete_$i', 'N5')),
+        },
+      );
+
+      final router = GoRouter(
+        initialLocation: '/vocab/review',
+        routes: [
+          GoRoute(
+            path: '/vocab/review',
+            builder: (context, state) => TermReviewScreen(
+              reviewArgs: const VocabReviewArgs(
+                source: 'core',
+                levelCode: 'N5',
+                series: 'hajimete',
+                title: 'Hajimete no Nihongo Tango N5',
+                subtitle: 'Chapter-based Hajimete track for N5 with seeded catalog data.',
+              ),
+              sessionTitle: 'Hajimete no Nihongo Tango N5',
+              sessionSubtitle:
+                  'Chapter-based Hajimete track for N5 with seeded catalog data.',
+            ),
+          ),
+        ],
+      );
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+            studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+            lessonRepositoryProvider.overrideWithValue(repo),
+            allDueTermsProvider.overrideWith(
+              (ref) async => const <UserLessonTermData>[],
+            ),
+            nextVocabReviewProvider.overrideWith((ref) => Stream.value(null)),
+          ],
+          child: MaterialApp.router(routerConfig: router),
+        ),
+      );
+
+      await _pumpCatalog(tester);
+
+      expect(find.text('6 terms due'), findsWidgets);
+      expect(find.text('Hajimete no Nihongo Tango N5'), findsWidgets);
+    },
+  );
 }

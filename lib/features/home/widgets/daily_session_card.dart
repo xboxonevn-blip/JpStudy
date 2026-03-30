@@ -4,10 +4,15 @@ import 'package:go_router/go_router.dart';
 import 'package:jpstudy/core/services/recovery_pack_service.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/level_provider.dart';
+import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/features/grammar/grammar_providers.dart';
 import 'package:jpstudy/features/grammar/screens/grammar_practice_screen.dart';
 import 'package:jpstudy/features/home/providers/backup_status_provider.dart';
+import 'package:jpstudy/features/kanji_hub/models/kanji_practice_args.dart';
 import 'package:jpstudy/features/vocab/vocab_ghost_providers.dart';
+import 'package:jpstudy/features/vocab/models/vocab_review_args.dart';
+import 'package:jpstudy/features/vocab/vocab_copy.dart';
 import 'package:jpstudy/features/home/providers/continue_provider.dart';
 import 'package:jpstudy/features/home/providers/daily_session_progress_provider.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
@@ -468,6 +473,9 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
     DashboardState? dashboard, {
     required ContinueAction? continueAction,
   }) {
+    final language = ref.read(appLanguageProvider);
+    final level = ref.read(studyLevelProvider) ?? StudyLevel.n5;
+
     switch (continueAction?.type) {
       case ContinueActionType.grammarReview:
         final ids = continueAction?.data;
@@ -480,13 +488,30 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
         }
         return const _DailyRoute(route: '/grammar', step: 1);
       case ContinueActionType.vocabReview:
-        return const _DailyRoute(route: '/vocab/review', step: 1);
+        return _DailyRoute(
+          route: '/vocab/review',
+          extra: VocabReviewArgs(
+            source: 'daily_queue',
+            levelCode: level.shortLabel,
+            title: language.vocabReviewTitle(level.shortLabel),
+            subtitle: switch (language) {
+              AppLanguage.en => 'Due queue for today',
+              AppLanguage.vi => 'Hàng đợi đến hạn hôm nay',
+              AppLanguage.ja => '今日の期限レビュー',
+            },
+          ),
+          step: 1,
+        );
       case ContinueActionType.kanjiReview:
-        final lessonId = continueAction?.data;
-        if (lessonId is int) {
-          return _DailyRoute(route: '/lesson/$lessonId', step: 1);
-        }
-        return const _DailyRoute(route: '/kanji-dash', step: 1);
+        return _DailyRoute(
+          route: '/kanji/practice',
+          extra: KanjiPracticeArgs(
+            mode: KanjiPracticeMode.both,
+            levelCode: level.shortLabel,
+            source: 'due',
+          ),
+          step: 1,
+        );
       default:
         break;
     }
@@ -495,9 +520,30 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
       return const _DailyRoute(route: '/grammar', step: 1);
     }
     if ((dashboard?.vocabDue ?? 0) > 0) {
-      return const _DailyRoute(route: '/vocab/review', step: 1);
+      return _DailyRoute(
+        route: '/vocab/review',
+        extra: VocabReviewArgs(
+          source: 'daily_queue',
+          levelCode: level.shortLabel,
+          title: language.vocabReviewTitle(level.shortLabel),
+          subtitle: switch (language) {
+            AppLanguage.en => 'Due queue for today',
+            AppLanguage.vi => 'Hàng đợi đến hạn hôm nay',
+            AppLanguage.ja => '今日の期限レビュー',
+          },
+        ),
+        step: 1,
+      );
     }
-    return const _DailyRoute(route: '/kanji-dash', step: 1);
+    return _DailyRoute(
+      route: '/kanji/practice',
+      extra: KanjiPracticeArgs(
+        mode: KanjiPracticeMode.both,
+        levelCode: level.shortLabel,
+        source: 'due',
+      ),
+      step: 1,
+    );
   }
 
   _DeepeningTask _resolveDeepeningTask({

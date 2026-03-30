@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/features/kanji_hub/models/kanji_practice_args.dart';
+import 'package:jpstudy/features/vocab/models/vocab_review_args.dart';
+import 'package:jpstudy/features/vocab/vocab_copy.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/data/daos/srs_dao.dart';
@@ -36,6 +39,7 @@ final progressCoachBoardProvider = FutureProvider<ProgressCoachBoard>((
   final dueAction = totalDue > 0
       ? _buildDueAction(
           language: language,
+          level: level,
           dashboard: dashboard,
           continueAction: continueAction,
         )
@@ -162,6 +166,7 @@ class ProgressCoachSignal {
 
 ProgressCoachAction _buildDueAction({
   required AppLanguage language,
+  required StudyLevel level,
   required DashboardState? dashboard,
   required ContinueAction? continueAction,
 }) {
@@ -170,6 +175,8 @@ ProgressCoachAction _buildDueAction({
   final kanjiDue = dashboard?.kanjiDue ?? 0;
   final totalDue = vocabDue + grammarDue + kanjiDue;
   final routeSpec = _dueRouteSpec(
+    language: language,
+    level: level,
     dashboard: dashboard,
     continueAction: continueAction,
   );
@@ -220,9 +227,9 @@ ProgressCoachAction _buildDueAction({
           ),
     ctaLabel: _l(
       language,
-      en: 'Open review lane',
-      vi: 'Mở lane ôn',
-      ja: '復習へ進む',
+      en: 'Start due session',
+      vi: 'Bắt đầu phiên đến hạn',
+      ja: '期限セッションを開始',
     ),
     route: routeSpec.route,
     extra: routeSpec.extra,
@@ -674,6 +681,8 @@ ProgressCoachSignal _buildPerformanceSignal({
 }
 
 ({String route, Object? extra}) _dueRouteSpec({
+  required AppLanguage language,
+  required StudyLevel level,
   required DashboardState? dashboard,
   required ContinueAction? continueAction,
 }) {
@@ -685,13 +694,29 @@ ProgressCoachSignal _buildPerformanceSignal({
         extra: ids is List ? List<int>.from(ids) : null,
       );
     case ContinueActionType.vocabReview:
-      return (route: '/vocab/review', extra: null);
+      return (
+        route: '/vocab/review',
+        extra: VocabReviewArgs(
+          source: 'progress_due',
+          levelCode: level.shortLabel,
+          title: language.vocabReviewTitle(level.shortLabel),
+          subtitle: _l(
+            language,
+            en: 'Due queue from progress',
+            vi: 'Hàng đợi đến hạn từ tiến độ',
+            ja: '進捗から開く期限キュー',
+          ),
+        ),
+      );
     case ContinueActionType.kanjiReview:
-      final lessonId = continueAction?.data;
-      if (lessonId is int) {
-        return (route: '/lesson/$lessonId', extra: null);
-      }
-      return (route: '/practice/kanji-reading', extra: null);
+      return (
+        route: '/kanji/practice',
+        extra: KanjiPracticeArgs(
+          mode: KanjiPracticeMode.both,
+          levelCode: level.shortLabel,
+          source: 'due',
+        ),
+      );
     case ContinueActionType.fixMistakes:
     case ContinueActionType.practiceMixed:
     case ContinueActionType.nextLesson:
@@ -706,9 +731,29 @@ ProgressCoachSignal _buildPerformanceSignal({
     return (route: '/grammar-practice', extra: null);
   }
   if (vocabDue >= kanjiDue && vocabDue > 0) {
-    return (route: '/vocab/review', extra: null);
+    return (
+      route: '/vocab/review',
+      extra: VocabReviewArgs(
+        source: 'progress_due',
+        levelCode: level.shortLabel,
+        title: language.vocabReviewTitle(level.shortLabel),
+        subtitle: _l(
+          language,
+          en: 'Due queue from progress',
+          vi: 'Hàng đợi đến hạn từ tiến độ',
+          ja: '進捗から開く期限キュー',
+        ),
+      ),
+    );
   }
-  return (route: '/practice/kanji-reading', extra: null);
+  return (
+    route: '/kanji/practice',
+    extra: KanjiPracticeArgs(
+      mode: KanjiPracticeMode.both,
+      levelCode: level.shortLabel,
+      source: 'due',
+    ),
+  );
 }
 
 List<ProgressCoachAction> _uniqueActions(

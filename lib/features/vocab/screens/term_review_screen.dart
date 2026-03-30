@@ -14,16 +14,19 @@ import '../../../core/services/fsrs_service.dart';
 import '../../mistakes/repositories/mistake_repository.dart';
 import '../../common/widgets/compact_ui.dart';
 import '../../../app/theme/app_theme_palette.dart';
+import '../models/vocab_review_args.dart';
 
 class TermReviewScreen extends ConsumerStatefulWidget {
   const TermReviewScreen({
     super.key,
+    this.reviewArgs,
     this.sessionTitle,
     this.sessionSubtitle,
     this.lessonStart,
     this.lessonEnd,
   });
 
+  final VocabReviewArgs? reviewArgs;
   final String? sessionTitle;
   final String? sessionSubtitle;
   final int? lessonStart;
@@ -73,8 +76,25 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
   Widget build(BuildContext context) {
     final language = ref.watch(appLanguageProvider);
     final selectedLevel = ref.watch(studyLevelProvider);
-    final levelCode = selectedLevel?.shortLabel ?? _inferLevelCodeFromRange();
-    final termsAsync = widget.hasLessonRange && levelCode != null
+    final levelCode =
+        widget.reviewArgs?.levelCode ??
+        selectedLevel?.shortLabel ??
+        _inferLevelCodeFromRange();
+    final reviewSeries = widget.reviewArgs?.series;
+    final termsAsync = reviewSeries != null &&
+            reviewSeries.trim().isNotEmpty &&
+            levelCode != null
+        ? ref.watch(
+            vocabSeriesTermsProvider(
+              VocabSeriesTermsArgs(
+                level: levelCode,
+                series: reviewSeries,
+                startLesson: widget.lessonStart,
+                endLesson: widget.lessonEnd,
+              ),
+            ),
+          )
+        : widget.hasLessonRange && levelCode != null
         ? ref.watch(
             lessonRangeTermsProvider(
               LessonRangeTermsArgs(
@@ -378,22 +398,22 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
     final start = widget.lessonStart!;
     final end = widget.lessonEnd!;
     return switch (language) {
-      AppLanguage.en => 'Lessons $start?$end',
-      AppLanguage.vi => 'B?i $start?$end',
-      AppLanguage.ja => '$start?$end?',
+      AppLanguage.en => 'Lessons $start–$end',
+      AppLanguage.vi => 'Bài $start–$end',
+      AppLanguage.ja => '$start–$end課',
     };
   }
 
   String _sessionKindLabel(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Companion track',
-    AppLanguage.vi => 'Track ??ng h?nh',
-    AppLanguage.ja => '??????',
+    AppLanguage.vi => 'Track đồng hành',
+    AppLanguage.ja => '補助トラック',
   };
 
   String _emptyStateSubtitle(AppLanguage language) {
     final range = _sessionRangeLabel(language);
     if ((widget.sessionSubtitle ?? '').trim().isNotEmpty && range != null) {
-      return '${widget.sessionSubtitle!} ? $range';
+      return '${widget.sessionSubtitle!} • $range';
     }
     if ((widget.sessionSubtitle ?? '').trim().isNotEmpty) {
       return widget.sessionSubtitle!;

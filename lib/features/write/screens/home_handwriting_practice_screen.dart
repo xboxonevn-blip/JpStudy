@@ -11,6 +11,7 @@ import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/data/models/kanji_item.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
+import 'package:jpstudy/features/kanji_hub/models/kanji_practice_args.dart';
 
 import 'handwriting_practice_screen.dart';
 
@@ -22,7 +23,9 @@ typedef _SessionData = ({
 });
 
 class HomeHandwritingPracticeScreen extends ConsumerStatefulWidget {
-  const HomeHandwritingPracticeScreen({super.key});
+  const HomeHandwritingPracticeScreen({super.key, this.launchArgs});
+
+  final KanjiPracticeArgs? launchArgs;
 
   @override
   ConsumerState<HomeHandwritingPracticeScreen> createState() =>
@@ -52,6 +55,23 @@ class _HomeHandwritingPracticeScreenState
 
   Future<_SessionData> _buildSession(StudyLevel level) async {
     final repo = ref.read(lessonRepositoryProvider);
+
+    if (widget.launchArgs case final args?) {
+      final scopedItems = await repo.fetchKanjiByLevel(
+        args.levelCode ?? level.shortLabel,
+      );
+      final filtered = _filterScopedItems(scopedItems, args);
+      if (filtered.isNotEmpty) {
+        return (
+          items: filtered,
+          source: args.source == 'new'
+              ? _HandwritingSessionSource.newBatch
+              : args.source == 'free'
+              ? _HandwritingSessionSource.free
+              : _HandwritingSessionSource.due,
+        );
+      }
+    }
 
     // 1. Due items first (SRS-scheduled reviews)
     final due = await repo.fetchDueKanjiByLevel(level.shortLabel);
@@ -98,17 +118,19 @@ class _HomeHandwritingPracticeScreenState
 
     // Free mode: bypass SRS and show everything
     if (_freeMode && _freeItems != null) {
+      final scopedFreeItems = _filterScopedItems(_freeItems!, widget.launchArgs);
       return HandwritingPracticeScreen(
         lessonTitle:
             '${level.shortLabel} — ${language.handwritingFreePracticeLabel}',
-        items: _freeItems!,
+        items: scopedFreeItems,
         headerWidget: _SessionHeader(
           language: language,
           source: _HandwritingSessionSource.free,
-          itemCount: _freeItems!.length,
+          itemCount: scopedFreeItems.length,
         ),
         randomizeSessionOrder: true,
         sessionShuffleSeed: _sessionShuffleSeed,
+        initialKanjiId: widget.launchArgs?.preferredKanjiId,
       );
     }
 
@@ -160,6 +182,7 @@ class _HomeHandwritingPracticeScreenState
         return HandwritingPracticeScreen(
           lessonTitle: sessionTitle,
           items: items,
+          initialKanjiId: widget.launchArgs?.preferredKanjiId,
           headerWidget: _SessionHeader(
             language: language,
             source: source,
@@ -171,6 +194,16 @@ class _HomeHandwritingPracticeScreenState
         );
       },
     );
+  }
+
+  List<KanjiItem> _filterScopedItems(
+    List<KanjiItem> items,
+    KanjiPracticeArgs? args,
+  ) {
+    if (args == null || args.kanjiIds.isEmpty) {
+      return items;
+    }
+    return items.where((item) => args.kanjiIds.contains(item.id)).toList();
   }
 }
 

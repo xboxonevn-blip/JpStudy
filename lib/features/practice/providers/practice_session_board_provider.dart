@@ -9,8 +9,11 @@ import 'package:jpstudy/features/grammar/screens/grammar_practice_screen.dart';
 import 'package:jpstudy/features/home/providers/continue_provider.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/home/providers/weakness_radar_provider.dart';
+import 'package:jpstudy/features/kanji_hub/models/kanji_practice_args.dart';
 import 'package:jpstudy/features/learn/models/learn_session_args.dart';
 import 'package:jpstudy/features/practice/models/recall_sprint_strategy.dart';
+import 'package:jpstudy/features/vocab/models/vocab_review_args.dart';
+import 'package:jpstudy/features/vocab/vocab_copy.dart';
 
 final practiceSessionBoardProvider = Provider<PracticeSessionBoard>((ref) {
   final language = ref.watch(appLanguageProvider);
@@ -57,6 +60,7 @@ PracticeSessionBoard buildPracticeSessionBoard({
   final specificDueAction = dueCount > 0
       ? _specificDueAction(
           language: language,
+          level: level,
           dashboard: dashboard,
           continueAction: continueAction,
         )
@@ -335,6 +339,7 @@ List<int> _preferredRecallSprintIds(List<WeaknessRadarItem> weaknessItems) {
 
 PracticeSessionAction _specificDueAction({
   required AppLanguage language,
+  required StudyLevel level,
   required DashboardState? dashboard,
   required ContinueAction? continueAction,
 }) {
@@ -389,6 +394,17 @@ PracticeSessionAction _specificDueAction({
         ),
         ctaLabel: _l(language, en: 'Open vocab', vi: 'Mở từ vựng', ja: '語彙へ'),
         route: '/vocab/review',
+        extra: VocabReviewArgs(
+          source: 'practice_board',
+          levelCode: level.shortLabel,
+          title: language.vocabReviewTitle(level.shortLabel),
+          subtitle: _l(
+            language,
+            en: 'Due vocab queue from today\'s board',
+            vi: 'Hàng đợi từ vựng đến hạn từ bảng hôm nay',
+            ja: '今日のボードから開く語彙レビュー',
+          ),
+        ),
         icon: Icons.translate_rounded,
         color: const Color(0xFF0EA5E9),
         badge: _l(language, en: 'Due lane', vi: 'Lane đến hạn', ja: '期限レーン'),
@@ -399,7 +415,6 @@ PracticeSessionAction _specificDueAction({
         ),
       );
     case ContinueActionType.kanjiReview:
-      final lessonId = continueAction?.data;
       return PracticeSessionAction(
         id: 'kanji_due',
         title: _l(
@@ -415,9 +430,12 @@ PracticeSessionAction _specificDueAction({
           ja: '${dashboard?.kanjiDue ?? 0}件の漢字レビューが残っています。',
         ),
         ctaLabel: _l(language, en: 'Open kanji', vi: 'Mở kanji', ja: '漢字へ'),
-        route: lessonId is int
-            ? '/lesson/$lessonId'
-            : '/practice/kanji-reading',
+        route: '/kanji/practice',
+        extra: KanjiPracticeArgs(
+          mode: KanjiPracticeMode.both,
+          levelCode: level.shortLabel,
+          source: 'practice_board',
+        ),
         icon: Icons.flash_on_rounded,
         color: const Color(0xFFF59E0B),
         badge: _l(language, en: 'Due lane', vi: 'Lane đến hạn', ja: '期限レーン'),

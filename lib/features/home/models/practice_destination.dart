@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/features/grammar/screens/grammar_practice_screen.dart';
+import 'package:jpstudy/features/kanji_hub/models/kanji_practice_args.dart';
 
 class PracticeDestination {
   const PracticeDestination({
@@ -38,6 +39,8 @@ List<PracticeDestination> buildPracticeDestinations({
   StudyLevel? level,
   bool preferImmersion = false,
 }) {
+  final selectedLevel = level ?? StudyLevel.n5;
+
   final list = <PracticeDestination>[
     PracticeDestination(
       id: 'jlpt_coach',
@@ -85,7 +88,7 @@ List<PracticeDestination> buildPracticeDestinations({
       subtitle: language.practiceKanjiDashSubtitle,
       icon: Icons.flash_on_rounded,
       color: const Color(0xFFF59E0B),
-      route: '/kanji-dash',
+      route: '/kanji',
       estimatedMinutes: kanjiDue > 0 ? (kanjiDue * 6 / 60).ceil() : null,
     ),
     PracticeDestination(
@@ -94,7 +97,12 @@ List<PracticeDestination> buildPracticeDestinations({
       subtitle: language.writeModeHandwritingSubtitle,
       icon: Icons.draw_rounded,
       color: const Color(0xFF0F766E),
-      route: '/practice/handwriting',
+      route: '/kanji/practice',
+      extra: KanjiPracticeArgs(
+        mode: KanjiPracticeMode.write,
+        levelCode: selectedLevel.shortLabel,
+        source: 'practice_hub',
+      ),
     ),
     PracticeDestination(
       id: 'kanji_reading',
@@ -102,7 +110,12 @@ List<PracticeDestination> buildPracticeDestinations({
       subtitle: language.practiceKanjiReadingSubtitle,
       icon: Icons.menu_book_rounded,
       color: const Color(0xFF7C3AED),
-      route: '/practice/kanji-reading',
+      route: '/kanji/practice',
+      extra: KanjiPracticeArgs(
+        mode: KanjiPracticeMode.read,
+        levelCode: selectedLevel.shortLabel,
+        source: 'practice_hub',
+      ),
       estimatedMinutes: kanjiDue > 0 ? (kanjiDue * 6 / 60).ceil() : null,
     ),
     PracticeDestination(
@@ -131,37 +144,37 @@ List<PracticeDestination> buildPracticeDestinations({
 
   final scored = visible.map((item) {
     var score = 10;
-    switch (item.route) {
-      case '/grammar-practice':
+    switch (item.id) {
+      case 'ghost':
         score += ghostCount * 4;
         break;
-      case '/mistakes':
+      case 'mistakes':
         score += mistakeCount * 3;
         break;
-      case '/practice/recall-sprint':
+      case 'recall_sprint':
         score += dueReviewCount * 5;
         score += vocabDue + grammarDue + kanjiDue;
         if (dueReviewCount > 0) {
           score += 10;
         }
         break;
-      case '/immersion':
+      case 'immersion':
         score += preferImmersion ? 10 : 0;
         if (dueReviewCount == 0 && mistakeCount == 0 && ghostCount == 0) {
           score += 8;
         }
         break;
-      case '/practice/handwriting':
+      case 'handwriting':
         if (level == StudyLevel.n5 || level == StudyLevel.n4) {
           score += 4;
         }
         break;
-      case '/kanji-dash':
+      case 'kanji_dash':
         if (dueReviewCount > 0) {
           score += 3;
         }
         break;
-      case '/jlpt/coach':
+      case 'jlpt_coach':
         if (dueReviewCount == 0) {
           score += 4;
         }
@@ -207,7 +220,7 @@ List<PracticeDestination> selectFocusPracticeDestinations({
   }
 
   final urgent = rankedDestinations
-      .where((item) => (item.badgeCount ?? 0) > 0 || _isFocusRoute(item.route))
+      .where((item) => (item.badgeCount ?? 0) > 0 || _isFocusDestination(item))
       .toList(growable: false);
 
   final picked = <PracticeDestination>[];
@@ -233,11 +246,11 @@ List<PracticeDestination> selectFocusPracticeDestinations({
   return List<PracticeDestination>.unmodifiable(picked);
 }
 
-bool _isFocusRoute(String route) {
-  return route == '/grammar-practice' ||
-      route == '/mistakes' ||
-      route == '/practice/handwriting' ||
-      route == '/immersion';
+bool _isFocusDestination(PracticeDestination destination) {
+  return destination.id == 'ghost' ||
+      destination.id == 'mistakes' ||
+      destination.id == 'handwriting' ||
+      destination.id == 'immersion';
 }
 
 String _jlptCoachTitle(AppLanguage language) {
