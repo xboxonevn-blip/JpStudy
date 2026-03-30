@@ -1,14 +1,21 @@
 # JpStudy-v2
 
+[![Flutter](https://img.shields.io/badge/Flutter-App-02569B?logo=flutter&logoColor=white)](https://flutter.dev)
+[![CI](https://img.shields.io/github/actions/workflow/status/xboxonevn-blip/JpStudy-v2/ui-string-guard.yml?branch=master&label=CI)](https://github.com/xboxonevn-blip/JpStudy-v2/actions/workflows/ui-string-guard.yml)
+[![Last Commit](https://img.shields.io/github/last-commit/xboxonevn-blip/JpStudy-v2)](https://github.com/xboxonevn-blip/JpStudy-v2/commits/master)
+[![Top Language](https://img.shields.io/github/languages/top/xboxonevn-blip/JpStudy-v2)](https://github.com/xboxonevn-blip/JpStudy-v2)
+[![Repo Size](https://img.shields.io/github/repo-size/xboxonevn-blip/JpStudy-v2)](https://github.com/xboxonevn-blip/JpStudy-v2)
+[![License Notes](https://img.shields.io/badge/docs-KanjiVG%20notes-6C63FF)](docs/third_party_kanjivg.md)
+
 JpStudy-v2 is a local-first Flutter app for Japanese study that combines JLPT content, FSRS-based review, handwriting practice, grammar drills, immersion reading, and exam-style training in one codebase.
 
 ## Audit Snapshot
 
 Verified locally on `2026-03-30`:
 
-- `flutter analyze` ✅
-- `flutter test` ✅ (`1330` passing tests reported by Flutter)
-- `flutter build web` ✅
+- `flutter analyze` passed
+- `flutter test` passed (`1330` passing tests reported by Flutter)
+- `flutter build web` passed
 
 Current product posture:
 
