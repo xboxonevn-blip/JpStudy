@@ -1,61 +1,97 @@
 # JpStudy-v2
 
-JpStudy-v2 is a Flutter app for Japanese learning with FSRS scheduling, immersion reading, handwriting practice, and exam-style review.
+JpStudy-v2 is a local-first Flutter app for Japanese study that combines JLPT content, FSRS-based review, handwriting practice, grammar drills, immersion reading, and exam-style training in one codebase.
 
-## Current Status (as of 2026-03-24)
+## Audit Snapshot
 
-| Phase | Focus | Status | Target |
-| :--- | :--- | :--- | :--- |
-| Phase 1 | Foundation (Anki-like learning core) | 100% | Completed |
-| Phase 2 | Structure and UI system | 100% | Completed |
-| Phase 3 | Core quality hardening (Grammar complete, Handwriting + release hardening active) | Active | Mar-Apr 2026 |
-| Phase 4 | Cloud Sync ecosystem | Parked until core is steadier | Later |
+Verified locally on `2026-03-30`:
 
-## Implemented Highlights
+- `flutter analyze` ✅
+- `flutter test` ✅ (`1330` passing tests reported by Flutter)
+- `flutter build web` ✅
 
-- FSRS replaced SM-2 for vocab, grammar, and kanji scheduling.
-- Ghost Review 2.0 auto-captures mistakes with context.
-- Immersion Reader is now local-first and uses the bundled reading bank as the canonical source.
-- Handwriting includes stroke/order/shape heuristics with template quality tiers (`manual`, `curated`, `generated`).
-- N5 and N4 kanji template coverage is in place, with curated-to-manual promotion workflow.
-- Mock Exam flow for N5/N4 exists with timer, scoring, and review.
-- Export/Import JSON backup includes progress, attempts, sessions, settings, mistakes, grammar SRS, and kanji SRS.
-- Grammar example quality audit is green across `N5`, `N4`, and `N3`, with `0` real quality gaps in `docs/reports/grammar-example-quality-report.json` as of `2026-03-24`.
-- Local release baseline is currently green on `flutter analyze`, `flutter test`, and `flutter build web`.
+Current product posture:
 
-## Current Priorities (from roadmap)
+- Core study flows are stable and broadly covered by automated tests.
+- The app is local-first today; cloud sync is still intentionally parked.
+- Premium pricing and some community/referral surfaces are still local placeholder experiences, not live backend features.
 
-### NOW
-- Keep the baseline green while these changes land:
-  - `flutter analyze`
-  - `flutter test`
-  - `flutter build web`
-- Keep grammar hardening green:
-  - treat `docs/reports/grammar-example-quality-report.json` as the canonical grammar quality report
-  - use `dart run tooling/audit_grammar_example_quality.dart --locale en` after grammar data or heuristic changes
-  - keep `python tooling/validate_content_assets_v2.py` in the release-truth content pass
-- Continue the handwriting reliability pass:
-  - reduce false negatives / false positives
-  - keep `Next`, completion flow, and randomized session scope stable
-- Continue route / release hardening:
-  - prefer focused stable regressions over long flaky walkthroughs
-  - keep main study and mock-exam surfaces regression-safe
+## What the App Includes
 
-### NEXT
-- grow route smoke and focused UI regressions where core learning flows still have coverage gaps
-- schedule dependency refresh as a separate plan once the current hardening branch is settled
+### Learning systems
 
-### LATER
-- Cloud sync / backup expansion after Grammar Practice + Handwriting are steadier
-- Additional exam analytics and release polish
+- FSRS scheduling for review-heavy study flows
+- Vocab, kanji, and grammar practice pipelines
+- Mistake capture / recovery flows for targeted review
+- Flashcard, recall, and mixed practice modes
+
+### Study surfaces
+
+- Home / study hub / active review navigation
+- Vocabulary catalogs and review flows
+- Kanji hub with stroke data and handwriting scoring support
+- Grammar browsing, detail views, and grammar practice sessions
+- Immersion reader with bundled local reading content
+- JLPT coach, reading, exam center, and mock exam flows
+- Progress, mastery, forecast, achievements, and review history screens
+
+### App behavior
+
+- Local persistence with Drift + SQLite
+- JSON backup/export-import for study data
+- Multi-language UI: English, Vietnamese, Japanese
+- Responsive Flutter shell for mobile and desktop/web layouts
+
+## Current Status
+
+### Stable now
+
+- Core route graph and primary learning flows
+- Grammar data pipeline with canonical audit reports in `docs/reports/`
+- Handwriting engine with support assets under `assets/data/support/kanji/`
+- Large automated regression suite across feature flows
+
+### Still in progress
+
+- Handwriting reliability polish and false-positive / false-negative reduction
+- Additional route-smoke and focused UI regression coverage
+- Release hardening around the highest-traffic study paths
+
+### Intentionally not live yet
+
+- Cloud sync ecosystem
+- Real premium billing backend
+- Full community/referral backend features
 
 ## Tech Stack
 
-- Flutter (Dart 3.10+)
-- Riverpod (state management)
-- Drift + SQLite (local database)
-- GoRouter (navigation)
-- SharedPreferences + local files for app settings/cache
+- Flutter / Dart
+- Riverpod
+- GoRouter
+- Drift + SQLite
+- SharedPreferences and local files for settings/cache
+- Python and Dart tooling for content generation and validation
+
+## Supported Platforms
+
+Platform runners currently exist for:
+
+- Android
+- iOS
+- Web
+- Windows
+
+There is no first-class `macos/` or `linux/` runner in this repository right now.
+
+## Repository Map
+
+- App architecture: `lib/README.md`
+- Repo structure: `PROJECT_STRUCTURE.md`
+- Product roadmap: `ROADMAP.md`
+- Docs index: `docs/README.md`
+- Test strategy: `test/README.md`
+- Data layout: `assets/data/README.md`
+- Tooling index: `tooling/README.md`
 
 ## Getting Started
 
@@ -63,108 +99,74 @@ JpStudy-v2 is a Flutter app for Japanese learning with FSRS scheduling, immersio
 
 - Flutter SDK
 - Dart SDK
-- Python 3.10+ (for tooling scripts)
+- Python `3.10+` for local tooling scripts
 
-### Setup
+### Install and run
 
 ```bash
 flutter pub get
 flutter run
 ```
 
-### Quality Checks
+### Main quality checks
 
 ```bash
 flutter analyze
 flutter test
+flutter build web
 ```
 
-## Where to Look First
+## Content and Tooling Workflows
 
-- Repo map: `PROJECT_STRUCTURE.md`
-- Data layout: `assets/data/README.md`
-- Runtime content/support schema: `assets/data/content/README.md`, `assets/data/support/README.md`
-- App architecture: `lib/README.md`
-- Tooling index: `tooling/README.md`
-- Test strategy: `test/README.md`
-- Docs index: `docs/README.md`
-- Main roadmap: `ROADMAP.md`
-
-## Tooling Workflows
-
-### Kanji Template / Promotion
+### Grammar quality audit
 
 ```bash
-# Regenerate N5/N4 stroke template baseline
-python tooling/generate_stroke_templates.py
-
-# Promote N4 curated templates to manual by Mistake Bank priority
-python tooling/promote_n4_curated_from_mistakes.py
-```
-
-### Scheduled Promotion Runner
-
-```bash
-# Run on app start, but only when interval is due
-python tooling/run_promotion_workflow.py --schedule app-start --interval-days 7
-
-# Weekly job mode
-python tooling/run_promotion_workflow.py --schedule weekly --interval-days 7
-
-# Force run immediately
-python tooling/run_promotion_workflow.py --force
-```
-
-Reports:
-- `tooling/reports/n4_promotion_history.json`
-- `tooling/reports/n4_promotion_schedule_state.json`
-
-### Content Schema v2
-
-```bash
-# Audit grammar example readiness and refresh the canonical report
 dart run tooling/audit_grammar_example_quality.dart --locale en
-
-# Sync decomposition and regenerate support export
-python tooling/sync_kanji_decomposition_labels.py
-
-# Export runtime content vocab + kanji lesson assets
-python tooling/build_canonical_content_v2.py
-
-# Validate archive + runtime content integrity
 python tooling/validate_content_assets_v2.py
 ```
 
-References:
-- `docs/DATA_SCHEMA_V2.md`
-- `docs/reports/canonical-content-v2-report.json`
-- `docs/reports/content-validation-v2.json`
+Key reports:
+
 - `docs/reports/grammar-example-quality-report.json`
+- `docs/reports/content-validation-v2.json`
+- `docs/reports/canonical-content-v2-report.json`
 
-## UI/UX Process Visibility
+### Canonical content export
 
-- Open in app: Settings -> `Design Lab` (route: `/design-lab`).
-- Track design iteration notes in `docs/uiux-progress.md`.
-- Use review checklist in `docs/uiux-review-checklist.md`.
-
-## Project Structure
-
-For the current repo map, use `PROJECT_STRUCTURE.md`.
-
-Quick summary:
-
-```text
-lib/          app source code
-test/         automated tests
-tooling/      data generation, migration, and validation scripts
-assets/       bundled runtime content, support assets, and archive data
-docs/         plans, reports, notes, specs, and reference docs
+```bash
+python tooling/sync_kanji_decomposition_labels.py
+python tooling/build_canonical_content_v2.py
+python tooling/validate_content_assets_v2.py
 ```
 
-## Roadmap
+### Handwriting / kanji support workflow
 
-- Main roadmap: `ROADMAP.md`
-- Active execution plan: `docs/plans/2026-03-24-grammar-hardening-execution-plan.md`
-- Tooling usage details: `tooling/README.md`
-- Architecture guide: `lib/README.md`
-- Test guide: `test/README.md`
+```bash
+python tooling/generate_stroke_templates.py
+python tooling/run_promotion_workflow.py --schedule app-start --interval-days 7
+```
+
+## Notable Audit Findings
+
+These points are important for anyone evaluating the repo today:
+
+- The app is much more mature than the old generic Flutter metadata suggests; the repository contains a large feature set and a substantial automated test suite.
+- The real source of truth for app health is the local baseline (`analyze`, `test`, `build web`) plus the reports in `docs/reports/`, not the old package description text.
+- Some product surfaces are intentionally product-shaped placeholders, especially premium/community-related flows.
+- CI is present but lightweight: `.github/workflows/ui-string-guard.yml` currently runs UI string audit, analyze, tests, and web build.
+
+## Recommended Reading Order
+
+If you are new to the project, start here:
+
+1. `README.md`
+2. `PROJECT_STRUCTURE.md`
+3. `ROADMAP.md`
+4. `lib/README.md`
+5. `assets/data/README.md`
+6. `tooling/README.md`
+
+## License / Content Notes
+
+- Review `docs/third_party_kanjivg.md` for KanjiVG-related notes.
+- Content, support assets, and archived data are intentionally separated under `assets/data/`.
