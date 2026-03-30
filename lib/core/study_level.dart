@@ -8,6 +8,16 @@ enum StudyLevel {
   final String shortLabel;
   const StudyLevel(this.shortLabel);
 
+  /// Returns the [StudyLevel] whose [shortLabel] matches [code] (case-insensitive).
+  /// Returns `null` for unrecognised codes (e.g. N2, N1, SE).
+  static StudyLevel? fromCode(String code) =>
+      switch (code.trim().toUpperCase()) {
+        'N5' => StudyLevel.n5,
+        'N4' => StudyLevel.n4,
+        'N3' => StudyLevel.n3,
+        _ => null,
+      };
+
   String description(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:

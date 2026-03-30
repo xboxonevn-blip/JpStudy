@@ -82,7 +82,7 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
       }
       if (item == null) return;
       final resolvedItem = item;
-      final level = _studyLevelFromCode(resolvedItem.jlptLevel);
+      final level = StudyLevel.fromCode(resolvedItem.jlptLevel);
       if (level != null && mounted) {
         _activateLevel(level, refreshKanji: true);
       }
@@ -383,21 +383,12 @@ String _previewMeaning(KanjiItem item) {
   return item.meaning;
 }
 
-StudyLevel? _studyLevelFromCode(String level) {
-  return switch (level.trim().toUpperCase()) {
-    'N5' => StudyLevel.n5,
-    'N4' => StudyLevel.n4,
-    'N3' => StudyLevel.n3,
-    _ => null,
-  };
-}
-
 void _launchLevelPractice(
   BuildContext context,
   String levelCode,
   KanjiPracticeMode mode,
 ) {
-  final level = _studyLevelFromCode(levelCode);
+  final level = StudyLevel.fromCode(levelCode);
   if (level == null) return;
   ProviderScope.containerOf(context, listen: false)
       .read(studyLevelProvider.notifier)
@@ -418,7 +409,7 @@ void _launchKanjiUtility(
   KanjiItem item,
   String route,
 ) {
-  final level = _studyLevelFromCode(item.jlptLevel);
+  final level = StudyLevel.fromCode(item.jlptLevel);
   if (level != null) {
     ProviderScope.containerOf(context, listen: false)
         .read(studyLevelProvider.notifier)
@@ -442,7 +433,7 @@ void _launchKanjiUtility(
 }
 
 void _launchKanjiPractice(BuildContext context, KanjiItem item) {
-  final level = _studyLevelFromCode(item.jlptLevel);
+  final level = StudyLevel.fromCode(item.jlptLevel);
   if (level != null) {
     ProviderScope.containerOf(context, listen: false)
         .read(studyLevelProvider.notifier)

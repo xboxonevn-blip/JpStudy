@@ -6,6 +6,7 @@ import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/data/models/kanji_item.dart';
+import 'package:jpstudy/features/kanji_hub/providers/kanji_home_provider.dart';
 import 'package:jpstudy/features/kanji_reading/providers/kanji_reading_providers.dart';
 import 'package:jpstudy/features/kanji_reading/screens/home_kanji_reading_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,7 +35,11 @@ Widget buildScreen({
       appLanguageProvider.overrideWith((ref) => AppLanguage.en),
       studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
       kanjiByLevelProvider.overrideWith((ref) async => allItems),
-      kanjiReadingDueCountProvider.overrideWith((ref) async => dueCount),
+      // kanjiReadingDueCountProvider was removed; the screen now derives the
+      // count from kanjiDueIdsProvider. Use a synthetic set of the right size
+      // so dueCount is honoured independently of the dueItems list.
+      kanjiDueIdsProvider.overrideWith(
+          (ref) async => Set.from(Iterable.generate(dueCount, (i) => i))),
       kanjiReadingDueItemsProvider.overrideWith((ref) async => dueItems),
     ],
     child: const MaterialApp(home: HomeKanjiReadingScreen()),

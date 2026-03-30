@@ -1112,7 +1112,7 @@ class _KanjiMindmapPanelState extends State<_KanjiMindmapPanel> with SingleTicke
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            'JP Study Flow',
+            widget.language.kanjiStudyFlowTitle(),
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
               color: context.appPalette.ink,
@@ -1145,17 +1145,17 @@ class _KanjiMindmapPanelState extends State<_KanjiMindmapPanel> with SingleTicke
                   right: 20,
                   top: 10,
                   child: _FlowTargetCard(
-                    title: '2500+ Kanji',
-                    subtitle: 'Hán tự cốt lõi',
+                    title: widget.language.kanjiFlowKanjiCardTitle(),
+                    subtitle: widget.language.kanjiFlowKanjiCardSubtitle(),
                     icon: Icons.font_download,
-                    onTap: () {}, // stay here
+                    onTap: () {}, // stay on kanji hub
                   ),
                 ),
                 Positioned(
                   right: 20,
                   child: _FlowTargetCard(
-                    title: '10.000+ Từ vựng',
-                    subtitle: 'Theo ngữ cảnh',
+                    title: widget.language.kanjiFlowVocabCardTitle(),
+                    subtitle: widget.language.kanjiFlowVocabCardSubtitle(),
                     icon: Icons.menu_book,
                     onTap: () => context.go('/vocab'),
                   ),
@@ -1164,8 +1164,8 @@ class _KanjiMindmapPanelState extends State<_KanjiMindmapPanel> with SingleTicke
                   right: 20,
                   bottom: 10,
                   child: _FlowTargetCard(
-                    title: 'Ngữ pháp N5-N1',
-                    subtitle: 'Cấu trúc thiết yếu',
+                    title: widget.language.kanjiFlowGrammarCardTitle(),
+                    subtitle: widget.language.kanjiFlowGrammarCardSubtitle(),
                     icon: Icons.architecture,
                     onTap: () => context.go('/grammar'),
                   ),

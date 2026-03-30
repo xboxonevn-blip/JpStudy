@@ -2371,6 +2371,12 @@ class LessonRepository {
     );
   }
 
+  /// Records one SRS review result.
+  /// XP awarded per review scales with confidence so users who recall well
+  /// progress faster on the leaderboard/dashboard:
+  ///   Again (1) → 2 XP  Hard (2) → 3 XP  Good (3) → 5 XP  Easy (4+) → 7 XP
+  /// The counter increment and XP delta are written in a single UPDATE to avoid
+  /// a second round-trip and eliminate any interleave from rapid taps.
   Future<void> recordReview({required int quality}) async {
     final today = _startOfDay(DateTime.now());
     final todayRow = await _ensureProgressRow(today);
@@ -2378,21 +2384,28 @@ class LessonRepository {
     var hardDelta = 0;
     var goodDelta = 0;
     var easyDelta = 0;
+    int xpDelta;
     switch (quality) {
       case 0:
       case 1:
         againDelta = 1;
+        xpDelta = 2;
         break;
       case 2:
         hardDelta = 1;
+        xpDelta = 3;
         break;
       case 3:
         goodDelta = 1;
+        xpDelta = 5;
         break;
       case 4:
       case 5:
         easyDelta = 1;
+        xpDelta = 7;
         break;
+      default:
+        xpDelta = 2;
     }
     await (_db.update(
       _db.userProgress,
@@ -2403,6 +2416,7 @@ class LessonRepository {
         reviewHardCount: Value(todayRow.reviewHardCount + hardDelta),
         reviewGoodCount: Value(todayRow.reviewGoodCount + goodDelta),
         reviewEasyCount: Value(todayRow.reviewEasyCount + easyDelta),
+        xp: Value(todayRow.xp + xpDelta),
         streak: Value(todayRow.streak),
       ),
     );

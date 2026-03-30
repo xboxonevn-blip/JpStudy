@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/features/kanji_hub/kanji_copy.dart';
+import 'package:jpstudy/features/kanji_hub/providers/kanji_home_provider.dart';
 import '../../../data/db/database_provider.dart';
 import '../../../core/services/fsrs_service.dart';
 import '../models/kanji_reading_question.dart';
@@ -21,6 +23,9 @@ class _KanjiReadingQuizScreenState
   int _correct = 0;
   int? _selectedIndex;
   bool _answered = false;
+  // For correct answers, _graded becomes true once the user picks Hard/Good/Easy.
+  // For wrong answers, grade 1 is submitted automatically on answer tap.
+  bool _graded = false;
   final FsrsService _fsrs = FsrsService();
 
   KanjiReadingQuestion get _question => widget.questions[_current];
@@ -28,45 +33,80 @@ class _KanjiReadingQuizScreenState
 
   Future<void> _handleOption(int index) async {
     if (_answered) return;
+    final isCorrect = index == _question.correctIndex;
+    if (isCorrect) _correct++;
     setState(() {
       _selectedIndex = index;
       _answered = true;
+      // Wrong answers are auto-graded; correct answers wait for user rating.
+      _graded = !isCorrect;
     });
-
-    final isCorrect = index == _question.correctIndex;
-    if (isCorrect) _correct++;
-
-    // Update kanji SRS
-    final db = ref.read(databaseProvider);
-    final kanjiSrsDao = db.kanjiSrsDao;
-    final grade = isCorrect ? 3 : 1; // Good or Again
-    final currentState = await kanjiSrsDao.getSrsState(_question.target.id);
-    if (currentState != null) {
-      final result = _fsrs.review(
-        stability: currentState.stability,
-        difficulty: currentState.difficulty,
-        grade: grade,
-        lastReviewedAt: currentState.lastReviewedAt,
-      );
-      await kanjiSrsDao.updateSrsState(
-        kanjiId: _question.target.id,
-        stability: result.stability,
-        difficulty: result.difficulty,
-        lastConfidence: grade,
-        nextReviewAt: result.nextReviewAt,
-      );
+    if (!isCorrect) {
+      // Fire-and-forget: grade 1 (Again) for wrong answers.
+      _submitGrade(1);
     }
+  }
 
+  /// Writes the FSRS result to the DB.
+  /// Captures [kanjiId] synchronously before the first await so that
+  /// advancing to the next question cannot corrupt the reference.
+  Future<void> _submitGrade(int grade) async {
+    final kanjiId = _question.target.id;
+    final db = ref.read(databaseProvider);
+    final dao = db.kanjiSrsDao;
+    // initializeSrsState uses insertOrIgnore — safe to call unconditionally.
+    // This fixes the silent-skip bug where first-time kanji never entered SRS.
+    await dao.initializeSrsState(kanjiId);
+    final state = await dao.getSrsState(kanjiId);
+    if (state == null || !mounted) return;
+    final result = _fsrs.review(
+      stability: state.stability,
+      difficulty: state.difficulty,
+      grade: grade,
+      lastReviewedAt: state.lastReviewedAt,
+    );
+    await dao.updateSrsState(
+      kanjiId: kanjiId,
+      stability: result.stability,
+      difficulty: result.difficulty,
+      lastConfidence: grade,
+      nextReviewAt: result.nextReviewAt,
+    );
+  }
+
+  void _advance() {
+    if (_isLast) {
+      _showSummary();
+    } else {
+      setState(() {
+        _current++;
+        _selectedIndex = null;
+        _answered = false;
+        _graded = false;
+      });
+    }
+  }
+
+  /// Submits the FSRS grade (fire-and-forget) and immediately advances.
+  void _rateAndAdvance(int grade) {
+    _submitGrade(grade); // starts async; kanjiId captured before first await
+    _advance();
   }
 
   void _showSummary() {
+    // Invalidate so kanji hub SRS dots + due counts refresh after the session.
+    ref.invalidate(kanjiDueIdsProvider);
+    ref.invalidate(kanjiSeenIdsProvider);
+    ref.invalidate(kanjiHomeSummaryProvider);
+
+    final language = ref.read(appLanguageProvider);
     final pct = (_correct / widget.questions.length * 100).round();
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (_) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: Text(ref.watch(appLanguageProvider).quizCompleteTitle),
+        title: Text(language.quizCompleteTitle),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -83,7 +123,7 @@ class _KanjiReadingQuizScreenState
               ),
             ),
             const SizedBox(height: 8),
-            Text(ref.watch(appLanguageProvider).correctCountLabel(_correct, widget.questions.length)),
+            Text(language.correctCountLabel(_correct, widget.questions.length)),
           ],
         ),
         actions: [
@@ -92,7 +132,7 @@ class _KanjiReadingQuizScreenState
               Navigator.of(context).pop(); // close dialog
               Navigator.of(context).pop(); // back to entry
             },
-            child: Text(ref.watch(appLanguageProvider).doneLabel),
+            child: Text(language.doneLabel),
           ),
         ],
       ),
@@ -102,6 +142,7 @@ class _KanjiReadingQuizScreenState
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final language = ref.watch(appLanguageProvider);
     final progress = (_current + 1) / widget.questions.length;
 
     return Scaffold(
@@ -139,7 +180,6 @@ class _KanjiReadingQuizScreenState
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              // Show meaning hint below
               const SizedBox(height: 8),
               Text(
                 _question.target.meaning,
@@ -147,7 +187,7 @@ class _KanjiReadingQuizScreenState
                     ?.copyWith(color: Colors.grey[500]),
               ),
               const SizedBox(height: 40),
-              // 2x2 option grid
+              // 2×2 option grid
               GridView.count(
                 crossAxisCount: 2,
                 shrinkWrap: true,
@@ -168,7 +208,6 @@ class _KanjiReadingQuizScreenState
                       borderColor = Colors.red;
                     }
                   }
-
                   return Material(
                     color: bgColor ?? theme.colorScheme.surface,
                     shape: RoundedRectangleBorder(
@@ -198,12 +237,12 @@ class _KanjiReadingQuizScreenState
                   );
                 }),
               ),
-              // Compound words + Next button (shown after answering)
+              // Post-answer section
               if (_answered) ...[
                 const SizedBox(height: 16),
                 if (_question.target.examples.isNotEmpty) ...[
                   Text(
-                    '熟語 Compound Words',
+                    language.kanjiQuizCompoundWordsLabel(),
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: Colors.grey[500],
                       fontWeight: FontWeight.w600,
@@ -238,29 +277,128 @@ class _KanjiReadingQuizScreenState
                     ),
                   ))),
                 ],
-                const SizedBox(height: 16),
-                SizedBox(
-                  width: 160,
-                  height: 48,
-                  child: FilledButton(
-                    onPressed: () {
-                      if (_isLast) {
-                        _showSummary();
-                      } else {
-                        setState(() {
-                          _current++;
-                          _selectedIndex = null;
-                          _answered = false;
-                        });
-                      }
-                    },
-                    child: Text(_isLast ? 'Finish' : 'Next →'),
+                const SizedBox(height: 20),
+                // Rating / navigation controls
+                if (_graded)
+                  // Wrong answer (or rated) — simple Next / Finish
+                  SizedBox(
+                    width: 160,
+                    height: 48,
+                    child: FilledButton(
+                      onPressed: _advance,
+                      child: Text(
+                        _isLast
+                            ? language.kanjiQuizFinishLabel()
+                            : language.kanjiQuizNextLabel(),
+                      ),
+                    ),
+                  )
+                else
+                  // Correct answer — ask user to self-rate for FSRS accuracy
+                  _SrsRatingRow(
+                    language: language,
+                    onRate: _rateAndAdvance,
+                    isLast: _isLast,
                   ),
-                ),
               ] else
                 const SizedBox(height: 24),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Three-button rating row shown after a correct answer.
+/// Tapping any button submits the FSRS grade and advances in one action.
+class _SrsRatingRow extends StatelessWidget {
+  const _SrsRatingRow({
+    required this.language,
+    required this.onRate,
+    required this.isLast,
+  });
+
+  final AppLanguage language;
+  final void Function(int grade) onRate;
+  final bool isLast;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          switch (language) {
+            AppLanguage.en => 'How well did you know it?',
+            AppLanguage.vi => 'Bạn nhớ tốt đến đâu?',
+            AppLanguage.ja => 'どのくらい覚えていましたか？',
+          },
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+            color: Colors.grey[500],
+          ),
+        ),
+        const SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _RatingButton(
+              label: language.kanjiGradeHardLabel(),
+              grade: 2,
+              color: Colors.orange.shade700,
+              onTap: onRate,
+            ),
+            const SizedBox(width: 10),
+            _RatingButton(
+              label: language.kanjiGradeGoodLabel(),
+              grade: 3,
+              color: Colors.green.shade600,
+              onTap: onRate,
+            ),
+            const SizedBox(width: 10),
+            _RatingButton(
+              label: language.kanjiGradeEasyLabel(),
+              grade: 4,
+              color: Colors.blue.shade600,
+              onTap: onRate,
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _RatingButton extends StatelessWidget {
+  const _RatingButton({
+    required this.label,
+    required this.grade,
+    required this.color,
+    required this.onTap,
+  });
+
+  final String label;
+  final int grade;
+  final Color color;
+  final void Function(int grade) onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 84,
+      height: 44,
+      child: OutlinedButton(
+        onPressed: () => onTap(grade),
+        style: OutlinedButton.styleFrom(
+          foregroundColor: color,
+          side: BorderSide(color: color, width: 1.5),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          padding: EdgeInsets.zero,
+        ),
+        child: Text(
+          label,
+          style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
         ),
       ),
     );

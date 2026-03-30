@@ -476,4 +476,99 @@ extension KanjiCopy on AppLanguage {
       AppLanguage.ja => '同じスコープで読みから書きへつなげます。',
     };
   }
+
+  // ── Kanji reading quiz ────────────────────────────────────────────────────
+  String kanjiQuizFinishLabel() => switch (this) {
+    AppLanguage.en => 'Finish',
+    AppLanguage.vi => 'Hoàn thành',
+    AppLanguage.ja => '完了',
+  };
+
+  String kanjiQuizNextLabel() => switch (this) {
+    AppLanguage.en => 'Next →',
+    AppLanguage.vi => 'Tiếp →',
+    AppLanguage.ja => '次へ →',
+  };
+
+  String kanjiQuizCompoundWordsLabel() => switch (this) {
+    AppLanguage.en => 'Compound Words',
+    AppLanguage.vi => 'Từ ghép',
+    AppLanguage.ja => '熟語',
+  };
+
+  /// Grade 2 in FSRS — user recalled but it felt difficult.
+  String kanjiGradeHardLabel() => switch (this) {
+    AppLanguage.en => 'Hard',
+    AppLanguage.vi => 'Khó',
+    AppLanguage.ja => '難しい',
+  };
+
+  /// Grade 3 in FSRS — solid recall.
+  String kanjiGradeGoodLabel() => switch (this) {
+    AppLanguage.en => 'Good',
+    AppLanguage.vi => 'Được',
+    AppLanguage.ja => 'よし',
+  };
+
+  /// Grade 4 in FSRS — instant / effortless recall.
+  String kanjiGradeEasyLabel() => switch (this) {
+    AppLanguage.en => 'Easy',
+    AppLanguage.vi => 'Dễ',
+    AppLanguage.ja => '簡単',
+  };
+
+  String kanjiReadingGoToLibraryLabel() => switch (this) {
+    AppLanguage.en => 'Go to Library',
+    AppLanguage.vi => 'Vào Thư viện',
+    AppLanguage.ja => 'ライブラリへ',
+  };
+
+  String kanjiReadingLevelSectionTitle() => switch (this) {
+    AppLanguage.en => 'Kanji in this level',
+    AppLanguage.vi => 'Kanji trong cấp độ này',
+    AppLanguage.ja => 'このレベルの漢字',
+  };
+
+  // ── Study Flow mindmap ────────────────────────────────────────────────────
+  String kanjiStudyFlowTitle() => switch (this) {
+    AppLanguage.en => 'JP Study Flow',
+    AppLanguage.vi => 'Lộ Trình Học Tiếng Nhật',
+    AppLanguage.ja => '日本語学習フロー',
+  };
+
+  String kanjiFlowKanjiCardTitle() => switch (this) {
+    AppLanguage.en => '2500+ Kanji',
+    AppLanguage.vi => '2500+ Hán tự',
+    AppLanguage.ja => '2500+ 漢字',
+  };
+
+  String kanjiFlowKanjiCardSubtitle() => switch (this) {
+    AppLanguage.en => 'Core kanji',
+    AppLanguage.vi => 'Hán tự cốt lõi',
+    AppLanguage.ja => '核心漢字',
+  };
+
+  String kanjiFlowVocabCardTitle() => switch (this) {
+    AppLanguage.en => '10,000+ Words',
+    AppLanguage.vi => '10.000+ Từ vựng',
+    AppLanguage.ja => '10,000+ 単語',
+  };
+
+  String kanjiFlowVocabCardSubtitle() => switch (this) {
+    AppLanguage.en => 'In context',
+    AppLanguage.vi => 'Theo ngữ cảnh',
+    AppLanguage.ja => '文脈の中で',
+  };
+
+  String kanjiFlowGrammarCardTitle() => switch (this) {
+    AppLanguage.en => 'Grammar N5–N1',
+    AppLanguage.vi => 'Ngữ pháp N5–N1',
+    AppLanguage.ja => '文法 N5–N1',
+  };
+
+  String kanjiFlowGrammarCardSubtitle() => switch (this) {
+    AppLanguage.en => 'Essential structures',
+    AppLanguage.vi => 'Cấu trúc thiết yếu',
+    AppLanguage.ja => '必須構造',
+  };
 }

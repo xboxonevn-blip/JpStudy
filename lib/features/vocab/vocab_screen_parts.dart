@@ -128,7 +128,7 @@ class _VocabCatalogBody extends ConsumerWidget {
       );
       return;
     }
-    final level = _studyLevelFromCode(section.levelCode);
+    final level = StudyLevel.fromCode(section.levelCode);
     if (level == null) return;
     ref.read(studyLevelProvider.notifier).state = level;
 
@@ -1412,7 +1412,7 @@ _VocabCatalogSection _buildJlptSection({
   final liveCount = items.length;
   final chapterCount = _chapterCountForLevel(levelCode);
   final coreInteractive =
-      isInteractive && _studyLevelFromCode(levelCode) != null && liveCount > 0;
+      isInteractive && StudyLevel.fromCode(levelCode) != null && liveCount > 0;
   final coreBadge = dueCount > 0
       ? '$dueCount due ? ${_formatReviewTiming(nextReview)}'
       : _formatReviewTiming(nextReview);

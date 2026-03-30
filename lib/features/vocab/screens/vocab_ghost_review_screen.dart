@@ -5,6 +5,7 @@ import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
 import '../../../data/models/vocab_item.dart';
 import '../../../data/repositories/lesson_repository.dart';
+import '../providers/vocab_home_provider.dart';
 import '../../flashcards/widgets/enhanced_flashcard.dart';
 import '../../mistakes/repositories/mistake_repository.dart';
 
@@ -102,6 +103,9 @@ class _VocabGhostReviewScreenState
   }
 
   void _showSummary() {
+    // Invalidate so the vocab home section reflects updated counts immediately.
+    ref.invalidate(allDueTermsProvider);
+    ref.invalidate(vocabHomeSectionProvider);
     showDialog(
       context: context,
       barrierDismissible: false,

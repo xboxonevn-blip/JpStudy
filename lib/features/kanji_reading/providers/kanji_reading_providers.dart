@@ -4,13 +4,6 @@ import '../../../data/db/database_provider.dart';
 import '../../../data/models/kanji_item.dart';
 import '../../../data/repositories/lesson_repository.dart';
 
-final kanjiReadingDueCountProvider =
-    FutureProvider.autoDispose<int>((ref) async {
-  final db = ref.watch(databaseProvider);
-  final due = await db.kanjiSrsDao.getDueReviews();
-  return due.length;
-});
-
 final kanjiByLevelProvider =
     FutureProvider.autoDispose<List<KanjiItem>>((ref) async {
   final level = ref.watch(studyLevelProvider);

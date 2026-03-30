@@ -333,12 +333,6 @@ int? _chapterCountForLevel(String levelCode) => switch (levelCode) {
   _ => null,
 };
 
-StudyLevel? _studyLevelFromCode(String code) => switch (code) {
-  'N5' => StudyLevel.n5,
-  'N4' => StudyLevel.n4,
-  'N3' => StudyLevel.n3,
-  _ => null,
-};
 
 (int, int)? _minnaLessonRange(String levelCode, _VocabProgramType type) {
   if (type != _VocabProgramType.minna) return null;

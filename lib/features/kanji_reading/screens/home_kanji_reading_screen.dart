@@ -5,10 +5,12 @@ import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/data/models/kanji_item.dart';
+import 'package:jpstudy/features/kanji_hub/kanji_copy.dart';
 import '../../../core/language_provider.dart';
 import '../../../core/level_provider.dart';
 import '../../../features/common/widgets/compact_ui.dart';
 import '../../kanji_hub/models/kanji_practice_args.dart';
+import '../../kanji_hub/providers/kanji_home_provider.dart';
 import '../models/kanji_reading_question.dart';
 import '../providers/kanji_reading_providers.dart';
 import 'kanji_reading_quiz_screen.dart';
@@ -57,7 +59,10 @@ class _KanjiHubBody extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final allAsync = ref.watch(kanjiByLevelProvider);
     final dueAsync = ref.watch(kanjiReadingDueItemsProvider);
-    final dueCount = ref.watch(kanjiReadingDueCountProvider).valueOrNull ?? 0;
+    // Derive due count from the already-cached kanjiDueIdsProvider —
+    // avoids an extra getDueReviews() call on every screen push.
+    final dueCount =
+        ref.watch(kanjiDueIdsProvider).valueOrNull?.length ?? 0;
 
     return allAsync.when(
       data: (allItems) {
@@ -158,27 +163,11 @@ class _KanjiHubBody extends ConsumerWidget {
     );
   }
 
-  String _goLibraryLabel(AppLanguage language) {
-    switch (language) {
-      case AppLanguage.en:
-        return 'Go to Library';
-      case AppLanguage.vi:
-        return 'Vào Thư viện';
-      case AppLanguage.ja:
-        return 'ライブラリへ';
-    }
-  }
+  String _goLibraryLabel(AppLanguage language) =>
+      language.kanjiReadingGoToLibraryLabel();
 
-  String _recentLabel(AppLanguage language) {
-    switch (language) {
-      case AppLanguage.en:
-        return 'Kanji in this level';
-      case AppLanguage.vi:
-        return 'Kanji trong cấp độ này';
-      case AppLanguage.ja:
-        return 'このレベルの漢字';
-    }
-  }
+  String _recentLabel(AppLanguage language) =>
+      language.kanjiReadingLevelSectionTitle();
 
   List<KanjiItem> _filterItems(List<KanjiItem> items) {
     final ids = launchArgs?.kanjiIds ?? const <int>[];

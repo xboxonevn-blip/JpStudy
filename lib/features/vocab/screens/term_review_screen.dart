@@ -7,6 +7,7 @@ import '../../../core/language_provider.dart';
 import '../../../data/models/vocab_item.dart';
 import '../../../data/db/app_database.dart';
 import '../../../data/repositories/lesson_repository.dart';
+import '../providers/vocab_home_provider.dart';
 import '../../../shared/widgets/confidence_rating.dart';
 import '../../flashcards/widgets/enhanced_flashcard.dart';
 import '../../../data/models/mistake_context.dart';
@@ -427,6 +428,16 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
   Widget _buildSummary(AppLanguage language, int total) {
     _animController.forward();
     final palette = context.appPalette;
+
+    // Compute session performance — choose chip label/tone accordingly.
+    final reviewed = _againCount + _hardCount + _goodCount + _easyCount;
+    final successCount = _goodCount + _easyCount;
+    final successRate = reviewed > 0 ? successCount / reviewed : 1.0;
+    final chipTone =
+        successRate >= 0.7 ? AppStatusTone.success : AppStatusTone.warning;
+    final chipLabel =
+        successRate >= 0.7 ? language.reviewGoodLabel : language.reviewHardLabel;
+
     return AppPageShell(
       child: Column(
         children: [
@@ -446,8 +457,8 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
             primaryLabel: language.doneLabel,
             onPrimaryTap: () => context.pop(),
             status: AppStatusChip(
-              label: language.reviewGoodLabel,
-              tone: AppStatusTone.success,
+              label: chipLabel,
+              tone: chipTone,
             ),
           ),
           const SizedBox(height: 16),
@@ -615,5 +626,12 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
         _isSessionComplete = true;
       }
     });
+
+    // Invalidate vocab providers so the home screen reflects the updated due
+    // count immediately when the user pops back — not on next app restart.
+    if (_isSessionComplete) {
+      ref.invalidate(allDueTermsProvider);
+      ref.invalidate(vocabHomeSectionProvider);
+    }
   }
 }

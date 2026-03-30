@@ -69,13 +69,23 @@ final vocabHomeSectionProvider = FutureProvider<VocabHomeSection>((ref) async {
     )).length;
   }
 
-  final n5Core = await countLevel('N5', 'hajimete');
-  final n4Core = await countLevel('N4', 'hajimete');
-  final n3Core = await countLevel('N3', 'hajimete');
-  final n2Core = await countLevel('N2', 'hajimete');
-  final n1Core = await countLevel('N1', 'hajimete');
-  final minnaN5 = await countMinna('N5', 1, 25);
-  final minnaN4 = await countMinna('N4', 26, 50);
+  // Fire all 7 DB queries in parallel — each is independent, no dependencies.
+  final counts = await Future.wait([
+    countLevel('N5', 'hajimete'),
+    countLevel('N4', 'hajimete'),
+    countLevel('N3', 'hajimete'),
+    countLevel('N2', 'hajimete'),
+    countLevel('N1', 'hajimete'),
+    countMinna('N5', 1, 25),
+    countMinna('N4', 26, 50),
+  ]);
+  final n5Core = counts[0];
+  final n4Core = counts[1];
+  final n3Core = counts[2];
+  final n2Core = counts[3];
+  final n1Core = counts[4];
+  final minnaN5 = counts[5];
+  final minnaN4 = counts[6];
 
   return VocabHomeSection(
     selectedLevelCode: selectedLevel.shortLabel,
