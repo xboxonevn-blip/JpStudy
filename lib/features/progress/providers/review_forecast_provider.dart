@@ -103,26 +103,20 @@ final reviewForecastProvider = FutureProvider<ReviewForecast>((ref) async {
     int vocabDue = 0, grammarDue = 0, kanjiDue = 0;
 
     for (final s in allVocab) {
-      if (s.nextReviewAt.isAfter(dayStart.subtract(const Duration(seconds: 1))) &&
-          s.nextReviewAt.isBefore(dayEnd)) {
+      if (i == 0 ? s.nextReviewAt.isBefore(dayEnd)
+          : !s.nextReviewAt.isBefore(dayStart) && s.nextReviewAt.isBefore(dayEnd)) {
         vocabDue++;
-      } else if (i == 0 && s.nextReviewAt.isBefore(dayEnd)) {
-        vocabDue++; // overdue items count for today
       }
     }
     for (final s in allGrammar) {
-      if (s.nextReviewAt.isAfter(dayStart.subtract(const Duration(seconds: 1))) &&
-          s.nextReviewAt.isBefore(dayEnd)) {
-        grammarDue++;
-      } else if (i == 0 && s.nextReviewAt.isBefore(dayEnd)) {
+      if (i == 0 ? s.nextReviewAt.isBefore(dayEnd)
+          : !s.nextReviewAt.isBefore(dayStart) && s.nextReviewAt.isBefore(dayEnd)) {
         grammarDue++;
       }
     }
     for (final s in allKanji) {
-      if (s.nextReviewAt.isAfter(dayStart.subtract(const Duration(seconds: 1))) &&
-          s.nextReviewAt.isBefore(dayEnd)) {
-        kanjiDue++;
-      } else if (i == 0 && s.nextReviewAt.isBefore(dayEnd)) {
+      if (i == 0 ? s.nextReviewAt.isBefore(dayEnd)
+          : !s.nextReviewAt.isBefore(dayStart) && s.nextReviewAt.isBefore(dayEnd)) {
         kanjiDue++;
       }
     }

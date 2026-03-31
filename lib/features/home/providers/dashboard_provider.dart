@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../data/db/app_database.dart';
@@ -110,11 +111,18 @@ final dashboardProvider = StreamProvider.autoDispose<DashboardState>((ref) {
     unawaited(emitSnapshot());
   });
 
+  // Refresh immediately when the app returns to foreground so due counts
+  // reflect items that became due while the app was backgrounded.
+  final lifecycleListener = AppLifecycleListener(
+    onResume: () => unawaited(emitSnapshot()),
+  );
+
   unawaited(emitSnapshot());
 
   ref.onDispose(() {
     isDisposed = true;
     minuteTicker?.cancel();
+    lifecycleListener.dispose();
     for (final sub in subscriptions) {
       unawaited(sub.cancel());
     }

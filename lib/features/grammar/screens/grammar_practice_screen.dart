@@ -13,6 +13,7 @@ import '../../../data/db/app_database.dart';
 import '../../../data/models/mistake_context.dart';
 import '../../../data/repositories/grammar_repository.dart';
 import '../../mistakes/repositories/mistake_repository.dart';
+import '../grammar_providers.dart' as grammar_providers;
 import '../services/grammar_question_generator.dart';
 import '../widgets/cloze_test_widget.dart';
 import '../widgets/multiple_choice_widget.dart';
@@ -400,6 +401,7 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
   bool _isLoading = true;
   bool _isAnswered = false;
   bool _summaryShown = false;
+  DateTime? _questionStartTime;
 
   int _score = 0;
   String? _feedbackMessage;
@@ -478,13 +480,13 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
       points = points.take(20).toList(growable: false);
     }
 
-    final details = <({GrammarPoint point, List<GrammarExample> examples})>[];
-    for (final point in points) {
-      final detail = await repo.getGrammarDetail(point.id);
-      if (detail != null && detail.examples.isNotEmpty) {
-        details.add(detail);
-      }
-    }
+    final rawDetails = await Future.wait(
+      points.map((point) => repo.getGrammarDetail(point.id)),
+    );
+    final details = [
+      for (final d in rawDetails)
+        if (d != null && d.examples.isNotEmpty) d,
+    ];
 
     final levels =
         (constrainToSelectedLevel
@@ -492,11 +494,12 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
                 : points.map((p) => p.jlptLevel).toSet())
             .where((level) => level.trim().isNotEmpty)
             .toList(growable: false);
-    final distractorPool = <GrammarPoint>[];
-    for (final level in levels) {
-      final levelPoints = await repo.fetchPointsByLevel(level);
-      distractorPool.addAll(levelPoints);
-    }
+    final levelResults = await Future.wait(
+      levels.map((level) => repo.fetchPointsByLevel(level)),
+    );
+    final distractorPool = <GrammarPoint>[
+      for (final pts in levelResults) ...pts,
+    ];
 
     final language = ref.read(appLanguageProvider);
     var generated = GrammarQuestionGenerator.generateQuestions(
@@ -542,6 +545,7 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
       _questionBank.addAll(generated);
       _questions.addAll(prepared);
       _isLoading = false;
+      _questionStartTime = DateTime.now();
       _sessionRenderToken = nextSessionRenderToken;
       _activeScopeLabel = _resolveActiveScopeLabel(
         points,
@@ -812,9 +816,15 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
       }
     }
 
+    final elapsedSeconds = _questionStartTime != null
+        ? DateTime.now().difference(_questionStartTime!).inSeconds
+        : 999;
+    final grade = isCorrect
+        ? (elapsedSeconds <= 8 ? 4 : 3) // Easy(4) if quick, Good(3) otherwise
+        : 1; // Again(1) for wrong answers
     await ref
         .read(grammarRepositoryProvider)
-        .recordReview(grammarId: question.point.id, grade: isCorrect ? 3 : 1);
+        .recordReview(grammarId: question.point.id, grade: grade);
 
     final waitMs = switch (_blueprint) {
       GrammarPracticeBlueprint.learn => isCorrect ? 1500 : 1900,
@@ -829,6 +839,7 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
           _isAnswered = false;
           _feedbackMessage = null;
           _feedbackCorrect = null;
+          _questionStartTime = DateTime.now();
         });
       } else {
         _showSummary();
@@ -922,6 +933,9 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
     if (_summaryShown || !mounted) return;
     _summaryShown = true;
     _timer?.cancel();
+    ref.invalidate(grammar_providers.grammarDueCountProvider);
+    ref.invalidate(grammar_providers.grammarGhostCountProvider);
+    ref.invalidate(grammar_providers.grammarGhostsProvider);
 
     final language = ref.read(appLanguageProvider);
     final total = _questions.length;

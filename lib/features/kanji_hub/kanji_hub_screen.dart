@@ -42,19 +42,22 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
   _KanjiCollection _selectedCollection = _KanjiCollection.n5;
   Future<List<KanjiItem>>? _kanjiFuture;
   late final Future<List<RadicalItem>> _radicalFuture;
-  late final Future<List<KanjiItem>> _allKanjiFuture;
+  Future<List<KanjiItem>>? _allKanjiFuture;
   bool _didOpenInitialKanji = false;
   
   // Realtime filter state
   String _searchQuery = '';
   List<String> _candidateKanji = [];
   final GlobalKey<_SearchDrawPanelState> _searchDrawKey = GlobalKey<_SearchDrawPanelState>();
+  final GlobalKey _gridPanelKey = GlobalKey();
 
   @override
   void initState() {
     super.initState();
     _radicalFuture = const RadicalRepository().loadAll();
-    _allKanjiFuture = _loadAllKanji();
+    if (widget.initialKanjiId != null) {
+      _allKanjiFuture = _loadAllKanji();
+    }
     _maybeOpenInitialKanji();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final initLevel = ref.read(studyLevelProvider) ?? StudyLevel.n5;
@@ -71,7 +74,7 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
     if (initialKanjiId == null || _didOpenInitialKanji) return;
     _didOpenInitialKanji = true;
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final allKanji = await _allKanjiFuture;
+      final allKanji = await _allKanjiFuture!;
       if (!mounted) return;
       KanjiItem? item;
       for (final entry in allKanji) {
@@ -126,6 +129,8 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
 
   void _onCollectionSelected(_KanjiCollection collection) {
     if (collection == _KanjiCollection.radicals) {
+      // Lazily start loading all kanji the first time radicals are browsed.
+      _allKanjiFuture ??= _loadAllKanji();
       setState(() {
         _selectedCollection = collection;
         _candidateKanji.clear();
@@ -256,7 +261,17 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
                     ),
                   ),
                   onExplore: () {
+                    _onClearRequested();
                     _onCollectionSelected(_collectionFromLevel(_selectedLevel));
+                    final ctx = _gridPanelKey.currentContext;
+                    if (ctx != null) {
+                      Scrollable.ensureVisible(
+                        ctx,
+                        duration: const Duration(milliseconds: 350),
+                        curve: Curves.easeOut,
+                        alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart,
+                      );
+                    }
                   },
                 ),
                 loading: () => AppFeatureCard(
@@ -310,6 +325,7 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
                     Expanded(
                       flex: 6,
                       child: _KanjiGridPanel(
+                        key: _gridPanelKey,
                         selectedLevel: _selectedLevel,
                         selectedCollection: _selectedCollection,
                         onLevelSelected: _onLevelSelected,
@@ -331,6 +347,7 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     _KanjiGridPanel(
+                      key: _gridPanelKey,
                       selectedLevel: _selectedLevel,
                       selectedCollection: _selectedCollection,
                       onLevelSelected: _onLevelSelected,
@@ -467,6 +484,35 @@ String _formatKanjiExample(KanjiExample example) {
 
 
 String _kanjiHubClearLabel(AppLanguage language) => language.kanjiClearLabel();
+
+String _srsFilterLabel(
+  AppLanguage lang,
+  _KanjiSrsFilter filter,
+  int total,
+  Set<int> dueIds,
+  Set<int> seenIds,
+) {
+  final dueCount = dueIds.length;
+  final unseenCount = total - seenIds.length - dueIds.length < 0
+      ? 0
+      : total - seenIds.length;
+  final studiedCount = seenIds.length - dueIds.length < 0
+      ? 0
+      : seenIds.length - dueIds.length;
+  return switch (filter) {
+    _KanjiSrsFilter.all => lang.kanjiSrsFilterAllLabel(total),
+    _KanjiSrsFilter.due => lang.kanjiSrsFilterDueLabel(dueCount),
+    _KanjiSrsFilter.unseen => lang.kanjiSrsFilterUnseenLabel(unseenCount),
+    _KanjiSrsFilter.studied => lang.kanjiSrsFilterStudiedLabel(studiedCount),
+  };
+}
+
+Color _srsFilterColor(_KanjiSrsFilter filter) => switch (filter) {
+  _KanjiSrsFilter.all => const Color(0xFF607D8B),
+  _KanjiSrsFilter.due => const Color(0xFFFF9800),
+  _KanjiSrsFilter.unseen => const Color(0xFF9C27B0),
+  _KanjiSrsFilter.studied => const Color(0xFF4CAF50),
+};
 
 String _kanjiHubStrokeChipLabel(AppLanguage language, int count) => language.kanjiStrokeChipLabel(count);
 

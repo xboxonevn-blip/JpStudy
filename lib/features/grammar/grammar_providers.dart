@@ -39,28 +39,11 @@ final grammarGhostsProvider = FutureProvider<List<GrammarPointData>>((
   final repo = ref.watch(grammarRepositoryProvider);
   final points = await repo.fetchGhostPoints();
 
-  // Is GrammarPointData wrapping logic needed?
-  // The repo returns List<GrammarPoint>.
-  // But GhostReviewScreen expects GrammarPointData (which usually includes examples).
-  // Let's check GrammarPointData definition.
-  // Assuming we need to fetch details for each point or if the screen handles it.
-
-  // Wait, I need to check how GrammarPointData is defined.
-  // If fetchGhostPoints returns just points, I might need to fetch examples too.
-
-  // Let's look at the screen usage: "final data = ghosts[index];" where data is GrammarPointData.
-  // And data.examples is used.
-
-  // So I need to fetch full data.
-
-  List<GrammarPointData> fullData = [];
-  for (final p in points) {
-    final details = await repo.getGrammarDetail(p.id);
-    if (details != null) {
-      fullData.add(
-        GrammarPointData(point: details.point, examples: details.examples),
-      );
-    }
-  }
-  return fullData;
+final details = await Future.wait(
+    points.map((p) => repo.getGrammarDetail(p.id)),
+  );
+  return [
+    for (final d in details)
+      if (d != null) GrammarPointData(point: d.point, examples: d.examples),
+  ];
 });

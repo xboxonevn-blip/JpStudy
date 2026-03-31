@@ -36,6 +36,7 @@ class _KanjiTodayPanel extends StatelessWidget {
                 icon: Icons.schedule_rounded,
                 title: _kanjiDueActionLabel(language),
                 subtitle: _kanjiDueActionSubtitle(language, summary.dueCount),
+                count: summary.dueCount,
                 onTap: onReviewDue,
               ),
               _KanjiTodayAction(
@@ -43,6 +44,7 @@ class _KanjiTodayPanel extends StatelessWidget {
                 icon: Icons.auto_awesome_rounded,
                 title: _kanjiNewActionLabel(language),
                 subtitle: _kanjiNewActionSubtitle(language, summary.newCount),
+                count: summary.newCount,
                 onTap: onLearnNew,
               ),
               _KanjiTodayAction(
@@ -67,24 +69,43 @@ class _KanjiTodayAction extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.onTap,
+    this.count,
   });
 
   final IconData icon;
   final String title;
   final String subtitle;
   final VoidCallback onTap;
+  /// When non-null and zero, renders in a visually muted "completed" state.
+  final int? count;
+
+  bool get _isEmpty => count != null && count == 0;
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return SizedBox(
       width: 260,
-      child: AppSectionCard(
-        child: ListTile(
-          leading: CircleAvatar(child: Icon(icon)),
-          title: Text(title),
-          subtitle: Text(subtitle),
-          trailing: const Icon(Icons.arrow_forward_rounded),
-          onTap: onTap,
+      child: Opacity(
+        opacity: _isEmpty ? 0.55 : 1.0,
+        child: AppSectionCard(
+          child: ListTile(
+            leading: CircleAvatar(
+              backgroundColor: _isEmpty
+                  ? palette.outline.withValues(alpha: 0.3)
+                  : null,
+              child: Icon(
+                _isEmpty ? Icons.check_rounded : icon,
+                color: _isEmpty ? palette.ink.withValues(alpha: 0.5) : null,
+              ),
+            ),
+            title: Text(title),
+            subtitle: Text(subtitle),
+            trailing: _isEmpty
+                ? null
+                : const Icon(Icons.arrow_forward_rounded),
+            onTap: _isEmpty ? null : onTap,
+          ),
         ),
       ),
     );
@@ -422,13 +443,14 @@ class _KanjiRecognitionCandidate {
 
 class _KanjiGridPanel extends ConsumerStatefulWidget {
   const _KanjiGridPanel({
+    super.key,
     required this.selectedLevel,
     required this.selectedCollection,
     required this.onLevelSelected,
     required this.onCollectionSelected,
     required this.kanjiFuture,
     required this.radicalFuture,
-    required this.allKanjiFuture,
+    this.allKanjiFuture,
     required this.language,
     required this.searchQuery,
     required this.candidateKanji,
@@ -442,7 +464,7 @@ class _KanjiGridPanel extends ConsumerStatefulWidget {
   final ValueChanged<_KanjiCollection> onCollectionSelected;
   final Future<List<KanjiItem>>? kanjiFuture;
   final Future<List<RadicalItem>> radicalFuture;
-  final Future<List<KanjiItem>> allKanjiFuture;
+  final Future<List<KanjiItem>>? allKanjiFuture;
   final AppLanguage language;
   final String searchQuery;
   final List<String> candidateKanji;
@@ -455,8 +477,12 @@ class _KanjiGridPanel extends ConsumerStatefulWidget {
 
 enum _RadicalSortMode { byIndex, byMeaning }
 
+enum _KanjiSrsFilter { all, due, unseen, studied }
+
 class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
   int? _selectedStrokeCount;
+  int? _selectedKanjiStrokeCount;
+  _KanjiSrsFilter _srsFilter = _KanjiSrsFilter.all;
   _RadicalSortMode _radicalSortMode = _RadicalSortMode.byIndex;
 
   bool get hasActiveCandidateFilter => widget.candidateKanji.isNotEmpty && widget.selectedCollection != _KanjiCollection.radicals;
@@ -466,6 +492,8 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
   void _clearLocalFilters() {
     setState(() {
       _selectedStrokeCount = null;
+      _selectedKanjiStrokeCount = null;
+      _srsFilter = _KanjiSrsFilter.all;
       _radicalSortMode = _RadicalSortMode.byIndex;
     });
     widget.onClearRequested();
@@ -796,9 +824,98 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                         ).toList();
                       }
 
+                      // Stroke filter
+                      if (_selectedKanjiStrokeCount != null) {
+                        items = items.where((k) => k.strokeCount == _selectedKanjiStrokeCount).toList();
+                      }
+
+                      // SRS status filter
+                      if (_srsFilter != _KanjiSrsFilter.all) {
+                        items = items.where((k) {
+                          final isDue = dueIds.contains(k.id);
+                          final isSeen = seenIds.contains(k.id);
+                          return switch (_srsFilter) {
+                            _KanjiSrsFilter.due => isDue,
+                            _KanjiSrsFilter.unseen => !isSeen && !isDue,
+                            _KanjiSrsFilter.studied => isSeen && !isDue,
+                            _KanjiSrsFilter.all => true,
+                          };
+                        }).toList();
+                      }
+
+                      // Compute stroke options from full (unfiltered) data
+                      final allItems = snapshot.data ?? [];
+                      final strokeCounts = ({
+                        for (final k in allItems) k.strokeCount,
+                      }.toList()..sort());
+
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
+                          // ── SRS status filter chips ──────────────────────
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                for (final filter in _KanjiSrsFilter.values)
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 6),
+                                    child: ChoiceChip(
+                                      label: Text(
+                                        _srsFilterLabel(lang, filter, allItems.length, dueIds, seenIds),
+                                        style: const TextStyle(fontSize: 11),
+                                      ),
+                                      selected: _srsFilter == filter,
+                                      onSelected: (val) => setState(() => _srsFilter = val ? filter : _KanjiSrsFilter.all),
+                                      showCheckmark: false,
+                                      selectedColor: _srsFilterColor(filter).withValues(alpha: 0.18),
+                                      labelStyle: TextStyle(
+                                        color: _srsFilter == filter
+                                            ? _srsFilterColor(filter)
+                                            : context.appPalette.ink.withValues(alpha: 0.65),
+                                        fontWeight: _srsFilter == filter ? FontWeight.bold : FontWeight.normal,
+                                      ),
+                                      side: BorderSide(
+                                        color: _srsFilter == filter
+                                            ? _srsFilterColor(filter).withValues(alpha: 0.5)
+                                            : context.appPalette.outline.withValues(alpha: 0.4),
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: AppSpacing.xs),
+                          // ── Stroke count filter chips ─────────────────────
+                          if (strokeCounts.isNotEmpty)
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  for (final strokes in strokeCounts)
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 6),
+                                      child: ChoiceChip(
+                                        label: Text(
+                                          _kanjiHubStrokeChipLabel(widget.language, strokes),
+                                          style: const TextStyle(fontSize: 11),
+                                        ),
+                                        selected: _selectedKanjiStrokeCount == strokes,
+                                        onSelected: (val) => setState(() => _selectedKanjiStrokeCount = val ? strokes : null),
+                                        selectedColor: context.appPalette.accent.withValues(alpha: 0.2),
+                                        showCheckmark: false,
+                                        labelStyle: TextStyle(
+                                          color: _selectedKanjiStrokeCount == strokes
+                                              ? context.appPalette.accent
+                                              : context.appPalette.ink,
+                                          fontWeight: _selectedKanjiStrokeCount == strokes ? FontWeight.bold : FontWeight.normal,
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
+                          const SizedBox(height: AppSpacing.xs),
                           if (hasActiveCandidateFilter || hasActiveTextFilter) ...[
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -831,9 +948,9 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: AppSpacing.md),
+                            const SizedBox(height: AppSpacing.sm),
                           ] else
-                            const SizedBox(height: AppSpacing.md),
+                            const SizedBox(height: AppSpacing.sm),
                           Expanded(
                             child: AnimatedSwitcher(
                               duration: const Duration(milliseconds: 300),

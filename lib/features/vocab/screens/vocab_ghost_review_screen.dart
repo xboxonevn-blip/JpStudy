@@ -8,6 +8,7 @@ import '../../../data/repositories/lesson_repository.dart';
 import '../providers/vocab_home_provider.dart';
 import '../../flashcards/widgets/enhanced_flashcard.dart';
 import '../../mistakes/repositories/mistake_repository.dart';
+import '../../../shared/widgets/confidence_rating.dart';
 
 class VocabGhostReviewScreen extends ConsumerStatefulWidget {
   final List<VocabItem> items;
@@ -23,27 +24,38 @@ class _VocabGhostReviewScreenState
     extends ConsumerState<VocabGhostReviewScreen> {
   int _currentIndex = 0;
   bool _isFlipped = false;
-  int _gotItCount = 0;
-  int _stillLearningCount = 0;
+  int _againCount = 0;
+  int _hardCount = 0;
+  int _goodCount = 0;
+  int _easyCount = 0;
 
   VocabItem get _currentItem => widget.items[_currentIndex];
   bool get _isLast => _currentIndex >= widget.items.length - 1;
 
   void _handleFlip() => setState(() => _isFlipped = true);
 
-  Future<void> _handleGotIt() async {
+  Future<void> _handleRating(ConfidenceLevel level) async {
+    final lessonRepo = ref.read(lessonRepositoryProvider);
+    await lessonRepo.saveTermReview(
+      termId: _currentItem.id,
+      quality: level.value,
+    );
     final repo = ref.read(mistakeRepositoryProvider);
-    await repo.markCorrect(type: 'vocab', itemId: _currentItem.id);
-    final lessonRepo = ref.read(lessonRepositoryProvider);
-    await lessonRepo.saveTermReview(termId: _currentItem.id, quality: 3);
-    setState(() => _gotItCount++);
-    _advance();
-  }
-
-  Future<void> _handleStillLearning() async {
-    final lessonRepo = ref.read(lessonRepositoryProvider);
-    await lessonRepo.saveTermReview(termId: _currentItem.id, quality: 1);
-    setState(() => _stillLearningCount++);
+    if (level == ConfidenceLevel.good || level == ConfidenceLevel.easy) {
+      await repo.markCorrect(type: 'vocab', itemId: _currentItem.id);
+    }
+    setState(() {
+      switch (level) {
+        case ConfidenceLevel.again:
+          _againCount++;
+        case ConfidenceLevel.hard:
+          _hardCount++;
+        case ConfidenceLevel.good:
+          _goodCount++;
+        case ConfidenceLevel.easy:
+          _easyCount++;
+      }
+    });
     _advance();
   }
 
@@ -103,7 +115,6 @@ class _VocabGhostReviewScreenState
   }
 
   void _showSummary() {
-    // Invalidate so the vocab home section reflects updated counts immediately.
     ref.invalidate(allDueTermsProvider);
     ref.invalidate(vocabHomeSectionProvider);
     showDialog(
@@ -111,8 +122,10 @@ class _VocabGhostReviewScreenState
       barrierDismissible: false,
       builder: (_) => _SummaryDialog(
         total: widget.items.length,
-        gotIt: _gotItCount,
-        stillLearning: _stillLearningCount,
+        againCount: _againCount,
+        hardCount: _hardCount,
+        goodCount: _goodCount,
+        easyCount: _easyCount,
         onDone: () {
           Navigator.of(context).pop();
           Navigator.of(context).pop();
@@ -206,49 +219,10 @@ class _VocabGhostReviewScreenState
             )
           else
             Padding(
-              padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: SizedBox(
-                      height: 52,
-                      child: OutlinedButton.icon(
-                        onPressed: _handleStillLearning,
-                        icon: const Icon(
-                          Icons.refresh_rounded,
-                          color: Colors.orange,
-                        ),
-                        label: Text(
-                          language.stillLearningLabel,
-                          style: const TextStyle(color: Colors.orange),
-                        ),
-                        style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: Colors.orange),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: SizedBox(
-                      height: 52,
-                      child: FilledButton.icon(
-                        onPressed: _handleGotIt,
-                        icon: const Icon(Icons.check_rounded),
-                        label: Text(language.gotItLabel),
-                        style: FilledButton.styleFrom(
-                          backgroundColor: Colors.green,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
+              child: ConfidenceRatingWidget(
+                language: language,
+                onSelect: _handleRating,
               ),
             ),
         ],
@@ -260,20 +234,30 @@ class _VocabGhostReviewScreenState
 class _SummaryDialog extends ConsumerWidget {
   const _SummaryDialog({
     required this.total,
-    required this.gotIt,
-    required this.stillLearning,
+    required this.againCount,
+    required this.hardCount,
+    required this.goodCount,
+    required this.easyCount,
     required this.onDone,
   });
 
   final int total;
-  final int gotIt;
-  final int stillLearning;
+  final int againCount;
+  final int hardCount;
+  final int goodCount;
+  final int easyCount;
   final VoidCallback onDone;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final language = ref.watch(appLanguageProvider);
-    final accuracyPct = total > 0 ? (gotIt / total * 100).round() : 0;
+    final successCount = goodCount + easyCount;
+    final accuracyPct = total > 0 ? (successCount / total * 100).round() : 0;
+    final color = accuracyPct >= 80
+        ? Colors.green
+        : accuracyPct >= 50
+            ? Colors.orange
+            : Colors.red;
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       title: Text(language.reviewCompleteLabel),
@@ -282,27 +266,100 @@ class _SummaryDialog extends ConsumerWidget {
         children: [
           Text(
             '$accuracyPct%',
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 48,
               fontWeight: FontWeight.bold,
-              color: Colors.green,
+              color: color,
             ),
           ),
           const SizedBox(height: 8),
-          Text(language.vocabClearedLabel(gotIt, total)),
-          if (stillLearning > 0) ...[
-            const SizedBox(height: 4),
-            Text(
-              language.stillInReviewQueueLabel(stillLearning),
-              style: const TextStyle(color: Colors.orange),
-            ),
-          ],
+          Text(language.correctCountLabel(successCount, total)),
+          const SizedBox(height: 12),
+          _GradeBreakdownRow(
+            againCount: againCount,
+            hardCount: hardCount,
+            goodCount: goodCount,
+            easyCount: easyCount,
+            language: language,
+          ),
         ],
       ),
       actions: [
         FilledButton(
           onPressed: onDone,
           child: Text(language.doneLabel),
+        ),
+      ],
+    );
+  }
+}
+
+class _GradeBreakdownRow extends StatelessWidget {
+  const _GradeBreakdownRow({
+    required this.againCount,
+    required this.hardCount,
+    required this.goodCount,
+    required this.easyCount,
+    required this.language,
+  });
+
+  final int againCount;
+  final int hardCount;
+  final int goodCount;
+  final int easyCount;
+  final AppLanguage language;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        _GradePill(count: againCount, color: Colors.red, label: language.reviewAgainLabel),
+        _GradePill(count: hardCount, color: Colors.orange, label: language.reviewHardLabel),
+        _GradePill(count: goodCount, color: Colors.blue, label: language.reviewGoodLabel),
+        _GradePill(count: easyCount, color: Colors.green, label: language.reviewEasyLabel),
+      ],
+    );
+  }
+}
+
+class _GradePill extends StatelessWidget {
+  const _GradePill({
+    required this.count,
+    required this.color,
+    required this.label,
+  });
+
+  final int count;
+  final Color color;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          width: 36,
+          height: 36,
+          decoration: BoxDecoration(
+            color: color.withValues(alpha: 0.15),
+            shape: BoxShape.circle,
+          ),
+          child: Center(
+            child: Text(
+              '$count',
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                color: color,
+                fontSize: 16,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          label,
+          style: TextStyle(fontSize: 11, color: color, fontWeight: FontWeight.w600),
         ),
       ],
     );

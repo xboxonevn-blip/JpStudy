@@ -295,6 +295,31 @@ extension KanjiCopy on AppLanguage {
     AppLanguage.ja => 'キーワード: $query ($count)',
   };
 
+  // ── SRS filter chips ──────────────────────────────────────────────────
+  String kanjiSrsFilterAllLabel(int count) => switch (this) {
+    AppLanguage.en => 'All ($count)',
+    AppLanguage.vi => 'Tất cả ($count)',
+    AppLanguage.ja => 'すべて ($count)',
+  };
+
+  String kanjiSrsFilterDueLabel(int count) => switch (this) {
+    AppLanguage.en => 'Due ($count)',
+    AppLanguage.vi => 'Đến hạn ($count)',
+    AppLanguage.ja => '期限あり ($count)',
+  };
+
+  String kanjiSrsFilterUnseenLabel(int count) => switch (this) {
+    AppLanguage.en => 'New ($count)',
+    AppLanguage.vi => 'Mới ($count)',
+    AppLanguage.ja => '未学習 ($count)',
+  };
+
+  String kanjiSrsFilterStudiedLabel(int count) => switch (this) {
+    AppLanguage.en => 'Studied ($count)',
+    AppLanguage.vi => 'Đã học ($count)',
+    AppLanguage.ja => 'SRS中 ($count)',
+  };
+
   // ── SRS status legend ──────────────────────────────────────────────────
   String kanjiStatusDueLabel() => switch (this) {
     AppLanguage.en => 'Due for review',

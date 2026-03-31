@@ -112,6 +112,9 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
   }
 
   void _showResults(int total) {
+    ref.invalidate(grammar_providers.grammarDueCountProvider);
+    ref.invalidate(grammar_providers.grammarGhostCountProvider);
+    ref.invalidate(grammar_providers.grammarGhostsProvider);
     final language = ref.read(appLanguageProvider);
     _spawnParticles(); // Bonus confetti on finish
     showDialog(
