@@ -1,4 +1,4 @@
-﻿import 'dart:convert';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
@@ -11,7 +11,7 @@ Future<void> main() async {
 }
 
 Future<Map<String, dynamic>> runHandwritingMeasurementAudit({
-  String inputPath = 'tooling/handwriting_audit_cases.v1.json',
+  String inputPath = 'tooling/handwriting_audit_cases.v2.json',
   String outputPath = 'docs/reports/handwriting-measurement-audit-report.json',
   String templatePath = 'assets/data/support/kanji/stroke_templates.json',
   bool showGuide = false,
@@ -38,12 +38,145 @@ Future<Map<String, dynamic>> runHandwritingMeasurementAudit({
     const JsonEncoder.withIndent('  ').convert(report),
   );
 
+  final markdownFile = File(_markdownPathFor(outputFile.path));
+  markdownFile.parent.createSync(recursive: true);
+  markdownFile.writeAsStringSync(_buildMarkdownSummary(report));
+
   stdout.writeln(
     'Wrote handwriting audit report to ${outputFile.path} '
     '(${report['summary']['sampleCount']} cases).',
   );
+  stdout.writeln('Wrote handwriting audit summary to ${markdownFile.path}.');
 
   return report;
+}
+
+String _markdownPathFor(String jsonPath) {
+  if (jsonPath.toLowerCase().endsWith('.json')) {
+    return '${jsonPath.substring(0, jsonPath.length - 5)}.md';
+  }
+  return '$jsonPath.md';
+}
+
+String _buildMarkdownSummary(Map<String, dynamic> report) {
+  final summary = report['summary'] as Map<String, dynamic>? ?? const {};
+  final cases = (report['cases'] as List<dynamic>? ?? const [])
+      .whereType<Map<String, dynamic>>()
+      .toList(growable: false);
+  final failedCases = cases
+      .where((caseReport) => caseReport['passed'] != true)
+      .toList(growable: false);
+  final topFailureBuckets =
+      (summary['topFailureBuckets'] as List<dynamic>? ?? const [])
+          .whereType<Map<String, dynamic>>()
+          .toList(growable: false);
+  final buffer = StringBuffer()
+    ..writeln('# Handwriting Measurement Audit Summary')
+    ..writeln()
+    ..writeln('- Sample set: `${report['sampleSetVersion'] ?? 'unknown'}`')
+    ..writeln(
+      '- Generated at (UTC): `${report['generatedAtUtc'] ?? 'unknown'}`',
+    )
+    ..writeln('- Scoring version: `${report['scoringVersion'] ?? 'unknown'}`')
+    ..writeln(
+      '- Template dataset: `${report['templateDatasetVersion'] ?? 'unknown'}`',
+    )
+    ..writeln('- Samples: `${summary['sampleCount'] ?? 0}`')
+    ..writeln(
+      '- False positives: `${summary['falsePositiveCount'] ?? 0}` (${_formatRate(summary['falsePositiveRate'])})',
+    )
+    ..writeln(
+      '- False negatives: `${summary['falseNegativeCount'] ?? 0}` (${_formatRate(summary['falseNegativeRate'])})',
+    )
+    ..writeln()
+    ..writeln('## Pass Rates by Mode')
+    ..writeln()
+    ..writeln('| Mode | Pass Rate |')
+    ..writeln('| --- | ---: |');
+
+  final passRateByMode =
+      (summary['passRateByMode'] as Map<String, dynamic>? ?? const {});
+  for (final entry in passRateByMode.entries) {
+    buffer.writeln(
+      '| `${_escapeMarkdown(entry.key)}` | ${_formatRate(entry.value)} |',
+    );
+  }
+
+  buffer
+    ..writeln()
+    ..writeln('## Pass Rates by Level')
+    ..writeln()
+    ..writeln('| Level | Pass Rate |')
+    ..writeln('| --- | ---: |');
+
+  final passRateByLevel =
+      (summary['passRateByLevel'] as Map<String, dynamic>? ?? const {});
+  for (final entry in passRateByLevel.entries) {
+    buffer.writeln(
+      '| `${_escapeMarkdown(entry.key)}` | ${_formatRate(entry.value)} |',
+    );
+  }
+
+  buffer
+    ..writeln()
+    ..writeln('## Top Failure Buckets')
+    ..writeln();
+  if (topFailureBuckets.isEmpty) {
+    buffer.writeln('- None');
+  } else {
+    for (final bucket in topFailureBuckets) {
+      buffer.writeln(
+        '- `${bucket['bucket'] ?? 'unknown'}`: ${bucket['count'] ?? 0}',
+      );
+    }
+  }
+
+  buffer
+    ..writeln()
+    ..writeln('## Failed Cases')
+    ..writeln();
+  if (failedCases.isEmpty) {
+    buffer.writeln('- None');
+  } else {
+    buffer
+      ..writeln('| Case | Word | Expected | Actual | Bucket | Score | Source |')
+      ..writeln('| --- | --- | --- | --- | --- | ---: | --- |');
+    for (final caseReport in failedCases) {
+      final metadata =
+          (caseReport['metadata'] as Map<String, dynamic>? ?? const {});
+      final word =
+          metadata['word'] ??
+          (caseReport['kanjiIds'] as List<dynamic>? ?? const []).join('');
+      final source =
+          metadata['sourceSenseId'] ?? metadata['sourceVocabId'] ?? 'n/a';
+      final score = caseReport['score'];
+      buffer.writeln(
+        '| `${_escapeMarkdown(caseReport['id']?.toString() ?? 'unknown')}` | '
+        '${_escapeMarkdown(word.toString())} | '
+        '`${_escapeMarkdown(caseReport['expectedVerdict']?.toString() ?? 'unknown')}` | '
+        '`${_escapeMarkdown(caseReport['actualVerdict']?.toString() ?? 'unknown')}` | '
+        '`${_escapeMarkdown(caseReport['likelyFailureBucket']?.toString() ?? 'unknown')}` | '
+        '${score is num ? score.toStringAsFixed(3) : 'n/a'} | '
+        '`${_escapeMarkdown(source.toString())}` |',
+      );
+    }
+  }
+
+  return buffer.toString();
+}
+
+String _formatRate(Object? value) {
+  if (value is num) {
+    return '${(value * 100).toStringAsFixed(1)}%';
+  }
+  return 'n/a';
+}
+
+String _escapeMarkdown(String value) {
+  return value
+      .replaceAll('|', r'\|')
+      .replaceAll('`', r'\`')
+      .replaceAll('\n', ' ');
 }
 
 class _AuditOptions {
@@ -58,7 +191,6 @@ class _AuditOptions {
   final String outputPath;
   final String templatePath;
   final bool showGuide;
-
 }
 
 class _SampleSet {
@@ -73,7 +205,8 @@ class _SampleSet {
   final List<_AuditCase> cases;
 
   static _SampleSet load(String path) {
-    final decoded = jsonDecode(File(path).readAsStringSync()) as Map<String, dynamic>;
+    final decoded =
+        jsonDecode(File(path).readAsStringSync()) as Map<String, dynamic>;
     final canvas = decoded['canvas'] as Map<String, dynamic>;
     return _SampleSet(
       version: decoded['version'] as String,
@@ -99,6 +232,7 @@ class _AuditCase {
     required this.expectedVerdict,
     required this.expectedFailureBucket,
     required this.generator,
+    required this.metadata,
   });
 
   final String id;
@@ -109,6 +243,7 @@ class _AuditCase {
   final String expectedVerdict;
   final String expectedFailureBucket;
   final _GeneratorSpec generator;
+  final Map<String, dynamic> metadata;
 
   static _AuditCase fromJson(Map<String, dynamic> json) {
     return _AuditCase(
@@ -119,7 +254,10 @@ class _AuditCase {
       characters: (json['characters'] as List<dynamic>).cast<String>(),
       expectedVerdict: json['expectedVerdict'] as String,
       expectedFailureBucket: json['expectedFailureBucket'] as String,
-      generator: _GeneratorSpec.fromJson(json['generator'] as Map<String, dynamic>),
+      generator: _GeneratorSpec.fromJson(
+        json['generator'] as Map<String, dynamic>,
+      ),
+      metadata: (json['metadata'] as Map<String, dynamic>?) ?? const {},
     );
   }
 }
@@ -159,7 +297,8 @@ class _TemplateCatalog {
   static _TemplateCatalog load(String path) {
     final file = File(path);
     final raw = file.readAsStringSync();
-    final decoded = (jsonDecode(raw) as List<dynamic>).cast<Map<String, dynamic>>();
+    final decoded = (jsonDecode(raw) as List<dynamic>)
+        .cast<Map<String, dynamic>>();
     final entries = <String, _TemplateEntry>{};
     for (final row in decoded) {
       final character = row['character'] as String;
@@ -172,8 +311,7 @@ class _TemplateCatalog {
     final stat = file.statSync();
     return _TemplateCatalog(
       entries: entries,
-      datasetVersion:
-          '${stat.size}-${stat.modified.toUtc().toIso8601String()}',
+      datasetVersion: '${stat.size}-${stat.modified.toUtc().toIso8601String()}',
     );
   }
 }
@@ -238,19 +376,32 @@ class _MeasurementAuditRunner {
         'sampleCount': caseReports.length,
         'falsePositiveCount': falsePositives,
         'falseNegativeCount': falseNegatives,
-        'falsePositiveRate': _rate(falsePositives, sampleSet.cases.where((c) => c.expectedVerdict == 'reject').length),
-        'falseNegativeRate': _rate(falseNegatives, sampleSet.cases.where((c) => c.expectedVerdict == 'accept').length),
+        'falsePositiveRate': _rate(
+          falsePositives,
+          sampleSet.cases.where((c) => c.expectedVerdict == 'reject').length,
+        ),
+        'falseNegativeRate': _rate(
+          falseNegatives,
+          sampleSet.cases.where((c) => c.expectedVerdict == 'accept').length,
+        ),
         'passRateByMode': {
           for (final entry in passByMode.entries)
-            entry.key: _rate(entry.value.where((v) => v).length, entry.value.length),
+            entry.key: _rate(
+              entry.value.where((v) => v).length,
+              entry.value.length,
+            ),
         },
         'passRateByLevel': {
           for (final entry in passByLevel.entries)
-            entry.key: _rate(entry.value.where((v) => v).length, entry.value.length),
+            entry.key: _rate(
+              entry.value.where((v) => v).length,
+              entry.value.length,
+            ),
         },
         'topFailureBuckets': [
-          for (final entry in (failureBuckets.entries.toList()
-            ..sort((a, b) => b.value.compareTo(a.value))))
+          for (final entry
+              in (failureBuckets.entries.toList()
+                ..sort((a, b) => b.value.compareTo(a.value))))
             {'bucket': entry.key, 'count': entry.value},
         ],
       },
@@ -282,10 +433,13 @@ class _MeasurementAuditRunner {
         'scoringVersion': HandwritingScoringVersion.v2.name,
         'likelyFailureBucket': 'template',
         'missingTemplates': missing,
+        if (auditCase.metadata.isNotEmpty) 'metadata': auditCase.metadata,
       };
     }
 
-    final templateEntries = selected.map((entry) => entry.value!).toList(growable: false);
+    final templateEntries = selected
+        .map((entry) => entry.value!)
+        .toList(growable: false);
     final strokes = _buildStrokes(auditCase, templateEntries);
 
     final result = auditCase.targetType == 'compound'
@@ -326,6 +480,7 @@ class _MeasurementAuditRunner {
       'expectedStrokes': result.expectedStrokes,
       'drawnStrokes': result.drawnStrokes,
       'likelyFailureBucket': _classifyFailureBucket(auditCase, result, passed),
+      if (auditCase.metadata.isNotEmpty) 'metadata': auditCase.metadata,
       'characterResults': [
         for (final charResult in result.characterResults)
           {
@@ -371,9 +526,15 @@ class _MeasurementAuditRunner {
       case 'template_match':
         return base;
       case 'reverse_all':
-        return [for (final stroke in base) stroke.reversed.toList(growable: false)];
+        return [
+          for (final stroke in base) stroke.reversed.toList(growable: false),
+        ];
       case 'mirror_horizontal':
-        return _mirrorCompoundOrSingle(auditCase, base, templatesForCase.length);
+        return _mirrorCompoundOrSingle(
+          auditCase,
+          base,
+          templatesForCase.length,
+        );
       case 'missing_last':
         return base.sublist(0, max(1, base.length - 1));
       case 'extra_stroke':
@@ -381,7 +542,10 @@ class _MeasurementAuditRunner {
           ...base,
           _linePath(
             const Offset(24, 24),
-            Offset(sampleSet.canvasSize.width - 24, sampleSet.canvasSize.height - 24),
+            Offset(
+              sampleSet.canvasSize.width - 24,
+              sampleSet.canvasSize.height - 24,
+            ),
           ),
         ];
       case 'reverse_character':
@@ -424,8 +588,16 @@ class _MeasurementAuditRunner {
       final offsetX = slotWidth * index;
       for (final stroke in template.strokes) {
         final local = _linePath(
-          _mapPoint(stroke.start, width: slotWidth, height: sampleSet.canvasSize.height),
-          _mapPoint(stroke.end, width: slotWidth, height: sampleSet.canvasSize.height),
+          _mapPoint(
+            stroke.start,
+            width: slotWidth,
+            height: sampleSet.canvasSize.height,
+          ),
+          _mapPoint(
+            stroke.end,
+            width: slotWidth,
+            height: sampleSet.canvasSize.height,
+          ),
           jitter: jitter,
           random: random,
         );
@@ -445,7 +617,10 @@ class _MeasurementAuditRunner {
     if (auditCase.targetType != 'compound') {
       return [
         for (final stroke in base)
-          [for (final point in stroke) Offset(sampleSet.canvasSize.width - point.dx, point.dy)],
+          [
+            for (final point in stroke)
+              Offset(sampleSet.canvasSize.width - point.dx, point.dy),
+          ],
       ];
     }
 
@@ -503,8 +678,13 @@ class _MeasurementAuditRunner {
     List<KanjiStrokeTemplate> templatesForCase,
     Size canvasSize,
   ) {
-    final meaningfulStrokes = strokes.where((stroke) => stroke.length > 1).toList();
-    final expectedTotal = templatesForCase.fold<int>(0, (sum, template) => sum + template.strokes.length);
+    final meaningfulStrokes = strokes
+        .where((stroke) => stroke.length > 1)
+        .toList();
+    final expectedTotal = templatesForCase.fold<int>(
+      0,
+      (sum, template) => sum + template.strokes.length,
+    );
     final drawnStrokes = meaningfulStrokes.length;
     final slotCount = max(1, templatesForCase.length);
     final slotWidth = canvasSize.width / slotCount;
@@ -527,11 +707,17 @@ class _MeasurementAuditRunner {
       final segmentCount = available <= 0 ? 0 : min(expected, available);
       final segment = segmentCount <= 0
           ? const <List<Offset>>[]
-          : meaningfulStrokes.sublist(strokeCursor, strokeCursor + segmentCount);
+          : meaningfulStrokes.sublist(
+              strokeCursor,
+              strokeCursor + segmentCount,
+            );
       strokeCursor += expected;
       final local = [
         for (final stroke in segment)
-          [for (final point in stroke) Offset(point.dx - (slotWidth * i), point.dy)],
+          [
+            for (final point in stroke)
+              Offset(point.dx - (slotWidth * i), point.dy),
+          ],
       ];
       final result = HandwritingEvaluator.evaluate(
         strokes: local,
@@ -566,22 +752,28 @@ class _MeasurementAuditRunner {
     }
 
     final strokeDelta = (drawnStrokes - expectedTotal).abs().toDouble();
-    final tolerance = expectedTotal >= 12 ? 2 : expectedTotal >= 6 ? 1 : 0;
+    final tolerance = expectedTotal >= 12
+        ? 2
+        : expectedTotal >= 6
+        ? 1
+        : 0;
     final strokeScore = 1.0 - (strokeDelta / (tolerance + 1)).clamp(0.0, 1.0);
     final shapeScore = weightedShape.clamp(0.0, 1.0);
     final orderScore = weightedOrder.clamp(0.0, 1.0);
     final templateScore = weightedTemplate.clamp(0.0, 1.0);
     final totalScore = usedTemplate
         ? ((strokeScore * 0.32) +
-                (shapeScore * 0.23) +
-                (orderScore * 0.17) +
-                (templateScore * 0.28))
-            .clamp(0.0, 1.0)
+                  (shapeScore * 0.23) +
+                  (orderScore * 0.17) +
+                  (templateScore * 0.28))
+              .clamp(0.0, 1.0)
         : ((strokeScore * 0.40) + (shapeScore * 0.35) + (orderScore * 0.25))
-            .clamp(0.0, 1.0);
+              .clamp(0.0, 1.0);
     final requiredScore = showGuide ? 0.58 : 0.68;
     final maxStrokeDelta = tolerance + max(0, templatesForCase.length - 1);
-    final charPassRatio = characterCount == 0 ? 0.0 : (correctCharacters / characterCount);
+    final charPassRatio = characterCount == 0
+        ? 0.0
+        : (correctCharacters / characterCount);
     final isCorrect =
         totalScore >= requiredScore &&
         strokeDelta <= maxStrokeDelta &&
@@ -618,7 +810,9 @@ class _MeasurementAuditRunner {
     if (!result.usedTemplate || result.templateQuality == 'none') {
       return 'template';
     }
-    if (result.templateScore < 0.45 || result.orderScore < 0.45 || result.shapeScore < 0.45) {
+    if (result.templateScore < 0.45 ||
+        result.orderScore < 0.45 ||
+        result.shapeScore < 0.45) {
       return 'normalization';
     }
     return 'threshold';
@@ -688,5 +882,3 @@ List<List<Offset>> _randomNoise({
     );
   });
 }
-
-

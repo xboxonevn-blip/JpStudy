@@ -30,7 +30,9 @@
 - `canonical-content-v2-report.json`
   Active canonical content snapshot for cross-checking release readiness.
 - `handwriting-measurement-audit-report.json`
-  Deterministic handwriting scoring baseline across fixed `single`, `compound`, and `mixed` audit samples.
+  Canonical machine-readable handwriting scoring baseline across fixed audit samples.
+- `handwriting-measurement-audit-report.md`
+  Human-readable summary companion for the handwriting audit JSON, including pass rates and failed-case highlights.
 
 ## Stale Or Legacy Reports
 

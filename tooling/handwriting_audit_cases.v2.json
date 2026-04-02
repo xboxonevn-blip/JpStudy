@@ -1,0 +1,584 @@
+{
+  "version": "2026-04-02-v2",
+  "canvas": {
+    "width": 220,
+    "height": 220
+  },
+  "cases": [
+    {
+      "id": "compound_n4_private_university_accept",
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "characters": [
+        "私",
+        "立",
+        "大",
+        "学"
+      ],
+      "expectedVerdict": "accept",
+      "expectedFailureBucket": "none",
+      "generator": {
+        "kind": "template_match",
+        "seed": 101,
+        "jitter": 0.18
+      },
+      "metadata": {
+        "anchorCharacter": "立",
+        "word": "私立大学",
+        "reading": "しりつだいがく",
+        "meaningEn": "Private university",
+        "meaningVi": "Đại học tư thục",
+        "sourceLessonId": 26,
+        "sourceVocabId": "n4_l26_v067",
+        "sourceSenseId": "n4_l26_s067",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_26.json"
+      }
+    },
+    {
+      "id": "compound_n4_private_university_reverse_third_reject",
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "characters": [
+        "私",
+        "立",
+        "大",
+        "学"
+      ],
+      "expectedVerdict": "reject",
+      "expectedFailureBucket": "threshold",
+      "generator": {
+        "kind": "reverse_character",
+        "seed": 101,
+        "jitter": 0.18,
+        "characterIndex": 2
+      },
+      "metadata": {
+        "anchorCharacter": "立",
+        "word": "私立大学",
+        "reading": "しりつだいがく",
+        "meaningEn": "Private university",
+        "meaningVi": "Đại học tư thục",
+        "sourceLessonId": 26,
+        "sourceVocabId": "n4_l26_v067",
+        "sourceSenseId": "n4_l26_s067",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_26.json"
+      }
+    },
+    {
+      "id": "compound_n4_breeding_accept",
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "characters": [
+        "飼",
+        "育"
+      ],
+      "expectedVerdict": "accept",
+      "expectedFailureBucket": "none",
+      "generator": {
+        "kind": "template_match",
+        "seed": 102,
+        "jitter": 0.2
+      },
+      "metadata": {
+        "anchorCharacter": "飼",
+        "word": "飼育",
+        "reading": "しいく",
+        "meaningEn": "breeding, raising",
+        "meaningVi": "chăn nuôi, gây nuôi",
+        "sourceLessonId": 27,
+        "sourceVocabId": "n4_l27_v064",
+        "sourceSenseId": "n4_l27_s064",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_27.json"
+      }
+    },
+    {
+      "id": "compound_n4_breeding_missing_last_reject",
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "characters": [
+        "飼",
+        "育"
+      ],
+      "expectedVerdict": "reject",
+      "expectedFailureBucket": "normalization",
+      "generator": {
+        "kind": "missing_last",
+        "seed": 102,
+        "jitter": 0.2
+      },
+      "metadata": {
+        "anchorCharacter": "飼",
+        "word": "飼育",
+        "reading": "しいく",
+        "meaningEn": "breeding, raising",
+        "meaningVi": "chăn nuôi, gây nuôi",
+        "sourceLessonId": 27,
+        "sourceVocabId": "n4_l27_v064",
+        "sourceSenseId": "n4_l27_s064",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_27.json"
+      }
+    },
+    {
+      "id": "mixed_n4_small_bird_accept",
+      "sessionMode": "mixed",
+      "targetType": "compound",
+      "level": "N4",
+      "characters": [
+        "小",
+        "鳥"
+      ],
+      "expectedVerdict": "accept",
+      "expectedFailureBucket": "none",
+      "generator": {
+        "kind": "template_match",
+        "seed": 103,
+        "jitter": 0.24
+      },
+      "metadata": {
+        "anchorCharacter": "鳥",
+        "word": "小鳥",
+        "reading": "ことり",
+        "meaningEn": "Small bird",
+        "meaningVi": "Chim non",
+        "sourceLessonId": 27,
+        "sourceVocabId": "n4_l27_v058",
+        "sourceSenseId": "n4_l27_s058",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_27.json"
+      }
+    },
+    {
+      "id": "mixed_n4_small_bird_reverse_second_reject",
+      "sessionMode": "mixed",
+      "targetType": "compound",
+      "level": "N4",
+      "characters": [
+        "小",
+        "鳥"
+      ],
+      "expectedVerdict": "reject",
+      "expectedFailureBucket": "threshold",
+      "generator": {
+        "kind": "reverse_character",
+        "seed": 103,
+        "jitter": 0.24,
+        "characterIndex": 1
+      },
+      "metadata": {
+        "anchorCharacter": "鳥",
+        "word": "小鳥",
+        "reading": "ことり",
+        "meaningEn": "Small bird",
+        "meaningVi": "Chim non",
+        "sourceLessonId": 27,
+        "sourceVocabId": "n4_l27_v058",
+        "sourceSenseId": "n4_l27_s058",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_27.json"
+      }
+    },
+    {
+      "id": "compound_n4_scenery_accept",
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "characters": [
+        "景",
+        "色"
+      ],
+      "expectedVerdict": "accept",
+      "expectedFailureBucket": "none",
+      "generator": {
+        "kind": "template_match",
+        "seed": 104,
+        "jitter": 0.21
+      },
+      "metadata": {
+        "anchorCharacter": "景",
+        "word": "景色",
+        "reading": "けしき",
+        "meaningEn": "scenery / view",
+        "meaningVi": "phong cảnh",
+        "sourceLessonId": 27,
+        "sourceVocabId": "n4_l27_v014",
+        "sourceSenseId": "n4_l27_s014",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_27.json"
+      }
+    },
+    {
+      "id": "compound_n4_scenery_mirror_reject",
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "characters": [
+        "景",
+        "色"
+      ],
+      "expectedVerdict": "reject",
+      "expectedFailureBucket": "threshold",
+      "generator": {
+        "kind": "mirror_horizontal",
+        "seed": 104,
+        "jitter": 0.21
+      },
+      "metadata": {
+        "anchorCharacter": "景",
+        "word": "景色",
+        "reading": "けしき",
+        "meaningEn": "scenery / view",
+        "meaningVi": "phong cảnh",
+        "sourceLessonId": 27,
+        "sourceVocabId": "n4_l27_v014",
+        "sourceSenseId": "n4_l27_s014",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_27.json"
+      }
+    },
+    {
+      "id": "mixed_n4_absorbed_accept",
+      "sessionMode": "mixed",
+      "targetType": "compound",
+      "level": "N4",
+      "characters": [
+        "夢",
+        "中"
+      ],
+      "expectedVerdict": "accept",
+      "expectedFailureBucket": "none",
+      "generator": {
+        "kind": "template_match",
+        "seed": 105,
+        "jitter": 0.19
+      },
+      "metadata": {
+        "anchorCharacter": "夢",
+        "word": "夢中",
+        "reading": "むちゅう",
+        "meaningEn": "absorbed in, immersed in",
+        "meaningVi": "mê mải, say mê",
+        "sourceLessonId": 27,
+        "sourceVocabId": "n4_l27_v063",
+        "sourceSenseId": "n4_l27_s063",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_27.json"
+      }
+    },
+    {
+      "id": "mixed_n4_absorbed_reverse_first_reject",
+      "sessionMode": "mixed",
+      "targetType": "compound",
+      "level": "N4",
+      "characters": [
+        "夢",
+        "中"
+      ],
+      "expectedVerdict": "reject",
+      "expectedFailureBucket": "threshold",
+      "generator": {
+        "kind": "reverse_character",
+        "seed": 105,
+        "jitter": 0.19,
+        "characterIndex": 0
+      },
+      "metadata": {
+        "anchorCharacter": "夢",
+        "word": "夢中",
+        "reading": "むちゅう",
+        "meaningEn": "absorbed in, immersed in",
+        "meaningVi": "mê mải, say mê",
+        "sourceLessonId": 27,
+        "sourceVocabId": "n4_l27_v063",
+        "sourceSenseId": "n4_l27_s063",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_27.json"
+      }
+    },
+    {
+      "id": "compound_n4_closing_accept",
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "characters": [
+        "閉",
+        "会"
+      ],
+      "expectedVerdict": "accept",
+      "expectedFailureBucket": "none",
+      "generator": {
+        "kind": "template_match",
+        "seed": 106,
+        "jitter": 0.18
+      },
+      "metadata": {
+        "anchorCharacter": "閉",
+        "word": "閉会",
+        "reading": "へいかい",
+        "meaningEn": "closure (of a ceremony, event, meeting, etc.)",
+        "meaningVi": "bế mạc",
+        "sourceLessonId": 29,
+        "sourceVocabId": "n4_l29_v068",
+        "sourceSenseId": "n4_l29_s068",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_29.json"
+      }
+    },
+    {
+      "id": "compound_n4_closing_extra_stroke_reject",
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "characters": [
+        "閉",
+        "会"
+      ],
+      "expectedVerdict": "reject",
+      "expectedFailureBucket": "threshold",
+      "generator": {
+        "kind": "extra_stroke",
+        "seed": 106,
+        "jitter": 0.18
+      },
+      "metadata": {
+        "anchorCharacter": "閉",
+        "word": "閉会",
+        "reading": "へいかい",
+        "meaningEn": "closure (of a ceremony, event, meeting, etc.)",
+        "meaningVi": "bế mạc",
+        "sourceLessonId": 29,
+        "sourceVocabId": "n4_l29_v068",
+        "sourceSenseId": "n4_l29_s068",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_29.json"
+      }
+    },
+    {
+      "id": "compound_n4_method_accept",
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "characters": [
+        "方",
+        "法"
+      ],
+      "expectedVerdict": "accept",
+      "expectedFailureBucket": "none",
+      "generator": {
+        "kind": "template_match",
+        "seed": 107,
+        "jitter": 0.2
+      },
+      "metadata": {
+        "anchorCharacter": "法",
+        "word": "方法",
+        "reading": "ほうほう",
+        "meaningEn": "method",
+        "meaningVi": "phương pháp",
+        "sourceLessonId": 35,
+        "sourceVocabId": "n4_l35_v024",
+        "sourceSenseId": "n4_l35_s024",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_35.json"
+      }
+    },
+    {
+      "id": "compound_n4_method_reverse_second_reject",
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "characters": [
+        "方",
+        "法"
+      ],
+      "expectedVerdict": "reject",
+      "expectedFailureBucket": "threshold",
+      "generator": {
+        "kind": "reverse_character",
+        "seed": 107,
+        "jitter": 0.2,
+        "characterIndex": 1
+      },
+      "metadata": {
+        "anchorCharacter": "法",
+        "word": "方法",
+        "reading": "ほうほう",
+        "meaningEn": "method",
+        "meaningVi": "phương pháp",
+        "sourceLessonId": 35,
+        "sourceVocabId": "n4_l35_v024",
+        "sourceSenseId": "n4_l35_s024",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_35.json"
+      }
+    },
+    {
+      "id": "compound_n4_grammar_accept",
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "characters": [
+        "文",
+        "法"
+      ],
+      "expectedVerdict": "accept",
+      "expectedFailureBucket": "none",
+      "generator": {
+        "kind": "template_match",
+        "seed": 108,
+        "jitter": 0.17
+      },
+      "metadata": {
+        "anchorCharacter": "法",
+        "word": "文法",
+        "reading": "ぶんぽう",
+        "meaningEn": "grammar",
+        "meaningVi": "ngữ pháp",
+        "sourceLessonId": 41,
+        "sourceVocabId": "n4_l41_v014",
+        "sourceSenseId": "n4_l41_s014",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_41.json"
+      }
+    },
+    {
+      "id": "compound_n4_grammar_missing_last_reject",
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "characters": [
+        "文",
+        "法"
+      ],
+      "expectedVerdict": "reject",
+      "expectedFailureBucket": "normalization",
+      "generator": {
+        "kind": "missing_last",
+        "seed": 108,
+        "jitter": 0.17
+      },
+      "metadata": {
+        "anchorCharacter": "法",
+        "word": "文法",
+        "reading": "ぶんぽう",
+        "meaningEn": "grammar",
+        "meaningVi": "ngữ pháp",
+        "sourceLessonId": 41,
+        "sourceVocabId": "n4_l41_v014",
+        "sourceSenseId": "n4_l41_s014",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_41.json"
+      }
+    },
+    {
+      "id": "compound_n4_education_accept",
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "characters": [
+        "教",
+        "育"
+      ],
+      "expectedVerdict": "accept",
+      "expectedFailureBucket": "none",
+      "generator": {
+        "kind": "template_match",
+        "seed": 109,
+        "jitter": 0.16
+      },
+      "metadata": {
+        "anchorCharacter": "育",
+        "word": "教育",
+        "reading": "きょういく",
+        "meaningEn": "education",
+        "meaningVi": "giáo dục",
+        "sourceLessonId": 42,
+        "sourceVocabId": "n4_l42_v012",
+        "sourceSenseId": "n4_l42_s012",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_42.json"
+      }
+    },
+    {
+      "id": "compound_n4_education_mirror_reject",
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "characters": [
+        "教",
+        "育"
+      ],
+      "expectedVerdict": "reject",
+      "expectedFailureBucket": "threshold",
+      "generator": {
+        "kind": "mirror_horizontal",
+        "seed": 109,
+        "jitter": 0.16
+      },
+      "metadata": {
+        "anchorCharacter": "育",
+        "word": "教育",
+        "reading": "きょういく",
+        "meaningEn": "education",
+        "meaningVi": "giáo dục",
+        "sourceLessonId": 42,
+        "sourceVocabId": "n4_l42_v012",
+        "sourceSenseId": "n4_l42_s012",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_42.json"
+      }
+    },
+    {
+      "id": "compound_n4_married_couple_template_reject",
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "characters": [
+        "夫",
+        "婦"
+      ],
+      "expectedVerdict": "reject",
+      "expectedFailureBucket": "template",
+      "generator": {
+        "kind": "template_match",
+        "seed": 110,
+        "jitter": 0.16
+      },
+      "metadata": {
+        "anchorCharacter": "夫",
+        "word": "夫婦",
+        "reading": "ふうふ",
+        "meaningEn": "Married couple",
+        "meaningVi": "Vợ chồng",
+        "sourceLessonId": 26,
+        "sourceVocabId": "n4_l26_v068",
+        "sourceSenseId": "n4_l26_s068",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_26.json",
+        "expectedMissingTemplates": [
+          "婦"
+        ]
+      }
+    },
+    {
+      "id": "compound_n4_gymnasium_template_reject",
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "characters": [
+        "体",
+        "育",
+        "館"
+      ],
+      "expectedVerdict": "reject",
+      "expectedFailureBucket": "template",
+      "generator": {
+        "kind": "template_match",
+        "seed": 111,
+        "jitter": 0.16
+      },
+      "metadata": {
+        "anchorCharacter": "育",
+        "word": "体育館",
+        "reading": "たいいくかん",
+        "meaningEn": "gymnasium",
+        "meaningVi": "nhà thi đấu, phòng tập thể dục",
+        "sourceLessonId": 28,
+        "sourceVocabId": "n4_l28_v048",
+        "sourceSenseId": "n4_l28_s048",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_28.json",
+        "expectedMissingTemplates": [
+          "館"
+        ]
+      }
+    }
+  ]
+}
