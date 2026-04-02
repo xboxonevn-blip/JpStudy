@@ -75,7 +75,9 @@ void main() {
               count: 3,
             ),
           ),
-          grammarGhostCountProvider.overrideWith((ref) async => 0),
+          grammarGhostCountProvider.overrideWith((ref) async* {
+            yield 0;
+          }),
           weaknessRadarProvider.overrideWith((ref) async => <WeaknessRadarItem>[]),
           recoveryPackProvider.overrideWith((ref) async => null),
           dailySessionProgressProvider.overrideWith(

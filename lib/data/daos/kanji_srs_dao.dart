@@ -59,6 +59,31 @@ class KanjiSrsDao extends DatabaseAccessor<AppDatabase>
     )..where((t) => t.nextReviewAt.isSmallerOrEqualValue(now))).get();
   }
 
+  /// One-shot due count — cheaper than getDueReviews().length.
+  Future<int> getDueReviewCount() async {
+    final countExpr = kanjiSrsState.kanjiId.count();
+    final row = await (selectOnly(kanjiSrsState)
+          ..addColumns([countExpr])
+          ..where(
+            kanjiSrsState.nextReviewAt.isSmallerOrEqualValue(DateTime.now()),
+          ))
+        .getSingle();
+    return row.read(countExpr) ?? 0;
+  }
+
+  /// COUNT of items that are both due now AND have stability < 1.0 (critical).
+  Future<int> getCriticalDueCount() async {
+    final countExpr = kanjiSrsState.kanjiId.count();
+    final row = await (selectOnly(kanjiSrsState)
+          ..addColumns([countExpr])
+          ..where(
+            kanjiSrsState.nextReviewAt.isSmallerOrEqualValue(DateTime.now()) &
+                kanjiSrsState.stability.isSmallerThanValue(1.0),
+          ))
+        .getSingle();
+    return row.read(countExpr) ?? 0;
+  }
+
   /// Returns the nearest future review date (nextReviewAt > now).
   /// Returns null if all reviews are past-due or no state exists.
   Future<DateTime?> getNextScheduledReview() async {
@@ -75,6 +100,18 @@ class KanjiSrsDao extends DatabaseAccessor<AppDatabase>
   Future<List<int>> getAllSeenKanjiIds() {
     return (selectOnly(kanjiSrsState)..addColumns([kanjiSrsState.kanjiId]))
         .map((row) => row.read(kanjiSrsState.kanjiId)!)
+        .get();
+  }
+
+  /// Returns only the kanjiId values for due SRS items.
+  Future<List<int>> getDueKanjiIds() {
+    final idExpr = kanjiSrsState.kanjiId;
+    return (selectOnly(kanjiSrsState)
+          ..addColumns([idExpr])
+          ..where(
+            kanjiSrsState.nextReviewAt.isSmallerOrEqualValue(DateTime.now()),
+          ))
+        .map((row) => row.read(idExpr)!)
         .get();
   }
 

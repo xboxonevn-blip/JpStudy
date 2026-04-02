@@ -183,7 +183,9 @@ void main() {
             ),
           ),
           weaknessRadarProvider.overrideWith((ref) async => const []),
-          grammarGhostCountProvider.overrideWith((ref) async => 0),
+          grammarGhostCountProvider.overrideWith((ref) async* {
+            yield 0;
+          }),
         ],
         child: const MaterialApp(home: PracticeScreen()),
       ),
@@ -231,7 +233,9 @@ void main() {
               ),
             ),
             weaknessRadarProvider.overrideWith((ref) async => const []),
-            grammarGhostCountProvider.overrideWith((ref) async => 0),
+            grammarGhostCountProvider.overrideWith((ref) async* {
+              yield 0;
+            }),
           ],
           child: const MaterialApp(home: PracticeScreen()),
         ),

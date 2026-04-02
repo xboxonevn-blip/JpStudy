@@ -58,8 +58,12 @@ void main() {
             label: 'practice',
           ),
         ),
-        grammarGhostCountProvider.overrideWith((_) async => 0),
-        vocabGhostCountProvider.overrideWith((_) async => 0),
+        grammarGhostCountProvider.overrideWith((_) async* {
+          yield 0;
+        }),
+        vocabGhostCountProvider.overrideWith((_) async* {
+          yield 0;
+        }),
         vocabGhostsProvider.overrideWith((_) async => const []),
         if (recoveryPack != null)
           recoveryPackProvider.overrideWith((_) async => recoveryPack),

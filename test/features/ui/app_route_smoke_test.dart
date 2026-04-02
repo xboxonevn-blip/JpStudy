@@ -18,6 +18,7 @@ import 'package:jpstudy/data/db/content_database.dart';
 import 'package:jpstudy/data/db/database_provider.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/grammar/services/grammar_question_generator.dart';
+import 'package:jpstudy/features/grammar/grammar_providers.dart';
 import 'package:jpstudy/features/home/providers/backup_status_provider.dart';
 import 'package:jpstudy/features/home/providers/cloud_sync_status_provider.dart';
 import 'package:jpstudy/features/home/providers/continue_provider.dart';
@@ -29,6 +30,7 @@ import 'package:jpstudy/features/immersion/providers/immersion_providers.dart';
 import 'package:jpstudy/features/immersion/services/immersion_service.dart';
 import 'package:jpstudy/features/progress/providers/mastery_provider.dart';
 import 'package:jpstudy/features/search/search_screen.dart';
+import 'package:jpstudy/features/vocab/vocab_ghost_providers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class _FakeImmersionService extends ImmersionService {
@@ -189,6 +191,11 @@ void main() {
               ),
             ),
           ),
+          grammarGhostCountProvider.overrideWith((ref) => Stream.value(0)),
+          vocabGhostCountProvider.overrideWith((ref) => Stream.value(0)),
+          nextVocabReviewProvider.overrideWith((ref) => Stream.value(null)),
+          nextKanjiReviewProvider.overrideWith((ref) => Stream.value(null)),
+          nextGrammarReviewProvider.overrideWith((ref) => Stream.value(null)),
           continueActionProvider.overrideWith(
             (ref) async => const ContinueAction(
               type: ContinueActionType.vocabReview,

@@ -105,7 +105,9 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
   // adding latency of every fetch to the total.  Now total latency ≈ slowest
   // single fetch.  minnaN5/N4 use COUNT queries instead of full row fetches
   // (vocab data is only needed for the other levels, not minna companion counts).
-  final dueCountFuture = ref.watch(dueVocabCountProvider.future);
+  final dueCountFuture = ref.watch(allDueTermsProvider.future).then(
+    (items) => items.length,
+  );
   final nextReviewFuture = ref.watch(nextVocabReviewProvider.future);
   final n5Future = repo.getVocabByLevelAndSeries('N5', 'hajimete');
   final n4Future = repo.getVocabByLevelAndSeries('N4', 'hajimete');
@@ -116,18 +118,22 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
   final shinkanzenN3SummaryFuture = _loadShinkanzenManifestSummary('N3');
   final shinkanzenN2SummaryFuture = _loadShinkanzenManifestSummary('N2');
   final shinkanzenN1SummaryFuture = _loadShinkanzenManifestSummary('N1');
-  final minnaN5CountFuture = repo.countVocabByLessonRange(
-    'N5',
-    startLesson: 1,
-    endLesson: 25,
-    series: 'minna',
-  );
-  final minnaN4CountFuture = repo.countVocabByLessonRange(
-    'N4',
-    startLesson: 26,
-    endLesson: 50,
-    series: 'minna',
-  );
+  final minnaN5CountFuture = repo
+      .getVocabByLessonRange(
+        'N5',
+        startLesson: 1,
+        endLesson: 25,
+        series: 'minna',
+      )
+      .then((items) => items.length);
+  final minnaN4CountFuture = repo
+      .getVocabByLessonRange(
+        'N4',
+        startLesson: 26,
+        endLesson: 50,
+        series: 'minna',
+      )
+      .then((items) => items.length);
 
   final dueCount = await dueCountFuture;
   final nextReview = await nextReviewFuture;

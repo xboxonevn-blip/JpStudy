@@ -86,8 +86,12 @@ void main() {
           dashboardProvider.overrideWith(
             (_) => Stream.value(buildDashboard(grammarDue: 3)),
           ),
-          grammarGhostCountProvider.overrideWith((_) async => 0),
-          vocabGhostCountProvider.overrideWith((_) async => 0),
+          grammarGhostCountProvider.overrideWith((_) async* {
+            yield 0;
+          }),
+          vocabGhostCountProvider.overrideWith((_) async* {
+            yield 0;
+          }),
           nextVocabReviewProvider.overrideWith((_) => Stream.value(null)),
           nextKanjiReviewProvider.overrideWith((_) => Stream.value(null)),
           nextGrammarReviewProvider.overrideWith((_) => Stream.value(null)),
@@ -127,8 +131,12 @@ void main() {
       ProviderScope(
         overrides: [
           dashboardProvider.overrideWith((_) => Stream.value(buildDashboard())),
-          grammarGhostCountProvider.overrideWith((_) async => 2),
-          vocabGhostCountProvider.overrideWith((_) async => 0),
+          grammarGhostCountProvider.overrideWith((_) async* {
+            yield 2;
+          }),
+          vocabGhostCountProvider.overrideWith((_) async* {
+            yield 0;
+          }),
           nextVocabReviewProvider.overrideWith((_) => Stream.value(null)),
           nextKanjiReviewProvider.overrideWith((_) => Stream.value(null)),
           nextGrammarReviewProvider.overrideWith((_) => Stream.value(null)),
@@ -171,8 +179,12 @@ void main() {
           dashboardProvider.overrideWith(
             (_) => Stream.value(buildDashboard(vocabDue: 4)),
           ),
-          grammarGhostCountProvider.overrideWith((_) async => 0),
-          vocabGhostCountProvider.overrideWith((_) async => 0),
+          grammarGhostCountProvider.overrideWith((_) async* {
+            yield 0;
+          }),
+          vocabGhostCountProvider.overrideWith((_) async* {
+            yield 0;
+          }),
           nextVocabReviewProvider.overrideWith((_) => Stream.value(null)),
           nextKanjiReviewProvider.overrideWith((_) => Stream.value(null)),
           nextGrammarReviewProvider.overrideWith((_) => Stream.value(null)),
@@ -216,8 +228,12 @@ void main() {
           dashboardProvider.overrideWith(
             (_) => Stream.value(buildDashboard(kanjiDue: 2)),
           ),
-          grammarGhostCountProvider.overrideWith((_) async => 0),
-          vocabGhostCountProvider.overrideWith((_) async => 0),
+          grammarGhostCountProvider.overrideWith((_) async* {
+            yield 0;
+          }),
+          vocabGhostCountProvider.overrideWith((_) async* {
+            yield 0;
+          }),
           nextVocabReviewProvider.overrideWith((_) => Stream.value(null)),
           nextKanjiReviewProvider.overrideWith((_) => Stream.value(null)),
           nextGrammarReviewProvider.overrideWith((_) => Stream.value(null)),
@@ -259,8 +275,12 @@ void main() {
       ProviderScope(
         overrides: [
           dashboardProvider.overrideWith((_) => Stream.value(buildDashboard())),
-          grammarGhostCountProvider.overrideWith((_) async => 0),
-          vocabGhostCountProvider.overrideWith((_) async => 0),
+          grammarGhostCountProvider.overrideWith((_) async* {
+            yield 0;
+          }),
+          vocabGhostCountProvider.overrideWith((_) async* {
+            yield 0;
+          }),
           nextVocabReviewProvider.overrideWith((_) => Stream.value(null)),
           nextKanjiReviewProvider.overrideWith((_) => Stream.value(null)),
           nextGrammarReviewProvider.overrideWith((_) => Stream.value(null)),

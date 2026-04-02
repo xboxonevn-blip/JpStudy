@@ -109,7 +109,7 @@ final dailyPlanProvider = FutureProvider<DailyPlan>((ref) async {
 
   // ── Priority 1: Fix mistakes ──────────────────────────────────
   if (dashboard.totalMistakeCount > 0) {
-    final count = dashboard.totalMistakeCount.clamp(1, 10);
+    final count = dashboard.totalMistakeCount.clamp(1, 10).toInt();
     steps.add(PlanStep(
       type: PlanStepType.mistakeFix,
       count: count,
@@ -121,7 +121,7 @@ final dailyPlanProvider = FutureProvider<DailyPlan>((ref) async {
 
   // ── Priority 2: Critical SRS reviews (stability < 1.0) ───────
   if (criticalVocab > 0) {
-    final count = criticalVocab.clamp(1, 20);
+    final count = criticalVocab.clamp(1, 20).toInt();
     steps.add(PlanStep(
       type: PlanStepType.vocabReview,
       count: count,
@@ -142,7 +142,7 @@ final dailyPlanProvider = FutureProvider<DailyPlan>((ref) async {
     ));
   }
   if (criticalGrammar > 0) {
-    final count = criticalGrammar.clamp(1, 10);
+    final count = criticalGrammar.clamp(1, 10).toInt();
     steps.add(PlanStep(
       type: PlanStepType.grammarReview,
       count: count,
@@ -152,7 +152,7 @@ final dailyPlanProvider = FutureProvider<DailyPlan>((ref) async {
     ));
   }
   if (criticalKanji > 0) {
-    final count = criticalKanji.clamp(1, 10);
+    final count = criticalKanji.clamp(1, 10).toInt();
     steps.add(PlanStep(
       type: PlanStepType.kanjiReview,
       count: count,
@@ -170,7 +170,7 @@ final dailyPlanProvider = FutureProvider<DailyPlan>((ref) async {
   // ── Priority 3: Regular due reviews ───────────────────────────
   final remainingVocab = dashboard.vocabDue - criticalVocab;
   if (remainingVocab > 0) {
-    final count = remainingVocab.clamp(1, 30);
+    final count = remainingVocab.clamp(1, 30).toInt();
     steps.add(PlanStep(
       type: PlanStepType.vocabReview,
       count: count,
@@ -192,7 +192,7 @@ final dailyPlanProvider = FutureProvider<DailyPlan>((ref) async {
   }
   final remainingGrammar = dashboard.grammarDue - criticalGrammar;
   if (remainingGrammar > 0) {
-    final count = remainingGrammar.clamp(1, 15);
+    final count = remainingGrammar.clamp(1, 15).toInt();
     steps.add(PlanStep(
       type: PlanStepType.grammarReview,
       count: count,
@@ -203,7 +203,7 @@ final dailyPlanProvider = FutureProvider<DailyPlan>((ref) async {
   }
   final remainingKanji = dashboard.kanjiDue - criticalKanji;
   if (remainingKanji > 0) {
-    final count = remainingKanji.clamp(1, 15);
+    final count = remainingKanji.clamp(1, 15).toInt();
     steps.add(PlanStep(
       type: PlanStepType.kanjiReview,
       count: count,
@@ -273,8 +273,8 @@ final dailyPlanProvider = FutureProvider<DailyPlan>((ref) async {
   // On first build today, save the count so subsequent rebuilds
   // (triggered as tasks are completed and steps shrink) can compute
   // progress = 1 - currentSteps / originalCount.
-  const _planDateKey = 'daily.plan.date';
-  const _planOriginalCountKey = 'daily.plan.originalCount';
+  const planDateKey = 'daily.plan.date';
+  const planOriginalCountKey = 'daily.plan.originalCount';
   final now = DateTime.now();
   final todayKey =
       '${now.year.toString().padLeft(4, '0')}-'
@@ -282,13 +282,13 @@ final dailyPlanProvider = FutureProvider<DailyPlan>((ref) async {
       '${now.day.toString().padLeft(2, '0')}';
   final prefs = await SharedPreferences.getInstance();
   int originalStepCount;
-  if (prefs.getString(_planDateKey) == todayKey) {
-    originalStepCount = prefs.getInt(_planOriginalCountKey) ?? steps.length;
+  if (prefs.getString(planDateKey) == todayKey) {
+    originalStepCount = prefs.getInt(planOriginalCountKey) ?? steps.length;
   } else {
     originalStepCount = steps.length;
     if (steps.isNotEmpty) {
-      await prefs.setString(_planDateKey, todayKey);
-      await prefs.setInt(_planOriginalCountKey, steps.length);
+      await prefs.setString(planDateKey, todayKey);
+      await prefs.setInt(planOriginalCountKey, steps.length);
     }
   }
 

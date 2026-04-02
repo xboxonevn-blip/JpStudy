@@ -81,8 +81,12 @@ Widget buildScreen(app_db.AppDatabase db) => ProviderScope(
         recoveryPackProvider.overrideWith((ref) async => null),
         dashboardProvider.overrideWith((ref) => Stream.value(_dashboard)),
         continueActionProvider.overrideWith((ref) async => _continueAction),
-        grammarGhostCountProvider.overrideWith((ref) async => 0),
-        vocabGhostCountProvider.overrideWith((ref) async => 0),
+        grammarGhostCountProvider.overrideWith((ref) async* {
+          yield 0;
+        }),
+        vocabGhostCountProvider.overrideWith((ref) async* {
+          yield 0;
+        }),
         vocabGhostsProvider.overrideWith((ref) async => const []),
       ],
       child: MaterialApp(

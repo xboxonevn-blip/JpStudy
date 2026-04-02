@@ -130,9 +130,13 @@ class MistakeDao extends DatabaseAccessor<AppDatabase> with _$MistakeDaoMixin {
           for (final row in rows) {
             final t = row.read(typeCol);
             final c = row.read(countExpr) ?? 0;
-            if (t == 'vocab') vocab = c;
-            else if (t == 'grammar') grammar = c;
-            else if (t == 'kanji') kanji = c;
+            if (t == 'vocab') {
+              vocab = c;
+            } else if (t == 'grammar') {
+              grammar = c;
+            } else if (t == 'kanji') {
+              kanji = c;
+            }
           }
           return (vocab: vocab, grammar: grammar, kanji: kanji, total: vocab + grammar + kanji);
         });
@@ -150,9 +154,13 @@ class MistakeDao extends DatabaseAccessor<AppDatabase> with _$MistakeDaoMixin {
     for (final row in rows) {
       final t = row.read(typeCol);
       final c = row.read(countExpr) ?? 0;
-      if (t == 'vocab') vocab = c;
-      else if (t == 'grammar') grammar = c;
-      else if (t == 'kanji') kanji = c;
+      if (t == 'vocab') {
+        vocab = c;
+      } else if (t == 'grammar') {
+        grammar = c;
+      } else if (t == 'kanji') {
+        kanji = c;
+      }
     }
     return (vocab: vocab, grammar: grammar, kanji: kanji, total: vocab + grammar + kanji);
   }

@@ -11,7 +11,7 @@ JpStudy-v2 is a local-first Flutter app for Japanese study that combines JLPT co
 
 ## Audit Snapshot
 
-Verified locally on `2026-03-30`:
+Verified locally on `2026-04-02`:
 
 - `flutter analyze` passed
 - `flutter test` passed (`1330` passing tests reported by Flutter)

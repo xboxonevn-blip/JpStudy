@@ -37,7 +37,9 @@ void main() {
       ProviderScope(
         overrides: [
           dashboardProvider.overrideWith((_) => Stream.value(buildDashboard())),
-          grammarGhostCountProvider.overrideWith((_) async => 0),
+          grammarGhostCountProvider.overrideWith((_) async* {
+            yield 0;
+          }),
         ],
         child: const MaterialApp(
           home: Scaffold(

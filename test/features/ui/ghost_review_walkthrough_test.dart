@@ -8,6 +8,7 @@ import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/db/database_provider.dart';
 import 'package:jpstudy/features/common/widgets/clay_card.dart';
+import 'package:jpstudy/features/grammar/grammar_providers.dart';
 import 'package:jpstudy/features/grammar/grammar_screen.dart';
 import 'package:jpstudy/features/grammar/screens/ghost_review_screen.dart';
 import 'package:jpstudy/features/grammar/screens/grammar_practice_screen.dart';
@@ -156,7 +157,10 @@ void main() {
 
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [databaseProvider.overrideWithValue(db)],
+        overrides: [
+          databaseProvider.overrideWithValue(db),
+          grammarGhostCountProvider.overrideWith((ref) => Stream.value(1)),
+        ],
         child: MaterialApp.router(routerConfig: buildGrammarRouter()),
       ),
     );

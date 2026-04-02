@@ -45,7 +45,9 @@ Widget _buildScreen({
             ),
       ),
       weaknessRadarProvider.overrideWith((ref) async => weaknessItems),
-      grammarGhostCountProvider.overrideWith((ref) async => grammarGhostCount),
+      grammarGhostCountProvider.overrideWith((ref) async* {
+        yield grammarGhostCount;
+      }),
     ],
     child: const MaterialApp(home: PracticeScreen()),
   );
