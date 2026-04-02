@@ -106,6 +106,7 @@ The roadmap is on track when:
 - repo map: `PROJECT_STRUCTURE.md`
 - docs index: `docs/README.md`
 - active execution plan: `docs/plans/2026-03-24-grammar-hardening-execution-plan.md`
+- handwriting audit note: `docs/notes/2026-04-02-handwriting-measurement-audit.md`
 - app architecture: `lib/README.md`
 - tooling index: `tooling/README.md`
 - test strategy: `test/README.md`
