@@ -12,16 +12,16 @@ final grammarPointsProvider = FutureProvider.family<List<GrammarPoint>, String>(
 
 final grammarDueCountProvider = FutureProvider<int>((ref) async {
   final repo = ref.watch(grammarRepositoryProvider);
-  final points = await repo.fetchDuePoints();
-  return points.length;
+  return repo.db.grammarDao.getDueReviewCount();
 });
 
-// Count is derived from grammarRepository.fetchGhostPoints() (ghostReviewsDue > 0),
-// same source as grammarGhostsProvider and GhostReviewScreen — badge and screen agree.
-final grammarGhostCountProvider = FutureProvider<int>((ref) async {
+// Reactive count of grammar ghost reviews — backed by watchGhostReviewCount()
+// so the badge updates immediately after a ghost session without needing
+// manual provider invalidation (unlike a FutureProvider which would only
+// refresh on next rebuild).
+final grammarGhostCountProvider = StreamProvider<int>((ref) {
   final repo = ref.watch(grammarRepositoryProvider);
-  final points = await repo.fetchGhostPoints();
-  return points.length;
+  return repo.db.grammarDao.watchGhostReviewCount();
 });
 
 final nextGrammarReviewProvider = StreamProvider.autoDispose<DateTime?>((
@@ -38,12 +38,23 @@ final grammarGhostsProvider = FutureProvider<List<GrammarPointData>>((
 ) async {
   final repo = ref.watch(grammarRepositoryProvider);
   final points = await repo.fetchGhostPoints();
+  if (points.isEmpty) return const [];
 
-final details = await Future.wait(
-    points.map((p) => repo.getGrammarDetail(p.id)),
-  );
+  // Batch-fetch all examples in one query — avoids N*2 queries from Future.wait(getGrammarDetail).
+  final pointIds = points.map((p) => p.id).toList();
+  final allExamples = await (repo.db.select(repo.db.grammarExamples)
+        ..where((tbl) => tbl.grammarId.isIn(pointIds)))
+      .get();
+  final examplesByGrammarId = <int, List<GrammarExample>>{};
+  for (final example in allExamples) {
+    examplesByGrammarId.putIfAbsent(example.grammarId, () => []).add(example);
+  }
+
   return [
-    for (final d in details)
-      if (d != null) GrammarPointData(point: d.point, examples: d.examples),
+    for (final point in points)
+      GrammarPointData(
+        point: point,
+        examples: examplesByGrammarId[point.id] ?? const [],
+      ),
   ];
 });

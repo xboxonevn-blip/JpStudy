@@ -85,6 +85,17 @@ class SrsDao extends DatabaseAccessor<AppDatabase> with _$SrsDaoMixin {
     return row?.nextReviewAt;
   }
 
+  /// One-shot due count — cheaper than getDueReviews().length as it runs
+  /// a COUNT(*) query instead of fetching all rows.
+  Future<int> getDueReviewCount() async {
+    final countExpr = srsState.vocabId.count();
+    final row = await (selectOnly(srsState)
+          ..addColumns([countExpr])
+          ..where(srsState.nextReviewAt.isSmallerOrEqualValue(DateTime.now())))
+        .getSingle();
+    return row.read(countExpr) ?? 0;
+  }
+
   /// Reactive due count used by dashboard and home indicators.
   Stream<int> watchDueReviewCount() {
     final countExpr = srsState.vocabId.count();
@@ -95,23 +106,58 @@ class SrsDao extends DatabaseAccessor<AppDatabase> with _$SrsDaoMixin {
         .watchSingle();
   }
 
+  /// Batch-fetch SRS states for multiple vocab IDs in a single query.
+  /// Replaces the N+1 pattern of calling [getSrsState] per term in a loop.
+  Future<Map<int, SrsStateData>> getStatesForIds(List<int> vocabIds) async {
+    if (vocabIds.isEmpty) return const {};
+    final rows = await (select(srsState)
+          ..where((t) => t.vocabId.isIn(vocabIds)))
+        .get();
+    return {for (final r in rows) r.vocabId: r};
+  }
+
+  /// COUNT of items that are both due now AND have stability < 1.0 (critical).
+  /// Used by dailyPlanProvider to avoid fetching full rows for counting.
+  Future<int> getCriticalDueCount() async {
+    final countExpr = srsState.vocabId.count();
+    final row = await (selectOnly(srsState)
+          ..addColumns([countExpr])
+          ..where(
+            srsState.nextReviewAt.isSmallerOrEqualValue(DateTime.now()) &
+                srsState.stability.isSmallerThanValue(1.0),
+          ))
+        .getSingle();
+    return row.read(countExpr) ?? 0;
+  }
+
   /// Returns counts of SRS items in each FSRS stability bracket.
   /// Only items that have been reviewed at least once are counted.
+  ///
+  /// Uses a single SQL pass with conditional SUM expressions, reducing
+  /// three separate COUNT queries down to one round-trip:
+  ///   SELECT SUM(CASE WHEN stability < 1   THEN 1 ELSE 0 END),
+  ///          SUM(CASE WHEN stability < 21  THEN 1 ELSE 0 END) — subtracted later,
+  ///          SUM(CASE WHEN stability >= 21 THEN 1 ELSE 0 END)
+  ///   FROM srs_state WHERE last_reviewed_at IS NOT NULL
   Future<SrsStageBreakdown> getStageBreakdown() async {
-    final rows = await (select(
-      srsState,
-    )..where((t) => t.lastReviewedAt.isNotNull())).get();
-    int learning = 0, young = 0, mature = 0;
-    for (final r in rows) {
-      final s = r.stability;
-      if (s < 1.0) {
-        learning++;
-      } else if (s < 21.0) {
-        young++;
-      } else {
-        mature++;
-      }
+    final rows = await customSelect(
+      'SELECT '
+      'SUM(CASE WHEN stability < 1.0                        THEN 1 ELSE 0 END) AS learning, '
+      'SUM(CASE WHEN stability >= 1.0 AND stability < 21.0  THEN 1 ELSE 0 END) AS young, '
+      'SUM(CASE WHEN stability >= 21.0                      THEN 1 ELSE 0 END) AS mature '
+      'FROM srs_state '
+      'WHERE last_reviewed_at IS NOT NULL',
+      readsFrom: {srsState},
+    ).get();
+
+    if (rows.isEmpty) {
+      return const SrsStageBreakdown(learning: 0, young: 0, mature: 0);
     }
-    return SrsStageBreakdown(learning: learning, young: young, mature: mature);
+    final row = rows.first;
+    return SrsStageBreakdown(
+      learning: row.read<int?>('learning') ?? 0,
+      young: row.read<int?>('young') ?? 0,
+      mature: row.read<int?>('mature') ?? 0,
+    );
   }
 }

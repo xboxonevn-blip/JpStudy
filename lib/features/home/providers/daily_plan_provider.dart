@@ -8,6 +8,7 @@ import 'package:jpstudy/features/kanji_hub/models/kanji_practice_args.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/vocab/models/vocab_review_args.dart';
 import 'package:jpstudy/features/vocab/vocab_copy.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // ---------------------------------------------------------------------------
 // Models
@@ -41,6 +42,7 @@ class DailyPlan {
     required this.totalMinutes,
     required this.totalItems,
     required this.completedSteps,
+    this.originalStepCount,
   });
 
   final List<PlanStep> steps;
@@ -50,6 +52,10 @@ class DailyPlan {
   /// Indices of steps already completed today (persisted separately).
   final Set<int> completedSteps;
 
+  /// Step count when the plan was first built today (saved to SharedPreferences).
+  /// Used to compute [progress] accurately as steps get completed and disappear.
+  final int? originalStepCount;
+
   int get remainingMinutes {
     int sum = 0;
     for (int i = 0; i < steps.length; i++) {
@@ -58,8 +64,16 @@ class DailyPlan {
     return sum;
   }
 
-  double get progress =>
-      steps.isEmpty ? 0 : completedSteps.length / steps.length;
+  /// Fraction of the original plan that has been completed.
+  /// Uses [originalStepCount] so the bar moves as tasks are finished
+  /// (and disappear from [steps]) throughout the day.
+  double get progress {
+    final original = originalStepCount;
+    if (original == null || original == 0) {
+      return steps.isEmpty ? 0 : completedSteps.length / steps.length;
+    }
+    return (1.0 - steps.length / original).clamp(0.0, 1.0);
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -81,30 +95,15 @@ final dailyPlanProvider = FutureProvider<DailyPlan>((ref) async {
     );
   }
 
-  // Fetch critical (low-stability) counts for prioritization.
-  final allVocab = await db.select(db.srsState).get();
-  final allGrammar = await db.select(db.grammarSrsState).get();
-  final allKanji = await db.select(db.kanjiSrsState).get();
-
-  int criticalVocab = 0, criticalGrammar = 0, criticalKanji = 0;
-  for (final s in allVocab) {
-    if (s.stability < 1.0 &&
-        s.nextReviewAt.isBefore(DateTime.now())) {
-      criticalVocab++;
-    }
-  }
-  for (final s in allGrammar) {
-    if (s.stability < 1.0 &&
-        s.nextReviewAt.isBefore(DateTime.now())) {
-      criticalGrammar++;
-    }
-  }
-  for (final s in allKanji) {
-    if (s.stability < 1.0 &&
-        s.nextReviewAt.isBefore(DateTime.now())) {
-      criticalKanji++;
-    }
-  }
+  // Fire all three critical-count queries in parallel — each runs a targeted
+  // COUNT(*) with WHERE stability < 1.0 AND nextReviewAt <= now, avoiding
+  // the cost of fetching every SRS row just to count a subset.
+  final criticalVocabFuture = db.srsDao.getCriticalDueCount();
+  final criticalGrammarFuture = db.grammarDao.getCriticalDueCount();
+  final criticalKanjiFuture = db.kanjiSrsDao.getCriticalDueCount();
+  final criticalVocab = await criticalVocabFuture;
+  final criticalGrammar = await criticalGrammarFuture;
+  final criticalKanji = await criticalKanjiFuture;
 
   final steps = <PlanStep>[];
 
@@ -220,15 +219,44 @@ final dailyPlanProvider = FutureProvider<DailyPlan>((ref) async {
   }
 
   // ── Priority 4: New content (if reviews are manageable) ───────
+  // Only offer new-content steps when the review queue isn't overloaded, so
+  // learners clear debt before acquiring more items.
   final totalDue = dashboard.vocabDue + dashboard.grammarDue + dashboard.kanjiDue;
   if (totalDue < 40) {
-    steps.add(const PlanStep(
+    steps.add(PlanStep(
       type: PlanStepType.newVocab,
       count: 5,
       estimatedMinutes: 5,
       route: '/library',
       urgency: 0,
     ));
+    // Suggest exploring new grammar only when vocab debt is light — grammar
+    // takes longer per item so we keep the batch smaller.
+    if (dashboard.grammarDue == 0) {
+      steps.add(const PlanStep(
+        type: PlanStepType.newGrammar,
+        count: 3,
+        estimatedMinutes: 5,
+        route: '/grammar',
+        urgency: 0,
+      ));
+    }
+    // Suggest new kanji when the kanji queue is clear — kanji acquisition
+    // without review debt creates compounding retention debt quickly.
+    if (dashboard.kanjiDue == 0) {
+      steps.add(PlanStep(
+        type: PlanStepType.newKanji,
+        count: 3,
+        estimatedMinutes: 4,
+        route: '/kanji',
+        extra: KanjiPracticeArgs(
+          mode: KanjiPracticeMode.both,
+          levelCode: level.shortLabel,
+          source: 'daily_plan_new',
+        ),
+        urgency: 0,
+      ));
+    }
   }
 
   // Sort by urgency (highest first).
@@ -241,11 +269,35 @@ final dailyPlanProvider = FutureProvider<DailyPlan>((ref) async {
     totalItems += s.count;
   }
 
+  // ── Snapshot original step count for the day ─────────────────
+  // On first build today, save the count so subsequent rebuilds
+  // (triggered as tasks are completed and steps shrink) can compute
+  // progress = 1 - currentSteps / originalCount.
+  const _planDateKey = 'daily.plan.date';
+  const _planOriginalCountKey = 'daily.plan.originalCount';
+  final now = DateTime.now();
+  final todayKey =
+      '${now.year.toString().padLeft(4, '0')}-'
+      '${now.month.toString().padLeft(2, '0')}-'
+      '${now.day.toString().padLeft(2, '0')}';
+  final prefs = await SharedPreferences.getInstance();
+  int originalStepCount;
+  if (prefs.getString(_planDateKey) == todayKey) {
+    originalStepCount = prefs.getInt(_planOriginalCountKey) ?? steps.length;
+  } else {
+    originalStepCount = steps.length;
+    if (steps.isNotEmpty) {
+      await prefs.setString(_planDateKey, todayKey);
+      await prefs.setInt(_planOriginalCountKey, steps.length);
+    }
+  }
+
   return DailyPlan(
     steps: steps,
     totalMinutes: totalMinutes,
     totalItems: totalItems,
     completedSteps: const {},
+    originalStepCount: originalStepCount,
   );
 });
 

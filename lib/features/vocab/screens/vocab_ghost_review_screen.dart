@@ -6,6 +6,7 @@ import '../../../core/language_provider.dart';
 import '../../../data/models/vocab_item.dart';
 import '../../../data/repositories/lesson_repository.dart';
 import '../providers/vocab_home_provider.dart';
+import '../../progress/providers/review_forecast_provider.dart';
 import '../../flashcards/widgets/enhanced_flashcard.dart';
 import '../../mistakes/repositories/mistake_repository.dart';
 import '../../../shared/widgets/confidence_rating.dart';
@@ -117,6 +118,7 @@ class _VocabGhostReviewScreenState
   void _showSummary() {
     ref.invalidate(allDueTermsProvider);
     ref.invalidate(vocabHomeSectionProvider);
+    ref.invalidate(reviewForecastProvider);
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -138,6 +140,14 @@ class _VocabGhostReviewScreenState
   Widget build(BuildContext context) {
     final language = ref.watch(appLanguageProvider);
     final theme = Theme.of(context);
+
+    if (widget.items.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(title: Text(language.reviewVocabLabel)),
+        body: Center(child: Text(language.reviewEmptyLabel)),
+      );
+    }
+
     final progress = (_currentIndex + 1) / widget.items.length;
 
     return Scaffold(

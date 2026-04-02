@@ -104,21 +104,106 @@ class MistakeDao extends DatabaseAccessor<AppDatabase> with _$MistakeDaoMixin {
     return (select(userMistakes)..where((tbl) => tbl.type.equals(type))).get();
   }
 
-  /// Get all mistakes
+  /// One-shot count for a specific type — cheaper than getMistakesByType().length.
+  Future<int> getMistakeCountByType(String type) async {
+    final countExpr = userMistakes.id.count();
+    final row = await (selectOnly(userMistakes)
+          ..addColumns([countExpr])
+          ..where(userMistakes.type.equals(type)))
+        .getSingle();
+    return row.read(countExpr) ?? 0;
+  }
+
+  /// Streams counts of mistake items grouped by type — returns a named record
+  /// (vocab, grammar, kanji, total) using a single GROUP BY query.
+  /// Transfers 3 rows instead of N full UserMistake rows — replaces the
+  /// watchAllMistakes() + Dart-side counting pattern in the dashboard.
+  Stream<({int vocab, int grammar, int kanji, int total})> watchMistakeCounts() {
+    final countExpr = userMistakes.id.count();
+    final typeCol = userMistakes.type;
+    return (selectOnly(userMistakes)
+          ..addColumns([typeCol, countExpr])
+          ..groupBy([typeCol]))
+        .watch()
+        .map((rows) {
+          var vocab = 0, grammar = 0, kanji = 0;
+          for (final row in rows) {
+            final t = row.read(typeCol);
+            final c = row.read(countExpr) ?? 0;
+            if (t == 'vocab') vocab = c;
+            else if (t == 'grammar') grammar = c;
+            else if (t == 'kanji') kanji = c;
+          }
+          return (vocab: vocab, grammar: grammar, kanji: kanji, total: vocab + grammar + kanji);
+        });
+  }
+
+  /// One-shot version of [watchMistakeCounts] — useful for the initial snapshot.
+  Future<({int vocab, int grammar, int kanji, int total})> getMistakeCounts() async {
+    final countExpr = userMistakes.id.count();
+    final typeCol = userMistakes.type;
+    final rows = await (selectOnly(userMistakes)
+          ..addColumns([typeCol, countExpr])
+          ..groupBy([typeCol]))
+        .get();
+    var vocab = 0, grammar = 0, kanji = 0;
+    for (final row in rows) {
+      final t = row.read(typeCol);
+      final c = row.read(countExpr) ?? 0;
+      if (t == 'vocab') vocab = c;
+      else if (t == 'grammar') grammar = c;
+      else if (t == 'kanji') kanji = c;
+    }
+    return (vocab: vocab, grammar: grammar, kanji: kanji, total: vocab + grammar + kanji);
+  }
+
+  /// Get all mistakes (unordered, unbounded — prefer [getTopMistakesByType] for
+  /// UI-facing queries where only the highest-priority items are needed).
   Future<List<UserMistake>> getAllMistakes() {
     return select(userMistakes).get();
   }
 
-  /// Watch all mistakes for live updates
-  Stream<List<UserMistake>> watchAllMistakes() {
-    return (select(userMistakes)..orderBy([
-          (tbl) => OrderingTerm(
-            expression: tbl.lastMistakeAt,
-            mode: OrderingMode.desc,
-          ),
-          (tbl) =>
-              OrderingTerm(expression: tbl.wrongCount, mode: OrderingMode.desc),
-        ]))
-        .watch();
+  /// Returns the top [limit] mistakes of [type], ordered by recency and
+  /// wrong-count so callers don't have to fetch the full table to find the
+  /// highest-priority items.  Defaults to 10 rows.
+  Future<List<UserMistake>> getTopMistakesByType(
+    String type, {
+    int limit = 10,
+  }) {
+    return (select(userMistakes)
+          ..where((tbl) => tbl.type.equals(type))
+          ..orderBy([
+            (tbl) => OrderingTerm(
+              expression: tbl.lastMistakeAt,
+              mode: OrderingMode.desc,
+            ),
+            (tbl) => OrderingTerm(
+              expression: tbl.wrongCount,
+              mode: OrderingMode.desc,
+            ),
+          ])
+          ..limit(limit))
+        .get();
+  }
+
+  /// Watch all mistakes for live updates.
+  /// Pass [limit] and [offset] to paginate — e.g. first 30 rows on page 0,
+  /// next 30 on page 1.  Omitting both returns the full list (original behaviour).
+  Stream<List<UserMistake>> watchAllMistakes({int? limit, int? offset}) {
+    final query = select(userMistakes)
+      ..orderBy([
+        (tbl) => OrderingTerm(
+          expression: tbl.lastMistakeAt,
+          mode: OrderingMode.desc,
+        ),
+        (tbl) => OrderingTerm(
+          expression: tbl.wrongCount,
+          mode: OrderingMode.desc,
+        ),
+      ]);
+    if (limit != null) {
+      query.limit(limit, offset: offset ?? 0);
+    }
+    return query.watch();
   }
 }

@@ -60,11 +60,36 @@ class MistakeRepository {
     return _dao.getMistakesByType(type);
   }
 
+  Future<int> getMistakeCountByType(String type) {
+    return _dao.getMistakeCountByType(type);
+  }
+
   Future<List<UserMistake>> getAllMistakes() {
     return _dao.getAllMistakes();
   }
 
-  Stream<List<UserMistake>> watchAllMistakes() {
-    return _dao.watchAllMistakes();
+  /// Returns the top [limit] highest-priority mistakes for [type].
+  /// Much cheaper than [getAllMistakes] + Dart-side filtering when the
+  /// caller only needs a small slice of the mistake bank.
+  Future<List<UserMistake>> getTopMistakesByType(
+    String type, {
+    int limit = 10,
+  }) {
+    return _dao.getTopMistakesByType(type, limit: limit);
+  }
+
+  Stream<List<UserMistake>> watchAllMistakes({int? limit, int? offset}) {
+    return _dao.watchAllMistakes(limit: limit, offset: offset);
+  }
+
+  /// Stream of mistake counts grouped by type — (vocab, grammar, kanji, total).
+  /// Uses a GROUP BY query; only 3 rows are transferred regardless of deck size.
+  Stream<({int vocab, int grammar, int kanji, int total})> watchMistakeCounts() {
+    return _dao.watchMistakeCounts();
+  }
+
+  /// One-shot variant of [watchMistakeCounts].
+  Future<({int vocab, int grammar, int kanji, int total})> getMistakeCounts() {
+    return _dao.getMistakeCounts();
   }
 }

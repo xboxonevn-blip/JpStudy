@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../data/db/app_database.dart';
 import '../../../data/db/database_provider.dart';
 import '../../../data/repositories/lesson_repository.dart';
 import '../../mistakes/repositories/mistake_repository.dart';
@@ -21,7 +20,7 @@ final dashboardProvider = StreamProvider.autoDispose<DashboardState>((ref) {
   Timer? minuteTicker;
 
   DashboardState? lastState;
-  List<UserMistake>? cachedMistakes;
+  ({int vocab, int grammar, int kanji, int total})? cachedMistakeCounts;
   var isComputing = false;
   var hasPendingRefresh = false;
   var isDisposed = false;
@@ -36,24 +35,21 @@ final dashboardProvider = StreamProvider.autoDispose<DashboardState>((ref) {
     }
     isComputing = true;
     try {
-      final progress = await lessonRepo.fetchProgressSummary();
-      final vocabDueCount = (await srsDao.getDueReviews()).length;
-      final grammarDueCount = (await grammarDao.getDueReviews()).length;
-      final kanjiDueCount = (await kanjiSrsDao.getDueReviews()).length;
-      final mistakes = cachedMistakes ?? await mistakeRepo.getAllMistakes();
+      final progressFuture = lessonRepo.fetchProgressSummary();
+      final vocabCountFuture = srsDao.getDueReviewCount();
+      final grammarCountFuture = grammarDao.getDueReviewCount();
+      final kanjiCountFuture = kanjiSrsDao.getDueReviewCount();
+      // Only fetch mistake counts if the stream hasn't pushed them yet.
+      // getMistakeCounts() runs a 3-row GROUP BY query instead of loading the
+      // full UserMistake table — avoids N rows × full columns on every refresh.
+      final mistakeCountsFuture =
+          cachedMistakeCounts != null ? null : mistakeRepo.getMistakeCounts();
 
-      var vocabMistakeCount = 0;
-      var grammarMistakeCount = 0;
-      var kanjiMistakeCount = 0;
-      for (final mistake in mistakes) {
-        if (mistake.type == 'vocab') {
-          vocabMistakeCount += 1;
-        } else if (mistake.type == 'grammar') {
-          grammarMistakeCount += 1;
-        } else if (mistake.type == 'kanji') {
-          kanjiMistakeCount += 1;
-        }
-      }
+      final progress = await progressFuture;
+      final vocabDueCount = await vocabCountFuture;
+      final grammarDueCount = await grammarCountFuture;
+      final kanjiDueCount = await kanjiCountFuture;
+      final mc = cachedMistakeCounts ?? await mistakeCountsFuture!;
 
       final next = DashboardState(
         streak: progress.streak,
@@ -61,10 +57,10 @@ final dashboardProvider = StreamProvider.autoDispose<DashboardState>((ref) {
         vocabDue: vocabDueCount,
         grammarDue: grammarDueCount,
         kanjiDue: kanjiDueCount,
-        vocabMistakeCount: vocabMistakeCount,
-        grammarMistakeCount: grammarMistakeCount,
-        kanjiMistakeCount: kanjiMistakeCount,
-        totalMistakeCount: mistakes.length,
+        vocabMistakeCount: mc.vocab,
+        grammarMistakeCount: mc.grammar,
+        kanjiMistakeCount: mc.kanji,
+        totalMistakeCount: mc.total,
       );
 
       if (next != lastState && !controller.isClosed) {
@@ -100,8 +96,8 @@ final dashboardProvider = StreamProvider.autoDispose<DashboardState>((ref) {
     }),
   );
   subscriptions.add(
-    mistakeRepo.watchAllMistakes().listen((items) {
-      cachedMistakes = items;
+    mistakeRepo.watchMistakeCounts().listen((counts) {
+      cachedMistakeCounts = counts;
       unawaited(emitSnapshot());
     }),
   );
@@ -111,10 +107,29 @@ final dashboardProvider = StreamProvider.autoDispose<DashboardState>((ref) {
     unawaited(emitSnapshot());
   });
 
+  void stopTicker() {
+    minuteTicker?.cancel();
+    minuteTicker = null;
+  }
+
+  void startTicker() {
+    // Guard: never double-create the timer.
+    minuteTicker ??= Timer.periodic(const Duration(minutes: 1), (_) {
+      unawaited(emitSnapshot());
+    });
+  }
+
   // Refresh immediately when the app returns to foreground so due counts
   // reflect items that became due while the app was backgrounded.
+  // Pause the minute ticker when hidden/backgrounded to save battery —
+  // the onResume callback will restart it.
   final lifecycleListener = AppLifecycleListener(
-    onResume: () => unawaited(emitSnapshot()),
+    onResume: () {
+      startTicker();
+      unawaited(emitSnapshot());
+    },
+    onHide: stopTicker,
+    onPause: stopTicker,
   );
 
   unawaited(emitSnapshot());

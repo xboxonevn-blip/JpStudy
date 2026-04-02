@@ -57,17 +57,29 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
   final mistakeRepo = ref.watch(mistakeRepositoryProvider);
   final recoveryPack = ref.watch(recoveryPackProvider).valueOrNull;
   final nextGrammarReview = ref.watch(nextGrammarReviewProvider).valueOrNull;
-  final srsBreakdown = await ref.watch(srsRetentionProvider.future);
-  final mistakes = await mistakeRepo.getAllMistakes();
-  final items = <WeaknessRadarItem>[];
   final now = DateTime.now();
+
+  // Fetch per-type top-N mistakes in parallel — each query is bounded by LIMIT
+  // and filtered by type in SQL, avoiding a full-table scan from getAllMistakes().
+  // Over-fetch slightly (×2) so after the priority filter we still have candidates.
+  final srsBreakdownFuture = ref.watch(srsRetentionProvider.future);
+  final vocabMistakesFuture = mistakeRepo.getTopMistakesByType('vocab', limit: 20);
+  final grammarMistakesFuture = mistakeRepo.getTopMistakesByType('grammar', limit: 10);
+  final kanjiMistakesFuture = mistakeRepo.getTopMistakesByType('kanji', limit: 20);
+
+  final srsBreakdown = await srsBreakdownFuture;
+  final vocabMistakesRaw = await vocabMistakesFuture;
+  final grammarMistakesRaw = await grammarMistakesFuture;
+  final kanjiMistakesRaw = await kanjiMistakesFuture;
+
+  final items = <WeaknessRadarItem>[];
 
   if (recoveryPack != null) {
     items.add(
-        WeaknessRadarItem(
-          id: 'recovery_pack',
-          title: weaknessRecoveryTitle(language, recoveryPack.lessonTitle),
-          subtitle: weaknessRecoverySubtitle(language, recoveryPack.itemCount),
+      WeaknessRadarItem(
+        id: 'recovery_pack',
+        title: weaknessRecoveryTitle(language, recoveryPack.lessonTitle),
+        subtitle: weaknessRecoverySubtitle(language, recoveryPack.itemCount),
         route: '/learn/recovery-pack',
         icon: Icons.medical_services_outlined,
         color: const Color(0xFF2563EB),
@@ -76,120 +88,114 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
     );
   }
 
-  final vocabMistakes = mistakes.where((item) => item.type == 'vocab').toList()
-    ..sort(
-      (left, right) => calculateMistakePriority(right, now).compareTo(
-        calculateMistakePriority(left, now),
+  // Sort each pre-fetched slice by computed priority (descending).
+  final vocabMistakes = vocabMistakesRaw
+    ..sort((l, r) =>
+        calculateMistakePriority(r, now).compareTo(calculateMistakePriority(l, now)));
+  final grammarMistakes = grammarMistakesRaw
+    ..sort((l, r) =>
+        calculateMistakePriority(r, now).compareTo(calculateMistakePriority(l, now)));
+  final kanjiMistakes = kanjiMistakesRaw
+    ..sort((l, r) =>
+        calculateMistakePriority(r, now).compareTo(calculateMistakePriority(l, now)));
+
+  final dueMistakesVocab = vocabMistakes
+      .where((m) => calculateMistakePriority(m, now) > 0)
+      .toList(growable: false);
+  final dueMistakesGrammar = grammarMistakes
+      .where((m) => calculateMistakePriority(m, now) > 0)
+      .toList(growable: false);
+  final dueMistakesKanji = kanjiMistakes
+      .where((m) => calculateMistakePriority(m, now) > 0)
+      .toList(growable: false);
+
+  // Fire all three DB look-ups in parallel — each method fast-returns [] when
+  // the ID list is empty, so no unnecessary round-trips are made.
+  final vocabFuture = lessonRepo.fetchVocabTermsByIds(
+    dueMistakesVocab.take(5).map((m) => m.itemId).toList(),
+  );
+  final grammarFuture = grammarRepo.fetchPointsByIds(
+    dueMistakesGrammar.take(3).map((m) => m.itemId).toList(),
+  );
+  final kanjiFuture = lessonRepo.fetchKanjiByIds(
+    dueMistakesKanji.take(5).map((m) => m.itemId).toList(),
+  );
+  final vocabItems = await vocabFuture;
+  final grammarPoints = await grammarFuture;
+  final kanjiItems = await kanjiFuture;
+
+  if (vocabItems.isNotEmpty) {
+    final lead = dueMistakesVocab.first;
+    items.add(
+      WeaknessRadarItem(
+        id: 'vocab_mistakes',
+        title: weaknessVocabTitle(language, vocabItems.first.term),
+        subtitle: weaknessVocabSubtitle(
+          language,
+          dueMistakesVocab.length,
+          _dueCheckpointShortLabel(language, lead.lastMistakeAt, now),
+        ),
+        route: '/learn/session',
+        extra: LearnSessionArgs(
+          items: vocabItems,
+          lessonId: RecoveryPackService.recoveryLessonId,
+          lessonTitle: weaknessVocabSessionTitle(language),
+          enabledTypes: const [
+            QuestionType.multipleChoice,
+            QuestionType.fillBlank,
+          ],
+        ),
+        icon: Icons.translate_rounded,
+        color: const Color(0xFF0F766E),
+        priority: 80 + calculateMistakePriority(lead, now),
       ),
     );
-  if (vocabMistakes.isNotEmpty) {
-    final dueMistakes = vocabMistakes
-        .where((item) => calculateMistakePriority(item, now) > 0)
-        .toList(growable: false);
-    final ids = dueMistakes.take(5).map((item) => item.itemId).toList();
-    final vocabItems = await lessonRepo.fetchVocabTermsByIds(ids);
-    if (vocabItems.isNotEmpty) {
-      final lead = dueMistakes.first;
-      items.add(
-        WeaknessRadarItem(
-          id: 'vocab_mistakes',
-          title: weaknessVocabTitle(language, vocabItems.first.term),
-          subtitle: weaknessVocabSubtitle(
-            language,
-            dueMistakes.length,
-            _dueCheckpointShortLabel(language, lead.lastMistakeAt, now),
-          ),
-          route: '/learn/session',
-          extra: LearnSessionArgs(
-            items: vocabItems,
-            lessonId: RecoveryPackService.recoveryLessonId,
-            lessonTitle: weaknessVocabSessionTitle(language),
-            enabledTypes: const [
-              QuestionType.multipleChoice,
-              QuestionType.fillBlank,
-            ],
-          ),
-          icon: Icons.translate_rounded,
-          color: const Color(0xFF0F766E),
-          priority: 80 + calculateMistakePriority(lead, now),
-        ),
-      );
-    }
   }
 
-  final grammarMistakes =
-      mistakes.where((item) => item.type == 'grammar').toList()
-        ..sort(
-          (left, right) => calculateMistakePriority(right, now).compareTo(
-            calculateMistakePriority(left, now),
-          ),
-        );
-  if (grammarMistakes.isNotEmpty) {
-    final dueMistakes = grammarMistakes
-        .where((item) => calculateMistakePriority(item, now) > 0)
-        .toList(growable: false);
-    final points = await grammarRepo.fetchPointsByIds(
-      dueMistakes.take(3).map((item) => item.itemId).toList(),
-    );
-    if (points.isNotEmpty) {
-      final lead = dueMistakes.first;
-      items.add(
-        WeaknessRadarItem(
-          id: 'grammar_mistakes',
-          title: weaknessGrammarTitle(language, points.first.grammarPoint),
-          subtitle: weaknessGrammarSubtitle(
-            language,
-            dueMistakes.length,
-            _dueCheckpointShortLabel(language, lead.lastMistakeAt, now),
-          ),
-          route: '/grammar-practice',
-          extra: points.map((point) => point.id).toList(),
-          icon: Icons.auto_stories_rounded,
-          color: const Color(0xFF7C3AED),
-          priority: 75 + calculateMistakePriority(lead, now),
+  if (grammarPoints.isNotEmpty) {
+    final lead = dueMistakesGrammar.first;
+    items.add(
+      WeaknessRadarItem(
+        id: 'grammar_mistakes',
+        title: weaknessGrammarTitle(language, grammarPoints.first.grammarPoint),
+        subtitle: weaknessGrammarSubtitle(
+          language,
+          dueMistakesGrammar.length,
+          _dueCheckpointShortLabel(language, lead.lastMistakeAt, now),
         ),
-      );
-    }
-  }
-
-  final kanjiMistakes = mistakes.where((item) => item.type == 'kanji').toList()
-    ..sort(
-      (left, right) => calculateMistakePriority(right, now).compareTo(
-        calculateMistakePriority(left, now),
+        route: '/grammar-practice',
+        extra: grammarPoints.map((point) => point.id).toList(),
+        icon: Icons.auto_stories_rounded,
+        color: const Color(0xFF7C3AED),
+        priority: 75 + calculateMistakePriority(lead, now),
       ),
     );
-  if (kanjiMistakes.isNotEmpty) {
-    final dueMistakes = kanjiMistakes
-        .where((item) => calculateMistakePriority(item, now) > 0)
-        .toList(growable: false);
-    final kanjiItems = await lessonRepo.fetchKanjiByIds(
-      dueMistakes.take(5).map((item) => item.itemId).toList(),
-    );
-    if (kanjiItems.isNotEmpty) {
-      final lead = dueMistakes.first;
-      items.add(
-        WeaknessRadarItem(
-          id: 'kanji_mistakes',
-          title: weaknessKanjiTitle(language, kanjiItems.first.character),
-          subtitle: weaknessKanjiSubtitle(
-            language,
-            dueMistakes.length,
-            _dueCheckpointShortLabel(language, lead.lastMistakeAt, now),
-          ),
-          route: '/kanji/practice',
-          extra: KanjiPracticeArgs(
-            mode: KanjiPracticeMode.write,
-            levelCode: level.shortLabel,
-            source: 'weakness_radar',
-            kanjiIds: kanjiItems.map((item) => item.id).toList(growable: false),
-            preferredKanjiId: kanjiItems.first.id,
-          ),
-          icon: Icons.draw_rounded,
-          color: const Color(0xFFF59E0B),
-          priority: 70 + calculateMistakePriority(lead, now),
+  }
+
+  if (kanjiItems.isNotEmpty) {
+    final lead = dueMistakesKanji.first;
+    items.add(
+      WeaknessRadarItem(
+        id: 'kanji_mistakes',
+        title: weaknessKanjiTitle(language, kanjiItems.first.character),
+        subtitle: weaknessKanjiSubtitle(
+          language,
+          dueMistakesKanji.length,
+          _dueCheckpointShortLabel(language, lead.lastMistakeAt, now),
         ),
-      );
-    }
+        route: '/kanji/practice',
+        extra: KanjiPracticeArgs(
+          mode: KanjiPracticeMode.write,
+          levelCode: level.shortLabel,
+          source: 'weakness_radar',
+          kanjiIds: kanjiItems.map((item) => item.id).toList(growable: false),
+          preferredKanjiId: kanjiItems.first.id,
+        ),
+        icon: Icons.draw_rounded,
+        color: const Color(0xFFF59E0B),
+        priority: 70 + calculateMistakePriority(lead, now),
+      ),
+    );
   }
 
   if (items.length < 3 && srsBreakdown.learning > 0) {

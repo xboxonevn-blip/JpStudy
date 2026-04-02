@@ -84,19 +84,41 @@ Future<MasterySnapshot> _fetchMasterySnapshot(
   AppDatabase appDb,
   ContentDatabase contentDb,
 ) async {
-  const levels = ['N5', 'N4', 'N3'];
+  // All six queries are independent — fire them all and await in parallel.
+  final vocabTotalsFuture = _countContentVocabByLevel(contentDb);
+  final kanjiTotalsFuture = _countContentKanjiByLevel(contentDb);
+  final grammarTotalsFuture = _countGrammarByLevel(appDb);
+  final vocabMasteryFuture = _vocabMasteryByLevel(appDb);
+  final grammarMasteryFuture = _grammarMasteryByLevel(appDb);
+  final kanjiMasteryFuture = _kanjiMasteryByLevel(appDb, contentDb);
 
-  // --- Content totals from ContentDatabase ---
-  final vocabTotals = await _countContentVocabByLevel(contentDb);
-  final kanjiTotals = await _countContentKanjiByLevel(contentDb);
+  final vocabTotals = await vocabTotalsFuture;
+  final kanjiTotals = await kanjiTotalsFuture;
+  final grammarTotals = await grammarTotalsFuture;
+  final vocabMastery = await vocabMasteryFuture;
+  final grammarMastery = await grammarMasteryFuture;
+  final kanjiMastery = await kanjiMasteryFuture;
 
-  // --- Grammar totals from AppDatabase (GrammarPoints) ---
-  final grammarTotals = await _countGrammarByLevel(appDb);
-
-  // --- SRS mastery from AppDatabase ---
-  final vocabMastery = await _vocabMasteryByLevel(appDb);
-  final grammarMastery = await _grammarMasteryByLevel(appDb);
-  final kanjiMastery = await _kanjiMasteryByLevel(appDb, contentDb);
+  // Derive the level list from actual data so N2/N1 content shows up
+  // automatically without code changes when new content is added.
+  const jlptOrder = ['N5', 'N4', 'N3', 'N2', 'N1'];
+  final allLevels = <String>{
+    ...vocabTotals.keys,
+    ...kanjiTotals.keys,
+    ...grammarTotals.keys,
+    ...vocabMastery.keys,
+    ...grammarMastery.keys,
+    ...kanjiMastery.keys,
+  };
+  // Sort by canonical JLPT order (beginner first); unknown levels go last.
+  final levels = allLevels.toList()
+    ..sort((a, b) {
+      final ia = jlptOrder.indexOf(a);
+      final ib = jlptOrder.indexOf(b);
+      final sortA = ia == -1 ? 999 : ia;
+      final sortB = ib == -1 ? 999 : ib;
+      return sortA.compareTo(sortB);
+    });
 
   final result = <LevelMastery>[];
   for (final level in levels) {
@@ -192,13 +214,31 @@ Future<Map<String, int>> _countGrammarByLevel(AppDatabase db) async {
   return map;
 }
 
+// Shared stability bucketer: returns (studied, learning, young, mature) for
+// a given stability value, accumulated into an existing record.
+typedef _MasteryAccum = (int studied, int learning, int young, int mature);
+
+_MasteryAccum _accumulate(_MasteryAccum prev, double stability) {
+  final (s, l, y, m) = prev;
+  if (stability < 1.0) return (s + 1, l + 1, y, m);
+  if (stability < 21.0) return (s + 1, l, y + 1, m);
+  return (s + 1, l, y, m + 1);
+}
+
+CategoryMastery _fromAccum(_MasteryAccum a) => CategoryMastery(
+      total: 0, // placeholder — overridden in caller
+      studied: a.$1,
+      learning: a.$2,
+      young: a.$3,
+      mature: a.$4,
+    );
+
 /// Vocab mastery: join SrsState → UserLessonTerm → UserLesson to get level,
-/// then bucket by stability.
+/// then bucket by stability.  Single pass — no intermediate stability list.
 Future<Map<String, CategoryMastery>> _vocabMasteryByLevel(
   AppDatabase db,
 ) async {
-  // Get all SRS states with their associated lesson level
-  final query = db.select(db.srsState).join([
+  final rows = await db.select(db.srsState).join([
     innerJoin(
       db.userLessonTerm,
       db.userLessonTerm.id.equalsExp(db.srsState.vocabId),
@@ -207,136 +247,73 @@ Future<Map<String, CategoryMastery>> _vocabMasteryByLevel(
       db.userLesson,
       db.userLesson.id.equalsExp(db.userLessonTerm.lessonId),
     ),
-  ]);
+  ]).get();
 
-  final rows = await query.get();
-
-  // Group by level
-  final byLevel = <String, List<double>>{};
+  final byLevel = <String, _MasteryAccum>{};
   for (final row in rows) {
     final level = row.readTable(db.userLesson).level;
     final stability = row.readTable(db.srsState).stability;
-    byLevel.putIfAbsent(level, () => []).add(stability);
-  }
-
-  // Also need content totals for the denominator
-  // (already have them from caller, but we recalculate here for independence)
-  // Actually, we pass total from caller — skip for now, use a sentinel
-
-  final result = <String, CategoryMastery>{};
-  for (final entry in byLevel.entries) {
-    int learning = 0, young = 0, mature = 0;
-    for (final s in entry.value) {
-      if (s < 1.0) {
-        learning++;
-      } else if (s < 21.0) {
-        young++;
-      } else {
-        mature++;
-      }
-    }
-    final studied = entry.value.length;
-    // total will be overridden by caller
-    result[entry.key] = CategoryMastery(
-      total: 0, // placeholder — overridden in caller
-      studied: studied,
-      learning: learning,
-      young: young,
-      mature: mature,
+    byLevel[level] = _accumulate(
+      byLevel[level] ?? (0, 0, 0, 0),
+      stability,
     );
   }
-  return result;
+
+  return {for (final e in byLevel.entries) e.key: _fromAccum(e.value)};
 }
 
 /// Grammar mastery: join GrammarSrsState → GrammarPoints to get level.
+/// Single pass — no intermediate stability list.
 Future<Map<String, CategoryMastery>> _grammarMasteryByLevel(
   AppDatabase db,
 ) async {
-  final query = db.select(db.grammarSrsState).join([
+  final rows = await db.select(db.grammarSrsState).join([
     innerJoin(
       db.grammarPoints,
       db.grammarPoints.id.equalsExp(db.grammarSrsState.grammarId),
     ),
-  ]);
+  ]).get();
 
-  final rows = await query.get();
-
-  final byLevel = <String, List<double>>{};
+  final byLevel = <String, _MasteryAccum>{};
   for (final row in rows) {
     final level = row.readTable(db.grammarPoints).jlptLevel;
     final stability = row.readTable(db.grammarSrsState).stability;
-    byLevel.putIfAbsent(level, () => []).add(stability);
-  }
-
-  final result = <String, CategoryMastery>{};
-  for (final entry in byLevel.entries) {
-    int learning = 0, young = 0, mature = 0;
-    for (final s in entry.value) {
-      if (s < 1.0) {
-        learning++;
-      } else if (s < 21.0) {
-        young++;
-      } else {
-        mature++;
-      }
-    }
-    result[entry.key] = CategoryMastery(
-      total: 0,
-      studied: entry.value.length,
-      learning: learning,
-      young: young,
-      mature: mature,
+    byLevel[level] = _accumulate(
+      byLevel[level] ?? (0, 0, 0, 0),
+      stability,
     );
   }
-  return result;
+
+  return {for (final e in byLevel.entries) e.key: _fromAccum(e.value)};
 }
 
 /// Kanji mastery: KanjiSrsState links to content DB kanji by kanjiId.
-/// We need to look up each kanji's level from the content DB.
+/// Single pass after the id→level lookup — no intermediate stability list.
 Future<Map<String, CategoryMastery>> _kanjiMasteryByLevel(
   AppDatabase appDb,
   ContentDatabase contentDb,
 ) async {
-  // Get all kanji SRS states
   final srsRows = await appDb.select(appDb.kanjiSrsState).get();
   if (srsRows.isEmpty) return {};
 
-  // Get kanji id→level mapping from content DB
+  // Build id→level map from content DB.
   final kanjiIds = srsRows.map((r) => r.kanjiId).toList();
   final kanjiRows = await (contentDb.select(contentDb.kanji)
         ..where((t) => t.id.isIn(kanjiIds)))
       .get();
-  final idToLevel = <int, String>{};
-  for (final k in kanjiRows) {
-    idToLevel[k.id] = k.jlptLevel;
-  }
+  final idToLevel = <int, String>{
+    for (final k in kanjiRows) k.id: k.jlptLevel,
+  };
 
-  final byLevel = <String, List<double>>{};
+  final byLevel = <String, _MasteryAccum>{};
   for (final srs in srsRows) {
     final level = idToLevel[srs.kanjiId];
     if (level == null) continue;
-    byLevel.putIfAbsent(level, () => []).add(srs.stability);
-  }
-
-  final result = <String, CategoryMastery>{};
-  for (final entry in byLevel.entries) {
-    int learning = 0, young = 0, mature = 0;
-    for (final s in entry.value) {
-      if (s < 1.0) {
-        learning++;
-      } else if (s < 21.0) {
-        young++;
-      } else {
-        mature++;
-      }
-    }
-    result[entry.key] = CategoryMastery(
-      total: 0,
-      studied: entry.value.length,
-      learning: learning,
-      young: young,
-      mature: mature,
+    byLevel[level] = _accumulate(
+      byLevel[level] ?? (0, 0, 0, 0),
+      srs.stability,
     );
   }
-  return result;
+
+  return {for (final e in byLevel.entries) e.key: _fromAccum(e.value)};
 }
