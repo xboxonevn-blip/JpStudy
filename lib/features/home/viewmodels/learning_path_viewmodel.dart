@@ -18,28 +18,48 @@ class LearningPathViewModel extends StateNotifier<AsyncValue<List<Unit>>> {
 
   Future<void> loadPath() async {
     try {
-      final lessons = await _repo.getAllLessons();
+      // Both queries are independent — fire in parallel.
+      final lessonsFuture = _repo.getAllLessons();
+      final statsFuture = _repo.getAllLessonProgress();
+      final lessons = await lessonsFuture;
+      final statsMap = await statsFuture;
 
-      // Group lessons into units (logic: by JLPT level or distinct parts)
-      // For now, we'll create one big unit per Level found
-
-      // 1. Group by Level
+      // Group lessons by JLPT level.
       final grouped = <String, List<UserLessonData>>{};
       for (final lesson in lessons) {
-        if (!grouped.containsKey(lesson.level)) {
-          grouped[lesson.level] = [];
-        }
-        grouped[lesson.level]!.add(lesson);
+        grouped.putIfAbsent(lesson.level, () => []).add(lesson);
       }
+
+      // Canonical JLPT order so units always display N5 → N1.
+      const levelOrder = ['N5', 'N4', 'N3', 'N2', 'N1'];
+      const levelColors = {
+        'N5': Color(0xFFEC4899), // pink
+        'N4': Color(0xFFF97316), // orange
+        'N3': Color(0xFF14B8A6), // teal
+        'N2': Color(0xFF6366F1), // indigo
+        'N1': Color(0xFFEF4444), // red
+      };
+      const levelDescriptions = {
+        'N5': 'Beginner Japanese',
+        'N4': 'Elementary Japanese',
+        'N3': 'Intermediate Japanese',
+        'N2': 'Upper-Intermediate Japanese',
+        'N1': 'Advanced Japanese',
+      };
+
+      // Process groups in canonical order; unknown levels appended at end.
+      final sortedLevels = grouped.keys.toList()
+        ..sort((a, b) {
+          final ia = levelOrder.indexOf(a);
+          final ib = levelOrder.indexOf(b);
+          return (ia == -1 ? 999 : ia).compareTo(ib == -1 ? 999 : ib);
+        });
 
       final units = <Unit>[];
 
-      final statsMap = await _repo.getAllLessonProgress();
-
-      // 2. Process each group
-      grouped.forEach((level, levelLessons) {
-        // Sort by id or order (assuming id is creation order for now)
-        levelLessons.sort((a, b) => a.id.compareTo(b.id));
+      for (final level in sortedLevels) {
+        final levelLessons = grouped[level]!
+          ..sort((a, b) => a.id.compareTo(b.id));
 
         final nodes = <LessonNode>[];
 
@@ -50,15 +70,10 @@ class LearningPathViewModel extends StateNotifier<AsyncValue<List<Unit>>> {
               stats.termCount > 0 &&
               stats.completedCount == stats.termCount;
 
-          // Unlock all lessons
-          LessonStatus status = isCompleted
-              ? LessonStatus.completed
-              : LessonStatus.available;
-
           nodes.add(
             LessonNode(
               lesson: lesson,
-              status: status,
+              status: isCompleted ? LessonStatus.completed : LessonStatus.available,
               stars: isCompleted ? 3 : 0,
               progress: (stats == null || stats.termCount == 0)
                   ? 0.0
@@ -67,32 +82,20 @@ class LearningPathViewModel extends StateNotifier<AsyncValue<List<Unit>>> {
           );
         }
 
-        // Color based on level
-        Color color = Colors.blue;
-        if (level == 'N5') {
-          color = Colors.pink;
-        } else if (level == 'N4') {
-          color = Colors.orange;
-        } else if (level == 'N3') {
-          color = Colors.teal;
-        }
-
         units.add(
           Unit(
             id: level,
             title: 'Level $level',
-            description: 'Basic Japanese',
+            description: levelDescriptions[level] ?? 'Japanese $level',
             nodes: nodes,
-            color: color,
+            color: levelColors[level] ?? Colors.blue,
           ),
         );
-      });
+      }
 
       state = AsyncValue.data(units);
     } catch (e, st) {
       state = AsyncValue.error(e, st);
     }
   }
-
-  // Helper removed as logic is inline now
 }

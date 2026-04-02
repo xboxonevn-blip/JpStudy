@@ -36,6 +36,8 @@ class _EnhancedFlashcardScreenState
   FlashcardSettings _settings = const FlashcardSettings();
   final Set<int> _flippedIndices = {};
   late final DateTime _sessionStart;
+  // FsrsService is stateless — create once in state rather than on every build.
+  final FsrsService _fsrsService = FsrsService();
 
   @override
   void initState() {
@@ -55,10 +57,9 @@ class _EnhancedFlashcardScreenState
     final language = ref.watch(appLanguageProvider);
     final currentItem = _displayItems[_currentIndex];
     final srsAsync = ref.watch(srsStateProvider(currentItem.id));
-    final fsrs = FsrsService();
     final retrievability = srsAsync.whenOrNull(data: (srs) {
       if (srs == null) return null;
-      return fsrs.retrievability(
+      return _fsrsService.retrievability(
         stability: srs.stability,
         lastReviewedAt: srs.lastReviewedAt,
       );
@@ -200,11 +201,16 @@ class _EnhancedFlashcardScreenState
       currentSettings: _settings,
       onSave: (newSettings) {
         setState(() {
+          // Capture old shuffle state BEFORE overwriting _settings so the
+          // comparison below isn't always false.
+          final wasShuffled = _settings.shuffleCards;
           _settings = newSettings;
-          if (newSettings.shuffleCards != _settings.shuffleCards) {
+          if (newSettings.shuffleCards != wasShuffled) {
             _displayItems = newSettings.shuffleCards
                 ? (List.from(widget.items)..shuffle())
-                : widget.items;
+                : List.from(widget.items);
+            _currentIndex = 0;
+            _flippedIndices.clear();
           }
         });
       },

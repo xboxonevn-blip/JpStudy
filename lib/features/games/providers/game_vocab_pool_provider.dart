@@ -10,13 +10,15 @@ final gameVocabPoolProvider = FutureProvider.autoDispose<List<VocabItem>>((ref) 
   final mistakeRepo = ref.watch(mistakeRepositoryProvider);
   final level = ref.watch(studyLevelProvider)?.shortLabel ?? 'N5';
 
-  final dueTerms = await lessonRepo.fetchAllDueTerms();
-  final mistakes = await mistakeRepo.getAllMistakes();
+  // Both futures start before any await — true parallel execution.
+  // Use getTopMistakesByType (bounded, SQL-filtered) instead of getAllMistakes()
+  // to avoid a full-table scan when the mistake bank is large.
+  final dueTermsFuture = lessonRepo.fetchAllDueTerms();
+  final mistakesFuture = mistakeRepo.getTopMistakesByType('vocab', limit: 40);
+  final dueTerms = await dueTermsFuture;
+  final mistakes = await mistakesFuture;
 
-  final vocabMistakeIds = mistakes
-      .where((m) => m.type == 'vocab')
-      .map((m) => m.itemId)
-      .toSet();
+  final vocabMistakeIds = mistakes.map((m) => m.itemId).toSet();
 
   final poolIds = <int>{};
 
@@ -29,7 +31,9 @@ final gameVocabPoolProvider = FutureProvider.autoDispose<List<VocabItem>>((ref) 
   }
 
   if (poolIds.length < 10) {
-    final preview = await ref.watch(vocabPreviewProvider(level).future);
+    // Use ref.read inside the conditional to avoid a Riverpod lint warning
+    // about conditionally watching a provider (watch must be unconditional).
+    final preview = await ref.read(vocabPreviewProvider(level).future);
     return preview
         .map(
           (p) => VocabItem(

@@ -29,6 +29,12 @@ class MistakeRepository {
     return _dao.watchMistakeItemCount(type: 'vocab');
   }
 
+  /// Reactive count of mistakes for [type].  Pass null to watch the total
+  /// across all types.  Cheaper than [watchAllMistakes] + Dart-side counting.
+  Stream<int> watchMistakeItemCount({String? type}) {
+    return _dao.watchMistakeItemCount(type: type);
+  }
+
   Future<void> addMistake({
     required String type,
     required int itemId,
