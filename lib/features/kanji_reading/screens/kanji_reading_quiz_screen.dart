@@ -5,6 +5,7 @@ import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/features/kanji_hub/kanji_copy.dart';
 import 'package:jpstudy/features/kanji_hub/providers/kanji_home_provider.dart';
 import '../../../data/db/database_provider.dart';
+import '../../progress/providers/review_forecast_provider.dart';
 import '../../../core/services/fsrs_service.dart';
 import '../models/kanji_reading_question.dart';
 
@@ -98,6 +99,7 @@ class _KanjiReadingQuizScreenState
     ref.invalidate(kanjiDueIdsProvider);
     ref.invalidate(kanjiSeenIdsProvider);
     ref.invalidate(kanjiHomeSummaryProvider);
+    ref.invalidate(reviewForecastProvider);
 
     final language = ref.read(appLanguageProvider);
     final pct = (_correct / widget.questions.length * 100).round();
@@ -143,6 +145,14 @@ class _KanjiReadingQuizScreenState
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final language = ref.watch(appLanguageProvider);
+
+    if (widget.questions.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(),
+        body: Center(child: Text(language.reviewEmptyLabel)),
+      );
+    }
+
     final progress = (_current + 1) / widget.questions.length;
 
     return Scaffold(

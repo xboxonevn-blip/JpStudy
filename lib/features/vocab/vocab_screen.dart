@@ -99,76 +99,92 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
   ref,
 ) async {
   final repo = ref.read(lessonRepositoryProvider);
-  final dueTerms = await ref.watch(allDueTermsProvider.future);
-  final nextReview = await ref.watch(nextVocabReviewProvider.future);
+  final language = ref.watch(appLanguageProvider);
 
-  Future<List<VocabItem>> loadCore(String level) =>
-      repo.getVocabByLevelAndSeries(level, 'hajimete');
-
-  final n5 = await loadCore('N5');
-  final n4 = await loadCore('N4');
-  final n3 = await loadCore('N3');
-  final n2 = await loadCore('N2');
-  final n1 = await loadCore('N1');
-  final shinkanzenN3 = await repo.getVocabByLevelAndSeries('N3', 'ShinKanzen');
-  final shinkanzenN3Summary = await _loadShinkanzenManifestSummary('N3');
-  final shinkanzenN2Summary = await _loadShinkanzenManifestSummary('N2');
-  final shinkanzenN1Summary = await _loadShinkanzenManifestSummary('N1');
-  final minnaN5 = await repo.getVocabByLessonRange(
+  // Fire all 13 independent fetches in parallel — previously sequential,
+  // adding latency of every fetch to the total.  Now total latency ≈ slowest
+  // single fetch.  minnaN5/N4 use COUNT queries instead of full row fetches
+  // (vocab data is only needed for the other levels, not minna companion counts).
+  final dueCountFuture = ref.watch(dueVocabCountProvider.future);
+  final nextReviewFuture = ref.watch(nextVocabReviewProvider.future);
+  final n5Future = repo.getVocabByLevelAndSeries('N5', 'hajimete');
+  final n4Future = repo.getVocabByLevelAndSeries('N4', 'hajimete');
+  final n3Future = repo.getVocabByLevelAndSeries('N3', 'hajimete');
+  final n2Future = repo.getVocabByLevelAndSeries('N2', 'hajimete');
+  final n1Future = repo.getVocabByLevelAndSeries('N1', 'hajimete');
+  final shinkanzenN3Future = repo.getVocabByLevelAndSeries('N3', 'ShinKanzen');
+  final shinkanzenN3SummaryFuture = _loadShinkanzenManifestSummary('N3');
+  final shinkanzenN2SummaryFuture = _loadShinkanzenManifestSummary('N2');
+  final shinkanzenN1SummaryFuture = _loadShinkanzenManifestSummary('N1');
+  final minnaN5CountFuture = repo.countVocabByLessonRange(
     'N5',
     startLesson: 1,
     endLesson: 25,
     series: 'minna',
   );
-  final minnaN4 = await repo.getVocabByLessonRange(
+  final minnaN4CountFuture = repo.countVocabByLessonRange(
     'N4',
     startLesson: 26,
     endLesson: 50,
     series: 'minna',
   );
 
+  final dueCount = await dueCountFuture;
+  final nextReview = await nextReviewFuture;
+  final n5 = await n5Future;
+  final n4 = await n4Future;
+  final n3 = await n3Future;
+  final n2 = await n2Future;
+  final n1 = await n1Future;
+  final shinkanzenN3 = await shinkanzenN3Future;
+  final shinkanzenN3Summary = await shinkanzenN3SummaryFuture;
+  final shinkanzenN2Summary = await shinkanzenN2SummaryFuture;
+  final shinkanzenN1Summary = await shinkanzenN1SummaryFuture;
+  final minnaN5Count = await minnaN5CountFuture;
+  final minnaN4Count = await minnaN4CountFuture;
+
   return [
     _buildJlptSection(
       levelCode: 'N5',
       items: n5,
-      dueCount: dueTerms.length,
+      dueCount: dueCount,
       nextReview: nextReview,
       accent: const Color(0xFFF5BE1D),
       companionTitle: 'Minna no Nihongo I',
       companionSubtitle: _courseSubtitle(
-        AppLanguage.vi,
+        language,
         _VocabProgramType.minna,
         'N5',
       ),
       companionType: _VocabProgramType.minna,
-      companionCountOverride: minnaN5.length,
+      companionCountOverride: minnaN5Count,
       isInteractive: true,
     ),
     _buildJlptSection(
       levelCode: 'N4',
       items: n4,
-      dueCount: dueTerms.length,
+      dueCount: dueCount,
       nextReview: nextReview,
       accent: const Color(0xFFB428F4),
       companionTitle: 'Minna no Nihongo II',
       companionSubtitle: _courseSubtitle(
-        AppLanguage.vi,
+        language,
         _VocabProgramType.minna,
         'N4',
       ),
       companionType: _VocabProgramType.minna,
-      companionCountOverride: minnaN4.length,
+      companionCountOverride: minnaN4Count,
       isInteractive: true,
     ),
     _buildJlptSection(
       levelCode: 'N3',
       items: n3,
-      dueCount: dueTerms.length,
+      dueCount: dueCount,
       nextReview: nextReview,
       accent: const Color(0xFF06CF56),
       companionTitle: 'Shin Kanzen Master',
       companionSubtitle: _courseSubtitle(
-        AppLanguage.vi,
+        language,
         _VocabProgramType.shinkanzen,
         'N3',
       ),
@@ -186,12 +202,12 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
     _buildJlptSection(
       levelCode: 'N2',
       items: n2,
-      dueCount: dueTerms.length,
+      dueCount: dueCount,
       nextReview: nextReview,
       accent: const Color(0xFFFF606A),
       companionTitle: 'Shin Kanzen Master',
       companionSubtitle: _courseSubtitle(
-        AppLanguage.vi,
+        language,
         _VocabProgramType.shinkanzen,
         'N2',
       ),
@@ -206,12 +222,12 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
     _buildJlptSection(
       levelCode: 'N1',
       items: n1,
-      dueCount: dueTerms.length,
+      dueCount: dueCount,
       nextReview: nextReview,
       accent: const Color(0xFF4095F2),
       companionTitle: 'Shin Kanzen Master',
       companionSubtitle: _courseSubtitle(
-        AppLanguage.vi,
+        language,
         _VocabProgramType.shinkanzen,
         'N1',
       ),
