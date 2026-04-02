@@ -131,10 +131,9 @@ Future<void> pumpReleaseSmokeApp(
   final mistakeRepo = FakeSmokeMistakeRepository(appDb);
   addTearDown(() async {
     await tester.pumpWidget(const SizedBox.shrink());
+    await tester.idle();
+    await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
-    await tester.pumpAndSettle();
-    await contentDb.close();
-    await appDb.close();
   });
 
   await seedSmokeGrammarPoint(

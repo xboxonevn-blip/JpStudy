@@ -37,7 +37,12 @@ class GrammarDao extends DatabaseAccessor<AppDatabase> with _$GrammarDaoMixin {
   }
 
   /// Initialize SRS for a grammar point
-  Future<int> initializeSrsState(int grammarId) {
+  Future<int> initializeSrsState(int grammarId) async {
+    final existing = await getSrsState(grammarId);
+    if (existing != null) {
+      return existing.id;
+    }
+
     return into(grammarSrsState).insert(
       GrammarSrsStateCompanion.insert(
         grammarId: grammarId,
@@ -45,7 +50,6 @@ class GrammarDao extends DatabaseAccessor<AppDatabase> with _$GrammarDaoMixin {
         streak: const Value(0),
         ease: const Value(2.5),
       ),
-      mode: InsertMode.insertOrIgnore,
     );
   }
 

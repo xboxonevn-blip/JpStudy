@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/app/navigation/app_router.dart';
 
@@ -18,6 +19,11 @@ void main() {
     await pumpRoute('/exam-center');
     expect(AppRouter.router.routeInformationProvider.value.uri.path, '/exam-center');
     expect(find.textContaining('Mock Exam'), findsWidgets);
+
+    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.idle();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
   });
 
   testWidgets('jlpt coach route stays mountable', (tester) async {
@@ -35,5 +41,10 @@ void main() {
     expect(find.text('JLPT N5 prep hub'), findsOneWidget);
     expect(find.textContaining('mock'), findsWidgets);
     expect(find.textContaining('Reading'), findsWidgets);
+
+    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.idle();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
   });
 }

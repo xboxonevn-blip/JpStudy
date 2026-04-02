@@ -13,6 +13,7 @@ import 'package:jpstudy/data/db/content_database.dart';
 import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/data/utils/hajimete_catalog_loader.dart';
+import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/vocab/vocab_screen.dart';
 import 'package:jpstudy/features/vocab/models/vocab_review_args.dart';
 import 'package:jpstudy/features/vocab/screens/hajimete_chapter_catalog_screen.dart';
@@ -201,6 +202,11 @@ class _FakeVocabLessonRepository extends LessonRepository {
       );
     });
   }
+
+  @override
+  Future<int> countVocabByLevelAndSeries(String level, String series) async {
+    return bank[level]?.length ?? 0;
+  }
 }
 
 VocabItem _item(int id, String term, String level) => VocabItem(
@@ -218,6 +224,21 @@ Widget _buildScreen({required LessonRepository repo}) {
       appLanguageProvider.overrideWith((ref) => AppLanguage.en),
       studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
       lessonRepositoryProvider.overrideWithValue(repo),
+      dashboardProvider.overrideWith(
+        (ref) => Stream.value(
+          const DashboardState(
+            streak: 0,
+            todayXp: 0,
+            vocabDue: 0,
+            grammarDue: 0,
+            kanjiDue: 0,
+            vocabMistakeCount: 0,
+            grammarMistakeCount: 0,
+            kanjiMistakeCount: 0,
+            totalMistakeCount: 0,
+          ),
+        ),
+      ),
       allDueTermsProvider.overrideWith((ref) async => const []),
       nextVocabReviewProvider.overrideWith((ref) => Stream.value(null)),
     ],
@@ -290,6 +311,21 @@ Widget _buildRouterScreen({required LessonRepository repo}) {
       appLanguageProvider.overrideWith((ref) => AppLanguage.en),
       studyLevelProvider.overrideWith((ref) => StudyLevel.n4),
       lessonRepositoryProvider.overrideWithValue(repo),
+      dashboardProvider.overrideWith(
+        (ref) => Stream.value(
+          const DashboardState(
+            streak: 0,
+            todayXp: 0,
+            vocabDue: 0,
+            grammarDue: 0,
+            kanjiDue: 0,
+            vocabMistakeCount: 0,
+            grammarMistakeCount: 0,
+            kanjiMistakeCount: 0,
+            totalMistakeCount: 0,
+          ),
+        ),
+      ),
       allDueTermsProvider.overrideWith((ref) async => const []),
       nextVocabReviewProvider.overrideWith((ref) => Stream.value(null)),
     ],

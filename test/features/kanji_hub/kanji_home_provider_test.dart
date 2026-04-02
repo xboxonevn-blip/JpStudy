@@ -69,6 +69,33 @@ class _FakeRepo extends LessonRepository {
 
   @override
   Future<Set<int>> fetchDueKanjiIds() async => const {};
+
+  @override
+  Future<int> countKanjiByLevel(String level) async {
+    return switch (level) {
+      'N5' => n5All.length,
+      'N4' => n4All.length,
+      _ => 0,
+    };
+  }
+
+  @override
+  Future<int> countDueKanjiByLevel(String level) async {
+    return switch (level) {
+      'N5' => n5Due.length,
+      'N4' => n4Due.length,
+      _ => 0,
+    };
+  }
+
+  @override
+  Future<int> countUnseenKanjiByLevel(String level) async {
+    return switch (level) {
+      'N5' => n5Unseen.length,
+      'N4' => n4Unseen.length,
+      _ => 0,
+    };
+  }
 }
 
 // ---------------------------------------------------------------------------

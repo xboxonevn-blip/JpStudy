@@ -40,7 +40,7 @@ final kanjiHomeSummaryProvider = FutureProvider<KanjiHomeSummary>((ref) async {
   final allFuture = repo.countKanjiByLevel(levelCode);
 
   final dueCount = await dueFuture;
-  final newCount = await unseenFuture;
+  final newCount = (await unseenFuture).clamp(0, 12);
   final exploreCount = await allFuture;
 
   return KanjiHomeSummary(

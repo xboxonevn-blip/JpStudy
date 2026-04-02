@@ -7,6 +7,7 @@ import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/db/content_database.dart';
 import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
+import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/vocab/providers/vocab_home_provider.dart';
 
 // ---------------------------------------------------------------------------
@@ -16,6 +17,7 @@ import 'package:jpstudy/features/vocab/providers/vocab_home_provider.dart';
 class _FakeVocabRepo extends LessonRepository {
   _FakeVocabRepo({
     this.bank = const {},
+    this.minnaBank = const {},
     this.dueTerms = const [],
   }) : super(
           AppDatabase(executor: NativeDatabase.memory()),
@@ -26,7 +28,7 @@ class _FakeVocabRepo extends LessonRepository {
   final Map<String, List<VocabItem>> bank;
 
   /// level → items for minna series (lesson-range queries)
-  final Map<String, List<VocabItem>> minnaBank = const {};
+  final Map<String, List<VocabItem>> minnaBank;
 
   /// Simulated due terms for allDueTermsProvider
   final List<UserLessonTermData> dueTerms;
@@ -52,6 +54,14 @@ class _FakeVocabRepo extends LessonRepository {
 
   @override
   Future<List<UserLessonTermData>> fetchAllDueTerms() async => dueTerms;
+
+  @override
+  Future<int> countVocabByLevelAndSeries(String level, String series) async {
+    if (series == 'minna') {
+      return minnaBank[level]?.length ?? 0;
+    }
+    return bank[level]?.length ?? 0;
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -86,11 +96,27 @@ ProviderContainer _buildContainer({
   required LessonRepository repo,
   StudyLevel level = StudyLevel.n5,
   DateTime? nextReview,
+  int? dueCount,
 }) {
   return ProviderContainer(
     overrides: [
       studyLevelProvider.overrideWith((ref) => level),
       lessonRepositoryProvider.overrideWithValue(repo),
+      dashboardProvider.overrideWith(
+        (ref) => Stream.value(
+          DashboardState(
+            streak: 0,
+            todayXp: 0,
+            vocabDue: dueCount ?? (repo as _FakeVocabRepo).dueTerms.length,
+            grammarDue: 0,
+            kanjiDue: 0,
+            vocabMistakeCount: 0,
+            grammarMistakeCount: 0,
+            kanjiMistakeCount: 0,
+            totalMistakeCount: 0,
+          ),
+        ),
+      ),
       allDueTermsProvider.overrideWith((ref) async {
         return (repo as _FakeVocabRepo).dueTerms;
       }),
@@ -120,6 +146,7 @@ void main() {
       final due = List.generate(7, _makeDueTerm);
       final container = _buildContainer(
         repo: _FakeVocabRepo(dueTerms: due),
+        dueCount: due.length,
       );
       addTearDown(container.dispose);
 
