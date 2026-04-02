@@ -41,39 +41,45 @@ final vocabDetailProvider =
   final contentDb = ref.watch(contentDatabaseProvider);
   final appDb = ref.watch(databaseProvider);
 
-  // 1. Fetch vocab from content DB
+  // 1. Fetch vocab first (needed to know level + term for downstream queries)
   final vocab = await (contentDb.select(contentDb.vocab)
         ..where((t) => t.id.equals(vocabId)))
       .getSingleOrNull();
   if (vocab == null) return null;
 
-  // 2. Fetch SRS state from app DB (linked via vocabId)
+  // 2–4. Fire SRS state, kanji batch lookup, and related vocab concurrently —
+  //      all three are independent once we have the vocab row.
   final srsDao = SrsDao(appDb);
-  final srs = await srsDao.getSrsState(vocabId);
-
-  // 3. Extract kanji characters from the term and look them up
   final kanjiChars = _extractKanji(vocab.term);
-  final kanjiList = <KanjiData>[];
-  if (kanjiChars.isNotEmpty) {
-    for (final char in kanjiChars) {
-      final found = await (contentDb.select(contentDb.kanji)
-            ..where((t) => t.character.equals(char)))
-          .getSingleOrNull();
-      if (found != null) kanjiList.add(found);
-    }
-  }
 
-  // 4. Find related vocab (same level, first 5 excluding self)
-  final related = await (contentDb.select(contentDb.vocab)
+  final srsFuture = srsDao.getSrsState(vocabId);
+  final kanjiFuture = kanjiChars.isNotEmpty
+      ? (contentDb.select(contentDb.kanji)
+              ..where((t) => t.character.isIn(kanjiChars)))
+          .get()
+      : Future.value(const <KanjiData>[]);
+  final relatedFuture = (contentDb.select(contentDb.vocab)
         ..where(
-            (t) => t.level.equals(vocab.level) & t.id.equals(vocabId).not())
+          (t) => t.level.equals(vocab.level) & t.id.equals(vocabId).not(),
+        )
         ..limit(5))
       .get();
+
+  final srs = await srsFuture;
+  final kanjiList = await kanjiFuture;
+  final related = await relatedFuture;
+
+  // Preserve kanji order matching the term's character order.
+  final kanjiByChar = {for (final k in kanjiList) k.character: k};
+  final orderedKanji = [
+    for (final char in kanjiChars)
+      if (kanjiByChar[char] != null) kanjiByChar[char]!,
+  ];
 
   return VocabDetail(
     vocab: vocab,
     srs: srs,
-    kanjiList: kanjiList,
+    kanjiList: orderedKanji,
     relatedVocab: related,
   );
 });

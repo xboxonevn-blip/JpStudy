@@ -16,21 +16,14 @@ Build a Japanese learning app that combines:
 
 | Phase | Focus | Status | Target |
 | :--- | :--- | :--- | :--- |
-<<<<<<< HEAD
 | Phase 1 | Learning foundation | Completed | Done |
 | Phase 2 | App structure and UI system | Completed | Done |
 | Phase 3 | Learning quality and release hardening | In progress | 2026-03 to 2026-04 |
 | Phase 4 | Cloud sync ecosystem | Parked behind core hardening | Later |
-=======
-| **Phase 1** | **Foundation** (Anki Logic) | ✅ 100% | Completed |
-| **Phase 2** | **Structure & Visuals** (LingoDeer + Clay UI) | ✅ 100% | Completed |
-| **Phase 3** | **Smart Immersion** (FSRS + Handwriting) | ✅ 100% | Feb 2026 |
-| **Phase 4** | **Cloud** (Sync) | 🧪 18% | Q2 2026 |
->>>>>>> f900c1f (T6: Phase 3 verification & build fix)
 
 ## Phase summary
 
-### Phase 1 ? Foundation
+### Phase 1 — Foundation
 
 Completed foundations include:
 - local persistence with Drift + SQLite
@@ -38,7 +31,7 @@ Completed foundations include:
 - core study flows for vocab/grammar/kanji review
 - initial localization and app shell setup
 
-### Phase 2 ? Structure and UI system
+### Phase 2 — Structure and UI system
 
 Completed structural work includes:
 - clearer feature-based app organization
@@ -46,7 +39,7 @@ Completed structural work includes:
 - reusable screens/components for major study flows
 - improved navigation and test coverage for core experiences
 
-### Phase 3 - Core learning quality hardening
+### Phase 3 — Core learning quality hardening
 
 Primary goal:
 - improve learning quality through stronger content-backed grammar behavior, more reliable handwriting evaluation, and steadier core release paths
@@ -63,12 +56,12 @@ Completed / active items:
 
 Remaining direction:
 - keep grammar audits green and update heuristics only when data-clean content still fails for the wrong reason
-- improve handwriting scoring quality and confidence further
+- improve handwriting scoring quality and confidence further through a measurable audit pass before tuning thresholds
 - replace legacy flaky UI paths with stable focused regressions
 - keep immersion regression-safe without reopening a large cleanup program
 - keep lesson/data quality audits active for the canonical report set
 
-### Phase 4 ? Cloud sync ecosystem
+### Phase 4 — Cloud sync ecosystem
 
 Primary goal:
 - add reliable backup and sync without weakening the local-first app model
@@ -91,6 +84,7 @@ Near-term targets:
 ### Next
 
 - extend route smoke / regression coverage for the main learning surfaces
+- run a measurement-first handwriting audit pass before any larger scoring refactor
 - schedule dependency refresh as a separate plan instead of mixing it into the grammar-hardening branch
 - resume cloud backup/sync groundwork only after the core learning flows are steadier
 

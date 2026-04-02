@@ -82,20 +82,29 @@ final hajimeteChapterStatusProvider =
       args,
     ) async {
       final repo = ref.watch(lessonRepositoryProvider);
-      final userTerms = await repo.fetchTermsForHajimeteChapter(
+
+      // Fire user-terms and vocab-items concurrently — they touch different DBs
+      // (app DB vs content DB) and are fully independent.
+      final userTermsFuture = repo.fetchTermsForHajimeteChapter(
         args.levelCode,
         chapterId: args.chapterId,
         title: args.title,
       );
-      final items = await repo.getVocabByLevelSeriesChapterRange(
+      final itemsFuture = repo.getVocabByLevelSeriesChapterRange(
         args.levelCode,
         series: 'hajimete',
         startChapter: args.chapterId,
         endChapter: args.chapterId,
       );
+
+      final userTerms = await userTermsFuture;
+      final items = await itemsFuture;
+
+      // SRS states depend on the vocab IDs from itemsFuture, so must follow.
       final states = await repo.getSrsStatesForIds(
         items.map((item) => item.id).toList(),
       );
+
       final now = DateTime.now();
       return _HajimeteChapterStatus(
         savedCount: userTerms.where((term) => term.isStarred).length,

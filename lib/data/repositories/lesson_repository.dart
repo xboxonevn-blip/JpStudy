@@ -187,8 +187,10 @@ class WeekSummary {
 
 final weekSummaryProvider = FutureProvider<WeekSummary>((ref) async {
   final repo = ref.watch(lessonRepositoryProvider);
-  final history = await repo.fetchReviewHistory(limit: 7);
-  final attempts = await repo.fetchAttemptHistory(limit: 50);
+  final historyFuture = repo.fetchReviewHistory(limit: 7);
+  final attemptsFuture = repo.fetchAttemptHistory(limit: 50);
+  final history = await historyFuture;
+  final attempts = await attemptsFuture;
   final cutoff = DateTime.now().subtract(const Duration(days: 7));
 
   final totalReviewed = history.fold(0, (s, d) => s + d.reviewed);
@@ -491,8 +493,9 @@ class LessonRepository {
 
   // Returns a map of lessonId -> {termCount, completedCount}
   Future<Map<int, LessonProgressStats>> getAllLessonProgress() async {
-    final termCounts =
-        await (_db.selectOnly(_db.userLessonTerm)
+    // Fire both aggregate queries concurrently — no inter-dependency.
+    final termCountsFuture =
+        (_db.selectOnly(_db.userLessonTerm)
               ..addColumns([
                 _db.userLessonTerm.lessonId,
                 _db.userLessonTerm.id.count(),
@@ -500,8 +503,8 @@ class LessonRepository {
               ..groupBy([_db.userLessonTerm.lessonId]))
             .get();
 
-    final completedCounts =
-        await (_db.selectOnly(_db.userLessonTerm)
+    final completedCountsFuture =
+        (_db.selectOnly(_db.userLessonTerm)
               ..addColumns([
                 _db.userLessonTerm.lessonId,
                 _db.userLessonTerm.id.count(),
@@ -509,6 +512,9 @@ class LessonRepository {
               ..where(_db.userLessonTerm.isLearned.equals(true))
               ..groupBy([_db.userLessonTerm.lessonId]))
             .get();
+
+    final termCounts = await termCountsFuture;
+    final completedCounts = await completedCountsFuture;
 
     final stats = <int, LessonProgressStats>{};
 
@@ -640,6 +646,20 @@ class LessonRepository {
   // Fetch Minna vocabulary for a JLPT level by default to avoid mixing tracks in legacy flows.
   Future<List<VocabItem>> getVocabByLevel(String level) {
     return getVocabByLevelAndSeries(level, 'minna');
+  }
+
+  /// COUNT(*) variant — use when only the number of terms is needed.
+  /// Avoids deserializing full vocab rows.
+  Future<int> countVocabByLevelAndSeries(String level, String series) async {
+    final countExpr = _contentDb.vocab.id.count();
+    final row = await (_contentDb.selectOnly(_contentDb.vocab)
+          ..addColumns([countExpr])
+          ..where(
+            _contentDb.vocab.level.equals(level) &
+                _contentDb.vocab.series.equals(series),
+          ))
+        .getSingle();
+    return row.read(countExpr) ?? 0;
   }
 
   Future<List<VocabItem>> getVocabByLevelAndSeries(
@@ -1542,6 +1562,26 @@ class LessonRepository {
     // prevents users from losing their SRS review history on lesson re-opens.
     final existingByTitle = {for (final p in existingPoints) p.grammarPoint: p};
 
+    // Pre-fetch ALL content examples for this lesson in one batch query.
+    // This replaces N individual SELECT queries (one per grammar point).
+    final contentPointIds = contentPoints.map((cp) => cp.id).toList();
+    final allContentExamples = contentPointIds.isEmpty
+        ? const <GrammarExampleData>[]
+        : await (_contentDb.select(
+              _contentDb.grammarExample,
+            )..where((tbl) => tbl.grammarPointId.isIn(contentPointIds)))
+            .get();
+    final contentExamplesByPointId = <int, List<GrammarExampleData>>{};
+    for (final ex in allContentExamples) {
+      contentExamplesByPointId.putIfAbsent(ex.grammarPointId, () => []).add(ex);
+    }
+
+    // Collect all app-side grammarIds for existing points — batch-delete their
+    // examples in one DELETE...WHERE id IN (...) instead of N individual deletes.
+    final existingAppIds = <int>[];
+    // Accumulate all example rows to insert; flush in a single batch at the end.
+    final pendingExamples = <GrammarExamplesCompanion>[];
+
     for (final cp in contentPoints) {
       final englishLabel = resolveEnglishGrammarLabel(
         titleEn: cp.titleEn,
@@ -1574,9 +1614,10 @@ class LessonRepository {
           ? null
           : englishConnection;
 
+      final cpExamples = contentExamplesByPointId[cp.id] ?? const [];
       final existing = existingByTitle[cp.title];
       if (existing != null) {
-        // UPDATE English fields in-place — row id and SRS state unchanged
+        // UPDATE English fields in-place — row id and SRS state unchanged.
         await (_db.update(
           _db.grammarPoints,
         )..where((tbl) => tbl.id.equals(existing.id))).write(
@@ -1587,69 +1628,64 @@ class LessonRepository {
             explanationEn: Value(cp.explanationEn),
           ),
         );
-
-        // Refresh examples (safe: examples don't carry SRS state)
-        await (_db.delete(
-          _db.grammarExamples,
-        )..where((tbl) => tbl.grammarId.equals(existing.id))).go();
-
-        final examples = await (_contentDb.select(
-          _contentDb.grammarExample,
-        )..where((tbl) => tbl.grammarPointId.equals(cp.id))).get();
-
-        for (final ex in examples) {
-          await _db
-              .into(_db.grammarExamples)
-              .insert(
-                GrammarExamplesCompanion.insert(
-                  grammarId: existing.id,
-                  japanese: ex.sentence,
-                  translation: ex.translation,
-                  translationVi: Value(ex.translation),
-                  translationEn: Value(ex.translationEn),
-                ),
-              );
+        // Mark for batch delete + re-insert below.
+        existingAppIds.add(existing.id);
+        for (final ex in cpExamples) {
+          pendingExamples.add(
+            GrammarExamplesCompanion.insert(
+              grammarId: existing.id,
+              japanese: ex.sentence,
+              translation: ex.translation,
+              translationVi: Value(ex.translation),
+              translationEn: Value(ex.translationEn),
+            ),
+          );
         }
       } else {
-        // INSERT new grammar point not previously in the app DB
-        final pointId = await _db
-            .into(_db.grammarPoints)
-            .insert(
-              GrammarPointsCompanion.insert(
-                lessonId: Value(lessonId),
-                grammarPoint: cp.title,
-                titleEn: Value(storedTitleEn),
-                meaning: cp.title,
-                meaningVi: Value(cp.title),
-                meaningEn: Value(storedMeaningEn),
-                connection: cp.structure,
-                connectionEn: Value(storedConnectionEn),
-                explanation: cp.explanation,
-                explanationVi: Value(cp.explanation),
-                explanationEn: Value(cp.explanationEn),
-                jlptLevel: cp.level,
-                isLearned: const Value(false),
-              ),
-            );
-
-        final examples = await (_contentDb.select(
-          _contentDb.grammarExample,
-        )..where((tbl) => tbl.grammarPointId.equals(cp.id))).get();
-
-        for (final ex in examples) {
-          await _db
-              .into(_db.grammarExamples)
-              .insert(
-                GrammarExamplesCompanion.insert(
-                  grammarId: pointId,
-                  japanese: ex.sentence,
-                  translation: ex.translation,
-                  translationVi: Value(ex.translation),
-                  translationEn: Value(ex.translationEn),
-                ),
-              );
+        // INSERT new grammar point — still needs sequential await to get the ID.
+        final pointId = await _db.into(_db.grammarPoints).insert(
+          GrammarPointsCompanion.insert(
+            lessonId: Value(lessonId),
+            grammarPoint: cp.title,
+            titleEn: Value(storedTitleEn),
+            meaning: cp.title,
+            meaningVi: Value(cp.title),
+            meaningEn: Value(storedMeaningEn),
+            connection: cp.structure,
+            connectionEn: Value(storedConnectionEn),
+            explanation: cp.explanation,
+            explanationVi: Value(cp.explanation),
+            explanationEn: Value(cp.explanationEn),
+            jlptLevel: cp.level,
+            isLearned: const Value(false),
+          ),
+        );
+        for (final ex in cpExamples) {
+          pendingExamples.add(
+            GrammarExamplesCompanion.insert(
+              grammarId: pointId,
+              japanese: ex.sentence,
+              translation: ex.translation,
+              translationVi: Value(ex.translation),
+              translationEn: Value(ex.translationEn),
+            ),
+          );
         }
       }
+    }
+
+    // Batch delete all old examples, then batch insert all new ones.
+    if (existingAppIds.isNotEmpty) {
+      await (_db.delete(
+        _db.grammarExamples,
+      )..where((tbl) => tbl.grammarId.isIn(existingAppIds))).go();
+    }
+    if (pendingExamples.isNotEmpty) {
+      await _db.batch((batch) {
+        for (final companion in pendingExamples) {
+          batch.insert(_db.grammarExamples, companion);
+        }
+      });
     }
   }
 
@@ -1725,6 +1761,49 @@ class LessonRepository {
 
     final rows = await query.get();
     return _mapKanjiRows(rows);
+  }
+
+  /// COUNT-only: total kanji at [level]. No row deserialization.
+  Future<int> countKanjiByLevel(String level) async {
+    final countExpr = _contentDb.kanji.id.count();
+    final row = await (_contentDb.selectOnly(_contentDb.kanji)
+          ..addColumns([countExpr])
+          ..where(_contentDb.kanji.jlptLevel.equals(level)))
+        .getSingle();
+    return row.read(countExpr) ?? 0;
+  }
+
+  /// COUNT-only: due kanji at [level]. No KanjiItem deserialization.
+  Future<int> countDueKanjiByLevel(String level) async {
+    final dueIds = await _db.kanjiSrsDao.getDueKanjiIds();
+    if (dueIds.isEmpty) return 0;
+    final countExpr = _contentDb.kanji.id.count();
+    final row = await (_contentDb.selectOnly(_contentDb.kanji)
+          ..addColumns([countExpr])
+          ..where(
+            _contentDb.kanji.jlptLevel.equals(level) &
+                _contentDb.kanji.id.isIn(dueIds),
+          ))
+        .getSingle();
+    return row.read(countExpr) ?? 0;
+  }
+
+  /// COUNT-only: unseen kanji at [level] (no SRS row). No deserialization.
+  Future<int> countUnseenKanjiByLevel(String level) async {
+    final seenIds = await _db.kanjiSrsDao.getAllSeenKanjiIds();
+    final countExpr = _contentDb.kanji.id.count();
+    final query = _contentDb.selectOnly(_contentDb.kanji)
+      ..addColumns([countExpr]);
+    if (seenIds.isEmpty) {
+      query.where(_contentDb.kanji.jlptLevel.equals(level));
+    } else {
+      query.where(
+        _contentDb.kanji.jlptLevel.equals(level) &
+            _contentDb.kanji.id.isNotIn(seenIds),
+      );
+    }
+    final row = await query.getSingle();
+    return row.read(countExpr) ?? 0;
   }
 
   /// Returns the IDs of all kanji that have ever been seen (have an SRS row).
@@ -1973,7 +2052,10 @@ class LessonRepository {
     required int kanjiId,
     required int grade,
   }) async {
-    await ensureKanjiSrsState(kanjiId);
+    // initializeSrsState uses INSERT OR IGNORE — safe to call unconditionally.
+    // This collapses ensureKanjiSrsState (SELECT + maybe INSERT) + getSrsState
+    // (SELECT) into 2 round-trips instead of 2-3.
+    await _db.kanjiSrsDao.initializeSrsState(kanjiId);
     final state = await _db.kanjiSrsDao.getSrsState(kanjiId);
     if (state == null) return;
 
@@ -2422,22 +2504,25 @@ class LessonRepository {
     );
   }
 
-  /// Process an SRS review for a specific term
+  /// Process an SRS review for a specific term.
+  ///
+  /// Query path (3 round-trips, down from up to 5):
+  ///   1. INSERT OR IGNORE srs_state   — ensures row exists, no-op if present
+  ///   2. SELECT srs_state + UPDATE user_progress — fired concurrently (different tables)
+  ///   3. UPDATE srs_state             — needs FSRS result from step 2
   Future<FsrsReviewResult?> saveTermReview({
     required int termId,
     required int quality,
   }) async {
-    // 1. Update Global Stats
-    await recordReview(quality: quality);
+    // Ensure row exists without a separate SELECT — INSERT OR IGNORE is a no-op
+    // when the SRS state already exists, eliminating the conditional check.
+    await _db.srsDao.initializeSrsState(termId);
 
-    // 2. Get current SRS state
-    var srsState = await _db.srsDao.getSrsState(termId);
-
-    // Initialize if missing
-    if (srsState == null) {
-      await _db.srsDao.initializeSrsState(termId);
-      srsState = await _db.srsDao.getSrsState(termId);
-    }
+    // Fire stats update and SRS state fetch concurrently — they touch different
+    // tables (user_progress vs srs_state) and are fully independent.
+    final recordFuture = recordReview(quality: quality);
+    final srsState = await _db.srsDao.getSrsState(termId);
+    await recordFuture;
 
     if (srsState == null) return null;
 
@@ -2448,7 +2533,6 @@ class LessonRepository {
       lastReviewedAt: srsState.lastReviewedAt,
     );
 
-    // 4. Update SRS state
     await _db.srsDao.updateSrsState(
       vocabId: termId,
       box: srsState.box,
@@ -2470,15 +2554,8 @@ class LessonRepository {
     }
   }
 
-  Future<Map<int, SrsStateData>> getSrsStatesForIds(List<int> termIds) async {
-    final states = <int, SrsStateData>{};
-    for (final termId in termIds.toSet()) {
-      final state = await _db.srsDao.getSrsState(termId);
-      if (state != null) {
-        states[termId] = state;
-      }
-    }
-    return states;
+  Future<Map<int, SrsStateData>> getSrsStatesForIds(List<int> termIds) {
+    return _db.srsDao.getStatesForIds(termIds.toSet().toList());
   }
 
   Future<void> initializeSrsForTermIds(List<int> termIds) async {
@@ -2597,17 +2674,39 @@ class LessonRepository {
 
   Future<ProgressSummary> fetchProgressSummary() async {
     final today = _startOfDay(DateTime.now());
-    final todayRow = await (_db.select(
-      _db.userProgress,
-    )..where((tbl) => tbl.day.equals(today))).getSingleOrNull();
-    final latestRow =
-        await (_db.select(_db.userProgress)
-              ..orderBy([
-                (tbl) =>
-                    OrderingTerm(expression: tbl.day, mode: OrderingMode.desc),
-              ])
-              ..limit(1))
-            .getSingleOrNull();
+
+    // Fire all four queries concurrently — none depend on each other's result.
+    // On devices where Drift uses a background isolate this gives true
+    // parallelism; on single-isolate setups it still amortises event-loop
+    // overhead across all four round-trips.
+    final todayFuture = (_db.select(_db.userProgress)
+          ..where((tbl) => tbl.day.equals(today)))
+        .getSingleOrNull();
+    final latestFuture = (_db.select(_db.userProgress)
+          ..orderBy([
+            (tbl) => OrderingTerm(expression: tbl.day, mode: OrderingMode.desc),
+          ])
+          ..limit(1))
+        .getSingleOrNull();
+    final progressAggFuture = (_db.selectOnly(_db.userProgress)
+          ..addColumns([
+            _db.userProgress.xp.sum(),
+            _db.userProgress.streak.max(),
+            _db.userProgress.id.count(),
+          ]))
+        .getSingleOrNull();
+    final attemptStatsFuture = (_db.selectOnly(_db.attempt)
+          ..addColumns([
+            _db.attempt.id.count(),
+            _db.attempt.score.sum(),
+            _db.attempt.total.sum(),
+          ]))
+        .getSingleOrNull();
+
+    final todayRow = await todayFuture;
+    final latestRow = await latestFuture;
+    final progressAgg = await progressAggFuture;
+    final attemptStats = await attemptStatsFuture;
 
     var streak = 0;
     if (todayRow != null) {
@@ -2619,26 +2718,11 @@ class LessonRepository {
       }
     }
 
-    final progressAgg = await (_db.selectOnly(_db.userProgress)
-          ..addColumns([
-            _db.userProgress.xp.sum(),
-            _db.userProgress.streak.max(),
-            _db.userProgress.id.count(),
-          ]))
-        .getSingleOrNull();
     final totalXp = progressAgg?.read(_db.userProgress.xp.sum()) ?? 0;
     final longestStreak =
         progressAgg?.read(_db.userProgress.streak.max()) ?? 0;
     final totalDaysStudied =
         progressAgg?.read(_db.userProgress.id.count()) ?? 0;
-
-    final attemptStats =
-        await (_db.selectOnly(_db.attempt)..addColumns([
-              _db.attempt.id.count(),
-              _db.attempt.score.sum(),
-              _db.attempt.total.sum(),
-            ]))
-            .getSingleOrNull();
     final totalAttempts = attemptStats?.read(_db.attempt.id.count()) ?? 0;
     final totalCorrect = attemptStats?.read(_db.attempt.score.sum()) ?? 0;
     final totalQuestions = attemptStats?.read(_db.attempt.total.sum()) ?? 0;

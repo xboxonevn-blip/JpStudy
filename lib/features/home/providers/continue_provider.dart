@@ -23,10 +23,9 @@ final continueActionProvider = FutureProvider<ContinueAction>((ref) async {
 
   final dashboard = dashboardAsync.value!;
 
-  // Priority 1: Grammar Due
+  // Priority 1: Grammar Due — fetch IDs only (no full GrammarPoint rows needed)
   if (dashboard.grammarDue > 0) {
-    final duePoints = await grammarRepo.fetchDuePoints();
-    final dueIds = duePoints.map((p) => p.id).toList();
+    final dueIds = await grammarRepo.fetchDueGrammarIds();
     return ContinueAction(
       type: ContinueActionType.grammarReview,
       label: language.reviewGrammarLabel,

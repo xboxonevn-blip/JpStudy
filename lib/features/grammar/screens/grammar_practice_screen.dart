@@ -480,23 +480,38 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
       points = points.take(20).toList(growable: false);
     }
 
-    final rawDetails = await Future.wait(
-      points.map((point) => repo.getGrammarDetail(point.id)),
-    );
-    final details = [
-      for (final d in rawDetails)
-        if (d != null && d.examples.isNotEmpty) d,
-    ];
-
+    // Single batch query for all examples — replaces N*2 queries from
+    // Future.wait(getGrammarDetail) since we already have the point objects.
+    final pointIds = points.map((p) => p.id).toList();
     final levels =
         (constrainToSelectedLevel
                 ? <String>{selectedLevel}
                 : points.map((p) => p.jlptLevel).toSet())
             .where((level) => level.trim().isNotEmpty)
             .toList(growable: false);
-    final levelResults = await Future.wait(
+
+    // Fire examples fetch and level queries concurrently.
+    final examplesFuture = pointIds.isEmpty
+        ? Future.value(const <GrammarExample>[])
+        : (repo.db.select(repo.db.grammarExamples)
+              ..where((tbl) => tbl.grammarId.isIn(pointIds)))
+            .get();
+    final levelResultsFuture = Future.wait(
       levels.map((level) => repo.fetchPointsByLevel(level)),
     );
+
+    final allExamplesRaw = await examplesFuture;
+    final examplesByGrammarId = <int, List<GrammarExample>>{};
+    for (final ex in allExamplesRaw) {
+      examplesByGrammarId.putIfAbsent(ex.grammarId, () => []).add(ex);
+    }
+    final details = [
+      for (final p in points)
+        if ((examplesByGrammarId[p.id] ?? const []).isNotEmpty)
+          (point: p, examples: examplesByGrammarId[p.id]!),
+    ];
+
+    final levelResults = await levelResultsFuture;
     final distractorPool = <GrammarPoint>[
       for (final pts in levelResults) ...pts,
     ];

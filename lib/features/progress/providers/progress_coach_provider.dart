@@ -18,11 +18,18 @@ final progressCoachBoardProvider = FutureProvider<ProgressCoachBoard>((
 ) async {
   final language = ref.watch(appLanguageProvider);
   final level = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
-  final summary = await ref.watch(progressSummaryProvider.future);
-  final reviewHistory = await ref.watch(reviewHistoryProvider.future);
-  final attemptHistory = await ref.watch(attemptHistoryProvider.future);
-  final retention = await ref.watch(srsRetentionProvider.future);
+
+  // Watch all async providers before any await so they start concurrently.
+  final summaryFuture = ref.watch(progressSummaryProvider.future);
+  final reviewHistoryFuture = ref.watch(reviewHistoryProvider.future);
+  final attemptHistoryFuture = ref.watch(attemptHistoryProvider.future);
+  final retentionFuture = ref.watch(srsRetentionProvider.future);
   final dashboard = ref.watch(dashboardProvider).valueOrNull;
+
+  final summary = await summaryFuture;
+  final reviewHistory = await reviewHistoryFuture;
+  final attemptHistory = await attemptHistoryFuture;
+  final retention = await retentionFuture;
   final continueAction = ref.watch(continueActionProvider).valueOrNull;
   final recoveryItems =
       ref.watch(weaknessRadarProvider).valueOrNull ?? const [];

@@ -33,14 +33,20 @@ final kanjiHomeSummaryProvider = FutureProvider<KanjiHomeSummary>((ref) async {
   final repo = ref.watch(lessonRepositoryProvider);
   final level = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
   final levelCode = level.shortLabel;
-  final due = await repo.fetchDueKanjiByLevel(levelCode);
-  final unseen = await repo.fetchUnseenKanjiByLevel(levelCode, limit: 12);
-  final all = await repo.fetchKanjiByLevel(levelCode);
+
+  // Fire all three COUNT queries concurrently — no full KanjiItem deserialization.
+  final dueFuture = repo.countDueKanjiByLevel(levelCode);
+  final unseenFuture = repo.countUnseenKanjiByLevel(levelCode);
+  final allFuture = repo.countKanjiByLevel(levelCode);
+
+  final dueCount = await dueFuture;
+  final newCount = await unseenFuture;
+  final exploreCount = await allFuture;
 
   return KanjiHomeSummary(
     levelCode: levelCode,
-    dueCount: due.length,
-    newCount: unseen.length,
-    exploreCount: all.length,
+    dueCount: dueCount,
+    newCount: newCount,
+    exploreCount: exploreCount,
   );
 });

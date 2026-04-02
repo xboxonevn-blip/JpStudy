@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
+import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 
 class VocabTrackSummary {
   const VocabTrackSummary({
@@ -52,44 +53,44 @@ class VocabHomeSection {
 
 final vocabHomeSectionProvider = FutureProvider<VocabHomeSection>((ref) async {
   final repo = ref.watch(lessonRepositoryProvider);
-  final dueTerms = await ref.watch(allDueTermsProvider.future);
-  final nextReview = await ref.watch(nextVocabReviewProvider.future);
   final selectedLevel = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
 
-  Future<int> countLevel(String levelCode, String series) async {
-    return (await repo.getVocabByLevelAndSeries(levelCode, series)).length;
-  }
+  // Fire all independent queries concurrently.
+  // Due count comes from the dashboard snapshot, which already uses aggregate
+  // DAO queries and is the shared source of truth for home/release surfaces.
+  final dashboardFuture = ref.watch(dashboardProvider.future);
+  final nextReviewFuture = ref.watch(nextVocabReviewProvider.future);
+  final n5Future = repo.countVocabByLevelAndSeries('N5', 'hajimete');
+  final n4Future = repo.countVocabByLevelAndSeries('N4', 'hajimete');
+  final n3Future = repo.countVocabByLevelAndSeries('N3', 'hajimete');
+  final n2Future = repo.countVocabByLevelAndSeries('N2', 'hajimete');
+  final n1Future = repo.countVocabByLevelAndSeries('N1', 'hajimete');
+  final minnaN5Future = repo.getVocabByLessonRange(
+    'N5',
+    startLesson: 1,
+    endLesson: 25,
+    series: 'minna',
+  ).then((items) => items.length);
+  final minnaN4Future = repo.getVocabByLessonRange(
+    'N4',
+    startLesson: 26,
+    endLesson: 50,
+    series: 'minna',
+  ).then((items) => items.length);
 
-  Future<int> countMinna(String levelCode, int start, int end) async {
-    return (await repo.getVocabByLessonRange(
-      levelCode,
-      startLesson: start,
-      endLesson: end,
-      series: 'minna',
-    )).length;
-  }
-
-  // Fire all 7 DB queries in parallel — each is independent, no dependencies.
-  final counts = await Future.wait([
-    countLevel('N5', 'hajimete'),
-    countLevel('N4', 'hajimete'),
-    countLevel('N3', 'hajimete'),
-    countLevel('N2', 'hajimete'),
-    countLevel('N1', 'hajimete'),
-    countMinna('N5', 1, 25),
-    countMinna('N4', 26, 50),
-  ]);
-  final n5Core = counts[0];
-  final n4Core = counts[1];
-  final n3Core = counts[2];
-  final n2Core = counts[3];
-  final n1Core = counts[4];
-  final minnaN5 = counts[5];
-  final minnaN4 = counts[6];
+  final dashboard = await dashboardFuture;
+  final nextReview = await nextReviewFuture;
+  final n5Core = await n5Future;
+  final n4Core = await n4Future;
+  final n3Core = await n3Future;
+  final n2Core = await n2Future;
+  final n1Core = await n1Future;
+  final minnaN5 = await minnaN5Future;
+  final minnaN4 = await minnaN4Future;
 
   return VocabHomeSection(
     selectedLevelCode: selectedLevel.shortLabel,
-    dueCount: dueTerms.length,
+    dueCount: dashboard.vocabDue,
     nextReview: nextReview,
     liveTracks: [
       VocabTrackSummary(

@@ -27,6 +27,13 @@ class GrammarRepository {
     return (_db.select(_db.grammarPoints)..where((t) => t.id.isIn(ids))).get();
   }
 
+  /// Returns only the IDs of grammar points due for review.
+  /// Cheaper than [fetchDuePoints] when the caller only needs IDs, not the
+  /// full GrammarPoint rows (title, connection, explanation, etc.).
+  Future<List<int>> fetchDueGrammarIds() {
+    return _db.grammarDao.getDueGrammarIds();
+  }
+
   /// Fetch all grammar points due for review
   Future<List<GrammarPoint>> fetchDuePoints() async {
     final dueStates = await _db.grammarDao.getDueReviews();
@@ -43,19 +50,13 @@ class GrammarRepository {
   /// Fetch full details for a grammar point (including examples)
   Future<({GrammarPoint point, List<GrammarExample> examples})?>
   getGrammarDetail(int id) async {
-    final point = await _db.grammarDao.getGrammarPoint(id);
+    // Fire both queries concurrently; discard examples if point not found.
+    final pointFuture = _db.grammarDao.getGrammarPoint(id);
+    final examplesFuture = _db.grammarDao.getExamplesForPoint(id);
+    final point = await pointFuture;
     if (point == null) return null;
-
-    final examples = await _db.grammarDao.getExamplesForPoint(id);
+    final examples = await examplesFuture;
     return (point: point, examples: examples);
-  }
-
-  /// Initialize SRS for a grammar point if not exists
-  Future<void> ensureSrsInitialized(int grammarId) async {
-    final existing = await _db.grammarDao.getSrsState(grammarId);
-    if (existing == null) {
-      await _db.grammarDao.initializeSrsState(grammarId);
-    }
   }
 
   /// Record a review for a grammar point
@@ -66,7 +67,8 @@ class GrammarRepository {
     required int grammarId,
     required int grade, // 1-4
   }) async {
-    await ensureSrsInitialized(grammarId);
+    // INSERT OR IGNORE — no prior SELECT needed; safe to call unconditionally.
+    await _db.grammarDao.initializeSrsState(grammarId);
     final state = await _db.grammarDao.getSrsState(grammarId);
     if (state == null) return;
 
@@ -119,6 +121,6 @@ class GrammarRepository {
   /// Mark a grammar point as learned and initialize SRS
   Future<void> markAsLearned(int grammarId) async {
     await _db.grammarDao.updateLearnedStatus(grammarId, true);
-    await ensureSrsInitialized(grammarId);
+    await _db.grammarDao.initializeSrsState(grammarId);
   }
 }

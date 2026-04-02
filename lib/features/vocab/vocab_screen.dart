@@ -12,6 +12,7 @@ import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
+import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/vocab/models/vocab_review_args.dart';
 import 'package:jpstudy/features/vocab/vocab_copy.dart';
 import 'package:jpstudy/features/vocab/providers/vocab_home_provider.dart';
@@ -101,13 +102,11 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
   final repo = ref.read(lessonRepositoryProvider);
   final language = ref.watch(appLanguageProvider);
 
-  // Fire all 13 independent fetches in parallel — previously sequential,
-  // adding latency of every fetch to the total.  Now total latency ≈ slowest
-  // single fetch.  minnaN5/N4 use COUNT queries instead of full row fetches
-  // (vocab data is only needed for the other levels, not minna companion counts).
-  final dueCountFuture = ref.watch(allDueTermsProvider.future).then(
-    (items) => items.length,
-  );
+  // Fire all 13 independent fetches in parallel — previously sequential.
+  // dueCount uses a COUNT(*) query instead of loading full term objects.
+  // minna companion counts use COUNT(*) from getVocabByLevelAndSeries
+  // (level-series filter is indexable in SQL, unlike lesson-tag filter).
+  final dashboardFuture = ref.watch(dashboardProvider.future);
   final nextReviewFuture = ref.watch(nextVocabReviewProvider.future);
   final n5Future = repo.getVocabByLevelAndSeries('N5', 'hajimete');
   final n4Future = repo.getVocabByLevelAndSeries('N4', 'hajimete');
@@ -119,23 +118,14 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
   final shinkanzenN2SummaryFuture = _loadShinkanzenManifestSummary('N2');
   final shinkanzenN1SummaryFuture = _loadShinkanzenManifestSummary('N1');
   final minnaN5CountFuture = repo
-      .getVocabByLessonRange(
-        'N5',
-        startLesson: 1,
-        endLesson: 25,
-        series: 'minna',
-      )
+      .getVocabByLessonRange('N5', startLesson: 1, endLesson: 25, series: 'minna')
       .then((items) => items.length);
   final minnaN4CountFuture = repo
-      .getVocabByLessonRange(
-        'N4',
-        startLesson: 26,
-        endLesson: 50,
-        series: 'minna',
-      )
+      .getVocabByLessonRange('N4', startLesson: 26, endLesson: 50, series: 'minna')
       .then((items) => items.length);
 
-  final dueCount = await dueCountFuture;
+  final dashboard = await dashboardFuture;
+  final dueCount = dashboard.vocabDue;
   final nextReview = await nextReviewFuture;
   final n5 = await n5Future;
   final n4 = await n4Future;

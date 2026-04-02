@@ -86,63 +86,80 @@ class HajimeteKanjiEntry {
   final String meaningEn;
 }
 
+// Process-level cache — catalog JSON is immutable at runtime (shipped as
+// assets), so caching indefinitely is safe and avoids repeated asset reads.
+final _catalogCache = <String, HajimeteChapterCatalog>{};
+
 Future<HajimeteChapterCatalog> loadHajimeteChapterCatalog(String levelCode) async {
   final normalizedLevel = levelCode.trim().toUpperCase();
+  final cached = _catalogCache[normalizedLevel];
+  if (cached != null) return cached;
+
   final chapterCount = _chapterCountByLevel[normalizedLevel] ?? 0;
   final levelLower = normalizedLevel.toLowerCase();
-  final chapters = <HajimeteChapterSummary>[];
 
-  for (var chapterId = 1; chapterId <= chapterCount; chapterId++) {
-    final padded = chapterId.toString().padLeft(2, '0');
-    final path = 'assets/data/content/vocab/$levelLower/hajimete/hajimete_ch$padded.json';
-    try {
-      final raw = await rootBundle.loadString(path);
-      final payload = json.decode(raw);
-      if (payload is! Map) continue;
+  // Load all chapter JSON files concurrently — asset bundle reads are
+  // independent and the rootBundle handles parallel access fine.
+  final summaries = await Future.wait([
+    for (var chapterId = 1; chapterId <= chapterCount; chapterId++)
+      _loadChapterSummary(levelLower, chapterId),
+  ]);
 
-      final map = payload.map((key, value) => MapEntry(key.toString(), value));
-      final rawTitle = (map['chapterTitle'] ?? '').toString();
-      final entryCount = map['entryCount'] is int
-          ? map['entryCount'] as int
-          : (map['entries'] is List ? (map['entries'] as List).length : 0);
-      final entries = map['entries'] is List ? map['entries'] as List : const [];
+  final chapters = summaries.whereType<HajimeteChapterSummary>().toList();
+  final catalog = HajimeteChapterCatalog(levelCode: normalizedLevel, chapters: chapters);
+  _catalogCache[normalizedLevel] = catalog;
+  return catalog;
+}
 
-      final previewTerms = <String>[];
-      final sourceVocabIds = <String>[];
-      for (final rawEntry in entries) {
-        if (rawEntry is! Map) continue;
-        final entry = rawEntry.map((key, value) => MapEntry(key.toString(), value));
-        final lemma = entry['lemma'] is Map
-            ? (entry['lemma'] as Map).map((key, value) => MapEntry(key.toString(), value))
-            : const <String, dynamic>{};
-        final links = entry['links'] is Map
-            ? (entry['links'] as Map).map((key, value) => MapEntry(key.toString(), value))
-            : const <String, dynamic>{};
-        final term = repairPotentialMojibake((lemma['term'] ?? '').toString()).trim();
-        if (term.isNotEmpty && previewTerms.length < 4) {
-          previewTerms.add(term);
-        }
-        final sourceVocabId = (links['sourceVocabId'] ?? '').toString().trim();
-        if (sourceVocabId.isNotEmpty) {
-          sourceVocabIds.add(sourceVocabId);
-        }
+Future<HajimeteChapterSummary?> _loadChapterSummary(
+  String levelLower,
+  int chapterId,
+) async {
+  final padded = chapterId.toString().padLeft(2, '0');
+  final path = 'assets/data/content/vocab/$levelLower/hajimete/hajimete_ch$padded.json';
+  try {
+    final raw = await rootBundle.loadString(path);
+    final payload = json.decode(raw);
+    if (payload is! Map) return null;
+
+    final map = payload.map((key, value) => MapEntry(key.toString(), value));
+    final rawTitle = (map['chapterTitle'] ?? '').toString();
+    final entryCount = map['entryCount'] is int
+        ? map['entryCount'] as int
+        : (map['entries'] is List ? (map['entries'] as List).length : 0);
+    final entries = map['entries'] is List ? map['entries'] as List : const [];
+
+    final previewTerms = <String>[];
+    final sourceVocabIds = <String>[];
+    for (final rawEntry in entries) {
+      if (rawEntry is! Map) continue;
+      final entry = rawEntry.map((key, value) => MapEntry(key.toString(), value));
+      final lemma = entry['lemma'] is Map
+          ? (entry['lemma'] as Map).map((key, value) => MapEntry(key.toString(), value))
+          : const <String, dynamic>{};
+      final links = entry['links'] is Map
+          ? (entry['links'] as Map).map((key, value) => MapEntry(key.toString(), value))
+          : const <String, dynamic>{};
+      final term = repairPotentialMojibake((lemma['term'] ?? '').toString()).trim();
+      if (term.isNotEmpty && previewTerms.length < 4) {
+        previewTerms.add(term);
       }
-
-      chapters.add(
-        HajimeteChapterSummary(
-          chapterId: map['chapterId'] is int ? map['chapterId'] as int : chapterId,
-          title: _normalizeChapterTitle(rawTitle, chapterId),
-          entryCount: entryCount,
-          previewTerms: previewTerms,
-          sourceVocabIds: sourceVocabIds,
-        ),
-      );
-    } catch (_) {
-      continue;
+      final sourceVocabId = (links['sourceVocabId'] ?? '').toString().trim();
+      if (sourceVocabId.isNotEmpty) {
+        sourceVocabIds.add(sourceVocabId);
+      }
     }
-  }
 
-  return HajimeteChapterCatalog(levelCode: normalizedLevel, chapters: chapters);
+    return HajimeteChapterSummary(
+      chapterId: map['chapterId'] is int ? map['chapterId'] as int : chapterId,
+      title: _normalizeChapterTitle(rawTitle, chapterId),
+      entryCount: entryCount,
+      previewTerms: previewTerms,
+      sourceVocabIds: sourceVocabIds,
+    );
+  } catch (_) {
+    return null;
+  }
 }
 
 Future<HajimeteChapterDetail?> loadHajimeteChapterDetail(
