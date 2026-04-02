@@ -1,22 +1,151 @@
 {
-  "sampleSetVersion": "2026-04-02-v2",
-  "generatedAtUtc": "2026-04-02T15:46:10.617511Z",
+  "sampleSetVersion": "2026-04-02-v3",
+  "generatedAtUtc": "2026-04-02T15:52:42.547802Z",
   "scoringVersion": "v2",
   "showGuide": false,
   "templateDatasetVersion": "422979-2026-03-18T10:57:01.000Z",
   "summary": {
-    "sampleCount": 20,
+    "sampleCount": 34,
     "falsePositiveCount": 2,
     "falseNegativeCount": 0,
-    "falsePositiveRate": 0.18181818181818182,
+    "falsePositiveRate": 0.08,
     "falseNegativeRate": 0.0,
     "passRateByMode": {
-      "compound": 0.875,
+      "compound": 0.9333333333333333,
       "mixed": 1.0
     },
     "passRateByLevel": {
-      "N4": 0.9
+      "N4": 0.9333333333333333,
+      "N5": 1.0
     },
+    "caseCountByExpectedBucket": [
+      {
+        "bucket": "none",
+        "count": 9
+      },
+      {
+        "bucket": "normalization",
+        "count": 2
+      },
+      {
+        "bucket": "template",
+        "count": 16
+      },
+      {
+        "bucket": "threshold",
+        "count": 7
+      }
+    ],
+    "passRateByExpectedBucket": [
+      {
+        "bucket": "none",
+        "passRate": 1.0
+      },
+      {
+        "bucket": "normalization",
+        "passRate": 1.0
+      },
+      {
+        "bucket": "template",
+        "passRate": 1.0
+      },
+      {
+        "bucket": "threshold",
+        "passRate": 0.7142857142857143
+      }
+    ],
+    "caseCountBySourceLesson": [
+      {
+        "sourceLesson": "7",
+        "count": 1
+      },
+      {
+        "sourceLesson": "11",
+        "count": 1
+      },
+      {
+        "sourceLesson": "19",
+        "count": 1
+      },
+      {
+        "sourceLesson": "22",
+        "count": 1
+      },
+      {
+        "sourceLesson": "26",
+        "count": 3
+      },
+      {
+        "sourceLesson": "27",
+        "count": 10
+      },
+      {
+        "sourceLesson": "28",
+        "count": 2
+      },
+      {
+        "sourceLesson": "29",
+        "count": 3
+      },
+      {
+        "sourceLesson": "35",
+        "count": 2
+      },
+      {
+        "sourceLesson": "41",
+        "count": 6
+      },
+      {
+        "sourceLesson": "42",
+        "count": 4
+      }
+    ],
+    "passRateBySourceLesson": [
+      {
+        "sourceLesson": "7",
+        "passRate": 1.0
+      },
+      {
+        "sourceLesson": "11",
+        "passRate": 1.0
+      },
+      {
+        "sourceLesson": "19",
+        "passRate": 1.0
+      },
+      {
+        "sourceLesson": "22",
+        "passRate": 1.0
+      },
+      {
+        "sourceLesson": "26",
+        "passRate": 0.6666666666666666
+      },
+      {
+        "sourceLesson": "27",
+        "passRate": 1.0
+      },
+      {
+        "sourceLesson": "28",
+        "passRate": 1.0
+      },
+      {
+        "sourceLesson": "29",
+        "passRate": 0.6666666666666666
+      },
+      {
+        "sourceLesson": "35",
+        "passRate": 1.0
+      },
+      {
+        "sourceLesson": "41",
+        "passRate": 1.0
+      },
+      {
+        "sourceLesson": "42",
+        "passRate": 1.0
+      }
+    ],
     "topFailureBuckets": [
       {
         "bucket": "threshold",
@@ -52,7 +181,7 @@
       "drawnStrokes": 23,
       "likelyFailureBucket": "none",
       "metadata": {
-        "anchorCharacter": "立",
+        "anchorCharacter": "?",
         "word": "私立大学",
         "reading": "しりつだいがく",
         "meaningEn": "Private university",
@@ -120,7 +249,7 @@
       "drawnStrokes": 23,
       "likelyFailureBucket": "threshold",
       "metadata": {
-        "anchorCharacter": "立",
+        "anchorCharacter": "?",
         "word": "私立大学",
         "reading": "しりつだいがく",
         "meaningEn": "Private university",
@@ -186,7 +315,7 @@
       "drawnStrokes": 21,
       "likelyFailureBucket": "none",
       "metadata": {
-        "anchorCharacter": "飼",
+        "anchorCharacter": "?",
         "word": "飼育",
         "reading": "しいく",
         "meaningEn": "breeding, raising",
@@ -238,7 +367,7 @@
       "drawnStrokes": 20,
       "likelyFailureBucket": "none",
       "metadata": {
-        "anchorCharacter": "飼",
+        "anchorCharacter": "?",
         "word": "飼育",
         "reading": "しいく",
         "meaningEn": "breeding, raising",
@@ -290,7 +419,7 @@
       "drawnStrokes": 14,
       "likelyFailureBucket": "none",
       "metadata": {
-        "anchorCharacter": "鳥",
+        "anchorCharacter": "?",
         "word": "小鳥",
         "reading": "ことり",
         "meaningEn": "Small bird",
@@ -342,7 +471,7 @@
       "drawnStrokes": 14,
       "likelyFailureBucket": "none",
       "metadata": {
-        "anchorCharacter": "鳥",
+        "anchorCharacter": "?",
         "word": "小鳥",
         "reading": "ことり",
         "meaningEn": "Small bird",
@@ -394,7 +523,7 @@
       "drawnStrokes": 18,
       "likelyFailureBucket": "none",
       "metadata": {
-        "anchorCharacter": "景",
+        "anchorCharacter": "?",
         "word": "景色",
         "reading": "けしき",
         "meaningEn": "scenery / view",
@@ -446,7 +575,7 @@
       "drawnStrokes": 18,
       "likelyFailureBucket": "none",
       "metadata": {
-        "anchorCharacter": "景",
+        "anchorCharacter": "?",
         "word": "景色",
         "reading": "けしき",
         "meaningEn": "scenery / view",
@@ -498,7 +627,7 @@
       "drawnStrokes": 17,
       "likelyFailureBucket": "none",
       "metadata": {
-        "anchorCharacter": "夢",
+        "anchorCharacter": "?",
         "word": "夢中",
         "reading": "むちゅう",
         "meaningEn": "absorbed in, immersed in",
@@ -550,7 +679,7 @@
       "drawnStrokes": 17,
       "likelyFailureBucket": "none",
       "metadata": {
-        "anchorCharacter": "夢",
+        "anchorCharacter": "?",
         "word": "夢中",
         "reading": "むちゅう",
         "meaningEn": "absorbed in, immersed in",
@@ -602,7 +731,7 @@
       "drawnStrokes": 17,
       "likelyFailureBucket": "none",
       "metadata": {
-        "anchorCharacter": "閉",
+        "anchorCharacter": "?",
         "word": "閉会",
         "reading": "へいかい",
         "meaningEn": "closure (of a ceremony, event, meeting, etc.)",
@@ -654,7 +783,7 @@
       "drawnStrokes": 18,
       "likelyFailureBucket": "threshold",
       "metadata": {
-        "anchorCharacter": "閉",
+        "anchorCharacter": "?",
         "word": "閉会",
         "reading": "へいかい",
         "meaningEn": "closure (of a ceremony, event, meeting, etc.)",
@@ -706,7 +835,7 @@
       "drawnStrokes": 12,
       "likelyFailureBucket": "none",
       "metadata": {
-        "anchorCharacter": "法",
+        "anchorCharacter": "?",
         "word": "方法",
         "reading": "ほうほう",
         "meaningEn": "method",
@@ -758,7 +887,7 @@
       "drawnStrokes": 12,
       "likelyFailureBucket": "none",
       "metadata": {
-        "anchorCharacter": "法",
+        "anchorCharacter": "?",
         "word": "方法",
         "reading": "ほうほう",
         "meaningEn": "method",
@@ -810,7 +939,7 @@
       "drawnStrokes": 12,
       "likelyFailureBucket": "none",
       "metadata": {
-        "anchorCharacter": "法",
+        "anchorCharacter": "?",
         "word": "文法",
         "reading": "ぶんぽう",
         "meaningEn": "grammar",
@@ -862,7 +991,7 @@
       "drawnStrokes": 11,
       "likelyFailureBucket": "none",
       "metadata": {
-        "anchorCharacter": "法",
+        "anchorCharacter": "?",
         "word": "文法",
         "reading": "ぶんぽう",
         "meaningEn": "grammar",
@@ -914,7 +1043,7 @@
       "drawnStrokes": 19,
       "likelyFailureBucket": "none",
       "metadata": {
-        "anchorCharacter": "育",
+        "anchorCharacter": "?",
         "word": "教育",
         "reading": "きょういく",
         "meaningEn": "education",
@@ -966,7 +1095,7 @@
       "drawnStrokes": 19,
       "likelyFailureBucket": "none",
       "metadata": {
-        "anchorCharacter": "育",
+        "anchorCharacter": "?",
         "word": "教育",
         "reading": "きょういく",
         "meaningEn": "education",
@@ -1013,7 +1142,7 @@
         "婦"
       ],
       "metadata": {
-        "anchorCharacter": "夫",
+        "anchorCharacter": "?",
         "word": "夫婦",
         "reading": "ふうふ",
         "meaningEn": "Married couple",
@@ -1023,7 +1152,7 @@
         "sourceSenseId": "n4_l26_s068",
         "sourcePath": "assets/data/content/vocab/n4/minna/lesson_26.json",
         "expectedMissingTemplates": [
-          "婦"
+          "?"
         ]
       }
     },
@@ -1048,7 +1177,7 @@
         "館"
       ],
       "metadata": {
-        "anchorCharacter": "育",
+        "anchorCharacter": "?",
         "word": "体育館",
         "reading": "たいいくかん",
         "meaningEn": "gymnasium",
@@ -1058,7 +1187,485 @@
         "sourceSenseId": "n4_l28_s048",
         "sourcePath": "assets/data/content/vocab/n4/minna/lesson_28.json",
         "expectedMissingTemplates": [
-          "館"
+          "?"
+        ]
+      }
+    },
+    {
+      "id": "compound_n5_luggage_template_reject",
+      "promptId": "compound_n5_luggage_template_reject",
+      "kanjiIds": [
+        "荷",
+        "物"
+      ],
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N5",
+      "expectedVerdict": "reject",
+      "actualVerdict": "reject",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "likelyFailureBucket": "template",
+      "missingTemplates": [
+        "物"
+      ],
+      "metadata": {
+        "anchorCharacter": "?",
+        "word": "荷物",
+        "reading": "にもつ",
+        "meaningEn": "baggage / parcel",
+        "meaningVi": "hành lý, đồ đạc",
+        "sourceLessonId": 7,
+        "sourceVocabId": "n5_l07_v028",
+        "sourceSenseId": "n5_l07_s028",
+        "sourcePath": "assets/data/content/vocab/n5/minna/lesson_07.json",
+        "expectedMissingTemplates": [
+          "?"
+        ]
+      }
+    },
+    {
+      "id": "compound_n5_special_delivery_template_reject",
+      "promptId": "compound_n5_special_delivery_template_reject",
+      "kanjiIds": [
+        "速",
+        "達"
+      ],
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N5",
+      "expectedVerdict": "reject",
+      "actualVerdict": "reject",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "likelyFailureBucket": "template",
+      "missingTemplates": [
+        "達"
+      ],
+      "metadata": {
+        "anchorCharacter": "?",
+        "word": "速達",
+        "reading": "そくたつ",
+        "meaningEn": "special delivery",
+        "meaningVi": "chuyển phát nhanh",
+        "sourceLessonId": 11,
+        "sourceVocabId": "n5_l11_v029",
+        "sourceSenseId": "n5_l11_s029",
+        "sourcePath": "assets/data/content/vocab/n5/minna/lesson_11.json",
+        "expectedMissingTemplates": [
+          "?"
+        ]
+      }
+    },
+    {
+      "id": "compound_n5_toast_template_reject",
+      "promptId": "compound_n5_toast_template_reject",
+      "kanjiIds": [
+        "乾",
+        "杯"
+      ],
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N5",
+      "expectedVerdict": "reject",
+      "actualVerdict": "reject",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "likelyFailureBucket": "template",
+      "missingTemplates": [
+        "杯"
+      ],
+      "metadata": {
+        "anchorCharacter": "?",
+        "word": "乾杯",
+        "reading": "かんぱい",
+        "meaningEn": "Cheers! / Toast",
+        "meaningVi": "nâng cốc, cạn ly",
+        "sourceLessonId": 19,
+        "sourceVocabId": "n5_l19_v021",
+        "sourceSenseId": "n5_l19_s021",
+        "sourcePath": "assets/data/content/vocab/n5/minna/lesson_19.json",
+        "expectedMissingTemplates": [
+          "?"
+        ]
+      }
+    },
+    {
+      "id": "compound_n5_closet_template_reject",
+      "promptId": "compound_n5_closet_template_reject",
+      "kanjiIds": [
+        "押",
+        "入"
+      ],
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N5",
+      "expectedVerdict": "reject",
+      "actualVerdict": "reject",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "likelyFailureBucket": "template",
+      "missingTemplates": [
+        "入"
+      ],
+      "metadata": {
+        "anchorCharacter": "?",
+        "word": "押し入れ",
+        "reading": "おしいれ",
+        "meaningEn": "Japanese-style closet",
+        "meaningVi": "tủ tường (kiểu Nhật)",
+        "sourceLessonId": 22,
+        "sourceVocabId": "n5_l22_v016",
+        "sourceSenseId": "n5_l22_s016",
+        "sourcePath": "assets/data/content/vocab/n5/minna/lesson_22.json",
+        "expectedMissingTemplates": [
+          "?"
+        ]
+      }
+    },
+    {
+      "id": "compound_n4_mail_order_template_reject",
+      "promptId": "compound_n4_mail_order_template_reject",
+      "kanjiIds": [
+        "通",
+        "信",
+        "販",
+        "売"
+      ],
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "expectedVerdict": "reject",
+      "actualVerdict": "reject",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "likelyFailureBucket": "template",
+      "missingTemplates": [
+        "販"
+      ],
+      "metadata": {
+        "anchorCharacter": "?",
+        "word": "通信販売",
+        "reading": "つうしんはんばい",
+        "meaningEn": "mail order / online shopping",
+        "meaningVi": "thương mại viễn thông (mua bán qua bưu điện/internet)",
+        "sourceLessonId": 27,
+        "sourceVocabId": "n4_l27_v019",
+        "sourceSenseId": "n4_l27_s019",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_27.json",
+        "expectedMissingTemplates": [
+          "?"
+        ]
+      }
+    },
+    {
+      "id": "compound_n4_tool_template_reject",
+      "promptId": "compound_n4_tool_template_reject",
+      "kanjiIds": [
+        "道",
+        "具"
+      ],
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "expectedVerdict": "reject",
+      "actualVerdict": "reject",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "likelyFailureBucket": "template",
+      "missingTemplates": [
+        "道"
+      ],
+      "metadata": {
+        "anchorCharacter": "?",
+        "word": "道具",
+        "reading": "どうぐ",
+        "meaningEn": "tool / instrument",
+        "meaningVi": "dụng cụ, công cụ",
+        "sourceLessonId": 27,
+        "sourceVocabId": "n4_l27_v017",
+        "sourceSenseId": "n4_l27_s017",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_27.json",
+        "expectedMissingTemplates": [
+          "?"
+        ]
+      }
+    },
+    {
+      "id": "compound_n4_election_template_reject",
+      "promptId": "compound_n4_election_template_reject",
+      "kanjiIds": [
+        "選",
+        "挙"
+      ],
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "expectedVerdict": "reject",
+      "actualVerdict": "reject",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "likelyFailureBucket": "template",
+      "missingTemplates": [
+        "挙"
+      ],
+      "metadata": {
+        "anchorCharacter": "?",
+        "word": "選挙",
+        "reading": "せんきょ",
+        "meaningEn": "election",
+        "meaningVi": "bầu cử",
+        "sourceLessonId": 28,
+        "sourceVocabId": "n4_l28_v062",
+        "sourceSenseId": "n4_l28_s062",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_28.json",
+        "expectedMissingTemplates": [
+          "?"
+        ]
+      }
+    },
+    {
+      "id": "compound_n4_pollution_template_reject",
+      "promptId": "compound_n4_pollution_template_reject",
+      "kanjiIds": [
+        "汚",
+        "染"
+      ],
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "expectedVerdict": "reject",
+      "actualVerdict": "reject",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "likelyFailureBucket": "template",
+      "missingTemplates": [
+        "染"
+      ],
+      "metadata": {
+        "anchorCharacter": "?",
+        "word": "汚染",
+        "reading": "おせん",
+        "meaningEn": "pollution, contamination",
+        "meaningVi": "ô nhiễm",
+        "sourceLessonId": 29,
+        "sourceVocabId": "n4_l29_v065",
+        "sourceSenseId": "n4_l29_s065",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_29.json",
+        "expectedMissingTemplates": [
+          "?"
+        ]
+      }
+    },
+    {
+      "id": "compound_n4_aircon_template_reject",
+      "promptId": "compound_n4_aircon_template_reject",
+      "kanjiIds": [
+        "冷",
+        "房"
+      ],
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "expectedVerdict": "reject",
+      "actualVerdict": "reject",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "likelyFailureBucket": "template",
+      "missingTemplates": [
+        "房"
+      ],
+      "metadata": {
+        "anchorCharacter": "?",
+        "word": "冷房",
+        "reading": "れいぼう",
+        "meaningEn": "air-conditioning",
+        "meaningVi": "máy lạnh",
+        "sourceLessonId": 41,
+        "sourceVocabId": "n4_l41_v027",
+        "sourceSenseId": "n4_l41_s027",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_41.json",
+        "expectedMissingTemplates": [
+          "?"
+        ]
+      }
+    },
+    {
+      "id": "compound_n4_hardship_template_reject",
+      "promptId": "compound_n4_hardship_template_reject",
+      "kanjiIds": [
+        "困",
+        "難"
+      ],
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "expectedVerdict": "reject",
+      "actualVerdict": "reject",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "likelyFailureBucket": "template",
+      "missingTemplates": [
+        "難"
+      ],
+      "metadata": {
+        "anchorCharacter": "?",
+        "word": "困難",
+        "reading": "こんなん",
+        "meaningEn": "difficulty, hardship",
+        "meaningVi": "khó khăn, gian nan",
+        "sourceLessonId": 41,
+        "sourceVocabId": "n4_l41_v075",
+        "sourceSenseId": "n4_l41_s075",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_41.json",
+        "expectedMissingTemplates": [
+          "?"
+        ]
+      }
+    },
+    {
+      "id": "compound_n4_apology_template_reject",
+      "promptId": "compound_n4_apology_template_reject",
+      "kanjiIds": [
+        "申",
+        "訳"
+      ],
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "expectedVerdict": "reject",
+      "actualVerdict": "reject",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "likelyFailureBucket": "template",
+      "missingTemplates": [
+        "訳"
+      ],
+      "metadata": {
+        "anchorCharacter": "?",
+        "word": "申し訳ありません",
+        "reading": "もうしわけありません",
+        "meaningEn": "I am very sorry",
+        "meaningVi": "xin loi",
+        "sourceLessonId": 41,
+        "sourceVocabId": "n4_l41_v063",
+        "sourceSenseId": "n4_l41_s063",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_41.json",
+        "expectedMissingTemplates": [
+          "?"
+        ]
+      }
+    },
+    {
+      "id": "compound_n4_manners_template_reject",
+      "promptId": "compound_n4_manners_template_reject",
+      "kanjiIds": [
+        "礼",
+        "儀"
+      ],
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "expectedVerdict": "reject",
+      "actualVerdict": "reject",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "likelyFailureBucket": "template",
+      "missingTemplates": [
+        "儀"
+      ],
+      "metadata": {
+        "anchorCharacter": "?",
+        "word": "礼儀",
+        "reading": "れいぎ",
+        "meaningEn": "Manners",
+        "meaningVi": "Lễ nghi",
+        "sourceLessonId": 41,
+        "sourceVocabId": "n4_l41_v068",
+        "sourceSenseId": "n4_l41_s068",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_41.json",
+        "expectedMissingTemplates": [
+          "?"
+        ]
+      }
+    },
+    {
+      "id": "compound_n4_sturdy_template_reject",
+      "promptId": "compound_n4_sturdy_template_reject",
+      "kanjiIds": [
+        "丈",
+        "夫"
+      ],
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "expectedVerdict": "reject",
+      "actualVerdict": "reject",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "likelyFailureBucket": "template",
+      "missingTemplates": [
+        "丈"
+      ],
+      "metadata": {
+        "anchorCharacter": "?",
+        "word": "丈夫",
+        "reading": "じょうぶ",
+        "meaningEn": "strong / healthy",
+        "meaningVi": "chắc chắn, bền",
+        "sourceLessonId": 42,
+        "sourceVocabId": "n4_l42_v006",
+        "sourceSenseId": "n4_l42_s006",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_42.json",
+        "expectedMissingTemplates": [
+          "?"
+        ]
+      }
+    },
+    {
+      "id": "compound_n4_packaging_template_reject",
+      "promptId": "compound_n4_packaging_template_reject",
+      "kanjiIds": [
+        "包",
+        "装"
+      ],
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N4",
+      "expectedVerdict": "reject",
+      "actualVerdict": "reject",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "likelyFailureBucket": "template",
+      "missingTemplates": [
+        "装"
+      ],
+      "metadata": {
+        "anchorCharacter": "?",
+        "word": "包装",
+        "reading": "ほうそう",
+        "meaningEn": "packing, wrapping",
+        "meaningVi": "đóng gói, bao bì",
+        "sourceLessonId": 42,
+        "sourceVocabId": "n4_l42_v076",
+        "sourceSenseId": "n4_l42_s076",
+        "sourcePath": "assets/data/content/vocab/n4/minna/lesson_42.json",
+        "expectedMissingTemplates": [
+          "?"
         ]
       }
     }

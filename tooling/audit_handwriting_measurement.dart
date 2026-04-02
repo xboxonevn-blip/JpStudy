@@ -11,7 +11,7 @@ Future<void> main() async {
 }
 
 Future<Map<String, dynamic>> runHandwritingMeasurementAudit({
-  String inputPath = 'tooling/handwriting_audit_cases.v2.json',
+  String inputPath = 'tooling/handwriting_audit_cases.v3.json',
   String outputPath = 'docs/reports/handwriting-measurement-audit-report.json',
   String templatePath = 'assets/data/support/kanji/stroke_templates.json',
   bool showGuide = false,
@@ -70,6 +70,22 @@ String _buildMarkdownSummary(Map<String, dynamic> report) {
       (summary['topFailureBuckets'] as List<dynamic>? ?? const [])
           .whereType<Map<String, dynamic>>()
           .toList(growable: false);
+  final caseCountByExpectedBucket =
+      (summary['caseCountByExpectedBucket'] as List<dynamic>? ?? const [])
+          .whereType<Map<String, dynamic>>()
+          .toList(growable: false);
+  final passRateByExpectedBucket =
+      (summary['passRateByExpectedBucket'] as List<dynamic>? ?? const [])
+          .whereType<Map<String, dynamic>>()
+          .toList(growable: false);
+  final caseCountBySourceLesson =
+      (summary['caseCountBySourceLesson'] as List<dynamic>? ?? const [])
+          .whereType<Map<String, dynamic>>()
+          .toList(growable: false);
+  final passRateBySourceLesson =
+      (summary['passRateBySourceLesson'] as List<dynamic>? ?? const [])
+          .whereType<Map<String, dynamic>>()
+          .toList(growable: false);
   final buffer = StringBuffer()
     ..writeln('# Handwriting Measurement Audit Summary')
     ..writeln()
@@ -119,6 +135,28 @@ String _buildMarkdownSummary(Map<String, dynamic> report) {
 
   buffer
     ..writeln()
+    ..writeln('## Expected Buckets')
+    ..writeln();
+  if (caseCountByExpectedBucket.isEmpty) {
+    buffer.writeln('- None');
+  } else {
+    buffer
+      ..writeln('| Expected Bucket | Cases | Pass Rate |')
+      ..writeln('| --- | ---: | ---: |');
+    for (final bucket in caseCountByExpectedBucket) {
+      final passRate = passRateByExpectedBucket.firstWhere(
+        (entry) => entry['bucket'] == bucket['bucket'],
+        orElse: () => const {'bucket': 'unknown', 'passRate': null},
+      );
+      buffer.writeln(
+        '| `${_escapeMarkdown(bucket['bucket']?.toString() ?? 'unknown')}` | '
+        '${bucket['count'] ?? 0} | ${_formatRate(passRate['passRate'])} |',
+      );
+    }
+  }
+
+  buffer
+    ..writeln()
     ..writeln('## Top Failure Buckets')
     ..writeln();
   if (topFailureBuckets.isEmpty) {
@@ -158,6 +196,28 @@ String _buildMarkdownSummary(Map<String, dynamic> report) {
         '`${_escapeMarkdown(caseReport['likelyFailureBucket']?.toString() ?? 'unknown')}` | '
         '${score is num ? score.toStringAsFixed(3) : 'n/a'} | '
         '`${_escapeMarkdown(source.toString())}` |',
+      );
+    }
+  }
+
+  buffer
+    ..writeln()
+    ..writeln('## Source Lessons')
+    ..writeln();
+  if (caseCountBySourceLesson.isEmpty) {
+    buffer.writeln('- None');
+  } else {
+    buffer
+      ..writeln('| Source Lesson | Cases | Pass Rate |')
+      ..writeln('| --- | ---: | ---: |');
+    for (final lesson in caseCountBySourceLesson) {
+      final passRate = passRateBySourceLesson.firstWhere(
+        (entry) => entry['sourceLesson'] == lesson['sourceLesson'],
+        orElse: () => const {'sourceLesson': 'unknown', 'passRate': null},
+      );
+      buffer.writeln(
+        '| `${_escapeMarkdown(lesson['sourceLesson']?.toString() ?? 'unknown')}` | '
+        '${lesson['count'] ?? 0} | ${_formatRate(passRate['passRate'])} |',
       );
     }
   }
@@ -345,6 +405,8 @@ class _MeasurementAuditRunner {
     var falseNegatives = 0;
     final passByMode = <String, List<bool>>{};
     final passByLevel = <String, List<bool>>{};
+    final passByExpectedBucket = <String, List<bool>>{};
+    final passBySourceLesson = <String, List<bool>>{};
     final failureBuckets = <String, int>{};
 
     for (final auditCase in sampleSet.cases) {
@@ -354,6 +416,11 @@ class _MeasurementAuditRunner {
       final passed = report['passed'] as bool;
       passByMode.putIfAbsent(auditCase.sessionMode, () => <bool>[]).add(passed);
       passByLevel.putIfAbsent(auditCase.level, () => <bool>[]).add(passed);
+      passByExpectedBucket
+          .putIfAbsent(auditCase.expectedFailureBucket, () => <bool>[])
+          .add(passed);
+      final sourceLesson = _sourceLessonKey(auditCase.metadata);
+      passBySourceLesson.putIfAbsent(sourceLesson, () => <bool>[]).add(passed);
 
       if (!passed) {
         final bucket = report['likelyFailureBucket'] as String;
@@ -398,6 +465,24 @@ class _MeasurementAuditRunner {
               entry.value.length,
             ),
         },
+        'caseCountByExpectedBucket': _countSummary(
+          passByExpectedBucket,
+          keyName: 'bucket',
+        ),
+        'passRateByExpectedBucket': _rateSummary(
+          passByExpectedBucket,
+          keyName: 'bucket',
+        ),
+        'caseCountBySourceLesson': _countSummary(
+          passBySourceLesson,
+          keyName: 'sourceLesson',
+          numericSort: true,
+        ),
+        'passRateBySourceLesson': _rateSummary(
+          passBySourceLesson,
+          keyName: 'sourceLesson',
+          numericSort: true,
+        ),
         'topFailureBuckets': [
           for (final entry
               in (failureBuckets.entries.toList()
@@ -407,6 +492,18 @@ class _MeasurementAuditRunner {
       },
       'cases': caseReports,
     };
+  }
+
+  String _sourceLessonKey(Map<String, dynamic> metadata) {
+    final value = metadata['sourceLessonId'];
+    if (value is int) {
+      return value.toString();
+    }
+    if (value is num) {
+      return value.toInt().toString();
+    }
+    final text = value?.toString().trim() ?? '';
+    return text.isEmpty ? 'unknown' : text;
   }
 
   Map<String, dynamic> _runCase(_AuditCase auditCase) {
@@ -817,6 +914,56 @@ class _MeasurementAuditRunner {
     }
     return 'threshold';
   }
+}
+
+List<Map<String, dynamic>> _countSummary(
+  Map<String, List<bool>> grouped, {
+  required String keyName,
+  bool numericSort = false,
+}) {
+  final entries = grouped.entries.toList();
+  _sortSummaryEntries(entries, numericSort: numericSort);
+  return [
+    for (final entry in entries)
+      {keyName: entry.key, 'count': entry.value.length},
+  ];
+}
+
+List<Map<String, dynamic>> _rateSummary(
+  Map<String, List<bool>> grouped, {
+  required String keyName,
+  bool numericSort = false,
+}) {
+  final entries = grouped.entries.toList();
+  _sortSummaryEntries(entries, numericSort: numericSort);
+  return [
+    for (final entry in entries)
+      {
+        keyName: entry.key,
+        'passRate': _rate(
+          entry.value.where((value) => value).length,
+          entry.value.length,
+        ),
+      },
+  ];
+}
+
+void _sortSummaryEntries(
+  List<MapEntry<String, List<bool>>> entries, {
+  required bool numericSort,
+}) {
+  entries.sort((a, b) {
+    if (numericSort) {
+      final left = int.tryParse(a.key);
+      final right = int.tryParse(b.key);
+      if (left != null && right != null) {
+        return left.compareTo(right);
+      }
+      if (left != null) return -1;
+      if (right != null) return 1;
+    }
+    return a.key.compareTo(b.key);
+  });
 }
 
 double _rate(int numerator, int denominator) {
