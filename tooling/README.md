@@ -48,6 +48,7 @@
 - `sync_kanji_decomposition_labels.py`: syncs decomposition labels from content kanji files into support exports
 - `generate_kanjivg_stroke_paths.py`: generates `assets/data/support/kanji/kanjivg_stroke_paths_n5n4.json`
 - `generate_stroke_templates.py`: builds handwriting stroke templates
+- `audit_handwriting_measurement.dart`: runs the deterministic handwriting measurement audit sample set and writes `docs/reports/handwriting-measurement-audit-report.json`
 - `promote_n4_curated_from_mistakes.py`: promotes curated template improvements from mistake-driven review
 
 ### Source cache / external source prep
@@ -79,3 +80,8 @@ For grammar hardening work, the common sequence is:
 - run `dart run tooling/audit_grammar_example_quality.dart --locale en`
 - run `python tooling/validate_content_assets_v2.py`
 - review `docs/reports/grammar-example-quality-report.json` before treating the pass as done
+
+For handwriting measurement work, the common sequence is:
+- review `tooling/handwriting_audit_cases.v1.json`
+- run `flutter test test/tooling/handwriting_measurement_audit_runner_test.dart`
+- review `docs/reports/handwriting-measurement-audit-report.json`

@@ -29,6 +29,8 @@
   Active structural validation baseline for content bundle correctness.
 - `canonical-content-v2-report.json`
   Active canonical content snapshot for cross-checking release readiness.
+- `handwriting-measurement-audit-report.json`
+  Deterministic handwriting scoring baseline across fixed `single`, `compound`, and `mixed` audit samples.
 
 ## Stale Or Legacy Reports
 

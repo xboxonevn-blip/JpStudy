@@ -1,0 +1,271 @@
+{
+  "version": "2026-04-02-v1",
+  "canvas": {
+    "width": 220,
+    "height": 220
+  },
+  "cases": [
+    {
+      "id": "single_n5_person_accept",
+      "sessionMode": "single",
+      "targetType": "single",
+      "level": "N5",
+      "characters": [
+        "人"
+      ],
+      "expectedVerdict": "accept",
+      "expectedFailureBucket": "none",
+      "generator": {
+        "kind": "template_match",
+        "seed": 11,
+        "jitter": 0.35
+      }
+    },
+    {
+      "id": "single_n5_person_reverse_reject",
+      "sessionMode": "single",
+      "targetType": "single",
+      "level": "N5",
+      "characters": [
+        "人"
+      ],
+      "expectedVerdict": "reject",
+      "expectedFailureBucket": "threshold",
+      "generator": {
+        "kind": "reverse_all",
+        "seed": 11,
+        "jitter": 0.35
+      }
+    },
+    {
+      "id": "single_n5_day_accept",
+      "sessionMode": "single",
+      "targetType": "single",
+      "level": "N5",
+      "characters": [
+        "日"
+      ],
+      "expectedVerdict": "accept",
+      "expectedFailureBucket": "none",
+      "generator": {
+        "kind": "template_match",
+        "seed": 12,
+        "jitter": 0.25
+      }
+    },
+    {
+      "id": "single_n5_day_missing_last_reject",
+      "sessionMode": "single",
+      "targetType": "single",
+      "level": "N5",
+      "characters": [
+        "日"
+      ],
+      "expectedVerdict": "reject",
+      "expectedFailureBucket": "normalization",
+      "generator": {
+        "kind": "missing_last",
+        "seed": 12,
+        "jitter": 0.25
+      }
+    },
+    {
+      "id": "single_n4_loss_accept",
+      "sessionMode": "single",
+      "targetType": "single",
+      "level": "N4",
+      "characters": [
+        "失"
+      ],
+      "expectedVerdict": "accept",
+      "expectedFailureBucket": "none",
+      "generator": {
+        "kind": "template_match",
+        "seed": 21,
+        "jitter": 0.3
+      }
+    },
+    {
+      "id": "single_n4_loss_mirror_reject",
+      "sessionMode": "single",
+      "targetType": "single",
+      "level": "N4",
+      "characters": [
+        "失"
+      ],
+      "expectedVerdict": "reject",
+      "expectedFailureBucket": "threshold",
+      "generator": {
+        "kind": "mirror_horizontal",
+        "seed": 21,
+        "jitter": 0.3
+      }
+    },
+    {
+      "id": "single_n5_learn_accept",
+      "sessionMode": "single",
+      "targetType": "single",
+      "level": "N5",
+      "characters": [
+        "学"
+      ],
+      "expectedVerdict": "accept",
+      "expectedFailureBucket": "none",
+      "generator": {
+        "kind": "template_match",
+        "seed": 31,
+        "jitter": 0.2
+      }
+    },
+    {
+      "id": "single_n5_learn_extra_stroke_reject",
+      "sessionMode": "single",
+      "targetType": "single",
+      "level": "N5",
+      "characters": [
+        "学"
+      ],
+      "expectedVerdict": "reject",
+      "expectedFailureBucket": "threshold",
+      "generator": {
+        "kind": "extra_stroke",
+        "seed": 31,
+        "jitter": 0.2
+      }
+    },
+    {
+      "id": "compound_n5_japan_accept",
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N5",
+      "characters": [
+        "日",
+        "本"
+      ],
+      "expectedVerdict": "accept",
+      "expectedFailureBucket": "none",
+      "generator": {
+        "kind": "template_match",
+        "seed": 41,
+        "jitter": 0.22
+      }
+    },
+    {
+      "id": "compound_n5_japan_reverse_first_reject",
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N5",
+      "characters": [
+        "日",
+        "本"
+      ],
+      "expectedVerdict": "reject",
+      "expectedFailureBucket": "threshold",
+      "generator": {
+        "kind": "reverse_character",
+        "seed": 41,
+        "jitter": 0.22,
+        "characterIndex": 0
+      }
+    },
+    {
+      "id": "mixed_n5_book_accept",
+      "sessionMode": "mixed",
+      "targetType": "single",
+      "level": "N5",
+      "characters": [
+        "本"
+      ],
+      "expectedVerdict": "accept",
+      "expectedFailureBucket": "none",
+      "generator": {
+        "kind": "template_match",
+        "seed": 51,
+        "jitter": 0.28
+      }
+    },
+    {
+      "id": "mixed_n5_honnin_noise_reject",
+      "sessionMode": "mixed",
+      "targetType": "compound",
+      "level": "N5",
+      "characters": [
+        "本",
+        "人"
+      ],
+      "expectedVerdict": "reject",
+      "expectedFailureBucket": "normalization",
+      "generator": {
+        "kind": "noise_random",
+        "seed": 61,
+        "noiseCount": 7
+      }
+    },
+    {
+      "id": "single_n5_missing_template_dragon_accept",
+      "sessionMode": "single",
+      "targetType": "single",
+      "level": "N5",
+      "characters": [
+        "?"
+      ],
+      "expectedVerdict": "accept",
+      "expectedFailureBucket": "template",
+      "generator": {
+        "kind": "template_match",
+        "seed": 71,
+        "jitter": 0.2
+      }
+    },
+    {
+      "id": "single_n4_missing_template_language_accept",
+      "sessionMode": "single",
+      "targetType": "single",
+      "level": "N4",
+      "characters": [
+        "?"
+      ],
+      "expectedVerdict": "accept",
+      "expectedFailureBucket": "template",
+      "generator": {
+        "kind": "template_match",
+        "seed": 72,
+        "jitter": 0.2
+      }
+    },
+    {
+      "id": "compound_n5_partial_missing_template_accept",
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N5",
+      "characters": [
+        "?",
+        "?"
+      ],
+      "expectedVerdict": "accept",
+      "expectedFailureBucket": "template",
+      "generator": {
+        "kind": "template_match",
+        "seed": 73,
+        "jitter": 0.18
+      }
+    },
+    {
+      "id": "mixed_n4_partial_missing_template_accept",
+      "sessionMode": "mixed",
+      "targetType": "compound",
+      "level": "N4",
+      "characters": [
+        "?",
+        "?"
+      ],
+      "expectedVerdict": "accept",
+      "expectedFailureBucket": "template",
+      "generator": {
+        "kind": "template_match",
+        "seed": 74,
+        "jitter": 0.18
+      }
+    }
+  ]
+}

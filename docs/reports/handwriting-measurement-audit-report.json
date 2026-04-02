@@ -1,0 +1,463 @@
+{
+  "sampleSetVersion": "2026-04-02-v1",
+  "generatedAtUtc": "2026-04-02T15:26:02.460020Z",
+  "scoringVersion": "v2",
+  "showGuide": false,
+  "templateDatasetVersion": "422979-2026-03-18T10:57:01.000Z",
+  "summary": {
+    "sampleCount": 16,
+    "falsePositiveCount": 0,
+    "falseNegativeCount": 5,
+    "falsePositiveRate": 0.0,
+    "falseNegativeRate": 0.5,
+    "passRateByMode": {
+      "single": 0.7,
+      "compound": 0.6666666666666666,
+      "mixed": 0.6666666666666666
+    },
+    "passRateByLevel": {
+      "N5": 0.75,
+      "N4": 0.5
+    },
+    "topFailureBuckets": [
+      {
+        "bucket": "template",
+        "count": 4
+      },
+      {
+        "bucket": "threshold",
+        "count": 1
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "single_n5_person_accept",
+      "promptId": "single_n5_person_accept",
+      "kanjiIds": [
+        "人"
+      ],
+      "sessionMode": "single",
+      "targetType": "single",
+      "level": "N5",
+      "expectedVerdict": "accept",
+      "actualVerdict": "reject",
+      "passed": false,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "templateQuality": "manual",
+      "score": 0.8230745462982204,
+      "strokeScore": 1.0,
+      "shapeScore": 0.8081908285027073,
+      "orderScore": 0.8083647969602592,
+      "templateScore": 0.6508236541833349,
+      "expectedStrokes": 2,
+      "drawnStrokes": 2,
+      "likelyFailureBucket": "threshold",
+      "characterResults": []
+    },
+    {
+      "id": "single_n5_person_reverse_reject",
+      "promptId": "single_n5_person_reverse_reject",
+      "kanjiIds": [
+        "人"
+      ],
+      "sessionMode": "single",
+      "targetType": "single",
+      "level": "N5",
+      "expectedVerdict": "reject",
+      "actualVerdict": "reject",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "templateQuality": "manual",
+      "score": 0.6996919391295044,
+      "strokeScore": 1.0,
+      "shapeScore": 0.8081908285027073,
+      "orderScore": 0.4740750073544302,
+      "templateScore": 0.42195134565882997,
+      "expectedStrokes": 2,
+      "drawnStrokes": 2,
+      "likelyFailureBucket": "none",
+      "characterResults": []
+    },
+    {
+      "id": "single_n5_day_accept",
+      "promptId": "single_n5_day_accept",
+      "kanjiIds": [
+        "日"
+      ],
+      "sessionMode": "single",
+      "targetType": "single",
+      "level": "N5",
+      "expectedVerdict": "accept",
+      "actualVerdict": "accept",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "templateQuality": "manual",
+      "score": 0.851777022997391,
+      "strokeScore": 1.0,
+      "shapeScore": 0.74078264255804,
+      "orderScore": 0.7808294944686718,
+      "templateScore": 0.7934496773158206,
+      "expectedStrokes": 4,
+      "drawnStrokes": 4,
+      "likelyFailureBucket": "none",
+      "characterResults": []
+    },
+    {
+      "id": "single_n5_day_missing_last_reject",
+      "promptId": "single_n5_day_missing_last_reject",
+      "kanjiIds": [
+        "日"
+      ],
+      "sessionMode": "single",
+      "targetType": "single",
+      "level": "N5",
+      "expectedVerdict": "reject",
+      "actualVerdict": "reject",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "templateQuality": "manual",
+      "score": 0.5925309671786769,
+      "strokeScore": 0.0,
+      "shapeScore": 0.7405397073092432,
+      "orderScore": 0.7704569743380144,
+      "templateScore": 0.7383121144975577,
+      "expectedStrokes": 4,
+      "drawnStrokes": 3,
+      "likelyFailureBucket": "none",
+      "characterResults": []
+    },
+    {
+      "id": "single_n4_loss_accept",
+      "promptId": "single_n4_loss_accept",
+      "kanjiIds": [
+        "失"
+      ],
+      "sessionMode": "single",
+      "targetType": "single",
+      "level": "N4",
+      "expectedVerdict": "accept",
+      "actualVerdict": "accept",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "templateQuality": "curated",
+      "score": 0.9265747083357775,
+      "strokeScore": 1.0,
+      "shapeScore": 0.8982272825385489,
+      "orderScore": 0.8703084065240588,
+      "templateScore": 0.8542589105419272,
+      "expectedStrokes": 5,
+      "drawnStrokes": 5,
+      "likelyFailureBucket": "none",
+      "characterResults": []
+    },
+    {
+      "id": "single_n4_loss_mirror_reject",
+      "promptId": "single_n4_loss_mirror_reject",
+      "kanjiIds": [
+        "失"
+      ],
+      "sessionMode": "single",
+      "targetType": "single",
+      "level": "N4",
+      "expectedVerdict": "reject",
+      "actualVerdict": "reject",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "templateQuality": "curated",
+      "score": 0.8104448914848095,
+      "strokeScore": 1.0,
+      "shapeScore": 0.8982272825385489,
+      "orderScore": 0.4173364677829213,
+      "templateScore": 0.6721806585547524,
+      "expectedStrokes": 5,
+      "drawnStrokes": 5,
+      "likelyFailureBucket": "none",
+      "characterResults": []
+    },
+    {
+      "id": "single_n5_learn_accept",
+      "promptId": "single_n5_learn_accept",
+      "kanjiIds": [
+        "学"
+      ],
+      "sessionMode": "single",
+      "targetType": "single",
+      "level": "N5",
+      "expectedVerdict": "accept",
+      "actualVerdict": "accept",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "templateQuality": "generated",
+      "score": 0.9041885648511515,
+      "strokeScore": 1.0,
+      "shapeScore": 0.870226353215342,
+      "orderScore": 0.7874386306167969,
+      "templateScore": 0.8533071476024777,
+      "expectedStrokes": 8,
+      "drawnStrokes": 8,
+      "likelyFailureBucket": "none",
+      "characterResults": []
+    },
+    {
+      "id": "single_n5_learn_extra_stroke_reject",
+      "promptId": "single_n5_learn_extra_stroke_reject",
+      "kanjiIds": [
+        "学"
+      ],
+      "sessionMode": "single",
+      "targetType": "single",
+      "level": "N5",
+      "expectedVerdict": "reject",
+      "actualVerdict": "reject",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "templateQuality": "generated",
+      "score": 0.7487181728190374,
+      "strokeScore": 0.5,
+      "shapeScore": 0.6792837465564738,
+      "orderScore": 0.8517357949578647,
+      "templateScore": 0.9576535030726008,
+      "expectedStrokes": 8,
+      "drawnStrokes": 9,
+      "likelyFailureBucket": "none",
+      "characterResults": []
+    },
+    {
+      "id": "compound_n5_japan_accept",
+      "promptId": "compound_n5_japan_accept",
+      "kanjiIds": [
+        "日",
+        "本"
+      ],
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N5",
+      "expectedVerdict": "accept",
+      "actualVerdict": "accept",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "templateQuality": "manual",
+      "score": 0.8707614770937266,
+      "strokeScore": 1.0,
+      "shapeScore": 0.7644815669059184,
+      "orderScore": 0.8446275211590234,
+      "templateScore": 0.826228707529755,
+      "expectedStrokes": 9,
+      "drawnStrokes": 9,
+      "likelyFailureBucket": "none",
+      "characterResults": [
+        {
+          "character": "日",
+          "expectedStrokes": 4,
+          "drawnStrokes": 4,
+          "score": 0.84298232336756,
+          "isCorrect": true
+        },
+        {
+          "character": "本",
+          "expectedStrokes": 5,
+          "drawnStrokes": 5,
+          "score": 0.9030240034378512,
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "id": "compound_n5_japan_reverse_first_reject",
+      "promptId": "compound_n5_japan_reverse_first_reject",
+      "kanjiIds": [
+        "日",
+        "本"
+      ],
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N5",
+      "expectedVerdict": "reject",
+      "actualVerdict": "reject",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "templateQuality": "manual",
+      "score": 0.7959172273763642,
+      "strokeScore": 1.0,
+      "shapeScore": 0.7644815669059184,
+      "orderScore": 0.6188344380027755,
+      "templateScore": 0.696016473312611,
+      "expectedStrokes": 9,
+      "drawnStrokes": 9,
+      "likelyFailureBucket": "none",
+      "characterResults": [
+        {
+          "character": "日",
+          "expectedStrokes": 4,
+          "drawnStrokes": 4,
+          "score": 0.6730243491659826,
+          "isCorrect": false
+        },
+        {
+          "character": "本",
+          "expectedStrokes": 5,
+          "drawnStrokes": 5,
+          "score": 0.9030240034378512,
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "id": "mixed_n5_book_accept",
+      "promptId": "mixed_n5_book_accept",
+      "kanjiIds": [
+        "本"
+      ],
+      "sessionMode": "mixed",
+      "targetType": "single",
+      "level": "N5",
+      "expectedVerdict": "accept",
+      "actualVerdict": "accept",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "templateQuality": "manual",
+      "score": 0.9125610202121748,
+      "strokeScore": 1.0,
+      "shapeScore": 0.871035992208493,
+      "orderScore": 0.8954035817100221,
+      "templateScore": 0.8523551388626804,
+      "expectedStrokes": 5,
+      "drawnStrokes": 5,
+      "likelyFailureBucket": "none",
+      "characterResults": []
+    },
+    {
+      "id": "mixed_n5_honnin_noise_reject",
+      "promptId": "mixed_n5_honnin_noise_reject",
+      "kanjiIds": [
+        "本",
+        "人"
+      ],
+      "sessionMode": "mixed",
+      "targetType": "compound",
+      "level": "N5",
+      "expectedVerdict": "reject",
+      "actualVerdict": "reject",
+      "passed": true,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "templateQuality": "manual",
+      "score": 0.6476920969486875,
+      "strokeScore": 1.0,
+      "shapeScore": 0.19675034557175197,
+      "orderScore": 0.5488638371635621,
+      "templateScore": 0.6754738041049246,
+      "expectedStrokes": 7,
+      "drawnStrokes": 7,
+      "likelyFailureBucket": "none",
+      "characterResults": [
+        {
+          "character": "本",
+          "expectedStrokes": 5,
+          "drawnStrokes": 5,
+          "score": 0.6733297356570385,
+          "isCorrect": false
+        },
+        {
+          "character": "人",
+          "expectedStrokes": 2,
+          "drawnStrokes": 2,
+          "score": 0.6821988157710042,
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "single_n5_missing_template_dragon_accept",
+      "promptId": "single_n5_missing_template_dragon_accept",
+      "kanjiIds": [
+        "?"
+      ],
+      "sessionMode": "single",
+      "targetType": "single",
+      "level": "N5",
+      "expectedVerdict": "accept",
+      "actualVerdict": "reject",
+      "passed": false,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "likelyFailureBucket": "template",
+      "missingTemplates": [
+        "?"
+      ]
+    },
+    {
+      "id": "single_n4_missing_template_language_accept",
+      "promptId": "single_n4_missing_template_language_accept",
+      "kanjiIds": [
+        "?"
+      ],
+      "sessionMode": "single",
+      "targetType": "single",
+      "level": "N4",
+      "expectedVerdict": "accept",
+      "actualVerdict": "reject",
+      "passed": false,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "likelyFailureBucket": "template",
+      "missingTemplates": [
+        "?"
+      ]
+    },
+    {
+      "id": "compound_n5_partial_missing_template_accept",
+      "promptId": "compound_n5_partial_missing_template_accept",
+      "kanjiIds": [
+        "?",
+        "?"
+      ],
+      "sessionMode": "compound",
+      "targetType": "compound",
+      "level": "N5",
+      "expectedVerdict": "accept",
+      "actualVerdict": "reject",
+      "passed": false,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "likelyFailureBucket": "template",
+      "missingTemplates": [
+        "?",
+        "?"
+      ]
+    },
+    {
+      "id": "mixed_n4_partial_missing_template_accept",
+      "promptId": "mixed_n4_partial_missing_template_accept",
+      "kanjiIds": [
+        "?",
+        "?"
+      ],
+      "sessionMode": "mixed",
+      "targetType": "compound",
+      "level": "N4",
+      "expectedVerdict": "accept",
+      "actualVerdict": "reject",
+      "passed": false,
+      "templateVersion": "422979-2026-03-18T10:57:01.000Z",
+      "scoringVersion": "v2",
+      "likelyFailureBucket": "template",
+      "missingTemplates": [
+        "?",
+        "?"
+      ]
+    }
+  ]
+}
