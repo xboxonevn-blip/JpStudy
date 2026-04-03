@@ -81,8 +81,10 @@ class TestHistoryService {
     String sessionId1,
     String sessionId2,
   ) async {
-    final s1 = await _testDao.getSession(sessionId1);
-    final s2 = await _testDao.getSession(sessionId2);
+    final s1Future = _testDao.getSession(sessionId1);
+    final s2Future = _testDao.getSession(sessionId2);
+    final s1 = await s1Future;
+    final s2 = await s2Future;
 
     if (s1 == null || s2 == null) return null;
 

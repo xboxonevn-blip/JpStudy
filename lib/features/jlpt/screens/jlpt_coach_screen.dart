@@ -26,17 +26,22 @@ final jlptPrepOverviewProvider =
       final repo = ref.watch(lessonRepositoryProvider);
       final contentDb = ref.watch(contentDatabaseProvider);
       final language = ref.watch(appLanguageProvider);
-      final quickMockBank = await repo.getVocabByLevel(level.shortLabel);
-      final passages = await loadJlptReadingBank();
-      final levelPassages = passages
-          .where((entry) => entry.level == level.shortLabel)
-          .toList(growable: false);
-      final fullMockSections = await buildJlptMockSections(
+      // Fire all three IO-bound fetches concurrently — fully independent.
+      final quickMockBankFuture = repo.getVocabByLevel(level.shortLabel);
+      final passagesFuture = loadJlptReadingBank();
+      final fullMockSectionsFuture = buildJlptMockSections(
         level: level,
         language: language,
         contentDb: contentDb,
         lessonRepo: repo,
       );
+
+      final quickMockBank = await quickMockBankFuture;
+      final passages = await passagesFuture;
+      final levelPassages = passages
+          .where((entry) => entry.level == level.shortLabel)
+          .toList(growable: false);
+      final fullMockSections = await fullMockSectionsFuture;
 
       return JlptPrepOverview(
         quickMockQuestionCount: quickMockBank.length,

@@ -44,9 +44,29 @@ Future<List<JlptMockSection>> buildJlptMockSections({
             level.index ^
             (language.index << 8),
       );
+  // Fire all four IO-bound fetches concurrently — they touch independent
+  // tables/assets and have no data dependency on each other.
+  final vocabFuture = lessonRepo.getVocabByLevel(level.shortLabel);
+  final grammarFuture = _buildGrammarSection(
+    contentDb: contentDb,
+    level: level,
+    language: language,
+    random: rng,
+  );
+  final kanjiFuture = lessonRepo.fetchKanjiByLevel(level.shortLabel);
+  final readingFuture = _buildReadingSection(
+    level: level,
+    language: language,
+    random: rng,
+  );
+
+  final vocabItems = await vocabFuture;
+  final grammarSection = await grammarFuture;
+  final kanjiItems = await kanjiFuture;
+  final readingSection = await readingFuture;
+
   final sections = <JlptMockSection>[];
 
-  final vocabItems = await lessonRepo.getVocabByLevel(level.shortLabel);
   final vocabSection = _buildVocabularySection(
     items: vocabItems,
     level: level,
@@ -56,18 +76,9 @@ Future<List<JlptMockSection>> buildJlptMockSections({
   if (vocabSection != null) {
     sections.add(vocabSection);
   }
-
-  final grammarSection = await _buildGrammarSection(
-    contentDb: contentDb,
-    level: level,
-    language: language,
-    random: rng,
-  );
   if (grammarSection != null) {
     sections.add(grammarSection);
   }
-
-  final kanjiItems = await lessonRepo.fetchKanjiByLevel(level.shortLabel);
   final kanjiSection = _buildKanjiSection(
     items: kanjiItems,
     level: level,
@@ -77,12 +88,6 @@ Future<List<JlptMockSection>> buildJlptMockSections({
   if (kanjiSection != null) {
     sections.add(kanjiSection);
   }
-
-  final readingSection = await _buildReadingSection(
-    level: level,
-    language: language,
-    random: rng,
-  );
   if (readingSection != null) {
     sections.add(readingSection);
   }

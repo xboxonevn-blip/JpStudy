@@ -1731,10 +1731,11 @@ class _HandwritingPracticeScreenState
     }
 
     final sessionItems = _orderItemsForSession(widget.items);
-    final fallbackStrokeCounts = await _buildFallbackStrokeCountIndex();
-    final learningStateByKanjiId = await _loadLearningStateByKanjiId(
-      sessionItems,
-    );
+    // Both fetches are independent — fire concurrently.
+    final fallbackFuture = _buildFallbackStrokeCountIndex();
+    final learnFuture = _loadLearningStateByKanjiId(sessionItems);
+    final fallbackStrokeCounts = await fallbackFuture;
+    final learningStateByKanjiId = await learnFuture;
     final allTargets = _buildPracticeTargets(
       sessionItems,
       fallbackStrokeCounts: fallbackStrokeCounts,

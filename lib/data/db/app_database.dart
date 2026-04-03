@@ -60,13 +60,14 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase({QueryExecutor? executor}) : super(executor ?? _openConnection());
 
   @override
-  int get schemaVersion => 25;
+  int get schemaVersion => 26;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
     onCreate: (migrator) async {
       await migrator.createAll();
       await _seedLessons();
+      await _createPerformanceIndexes();
     },
     onUpgrade: (migrator, from, to) async {
       if (from < 2) {
@@ -253,11 +254,50 @@ class AppDatabase extends _$AppDatabase {
           "UPDATE grammar_srs_state SET difficulty = max(1, min(10, 11 - (ease * 3)))",
         );
       }
+      if (from < 26) {
+        await _createPerformanceIndexes();
+      }
     },
     beforeOpen: (details) async {
-      await _seedLessons();
+      // Only reseed on first install or after an upgrade — on routine opens
+      // all 75 INSERT OR IGNORE calls are guaranteed no-ops and waste
+      // 75 round-trips to the background isolate on every app start.
+      if (details.wasCreated || details.hadUpgrade) {
+        await _seedLessons();
+      }
     },
   );
+
+  Future<void> _createPerformanceIndexes() async {
+    // SRS due-date indexes — every dashboard heartbeat scans these columns.
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_srs_next_review ON srs_state(next_review_at)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_grammar_srs_next_review ON grammar_srs_state(next_review_at)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_kanji_srs_next_review ON kanji_srs_state(next_review_at)',
+    );
+    // Grammar lookup indexes — queried by level on every practice screen open.
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_grammar_points_jlpt ON grammar_points(jlpt_level)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_grammar_points_lesson ON grammar_points(lesson_id)',
+    );
+    // FK indexes SQLite does not create automatically.
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_grammar_examples_grammar ON grammar_examples(grammar_id)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_lesson_term_lesson ON user_lesson_term(lesson_id)',
+    );
+    // Ghost reviews — queried by ghost_reviews_due > 0 for ghost session load.
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_grammar_srs_ghost ON grammar_srs_state(ghost_reviews_due)',
+    );
+  }
 
   Future<void> _seedLessons() async {
     for (final spec in _lessonSeedSpecs) {

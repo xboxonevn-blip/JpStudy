@@ -9,33 +9,43 @@ class SharedReadingLibrary {
 
   Future<List<ImmersionArticle>> loadImmersionArticles() async {
     final assetPaths = await _loadLessonAssetPaths();
-    final articles = <ImmersionArticle>[];
-    for (final path in assetPaths) {
-      final expectedLevel = _levelFromAssetPath(path);
+
+    // Load all JSON files concurrently — pure I/O, no DB involvement.
+    final futures = assetPaths.map((path) async {
       try {
         final raw = await rootBundle.loadString(path);
-        final decoded = jsonDecode(raw);
-        if (decoded is Map<String, dynamic>) {
-          final wrappedArticles = decoded['articles'];
-          if (wrappedArticles is List) {
-            articles.addAll(
-              wrappedArticles.whereType<Map>().map(
-                (item) => ImmersionArticle.fromJson(
-                  _asMap(item),
-                  expectedLevel: expectedLevel,
-                  fallbackSource: ImmersionArticle.localSourceLabel,
-                ),
-              ),
-            );
-          } else {
-            articles.add(
-              ImmersionArticle.fromJson(
-                decoded,
-                expectedLevel: expectedLevel,
+        return (level: _levelFromAssetPath(path), raw: raw);
+      } catch (_) {
+        return null;
+      }
+    });
+    final rawEntries = await Future.wait(futures);
+
+    final articles = <ImmersionArticle>[];
+    for (final entry in rawEntries) {
+      if (entry == null) continue;
+      try {
+        final decoded = jsonDecode(entry.raw);
+        if (decoded is! Map<String, dynamic>) continue;
+        final wrappedArticles = decoded['articles'];
+        if (wrappedArticles is List) {
+          articles.addAll(
+            wrappedArticles.whereType<Map>().map(
+              (item) => ImmersionArticle.fromJson(
+                _asMap(item),
+                expectedLevel: entry.level,
                 fallbackSource: ImmersionArticle.localSourceLabel,
               ),
-            );
-          }
+            ),
+          );
+        } else {
+          articles.add(
+            ImmersionArticle.fromJson(
+              decoded,
+              expectedLevel: entry.level,
+              fallbackSource: ImmersionArticle.localSourceLabel,
+            ),
+          );
         }
       } catch (_) {
         continue;

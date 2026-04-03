@@ -67,7 +67,6 @@ class GrammarRepository {
     required int grammarId,
     required int grade, // 1-4
   }) async {
-    // INSERT OR IGNORE — no prior SELECT needed; safe to call unconditionally.
     await _db.grammarDao.initializeSrsState(grammarId);
     final state = await _db.grammarDao.getSrsState(grammarId);
     if (state == null) return;

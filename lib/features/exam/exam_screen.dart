@@ -76,8 +76,14 @@ class ExamScreen extends ConsumerWidget {
 
     try {
       final repo = ref.read(lessonRepositoryProvider);
-      final allVocab = await repo.getVocabByLevel(level);
       final sessionKey = 'mock_$level';
+      final storage = ref.read(sessionStorageProvider);
+
+      // Fire vocab fetch and session resume load concurrently — independent.
+      final vocabFuture = repo.getVocabByLevel(level);
+      final resumeFuture = storage.loadTestSession(sessionKey);
+      final allVocab = await vocabFuture;
+      final resumeSnapshot = await resumeFuture;
 
       if (!context.mounted) return;
       Navigator.pop(context);
@@ -88,9 +94,6 @@ class ExamScreen extends ConsumerWidget {
         );
         return;
       }
-
-      final storage = ref.read(sessionStorageProvider);
-      final resumeSnapshot = await storage.loadTestSession(sessionKey);
       if (!context.mounted) return;
 
       final initialConfig = TestConfig.mockExam(questionCount: allVocab.length);

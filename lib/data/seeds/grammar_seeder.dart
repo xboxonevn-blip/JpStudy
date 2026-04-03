@@ -8,6 +8,12 @@ import '../daos/grammar_dao.dart';
 import '../utils/grammar_example_matching.dart';
 import '../utils/grammar_english_notation.dart';
 
+typedef _LessonData = ({
+  int lessonId,
+  List<dynamic> def,
+  List<dynamic>? ex,
+});
+
 class GrammarSeeder {
   final GrammarDao _dao;
 
@@ -30,14 +36,21 @@ class GrammarSeeder {
     }
 
     debugPrint('🔄 Starting Grammar Seed (v$kGrammarDataVersion)...');
-
     final stopwatch = Stopwatch()..start();
+
+    // Load all JSON files concurrently before opening the transaction so
+    // that asset I/O does not block or extend the DB transaction window.
+    final allLevelData = await Future.wait([
+      _loadLevelJson('N5', 1, 25),
+      _loadLevelJson('N4', 26, 50),
+      _loadLevelJson('N3', 51, 75),
+    ]);
 
     // Chạy trong transaction để đảm bảo toàn vẹn dữ liệu
     await db.transaction(() async {
-      await _seedLevel('N5', 1, 25);
-      await _seedLevel('N4', 26, 50);
-      await _seedLevel('N3', 51, 75);
+      await _seedLevelFromData('N5', allLevelData[0]);
+      await _seedLevelFromData('N4', allLevelData[1]);
+      await _seedLevelFromData('N3', allLevelData[2]);
     });
 
     await prefs.setInt(kKeyGrammarVersion, kGrammarDataVersion);
@@ -47,182 +60,214 @@ class GrammarSeeder {
     );
   }
 
-  Future<void> _seedLevel(String level, int startLesson, int endLesson) async {
-    for (int i = startLesson; i <= endLesson; i++) {
+  // ── JSON loading (pure I/O, no DB) ───────────────────────────────────────
+
+  /// Loads all lesson JSON files for [level] concurrently.
+  Future<List<_LessonData>> _loadLevelJson(
+    String level,
+    int start,
+    int end,
+  ) {
+    return Future.wait([
+      for (int i = start; i <= end; i++) _loadOneLessonJson(level, i),
+    ]);
+  }
+
+  /// Loads the definition and example files for a single lesson in parallel.
+  Future<_LessonData> _loadOneLessonJson(String level, int lessonId) async {
+    final ll = level.toLowerCase();
+    final defPath =
+        'assets/data/content/grammar/$ll/grammar_${ll}_$lessonId.json';
+    final exPath =
+        'assets/data/content/grammar_examples/$ll/lesson_$lessonId.json';
+
+    // Fire both loads concurrently — they are completely independent.
+    final defFuture = rootBundle
+        .loadString(defPath)
+        .then((s) => json.decode(s) as List<dynamic>);
+    final exFuture = _tryLoadJsonList(exPath);
+
+    final def = await defFuture;
+    final ex = await exFuture;
+    return (lessonId: lessonId, def: def, ex: ex);
+  }
+
+  Future<List<dynamic>?> _tryLoadJsonList(String path) async {
+    try {
+      final s = await rootBundle.loadString(path);
+      return json.decode(s) as List<dynamic>;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  // ── DB seeding ────────────────────────────────────────────────────────────
+
+  Future<void> _seedLevelFromData(
+    String level,
+    List<_LessonData> lessons,
+  ) async {
+    for (final lessonData in lessons) {
       try {
-        // 1. Definition File
-        final defPath =
-            'assets/data/content/grammar/${level.toLowerCase()}/grammar_${level.toLowerCase()}_$i.json';
-        final defString = await rootBundle.loadString(defPath);
-        final List<dynamic> defJson = json.decode(defString);
+        await _seedOneLesson(level, lessonData);
+        debugPrint('   -> Seeded Lesson ${lessonData.lessonId} ($level)');
+      } catch (e) {
+        debugPrint('   -> Error seeding Lesson ${lessonData.lessonId}: $e');
+      }
+    }
+  }
 
-        // 2. Example File
-        final exPath =
-            'assets/data/content/grammar_examples/${level.toLowerCase()}/lesson_$i.json';
-        String? exString;
-        try {
-          exString = await rootBundle.loadString(exPath);
-        } catch (_) {
-          // Ignore missing examples
-        }
-        final List<dynamic>? exJson = exString != null
-            ? json.decode(exString)
-            : null;
+  Future<void> _seedOneLesson(String level, _LessonData lessonData) async {
+    final lessonId = lessonData.lessonId;
+    final defJson = lessonData.def;
+    final exJson = lessonData.ex;
 
-        for (final item in defJson) {
-          final rawGrammarPoint = item['grammarPoint'] as String?;
-          final rawTitle = item['title'] as String?;
-          final rawTitleEn = item['titleEn'] as String?;
-          final rawStructure = (item['structure'] ?? item['connection'] ?? '')
+    // Hoist: fetch existing points ONCE per lesson, not once per grammar item.
+    final existingPoints = await (_dao.db.select(
+      _dao.db.grammarPoints,
+    )..where((tbl) => tbl.lessonId.equals(lessonId))).get();
+
+    for (final item in defJson) {
+      final rawGrammarPoint = item['grammarPoint'] as String?;
+      final rawTitle = item['title'] as String?;
+      final rawTitleEn = item['titleEn'] as String?;
+      final rawStructure = (item['structure'] ?? item['connection'] ?? '')
+          .toString()
+          .trim();
+      final grammarPointLabel = resolveCanonicalGrammarPointSource(
+        grammarPoint: rawGrammarPoint,
+        structure: rawStructure,
+        title: rawTitle,
+        structureEn: item['structureEn'] as String?,
+        titleEn: rawTitleEn,
+      );
+      final structure = stripNonCanonicalGrammarNotes(
+        rawStructure.isEmpty ? grammarPointLabel : rawStructure,
+      );
+      final titleVi =
+          ((item['title'] ?? item['meaning_vi'] ?? '').toString().trim()).trim();
+      final structureEn = normalizeGrammarStructureEn(
+        item['structureEn'] as String?,
+      );
+      final explanationVi =
+          (item['explanation'] ?? item['explanation_vi'] ?? '')
               .toString()
               .trim();
-          final grammarPointLabel = resolveCanonicalGrammarPointSource(
-            grammarPoint: rawGrammarPoint,
-            structure: rawStructure,
-            title: rawTitle,
-            structureEn: item['structureEn'] as String?,
-            titleEn: rawTitleEn,
-          );
-          final structure = stripNonCanonicalGrammarNotes(
-            rawStructure.isEmpty ? grammarPointLabel : rawStructure,
-          );
-          final titleVi =
-              ((item['title'] ?? item['meaning_vi'] ?? '').toString().trim())
-                  .trim();
-          final structureEn = normalizeGrammarStructureEn(
-            item['structureEn'] as String?,
-          );
-          final explanationVi =
-              (item['explanation'] ?? item['explanation_vi'] ?? '')
-                  .toString()
-                  .trim();
-          final explanationEn = (item['explanationEn'] as String? ?? '').trim();
+      final explanationEn = (item['explanationEn'] as String? ?? '').trim();
 
-          if (grammarPointLabel.isEmpty ||
-              titleVi.isEmpty ||
-              structure.isEmpty) {
-            continue;
-          }
+      if (grammarPointLabel.isEmpty || titleVi.isEmpty || structure.isEmpty) {
+        continue;
+      }
 
-          final englishLabel = resolveEnglishGrammarLabel(
-            titleEn: rawTitleEn,
-            meaningEn: rawTitleEn,
-            connectionEn: structureEn,
-            connection: structure,
-            grammarPoint: grammarPointLabel,
-          );
-          final englishMeaning = resolveEnglishGrammarMeaning(
-            meaningEn: rawTitleEn,
-            titleEn: rawTitleEn,
-            connectionEn: structureEn,
-            connection: structure,
-            grammarPoint: grammarPointLabel,
-          );
-          final englishConnection = resolveEnglishGrammarConnection(
-            connectionEn: structureEn,
-            connection: structure,
-            grammarPoint: grammarPointLabel,
-            titleEn: rawTitleEn,
-            meaningEn: rawTitleEn,
-          );
-          final storedTitleEn = englishLabel == 'Target pattern'
-              ? null
-              : englishLabel;
-          final storedMeaningEn = englishMeaning == 'Target pattern'
-              ? null
-              : englishMeaning;
-          final storedConnectionEn = englishConnection == 'Grammar pattern'
-              ? null
-              : englishConnection;
+      final englishLabel = resolveEnglishGrammarLabel(
+        titleEn: rawTitleEn,
+        meaningEn: rawTitleEn,
+        connectionEn: structureEn,
+        connection: structure,
+        grammarPoint: grammarPointLabel,
+      );
+      final englishMeaning = resolveEnglishGrammarMeaning(
+        meaningEn: rawTitleEn,
+        titleEn: rawTitleEn,
+        connectionEn: structureEn,
+        connection: structure,
+        grammarPoint: grammarPointLabel,
+      );
+      final englishConnection = resolveEnglishGrammarConnection(
+        connectionEn: structureEn,
+        connection: structure,
+        grammarPoint: grammarPointLabel,
+        titleEn: rawTitleEn,
+        meaningEn: rawTitleEn,
+      );
+      final storedTitleEn =
+          englishLabel == 'Target pattern' ? null : englishLabel;
+      final storedMeaningEn =
+          englishMeaning == 'Target pattern' ? null : englishMeaning;
+      final storedConnectionEn =
+          englishConnection == 'Grammar pattern' ? null : englishConnection;
 
-          final existing = _findExistingPoint(
-            await (_dao.db.select(
-              _dao.db.grammarPoints,
-            )..where((tbl) => tbl.lessonId.equals(i))).get(),
-            grammarPointLabel: grammarPointLabel,
-            rawGrammarPoint: rawGrammarPoint,
-            rawTitle: rawTitle,
-            rawStructure: rawStructure,
-          );
+      final existing = _findExistingPoint(
+        existingPoints,
+        grammarPointLabel: grammarPointLabel,
+        rawGrammarPoint: rawGrammarPoint,
+        rawTitle: rawTitle,
+        rawStructure: rawStructure,
+      );
 
-          final companion = GrammarPointsCompanion(
-            lessonId: Value(i),
-            grammarPoint: Value(grammarPointLabel),
-            titleEn: Value(storedTitleEn),
-            meaning: Value(titleVi),
-            meaningVi: Value(titleVi),
-            meaningEn: Value(storedMeaningEn),
-            connection: Value(structure),
-            connectionEn: Value(storedConnectionEn),
-            explanation: Value(explanationVi),
-            explanationVi: Value(explanationVi),
-            explanationEn: Value(explanationEn.isEmpty ? null : explanationEn),
-            jlptLevel: Value(level),
-          );
+      final companion = GrammarPointsCompanion(
+        lessonId: Value(lessonId),
+        grammarPoint: Value(grammarPointLabel),
+        titleEn: Value(storedTitleEn),
+        meaning: Value(titleVi),
+        meaningVi: Value(titleVi),
+        meaningEn: Value(storedMeaningEn),
+        connection: Value(structure),
+        connectionEn: Value(storedConnectionEn),
+        explanation: Value(explanationVi),
+        explanationVi: Value(explanationVi),
+        explanationEn: Value(explanationEn.isEmpty ? null : explanationEn),
+        jlptLevel: Value(level),
+      );
 
-          late final int pointId;
-          if (existing == null) {
-            pointId = await _dao
-                .into(_dao.db.grammarPoints)
+      late final int pointId;
+      if (existing == null) {
+        pointId = await _dao
+            .into(_dao.db.grammarPoints)
+            .insert(
+              GrammarPointsCompanion.insert(
+                lessonId: Value(lessonId),
+                grammarPoint: grammarPointLabel,
+                titleEn: Value(storedTitleEn),
+                meaning: titleVi,
+                meaningVi: Value(titleVi),
+                meaningEn: Value(storedMeaningEn),
+                connection: structure,
+                connectionEn: Value(storedConnectionEn),
+                explanation: explanationVi,
+                explanationVi: Value(explanationVi),
+                explanationEn: Value(
+                  explanationEn.isEmpty ? null : explanationEn,
+                ),
+                jlptLevel: level,
+                isLearned: const Value(false),
+              ),
+            );
+      } else {
+        pointId = existing.id;
+        await (_dao.db.update(
+          _dao.db.grammarPoints,
+        )..where((tbl) => tbl.id.equals(pointId))).write(companion);
+        await (_dao.db.delete(
+          _dao.db.grammarExamples,
+        )..where((tbl) => tbl.grammarId.equals(pointId))).go();
+      }
+
+      // Insert Examples
+      if (exJson != null) {
+        final examples = findGrammarExamplesForDefinition(
+          exampleBlocks: exJson,
+          title: rawTitle,
+          grammarPoint: grammarPointLabel,
+        );
+
+        if (examples != null) {
+          for (final ex in examples) {
+            await _dao
+                .into(_dao.db.grammarExamples)
                 .insert(
-                  GrammarPointsCompanion.insert(
-                    lessonId: Value(i),
-                    grammarPoint: grammarPointLabel,
-                    titleEn: Value(storedTitleEn),
-                    meaning: titleVi,
-                    meaningVi: Value(titleVi),
-                    meaningEn: Value(storedMeaningEn),
-                    connection: structure,
-                    connectionEn: Value(storedConnectionEn),
-                    explanation: explanationVi,
-                    explanationVi: Value(explanationVi),
-                    explanationEn: Value(
-                      explanationEn.isEmpty ? null : explanationEn,
-                    ),
-                    jlptLevel: level,
-                    isLearned: const Value(false),
+                  GrammarExamplesCompanion.insert(
+                    grammarId: pointId,
+                    japanese: ex['sentence'],
+                    translation:
+                        (ex['translation'] ?? ex['translationEn'] ?? '')
+                            .toString(),
+                    translationVi: Value(ex['translation'] as String?),
+                    translationEn: Value(ex['translationEn'] as String?),
                   ),
                 );
-          } else {
-            pointId = existing.id;
-            await (_dao.db.update(
-              _dao.db.grammarPoints,
-            )..where((tbl) => tbl.id.equals(pointId))).write(companion);
-            await (_dao.db.delete(
-              _dao.db.grammarExamples,
-            )..where((tbl) => tbl.grammarId.equals(pointId))).go();
-          }
-
-          // Insert Examples
-          if (exJson != null) {
-            final examples = findGrammarExamplesForDefinition(
-              exampleBlocks: exJson,
-              title: rawTitle,
-              grammarPoint: grammarPointLabel,
-            );
-
-            if (examples != null) {
-              for (final ex in examples) {
-                await _dao
-                    .into(_dao.db.grammarExamples)
-                    .insert(
-                      GrammarExamplesCompanion.insert(
-                        grammarId: pointId,
-                        japanese: ex['sentence'],
-                        translation:
-                            (ex['translation'] ?? ex['translationEn'] ?? '')
-                                .toString(),
-                        translationVi: Value(ex['translation'] as String?),
-                        translationEn: Value(ex['translationEn'] as String?),
-                      ),
-                    );
-              }
-            }
           }
         }
-        debugPrint('   -> Seeded Lesson $i ($level)');
-      } catch (e) {
-        debugPrint('   -> Error seeding Lesson $i: $e');
       }
     }
   }

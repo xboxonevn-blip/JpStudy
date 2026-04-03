@@ -44,8 +44,11 @@ final lessonTermsProvider =
         level: args.level,
         title: args.fallbackTitle,
       );
-      await repo.seedTermsIfEmpty(args.lessonId, args.level);
-      await repo.seedGrammarIfEmpty(args.lessonId, args.level);
+      // Vocab and grammar seeding touch independent tables — run concurrently.
+      await Future.wait([
+        repo.seedTermsIfEmpty(args.lessonId, args.level),
+        repo.seedGrammarIfEmpty(args.lessonId, args.level),
+      ]);
       return repo.fetchTerms(args.lessonId);
     });
 
@@ -469,6 +472,18 @@ class ProgressSummary {
   final int totalQuestions;
 }
 
+// Process-level caches for read-only content DB counts and item lists.
+// Content DB is seeded once and never mutated at runtime, so these are safe
+// to cache for the lifetime of the process.
+final _vocabCountCache = <String, int>{};
+final _kanjiCountCache = <String, int>{};
+// Cache keyed by "$level:$series:$start:$end" — lesson-range lists never change.
+final _vocabLessonRangeCache = <String, List<VocabItem>>{};
+// Full level+series vocab list cache — avoids re-mapping hundreds of DB rows.
+final _vocabByLevelSeriesCache = <String, List<VocabItem>>{};
+// Full level kanji list cache — avoids re-fetching and re-mapping on every call.
+final _kanjiByLevelCache = <String, List<KanjiItem>>{};
+
 class LessonRepository {
   LessonRepository(this._db, this._contentDb);
 
@@ -649,8 +664,12 @@ class LessonRepository {
   }
 
   /// COUNT(*) variant — use when only the number of terms is needed.
-  /// Avoids deserializing full vocab rows.
+  /// Avoids deserializing full vocab rows. Result is cached for the process
+  /// lifetime since content DB data is read-only and never changes at runtime.
   Future<int> countVocabByLevelAndSeries(String level, String series) async {
+    final key = '$level:$series';
+    final cached = _vocabCountCache[key];
+    if (cached != null) return cached;
     final countExpr = _contentDb.vocab.id.count();
     final row = await (_contentDb.selectOnly(_contentDb.vocab)
           ..addColumns([countExpr])
@@ -659,20 +678,28 @@ class LessonRepository {
                 _contentDb.vocab.series.equals(series),
           ))
         .getSingle();
-    return row.read(countExpr) ?? 0;
+    final count = row.read(countExpr) ?? 0;
+    _vocabCountCache[key] = count;
+    return count;
   }
 
   Future<List<VocabItem>> getVocabByLevelAndSeries(
     String level,
     String series,
   ) async {
+    final cacheKey = '$level:$series';
+    final cached = _vocabByLevelSeriesCache[cacheKey];
+    if (cached != null) return cached;
+
     final items =
         await (_contentDb.select(_contentDb.vocab)..where(
               (tbl) => tbl.level.equals(level) & tbl.series.equals(series),
             ))
             .get();
 
-    return items.map(_mapContentVocabToItem).toList();
+    final result = items.map(_mapContentVocabToItem).toList();
+    _vocabByLevelSeriesCache[cacheKey] = result;
+    return result;
   }
 
   Future<List<VocabItem>> getVocabByLevelSeriesChapterRange(
@@ -721,9 +748,13 @@ class LessonRepository {
     required int endLesson,
     String series = 'minna',
   }) async {
+    final cacheKey = '$level:$series:$startLesson:$endLesson';
+    final cached = _vocabLessonRangeCache[cacheKey];
+    if (cached != null) return cached;
+
     final lessonTags = {
       for (var lesson = startLesson; lesson <= endLesson; lesson++)
-        'minna_$lesson',
+        '${series}_$lesson',
     };
 
     final items =
@@ -732,7 +763,7 @@ class LessonRepository {
             ))
             .get();
 
-    return items
+    final result = items
         .where((item) {
           final rawTags = item.tags;
           if (rawTags == null || rawTags.trim().isEmpty) {
@@ -747,6 +778,8 @@ class LessonRepository {
         })
         .map(_mapContentVocabToItem)
         .toList();
+    _vocabLessonRangeCache[cacheKey] = result;
+    return result;
   }
 
   Future<List<VocabItem>> fetchContentVocabByIds(List<int> ids) async {
@@ -1705,6 +1738,9 @@ class LessonRepository {
   }
 
   Future<List<KanjiItem>> fetchKanjiByLevel(String level) async {
+    final cached = _kanjiByLevelCache[level];
+    if (cached != null) return cached;
+
     final rows =
         await (_contentDb.select(_contentDb.kanji)..where((tbl) {
               return tbl.jlptLevel.equals(level);
@@ -1715,16 +1751,17 @@ class LessonRepository {
       if (byLesson != 0) return byLesson;
       return a.id.compareTo(b.id);
     });
-    return _mapKanjiRows(rows);
+    final result = await _mapKanjiRows(rows);
+    _kanjiByLevelCache[level] = result;
+    return result;
   }
 
   /// Returns kanji at [level] whose SRS state is currently due (nextReviewAt <= now).
   /// Kanji with no SRS state row are excluded — they are "unseen", not "due".
   Future<List<KanjiItem>> fetchDueKanjiByLevel(String level) async {
-    final dueStates = await _db.kanjiSrsDao.getDueReviews();
-    if (dueStates.isEmpty) return const [];
-
-    final dueIds = dueStates.map((s) => s.kanjiId).toList();
+    // getDueKanjiIds() fetches only kanjiId values — no extra columns transferred.
+    final dueIds = await _db.kanjiSrsDao.getDueKanjiIds();
+    if (dueIds.isEmpty) return const [];
     final rows =
         await (_contentDb.select(_contentDb.kanji)
               ..where(
@@ -1763,14 +1800,19 @@ class LessonRepository {
     return _mapKanjiRows(rows);
   }
 
-  /// COUNT-only: total kanji at [level]. No row deserialization.
+  /// COUNT-only: total kanji at [level]. No row deserialization. Result is
+  /// cached for the process lifetime since content DB is read-only.
   Future<int> countKanjiByLevel(String level) async {
+    final cached = _kanjiCountCache[level];
+    if (cached != null) return cached;
     final countExpr = _contentDb.kanji.id.count();
     final row = await (_contentDb.selectOnly(_contentDb.kanji)
           ..addColumns([countExpr])
           ..where(_contentDb.kanji.jlptLevel.equals(level)))
         .getSingle();
-    return row.read(countExpr) ?? 0;
+    final count = row.read(countExpr) ?? 0;
+    _kanjiCountCache[level] = count;
+    return count;
   }
 
   /// COUNT-only: due kanji at [level]. No KanjiItem deserialization.
@@ -2015,10 +2057,8 @@ class LessonRepository {
   }
 
   Future<int?> findFirstLessonWithDueKanji(String level) async {
-    final dueStates = await _db.kanjiSrsDao.getDueReviews();
-    if (dueStates.isEmpty) return null;
-
-    final dueIds = dueStates.map((state) => state.kanjiId).toList();
+    final dueIds = await _db.kanjiSrsDao.getDueKanjiIds();
+    if (dueIds.isEmpty) return null;
     final rows =
         await (_contentDb.select(_contentDb.kanji)..where((tbl) {
               return tbl.id.isIn(dueIds) & tbl.jlptLevel.equals(level);
@@ -2039,13 +2079,6 @@ class LessonRepository {
   ) async {
     final states = await _db.kanjiSrsDao.getStatesForIds(kanjiIds);
     return {for (final state in states) state.kanjiId: state};
-  }
-
-  Future<void> ensureKanjiSrsState(int kanjiId) async {
-    final existing = await _db.kanjiSrsDao.getSrsState(kanjiId);
-    if (existing == null) {
-      await _db.kanjiSrsDao.initializeSrsState(kanjiId);
-    }
   }
 
   Future<void> saveKanjiReview({

@@ -538,14 +538,26 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
       }
     }
 
+    // Fire grammar and kanji fetches concurrently with the vocab fetch —
+    // they are fully independent and touch different tables.
+    final termsFuture = lessonVocabIds.isNotEmpty
+        ? (db.select(db.userLessonTerm)
+              ..where((t) => t.id.isIn(lessonVocabIds.toList())))
+            .get()
+        : Future.value(const <UserLessonTermData>[]);
+    final grammarFuture = grammarIds.isNotEmpty
+        ? (db.select(db.grammarPoints)
+              ..where((g) => g.id.isIn(grammarIds.toList())))
+            .get()
+        : Future.value(const <GrammarPoint>[]);
+    final kanjiFuture = kanjiIds.isNotEmpty
+        ? lessonRepo.fetchKanjiByIds(kanjiIds.toList())
+        : Future.value(const <KanjiItem>[]);
+
+    // Await lesson vocab first — fallback ID list depends on which were found.
     final vocabMap = <int, UserLessonTermData>{};
-    if (lessonVocabIds.isNotEmpty) {
-      final terms = await (db.select(
-        db.userLessonTerm,
-      )..where((t) => t.id.isIn(lessonVocabIds.toList()))).get();
-      for (final term in terms) {
-        vocabMap[term.id] = term;
-      }
+    for (final term in await termsFuture) {
+      vocabMap[term.id] = term;
     }
 
     final vocabFallbackMap = <int, VocabItem>{};
@@ -554,30 +566,21 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
       ...lessonVocabIds.where((id) => !vocabMap.containsKey(id)),
     }.toList();
     if (fallbackIds.isNotEmpty) {
-      final fallbackItems = await lessonRepo.fetchContentVocabByIds(
-        fallbackIds,
-      );
+      final fallbackItems = await lessonRepo.fetchContentVocabByIds(fallbackIds);
       for (final item in fallbackItems) {
         vocabFallbackMap[item.id] = item;
       }
     }
 
+    // Collect grammar and kanji — already running since before the first await.
     final grammarMap = <int, GrammarPoint>{};
-    if (grammarIds.isNotEmpty) {
-      final points = await (db.select(
-        db.grammarPoints,
-      )..where((g) => g.id.isIn(grammarIds.toList()))).get();
-      for (final point in points) {
-        grammarMap[point.id] = point;
-      }
+    for (final point in await grammarFuture) {
+      grammarMap[point.id] = point;
     }
 
     final kanjiMap = <int, KanjiItem>{};
-    if (kanjiIds.isNotEmpty) {
-      final items = await lessonRepo.fetchKanjiByIds(kanjiIds.toList());
-      for (final item in items) {
-        kanjiMap[item.id] = item;
-      }
+    for (final item in await kanjiFuture) {
+      kanjiMap[item.id] = item;
     }
 
     return _MistakeDetails(

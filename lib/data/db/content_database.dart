@@ -127,10 +127,14 @@ class ContentDatabase extends _$ContentDatabase {
         }
       },
       beforeOpen: (details) async {
-        await _ensureMinnaVocabularySeeded();
-        await _ensureHajimeteVocabularySeeded();
-        await _ensureMinnaGrammarSeeded();
-        await _ensureMinnaKanjiSeeded();
+        // All four checks are independent — run them concurrently so the
+        // content DB is ready in the time of the single slowest check.
+        await Future.wait([
+          _ensureMinnaVocabularySeeded(),
+          _ensureHajimeteVocabularySeeded(),
+          _ensureMinnaGrammarSeeded(),
+          _ensureMinnaKanjiSeeded(),
+        ]);
       },
     );
   }
@@ -146,16 +150,26 @@ class ContentDatabase extends _$ContentDatabase {
   }
 
   Future<void> _ensureMinnaVocabularySeeded() async {
+    // One GROUP BY query replaces N sequential COUNT queries (one per level).
+    final levelCol = vocab.level;
+    final seriesCol = vocab.series;
+    final countExpr = vocab.id.count();
+    final rows = await (selectOnly(vocab)
+          ..addColumns([levelCol, seriesCol, countExpr])
+          ..where(
+            _contentSeedSpecs.map((s) {
+              return vocab.level.equals(s.levelLabel) &
+                  vocab.series.equals(s.series);
+            }).reduce((a, b) => a | b),
+          )
+          ..groupBy([levelCol, seriesCol]))
+        .get();
+    final counts = {
+      for (final row in rows)
+        '${row.read(levelCol)}:${row.read(seriesCol)}': row.read(countExpr) ?? 0,
+    };
     for (final spec in _contentSeedSpecs) {
-      final levelCountExpr = vocab.id.count();
-      final levelQuery = selectOnly(vocab)
-        ..addColumns([levelCountExpr])
-        ..where(
-          vocab.level.equals(spec.levelLabel) & vocab.series.equals(spec.series),
-        );
-      final levelRow = await levelQuery.getSingle();
-      final levelCount = levelRow.read(levelCountExpr) ?? 0;
-      if (levelCount == 0) {
+      if ((counts['${spec.levelLabel}:${spec.series}'] ?? 0) == 0) {
         await _seedVocabularyLevel(spec);
       }
     }
@@ -187,16 +201,24 @@ class ContentDatabase extends _$ContentDatabase {
   }
 
   Future<void> _ensureHajimeteVocabularySeeded() async {
+    // One GROUP BY query replaces N sequential COUNT queries (one per level).
+    final levelCol = vocab.level;
+    final countExpr = vocab.id.count();
+    final rows = await (selectOnly(vocab)
+          ..addColumns([levelCol, countExpr])
+          ..where(
+            vocab.series.equals('hajimete') &
+                vocab.level.isIn(
+                  _hajimeteSeedSpecs.map((s) => s.levelLabel).toList(),
+                ),
+          )
+          ..groupBy([levelCol]))
+        .get();
+    final counts = {
+      for (final row in rows) row.read(levelCol)!: row.read(countExpr) ?? 0,
+    };
     for (final spec in _hajimeteSeedSpecs) {
-      final countExpr = vocab.id.count();
-      final query = selectOnly(vocab)
-        ..addColumns([countExpr])
-        ..where(
-          vocab.level.equals(spec.levelLabel) & vocab.series.equals('hajimete'),
-        );
-      final row = await query.getSingle();
-      final count = row.read(countExpr) ?? 0;
-      if (count == 0) {
+      if ((counts[spec.levelLabel] ?? 0) == 0) {
         await _seedHajimeteLevel(spec);
       }
     }
@@ -281,28 +303,46 @@ class ContentDatabase extends _$ContentDatabase {
   }
 
   Future<void> _ensureMinnaKanjiSeeded() async {
+    // One GROUP BY query replaces N sequential COUNT queries (one per level).
+    final levelCol = kanji.jlptLevel;
+    final countExpr = kanji.id.count();
+    final rows = await (selectOnly(kanji)
+          ..addColumns([levelCol, countExpr])
+          ..where(
+            kanji.jlptLevel.isIn(
+              _contentSeedSpecs.map((s) => s.levelLabel).toList(),
+            ),
+          )
+          ..groupBy([levelCol]))
+        .get();
+    final counts = {
+      for (final row in rows) row.read(levelCol)!: row.read(countExpr) ?? 0,
+    };
     for (final spec in _contentSeedSpecs) {
-      final levelCountExpr = kanji.id.count();
-      final levelQuery = selectOnly(kanji)
-        ..addColumns([levelCountExpr])
-        ..where(kanji.jlptLevel.equals(spec.levelLabel));
-      final levelRow = await levelQuery.getSingle();
-      final levelCount = levelRow.read(levelCountExpr) ?? 0;
-      if (levelCount == 0) {
+      if ((counts[spec.levelLabel] ?? 0) == 0) {
         await _seedKanjiLevel(spec);
       }
     }
   }
 
   Future<void> _ensureMinnaGrammarSeeded() async {
+    // One GROUP BY query replaces N sequential COUNT queries (one per level).
+    final levelCol = grammarPoint.level;
+    final countExpr = grammarPoint.id.count();
+    final rows = await (selectOnly(grammarPoint)
+          ..addColumns([levelCol, countExpr])
+          ..where(
+            grammarPoint.level.isIn(
+              _contentSeedSpecs.map((s) => s.levelLabel).toList(),
+            ),
+          )
+          ..groupBy([levelCol]))
+        .get();
+    final counts = {
+      for (final row in rows) row.read(levelCol)!: row.read(countExpr) ?? 0,
+    };
     for (final spec in _contentSeedSpecs) {
-      final levelCountExpr = grammarPoint.id.count();
-      final levelQuery = selectOnly(grammarPoint)
-        ..addColumns([levelCountExpr])
-        ..where(grammarPoint.level.equals(spec.levelLabel));
-      final levelRow = await levelQuery.getSingle();
-      final levelCount = levelRow.read(levelCountExpr) ?? 0;
-      if (levelCount == 0) {
+      if ((counts[spec.levelLabel] ?? 0) == 0) {
         await _seedMinnaGrammar();
         return;
       }
