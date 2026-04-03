@@ -95,3 +95,33 @@ A good first tuning pass should aim for:
 - `reverse_character` false positives reduced from `2/4` to `0/4` or `1/4`
 - `template_match` accept cases remain `100.0%`
 - no new false negatives introduced in `v4`
+
+
+## Result After Tuning
+
+Two tuning passes were applied after this note was written:
+
+- `fix: tighten extra-stroke handwriting penalty`
+- `fix: tighten compound reverse-character gating`
+
+Measured outcome after rerunning the audits:
+
+- `v4` focused set: false positives improved from `4` to `0`
+- `v3` broader regression set: false positives improved from `2` to `0`
+- no new false negatives were introduced in either set
+
+What changed in practice:
+
+- `extra_stroke` moved from the worst generator in `v4` to a clean pass
+- `reverse_character` on long compounds such as `????` no longer clears the compound aggregate gate
+- `mirror_horizontal` remained stable throughout and did not require tuning
+
+## Conclusion
+
+The current threshold pocket identified by the focused `v4` audit is closed for the measured sample sets.
+
+If a future regression appears, the next priority should be:
+
+1. expand the focused set with newly observed real-user failures
+2. keep using `v4` as the fast tuning gate
+3. rerun `v3` as the broader regression check before treating the pass as complete
