@@ -1492,12 +1492,13 @@ class _HandwritingPracticeScreenState
     }
 
     final strokeDelta = (drawnStrokes - expectedTotal).abs().toDouble();
-    final tolerance = expectedTotal >= 12
-        ? 2
-        : expectedTotal >= 6
-        ? 1
-        : 0;
-    final strokeScore = 1.0 - (strokeDelta / (tolerance + 1)).clamp(0.0, 1.0);
+    final tolerance = HandwritingEvaluator.strokeToleranceForExpectedCount(
+      expectedTotal,
+    );
+    final strokeScore = HandwritingEvaluator.strokeScoreForCounts(
+      drawnStrokes: drawnStrokes,
+      expectedStrokes: expectedTotal,
+    );
 
     final shapeScore = weightedShape.clamp(0.0, 1.0);
     final orderScore = weightedOrder.clamp(0.0, 1.0);

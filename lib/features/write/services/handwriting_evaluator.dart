@@ -99,13 +99,10 @@ class HandwritingEvaluator {
         .where((stroke) => stroke.length > 1)
         .toList();
     final drawnStrokes = meaningfulStrokes.length;
-    final strokeDelta = (drawnStrokes - expectedStrokes).abs().toDouble();
-    final tolerance = expectedStrokes >= 12
-        ? 2
-        : expectedStrokes >= 6
-        ? 1
-        : 0;
-    final strokeScore = 1.0 - (strokeDelta / (tolerance + 1)).clamp(0.0, 1.0);
+    final strokeScore = strokeScoreForCounts(
+      drawnStrokes: drawnStrokes,
+      expectedStrokes: expectedStrokes,
+    );
 
     final minSide = canvasSize.shortestSide == 0
         ? 200
@@ -230,6 +227,26 @@ class HandwritingEvaluator {
       default:
         return HandwritingQualityTier.generated;
     }
+  }
+
+  static int strokeToleranceForExpectedCount(int expectedStrokes) {
+    return expectedStrokes >= 12
+        ? 2
+        : expectedStrokes >= 6
+        ? 1
+        : 0;
+  }
+
+  static double strokeScoreForCounts({
+    required int drawnStrokes,
+    required int expectedStrokes,
+  }) {
+    final tolerance = strokeToleranceForExpectedCount(expectedStrokes);
+    final strokeDelta = (drawnStrokes - expectedStrokes).abs().toDouble();
+    final effectiveDelta = drawnStrokes > expectedStrokes
+        ? strokeDelta * 2.0
+        : strokeDelta;
+    return 1.0 - (effectiveDelta / (tolerance + 1)).clamp(0.0, 1.0);
   }
 
   static _TierProfile _profileForTier({
@@ -609,10 +626,11 @@ class HandwritingEvaluator {
     return totalScore >= max(0.0, profile.requiredScore - 0.01) &&
         strokeScore >= max(0.56, profile.minStrokeScore - 0.02) &&
         shapeScore >= max(0.54, profile.minShapeScore - 0.08) &&
-        orderScore >= max(
-          minEnclosureOrderFloor,
-          profile.minOrderScore - enclosureOrderSlack,
-        ) &&
+        orderScore >=
+            max(
+              minEnclosureOrderFloor,
+              profile.minOrderScore - enclosureOrderSlack,
+            ) &&
         templateScore >= max(0.52, profile.minTemplateScore - 0.08) &&
         directionScore >= max(0.62, profile.minDirectionScore - 0.06);
   }
