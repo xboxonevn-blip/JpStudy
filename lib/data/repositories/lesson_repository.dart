@@ -508,58 +508,26 @@ class LessonRepository {
 
   // Returns a map of lessonId -> {termCount, completedCount}
   Future<Map<int, LessonProgressStats>> getAllLessonProgress() async {
-    // Fire both aggregate queries concurrently — no inter-dependency.
-    final termCountsFuture =
-        (_db.selectOnly(_db.userLessonTerm)
-              ..addColumns([
-                _db.userLessonTerm.lessonId,
-                _db.userLessonTerm.id.count(),
-              ])
-              ..groupBy([_db.userLessonTerm.lessonId]))
-            .get();
-
-    final completedCountsFuture =
-        (_db.selectOnly(_db.userLessonTerm)
-              ..addColumns([
-                _db.userLessonTerm.lessonId,
-                _db.userLessonTerm.id.count(),
-              ])
-              ..where(_db.userLessonTerm.isLearned.equals(true))
-              ..groupBy([_db.userLessonTerm.lessonId]))
-            .get();
-
-    final termCounts = await termCountsFuture;
-    final completedCounts = await completedCountsFuture;
+    // Single GROUP BY pass: COUNT(*) for total, SUM(CASE WHEN is_learned) for
+    // completed — replaces two separate aggregate queries on the same table.
+    final rows = await _db.customSelect(
+      'SELECT lesson_id, '
+      'COUNT(*) AS term_count, '
+      'SUM(CASE WHEN is_learned THEN 1 ELSE 0 END) AS completed_count '
+      'FROM user_lesson_term '
+      'GROUP BY lesson_id',
+      readsFrom: {_db.userLessonTerm},
+    ).get();
 
     final stats = <int, LessonProgressStats>{};
-
-    for (final row in termCounts) {
-      final lessonId = row.read(_db.userLessonTerm.lessonId);
-      final count = row.read(_db.userLessonTerm.id.count()) ?? 0;
-      if (lessonId != null) {
-        stats[lessonId] = LessonProgressStats(
-          termCount: count,
-          completedCount: 0,
-        );
-      }
+    for (final row in rows) {
+      final lessonId = row.read<int?>('lesson_id');
+      if (lessonId == null) continue;
+      stats[lessonId] = LessonProgressStats(
+        termCount: row.read<int?>('term_count') ?? 0,
+        completedCount: row.read<int?>('completed_count') ?? 0,
+      );
     }
-
-    for (final row in completedCounts) {
-      final lessonId = row.read(_db.userLessonTerm.lessonId);
-      final count = row.read(_db.userLessonTerm.id.count()) ?? 0;
-      if (lessonId != null) {
-        if (stats.containsKey(lessonId)) {
-          stats[lessonId] = stats[lessonId]!.copyWith(completedCount: count);
-        } else {
-          // Should not happen usually as learned implies existing
-          stats[lessonId] = LessonProgressStats(
-            termCount: 0,
-            completedCount: count,
-          );
-        }
-      }
-    }
-
     return stats;
   }
 
@@ -625,22 +593,33 @@ class LessonRepository {
       return const [];
     }
     final ids = lessons.map((lesson) => lesson.id).toList();
-    final terms = await (_db.select(
-      _db.userLessonTerm,
-    )..where((tbl) => tbl.lessonId.isIn(ids))).get();
+
+    // Fire both aggregate queries concurrently — independent of each other.
+    // Single GROUP BY pass replaces loading full term rows for counting.
+    final termCountsFuture = _db.customSelect(
+      'SELECT lesson_id, '
+      'COUNT(*) AS term_count, '
+      'SUM(CASE WHEN is_learned THEN 1 ELSE 0 END) AS completed_count '
+      'FROM user_lesson_term '
+      'WHERE lesson_id IN (${ids.map((_) => '?').join(',')}) '
+      'GROUP BY lesson_id',
+      variables: ids.map(Variable<int>.new).toList(),
+      readsFrom: {_db.userLessonTerm},
+    ).get();
+    final dueCountsFuture = _fetchDueCounts(ids);
+
+    final termRows = await termCountsFuture;
+    final dueCounts = await dueCountsFuture;
+
     final counts = <int, int>{};
     final completedCounts = <int, int>{};
-    for (final term in terms) {
-      counts.update(term.lessonId, (value) => value + 1, ifAbsent: () => 1);
-      if (term.isLearned) {
-        completedCounts.update(
-          term.lessonId,
-          (value) => value + 1,
-          ifAbsent: () => 1,
-        );
-      }
+    for (final row in termRows) {
+      final lessonId = row.read<int?>('lesson_id');
+      if (lessonId == null) continue;
+      counts[lessonId] = row.read<int?>('term_count') ?? 0;
+      completedCounts[lessonId] = row.read<int?>('completed_count') ?? 0;
     }
-    final dueCounts = await _fetchDueCounts(ids);
+
     return lessons
         .map(
           (lesson) => LessonMeta(

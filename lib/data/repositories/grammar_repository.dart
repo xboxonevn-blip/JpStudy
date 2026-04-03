@@ -34,17 +34,10 @@ class GrammarRepository {
     return _db.grammarDao.getDueGrammarIds();
   }
 
-  /// Fetch all grammar points due for review
-  Future<List<GrammarPoint>> fetchDuePoints() async {
-    final dueStates = await _db.grammarDao.getDueReviews();
-    final ids = dueStates.map((s) => s.grammarId).toList();
-    if (ids.isEmpty) return [];
-
-    // Fetch actual points for these ids
-    final points = await (_db.select(
-      _db.grammarPoints,
-    )..where((t) => t.id.isIn(ids))).get();
-    return points;
+  /// Fetch all grammar points due for review.
+  /// Uses a single JOIN query instead of two round-trips (get IDs then get points).
+  Future<List<GrammarPoint>> fetchDuePoints() {
+    return _db.grammarDao.getDuePoints();
   }
 
   /// Fetch full details for a grammar point (including examples)
@@ -104,17 +97,10 @@ class GrammarRepository {
     );
   }
 
-  /// Fetch all grammar points that are "Ghosts" (failed previously)
-  Future<List<GrammarPoint>> fetchGhostPoints() async {
-    final ghostStates = await _db.grammarDao.getGhostReviews();
-    final ids = ghostStates.map((s) => s.grammarId).toList();
-    if (ids.isEmpty) return [];
-
-    // Fetch actual points for these ids
-    final points = await (_db.select(
-      _db.grammarPoints,
-    )..where((t) => t.id.isIn(ids))).get();
-    return points;
+  /// Fetch all grammar points that are "Ghosts" (failed previously).
+  /// Uses a single JOIN query instead of two round-trips (get IDs then get points).
+  Future<List<GrammarPoint>> fetchGhostPoints() {
+    return _db.grammarDao.getGhostPoints();
   }
 
   /// Mark a grammar point as learned and initialize SRS

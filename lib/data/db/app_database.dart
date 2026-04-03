@@ -300,22 +300,28 @@ class AppDatabase extends _$AppDatabase {
   }
 
   Future<void> _seedLessons() async {
-    for (final spec in _lessonSeedSpecs) {
-      for (var i = spec.startLesson; i <= spec.endLesson; i++) {
-        await into(userLesson).insert(
-          UserLessonCompanion.insert(
-            id: Value(i),
-            level: spec.level,
-            title: 'Lesson $i',
-            description: const Value(''),
-            isPublic: const Value(true),
-            isCustomTitle: const Value(false),
-            updatedAt: Value(DateTime.now()),
-          ),
-          mode: InsertMode.insertOrIgnore,
-        );
+    // batch() sends all 75 inserts in a single round-trip to the DB isolate
+    // instead of 75 sequential message-passing calls.
+    final now = DateTime.now();
+    await batch((b) {
+      for (final spec in _lessonSeedSpecs) {
+        for (var i = spec.startLesson; i <= spec.endLesson; i++) {
+          b.insert(
+            userLesson,
+            UserLessonCompanion.insert(
+              id: Value(i),
+              level: spec.level,
+              title: 'Lesson $i',
+              description: const Value(''),
+              isPublic: const Value(true),
+              isCustomTitle: const Value(false),
+              updatedAt: Value(now),
+            ),
+            mode: InsertMode.insertOrIgnore,
+          );
+        }
       }
-    }
+    });
   }
 
   Future<void> _removeImagePathColumn(Migrator migrator) async {

@@ -65,18 +65,11 @@ final vocabHomeSectionProvider = FutureProvider<VocabHomeSection>((ref) async {
   final n3Future = repo.countVocabByLevelAndSeries('N3', 'hajimete');
   final n2Future = repo.countVocabByLevelAndSeries('N2', 'hajimete');
   final n1Future = repo.countVocabByLevelAndSeries('N1', 'hajimete');
-  final minnaN5Future = repo.getVocabByLessonRange(
-    'N5',
-    startLesson: 1,
-    endLesson: 25,
-    series: 'minna',
-  ).then((items) => items.length);
-  final minnaN4Future = repo.getVocabByLessonRange(
-    'N4',
-    startLesson: 26,
-    endLesson: 50,
-    series: 'minna',
-  ).then((items) => items.length);
+  // Count using a SQL COUNT(*) backed by idx_vocab_level_series — avoids
+  // fetching full VocabItem rows just to call .length on the result.
+  // N5 minna = lessons 1-25 (the entire N5 minna series) and likewise for N4.
+  final minnaN5Future = repo.countVocabByLevelAndSeries('N5', 'minna');
+  final minnaN4Future = repo.countVocabByLevelAndSeries('N4', 'minna');
 
   final dashboard = await dashboardFuture;
   final nextReview = await nextReviewFuture;

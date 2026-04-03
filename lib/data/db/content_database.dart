@@ -30,7 +30,7 @@ class ContentDatabase extends _$ContentDatabase {
     : super(executor ?? _openContentConnection());
 
   @override
-  int get schemaVersion => 27;
+  int get schemaVersion => 28;
 
   @override
   MigrationStrategy get migration {
@@ -41,6 +41,7 @@ class ContentDatabase extends _$ContentDatabase {
         await _seedHajimeteVocabulary();
         await _seedMinnaGrammar();
         await _seedMinnaKanji();
+        await _createContentIndexes();
       },
       onUpgrade: (Migrator m, int from, int to) async {
         if (from < 2) {
@@ -124,6 +125,9 @@ class ContentDatabase extends _$ContentDatabase {
         }
         if (from < 27) {
           await _reseedMinnaVocabulary();
+        }
+        if (from < 28) {
+          await _createContentIndexes();
         }
       },
       beforeOpen: (details) async {
@@ -237,69 +241,101 @@ class ContentDatabase extends _$ContentDatabase {
 
   Future<void> _seedHajimeteLevel(_HajimeteSeedSpec spec) async {
     final level = spec.levelLabel;
-    for (int chapterId = 1; chapterId <= spec.chapterCount; chapterId++) {
-      final padded = chapterId.toString().padLeft(2, '0');
-      final path = _hajimeteVocabAssetPath(spec.levelLower, padded);
-      try {
-        final raw = await rootBundle.loadString(path);
-        final payload = _asMap(json.decode(raw));
-        final entries = payload?['entries'];
-        if (entries is! List) continue;
 
-        for (final rawEntry in entries) {
-          final entry = _asMap(rawEntry);
-          final lemma = _asMap(entry?['lemma']);
-          final sense = _asMap(entry?['sense']);
-          final labels = _asMap(lemma?['labels']);
-          final links = _asMap(entry?['links']);
-          if (entry == null || lemma == null || sense == null) continue;
+    // Step 1: Load all chapter JSON files concurrently.
+    final chapterFutures = [
+      for (int chapterId = 1; chapterId <= spec.chapterCount; chapterId++)
+        _tryLoadHajimeteChapterEntries(spec.levelLower, chapterId),
+    ];
+    final chapterEntryLists = await Future.wait(chapterFutures);
 
-          final term = _readText(lemma, 'term');
-          final meaningVi = _readText(sense, 'meaningVi');
-          if (term.isEmpty || meaningVi.isEmpty) continue;
-
-          final tags = entry['tags'] is List
-              ? (entry['tags'] as List).whereType<String>().join(',')
-              : null;
-          final hvResolution = await HanVietLookup.resolve(
-            term: term,
-            explicitHanViet: _readText(
-              labels ?? const <String, dynamic>{},
-              'hanViet',
-            ).nullIfEmpty(),
-            explicitMeaningVi: meaningVi,
-          );
-
-          await into(vocab).insert(
-            VocabCompanion.insert(
-              term: term,
-              reading: Value(_readText(lemma, 'reading').nullIfEmpty()),
-              meaning: hvResolution.meaningVi ?? meaningVi,
-              meaningEn: Value(_readText(sense, 'meaningEn').nullIfEmpty()),
-              kanjiMeaning: Value(hvResolution.hanViet),
-              sourceVocabId: Value(
-                _readText(
-                  links ?? const <String, dynamic>{},
-                  'sourceVocabId',
-                ).nullIfEmpty(),
-              ),
-              sourceSenseId: Value(
-                _readText(
-                  links ?? const <String, dynamic>{},
-                  'sourceSenseId',
-                ).nullIfEmpty(),
-              ),
-              series: const Value('hajimete'),
-              level: level,
-              tags: Value(tags?.nullIfEmpty()),
-            ),
-            mode: InsertMode.insertOrIgnore,
-          );
-        }
-      } catch (_) {
-        // Missing chapter file: skip until that level is implemented.
+    // Step 2: Resolve all HanViet lookups concurrently across all chapters.
+    // HanVietLookup caches after first load; concurrent calls are safe.
+    final resolutionFutures = <Future<VocabCompanion?>>[];
+    for (final entries in chapterEntryLists) {
+      if (entries == null) continue;
+      for (final rawEntry in entries) {
+        resolutionFutures.add(_resolveHajimeteEntry(rawEntry, level));
       }
     }
+    final companions = await Future.wait(resolutionFutures);
+
+    // Step 3: Batch insert all resolved entries in one round-trip.
+    await batch((b) {
+      for (final companion in companions) {
+        if (companion != null) {
+          b.insert(vocab, companion, mode: InsertMode.insertOrIgnore);
+        }
+      }
+    });
+  }
+
+  Future<List<dynamic>?> _tryLoadHajimeteChapterEntries(
+    String levelLower,
+    int chapterId,
+  ) async {
+    final padded = chapterId.toString().padLeft(2, '0');
+    final path = _hajimeteVocabAssetPath(levelLower, padded);
+    try {
+      final raw = await rootBundle.loadString(path);
+      final payload = _asMap(json.decode(raw));
+      final entries = payload?['entries'];
+      return entries is List ? entries : null;
+    } catch (_) {
+      return null; // Missing chapter file: skip until that level is implemented.
+    }
+  }
+
+  Future<VocabCompanion?> _resolveHajimeteEntry(
+    dynamic rawEntry,
+    String level,
+  ) async {
+    final entry = _asMap(rawEntry);
+    final lemma = _asMap(entry?['lemma']);
+    final sense = _asMap(entry?['sense']);
+    if (entry == null || lemma == null || sense == null) return null;
+
+    final term = _readText(lemma, 'term');
+    final meaningVi = _readText(sense, 'meaningVi');
+    if (term.isEmpty || meaningVi.isEmpty) return null;
+
+    final labels = _asMap(lemma['labels']);
+    final links = _asMap(entry['links']);
+    final tags = entry['tags'] is List
+        ? (entry['tags'] as List).whereType<String>().join(',')
+        : null;
+
+    final hvResolution = await HanVietLookup.resolve(
+      term: term,
+      explicitHanViet: _readText(
+        labels ?? const <String, dynamic>{},
+        'hanViet',
+      ).nullIfEmpty(),
+      explicitMeaningVi: meaningVi,
+    );
+
+    return VocabCompanion.insert(
+      term: term,
+      reading: Value(_readText(lemma, 'reading').nullIfEmpty()),
+      meaning: hvResolution.meaningVi ?? meaningVi,
+      meaningEn: Value(_readText(sense, 'meaningEn').nullIfEmpty()),
+      kanjiMeaning: Value(hvResolution.hanViet),
+      sourceVocabId: Value(
+        _readText(
+          links ?? const <String, dynamic>{},
+          'sourceVocabId',
+        ).nullIfEmpty(),
+      ),
+      sourceSenseId: Value(
+        _readText(
+          links ?? const <String, dynamic>{},
+          'sourceSenseId',
+        ).nullIfEmpty(),
+      ),
+      series: const Value('hajimete'),
+      level: level,
+      tags: Value(tags?.nullIfEmpty()),
+    );
   }
 
   Future<void> _ensureMinnaKanjiSeeded() async {
@@ -354,47 +390,44 @@ class ContentDatabase extends _$ContentDatabase {
     await delete(grammarExample).go();
     await delete(grammarPoint).go();
 
-    final grammarFiles = <String>[];
+    // Phase 1: Load every (def, examples) file pair concurrently — pure I/O.
+    final filePairs = <({String defPath, String exPath})>[];
     for (final spec in _contentSeedSpecs) {
-      for (
-        var lessonId = spec.startLesson;
-        lessonId <= spec.endLesson;
-        lessonId++
-      ) {
-        grammarFiles.add(
-          'assets/data/content/grammar/${spec.levelLower}/grammar_${spec.levelLower}_$lessonId.json',
-        );
+      for (var lessonId = spec.startLesson; lessonId <= spec.endLesson; lessonId++) {
+        filePairs.add((
+          defPath:
+              'assets/data/content/grammar/${spec.levelLower}/grammar_${spec.levelLower}_$lessonId.json',
+          exPath:
+              'assets/data/content/grammar_examples/${spec.levelLower}/lesson_$lessonId.json',
+        ));
       }
     }
 
-    for (final file in grammarFiles) {
+    final loadFutures = filePairs.map((pair) async {
       try {
-        final jsonString = await rootBundle.loadString(file);
-        final List<dynamic> points = json.decode(jsonString);
-
-        if (points.isEmpty) continue;
-
-        // Try load supplementary examples
-        final extraExampleBlocks = <dynamic>[];
+        final defStr = await rootBundle.loadString(pair.defPath);
+        final points = json.decode(defStr) as List<dynamic>;
+        List<dynamic> extras = const [];
         try {
-          // Infer lesson and level from first point or file path
-          // File path: assets/data/content/grammar/n5/grammar_n5_1.json
-          // We can parse file path string usually, or take from point data
-          final firstPoint = points.first;
-          final lessonId = firstPoint['lessonId'] as int;
-          final level = (firstPoint['level'] as String).toLowerCase(); // 'n5'
+          final exStr = await rootBundle.loadString(pair.exPath);
+          extras = json.decode(exStr) as List<dynamic>;
+        } catch (_) {}
+        return (points: points, extras: extras);
+      } catch (_) {
+        return null;
+      }
+    }).toList();
+    final allFileData = await Future.wait(loadFutures);
 
-          final examplesFile =
-              'assets/data/content/grammar_examples/$level/lesson_$lessonId.json';
-          final exJsonString = await rootBundle.loadString(examplesFile);
-          extraExampleBlocks.addAll(json.decode(exJsonString) as List<dynamic>);
-        } catch (_) {
-          // No supplementary file or parse error, ignore
-        }
-
-        for (final pointData in points) {
-          // Insert Grammar Point
-          final pointId = await into(grammarPoint).insert(
+    // Phase 2: Insert grammar points sequentially (need generated IDs for examples).
+    // Accumulate all example companions for a single batch insert at the end.
+    final exampleCompanions = <GrammarExampleCompanion>[];
+    for (final fileData in allFileData) {
+      if (fileData == null || fileData.points.isEmpty) continue;
+      for (final pointData in fileData.points) {
+        late final int pointId;
+        try {
+          pointId = await into(grammarPoint).insert(
             GrammarPointCompanion.insert(
               lessonId: pointData['lessonId'] as int,
               title: pointData['title'] as String,
@@ -414,35 +447,40 @@ class ContentDatabase extends _$ContentDatabase {
             ),
             mode: InsertMode.insertOrReplace,
           );
-
-          // Insert Original Examples
-          final List<dynamic> examples = [...(pointData['examples'] ?? [])];
-
-          // Merge Supplementary Examples
-          final extraExamples = findGrammarExamplesForDefinition(
-            exampleBlocks: extraExampleBlocks,
-            title: pointData['title'] as String?,
-            grammarPoint: pointData['grammarPoint'] as String?,
-          );
-          if (extraExamples != null) {
-            examples.addAll(extraExamples);
-          }
-
-          for (final ex in examples) {
-            await into(grammarExample).insert(
-              GrammarExampleCompanion.insert(
-                grammarPointId: pointId,
-                sentence: ex['sentence'] as String,
-                translation: ex['translation'] as String,
-                translationEn: Value(ex['translationEn'] as String?),
-              ),
-              mode: InsertMode.insertOrReplace,
-            );
-          }
+        } catch (_) {
+          continue;
         }
-      } catch (e) {
-        // debugPrint('Error loading grammar file $file: $e');
+
+        final List<dynamic> examples = [...(pointData['examples'] ?? const [])];
+        final extraExamples = findGrammarExamplesForDefinition(
+          exampleBlocks: fileData.extras,
+          title: pointData['title'] as String?,
+          grammarPoint: pointData['grammarPoint'] as String?,
+        );
+        if (extraExamples != null) {
+          examples.addAll(extraExamples);
+        }
+
+        for (final ex in examples) {
+          exampleCompanions.add(
+            GrammarExampleCompanion.insert(
+              grammarPointId: pointId,
+              sentence: ex['sentence'] as String,
+              translation: ex['translation'] as String,
+              translationEn: Value(ex['translationEn'] as String?),
+            ),
+          );
+        }
       }
+    }
+
+    // Phase 3: Single batch for all example rows.
+    if (exampleCompanions.isNotEmpty) {
+      await batch((b) {
+        for (final companion in exampleCompanions) {
+          b.insert(grammarExample, companion, mode: InsertMode.insertOrReplace);
+        }
+      });
     }
   }
 
@@ -451,44 +489,49 @@ class ContentDatabase extends _$ContentDatabase {
     final startLesson = spec.startLesson;
     final endLesson = spec.endLesson;
 
-    final allRows = <Map<String, dynamic>>[];
-    for (int lessonId = startLesson; lessonId <= endLesson; lessonId++) {
-      final canonicalRows = await _loadCanonicalVocabRows(
-        level: level,
-        lessonId: lessonId,
-      );
-      if (canonicalRows.isEmpty) {
-        continue;
-      }
+    // Load all lesson JSON files concurrently — each file is independent.
+    final perLessonFutures = [
+      for (int lessonId = startLesson; lessonId <= endLesson; lessonId++)
+        _loadCanonicalVocabRows(level: level, lessonId: lessonId),
+    ];
+    final perLessonRows = await Future.wait(perLessonFutures);
 
+    final allRows = <Map<String, dynamic>>[];
+    for (int idx = 0; idx < perLessonRows.length; idx++) {
+      final rows = perLessonRows[idx];
+      if (rows.isEmpty) continue;
       allRows.addAll(
         _mergeLessonRows(
-          preferred: canonicalRows,
+          preferred: rows,
           fallback: const [],
           level: level,
-          lessonId: lessonId,
+          lessonId: startLesson + idx,
         ),
       );
     }
 
     final collapsedRows = _collapseExactDuplicateRows(allRows);
-    for (final item in collapsedRows) {
-      await into(vocab).insert(
-        VocabCompanion.insert(
-          term: item['term'] as String,
-          reading: Value(item['reading'] as String?),
-          kanjiMeaning: Value(item['kanjiMeaning'] as String?),
-          sourceVocabId: Value(item['sourceVocabId'] as String?),
-          sourceSenseId: Value(item['sourceSenseId'] as String?),
-          meaning: item['meaning_vi'] as String,
-          meaningEn: Value(item['meaning_en'] as String?),
-          series: Value((item['series'] as String?) ?? 'minna'),
-          level: item['level'] as String,
-          tags: Value(item['tags'] as String?),
-        ),
-        mode: InsertMode.insertOrIgnore,
-      );
-    }
+    // Batch all inserts in a single round-trip to the DB isolate.
+    await batch((b) {
+      for (final item in collapsedRows) {
+        b.insert(
+          vocab,
+          VocabCompanion.insert(
+            term: item['term'] as String,
+            reading: Value(item['reading'] as String?),
+            kanjiMeaning: Value(item['kanjiMeaning'] as String?),
+            sourceVocabId: Value(item['sourceVocabId'] as String?),
+            sourceSenseId: Value(item['sourceSenseId'] as String?),
+            meaning: item['meaning_vi'] as String,
+            meaningEn: Value(item['meaning_en'] as String?),
+            series: Value((item['series'] as String?) ?? 'minna'),
+            level: item['level'] as String,
+            tags: Value(item['tags'] as String?),
+          ),
+          mode: InsertMode.insertOrIgnore,
+        );
+      }
+    });
   }
 
   String _minnaVocabAssetPath(String levelLower, String paddedLessonId) {
@@ -763,6 +806,32 @@ class ContentDatabase extends _$ContentDatabase {
     await migrator.addColumn(table, column as GeneratedColumn);
   }
 
+  Future<void> _createContentIndexes() async {
+    // Vocab — most frequently queried columns for every vocab screen load.
+    // Composite (level, series) covers the common getVocabByLevelAndSeries
+    // pattern; (level) alone covers getVocabByLevel fallback queries.
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_vocab_level_series ON vocab(level, series)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_vocab_level ON vocab(level)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_vocab_series ON vocab(series)',
+    );
+    // Kanji — queried by JLPT level on every kanji hub / practice screen open.
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_kanji_jlpt ON kanji(jlpt_level)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_kanji_lesson ON kanji(lesson_id)',
+    );
+    // Grammar (content DB copy) — queried by level in JLPT mock exam builder.
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_grammar_point_level ON grammar_point(level)',
+    );
+  }
+
   Future<void> _reseedMinnaKanji() async {
     // Delete all existing Kanji data to prevent duplicates or stale data
     await delete(kanji).go();
@@ -922,19 +991,19 @@ class ContentDatabase extends _$ContentDatabase {
   }
 
   Future<void> _seedKanjiLevel(_ContentSeedSpec spec) async {
-    for (
-      var lessonId = spec.startLesson;
-      lessonId <= spec.endLesson;
-      lessonId++
-    ) {
-      final rows = await _loadCanonicalKanjiRows(
-        levelLower: spec.levelLower,
-        lessonId: lessonId,
-      );
-      if (rows.isEmpty) {
-        continue;
-      }
-      await _insertKanjiRows(rows);
+    // Load all lesson files for this level concurrently — pure I/O, no deps.
+    final perLessonFutures = [
+      for (int lessonId = spec.startLesson; lessonId <= spec.endLesson; lessonId++)
+        _loadCanonicalKanjiRows(levelLower: spec.levelLower, lessonId: lessonId),
+    ];
+    final perLessonRows = await Future.wait(perLessonFutures);
+
+    final allRows = <Map<String, dynamic>>[];
+    for (final rows in perLessonRows) {
+      allRows.addAll(rows);
+    }
+    if (allRows.isNotEmpty) {
+      await _insertKanjiRows(allRows);
     }
   }
 }
