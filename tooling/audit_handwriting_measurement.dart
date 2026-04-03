@@ -945,10 +945,15 @@ class _MeasurementAuditRunner {
     final charPassRatio = characterCount == 0
         ? 0.0
         : (correctCharacters / characterCount);
+    final weakestCharacterScore = characterResults.isEmpty
+        ? 0.0
+        : characterResults.map((result) => result.score).reduce(min);
+    final minWeakCharacterScore = characterCount >= 4 ? 0.80 : 0.0;
     final isCorrect =
         totalScore >= requiredScore &&
         strokeDelta <= maxStrokeDelta &&
-        charPassRatio >= 0.6;
+        charPassRatio >= 0.6 &&
+        weakestCharacterScore >= minWeakCharacterScore;
 
     return HandwritingEvaluationResult(
       expectedStrokes: expectedTotal,

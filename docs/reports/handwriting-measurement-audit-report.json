@@ -1,20 +1,20 @@
 {
   "sampleSetVersion": "2026-04-03-v4",
-  "generatedAtUtc": "2026-04-03T02:03:43.695647Z",
+  "generatedAtUtc": "2026-04-03T02:07:37.663185Z",
   "scoringVersion": "v2",
   "showGuide": false,
   "templateDatasetVersion": "422979-2026-03-18T10:57:01.000Z",
   "summary": {
     "sampleCount": 10,
-    "falsePositiveCount": 2,
+    "falsePositiveCount": 0,
     "falseNegativeCount": 0,
-    "falsePositiveRate": 0.25,
+    "falsePositiveRate": 0.0,
     "falseNegativeRate": 0.0,
     "passRateByMode": {
-      "compound": 0.8
+      "compound": 1.0
     },
     "passRateByLevel": {
-      "N4": 0.8
+      "N4": 1.0
     },
     "caseCountByExpectedBucket": [
       {
@@ -33,7 +33,7 @@
       },
       {
         "bucket": "threshold",
-        "passRate": 0.75
+        "passRate": 1.0
       }
     ],
     "caseCountBySourceLesson": [
@@ -49,7 +49,7 @@
     "passRateBySourceLesson": [
       {
         "sourceLesson": "26",
-        "passRate": 0.6
+        "passRate": 1.0
       },
       {
         "sourceLesson": "29",
@@ -85,7 +85,7 @@
       },
       {
         "generatorKind": "reverse_character",
-        "passRate": 0.5
+        "passRate": 1.0
       },
       {
         "generatorKind": "template_match",
@@ -109,7 +109,7 @@
         "generatorKind": "reverse_character",
         "expectedBucket": "threshold",
         "count": 4,
-        "passRate": 0.5
+        "passRate": 1.0
       },
       {
         "generatorKind": "template_match",
@@ -118,12 +118,7 @@
         "passRate": 1.0
       }
     ],
-    "topFailureBuckets": [
-      {
-        "bucket": "threshold",
-        "count": 2
-      }
-    ]
+    "topFailureBuckets": []
   },
   "cases": [
     {
@@ -208,8 +203,8 @@
       "targetType": "compound",
       "level": "N4",
       "expectedVerdict": "reject",
-      "actualVerdict": "accept",
-      "passed": false,
+      "actualVerdict": "reject",
+      "passed": true,
       "templateVersion": "422979-2026-03-18T10:57:01.000Z",
       "scoringVersion": "v2",
       "templateQuality": "mixed",
@@ -220,7 +215,7 @@
       "templateScore": 0.7568798713713925,
       "expectedStrokes": 23,
       "drawnStrokes": 23,
-      "likelyFailureBucket": "threshold",
+      "likelyFailureBucket": "none",
       "metadata": {
         "anchorCharacter": "?",
         "word": "私立大学",
@@ -277,8 +272,8 @@
       "targetType": "compound",
       "level": "N4",
       "expectedVerdict": "reject",
-      "actualVerdict": "accept",
-      "passed": false,
+      "actualVerdict": "reject",
+      "passed": true,
       "templateVersion": "422979-2026-03-18T10:57:01.000Z",
       "scoringVersion": "v2",
       "templateQuality": "mixed",
@@ -289,7 +284,7 @@
       "templateScore": 0.8154427129982601,
       "expectedStrokes": 23,
       "drawnStrokes": 23,
-      "likelyFailureBucket": "threshold",
+      "likelyFailureBucket": "none",
       "metadata": {
         "anchorCharacter": "?",
         "word": "私立大学",
