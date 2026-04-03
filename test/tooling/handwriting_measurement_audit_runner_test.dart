@@ -25,19 +25,22 @@ void main() {
 
     expect(written.existsSync(), isTrue);
     expect(writtenMarkdown.existsSync(), isTrue);
-    expect(report['sampleSetVersion'], '2026-04-02-v3');
+    expect(report['sampleSetVersion'], '2026-04-03-v4');
     expect(report['summary'], isA<Map<String, dynamic>>());
     expect(report['cases'], isA<List<dynamic>>());
 
     final decoded =
         jsonDecode(written.readAsStringSync()) as Map<String, dynamic>;
-    expect(decoded['summary']['sampleCount'], 34);
-    expect((decoded['cases'] as List<dynamic>).length, 34);
+    expect(decoded['summary']['sampleCount'], 10);
+    expect((decoded['cases'] as List<dynamic>).length, 10);
     expect(
       writtenMarkdown.readAsStringSync(),
       contains('# Handwriting Measurement Audit Summary'),
     );
-    expect(writtenMarkdown.readAsStringSync(), contains('## Expected Buckets'));
-    expect(writtenMarkdown.readAsStringSync(), contains('## Source Lessons'));
+    expect(writtenMarkdown.readAsStringSync(), contains('## Generator Kinds'));
+    expect(
+      writtenMarkdown.readAsStringSync(),
+      contains('## Generator Kind Matrix'),
+    );
   });
 }

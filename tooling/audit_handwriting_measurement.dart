@@ -11,7 +11,7 @@ Future<void> main() async {
 }
 
 Future<Map<String, dynamic>> runHandwritingMeasurementAudit({
-  String inputPath = 'tooling/handwriting_audit_cases.v3.json',
+  String inputPath = 'tooling/handwriting_audit_cases.v4.json',
   String outputPath = 'docs/reports/handwriting-measurement-audit-report.json',
   String templatePath = 'assets/data/support/kanji/stroke_templates.json',
   bool showGuide = false,
@@ -84,6 +84,18 @@ String _buildMarkdownSummary(Map<String, dynamic> report) {
           .toList(growable: false);
   final passRateBySourceLesson =
       (summary['passRateBySourceLesson'] as List<dynamic>? ?? const [])
+          .whereType<Map<String, dynamic>>()
+          .toList(growable: false);
+  final caseCountByGeneratorKind =
+      (summary['caseCountByGeneratorKind'] as List<dynamic>? ?? const [])
+          .whereType<Map<String, dynamic>>()
+          .toList(growable: false);
+  final passRateByGeneratorKind =
+      (summary['passRateByGeneratorKind'] as List<dynamic>? ?? const [])
+          .whereType<Map<String, dynamic>>()
+          .toList(growable: false);
+  final generatorKindMatrix =
+      (summary['generatorKindMatrix'] as List<dynamic>? ?? const [])
           .whereType<Map<String, dynamic>>()
           .toList(growable: false);
   final buffer = StringBuffer()
@@ -196,6 +208,47 @@ String _buildMarkdownSummary(Map<String, dynamic> report) {
         '`${_escapeMarkdown(caseReport['likelyFailureBucket']?.toString() ?? 'unknown')}` | '
         '${score is num ? score.toStringAsFixed(3) : 'n/a'} | '
         '`${_escapeMarkdown(source.toString())}` |',
+      );
+    }
+  }
+
+  buffer
+    ..writeln()
+    ..writeln('## Generator Kinds')
+    ..writeln();
+  if (caseCountByGeneratorKind.isEmpty) {
+    buffer.writeln('- None');
+  } else {
+    buffer
+      ..writeln('| Generator Kind | Cases | Pass Rate |')
+      ..writeln('| --- | ---: | ---: |');
+    for (final generator in caseCountByGeneratorKind) {
+      final passRate = passRateByGeneratorKind.firstWhere(
+        (entry) => entry['generatorKind'] == generator['generatorKind'],
+        orElse: () => const {'generatorKind': 'unknown', 'passRate': null},
+      );
+      buffer.writeln(
+        '| `${_escapeMarkdown(generator['generatorKind']?.toString() ?? 'unknown')}` | '
+        '${generator['count'] ?? 0} | ${_formatRate(passRate['passRate'])} |',
+      );
+    }
+  }
+
+  buffer
+    ..writeln()
+    ..writeln('## Generator Kind Matrix')
+    ..writeln();
+  if (generatorKindMatrix.isEmpty) {
+    buffer.writeln('- None');
+  } else {
+    buffer
+      ..writeln('| Generator Kind | Expected Bucket | Cases | Pass Rate |')
+      ..writeln('| --- | --- | ---: | ---: |');
+    for (final row in generatorKindMatrix) {
+      buffer.writeln(
+        '| `${_escapeMarkdown(row['generatorKind']?.toString() ?? 'unknown')}` | '
+        '`${_escapeMarkdown(row['expectedBucket']?.toString() ?? 'unknown')}` | '
+        '${row['count'] ?? 0} | ${_formatRate(row['passRate'])} |',
       );
     }
   }
@@ -407,6 +460,8 @@ class _MeasurementAuditRunner {
     final passByLevel = <String, List<bool>>{};
     final passByExpectedBucket = <String, List<bool>>{};
     final passBySourceLesson = <String, List<bool>>{};
+    final passByGeneratorKind = <String, List<bool>>{};
+    final passByGeneratorExpectedBucket = <String, List<bool>>{};
     final failureBuckets = <String, int>{};
 
     for (final auditCase in sampleSet.cases) {
@@ -421,6 +476,15 @@ class _MeasurementAuditRunner {
           .add(passed);
       final sourceLesson = _sourceLessonKey(auditCase.metadata);
       passBySourceLesson.putIfAbsent(sourceLesson, () => <bool>[]).add(passed);
+      final generatorKind = auditCase.generator.kind;
+      passByGeneratorKind
+          .putIfAbsent(generatorKind, () => <bool>[])
+          .add(passed);
+      final generatorExpectedBucketKey =
+          '${auditCase.generator.kind}::${auditCase.expectedFailureBucket}';
+      passByGeneratorExpectedBucket
+          .putIfAbsent(generatorExpectedBucketKey, () => <bool>[])
+          .add(passed);
 
       if (!passed) {
         final bucket = report['likelyFailureBucket'] as String;
@@ -483,6 +547,15 @@ class _MeasurementAuditRunner {
           keyName: 'sourceLesson',
           numericSort: true,
         ),
+        'caseCountByGeneratorKind': _countSummary(
+          passByGeneratorKind,
+          keyName: 'generatorKind',
+        ),
+        'passRateByGeneratorKind': _rateSummary(
+          passByGeneratorKind,
+          keyName: 'generatorKind',
+        ),
+        'generatorKindMatrix': _matrixSummary(passByGeneratorExpectedBucket),
         'topFailureBuckets': [
           for (final entry
               in (failureBuckets.entries.toList()
@@ -914,6 +987,23 @@ class _MeasurementAuditRunner {
     }
     return 'threshold';
   }
+}
+
+List<Map<String, dynamic>> _matrixSummary(Map<String, List<bool>> grouped) {
+  final entries = grouped.entries.toList()
+    ..sort((a, b) => a.key.compareTo(b.key));
+  return [
+    for (final entry in entries)
+      {
+        'generatorKind': entry.key.split('::').first,
+        'expectedBucket': entry.key.split('::').skip(1).join('::'),
+        'count': entry.value.length,
+        'passRate': _rate(
+          entry.value.where((value) => value).length,
+          entry.value.length,
+        ),
+      },
+  ];
 }
 
 List<Map<String, dynamic>> _countSummary(

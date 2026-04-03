@@ -32,7 +32,7 @@
 - `handwriting-measurement-audit-report.json`
   Canonical machine-readable handwriting scoring baseline across fixed audit samples.
 - `handwriting-measurement-audit-report.md`
-  Human-readable summary companion for the handwriting audit JSON, including pass rates, bucket splits, source-lesson splits, and failed-case highlights.
+  Human-readable summary companion for the handwriting audit JSON, including pass rates, bucket splits, source-lesson splits, generator-kind matrices, and failed-case highlights.
 
 ## Stale Or Legacy Reports
 
