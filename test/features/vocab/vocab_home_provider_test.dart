@@ -15,20 +15,17 @@ import 'package:jpstudy/features/vocab/providers/vocab_home_provider.dart';
 // ---------------------------------------------------------------------------
 
 class _FakeVocabRepo extends LessonRepository {
-  _FakeVocabRepo({
-    this.bank = const {},
-    this.minnaBank = const {},
-    this.dueTerms = const [],
-  }) : super(
-          AppDatabase(executor: NativeDatabase.memory()),
-          ContentDatabase(executor: NativeDatabase.memory()),
-        );
+  _FakeVocabRepo({this.bank = const {}, this.dueTerms = const []})
+    : super(
+        AppDatabase(executor: NativeDatabase.memory()),
+        ContentDatabase(executor: NativeDatabase.memory()),
+      );
 
   /// level → items for hajimete series
   final Map<String, List<VocabItem>> bank;
 
   /// level → items for minna series (lesson-range queries)
-  final Map<String, List<VocabItem>> minnaBank;
+  final Map<String, List<VocabItem>> minnaBank = const {};
 
   /// Simulated due terms for allDueTermsProvider
   final List<UserLessonTermData> dueTerms;
@@ -69,28 +66,28 @@ class _FakeVocabRepo extends LessonRepository {
 // ---------------------------------------------------------------------------
 
 VocabItem _makeVocab(int id, String level) => VocabItem(
-      id: id,
-      term: 'term$id',
-      reading: 'よみ$id',
-      meaning: 'meaning $id',
-      meaningEn: 'meaning $id',
-      level: level,
-    );
+  id: id,
+  term: 'term$id',
+  reading: 'よみ$id',
+  meaning: 'meaning $id',
+  meaningEn: 'meaning $id',
+  level: level,
+);
 
 UserLessonTermData _makeDueTerm(int id) => UserLessonTermData(
-      id: id,
-      lessonId: 1,
-      term: 'term$id',
-      reading: 'よみ$id',
-      definition: 'def $id',
-      definitionEn: 'def $id',
-      mnemonicVi: '',
-      mnemonicEn: '',
-      kanjiMeaning: '',
-      isStarred: false,
-      isLearned: false,
-      orderIndex: id,
-    );
+  id: id,
+  lessonId: 1,
+  term: 'term$id',
+  reading: 'よみ$id',
+  definition: 'def $id',
+  definitionEn: 'def $id',
+  mnemonicVi: '',
+  mnemonicEn: '',
+  kanjiMeaning: '',
+  isStarred: false,
+  isLearned: false,
+  orderIndex: id,
+);
 
 ProviderContainer _buildContainer({
   required LessonRepository repo,
@@ -189,17 +186,21 @@ void main() {
       expect(result.nextReview, isNull);
     });
 
-    test('liveTracks always contains 4 entries (N5 core, N5 minna, N4 core, N4 minna)', () async {
-      final container = _buildContainer(repo: _FakeVocabRepo());
-      addTearDown(container.dispose);
+    test(
+      'liveTracks always contains 4 entries (N5 core, N5 minna, N4 core, N4 minna)',
+      () async {
+        final container = _buildContainer(repo: _FakeVocabRepo());
+        addTearDown(container.dispose);
 
-      final result = await container.read(vocabHomeSectionProvider.future);
+        final result = await container.read(vocabHomeSectionProvider.future);
 
-      expect(result.liveTracks.length, equals(4));
-      expect(result.liveTracks.map((t) => t.key), containsAll([
-        'n5_core', 'n5_minna', 'n4_core', 'n4_minna',
-      ]));
-    });
+        expect(result.liveTracks.length, equals(4));
+        expect(
+          result.liveTracks.map((t) => t.key),
+          containsAll(['n5_core', 'n5_minna', 'n4_core', 'n4_minna']),
+        );
+      },
+    );
 
     test('previewTracks always contains 4 entries (N3, N2, N1, SE)', () async {
       final container = _buildContainer(repo: _FakeVocabRepo());
@@ -208,16 +209,15 @@ void main() {
       final result = await container.read(vocabHomeSectionProvider.future);
 
       expect(result.previewTracks.length, equals(4));
-      expect(result.previewTracks.map((t) => t.key), containsAll([
-        'n3_core', 'n2_core', 'n1_core', 'se_core',
-      ]));
+      expect(
+        result.previewTracks.map((t) => t.key),
+        containsAll(['n3_core', 'n2_core', 'n1_core', 'se_core']),
+      );
     });
 
     test('n5_core track is interactive when data exists', () async {
       final n5 = List.generate(10, (i) => _makeVocab(i + 1, 'N5'));
-      final container = _buildContainer(
-        repo: _FakeVocabRepo(bank: {'N5': n5}),
-      );
+      final container = _buildContainer(repo: _FakeVocabRepo(bank: {'N5': n5}));
       addTearDown(container.dispose);
 
       final result = await container.read(vocabHomeSectionProvider.future);
@@ -245,8 +245,14 @@ void main() {
 
       final result = await container.read(vocabHomeSectionProvider.future);
 
-      for (final track in result.liveTracks.where((t) => t.key.contains('minna'))) {
-        expect(track.isCompanion, isTrue, reason: '${track.key} should be companion');
+      for (final track in result.liveTracks.where(
+        (t) => t.key.contains('minna'),
+      )) {
+        expect(
+          track.isCompanion,
+          isTrue,
+          reason: '${track.key} should be companion',
+        );
       }
     });
 
@@ -256,40 +262,54 @@ void main() {
 
       final result = await container.read(vocabHomeSectionProvider.future);
 
-      for (final track in result.liveTracks.where((t) => t.key.contains('core'))) {
-        expect(track.isCompanion, isFalse, reason: '${track.key} should not be companion');
+      for (final track in result.liveTracks.where(
+        (t) => t.key.contains('core'),
+      )) {
+        expect(
+          track.isCompanion,
+          isFalse,
+          reason: '${track.key} should not be companion',
+        );
       }
     });
 
-    test('recommendedTrack returns the track matching selectedLevelCode', () async {
-      final n5 = List.generate(5, (i) => _makeVocab(i + 1, 'N5'));
-      final container = _buildContainer(
-        repo: _FakeVocabRepo(bank: {'N5': n5}),
-        level: StudyLevel.n5,
-      );
-      addTearDown(container.dispose);
+    test(
+      'recommendedTrack returns the track matching selectedLevelCode',
+      () async {
+        final n5 = List.generate(5, (i) => _makeVocab(i + 1, 'N5'));
+        final container = _buildContainer(
+          repo: _FakeVocabRepo(bank: {'N5': n5}),
+          level: StudyLevel.n5,
+        );
+        addTearDown(container.dispose);
 
-      final result = await container.read(vocabHomeSectionProvider.future);
+        final result = await container.read(vocabHomeSectionProvider.future);
 
-      final recommended = result.recommendedTrack;
-      expect(recommended, isNotNull);
-      expect(recommended!.levelCode, equals('N5'));
-      expect(recommended.isCompanion, isFalse);
-    });
+        final recommended = result.recommendedTrack;
+        expect(recommended, isNotNull);
+        expect(recommended!.levelCode, equals('N5'));
+        expect(recommended.isCompanion, isFalse);
+      },
+    );
 
-    test('previewTracks have isInteractive=false and isPreview based on data availability', () async {
-      final n3 = List.generate(3, (i) => _makeVocab(200 + i, 'N3'));
-      final container = _buildContainer(
-        repo: _FakeVocabRepo(bank: {'N3': n3}),
-      );
-      addTearDown(container.dispose);
+    test(
+      'previewTracks have isInteractive=false and isPreview based on data availability',
+      () async {
+        final n3 = List.generate(3, (i) => _makeVocab(200 + i, 'N3'));
+        final container = _buildContainer(
+          repo: _FakeVocabRepo(bank: {'N3': n3}),
+        );
+        addTearDown(container.dispose);
 
-      final result = await container.read(vocabHomeSectionProvider.future);
+        final result = await container.read(vocabHomeSectionProvider.future);
 
-      final n3Track = result.previewTracks.firstWhere((t) => t.key == 'n3_core');
-      expect(n3Track.isInteractive, isFalse);
-      expect(n3Track.isPreview, isTrue);
-      expect(n3Track.termCount, equals(3));
-    });
+        final n3Track = result.previewTracks.firstWhere(
+          (t) => t.key == 'n3_core',
+        );
+        expect(n3Track.isInteractive, isFalse);
+        expect(n3Track.isPreview, isTrue);
+        expect(n3Track.termCount, equals(3));
+      },
+    );
   });
 }
