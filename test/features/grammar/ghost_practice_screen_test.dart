@@ -6,8 +6,7 @@ import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/db/content_database.dart' as content_db;
-import 'package:jpstudy/data/repositories/lesson_repository.dart'
-    hide GrammarPointData;
+import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/grammar/models/grammar_point_data.dart';
 import 'package:jpstudy/features/grammar/screens/ghost_practice_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
