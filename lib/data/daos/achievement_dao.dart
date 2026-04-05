@@ -36,6 +36,14 @@ class AchievementDao extends DatabaseAccessor<AppDatabase>
     );
   }
 
+  /// Mark multiple achievements as notified in a single round-trip.
+  Future<void> markAllAsNotified(List<int> ids) {
+    if (ids.isEmpty) return Future.value();
+    return (update(achievements)..where((t) => t.id.isIn(ids))).write(
+      const AchievementsCompanion(isNotified: Value(true)),
+    );
+  }
+
   /// Returns true if an achievement of the given type and value already exists.
   Future<bool> hasAchievement(String type, int value) async {
     final row = await (select(achievements)

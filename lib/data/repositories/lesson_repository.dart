@@ -9,7 +9,8 @@ import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/db/database_provider.dart';
 
 import 'package:jpstudy/data/db/content_database.dart'
-    hide UserProgressCompanion, UserProgressData;
+    hide UserProgressCompanion, UserProgressData, GrammarPointData;
+import 'package:jpstudy/features/grammar/models/grammar_point_data.dart';
 import 'package:jpstudy/data/db/content_database_provider.dart';
 import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/models/kanji_item.dart';
@@ -265,12 +266,6 @@ final srsStateProvider = FutureProvider.family<SrsStateData?, int>((
   return repo.getSrsState(termId);
 });
 
-class GrammarPointData {
-  const GrammarPointData({required this.point, required this.examples});
-
-  final GrammarPoint point;
-  final List<GrammarExample> examples;
-}
 
 class LessonTermsArgs {
   const LessonTermsArgs(this.lessonId, this.level, this.fallbackTitle);
@@ -491,6 +486,7 @@ class LessonRepository {
   final ContentDatabase _contentDb;
   final FsrsService _fsrsService = FsrsService();
   static const int _defaultLessonCount = 25;
+  static final _seriesNormalizeRe = RegExp(r'[^a-z0-9]+');
 
   Future<String> getLessonTitle(int lessonId, String fallback) async {
     final existing = await (_db.select(
@@ -837,26 +833,28 @@ class LessonRepository {
   }
 
   Future<int?> findNextToStudyLesson(String level) async {
-    final lessons =
-        await (_db.select(_db.userLesson)
-              ..where((tbl) => tbl.level.equals(level))
-              ..orderBy([(t) => OrderingTerm(expression: t.id)]))
-            .get();
-
-    if (lessons.isEmpty) return null;
-
-    final stats = await getAllLessonProgress();
-
-    for (final lesson in lessons) {
-      final stat = stats[lesson.id];
-      // If no stats (no terms yet) or not fully completed, this is the next one
-      if (stat == null ||
-          stat.termCount == 0 ||
-          stat.completedCount < stat.termCount) {
-        return lesson.id;
-      }
-    }
-    return null; // All completed
+    // Single LEFT JOIN query with LIMIT 1 — avoids fetching all lessons and
+    // all lesson progress just to find the first incomplete one.
+    final rows = await _db.customSelect(
+      'SELECT ul.id '
+      'FROM user_lesson ul '
+      'LEFT JOIN ('
+      '  SELECT lesson_id, '
+      '         COUNT(*) AS term_count, '
+      '         SUM(CASE WHEN is_learned THEN 1 ELSE 0 END) AS completed_count '
+      '  FROM user_lesson_term '
+      '  GROUP BY lesson_id'
+      ') stats ON stats.lesson_id = ul.id '
+      'WHERE ul.level = ? '
+      '  AND (stats.term_count IS NULL '
+      '       OR stats.term_count = 0 '
+      '       OR stats.completed_count < stats.term_count) '
+      'ORDER BY ul.id '
+      'LIMIT 1',
+      variables: [Variable.withString(level)],
+      readsFrom: {_db.userLesson, _db.userLessonTerm},
+    ).getSingleOrNull();
+    return rows?.read<int?>('id');
   }
 
   Future<int> nextLessonId() async {
@@ -918,18 +916,32 @@ class LessonRepository {
     required int startLesson,
     required int endLesson,
   }) async {
-    final terms = <UserLessonTermData>[];
+    // Phase 1: ensure + seed each lesson sequentially (FK dependency within
+    // each lesson requires ordering: ensureLesson → seedTermsIfEmpty).
     for (int lessonId = startLesson; lessonId <= endLesson; lessonId++) {
       final title = await getLessonTitle(lessonId, 'Lesson $lessonId');
       await ensureLesson(lessonId: lessonId, level: level, title: title);
       await seedTermsIfEmpty(lessonId, level);
-      terms.addAll(await fetchTerms(lessonId));
     }
-    terms.sort((a, b) {
-      final lessonCompare = a.lessonId.compareTo(b.lessonId);
-      if (lessonCompare != 0) return lessonCompare;
-      return a.orderIndex.compareTo(b.orderIndex);
-    });
+
+    // Phase 2: single bulk fetch for all lesson IDs — replaces N individual
+    // fetchTerms(lessonId) calls with one WHERE lessonId IN (...) query.
+    final lessonIds = List.generate(
+      endLesson - startLesson + 1,
+      (i) => startLesson + i,
+    );
+    final terms = await (_db.select(_db.userLessonTerm)
+          ..where(
+            (tbl) =>
+                tbl.lessonId.isIn(lessonIds) &
+                tbl.term.like('%?%').not() &
+                tbl.reading.like('%?%').not(),
+          )
+          ..orderBy([
+            (tbl) => OrderingTerm(expression: tbl.lessonId),
+            (tbl) => OrderingTerm(expression: tbl.orderIndex),
+          ]))
+        .get();
     return terms;
   }
 
@@ -1026,23 +1038,21 @@ class LessonRepository {
     if (existing.isNotEmpty && !isDummy) {
       // Try to backfill missing English without destructive reset.
       final missingEnglish = existing.any((t) => t.definitionEn.isEmpty);
-      if (missingEnglish) {
-        await _backfillEnglishDefinitions(
-          lessonId,
-          currentLevelLabel,
-          existing,
-        );
+      if (!missingEnglish) {
+        // All terms already have English definitions — nothing to do.
+        return;
       }
 
+      await _backfillEnglishDefinitions(lessonId, currentLevelLabel, existing);
+
+      // Re-fetch only to verify the backfill succeeded.
       final refreshed = await fetchTerms(lessonId);
       if (refreshed.isNotEmpty &&
           refreshed.every((t) => t.definitionEn.isNotEmpty)) {
         return;
       }
-    }
-
-    if (existing.isNotEmpty && !isDummy) {
-      // Data exists but still missing English; keep user data as-is.
+      // Backfill didn't fully succeed — data exists but some English still
+      // missing; keep user data as-is rather than replacing.
       return;
     }
 
@@ -1360,7 +1370,20 @@ class LessonRepository {
       final entries = payload['entries'];
       if (entries is! List) return const [];
 
-      final out = <Map<String, dynamic>>[];
+      // Parse all entries synchronously, then resolve all HanViet lookups
+      // concurrently with Future.wait — HanVietLookup caches after first load
+      // and is concurrency-safe, so parallel resolution is correct here.
+      final parsed =
+          <({
+            String term,
+            String? reading,
+            String meaningVi,
+            String? meaningEn,
+            String? explicitHanViet,
+            int order,
+            dynamic tags,
+          })>[];
+
       for (final rawEntry in entries) {
         if (rawEntry is! Map) continue;
         final entry = rawEntry.map((k, v) => MapEntry(k.toString(), v));
@@ -1375,21 +1398,42 @@ class LessonRepository {
             : const <String, dynamic>{};
         final term = (lemma['term'] ?? '').toString().trim();
         final meaningVi = (sense['meaningVi'] ?? '').toString().trim();
-        final hvResolution = await HanVietLookup.resolve(
+        parsed.add((
           term: term,
+          reading: _nullableLessonText(lemma['reading']),
+          meaningVi: meaningVi,
+          meaningEn: _nullableLessonText(sense['meaningEn']),
           explicitHanViet: _nullableLessonText(labels['hanViet']),
-          explicitMeaningVi: meaningVi,
-        );
+          order:
+              int.tryParse((entry['order'] ?? '').toString().trim()) ?? 0,
+          tags: entry['tags'],
+        ));
+      }
 
+      // Fire all HanVietLookup futures before any await.
+      final hvFutures = [
+        for (final p in parsed)
+          HanVietLookup.resolve(
+            term: p.term,
+            explicitHanViet: p.explicitHanViet,
+            explicitMeaningVi: p.meaningVi,
+          ),
+      ];
+      final hvResults = await Future.wait(hvFutures);
+
+      final out = <Map<String, dynamic>>[];
+      for (var i = 0; i < parsed.length; i++) {
+        final p = parsed[i];
+        final hv = hvResults[i];
         out.add({
-          'term': term,
-          'reading': _nullableLessonText(lemma['reading']),
-          'kanjiMeaning': hvResolution.hanViet,
-          'meaningVi': hvResolution.meaningVi ?? meaningVi,
-          'meaningEn': _nullableLessonText(sense['meaningEn']),
-          'order': int.tryParse((entry['order'] ?? '').toString().trim()) ?? 0,
+          'term': p.term,
+          'reading': p.reading,
+          'kanjiMeaning': hv.hanViet,
+          'meaningVi': hv.meaningVi ?? p.meaningVi,
+          'meaningEn': p.meaningEn,
+          'order': p.order,
           'series': payloadSeries,
-          'tags': entry['tags'],
+          'tags': p.tags,
         });
       }
       return out;
@@ -1403,7 +1447,7 @@ class LessonRepository {
   }
 
   String _lessonSeriesTag(String series, int lessonId) {
-    final normalized = series.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]+'), '');
+    final normalized = series.toLowerCase().replaceAll(_seriesNormalizeRe, '');
     final prefix = normalized.isEmpty ? 'lesson' : normalized;
     return '${prefix}_$lessonId';
   }
@@ -1419,17 +1463,27 @@ class LessonRepository {
     )..where((tbl) => tbl.lessonId.equals(lessonId))).get();
 
     if (points.isEmpty) {
-      return [];
+      return const [];
     }
 
-    final result = <GrammarPointData>[];
-    for (final point in points) {
-      final examples = await (_db.select(
-        _db.grammarExamples,
-      )..where((tbl) => tbl.grammarId.equals(point.id))).get();
-      result.add(GrammarPointData(point: point, examples: examples));
+    // Single batch query for all examples — replaces N individual round-trips
+    // (N+1 pattern) with 2 total DB calls regardless of lesson size.
+    final pointIds = points.map((p) => p.id).toList();
+    final allExamples = await (_db.select(_db.grammarExamples)
+          ..where((tbl) => tbl.grammarId.isIn(pointIds)))
+        .get();
+    final examplesByGrammarId = <int, List<GrammarExample>>{};
+    for (final ex in allExamples) {
+      examplesByGrammarId.putIfAbsent(ex.grammarId, () => []).add(ex);
     }
-    return result;
+
+    return [
+      for (final point in points)
+        GrammarPointData(
+          point: point,
+          examples: examplesByGrammarId[point.id] ?? const [],
+        ),
+    ];
   }
 
   /// Fetch grammar points that have been answered incorrectly in attempts (Ghosts)
@@ -1458,19 +1512,27 @@ class LessonRepository {
       return [];
     }
 
-    // Fetch full grammar data for these IDs
+    // Fetch grammar points and all their examples in two queries instead of N+1.
     final points = await (_db.select(
       _db.grammarPoints,
     )..where((tbl) => tbl.id.isIn(ghostIds))).get();
 
-    final result = <GrammarPointData>[];
-    for (final point in points) {
-      final examples = await (_db.select(
-        _db.grammarExamples,
-      )..where((tbl) => tbl.grammarId.equals(point.id))).get();
-      result.add(GrammarPointData(point: point, examples: examples));
+    final allExamples = await (_db.select(
+      _db.grammarExamples,
+    )..where((tbl) => tbl.grammarId.isIn(ghostIds))).get();
+
+    final examplesByGrammarId = <int, List<GrammarExample>>{};
+    for (final ex in allExamples) {
+      examplesByGrammarId.putIfAbsent(ex.grammarId, () => []).add(ex);
     }
-    return result;
+
+    return [
+      for (final point in points)
+        GrammarPointData(
+          point: point,
+          examples: examplesByGrammarId[point.id] ?? const [],
+        ),
+    ];
   }
 
   /// Remove a grammar point from ghosts by deleting its incorrect attempt records
@@ -1594,6 +1656,28 @@ class LessonRepository {
     // Accumulate all example rows to insert; flush in a single batch at the end.
     final pendingExamples = <GrammarExamplesCompanion>[];
 
+    // Pre-compute all English fields and split into update vs insert groups so
+    // that all updates (independent operations) can be sent in a single batch
+    // round-trip before the sequential inserts (which need auto-generated IDs).
+    final updateOps =
+        <({
+          int existingId,
+          GrammarPointsCompanion companion,
+          List<GrammarExampleData> examples,
+        })>[];
+    final insertOps =
+        <({
+          String title,
+          String structure,
+          String explanation,
+          String? explanationEn,
+          String level,
+          String? storedTitleEn,
+          String? storedMeaningEn,
+          String? storedConnectionEn,
+          List<GrammarExampleData> examples,
+        })>[];
+
     for (final cp in contentPoints) {
       final englishLabel = resolveEnglishGrammarLabel(
         titleEn: cp.titleEn,
@@ -1629,23 +1713,49 @@ class LessonRepository {
       final cpExamples = contentExamplesByPointId[cp.id] ?? const [];
       final existing = existingByTitle[cp.title];
       if (existing != null) {
-        // UPDATE English fields in-place — row id and SRS state unchanged.
-        await (_db.update(
-          _db.grammarPoints,
-        )..where((tbl) => tbl.id.equals(existing.id))).write(
-          GrammarPointsCompanion(
-            titleEn: Value(storedTitleEn),
-            meaningEn: Value(storedMeaningEn),
-            connectionEn: Value(storedConnectionEn),
-            explanationEn: Value(cp.explanationEn),
-          ),
-        );
-        // Mark for batch delete + re-insert below.
         existingAppIds.add(existing.id);
-        for (final ex in cpExamples) {
+        updateOps.add((
+          existingId: existing.id,
+          companion: GrammarPointsCompanion(
+            titleEn: Value(storedTitleEn),
+            meaningEn: Value(storedMeaningEn),
+            connectionEn: Value(storedConnectionEn),
+            explanationEn: Value(cp.explanationEn),
+          ),
+          examples: cpExamples,
+        ));
+      } else {
+        insertOps.add((
+          title: cp.title,
+          structure: cp.structure,
+          explanation: cp.explanation,
+          explanationEn: cp.explanationEn,
+          level: cp.level,
+          storedTitleEn: storedTitleEn,
+          storedMeaningEn: storedMeaningEn,
+          storedConnectionEn: storedConnectionEn,
+          examples: cpExamples,
+        ));
+      }
+    }
+
+    // Phase A: Batch all updates for existing points — one DB round-trip
+    // regardless of how many grammar points already exist in the lesson.
+    if (updateOps.isNotEmpty) {
+      await _db.batch((batch) {
+        for (final op in updateOps) {
+          batch.update(
+            _db.grammarPoints,
+            op.companion,
+            where: (tbl) => tbl.id.equals(op.existingId),
+          );
+        }
+      });
+      for (final op in updateOps) {
+        for (final ex in op.examples) {
           pendingExamples.add(
             GrammarExamplesCompanion.insert(
-              grammarId: existing.id,
+              grammarId: op.existingId,
               japanese: ex.sentence,
               translation: ex.translation,
               translationVi: Value(ex.translation),
@@ -1653,36 +1763,39 @@ class LessonRepository {
             ),
           );
         }
-      } else {
-        // INSERT new grammar point — still needs sequential await to get the ID.
-        final pointId = await _db.into(_db.grammarPoints).insert(
-          GrammarPointsCompanion.insert(
-            lessonId: Value(lessonId),
-            grammarPoint: cp.title,
-            titleEn: Value(storedTitleEn),
-            meaning: cp.title,
-            meaningVi: Value(cp.title),
-            meaningEn: Value(storedMeaningEn),
-            connection: cp.structure,
-            connectionEn: Value(storedConnectionEn),
-            explanation: cp.explanation,
-            explanationVi: Value(cp.explanation),
-            explanationEn: Value(cp.explanationEn),
-            jlptLevel: cp.level,
-            isLearned: const Value(false),
+      }
+    }
+
+    // Phase B: Sequential inserts for new grammar points — auto-generated IDs
+    // are needed immediately as FK for the example rows collected below.
+    for (final op in insertOps) {
+      final pointId = await _db.into(_db.grammarPoints).insert(
+        GrammarPointsCompanion.insert(
+          lessonId: Value(lessonId),
+          grammarPoint: op.title,
+          titleEn: Value(op.storedTitleEn),
+          meaning: op.title,
+          meaningVi: Value(op.title),
+          meaningEn: Value(op.storedMeaningEn),
+          connection: op.structure,
+          connectionEn: Value(op.storedConnectionEn),
+          explanation: op.explanation,
+          explanationVi: Value(op.explanation),
+          explanationEn: Value(op.explanationEn),
+          jlptLevel: op.level,
+          isLearned: const Value(false),
+        ),
+      );
+      for (final ex in op.examples) {
+        pendingExamples.add(
+          GrammarExamplesCompanion.insert(
+            grammarId: pointId,
+            japanese: ex.sentence,
+            translation: ex.translation,
+            translationVi: Value(ex.translation),
+            translationEn: Value(ex.translationEn),
           ),
         );
-        for (final ex in cpExamples) {
-          pendingExamples.add(
-            GrammarExamplesCompanion.insert(
-              grammarId: pointId,
-              japanese: ex.sentence,
-              translation: ex.translation,
-              translationVi: Value(ex.translation),
-              translationEn: Value(ex.translationEn),
-            ),
-          );
-        }
       }
     }
 
@@ -2038,15 +2151,17 @@ class LessonRepository {
   Future<int?> findFirstLessonWithDueKanji(String level) async {
     final dueIds = await _db.kanjiSrsDao.getDueKanjiIds();
     if (dueIds.isEmpty) return null;
-    final rows =
-        await (_contentDb.select(_contentDb.kanji)..where((tbl) {
-              return tbl.id.isIn(dueIds) & tbl.jlptLevel.equals(level);
-            }))
-            .get();
-    if (rows.isEmpty) return null;
-
-    rows.sort((a, b) => a.lessonId.compareTo(b.lessonId));
-    return rows.first.lessonId;
+    // ORDER BY lesson_id + LIMIT 1 — lets the DB find the minimum lessonId
+    // without fetching all matching rows into Dart for a Dart-side sort.
+    final row =
+        await (_contentDb.select(_contentDb.kanji)
+              ..where(
+                (tbl) => tbl.id.isIn(dueIds) & tbl.jlptLevel.equals(level),
+              )
+              ..orderBy([(tbl) => OrderingTerm(expression: tbl.lessonId)])
+              ..limit(1))
+            .getSingleOrNull();
+    return row?.lessonId;
   }
 
   Future<KanjiSrsStateData?> getKanjiSrsState(int kanjiId) {
@@ -2559,11 +2674,11 @@ class LessonRepository {
     return result;
   }
 
-  Future<void> ensureSrsStateForTerm(int termId) async {
-    final existing = await _db.srsDao.getSrsState(termId);
-    if (existing == null) {
-      await _db.srsDao.initializeSrsState(termId);
-    }
+  /// Ensures an SRS state row exists for [termId].
+  /// INSERT OR IGNORE is idempotent because srs_state has a UNIQUE index on
+  /// vocab_id (enforced at DB level since schema v27).
+  Future<void> ensureSrsStateForTerm(int termId) {
+    return _db.srsDao.initializeSrsState(termId);
   }
 
   Future<Map<int, SrsStateData>> getSrsStatesForIds(List<int> termIds) {
@@ -2587,7 +2702,7 @@ class LessonRepository {
             lastReviewedAt: Value(now),
             nextReviewAt: now,
           ),
-          mode: InsertMode.insertOrReplace,
+          mode: InsertMode.insertOrIgnore,
         );
       }
     });
@@ -2787,11 +2902,14 @@ class LessonRepository {
       await (_db.delete(
         _db.userLessonTerm,
       )..where((tbl) => tbl.lessonId.equals(lessonId))).go();
-      for (var i = 0; i < terms.length; i++) {
-        final term = terms[i];
-        await _db
-            .into(_db.userLessonTerm)
-            .insert(
+      if (terms.isNotEmpty) {
+        // Batch all inserts — avoids N sequential round-trips inside the
+        // transaction. Matches the pattern already used in appendTerms().
+        await _db.batch((batch) {
+          for (var i = 0; i < terms.length; i++) {
+            final term = terms[i];
+            batch.insert(
+              _db.userLessonTerm,
               UserLessonTermCompanion.insert(
                 lessonId: lessonId,
                 orderIndex: Value(i + 1),
@@ -2801,6 +2919,8 @@ class LessonRepository {
                 kanjiMeaning: Value(term.kanjiMeaning),
               ),
             );
+          }
+        });
       }
     });
     await _touchLesson(lessonId);

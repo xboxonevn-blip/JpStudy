@@ -52,6 +52,11 @@ class GrammarSrsState extends Table {
   // If > 0, this item is a "Ghost" generated from a mistake.
   // Reviews of ghosts don't advance the main SRS interval as much, or are auxiliary.
   IntColumn get ghostReviewsDue => integer().withDefault(const Constant(0))();
+
+  @override
+  List<Set<Column>> get uniqueKeys => [
+    {grammarId},
+  ];
 }
 
 /// Table to store Grammar Questions (Exercises)

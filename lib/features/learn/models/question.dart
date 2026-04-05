@@ -3,6 +3,10 @@ import 'question_type.dart';
 
 /// Represents a single question in Learn Mode
 class Question {
+  static final _alternativesSplitRe = RegExp(
+    r'\s*(?:/|／|\bor\b|;|\|)\s*',
+    caseSensitive: false,
+  );
   final String id;
   final QuestionType type;
   final VocabItem targetItem;
@@ -50,7 +54,7 @@ class Question {
     if (raw.isEmpty) return const [''];
 
     final parts = raw
-        .split(RegExp(r'\s*(?:/|／|\bor\b|;|\|)\s*', caseSensitive: false))
+        .split(_alternativesSplitRe)
         .map((part) => part.trim())
         .where((part) => part.isNotEmpty)
         .toList();

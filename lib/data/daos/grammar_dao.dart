@@ -36,13 +36,10 @@ class GrammarDao extends DatabaseAccessor<AppDatabase> with _$GrammarDaoMixin {
     )..where((t) => t.grammarId.equals(grammarId))).getSingleOrNull();
   }
 
-  /// Initialize SRS for a grammar point
-  Future<int> initializeSrsState(int grammarId) async {
-    final existing = await getSrsState(grammarId);
-    if (existing != null) {
-      return existing.id;
-    }
-
+  /// Initialize SRS for a grammar point.
+  /// INSERT OR IGNORE is idempotent because grammar_srs_state has a UNIQUE
+  /// index on grammar_id (enforced at DB level since schema v27).
+  Future<int> initializeSrsState(int grammarId) {
     return into(grammarSrsState).insert(
       GrammarSrsStateCompanion.insert(
         grammarId: grammarId,
@@ -50,6 +47,7 @@ class GrammarDao extends DatabaseAccessor<AppDatabase> with _$GrammarDaoMixin {
         streak: const Value(0),
         ease: const Value(2.5),
       ),
+      mode: InsertMode.insertOrIgnore,
     );
   }
 

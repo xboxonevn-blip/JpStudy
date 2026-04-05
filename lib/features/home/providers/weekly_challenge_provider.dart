@@ -78,6 +78,8 @@ Future<void> _persist(
 }
 
 /// Archive any previous week's challenge data before switching to a new week.
+final _weekIdRe = RegExp(r'(\d{4})-W(\d{2})');
+
 Future<void> _archivePreviousWeeks(
   SharedPreferences prefs,
   String currentWeekId,
@@ -102,7 +104,7 @@ Future<void> _archivePreviousWeeks(
       final storedCurrent = map['current'] as int? ?? 0;
 
       // Reconstruct challenge from weekId to get type/target.
-      final match = RegExp(r'(\d{4})-W(\d{2})').firstMatch(weekId);
+      final match = _weekIdRe.firstMatch(weekId);
       if (match != null) {
         final year = int.parse(match.group(1)!);
         final week = int.parse(match.group(2)!);

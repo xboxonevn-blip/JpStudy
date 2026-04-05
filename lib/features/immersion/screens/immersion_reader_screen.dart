@@ -26,6 +26,10 @@ class ImmersionReaderScreen extends ConsumerStatefulWidget {
 }
 
 class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
+  static final _punctAndDigitOnlyRe =
+      RegExp(r'^[\s\d\.,!?;:(){}\[\]「」『』（）・…\-]+$');
+  static final _japaneseCharRe = RegExp(r'[\u3040-\u30FF\u3400-\u9FFF]');
+
   static const int _immersionLessonId = 9999;
   static const String _immersionLessonTitle = 'Immersion Notes';
   static const String _immersionLevel = 'IMMERSION';
@@ -381,10 +385,10 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
 
   bool _isQuizSurfaceCandidate(String surface) {
     if (surface.length < 2 || surface.length > 10) return false;
-    if (RegExp(r'^[\s\d\.,!?;:(){}\[\]「」『』（）・…\-]+$').hasMatch(surface)) {
+    if (_punctAndDigitOnlyRe.hasMatch(surface)) {
       return false;
     }
-    return RegExp(r'[\u3040-\u30FF\u3400-\u9FFF]').hasMatch(surface);
+    return _japaneseCharRe.hasMatch(surface);
   }
 
   String? _quizMeaning(ImmersionToken token, AppLanguage language) {

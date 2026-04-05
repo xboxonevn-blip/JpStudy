@@ -102,6 +102,28 @@ class GrammarExampleBlockQualityAssessment {
 }
 
 class GrammarExampleQualityAssessor {
+  // RegExp objects compiled once per class load, not per call.
+  static final _whitespaceRe = RegExp(r'\s+');
+  static final _unusablePatternCharsRe = RegExp(r'[~～〜〇○◯□△◇_＿/／]');
+  static final _promptNormRe = RegExp(r'[\s\u3000。！？?!….,，．]');
+  static final _placeholderRe = RegExp(
+    r'(^|[^A-Za-z])(N\d*|V\d*|A\d*|S\d*)(?=$|[^A-Za-z])',
+  );
+
+  // Rune code set for _lastNonPunctuationChar — replaces per-character RegExp.
+  static const Set<int> _terminalPunctAndSpaceRunes = {
+    0x20,   // space
+    0x09,   // tab
+    0x0A,   // LF
+    0x0D,   // CR
+    0x3000, // 　 ideographic space
+    0x3002, // 。
+    0xFF01, // ！
+    0xFF1F, // ？
+    0x21,   // !
+    0x3F,   // ?
+  };
+
   static GrammarExampleBlockQualityAssessment assessBlock({
     required String grammarPoint,
     required List<GrammarExampleSeedData> examples,
@@ -265,7 +287,7 @@ class GrammarExampleQualityAssessor {
     final trimmed = value.trim();
     if (trimmed.isEmpty) return false;
     if (_placeholderCount(trimmed) > 0) return false;
-    return !RegExp(r'[~～〜〇○◯□△◇_＿/／]').hasMatch(trimmed);
+    return !_unusablePatternCharsRe.hasMatch(trimmed);
   }
 
   static bool supportsTransformation(String sentence) {
@@ -492,7 +514,7 @@ class GrammarExampleQualityAssessor {
     if (trimmed.isEmpty) return 0;
     if (trimmed.contains(' ')) {
       return trimmed
-          .split(RegExp(r'\s+'))
+          .split(_whitespaceRe)
           .where((part) => part.isNotEmpty)
           .length;
     }
@@ -505,7 +527,7 @@ class GrammarExampleQualityAssessor {
       rough = rough.replaceAll(particle, '$particle ');
     }
     return rough
-        .split(RegExp(r'\s+'))
+        .split(_whitespaceRe)
         .where((part) => part.trim().isNotEmpty)
         .length;
   }
@@ -692,10 +714,12 @@ class GrammarExampleQualityAssessor {
   }
 
   static String? _lastNonPunctuationChar(String value) {
-    final chars = value.runes.map(String.fromCharCode).toList(growable: false);
-    for (var i = chars.length - 1; i >= 0; i--) {
-      if (!RegExp(r'[\s\u3000。！？?!]').hasMatch(chars[i])) {
-        return chars[i];
+    // Use a const rune-code set instead of a per-character RegExp to avoid
+    // allocating one RegExp object (and one String) per character checked.
+    final runes = value.runes.toList(growable: false);
+    for (var i = runes.length - 1; i >= 0; i--) {
+      if (!_terminalPunctAndSpaceRunes.contains(runes[i])) {
+        return String.fromCharCode(runes[i]);
       }
     }
     return null;
@@ -748,7 +772,7 @@ class GrammarExampleQualityAssessor {
   ];
 
   static String _normalizePromptCompare(String input) {
-    return input.replaceAll(RegExp(r'[\s\u3000。！？?!….,，．]'), '').trim();
+    return input.replaceAll(_promptNormRe, '').trim();
   }
 
   static String _leadingSentenceClause(String sentence) {
@@ -787,8 +811,6 @@ class GrammarExampleQualityAssessor {
   }
 
   static int _placeholderCount(String value) {
-    return RegExp(
-      r'(^|[^A-Za-z])(N\d*|V\d*|A\d*|S\d*)(?=$|[^A-Za-z])',
-    ).allMatches(value).length;
+    return _placeholderRe.allMatches(value).length;
   }
 }

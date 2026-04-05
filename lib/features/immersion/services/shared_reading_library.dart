@@ -7,6 +7,11 @@ import 'package:jpstudy/features/jlpt/models/jlpt_reading_models.dart';
 class SharedReadingLibrary {
   const SharedReadingLibrary();
 
+  static final _closingPlanRe = RegExp(
+    r'(たい|つもり|ようにしている|ことにしている|予定|大切にしたい)',
+  );
+  static final _immersionLevelRe = RegExp(r'/immersion/(n[1-5])/');
+
   Future<List<ImmersionArticle>> loadImmersionArticles() async {
     final assetPaths = await _loadLessonAssetPaths();
 
@@ -227,9 +232,7 @@ class SharedReadingLibrary {
   }
 
   _ClosingQuestion _closingQuestion(String closingParagraph) {
-    final looksLikePlan = RegExp(
-      r'(たい|つもり|ようにしている|ことにしている|予定|大切にしたい)',
-    ).hasMatch(closingParagraph);
+    final looksLikePlan = _closingPlanRe.hasMatch(closingParagraph);
     if (looksLikePlan) {
       return const _ClosingQuestion(
         type: JlptReadingQuestionType.inference,
@@ -276,7 +279,7 @@ class SharedReadingLibrary {
 
   String? _levelFromAssetPath(String path) {
     final normalizedPath = path.replaceAll('\\', '/');
-    final match = RegExp(r'/immersion/(n[1-5])/').firstMatch(normalizedPath);
+    final match = _immersionLevelRe.firstMatch(normalizedPath);
     final rawLevel = match?.group(1);
     if (rawLevel == null) {
       return null;

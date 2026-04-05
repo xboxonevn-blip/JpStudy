@@ -60,7 +60,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase({QueryExecutor? executor}) : super(executor ?? _openConnection());
 
   @override
-  int get schemaVersion => 26;
+  int get schemaVersion => 28;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -257,6 +257,36 @@ class AppDatabase extends _$AppDatabase {
       if (from < 26) {
         await _createPerformanceIndexes();
       }
+      if (from < 27) {
+        // Remove duplicate srs_state rows (keep the row with the highest id
+        // for each vocab_id — most recently inserted, most up-to-date state).
+        await customStatement(
+          'DELETE FROM srs_state '
+          'WHERE id NOT IN ('
+          '  SELECT MAX(id) FROM srs_state GROUP BY vocab_id'
+          ')',
+        );
+        // Add UNIQUE index to enforce one SRS state row per vocab term.
+        // Makes initializeSrsState (INSERT OR IGNORE) truly idempotent.
+        await customStatement(
+          'CREATE UNIQUE INDEX IF NOT EXISTS idx_srs_state_vocab_unique '
+          'ON srs_state(vocab_id)',
+        );
+        // Same for grammar_srs_state — one row per grammar point.
+        await customStatement(
+          'DELETE FROM grammar_srs_state '
+          'WHERE id NOT IN ('
+          '  SELECT MAX(id) FROM grammar_srs_state GROUP BY grammar_id'
+          ')',
+        );
+        await customStatement(
+          'CREATE UNIQUE INDEX IF NOT EXISTS idx_grammar_srs_state_grammar_unique '
+          'ON grammar_srs_state(grammar_id)',
+        );
+      }
+      if (from < 28) {
+        await _createSessionIndexes();
+      }
     },
     beforeOpen: (details) async {
       // Only reseed on first install or after an upgrade — on routine opens
@@ -296,6 +326,50 @@ class AppDatabase extends _$AppDatabase {
     // Ghost reviews — queried by ghost_reviews_due > 0 for ghost session load.
     await customStatement(
       'CREATE INDEX IF NOT EXISTS idx_grammar_srs_ghost ON grammar_srs_state(ghost_reviews_due)',
+    );
+    await _createSessionIndexes();
+  }
+
+  Future<void> _createSessionIndexes() async {
+    // Learn/test session lookup by lesson — every lesson screen open hits these.
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_learn_sessions_lesson '
+      'ON learn_sessions(lesson_id)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_test_sessions_lesson '
+      'ON test_sessions(lesson_id)',
+    );
+    // Answer FK indexes — session answer lookups without full-table scans.
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_learn_answers_session '
+      'ON learn_answers(session_id)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_test_answers_session '
+      'ON test_answers(session_id)',
+    );
+    // UserProgress day lookup — scanned on every dashboard and XP update.
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_user_progress_day ON user_progress(day)',
+    );
+    // UserMistakes top-N by type — weakness radar and mistake screen both
+    // filter by type + order by last_mistake_at + wrong_count DESC.
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_user_mistakes_type_date '
+      'ON user_mistakes(type, last_mistake_at DESC)',
+    );
+    // Attempt + AttemptAnswer indexes — ghost grammar query filters on these.
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_attempt_mode ON attempt(mode)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_attempt_answer_attempt '
+      'ON attempt_answer(attempt_id)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_attempt_answer_question_correct '
+      'ON attempt_answer(question_id, is_correct)',
     );
   }
 

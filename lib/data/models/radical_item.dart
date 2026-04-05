@@ -42,13 +42,28 @@ class RadicalItem {
 
 class _RadicalViMeaningFormatter {
   static final RegExp _tokenPattern = RegExp(r'[a-zA-Z]+');
+  static final _hanVietGlossRe = RegExp(r'^([^()]+?)(?:\s*\(([^()]*)\))?$');
+  static final _whitespaceRe = RegExp(r'\s+');
+  static final Map<int, int> _diacriticMap = _buildDiacriticMap();
+
+  static Map<int, int> _buildDiacriticMap() {
+    final map = <int, int>{};
+    for (final c in 'àáạảãâầấậẩẫăằắặẳẵ'.runes) { map[c] = 0x61; }
+    for (final c in 'èéẹẻẽêềếệểễ'.runes) { map[c] = 0x65; }
+    for (final c in 'ìíịỉĩ'.runes) { map[c] = 0x69; }
+    for (final c in 'òóọỏõôồốộổỗơờớợởỡ'.runes) { map[c] = 0x6F; }
+    for (final c in 'ùúụủũưừứựửữ'.runes) { map[c] = 0x75; }
+    for (final c in 'ỳýỵỷỹ'.runes) { map[c] = 0x79; }
+    for (final c in 'đ'.runes) { map[c] = 0x64; }
+    return map;
+  }
 
   static String format(String raw) {
     final trimmed = raw.trim();
     if (trimmed.isEmpty) return trimmed;
     if (trimmed.contains('·')) return trimmed;
 
-    final match = RegExp(r'^([^()]+?)(?:\s*\(([^()]*)\))?$').firstMatch(trimmed);
+    final match = _hanVietGlossRe.firstMatch(trimmed);
     if (match == null) {
       return _beautifyPhrase(trimmed, titleCase: true);
     }
@@ -60,14 +75,7 @@ class _RadicalViMeaningFormatter {
   }
 
   static String stripDiacritics(String input) {
-    return input
-        .replaceAll(RegExp('[àáạảãâầấậẩẫăằắặẳẵ]'), 'a')
-        .replaceAll(RegExp('[èéẹẻẽêềếệểễ]'), 'e')
-        .replaceAll(RegExp('[ìíịỉĩ]'), 'i')
-        .replaceAll(RegExp('[òóọỏõôồốộổỗơờớợởỡ]'), 'o')
-        .replaceAll(RegExp('[ùúụủũưừứựửữ]'), 'u')
-        .replaceAll(RegExp('[ỳýỵỷỹ]'), 'y')
-        .replaceAll(RegExp('[đ]'), 'd');
+    return String.fromCharCodes(input.runes.map((r) => _diacriticMap[r] ?? r));
   }
 
   static String _beautifyPhrase(String input, {required bool titleCase}) {
@@ -79,7 +87,7 @@ class _RadicalViMeaningFormatter {
       return _tokenMap[token] ?? token;
     });
 
-    final normalized = replaced.replaceAll(RegExp(r'\s+'), ' ').trim();
+    final normalized = replaced.replaceAll(_whitespaceRe, ' ').trim();
     if (!titleCase) return normalized;
 
     return normalized

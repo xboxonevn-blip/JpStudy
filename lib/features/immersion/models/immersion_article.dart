@@ -38,6 +38,11 @@ class ImmersionArticle {
   static const localSourceLabel = 'JpStudy Original';
   static const _fallbackLevel = 'N5';
 
+  static final _jlptLevelExactRe = RegExp(r'^N[1-5]$');
+  static final _nonAlphanumRe = RegExp(r'[^A-Z0-9]');
+  static final _jlptLevelCompactRe = RegExp(r'N([1-5])');
+  static final _digitOnlyLevelRe = RegExp(r'^([1-5])$');
+
   const ImmersionArticle({
     required this.id,
     required this.title,
@@ -143,18 +148,17 @@ class ImmersionArticle {
       return fallback;
     }
 
-    final directMatch = RegExp(r'^N[1-5]$').firstMatch(normalized);
-    if (directMatch != null) {
+    if (_jlptLevelExactRe.hasMatch(normalized)) {
       return normalized;
     }
 
-    final compact = normalized.replaceAll(RegExp(r'[^A-Z0-9]'), '');
-    final compactMatch = RegExp(r'N([1-5])').firstMatch(compact);
+    final compact = normalized.replaceAll(_nonAlphanumRe, '');
+    final compactMatch = _jlptLevelCompactRe.firstMatch(compact);
     if (compactMatch != null) {
       return 'N${compactMatch.group(1)}';
     }
 
-    final digitOnlyMatch = RegExp(r'^([1-5])$').firstMatch(compact);
+    final digitOnlyMatch = _digitOnlyLevelRe.firstMatch(compact);
     if (digitOnlyMatch != null) {
       return 'N${digitOnlyMatch.group(1)}';
     }

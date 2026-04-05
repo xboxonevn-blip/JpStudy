@@ -70,7 +70,7 @@ Widget buildScreen() => ProviderScope(
     appLanguageProvider.overrideWith((ref) => AppLanguage.en),
     dashboardProvider.overrideWith((ref) => Stream.value(_kDashboard)),
     dailySessionProgressProvider.overrideWith((ref) async => _kProgress),
-    coachSessionPlanProvider.overrideWith((ref) async => _kCoachPlan),
+    coachSessionPlanProvider.overrideWith((ref) => _kCoachPlan),
     continueActionProvider.overrideWith((ref) async => _kContinueAction),
     vocabGhostsProvider.overrideWith((ref) async => const []),
   ],

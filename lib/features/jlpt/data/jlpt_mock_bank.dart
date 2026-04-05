@@ -860,8 +860,10 @@ int? _extractLessonIdFromVocab(VocabItem item) {
   return null;
 }
 
+final _firstDigitGroupRe = RegExp(r'(\d+)');
+
 int? _extractLessonId(String raw) {
-  final match = RegExp(r'(\d+)').firstMatch(raw);
+  final match = _firstDigitGroupRe.firstMatch(raw);
   return match == null ? null : int.tryParse(match.group(1)!);
 }
 
@@ -974,6 +976,8 @@ String _kanjiMeaning(KanjiItem item, AppLanguage language) {
   }
 }
 
+final _readingSplitRe = RegExp(r'[,/、\s]+');
+
 String _primaryKanjiReading(KanjiItem item) {
   for (final raw in [item.onyomi, item.kunyomi]) {
     final value = raw?.trim() ?? '';
@@ -981,7 +985,7 @@ String _primaryKanjiReading(KanjiItem item) {
       continue;
     }
     final parts = value
-        .split(RegExp(r'[,/、\s]+'))
+        .split(_readingSplitRe)
         .map((part) => part.trim())
         .where((part) => part.isNotEmpty);
     if (parts.isNotEmpty) {

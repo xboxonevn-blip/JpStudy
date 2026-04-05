@@ -13,6 +13,11 @@ class SrsState extends Table {
   )(); // 0=unknown, 1=again, 2=hard, 3=good, 4=easy
   DateTimeColumn get lastReviewedAt => dateTime().nullable()();
   DateTimeColumn get nextReviewAt => dateTime()();
+
+  @override
+  List<Set<Column>> get uniqueKeys => [
+    {vocabId},
+  ];
 }
 
 class UserProgress extends Table {

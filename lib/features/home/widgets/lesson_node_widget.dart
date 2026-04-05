@@ -25,6 +25,8 @@ class LessonNodeWidget extends ConsumerStatefulWidget {
 
 class _LessonNodeWidgetState extends ConsumerState<LessonNodeWidget>
     with SingleTickerProviderStateMixin {
+  static final _nonDigitRe = RegExp(r'[^0-9]');
+
   late final AnimationController _pulseController;
   late final Animation<double> _pulse;
 
@@ -238,7 +240,7 @@ class _LessonNodeWidgetState extends ConsumerState<LessonNodeWidget>
   String _localizedLessonTitle(AppLanguage language) {
     final raw = widget.node.lesson.title.trim();
     if (raw.startsWith('Lesson ')) {
-      final number = raw.replaceAll(RegExp(r'[^0-9]'), '');
+      final number = raw.replaceAll(_nonDigitRe, '');
       if (number.isNotEmpty) {
         return '${language.lessonLabel} $number';
       }

@@ -1380,7 +1380,7 @@ enum _SearchKind {
 }
 
 class _SearchEntry {
-  const _SearchEntry({
+  _SearchEntry({
     required this.kind,
     required this.title,
     required this.subtitle,
@@ -1388,7 +1388,20 @@ class _SearchEntry {
     required this.keywords,
     this.id,
     this.reading,
-  });
+  })  : normalizedTitle = _normalizeSearchText(title),
+        normalizedReading = _normalizeSearchText(reading ?? ''),
+        normalizedMeaning = _normalizeSearchText(meaning),
+        normalizedKeywords = keywords
+            .map(_normalizeSearchText)
+            .where((s) => s.isNotEmpty)
+            .toList(growable: false),
+        romajiTerms = {
+          if (title.isNotEmpty) _normalizeRomaji(kanaToRomaji(title)),
+          if ((reading ?? '').isNotEmpty)
+            _normalizeRomaji(kanaToRomaji(reading!)),
+          for (final value in keywords)
+            if (value.isNotEmpty) _normalizeRomaji(kanaToRomaji(value)),
+        }..remove('');
 
   final _SearchKind kind;
   final String title;
@@ -1397,6 +1410,11 @@ class _SearchEntry {
   final String? reading;
   final String meaning;
   final List<String> keywords;
+  final String normalizedTitle;
+  final String normalizedReading;
+  final String normalizedMeaning;
+  final List<String> normalizedKeywords;
+  final Set<String> romajiTerms;
 }
 
 List<_SearchMatch> _buildSearchMatches({
@@ -1444,70 +1462,58 @@ _SearchMatch? _matchEntry(String query, _SearchEntry entry) {
     bestReason = reason;
   }
 
-  final normalizedTitle = _normalizeSearchText(entry.title);
-  final normalizedReading = _normalizeSearchText(entry.reading ?? '');
-  final normalizedMeaning = _normalizeSearchText(entry.meaning);
-
   consider(
-    condition: normalizedTitle == normalizedQuery,
+    condition: entry.normalizedTitle == normalizedQuery,
     score: 130,
     reason: _SearchMatchReason.exactTitle,
   );
   consider(
     condition:
-        normalizedTitle.startsWith(normalizedQuery) &&
+        entry.normalizedTitle.startsWith(normalizedQuery) &&
         normalizedQuery.isNotEmpty,
     score: 116,
     reason: _SearchMatchReason.titlePrefix,
   );
   consider(
     condition:
-        normalizedReading == normalizedQuery && normalizedQuery.isNotEmpty,
+        entry.normalizedReading == normalizedQuery &&
+        normalizedQuery.isNotEmpty,
     score: 122,
     reason: _SearchMatchReason.reading,
   );
   consider(
     condition:
-        normalizedReading.startsWith(normalizedQuery) &&
+        entry.normalizedReading.startsWith(normalizedQuery) &&
         normalizedQuery.isNotEmpty,
     score: 108,
     reason: _SearchMatchReason.reading,
   );
 
-  final romajiTerms = <String>[
-    if (entry.title.isNotEmpty) _normalizeRomaji(kanaToRomaji(entry.title)),
-    if ((entry.reading ?? '').isNotEmpty)
-      _normalizeRomaji(kanaToRomaji(entry.reading!)),
-    for (final value in entry.keywords)
-      if (value.isNotEmpty) _normalizeRomaji(kanaToRomaji(value)),
-  ].where((value) => value.isNotEmpty).toSet();
-
   consider(
-    condition: romajiQuery.isNotEmpty && romajiTerms.contains(romajiQuery),
+    condition:
+        romajiQuery.isNotEmpty && entry.romajiTerms.contains(romajiQuery),
     score: 120,
     reason: _SearchMatchReason.romaji,
   );
   consider(
     condition:
         romajiQuery.isNotEmpty &&
-        romajiTerms.any((value) => value.startsWith(romajiQuery)),
+        entry.romajiTerms.any((value) => value.startsWith(romajiQuery)),
     score: 104,
     reason: _SearchMatchReason.romaji,
   );
   consider(
     condition:
-        normalizedMeaning.isNotEmpty &&
+        entry.normalizedMeaning.isNotEmpty &&
         normalizedQuery.isNotEmpty &&
-        normalizedMeaning.contains(normalizedQuery),
+        entry.normalizedMeaning.contains(normalizedQuery),
     score: 96,
     reason: _SearchMatchReason.meaning,
   );
   consider(
     condition:
         normalizedQuery.isNotEmpty &&
-        entry.keywords.any(
-          (value) => _normalizeSearchText(value).contains(normalizedQuery),
-        ),
+        entry.normalizedKeywords.any((s) => s.contains(normalizedQuery)),
     score: 82,
     reason: _SearchMatchReason.keyword,
   );
@@ -1519,8 +1525,10 @@ _SearchMatch? _matchEntry(String query, _SearchEntry entry) {
   return _SearchMatch(entry: entry, score: bestScore, reason: bestReason!);
 }
 
+final _romajiNormalizeRe = RegExp(r'[^a-z0-9]');
+
 String _normalizeRomaji(String value) {
-  return value.trim().toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '');
+  return value.trim().toLowerCase().replaceAll(_romajiNormalizeRe, '');
 }
 
 enum _SearchMatchReason {

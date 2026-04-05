@@ -43,33 +43,28 @@ class ContentRepository {
         : '$term NOT FOUND';
   }
 
-  Future<void> updateProgress(int vocabId, bool isCorrect) async {
-    final existing = await (_db.select(
-      _db.userProgress,
-    )..where((tbl) => tbl.vocabId.equals(vocabId))).getSingleOrNull();
-
-    if (existing == null) {
-      await _db
-          .into(_db.userProgress)
-          .insert(
-            UserProgressCompanion.insert(
-              vocabId: Value(vocabId),
-              correctCount: Value(isCorrect ? 1 : 0),
-              missedCount: Value(isCorrect ? 0 : 1),
-              lastReviewedAt: Value(DateTime.now()),
-            ),
-          );
-    } else {
-      await (_db.update(
-        _db.userProgress,
-      )..where((tbl) => tbl.vocabId.equals(vocabId))).write(
-        UserProgressCompanion(
-          correctCount: Value(existing.correctCount + (isCorrect ? 1 : 0)),
-          missedCount: Value(existing.missedCount + (isCorrect ? 0 : 1)),
-          lastReviewedAt: Value(DateTime.now()),
-        ),
-      );
-    }
+  Future<void> updateProgress(int vocabId, bool isCorrect) {
+    final correctDelta = isCorrect ? 1 : 0;
+    final missedDelta = isCorrect ? 0 : 1;
+    // Single-round-trip upsert: insert on first encounter, or atomically
+    // increment the appropriate counter on subsequent reviews.
+    return _db.customStatement(
+      'INSERT INTO user_progress (vocab_id, correct_count, missed_count, last_reviewed_at) '
+      'VALUES (?, ?, ?, ?) '
+      'ON CONFLICT(vocab_id) DO UPDATE SET '
+      'correct_count = correct_count + ?, '
+      'missed_count  = missed_count  + ?, '
+      'last_reviewed_at = ?',
+      [
+        vocabId,
+        correctDelta,
+        missedDelta,
+        DateTime.now().millisecondsSinceEpoch,
+        correctDelta,
+        missedDelta,
+        DateTime.now().millisecondsSinceEpoch,
+      ],
+    );
   }
 }
 

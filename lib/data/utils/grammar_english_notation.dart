@@ -119,7 +119,7 @@ String normalizeGrammarTitleEn(String? raw) {
     value = value.replaceAll(oldValue, newValue);
   });
 
-  return value.replaceAll(RegExp(r'\s{2,}'), ' ').trim();
+  return value.replaceAll(_whitespaceCollapseRe, ' ').trim();
 }
 
 String normalizeGrammarStructureEn(String? raw) {
@@ -246,29 +246,11 @@ String normalizeGrammarStructureEn(String? raw) {
     value = value.replaceAll(oldValue, newValue);
   });
 
-  final regexReplacements = <Pattern, String>{
-    RegExp(r'\bdesu ka\b'): 'ですか',
-    RegExp(r'\bdesu\b'): 'です',
-    RegExp(r'\bwa\b'): 'は',
-    RegExp(r'\bga\b'): 'が',
-    RegExp(r'\bni\b'): 'に',
-    RegExp(r'\bde\b'): 'で',
-    RegExp(r'\bto\b'): 'と',
-    RegExp(r'\bmo\b'): 'も',
-    RegExp(r'\bno\b'): 'の',
-    RegExp(r'\bo\b'): 'を',
-    RegExp(r'\be\b'): 'へ',
-    RegExp(r'\bnan\b'): '何',
-    RegExp(r'\bnani\b'): 'なに',
-    RegExp(r'\bitsu\b'): 'いつ',
-    RegExp(r'\bmou\b'): 'もう',
-  };
-
-  regexReplacements.forEach((pattern, replacement) {
+  _regexStructureReplacements.forEach((pattern, replacement) {
     value = value.replaceAll(pattern, replacement);
   });
 
-  return value.replaceAll(RegExp(r'\s{2,}'), ' ').trim();
+  return value.replaceAll(_whitespaceCollapseRe, ' ').trim();
 }
 
 String resolveCanonicalGrammarPointSource({
@@ -330,7 +312,7 @@ String stripNonCanonicalGrammarNotes(String? raw) {
     return value;
   }
 
-  value = value.replaceAllMapped(RegExp(r'[（(]([^()（）]*)[)）]'), (match) {
+  value = value.replaceAllMapped(_bracketContentRe, (match) {
     final inner = (match.group(1) ?? '').trim();
     if (inner.isEmpty) {
       return '';
@@ -358,10 +340,10 @@ String stripNonCanonicalGrammarNotes(String? raw) {
   });
 
   value = value
-      .replaceAllMapped(RegExp(r'\s*/\s*'), (_) => ' / ')
-      .replaceAllMapped(RegExp(r'\s*,\s*'), (_) => ', ')
-      .replaceAllMapped(RegExp(r'\s*\+\s*'), (_) => ' + ')
-      .replaceAll(RegExp(r'\s{2,}'), ' ')
+      .replaceAllMapped(_slashSpaceRe, (_) => ' / ')
+      .replaceAllMapped(_commaSpaceRe, (_) => ', ')
+      .replaceAllMapped(_plusSpaceRe, (_) => ' + ')
+      .replaceAll(_whitespaceCollapseRe, ' ')
       .trim();
 
   return value;
@@ -395,6 +377,49 @@ const List<String> _vietnameseGrammarKeywords = <String>[
   'câu sai',
 ];
 
+// ---------------------------------------------------------------------------
+// Cached RegExp objects — compiled once per isolate, not once per call.
+// ---------------------------------------------------------------------------
+
+/// Matches two or more consecutive whitespace characters.
+final _whitespaceCollapseRe = RegExp(r'\s{2,}');
+
+/// Matches parenthetical notes (full-width or ASCII brackets).
+final _bracketContentRe = RegExp(r'[（(]([^()（）]*)[)）]');
+
+/// Slash/comma/plus surrounded by optional whitespace — for canonicalization.
+final _slashSpaceRe = RegExp(r'\s*/\s*');
+final _commaSpaceRe = RegExp(r'\s*,\s*');
+final _plusSpaceRe = RegExp(r'\s*\+\s*');
+
+/// Latin letter detector.
+final _latinCharRe = RegExp(r'[A-Za-z]');
+
+/// Japanese character or grammar placeholder.
+final _japaneseOrPlaceholderRe = RegExp(
+  r'[ぁ-ゖァ-ヶ一-龯々ー]|(^|[^A-Za-z])(N\d*|V\d*|A\d*|S\d*)(?=$|[^A-Za-z])',
+);
+
+/// The 15 romanized-to-Japanese regex replacements used by
+/// [normalizeGrammarStructureEn] — compiled once per isolate.
+final _regexStructureReplacements = <Pattern, String>{
+  RegExp(r'\bdesu ka\b'): 'ですか',
+  RegExp(r'\bdesu\b'): 'です',
+  RegExp(r'\bwa\b'): 'は',
+  RegExp(r'\bga\b'): 'が',
+  RegExp(r'\bni\b'): 'に',
+  RegExp(r'\bde\b'): 'で',
+  RegExp(r'\bto\b'): 'と',
+  RegExp(r'\bmo\b'): 'も',
+  RegExp(r'\bno\b'): 'の',
+  RegExp(r'\bo\b'): 'を',
+  RegExp(r'\be\b'): 'へ',
+  RegExp(r'\bnan\b'): '何',
+  RegExp(r'\bnani\b'): 'なに',
+  RegExp(r'\bitsu\b'): 'いつ',
+  RegExp(r'\bmou\b'): 'もう',
+};
+
 bool containsVietnameseGrammarText(String? raw) {
   final value = (raw ?? '').trim();
   if (value.isEmpty) {
@@ -408,17 +433,15 @@ bool containsVietnameseGrammarText(String? raw) {
   return _vietnameseGrammarKeywords.any(lowered.contains);
 }
 
-bool _containsLatin(String value) => RegExp(r'[A-Za-z]').hasMatch(value);
+bool _containsLatin(String value) => _latinCharRe.hasMatch(value);
 
 bool _hasJapaneseOrGrammarPlaceholder(String value) {
-  return RegExp(
-    r'[ぁ-ゖァ-ヶ一-龯々ー]|(^|[^A-Za-z])(N\d*|V\d*|A\d*|S\d*)(?=$|[^A-Za-z])',
-  ).hasMatch(value);
+  return _japaneseOrPlaceholderRe.hasMatch(value);
 }
 
 String _cleanCanonicalGrammarCandidate(String? raw) {
   final value = stripNonCanonicalGrammarNotes(raw);
-  return value.replaceAll(RegExp(r'\s{2,}'), ' ').trim();
+  return value.replaceAll(_whitespaceCollapseRe, ' ').trim();
 }
 
 String resolveEnglishGrammarLabel({

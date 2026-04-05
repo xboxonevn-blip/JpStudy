@@ -19,7 +19,7 @@ class DailySessionSummaryScreen extends ConsumerWidget {
     final language = ref.watch(appLanguageProvider);
     final dashboard = ref.watch(dashboardProvider).valueOrNull;
     final progress = ref.watch(dailySessionProgressProvider).valueOrNull;
-    final coachPlan = ref.watch(coachSessionPlanProvider).valueOrNull;
+    final coachPlan = ref.watch(coachSessionPlanProvider);
     final totalDue =
         (dashboard?.vocabDue ?? 0) +
         (dashboard?.grammarDue ?? 0) +
@@ -84,28 +84,27 @@ class DailySessionSummaryScreen extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 14),
-              if (coachPlan != null)
-                Container(
-                  decoration: HomeSurface.softPanel(),
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        _improvedTitle(language),
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w800,
-                          color: Color(0xFF0F172A),
-                        ),
+              Container(
+                decoration: HomeSurface.softPanel(),
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      _improvedTitle(language),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w800,
+                        color: Color(0xFF0F172A),
                       ),
-                      const SizedBox(height: 10),
-                      _SummaryItem(label: coachPlan.step1.target),
-                      _SummaryItem(label: coachPlan.step2.target),
-                      _SummaryItem(label: coachPlan.step3.target),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 10),
+                    _SummaryItem(label: coachPlan.step1.target),
+                    _SummaryItem(label: coachPlan.step2.target),
+                    _SummaryItem(label: coachPlan.step3.target),
+                  ],
                 ),
+              ),
               const SizedBox(height: 14),
               Container(
                 decoration: HomeSurface.softPanel(),

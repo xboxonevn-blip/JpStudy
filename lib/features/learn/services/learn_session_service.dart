@@ -67,10 +67,10 @@ class LearnSessionService {
       );
     }).toList();
 
-    // Mark as notified
-    for (var a in dbAchievements) {
-      await _achievementDao.markAsNotified(a.id);
-    }
+    // Mark all as notified in a single round-trip.
+    await _achievementDao.markAllAsNotified(
+      dbAchievements.map((a) => a.id).toList(growable: false),
+    );
 
     return achievements;
   }
@@ -120,10 +120,11 @@ class LearnSessionService {
       );
     }
 
-    // First lesson — awarded once when the achievement table is otherwise empty.
-    final existing = await _achievementDao.getAchievements();
-    final alreadyAwarded = existing.any(
-      (a) => a.type == model.AchievementType.firstLesson.name,
+    // First lesson — awarded once. Uses a targeted point-lookup instead of
+    // loading the full achievements table and scanning in Dart.
+    final alreadyAwarded = await _achievementDao.hasAchievement(
+      model.AchievementType.firstLesson.name,
+      1,
     );
     if (!alreadyAwarded) {
       await _achievementDao.addAchievement(

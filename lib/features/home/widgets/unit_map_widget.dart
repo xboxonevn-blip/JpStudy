@@ -14,6 +14,8 @@ import 'path_painter.dart';
 class UnitMapWidget extends ConsumerWidget {
   const UnitMapWidget({super.key, required this.unit, required this.onNodeTap});
 
+  static final _nonDigitRe = RegExp(r'[^0-9]');
+
   final Unit unit;
   final void Function(LessonNode) onNodeTap;
 
@@ -231,7 +233,7 @@ class UnitMapWidget extends ConsumerWidget {
   String _localizedLessonTitle(LessonNode node, AppLanguage language) {
     final raw = node.lesson.title.trim();
     if (raw.startsWith('Lesson ')) {
-      final number = raw.replaceAll(RegExp(r'[^0-9]'), '');
+      final number = raw.replaceAll(_nonDigitRe, '');
       if (number.isNotEmpty) {
         return '${language.lessonLabel} $number';
       }

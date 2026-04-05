@@ -277,12 +277,14 @@ String repairPotentialMojibake(String input) {
   }
 }
 
+final _chapterTitleWhitespaceRe = RegExp(r'\s+');
+
 String _normalizeChapterTitle(String rawTitle, int chapterId) {
   final repaired = repairPotentialMojibake(rawTitle);
   if (repaired.isEmpty) {
     return 'Chapter ${chapterId.toString().padLeft(2, '0')}';
   }
-  return repaired.replaceAll(RegExp(r'\s+'), ' ').trim();
+  return repaired.replaceAll(_chapterTitleWhitespaceRe, ' ').trim();
 }
 
 bool _looksLikeMojibake(String text) {

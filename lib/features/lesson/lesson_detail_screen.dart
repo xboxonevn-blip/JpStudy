@@ -34,6 +34,8 @@ class LessonDetailScreen extends ConsumerStatefulWidget {
 }
 
 class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
+  static final _whitespaceRe = RegExp(r'\s+');
+
   bool _showHints = true;
   bool _trackProgress = false;
   final FsrsService _fsrsService = FsrsService();
@@ -620,7 +622,7 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
   }
 
   String _normalizeKeyPart(String value) {
-    return value.trim().replaceAll(RegExp(r'\s+'), ' ').toLowerCase();
+    return value.trim().replaceAll(_whitespaceRe, ' ').toLowerCase();
   }
 
   void _maybeSyncTermFlags(List<UserLessonTermData> terms) {
@@ -1613,6 +1615,8 @@ class _LessonCard extends StatelessWidget {
 }
 
 class _CardContent extends StatelessWidget {
+  static final _whitespaceRe = RegExp(r'\s+');
+
   const _CardContent({
     required this.language,
     required this.termsAsync,
@@ -1847,7 +1851,7 @@ class _CardContent extends StatelessWidget {
   String _compactHint(String meaning, int seed) {
     final clean = meaning.replaceAll('\n', ' ').trim();
     if (clean.isEmpty) return '';
-    final compact = clean.replaceAll(RegExp(r'\s+'), '');
+    final compact = clean.replaceAll(_whitespaceRe, '');
     if (compact.isEmpty) return '';
 
     var take = compact.length <= 2 ? compact.length : (seed.abs() % 2) + 2;

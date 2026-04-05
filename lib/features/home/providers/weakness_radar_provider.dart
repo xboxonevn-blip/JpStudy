@@ -15,6 +15,7 @@ import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/home/providers/recovery_pack_provider.dart';
 import 'package:jpstudy/features/learn/models/learn_session_args.dart';
 import 'package:jpstudy/features/learn/models/question_type.dart';
+import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/features/mistakes/repositories/mistake_repository.dart';
 import 'package:jpstudy/features/home/providers/weakness_radar_priority.dart';
 import 'package:jpstudy/features/vocab/models/vocab_review_args.dart';
@@ -88,37 +89,42 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
     );
   }
 
-  // Sort each pre-fetched slice by computed priority (descending).
-  final vocabMistakes = vocabMistakesRaw
-    ..sort((l, r) =>
-        calculateMistakePriority(r, now).compareTo(calculateMistakePriority(l, now)));
-  final grammarMistakes = grammarMistakesRaw
-    ..sort((l, r) =>
-        calculateMistakePriority(r, now).compareTo(calculateMistakePriority(l, now)));
-  final kanjiMistakes = kanjiMistakesRaw
-    ..sort((l, r) =>
-        calculateMistakePriority(r, now).compareTo(calculateMistakePriority(l, now)));
+  // Pre-compute each mistake's priority once (Schwartzian transform) so the
+  // sort comparator doesn't call calculateMistakePriority twice per comparison.
+  List<({UserMistake mistake, int priority})> scoredAndSorted(
+    List<UserMistake> raw,
+  ) {
+    final scored = raw
+        .map((m) => (mistake: m, priority: calculateMistakePriority(m, now)))
+        .toList();
+    scored.sort((l, r) => r.priority.compareTo(l.priority));
+    return scored;
+  }
 
-  final dueMistakesVocab = vocabMistakes
-      .where((m) => calculateMistakePriority(m, now) > 0)
+  final vocabScored = scoredAndSorted(vocabMistakesRaw);
+  final grammarScored = scoredAndSorted(grammarMistakesRaw);
+  final kanjiScored = scoredAndSorted(kanjiMistakesRaw);
+
+  final dueMistakesVocab = vocabScored
+      .where((s) => s.priority > 0)
       .toList(growable: false);
-  final dueMistakesGrammar = grammarMistakes
-      .where((m) => calculateMistakePriority(m, now) > 0)
+  final dueMistakesGrammar = grammarScored
+      .where((s) => s.priority > 0)
       .toList(growable: false);
-  final dueMistakesKanji = kanjiMistakes
-      .where((m) => calculateMistakePriority(m, now) > 0)
+  final dueMistakesKanji = kanjiScored
+      .where((s) => s.priority > 0)
       .toList(growable: false);
 
   // Fire all three DB look-ups in parallel — each method fast-returns [] when
   // the ID list is empty, so no unnecessary round-trips are made.
   final vocabFuture = lessonRepo.fetchVocabTermsByIds(
-    dueMistakesVocab.take(5).map((m) => m.itemId).toList(),
+    dueMistakesVocab.take(5).map((s) => s.mistake.itemId).toList(),
   );
   final grammarFuture = grammarRepo.fetchPointsByIds(
-    dueMistakesGrammar.take(3).map((m) => m.itemId).toList(),
+    dueMistakesGrammar.take(3).map((s) => s.mistake.itemId).toList(),
   );
   final kanjiFuture = lessonRepo.fetchKanjiByIds(
-    dueMistakesKanji.take(5).map((m) => m.itemId).toList(),
+    dueMistakesKanji.take(5).map((s) => s.mistake.itemId).toList(),
   );
   final vocabItems = await vocabFuture;
   final grammarPoints = await grammarFuture;
@@ -133,7 +139,7 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
         subtitle: weaknessVocabSubtitle(
           language,
           dueMistakesVocab.length,
-          _dueCheckpointShortLabel(language, lead.lastMistakeAt, now),
+          _dueCheckpointShortLabel(language, lead.mistake.lastMistakeAt, now),
         ),
         route: '/learn/session',
         extra: LearnSessionArgs(
@@ -147,7 +153,7 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
         ),
         icon: Icons.translate_rounded,
         color: const Color(0xFF0F766E),
-        priority: 80 + calculateMistakePriority(lead, now),
+        priority: 80 + lead.priority,
       ),
     );
   }
@@ -161,13 +167,13 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
         subtitle: weaknessGrammarSubtitle(
           language,
           dueMistakesGrammar.length,
-          _dueCheckpointShortLabel(language, lead.lastMistakeAt, now),
+          _dueCheckpointShortLabel(language, lead.mistake.lastMistakeAt, now),
         ),
         route: '/grammar-practice',
         extra: grammarPoints.map((point) => point.id).toList(),
         icon: Icons.auto_stories_rounded,
         color: const Color(0xFF7C3AED),
-        priority: 75 + calculateMistakePriority(lead, now),
+        priority: 75 + lead.priority,
       ),
     );
   }
@@ -181,7 +187,7 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
         subtitle: weaknessKanjiSubtitle(
           language,
           dueMistakesKanji.length,
-          _dueCheckpointShortLabel(language, lead.lastMistakeAt, now),
+          _dueCheckpointShortLabel(language, lead.mistake.lastMistakeAt, now),
         ),
         route: '/kanji/practice',
         extra: KanjiPracticeArgs(
@@ -193,7 +199,7 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
         ),
         icon: Icons.draw_rounded,
         color: const Color(0xFFF59E0B),
-        priority: 70 + calculateMistakePriority(lead, now),
+        priority: 70 + lead.priority,
       ),
     );
   }

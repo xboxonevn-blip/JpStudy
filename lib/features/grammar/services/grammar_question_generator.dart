@@ -43,6 +43,26 @@ class GeneratedQuestion {
 }
 
 class GrammarQuestionGenerator {
+  // All RegExp objects compiled once per class load, not per call.
+  static final _verbalEndingRe = RegExp(
+    'じゃありません|ではありません|じゃないです'
+    '|なければなりません|なくてもいいです|かもしれません'
+    '|てはいけません|てはいけない|てもいいです'
+    '|ていただけます|ていただきます|ていません'
+    '|ています|てあります|ていました|ていた|てある|てきます'
+    '|でしょう|ましょう|ください'
+    '|ません|ました|ますか|ますね|ますよ|ます'
+    '|ですか|ですね|ですよ|です',
+  );
+  static final _splitMarkPunctuationRe = RegExp('\x00([。、！？])');
+  static final _trailPunctuationRe = RegExp(r'[。！？?!]+$');
+  static final _nonWordTokenRe = RegExp(r'[^a-z0-9\u00c0-\u1ef9]+');
+  static final _whitespaceRe = RegExp(r'\s+');
+  static final _unusablePatternCharsRe = RegExp(r'[~～〜〇○◯□△◇_＿/／]');
+  static final _placeholderRe = RegExp(
+    r'(^|[^A-Za-z])(N\d*|V\d*|A\d*|S\d*)(?=$|[^A-Za-z])',
+  );
+
   static const List<List<String>> _minimalPairPack = [
     ['は', 'が'],
     ['に', 'で'],
@@ -482,6 +502,12 @@ class GrammarQuestionGenerator {
         .toList(growable: false);
     if (pool.isEmpty) return null;
 
+    // Pre-compute normalized strings once — avoids re-normalizing every
+    // candidate on every (pair × token) iteration inside the nested loops.
+    final normalizedPool = [
+      for (final c in pool) _normalizePattern(c.grammarPoint),
+    ];
+
     for (final pair in _minimalPairPack) {
       final selfToken = pair.firstWhere(
         (token) => self.contains(_normalizePattern(token)),
@@ -491,9 +517,9 @@ class GrammarQuestionGenerator {
       for (final token in pair) {
         if (token == selfToken) continue;
         final normalized = _normalizePattern(token);
-        for (final candidate in pool) {
-          if (_normalizePattern(candidate.grammarPoint).contains(normalized)) {
-            return candidate;
+        for (var i = 0; i < pool.length; i++) {
+          if (normalizedPool[i].contains(normalized)) {
+            return pool[i];
           }
         }
       }
@@ -876,7 +902,7 @@ class GrammarQuestionGenerator {
   }
 
   static String _trimSentencePunctuation(String sentence) {
-    return sentence.trim().replaceFirst(RegExp(r'[。！？?!]+$'), '');
+    return sentence.trim().replaceFirst(_trailPunctuationRe, '');
   }
 
   static List<String> _tokenizeSentence(String sentence) {
@@ -895,7 +921,7 @@ class GrammarQuestionGenerator {
     // Sentences with explicit spaces — split on whitespace.
     if (trimmed.contains(' ')) {
       return trimmed
-          .split(RegExp(r'\s+'))
+          .split(_whitespaceRe)
           .where((part) => part.isNotEmpty)
           .toList(growable: false);
     }
@@ -907,22 +933,10 @@ class GrammarQuestionGenerator {
     // like「ですか」are matched before their substrings like「です」.
     const splitMark = '\x00';
 
-    // Verbal/copula endings — longest alternatives first so the regex engine
-    // matches「ですか」before trying「です」etc.
-    final verbalEndingRe = RegExp(
-      'じゃありません|ではありません|じゃないです'
-      '|なければなりません|なくてもいいです|かもしれません'
-      '|てはいけません|てはいけない|てもいいです'
-      '|ていただけます|ていただきます|ていません'
-      '|ています|てあります|ていました|ていた|てある|てきます'
-      '|でしょう|ましょう|ください'
-      '|ません|ました|ますか|ますね|ますよ|ます'
-      '|ですか|ですね|ですよ|です',
-    );
-
-    // Insert split markers before each verbal ending (single pass)
+    // Insert split markers before each verbal ending (single pass).
+    // Uses the class-level static regex — compiled once, not per-call.
     var work = trimmed.replaceAllMapped(
-      verbalEndingRe,
+      _verbalEndingRe,
       (m) => '$splitMark${m.group(0)}',
     );
 
@@ -933,11 +947,8 @@ class GrammarQuestionGenerator {
       work = work.replaceAll(particle, '$particle$splitMark');
     }
 
-    // Remove any split mark that immediately precedes sentence-final punctuation
-    work = work.replaceAllMapped(
-      RegExp('$splitMark([。、！？])'),
-      (m) => m.group(1)!,
-    );
+    // Remove any split mark that immediately precedes sentence-final punctuation.
+    work = work.replaceAllMapped(_splitMarkPunctuationRe, (m) => m.group(1)!);
 
     final rawChunks = work
         .split(splitMark)
@@ -995,6 +1006,10 @@ class GrammarQuestionGenerator {
       language,
     ).trim();
 
+    // Pre-compute target-side values that are constant across all candidates.
+    final targetSurface = _exampleSurfaceFamily(targetExample.japanese);
+    final targetSentenceLen = targetExample.japanese.length;
+
     final ranked = <({String sentence, int score})>[];
     for (final item in examplePool) {
       final sentence = item.example.japanese.trim();
@@ -1013,6 +1028,8 @@ class GrammarQuestionGenerator {
           targetPoint: point,
           targetExample: targetExample,
           targetPrompt: targetPrompt,
+          targetSurface: targetSurface,
+          targetSentenceLen: targetSentenceLen,
           candidatePoint: item.point,
           candidateExample: item.example,
           candidatePrompt: prompt,
@@ -1040,12 +1057,13 @@ class GrammarQuestionGenerator {
     required GrammarPoint targetPoint,
     required GrammarExample targetExample,
     required String targetPrompt,
+    required String targetSurface,
+    required int targetSentenceLen,
     required GrammarPoint candidatePoint,
     required GrammarExample candidateExample,
     required String candidatePrompt,
   }) {
     var score = 0;
-    final targetSurface = _exampleSurfaceFamily(targetExample.japanese);
     final candidateSurface = _exampleSurfaceFamily(candidateExample.japanese);
 
     if (candidatePoint.lessonId != null &&
@@ -1083,8 +1101,7 @@ class GrammarQuestionGenerator {
     }
 
     final sentenceDelta =
-        (targetExample.japanese.length - candidateExample.japanese.length)
-            .abs();
+        (targetSentenceLen - candidateExample.japanese.length).abs();
     if (sentenceDelta <= 6) {
       score += 2;
     } else if (sentenceDelta <= 12) {
@@ -1106,14 +1123,14 @@ class GrammarQuestionGenerator {
     if (normalized.isEmpty) return const <String>{};
 
     final wordTokens = normalized
-        .split(RegExp(r'[^a-z0-9\u00c0-\u1ef9]+'))
+        .split(_nonWordTokenRe)
         .where((token) => token.length >= 2)
         .toSet();
     if (wordTokens.isNotEmpty) {
       return wordTokens;
     }
 
-    final compact = normalized.replaceAll(RegExp(r'\s+'), '');
+    final compact = normalized.replaceAll(_whitespaceRe, '');
     if (compact.runes.length < 2) {
       return compact.isEmpty ? const <String>{} : {compact};
     }
@@ -1192,26 +1209,25 @@ class GrammarQuestionGenerator {
     required AppLanguage language,
     required String targetFormula,
   }) {
-    final candidates = pool.where((item) => item.id != target.id).toList()
+    // Schwartzian transform: compute each score once (O(n)) rather than
+    // recomputing it O(n log n) times inside the sort comparator.
+    final scored = pool
+        .where((item) => item.id != target.id)
+        .map(
+          (item) => (
+            point: item,
+            score: _relatedPointScore(
+              target: target,
+              candidate: item,
+              language: language,
+              targetFormula: targetFormula,
+            ),
+          ),
+        )
+        .toList()
       ..shuffle();
-
-    candidates.sort((a, b) {
-      final scoreB = _relatedPointScore(
-        target: target,
-        candidate: b,
-        language: language,
-        targetFormula: targetFormula,
-      );
-      final scoreA = _relatedPointScore(
-        target: target,
-        candidate: a,
-        language: language,
-        targetFormula: targetFormula,
-      );
-      return scoreB.compareTo(scoreA);
-    });
-
-    return candidates;
+    scored.sort((a, b) => b.score.compareTo(a.score));
+    return scored.map((s) => s.point).toList(growable: false);
   }
 
   static int _relatedPointScore({
@@ -1351,7 +1367,7 @@ class GrammarQuestionGenerator {
     if (trimmed.isEmpty) return false;
     if (containsVietnameseGrammarText(trimmed)) return false;
     if (_placeholderCount(trimmed) > 0) return false;
-    return !RegExp(r'[~～〜〇○◯□△◇_＿/／]').hasMatch(trimmed);
+    return !_unusablePatternCharsRe.hasMatch(trimmed);
   }
 
   static bool _isDialogueSentence(String value) {
@@ -1390,9 +1406,7 @@ class GrammarQuestionGenerator {
   }
 
   static int _placeholderCount(String value) {
-    final matches = RegExp(
-      r'(^|[^A-Za-z])(N\d*|V\d*|A\d*|S\d*)(?=$|[^A-Za-z])',
-    ).allMatches(value).length;
+    final matches = _placeholderRe.allMatches(value).length;
     return matches;
   }
 
@@ -1463,13 +1477,13 @@ class GrammarQuestionGenerator {
   }
 
   static String _normalizeStem(String input) {
-    return input.replaceAll(RegExp(r'\s+'), ' ').trim();
+    return input.replaceAll(_whitespaceRe, ' ').trim();
   }
 
+  static final _normalizeRe = RegExp(r'[\s\u3000\(\)\[\]{}<>]');
+
   static String _normalizePattern(String input) {
-    return input
-        .replaceAll(RegExp(r'[\s\u3000\(\)\[\]{}<>]'), '')
-        .toLowerCase();
+    return input.replaceAll(_normalizeRe, '').toLowerCase();
   }
 
   static String _localizedPointMeaning(

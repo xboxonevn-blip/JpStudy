@@ -1,3 +1,10 @@
+final _tildeNormRe = RegExp(r'[~～]');
+final _bracketNotesRe = RegExp(r'[（(].*?[)）]');
+final _tildeNoRe = RegExp(r'^〜の');
+final _noLeadingRe = RegExp(r'^の');
+final _labelCompactRe = RegExp(r'[\s\u3000\(\)（）\[\]【】「」『』:：,，.．/／・\-+]+');
+final _nonJapaneseRe = RegExp(r'[^〜ぁ-ゖァ-ヶ一-龯々ー]');
+
 List<dynamic>? findGrammarExamplesForDefinition({
   required List<dynamic>? exampleBlocks,
   required String? title,
@@ -35,15 +42,15 @@ Set<String> _buildGrammarLabelKeys(String? rawValue) {
   final raw = rawValue?.trim() ?? '';
   if (raw.isEmpty) return const <String>{};
 
-  final tildeNormalized = raw.replaceAll(RegExp(r'[~～]'), '〜');
+  final tildeNormalized = raw.replaceAll(_tildeNormRe, '〜');
   final compact = _compactLabel(tildeNormalized);
   final noNotes = _compactLabel(
-    tildeNormalized.replaceAll(RegExp(r'[（(].*?[)）]'), ''),
+    tildeNormalized.replaceAll(_bracketNotesRe, ''),
   );
   final japaneseCore = _extractJapaneseCore(tildeNormalized);
   final relaxedJapaneseCore = japaneseCore
-      .replaceFirst(RegExp(r'^〜の'), '〜')
-      .replaceFirst(RegExp(r'^の'), '');
+      .replaceFirst(_tildeNoRe, '〜')
+      .replaceFirst(_noLeadingRe, '');
 
   return <String>{
     tildeNormalized,
@@ -57,10 +64,10 @@ Set<String> _buildGrammarLabelKeys(String? rawValue) {
 String _compactLabel(String value) {
   return value
       .toLowerCase()
-      .replaceAll(RegExp(r'[\s\u3000\(\)（）\[\]【】「」『』:：,，.．/／・\-+]+'), '')
+      .replaceAll(_labelCompactRe, '')
       .trim();
 }
 
 String _extractJapaneseCore(String value) {
-  return value.replaceAll(RegExp(r'[^〜ぁ-ゖァ-ヶ一-龯々ー]'), '').trim();
+  return value.replaceAll(_nonJapaneseRe, '').trim();
 }

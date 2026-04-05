@@ -10,7 +10,7 @@ import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/home/providers/recovery_pack_provider.dart';
 import 'package:jpstudy/features/vocab/vocab_ghost_providers.dart';
 
-final coachSessionPlanProvider = FutureProvider<CoachSessionPlan>((ref) async {
+final coachSessionPlanProvider = Provider<CoachSessionPlan>((ref) {
   final dashboard = ref.watch(dashboardProvider).valueOrNull;
   final language = ref.watch(appLanguageProvider);
   final continueAction = ref.watch(continueActionProvider).valueOrNull;

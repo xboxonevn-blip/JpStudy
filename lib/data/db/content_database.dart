@@ -172,10 +172,11 @@ class ContentDatabase extends _$ContentDatabase {
       for (final row in rows)
         '${row.read(levelCol)}:${row.read(seriesCol)}': row.read(countExpr) ?? 0,
     };
-    for (final spec in _contentSeedSpecs) {
-      if ((counts['${spec.levelLabel}:${spec.series}'] ?? 0) == 0) {
-        await _seedVocabularyLevel(spec);
-      }
+    final missingSpecs = _contentSeedSpecs
+        .where((s) => (counts['${s.levelLabel}:${s.series}'] ?? 0) == 0)
+        .toList();
+    if (missingSpecs.isNotEmpty) {
+      await Future.wait(missingSpecs.map(_seedVocabularyLevel));
     }
 
     // Self-heal old seeded DBs that still contain placeholder/garbled rows.
@@ -198,10 +199,10 @@ class ContentDatabase extends _$ContentDatabase {
     }
   }
 
-  Future<void> _seedMinnaVocabulary() async {
-    for (final spec in _contentSeedSpecs) {
-      await _seedVocabularyLevel(spec);
-    }
+  Future<void> _seedMinnaVocabulary() {
+    // All level specs are independent — seed them concurrently so file I/O
+    // for N5, N4, and N3 overlaps. DB writes still serialize through the isolate.
+    return Future.wait(_contentSeedSpecs.map(_seedVocabularyLevel));
   }
 
   Future<void> _ensureHajimeteVocabularySeeded() async {
@@ -221,17 +222,17 @@ class ContentDatabase extends _$ContentDatabase {
     final counts = {
       for (final row in rows) row.read(levelCol)!: row.read(countExpr) ?? 0,
     };
-    for (final spec in _hajimeteSeedSpecs) {
-      if ((counts[spec.levelLabel] ?? 0) == 0) {
-        await _seedHajimeteLevel(spec);
-      }
+    final missingSpecs = _hajimeteSeedSpecs
+        .where((s) => (counts[s.levelLabel] ?? 0) == 0)
+        .toList();
+    if (missingSpecs.isNotEmpty) {
+      await Future.wait(missingSpecs.map(_seedHajimeteLevel));
     }
   }
 
-  Future<void> _seedHajimeteVocabulary() async {
-    for (final spec in _hajimeteSeedSpecs) {
-      await _seedHajimeteLevel(spec);
-    }
+  Future<void> _seedHajimeteVocabulary() {
+    // All Hajimete level specs are independent — seed them concurrently.
+    return Future.wait(_hajimeteSeedSpecs.map(_seedHajimeteLevel));
   }
 
   Future<void> _reseedHajimeteVocab() async {
@@ -354,10 +355,11 @@ class ContentDatabase extends _$ContentDatabase {
     final counts = {
       for (final row in rows) row.read(levelCol)!: row.read(countExpr) ?? 0,
     };
-    for (final spec in _contentSeedSpecs) {
-      if ((counts[spec.levelLabel] ?? 0) == 0) {
-        await _seedKanjiLevel(spec);
-      }
+    final missingKanjiSpecs = _contentSeedSpecs
+        .where((s) => (counts[s.levelLabel] ?? 0) == 0)
+        .toList();
+    if (missingKanjiSpecs.isNotEmpty) {
+      await Future.wait(missingKanjiSpecs.map(_seedKanjiLevel));
     }
   }
 
@@ -788,8 +790,10 @@ class ContentDatabase extends _$ContentDatabase {
     return level == 'N3' ? 'ShinKanzen' : 'minna';
   }
 
+  static final _seriesNormalizeRe = RegExp(r'[^a-z0-9]+');
+
   String _lessonSeriesTag(String series, int lessonId) {
-    final normalized = series.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]+'), '');
+    final normalized = series.toLowerCase().replaceAll(_seriesNormalizeRe, '');
     final prefix = normalized.isEmpty ? 'lesson' : normalized;
     return '${prefix}_$lessonId';
   }
@@ -839,49 +843,52 @@ class ContentDatabase extends _$ContentDatabase {
     await _seedMinnaKanji();
   }
 
-  Future<void> _seedMinnaKanji() async {
-    for (final spec in _contentSeedSpecs) {
-      await _seedKanjiLevel(spec);
-    }
+  Future<void> _seedMinnaKanji() {
+    // All level specs are independent — seed them concurrently.
+    return Future.wait(_contentSeedSpecs.map(_seedKanjiLevel));
   }
 
   Future<void> _backfillKanjiDecompositionFromCanonical() async {
+    // Create all file-load futures before any await — pure IO, no deps between
+    // lessons, so all reads start concurrently in the event loop.
+    final rowFutures = <Future<List<Map<String, dynamic>>>>[];
+    final lessonIds = <int>[];
     for (final spec in _contentSeedSpecs) {
       for (
         var lessonId = spec.startLesson;
         lessonId <= spec.endLesson;
         lessonId++
       ) {
-        final rows = await _loadCanonicalKanjiRows(
-          levelLower: spec.levelLower,
-          lessonId: lessonId,
+        lessonIds.add(lessonId);
+        rowFutures.add(
+          _loadCanonicalKanjiRows(
+            levelLower: spec.levelLower,
+            lessonId: lessonId,
+          ),
         );
-        if (rows.isEmpty) {
-          continue;
-        }
-
-        await batch((batch) {
-          for (final row in rows) {
-            final character = _readText(row, 'character');
-            final decompositionJson = _readNullableText(
-              row,
-              'decomposition_json',
-            );
-            if (character.isEmpty || decompositionJson == null) {
-              continue;
-            }
-
-            batch.update(
-              kanji,
-              KanjiCompanion(decompositionJson: Value(decompositionJson)),
-              where: (tbl) =>
-                  tbl.lessonId.equals(lessonId) &
-                  tbl.character.equals(character),
-            );
-          }
-        });
       }
     }
+
+    final allRowLists = await Future.wait(rowFutures);
+
+    // Single batch for all decomposition updates across every level/lesson.
+    await batch((b) {
+      for (var i = 0; i < lessonIds.length; i++) {
+        final lessonId = lessonIds[i];
+        for (final row in allRowLists[i]) {
+          final character = _readText(row, 'character');
+          final decompositionJson = _readNullableText(row, 'decomposition_json');
+          if (character.isEmpty || decompositionJson == null) continue;
+          b.update(
+            kanji,
+            KanjiCompanion(decompositionJson: Value(decompositionJson)),
+            where: (tbl) =>
+                tbl.lessonId.equals(lessonId) &
+                tbl.character.equals(character),
+          );
+        }
+      }
+    });
   }
 
   Future<List<Map<String, dynamic>>> _loadCanonicalKanjiRows({

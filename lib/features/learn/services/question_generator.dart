@@ -74,9 +74,10 @@ class QuestionGenerator {
     // Round 2: Weak terms as fill-in-blank (harder)
     // Round 3+: Mix of types for remaining weak terms
 
+    final weakSet = weakTermIds.toSet();
     final targetItems = round == 1
         ? items
-        : items.where((item) => weakTermIds.contains(item.id)).toList();
+        : items.where((item) => weakSet.contains(item.id)).toList();
 
     if (targetItems.isEmpty) return [];
 

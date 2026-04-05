@@ -76,7 +76,7 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
     final nextKanjiReview = ref.watch(nextKanjiReviewProvider).valueOrNull;
     final nextGrammarReview = ref.watch(nextGrammarReviewProvider).valueOrNull;
 
-    final coachPlan = ref.watch(coachSessionPlanProvider).valueOrNull;
+    final coachPlan = ref.watch(coachSessionPlanProvider);
 
     final totalDue =
         (dashboard?.vocabDue ?? 0) +

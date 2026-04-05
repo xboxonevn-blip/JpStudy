@@ -129,8 +129,10 @@ String userTermIdentityKey(UserLessonTermData term) {
   ].join('|');
 }
 
+final _whitespaceRe = RegExp(r'\s+');
+
 String normalizeHajimeteKeyPart(String value) {
-  return value.trim().replaceAll(RegExp(r'\s+'), ' ').toLowerCase();
+  return value.trim().replaceAll(_whitespaceRe, ' ').toLowerCase();
 }
 
 double? hajimeteRetrievabilityForItem(
