@@ -1,3 +1,4 @@
+import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/features/grammar/screens/grammar_practice_screen.dart';
@@ -69,7 +70,10 @@ void main() {
       item: item,
     );
 
-    expect(presentation.launchTarget.route, equals('/grammar-practice'));
+    expect(
+      presentation.launchTarget.route,
+      equals(AppRoutePath.grammarPractice),
+    );
     expect(presentation.phaseLabel, equals('Timed'));
 
     final extra = presentation.launchTarget.extra! as Map<String, Object?>;
@@ -93,7 +97,7 @@ void main() {
     );
 
     expect(presentation.phaseLabel, equals('Coverage'));
-    expect(presentation.launchTarget.route, equals('/immersion'));
+    expect(presentation.launchTarget.route, equals(AppRoutePath.immersion));
     expect(presentation.actionLabel, equals('Open immersion'));
   });
 
@@ -135,7 +139,7 @@ void main() {
       item: item,
     );
 
-    expect(presentation.launchTarget.route, equals('/kanji/practice'));
+    expect(presentation.launchTarget.route, equals(AppRoutePath.kanjiPractice));
     expect(presentation.actionLabel, equals('Open handwriting'));
     expect(presentation.launchTarget.extra, isA<KanjiPracticeArgs>());
 

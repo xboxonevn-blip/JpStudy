@@ -32,7 +32,22 @@ void main() {
     final decoded =
         jsonDecode(written.readAsStringSync()) as Map<String, dynamic>;
     expect(decoded['summary']['sampleCount'], 10);
+    expect(decoded['summary']['falsePositiveCount'], 0);
+    expect(decoded['summary']['falseNegativeCount'], 0);
     expect((decoded['cases'] as List<dynamic>).length, 10);
+    expect(
+      (decoded['cases'] as List<dynamic>)
+          .whereType<Map<String, dynamic>>()
+          .every((caseReport) => caseReport['passed'] == true),
+      isTrue,
+    );
+    expect(decoded['summary']['topFailureBuckets'], isEmpty);
+    expect(
+      (decoded['summary']['passRateByGeneratorKind'] as List<dynamic>)
+          .whereType<Map<String, dynamic>>()
+          .every((entry) => entry['passRate'] == 1.0),
+      isTrue,
+    );
     expect(
       writtenMarkdown.readAsStringSync(),
       contains('# Handwriting Measurement Audit Summary'),

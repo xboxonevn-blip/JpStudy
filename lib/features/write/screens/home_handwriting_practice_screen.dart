@@ -226,8 +226,9 @@ class _SessionHeader extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final palette = context.appPalette;
-    final dashboard = ref.watch(dashboardProvider).valueOrNull;
-    final kanjiDue = dashboard?.kanjiDue ?? 0;
+    final kanjiDue = ref.watch(
+      dashboardProvider.select((v) => v.valueOrNull?.kanjiDue ?? 0),
+    );
 
     final Color accent;
     final IconData icon;

@@ -1,3 +1,4 @@
+import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/features/grammar/screens/grammar_practice_screen.dart';
 import 'package:jpstudy/features/kanji_hub/models/kanji_practice_args.dart';
@@ -214,7 +215,7 @@ JlptPlanPresentation _vocabResetPresentation(
     },
     actionLabel: jlptActionOpenRepairCheck(language),
     launchTarget: JlptPlanLaunchTarget(
-      route: '/practice/mock-exam',
+      route: AppRoutePath.practiceMockExam,
       extra: HomeMockExamLaunchArgs(
         titleOverride: switch (language) {
           AppLanguage.en => 'Vocab repair check',
@@ -253,7 +254,7 @@ JlptPlanPresentation _vocabAccuracyPresentation(
     },
     actionLabel: jlptActionOpenPrecisionCheck(language),
     launchTarget: JlptPlanLaunchTarget(
-      route: '/practice/mock-exam',
+      route: AppRoutePath.practiceMockExam,
       extra: HomeMockExamLaunchArgs(
         titleOverride: switch (language) {
           AppLanguage.en => 'Vocab precision check',
@@ -293,7 +294,7 @@ JlptPlanPresentation _vocabSpeedPresentation(
     },
     actionLabel: jlptActionOpenTimedCheck(language),
     launchTarget: JlptPlanLaunchTarget(
-      route: '/practice/mock-exam',
+      route: AppRoutePath.practiceMockExam,
       extra: HomeMockExamLaunchArgs(
         titleOverride: switch (language) {
           AppLanguage.en => 'Timed vocab check',
@@ -339,7 +340,7 @@ JlptPlanPresentation _vocabTimedPresentation(
     },
     actionLabel: jlptActionOpenCoverageCheck(language),
     launchTarget: JlptPlanLaunchTarget(
-      route: '/practice/mock-exam',
+      route: AppRoutePath.practiceMockExam,
       extra: HomeMockExamLaunchArgs(
         titleOverride: switch (language) {
           AppLanguage.en => 'Timed vocab consolidation',
@@ -373,7 +374,7 @@ JlptPlanPresentation _vocabCheckpointPresentation(
     },
     actionLabel: jlptActionOpenCheckpoint(language),
     launchTarget: JlptPlanLaunchTarget(
-      route: '/practice/mock-exam',
+      route: AppRoutePath.practiceMockExam,
       extra: HomeMockExamLaunchArgs(
         titleOverride: switch (language) {
           AppLanguage.en => 'Vocab checkpoint',
@@ -420,7 +421,7 @@ JlptPlanPresentation _grammarAccuracyPresentation(
     },
     actionLabel: jlptActionOpenGrammarDrill(language),
     launchTarget: const JlptPlanLaunchTarget(
-      route: '/grammar-practice',
+      route: AppRoutePath.grammarPractice,
       extra: {
         'sessionType': GrammarSessionType.mastery,
         'blueprint': GrammarPracticeBlueprint.drill,
@@ -451,7 +452,7 @@ JlptPlanPresentation _grammarSpeedPresentation(
     },
     actionLabel: jlptActionOpenSpeedQuiz(language),
     launchTarget: const JlptPlanLaunchTarget(
-      route: '/grammar-practice',
+      route: AppRoutePath.grammarPractice,
       extra: {
         'sessionType': GrammarSessionType.quick,
         'blueprint': GrammarPracticeBlueprint.quiz,
@@ -481,7 +482,7 @@ JlptPlanPresentation _grammarCoveragePresentation(
     },
     actionLabel: jlptActionOpenFillBlankDrill(language),
     launchTarget: const JlptPlanLaunchTarget(
-      route: '/grammar-practice',
+      route: AppRoutePath.grammarPractice,
       extra: {
         'sessionType': GrammarSessionType.mastery,
         'blueprint': GrammarPracticeBlueprint.learn,
@@ -512,7 +513,7 @@ JlptPlanPresentation _grammarTimedPresentation(
     },
     actionLabel: jlptActionOpenTimedGrammar(language),
     launchTarget: const JlptPlanLaunchTarget(
-      route: '/grammar-practice',
+      route: AppRoutePath.grammarPractice,
       extra: {
         'sessionType': GrammarSessionType.mock,
         'blueprint': GrammarPracticeBlueprint.quiz,
@@ -542,7 +543,7 @@ JlptPlanPresentation _grammarCheckpointPresentation(
     },
     actionLabel: jlptActionOpenCheckpoint(language),
     launchTarget: const JlptPlanLaunchTarget(
-      route: '/grammar-practice',
+      route: AppRoutePath.grammarPractice,
       extra: {
         'sessionType': GrammarSessionType.quick,
         'blueprint': GrammarPracticeBlueprint.quiz,
@@ -572,7 +573,7 @@ JlptPlanPresentation _kanjiResetPresentation(
     },
     actionLabel: jlptActionOpenHandwriting(language),
     launchTarget: const JlptPlanLaunchTarget(
-      route: '/kanji/practice',
+      route: AppRoutePath.kanjiPractice,
       extra: KanjiPracticeArgs(
         mode: KanjiPracticeMode.write,
         levelCode: 'N5',
@@ -610,7 +611,7 @@ JlptPlanPresentation _kanjiSpeedPresentation(
     },
     actionLabel: jlptActionOpenKanjiPractice(language),
     launchTarget: const JlptPlanLaunchTarget(
-      route: '/kanji/practice',
+      route: AppRoutePath.kanjiPractice,
       extra: KanjiPracticeArgs(
         mode: KanjiPracticeMode.both,
         levelCode: 'N5',
@@ -640,7 +641,7 @@ JlptPlanPresentation _kanjiCoveragePresentation(
     },
     actionLabel: jlptActionOpenKanjiReading(language),
     launchTarget: const JlptPlanLaunchTarget(
-      route: '/kanji/practice',
+      route: AppRoutePath.kanjiPractice,
       extra: KanjiPracticeArgs(
         mode: KanjiPracticeMode.read,
         levelCode: 'N5',
@@ -705,7 +706,7 @@ JlptPlanPresentation _readingCoveragePresentation(
         '${item.minutes}分のイマージョンで、重いドリル日の合間にも実際の日本語に目を慣らしておきます。',
     },
     actionLabel: jlptActionOpenImmersion(language),
-    launchTarget: const JlptPlanLaunchTarget(route: '/immersion'),
+    launchTarget: const JlptPlanLaunchTarget(route: AppRoutePath.immersion),
   );
 }
 
@@ -728,7 +729,7 @@ JlptPlanPresentation _readingTimedPresentation(
       AppLanguage.ja => '${item.minutes}分の読解ドリルで、タイマーが見えていても理解と速度を安定させます。',
     },
     actionLabel: jlptActionOpenReadingDrill(language),
-    launchTarget: const JlptPlanLaunchTarget(route: '/jlpt/reading'),
+    launchTarget: const JlptPlanLaunchTarget(route: AppRoutePath.jlptReading),
   );
 }
 
@@ -759,6 +760,6 @@ JlptPlanPresentation _readingMiniMockPresentation(
         '${item.minutes}分の読解中心チェックで、今週の補強が本番の動きに変わったかを確かめて締めます。',
     },
     actionLabel: jlptActionOpenFinalReadingCheck(language),
-    launchTarget: const JlptPlanLaunchTarget(route: '/jlpt/reading'),
+    launchTarget: const JlptPlanLaunchTarget(route: AppRoutePath.jlptReading),
   );
 }

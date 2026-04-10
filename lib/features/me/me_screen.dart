@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:jpstudy/app/theme/app_breakpoints.dart';
@@ -58,13 +58,13 @@ class _MeScreenState extends ConsumerState<MeScreen> {
         title: _title(language),
         subtitle: _summaryCaption(language, summary),
         primaryLabel: _manageDataLabel(language),
-        onPrimaryTap: () => context.push('/me/data'),
+        onPrimaryTap: () => context.openMeData(),
         secondaryLabel: switch (language) {
           AppLanguage.en => 'Progress',
           AppLanguage.vi => 'Tiến độ',
           AppLanguage.ja => '進捗',
         },
-        onSecondaryTap: () => context.push('/progress'),
+        onSecondaryTap: () => context.openProgress(),
         status: AppStatusChip(
           label: level.shortLabel,
           tone: AppStatusTone.primary,
@@ -248,7 +248,7 @@ class _MeScreenState extends ConsumerState<MeScreen> {
             icon: Icons.schedule_outlined,
             title: language.autoBackupLabel,
             subtitle: _autoBackupSubtitle(language, dataSettings),
-            onTap: () => context.push('/me/data'),
+            onTap: () => context.openMeData(),
           ),
           const SizedBox(height: 10),
           cloudStatusAsync.when(
@@ -260,24 +260,24 @@ class _MeScreenState extends ConsumerState<MeScreen> {
                 language,
                 status,
               ),
-              onTap: () => context.push('/me/data'),
+              onTap: () => context.openMeData(),
             ),
             loading: () => _InlineActionTile(
               icon: Icons.cloud_sync_outlined,
               title: dataSettingsController.cloudSyncLabel(language),
               subtitle: dataSettingsController.cloudSyncLoadingLabel(language),
-              onTap: () => context.push('/me/data'),
+              onTap: () => context.openMeData(),
             ),
             error: (error, stackTrace) => _InlineActionTile(
               icon: Icons.cloud_sync_outlined,
               title: dataSettingsController.cloudSyncLabel(language),
               subtitle: dataSettingsController.cloudSyncLoadingLabel(language),
-              onTap: () => context.push('/me/data'),
+              onTap: () => context.openMeData(),
             ),
           ),
           const SizedBox(height: 12),
           FilledButton.icon(
-            onPressed: () => context.push('/me/data'),
+            onPressed: () => context.openMeData(),
             icon: const Icon(Icons.storage_rounded),
             label: Text(_manageDataLabel(language)),
           ),
@@ -292,35 +292,35 @@ class _MeScreenState extends ConsumerState<MeScreen> {
             icon: Icons.insights_outlined,
             title: language.progressTitle,
             subtitle: _progressHint(language),
-            onTap: () => context.push('/progress'),
+            onTap: () => context.openProgress(),
           ),
           const SizedBox(height: 10),
           _ActionTile(
             icon: Icons.military_tech_outlined,
             title: _masteryTitle(language),
             subtitle: _masteryHint(language),
-            onTap: () => context.push('/mastery'),
+            onTap: () => context.openMastery(),
           ),
           const SizedBox(height: 10),
           _ActionTile(
             icon: Icons.calendar_month_outlined,
             title: _forecastTitle(language),
             subtitle: _forecastHint(language),
-            onTap: () => context.push('/forecast'),
+            onTap: () => context.openForecast(),
           ),
           const SizedBox(height: 10),
           _ActionTile(
             icon: Icons.emoji_events_outlined,
             title: language.achievementsTitle,
             subtitle: _achievementsHint(language),
-            onTap: () => context.push('/achievements'),
+            onTap: () => context.openAchievements(),
           ),
           const SizedBox(height: 10),
           _ActionTile(
             icon: Icons.design_services_outlined,
             title: language.designLabLabel,
             subtitle: language.designLabSubtitle,
-            onTap: () => context.push('/design-lab'),
+            onTap: () => context.openDesignLab(),
           ),
         ],
       ),
@@ -406,7 +406,7 @@ class _MeScreenState extends ConsumerState<MeScreen> {
       return;
     }
     ref.read(onboardingDoneProvider.notifier).state = false;
-    context.go('/today');
+    context.openToday();
   }
 
   String _formatTime(TimeOfDay time) {

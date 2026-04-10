@@ -1,3 +1,5 @@
+import 'package:jpstudy/app/navigation/app_route_locations.dart';
+import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/core/app_language.dart';
@@ -24,7 +26,14 @@ final progressCoachBoardProvider = FutureProvider<ProgressCoachBoard>((
   final reviewHistoryFuture = ref.watch(reviewHistoryProvider.future);
   final attemptHistoryFuture = ref.watch(attemptHistoryProvider.future);
   final retentionFuture = ref.watch(srsRetentionProvider.future);
-  final dashboard = ref.watch(dashboardProvider).valueOrNull;
+  // Subscribe only to the due/mistake counts; streak/XP changes won't retrigger.
+  ref.watch(
+    dashboardProvider.select((v) {
+      final d = v.valueOrNull;
+      return (d?.vocabDue ?? 0, d?.grammarDue ?? 0, d?.kanjiDue ?? 0);
+    }),
+  );
+  final dashboard = ref.read(dashboardProvider).valueOrNull;
 
   final summary = await summaryFuture;
   final reviewHistory = await reviewHistoryFuture;
@@ -288,7 +297,7 @@ ProgressCoachAction? _nextLessonAction(
       ja: '復習圧が低い今のうちに新しいレッスンを進めましょう。',
     ),
     ctaLabel: _l(language, en: 'Open lesson', vi: 'Mở bài học', ja: 'レッスンへ'),
-    route: '/lesson/$lessonId',
+    route: AppRouteLocation.lessonDetail(lessonId),
     icon: Icons.play_lesson_rounded,
     color: const Color(0xFF16A34A),
     badge: _l(language, en: 'Deepen', vi: 'Đào sâu', ja: '深掘り'),
@@ -325,7 +334,7 @@ ProgressCoachAction? _actionFromContinue({
           vi: 'Mở ngữ pháp',
           ja: '文法へ',
         ),
-        route: '/grammar-practice',
+        route: AppRoutePath.grammarPractice,
         extra: extra,
         icon: Icons.auto_stories_rounded,
         color: const Color(0xFF7C3AED),
@@ -351,7 +360,7 @@ ProgressCoachAction? _actionFromContinue({
           vi: 'Mở lỗi sai',
           ja: 'ミスへ',
         ),
-        route: '/mistakes',
+        route: AppRoutePath.mistakes,
         icon: Icons.healing_rounded,
         color: const Color(0xFFDC2626),
       );
@@ -371,7 +380,7 @@ ProgressCoachAction? _actionFromContinue({
           ja: '急ぎがなくても毎日の接触を途切れさせないようにしましょう。',
         ),
         ctaLabel: _l(language, en: 'Open study', vi: 'Mở khu học', ja: '学習へ'),
-        route: '/study',
+        route: AppRoutePath.study,
         icon: Icons.layers_clear_rounded,
         color: const Color(0xFF0F766E),
       );
@@ -415,7 +424,7 @@ ProgressCoachAction _examAction(
       vi: 'Mở JLPT Coach',
       ja: 'JLPT Coachへ',
     ),
-    route: '/jlpt/coach',
+    route: AppRoutePath.jlptCoach,
     icon: Icons.school_rounded,
     color: const Color(0xFFD97706),
     badge: level.shortLabel,
@@ -438,7 +447,7 @@ ProgressCoachAction _immersionAction(AppLanguage language) {
       ja: '短く読んで未知語を保存し、学習ループを保ちましょう。',
     ),
     ctaLabel: _l(language, en: 'Open immersion', vi: 'Mở immersion', ja: '没入へ'),
-    route: '/immersion',
+    route: AppRoutePath.immersion,
     icon: Icons.article_rounded,
     color: const Color(0xFF059669),
   );
@@ -693,31 +702,33 @@ ProgressCoachSignal _buildPerformanceSignal({
   required DashboardState? dashboard,
   required ContinueAction? continueAction,
 }) {
+  VocabReviewArgs buildVocabArgs() {
+    return VocabReviewArgs(
+      source: 'progress_due',
+      levelCode: level.shortLabel,
+      title: language.vocabReviewTitle(level.shortLabel),
+      subtitle: _l(
+        language,
+        en: 'Due queue from progress',
+        vi: 'H??ng ?????i ?????n h???n t??? ti???n ?????',
+        ja: '?????????????????????????????????',
+      ),
+    );
+  }
+
   switch (continueAction?.type) {
     case ContinueActionType.grammarReview:
       final ids = continueAction?.data;
       return (
-        route: '/grammar-practice',
+        route: AppRoutePath.grammarPractice,
         extra: ids is List ? List<int>.from(ids) : null,
       );
     case ContinueActionType.vocabReview:
-      return (
-        route: '/vocab/review',
-        extra: VocabReviewArgs(
-          source: 'progress_due',
-          levelCode: level.shortLabel,
-          title: language.vocabReviewTitle(level.shortLabel),
-          subtitle: _l(
-            language,
-            en: 'Due queue from progress',
-            vi: 'Hàng đợi đến hạn từ tiến độ',
-            ja: '進捗から開く期限キュー',
-          ),
-        ),
-      );
+      final args = buildVocabArgs();
+      return (route: AppRouteLocation.vocabReview(args: args), extra: args);
     case ContinueActionType.kanjiReview:
       return (
-        route: '/kanji/practice',
+        route: AppRoutePath.kanjiPractice,
         extra: KanjiPracticeArgs(
           mode: KanjiPracticeMode.both,
           levelCode: level.shortLabel,
@@ -735,26 +746,14 @@ ProgressCoachSignal _buildPerformanceSignal({
   final vocabDue = dashboard?.vocabDue ?? 0;
   final kanjiDue = dashboard?.kanjiDue ?? 0;
   if (grammarDue >= vocabDue && grammarDue >= kanjiDue && grammarDue > 0) {
-    return (route: '/grammar-practice', extra: null);
+    return (route: AppRoutePath.grammarPractice, extra: null);
   }
   if (vocabDue >= kanjiDue && vocabDue > 0) {
-    return (
-      route: '/vocab/review',
-      extra: VocabReviewArgs(
-        source: 'progress_due',
-        levelCode: level.shortLabel,
-        title: language.vocabReviewTitle(level.shortLabel),
-        subtitle: _l(
-          language,
-          en: 'Due queue from progress',
-          vi: 'Hàng đợi đến hạn từ tiến độ',
-          ja: '進捗から開く期限キュー',
-        ),
-      ),
-    );
+    final args = buildVocabArgs();
+    return (route: AppRouteLocation.vocabReview(args: args), extra: args);
   }
   return (
-    route: '/kanji/practice',
+    route: AppRoutePath.kanjiPractice,
     extra: KanjiPracticeArgs(
       mode: KanjiPracticeMode.both,
       levelCode: level.shortLabel,

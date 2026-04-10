@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/app/theme/app_breakpoints.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
@@ -21,13 +22,14 @@ class PracticeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final language = ref.watch(appLanguageProvider);
     final level = ref.watch(studyLevelProvider);
-    final dashboard = ref.watch(dashboardProvider).valueOrNull;
-    final sessionBoard = ref.watch(practiceSessionBoardProvider);
-    final vocabDue = dashboard?.vocabDue ?? 0;
-    final grammarDue = dashboard?.grammarDue ?? 0;
-    final kanjiDue = dashboard?.kanjiDue ?? 0;
+    final (vocabDue, grammarDue, kanjiDue, mistakeCount) = ref.watch(
+      dashboardProvider.select((v) {
+        final d = v.valueOrNull;
+        return (d?.vocabDue ?? 0, d?.grammarDue ?? 0, d?.kanjiDue ?? 0, d?.totalMistakeCount ?? 0);
+      }),
+    );
     final dueCount = vocabDue + grammarDue + kanjiDue;
-    final mistakeCount = dashboard?.totalMistakeCount ?? 0;
+    final sessionBoard = ref.watch(practiceSessionBoardProvider);
     final grammarGhostCount = sessionBoard.grammarGhostCount;
     final repairCount = sessionBoard.repairCount;
 
@@ -49,7 +51,7 @@ class PracticeScreen extends ConsumerWidget {
         actions: [
           IconButton(
             tooltip: _searchLabel(language),
-            onPressed: () => context.push('/search'),
+            onPressed: () => context.openSearch(),
             icon: const Icon(Icons.search_rounded),
           ),
         ],
@@ -94,7 +96,7 @@ class PracticeScreen extends ConsumerWidget {
                   primaryAction: sessionBoard.primaryAction,
                   onPrimaryTap: () =>
                       _openAction(context, sessionBoard.primaryAction),
-                  onSecondaryTap: () => context.push('/jlpt/coach'),
+                  onSecondaryTap: () => context.openJlptCoach(),
                 ),
                 const SizedBox(height: AppSpacing.md),
                 _StudyPanel(
@@ -144,7 +146,7 @@ class PracticeScreen extends ConsumerWidget {
                     icon: Icons.library_books_rounded,
                     title: _studyHubLabel(language),
                     subtitle: _studyHubSubtitle(language),
-                    onTap: () => context.push('/study-hub'),
+                    onTap: () => context.openStudyHub(),
                   ),
                 ),
                 if (remainingTools.isNotEmpty) ...[

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
@@ -29,11 +30,17 @@ class PracticeHub extends ConsumerWidget {
     final ghostCount = ref
         .watch(grammarGhostCountProvider)
         .maybeWhen(data: (count) => count, orElse: () => 0);
-    final dashboard = ref.watch(dashboardProvider).valueOrNull;
-    final mistakeCount = dashboard?.totalMistakeCount ?? 0;
-    final vocabDue = dashboard?.vocabDue ?? 0;
-    final grammarDue = dashboard?.grammarDue ?? 0;
-    final kanjiDue = dashboard?.kanjiDue ?? 0;
+    final (mistakeCount, vocabDue, grammarDue, kanjiDue) = ref.watch(
+      dashboardProvider.select((v) {
+        final d = v.valueOrNull;
+        return (
+          d?.totalMistakeCount ?? 0,
+          d?.vocabDue ?? 0,
+          d?.grammarDue ?? 0,
+          d?.kanjiDue ?? 0,
+        );
+      }),
+    );
     final totalDue = vocabDue + grammarDue + kanjiDue;
     final level = ref.watch(studyLevelProvider);
 
@@ -101,6 +108,7 @@ class _PracticeHubContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Padding(
       padding: EdgeInsets.fromLTRB(
         embedded ? 0 : 14,
@@ -129,9 +137,9 @@ class _PracticeHubContent extends StatelessWidget {
                       end: Alignment.bottomRight,
                     ),
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.rocket_launch_rounded,
-                    color: Color(0xFF0F766E),
+                    color: palette.secondary,
                     size: 18,
                   ),
                 ),
@@ -145,16 +153,16 @@ class _PracticeHubContent extends StatelessWidget {
                         style: TextStyle(
                           fontSize: embedded ? 14 : 18,
                           fontWeight: FontWeight.w800,
-                          color: const Color(0xFF0F172A),
+                          color: palette.ink,
                         ),
                       ),
                       if (!embedded) ...[
                         const SizedBox(height: 2),
                         Text(
                           language.practiceHubSubtitle,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 12.5,
-                            color: Color(0xFF64748B),
+                            color: palette.ink.withValues(alpha: 0.55),
                           ),
                         ),
                       ],
@@ -304,6 +312,7 @@ class _PracticeTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Material(
       color: Colors.transparent,
       borderRadius: BorderRadius.circular(compact ? 14 : 16),
@@ -313,7 +322,7 @@ class _PracticeTile extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.all(compact ? 8 : 12),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: palette.elevated,
             borderRadius: BorderRadius.circular(compact ? 14 : 16),
             border: Border.all(color: HomeSurface.panelBorder),
             boxShadow: const [
@@ -351,7 +360,7 @@ class _PracticeTile extends StatelessWidget {
                         vertical: compact ? 1.5 : 2,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFEF4444),
+                        color: palette.error,
                         borderRadius: BorderRadius.circular(999),
                       ),
                       child: Text(
@@ -373,7 +382,7 @@ class _PracticeTile extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.w800,
                   fontSize: compact ? 12.2 : 14,
-                  color: const Color(0xFF0F172A),
+                  color: palette.ink,
                 ),
               ),
               SizedBox(height: compact ? 1 : 2),
@@ -383,7 +392,7 @@ class _PracticeTile extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontSize: compact ? 10.6 : 12,
-                  color: const Color(0xFF64748B),
+                  color: palette.ink.withValues(alpha: 0.55),
                   height: 1.15,
                 ),
               ),
@@ -394,7 +403,7 @@ class _PracticeTile extends StatelessWidget {
                   '~${item.estimatedMinutes} min',
                   style: TextStyle(
                     fontSize: compact ? 9.8 : 11,
-                    color: const Color(0xFF94A3B8),
+                    color: palette.ink.withValues(alpha: 0.55),
                     fontWeight: FontWeight.w600,
                   ),
                 ),

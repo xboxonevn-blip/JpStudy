@@ -1,3 +1,5 @@
+import 'package:jpstudy/app/navigation/app_route_locations.dart';
+import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/core/app_language.dart';
@@ -18,7 +20,19 @@ import 'package:jpstudy/features/vocab/vocab_copy.dart';
 final practiceSessionBoardProvider = Provider<PracticeSessionBoard>((ref) {
   final language = ref.watch(appLanguageProvider);
   final level = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
-  final dashboard = ref.watch(dashboardProvider).valueOrNull;
+  // Subscribe only to the fields that affect the board; streak/XP won't retrigger.
+  ref.watch(
+    dashboardProvider.select((v) {
+      final d = v.valueOrNull;
+      return (
+        d?.vocabDue ?? 0,
+        d?.grammarDue ?? 0,
+        d?.kanjiDue ?? 0,
+        d?.totalMistakeCount ?? 0,
+      );
+    }),
+  );
+  final dashboard = ref.read(dashboardProvider).valueOrNull;
   final continueAction = ref.watch(continueActionProvider).valueOrNull;
   final weaknessItems =
       ref.watch(weaknessRadarProvider).valueOrNull ?? const [];
@@ -289,43 +303,43 @@ PracticeSessionAction _recallSprintAction({
       en: '${pieces.join(' · ')} are all pulling at once. Sweep the mixed queue before choosing a deeper lane.',
       vi: '${pieces.join(' · ')} đang kéo cùng lúc. Quét nhanh hàng đợi tổng hợp trước rồi mới vào lane sâu hơn.',
       ja: '${pieces.join(' · ')} が同時に動いています。先に混合キューを一掃してから深いレーンへ進みましょう。',
+    ),
+    ctaLabel: _l(language, en: 'Open sprint', vi: 'Mở sprint', ja: 'スプリント開始'),
+    route: AppRoutePath.practiceRecallSprint,
+    extra: RecallSprintArgs(
+      strategy: preferredTermIds.isNotEmpty
+          ? RecallSprintStrategy.weakVocab
+          : RecallSprintStrategy.mixedDue,
+      preferredTermIds: preferredTermIds,
+      batchSize: 5,
+      titleOverride: _l(
+        language,
+        en: 'Recall Sprint',
+        vi: 'Recall Sprint',
+        ja: 'リコールスプリント',
       ),
-      ctaLabel: _l(language, en: 'Open sprint', vi: 'Mở sprint', ja: 'スプリント開始'),
-      route: '/practice/recall-sprint',
-      extra: RecallSprintArgs(
-        strategy: preferredTermIds.isNotEmpty
-            ? RecallSprintStrategy.weakVocab
-            : RecallSprintStrategy.mixedDue,
-        preferredTermIds: preferredTermIds,
-        batchSize: 5,
-        titleOverride: _l(
-          language,
-          en: 'Recall Sprint',
-          vi: 'Recall Sprint',
-          ja: 'リコールスプリント',
-        ),
-        subtitleOverride: preferredTermIds.isNotEmpty
-            ? _l(
-                language,
-                en: 'Start with the due vocabulary that is still shaky.',
-                vi: 'Bắt đầu từ những từ đến hạn nhưng vẫn chưa chắc.',
-                ja: '期限が来ていて、まだ不安定な語彙から先に入ります。',
-              )
-            : _l(
-                language,
-                en: 'Run a fast mixed pass across the live review queue.',
-                vi: 'Chạy một lượt nhanh trên hàng đợi review đang mở.',
-                ja: '動いているレビューキューを短く横断します。',
-              ),
-      ),
-      icon: Icons.bolt_rounded,
-      color: const Color(0xFF7C3AED),
-      badge: _l(language, en: 'Do this now', vi: 'Làm ngay', ja: '今やる'),
-      estimatedMinutes: dueCount > 0
-          ? (dueCount * 6 / 60).ceil().clamp(5, 20)
-          : 5,
-    );
-  }
+      subtitleOverride: preferredTermIds.isNotEmpty
+          ? _l(
+              language,
+              en: 'Start with the due vocabulary that is still shaky.',
+              vi: 'Bắt đầu từ những từ đến hạn nhưng vẫn chưa chắc.',
+              ja: '期限が来ていて、まだ不安定な語彙から先に入ります。',
+            )
+          : _l(
+              language,
+              en: 'Run a fast mixed pass across the live review queue.',
+              vi: 'Chạy một lượt nhanh trên hàng đợi review đang mở.',
+              ja: '動いているレビューキューを短く横断します。',
+            ),
+    ),
+    icon: Icons.bolt_rounded,
+    color: const Color(0xFF7C3AED),
+    badge: _l(language, en: 'Do this now', vi: 'Làm ngay', ja: '今やる'),
+    estimatedMinutes: dueCount > 0
+        ? (dueCount * 6 / 60).ceil().clamp(5, 20)
+        : 5,
+  );
+}
 
 List<int> _preferredRecallSprintIds(List<WeaknessRadarItem> weaknessItems) {
   for (final item in weaknessItems) {
@@ -366,7 +380,7 @@ PracticeSessionAction _specificDueAction({
           vi: 'Mở ngữ pháp',
           ja: '文法へ',
         ),
-        route: '/grammar-practice',
+        route: AppRoutePath.grammarPractice,
         extra: ids is List ? List<int>.from(ids) : null,
         icon: Icons.auto_stories_rounded,
         color: const Color(0xFF7C3AED),
@@ -393,16 +407,17 @@ PracticeSessionAction _specificDueAction({
           ja: '${dashboard?.vocabDue ?? 0}件の語彙カードが待っています。',
         ),
         ctaLabel: _l(language, en: 'Open vocab', vi: 'Mở từ vựng', ja: '語彙へ'),
-        route: '/vocab/review',
-        extra: VocabReviewArgs(
-          source: 'practice_board',
-          levelCode: level.shortLabel,
-          title: language.vocabReviewTitle(level.shortLabel),
-          subtitle: _l(
-            language,
-            en: 'Due vocab queue from today\'s board',
-            vi: 'Hàng đợi từ vựng đến hạn từ bảng hôm nay',
-            ja: '今日のボードから開く語彙レビュー',
+        route: AppRouteLocation.vocabReview(
+          args: VocabReviewArgs(
+            source: 'practice_board',
+            levelCode: level.shortLabel,
+            title: language.vocabReviewTitle(level.shortLabel),
+            subtitle: _l(
+              language,
+              en: 'Due vocab queue from today\'s board',
+              vi: 'Hàng đợi từ vựng đến hạn từ bảng hôm nay',
+              ja: '今日のボードから開く語彙レビュー',
+            ),
           ),
         ),
         icon: Icons.translate_rounded,
@@ -430,7 +445,7 @@ PracticeSessionAction _specificDueAction({
           ja: '${dashboard?.kanjiDue ?? 0}件の漢字レビューが残っています。',
         ),
         ctaLabel: _l(language, en: 'Open kanji', vi: 'Mở kanji', ja: '漢字へ'),
-        route: '/kanji/practice',
+        route: AppRoutePath.kanjiPractice,
         extra: KanjiPracticeArgs(
           mode: KanjiPracticeMode.both,
           levelCode: level.shortLabel,
@@ -467,7 +482,7 @@ PracticeSessionAction _specificDueAction({
       ja: 'すでに注意を求めているキューから始めましょう。',
     ),
     ctaLabel: _l(language, en: 'Open review', vi: 'Mở review', ja: 'レビューへ'),
-    route: '/practice/recall-sprint',
+    route: AppRoutePath.practiceRecallSprint,
     icon: Icons.schedule_rounded,
     color: const Color(0xFF2563EB),
     badge: _l(language, en: 'Due lane', vi: 'Lane đến hạn', ja: '期限レーン'),
@@ -520,7 +535,7 @@ PracticeSessionAction _grammarGhostAction(AppLanguage language, int count) {
       ja: '$count件の弱い文法ポイントは今なら素早く補強できます。',
     ),
     ctaLabel: _l(language, en: 'Open ghosts', vi: 'Mở ghost', ja: 'ゴーストへ'),
-    route: '/grammar-practice',
+    route: AppRoutePath.grammarPractice,
     extra: GrammarPracticeMode.ghost,
     icon: Icons.auto_fix_high_rounded,
     color: const Color(0xFFF43F5E),
@@ -545,7 +560,7 @@ PracticeSessionAction _mistakeBankAction(AppLanguage language, int count) {
       ja: '$count件の保存ミスはもう一度しっかり補強する価値があります。',
     ),
     ctaLabel: _l(language, en: 'Open mistakes', vi: 'Mở lỗi sai', ja: 'ミスへ'),
-    route: '/mistakes',
+    route: AppRoutePath.mistakes,
     icon: Icons.warning_amber_rounded,
     color: const Color(0xFFDC2626),
     badge: _l(language, en: 'Repair lane', vi: 'Lane sửa lỗi', ja: '補強レーン'),
@@ -576,7 +591,7 @@ PracticeSessionAction _deepenAction({
         ja: '負荷が安定しているので、${level.shortLabel}の新しいレッスンに進めます。',
       ),
       ctaLabel: _l(language, en: 'Open lesson', vi: 'Mở bài học', ja: 'レッスンへ'),
-      route: '/lesson/$lessonId',
+      route: AppRouteLocation.lessonDetail(lessonId),
       icon: Icons.play_lesson_rounded,
       color: const Color(0xFF16A34A),
       badge: _l(language, en: 'Deepen', vi: 'Đào sâu', ja: '深掘り'),
@@ -608,7 +623,7 @@ PracticeSessionAction _examAction(AppLanguage language, StudyLevel level) {
       vi: 'Mở JLPT Prep',
       ja: 'JLPT対策へ',
     ),
-    route: '/jlpt/coach',
+    route: AppRoutePath.jlptCoach,
     icon: Icons.school_rounded,
     color: const Color(0xFFD97706),
     badge: level.shortLabel,
@@ -632,7 +647,7 @@ PracticeSessionAction _immersionAction(AppLanguage language) {
       ja: '短く読み、未知語を保存し、日本語との接触を温かく保ちましょう。',
     ),
     ctaLabel: _l(language, en: 'Open immersion', vi: 'Mở immersion', ja: '没入へ'),
-    route: '/immersion',
+    route: AppRoutePath.immersion,
     icon: Icons.article_rounded,
     color: const Color(0xFF059669),
     badge: _l(language, en: 'Momentum', vi: 'Giữ nhịp', ja: '勢い'),

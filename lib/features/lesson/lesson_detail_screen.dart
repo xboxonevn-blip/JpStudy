@@ -1,10 +1,11 @@
+import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
@@ -286,9 +287,8 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
                                     onShowHintsChanged: (value) =>
                                         _updateShowHints(value),
                                     onFlip: onFlip,
-                                    onEdit: () => context.push(
-                                      '/lesson/${widget.lessonId}/edit',
-                                    ),
+                                    onEdit: () =>
+                                        context.openLessonEdit(widget.lessonId),
                                     onStar: currentTerm == null
                                         ? null
                                         : () => _toggleStar(currentTerm, level),
@@ -485,8 +485,11 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
     if (mounted && fsrsResult != null) {
       final language = ref.read(appLanguageProvider);
       final days = fsrsResult.nextReviewAt.difference(DateTime.now()).inDays;
-      final label =
-          days == 0 ? language.todayLabel : days == 1 ? language.tomorrowLabel : language.inDaysLabel(days);
+      final label = days == 0
+          ? language.todayLabel
+          : days == 1
+          ? language.tomorrowLabel
+          : language.inDaysLabel(days);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(language.nextReviewToastLabel(label)),
@@ -732,7 +735,7 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
   ) {
     switch (action) {
       case _MenuAction.edit:
-        context.push('/lesson/${widget.lessonId}/edit');
+        context.openLessonEdit(widget.lessonId);
         break;
       case _MenuAction.addTerm:
         _showQuickAddTerm(language, level);
@@ -1417,33 +1420,24 @@ class _PracticeActions extends StatelessWidget {
       children: [
         _PracticeButton(
           label: language.learnModeLabel,
-          onTap: () => context.push(
-            '/lesson/$lessonId/learn-enhanced?title=${Uri.encodeComponent(lessonTitle)}',
-          ),
+          onTap: () => context.openLessonLearn(lessonId, title: lessonTitle),
         ),
         _PracticeButton(
           label: language.testModeLabel,
-          onTap: () => context.push(
-            '/lesson/$lessonId/test-enhanced?title=${Uri.encodeComponent(lessonTitle)}',
-          ),
+          onTap: () => context.openLessonTest(lessonId, title: lessonTitle),
         ),
         _PracticeButton(
           label: language.matchModeLabel,
-          onTap: () => context.push(
-            '/lesson/$lessonId/match-mode?title=${Uri.encodeComponent(lessonTitle)}',
-          ),
+          onTap: () => context.openLessonMatch(lessonId, title: lessonTitle),
         ),
         _PracticeButton(
           label: language.writeModeLabel,
-          onTap: () => context.push(
-            '/lesson/$lessonId/write-mode?title=${Uri.encodeComponent(lessonTitle)}',
-          ),
+          onTap: () => context.openLessonWrite(lessonId, title: lessonTitle),
         ),
         _PracticeButton(
           label: language.flashcardsAction,
-          onTap: () => context.push(
-            '/lesson/$lessonId/flashcards-enhanced?title=${Uri.encodeComponent(lessonTitle)}',
-          ),
+          onTap: () =>
+              context.openLessonFlashcards(lessonId, title: lessonTitle),
         ),
       ],
     );

@@ -11,7 +11,20 @@ import 'package:jpstudy/features/home/providers/recovery_pack_provider.dart';
 import 'package:jpstudy/features/vocab/vocab_ghost_providers.dart';
 
 final coachSessionPlanProvider = Provider<CoachSessionPlan>((ref) {
-  final dashboard = ref.watch(dashboardProvider).valueOrNull;
+  final d = ref.watch(
+    dashboardProvider.select((v) {
+      final s = v.valueOrNull;
+      return (
+        vocabDue: s?.vocabDue ?? 0,
+        grammarDue: s?.grammarDue ?? 0,
+        kanjiDue: s?.kanjiDue ?? 0,
+        totalMistakeCount: s?.totalMistakeCount ?? 0,
+        vocabMistakeCount: s?.vocabMistakeCount ?? 0,
+        grammarMistakeCount: s?.grammarMistakeCount ?? 0,
+        kanjiMistakeCount: s?.kanjiMistakeCount ?? 0,
+      );
+    }),
+  );
   final language = ref.watch(appLanguageProvider);
   final continueAction = ref.watch(continueActionProvider).valueOrNull;
   final recoveryPack = ref.watch(recoveryPackProvider).valueOrNull;
@@ -22,29 +35,25 @@ final coachSessionPlanProvider = Provider<CoachSessionPlan>((ref) {
       .watch(vocabGhostCountProvider)
       .maybeWhen(data: (count) => count, orElse: () => 0);
 
-  final vocabDue = dashboard?.vocabDue ?? 0;
-  final grammarDue = dashboard?.grammarDue ?? 0;
-  final kanjiDue = dashboard?.kanjiDue ?? 0;
-  final totalDue = vocabDue + grammarDue + kanjiDue;
+  final totalDue = d.vocabDue + d.grammarDue + d.kanjiDue;
   final ghostCount = grammarGhostCount + vocabGhostCount;
-  final mistakeCount = dashboard?.totalMistakeCount ?? 0;
-  final totalFix = mistakeCount + ghostCount;
+  final totalFix = d.totalMistakeCount + ghostCount;
 
   return CoachSessionPlan(
     step1: _buildStep1(
       language: language,
-      vocabDue: vocabDue,
-      grammarDue: grammarDue,
-      kanjiDue: kanjiDue,
+      vocabDue: d.vocabDue,
+      grammarDue: d.grammarDue,
+      kanjiDue: d.kanjiDue,
       totalDue: totalDue,
     ),
     step2: _buildStep2(
       language: language,
       grammarGhostCount: grammarGhostCount,
       vocabGhostCount: vocabGhostCount,
-      vocabMistakeCount: dashboard?.vocabMistakeCount ?? 0,
-      grammarMistakeCount: dashboard?.grammarMistakeCount ?? 0,
-      kanjiMistakeCount: dashboard?.kanjiMistakeCount ?? 0,
+      vocabMistakeCount: d.vocabMistakeCount,
+      grammarMistakeCount: d.grammarMistakeCount,
+      kanjiMistakeCount: d.kanjiMistakeCount,
       totalFix: totalFix,
     ),
     step3: _buildStep3(

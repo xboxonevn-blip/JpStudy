@@ -55,11 +55,15 @@ final vocabHomeSectionProvider = FutureProvider<VocabHomeSection>((ref) async {
   final repo = ref.watch(lessonRepositoryProvider);
   final selectedLevel = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
 
-  // Fire all independent queries concurrently.
-  // Due count comes from the dashboard snapshot, which already uses aggregate
-  // DAO queries and is the shared source of truth for home/release surfaces.
-  final dashboardFuture = ref.watch(dashboardProvider.future);
-  final nextReviewFuture = ref.watch(nextVocabReviewProvider.future);
+  // Subscribe only to vocabDue so streak/XP ticks don't re-fire all 9 queries.
+  final dueCount = ref.watch(
+    dashboardProvider.select((v) => v.valueOrNull?.vocabDue ?? 0),
+  );
+  // Use current value of next-review stream; null while not yet emitted.
+  // The provider re-runs automatically when the stream emits a new value.
+  final nextReview = ref.watch(nextVocabReviewProvider).valueOrNull;
+
+  // Fire all remaining independent queries concurrently.
   final n5Future = repo.countVocabByLevelAndSeries('N5', 'hajimete');
   final n4Future = repo.countVocabByLevelAndSeries('N4', 'hajimete');
   final n3Future = repo.countVocabByLevelAndSeries('N3', 'hajimete');
@@ -71,8 +75,6 @@ final vocabHomeSectionProvider = FutureProvider<VocabHomeSection>((ref) async {
   final minnaN5Future = repo.countVocabByLevelAndSeries('N5', 'minna');
   final minnaN4Future = repo.countVocabByLevelAndSeries('N4', 'minna');
 
-  final dashboard = await dashboardFuture;
-  final nextReview = await nextReviewFuture;
   final n5Core = await n5Future;
   final n4Core = await n4Future;
   final n3Core = await n3Future;
@@ -83,7 +85,7 @@ final vocabHomeSectionProvider = FutureProvider<VocabHomeSection>((ref) async {
 
   return VocabHomeSection(
     selectedLevelCode: selectedLevel.shortLabel,
-    dueCount: dashboard.vocabDue,
+    dueCount: dueCount,
     nextReview: nextReview,
     liveTracks: [
       VocabTrackSummary(

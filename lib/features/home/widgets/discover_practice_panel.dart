@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
@@ -38,16 +39,23 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     final language = ref.watch(appLanguageProvider);
     final level = ref.watch(studyLevelProvider);
     final ghostCount = ref
         .watch(grammarGhostCountProvider)
         .maybeWhen(data: (count) => count, orElse: () => 0);
-    final dashboard = ref.watch(dashboardProvider).valueOrNull;
-    final mistakeCount = dashboard?.totalMistakeCount ?? 0;
-    final vocabDue = dashboard?.vocabDue ?? 0;
-    final grammarDue = dashboard?.grammarDue ?? 0;
-    final kanjiDue = dashboard?.kanjiDue ?? 0;
+    final (mistakeCount, vocabDue, grammarDue, kanjiDue) = ref.watch(
+      dashboardProvider.select((v) {
+        final d = v.valueOrNull;
+        return (
+          d?.totalMistakeCount ?? 0,
+          d?.vocabDue ?? 0,
+          d?.grammarDue ?? 0,
+          d?.kanjiDue ?? 0,
+        );
+      }),
+    );
     final totalDue = vocabDue + grammarDue + kanjiDue;
     final highlightCount = ghostCount + mistakeCount;
     final hubPrefs = ref.watch(practiceHubPreferencesProvider);
@@ -112,9 +120,9 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
                             end: Alignment.bottomRight,
                           ),
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.explore_rounded,
-                          color: Color(0xFF0F766E),
+                          color: palette.secondary,
                           size: 17,
                         ),
                       ),
@@ -129,15 +137,15 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
                               style: TextStyle(
                                 fontSize: widget.dense ? 13.5 : 16,
                                 fontWeight: FontWeight.w800,
-                                color: const Color(0xFF0F172A),
+                                color: palette.ink,
                               ),
                             ),
                             if (!widget.dense) ...[
                               Text(
                                 language.practiceHubSubtitle,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 12,
-                                  color: Color(0xFF64748B),
+                                  color: palette.ink.withValues(alpha: 0.55),
                                 ),
                               ),
                             ],
@@ -168,7 +176,7 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
                           Icons.drag_indicator_rounded,
                           size: widget.dense ? 18 : 20,
                         ),
-                        color: const Color(0xFF334155),
+                        color: palette.ink.withValues(alpha: 0.7),
                         style: IconButton.styleFrom(
                           minimumSize: Size(
                             widget.dense ? 28 : 34,
@@ -180,9 +188,9 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
                             borderRadius: BorderRadius.circular(
                               widget.dense ? 8 : 10,
                             ),
-                            side: const BorderSide(color: Color(0xFFDCE8F8)),
+                            side: BorderSide(color: palette.outline),
                           ),
-                          backgroundColor: const Color(0xFFF8FBFF),
+                          backgroundColor: palette.elevated,
                         ),
                       ),
                       if (highlightCount > 0) ...[
@@ -192,7 +200,7 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
                             vertical: 2,
                           ),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFEF4444),
+                            color: palette.error,
                             borderRadius: BorderRadius.circular(999),
                           ),
                           child: Text(
@@ -211,7 +219,7 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
                         duration: const Duration(milliseconds: 160),
                         child: Icon(
                           Icons.keyboard_arrow_down_rounded,
-                          color: Color(0xFF334155),
+                          color: palette.ink.withValues(alpha: 0.7),
                           size: widget.dense ? 18 : 24,
                         ),
                       ),
@@ -267,6 +275,7 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
       builder: (context) {
         return StatefulBuilder(
           builder: (context, setModalState) {
+            final palette = context.appPalette;
             return SafeArea(
               child: SizedBox(
                 height: MediaQuery.of(context).size.height * 0.74,
@@ -290,8 +299,8 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
                                 const SizedBox(height: 2),
                                 Text(
                                   _reorderSubtitle(language),
-                                  style: const TextStyle(
-                                    color: Color(0xFF64748B),
+                                  style: TextStyle(
+                                    color: palette.ink.withValues(alpha: 0.55),
                                     fontSize: 12,
                                   ),
                                 ),
@@ -439,6 +448,7 @@ class _FocusChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -447,10 +457,12 @@ class _FocusChip extends StatelessWidget {
           vertical: compact ? 3 : 5,
         ),
         decoration: BoxDecoration(
-          color: enabled ? const Color(0xFFFEF3C7) : const Color(0xFFF8FAFC),
+          color: enabled
+              ? palette.warning.withValues(alpha: 0.18)
+              : palette.surface,
           borderRadius: BorderRadius.circular(999),
           border: Border.all(
-            color: enabled ? const Color(0xFFFBBF24) : const Color(0xFFDCE8F8),
+            color: enabled ? palette.warning : palette.outline,
           ),
         ),
         child: Row(
@@ -459,8 +471,8 @@ class _FocusChip extends StatelessWidget {
               Icons.filter_alt_rounded,
               size: compact ? 11 : 13,
               color: enabled
-                  ? const Color(0xFFB45309)
-                  : const Color(0xFF64748B),
+                  ? palette.warning
+                  : palette.ink.withValues(alpha: 0.55),
             ),
             if (!compact) ...[
               const SizedBox(width: 4),
@@ -468,8 +480,8 @@ class _FocusChip extends StatelessWidget {
                 label,
                 style: TextStyle(
                   color: enabled
-                      ? const Color(0xFF92400E)
-                      : const Color(0xFF475569),
+                      ? palette.warning
+                      : palette.ink.withValues(alpha: 0.7),
                   fontSize: 11,
                   fontWeight: FontWeight.w800,
                 ),

@@ -1,5 +1,4 @@
 import 'package:jpstudy/core/app_language.dart';
-import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 
 String weaknessRecoveryTitle(AppLanguage language, String lessonTitle) => switch (language) {
   AppLanguage.en => 'Recovery pack from $lessonTitle',
@@ -92,7 +91,9 @@ String weaknessDueTitle(AppLanguage language, int totalDue) => switch (language)
 
 String weaknessDueSubtitle(
   AppLanguage language, {
-  required DashboardState dashboard,
+  required int vocabDue,
+  required int grammarDue,
+  required int kanjiDue,
   required DateTime? nextGrammarReview,
 }) {
   final grammarHint = switch (language) {
@@ -105,10 +106,10 @@ String weaknessDueSubtitle(
   };
   return switch (language) {
     AppLanguage.en =>
-      '${dashboard.vocabDue} vocab, ${dashboard.grammarDue} grammar, ${dashboard.kanjiDue} kanji are due.$grammarHint',
+      '$vocabDue vocab, $grammarDue grammar, $kanjiDue kanji are due.$grammarHint',
     AppLanguage.vi =>
-      '${dashboard.vocabDue} từ, ${dashboard.grammarDue} ngữ pháp, ${dashboard.kanjiDue} kanji đã đến hạn.$grammarHint',
+      '$vocabDue từ, $grammarDue ngữ pháp, $kanjiDue kanji đã đến hạn.$grammarHint',
     AppLanguage.ja =>
-      '語彙 ${dashboard.vocabDue}件、文法 ${dashboard.grammarDue}件、漢字 ${dashboard.kanjiDue}件が期限です。$grammarHint',
+      '語彙 $vocabDue件、文法 $grammarDue件、漢字 $kanjiDue件が期限です。$grammarHint',
   };
 }

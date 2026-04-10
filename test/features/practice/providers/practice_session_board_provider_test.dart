@@ -1,3 +1,5 @@
+import 'package:jpstudy/app/navigation/app_route_locations.dart';
+import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/core/app_language.dart';
@@ -38,8 +40,8 @@ void main() {
         ),
       );
 
-      expect(board.primaryAction.route, '/practice/recall-sprint');
-      expect(board.steps[1].route, '/grammar-practice');
+      expect(board.primaryAction.route, AppRoutePath.practiceRecallSprint);
+      expect(board.steps[1].route, AppRoutePath.grammarPractice);
       expect(board.headline, 'Protect the review queue first');
       expect(board.primaryAction.extra, isA<RecallSprintArgs>());
     });
@@ -64,11 +66,23 @@ void main() {
             id: 'vocab_mistakes',
             title: 'Vocab slipping',
             subtitle: 'repair',
-            route: '/learn/session',
+            route: AppRoutePath.learnSession,
             extra: LearnSessionArgs(
               items: const [
-                VocabItem(id: 11, term: '水', reading: 'みず', meaning: 'water', level: 'N5'),
-                VocabItem(id: 12, term: '火', reading: 'ひ', meaning: 'fire', level: 'N5'),
+                VocabItem(
+                  id: 11,
+                  term: '水',
+                  reading: 'みず',
+                  meaning: 'water',
+                  level: 'N5',
+                ),
+                VocabItem(
+                  id: 12,
+                  term: '火',
+                  reading: 'ひ',
+                  meaning: 'fire',
+                  level: 'N5',
+                ),
               ],
               lessonId: -1,
               lessonTitle: 'Recovery',
@@ -106,7 +120,7 @@ void main() {
         grammarGhostCount: 2,
       );
 
-      expect(board.primaryAction.route, '/grammar-practice');
+      expect(board.primaryAction.route, AppRoutePath.grammarPractice);
       expect(board.primaryAction.extra, GrammarPracticeMode.ghost);
       expect(board.repairCount, 3);
       expect(board.headline, 'Repair the weak spots while they are fresh');
@@ -134,11 +148,17 @@ void main() {
         ),
       );
 
-      expect(board.primaryAction.route, '/vocab/review');
-      expect(board.primaryAction.extra, isA<VocabReviewArgs>());
-      final args = board.primaryAction.extra as VocabReviewArgs;
-      expect(args.levelCode, 'N4');
-      expect(args.source, 'practice_board');
+      final args = VocabReviewArgs(
+        source: 'practice_board',
+        levelCode: 'N4',
+        title: 'N4 review',
+        subtitle: 'Due vocab queue from today\'s board',
+      );
+      expect(
+        board.primaryAction.route,
+        AppRouteLocation.vocabReview(args: args),
+      );
+      expect(board.primaryAction.extra, isNull);
     });
 
     test('uses typed args for kanji due action', () {
@@ -163,7 +183,7 @@ void main() {
         ),
       );
 
-      expect(board.primaryAction.route, '/kanji/practice');
+      expect(board.primaryAction.route, AppRoutePath.kanjiPractice);
       expect(board.primaryAction.extra, isA<KanjiPracticeArgs>());
       final args = board.primaryAction.extra as KanjiPracticeArgs;
       expect(args.levelCode, 'N5');
@@ -196,16 +216,22 @@ void main() {
             id: 'recovery_pack',
             title: 'Recovery pack from Lesson 5',
             subtitle: '4 weak terms are ready for a clean-up round.',
-            route: '/learn/recovery-pack',
+            route: AppRoutePath.learnRecoveryPack,
             icon: IconData(0xe3c9, fontFamily: 'MaterialIcons'),
             color: Color(0xFF2563EB),
           ),
         ],
       );
 
-      expect(board.primaryAction.route, '/learn/recovery-pack');
-      expect(board.steps.map((item) => item.route), contains('/lesson/12'));
-      expect(board.steps.map((item) => item.route), contains('/jlpt/coach'));
+      expect(board.primaryAction.route, AppRoutePath.learnRecoveryPack);
+      expect(
+        board.steps.map((item) => item.route),
+        contains(AppRouteLocation.lessonDetail(12)),
+      );
+      expect(
+        board.steps.map((item) => item.route),
+        contains(AppRoutePath.jlptCoach),
+      );
     });
   });
 }

@@ -1,3 +1,4 @@
+import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -123,7 +124,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const ValueKey('daily_session_cta')));
     await tester.pumpAndSettle();
-    expect(find.text('route:/grammar'), findsOneWidget);
+    expect(find.text('route:${AppRoutePath.grammar}'), findsOneWidget);
   });
 
   testWidgets('Daily session routes to ghost step when no due', (tester) async {
@@ -167,7 +168,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const ValueKey('daily_session_cta')));
     await tester.pumpAndSettle();
-    expect(find.text('route:/grammar-practice'), findsOneWidget);
+    expect(find.text('route:${AppRoutePath.grammarPractice}'), findsOneWidget);
   });
 
   testWidgets('Daily session routes vocab due work to vocab review session', (
@@ -216,7 +217,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const ValueKey('daily_session_cta')));
     await tester.pumpAndSettle();
-    expect(find.text('route:/vocab/review'), findsOneWidget);
+    expect(find.text('route:${AppRoutePath.vocabReview}'), findsOneWidget);
   });
 
   testWidgets('Daily session routes kanji due work to kanji practice hub', (
@@ -265,7 +266,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const ValueKey('daily_session_cta')));
     await tester.pumpAndSettle();
-    expect(find.text('route:/kanji/practice'), findsOneWidget);
+    expect(find.text('route:${AppRoutePath.kanjiPractice}'), findsOneWidget);
   });
 
   testWidgets('Daily session resumes stored route when in progress', (
@@ -302,7 +303,7 @@ void main() {
               dateKey: '2026-02-22',
               started: true,
               doneSteps: const <int>{1, 2},
-              lastRoute: '/mistakes',
+              lastRoute: AppRoutePath.mistakes,
               updatedAt: DateTime(2026, 2, 22, 8, 0),
             ),
           ),
@@ -317,6 +318,6 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const ValueKey('daily_session_cta')));
     await tester.pumpAndSettle();
-    expect(find.text('route:/mistakes'), findsOneWidget);
+    expect(find.text('route:${AppRoutePath.mistakes}'), findsOneWidget);
   });
 }

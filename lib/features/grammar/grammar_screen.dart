@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
+import 'package:jpstudy/app/navigation/app_route_locations.dart';
 import 'package:jpstudy/app/theme/app_breakpoints.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
@@ -135,13 +137,10 @@ class _GrammarHubContent extends StatelessWidget {
                     ),
               onPrimaryActionTap: () {
                 if (ghostCount > 0) {
-                  context.push(
-                    '/grammar-practice',
-                    extra: GrammarPracticeMode.ghost,
-                  );
+                  context.openGrammarPractice(extra: GrammarPracticeMode.ghost);
                   return;
                 }
-                context.push('/grammar-practice');
+                context.openGrammarPractice();
               },
             ),
             const SizedBox(height: AppSpacing.md),
@@ -203,7 +202,7 @@ class _GrammarHubContent extends StatelessWidget {
                             vi: 'L\u00e0m m\u1ed9t phi\u00ean nh\u1eb9',
                             ja: '\u8efd\u3044\u30c9\u30ea\u30eb\u3092\u59cb\u3081\u308b',
                           ),
-                    onPrimaryTap: () => context.push('/grammar-practice'),
+                    onPrimaryTap: () => context.openGrammarPractice(),
                   ),
                 ),
                 SizedBox(
@@ -243,7 +242,9 @@ class _GrammarHubContent extends StatelessWidget {
                           )
                         : null,
                     onPrimaryTap: ghostCount == 0 && points.isNotEmpty
-                        ? () => context.push('/grammar/${points.first.id}')
+                        ? () => context.push(
+                            AppRouteLocation.grammarDetail(points.first.id),
+                          )
                         : null,
                   ),
                 ),
@@ -271,7 +272,9 @@ class _GrammarHubContent extends StatelessWidget {
                       ja: '\u30d0\u30f3\u30af\u3092\u898b\u308b',
                     ),
                     onPrimaryTap: points.isNotEmpty
-                        ? () => context.push('/grammar/${points.first.id}')
+                        ? () => context.push(
+                            AppRouteLocation.grammarDetail(points.first.id),
+                          )
                         : null,
                     secondaryLabel: dueCount > 0
                         ? _tr(
@@ -282,7 +285,7 @@ class _GrammarHubContent extends StatelessWidget {
                           )
                         : null,
                     onSecondaryTap: dueCount > 0
-                        ? () => context.push('/grammar-practice')
+                        ? () => context.openGrammarPractice()
                         : null,
                   ),
                 ),
@@ -315,7 +318,7 @@ class _GrammarHubContent extends StatelessWidget {
                           )
                         : null,
                     onActionTap: dueCount > 0
-                        ? () => context.push('/grammar-practice')
+                        ? () => context.openGrammarPractice()
                         : null,
                   ),
                   const SizedBox(height: AppSpacing.lg),
@@ -625,7 +628,7 @@ class _GrammarPointRow extends StatelessWidget {
             : _tr(language, en: 'New', vi: 'M\u1edbi', ja: '\u65b0\u898f'),
         tone: point.isLearned ? AppStatusTone.success : AppStatusTone.neutral,
       ),
-      onTap: () => context.push('/grammar/${point.id}'),
+      onTap: () => context.push(AppRouteLocation.grammarDetail(point.id)),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
@@ -109,7 +110,9 @@ final hajimeteChapterStatusProvider =
       return _HajimeteChapterStatus(
         savedCount: userTerms.where((term) => term.isStarred).length,
         learnedCount: states.length,
-        dueCount: states.values.where((state) => !state.nextReviewAt.isAfter(now)).length,
+        dueCount: states.values
+            .where((state) => !state.nextReviewAt.isAfter(now))
+            .length,
       );
     });
 
@@ -153,7 +156,8 @@ class HajimeteChapterCatalogScreen extends ConsumerWidget {
             title: _errorTitle(language),
             subtitle: error.toString(),
             secondaryLabel: _retryLabel(language),
-            onSecondaryTap: () => ref.invalidate(hajimeteChapterCatalogProvider(args)),
+            onSecondaryTap: () =>
+                ref.invalidate(hajimeteChapterCatalogProvider(args)),
           ),
         ),
       ),
@@ -208,7 +212,7 @@ class _BackRow extends StatelessWidget {
             context.pop();
             return;
           }
-          context.go('/vocab');
+          context.openVocab();
         },
         icon: const Icon(Icons.arrow_back_rounded),
         label: Text(_backLabel(language)),
@@ -291,9 +295,9 @@ class _Hero extends StatelessWidget {
             const SizedBox(height: AppSpacing.lg),
             Text(
               _highlightTitle(language),
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.w900,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w900),
             ),
             const SizedBox(height: AppSpacing.sm),
             Wrap(
@@ -306,18 +310,15 @@ class _Hero extends StatelessWidget {
           ],
           const SizedBox(height: AppSpacing.lg),
           FilledButton.icon(
-            onPressed: () {
-              context.push(
-                '/vocab/review',
-                extra: VocabReviewArgs(
-                  source: 'core',
-                  levelCode: args.levelCode,
-                  series: 'hajimete',
-                  title: args.title,
-                  subtitle: args.subtitle ?? _heroSubtitle(language),
-                ),
-              );
-            },
+            onPressed: () => context.openVocabReview(
+              args: VocabReviewArgs(
+                source: 'core',
+                levelCode: args.levelCode,
+                series: 'hajimete',
+                title: args.title,
+                subtitle: args.subtitle ?? _heroSubtitle(language),
+              ),
+            ),
             icon: const Icon(Icons.play_circle_fill_rounded),
             label: Text(_reviewWholeLaneLabel(language)),
           ),
@@ -372,15 +373,11 @@ class _HeroTag extends StatelessWidget {
       ),
       child: Text(
         label,
-        style: TextStyle(
-          color: palette.ink,
-          fontWeight: FontWeight.w800,
-        ),
+        style: TextStyle(color: palette.ink, fontWeight: FontWeight.w800),
       ),
     );
   }
 }
-
 
 class _StatusPill extends StatelessWidget {
   const _StatusPill({
@@ -562,7 +559,10 @@ class _ChapterCard extends ConsumerWidget {
             Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
                     color: palette.surface,
                     borderRadius: BorderRadius.circular(12),
@@ -576,7 +576,10 @@ class _ChapterCard extends ConsumerWidget {
                   ),
                 ),
                 const Spacer(),
-                Icon(Icons.chevron_right_rounded, color: palette.ink.withValues(alpha: 0.45)),
+                Icon(
+                  Icons.chevron_right_rounded,
+                  color: palette.ink.withValues(alpha: 0.45),
+                ),
               ],
             ),
             const SizedBox(height: AppSpacing.md),
@@ -604,19 +607,25 @@ class _ChapterCard extends ConsumerWidget {
                 runSpacing: 8,
                 children: [
                   _StatusPill(
-                    key: ValueKey('hajimete_status_saved_${chapter.chapterId}_${status.savedCount}'),
+                    key: ValueKey(
+                      'hajimete_status_saved_${chapter.chapterId}_${status.savedCount}',
+                    ),
                     icon: Icons.star_rounded,
                     label: _savedCountLabel(language, status.savedCount),
                     tone: AppStatusTone.warning,
                   ),
                   _StatusPill(
-                    key: ValueKey('hajimete_status_learned_${chapter.chapterId}_${status.learnedCount}'),
+                    key: ValueKey(
+                      'hajimete_status_learned_${chapter.chapterId}_${status.learnedCount}',
+                    ),
                     icon: Icons.school_rounded,
                     label: _learnedCountLabel(language, status.learnedCount),
                     tone: AppStatusTone.primary,
                   ),
                   _StatusPill(
-                    key: ValueKey('hajimete_status_due_${chapter.chapterId}_${status.dueCount}'),
+                    key: ValueKey(
+                      'hajimete_status_due_${chapter.chapterId}_${status.dueCount}',
+                    ),
                     icon: Icons.schedule_rounded,
                     label: _dueCountLabel(language, status.dueCount),
                     tone: status.dueCount > 0
@@ -657,7 +666,8 @@ class _ChapterCard extends ConsumerWidget {
                         spacing: 8,
                         runSpacing: 8,
                         children: [
-                          for (final term in previewTerms) _PreviewChip(label: term),
+                          for (final term in previewTerms)
+                            _PreviewChip(label: term),
                         ],
                       )
                     : Text(
@@ -673,17 +683,11 @@ class _ChapterCard extends ConsumerWidget {
               width: double.infinity,
               child: FilledButton.icon(
                 key: ValueKey('hajimete_chapter_open_${chapter.chapterId}'),
-                onPressed: () {
-                  final uri = Uri(
-                    path: '/vocab/hajimete/chapter',
-                    queryParameters: {
-                      'level': args.levelCode,
-                      'chapterId': '${chapter.chapterId}',
-                      'title': args.title,
-                    },
-                  );
-                  context.push(uri.toString());
-                },
+                onPressed: () => context.openHajimeteChapter(
+                  levelCode: args.levelCode,
+                  chapterId: chapter.chapterId,
+                  title: args.title,
+                ),
                 icon: const Icon(Icons.menu_book_rounded),
                 label: Text(_openChapterLabel(language)),
               ),
@@ -702,9 +706,11 @@ String _backLabel(AppLanguage language) => switch (language) {
 };
 
 String _heroSubtitle(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Chọn chapter hoặc chủ đề để vào đúng lane học, thay vì nhảy thẳng vào một phiên review tổng.',
+  AppLanguage.vi =>
+    'Chọn chapter hoặc chủ đề để vào đúng lane học, thay vì nhảy thẳng vào một phiên review tổng.',
   AppLanguage.ja => '総レビューへ飛ぶ前に、章ごとのテーマから学習レーンを選べます。',
-  AppLanguage.en => 'Choose a chapter or topic first so the lane feels structured before you jump into a full review session.',
+  AppLanguage.en =>
+    'Choose a chapter or topic first so the lane feels structured before you jump into a full review session.',
 };
 
 String _liveLaneLabel(AppLanguage language) => switch (language) {
@@ -725,11 +731,12 @@ String _chapterCaption(AppLanguage language, int count) => switch (language) {
   AppLanguage.en => '$count chapters are ready to open directly.',
 };
 
-String _chapterCountLabel(AppLanguage language, int count) => switch (language) {
-  AppLanguage.vi => '$count chapter',
-  AppLanguage.ja => '$count チャプター',
-  AppLanguage.en => '$count chapters',
-};
+String _chapterCountLabel(AppLanguage language, int count) =>
+    switch (language) {
+      AppLanguage.vi => '$count chapter',
+      AppLanguage.ja => '$count チャプター',
+      AppLanguage.en => '$count chapters',
+    };
 
 String _termCountLabel(AppLanguage language, int count) => switch (language) {
   AppLanguage.vi => '$count từ',
@@ -767,12 +774,12 @@ String _openChapterLabel(AppLanguage language) => switch (language) {
   AppLanguage.en => 'View chapter',
 };
 
-String _chapterBadge(AppLanguage language, String chapterNumber) => switch (language) {
-  AppLanguage.vi => 'Chương $chapterNumber',
-  AppLanguage.ja => 'Chapter $chapterNumber',
-  AppLanguage.en => 'Chapter $chapterNumber',
-};
-
+String _chapterBadge(AppLanguage language, String chapterNumber) =>
+    switch (language) {
+      AppLanguage.vi => 'Chương $chapterNumber',
+      AppLanguage.ja => 'Chapter $chapterNumber',
+      AppLanguage.en => 'Chapter $chapterNumber',
+    };
 
 String _savedCountLabel(AppLanguage language, int count) => switch (language) {
   AppLanguage.vi => 'L?u $count',
@@ -780,11 +787,12 @@ String _savedCountLabel(AppLanguage language, int count) => switch (language) {
   AppLanguage.en => 'Saved $count',
 };
 
-String _learnedCountLabel(AppLanguage language, int count) => switch (language) {
-  AppLanguage.vi => 'H?c $count',
-  AppLanguage.ja => '?? $count',
-  AppLanguage.en => 'Learned $count',
-};
+String _learnedCountLabel(AppLanguage language, int count) =>
+    switch (language) {
+      AppLanguage.vi => 'H?c $count',
+      AppLanguage.ja => '?? $count',
+      AppLanguage.en => 'Learned $count',
+    };
 
 String _dueCountLabel(AppLanguage language, int count) => switch (language) {
   AppLanguage.vi => '??n h?n $count',
@@ -820,9 +828,11 @@ String _emptyTitle(AppLanguage language) => switch (language) {
 };
 
 String _emptySubtitle(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Dữ liệu Hajimete cho level này sẽ hiện ở đây khi được nối xong.',
+  AppLanguage.vi =>
+    'Dữ liệu Hajimete cho level này sẽ hiện ở đây khi được nối xong.',
   AppLanguage.ja => 'このレベルの Hajimete データは準備でき次第ここに表示されます。',
-  AppLanguage.en => 'The Hajimete data for this level will appear here once it is connected.',
+  AppLanguage.en =>
+    'The Hajimete data for this level will appear here once it is connected.',
 };
 
 String _errorTitle(AppLanguage language) => switch (language) {

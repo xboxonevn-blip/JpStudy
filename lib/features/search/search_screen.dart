@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_route_locations.dart';
 import 'package:jpstudy/app/theme/app_breakpoints.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/core/app_language.dart';
@@ -804,8 +805,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
 
   String _retryLabel(AppLanguage language) => _searchRetryLabel(language);
 
-  String _clearSearchLabel(AppLanguage language) =>
-      _searchClearLabel(language);
+  String _clearSearchLabel(AppLanguage language) => _searchClearLabel(language);
 
   String _showAllLabel(AppLanguage language) => _searchShowAllLabel(language);
 
@@ -891,9 +891,30 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
 
   List<({String query, String label})> _defaultPrompts(AppLanguage language) {
     return [
-      (query: 'taberu', label: _promptLabel(language, kind: _SearchPromptKind.romaji, value: 'taberu')),
-      (query: '??', label: _promptLabel(language, kind: _SearchPromptKind.reading, value: '??')),
-      (query: 'forest', label: _promptLabel(language, kind: _SearchPromptKind.meaning, value: 'forest')),
+      (
+        query: 'taberu',
+        label: _promptLabel(
+          language,
+          kind: _SearchPromptKind.romaji,
+          value: 'taberu',
+        ),
+      ),
+      (
+        query: '??',
+        label: _promptLabel(
+          language,
+          kind: _SearchPromptKind.reading,
+          value: '??',
+        ),
+      ),
+      (
+        query: 'forest',
+        label: _promptLabel(
+          language,
+          kind: _SearchPromptKind.meaning,
+          value: 'forest',
+        ),
+      ),
     ];
   }
 
@@ -1228,11 +1249,11 @@ class _SearchTile extends StatelessWidget {
   void _onTap(BuildContext context) {
     if (entry.id == null) return;
     if (entry.kind == _SearchKind.vocab || entry.kind == _SearchKind.kana) {
-      context.push('/vocab/${entry.id}');
+      context.push(AppRouteLocation.vocabDetail(entry.id));
       return;
     }
     if (entry.kind == _SearchKind.kanji) {
-      context.push('/kanji?kanjiId=${entry.id}');
+      context.push(AppRouteLocation.kanji(kanjiId: entry.id));
     }
   }
 
@@ -1241,70 +1262,70 @@ class _SearchTile extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-      onTap: entry.id != null ? () => _onTap(context) : null,
-      borderRadius: BorderRadius.circular(16),
-      child: Container(
-        decoration: HomeSurface.softPanel(),
-        padding: EdgeInsets.symmetric(
-          horizontal: 14,
-          vertical: compact ? 12 : 14,
-        ),
-        child: Row(
-          children: [
-            Container(
-              width: compact ? 36 : 40,
-              height: compact ? 36 : 40,
-              decoration: BoxDecoration(
-                color: entry.kind.color.withValues(alpha: 0.12),
-                borderRadius: BorderRadius.circular(12),
+        onTap: entry.id != null ? () => _onTap(context) : null,
+        borderRadius: BorderRadius.circular(16),
+        child: Container(
+          decoration: HomeSurface.softPanel(),
+          padding: EdgeInsets.symmetric(
+            horizontal: 14,
+            vertical: compact ? 12 : 14,
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: compact ? 36 : 40,
+                height: compact ? 36 : 40,
+                decoration: BoxDecoration(
+                  color: entry.kind.color.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(
+                  entry.kind.icon,
+                  color: entry.kind.color,
+                  size: compact ? 18 : 20,
+                ),
               ),
-              child: Icon(
-                entry.kind.icon,
-                color: entry.kind.color,
-                size: compact ? 18 : 20,
-              ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (matchHint != null) ...[
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (matchHint != null) ...[
+                      Text(
+                        matchHint!,
+                        style: TextStyle(
+                          color: entry.kind.color,
+                          fontSize: compact ? 10.5 : 11,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                    ],
                     Text(
-                      matchHint!,
+                      entry.title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        color: entry.kind.color,
-                        fontSize: compact ? 10.5 : 11,
-                        fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.w800,
+                        fontSize: compact ? 14 : 15,
                       ),
                     ),
-                    const SizedBox(height: 2),
+                    const SizedBox(height: 4),
+                    Text(
+                      entry.subtitle,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: const Color(0xFF64748B),
+                        fontSize: compact ? 11.5 : 12,
+                      ),
+                    ),
                   ],
-                  Text(
-                    entry.title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontSize: compact ? 14 : 15,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    entry.subtitle,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      color: const Color(0xFF64748B),
-                      fontSize: compact ? 11.5 : 12,
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
       ),
     );
   }
@@ -1388,20 +1409,20 @@ class _SearchEntry {
     required this.keywords,
     this.id,
     this.reading,
-  })  : normalizedTitle = _normalizeSearchText(title),
-        normalizedReading = _normalizeSearchText(reading ?? ''),
-        normalizedMeaning = _normalizeSearchText(meaning),
-        normalizedKeywords = keywords
-            .map(_normalizeSearchText)
-            .where((s) => s.isNotEmpty)
-            .toList(growable: false),
-        romajiTerms = {
-          if (title.isNotEmpty) _normalizeRomaji(kanaToRomaji(title)),
-          if ((reading ?? '').isNotEmpty)
-            _normalizeRomaji(kanaToRomaji(reading!)),
-          for (final value in keywords)
-            if (value.isNotEmpty) _normalizeRomaji(kanaToRomaji(value)),
-        }..remove('');
+  }) : normalizedTitle = _normalizeSearchText(title),
+       normalizedReading = _normalizeSearchText(reading ?? ''),
+       normalizedMeaning = _normalizeSearchText(meaning),
+       normalizedKeywords = keywords
+           .map(_normalizeSearchText)
+           .where((s) => s.isNotEmpty)
+           .toList(growable: false),
+       romajiTerms = {
+         if (title.isNotEmpty) _normalizeRomaji(kanaToRomaji(title)),
+         if ((reading ?? '').isNotEmpty)
+           _normalizeRomaji(kanaToRomaji(reading!)),
+         for (final value in keywords)
+           if (value.isNotEmpty) _normalizeRomaji(kanaToRomaji(value)),
+       }..remove('');
 
   final _SearchKind kind;
   final String title;
@@ -1551,6 +1572,5 @@ class _SearchMatch {
   final int score;
   final _SearchMatchReason reason;
 }
-
 
 enum _SearchPromptKind { romaji, reading, meaning }

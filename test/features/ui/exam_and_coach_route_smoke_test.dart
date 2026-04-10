@@ -1,3 +1,4 @@
+import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/app/navigation/app_router.dart';
@@ -14,10 +15,10 @@ void main() {
       await tester.pump(const Duration(milliseconds: 300));
     }
 
-    await pumpRoute('/exam-center');
+    await pumpRoute(AppRoutePath.examCenter);
     expect(
       AppRouter.router.routeInformationProvider.value.uri.path,
-      '/exam-center',
+      AppRoutePath.examCenter,
     );
     expect(find.textContaining('Mock Exam'), findsWidgets);
 
@@ -36,10 +37,10 @@ void main() {
       await tester.pump(const Duration(milliseconds: 300));
     }
 
-    await pumpRoute('/jlpt/coach');
+    await pumpRoute(AppRoutePath.jlptCoach);
     expect(
       AppRouter.router.routeInformationProvider.value.uri.path,
-      '/jlpt/coach',
+      AppRoutePath.jlptCoach,
     );
     expect(find.text('JLPT Prep'), findsWidgets);
     expect(find.text('JLPT N5 prep hub'), findsOneWidget);

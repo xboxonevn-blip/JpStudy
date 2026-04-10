@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/app/theme/app_breakpoints.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
@@ -852,7 +853,7 @@ class _CoachBoardFallback extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.md),
           TextButton.icon(
-            onPressed: () => context.push('/study'),
+            onPressed: () => context.openStudy(),
             icon: const Icon(Icons.arrow_forward_rounded),
             label: Text(_coachFallbackCta(language)),
           ),
@@ -1589,7 +1590,7 @@ class _MasterySummaryCard extends ConsumerWidget {
     final palette = context.appPalette;
 
     return GestureDetector(
-      onTap: () => context.push('/mastery'),
+      onTap: () => context.openMastery(),
       child: AppSectionCard(
         child: snapshotAsync.when(
           data: (snapshot) {
@@ -1748,7 +1749,7 @@ class _ForecastPreviewCard extends ConsumerWidget {
     final palette = context.appPalette;
 
     return GestureDetector(
-      onTap: () => context.push('/forecast'),
+      onTap: () => context.openForecast(),
       child: AppSectionCard(
         child: forecastAsync.when(
           data: (forecast) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
@@ -73,11 +74,14 @@ class JlptCoachScreen extends ConsumerWidget {
     final overviewAsync = ref.watch(jlptPrepOverviewProvider(level));
     final overview =
         overviewAsync.valueOrNull ?? JlptPrepOverview.placeholder();
-    final dashboard =
-        ref.watch(dashboardProvider).valueOrNull ?? _emptyDashboardState;
     final mistakeRepo = ref.watch(mistakeRepositoryProvider);
-    final dueCount =
-        dashboard.vocabDue + dashboard.grammarDue + dashboard.kanjiDue;
+    final (vocabDue, grammarDue, kanjiDue) = ref.watch(
+      dashboardProvider.select((v) {
+        final d = v.valueOrNull;
+        return (d?.vocabDue ?? 0, d?.grammarDue ?? 0, d?.kanjiDue ?? 0);
+      }),
+    );
+    final dueCount = vocabDue + grammarDue + kanjiDue;
 
     return Scaffold(
       appBar: AppBar(title: Text(_screenTitle(language))),
@@ -115,9 +119,9 @@ class JlptCoachScreen extends ConsumerWidget {
                 ),
               ],
               primaryLabel: _startFullMockLabel(language),
-              onPrimaryTap: () => context.push('/jlpt/mock-pro'),
+              onPrimaryTap: () => context.openJlptMockPro(),
               secondaryLabel: _startReadingLabel(language),
-              onSecondaryTap: () => context.push('/jlpt/reading'),
+              onSecondaryTap: () => context.openJlptReading(),
             ),
             const SizedBox(height: AppSpacing.md),
             _PrepPanel(
@@ -148,7 +152,7 @@ class JlptCoachScreen extends ConsumerWidget {
                               ? AppStatusTone.success
                               : AppStatusTone.primary,
                           accent: context.appPalette.accent,
-                          onTap: () => context.push('/jlpt/mock-pro'),
+                          onTap: () => context.openJlptMockPro(),
                         ),
                         _PrepModeCardData(
                           icon: Icons.timer_rounded,
@@ -168,7 +172,7 @@ class JlptCoachScreen extends ConsumerWidget {
                               : AppStatusTone.warning,
                           accent: context.appPalette.primary,
                           onTap: overview.quickMockQuestionCount > 0
-                              ? () => context.push('/practice/mock-exam')
+                              ? () => context.openPracticeMockExam()
                               : null,
                         ),
                         _PrepModeCardData(
@@ -185,7 +189,7 @@ class JlptCoachScreen extends ConsumerWidget {
                           statusLabel: level.shortLabel,
                           statusTone: AppStatusTone.primary,
                           accent: context.appPalette.secondary,
-                          onTap: () => context.push('/jlpt/reading'),
+                          onTap: () => context.openJlptReading(),
                         ),
                       ];
                       final columns = constraints.maxWidth >= 980
@@ -227,7 +231,9 @@ class JlptCoachScreen extends ConsumerWidget {
                   language: language,
                   level: level,
                   dueCount: dueCount,
-                  dashboard: dashboard,
+                  vocabDue: vocabDue,
+                  grammarDue: grammarDue,
+                  kanjiDue: kanjiDue,
                   mistakeStream: mistakeRepo.watchAllMistakes(),
                 );
 
@@ -1020,14 +1026,18 @@ class _SupportPanel extends StatelessWidget {
     required this.language,
     required this.level,
     required this.dueCount,
-    required this.dashboard,
+    required this.vocabDue,
+    required this.grammarDue,
+    required this.kanjiDue,
     required this.mistakeStream,
   });
 
   final AppLanguage language;
   final StudyLevel level;
   final int dueCount;
-  final DashboardState dashboard;
+  final int vocabDue;
+  final int grammarDue;
+  final int kanjiDue;
   final Stream<List<UserMistake>> mistakeStream;
 
   @override
@@ -1067,13 +1077,13 @@ class _SupportPanel extends StatelessWidget {
                           ? AppStatusTone.success
                           : AppStatusTone.warning,
                     ),
-                    onTap: () => context.push('/mistakes'),
+                    onTap: () => context.openMistakes(),
                   ),
                   const SizedBox(height: AppSpacing.md),
                   AppCompactRow(
                     icon: Icons.hub_rounded,
                     title: _studyLaneTitle(language),
-                    subtitle: _studyLaneSubtitle(language, dashboard, dueCount),
+                    subtitle: _studyLaneSubtitle(language, vocabDue, grammarDue, kanjiDue, dueCount),
                     status: AppStatusChip(
                       label: dueCount > 0
                           ? '$dueCount'
@@ -1082,7 +1092,7 @@ class _SupportPanel extends StatelessWidget {
                           ? AppStatusTone.warning
                           : AppStatusTone.success,
                     ),
-                    onTap: () => context.push('/study'),
+                    onTap: () => context.openStudy(),
                   ),
                   const SizedBox(height: AppSpacing.md),
                   AppCompactRow(
@@ -1093,7 +1103,7 @@ class _SupportPanel extends StatelessWidget {
                       label: level.shortLabel,
                       tone: AppStatusTone.primary,
                     ),
-                    onTap: () => context.push('/immersion'),
+                    onTap: () => context.openImmersion(),
                   ),
                 ],
               );
@@ -1648,20 +1658,22 @@ String _studyLaneTitle(AppLanguage language) => switch (language) {
 
 String _studyLaneSubtitle(
   AppLanguage language,
-  DashboardState dashboard,
+  int vocabDue,
+  int grammarDue,
+  int kanjiDue,
   int dueCount,
 ) => switch (language) {
   AppLanguage.en =>
     dueCount > 0
-        ? 'Due now: vocab ${dashboard.vocabDue} • grammar ${dashboard.grammarDue} • kanji ${dashboard.kanjiDue}.'
+        ? 'Due now: vocab $vocabDue • grammar $grammarDue • kanji $kanjiDue.'
         : 'Queue is calm, so this is a clean place to tighten weak skills between mock runs.',
   AppLanguage.vi =>
     dueCount > 0
-        ? 'Đến hạn: từ vựng ${dashboard.vocabDue} • ngữ pháp ${dashboard.grammarDue} • kanji ${dashboard.kanjiDue}.'
+        ? 'Đến hạn: từ vựng $vocabDue • ngữ pháp $grammarDue • kanji $kanjiDue.'
         : 'Hàng đợi đang nhẹ, hợp để siết các kỹ năng yếu giữa hai lần thi thử.',
   AppLanguage.ja =>
     dueCount > 0
-        ? '期限あり: 語彙 ${dashboard.vocabDue} • 文法 ${dashboard.grammarDue} • 漢字 ${dashboard.kanjiDue}'
+        ? '期限あり: 語彙 $vocabDue • 文法 $grammarDue • 漢字 $kanjiDue'
         : 'キューが落ち着いているので、模試の合間の補強に向いています。',
 };
 
@@ -1790,14 +1802,3 @@ bool _isReadyForExam(JlptCoachSnapshot snapshot) {
   return true;
 }
 
-const _emptyDashboardState = DashboardState(
-  streak: 0,
-  todayXp: 0,
-  vocabDue: 0,
-  grammarDue: 0,
-  kanjiDue: 0,
-  vocabMistakeCount: 0,
-  grammarMistakeCount: 0,
-  kanjiMistakeCount: 0,
-  totalMistakeCount: 0,
-);

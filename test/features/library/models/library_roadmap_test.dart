@@ -1,3 +1,5 @@
+import 'package:jpstudy/app/navigation/app_route_locations.dart';
+import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/study_level.dart';
@@ -48,10 +50,10 @@ void main() {
     );
 
     expect(board.headline, 'Stabilize the lesson queue first');
-    expect(board.primaryAction.route, '/lesson/2');
+    expect(board.primaryAction.route, AppRouteLocation.lessonDetail(2));
     expect(board.primaryAction.badge, '5 due');
     expect(board.stats[1].value, '2');
-    expect(board.quickActions.last.route, '/search');
+    expect(board.quickActions.last.route, AppRoutePath.search);
   });
 
   test(
@@ -65,10 +67,10 @@ void main() {
       );
 
       expect(board.headline, 'Start building the level map');
-      expect(board.primaryAction.route, '/lesson/26');
+      expect(board.primaryAction.route, AppRouteLocation.lessonDetail(26));
       expect(board.primaryAction.ctaLabel, 'Open first lesson');
       expect(board.quickActions, hasLength(1));
-      expect(board.quickActions.single.route, '/search');
+      expect(board.quickActions.single.route, AppRoutePath.search);
       expect(board.stats[0].value, '0%');
     },
   );

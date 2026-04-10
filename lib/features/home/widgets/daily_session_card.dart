@@ -1,6 +1,10 @@
+import 'package:jpstudy/app/navigation/app_route_constants.dart';
+import 'package:jpstudy/app/navigation/app_route_locations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/core/services/recovery_pack_service.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
@@ -60,6 +64,7 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     final language = ref.watch(appLanguageProvider);
     final dashboard = ref.watch(dashboardProvider).valueOrNull;
     final grammarGhostCount = ref
@@ -209,7 +214,7 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
                     key: const ValueKey('daily_session_cta'),
                     onPressed: () async {
                       if (isComplete) {
-                        context.push('/today/session-summary');
+                        context.openTodaySessionSummary();
                         return;
                       }
                       await _startDailySession(
@@ -228,7 +233,7 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
                     label: Text(ctaLabel),
                     style: FilledButton.styleFrom(
                       backgroundColor: Colors.white,
-                      foregroundColor: const Color(0xFF0F172A),
+                      foregroundColor: palette.ink,
                       textStyle: const TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w800,
@@ -446,14 +451,14 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
 
     if (ghostCount > 0) {
       return const _DailyRoute(
-        route: '/grammar-practice',
+        route: AppRoutePath.grammarPractice,
         extra: GrammarPracticeMode.ghost,
         step: 2,
       );
     }
 
     if (totalMistakes > 0) {
-      return const _DailyRoute(route: '/mistakes', step: 2);
+      return const _DailyRoute(route: AppRoutePath.mistakes, step: 2);
     }
 
     final lastRoute = progress?.lastRoute;
@@ -481,15 +486,15 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
         final ids = continueAction?.data;
         if (ids is List && ids.isNotEmpty) {
           return _DailyRoute(
-            route: '/grammar-practice',
+            route: AppRoutePath.grammarPractice,
             extra: List<int>.from(ids),
             step: 1,
           );
         }
-        return const _DailyRoute(route: '/grammar', step: 1);
+        return const _DailyRoute(route: AppRoutePath.grammar, step: 1);
       case ContinueActionType.vocabReview:
         return _DailyRoute(
-          route: '/vocab/review',
+          route: AppRoutePath.vocabReview,
           extra: VocabReviewArgs(
             source: 'daily_queue',
             levelCode: level.shortLabel,
@@ -504,7 +509,7 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
         );
       case ContinueActionType.kanjiReview:
         return _DailyRoute(
-          route: '/kanji/practice',
+          route: AppRoutePath.kanjiPractice,
           extra: KanjiPracticeArgs(
             mode: KanjiPracticeMode.both,
             levelCode: level.shortLabel,
@@ -517,11 +522,11 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
     }
 
     if ((dashboard?.grammarDue ?? 0) > 0) {
-      return const _DailyRoute(route: '/grammar', step: 1);
+      return const _DailyRoute(route: AppRoutePath.grammar, step: 1);
     }
     if ((dashboard?.vocabDue ?? 0) > 0) {
       return _DailyRoute(
-        route: '/vocab/review',
+        route: AppRoutePath.vocabReview,
         extra: VocabReviewArgs(
           source: 'daily_queue',
           levelCode: level.shortLabel,
@@ -536,7 +541,7 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
       );
     }
     return _DailyRoute(
-      route: '/kanji/practice',
+      route: AppRoutePath.kanjiPractice,
       extra: KanjiPracticeArgs(
         mode: KanjiPracticeMode.both,
         levelCode: level.shortLabel,
@@ -555,25 +560,27 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
       return _DeepeningTask(
         label: _recoveryLabel(language),
         count: recoveryPack.itemCount,
-        route: '/learn/recovery-pack',
+        route: AppRoutePath.learnRecoveryPack,
       );
     }
 
     if (continueAction?.type == ContinueActionType.nextLesson &&
         continueAction?.data is int) {
       final lessonId = continueAction!.data as int;
-      final title = Uri.encodeComponent(continueAction.label);
       return _DeepeningTask(
         label: _nextLessonLabel(language),
         count: 1,
-        route: '/lesson/$lessonId/learn-enhanced?title=$title',
+        route: AppRouteLocation.lessonLearnEnhanced(
+          lessonId,
+          title: continueAction.label,
+        ),
       );
     }
 
     return _DeepeningTask(
       label: language.practiceImmersionLabel,
       count: 1,
-      route: '/immersion',
+      route: AppRoutePath.immersion,
     );
   }
 
@@ -1124,7 +1131,7 @@ class _WeekSummaryRow extends ConsumerWidget {
         return Padding(
           padding: const EdgeInsets.only(top: 8),
           child: GestureDetector(
-            onTap: () => context.push('/progress'),
+            onTap: () => context.openProgressHome(),
             child: Row(
               children: [
                 const Icon(

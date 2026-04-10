@@ -80,6 +80,25 @@ Use for:
 - reusable presentational widgets with broad app reuse
 - components that are not owned by just one feature
 
+## Routing Rules
+
+Use these routing rules consistently across the codebase:
+
+- UI layer (`screens/`, `widgets/`) uses `context.open...` helpers from `lib/app/navigation/app_navigation_extensions.dart`
+- model/provider/persistence layers store route strings only via `AppRoutePath` or `AppRouteLocation`
+- dynamic routes must be built through `AppRouteLocation`, never by manual string interpolation
+- route configs remain centralized under `lib/app/navigation/`
+
+Examples:
+- use `context.openLesson(id)` in widgets
+- use `AppRoutePath.grammarPractice` for persisted/static route values
+- use `AppRouteLocation.vocabReview(args: ...)` for persisted/dynamic route values
+
+Avoid:
+- `context.go('/...')` or `context.push('/...')` in UI
+- `'/lesson/$id'` or `Uri(path: '/...')` outside `lib/app/navigation/`
+- model/provider code constructing paths ad hoc
+
 ## Suggested dependency direction
 
 Prefer this flow:

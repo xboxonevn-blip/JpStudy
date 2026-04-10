@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
@@ -14,63 +14,81 @@ import 'providers/study_hub_provider.dart';
 // ---------------------------------------------------------------------------
 // Localisation helpers
 // ---------------------------------------------------------------------------
-String _tr(AppLanguage l, {required String en, required String vi, required String ja}) =>
-    switch (l) { AppLanguage.en => en, AppLanguage.vi => vi, AppLanguage.ja => ja };
+String _tr(
+  AppLanguage l, {
+  required String en,
+  required String vi,
+  required String ja,
+}) => switch (l) {
+  AppLanguage.en => en,
+  AppLanguage.vi => vi,
+  AppLanguage.ja => ja,
+};
 
-String _screenTitle(AppLanguage l) => _tr(l,
-    en: 'Study Hub', vi: 'Trung tâm học tập', ja: 'スタディHub');
+String _screenTitle(AppLanguage l) =>
+    _tr(l, en: 'Study Hub', vi: 'Trung tâm học tập', ja: 'スタディHub');
 
-String _jlptCardTitle(AppLanguage l) => _tr(l,
-    en: 'JLPT Prep', vi: 'Ôn thi JLPT', ja: 'JLPT試験対策');
+String _jlptCardTitle(AppLanguage l) =>
+    _tr(l, en: 'JLPT Prep', vi: 'Ôn thi JLPT', ja: 'JLPT試験対策');
 
-String _jlptCardSubtitle(AppLanguage l, StudyLevel level) => _tr(l,
-    en: 'Mock exams, reading, and full prep for ${level.shortLabel}.',
-    vi: 'Đề thi thử, đọc hiểu và ôn luyện toàn diện cho ${level.shortLabel}.',
-    ja: '${level.shortLabel}の模擬試験・読解・総合対策。');
+String _jlptCardSubtitle(AppLanguage l, StudyLevel level) => _tr(
+  l,
+  en: 'Mock exams, reading, and full prep for ${level.shortLabel}.',
+  vi: 'Đề thi thử, đọc hiểu và ôn luyện toàn diện cho ${level.shortLabel}.',
+  ja: '${level.shortLabel}の模擬試験・読解・総合対策。',
+);
 
-String _textbookSectionTitle(AppLanguage l) => _tr(l,
-    en: 'Textbook Tracker', vi: 'Theo dõi giáo trình', ja: '教材トラッカー');
+String _textbookSectionTitle(AppLanguage l) =>
+    _tr(l, en: 'Textbook Tracker', vi: 'Theo dõi giáo trình', ja: '教材トラッカー');
 
-String _lessonDecksSectionTitle(AppLanguage l) => _tr(l,
-    en: 'My Lesson Decks', vi: 'Bộ bài học của tôi', ja: 'マイレッスン');
+String _lessonDecksSectionTitle(AppLanguage l) =>
+    _tr(l, en: 'My Lesson Decks', vi: 'Bộ bài học của tôi', ja: 'マイレッスン');
 
-String _lessonDecksSectionCaption(AppLanguage l) => _tr(l,
-    en: 'Live progress from your actual lessons and due reviews.',
-    vi: 'Tiến độ thật từ các bài học và lượt ôn đến hạn của bạn.',
-    ja: '実際のレッスン進捗と期限レビューを表示します。');
+String _lessonDecksSectionCaption(AppLanguage l) => _tr(
+  l,
+  en: 'Live progress from your actual lessons and due reviews.',
+  vi: 'Tiến độ thật từ các bài học và lượt ôn đến hạn của bạn.',
+  ja: '実際のレッスン進捗と期限レビューを表示します。',
+);
 
-String _nextUpLabel(AppLanguage l) => _tr(l,
-    en: 'Next Up', vi: 'Tiếp theo', ja: '次にやること');
+String _nextUpLabel(AppLanguage l) =>
+    _tr(l, en: 'Next Up', vi: 'Tiếp theo', ja: '次にやること');
 
-String _continueLessonLabel(AppLanguage l) => _tr(l,
-    en: 'Continue lesson', vi: 'Tiếp tục bài học', ja: 'レッスンを続ける');
+String _continueLessonLabel(AppLanguage l) =>
+    _tr(l, en: 'Continue lesson', vi: 'Tiếp tục bài học', ja: 'レッスンを続ける');
 
-String _lessonProgressLabel(AppLanguage l, int percent, int dueCount) => _tr(l,
-    en: '$percent% complete • $dueCount due',
-    vi: 'Hoàn thành $percent% • $dueCount đến hạn',
-    ja: '$percent% 完了 • $dueCount 件期限');
+String _lessonProgressLabel(AppLanguage l, int percent, int dueCount) => _tr(
+  l,
+  en: '$percent% complete • $dueCount due',
+  vi: 'Hoàn thành $percent% • $dueCount đến hạn',
+  ja: '$percent% 完了 • $dueCount 件期限',
+);
 
-String _lessonDecksEmptyLabel(AppLanguage l) => _tr(l,
-    en: 'Start a lesson or build review progress to unlock live lesson decks here.',
-    vi: 'Hãy bắt đầu bài học hoặc tạo tiến độ ôn tập để mở phần bộ bài học trực tiếp ở đây.',
-    ja: 'レッスンや復習を始めると、ここにライブのレッスン一覧が表示されます。');
+String _lessonDecksEmptyLabel(AppLanguage l) => _tr(
+  l,
+  en: 'Start a lesson or build review progress to unlock live lesson decks here.',
+  vi: 'Hãy bắt đầu bài học hoặc tạo tiến độ ôn tập để mở phần bộ bài học trực tiếp ở đây.',
+  ja: 'レッスンや復習を始めると、ここにライブのレッスン一覧が表示されます。',
+);
 
-String _resourceSectionTitle(AppLanguage l) => _tr(l,
-    en: 'Resource Library', vi: 'Thư viện tài nguyên', ja: 'リソースライブラリ');
+String _resourceSectionTitle(AppLanguage l) =>
+    _tr(l, en: 'Resource Library', vi: 'Thư viện tài nguyên', ja: 'リソースライブラリ');
 
-String _checklistSectionTitle(AppLanguage l) => _tr(l,
-    en: 'Exam Checklist', vi: 'Danh sách chuẩn bị thi', ja: '試験チェックリスト');
+String _checklistSectionTitle(AppLanguage l) =>
+    _tr(l, en: 'Exam Checklist', vi: 'Danh sách chuẩn bị thi', ja: '試験チェックリスト');
 
-String _lessonLabel(AppLanguage l, int current, int total) => _tr(l,
-    en: 'Lesson $current / $total',
-    vi: 'Bài $current / $total',
-    ja: '$current / $total レッスン');
+String _lessonLabel(AppLanguage l, int current, int total) => _tr(
+  l,
+  en: 'Lesson $current / $total',
+  vi: 'Bài $current / $total',
+  ja: '$current / $total レッスン',
+);
 
 String _levelLabel(StudyResourceLevel level) => switch (level) {
-      StudyResourceLevel.beginner => 'Beginner',
-      StudyResourceLevel.intermediate => 'Intermediate',
-      StudyResourceLevel.advanced => 'Advanced',
-    };
+  StudyResourceLevel.beginner => 'Beginner',
+  StudyResourceLevel.intermediate => 'Intermediate',
+  StudyResourceLevel.advanced => 'Advanced',
+};
 
 // ---------------------------------------------------------------------------
 // Screen
@@ -86,7 +104,9 @@ class StudyHubScreen extends ConsumerWidget {
     final lessonDecksAsync = ref.watch(studyHubDecksProvider);
 
     final filtered = filteredResources(hub);
-    final resources = filtered.isNotEmpty ? filtered : studyResources.take(6).toList();
+    final resources = filtered.isNotEmpty
+        ? filtered
+        : studyResources.take(6).toList();
 
     return Scaffold(
       appBar: AppBar(title: Text(_screenTitle(language))),
@@ -101,7 +121,7 @@ class StudyHubScreen extends ConsumerWidget {
               title: _jlptCardTitle(language),
               subtitle: _jlptCardSubtitle(language, level),
               primaryLabel: 'Start prep',
-              onPrimaryTap: () => context.push('/jlpt/coach'),
+              onPrimaryTap: () => context.openJlptCoach(),
               status: AppStatusChip(
                 label: level.shortLabel,
                 tone: AppStatusTone.primary,
@@ -133,10 +153,11 @@ class StudyHubScreen extends ConsumerWidget {
                           if (board.nextUp != null) ...[
                             Text(
                               _nextUpLabel(language),
-                              style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                                fontWeight: FontWeight.w800,
-                                color: context.appPalette.ink,
-                              ),
+                              style: Theme.of(context).textTheme.labelLarge
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.w800,
+                                    color: context.appPalette.ink,
+                                  ),
                             ),
                             const SizedBox(height: AppSpacing.xs),
                             AppCompactRow(
@@ -153,13 +174,15 @@ class StudyHubScreen extends ConsumerWidget {
                                     ? AppStatusTone.warning
                                     : AppStatusTone.primary,
                               ),
-                              onTap: () => context.push('/lesson/${board.nextUp!.id}'),
+                              onTap: () => context.openLesson(board.nextUp!.id),
                             ),
                             const SizedBox(height: AppSpacing.md),
                           ],
                           for (final deck in board.activeDecks.take(4))
                             Padding(
-                              padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+                              padding: const EdgeInsets.only(
+                                bottom: AppSpacing.sm,
+                              ),
                               child: AppCompactRow(
                                 icon: deck.dueCount > 0
                                     ? Icons.schedule_rounded
@@ -178,21 +201,25 @@ class StudyHubScreen extends ConsumerWidget {
                                       ? AppStatusTone.warning
                                       : AppStatusTone.primary,
                                 ),
-                                onTap: () => context.push('/lesson/${deck.id}'),
+                                onTap: () => context.openLesson(deck.id),
                               ),
                             ),
                           if (board.completedDecks.isNotEmpty)
                             Text(
                               '${board.completedDecks.length} ${_tr(language, en: 'completed', vi: 'đã xong', ja: '完了')}',
-                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: context.appPalette.ink.withValues(alpha: 0.6),
-                                fontWeight: FontWeight.w700,
-                              ),
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(
+                                    color: context.appPalette.ink.withValues(
+                                      alpha: 0.6,
+                                    ),
+                                    fontWeight: FontWeight.w700,
+                                  ),
                             ),
                         ],
                       );
                     },
-                    loading: () => const Center(child: CircularProgressIndicator()),
+                    loading: () =>
+                        const Center(child: CircularProgressIndicator()),
                     error: (_, _) => _StudyHubEmptyCopy(
                       label: _lessonDecksEmptyLabel(language),
                     ),
@@ -225,21 +252,21 @@ class StudyHubScreen extends ConsumerWidget {
                       language: language,
                       onDecrement: current > 0
                           ? () => ref
-                              .read(studyHubProvider.notifier)
-                              .setPackLesson(
-                                packId: pack.id,
-                                currentLesson: current - 1,
-                                maxLesson: pack.totalLessons,
-                              )
+                                .read(studyHubProvider.notifier)
+                                .setPackLesson(
+                                  packId: pack.id,
+                                  currentLesson: current - 1,
+                                  maxLesson: pack.totalLessons,
+                                )
                           : null,
                       onIncrement: current < pack.totalLessons
                           ? () => ref
-                              .read(studyHubProvider.notifier)
-                              .setPackLesson(
-                                packId: pack.id,
-                                currentLesson: current + 1,
-                                maxLesson: pack.totalLessons,
-                              )
+                                .read(studyHubProvider.notifier)
+                                .setPackLesson(
+                                  packId: pack.id,
+                                  currentLesson: current + 1,
+                                  maxLesson: pack.totalLessons,
+                                )
                           : null,
                     ),
                   );
@@ -252,13 +279,16 @@ class StudyHubScreen extends ConsumerWidget {
             Row(
               children: [
                 Expanded(
-                  child: AppSectionHeader(title: _resourceSectionTitle(language)),
+                  child: AppSectionHeader(
+                    title: _resourceSectionTitle(language),
+                  ),
                 ),
                 if (hub.selectedLevels.isNotEmpty ||
                     hub.selectedTopics.isNotEmpty ||
                     hub.selectedLabels.isNotEmpty)
                   TextButton(
-                    onPressed: () => ref.read(studyHubProvider.notifier).clearFilters(),
+                    onPressed: () =>
+                        ref.read(studyHubProvider.notifier).clearFilters(),
                     child: Text(_clearFiltersLabel(language)),
                   ),
               ],
@@ -266,41 +296,56 @@ class StudyHubScreen extends ConsumerWidget {
             const SizedBox(height: AppSpacing.sm),
             _FilterWrap(
               title: _filterLevelLabel(language),
-              children: StudyResourceLevel.values.map((levelOption) {
-                final selected = hub.selectedLevels.contains(levelOption);
-                return ChoiceChip(
-                  label: Text(_levelLabel(levelOption)),
-                  selected: selected,
-                  onSelected: (_) => ref.read(studyHubProvider.notifier).toggleLevel(levelOption),
-                );
-              }).toList(growable: false),
+              children: StudyResourceLevel.values
+                  .map((levelOption) {
+                    final selected = hub.selectedLevels.contains(levelOption);
+                    return ChoiceChip(
+                      label: Text(_levelLabel(levelOption)),
+                      selected: selected,
+                      onSelected: (_) => ref
+                          .read(studyHubProvider.notifier)
+                          .toggleLevel(levelOption),
+                    );
+                  })
+                  .toList(growable: false),
             ),
             const SizedBox(height: AppSpacing.sm),
             _FilterWrap(
               title: _filterTopicLabel(language),
-              children: StudyResourceTopic.values.map((topic) {
-                final selected = hub.selectedTopics.contains(topic);
-                return ChoiceChip(
-                  label: Text(_topicLabel(language, topic)),
-                  selected: selected,
-                  onSelected: (_) => ref.read(studyHubProvider.notifier).toggleTopic(topic),
-                );
-              }).toList(growable: false),
+              children: StudyResourceTopic.values
+                  .map((topic) {
+                    final selected = hub.selectedTopics.contains(topic);
+                    return ChoiceChip(
+                      label: Text(_topicLabel(language, topic)),
+                      selected: selected,
+                      onSelected: (_) => ref
+                          .read(studyHubProvider.notifier)
+                          .toggleTopic(topic),
+                    );
+                  })
+                  .toList(growable: false),
             ),
             const SizedBox(height: AppSpacing.sm),
             _FilterWrap(
               title: _filterLabelLabel(language),
-              children: availableLabels().take(8).map((label) {
-                final selected = hub.selectedLabels.contains(label);
-                return ChoiceChip(
-                  label: Text(label),
-                  selected: selected,
-                  onSelected: (_) => ref.read(studyHubProvider.notifier).toggleLabel(label),
-                );
-              }).toList(growable: false),
+              children: availableLabels()
+                  .take(8)
+                  .map((label) {
+                    final selected = hub.selectedLabels.contains(label);
+                    return ChoiceChip(
+                      label: Text(label),
+                      selected: selected,
+                      onSelected: (_) => ref
+                          .read(studyHubProvider.notifier)
+                          .toggleLabel(label),
+                    );
+                  })
+                  .toList(growable: false),
             ),
             const SizedBox(height: AppSpacing.md),
-            ...resources.take(8).map(
+            ...resources
+                .take(8)
+                .map(
                   (resource) => Padding(
                     padding: const EdgeInsets.only(bottom: AppSpacing.sm),
                     child: AppCompactRow(
@@ -391,13 +436,17 @@ class StudyHubScreen extends ConsumerWidget {
                       OutlinedButton.icon(
                         onPressed: () => ref
                             .read(studyHubProvider.notifier)
-                            .setExamDate(DateTime.now().add(const Duration(days: 90))),
+                            .setExamDate(
+                              DateTime.now().add(const Duration(days: 90)),
+                            ),
                         icon: const Icon(Icons.event_rounded, size: 16),
                         label: Text(_setExamDateLabel(language)),
                       ),
                       if (hub.examDate != null)
                         TextButton(
-                          onPressed: () => ref.read(studyHubProvider.notifier).setExamDate(null),
+                          onPressed: () => ref
+                              .read(studyHubProvider.notifier)
+                              .setExamDate(null),
                           child: Text(_clearExamDateLabel(language)),
                         ),
                     ],
@@ -482,7 +531,9 @@ class StudyHubScreen extends ConsumerWidget {
                 ),
               )
             else
-              ...hub.threads.take(10).map(
+              ...hub.threads
+                  .take(10)
+                  .map(
                     (thread) => Padding(
                       padding: const EdgeInsets.only(bottom: AppSpacing.sm),
                       child: _QaThreadCard(
@@ -494,8 +545,12 @@ class StudyHubScreen extends ConsumerWidget {
                         onToggleResolved: () => ref
                             .read(studyHubProvider.notifier)
                             .toggleResolved(thread.id),
-                        onAnswer: () =>
-                            _showAnswerDialog(context, ref, language, thread.id),
+                        onAnswer: () => _showAnswerDialog(
+                          context,
+                          ref,
+                          language,
+                          thread.id,
+                        ),
                       ),
                     ),
                   ),
@@ -522,17 +577,13 @@ class StudyHubScreen extends ConsumerWidget {
           children: [
             TextField(
               controller: titleCtrl,
-              decoration: InputDecoration(
-                labelText: _qaTitleHint(language),
-              ),
+              decoration: InputDecoration(labelText: _qaTitleHint(language)),
               textInputAction: TextInputAction.next,
             ),
             const SizedBox(height: 12),
             TextField(
               controller: bodyCtrl,
-              decoration: InputDecoration(
-                labelText: _qaBodyHint(language),
-              ),
+              decoration: InputDecoration(labelText: _qaBodyHint(language)),
               maxLines: 3,
             ),
           ],
@@ -544,7 +595,9 @@ class StudyHubScreen extends ConsumerWidget {
           ),
           FilledButton(
             onPressed: () {
-              ref.read(studyHubProvider.notifier).addQuestion(
+              ref
+                  .read(studyHubProvider.notifier)
+                  .addQuestion(
                     title: titleCtrl.text,
                     body: bodyCtrl.text,
                     tags: const [],
@@ -602,32 +655,33 @@ class StudyHubScreen extends ConsumerWidget {
   }
 
   IconData _topicIcon(StudyResourceTopic topic) => switch (topic) {
-        StudyResourceTopic.grammar => Icons.menu_book_rounded,
-        StudyResourceTopic.kanji => Icons.brush_rounded,
-        StudyResourceTopic.vocabulary => Icons.translate_rounded,
-        StudyResourceTopic.reading => Icons.article_rounded,
-        StudyResourceTopic.listening => Icons.headphones_rounded,
-        StudyResourceTopic.exam => Icons.timer_outlined,
-        StudyResourceTopic.selfStudy => Icons.self_improvement_rounded,
-        StudyResourceTopic.tools => Icons.build_outlined,
-      };
+    StudyResourceTopic.grammar => Icons.menu_book_rounded,
+    StudyResourceTopic.kanji => Icons.brush_rounded,
+    StudyResourceTopic.vocabulary => Icons.translate_rounded,
+    StudyResourceTopic.reading => Icons.article_rounded,
+    StudyResourceTopic.listening => Icons.headphones_rounded,
+    StudyResourceTopic.exam => Icons.timer_outlined,
+    StudyResourceTopic.selfStudy => Icons.self_improvement_rounded,
+    StudyResourceTopic.tools => Icons.build_outlined,
+  };
 
   AppStatusTone _levelTone(StudyResourceLevel level) => switch (level) {
-        StudyResourceLevel.beginner => AppStatusTone.success,
-        StudyResourceLevel.intermediate => AppStatusTone.warning,
-        StudyResourceLevel.advanced => AppStatusTone.warning,
-      };
+    StudyResourceLevel.beginner => AppStatusTone.success,
+    StudyResourceLevel.intermediate => AppStatusTone.warning,
+    StudyResourceLevel.advanced => AppStatusTone.warning,
+  };
 
   String _qaSectionTitle(AppLanguage l) =>
       _tr(l, en: 'Community Q&A', vi: 'Hỏi & Đáp cộng đồng', ja: 'Q&A');
 
-  String _qaAskLabel(AppLanguage l) =>
-      _tr(l, en: 'Ask', vi: 'Hỏi', ja: '質問する');
+  String _qaAskLabel(AppLanguage l) => _tr(l, en: 'Ask', vi: 'Hỏi', ja: '質問する');
 
-  String _qaEmptyLabel(AppLanguage l) => _tr(l,
-      en: 'No questions yet. Be the first to ask.',
-      vi: 'Chưa có câu hỏi nào. Hãy là người đầu tiên đặt câu hỏi.',
-      ja: 'まだ質問がありません。最初に質問してみましょう。');
+  String _qaEmptyLabel(AppLanguage l) => _tr(
+    l,
+    en: 'No questions yet. Be the first to ask.',
+    vi: 'Chưa có câu hỏi nào. Hãy là người đầu tiên đặt câu hỏi.',
+    ja: 'まだ質問がありません。最初に質問してみましょう。',
+  );
 
   String _qaAskDialogTitle(AppLanguage l) =>
       _tr(l, en: 'Ask a question', vi: 'Đặt câu hỏi', ja: '質問する');
@@ -666,12 +720,8 @@ class StudyHubScreen extends ConsumerWidget {
     ja: '学習ロードマップ',
   );
 
-  String _examDateSectionTitle(AppLanguage l) => _tr(
-    l,
-    en: 'Target Exam Date',
-    vi: 'Ngày thi mục tiêu',
-    ja: '目標試験日',
-  );
+  String _examDateSectionTitle(AppLanguage l) =>
+      _tr(l, en: 'Target Exam Date', vi: 'Ngày thi mục tiêu', ja: '目標試験日');
 
   String _examDateEmptyLabel(AppLanguage l) => _tr(
     l,
@@ -700,15 +750,46 @@ class StudyHubScreen extends ConsumerWidget {
   String _clearExamDateLabel(AppLanguage l) =>
       _tr(l, en: 'Clear date', vi: 'Xoá ngày', ja: '日付をクリア');
 
-  String _topicLabel(AppLanguage l, StudyResourceTopic topic) => switch (topic) {
-        StudyResourceTopic.grammar => _tr(l, en: 'Grammar', vi: 'Ngữ pháp', ja: '文法'),
+  String _topicLabel(AppLanguage l, StudyResourceTopic topic) =>
+      switch (topic) {
+        StudyResourceTopic.grammar => _tr(
+          l,
+          en: 'Grammar',
+          vi: 'Ngữ pháp',
+          ja: '文法',
+        ),
         StudyResourceTopic.kanji => _tr(l, en: 'Kanji', vi: 'Kanji', ja: '漢字'),
-        StudyResourceTopic.vocabulary => _tr(l, en: 'Vocabulary', vi: 'Từ vựng', ja: '語彙'),
-        StudyResourceTopic.reading => _tr(l, en: 'Reading', vi: 'Đọc hiểu', ja: '読解'),
-        StudyResourceTopic.listening => _tr(l, en: 'Listening', vi: 'Nghe', ja: '聴解'),
+        StudyResourceTopic.vocabulary => _tr(
+          l,
+          en: 'Vocabulary',
+          vi: 'Từ vựng',
+          ja: '語彙',
+        ),
+        StudyResourceTopic.reading => _tr(
+          l,
+          en: 'Reading',
+          vi: 'Đọc hiểu',
+          ja: '読解',
+        ),
+        StudyResourceTopic.listening => _tr(
+          l,
+          en: 'Listening',
+          vi: 'Nghe',
+          ja: '聴解',
+        ),
         StudyResourceTopic.exam => _tr(l, en: 'Exam', vi: 'Thi cử', ja: '試験'),
-        StudyResourceTopic.selfStudy => _tr(l, en: 'Self-study', vi: 'Tự học', ja: '独学'),
-        StudyResourceTopic.tools => _tr(l, en: 'Tools', vi: 'Công cụ', ja: 'ツール'),
+        StudyResourceTopic.selfStudy => _tr(
+          l,
+          en: 'Self-study',
+          vi: 'Tự học',
+          ja: '独学',
+        ),
+        StudyResourceTopic.tools => _tr(
+          l,
+          en: 'Tools',
+          vi: 'Công cụ',
+          ja: 'ツール',
+        ),
       };
 }
 
@@ -818,11 +899,7 @@ class _FilterWrap extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 6),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: children,
-        ),
+        Wrap(spacing: 8, runSpacing: 8, children: children),
       ],
     );
   }
@@ -874,8 +951,11 @@ class _QaThreadCardState extends State<_QaThreadCard> {
                 if (thread.resolved)
                   Padding(
                     padding: const EdgeInsets.only(right: 6, top: 2),
-                    child: Icon(Icons.check_circle_rounded,
-                        size: 16, color: palette.success),
+                    child: Icon(
+                      Icons.check_circle_rounded,
+                      size: 16,
+                      color: palette.success,
+                    ),
                   ),
                 Expanded(
                   child: Text(
@@ -903,14 +983,14 @@ class _QaThreadCardState extends State<_QaThreadCard> {
             Wrap(
               spacing: 4,
               children: thread.tags
-                  .map((tag) => Chip(
-                        label: Text(tag,
-                            style: const TextStyle(fontSize: 10)),
-                        padding: EdgeInsets.zero,
-                        materialTapTargetSize:
-                            MaterialTapTargetSize.shrinkWrap,
-                        visualDensity: VisualDensity.compact,
-                      ))
+                  .map(
+                    (tag) => Chip(
+                      label: Text(tag, style: const TextStyle(fontSize: 10)),
+                      padding: EdgeInsets.zero,
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      visualDensity: VisualDensity.compact,
+                    ),
+                  )
                   .toList(),
             ),
           ],
@@ -921,7 +1001,9 @@ class _QaThreadCardState extends State<_QaThreadCard> {
             Text(
               thread.body,
               style: TextStyle(
-                  color: palette.ink.withValues(alpha: 0.75), height: 1.4),
+                color: palette.ink.withValues(alpha: 0.75),
+                height: 1.4,
+              ),
             ),
             if (thread.answers.isNotEmpty) ...[
               const SizedBox(height: 12),
@@ -936,8 +1018,9 @@ class _QaThreadCardState extends State<_QaThreadCard> {
                   child: Text(
                     answer.body,
                     style: TextStyle(
-                        fontSize: 13,
-                        color: palette.ink.withValues(alpha: 0.85)),
+                      fontSize: 13,
+                      color: palette.ink.withValues(alpha: 0.85),
+                    ),
                   ),
                 ),
               ),
@@ -953,18 +1036,23 @@ class _QaThreadCardState extends State<_QaThreadCard> {
                 borderRadius: BorderRadius.circular(6),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 6, vertical: 2),
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
                   child: Row(
                     children: [
-                      Icon(Icons.arrow_upward_rounded,
-                          size: 14,
-                          color: palette.ink.withValues(alpha: 0.55)),
+                      Icon(
+                        Icons.arrow_upward_rounded,
+                        size: 14,
+                        color: palette.ink.withValues(alpha: 0.55),
+                      ),
                       const SizedBox(width: 3),
                       Text(
                         '${thread.upvotes}',
                         style: TextStyle(
-                            fontSize: 12,
-                            color: palette.ink.withValues(alpha: 0.55)),
+                          fontSize: 12,
+                          color: palette.ink.withValues(alpha: 0.55),
+                        ),
                       ),
                     ],
                   ),
@@ -976,11 +1064,12 @@ class _QaThreadCardState extends State<_QaThreadCard> {
                 borderRadius: BorderRadius.circular(6),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 6, vertical: 2),
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
                   child: Text(
                     _tr(l, en: 'Answer', vi: 'Trả lời', ja: '回答'),
-                    style: TextStyle(
-                        fontSize: 12, color: palette.primary),
+                    style: TextStyle(fontSize: 12, color: palette.primary),
                   ),
                 ),
               ),
@@ -990,17 +1079,18 @@ class _QaThreadCardState extends State<_QaThreadCard> {
                 borderRadius: BorderRadius.circular(6),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 6, vertical: 2),
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
                   child: Text(
                     thread.resolved
-                        ? _tr(l,
-                            en: 'Reopen',
-                            vi: 'Mở lại',
-                            ja: '再オープン')
-                        : _tr(l,
+                        ? _tr(l, en: 'Reopen', vi: 'Mở lại', ja: '再オープン')
+                        : _tr(
+                            l,
                             en: 'Mark solved',
                             vi: 'Đánh dấu đã giải quyết',
-                            ja: '解決済みにする'),
+                            ja: '解決済みにする',
+                          ),
                     style: TextStyle(
                       fontSize: 11,
                       color: thread.resolved
@@ -1035,7 +1125,9 @@ class _StudyHubEmptyCopy extends StatelessWidget {
             fontSize: 14,
             height: 1.5,
             fontWeight: FontWeight.w600,
-            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
+            color: Theme.of(
+              context,
+            ).colorScheme.onSurface.withValues(alpha: 0.5),
           ),
         ),
       ),

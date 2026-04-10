@@ -15,6 +15,7 @@ Widget _buildScreen() {
     routes: [
       GoRoute(path: '/', builder: (_, _) => const StudyHubScreen()),
       GoRoute(
+        name: 'jlpt-coach',
         path: '/jlpt/coach',
         builder: (_, _) => const Scaffold(body: Center(child: Text('JLPT Coach'))),
       ),

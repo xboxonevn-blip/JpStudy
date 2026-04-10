@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
@@ -102,12 +103,15 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
   final repo = ref.read(lessonRepositoryProvider);
   final language = ref.watch(appLanguageProvider);
 
-  // Fire all 13 independent fetches in parallel — previously sequential.
-  // dueCount uses a COUNT(*) query instead of loading full term objects.
-  // minna companion counts use COUNT(*) from getVocabByLevelAndSeries
-  // (level-series filter is indexable in SQL, unlike lesson-tag filter).
-  final dashboardFuture = ref.watch(dashboardProvider.future);
-  final nextReviewFuture = ref.watch(nextVocabReviewProvider.future);
+  // Subscribe only to vocabDue — streak/XP ticks won't re-fire all 13 queries.
+  final dueCount = ref.watch(
+    dashboardProvider.select((v) => v.valueOrNull?.vocabDue ?? 0),
+  );
+  // Use current stream value; null while stream hasn't emitted yet (fine since
+  // nextReview is nullable). Provider re-runs when stream emits a new value.
+  final nextReview = ref.watch(nextVocabReviewProvider).valueOrNull;
+
+  // Fire all 11 independent fetches in parallel.
   final n5Future = repo.getVocabByLevelAndSeries('N5', 'hajimete');
   final n4Future = repo.getVocabByLevelAndSeries('N4', 'hajimete');
   final n3Future = repo.getVocabByLevelAndSeries('N3', 'hajimete');
@@ -118,15 +122,22 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
   final shinkanzenN2SummaryFuture = _loadShinkanzenManifestSummary('N2');
   final shinkanzenN1SummaryFuture = _loadShinkanzenManifestSummary('N1');
   final minnaN5CountFuture = repo
-      .getVocabByLessonRange('N5', startLesson: 1, endLesson: 25, series: 'minna')
+      .getVocabByLessonRange(
+        'N5',
+        startLesson: 1,
+        endLesson: 25,
+        series: 'minna',
+      )
       .then((items) => items.length);
   final minnaN4CountFuture = repo
-      .getVocabByLessonRange('N4', startLesson: 26, endLesson: 50, series: 'minna')
+      .getVocabByLessonRange(
+        'N4',
+        startLesson: 26,
+        endLesson: 50,
+        series: 'minna',
+      )
       .then((items) => items.length);
 
-  final dashboard = await dashboardFuture;
-  final dueCount = dashboard.vocabDue;
-  final nextReview = await nextReviewFuture;
   final n5 = await n5Future;
   final n4 = await n4Future;
   final n3 = await n3Future;
@@ -345,7 +356,6 @@ int? _chapterCountForLevel(String levelCode) => switch (levelCode) {
   _ => null,
 };
 
-
 (int, int)? _minnaLessonRange(String levelCode, _VocabProgramType type) {
   if (type != _VocabProgramType.minna) return null;
   return switch (levelCode) {
@@ -388,15 +398,19 @@ String _todayCaption(AppLanguage language) => language.vocabTodayCaption();
 
 String _dueNowLabel(AppLanguage language) => language.vocabDueNowLabel();
 
-String _activeLaneLabel(AppLanguage language) => language.vocabActiveLaneLabel();
+String _activeLaneLabel(AppLanguage language) =>
+    language.vocabActiveLaneLabel();
 
-String _nextWindowLabel(AppLanguage language) => language.vocabNextWindowLabel();
+String _nextWindowLabel(AppLanguage language) =>
+    language.vocabNextWindowLabel();
 
 String _reviewNowLabel(AppLanguage language) => language.vocabReviewNowLabel();
 
-String _companionShortcutLabel(AppLanguage language) => language.vocabCompanionShortcutLabel();
+String _companionShortcutLabel(AppLanguage language) =>
+    language.vocabCompanionShortcutLabel();
 
-String _todayReviewTitle(AppLanguage language, String levelCode) => language.vocabReviewTitle(levelCode);
+String _todayReviewTitle(AppLanguage language, String levelCode) =>
+    language.vocabReviewTitle(levelCode);
 
 String _todayReviewSubtitle(
   AppLanguage language,
@@ -404,17 +418,23 @@ String _todayReviewSubtitle(
   DateTime? nextReview,
 ) => language.vocabReviewSubtitle(dueCount, _formatReviewTiming(nextReview));
 
-String _currentTrackLine(AppLanguage language, VocabTrackSummary track) => language.vocabCurrentTrackLine(track.title, track.termCount);
+String _currentTrackLine(AppLanguage language, VocabTrackSummary track) =>
+    language.vocabCurrentTrackLine(track.title, track.termCount);
 
-String _liveCatalogTitle(AppLanguage language) => language.vocabLiveCatalogTitle();
+String _liveCatalogTitle(AppLanguage language) =>
+    language.vocabLiveCatalogTitle();
 
-String _liveCatalogCaption(AppLanguage language) => language.vocabLiveCatalogCaption();
+String _liveCatalogCaption(AppLanguage language) =>
+    language.vocabLiveCatalogCaption();
 
-String _previewCatalogTitle(AppLanguage language) => language.vocabPreviewCatalogTitle();
+String _previewCatalogTitle(AppLanguage language) =>
+    language.vocabPreviewCatalogTitle();
 
-String _previewCatalogCaption(AppLanguage language) => language.vocabPreviewCatalogCaption();
+String _previewCatalogCaption(AppLanguage language) =>
+    language.vocabPreviewCatalogCaption();
 
-String _chapterSummaryLabel(int chapterCount, AppLanguage language) => language.vocabChapterSummaryLabel(chapterCount);
+String _chapterSummaryLabel(int chapterCount, AppLanguage language) =>
+    language.vocabChapterSummaryLabel(chapterCount);
 
 String _formatReviewTiming(DateTime? nextReview) {
   if (nextReview == null) return 'Ready now';
@@ -430,7 +450,8 @@ String _formatReviewTiming(DateTime? nextReview) {
 String _localizedSectionSubtitle(
   _VocabCatalogSection section,
   AppLanguage language,
-) => language.vocabLocalizedSectionSubtitle(section.levelCode, section.subtitle);
+) =>
+    language.vocabLocalizedSectionSubtitle(section.levelCode, section.subtitle);
 
 String _localizedProgramSubtitle(
   _VocabCatalogProgram program,
@@ -453,29 +474,37 @@ String _heroTitle(AppLanguage language) => language.vocabHeroTitle();
 
 String _heroSubtitle(AppLanguage language) => language.vocabHeroSubtitle();
 
-String _heroDescription(AppLanguage language) => language.vocabHeroDescription();
+String _heroDescription(AppLanguage language) =>
+    language.vocabHeroDescription();
 
-String _heroScopeAllLabel(AppLanguage language) => language.vocabHeroScopeAllLabel();
+String _heroScopeAllLabel(AppLanguage language) =>
+    language.vocabHeroScopeAllLabel();
 
-String _heroScopeLevelLabel(AppLanguage language, String level) => language.vocabHeroScopeLevelLabel(level);
+String _heroScopeLevelLabel(AppLanguage language, String level) =>
+    language.vocabHeroScopeLevelLabel(level);
 
-String _heroMemoryLabel(AppLanguage language) => language.vocabHeroMemoryLabel();
+String _heroMemoryLabel(AppLanguage language) =>
+    language.vocabHeroMemoryLabel();
 
 String _heroUsageLabel(AppLanguage language) => language.vocabHeroUsageLabel();
 
 String _heroPanelTitle(AppLanguage language) => language.vocabHeroPanelTitle();
 
-String _heroPanelSubtitle(AppLanguage language) => language.vocabHeroPanelSubtitle();
+String _heroPanelSubtitle(AppLanguage language) =>
+    language.vocabHeroPanelSubtitle();
 
-String _heroMetricPrograms(AppLanguage language) => language.vocabHeroMetricPrograms();
+String _heroMetricPrograms(AppLanguage language) =>
+    language.vocabHeroMetricPrograms();
 
 String _heroMetricLive(AppLanguage language) => language.vocabHeroMetricLive();
 
-String _heroMetricTerms(AppLanguage language) => language.vocabHeroMetricTerms();
+String _heroMetricTerms(AppLanguage language) =>
+    language.vocabHeroMetricTerms();
 
 String _trackLabel(AppLanguage language) => language.vocabTrackLabel();
 
-String _programTypeLabel(_VocabProgramType type, AppLanguage language) => language.vocabProgramTypeLabel(type.name);
+String _programTypeLabel(_VocabProgramType type, AppLanguage language) =>
+    language.vocabProgramTypeLabel(type.name);
 
 String _badgeLabel(_VocabCatalogProgram program, AppLanguage language) {
   if (program.isComingSoon) return _comingSoonLabel(language);
@@ -483,11 +512,14 @@ String _badgeLabel(_VocabCatalogProgram program, AppLanguage language) {
   return program.badgeText ?? _availableNowLabel(language);
 }
 
-String _availableNowLabel(AppLanguage language) => language.vocabAvailableNowLabel();
+String _availableNowLabel(AppLanguage language) =>
+    language.vocabAvailableNowLabel();
 
-String _comingSoonLabel(AppLanguage language) => language.vocabComingSoonLabel();
+String _comingSoonLabel(AppLanguage language) =>
+    language.vocabComingSoonLabel();
 
-String _previewReadyLabel(AppLanguage language) => language.vocabPreviewReadyLabel();
+String _previewReadyLabel(AppLanguage language) =>
+    language.vocabPreviewReadyLabel();
 
 String _roadmapLabel(AppLanguage language) => language.vocabRoadmapLabel();
 
@@ -500,9 +532,11 @@ String _programAvailabilityPill(
   return _roadmapLabel(language);
 }
 
-String _previewDialogTitle(AppLanguage language) => language.vocabPreviewDialogTitle();
+String _previewDialogTitle(AppLanguage language) =>
+    language.vocabPreviewDialogTitle();
 
-String _previewDialogClose(AppLanguage language) => language.vocabPreviewDialogClose();
+String _previewDialogClose(AppLanguage language) =>
+    language.vocabPreviewDialogClose();
 
 String _previewDialogBody(AppLanguage language, _VocabCatalogProgram program) {
   if (program.previewBody != null && program.previewBody!.trim().isNotEmpty) {
@@ -511,11 +545,13 @@ String _previewDialogBody(AppLanguage language, _VocabCatalogProgram program) {
   return language.vocabDefaultPreviewDialogBody();
 }
 
-String _meaningFirstLabel(AppLanguage language) => language.vocabMeaningFirstLabel();
+String _meaningFirstLabel(AppLanguage language) =>
+    language.vocabMeaningFirstLabel();
 
 String _usageFlowLabel(AppLanguage language) => language.vocabUsageFlowLabel();
 
-String _reviewReadyLabel(AppLanguage language) => language.vocabReviewReadyLabel();
+String _reviewReadyLabel(AppLanguage language) =>
+    language.vocabReviewReadyLabel();
 
 String _openLaneLabel(AppLanguage language) => language.vocabOpenLaneLabel();
 
@@ -523,8 +559,11 @@ String _joinTrackLabel(AppLanguage language) => language.vocabJoinTrackLabel();
 
 String _previewLabel(AppLanguage language) => language.vocabPreviewLabel();
 
-String _programFooterHint(_VocabProgramType type, AppLanguage language) => language.vocabProgramFooterHint(type.name);
+String _programFooterHint(_VocabProgramType type, AppLanguage language) =>
+    language.vocabProgramFooterHint(type.name);
 
-String _catalogErrorTitle(AppLanguage language) => language.vocabCatalogErrorTitle();
+String _catalogErrorTitle(AppLanguage language) =>
+    language.vocabCatalogErrorTitle();
 
-String _catalogRetryLabel(AppLanguage language) => language.vocabCatalogRetryLabel();
+String _catalogRetryLabel(AppLanguage language) =>
+    language.vocabCatalogRetryLabel();

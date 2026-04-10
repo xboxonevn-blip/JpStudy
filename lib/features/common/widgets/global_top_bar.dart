@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/app/theme/app_breakpoints.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
@@ -34,7 +34,7 @@ class GlobalTopBar extends ConsumerWidget {
             children: [
               Expanded(
                 child: InkWell(
-                  onTap: () => context.go('/'),
+                  onTap: () => context.openHome(),
                   borderRadius: BorderRadius.circular(8),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -62,14 +62,15 @@ class GlobalTopBar extends ConsumerWidget {
                         child: Text(
                           'JP Study',
                           overflow: TextOverflow.ellipsis,
-                          style: (compact
-                                  ? Theme.of(context).textTheme.titleMedium
-                                  : Theme.of(context).textTheme.titleLarge)
-                              ?.copyWith(
-                                fontWeight: FontWeight.w900,
-                                color: palette.ink,
-                                letterSpacing: -0.5,
-                              ),
+                          style:
+                              (compact
+                                      ? Theme.of(context).textTheme.titleMedium
+                                      : Theme.of(context).textTheme.titleLarge)
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.w900,
+                                    color: palette.ink,
+                                    letterSpacing: -0.5,
+                                  ),
                         ),
                       ),
                       if (showMascot) ...[
@@ -91,8 +92,9 @@ class GlobalTopBar extends ConsumerWidget {
                 icon: const Icon(Icons.notifications_none_rounded),
                 color: palette.ink,
                 tooltip: _notificationsTooltip(currentLang),
-                visualDensity:
-                    compact ? VisualDensity.compact : VisualDensity.standard,
+                visualDensity: compact
+                    ? VisualDensity.compact
+                    : VisualDensity.standard,
                 onPressed: () {},
               ),
               SizedBox(width: controlGap),
@@ -154,9 +156,7 @@ class _LanguagePicker extends ConsumerWidget {
       }).toList(),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: compact ? 6 : 8, vertical: 6),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -228,7 +228,9 @@ class _UserMenu extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  _premiumMenuLabel(Localizations.localeOf(context).languageCode),
+                  _premiumMenuLabel(
+                    Localizations.localeOf(context).languageCode,
+                  ),
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: palette.warning,
@@ -247,7 +249,9 @@ class _UserMenu extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  _inviteMenuLabel(Localizations.localeOf(context).languageCode),
+                  _inviteMenuLabel(
+                    Localizations.localeOf(context).languageCode,
+                  ),
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(color: palette.ink),
                 ),
@@ -267,7 +271,9 @@ class _UserMenu extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  _settingsMenuLabel(Localizations.localeOf(context).languageCode),
+                  _settingsMenuLabel(
+                    Localizations.localeOf(context).languageCode,
+                  ),
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(color: palette.ink),
                 ),
@@ -284,7 +290,9 @@ class _UserMenu extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  _logoutMenuLabel(Localizations.localeOf(context).languageCode),
+                  _logoutMenuLabel(
+                    Localizations.localeOf(context).languageCode,
+                  ),
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(color: palette.error),
                 ),
@@ -294,8 +302,8 @@ class _UserMenu extends StatelessWidget {
         ),
       ],
       onSelected: (val) {
-        if (val == 'premium') context.push('/premium');
-        if (val == 'settings') context.go('/me');
+        if (val == 'premium') context.openPremium();
+        if (val == 'settings') context.openMe();
       },
       child: Container(
         width: 36,
@@ -319,43 +327,43 @@ class _UserMenu extends StatelessWidget {
 }
 
 String _notificationsTooltip(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'Notifications',
-      AppLanguage.vi => 'Thông báo',
-      AppLanguage.ja => '通知',
-    };
+  AppLanguage.en => 'Notifications',
+  AppLanguage.vi => 'Thông báo',
+  AppLanguage.ja => '通知',
+};
 
 String _languageTooltip(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'Choose language',
-      AppLanguage.vi => 'Chọn ngôn ngữ',
-      AppLanguage.ja => '言語を選択',
-    };
+  AppLanguage.en => 'Choose language',
+  AppLanguage.vi => 'Chọn ngôn ngữ',
+  AppLanguage.ja => '言語を選択',
+};
 
 String _profileTooltip(String languageCode) => switch (languageCode) {
-      'en' => 'Profile',
-      'ja' => 'プロフィール',
-      _ => 'Hồ sơ',
-    };
+  'en' => 'Profile',
+  'ja' => 'プロフィール',
+  _ => 'Hồ sơ',
+};
 
 String _premiumMenuLabel(String languageCode) => switch (languageCode) {
-      'en' => 'Upgrade to Premium',
-      'ja' => 'Premiumにアップグレード',
-      _ => 'Nâng cấp Premium',
-    };
+  'en' => 'Upgrade to Premium',
+  'ja' => 'Premiumにアップグレード',
+  _ => 'Nâng cấp Premium',
+};
 
 String _inviteMenuLabel(String languageCode) => switch (languageCode) {
-      'en' => 'Invite friends',
-      'ja' => '友達を招待',
-      _ => 'Giới thiệu bạn bè',
-    };
+  'en' => 'Invite friends',
+  'ja' => '友達を招待',
+  _ => 'Giới thiệu bạn bè',
+};
 
 String _settingsMenuLabel(String languageCode) => switch (languageCode) {
-      'en' => 'Settings',
-      'ja' => '設定',
-      _ => 'Cài đặt',
-    };
+  'en' => 'Settings',
+  'ja' => '設定',
+  _ => 'Cài đặt',
+};
 
 String _logoutMenuLabel(String languageCode) => switch (languageCode) {
-      'en' => 'Log out',
-      'ja' => 'ログアウト',
-      _ => 'Đăng xuất',
-    };
+  'en' => 'Log out',
+  'ja' => 'ログアウト',
+  _ => 'Đăng xuất',
+};

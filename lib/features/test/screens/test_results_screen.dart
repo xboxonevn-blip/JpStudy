@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -461,7 +461,7 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
             width: double.infinity,
             height: 56,
             child: ElevatedButton.icon(
-              onPressed: () => context.push('/learn/recovery-pack'),
+              onPressed: () => context.openLearnRecoveryPack(),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF1D4ED8),
                 foregroundColor: Colors.white,
@@ -628,7 +628,7 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
         icon: const Icon(Icons.close_rounded),
         onPressed: () => _togglePinnedLesson(pinned.lessonId),
       ),
-      onTap: () => context.push('/lesson/${pinned.lessonId}'),
+      onTap: () => context.openLesson(pinned.lessonId),
     );
   }
 
@@ -681,7 +681,7 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
           const Icon(Icons.arrow_forward_ios_rounded, size: 16),
         ],
       ),
-      onTap: () => context.push('/lesson/${suggestion.lessonId}'),
+      onTap: () => context.openLesson(suggestion.lessonId),
     );
   }
 

@@ -1,3 +1,5 @@
+import 'package:jpstudy/app/navigation/app_route_locations.dart';
+import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
@@ -14,7 +16,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 // Models
 // ---------------------------------------------------------------------------
 
-enum PlanStepType { vocabReview, grammarReview, kanjiReview, mistakeFix, newVocab, newGrammar, newKanji }
+enum PlanStepType {
+  vocabReview,
+  grammarReview,
+  kanjiReview,
+  mistakeFix,
+  newVocab,
+  newGrammar,
+  newKanji,
+}
 
 class PlanStep {
   const PlanStep({
@@ -82,11 +92,19 @@ class DailyPlan {
 
 final dailyPlanProvider = FutureProvider<DailyPlan>((ref) async {
   final db = ref.watch(databaseProvider);
-  final dashboard = ref.watch(dashboardProvider).valueOrNull;
-  final language = ref.watch(appLanguageProvider);
-  final level = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
-
-  if (dashboard == null) {
+  final dashboardData = ref.watch(
+    dashboardProvider.select((v) {
+      final d = v.valueOrNull;
+      if (d == null) return null;
+      return (
+        totalMistakeCount: d.totalMistakeCount,
+        vocabDue: d.vocabDue,
+        grammarDue: d.grammarDue,
+        kanjiDue: d.kanjiDue,
+      );
+    }),
+  );
+  if (dashboardData == null) {
     return const DailyPlan(
       steps: [],
       totalMinutes: 0,
@@ -94,6 +112,8 @@ final dailyPlanProvider = FutureProvider<DailyPlan>((ref) async {
       completedSteps: {},
     );
   }
+  final language = ref.watch(appLanguageProvider);
+  final level = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
 
   // Fire all three critical-count queries in parallel — each runs a targeted
   // COUNT(*) with WHERE stability < 1.0 AND nextReviewAt <= now, avoiding
@@ -108,154 +128,177 @@ final dailyPlanProvider = FutureProvider<DailyPlan>((ref) async {
   final steps = <PlanStep>[];
 
   // ── Priority 1: Fix mistakes ──────────────────────────────────
-  if (dashboard.totalMistakeCount > 0) {
-    final count = dashboard.totalMistakeCount.clamp(1, 10).toInt();
-    steps.add(PlanStep(
-      type: PlanStepType.mistakeFix,
-      count: count,
-      estimatedMinutes: (count * 1.5).ceil(),
-      route: '/mistakes',
-      urgency: 2,
-    ));
+  if (dashboardData.totalMistakeCount > 0) {
+    final count = dashboardData.totalMistakeCount.clamp(1, 10).toInt();
+    steps.add(
+      PlanStep(
+        type: PlanStepType.mistakeFix,
+        count: count,
+        estimatedMinutes: (count * 1.5).ceil(),
+        route: AppRoutePath.mistakes,
+        urgency: 2,
+      ),
+    );
   }
 
   // ── Priority 2: Critical SRS reviews (stability < 1.0) ───────
   if (criticalVocab > 0) {
     final count = criticalVocab.clamp(1, 20).toInt();
-    steps.add(PlanStep(
-      type: PlanStepType.vocabReview,
-      count: count,
-      estimatedMinutes: (count * 0.5).ceil(),
-      route: '/vocab/review',
-      extra: VocabReviewArgs(
-        source: 'daily_plan_critical',
-        levelCode: level.shortLabel,
-        title: language.vocabReviewTitle(level.shortLabel),
-        subtitle: _planSubtitle(
-          language,
-          en: 'Critical vocab due now',
-          vi: 'Từ vựng quan trọng cần ôn ngay',
-          ja: '重要な語彙レビューを優先',
-        ),
+    final args = VocabReviewArgs(
+      source: 'daily_plan_critical',
+      levelCode: level.shortLabel,
+      title: language.vocabReviewTitle(level.shortLabel),
+      subtitle: _planSubtitle(
+        language,
+        en: 'Critical vocab due now',
+        vi: 'T??? v???ng quan tr???ng c???n ??n ngay',
+        ja: '????????????????????????????????????',
       ),
-      urgency: 2,
-    ));
+    );
+    steps.add(
+      PlanStep(
+        type: PlanStepType.vocabReview,
+        count: count,
+        estimatedMinutes: (count * 0.5).ceil(),
+        route: AppRouteLocation.vocabReview(args: args),
+        extra: args,
+        urgency: 2,
+      ),
+    );
   }
   if (criticalGrammar > 0) {
     final count = criticalGrammar.clamp(1, 10).toInt();
-    steps.add(PlanStep(
-      type: PlanStepType.grammarReview,
-      count: count,
-      estimatedMinutes: (count * 1.2).ceil(),
-      route: '/grammar-practice',
-      urgency: 2,
-    ));
+    steps.add(
+      PlanStep(
+        type: PlanStepType.grammarReview,
+        count: count,
+        estimatedMinutes: (count * 1.2).ceil(),
+        route: AppRoutePath.grammarPractice,
+        urgency: 2,
+      ),
+    );
   }
   if (criticalKanji > 0) {
     final count = criticalKanji.clamp(1, 10).toInt();
-    steps.add(PlanStep(
-      type: PlanStepType.kanjiReview,
-      count: count,
-      estimatedMinutes: (count * 1.0).ceil(),
-      route: '/kanji/practice',
-      extra: KanjiPracticeArgs(
-        mode: KanjiPracticeMode.both,
-        levelCode: level.shortLabel,
-        source: 'daily_plan_critical',
+    steps.add(
+      PlanStep(
+        type: PlanStepType.kanjiReview,
+        count: count,
+        estimatedMinutes: (count * 1.0).ceil(),
+        route: AppRoutePath.kanjiPractice,
+        extra: KanjiPracticeArgs(
+          mode: KanjiPracticeMode.both,
+          levelCode: level.shortLabel,
+          source: 'daily_plan_critical',
+        ),
+        urgency: 2,
       ),
-      urgency: 2,
-    ));
+    );
   }
 
   // ── Priority 3: Regular due reviews ───────────────────────────
-  final remainingVocab = dashboard.vocabDue - criticalVocab;
+  final remainingVocab = dashboardData.vocabDue - criticalVocab;
   if (remainingVocab > 0) {
     final count = remainingVocab.clamp(1, 30).toInt();
-    steps.add(PlanStep(
-      type: PlanStepType.vocabReview,
-      count: count,
-      estimatedMinutes: (count * 0.4).ceil(),
-      route: '/vocab/review',
-      extra: VocabReviewArgs(
-        source: 'daily_plan_due',
-        levelCode: level.shortLabel,
-        title: language.vocabReviewTitle(level.shortLabel),
-        subtitle: _planSubtitle(
-          language,
-          en: 'Due vocab queue for today',
-          vi: 'Hàng đợi từ vựng đến hạn hôm nay',
-          ja: '今日の語彙レビュー',
-        ),
+    final args = VocabReviewArgs(
+      source: 'daily_plan_due',
+      levelCode: level.shortLabel,
+      title: language.vocabReviewTitle(level.shortLabel),
+      subtitle: _planSubtitle(
+        language,
+        en: 'Due vocab queue for today',
+        vi: 'H??ng ?????i t??? v???ng ?????n h???n h??m nay',
+        ja: '???????????????????????????',
       ),
-      urgency: 1,
-    ));
+    );
+    steps.add(
+      PlanStep(
+        type: PlanStepType.vocabReview,
+        count: count,
+        estimatedMinutes: (count * 0.4).ceil(),
+        route: AppRouteLocation.vocabReview(args: args),
+        extra: args,
+        urgency: 1,
+      ),
+    );
   }
-  final remainingGrammar = dashboard.grammarDue - criticalGrammar;
+  final remainingGrammar = dashboardData.grammarDue - criticalGrammar;
   if (remainingGrammar > 0) {
     final count = remainingGrammar.clamp(1, 15).toInt();
-    steps.add(PlanStep(
-      type: PlanStepType.grammarReview,
-      count: count,
-      estimatedMinutes: (count * 1.0).ceil(),
-      route: '/grammar-practice',
-      urgency: 1,
-    ));
+    steps.add(
+      PlanStep(
+        type: PlanStepType.grammarReview,
+        count: count,
+        estimatedMinutes: (count * 1.0).ceil(),
+        route: AppRoutePath.grammarPractice,
+        urgency: 1,
+      ),
+    );
   }
-  final remainingKanji = dashboard.kanjiDue - criticalKanji;
+  final remainingKanji = dashboardData.kanjiDue - criticalKanji;
   if (remainingKanji > 0) {
     final count = remainingKanji.clamp(1, 15).toInt();
-    steps.add(PlanStep(
-      type: PlanStepType.kanjiReview,
-      count: count,
-      estimatedMinutes: (count * 0.8).ceil(),
-      route: '/kanji/practice',
-      extra: KanjiPracticeArgs(
-        mode: KanjiPracticeMode.both,
-        levelCode: level.shortLabel,
-        source: 'daily_plan_due',
+    steps.add(
+      PlanStep(
+        type: PlanStepType.kanjiReview,
+        count: count,
+        estimatedMinutes: (count * 0.8).ceil(),
+        route: AppRoutePath.kanjiPractice,
+        extra: KanjiPracticeArgs(
+          mode: KanjiPracticeMode.both,
+          levelCode: level.shortLabel,
+          source: 'daily_plan_due',
+        ),
+        urgency: 1,
       ),
-      urgency: 1,
-    ));
+    );
   }
 
   // ── Priority 4: New content (if reviews are manageable) ───────
   // Only offer new-content steps when the review queue isn't overloaded, so
   // learners clear debt before acquiring more items.
-  final totalDue = dashboard.vocabDue + dashboard.grammarDue + dashboard.kanjiDue;
+  final totalDue =
+      dashboardData.vocabDue + dashboardData.grammarDue + dashboardData.kanjiDue;
   if (totalDue < 40) {
-    steps.add(PlanStep(
-      type: PlanStepType.newVocab,
-      count: 5,
-      estimatedMinutes: 5,
-      route: '/library',
-      urgency: 0,
-    ));
+    steps.add(
+      PlanStep(
+        type: PlanStepType.newVocab,
+        count: 5,
+        estimatedMinutes: 5,
+        route: AppRoutePath.library,
+        urgency: 0,
+      ),
+    );
     // Suggest exploring new grammar only when vocab debt is light — grammar
     // takes longer per item so we keep the batch smaller.
-    if (dashboard.grammarDue == 0) {
-      steps.add(const PlanStep(
-        type: PlanStepType.newGrammar,
-        count: 3,
-        estimatedMinutes: 5,
-        route: '/grammar',
-        urgency: 0,
-      ));
+    if (dashboardData.grammarDue == 0) {
+      steps.add(
+        const PlanStep(
+          type: PlanStepType.newGrammar,
+          count: 3,
+          estimatedMinutes: 5,
+          route: AppRoutePath.grammar,
+          urgency: 0,
+        ),
+      );
     }
     // Suggest new kanji when the kanji queue is clear — kanji acquisition
     // without review debt creates compounding retention debt quickly.
-    if (dashboard.kanjiDue == 0) {
-      steps.add(PlanStep(
-        type: PlanStepType.newKanji,
-        count: 3,
-        estimatedMinutes: 4,
-        route: '/kanji',
-        extra: KanjiPracticeArgs(
-          mode: KanjiPracticeMode.both,
-          levelCode: level.shortLabel,
-          source: 'daily_plan_new',
+    if (dashboardData.kanjiDue == 0) {
+      steps.add(
+        PlanStep(
+          type: PlanStepType.newKanji,
+          count: 3,
+          estimatedMinutes: 4,
+          route: AppRoutePath.kanji,
+          extra: KanjiPracticeArgs(
+            mode: KanjiPracticeMode.both,
+            levelCode: level.shortLabel,
+            source: 'daily_plan_new',
+          ),
+          urgency: 0,
         ),
-        urgency: 0,
-      ));
+      );
     }
   }
 

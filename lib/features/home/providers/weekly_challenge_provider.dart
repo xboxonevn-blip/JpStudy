@@ -12,8 +12,10 @@ const _prefKey = 'weekly.challenge';
 
 final weeklyChallengeProvider =
     FutureProvider.autoDispose<WeeklyChallenge>((ref) async {
-  // React to dashboard and week summary changes.
-  final dashboard = ref.watch(dashboardProvider).valueOrNull;
+  // React only to todayXp (used for xpTarget challenge) and week summary.
+  // vocabDue/grammarDue/streak changes don't affect challenge progress.
+  ref.watch(dashboardProvider.select((v) => v.valueOrNull?.todayXp ?? 0));
+  final dashboard = ref.read(dashboardProvider).valueOrNull;
   final weekSummary = ref.watch(weekSummaryProvider).valueOrNull;
 
   final prefs = await SharedPreferences.getInstance();

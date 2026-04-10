@@ -31,6 +31,7 @@ GoRouter _router() => GoRouter(
           Scaffold(body: Text('Lesson Route ${state.pathParameters['id']}')),
     ),
     GoRoute(
+      name: 'search',
       path: '/search',
       builder: (_, _) => const Scaffold(body: Text('Search Route')),
     ),

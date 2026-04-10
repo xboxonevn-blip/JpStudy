@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../app/theme/app_spacing.dart';
@@ -1705,7 +1706,7 @@ class _HandwritingPracticeScreenState
     final routePath = router?.routeInformationProvider.value.uri.path;
 
     if (router != null && routePath == '/practice/handwriting') {
-      context.go('/practice');
+      context.openHandwritingPractice();
       return;
     }
 
@@ -1716,7 +1717,7 @@ class _HandwritingPracticeScreenState
     }
 
     if (router != null) {
-      context.go('/practice');
+      context.openHandwritingPractice();
       return;
     }
 

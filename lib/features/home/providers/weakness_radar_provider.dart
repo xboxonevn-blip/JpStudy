@@ -1,3 +1,5 @@
+import 'package:jpstudy/app/navigation/app_route_locations.dart';
+import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -46,12 +48,16 @@ class WeaknessRadarItem {
 final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
   ref,
 ) async {
-  final dashboard = ref.watch(dashboardProvider).valueOrNull;
+  final dashboardDue = ref.watch(
+    dashboardProvider.select((v) {
+      final d = v.valueOrNull;
+      if (d == null) return null;
+      return (vocabDue: d.vocabDue, grammarDue: d.grammarDue, kanjiDue: d.kanjiDue);
+    }),
+  );
+  if (dashboardDue == null) return const [];
   final language = ref.watch(appLanguageProvider);
   final level = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
-  if (dashboard == null) {
-    return const [];
-  }
 
   final lessonRepo = ref.watch(lessonRepositoryProvider);
   final grammarRepo = ref.watch(grammarRepositoryProvider);
@@ -64,9 +70,18 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
   // and filtered by type in SQL, avoiding a full-table scan from getAllMistakes().
   // Over-fetch slightly (×2) so after the priority filter we still have candidates.
   final srsBreakdownFuture = ref.watch(srsRetentionProvider.future);
-  final vocabMistakesFuture = mistakeRepo.getTopMistakesByType('vocab', limit: 20);
-  final grammarMistakesFuture = mistakeRepo.getTopMistakesByType('grammar', limit: 10);
-  final kanjiMistakesFuture = mistakeRepo.getTopMistakesByType('kanji', limit: 20);
+  final vocabMistakesFuture = mistakeRepo.getTopMistakesByType(
+    'vocab',
+    limit: 20,
+  );
+  final grammarMistakesFuture = mistakeRepo.getTopMistakesByType(
+    'grammar',
+    limit: 10,
+  );
+  final kanjiMistakesFuture = mistakeRepo.getTopMistakesByType(
+    'kanji',
+    limit: 20,
+  );
 
   final srsBreakdown = await srsBreakdownFuture;
   final vocabMistakesRaw = await vocabMistakesFuture;
@@ -81,7 +96,7 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
         id: 'recovery_pack',
         title: weaknessRecoveryTitle(language, recoveryPack.lessonTitle),
         subtitle: weaknessRecoverySubtitle(language, recoveryPack.itemCount),
-        route: '/learn/recovery-pack',
+        route: AppRoutePath.learnRecoveryPack,
         icon: Icons.medical_services_outlined,
         color: const Color(0xFF2563EB),
         priority: 120,
@@ -141,7 +156,7 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
           dueMistakesVocab.length,
           _dueCheckpointShortLabel(language, lead.mistake.lastMistakeAt, now),
         ),
-        route: '/learn/session',
+        route: AppRoutePath.learnSession,
         extra: LearnSessionArgs(
           items: vocabItems,
           lessonId: RecoveryPackService.recoveryLessonId,
@@ -169,7 +184,7 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
           dueMistakesGrammar.length,
           _dueCheckpointShortLabel(language, lead.mistake.lastMistakeAt, now),
         ),
-        route: '/grammar-practice',
+        route: AppRoutePath.grammarPractice,
         extra: grammarPoints.map((point) => point.id).toList(),
         icon: Icons.auto_stories_rounded,
         color: const Color(0xFF7C3AED),
@@ -189,7 +204,7 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
           dueMistakesKanji.length,
           _dueCheckpointShortLabel(language, lead.mistake.lastMistakeAt, now),
         ),
-        route: '/kanji/practice',
+        route: AppRoutePath.kanjiPractice,
         extra: KanjiPracticeArgs(
           mode: KanjiPracticeMode.write,
           levelCode: level.shortLabel,
@@ -210,7 +225,19 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
         id: 'fresh_cards',
         title: weaknessRetentionTitle(language),
         subtitle: weaknessRetentionSubtitle(language, srsBreakdown.learning),
-        route: '/vocab/review',
+        route: AppRouteLocation.vocabReview(
+          args: VocabReviewArgs(
+            source: 'weakness_radar',
+            levelCode: level.shortLabel,
+            title: language.vocabReviewTitle(level.shortLabel),
+            subtitle: _planHint(
+              language,
+              en: 'Fresh vocab still needs review',
+              vi: 'Nh??m t??? m???i v???n c???n ??n ti???p',
+              ja: '???????????????????????????????????????',
+            ),
+          ),
+        ),
         extra: VocabReviewArgs(
           source: 'weakness_radar',
           levelCode: level.shortLabel,
@@ -218,8 +245,8 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
           subtitle: _planHint(
             language,
             en: 'Fresh vocab still needs review',
-            vi: 'Nhóm từ mới vẫn cần ôn tiếp',
-            ja: '新しい語彙をもう一度固める',
+            vi: 'Nh??m t??? m???i v???n c???n ??n ti???p',
+            ja: '???????????????????????????????????????',
           ),
         ),
         icon: Icons.schedule_rounded,
@@ -231,12 +258,14 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
 
   if (items.length < 3) {
     final totalDue =
-        dashboard.vocabDue + dashboard.grammarDue + dashboard.kanjiDue;
+        dashboardDue.vocabDue + dashboardDue.grammarDue + dashboardDue.kanjiDue;
     if (totalDue > 0) {
       final dueRoute = _dueRouteSpec(
         language: language,
         level: level,
-        dashboard: dashboard,
+        vocabDue: dashboardDue.vocabDue,
+        grammarDue: dashboardDue.grammarDue,
+        kanjiDue: dashboardDue.kanjiDue,
       );
       items.add(
         WeaknessRadarItem(
@@ -244,7 +273,9 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
           title: weaknessDueTitle(language, totalDue),
           subtitle: weaknessDueSubtitle(
             language,
-            dashboard: dashboard,
+            vocabDue: dashboardDue.vocabDue,
+            grammarDue: dashboardDue.grammarDue,
+            kanjiDue: dashboardDue.kanjiDue,
             nextGrammarReview: nextGrammarReview,
           ),
           route: dueRoute.route,
@@ -273,37 +304,41 @@ String _dueCheckpointShortLabel(
   DateTime lastMistakeAt,
   DateTime now,
 ) {
-  return weaknessDueCheckpointShortLabel(language, now.difference(lastMistakeAt));
+  return weaknessDueCheckpointShortLabel(
+    language,
+    now.difference(lastMistakeAt),
+  );
 }
 
 _WeaknessRouteSpec _dueRouteSpec({
   required AppLanguage language,
   required StudyLevel level,
-  required DashboardState dashboard,
+  required int vocabDue,
+  required int grammarDue,
+  required int kanjiDue,
 }) {
-  if (dashboard.grammarDue >= dashboard.vocabDue &&
-      dashboard.grammarDue >= dashboard.kanjiDue &&
-      dashboard.grammarDue > 0) {
-    return const _WeaknessRouteSpec(route: '/grammar');
+  if (grammarDue >= vocabDue && grammarDue >= kanjiDue && grammarDue > 0) {
+    return const _WeaknessRouteSpec(route: AppRoutePath.grammar);
   }
-  if (dashboard.vocabDue >= dashboard.kanjiDue && dashboard.vocabDue > 0) {
-    return _WeaknessRouteSpec(
-      route: '/vocab/review',
-      extra: VocabReviewArgs(
-        source: 'weakness_radar',
-        levelCode: level.shortLabel,
-        title: language.vocabReviewTitle(level.shortLabel),
-        subtitle: _planHint(
-          language,
-          en: 'Due vocab queue from radar',
-          vi: 'Hàng đợi từ vựng đến hạn từ radar',
-          ja: 'レーダーから開く語彙レビュー',
-        ),
+  if (vocabDue >= kanjiDue && vocabDue > 0) {
+    final args = VocabReviewArgs(
+      source: 'weakness_radar',
+      levelCode: level.shortLabel,
+      title: language.vocabReviewTitle(level.shortLabel),
+      subtitle: _planHint(
+        language,
+        en: 'Due vocab queue from radar',
+        vi: 'H??ng ?????i t??? v???ng ?????n h???n t??? radar',
+        ja: '??????????????????????????????????????????',
       ),
+    );
+    return _WeaknessRouteSpec(
+      route: AppRouteLocation.vocabReview(args: args),
+      extra: args,
     );
   }
   return _WeaknessRouteSpec(
-    route: '/kanji/practice',
+    route: AppRoutePath.kanjiPractice,
     extra: KanjiPracticeArgs(
       mode: KanjiPracticeMode.both,
       levelCode: level.shortLabel,

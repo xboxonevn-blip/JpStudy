@@ -27,10 +27,14 @@ class _VocabCatalogBody extends ConsumerWidget {
         .where((program) => program.termCount > 0)
         .fold<int>(0, (sum, program) => sum + program.termCount);
     final liveSections = sections
-        .where((section) => section.levelCode == 'N5' || section.levelCode == 'N4')
+        .where(
+          (section) => section.levelCode == 'N5' || section.levelCode == 'N4',
+        )
         .toList(growable: false);
     final previewSections = sections
-        .where((section) => section.levelCode != 'N5' && section.levelCode != 'N4')
+        .where(
+          (section) => section.levelCode != 'N5' && section.levelCode != 'N4',
+        )
         .toList(growable: false);
 
     return Column(
@@ -134,30 +138,22 @@ class _VocabCatalogBody extends ConsumerWidget {
 
     final minnaRange = _minnaLessonRange(section.levelCode, program.type);
     if (minnaRange != null) {
-      final uri = Uri(
-        path: '/vocab/minna',
-        queryParameters: {
-          'level': section.levelCode,
-          'title': program.titleTop,
-          'subtitle': _localizedProgramSubtitle(program, language),
-          'lessonStart': '${minnaRange.$1}',
-          'lessonEnd': '${minnaRange.$2}',
-        },
+      context.openMinnaCatalog(
+        levelCode: section.levelCode,
+        title: program.titleTop,
+        subtitle: _localizedProgramSubtitle(program, language),
+        lessonStart: minnaRange.$1,
+        lessonEnd: minnaRange.$2,
       );
-      context.push(uri.toString());
       return;
     }
 
     if (program.type == _VocabProgramType.core) {
-      final uri = Uri(
-        path: '/vocab/hajimete',
-        queryParameters: {
-          'level': section.levelCode,
-          'title': '${program.titleTop} ${program.titleMain}'.trim(),
-          'subtitle': _localizedProgramSubtitle(program, language),
-        },
+      context.openHajimeteCatalog(
+        levelCode: section.levelCode,
+        title: '${program.titleTop} ${program.titleMain}'.trim(),
+        subtitle: _localizedProgramSubtitle(program, language),
       );
-      context.push(uri.toString());
       return;
     }
 
@@ -294,7 +290,7 @@ class _VocabTodaySection extends ConsumerWidget {
             children: [
               FilledButton.icon(
                 key: const ValueKey('vocab_today_review_cta'),
-                onPressed: () => context.push('/vocab/review', extra: reviewArgs),
+                onPressed: () => context.openVocabReview(args: reviewArgs),
                 icon: const Icon(Icons.play_arrow_rounded),
                 label: Text(_reviewNowLabel(language)),
               ),
@@ -310,9 +306,11 @@ class _VocabTodaySection extends ConsumerWidget {
                   key: const ValueKey('vocab_today_companion_cta'),
                   onPressed: () => _openCompanion(
                     context,
-                    home.liveTracks.firstWhere((track) =>
-                        track.levelCode == home.selectedLevelCode &&
-                        track.isCompanion),
+                    home.liveTracks.firstWhere(
+                      (track) =>
+                          track.levelCode == home.selectedLevelCode &&
+                          track.isCompanion,
+                    ),
                   ),
                   icon: const Icon(Icons.menu_book_rounded),
                   label: Text(_companionShortcutLabel(language)),
@@ -333,26 +331,18 @@ class _VocabTodaySection extends ConsumerWidget {
 
   void _openCompanion(BuildContext context, VocabTrackSummary track) {
     final range = track.levelCode == 'N5' ? (1, 25) : (26, 50);
-    final uri = Uri(
-      path: '/vocab/minna',
-      queryParameters: {
-        'level': track.levelCode,
-        'title': track.title,
-        'subtitle': track.subtitle,
-        'lessonStart': '${range.$1}',
-        'lessonEnd': '${range.$2}',
-      },
+    context.openMinnaCatalog(
+      levelCode: track.levelCode,
+      title: track.title,
+      subtitle: track.subtitle,
+      lessonStart: range.$1,
+      lessonEnd: range.$2,
     );
-    context.push(uri.toString());
   }
 }
 
 class _TodayMetric extends StatelessWidget {
-  const _TodayMetric({
-    super.key,
-    required this.label,
-    required this.value,
-  });
+  const _TodayMetric({super.key, required this.label, required this.value});
 
   final String label;
   final String value;
@@ -373,9 +363,9 @@ class _TodayMetric extends StatelessWidget {
           const SizedBox(height: AppSpacing.xs),
           Text(
             value,
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.w900,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w900),
           ),
         ],
       ),
@@ -1459,4 +1449,3 @@ _VocabCatalogSection _buildJlptSection({
     ],
   );
 }
-

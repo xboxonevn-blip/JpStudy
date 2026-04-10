@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
@@ -27,7 +29,12 @@ class NextStepSuggestions extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final language = ref.watch(appLanguageProvider);
-    final dashboard = ref.watch(dashboardProvider).valueOrNull;
+    final (vocabDue, grammarDue, kanjiDue) = ref.watch(
+      dashboardProvider.select((v) {
+        final d = v.valueOrNull;
+        return (d?.vocabDue ?? 0, d?.grammarDue ?? 0, d?.kanjiDue ?? 0);
+      }),
+    );
     final grammarGhostCount = ref
         .watch(grammarGhostCountProvider)
         .maybeWhen(data: (c) => c, orElse: () => 0);
@@ -38,12 +45,11 @@ class NextStepSuggestions extends ConsumerWidget {
     final continueAction = ref.watch(continueActionProvider).valueOrNull;
 
     final totalGhosts = grammarGhostCount + vocabGhostCount;
-    final totalDue =
-        (dashboard?.vocabDue ?? 0) +
-        (dashboard?.grammarDue ?? 0) +
-        (dashboard?.kanjiDue ?? 0);
+    final totalDue = vocabDue + grammarDue + kanjiDue;
 
     final steps = <_Step>[];
+
+    final palette = context.appPalette;
 
     // Priority 1: Ghosts need fixing first
     if (totalGhosts > 0) {
@@ -52,7 +58,7 @@ class NextStepSuggestions extends ConsumerWidget {
           icon: Icons.warning_amber_rounded,
           label: language.fixMistakesLabel,
           count: totalGhosts,
-          color: const Color(0xFFDC2626),
+          color: palette.error,
           onTap: () {
             if (grammarGhostCount > 0) {
               context.push(
@@ -78,8 +84,15 @@ class NextStepSuggestions extends ConsumerWidget {
           icon: Icons.schedule_rounded,
           label: language.reviewsLabel,
           count: totalDue,
-          color: const Color(0xFF1D4ED8),
-          onTap: () => _navigateToDue(context, ref, continueAction, dashboard),
+          color: palette.primary,
+          onTap: () => _navigateToDue(
+            context,
+            ref,
+            continueAction,
+            grammarDue: grammarDue,
+            vocabDue: vocabDue,
+            kanjiDue: kanjiDue,
+          ),
         ),
       );
     }
@@ -91,8 +104,8 @@ class NextStepSuggestions extends ConsumerWidget {
           icon: Icons.article_rounded,
           label: language.practiceImmersionLabel,
           count: 0,
-          color: const Color(0xFF059669),
-          onTap: () => context.push('/immersion'),
+          color: palette.success,
+          onTap: () => context.openImmersion(),
         ),
       );
     }
@@ -113,9 +126,11 @@ class NextStepSuggestions extends ConsumerWidget {
   void _navigateToDue(
     BuildContext context,
     WidgetRef ref,
-    ContinueAction? action,
-    DashboardState? dashboard,
-  ) {
+    ContinueAction? action, {
+    required int grammarDue,
+    required int vocabDue,
+    required int kanjiDue,
+  }) {
     final language = ref.read(appLanguageProvider);
     final level = ref.read(studyLevelProvider) ?? StudyLevel.n5;
 
@@ -123,9 +138,9 @@ class NextStepSuggestions extends ConsumerWidget {
       case ContinueActionType.grammarReview:
         final ids = action?.data;
         if (ids is List && ids.isNotEmpty) {
-          context.push('/grammar-practice', extra: List<int>.from(ids));
+          context.openGrammarPractice(extra: List<int>.from(ids));
         } else {
-          context.push('/grammar');
+          context.openGrammar();
         }
         return;
       case ContinueActionType.vocabReview:
@@ -157,9 +172,9 @@ class NextStepSuggestions extends ConsumerWidget {
         break;
     }
 
-    if ((dashboard?.grammarDue ?? 0) > 0) {
-      context.push('/grammar');
-    } else if ((dashboard?.vocabDue ?? 0) > 0) {
+    if (grammarDue > 0) {
+      context.openGrammar();
+    } else if (vocabDue > 0) {
       context.push(
         '/vocab/review',
         extra: VocabReviewArgs(
@@ -221,9 +236,7 @@ class _StepTile extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                color: step.color.withValues(alpha: 0.25),
-              ),
+              border: Border.all(color: step.color.withValues(alpha: 0.25)),
             ),
             child: Row(
               children: [
@@ -254,7 +267,7 @@ class _StepTile extends StatelessWidget {
                           '${step.count} ${step.count == 1 ? 'item' : 'items'}',
                           style: TextStyle(
                             fontSize: 12,
-                            color: Colors.grey[600],
+                            color: context.appPalette.ink.withValues(alpha: 0.55),
                           ),
                         ),
                     ],

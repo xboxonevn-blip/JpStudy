@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
@@ -205,7 +205,7 @@ class _ImmersionHomeScreenState extends ConsumerState<ImmersionHomeScreen> {
                       onPrimaryTap: nextArticle == null
                           ? null
                           : () => _openArticle(context, nextArticle),
-                      onSecondaryTap: () => context.push('/jlpt/coach'),
+                      onSecondaryTap: () => context.openJlptCoach(),
                     ),
                     const SizedBox(height: 12),
                     _ReadingOverviewCard(

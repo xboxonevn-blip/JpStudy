@@ -1,6 +1,8 @@
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
@@ -46,6 +48,7 @@ class _ContinueButtonState extends ConsumerState<ContinueButton> {
     final accent = _getAccentColor(action.type);
     final icon = _getIcon(action.type);
     final isNextLesson = action.type == ContinueActionType.nextLesson;
+    final palette = context.appPalette;
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 16, 20, 18),
@@ -58,18 +61,18 @@ class _ContinueButtonState extends ConsumerState<ContinueButton> {
             width: double.infinity,
             padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
             decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [Color(0xFFFFFFFF), Color(0xFFF7FBFF)],
+              gradient: LinearGradient(
+                colors: [palette.elevated, palette.base],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
               borderRadius: BorderRadius.circular(28),
               border: Border.all(color: accent.withValues(alpha: 0.26)),
-              boxShadow: const [
+              boxShadow: [
                 BoxShadow(
-                  color: Color(0x11243A57),
+                  color: palette.primary.withValues(alpha: 0.07),
                   blurRadius: 18,
-                  offset: Offset(0, 8),
+                  offset: const Offset(0, 8),
                 ),
               ],
             ),
@@ -84,6 +87,7 @@ class _ContinueButtonState extends ConsumerState<ContinueButton> {
 
   Widget _buildNextLessonStyle(ContinueAction action, AppLanguage language) {
     final accent = _getAccentColor(action.type);
+    final palette = context.appPalette;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,8 +106,8 @@ class _ContinueButtonState extends ConsumerState<ContinueButton> {
             const SizedBox(width: 10),
             Text(
               language.nextStepLabel.toUpperCase(),
-              style: const TextStyle(
-                color: Color(0xFF64748B),
+              style: TextStyle(
+                color: palette.ink.withValues(alpha: 0.55),
                 fontSize: 11,
                 fontWeight: FontWeight.w800,
                 letterSpacing: 0.7,
@@ -130,8 +134,8 @@ class _ContinueButtonState extends ConsumerState<ContinueButton> {
         const SizedBox(height: 10),
         Text(
           language.nextLessonSubtitle,
-          style: const TextStyle(
-            color: Color(0xFF0F172A),
+          style: TextStyle(
+            color: palette.ink,
             fontSize: 24,
             fontWeight: FontWeight.w900,
             height: 1.02,
@@ -142,8 +146,8 @@ class _ContinueButtonState extends ConsumerState<ContinueButton> {
           _getLabel(action, language),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
-            color: Color(0xFF475569),
+          style: TextStyle(
+            color: palette.ink.withValues(alpha: 0.7),
             fontSize: 14,
             fontWeight: FontWeight.w700,
           ),
@@ -181,6 +185,7 @@ class _ContinueButtonState extends ConsumerState<ContinueButton> {
     ContinueAction action,
     AppLanguage language,
   ) {
+    final palette = context.appPalette;
     return Row(
       children: [
         Container(
@@ -211,8 +216,8 @@ class _ContinueButtonState extends ConsumerState<ContinueButton> {
                 _getLabel(action, language),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: Color(0xFF0F172A),
+                style: TextStyle(
+                  color: palette.ink,
                   fontSize: 18,
                   fontWeight: FontWeight.w900,
                 ),
@@ -309,7 +314,7 @@ class _ContinueButtonState extends ConsumerState<ContinueButton> {
 
     switch (action.type) {
       case ContinueActionType.grammarReview:
-        context.push('/grammar');
+        context.openGrammar();
         break;
       case ContinueActionType.vocabReview:
         context.push(
@@ -337,13 +342,13 @@ class _ContinueButtonState extends ConsumerState<ContinueButton> {
         );
         break;
       case ContinueActionType.fixMistakes:
-        context.push('/mistakes');
+        context.openMistakes();
         break;
       case ContinueActionType.nextLesson:
         if (action.data != null) {
-          context.push('/lesson/${action.data}');
+          context.openLesson(action.data);
         } else {
-          context.push('/');
+          context.openHome();
         }
         break;
       default:

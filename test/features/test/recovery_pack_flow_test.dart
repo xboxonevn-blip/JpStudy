@@ -128,6 +128,7 @@ void main() {
               TestResultsScreen(session: session, lessonTitle: 'Lesson 1'),
         ),
         GoRoute(
+          name: 'learn-recovery-pack',
           path: '/learn/recovery-pack',
           builder: (context, state) =>
               const Scaffold(body: Center(child: Text('recovery-pack-route'))),

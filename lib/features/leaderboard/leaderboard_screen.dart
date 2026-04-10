@@ -20,12 +20,15 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
   @override
   Widget build(BuildContext context) {
     final language = ref.watch(appLanguageProvider);
-    final dashboard = ref.watch(dashboardProvider).valueOrNull;
+    final (streak, todayXp) = ref.watch(
+      dashboardProvider.select((v) {
+        final d = v.valueOrNull;
+        return (d?.streak ?? 0, d?.todayXp ?? 0);
+      }),
+    );
     final progress = ref.watch(progressSummaryProvider).valueOrNull;
     final reviewHistory = ref.watch(reviewHistoryProvider).valueOrNull ?? const [];
     final attemptHistory = ref.watch(attemptHistoryProvider).valueOrNull ?? const [];
-    final streak = dashboard?.streak ?? 0;
-    final todayXp = dashboard?.todayXp ?? 0;
     final ranges = _ranges(language);
     final activeRange = ranges[_selectedRange];
     final board = _items(

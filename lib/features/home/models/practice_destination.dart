@@ -1,3 +1,4 @@
+import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/study_level.dart';
@@ -48,7 +49,7 @@ List<PracticeDestination> buildPracticeDestinations({
       subtitle: _jlptCoachSubtitle(language),
       icon: Icons.school_rounded,
       color: const Color(0xFF17324D),
-      route: '/jlpt/coach',
+      route: AppRoutePath.jlptCoach,
     ),
     PracticeDestination(
       id: 'match',
@@ -56,7 +57,7 @@ List<PracticeDestination> buildPracticeDestinations({
       subtitle: language.practiceMatchSubtitle,
       icon: Icons.extension_rounded,
       color: const Color(0xFF0EA5E9),
-      route: '/match',
+      route: AppRoutePath.match,
       estimatedMinutes: vocabDue > 0 ? (vocabDue * 8 / 60).ceil() : null,
     ),
     PracticeDestination(
@@ -65,7 +66,7 @@ List<PracticeDestination> buildPracticeDestinations({
       subtitle: language.practiceGhostSubtitle,
       icon: Icons.auto_fix_high_rounded,
       color: const Color(0xFFF43F5E),
-      route: '/grammar-practice',
+      route: AppRoutePath.grammarPractice,
       extra: GrammarPracticeMode.ghost,
       badgeCount: ghostCount > 0 ? ghostCount : null,
       estimatedMinutes: ghostCount > 0 ? (ghostCount * 12 / 60).ceil() : null,
@@ -76,7 +77,7 @@ List<PracticeDestination> buildPracticeDestinations({
       subtitle: language.practiceRecallSprintSubtitle,
       icon: Icons.bolt_rounded,
       color: const Color(0xFF7C3AED),
-      route: '/practice/recall-sprint',
+      route: AppRoutePath.practiceRecallSprint,
       badgeCount: dueReviewCount > 0 ? dueReviewCount : null,
       estimatedMinutes: dueReviewCount > 0
           ? (dueReviewCount * 6 / 60).ceil()
@@ -88,7 +89,7 @@ List<PracticeDestination> buildPracticeDestinations({
       subtitle: language.practiceKanjiDashSubtitle,
       icon: Icons.flash_on_rounded,
       color: const Color(0xFFF59E0B),
-      route: '/kanji',
+      route: AppRoutePath.kanji,
       estimatedMinutes: kanjiDue > 0 ? (kanjiDue * 6 / 60).ceil() : null,
     ),
     PracticeDestination(
@@ -97,7 +98,7 @@ List<PracticeDestination> buildPracticeDestinations({
       subtitle: language.writeModeHandwritingSubtitle,
       icon: Icons.draw_rounded,
       color: const Color(0xFF0F766E),
-      route: '/kanji/practice',
+      route: AppRoutePath.kanjiPractice,
       extra: KanjiPracticeArgs(
         mode: KanjiPracticeMode.write,
         levelCode: selectedLevel.shortLabel,
@@ -110,7 +111,7 @@ List<PracticeDestination> buildPracticeDestinations({
       subtitle: language.practiceKanjiReadingSubtitle,
       icon: Icons.menu_book_rounded,
       color: const Color(0xFF7C3AED),
-      route: '/kanji/practice',
+      route: AppRoutePath.kanjiPractice,
       extra: KanjiPracticeArgs(
         mode: KanjiPracticeMode.read,
         levelCode: selectedLevel.shortLabel,
@@ -124,7 +125,7 @@ List<PracticeDestination> buildPracticeDestinations({
       subtitle: language.practiceImmersionSubtitle,
       icon: Icons.newspaper_rounded,
       color: const Color(0xFF2563EB),
-      route: '/immersion',
+      route: AppRoutePath.immersion,
     ),
     PracticeDestination(
       id: 'mistakes',
@@ -132,7 +133,7 @@ List<PracticeDestination> buildPracticeDestinations({
       subtitle: language.practiceMistakesSubtitle,
       icon: Icons.warning_amber_rounded,
       color: const Color(0xFFDC2626),
-      route: '/mistakes',
+      route: AppRoutePath.mistakes,
       badgeCount: mistakeCount > 0 ? mistakeCount : null,
       estimatedMinutes: mistakeCount > 0
           ? (mistakeCount * 12 / 60).ceil()
@@ -185,10 +186,10 @@ List<PracticeDestination> buildPracticeDestinations({
       default:
         break;
     }
-    return _ScoredDestination(item, score);
-  }).toList()..sort((a, b) => b.score.compareTo(a.score));
+    return (item, score);
+  }).toList()..sort((a, b) => b.$2.compareTo(a.$2));
 
-  return scored.map((entry) => entry.destination).toList(growable: false);
+  return scored.map((entry) => entry.$1).toList(growable: false);
 }
 
 List<PracticeDestination> applyPracticeDestinationOrder({
@@ -224,10 +225,9 @@ List<PracticeDestination> selectFocusPracticeDestinations({
       .toList(growable: false);
 
   final picked = <PracticeDestination>[];
+  final pickedIds = <String>{};
   for (final item in urgent) {
-    if (picked.any((entry) => entry.id == item.id)) {
-      continue;
-    }
+    if (!pickedIds.add(item.id)) continue;
     picked.add(item);
     if (picked.length == limit) {
       return List<PracticeDestination>.unmodifiable(picked);
@@ -235,13 +235,9 @@ List<PracticeDestination> selectFocusPracticeDestinations({
   }
 
   for (final item in rankedDestinations) {
-    if (picked.any((entry) => entry.id == item.id)) {
-      continue;
-    }
+    if (!pickedIds.add(item.id)) continue;
     picked.add(item);
-    if (picked.length == limit) {
-      break;
-    }
+    if (picked.length == limit) break;
   }
   return List<PracticeDestination>.unmodifiable(picked);
 }
@@ -275,9 +271,3 @@ String _jlptCoachSubtitle(AppLanguage language) {
   }
 }
 
-class _ScoredDestination {
-  const _ScoredDestination(this.destination, this.score);
-
-  final PracticeDestination destination;
-  final int score;
-}

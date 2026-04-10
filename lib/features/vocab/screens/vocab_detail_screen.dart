@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_route_locations.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
@@ -17,12 +18,11 @@ String _tr(
   required String en,
   required String vi,
   required String ja,
-}) =>
-    switch (l) {
-      AppLanguage.en => en,
-      AppLanguage.vi => vi,
-      AppLanguage.ja => ja,
-    };
+}) => switch (l) {
+  AppLanguage.en => en,
+  AppLanguage.vi => vi,
+  AppLanguage.ja => ja,
+};
 
 class VocabDetailScreen extends ConsumerWidget {
   const VocabDetailScreen({super.key, required this.vocabId});
@@ -36,17 +36,22 @@ class VocabDetailScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(_tr(language,
-            en: 'Word Detail', vi: 'Chi tiết từ', ja: '単語の詳細')),
+        title: Text(
+          _tr(language, en: 'Word Detail', vi: 'Chi tiết từ', ja: '単語の詳細'),
+        ),
       ),
       body: detailAsync.when(
         data: (detail) {
           if (detail == null) {
             return Center(
-              child: Text(_tr(language,
+              child: Text(
+                _tr(
+                  language,
                   en: 'Word not found',
                   vi: 'Không tìm thấy từ',
-                  ja: '単語が見つかりません')),
+                  ja: '単語が見つかりません',
+                ),
+              ),
             );
           }
           return _VocabDetailBody(detail: detail, language: language);
@@ -72,8 +77,10 @@ class _VocabDetailBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final vocab = detail.vocab;
     final palette = context.appPalette;
-    final showReading =
-        shouldShowReading(term: vocab.term, reading: vocab.reading);
+    final showReading = shouldShowReading(
+      term: vocab.term,
+      reading: vocab.reading,
+    );
 
     return AppPageShell(
       child: Column(
@@ -175,10 +182,14 @@ class _HeroCard extends StatelessWidget {
               _LevelBadge(level: level, palette: palette),
               if (tagList.isNotEmpty) ...[
                 const SizedBox(width: 8),
-                ...tagList.take(3).map((tag) => Padding(
-                      padding: const EdgeInsets.only(right: 6),
-                      child: _TagChip(tag: tag, palette: palette),
-                    )),
+                ...tagList
+                    .take(3)
+                    .map(
+                      (tag) => Padding(
+                        padding: const EdgeInsets.only(right: 6),
+                        child: _TagChip(tag: tag, palette: palette),
+                      ),
+                    ),
               ],
             ],
           ),
@@ -195,7 +206,11 @@ class _HeroCard extends StatelessWidget {
         return (jsonDecode(tags) as List).cast<String>();
       } catch (_) {}
     }
-    return tags.split(',').map((t) => t.trim()).where((t) => t.isNotEmpty).toList();
+    return tags
+        .split(',')
+        .map((t) => t.trim())
+        .where((t) => t.isNotEmpty)
+        .toList();
   }
 }
 
@@ -277,8 +292,7 @@ class _MeaningSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _SectionLabel(
-            label: _tr(language,
-                en: 'Meaning', vi: 'Nghĩa', ja: '意味'),
+            label: _tr(language, en: 'Meaning', vi: 'Nghĩa', ja: '意味'),
             palette: palette,
           ),
           const SizedBox(height: 10),
@@ -314,8 +328,11 @@ class _MeaningSection extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.translate_rounded,
-                      size: 16, color: palette.info.withValues(alpha: 0.7)),
+                  Icon(
+                    Icons.translate_rounded,
+                    size: 16,
+                    color: palette.info.withValues(alpha: 0.7),
+                  ),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
@@ -392,8 +409,12 @@ class _SrsStatusCard extends StatelessWidget {
             children: [
               Expanded(
                 child: _SectionLabel(
-                  label: _tr(language,
-                      en: 'SRS Status', vi: 'Trạng thái SRS', ja: 'SRS状態'),
+                  label: _tr(
+                    language,
+                    en: 'SRS Status',
+                    vi: 'Trạng thái SRS',
+                    ja: 'SRS状態',
+                  ),
                   palette: palette,
                 ),
               ),
@@ -403,10 +424,12 @@ class _SrsStatusCard extends StatelessWidget {
           const SizedBox(height: 14),
           if (srs == null)
             Text(
-              _tr(language,
-                  en: 'Not yet studied. Start a review to begin tracking.',
-                  vi: 'Chưa học. Bắt đầu ôn tập để theo dõi.',
-                  ja: 'まだ学習していません。復習を始めましょう。'),
+              _tr(
+                language,
+                en: 'Not yet studied. Start a review to begin tracking.',
+                vi: 'Chưa học. Bắt đầu ôn tập để theo dõi.',
+                ja: 'まだ学習していません。復習を始めましょう。',
+              ),
               style: TextStyle(
                 fontSize: 14,
                 color: palette.ink.withValues(alpha: 0.55),
@@ -417,24 +440,36 @@ class _SrsStatusCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: _StatTile(
-                    label: _tr(language,
-                        en: 'Stability', vi: 'Độ ổn định', ja: '安定度'),
+                    label: _tr(
+                      language,
+                      en: 'Stability',
+                      vi: 'Độ ổn định',
+                      ja: '安定度',
+                    ),
                     value: srs.stability.toStringAsFixed(1),
                     palette: palette,
                   ),
                 ),
                 Expanded(
                   child: _StatTile(
-                    label: _tr(language,
-                        en: 'Difficulty', vi: 'Độ khó', ja: '難易度'),
+                    label: _tr(
+                      language,
+                      en: 'Difficulty',
+                      vi: 'Độ khó',
+                      ja: '難易度',
+                    ),
                     value: srs.difficulty.toStringAsFixed(1),
                     palette: palette,
                   ),
                 ),
                 Expanded(
                   child: _StatTile(
-                    label: _tr(language,
-                        en: 'Reviews', vi: 'Số lần ôn', ja: '復習回数'),
+                    label: _tr(
+                      language,
+                      en: 'Reviews',
+                      vi: 'Số lần ôn',
+                      ja: '復習回数',
+                    ),
                     value: '${srs.repetitions}',
                     palette: palette,
                   ),
@@ -445,15 +480,23 @@ class _SrsStatusCard extends StatelessWidget {
             if (srs.lastReviewedAt != null)
               _InfoRow(
                 icon: Icons.history_rounded,
-                label: _tr(language,
-                    en: 'Last reviewed', vi: 'Ôn lần cuối', ja: '最終復習'),
+                label: _tr(
+                  language,
+                  en: 'Last reviewed',
+                  vi: 'Ôn lần cuối',
+                  ja: '最終復習',
+                ),
                 value: _formatDate(context, srs.lastReviewedAt!),
                 palette: palette,
               ),
             _InfoRow(
               icon: Icons.event_rounded,
-              label: _tr(language,
-                  en: 'Next review', vi: 'Ôn tiếp theo', ja: '次の復習'),
+              label: _tr(
+                language,
+                en: 'Next review',
+                vi: 'Ôn tiếp theo',
+                ja: '次の復習',
+              ),
               value: _formatDate(context, srs.nextReviewAt),
               palette: palette,
             ),
@@ -624,19 +667,18 @@ class _KanjiBreakdownSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _SectionLabel(
-            label: _tr(language,
-                en: 'Kanji Breakdown',
-                vi: 'Phân tích Kanji',
-                ja: '漢字分解'),
+            label: _tr(
+              language,
+              en: 'Kanji Breakdown',
+              vi: 'Phân tích Kanji',
+              ja: '漢字分解',
+            ),
             palette: palette,
           ),
           const SizedBox(height: 12),
           ...kanjiList.map(
-            (kanji) => _KanjiRow(
-              kanji: kanji,
-              language: language,
-              palette: palette,
-            ),
+            (kanji) =>
+                _KanjiRow(kanji: kanji, language: language, palette: palette),
           ),
         ],
       ),
@@ -740,8 +782,7 @@ class _KanjiRow extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    _tr(language,
-                        en: 'strokes', vi: 'nét', ja: '画'),
+                    _tr(language, en: 'strokes', vi: 'nét', ja: '画'),
                     style: TextStyle(
                       fontSize: 10,
                       color: palette.ink.withValues(alpha: 0.45),
@@ -780,10 +821,12 @@ class _RelatedVocabSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _SectionLabel(
-            label: _tr(language,
-                en: 'Related Words',
-                vi: 'Từ liên quan',
-                ja: '関連語'),
+            label: _tr(
+              language,
+              en: 'Related Words',
+              vi: 'Từ liên quan',
+              ja: '関連語',
+            ),
             palette: palette,
           ),
           const SizedBox(height: 10),
@@ -792,7 +835,9 @@ class _RelatedVocabSection extends StatelessWidget {
                 ? (item.meaningEn ?? item.meaning)
                 : item.meaning;
             final showRead = shouldShowReading(
-                term: item.term, reading: item.reading);
+              term: item.term,
+              reading: item.reading,
+            );
             return Padding(
               padding: const EdgeInsets.only(bottom: 6),
               child: AppCompactRow(
@@ -802,7 +847,8 @@ class _RelatedVocabSection extends StatelessWidget {
                 status: showRead
                     ? AppStatusChip(label: item.reading!.trim())
                     : null,
-                onTap: () => context.push('/vocab/${item.id}'),
+                onTap: () =>
+                    context.push(AppRouteLocation.vocabDetail(item.id)),
               ),
             );
           }),

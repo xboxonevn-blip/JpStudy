@@ -1,3 +1,4 @@
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'dart:async';
 import 'dart:math';
 
@@ -102,7 +103,8 @@ class _HajimeteChapterDetailScreenState
             userTermsAsync.when(
               data: (userTerms) {
                 _maybeSyncStarFlags(userTerms);
-                final isSaved = userTerms.isNotEmpty &&
+                final isSaved =
+                    userTerms.isNotEmpty &&
                     _starredTermIds.length == userTerms.length;
                 return _SavedPill(
                   label: _savedLabel(language),
@@ -143,20 +145,32 @@ class _HajimeteChapterDetailScreenState
             final rawItems = itemsAsync.valueOrNull ?? _toVocabItems(detail);
             final items = _orderedItems(rawItems);
             final dueItems = dueItemsAsync.valueOrNull ?? const <VocabItem>[];
-            final srsStates = srsStatesAsync.valueOrNull ?? const <int, SrsStateData>{};
-            final userTerms = userTermsAsync.valueOrNull ?? const <UserLessonTermData>[];
+            final srsStates =
+                srsStatesAsync.valueOrNull ?? const <int, SrsStateData>{};
+            final userTerms =
+                userTermsAsync.valueOrNull ?? const <UserLessonTermData>[];
             _maybeSyncStarFlags(userTerms);
-            final userTermsByItemId = mapHajimeteUserTermsByItemId(items, userTerms);
+            final userTermsByItemId = mapHajimeteUserTermsByItemId(
+              items,
+              userTerms,
+            );
             final learnedCount = srsStates.length;
             final total = items.length;
-            final currentIndex = total == 0 ? 0 : _currentIndex.clamp(0, total - 1);
+            final currentIndex = total == 0
+                ? 0
+                : _currentIndex.clamp(0, total - 1);
             final currentItem = total == 0 ? null : items[currentIndex];
             final dueCount = dueItems.length;
-            final reviewIndex = dueCount == 0 ? 0 : _reviewIndex.clamp(0, dueCount - 1);
+            final reviewIndex = dueCount == 0
+                ? 0
+                : _reviewIndex.clamp(0, dueCount - 1);
             final currentDueItem = dueCount == 0 ? null : dueItems[reviewIndex];
-            final currentUserTerm = currentItem == null ? null : userTermsByItemId[currentItem.id];
-            final currentDueUserTerm =
-                currentDueItem == null ? null : userTermsByItemId[currentDueItem.id];
+            final currentUserTerm = currentItem == null
+                ? null
+                : userTermsByItemId[currentItem.id];
+            final currentDueUserTerm = currentDueItem == null
+                ? null
+                : userTermsByItemId[currentDueItem.id];
             final currentRetrievability = currentDueItem == null
                 ? null
                 : hajimeteRetrievabilityForItem(currentDueItem, srsStates);
@@ -190,17 +204,20 @@ class _HajimeteChapterDetailScreenState
                   onTest: () => _openTest(items, detail.title),
                   onMatch: () => _openMatch(items, detail.title),
                   onWrite: () => _openWrite(items, detail.title),
-                  onToggleCurrentStar: (_mode == _ChapterStudyMode.review
+                  onToggleCurrentStar:
+                      (_mode == _ChapterStudyMode.review
                               ? currentDueUserTerm
-                              : currentUserTerm) == null
+                              : currentUserTerm) ==
+                          null
                       ? null
                       : () => _toggleStar(
-                            _mode == _ChapterStudyMode.review
-                                ? currentDueUserTerm!
-                                : currentUserTerm!,
-                            args,
-                          ),
-                  onShowHintsChanged: (value) => setState(() => _showHints = value),
+                          _mode == _ChapterStudyMode.review
+                              ? currentDueUserTerm!
+                              : currentUserTerm!,
+                          args,
+                        ),
+                  onShowHintsChanged: (value) =>
+                      setState(() => _showHints = value),
                   onToggleShuffle: _toggleShuffle,
                   onToggleAutoPlay: () => _toggleAutoPlay(total),
                   onPrev: () => _goPrev(total),
@@ -209,10 +226,10 @@ class _HajimeteChapterDetailScreenState
                   onReviewRate: currentDueItem == null
                       ? null
                       : (level) => _handleReviewRating(
-                            currentDueItem,
-                            level.value,
-                            args,
-                          ),
+                          currentDueItem,
+                          level.value,
+                          args,
+                        ),
                 ),
                 _KanjiTab(
                   language: language,
@@ -224,7 +241,8 @@ class _HajimeteChapterDetailScreenState
             );
           },
           loading: () => const Center(child: CircularProgressIndicator()),
-          error: (error, _) => _ErrorState(language: language, message: error.toString()),
+          error: (error, _) =>
+              _ErrorState(language: language, message: error.toString()),
         ),
       ),
     );
@@ -251,7 +269,9 @@ class _HajimeteChapterDetailScreenState
     }
     final ids = items.map((item) => item.id).toSet();
     final order = _shuffledOrder;
-    if (order == null || order.length != ids.length || !order.every(ids.contains)) {
+    if (order == null ||
+        order.length != ids.length ||
+        !order.every(ids.contains)) {
       _shuffledOrder = ids.toList()..shuffle(_random);
     }
     final byId = {for (final item in items) item.id: item};
@@ -295,9 +315,8 @@ class _HajimeteChapterDetailScreenState
   }
 
   void _openLearn(List<VocabItem> items, String chapterTitle) {
-    context.push(
-      '/learn/session',
-      extra: LearnSessionArgs(
+    context.openLearnSession(
+      LearnSessionArgs(
         items: items,
         lessonId: -widget.chapterId,
         lessonTitle: chapterTitle,
@@ -306,9 +325,8 @@ class _HajimeteChapterDetailScreenState
   }
 
   void _openTest(List<VocabItem> items, String chapterTitle) {
-    context.push(
-      '/learn/session',
-      extra: LearnSessionArgs(
+    context.openLearnSession(
+      LearnSessionArgs(
         items: items,
         lessonId: -widget.chapterId,
         lessonTitle: '$chapterTitle - Test',
@@ -322,9 +340,8 @@ class _HajimeteChapterDetailScreenState
   }
 
   void _openWrite(List<VocabItem> items, String chapterTitle) {
-    context.push(
-      '/learn/session',
-      extra: LearnSessionArgs(
+    context.openLearnSession(
+      LearnSessionArgs(
         items: items,
         lessonId: -widget.chapterId,
         lessonTitle: '$chapterTitle - Write',
@@ -342,9 +359,13 @@ class _HajimeteChapterDetailScreenState
 
   void _maybeSyncStarFlags(List<UserLessonTermData> terms) {
     final ids = terms.map((term) => term.id).toSet();
-    final starred = terms.where((term) => term.isStarred).map((term) => term.id).toSet();
+    final starred = terms
+        .where((term) => term.isStarred)
+        .map((term) => term.id)
+        .toSet();
     final needsSync =
-        !_setsEqual(ids, _syncedTermIds) || !_setsEqual(starred, _starredTermIds);
+        !_setsEqual(ids, _syncedTermIds) ||
+        !_setsEqual(starred, _starredTermIds);
     if (!needsSync) {
       return;
     }
@@ -417,8 +438,8 @@ class _HajimeteChapterDetailScreenState
     final label = days == 0
         ? language.todayLabel
         : days == 1
-            ? language.tomorrowLabel
-            : language.inDaysLabel(days);
+        ? language.tomorrowLabel
+        : language.inDaysLabel(days);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(language.nextReviewToastLabel(label)),
@@ -455,7 +476,10 @@ class _HajimeteChapterDetailScreenState
     HajimeteChapterDetailArgs args,
   ) async {
     final repo = ref.read(lessonRepositoryProvider);
-    final fsrsResult = await repo.saveTermReview(termId: item.id, quality: quality);
+    final fsrsResult = await repo.saveTermReview(
+      termId: item.id,
+      quality: quality,
+    );
     _showNextReviewToast(fsrsResult?.nextReviewAt, quality);
     ref.invalidate(hajimeteChapterDueItemsProvider(args));
     ref.invalidate(hajimeteChapterSrsStatesProvider(args));
@@ -479,7 +503,6 @@ class _HajimeteChapterDetailScreenState
     });
   }
 }
-
 
 class _VocabTabView extends StatelessWidget {
   const _VocabTabView({
@@ -561,7 +584,8 @@ class _VocabTabView extends StatelessWidget {
     final activeTerm = mode == _ChapterStudyMode.review
         ? currentDueUserTerm
         : currentUserTerm;
-    final isStarred = activeTerm != null && starredTermIds.contains(activeTerm.id);
+    final isStarred =
+        activeTerm != null && starredTermIds.contains(activeTerm.id);
     return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
       child: Column(
@@ -697,7 +721,9 @@ class _StudyStagePanel extends StatelessWidget {
                   Expanded(
                     child: Center(
                       child: SingleChildScrollView(
-                        child: mode == _ChapterStudyMode.review && currentDueItem == null
+                        child:
+                            mode == _ChapterStudyMode.review &&
+                                currentDueItem == null
                             ? _ReviewEmptyState(
                                 language: language,
                                 onStartLearning: onStartLearning,
@@ -762,10 +788,7 @@ class _StageHintRow extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 12),
-          Switch.adaptive(
-            value: showHints,
-            onChanged: onShowHintsChanged,
-          ),
+          Switch.adaptive(value: showHints, onChanged: onShowHintsChanged),
         ],
       ),
     );
@@ -894,9 +917,15 @@ class _ReviewEmptyState extends StatelessWidget {
             right: 18,
             child: Row(
               children: [
-                Icon(Icons.star_border_rounded, color: palette.ink.withValues(alpha: 0.45)),
+                Icon(
+                  Icons.star_border_rounded,
+                  color: palette.ink.withValues(alpha: 0.45),
+                ),
                 const SizedBox(width: 12),
-                Icon(Icons.edit_outlined, color: palette.ink.withValues(alpha: 0.45)),
+                Icon(
+                  Icons.edit_outlined,
+                  color: palette.ink.withValues(alpha: 0.45),
+                ),
               ],
             ),
           ),
@@ -947,7 +976,9 @@ class _CurrentTermActionBar extends StatelessWidget {
       child: FilledButton.tonalIcon(
         onPressed: onToggleStar,
         icon: Icon(starred ? Icons.star_rounded : Icons.star_border_rounded),
-        label: Text(starred ? _savedLabel(language) : _saveThisWordLabel(language)),
+        label: Text(
+          starred ? _savedLabel(language) : _saveThisWordLabel(language),
+        ),
       ),
     );
   }
@@ -1083,7 +1114,10 @@ class _StatPill extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: palette.outline),
       ),
-      child: Text('$label $value', style: const TextStyle(fontWeight: FontWeight.w700)),
+      child: Text(
+        '$label $value',
+        style: const TextStyle(fontWeight: FontWeight.w700),
+      ),
     );
   }
 }
@@ -1142,10 +1176,7 @@ class _ActionChip extends StatelessWidget {
         ),
         child: Text(
           label,
-          style: TextStyle(
-            fontWeight: FontWeight.w700,
-            color: palette.ink,
-          ),
+          style: TextStyle(fontWeight: FontWeight.w700, color: palette.ink),
         ),
       ),
     );
@@ -1190,7 +1221,10 @@ class _FlashcardControls extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 8),
-          IconButton(onPressed: onPrev, icon: const Icon(Icons.arrow_back_rounded)),
+          IconButton(
+            onPressed: onPrev,
+            icon: const Icon(Icons.arrow_back_rounded),
+          ),
           const SizedBox(width: 8),
           InkWell(
             onTap: onAutoPlay,
@@ -1209,7 +1243,10 @@ class _FlashcardControls extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 8),
-          IconButton(onPressed: onNext, icon: const Icon(Icons.arrow_forward_rounded)),
+          IconButton(
+            onPressed: onNext,
+            icon: const Icon(Icons.arrow_forward_rounded),
+          ),
         ],
       ),
     );
@@ -1284,9 +1321,8 @@ class _KanjiTab extends StatelessWidget {
                           child: Text(
                             entry.character.isEmpty ? '—' : entry.character,
                             textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                              fontWeight: FontWeight.w900,
-                            ),
+                            style: Theme.of(context).textTheme.headlineMedium
+                                ?.copyWith(fontWeight: FontWeight.w900),
                           ),
                         ),
                         const SizedBox(width: 16),
@@ -1297,10 +1333,11 @@ class _KanjiTab extends StatelessWidget {
                               if (entry.reading.isNotEmpty)
                                 Text(
                                   entry.reading,
-                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    color: context.appPalette.info,
-                                    fontWeight: FontWeight.w700,
-                                  ),
+                                  style: Theme.of(context).textTheme.bodyMedium
+                                      ?.copyWith(
+                                        color: context.appPalette.info,
+                                        fontWeight: FontWeight.w700,
+                                      ),
                                 ),
                               if (entry.meaningVi.isNotEmpty) ...[
                                 const SizedBox(height: 4),
@@ -1310,9 +1347,11 @@ class _KanjiTab extends StatelessWidget {
                                 const SizedBox(height: 4),
                                 Text(
                                   entry.meaningEn,
-                                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: context.appPalette.ink.withValues(alpha: 0.65),
-                                  ),
+                                  style: Theme.of(context).textTheme.bodySmall
+                                      ?.copyWith(
+                                        color: context.appPalette.ink
+                                            .withValues(alpha: 0.65),
+                                      ),
                                 ),
                               ],
                             ],
@@ -1359,9 +1398,9 @@ class _KanjiContractCard extends StatelessWidget {
         children: [
           Text(
             _kanjiContractTitle(language),
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.w900,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w900),
           ),
           const SizedBox(height: 8),
           Text(_kanjiContractSubtitle(language, levelCode, chapterTitle)),
@@ -1396,9 +1435,9 @@ class _KanjiSummaryCard extends StatelessWidget {
               children: [
                 Text(
                   _kanjiLiveTitle(language),
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w900,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w900),
                 ),
                 const SizedBox(height: 8),
                 Text(_kanjiLiveSubtitle(language, detail.entries.length)),
@@ -1415,9 +1454,9 @@ class _KanjiSummaryCard extends StatelessWidget {
             ),
             child: Text(
               '${detail.entries.length}',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.w900,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w900),
             ),
           ),
         ],
@@ -1502,7 +1541,10 @@ class _SavedPill extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(active ? Icons.star_rounded : Icons.star_border_rounded, size: 18),
+            Icon(
+              active ? Icons.star_rounded : Icons.star_border_rounded,
+              size: 18,
+            ),
             const SizedBox(width: 6),
             Text(label),
           ],
@@ -1631,9 +1673,12 @@ String _kanjiContractSubtitle(
   String levelCode,
   String chapterTitle,
 ) => switch (language) {
-  AppLanguage.vi => 'Tab Kanji của $levelCode / $chapterTitle đang chờ asset Hajimete. Chỉ cần thêm file đúng format là UI này sẽ dùng ngay.',
-  AppLanguage.ja => '$levelCode / $chapterTitle の漢字タブは Hajimete のアセット待ちです。正しい形式のファイルを追加すればこの UI にそのまま表示されます。',
-  AppLanguage.en => 'The Kanji tab for $levelCode / $chapterTitle is waiting for Hajimete assets. Once you add a file in the expected format, this UI can use it directly.',
+  AppLanguage.vi =>
+    'Tab Kanji của $levelCode / $chapterTitle đang chờ asset Hajimete. Chỉ cần thêm file đúng format là UI này sẽ dùng ngay.',
+  AppLanguage.ja =>
+    '$levelCode / $chapterTitle の漢字タブは Hajimete のアセット待ちです。正しい形式のファイルを追加すればこの UI にそのまま表示されます。',
+  AppLanguage.en =>
+    'The Kanji tab for $levelCode / $chapterTitle is waiting for Hajimete assets. Once you add a file in the expected format, this UI can use it directly.',
 };
 
 String _kanjiLiveTitle(AppLanguage language) => switch (language) {
@@ -1642,20 +1687,24 @@ String _kanjiLiveTitle(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Kanji for this chapter is live',
 };
 
-String _kanjiLiveSubtitle(AppLanguage language, int count) => switch (language) {
-  AppLanguage.vi => '$count mục Kanji đã được nạp vào tab này.',
-  AppLanguage.ja => '$count 件の漢字がこのタブに読み込まれました。',
-  AppLanguage.en => '$count Kanji entries are loaded into this tab.',
-};
+String _kanjiLiveSubtitle(AppLanguage language, int count) =>
+    switch (language) {
+      AppLanguage.vi => '$count mục Kanji đã được nạp vào tab này.',
+      AppLanguage.ja => '$count 件の漢字がこのタブに読み込まれました。',
+      AppLanguage.en => '$count Kanji entries are loaded into this tab.',
+    };
 
 String _kanjiComingSoonSubtitle(
   AppLanguage language,
   String levelCode,
   String chapterTitle,
 ) => switch (language) {
-  AppLanguage.vi => 'Mình đã chừa sẵn tab Kanji cho $levelCode / $chapterTitle. Khi bạn bổ sung data kanji của Hajimete, mình sẽ nối vào đây.',
-  AppLanguage.ja => '$levelCode / $chapterTitle 用に漢字タブを準備しています。Hajimete の漢字データが追加されたらここへ接続します。',
-  AppLanguage.en => 'The Kanji tab is reserved for $levelCode / $chapterTitle. Once you add Hajimete kanji data, it can plug in here directly.',
+  AppLanguage.vi =>
+    'Mình đã chừa sẵn tab Kanji cho $levelCode / $chapterTitle. Khi bạn bổ sung data kanji của Hajimete, mình sẽ nối vào đây.',
+  AppLanguage.ja =>
+    '$levelCode / $chapterTitle 用に漢字タブを準備しています。Hajimete の漢字データが追加されたらここへ接続します。',
+  AppLanguage.en =>
+    'The Kanji tab is reserved for $levelCode / $chapterTitle. Once you add Hajimete kanji data, it can plug in here directly.',
 };
 
 String _emptyTitle(AppLanguage language) => switch (language) {
@@ -1683,7 +1732,9 @@ String _noVocabTitle(AppLanguage language) => switch (language) {
 };
 
 String _noVocabSubtitle(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'Khi chapter này có dữ liệu vocab, flashcard sẽ hiện ở đây.',
+  AppLanguage.vi =>
+    'Khi chapter này có dữ liệu vocab, flashcard sẽ hiện ở đây.',
   AppLanguage.ja => 'このチャプターの語彙データが入ると、ここにフラッシュカードが表示されます。',
-  AppLanguage.en => 'Flashcards will appear here once this chapter has vocab data.',
+  AppLanguage.en =>
+    'Flashcards will appear here once this chapter has vocab data.',
 };

@@ -721,6 +721,7 @@ void main() {
         initialLocation: '/practice/handwriting',
         routes: [
           GoRoute(
+            name: 'practice',
             path: '/practice',
             builder: (context, state) =>
                 const Scaffold(body: Center(child: Text('Practice hub'))),

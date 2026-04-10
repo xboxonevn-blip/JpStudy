@@ -1,3 +1,4 @@
+import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -84,7 +85,7 @@ ProgressCoachBoard buildCoachBoard({
           title: 'Review 6 due items now',
           subtitle: '3 vocab · 2 grammar · 1 kanji are waiting in the queue.',
           ctaLabel: 'Start due session',
-          route: '/grammar-practice',
+          route: AppRoutePath.grammarPractice,
           icon: Icons.schedule_rounded,
           color: Color(0xFF1D4ED8),
           badge: 'Due now',
@@ -262,7 +263,7 @@ void main() {
               title: 'Do one immersion pass',
               subtitle: 'Read briefly and save unknown words.',
               ctaLabel: 'Open immersion',
-              route: '/immersion',
+              route: AppRoutePath.immersion,
               icon: Icons.article_rounded,
               color: Color(0xFF059669),
             ),
@@ -296,7 +297,7 @@ void main() {
               title: 'Grammar slipping: 〜てしまう',
               subtitle: '2 grammar ghosts are still open.',
               ctaLabel: 'Drill now',
-              route: '/grammar-practice',
+              route: AppRoutePath.grammarPractice,
               icon: Icons.auto_stories_rounded,
               color: Color(0xFF7C3AED),
               badge: 'Weak spot',
@@ -306,7 +307,7 @@ void main() {
                 id: 'grammar_mistakes',
                 title: 'Grammar slipping: 〜てしまう',
                 subtitle: '2 grammar ghosts are still open.',
-                route: '/grammar-practice',
+                route: AppRoutePath.grammarPractice,
                 icon: Icons.auto_stories_rounded,
                 color: Color(0xFF7C3AED),
               ),

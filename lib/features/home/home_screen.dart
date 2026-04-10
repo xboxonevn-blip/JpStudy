@@ -1,7 +1,7 @@
 import 'package:drift/drift.dart' hide Column;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/goal_provider.dart';
 import 'package:jpstudy/core/language_provider.dart';
@@ -95,7 +95,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           language: language,
           onLanguageTap: () => _showLanguageSheet(context),
           onLevelChanged: _setLevel,
-          onSettingsTap: () => context.go('/me'),
+          onSettingsTap: () => context.openMe(),
         ),
         elevation: 0,
         scrolledUnderElevation: 0,
@@ -271,12 +271,8 @@ class _AchievementDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (isStreak && milestone != null)
-            Text(
-              milestone.emoji,
-              style: const TextStyle(fontSize: 56),
-            ),
-          if (isStreak && milestone != null)
-            const SizedBox(height: 8),
+            Text(milestone.emoji, style: const TextStyle(fontSize: 56)),
+          if (isStreak && milestone != null) const SizedBox(height: 8),
           Transform.rotate(
             angle: -0.09,
             child: Container(

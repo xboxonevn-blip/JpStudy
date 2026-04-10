@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
@@ -61,8 +61,7 @@ class _KanjiHubBody extends ConsumerWidget {
     final dueAsync = ref.watch(kanjiReadingDueItemsProvider);
     // Derive due count from the already-cached kanjiDueIdsProvider —
     // avoids an extra getDueReviews() call on every screen push.
-    final dueCount =
-        ref.watch(kanjiDueIdsProvider).valueOrNull?.length ?? 0;
+    final dueCount = ref.watch(kanjiDueIdsProvider).valueOrNull?.length ?? 0;
 
     return allAsync.when(
       data: (allItems) {
@@ -74,7 +73,7 @@ class _KanjiHubBody extends ConsumerWidget {
               title: language.kanjiReadingQuizTitle,
               subtitle: language.noTermsAvailableLabel,
               secondaryLabel: _goLibraryLabel(language),
-              onSecondaryTap: () => context.push('/library'),
+              onSecondaryTap: () => context.openLibrary(),
             ),
           );
         }
@@ -145,12 +144,7 @@ class _KanjiHubBody extends ConsumerWidget {
                   children: allItems
                       .where((item) => scopedAllItems.contains(item))
                       .take(8)
-                      .map(
-                        (k) => _KanjiRow(
-                          kanji: k,
-                          language: language,
-                        ),
-                      )
+                      .map((k) => _KanjiRow(kanji: k, language: language))
                       .toList(),
                 ),
               ),
@@ -185,8 +179,10 @@ class _KanjiHubBody extends ConsumerWidget {
     }
     if (launchArgs?.mode == KanjiPracticeMode.both) {
       return switch (language) {
-        AppLanguage.en => '$itemCount kanji ready. Start here, then continue with writing.',
-        AppLanguage.vi => '$itemCount kanji sẵn sàng. Bắt đầu ở đây rồi tiếp tục sang viết.',
+        AppLanguage.en =>
+          '$itemCount kanji ready. Start here, then continue with writing.',
+        AppLanguage.vi =>
+          '$itemCount kanji sẵn sàng. Bắt đầu ở đây rồi tiếp tục sang viết.',
         AppLanguage.ja => '$itemCount件の漢字が準備できています。ここから始めて次に書きを続けます。',
       };
     }

@@ -1,9 +1,9 @@
-﻿
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/app/theme/app_breakpoints.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
@@ -44,11 +44,12 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
   late final Future<List<RadicalItem>> _radicalFuture;
   Future<List<KanjiItem>>? _allKanjiFuture;
   bool _didOpenInitialKanji = false;
-  
+
   // Realtime filter state
   String _searchQuery = '';
   List<String> _candidateKanji = [];
-  final GlobalKey<_SearchDrawPanelState> _searchDrawKey = GlobalKey<_SearchDrawPanelState>();
+  final GlobalKey<_SearchDrawPanelState> _searchDrawKey =
+      GlobalKey<_SearchDrawPanelState>();
   final GlobalKey _gridPanelKey = GlobalKey();
 
   @override
@@ -101,7 +102,9 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
   }
 
   Future<List<KanjiItem>> _fetchKanji(StudyLevel level) async {
-    return ref.read(lessonRepositoryProvider).fetchKanjiByLevel(level.shortLabel);
+    return ref
+        .read(lessonRepositoryProvider)
+        .fetchKanjiByLevel(level.shortLabel);
   }
 
   Future<List<KanjiItem>> _loadAllKanji() async {
@@ -111,9 +114,7 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
       repo.fetchKanjiByLevel(StudyLevel.n4.shortLabel),
       repo.fetchKanjiByLevel(StudyLevel.n3.shortLabel),
     ]);
-    return [
-      for (final bucket in buckets) ...bucket,
-    ];
+    return [for (final bucket in buckets) ...bucket];
   }
 
   _KanjiCollection _collectionFromLevel(StudyLevel level) {
@@ -200,7 +201,9 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
 
   Future<void> _tryJumpToLevelOfKanji(String character) async {
     final repo = ref.read(lessonRepositoryProvider);
-    final currentItems = await repo.fetchKanjiByLevel(_selectedLevel.shortLabel);
+    final currentItems = await repo.fetchKanjiByLevel(
+      _selectedLevel.shortLabel,
+    );
     if (currentItems.any((k) => k.character == character)) {
       if (mounted) {
         _activateLevel(_selectedLevel, refreshKanji: _kanjiFuture == null);
@@ -224,7 +227,8 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
   Widget build(BuildContext context) {
     final language = ref.watch(appLanguageProvider);
     final homeSummary = ref.watch(kanjiHomeSummaryProvider);
-    final isDesktop = MediaQuery.of(context).size.width >= AppBreakpoints.desktop;
+    final isDesktop =
+        MediaQuery.of(context).size.width >= AppBreakpoints.desktop;
     final isTablet = MediaQuery.of(context).size.width >= AppBreakpoints.tablet;
     final twoColumns = isDesktop || isTablet;
 
@@ -269,7 +273,8 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
                         ctx,
                         duration: const Duration(milliseconds: 350),
                         curve: Curves.easeOut,
-                        alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart,
+                        alignmentPolicy:
+                            ScrollPositionAlignmentPolicy.keepVisibleAtStart,
                       );
                     }
                   },
@@ -363,11 +368,11 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
                     ),
                     const SizedBox(height: AppSpacing.xl),
                     _SearchDrawPanel(
-                            key: _searchDrawKey,
-                            language: language,
-                            onSearchQueryChanged: _onSearchQueryChanged,
-                            onCandidatesFound: _onCandidatesFound,
-                          ),
+                      key: _searchDrawKey,
+                      language: language,
+                      onSearchQueryChanged: _onSearchQueryChanged,
+                      onCandidatesFound: _onCandidatesFound,
+                    ),
                     const SizedBox(height: AppSpacing.xl),
                     _KanjiMindmapPanel(language: language),
                   ],
@@ -380,7 +385,7 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
   }
 
   void _openPracticeHub(BuildContext context, KanjiPracticeArgs args) {
-    context.push('/kanji/practice', extra: args);
+    context.openKanjiPractice(extra: args);
   }
 
   Widget _buildHeader(BuildContext context, AppLanguage language) {
@@ -390,7 +395,6 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
     );
   }
 }
-
 
 String _previewMeaning(KanjiItem item) {
   final meaningEn = item.meaningEn?.trim();
@@ -407,9 +411,10 @@ void _launchLevelPractice(
 ) {
   final level = StudyLevel.fromCode(levelCode);
   if (level == null) return;
-  ProviderScope.containerOf(context, listen: false)
-      .read(studyLevelProvider.notifier)
-      .state = level;
+  ProviderScope.containerOf(
+    context,
+    listen: false,
+  ).read(studyLevelProvider.notifier).state = level;
   Navigator.of(context).pop();
   context.push(
     '/kanji/practice',
@@ -421,16 +426,13 @@ void _launchLevelPractice(
   );
 }
 
-void _launchKanjiUtility(
-  BuildContext context,
-  KanjiItem item,
-  String route,
-) {
+void _launchKanjiUtility(BuildContext context, KanjiItem item, String route) {
   final level = StudyLevel.fromCode(item.jlptLevel);
   if (level != null) {
-    ProviderScope.containerOf(context, listen: false)
-        .read(studyLevelProvider.notifier)
-        .state = level;
+    ProviderScope.containerOf(
+      context,
+      listen: false,
+    ).read(studyLevelProvider.notifier).state = level;
   }
   Navigator.of(context).pop();
   if (route == '/practice/handwriting') {
@@ -452,9 +454,10 @@ void _launchKanjiUtility(
 void _launchKanjiPractice(BuildContext context, KanjiItem item) {
   final level = StudyLevel.fromCode(item.jlptLevel);
   if (level != null) {
-    ProviderScope.containerOf(context, listen: false)
-        .read(studyLevelProvider.notifier)
-        .state = level;
+    ProviderScope.containerOf(
+      context,
+      listen: false,
+    ).read(studyLevelProvider.notifier).state = level;
   }
   Navigator.of(context).pop();
   context.push(
@@ -481,7 +484,6 @@ String _formatKanjiExample(KanjiExample example) {
   if (meaning.isNotEmpty) parts.add('? $meaning');
   return parts.join(' ');
 }
-
 
 String _kanjiHubClearLabel(AppLanguage language) => language.kanjiClearLabel();
 
@@ -514,43 +516,60 @@ Color _srsFilterColor(_KanjiSrsFilter filter) => switch (filter) {
   _KanjiSrsFilter.studied => const Color(0xFF4CAF50),
 };
 
-String _kanjiHubStrokeChipLabel(AppLanguage language, int count) => language.kanjiStrokeChipLabel(count);
+String _kanjiHubStrokeChipLabel(AppLanguage language, int count) =>
+    language.kanjiStrokeChipLabel(count);
 
-String _kanjiHubClearFiltersLabel(AppLanguage language) => language.kanjiClearFiltersLabel();
+String _kanjiHubClearFiltersLabel(AppLanguage language) =>
+    language.kanjiClearFiltersLabel();
 
-String _kanjiHubStudyWord(AppLanguage language) => language.kanjiStudyWordLabel();
+String _kanjiHubStudyWord(AppLanguage language) =>
+    language.kanjiStudyWordLabel();
 
-String _kanjiHubSearchLabel(AppLanguage language) => language.kanjiSearchLabel();
+String _kanjiHubSearchLabel(AppLanguage language) =>
+    language.kanjiSearchLabel();
 
-String _kanjiHubFlashcardLabel(AppLanguage language) => language.kanjiPracticeThisLabel();
+String _kanjiHubFlashcardLabel(AppLanguage language) =>
+    language.kanjiPracticeThisLabel();
 
 String _kanjiTodayTitle(AppLanguage language) => language.kanjiTodayTitle();
 
-String _kanjiTodayCaption(AppLanguage language, String levelCode) => language.kanjiTodayCaption(levelCode);
+String _kanjiTodayCaption(AppLanguage language, String levelCode) =>
+    language.kanjiTodayCaption(levelCode);
 
-String _kanjiDueActionLabel(AppLanguage language) => language.kanjiDueActionLabel();
+String _kanjiDueActionLabel(AppLanguage language) =>
+    language.kanjiDueActionLabel();
 
-String _kanjiDueActionSubtitle(AppLanguage language, int count) => language.kanjiDueActionSubtitle(count);
+String _kanjiDueActionSubtitle(AppLanguage language, int count) =>
+    language.kanjiDueActionSubtitle(count);
 
-String _kanjiNewActionLabel(AppLanguage language) => language.kanjiNewActionLabel();
+String _kanjiNewActionLabel(AppLanguage language) =>
+    language.kanjiNewActionLabel();
 
-String _kanjiNewActionSubtitle(AppLanguage language, int count) => language.kanjiNewActionSubtitle(count);
+String _kanjiNewActionSubtitle(AppLanguage language, int count) =>
+    language.kanjiNewActionSubtitle(count);
 
-String _kanjiExploreActionLabel(AppLanguage language) => language.kanjiExploreActionLabel();
+String _kanjiExploreActionLabel(AppLanguage language) =>
+    language.kanjiExploreActionLabel();
 
-String _kanjiExploreActionSubtitle(AppLanguage language, int count) => language.kanjiExploreActionSubtitle(count);
+String _kanjiExploreActionSubtitle(AppLanguage language, int count) =>
+    language.kanjiExploreActionSubtitle(count);
 
 String _kanjiHubWriteLabel(AppLanguage language) => language.kanjiWriteLabel();
 
-String _kanjiSummaryLoadingTitle(AppLanguage language) => language.kanjiSummaryLoadingTitle();
+String _kanjiSummaryLoadingTitle(AppLanguage language) =>
+    language.kanjiSummaryLoadingTitle();
 
-String _kanjiSummaryLoadingSubtitle(AppLanguage language) => language.kanjiSummaryLoadingSubtitle();
+String _kanjiSummaryLoadingSubtitle(AppLanguage language) =>
+    language.kanjiSummaryLoadingSubtitle();
 
-String _kanjiSummaryErrorTitle(AppLanguage language) => language.kanjiSummaryErrorTitle();
+String _kanjiSummaryErrorTitle(AppLanguage language) =>
+    language.kanjiSummaryErrorTitle();
 
-String _kanjiSummaryErrorSubtitle(AppLanguage language) => language.kanjiSummaryErrorSubtitle();
+String _kanjiSummaryErrorSubtitle(AppLanguage language) =>
+    language.kanjiSummaryErrorSubtitle();
 
-String _kanjiSummaryRetryLabel(AppLanguage language) => language.kanjiSummaryRetryLabel();
+String _kanjiSummaryRetryLabel(AppLanguage language) =>
+    language.kanjiSummaryRetryLabel();
 
 AppLanguage _kanjiHubDialogLanguage(BuildContext context) {
   final code = Localizations.localeOf(context).languageCode;
@@ -611,7 +630,11 @@ String _writeLaneLabel(BuildContext context, String level) {
   return language.kanjiWriteLaneLabel(level);
 }
 
-String _relatedLevelSectionLabel(BuildContext context, String level, int count) {
+String _relatedLevelSectionLabel(
+  BuildContext context,
+  String level,
+  int count,
+) {
   final language = _kanjiHubDialogLanguage(context);
   return language.kanjiRelatedLevelSectionLabel(level, count);
 }

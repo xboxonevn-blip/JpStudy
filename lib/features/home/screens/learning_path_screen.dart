@@ -1,7 +1,8 @@
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/app/layout/app_responsive_frame.dart';
 import 'package:jpstudy/app/theme/app_breakpoints.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
@@ -115,14 +116,13 @@ class LearningPathScreen extends ConsumerWidget {
                               weakCount: weakCount,
                               hasStartedToday: hasStartedToday,
                               missionLabel: continueAction?.label,
-                              onPrimaryTap: () =>
-                                  _openContinueAction(
-                                    context,
-                                    continueAction,
-                                    language: language,
-                                    level: level,
-                                  ),
-                              onSecondaryTap: () => context.push('/jlpt/coach'),
+                              onPrimaryTap: () => _openContinueAction(
+                                context,
+                                continueAction,
+                                language: language,
+                                level: level,
+                              ),
+                              onSecondaryTap: () => context.openJlptCoach(),
                             ),
                           )
                           .animate()
@@ -262,19 +262,17 @@ class LearningPathScreen extends ConsumerWidget {
 
   static void _openContinueAction(
     BuildContext context,
-    ContinueAction? action,
-    {
+    ContinueAction? action, {
     required AppLanguage language,
     required StudyLevel level,
-  }
-  ) {
+  }) {
     if (action == null) {
-      context.push('/study');
+      context.openStudy();
       return;
     }
     switch (action.type) {
       case ContinueActionType.grammarReview:
-        context.push('/grammar-practice', extra: action.data);
+        context.openGrammarPractice(extra: action.data);
         return;
       case ContinueActionType.vocabReview:
         context.push(
@@ -302,17 +300,17 @@ class LearningPathScreen extends ConsumerWidget {
         );
         return;
       case ContinueActionType.fixMistakes:
-        context.push('/mistakes');
+        context.openMistakes();
         return;
       case ContinueActionType.practiceMixed:
-        context.push('/study');
+        context.openStudy();
         return;
       case ContinueActionType.nextLesson:
         final lessonId = action.data as int?;
         if (lessonId != null) {
-          context.push('/lesson/$lessonId');
+          context.openLesson(lessonId);
         } else {
-          context.push('/library');
+          context.openLibrary();
         }
         return;
     }
@@ -324,9 +322,8 @@ class LearningPathScreen extends ConsumerWidget {
     AppLanguage.ja => '毎日の日本語リズムを保つ',
   };
 
-  static String _studyPromptSubtitle(
-    AppLanguage language,
-  ) => language.learningPathStudyPromptSubtitle();
+  static String _studyPromptSubtitle(AppLanguage language) =>
+      language.learningPathStudyPromptSubtitle();
 
   static String _studyPromptProgressLabel(
     AppLanguage language, {
@@ -662,9 +659,11 @@ class _DojoHeroCard extends StatelessWidget {
     AppLanguage.ja => language.learningHeroRepairLabel(),
   };
 
-  static String _primaryLabel(AppLanguage language) => language.learningHeroPrimaryLabel();
+  static String _primaryLabel(AppLanguage language) =>
+      language.learningHeroPrimaryLabel();
 
-  static String _secondaryLabel(AppLanguage language) => language.learningHeroSecondaryLabel();
+  static String _secondaryLabel(AppLanguage language) =>
+      language.learningHeroSecondaryLabel();
 }
 
 class _DojoStatChip extends StatelessWidget {
@@ -760,7 +759,7 @@ class _LearningLanesPanel extends StatelessWidget {
                       ? _dueChip(language, dueCount)
                       : _readyChip(language),
                   color: palette.primary,
-                  onTap: () => context.push('/study'),
+                  onTap: () => context.openStudy(),
                 ),
                 _LaneCard(
                   icon: Icons.quiz_rounded,
@@ -769,7 +768,7 @@ class _LearningLanesPanel extends StatelessWidget {
                   ctaLabel: _openLaneLabel(language),
                   chipLabel: level.shortLabel,
                   color: palette.accent,
-                  onTap: () => context.push('/jlpt/coach'),
+                  onTap: () => context.openJlptCoach(),
                 ),
                 _LaneCard(
                   icon: Icons.auto_stories_rounded,
@@ -778,7 +777,7 @@ class _LearningLanesPanel extends StatelessWidget {
                   ctaLabel: _openLaneLabel(language),
                   chipLabel: _immersionChip(language),
                   color: palette.secondary,
-                  onTap: () => context.push('/immersion'),
+                  onTap: () => context.openImmersion(),
                 ),
               ];
 
@@ -822,26 +821,23 @@ class _LearningLanesPanel extends StatelessWidget {
     AppLanguage.ja => language.learningLanesSubtitle(),
   };
 
-  static String _studyLaneTitle(AppLanguage language) => language.learningStudyLaneTitle();
+  static String _studyLaneTitle(AppLanguage language) =>
+      language.learningStudyLaneTitle();
 
-  static String _studyLaneSubtitle(
-    AppLanguage language,
-    int dueCount,
-  ) => language.learningStudyLaneSubtitle(dueCount);
+  static String _studyLaneSubtitle(AppLanguage language, int dueCount) =>
+      language.learningStudyLaneSubtitle(dueCount);
 
-  static String _jlptLaneTitle(AppLanguage language) => language.learningJlptLaneTitle();
+  static String _jlptLaneTitle(AppLanguage language) =>
+      language.learningJlptLaneTitle();
 
-  static String _jlptLaneSubtitle(
-    AppLanguage language,
-    StudyLevel level,
-  ) => language.learningJlptLaneSubtitle(level.shortLabel);
+  static String _jlptLaneSubtitle(AppLanguage language, StudyLevel level) =>
+      language.learningJlptLaneSubtitle(level.shortLabel);
 
-  static String _immersionLaneTitle(AppLanguage language) => language.learningImmersionLaneTitle();
+  static String _immersionLaneTitle(AppLanguage language) =>
+      language.learningImmersionLaneTitle();
 
-  static String _immersionLaneSubtitle(
-    AppLanguage language,
-    int weakCount,
-  ) => language.learningImmersionLaneSubtitle(weakCount);
+  static String _immersionLaneSubtitle(AppLanguage language, int weakCount) =>
+      language.learningImmersionLaneSubtitle(weakCount);
 
   static String _dueChip(AppLanguage language, int dueCount) =>
       switch (language) {
@@ -862,7 +858,8 @@ class _LearningLanesPanel extends StatelessWidget {
     AppLanguage.ja => '実際の日本語',
   };
 
-  static String _openLaneLabel(AppLanguage language) => language.learningOpenLaneLabel();
+  static String _openLaneLabel(AppLanguage language) =>
+      language.learningOpenLaneLabel();
 }
 
 class _LaneCard extends StatelessWidget {

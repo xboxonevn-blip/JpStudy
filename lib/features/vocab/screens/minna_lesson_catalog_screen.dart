@@ -1,6 +1,7 @@
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
@@ -189,7 +190,7 @@ class _BackRow extends StatelessWidget {
             context.pop();
             return;
           }
-          context.go('/vocab');
+          context.openVocab();
         },
         icon: const Icon(Icons.arrow_back_rounded),
         label: Text(_backLabel(language)),
@@ -495,7 +496,7 @@ class _LessonCard extends StatelessWidget {
 
     return InkWell(
       key: ValueKey('minna_lesson_${lesson.id}'),
-      onTap: () => context.push('/lesson/${lesson.id}'),
+      onTap: () => context.openLesson(lesson.id),
       borderRadius: BorderRadius.circular(24),
       child: Container(
         padding: const EdgeInsets.all(AppSpacing.lg),
@@ -622,20 +623,17 @@ class _ReviewCta extends StatelessWidget {
           const SizedBox(width: AppSpacing.lg),
           FilledButton.icon(
             key: const ValueKey('minna_review_cta'),
-            onPressed: () {
-              final uri = Uri(
-                path: '/vocab/review',
-                queryParameters: {
-                  'title': args.title,
-                  'subtitle':
-                      args.subtitle ??
-                      _heroSubtitle(language, args.lessonStart, args.lessonEnd),
-                  'lessonStart': '${args.lessonStart}',
-                  'lessonEnd': '${args.lessonEnd}',
-                },
-              );
-              context.push(uri.toString());
-            },
+            onPressed: () => context.openVocabReview(
+              source: 'minna_catalog',
+              levelCode: args.levelCode,
+              series: 'minna',
+              title: args.title,
+              subtitle:
+                  args.subtitle ??
+                  _heroSubtitle(language, args.lessonStart, args.lessonEnd),
+              lessonStart: args.lessonStart,
+              lessonEnd: args.lessonEnd,
+            ),
             icon: const Icon(Icons.auto_stories_rounded),
             label: Text(_reviewButton(language)),
           ),
@@ -1049,11 +1047,7 @@ const _lessonThemes = <int, _LessonTheme>{
     'Cho nhận trong ngữ cảnh',
     '文脈での授受',
   ),
-  25: _LessonTheme(
-    'Hypothesis and advice',
-    'Giả định và lời khuyên',
-    '仮定と助言',
-  ),
+  25: _LessonTheme('Hypothesis and advice', 'Giả định và lời khuyên', '仮定と助言'),
   26: _LessonTheme(
     'Plans and schedules with context',
     'Kế hoạch và lịch trình theo ngữ cảnh',

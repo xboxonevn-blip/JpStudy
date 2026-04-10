@@ -1,3 +1,4 @@
+import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/features/home/models/practice_destination.dart';
@@ -39,8 +40,11 @@ void main() {
     );
 
     expect(focus.length, 3);
-    expect(focus.any((item) => item.route == '/grammar-practice'), isTrue);
-    expect(focus.any((item) => item.route == '/mistakes'), isTrue);
+    expect(
+      focus.any((item) => item.route == AppRoutePath.grammarPractice),
+      isTrue,
+    );
+    expect(focus.any((item) => item.route == AppRoutePath.mistakes), isTrue);
   });
 
   test(
@@ -57,7 +61,7 @@ void main() {
 
       expect(ranked.any((item) => item.id == 'recall_sprint'), isTrue);
       expect(ranked.first.id, 'recall_sprint');
-      expect(ranked.first.route, '/practice/recall-sprint');
+      expect(ranked.first.route, AppRoutePath.practiceRecallSprint);
     },
   );
 
@@ -92,7 +96,7 @@ void main() {
 
       expect(ranked.any((item) => item.id == 'mock_exam'), isFalse);
       expect(
-        ranked.any((item) => item.route == '/practice/mock-exam'),
+        ranked.any((item) => item.route == AppRoutePath.practiceMockExam),
         isFalse,
       );
     },

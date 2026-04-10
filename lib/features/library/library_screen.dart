@@ -1,6 +1,8 @@
+import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/app/theme/app_breakpoints.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
@@ -45,7 +47,7 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
         actions: [
           IconButton(
             tooltip: _searchLabel(language),
-            onPressed: () => context.push('/search'),
+            onPressed: () => context.openSearch(),
             icon: const Icon(Icons.search_rounded),
           ),
         ],
@@ -60,7 +62,7 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
               language: language,
               board: board,
               onPrimaryTap: () => context.push(board.primaryAction.route),
-              onSecondaryTap: () => context.push('/search'),
+              onSecondaryTap: () => context.openSearch(),
             ),
             const SizedBox(height: AppSpacing.lg),
             _RoadmapPanel(
@@ -877,21 +879,21 @@ class _QuickAccessRow extends StatelessWidget {
         subtitle: _vocabHint(language),
         icon: Icons.translate_rounded,
         color: const Color(0xFF0F766E),
-        route: '/vocab',
+        route: AppRoutePath.vocab,
       ),
       (
         title: _grammarLabel(language),
         subtitle: _grammarHint(language),
         icon: Icons.auto_stories_rounded,
         color: const Color(0xFF2563EB),
-        route: '/grammar',
+        route: AppRoutePath.grammar,
       ),
       (
         title: _lookupLabel(language),
         subtitle: _lookupHint(language),
         icon: Icons.search_rounded,
         color: const Color(0xFF7C3AED),
-        route: '/search',
+        route: AppRoutePath.search,
       ),
     ];
 
@@ -1087,7 +1089,7 @@ class _LessonSection extends StatelessWidget {
                     child: _LessonTile(
                       language: language,
                       lesson: lesson,
-                      onTap: () => context.push('/lesson/${lesson.id}'),
+                      onTap: () => context.openLesson(lesson.id),
                     ),
                   ),
               ],

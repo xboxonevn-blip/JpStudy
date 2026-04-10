@@ -17,14 +17,20 @@ class DailySessionSummaryScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final language = ref.watch(appLanguageProvider);
-    final dashboard = ref.watch(dashboardProvider).valueOrNull;
+    final (vocabDue, grammarDue, kanjiDue, totalFix) = ref.watch(
+      dashboardProvider.select((v) {
+        final d = v.valueOrNull;
+        return (
+          d?.vocabDue ?? 0,
+          d?.grammarDue ?? 0,
+          d?.kanjiDue ?? 0,
+          d?.totalMistakeCount ?? 0,
+        );
+      }),
+    );
+    final totalDue = vocabDue + grammarDue + kanjiDue;
     final progress = ref.watch(dailySessionProgressProvider).valueOrNull;
     final coachPlan = ref.watch(coachSessionPlanProvider);
-    final totalDue =
-        (dashboard?.vocabDue ?? 0) +
-        (dashboard?.grammarDue ?? 0) +
-        (dashboard?.kanjiDue ?? 0);
-    final totalFix = dashboard?.totalMistakeCount ?? 0;
     final percent = progress?.completionPercent(
           step1Done: totalDue == 0,
           step2Done: totalFix == 0,

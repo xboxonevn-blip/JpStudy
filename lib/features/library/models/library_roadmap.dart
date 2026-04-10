@@ -1,3 +1,5 @@
+import 'package:jpstudy/app/navigation/app_route_locations.dart';
+import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/study_level.dart';
@@ -228,7 +230,7 @@ LibraryRoadmapAction _dueAction(AppLanguage language, LessonMeta lesson) {
       vi: 'Mở lesson ưu tiên',
       ja: '優先レッスンへ',
     ),
-    route: '/lesson/${lesson.id}',
+    route: AppRouteLocation.lessonDetail(lesson.id),
     icon: Icons.schedule_rounded,
     color: const Color(0xFFD97706),
     badge: _l(
@@ -279,7 +281,7 @@ LibraryRoadmapAction _nextLessonAction(
       vi: isFresh ? 'Bắt đầu lesson' : 'Học tiếp lesson',
       ja: isFresh ? 'レッスン開始' : 'レッスン再開',
     ),
-    route: '/lesson/${lesson.id}',
+    route: AppRouteLocation.lessonDetail(lesson.id),
     icon: isFresh ? Icons.play_lesson_rounded : Icons.menu_book_rounded,
     color: const Color(0xFF2563EB),
     badge: isFresh
@@ -312,7 +314,7 @@ LibraryRoadmapAction _freshLessonAction(
       vi: 'Mở lesson mới',
       ja: '新規レッスンへ',
     ),
-    route: '/lesson/${lesson.id}',
+    route: AppRouteLocation.lessonDetail(lesson.id),
     icon: Icons.play_circle_outline_rounded,
     color: const Color(0xFF16A34A),
     badge: _l(language, en: 'Expand', vi: 'Mở rộng', ja: '拡張'),
@@ -335,7 +337,7 @@ LibraryRoadmapAction _lookupAction(AppLanguage language, StudyLevel level) {
       ja: '語彙・漢字・読みをすぐ引きたい時の近道です。',
     ),
     ctaLabel: _l(language, en: 'Open lookup', vi: 'Mở tra cứu', ja: '検索へ'),
-    route: '/search',
+    route: AppRoutePath.search,
     icon: Icons.search_rounded,
     color: const Color(0xFF7C3AED),
     badge: level.shortLabel,
@@ -363,7 +365,7 @@ LibraryRoadmapAction _emptyAction(AppLanguage language, int fallbackLessonId) {
       vi: 'Mở lesson đầu',
       ja: '最初のレッスンへ',
     ),
-    route: '/lesson/$fallbackLessonId',
+    route: AppRouteLocation.lessonDetail(fallbackLessonId),
     icon: Icons.play_lesson_rounded,
     color: const Color(0xFF2563EB),
   );

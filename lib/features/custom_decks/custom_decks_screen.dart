@@ -23,7 +23,19 @@ class _CustomDecksScreenState extends ConsumerState<CustomDecksScreen> {
     final language = ref.watch(appLanguageProvider);
     final deckBoard = ref.watch(studyHubDecksProvider).valueOrNull;
     final continueAction = ref.watch(continueActionProvider).valueOrNull;
-    final dashboard = ref.watch(dashboardProvider).valueOrNull;
+    ref.watch(
+      dashboardProvider.select((v) {
+        final d = v.valueOrNull;
+        return (
+          d?.vocabDue ?? 0,
+          d?.grammarDue ?? 0,
+          d?.kanjiDue ?? 0,
+          d?.totalMistakeCount ?? 0,
+          d?.kanjiMistakeCount ?? 0,
+        );
+      }),
+    );
+    final dashboard = ref.read(dashboardProvider).valueOrNull;
     final recipes = _recipes(
       language,
       deckBoard: deckBoard,

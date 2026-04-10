@@ -51,7 +51,10 @@ class _KanjiTodayPanel extends StatelessWidget {
                 key: const ValueKey('kanji_cta_explore'),
                 icon: Icons.travel_explore_rounded,
                 title: _kanjiExploreActionLabel(language),
-                subtitle: _kanjiExploreActionSubtitle(language, summary.exploreCount),
+                subtitle: _kanjiExploreActionSubtitle(
+                  language,
+                  summary.exploreCount,
+                ),
                 onTap: onExplore,
               ),
             ],
@@ -76,6 +79,7 @@ class _KanjiTodayAction extends StatelessWidget {
   final String title;
   final String subtitle;
   final VoidCallback onTap;
+
   /// When non-null and zero, renders in a visually muted "completed" state.
   final int? count;
 
@@ -101,9 +105,7 @@ class _KanjiTodayAction extends StatelessWidget {
             ),
             title: Text(title),
             subtitle: Text(subtitle),
-            trailing: _isEmpty
-                ? null
-                : const Icon(Icons.arrow_forward_rounded),
+            trailing: _isEmpty ? null : const Icon(Icons.arrow_forward_rounded),
             onTap: _isEmpty ? null : onTap,
           ),
         ),
@@ -130,7 +132,7 @@ class _SearchDrawPanel extends StatefulWidget {
 class _SearchDrawPanelState extends State<_SearchDrawPanel> {
   final TextEditingController _searchController = TextEditingController();
   Timer? _autoFindDebounce;
-  
+
   @override
   void initState() {
     super.initState();
@@ -146,8 +148,9 @@ class _SearchDrawPanelState extends State<_SearchDrawPanel> {
     _searchController.dispose();
     super.dispose();
   }
+
   final List<List<Offset>> _strokes = [];
-  
+
   List<_KanjiRecognitionCandidate> _candidates = [];
   bool _isSearching = false;
   bool _autoFindEnabled = true;
@@ -177,7 +180,9 @@ class _SearchDrawPanelState extends State<_SearchDrawPanel> {
 
   void _applyCandidate(String character) {
     _searchController.text = character;
-    _searchController.selection = TextSelection.collapsed(offset: character.length);
+    _searchController.selection = TextSelection.collapsed(
+      offset: character.length,
+    );
     widget.onSearchQueryChanged(character);
     _showKanjiDetail(character);
   }
@@ -198,10 +203,11 @@ class _SearchDrawPanelState extends State<_SearchDrawPanel> {
   Future<void> _findMatches({bool autoOpenDialog = true}) async {
     if (_strokes.isEmpty) return;
     setState(() => _isSearching = true);
-    
-    final templates = await KanjiStrokeTemplateService.instance.getAllTemplates();
+
+    final templates = await KanjiStrokeTemplateService.instance
+        .getAllTemplates();
     final results = <_KanjiRecognitionCandidate>[];
-    
+
     for (final entry in templates.entries) {
       final score = HandwritingTemplateMatcher.templateScore(
         strokes: _strokes,
@@ -211,14 +217,14 @@ class _SearchDrawPanelState extends State<_SearchDrawPanel> {
         results.add(_KanjiRecognitionCandidate(entry.key, score));
       }
     }
-    
+
     results.sort((a, b) => b.score.compareTo(a.score));
-    
+
     setState(() {
       _candidates = results.take(8).toList();
       _isSearching = false;
     });
-    
+
     widget.onCandidatesFound(_candidates.map((c) => c.kanji).toList());
 
     if (autoOpenDialog && _candidates.isNotEmpty && mounted) {
@@ -230,7 +236,6 @@ class _SearchDrawPanelState extends State<_SearchDrawPanel> {
     final container = ProviderScope.containerOf(context, listen: false);
     final lessonRepo = container.read(lessonRepositoryProvider);
     try {
-      
       // Simplified: Just use a search dialog or go to search route
       // For this implementation, we just open a local dialog if we find it in N5-N3
       final allItems = [
@@ -250,11 +255,12 @@ class _SearchDrawPanelState extends State<_SearchDrawPanel> {
           jlptLevel: 'N?',
         ),
       );
-      
+
       if (!mounted) return;
       showDialog(
         context: context,
-        builder: (_) => _KanjiDetailDialog(item: item, language: widget.language),
+        builder: (_) =>
+            _KanjiDetailDialog(item: item, language: widget.language),
       );
     } catch (_) {}
   }
@@ -262,7 +268,7 @@ class _SearchDrawPanelState extends State<_SearchDrawPanel> {
   @override
   Widget build(BuildContext context) {
     final palette = context.appPalette;
-    
+
     final searchHint = widget.language.kanjiSearchHintLabel();
     final drawHint = widget.language.kanjiDrawHintLabel();
 
@@ -285,7 +291,7 @@ class _SearchDrawPanelState extends State<_SearchDrawPanel> {
             ),
             onSubmitted: (val) {
               if (val.trim().isNotEmpty) {
-                context.push('/search', extra: val.trim());
+                context.openSearch(extra: val.trim());
               }
             },
           ),
@@ -324,7 +330,10 @@ class _SearchDrawPanelState extends State<_SearchDrawPanel> {
             children: [
               Expanded(
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 10,
+                  ),
                   decoration: BoxDecoration(
                     color: palette.outlineSoft.withValues(alpha: 0.7),
                     borderRadius: BorderRadius.circular(12),
@@ -333,9 +342,13 @@ class _SearchDrawPanelState extends State<_SearchDrawPanel> {
                   child: Row(
                     children: [
                       Icon(
-                        _autoFindEnabled ? Icons.auto_awesome : Icons.touch_app_outlined,
+                        _autoFindEnabled
+                            ? Icons.auto_awesome
+                            : Icons.touch_app_outlined,
                         size: 18,
-                        color: _autoFindEnabled ? palette.primary : palette.ink.withValues(alpha: 0.7),
+                        color: _autoFindEnabled
+                            ? palette.primary
+                            : palette.ink.withValues(alpha: 0.7),
                       ),
                       const SizedBox(width: 8),
                       Expanded(
@@ -343,17 +356,21 @@ class _SearchDrawPanelState extends State<_SearchDrawPanel> {
                           _autoFindEnabled
                               ? widget.language.kanjiAutoFindOnLabel()
                               : widget.language.kanjiAutoFindOffLabel(),
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: palette.ink,
-                            fontWeight: FontWeight.w700,
-                          ),
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(
+                                color: palette.ink,
+                                fontWeight: FontWeight.w700,
+                              ),
                         ),
                       ),
                       Switch.adaptive(
                         value: _autoFindEnabled,
-                        onChanged: (value) => setState(() => _autoFindEnabled = value),
+                        onChanged: (value) =>
+                            setState(() => _autoFindEnabled = value),
                         activeThumbColor: palette.primary,
-                        activeTrackColor: palette.primary.withValues(alpha: 0.35),
+                        activeTrackColor: palette.primary.withValues(
+                          alpha: 0.35,
+                        ),
                       ),
                     ],
                   ),
@@ -373,14 +390,18 @@ class _SearchDrawPanelState extends State<_SearchDrawPanel> {
               ),
               ElevatedButton.icon(
                 onPressed: _isSearching ? null : _findMatches,
-                icon: _isSearching 
-                    ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2))
+                icon: _isSearching
+                    ? const SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
                     : const Icon(Icons.manage_search),
                 label: Text(
-                    _autoFindEnabled
-                        ? widget.language.kanjiFindNowLabel()
-                        : widget.language.kanjiFindLabel(),
-                  ),
+                  _autoFindEnabled
+                      ? widget.language.kanjiFindNowLabel()
+                      : widget.language.kanjiFindLabel(),
+                ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: palette.primary,
                   foregroundColor: Colors.white,
@@ -393,12 +414,16 @@ class _SearchDrawPanelState extends State<_SearchDrawPanel> {
             Wrap(
               spacing: 8,
               runSpacing: 8,
-              children: _candidates.map((c) => _CandidateChip(
-                character: c.kanji,
-                onTap: () => _applyCandidate(c.kanji),
-              )).toList(),
+              children: _candidates
+                  .map(
+                    (c) => _CandidateChip(
+                      character: c.kanji,
+                      onTap: () => _applyCandidate(c.kanji),
+                    ),
+                  )
+                  .toList(),
             ),
-          ]
+          ],
         ],
       ),
     );
@@ -485,9 +510,12 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
   _KanjiSrsFilter _srsFilter = _KanjiSrsFilter.all;
   _RadicalSortMode _radicalSortMode = _RadicalSortMode.byIndex;
 
-  bool get hasActiveCandidateFilter => widget.candidateKanji.isNotEmpty && widget.selectedCollection != _KanjiCollection.radicals;
+  bool get hasActiveCandidateFilter =>
+      widget.candidateKanji.isNotEmpty &&
+      widget.selectedCollection != _KanjiCollection.radicals;
   bool get hasActiveTextFilter => widget.searchQuery.trim().isNotEmpty;
-  bool get showsRadicals => widget.selectedCollection == _KanjiCollection.radicals;
+  bool get showsRadicals =>
+      widget.selectedCollection == _KanjiCollection.radicals;
 
   void _clearLocalFilters() {
     setState(() {
@@ -502,9 +530,10 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
   @override
   Widget build(BuildContext context) {
     final palette = context.appPalette;
-    
+
     final lang = widget.language;
-    final seenIds = ref.watch(kanjiSeenIdsProvider).valueOrNull ?? const <int>{};
+    final seenIds =
+        ref.watch(kanjiSeenIdsProvider).valueOrNull ?? const <int>{};
     final dueIds = ref.watch(kanjiDueIdsProvider).valueOrNull ?? const <int>{};
     final exploreTitle = lang.kanjiExplorePanelTitle();
     final levelLabel = lang.kanjiCurrentLevelLabel();
@@ -514,7 +543,6 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
     final radicalSortLabel = lang.kanjiRadicalSortLabel();
     final radicalSortIndex = lang.kanjiRadicalSortIndexLabel();
     final radicalSortMeaning = lang.kanjiRadicalSortMeaningLabel();
-
 
     return AppSectionCard(
       padding: const EdgeInsets.all(AppSpacing.lg),
@@ -539,7 +567,8 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                   children: [
                     TextButton.icon(
                       onPressed: () {
-                        ref.read(studyLevelProvider.notifier).state = widget.selectedLevel;
+                        ref.read(studyLevelProvider.notifier).state =
+                            widget.selectedLevel;
                         context.push(
                           '/kanji/practice',
                           extra: KanjiPracticeArgs(
@@ -550,11 +579,14 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                         );
                       },
                       icon: const Icon(Icons.style, size: 18),
-                      label: Text('$flashcardLabel (${widget.selectedLevel.shortLabel})'),
+                      label: Text(
+                        '$flashcardLabel (${widget.selectedLevel.shortLabel})',
+                      ),
                     ),
                     ElevatedButton.icon(
                       onPressed: () {
-                        ref.read(studyLevelProvider.notifier).state = widget.selectedLevel;
+                        ref.read(studyLevelProvider.notifier).state =
+                            widget.selectedLevel;
                         context.push(
                           '/kanji/practice',
                           extra: KanjiPracticeArgs(
@@ -565,11 +597,16 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                         );
                       },
                       icon: const Icon(Icons.edit, size: 18),
-                      label: Text('$handwritingLabel (${widget.selectedLevel.shortLabel})'),
+                      label: Text(
+                        '$handwritingLabel (${widget.selectedLevel.shortLabel})',
+                      ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: palette.primary,
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
                       ),
                     ),
                   ],
@@ -597,29 +634,39 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                     _CollectionSelectorCard(
                       title: 'N5',
                       subtitle: StudyLevel.n5.description(widget.language),
-                      selected: widget.selectedCollection == _KanjiCollection.n5,
-                      onTap: () => widget.onCollectionSelected(_KanjiCollection.n5),
+                      selected:
+                          widget.selectedCollection == _KanjiCollection.n5,
+                      onTap: () =>
+                          widget.onCollectionSelected(_KanjiCollection.n5),
                     ),
                     const SizedBox(width: 10),
                     _CollectionSelectorCard(
                       title: 'N4',
                       subtitle: StudyLevel.n4.description(widget.language),
-                      selected: widget.selectedCollection == _KanjiCollection.n4,
-                      onTap: () => widget.onCollectionSelected(_KanjiCollection.n4),
+                      selected:
+                          widget.selectedCollection == _KanjiCollection.n4,
+                      onTap: () =>
+                          widget.onCollectionSelected(_KanjiCollection.n4),
                     ),
                     const SizedBox(width: 10),
                     _CollectionSelectorCard(
                       title: 'N3',
                       subtitle: StudyLevel.n3.description(widget.language),
-                      selected: widget.selectedCollection == _KanjiCollection.n3,
-                      onTap: () => widget.onCollectionSelected(_KanjiCollection.n3),
+                      selected:
+                          widget.selectedCollection == _KanjiCollection.n3,
+                      onTap: () =>
+                          widget.onCollectionSelected(_KanjiCollection.n3),
                     ),
                     const SizedBox(width: 10),
                     _CollectionSelectorCard(
                       title: '214',
                       subtitle: radicalsLabel,
-                      selected: widget.selectedCollection == _KanjiCollection.radicals,
-                      onTap: () => widget.onCollectionSelected(_KanjiCollection.radicals),
+                      selected:
+                          widget.selectedCollection ==
+                          _KanjiCollection.radicals,
+                      onTap: () => widget.onCollectionSelected(
+                        _KanjiCollection.radicals,
+                      ),
                       icon: Icons.hub_outlined,
                     ),
                   ],
@@ -642,43 +689,71 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                       }
                       var items = snapshot.data ?? [];
                       if (_selectedStrokeCount != null) {
-                        items = items.where((r) => r.strokes == _selectedStrokeCount).toList();
+                        items = items
+                            .where((r) => r.strokes == _selectedStrokeCount)
+                            .toList();
                       }
                       if (hasActiveTextFilter) {
                         final q = widget.searchQuery.trim().toLowerCase();
-                        items = items.where((r) =>
-                          r.kanji.toLowerCase().contains(q) ||
-                          r.viMeaning.toLowerCase().contains(q) ||
-                          r.searchMeaningVi.contains(q) ||
-                          r.id.toString() == q ||
-                          r.id.toString().startsWith(q)
-                        ).toList();
+                        items = items
+                            .where(
+                              (r) =>
+                                  r.kanji.toLowerCase().contains(q) ||
+                                  r.viMeaning.toLowerCase().contains(q) ||
+                                  r.searchMeaningVi.contains(q) ||
+                                  r.id.toString() == q ||
+                                  r.id.toString().startsWith(q),
+                            )
+                            .toList();
                       }
                       if (_radicalSortMode == _RadicalSortMode.byMeaning) {
-                        items = [...items]..sort((a, b) => a.displayMeaningVi.compareTo(b.displayMeaningVi));
+                        items = [...items]
+                          ..sort(
+                            (a, b) => a.displayMeaningVi.compareTo(
+                              b.displayMeaningVi,
+                            ),
+                          );
                       } else {
-                        items = [...items]..sort((a, b) => a.id.compareTo(b.id));
+                        items = [...items]
+                          ..sort((a, b) => a.id.compareTo(b.id));
                       }
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
-                            padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+                            padding: const EdgeInsets.only(
+                              bottom: AppSpacing.sm,
+                            ),
                             child: Row(
                               children: [
                                 for (int i = 1; i <= 17; i++)
                                   Padding(
                                     padding: const EdgeInsets.only(right: 6.0),
                                     child: ChoiceChip(
-                                      label: Text(_kanjiHubStrokeChipLabel(widget.language, i), style: const TextStyle(fontSize: 11)),
+                                      label: Text(
+                                        _kanjiHubStrokeChipLabel(
+                                          widget.language,
+                                          i,
+                                        ),
+                                        style: const TextStyle(fontSize: 11),
+                                      ),
                                       selected: _selectedStrokeCount == i,
-                                      onSelected: (val) => setState(() => _selectedStrokeCount = val ? i : null),
-                                      selectedColor: context.appPalette.accent.withValues(alpha: 0.2),
+                                      onSelected: (val) => setState(
+                                        () => _selectedStrokeCount = val
+                                            ? i
+                                            : null,
+                                      ),
+                                      selectedColor: context.appPalette.accent
+                                          .withValues(alpha: 0.2),
                                       showCheckmark: false,
                                       labelStyle: TextStyle(
-                                        color: _selectedStrokeCount == i ? context.appPalette.accent : context.appPalette.ink,
-                                        fontWeight: _selectedStrokeCount == i ? FontWeight.bold : FontWeight.normal,
+                                        color: _selectedStrokeCount == i
+                                            ? context.appPalette.accent
+                                            : context.appPalette.ink,
+                                        fontWeight: _selectedStrokeCount == i
+                                            ? FontWeight.bold
+                                            : FontWeight.normal,
                                       ),
                                     ),
                                   ),
@@ -689,28 +764,42 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                             children: [
                               Text(
                                 radicalSortLabel,
-                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: context.appPalette.ink.withValues(alpha: 0.65),
-                                  fontWeight: FontWeight.w800,
-                                ),
+                                style: Theme.of(context).textTheme.bodySmall
+                                    ?.copyWith(
+                                      color: context.appPalette.ink.withValues(
+                                        alpha: 0.65,
+                                      ),
+                                      fontWeight: FontWeight.w800,
+                                    ),
                               ),
                               const SizedBox(width: 10),
                               ChoiceChip(
                                 label: Text(radicalSortIndex),
-                                selected: _radicalSortMode == _RadicalSortMode.byIndex,
-                                onSelected: (_) => setState(() => _radicalSortMode = _RadicalSortMode.byIndex),
+                                selected:
+                                    _radicalSortMode ==
+                                    _RadicalSortMode.byIndex,
+                                onSelected: (_) => setState(
+                                  () => _radicalSortMode =
+                                      _RadicalSortMode.byIndex,
+                                ),
                                 showCheckmark: false,
                               ),
                               const SizedBox(width: 6),
                               ChoiceChip(
                                 label: Text(radicalSortMeaning),
-                                selected: _radicalSortMode == _RadicalSortMode.byMeaning,
-                                onSelected: (_) => setState(() => _radicalSortMode = _RadicalSortMode.byMeaning),
+                                selected:
+                                    _radicalSortMode ==
+                                    _RadicalSortMode.byMeaning,
+                                onSelected: (_) => setState(
+                                  () => _radicalSortMode =
+                                      _RadicalSortMode.byMeaning,
+                                ),
                                 showCheckmark: false,
                               ),
                             ],
                           ),
-                          if (hasActiveTextFilter || _selectedStrokeCount != null) ...[
+                          if (hasActiveTextFilter ||
+                              _selectedStrokeCount != null) ...[
                             Row(
                               children: [
                                 Expanded(
@@ -720,13 +809,19 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                                       if (_selectedStrokeCount != null)
                                         _FilterPill(
                                           icon: Icons.edit,
-                                          label: lang.kanjiStrokeFilterLabel(_selectedStrokeCount!, items.length),
+                                          label: lang.kanjiStrokeFilterLabel(
+                                            _selectedStrokeCount!,
+                                            items.length,
+                                          ),
                                           toneColor: context.appPalette.accent,
                                         ),
                                       if (hasActiveTextFilter)
                                         _FilterPill(
                                           icon: Icons.search,
-                                          label: lang.kanjiKeywordFilterLabel(widget.searchQuery.trim(), items.length),
+                                          label: lang.kanjiKeywordFilterLabel(
+                                            widget.searchQuery.trim(),
+                                            items.length,
+                                          ),
                                           toneColor: context.appPalette.accent,
                                         ),
                                     ],
@@ -734,9 +829,13 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                                 ),
                                 IconButton(
                                   icon: const Icon(Icons.cancel, size: 20),
-                                  color: context.appPalette.ink.withValues(alpha: 0.5),
+                                  color: context.appPalette.ink.withValues(
+                                    alpha: 0.5,
+                                  ),
                                   onPressed: _clearLocalFilters,
-                                  tooltip: _kanjiHubClearFiltersLabel(widget.language),
+                                  tooltip: _kanjiHubClearFiltersLabel(
+                                    widget.language,
+                                  ),
                                 ),
                               ],
                             ),
@@ -751,27 +850,43 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                                       key: const ValueKey('empty_radicals'),
                                       child: Text(
                                         lang.kanjiRadicalsNotFoundLabel(),
-                                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                          color: context.appPalette.ink.withValues(alpha: 0.6),
-                                        ),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge
+                                            ?.copyWith(
+                                              color: context.appPalette.ink
+                                                  .withValues(alpha: 0.6),
+                                            ),
                                       ),
                                     )
                                   : ListView(
-                                      key: ValueKey('radicals_${items.length}_$hasActiveTextFilter$_selectedStrokeCount'),
-                                      padding: const EdgeInsets.only(bottom: AppSpacing.xxl),
+                                      key: ValueKey(
+                                        'radicals_${items.length}_$hasActiveTextFilter$_selectedStrokeCount',
+                                      ),
+                                      padding: const EdgeInsets.only(
+                                        bottom: AppSpacing.xxl,
+                                      ),
                                       children: [
-                                        for (final entry in _groupRadicalsByStroke(items).entries) ...[
-                                          _RadicalSectionHeader(strokeCount: entry.key, count: entry.value.length),
+                                        for (final entry
+                                            in _groupRadicalsByStroke(
+                                              items,
+                                            ).entries) ...[
+                                          _RadicalSectionHeader(
+                                            strokeCount: entry.key,
+                                            count: entry.value.length,
+                                          ),
                                           const SizedBox(height: 10),
                                           GridView.builder(
                                             shrinkWrap: true,
-                                            physics: const NeverScrollableScrollPhysics(),
-                                            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                                              maxCrossAxisExtent: 88,
-                                              mainAxisSpacing: 10,
-                                              crossAxisSpacing: 10,
-                                              childAspectRatio: 0.9,
-                                            ),
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            gridDelegate:
+                                                const SliverGridDelegateWithMaxCrossAxisExtent(
+                                                  maxCrossAxisExtent: 88,
+                                                  mainAxisSpacing: 10,
+                                                  crossAxisSpacing: 10,
+                                                  childAspectRatio: 0.9,
+                                                ),
                                             itemCount: entry.value.length,
                                             itemBuilder: (context, index) {
                                               final item = entry.value[index];
@@ -780,11 +895,15 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                                                 onTap: () {
                                                   showDialog(
                                                     context: context,
-                                                    builder: (_) => _RadicalDetailDialog(
-                                                      item: item,
-                                                      kanjiFuture: widget.allKanjiFuture,
-                                                      onRelatedKanjiSelected: widget.onRelatedKanjiSelected,
-                                                    ),
+                                                    builder: (_) =>
+                                                        _RadicalDetailDialog(
+                                                          item: item,
+                                                          kanjiFuture: widget
+                                                              .allKanjiFuture,
+                                                          onRelatedKanjiSelected:
+                                                              widget
+                                                                  .onRelatedKanjiSelected,
+                                                        ),
                                                   );
                                                 },
                                               );
@@ -812,21 +931,36 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                       var items = snapshot.data ?? [];
 
                       if (widget.candidateKanji.isNotEmpty) {
-                        items = items.where((k) => widget.candidateKanji.contains(k.character)).toList();
+                        items = items
+                            .where(
+                              (k) =>
+                                  widget.candidateKanji.contains(k.character),
+                            )
+                            .toList();
                       } else if (widget.searchQuery.trim().isNotEmpty) {
                         final q = widget.searchQuery.trim().toLowerCase();
-                        items = items.where((k) =>
-                          k.character.toLowerCase().contains(q) ||
-                          k.meaning.toLowerCase().contains(q) ||
-                          (k.meaningEn?.toLowerCase().contains(q) ?? false) ||
-                          (k.onyomi?.toLowerCase().contains(q) ?? false) ||
-                          (k.kunyomi?.toLowerCase().contains(q) ?? false)
-                        ).toList();
+                        items = items
+                            .where(
+                              (k) =>
+                                  k.character.toLowerCase().contains(q) ||
+                                  k.meaning.toLowerCase().contains(q) ||
+                                  (k.meaningEn?.toLowerCase().contains(q) ??
+                                      false) ||
+                                  (k.onyomi?.toLowerCase().contains(q) ??
+                                      false) ||
+                                  (k.kunyomi?.toLowerCase().contains(q) ??
+                                      false),
+                            )
+                            .toList();
                       }
 
                       // Stroke filter
                       if (_selectedKanjiStrokeCount != null) {
-                        items = items.where((k) => k.strokeCount == _selectedKanjiStrokeCount).toList();
+                        items = items
+                            .where(
+                              (k) => k.strokeCount == _selectedKanjiStrokeCount,
+                            )
+                            .toList();
                       }
 
                       // SRS status filter
@@ -862,23 +996,42 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                                     padding: const EdgeInsets.only(right: 6),
                                     child: ChoiceChip(
                                       label: Text(
-                                        _srsFilterLabel(lang, filter, allItems.length, dueIds, seenIds),
+                                        _srsFilterLabel(
+                                          lang,
+                                          filter,
+                                          allItems.length,
+                                          dueIds,
+                                          seenIds,
+                                        ),
                                         style: const TextStyle(fontSize: 11),
                                       ),
                                       selected: _srsFilter == filter,
-                                      onSelected: (val) => setState(() => _srsFilter = val ? filter : _KanjiSrsFilter.all),
+                                      onSelected: (val) => setState(
+                                        () => _srsFilter = val
+                                            ? filter
+                                            : _KanjiSrsFilter.all,
+                                      ),
                                       showCheckmark: false,
-                                      selectedColor: _srsFilterColor(filter).withValues(alpha: 0.18),
+                                      selectedColor: _srsFilterColor(
+                                        filter,
+                                      ).withValues(alpha: 0.18),
                                       labelStyle: TextStyle(
                                         color: _srsFilter == filter
                                             ? _srsFilterColor(filter)
-                                            : context.appPalette.ink.withValues(alpha: 0.65),
-                                        fontWeight: _srsFilter == filter ? FontWeight.bold : FontWeight.normal,
+                                            : context.appPalette.ink.withValues(
+                                                alpha: 0.65,
+                                              ),
+                                        fontWeight: _srsFilter == filter
+                                            ? FontWeight.bold
+                                            : FontWeight.normal,
                                       ),
                                       side: BorderSide(
                                         color: _srsFilter == filter
-                                            ? _srsFilterColor(filter).withValues(alpha: 0.5)
-                                            : context.appPalette.outline.withValues(alpha: 0.4),
+                                            ? _srsFilterColor(
+                                                filter,
+                                              ).withValues(alpha: 0.5)
+                                            : context.appPalette.outline
+                                                  .withValues(alpha: 0.4),
                                       ),
                                     ),
                                   ),
@@ -897,18 +1050,34 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                                       padding: const EdgeInsets.only(right: 6),
                                       child: ChoiceChip(
                                         label: Text(
-                                          _kanjiHubStrokeChipLabel(widget.language, strokes),
+                                          _kanjiHubStrokeChipLabel(
+                                            widget.language,
+                                            strokes,
+                                          ),
                                           style: const TextStyle(fontSize: 11),
                                         ),
-                                        selected: _selectedKanjiStrokeCount == strokes,
-                                        onSelected: (val) => setState(() => _selectedKanjiStrokeCount = val ? strokes : null),
-                                        selectedColor: context.appPalette.accent.withValues(alpha: 0.2),
+                                        selected:
+                                            _selectedKanjiStrokeCount ==
+                                            strokes,
+                                        onSelected: (val) => setState(
+                                          () => _selectedKanjiStrokeCount = val
+                                              ? strokes
+                                              : null,
+                                        ),
+                                        selectedColor: context.appPalette.accent
+                                            .withValues(alpha: 0.2),
                                         showCheckmark: false,
                                         labelStyle: TextStyle(
-                                          color: _selectedKanjiStrokeCount == strokes
+                                          color:
+                                              _selectedKanjiStrokeCount ==
+                                                  strokes
                                               ? context.appPalette.accent
                                               : context.appPalette.ink,
-                                          fontWeight: _selectedKanjiStrokeCount == strokes ? FontWeight.bold : FontWeight.normal,
+                                          fontWeight:
+                                              _selectedKanjiStrokeCount ==
+                                                  strokes
+                                              ? FontWeight.bold
+                                              : FontWeight.normal,
                                         ),
                                       ),
                                     ),
@@ -916,7 +1085,8 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                               ),
                             ),
                           const SizedBox(height: AppSpacing.xs),
-                          if (hasActiveCandidateFilter || hasActiveTextFilter) ...[
+                          if (hasActiveCandidateFilter ||
+                              hasActiveTextFilter) ...[
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
@@ -928,13 +1098,19 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                                       if (hasActiveCandidateFilter)
                                         _FilterPill(
                                           icon: Icons.gesture_outlined,
-                                          label: lang.kanjiDrawFilterLabel(widget.candidateKanji, items.length),
+                                          label: lang.kanjiDrawFilterLabel(
+                                            widget.candidateKanji,
+                                            items.length,
+                                          ),
                                           toneColor: context.appPalette.primary,
                                         ),
                                       if (hasActiveTextFilter)
                                         _FilterPill(
                                           icon: Icons.search,
-                                          label: lang.kanjiKeywordFilterLabel(widget.searchQuery.trim(), items.length),
+                                          label: lang.kanjiKeywordFilterLabel(
+                                            widget.searchQuery.trim(),
+                                            items.length,
+                                          ),
                                           toneColor: context.appPalette.accent,
                                         ),
                                     ],
@@ -942,9 +1118,13 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                                 ),
                                 IconButton(
                                   icon: const Icon(Icons.cancel, size: 20),
-                                  color: context.appPalette.ink.withValues(alpha: 0.5),
+                                  color: context.appPalette.ink.withValues(
+                                    alpha: 0.5,
+                                  ),
                                   onPressed: _clearLocalFilters,
-                                  tooltip: _kanjiHubClearFiltersLabel(widget.language),
+                                  tooltip: _kanjiHubClearFiltersLabel(
+                                    widget.language,
+                                  ),
                                 ),
                               ],
                             ),
@@ -955,51 +1135,106 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                             child: AnimatedSwitcher(
                               duration: const Duration(milliseconds: 300),
                               child: items.isEmpty
-                                ? Center(
-                                    key: const ValueKey('empty_state'),
-                                    child: Text(
-                                      hasActiveCandidateFilter || hasActiveTextFilter
-                                        ? lang.kanjiNoMatchLabel()
-                                        : lang.kanjiNoKanjiFoundLabel(),
-                                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                        color: context.appPalette.ink.withValues(alpha: 0.6),
+                                  ? Center(
+                                      key: const ValueKey('empty_state'),
+                                      child: Text(
+                                        hasActiveCandidateFilter ||
+                                                hasActiveTextFilter
+                                            ? lang.kanjiNoMatchLabel()
+                                            : lang.kanjiNoKanjiFoundLabel(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge
+                                            ?.copyWith(
+                                              color: context.appPalette.ink
+                                                  .withValues(alpha: 0.6),
+                                            ),
                                       ),
                                     )
-                                  )
-                                : GridView.builder(
-                                    key: ValueKey('${widget.selectedLevel.shortLabel}_${items.length}_$hasActiveTextFilter'),
-                                    padding: const EdgeInsets.only(bottom: AppSpacing.xxl),
-                                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                                      maxCrossAxisExtent: 70,
-                                      mainAxisSpacing: 8,
-                                      crossAxisSpacing: 8,
+                                  : GridView.builder(
+                                      key: ValueKey(
+                                        '${widget.selectedLevel.shortLabel}_${items.length}_$hasActiveTextFilter',
+                                      ),
+                                      padding: const EdgeInsets.only(
+                                        bottom: AppSpacing.xxl,
+                                      ),
+                                      gridDelegate:
+                                          const SliverGridDelegateWithMaxCrossAxisExtent(
+                                            maxCrossAxisExtent: 70,
+                                            mainAxisSpacing: 8,
+                                            crossAxisSpacing: 8,
+                                          ),
+                                      itemCount: items.length,
+                                      itemBuilder: (context, index) {
+                                        final item = items[index];
+                                        return _KanjiTile(
+                                          item: item,
+                                          isHighlighted:
+                                              widget.candidateKanji.contains(
+                                                item.character,
+                                              ) ||
+                                              (widget.searchQuery
+                                                      .trim()
+                                                      .isNotEmpty &&
+                                                  (item.character
+                                                          .toLowerCase()
+                                                          .contains(
+                                                            widget.searchQuery
+                                                                .trim()
+                                                                .toLowerCase(),
+                                                          ) ||
+                                                      item.meaning
+                                                          .toLowerCase()
+                                                          .contains(
+                                                            widget.searchQuery
+                                                                .trim()
+                                                                .toLowerCase(),
+                                                          ) ||
+                                                      (item.meaningEn
+                                                              ?.toLowerCase()
+                                                              .contains(
+                                                                widget
+                                                                    .searchQuery
+                                                                    .trim()
+                                                                    .toLowerCase(),
+                                                              ) ??
+                                                          false) ||
+                                                      (item.onyomi
+                                                              ?.toLowerCase()
+                                                              .contains(
+                                                                widget
+                                                                    .searchQuery
+                                                                    .trim()
+                                                                    .toLowerCase(),
+                                                              ) ??
+                                                          false) ||
+                                                      (item.kunyomi
+                                                              ?.toLowerCase()
+                                                              .contains(
+                                                                widget
+                                                                    .searchQuery
+                                                                    .trim()
+                                                                    .toLowerCase(),
+                                                              ) ??
+                                                          false))),
+                                          srsStatus: dueIds.contains(item.id)
+                                              ? _KanjiSrsStatus.due
+                                              : seenIds.contains(item.id)
+                                              ? _KanjiSrsStatus.studied
+                                              : _KanjiSrsStatus.unseen,
+                                          onTap: () {
+                                            showDialog(
+                                              context: context,
+                                              builder: (_) =>
+                                                  _KanjiDetailDialog(
+                                                    item: item,
+                                                    language: widget.language,
+                                                  ),
+                                            );
+                                          },
+                                        );
+                                      },
                                     ),
-                                    itemCount: items.length,
-                                    itemBuilder: (context, index) {
-                                      final item = items[index];
-                                      return _KanjiTile(
-                                        item: item,
-                                        isHighlighted: widget.candidateKanji.contains(item.character) || (widget.searchQuery.trim().isNotEmpty && (
-                                          item.character.toLowerCase().contains(widget.searchQuery.trim().toLowerCase()) ||
-                                          item.meaning.toLowerCase().contains(widget.searchQuery.trim().toLowerCase()) ||
-                                          (item.meaningEn?.toLowerCase().contains(widget.searchQuery.trim().toLowerCase()) ?? false) ||
-                                          (item.onyomi?.toLowerCase().contains(widget.searchQuery.trim().toLowerCase()) ?? false) ||
-                                          (item.kunyomi?.toLowerCase().contains(widget.searchQuery.trim().toLowerCase()) ?? false)
-                                        )),
-                                        srsStatus: dueIds.contains(item.id)
-                                            ? _KanjiSrsStatus.due
-                                            : seenIds.contains(item.id)
-                                                ? _KanjiSrsStatus.studied
-                                                : _KanjiSrsStatus.unseen,
-                                        onTap: () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (_) => _KanjiDetailDialog(item: item, language: widget.language),
-                                          );
-                                        },
-                                      );
-                                    },
-                                  ),
                             ),
                           ),
                         ],
@@ -1012,7 +1247,6 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
     );
   }
 }
-
 
 class _FilterPill extends StatelessWidget {
   const _FilterPill({
@@ -1099,7 +1333,10 @@ class _KanjiTile extends StatelessWidget {
           onTap: onTap,
           child: Container(
             decoration: BoxDecoration(
-              border: Border.all(color: borderColor, width: isHighlighted ? 1.6 : 1),
+              border: Border.all(
+                color: borderColor,
+                width: isHighlighted ? 1.6 : 1,
+              ),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Stack(
@@ -1126,8 +1363,8 @@ class _KanjiTile extends StatelessWidget {
                       height: 7,
                       decoration: BoxDecoration(
                         color: srsStatus == _KanjiSrsStatus.due
-                            ? const Color(0xFFFF9800)  // orange – due
-                            : const Color(0xFF4CAF50),  // green – studied
+                            ? const Color(0xFFFF9800) // orange – due
+                            : const Color(0xFF4CAF50), // green – studied
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -1137,7 +1374,9 @@ class _KanjiTile extends StatelessWidget {
                     item.character,
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       color: isHighlighted ? palette.primary : palette.ink,
-                      fontWeight: isHighlighted ? FontWeight.w800 : FontWeight.w500,
+                      fontWeight: isHighlighted
+                          ? FontWeight.w800
+                          : FontWeight.w500,
                     ),
                   ),
                 ),
@@ -1162,30 +1401,49 @@ class _KanjiDetailDialog extends StatelessWidget {
       AppLanguage.vi => item.meaning,
       _ => item.meaningEn ?? item.meaning,
     };
-    
+
     return AlertDialog(
       backgroundColor: palette.elevated,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(item.character, style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold, color: palette.ink)),
+          Text(
+            item.character,
+            style: TextStyle(
+              fontSize: 48,
+              fontWeight: FontWeight.bold,
+              color: palette.ink,
+            ),
+          ),
           IconButton(
             icon: const Icon(Icons.close),
             onPressed: () => Navigator.of(context).pop(),
-          )
+          ),
         ],
       ),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(meaning, style: Theme.of(context).textTheme.titleLarge?.copyWith(color: palette.primary, fontWeight: FontWeight.bold)),
+          Text(
+            meaning,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              color: palette.primary,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           const SizedBox(height: 16),
           if (item.onyomi != null && item.onyomi!.isNotEmpty)
-            Text('Onyomi: ${item.onyomi}', style: Theme.of(context).textTheme.bodyLarge),
+            Text(
+              'Onyomi: ${item.onyomi}',
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
           if (item.kunyomi != null && item.kunyomi!.isNotEmpty)
-            Text('Kunyomi: ${item.kunyomi}', style: Theme.of(context).textTheme.bodyLarge),
+            Text(
+              'Kunyomi: ${item.kunyomi}',
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
           const SizedBox(height: 8),
           Text('Strokes: ${item.strokeCount} | Level: ${item.jlptLevel}'),
         ],
@@ -1202,7 +1460,8 @@ class _KanjiMindmapPanel extends StatefulWidget {
   State<_KanjiMindmapPanel> createState() => _KanjiMindmapPanelState();
 }
 
-class _KanjiMindmapPanelState extends State<_KanjiMindmapPanel> with SingleTickerProviderStateMixin {
+class _KanjiMindmapPanelState extends State<_KanjiMindmapPanel>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -1254,10 +1513,7 @@ class _KanjiMindmapPanelState extends State<_KanjiMindmapPanel> with SingleTicke
                     );
                   },
                 ),
-                const Positioned(
-                  left: 20,
-                  child: _FlowHubNode(),
-                ),
+                const Positioned(left: 20, child: _FlowHubNode()),
                 Positioned(
                   right: 20,
                   top: 10,
@@ -1274,7 +1530,7 @@ class _KanjiMindmapPanelState extends State<_KanjiMindmapPanel> with SingleTicke
                     title: widget.language.kanjiFlowVocabCardTitle(),
                     subtitle: widget.language.kanjiFlowVocabCardSubtitle(),
                     icon: Icons.menu_book,
-                    onTap: () => context.go('/vocab'),
+                    onTap: () => context.openVocab(),
                   ),
                 ),
                 Positioned(
@@ -1284,7 +1540,7 @@ class _KanjiMindmapPanelState extends State<_KanjiMindmapPanel> with SingleTicke
                     title: widget.language.kanjiFlowGrammarCardTitle(),
                     subtitle: widget.language.kanjiFlowGrammarCardSubtitle(),
                     icon: Icons.architecture,
-                    onTap: () => context.go('/grammar'),
+                    onTap: () => context.openGrammar(),
                   ),
                 ),
               ],
@@ -1303,7 +1559,8 @@ class _FlowHubNode extends StatefulWidget {
   State<_FlowHubNode> createState() => _FlowHubNodeState();
 }
 
-class _FlowHubNodeState extends State<_FlowHubNode> with SingleTickerProviderStateMixin {
+class _FlowHubNodeState extends State<_FlowHubNode>
+    with SingleTickerProviderStateMixin {
   late AnimationController _pulseController;
 
   @override
@@ -1336,7 +1593,9 @@ class _FlowHubNodeState extends State<_FlowHubNode> with SingleTickerProviderSta
             color: palette.primary,
             boxShadow: [
               BoxShadow(
-                color: palette.primary.withValues(alpha: 0.15 + (0.25 * _pulseController.value)),
+                color: palette.primary.withValues(
+                  alpha: 0.15 + (0.25 * _pulseController.value),
+                ),
                 blurRadius: 20 * _pulseController.value,
                 spreadRadius: 10 * _pulseController.value,
               ),
@@ -1346,8 +1605,18 @@ class _FlowHubNodeState extends State<_FlowHubNode> with SingleTickerProviderSta
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('JP', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24)),
-              Text(_kanjiHubStudyWord(_kanjiHubDialogLanguage(context)), style: const TextStyle(color: Colors.white70, fontSize: 12)),
+              Text(
+                'JP',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                ),
+              ),
+              Text(
+                _kanjiHubStudyWord(_kanjiHubDialogLanguage(context)),
+                style: const TextStyle(color: Colors.white70, fontSize: 12),
+              ),
             ],
           ),
         );
@@ -1396,7 +1665,13 @@ class _FlowTargetCardState extends State<_FlowTargetCard> {
               width: _isHovered ? 2 : 1,
             ),
             boxShadow: _isHovered
-                ? [BoxShadow(color: palette.primary.withValues(alpha: 0.3), blurRadius: 8, spreadRadius: 2)]
+                ? [
+                    BoxShadow(
+                      color: palette.primary.withValues(alpha: 0.3),
+                      blurRadius: 8,
+                      spreadRadius: 2,
+                    ),
+                  ]
                 : [],
           ),
           child: Column(
@@ -1405,8 +1680,20 @@ class _FlowTargetCardState extends State<_FlowTargetCard> {
             children: [
               Icon(widget.icon, color: palette.primary, size: 20),
               const SizedBox(height: 4),
-              Text(widget.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-              Text(widget.subtitle, style: TextStyle(color: palette.ink.withValues(alpha: 0.6), fontSize: 10)),
+              Text(
+                widget.title,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13,
+                ),
+              ),
+              Text(
+                widget.subtitle,
+                style: TextStyle(
+                  color: palette.ink.withValues(alpha: 0.6),
+                  fontSize: 10,
+                ),
+              ),
             ],
           ),
         ),
@@ -1443,16 +1730,25 @@ class _StudyFlowPainter extends CustomPainter {
     for (var target in targets) {
       final path = Path();
       path.moveTo(startX, startY);
-      
+
       final ctrl1 = Offset(startX + 50, startY);
       final ctrl2 = Offset(target.dx - 50, target.dy);
-      
-      path.cubicTo(ctrl1.dx, ctrl1.dy, ctrl2.dx, ctrl2.dy, target.dx, target.dy);
+
+      path.cubicTo(
+        ctrl1.dx,
+        ctrl1.dy,
+        ctrl2.dx,
+        ctrl2.dy,
+        target.dx,
+        target.dy,
+      );
       canvas.drawPath(path, paint);
 
       // Animation dot
       final metrics = path.computeMetrics().first;
-      final pos = metrics.getTangentForOffset(metrics.length * animationValue)?.position;
+      final pos = metrics
+          .getTangentForOffset(metrics.length * animationValue)
+          ?.position;
       if (pos != null) {
         canvas.drawCircle(pos, 4, dotPaint);
       }
@@ -1464,8 +1760,6 @@ class _StudyFlowPainter extends CustomPainter {
     return oldDelegate.animationValue != animationValue;
   }
 }
-
-
 
 Map<int, List<RadicalItem>> _groupRadicalsByStroke(List<RadicalItem> items) {
   final grouped = <int, List<RadicalItem>>{};
@@ -1539,21 +1833,37 @@ class _CollectionSelectorCard extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
-          color: selected ? palette.primary.withValues(alpha: 0.12) : palette.surface,
+          color: selected
+              ? palette.primary.withValues(alpha: 0.12)
+              : palette.surface,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: selected ? palette.primary : palette.outline.withValues(alpha: 0.6),
+            color: selected
+                ? palette.primary
+                : palette.outline.withValues(alpha: 0.6),
             width: selected ? 2 : 1,
           ),
           boxShadow: selected
-              ? [BoxShadow(color: palette.primary.withValues(alpha: 0.15), blurRadius: 10, offset: const Offset(0, 4))]
+              ? [
+                  BoxShadow(
+                    color: palette.primary.withValues(alpha: 0.15),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ]
               : [],
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             if (icon != null) ...[
-              Icon(icon, size: 20, color: selected ? palette.primary : palette.ink.withValues(alpha: 0.6)),
+              Icon(
+                icon,
+                size: 20,
+                color: selected
+                    ? palette.primary
+                    : palette.ink.withValues(alpha: 0.6),
+              ),
               const SizedBox(width: 10),
             ],
             Column(
@@ -1571,7 +1881,9 @@ class _CollectionSelectorCard extends StatelessWidget {
                   subtitle,
                   style: TextStyle(
                     fontSize: 11,
-                    color: selected ? palette.primary.withValues(alpha: 0.8) : palette.ink.withValues(alpha: 0.6),
+                    color: selected
+                        ? palette.primary.withValues(alpha: 0.8)
+                        : palette.ink.withValues(alpha: 0.6),
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -1638,7 +1950,11 @@ class _RadicalTile extends StatelessWidget {
                 ),
                 child: Text(
                   '${item.id}',
-                  style: TextStyle(fontSize: 8, color: palette.ink.withValues(alpha: 0.6), fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 8,
+                    color: palette.ink.withValues(alpha: 0.6),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
@@ -1669,7 +1985,6 @@ class _RadicalDetailDialogState extends State<_RadicalDetailDialog> {
   void _selectPreview(KanjiItem item) {
     setState(() => _selectedPreviewItem = item);
   }
-
 
   KanjiItem? _resolveSelectedPreview(List<KanjiItem> items) {
     final selected = _selectedPreviewItem;
@@ -1724,7 +2039,10 @@ class _RadicalDetailDialogState extends State<_RadicalDetailDialog> {
               const SizedBox(height: 16),
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
                 decoration: BoxDecoration(
                   color: palette.accent.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(18),
@@ -1753,7 +2071,8 @@ class _RadicalDetailDialogState extends State<_RadicalDetailDialog> {
                 ),
               ),
               const SizedBox(height: 20),
-              if (widget.item.viMeaningRaw != null && widget.item.viMeaningRaw!.trim().isNotEmpty) ...[
+              if (widget.item.viMeaningRaw != null &&
+                  widget.item.viMeaningRaw!.trim().isNotEmpty) ...[
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -1796,20 +2115,31 @@ class _RadicalDetailDialogState extends State<_RadicalDetailDialog> {
                               Expanded(
                                 child: Text(
                                   _relatedKanjiLabel(context),
-                                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                                    fontWeight: FontWeight.w900,
-                                    color: palette.primary,
-                                  ),
+                                  style: Theme.of(context).textTheme.labelLarge
+                                      ?.copyWith(
+                                        fontWeight: FontWeight.w900,
+                                        color: palette.primary,
+                                      ),
                                 ),
                               ),
                               TextButton.icon(
                                 key: const ValueKey('open_related_all'),
                                 onPressed: () {
                                   Navigator.of(context).pop();
-                                  widget.onRelatedKanjiSelected?.call(summary.allCharacters);
+                                  widget.onRelatedKanjiSelected?.call(
+                                    summary.allCharacters,
+                                  );
                                 },
-                                icon: const Icon(Icons.travel_explore_rounded, size: 18),
-                                label: Text(_openAllRelatedLabel(context, summary.totalCount)),
+                                icon: const Icon(
+                                  Icons.travel_explore_rounded,
+                                  size: 18,
+                                ),
+                                label: Text(
+                                  _openAllRelatedLabel(
+                                    context,
+                                    summary.totalCount,
+                                  ),
+                                ),
                               ),
                             ],
                           ),
@@ -1834,11 +2164,16 @@ class _RadicalDetailDialogState extends State<_RadicalDetailDialog> {
                           const SizedBox(height: 16),
                           for (final group in summary.groups) ...[
                             Text(
-                              _relatedLevelSectionLabel(context, group.level, group.count),
-                              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                fontWeight: FontWeight.w900,
-                                color: palette.ink,
+                              _relatedLevelSectionLabel(
+                                context,
+                                group.level,
+                                group.count,
                               ),
+                              style: Theme.of(context).textTheme.titleSmall
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.w900,
+                                    color: palette.ink,
+                                  ),
                             ),
                             const SizedBox(height: 8),
                             Wrap(
@@ -1846,23 +2181,42 @@ class _RadicalDetailDialogState extends State<_RadicalDetailDialog> {
                               runSpacing: 8,
                               children: [
                                 TextButton.icon(
-                                  key: ValueKey('open_related_level_${group.level}'),
+                                  key: ValueKey(
+                                    'open_related_level_${group.level}',
+                                  ),
                                   onPressed: () {
                                     Navigator.of(context).pop();
-                                    widget.onRelatedKanjiSelected?.call(group.characters);
+                                    widget.onRelatedKanjiSelected?.call(
+                                      group.characters,
+                                    );
                                   },
-                                  icon: const Icon(Icons.arrow_circle_right_outlined, size: 18),
-                                  label: Text(_openLevelRelatedLabel(context, group.level)),
+                                  icon: const Icon(
+                                    Icons.arrow_circle_right_outlined,
+                                    size: 18,
+                                  ),
+                                  label: Text(
+                                    _openLevelRelatedLabel(
+                                      context,
+                                      group.level,
+                                    ),
+                                  ),
                                 ),
                                 OutlinedButton.icon(
-                                  key: ValueKey('study_flashcard_${group.level}'),
+                                  key: ValueKey(
+                                    'study_flashcard_${group.level}',
+                                  ),
                                   onPressed: () => _launchLevelPractice(
                                     context,
                                     group.level,
                                     KanjiPracticeMode.read,
                                   ),
-                                  icon: const Icon(Icons.style_outlined, size: 18),
-                                  label: Text(_flashcardLaneLabel(context, group.level)),
+                                  icon: const Icon(
+                                    Icons.style_outlined,
+                                    size: 18,
+                                  ),
+                                  label: Text(
+                                    _flashcardLaneLabel(context, group.level),
+                                  ),
                                 ),
                                 ElevatedButton.icon(
                                   key: ValueKey('study_write_${group.level}'),
@@ -1871,8 +2225,13 @@ class _RadicalDetailDialogState extends State<_RadicalDetailDialog> {
                                     group.level,
                                     KanjiPracticeMode.write,
                                   ),
-                                  icon: const Icon(Icons.edit_outlined, size: 18),
-                                  label: Text(_writeLaneLabel(context, group.level)),
+                                  icon: const Icon(
+                                    Icons.edit_outlined,
+                                    size: 18,
+                                  ),
+                                  label: Text(
+                                    _writeLaneLabel(context, group.level),
+                                  ),
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: palette.primary,
                                     foregroundColor: Colors.white,
@@ -1887,20 +2246,38 @@ class _RadicalDetailDialogState extends State<_RadicalDetailDialog> {
                               children: [
                                 for (final relatedItem in group.items.take(4))
                                   _RelatedKanjiPreviewCard(
-                                    key: ValueKey('preview_${group.level}_${relatedItem.character}'),
+                                    key: ValueKey(
+                                      'preview_${group.level}_${relatedItem.character}',
+                                    ),
                                     item: relatedItem,
-                                    isSelected: selectedPreview?.character == relatedItem.character,
+                                    isSelected:
+                                        selectedPreview?.character ==
+                                        relatedItem.character,
                                     onTap: () => _selectPreview(relatedItem),
                                   ),
                               ],
                             ),
-                            if (selectedPreview != null && group.characters.contains(selectedPreview.character)) ...[
+                            if (selectedPreview != null &&
+                                group.characters.contains(
+                                  selectedPreview.character,
+                                )) ...[
                               const SizedBox(height: 12),
                               _RadicalKanjiMicroDetailPanel(
                                 item: selectedPreview,
-                                onSearch: () => _launchKanjiUtility(context, selectedPreview, '/search'),
-                                onFlashcard: () => _launchKanjiPractice(context, selectedPreview),
-                                onWrite: () => _launchKanjiUtility(context, selectedPreview, '/practice/handwriting'),
+                                onSearch: () => _launchKanjiUtility(
+                                  context,
+                                  selectedPreview,
+                                  '/search',
+                                ),
+                                onFlashcard: () => _launchKanjiPractice(
+                                  context,
+                                  selectedPreview,
+                                ),
+                                onWrite: () => _launchKanjiUtility(
+                                  context,
+                                  selectedPreview,
+                                  '/practice/handwriting',
+                                ),
                               ),
                             ],
                             const SizedBox(height: 12),
@@ -1960,7 +2337,6 @@ class _RadicalDetailDialogState extends State<_RadicalDetailDialog> {
   }
 }
 
-
 class _RelatedKanjiPreviewCard extends StatelessWidget {
   const _RelatedKanjiPreviewCard({
     super.key,
@@ -1983,9 +2359,14 @@ class _RelatedKanjiPreviewCard extends StatelessWidget {
         width: 132,
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: isSelected ? palette.primary.withValues(alpha: 0.08) : palette.base,
+          color: isSelected
+              ? palette.primary.withValues(alpha: 0.08)
+              : palette.base,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: isSelected ? palette.primary : palette.outline, width: isSelected ? 1.5 : 1),
+          border: Border.all(
+            color: isSelected ? palette.primary : palette.outline,
+            width: isSelected ? 1.5 : 1,
+          ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -2011,11 +2392,7 @@ class _RelatedKanjiPreviewCard extends StatelessWidget {
             const SizedBox(height: 8),
             Row(
               children: [
-                Icon(
-                  Icons.brush_outlined,
-                  size: 14,
-                  color: palette.accent,
-                ),
+                Icon(Icons.brush_outlined, size: 14, color: palette.accent),
                 const SizedBox(width: 4),
                 Text(
                   '${item.strokeCount}',
@@ -2041,7 +2418,6 @@ class _RelatedKanjiPreviewCard extends StatelessWidget {
   }
 }
 
-
 class _RadicalKanjiMicroDetailPanel extends StatelessWidget {
   const _RadicalKanjiMicroDetailPanel({
     required this.item,
@@ -2061,7 +2437,8 @@ class _RadicalKanjiMicroDetailPanel extends StatelessWidget {
     final meaning = _previewMeaning(item);
     final readings = <String>[
       if ((item.onyomi ?? '').trim().isNotEmpty) 'On: ${item.onyomi!.trim()}',
-      if ((item.kunyomi ?? '').trim().isNotEmpty) 'Kun: ${item.kunyomi!.trim()}',
+      if ((item.kunyomi ?? '').trim().isNotEmpty)
+        'Kun: ${item.kunyomi!.trim()}',
     ];
     final examples = item.examples.take(2).toList(growable: false);
     return Container(
@@ -2162,19 +2539,25 @@ class _RadicalKanjiMicroDetailPanel extends StatelessWidget {
                 key: ValueKey('micro_search_${item.character}'),
                 onPressed: onSearch,
                 icon: const Icon(Icons.search_rounded, size: 18),
-                label: Text(_kanjiHubSearchLabel(_kanjiHubDialogLanguage(context))),
+                label: Text(
+                  _kanjiHubSearchLabel(_kanjiHubDialogLanguage(context)),
+                ),
               ),
               OutlinedButton.icon(
                 key: ValueKey('micro_flashcard_${item.character}'),
                 onPressed: onFlashcard,
                 icon: const Icon(Icons.style_outlined, size: 18),
-                label: Text(_kanjiHubFlashcardLabel(_kanjiHubDialogLanguage(context))),
+                label: Text(
+                  _kanjiHubFlashcardLabel(_kanjiHubDialogLanguage(context)),
+                ),
               ),
               ElevatedButton.icon(
                 key: ValueKey('micro_write_${item.character}'),
                 onPressed: onWrite,
                 icon: const Icon(Icons.edit_outlined, size: 18),
-                label: Text(_kanjiHubWriteLabel(_kanjiHubDialogLanguage(context))),
+                label: Text(
+                  _kanjiHubWriteLabel(_kanjiHubDialogLanguage(context)),
+                ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: palette.primary,
                   foregroundColor: Colors.white,
@@ -2257,5 +2640,3 @@ class _RelatedStatCard extends StatelessWidget {
     );
   }
 }
-
-

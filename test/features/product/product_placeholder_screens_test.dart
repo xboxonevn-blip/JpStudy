@@ -234,11 +234,13 @@ void main() {
           ),
         ),
         GoRoute(
+          name: 'me',
           path: '/me',
           builder: (context, state) =>
               const Scaffold(body: Center(child: Text('ME'))),
         ),
         GoRoute(
+          name: 'me-data',
           path: '/me/data',
           builder: (context, state) =>
               const Scaffold(body: Center(child: Text('DATA'))),

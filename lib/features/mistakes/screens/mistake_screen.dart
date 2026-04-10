@@ -2,8 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
+import '../../common/widgets/compact_ui.dart';
+import '../../common/widgets/error_state_widget.dart';
 import '../../home/providers/dashboard_provider.dart';
 import '../repositories/mistake_repository.dart';
 import '../../../data/db/database_provider.dart';
@@ -12,7 +16,6 @@ import '../../../data/models/kanji_item.dart';
 import '../../../data/repositories/lesson_repository.dart';
 import '../../../data/utils/grammar_english_notation.dart';
 import '../../learn/models/learn_session_args.dart';
-import 'package:go_router/go_router.dart';
 import '../../../data/db/app_database.dart';
 import '../../write/screens/handwriting_practice_screen.dart';
 import '../../jlpt/models/jlpt_coach_models.dart';
@@ -43,7 +46,9 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
             return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError) {
-            return Center(child: Text(language.loadErrorLabel));
+            return Center(
+              child: ErrorStateWidget(error: snapshot.error!),
+            );
           }
 
           final allMistakes = snapshot.data ?? [];
@@ -56,14 +61,15 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
               : allMistakes;
 
           if (allMistakes.isEmpty) {
+            final emptyPalette = context.appPalette;
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.check_circle_outline,
                     size: 64,
-                    color: Colors.green,
+                    color: emptyPalette.success,
                   ),
                   const SizedBox(height: 16),
                   Text(
@@ -74,7 +80,9 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
                   Text(
                     language.mistakeEmptySubtitle,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(color: Color(0xFF6B7390)),
+                    style: TextStyle(
+                      color: emptyPalette.ink.withValues(alpha: 0.5),
+                    ),
                   ),
                 ],
               ),
@@ -88,7 +96,9 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
                 return const Center(child: CircularProgressIndicator());
               }
               if (detailSnapshot.hasError) {
-                return Center(child: Text(language.loadErrorLabel));
+                return Center(
+                  child: ErrorStateWidget(error: detailSnapshot.error!),
+                );
               }
 
               final details = detailSnapshot.data ?? const _MistakeDetails();
@@ -97,7 +107,7 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
-                    child: _buildDueSummaryCard(language, dueBuckets),
+                    child: _buildDueSummaryCard(context, language, dueBuckets),
                   ),
                   Expanded(
                     child: visibleMistakes.isEmpty
@@ -112,8 +122,10 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
                                   '現在、1-3-7の期限ミスはありません。',
                                 ),
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: Color(0xFF6B7390),
+                                style: TextStyle(
+                                  color: context.appPalette.ink.withValues(
+                                    alpha: 0.5,
+                                  ),
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
@@ -133,44 +145,102 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
                                 language,
                               );
                               final icon = _mistakeIcon(mistake.type);
-                              final color = _mistakeColor(mistake.type);
+                              final palette = context.appPalette;
+                              final color = _mistakeColor(
+                                mistake.type,
+                                palette,
+                              );
 
-                              return Card(
-                                margin: const EdgeInsets.symmetric(
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
                                   horizontal: 16,
-                                  vertical: 6,
+                                  vertical: 4,
                                 ),
-                                child: ListTile(
-                                  leading: Icon(icon, color: color),
-                                  title: Text(display.title),
-                                  subtitle: Column(
+                                child: AppSectionCard(
+                                  padding: const EdgeInsets.fromLTRB(
+                                    12,
+                                    10,
+                                    4,
+                                    10,
+                                  ),
+                                  child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(display.subtitle),
-                                      if (contextLines.isNotEmpty) ...[
-                                        const SizedBox(height: 6),
-                                        ...contextLines.map(
-                                          (line) => Text(
-                                            line,
-                                            style: const TextStyle(
-                                              fontSize: 12,
-                                              color: Color(0xFF6B7390),
-                                            ),
+                                      Container(
+                                        width: 40,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                          color: color.withValues(alpha: 0.12),
+                                          borderRadius: BorderRadius.circular(
+                                            12,
                                           ),
                                         ),
-                                      ],
+                                        child: Icon(
+                                          icon,
+                                          color: color,
+                                          size: 20,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 12),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              display.title,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 14,
+                                                color: palette.ink,
+                                              ),
+                                            ),
+                                            const SizedBox(height: 2),
+                                            Text(
+                                              display.subtitle,
+                                              style: TextStyle(
+                                                fontSize: 12.5,
+                                                color: palette.ink.withValues(
+                                                  alpha: 0.65,
+                                                ),
+                                              ),
+                                            ),
+                                            if (contextLines.isNotEmpty) ...[
+                                              const SizedBox(height: 6),
+                                              ...contextLines.map(
+                                                (line) => Text(
+                                                  line,
+                                                  style: TextStyle(
+                                                    fontSize: 11.5,
+                                                    color: palette.ink
+                                                        .withValues(alpha: 0.45),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ],
+                                        ),
+                                      ),
+                                      IconButton(
+                                        icon: const Icon(
+                                          Icons.delete_outline,
+                                          size: 20,
+                                        ),
+                                        padding: const EdgeInsets.all(8),
+                                        constraints: const BoxConstraints(
+                                          minWidth: 36,
+                                          minHeight: 36,
+                                        ),
+                                        onPressed: () {
+                                          repo.removeMistake(
+                                            type: mistake.type,
+                                            itemId: mistake.itemId,
+                                          );
+                                          ref.invalidate(dashboardProvider);
+                                        },
+                                      ),
                                     ],
-                                  ),
-                                  trailing: IconButton(
-                                    icon: const Icon(Icons.delete_outline),
-                                    onPressed: () {
-                                      repo.removeMistake(
-                                        type: mistake.type,
-                                        itemId: mistake.itemId,
-                                      );
-                                      ref.invalidate(dashboardProvider);
-                                    },
                                   ),
                                 ),
                               );
@@ -298,25 +368,20 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
     );
   }
 
-  Widget _buildDueSummaryCard(AppLanguage language, MistakeDueBuckets buckets) {
-    return Container(
-      width: double.infinity,
+  Widget _buildDueSummaryCard(
+    BuildContext context,
+    AppLanguage language,
+    MistakeDueBuckets buckets,
+  ) {
+    final palette = context.appPalette;
+    return AppSectionCard(
       padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: const Color(0xFFFFFBEB),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFFDE68A)),
-      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              const Icon(
-                Icons.schedule_rounded,
-                color: Color(0xFFB45309),
-                size: 18,
-              ),
+              Icon(Icons.schedule_rounded, color: palette.warning, size: 18),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
@@ -326,9 +391,9 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
                     'Ôn đến hạn 1-3-7',
                     '1-3-7期限レビュー',
                   ),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.w900,
-                    color: Color(0xFF92400E),
+                    color: palette.warning,
                   ),
                 ),
               ),
@@ -359,9 +424,9 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
               'Đến hạn: D1 ${buckets.due1d} | D3 ${buckets.due3d} | D7 ${buckets.due7d} | Mới ${buckets.notDue}',
               '期限: D1 ${buckets.due1d} | D3 ${buckets.due3d} | D7 ${buckets.due7d} | 新規 ${buckets.notDue}',
             ),
-            style: const TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.w700,
-              color: Color(0xFF78350F),
+              color: palette.warning.withValues(alpha: 0.85),
             ),
           ),
         ],
@@ -471,9 +536,8 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
     }
 
     if (items.isEmpty || !context.mounted) return;
-    context.push(
-      '/learn/session',
-      extra: LearnSessionArgs(
+    context.openLearnSession(
+      LearnSessionArgs(
         lessonId: -999,
         lessonTitle: language.mistakesLabel,
         items: items,
@@ -483,7 +547,7 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
 
   void _startGrammarPractice(BuildContext context, List<int> grammarIds) {
     if (grammarIds.isEmpty || !context.mounted) return;
-    context.push('/grammar-practice', extra: grammarIds);
+    context.openGrammarPractice(extra: grammarIds);
   }
 
   Future<void> _startKanjiPractice(
@@ -541,14 +605,14 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
     // Fire grammar and kanji fetches concurrently with the vocab fetch —
     // they are fully independent and touch different tables.
     final termsFuture = lessonVocabIds.isNotEmpty
-        ? (db.select(db.userLessonTerm)
-              ..where((t) => t.id.isIn(lessonVocabIds.toList())))
-            .get()
+        ? (db.select(
+            db.userLessonTerm,
+          )..where((t) => t.id.isIn(lessonVocabIds.toList()))).get()
         : Future.value(const <UserLessonTermData>[]);
     final grammarFuture = grammarIds.isNotEmpty
-        ? (db.select(db.grammarPoints)
-              ..where((g) => g.id.isIn(grammarIds.toList())))
-            .get()
+        ? (db.select(
+            db.grammarPoints,
+          )..where((g) => g.id.isIn(grammarIds.toList()))).get()
         : Future.value(const <GrammarPoint>[]);
     final kanjiFuture = kanjiIds.isNotEmpty
         ? lessonRepo.fetchKanjiByIds(kanjiIds.toList())
@@ -566,7 +630,9 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
       ...lessonVocabIds.where((id) => !vocabMap.containsKey(id)),
     }.toList();
     if (fallbackIds.isNotEmpty) {
-      final fallbackItems = await lessonRepo.fetchContentVocabByIds(fallbackIds);
+      final fallbackItems = await lessonRepo.fetchContentVocabByIds(
+        fallbackIds,
+      );
       for (final item in fallbackItems) {
         vocabFallbackMap[item.id] = item;
       }
@@ -755,16 +821,16 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
     }
   }
 
-  Color _mistakeColor(String type) {
+  Color _mistakeColor(String type, AppThemePalette palette) {
     switch (type) {
       case 'vocab':
-        return Colors.orange;
+        return palette.accent;
       case 'grammar':
-        return Colors.purple;
+        return palette.info;
       case 'kanji':
-        return const Color(0xFF0F766E);
+        return palette.secondary;
       default:
-        return Colors.grey;
+        return palette.outline;
     }
   }
 

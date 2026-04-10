@@ -1,6 +1,9 @@
+import 'package:jpstudy/features/vocab/models/vocab_review_args.dart';
+import 'package:jpstudy/app/navigation/app_route_locations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:jpstudy/app/navigation/app_router.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
@@ -26,7 +29,7 @@ Widget _buildApp() {
 
 void main() {
   tearDown(() {
-    AppRouter.router.go('/');
+    AppRouter.router.go(AppRoutePath.home);
   });
 
   testWidgets('legacy vocab review query route still opens term review', (
@@ -34,7 +37,15 @@ void main() {
   ) async {
     await tester.pumpWidget(_buildApp());
     AppRouter.router.go(
-      '/vocab/review?title=Minna%20no%20Nihongo%20I&subtitle=Track%20dong%20hanh&lessonStart=1&lessonEnd=25',
+      AppRouteLocation.vocabReview(
+        args: const VocabReviewArgs(
+          source: 'legacy',
+          title: 'Minna no Nihongo I',
+          subtitle: 'Track dong hanh',
+          lessonStart: 1,
+          lessonEnd: 25,
+        ),
+      ),
     );
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
@@ -47,7 +58,12 @@ void main() {
   ) async {
     await tester.pumpWidget(_buildApp());
     AppRouter.router.go(
-      '/vocab/minna?level=N5&title=Minna%20no%20Nihongo%20I&lessonStart=1&lessonEnd=25',
+      AppRouteLocation.minnaCatalog(
+        levelCode: 'N5',
+        title: 'Minna no Nihongo I',
+        lessonStart: 1,
+        lessonEnd: 25,
+      ),
     );
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
@@ -55,10 +71,15 @@ void main() {
     expect(find.byType(MinnaLessonCatalogScreen), findsOneWidget);
   });
 
-  testWidgets('hajimete catalog query route opens chapter catalog', (tester) async {
+  testWidgets('hajimete catalog query route opens chapter catalog', (
+    tester,
+  ) async {
     await tester.pumpWidget(_buildApp());
     AppRouter.router.go(
-      '/vocab/hajimete?level=N5&title=Hajimete%20no%20Nihongo%20Tango%20N5',
+      AppRouteLocation.hajimeteCatalog(
+        levelCode: 'N5',
+        title: 'Hajimete no Nihongo Tango N5',
+      ),
     );
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
@@ -66,10 +87,16 @@ void main() {
     expect(find.byType(HajimeteChapterCatalogScreen), findsOneWidget);
   });
 
-  testWidgets('hajimete chapter query route opens detail screen', (tester) async {
+  testWidgets('hajimete chapter query route opens detail screen', (
+    tester,
+  ) async {
     await tester.pumpWidget(_buildApp());
     AppRouter.router.go(
-      '/vocab/hajimete/chapter?level=N5&chapterId=1&title=Hajimete%20no%20Nihongo%20Tango%20N5',
+      AppRouteLocation.hajimeteChapter(
+        levelCode: 'N5',
+        chapterId: 1,
+        title: 'Hajimete no Nihongo Tango N5',
+      ),
     );
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
@@ -78,9 +105,11 @@ void main() {
     expect(find.text('Kanji'), findsWidgets);
   });
 
-  testWidgets('vocab match session fallback route opens screen', (tester) async {
+  testWidgets('vocab match session fallback route opens screen', (
+    tester,
+  ) async {
     await tester.pumpWidget(_buildApp());
-    AppRouter.router.go('/vocab/match-session');
+    AppRouter.router.go(AppRoutePath.vocabMatchSession);
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
 
@@ -91,7 +120,7 @@ void main() {
     tester,
   ) async {
     await tester.pumpWidget(_buildApp());
-    AppRouter.router.go('/practice/kanji-reading');
+    AppRouter.router.go(AppRoutePath.kanjiReadingPractice);
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
 
@@ -102,7 +131,7 @@ void main() {
     tester,
   ) async {
     await tester.pumpWidget(_buildApp());
-    AppRouter.router.go('/practice/handwriting');
+    AppRouter.router.go(AppRoutePath.handwritingPractice);
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
 

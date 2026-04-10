@@ -82,6 +82,7 @@ void main() {
           builder: (context, state) => const GrammarScreen(),
         ),
         GoRoute(
+          name: 'grammar-practice',
           path: '/grammar-practice',
           builder: (context, state) {
             var mode = GrammarPracticeMode.normal;

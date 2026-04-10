@@ -1,3 +1,4 @@
+import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -29,7 +30,7 @@ const _kProgress = DailySessionProgress(
   dateKey: '2026-03-24',
   started: true,
   doneSteps: {3},
-  lastRoute: '/practice',
+  lastRoute: AppRoutePath.practice,
   updatedAt: null,
 );
 
