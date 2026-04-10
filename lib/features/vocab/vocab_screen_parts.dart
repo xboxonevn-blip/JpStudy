@@ -107,7 +107,7 @@ class _VocabCatalogBody extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${program.titleTop} ? ${program.titleMain}',
+                '${program.titleTop} - ${program.titleMain}',
                 style: Theme.of(
                   dialogContext,
                 ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
@@ -349,23 +349,36 @@ class _TodayMetric extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Container(
       width: 180,
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: context.appPalette.surface,
-        borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+        gradient: LinearGradient(
+          colors: [palette.surface, palette.elevated],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+        border: Border.all(color: palette.outlineSoft),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label, style: Theme.of(context).textTheme.labelMedium),
+          Text(
+            label,
+            style: Theme.of(context).textTheme.labelMedium?.copyWith(
+              color: palette.ink.withValues(alpha: 0.62),
+              fontWeight: FontWeight.w800,
+            ),
+          ),
           const SizedBox(height: AppSpacing.xs),
           Text(
             value,
-            style: Theme.of(
-              context,
-            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w900),
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              color: palette.ink,
+              fontWeight: FontWeight.w900,
+            ),
           ),
         ],
       ),
@@ -424,8 +437,8 @@ class _HeroCopy extends StatelessWidget {
         ),
         const SizedBox(height: AppSpacing.lg),
         Wrap(
-          spacing: 8,
-          runSpacing: 8,
+          spacing: AppSpacing.sm,
+          runSpacing: AppSpacing.sm,
           children: [
             AppStatusChip(
               label: selectedLevel == null
@@ -469,14 +482,11 @@ class _HeroMetricsPanel extends StatelessWidget {
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            Colors.white.withValues(alpha: 0.9),
-            palette.primary.withValues(alpha: 0.08),
-          ],
+          colors: [palette.elevated, palette.primary.withValues(alpha: 0.08)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusXxl),
         border: Border.all(color: palette.outline.withValues(alpha: 0.95)),
       ),
       child: Column(
@@ -547,7 +557,8 @@ class _HeroMetricTile extends StatelessWidget {
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
         color: accent.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
+        border: Border.all(color: accent.withValues(alpha: 0.16)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -591,7 +602,8 @@ class _HeroMetricStrip extends StatelessWidget {
         vertical: AppSpacing.md,
       ),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+        color: accent.withValues(alpha: 0.07),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
         border: Border.all(color: accent.withValues(alpha: 0.28)),
       ),
       child: Row(
@@ -679,6 +691,17 @@ class _VocabSection extends StatelessWidget {
   }
 }
 
+Color _blendAccent(BuildContext context, Color accent) {
+  final palette = context.appPalette;
+  final mix = Theme.of(context).brightness == Brightness.dark ? 0.44 : 0.18;
+  return Color.lerp(accent, palette.primary, mix) ?? accent;
+}
+
+Color _foregroundFor(Color background) {
+  final brightness = ThemeData.estimateBrightnessForColor(background);
+  return brightness == Brightness.dark ? Colors.white : Colors.black;
+}
+
 double _cardWidth(int count) {
   if (count == 1) return 460;
   if (count == 2) return 432;
@@ -697,6 +720,7 @@ class _SectionHeader extends StatelessWidget {
         .where((program) => program.isInteractive)
         .length;
     final palette = context.appPalette;
+    final accent = _blendAccent(context, section.accent);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -704,8 +728,8 @@ class _SectionHeader extends StatelessWidget {
           width: 6,
           height: 44,
           decoration: BoxDecoration(
-            color: section.accent,
-            borderRadius: BorderRadius.circular(999),
+            color: accent,
+            borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
           ),
         ),
         const SizedBox(width: 12),
@@ -807,6 +831,7 @@ class _CoreProgramCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final palette = context.appPalette;
     final enabled = program.isInteractive || program.isPreviewOnly;
+    final accent = _blendAccent(context, section.accent);
 
     return InkWell(
       key: ValueKey('program_${section.key}_${program.key}'),
@@ -819,14 +844,14 @@ class _CoreProgramCard extends StatelessWidget {
           padding: const EdgeInsets.all(6),
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [section.accent, section.accent.withValues(alpha: 0.82)],
+              colors: [accent, accent.withValues(alpha: 0.82)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.circular(26),
             boxShadow: [
               BoxShadow(
-                color: section.accent.withValues(alpha: 0.16),
+                color: accent.withValues(alpha: 0.16),
                 blurRadius: 24,
                 offset: const Offset(0, 12),
               ),
@@ -835,7 +860,14 @@ class _CoreProgramCard extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.fromLTRB(22, 22, 22, 20),
             decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.9),
+              gradient: LinearGradient(
+                colors: [
+                  palette.elevated,
+                  palette.surface.withValues(alpha: 0.92),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
               borderRadius: BorderRadius.circular(22),
             ),
             child: Column(
@@ -845,7 +877,7 @@ class _CoreProgramCard extends StatelessWidget {
                   children: [
                     _ProgramTypeBadge(
                       label: _trackLabel(language),
-                      accent: section.accent,
+                      accent: accent,
                     ),
                     const Spacer(),
                     AppStatusChip(
@@ -904,8 +936,8 @@ class _CoreProgramCard extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSpacing.md),
                 Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
+                  runSpacing: AppSpacing.sm,
+                  spacing: AppSpacing.sm,
                   children: [
                     _MetaPill(
                       icon: Icons.auto_awesome_rounded,
@@ -969,9 +1001,11 @@ class _CompanionProgramCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final palette = context.appPalette;
     final enabled = program.isInteractive || program.isPreviewOnly;
+    final accent = _blendAccent(context, section.accent);
     final footerColor = program.type == _VocabProgramType.listening
-        ? const Color(0xFF2F9A8F)
-        : const Color(0xFF67C778);
+        ? palette.info
+        : palette.secondary;
+    final footerForeground = _foregroundFor(footerColor);
 
     return InkWell(
       key: ValueKey('program_${section.key}_${program.key}'),
@@ -1008,7 +1042,7 @@ class _CompanionProgramCard extends StatelessWidget {
                       children: [
                         _ProgramTypeBadge(
                           label: _programTypeLabel(program.type, language),
-                          accent: section.accent,
+                          accent: accent,
                         ),
                         const Spacer(),
                         AppStatusChip(
@@ -1093,7 +1127,7 @@ class _CompanionProgramCard extends StatelessWidget {
                             _programCountLabel(program, language),
                             style: Theme.of(context).textTheme.headlineSmall
                                 ?.copyWith(
-                                  color: Colors.white,
+                                  color: footerForeground,
                                   fontWeight: FontWeight.w900,
                                 ),
                           ),
@@ -1102,7 +1136,7 @@ class _CompanionProgramCard extends StatelessWidget {
                           program.titleMain,
                           style: Theme.of(context).textTheme.headlineSmall
                               ?.copyWith(
-                                color: Colors.white,
+                                color: footerForeground,
                                 fontWeight: FontWeight.w900,
                               ),
                         ),
@@ -1112,7 +1146,7 @@ class _CompanionProgramCard extends StatelessWidget {
                     Text(
                       _programFooterHint(program.type, language),
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.white.withValues(alpha: 0.94),
+                        color: footerForeground.withValues(alpha: 0.90),
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -1120,8 +1154,10 @@ class _CompanionProgramCard extends StatelessWidget {
                     OutlinedButton.icon(
                       onPressed: enabled ? onTap : null,
                       style: OutlinedButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        side: const BorderSide(color: Colors.white70),
+                        foregroundColor: footerForeground,
+                        side: BorderSide(
+                          color: footerForeground.withValues(alpha: 0.68),
+                        ),
                       ),
                       icon: Icon(
                         program.isInteractive
@@ -1164,6 +1200,7 @@ class _GlassProgramCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final palette = context.appPalette;
     final enabled = program.isInteractive || program.isPreviewOnly;
+    final accent = _blendAccent(context, section.accent);
 
     return InkWell(
       key: ValueKey('program_${section.key}_${program.key}'),
@@ -1172,10 +1209,7 @@ class _GlassProgramCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Colors.white.withValues(alpha: 0.74),
-              section.accent.withValues(alpha: 0.1),
-            ],
+            colors: [palette.elevated, accent.withValues(alpha: 0.10)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -1194,7 +1228,7 @@ class _GlassProgramCard extends StatelessWidget {
                 children: [
                   _ProgramTypeBadge(
                     label: _programTypeLabel(program.type, language),
-                    accent: section.accent,
+                    accent: accent,
                   ),
                   const Spacer(),
                   AppStatusChip(
@@ -1219,7 +1253,7 @@ class _GlassProgramCard extends StatelessWidget {
               Text(
                 program.titleMain,
                 style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                  color: section.accent,
+                  color: accent,
                   fontWeight: FontWeight.w900,
                 ),
               ),
@@ -1245,11 +1279,7 @@ class _GlassProgramCard extends StatelessWidget {
               const SizedBox(height: AppSpacing.md),
               Row(
                 children: [
-                  Icon(
-                    Icons.auto_awesome_rounded,
-                    color: section.accent,
-                    size: 18,
-                  ),
+                  Icon(Icons.auto_awesome_rounded, color: accent, size: 18),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
@@ -1404,7 +1434,7 @@ _VocabCatalogSection _buildJlptSection({
   final coreInteractive =
       isInteractive && StudyLevel.fromCode(levelCode) != null && liveCount > 0;
   final coreBadge = dueCount > 0
-      ? '$dueCount due ? ${_formatReviewTiming(nextReview)}'
+      ? '$dueCount due - ${_formatReviewTiming(nextReview)}'
       : _formatReviewTiming(nextReview);
   final companionTermCount = companionCountOverride ?? 0;
   final companionInteractive =

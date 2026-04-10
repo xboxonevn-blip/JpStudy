@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_spacing.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/models/weekly_challenge.dart';
+import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/home/providers/challenge_history_provider.dart';
 
 class ChallengeHistoryCard extends ConsumerWidget {
@@ -17,58 +20,50 @@ class ChallengeHistoryCard extends ConsumerWidget {
       data: (history) {
         if (history.isEmpty) return const SizedBox.shrink();
         final completedCount = history.where((e) => e.completed).length;
-        return Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [Color(0xFFF0F9FF), Color(0xFFEDE9FE)],
-            ),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: const Color(0xFFA5B4FC)),
-          ),
+        final palette = context.appPalette;
+        return AppSectionCard(
+          padding: const EdgeInsets.all(AppSpacing.lg),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
-                  const Icon(
-                    Icons.history_rounded,
-                    color: Color(0xFF4F46E5),
-                    size: 22,
-                  ),
-                  const SizedBox(width: 8),
+                  Icon(Icons.history_rounded, color: palette.info, size: 22),
+                  const SizedBox(width: AppSpacing.sm),
                   Expanded(
                     child: Text(
                       _title(language),
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
-                        color: Color(0xFF312E81),
+                        color: palette.ink,
                       ),
                     ),
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
+                      horizontal: AppSpacing.sm,
                       vertical: 2,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF4F46E5).withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(10),
+                      color: palette.info.withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
                     ),
                     child: Text(
                       '$completedCount/${history.length}',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w700,
-                        color: Color(0xFF4F46E5),
+                        color: palette.info,
                       ),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 12),
-              ...history.take(6).map(
+              const SizedBox(height: AppSpacing.md),
+              ...history
+                  .take(6)
+                  .map(
                     (entry) => _HistoryRow(entry: entry, language: language),
                   ),
             ],
@@ -100,8 +95,12 @@ class _HistoryRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    final statusColor = entry.completed
+        ? palette.success
+        : palette.ink.withValues(alpha: 0.38);
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.only(bottom: AppSpacing.sm),
       child: Row(
         children: [
           Icon(
@@ -109,27 +108,26 @@ class _HistoryRow extends StatelessWidget {
                 ? Icons.check_circle_rounded
                 : Icons.radio_button_unchecked,
             size: 20,
-            color: entry.completed
-                ? const Color(0xFF16A34A)
-                : const Color(0xFF9CA3AF),
+            color: statusColor,
           ),
-          const SizedBox(width: 10),
+          const SizedBox(width: AppSpacing.sm),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   _challengeLabel(entry.type, language),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
+                    color: palette.ink,
                   ),
                 ),
                 Text(
                   entry.weekId,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 11,
-                    color: Color(0xFF9CA3AF),
+                    color: palette.ink.withValues(alpha: 0.50),
                   ),
                 ),
               ],
@@ -141,8 +139,8 @@ class _HistoryRow extends StatelessWidget {
               fontSize: 13,
               fontWeight: FontWeight.w700,
               color: entry.completed
-                  ? const Color(0xFF16A34A)
-                  : const Color(0xFF6B7280),
+                  ? palette.success
+                  : palette.ink.withValues(alpha: 0.64),
             ),
           ),
         ],

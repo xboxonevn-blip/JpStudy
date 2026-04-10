@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_spacing.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/me/providers/personal_best_provider.dart';
 
 class PersonalBestsCard extends ConsumerWidget {
@@ -15,40 +18,34 @@ class PersonalBestsCard extends ConsumerWidget {
     return bestsAsync.when(
       data: (bests) {
         if (bests.isEmpty) return const SizedBox.shrink();
-        return Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [Color(0xFFFFF7ED), Color(0xFFFEF3C7)],
-            ),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: const Color(0xFFFBBF24)),
-          ),
+        final palette = context.appPalette;
+        return AppSectionCard(
+          padding: const EdgeInsets.all(AppSpacing.lg),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.workspace_premium_rounded,
-                    color: Color(0xFFD97706),
+                    color: palette.warning,
                     size: 22,
                   ),
-                  const SizedBox(width: 8),
+                  const SizedBox(width: AppSpacing.sm),
                   Text(
                     _title(language),
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
-                      color: Color(0xFF92400E),
+                      color: palette.ink,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 12),
-              ...bests.take(5).map(
-                    (best) => _BestRow(best: best, language: language),
-                  ),
+              const SizedBox(height: AppSpacing.md),
+              ...bests
+                  .take(5)
+                  .map((best) => _BestRow(best: best, language: language)),
             ],
           ),
         );
@@ -79,16 +76,18 @@ class _BestRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pct = best.bestPercent.round();
+    final palette = context.appPalette;
+    final percentColor = _percentColor(context, pct);
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.only(bottom: AppSpacing.sm),
       child: Row(
         children: [
           Container(
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: _modeColor(best.mode).withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(10),
+              color: _modeColor(context, best.mode).withValues(alpha: 0.15),
+              borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
             ),
             child: Center(
               child: Text(
@@ -97,23 +96,24 @@ class _BestRow extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: AppSpacing.md),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   '${_modeLabel(best.mode, language)} · ${best.level}',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
+                    color: palette.ink,
                   ),
                 ),
                 Text(
                   _attemptsLabel(best.attempts, language),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 11,
-                    color: Color(0xFF78716C),
+                    color: palette.ink.withValues(alpha: 0.62),
                   ),
                 ),
               ],
@@ -122,15 +122,15 @@ class _BestRow extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
             decoration: BoxDecoration(
-              color: _percentColor(pct),
-              borderRadius: BorderRadius.circular(12),
+              color: percentColor,
+              borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
             ),
             child: Text(
               '$pct%',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w800,
-                color: Colors.white,
+                color: _onAccent(percentColor),
               ),
             ),
           ),
@@ -152,16 +152,17 @@ class _BestRow extends StatelessWidget {
     }
   }
 
-  Color _modeColor(String mode) {
+  Color _modeColor(BuildContext context, String mode) {
+    final palette = context.appPalette;
     switch (mode) {
       case 'learn':
-        return Colors.blue;
+        return palette.info;
       case 'test':
-        return Colors.purple;
+        return palette.primary;
       case 'flashcard':
-        return Colors.teal;
+        return palette.secondary;
       default:
-        return Colors.grey;
+        return palette.ink.withValues(alpha: 0.52);
     }
   }
 
@@ -210,10 +211,16 @@ class _BestRow extends StatelessWidget {
     }
   }
 
-  Color _percentColor(int pct) {
-    if (pct >= 90) return const Color(0xFF16A34A);
-    if (pct >= 70) return const Color(0xFF2563EB);
-    if (pct >= 50) return const Color(0xFFD97706);
-    return const Color(0xFFDC2626);
+  Color _percentColor(BuildContext context, int pct) {
+    final palette = context.appPalette;
+    if (pct >= 90) return palette.success;
+    if (pct >= 70) return palette.info;
+    if (pct >= 50) return palette.warning;
+    return palette.error;
+  }
+
+  Color _onAccent(Color color) {
+    final brightness = ThemeData.estimateBrightnessForColor(color);
+    return brightness == Brightness.dark ? Colors.white : Colors.black;
   }
 }

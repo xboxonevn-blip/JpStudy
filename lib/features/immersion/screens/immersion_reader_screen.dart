@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
@@ -26,8 +27,9 @@ class ImmersionReaderScreen extends ConsumerStatefulWidget {
 }
 
 class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
-  static final _punctAndDigitOnlyRe =
-      RegExp(r'^[\s\d\.,!?;:(){}\[\]「」『』（）・…\-]+$');
+  static final _punctAndDigitOnlyRe = RegExp(
+    r'^[\s\d\.,!?;:(){}\[\]「」『』（）・…\-]+$',
+  );
   static final _japaneseCharRe = RegExp(r'[\u3040-\u30FF\u3400-\u9FFF]');
 
   static const int _immersionLessonId = 9999;
@@ -210,20 +212,23 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
         : speed > 100
         ? 'Good Pace'
         : 'Steady Reader';
-    final badgeColor = speed > 200
-        ? Colors.green
-        : speed > 100
-        ? Colors.blue
-        : Colors.orange;
 
     if (!mounted) return true;
 
     final language = ref.read(appLanguageProvider);
+    final palette = context.appPalette;
+    final badgeColor = speed > 200
+        ? palette.success
+        : speed > 100
+        ? palette.info
+        : palette.warning;
 
     await showDialog<void>(
       context: context,
       builder: (_) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
+        ),
         title: Text(language.readingSummaryTitle),
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -236,7 +241,7 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
                 color: badgeColor,
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppSpacing.lg),
             _SummaryStat(
               label: language.readingCharactersLabel,
               value: '$totalChars',
@@ -1103,6 +1108,7 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
     final progress = isRead ? 1.0 : _readingProgress.clamp(0.0, 1.0);
     final progressPercent = (progress * 100).round();
     final charsPerMinute = _charsPerMinute(isRead: isRead);
+    final palette = context.appPalette;
 
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -1121,7 +1127,7 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
               _quickAddMode
                   ? Icons.playlist_add_check_circle_rounded
                   : Icons.playlist_add_check_rounded,
-              color: _quickAddMode ? const Color(0xFF059669) : null,
+              color: _quickAddMode ? palette.success : null,
             ),
           ),
           IconButton(
@@ -1129,7 +1135,7 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
             onPressed: _toggleReadStatus,
             icon: Icon(
               isRead ? Icons.check_circle_rounded : Icons.check_circle_outline,
-              color: isRead ? const Color(0xFF059669) : null,
+              color: isRead ? palette.success : null,
             ),
           ),
           IconButton(
@@ -1315,7 +1321,7 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
                       color: palette.base,
-                      borderRadius: BorderRadius.circular(18),
+                      borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
                       border: Border.all(color: palette.outlineSoft),
                     ),
                     child: Column(
@@ -1364,17 +1370,19 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
       context: context,
       showDragHandle: true,
       builder: (context) {
+        final palette = context.appPalette;
         return Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(AppSpacing.lg),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 token.surface,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w800,
+                  color: palette.ink,
                 ),
               ),
               if (shouldShowReading(
@@ -1384,12 +1392,19 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
                 const SizedBox(height: 4),
                 Text(
                   token.reading!,
-                  style: const TextStyle(color: Color(0xFF64748B)),
+                  style: TextStyle(color: palette.ink.withValues(alpha: 0.62)),
                 ),
               ],
               const SizedBox(height: 10),
-              Text(meaning, style: const TextStyle(fontSize: 14, height: 1.4)),
-              const SizedBox(height: 16),
+              Text(
+                meaning,
+                style: TextStyle(
+                  fontSize: 14,
+                  height: 1.4,
+                  color: palette.ink.withValues(alpha: 0.78),
+                ),
+              ),
+              const SizedBox(height: AppSpacing.lg),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
@@ -1534,7 +1549,7 @@ class _ArticleHeaderCard extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
         border: Border.all(color: palette.outline),
       ),
       child: Column(
@@ -1597,10 +1612,10 @@ class _ReadingSpeedCard extends StatelessWidget {
     final palette = context.appPalette;
 
     return Container(
-      padding: const EdgeInsets.all(14),
+      padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
         color: palette.elevated,
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
         border: Border.all(color: palette.outlineSoft),
       ),
       child: Column(
@@ -1649,10 +1664,10 @@ class _ParagraphCard extends StatelessWidget {
     final palette = context.appPalette;
 
     return Container(
-      padding: const EdgeInsets.all(14),
+      padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
         color: palette.elevated,
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
         border: Border.all(color: palette.outlineSoft),
       ),
       child: Wrap(spacing: 4, runSpacing: 6, children: children),
@@ -1694,7 +1709,7 @@ class _TokenChip extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 5),
       decoration: BoxDecoration(
         color: bg,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
         border: Border.all(color: border),
       ),
       child: Column(
@@ -1748,7 +1763,7 @@ class _TokenChip extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         onLongPress: onLongPress,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
         child: child,
       ),
     );
@@ -1770,7 +1785,7 @@ class _TinyTag extends StatelessWidget {
         color: emphasize
             ? palette.success.withValues(alpha: 0.12)
             : palette.base,
-        borderRadius: BorderRadius.circular(999),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
         border: Border.all(
           color: emphasize
               ? palette.success.withValues(alpha: 0.22)
@@ -1814,30 +1829,27 @@ class _UnknownQueueCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.95),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFFACC15)),
+        color: palette.elevated,
+        borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+        border: Border.all(color: palette.warning.withValues(alpha: 0.36)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              const Icon(
-                Icons.inventory_2_rounded,
-                size: 18,
-                color: Color(0xFFB45309),
-              ),
+              Icon(Icons.inventory_2_rounded, size: 18, color: palette.warning),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
                   title,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.w800,
-                    color: Color(0xFF7C2D12),
+                    color: palette.ink,
                   ),
                 ),
               ),
@@ -1851,7 +1863,10 @@ class _UnknownQueueCard extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             subtitle,
-            style: const TextStyle(fontSize: 12.5, color: Color(0xFF57534E)),
+            style: TextStyle(
+              fontSize: 12.5,
+              color: palette.ink.withValues(alpha: 0.68),
+            ),
           ),
           const SizedBox(height: 10),
           Wrap(
@@ -1929,44 +1944,44 @@ class _ImmersionQuizCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Container(
-      padding: const EdgeInsets.all(14),
+      padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.95),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFC7D2FE)),
+        color: palette.elevated,
+        borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+        border: Border.all(color: palette.info.withValues(alpha: 0.28)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             title,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w900,
-              color: Color(0xFF1E1B4B),
+              color: palette.ink,
             ),
           ),
           const SizedBox(height: 4),
           Text(
             subtitle,
-            style: const TextStyle(fontSize: 12.5, color: Color(0xFF475569)),
+            style: TextStyle(
+              fontSize: 12.5,
+              color: palette.ink.withValues(alpha: 0.68),
+            ),
           ),
           const SizedBox(height: 10),
           Row(
             children: [
-              const Icon(
-                Icons.history_rounded,
-                size: 16,
-                color: Color(0xFF6366F1),
-              ),
+              Icon(Icons.history_rounded, size: 16, color: palette.info),
               const SizedBox(width: 6),
               Text(
                 historyTitle,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12.5,
                   fontWeight: FontWeight.w800,
-                  color: Color(0xFF312E81),
+                  color: palette.info,
                 ),
               ),
             ],
@@ -1996,10 +2011,10 @@ class _ImmersionQuizCard extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             progressTitle,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 12.5,
               fontWeight: FontWeight.w800,
-              color: Color(0xFF1E293B),
+              color: palette.ink,
             ),
           ),
           const SizedBox(height: 6),
@@ -2011,10 +2026,10 @@ class _ImmersionQuizCard extends StatelessWidget {
             const SizedBox(height: 6),
             Text(
               progressSummaryLabel,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w700,
-                color: Color(0xFF475569),
+                color: palette.ink.withValues(alpha: 0.68),
               ),
             ),
           ],
@@ -2022,7 +2037,10 @@ class _ImmersionQuizCard extends StatelessWidget {
           if (historyItems.isEmpty)
             Text(
               historyEmptyLabel,
-              style: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
+              style: TextStyle(
+                fontSize: 12,
+                color: palette.ink.withValues(alpha: 0.62),
+              ),
             )
           else
             Wrap(
@@ -2037,15 +2055,17 @@ class _ImmersionQuizCard extends StatelessWidget {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFE0E7FF),
-                        borderRadius: BorderRadius.circular(999),
+                        color: palette.info.withValues(alpha: 0.12),
+                        borderRadius: BorderRadius.circular(
+                          AppSpacing.radiusPill,
+                        ),
                       ),
                       child: Text(
                         item,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w700,
-                          color: Color(0xFF3730A3),
+                          color: palette.info,
                         ),
                       ),
                     ),
@@ -2064,9 +2084,9 @@ class _ImmersionQuizCard extends StatelessWidget {
                 children: [
                   Text(
                     '${questionIndex + 1}. ${question.prompt}',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.w800,
-                      color: Color(0xFF0F172A),
+                      color: palette.ink,
                       height: 1.35,
                     ),
                   ),
@@ -2077,22 +2097,22 @@ class _ImmersionQuizCard extends StatelessWidget {
                     final showResult = submitted && selected;
                     final bgColor = submitted
                         ? (isCorrect
-                              ? const Color(0xFFDCFCE7)
+                              ? palette.success.withValues(alpha: 0.14)
                               : (showResult
-                                    ? const Color(0xFFFEE2E2)
-                                    : const Color(0xFFF8FAFC)))
+                                    ? palette.error.withValues(alpha: 0.14)
+                                    : palette.base))
                         : (selected
-                              ? const Color(0xFFE0E7FF)
-                              : const Color(0xFFF8FAFC));
+                              ? palette.info.withValues(alpha: 0.14)
+                              : palette.base);
                     final borderColor = submitted
                         ? (isCorrect
-                              ? const Color(0xFF86EFAC)
+                              ? palette.success.withValues(alpha: 0.34)
                               : (showResult
-                                    ? const Color(0xFFFCA5A5)
-                                    : const Color(0xFFE2E8F0)))
+                                    ? palette.error.withValues(alpha: 0.34)
+                                    : palette.outlineSoft))
                         : (selected
-                              ? const Color(0xFFA5B4FC)
-                              : const Color(0xFFE2E8F0));
+                              ? palette.info.withValues(alpha: 0.32)
+                              : palette.outlineSoft);
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 6),
                       child: Material(
@@ -2101,7 +2121,9 @@ class _ImmersionQuizCard extends StatelessWidget {
                           onTap: submitted
                               ? null
                               : () => onSelect(questionIndex, optionIndex),
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(
+                            AppSpacing.radiusMd,
+                          ),
                           child: Container(
                             width: double.infinity,
                             padding: const EdgeInsets.symmetric(
@@ -2110,14 +2132,16 @@ class _ImmersionQuizCard extends StatelessWidget {
                             ),
                             decoration: BoxDecoration(
                               color: bgColor,
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(
+                                AppSpacing.radiusMd,
+                              ),
                               border: Border.all(color: borderColor),
                             ),
                             child: Text(
                               question.options[optionIndex],
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontWeight: FontWeight.w600,
-                                color: Color(0xFF1E293B),
+                                color: palette.ink,
                               ),
                             ),
                           ),
@@ -2133,10 +2157,7 @@ class _ImmersionQuizCard extends StatelessWidget {
           if (submitted) ...[
             Text(
               scoreLabel,
-              style: const TextStyle(
-                fontWeight: FontWeight.w900,
-                color: Color(0xFF0F172A),
-              ),
+              style: TextStyle(fontWeight: FontWeight.w900, color: palette.ink),
             ),
             const SizedBox(height: 8),
             OutlinedButton.icon(
@@ -2164,18 +2185,25 @@ class _QuizProgressChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     if (points.isEmpty) {
       return Container(
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.md,
+          vertical: AppSpacing.md,
+        ),
         decoration: BoxDecoration(
-          color: const Color(0xFFF8FAFC),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: const Color(0xFFE2E8F0)),
+          color: palette.base,
+          borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+          border: Border.all(color: palette.outlineSoft),
         ),
         child: Text(
           emptyLabel,
-          style: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
+          style: TextStyle(
+            fontSize: 12,
+            color: palette.ink.withValues(alpha: 0.62),
+          ),
         ),
       );
     }
@@ -2184,9 +2212,9 @@ class _QuizProgressChart extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.fromLTRB(8, 10, 8, 8),
       decoration: BoxDecoration(
-        color: const Color(0xFFF8FAFC),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFE2E8F0)),
+        color: palette.base,
+        borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+        border: Border.all(color: palette.outlineSoft),
       ),
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -2202,8 +2230,8 @@ class _QuizProgressChart extends StatelessWidget {
                     final percent = (ratio * 100).round();
                     final barHeight = max(6.0, ratio * 48);
                     final color = Color.lerp(
-                      const Color(0xFFF59E0B),
-                      const Color(0xFF22C55E),
+                      palette.warning,
+                      palette.success,
                       ratio,
                     )!;
                     return Expanded(
@@ -2215,7 +2243,9 @@ class _QuizProgressChart extends StatelessWidget {
                             height: barHeight,
                             decoration: BoxDecoration(
                               color: color,
-                              borderRadius: BorderRadius.circular(999),
+                              borderRadius: BorderRadius.circular(
+                                AppSpacing.radiusPill,
+                              ),
                             ),
                           ),
                         ),
@@ -2235,10 +2265,10 @@ class _QuizProgressChart extends StatelessWidget {
                         textAlign: TextAlign.center,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.w700,
-                          color: Color(0xFF64748B),
+                          color: palette.ink.withValues(alpha: 0.62),
                         ),
                       ),
                     );

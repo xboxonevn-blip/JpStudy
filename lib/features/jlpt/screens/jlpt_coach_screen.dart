@@ -303,14 +303,7 @@ class _PrepPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: padding,
-      decoration: HomeSurface.softPanel(
-        radius: AppSpacing.radiusXxl,
-        colors: const [Color(0xFFFFFEFC), Color(0xFFF8FBFF)],
-      ),
-      child: child,
-    );
+    return AppSectionCard(padding: padding, child: child);
   }
 }
 
@@ -571,7 +564,7 @@ class _SectionAccent extends StatelessWidget {
       height: 3,
       decoration: BoxDecoration(
         color: accent.withValues(alpha: 0.72),
-        borderRadius: BorderRadius.circular(999),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
       ),
     );
   }
@@ -699,14 +692,14 @@ class _PrepModeCard extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: data.onTap,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusXxl),
         child: Ink(
           padding: const EdgeInsets.all(AppSpacing.lg),
           decoration:
               HomeSurface.softPanel(
-                radius: 24,
+                radius: AppSpacing.radiusXxl,
                 colors: [
-                  Colors.white,
+                  palette.elevated,
                   Color.lerp(
                         palette.base,
                         data.accent.withValues(alpha: 0.04),
@@ -733,7 +726,7 @@ class _PrepModeCard extends StatelessWidget {
                   height: 3,
                   decoration: BoxDecoration(
                     color: data.accent.withValues(alpha: 0.72),
-                    borderRadius: BorderRadius.circular(999),
+                    borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
                   ),
                 ),
                 const SizedBox(height: AppSpacing.md),
@@ -868,8 +861,8 @@ class _ReadinessPanel extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(AppSpacing.lg),
               decoration: HomeSurface.softPanel(
-                radius: 22,
-                colors: const [Color(0xFFFFFDFA), Color(0xFFF9FBFF)],
+                radius: AppSpacing.radiusXxl,
+                colors: [palette.elevated, palette.base],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -893,8 +886,8 @@ class _ReadinessPanel extends StatelessWidget {
                   ),
                   const SizedBox(height: AppSpacing.md),
                   Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
+                    spacing: AppSpacing.sm,
+                    runSpacing: AppSpacing.sm,
                     children: [
                       AppStatusChip(
                         label: _baselineChip(language),
@@ -916,8 +909,8 @@ class _ReadinessPanel extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.md),
             Wrap(
-              spacing: 8,
-              runSpacing: 8,
+              spacing: AppSpacing.sm,
+              runSpacing: AppSpacing.sm,
               children: [
                 AppStatusChip(
                   label: _snapshotSourceLabel(
@@ -1001,7 +994,7 @@ class _ReadinessBar extends StatelessWidget {
           height: 10,
           decoration: BoxDecoration(
             color: palette.outlineSoft,
-            borderRadius: BorderRadius.circular(999),
+            borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
           ),
           child: Align(
             alignment: Alignment.centerLeft,
@@ -1010,7 +1003,7 @@ class _ReadinessBar extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   color: accent,
-                  borderRadius: BorderRadius.circular(999),
+                  borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
                 ),
               ),
             ),
@@ -1083,7 +1076,13 @@ class _SupportPanel extends StatelessWidget {
                   AppCompactRow(
                     icon: Icons.hub_rounded,
                     title: _studyLaneTitle(language),
-                    subtitle: _studyLaneSubtitle(language, vocabDue, grammarDue, kanjiDue, dueCount),
+                    subtitle: _studyLaneSubtitle(
+                      language,
+                      vocabDue,
+                      grammarDue,
+                      kanjiDue,
+                      dueCount,
+                    ),
                     status: AppStatusChip(
                       label: dueCount > 0
                           ? '$dueCount'
@@ -1141,8 +1140,8 @@ class _PlanPanel extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(AppSpacing.lg),
               decoration: HomeSurface.softPanel(
-                radius: 22,
-                colors: const [Color(0xFFFFFDFA), Color(0xFFF9FBFF)],
+                radius: AppSpacing.radiusXxl,
+                colors: [palette.elevated, palette.base],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1218,7 +1217,7 @@ class _PlanCard extends StatelessWidget {
       decoration: HomeSurface.softPanel(
         radius: 24,
         colors: [
-          Colors.white,
+          palette.elevated,
           Color.lerp(palette.base, accent.withValues(alpha: 0.04), 0.5) ??
               palette.base,
         ],
@@ -1231,7 +1230,7 @@ class _PlanCard extends StatelessWidget {
             height: 3,
             decoration: BoxDecoration(
               color: accent.withValues(alpha: 0.72),
-              borderRadius: BorderRadius.circular(999),
+              borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
             ),
           ),
           const SizedBox(height: AppSpacing.md),
@@ -1244,7 +1243,7 @@ class _PlanCard extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   color: accent.withValues(alpha: 0.12),
-                  borderRadius: BorderRadius.circular(999),
+                  borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
                 ),
                 child: Text(
                   _planDayLabel(language, item.dayOffset),
@@ -1259,7 +1258,7 @@ class _PlanCard extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   color: palette.elevated,
-                  borderRadius: BorderRadius.circular(999),
+                  borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
                   border: Border.all(color: accent.withValues(alpha: 0.18)),
                 ),
                 child: Text(
@@ -1801,4 +1800,3 @@ bool _isReadyForExam(JlptCoachSnapshot snapshot) {
   }
   return true;
 }
-

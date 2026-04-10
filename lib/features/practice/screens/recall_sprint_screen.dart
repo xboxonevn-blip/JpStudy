@@ -51,25 +51,26 @@ Future<List<SprintQuestion>> buildRecallSprintQuestions(
 
   final batch = prioritized.take(batchSize).toList(growable: false);
 
-  return batch.map((q) {
-    final distractors = due
-        .where((t) => t.id != q.id)
-        .toList(growable: false)
-      ..shuffle(rng);
-    final choices = [q, ...distractors.take(3)]..shuffle(rng);
-    return SprintQuestion(
-      term: q.term,
-      correct: q.definition,
-      options: choices.map((t) => t.definition).toList(growable: false),
-    );
-  }).toList(growable: false);
+  return batch
+      .map((q) {
+        final distractors =
+            due.where((t) => t.id != q.id).toList(growable: false)
+              ..shuffle(rng);
+        final choices = [q, ...distractors.take(3)]..shuffle(rng);
+        return SprintQuestion(
+          term: q.term,
+          correct: q.definition,
+          options: choices.map((t) => t.definition).toList(growable: false),
+        );
+      })
+      .toList(growable: false);
 }
 
 final recallSprintQuestionsProvider =
     FutureProvider.autoDispose<List<SprintQuestion>>((ref) async {
-  final repo = ref.read(lessonRepositoryProvider);
-  return buildRecallSprintQuestions(repo);
-});
+      final repo = ref.read(lessonRepositoryProvider);
+      return buildRecallSprintQuestions(repo);
+    });
 
 final recallSprintQuestionsForArgsProvider = FutureProvider.autoDispose
     .family<List<SprintQuestion>, RecallSprintArgs>((ref, args) async {
@@ -99,8 +100,7 @@ class _RecallSprintScreenState extends ConsumerState<RecallSprintScreen> {
   bool _retrying = false;
   int _retryIndex = 0;
 
-  int get _effectiveIndex =>
-      _retrying ? _missed[_retryIndex] : _questionIndex;
+  int get _effectiveIndex => _retrying ? _missed[_retryIndex] : _questionIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +117,9 @@ class _RecallSprintScreenState extends ConsumerState<RecallSprintScreen> {
             return AppPageShell(
               child: AppFeatureCard(
                 icon: Icons.bolt_rounded,
-                title: widget.launchArgs?.titleOverride ?? language.practiceRecallSprintLabel,
+                title:
+                    widget.launchArgs?.titleOverride ??
+                    language.practiceRecallSprintLabel,
                 subtitle: _notEnoughTermsLabel(language),
               ),
             );
@@ -142,8 +144,7 @@ class _RecallSprintScreenState extends ConsumerState<RecallSprintScreen> {
               _retrying = false;
               _retryIndex = 0;
             }),
-            onSelect: (answer) =>
-                setState(() => _selectedAnswer = answer),
+            onSelect: (answer) => setState(() => _selectedAnswer = answer),
             onNext: () => _onNext(questions),
             onRestart: () => setState(() {
               _completed = false;
@@ -288,10 +289,7 @@ class _SprintBody extends StatelessWidget {
           ),
         ),
         const SizedBox(height: AppSpacing.md),
-        FilledButton(
-          onPressed: onStart,
-          child: Text(_startLabel(language)),
-        ),
+        FilledButton(onPressed: onStart, child: Text(_startLabel(language))),
       ],
     );
   }
@@ -327,7 +325,10 @@ class _SprintBody extends StatelessWidget {
           ),
         ),
         const SizedBox(height: AppSpacing.lg),
-        FilledButton(onPressed: onRestart, child: Text(_restartLabel(language))),
+        FilledButton(
+          onPressed: onRestart,
+          child: Text(_restartLabel(language)),
+        ),
       ],
     );
   }
@@ -362,11 +363,9 @@ class _SprintBody extends StatelessWidget {
         const SizedBox(height: AppSpacing.md),
         ...q.options.map(
           (option) => Padding(
-            padding: const EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.only(bottom: AppSpacing.sm),
             child: OutlinedButton(
-              onPressed: selectedAnswer == null
-                  ? () => onSelect(option)
-                  : null,
+              onPressed: selectedAnswer == null ? () => onSelect(option) : null,
               style: OutlinedButton.styleFrom(
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.symmetric(
@@ -376,17 +375,17 @@ class _SprintBody extends StatelessWidget {
                 side: BorderSide(
                   color: selectedAnswer == option
                       ? (option == q.correct
-                          ? Colors.green
-                          : palette.primary)
+                            ? palette.success
+                            : palette.primary)
                       : palette.outline,
                 ),
                 backgroundColor: selectedAnswer == option
                     ? (option == q.correct
-                        ? Colors.green.withValues(alpha: 0.08)
-                        : palette.primary.withValues(alpha: 0.06))
+                          ? palette.success.withValues(alpha: 0.08)
+                          : palette.primary.withValues(alpha: 0.06))
                     : null,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
                 ),
               ),
               child: Text(option),
@@ -403,7 +402,7 @@ class _SprintBody extends StatelessWidget {
               color: palette.success,
             ),
           ),
-          const SizedBox(height: 4),
+          const SizedBox(height: AppSpacing.xs),
           Text(
             _correctBody(language),
             style: TextStyle(
@@ -423,7 +422,7 @@ class _SprintBody extends StatelessWidget {
               color: palette.warning,
             ),
           ),
-          const SizedBox(height: 4),
+          const SizedBox(height: AppSpacing.xs),
           Text(
             _wrongBody(language, q.term, q.correct),
             style: TextStyle(
@@ -472,8 +471,7 @@ class _SprintBody extends StatelessWidget {
       'You cleared the current recall set. Run it again to build speed.',
     AppLanguage.vi =>
       'Bạn đã hoàn thành lượt recall hiện tại. Chạy lại để tăng tốc độ.',
-    AppLanguage.ja =>
-      '現在のリコールセットを完了しました。もう一度行ってスピードを上げましょう。',
+    AppLanguage.ja => '現在のリコールセットを完了しました。もう一度行ってスピードを上げましょう。',
   };
 
   String _restartLabel(AppLanguage l) => switch (l) {

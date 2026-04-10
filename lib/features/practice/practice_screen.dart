@@ -15,6 +15,12 @@ import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/home/widgets/home_surface.dart';
 import 'package:jpstudy/features/practice/providers/practice_session_board_provider.dart';
 
+Color _practiceAccent(BuildContext context, Color color) {
+  final palette = context.appPalette;
+  final mix = Theme.of(context).brightness == Brightness.dark ? 0.38 : 0.14;
+  return Color.lerp(color, palette.primary, mix) ?? color;
+}
+
 class PracticeScreen extends ConsumerWidget {
   const PracticeScreen({super.key});
 
@@ -25,7 +31,12 @@ class PracticeScreen extends ConsumerWidget {
     final (vocabDue, grammarDue, kanjiDue, mistakeCount) = ref.watch(
       dashboardProvider.select((v) {
         final d = v.valueOrNull;
-        return (d?.vocabDue ?? 0, d?.grammarDue ?? 0, d?.kanjiDue ?? 0, d?.totalMistakeCount ?? 0);
+        return (
+          d?.vocabDue ?? 0,
+          d?.grammarDue ?? 0,
+          d?.kanjiDue ?? 0,
+          d?.totalMistakeCount ?? 0,
+        );
       }),
     );
     final dueCount = vocabDue + grammarDue + kanjiDue;
@@ -379,7 +390,7 @@ class _StudyHero extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(26),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusXxl),
         boxShadow: [
           BoxShadow(
             color: palette.primary.withValues(alpha: 0.22),
@@ -389,7 +400,7 @@ class _StudyHero extends StatelessWidget {
         ],
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(26),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusXxl),
         child: Stack(
           children: [
             Positioned(
@@ -431,7 +442,9 @@ class _StudyHero extends StatelessWidget {
                             height: 40,
                             decoration: BoxDecoration(
                               color: Colors.white.withValues(alpha: 0.16),
-                              borderRadius: BorderRadius.circular(14),
+                              borderRadius: BorderRadius.circular(
+                                AppSpacing.radiusMd,
+                              ),
                               border: Border.all(
                                 color: Colors.white.withValues(alpha: 0.16),
                               ),
@@ -491,7 +504,9 @@ class _StudyHero extends StatelessWidget {
                         ),
                         decoration: BoxDecoration(
                           color: Colors.white.withValues(alpha: 0.12),
-                          borderRadius: BorderRadius.circular(14),
+                          borderRadius: BorderRadius.circular(
+                            AppSpacing.radiusMd,
+                          ),
                           border: Border.all(
                             color: Colors.white.withValues(alpha: 0.16),
                           ),
@@ -503,7 +518,9 @@ class _StudyHero extends StatelessWidget {
                               height: 28,
                               decoration: BoxDecoration(
                                 color: Colors.white.withValues(alpha: 0.14),
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(
+                                  AppSpacing.radiusMd,
+                                ),
                               ),
                               child: Icon(
                                 primaryAction.icon,
@@ -716,10 +733,10 @@ class _HeroFocusPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(14),
+      padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
         color: Colors.white.withValues(alpha: 0.12),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
         border: Border.all(color: Colors.white.withValues(alpha: 0.14)),
       ),
       child: Column(
@@ -852,20 +869,20 @@ class _MixRow extends StatelessWidget {
     final palette = context.appPalette;
     final dividerColor = light
         ? Colors.white.withValues(alpha: 0.14)
-        : HomeSurface.panelBorder;
+        : palette.outlineSoft;
     final lineColor = light
         ? const Color(0xFFFFE4BF)
         : palette.primary.withValues(alpha: 0.6);
     final labelColor = light
         ? const Color(0xFFE2E8F0)
-        : const Color(0xFF475569);
+        : palette.ink.withValues(alpha: 0.68);
     final pillColor = light
         ? Colors.white.withValues(alpha: 0.12)
-        : Colors.white.withValues(alpha: 0.92);
+        : palette.elevated;
     final pillBorder = light
         ? Colors.white.withValues(alpha: 0.14)
-        : HomeSurface.panelBorder;
-    final pillTextColor = light ? Colors.white : const Color(0xFF0F172A);
+        : palette.outlineSoft;
+    final pillTextColor = light ? Colors.white : palette.ink;
 
     return Row(
       children: [
@@ -1008,16 +1025,18 @@ class _SessionPrimaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    final accent = _practiceAccent(context, action.color);
     return Container(
-      padding: const EdgeInsets.all(18),
+      padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [action.color.withValues(alpha: 0.16), Colors.white],
+          colors: [accent.withValues(alpha: 0.16), palette.elevated],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: action.color.withValues(alpha: 0.24)),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
+        border: Border.all(color: accent.withValues(alpha: 0.24)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1028,10 +1047,10 @@ class _SessionPrimaryCard extends StatelessWidget {
                 width: 42,
                 height: 42,
                 decoration: BoxDecoration(
-                  color: action.color.withValues(alpha: 0.14),
-                  borderRadius: BorderRadius.circular(14),
+                  color: accent.withValues(alpha: 0.14),
+                  borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
                 ),
-                child: Icon(action.icon, color: action.color, size: 20),
+                child: Icon(action.icon, color: accent, size: 20),
               ),
               const SizedBox(width: 10),
               Expanded(
@@ -1041,7 +1060,7 @@ class _SessionPrimaryCard extends StatelessWidget {
                     Text(
                       _nowLabel(language),
                       style: TextStyle(
-                        color: action.color,
+                        color: accent,
                         fontSize: 10,
                         fontWeight: FontWeight.w900,
                         letterSpacing: 0.7,
@@ -1050,8 +1069,8 @@ class _SessionPrimaryCard extends StatelessWidget {
                     const SizedBox(height: 2),
                     Text(
                       action.title,
-                      style: const TextStyle(
-                        color: Color(0xFF0F172A),
+                      style: TextStyle(
+                        color: palette.ink,
                         fontSize: 17,
                         fontWeight: FontWeight.w900,
                         height: 1.12,
@@ -1070,8 +1089,8 @@ class _SessionPrimaryCard extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             action.subtitle,
-            style: const TextStyle(
-              color: Color(0xFF334155),
+            style: TextStyle(
+              color: palette.ink.withValues(alpha: 0.72),
               fontSize: 12.7,
               height: 1.5,
               fontWeight: FontWeight.w700,
@@ -1127,12 +1146,14 @@ class _SessionStepTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    final accent = _practiceAccent(context, action.color);
     return Container(
-      padding: const EdgeInsets.all(14),
+      padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: HomeSurface.panelBorder),
+        color: palette.elevated,
+        borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
+        border: Border.all(color: palette.outlineSoft),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1141,14 +1162,14 @@ class _SessionStepTile extends StatelessWidget {
             width: 36,
             height: 36,
             decoration: BoxDecoration(
-              color: action.color.withValues(alpha: 0.12),
-              borderRadius: BorderRadius.circular(12),
+              color: accent.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
             ),
             child: Center(
               child: Text(
                 '${stageIndex + 1}',
                 style: TextStyle(
-                  color: action.color,
+                  color: accent,
                   fontWeight: FontWeight.w900,
                   fontSize: 14,
                 ),
@@ -1163,7 +1184,7 @@ class _SessionStepTile extends StatelessWidget {
                 Text(
                   _stageLabel(language, stageIndex),
                   style: TextStyle(
-                    color: action.color,
+                    color: accent,
                     fontSize: 10,
                     fontWeight: FontWeight.w900,
                     letterSpacing: 0.6,
@@ -1172,8 +1193,8 @@ class _SessionStepTile extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   action.title,
-                  style: const TextStyle(
-                    color: Color(0xFF0F172A),
+                  style: TextStyle(
+                    color: palette.ink,
                     fontSize: 14,
                     fontWeight: FontWeight.w900,
                   ),
@@ -1183,8 +1204,8 @@ class _SessionStepTile extends StatelessWidget {
                   action.subtitle,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    color: Color(0xFF475569),
+                  style: TextStyle(
+                    color: palette.ink.withValues(alpha: 0.68),
                     fontSize: 11.7,
                     height: 1.42,
                     fontWeight: FontWeight.w600,
@@ -1194,7 +1215,7 @@ class _SessionStepTile extends StatelessWidget {
                 TextButton.icon(
                   onPressed: onTap,
                   style: TextButton.styleFrom(
-                    foregroundColor: action.color,
+                    foregroundColor: accent,
                     padding: EdgeInsets.zero,
                     minimumSize: const Size(0, 0),
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -1234,12 +1255,14 @@ class _SessionSignalTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    final accent = _practiceAccent(context, signal.color);
     return Container(
-      padding: const EdgeInsets.all(14),
+      padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: HomeSurface.panelBorder),
+        color: palette.elevated,
+        borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
+        border: Border.all(color: palette.outlineSoft),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1248,10 +1271,10 @@ class _SessionSignalTile extends StatelessWidget {
             width: 36,
             height: 36,
             decoration: BoxDecoration(
-              color: signal.color.withValues(alpha: 0.12),
-              borderRadius: BorderRadius.circular(12),
+              color: accent.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
             ),
-            child: Icon(signal.icon, color: signal.color, size: 18),
+            child: Icon(signal.icon, color: accent, size: 18),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -1260,8 +1283,8 @@ class _SessionSignalTile extends StatelessWidget {
               children: [
                 Text(
                   '${signal.label} · ${signal.value}',
-                  style: const TextStyle(
-                    color: Color(0xFF0F172A),
+                  style: TextStyle(
+                    color: palette.ink,
                     fontSize: 13,
                     fontWeight: FontWeight.w900,
                   ),
@@ -1269,8 +1292,8 @@ class _SessionSignalTile extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   signal.detail,
-                  style: const TextStyle(
-                    color: Color(0xFF475569),
+                  style: TextStyle(
+                    color: palette.ink.withValues(alpha: 0.68),
                     fontSize: 11.6,
                     height: 1.4,
                     fontWeight: FontWeight.w600,
@@ -1300,22 +1323,24 @@ class _PracticeSpotlightCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    final accent = _practiceAccent(context, item.color);
     return Material(
       color: Colors.transparent,
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
         child: Ink(
-          padding: const EdgeInsets.all(14),
+          padding: const EdgeInsets.all(AppSpacing.lg),
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [item.color.withValues(alpha: 0.16), Colors.white],
+              colors: [accent.withValues(alpha: 0.16), palette.elevated],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: item.color.withValues(alpha: 0.24)),
+            borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
+            border: Border.all(color: accent.withValues(alpha: 0.24)),
             boxShadow: HomeSurface.panelShadow,
           ),
           child: Column(
@@ -1327,10 +1352,10 @@ class _PracticeSpotlightCard extends StatelessWidget {
                     width: 36,
                     height: 36,
                     decoration: BoxDecoration(
-                      color: item.color.withValues(alpha: 0.14),
-                      borderRadius: BorderRadius.circular(12),
+                      color: accent.withValues(alpha: 0.14),
+                      borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
                     ),
-                    child: Icon(item.icon, color: item.color, size: 19),
+                    child: Icon(item.icon, color: accent, size: 19),
                   ),
                   const Spacer(),
                   if (status != null) status!,
@@ -1339,10 +1364,10 @@ class _PracticeSpotlightCard extends StatelessWidget {
               const SizedBox(height: 10),
               Text(
                 item.title,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w900,
-                  color: Color(0xFF0F172A),
+                  color: palette.ink,
                 ),
               ),
               const SizedBox(height: 4),
@@ -1350,8 +1375,8 @@ class _PracticeSpotlightCard extends StatelessWidget {
                 item.subtitle,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: Color(0xFF475569),
+                style: TextStyle(
+                  color: palette.ink.withValues(alpha: 0.68),
                   fontSize: 11.5,
                   height: 1.35,
                   fontWeight: FontWeight.w600,
@@ -1364,17 +1389,13 @@ class _PracticeSpotlightCard extends StatelessWidget {
                     child: Text(
                       openLabel,
                       style: TextStyle(
-                        color: item.color,
+                        color: accent,
                         fontSize: 12.5,
                         fontWeight: FontWeight.w900,
                       ),
                     ),
                   ),
-                  Icon(
-                    Icons.arrow_outward_rounded,
-                    color: item.color,
-                    size: 16,
-                  ),
+                  Icon(Icons.arrow_outward_rounded, color: accent, size: 16),
                 ],
               ),
             ],
@@ -1428,7 +1449,7 @@ class _HeroStatChip extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
         color: Colors.white.withValues(alpha: 0.12),
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
         border: Border.all(color: Colors.white.withValues(alpha: 0.14)),
       ),
       child: Row(

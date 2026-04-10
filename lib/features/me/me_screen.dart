@@ -95,8 +95,8 @@ class _MeScreenState extends ConsumerState<MeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Wrap(
-            spacing: 8,
-            runSpacing: 8,
+            spacing: AppSpacing.sm,
+            runSpacing: AppSpacing.sm,
             children: [
               for (final candidate in StudyLevel.values)
                 ChoiceChip(
@@ -113,10 +113,10 @@ class _MeScreenState extends ConsumerState<MeScreen> {
                 ),
             ],
           ),
-          const SizedBox(height: 14),
+          const SizedBox(height: AppSpacing.md),
           Wrap(
-            spacing: 8,
-            runSpacing: 8,
+            spacing: AppSpacing.sm,
+            runSpacing: AppSpacing.sm,
             children: [
               for (final appLanguage in AppLanguage.values)
                 ChoiceChip(
@@ -132,7 +132,7 @@ class _MeScreenState extends ConsumerState<MeScreen> {
                 ),
             ],
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSpacing.md),
           _InlineActionTile(
             icon: Icons.school_outlined,
             title: language.levelMenuTitle,
@@ -202,10 +202,13 @@ class _MeScreenState extends ConsumerState<MeScreen> {
           ),
           if (!appSettingsController.supportsNotifications) ...[
             Padding(
-              padding: const EdgeInsets.only(bottom: 8),
+              padding: const EdgeInsets.only(bottom: AppSpacing.sm),
               child: Text(
                 language.reminderUnsupportedLabel,
-                style: const TextStyle(color: Color(0xFF64748B)),
+                style: TextStyle(
+                  color: context.appPalette.ink.withValues(alpha: 0.64),
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
             _InlineActionTile(
@@ -225,7 +228,7 @@ class _MeScreenState extends ConsumerState<MeScreen> {
                     },
             ),
           ],
-          const SizedBox(height: 8),
+          const SizedBox(height: AppSpacing.sm),
           TextButton.icon(
             onPressed: appSettings.isReady
                 ? () => appSettingsController.testReminder(
@@ -250,7 +253,7 @@ class _MeScreenState extends ConsumerState<MeScreen> {
             subtitle: _autoBackupSubtitle(language, dataSettings),
             onTap: () => context.openMeData(),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: AppSpacing.sm),
           cloudStatusAsync.when(
             data: (status) => _InlineActionTile(
               icon: Icons.cloud_sync_outlined,
@@ -275,7 +278,7 @@ class _MeScreenState extends ConsumerState<MeScreen> {
               onTap: () => context.openMeData(),
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSpacing.md),
           FilledButton.icon(
             onPressed: () => context.openMeData(),
             icon: const Icon(Icons.storage_rounded),
@@ -294,28 +297,28 @@ class _MeScreenState extends ConsumerState<MeScreen> {
             subtitle: _progressHint(language),
             onTap: () => context.openProgress(),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: AppSpacing.sm),
           _ActionTile(
             icon: Icons.military_tech_outlined,
             title: _masteryTitle(language),
             subtitle: _masteryHint(language),
             onTap: () => context.openMastery(),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: AppSpacing.sm),
           _ActionTile(
             icon: Icons.calendar_month_outlined,
             title: _forecastTitle(language),
             subtitle: _forecastHint(language),
             onTap: () => context.openForecast(),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: AppSpacing.sm),
           _ActionTile(
             icon: Icons.emoji_events_outlined,
             title: language.achievementsTitle,
             subtitle: _achievementsHint(language),
             onTap: () => context.openAchievements(),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: AppSpacing.sm),
           _ActionTile(
             icon: Icons.design_services_outlined,
             title: language.designLabLabel,
@@ -464,9 +467,9 @@ class _MeScreenState extends ConsumerState<MeScreen> {
       case AppLanguage.en:
         return 'View streak, XP, retention, and history.';
       case AppLanguage.vi:
-        return 'Xem streak, XP, retention v? l?ch s?.';
+        return 'Xem streak, XP, retention và lịch sử.';
       case AppLanguage.ja:
-        return '?????XP??????????????????';
+        return '連続記録、XP、定着率、履歴を確認します。';
     }
   }
 
@@ -475,9 +478,9 @@ class _MeScreenState extends ConsumerState<MeScreen> {
       case AppLanguage.en:
         return 'JLPT Mastery';
       case AppLanguage.vi:
-        return 'Ti?n ?? JLPT';
+        return 'Tiến độ JLPT';
       case AppLanguage.ja:
-        return 'JLPT ???';
+        return 'JLPT 習熟度';
     }
   }
 
@@ -486,9 +489,9 @@ class _MeScreenState extends ConsumerState<MeScreen> {
       case AppLanguage.en:
         return 'Track mastery across vocab, grammar, and kanji per level.';
       case AppLanguage.vi:
-        return 'Theo d?i ti?n tr?nh t? v?ng, ng? ph?p, h?n t? theo c?p.';
+        return 'Theo dõi tiến trình từ vựng, ngữ pháp, hán tự theo cấp.';
       case AppLanguage.ja:
-        return '????????????????????????';
+        return 'レベル別に語彙・文法・漢字の習熟度を追跡します。';
     }
   }
 
@@ -497,9 +500,9 @@ class _MeScreenState extends ConsumerState<MeScreen> {
       case AppLanguage.en:
         return 'Review Forecast';
       case AppLanguage.vi:
-        return 'D? b?o ?n t?p';
+        return 'Dự báo ôn tập';
       case AppLanguage.ja:
-        return '????';
+        return '復習予測';
     }
   }
 
@@ -508,9 +511,9 @@ class _MeScreenState extends ConsumerState<MeScreen> {
       case AppLanguage.en:
         return 'See upcoming reviews, memory strength, and SRS analytics.';
       case AppLanguage.vi:
-        return 'Xem l?ch ?n t?p, s?c m?nh tr? nh? v? ph?n t?ch SRS.';
+        return 'Xem lịch ôn tập, sức mạnh trí nhớ và phân tích SRS.';
       case AppLanguage.ja:
-        return '??????????????SRS?????????';
+        return '今後の復習、記憶強度、SRS分析を確認します。';
     }
   }
 
@@ -545,31 +548,13 @@ class _SectionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final palette = context.appPalette;
-    return Container(
-      decoration: BoxDecoration(
-        color: palette.elevated,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: palette.outline),
-        boxShadow: [
-          BoxShadow(
-            color: palette.ink.withValues(alpha: 0.06),
-            blurRadius: 18,
-            offset: const Offset(0, 8),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(16),
+    return AppSectionCard(
+      padding: const EdgeInsets.all(AppSpacing.lg),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: Theme.of(
-              context,
-            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
-          ),
-          const SizedBox(height: 12),
+          AppSectionHeader(title: title),
+          const SizedBox(height: AppSpacing.md),
           child,
         ],
       ),
@@ -592,12 +577,74 @@ class _InlineActionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      contentPadding: EdgeInsets.zero,
-      leading: Icon(icon),
-      title: Text(title),
-      subtitle: Text(subtitle),
-      onTap: onTap,
+    final palette = context.appPalette;
+    final enabled = onTap != null;
+    return Opacity(
+      opacity: enabled ? 1 : 0.62,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
+          onTap: onTap,
+          child: Ink(
+            padding: const EdgeInsets.all(AppSpacing.md),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [palette.base, palette.elevated],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
+              border: Border.all(color: palette.outlineSoft),
+            ),
+            child: Row(
+              children: [
+                Container(
+                  width: 42,
+                  height: 42,
+                  decoration: BoxDecoration(
+                    color: palette.primary.withValues(alpha: 0.10),
+                    borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+                  ),
+                  child: Icon(icon, color: palette.primary, size: 20),
+                ),
+                const SizedBox(width: AppSpacing.md),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: palette.ink,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      const SizedBox(height: AppSpacing.xs),
+                      Text(
+                        subtitle,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: palette.ink.withValues(alpha: 0.66),
+                          fontWeight: FontWeight.w600,
+                          height: 1.25,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                if (enabled) ...[
+                  const SizedBox(width: AppSpacing.sm),
+                  Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 15,
+                    color: palette.ink.withValues(alpha: 0.44),
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -617,50 +664,11 @@ class _ActionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: const Color(0xFFF8FBFF),
-      borderRadius: BorderRadius.circular(18),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(18),
-        onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.all(14),
-          child: Row(
-            children: [
-              Container(
-                width: 42,
-                height: 42,
-                decoration: BoxDecoration(
-                  color: const Color(0xFFE0F2FE),
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: Icon(icon, color: const Color(0xFF0369A1)),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: const TextStyle(fontWeight: FontWeight.w700),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      subtitle,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Color(0xFF64748B),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const Icon(Icons.arrow_forward_ios_rounded, size: 16),
-            ],
-          ),
-        ),
-      ),
+    return _InlineActionTile(
+      icon: icon,
+      title: title,
+      subtitle: subtitle,
+      onTap: onTap,
     );
   }
 }

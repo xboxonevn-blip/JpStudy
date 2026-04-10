@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
+import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
@@ -15,6 +16,13 @@ import 'models/immersion_article.dart';
 import 'providers/immersion_providers.dart';
 import 'screens/immersion_reader_screen.dart';
 import 'services/difficulty_estimator.dart';
+
+Color _immersionLevelAccent(BuildContext context, String level) {
+  final palette = context.appPalette;
+  final base = DifficultyEstimator.colorForLevel(level);
+  final mix = Theme.of(context).brightness == Brightness.dark ? 0.44 : 0.18;
+  return Color.lerp(base, palette.primary, mix) ?? base;
+}
 
 class ImmersionHomeScreen extends ConsumerStatefulWidget {
   const ImmersionHomeScreen({super.key});
@@ -451,7 +459,7 @@ class _DeckStat extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
         border: Border.all(color: color.withValues(alpha: 0.18)),
       ),
       child: Column(
@@ -488,12 +496,12 @@ class _LevelCountChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = DifficultyEstimator.colorForLevel(label);
+    final color = _immersionLevelAccent(context, label);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.12),
-        borderRadius: BorderRadius.circular(999),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
         border: Border.all(color: color.withValues(alpha: 0.24)),
       ),
       child: Text(
@@ -576,7 +584,8 @@ class _ArticleCard extends StatelessWidget {
     final dateLabel = MaterialLocalizations.of(
       context,
     ).formatMediumDate(article.publishedAt);
-    final levelColor = DifficultyEstimator.colorForLevel(article.officialLevel);
+    final palette = context.appPalette;
+    final levelColor = _immersionLevelAccent(context, article.officialLevel);
     final paragraphCount = article.paragraphs.length;
     final glossCount = article.paragraphs
         .expand((paragraph) => paragraph)
@@ -595,22 +604,19 @@ class _ArticleCard extends StatelessWidget {
 
     return Material(
       color: Colors.transparent,
-      borderRadius: BorderRadius.circular(24),
+      borderRadius: BorderRadius.circular(AppSpacing.radiusXxl),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusXxl),
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [
-                levelColor.withValues(alpha: 0.12),
-                Colors.white.withValues(alpha: 0.96),
-              ],
+              colors: [levelColor.withValues(alpha: 0.12), palette.elevated],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: BorderRadius.circular(AppSpacing.radiusXxl),
             border: Border.all(
               color: isRead
                   ? levelColor.withValues(alpha: 0.34)
@@ -620,7 +626,7 @@ class _ArticleCard extends StatelessWidget {
               BoxShadow(
                 color: levelColor.withValues(alpha: 0.08),
                 blurRadius: 12,
-                offset: Offset(0, 6),
+                offset: const Offset(0, 6),
               ),
             ],
           ),
@@ -635,7 +641,7 @@ class _ArticleCard extends StatelessWidget {
                     height: 44,
                     decoration: BoxDecoration(
                       color: levelColor.withValues(alpha: 0.14),
-                      borderRadius: BorderRadius.circular(14),
+                      borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
                     ),
                     child: Icon(
                       isRead ? Icons.check_rounded : Icons.auto_stories_rounded,
@@ -653,10 +659,10 @@ class _ArticleCard extends StatelessWidget {
                           article.title,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 15.5,
                             fontWeight: FontWeight.w800,
-                            color: Color(0xFF0F172A),
+                            color: palette.ink,
                             height: 1.35,
                           ),
                         ),
@@ -667,8 +673,8 @@ class _ArticleCard extends StatelessWidget {
                             article.titleFurigana!,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              color: Color(0xFF64748B),
+                            style: TextStyle(
+                              color: palette.ink.withValues(alpha: 0.62),
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
                             ),
@@ -686,7 +692,9 @@ class _ArticleCard extends StatelessWidget {
                       ),
                       decoration: BoxDecoration(
                         color: levelColor.withValues(alpha: 0.12),
-                        borderRadius: BorderRadius.circular(999),
+                        borderRadius: BorderRadius.circular(
+                          AppSpacing.radiusPill,
+                        ),
                       ),
                       child: Text(
                         language.doneLabel,
@@ -706,15 +714,15 @@ class _ArticleCard extends StatelessWidget {
                 children: [
                   _Tag(
                     label: _paragraphLabel(language, paragraphCount),
-                    color: const Color(0xFF0F766E),
+                    color: palette.secondary,
                   ),
                   _Tag(
                     label: _glossLabel(language, glossCount),
-                    color: const Color(0xFFB45309),
+                    color: palette.warning,
                   ),
                   _Tag(
                     label: _minuteLabel(language, estimatedMinutes),
-                    color: const Color(0xFF1D4ED8),
+                    color: palette.info,
                   ),
                 ],
               ),
@@ -726,8 +734,8 @@ class _ArticleCard extends StatelessWidget {
                       '$dateLabel • ${article.source}',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: Color(0xFF64748B),
+                      style: TextStyle(
+                        color: palette.ink.withValues(alpha: 0.62),
                         fontSize: 11.5,
                         fontWeight: FontWeight.w700,
                       ),
@@ -789,18 +797,20 @@ class _Tag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    final chipColor = color ?? palette.ink.withValues(alpha: 0.68);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: (color ?? const Color(0xFF475569)).withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(999),
+        color: chipColor.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
       ),
       child: Text(
         label,
         style: TextStyle(
           fontSize: 11,
           fontWeight: FontWeight.w700,
-          color: color ?? const Color(0xFF475569),
+          color: chipColor,
         ),
       ),
     );
@@ -820,6 +830,7 @@ class _DifficultyBadge extends StatelessWidget {
     if (article.hasEstimatedDifficulty) {
       tags.add(
         _buildBadge(
+          context,
           label: language.immersionEstimatedDifficultyLabel(
             article.estimatedDifficulty!,
           ),
@@ -830,6 +841,7 @@ class _DifficultyBadge extends StatelessWidget {
 
     tags.add(
       _buildBadge(
+        context,
         label: language.immersionOfficialLevelLabel(article.officialLevel),
         toneLevel: article.officialLevel,
       ),
@@ -838,13 +850,17 @@ class _DifficultyBadge extends StatelessWidget {
     return Wrap(spacing: 6, runSpacing: 6, children: tags);
   }
 
-  Widget _buildBadge({required String label, required String toneLevel}) {
-    final color = DifficultyEstimator.colorForLevel(toneLevel);
+  Widget _buildBadge(
+    BuildContext context, {
+    required String label,
+    required String toneLevel,
+  }) {
+    final color = _immersionLevelAccent(context, toneLevel);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.15),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
         border: Border.all(color: color.withValues(alpha: 0.4)),
       ),
       child: Text(
@@ -866,6 +882,7 @@ class _EmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -874,20 +891,20 @@ class _EmptyState extends StatelessWidget {
             width: 68,
             height: 68,
             decoration: BoxDecoration(
-              color: const Color(0xFFE2E8F0),
-              borderRadius: BorderRadius.circular(18),
+              color: palette.surface,
+              borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
             ),
-            child: const Icon(
+            child: Icon(
               Icons.inbox_rounded,
               size: 34,
-              color: Color(0xFF64748B),
+              color: palette.ink.withValues(alpha: 0.58),
             ),
           ),
           const SizedBox(height: 12),
           Text(
             language.immersionEmptyLabel,
-            style: const TextStyle(
-              color: Color(0xFF475569),
+            style: TextStyle(
+              color: palette.ink.withValues(alpha: 0.68),
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -905,19 +922,20 @@ class _ErrorState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(
+          Icon(
             Icons.error_outline_rounded,
-            color: Color(0xFF64748B),
+            color: palette.error.withValues(alpha: 0.78),
             size: 44,
           ),
           const SizedBox(height: 10),
           Text(
             language.loadErrorLabel,
-            style: const TextStyle(color: Color(0xFF475569)),
+            style: TextStyle(color: palette.ink.withValues(alpha: 0.68)),
           ),
           if (onRetry != null) ...[
             const SizedBox(height: 10),

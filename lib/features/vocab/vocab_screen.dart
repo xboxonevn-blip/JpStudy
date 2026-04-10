@@ -156,7 +156,7 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
       items: n5,
       dueCount: dueCount,
       nextReview: nextReview,
-      accent: const Color(0xFFF5BE1D),
+      accent: AppThemePalette.light.warning,
       companionTitle: 'Minna no Nihongo I',
       companionSubtitle: _courseSubtitle(
         language,
@@ -172,7 +172,7 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
       items: n4,
       dueCount: dueCount,
       nextReview: nextReview,
-      accent: const Color(0xFFB428F4),
+      accent: AppThemePalette.light.primary,
       companionTitle: 'Minna no Nihongo II',
       companionSubtitle: _courseSubtitle(
         language,
@@ -188,7 +188,7 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
       items: n3,
       dueCount: dueCount,
       nextReview: nextReview,
-      accent: const Color(0xFF06CF56),
+      accent: AppThemePalette.light.success,
       companionTitle: 'Shin Kanzen Master',
       companionSubtitle: _courseSubtitle(
         language,
@@ -211,7 +211,7 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
       items: n2,
       dueCount: dueCount,
       nextReview: nextReview,
-      accent: const Color(0xFFFF606A),
+      accent: AppThemePalette.light.error,
       companionTitle: 'Shin Kanzen Master',
       companionSubtitle: _courseSubtitle(
         language,
@@ -231,7 +231,7 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
       items: n1,
       dueCount: dueCount,
       nextReview: nextReview,
-      accent: const Color(0xFF4095F2),
+      accent: AppThemePalette.light.info,
       companionTitle: 'Shin Kanzen Master',
       companionSubtitle: _courseSubtitle(
         language,
@@ -260,12 +260,12 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
       ],
       isInteractive: true,
     ),
-    const _VocabCatalogSection(
+    _VocabCatalogSection(
       key: 'se',
       levelCode: 'SE',
       subtitle: 'Specialized Japanese for software teams',
-      accent: Color(0xFF6B7280),
-      programs: [
+      accent: AppThemePalette.light.ink,
+      programs: const [
         _VocabCatalogProgram(
           key: 'se_track',
           titleTop: 'Tech Japanese Track',

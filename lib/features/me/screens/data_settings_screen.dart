@@ -87,14 +87,17 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
           ),
           if (settings.lastAutoBackup != null)
             Padding(
-              padding: const EdgeInsets.only(top: 8),
+              padding: const EdgeInsets.only(top: AppSpacing.sm),
               child: Text(
                 language.autoBackupLastLabel(
                   MaterialLocalizations.of(
                     context,
                   ).formatMediumDate(settings.lastAutoBackup!),
                 ),
-                style: const TextStyle(color: Color(0xFF64748B)),
+                style: TextStyle(
+                  color: context.appPalette.ink.withValues(alpha: 0.64),
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
         ],
@@ -185,8 +188,8 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
               ),
               const SizedBox(height: AppSpacing.md),
               Wrap(
-                spacing: 8,
-                runSpacing: 8,
+                spacing: AppSpacing.sm,
+                runSpacing: AppSpacing.sm,
                 children: [
                   OutlinedButton.icon(
                     onPressed: settings.isReady
@@ -256,7 +259,7 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
                 ? () => controller.exportBackup(context, language)
                 : null,
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: AppSpacing.sm),
           _ActionTile(
             icon: Icons.restore_outlined,
             title: language.backupImportLabel,
@@ -978,31 +981,13 @@ class _SectionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final palette = context.appPalette;
-    return Container(
-      decoration: BoxDecoration(
-        color: palette.elevated,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: palette.outline),
-        boxShadow: [
-          BoxShadow(
-            color: palette.ink.withValues(alpha: 0.06),
-            blurRadius: 18,
-            offset: const Offset(0, 8),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(16),
+    return AppSectionCard(
+      padding: const EdgeInsets.all(AppSpacing.lg),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: Theme.of(
-              context,
-            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
-          ),
-          const SizedBox(height: 12),
+          AppSectionHeader(title: title),
+          const SizedBox(height: AppSpacing.md),
           child,
         ],
       ),
@@ -1025,49 +1010,13 @@ class _ActionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: context.appPalette.base,
-      borderRadius: BorderRadius.circular(18),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(18),
+    return Opacity(
+      opacity: onTap == null ? 0.62 : 1,
+      child: AppCompactRow(
+        icon: icon,
+        title: title,
+        subtitle: subtitle,
         onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.all(14),
-          child: Row(
-            children: [
-              Container(
-                width: 42,
-                height: 42,
-                decoration: BoxDecoration(
-                  color: context.appPalette.primary.withValues(alpha: 0.10),
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: Icon(icon, color: context.appPalette.primary),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: const TextStyle(fontWeight: FontWeight.w700),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      subtitle,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: context.appPalette.ink.withValues(alpha: 0.66),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const Icon(Icons.arrow_forward_ios_rounded, size: 16),
-            ],
-          ),
-        ),
       ),
     );
   }
