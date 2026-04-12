@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/gamification/level_calculator.dart';
 import 'package:jpstudy/core/goal_provider.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
@@ -114,11 +115,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     if (!mounted) {
       return;
     }
-    final service = LearnSessionService(
-      LearnDao(ref.read(databaseProvider)),
-      AchievementDao(ref.read(databaseProvider)),
-    );
-    _lastKnownLevel = service.calculateLevel(progress.totalXp);
+    _lastKnownLevel = LevelCalculator.calculate(progress.totalXp).level;
   }
 
   Future<void> _checkMilestones(DashboardState state) async {
@@ -149,8 +146,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     if (_lastKnownLevel != null) {
       final repo = ref.read(lessonRepositoryProvider);
       final progress = await repo.fetchProgressSummary();
-      final service = LearnSessionService(LearnDao(db), AchievementDao(db));
-      final newLevel = service.calculateLevel(progress.totalXp);
+      final newLevel = LevelCalculator.calculate(progress.totalXp).level;
       if (newLevel > _lastKnownLevel!) {
         final already = await achievementDao.hasAchievement(
           model.AchievementType.levelUp.name,

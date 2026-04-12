@@ -1,5 +1,6 @@
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:jpstudy/core/gamification/level_calculator.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/daos/achievement_dao.dart';
 import 'package:jpstudy/data/daos/learn_dao.dart';
@@ -65,76 +66,62 @@ domain.LearnSession _buildSession({
 // ── Tests ────────────────────────────────────────────────────
 
 void main() {
-  group('LearnSessionService.calculateLevel', () {
-    late LearnSessionService service;
-
-    setUp(() {
-      final db = AppDatabase(executor: NativeDatabase.memory());
-      service = LearnSessionService(LearnDao(db), AchievementDao(db));
-    });
+  // LevelCalculator is now the single source of truth for XP→level conversion.
+  // The old service.calculateLevel() / xpForNextLevel() were removed in favour
+  // of the infinite quadratic progression in LevelCalculator.
+  group('LevelCalculator.calculate', () {
+    // Thresholds (iterative quadratic, gap += 50 each level):
+    // L1: 0–100   L2: 100–250  L3: 250–450  L4: 450–700  L5: 700–1000
+    // L6: 1000–1350  L7: 1350–1750  L8: 1750–2200  L9: 2200–2700  L10: 2700–3250
 
     test('0 XP is level 1', () {
-      expect(service.calculateLevel(0), 1);
+      expect(LevelCalculator.calculate(0).level, 1);
     });
 
     test('99 XP is still level 1', () {
-      expect(service.calculateLevel(99), 1);
+      expect(LevelCalculator.calculate(99).level, 1);
     });
 
     test('100 XP is level 2', () {
-      expect(service.calculateLevel(100), 2);
+      expect(LevelCalculator.calculate(100).level, 2);
     });
 
-    test('299 XP is level 2', () {
-      expect(service.calculateLevel(299), 2);
+    test('249 XP is still level 2', () {
+      expect(LevelCalculator.calculate(249).level, 2);
     });
 
-    test('300 XP is level 3', () {
-      expect(service.calculateLevel(300), 3);
+    test('250 XP is level 3', () {
+      expect(LevelCalculator.calculate(250).level, 3);
     });
 
-    test('4500 XP is level 10 (max)', () {
-      expect(service.calculateLevel(4500), 10);
+    test('450 XP is level 4', () {
+      expect(LevelCalculator.calculate(450).level, 4);
     });
 
-    test('very high XP stays at level 10', () {
-      expect(service.calculateLevel(99999), 10);
+    test('700 XP is level 5', () {
+      expect(LevelCalculator.calculate(700).level, 5);
     });
 
-    test('all threshold boundaries', () {
-      const thresholds = {
-        0: 1, 100: 2, 300: 3, 600: 4, 1000: 5,
-        1500: 6, 2100: 7, 2800: 8, 3600: 9, 4500: 10,
-      };
-      for (final entry in thresholds.entries) {
-        expect(service.calculateLevel(entry.key), entry.value,
-            reason: '${entry.key} XP should be level ${entry.value}');
-      }
-    });
-  });
-
-  group('LearnSessionService.xpForNextLevel', () {
-    late LearnSessionService service;
-
-    setUp(() {
-      final db = AppDatabase(executor: NativeDatabase.memory());
-      service = LearnSessionService(LearnDao(db), AchievementDao(db));
+    test('2700 XP is level 10', () {
+      expect(LevelCalculator.calculate(2700).level, 10);
     });
 
-    test('level 1 needs 100 XP for level 2', () {
-      expect(service.xpForNextLevel(1), 100);
+    test('very high XP exceeds level 10 (no cap)', () {
+      expect(LevelCalculator.calculate(99999).level, greaterThan(10));
     });
 
-    test('level 9 needs 4500 XP for level 10', () {
-      expect(service.xpForNextLevel(9), 4500);
+    test('progress is 0.0 at level start', () {
+      final info = LevelCalculator.calculate(100); // exactly level 2 start
+      expect(info.progress, 0.0);
     });
 
-    test('level 10 (max) returns 0', () {
-      expect(service.xpForNextLevel(10), 0);
+    test('progress increases within level', () {
+      final info = LevelCalculator.calculate(175); // halfway through L2 (100-250)
+      expect(info.progress, closeTo(0.5, 0.01));
     });
 
-    test('beyond max level returns 0', () {
-      expect(service.xpForNextLevel(99), 0);
+    test('totalXp is preserved', () {
+      expect(LevelCalculator.calculate(1234).totalXp, 1234);
     });
   });
 

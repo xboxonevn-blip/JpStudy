@@ -142,34 +142,4 @@ class LearnSessionService {
     // D2: articleReader — trigger from immersion reader when completed article count crosses 5.
   }
 
-  /// Calculate user's current level based on total XP
-  int calculateLevel(int totalXP) {
-    // XP thresholds for each level
-    const xpPerLevel = [
-      0, // Level 1
-      100, // Level 2
-      300, // Level 3
-      600, // Level 4
-      1000, // Level 5
-      1500, // Level 6
-      2100, // Level 7
-      2800, // Level 8
-      3600, // Level 9
-      4500, // Level 10
-    ];
-
-    for (int i = xpPerLevel.length - 1; i >= 0; i--) {
-      if (totalXP >= xpPerLevel[i]) {
-        return i + 1;
-      }
-    }
-    return 1;
-  }
-
-  /// Get XP needed for next level
-  int xpForNextLevel(int currentLevel) {
-    const xpPerLevel = [0, 100, 300, 600, 1000, 1500, 2100, 2800, 3600, 4500];
-    if (currentLevel >= xpPerLevel.length) return 0;
-    return xpPerLevel[currentLevel];
-  }
 }
