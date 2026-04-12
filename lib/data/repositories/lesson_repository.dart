@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jpstudy/core/services/fsrs_service.dart';
+import 'package:jpstudy/data/daos/achievement_dao.dart';
 import 'package:jpstudy/data/daos/srs_dao.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/db/database_provider.dart';
@@ -2200,6 +2201,31 @@ class LessonRepository {
       lastConfidence: grade,
       nextReviewAt: result.nextReviewAt,
     );
+
+    // Achievement: kanjiMaster — fires at milestones [10, 25, 50, 100].
+    // Only checked when this review crosses the Strong-tier threshold (≥21 days
+    // stability), so the DB query is skipped on weaker reviews.
+    if (result.stability >= 21.0) {
+      const milestones = [10, 25, 50, 100];
+      final masteredCount = await _db.kanjiSrsDao.getMasteredCount();
+      if (milestones.contains(masteredCount)) {
+        final achievementDao = AchievementDao(_db);
+        final already = await achievementDao.hasAchievement(
+          'kanjiMaster',
+          masteredCount,
+        );
+        if (!already) {
+          await achievementDao.addAchievement(
+            AchievementsCompanion(
+              type: const Value('kanjiMaster'),
+              value: Value(masteredCount),
+              earnedAt: Value(DateTime.now()),
+              isNotified: const Value(false),
+            ),
+          );
+        }
+      }
+    }
   }
 
   Future<void> updateLessonTitle(

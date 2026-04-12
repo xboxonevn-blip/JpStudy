@@ -129,6 +129,17 @@ class KanjiSrsDao extends DatabaseAccessor<AppDatabase>
     );
   }
 
+  /// COUNT of kanji whose stability has reached the Strong tier (≥ 21 days).
+  /// Used to gate the kanjiMaster achievement milestones.
+  Future<int> getMasteredCount() async {
+    final countExpr = kanjiSrsState.kanjiId.count();
+    final row = await (selectOnly(kanjiSrsState)
+          ..addColumns([countExpr])
+          ..where(kanjiSrsState.stability.isBiggerOrEqualValue(21.0)))
+        .getSingle();
+    return row.read(countExpr) ?? 0;
+  }
+
   /// Reactive due count for dashboard/home.
   Stream<int> watchDueReviewCount() {
     final countExpr = kanjiSrsState.kanjiId.count();

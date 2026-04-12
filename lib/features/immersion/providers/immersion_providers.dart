@@ -1,5 +1,9 @@
+import 'package:drift/drift.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../data/daos/achievement_dao.dart';
+import '../../../data/db/app_database.dart';
+import '../../../data/db/database_provider.dart';
 import '../services/immersion_service.dart';
 
 final immersionServiceProvider = Provider<ImmersionService>((ref) {
@@ -9,15 +13,20 @@ final immersionServiceProvider = Provider<ImmersionService>((ref) {
 final readArticlesProvider =
     StateNotifierProvider<ReadArticlesNotifier, Set<String>>((ref) {
   final service = ref.watch(immersionServiceProvider);
-  return ReadArticlesNotifier(service);
+  final db = ref.watch(databaseProvider);
+  return ReadArticlesNotifier(service, AchievementDao(db));
 });
 
 class ReadArticlesNotifier extends StateNotifier<Set<String>> {
-  ReadArticlesNotifier(this._service) : super({}) {
+  ReadArticlesNotifier(this._service, this._achievementDao) : super({}) {
     _load();
   }
 
   final ImmersionService _service;
+  final AchievementDao _achievementDao;
+
+  /// Article-read milestones that unlock the Avid Reader achievement.
+  static const _milestones = [5, 10, 20];
 
   Future<void> _load() async {
     final ids = await _service.getReadArticleIds();
@@ -34,5 +43,25 @@ class ReadArticlesNotifier extends StateNotifier<Set<String>> {
     }
     state = newState;
     await _service.markArticleAsRead(id, !isRead);
+
+    // Achievement: articleReader — fire when the read count hits a milestone.
+    // Only check on mark-as-read, not on un-mark.
+    if (!isRead && _milestones.contains(newState.length)) {
+      final count = newState.length;
+      final already = await _achievementDao.hasAchievement(
+        'articleReader',
+        count,
+      );
+      if (!already) {
+        await _achievementDao.addAchievement(
+          AchievementsCompanion(
+            type: const Value('articleReader'),
+            value: Value(count),
+            earnedAt: Value(DateTime.now()),
+            isNotified: const Value(false),
+          ),
+        );
+      }
+    }
   }
 }
