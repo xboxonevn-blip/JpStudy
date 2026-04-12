@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
@@ -117,9 +118,9 @@ class _EnhancedFlashcardScreenState
         borderRadius: BorderRadius.circular(3),
         child: LinearProgressIndicator(
           value: progress,
-          backgroundColor: Colors.grey[200],
+          backgroundColor: context.appPalette.outline,
           valueColor: AlwaysStoppedAnimation<Color>(
-            Theme.of(context).primaryColor,
+            context.appPalette.primary,
           ),
         ),
       ),
@@ -138,8 +139,8 @@ class _EnhancedFlashcardScreenState
             style: ElevatedButton.styleFrom(
               shape: const CircleBorder(),
               padding: const EdgeInsets.all(20),
-              backgroundColor: Colors.white,
-              foregroundColor: Theme.of(context).primaryColor,
+              backgroundColor: context.appPalette.elevated,
+              foregroundColor: context.appPalette.primary,
               elevation: 4,
             ),
             child: const Icon(Icons.arrow_back_rounded, size: 32),
@@ -153,7 +154,7 @@ class _EnhancedFlashcardScreenState
             style: ElevatedButton.styleFrom(
               shape: const CircleBorder(),
               padding: const EdgeInsets.all(20),
-              backgroundColor: Theme.of(context).primaryColor,
+              backgroundColor: context.appPalette.primary,
               foregroundColor: Colors.white,
               elevation: 4,
             ),
@@ -173,7 +174,7 @@ class _EnhancedFlashcardScreenState
     return Text(
       '${_currentIndex + 1} / ${_displayItems.length}',
       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-        color: Colors.grey[600],
+        color: context.appPalette.ink.withValues(alpha: 0.55),
         fontWeight: FontWeight.w500,
       ),
     );

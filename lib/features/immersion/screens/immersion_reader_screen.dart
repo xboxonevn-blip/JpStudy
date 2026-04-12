@@ -1111,7 +1111,7 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
     final palette = context.appPalette;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: palette.bg,
       appBar: _buildAppBar(
         context,
         language,

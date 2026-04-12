@@ -695,6 +695,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
     AppLanguage language,
     AsyncValue<JlptCoachSnapshot?> snapshotAsync,
   ) {
+    final palette = context.appPalette;
     return AppSectionCard(
       padding: const EdgeInsets.all(AppSpacing.lg),
       child: snapshotAsync.when(
@@ -710,17 +711,17 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
                 const SizedBox(height: 12),
                 Text(
                   _readinessEmptyTitle(language),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w900,
-                    color: Color(0xFF0F172A),
+                    color: palette.ink,
                   ),
                 ),
                 const SizedBox(height: 6),
                 Text(
                   _readinessEmptyBody(language),
-                  style: const TextStyle(
-                    color: Color(0xFF475569),
+                  style: TextStyle(
+                    color: palette.ink.withValues(alpha: 0.7),
                     height: 1.45,
                     fontWeight: FontWeight.w600,
                   ),
@@ -794,9 +795,9 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
                 const SizedBox(height: 6),
                 Text(
                   _tr(language, '7-day focus', 'Kế hoạch 7 ngày', '7日プラン'),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.w900,
-                    color: Color(0xFF0F172A),
+                    color: palette.ink,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -807,8 +808,8 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
                         padding: const EdgeInsets.only(bottom: 8),
                         child: Text(
                           'D${item.dayOffset + 1} • ${_areaLabel(language, item.area)} • ${item.minutes}m',
-                          style: const TextStyle(
-                            color: Color(0xFF475569),
+                          style: TextStyle(
+                            color: palette.ink.withValues(alpha: 0.7),
                             fontWeight: FontWeight.w700,
                           ),
                         ),

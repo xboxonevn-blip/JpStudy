@@ -509,12 +509,13 @@ String _srsFilterLabel(
   };
 }
 
-Color _srsFilterColor(_KanjiSrsFilter filter) => switch (filter) {
-  _KanjiSrsFilter.all => const Color(0xFF607D8B),
-  _KanjiSrsFilter.due => const Color(0xFFFF9800),
-  _KanjiSrsFilter.unseen => const Color(0xFF9C27B0),
-  _KanjiSrsFilter.studied => const Color(0xFF4CAF50),
-};
+Color _srsFilterColor(_KanjiSrsFilter filter, AppThemePalette palette) =>
+    switch (filter) {
+      _KanjiSrsFilter.all => palette.ink.withValues(alpha: 0.55),
+      _KanjiSrsFilter.due => palette.warning,
+      _KanjiSrsFilter.unseen => palette.accent,
+      _KanjiSrsFilter.studied => palette.success,
+    };
 
 String _kanjiHubStrokeChipLabel(AppLanguage language, int count) =>
     language.kanjiStrokeChipLabel(count);

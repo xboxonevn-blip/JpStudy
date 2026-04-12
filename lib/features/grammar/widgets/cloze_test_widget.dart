@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 
 import 'grammar_practice_surfaces.dart';
@@ -64,7 +65,7 @@ class _ClozeTestWidgetState extends State<ClozeTestWidget> {
                 _sentenceLabel(widget.language),
                 style: Theme.of(context).textTheme.labelLarge?.copyWith(
                   fontWeight: FontWeight.w800,
-                  color: Theme.of(context).colorScheme.primary,
+                  color: context.appPalette.primary,
                   letterSpacing: 0.25,
                 ),
               ),
@@ -74,7 +75,7 @@ class _ClozeTestWidgetState extends State<ClozeTestWidget> {
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     height: 1.55,
                     fontWeight: FontWeight.w800,
-                    color: Theme.of(context).colorScheme.onSurface,
+                    color: context.appPalette.ink,
                   ),
                   children: [
                     TextSpan(text: parts[0]),
@@ -174,36 +175,36 @@ class _ClozeTestWidgetState extends State<ClozeTestWidget> {
   }
 
   Color _blankBackground(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final palette = context.appPalette;
     if (_isCorrect == true) {
-      return const Color(0xFFF1FBF6);
+      return palette.success.withValues(alpha: 0.06);
     }
     if (_isCorrect == false) {
-      return const Color(0xFFFFF5F5);
+      return palette.error.withValues(alpha: 0.05);
     }
-    return scheme.primary.withValues(alpha: 0.06);
+    return palette.primary.withValues(alpha: 0.06);
   }
 
   Color _blankBorder(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final palette = context.appPalette;
     if (_isCorrect == true) {
-      return const Color(0xFFB9E6CE);
+      return palette.success.withValues(alpha: 0.32);
     }
     if (_isCorrect == false) {
-      return const Color(0xFFF2C2C8);
+      return palette.error.withValues(alpha: 0.28);
     }
-    return scheme.primary.withValues(alpha: 0.24);
+    return palette.primary.withValues(alpha: 0.24);
   }
 
   Color _blankText(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final palette = context.appPalette;
     if (_isCorrect == true) {
-      return const Color(0xFF1E6A4D);
+      return palette.success;
     }
     if (_isCorrect == false) {
-      return const Color(0xFFA13C45);
+      return palette.error;
     }
-    return scheme.primary;
+    return palette.primary;
   }
 
   String _eyebrow(AppLanguage language) {

@@ -331,7 +331,7 @@ class _StudyPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
-      decoration: HomeSurface.softPanel(radius: AppSpacing.radiusXxl),
+      decoration: HomeSurface.softPanel(radius: AppSpacing.radiusXxl, context: context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -1341,7 +1341,7 @@ class _PracticeSpotlightCard extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
             border: Border.all(color: accent.withValues(alpha: 0.24)),
-            boxShadow: HomeSurface.panelShadow,
+            boxShadow: HomeSurface.panelShadowFor(context),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

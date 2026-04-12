@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../app/theme/app_theme_palette.dart';
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
 import '../../../core/widgets/empty_state_widget.dart';
@@ -23,7 +24,7 @@ class MiniDashboard extends ConsumerWidget {
 
     return dashboardAsync.when(
       data: (state) =>
-          _buildContent(state, language, ghostCount, compact: compact),
+          _buildContent(context, state, language, ghostCount, compact: compact),
       loading: () => SizedBox(
         height: compact ? 62 : 88,
         child: Center(child: CircularProgressIndicator()),
@@ -37,11 +38,13 @@ class MiniDashboard extends ConsumerWidget {
   }
 
   Widget _buildContent(
+    BuildContext context,
     DashboardState state,
     AppLanguage language,
     int ghostCount, {
     required bool compact,
   }) {
+    final palette = context.appPalette;
     final totalDue = state.vocabDue + state.grammarDue + state.kanjiDue;
     final focusCount = state.totalMistakeCount + ghostCount;
     final headerTitle = language.progressTitle;
@@ -77,7 +80,7 @@ class MiniDashboard extends ConsumerWidget {
       return Container(
         padding: const EdgeInsets.fromLTRB(12, 12, 12, 11),
         decoration: HomeSurface.softPanel(
-          colors: const [Color(0xFFFFFFFF), Color(0xFFF7FBFF)],
+          colors: [palette.elevated, palette.base],
           radius: 18,
         ),
         child: LayoutBuilder(
@@ -103,16 +106,19 @@ class MiniDashboard extends ConsumerWidget {
                       height: 32,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(11),
-                        gradient: const LinearGradient(
-                          colors: [Color(0xFFFFEDD5), Color(0xFFFFFBEB)],
+                        gradient: LinearGradient(
+                          colors: [
+                            palette.warning.withValues(alpha: 0.14),
+                            palette.warning.withValues(alpha: 0.06),
+                          ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
-                        border: Border.all(color: const Color(0xFFFED7AA)),
+                        border: Border.all(color: palette.warning.withValues(alpha: 0.25)),
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.insights_rounded,
-                        color: Color(0xFFEA580C),
+                        color: palette.warning,
                         size: 18,
                       ),
                     ),
@@ -124,20 +130,20 @@ class MiniDashboard extends ConsumerWidget {
                         children: [
                           Text(
                             _compactEyebrow(language),
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 10,
                               fontWeight: FontWeight.w800,
                               letterSpacing: 0.22,
-                              color: Color(0xFF64748B),
+                              color: palette.ink.withValues(alpha: 0.55),
                             ),
                           ),
                           const SizedBox(height: 1),
                           Text(
                             headerTitle,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w900,
-                              color: Color(0xFF0F172A),
+                              color: palette.ink,
                             ),
                           ),
                         ],
@@ -178,7 +184,7 @@ class MiniDashboard extends ConsumerWidget {
           return Container(
             padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
             decoration: HomeSurface.softPanel(
-              colors: const [Color(0xFFFFFFFF), Color(0xFFF4FAFF)],
+              colors: [palette.elevated, palette.base],
               radius: 28,
             ),
             child: Column(
@@ -192,11 +198,11 @@ class MiniDashboard extends ConsumerWidget {
                         children: [
                           Text(
                             headerSubtitle,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w800,
                               letterSpacing: 0.35,
-                              color: Color(0xFF4B5563),
+                              color: palette.ink.withValues(alpha: 0.7),
                             ),
                           ),
                           const SizedBox(height: 4),
@@ -204,10 +210,10 @@ class MiniDashboard extends ConsumerWidget {
                             headerTitle,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.w800,
-                              color: Color(0xFF0F172A),
+                              color: palette.ink,
                             ),
                           ),
                         ],
@@ -218,16 +224,19 @@ class MiniDashboard extends ConsumerWidget {
                       height: 44,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(14),
-                        gradient: const LinearGradient(
-                          colors: [Color(0xFFFFEDD5), Color(0xFFFFFBEB)],
+                        gradient: LinearGradient(
+                          colors: [
+                            palette.warning.withValues(alpha: 0.14),
+                            palette.warning.withValues(alpha: 0.06),
+                          ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
-                        border: Border.all(color: const Color(0xFFFED7AA)),
+                        border: Border.all(color: palette.warning.withValues(alpha: 0.25)),
                       ),
                       child: Icon(
                         Icons.local_fire_department_rounded,
-                        color: const Color(0xFFEA580C),
+                        color: palette.warning,
                         size: 22,
                       ),
                     ),
@@ -298,6 +307,7 @@ class _CompactStatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Container(
       padding: const EdgeInsets.fromLTRB(10, 9, 10, 9),
       decoration: BoxDecoration(
@@ -312,7 +322,7 @@ class _CompactStatCard extends StatelessWidget {
             height: 26,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(9),
-              color: Colors.white.withValues(alpha: 0.86),
+              color: palette.elevated,
             ),
             child: Icon(icon, size: 14, color: iconColor),
           ),
@@ -326,10 +336,10 @@ class _CompactStatCard extends StatelessWidget {
                   label,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 9.8,
                     fontWeight: FontWeight.w700,
-                    color: Color(0xFF64748B),
+                    color: palette.ink.withValues(alpha: 0.55),
                     letterSpacing: 0.12,
                   ),
                 ),
@@ -338,11 +348,11 @@ class _CompactStatCard extends StatelessWidget {
                   value,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 17,
                     height: 1,
                     fontWeight: FontWeight.w900,
-                    color: Color(0xFF0F172A),
+                    color: palette.ink,
                   ),
                 ),
               ],
@@ -369,12 +379,13 @@ class _StatTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.94),
+        color: palette.elevated,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: HomeSurface.panelBorder),
+        border: Border.all(color: HomeSurface.panelBorderFor(context)),
       ),
       child: Row(
         children: [
@@ -397,11 +408,11 @@ class _StatTile extends StatelessWidget {
                   value,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 18,
                     height: 1,
                     fontWeight: FontWeight.w900,
-                    color: Color(0xFF0F172A),
+                    color: palette.ink,
                   ),
                 ),
                 const SizedBox(height: 2),
@@ -409,10 +420,10 @@ class _StatTile extends StatelessWidget {
                   suffix,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 9.5,
                     fontWeight: FontWeight.w700,
-                    color: Color(0xFF64748B),
+                    color: palette.ink.withValues(alpha: 0.55),
                     letterSpacing: 0.28,
                   ),
                 ),

@@ -150,9 +150,9 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
               // Progress
               LinearProgressIndicator(
                 value: (_currentIndex + 1) / visibleTerms.length,
-                backgroundColor: Colors.grey[200],
+                backgroundColor: context.appPalette.outline,
                 valueColor: AlwaysStoppedAnimation<Color>(
-                  Theme.of(context).primaryColor,
+                  context.appPalette.primary,
                 ),
               ),
               Padding(
@@ -161,7 +161,9 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
                   children: [
                     Text(
                       '${_currentIndex + 1} / ${visibleTerms.length}',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.grey[600]),
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: context.appPalette.ink.withValues(alpha: 0.55),
+                      ),
                     ),
                     if (_shouldShowSessionMeta) ...[
                       const SizedBox(height: 10),
@@ -173,13 +175,13 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
                           _buildPreviewChip(
                             Icons.style_rounded,
                             widget.sessionTitle ?? language.reviewAction,
-                            Theme.of(context).colorScheme.primary,
+                            context.appPalette.primary,
                           ),
                           if (_sessionRangeLabel(language) != null)
                             _buildPreviewChip(
                               Icons.segment_rounded,
                               _sessionRangeLabel(language)!,
-                              Colors.teal,
+                              context.appPalette.info,
                             ),
                         ],
                       ),
@@ -284,18 +286,18 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
               _buildPreviewChip(
                 Icons.library_books_outlined,
                 language.reviewTermsDueLabel(termCount),
-                Theme.of(context).colorScheme.primary,
+                context.appPalette.primary,
               ),
               _buildPreviewChip(
                 Icons.timer_outlined,
                 language.reviewEstimateLabel(estimatedMinutes),
-                Colors.orange[700]!,
+                context.appPalette.warning,
               ),
               if (_sessionRangeLabel(language) != null)
                 _buildPreviewChip(
                   Icons.layers_rounded,
                   _sessionRangeLabel(language)!,
-                  Colors.teal[700]!,
+                  context.appPalette.info,
                 ),
             ],
           ),
@@ -462,10 +464,10 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
             ),
           ),
           const SizedBox(height: 16),
-          _buildSummaryRow(language.reviewAgainLabel, _againCount, Colors.red),
-          _buildSummaryRow(language.reviewHardLabel, _hardCount, Colors.orange),
-          _buildSummaryRow(language.reviewGoodLabel, _goodCount, Colors.blue),
-          _buildSummaryRow(language.reviewEasyLabel, _easyCount, Colors.green),
+          _buildSummaryRow(language.reviewAgainLabel, _againCount, context.appPalette.error),
+          _buildSummaryRow(language.reviewHardLabel, _hardCount, context.appPalette.warning),
+          _buildSummaryRow(language.reviewGoodLabel, _goodCount, context.appPalette.info),
+          _buildSummaryRow(language.reviewEasyLabel, _easyCount, context.appPalette.success),
         ],
       ),
     );
@@ -506,7 +508,7 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
     return Text(
       language.retrievabilityPercentLabel(percent),
       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-        color: Colors.grey[700],
+        color: context.appPalette.ink.withValues(alpha: 0.7),
         fontWeight: FontWeight.w600,
       ),
       textAlign: TextAlign.center,
@@ -528,8 +530,8 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
         : _toastInDays(language, days);
     final color =
         level == ConfidenceLevel.again || level == ConfidenceLevel.hard
-        ? Colors.orange
-        : Colors.green;
+        ? context.appPalette.warning
+        : context.appPalette.success;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(_nextReviewToast(language, label)),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../app/theme/app_theme_palette.dart';
 import '../../../core/app_language.dart';
 import '../../../data/models/vocab_item.dart';
 
@@ -15,6 +16,7 @@ class ContextualHintCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     final meaning = item.displayMeaning(language);
     final lines = _buildContextLines(meaning, language);
     final reading = item.reading?.trim() ?? '';
@@ -25,19 +27,19 @@ class ContextualHintCard extends StatelessWidget {
       margin: const EdgeInsets.only(top: 16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFF8FAFF),
+        color: palette.elevated,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFE3E8F7)),
+        border: Border.all(color: palette.outline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.auto_stories_outlined,
                 size: 18,
-                color: Color(0xFF4B5EAA),
+                color: palette.info,
               ),
               const SizedBox(width: 6),
               Text(
@@ -53,17 +55,17 @@ class ContextualHintCard extends StatelessWidget {
           ),
           if (showReading) ...[
             const SizedBox(height: 6),
-            Text(reading, style: const TextStyle(color: Color(0xFF6B7390))),
+            Text(reading, style: TextStyle(color: palette.ink.withValues(alpha: 0.55))),
           ],
           const SizedBox(height: 8),
           Text(
             lines.translation,
-            style: const TextStyle(color: Color(0xFF1C2440)),
+            style: TextStyle(color: palette.ink),
           ),
           const SizedBox(height: 10),
           Text(
             language.contextualLearningHelperLabel,
-            style: TextStyle(color: Colors.grey[600], fontSize: 12),
+            style: TextStyle(color: palette.ink.withValues(alpha: 0.55), fontSize: 12),
           ),
         ],
       ),

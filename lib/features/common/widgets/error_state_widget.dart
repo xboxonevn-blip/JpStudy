@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/theme/app_spacing.dart';
+import '../../../app/theme/app_theme_palette.dart';
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
 
@@ -22,6 +23,7 @@ class ErrorStateWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final language = ref.watch(appLanguageProvider);
+    final palette = context.appPalette;
     final message = customMessage ?? _friendlyMessage(language, error);
     final double iconSize = compact ? 28 : 40;
     final double titleSize = compact ? 12 : 14;
@@ -46,14 +48,14 @@ class ErrorStateWidget extends ConsumerWidget {
             Container(
               width: compact ? 44 : 64,
               height: compact ? 44 : 64,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Color(0xFFFEE2E2),
+                color: palette.error.withValues(alpha: 0.1),
               ),
               child: Icon(
                 Icons.error_outline_rounded,
                 size: iconSize,
-                color: const Color(0xFFEF4444),
+                color: palette.error,
               ),
             ),
             SizedBox(height: compact ? AppSpacing.sm : AppSpacing.md),
@@ -63,7 +65,7 @@ class ErrorStateWidget extends ConsumerWidget {
               style: TextStyle(
                 fontSize: titleSize,
                 fontWeight: FontWeight.w600,
-                color: const Color(0xFF6B7280),
+                color: palette.ink.withValues(alpha: 0.55),
                 height: 1.4,
               ),
             ),
@@ -74,7 +76,7 @@ class ErrorStateWidget extends ConsumerWidget {
                 icon: const Icon(Icons.refresh_rounded, size: 16),
                 label: Text(language.retryLabel),
                 style: TextButton.styleFrom(
-                  foregroundColor: const Color(0xFF3B82F6),
+                  foregroundColor: palette.info,
                   textStyle: const TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,

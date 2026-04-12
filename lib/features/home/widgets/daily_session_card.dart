@@ -920,6 +920,7 @@ class _CoachStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Semantics(
       label:
           'Step $index: $target${done ? ' '
@@ -967,7 +968,7 @@ class _CoachStep extends StatelessWidget {
                   style: TextStyle(
                     color: done
                         ? const Color(0xFFBBF7D0)
-                        : const Color(0xFFE2E8F0),
+                        : palette.outline,
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
                     decoration: done ? TextDecoration.lineThrough : null,
@@ -1008,6 +1009,7 @@ class _DailyCompleteBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     final label = switch (language) {
       AppLanguage.en => 'Daily Complete! +25 XP',
       AppLanguage.vi => 'Hoàn thành ngày! +25 XP',
@@ -1019,8 +1021,8 @@ class _DailyCompleteBanner extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [Color(0xFF059669), Color(0xFF10B981)],
+          gradient: LinearGradient(
+            colors: [palette.success, const Color(0xFF10B981)],
           ),
           borderRadius: BorderRadius.circular(12),
         ),
@@ -1055,6 +1057,7 @@ class _BackupStatusLine extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final palette = context.appPalette;
     final backupAsync = ref.watch(backupStatusProvider);
 
     return backupAsync.when(
@@ -1066,7 +1069,7 @@ class _BackupStatusLine extends ConsumerWidget {
                 material.formatMediumDate(status.lastBackupAt!),
               );
         final color = status.isStale
-            ? const Color(0xFFFECACA)
+            ? palette.error
             : const Color(0xFFBBF7D0);
         final iconColor = status.isStale
             ? const Color(0xFFF87171)

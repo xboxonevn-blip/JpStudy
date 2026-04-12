@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 
@@ -41,7 +42,7 @@ class TestHistoryScreen extends ConsumerWidget {
           final history = data.history;
 
           if (history.isEmpty) {
-            return _buildEmptyState(language);
+            return _buildEmptyState(context, language);
           }
 
           return SingleChildScrollView(
@@ -93,21 +94,29 @@ class TestHistoryScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildEmptyState(AppLanguage language) {
+  Widget _buildEmptyState(BuildContext context, AppLanguage language) {
+    final palette = context.appPalette;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.history, size: 64, color: Colors.grey),
+          Icon(
+            Icons.history,
+            size: 64,
+            color: palette.ink.withValues(alpha: 0.4),
+          ),
           const SizedBox(height: 16),
           Text(
             language.attemptHistoryEmptyLabel,
-            style: const TextStyle(fontSize: 18, color: Colors.grey),
+            style: TextStyle(
+              fontSize: 18,
+              color: palette.ink.withValues(alpha: 0.55),
+            ),
           ),
           const SizedBox(height: 8),
           Text(
             language.testHistoryEmptyHintLabel,
-            style: const TextStyle(color: Colors.grey),
+            style: TextStyle(color: palette.ink.withValues(alpha: 0.55)),
           ),
         ],
       ),
@@ -121,6 +130,7 @@ class TestHistoryScreen extends ConsumerWidget {
     double averageScore,
     AppLanguage language,
   ) {
+    final palette = context.appPalette;
     return Row(
       children: [
         Expanded(
@@ -128,7 +138,7 @@ class TestHistoryScreen extends ConsumerWidget {
             icon: Icons.quiz,
             label: language.testHistoryTestsTakenLabel,
             value: testCount.toString(),
-            color: Colors.blue,
+            color: palette.info,
           ),
         ),
         const SizedBox(width: 12),
@@ -137,7 +147,7 @@ class TestHistoryScreen extends ConsumerWidget {
             icon: Icons.emoji_events,
             label: language.testHistoryBestScoreLabel,
             value: bestScore != null ? '${bestScore.score.toInt()}%' : '-',
-            color: Colors.amber,
+            color: palette.warning,
           ),
         ),
         const SizedBox(width: 12),
@@ -146,7 +156,7 @@ class TestHistoryScreen extends ConsumerWidget {
             icon: Icons.analytics,
             label: language.testHistoryAverageLabel,
             value: '${averageScore.toInt()}%',
-            color: Colors.green,
+            color: palette.success,
           ),
         ),
       ],
@@ -161,7 +171,7 @@ class TestHistoryScreen extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.grey.withValues(alpha: 0.1),
+        color: context.appPalette.elevated,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
@@ -180,7 +190,7 @@ class TestHistoryScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: data.map((point) {
                 final height = (point.score / 100) * 100;
-                final color = _getScoreColor(point.score);
+                final color = _getScoreColor(context, point.score);
 
                 return Expanded(
                   child: Padding(
@@ -218,11 +228,17 @@ class TestHistoryScreen extends ConsumerWidget {
             children: [
               Text(
                 language.testHistoryOldestLabel,
-                style: TextStyle(fontSize: 10, color: Colors.grey[600]),
+                style: TextStyle(
+                  fontSize: 10,
+                  color: context.appPalette.ink.withValues(alpha: 0.55),
+                ),
               ),
               Text(
                 language.testHistoryLatestLabel,
-                style: TextStyle(fontSize: 10, color: Colors.grey[600]),
+                style: TextStyle(
+                  fontSize: 10,
+                  color: context.appPalette.ink.withValues(alpha: 0.55),
+                ),
               ),
             ],
           ),
@@ -258,11 +274,12 @@ class TestHistoryScreen extends ConsumerWidget {
     );
   }
 
-  Color _getScoreColor(double score) {
-    if (score >= 90) return Colors.green;
-    if (score >= 70) return Colors.blue;
-    if (score >= 50) return Colors.orange;
-    return Colors.red;
+  Color _getScoreColor(BuildContext context, double score) {
+    final palette = context.appPalette;
+    if (score >= 90) return palette.success;
+    if (score >= 70) return palette.info;
+    if (score >= 50) return palette.warning;
+    return palette.error;
   }
 }
 
@@ -299,7 +316,13 @@ class _StatCard extends StatelessWidget {
               color: color,
             ),
           ),
-          Text(label, style: TextStyle(fontSize: 12, color: Colors.grey[600])),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              color: context.appPalette.ink.withValues(alpha: 0.55),
+            ),
+          ),
         ],
       ),
     );
@@ -314,6 +337,7 @@ class _HistoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     final scoreDiff = previousRecord != null
         ? record.score - previousRecord!.score
         : null;
@@ -322,11 +346,11 @@ class _HistoryItem extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
+        color: palette.elevated,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
+            color: palette.ink.withValues(alpha: 0.05),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -340,7 +364,7 @@ class _HistoryItem extends StatelessWidget {
             height: 50,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: _getGradeColor(record.grade).withValues(alpha: 0.2),
+              color: _getGradeColor(context, record.grade).withValues(alpha: 0.2),
             ),
             child: Center(
               child: Text(
@@ -348,7 +372,7 @@ class _HistoryItem extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: _getGradeColor(record.grade),
+                  color: _getGradeColor(context, record.grade),
                 ),
               ),
             ),
@@ -370,7 +394,10 @@ class _HistoryItem extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   _formatDate(record.completedAt),
-                  style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: palette.ink.withValues(alpha: 0.55),
+                  ),
                 ),
               ],
             ),
@@ -382,8 +409,8 @@ class _HistoryItem extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
                 color: scoreDiff >= 0
-                    ? Colors.green.withValues(alpha: 0.1)
-                    : Colors.red.withValues(alpha: 0.1),
+                    ? palette.success.withValues(alpha: 0.1)
+                    : palette.error.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Row(
@@ -392,7 +419,7 @@ class _HistoryItem extends StatelessWidget {
                   Icon(
                     scoreDiff >= 0 ? Icons.arrow_upward : Icons.arrow_downward,
                     size: 14,
-                    color: scoreDiff >= 0 ? Colors.green : Colors.red,
+                    color: scoreDiff >= 0 ? palette.success : palette.error,
                   ),
                   const SizedBox(width: 2),
                   Text(
@@ -400,7 +427,7 @@ class _HistoryItem extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
-                      color: scoreDiff >= 0 ? Colors.green : Colors.red,
+                      color: scoreDiff >= 0 ? palette.success : palette.error,
                     ),
                   ),
                 ],
@@ -411,18 +438,19 @@ class _HistoryItem extends StatelessWidget {
     );
   }
 
-  Color _getGradeColor(String grade) {
+  Color _getGradeColor(BuildContext context, String grade) {
+    final palette = context.appPalette;
     switch (grade) {
       case 'A':
-        return Colors.green;
+        return palette.success;
       case 'B':
-        return Colors.blue;
+        return palette.info;
       case 'C':
-        return Colors.orange;
+        return palette.warning;
       case 'D':
-        return Colors.deepOrange;
+        return Color.lerp(palette.warning, palette.error, 0.55)!;
       default:
-        return Colors.red;
+        return palette.error;
     }
   }
 

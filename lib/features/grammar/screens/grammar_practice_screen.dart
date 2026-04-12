@@ -961,6 +961,7 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
       context: context,
       barrierDismissible: false,
       builder: (context) {
+        final palette = context.appPalette;
         return AlertDialog(
           title: Text(_sessionTitle(language)),
           content: Column(
@@ -975,8 +976,8 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
                     vi: 'Hết thời gian!',
                     ja: '時間切れです。',
                   ),
-                  style: const TextStyle(
-                    color: Color(0xFFB91C1C),
+                  style: TextStyle(
+                    color: palette.error,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -1372,9 +1373,9 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
                       vi: 'Điểm $_score',
                       ja: 'スコア $_score',
                     ),
-                    fg: const Color(0xFF1E3A8A),
-                    bg: const Color(0xFFEFF6FF),
-                    border: const Color(0xFFBFDBFE),
+                    fg: palette.info,
+                    bg: palette.info.withValues(alpha: 0.07),
+                    border: palette.info.withValues(alpha: 0.25),
                   ),
                   _pill(
                     label: switch (_blueprint) {
@@ -1415,9 +1416,9 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
                         vi: 'Ôn quên',
                         ja: 'ゴースト',
                       ),
-                      fg: const Color(0xFF7C2D12),
-                      bg: const Color(0xFFFFF7ED),
-                      border: const Color(0xFFFED7AA),
+                      fg: palette.warning,
+                      bg: palette.warning.withValues(alpha: 0.08),
+                      border: palette.warning.withValues(alpha: 0.28),
                     ),
                   if (_isWeakDrill)
                     _pill(
@@ -1427,9 +1428,9 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
                         vi: 'Chỉ phần yếu',
                         ja: '弱点のみ',
                       ),
-                      fg: const Color(0xFF92400E),
-                      bg: const Color(0xFFFEF3C7),
-                      border: const Color(0xFFFCD34D),
+                      fg: palette.accent,
+                      bg: palette.accent.withValues(alpha: 0.07),
+                      border: palette.accent.withValues(alpha: 0.25),
                     ),
                 ],
               ),
@@ -1497,10 +1498,10 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
       decoration: BoxDecoration(
-        color: isUrgent ? const Color(0xFFFEF2F2) : palette.elevated,
+        color: isUrgent ? palette.error.withValues(alpha: 0.1) : palette.elevated,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
-          color: isUrgent ? const Color(0xFFFECACA) : palette.outline,
+          color: isUrgent ? palette.error.withValues(alpha: 0.24) : palette.outline,
         ),
       ),
       child: Row(
@@ -1508,7 +1509,7 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
           Icon(
             Icons.timer_outlined,
             size: 18,
-            color: isUrgent ? const Color(0xFFB91C1C) : const Color(0xFF475569),
+            color: isUrgent ? palette.error : palette.ink.withValues(alpha: 0.7),
           ),
           const SizedBox(width: 8),
           Text(
@@ -1520,8 +1521,8 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
             ),
             style: TextStyle(
               color: isUrgent
-                  ? const Color(0xFFB91C1C)
-                  : const Color(0xFF334155),
+                  ? palette.error
+                  : palette.ink.withValues(alpha: 0.7),
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -1533,11 +1534,13 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
   Widget _buildFeedbackBanner(AppLanguage language) {
     final palette = context.appPalette;
     final isCorrect = _feedbackCorrect == true;
-    final fg = isCorrect ? const Color(0xFF166534) : const Color(0xFF991B1B);
-    final bg = isCorrect ? const Color(0xFFF0FDF4) : const Color(0xFFFEF2F2);
+    final fg = isCorrect ? palette.success : palette.error;
+    final bg = isCorrect
+        ? palette.success.withValues(alpha: 0.08)
+        : palette.error.withValues(alpha: 0.06);
     final border = isCorrect
-        ? const Color(0xFFBBF7D0)
-        : const Color(0xFFFECACA);
+        ? palette.success.withValues(alpha: 0.30)
+        : palette.error.withValues(alpha: 0.25);
 
     return Container(
       width: double.infinity,
@@ -1675,10 +1678,11 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
   }
 
   Color _modeColor() {
+    final palette = context.appPalette;
     return switch (_blueprint) {
-      GrammarPracticeBlueprint.learn => const Color(0xFF1D4ED8),
-      GrammarPracticeBlueprint.drill => const Color(0xFFB45309),
-      GrammarPracticeBlueprint.quiz => const Color(0xFF7C3AED),
+      GrammarPracticeBlueprint.learn => palette.info,
+      GrammarPracticeBlueprint.drill => palette.warning,
+      GrammarPracticeBlueprint.quiz => palette.accent,
     };
   }
 

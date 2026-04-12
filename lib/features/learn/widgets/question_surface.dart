@@ -44,7 +44,7 @@ class QuestionPromptCard extends StatelessWidget {
         border: Border.all(color: accentColor.withValues(alpha: 0.18)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.035),
+            color: palette.ink.withValues(alpha: 0.035),
             blurRadius: 18,
             offset: const Offset(0, 8),
           ),

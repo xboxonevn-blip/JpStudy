@@ -1642,7 +1642,7 @@ class _TimerBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tint = danger ? const Color(0xFFFFD7D7) : Colors.white;
+    final tint = danger ? context.appPalette.error : Colors.white;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 9),
       decoration: BoxDecoration(

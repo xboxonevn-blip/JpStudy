@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/features/common/widgets/sakura_particles.dart';
 
 class JapaneseBackground extends StatelessWidget {
@@ -8,13 +9,11 @@ class JapaneseBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final gradientColors = isDark
-        ? const [Color(0xFF111827), Color(0xFF1F2937), Color(0xFF0F172A)]
-        : const [Color(0xFFF7F2E8), Color(0xFFFDF7EF), Color(0xFFF5EEE3)];
-    final patternColor = isDark
-        ? const Color(0x12FFFFFF)
-        : const Color(0x120F172A);
+    final palette = context.appPalette;
+    final gradientColors = [palette.bg, palette.surface, palette.base];
+    // Subtle repeating arc pattern — low-alpha ink ensures correct contrast
+    // on both light (warm-tinted surfaces) and dark themes.
+    final patternColor = palette.ink.withValues(alpha: 0.07);
 
     return Stack(
       children: [
@@ -41,9 +40,10 @@ class JapaneseBackground extends StatelessWidget {
           right: -40,
           child: _Orb(
             size: 220,
-            colors: isDark
-                ? const [Color(0x4022D3EE), Color(0x00111827)]
-                : const [Color(0x55F59E0B), Color(0x00FDE68A)],
+            colors: [
+              palette.warning.withValues(alpha: 0.28),
+              palette.warning.withValues(alpha: 0),
+            ],
           ),
         ),
         Positioned(
@@ -51,9 +51,10 @@ class JapaneseBackground extends StatelessWidget {
           left: -60,
           child: _Orb(
             size: 260,
-            colors: isDark
-                ? const [Color(0x4034D399), Color(0x000F172A)]
-                : const [Color(0x5538BDF8), Color(0x00BFDBFE)],
+            colors: [
+              palette.info.withValues(alpha: 0.28),
+              palette.info.withValues(alpha: 0),
+            ],
           ),
         ),
         Positioned.fill(

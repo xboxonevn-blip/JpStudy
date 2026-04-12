@@ -134,7 +134,7 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
                         width: double.infinity,
                         padding: const EdgeInsets.all(14),
                         decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: 0.72),
+                          color: palette.elevated.withValues(alpha: 0.72),
                           borderRadius: BorderRadius.circular(18),
                           border: Border.all(color: _trayBorder(palette)),
                         ),
@@ -182,11 +182,11 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
                       vertical: 12,
                     ),
                     backgroundColor: _isLastCorrect == true
-                        ? const Color(0xFFF1FBF6)
-                        : const Color(0xFFFFF5F5),
+                        ? palette.success.withValues(alpha: 0.06)
+                        : palette.error.withValues(alpha: 0.05),
                     borderColor: _isLastCorrect == true
-                        ? const Color(0xFFB9E6CE)
-                        : const Color(0xFFF2C2C8),
+                        ? palette.success.withValues(alpha: 0.32)
+                        : palette.error.withValues(alpha: 0.28),
                     shadowColor: Colors.transparent,
                     radius: 18,
                     child: Column(
@@ -200,8 +200,8 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
                                   ? Icons.check_circle_rounded
                                   : Icons.error_rounded,
                               color: _isLastCorrect == true
-                                  ? const Color(0xFF2D8A63)
-                                  : const Color(0xFFC44F59),
+                                  ? palette.success
+                                  : palette.error,
                             ),
                             const SizedBox(width: 10),
                             Expanded(
@@ -235,7 +235,7 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
                               widget.feedback!,
                               style: Theme.of(context).textTheme.bodySmall
                                   ?.copyWith(
-                                    color: const Color(0xFFC44F59),
+                                    color: palette.error,
                                     fontWeight: FontWeight.w700,
                                   ),
                             ),
@@ -247,7 +247,7 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
                               '✓ ${widget.correctSentence}',
                               style: Theme.of(context).textTheme.bodySmall
                                   ?.copyWith(
-                                    color: const Color(0xFF6B7280),
+                                    color: palette.ink.withValues(alpha: 0.55),
                                     fontWeight: FontWeight.w600,
                                   ),
                             ),
@@ -256,7 +256,7 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
                               widget.explanation!,
                               style: Theme.of(context).textTheme.bodySmall
                                   ?.copyWith(
-                                    color: const Color(0xFF9CA3AF),
+                                    color: palette.ink.withValues(alpha: 0.4),
                                     fontStyle: FontStyle.italic,
                                   ),
                             ),
@@ -354,20 +354,20 @@ class _SentenceBuilderWidgetState extends State<SentenceBuilderWidget> {
 
   Color _trayBackground(AppThemePalette palette) {
     if (_isLastCorrect == true) {
-      return const Color(0xFFF6FCF8);
+      return palette.success.withValues(alpha: 0.07);
     }
     if (_isLastCorrect == false) {
-      return const Color(0xFFFFF7F7);
+      return palette.error.withValues(alpha: 0.05);
     }
     return palette.elevated;
   }
 
   Color _trayBorder(AppThemePalette palette) {
     if (_isLastCorrect == true) {
-      return const Color(0xFFB9E6CE);
+      return palette.success.withValues(alpha: 0.32);
     }
     if (_isLastCorrect == false) {
-      return const Color(0xFFF2C2C8);
+      return palette.error.withValues(alpha: 0.28);
     }
     return palette.outline;
   }
@@ -416,7 +416,7 @@ class _WordChip extends StatelessWidget {
           decoration: BoxDecoration(
             color: selected
                 ? palette.primary.withValues(alpha: 0.08)
-                : Colors.white,
+                : palette.elevated,
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
               color: selected

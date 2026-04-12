@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:rive/rive.dart' hide Animation, PaintingStyle;
 
 import '../../../../core/app_language.dart';
@@ -797,6 +798,8 @@ class _MascotSpeechBubble extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
+    final palette = context.appPalette;
+
     return AnimatedOpacity(
       opacity: visible ? 1 : 0,
       duration: const Duration(milliseconds: 190),
@@ -819,14 +822,14 @@ class _MascotSpeechBubble extends StatelessWidget {
                     vertical: 8,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.98),
+                    color: palette.elevated.withValues(alpha: 0.98),
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: const Color(0xFFE4EAF7)),
-                    boxShadow: const [
+                    border: Border.all(color: palette.outline),
+                    boxShadow: [
                       BoxShadow(
-                        color: Color(0x1C1E293B),
+                        color: palette.ink.withValues(alpha: 0.11),
                         blurRadius: 14,
-                        offset: Offset(0, 5),
+                        offset: const Offset(0, 5),
                       ),
                     ],
                   ),
@@ -852,10 +855,10 @@ class _MascotSpeechBubble extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 11.5,
                         fontWeight: FontWeight.w800,
-                        color: Color(0xFF1F2937),
+                        color: palette.ink,
                         height: 1.22,
                       ),
                     ),
@@ -871,8 +874,8 @@ class _MascotSpeechBubble extends StatelessWidget {
                       width: 10,
                       height: 10,
                       decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.98),
-                        border: Border.all(color: const Color(0xFFE4EAF7)),
+                        color: palette.elevated.withValues(alpha: 0.98),
+                        border: Border.all(color: palette.outline),
                       ),
                     ),
                   ),

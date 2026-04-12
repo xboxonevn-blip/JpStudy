@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
@@ -91,7 +92,7 @@ class _LearnConfigScreenState extends ConsumerState<LearnConfigScreen> {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Colors.purple, Colors.purple.withValues(alpha: 0.7)],
+          colors: [context.appPalette.primary, context.appPalette.primary.withValues(alpha: 0.7)],
         ),
         borderRadius: BorderRadius.circular(20),
       ),
@@ -124,6 +125,7 @@ class _LearnConfigScreenState extends ConsumerState<LearnConfigScreen> {
   }
 
   Widget _buildResumeCard(AppLanguage language) {
+    final palette = context.appPalette;
     final snapshot = _resumeSnapshot!;
     final progress = snapshot.totalQuestions == 0
         ? 0
@@ -134,9 +136,9 @@ class _LearnConfigScreenState extends ConsumerState<LearnConfigScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFF0F9FF),
+        color: palette.surface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFBAE6FD)),
+        border: Border.all(color: palette.outline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -148,7 +150,10 @@ class _LearnConfigScreenState extends ConsumerState<LearnConfigScreen> {
           const SizedBox(height: 6),
           Text(
             language.resumeSessionSubtitle(progress, lastSaved),
-            style: const TextStyle(fontSize: 12, color: Color(0xFF6B7390)),
+            style: TextStyle(
+              fontSize: 12,
+              color: palette.ink.withValues(alpha: 0.55),
+            ),
           ),
           const SizedBox(height: 12),
           Row(
@@ -159,7 +164,7 @@ class _LearnConfigScreenState extends ConsumerState<LearnConfigScreen> {
                   icon: const Icon(Icons.play_arrow_rounded),
                   label: Text(language.resumeButtonLabel),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: palette.info,
                     foregroundColor: Colors.white,
                   ),
                 ),
@@ -223,7 +228,7 @@ class _LearnConfigScreenState extends ConsumerState<LearnConfigScreen> {
         const SizedBox(height: 8),
         Text(
           language.selectQuestionTypesLabel,
-          style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+          style: TextStyle(fontSize: 14, color: context.appPalette.ink.withValues(alpha: 0.55)),
         ),
         const SizedBox(height: 12),
         Wrap(
@@ -314,7 +319,7 @@ class _LearnConfigScreenState extends ConsumerState<LearnConfigScreen> {
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
         ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.purple,
+          backgroundColor: context.appPalette.primary,
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),

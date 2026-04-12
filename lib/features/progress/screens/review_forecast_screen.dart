@@ -447,12 +447,12 @@ class _StabilitySection extends StatelessWidget {
   final AppLanguage language;
   final AppThemePalette palette;
 
-  static const _bucketColors = [
-    Color(0xFFEF4444), // Critical - red
-    Color(0xFFF59E0B), // Weak - amber
-    Color(0xFF3B82F6), // Growing - blue
-    Color(0xFF22C55E), // Strong - green
-    Color(0xFF8B5CF6), // Mastered - purple
+  List<Color> get _bucketColors => [
+    palette.error,    // Critical - red
+    palette.warning,  // Weak - amber
+    palette.info,     // Growing - blue
+    palette.success,  // Strong - green
+    palette.accent,   // Mastered - purple
   ];
 
   @override

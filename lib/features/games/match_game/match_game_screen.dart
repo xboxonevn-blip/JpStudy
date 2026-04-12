@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/features/common/widgets/clay_button.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
@@ -376,10 +377,10 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
+                Icon(
                   Icons.emoji_events_rounded,
                   size: 64,
-                  color: Colors.amber,
+                  color: context.appPalette.warning,
                 ),
                 const SizedBox(height: 16),
                 if (_mode == MatchGameMode.timeAttack) ...[
@@ -398,7 +399,9 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
                       language.timeAttackBonusLabel(_timeAttackBonus),
                       style: Theme.of(
                         context,
-                      ).textTheme.titleMedium?.copyWith(color: Colors.blueGrey),
+                      ).textTheme.titleMedium?.copyWith(
+                    color: context.appPalette.ink.withValues(alpha: 0.55),
+                  ),
                     ),
                   ],
                 ] else ...[
@@ -411,7 +414,9 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
                   language.maxComboLabel(_maxCombo),
                   style: Theme.of(
                     context,
-                  ).textTheme.titleLarge?.copyWith(color: Colors.deepPurple),
+                  ).textTheme.titleLarge?.copyWith(
+                    color: context.appPalette.primary,
+                  ),
                 ),
                 const SizedBox(height: 24),
                 ClayButton(
@@ -442,7 +447,9 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
                 Text(
                   language.timeAttackSubtitle,
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.grey[600]),
+                  style: TextStyle(
+                    color: context.appPalette.ink.withValues(alpha: 0.55),
+                  ),
                 ),
                 const SizedBox(height: 12),
                 ClayButton(
@@ -478,10 +485,10 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
                   duration: const Duration(milliseconds: 200),
                   child: Text(
                     language.comboLabel(_combo),
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w900,
-                      color: Colors.orange,
+                      color: context.appPalette.warning,
                       letterSpacing: 1.2,
                     ),
                   ),
@@ -527,9 +534,14 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
       return const SizedBox(); // Hide matched cards
     }
 
-    Color color = Theme.of(context).cardColor;
-    if (card.state == MatchCardState.selected) color = Colors.blue.shade100;
-    if (card.state == MatchCardState.mismatched) color = Colors.red.shade100;
+    final palette = context.appPalette;
+    Color color = palette.elevated;
+    if (card.state == MatchCardState.selected) {
+      color = palette.info.withValues(alpha: 0.15);
+    }
+    if (card.state == MatchCardState.mismatched) {
+      color = palette.error.withValues(alpha: 0.15);
+    }
 
     return GestureDetector(
       onTap: () => _onCardTap(card),
@@ -540,13 +552,13 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
             color: card.state == MatchCardState.selected
-                ? Colors.blue
-                : Colors.grey.shade300,
+                ? palette.info
+                : palette.outline,
             width: 2,
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.05),
+              color: palette.ink.withValues(alpha: 0.05),
               blurRadius: 4,
               offset: const Offset(0, 2),
             ),
@@ -581,7 +593,7 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
             child: Transform.scale(scale: scale, child: child),
           );
         },
-        child: const Icon(Icons.auto_awesome, color: Colors.amber, size: 18),
+        child: Icon(Icons.auto_awesome, color: context.appPalette.warning, size: 18),
       ),
     );
   }

@@ -171,7 +171,7 @@ class _LevelMasteryCard extends StatelessWidget {
                   painter: _RingPainter(
                     ratio: mastery.overallMasteryRatio,
                     trackColor: palette.outline.withValues(alpha: 0.3),
-                    fillColor: _levelColor(mastery.level),
+                    fillColor: _levelColor(mastery.level, palette),
                     strokeWidth: 5,
                   ),
                   child: Center(
@@ -194,21 +194,21 @@ class _LevelMasteryCard extends StatelessWidget {
             icon: Icons.translate_rounded,
             label: _tr(language, 'Vocab', 'Từ vựng', '語彙'),
             mastery: mastery.vocab,
-            color: const Color(0xFF4B74B7),
+            color: palette.info,
           ),
           const SizedBox(height: 10),
           _CategoryRow(
             icon: Icons.menu_book_rounded,
             label: _tr(language, 'Grammar', 'Ngữ pháp', '文法'),
             mastery: mastery.grammar,
-            color: const Color(0xFF2D8A63),
+            color: palette.secondary,
           ),
           const SizedBox(height: 10),
           _CategoryRow(
             icon: Icons.brush_rounded,
             label: _tr(language, 'Kanji', 'Hán tự', '漢字'),
             mastery: mastery.kanji,
-            color: const Color(0xFFD66A3D),
+            color: palette.warning,
           ),
         ],
       ),
@@ -283,17 +283,17 @@ class _CategoryRow extends StatelessWidget {
                       if (mastery.mature > 0)
                         Expanded(
                           flex: mastery.mature,
-                          child: Container(color: const Color(0xFF22C55E)),
+                          child: Container(color: palette.success),
                         ),
                       if (mastery.young > 0)
                         Expanded(
                           flex: mastery.young,
-                          child: Container(color: const Color(0xFFEAB308)),
+                          child: Container(color: palette.warning),
                         ),
                       if (mastery.learning > 0)
                         Expanded(
                           flex: mastery.learning,
-                          child: Container(color: const Color(0xFFEF4444)),
+                          child: Container(color: palette.error),
                         ),
                       if (mastery.total - mastery.studied > 0)
                         Expanded(
@@ -310,20 +310,11 @@ class _CategoryRow extends StatelessWidget {
         // Legend row
         Row(
           children: [
-            _LegendDot(
-              color: const Color(0xFF22C55E),
-              label: '${mastery.mature}',
-            ),
+            _LegendDot(color: palette.success, label: '${mastery.mature}'),
             const SizedBox(width: 10),
-            _LegendDot(
-              color: const Color(0xFFEAB308),
-              label: '${mastery.young}',
-            ),
+            _LegendDot(color: palette.warning, label: '${mastery.young}'),
             const SizedBox(width: 10),
-            _LegendDot(
-              color: const Color(0xFFEF4444),
-              label: '${mastery.learning}',
-            ),
+            _LegendDot(color: palette.error, label: '${mastery.learning}'),
             const Spacer(),
             Text(
               '$studiedPct% studied',
@@ -347,6 +338,7 @@ class _LegendDot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -361,7 +353,10 @@ class _LegendDot extends StatelessWidget {
         const SizedBox(width: 3),
         Text(
           label,
-          style: const TextStyle(fontSize: 10, color: Color(0xFF6B7390)),
+          style: TextStyle(
+            fontSize: 10,
+            color: palette.ink.withValues(alpha: 0.55),
+          ),
         ),
       ],
     );
@@ -376,7 +371,7 @@ class _LevelBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = _levelColor(level);
+    final color = _levelColor(level, palette);
     return Container(
       width: 44,
       height: 44,
@@ -503,20 +498,20 @@ class _RingPainter extends CustomPainter {
       old.ratio != ratio || old.fillColor != fillColor;
 }
 
-Color _levelColor(String level) {
+Color _levelColor(String level, AppThemePalette palette) {
   switch (level) {
     case 'N5':
-      return const Color(0xFF4B74B7);
+      return palette.info;
     case 'N4':
-      return const Color(0xFF2D8A63);
+      return palette.secondary;
     case 'N3':
-      return const Color(0xFFD66A3D);
+      return palette.warning;
     case 'N2':
-      return const Color(0xFFC44F59);
+      return palette.error;
     case 'N1':
-      return const Color(0xFF7C3AED);
+      return palette.accent;
     default:
-      return const Color(0xFF6B7390);
+      return palette.ink.withValues(alpha: 0.55);
   }
 }
 

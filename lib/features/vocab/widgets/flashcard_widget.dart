@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/data/models/vocab_item.dart';
 
@@ -86,16 +87,15 @@ class _FlashcardWidgetState extends State<FlashcardWidget>
       width: double.infinity,
       height: 480, // Match EnhancedFlashcard height
       decoration: BoxDecoration(
-        color:
-            Colors.white, // Always white for Clay style usually, or color param
+        color: context.appPalette.elevated,
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
-          color: const Color(0xFFE5E7EB), // Neutral 200
+          color: context.appPalette.outline,
           width: 3,
         ),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFFE5E7EB),
+            color: context.appPalette.outline,
             offset: const Offset(0, 8),
             blurRadius: 0,
           ),
@@ -109,7 +109,7 @@ class _FlashcardWidgetState extends State<FlashcardWidget>
 
   Widget _buildFront() {
     return _buildCardBase(
-      color: Theme.of(context).colorScheme.surface,
+      color: context.appPalette.surface,
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -131,7 +131,7 @@ class _FlashcardWidgetState extends State<FlashcardWidget>
                 Text(
                   widget.item.kanjiMeaning!,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Colors.grey[700],
+                    color: context.appPalette.ink.withValues(alpha: 0.7),
                     fontStyle: FontStyle.italic,
                   ),
                   textAlign: TextAlign.center,
@@ -142,7 +142,7 @@ class _FlashcardWidgetState extends State<FlashcardWidget>
                 widget.language.tapToFlipLabel,
                 style: Theme.of(
                   context,
-                ).textTheme.bodySmall?.copyWith(color: Colors.grey),
+                ).textTheme.bodySmall?.copyWith(color: context.appPalette.ink.withValues(alpha: 0.55)),
               ),
             ],
           ),
@@ -153,7 +153,7 @@ class _FlashcardWidgetState extends State<FlashcardWidget>
 
   Widget _buildBack() {
     return _buildCardBase(
-      color: Theme.of(context).colorScheme.primaryContainer,
+      color: context.appPalette.primary.withValues(alpha: 0.08),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

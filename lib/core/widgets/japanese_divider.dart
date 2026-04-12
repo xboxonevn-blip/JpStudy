@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 
 class JapaneseDivider extends StatelessWidget {
   const JapaneseDivider({super.key, this.icon = '⛩'});
@@ -7,7 +8,7 @@ class JapaneseDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = Theme.of(context).dividerColor.withValues(alpha: 0.3);
+    final color = context.appPalette.outline.withValues(alpha: 0.5);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(

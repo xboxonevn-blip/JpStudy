@@ -23,6 +23,7 @@ import 'package:jpstudy/features/learn/services/learn_session_service.dart';
 import 'package:jpstudy/features/me/providers/app_settings_controller.dart';
 import 'package:jpstudy/features/me/providers/data_settings_controller.dart';
 import 'package:jpstudy/features/onboarding/onboarding_screen.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -252,14 +253,15 @@ class _AchievementDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     final isStreak = achievement.type == model.AchievementType.streak;
     final milestone = isStreak
         ? StreakMilestone.forStreak(achievement.value)
         : null;
-    final bgColor = milestone?.color ?? const Color(0xFFD1493F);
+    final bgColor = milestone?.color ?? palette.error;
     final borderColor = isStreak
         ? bgColor.withValues(alpha: 0.7)
-        : const Color(0xFFB03A32);
+        : palette.error.withValues(alpha: 0.7);
 
     final bonusLabel = isStreak && milestone != null
         ? '+${milestone.bonusXp} XP'
@@ -282,11 +284,11 @@ class _AchievementDialog extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: bgColor,
                 border: Border.all(color: borderColor, width: 4),
-                boxShadow: const [
+                boxShadow: [
                   BoxShadow(
-                    color: Color(0x33000000),
+                    color: palette.ink.withValues(alpha: 0.20),
                     blurRadius: 12,
-                    offset: Offset(0, 4),
+                    offset: const Offset(0, 4),
                   ),
                 ],
               ),
@@ -319,8 +321,8 @@ class _AchievementDialog extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               bonusLabel,
-              style: const TextStyle(
-                color: Color(0xFFFDE68A),
+              style: TextStyle(
+                color: palette.warning,
                 fontSize: 16,
                 fontWeight: FontWeight.w800,
               ),
@@ -332,7 +334,7 @@ class _AchievementDialog extends StatelessWidget {
             child: Text(
               'OK',
               style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
+                color: context.appPalette.primary,
                 fontWeight: FontWeight.w700,
                 fontSize: 16,
               ),

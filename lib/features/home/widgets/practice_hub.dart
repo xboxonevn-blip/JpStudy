@@ -84,7 +84,7 @@ class PracticeHub extends ConsumerWidget {
         HomeSurface.pageHorizontalPadding,
         0,
       ),
-      child: Container(decoration: HomeSurface.softPanel(), child: content),
+      child: Container(decoration: HomeSurface.softPanel(context: context), child: content),
     );
   }
 }
@@ -131,8 +131,11 @@ class _PracticeHubContent extends StatelessWidget {
                   height: embedded ? 32 : 38,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(embedded ? 10 : 12),
-                    gradient: const LinearGradient(
-                      colors: [Color(0xFFE0F2FE), Color(0xFFDCFCE7)],
+                    gradient: LinearGradient(
+                      colors: [
+                        palette.info.withValues(alpha: 0.18),
+                        palette.success.withValues(alpha: 0.12),
+                      ],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
@@ -260,23 +263,23 @@ class _FocusModeHint extends StatelessWidget {
         vertical: embedded ? 6 : 8,
       ),
       decoration: BoxDecoration(
-        color: const Color(0xFFFFFBEB),
+        color: context.appPalette.warning.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(embedded ? 10 : 12),
-        border: Border.all(color: const Color(0xFFFDE68A)),
+        border: Border.all(color: context.appPalette.warning.withValues(alpha: 0.30)),
       ),
       child: Row(
         children: [
           Icon(
             Icons.filter_alt_rounded,
             size: embedded ? 14 : 16,
-            color: const Color(0xFFB45309),
+            color: context.appPalette.warning,
           ),
           SizedBox(width: embedded ? 5 : 6),
           Expanded(
             child: Text(
               _focusHintLabel(language),
               style: TextStyle(
-                color: Color(0xFF92400E),
+                color: context.appPalette.warning,
                 fontSize: embedded ? 11 : 12,
                 fontWeight: FontWeight.w700,
               ),
@@ -324,12 +327,12 @@ class _PracticeTile extends StatelessWidget {
           decoration: BoxDecoration(
             color: palette.elevated,
             borderRadius: BorderRadius.circular(compact ? 14 : 16),
-            border: Border.all(color: HomeSurface.panelBorder),
-            boxShadow: const [
+            border: Border.all(color: HomeSurface.panelBorderFor(context)),
+            boxShadow: [
               BoxShadow(
-                color: Color(0x09283A57),
+                color: palette.ink.withValues(alpha: 0.035),
                 blurRadius: 10,
-                offset: Offset(0, 4),
+                offset: const Offset(0, 4),
               ),
             ],
           ),

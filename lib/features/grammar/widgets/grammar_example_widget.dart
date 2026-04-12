@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/data/utils/grammar_english_notation.dart';
 
@@ -44,7 +45,7 @@ class GrammarExampleWidget extends StatelessWidget {
           _resolveTranslation(),
           style: TextStyle(
             fontSize: 16,
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
+            color: context.appPalette.ink.withValues(alpha: 0.55),
             fontStyle: FontStyle.italic,
           ),
         ),

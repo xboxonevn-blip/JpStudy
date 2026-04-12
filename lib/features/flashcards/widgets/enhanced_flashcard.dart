@@ -332,11 +332,12 @@ class _RetrievabilityChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pct = (value * 100).round();
+    final palette = context.appPalette;
     final color = value > 0.8
-        ? const Color(0xFF2E8B57)
+        ? palette.success
         : value > 0.5
-        ? const Color(0xFFD18A2E)
-        : const Color(0xFFD14B57);
+        ? palette.warning
+        : palette.error;
     final label = switch (language) {
       AppLanguage.en => 'Memory $pct%',
       AppLanguage.vi => 'Ð? nh? $pct%',

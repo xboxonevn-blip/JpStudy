@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 
 /// Confidence level enum for SRS reviews
@@ -32,6 +33,16 @@ class ConfidenceRatingWidget extends StatelessWidget {
     this.compact = false,
   });
 
+  Color _colorForLevel(BuildContext context, ConfidenceLevel level) {
+    final palette = context.appPalette;
+    return switch (level) {
+      ConfidenceLevel.again => palette.error,
+      ConfidenceLevel.hard => palette.warning,
+      ConfidenceLevel.good => palette.info,
+      ConfidenceLevel.easy => palette.success,
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     if (compact) {
@@ -42,7 +53,9 @@ class ConfidenceRatingWidget extends StatelessWidget {
           return IconButton(
             onPressed: () => onSelect(level),
             icon: Icon(level.icon),
-            color: isSelected ? level.color : Colors.grey,
+            color: isSelected
+                ? _colorForLevel(context, level)
+                : context.appPalette.ink.withValues(alpha: 0.4),
             iconSize: 28,
             tooltip: _labelFor(level),
           );
@@ -68,8 +81,9 @@ class ConfidenceRatingWidget extends StatelessWidget {
     ConfidenceLevel level,
     bool isSelected,
   ) {
+    final levelColor = _colorForLevel(context, level);
     return Material(
-      color: isSelected ? level.color : level.color.withValues(alpha: 0.1),
+      color: isSelected ? levelColor : levelColor.withValues(alpha: 0.1),
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         onTap: () => onSelect(level),
@@ -81,7 +95,7 @@ class ConfidenceRatingWidget extends StatelessWidget {
             children: [
               Icon(
                 level.icon,
-                color: isSelected ? Colors.white : level.color,
+                color: isSelected ? Colors.white : levelColor,
                 size: 24,
               ),
               if (showLabels) ...[
@@ -91,7 +105,7 @@ class ConfidenceRatingWidget extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
-                    color: isSelected ? Colors.white : level.color,
+                    color: isSelected ? Colors.white : levelColor,
                   ),
                 ),
               ],
@@ -151,8 +165,8 @@ class StarRating extends StatelessWidget {
               isActive ? Icons.star_rounded : Icons.star_border_rounded,
               size: size,
               color: isActive
-                  ? (activeColor ?? Colors.amber)
-                  : (inactiveColor ?? Colors.grey[300]),
+                  ? (activeColor ?? context.appPalette.warning)
+                  : (inactiveColor ?? context.appPalette.outline),
             ),
           ),
         );

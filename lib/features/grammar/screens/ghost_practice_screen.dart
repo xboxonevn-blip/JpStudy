@@ -159,7 +159,7 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
               Text(
                 '${language.ghostPracticePerfectLabel} 👻',
                 style: TextStyle(
-                  color: Colors.green,
+                  color: context.appPalette.success,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -251,7 +251,7 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
                       value: (_currentIndex + 1) / quizItems.length,
                       minHeight: 12,
                       borderRadius: BorderRadius.circular(6),
-                      backgroundColor: Colors.grey.shade200,
+                      backgroundColor: context.appPalette.outline,
                       valueColor: AlwaysStoppedAnimation<Color>(
                         context.appPalette.primary,
                       ),
@@ -278,7 +278,7 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
                     ),
                     const SizedBox(height: 24),
                     ClayCard(
-                      color: Colors.blue.shade50,
+                      color: context.appPalette.info.withValues(alpha: 0.06),
                       child: Container(
                         width: double.infinity,
                         alignment: Alignment.center,
@@ -299,18 +299,19 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
                       final isSelected = _selectedOptionIndex == index;
                       final isCorrect = option.id == target.id;
 
-                      Color? cardColor = Colors.white;
+                      final palette = context.appPalette;
+                      Color? cardColor = palette.elevated;
                       Color? borderColor;
                       if (_answered) {
                         if (isCorrect) {
-                          cardColor = Colors.green.shade100;
-                          borderColor = Colors.green;
+                          cardColor = palette.success.withValues(alpha: 0.12);
+                          borderColor = palette.success;
                         } else if (isSelected) {
-                          cardColor = Colors.red.shade100;
-                          borderColor = Colors.red;
+                          cardColor = palette.error.withValues(alpha: 0.08);
+                          borderColor = palette.error;
                         }
                       } else if (isSelected) {
-                        cardColor = Colors.blue.shade50;
+                        cardColor = palette.primary.withValues(alpha: 0.08);
                       }
 
                       return Padding(
@@ -334,7 +335,7 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
                                     ),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withValues(alpha: 0.05),
+                                  color: context.appPalette.ink.withValues(alpha: 0.05),
                                   offset: const Offset(0, 4),
                                   blurRadius: 8,
                                 ),
@@ -345,9 +346,7 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                color: _answered && (isCorrect || isSelected)
-                                    ? Colors.black87
-                                    : context.appPalette.ink,
+                                color: context.appPalette.ink,
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -389,7 +388,7 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
                               language.ghostPracticeMarkMasteredLabel,
                             ),
                             style: TextButton.styleFrom(
-                              foregroundColor: Colors.green,
+                              foregroundColor: context.appPalette.success,
                             ),
                           ),
                         ],

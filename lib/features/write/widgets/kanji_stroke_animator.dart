@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:path_drawing/path_drawing.dart';
 
 import '../../../core/app_language.dart';
@@ -214,6 +215,7 @@ class _KanjiStrokeAnimatorState extends State<KanjiStrokeAnimator>
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     final animationButtonLabel = _isPlaying
         ? widget.language.handwritingPauseLabel
         : widget.language.handwritingAnimateLabel;
@@ -237,6 +239,9 @@ class _KanjiStrokeAnimatorState extends State<KanjiStrokeAnimator>
                 currentStrokeProgress: _activeProgress,
                 showStrokeNumbers: _showStrokeNumbers,
                 highlightRadical: _highlightRadical,
+                gridColor: palette.outline,
+                ghostStrokeColor: palette.outline.withValues(alpha: 0.5),
+                pendingNumberColor: palette.ink.withValues(alpha: 0.4),
               ),
             ),
           ),
@@ -250,10 +255,10 @@ class _KanjiStrokeAnimatorState extends State<KanjiStrokeAnimator>
                 _displayStep,
                 _strokeCount,
               ),
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: Color(0xFF4D587A),
+                color: palette.ink.withValues(alpha: 0.7),
               ),
             );
 
@@ -345,7 +350,7 @@ class _KanjiStrokeAnimatorState extends State<KanjiStrokeAnimator>
         LinearProgressIndicator(
           value: stepProgress,
           minHeight: 4,
-          backgroundColor: const Color(0xFFE2E8F0),
+          backgroundColor: palette.outline,
         ),
         const SizedBox(height: 8),
         Align(
@@ -374,10 +379,10 @@ class _KanjiStrokeAnimatorState extends State<KanjiStrokeAnimator>
             children: [
               Text(
                 widget.language.handwritingAnimationSpeedLabel,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xFF4D587A),
+                  color: palette.ink.withValues(alpha: 0.7),
                 ),
               ),
               for (final speed in _speedOptions)
@@ -425,6 +430,9 @@ class _KanjiStrokeAnimatorPainter extends CustomPainter {
     required this.currentStrokeProgress,
     required this.showStrokeNumbers,
     required this.highlightRadical,
+    required this.gridColor,
+    required this.ghostStrokeColor,
+    required this.pendingNumberColor,
   });
 
   final KanjiStrokeVector? vectorTemplate;
@@ -434,6 +442,9 @@ class _KanjiStrokeAnimatorPainter extends CustomPainter {
   final double currentStrokeProgress;
   final bool showStrokeNumbers;
   final bool highlightRadical;
+  final Color gridColor;
+  final Color ghostStrokeColor;
+  final Color pendingNumberColor;
 
   static const _palette = <Color>[
     Color(0xFF0D47A1),
@@ -458,7 +469,7 @@ class _KanjiStrokeAnimatorPainter extends CustomPainter {
 
   void _drawBackground(Canvas canvas, Size size) {
     final gridPaint = Paint()
-      ..color = const Color(0xFFD8DFEE)
+      ..color = gridColor
       ..strokeWidth = 1;
     final thirdW = size.width / 3;
     final thirdH = size.height / 3;
@@ -475,7 +486,7 @@ class _KanjiStrokeAnimatorPainter extends CustomPainter {
       );
     }
     final borderPaint = Paint()
-      ..color = const Color(0xFFD8DFEE)
+      ..color = gridColor
       ..strokeWidth = 1
       ..style = PaintingStyle.stroke;
     canvas.drawRect(Offset.zero & size, borderPaint);
@@ -532,9 +543,7 @@ class _KanjiStrokeAnimatorPainter extends CustomPainter {
       }
 
       if (showStrokeNumbers) {
-        final numberColor = i <= completedStrokes
-            ? color
-            : const Color(0xFF6B7390).withValues(alpha: 0.75);
+        final numberColor = i <= completedStrokes ? color : pendingNumberColor;
         _drawStrokeNumber(
           canvas,
           size,
@@ -561,7 +570,7 @@ class _KanjiStrokeAnimatorPainter extends CustomPainter {
       final color = _strokeColor(i, isRadical: isRadicalStroke);
 
       final basePaint = Paint()
-        ..color = const Color(0xFF8C97B8).withValues(alpha: 0.22)
+        ..color = ghostStrokeColor
         ..strokeWidth = strokeWidth
         ..strokeCap = StrokeCap.round
         ..strokeJoin = StrokeJoin.round
@@ -592,9 +601,7 @@ class _KanjiStrokeAnimatorPainter extends CustomPainter {
 
       if (showStrokeNumbers) {
         final anchor = _vectorNumberAnchor(vector, i, path, layout);
-        final numberColor = i <= completedStrokes
-            ? color
-            : const Color(0xFF6B7390).withValues(alpha: 0.75);
+        final numberColor = i <= completedStrokes ? color : pendingNumberColor;
         _drawStrokeNumber(
           canvas,
           size,
@@ -704,6 +711,9 @@ class _KanjiStrokeAnimatorPainter extends CustomPainter {
         oldDelegate.currentStrokeIndex != currentStrokeIndex ||
         oldDelegate.currentStrokeProgress != currentStrokeProgress ||
         oldDelegate.showStrokeNumbers != showStrokeNumbers ||
-        oldDelegate.highlightRadical != highlightRadical;
+        oldDelegate.highlightRadical != highlightRadical ||
+        oldDelegate.gridColor != gridColor ||
+        oldDelegate.ghostStrokeColor != ghostStrokeColor ||
+        oldDelegate.pendingNumberColor != pendingNumberColor;
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/data/utils/grammar_english_notation.dart';
@@ -70,7 +71,7 @@ class GrammarDetailScreen extends ConsumerWidget {
                   connection,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     fontFamily: 'RobotoMono',
-                    color: Theme.of(context).colorScheme.primary,
+                    color: context.appPalette.primary,
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -97,11 +98,9 @@ class GrammarDetailScreen extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Theme.of(
-          context,
-        ).colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
+        color: context.appPalette.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
+        border: Border.all(color: context.appPalette.outline),
       ),
       child: Text(explanation),
     );
@@ -131,7 +130,7 @@ class GrammarDetailScreen extends ConsumerWidget {
     return Text(
       title.toUpperCase(),
       style: Theme.of(context).textTheme.labelLarge?.copyWith(
-        color: Theme.of(context).colorScheme.tertiary,
+        color: context.appPalette.accent,
         fontWeight: FontWeight.bold,
         letterSpacing: 1.2,
       ),

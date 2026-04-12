@@ -13,6 +13,7 @@ import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/repositories/content_repository.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/games/providers/game_vocab_pool_provider.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/features/mistakes/repositories/mistake_repository.dart';
 
 class KanjiDashScreen extends ConsumerStatefulWidget {
@@ -222,7 +223,7 @@ class _KanjiDashScreenState extends ConsumerState<KanjiDashScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.flash_on, size: 80, color: Colors.amber),
+                Icon(Icons.flash_on, size: 80, color: context.appPalette.warning),
                 const SizedBox(height: 24),
                 Text(
                   language.kanjiDashTitle,
@@ -269,9 +270,9 @@ class _KanjiDashScreenState extends ConsumerState<KanjiDashScreen> {
           height: 8,
           child: LinearProgressIndicator(
             value: progress,
-            backgroundColor: Colors.grey.shade300,
+            backgroundColor: context.appPalette.outline,
             valueColor: AlwaysStoppedAnimation(
-              progress > 0.3 ? Colors.green : Colors.red,
+              progress > 0.3 ? context.appPalette.success : context.appPalette.error,
             ),
           ),
         ),
@@ -284,7 +285,7 @@ class _KanjiDashScreenState extends ConsumerState<KanjiDashScreen> {
                 '${language.kanjiDashTime}: ${_timeLeft.toStringAsFixed(1)}s',
                 style: theme.textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.w700,
-                  color: progress > 0.3 ? Colors.green : Colors.red,
+                  color: progress > 0.3 ? context.appPalette.success : context.appPalette.error,
                 ),
               ),
               Text(
@@ -312,7 +313,7 @@ class _KanjiDashScreenState extends ConsumerState<KanjiDashScreen> {
               Text(
                 _currentQuestion?.reading ?? '',
                 style: theme.textTheme.headlineSmall?.copyWith(
-                  color: Colors.grey.shade600,
+                  color: context.appPalette.ink.withValues(alpha: 0.55),
                 ),
               ),
             ],
@@ -360,7 +361,7 @@ class _KanjiDashScreenState extends ConsumerState<KanjiDashScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.emoji_events, size: 80, color: Colors.amber),
+          Icon(Icons.emoji_events, size: 80, color: context.appPalette.warning),
           const SizedBox(height: 24),
           Text(
             '${language.kanjiDashFinalScore}: $_score',
@@ -371,7 +372,7 @@ class _KanjiDashScreenState extends ConsumerState<KanjiDashScreen> {
             '+${_score * 5} XP',
             style: TextStyle(
               fontSize: 24,
-              color: Theme.of(context).colorScheme.primary,
+              color: context.appPalette.primary,
               fontWeight: FontWeight.w700,
             ),
           ),

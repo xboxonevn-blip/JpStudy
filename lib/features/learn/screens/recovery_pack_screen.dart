@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/services/recovery_pack_service.dart';
@@ -91,6 +92,7 @@ class _RecoveryPackEmpty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Scaffold(
       appBar: AppBar(title: Text(_title(language))),
       body: Center(
@@ -99,10 +101,10 @@ class _RecoveryPackEmpty extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(
+              Icon(
                 Icons.inventory_2_outlined,
                 size: 48,
-                color: Color(0xFF64748B),
+                color: palette.ink.withValues(alpha: 0.55),
               ),
               const SizedBox(height: 12),
               Text(
@@ -116,7 +118,9 @@ class _RecoveryPackEmpty extends StatelessWidget {
               Text(
                 _emptyBody(language),
                 textAlign: TextAlign.center,
-                style: const TextStyle(color: Color(0xFF64748B)),
+                style: TextStyle(
+                  color: palette.ink.withValues(alpha: 0.55),
+                ),
               ),
             ],
           ),

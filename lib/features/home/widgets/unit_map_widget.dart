@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import '../../../../core/app_language.dart';
 import '../../../../core/language_provider.dart';
 import '../models/lesson_node.dart';
@@ -21,6 +22,7 @@ class UnitMapWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final palette = context.appPalette;
     final language = ref.watch(appLanguageProvider);
     final activeIndex = _findActiveNodeIndex();
 
@@ -55,17 +57,20 @@ class UnitMapWidget extends ConsumerWidget {
               height: totalHeight,
               child: Stack(
                 children: [
-                  Positioned.fill(child: _buildPanelShell()),
+                  Positioned.fill(child: _buildPanelShell(palette)),
                   Positioned.fill(
                     child: CustomPaint(
-                      painter: _PanelPatternPainter(accent: unit.color),
+                      painter: _PanelPatternPainter(
+                        accent: unit.color,
+                        outline: palette.outline,
+                      ),
                     ),
                   ),
                   Positioned(
                     top: 18,
                     left: 18,
                     right: 18,
-                    child: _buildUnitHeader(language),
+                    child: _buildUnitHeader(language, palette),
                   ),
                   Positioned.fill(
                     child: CustomPaint(
@@ -143,24 +148,24 @@ class UnitMapWidget extends ConsumerWidget {
     return activeIndex;
   }
 
-  Widget _buildPanelShell() {
+  Widget _buildPanelShell(AppThemePalette palette) {
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
-        color: Colors.white.withValues(alpha: 0.9),
-        border: Border.all(color: const Color(0xFFE3EAF8)),
-        boxShadow: const [
+        color: palette.elevated,
+        border: Border.all(color: palette.outline),
+        boxShadow: [
           BoxShadow(
-            color: Color(0x10264060),
+            color: palette.ink.withValues(alpha: 0.06),
             blurRadius: 22,
-            offset: Offset(0, 10),
+            offset: const Offset(0, 10),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildUnitHeader(AppLanguage language) {
+  Widget _buildUnitHeader(AppLanguage language, AppThemePalette palette) {
     var title = unit.title;
     if (title.startsWith('Level ')) {
       final level = title.replaceAll('Level ', '');
@@ -170,14 +175,14 @@ class UnitMapWidget extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.92),
+        color: palette.elevated,
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: const Color(0xFFDCE6F6)),
-        boxShadow: const [
+        border: Border.all(color: palette.outline),
+        boxShadow: [
           BoxShadow(
-            color: Color(0x0C24364D),
+            color: palette.ink.withValues(alpha: 0.05),
             blurRadius: 10,
-            offset: Offset(0, 4),
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -202,10 +207,10 @@ class UnitMapWidget extends ConsumerWidget {
             child: Text(
               title,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w800,
-                color: Color(0xFF0F172A),
+                color: palette.ink,
               ),
             ),
           ),
@@ -263,15 +268,16 @@ class _LessonLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: isDesktop ? 10 : 8,
         vertical: isDesktop ? 7 : 6,
       ),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.9),
+        color: palette.elevated,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFE2EAF8)),
+        border: Border.all(color: palette.outline),
       ),
       child: Column(
         crossAxisAlignment: alignRight
@@ -284,7 +290,7 @@ class _LessonLabel extends StatelessWidget {
             style: TextStyle(
               fontSize: isDesktop ? 16 : 14,
               fontWeight: FontWeight.w800,
-              color: const Color(0xFF1E293B),
+              color: palette.ink,
               height: 1.15,
             ),
           ),
@@ -297,7 +303,7 @@ class _LessonLabel extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontSize: isDesktop ? 13 : 11.5,
-                color: const Color(0xFF64748B),
+                color: palette.ink.withValues(alpha: 0.55),
                 fontWeight: FontWeight.w600,
                 height: 1.2,
               ),
@@ -310,9 +316,10 @@ class _LessonLabel extends StatelessWidget {
 }
 
 class _PanelPatternPainter extends CustomPainter {
-  _PanelPatternPainter({required this.accent});
+  _PanelPatternPainter({required this.accent, required this.outline});
 
   final Color accent;
+  final Color outline;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -322,7 +329,7 @@ class _PanelPatternPainter extends CustomPainter {
       ..strokeWidth = 1;
 
     final wavePaint = Paint()
-      ..color = const Color(0x0894A3B8)
+      ..color = outline.withValues(alpha: 0.03)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 0.8;
 
@@ -345,6 +352,6 @@ class _PanelPatternPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _PanelPatternPainter oldDelegate) {
-    return oldDelegate.accent != accent;
+    return oldDelegate.accent != accent || oldDelegate.outline != outline;
   }
 }

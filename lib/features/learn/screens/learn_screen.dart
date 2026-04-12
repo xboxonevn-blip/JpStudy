@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
@@ -97,6 +98,7 @@ class _LearnScreenState extends ConsumerState<LearnScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     final language = ref.watch(appLanguageProvider);
     final session = ref.watch(learnSessionProvider);
 
@@ -149,7 +151,7 @@ class _LearnScreenState extends ConsumerState<LearnScreen> {
             height: 6,
             child: LinearProgressIndicator(
               value: session.progress,
-              backgroundColor: Colors.grey[200],
+              backgroundColor: palette.outline,
             ),
           ),
 
@@ -172,25 +174,27 @@ class _LearnScreenState extends ConsumerState<LearnScreen> {
                           vertical: 6,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFFFF7ED),
+                          color: palette.warning.withValues(alpha: 0.08),
                           borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: const Color(0xFFFED7AA)),
+                          border: Border.all(
+                            color: palette.warning.withValues(alpha: 0.30),
+                          ),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.refresh,
                               size: 16,
-                              color: Color(0xFFEA580C),
+                              color: palette.warning,
                             ),
                             const SizedBox(width: 4),
                             Text(
                               language.requeueRetryChip,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
-                                color: Color(0xFFEA580C),
+                                color: palette.warning,
                               ),
                             ),
                           ],
@@ -238,7 +242,7 @@ class _LearnScreenState extends ConsumerState<LearnScreen> {
                             Icon(
                               Icons.replay_rounded,
                               size: 16,
-                              color: Colors.orange[300],
+                              color: palette.warning.withValues(alpha: 0.75),
                             ),
                             const SizedBox(width: 4),
                             Text(
@@ -246,7 +250,7 @@ class _LearnScreenState extends ConsumerState<LearnScreen> {
                               style: TextStyle(
                                 fontSize: 13,
                                 fontStyle: FontStyle.italic,
-                                color: Colors.orange[300],
+                                color: palette.warning.withValues(alpha: 0.75),
                               ),
                             ),
                           ],
@@ -259,8 +263,8 @@ class _LearnScreenState extends ConsumerState<LearnScreen> {
                         onPressed: _handleContinue,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: _isCorrect
-                              ? Colors.green
-                              : Colors.orange,
+                              ? palette.success
+                              : palette.warning,
                           foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -312,7 +316,7 @@ class _LearnScreenState extends ConsumerState<LearnScreen> {
   Widget _buildStatsRow(dynamic session, AppLanguage language) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      color: Colors.grey[50],
+      color: context.appPalette.elevated,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -320,19 +324,19 @@ class _LearnScreenState extends ConsumerState<LearnScreen> {
             icon: Icons.check_circle,
             label: language.correctLabel,
             value: session.correctCount,
-            color: Colors.green,
+            color: context.appPalette.success,
           ),
           _buildStatItem(
             icon: Icons.cancel,
             label: language.incorrectLabel,
             value: session.wrongCount,
-            color: Colors.red,
+            color: context.appPalette.error,
           ),
           _buildStatItem(
             icon: Icons.percent,
             label: language.progressAccuracyLabel,
             value: '${(session.accuracy * 100).toInt()}%',
-            color: Colors.blue,
+            color: context.appPalette.info,
           ),
         ],
       ),
@@ -361,7 +365,13 @@ class _LearnScreenState extends ConsumerState<LearnScreen> {
             ),
           ],
         ),
-        Text(label, style: TextStyle(fontSize: 12, color: Colors.grey[600])),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 12,
+            color: context.appPalette.ink.withValues(alpha: 0.55),
+          ),
+        ),
       ],
     );
   }

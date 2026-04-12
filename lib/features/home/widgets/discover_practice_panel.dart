@@ -87,7 +87,7 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
       child: Material(
         color: Colors.transparent,
         child: Ink(
-          decoration: HomeSurface.softPanel(radius: panelRadius),
+          decoration: HomeSurface.softPanel(radius: panelRadius, context: context),
           child: Column(
             children: [
               InkWell(
@@ -114,8 +114,11 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
                           borderRadius: BorderRadius.circular(
                             widget.dense ? 10 : 12,
                           ),
-                          gradient: const LinearGradient(
-                            colors: [Color(0xFFE0F2FE), Color(0xFFFFEDD5)],
+                          gradient: LinearGradient(
+                            colors: [
+                              palette.info.withValues(alpha: 0.2),
+                              palette.warning.withValues(alpha: 0.2),
+                            ],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),

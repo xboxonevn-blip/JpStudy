@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/study_level.dart';
 
@@ -62,22 +63,23 @@ class _LevelCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: palette.elevated,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE8ECF5)),
+        border: Border.all(color: palette.outline),
       ),
       child: ListTile(
         leading: Container(
           width: 44,
           height: 44,
           decoration: BoxDecoration(
-            color: const Color(0xFFEFF2FF),
+            color: palette.surface,
             borderRadius: BorderRadius.circular(12),
           ),
-          child: const Icon(Icons.folder_open, color: Color(0xFF4255FF)),
+          child: Icon(Icons.folder_open, color: context.appPalette.primary),
         ),
         title: Text(
           level.shortLabel,
@@ -85,7 +87,7 @@ class _LevelCard extends StatelessWidget {
         ),
         subtitle: Text(
           '${level.description(language)} - $countLabel',
-          style: const TextStyle(color: Color(0xFF6B7390)),
+          style: TextStyle(color: palette.ink.withValues(alpha: 0.55)),
         ),
         trailing: const Icon(Icons.chevron_right),
         onTap: () => onSelected(level),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/features/home/providers/weakness_radar_provider.dart';
@@ -14,6 +15,7 @@ class WeaknessRadarCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final palette = context.appPalette;
     final language = ref.watch(appLanguageProvider);
     final radarAsync = ref.watch(weaknessRadarProvider);
 
@@ -31,7 +33,7 @@ class WeaknessRadarCard extends ConsumerWidget {
             0,
           ),
           child: Container(
-            decoration: HomeSurface.softPanel(),
+            decoration: HomeSurface.softPanel(context: context),
             padding: EdgeInsets.all(compact ? 14 : 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,15 +45,18 @@ class WeaknessRadarCard extends ConsumerWidget {
                       height: compact ? 34 : 38,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
-                        gradient: const LinearGradient(
-                          colors: [Color(0xFFFFEDD5), Color(0xFFDBEAFE)],
+                        gradient: LinearGradient(
+                          colors: [
+                            palette.warning.withValues(alpha: 0.2),
+                            palette.info.withValues(alpha: 0.2),
+                          ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.radar_rounded,
-                        color: Color(0xFF0F172A),
+                        color: palette.ink,
                       ),
                     ),
                     const SizedBox(width: 10),
@@ -64,15 +69,15 @@ class WeaknessRadarCard extends ConsumerWidget {
                             style: TextStyle(
                               fontSize: compact ? 16 : 18,
                               fontWeight: FontWeight.w800,
-                              color: const Color(0xFF0F172A),
+                              color: palette.ink,
                             ),
                           ),
                           const SizedBox(height: 2),
                           Text(
                             _subtitle(language),
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 12,
-                              color: Color(0xFF64748B),
+                              color: palette.ink.withValues(alpha: 0.55),
                             ),
                           ),
                         ],
@@ -126,6 +131,7 @@ class _RadarTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Material(
       color: item.color.withValues(alpha: 0.08),
       borderRadius: BorderRadius.circular(18),
@@ -160,9 +166,9 @@ class _RadarTile extends StatelessWidget {
                       item.title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.w800,
-                        color: Color(0xFF0F172A),
+                        color: palette.ink,
                       ),
                     ),
                     const SizedBox(height: 4),
@@ -170,9 +176,9 @@ class _RadarTile extends StatelessWidget {
                       item.subtitle,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 12,
-                        color: Color(0xFF64748B),
+                        color: palette.ink.withValues(alpha: 0.55),
                         height: 1.35,
                       ),
                     ),

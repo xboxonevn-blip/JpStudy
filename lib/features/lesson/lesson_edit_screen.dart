@@ -5,6 +5,7 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
@@ -124,6 +125,7 @@ class _LessonEditScreenState extends ConsumerState<LessonEditScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     final language = ref.watch(appLanguageProvider);
     final repo = ref.read(lessonRepositoryProvider);
     final level = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
@@ -169,9 +171,9 @@ class _LessonEditScreenState extends ConsumerState<LessonEditScreen> {
             child: TextField(
               controller: _titleController,
               enabled: false, // Locked as requested
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 filled: true,
-                fillColor: Color(0xFFF0F0F0),
+                fillColor: context.appPalette.outline,
               ),
             ),
           ),
@@ -324,7 +326,7 @@ class _LessonEditScreenState extends ConsumerState<LessonEditScreen> {
           const SizedBox(height: 12),
           Text(
             '${language.levelLabelPrefix}${level.shortLabel}',
-            style: const TextStyle(color: Color(0xFF8F9BB3)),
+            style: TextStyle(color: palette.ink.withValues(alpha: 0.55)),
           ),
         ],
       ),
@@ -649,6 +651,7 @@ class _LessonEditScreenState extends ConsumerState<LessonEditScreen> {
       context: context,
       showDragHandle: true,
       builder: (context) {
+        final palette = context.appPalette;
         return SafeArea(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
@@ -666,7 +669,7 @@ class _LessonEditScreenState extends ConsumerState<LessonEditScreen> {
                 const SizedBox(height: 8),
                 Text(
                   language.keyboardHelperCopyHintLabel,
-                  style: const TextStyle(color: Color(0xFF6B7390)),
+                  style: TextStyle(color: palette.ink.withValues(alpha: 0.55)),
                 ),
                 const SizedBox(height: 16),
                 Wrap(
@@ -720,15 +723,16 @@ class _Pill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return InkWell(
       borderRadius: BorderRadius.circular(16),
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: active ? const Color(0xFFEFF2FF) : const Color(0xFFF1F3F7),
+          color: active ? palette.primary.withValues(alpha: 0.10) : palette.surface,
           borderRadius: BorderRadius.circular(16),
-          border: active ? Border.all(color: const Color(0xFFD6DDFF)) : null,
+          border: active ? Border.all(color: palette.primary.withValues(alpha: 0.22)) : null,
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -751,12 +755,13 @@ class _LabeledField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           label,
-          style: const TextStyle(fontSize: 12, color: Color(0xFF8F9BB3)),
+          style: TextStyle(fontSize: 12, color: palette.ink.withValues(alpha: 0.55)),
         ),
         const SizedBox(height: 6),
         child,
@@ -778,14 +783,15 @@ class _GhostButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return OutlinedButton.icon(
       onPressed: onPressed,
       icon: Icon(icon, size: 18),
       label: Text(label),
       style: OutlinedButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-        side: const BorderSide(color: Color(0xFFE1E6F0)),
-        foregroundColor: const Color(0xFF1C2440),
+        side: BorderSide(color: palette.outline),
+        foregroundColor: palette.ink,
       ),
     );
   }
@@ -799,6 +805,7 @@ class _IconCircleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return InkWell(
       borderRadius: BorderRadius.circular(18),
       onTap: onTap,
@@ -806,7 +813,7 @@ class _IconCircleButton extends StatelessWidget {
         width: 36,
         height: 36,
         decoration: BoxDecoration(
-          color: const Color(0xFFF1F3F7),
+          color: palette.surface,
           borderRadius: BorderRadius.circular(18),
         ),
         child: Icon(icon, size: 18),
@@ -845,15 +852,16 @@ class _TermCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     // Term (Kanji) | Kanji Meaning
     // Reading      | Definition
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: palette.elevated,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE8ECF5)),
+        border: Border.all(color: palette.outline),
       ),
       child: Column(
         children: [
@@ -932,9 +940,9 @@ class _TermCard extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: const Color(0xFFF7F9FC),
+                color: palette.elevated,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: const Color(0xFFE1E6F0)),
+                border: Border.all(color: palette.outline),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -951,9 +959,9 @@ class _TermCard extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       term.reading,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 13,
-                        color: Color(0xFF6B7390),
+                        color: palette.ink.withValues(alpha: 0.55),
                       ),
                     ),
                   ],
@@ -984,12 +992,13 @@ class _TermField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           label,
-          style: const TextStyle(fontSize: 12, color: Color(0xFF8F9BB3)),
+          style: TextStyle(fontSize: 12, color: palette.ink.withValues(alpha: 0.55)),
         ),
         const SizedBox(height: 6),
         TextFormField(

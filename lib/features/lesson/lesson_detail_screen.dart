@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'dart:async';
 import 'dart:math';
 
@@ -79,6 +80,7 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     final language = ref.watch(appLanguageProvider);
     final level = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
     final fallbackTitle = language.lessonTitle(widget.lessonId);
@@ -179,9 +181,9 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
                   const SizedBox(width: 12),
                 ],
                 bottom: TabBar(
-                  labelColor: const Color(0xFF4255FF),
-                  unselectedLabelColor: const Color(0xFF6B7390),
-                  indicatorColor: const Color(0xFF4255FF),
+                  labelColor: palette.primary,
+                  unselectedLabelColor: palette.ink.withValues(alpha: 0.55),
+                  indicatorColor: palette.primary,
                   tabs: [
                     Tab(
                       text: language.flashcardsAction,
@@ -340,7 +342,9 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
                                 ),
                                 style: Theme.of(context).textTheme.bodySmall
                                     ?.copyWith(
-                                      color: Colors.grey[700],
+                                      color: context.appPalette.ink.withValues(
+                                        alpha: 0.7,
+                                      ),
                                       fontWeight: FontWeight.w600,
                                     ),
                                 textAlign: TextAlign.center,
@@ -493,7 +497,9 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(language.nextReviewToastLabel(label)),
-          backgroundColor: quality <= 2 ? Colors.orange : Colors.green,
+          backgroundColor: quality <= 2
+              ? context.appPalette.warning
+              : context.appPalette.success,
           duration: const Duration(seconds: 2),
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
@@ -1152,19 +1158,20 @@ class _StatChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: palette.elevated,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE8ECF5)),
+        border: Border.all(color: palette.outline),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             label,
-            style: const TextStyle(fontSize: 12, color: Color(0xFF6B7390)),
+            style: TextStyle(fontSize: 12, color: palette.ink.withValues(alpha: 0.55)),
           ),
           const SizedBox(width: 6),
           Text(value, style: const TextStyle(fontWeight: FontWeight.w700)),
@@ -1238,19 +1245,20 @@ class _SummaryChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-        color: const Color(0xFFF7F9FC),
+        color: palette.elevated,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE1E6F0)),
+        border: Border.all(color: palette.outline),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             label,
-            style: const TextStyle(fontSize: 12, color: Color(0xFF6B7390)),
+            style: TextStyle(fontSize: 12, color: palette.ink.withValues(alpha: 0.55)),
           ),
           const SizedBox(width: 6),
           Text(value, style: const TextStyle(fontWeight: FontWeight.w700)),
@@ -1273,16 +1281,21 @@ class _SavedPill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return InkWell(
       borderRadius: BorderRadius.circular(20),
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-          color: active ? const Color(0xFFEFF2FF) : Colors.white,
+          color: active
+              ? palette.primary.withValues(alpha: 0.1)
+              : palette.elevated,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: active ? const Color(0xFFD6DDFF) : const Color(0xFFE1E6F0),
+            color: active
+                ? palette.primary.withValues(alpha: 0.22)
+                : palette.outline,
           ),
         ),
         child: Row(
@@ -1291,7 +1304,7 @@ class _SavedPill extends StatelessWidget {
             Icon(
               active ? Icons.star : Icons.star_border,
               size: 16,
-              color: active ? const Color(0xFF4255FF) : null,
+              color: active ? palette.primary : null,
             ),
             const SizedBox(width: 6),
             Text(label, style: const TextStyle(fontWeight: FontWeight.w600)),
@@ -1352,6 +1365,7 @@ class _ModeSwitcher extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Wrap(
       spacing: 12,
       runSpacing: 12,
@@ -1377,18 +1391,18 @@ class _ModeSwitcher extends StatelessWidget {
           style: ButtonStyle(
             backgroundColor: WidgetStateProperty.resolveWith((states) {
               if (states.contains(WidgetState.selected)) {
-                return const Color(0xFF4255FF);
+                return palette.primary;
               }
-              return Colors.white;
+              return palette.elevated;
             }),
             foregroundColor: WidgetStateProperty.resolveWith((states) {
               if (states.contains(WidgetState.selected)) {
                 return Colors.white;
               }
-              return const Color(0xFF1C2440);
+              return palette.ink;
             }),
             side: WidgetStateProperty.all(
-              const BorderSide(color: Color(0xFFE1E6F0)),
+              BorderSide(color: palette.outline),
             ),
             shape: WidgetStateProperty.all(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
@@ -1452,11 +1466,12 @@ class _PracticeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return OutlinedButton(
       onPressed: onTap,
       style: OutlinedButton.styleFrom(
-        foregroundColor: const Color(0xFF1C2440),
-        side: const BorderSide(color: Color(0xFFE1E6F0)),
+        foregroundColor: palette.ink,
+        side: BorderSide(color: palette.outline),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       ),
@@ -1504,16 +1519,17 @@ class _LessonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: palette.elevated,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFFE8ECF5)),
-        boxShadow: const [
+        border: Border.all(color: palette.outline),
+        boxShadow: [
           BoxShadow(
-            color: Color(0x0A2E3A59),
+            color: palette.ink.withValues(alpha: 0.04),
             blurRadius: 24,
-            offset: Offset(0, 8),
+            offset: const Offset(0, 8),
           ),
         ],
       ),
@@ -1544,8 +1560,8 @@ class _LessonCard extends StatelessWidget {
                               ? Icons.check_circle
                               : Icons.check_circle_outline,
                           color: isLearned
-                              ? const Color(0xFF22C55E)
-                              : const Color(0xFF8F9BB3),
+                              ? palette.success
+                              : palette.ink.withValues(alpha: 0.4),
                         ),
                         tooltip: language.learnedLabel,
                         padding: EdgeInsets.zero,
@@ -1559,8 +1575,8 @@ class _LessonCard extends StatelessWidget {
                             ? Icons.star_rounded
                             : Icons.star_border_rounded,
                         color: isStarred
-                            ? const Color(0xFFFFC107)
-                            : const Color(0xFF8F9BB3),
+                            ? palette.warning
+                            : palette.ink.withValues(alpha: 0.4),
                         size: 26,
                       ),
                       tooltip: language.starLabel,
@@ -1570,9 +1586,9 @@ class _LessonCard extends StatelessWidget {
                     const SizedBox(width: 16),
                     IconButton(
                       onPressed: onEdit,
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.edit_outlined,
-                        color: Color(0xFF8F9BB3),
+                        color: palette.ink.withValues(alpha: 0.55),
                         size: 22,
                       ),
                       tooltip: language.editLabel,
@@ -1633,6 +1649,7 @@ class _CardContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     if (termsAsync.isLoading) {
       return const CircularProgressIndicator();
     }
@@ -1647,14 +1664,14 @@ class _CardContent extends StatelessWidget {
           children: [
             Text(
               emptyLabel ?? '',
-              style: const TextStyle(color: Color(0xFF6B7390)),
+              style: TextStyle(color: palette.ink.withValues(alpha: 0.55)),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: onStartLearning,
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF4255FF),
+                backgroundColor: palette.primary,
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 24,
@@ -1675,7 +1692,7 @@ class _CardContent extends StatelessWidget {
       }
       return Text(
         label,
-        style: const TextStyle(color: Color(0xFF6B7390)),
+        style: TextStyle(color: palette.ink.withValues(alpha: 0.55)),
         textAlign: TextAlign.center,
       );
     }
@@ -1701,19 +1718,19 @@ class _CardContent extends StatelessWidget {
         children: [
           Text(
             language.termLabel,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 12,
-              color: Color(0xFF8F9BB3),
+              color: palette.ink.withValues(alpha: 0.55),
               fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(height: 8),
           Text(
             resolvedTerm.term,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 36,
               fontWeight: FontWeight.w700,
-              color: Color(0xFF1C2440),
+              color: palette.ink,
             ),
             textAlign: TextAlign.center,
           ),
@@ -1721,16 +1738,16 @@ class _CardContent extends StatelessWidget {
             const SizedBox(height: 20),
             Text(
               language.readingLabel,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 12,
-                color: Color(0xFF8F9BB3),
+                color: palette.ink.withValues(alpha: 0.55),
                 fontWeight: FontWeight.w600,
               ),
             ),
             const SizedBox(height: 8),
             Text(
               resolvedTerm.reading.trim(),
-              style: const TextStyle(fontSize: 18, color: Color(0xFF6B7390)),
+              style: TextStyle(fontSize: 18, color: palette.ink.withValues(alpha: 0.55)),
               textAlign: TextAlign.center,
             ),
           ],
@@ -1740,14 +1757,14 @@ class _CardContent extends StatelessWidget {
               language.meaningLabel,
               style: TextStyle(
                 fontSize: 12,
-                color: Color(0xFF8F9BB3),
+                color: palette.ink.withValues(alpha: 0.55),
                 fontWeight: FontWeight.w600,
               ),
             ),
             const SizedBox(height: 8),
             Text(
               frontHint,
-              style: const TextStyle(fontSize: 16, color: Color(0xFF4D5877)),
+              style: TextStyle(fontSize: 16, color: palette.ink.withValues(alpha: 0.7)),
               textAlign: TextAlign.center,
             ),
           ],
@@ -1764,16 +1781,16 @@ class _CardContent extends StatelessWidget {
           language == AppLanguage.en
               ? language.meaningEnLabel
               : language.meaningLabel,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 12,
-            color: Color(0xFF8F9BB3),
+            color: palette.ink.withValues(alpha: 0.55),
             fontWeight: FontWeight.w600,
           ),
         ),
         const SizedBox(height: 12),
         Text(
           backMeaning.trim().isEmpty ? '-' : backMeaning,
-          style: const TextStyle(fontSize: 18, color: Color(0xFF1C2440)),
+          style: TextStyle(fontSize: 18, color: palette.ink),
           textAlign: TextAlign.center,
         ),
         if (language == AppLanguage.vi &&
@@ -1783,16 +1800,16 @@ class _CardContent extends StatelessWidget {
             language.kanjiMeaningLabel,
             style: TextStyle(
               fontSize: 12,
-              color: Color(0xFF8F9BB3),
+              color: palette.ink.withValues(alpha: 0.55),
               fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(height: 8),
           Text(
             resolvedTerm.kanjiMeaning,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 16,
-              color: Color(0xFF4D5877),
+              color: palette.ink.withValues(alpha: 0.7),
               fontStyle: FontStyle.italic,
             ),
             textAlign: TextAlign.center,
@@ -1874,12 +1891,13 @@ class _ShortcutBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: const BoxDecoration(
-        color: Color(0xFFE9EBFF),
-        borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
+      decoration: BoxDecoration(
+        color: palette.primary.withValues(alpha: 0.08),
+        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(20)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -1888,7 +1906,7 @@ class _ShortcutBar extends StatelessWidget {
             width: 28,
             height: 28,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: palette.elevated,
               borderRadius: BorderRadius.circular(10),
             ),
             child: const Icon(Icons.keyboard, size: 16),
@@ -1902,7 +1920,7 @@ class _ShortcutBar extends StatelessWidget {
           Flexible(
             child: Text(
               language.shortcutInstruction,
-              style: const TextStyle(color: Color(0xFF4D5877)),
+              style: TextStyle(color: palette.ink.withValues(alpha: 0.7)),
               textAlign: TextAlign.center,
             ),
           ),
@@ -1933,17 +1951,18 @@ class _FlashcardControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: palette.elevated,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFFE1E6F0)),
-        boxShadow: const [
+        border: Border.all(color: palette.outline),
+        boxShadow: [
           BoxShadow(
-            color: Color(0x05000000),
+            color: palette.ink.withValues(alpha: 0.02),
             blurRadius: 10,
-            offset: Offset(0, 4),
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -1955,18 +1974,18 @@ class _FlashcardControls extends StatelessWidget {
             icon: Icon(
               isShuffle ? Icons.shuffle_on_outlined : Icons.shuffle,
               color: isShuffle
-                  ? const Color(0xFF4255FF)
-                  : const Color(0xFF6B7390),
+                  ? palette.primary
+                  : palette.ink.withValues(alpha: 0.55),
             ),
             tooltip: language.shuffleLabel,
           ),
           const SizedBox(width: 8),
-          Container(width: 1, height: 24, color: const Color(0xFFE1E6F0)),
+          Container(width: 1, height: 24, color: palette.outline),
           const SizedBox(width: 8),
           IconButton(
             onPressed: onPrev,
             icon: const Icon(Icons.arrow_back_rounded, size: 28),
-            color: const Color(0xFF1C2440),
+            color: palette.ink,
             tooltip: language.previousLabel,
           ),
           const SizedBox(width: 4),
@@ -1974,7 +1993,7 @@ class _FlashcardControls extends StatelessWidget {
             onPressed: onAutoPlay,
             icon: Icon(
               isAutoPlay ? Icons.pause_circle_filled : Icons.play_circle_filled,
-              color: const Color(0xFF4255FF),
+              color: palette.primary,
               size: 52,
             ),
             padding: EdgeInsets.zero,
@@ -1984,7 +2003,7 @@ class _FlashcardControls extends StatelessWidget {
           IconButton(
             onPressed: onNext,
             icon: const Icon(Icons.arrow_forward_rounded, size: 28),
-            color: const Color(0xFF1C2440),
+            color: palette.ink,
             tooltip: language.nextLabel,
           ),
         ],

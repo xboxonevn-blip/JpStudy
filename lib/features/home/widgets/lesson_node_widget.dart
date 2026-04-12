@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 
 import '../../../../core/app_language.dart';
 import '../../../../core/language_provider.dart';
@@ -232,7 +233,12 @@ class _LessonNodeWidgetState extends ConsumerState<LessonNodeWidget>
       return const [Color(0xFF93C5FD), Color(0xFF3B82F6), Color(0xFF2563EB)];
     }
     if (widget.node.isLocked) {
-      return const [Color(0xFFE5E7EB), Color(0xFFBFC7D4), Color(0xFF94A3B8)];
+      final p = context.appPalette;
+      return [
+        p.outline,
+        p.ink.withValues(alpha: 0.30),
+        p.ink.withValues(alpha: 0.45),
+      ];
     }
     return const [Color(0xFFBFDBFE), Color(0xFF60A5FA), Color(0xFF2563EB)];
   }

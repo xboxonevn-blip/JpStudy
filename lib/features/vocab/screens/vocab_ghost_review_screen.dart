@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
@@ -86,9 +87,9 @@ class _VocabGhostReviewScreenState
           children: [
             Row(
               children: [
-                const Icon(
+                Icon(
                   Icons.lightbulb_rounded,
-                  color: Colors.amber,
+                  color: context.appPalette.warning,
                   size: 24,
                 ),
                 const SizedBox(width: 8),
@@ -157,7 +158,7 @@ class _VocabGhostReviewScreenState
           preferredSize: const Size.fromHeight(6),
           child: LinearProgressIndicator(
             value: progress,
-            backgroundColor: Colors.grey[200],
+            backgroundColor: context.appPalette.outline,
             valueColor: AlwaysStoppedAnimation<Color>(theme.colorScheme.error),
           ),
         ),
@@ -169,7 +170,7 @@ class _VocabGhostReviewScreenState
             child: Text(
               '${_currentIndex + 1} / ${widget.items.length}',
               style: theme.textTheme.bodyMedium?.copyWith(
-                color: Colors.grey[600],
+                color: context.appPalette.ink.withValues(alpha: 0.55),
               ),
             ),
           ),
@@ -207,16 +208,16 @@ class _VocabGhostReviewScreenState
                       height: 52,
                       child: OutlinedButton.icon(
                         onPressed: () => _showHint(context),
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.lightbulb_outline_rounded,
-                          color: Colors.amber,
+                          color: context.appPalette.warning,
                         ),
                         label: Text(
                           language.mnemonicHintLabel,
-                          style: const TextStyle(color: Colors.amber),
+                          style: TextStyle(color: context.appPalette.warning),
                         ),
                         style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: Colors.amber),
+                          side: BorderSide(color: context.appPalette.warning),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(14),
                           ),
@@ -263,11 +264,12 @@ class _SummaryDialog extends ConsumerWidget {
     final language = ref.watch(appLanguageProvider);
     final successCount = goodCount + easyCount;
     final accuracyPct = total > 0 ? (successCount / total * 100).round() : 0;
+    final palette = context.appPalette;
     final color = accuracyPct >= 80
-        ? Colors.green
+        ? palette.success
         : accuracyPct >= 50
-            ? Colors.orange
-            : Colors.red;
+            ? palette.warning
+            : palette.error;
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       title: Text(language.reviewCompleteLabel),
@@ -321,13 +323,14 @@ class _GradeBreakdownRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        _GradePill(count: againCount, color: Colors.red, label: language.reviewAgainLabel),
-        _GradePill(count: hardCount, color: Colors.orange, label: language.reviewHardLabel),
-        _GradePill(count: goodCount, color: Colors.blue, label: language.reviewGoodLabel),
-        _GradePill(count: easyCount, color: Colors.green, label: language.reviewEasyLabel),
+        _GradePill(count: againCount, color: palette.error, label: language.reviewAgainLabel),
+        _GradePill(count: hardCount, color: palette.warning, label: language.reviewHardLabel),
+        _GradePill(count: goodCount, color: palette.info, label: language.reviewGoodLabel),
+        _GradePill(count: easyCount, color: palette.success, label: language.reviewEasyLabel),
       ],
     );
   }

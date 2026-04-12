@@ -946,17 +946,17 @@ class _SrsRetentionCard extends ConsumerWidget {
                       if (bd.learning > 0)
                         Expanded(
                           flex: bd.learning,
-                          child: Container(color: const Color(0xFFEF4444)),
+                          child: Container(color: palette.error),
                         ),
                       if (bd.young > 0)
                         Expanded(
                           flex: bd.young,
-                          child: Container(color: const Color(0xFFEAB308)),
+                          child: Container(color: palette.warning),
                         ),
                       if (bd.mature > 0)
                         Expanded(
                           flex: bd.mature,
-                          child: Container(color: const Color(0xFF22C55E)),
+                          child: Container(color: palette.success),
                         ),
                     ],
                   ),
@@ -970,17 +970,17 @@ class _SrsRetentionCard extends ConsumerWidget {
                 _StageLabel(
                   label: language.progressLearningStageLabel,
                   count: bd.learning,
-                  color: const Color(0xFFEF4444),
+                  color: palette.error,
                 ),
                 _StageLabel(
                   label: language.progressYoungStageLabel,
                   count: bd.young,
-                  color: const Color(0xFFEAB308),
+                  color: palette.warning,
                 ),
                 _StageLabel(
                   label: language.progressMatureStageLabel,
                   count: bd.mature,
-                  color: const Color(0xFF22C55E),
+                  color: palette.success,
                 ),
               ],
             ),
@@ -1009,6 +1009,7 @@ class _StageLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -1023,7 +1024,10 @@ class _StageLabel extends StatelessWidget {
         const SizedBox(width: 4),
         Text(
           '$label $count',
-          style: const TextStyle(fontSize: 11, color: Color(0xFF6B7390)),
+          style: TextStyle(
+            fontSize: 11,
+            color: palette.ink.withValues(alpha: 0.55),
+          ),
         ),
       ],
     );
@@ -1184,18 +1188,19 @@ class _EmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: palette.elevated,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE8ECF5)),
+        border: Border.all(color: palette.outline),
       ),
       child: Text(
         label,
-        style: const TextStyle(
-          color: Color(0xFF6B7390),
+        style: TextStyle(
+          color: palette.ink.withValues(alpha: 0.55),
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -1259,18 +1264,22 @@ class _ActivityCalendar extends ConsumerWidget {
   static const int _weeks = 16;
   static const double _cellSize = 10;
   static const double _cellGap = 3;
-  static const List<Color> _palette = [
-    Color(0xFFE8ECF5), // 0 reviews
-    Color(0xFFBDD5F5), // 1–5
-    Color(0xFF5B9FE8), // 6–15
-    Color(0xFF1A6FD8), // 16+
-  ];
+  List<Color> _paletteFor(BuildContext context) {
+    final p = context.appPalette;
+    return [
+      p.outline, // 0 reviews
+      p.info.withValues(alpha: 0.35), // 1–5
+      p.info.withValues(alpha: 0.65), // 6–15
+      p.info, // 16+
+    ];
+  }
 
-  Color _color(int reviewed) {
-    if (reviewed <= 0) return _palette[0];
-    if (reviewed <= 5) return _palette[1];
-    if (reviewed <= 15) return _palette[2];
-    return _palette[3];
+  Color _color(BuildContext context, int reviewed) {
+    final pal = _paletteFor(context);
+    if (reviewed <= 0) return pal[0];
+    if (reviewed <= 5) return pal[1];
+    if (reviewed <= 15) return pal[2];
+    return pal[3];
   }
 
   String _dateKey(DateTime d) =>
@@ -1334,17 +1343,18 @@ class _ActivityCalendar extends ConsumerWidget {
     final language = ref.watch(appLanguageProvider);
     final calendarAsync = ref.watch(activityCalendarProvider);
 
+    final palette = context.appPalette;
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: palette.elevated,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE8ECF5)),
-        boxShadow: const [
+        border: Border.all(color: palette.outline),
+        boxShadow: [
           BoxShadow(
-            color: Color(0x0A2E3A59),
+            color: palette.ink.withValues(alpha: 0.04),
             blurRadius: 18,
-            offset: Offset(0, 6),
+            offset: const Offset(0, 6),
           ),
         ],
       ),
@@ -1365,7 +1375,7 @@ class _ActivityCalendar extends ConsumerWidget {
             error: (e, _) => ErrorStateWidget(error: e, compact: true),
           ),
           const SizedBox(height: 10),
-          _buildBottomRow(streak, language),
+          _buildBottomRow(context, streak, language),
         ],
       ),
     );
@@ -1412,9 +1422,9 @@ class _ActivityCalendar extends ConsumerWidget {
                   width: 12,
                   child: Text(
                     label,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 8,
-                      color: Color(0xFF6B7390),
+                      color: context.appPalette.ink.withValues(alpha: 0.55),
                     ),
                     textAlign: TextAlign.right,
                   ),
@@ -1463,9 +1473,9 @@ class _ActivityCalendar extends ConsumerWidget {
           child: monthLabel != null
               ? Text(
                   monthLabel,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 8,
-                    color: Color(0xFF6B7390),
+                    color: context.appPalette.ink.withValues(alpha: 0.55),
                     fontWeight: FontWeight.w600,
                   ),
                 )
@@ -1503,10 +1513,10 @@ class _ActivityCalendar extends ConsumerWidget {
       width: _cellSize,
       height: _cellSize,
       decoration: BoxDecoration(
-        color: isFuture ? Colors.transparent : _color(reviewed),
+        color: isFuture ? Colors.transparent : _color(context, reviewed),
         borderRadius: BorderRadius.circular(3),
         border: isToday
-            ? Border.all(color: const Color(0xFF1A6FD8), width: 1.5)
+            ? Border.all(color: context.appPalette.info, width: 1.5)
             : null,
       ),
     );
@@ -1531,13 +1541,18 @@ class _ActivityCalendar extends ConsumerWidget {
     );
   }
 
-  Widget _buildBottomRow(int streak, AppLanguage language) {
+  Widget _buildBottomRow(
+    BuildContext context,
+    int streak,
+    AppLanguage language,
+  ) {
+    final palette = context.appPalette;
     return Row(
       children: [
-        const Icon(
+        Icon(
           Icons.local_fire_department_rounded,
           size: 14,
-          color: Color(0xFFF97316),
+          color: palette.accent,
         ),
         const SizedBox(width: 4),
         Text(
@@ -1547,33 +1562,39 @@ class _ActivityCalendar extends ConsumerWidget {
             'Chuỗi $streak ngày',
             '$streak日連続',
           ),
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w700,
-            color: Color(0xFFF97316),
+            color: palette.accent,
           ),
         ),
         const Spacer(),
         Text(
           _tr(language, 'Less', 'Ít', '少'),
-          style: const TextStyle(fontSize: 10, color: Color(0xFF6B7390)),
+          style: TextStyle(
+            fontSize: 10,
+            color: palette.ink.withValues(alpha: 0.55),
+          ),
         ),
         const SizedBox(width: 4),
-        for (int i = 0; i < _palette.length; i++) ...[
+        for (int i = 0; i < _paletteFor(context).length; i++) ...[
           Container(
             width: _cellSize,
             height: _cellSize,
             decoration: BoxDecoration(
-              color: _palette[i],
+              color: _paletteFor(context)[i],
               borderRadius: BorderRadius.circular(3),
             ),
           ),
-          if (i < _palette.length - 1) const SizedBox(width: _cellGap),
+          if (i < _paletteFor(context).length - 1) const SizedBox(width: _cellGap),
         ],
         const SizedBox(width: 4),
         Text(
           _tr(language, 'More', 'Nhiều', '多'),
-          style: const TextStyle(fontSize: 10, color: Color(0xFF6B7390)),
+          style: TextStyle(
+            fontSize: 10,
+            color: palette.ink.withValues(alpha: 0.55),
+          ),
         ),
       ],
     );
@@ -1698,12 +1719,12 @@ class _MasteryMiniBar extends StatelessWidget {
                         if (mastery.totalMature > 0)
                           Expanded(
                             flex: mastery.totalMature,
-                            child: Container(color: const Color(0xFF22C55E)),
+                            child: Container(color: palette.success),
                           ),
                         if (mastery.totalStudied - mastery.totalMature > 0)
                           Expanded(
                             flex: mastery.totalStudied - mastery.totalMature,
-                            child: Container(color: const Color(0xFFEAB308)),
+                            child: Container(color: palette.warning),
                           ),
                         if (mastery.totalItems - mastery.totalStudied > 0)
                           Expanded(

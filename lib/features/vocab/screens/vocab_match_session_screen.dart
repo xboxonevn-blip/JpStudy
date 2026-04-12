@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/features/common/widgets/clay_button.dart';
@@ -118,21 +119,21 @@ class _VocabMatchSessionScreenState
                   duration: const Duration(milliseconds: 180),
                   decoration: BoxDecoration(
                     color: matched
-                        ? Colors.green.shade50
+                        ? context.appPalette.success.withValues(alpha: 0.10)
                         : mismatched
-                        ? Colors.red.shade50
+                        ? context.appPalette.error.withValues(alpha: 0.08)
                         : selected
-                        ? const Color(0xFFE8EBFF)
-                        : Colors.white,
+                        ? context.appPalette.primary.withValues(alpha: 0.10)
+                        : context.appPalette.elevated,
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
                       color: matched
-                          ? Colors.green
+                          ? context.appPalette.success
                           : mismatched
-                          ? Colors.red
+                          ? context.appPalette.error
                           : selected
-                          ? const Color(0xFF4255FF)
-                          : Colors.grey.shade300,
+                          ? context.appPalette.primary
+                          : context.appPalette.outline,
                       width: 1.6,
                     ),
                   ),

@@ -45,10 +45,10 @@ class _ContinueButtonState extends ConsumerState<ContinueButton> {
     ContinueAction action,
     AppLanguage language,
   ) {
-    final accent = _getAccentColor(action.type);
+    final palette = context.appPalette;
+    final accent = _getAccentColor(action.type, palette);
     final icon = _getIcon(action.type);
     final isNextLesson = action.type == ContinueActionType.nextLesson;
-    final palette = context.appPalette;
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 16, 20, 18),
@@ -86,8 +86,8 @@ class _ContinueButtonState extends ConsumerState<ContinueButton> {
   }
 
   Widget _buildNextLessonStyle(ContinueAction action, AppLanguage language) {
-    final accent = _getAccentColor(action.type);
     final palette = context.appPalette;
+    final accent = _getAccentColor(action.type, palette);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -242,20 +242,20 @@ class _ContinueButtonState extends ConsumerState<ContinueButton> {
     );
   }
 
-  Color _getAccentColor(ContinueActionType type) {
+  Color _getAccentColor(ContinueActionType type, AppThemePalette palette) {
     switch (type) {
       case ContinueActionType.grammarReview:
-        return const Color(0xFF7C3AED);
+        return palette.accent;
       case ContinueActionType.vocabReview:
-        return const Color(0xFF2563EB);
+        return palette.info;
       case ContinueActionType.kanjiReview:
-        return const Color(0xFF0E7490);
+        return palette.secondary;
       case ContinueActionType.nextLesson:
-        return const Color(0xFF16A34A);
+        return palette.success;
       case ContinueActionType.fixMistakes:
-        return const Color(0xFFDC2626);
+        return palette.error;
       default:
-        return const Color(0xFF2563EB);
+        return palette.info;
     }
   }
 

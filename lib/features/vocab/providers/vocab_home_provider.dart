@@ -55,13 +55,13 @@ final vocabHomeSectionProvider = FutureProvider<VocabHomeSection>((ref) async {
   final repo = ref.watch(lessonRepositoryProvider);
   final selectedLevel = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
 
-  // Subscribe only to vocabDue so streak/XP ticks don't re-fire all 9 queries.
-  final dueCount = ref.watch(
-    dashboardProvider.select((v) => v.valueOrNull?.vocabDue ?? 0),
-  );
-  // Use current value of next-review stream; null while not yet emitted.
-  // The provider re-runs automatically when the stream emits a new value.
-  final nextReview = ref.watch(nextVocabReviewProvider).valueOrNull;
+  // Await the first emission from each stream so the body doesn't complete
+  // with AsyncLoading defaults and get re-triggered by the first value.
+  // Using .future suspends the body while keeping the subscription alive,
+  // which prevents the autoDispose restart loop that breaks tests.
+  final dashboard = await ref.watch(dashboardProvider.future);
+  final dueCount = dashboard.vocabDue;
+  final nextReview = await ref.watch(nextVocabReviewProvider.future);
 
   // Fire all remaining independent queries concurrently.
   final n5Future = repo.countVocabByLevelAndSeries('N5', 'hajimete');

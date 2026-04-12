@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
@@ -51,7 +52,7 @@ class _GrammarListWidgetState extends ConsumerState<GrammarListWidget> {
                 vi: 'Chưa có dữ liệu ngữ pháp.',
                 ja: '文法データがありません。',
               ),
-              style: const TextStyle(color: Colors.grey),
+              style: TextStyle(color: context.appPalette.ink.withValues(alpha: 0.45)),
             ),
           );
         }
@@ -284,19 +285,20 @@ class _GrammarLessonHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     final masteryPercent = total == 0 ? 0 : ((mastered / total) * 100).round();
 
     return Container(
       padding: const EdgeInsets.fromLTRB(14, 14, 14, 12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: palette.elevated,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE2E8F0)),
-        boxShadow: const [
+        border: Border.all(color: palette.outline),
+        boxShadow: [
           BoxShadow(
-            color: Color(0x0B334155),
+            color: palette.ink.withValues(alpha: 0.04),
             blurRadius: 12,
-            offset: Offset(0, 4),
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -310,10 +312,10 @@ class _GrammarLessonHeader extends StatelessWidget {
               vi: 'Khu vực học Ngữ pháp',
               ja: '文法学習ハブ',
             ),
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w800,
-              color: Color(0xFF1E293B),
+              color: palette.ink,
             ),
           ),
           const SizedBox(height: 8),
@@ -328,8 +330,8 @@ class _GrammarLessonHeader extends StatelessWidget {
                   vi: 'Thuộc $mastered/$total',
                   ja: '習得済み $mastered/$total',
                 ),
-                const Color(0xFF166534),
-                const Color(0xFFF0FDF4),
+                palette.success,
+                palette.success.withValues(alpha: 0.08),
               ),
               _chip(
                 _tr(
@@ -338,8 +340,8 @@ class _GrammarLessonHeader extends StatelessWidget {
                   vi: 'Nắm chắc $masteryPercent%',
                   ja: '習得度 $masteryPercent%',
                 ),
-                const Color(0xFF1E3A8A),
-                const Color(0xFFEFF6FF),
+                palette.info,
+                palette.info.withValues(alpha: 0.08),
               ),
               _chip(
                 _tr(
@@ -348,8 +350,8 @@ class _GrammarLessonHeader extends StatelessWidget {
                   vi: 'Cần ôn $dueCount',
                   ja: '期限 $dueCount',
                 ),
-                const Color(0xFF92400E),
-                const Color(0xFFFFFBEB),
+                palette.warning,
+                palette.warning.withValues(alpha: 0.08),
               ),
               _chip(
                 _tr(
@@ -358,8 +360,8 @@ class _GrammarLessonHeader extends StatelessWidget {
                   vi: 'Điểm yếu $ghostCount',
                   ja: '弱点 $ghostCount',
                 ),
-                const Color(0xFF991B1B),
-                const Color(0xFFFEF2F2),
+                palette.error,
+                palette.error.withValues(alpha: 0.07),
               ),
               _chip(
                 _tr(
@@ -368,8 +370,8 @@ class _GrammarLessonHeader extends StatelessWidget {
                   vi: '$totalExamples ví dụ',
                   ja: '例文 $totalExamples',
                 ),
-                const Color(0xFF0F766E),
-                const Color(0xFFF0FDFA),
+                palette.secondary,
+                palette.secondary.withValues(alpha: 0.09),
               ),
               _chip(
                 _tr(
@@ -378,8 +380,8 @@ class _GrammarLessonHeader extends StatelessWidget {
                   vi: 'Mục tiêu: Toàn diện',
                   ja: '目標 バランス重視',
                 ),
-                const Color(0xFF4338CA),
-                const Color(0xFFEEF2FF),
+                palette.info,
+                palette.info.withValues(alpha: 0.12),
               ),
             ],
           ),
@@ -408,20 +410,20 @@ class _GrammarLessonHeader extends StatelessWidget {
             },
           ),
           const SizedBox(height: 12),
-          _buildModeSpotlight(),
+          _buildModeSpotlight(context),
           const SizedBox(height: 10),
           if (mode == _GrammarLessonViewMode.learn)
-            _buildLearnActions()
+            _buildLearnActions(palette)
           else if (mode == _GrammarLessonViewMode.drill)
             _buildDrillActions()
           else
-            _buildQuizActions(),
+            _buildQuizActions(palette),
         ],
       ),
     );
   }
 
-  Widget _buildLearnActions() {
+  Widget _buildLearnActions(AppThemePalette palette) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -432,7 +434,7 @@ class _GrammarLessonHeader extends StatelessWidget {
             vi: 'Xem các thẻ ngữ pháp bên dưới, rồi bắt đầu luyện.',
             ja: '下の文法カードを確認してから、習得フローを開始してください。',
           ),
-          style: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
+          style: TextStyle(fontSize: 12, color: palette.ink.withValues(alpha: 0.55)),
         ),
         const SizedBox(height: 10),
         SizedBox(
@@ -511,10 +513,11 @@ class _GrammarLessonHeader extends StatelessWidget {
     );
   }
 
-  Widget _buildQuizActions() {
+  Widget _buildQuizActions(AppThemePalette palette) {
     return Column(
       children: [
         _quizTile(
+          palette: palette,
           title: _tr(language, en: 'Quick 10', vi: 'Quick 10', ja: 'クイック10'),
           subtitle: _tr(
             language,
@@ -523,11 +526,12 @@ class _GrammarLessonHeader extends StatelessWidget {
             ja: '2〜3分、試験に近いミックス問題。',
           ),
           icon: Icons.flash_on_rounded,
-          color: const Color(0xFF2563EB),
+          color: palette.info,
           onTap: onStartQuick,
         ),
         const SizedBox(height: 8),
         _quizTile(
+          palette: palette,
           title: _tr(
             language,
             en: 'Lesson Mastery 25',
@@ -541,11 +545,12 @@ class _GrammarLessonHeader extends StatelessWidget {
             ja: 'このレッスンをバランス良く網羅。',
           ),
           icon: Icons.checklist_rounded,
-          color: const Color(0xFF0F766E),
+          color: palette.secondary,
           onTap: onStartMastery,
         ),
         const SizedBox(height: 8),
         _quizTile(
+          palette: palette,
           title: _tr(
             language,
             en: 'JLPT Mini Mock',
@@ -566,11 +571,12 @@ class _GrammarLessonHeader extends StatelessWidget {
     );
   }
 
-  Widget _buildModeSpotlight() {
+  Widget _buildModeSpotlight(BuildContext context) {
+    final palette = context.appPalette;
     final color = switch (mode) {
-      _GrammarLessonViewMode.learn => const Color(0xFF1D4ED8),
-      _GrammarLessonViewMode.drill => const Color(0xFFB45309),
-      _GrammarLessonViewMode.quiz => const Color(0xFF7C3AED),
+      _GrammarLessonViewMode.learn => palette.info,
+      _GrammarLessonViewMode.drill => palette.warning,
+      _GrammarLessonViewMode.quiz => palette.accent,
     };
     final icon = switch (mode) {
       _GrammarLessonViewMode.learn => Icons.menu_book_rounded,
@@ -626,6 +632,7 @@ class _GrammarLessonHeader extends StatelessWidget {
   }
 
   Widget _quizTile({
+    required AppThemePalette palette,
     required String title,
     required String subtitle,
     required IconData icon,
@@ -640,8 +647,8 @@ class _GrammarLessonHeader extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: const Color(0xFFE2E8F0)),
-          color: Colors.white,
+          border: Border.all(color: palette.outline),
+          color: palette.elevated,
         ),
         child: Row(
           children: [
@@ -661,23 +668,23 @@ class _GrammarLessonHeader extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w700,
-                      color: Color(0xFF1F2937),
+                      color: palette.ink,
                     ),
                   ),
                   Text(
                     subtitle,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
-                      color: Color(0xFF64748B),
+                      color: palette.ink.withValues(alpha: 0.55),
                     ),
                   ),
                 ],
               ),
             ),
-            const Icon(Icons.chevron_right_rounded, color: Color(0xFF94A3B8)),
+            Icon(Icons.chevron_right_rounded, color: palette.ink.withValues(alpha: 0.55)),
           ],
         ),
       ),
@@ -737,6 +744,7 @@ class _GrammarPointCardState extends State<_GrammarPointCard> {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     final point = widget.data.point;
     final structure = _resolveStructure(point);
     final meaning = _resolveMeaning(point);
@@ -745,10 +753,10 @@ class _GrammarPointCardState extends State<_GrammarPointCard> {
 
     return Card(
       elevation: 0,
-      color: Colors.white,
+      color: palette.elevated,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: const BorderSide(color: Color(0xFFE2E8F0)),
+        side: BorderSide(color: palette.outline),
       ),
       clipBehavior: Clip.antiAlias,
       child: Column(
@@ -769,15 +777,15 @@ class _GrammarPointCardState extends State<_GrammarPointCard> {
                     width: 40,
                     height: 40,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFEFF6FF),
+                      color: palette.info.withValues(alpha: 0.08),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Center(
                       child: Text(
                         '${widget.index}',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontWeight: FontWeight.w800,
-                          color: Color(0xFF1E3A8A),
+                          color: palette.info,
                           fontSize: 16,
                         ),
                       ),
@@ -794,8 +802,8 @@ class _GrammarPointCardState extends State<_GrammarPointCard> {
                           children: [
                             _pill(
                               point.jlptLevel,
-                              fg: const Color(0xFF7F1D1D),
-                              bg: const Color(0xFFFEE2E2),
+                              fg: palette.error,
+                              bg: palette.error.withValues(alpha: 0.07),
                             ),
                             _pill(
                               point.isLearned
@@ -812,11 +820,11 @@ class _GrammarPointCardState extends State<_GrammarPointCard> {
                                       ja: '???',
                                     ),
                               fg: point.isLearned
-                                  ? const Color(0xFF166534)
-                                  : const Color(0xFF1E3A8A),
+                                  ? palette.success
+                                  : palette.info,
                               bg: point.isLearned
-                                  ? const Color(0xFFF0FDF4)
-                                  : const Color(0xFFEFF6FF),
+                                  ? palette.success.withValues(alpha: 0.08)
+                                  : palette.info.withValues(alpha: 0.08),
                             ),
                             _pill(
                               _tr(
@@ -825,28 +833,28 @@ class _GrammarPointCardState extends State<_GrammarPointCard> {
                                 vi: '${widget.data.examples.length} v? d?',
                                 ja: '${widget.data.examples.length} ?',
                               ),
-                              fg: const Color(0xFF0F766E),
-                              bg: const Color(0xFFF0FDFA),
+                              fg: palette.secondary,
+                              bg: palette.secondary.withValues(alpha: 0.08),
                             ),
                           ],
                         ),
                         const SizedBox(height: 8),
                         Text(
                           point.grammarPoint,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.w800,
-                            color: Color(0xFF0F172A),
+                            color: palette.ink,
                             height: 1.1,
                           ),
                         ),
                         const SizedBox(height: 6),
                         Text(
                           meaning,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
-                            color: Color(0xFF334155),
+                            color: palette.ink.withValues(alpha: 0.7),
                           ),
                         ),
                         const SizedBox(height: 8),
@@ -855,10 +863,10 @@ class _GrammarPointCardState extends State<_GrammarPointCard> {
                           child: LinearProgressIndicator(
                             value: mastery,
                             minHeight: 6,
-                            backgroundColor: const Color(0xFFE2E8F0),
+                            backgroundColor: palette.outline,
                             color: point.isLearned
-                                ? const Color(0xFF16A34A)
-                                : const Color(0xFF2563EB),
+                                ? palette.success
+                                : palette.info,
                           ),
                         ),
                       ],
@@ -868,9 +876,9 @@ class _GrammarPointCardState extends State<_GrammarPointCard> {
                   AnimatedRotation(
                     turns: _expanded ? 0.5 : 0,
                     duration: const Duration(milliseconds: 180),
-                    child: const Icon(
+                    child: Icon(
                       Icons.expand_more_rounded,
-                      color: Color(0xFF64748B),
+                      color: palette.ink.withValues(alpha: 0.55),
                     ),
                   ),
                 ],
@@ -886,23 +894,23 @@ class _GrammarPointCardState extends State<_GrammarPointCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Divider(height: 24),
-                  _sectionLabel(widget.language.grammarConnectionLabel),
+                  _sectionLabel(widget.language.grammarConnectionLabel, palette),
                   const SizedBox(height: 6),
-                  _contentBlock(structure, monospace: true),
+                  _contentBlock(palette, structure, monospace: true),
                   const SizedBox(height: 14),
-                  _sectionLabel(widget.language.grammarExplanationLabel),
+                  _sectionLabel(widget.language.grammarExplanationLabel, palette),
                   const SizedBox(height: 6),
-                  _contentBlock(explanation),
+                  _contentBlock(palette, explanation),
                   if (widget.data.examples.isNotEmpty) ...[
                     const SizedBox(height: 14),
-                    _sectionLabel(widget.language.grammarExamplesLabel),
+                    _sectionLabel(widget.language.grammarExamplesLabel, palette),
                     const SizedBox(height: 8),
                     ...widget.data.examples
                         .take(4)
                         .map(
                           (example) => Padding(
                             padding: const EdgeInsets.only(bottom: 10),
-                            child: _exampleBlock(example, widget.language),
+                            child: _exampleBlock(palette, example, widget.language),
                           ),
                         ),
                   ],
@@ -934,7 +942,7 @@ class _GrammarPointCardState extends State<_GrammarPointCard> {
     );
   }
 
-  Widget _exampleBlock(GrammarExample ex, AppLanguage language) {
+  Widget _exampleBlock(AppThemePalette palette, GrammarExample ex, AppLanguage language) {
     final translation = switch (language) {
       AppLanguage.vi => ex.translationVi ?? ex.translation,
       AppLanguage.en => ex.translationEn ?? ex.translation,
@@ -945,28 +953,28 @@ class _GrammarPointCardState extends State<_GrammarPointCard> {
       width: double.infinity,
       padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
       decoration: BoxDecoration(
-        color: const Color(0xFFF8FAFC),
+        color: palette.surface,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color(0xFFE2E8F0)),
+        border: Border.all(color: palette.outline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             ex.japanese,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
-              color: Color(0xFF0F172A),
+              color: palette.ink,
             ),
           ),
           if (translation.trim().isNotEmpty) ...[
             const SizedBox(height: 4),
             Text(
               translation,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 13,
-                color: Color(0xFF64748B),
+                color: palette.ink.withValues(alpha: 0.55),
                 fontStyle: FontStyle.italic,
               ),
             ),
@@ -976,33 +984,33 @@ class _GrammarPointCardState extends State<_GrammarPointCard> {
     );
   }
 
-  Widget _sectionLabel(String text) {
+  Widget _sectionLabel(String text, AppThemePalette palette) {
     return Text(
       text,
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.w800,
         letterSpacing: 0.25,
-        color: Color(0xFF1E3A8A),
+        color: palette.info,
       ),
     );
   }
 
-  Widget _contentBlock(String text, {bool monospace = false}) {
+  Widget _contentBlock(AppThemePalette palette, String text, {bool monospace = false}) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: const Color(0xFFF8FAFC),
+        color: palette.surface,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color(0xFFE2E8F0)),
+        border: Border.all(color: palette.outline),
       ),
       child: Text(
         text,
         style: TextStyle(
           fontSize: 14,
           height: 1.5,
-          color: const Color(0xFF1E293B),
+          color: palette.ink,
           fontFamily: monospace ? 'Courier' : null,
           fontWeight: monospace ? FontWeight.w600 : FontWeight.w500,
         ),

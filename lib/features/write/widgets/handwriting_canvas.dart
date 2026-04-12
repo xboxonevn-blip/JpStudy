@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 
 class HandwritingCanvas extends StatelessWidget {
   const HandwritingCanvas({
@@ -42,6 +43,9 @@ class HandwritingCanvas extends StatelessWidget {
           guideText: guideText,
           guideSlotCount: guideSlotCount,
           textStyle: Theme.of(context).textTheme.displayMedium,
+          gridColor: context.appPalette.outline,
+          guideColor: context.appPalette.ink.withValues(alpha: 0.12),
+          strokeColor: context.appPalette.ink,
         ),
         size: Size.infinite,
       ),
@@ -56,6 +60,9 @@ class _HandwritingPainter extends CustomPainter {
     required this.guideText,
     required this.guideSlotCount,
     required this.textStyle,
+    required this.gridColor,
+    required this.guideColor,
+    required this.strokeColor,
   });
 
   final List<List<Offset>> strokes;
@@ -63,6 +70,9 @@ class _HandwritingPainter extends CustomPainter {
   final String guideText;
   final int guideSlotCount;
   final TextStyle? textStyle;
+  final Color gridColor;
+  final Color guideColor;
+  final Color strokeColor;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -75,7 +85,7 @@ class _HandwritingPainter extends CustomPainter {
 
   void _drawGrid(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = const Color(0xFFE5E7EB)
+      ..color = gridColor
       ..strokeWidth = 1;
     final slotCount = math.max(1, guideSlotCount);
     final slotWidth = size.width / slotCount;
@@ -103,7 +113,7 @@ class _HandwritingPainter extends CustomPainter {
     }
 
     final borderPaint = Paint()
-      ..color = const Color(0xFFE5E7EB)
+      ..color = gridColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
     canvas.drawRect(Offset.zero & size, borderPaint);
@@ -114,7 +124,7 @@ class _HandwritingPainter extends CustomPainter {
     final characters = guideText.runes
         .map(String.fromCharCode)
         .toList(growable: false);
-    final color = const Color(0xFF1F2937).withValues(alpha: 0.12);
+    final color = guideColor;
 
     if (slotCount <= 1 || characters.length <= 1) {
       final style = (textStyle ?? const TextStyle()).copyWith(
@@ -157,7 +167,7 @@ class _HandwritingPainter extends CustomPainter {
 
   void _drawStrokes(Canvas canvas) {
     final paint = Paint()
-      ..color = Colors.black87
+      ..color = strokeColor
       ..strokeWidth = 6
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round
@@ -177,6 +187,9 @@ class _HandwritingPainter extends CustomPainter {
     return oldDelegate.strokes != strokes ||
         oldDelegate.showGuide != showGuide ||
         oldDelegate.guideText != guideText ||
-        oldDelegate.guideSlotCount != guideSlotCount;
+        oldDelegate.guideSlotCount != guideSlotCount ||
+        oldDelegate.gridColor != gridColor ||
+        oldDelegate.guideColor != guideColor ||
+        oldDelegate.strokeColor != strokeColor;
   }
 }

@@ -201,10 +201,10 @@ class _GhostClayCardState extends State<_GhostClayCard> {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors.red.withValues(alpha: 0.1),
+                  color: context.appPalette.error.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Icon(Icons.pest_control, size: 24, color: Colors.red),
+                child: Icon(Icons.pest_control, size: 24, color: context.appPalette.error),
               ),
               const SizedBox(width: 16),
               Expanded(

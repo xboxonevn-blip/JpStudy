@@ -550,7 +550,7 @@ class _RoadmapPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
-      decoration: HomeSurface.softPanel(radius: AppSpacing.radiusXxl),
+      decoration: HomeSurface.softPanel(radius: AppSpacing.radiusXxl, context: context),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -642,11 +642,12 @@ class _RoadmapPrimaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [action.color.withValues(alpha: 0.16), Colors.white],
+          colors: [action.color.withValues(alpha: 0.16), palette.elevated],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -671,8 +672,8 @@ class _RoadmapPrimaryCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   action.title,
-                  style: const TextStyle(
-                    color: Color(0xFF0F172A),
+                  style: TextStyle(
+                    color: palette.ink,
                     fontSize: 17,
                     fontWeight: FontWeight.w900,
                     height: 1.12,
@@ -689,8 +690,8 @@ class _RoadmapPrimaryCard extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             action.subtitle,
-            style: const TextStyle(
-              color: Color(0xFF334155),
+            style: TextStyle(
+              color: palette.ink.withValues(alpha: 0.7),
               fontSize: 12.7,
               height: 1.5,
               fontWeight: FontWeight.w700,
@@ -716,12 +717,13 @@ class _RoadmapActionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: palette.elevated,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: HomeSurface.panelBorder),
+        border: Border.all(color: HomeSurface.panelBorderFor(context)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -742,8 +744,8 @@ class _RoadmapActionTile extends StatelessWidget {
               children: [
                 Text(
                   action.title,
-                  style: const TextStyle(
-                    color: Color(0xFF0F172A),
+                  style: TextStyle(
+                    color: palette.ink,
                     fontSize: 14,
                     fontWeight: FontWeight.w900,
                   ),
@@ -753,8 +755,8 @@ class _RoadmapActionTile extends StatelessWidget {
                   action.subtitle,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    color: Color(0xFF475569),
+                  style: TextStyle(
+                    color: palette.ink.withValues(alpha: 0.7),
                     fontSize: 11.7,
                     height: 1.42,
                     fontWeight: FontWeight.w600,
@@ -873,26 +875,27 @@ class _QuickAccessRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     final items = [
       (
         title: _vocabLabel(language),
         subtitle: _vocabHint(language),
         icon: Icons.translate_rounded,
-        color: const Color(0xFF0F766E),
+        color: palette.secondary,
         route: AppRoutePath.vocab,
       ),
       (
         title: _grammarLabel(language),
         subtitle: _grammarHint(language),
         icon: Icons.auto_stories_rounded,
-        color: const Color(0xFF2563EB),
+        color: palette.info,
         route: AppRoutePath.grammar,
       ),
       (
         title: _lookupLabel(language),
         subtitle: _lookupHint(language),
         icon: Icons.search_rounded,
-        color: const Color(0xFF7C3AED),
+        color: palette.accent,
         route: AppRoutePath.search,
       ),
     ];
@@ -984,6 +987,7 @@ class _SectionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Material(
       color: Colors.transparent,
       borderRadius: BorderRadius.circular(20),
@@ -994,13 +998,13 @@ class _SectionCard extends StatelessWidget {
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [color.withValues(alpha: 0.16), Colors.white],
+              colors: [color.withValues(alpha: 0.16), palette.elevated],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(color: color.withValues(alpha: 0.24)),
-            boxShadow: HomeSurface.panelShadow,
+            boxShadow: HomeSurface.panelShadowFor(context),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -1017,17 +1021,17 @@ class _SectionCard extends StatelessWidget {
               const SizedBox(height: 10),
               Text(
                 title,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w900,
-                  color: Color(0xFF0F172A),
+                  color: palette.ink,
                 ),
               ),
               const SizedBox(height: 4),
               Text(
                 subtitle,
-                style: const TextStyle(
-                  color: Color(0xFF475569),
+                style: TextStyle(
+                  color: palette.ink.withValues(alpha: 0.7),
                   fontSize: 11.8,
                   height: 1.35,
                   fontWeight: FontWeight.w600,
@@ -1122,7 +1126,14 @@ class _LessonTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     final tone = _lessonTone(lesson);
+    final toneColor = switch (tone.tone) {
+      AppStatusTone.warning => palette.warning,
+      AppStatusTone.success => palette.success,
+      AppStatusTone.primary => palette.info,
+      _ => palette.ink.withValues(alpha: 0.4),
+    };
     final progress = lesson.termCount == 0
         ? 0.0
         : (lesson.completedCount / lesson.termCount).clamp(0.0, 1.0);
@@ -1137,13 +1148,13 @@ class _LessonTile extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [tone.color.withValues(alpha: 0.16), Colors.white],
+              colors: [toneColor.withValues(alpha: 0.16), palette.elevated],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: tone.color.withValues(alpha: 0.24)),
-            boxShadow: HomeSurface.panelShadow,
+            border: Border.all(color: toneColor.withValues(alpha: 0.24)),
+            boxShadow: HomeSurface.panelShadowFor(context),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -1153,10 +1164,10 @@ class _LessonTile extends StatelessWidget {
                   Expanded(
                     child: Text(
                       lesson.title,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.w900,
-                        color: Color(0xFF0F172A),
+                        color: palette.ink,
                       ),
                     ),
                   ),
@@ -1169,8 +1180,8 @@ class _LessonTile extends StatelessWidget {
               const SizedBox(height: 8),
               Text(
                 _lessonSummary(language, lesson),
-                style: const TextStyle(
-                  color: Color(0xFF334155),
+                style: TextStyle(
+                  color: palette.ink.withValues(alpha: 0.7),
                   fontSize: 12.3,
                   height: 1.45,
                   fontWeight: FontWeight.w700,
@@ -1182,8 +1193,8 @@ class _LessonTile extends StatelessWidget {
                 child: LinearProgressIndicator(
                   value: progress,
                   minHeight: 8,
-                  backgroundColor: const Color(0xFFE2E8F0),
-                  valueColor: AlwaysStoppedAnimation<Color>(tone.color),
+                  backgroundColor: palette.outline,
+                  valueColor: AlwaysStoppedAnimation<Color>(toneColor),
                 ),
               ),
               const SizedBox(height: 10),
@@ -1277,12 +1288,13 @@ class _LessonFact extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.86),
+        color: palette.elevated.withValues(alpha: 0.86),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: HomeSurface.panelBorder),
+        border: Border.all(color: HomeSurface.panelBorderFor(context)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1290,8 +1302,8 @@ class _LessonFact extends StatelessWidget {
         children: [
           Text(
             label,
-            style: const TextStyle(
-              color: Color(0xFF64748B),
+            style: TextStyle(
+              color: palette.ink.withValues(alpha: 0.55),
               fontSize: 10,
               fontWeight: FontWeight.w700,
             ),
@@ -1299,8 +1311,8 @@ class _LessonFact extends StatelessWidget {
           const SizedBox(height: 2),
           Text(
             value,
-            style: const TextStyle(
-              color: Color(0xFF0F172A),
+            style: TextStyle(
+              color: palette.ink,
               fontSize: 12,
               fontWeight: FontWeight.w900,
             ),
@@ -1320,7 +1332,7 @@ class _FilteredEmptyLibrary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: HomeSurface.softPanel(),
+      decoration: HomeSurface.softPanel(context: context),
       padding: const EdgeInsets.all(24),
       child: Text(switch (filter) {
         _LibraryFilter.due => switch (language) {
@@ -1362,7 +1374,7 @@ class _EmptyLibrary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: HomeSurface.softPanel(),
+      decoration: HomeSurface.softPanel(context: context),
       padding: const EdgeInsets.all(24),
       child: Text(switch (language) {
         AppLanguage.en => 'No lessons for this level yet.',

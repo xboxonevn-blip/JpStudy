@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../app/theme/app_spacing.dart';
+import '../../app/theme/app_theme_palette.dart';
 
 /// A reusable empty / error state widget.
 ///
@@ -32,7 +33,7 @@ class EmptyStateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final iconColor = color ?? const Color(0xFF94A3B8);
+    final iconColor = color ?? context.appPalette.ink.withValues(alpha: 0.4);
     final double iconSize = compact ? 32 : 48;
     final double titleSize = compact ? 13 : 16;
     final double subtitleSize = compact ? 11 : 13;
@@ -67,7 +68,7 @@ class EmptyStateWidget extends StatelessWidget {
             style: TextStyle(
               fontSize: titleSize,
               fontWeight: FontWeight.w700,
-              color: const Color(0xFF374151),
+              color: context.appPalette.ink,
             ),
           ),
           if (subtitle != null) ...[
@@ -77,7 +78,7 @@ class EmptyStateWidget extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: subtitleSize,
-                color: const Color(0xFF9CA3AF),
+                color: context.appPalette.ink.withValues(alpha: 0.55),
                 height: 1.4,
               ),
             ),

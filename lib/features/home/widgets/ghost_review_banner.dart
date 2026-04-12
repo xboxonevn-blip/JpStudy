@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../app/theme/app_theme_palette.dart';
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
 import '../../grammar/grammar_providers.dart';
@@ -16,6 +17,7 @@ class GhostReviewBanner extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final palette = context.appPalette;
     final language = ref.watch(appLanguageProvider);
     final grammarCount = ref.watch(grammarGhostCountProvider).valueOrNull ?? 0;
     final vocabCount = ref.watch(vocabGhostCountProvider).valueOrNull ?? 0;
@@ -31,12 +33,12 @@ class GhostReviewBanner extends ConsumerWidget {
         margin: cardMargin,
         padding: EdgeInsets.all(embedded ? 10 : 14),
         decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: 0.9),
+          color: palette.elevated,
           borderRadius: BorderRadius.circular(embedded ? 14 : 18),
-          border: Border.all(color: const Color(0xFFE5F5EB)),
+          border: Border.all(color: palette.success.withValues(alpha: 0.3)),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFF16A34A).withValues(alpha: 0.08),
+              color: palette.success.withValues(alpha: 0.08),
               blurRadius: embedded ? 10 : 16,
               offset: Offset(0, embedded ? 4 : 6),
             ),
@@ -46,7 +48,7 @@ class GhostReviewBanner extends ConsumerWidget {
           children: [
             Icon(
               Icons.check_circle_rounded,
-              color: const Color(0xFF16A34A),
+              color: palette.success,
               size: embedded ? 18 : 24,
             ),
             SizedBox(width: embedded ? 8 : 10),
@@ -65,7 +67,7 @@ class GhostReviewBanner extends ConsumerWidget {
                     language.ghostReviewAllClearSubtitle,
                     style: TextStyle(
                       fontSize: embedded ? 11 : 12,
-                      color: const Color(0xFF6B7390),
+                      color: palette.ink.withValues(alpha: 0.55),
                     ),
                   ),
                 ],
@@ -80,16 +82,19 @@ class GhostReviewBanner extends ConsumerWidget {
       margin: cardMargin,
       padding: EdgeInsets.all(embedded ? 12 : 16),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFFFFF1F2), Color(0xFFFFE4E6)],
+        gradient: LinearGradient(
+          colors: [
+            palette.error.withValues(alpha: 0.05),
+            palette.error.withValues(alpha: 0.10),
+          ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(embedded ? 16 : 20),
-        border: Border.all(color: const Color(0xFFFECACA)),
+        border: Border.all(color: palette.error.withValues(alpha: 0.3)),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFFF87171).withValues(alpha: 0.2),
+            color: palette.error.withValues(alpha: 0.2),
             blurRadius: embedded ? 10 : 16,
             offset: Offset(0, embedded ? 5 : 8),
           ),
@@ -102,7 +107,7 @@ class GhostReviewBanner extends ConsumerWidget {
             children: [
               Icon(
                 Icons.warning_amber_rounded,
-                color: Color(0xFFDC2626),
+                color: palette.error,
                 size: embedded ? 18 : 24,
               ),
               SizedBox(width: embedded ? 8 : 12),
@@ -115,7 +120,7 @@ class GhostReviewBanner extends ConsumerWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: embedded ? 13.5 : 15,
-                        color: const Color(0xFF7F1D1D),
+                        color: palette.error,
                       ),
                     ),
                     SizedBox(height: embedded ? 1 : 2),
@@ -123,7 +128,7 @@ class GhostReviewBanner extends ConsumerWidget {
                       language.ghostReviewBannerSubtitle,
                       style: TextStyle(
                         fontSize: embedded ? 11 : 12,
-                        color: const Color(0xFF9F1239),
+                        color: palette.error,
                       ),
                     ),
                   ],
@@ -147,7 +152,7 @@ class GhostReviewBanner extends ConsumerWidget {
                       style: TextStyle(fontSize: embedded ? 12 : 13),
                     ),
                     style: FilledButton.styleFrom(
-                      backgroundColor: const Color(0xFFDC2626),
+                      backgroundColor: palette.error,
                       foregroundColor: Colors.white,
                       padding: EdgeInsets.symmetric(
                         vertical: embedded ? 8 : 10,
@@ -178,7 +183,7 @@ class GhostReviewBanner extends ConsumerWidget {
                       style: TextStyle(fontSize: embedded ? 12 : 13),
                     ),
                     style: FilledButton.styleFrom(
-                      backgroundColor: const Color(0xFFEA580C),
+                      backgroundColor: palette.accent,
                       foregroundColor: Colors.white,
                       padding: EdgeInsets.symmetric(
                         vertical: embedded ? 8 : 10,

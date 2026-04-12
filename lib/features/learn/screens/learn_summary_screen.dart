@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/services/recovery_pack_service.dart';
@@ -219,6 +220,7 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
   }
 
   Widget _buildStatsGrid(BuildContext context, AppLanguage language) {
+    final palette = context.appPalette;
     return Row(
       children: [
         Expanded(
@@ -226,7 +228,7 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
             icon: Icons.check_circle,
             value: session.correctCount,
             label: language.correctLabel,
-            color: Colors.green,
+            color: palette.success,
           ),
         ),
         const SizedBox(width: 12),
@@ -235,7 +237,7 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
             icon: Icons.cancel,
             value: session.wrongCount,
             label: language.incorrectLabel,
-            color: Colors.red,
+            color: palette.error,
           ),
         ),
         const SizedBox(width: 12),
@@ -244,7 +246,7 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
             icon: Icons.timer,
             value: _formatDuration(session.totalTime),
             label: language.attemptDurationLabel,
-            color: Colors.blue,
+            color: palette.info,
           ),
         ),
       ],
@@ -252,18 +254,19 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
   }
 
   Widget _buildXPCard(BuildContext context, AppLanguage language) {
+    final palette = context.appPalette;
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
+        gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF667eea), Color(0xFF764ba2)],
+          colors: [palette.primary, palette.secondary],
         ),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF667eea).withValues(alpha: 0.3),
+            color: palette.primary.withValues(alpha: 0.3),
             blurRadius: 15,
             offset: const Offset(0, 8),
           ),
@@ -291,25 +294,26 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
     BuildContext context,
     AppLanguage language,
   ) {
+    final palette = context.appPalette;
     if (session.weakTermIds.isEmpty) {
       return Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Colors.green.withValues(alpha: 0.1),
+          color: palette.success.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.green, width: 2),
+          border: Border.all(color: palette.success, width: 2),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.celebration, color: Colors.green, size: 32),
+            Icon(Icons.celebration, color: palette.success, size: 32),
             const SizedBox(width: 12),
             Text(
               language.learnPerfectLabel,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Colors.green,
+                color: palette.success,
               ),
             ),
           ],
@@ -320,23 +324,23 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.orange.withValues(alpha: 0.1),
+        color: palette.warning.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.orange, width: 2),
+        border: Border.all(color: palette.warning, width: 2),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              const Icon(Icons.priority_high, color: Colors.orange),
+              Icon(Icons.priority_high, color: palette.warning),
               const SizedBox(width: 8),
               Text(
                 language.learnWeakTermsLabel(session.weakTermIds.length),
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Colors.orange,
+                  color: palette.warning,
                 ),
               ),
             ],
@@ -344,7 +348,10 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
           const SizedBox(height: 8),
           Text(
             language.learnWeakTermsHint,
-            style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+            style: TextStyle(
+              fontSize: 14,
+              color: palette.ink.withValues(alpha: 0.55),
+            ),
           ),
         ],
       ),
@@ -396,7 +403,7 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
                 ),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.orange,
+                backgroundColor: context.appPalette.warning,
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
@@ -414,7 +421,7 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
-              side: BorderSide(color: Theme.of(context).primaryColor, width: 2),
+              side: BorderSide(color: context.appPalette.primary, width: 2),
             ),
             child: Text(
               language.doneLabel,
@@ -427,6 +434,7 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
   }
 
   Widget _buildPersonalBestBanner(AppLanguage language) {
+    final palette = context.appPalette;
     final label = switch (language) {
       AppLanguage.en => 'New Personal Best!',
       AppLanguage.vi => 'Kỷ lục mới!',
@@ -435,13 +443,16 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFFFBBF24), Color(0xFFF59E0B)],
+        gradient: LinearGradient(
+          colors: [
+            palette.warning,
+            palette.warning.withValues(alpha: 0.85),
+          ],
         ),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFFFBBF24).withValues(alpha: 0.4),
+            color: palette.warning.withValues(alpha: 0.4),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
@@ -466,10 +477,11 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
   }
 
   Color _getAccuracyColor(int accuracy) {
-    if (accuracy >= 90) return Colors.green;
-    if (accuracy >= 70) return Colors.blue;
-    if (accuracy >= 50) return Colors.orange;
-    return Colors.red;
+    final palette = context.appPalette;
+    if (accuracy >= 90) return palette.success;
+    if (accuracy >= 70) return palette.info;
+    if (accuracy >= 50) return palette.warning;
+    return palette.error;
   }
 
   String _formatDuration(Duration duration) {

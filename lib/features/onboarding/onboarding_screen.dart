@@ -300,7 +300,7 @@ class _GoalCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: isSelected
               ? context.appPalette.primary.withValues(alpha: 0.08)
-              : Colors.white,
+              : context.appPalette.elevated,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
             color: isSelected ? context.appPalette.primary : context.appPalette.outline,
@@ -320,7 +320,7 @@ class _GoalCard extends StatelessWidget {
               ),
               child: Icon(
                 goal.icon,
-                color: isSelected ? context.appPalette.primary : const Color(0xFF4255FF),
+                color: context.appPalette.primary,
               ),
             ),
             const SizedBox(width: AppSpacing.md),
@@ -689,7 +689,7 @@ class _PreviewQuestionCard extends StatelessWidget {
                   ? _successLabel(language)
                   : _answerLabel(language, options.first),
               style: TextStyle(
-                color: isCorrect ? const Color(0xFF15803D) : context.appPalette.ink.withValues(alpha: 0.55),
+                color: isCorrect ? context.appPalette.success : context.appPalette.ink.withValues(alpha: 0.55),
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -751,20 +751,21 @@ class _PreviewOptionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     final borderColor = correct
-        ? const Color(0xFF22C55E)
+        ? palette.success
         : wrong
-        ? const Color(0xFFEF4444)
+        ? palette.error
         : selected
-        ? context.appPalette.primary
-        : const Color(0xFFE8ECF5);
+        ? palette.primary
+        : palette.outline;
     final background = correct
-        ? const Color(0xFFF0FDF4)
+        ? palette.success.withValues(alpha: 0.08)
         : wrong
-        ? const Color(0xFFFEF2F2)
+        ? palette.error.withValues(alpha: 0.06)
         : selected
-        ? context.appPalette.primary.withValues(alpha: 0.06)
-        : context.appPalette.elevated;
+        ? palette.primary.withValues(alpha: 0.06)
+        : palette.elevated;
 
     return GestureDetector(
       onTap: onTap,

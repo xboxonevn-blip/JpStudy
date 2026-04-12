@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 
@@ -47,13 +48,13 @@ class _DesignLabScreenState extends ConsumerState<DesignLabScreen> {
             builder: (context, constraints) {
               final isWide = constraints.maxWidth >= 920;
               final content = <Widget>[
-                _heroCard(language),
+                _heroCard(context, language),
                 const SizedBox(height: 16),
-                _stageSwitch(language),
+                _stageSwitch(context, language),
                 const SizedBox(height: 16),
-                _stageCanvas(language),
+                _stageCanvas(context, language),
                 const SizedBox(height: 16),
-                _progressChecklist(language),
+                _progressChecklist(context, language),
               ];
 
               if (isWide) {
@@ -88,13 +89,14 @@ class _DesignLabScreenState extends ConsumerState<DesignLabScreen> {
     );
   }
 
-  Widget _heroCard(AppLanguage language) {
+  Widget _heroCard(BuildContext context, AppLanguage language) {
+    final palette = context.appPalette;
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        gradient: const LinearGradient(
-          colors: [Color(0xFF0F172A), Color(0xFF1E3A8A)],
+        gradient: LinearGradient(
+          colors: [palette.ink, const Color(0xFF1E3A8A)],
         ),
         boxShadow: const [
           BoxShadow(
@@ -130,13 +132,14 @@ class _DesignLabScreenState extends ConsumerState<DesignLabScreen> {
     );
   }
 
-  Widget _stageSwitch(AppLanguage language) {
+  Widget _stageSwitch(BuildContext context, AppLanguage language) {
+    final palette = context.appPalette;
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: palette.elevated,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFDCE7FF)),
+        border: Border.all(color: palette.outline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -174,23 +177,25 @@ class _DesignLabScreenState extends ConsumerState<DesignLabScreen> {
     );
   }
 
-  Widget _stageCanvas(AppLanguage language) {
+  Widget _stageCanvas(BuildContext context, AppLanguage language) {
+    final palette = context.appPalette;
     switch (_stage) {
       case LabStage.discover:
         return _panel(
+          context: context,
           title: _tr(language, 'Wireframe Snapshot', 'Ảnh chụp wireframe', 'ワイヤーフレームのスナップショット'),
           subtitle: _tr(language, 'Block-level layout before visual polish.', 'Bố cục ở mức khối trước khi polish giao diện.', 'ビジュアル調整前のブロックレベルのレイアウトです。'),
           child: Column(
             children: [
-              _skeletonBlock(height: 36),
+              _skeletonBlock(context, height: 36),
               const SizedBox(height: 12),
-              _skeletonBlock(height: 92),
+              _skeletonBlock(context, height: 92),
               const SizedBox(height: 12),
               Row(
                 children: [
-                  Expanded(child: _skeletonBlock(height: 110)),
+                  Expanded(child: _skeletonBlock(context, height: 110)),
                   const SizedBox(width: 12),
-                  Expanded(child: _skeletonBlock(height: 110)),
+                  Expanded(child: _skeletonBlock(context, height: 110)),
                 ],
               ),
             ],
@@ -198,6 +203,7 @@ class _DesignLabScreenState extends ConsumerState<DesignLabScreen> {
         );
       case LabStage.visual:
         return _panel(
+          context: context,
           title: _tr(language, 'Visual Direction', 'Định hướng hình ảnh', 'ビジュアル方針'),
           subtitle: _tr(language, 'Color, spacing, and card rhythm review.', 'Rà màu sắc, khoảng cách và nhịp điệu thẻ.', '色・余白・カードのリズムを確認します。'),
           child: Column(
@@ -215,15 +221,15 @@ class _DesignLabScreenState extends ConsumerState<DesignLabScreen> {
               Row(
                 children: [
                   Expanded(
-                    child: _swatchCard(_tr(language, 'Primary', 'Chính', 'メイン'), const Color(0xFF0F766E)),
+                    child: _swatchCard(_tr(language, 'Primary', 'Chính', 'メイン'), palette.primary),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
-                    child: _swatchCard(_tr(language, 'Accent', 'Nhấn', 'アクセント'), const Color(0xFFFB7185)),
+                    child: _swatchCard(_tr(language, 'Accent', 'Nhấn', 'アクセント'), palette.accent),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
-                    child: _swatchCard(_tr(language, 'Neutral', 'Trung tính', 'ニュートラル'), const Color(0xFF334155)),
+                    child: _swatchCard(_tr(language, 'Neutral', 'Trung tính', 'ニュートラル'), palette.ink),
                   ),
                 ],
               ),
@@ -232,6 +238,7 @@ class _DesignLabScreenState extends ConsumerState<DesignLabScreen> {
         );
       case LabStage.validate:
         return _panel(
+          context: context,
           title: _tr(language, 'Validation Notes', 'Ghi chú kiểm tra', '検証メモ'),
           subtitle: _tr(language, 'Quick quality readout before merge.', 'Tóm tắt chất lượng nhanh trước khi merge.', 'マージ前の品質チェックを素早く確認します。'),
           child: Wrap(
@@ -249,7 +256,8 @@ class _DesignLabScreenState extends ConsumerState<DesignLabScreen> {
     }
   }
 
-  Widget _progressChecklist(AppLanguage language) {
+  Widget _progressChecklist(BuildContext context, AppLanguage language) {
+    final palette = context.appPalette;
     final tasks = [
       (1, _tr(language, 'Wireframe approved in team review', 'Wireframe đã được duyệt trong buổi review', 'ワイヤーフレームがレビューで承認済み')),
       (2, _tr(language, 'Visual style tokenized (color/spacing/type)', 'Visual style đã token hóa (màu/khoảng cách/chữ)', 'ビジュアルスタイルをトークン化済み（色・余白・文字）')),
@@ -258,6 +266,7 @@ class _DesignLabScreenState extends ConsumerState<DesignLabScreen> {
       (5, _tr(language, 'Ready for handoff to production screen', 'Sẵn sàng bàn giao sang màn hình production', '本番画面への引き継ぎ準備完了')),
     ];
     return _panel(
+      context: context,
       title: _tr(language, 'Process Checklist', 'Checklist quy trình', 'プロセスチェックリスト'),
       subtitle: _tr(language, 'Track each iteration in one place.', 'Theo dõi từng iteration ở một nơi.', '各イテレーションを一箇所で管理します。'),
       child: Column(
@@ -283,7 +292,7 @@ class _DesignLabScreenState extends ConsumerState<DesignLabScreen> {
             child: Text(
               _tr(language, 'Next: update docs/uiux-progress.md and docs/uiux-review-checklist.md', 'Tiếp theo: cập nhật docs/uiux-progress.md và docs/uiux-review-checklist.md', '次: docs/uiux-progress.md と docs/uiux-review-checklist.md を更新'),
               style: TextStyle(
-                color: Colors.blueGrey.shade700,
+                color: palette.ink.withValues(alpha: 0.7),
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -294,26 +303,32 @@ class _DesignLabScreenState extends ConsumerState<DesignLabScreen> {
   }
 
   Widget _panel({
+    required BuildContext context,
     required String title,
     required String subtitle,
     required Widget child,
   }) {
+    final palette = context.appPalette;
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: palette.elevated,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: const Color(0xFFDCE7FF)),
+        border: Border.all(color: palette.outline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             title,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w800,
+              color: palette.ink,
+            ),
           ),
           const SizedBox(height: 4),
-          Text(subtitle, style: TextStyle(color: Colors.blueGrey.shade700)),
+          Text(subtitle, style: TextStyle(color: palette.ink.withValues(alpha: 0.7))),
           const SizedBox(height: 12),
           child,
         ],
@@ -321,11 +336,12 @@ class _DesignLabScreenState extends ConsumerState<DesignLabScreen> {
     );
   }
 
-  Widget _skeletonBlock({required double height}) {
+  Widget _skeletonBlock(BuildContext context, {required double height}) {
+    final palette = context.appPalette;
     return Container(
       height: height,
       decoration: BoxDecoration(
-        color: const Color(0xFFE9EEF8),
+        color: palette.surface,
         borderRadius: BorderRadius.circular(12),
       ),
     );
@@ -358,8 +374,9 @@ class _MetricChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bg = ok ? const Color(0xFFE8F7EE) : const Color(0xFFFFF1F2);
-    final fg = ok ? const Color(0xFF166534) : const Color(0xFF9F1239);
+    final palette = context.appPalette;
+    final bg = ok ? palette.success.withValues(alpha: 0.18) : palette.error.withValues(alpha: 0.1);
+    final fg = ok ? palette.success : palette.error;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(

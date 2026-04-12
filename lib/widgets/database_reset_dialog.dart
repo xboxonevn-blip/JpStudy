@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 
 import '../core/app_language.dart';
 import '../core/language_provider.dart';
@@ -27,6 +28,7 @@ class DatabaseResetDialog extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final language = ref.watch(appLanguageProvider);
+    final palette = context.appPalette;
 
     return AlertDialog(
       title: Text(language.databaseResetTitle),
@@ -42,7 +44,7 @@ class DatabaseResetDialog extends ConsumerWidget {
         ),
         if (!kIsWeb)
           FilledButton(
-            style: FilledButton.styleFrom(backgroundColor: Colors.red),
+            style: FilledButton.styleFrom(backgroundColor: palette.error),
             onPressed: () async {
               final success = await resetDatabase();
               if (context.mounted) {

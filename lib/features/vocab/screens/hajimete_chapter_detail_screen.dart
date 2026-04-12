@@ -64,6 +64,7 @@ class _HajimeteChapterDetailScreenState
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     final language = ref.watch(appLanguageProvider);
     final args = HajimeteChapterDetailArgs(
       levelCode: widget.levelCode,
@@ -128,9 +129,9 @@ class _HajimeteChapterDetailScreenState
             const SizedBox(width: 12),
           ],
           bottom: TabBar(
-            labelColor: const Color(0xFF4255FF),
-            unselectedLabelColor: const Color(0xFF6B7390),
-            indicatorColor: const Color(0xFF4255FF),
+            labelColor: palette.primary,
+            unselectedLabelColor: palette.ink.withValues(alpha: 0.55),
+            indicatorColor: palette.primary,
             tabs: [
               Tab(text: _vocabTabLabel(language)),
               Tab(text: _kanjiTabLabel(language)),
@@ -443,7 +444,7 @@ class _HajimeteChapterDetailScreenState
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(language.nextReviewToastLabel(label)),
-        backgroundColor: quality <= 2 ? Colors.orange : Colors.green,
+        backgroundColor: quality <= 2 ? context.appPalette.warning : context.appPalette.success,
         duration: const Duration(seconds: 2),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -821,6 +822,7 @@ class _ModeSwitcher extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return SegmentedButton<_ChapterStudyMode>(
       segments: [
         ButtonSegment(
@@ -842,18 +844,18 @@ class _ModeSwitcher extends StatelessWidget {
       style: ButtonStyle(
         backgroundColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
-            return const Color(0xFF4255FF);
+            return palette.primary;
           }
-          return Colors.white;
+          return palette.elevated;
         }),
         foregroundColor: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
             return Colors.white;
           }
-          return const Color(0xFF1C2440);
+          return palette.ink;
         }),
         side: WidgetStateProperty.all(
-          const BorderSide(color: Color(0xFFE1E6F0)),
+          BorderSide(color: palette.outline),
         ),
         shape: WidgetStateProperty.all(
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
@@ -879,7 +881,7 @@ class _ReviewEmptyState extends StatelessWidget {
       width: double.infinity,
       height: 460,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: palette.elevated,
         borderRadius: BorderRadius.circular(28),
         border: Border.all(color: palette.outline),
         boxShadow: [
@@ -1048,19 +1050,23 @@ class _SummaryChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-        color: const Color(0xFFF7F9FC),
+        color: palette.elevated,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE1E6F0)),
+        border: Border.all(color: palette.outline),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             label,
-            style: const TextStyle(fontSize: 12, color: Color(0xFF6B7390)),
+            style: TextStyle(
+              fontSize: 12,
+              color: palette.ink.withValues(alpha: 0.55),
+            ),
           ),
           const SizedBox(width: 6),
           Text(value, style: const TextStyle(fontWeight: FontWeight.w700)),
@@ -1217,7 +1223,7 @@ class _FlashcardControls extends StatelessWidget {
             onPressed: onShuffle,
             icon: Icon(
               Icons.shuffle_rounded,
-              color: isShuffle ? const Color(0xFF4255FF) : palette.ink,
+              color: isShuffle ? palette.primary : palette.ink,
             ),
           ),
           const SizedBox(width: 8),
@@ -1232,8 +1238,8 @@ class _FlashcardControls extends StatelessWidget {
             child: Container(
               width: 52,
               height: 52,
-              decoration: const BoxDecoration(
-                color: Color(0xFF4255FF),
+              decoration: BoxDecoration(
+                color: palette.primary,
                 shape: BoxShape.circle,
               ),
               child: Icon(

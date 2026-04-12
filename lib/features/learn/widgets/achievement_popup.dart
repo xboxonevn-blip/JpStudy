@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 
 import '../models/achievement.dart';
 
@@ -194,7 +195,7 @@ class AchievementBadge extends StatelessWidget {
                 ),
                 Text(
                   achievement.description,
-                  style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                  style: TextStyle(fontSize: 12, color: context.appPalette.ink.withValues(alpha: 0.55)),
                 ),
               ],
             ),

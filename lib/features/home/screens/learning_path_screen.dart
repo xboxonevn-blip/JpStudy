@@ -883,6 +883,7 @@ class _LaneCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Material(
       color: Colors.transparent,
       borderRadius: BorderRadius.circular(20),
@@ -895,7 +896,7 @@ class _LaneCard extends StatelessWidget {
             gradient: LinearGradient(
               colors: [
                 color.withValues(alpha: 0.16),
-                Theme.of(context).colorScheme.surface,
+                context.appPalette.surface,
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -943,7 +944,7 @@ class _LaneCard extends StatelessWidget {
                 title,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   fontSize: 16,
-                  color: const Color(0xFF0F172A),
+                  color: palette.ink,
                   fontWeight: FontWeight.w900,
                 ),
               ),
@@ -952,8 +953,8 @@ class _LaneCard extends StatelessWidget {
                 subtitle,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: Color(0xFF475569),
+                style: TextStyle(
+                  color: palette.ink.withValues(alpha: 0.7),
                   fontSize: 11.5,
                   height: 1.35,
                   fontWeight: FontWeight.w600,

@@ -245,7 +245,7 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
       padding: const EdgeInsets.fromLTRB(12, 11, 12, 11),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Colors.white, background],
+          colors: [palette.elevated, background],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -337,7 +337,7 @@ class _GrammarRepairPrompt extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final palette = context.appPalette;
-    final colors = _colorsForType();
+    final colors = _colorsForType(palette);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -705,7 +705,7 @@ class _GrammarRepairPrompt extends StatelessWidget {
     }
   }
 
-  _RepairPromptColors _colorsForType() {
+  _RepairPromptColors _colorsForType(AppThemePalette palette) {
     switch (type) {
       case GrammarQuestionType.errorCorrection:
         return const _RepairPromptColors(
@@ -746,23 +746,23 @@ class _GrammarRepairPrompt extends StatelessWidget {
           noteBorder: Color(0xFFEBD7D4),
         );
       default:
-        return const _RepairPromptColors(
-          promptSurface: Colors.white,
-          promptBorder: Color(0xFFE5E7EB),
-          promptShadow: Color(0x10000000),
-          surface: Colors.white,
-          border: Color(0xFFE5E7EB),
-          shadow: Color(0x10000000),
-          paperBackground: Color(0xFFF9FAFB),
-          paperBorder: Color(0xFFE5E7EB),
-          badgeBackground: Color(0xFFF9FAFB),
-          badgeBorder: Color(0xFFE5E7EB),
-          badgeText: Color(0xFF111827),
-          labelBackground: Color(0xFFF9FAFB),
-          labelBorder: Color(0xFFE5E7EB),
-          labelText: Color(0xFF111827),
-          noteBackground: Color(0xFFF9FAFB),
-          noteBorder: Color(0xFFE5E7EB),
+        return _RepairPromptColors(
+          promptSurface: palette.elevated,
+          promptBorder: palette.outline,
+          promptShadow: palette.ink.withValues(alpha: 0.06),
+          surface: palette.elevated,
+          border: palette.outline,
+          shadow: palette.ink.withValues(alpha: 0.08),
+          paperBackground: palette.surface,
+          paperBorder: palette.outline,
+          badgeBackground: palette.surface,
+          badgeBorder: palette.outline,
+          badgeText: palette.ink,
+          labelBackground: palette.surface,
+          labelBorder: palette.outline,
+          labelText: palette.ink,
+          noteBackground: palette.surface,
+          noteBorder: palette.outline,
         );
     }
   }

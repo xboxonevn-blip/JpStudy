@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
@@ -26,11 +27,11 @@ class RoundStatisticsWidget extends ConsumerWidget {
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
+        color: context.appPalette.elevated,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
+            color: context.appPalette.ink.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -52,13 +53,13 @@ class RoundStatisticsWidget extends ConsumerWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
+                  color: context.appPalette.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
                   language.remainingCardsLabel(remainingCards),
                   style: TextStyle(
-                    color: Theme.of(context).primaryColor,
+                    color: context.appPalette.primary,
                     fontWeight: FontWeight.w600,
                     fontSize: 12,
                   ),
@@ -74,7 +75,7 @@ class RoundStatisticsWidget extends ConsumerWidget {
                   icon: Icons.check_circle_rounded,
                   label: language.knownLabel,
                   count: session.knownTermIds.length,
-                  color: Colors.green,
+                  color: context.appPalette.success,
                   total: totalCards,
                 ),
               ),
@@ -84,7 +85,7 @@ class RoundStatisticsWidget extends ConsumerWidget {
                   icon: Icons.replay_rounded,
                   label: language.practiceLabel,
                   count: session.needPracticeTermIds.length,
-                  color: Colors.orange,
+                  color: context.appPalette.warning,
                   total: totalCards,
                 ),
               ),
@@ -94,7 +95,7 @@ class RoundStatisticsWidget extends ConsumerWidget {
                   icon: Icons.star_rounded,
                   label: language.starredLabel,
                   count: session.starredTermIds.length,
-                  color: Colors.amber,
+                  color: context.appPalette.warning,
                   total: totalCards,
                 ),
               ),
@@ -203,7 +204,7 @@ class _AccuracyBar extends StatelessWidget {
             Text(
               '$accuracy%',
               style: TextStyle(
-                color: _getAccuracyColor(accuracy),
+                color: _getAccuracyColor(context, accuracy),
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -215,17 +216,18 @@ class _AccuracyBar extends StatelessWidget {
           child: LinearProgressIndicator(
             value: total > 0 ? knownCount / total : 0,
             minHeight: 8,
-            backgroundColor: Colors.grey.withValues(alpha: 0.2),
-            valueColor: AlwaysStoppedAnimation<Color>(_getAccuracyColor(accuracy)),
+            backgroundColor: context.appPalette.outline,
+            valueColor: AlwaysStoppedAnimation<Color>(_getAccuracyColor(context, accuracy)),
           ),
         ),
       ],
     );
   }
 
-  Color _getAccuracyColor(int accuracy) {
-    if (accuracy >= 80) return Colors.green;
-    if (accuracy >= 60) return Colors.orange;
-    return Colors.red;
+  Color _getAccuracyColor(BuildContext context, int accuracy) {
+    final palette = context.appPalette;
+    if (accuracy >= 80) return palette.success;
+    if (accuracy >= 60) return palette.warning;
+    return palette.error;
   }
 }

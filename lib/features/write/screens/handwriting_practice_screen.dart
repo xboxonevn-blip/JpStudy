@@ -142,7 +142,7 @@ class _HandwritingPracticeScreenState
       bottomNavigationBar: Material(
         color: palette.elevated,
         elevation: 10,
-        shadowColor: const Color(0x17273854),
+        shadowColor: palette.primary.withValues(alpha: 0.09),
         child: SafeArea(
           top: false,
           minimum: const EdgeInsets.fromLTRB(
@@ -740,15 +740,16 @@ class _HandwritingPracticeScreenState
   Widget _buildLearningStateBadge(AppLanguage language, _LearningState state) {
     late final Color color;
     late final String label;
+    final palette = context.appPalette;
     switch (state) {
       case _LearningState.newItem:
-        color = const Color(0xFF2563EB);
+        color = palette.info;
         label = language.handwritingStatusNewLabel;
       case _LearningState.review:
-        color = const Color(0xFF4D7C0F);
+        color = palette.success;
         label = language.handwritingStatusReviewLabel;
       case _LearningState.weak:
-        color = const Color(0xFFB91C1C);
+        color = palette.error;
         label = language.handwritingStatusWeakLabel;
     }
 

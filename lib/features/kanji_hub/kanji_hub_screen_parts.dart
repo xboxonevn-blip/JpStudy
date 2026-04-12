@@ -1014,10 +1014,14 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                                       showCheckmark: false,
                                       selectedColor: _srsFilterColor(
                                         filter,
+                                        context.appPalette,
                                       ).withValues(alpha: 0.18),
                                       labelStyle: TextStyle(
                                         color: _srsFilter == filter
-                                            ? _srsFilterColor(filter)
+                                            ? _srsFilterColor(
+                                                filter,
+                                                context.appPalette,
+                                              )
                                             : context.appPalette.ink.withValues(
                                                 alpha: 0.65,
                                               ),
@@ -1029,6 +1033,7 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                                         color: _srsFilter == filter
                                             ? _srsFilterColor(
                                                 filter,
+                                                context.appPalette,
                                               ).withValues(alpha: 0.5)
                                             : context.appPalette.outline
                                                   .withValues(alpha: 0.4),
@@ -1363,8 +1368,8 @@ class _KanjiTile extends StatelessWidget {
                       height: 7,
                       decoration: BoxDecoration(
                         color: srsStatus == _KanjiSrsStatus.due
-                            ? const Color(0xFFFF9800) // orange – due
-                            : const Color(0xFF4CAF50), // green – studied
+                            ? palette.warning
+                            : palette.success,
                         shape: BoxShape.circle,
                       ),
                     ),

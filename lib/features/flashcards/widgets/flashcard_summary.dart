@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 
@@ -41,9 +42,9 @@ class FlashcardSummaryScreen extends ConsumerWidget {
               const SizedBox(height: 20),
               _buildAccuracyCircle(context, language, accuracyPercent),
               const SizedBox(height: 40),
-              _buildStatsGrid(language),
+              _buildStatsGrid(context, language),
               const SizedBox(height: 40),
-              _buildXPCard(language, xpEarned),
+              _buildXPCard(context, language, xpEarned),
               const SizedBox(height: 32),
               const NextStepSuggestions(),
               const SizedBox(height: 32),
@@ -70,13 +71,13 @@ class FlashcardSummaryScreen extends ConsumerWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            _getAccuracyColor(accuracyPercent),
-            _getAccuracyColor(accuracyPercent).withValues(alpha: 0.7),
+            _getAccuracyColor(context, accuracyPercent),
+            _getAccuracyColor(context, accuracyPercent).withValues(alpha: 0.7),
           ],
         ),
         boxShadow: [
           BoxShadow(
-            color: _getAccuracyColor(accuracyPercent).withValues(alpha: 0.3),
+            color: _getAccuracyColor(context, accuracyPercent).withValues(alpha: 0.3),
             blurRadius: 20,
             spreadRadius: 5,
           ),
@@ -108,7 +109,8 @@ class FlashcardSummaryScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildStatsGrid(AppLanguage language) {
+  Widget _buildStatsGrid(BuildContext context, AppLanguage language) {
+    final palette = context.appPalette;
     return Row(
       children: [
         Expanded(
@@ -116,7 +118,7 @@ class FlashcardSummaryScreen extends ConsumerWidget {
             icon: Icons.check_circle_rounded,
             value: session.knownTermIds.length,
             label: language.knownLabel,
-            color: Colors.green,
+            color: palette.success,
           ),
         ),
         const SizedBox(width: 12),
@@ -125,7 +127,7 @@ class FlashcardSummaryScreen extends ConsumerWidget {
             icon: Icons.replay_rounded,
             value: session.needPracticeTermIds.length,
             label: language.practiceLabel,
-            color: Colors.orange,
+            color: palette.warning,
           ),
         ),
         const SizedBox(width: 12),
@@ -134,14 +136,14 @@ class FlashcardSummaryScreen extends ConsumerWidget {
             icon: Icons.star_rounded,
             value: session.starredTermIds.length,
             label: language.starredLabel,
-            color: Colors.amber,
+            color: palette.warning,
           ),
         ),
       ],
     );
   }
 
-  Widget _buildXPCard(AppLanguage language, int xpEarned) {
+  Widget _buildXPCard(BuildContext context, AppLanguage language, int xpEarned) {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
@@ -209,7 +211,7 @@ class FlashcardSummaryScreen extends ConsumerWidget {
                 ),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.orange,
+                backgroundColor: context.appPalette.warning,
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
@@ -227,7 +229,7 @@ class FlashcardSummaryScreen extends ConsumerWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
-              side: BorderSide(color: Theme.of(context).primaryColor, width: 2),
+              side: BorderSide(color: context.appPalette.primary, width: 2),
             ),
             child: Text(
               language.doneLabel,
@@ -239,11 +241,12 @@ class FlashcardSummaryScreen extends ConsumerWidget {
     );
   }
 
-  Color _getAccuracyColor(int accuracy) {
-    if (accuracy >= 90) return Colors.green;
-    if (accuracy >= 70) return Colors.blue;
-    if (accuracy >= 50) return Colors.orange;
-    return Colors.red;
+  Color _getAccuracyColor(BuildContext context, int accuracy) {
+    final palette = context.appPalette;
+    if (accuracy >= 90) return palette.success;
+    if (accuracy >= 70) return palette.info;
+    if (accuracy >= 50) return palette.warning;
+    return palette.error;
   }
 }
 

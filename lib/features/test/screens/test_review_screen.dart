@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
@@ -174,7 +175,8 @@ class _ReviewCard extends StatelessWidget {
       false,
     );
 
-    final statusColor = entry.isCorrect ? Colors.green : Colors.red;
+    final palette = context.appPalette;
+    final statusColor = entry.isCorrect ? palette.success : palette.error;
     final statusIcon = entry.isCorrect ? Icons.check_circle : Icons.cancel;
 
     return Card(
@@ -202,18 +204,18 @@ class _ReviewCard extends StatelessWidget {
             if (question.targetItem.hasDisplayReading)
               Text(
                 question.targetItem.reading!.trim(),
-                style: TextStyle(color: Colors.grey[600]),
+                style: TextStyle(color: context.appPalette.ink.withValues(alpha: 0.55)),
               ),
             const SizedBox(height: 8),
             Text(
               question.questionText,
-              style: TextStyle(color: Colors.grey[700]),
+              style: TextStyle(color: context.appPalette.ink.withValues(alpha: 0.7)),
             ),
             const SizedBox(height: 12),
             Text(
               '${language.yourAnswerLabel} $userAnswer',
               style: TextStyle(
-                color: entry.isCorrect ? Colors.green : Colors.red,
+                color: entry.isCorrect ? palette.success : palette.error,
                 fontWeight: FontWeight.w600,
               ),
             ),

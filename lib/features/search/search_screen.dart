@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/navigation/app_route_locations.dart';
 import 'package:jpstudy/app/theme/app_breakpoints.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/utils/kana_romaji.dart';
 import 'package:jpstudy/core/language_provider.dart';
@@ -200,6 +201,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     final language = ref.watch(appLanguageProvider);
     final level = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
     final indexAsync = ref.watch(searchIndexProvider);
@@ -244,8 +246,8 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                                 const SizedBox(height: 4),
                                 Text(
                                   _scopeNote(language, level),
-                                  style: const TextStyle(
-                                    color: Color(0xFF64748B),
+                                  style: TextStyle(
+                                    color: palette.ink.withValues(alpha: 0.55),
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -274,7 +276,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                                 ),
                           hintText: _hint(language, level),
                           filled: true,
-                          fillColor: Colors.white,
+                          fillColor: palette.elevated,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(16),
                             borderSide: BorderSide.none,
@@ -346,10 +348,10 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                                 AppLanguage.vi => 'Kho tra cứu hiện tại',
                                 AppLanguage.ja => '現在の検索バンク',
                               },
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w800,
-                                color: Color(0xFF475569),
+                                color: palette.ink.withValues(alpha: 0.7),
                               ),
                             ),
                             const SizedBox(height: AppSpacing.sm),
@@ -1032,7 +1034,7 @@ class _SearchSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
-      decoration: HomeSurface.softPanel(),
+      decoration: HomeSurface.softPanel(context: context),
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1053,8 +1055,8 @@ class _SearchSection extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       subtitle,
-                      style: const TextStyle(
-                        color: Color(0xFF64748B),
+                      style: TextStyle(
+                        color: context.appPalette.ink.withValues(alpha: 0.55),
                         fontSize: 12,
                       ),
                     ),
@@ -1086,12 +1088,13 @@ class _SearchTopHitCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = match.entry.kind.color;
+    final palette = context.appPalette;
+    final color = match.entry.kind.colorFor(palette);
 
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [color.withValues(alpha: 0.16), Colors.white],
+          colors: [color.withValues(alpha: 0.16), palette.elevated],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -1130,8 +1133,8 @@ class _SearchTopHitCard extends StatelessWidget {
                     const SizedBox(height: 2),
                     Text(
                       summary,
-                      style: const TextStyle(
-                        color: Color(0xFF334155),
+                      style: TextStyle(
+                        color: palette.ink.withValues(alpha: 0.7),
                         fontSize: 12,
                         fontWeight: FontWeight.w700,
                       ),
@@ -1148,17 +1151,17 @@ class _SearchTopHitCard extends StatelessWidget {
           const SizedBox(height: AppSpacing.md),
           Text(
             match.entry.title,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w900,
-              color: Color(0xFF0F172A),
+              color: palette.ink,
             ),
           ),
           const SizedBox(height: 6),
           Text(
             match.entry.subtitle,
-            style: const TextStyle(
-              color: Color(0xFF475569),
+            style: TextStyle(
+              color: palette.ink.withValues(alpha: 0.7),
               fontSize: 13,
               height: 1.45,
               fontWeight: FontWeight.w700,
@@ -1168,8 +1171,8 @@ class _SearchTopHitCard extends StatelessWidget {
             const SizedBox(height: 10),
             Text(
               _readingHint(language, match.entry.reading!),
-              style: const TextStyle(
-                color: Color(0xFF334155),
+              style: TextStyle(
+                color: palette.ink.withValues(alpha: 0.7),
                 fontSize: 12,
                 fontWeight: FontWeight.w700,
               ),
@@ -1259,13 +1262,14 @@ class _SearchTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Material(
       color: Colors.transparent,
       child: InkWell(
         onTap: entry.id != null ? () => _onTap(context) : null,
         borderRadius: BorderRadius.circular(16),
         child: Container(
-          decoration: HomeSurface.softPanel(),
+          decoration: HomeSurface.softPanel(context: context),
           padding: EdgeInsets.symmetric(
             horizontal: 14,
             vertical: compact ? 12 : 14,
@@ -1276,12 +1280,12 @@ class _SearchTile extends StatelessWidget {
                 width: compact ? 36 : 40,
                 height: compact ? 36 : 40,
                 decoration: BoxDecoration(
-                  color: entry.kind.color.withValues(alpha: 0.12),
+                  color: entry.kind.colorFor(palette).withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(
                   entry.kind.icon,
-                  color: entry.kind.color,
+                  color: entry.kind.colorFor(palette),
                   size: compact ? 18 : 20,
                 ),
               ),
@@ -1294,7 +1298,7 @@ class _SearchTile extends StatelessWidget {
                       Text(
                         matchHint!,
                         style: TextStyle(
-                          color: entry.kind.color,
+                          color: entry.kind.colorFor(palette),
                           fontSize: compact ? 10.5 : 11,
                           fontWeight: FontWeight.w900,
                         ),
@@ -1316,7 +1320,7 @@ class _SearchTile extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        color: const Color(0xFF64748B),
+                        color: palette.ink.withValues(alpha: 0.55),
                         fontSize: compact ? 11.5 : 12,
                       ),
                     ),
@@ -1389,15 +1393,20 @@ String _searchLoadErrorSubtitle(AppLanguage language) {
 enum _SearchFilter { all, vocab, kanji, kana }
 
 enum _SearchKind {
-  vocab(_SearchFilter.vocab, Icons.translate_rounded, Color(0xFF0F766E)),
-  kanji(_SearchFilter.kanji, Icons.draw_rounded, Color(0xFF2563EB)),
-  kana(_SearchFilter.kana, Icons.text_fields_rounded, Color(0xFF7C3AED));
+  vocab(_SearchFilter.vocab, Icons.translate_rounded),
+  kanji(_SearchFilter.kanji, Icons.draw_rounded),
+  kana(_SearchFilter.kana, Icons.text_fields_rounded);
 
-  const _SearchKind(this.filter, this.icon, this.color);
+  const _SearchKind(this.filter, this.icon);
 
   final _SearchFilter filter;
   final IconData icon;
-  final Color color;
+
+  Color colorFor(AppThemePalette palette) => switch (this) {
+    _SearchKind.vocab => palette.secondary,
+    _SearchKind.kanji => palette.info,
+    _SearchKind.kana => palette.accent,
+  };
 }
 
 class _SearchEntry {

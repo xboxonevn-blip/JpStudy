@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -220,6 +221,7 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
   }
 
   Widget _buildScoreSummary(BuildContext context, AppLanguage language) {
+    final palette = context.appPalette;
     return Column(
       children: [
         Text(
@@ -231,13 +233,17 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
             session.correctCount,
             session.totalQuestions,
           ),
-          style: TextStyle(fontSize: 18, color: Colors.grey[600]),
+          style: TextStyle(
+            fontSize: 18,
+            color: palette.ink.withValues(alpha: 0.55),
+          ),
         ),
       ],
     );
   }
 
   Widget _buildStatsGrid(BuildContext context, AppLanguage language) {
+    final palette = context.appPalette;
     return Row(
       children: [
         Expanded(
@@ -245,7 +251,7 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
             icon: Icons.check_circle,
             value: session.correctCount,
             label: language.correctLabel,
-            color: Colors.green,
+            color: palette.success,
           ),
         ),
         const SizedBox(width: 12),
@@ -254,7 +260,7 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
             icon: Icons.cancel,
             value: session.wrongCount,
             label: language.incorrectLabel,
-            color: Colors.red,
+            color: palette.error,
           ),
         ),
         const SizedBox(width: 12),
@@ -263,7 +269,7 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
             icon: Icons.timer,
             value: _formatDuration(session.timeElapsed),
             label: language.timeSpentLabel,
-            color: Colors.blue,
+            color: palette.info,
           ),
         ),
       ],
@@ -271,18 +277,19 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
   }
 
   Widget _buildXPCard(BuildContext context) {
+    final palette = context.appPalette;
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
+        gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF667eea), Color(0xFF764ba2)],
+          colors: [palette.primary, palette.secondary],
         ),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF667eea).withValues(alpha: 0.3),
+            color: palette.primary.withValues(alpha: 0.3),
             blurRadius: 15,
             offset: const Offset(0, 8),
           ),
@@ -307,12 +314,13 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
   }
 
   Widget _buildTypeBreakdown(BuildContext context, AppLanguage language) {
+    final palette = context.appPalette;
     final breakdown = session.breakdownByType;
 
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.grey.withValues(alpha: 0.1),
+        color: palette.elevated,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
@@ -324,7 +332,7 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
           ),
           const SizedBox(height: 16),
           ...breakdown.entries.map(
-            (entry) => _buildTypeRow(entry.key, entry.value, language),
+            (entry) => _buildTypeRow(context, entry.key, entry.value, language),
           ),
         ],
       ),
@@ -332,10 +340,12 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
   }
 
   Widget _buildTypeRow(
+    BuildContext context,
     QuestionType type,
     TypeBreakdown breakdown,
     AppLanguage language,
   ) {
+    final palette = context.appPalette;
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Row(
@@ -357,9 +367,11 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
                     height: 8,
                     child: LinearProgressIndicator(
                       value: breakdown.accuracy / 100,
-                      backgroundColor: Colors.grey[300],
+                      backgroundColor: palette.outline,
                       valueColor: AlwaysStoppedAnimation<Color>(
-                        breakdown.accuracy >= 70 ? Colors.green : Colors.orange,
+                        breakdown.accuracy >= 70
+                            ? palette.success
+                            : palette.warning,
                       ),
                     ),
                   ),
@@ -382,26 +394,27 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
     AppLanguage language, {
     required bool hasRecoveryPack,
   }) {
+    final palette = context.appPalette;
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.orange.withValues(alpha: 0.1),
+        color: palette.warning.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.orange, width: 2),
+        border: Border.all(color: palette.warning, width: 2),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              const Icon(Icons.priority_high, color: Colors.orange),
+              Icon(Icons.priority_high, color: palette.warning),
               const SizedBox(width: 8),
               Text(
                 language.termsNeedPracticeLabel(session.weakTermIds.length),
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Colors.orange,
+                  color: palette.warning,
                 ),
               ),
             ],
@@ -409,16 +422,19 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
           const SizedBox(height: 8),
           Text(
             language.termsNeedPracticeHint,
-            style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+            style: TextStyle(
+              fontSize: 14,
+              color: palette.ink.withValues(alpha: 0.55),
+            ),
           ),
           if (hasRecoveryPack) ...[
             const SizedBox(height: 8),
             Text(
               _recoveryPackReadyLabel(language),
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
-                color: Color(0xFF1D4ED8),
+                color: palette.info,
               ),
             ),
           ],
@@ -463,7 +479,7 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
             child: ElevatedButton.icon(
               onPressed: () => context.openLearnRecoveryPack(),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF1D4ED8),
+                backgroundColor: context.appPalette.info,
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
@@ -490,7 +506,7 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
-              side: BorderSide(color: Theme.of(context).primaryColor, width: 2),
+              side: BorderSide(color: context.appPalette.primary, width: 2),
             ),
             child: Text(
               language.doneLabel,
@@ -522,9 +538,9 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
           return Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Colors.blueGrey.withValues(alpha: 0.08),
+              color: context.appPalette.elevated,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: Colors.blueGrey.withValues(alpha: 0.2)),
+              border: Border.all(color: context.appPalette.outline),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -539,7 +555,10 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
                 const SizedBox(height: 8),
                 Text(
                   language.lessonRecommendationsEmptyLabel,
-                  style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                  style: TextStyle(
+                  fontSize: 14,
+                  color: context.appPalette.ink.withValues(alpha: 0.55),
+                ),
                 ),
               ],
             ),
@@ -576,9 +595,9 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
         return Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: Colors.blueGrey.withValues(alpha: 0.08),
+            color: context.appPalette.elevated,
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: Colors.blueGrey.withValues(alpha: 0.2)),
+            border: Border.all(color: context.appPalette.outline),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -593,7 +612,10 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
               const SizedBox(height: 8),
               Text(
                 language.lessonRecommendationsHint,
-                style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                style: TextStyle(
+                  fontSize: 14,
+                  color: context.appPalette.ink.withValues(alpha: 0.55),
+                ),
               ),
               const SizedBox(height: 12),
               if (data.pinned != null) ...[
@@ -620,7 +642,7 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
         : '${language.lessonLabel} ${pinned.lessonId}';
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      leading: const Icon(Icons.push_pin, color: Colors.indigo),
+      leading: Icon(Icons.push_pin, color: context.appPalette.primary),
       title: Text(title),
       subtitle: Text(language.pinnedLessonLabel),
       trailing: IconButton(
@@ -637,13 +659,14 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
     _LessonSuggestion suggestion,
     AppLanguage language,
   ) {
+    final palette = context.appPalette;
     final title = suggestion.title.isNotEmpty
         ? suggestion.title
         : '${language.lessonLabel} ${suggestion.lessonId}';
     final isPinned = _pinnedLessonId == suggestion.lessonId;
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      leading: const Icon(Icons.school_rounded, color: Colors.blueGrey),
+      leading: Icon(Icons.school_rounded, color: palette.ink.withValues(alpha: 0.5)),
       title: Text(title),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -659,7 +682,7 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
               language.pinnedLessonLabel,
               style: TextStyle(
                 fontSize: 12,
-                color: Colors.indigo[700],
+                color: palette.primary,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -674,7 +697,7 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
                 : language.pinLessonLabel,
             icon: Icon(
               isPinned ? Icons.push_pin : Icons.push_pin_outlined,
-              color: isPinned ? Colors.indigo : Colors.blueGrey,
+              color: isPinned ? palette.primary : palette.ink.withValues(alpha: 0.5),
             ),
             onPressed: () => _togglePinnedLesson(suggestion.lessonId),
           ),
@@ -748,17 +771,18 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
   }
 
   Color _getGradeColor(String grade) {
+    final palette = context.appPalette;
     switch (grade) {
       case 'A':
-        return Colors.green;
+        return palette.success;
       case 'B':
-        return Colors.blue;
+        return palette.info;
       case 'C':
-        return Colors.orange;
+        return palette.warning;
       case 'D':
-        return Colors.deepOrange;
+        return Color.lerp(palette.warning, palette.error, 0.55)!;
       default:
-        return Colors.red;
+        return palette.error;
     }
   }
 
@@ -780,7 +804,7 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(language.resultsCopiedLabel),
-              backgroundColor: Colors.green,
+              backgroundColor: context.appPalette.success,
             ),
           );
         }
@@ -897,16 +921,20 @@ class _PersonalBestBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFFFBBF24), Color(0xFFF59E0B)],
+        gradient: LinearGradient(
+          colors: [
+            palette.warning,
+            palette.warning.withValues(alpha: 0.85),
+          ],
         ),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFFFBBF24).withValues(alpha: 0.4),
+            color: palette.warning.withValues(alpha: 0.4),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),

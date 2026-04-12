@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'dart:async';
 
 import '../../../data/models/vocab_item.dart';
@@ -246,7 +247,7 @@ class _LessonMatchScreenState extends ConsumerState<LessonMatchScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.extension, size: 64, color: Colors.blue),
+          Icon(Icons.extension, size: 64, color: context.appPalette.info),
           const SizedBox(height: 16),
           Text(
             language.matchGameLabel,
@@ -257,7 +258,9 @@ class _LessonMatchScreenState extends ConsumerState<LessonMatchScreen> {
             language.learnTermsAvailableLabel(items.length),
             style: Theme.of(
               context,
-            ).textTheme.bodyLarge?.copyWith(color: Colors.grey),
+            ).textTheme.bodyLarge?.copyWith(
+              color: context.appPalette.ink.withValues(alpha: 0.55),
+            ),
           ),
           const SizedBox(height: 24),
           ClayButton(
@@ -278,7 +281,7 @@ class _LessonMatchScreenState extends ConsumerState<LessonMatchScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.emoji_events_rounded, size: 64, color: Colors.amber),
+          Icon(Icons.emoji_events_rounded, size: 64, color: context.appPalette.warning),
           const SizedBox(height: 16),
           Text(
             language.timeSecondsLabel(_secondsElapsed),
@@ -288,7 +291,9 @@ class _LessonMatchScreenState extends ConsumerState<LessonMatchScreen> {
             language.maxComboLabel(_maxCombo),
             style: Theme.of(
               context,
-            ).textTheme.titleLarge?.copyWith(color: Colors.deepPurple),
+            ).textTheme.titleLarge?.copyWith(
+              color: context.appPalette.primary,
+            ),
           ),
           const SizedBox(height: 24),
           ClayButton(
@@ -320,10 +325,10 @@ class _LessonMatchScreenState extends ConsumerState<LessonMatchScreen> {
               duration: const Duration(milliseconds: 200),
               child: Text(
                 language.comboLabel(_combo),
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w900,
-                  color: Colors.orange,
+                  color: context.appPalette.warning,
                   letterSpacing: 1.2,
                 ),
               ),
@@ -353,9 +358,14 @@ class _LessonMatchScreenState extends ConsumerState<LessonMatchScreen> {
       return const SizedBox();
     }
 
-    Color color = Theme.of(context).cardColor;
-    if (card.state == MatchCardState.selected) color = Colors.blue.shade100;
-    if (card.state == MatchCardState.mismatched) color = Colors.red.shade100;
+    final palette = context.appPalette;
+    Color color = palette.elevated;
+    if (card.state == MatchCardState.selected) {
+      color = palette.info.withValues(alpha: 0.15);
+    }
+    if (card.state == MatchCardState.mismatched) {
+      color = palette.error.withValues(alpha: 0.15);
+    }
 
     return GestureDetector(
       onTap: () => _onCardTap(card),
@@ -366,13 +376,13 @@ class _LessonMatchScreenState extends ConsumerState<LessonMatchScreen> {
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
             color: card.state == MatchCardState.selected
-                ? Colors.blue
-                : Colors.grey.shade300,
+                ? palette.info
+                : palette.outline,
             width: 2,
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.05),
+              color: palette.ink.withValues(alpha: 0.05),
               blurRadius: 4,
               offset: const Offset(0, 2),
             ),

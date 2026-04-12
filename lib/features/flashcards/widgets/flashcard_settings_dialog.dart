@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 
@@ -34,7 +35,7 @@ class _FlashcardSettingsDialogState extends ConsumerState<FlashcardSettingsDialo
     return AlertDialog(
       title: Row(
         children: [
-          Icon(Icons.settings_rounded, color: Theme.of(context).primaryColor),
+          Icon(Icons.settings_rounded, color: context.appPalette.primary),
           const SizedBox(width: 12),
           Text(ref.watch(appLanguageProvider).flashcardSettingsTitle),
         ],
@@ -115,7 +116,7 @@ class _FlashcardSettingsDialogState extends ConsumerState<FlashcardSettingsDialo
       title: Text(title, style: const TextStyle(fontWeight: FontWeight.w600)),
       subtitle: Text(
         subtitle,
-        style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+        style: TextStyle(fontSize: 12, color: context.appPalette.ink.withValues(alpha: 0.55)),
       ),
       value: value,
       onChanged: onChanged,

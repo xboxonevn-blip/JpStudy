@@ -204,7 +204,7 @@ class _TestScreenState extends ConsumerState<TestScreen> {
                   ? Icons.flag
                   : Icons.flag_outlined,
               color: _session.isFlagged(_session.currentQuestionIndex)
-                  ? Colors.orange
+                  ? context.appPalette.warning
                   : null,
             ),
             onPressed: () {
@@ -301,20 +301,20 @@ class _TestScreenState extends ConsumerState<TestScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
         color: isLow
-            ? Colors.red.withValues(alpha: 0.2)
-            : Colors.grey.withValues(alpha: 0.2),
+            ? context.appPalette.error.withValues(alpha: 0.2)
+            : context.appPalette.outline,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.timer, size: 18, color: isLow ? Colors.red : null),
+          Icon(Icons.timer, size: 18, color: isLow ? context.appPalette.error : null),
           const SizedBox(width: 4),
           Text(
             '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: isLow ? Colors.red : null,
+              color: isLow ? context.appPalette.error : null,
             ),
           ),
         ],

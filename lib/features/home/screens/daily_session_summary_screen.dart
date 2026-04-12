@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/features/common/widgets/japanese_background.dart';
@@ -16,6 +17,7 @@ class DailySessionSummaryScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final palette = context.appPalette;
     final language = ref.watch(appLanguageProvider);
     final (vocabDue, grammarDue, kanjiDue, totalFix) = ref.watch(
       dashboardProvider.select((v) {
@@ -52,10 +54,10 @@ class DailySessionSummaryScreen extends ConsumerWidget {
                   const SizedBox(width: 4),
                   Text(
                     _title(language),
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.w900,
-                      color: Color(0xFF0F172A),
+                      color: palette.ink,
                     ),
                   ),
                 ],
@@ -91,17 +93,17 @@ class DailySessionSummaryScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 14),
               Container(
-                decoration: HomeSurface.softPanel(),
+                decoration: HomeSurface.softPanel(context: context),
                 padding: const EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       _improvedTitle(language),
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w800,
-                        color: Color(0xFF0F172A),
+                        color: palette.ink,
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -113,26 +115,26 @@ class DailySessionSummaryScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 14),
               Container(
-                decoration: HomeSurface.softPanel(),
+                decoration: HomeSurface.softPanel(context: context),
                 padding: const EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       _nextTitle(language),
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w800,
-                        color: Color(0xFF0F172A),
+                        color: palette.ink,
                       ),
                     ),
                     const SizedBox(height: 8),
                     Text(
                       _nextLine(language, totalDue, totalFix),
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 13,
                         height: 1.4,
-                        color: Color(0xFF475569),
+                        color: palette.ink.withValues(alpha: 0.7),
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -141,7 +143,7 @@ class DailySessionSummaryScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 14),
               Container(
-                decoration: HomeSurface.softPanel(),
+                decoration: HomeSurface.softPanel(context: context),
                 padding: const EdgeInsets.all(16),
                 child: const NextStepSuggestions(),
               ),
@@ -216,27 +218,28 @@ class _SummaryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.appPalette;
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 2),
+          Padding(
+            padding: const EdgeInsets.only(top: 2),
             child: Icon(
               Icons.check_circle_rounded,
               size: 16,
-              color: Color(0xFF16A34A),
+              color: palette.success,
             ),
           ),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
               label,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
-                color: Color(0xFF334155),
+                color: palette.ink.withValues(alpha: 0.7),
               ),
             ),
           ),
