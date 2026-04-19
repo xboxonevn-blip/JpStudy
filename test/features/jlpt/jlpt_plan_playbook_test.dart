@@ -8,6 +8,80 @@ import 'package:jpstudy/features/jlpt/models/jlpt_plan_playbook.dart';
 import 'package:jpstudy/features/test/models/home_mock_exam_launch_args.dart';
 
 void main() {
+  // ── jlptPlanPhaseForDayOffset ──────────────────────────────────────────────
+
+  group('jlptPlanPhaseForDayOffset', () {
+    test('day 0 → reset', () {
+      expect(jlptPlanPhaseForDayOffset(0), JlptPlanPhase.reset);
+    });
+    test('day 1 → accuracy', () {
+      expect(jlptPlanPhaseForDayOffset(1), JlptPlanPhase.accuracy);
+    });
+    test('day 2 → speed', () {
+      expect(jlptPlanPhaseForDayOffset(2), JlptPlanPhase.speed);
+    });
+    test('day 3 → coverage', () {
+      expect(jlptPlanPhaseForDayOffset(3), JlptPlanPhase.coverage);
+    });
+    test('day 4 → timed', () {
+      expect(jlptPlanPhaseForDayOffset(4), JlptPlanPhase.timed);
+    });
+    test('day 5 → checkpoint', () {
+      expect(jlptPlanPhaseForDayOffset(5), JlptPlanPhase.checkpoint);
+    });
+    test('day 6 → miniMock (default arm)', () {
+      expect(jlptPlanPhaseForDayOffset(6), JlptPlanPhase.miniMock);
+    });
+    test('day 100 → miniMock (default arm)', () {
+      expect(jlptPlanPhaseForDayOffset(100), JlptPlanPhase.miniMock);
+    });
+  });
+
+  // ── jlptPlanPhaseLabel ─────────────────────────────────────────────────────
+
+  group('jlptPlanPhaseLabel', () {
+    test('all phases produce non-empty labels in English', () {
+      for (final phase in JlptPlanPhase.values) {
+        expect(
+          jlptPlanPhaseLabel(AppLanguage.en, phase),
+          isNotEmpty,
+          reason: 'phase $phase had empty label',
+        );
+      }
+    });
+
+    test('all phases produce non-empty labels in Vietnamese', () {
+      for (final phase in JlptPlanPhase.values) {
+        expect(
+          jlptPlanPhaseLabel(AppLanguage.vi, phase),
+          isNotEmpty,
+          reason: 'phase $phase had empty label',
+        );
+      }
+    });
+
+    test('all phases produce non-empty labels in Japanese', () {
+      for (final phase in JlptPlanPhase.values) {
+        expect(
+          jlptPlanPhaseLabel(AppLanguage.ja, phase),
+          isNotEmpty,
+          reason: 'phase $phase had empty label',
+        );
+      }
+    });
+
+    test('reset phase labels are distinct across three languages', () {
+      final labels = {
+        jlptPlanPhaseLabel(AppLanguage.en, JlptPlanPhase.reset),
+        jlptPlanPhaseLabel(AppLanguage.vi, JlptPlanPhase.reset),
+        jlptPlanPhaseLabel(AppLanguage.ja, JlptPlanPhase.reset),
+      };
+      expect(labels.length, 3);
+    });
+  });
+
+  // ── existing presentation tests below ──────────────────────────────────────
+
   test('Day 1 and Day 3 vocab plan cards produce different learning lanes', () {
     const day1 = JlptPlanItem(
       dayOffset: 0,
@@ -27,10 +101,12 @@ void main() {
     final day1Presentation = buildJlptPlanPresentation(
       language: AppLanguage.en,
       item: day1,
+      levelCode: 'N5',
     );
     final day3Presentation = buildJlptPlanPresentation(
       language: AppLanguage.en,
       item: day3,
+      levelCode: 'N5',
     );
 
     expect(day1Presentation.phaseLabel, isNot(day3Presentation.phaseLabel));
@@ -68,6 +144,7 @@ void main() {
     final presentation = buildJlptPlanPresentation(
       language: AppLanguage.en,
       item: item,
+      levelCode: 'N5',
     );
 
     expect(
@@ -94,6 +171,7 @@ void main() {
     final presentation = buildJlptPlanPresentation(
       language: AppLanguage.en,
       item: item,
+      levelCode: 'N5',
     );
 
     expect(presentation.phaseLabel, equals('Coverage'));
@@ -120,6 +198,7 @@ void main() {
     final presentation = buildJlptPlanPresentation(
       language: AppLanguage.vi,
       item: item,
+      levelCode: 'N5',
     );
 
     expect(presentation.actionLabel, equals('Mở đọc ngữ cảnh'));
@@ -137,6 +216,7 @@ void main() {
     final presentation = buildJlptPlanPresentation(
       language: AppLanguage.en,
       item: item,
+      levelCode: 'N4',
     );
 
     expect(presentation.launchTarget.route, equals(AppRoutePath.kanjiPractice));
@@ -145,6 +225,44 @@ void main() {
 
     final args = presentation.launchTarget.extra as KanjiPracticeArgs;
     expect(args.mode, KanjiPracticeMode.write);
+    expect(args.levelCode, 'N4');
     expect(args.source, 'jlpt_plan');
+  });
+
+  test('Kanji speed and coverage phases keep the provided level code', () {
+    const speedItem = JlptPlanItem(
+      dayOffset: 2,
+      area: JlptSkillArea.kanji,
+      minutes: 20,
+      focus: 'Speed',
+      action: 'Push faster kanji recall.',
+    );
+    const coverageItem = JlptPlanItem(
+      dayOffset: 3,
+      area: JlptSkillArea.kanji,
+      minutes: 20,
+      focus: 'Coverage',
+      action: 'Balance kanji reading coverage.',
+    );
+
+    final speedPresentation = buildJlptPlanPresentation(
+      language: AppLanguage.en,
+      item: speedItem,
+      levelCode: 'N3',
+    );
+    final coveragePresentation = buildJlptPlanPresentation(
+      language: AppLanguage.en,
+      item: coverageItem,
+      levelCode: 'N3',
+    );
+
+    final speedArgs = speedPresentation.launchTarget.extra as KanjiPracticeArgs;
+    final coverageArgs =
+        coveragePresentation.launchTarget.extra as KanjiPracticeArgs;
+
+    expect(speedArgs.mode, KanjiPracticeMode.both);
+    expect(speedArgs.levelCode, 'N3');
+    expect(coverageArgs.mode, KanjiPracticeMode.read);
+    expect(coverageArgs.levelCode, 'N3');
   });
 }
