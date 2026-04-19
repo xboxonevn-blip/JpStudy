@@ -20,6 +20,7 @@ enum JlptPlanPhase {
 class JlptPlanLaunchTarget {
   const JlptPlanLaunchTarget({required this.route, this.extra});
 
+  // Must be an AppRoutePath constant — GoRouter.push() takes a path string.
   final String route;
   final Object? extra;
 }
@@ -43,6 +44,7 @@ class JlptPlanPresentation {
 JlptPlanPresentation buildJlptPlanPresentation({
   required AppLanguage language,
   required JlptPlanItem item,
+  required String levelCode,
 }) {
   final phase = jlptPlanPhaseForDayOffset(item.dayOffset);
   return switch ((item.area, phase)) {
@@ -89,28 +91,34 @@ JlptPlanPresentation buildJlptPlanPresentation({
     (JlptSkillArea.kanji, JlptPlanPhase.reset) => _kanjiResetPresentation(
       language,
       item,
+      levelCode,
     ),
     (JlptSkillArea.kanji, JlptPlanPhase.accuracy) => _kanjiAccuracyPresentation(
       language,
       item,
+      levelCode,
     ),
     (JlptSkillArea.kanji, JlptPlanPhase.speed) => _kanjiSpeedPresentation(
       language,
       item,
+      levelCode,
     ),
     (JlptSkillArea.kanji, JlptPlanPhase.coverage) => _kanjiCoveragePresentation(
       language,
       item,
+      levelCode,
     ),
     (JlptSkillArea.kanji, JlptPlanPhase.timed) => _kanjiTimedPresentation(
       language,
       item,
+      levelCode,
     ),
     (JlptSkillArea.kanji, JlptPlanPhase.checkpoint) =>
-      _kanjiCheckpointPresentation(language, item),
+      _kanjiCheckpointPresentation(language, item, levelCode),
     (JlptSkillArea.kanji, JlptPlanPhase.miniMock) => _kanjiTimedPresentation(
       language,
       item,
+      levelCode,
     ),
     (JlptSkillArea.reading, JlptPlanPhase.reset) => _readingResetPresentation(
       language,
@@ -556,6 +564,7 @@ JlptPlanPresentation _grammarCheckpointPresentation(
 JlptPlanPresentation _kanjiResetPresentation(
   AppLanguage language,
   JlptPlanItem item,
+  String levelCode,
 ) {
   return JlptPlanPresentation(
     phaseLabel: jlptPlanPhaseLabel(language, JlptPlanPhase.reset),
@@ -572,11 +581,11 @@ JlptPlanPresentation _kanjiResetPresentation(
       AppLanguage.ja => '${item.minutes}分は崩れた漢字を書き直し、形と書き順の手応えを戻します。',
     },
     actionLabel: jlptActionOpenHandwriting(language),
-    launchTarget: const JlptPlanLaunchTarget(
+    launchTarget: JlptPlanLaunchTarget(
       route: AppRoutePath.kanjiPractice,
       extra: KanjiPracticeArgs(
         mode: KanjiPracticeMode.write,
-        levelCode: 'N5',
+        levelCode: levelCode,
         source: 'jlpt_plan',
       ),
     ),
@@ -586,13 +595,15 @@ JlptPlanPresentation _kanjiResetPresentation(
 JlptPlanPresentation _kanjiAccuracyPresentation(
   AppLanguage language,
   JlptPlanItem item,
+  String levelCode,
 ) {
-  return _kanjiResetPresentation(language, item);
+  return _kanjiResetPresentation(language, item, levelCode);
 }
 
 JlptPlanPresentation _kanjiSpeedPresentation(
   AppLanguage language,
   JlptPlanItem item,
+  String levelCode,
 ) {
   return JlptPlanPresentation(
     phaseLabel: jlptPlanPhaseLabel(language, JlptPlanPhase.speed),
@@ -610,11 +621,11 @@ JlptPlanPresentation _kanjiSpeedPresentation(
         '形が安定したら、${item.minutes}分の速い反応ラウンドに切り替えて既知漢字での迷いを減らします。',
     },
     actionLabel: jlptActionOpenKanjiPractice(language),
-    launchTarget: const JlptPlanLaunchTarget(
+    launchTarget: JlptPlanLaunchTarget(
       route: AppRoutePath.kanjiPractice,
       extra: KanjiPracticeArgs(
         mode: KanjiPracticeMode.both,
-        levelCode: 'N5',
+        levelCode: levelCode,
         source: 'jlpt_plan',
       ),
     ),
@@ -624,6 +635,7 @@ JlptPlanPresentation _kanjiSpeedPresentation(
 JlptPlanPresentation _kanjiCoveragePresentation(
   AppLanguage language,
   JlptPlanItem item,
+  String levelCode,
 ) {
   return JlptPlanPresentation(
     phaseLabel: jlptPlanPhaseLabel(language, JlptPlanPhase.coverage),
@@ -640,11 +652,11 @@ JlptPlanPresentation _kanjiCoveragePresentation(
       AppLanguage.ja => '${item.minutes}分で、手書き想起だけでなく認識と読みの広がりも整えます。',
     },
     actionLabel: jlptActionOpenKanjiReading(language),
-    launchTarget: const JlptPlanLaunchTarget(
+    launchTarget: JlptPlanLaunchTarget(
       route: AppRoutePath.kanjiPractice,
       extra: KanjiPracticeArgs(
         mode: KanjiPracticeMode.read,
-        levelCode: 'N5',
+        levelCode: levelCode,
         source: 'jlpt_plan',
       ),
     ),
@@ -654,15 +666,17 @@ JlptPlanPresentation _kanjiCoveragePresentation(
 JlptPlanPresentation _kanjiTimedPresentation(
   AppLanguage language,
   JlptPlanItem item,
+  String levelCode,
 ) {
-  return _kanjiSpeedPresentation(language, item);
+  return _kanjiSpeedPresentation(language, item, levelCode);
 }
 
 JlptPlanPresentation _kanjiCheckpointPresentation(
   AppLanguage language,
   JlptPlanItem item,
+  String levelCode,
 ) {
-  return _kanjiCoveragePresentation(language, item);
+  return _kanjiCoveragePresentation(language, item, levelCode);
 }
 
 JlptPlanPresentation _readingResetPresentation(

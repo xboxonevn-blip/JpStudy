@@ -43,6 +43,12 @@ class HandwritingCharacterResult {
     required this.expectedStrokes,
     required this.drawnStrokes,
     required this.score,
+    required this.strokeScore,
+    required this.shapeScore,
+    required this.orderScore,
+    required this.templateScore,
+    required this.usedTemplate,
+    required this.templateQuality,
     required this.isCorrect,
     this.kanjiId,
   });
@@ -51,6 +57,12 @@ class HandwritingCharacterResult {
   final int expectedStrokes;
   final int drawnStrokes;
   final double score;
+  final double strokeScore;
+  final double shapeScore;
+  final double orderScore;
+  final double templateScore;
+  final bool usedTemplate;
+  final String templateQuality;
   final bool isCorrect;
   final int? kanjiId;
 }
@@ -58,6 +70,10 @@ class HandwritingCharacterResult {
 class HandwritingEvaluator {
   const HandwritingEvaluator._();
 
+  // Per-character threshold deltas applied on top of the tier+complexity profile.
+  // Positive deltas tighten acceptance for visually confusable pairs (未/末, 土/士).
+  // Negative deltas loosen acceptance for enclosure characters (口, 日) whose
+  // stroke direction is harder to score precisely with template matching.
   static const Map<String, _ThresholdOverride> _characterOverrides = {
     '未': _ThresholdOverride(
       requiredScoreDelta: 0.02,

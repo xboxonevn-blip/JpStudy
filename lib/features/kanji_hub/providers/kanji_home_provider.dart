@@ -29,10 +29,11 @@ final kanjiDueIdsProvider = FutureProvider<Set<int>>((ref) async {
   return repo.fetchDueKanjiIds();
 });
 
-final kanjiHomeSummaryProvider = FutureProvider<KanjiHomeSummary>((ref) async {
+Future<KanjiHomeSummary> _loadKanjiHomeSummary(
+  Ref ref,
+  String levelCode,
+) async {
   final repo = ref.watch(lessonRepositoryProvider);
-  final level = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
-  final levelCode = level.shortLabel;
 
   // Fire all three COUNT queries concurrently — no full KanjiItem deserialization.
   final dueFuture = repo.countDueKanjiByLevel(levelCode);
@@ -40,6 +41,7 @@ final kanjiHomeSummaryProvider = FutureProvider<KanjiHomeSummary>((ref) async {
   final allFuture = repo.countKanjiByLevel(levelCode);
 
   final dueCount = await dueFuture;
+  // Cap at 12: UX session limit — avoids overwhelming the landing card with unseen items.
   final newCount = (await unseenFuture).clamp(0, 12);
   final exploreCount = await allFuture;
 
@@ -48,5 +50,17 @@ final kanjiHomeSummaryProvider = FutureProvider<KanjiHomeSummary>((ref) async {
     dueCount: dueCount,
     newCount: newCount,
     exploreCount: exploreCount,
+  );
+}
+
+final kanjiHomeSummaryByLevelCodeProvider =
+    FutureProvider.family<KanjiHomeSummary, String>((ref, levelCode) async {
+      return _loadKanjiHomeSummary(ref, levelCode);
+    });
+
+final kanjiHomeSummaryProvider = FutureProvider<KanjiHomeSummary>((ref) async {
+  final level = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
+  return ref.watch(
+    kanjiHomeSummaryByLevelCodeProvider(level.shortLabel).future,
   );
 });

@@ -916,6 +916,12 @@ class _MeasurementAuditRunner {
           expectedStrokes: expected,
           drawnStrokes: result.drawnStrokes,
           score: result.score,
+          strokeScore: result.strokeScore,
+          shapeScore: result.shapeScore,
+          orderScore: result.orderScore,
+          templateScore: result.templateScore,
+          usedTemplate: result.usedTemplate,
+          templateQuality: result.templateQuality,
           isCorrect: result.isCorrect,
         ),
       );
