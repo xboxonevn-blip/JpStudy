@@ -11,6 +11,15 @@ import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/common/widgets/clay_button.dart';
 import 'package:jpstudy/features/common/widgets/japanese_background.dart';
 
+/// Returns [Duration.zero] when the user has requested reduced motion
+/// (OS-level accessibility setting), otherwise returns [normal].
+///
+/// Applied to short AnimatedContainer tweens inside this screen so the
+/// onboarding visuals don't cross-fade/resize for users who have disabled
+/// animations system-wide.
+Duration _onboardingAnimDuration(BuildContext context, Duration normal) =>
+    MediaQuery.of(context).disableAnimations ? Duration.zero : normal;
+
 class OnboardingScreen extends ConsumerStatefulWidget {
   const OnboardingScreen({super.key, required this.onComplete});
 
@@ -103,7 +112,10 @@ class _ProgressDots extends StatelessWidget {
       children: List.generate(total, (i) {
         final active = i == current;
         return AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
+          duration: _onboardingAnimDuration(
+            context,
+            const Duration(milliseconds: 200),
+          ),
           margin: const EdgeInsets.symmetric(horizontal: 4),
           width: active ? 24 : 8,
           height: 8,
@@ -294,7 +306,10 @@ class _GoalCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 150),
+        duration: _onboardingAnimDuration(
+          context,
+          const Duration(milliseconds: 150),
+        ),
         margin: const EdgeInsets.only(bottom: AppSpacing.md),
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
@@ -770,7 +785,10 @@ class _PreviewOptionTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 150),
+        duration: _onboardingAnimDuration(
+          context,
+          const Duration(milliseconds: 150),
+        ),
         padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.md,
           vertical: AppSpacing.md,

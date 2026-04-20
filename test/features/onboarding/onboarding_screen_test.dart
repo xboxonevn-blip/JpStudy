@@ -133,4 +133,93 @@ void main() {
     expect(completedLevel, StudyLevel.n5);
     expect(completedGoal, StudyGoal.jlpt);
   });
+
+  // ---------------------------------------------------------------------------
+  // Reduced-motion (accessibility) support
+  // ---------------------------------------------------------------------------
+  //
+  // The onboarding screen contains several AnimatedContainer tweens (progress
+  // dots, goal cards, option pills). When the OS reports `disableAnimations`
+  // (iOS "Reduce Motion" / Android "Remove animations"), these must collapse
+  // to Duration.zero so the user doesn't see any motion. These tests pin the
+  // `_onboardingAnimDuration` gate so a future refactor can't silently drop it.
+
+  Widget hostOnboarding({required bool disableAnimations}) {
+    final db = AppDatabase(executor: NativeDatabase.memory());
+    final contentDb = ContentDatabase(executor: NativeDatabase.memory());
+    final repo = FakeOnboardingLessonRepository(
+      db,
+      contentDb,
+      itemsByLevel: const {},
+    );
+    addTearDown(() async {
+      await contentDb.close();
+      await db.close();
+    });
+    return ProviderScope(
+      overrides: [
+        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+        lessonRepositoryProvider.overrideWithValue(repo),
+      ],
+      child: MaterialApp(
+        // Inject the MediaQuery override above the OnboardingScreen build.
+        builder: (context, child) => MediaQuery(
+          data: MediaQuery.of(context).copyWith(
+            disableAnimations: disableAnimations,
+          ),
+          child: child!,
+        ),
+        home: OnboardingScreen(onComplete: (_, _) {}),
+      ),
+    );
+  }
+
+  testWidgets(
+    'disableAnimations=true → all AnimatedContainer durations collapse to zero',
+    (tester) async {
+      await tester.pumpWidget(hostOnboarding(disableAnimations: true));
+      await tester.pumpAndSettle();
+
+      final containers = tester
+          .widgetList<AnimatedContainer>(find.byType(AnimatedContainer))
+          .toList();
+
+      expect(
+        containers,
+        isNotEmpty,
+        reason: 'progress dots render AnimatedContainers on every page',
+      );
+      for (final c in containers) {
+        expect(
+          c.duration,
+          Duration.zero,
+          reason:
+              'reduced-motion gate must zero out the duration on every '
+              'AnimatedContainer in the onboarding flow',
+        );
+      }
+    },
+  );
+
+  testWidgets(
+    'disableAnimations=false → AnimatedContainer durations remain non-zero',
+    (tester) async {
+      await tester.pumpWidget(hostOnboarding(disableAnimations: false));
+      await tester.pumpAndSettle();
+
+      final containers = tester
+          .widgetList<AnimatedContainer>(find.byType(AnimatedContainer))
+          .toList();
+
+      expect(containers, isNotEmpty);
+      for (final c in containers) {
+        expect(
+          c.duration,
+          isNot(Duration.zero),
+          reason: 'default motion must be preserved when the user has not '
+              'requested reduced motion',
+        );
+      }
+    },
+  );
 }
