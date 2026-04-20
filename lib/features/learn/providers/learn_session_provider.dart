@@ -122,8 +122,10 @@ class LearnSessionNotifier extends StateNotifier<LearnSession?> {
     return result;
   }
 
-  /// Move to next question
-  void nextQuestion() {
+  /// Move to next question. At the final question this awaits session
+  /// persistence so callers can rely on the DB write completing before
+  /// the future resolves.
+  Future<void> nextQuestion() async {
     if (state == null) return;
 
     if (state!.currentQuestionIndex < state!.questions.length - 1) {
@@ -131,8 +133,7 @@ class LearnSessionNotifier extends StateNotifier<LearnSession?> {
         currentQuestionIndex: state!.currentQuestionIndex + 1,
       );
     } else {
-      // Session complete
-      _completeSession();
+      await _completeSession();
     }
   }
 
@@ -142,15 +143,18 @@ class LearnSessionNotifier extends StateNotifier<LearnSession?> {
     state = state!.copyWith(questions: nextQuestions);
   }
 
-  /// Complete the session
+  /// Complete the session.
+  ///
+  /// Persist-then-mutate: the DB row is written before state flips to
+  /// completed, so a save failure leaves the in-memory session in its
+  /// pre-completion shape instead of showing a "done" summary that has
+  /// no matching row to resume from.
   Future<void> _completeSession() async {
     if (state == null) return;
 
-    // Update state first
-    state = state!.copyWith(completedAt: DateTime.now());
-
-    // Save to database
-    await _learnService.saveSession(state!);
+    final completedSession = state!.copyWith(completedAt: DateTime.now());
+    await _learnService.saveSession(completedSession);
+    state = completedSession;
   }
 
   /// Reset session

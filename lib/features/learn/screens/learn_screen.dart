@@ -492,9 +492,10 @@ class _LearnScreenState extends ConsumerState<LearnScreen> {
     }
   }
 
-  void _handleContinue() {
-    ref.read(learnSessionProvider.notifier).nextQuestion();
+  Future<void> _handleContinue() async {
+    await ref.read(learnSessionProvider.notifier).nextQuestion();
 
+    if (!mounted) return;
     setState(() {
       _selectedAnswer = null;
       _selectedTrueFalse = null;
