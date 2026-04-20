@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../app/theme/app_theme_palette.dart';
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
-import '../../../core/widgets/empty_state_widget.dart';
+import '../../common/widgets/error_state_widget.dart';
 import '../../grammar/grammar_providers.dart';
 import '../providers/dashboard_provider.dart';
 import 'home_surface.dart';
@@ -29,10 +29,10 @@ class MiniDashboard extends ConsumerWidget {
         height: compact ? 62 : 88,
         child: Center(child: CircularProgressIndicator()),
       ),
-      error: (err, stack) => EmptyStateWidget(
-        icon: Icons.cloud_off_rounded,
-        title: ref.watch(appLanguageProvider).loadErrorLabel,
+      error: (err, stack) => ErrorStateWidget(
+        error: err,
         compact: true,
+        onRetry: () => ref.invalidate(dashboardProvider),
       ),
     );
   }
