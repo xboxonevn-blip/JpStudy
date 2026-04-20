@@ -8,7 +8,6 @@ import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/jlpt/models/jlpt_coach_models.dart';
 import 'package:jpstudy/features/jlpt/widgets/jlpt_coach_shared.dart';
-import 'package:jpstudy/features/mistakes/repositories/mistake_repository.dart';
 
 class JlptSupportPanel extends StatelessWidget {
   const JlptSupportPanel({

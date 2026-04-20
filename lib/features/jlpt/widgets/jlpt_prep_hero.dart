@@ -60,7 +60,7 @@ class JlptPrepHero extends StatelessWidget {
         label: _metricLevelBank(language),
         value: isLoading
             ? _loadingLabel(language)
-            : '${quickMockQuestionCount}Q • ${readingPassageCount} bài',
+            : '${quickMockQuestionCount}Q • $readingPassageCount bài',
       ),
     ];
 

@@ -19,7 +19,6 @@ import 'package:jpstudy/features/mistakes/repositories/mistake_repository.dart';
 
 import '../data/jlpt_mock_bank.dart';
 import '../data/jlpt_reading_bank.dart';
-import '../models/jlpt_coach_models.dart';
 import '../services/jlpt_coach_service.dart';
 
 final jlptPrepOverviewProvider =

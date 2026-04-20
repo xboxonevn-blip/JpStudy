@@ -242,7 +242,7 @@ void main() {
       // Pre-warm and keep alive with a listener.
       final sub = container.listen(
         kanjiByLevelCodeProvider('N5'),
-        (_, __) {},
+        (_, _) {},
       );
       await container.read(kanjiByLevelCodeProvider('N5').future);
       addTearDown(sub.close);
