@@ -111,7 +111,11 @@ class _ClayButtonState extends State<ClayButton> {
         onTapCancel: () => setState(() => _isPressed = false),
         onTap: widget.onPressed,
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 50),
+          // Respect the OS-level Reduce Motion preference: when enabled, the
+          // press/release transform snaps instantly instead of sliding down.
+          duration: MediaQuery.of(context).disableAnimations
+              ? Duration.zero
+              : const Duration(milliseconds: 50),
           transform: Matrix4.translationValues(0, _isPressed ? 4 : 0, 0),
           child: Container(
             width: widget.width,
