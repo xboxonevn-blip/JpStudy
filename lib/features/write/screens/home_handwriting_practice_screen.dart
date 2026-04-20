@@ -15,10 +15,11 @@ import 'package:jpstudy/features/kanji_hub/models/kanji_practice_args.dart';
 
 import 'handwriting_practice_screen.dart';
 
-enum _HandwritingSessionSource { due, newBatch, free }
+enum _HandwritingSessionSource { due, newBatch, free, scoped }
 
 typedef _SessionData = ({
   List<KanjiItem> items,
+  bool isScopedRequest,
   _HandwritingSessionSource source,
 });
 
@@ -45,6 +46,14 @@ class _HomeHandwritingPracticeScreenState
       identityHashCode(this) ^
       Random().nextInt(1 << 32);
 
+  @override
+  void didUpdateWidget(covariant HomeHandwritingPracticeScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (!_hasSameLaunchArgs(oldWidget.launchArgs, widget.launchArgs)) {
+      _invalidateCachedSession();
+    }
+  }
+
   void _ensureSessionFuture(StudyLevel level) {
     if (_freeMode) return;
     if (_loadedLevel == level && _sessionFuture != null) return;
@@ -55,50 +64,90 @@ class _HomeHandwritingPracticeScreenState
 
   Future<_SessionData> _buildSession(StudyLevel level) async {
     final repo = ref.read(lessonRepositoryProvider);
+    final levelCode = _resolveSessionLevelCode(level);
 
-    if (widget.launchArgs case final args?) {
-      final scopedItems = await repo.fetchKanjiByLevel(
-        args.levelCode ?? level.shortLabel,
-      );
+    if (widget.launchArgs case final args? when args.kanjiIds.isNotEmpty) {
+      final scopedItems = await repo.fetchKanjiByLevel(levelCode);
       final filtered = _filterScopedItems(scopedItems, args);
-      if (filtered.isNotEmpty) {
+      return (
+        items: filtered,
+        isScopedRequest: true,
+        source: _scopedSessionSourceFromLaunchArgs(args.source),
+      );
+    }
+
+    final sourceHint = _sessionSourceFromLaunchArgs(widget.launchArgs?.source);
+    if (sourceHint == _HandwritingSessionSource.free) {
+      final allItems = await repo.fetchKanjiByLevel(levelCode);
+      return (
+        items: allItems,
+        isScopedRequest: false,
+        source: _HandwritingSessionSource.free,
+      );
+    }
+
+    if (sourceHint == _HandwritingSessionSource.newBatch) {
+      final unseenItems = await repo.fetchUnseenKanjiByLevel(
+        levelCode,
+        limit: 15,
+      );
+      if (unseenItems.isNotEmpty) {
         return (
-          items: filtered,
-          source: args.source == 'new'
-              ? _HandwritingSessionSource.newBatch
-              : args.source == 'free'
-              ? _HandwritingSessionSource.free
-              : _HandwritingSessionSource.due,
+          items: unseenItems,
+          isScopedRequest: false,
+          source: _HandwritingSessionSource.newBatch,
+        );
+      }
+    }
+
+    if (sourceHint == _HandwritingSessionSource.due) {
+      final dueItems = await repo.fetchDueKanjiByLevel(levelCode);
+      if (dueItems.isNotEmpty) {
+        return (
+          items: dueItems,
+          isScopedRequest: false,
+          source: _HandwritingSessionSource.due,
         );
       }
     }
 
     // 1. Due items first (SRS-scheduled reviews)
-    final due = await repo.fetchDueKanjiByLevel(level.shortLabel);
+    final due = await repo.fetchDueKanjiByLevel(levelCode);
     if (due.isNotEmpty) {
-      return (items: due, source: _HandwritingSessionSource.due);
+      return (
+        items: due,
+        isScopedRequest: false,
+        source: _HandwritingSessionSource.due,
+      );
     }
 
     // 2. Fall back to a batch of unseen kanji (never practiced at all)
-    final unseen = await repo.fetchUnseenKanjiByLevel(
-      level.shortLabel,
-      limit: 15,
-    );
+    final unseen = await repo.fetchUnseenKanjiByLevel(levelCode, limit: 15);
     if (unseen.isNotEmpty) {
-      return (items: unseen, source: _HandwritingSessionSource.newBatch);
+      return (
+        items: unseen,
+        isScopedRequest: false,
+        source: _HandwritingSessionSource.newBatch,
+      );
     }
 
     // 3. Everything has been seen and nothing is due yet
-    return (items: const <KanjiItem>[], source: _HandwritingSessionSource.due);
+    return (
+      items: const <KanjiItem>[],
+      isScopedRequest: false,
+      source: _HandwritingSessionSource.due,
+    );
   }
 
   Future<void> _enterFreeMode(StudyLevel level) async {
     final repo = ref.read(lessonRepositoryProvider);
-    final all = await repo.fetchKanjiByLevel(level.shortLabel);
+    final all = await repo.fetchKanjiByLevel(_resolveSessionLevelCode(level));
     if (mounted) {
       setState(() {
         _freeItems = all;
         _freeMode = true;
+        _loadedLevel = level;
+        _sessionFuture = null;
         _sessionShuffleSeed = _newSeed();
       });
     }
@@ -107,7 +156,7 @@ class _HomeHandwritingPracticeScreenState
   @override
   Widget build(BuildContext context) {
     final language = ref.watch(appLanguageProvider);
-    final level = ref.watch(studyLevelProvider);
+    final level = _resolveEffectiveLevel(ref.watch(studyLevelProvider));
 
     if (level == null) {
       return Scaffold(
@@ -116,13 +165,21 @@ class _HomeHandwritingPracticeScreenState
       );
     }
 
+    _syncCacheWithLevel(level);
+
     // Free mode: bypass SRS and show everything
     if (_freeMode && _freeItems != null) {
-      final scopedFreeItems = _filterScopedItems(_freeItems!, widget.launchArgs);
+      final scopedFreeItems = _filterScopedItems(
+        _freeItems!,
+        widget.launchArgs,
+      );
       return HandwritingPracticeScreen(
         lessonTitle:
             '${level.shortLabel} — ${language.handwritingFreePracticeLabel}',
         items: scopedFreeItems,
+        includeCompoundWords: _shouldIncludeCompoundWords(
+          _HandwritingSessionSource.free,
+        ),
         headerWidget: _SessionHeader(
           language: language,
           source: _HandwritingSessionSource.free,
@@ -159,10 +216,11 @@ class _HomeHandwritingPracticeScreenState
 
         final data = snapshot.data;
         final items = data?.items ?? const <KanjiItem>[];
+        final isScopedRequest = data?.isScopedRequest ?? false;
         final source = data?.source ?? _HandwritingSessionSource.due;
 
         // Nothing due and nothing unseen — all kanji are scheduled for later
-        if (items.isEmpty) {
+        if (items.isEmpty && !isScopedRequest) {
           return _AllCaughtUpScreen(
             language: language,
             level: level,
@@ -177,11 +235,14 @@ class _HomeHandwritingPracticeScreenState
             '${level.shortLabel} — ${language.handwritingNewBatchTitle}',
           _HandwritingSessionSource.free =>
             '${level.shortLabel} — ${language.handwritingFreePracticeLabel}',
+          _HandwritingSessionSource.scoped =>
+            '${level.shortLabel} — ${language.handwritingLabel}',
         };
 
         return HandwritingPracticeScreen(
           lessonTitle: sessionTitle,
           items: items,
+          includeCompoundWords: _shouldIncludeCompoundWords(source),
           initialKanjiId: widget.launchArgs?.preferredKanjiId,
           headerWidget: _SessionHeader(
             language: language,
@@ -203,7 +264,118 @@ class _HomeHandwritingPracticeScreenState
     if (args == null || args.kanjiIds.isEmpty) {
       return items;
     }
-    return items.where((item) => args.kanjiIds.contains(item.id)).toList();
+    final itemsById = {for (final item in items) item.id: item};
+    final ordered = <KanjiItem>[];
+    final seen = <int>{};
+    for (final id in args.kanjiIds) {
+      if (!seen.add(id)) {
+        continue;
+      }
+      final item = itemsById[id];
+      if (item != null) {
+        ordered.add(item);
+      }
+    }
+    return ordered;
+  }
+
+  void _syncCacheWithLevel(StudyLevel level) {
+    if (_loadedLevel == null || _loadedLevel == level) {
+      return;
+    }
+    _invalidateCachedSession();
+  }
+
+  void _invalidateCachedSession() {
+    _sessionFuture = null;
+    _freeItems = null;
+    _loadedLevel = null;
+    _freeMode = false;
+    _sessionShuffleSeed = _newSeed();
+  }
+
+  bool _hasSameLaunchArgs(KanjiPracticeArgs? a, KanjiPracticeArgs? b) {
+    if (identical(a, b)) {
+      return true;
+    }
+    if (a == null || b == null) {
+      return a == b;
+    }
+    return a.mode == b.mode &&
+        a.source == b.source &&
+        a.levelCode == b.levelCode &&
+        a.preferredKanjiId == b.preferredKanjiId &&
+        _hasSameKanjiIds(a.kanjiIds, b.kanjiIds);
+  }
+
+  StudyLevel? _resolveEffectiveLevel(StudyLevel? selectedLevel) {
+    final launchLevelCode = widget.launchArgs?.levelCode ?? '';
+    return StudyLevel.fromCode(launchLevelCode) ?? selectedLevel;
+  }
+
+  String _resolveSessionLevelCode(StudyLevel level) {
+    final launchLevelCode = widget.launchArgs?.levelCode?.trim().toUpperCase();
+    if (launchLevelCode != null && launchLevelCode.isNotEmpty) {
+      return launchLevelCode;
+    }
+    return level.shortLabel;
+  }
+
+  bool _shouldIncludeCompoundWords(_HandwritingSessionSource source) {
+    if (source == _HandwritingSessionSource.free) {
+      return true;
+    }
+    final normalized = widget.launchArgs?.source.trim().toLowerCase();
+    if (normalized == null || normalized.isEmpty) {
+      return true;
+    }
+    return !normalized.contains('mistake');
+  }
+
+  _HandwritingSessionSource _sessionSourceFromLaunchArgs(String? source) {
+    final normalized = source?.trim().toLowerCase();
+    if (normalized == null || normalized.isEmpty) {
+      return _HandwritingSessionSource.due;
+    }
+    if (normalized == 'free' || normalized.contains('free')) {
+      return _HandwritingSessionSource.free;
+    }
+    if (normalized == 'new' || normalized.contains('new')) {
+      return _HandwritingSessionSource.newBatch;
+    }
+    return _HandwritingSessionSource.due;
+  }
+
+  _HandwritingSessionSource _scopedSessionSourceFromLaunchArgs(String? source) {
+    final normalized = source?.trim().toLowerCase();
+    if (normalized == null || normalized.isEmpty) {
+      return _HandwritingSessionSource.scoped;
+    }
+    if (normalized == 'free' || normalized.contains('free')) {
+      return _HandwritingSessionSource.free;
+    }
+    if (normalized == 'new' || normalized.contains('new')) {
+      return _HandwritingSessionSource.newBatch;
+    }
+    if (normalized == 'due' || normalized.contains('due')) {
+      return _HandwritingSessionSource.due;
+    }
+    return _HandwritingSessionSource.scoped;
+  }
+
+  bool _hasSameKanjiIds(List<int> a, List<int> b) {
+    if (identical(a, b)) {
+      return true;
+    }
+    if (a.length != b.length) {
+      return false;
+    }
+    for (var i = 0; i < a.length; i++) {
+      if (a[i] != b[i]) {
+        return false;
+      }
+    }
+    return true;
   }
 }
 
@@ -249,6 +421,10 @@ class _SessionHeader extends ConsumerWidget {
         accent = palette.success;
         icon = Icons.shuffle_rounded;
         label = language.handwritingFreePracticeLabel;
+      case _HandwritingSessionSource.scoped:
+        accent = palette.primary;
+        icon = Icons.filter_alt_rounded;
+        label = language.kanjiAvailableLabel(itemCount);
     }
 
     return Container(

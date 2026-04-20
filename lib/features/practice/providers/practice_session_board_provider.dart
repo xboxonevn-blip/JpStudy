@@ -449,7 +449,7 @@ PracticeSessionAction _specificDueAction({
         extra: KanjiPracticeArgs(
           mode: KanjiPracticeMode.both,
           levelCode: level.shortLabel,
-          source: 'practice_board',
+          source: 'practice_board_due',
         ),
         icon: Icons.flash_on_rounded,
         color: const Color(0xFFF59E0B),

@@ -13,6 +13,23 @@ Most newer plan files use a date-prefixed format such as:
 - `YYYY-MM-DD-feature-plan.md`
 - `YYYY-MM-DD-feature-design.md`
 
+## Templates
+
+Start from:
+
+- [`_template-design.md`](_template-design.md)
+- [`_template-plan.md`](_template-plan.md)
+
+Use the design template when the task needs technical decisions, tradeoff analysis, or interface/risk review before code changes.
+Use the plan template when the task needs an execution breakdown, checkpoints, and a verification sequence.
+
+## Example
+
+Reference examples:
+
+- [`2026-04-16-example-learn-session-resume-design.md`](2026-04-16-example-learn-session-resume-design.md)
+- [`2026-04-16-example-learn-session-resume-plan.md`](2026-04-16-example-learn-session-resume-plan.md)
+
 ## Usage
 
 - Put current planning documents here.

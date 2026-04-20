@@ -1403,6 +1403,12 @@ class _HandwritingPracticeScreenState
             expectedStrokes: guide.strokeCount,
             drawnStrokes: result.drawnStrokes,
             score: result.score,
+            strokeScore: result.strokeScore,
+            shapeScore: result.shapeScore,
+            orderScore: result.orderScore,
+            templateScore: result.templateScore,
+            usedTemplate: result.usedTemplate,
+            templateQuality: result.templateQuality,
             isCorrect: result.isCorrect,
             kanjiId: guide.kanjiId,
           ),
@@ -1481,16 +1487,22 @@ class _HandwritingPracticeScreenState
         correctCharacters += 1;
       }
       characterCount += 1;
-      characterResults.add(
-        HandwritingCharacterResult(
-          character: guide.character,
-          expectedStrokes: guide.strokeCount,
-          drawnStrokes: result.drawnStrokes,
-          score: result.score,
-          isCorrect: result.isCorrect,
-          kanjiId: guide.kanjiId,
-        ),
-      );
+        characterResults.add(
+          HandwritingCharacterResult(
+            character: guide.character,
+            expectedStrokes: guide.strokeCount,
+            drawnStrokes: result.drawnStrokes,
+            score: result.score,
+            strokeScore: result.strokeScore,
+            shapeScore: result.shapeScore,
+            orderScore: result.orderScore,
+            templateScore: result.templateScore,
+            usedTemplate: result.usedTemplate,
+            templateQuality: result.templateQuality,
+            isCorrect: result.isCorrect,
+            kanjiId: guide.kanjiId,
+          ),
+        );
     }
 
     final strokeDelta = (drawnStrokes - expectedTotal).abs().toDouble();
@@ -1597,19 +1609,6 @@ class _HandwritingPracticeScreenState
     final softPass = _isSoftPassForLenientTier(evaluation);
     final isSuccessful = evaluation.isCorrect || softPass;
     final isLenientTier = _isLenientTemplateQuality(evaluation.templateQuality);
-    final grade = isSuccessful ? (_showGuide ? 3 : 4) : (isLenientTier ? 2 : 1);
-
-    for (final kanjiId in target.reviewKanjiIds) {
-      await repo.saveKanjiReview(kanjiId: kanjiId, grade: grade);
-    }
-
-    if (isSuccessful) {
-      for (final kanjiId in target.reviewKanjiIds) {
-        await mistakeRepo.markCorrect(type: 'kanji', itemId: kanjiId);
-      }
-      return;
-    }
-
     final meaning = _resolveMeaning(target, language);
     final promptParts = <String>[target.text];
     if (target.reading.trim().isNotEmpty) {
@@ -1618,33 +1617,59 @@ class _HandwritingPracticeScreenState
     if (meaning.trim().isNotEmpty) {
       promptParts.add(meaning.trim());
     }
-
-    await mistakeRepo.addMistake(
-      type: 'kanji',
-      itemId: target.primaryKanjiId,
-      context: MistakeContext(
-        prompt: promptParts.join(' - '),
-        correctAnswer: target.text,
-        userAnswer: language.handwritingStrokesDrawnLabel(
-          evaluation.drawnStrokes,
-        ),
-        source: 'handwriting',
-        extra: {
-          'expectedStrokes': evaluation.expectedStrokes,
-          'drawnStrokes': evaluation.drawnStrokes,
-          'score': evaluation.score,
-          'strokeScore': evaluation.strokeScore,
-          'shapeScore': evaluation.shapeScore,
-          'orderScore': evaluation.orderScore,
-          'templateScore': evaluation.templateScore,
-          'usedTemplate': evaluation.usedTemplate,
-          'templateQuality': evaluation.templateQuality,
-          'showGuide': _showGuide,
-          'isCompound': target.isCompound,
-          'reviewKanjiIds': target.reviewKanjiIds,
-        },
-      ),
+    final perKanjiOutcomes = _buildKanjiReviewOutcomes(
+      target,
+      evaluation,
+      fallbackIsSuccessful: isSuccessful,
+      fallbackIsLenientTier: isLenientTier,
     );
+
+    for (final entry in perKanjiOutcomes.entries) {
+      final kanjiId = entry.key;
+      final outcome = entry.value;
+      await repo.saveKanjiReview(kanjiId: kanjiId, grade: outcome.grade);
+      if (outcome.isSuccessful) {
+        await mistakeRepo.markCorrect(type: 'kanji', itemId: kanjiId);
+        continue;
+      }
+
+      final failedResult = outcome.failedResult;
+      await mistakeRepo.addMistake(
+        type: 'kanji',
+        itemId: kanjiId,
+        context: MistakeContext(
+          prompt: failedResult == null
+              ? promptParts.join(' - ')
+              : [...promptParts, failedResult.character].join(' - '),
+          correctAnswer: failedResult?.character ?? target.text,
+          userAnswer: language.handwritingStrokesDrawnLabel(
+            failedResult?.drawnStrokes ?? evaluation.drawnStrokes,
+          ),
+          source: 'handwriting',
+          extra: {
+            'expectedStrokes':
+                failedResult?.expectedStrokes ?? evaluation.expectedStrokes,
+            'drawnStrokes': failedResult?.drawnStrokes ?? evaluation.drawnStrokes,
+            'score': failedResult?.score ?? evaluation.score,
+            'strokeScore': failedResult?.strokeScore ?? evaluation.strokeScore,
+            'shapeScore': failedResult?.shapeScore ?? evaluation.shapeScore,
+            'orderScore': failedResult?.orderScore ?? evaluation.orderScore,
+            'templateScore':
+                failedResult?.templateScore ?? evaluation.templateScore,
+            'usedTemplate': failedResult?.usedTemplate ?? evaluation.usedTemplate,
+            'templateQuality':
+                failedResult?.templateQuality ?? evaluation.templateQuality,
+            'showGuide': _showGuide,
+            'isCompound': target.isCompound,
+            'targetText': target.text,
+            'targetReading': target.reading,
+            'reviewKanjiIds': target.reviewKanjiIds,
+            if (failedResult != null) 'character': failedResult.character,
+            if (failedResult?.kanjiId != null) 'characterKanjiId': failedResult!.kanjiId,
+          },
+        ),
+      );
+    }
   }
 
   bool _isLenientTemplateQuality(String quality) {
@@ -1661,6 +1686,69 @@ class _HandwritingPracticeScreenState
     return evaluation.score >= scoreGate &&
         evaluation.strokeScore >= 0.50 &&
         evaluation.templateScore >= 0.35;
+  }
+
+  bool _isSoftPassForCharacterResult(HandwritingCharacterResult result) {
+    if (result.isCorrect || !_isLenientTemplateQuality(result.templateQuality)) {
+      return false;
+    }
+    final scoreGate = _showGuide ? 0.56 : 0.62;
+    return result.score >= scoreGate &&
+        result.strokeScore >= 0.50 &&
+        result.templateScore >= 0.35;
+  }
+
+  Map<int, _KanjiReviewOutcome> _buildKanjiReviewOutcomes(
+    _PracticeTarget target,
+    HandwritingEvaluationResult evaluation, {
+    required bool fallbackIsSuccessful,
+    required bool fallbackIsLenientTier,
+  }) {
+    final groupedResults = <int, List<HandwritingCharacterResult>>{};
+    for (final result in evaluation.characterResults) {
+      final kanjiId = result.kanjiId;
+      if (kanjiId == null) {
+        continue;
+      }
+      groupedResults.putIfAbsent(kanjiId, () => []).add(result);
+    }
+
+    if (groupedResults.isEmpty) {
+      final grade = fallbackIsSuccessful
+          ? (_showGuide ? 3 : 4)
+          : (fallbackIsLenientTier ? 2 : 1);
+      return {
+        for (final kanjiId in target.reviewKanjiIds)
+          kanjiId: _KanjiReviewOutcome(
+            isSuccessful: fallbackIsSuccessful,
+            grade: grade,
+          ),
+      };
+    }
+
+    final outcomes = <int, _KanjiReviewOutcome>{};
+    groupedResults.forEach((kanjiId, results) {
+      HandwritingCharacterResult? failedResult;
+      for (final result in results) {
+        if (!_isSuccessfulCharacterResult(result)) {
+          failedResult = result;
+          break;
+        }
+      }
+      final isSuccessful = failedResult == null;
+      outcomes[kanjiId] = _KanjiReviewOutcome(
+        isSuccessful: isSuccessful,
+        grade: isSuccessful
+            ? (_showGuide ? 3 : 4)
+            : (_isLenientTemplateQuality(failedResult.templateQuality) ? 2 : 1),
+        failedResult: failedResult,
+      );
+    });
+    return outcomes;
+  }
+
+  bool _isSuccessfulCharacterResult(HandwritingCharacterResult result) {
+    return result.isCorrect || _isSoftPassForCharacterResult(result);
   }
 
   Future<void> _showSummary() async {
@@ -2878,6 +2966,18 @@ class _ProgressStats {
   final int newItems;
   final int reviewItems;
   final int weakItems;
+}
+
+class _KanjiReviewOutcome {
+  const _KanjiReviewOutcome({
+    required this.isSuccessful,
+    required this.grade,
+    this.failedResult,
+  });
+
+  final bool isSuccessful;
+  final int grade;
+  final HandwritingCharacterResult? failedResult;
 }
 
 class _CharacterResultChip extends StatelessWidget {

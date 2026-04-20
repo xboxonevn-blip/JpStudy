@@ -188,7 +188,7 @@ void main() {
       final args = board.primaryAction.extra as KanjiPracticeArgs;
       expect(args.levelCode, 'N5');
       expect(args.mode, KanjiPracticeMode.both);
-      expect(args.source, 'practice_board');
+      expect(args.source, 'practice_board_due');
     });
 
     test('follows a specific weakness radar item before generic deepening', () {

@@ -371,6 +371,168 @@ void main() {
     },
   );
 
+  testWidgets(
+    'Compound handwriting commits SRS and mistakes per kanji result',
+    (tester) async {
+      KanjiStrokeTemplateService.setDebugTemplateOverrides({
+        '\u9580': const KanjiStrokeTemplate(
+          character: '\u9580',
+          quality: 'manual',
+          targetArea: 0.34,
+          targetAspect: 0.95,
+          strokes: [
+            StrokeTemplate(start: Point(0.0, 0.0), end: Point(0.0, 1.0)),
+            StrokeTemplate(start: Point(1.0, 0.0), end: Point(1.0, 1.0)),
+          ],
+        ),
+        '\u4EBA': const KanjiStrokeTemplate(
+          character: '\u4EBA',
+          quality: 'manual',
+          targetArea: 0.30,
+          targetAspect: 0.85,
+          strokes: [
+            StrokeTemplate(start: Point(0.46, 0.18), end: Point(0.30, 0.84)),
+            StrokeTemplate(start: Point(0.54, 0.18), end: Point(0.74, 0.84)),
+          ],
+        ),
+      });
+      addTearDown(() {
+        KanjiStrokeTemplateService.setDebugTemplateOverrides(null);
+      });
+
+      final db = AppDatabase(executor: NativeDatabase.memory());
+      final contentDb = ContentDatabase(executor: NativeDatabase.memory());
+      final repo = LessonRepository(db, contentDb);
+      addTearDown(() async {
+        await contentDb.close();
+        await db.close();
+      });
+
+      const items = [
+        KanjiItem(
+          id: 1,
+          lessonId: 1,
+          character: '\u9580',
+          strokeCount: 2,
+          meaning: 'cua',
+          meaningEn: 'gate',
+          examples: [
+            KanjiExample(
+              word: '\u9580\u4EBA',
+              reading: 'monjin',
+              meaning: 'nguoi o cong',
+              meaningEn: 'gate person',
+            ),
+          ],
+          jlptLevel: 'N5',
+        ),
+        KanjiItem(
+          id: 2,
+          lessonId: 1,
+          character: '\u4EBA',
+          strokeCount: 2,
+          meaning: 'nguoi',
+          meaningEn: 'person',
+          examples: [],
+          jlptLevel: 'N5',
+        ),
+      ];
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            databaseProvider.overrideWithValue(db),
+            lessonRepositoryProvider.overrideWithValue(repo),
+          ],
+          child: const MaterialApp(
+            home: HandwritingPracticeScreen(
+              lessonTitle: 'Lesson 1',
+              items: items,
+              maxCompoundsPerKanji: 1,
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text(AppLanguage.en.handwritingModeCompoundLabel));
+      await tester.pumpAndSettle();
+
+      final canvas = find.byType(HandwritingCanvas, skipOffstage: false);
+      expect(canvas, findsOneWidget);
+      await tester.ensureVisible(canvas);
+      await tester.pumpAndSettle();
+      final rect = tester.getRect(canvas);
+      final slotWidth = rect.width / 2;
+      final secondSlotLeft = rect.left + slotWidth;
+
+      Future<void> drawStroke(Offset start, Offset end) async {
+        final gesture = await tester.startGesture(start);
+        await tester.pump(const Duration(milliseconds: 16));
+        await gesture.moveTo(end);
+        await tester.pump(const Duration(milliseconds: 16));
+        await gesture.up();
+        await tester.pump(const Duration(milliseconds: 50));
+      }
+
+      await drawStroke(
+        Offset(rect.left + (slotWidth * 0.22), rect.top + 24),
+        Offset(rect.left + (slotWidth * 0.22), rect.bottom - 24),
+      );
+      await drawStroke(
+        Offset(rect.left + (slotWidth * 0.78), rect.top + 24),
+        Offset(rect.left + (slotWidth * 0.78), rect.bottom - 24),
+      );
+      await drawStroke(
+        Offset(
+          secondSlotLeft + (slotWidth * 0.30),
+          rect.top + (rect.height * 0.84),
+        ),
+        Offset(
+          secondSlotLeft + (slotWidth * 0.46),
+          rect.top + (rect.height * 0.18),
+        ),
+      );
+      await drawStroke(
+        Offset(
+          secondSlotLeft + (slotWidth * 0.54),
+          rect.top + (rect.height * 0.18),
+        ),
+        Offset(
+          secondSlotLeft + (slotWidth * 0.74),
+          rect.top + (rect.height * 0.84),
+        ),
+      );
+
+      final checkButton = find
+          .text(AppLanguage.en.handwritingCheckLabel, skipOffstage: false)
+          .last;
+      await tester.ensureVisible(checkButton);
+      await tester.tap(checkButton);
+      await tester.pumpAndSettle();
+
+      final nextButton = find
+          .text(AppLanguage.en.handwritingPracticeWrongFirstLabel, skipOffstage: false)
+          .last;
+      await tester.ensureVisible(nextButton);
+      await tester.tap(nextButton);
+      await tester.pumpAndSettle();
+
+      final firstState = await db.kanjiSrsDao.getSrsState(1);
+      final secondState = await db.kanjiSrsDao.getSrsState(2);
+      expect(firstState, isNotNull);
+      expect(secondState, isNotNull);
+      expect(firstState!.lastConfidence, equals(3));
+      expect(secondState!.lastConfidence, equals(1));
+
+      final mistakes = await db.mistakeDao.getMistakesByType('kanji');
+      expect(mistakes.where((m) => m.itemId == 1), isEmpty);
+      final secondMistakes = mistakes.where((m) => m.itemId == 2).toList();
+      expect(secondMistakes, hasLength(1));
+      expect(secondMistakes.first.correctAnswer, equals('\u4EBA'));
+    },
+  );
+
   testWidgets('Handwriting supports single/compound/mixed mode selection', (
     tester,
   ) async {

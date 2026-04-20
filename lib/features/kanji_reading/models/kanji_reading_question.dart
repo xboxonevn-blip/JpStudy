@@ -31,18 +31,23 @@ class KanjiReadingQuestion {
   static List<KanjiReadingQuestion> generate(
     List<KanjiItem> pool, {
     int count = 10,
+    List<KanjiItem>? distractorPool,
   }) {
     final rng = Random();
-    // Filter items that have at least one reading
-    final usable = pool
+    final usableTargets = pool
         .where((k) =>
             (k.onyomi?.trim().isNotEmpty ?? false) ||
             (k.kunyomi?.trim().isNotEmpty ?? false))
         .toList();
-    if (usable.length < 4) return [];
+    final usableOptions = (distractorPool ?? pool)
+        .where((k) =>
+            (k.onyomi?.trim().isNotEmpty ?? false) ||
+            (k.kunyomi?.trim().isNotEmpty ?? false))
+        .toList();
+    if (usableTargets.isEmpty || usableOptions.length < 4) return [];
 
-    final shuffled = List.of(usable)..shuffle(rng);
-    final selected = shuffled.take(count.clamp(0, usable.length)).toList();
+    final shuffled = List.of(usableTargets)..shuffle(rng);
+    final selected = shuffled.take(count.clamp(0, usableTargets.length)).toList();
     final questions = <KanjiReadingQuestion>[];
 
     for (final target in selected) {
@@ -51,7 +56,7 @@ class KanjiReadingQuestion {
           : KanjiQuizMode.readingToKanji;
 
       // Build distractors
-      final others = usable.where((k) => k.id != target.id).toList()
+      final others = usableOptions.where((k) => k.id != target.id).toList()
         ..shuffle(rng);
       final distractors = others.take(3).toList();
 

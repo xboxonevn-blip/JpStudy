@@ -22,9 +22,9 @@ class _FakeRepo extends LessonRepository {
     this.n4Due = const [],
     this.n4Unseen = const [],
   }) : super(
-          AppDatabase(executor: NativeDatabase.memory()),
-          ContentDatabase(executor: NativeDatabase.memory()),
-        );
+         AppDatabase(executor: NativeDatabase.memory()),
+         ContentDatabase(executor: NativeDatabase.memory()),
+       );
 
   final List<KanjiItem> n5All;
   final List<KanjiItem> n5Due;
@@ -103,16 +103,16 @@ class _FakeRepo extends LessonRepository {
 // ---------------------------------------------------------------------------
 
 KanjiItem _makeKanji(int id, String level) => KanjiItem(
-      id: id,
-      lessonId: 1,
-      character: '字$id',
-      strokeCount: 4,
-      meaning: 'char $id',
-      meaningEn: 'char $id',
-      examples: const [],
-      jlptLevel: level,
-      decomposition: const KanjiDecomposition(),
-    );
+  id: id,
+  lessonId: 1,
+  character: '字$id',
+  strokeCount: 4,
+  meaning: 'char $id',
+  meaningEn: 'char $id',
+  examples: const [],
+  jlptLevel: level,
+  decomposition: const KanjiDecomposition(),
+);
 
 ProviderContainer _buildContainer({
   required LessonRepository repo,
@@ -146,9 +146,7 @@ void main() {
 
     test('surfaces correct dueCount from fetchDueKanjiByLevel', () async {
       final due = [_makeKanji(1, 'N5'), _makeKanji(2, 'N5')];
-      final container = _buildContainer(
-        repo: _FakeRepo(n5Due: due),
-      );
+      final container = _buildContainer(repo: _FakeRepo(n5Due: due));
       addTearDown(container.dispose);
 
       final result = await container.read(kanjiHomeSummaryProvider.future);
@@ -159,9 +157,7 @@ void main() {
     test('respects limit of 12 for newCount', () async {
       // 20 unseen kanji in the fake, but provider requests limit:12
       final unseen = List.generate(20, (i) => _makeKanji(100 + i, 'N5'));
-      final container = _buildContainer(
-        repo: _FakeRepo(n5Unseen: unseen),
-      );
+      final container = _buildContainer(repo: _FakeRepo(n5Unseen: unseen));
       addTearDown(container.dispose);
 
       final result = await container.read(kanjiHomeSummaryProvider.future);
@@ -171,9 +167,7 @@ void main() {
 
     test('exploreCount reflects total kanji at the selected level', () async {
       final all = List.generate(80, (i) => _makeKanji(i + 1, 'N5'));
-      final container = _buildContainer(
-        repo: _FakeRepo(n5All: all),
-      );
+      final container = _buildContainer(repo: _FakeRepo(n5All: all));
       addTearDown(container.dispose);
 
       final result = await container.read(kanjiHomeSummaryProvider.future);
@@ -200,8 +194,36 @@ void main() {
       expect(result.exploreCount, equals(5));
     });
 
+    test(
+      'family provider can load a scoped level without changing studyLevelProvider',
+      () async {
+        final n4Due = [_makeKanji(1, 'N4'), _makeKanji(2, 'N4')];
+        final n4Unseen = [_makeKanji(3, 'N4')];
+        final n4All = List.generate(5, (i) => _makeKanji(10 + i, 'N4'));
+
+        final container = _buildContainer(
+          repo: _FakeRepo(n4Due: n4Due, n4Unseen: n4Unseen, n4All: n4All),
+          level: StudyLevel.n5,
+        );
+        addTearDown(container.dispose);
+
+        final result = await container.read(
+          kanjiHomeSummaryByLevelCodeProvider('N4').future,
+        );
+
+        expect(result.levelCode, equals('N4'));
+        expect(result.dueCount, equals(2));
+        expect(result.newCount, equals(1));
+        expect(result.exploreCount, equals(5));
+      },
+    );
+
     test('all three counts can be non-zero simultaneously', () async {
-      final n5Due = [_makeKanji(1, 'N5'), _makeKanji(2, 'N5'), _makeKanji(3, 'N5')];
+      final n5Due = [
+        _makeKanji(1, 'N5'),
+        _makeKanji(2, 'N5'),
+        _makeKanji(3, 'N5'),
+      ];
       final n5Unseen = List.generate(8, (i) => _makeKanji(10 + i, 'N5'));
       final n5All = List.generate(40, (i) => _makeKanji(50 + i, 'N5'));
 

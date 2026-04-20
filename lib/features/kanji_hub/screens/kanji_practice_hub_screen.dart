@@ -18,13 +18,20 @@ class KanjiPracticeHubScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final language = ref.watch(appLanguageProvider);
     final level = ref.watch(studyLevelProvider);
-    final summaryAsync = ref.watch(kanjiHomeSummaryProvider);
-    final summary = summaryAsync.valueOrNull;
-    final args = launchArgs ?? KanjiPracticeArgs(
-      mode: KanjiPracticeMode.both,
-      source: 'hub',
-      levelCode: level?.shortLabel,
+    final resolvedLevelCode =
+        launchArgs?.levelCode ?? level?.shortLabel ?? 'N5';
+    final summaryAsync = ref.watch(
+      kanjiHomeSummaryByLevelCodeProvider(resolvedLevelCode),
     );
+    final summary = summaryAsync.valueOrNull;
+    final args =
+        (launchArgs ??
+                KanjiPracticeArgs(
+                  mode: KanjiPracticeMode.both,
+                  source: 'hub',
+                  levelCode: resolvedLevelCode,
+                ))
+            .copyWith(levelCode: resolvedLevelCode);
 
     final source = args.source;
     final dueCount = summary?.dueCount;
@@ -41,9 +48,13 @@ class KanjiPracticeHubScreen extends ConsumerWidget {
               key: const ValueKey('kanji_practice_hub_header'),
               icon: Icons.auto_stories_rounded,
               title: language.kanjiPracticeHubTitle(),
-              subtitle: language.kanjiPracticeHubSubtitle(source, dueCount, newCount),
+              subtitle: language.kanjiPracticeHubSubtitle(
+                source,
+                dueCount,
+                newCount,
+              ),
               status: AppStatusChip(
-                label: args.levelCode ?? level?.shortLabel ?? 'N5',
+                label: resolvedLevelCode,
                 tone: AppStatusTone.primary,
               ),
             ),
@@ -52,7 +63,11 @@ class KanjiPracticeHubScreen extends ConsumerWidget {
               key: const ValueKey('kanji_practice_read'),
               icon: Icons.style_rounded,
               title: language.kanjiPracticeReadLabel(),
-              subtitle: language.kanjiPracticeReadSubtitle(source, dueCount, newCount),
+              subtitle: language.kanjiPracticeReadSubtitle(
+                source,
+                dueCount,
+                newCount,
+              ),
               onTap: () => context.push(
                 '/practice/kanji-reading',
                 extra: args.copyWith(mode: KanjiPracticeMode.read),
@@ -63,7 +78,11 @@ class KanjiPracticeHubScreen extends ConsumerWidget {
               key: const ValueKey('kanji_practice_write'),
               icon: Icons.edit_rounded,
               title: language.kanjiPracticeWriteLabel(),
-              subtitle: language.kanjiPracticeWriteSubtitle(source, dueCount, newCount),
+              subtitle: language.kanjiPracticeWriteSubtitle(
+                source,
+                dueCount,
+                newCount,
+              ),
               onTap: () => context.push(
                 '/practice/handwriting',
                 extra: args.copyWith(mode: KanjiPracticeMode.write),
@@ -74,7 +93,11 @@ class KanjiPracticeHubScreen extends ConsumerWidget {
               key: const ValueKey('kanji_practice_both'),
               icon: Icons.merge_type_rounded,
               title: language.kanjiPracticeBothLabel(),
-              subtitle: language.kanjiPracticeBothSubtitle(source, dueCount, newCount),
+              subtitle: language.kanjiPracticeBothSubtitle(
+                source,
+                dueCount,
+                newCount,
+              ),
               onTap: () => context.push(
                 '/practice/kanji-reading',
                 extra: args.copyWith(

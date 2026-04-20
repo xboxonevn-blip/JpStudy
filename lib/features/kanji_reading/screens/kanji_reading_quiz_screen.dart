@@ -12,9 +12,16 @@ import '../../progress/providers/review_forecast_provider.dart';
 import '../../../core/services/fsrs_service.dart';
 import '../models/kanji_reading_question.dart';
 
+enum ReadingQuizCompletion { done, continueToWriting }
+
 class KanjiReadingQuizScreen extends ConsumerStatefulWidget {
-  const KanjiReadingQuizScreen({super.key, required this.questions});
+  const KanjiReadingQuizScreen({
+    super.key,
+    required this.questions,
+    this.allowContinueToWriting = false,
+  });
   final List<KanjiReadingQuestion> questions;
+  final bool allowContinueToWriting;
 
   @override
   ConsumerState<KanjiReadingQuizScreen> createState() =>
@@ -99,8 +106,12 @@ class _KanjiReadingQuizScreenState
 
   void _showSummary() {
     // Invalidate so kanji hub SRS dots + due counts refresh after the session.
+    final levelCode = _question.target.jlptLevel.trim();
     ref.invalidate(kanjiDueIdsProvider);
     ref.invalidate(kanjiSeenIdsProvider);
+    if (levelCode.isNotEmpty) {
+      ref.invalidate(kanjiHomeSummaryByLevelCodeProvider(levelCode));
+    }
     ref.invalidate(kanjiHomeSummaryProvider);
     ref.invalidate(reviewForecastProvider);
 
@@ -115,7 +126,7 @@ class _KanjiReadingQuizScreenState
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (_) => AlertDialog(
+      builder: (dialogContext) => AlertDialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSpacing.radiusXl),
         ),
@@ -136,13 +147,23 @@ class _KanjiReadingQuizScreenState
           ],
         ),
         actions: [
-          FilledButton(
+          TextButton(
             onPressed: () {
-              Navigator.of(context).pop(); // close dialog
-              Navigator.of(context).pop(); // back to entry
+              Navigator.of(dialogContext).pop();
+              Navigator.of(context).pop(ReadingQuizCompletion.done);
             },
             child: Text(language.doneLabel),
           ),
+          if (widget.allowContinueToWriting)
+            FilledButton(
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+                Navigator.of(
+                  context,
+                ).pop(ReadingQuizCompletion.continueToWriting);
+              },
+              child: Text(language.kanjiPracticeWriteLabel()),
+            ),
         ],
       ),
     );

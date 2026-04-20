@@ -2,13 +2,17 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
+import '../../../core/study_level.dart';
 import '../../common/widgets/compact_ui.dart';
 import '../../common/widgets/error_state_widget.dart';
 import '../../home/providers/dashboard_provider.dart';
+import '../../kanji_hub/models/kanji_practice_args.dart';
 import '../repositories/mistake_repository.dart';
 import '../../../data/db/database_provider.dart';
 import '../../../data/models/vocab_item.dart';
@@ -17,6 +21,7 @@ import '../../../data/repositories/lesson_repository.dart';
 import '../../../data/utils/grammar_english_notation.dart';
 import '../../learn/models/learn_session_args.dart';
 import '../../../data/db/app_database.dart';
+import '../../write/screens/home_handwriting_practice_screen.dart';
 import '../../write/screens/handwriting_practice_screen.dart';
 import '../../jlpt/models/jlpt_coach_models.dart';
 
@@ -46,9 +51,7 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
             return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError) {
-            return Center(
-              child: ErrorStateWidget(error: snapshot.error!),
-            );
+            return Center(child: ErrorStateWidget(error: snapshot.error!));
           }
 
           final allMistakes = snapshot.data ?? [];
@@ -214,7 +217,9 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
                                                   style: TextStyle(
                                                     fontSize: 11.5,
                                                     color: palette.ink
-                                                        .withValues(alpha: 0.45),
+                                                        .withValues(
+                                                          alpha: 0.45,
+                                                        ),
                                                   ),
                                                 ),
                                               ),
@@ -564,7 +569,25 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
       }
     }
     if (items.isEmpty || !context.mounted) return;
-    Navigator.of(context).push(
+
+    final launchArgs = _buildScopedKanjiPracticeArgs(items);
+    if (launchArgs != null) {
+      final router = GoRouter.maybeOf(context);
+      if (router != null) {
+        await router.push(AppRoutePath.handwritingPractice, extra: launchArgs);
+        return;
+      }
+      if (!context.mounted) return;
+      await Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) =>
+              HomeHandwritingPracticeScreen(launchArgs: launchArgs),
+        ),
+      );
+      return;
+    }
+
+    await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => HandwritingPracticeScreen(
           lessonTitle: language.ghostKanjiTitle,
@@ -573,6 +596,39 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
         ),
       ),
     );
+  }
+
+  KanjiPracticeArgs? _buildScopedKanjiPracticeArgs(List<KanjiItem> items) {
+    final levelCode = _singleLevelCodeFor(items);
+    if (levelCode == null) {
+      return null;
+    }
+    final ids = items.map((item) => item.id).toList(growable: false);
+    return KanjiPracticeArgs(
+      mode: KanjiPracticeMode.write,
+      source: 'mistake_bank_scoped',
+      levelCode: levelCode,
+      kanjiIds: ids,
+      preferredKanjiId: ids.isEmpty ? null : ids.first,
+    );
+  }
+
+  String? _singleLevelCodeFor(List<KanjiItem> items) {
+    String? levelCode;
+    for (final item in items) {
+      final normalized = StudyLevel.fromCode(item.jlptLevel)?.shortLabel;
+      if (normalized == null) {
+        return null;
+      }
+      if (levelCode == null) {
+        levelCode = normalized;
+        continue;
+      }
+      if (levelCode != normalized) {
+        return null;
+      }
+    }
+    return levelCode;
   }
 
   Future<_MistakeDetails> _loadMistakeDetails(

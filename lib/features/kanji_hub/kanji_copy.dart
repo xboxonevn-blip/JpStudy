@@ -1,5 +1,20 @@
 import 'package:jpstudy/core/app_language.dart';
 
+bool _isFocusedPracticeSource(String source) =>
+    source == 'focused' || source == 'focus' || source.startsWith('focus_');
+
+bool _hasPracticeSourceToken(String source, String token) =>
+    source == token ||
+    source.startsWith('${token}_') ||
+    source.endsWith('_$token') ||
+    source.contains('_${token}_');
+
+bool _isDuePracticeSource(String source) =>
+    _hasPracticeSourceToken(source, 'due');
+
+bool _isNewPracticeSource(String source) =>
+    _hasPracticeSourceToken(source, 'new');
+
 extension KanjiCopy on AppLanguage {
   String kanjiClearLabel() => switch (this) {
     AppLanguage.en => 'Clear',
@@ -44,8 +59,10 @@ extension KanjiCopy on AppLanguage {
   };
 
   String kanjiTodayCaption(String levelCode) => switch (this) {
-    AppLanguage.en => 'Use $levelCode as the active lane, then drop into explore only when you need a lookup.',
-    AppLanguage.vi => 'Dùng $levelCode làm lane chính, rồi chỉ xuống phần khám phá khi cần tra cứu.',
+    AppLanguage.en =>
+      'Use $levelCode as the active lane, then drop into explore only when you need a lookup.',
+    AppLanguage.vi =>
+      'Dùng $levelCode làm lane chính, rồi chỉ xuống phần khám phá khi cần tra cứu.',
     AppLanguage.ja => '$levelCode を学習レーンの中心にして、調べたいときだけ探索へ進みます。',
   };
 
@@ -80,7 +97,8 @@ extension KanjiCopy on AppLanguage {
   };
 
   String kanjiExploreActionSubtitle(int count) => switch (this) {
-    AppLanguage.en => 'Browse $count entries by grid, radicals, and handwriting search.',
+    AppLanguage.en =>
+      'Browse $count entries by grid, radicals, and handwriting search.',
     AppLanguage.vi => 'Duyệt $count mục bằng grid, bộ thủ và tìm viết tay.',
     AppLanguage.ja => '$count件をグリッド・部首・手書き検索で探せます。',
   };
@@ -151,11 +169,12 @@ extension KanjiCopy on AppLanguage {
     AppLanguage.ja => '$level を書く',
   };
 
-  String kanjiRelatedLevelSectionLabel(String level, int count) => switch (this) {
-    AppLanguage.en => '$level lane \u2014 $count kanji',
-    AppLanguage.vi => 'Lane $level \u2014 $count kanji',
-    AppLanguage.ja => '$level \u30ec\u30fc\u30f3 \u2014 $count\u6f22\u5b57',
-  };
+  String kanjiRelatedLevelSectionLabel(String level, int count) =>
+      switch (this) {
+        AppLanguage.en => '$level lane \u2014 $count kanji',
+        AppLanguage.vi => 'Lane $level \u2014 $count kanji',
+        AppLanguage.ja => '$level \u30ec\u30fc\u30f3 \u2014 $count\u6f22\u5b57',
+      };
 
   String kanjiRawMeaningLabel(String raw) => switch (this) {
     AppLanguage.en => 'Source: $raw',
@@ -357,8 +376,7 @@ extension KanjiCopy on AppLanguage {
       'Checking due reviews, new items, and the active practice lane for this level.',
     AppLanguage.vi =>
       'Đang kiểm tra phần đến hạn, mục mới và lane luyện tập hiện tại của cấp này.',
-    AppLanguage.ja =>
-      'このレベルの期限レビュー・新規項目・現在の練習レーンを確認しています。',
+    AppLanguage.ja => 'このレベルの期限レビュー・新規項目・現在の練習レーンを確認しています。',
   };
 
   String kanjiSummaryErrorTitle() => switch (this) {
@@ -372,8 +390,7 @@ extension KanjiCopy on AppLanguage {
       'You can retry the summary or go straight to explore mode for this lane.',
     AppLanguage.vi =>
       'Bạn có thể tải lại tóm tắt hoặc vào thẳng chế độ khám phá của lane này.',
-    AppLanguage.ja =>
-      'サマリーを再試行するか、このレーンの探索モードへ直接進めます。',
+    AppLanguage.ja => 'サマリーを再試行するか、このレーンの探索モードへ直接進めます。',
   };
 
   String kanjiSummaryRetryLabel() => switch (this) {
@@ -390,21 +407,21 @@ extension KanjiCopy on AppLanguage {
   };
 
   String kanjiPracticeHubSubtitle(String source, int? dueCount, int? newCount) {
-    if (source == 'due' && dueCount != null) {
+    if (_isDuePracticeSource(source) && dueCount != null) {
       return switch (this) {
         AppLanguage.en => 'Start with your $dueCount kanji that are due today.',
         AppLanguage.vi => 'Bắt đầu với $dueCount kanji đến hạn hôm nay.',
         AppLanguage.ja => '今日の期限 $dueCount 件の漢字から始めます。',
       };
     }
-    if (source == 'new' && newCount != null) {
+    if (_isNewPracticeSource(source) && newCount != null) {
       return switch (this) {
         AppLanguage.en => 'Open $newCount unseen kanji as a fresh batch.',
         AppLanguage.vi => 'Mở $newCount kanji chưa học thành batch mới.',
         AppLanguage.ja => '$newCount 件の未学習漢字を新規バッチで始めます。',
       };
     }
-    if (source == 'focused') {
+    if (_isFocusedPracticeSource(source)) {
       return switch (this) {
         AppLanguage.en => 'Focused practice for one kanji.',
         AppLanguage.vi => 'Luyện tập tập trung cho một kanji.',
@@ -424,19 +441,33 @@ extension KanjiCopy on AppLanguage {
     AppLanguage.ja => '読む',
   };
 
-  String kanjiPracticeReadSubtitle(String source, int? dueCount, int? newCount) {
-    if (source == 'due' && dueCount != null) {
+  String kanjiPracticeReadSubtitle(
+    String source,
+    int? dueCount,
+    int? newCount,
+  ) {
+    if (_isDuePracticeSource(source) && dueCount != null) {
       return switch (this) {
-        AppLanguage.en => '$dueCount kanji ready – drill readings with quick flashcards.',
-        AppLanguage.vi => '$dueCount kanji sẵn sàng – ôn âm đọc bằng flashcard ngắn.',
+        AppLanguage.en =>
+          '$dueCount kanji ready – drill readings with quick flashcards.',
+        AppLanguage.vi =>
+          '$dueCount kanji sẵn sàng – ôn âm đọc bằng flashcard ngắn.',
         AppLanguage.ja => '$dueCount 件準備完了 – 読みをフラッシュカードで確認。',
       };
     }
-    if (source == 'new' && newCount != null) {
+    if (_isNewPracticeSource(source) && newCount != null) {
       return switch (this) {
-        AppLanguage.en => '$newCount new kanji – learn readings with flashcard drills.',
+        AppLanguage.en =>
+          '$newCount new kanji – learn readings with flashcard drills.',
         AppLanguage.vi => '$newCount kanji mới – học âm đọc bằng flashcard.',
         AppLanguage.ja => '$newCount 件新規 – フラッシュカードで読みを学習。',
+      };
+    }
+    if (_isFocusedPracticeSource(source)) {
+      return switch (this) {
+        AppLanguage.en => 'Drill readings for the selected kanji first.',
+        AppLanguage.vi => 'Ôn âm đọc trước cho kanji đã chọn.',
+        AppLanguage.ja => '選んだ漢字の読みを先に確認します。',
       };
     }
     return switch (this) {
@@ -452,19 +483,34 @@ extension KanjiCopy on AppLanguage {
     AppLanguage.ja => '書く',
   };
 
-  String kanjiPracticeWriteSubtitle(String source, int? dueCount, int? newCount) {
-    if (source == 'due' && dueCount != null) {
+  String kanjiPracticeWriteSubtitle(
+    String source,
+    int? dueCount,
+    int? newCount,
+  ) {
+    if (_isDuePracticeSource(source) && dueCount != null) {
       return switch (this) {
-        AppLanguage.en => '$dueCount kanji ready – reinforce recall through handwriting.',
-        AppLanguage.vi => '$dueCount kanji sẵn sàng – củng cố ký ức bằng viết tay.',
+        AppLanguage.en =>
+          '$dueCount kanji ready – reinforce recall through handwriting.',
+        AppLanguage.vi =>
+          '$dueCount kanji sẵn sàng – củng cố ký ức bằng viết tay.',
         AppLanguage.ja => '$dueCount 件準備完了 – 手書きで記憶を強化。',
       };
     }
-    if (source == 'new' && newCount != null) {
+    if (_isNewPracticeSource(source) && newCount != null) {
       return switch (this) {
-        AppLanguage.en => '$newCount new kanji – practice stroke shape through handwriting.',
-        AppLanguage.vi => '$newCount kanji mới – luyện nét viết bằng handwriting.',
+        AppLanguage.en =>
+          '$newCount new kanji – practice stroke shape through handwriting.',
+        AppLanguage.vi =>
+          '$newCount kanji mới – luyện nét viết bằng handwriting.',
         AppLanguage.ja => '$newCount 件新規 – 手書きで字形を練習。',
+      };
+    }
+    if (_isFocusedPracticeSource(source)) {
+      return switch (this) {
+        AppLanguage.en => 'Practice handwriting for the selected kanji.',
+        AppLanguage.vi => 'Luyện viết cho kanji đã chọn.',
+        AppLanguage.ja => '選んだ漢字の手書きを練習します。',
       };
     }
     return switch (this) {
@@ -480,24 +526,42 @@ extension KanjiCopy on AppLanguage {
     AppLanguage.ja => '読む + 書く',
   };
 
-  String kanjiPracticeBothSubtitle(String source, int? dueCount, int? newCount) {
-    if (source == 'due' && dueCount != null) {
+  String kanjiPracticeBothSubtitle(
+    String source,
+    int? dueCount,
+    int? newCount,
+  ) {
+    if (_isDuePracticeSource(source) && dueCount != null) {
       return switch (this) {
-        AppLanguage.en => '$dueCount kanji – start with reading then continue to writing.',
-        AppLanguage.vi => '$dueCount kanji – bắt đầu đọc rồi tiếp tục sang viết.',
+        AppLanguage.en =>
+          '$dueCount kanji – start with reading then continue to writing.',
+        AppLanguage.vi =>
+          '$dueCount kanji – bắt đầu đọc rồi tiếp tục sang viết.',
         AppLanguage.ja => '$dueCount 件 – 読みから書きへ続けます。',
       };
     }
-    if (source == 'new' && newCount != null) {
+    if (_isNewPracticeSource(source) && newCount != null) {
       return switch (this) {
-        AppLanguage.en => '$newCount new kanji – read then write the full batch.',
+        AppLanguage.en =>
+          '$newCount new kanji – read then write the full batch.',
         AppLanguage.vi => '$newCount kanji mới – đọc rồi viết toàn bộ batch.',
         AppLanguage.ja => '$newCount 件新規 – 読んでから書きます。',
       };
     }
+    if (_isFocusedPracticeSource(source)) {
+      return switch (this) {
+        AppLanguage.en =>
+          'Read then write the selected kanji in one focused pass.',
+        AppLanguage.vi =>
+          'Đọc rồi viết kanji đã chọn trong một lượt tập trung.',
+        AppLanguage.ja => '選んだ漢字を読みから書きまで一気に練習します。',
+      };
+    }
     return switch (this) {
-      AppLanguage.en => 'Start with reading, then continue to writing for the same scope.',
-      AppLanguage.vi => 'Bắt đầu bằng đọc rồi tiếp tục sang viết trong cùng scope.',
+      AppLanguage.en =>
+        'Start with reading, then continue to writing for the same scope.',
+      AppLanguage.vi =>
+        'Bắt đầu bằng đọc rồi tiếp tục sang viết trong cùng scope.',
       AppLanguage.ja => '同じスコープで読みから書きへつなげます。',
     };
   }
