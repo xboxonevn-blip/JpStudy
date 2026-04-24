@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/features/study_hub/providers/study_hub_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+const _studyHubPrefsKey = 'study_hub.state.v1';
 
 void main() {
   setUp(() {
@@ -8,17 +12,20 @@ void main() {
   });
 
   group('StudyHubState', () {
-    test('initial state is unloaded with empty selections and null exam date', () {
-      final state = StudyHubState.initial();
-      expect(state.loaded, isFalse);
-      expect(state.selectedLevels, isEmpty);
-      expect(state.selectedTopics, isEmpty);
-      expect(state.selectedLabels, isEmpty);
-      expect(state.packLessons, isEmpty);
-      expect(state.doneOnboardingSteps, isEmpty);
-      expect(state.examChecklistDone, isEmpty);
-      expect(state.examDate, isNull);
-    });
+    test(
+      'initial state is unloaded with empty selections and null exam date',
+      () {
+        final state = StudyHubState.initial();
+        expect(state.loaded, isFalse);
+        expect(state.selectedLevels, isEmpty);
+        expect(state.selectedTopics, isEmpty);
+        expect(state.selectedLabels, isEmpty);
+        expect(state.packLessons, isEmpty);
+        expect(state.doneOnboardingSteps, isEmpty);
+        expect(state.examChecklistDone, isEmpty);
+        expect(state.examDate, isNull);
+      },
+    );
 
     test('copyWith can clear exam date via clearExamDate', () {
       final initial = StudyHubState.initial().copyWith(
@@ -69,12 +76,35 @@ void main() {
   });
 
   group('StudyHubNotifier', () {
-    test('load with empty prefs marks loaded and seeds default threads', () async {
-      final notifier = StudyHubNotifier();
-      await notifier.load();
+    test(
+      'load with empty prefs marks loaded and seeds default threads',
+      () async {
+        final notifier = StudyHubNotifier();
+        await notifier.load();
 
-      expect(notifier.state.loaded, isTrue);
-      expect(notifier.state.threads, isNotEmpty);
+        expect(notifier.state.loaded, isTrue);
+        expect(notifier.state.threads, isNotEmpty);
+      },
+    );
+
+    test('load does not overwrite newer user changes', () async {
+      final storedState = StudyHubState.initial().copyWith(
+        loaded: true,
+        selectedLevels: {StudyResourceLevel.beginner},
+      );
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(
+        _studyHubPrefsKey,
+        jsonEncode(storedState.toJson()),
+      );
+
+      final notifier = StudyHubNotifier();
+      final loadFuture = notifier.load();
+      notifier.toggleLevel(StudyResourceLevel.advanced);
+
+      await loadFuture;
+
+      expect(notifier.state.selectedLevels, {StudyResourceLevel.advanced});
     });
 
     test('toggleLevel adds then removes level', () {
@@ -119,10 +149,18 @@ void main() {
 
     test('setPackLesson clamps to range 0..maxLesson', () {
       final notifier = StudyHubNotifier();
-      notifier.setPackLesson(packId: 'minna_1', currentLesson: -5, maxLesson: 25);
+      notifier.setPackLesson(
+        packId: 'minna_1',
+        currentLesson: -5,
+        maxLesson: 25,
+      );
       expect(notifier.state.packLessons['minna_1'], 0);
 
-      notifier.setPackLesson(packId: 'minna_1', currentLesson: 40, maxLesson: 25);
+      notifier.setPackLesson(
+        packId: 'minna_1',
+        currentLesson: 40,
+        maxLesson: 25,
+      );
       expect(notifier.state.packLessons['minna_1'], 25);
     });
 
@@ -226,10 +264,12 @@ void main() {
 
       notifier.upvoteAnswer(threadId: thread.id, answerId: answer.id);
 
-      final updatedThread =
-          notifier.state.threads.firstWhere((t) => t.id == thread.id);
-      final updatedAnswer =
-          updatedThread.answers.firstWhere((a) => a.id == answer.id);
+      final updatedThread = notifier.state.threads.firstWhere(
+        (t) => t.id == thread.id,
+      );
+      final updatedAnswer = updatedThread.answers.firstWhere(
+        (a) => a.id == answer.id,
+      );
       expect(updatedAnswer.upvotes, answer.upvotes + 1);
     });
 
@@ -254,10 +294,13 @@ void main() {
   });
 
   group('study hub selectors', () {
-    test('filteredResources returns all resources when no filters selected', () {
-      final state = StudyHubState.initial().copyWith(loaded: true);
-      expect(filteredResources(state), hasLength(studyResources.length));
-    });
+    test(
+      'filteredResources returns all resources when no filters selected',
+      () {
+        final state = StudyHubState.initial().copyWith(loaded: true);
+        expect(filteredResources(state), hasLength(studyResources.length));
+      },
+    );
 
     test('filteredResources filters by level', () {
       final state = StudyHubState.initial().copyWith(
@@ -266,7 +309,10 @@ void main() {
       );
       final filtered = filteredResources(state);
       expect(filtered, isNotEmpty);
-      expect(filtered.every((r) => r.level == StudyResourceLevel.beginner), isTrue);
+      expect(
+        filtered.every((r) => r.level == StudyResourceLevel.beginner),
+        isTrue,
+      );
     });
 
     test('filteredResources filters by topic', () {
@@ -276,7 +322,10 @@ void main() {
       );
       final filtered = filteredResources(state);
       expect(filtered, isNotEmpty);
-      expect(filtered.every((r) => r.topic == StudyResourceTopic.grammar), isTrue);
+      expect(
+        filtered.every((r) => r.topic == StudyResourceTopic.grammar),
+        isTrue,
+      );
     });
 
     test('filteredResources filters by label intersection', () {
@@ -293,16 +342,33 @@ void main() {
     test('popularResources returns descending popularity and honors limit', () {
       final popular = popularResources(limit: 3);
       expect(popular, hasLength(3));
-      expect(popular[0].popularityScore, greaterThanOrEqualTo(popular[1].popularityScore));
-      expect(popular[1].popularityScore, greaterThanOrEqualTo(popular[2].popularityScore));
+      expect(
+        popular[0].popularityScore,
+        greaterThanOrEqualTo(popular[1].popularityScore),
+      );
+      expect(
+        popular[1].popularityScore,
+        greaterThanOrEqualTo(popular[2].popularityScore),
+      );
     });
 
-    test('recentlyUpdatedResources returns descending updatedAt and honors limit', () {
-      final recent = recentlyUpdatedResources(limit: 4);
-      expect(recent, hasLength(4));
-      expect(recent[0].updatedAt.isAfter(recent[1].updatedAt) || recent[0].updatedAt.isAtSameMomentAs(recent[1].updatedAt), isTrue);
-      expect(recent[1].updatedAt.isAfter(recent[2].updatedAt) || recent[1].updatedAt.isAtSameMomentAs(recent[2].updatedAt), isTrue);
-    });
+    test(
+      'recentlyUpdatedResources returns descending updatedAt and honors limit',
+      () {
+        final recent = recentlyUpdatedResources(limit: 4);
+        expect(recent, hasLength(4));
+        expect(
+          recent[0].updatedAt.isAfter(recent[1].updatedAt) ||
+              recent[0].updatedAt.isAtSameMomentAs(recent[1].updatedAt),
+          isTrue,
+        );
+        expect(
+          recent[1].updatedAt.isAfter(recent[2].updatedAt) ||
+              recent[1].updatedAt.isAtSameMomentAs(recent[2].updatedAt),
+          isTrue,
+        );
+      },
+    );
 
     test('availableLabels returns union of labels across all resources', () {
       final labels = availableLabels();

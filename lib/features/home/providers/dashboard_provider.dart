@@ -25,8 +25,10 @@ final dashboardProvider = StreamProvider.autoDispose<DashboardState>((ref) {
   var hasPendingRefresh = false;
   var isDisposed = false;
 
+  bool canEmit() => !isDisposed && !controller.isClosed;
+
   Future<void> emitSnapshot() async {
-    if (isDisposed) {
+    if (!canEmit()) {
       return;
     }
     if (isComputing) {
@@ -42,14 +44,18 @@ final dashboardProvider = StreamProvider.autoDispose<DashboardState>((ref) {
       // Only fetch mistake counts if the stream hasn't pushed them yet.
       // getMistakeCounts() runs a 3-row GROUP BY query instead of loading the
       // full UserMistake table — avoids N rows × full columns on every refresh.
-      final mistakeCountsFuture =
-          cachedMistakeCounts != null ? null : mistakeRepo.getMistakeCounts();
+      final mistakeCountsFuture = cachedMistakeCounts != null
+          ? null
+          : mistakeRepo.getMistakeCounts();
 
       final progress = await progressFuture;
       final vocabDueCount = await vocabCountFuture;
       final grammarDueCount = await grammarCountFuture;
       final kanjiDueCount = await kanjiCountFuture;
       final mc = cachedMistakeCounts ?? await mistakeCountsFuture!;
+      if (!canEmit()) {
+        return;
+      }
 
       final next = DashboardState(
         streak: progress.streak,
@@ -68,12 +74,12 @@ final dashboardProvider = StreamProvider.autoDispose<DashboardState>((ref) {
         controller.add(next);
       }
     } catch (error, stackTrace) {
-      if (!controller.isClosed) {
+      if (canEmit()) {
         controller.addError(error, stackTrace);
       }
     } finally {
       isComputing = false;
-      if (hasPendingRefresh) {
+      if (canEmit() && hasPendingRefresh) {
         hasPendingRefresh = false;
         unawaited(emitSnapshot());
       }
@@ -82,21 +88,33 @@ final dashboardProvider = StreamProvider.autoDispose<DashboardState>((ref) {
 
   subscriptions.add(
     srsDao.watchDueReviewCount().listen((_) {
+      if (isDisposed) {
+        return;
+      }
       unawaited(emitSnapshot());
     }),
   );
   subscriptions.add(
     grammarDao.watchDueReviewCount().listen((_) {
+      if (isDisposed) {
+        return;
+      }
       unawaited(emitSnapshot());
     }),
   );
   subscriptions.add(
     kanjiSrsDao.watchDueReviewCount().listen((_) {
+      if (isDisposed) {
+        return;
+      }
       unawaited(emitSnapshot());
     }),
   );
   subscriptions.add(
     mistakeRepo.watchMistakeCounts().listen((counts) {
+      if (isDisposed) {
+        return;
+      }
       cachedMistakeCounts = counts;
       unawaited(emitSnapshot());
     }),
@@ -113,6 +131,9 @@ final dashboardProvider = StreamProvider.autoDispose<DashboardState>((ref) {
   }
 
   void startTicker() {
+    if (isDisposed) {
+      return;
+    }
     // Guard: never double-create the timer.
     minuteTicker ??= Timer.periodic(const Duration(minutes: 1), (_) {
       unawaited(emitSnapshot());
@@ -125,6 +146,9 @@ final dashboardProvider = StreamProvider.autoDispose<DashboardState>((ref) {
   // the onResume callback will restart it.
   final lifecycleListener = AppLifecycleListener(
     onResume: () {
+      if (isDisposed) {
+        return;
+      }
       startTicker();
       unawaited(emitSnapshot());
     },

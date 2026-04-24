@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -348,28 +349,66 @@ final studyHubProvider = StateNotifierProvider<StudyHubNotifier, StudyHubState>(
 class StudyHubNotifier extends StateNotifier<StudyHubState> {
   StudyHubNotifier() : super(StudyHubState.initial());
 
+  int _revision = 0;
+
   Future<void> load() async {
+    final loadRevision = _revision;
     final prefs = await SharedPreferences.getInstance();
+    if (!_canApply(loadRevision)) {
+      return;
+    }
     final raw = prefs.getString(_prefsKey);
     if (raw == null || raw.isEmpty) {
-      state = state.copyWith(loaded: true, threads: _defaultThreads);
+      _applyLoadedState(
+        state.copyWith(loaded: true, threads: _defaultThreads),
+        loadRevision,
+      );
       return;
     }
     try {
       final json = jsonDecode(raw);
       if (json is! Map) {
-        state = state.copyWith(loaded: true, threads: _defaultThreads);
+        _applyLoadedState(
+          state.copyWith(loaded: true, threads: _defaultThreads),
+          loadRevision,
+        );
         return;
       }
-      state = StudyHubState.fromJson(Map<String, dynamic>.from(json));
+      _applyLoadedState(
+        StudyHubState.fromJson(Map<String, dynamic>.from(json)),
+        loadRevision,
+      );
     } catch (_) {
-      state = state.copyWith(loaded: true, threads: _defaultThreads);
+      _applyLoadedState(
+        state.copyWith(loaded: true, threads: _defaultThreads),
+        loadRevision,
+      );
     }
   }
 
-  Future<void> _persist() async {
+  bool _canApply(int revision) {
+    return mounted && revision == _revision;
+  }
+
+  void _applyLoadedState(StudyHubState next, int loadRevision) {
+    if (!_canApply(loadRevision)) {
+      return;
+    }
+    state = next;
+  }
+
+  void _setStateAndPersist(StudyHubState next) {
+    _revision += 1;
+    state = next;
+    unawaited(_persistSnapshot(next, _revision));
+  }
+
+  Future<void> _persistSnapshot(StudyHubState snapshot, int revision) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_prefsKey, jsonEncode(state.toJson()));
+    if (!_canApply(revision)) {
+      return;
+    }
+    await prefs.setString(_prefsKey, jsonEncode(snapshot.toJson()));
   }
 
   void toggleLevel(StudyResourceLevel level) {
@@ -377,8 +416,7 @@ class StudyHubNotifier extends StateNotifier<StudyHubState> {
     if (!next.add(level)) {
       next.remove(level);
     }
-    state = state.copyWith(selectedLevels: next);
-    _persist();
+    _setStateAndPersist(state.copyWith(selectedLevels: next));
   }
 
   void toggleTopic(StudyResourceTopic topic) {
@@ -386,8 +424,7 @@ class StudyHubNotifier extends StateNotifier<StudyHubState> {
     if (!next.add(topic)) {
       next.remove(topic);
     }
-    state = state.copyWith(selectedTopics: next);
-    _persist();
+    _setStateAndPersist(state.copyWith(selectedTopics: next));
   }
 
   void toggleLabel(String label) {
@@ -395,17 +432,17 @@ class StudyHubNotifier extends StateNotifier<StudyHubState> {
     if (!next.add(label)) {
       next.remove(label);
     }
-    state = state.copyWith(selectedLabels: next);
-    _persist();
+    _setStateAndPersist(state.copyWith(selectedLabels: next));
   }
 
   void clearFilters() {
-    state = state.copyWith(
-      selectedLevels: const <StudyResourceLevel>{},
-      selectedTopics: const <StudyResourceTopic>{},
-      selectedLabels: const <String>{},
+    _setStateAndPersist(
+      state.copyWith(
+        selectedLevels: const <StudyResourceLevel>{},
+        selectedTopics: const <StudyResourceTopic>{},
+        selectedLabels: const <String>{},
+      ),
     );
-    _persist();
   }
 
   void setPackLesson({
@@ -416,8 +453,7 @@ class StudyHubNotifier extends StateNotifier<StudyHubState> {
     final normalized = currentLesson.clamp(0, maxLesson);
     final next = Map<String, int>.from(state.packLessons);
     next[packId] = normalized;
-    state = state.copyWith(packLessons: next);
-    _persist();
+    _setStateAndPersist(state.copyWith(packLessons: next));
   }
 
   void toggleOnboardingStep(String stepId) {
@@ -425,8 +461,7 @@ class StudyHubNotifier extends StateNotifier<StudyHubState> {
     if (!next.add(stepId)) {
       next.remove(stepId);
     }
-    state = state.copyWith(doneOnboardingSteps: next);
-    _persist();
+    _setStateAndPersist(state.copyWith(doneOnboardingSteps: next));
   }
 
   void addQuestion({
@@ -456,8 +491,7 @@ class StudyHubNotifier extends StateNotifier<StudyHubState> {
       answers: const <QaAnswer>[],
     );
     final next = [thread, ...state.threads];
-    state = state.copyWith(threads: next);
-    _persist();
+    _setStateAndPersist(state.copyWith(threads: next));
   }
 
   void addAnswer({required String threadId, required String body}) {
@@ -483,8 +517,7 @@ class StudyHubNotifier extends StateNotifier<StudyHubState> {
           );
         })
         .toList(growable: false);
-    state = state.copyWith(threads: next);
-    _persist();
+    _setStateAndPersist(state.copyWith(threads: next));
   }
 
   void toggleResolved(String threadId) {
@@ -496,8 +529,7 @@ class StudyHubNotifier extends StateNotifier<StudyHubState> {
           return thread.copyWith(resolved: !thread.resolved);
         })
         .toList(growable: false);
-    state = state.copyWith(threads: next);
-    _persist();
+    _setStateAndPersist(state.copyWith(threads: next));
   }
 
   void upvoteThread(String threadId) {
@@ -509,8 +541,7 @@ class StudyHubNotifier extends StateNotifier<StudyHubState> {
           return thread.copyWith(upvotes: thread.upvotes + 1);
         })
         .toList(growable: false);
-    state = state.copyWith(threads: next);
-    _persist();
+    _setStateAndPersist(state.copyWith(threads: next));
   }
 
   void upvoteAnswer({required String threadId, required String answerId}) {
@@ -530,8 +561,7 @@ class StudyHubNotifier extends StateNotifier<StudyHubState> {
           return thread.copyWith(answers: answers);
         })
         .toList(growable: false);
-    state = state.copyWith(threads: next);
-    _persist();
+    _setStateAndPersist(state.copyWith(threads: next));
   }
 
   void toggleExamChecklist(String itemId) {
@@ -539,17 +569,15 @@ class StudyHubNotifier extends StateNotifier<StudyHubState> {
     if (!next.add(itemId)) {
       next.remove(itemId);
     }
-    state = state.copyWith(examChecklistDone: next);
-    _persist();
+    _setStateAndPersist(state.copyWith(examChecklistDone: next));
   }
 
   void setExamDate(DateTime? date) {
     if (date == null) {
-      state = state.copyWith(clearExamDate: true);
+      _setStateAndPersist(state.copyWith(clearExamDate: true));
     } else {
-      state = state.copyWith(examDate: date);
+      _setStateAndPersist(state.copyWith(examDate: date));
     }
-    _persist();
   }
 }
 

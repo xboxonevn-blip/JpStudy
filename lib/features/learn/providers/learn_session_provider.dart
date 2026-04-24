@@ -80,7 +80,11 @@ class LearnSessionNotifier extends StateNotifier<LearnSession?> {
   Future<QuestionResult?> submitAnswer(String answer) async {
     if (state == null || state!.currentQuestion == null) return null;
 
-    final question = state!.currentQuestion!;
+    final session = state!;
+    final sessionId = session.sessionId;
+    final questionIndex = session.currentQuestionIndex;
+    final resultCount = session.results.length;
+    final question = session.currentQuestion!;
     final startTime = DateTime.now().subtract(
       const Duration(seconds: 5),
     ); // Approximate
@@ -114,10 +118,21 @@ class LearnSessionNotifier extends StateNotifier<LearnSession?> {
       );
     }
 
-    state!.recordResult(result);
+    if (!mounted) {
+      return null;
+    }
+    final activeSession = state;
+    if (activeSession == null ||
+        activeSession.sessionId != sessionId ||
+        activeSession.currentQuestionIndex != questionIndex ||
+        activeSession.results.length != resultCount) {
+      return null;
+    }
 
-    // Notify listeners
-    state = state!.copyWith();
+    activeSession.recordResult(result);
+
+    // Notify listeners.
+    state = activeSession.copyWith();
 
     return result;
   }
@@ -152,8 +167,20 @@ class LearnSessionNotifier extends StateNotifier<LearnSession?> {
   Future<void> _completeSession() async {
     if (state == null) return;
 
-    final completedSession = state!.copyWith(completedAt: DateTime.now());
+    final session = state!;
+    final sessionId = session.sessionId;
+    final questionIndex = session.currentQuestionIndex;
+    final completedSession = session.copyWith(completedAt: DateTime.now());
     await _learnService.saveSession(completedSession);
+    if (!mounted) {
+      return;
+    }
+    final activeSession = state;
+    if (activeSession == null ||
+        activeSession.sessionId != sessionId ||
+        activeSession.currentQuestionIndex != questionIndex) {
+      return;
+    }
     state = completedSession;
   }
 
