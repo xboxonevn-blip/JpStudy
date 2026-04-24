@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
@@ -303,6 +304,7 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
   }
 
   void _spawnParticles() {
+    if (MediaQuery.maybeOf(context)?.disableAnimations ?? false) return;
     if (_lastBoardSize == Size.zero) return;
     for (var i = 0; i < 6; i++) {
       final burst = _ParticleBurst(
@@ -397,11 +399,9 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
                     const SizedBox(height: 6),
                     Text(
                       language.timeAttackBonusLabel(_timeAttackBonus),
-                      style: Theme.of(
-                        context,
-                      ).textTheme.titleMedium?.copyWith(
-                    color: context.appPalette.ink.withValues(alpha: 0.55),
-                  ),
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: context.appPalette.ink.withValues(alpha: 0.55),
+                      ),
                     ),
                   ],
                 ] else ...[
@@ -412,9 +412,7 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
                 ],
                 Text(
                   language.maxComboLabel(_maxCombo),
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleLarge?.copyWith(
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: context.appPalette.primary,
                   ),
                 ),
@@ -482,7 +480,10 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: AnimatedScale(
                   scale: 1.0 + (_combo * 0.1).clamp(0.0, 0.5),
-                  duration: const Duration(milliseconds: 200),
+                  duration: reducedMotionDuration(
+                    context,
+                    const Duration(milliseconds: 200),
+                  ),
                   child: Text(
                     language.comboLabel(_combo),
                     style: TextStyle(
@@ -546,7 +547,10 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
     return GestureDetector(
       onTap: () => _onCardTap(card),
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+        duration: reducedMotionDuration(
+          context,
+          const Duration(milliseconds: 200),
+        ),
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(8),
@@ -584,7 +588,10 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
       top: burst.offset.dy,
       child: TweenAnimationBuilder<double>(
         tween: Tween(begin: 0.0, end: 1.0),
-        duration: const Duration(milliseconds: 700),
+        duration: reducedMotionDuration(
+          context,
+          const Duration(milliseconds: 700),
+        ),
         builder: (context, value, child) {
           final scale = 0.6 + value * 1.2;
           final opacity = (1 - value).clamp(0.0, 1.0);
@@ -593,7 +600,11 @@ class _MatchGameScreenState extends ConsumerState<MatchGameScreen> {
             child: Transform.scale(scale: scale, child: child),
           );
         },
-        child: Icon(Icons.auto_awesome, color: context.appPalette.warning, size: 18),
+        child: Icon(
+          Icons.auto_awesome,
+          color: context.appPalette.warning,
+          size: 18,
+        ),
       ),
     );
   }

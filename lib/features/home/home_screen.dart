@@ -45,6 +45,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     _appSettingsController = ref.read(appSettingsControllerProvider.notifier);
     _dataSettingsController = ref.read(dataSettingsControllerProvider.notifier);
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) {
+        return;
+      }
       _appSettingsController.initialize(hostContext: context);
       _dataSettingsController.initialize(hostContext: context);
       _showPendingAchievements();

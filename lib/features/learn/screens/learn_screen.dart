@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
+import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
@@ -112,6 +113,7 @@ class _LearnScreenState extends ConsumerState<LearnScreen> {
       _clearSavedSession();
       // Navigate to summary
       WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (context) => LearnSummaryScreen(
@@ -202,7 +204,10 @@ class _LearnScreenState extends ConsumerState<LearnScreen> {
                       ),
                     ),
                   AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 300),
+                    duration: reducedMotionDuration(
+                      context,
+                      const Duration(milliseconds: 300),
+                    ),
                     transitionBuilder: (child, animation) {
                       return FadeTransition(
                         opacity: animation,

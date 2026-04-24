@@ -568,51 +568,54 @@ class StudyHubScreen extends ConsumerWidget {
   ) async {
     final titleCtrl = TextEditingController();
     final bodyCtrl = TextEditingController();
-    await showDialog<void>(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(_qaAskDialogTitle(language)),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: titleCtrl,
-              decoration: InputDecoration(labelText: _qaTitleHint(language)),
-              textInputAction: TextInputAction.next,
+    try {
+      await showDialog<void>(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text(_qaAskDialogTitle(language)),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: titleCtrl,
+                decoration: InputDecoration(labelText: _qaTitleHint(language)),
+                textInputAction: TextInputAction.next,
+              ),
+              const SizedBox(height: 12),
+              TextField(
+                controller: bodyCtrl,
+                decoration: InputDecoration(labelText: _qaBodyHint(language)),
+                maxLines: 3,
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(ctx).pop(),
+              child: Text(_cancelLabel(language)),
             ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: bodyCtrl,
-              decoration: InputDecoration(labelText: _qaBodyHint(language)),
-              maxLines: 3,
+            FilledButton(
+              onPressed: () {
+                ref
+                    .read(studyHubProvider.notifier)
+                    .addQuestion(
+                      title: titleCtrl.text,
+                      body: bodyCtrl.text,
+                      tags: const [],
+                    );
+                Navigator.of(ctx).pop();
+              },
+              child: Text(_qaPostLabel(language)),
             ),
           ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(),
-            child: Text(_cancelLabel(language)),
-          ),
-          FilledButton(
-            onPressed: () {
-              ref
-                  .read(studyHubProvider.notifier)
-                  .addQuestion(
-                    title: titleCtrl.text,
-                    body: bodyCtrl.text,
-                    tags: const [],
-                  );
-              Navigator.of(ctx).pop();
-            },
-            child: Text(_qaPostLabel(language)),
-          ),
-        ],
-      ),
-    );
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      titleCtrl.dispose();
-      bodyCtrl.dispose();
-    });
+      );
+    } finally {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        titleCtrl.dispose();
+        bodyCtrl.dispose();
+      });
+    }
   }
 
   Future<void> _showAnswerDialog(
@@ -622,36 +625,39 @@ class StudyHubScreen extends ConsumerWidget {
     String threadId,
   ) async {
     final ctrl = TextEditingController();
-    await showDialog<void>(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(_qaAnswerDialogTitle(language)),
-        content: TextField(
-          controller: ctrl,
-          decoration: InputDecoration(labelText: _qaBodyHint(language)),
-          maxLines: 4,
-          autofocus: true,
+    try {
+      await showDialog<void>(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text(_qaAnswerDialogTitle(language)),
+          content: TextField(
+            controller: ctrl,
+            decoration: InputDecoration(labelText: _qaBodyHint(language)),
+            maxLines: 4,
+            autofocus: true,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(ctx).pop(),
+              child: Text(_cancelLabel(language)),
+            ),
+            FilledButton(
+              onPressed: () {
+                ref
+                    .read(studyHubProvider.notifier)
+                    .addAnswer(threadId: threadId, body: ctrl.text);
+                Navigator.of(ctx).pop();
+              },
+              child: Text(_qaPostLabel(language)),
+            ),
+          ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(),
-            child: Text(_cancelLabel(language)),
-          ),
-          FilledButton(
-            onPressed: () {
-              ref
-                  .read(studyHubProvider.notifier)
-                  .addAnswer(threadId: threadId, body: ctrl.text);
-              Navigator.of(ctx).pop();
-            },
-            child: Text(_qaPostLabel(language)),
-          ),
-        ],
-      ),
-    );
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ctrl.dispose();
-    });
+      );
+    } finally {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ctrl.dispose();
+      });
+    }
   }
 
   IconData _topicIcon(StudyResourceTopic topic) => switch (topic) {

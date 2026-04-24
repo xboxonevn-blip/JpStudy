@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
+import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/data/db/app_database.dart';
@@ -60,6 +61,14 @@ class _HajimeteChapterDetailScreenState
   void dispose() {
     _autoTimer?.cancel();
     super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (reducedMotionEnabled(context) && _autoPlay) {
+      _stopAutoPlay(notify: false);
+    }
   }
 
   @override
@@ -289,16 +298,34 @@ class _HajimeteChapterDetailScreenState
 
   void _toggleAutoPlay(int total) {
     if (_autoPlay) {
-      _autoTimer?.cancel();
-      setState(() => _autoPlay = false);
+      _stopAutoPlay();
+      return;
+    }
+    if (reducedMotionEnabled(context)) {
       return;
     }
     _autoTimer?.cancel();
     _autoTimer = Timer.periodic(const Duration(seconds: 3), (_) {
-      if (!mounted) return;
+      if (!mounted || reducedMotionEnabled(context)) {
+        _stopAutoPlay();
+        return;
+      }
       _goNext(total);
     });
     setState(() => _autoPlay = true);
+  }
+
+  void _stopAutoPlay({bool notify = true}) {
+    _autoTimer?.cancel();
+    _autoTimer = null;
+    if (!_autoPlay) {
+      return;
+    }
+    if (notify && mounted) {
+      setState(() => _autoPlay = false);
+    } else {
+      _autoPlay = false;
+    }
   }
 
   void _goPrev(int total) {
@@ -444,7 +471,9 @@ class _HajimeteChapterDetailScreenState
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(language.nextReviewToastLabel(label)),
-        backgroundColor: quality <= 2 ? context.appPalette.warning : context.appPalette.success,
+        backgroundColor: quality <= 2
+            ? context.appPalette.warning
+            : context.appPalette.success,
         duration: const Duration(seconds: 2),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -698,7 +727,10 @@ class _StudyStagePanel extends StatelessWidget {
           key: const ValueKey('hajimete_review_stage'),
           height: 460,
           child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 300),
+            duration: reducedMotionDuration(
+              context,
+              const Duration(milliseconds: 300),
+            ),
             transitionBuilder: (child, animation) {
               final offset = Tween<Offset>(
                 begin: const Offset(1.0, 0.0),
@@ -854,9 +886,7 @@ class _ModeSwitcher extends StatelessWidget {
           }
           return palette.ink;
         }),
-        side: WidgetStateProperty.all(
-          BorderSide(color: palette.outline),
-        ),
+        side: WidgetStateProperty.all(BorderSide(color: palette.outline)),
         shape: WidgetStateProperty.all(
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
         ),

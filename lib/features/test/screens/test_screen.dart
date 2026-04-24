@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../app/theme/app_spacing.dart';
 import '../../../app/theme/app_theme_palette.dart';
+import '../../../core/accessibility/reduced_motion.dart';
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
 import '../../../core/services/recovery_pack_service.dart';
@@ -58,6 +59,7 @@ class _TestScreenState extends ConsumerState<TestScreen> {
   bool? _selectedTrueFalse;
   bool _showResult = false;
   bool _isCorrect = false;
+  bool _isSubmitting = false;
   Timer? _timer;
   int _secondsRemaining = 0;
   int _adaptiveAdded = 0;
@@ -156,20 +158,28 @@ class _TestScreenState extends ConsumerState<TestScreen> {
       if (_secondsRemaining > 0) {
         _startTimer();
       } else {
-        WidgetsBinding.instance.addPostFrameCallback((_) => _submitTest());
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (!mounted) return;
+          unawaited(_submitTest());
+        });
       }
     }
   }
 
   void _startTimer() {
+    _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (!mounted) {
+        timer.cancel();
+        return;
+      }
       setState(() {
         _secondsRemaining--;
       });
 
       if (_secondsRemaining <= 0) {
         timer.cancel();
-        _submitTest();
+        unawaited(_submitTest());
       }
     });
   }
@@ -308,7 +318,11 @@ class _TestScreenState extends ConsumerState<TestScreen> {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.timer, size: 18, color: isLow ? context.appPalette.error : null),
+          Icon(
+            Icons.timer,
+            size: 18,
+            color: isLow ? context.appPalette.error : null,
+          ),
           const SizedBox(width: 4),
           Text(
             '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}',
@@ -415,7 +429,10 @@ class _TestScreenState extends ConsumerState<TestScreen> {
           child: ConstrainedBox(
             constraints: BoxConstraints(maxWidth: wide ? 860 : 760),
             child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 300),
+              duration: reducedMotionDuration(
+                context,
+                const Duration(milliseconds: 300),
+              ),
               transitionBuilder: (child, animation) {
                 return FadeTransition(
                   opacity: animation,
@@ -1014,6 +1031,10 @@ class _TestScreenState extends ConsumerState<TestScreen> {
   }
 
   Future<void> _submitTest() async {
+    if (_isSubmitting) {
+      return;
+    }
+    _isSubmitting = true;
     _timer?.cancel();
     _session.completedAt = DateTime.now();
     final vocabSource = widget.lessonId < 0 ? 'content' : 'lesson';

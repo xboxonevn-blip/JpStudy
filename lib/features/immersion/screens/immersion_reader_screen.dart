@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
+import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/utils/japanese_text.dart';
@@ -75,6 +76,14 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
     super.dispose();
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (reducedMotionEnabled(context) && _isAutoScrolling) {
+      _stopAutoScroll(notify: false);
+    }
+  }
+
   Future<void> _loadSavedTokens() async {
     final repo = ref.read(lessonRepositoryProvider);
     final terms = await repo.fetchTerms(_immersionLessonId);
@@ -106,9 +115,10 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
   void _toggleAutoScroll() {
     if (_isAutoScrolling) {
       _stopAutoScroll();
-    } else {
-      _startAutoScroll();
+      return;
     }
+    if (reducedMotionEnabled(context)) return;
+    _startAutoScroll();
   }
 
   void _startAutoScroll() {
@@ -119,6 +129,10 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
     const step = 1.8;
     const duration = Duration(milliseconds: 40);
     _autoScrollTimer = Timer.periodic(duration, (timer) {
+      if (reducedMotionEnabled(context)) {
+        _stopAutoScroll();
+        return;
+      }
       if (!_scrollController.hasClients) return;
       final maxScroll = _scrollController.position.maxScrollExtent;
       final current = _scrollController.offset;
@@ -130,11 +144,17 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
     });
   }
 
-  void _stopAutoScroll() {
+  void _stopAutoScroll({bool notify = true}) {
     _autoScrollTimer?.cancel();
-    setState(() {
+    _autoScrollTimer = null;
+    if (!_isAutoScrolling) return;
+    if (notify && mounted) {
+      setState(() {
+        _isAutoScrolling = false;
+      });
+    } else {
       _isAutoScrolling = false;
-    });
+    }
   }
 
   void _handleScrollProgress() {
@@ -1109,6 +1129,7 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
     final progressPercent = (progress * 100).round();
     final charsPerMinute = _charsPerMinute(isRead: isRead);
     final palette = context.appPalette;
+    final reduceMotion = reducedMotionEnabled(context);
 
     return Scaffold(
       backgroundColor: palette.bg,
@@ -1166,7 +1187,7 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
           ),
           IconButton(
             tooltip: language.immersionAutoScrollLabel,
-            onPressed: _toggleAutoScroll,
+            onPressed: reduceMotion ? null : _toggleAutoScroll,
             icon: Icon(
               _isAutoScrolling
                   ? Icons.pause_circle_rounded
@@ -1177,7 +1198,7 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: _toggleAutoScroll,
+        onPressed: reduceMotion ? null : _toggleAutoScroll,
         icon: Icon(
           _isAutoScrolling ? Icons.pause_rounded : Icons.play_arrow_rounded,
         ),

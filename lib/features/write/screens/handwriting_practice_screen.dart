@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../app/theme/app_spacing.dart';
 import '../../../app/theme/app_theme_palette.dart';
+import '../../../core/accessibility/reduced_motion.dart';
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
 import '../../../data/models/kanji_item.dart';
@@ -1487,22 +1488,22 @@ class _HandwritingPracticeScreenState
         correctCharacters += 1;
       }
       characterCount += 1;
-        characterResults.add(
-          HandwritingCharacterResult(
-            character: guide.character,
-            expectedStrokes: guide.strokeCount,
-            drawnStrokes: result.drawnStrokes,
-            score: result.score,
-            strokeScore: result.strokeScore,
-            shapeScore: result.shapeScore,
-            orderScore: result.orderScore,
-            templateScore: result.templateScore,
-            usedTemplate: result.usedTemplate,
-            templateQuality: result.templateQuality,
-            isCorrect: result.isCorrect,
-            kanjiId: guide.kanjiId,
-          ),
-        );
+      characterResults.add(
+        HandwritingCharacterResult(
+          character: guide.character,
+          expectedStrokes: guide.strokeCount,
+          drawnStrokes: result.drawnStrokes,
+          score: result.score,
+          strokeScore: result.strokeScore,
+          shapeScore: result.shapeScore,
+          orderScore: result.orderScore,
+          templateScore: result.templateScore,
+          usedTemplate: result.usedTemplate,
+          templateQuality: result.templateQuality,
+          isCorrect: result.isCorrect,
+          kanjiId: guide.kanjiId,
+        ),
+      );
     }
 
     final strokeDelta = (drawnStrokes - expectedTotal).abs().toDouble();
@@ -1649,14 +1650,16 @@ class _HandwritingPracticeScreenState
           extra: {
             'expectedStrokes':
                 failedResult?.expectedStrokes ?? evaluation.expectedStrokes,
-            'drawnStrokes': failedResult?.drawnStrokes ?? evaluation.drawnStrokes,
+            'drawnStrokes':
+                failedResult?.drawnStrokes ?? evaluation.drawnStrokes,
             'score': failedResult?.score ?? evaluation.score,
             'strokeScore': failedResult?.strokeScore ?? evaluation.strokeScore,
             'shapeScore': failedResult?.shapeScore ?? evaluation.shapeScore,
             'orderScore': failedResult?.orderScore ?? evaluation.orderScore,
             'templateScore':
                 failedResult?.templateScore ?? evaluation.templateScore,
-            'usedTemplate': failedResult?.usedTemplate ?? evaluation.usedTemplate,
+            'usedTemplate':
+                failedResult?.usedTemplate ?? evaluation.usedTemplate,
             'templateQuality':
                 failedResult?.templateQuality ?? evaluation.templateQuality,
             'showGuide': _showGuide,
@@ -1665,7 +1668,8 @@ class _HandwritingPracticeScreenState
             'targetReading': target.reading,
             'reviewKanjiIds': target.reviewKanjiIds,
             if (failedResult != null) 'character': failedResult.character,
-            if (failedResult?.kanjiId != null) 'characterKanjiId': failedResult!.kanjiId,
+            if (failedResult?.kanjiId != null)
+              'characterKanjiId': failedResult!.kanjiId,
           },
         ),
       );
@@ -1689,7 +1693,8 @@ class _HandwritingPracticeScreenState
   }
 
   bool _isSoftPassForCharacterResult(HandwritingCharacterResult result) {
-    if (result.isCorrect || !_isLenientTemplateQuality(result.templateQuality)) {
+    if (result.isCorrect ||
+        !_isLenientTemplateQuality(result.templateQuality)) {
       return false;
     }
     final scoreGate = _showGuide ? 0.56 : 0.62;
@@ -3008,7 +3013,10 @@ class _CharacterResultChip extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 180),
+          duration: reducedMotionDuration(
+            context,
+            const Duration(milliseconds: 180),
+          ),
           padding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.sm,
             vertical: AppSpacing.xs + 3,

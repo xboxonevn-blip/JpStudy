@@ -61,11 +61,15 @@ class DataSettingsController extends Notifier<DataSettingsState> {
   Timer? _autoBackupTimer;
   SharedPreferences? _prefs;
   BuildContext? _hostContext;
+  bool _disposed = false;
 
   @override
   DataSettingsState build() {
+    _disposed = false;
     ref.onDispose(() {
+      _disposed = true;
       _autoBackupTimer?.cancel();
+      _hostContext = null;
     });
     return const DataSettingsState();
   }
@@ -100,6 +104,9 @@ class DataSettingsController extends Notifier<DataSettingsState> {
         _backupTimeFromPrefs(prefs) ?? const TimeOfDay(hour: 2, minute: 0);
     final lastRaw = prefs.getString(_prefAutoBackupLast);
 
+    if (_disposed) {
+      return;
+    }
     state = state.copyWith(
       isReady: true,
       autoBackupEnabled: autoBackupEnabled,
@@ -338,7 +345,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
     final prefs = await _ensurePrefs();
     final todayKey = _dateKey(DateTime.now());
     final lastRaw = prefs.getString(_prefAutoBackupLast);
-    if (_dateKeyFromStored(lastRaw) == todayKey) {
+    if (_disposed || _dateKeyFromStored(lastRaw) == todayKey) {
       return;
     }
 
@@ -356,10 +363,16 @@ class DataSettingsController extends Notifier<DataSettingsState> {
       await prefs.setString(_prefAutoBackupLast, timestamp.toIso8601String());
       await _cleanupOldBackups(backupDir, keep: 7);
 
+      if (_disposed) {
+        return;
+      }
       state = state.copyWith(lastAutoBackup: timestamp, isReady: true);
       ref.invalidate(backupStatusProvider);
       _showSnackBar(context ?? _hostContext, language.autoBackupSuccessLabel);
     } catch (_) {
+      if (_disposed) {
+        return;
+      }
       _showSnackBar(context ?? _hostContext, language.autoBackupErrorLabel);
     }
   }
@@ -624,14 +637,20 @@ class DataSettingsController extends Notifier<DataSettingsState> {
 
   void _scheduleAutoBackup() {
     _autoBackupTimer?.cancel();
-    if (!state.autoBackupEnabled) {
+    if (_disposed || !state.autoBackupEnabled) {
       return;
     }
 
     final now = DateTime.now();
     final next = _nextReminderTime(now, state.autoBackupTime);
     _autoBackupTimer = Timer(next.difference(now), () async {
+      if (_disposed) {
+        return;
+      }
       await performAutoBackup(ref.read(appLanguageProvider));
+      if (_disposed) {
+        return;
+      }
       _scheduleAutoBackup();
     });
   }

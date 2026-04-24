@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
+import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 import 'package:rive/rive.dart' hide Animation, PaintingStyle;
 
 import '../../../../core/app_language.dart';
@@ -64,6 +65,8 @@ class _MascotRiveState extends ConsumerState<MascotRive>
   double _actionIntensity = 1.0;
   bool _hasRiveAsset = false;
   bool _riveChecked = false;
+  bool _reduceMotion = false;
+  bool _motionPreferenceInitialized = false;
   List<double> _sparkAngles = <double>[];
   List<double> _sparkDistances = <double>[];
   List<double> _sparkSizes = <double>[];
@@ -85,7 +88,7 @@ class _MascotRiveState extends ConsumerState<MascotRive>
     _idleController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 3200),
-    )..repeat();
+    );
     _actionController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 760),
@@ -208,9 +211,54 @@ class _MascotRiveState extends ConsumerState<MascotRive>
         weight: 52,
       ),
     ]).animate(_travelController);
+  }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _syncMotionPreference();
+  }
+
+  void _syncMotionPreference() {
+    final reduceMotion =
+        MediaQuery.maybeOf(context)?.disableAnimations ?? false;
+    if (_motionPreferenceInitialized && _reduceMotion == reduceMotion) {
+      return;
+    }
+    _motionPreferenceInitialized = true;
+    _reduceMotion = reduceMotion;
+
+    if (_reduceMotion) {
+      _idleController.stop();
+      _actionController.stop();
+      _travelController.stop();
+      _blinkController.stop();
+      _sparkleController.stop();
+      _idleController.value = 0;
+      _actionController.value = 0;
+      _travelController.value = 0;
+      _blinkController.value = 0;
+      _sparkleController.value = 0;
+      _blinkTimer?.cancel();
+      _lookTimer?.cancel();
+      _ambientTimer?.cancel();
+      _lagTimer?.cancel();
+      _lookTargetX = 0;
+      _lookTargetY = 0;
+      _lagTargetX = 0;
+      _lagTargetY = 0;
+      _sparkAngles = const <double>[];
+      _sparkDistances = const <double>[];
+      _sparkSizes = const <double>[];
+      _pushRiveState(triggerMood: false);
+      return;
+    }
+
+    if (!_idleController.isAnimating) {
+      _idleController.repeat();
+    }
     _scheduleBlink();
-    _retargetLook();
+    _retargetLook(notify: false);
     _scheduleLookRetarget();
     _scheduleAmbientEvent();
   }
@@ -219,8 +267,10 @@ class _MascotRiveState extends ConsumerState<MascotRive>
   void didUpdateWidget(covariant MascotRive oldWidget) {
     super.didUpdateWidget(oldWidget);
     if ((oldWidget.nodePos - widget.nodePos).distance > 12) {
-      _travelController.forward(from: 0);
-      _playMood(_MascotMood.encourage, actionIntensity: 0.24);
+      if (!_reduceMotion) {
+        _travelController.forward(from: 0);
+        _playMood(_MascotMood.encourage, actionIntensity: 0.24);
+      }
       _retargetLook();
     }
   }
@@ -265,6 +315,7 @@ class _MascotRiveState extends ConsumerState<MascotRive>
 
   void _scheduleBlink() {
     _blinkTimer?.cancel();
+    if (_reduceMotion) return;
     final delayMs = 1300 + _random.nextInt(2600);
     _blinkTimer = Timer(Duration(milliseconds: delayMs), () {
       if (!mounted) return;
@@ -275,6 +326,7 @@ class _MascotRiveState extends ConsumerState<MascotRive>
 
   void _scheduleLookRetarget() {
     _lookTimer?.cancel();
+    if (_reduceMotion) return;
     final delayMs = _isHovering ? 750 : 1700 + _random.nextInt(2300);
     _lookTimer = Timer(Duration(milliseconds: delayMs), () {
       if (!mounted) return;
@@ -285,6 +337,7 @@ class _MascotRiveState extends ConsumerState<MascotRive>
 
   void _scheduleAmbientEvent() {
     _ambientTimer?.cancel();
+    if (_reduceMotion) return;
     final delay = Duration(seconds: 7 + _random.nextInt(7));
     _ambientTimer = Timer(delay, () {
       if (!mounted) return;
@@ -340,8 +393,10 @@ class _MascotRiveState extends ConsumerState<MascotRive>
   }) {
     _moodResetTimer?.cancel();
     _actionIntensity = actionIntensity;
-    _setMood(mood, triggerRive: true);
-    _actionController.forward(from: 0);
+    _setMood(mood, triggerRive: !_reduceMotion);
+    if (!_reduceMotion) {
+      _actionController.forward(from: 0);
+    }
 
     if (bubbleMessage != null && bubbleMessage.isNotEmpty) {
       _showSpeechBubble(bubbleMessage, visibleFor: bubbleDuration);
@@ -429,6 +484,7 @@ class _MascotRiveState extends ConsumerState<MascotRive>
   }
 
   void _triggerSparkles() {
+    if (_reduceMotion) return;
     const count = 8;
     _sparkAngles = List<double>.generate(count, (index) {
       final base = (2 * pi * index) / count;
@@ -467,7 +523,24 @@ class _MascotRiveState extends ConsumerState<MascotRive>
     _pushRiveState(triggerMood: false);
   }
 
-  void _retargetLook() {
+  void _retargetLook({bool notify = true}) {
+    if (_reduceMotion) {
+      _lagTimer?.cancel();
+      void updateTargets() {
+        _lookTargetX = 0;
+        _lookTargetY = 0;
+        _lagTargetX = 0;
+        _lagTargetY = 0;
+      }
+
+      if (notify) {
+        setState(updateTargets);
+      } else {
+        updateTargets();
+      }
+      _pushRiveState(triggerMood: false);
+      return;
+    }
     final sideBias = _isRightSide ? -0.42 : 0.42;
     final xJitter = (_random.nextDouble() - 0.5) * (_isHovering ? 0.62 : 1.02);
     final yJitter = (_random.nextDouble() - 0.5) * 0.62;
@@ -476,10 +549,16 @@ class _MascotRiveState extends ConsumerState<MascotRive>
         .clamp(-1.0, 1.0)
         .toDouble();
 
-    setState(() {
+    void updateLookTargets() {
       _lookTargetX = x;
       _lookTargetY = y;
-    });
+    }
+
+    if (notify) {
+      setState(updateLookTargets);
+    } else {
+      updateLookTargets();
+    }
     _pushRiveState(triggerMood: false);
 
     _lagTimer?.cancel();
@@ -589,6 +668,13 @@ class _MascotRiveState extends ConsumerState<MascotRive>
   }
 
   Widget _buildMascotArt() {
+    if (_reduceMotion) {
+      return Image.asset(
+        _foxAsset,
+        fit: BoxFit.contain,
+        filterQuality: FilterQuality.high,
+      );
+    }
     if (!_riveChecked || !_hasRiveAsset) {
       return _buildFallbackFox();
     }
@@ -614,7 +700,10 @@ class _MascotRiveState extends ConsumerState<MascotRive>
       alignment: Alignment.center,
       children: [
         AnimatedContainer(
-          duration: const Duration(milliseconds: 620),
+          duration: reducedMotionDuration(
+            context,
+            const Duration(milliseconds: 620),
+          ),
           curve: Curves.easeOutCubic,
           transform: Matrix4.translationValues(
             _lagTargetX * 5.2,
@@ -633,7 +722,10 @@ class _MascotRiveState extends ConsumerState<MascotRive>
           ),
         ),
         AnimatedContainer(
-          duration: const Duration(milliseconds: 280),
+          duration: reducedMotionDuration(
+            context,
+            const Duration(milliseconds: 280),
+          ),
           curve: Curves.easeOutCubic,
           transform: Matrix4.translationValues(
             _lookTargetX * 3.4,
@@ -666,7 +758,10 @@ class _MascotRiveState extends ConsumerState<MascotRive>
     final mascotY = widget.nodePos.dy - mascotSize * 0.36;
 
     return AnimatedPositioned(
-      duration: const Duration(milliseconds: 440),
+      duration: reducedMotionDuration(
+        context,
+        const Duration(milliseconds: 440),
+      ),
       curve: Curves.easeOutCubic,
       left: mascotX,
       top: mascotY,
@@ -693,31 +788,42 @@ class _MascotRiveState extends ConsumerState<MascotRive>
                   child: _buildMascotArt(),
                   builder: (context, child) {
                     final phase = _idleController.value * pi * 2;
-                    final idleFloat = sin(phase) * 3.8;
-                    final breathe = 1 + sin(phase + 0.7) * 0.018;
-                    final blink = _blinkController.isAnimating
+                    final motionEnabled = !_reduceMotion;
+                    final idleFloat = motionEnabled ? sin(phase) * 3.8 : 0.0;
+                    final breathe = motionEnabled
+                        ? 1 + sin(phase + 0.7) * 0.018
+                        : 1.0;
+                    final blink = motionEnabled && _blinkController.isAnimating
                         ? (1 - sin(_blinkController.value * pi) * 0.12)
                         : 1.0;
                     final swayBase = _isHovering ? 0.022 : 0.016;
-                    final sway = sin(phase * 0.72) * swayBase;
-                    final moodTilt = switch (_mood) {
-                      _MascotMood.sleep => -0.04,
-                      _MascotMood.oops => 0.05,
-                      _MascotMood.encourage => -0.018,
-                      _MascotMood.celebrate => 0.01,
-                      _MascotMood.idle => 0.0,
-                    };
-                    final moodOffsetY = switch (_mood) {
-                      _MascotMood.sleep => 2.2,
-                      _MascotMood.oops => 1.0,
-                      _MascotMood.encourage => -0.4,
-                      _MascotMood.celebrate => -0.6,
-                      _MascotMood.idle => 0.0,
-                    };
-                    final actionLift = _actionLift.value * _actionIntensity;
-                    final travelLift = _travelLift.value;
-                    final scaleX = _actionScaleX.value;
-                    final scaleY = _actionScaleY.value;
+                    final sway = motionEnabled
+                        ? sin(phase * 0.72) * swayBase
+                        : 0.0;
+                    final moodTilt = motionEnabled
+                        ? switch (_mood) {
+                            _MascotMood.sleep => -0.04,
+                            _MascotMood.oops => 0.05,
+                            _MascotMood.encourage => -0.018,
+                            _MascotMood.celebrate => 0.01,
+                            _MascotMood.idle => 0.0,
+                          }
+                        : 0.0;
+                    final moodOffsetY = motionEnabled
+                        ? switch (_mood) {
+                            _MascotMood.sleep => 2.2,
+                            _MascotMood.oops => 1.0,
+                            _MascotMood.encourage => -0.4,
+                            _MascotMood.celebrate => -0.6,
+                            _MascotMood.idle => 0.0,
+                          }
+                        : 0.0;
+                    final actionLift = motionEnabled
+                        ? _actionLift.value * _actionIntensity
+                        : 0.0;
+                    final travelLift = motionEnabled ? _travelLift.value : 0.0;
+                    final scaleX = motionEnabled ? _actionScaleX.value : 1.0;
+                    final scaleY = motionEnabled ? _actionScaleY.value : 1.0;
                     final totalTilt =
                         sway +
                         moodTilt +
@@ -802,11 +908,17 @@ class _MascotSpeechBubble extends StatelessWidget {
 
     return AnimatedOpacity(
       opacity: visible ? 1 : 0,
-      duration: const Duration(milliseconds: 190),
+      duration: reducedMotionDuration(
+        context,
+        const Duration(milliseconds: 190),
+      ),
       curve: Curves.easeOut,
       child: AnimatedScale(
         scale: visible ? 1 : 0.93,
-        duration: const Duration(milliseconds: 220),
+        duration: reducedMotionDuration(
+          context,
+          const Duration(milliseconds: 220),
+        ),
         curve: Curves.easeOutBack,
         alignment: isRightSide ? Alignment.bottomRight : Alignment.bottomLeft,
         child: Align(
@@ -834,7 +946,10 @@ class _MascotSpeechBubble extends StatelessWidget {
                     ],
                   ),
                   child: AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 240),
+                    duration: reducedMotionDuration(
+                      context,
+                      const Duration(milliseconds: 240),
+                    ),
                     switchInCurve: Curves.easeOut,
                     switchOutCurve: Curves.easeIn,
                     transitionBuilder: (child, animation) {

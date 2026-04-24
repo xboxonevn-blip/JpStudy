@@ -112,7 +112,9 @@ void main() {
     );
     expect(lockedStartButton.onPressed, isNull);
     expect(
-      find.text('Answer this one preview question to unlock your first session.'),
+      find.text(
+        'Answer this one preview question to unlock your first session.',
+      ),
       findsOneWidget,
     );
 
@@ -142,7 +144,7 @@ void main() {
   // dots, goal cards, option pills). When the OS reports `disableAnimations`
   // (iOS "Reduce Motion" / Android "Remove animations"), these must collapse
   // to Duration.zero so the user doesn't see any motion. These tests pin the
-  // `_onboardingAnimDuration` gate so a future refactor can't silently drop it.
+  // `reducedMotionDuration` gate so a future refactor can't silently drop it.
 
   Widget hostOnboarding({required bool disableAnimations}) {
     final db = AppDatabase(executor: NativeDatabase.memory());
@@ -164,9 +166,9 @@ void main() {
       child: MaterialApp(
         // Inject the MediaQuery override above the OnboardingScreen build.
         builder: (context, child) => MediaQuery(
-          data: MediaQuery.of(context).copyWith(
-            disableAnimations: disableAnimations,
-          ),
+          data: MediaQuery.of(
+            context,
+          ).copyWith(disableAnimations: disableAnimations),
           child: child!,
         ),
         home: OnboardingScreen(onComplete: (_, _) {}),
@@ -216,7 +218,8 @@ void main() {
         expect(
           c.duration,
           isNot(Duration.zero),
-          reason: 'default motion must be preserved when the user has not '
+          reason:
+              'default motion must be preserved when the user has not '
               'requested reduced motion',
         );
       }

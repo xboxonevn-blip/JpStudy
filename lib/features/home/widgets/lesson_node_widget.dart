@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
+import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 
 import '../../../../core/app_language.dart';
 import '../../../../core/language_provider.dart';
@@ -30,6 +31,8 @@ class _LessonNodeWidgetState extends ConsumerState<LessonNodeWidget>
 
   late final AnimationController _pulseController;
   late final Animation<double> _pulse;
+  bool _reduceMotion = false;
+  bool _motionPreferenceInitialized = false;
 
   bool get _canTap => !widget.node.isLocked && widget.onTap != null;
 
@@ -43,7 +46,12 @@ class _LessonNodeWidgetState extends ConsumerState<LessonNodeWidget>
     _pulse = Tween<double>(begin: 1.0, end: 1.02).animate(
       CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
     );
-    _syncPulse();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _syncMotionPreference();
   }
 
   @override
@@ -54,8 +62,18 @@ class _LessonNodeWidgetState extends ConsumerState<LessonNodeWidget>
     }
   }
 
+  void _syncMotionPreference() {
+    final reduceMotion = reducedMotionEnabled(context);
+    if (_motionPreferenceInitialized && _reduceMotion == reduceMotion) {
+      return;
+    }
+    _motionPreferenceInitialized = true;
+    _reduceMotion = reduceMotion;
+    _syncPulse();
+  }
+
   void _syncPulse() {
-    if (widget.isPrimaryActive) {
+    if (widget.isPrimaryActive && !_reduceMotion) {
       _pulseController.repeat(reverse: true);
     } else {
       _pulseController.stop();
@@ -77,7 +95,7 @@ class _LessonNodeWidgetState extends ConsumerState<LessonNodeWidget>
       child: AnimatedBuilder(
         animation: _pulse,
         builder: (context, child) => Transform.scale(
-          scale: widget.isPrimaryActive ? _pulse.value : 1.0,
+          scale: widget.isPrimaryActive && !_reduceMotion ? _pulse.value : 1.0,
           child: child,
         ),
         child: widget.isPrimaryActive

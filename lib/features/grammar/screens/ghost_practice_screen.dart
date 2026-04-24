@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/accessibility/reduced_motion.dart';
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
 import '../../../data/db/app_database.dart';
@@ -76,6 +77,8 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
   }
 
   void _spawnParticles() {
+    if (MediaQuery.maybeOf(context)?.disableAnimations ?? false) return;
+
     // Spawn particles around the center or random positions
     for (var i = 0; i < 10; i++) {
       final burst = _ParticleBurst(
@@ -319,7 +322,10 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
                         child: GestureDetector(
                           onTap: () => _handleAnswer(index, item),
                           child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
+                            duration: reducedMotionDuration(
+                              context,
+                              const Duration(milliseconds: 200),
+                            ),
                             padding: const EdgeInsets.symmetric(
                               vertical: 16,
                               horizontal: 20,
@@ -335,7 +341,9 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
                                     ),
                               boxShadow: [
                                 BoxShadow(
-                                  color: context.appPalette.ink.withValues(alpha: 0.05),
+                                  color: context.appPalette.ink.withValues(
+                                    alpha: 0.05,
+                                  ),
                                   offset: const Offset(0, 4),
                                   blurRadius: 8,
                                 ),
@@ -410,7 +418,10 @@ class _GhostPracticeScreenState extends ConsumerState<GhostPracticeScreen> {
       top: burst.offset.dy,
       child: TweenAnimationBuilder<double>(
         tween: Tween(begin: 0.0, end: 1.0),
-        duration: const Duration(milliseconds: 700),
+        duration: reducedMotionDuration(
+          context,
+          const Duration(milliseconds: 700),
+        ),
         builder: (context, value, child) {
           final scale = 0.5 + value * 1.5;
           final opacity = (1 - value).clamp(0.0, 1.0);

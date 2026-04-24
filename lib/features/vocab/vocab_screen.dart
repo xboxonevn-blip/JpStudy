@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
+import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
@@ -405,9 +406,6 @@ String _nextWindowLabel(AppLanguage language) =>
     language.vocabNextWindowLabel();
 
 String _reviewNowLabel(AppLanguage language) => language.vocabReviewNowLabel();
-
-String _companionShortcutLabel(AppLanguage language) =>
-    language.vocabCompanionShortcutLabel();
 
 String _todayReviewTitle(AppLanguage language, String levelCode) =>
     language.vocabReviewTitle(levelCode);

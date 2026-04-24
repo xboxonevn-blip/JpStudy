@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
+import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/data/models/kanji_item.dart';
@@ -165,7 +166,10 @@ class _KanjiListWidgetState extends ConsumerState<KanjiListWidget> {
                             const SizedBox(width: 12),
                             AnimatedRotation(
                               turns: expanded ? 0.5 : 0,
-                              duration: const Duration(milliseconds: 180),
+                              duration: reducedMotionDuration(
+                                context,
+                                const Duration(milliseconds: 180),
+                              ),
                               child: Icon(
                                 Icons.expand_more_rounded,
                                 color: palette.primary,
@@ -177,7 +181,10 @@ class _KanjiListWidgetState extends ConsumerState<KanjiListWidget> {
                     ),
                   ),
                   AnimatedCrossFade(
-                    duration: const Duration(milliseconds: 220),
+                    duration: reducedMotionDuration(
+                      context,
+                      const Duration(milliseconds: 220),
+                    ),
                     crossFadeState: expanded
                         ? CrossFadeState.showSecond
                         : CrossFadeState.showFirst,

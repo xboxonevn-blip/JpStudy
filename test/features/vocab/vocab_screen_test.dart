@@ -30,13 +30,12 @@ class _FakeVocabLessonRepository extends LessonRepository {
     required this.bank,
     this.hajimeteChapterTerms = const {},
     Map<int, SrsStateData> srsStates = const {},
-  })
-    : super(
-        AppDatabase(executor: NativeDatabase.memory()),
-        ContentDatabase(executor: NativeDatabase.memory()),
-      ) {
-        this.srsStates = Map<int, SrsStateData>.from(srsStates);
-      }
+  }) : super(
+         AppDatabase(executor: NativeDatabase.memory()),
+         ContentDatabase(executor: NativeDatabase.memory()),
+       ) {
+    this.srsStates = Map<int, SrsStateData>.from(srsStates);
+  }
 
   final Map<String, List<VocabItem>> bank;
   final Map<String, List<UserLessonTermData>> hajimeteChapterTerms;
@@ -65,7 +64,9 @@ class _FakeVocabLessonRepository extends LessonRepository {
     if (series != 'hajimete') {
       return bank[level] ?? const [];
     }
-    final terms = hajimeteChapterTerms['$level:$startChapter'] ?? const <UserLessonTermData>[];
+    final terms =
+        hajimeteChapterTerms['$level:$startChapter'] ??
+        const <UserLessonTermData>[];
     return [
       for (final term in terms)
         VocabItem(
@@ -86,7 +87,8 @@ class _FakeVocabLessonRepository extends LessonRepository {
     required int chapterId,
     String? title,
   }) async {
-    return hajimeteChapterTerms['$level:$chapterId'] ?? const <UserLessonTermData>[];
+    return hajimeteChapterTerms['$level:$chapterId'] ??
+        const <UserLessonTermData>[];
   }
 
   @override
@@ -96,7 +98,6 @@ class _FakeVocabLessonRepository extends LessonRepository {
         if (srsStates.containsKey(id)) id: srsStates[id]!,
     };
   }
-
 
   @override
   Future<FsrsReviewResult?> saveTermReview({
@@ -218,11 +219,14 @@ VocabItem _item(int id, String term, String level) => VocabItem(
   level: level,
 );
 
-Widget _buildScreen({required LessonRepository repo}) {
+Widget _buildScreen({
+  required LessonRepository repo,
+  StudyLevel level = StudyLevel.n5,
+}) {
   return ProviderScope(
     overrides: [
       appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-      studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+      studyLevelProvider.overrideWith((ref) => level),
       lessonRepositoryProvider.overrideWithValue(repo),
       dashboardProvider.overrideWith(
         (ref) => Stream.value(
@@ -267,7 +271,8 @@ Widget _buildRouterScreen({required LessonRepository repo}) {
         path: '/vocab/hajimete',
         builder: (context, state) => HajimeteChapterCatalogScreen(
           levelCode: state.uri.queryParameters['level'] ?? 'N5',
-          title: state.uri.queryParameters['title'] ?? 'Hajimete no Nihongo Tango',
+          title:
+              state.uri.queryParameters['title'] ?? 'Hajimete no Nihongo Tango',
           subtitle: state.uri.queryParameters['subtitle'],
         ),
       ),
@@ -275,8 +280,10 @@ Widget _buildRouterScreen({required LessonRepository repo}) {
         path: '/vocab/hajimete/chapter',
         builder: (context, state) => HajimeteChapterDetailScreen(
           levelCode: state.uri.queryParameters['level'] ?? 'N5',
-          chapterId: int.tryParse(state.uri.queryParameters['chapterId'] ?? '') ?? 1,
-          laneTitle: state.uri.queryParameters['title'] ?? 'Hajimete no Nihongo Tango',
+          chapterId:
+              int.tryParse(state.uri.queryParameters['chapterId'] ?? '') ?? 1,
+          laneTitle:
+              state.uri.queryParameters['title'] ?? 'Hajimete no Nihongo Tango',
         ),
       ),
       GoRoute(
@@ -381,7 +388,10 @@ void main() {
       findsOneWidget,
     );
     expect(find.byKey(const ValueKey('vocab_today_section')), findsOneWidget);
-    expect(find.byKey(const ValueKey('vocab_today_review_cta')), findsOneWidget);
+    expect(
+      find.byKey(const ValueKey('vocab_today_review_cta')),
+      findsOneWidget,
+    );
   });
 
   testWidgets('VocabScreen prioritizes Today section before catalog', (
@@ -408,6 +418,33 @@ void main() {
     );
     expect(todayTopLeft.dy, lessThan(heroTopLeft.dy));
   });
+
+  testWidgets(
+    'Today section hides companion shortcut when selected level has none',
+    (tester) async {
+      final repo = _FakeVocabLessonRepository(
+        bank: {
+          'N5': List.generate(4, (i) => _item(i + 1, 'n5_$i', 'N5')),
+          'N4': List.generate(4, (i) => _item(i + 11, 'n4_$i', 'N4')),
+          'N3': List.generate(4, (i) => _item(i + 21, 'n3_$i', 'N3')),
+        },
+      );
+
+      await tester.pumpWidget(_buildScreen(repo: repo, level: StudyLevel.n3));
+      await _pumpCatalog(tester);
+
+      expect(find.byKey(const ValueKey('vocab_today_section')), findsOneWidget);
+      expect(
+        find.byKey(const ValueKey('vocab_today_review_cta')),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(const ValueKey('vocab_today_companion_cta')),
+        findsNothing,
+      );
+      expect(tester.takeException(), isNull);
+    },
+  );
 
   testWidgets('Vocab companion track opens Minna catalog flow', (tester) async {
     final repo = _FakeVocabLessonRepository(
@@ -674,33 +711,33 @@ void main() {
     },
   );
 
-  testWidgets('VocabScreen opens Hajimete chapter catalog for active core lane', (
-    tester,
-  ) async {
-    final repo = _FakeVocabLessonRepository(
-      bank: {
-        'N5': List.generate(5, (i) => _item(i + 1, 'n5_$i', 'N5')),
-        'N4': List.generate(5, (i) => _item(i + 11, 'n4_$i', 'N4')),
-        'N3': List.generate(5, (i) => _item(i + 21, 'n3_$i', 'N3')),
-        'N2': List.generate(5, (i) => _item(i + 31, 'n2_$i', 'N2')),
-        'N1': List.generate(5, (i) => _item(i + 41, 'n1_$i', 'N1')),
-      },
-    );
+  testWidgets(
+    'VocabScreen opens Hajimete chapter catalog for active core lane',
+    (tester) async {
+      final repo = _FakeVocabLessonRepository(
+        bank: {
+          'N5': List.generate(5, (i) => _item(i + 1, 'n5_$i', 'N5')),
+          'N4': List.generate(5, (i) => _item(i + 11, 'n4_$i', 'N4')),
+          'N3': List.generate(5, (i) => _item(i + 21, 'n3_$i', 'N3')),
+          'N2': List.generate(5, (i) => _item(i + 31, 'n2_$i', 'N2')),
+          'N1': List.generate(5, (i) => _item(i + 41, 'n1_$i', 'N1')),
+        },
+      );
 
-    await tester.pumpWidget(_buildRouterScreen(repo: repo));
-    await _pumpCatalog(tester);
+      await tester.pumpWidget(_buildRouterScreen(repo: repo));
+      await _pumpCatalog(tester);
 
-    await tester.ensureVisible(
-      find.byKey(const ValueKey('program_n5_n5_core')),
-    );
-    await _pumpCatalog(tester);
+      await tester.ensureVisible(
+        find.byKey(const ValueKey('program_n5_n5_core')),
+      );
+      await _pumpCatalog(tester);
 
-    await tester.tap(find.byKey(const ValueKey('program_n5_n5_core')));
-    await _pumpCatalog(tester);
+      await tester.tap(find.byKey(const ValueKey('program_n5_n5_core')));
+      await _pumpCatalog(tester);
 
-    expect(find.byType(HajimeteChapterCatalogScreen), findsOneWidget);
-  });
-
+      expect(find.byType(HajimeteChapterCatalogScreen), findsOneWidget);
+    },
+  );
 
   testWidgets('Hajimete chapter catalog shows saved learned due status', (
     tester,
@@ -738,10 +775,7 @@ void main() {
     ];
     final repo = _FakeVocabLessonRepository(
       bank: {
-        'N5': [
-          _item(101, '????', 'N5'),
-          _item(102, '?????', 'N5'),
-        ],
+        'N5': [_item(101, '????', 'N5'), _item(102, '?????', 'N5')],
       },
       hajimeteChapterTerms: {'N5:1': chapterTerms},
       srsStates: {
@@ -806,11 +840,19 @@ void main() {
 
     await _pumpCatalog(tester);
 
-    expect(find.byKey(const ValueKey('hajimete_status_saved_1_1')), findsOneWidget);
-    expect(find.byKey(const ValueKey('hajimete_status_learned_1_2')), findsOneWidget);
-    expect(find.byKey(const ValueKey('hajimete_status_due_1_1')), findsOneWidget);
+    expect(
+      find.byKey(const ValueKey('hajimete_status_saved_1_1')),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(const ValueKey('hajimete_status_learned_1_2')),
+      findsOneWidget,
+    );
+    expect(
+      find.byKey(const ValueKey('hajimete_status_due_1_1')),
+      findsOneWidget,
+    );
   });
-
 
   testWidgets('Hajimete review stage locks stage layout and action bar', (
     tester,
@@ -850,11 +892,19 @@ void main() {
         overrides: [
           appLanguageProvider.overrideWith((ref) => AppLanguage.en),
           lessonRepositoryProvider.overrideWithValue(
-            _FakeVocabLessonRepository(bank: {'N5': [item]}),
+            _FakeVocabLessonRepository(
+              bank: {
+                'N5': [item],
+              },
+            ),
           ),
-          hajimeteChapterDetailProvider.overrideWith((ref, arg) async => detail),
+          hajimeteChapterDetailProvider.overrideWith(
+            (ref, arg) async => detail,
+          ),
           hajimeteChapterItemsProvider.overrideWith((ref, arg) async => [item]),
-          hajimeteChapterDueItemsProvider.overrideWith((ref, arg) async => [item]),
+          hajimeteChapterDueItemsProvider.overrideWith(
+            (ref, arg) async => [item],
+          ),
           hajimeteChapterSrsStatesProvider.overrideWith(
             (ref, arg) async => {
               101: SrsStateData(
@@ -891,138 +941,163 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byKey(const ValueKey('hajimete_review_stage')), findsOneWidget);
-    expect(tester.getSize(find.byKey(const ValueKey('hajimete_review_stage'))).height, 460);
+    expect(
+      tester
+          .getSize(find.byKey(const ValueKey('hajimete_review_stage')))
+          .height,
+      460,
+    );
     expect(find.byType(ConfidenceRatingWidget), findsOneWidget);
     expect(find.byType(EnhancedFlashcard), findsOneWidget);
   });
 
-
-  testWidgets('Hajimete review rating advances due queue and keeps stage locked', (
-    tester,
-  ) async {
-    final now = DateTime.now();
-    final item1 = _item(101, '????', 'N5');
-    final item2 = _item(102, '?????', 'N5');
-    final repo = _FakeVocabLessonRepository(
-      bank: {'N5': [item1, item2]},
-      srsStates: {
-        101: SrsStateData(
-          id: 1,
-          vocabId: 101,
-          box: 1,
-          repetitions: 1,
-          ease: 2.5,
-          stability: 1,
-          difficulty: 5,
-          lastConfidence: 3,
-          lastReviewedAt: now.subtract(const Duration(hours: 1)),
-          nextReviewAt: now.subtract(const Duration(minutes: 5)),
-        ),
-        102: SrsStateData(
-          id: 2,
-          vocabId: 102,
-          box: 1,
-          repetitions: 1,
-          ease: 2.5,
-          stability: 1,
-          difficulty: 5,
-          lastConfidence: 3,
-          lastReviewedAt: now.subtract(const Duration(hours: 1)),
-          nextReviewAt: now.subtract(const Duration(minutes: 4)),
-        ),
-      },
-    );
-    const detail = HajimeteChapterDetail(
-      levelCode: 'N5',
-      chapterId: 1,
-      title: 'Greetings',
-      entries: [
-        HajimeteChapterEntry(
+  testWidgets(
+    'Hajimete review rating advances due queue and keeps stage locked',
+    (tester) async {
+      final now = DateTime.now();
+      final item1 = _item(101, '????', 'N5');
+      final item2 = _item(102, '?????', 'N5');
+      final repo = _FakeVocabLessonRepository(
+        bank: {
+          'N5': [item1, item2],
+        },
+        srsStates: {
+          101: SrsStateData(
+            id: 1,
+            vocabId: 101,
+            box: 1,
+            repetitions: 1,
+            ease: 2.5,
+            stability: 1,
+            difficulty: 5,
+            lastConfidence: 3,
+            lastReviewedAt: now.subtract(const Duration(hours: 1)),
+            nextReviewAt: now.subtract(const Duration(minutes: 5)),
+          ),
+          102: SrsStateData(
+            id: 2,
+            vocabId: 102,
+            box: 1,
+            repetitions: 1,
+            ease: 2.5,
+            stability: 1,
+            difficulty: 5,
+            lastConfidence: 3,
+            lastReviewedAt: now.subtract(const Duration(hours: 1)),
+            nextReviewAt: now.subtract(const Duration(minutes: 4)),
+          ),
+        },
+      );
+      const detail = HajimeteChapterDetail(
+        levelCode: 'N5',
+        chapterId: 1,
+        title: 'Greetings',
+        entries: [
+          HajimeteChapterEntry(
+            term: '????',
+            reading: '????',
+            meaningVi: 'ch?o h?i',
+            meaningEn: 'greeting',
+          ),
+          HajimeteChapterEntry(
+            term: '?????',
+            reading: '?????',
+            meaningVi: 'c?m ?n',
+            meaningEn: 'thank you',
+          ),
+        ],
+      );
+      final userTerms = [
+        UserLessonTermData(
+          id: 101,
+          lessonId: -905001,
           term: '????',
           reading: '????',
-          meaningVi: 'ch?o h?i',
-          meaningEn: 'greeting',
+          definition: 'greeting',
+          definitionEn: 'greeting',
+          mnemonicVi: '',
+          mnemonicEn: '',
+          kanjiMeaning: '',
+          isStarred: false,
+          isLearned: true,
+          orderIndex: 1,
         ),
-        HajimeteChapterEntry(
+        UserLessonTermData(
+          id: 102,
+          lessonId: -905001,
           term: '?????',
           reading: '?????',
-          meaningVi: 'c?m ?n',
-          meaningEn: 'thank you',
+          definition: 'thank you',
+          definitionEn: 'thank you',
+          mnemonicVi: '',
+          mnemonicEn: '',
+          kanjiMeaning: '',
+          isStarred: false,
+          isLearned: true,
+          orderIndex: 2,
         ),
-      ],
-    );
-    final userTerms = [
-      UserLessonTermData(
-        id: 101,
-        lessonId: -905001,
-        term: '????',
-        reading: '????',
-        definition: 'greeting',
-        definitionEn: 'greeting',
-        mnemonicVi: '',
-        mnemonicEn: '',
-        kanjiMeaning: '',
-        isStarred: false,
-        isLearned: true,
-        orderIndex: 1,
-      ),
-      UserLessonTermData(
-        id: 102,
-        lessonId: -905001,
-        term: '?????',
-        reading: '?????',
-        definition: 'thank you',
-        definitionEn: 'thank you',
-        mnemonicVi: '',
-        mnemonicEn: '',
-        kanjiMeaning: '',
-        isStarred: false,
-        isLearned: true,
-        orderIndex: 2,
-      ),
-    ];
+      ];
 
-    await tester.pumpWidget(
-      ProviderScope(
-        overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-          lessonRepositoryProvider.overrideWithValue(repo),
-          hajimeteChapterDetailProvider.overrideWith((ref, arg) async => detail),
-          hajimeteChapterItemsProvider.overrideWith((ref, arg) async => [item1, item2]),
-          hajimeteChapterUserTermsProvider.overrideWith((ref, arg) async => userTerms),
-          hajimeteKanjiChapterProvider.overrideWith((ref, arg) async => null),
-        ],
-        child: const MaterialApp(
-          home: HajimeteChapterDetailScreen(
-            levelCode: 'N5',
-            chapterId: 1,
-            laneTitle: 'Hajimete no Nihongo Tango',
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+            lessonRepositoryProvider.overrideWithValue(repo),
+            hajimeteChapterDetailProvider.overrideWith(
+              (ref, arg) async => detail,
+            ),
+            hajimeteChapterItemsProvider.overrideWith(
+              (ref, arg) async => [item1, item2],
+            ),
+            hajimeteChapterUserTermsProvider.overrideWith(
+              (ref, arg) async => userTerms,
+            ),
+            hajimeteKanjiChapterProvider.overrideWith((ref, arg) async => null),
+          ],
+          child: const MaterialApp(
+            home: HajimeteChapterDetailScreen(
+              levelCode: 'N5',
+              chapterId: 1,
+              laneTitle: 'Hajimete no Nihongo Tango',
+            ),
           ),
         ),
-      ),
-    );
+      );
 
-    await _pumpCatalog(tester);
-    await tester.tap(find.text('Review now'));
-    await tester.pumpAndSettle();
+      await _pumpCatalog(tester);
+      await tester.tap(find.text('Review now'));
+      await tester.pumpAndSettle();
 
-    expect(find.byKey(const ValueKey('hajimete_review_stage')), findsOneWidget);
-    expect(find.byKey(const ValueKey('hajimete_card_review_101_hint')), findsOneWidget);
+      expect(
+        find.byKey(const ValueKey('hajimete_review_stage')),
+        findsOneWidget,
+      );
+      expect(
+        find.byKey(const ValueKey('hajimete_card_review_101_hint')),
+        findsOneWidget,
+      );
 
-    final goodButton = find.descendant(
-      of: find.byType(ConfidenceRatingWidget),
-      matching: find.text('Good'),
-    );
-    await tester.ensureVisible(goodButton);
-    await tester.tap(goodButton, warnIfMissed: false);
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 350));
-    await tester.pumpAndSettle();
+      final goodButton = find.descendant(
+        of: find.byType(ConfidenceRatingWidget),
+        matching: find.text('Good'),
+      );
+      await tester.ensureVisible(goodButton);
+      await tester.tap(goodButton, warnIfMissed: false);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 350));
+      await tester.pumpAndSettle();
 
-    expect(find.byKey(const ValueKey('hajimete_review_stage')), findsOneWidget);
-    expect(find.byType(ConfidenceRatingWidget), findsOneWidget);
-    expect(find.byKey(const ValueKey('hajimete_card_review_102_hint')), findsOneWidget);
-  });
+      expect(
+        find.byKey(const ValueKey('hajimete_review_stage')),
+        findsOneWidget,
+      );
+      expect(find.byType(ConfidenceRatingWidget), findsOneWidget);
+      expect(
+        find.byKey(const ValueKey('hajimete_card_review_102_hint')),
+        findsOneWidget,
+      );
+    },
+  );
 
   testWidgets(
     'Hajimete core lane loads series terms even when due queue is empty',
@@ -1044,7 +1119,8 @@ void main() {
                 levelCode: 'N5',
                 series: 'hajimete',
                 title: 'Hajimete no Nihongo Tango N5',
-                subtitle: 'Chapter-based Hajimete track for N5 with seeded catalog data.',
+                subtitle:
+                    'Chapter-based Hajimete track for N5 with seeded catalog data.',
               ),
               sessionTitle: 'Hajimete no Nihongo Tango N5',
               sessionSubtitle:

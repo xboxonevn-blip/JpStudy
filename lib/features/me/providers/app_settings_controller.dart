@@ -52,11 +52,15 @@ class AppSettingsController extends Notifier<AppSettingsState> {
   Timer? _inAppReminderTimer;
   SharedPreferences? _prefs;
   BuildContext? _hostContext;
+  bool _disposed = false;
 
   @override
   AppSettingsState build() {
+    _disposed = false;
     ref.onDispose(() {
+      _disposed = true;
       _inAppReminderTimer?.cancel();
+      _hostContext = null;
     });
     return const AppSettingsState();
   }
@@ -88,6 +92,9 @@ class AppSettingsController extends Notifier<AppSettingsState> {
 
   Future<void> refresh() async {
     final prefs = await _ensurePrefs();
+    if (_disposed) {
+      return;
+    }
     state = state.copyWith(
       isReady: true,
       reminderEnabled: prefs.getBool(_prefDailyReminder) ?? false,
@@ -165,7 +172,7 @@ class AppSettingsController extends Notifier<AppSettingsState> {
 
   void _scheduleInAppReminder() {
     _inAppReminderTimer?.cancel();
-    if (!state.reminderEnabled) {
+    if (_disposed || !state.reminderEnabled) {
       return;
     }
 
@@ -176,10 +183,16 @@ class AppSettingsController extends Notifier<AppSettingsState> {
 
   Future<void> _handleInAppReminder() async {
     final prefs = await _ensurePrefs();
+    if (_disposed) {
+      return;
+    }
     final todayKey = _dateKey(DateTime.now());
     final lastShown = prefs.getString(_prefDailyReminderLast);
     if (lastShown != todayKey) {
       await prefs.setString(_prefDailyReminderLast, todayKey);
+      if (_disposed) {
+        return;
+      }
       _showSnackBar(_hostContext, ref.read(appLanguageProvider).reminderBody);
     }
     _scheduleInAppReminder();

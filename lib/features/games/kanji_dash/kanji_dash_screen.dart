@@ -14,6 +14,7 @@ import 'package:jpstudy/data/repositories/content_repository.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/games/providers/game_vocab_pool_provider.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
+import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 import 'package:jpstudy/features/mistakes/repositories/mistake_repository.dart';
 
 class KanjiDashScreen extends ConsumerStatefulWidget {
@@ -29,11 +30,32 @@ class _KanjiDashScreenState extends ConsumerState<KanjiDashScreen> {
   int _score = 0;
   bool _isGameActive = false;
   bool _isGameOver = false;
+  bool _reduceMotion = false;
+  bool _motionPreferenceInitialized = false;
 
   VocabItem? _currentQuestion;
   List<String> _options = [];
   List<VocabItem> _vocabPool = [];
   final Map<int, int?> _resolvedTermIdByContentId = {};
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _syncMotionPreference();
+  }
+
+  void _syncMotionPreference() {
+    final reduceMotion = reducedMotionEnabled(context);
+    if (_motionPreferenceInitialized && _reduceMotion == reduceMotion) {
+      return;
+    }
+    _motionPreferenceInitialized = true;
+    final shouldRestartTimer = _isGameActive && _reduceMotion != reduceMotion;
+    _reduceMotion = reduceMotion;
+    if (shouldRestartTimer) {
+      _startTimer();
+    }
+  }
 
   @override
   void dispose() {
@@ -64,13 +86,28 @@ class _KanjiDashScreenState extends ConsumerState<KanjiDashScreen> {
 
   void _startTimer() {
     _timer?.cancel();
-    _timer = Timer.periodic(const Duration(milliseconds: 50), (timer) {
+    final tickDuration = _reduceMotion
+        ? const Duration(seconds: 1)
+        : const Duration(milliseconds: 50);
+    final tickSeconds =
+        tickDuration.inMilliseconds / Duration.millisecondsPerSecond;
+
+    _timer = Timer.periodic(tickDuration, (timer) {
+      if (!mounted || !_isGameActive) {
+        timer.cancel();
+        return;
+      }
+
+      final nextTime = (_timeLeft - tickSeconds)
+          .clamp(0.0, double.infinity)
+          .toDouble();
       setState(() {
-        _timeLeft -= 0.05;
-        if (_timeLeft <= 0) {
-          _endGame();
-        }
+        _timeLeft = nextTime;
       });
+
+      if (nextTime <= 0) {
+        _endGame();
+      }
     });
   }
 
@@ -223,7 +260,11 @@ class _KanjiDashScreenState extends ConsumerState<KanjiDashScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.flash_on, size: 80, color: context.appPalette.warning),
+                Icon(
+                  Icons.flash_on,
+                  size: 80,
+                  color: context.appPalette.warning,
+                ),
                 const SizedBox(height: 24),
                 Text(
                   language.kanjiDashTitle,
@@ -272,7 +313,9 @@ class _KanjiDashScreenState extends ConsumerState<KanjiDashScreen> {
             value: progress,
             backgroundColor: context.appPalette.outline,
             valueColor: AlwaysStoppedAnimation(
-              progress > 0.3 ? context.appPalette.success : context.appPalette.error,
+              progress > 0.3
+                  ? context.appPalette.success
+                  : context.appPalette.error,
             ),
           ),
         ),
@@ -285,7 +328,9 @@ class _KanjiDashScreenState extends ConsumerState<KanjiDashScreen> {
                 '${language.kanjiDashTime}: ${_timeLeft.toStringAsFixed(1)}s',
                 style: theme.textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.w700,
-                  color: progress > 0.3 ? context.appPalette.success : context.appPalette.error,
+                  color: progress > 0.3
+                      ? context.appPalette.success
+                      : context.appPalette.error,
                 ),
               ),
               Text(
@@ -393,5 +438,4 @@ class _KanjiDashScreenState extends ConsumerState<KanjiDashScreen> {
       ),
     );
   }
-
 }

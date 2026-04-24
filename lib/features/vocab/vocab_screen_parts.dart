@@ -246,6 +246,7 @@ class _VocabTodaySection extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final recommended = home.recommendedTrack;
+    final selectedCompanion = home.selectedCompanionTrack;
     final reviewArgs = VocabReviewArgs(
       source: 'today',
       levelCode: home.selectedLevelCode,
@@ -294,26 +295,12 @@ class _VocabTodaySection extends ConsumerWidget {
                 icon: const Icon(Icons.play_arrow_rounded),
                 label: Text(_reviewNowLabel(language)),
               ),
-              if (recommended != null && recommended.isCompanion)
+              if (selectedCompanion != null)
                 OutlinedButton.icon(
                   key: const ValueKey('vocab_today_companion_cta'),
-                  onPressed: () => _openCompanion(context, recommended),
+                  onPressed: () => _openCompanion(context, selectedCompanion),
                   icon: const Icon(Icons.menu_book_rounded),
-                  label: Text(recommended.title),
-                )
-              else if (home.liveTracks.any((track) => track.isCompanion))
-                OutlinedButton.icon(
-                  key: const ValueKey('vocab_today_companion_cta'),
-                  onPressed: () => _openCompanion(
-                    context,
-                    home.liveTracks.firstWhere(
-                      (track) =>
-                          track.levelCode == home.selectedLevelCode &&
-                          track.isCompanion,
-                    ),
-                  ),
-                  icon: const Icon(Icons.menu_book_rounded),
-                  label: Text(_companionShortcutLabel(language)),
+                  label: Text(selectedCompanion.title),
                 ),
             ],
           ),
@@ -839,7 +826,10 @@ class _CoreProgramCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(26),
       child: AnimatedOpacity(
         opacity: enabled ? 1 : 0.9,
-        duration: const Duration(milliseconds: 180),
+        duration: reducedMotionDuration(
+          context,
+          const Duration(milliseconds: 180),
+        ),
         child: Container(
           padding: const EdgeInsets.all(6),
           decoration: BoxDecoration(
@@ -1013,7 +1003,10 @@ class _CompanionProgramCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(24),
       child: AnimatedOpacity(
         opacity: enabled ? 1 : 0.9,
-        duration: const Duration(milliseconds: 180),
+        duration: reducedMotionDuration(
+          context,
+          const Duration(milliseconds: 180),
+        ),
         child: Container(
           decoration: BoxDecoration(
             color: palette.elevated,

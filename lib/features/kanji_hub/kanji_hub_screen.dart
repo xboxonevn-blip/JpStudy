@@ -7,6 +7,7 @@ import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/app/theme/app_breakpoints.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
+import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
@@ -61,6 +62,7 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
     }
     _maybeOpenInitialKanji();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
       final initLevel = ref.read(studyLevelProvider) ?? StudyLevel.n5;
       setState(() {
         _selectedLevel = initLevel;
@@ -271,7 +273,10 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
                     if (ctx != null) {
                       Scrollable.ensureVisible(
                         ctx,
-                        duration: const Duration(milliseconds: 350),
+                        duration: reducedMotionDuration(
+                          context,
+                          const Duration(milliseconds: 350),
+                        ),
                         curve: Curves.easeOut,
                         alignmentPolicy:
                             ScrollPositionAlignmentPolicy.keepVisibleAtStart,

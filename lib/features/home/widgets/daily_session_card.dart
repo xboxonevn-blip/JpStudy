@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
+import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 import 'package:jpstudy/core/services/recovery_pack_service.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
@@ -60,6 +61,15 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
   void dispose() {
     _completionController.dispose();
     super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (reducedMotionEnabled(context) && _completionController.isAnimating) {
+      _completionController.stop();
+      _completionController.value = 1;
+    }
   }
 
   @override
@@ -389,7 +399,11 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
   void _maybeAwardDailyBonus(int completionPercent) {
     if (completionPercent >= 100 && !_dailyBonusAwarded) {
       _dailyBonusAwarded = true;
-      _completionController.forward();
+      if (reducedMotionEnabled(context)) {
+        _completionController.value = 1;
+      } else {
+        _completionController.forward();
+      }
       final repo = ref.read(lessonRepositoryProvider);
       repo.recordStudyActivity(xpDelta: 25);
     }
@@ -966,9 +980,7 @@ class _CoachStep extends StatelessWidget {
                 Text(
                   target,
                   style: TextStyle(
-                    color: done
-                        ? const Color(0xFFBBF7D0)
-                        : palette.outline,
+                    color: done ? const Color(0xFFBBF7D0) : palette.outline,
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
                     decoration: done ? TextDecoration.lineThrough : null,
@@ -1068,9 +1080,7 @@ class _BackupStatusLine extends ConsumerWidget {
             : language.autoBackupLastLabel(
                 material.formatMediumDate(status.lastBackupAt!),
               );
-        final color = status.isStale
-            ? palette.error
-            : const Color(0xFFBBF7D0);
+        final color = status.isStale ? palette.error : const Color(0xFFBBF7D0);
         final iconColor = status.isStale
             ? const Color(0xFFF87171)
             : const Color(0xFF4ADE80);

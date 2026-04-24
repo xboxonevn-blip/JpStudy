@@ -1,9 +1,10 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/layout/app_responsive_frame.dart';
 import 'package:jpstudy/app/theme/app_breakpoints.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
+import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/features/common/widgets/global_top_bar.dart';
@@ -31,8 +32,12 @@ class AppShellScaffold extends ConsumerWidget {
                   const GlobalTopBar(),
                   Expanded(
                     child: AppResponsiveFrame(
-                      maxWidth: AppResponsiveMetrics.shellMaxWidth(constraints.maxWidth),
-                      desktopHorizontalPadding: AppResponsiveMetrics.pageGutter(constraints.maxWidth),
+                      maxWidth: AppResponsiveMetrics.shellMaxWidth(
+                        constraints.maxWidth,
+                      ),
+                      desktopHorizontalPadding: AppResponsiveMetrics.pageGutter(
+                        constraints.maxWidth,
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(0, 14, 0, 14),
                         child: Row(
@@ -43,7 +48,11 @@ class AppShellScaffold extends ConsumerWidget {
                               onTap: _goToBranch,
                             ),
                             const SizedBox(width: 18),
-                            Expanded(child: _ShellBody(navigationShell: navigationShell)),
+                            Expanded(
+                              child: _ShellBody(
+                                navigationShell: navigationShell,
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -118,7 +127,9 @@ class AppShellScaffold extends ConsumerWidget {
                       ),
                     NavigationDestination(
                       icon: const Icon(Icons.dashboard_customize_outlined),
-                      selectedIcon: const Icon(Icons.dashboard_customize_rounded),
+                      selectedIcon: const Icon(
+                        Icons.dashboard_customize_rounded,
+                      ),
                       label: _moreLabel(language),
                     ),
                   ],
@@ -147,7 +158,9 @@ class AppShellScaffold extends ConsumerWidget {
               final branchIndex = [1, 2, 5, 7, 8, 9][index];
               final item = items[branchIndex];
               return ListTile(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18),
+                ),
                 leading: Icon(item.selectedIcon),
                 title: Text(item.label),
                 onTap: () {
@@ -171,16 +184,56 @@ class AppShellScaffold extends ConsumerWidget {
 
   List<_ShellItem> _buildItems(AppLanguage language) {
     return [
-      _ShellItem(label: _kanji(language), icon: Icons.grid_view_outlined, selectedIcon: Icons.grid_view_rounded),
-      _ShellItem(label: _vocab(language), icon: Icons.translate_outlined, selectedIcon: Icons.translate_rounded),
-      _ShellItem(label: _grammar(language), icon: Icons.account_tree_outlined, selectedIcon: Icons.account_tree_rounded),
-      _ShellItem(label: _roadmap(language), icon: Icons.route_outlined, selectedIcon: Icons.route_rounded),
-      _ShellItem(label: _memory(language), icon: Icons.psychology_alt_outlined, selectedIcon: Icons.psychology_alt_rounded),
-      _ShellItem(label: _active(language), icon: Icons.bolt_outlined, selectedIcon: Icons.bolt_rounded),
-      _ShellItem(label: _exam(language), icon: Icons.fact_check_outlined, selectedIcon: Icons.fact_check_rounded),
-      _ShellItem(label: _leaderboard(language), icon: Icons.emoji_events_outlined, selectedIcon: Icons.emoji_events_rounded),
-      _ShellItem(label: _upgrade(language), icon: Icons.diamond_outlined, selectedIcon: Icons.diamond_rounded),
-      _ShellItem(label: _community(language), icon: Icons.forum_outlined, selectedIcon: Icons.forum_rounded),
+      _ShellItem(
+        label: _kanji(language),
+        icon: Icons.grid_view_outlined,
+        selectedIcon: Icons.grid_view_rounded,
+      ),
+      _ShellItem(
+        label: _vocab(language),
+        icon: Icons.translate_outlined,
+        selectedIcon: Icons.translate_rounded,
+      ),
+      _ShellItem(
+        label: _grammar(language),
+        icon: Icons.account_tree_outlined,
+        selectedIcon: Icons.account_tree_rounded,
+      ),
+      _ShellItem(
+        label: _roadmap(language),
+        icon: Icons.route_outlined,
+        selectedIcon: Icons.route_rounded,
+      ),
+      _ShellItem(
+        label: _memory(language),
+        icon: Icons.psychology_alt_outlined,
+        selectedIcon: Icons.psychology_alt_rounded,
+      ),
+      _ShellItem(
+        label: _active(language),
+        icon: Icons.bolt_outlined,
+        selectedIcon: Icons.bolt_rounded,
+      ),
+      _ShellItem(
+        label: _exam(language),
+        icon: Icons.fact_check_outlined,
+        selectedIcon: Icons.fact_check_rounded,
+      ),
+      _ShellItem(
+        label: _leaderboard(language),
+        icon: Icons.emoji_events_outlined,
+        selectedIcon: Icons.emoji_events_rounded,
+      ),
+      _ShellItem(
+        label: _upgrade(language),
+        icon: Icons.diamond_outlined,
+        selectedIcon: Icons.diamond_rounded,
+      ),
+      _ShellItem(
+        label: _community(language),
+        icon: Icons.forum_outlined,
+        selectedIcon: Icons.forum_rounded,
+      ),
     ];
   }
 }
@@ -234,7 +287,10 @@ class _Sidebar extends StatelessWidget {
                       end: Alignment.bottomRight,
                     ),
                   ),
-                  child: const Icon(Icons.auto_stories_rounded, color: Colors.white),
+                  child: const Icon(
+                    Icons.auto_stories_rounded,
+                    color: Colors.white,
+                  ),
                 ),
                 const SizedBox(height: 12),
                 Text(
@@ -260,26 +316,44 @@ class _Sidebar extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                   onTap: () => onTap(index),
                   child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 180),
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                    duration: reducedMotionDuration(
+                      context,
+                      const Duration(milliseconds: 180),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 12,
+                    ),
                     decoration: BoxDecoration(
-                      color: selected ? palette.primary.withValues(alpha: 0.14) : Colors.transparent,
+                      color: selected
+                          ? palette.primary.withValues(alpha: 0.14)
+                          : Colors.transparent,
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(
-                        color: selected ? palette.primary.withValues(alpha: 0.28) : Colors.transparent,
+                        color: selected
+                            ? palette.primary.withValues(alpha: 0.28)
+                            : Colors.transparent,
                       ),
                     ),
                     child: Column(
                       children: [
-                        Icon(selected ? item.selectedIcon : item.icon, color: selected ? palette.primary : palette.ink.withValues(alpha: 0.72)),
+                        Icon(
+                          selected ? item.selectedIcon : item.icon,
+                          color: selected
+                              ? palette.primary
+                              : palette.ink.withValues(alpha: 0.72),
+                        ),
                         const SizedBox(height: 6),
                         Text(
                           item.label,
                           textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                            fontWeight: FontWeight.w800,
-                            color: selected ? palette.primary : palette.ink.withValues(alpha: 0.72),
-                          ),
+                          style: Theme.of(context).textTheme.labelMedium
+                              ?.copyWith(
+                                fontWeight: FontWeight.w800,
+                                color: selected
+                                    ? palette.primary
+                                    : palette.ink.withValues(alpha: 0.72),
+                              ),
                         ),
                       ],
                     ),
@@ -387,7 +461,11 @@ String _moreLabel(AppLanguage language) => switch (language) {
 };
 
 class _ShellItem {
-  const _ShellItem({required this.label, required this.icon, required this.selectedIcon});
+  const _ShellItem({
+    required this.label,
+    required this.icon,
+    required this.selectedIcon,
+  });
 
   final String label;
   final IconData icon;

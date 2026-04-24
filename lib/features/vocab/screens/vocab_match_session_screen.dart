@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
+import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/features/common/widgets/clay_button.dart';
@@ -11,10 +12,7 @@ import 'package:jpstudy/features/games/match_game/logic/match_engine.dart';
 import 'package:jpstudy/features/vocab/models/vocab_match_session_args.dart';
 
 class VocabMatchSessionScreen extends ConsumerStatefulWidget {
-  const VocabMatchSessionScreen({
-    super.key,
-    required this.args,
-  });
+  const VocabMatchSessionScreen({super.key, required this.args});
 
   final VocabMatchSessionArgs args;
 
@@ -64,9 +62,9 @@ class _VocabMatchSessionScreenState
         children: [
           Text(
             _matchIntroTitle(language),
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.w900,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w900),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 12),
@@ -92,9 +90,9 @@ class _VocabMatchSessionScreenState
       children: [
         Text(
           _matchTimerLabel(language, _seconds),
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w800,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
         ),
         const SizedBox(height: 16),
         Expanded(
@@ -116,7 +114,10 @@ class _VocabMatchSessionScreenState
                 onTap: () => _onTap(card),
                 borderRadius: BorderRadius.circular(20),
                 child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 180),
+                  duration: reducedMotionDuration(
+                    context,
+                    const Duration(milliseconds: 180),
+                  ),
                   decoration: BoxDecoration(
                     color: matched
                         ? context.appPalette.success.withValues(alpha: 0.10)
@@ -163,9 +164,9 @@ class _VocabMatchSessionScreenState
         children: [
           Text(
             _matchDoneTitle(language),
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.w900,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w900),
           ),
           const SizedBox(height: 12),
           Text(_matchTimerLabel(language, _seconds)),
@@ -256,10 +257,15 @@ String _matchIntroTitle(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Match the term with its meaning',
 };
 
-String _matchIntroSubtitle(AppLanguage language, int count) => switch (language) {
-  AppLanguage.vi => 'Session này lấy từ chapter hiện tại với $count từ để luyện nhanh.',
+String _matchIntroSubtitle(
+  AppLanguage language,
+  int count,
+) => switch (language) {
+  AppLanguage.vi =>
+    'Session này lấy từ chapter hiện tại với $count từ để luyện nhanh.',
   AppLanguage.ja => 'このセッションでは現在のチャプターから $count 語を使って練習します。',
-  AppLanguage.en => 'This session uses the current chapter and pulls from $count terms for a quick match round.',
+  AppLanguage.en =>
+    'This session uses the current chapter and pulls from $count terms for a quick match round.',
 };
 
 String _startMatchLabel(AppLanguage language) => switch (language) {
@@ -268,11 +274,12 @@ String _startMatchLabel(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Start match',
 };
 
-String _matchTimerLabel(AppLanguage language, int seconds) => switch (language) {
-  AppLanguage.vi => 'Thời gian: ${seconds}s',
-  AppLanguage.ja => '時間: ${seconds}s',
-  AppLanguage.en => 'Time: ${seconds}s',
-};
+String _matchTimerLabel(AppLanguage language, int seconds) =>
+    switch (language) {
+      AppLanguage.vi => 'Thời gian: ${seconds}s',
+      AppLanguage.ja => '時間: ${seconds}s',
+      AppLanguage.en => 'Time: ${seconds}s',
+    };
 
 String _matchDoneTitle(AppLanguage language) => switch (language) {
   AppLanguage.vi => 'Hoàn thành vòng match',

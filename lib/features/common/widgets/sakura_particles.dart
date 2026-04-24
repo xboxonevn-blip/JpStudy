@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 
 const _testFrameProgress = 0.35;
 bool get _isWidgetTestBinding => WidgetsBinding.instance.runtimeType
@@ -19,6 +20,8 @@ class _SakuraParticlesState extends State<SakuraParticles>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late List<_Petal> _petals;
+  bool _reduceMotion = false;
+  bool _motionPreferenceInitialized = false;
 
   @override
   void initState() {
@@ -30,9 +33,12 @@ class _SakuraParticlesState extends State<SakuraParticles>
       duration: const Duration(seconds: 10),
       value: isWidgetTest ? _testFrameProgress : 0,
     );
-    if (!isWidgetTest) {
-      _controller.repeat();
-    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _syncMotionPreference();
   }
 
   @override
@@ -40,6 +46,21 @@ class _SakuraParticlesState extends State<SakuraParticles>
     super.didUpdateWidget(oldWidget);
     if (oldWidget.petalCount != widget.petalCount) {
       _seedPetals();
+    }
+  }
+
+  void _syncMotionPreference() {
+    final reduceMotion = reducedMotionEnabled(context);
+    if (_motionPreferenceInitialized && _reduceMotion == reduceMotion) {
+      return;
+    }
+    _motionPreferenceInitialized = true;
+    _reduceMotion = reduceMotion;
+    if (_reduceMotion || _isWidgetTestBinding) {
+      _controller.stop();
+      _controller.value = _isWidgetTestBinding ? _testFrameProgress : 0;
+    } else if (!_controller.isAnimating) {
+      _controller.repeat();
     }
   }
 
@@ -56,8 +77,7 @@ class _SakuraParticlesState extends State<SakuraParticles>
 
   @override
   Widget build(BuildContext context) {
-    final reducedMotion = MediaQuery.of(context).disableAnimations;
-    if (reducedMotion) return const SizedBox.shrink();
+    if (_reduceMotion) return const SizedBox.shrink();
     if (_isWidgetTestBinding) {
       return IgnorePointer(
         child: CustomPaint(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
+import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 import 'dart:async';
 
 import '../../../data/models/vocab_item.dart';
@@ -256,9 +257,7 @@ class _LessonMatchScreenState extends ConsumerState<LessonMatchScreen> {
           const SizedBox(height: 8),
           Text(
             language.learnTermsAvailableLabel(items.length),
-            style: Theme.of(
-              context,
-            ).textTheme.bodyLarge?.copyWith(
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
               color: context.appPalette.ink.withValues(alpha: 0.55),
             ),
           ),
@@ -281,7 +280,11 @@ class _LessonMatchScreenState extends ConsumerState<LessonMatchScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.emoji_events_rounded, size: 64, color: context.appPalette.warning),
+          Icon(
+            Icons.emoji_events_rounded,
+            size: 64,
+            color: context.appPalette.warning,
+          ),
           const SizedBox(height: 16),
           Text(
             language.timeSecondsLabel(_secondsElapsed),
@@ -291,9 +294,7 @@ class _LessonMatchScreenState extends ConsumerState<LessonMatchScreen> {
             language.maxComboLabel(_maxCombo),
             style: Theme.of(
               context,
-            ).textTheme.titleLarge?.copyWith(
-              color: context.appPalette.primary,
-            ),
+            ).textTheme.titleLarge?.copyWith(color: context.appPalette.primary),
           ),
           const SizedBox(height: 24),
           ClayButton(
@@ -322,7 +323,10 @@ class _LessonMatchScreenState extends ConsumerState<LessonMatchScreen> {
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: AnimatedScale(
               scale: 1.0 + (_combo * 0.1).clamp(0.0, 0.5),
-              duration: const Duration(milliseconds: 200),
+              duration: reducedMotionDuration(
+                context,
+                const Duration(milliseconds: 200),
+              ),
               child: Text(
                 language.comboLabel(_combo),
                 style: TextStyle(
@@ -370,7 +374,10 @@ class _LessonMatchScreenState extends ConsumerState<LessonMatchScreen> {
     return GestureDetector(
       onTap: () => _onCardTap(card),
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+        duration: reducedMotionDuration(
+          context,
+          const Duration(milliseconds: 200),
+        ),
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(8),

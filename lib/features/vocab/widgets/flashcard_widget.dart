@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
+import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/data/models/vocab_item.dart';
 
@@ -45,6 +46,14 @@ class _FlashcardWidgetState extends State<FlashcardWidget>
   }
 
   void _flipCard() {
+    if (reducedMotionEnabled(context)) {
+      setState(() {
+        _isFront = !_isFront;
+        _controller.value = _isFront ? 0 : 1;
+      });
+      widget.onFlip?.call();
+      return;
+    }
     if (_isFront) {
       _controller.forward();
     } else {
@@ -56,6 +65,13 @@ class _FlashcardWidgetState extends State<FlashcardWidget>
 
   @override
   Widget build(BuildContext context) {
+    if (reducedMotionEnabled(context)) {
+      return GestureDetector(
+        onTap: _flipCard,
+        child: _isFront ? _buildFront() : _buildBack(),
+      );
+    }
+
     return GestureDetector(
       onTap: _flipCard,
       child: AnimatedBuilder(
@@ -89,10 +105,7 @@ class _FlashcardWidgetState extends State<FlashcardWidget>
       decoration: BoxDecoration(
         color: context.appPalette.elevated,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(
-          color: context.appPalette.outline,
-          width: 3,
-        ),
+        border: Border.all(color: context.appPalette.outline, width: 3),
         boxShadow: [
           BoxShadow(
             color: context.appPalette.outline,
@@ -140,9 +153,9 @@ class _FlashcardWidgetState extends State<FlashcardWidget>
               const SizedBox(height: 16),
               Text(
                 widget.language.tapToFlipLabel,
-                style: Theme.of(
-                  context,
-                ).textTheme.bodySmall?.copyWith(color: context.appPalette.ink.withValues(alpha: 0.55)),
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: context.appPalette.ink.withValues(alpha: 0.55),
+                ),
               ),
             ],
           ),

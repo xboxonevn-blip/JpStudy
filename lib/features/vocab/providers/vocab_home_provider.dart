@@ -47,7 +47,16 @@ class VocabHomeSection {
         return track;
       }
     }
-    return liveTracks.isEmpty ? null : liveTracks.first;
+    return null;
+  }
+
+  VocabTrackSummary? get selectedCompanionTrack {
+    for (final track in liveTracks) {
+      if (track.levelCode == selectedLevelCode && track.isCompanion) {
+        return track;
+      }
+    }
+    return null;
   }
 }
 

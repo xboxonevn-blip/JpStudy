@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
+import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/study_goal.dart';
@@ -10,15 +11,6 @@ import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/common/widgets/clay_button.dart';
 import 'package:jpstudy/features/common/widgets/japanese_background.dart';
-
-/// Returns [Duration.zero] when the user has requested reduced motion
-/// (OS-level accessibility setting), otherwise returns [normal].
-///
-/// Applied to short AnimatedContainer tweens inside this screen so the
-/// onboarding visuals don't cross-fade/resize for users who have disabled
-/// animations system-wide.
-Duration _onboardingAnimDuration(BuildContext context, Duration normal) =>
-    MediaQuery.of(context).disableAnimations ? Duration.zero : normal;
 
 class OnboardingScreen extends ConsumerStatefulWidget {
   const OnboardingScreen({super.key, required this.onComplete});
@@ -37,6 +29,10 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
 
   void _goToPage(int page) {
     setState(() => _currentPage = page);
+    if (reducedMotionEnabled(context)) {
+      _controller.jumpToPage(page);
+      return;
+    }
     _controller.animateToPage(
       page,
       duration: const Duration(milliseconds: 300),
@@ -112,7 +108,7 @@ class _ProgressDots extends StatelessWidget {
       children: List.generate(total, (i) {
         final active = i == current;
         return AnimatedContainer(
-          duration: _onboardingAnimDuration(
+          duration: reducedMotionDuration(
             context,
             const Duration(milliseconds: 200),
           ),
@@ -120,7 +116,9 @@ class _ProgressDots extends StatelessWidget {
           width: active ? 24 : 8,
           height: 8,
           decoration: BoxDecoration(
-            color: active ? context.appPalette.primary : context.appPalette.outline,
+            color: active
+                ? context.appPalette.primary
+                : context.appPalette.outline,
             borderRadius: BorderRadius.circular(4),
           ),
         );
@@ -152,7 +150,10 @@ class _LevelPage extends StatelessWidget {
         const SizedBox(height: AppSpacing.sm),
         Text(
           language.onboardingWelcomeSubtitle,
-          style: TextStyle(fontSize: 15, color: context.appPalette.ink.withValues(alpha: 0.55)),
+          style: TextStyle(
+            fontSize: 15,
+            color: context.appPalette.ink.withValues(alpha: 0.55),
+          ),
         ),
         const SizedBox(height: AppSpacing.xxl),
         Text(
@@ -212,7 +213,9 @@ class _OnboardingLevelCard extends StatelessWidget {
         ),
         subtitle: Text(
           level.description(language),
-          style: TextStyle(color: context.appPalette.ink.withValues(alpha: 0.55)),
+          style: TextStyle(
+            color: context.appPalette.ink.withValues(alpha: 0.55),
+          ),
         ),
         trailing: const Icon(Icons.chevron_right),
         onTap: () => onSelected(level),
@@ -306,7 +309,7 @@ class _GoalCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
-        duration: _onboardingAnimDuration(
+        duration: reducedMotionDuration(
           context,
           const Duration(milliseconds: 150),
         ),
@@ -318,7 +321,9 @@ class _GoalCard extends StatelessWidget {
               : context.appPalette.elevated,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: isSelected ? context.appPalette.primary : context.appPalette.outline,
+            color: isSelected
+                ? context.appPalette.primary
+                : context.appPalette.outline,
             width: isSelected ? 2 : 1,
           ),
         ),
@@ -333,10 +338,7 @@ class _GoalCard extends StatelessWidget {
                     : context.appPalette.primary.withValues(alpha: 0.10),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Icon(
-                goal.icon,
-                color: context.appPalette.primary,
-              ),
+              child: Icon(goal.icon, color: context.appPalette.primary),
             ),
             const SizedBox(width: AppSpacing.md),
             Expanded(
@@ -347,7 +349,9 @@ class _GoalCard extends StatelessWidget {
                     goal.label(language),
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      color: isSelected ? context.appPalette.primary : context.appPalette.ink,
+                      color: isSelected
+                          ? context.appPalette.primary
+                          : context.appPalette.ink,
                     ),
                   ),
                   Text(
@@ -465,7 +469,9 @@ class _FirstWinPageState extends ConsumerState<_FirstWinPage> {
                       width: double.infinity,
                       padding: const EdgeInsets.all(AppSpacing.md),
                       decoration: BoxDecoration(
-                        color: context.appPalette.primary.withValues(alpha: 0.06),
+                        color: context.appPalette.primary.withValues(
+                          alpha: 0.06,
+                        ),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Text(
@@ -517,7 +523,9 @@ class _FirstWinPageState extends ConsumerState<_FirstWinPage> {
                           key: const ValueKey('onboarding_first_win_hint'),
                           style: TextStyle(
                             fontSize: 12,
-                            color: context.appPalette.ink.withValues(alpha: 0.55),
+                            color: context.appPalette.ink.withValues(
+                              alpha: 0.55,
+                            ),
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -681,7 +689,9 @@ class _PreviewQuestionCard extends StatelessWidget {
             const SizedBox(height: 4),
             Text(
               target.reading ?? '',
-              style: TextStyle(color: context.appPalette.ink.withValues(alpha: 0.55)),
+              style: TextStyle(
+                color: context.appPalette.ink.withValues(alpha: 0.55),
+              ),
             ),
           ],
           const SizedBox(height: AppSpacing.lg),
@@ -704,7 +714,9 @@ class _PreviewQuestionCard extends StatelessWidget {
                   ? _successLabel(language)
                   : _answerLabel(language, options.first),
               style: TextStyle(
-                color: isCorrect ? context.appPalette.success : context.appPalette.ink.withValues(alpha: 0.55),
+                color: isCorrect
+                    ? context.appPalette.success
+                    : context.appPalette.ink.withValues(alpha: 0.55),
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -785,7 +797,7 @@ class _PreviewOptionTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
-        duration: _onboardingAnimDuration(
+        duration: reducedMotionDuration(
           context,
           const Duration(milliseconds: 150),
         ),

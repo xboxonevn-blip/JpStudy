@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../../../app/theme/app_theme_palette.dart';
+import '../../../core/accessibility/reduced_motion.dart';
 import '../../../core/app_language.dart';
 import '../../../data/models/vocab_item.dart';
 
@@ -105,7 +106,10 @@ class _EnhancedFlashcardState extends State<EnhancedFlashcard> {
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 20, 20, 56),
             child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 320),
+              duration: reducedMotionDuration(
+                context,
+                const Duration(milliseconds: 320),
+              ),
               switchInCurve: Curves.easeInOut,
               switchOutCurve: Curves.easeInOut,
               transitionBuilder: (child, animation) {

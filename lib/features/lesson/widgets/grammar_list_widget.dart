@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
+import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
@@ -52,7 +53,9 @@ class _GrammarListWidgetState extends ConsumerState<GrammarListWidget> {
                 vi: 'Chưa có dữ liệu ngữ pháp.',
                 ja: '文法データがありません。',
               ),
-              style: TextStyle(color: context.appPalette.ink.withValues(alpha: 0.45)),
+              style: TextStyle(
+                color: context.appPalette.ink.withValues(alpha: 0.45),
+              ),
             ),
           );
         }
@@ -434,7 +437,10 @@ class _GrammarLessonHeader extends StatelessWidget {
             vi: 'Xem các thẻ ngữ pháp bên dưới, rồi bắt đầu luyện.',
             ja: '下の文法カードを確認してから、習得フローを開始してください。',
           ),
-          style: TextStyle(fontSize: 12, color: palette.ink.withValues(alpha: 0.55)),
+          style: TextStyle(
+            fontSize: 12,
+            color: palette.ink.withValues(alpha: 0.55),
+          ),
         ),
         const SizedBox(height: 10),
         SizedBox(
@@ -684,7 +690,10 @@ class _GrammarLessonHeader extends StatelessWidget {
                 ],
               ),
             ),
-            Icon(Icons.chevron_right_rounded, color: palette.ink.withValues(alpha: 0.55)),
+            Icon(
+              Icons.chevron_right_rounded,
+              color: palette.ink.withValues(alpha: 0.55),
+            ),
           ],
         ),
       ),
@@ -875,7 +884,10 @@ class _GrammarPointCardState extends State<_GrammarPointCard> {
                   const SizedBox(width: 8),
                   AnimatedRotation(
                     turns: _expanded ? 0.5 : 0,
-                    duration: const Duration(milliseconds: 180),
+                    duration: reducedMotionDuration(
+                      context,
+                      const Duration(milliseconds: 180),
+                    ),
                     child: Icon(
                       Icons.expand_more_rounded,
                       color: palette.ink.withValues(alpha: 0.55),
@@ -886,7 +898,10 @@ class _GrammarPointCardState extends State<_GrammarPointCard> {
             ),
           ),
           AnimatedCrossFade(
-            duration: const Duration(milliseconds: 200),
+            duration: reducedMotionDuration(
+              context,
+              const Duration(milliseconds: 200),
+            ),
             firstChild: const SizedBox.shrink(),
             secondChild: Padding(
               padding: const EdgeInsets.fromLTRB(14, 0, 14, 14),
@@ -894,23 +909,36 @@ class _GrammarPointCardState extends State<_GrammarPointCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Divider(height: 24),
-                  _sectionLabel(widget.language.grammarConnectionLabel, palette),
+                  _sectionLabel(
+                    widget.language.grammarConnectionLabel,
+                    palette,
+                  ),
                   const SizedBox(height: 6),
                   _contentBlock(palette, structure, monospace: true),
                   const SizedBox(height: 14),
-                  _sectionLabel(widget.language.grammarExplanationLabel, palette),
+                  _sectionLabel(
+                    widget.language.grammarExplanationLabel,
+                    palette,
+                  ),
                   const SizedBox(height: 6),
                   _contentBlock(palette, explanation),
                   if (widget.data.examples.isNotEmpty) ...[
                     const SizedBox(height: 14),
-                    _sectionLabel(widget.language.grammarExamplesLabel, palette),
+                    _sectionLabel(
+                      widget.language.grammarExamplesLabel,
+                      palette,
+                    ),
                     const SizedBox(height: 8),
                     ...widget.data.examples
                         .take(4)
                         .map(
                           (example) => Padding(
                             padding: const EdgeInsets.only(bottom: 10),
-                            child: _exampleBlock(palette, example, widget.language),
+                            child: _exampleBlock(
+                              palette,
+                              example,
+                              widget.language,
+                            ),
                           ),
                         ),
                   ],
@@ -942,7 +970,11 @@ class _GrammarPointCardState extends State<_GrammarPointCard> {
     );
   }
 
-  Widget _exampleBlock(AppThemePalette palette, GrammarExample ex, AppLanguage language) {
+  Widget _exampleBlock(
+    AppThemePalette palette,
+    GrammarExample ex,
+    AppLanguage language,
+  ) {
     final translation = switch (language) {
       AppLanguage.vi => ex.translationVi ?? ex.translation,
       AppLanguage.en => ex.translationEn ?? ex.translation,
@@ -996,7 +1028,11 @@ class _GrammarPointCardState extends State<_GrammarPointCard> {
     );
   }
 
-  Widget _contentBlock(AppThemePalette palette, String text, {bool monospace = false}) {
+  Widget _contentBlock(
+    AppThemePalette palette,
+    String text, {
+    bool monospace = false,
+  }) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(10),

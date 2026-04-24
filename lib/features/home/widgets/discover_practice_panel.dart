@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
+import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
@@ -87,7 +88,10 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
       child: Material(
         color: Colors.transparent,
         child: Ink(
-          decoration: HomeSurface.softPanel(radius: panelRadius, context: context),
+          decoration: HomeSurface.softPanel(
+            radius: panelRadius,
+            context: context,
+          ),
           child: Column(
             children: [
               InkWell(
@@ -219,7 +223,10 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
                       ],
                       AnimatedRotation(
                         turns: _expanded ? 0.5 : 0,
-                        duration: const Duration(milliseconds: 160),
+                        duration: reducedMotionDuration(
+                          context,
+                          const Duration(milliseconds: 160),
+                        ),
                         child: Icon(
                           Icons.keyboard_arrow_down_rounded,
                           color: palette.ink.withValues(alpha: 0.7),
@@ -232,7 +239,10 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
               ),
               AnimatedCrossFade(
                 key: const ValueKey('discover_practice_body'),
-                duration: const Duration(milliseconds: 180),
+                duration: reducedMotionDuration(
+                  context,
+                  const Duration(milliseconds: 180),
+                ),
                 crossFadeState: _expanded
                     ? CrossFadeState.showSecond
                     : CrossFadeState.showFirst,

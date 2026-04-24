@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
+import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 import 'package:path_drawing/path_drawing.dart';
 
 import '../../../core/app_language.dart';
@@ -42,6 +43,8 @@ class _KanjiStrokeAnimatorState extends State<KanjiStrokeAnimator>
   bool _showStrokeNumbers = true;
   bool _highlightRadical = false;
   bool _showAdvancedOptions = false;
+  bool _reduceMotion = false;
+  bool _motionPreferenceInitialized = false;
 
   int get _strokeCount => widget.strokeCount;
 
@@ -63,6 +66,10 @@ class _KanjiStrokeAnimatorState extends State<KanjiStrokeAnimator>
             if (status != AnimationStatus.completed || _strokeCount == 0) {
               return;
             }
+            if (_reduceMotion) {
+              _completePlaybackInstantly();
+              return;
+            }
             if (_currentStrokeIndex >= _strokeCount - 1) {
               setState(() {
                 _isPlaying = false;
@@ -79,11 +86,31 @@ class _KanjiStrokeAnimatorState extends State<KanjiStrokeAnimator>
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _syncMotionPreference();
+  }
+
+  @override
   void didUpdateWidget(covariant KanjiStrokeAnimator oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.vectorTemplate != widget.vectorTemplate ||
         oldWidget.linearTemplate != widget.linearTemplate) {
       _resetPlayback();
+      _autoPlayIfPossible();
+    }
+  }
+
+  void _syncMotionPreference() {
+    final reduceMotion = reducedMotionEnabled(context);
+    if (_motionPreferenceInitialized && _reduceMotion == reduceMotion) {
+      return;
+    }
+    _motionPreferenceInitialized = true;
+    _reduceMotion = reduceMotion;
+    if (_reduceMotion) {
+      _completePlaybackInstantly(notify: false);
+    } else {
       _autoPlayIfPossible();
     }
   }
@@ -127,8 +154,27 @@ class _KanjiStrokeAnimatorState extends State<KanjiStrokeAnimator>
     _isPlaying = false;
   }
 
+  void _completePlaybackInstantly({bool notify = true}) {
+    void update() {
+      _controller.stop();
+      _controller.value = 1;
+      _currentStrokeIndex = _strokeCount > 0 ? _strokeCount - 1 : 0;
+      _isPlaying = false;
+    }
+
+    if (notify && mounted) {
+      setState(update);
+    } else {
+      update();
+    }
+  }
+
   void _startPlayback({bool restart = false}) {
     if (_strokeCount == 0) return;
+    if (_reduceMotion) {
+      _completePlaybackInstantly();
+      return;
+    }
     if (restart || _completedStrokes >= _strokeCount) {
       _currentStrokeIndex = 0;
       _controller.value = 0;
@@ -147,12 +193,20 @@ class _KanjiStrokeAnimatorState extends State<KanjiStrokeAnimator>
     if (_strokeCount == 0) return;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted || _isPlaying || _strokeCount == 0) return;
+      if (_reduceMotion) {
+        _completePlaybackInstantly();
+        return;
+      }
       _startPlayback(restart: true);
     });
   }
 
   void _playOrPause() {
     if (_strokeCount == 0) return;
+    if (_reduceMotion) {
+      _completePlaybackInstantly();
+      return;
+    }
     if (_isPlaying) {
       _controller.stop();
       setState(() {
@@ -165,6 +219,10 @@ class _KanjiStrokeAnimatorState extends State<KanjiStrokeAnimator>
 
   void _replay() {
     if (_strokeCount == 0) return;
+    if (_reduceMotion) {
+      _completePlaybackInstantly();
+      return;
+    }
     _startPlayback(restart: true);
   }
 
@@ -201,7 +259,7 @@ class _KanjiStrokeAnimatorState extends State<KanjiStrokeAnimator>
       _controller.duration = _durationForSpeed(speed);
       _isPlaying = wasPlaying;
     });
-    if (wasPlaying) {
+    if (wasPlaying && !_reduceMotion) {
       _controller.forward(from: progress.clamp(0.0, 0.999));
     }
   }

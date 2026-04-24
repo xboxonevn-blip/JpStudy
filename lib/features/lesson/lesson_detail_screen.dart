@@ -7,6 +7,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
@@ -76,6 +77,14 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
   void dispose() {
     _autoTimer?.cancel();
     super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (reducedMotionEnabled(context) && _isAutoPlay) {
+      _stopAutoPlay(notify: false);
+    }
   }
 
   @override
@@ -260,7 +269,10 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
                             child: SizedBox(
                               height: _focusMode ? 520 : 460,
                               child: AnimatedSwitcher(
-                                duration: const Duration(milliseconds: 300),
+                                duration: reducedMotionDuration(
+                                  context,
+                                  const Duration(milliseconds: 300),
+                                ),
                                 transitionBuilder: (child, animation) {
                                   final offset = Tween<Offset>(
                                     begin: const Offset(1.0, 0.0),
@@ -713,21 +725,42 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
   }
 
   void _toggleAutoPlay(int total) {
+    if (_isAutoPlay) {
+      _stopAutoPlay();
+      return;
+    }
+    if (reducedMotionEnabled(context)) {
+      return;
+    }
+
     setState(() {
-      _isAutoPlay = !_isAutoPlay;
+      _isAutoPlay = true;
     });
 
-    if (_isAutoPlay) {
-      _autoTimer = Timer.periodic(const Duration(seconds: 3), (timer) {
-        if (!mounted) {
-          timer.cancel();
-          return;
+    _autoTimer = Timer.periodic(const Duration(seconds: 3), (timer) {
+      if (!mounted || reducedMotionEnabled(context)) {
+        timer.cancel();
+        if (mounted) {
+          _stopAutoPlay();
         }
-        _goNext(total);
+        return;
+      }
+      _goNext(total);
+    });
+  }
+
+  void _stopAutoPlay({bool notify = true}) {
+    _autoTimer?.cancel();
+    _autoTimer = null;
+    if (!_isAutoPlay) {
+      return;
+    }
+    if (notify && mounted) {
+      setState(() {
+        _isAutoPlay = false;
       });
     } else {
-      _autoTimer?.cancel();
-      _autoTimer = null;
+      _isAutoPlay = false;
     }
   }
 
@@ -1171,7 +1204,10 @@ class _StatChip extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(fontSize: 12, color: palette.ink.withValues(alpha: 0.55)),
+            style: TextStyle(
+              fontSize: 12,
+              color: palette.ink.withValues(alpha: 0.55),
+            ),
           ),
           const SizedBox(width: 6),
           Text(value, style: const TextStyle(fontWeight: FontWeight.w700)),
@@ -1258,7 +1294,10 @@ class _SummaryChip extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(fontSize: 12, color: palette.ink.withValues(alpha: 0.55)),
+            style: TextStyle(
+              fontSize: 12,
+              color: palette.ink.withValues(alpha: 0.55),
+            ),
           ),
           const SizedBox(width: 6),
           Text(value, style: const TextStyle(fontWeight: FontWeight.w700)),
@@ -1401,9 +1440,7 @@ class _ModeSwitcher extends StatelessWidget {
               }
               return palette.ink;
             }),
-            side: WidgetStateProperty.all(
-              BorderSide(color: palette.outline),
-            ),
+            side: WidgetStateProperty.all(BorderSide(color: palette.outline)),
             shape: WidgetStateProperty.all(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
             ),
@@ -1747,7 +1784,10 @@ class _CardContent extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               resolvedTerm.reading.trim(),
-              style: TextStyle(fontSize: 18, color: palette.ink.withValues(alpha: 0.55)),
+              style: TextStyle(
+                fontSize: 18,
+                color: palette.ink.withValues(alpha: 0.55),
+              ),
               textAlign: TextAlign.center,
             ),
           ],
@@ -1764,7 +1804,10 @@ class _CardContent extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               frontHint,
-              style: TextStyle(fontSize: 16, color: palette.ink.withValues(alpha: 0.7)),
+              style: TextStyle(
+                fontSize: 16,
+                color: palette.ink.withValues(alpha: 0.7),
+              ),
               textAlign: TextAlign.center,
             ),
           ],
@@ -1821,7 +1864,10 @@ class _CardContent extends StatelessWidget {
     final back = _CardFace(key: const ValueKey(true), child: backContent);
 
     return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 320),
+      duration: reducedMotionDuration(
+        context,
+        const Duration(milliseconds: 320),
+      ),
       switchInCurve: Curves.easeInOut,
       switchOutCurve: Curves.easeInOut,
       transitionBuilder: (child, animation) {

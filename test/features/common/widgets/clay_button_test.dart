@@ -17,13 +17,13 @@ import 'package:jpstudy/features/common/widgets/clay_button.dart';
 // ---------------------------------------------------------------------------
 
 Widget _host({required bool disableAnimations}) => MaterialApp(
-      home: MediaQuery(
-        data: MediaQueryData(disableAnimations: disableAnimations),
-        child: Scaffold(
-          body: ClayButton(label: 'Go', onPressed: () {}),
-        ),
-      ),
-    );
+  home: MediaQuery(
+    data: MediaQueryData(disableAnimations: disableAnimations),
+    child: Scaffold(
+      body: ClayButton(label: 'Go', onPressed: () {}),
+    ),
+  ),
+);
 
 Duration _buttonAnimDuration(WidgetTester tester) {
   final container = tester.widget<AnimatedContainer>(

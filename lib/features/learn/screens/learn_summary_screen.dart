@@ -41,6 +41,7 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
       _showPendingAchievements();
       _clearSavedSession();
       _checkPersonalBest();
@@ -108,6 +109,7 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
     await storage.clearLearnSession(session.lessonId);
     if (session.lessonId == RecoveryPackService.recoveryLessonId) {
       await RecoveryPackService.clear();
+      if (!mounted) return;
       refreshRecoveryPack(ref);
     }
   }
@@ -444,10 +446,7 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            palette.warning,
-            palette.warning.withValues(alpha: 0.85),
-          ],
+          colors: [palette.warning, palette.warning.withValues(alpha: 0.85)],
         ),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/accessibility/reduced_motion.dart';
 import '../../../core/app_language.dart';
 import '../../../core/level_provider.dart';
 import '../../../core/language_provider.dart';
@@ -73,6 +74,17 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
     super.dispose();
   }
 
+  void _syncSummaryAnimation() {
+    if (reducedMotionEnabled(context)) {
+      _animController.stop();
+      _animController.value = 1;
+      return;
+    }
+    if (!_animController.isAnimating && _animController.value == 0) {
+      _animController.forward();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final language = ref.watch(appLanguageProvider);
@@ -82,7 +94,8 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
         selectedLevel?.shortLabel ??
         _inferLevelCodeFromRange();
     final reviewSeries = widget.reviewArgs?.series;
-    final termsAsync = reviewSeries != null &&
+    final termsAsync =
+        reviewSeries != null &&
             reviewSeries.trim().isNotEmpty &&
             levelCode != null
         ? ref.watch(
@@ -249,7 +262,9 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
     if (!widget.hasLessonRange) return terms;
     final start = widget.lessonStart!;
     final end = widget.lessonEnd!;
-    return terms.where((term) => term.lessonId >= start && term.lessonId <= end).toList();
+    return terms
+        .where((term) => term.lessonId >= start && term.lessonId <= end)
+        .toList();
   }
 
   String? _inferLevelCodeFromRange() {
@@ -310,17 +325,19 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
                 children: [
                   Text(
                     widget.sessionTitle ?? language.reviewAction,
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w900),
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.w900,
+                    ),
                   ),
                   if ((widget.sessionSubtitle ?? '').trim().isNotEmpty) ...[
                     const SizedBox(height: 8),
                     Text(
                       widget.sessionSubtitle!,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            height: 1.5,
-                            color: context.appPalette.ink.withValues(alpha: 0.74),
-                            fontWeight: FontWeight.w700,
-                          ),
+                        height: 1.5,
+                        color: context.appPalette.ink.withValues(alpha: 0.74),
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ],
                   const SizedBox(height: 14),
@@ -428,17 +445,19 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
   }
 
   Widget _buildSummary(AppLanguage language, int total) {
-    _animController.forward();
+    _syncSummaryAnimation();
     final palette = context.appPalette;
 
     // Compute session performance — choose chip label/tone accordingly.
     final reviewed = _againCount + _hardCount + _goodCount + _easyCount;
     final successCount = _goodCount + _easyCount;
     final successRate = reviewed > 0 ? successCount / reviewed : 1.0;
-    final chipTone =
-        successRate >= 0.7 ? AppStatusTone.success : AppStatusTone.warning;
-    final chipLabel =
-        successRate >= 0.7 ? language.reviewGoodLabel : language.reviewHardLabel;
+    final chipTone = successRate >= 0.7
+        ? AppStatusTone.success
+        : AppStatusTone.warning;
+    final chipLabel = successRate >= 0.7
+        ? language.reviewGoodLabel
+        : language.reviewHardLabel;
 
     return AppPageShell(
       child: Column(
@@ -458,16 +477,29 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
             subtitle: language.sessionReviewCountLabel(total),
             primaryLabel: language.doneLabel,
             onPrimaryTap: () => context.pop(),
-            status: AppStatusChip(
-              label: chipLabel,
-              tone: chipTone,
-            ),
+            status: AppStatusChip(label: chipLabel, tone: chipTone),
           ),
           const SizedBox(height: 16),
-          _buildSummaryRow(language.reviewAgainLabel, _againCount, context.appPalette.error),
-          _buildSummaryRow(language.reviewHardLabel, _hardCount, context.appPalette.warning),
-          _buildSummaryRow(language.reviewGoodLabel, _goodCount, context.appPalette.info),
-          _buildSummaryRow(language.reviewEasyLabel, _easyCount, context.appPalette.success),
+          _buildSummaryRow(
+            language.reviewAgainLabel,
+            _againCount,
+            context.appPalette.error,
+          ),
+          _buildSummaryRow(
+            language.reviewHardLabel,
+            _hardCount,
+            context.appPalette.warning,
+          ),
+          _buildSummaryRow(
+            language.reviewGoodLabel,
+            _goodCount,
+            context.appPalette.info,
+          ),
+          _buildSummaryRow(
+            language.reviewEasyLabel,
+            _easyCount,
+            context.appPalette.success,
+          ),
         ],
       ),
     );

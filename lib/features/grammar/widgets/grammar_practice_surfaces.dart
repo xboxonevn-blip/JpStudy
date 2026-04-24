@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
+import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 
 enum GrammarOptionState { idle, selected, correct, incorrect }
 
@@ -148,7 +149,10 @@ class GrammarOptionTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(22),
         onTap: onTap,
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 180),
+          duration: reducedMotionDuration(
+            context,
+            const Duration(milliseconds: 180),
+          ),
           curve: Curves.easeOut,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
           decoration: BoxDecoration(

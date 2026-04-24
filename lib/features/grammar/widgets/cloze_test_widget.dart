@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
+import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 import 'package:jpstudy/core/app_language.dart';
 
 import 'grammar_practice_surfaces.dart';
@@ -82,7 +83,10 @@ class _ClozeTestWidgetState extends State<ClozeTestWidget> {
                     WidgetSpan(
                       alignment: PlaceholderAlignment.middle,
                       child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 180),
+                        duration: reducedMotionDuration(
+                          context,
+                          const Duration(milliseconds: 180),
+                        ),
                         margin: const EdgeInsets.symmetric(horizontal: 8),
                         padding: const EdgeInsets.symmetric(
                           horizontal: 14,

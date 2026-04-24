@@ -844,7 +844,10 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                             const SizedBox(height: AppSpacing.md),
                           Expanded(
                             child: AnimatedSwitcher(
-                              duration: const Duration(milliseconds: 300),
+                              duration: reducedMotionDuration(
+                                context,
+                                const Duration(milliseconds: 300),
+                              ),
                               child: items.isEmpty
                                   ? Center(
                                       key: const ValueKey('empty_radicals'),
@@ -1138,7 +1141,10 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                             const SizedBox(height: AppSpacing.sm),
                           Expanded(
                             child: AnimatedSwitcher(
-                              duration: const Duration(milliseconds: 300),
+                              duration: reducedMotionDuration(
+                                context,
+                                const Duration(milliseconds: 300),
+                              ),
                               child: items.isEmpty
                                   ? Center(
                                       key: const ValueKey('empty_state'),
@@ -1316,7 +1322,10 @@ class _KanjiTile extends StatelessWidget {
         : palette.outline.withValues(alpha: 0.5);
 
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 180),
+      duration: reducedMotionDuration(
+        context,
+        const Duration(milliseconds: 180),
+      ),
       decoration: BoxDecoration(
         boxShadow: isHighlighted
             ? [
@@ -1468,6 +1477,8 @@ class _KanjiMindmapPanel extends StatefulWidget {
 class _KanjiMindmapPanelState extends State<_KanjiMindmapPanel>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
+  bool _reduceMotion = false;
+  bool _motionPreferenceInitialized = false;
 
   @override
   void initState() {
@@ -1476,7 +1487,29 @@ class _KanjiMindmapPanelState extends State<_KanjiMindmapPanel>
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 4),
-    )..repeat();
+    );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _syncMotionPreference();
+  }
+
+  void _syncMotionPreference() {
+    final reduceMotion =
+        MediaQuery.maybeOf(context)?.disableAnimations ?? false;
+    if (_motionPreferenceInitialized && _reduceMotion == reduceMotion) {
+      return;
+    }
+    _motionPreferenceInitialized = true;
+    _reduceMotion = reduceMotion;
+    if (_reduceMotion) {
+      _controller.stop();
+      _controller.value = 0;
+    } else if (!_controller.isAnimating) {
+      _controller.repeat();
+    }
   }
 
   @override
@@ -1512,7 +1545,7 @@ class _KanjiMindmapPanelState extends State<_KanjiMindmapPanel>
                     return CustomPaint(
                       size: const Size(double.infinity, 220),
                       painter: _StudyFlowPainter(
-                        animationValue: _controller.value,
+                        animationValue: _reduceMotion ? 0 : _controller.value,
                         color: context.appPalette.primary,
                       ),
                     );
@@ -1567,6 +1600,8 @@ class _FlowHubNode extends StatefulWidget {
 class _FlowHubNodeState extends State<_FlowHubNode>
     with SingleTickerProviderStateMixin {
   late AnimationController _pulseController;
+  bool _reduceMotion = false;
+  bool _motionPreferenceInitialized = false;
 
   @override
   void initState() {
@@ -1575,7 +1610,29 @@ class _FlowHubNodeState extends State<_FlowHubNode>
     _pulseController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
-    )..repeat(reverse: true);
+    );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _syncMotionPreference();
+  }
+
+  void _syncMotionPreference() {
+    final reduceMotion =
+        MediaQuery.maybeOf(context)?.disableAnimations ?? false;
+    if (_motionPreferenceInitialized && _reduceMotion == reduceMotion) {
+      return;
+    }
+    _motionPreferenceInitialized = true;
+    _reduceMotion = reduceMotion;
+    if (_reduceMotion) {
+      _pulseController.stop();
+      _pulseController.value = 0;
+    } else if (!_pulseController.isAnimating) {
+      _pulseController.repeat(reverse: true);
+    }
   }
 
   @override
@@ -1599,10 +1656,12 @@ class _FlowHubNodeState extends State<_FlowHubNode>
             boxShadow: [
               BoxShadow(
                 color: palette.primary.withValues(
-                  alpha: 0.15 + (0.25 * _pulseController.value),
+                  alpha:
+                      0.15 +
+                      (0.25 * (_reduceMotion ? 0 : _pulseController.value)),
                 ),
-                blurRadius: 20 * _pulseController.value,
-                spreadRadius: 10 * _pulseController.value,
+                blurRadius: 20 * (_reduceMotion ? 0 : _pulseController.value),
+                spreadRadius: 10 * (_reduceMotion ? 0 : _pulseController.value),
               ),
             ],
           ),
@@ -1659,7 +1718,10 @@ class _FlowTargetCardState extends State<_FlowTargetCard> {
       child: GestureDetector(
         onTap: widget.onTap,
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
+          duration: reducedMotionDuration(
+            context,
+            const Duration(milliseconds: 200),
+          ),
           width: 140,
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
@@ -1835,7 +1897,10 @@ class _CollectionSelectorCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+        duration: reducedMotionDuration(
+          context,
+          const Duration(milliseconds: 200),
+        ),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
           color: selected

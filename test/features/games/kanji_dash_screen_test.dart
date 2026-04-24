@@ -12,21 +12,27 @@ import 'package:jpstudy/features/games/providers/game_vocab_pool_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 VocabItem _vocab(int id, String term, String meaning) => VocabItem(
-      id: id,
-      term: term,
-      reading: '',
-      meaning: meaning,
-      meaningEn: meaning,
-      level: 'N5',
-    );
+  id: id,
+  term: term,
+  reading: '',
+  meaning: meaning,
+  meaningEn: meaning,
+  level: 'N5',
+);
 
-Widget buildScreen(List<VocabItem> items) => ProviderScope(
+Widget buildScreen(List<VocabItem> items, {bool disableAnimations = false}) =>
+    ProviderScope(
       overrides: [
         appLanguageProvider.overrideWith((ref) => AppLanguage.en),
         studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
         gameVocabPoolProvider.overrideWith((ref) async => items),
       ],
-      child: const MaterialApp(home: KanjiDashScreen()),
+      child: MaterialApp(
+        home: MediaQuery(
+          data: MediaQueryData(disableAnimations: disableAnimations),
+          child: const KanjiDashScreen(),
+        ),
+      ),
     );
 
 Future<void> _pumpReady(WidgetTester tester) async {
@@ -46,16 +52,21 @@ void main() {
   });
 
   testWidgets('shows start button when vocab exists', (tester) async {
-    await tester.pumpWidget(buildScreen([
-      _vocab(1, '?', 'fire'),
-      _vocab(2, '?', 'water'),
-      _vocab(3, '?', 'tree'),
-      _vocab(4, '?', 'gold'),
-    ]));
+    await tester.pumpWidget(
+      buildScreen([
+        _vocab(1, '?', 'fire'),
+        _vocab(2, '?', 'water'),
+        _vocab(3, '?', 'tree'),
+        _vocab(4, '?', 'gold'),
+      ]),
+    );
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));
     expect(
-      find.widgetWithText(ClayButton, AppLanguage.en.kanjiDashStart.toUpperCase()),
+      find.widgetWithText(
+        ClayButton,
+        AppLanguage.en.kanjiDashStart.toUpperCase(),
+      ),
       findsOneWidget,
     );
     expect(find.byIcon(Icons.play_arrow), findsOneWidget);
@@ -67,6 +78,34 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));
     expect(find.text(AppLanguage.en.kanjiDashNoVocab), findsOneWidget);
+    await _pumpReady(tester);
+  });
+
+  testWidgets('reduced motion slows countdown tick to one second', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      buildScreen([
+        _vocab(1, '火', 'fire'),
+        _vocab(2, '水', 'water'),
+        _vocab(3, '木', 'tree'),
+        _vocab(4, '金', 'gold'),
+      ], disableAnimations: true),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+
+    await tester.tap(find.byIcon(Icons.play_arrow));
+    await tester.pump();
+
+    expect(find.text('${AppLanguage.en.kanjiDashTime}: 30.0s'), findsOneWidget);
+
+    await tester.pump(const Duration(milliseconds: 100));
+    expect(find.text('${AppLanguage.en.kanjiDashTime}: 30.0s'), findsOneWidget);
+
+    await tester.pump(const Duration(seconds: 1));
+    expect(find.text('${AppLanguage.en.kanjiDashTime}: 29.0s'), findsOneWidget);
+
     await _pumpReady(tester);
   });
 }

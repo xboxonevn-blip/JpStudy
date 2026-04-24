@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../app/theme/app_theme_palette.dart';
+import '../../../core/accessibility/reduced_motion.dart';
 
 enum ClayButtonStyle { primary, secondary, tertiary, neutral, error }
 
@@ -113,14 +114,16 @@ class _ClayButtonState extends State<ClayButton> {
         child: AnimatedContainer(
           // Respect the OS-level Reduce Motion preference: when enabled, the
           // press/release transform snaps instantly instead of sliding down.
-          duration: MediaQuery.of(context).disableAnimations
-              ? Duration.zero
-              : const Duration(milliseconds: 50),
+          duration: reducedMotionDuration(
+            context,
+            const Duration(milliseconds: 50),
+          ),
           transform: Matrix4.translationValues(0, _isPressed ? 4 : 0, 0),
           child: Container(
             width: widget.width,
             height: widget.height,
-            padding: widget.padding ??
+            padding:
+                widget.padding ??
                 const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
             decoration: BoxDecoration(
               color: baseColor,
