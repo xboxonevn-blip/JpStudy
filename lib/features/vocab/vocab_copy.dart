@@ -334,9 +334,9 @@ extension VocabCopy on AppLanguage {
     AppLanguage.en =>
       'This track already has seeded vocabulary data inside JP Study. The catalog volume and content are ready for preview.',
     AppLanguage.vi =>
-      'Track này đã có dữ liệu từ vựng trong JP Study. Flow review cho lane này chưa nối xong, nhưng dữ liệu và cấu trúc catalog đã sẵn sàng để xem trước.',
+      'Track này đã có dữ liệu từ vựng trong JP Study. Dữ liệu và cấu trúc catalog đã sẵn sàng để xem trước.',
     AppLanguage.ja =>
-      'このトラックにはすでに JP Study 内の語彙データがあります。復習フローはまだ完全には接続されていませんが、カタログ内容は確認できます。',
+      'このトラックにはすでに JP Study 内の語彙データがあります。カタログ内容は確認できます。',
   };
 
   String vocabMeaningFirstLabel() => switch (this) {
