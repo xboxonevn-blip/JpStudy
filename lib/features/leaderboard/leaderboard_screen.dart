@@ -437,9 +437,9 @@ String _snapshotText(
   };
 }
 String _profileSoon(AppLanguage language, String name) => switch (language) {
-      AppLanguage.en => '$name profile cards are still local mock data.',
-      AppLanguage.vi => 'Thẻ hồ sơ của $name hiện vẫn là dữ liệu mock local.',
-      AppLanguage.ja => '$name の profile card はまだローカル mock データです。',
+      AppLanguage.en => '$name\'s full profile will be available in a future update.',
+      AppLanguage.vi => 'Hồ sơ đầy đủ của $name sẽ có trong bản cập nhật sau.',
+      AppLanguage.ja => '$name のプロフィール詳細は今後のアップデートで追加予定です。',
     };
 
 class _LeaderboardRange {
