@@ -5,6 +5,7 @@ import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
+import 'package:share_plus/share_plus.dart';
 
 class CommunityScreen extends ConsumerWidget {
   const CommunityScreen({super.key});
@@ -97,9 +98,11 @@ class CommunityScreen extends ConsumerWidget {
                         label: item.status,
                         tone: item.tone,
                       ),
-                      onTap: () => ScaffoldMessenger.of(
-                        context,
-                      ).showSnackBar(SnackBar(content: Text(item.feedback))),
+                      onTap: () => item.onTap != null
+                          ? item.onTap!(context)
+                          : ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(item.feedback)),
+                            ),
                     ),
                     const SizedBox(height: AppSpacing.sm),
                   ],
@@ -281,7 +284,7 @@ List<_RoadmapItem> _roadmapItems(AppLanguage language) => switch (language) {
 };
 
 List<_ConnectItem> _connectItems(AppLanguage language) => switch (language) {
-  AppLanguage.en => const [
+  AppLanguage.en => [
     _ConnectItem(
       Icons.feedback_rounded,
       'Send feedback',
@@ -289,8 +292,9 @@ List<_ConnectItem> _connectItems(AppLanguage language) => switch (language) {
       'Open',
       AppStatusTone.success,
       'Feedback intake will be wired to a real channel later.',
+      onTap: (context) => _openFeedbackDialog(context, language),
     ),
-    _ConnectItem(
+    const _ConnectItem(
       Icons.campaign_rounded,
       'Invite a friend',
       'Prepare a lightweight referral path without changing the app shell.',
@@ -298,7 +302,7 @@ List<_ConnectItem> _connectItems(AppLanguage language) => switch (language) {
       AppStatusTone.warning,
       'Referral flow is still local placeholder content.',
     ),
-    _ConnectItem(
+    const _ConnectItem(
       Icons.groups_rounded,
       'Community room',
       'Reserve a future home for live learners, sprint rooms, and announcements.',
@@ -307,7 +311,7 @@ List<_ConnectItem> _connectItems(AppLanguage language) => switch (language) {
       'Community links will be enabled in a later release.',
     ),
   ],
-  AppLanguage.vi => const [
+  AppLanguage.vi => [
     _ConnectItem(
       Icons.feedback_rounded,
       'Gửi phản hồi',
@@ -315,8 +319,9 @@ List<_ConnectItem> _connectItems(AppLanguage language) => switch (language) {
       'Mở',
       AppStatusTone.success,
       'Kênh nhận phản hồi thật sẽ được nối sau.',
+      onTap: (context) => _openFeedbackDialog(context, language),
     ),
-    _ConnectItem(
+    const _ConnectItem(
       Icons.campaign_rounded,
       'Mời bạn bè',
       'Chuẩn bị lối giới thiệu nhẹ mà không đổi app shell.',
@@ -324,7 +329,7 @@ List<_ConnectItem> _connectItems(AppLanguage language) => switch (language) {
       AppStatusTone.warning,
       'Flow giới thiệu hiện vẫn là placeholder local.',
     ),
-    _ConnectItem(
+    const _ConnectItem(
       Icons.groups_rounded,
       'Phòng cộng đồng',
       'Chừa sẵn nơi cho người học trực tiếp, sprint room và thông báo.',
@@ -333,7 +338,7 @@ List<_ConnectItem> _connectItems(AppLanguage language) => switch (language) {
       'Link cộng đồng sẽ được bật ở bản sau.',
     ),
   ],
-  AppLanguage.ja => const [
+  AppLanguage.ja => [
     _ConnectItem(
       Icons.feedback_rounded,
       'フィードバック送信',
@@ -341,8 +346,9 @@ List<_ConnectItem> _connectItems(AppLanguage language) => switch (language) {
       '受付中',
       AppStatusTone.success,
       'feedback 導線は後で実チャネルへ接続します。',
+      onTap: (context) => _openFeedbackDialog(context, language),
     ),
-    _ConnectItem(
+    const _ConnectItem(
       Icons.campaign_rounded,
       '友達を招待',
       'app shell を変えずに紹介導線を準備します。',
@@ -350,7 +356,7 @@ List<_ConnectItem> _connectItems(AppLanguage language) => switch (language) {
       AppStatusTone.warning,
       '紹介 flow はまだローカル placeholder です。',
     ),
-    _ConnectItem(
+    const _ConnectItem(
       Icons.groups_rounded,
       'コミュニティルーム',
       '学習者の live room、sprint room、announcement の居場所を確保します。',
@@ -506,6 +512,81 @@ String _connectCaption(AppLanguage language) => switch (language) {
   AppLanguage.ja => 'feedback、referral、将来の social loop 向けの準備済み surface です。',
 };
 
+String _feedbackDialogTitle(AppLanguage language) => switch (language) {
+  AppLanguage.en => 'Send feedback',
+  AppLanguage.vi => 'Gửi phản hồi',
+  AppLanguage.ja => 'フィードバック送信',
+};
+String _feedbackDialogHint(AppLanguage language) => switch (language) {
+  AppLanguage.en => 'What would you like us to know?',
+  AppLanguage.vi => 'Bạn muốn cho chúng tôi biết điều gì?',
+  AppLanguage.ja => '伝えたいことを入力してください',
+};
+String _feedbackDialogSend(AppLanguage language) => switch (language) {
+  AppLanguage.en => 'Share',
+  AppLanguage.vi => 'Chia sẻ',
+  AppLanguage.ja => '送信',
+};
+String _feedbackDialogCancel(AppLanguage language) => switch (language) {
+  AppLanguage.en => 'Cancel',
+  AppLanguage.vi => 'Huỷ',
+  AppLanguage.ja => 'キャンセル',
+};
+String _feedbackDialogEmptyHint(AppLanguage language) => switch (language) {
+  AppLanguage.en => 'Please enter feedback first',
+  AppLanguage.vi => 'Vui lòng nhập nội dung trước',
+  AppLanguage.ja => '先に内容を入力してください',
+};
+
+void _openFeedbackDialog(BuildContext context, AppLanguage language) {
+  showDialog<void>(
+    context: context,
+    builder: (dialogContext) {
+      var feedbackText = '';
+      return StatefulBuilder(
+        builder: (context, setState) {
+          return AlertDialog(
+            title: Text(_feedbackDialogTitle(language)),
+            content: TextField(
+              minLines: 4,
+              maxLines: 8,
+              onChanged: (value) => setState(() => feedbackText = value),
+              decoration: InputDecoration(
+                hintText: _feedbackDialogHint(language),
+                border: const OutlineInputBorder(),
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text(_feedbackDialogCancel(language)),
+              ),
+              TextButton(
+                onPressed: () {
+                  final text = feedbackText.trim();
+                  if (text.isEmpty) {
+                    ScaffoldMessenger.of(dialogContext).showSnackBar(
+                      SnackBar(
+                        content: Text(_feedbackDialogEmptyHint(language)),
+                      ),
+                    );
+                    return;
+                  }
+                  Navigator.of(context).pop();
+                  SharePlus.instance.share(
+                    ShareParams(text: text, subject: 'JpStudy Feedback'),
+                  );
+                },
+                child: Text(_feedbackDialogSend(language)),
+              ),
+            ],
+          );
+        },
+      );
+    },
+  );
+}
+
 class _ShortcutItem {
   const _ShortcutItem(
     this.icon,
@@ -547,8 +628,9 @@ class _ConnectItem {
     this.subtitle,
     this.status,
     this.tone,
-    this.feedback,
-  );
+    this.feedback, {
+    this.onTap,
+  });
 
   final IconData icon;
   final String title;
@@ -556,4 +638,5 @@ class _ConnectItem {
   final String status;
   final AppStatusTone tone;
   final String feedback;
+  final void Function(BuildContext context)? onTap;
 }
