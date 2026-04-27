@@ -132,6 +132,17 @@ class _VocabCatalogBody extends ConsumerWidget {
       );
       return;
     }
+    // Core hajimete catalog — no StudyLevel required, works for all levels
+    if (program.type == _VocabProgramType.core) {
+      context.openHajimeteCatalog(
+        levelCode: section.levelCode,
+        title: '${program.titleTop} ${program.titleMain}'.trim(),
+        subtitle: _localizedProgramSubtitle(program, language),
+      );
+      return;
+    }
+
+    // Review path needs StudyLevel (for scoping queue to level)
     final level = StudyLevel.fromCode(section.levelCode);
     if (level == null) return;
     ref.read(studyLevelProvider.notifier).state = level;
@@ -144,15 +155,6 @@ class _VocabCatalogBody extends ConsumerWidget {
         subtitle: _localizedProgramSubtitle(program, language),
         lessonStart: minnaRange.$1,
         lessonEnd: minnaRange.$2,
-      );
-      return;
-    }
-
-    if (program.type == _VocabProgramType.core) {
-      context.openHajimeteCatalog(
-        levelCode: section.levelCode,
-        title: '${program.titleTop} ${program.titleMain}'.trim(),
-        subtitle: _localizedProgramSubtitle(program, language),
       );
       return;
     }
@@ -1424,8 +1426,7 @@ _VocabCatalogSection _buildJlptSection({
 }) {
   final liveCount = items.length;
   final chapterCount = _chapterCountForLevel(levelCode);
-  final coreInteractive =
-      isInteractive && StudyLevel.fromCode(levelCode) != null && liveCount > 0;
+  final coreInteractive = isInteractive && liveCount > 0;
   final coreBadge = dueCount > 0
       ? '$dueCount due - ${_formatReviewTiming(nextReview)}'
       : _formatReviewTiming(nextReview);

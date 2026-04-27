@@ -332,7 +332,7 @@ extension VocabCopy on AppLanguage {
 
   String vocabDefaultPreviewDialogBody() => switch (this) {
     AppLanguage.en =>
-      'This track already has seeded vocabulary data inside JP Study. Review flow for this lane is not wired yet, but the catalog volume and content are ready for preview.',
+      'This track already has seeded vocabulary data inside JP Study. The catalog volume and content are ready for preview.',
     AppLanguage.vi =>
       'Track này đã có dữ liệu từ vựng trong JP Study. Flow review cho lane này chưa nối xong, nhưng dữ liệu và cấu trúc catalog đã sẵn sàng để xem trước.',
     AppLanguage.ja =>

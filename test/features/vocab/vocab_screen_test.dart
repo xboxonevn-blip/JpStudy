@@ -605,7 +605,7 @@ void main() {
   });
 
   testWidgets(
-    'N2 core track opens preview dialog when data exists but review is not wired',
+    'N2 core track opens Hajimete chapter catalog when data exists',
     (tester) async {
       final repo = _FakeVocabLessonRepository(
         bank: {
@@ -617,7 +617,7 @@ void main() {
         },
       );
 
-      await tester.pumpWidget(_buildScreen(repo: repo));
+      await tester.pumpWidget(_buildRouterScreen(repo: repo));
       await _pumpCatalog(tester);
 
       await tester.ensureVisible(
@@ -628,10 +628,7 @@ void main() {
       await tester.tap(find.byKey(const ValueKey('program_n2_n2_core')));
       await _pumpCatalog(tester);
 
-      expect(find.text('Track preview'), findsOneWidget);
-      expect(find.textContaining('Hajimete no Nihongo Tango'), findsWidgets);
-      expect(find.text('3 terms'), findsWidgets);
-      expect(find.text('38 chapters seeded'), findsOneWidget);
+      expect(find.byType(HajimeteChapterCatalogScreen), findsOneWidget);
     },
   );
 
