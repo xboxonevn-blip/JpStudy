@@ -116,6 +116,7 @@ void main() {
     // Should still be on the main screen — snackbar shown, not navigated away
     expect(find.byType(CustomDecksScreen), findsOneWidget);
     expect(find.textContaining('VOCAB_REVIEW'), findsNothing);
+    expect(find.byType(SnackBar), findsOneWidget);
   });
 
   testWidgets(
@@ -138,5 +139,30 @@ void main() {
       find.textContaining('title=Nhồi nhanh'),
       findsOneWidget,
     );
+  });
+
+  testWidgets(
+      'Cram mode in JA language navigates with title=Night Cram',
+      (tester) async {
+    await tester.pumpWidget(_buildRouterScreen(language: AppLanguage.ja));
+    await _pump(tester);
+
+    // JA uses 'Cram mode' as the title (same as EN)
+    await tester.ensureVisible(
+      find.byWidgetPredicate(
+        (w) => w is Text && w.data == 'Cram mode',
+        description: 'JA cram mode item',
+      ),
+    );
+    await _pump(tester);
+
+    await tester.tap(find.byWidgetPredicate(
+      (w) => w is Text && w.data == 'Cram mode',
+      description: 'JA cram mode item',
+    ));
+    await _pump(tester);
+
+    expect(find.textContaining('VOCAB_REVIEW_source=cram'), findsOneWidget);
+    expect(find.textContaining('title=Night Cram'), findsOneWidget);
   });
 }

@@ -431,17 +431,17 @@ List<_StudyRecipe> _recipes(
 
 List<_ToolkitItem> _toolkit(AppLanguage language) => switch (language) {
       AppLanguage.en => [
-          _ToolkitItem(Icons.layers_clear_rounded, 'Cram mode', 'Override the usual due queue for one urgent session tonight.', 'Power', AppStatusTone.warning, 'Cram mode', cramMode: true),
-          _ToolkitItem(Icons.quiz_rounded, 'Custom quiz', 'Blend kanji, vocab, and grammar into one targeted set.', 'New', AppStatusTone.success, 'Custom quiz builder is still local-only for now.'),
-          _ToolkitItem(Icons.repeat_rounded, 'Flashcard loop', 'Run a rapid loop for pronunciation, recall, and confidence rating.', 'Loop', AppStatusTone.primary, 'Loop settings will be connected to saved presets later.'),
+          _ToolkitItem(Icons.layers_clear_rounded, 'Cram mode', 'Override the usual due queue for one urgent session tonight.', 'Power', AppStatusTone.warning, '', cramMode: true),
+          const _ToolkitItem(Icons.quiz_rounded, 'Custom quiz', 'Blend kanji, vocab, and grammar into one targeted set.', 'New', AppStatusTone.success, 'Custom quiz builder is still local-only for now.'),
+          const _ToolkitItem(Icons.repeat_rounded, 'Flashcard loop', 'Run a rapid loop for pronunciation, recall, and confidence rating.', 'Loop', AppStatusTone.primary, 'Loop settings will be connected to saved presets later.'),
         ],
       AppLanguage.vi => [
-          _ToolkitItem(Icons.layers_clear_rounded, 'Chế độ nhồi nhanh', 'Ghi đè hàng due thông thường cho một phiên gấp tối nay.', 'Mạnh', AppStatusTone.warning, 'Chế độ nhồi nhanh', cramMode: true),
+          _ToolkitItem(Icons.layers_clear_rounded, 'Chế độ nhồi nhanh', 'Ghi đè hàng due thông thường cho một phiên gấp tối nay.', 'Mạnh', AppStatusTone.warning, '', cramMode: true),
           const _ToolkitItem(Icons.quiz_rounded, 'Quiz tùy chọn', 'Trộn kanji, từ vựng và ngữ pháp thành một bộ tập trung.', 'Mới', AppStatusTone.success, 'Trình tạo custom quiz hiện vẫn là local-only.'),
           const _ToolkitItem(Icons.repeat_rounded, 'Vòng flashcard', 'Chạy vòng nhanh cho phát âm, recall và tự chấm độ tự tin.', 'Vòng', AppStatusTone.primary, 'Thiết lập loop sẽ được nối với preset lưu sau.'),
         ],
       AppLanguage.ja => [
-          _ToolkitItem(Icons.layers_clear_rounded, 'Cram mode', '今夜だけ通常の due queue を上書きして急ぎの session を作ります。', '強化', AppStatusTone.warning, 'Cram mode', cramMode: true),
+          _ToolkitItem(Icons.layers_clear_rounded, 'Cram mode', '今夜だけ通常の due queue を上書きして急ぎの session を作ります。', '強化', AppStatusTone.warning, '', cramMode: true),
           const _ToolkitItem(Icons.quiz_rounded, 'Custom quiz', 'kanji、vocab、grammar を1つの targeted set にまとめます。', '新着', AppStatusTone.success, 'custom quiz builder はまだ local-only です。'),
           const _ToolkitItem(Icons.repeat_rounded, 'フラッシュカードループ', '発音、recall、自信評価を高速 loop で回します。', 'ループ', AppStatusTone.primary, 'loop 設定は後で保存 preset に接続します。'),
         ],
@@ -550,7 +550,7 @@ String _recipeSoon(AppLanguage language, String recipe) => switch (language) {
 String _cramSessionTitle(AppLanguage language) => switch (language) {
       AppLanguage.en => 'Night Cram',
       AppLanguage.vi => 'Nhồi nhanh',
-      AppLanguage.ja => 'Cram Session',
+      AppLanguage.ja => 'Night Cram',
     };
 
 class _StudyRecipe {
