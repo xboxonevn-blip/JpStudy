@@ -134,5 +134,9 @@ void main() {
       find.textContaining('VOCAB_REVIEW_source=cram'),
       findsOneWidget,
     );
+    expect(
+      find.textContaining('title=Nhồi nhanh'),
+      findsOneWidget,
+    );
   });
 }
