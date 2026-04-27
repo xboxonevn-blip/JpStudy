@@ -541,50 +541,78 @@ String _feedbackDialogEmptyHint(AppLanguage language) => switch (language) {
 void _openFeedbackDialog(BuildContext context, AppLanguage language) {
   showDialog<void>(
     context: context,
-    builder: (dialogContext) {
-      var feedbackText = '';
-      return StatefulBuilder(
-        builder: (context, setState) {
-          return AlertDialog(
-            title: Text(_feedbackDialogTitle(language)),
-            content: TextField(
-              minLines: 4,
-              maxLines: 8,
-              onChanged: (value) => setState(() => feedbackText = value),
-              decoration: InputDecoration(
-                hintText: _feedbackDialogHint(language),
-                border: const OutlineInputBorder(),
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text(_feedbackDialogCancel(language)),
-              ),
-              TextButton(
-                onPressed: () {
-                  final text = feedbackText.trim();
-                  if (text.isEmpty) {
-                    ScaffoldMessenger.of(dialogContext).showSnackBar(
-                      SnackBar(
-                        content: Text(_feedbackDialogEmptyHint(language)),
-                      ),
-                    );
-                    return;
-                  }
-                  Navigator.of(context).pop();
-                  SharePlus.instance.share(
-                    ShareParams(text: text, subject: 'JpStudy Feedback'),
-                  );
-                },
-                child: Text(_feedbackDialogSend(language)),
-              ),
-            ],
-          );
-        },
-      );
-    },
+    builder: (_) => _FeedbackDialog(language: language),
   );
+}
+
+class _FeedbackDialog extends StatefulWidget {
+  const _FeedbackDialog({required this.language});
+  final AppLanguage language;
+
+  @override
+  State<_FeedbackDialog> createState() => _FeedbackDialogState();
+}
+
+class _FeedbackDialogState extends State<_FeedbackDialog> {
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final language = widget.language;
+    return AlertDialog(
+      title: Text(_feedbackDialogTitle(language)),
+      content: TextField(
+        controller: _controller,
+        minLines: 4,
+        maxLines: 8,
+        onChanged: (_) => setState(() {}),
+        decoration: InputDecoration(
+          hintText: _feedbackDialogHint(language),
+          border: const OutlineInputBorder(),
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            if (context.mounted) Navigator.of(context).pop();
+          },
+          child: Text(_feedbackDialogCancel(language)),
+        ),
+        TextButton(
+          onPressed: () {
+            final text = _controller.text.trim();
+            if (text.isEmpty) {
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(_feedbackDialogEmptyHint(language)),
+                  ),
+                );
+              }
+              return;
+            }
+            if (context.mounted) Navigator.of(context).pop();
+            SharePlus.instance.share(
+              ShareParams(text: text, subject: 'JpStudy Feedback'),
+            );
+          },
+          child: Text(_feedbackDialogSend(language)),
+        ),
+      ],
+    );
+  }
 }
 
 class _ShortcutItem {
