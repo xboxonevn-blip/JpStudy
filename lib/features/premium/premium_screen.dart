@@ -14,6 +14,7 @@ class PremiumScreen extends ConsumerStatefulWidget {
 
 class _PremiumScreenState extends ConsumerState<PremiumScreen> {
   int _selectedPlan = 1;
+  final GlobalKey _compareKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,11 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
               primaryLabel: _upgradeLabel(language),
               onPrimaryTap: () => _snack(context, _checkoutSoon(language, selected.name)),
               secondaryLabel: _compareLabel(language),
-              onSecondaryTap: () {},
+              onSecondaryTap: () => Scrollable.ensureVisible(
+                _compareKey.currentContext!,
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.easeOut,
+              ),
             ),
             const SizedBox(height: AppSpacing.xl),
             AppSectionCard(
@@ -111,6 +116,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
             ],
             const SizedBox(height: AppSpacing.xl),
             AppSectionCard(
+              key: _compareKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -381,9 +387,9 @@ String _featureTitle(AppLanguage language) => switch (language) {
       AppLanguage.ja => 'Proで広がる内容',
     };
 String _featureCaption(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'These sections now read like a real product surface instead of an empty upsell.',
-      AppLanguage.vi => 'Các phần này giờ có cảm giác là một bề mặt sản phẩm thật thay vì một upsell trống.',
-      AppLanguage.ja => '空の upsell ではなく、実際の製品面として読める構成にしています。',
+      AppLanguage.en => 'Everything that\'s unlocked when you upgrade.',
+      AppLanguage.vi => 'Tất cả những gì được mở khóa khi bạn nâng cấp.',
+      AppLanguage.ja => 'アップグレード後に解放されるすべての機能です。',
     };
 String _compareMatrixTitle(AppLanguage language) => switch (language) {
       AppLanguage.en => 'Free vs selected plan',

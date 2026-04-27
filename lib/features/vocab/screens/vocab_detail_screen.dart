@@ -714,7 +714,7 @@ class _KanjiRow extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 10),
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
-        onTap: () {},
+        onTap: () => context.push(AppRouteLocation.kanji(kanjiId: kanji.id)),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
           decoration: BoxDecoration(
