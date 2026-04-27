@@ -134,7 +134,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
                     title: activeRange.challengeTitle,
                     subtitle: activeRange.challengeSubtitle(language),
                     status: AppStatusChip(label: activeRange.reward, tone: AppStatusTone.success),
-                    onTap: () => _snack(context, _challengeSoon(language)),
+                    onTap: () => _showChallengeDetail(context, language, activeRange),
                   ),
                 ],
               ),
@@ -188,6 +188,54 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
     );
     await SharePlus.instance.share(
       ShareParams(text: text, subject: _shareLabel(language)),
+    );
+  }
+
+  void _showChallengeDetail(
+    BuildContext context,
+    AppLanguage language,
+    _LeaderboardRange range,
+  ) {
+    showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      builder: (ctx) => Padding(
+        padding: const EdgeInsets.fromLTRB(
+          AppSpacing.xl,
+          AppSpacing.sm,
+          AppSpacing.xl,
+          AppSpacing.xl,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.local_fire_department_rounded),
+                const SizedBox(width: AppSpacing.sm),
+                Expanded(
+                  child: Text(
+                    range.challengeTitle,
+                    style: Theme.of(ctx).textTheme.titleMedium,
+                  ),
+                ),
+                AppStatusChip(label: range.reward, tone: AppStatusTone.success),
+              ],
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            Text(
+              range.challengeSubtitle(language),
+              style: Theme.of(ctx).textTheme.bodyMedium,
+            ),
+            const SizedBox(height: AppSpacing.lg),
+            AppProgressStrip(
+              value: range.challengeProgress,
+              label: range.challengeProgressLabel(language),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -388,11 +436,6 @@ String _snapshotText(
       '#JpStudy #日本語学習',
   };
 }
-String _challengeSoon(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'Challenge syncing is still being wired up.',
-      AppLanguage.vi => 'Đồng bộ thử thách vẫn đang được nối.',
-      AppLanguage.ja => 'チャレンジ同期はまだ接続中です。',
-    };
 String _profileSoon(AppLanguage language, String name) => switch (language) {
       AppLanguage.en => '$name profile cards are still local mock data.',
       AppLanguage.vi => 'Thẻ hồ sơ của $name hiện vẫn là dữ liệu mock local.',

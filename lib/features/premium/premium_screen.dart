@@ -341,9 +341,9 @@ String _plansTitle(AppLanguage language) => switch (language) {
       AppLanguage.ja => 'プランを選ぶ',
     };
 String _plansCaption(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'Pricing is local placeholder data, but the decision flow is production-ready.',
-      AppLanguage.vi => 'Giá hiện là dữ liệu placeholder local, nhưng luồng ra quyết định đã ở mức production-ready.',
-      AppLanguage.ja => '価格はローカル placeholder ですが、選択フローは製品レベルで整えています。',
+      AppLanguage.en => 'Unlock the full app — pick the plan that matches your study pace.',
+      AppLanguage.vi => 'Mở khóa toàn bộ app — chọn gói phù hợp với tốc độ học của bạn.',
+      AppLanguage.ja => 'アプリをフル解放 — 自分の学習ペースに合ったプランを選んでください。',
     };
 String _fitTitle(AppLanguage language) => switch (language) {
       AppLanguage.en => 'Best fit',

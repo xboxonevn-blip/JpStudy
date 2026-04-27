@@ -129,6 +129,31 @@ void main() {
     expect(find.text('You'), findsOneWidget);
   });
 
+  testWidgets('tapping featured challenge card opens bottom sheet', (
+    tester,
+  ) async {
+    await tester.pumpWidget(_buildScreen());
+    await _pump(tester);
+
+    // Scroll to the challenge row
+    await tester.scrollUntilVisible(
+      find.text('7-day streak race'),
+      200,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await _pump(tester);
+
+    await tester.tap(find.text('7-day streak race'));
+    await _pump(tester);
+
+    // Bottom sheet should be visible with challenge details
+    expect(find.byType(BottomSheet), findsOneWidget);
+    expect(find.text('7-day streak race'), findsAtLeastNWidgets(1));
+    expect(find.text('120 XP reward'), findsAtLeastNWidgets(1));
+    // No snackbar
+    expect(find.byType(SnackBar), findsNothing);
+  });
+
   testWidgets('VI locale shows Vietnamese labels', (tester) async {
     await tester.pumpWidget(_buildScreen(language: AppLanguage.vi));
     await _pump(tester);

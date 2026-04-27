@@ -300,7 +300,7 @@ List<_ConnectItem> _connectItems(AppLanguage language) => switch (language) {
       'Prepare a lightweight referral path without changing the app shell.',
       'Soon',
       AppStatusTone.warning,
-      'Referral flow is still local placeholder content.',
+      'Referral flow is on our roadmap — stay tuned!',
     ),
     const _ConnectItem(
       Icons.groups_rounded,
@@ -308,7 +308,7 @@ List<_ConnectItem> _connectItems(AppLanguage language) => switch (language) {
       'Reserve a future home for live learners, sprint rooms, and announcements.',
       'Planned',
       AppStatusTone.neutral,
-      'Community links will be enabled in a later release.',
+      'Community rooms are coming in a future update.',
     ),
   ],
   AppLanguage.vi => [
@@ -327,7 +327,7 @@ List<_ConnectItem> _connectItems(AppLanguage language) => switch (language) {
       'Chuẩn bị lối giới thiệu nhẹ mà không đổi app shell.',
       'Sớm',
       AppStatusTone.warning,
-      'Flow giới thiệu hiện vẫn là placeholder local.',
+      'Flow giới thiệu sẽ có trong các bản cập nhật sắp tới.',
     ),
     const _ConnectItem(
       Icons.groups_rounded,
@@ -335,7 +335,7 @@ List<_ConnectItem> _connectItems(AppLanguage language) => switch (language) {
       'Chừa sẵn nơi cho người học trực tiếp, sprint room và thông báo.',
       'Kế hoạch',
       AppStatusTone.neutral,
-      'Link cộng đồng sẽ được bật ở bản sau.',
+      'Phòng cộng đồng sẽ có trong bản cập nhật tương lai.',
     ),
   ],
   AppLanguage.ja => [
@@ -354,7 +354,7 @@ List<_ConnectItem> _connectItems(AppLanguage language) => switch (language) {
       'app shell を変えずに紹介導線を準備します。',
       '近日',
       AppStatusTone.warning,
-      '紹介 flow はまだローカル placeholder です。',
+      '紹介フローは今後のアップデートで追加予定です。',
     ),
     const _ConnectItem(
       Icons.groups_rounded,
@@ -362,7 +362,7 @@ List<_ConnectItem> _connectItems(AppLanguage language) => switch (language) {
       '学習者の live room、sprint room、announcement の居場所を確保します。',
       '予定',
       AppStatusTone.neutral,
-      'community link は後続リリースで有効になります。',
+      'コミュニティルームは今後のアップデートで追加されます。',
     ),
   ],
 };

@@ -508,9 +508,9 @@ String _queueTitle(AppLanguage language) => switch (language) {
       AppLanguage.ja => 'queue preview',
     };
 String _queueCaption(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'Local mock logic that already feels like a real active-learning panel.',
-      AppLanguage.vi => 'Logic mock local nhưng đã có cảm giác như panel active-learning thật.',
-      AppLanguage.ja => 'ローカル mock ですが、実際の active-learning panel に近い感触です。',
+      AppLanguage.en => 'Upcoming sessions based on what\'s due, your recent focus, and energy level.',
+      AppLanguage.vi => 'Các buổi học sắp tới dựa theo thẻ đến hạn, trọng tâm gần đây và mức năng lượng.',
+      AppLanguage.ja => '期限・最近のフォーカス・エネルギーレベルをもとにした次の学習セッションです。',
     };
 String _toolkitTitle(AppLanguage language) => switch (language) {
       AppLanguage.en => 'Active toolkit',

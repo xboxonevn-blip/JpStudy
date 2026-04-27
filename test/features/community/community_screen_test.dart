@@ -80,7 +80,7 @@ void main() {
       expect(find.byType(AlertDialog), findsNothing);
       // Snackbar should appear instead.
       expect(
-        find.text('Referral flow is still local placeholder content.'),
+        find.text('Referral flow is on our roadmap — stay tuned!'),
         findsOneWidget,
       );
     },
