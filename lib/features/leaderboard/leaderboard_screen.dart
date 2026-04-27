@@ -6,6 +6,7 @@ import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 class LeaderboardScreen extends ConsumerStatefulWidget {
   const LeaderboardScreen({super.key});
@@ -65,7 +66,15 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
               primaryLabel: _joinLabel(language),
               onPrimaryTap: () => _snack(context, _joinSoon(language)),
               secondaryLabel: _shareLabel(language),
-              onSecondaryTap: () => _snack(context, _shareSoon(language)),
+              onSecondaryTap: () => _shareSnapshot(
+                language,
+                league: activeRange.league,
+                rank: board.last.rank,
+                xp: personalXp,
+                streak: streak,
+                reviewed: totalReviewed,
+                bestScore: bestScore,
+              ),
             ),
             const SizedBox(height: AppSpacing.xl),
             AppSectionCard(
@@ -157,6 +166,29 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
 
   void _snack(BuildContext context, String text) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
+  }
+
+  Future<void> _shareSnapshot(
+    AppLanguage language, {
+    required String league,
+    required int rank,
+    required int xp,
+    required int streak,
+    required int reviewed,
+    required int bestScore,
+  }) async {
+    final text = _snapshotText(
+      language,
+      league: league,
+      rank: rank,
+      xp: xp,
+      streak: streak,
+      reviewed: reviewed,
+      bestScore: bestScore,
+    );
+    await SharePlus.instance.share(
+      ShareParams(text: text, subject: _shareLabel(language)),
+    );
   }
 }
 
@@ -295,9 +327,9 @@ String _topTitle(AppLanguage language) => switch (language) {
       AppLanguage.ja => '上位学習者',
     };
 String _topCaption(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'A richer mock leaderboard using your local XP and streak as the anchor.',
-      AppLanguage.vi => 'Bảng xếp hạng mock giàu hơn, lấy local XP và streak của bạn làm neo.',
-      AppLanguage.ja => 'ローカル XP と streak を軸にした、より厚みのある mock leaderboard です。',
+      AppLanguage.en => 'Rankings reflect your XP and streak — live sync coming soon.',
+      AppLanguage.vi => 'Xếp hạng dựa trên XP và streak của bạn — đồng bộ thật sẽ sớm có.',
+      AppLanguage.ja => 'XP と streak を基にしたランキングです。ライブ同期は近日追加予定。',
     };
 String _rowSubtitle(AppLanguage language, int xp, int streak) => switch (language) {
       AppLanguage.en => '$xp XP · $streak-day streak',
@@ -326,11 +358,36 @@ String _joinSoon(AppLanguage language) => switch (language) {
       AppLanguage.vi => 'Đăng ký thử thách sẽ được nối với sự kiện thật sau.',
       AppLanguage.ja => 'チャレンジ参加は後で live event と接続されます。',
     };
-String _shareSoon(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'Share cards will be enabled in a later release.',
-      AppLanguage.vi => 'Thẻ chia sẻ sẽ được bật ở bản sau.',
-      AppLanguage.ja => '共有カードは後続リリースで有効になります。',
-    };
+String _snapshotText(
+  AppLanguage language, {
+  required String league,
+  required int rank,
+  required int xp,
+  required int streak,
+  required int reviewed,
+  required int bestScore,
+}) {
+  final best = bestScore > 0 ? ' · Best: $bestScore%' : '';
+  final bestVi = bestScore > 0 ? ' · Tốt nhất: $bestScore%' : '';
+  final bestJa = bestScore > 0 ? ' ・ ベスト$bestScore%' : '';
+  return switch (language) {
+    AppLanguage.en =>
+      'My JpStudy leaderboard snapshot 🏆\n'
+      'League: $league | Position: #$rank\n'
+      '$xp XP · $streak-day streak · $reviewed reviewed$best\n'
+      '#JpStudy #JapaneseLearning',
+    AppLanguage.vi =>
+      'Snapshot xếp hạng JpStudy 🏆\n'
+      'Giải: $league | Vị trí: #$rank\n'
+      '$xp XP · chuỗi $streak ngày · đã ôn $reviewed$bestVi\n'
+      '#JpStudy #HọcTiếngNhật',
+    AppLanguage.ja =>
+      'JpStudy ランキング スナップショット 🏆\n'
+      'リーグ: $league | 順位: #$rank\n'
+      '$xp XP ・ $streak日連続 ・ 復習$reviewed件$bestJa\n'
+      '#JpStudy #日本語学習',
+  };
+}
 String _challengeSoon(AppLanguage language) => switch (language) {
       AppLanguage.en => 'Challenge syncing is still being wired up.',
       AppLanguage.vi => 'Đồng bộ thử thách vẫn đang được nối.',

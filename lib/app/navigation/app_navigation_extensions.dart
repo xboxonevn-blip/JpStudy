@@ -41,6 +41,7 @@ extension AppNavigationContext on BuildContext {
   void openLearnRecoveryPack() => pushNamed(AppRouteName.learnRecoveryPack);
   void openKanjiPractice({Object? extra}) =>
       pushNamed(AppRouteName.kanjiPractice, extra: extra);
+  void openLeaderboard() => goNamed(AppRouteName.leaderboard);
   void openHandwritingPractice() => goNamed(AppRouteName.practice);
   void openLearnSession(LearnSessionArgs args) =>
       pushNamed(AppRouteName.learnSession, extra: args);
