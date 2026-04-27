@@ -61,6 +61,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
   Timer? _autoBackupTimer;
   SharedPreferences? _prefs;
   BuildContext? _hostContext;
+  Future<void>? _initializeFuture;
   bool _disposed = false;
 
   @override
@@ -68,6 +69,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
     _disposed = false;
     ref.onDispose(() {
       _disposed = true;
+      _initializeFuture = null;
       _autoBackupTimer?.cancel();
       _hostContext = null;
     });
@@ -94,7 +96,17 @@ class DataSettingsController extends Notifier<DataSettingsState> {
     if (state.isReady) {
       return;
     }
-    await refresh();
+    final pending = _initializeFuture;
+    if (pending != null) {
+      await pending;
+      return;
+    }
+
+    final tracked = refresh().whenComplete(() {
+      _initializeFuture = null;
+    });
+    _initializeFuture = tracked;
+    await tracked;
   }
 
   Future<void> refresh() async {

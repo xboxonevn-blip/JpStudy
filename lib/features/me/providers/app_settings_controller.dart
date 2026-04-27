@@ -52,6 +52,7 @@ class AppSettingsController extends Notifier<AppSettingsState> {
   Timer? _inAppReminderTimer;
   SharedPreferences? _prefs;
   BuildContext? _hostContext;
+  Future<void>? _initializeFuture;
   bool _disposed = false;
 
   @override
@@ -59,6 +60,7 @@ class AppSettingsController extends Notifier<AppSettingsState> {
     _disposed = false;
     ref.onDispose(() {
       _disposed = true;
+      _initializeFuture = null;
       _inAppReminderTimer?.cancel();
       _hostContext = null;
     });
@@ -87,7 +89,17 @@ class AppSettingsController extends Notifier<AppSettingsState> {
     if (state.isReady) {
       return;
     }
-    await refresh();
+    final pending = _initializeFuture;
+    if (pending != null) {
+      await pending;
+      return;
+    }
+
+    final tracked = refresh().whenComplete(() {
+      _initializeFuture = null;
+    });
+    _initializeFuture = tracked;
+    await tracked;
   }
 
   Future<void> refresh() async {
