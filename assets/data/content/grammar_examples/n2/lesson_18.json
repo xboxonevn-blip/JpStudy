@@ -1,0 +1,364 @@
+{
+  "lessonId": 18,
+  "level": "N2",
+  "source": "Hanabira grammar JSON",
+  "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
+  "tags": [
+    "source-hanabira",
+    "n2-grammar-import"
+  ],
+  "examples": [
+    {
+      "grammarPoint": "～ばかりか〜も",
+      "sentence": "彼はかわいいばかりか、賢くもある。",
+      "translation": "He is not only cute but also smart.",
+      "translationEn": "He is not only cute but also smart.",
+      "romaji": "Kare wa kawaii bakari ka, kashikoku mo aru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ばかりか〜も",
+      "sentence": "このレストランは味が良いばかりかサービスも素晴らしいです。",
+      "translation": "This restaurant not only has great taste but also wonderful service.",
+      "translationEn": "This restaurant not only has great taste but also wonderful service.",
+      "romaji": "Kono resutoran wa aji ga yoi bakari ka saabisu mo subarashii desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ばかりか〜も",
+      "sentence": "彼女は日本語が上手ばかりか英語も話せる。",
+      "translation": "She can speak not only Japanese but also English.",
+      "translationEn": "She can speak not only Japanese but also English.",
+      "romaji": "Kanojo wa nihongo ga jouzu bakari ka eigo mo hanaseru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ばかりか〜も",
+      "sentence": "彼は歌が上手いばかりかダンスもうまい。",
+      "translation": "He is not only good at singing but also dancing.",
+      "translationEn": "He is not only good at singing but also dancing.",
+      "romaji": "Kare wa uta ga umai bakari ka dansu mo umai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ばかりだ",
+      "sentence": "彼は文句を言ってばかりだ。",
+      "translation": "He is always complaining.",
+      "translationEn": "He is always complaining.",
+      "romaji": "Kare wa monku wo itte bakari da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ばかりだ",
+      "sentence": "この映画は面白くなくて、退屈してばかりだ。",
+      "translation": "This movie isn't interesting, and I'm just bored.",
+      "translationEn": "This movie isn't interesting, and I'm just bored.",
+      "romaji": "Kono eiga wa omoshirokunakute, taikutsu shite bakari da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ばかりだ",
+      "sentence": "彼女は暇でいるばかりだ。",
+      "translation": "She is always just idling around with nothing to do.",
+      "translationEn": "She is always just idling around with nothing to do.",
+      "romaji": "Kanojo wa hima de iru bakari da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ばかりだ",
+      "sentence": "最近、仕事の失敗ばかりだ。",
+      "translation": "Lately, it’s just been one failure at work after another.",
+      "translationEn": "Lately, it’s just been one failure at work after another.",
+      "romaji": "Saikin, shigoto no shippai bakari da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ばかりに",
+      "sentence": "雨が降ったばかりに、試合が中止になりました。",
+      "translation": "Simply because it rained, the match was cancelled.",
+      "translationEn": "Simply because it rained, the match was cancelled.",
+      "romaji": "Ame ga futta bakari ni, shiai ga chuushi ni narimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ばかりに",
+      "sentence": "彼が遅れたばかりに、私たちも遅刻しました。",
+      "translation": "Because he was late, we ended up being late too.",
+      "translationEn": "Because he was late, we ended up being late too.",
+      "romaji": "Kare ga okureta bakari ni, watashitachi mo chikoku shimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ばかりに",
+      "sentence": "忘れ物をしたばかりに、買い物に戻らなければなりません。",
+      "translation": "Simply because I forgot something, I have to go back to the store.",
+      "translationEn": "Simply because I forgot something, I have to go back to the store.",
+      "romaji": "Wasuremono wo shita bakari ni, kaimono ni modoranakereba narimasen.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ばかりに",
+      "sentence": "彼女が美人なばかりに、みんなが彼女を羨んでいます。",
+      "translation": "Just because she is beautiful, everyone is envious of her.",
+      "translationEn": "Just because she is beautiful, everyone is envious of her.",
+      "romaji": "Kanojo ga bijin na bakari ni, minna ga kanojo wo urayande imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ば～というものでもない",
+      "sentence": "高いものがいいものばかりではない。",
+      "translation": "Expensive things are not always good.",
+      "translationEn": "Expensive things are not always good.",
+      "romaji": "Takai mono ga ii mono bakari de wa nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ば～というものでもない",
+      "sentence": "英語ができれば、成功するというものでもない。",
+      "translation": "Just because you can speak English doesn’t mean you’ll succeed.",
+      "translationEn": "Just because you can speak English doesn’t mean you’ll succeed.",
+      "romaji": "Eigo ga dekireba, seikou suru to iu mono demo nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ば～というものでもない",
+      "sentence": "見た目が美しいからといって、心も美しいというものでもない。",
+      "translation": "Just because someone is beautiful on the outside, it doesn’t mean they’re beautiful on the inside.",
+      "translationEn": "Just because someone is beautiful on the outside, it doesn’t mean they’re beautiful on the inside.",
+      "romaji": "Mitame ga utsukushii kara to itte, kokoro mo utsukushii to iu mono demo nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ば～というものでもない",
+      "sentence": "有名大学に入れば、将来が安泰だというものでもない。",
+      "translation": "Getting into a famous university doesn’t guarantee a secure future.",
+      "translationEn": "Getting into a famous university doesn’t guarantee a secure future.",
+      "romaji": "Yuumei daigaku ni haireba, shourai ga antai da to iu mono demo nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～はともかく～は",
+      "sentence": "デザインはともかく、機能はこの携帯電話が一番です。",
+      "translation": "As for design, the functionality of this phone is the best.",
+      "translationEn": "As for design, the functionality of this phone is the best.",
+      "romaji": "Dezain wa tomokaku, kinou wa kono keitai denwa ga ichiban desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～はともかく～は",
+      "sentence": "彼の容姿はともかく、性格は素晴らしいです。",
+      "translation": "Putting aside his looks, his personality is wonderful.",
+      "translationEn": "Putting aside his looks, his personality is wonderful.",
+      "romaji": "Kare no youshi wa tomokaku, seikaku wa subarashii desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～はともかく～は",
+      "sentence": "料理の味はともかく、盛り付けは綺麗です。",
+      "translation": "Putting aside the taste of the food, the presentation is beautiful.",
+      "translationEn": "Putting aside the taste of the food, the presentation is beautiful.",
+      "romaji": "Ryouri no aji wa tomokaku, moritsuke wa kirei desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～はともかく～は",
+      "sentence": "値段はともかく、このバッグの質は良いです。",
+      "translation": "Ignoring the price, this bag’s quality is good.",
+      "translationEn": "Ignoring the price, this bag’s quality is good.",
+      "romaji": "Nedan wa tomokaku, kono baggu no shitsu wa yoi desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～はまだしも",
+      "sentence": "失敗するのはまだしも、やらないで後悔する方がつらい。",
+      "translation": "Failing is one thing, but regretting not even trying is worse.",
+      "translationEn": "Failing is one thing, but regretting not even trying is worse.",
+      "romaji": "Shippai suru no wa mada shimo, yaranai de koukai suru hou ga tsurai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～はまだしも",
+      "sentence": "このピザは野菜が少ないのはまだしも、味も悪い。",
+      "translation": "It’s not just that this pizza has few vegetables, it also tastes bad.",
+      "translationEn": "It’s not just that this pizza has few vegetables, it also tastes bad.",
+      "romaji": "Kono piza wa yasai ga sukunai no wa mada shimo, aji mo warui.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～はまだしも",
+      "sentence": "たまに遅刻するのはまだしも、連絡もせずに遅刻するのは許せない。",
+      "translation": "Being late occasionally might be forgivable, but being late without any contact is unacceptable.",
+      "translationEn": "Being late occasionally might be forgivable, but being late without any contact is unacceptable.",
+      "romaji": "Tama ni chikoku suru no wa mada shimo, renraku mo sezu ni chikoku suru no wa yurusenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～はまだしも",
+      "sentence": "難しい質問に答えられないのはまだしも、簡単な質問にも答えられないのは問題だ。",
+      "translation": "It’s one thing not to be able to answer difficult questions, but it’s a real problem if you can’t even answer simple ones.",
+      "translationEn": "It’s one thing not to be able to answer difficult questions, but it’s a real problem if you can’t even answer simple ones.",
+      "romaji": "Muzukashii shitsumon ni kotaerarenai no wa mada shimo, kantan na shitsumon ni mo kotaerarenai no wa mondai da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～はもとより",
+      "sentence": "英語はもとより、スペイン語も勉強しています。",
+      "translation": "I'm studying not only English, but also Spanish.",
+      "translationEn": "I'm studying not only English, but also Spanish.",
+      "romaji": "Eigo wa moto yori, supeingo mo benkyou shite imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～はもとより",
+      "sentence": "彼女は料理はもとより、お菓子作りも得意です。",
+      "translation": "She’s not only good at cooking, but also at making sweets.",
+      "translationEn": "She’s not only good at cooking, but also at making sweets.",
+      "romaji": "Kanojo wa ryouri wa moto yori, okashi tsukuri mo tokui desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～はもとより",
+      "sentence": "このホテルは部屋の清潔さはもとより、サービスも素晴らしいです。",
+      "translation": "This hotel not only has clean rooms but also great service.",
+      "translationEn": "This hotel not only has clean rooms but also great service.",
+      "romaji": "Kono hoteru wa heya no seiketsusa wa moto yori, saabisu mo subarashii desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～はもとより",
+      "sentence": "彼は音楽はもとより、絵も上手です。",
+      "translation": "He’s not only good at music, but also skilled at drawing.",
+      "translationEn": "He’s not only good at music, but also skilled at drawing.",
+      "romaji": "Kare wa ongaku wa moto yori, e mo jouzu desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～は抜きにして",
+      "sentence": "値段は抜きにして、味は美味しい。",
+      "translation": "Leaving aside the price, the taste is delicious.",
+      "translationEn": "Leaving aside the price, the taste is delicious.",
+      "romaji": "Nedan wa nuki ni shite, aji wa oishii.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～は抜きにして",
+      "sentence": "彼の性格は抜きにして、彼の実力は認めざるを得ない。",
+      "translation": "Putting aside his personality, I have to acknowledge his ability.",
+      "translationEn": "Putting aside his personality, I have to acknowledge his ability.",
+      "romaji": "Kare no seikaku wa nuki ni shite, kare no jitsuryoku wa mitomezaru o enai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～は抜きにして",
+      "sentence": "デザインは抜きにして、この携帯電話の機能は優れています。",
+      "translation": "Leaving aside the design, this phone’s features are excellent.",
+      "translationEn": "Leaving aside the design, this phone’s features are excellent.",
+      "romaji": "Dezain wa nuki ni shite, kono keitai denwa no kinou wa sugurete imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～は抜きにして",
+      "sentence": "運転の速さは抜きにして、彼女は親切で信頼できる運転手だ。",
+      "translation": "Leaving aside her driving speed, she's a kind and trustworthy driver.",
+      "translationEn": "Leaving aside her driving speed, she's a kind and trustworthy driver.",
+      "romaji": "Unten no hayasa wa nuki ni shite, kanojo wa shinsetsu de shinrai dekiru untenshu da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,452 @@
+{
+  "lessonId": 22,
+  "level": "N1",
+  "source": "Hanabira grammar JSON",
+  "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
+  "tags": [
+    "source-hanabira",
+    "n1-grammar-import"
+  ],
+  "examples": [
+    {
+      "grammarPoint": "～と言わんばかりに",
+      "sentence": "彼女は優勝したと言わんばかりに笑った。",
+      "translation": "She laughed as if to say she won.",
+      "translationEn": "She laughed as if to say she won.",
+      "romaji": "Kanojo wa yuushou shita to iwan bakari ni waratta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～と言わんばかりに",
+      "sentence": "彼は倒れると言わんばかりの疲労感があった。",
+      "translation": "He was so fatigued it was as if he might collapse.",
+      "translationEn": "He was so fatigued it was as if he might collapse.",
+      "romaji": "Kare wa taoreru to iwan bakari no hiroukan ga atta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～と言わんばかりに",
+      "sentence": "彼女は雨の日を恐れていて、晴れてほしいと言わんばかりに窓の外を見つめていた。",
+      "translation": "She was afraid of rainy days, almost as if to say she wanted it to be sunny, as she gazed out the window.",
+      "translationEn": "She was afraid of rainy days, almost as if to say she wanted it to be sunny, as she gazed out the window.",
+      "romaji": "Kanojo wa ame no hi o osorete ite, harete hoshii to iwan bakari ni mado no soto o mitsumete ita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～と言わんばかりに",
+      "sentence": "彼の行動は、誰にも信じてもらえないと言わんばかりだった。",
+      "translation": "His behavior was as if to say that no one would believe him.",
+      "translationEn": "His behavior was as if to say that no one would believe him.",
+      "romaji": "Kare no koudou wa, dare ni mo shinjite moraenai to iwan bakari datta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～と言わんばかりの Noun",
+      "sentence": "田中さんは嬉しくて飛び上がると言わんばかりの笑顔を見せた。",
+      "translation": "Tanaka showed a smile as if to say he was so happy he could jump for joy.",
+      "translationEn": "Tanaka showed a smile as if to say he was so happy he could jump for joy.",
+      "romaji": "Tanaka-san wa ureshikute tobiagaru to iwan bakari no egao wo miseta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～と言わんばかりの Noun",
+      "sentence": "彼女は僕に話しかけると言わんばかりの視線を送った。",
+      "translation": "She sent me glances as if to say she wanted to speak with me.",
+      "translationEn": "She sent me glances as if to say she wanted to speak with me.",
+      "romaji": "Kanojo wa boku ni hanashikakeru to iwan bakari no shisen wo okutta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～と言わんばかりの Noun",
+      "sentence": "その老人は寒さで震えていると言わんばかりの姿を見せていた。",
+      "translation": "The old man was shivering as if to say he was freezing from the cold.",
+      "translationEn": "The old man was shivering as if to say he was freezing from the cold.",
+      "romaji": "Sono roujin wa samusa de furueteiru to iwan bakari no sugata wo miseteita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～と言わんばかりの Noun",
+      "sentence": "彼の体は緊張で固まっていると言わんばかりの風格を放っている。",
+      "translation": "He exudes an air as if his body were stiff from tension.",
+      "translationEn": "He exudes an air as if his body were stiff from tension.",
+      "romaji": "Kare no karada wa kinchou de katamatteiru to iwan bakari no fuukaku wo hanatteiru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ながらに",
+      "sentence": "彼女は生まれながらにして優れた音感を持っている。",
+      "translation": "She has had an excellent sense of pitch from birth.",
+      "translationEn": "She has had an excellent sense of pitch from birth.",
+      "romaji": "Kanojo wa umare nagara ni shite sugureta onkan o motte iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ながらに",
+      "sentence": "彼は子供ながらに大人の会話を理解していた。",
+      "translation": "Even though he was just a child, he understood adult conversations.",
+      "translationEn": "Even though he was just a child, he understood adult conversations.",
+      "romaji": "Kare wa kodomo nagara ni otona no kaiwa o rikaishite ita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ながらに",
+      "sentence": "彼女は涙ながらに真実を訴えた。",
+      "translation": "She pleaded the truth while in tears.",
+      "translationEn": "She pleaded the truth while in tears.",
+      "romaji": "Kanojo wa namida nagara ni shinjitsu o uttaeta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ながらに",
+      "sentence": "私たちは昔ながらに伝わる祭りを大切にしている。",
+      "translation": "We cherish the traditional festival that has been passed down unchanged from old times.",
+      "translationEn": "We cherish the traditional festival that has been passed down unchanged from old times.",
+      "romaji": "Watashi-tachi wa mukashi nagara ni tsutawaru matsuri o taisetsu ni shite iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ながらの Noun",
+      "sentence": "テレビを見ながらの夕食は、子供たちにとって楽しいだろう。",
+      "translation": "Eating dinner while watching TV might be fun for the children.",
+      "translationEn": "Eating dinner while watching TV might be fun for the children.",
+      "romaji": "Terebi o mi-nagara no yuushoku wa, kodomotachi ni totte tanoshii darou.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ながらの Noun",
+      "sentence": "地図を読みながらの運転は危険です。",
+      "translation": "Driving while reading a map is dangerous.",
+      "translationEn": "Driving while reading a map is dangerous.",
+      "romaji": "Chizu o yomi-nagara no unten wa kiken desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ながらの Noun",
+      "sentence": "散歩しながらの会話はリラックスできます。",
+      "translation": "Talking during a walk can be relaxing.",
+      "translationEn": "Talking during a walk can be relaxing.",
+      "romaji": "Sanpo shi-nagara no kaiwa wa rirakkusu dekimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ながらの Noun",
+      "sentence": "音楽を聴きながらの勉強は集中力を高めるかもしれません。",
+      "translation": "Studying while listening to music might improve concentration.",
+      "translationEn": "Studying while listening to music might improve concentration.",
+      "romaji": "Ongaku o kiki-nagara no benkyou wa shuuchuuryoku o takameru kamoshiremasen.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ながらも",
+      "sentence": "彼は貧しいながらも、幸せな生活を送っている。",
+      "translation": "Despite being poor, he leads a happy life.",
+      "translationEn": "Despite being poor, he leads a happy life.",
+      "romaji": "Kare wa mazushii nagara mo, shiawase na seikatsu o okutte iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ながらも",
+      "sentence": "僕は忙しいながらも、毎日運動しています。",
+      "translation": "Even though I am busy, I exercise every day.",
+      "translationEn": "Even though I am busy, I exercise every day.",
+      "romaji": "Boku wa isogashii nagara mo, mainichi undou shiteimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ながらも",
+      "sentence": "病気ながらも、彼は仕事を続けました。",
+      "translation": "Despite being sick, he continued working.",
+      "translationEn": "Despite being sick, he continued working.",
+      "romaji": "Byouki nagara mo, kare wa shigoto o tsuzukemashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ながらも",
+      "sentence": "雨が降っているながらも、彼は散歩に出かけた。",
+      "translation": "Even though it was raining, he went for a walk.",
+      "translationEn": "Even though it was raining, he went for a walk.",
+      "romaji": "Ame ga futte iru nagara mo, kare wa sanpo ni dekaketa.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～なくはない",
+      "sentence": "それを終えるのは難しくなくはない。",
+      "translation": "It's not that it's impossible to finish it.",
+      "translationEn": "It's not that it's impossible to finish it.",
+      "romaji": "Sore o oeru no wa muzukashiku naku wa nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～なくはない",
+      "sentence": "彼に話すのは怖くなくはない。",
+      "translation": "It's not that I'm entirely unafraid to talk to him.",
+      "translationEn": "It's not that I'm entirely unafraid to talk to him.",
+      "romaji": "Kare ni hanasu no wa kowaku naku wa nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～なくはない",
+      "sentence": "映画を見に行く時間がなくはない。",
+      "translation": "It's not that I don't have time to go see a movie.",
+      "translationEn": "It's not that I don't have time to go see a movie.",
+      "romaji": "Eiga o mi ni iku jikan ga naku wa nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～なくはない",
+      "sentence": "日本語で講演するのは難しくなくはない。",
+      "translation": "It's not impossible to give a lecture in Japanese, but it won't be easy.",
+      "translationEn": "It's not impossible to give a lecture in Japanese, but it won't be easy.",
+      "romaji": "Nihongo de kouen suru no wa muzukashiku naku wa nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～なくもない",
+      "sentence": "彼がもうすぐ戻るなら、待つなくもない。",
+      "translation": "If he’s coming back soon, waiting wouldn’t be a bad idea.",
+      "translationEn": "If he’s coming back soon, waiting wouldn’t be a bad idea.",
+      "romaji": "Kare ga mou sugu modoru nara, matsu naku mo nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～なくもない",
+      "sentence": "この本が役に立つなら、買うなくもない。",
+      "translation": "If this book is useful, it might not be a bad idea to buy it.",
+      "translationEn": "If this book is useful, it might not be a bad idea to buy it.",
+      "romaji": "Kono hon ga yaku ni tatsu nara, kau naku mo nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～なくもない",
+      "sentence": "天気が良ければ、ピクニックに行くなくもない。",
+      "translation": "If the weather is nice, it wouldn't be impossible for us to go on a picnic.",
+      "translationEn": "If the weather is nice, it wouldn't be impossible for us to go on a picnic.",
+      "romaji": "Tenki ga yokereba, pikunikku ni iku naku mo nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～なくもない",
+      "sentence": "そのプロジェクトが成功すれば、プロモーションもあり得なくもない。",
+      "translation": "If that project succeeds, a promotion might not be out of the question.",
+      "translationEn": "If that project succeeds, a promotion might not be out of the question.",
+      "romaji": "Sono purojekuto ga seikou sureba, puromooshon mo arienaku mo nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～なら～なりに",
+      "sentence": "彼はまだ初心者なら初心者なりに頑張っている。",
+      "translation": "Since he’s still a beginner, he’s doing his best in his own beginner way.",
+      "translationEn": "Since he’s still a beginner, he’s doing his best in his own beginner way.",
+      "romaji": "Kare wa mada shoshinsha nara shoshinsha nari ni ganbatteiru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～なら～なりに",
+      "sentence": "この料理は辛いなら辛いなりに美味しい。",
+      "translation": "If this dish is spicy, it’s delicious in its own spicy way.",
+      "translationEn": "If this dish is spicy, it’s delicious in its own spicy way.",
+      "romaji": "Kono ryouri wa karai nara karai nari ni oishii.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～なら～なりに",
+      "sentence": "あの人は変なら変なりに面白い。",
+      "translation": "If that person is strange, they’re interesting in their own strange way.",
+      "translationEn": "If that person is strange, they’re interesting in their own strange way.",
+      "romaji": "Ano hito wa hen nara hen nari ni omoshiroi.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～なら～なりに",
+      "sentence": "この町は小さいなら小さいなりに楽しい。",
+      "translation": "If this town is small, it’s fun in its own small way.",
+      "translationEn": "If this town is small, it’s fun in its own small way.",
+      "romaji": "Kono machi wa chiisai nara chiisai nari ni tanoshii.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～には及ばない",
+      "sentence": "ファーストクラスに乗るには及ばない、エコノミーでも十分だ。",
+      "translation": "There’s no need to go as far as flying first class; economy is enough.",
+      "translationEn": "There’s no need to go as far as flying first class; economy is enough.",
+      "romaji": "Faasuto kurasu ni noru ni wa oyobanai, ekonomii demo juubun da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～には及ばない",
+      "sentence": "毎回会うたびにギフトを持って行くには及ばない。",
+      "translation": "There’s no need to bring a gift every time you meet her.",
+      "translationEn": "There’s no need to bring a gift every time you meet her.",
+      "romaji": "Maikai au tabi ni gifuto o motte iku ni wa oyobanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～には及ばない",
+      "sentence": "その問題は先生に聞くには及ばない、自分で解決できる。",
+      "translation": "That issue doesn’t warrant asking the teacher; you can solve it yourself.",
+      "translationEn": "That issue doesn’t warrant asking the teacher; you can solve it yourself.",
+      "romaji": "Sono mondai wa sensei ni kiku ni wa oyobanai, jibun de kaiketsu dekiru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～には及ばない",
+      "sentence": "小さな失敗のために、あんなに辛辣な言葉を使うには及ばないだろう。",
+      "translation": "For such a small mistake, there’s no need to use such harsh words.",
+      "translationEn": "For such a small mistake, there’s no need to use such harsh words.",
+      "romaji": "Chiisana shippai no tame ni, anna ni shinratsu na kotoba o tsukau ni wa oyobanai darou.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～に堪えない",
+      "sentence": "彼の冗談は聞くに堪えない。",
+      "translation": "His jokes are unbearable to listen to.",
+      "translationEn": "His jokes are unbearable to listen to.",
+      "romaji": "Kare no joudan wa kiku ni taenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～に堪えない",
+      "sentence": "その映画は見るに堪えないほどひどい出来だ。",
+      "translation": "That movie is so bad that it’s unbearable to watch.",
+      "translationEn": "That movie is so bad that it’s unbearable to watch.",
+      "romaji": "Sono eiga wa miru ni taenai hodo hidoi deki da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～に堪えない",
+      "sentence": "この小説は読むに堪えないほど退屈だ。",
+      "translation": "This novel is so boring that it’s unbearable to read.",
+      "translationEn": "This novel is so boring that it’s unbearable to read.",
+      "romaji": "Kono shousetsu wa yomu ni taenai hodo taikutsu da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～に堪えない",
+      "sentence": "彼の行動は見るに堪えない。",
+      "translation": "His behavior is unbearable to watch.",
+      "translationEn": "His behavior is unbearable to watch.",
+      "romaji": "Kare no koudou wa miru ni taenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    }
+  ]
+}

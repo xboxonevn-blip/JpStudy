@@ -65,22 +65,26 @@ class HeaderBar extends StatelessWidget {
                 onTap: onLanguageTap,
               ),
               const SizedBox(width: 6),
-              PopupMenuButton<StudyLevel>(
-                tooltip: language.changeLevelLabel,
-                onSelected: onLevelChanged,
-                itemBuilder: (context) {
-                  return StudyLevel.values
-                      .map(
-                        (item) => PopupMenuItem<StudyLevel>(
-                          value: item,
-                          child: Text(item.shortLabel),
-                        ),
-                      )
-                      .toList();
-                },
-                child: _MenuPill(
-                  icon: Icons.school_rounded,
-                  label: level?.shortLabel ?? 'JLPT',
+              Semantics(
+                label: language.changeLevelLabel,
+                button: true,
+                child: PopupMenuButton<StudyLevel>(
+                  tooltip: language.changeLevelLabel,
+                  onSelected: onLevelChanged,
+                  itemBuilder: (context) {
+                    return StudyLevel.values
+                        .map(
+                          (item) => PopupMenuItem<StudyLevel>(
+                            value: item,
+                            child: Text(item.shortLabel),
+                          ),
+                        )
+                        .toList();
+                  },
+                  child: _MenuPill(
+                    icon: Icons.school_rounded,
+                    label: level?.shortLabel ?? 'JLPT',
+                  ),
                 ),
               ),
               const SizedBox(width: 6),
@@ -253,31 +257,35 @@ class _ActionPill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final palette = context.appPalette;
-    return Tooltip(
-      message: tooltip,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(999),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
-          decoration: BoxDecoration(
-            color: palette.surface,
-            borderRadius: BorderRadius.circular(999),
-            border: Border.all(color: palette.outline),
-          ),
-          child: Row(
-            children: [
-              Icon(icon, size: 14, color: palette.primary),
-              const SizedBox(width: 4),
-              Text(
-                label,
-                style: TextStyle(
-                  color: palette.ink.withValues(alpha: 0.86),
-                  fontSize: 11.5,
-                  fontWeight: FontWeight.w800,
+    return Semantics(
+      label: tooltip,
+      button: true,
+      child: Tooltip(
+        message: tooltip,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(999),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
+            decoration: BoxDecoration(
+              color: palette.surface,
+              borderRadius: BorderRadius.circular(999),
+              border: Border.all(color: palette.outline),
+            ),
+            child: Row(
+              children: [
+                Icon(icon, size: 14, color: palette.primary),
+                const SizedBox(width: 4),
+                Text(
+                  label,
+                  style: TextStyle(
+                    color: palette.ink.withValues(alpha: 0.86),
+                    fontSize: 11.5,
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

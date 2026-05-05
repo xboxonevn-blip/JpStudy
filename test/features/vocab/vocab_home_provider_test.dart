@@ -186,34 +186,39 @@ void main() {
       expect(result.nextReview, isNull);
     });
 
+    test('liveTracks contains all interactive JLPT lanes', () async {
+      final container = _buildContainer(repo: _FakeVocabRepo());
+      addTearDown(container.dispose);
+
+      final result = await container.read(vocabHomeSectionProvider.future);
+
+      expect(result.liveTracks.length, equals(7));
+      expect(
+        result.liveTracks.map((t) => t.key),
+        containsAll([
+          'n5_core',
+          'n5_minna',
+          'n4_core',
+          'n4_minna',
+          'n3_core',
+          'n2_core',
+          'n1_core',
+        ]),
+      );
+    });
+
     test(
-      'liveTracks always contains 4 entries (N5 core, N5 minna, N4 core, N4 minna)',
+      'previewTracks only contains future non-JLPT roadmap entries',
       () async {
         final container = _buildContainer(repo: _FakeVocabRepo());
         addTearDown(container.dispose);
 
         final result = await container.read(vocabHomeSectionProvider.future);
 
-        expect(result.liveTracks.length, equals(4));
-        expect(
-          result.liveTracks.map((t) => t.key),
-          containsAll(['n5_core', 'n5_minna', 'n4_core', 'n4_minna']),
-        );
+        expect(result.previewTracks.length, equals(1));
+        expect(result.previewTracks.single.key, equals('se_core'));
       },
     );
-
-    test('previewTracks always contains 4 entries (N3, N2, N1, SE)', () async {
-      final container = _buildContainer(repo: _FakeVocabRepo());
-      addTearDown(container.dispose);
-
-      final result = await container.read(vocabHomeSectionProvider.future);
-
-      expect(result.previewTracks.length, equals(4));
-      expect(
-        result.previewTracks.map((t) => t.key),
-        containsAll(['n3_core', 'n2_core', 'n1_core', 'se_core']),
-      );
-    });
 
     test('n5_core track is interactive when data exists', () async {
       final n5 = List.generate(10, (i) => _makeVocab(i + 1, 'N5'));
@@ -292,24 +297,17 @@ void main() {
       },
     );
 
-    test(
-      'previewTracks have isInteractive=false and isPreview based on data availability',
-      () async {
-        final n3 = List.generate(3, (i) => _makeVocab(200 + i, 'N3'));
-        final container = _buildContainer(
-          repo: _FakeVocabRepo(bank: {'N3': n3}),
-        );
-        addTearDown(container.dispose);
+    test('upper JLPT core tracks are interactive when data exists', () async {
+      final n3 = List.generate(3, (i) => _makeVocab(200 + i, 'N3'));
+      final container = _buildContainer(repo: _FakeVocabRepo(bank: {'N3': n3}));
+      addTearDown(container.dispose);
 
-        final result = await container.read(vocabHomeSectionProvider.future);
+      final result = await container.read(vocabHomeSectionProvider.future);
 
-        final n3Track = result.previewTracks.firstWhere(
-          (t) => t.key == 'n3_core',
-        );
-        expect(n3Track.isInteractive, isFalse);
-        expect(n3Track.isPreview, isTrue);
-        expect(n3Track.termCount, equals(3));
-      },
-    );
+      final n3Track = result.liveTracks.firstWhere((t) => t.key == 'n3_core');
+      expect(n3Track.isInteractive, isTrue);
+      expect(n3Track.isPreview, isFalse);
+      expect(n3Track.termCount, equals(3));
+    });
   });
 }

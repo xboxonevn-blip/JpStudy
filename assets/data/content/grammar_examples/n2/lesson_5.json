@@ -1,0 +1,364 @@
+{
+  "lessonId": 5,
+  "level": "N2",
+  "source": "Hanabira grammar JSON",
+  "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
+  "tags": [
+    "source-hanabira",
+    "n2-grammar-import"
+  ],
+  "examples": [
+    {
+      "grammarPoint": "Noun を めぐる Noun",
+      "sentence": "この事件をめぐる議論が続いています。",
+      "translation": "The debate concerning this incident continues.",
+      "translationEn": "The debate concerning this incident continues.",
+      "romaji": "Kono jiken o meguru giron ga tsudzuite imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を めぐる Noun",
+      "sentence": "環境問題をめぐる国際会議が開かれます。",
+      "translation": "An international conference regarding environmental issues will be held.",
+      "translationEn": "An international conference regarding environmental issues will be held.",
+      "romaji": "Kankyō mondai o meguru kokusai kaigi ga hirakaremasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を めぐる Noun",
+      "sentence": "彼の突然の辞任をめぐるうわさが広がっている。",
+      "translation": "Rumors are spreading concerning his sudden resignation.",
+      "translationEn": "Rumors are spreading concerning his sudden resignation.",
+      "romaji": "Kare no totsuzen no jinin o meguru uwasa ga hirogatte iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を めぐる Noun",
+      "sentence": "映画祭をめぐる活動が多くなっています。",
+      "translation": "There are increasing activities surrounding the film festival.",
+      "translationEn": "There are increasing activities surrounding the film festival.",
+      "romaji": "Eigashai o meguru katsudō ga ōku natte imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を もとに",
+      "sentence": "この映画は実話をもとに作られました。",
+      "translation": "This movie was made based on a true story.",
+      "translationEn": "This movie was made based on a true story.",
+      "romaji": "Kono eiga wa jitsuwa o moto ni tsukuraremashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を もとに",
+      "sentence": "彼の経験をもとにアドバイスが必要だ。",
+      "translation": "Advice is needed based on his experience.",
+      "translationEn": "Advice is needed based on his experience.",
+      "romaji": "Kare no keiken o moto ni adobaisu ga hitsuyō da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を もとに",
+      "sentence": "データをもとに分析を行いました。",
+      "translation": "I performed an analysis based on the data.",
+      "translationEn": "I performed an analysis based on the data.",
+      "romaji": "Dēta o moto ni bunseki o okonaimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を もとに",
+      "sentence": "世界中の美術館をもとにコレクションを作りました。",
+      "translation": "I created a collection based on art galleries all over the world.",
+      "translationEn": "I created a collection based on art galleries all over the world.",
+      "romaji": "Sekaijū no bijutsukan o moto ni korekushon o tsukurimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を もとにして",
+      "sentence": "彼の意見をもとにして、計画を変更しました。",
+      "translation": "Based on his opinion, we changed the plan.",
+      "translationEn": "Based on his opinion, we changed the plan.",
+      "romaji": "Kare no iken o moto ni shite, keikaku o henkō shimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を もとにして",
+      "sentence": "この小説は実話をもとにして書かれています。",
+      "translation": "This novel is written based on a true story.",
+      "translationEn": "This novel is written based on a true story.",
+      "romaji": "Kono shōsetsu wa jitsuwa o moto ni shite kakarete imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を もとにして",
+      "sentence": "資料をもとにして、レポートを作成しました。",
+      "translation": "I created the report based on the materials.",
+      "translationEn": "I created the report based on the materials.",
+      "romaji": "Shiryō o moto ni shite, repōto o sakusei shimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を もとにして",
+      "sentence": "過去の成功例をもとにして、新しいプロジェクトを進める予定です。",
+      "translation": "We plan to proceed with the new project based on past successful examples.",
+      "translationEn": "We plan to proceed with the new project based on past successful examples.",
+      "romaji": "Kako no seikōrei o moto ni shite, atarashii purojekuto o susumeru yotei desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ことなく",
+      "sentence": "彼女は泣くことなく帰ってしまいました。",
+      "translation": "She went home without crying.",
+      "translationEn": "She went home without crying.",
+      "romaji": "Kanojo wa naku koto naku kaette shimaimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ことなく",
+      "sentence": "彼は注意することなく突然出かけた。",
+      "translation": "He suddenly left without giving any warning.",
+      "translationEn": "He suddenly left without giving any warning.",
+      "romaji": "Kare wa chūi suru koto naku totsuzen dekaketa.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ことなく",
+      "sentence": "山田さんは誰にも話すことなく会社を辞めました。",
+      "translation": "Mr. Yamada quit the company without talking to anyone.",
+      "translationEn": "Mr. Yamada quit the company without talking to anyone.",
+      "romaji": "Yamada-san wa dare ni mo hanasu koto naku kaisha o yamemashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ことなく",
+      "sentence": "２０年間、病気になることなく働いています。",
+      "translation": "I have been working for 20 years without getting sick.",
+      "translationEn": "I have been working for 20 years without getting sick.",
+      "romaji": "Nijūnenkan, byōki ni naru koto naku hataraite imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ないことには Verb ない",
+      "sentence": "薬を飲まないことには、病気が治らない。",
+      "translation": "Unless you take the medicine, the illness won't get better.",
+      "translationEn": "Unless you take the medicine, the illness won't get better.",
+      "romaji": "Kusuri o nomanai koto ni wa, byōki ga naoranai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ないことには Verb ない",
+      "sentence": "この問題によく考えないことには、解決できない。",
+      "translation": "Unless you think carefully about this problem, you can't solve it.",
+      "translationEn": "Unless you think carefully about this problem, you can't solve it.",
+      "romaji": "Kono mondai ni yoku kangaenai koto ni wa, kaiketsu dekinai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ないことには Verb ない",
+      "sentence": "練習をしないことには、スキルが上達しない。",
+      "translation": "Unless you practice, your skills won't improve.",
+      "translationEn": "Unless you practice, your skills won't improve.",
+      "romaji": "Renshū o shinai koto ni wa, sukiru ga jōtatsu shinai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ないことには Verb ない",
+      "sentence": "手続きをしないことには、新しいパスポートがもらえない。",
+      "translation": "Unless you go through the procedures, you can't get a new passport.",
+      "translationEn": "Unless you go through the procedures, you can't get a new passport.",
+      "romaji": "Tetsuzuki o shinai koto ni wa, atarashii pasupōto ga moraenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～あげく",
+      "sentence": "長い時間待ったあげく、電車が来なかった。",
+      "translation": "After waiting a long time, in the end, the train didn't come.",
+      "translationEn": "After waiting a long time, in the end, the train didn't come.",
+      "romaji": "Nagai jikan matta ageku, densha ga konakatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～あげく",
+      "sentence": "いろいろな方法を試したあげく、成功した。",
+      "translation": "After trying various methods, I finally succeeded.",
+      "translationEn": "After trying various methods, I finally succeeded.",
+      "romaji": "Iroiro na hōhō o tameshita ageku, seikō shita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～あげく",
+      "sentence": "彼は失敗のあげく、会社を辞める決心をした。",
+      "translation": "In the end, after his failures, he decided to quit the company.",
+      "translationEn": "In the end, after his failures, he decided to quit the company.",
+      "romaji": "Kare wa shippai no ageku, kaisha o yameru kesshin o shita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～あげく",
+      "sentence": "彼女は長い間悩んだあげく、その仕事を断った。",
+      "translation": "After worrying for a long time, she finally turned down the job.",
+      "translationEn": "After worrying for a long time, she finally turned down the job.",
+      "romaji": "Kanojo wa nagai aida nayanda ageku, sono shigoto o kotowatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～あまり",
+      "sentence": "昨日は疲れすぎたあまり、朝まで眠り続けました。",
+      "translation": "Yesterday, I was so tired that I slept until morning.",
+      "translationEn": "Yesterday, I was so tired that I slept until morning.",
+      "romaji": "Kinō wa tsukare-sugita amari, asa made nemuri tsuzukemashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～あまり",
+      "sentence": "彼女はうれしいあまり、泣き出してしまった。",
+      "translation": "She was so happy that she ended up crying.",
+      "translationEn": "She was so happy that she ended up crying.",
+      "romaji": "Kanojo wa ureshii amari, nakidashite shimatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～あまり",
+      "sentence": "彼は安全を確認するあまり、何回もドアをチェックしている。",
+      "translation": "He is so concerned about safety that he checks the door many times.",
+      "translationEn": "He is so concerned about safety that he checks the door many times.",
+      "romaji": "Kare wa anzen o kakunin suru amari, nankai mo doa o chekku shite iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～あまり",
+      "sentence": "寒さのあまり、彼は震えが止まらなかった。",
+      "translation": "It was so cold that he couldn't stop shivering.",
+      "translationEn": "It was so cold that he couldn't stop shivering.",
+      "romaji": "Samusa no amari, kare wa furue ga tomaranakatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～うちに",
+      "sentence": "元気なうちに、旅行を楽しんでください。",
+      "translation": "Enjoy traveling while you are healthy.",
+      "translationEn": "Enjoy traveling while you are healthy.",
+      "romaji": "Genki na uchi ni, ryokō o tanoshinde kudasai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～うちに",
+      "sentence": "若いうちに、いろいろなことを学ぶべきだ。",
+      "translation": "One should learn various things while they are young.",
+      "translationEn": "One should learn various things while they are young.",
+      "romaji": "Wakai uchi ni, iroiro na koto o manabu beki da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～うちに",
+      "sentence": "子供が寝ているうちに、夕食の準備をしましょう。",
+      "translation": "Let's prepare dinner while the kids are sleeping.",
+      "translationEn": "Let's prepare dinner while the kids are sleeping.",
+      "romaji": "Kodomo ga nete iru uchi ni, yūshoku no junbi o shimashō.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～うちに",
+      "sentence": "雨が降らないうちに、家に帰りましょう。",
+      "translation": "Let's go home before it starts raining.",
+      "translationEn": "Let's go home before it starts raining.",
+      "romaji": "Ame ga furanai uchi ni, ie ni kaerimashō.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    }
+  ]
+}

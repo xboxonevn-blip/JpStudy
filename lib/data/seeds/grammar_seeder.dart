@@ -8,17 +8,13 @@ import '../daos/grammar_dao.dart';
 import '../utils/grammar_example_matching.dart';
 import '../utils/grammar_english_notation.dart';
 
-typedef _LessonData = ({
-  int lessonId,
-  List<dynamic> def,
-  List<dynamic>? ex,
-});
+typedef _LessonData = ({int lessonId, List<dynamic> def, List<dynamic>? ex});
 
 class GrammarSeeder {
   final GrammarDao _dao;
 
-  // Tăng version này lên khi thay đổi file JSON data
-  static const int kGrammarDataVersion = 8;
+  // TÄƒng version nÃ y lÃªn khi thay Ä‘á»•i file JSON data
+  static const int kGrammarDataVersion = 11;
   static const String kKeyGrammarVersion = 'grammar_data_version';
 
   GrammarSeeder(this._dao);
@@ -27,15 +23,15 @@ class GrammarSeeder {
     final prefs = await SharedPreferences.getInstance();
     final currentVersion = prefs.getInt(kKeyGrammarVersion) ?? 0;
 
-    // Smart Seeding: Chỉ chạy nếu version thay đổi hoặc chưa có data
+    // Smart Seeding: Chá»‰ cháº¡y náº¿u version thay Ä‘á»•i hoáº·c chÆ°a cÃ³ data
     if (currentVersion >= kGrammarDataVersion) {
       debugPrint(
-        '⚡ Skipping Grammar Seed: Data is up to date (v$currentVersion)',
+        'âš¡ Skipping Grammar Seed: Data is up to date (v$currentVersion)',
       );
       return;
     }
 
-    debugPrint('🔄 Starting Grammar Seed (v$kGrammarDataVersion)...');
+    debugPrint('ðŸ”„ Starting Grammar Seed (v$kGrammarDataVersion)...');
     final stopwatch = Stopwatch()..start();
 
     // Load all JSON files concurrently before opening the transaction so
@@ -43,31 +39,31 @@ class GrammarSeeder {
     final allLevelData = await Future.wait([
       _loadLevelJson('N5', 1, 25),
       _loadLevelJson('N4', 26, 50),
-      _loadLevelJson('N3', 51, 75),
+      _loadLevelJson('N3', 1, 25),
+      _loadLevelJson('N2', 1, 25),
+      _loadLevelJson('N1', 1, 25),
     ]);
 
-    // Chạy trong transaction để đảm bảo toàn vẹn dữ liệu
+    // Cháº¡y trong transaction Ä‘á»ƒ Ä‘áº£m báº£o toÃ n váº¹n dá»¯ liá»‡u
     await db.transaction(() async {
       await _seedLevelFromData('N5', allLevelData[0]);
       await _seedLevelFromData('N4', allLevelData[1]);
       await _seedLevelFromData('N3', allLevelData[2]);
+      await _seedLevelFromData('N2', allLevelData[3]);
+      await _seedLevelFromData('N1', allLevelData[4]);
     });
 
     await prefs.setInt(kKeyGrammarVersion, kGrammarDataVersion);
     stopwatch.stop();
     debugPrint(
-      '✅ Grammar Seed Completed in ${stopwatch.elapsedMilliseconds}ms. Version updated to $kGrammarDataVersion',
+      'âœ… Grammar Seed Completed in ${stopwatch.elapsedMilliseconds}ms. Version updated to $kGrammarDataVersion',
     );
   }
 
-  // ── JSON loading (pure I/O, no DB) ───────────────────────────────────────
+  // â”€â”€ JSON loading (pure I/O, no DB) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   /// Loads all lesson JSON files for [level] concurrently.
-  Future<List<_LessonData>> _loadLevelJson(
-    String level,
-    int start,
-    int end,
-  ) {
+  Future<List<_LessonData>> _loadLevelJson(String level, int start, int end) {
     return Future.wait([
       for (int i = start; i <= end; i++) _loadOneLessonJson(level, i),
     ]);
@@ -81,7 +77,7 @@ class GrammarSeeder {
     final exPath =
         'assets/data/content/grammar_examples/$ll/lesson_$lessonId.json';
 
-    // Fire both loads concurrently — they are completely independent.
+    // Fire both loads concurrently â€” they are completely independent.
     final defFuture = rootBundle
         .loadString(defPath)
         .then((s) => json.decode(s) as List<dynamic>);
@@ -101,7 +97,7 @@ class GrammarSeeder {
     }
   }
 
-  // ── DB seeding ────────────────────────────────────────────────────────────
+  // â”€â”€ DB seeding â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   Future<void> _seedLevelFromData(
     String level,
@@ -145,7 +141,8 @@ class GrammarSeeder {
         rawStructure.isEmpty ? grammarPointLabel : rawStructure,
       );
       final titleVi =
-          ((item['title'] ?? item['meaning_vi'] ?? '').toString().trim()).trim();
+          ((item['title'] ?? item['meaning_vi'] ?? '').toString().trim())
+              .trim();
       final structureEn = normalizeGrammarStructureEn(
         item['structureEn'] as String?,
       );
@@ -180,12 +177,15 @@ class GrammarSeeder {
         titleEn: rawTitleEn,
         meaningEn: rawTitleEn,
       );
-      final storedTitleEn =
-          englishLabel == 'Target pattern' ? null : englishLabel;
-      final storedMeaningEn =
-          englishMeaning == 'Target pattern' ? null : englishMeaning;
-      final storedConnectionEn =
-          englishConnection == 'Grammar pattern' ? null : englishConnection;
+      final storedTitleEn = englishLabel == 'Target pattern'
+          ? null
+          : englishLabel;
+      final storedMeaningEn = englishMeaning == 'Target pattern'
+          ? null
+          : englishMeaning;
+      final storedConnectionEn = englishConnection == 'Grammar pattern'
+          ? null
+          : englishConnection;
 
       final existing = _findExistingPoint(
         existingPoints,
@@ -309,13 +309,13 @@ class GrammarSeeder {
 
     final normalized = stripNonCanonicalGrammarNotes(
       raw,
-    ).replaceAll(RegExp(r'[~～]'), '〜').trim();
+    ).replaceAll(RegExp(r'[~?]'), '?').trim();
     final compact = normalized
         .toLowerCase()
-        .replaceAll(RegExp(r'[\s\u3000\(\)（）\[\]【】「」『』:：,，.．/／・\-\+]+'), '')
+        .replaceAll(RegExp(r'[\s\u3000\(\)?\[\]?:?,?.?/?\-\+]+'), '')
         .trim();
     final japaneseCore = normalized
-        .replaceAll(RegExp(r'[^〜ぁ-ゖァ-ヶ一-龯々ー]'), '')
+        .replaceAll(RegExp(r'[^?-?-?-?]'), '')
         .trim();
 
     return <String>{raw, normalized, compact, japaneseCore}

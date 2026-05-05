@@ -1,4 +1,4 @@
-﻿name: jpstudy
+name: jpstudy
 description: "Local-first Flutter app for Japanese study with JLPT content, FSRS review, grammar drills, handwriting practice, and exam training."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -95,6 +95,8 @@ flutter:
     - assets/data/content/grammar/n3/
     - assets/data/content/grammar/n4/
     - assets/data/content/grammar/n5/
+    - assets/data/content/grammar_examples/n1/
+    - assets/data/content/grammar_examples/n2/
     - assets/data/content/grammar_examples/n3/
     - assets/data/content/grammar_examples/n4/
     - assets/data/content/grammar_examples/n5/
@@ -103,6 +105,8 @@ flutter:
     - assets/data/content/immersion/n3/
     - assets/data/content/immersion/n4/
     - assets/data/content/immersion/n5/
+    - assets/data/content/kanji/n1/
+    - assets/data/content/kanji/n2/
     - assets/data/content/kanji/n3/
     - assets/data/content/kanji/n4/
     - assets/data/content/kanji/n5/
@@ -150,5 +154,6 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
 
 

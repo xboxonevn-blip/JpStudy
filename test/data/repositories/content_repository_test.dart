@@ -1,4 +1,3 @@
-import 'package:drift/drift.dart' hide isNull, isNotNull;
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/data/db/content_database.dart';
@@ -66,26 +65,4 @@ void main() {
     expect(r20.missedCount, 1);
   });
 
-  // ── getDebugTags ─────────────────────────────────────────────────────────
-
-  test('getDebugTags returns NOT FOUND for missing term', () async {
-    final result = await repository.getDebugTags('nonexistent');
-    expect(result, contains('NOT FOUND'));
-  });
-
-  test('getDebugTags returns term info for existing vocab', () async {
-    await db.into(db.vocab).insert(
-          VocabCompanion.insert(
-            id: const Value(101),
-            term: '食べる',
-            meaning: 'to eat',
-            level: 'N5',
-            tags: const Value('verb'),
-          ),
-        );
-
-    final result = await repository.getDebugTags('食べる');
-    expect(result, contains('食べる'));
-    expect(result, contains('N5'));
-  });
 }

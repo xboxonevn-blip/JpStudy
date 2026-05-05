@@ -1,0 +1,452 @@
+{
+  "lessonId": 13,
+  "level": "N1",
+  "source": "Hanabira grammar JSON",
+  "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
+  "tags": [
+    "source-hanabira",
+    "n1-grammar-import"
+  ],
+  "examples": [
+    {
+      "grammarPoint": "Verb ずにはすまない",
+      "sentence": "この問題を解決しないと、社会全体が影響を受けるので、解決せずにはすまない。",
+      "translation": "Since this issue will affect the entire society if not resolved, we cannot do without solving it.",
+      "translationEn": "Since this issue will affect the entire society if not resolved, we cannot do without solving it.",
+      "romaji": "Kono mondai o kaiketsu shinai to, shakai zentai ga eikyō o ukeru node, kaiketsu sezu ni wa sumanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ずにはすまない",
+      "sentence": "これは子供たちの未来を思うと、教育改革を行わずにはすまないことだ。",
+      "translation": "For the sake of the children’s future, we cannot avoid carrying out educational reforms.",
+      "translationEn": "For the sake of the children’s future, we cannot avoid carrying out educational reforms.",
+      "romaji": "Kore wa kodomo-tachi no mirai o omou to, kyōiku kaikaku o okonawazu ni wa sumanai koto da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ずにはすまない",
+      "sentence": "この件については、彼に謝らずにはすまない。",
+      "translation": "Regarding this matter, I can’t do without apologizing to him.",
+      "translationEn": "Regarding this matter, I can’t do without apologizing to him.",
+      "romaji": "Kono ken ni tsuite wa, kare ni ayamarazu ni wa sumanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ずにはすまない",
+      "sentence": "結婚式に出席するなら、プレゼントを渡さずにはすまない。",
+      "translation": "If you attend a wedding, you have to bring a gift.",
+      "translationEn": "If you attend a wedding, you have to bring a gift.",
+      "romaji": "Kekkonshiki ni shusseki suru nara, purezento o watasazu ni wa sumanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb そうにない",
+      "sentence": "彼はそんなに早く走れそうにない。",
+      "translation": "He doesn't seem likely to run that fast.",
+      "translationEn": "He doesn't seem likely to run that fast.",
+      "romaji": "Kare wa sonna ni hayaku hashire sō ni nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb そうにない",
+      "sentence": "この書類を明日までに終わりそうにない。",
+      "translation": "It doesn’t seem like I’ll be able to finish these documents by tomorrow.",
+      "translationEn": "It doesn’t seem like I’ll be able to finish these documents by tomorrow.",
+      "romaji": "Kono shorui o ashita made ni owarisō ni nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb そうにない",
+      "sentence": "今日雨が降りそうにない。",
+      "translation": "It doesn't look like it will rain today.",
+      "translationEn": "It doesn't look like it will rain today.",
+      "romaji": "Kyō ame ga furisō ni nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb そうにない",
+      "sentence": "彼女は間違えそうにない。",
+      "translation": "She doesn’t seem likely to make a mistake.",
+      "translationEn": "She doesn’t seem likely to make a mistake.",
+      "romaji": "Kanojo wa machigae sō ni nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb そうもない",
+      "sentence": "今日中に仕事を終えそうもない。",
+      "translation": "It doesn't seem like I'll finish my work today.",
+      "translationEn": "It doesn't seem like I'll finish my work today.",
+      "romaji": "Kyōjū ni shigoto o oesō mo nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb そうもない",
+      "sentence": "雨が止みそうもない。",
+      "translation": "It doesn't seem like the rain will stop.",
+      "translationEn": "It doesn't seem like the rain will stop.",
+      "romaji": "Ame ga yamisō mo nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb そうもない",
+      "sentence": "彼が約束を守りそうもない。",
+      "translation": "It doesn't seem like he will keep his promise.",
+      "translationEn": "It doesn't seem like he will keep his promise.",
+      "romaji": "Kare ga yakusoku o mamorisō mo nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb そうもない",
+      "sentence": "この難しい問題は解決しそうもない。",
+      "translation": "It doesn't seem like this difficult problem will be solved.",
+      "translationEn": "It doesn't seem like this difficult problem will be solved.",
+      "romaji": "Kono muzukashii mondai wa kaiketsu shisō mo nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb そばから",
+      "sentence": "掃除をするそばから子供たちが散らかす。",
+      "translation": "As soon as I clean, the kids mess it up.",
+      "translationEn": "As soon as I clean, the kids mess it up.",
+      "romaji": "Sōji o suru soba kara kodomo-tachi ga chirakasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb そばから",
+      "sentence": "仕事を終えるそばから新たな仕事が舞い込んできた。",
+      "translation": "As soon as I finished my work, a new task came in.",
+      "translationEn": "As soon as I finished my work, a new task came in.",
+      "romaji": "Shigoto o oeru soba kara aratana shigoto ga maikonde kita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb そばから",
+      "sentence": "それを解決するそばからまた別の問題が出てきた。",
+      "translation": "As soon as we solve that, another problem arises.",
+      "translationEn": "As soon as we solve that, another problem arises.",
+      "romaji": "Sore o kaiketsu suru soba kara mata betsu no mondai ga detekita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb そばから",
+      "sentence": "眠りにつくそばから電話が鳴った。",
+      "translation": "The phone rang as soon as I fell asleep.",
+      "translationEn": "The phone rang as soon as I fell asleep.",
+      "romaji": "Nemuri ni tsuku soba kara denwa ga natta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb たが最後",
+      "sentence": "彼が一度怒ったが最後、誰も彼を止めることはできません。",
+      "translation": "Once he gets angry, no one can stop him.",
+      "translationEn": "Once he gets angry, no one can stop him.",
+      "romaji": "Kare ga ichido okotta ga saigo, dare mo kare o tomeru koto wa dekimasen.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb たが最後",
+      "sentence": "このゲームを始めたが最後、一晩中やり続けた。",
+      "translation": "As soon as I started this game, I played it all night.",
+      "translationEn": "As soon as I started this game, I played it all night.",
+      "romaji": "Kono gēmu o hajimeta ga saigo, hitobanjū yari tsuzuketa.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb たが最後",
+      "sentence": "彼女が部屋を出たが最後、二度と戻ってこなかった。",
+      "translation": "The moment she left the room, she never came back.",
+      "translationEn": "The moment she left the room, she never came back.",
+      "romaji": "Kanojo ga heya o deta ga saigo, nido to modotte konakatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb たが最後",
+      "sentence": "私がその橋を渡ったが最後、それが最後の別れだった。",
+      "translation": "Once I crossed that bridge, it was our final goodbye.",
+      "translationEn": "Once I crossed that bridge, it was our final goodbye.",
+      "romaji": "Watashi ga sono hashi o watatta ga saigo, sore ga saigo no wakare datta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb たことにしてください",
+      "sentence": "昨日のことは忘れたことにしてください。",
+      "translation": "Please act as if you have forgotten about yesterday.",
+      "translationEn": "Please act as if you have forgotten about yesterday.",
+      "romaji": "Kinou no koto wa wasureta koto ni shite kudasai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb たことにしてください",
+      "sentence": "私がここに来たことを誰にも言わないで、秘密にしたことにしてください。",
+      "translation": "Please don't tell anyone that I came here; act as if it’s a secret.",
+      "translationEn": "Please don't tell anyone that I came here; act as if it’s a secret.",
+      "romaji": "Watashi ga koko ni kita koto o dare ni mo iwanaide, himitsu ni shita koto ni shite kudasai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb たことにしてください",
+      "sentence": "彼が間違えたと思ったことにしてください。",
+      "translation": "Please pretend that you think he made a mistake.",
+      "translationEn": "Please pretend that you think he made a mistake.",
+      "romaji": "Kare ga machigaeta to omotta koto ni shite kudasai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb たことにしてください",
+      "sentence": "彼女が帰ったことにしてください。",
+      "translation": "Let’s pretend that she has gone home.",
+      "translationEn": "Let’s pretend that she has gone home.",
+      "romaji": "Kanojo ga kaetta koto ni shite kudasai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb たら Verb たで",
+      "sentence": "行ったら行ったで大変だし、行かなかったら行かなかったで後悔しそうだ。",
+      "translation": "If I go, it’s a hassle; if I don’t go, I’ll regret it.",
+      "translationEn": "If I go, it’s a hassle; if I don’t go, I’ll regret it.",
+      "romaji": "Ittara itta de taihen da shi, ikanakattara ikanakatta de kōkai shisō da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb たら Verb たで",
+      "sentence": "買ったら買ったでお金がなくなるし、買わなかったら買わなかったで後で欲しくなる。",
+      "translation": "If I buy it, I’ll run out of money; if I don’t buy it, I’ll want it later.",
+      "translationEn": "If I buy it, I’ll run out of money; if I don’t buy it, I’ll want it later.",
+      "romaji": "Kattara katta de okane ga naku naru shi, kawanakattara kawanakatta de ato de hoshiku naru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb たら Verb たで",
+      "sentence": "作ったら作ったで食べきれないし、作らなかったら作らなかったでお腹が空く。",
+      "translation": "If I cook, I can’t finish it all; if I don’t, I’ll be hungry.",
+      "translationEn": "If I cook, I can’t finish it all; if I don’t, I’ll be hungry.",
+      "romaji": "Tsukuttara tsukutta de tabekirenai shi, tsukuranakattara tsukuranakatta de onaka ga suku.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb たら Verb たで",
+      "sentence": "旅行に出かけたら出かけたで疲れるし、家にいたらいたで退屈する。",
+      "translation": "If I go on a trip, I'll get tired, but if I stay home, I'll be bored.",
+      "translationEn": "If I go on a trip, I'll get tired, but if I stay home, I'll be bored.",
+      "romaji": "Ryokō ni dekaketara dekaketa de tsukareru shi, ie ni itara itada de taikutsu suru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb たら きりがない",
+      "sentence": "このエンジンを修理したら、またすぐ壊れて、直したらきりがない。",
+      "translation": "If I fix this engine, it breaks again, and if I fix it again, it never ends.",
+      "translationEn": "If I fix this engine, it breaks again, and if I fix it again, it never ends.",
+      "romaji": "Kono enjin o shuuri shitara, mata sugu kowarete, naoshitara kiri ga nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb たら きりがない",
+      "sentence": "飲み始めたらきりがない。",
+      "translation": "Once I start drinking, I never stop.",
+      "translationEn": "Once I start drinking, I never stop.",
+      "romaji": "Nomihajimetara kiri ga nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb たら きりがない",
+      "sentence": "彼女にお金を貸したら、きりがない。",
+      "translation": "If I lend her money, there will be no end to it.",
+      "translationEn": "If I lend her money, there will be no end to it.",
+      "romaji": "Kanojo ni okane o kashitara, kiri ga nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb たら きりがない",
+      "sentence": "彼の話を聞き始めたらきりがない。",
+      "translation": "Once you start listening to his stories, it never ends.",
+      "translationEn": "Once you start listening to his stories, it never ends.",
+      "romaji": "Kare no hanashi o kikihajimetara kiri ga nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb たら最後",
+      "sentence": "このゲームを始めたら最後、時間の経つのを忘れてしまいます。",
+      "translation": "Once you start this game, you completely lose track of time.",
+      "translationEn": "Once you start this game, you completely lose track of time.",
+      "romaji": "Kono gēmu o hajimetara saigo, jikan no tatsu no o wasurete shimaimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb たら最後",
+      "sentence": "彼はビールを一杯飲み始めたら最後、止まらなくなります。",
+      "translation": "Once he starts drinking a beer, he can't stop.",
+      "translationEn": "Once he starts drinking a beer, he can't stop.",
+      "romaji": "Kare wa bīru o ippai nomihajimetara saigo, tomaranaku narimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb たら最後",
+      "sentence": "この本を読み始めたら最後、一気に読破してしまいました。",
+      "translation": "Once I started reading this book, I ended up finishing it in one go.",
+      "translationEn": "Once I started reading this book, I ended up finishing it in one go.",
+      "romaji": "Kono hon o yomihajimetara saigo, ikki ni dokuha shite shimaimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb たら最後",
+      "sentence": "彼を怒らせたら最後、なかなか許してもらえないよ。",
+      "translation": "Once you make him angry, he won't forgive you so easily.",
+      "translationEn": "Once you make him angry, he won't forgive you so easily.",
+      "romaji": "Kare o okorasetara saigo, nakanaka yurushite moraenai yo.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb つ Verb つ",
+      "sentence": "朝から晩まで働きつ勉強しつで、疲れてしまった。",
+      "translation": "I’ve been working and studying from morning till night, and now I’m exhausted.",
+      "translationEn": "I’ve been working and studying from morning till night, and now I’m exhausted.",
+      "romaji": "Asa kara ban made hataraki tsu benkyō shi tsu de, tsukarete shimatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb つ Verb つ",
+      "sentence": "彼は話しつ笑いつして楽しんでいた。",
+      "translation": "He was talking and laughing, having a good time.",
+      "translationEn": "He was talking and laughing, having a good time.",
+      "romaji": "Kare wa hanashi tsu warai tsu shite tanoshinde ita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb つ Verb つ",
+      "sentence": "子供たちは食べつ遊びつしていた。",
+      "translation": "The children were eating and playing.",
+      "translationEn": "The children were eating and playing.",
+      "romaji": "Kodomo-tachi wa tabe tsu asobi tsu shite ita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb つ Verb つ",
+      "sentence": "私は読みつ書きつして過ごした。",
+      "translation": "I spent my time reading and writing.",
+      "translationEn": "I spent my time reading and writing.",
+      "romaji": "Watashi wa yomi tsu kaki tsu shite sugoshita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    }
+  ]
+}

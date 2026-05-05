@@ -1,0 +1,452 @@
+{
+  "lessonId": 20,
+  "level": "N1",
+  "source": "Hanabira grammar JSON",
+  "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
+  "tags": [
+    "source-hanabira",
+    "n1-grammar-import"
+  ],
+  "examples": [
+    {
+      "grammarPoint": "～とあれば",
+      "sentence": "無料とあれば、誰でも利用したいと思います。",
+      "translation": "If it's free, anyone would want to use it.",
+      "translationEn": "If it's free, anyone would want to use it.",
+      "romaji": "Muryou to areba, dare demo riyou shitai to omoimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～とあれば",
+      "sentence": "この曲が流れるとあれば、彼は必ず踊り始めます。",
+      "translation": "If this song starts playing, he will definitely begin to dance.",
+      "translationEn": "If this song starts playing, he will definitely begin to dance.",
+      "romaji": "Kono kyoku ga nagareru to areba, kare wa kanarazu odorihajimemasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～とあれば",
+      "sentence": "明日が休日だとあれば、今夜は遅くまで起きていられます。",
+      "translation": "If tomorrow is a holiday, I can stay up late tonight.",
+      "translationEn": "If tomorrow is a holiday, I can stay up late tonight.",
+      "romaji": "Ashita ga kyuujitsu da to areba, konya wa osoku made okite iraremasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～とあれば",
+      "sentence": "彼が参加するとあれば、このイベントは成功でしょう。",
+      "translation": "If he participates, this event will surely be successful.",
+      "translationEn": "If he participates, this event will surely be successful.",
+      "romaji": "Kare ga sanka suru to areba, kono ibento wa seikou deshou.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～といえども",
+      "sentence": "彼が天才といえども、ミスをすることはあります。",
+      "translation": "Even though he’s a genius, he still makes mistakes.",
+      "translationEn": "Even though he’s a genius, he still makes mistakes.",
+      "romaji": "Kare ga tensai to iedomo, misu o suru koto wa arimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～といえども",
+      "sentence": "このパソコンが新しいといえども、問題があります。",
+      "translation": "Even though this computer is new, it has problems.",
+      "translationEn": "Even though this computer is new, it has problems.",
+      "romaji": "Kono pasokon ga atarashii to iedomo, mondai ga arimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～といえども",
+      "sentence": "春といえども、まだ寒い日があります。",
+      "translation": "Even though it's spring, there are still cold days.",
+      "translationEn": "Even though it's spring, there are still cold days.",
+      "romaji": "Haru to iedomo, mada samui hi ga arimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～といえども",
+      "sentence": "彼女が一番好きな人といえども、嫌なことは嫌です。",
+      "translation": "Even though she’s my favorite person, unpleasant things are still unpleasant.",
+      "translationEn": "Even though she’s my favorite person, unpleasant things are still unpleasant.",
+      "romaji": "Kanojo ga ichiban suki na hito to iedomo, iya na koto wa iya desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～といったらありはしない",
+      "sentence": "彼の英語の上手さといったらありはしない。",
+      "translation": "His English is unbelievably good.",
+      "translationEn": "His English is unbelievably good.",
+      "romaji": "Kare no eigo no jouzusa to ittara ari wa shinai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～といったらありはしない",
+      "sentence": "このスイーツの美味しさといったらありはしない。",
+      "translation": "These sweets are unbelievably delicious.",
+      "translationEn": "These sweets are unbelievably delicious.",
+      "romaji": "Kono suiitsu no oishisa to ittara ari wa shinai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～といったらありはしない",
+      "sentence": "その子の頭の良さといったらありはしない。",
+      "translation": "That kid's intelligence is unsurpassed.",
+      "translationEn": "That kid's intelligence is unsurpassed.",
+      "romaji": "Sono ko no atama no yosa to ittara ari wa shinai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～といったらありはしない",
+      "sentence": "彼女の美しさといったらありはしない。",
+      "translation": "Her beauty is beyond belief.",
+      "translationEn": "Her beauty is beyond belief.",
+      "romaji": "Kanojo no utsukushisa to ittara ari wa shinai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～といったらありゃしない",
+      "sentence": "その店のラーメンは美味しいといったらありゃしない。",
+      "translation": "You have no idea how delicious the ramen at that shop is.",
+      "translationEn": "You have no idea how delicious the ramen at that shop is.",
+      "romaji": "Sono mise no ramen wa oishii to ittara arya shinai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～といったらありゃしない",
+      "sentence": "彼女の料理の腕前は上手だといったらありゃしない。",
+      "translation": "You have no idea how skilled she is at cooking.",
+      "translationEn": "You have no idea how skilled she is at cooking.",
+      "romaji": "Kanojo no ryouri no udemae wa jouzu da to ittara arya shinai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～といったらありゃしない",
+      "sentence": "この冬の寒さは厳しいといったらありゃしない。",
+      "translation": "You have no idea how harsh this winter's cold is.",
+      "translationEn": "You have no idea how harsh this winter's cold is.",
+      "romaji": "Kono fuyu no samusa wa kibishii to ittara arya shinai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～といったらありゃしない",
+      "sentence": "その小説は面白いといったらありゃしない。",
+      "translation": "You have no idea how interesting that novel is.",
+      "translationEn": "You have no idea how interesting that novel is.",
+      "romaji": "Sono shousetsu wa omoshiroi to ittara arya shinai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～といったらない",
+      "sentence": "今日は寒いといったらない。",
+      "translation": "It’s extremely cold today.",
+      "translationEn": "It’s extremely cold today.",
+      "romaji": "Kyou wa samui to ittara nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～といったらない",
+      "sentence": "彼女の料理の美味しさといったらない。",
+      "translation": "Nothing can be more delicious than her cooking.",
+      "translationEn": "Nothing can be more delicious than her cooking.",
+      "romaji": "Kanojo no ryouri no oishisa to ittara nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～といったらない",
+      "sentence": "この子の頭の良さだといったらない。",
+      "translation": "This child is unbelievably smart.",
+      "translationEn": "This child is unbelievably smart.",
+      "romaji": "Kono ko no atama no yosa da to ittara nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～といったらない",
+      "sentence": "彼の怠けっぷりだといったらない。",
+      "translation": "Nobody could be lazier than him.",
+      "translationEn": "Nobody could be lazier than him.",
+      "romaji": "Kare no namakeppuri da to ittara nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ときている",
+      "sentence": "仕事が忙しいときているので、なかなか休みが取れません。",
+      "translation": "Because work is so busy, I just can’t take any time off.",
+      "translationEn": "Because work is so busy, I just can’t take any time off.",
+      "romaji": "Shigoto ga isogashii to kite iru no de, nakanaka yasumi ga toremasen.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ときている",
+      "sentence": "経済が悪いときているだけに、会社が大量解雇を発表した。",
+      "translation": "Since the economy is in such bad shape, the company announced mass layoffs.",
+      "translationEn": "Since the economy is in such bad shape, the company announced mass layoffs.",
+      "romaji": "Keizai ga warui to kite iru dake ni, kaisha ga tairyou kaiko o happyou shita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ときている",
+      "sentence": "旅行先で荷物を盗まれたときているから、旅行を楽しむどころではない。",
+      "translation": "Given that my luggage was stolen while traveling, there’s no way I can enjoy the trip.",
+      "translationEn": "Given that my luggage was stolen while traveling, there’s no way I can enjoy the trip.",
+      "romaji": "Ryokousaki de nimotsu o nusumareta to kite iru kara, ryokou o tanoshimu dokoro de wa nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ときている",
+      "sentence": "試験が近いときているうえに、課題も山ほどあって大変だ。",
+      "translation": "Not only are exams coming up, but I also have a mountain of assignments, so it’s really tough.",
+      "translationEn": "Not only are exams coming up, but I also have a mountain of assignments, so it’s really tough.",
+      "romaji": "Shiken ga chikai to kite iru ue ni, kadai mo yamahodo atte taihen da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ところを",
+      "sentence": "ちょうど映画を見ているところを、停電で真っ暗になった。",
+      "translation": "Just when I was in the middle of watching a movie, the power went out and everything went dark.",
+      "translationEn": "Just when I was in the middle of watching a movie, the power went out and everything went dark.",
+      "romaji": "Choudo eiga o mite iru tokoro o, teiden de makkura ni natta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ところを",
+      "sentence": "美味しく食べているところを、彼が全部横取りしてしまった。",
+      "translation": "Right when I was enjoying my meal, he took it all away.",
+      "translationEn": "Right when I was enjoying my meal, he took it all away.",
+      "romaji": "Oishiku tabete iru tokoro o, kare ga zenbu yokodori shite shimatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ところを",
+      "sentence": "飛行機が離陸しようとしているところを、急にエンジンが止まった。",
+      "translation": "Just as the plane was about to take off, the engine suddenly stopped.",
+      "translationEn": "Just as the plane was about to take off, the engine suddenly stopped.",
+      "romaji": "Hikouki ga ririku shiyou to shite iru tokoro o, kyuu ni enjin ga tomatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ところを",
+      "sentence": "彼女が怒っているところを、私は冗談を言ってしまった。",
+      "translation": "Even though she was angry, I went ahead and made a joke.",
+      "translationEn": "Even though she was angry, I went ahead and made a joke.",
+      "romaji": "Kanojo ga okotte iru tokoro o, watashi wa joudan o itte shimatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～とされる",
+      "sentence": "サッカーは世界で最も人気のあるスポーツとされています。",
+      "translation": "Soccer is considered the most popular sport in the world.",
+      "translationEn": "Soccer is considered the most popular sport in the world.",
+      "romaji": "Sakkaa wa sekai de mottomo ninki no aru supootsu to sarete imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～とされる",
+      "sentence": "彼は最も有能な科学者とされる。",
+      "translation": "He is considered the most talented scientist.",
+      "translationEn": "He is considered the most talented scientist.",
+      "romaji": "Kare wa mottomo yuunou na kagakusha to sareru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～とされる",
+      "sentence": "この建物は地元のランドマークだとされています。",
+      "translation": "This building is said to be a local landmark.",
+      "translationEn": "This building is said to be a local landmark.",
+      "romaji": "Kono tatemono wa jimoto no randomaaku da to sarete imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～とされる",
+      "sentence": "そのお寺は古代の美術品とされている。",
+      "translation": "That temple is considered an ancient work of art.",
+      "translationEn": "That temple is considered an ancient work of art.",
+      "romaji": "Sono otera wa kodai no bijutsuhin to sarete iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～としたところで",
+      "sentence": "彼が来るとしたところで、何も変わらないだろう。",
+      "translation": "Even if he comes, nothing will probably change.",
+      "translationEn": "Even if he comes, nothing will probably change.",
+      "romaji": "Kare ga kuru to shita tokoro de, nani mo kawaranai darou.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～としたところで",
+      "sentence": "美味しいお菓子を作るとしたところで、それが売れる保証はない。",
+      "translation": "Even if we make delicious sweets, there's no guarantee they’ll sell.",
+      "translationEn": "Even if we make delicious sweets, there's no guarantee they’ll sell.",
+      "romaji": "Oishii okashi o tsukuru to shita tokoro de, sore ga ureru hoshou wa nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～としたところで",
+      "sentence": "電話をかけるとしたところで、彼女が出るとは限らない。",
+      "translation": "Even if I call her, she might not pick up.",
+      "translationEn": "Even if I call her, she might not pick up.",
+      "romaji": "Denwa o kakeru to shita tokoro de, kanojo ga deru to wa kagiranai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～としたところで",
+      "sentence": "最高の材料を使うとしたところで、美味しくなるとは限らない。",
+      "translation": "Even if you use the best ingredients, it might not turn out delicious.",
+      "translationEn": "Even if you use the best ingredients, it might not turn out delicious.",
+      "romaji": "Saikou no zairyou o tsukau to shita tokoro de, oishiku naru to wa kagiranai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～とすると",
+      "sentence": "彼が来るとすると、もうすぐ到着するはずです。",
+      "translation": "If he’s coming, he should arrive soon.",
+      "translationEn": "If he’s coming, he should arrive soon.",
+      "romaji": "Kare ga kuru to suru to, mou sugu touchaku suru hazu desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～とすると",
+      "sentence": "この仕事を終えるとすると、最低でも3日はかかるでしょう。",
+      "translation": "Assuming we finish this work, it will take at least three days.",
+      "translationEn": "Assuming we finish this work, it will take at least three days.",
+      "romaji": "Kono shigoto o oeru to suru to, saitei demo mikka wa kakaru deshou.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～とすると",
+      "sentence": "戦争が起きるとすると、多くの人々が犠牲になるでしょう。",
+      "translation": "If a war were to break out, many people would become victims.",
+      "translationEn": "If a war were to break out, many people would become victims.",
+      "romaji": "Sensou ga okiru to suru to, ooku no hitobito ga gisei ni naru deshou.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～とすると",
+      "sentence": "彼が経営者だとすると、多くの責任を負うことになるでしょう。",
+      "translation": "If he’s the manager, he will bear a lot of responsibility.",
+      "translationEn": "If he’s the manager, he will bear a lot of responsibility.",
+      "romaji": "Kare ga keieisha da to suru to, ooku no sekinin o ou koto ni naru deshou.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    }
+  ]
+}

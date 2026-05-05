@@ -1,0 +1,6174 @@
+{
+  "schemaVersion": 2,
+  "dataset": "vocab",
+  "series": "ShinKanzen",
+  "level": "N1",
+  "lessonId": 9,
+  "bookTitle": "JLPT N1 Vocabulary Import",
+  "entryCount": 140,
+  "importStatus": "source-imported",
+  "sourceNote": "Imported from Hanabira wordsTanos_openai JLPT vocabulary JSON; original Tanos list is CC-BY per Hanabira README. Vietnamese meanings require editorial translation.",
+  "license": "CC-BY / source attribution required; see docs/credits/upper-jlpt-sources.md",
+  "entries": [
+    {
+      "entryId": "n1_tanos_1121",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 1,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1121",
+        "term": "混む",
+        "reading": "こむ",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1121",
+        "meaningVi": "to be crowded",
+        "meaningEn": "to be crowded"
+      },
+      "search": {
+        "termNoAccent": "混む",
+        "readingNoAccent": "こむ",
+        "meaningViNoAccent": "to be crowded",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1121",
+        "sourceSenseId": "1121",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1121
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1122",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 2,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1122",
+        "term": "込める",
+        "reading": "こめる",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1122",
+        "meaningVi": "to include, to put into",
+        "meaningEn": "to include, to put into"
+      },
+      "search": {
+        "termNoAccent": "込める",
+        "readingNoAccent": "こめる",
+        "meaningViNoAccent": "to include, to put into",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1122",
+        "sourceSenseId": "1122",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1122
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1123",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 3,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1123",
+        "term": "篭る",
+        "reading": "こもる",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1123",
+        "meaningVi": "to seclude oneself, to be confined in, to be implied, to be stuffy",
+        "meaningEn": "to seclude oneself, to be confined in, to be implied, to be stuffy"
+      },
+      "search": {
+        "termNoAccent": "篭る",
+        "readingNoAccent": "こもる",
+        "meaningViNoAccent": "to seclude oneself, to be confined in, to be implied, to be stuffy",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1123",
+        "sourceSenseId": "1123",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1123
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1124",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 4,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1124",
+        "term": "固有",
+        "reading": "こゆう",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1124",
+        "meaningVi": "characteristic, tradition, peculiar, inherent, eigen-",
+        "meaningEn": "characteristic, tradition, peculiar, inherent, eigen-"
+      },
+      "search": {
+        "termNoAccent": "固有",
+        "readingNoAccent": "こゆう",
+        "meaningViNoAccent": "characteristic, tradition, peculiar, inherent, eigen-",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1124",
+        "sourceSenseId": "1124",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1124
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1125",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 5,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1125",
+        "term": "雇用",
+        "reading": "こよう",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1125",
+        "meaningVi": "employment (long term), hire",
+        "meaningEn": "employment (long term), hire"
+      },
+      "search": {
+        "termNoAccent": "雇用",
+        "readingNoAccent": "こよう",
+        "meaningViNoAccent": "employment (long term), hire",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1125",
+        "sourceSenseId": "1125",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1125
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1126",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 6,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1126",
+        "term": "暦",
+        "reading": "こよみ",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1126",
+        "meaningVi": "calendar, almanac",
+        "meaningEn": "calendar, almanac"
+      },
+      "search": {
+        "termNoAccent": "暦",
+        "readingNoAccent": "こよみ",
+        "meaningViNoAccent": "calendar, almanac",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1126",
+        "sourceSenseId": "1126",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1126
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1127",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 7,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1127",
+        "term": "堪える",
+        "reading": "こらえる",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1127",
+        "meaningVi": "to bear, to stand, to endure, to put up with, to support, to withstand, to resist, to brave, to be fit for, t",
+        "meaningEn": "to bear, to stand, to endure, to put up with, to support, to withstand, to resist, to brave, to be fit for, t"
+      },
+      "search": {
+        "termNoAccent": "堪える",
+        "readingNoAccent": "こらえる",
+        "meaningViNoAccent": "to bear, to stand, to endure, to put up with, to support, to withstand, to resist, to brave, to be fit for, t",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1127",
+        "sourceSenseId": "1127",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1127
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1128",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 8,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1128",
+        "term": "孤立",
+        "reading": "こりつ",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1128",
+        "meaningVi": "isolation, helplessness",
+        "meaningEn": "isolation, helplessness"
+      },
+      "search": {
+        "termNoAccent": "孤立",
+        "readingNoAccent": "こりつ",
+        "meaningViNoAccent": "isolation, helplessness",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1128",
+        "sourceSenseId": "1128",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1128
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1129",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 9,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1129",
+        "term": "懲りる",
+        "reading": "こりる",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1129",
+        "meaningVi": "to learn by experience, to be disgusted with",
+        "meaningEn": "to learn by experience, to be disgusted with"
+      },
+      "search": {
+        "termNoAccent": "懲りる",
+        "readingNoAccent": "こりる",
+        "meaningViNoAccent": "to learn by experience, to be disgusted with",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1129",
+        "sourceSenseId": "1129",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1129
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1130",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 10,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1130",
+        "term": "此れ",
+        "reading": "これ",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1130",
+        "meaningVi": "this",
+        "meaningEn": "this"
+      },
+      "search": {
+        "termNoAccent": "此れ",
+        "readingNoAccent": "これ",
+        "meaningViNoAccent": "this",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1130",
+        "sourceSenseId": "1130",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1130
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1131",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 11,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1131",
+        "term": "此れ等",
+        "reading": "これら",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1131",
+        "meaningVi": "these",
+        "meaningEn": "these"
+      },
+      "search": {
+        "termNoAccent": "此れ等",
+        "readingNoAccent": "これら",
+        "meaningViNoAccent": "these",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1131",
+        "sourceSenseId": "1131",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1131
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1132",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 12,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1132",
+        "term": "魂",
+        "reading": "こん",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1132",
+        "meaningVi": "soul, spirit",
+        "meaningEn": "soul, spirit"
+      },
+      "search": {
+        "termNoAccent": "魂",
+        "readingNoAccent": "こん",
+        "meaningViNoAccent": "soul, spirit",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1132",
+        "sourceSenseId": "1132",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1132
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1133",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 13,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1133",
+        "term": "根気",
+        "reading": "こんき",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1133",
+        "meaningVi": "patience, perseverance, energy",
+        "meaningEn": "patience, perseverance, energy"
+      },
+      "search": {
+        "termNoAccent": "根気",
+        "readingNoAccent": "こんき",
+        "meaningViNoAccent": "patience, perseverance, energy",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1133",
+        "sourceSenseId": "1133",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1133
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1134",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 14,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1134",
+        "term": "根拠",
+        "reading": "こんきょ",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1134",
+        "meaningVi": "basis, foundation",
+        "meaningEn": "basis, foundation"
+      },
+      "search": {
+        "termNoAccent": "根拠",
+        "readingNoAccent": "こんきょ",
+        "meaningViNoAccent": "basis, foundation",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1134",
+        "sourceSenseId": "1134",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1134
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1135",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 15,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1135",
+        "term": "混血",
+        "reading": "こんけつ",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1135",
+        "meaningVi": "mixed race, mixed parentage",
+        "meaningEn": "mixed race, mixed parentage"
+      },
+      "search": {
+        "termNoAccent": "混血",
+        "readingNoAccent": "こんけつ",
+        "meaningViNoAccent": "mixed race, mixed parentage",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1135",
+        "sourceSenseId": "1135",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1135
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1136",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 16,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1136",
+        "term": "昆虫",
+        "reading": "こんちゅう",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1136",
+        "meaningVi": "insect, bug",
+        "meaningEn": "insect, bug"
+      },
+      "search": {
+        "termNoAccent": "昆虫",
+        "readingNoAccent": "こんちゅう",
+        "meaningViNoAccent": "insect, bug",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1136",
+        "sourceSenseId": "1136",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1136
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1137",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 17,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1137",
+        "term": "根底",
+        "reading": "こんてい",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1137",
+        "meaningVi": "root, basis, foundation",
+        "meaningEn": "root, basis, foundation"
+      },
+      "search": {
+        "termNoAccent": "根底",
+        "readingNoAccent": "こんてい",
+        "meaningViNoAccent": "root, basis, foundation",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1137",
+        "sourceSenseId": "1137",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1137
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1138",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 18,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1138",
+        "term": "混同",
+        "reading": "こんどう",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1138",
+        "meaningVi": "confusion, mixing, merger",
+        "meaningEn": "confusion, mixing, merger"
+      },
+      "search": {
+        "termNoAccent": "混同",
+        "readingNoAccent": "こんどう",
+        "meaningViNoAccent": "confusion, mixing, merger",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1138",
+        "sourceSenseId": "1138",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1138
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1139",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 19,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1139",
+        "term": "今日は",
+        "reading": "こんにちは",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1139",
+        "meaningVi": "hello, good day (daytime greeting id)",
+        "meaningEn": "hello, good day (daytime greeting id)"
+      },
+      "search": {
+        "termNoAccent": "今日は",
+        "readingNoAccent": "こんにちは",
+        "meaningViNoAccent": "hello, good day (daytime greeting id)",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1139",
+        "sourceSenseId": "1139",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1139
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1140",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 20,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1140",
+        "term": "今晩は",
+        "reading": "こんばんは",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1140",
+        "meaningVi": "good evening",
+        "meaningEn": "good evening"
+      },
+      "search": {
+        "termNoAccent": "今晩は",
+        "readingNoAccent": "こんばんは",
+        "meaningViNoAccent": "good evening",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1140",
+        "sourceSenseId": "1140",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1140
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1141",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 21,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1141",
+        "term": "根本",
+        "reading": "こんぽん",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1141",
+        "meaningVi": "origin, source, foundation, root, base, principle",
+        "meaningEn": "origin, source, foundation, root, base, principle"
+      },
+      "search": {
+        "termNoAccent": "根本",
+        "readingNoAccent": "こんぽん",
+        "meaningViNoAccent": "origin, source, foundation, root, base, principle",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1141",
+        "sourceSenseId": "1141",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1141
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1142",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 22,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1142",
+        "term": "御",
+        "reading": "ご",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1142",
+        "meaningVi": "go-, honourable",
+        "meaningEn": "go-, honourable"
+      },
+      "search": {
+        "termNoAccent": "御",
+        "readingNoAccent": "ご",
+        "meaningViNoAccent": "go-, honourable",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1142",
+        "sourceSenseId": "1142",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1142
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1143",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 23,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1143",
+        "term": "語彙",
+        "reading": "ごい",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1143",
+        "meaningVi": "vocabulary, glossary",
+        "meaningEn": "vocabulary, glossary"
+      },
+      "search": {
+        "termNoAccent": "語彙",
+        "readingNoAccent": "ごい",
+        "meaningViNoAccent": "vocabulary, glossary",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1143",
+        "sourceSenseId": "1143",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1143
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1144",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 24,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1144",
+        "term": "濠",
+        "reading": "ごう",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1144",
+        "meaningVi": "moat",
+        "meaningEn": "moat"
+      },
+      "search": {
+        "termNoAccent": "濠",
+        "readingNoAccent": "ごう",
+        "meaningViNoAccent": "moat",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1144",
+        "sourceSenseId": "1144",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1144
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1145",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 25,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1145",
+        "term": "業",
+        "reading": "ごう",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1145",
+        "meaningVi": "Buddhist karma, actions committed in a former life",
+        "meaningEn": "Buddhist karma, actions committed in a former life"
+      },
+      "search": {
+        "termNoAccent": "業",
+        "readingNoAccent": "ごう",
+        "meaningViNoAccent": "buddhist karma, actions committed in a former life",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1145",
+        "sourceSenseId": "1145",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1145
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1146",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 26,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1146",
+        "term": "号",
+        "reading": "ごう",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1146",
+        "meaningVi": "number, issue",
+        "meaningEn": "number, issue"
+      },
+      "search": {
+        "termNoAccent": "号",
+        "readingNoAccent": "ごう",
+        "meaningViNoAccent": "number, issue",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1146",
+        "sourceSenseId": "1146",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1146
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1147",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 27,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1147",
+        "term": "合意",
+        "reading": "ごうい",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1147",
+        "meaningVi": "agreement, consent, mutual understanding",
+        "meaningEn": "agreement, consent, mutual understanding"
+      },
+      "search": {
+        "termNoAccent": "合意",
+        "readingNoAccent": "ごうい",
+        "meaningViNoAccent": "agreement, consent, mutual understanding",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1147",
+        "sourceSenseId": "1147",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1147
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1148",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 28,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1148",
+        "term": "合議",
+        "reading": "ごうぎ",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1148",
+        "meaningVi": "consultation, conference",
+        "meaningEn": "consultation, conference"
+      },
+      "search": {
+        "termNoAccent": "合議",
+        "readingNoAccent": "ごうぎ",
+        "meaningViNoAccent": "consultation, conference",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1148",
+        "sourceSenseId": "1148",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1148
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1149",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 29,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1149",
+        "term": "強気",
+        "reading": "ごうぎ",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1149",
+        "meaningVi": "great, grand",
+        "meaningEn": "great, grand"
+      },
+      "search": {
+        "termNoAccent": "強気",
+        "readingNoAccent": "ごうぎ",
+        "meaningViNoAccent": "great, grand",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1149",
+        "sourceSenseId": "1149",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1149
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1150",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 30,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1150",
+        "term": "合成",
+        "reading": "ごうせい",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1150",
+        "meaningVi": "synthesis, composition, synthetic, composite, mixed, combined, compound",
+        "meaningEn": "synthesis, composition, synthetic, composite, mixed, combined, compound"
+      },
+      "search": {
+        "termNoAccent": "合成",
+        "readingNoAccent": "ごうせい",
+        "meaningViNoAccent": "synthesis, composition, synthetic, composite, mixed, combined, compound",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1150",
+        "sourceSenseId": "1150",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1150
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1151",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 31,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1151",
+        "term": "護衛",
+        "reading": "ごえい",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1151",
+        "meaningVi": "guard, convoy, escort",
+        "meaningEn": "guard, convoy, escort"
+      },
+      "search": {
+        "termNoAccent": "護衛",
+        "readingNoAccent": "ごえい",
+        "meaningViNoAccent": "guard, convoy, escort",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1151",
+        "sourceSenseId": "1151",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1151
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1152",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 32,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1152",
+        "term": "語句",
+        "reading": "ごく",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1152",
+        "meaningVi": "words, phrases",
+        "meaningEn": "words, phrases"
+      },
+      "search": {
+        "termNoAccent": "語句",
+        "readingNoAccent": "ごく",
+        "meaningViNoAccent": "words, phrases",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1152",
+        "sourceSenseId": "1152",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1152
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1153",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 33,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1153",
+        "term": "極楽",
+        "reading": "ごくらく",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1153",
+        "meaningVi": "paradise",
+        "meaningEn": "paradise"
+      },
+      "search": {
+        "termNoAccent": "極楽",
+        "readingNoAccent": "ごくらく",
+        "meaningViNoAccent": "paradise",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1153",
+        "sourceSenseId": "1153",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1153
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1154",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 34,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1154",
+        "term": "ご苦労様",
+        "reading": "ごくろうさま",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1154",
+        "meaningVi": "Thank you very much for your....",
+        "meaningEn": "Thank you very much for your...."
+      },
+      "search": {
+        "termNoAccent": "ご苦労様",
+        "readingNoAccent": "ごくろうさま",
+        "meaningViNoAccent": "thank you very much for your....",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1154",
+        "sourceSenseId": "1154",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1154
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1155",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 35,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1155",
+        "term": "語源",
+        "reading": "ごげん",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1155",
+        "meaningVi": "word root, word derivation, etymology",
+        "meaningEn": "word root, word derivation, etymology"
+      },
+      "search": {
+        "termNoAccent": "語源",
+        "readingNoAccent": "ごげん",
+        "meaningViNoAccent": "word root, word derivation, etymology",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1155",
+        "sourceSenseId": "1155",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1155
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1156",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 36,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1156",
+        "term": "誤差",
+        "reading": "ごさ",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1156",
+        "meaningVi": "error",
+        "meaningEn": "error"
+      },
+      "search": {
+        "termNoAccent": "誤差",
+        "readingNoAccent": "ごさ",
+        "meaningViNoAccent": "error",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1156",
+        "sourceSenseId": "1156",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1156
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1157",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 37,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1157",
+        "term": "ご座います",
+        "reading": "ございます",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1157",
+        "meaningVi": "to be (polite), to exist",
+        "meaningEn": "to be (polite), to exist"
+      },
+      "search": {
+        "termNoAccent": "ご座います",
+        "readingNoAccent": "ございます",
+        "meaningViNoAccent": "to be (polite), to exist",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1157",
+        "sourceSenseId": "1157",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1157
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1158",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 38,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1158",
+        "term": "ご馳走",
+        "reading": "ごちそう",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1158",
+        "meaningVi": "feast, treating (someone)",
+        "meaningEn": "feast, treating (someone)"
+      },
+      "search": {
+        "termNoAccent": "ご馳走",
+        "readingNoAccent": "ごちそう",
+        "meaningViNoAccent": "feast, treating (someone)",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1158",
+        "sourceSenseId": "1158",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1158
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1159",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 39,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1159",
+        "term": "ご馳走さま",
+        "reading": "ごちそうさま",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1159",
+        "meaningVi": "feast",
+        "meaningEn": "feast"
+      },
+      "search": {
+        "termNoAccent": "ご馳走さま",
+        "readingNoAccent": "ごちそうさま",
+        "meaningViNoAccent": "feast",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1159",
+        "sourceSenseId": "1159",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1159
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1160",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 40,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1160",
+        "term": "毎",
+        "reading": "ごと",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1160",
+        "meaningVi": "each respectively",
+        "meaningEn": "each respectively"
+      },
+      "search": {
+        "termNoAccent": "毎",
+        "readingNoAccent": "ごと",
+        "meaningViNoAccent": "each respectively",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1160",
+        "sourceSenseId": "1160",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1160
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1161",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 41,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1161",
+        "term": "碁盤",
+        "reading": "ごばん",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1161",
+        "meaningVi": "Go board",
+        "meaningEn": "Go board"
+      },
+      "search": {
+        "termNoAccent": "碁盤",
+        "readingNoAccent": "ごばん",
+        "meaningViNoAccent": "go board",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1161",
+        "sourceSenseId": "1161",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1161
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1162",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 42,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1162",
+        "term": "ご無沙汰",
+        "reading": "ごぶさた",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1162",
+        "meaningVi": "not writing or contacting for a while",
+        "meaningEn": "not writing or contacting for a while"
+      },
+      "search": {
+        "termNoAccent": "ご無沙汰",
+        "readingNoAccent": "ごぶさた",
+        "meaningViNoAccent": "not writing or contacting for a while",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1162",
+        "sourceSenseId": "1162",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1162
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1163",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 43,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1163",
+        "term": "誤魔化す",
+        "reading": "ごまかす",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1163",
+        "meaningVi": "to deceive, to falsify, to misrepresent",
+        "meaningEn": "to deceive, to falsify, to misrepresent"
+      },
+      "search": {
+        "termNoAccent": "誤魔化す",
+        "readingNoAccent": "ごまかす",
+        "meaningViNoAccent": "to deceive, to falsify, to misrepresent",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1163",
+        "sourceSenseId": "1163",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1163
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1164",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 44,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1164",
+        "term": "御免ください",
+        "reading": "ごめんください",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1164",
+        "meaningVi": "May I come in?",
+        "meaningEn": "May I come in?"
+      },
+      "search": {
+        "termNoAccent": "御免ください",
+        "readingNoAccent": "ごめんください",
+        "meaningViNoAccent": "may i come in?",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1164",
+        "sourceSenseId": "1164",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1164
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1165",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 45,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1165",
+        "term": "御免なさい",
+        "reading": "ごめんなさい",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1165",
+        "meaningVi": "I beg your pardon, excuse me",
+        "meaningEn": "I beg your pardon, excuse me"
+      },
+      "search": {
+        "termNoAccent": "御免なさい",
+        "readingNoAccent": "ごめんなさい",
+        "meaningViNoAccent": "i beg your pardon, excuse me",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1165",
+        "sourceSenseId": "1165",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1165
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1166",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 46,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1166",
+        "term": "御覧なさい",
+        "reading": "ごらんなさい",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1166",
+        "meaningVi": "(please) look, (please) try to do",
+        "meaningEn": "(please) look, (please) try to do"
+      },
+      "search": {
+        "termNoAccent": "御覧なさい",
+        "readingNoAccent": "ごらんなさい",
+        "meaningViNoAccent": "(please) look, (please) try to do",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1166",
+        "sourceSenseId": "1166",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1166
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1167",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 47,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1167",
+        "term": "佐",
+        "reading": "さ",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1167",
+        "meaningVi": "help",
+        "meaningEn": "help"
+      },
+      "search": {
+        "termNoAccent": "佐",
+        "readingNoAccent": "さ",
+        "meaningViNoAccent": "help",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1167",
+        "sourceSenseId": "1167",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1167
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1168",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 48,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1168",
+        "term": "再",
+        "reading": "さい",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1168",
+        "meaningVi": "re-, again, repeated",
+        "meaningEn": "re-, again, repeated"
+      },
+      "search": {
+        "termNoAccent": "再",
+        "readingNoAccent": "さい",
+        "meaningViNoAccent": "re-, again, repeated",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1168",
+        "sourceSenseId": "1168",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1168
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1169",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 49,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1169",
+        "term": "差異",
+        "reading": "さい",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1169",
+        "meaningVi": "difference, disparity",
+        "meaningEn": "difference, disparity"
+      },
+      "search": {
+        "termNoAccent": "差異",
+        "readingNoAccent": "さい",
+        "meaningViNoAccent": "difference, disparity",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1169",
+        "sourceSenseId": "1169",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1169
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1170",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 50,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1170",
+        "term": "歳",
+        "reading": "さい",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1170",
+        "meaningVi": "#NAME?",
+        "meaningEn": "#NAME?"
+      },
+      "search": {
+        "termNoAccent": "歳",
+        "readingNoAccent": "さい",
+        "meaningViNoAccent": "#name?",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1170",
+        "sourceSenseId": "1170",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1170
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1171",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 51,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1171",
+        "term": "再会",
+        "reading": "さいかい",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1171",
+        "meaningVi": "another meeting, meeting again, reunion",
+        "meaningEn": "another meeting, meeting again, reunion"
+      },
+      "search": {
+        "termNoAccent": "再会",
+        "readingNoAccent": "さいかい",
+        "meaningViNoAccent": "another meeting, meeting again, reunion",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1171",
+        "sourceSenseId": "1171",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1171
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1172",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 52,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1172",
+        "term": "災害",
+        "reading": "さいがい",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1172",
+        "meaningVi": "calamity, disaster, misfortune",
+        "meaningEn": "calamity, disaster, misfortune"
+      },
+      "search": {
+        "termNoAccent": "災害",
+        "readingNoAccent": "さいがい",
+        "meaningViNoAccent": "calamity, disaster, misfortune",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1172",
+        "sourceSenseId": "1172",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1172
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1173",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 53,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1173",
+        "term": "細菌",
+        "reading": "さいきん",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1173",
+        "meaningVi": "bacillus, bacterium, germ",
+        "meaningEn": "bacillus, bacterium, germ"
+      },
+      "search": {
+        "termNoAccent": "細菌",
+        "readingNoAccent": "さいきん",
+        "meaningViNoAccent": "bacillus, bacterium, germ",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1173",
+        "sourceSenseId": "1173",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1173
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1174",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 54,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1174",
+        "term": "細工",
+        "reading": "さいく",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1174",
+        "meaningVi": "work, craftsmanship, tactics, trick",
+        "meaningEn": "work, craftsmanship, tactics, trick"
+      },
+      "search": {
+        "termNoAccent": "細工",
+        "readingNoAccent": "さいく",
+        "meaningViNoAccent": "work, craftsmanship, tactics, trick",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1174",
+        "sourceSenseId": "1174",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1174
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1175",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 55,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1175",
+        "term": "採掘",
+        "reading": "さいくつ",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1175",
+        "meaningVi": "mining",
+        "meaningEn": "mining"
+      },
+      "search": {
+        "termNoAccent": "採掘",
+        "readingNoAccent": "さいくつ",
+        "meaningViNoAccent": "mining",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1175",
+        "sourceSenseId": "1175",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1175
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1176",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 56,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1176",
+        "term": "採決",
+        "reading": "さいけつ",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1176",
+        "meaningVi": "vote, roll call",
+        "meaningEn": "vote, roll call"
+      },
+      "search": {
+        "termNoAccent": "採決",
+        "readingNoAccent": "さいけつ",
+        "meaningViNoAccent": "vote, roll call",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1176",
+        "sourceSenseId": "1176",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1176
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1177",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 57,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1177",
+        "term": "再建",
+        "reading": "さいけん",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1177",
+        "meaningVi": "rebuilding, reconstruction, rehabilitation",
+        "meaningEn": "rebuilding, reconstruction, rehabilitation"
+      },
+      "search": {
+        "termNoAccent": "再建",
+        "readingNoAccent": "さいけん",
+        "meaningViNoAccent": "rebuilding, reconstruction, rehabilitation",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1177",
+        "sourceSenseId": "1177",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1177
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1178",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 58,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1178",
+        "term": "再現",
+        "reading": "さいげん",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1178",
+        "meaningVi": "reappearance, reproduction, return, revival",
+        "meaningEn": "reappearance, reproduction, return, revival"
+      },
+      "search": {
+        "termNoAccent": "再現",
+        "readingNoAccent": "さいげん",
+        "meaningViNoAccent": "reappearance, reproduction, return, revival",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1178",
+        "sourceSenseId": "1178",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1178
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1179",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 59,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1179",
+        "term": "採算",
+        "reading": "さいさん",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1179",
+        "meaningVi": "profit",
+        "meaningEn": "profit"
+      },
+      "search": {
+        "termNoAccent": "採算",
+        "readingNoAccent": "さいさん",
+        "meaningViNoAccent": "profit",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1179",
+        "sourceSenseId": "1179",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1179
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1180",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 60,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1180",
+        "term": "採集",
+        "reading": "さいしゅう",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1180",
+        "meaningVi": "collecting, gathering",
+        "meaningEn": "collecting, gathering"
+      },
+      "search": {
+        "termNoAccent": "採集",
+        "readingNoAccent": "さいしゅう",
+        "meaningViNoAccent": "collecting, gathering",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1180",
+        "sourceSenseId": "1180",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1180
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1181",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 61,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1181",
+        "term": "再生",
+        "reading": "さいせい",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1181",
+        "meaningVi": "playback, regeneration, resuscitation, return to life, rebirth, reincarnation, narrow escape, reclamation, r",
+        "meaningEn": "playback, regeneration, resuscitation, return to life, rebirth, reincarnation, narrow escape, reclamation, r"
+      },
+      "search": {
+        "termNoAccent": "再生",
+        "readingNoAccent": "さいせい",
+        "meaningViNoAccent": "playback, regeneration, resuscitation, return to life, rebirth, reincarnation, narrow escape, reclamation, r",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1181",
+        "sourceSenseId": "1181",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1181
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1182",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 62,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1182",
+        "term": "最善",
+        "reading": "さいぜん",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1182",
+        "meaningVi": "the very best",
+        "meaningEn": "the very best"
+      },
+      "search": {
+        "termNoAccent": "最善",
+        "readingNoAccent": "さいぜん",
+        "meaningViNoAccent": "the very best",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1182",
+        "sourceSenseId": "1182",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1182
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1183",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 63,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1183",
+        "term": "採択",
+        "reading": "さいたく",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1183",
+        "meaningVi": "adoption, selection, choice",
+        "meaningEn": "adoption, selection, choice"
+      },
+      "search": {
+        "termNoAccent": "採択",
+        "readingNoAccent": "さいたく",
+        "meaningViNoAccent": "adoption, selection, choice",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1183",
+        "sourceSenseId": "1183",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1183
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1184",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 64,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1184",
+        "term": "再発",
+        "reading": "さいはつ",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1184",
+        "meaningVi": "return, relapse, reoccurrence",
+        "meaningEn": "return, relapse, reoccurrence"
+      },
+      "search": {
+        "termNoAccent": "再発",
+        "readingNoAccent": "さいはつ",
+        "meaningViNoAccent": "return, relapse, reoccurrence",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1184",
+        "sourceSenseId": "1184",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1184
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1185",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 65,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1185",
+        "term": "栽培",
+        "reading": "さいばい",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1185",
+        "meaningVi": "cultivation",
+        "meaningEn": "cultivation"
+      },
+      "search": {
+        "termNoAccent": "栽培",
+        "readingNoAccent": "さいばい",
+        "meaningViNoAccent": "cultivation",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1185",
+        "sourceSenseId": "1185",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1185
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1186",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 66,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1186",
+        "term": "細胞",
+        "reading": "さいぼう",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1186",
+        "meaningVi": "cell (biology)",
+        "meaningEn": "cell (biology)"
+      },
+      "search": {
+        "termNoAccent": "細胞",
+        "readingNoAccent": "さいぼう",
+        "meaningViNoAccent": "cell (biology)",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1186",
+        "sourceSenseId": "1186",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1186
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1187",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 67,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1187",
+        "term": "採用",
+        "reading": "さいよう",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1187",
+        "meaningVi": "use, adopt",
+        "meaningEn": "use, adopt"
+      },
+      "search": {
+        "termNoAccent": "採用",
+        "readingNoAccent": "さいよう",
+        "meaningViNoAccent": "use, adopt",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1187",
+        "sourceSenseId": "1187",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1187
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1188",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 68,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1188",
+        "term": "遮る",
+        "reading": "さえぎる",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1188",
+        "meaningVi": "to interrupt, to intercept, to obstruct",
+        "meaningEn": "to interrupt, to intercept, to obstruct"
+      },
+      "search": {
+        "termNoAccent": "遮る",
+        "readingNoAccent": "さえぎる",
+        "meaningViNoAccent": "to interrupt, to intercept, to obstruct",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1188",
+        "sourceSenseId": "1188",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1188
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1189",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 69,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1189",
+        "term": "囀る",
+        "reading": "さえずる",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1189",
+        "meaningVi": "to sing, to chirp, to twitter",
+        "meaningEn": "to sing, to chirp, to twitter"
+      },
+      "search": {
+        "termNoAccent": "囀る",
+        "readingNoAccent": "さえずる",
+        "meaningViNoAccent": "to sing, to chirp, to twitter",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1189",
+        "sourceSenseId": "1189",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1189
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1190",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 70,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1190",
+        "term": "冴える",
+        "reading": "さえる",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1190",
+        "meaningVi": "to be clear, to be serene, to be cold, to be skillful",
+        "meaningEn": "to be clear, to be serene, to be cold, to be skillful"
+      },
+      "search": {
+        "termNoAccent": "冴える",
+        "readingNoAccent": "さえる",
+        "meaningViNoAccent": "to be clear, to be serene, to be cold, to be skillful",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1190",
+        "sourceSenseId": "1190",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1190
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1191",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 71,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1191",
+        "term": "竿",
+        "reading": "さお",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1191",
+        "meaningVi": "rod, pole (e.g. for drying laundry)",
+        "meaningEn": "rod, pole (e.g. for drying laundry)"
+      },
+      "search": {
+        "termNoAccent": "竿",
+        "readingNoAccent": "さお",
+        "meaningViNoAccent": "rod, pole (e.g. for drying laundry)",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1191",
+        "sourceSenseId": "1191",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1191
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1192",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 72,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1192",
+        "term": "栄える",
+        "reading": "さかえる",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1192",
+        "meaningVi": "to prosper, to flourish",
+        "meaningEn": "to prosper, to flourish"
+      },
+      "search": {
+        "termNoAccent": "栄える",
+        "readingNoAccent": "さかえる",
+        "meaningViNoAccent": "to prosper, to flourish",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1192",
+        "sourceSenseId": "1192",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1192
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1193",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 73,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1193",
+        "term": "杯",
+        "reading": "さかずき",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1193",
+        "meaningVi": "wine cups",
+        "meaningEn": "wine cups"
+      },
+      "search": {
+        "termNoAccent": "杯",
+        "readingNoAccent": "さかずき",
+        "meaningViNoAccent": "wine cups",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1193",
+        "sourceSenseId": "1193",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1193
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1194",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 74,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1194",
+        "term": "逆立ち",
+        "reading": "さかだち",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1194",
+        "meaningVi": "handstand, headstand",
+        "meaningEn": "handstand, headstand"
+      },
+      "search": {
+        "termNoAccent": "逆立ち",
+        "readingNoAccent": "さかだち",
+        "meaningViNoAccent": "handstand, headstand",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1194",
+        "sourceSenseId": "1194",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1194
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1195",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 75,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1195",
+        "term": "逆上る",
+        "reading": "さかのぼる",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1195",
+        "meaningVi": "to go back, to go upstream, to make retroactive",
+        "meaningEn": "to go back, to go upstream, to make retroactive"
+      },
+      "search": {
+        "termNoAccent": "逆上る",
+        "readingNoAccent": "さかのぼる",
+        "meaningViNoAccent": "to go back, to go upstream, to make retroactive",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1195",
+        "sourceSenseId": "1195",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1195
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1196",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 76,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1196",
+        "term": "盛る",
+        "reading": "さかる",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1196",
+        "meaningVi": "to prosper, to flourish, to copulate (animals)",
+        "meaningEn": "to prosper, to flourish, to copulate (animals)"
+      },
+      "search": {
+        "termNoAccent": "盛る",
+        "readingNoAccent": "さかる",
+        "meaningViNoAccent": "to prosper, to flourish, to copulate (animals)",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1196",
+        "sourceSenseId": "1196",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1196
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1197",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 77,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1197",
+        "term": "差額",
+        "reading": "さがく",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1197",
+        "meaningVi": "balance, difference, margin",
+        "meaningEn": "balance, difference, margin"
+      },
+      "search": {
+        "termNoAccent": "差額",
+        "readingNoAccent": "さがく",
+        "meaningViNoAccent": "balance, difference, margin",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1197",
+        "sourceSenseId": "1197",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1197
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1198",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 78,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1198",
+        "term": "下がる",
+        "reading": "さがる",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1198",
+        "meaningVi": "to hang down, to abate, to retire, to fall, to step back",
+        "meaningEn": "to hang down, to abate, to retire, to fall, to step back"
+      },
+      "search": {
+        "termNoAccent": "下がる",
+        "readingNoAccent": "さがる",
+        "meaningViNoAccent": "to hang down, to abate, to retire, to fall, to step back",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1198",
+        "sourceSenseId": "1198",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1198
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1199",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 79,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1199",
+        "term": "一昨昨日",
+        "reading": "さきおととい",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1199",
+        "meaningVi": "two days before yesterday",
+        "meaningEn": "two days before yesterday"
+      },
+      "search": {
+        "termNoAccent": "一昨昨日",
+        "readingNoAccent": "さきおととい",
+        "meaningViNoAccent": "two days before yesterday",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1199",
+        "sourceSenseId": "1199",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1199
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1200",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 80,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1200",
+        "term": "先に",
+        "reading": "さきに",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1200",
+        "meaningVi": "before, earlier than, ahead, beyond, away, previously, recently",
+        "meaningEn": "before, earlier than, ahead, beyond, away, previously, recently"
+      },
+      "search": {
+        "termNoAccent": "先に",
+        "readingNoAccent": "さきに",
+        "meaningViNoAccent": "before, earlier than, ahead, beyond, away, previously, recently",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1200",
+        "sourceSenseId": "1200",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1200
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1201",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 81,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1201",
+        "term": "詐欺",
+        "reading": "さぎ",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1201",
+        "meaningVi": "fraud, swindle",
+        "meaningEn": "fraud, swindle"
+      },
+      "search": {
+        "termNoAccent": "詐欺",
+        "readingNoAccent": "さぎ",
+        "meaningViNoAccent": "fraud, swindle",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1201",
+        "sourceSenseId": "1201",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1201
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1202",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 82,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1202",
+        "term": "作",
+        "reading": "さく",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1202",
+        "meaningVi": "a work, a harvest",
+        "meaningEn": "a work, a harvest"
+      },
+      "search": {
+        "termNoAccent": "作",
+        "readingNoAccent": "さく",
+        "meaningViNoAccent": "a work, a harvest",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1202",
+        "sourceSenseId": "1202",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1202
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1203",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 83,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1203",
+        "term": "策",
+        "reading": "さく",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1203",
+        "meaningVi": "plan, policy",
+        "meaningEn": "plan, policy"
+      },
+      "search": {
+        "termNoAccent": "策",
+        "readingNoAccent": "さく",
+        "meaningViNoAccent": "plan, policy",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1203",
+        "sourceSenseId": "1203",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1203
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1204",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 84,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1204",
+        "term": "柵",
+        "reading": "さく",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1204",
+        "meaningVi": "fence, paling",
+        "meaningEn": "fence, paling"
+      },
+      "search": {
+        "termNoAccent": "柵",
+        "readingNoAccent": "さく",
+        "meaningViNoAccent": "fence, paling",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1204",
+        "sourceSenseId": "1204",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1204
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1205",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 85,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1205",
+        "term": "削減",
+        "reading": "さくげん",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1205",
+        "meaningVi": "cut, reduction, curtailment",
+        "meaningEn": "cut, reduction, curtailment"
+      },
+      "search": {
+        "termNoAccent": "削減",
+        "readingNoAccent": "さくげん",
+        "meaningViNoAccent": "cut, reduction, curtailment",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1205",
+        "sourceSenseId": "1205",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1205
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1206",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 86,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1206",
+        "term": "錯誤",
+        "reading": "さくご",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1206",
+        "meaningVi": "mistake",
+        "meaningEn": "mistake"
+      },
+      "search": {
+        "termNoAccent": "錯誤",
+        "readingNoAccent": "さくご",
+        "meaningViNoAccent": "mistake",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1206",
+        "sourceSenseId": "1206",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1206
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1207",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 87,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1207",
+        "term": "作戦",
+        "reading": "さくせん",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1207",
+        "meaningVi": "military or naval operations, tactics, strategy",
+        "meaningEn": "military or naval operations, tactics, strategy"
+      },
+      "search": {
+        "termNoAccent": "作戦",
+        "readingNoAccent": "さくせん",
+        "meaningViNoAccent": "military or naval operations, tactics, strategy",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1207",
+        "sourceSenseId": "1207",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1207
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1208",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 88,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1208",
+        "term": "作物",
+        "reading": "さくぶつ",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1208",
+        "meaningVi": "literary work",
+        "meaningEn": "literary work"
+      },
+      "search": {
+        "termNoAccent": "作物",
+        "readingNoAccent": "さくぶつ",
+        "meaningViNoAccent": "literary work",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1208",
+        "sourceSenseId": "1208",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1208
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1209",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 89,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1209",
+        "term": "叫び",
+        "reading": "さけび",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1209",
+        "meaningVi": "shout, scream, outcry",
+        "meaningEn": "shout, scream, outcry"
+      },
+      "search": {
+        "termNoAccent": "叫び",
+        "readingNoAccent": "さけび",
+        "meaningViNoAccent": "shout, scream, outcry",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1209",
+        "sourceSenseId": "1209",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1209
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1210",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 90,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1210",
+        "term": "裂ける",
+        "reading": "さける",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1210",
+        "meaningVi": "to split, to tear, to burst",
+        "meaningEn": "to split, to tear, to burst"
+      },
+      "search": {
+        "termNoAccent": "裂ける",
+        "readingNoAccent": "さける",
+        "meaningViNoAccent": "to split, to tear, to burst",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1210",
+        "sourceSenseId": "1210",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1210
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1211",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 91,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1211",
+        "term": "捧げる",
+        "reading": "ささげる",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1211",
+        "meaningVi": "to lift up, to give, to offer, to consecrate, to devote, to sacrifice, to dedicate",
+        "meaningEn": "to lift up, to give, to offer, to consecrate, to devote, to sacrifice, to dedicate"
+      },
+      "search": {
+        "termNoAccent": "捧げる",
+        "readingNoAccent": "ささげる",
+        "meaningViNoAccent": "to lift up, to give, to offer, to consecrate, to devote, to sacrifice, to dedicate",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1211",
+        "sourceSenseId": "1211",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1211
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1212",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 92,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1212",
+        "term": "差し掛かる",
+        "reading": "さしかかる",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1212",
+        "meaningVi": "to come near to, to approach",
+        "meaningEn": "to come near to, to approach"
+      },
+      "search": {
+        "termNoAccent": "差し掛かる",
+        "readingNoAccent": "さしかかる",
+        "meaningViNoAccent": "to come near to, to approach",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1212",
+        "sourceSenseId": "1212",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1212
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1213",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 93,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1213",
+        "term": "指図",
+        "reading": "さしず",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1213",
+        "meaningVi": "instruction, mandate",
+        "meaningEn": "instruction, mandate"
+      },
+      "search": {
+        "termNoAccent": "指図",
+        "readingNoAccent": "さしず",
+        "meaningViNoAccent": "instruction, mandate",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1213",
+        "sourceSenseId": "1213",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1213
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1214",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 94,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1214",
+        "term": "差し出す",
+        "reading": "さしだす",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1214",
+        "meaningVi": "to present, to submit, to tender, to hold out",
+        "meaningEn": "to present, to submit, to tender, to hold out"
+      },
+      "search": {
+        "termNoAccent": "差し出す",
+        "readingNoAccent": "さしだす",
+        "meaningViNoAccent": "to present, to submit, to tender, to hold out",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1214",
+        "sourceSenseId": "1214",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1214
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1215",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 95,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1215",
+        "term": "差し支える",
+        "reading": "さしつかえる",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1215",
+        "meaningVi": "to interfere, to hinder, to become impeded",
+        "meaningEn": "to interfere, to hinder, to become impeded"
+      },
+      "search": {
+        "termNoAccent": "差し支える",
+        "readingNoAccent": "さしつかえる",
+        "meaningViNoAccent": "to interfere, to hinder, to become impeded",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1215",
+        "sourceSenseId": "1215",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1215
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1216",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 96,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1216",
+        "term": "差し引く",
+        "reading": "さしひく",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1216",
+        "meaningVi": "to deduct",
+        "meaningEn": "to deduct"
+      },
+      "search": {
+        "termNoAccent": "差し引く",
+        "readingNoAccent": "さしひく",
+        "meaningViNoAccent": "to deduct",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1216",
+        "sourceSenseId": "1216",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1216
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1217",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 97,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1217",
+        "term": "些事",
+        "reading": "さじ",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1217",
+        "meaningVi": "something small or petty, trifle",
+        "meaningEn": "something small or petty, trifle"
+      },
+      "search": {
+        "termNoAccent": "些事",
+        "readingNoAccent": "さじ",
+        "meaningViNoAccent": "something small or petty, trifle",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1217",
+        "sourceSenseId": "1217",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1217
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1218",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 98,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1218",
+        "term": "授ける",
+        "reading": "さずける",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1218",
+        "meaningVi": "to grant, to award, to teach",
+        "meaningEn": "to grant, to award, to teach"
+      },
+      "search": {
+        "termNoAccent": "授ける",
+        "readingNoAccent": "さずける",
+        "meaningViNoAccent": "to grant, to award, to teach",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1218",
+        "sourceSenseId": "1218",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1218
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1219",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 99,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1219",
+        "term": "嘸",
+        "reading": "さぞ",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1219",
+        "meaningVi": "I am sure, certainly, no doubt",
+        "meaningEn": "I am sure, certainly, no doubt"
+      },
+      "search": {
+        "termNoAccent": "嘸",
+        "readingNoAccent": "さぞ",
+        "meaningViNoAccent": "i am sure, certainly, no doubt",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1219",
+        "sourceSenseId": "1219",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1219
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1220",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 100,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1220",
+        "term": "定まる",
+        "reading": "さだまる",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1220",
+        "meaningVi": "to become settled, to be fixed",
+        "meaningEn": "to become settled, to be fixed"
+      },
+      "search": {
+        "termNoAccent": "定まる",
+        "readingNoAccent": "さだまる",
+        "meaningViNoAccent": "to become settled, to be fixed",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1220",
+        "sourceSenseId": "1220",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1220
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1221",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 101,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1221",
+        "term": "定める",
+        "reading": "さだめる",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1221",
+        "meaningVi": "to decide, to establish, to determine",
+        "meaningEn": "to decide, to establish, to determine"
+      },
+      "search": {
+        "termNoAccent": "定める",
+        "readingNoAccent": "さだめる",
+        "meaningViNoAccent": "to decide, to establish, to determine",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1221",
+        "sourceSenseId": "1221",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1221
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1222",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 102,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1222",
+        "term": "錯覚",
+        "reading": "さっかく",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1222",
+        "meaningVi": "optical illusion, hallucination",
+        "meaningEn": "optical illusion, hallucination"
+      },
+      "search": {
+        "termNoAccent": "錯覚",
+        "readingNoAccent": "さっかく",
+        "meaningViNoAccent": "optical illusion, hallucination",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1222",
+        "sourceSenseId": "1222",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1222
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1223",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 103,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1223",
+        "term": "早急",
+        "reading": "さっきゅう",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1223",
+        "meaningVi": "urgent",
+        "meaningEn": "urgent"
+      },
+      "search": {
+        "termNoAccent": "早急",
+        "readingNoAccent": "さっきゅう",
+        "meaningViNoAccent": "urgent",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1223",
+        "sourceSenseId": "1223",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1223
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1224",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 104,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1224",
+        "term": "察する",
+        "reading": "さっする",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1224",
+        "meaningVi": "to guess, to sense, to presume, to judge, to sympathize with",
+        "meaningEn": "to guess, to sense, to presume, to judge, to sympathize with"
+      },
+      "search": {
+        "termNoAccent": "察する",
+        "readingNoAccent": "さっする",
+        "meaningViNoAccent": "to guess, to sense, to presume, to judge, to sympathize with",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1224",
+        "sourceSenseId": "1224",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1224
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1225",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 105,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1225",
+        "term": "さっと",
+        "reading": "さっと",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1225",
+        "meaningVi": "quickly, suddenly",
+        "meaningEn": "quickly, suddenly"
+      },
+      "search": {
+        "termNoAccent": "さっと",
+        "readingNoAccent": "さっと",
+        "meaningViNoAccent": "quickly, suddenly",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1225",
+        "sourceSenseId": "1225",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1225
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1226",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 106,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1226",
+        "term": "冊",
+        "reading": "さつ",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1226",
+        "meaningVi": "counter for books",
+        "meaningEn": "counter for books"
+      },
+      "search": {
+        "termNoAccent": "冊",
+        "readingNoAccent": "さつ",
+        "meaningViNoAccent": "counter for books",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1226",
+        "sourceSenseId": "1226",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1226
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1227",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 107,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1227",
+        "term": "殺人",
+        "reading": "さつじん",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1227",
+        "meaningVi": "murder",
+        "meaningEn": "murder"
+      },
+      "search": {
+        "termNoAccent": "殺人",
+        "readingNoAccent": "さつじん",
+        "meaningViNoAccent": "murder",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1227",
+        "sourceSenseId": "1227",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1227
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1228",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 108,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1228",
+        "term": "偖",
+        "reading": "さて",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1228",
+        "meaningVi": "well, now, then",
+        "meaningEn": "well, now, then"
+      },
+      "search": {
+        "termNoAccent": "偖",
+        "readingNoAccent": "さて",
+        "meaningViNoAccent": "well, now, then",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1228",
+        "sourceSenseId": "1228",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1228
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1229",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 109,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1229",
+        "term": "悟る",
+        "reading": "さとる",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1229",
+        "meaningVi": "to attain enlightenment, to perceive, to understand, to discern",
+        "meaningEn": "to attain enlightenment, to perceive, to understand, to discern"
+      },
+      "search": {
+        "termNoAccent": "悟る",
+        "readingNoAccent": "さとる",
+        "meaningViNoAccent": "to attain enlightenment, to perceive, to understand, to discern",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1229",
+        "sourceSenseId": "1229",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1229
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1230",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 110,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1230",
+        "term": "真実",
+        "reading": "さな",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1230",
+        "meaningVi": "truth, reality",
+        "meaningEn": "truth, reality"
+      },
+      "search": {
+        "termNoAccent": "真実",
+        "readingNoAccent": "さな",
+        "meaningViNoAccent": "truth, reality",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1230",
+        "sourceSenseId": "1230",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1230
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1231",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 111,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1231",
+        "term": "裁く",
+        "reading": "さばく",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1231",
+        "meaningVi": "to judge",
+        "meaningEn": "to judge"
+      },
+      "search": {
+        "termNoAccent": "裁く",
+        "readingNoAccent": "さばく",
+        "meaningViNoAccent": "to judge",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1231",
+        "sourceSenseId": "1231",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1231
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1232",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 112,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1232",
+        "term": "錆び",
+        "reading": "さび",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1232",
+        "meaningVi": "rust (colour)",
+        "meaningEn": "rust (colour)"
+      },
+      "search": {
+        "termNoAccent": "錆び",
+        "readingNoAccent": "さび",
+        "meaningViNoAccent": "rust (colour)",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1232",
+        "sourceSenseId": "1232",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1232
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1233",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 113,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1233",
+        "term": "左程",
+        "reading": "さほど",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1233",
+        "meaningVi": "(not) very, (not) much",
+        "meaningEn": "(not) very, (not) much"
+      },
+      "search": {
+        "termNoAccent": "左程",
+        "readingNoAccent": "さほど",
+        "meaningViNoAccent": "(not) very, (not) much",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1233",
+        "sourceSenseId": "1233",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1233
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1234",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 114,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1234",
+        "term": "様",
+        "reading": "さま",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1234",
+        "meaningVi": "Mr. or Mrs., manner, kind, appearance",
+        "meaningEn": "Mr. or Mrs., manner, kind, appearance"
+      },
+      "search": {
+        "termNoAccent": "様",
+        "readingNoAccent": "さま",
+        "meaningViNoAccent": "mr. or mrs., manner, kind, appearance",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1234",
+        "sourceSenseId": "1234",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1234
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1235",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 115,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1235",
+        "term": "三味線",
+        "reading": "さみせん",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1235",
+        "meaningVi": "three-stringed Japanese guitar, shamisen",
+        "meaningEn": "three-stringed Japanese guitar, shamisen"
+      },
+      "search": {
+        "termNoAccent": "三味線",
+        "readingNoAccent": "さみせん",
+        "meaningViNoAccent": "three-stringed japanese guitar, shamisen",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1235",
+        "sourceSenseId": "1235",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1235
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1236",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 116,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1236",
+        "term": "侍",
+        "reading": "さむらい",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1236",
+        "meaningVi": "Samurai, warrior",
+        "meaningEn": "Samurai, warrior"
+      },
+      "search": {
+        "termNoAccent": "侍",
+        "readingNoAccent": "さむらい",
+        "meaningViNoAccent": "samurai, warrior",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1236",
+        "sourceSenseId": "1236",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1236
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1237",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 117,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1237",
+        "term": "然も",
+        "reading": "さも",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1237",
+        "meaningVi": "with gusto, with satisfaction",
+        "meaningEn": "with gusto, with satisfaction"
+      },
+      "search": {
+        "termNoAccent": "然も",
+        "readingNoAccent": "さも",
+        "meaningViNoAccent": "with gusto, with satisfaction",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1237",
+        "sourceSenseId": "1237",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1237
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1238",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 118,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1238",
+        "term": "作用",
+        "reading": "さよう",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1238",
+        "meaningVi": "action, operation, effect, function",
+        "meaningEn": "action, operation, effect, function"
+      },
+      "search": {
+        "termNoAccent": "作用",
+        "readingNoAccent": "さよう",
+        "meaningViNoAccent": "action, operation, effect, function",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1238",
+        "sourceSenseId": "1238",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1238
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1239",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 119,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1239",
+        "term": "左様なら",
+        "reading": "さようなら",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1239",
+        "meaningVi": "good-bye",
+        "meaningEn": "good-bye"
+      },
+      "search": {
+        "termNoAccent": "左様なら",
+        "readingNoAccent": "さようなら",
+        "meaningViNoAccent": "good-bye",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1239",
+        "sourceSenseId": "1239",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1239
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1240",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 120,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1240",
+        "term": "拐う",
+        "reading": "さらう",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1240",
+        "meaningVi": "to carry off, to run away with, to kidnap, to abduct",
+        "meaningEn": "to carry off, to run away with, to kidnap, to abduct"
+      },
+      "search": {
+        "termNoAccent": "拐う",
+        "readingNoAccent": "さらう",
+        "meaningViNoAccent": "to carry off, to run away with, to kidnap, to abduct",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1240",
+        "sourceSenseId": "1240",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1240
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1241",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 121,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1241",
+        "term": "爽やか",
+        "reading": "さわやか",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1241",
+        "meaningVi": "fresh, refreshing, invigorating, clear, fluent, eloquent",
+        "meaningEn": "fresh, refreshing, invigorating, clear, fluent, eloquent"
+      },
+      "search": {
+        "termNoAccent": "爽やか",
+        "readingNoAccent": "さわやか",
+        "meaningViNoAccent": "fresh, refreshing, invigorating, clear, fluent, eloquent",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1241",
+        "sourceSenseId": "1241",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1241
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1242",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 122,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1242",
+        "term": "障る",
+        "reading": "さわる",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1242",
+        "meaningVi": "to hinder, to interfere with, to affect, to do one harm, to be harmful to",
+        "meaningEn": "to hinder, to interfere with, to affect, to do one harm, to be harmful to"
+      },
+      "search": {
+        "termNoAccent": "障る",
+        "readingNoAccent": "さわる",
+        "meaningViNoAccent": "to hinder, to interfere with, to affect, to do one harm, to be harmful to",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1242",
+        "sourceSenseId": "1242",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1242
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1243",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 123,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1243",
+        "term": "酸",
+        "reading": "さん",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1243",
+        "meaningVi": "acid",
+        "meaningEn": "acid"
+      },
+      "search": {
+        "termNoAccent": "酸",
+        "readingNoAccent": "さん",
+        "meaningViNoAccent": "acid",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1243",
+        "sourceSenseId": "1243",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1243
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1244",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 124,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1244",
+        "term": "さん",
+        "reading": "さん",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1244",
+        "meaningVi": "Mr or Mrs",
+        "meaningEn": "Mr or Mrs"
+      },
+      "search": {
+        "termNoAccent": "さん",
+        "readingNoAccent": "さん",
+        "meaningViNoAccent": "mr or mrs",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1244",
+        "sourceSenseId": "1244",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1244
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1245",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 125,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1245",
+        "term": "酸化",
+        "reading": "さんか",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1245",
+        "meaningVi": "oxidation",
+        "meaningEn": "oxidation"
+      },
+      "search": {
+        "termNoAccent": "酸化",
+        "readingNoAccent": "さんか",
+        "meaningViNoAccent": "oxidation",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1245",
+        "sourceSenseId": "1245",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1245
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1246",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 126,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1246",
+        "term": "山岳",
+        "reading": "さんがく",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1246",
+        "meaningVi": "mountains",
+        "meaningEn": "mountains"
+      },
+      "search": {
+        "termNoAccent": "山岳",
+        "readingNoAccent": "さんがく",
+        "meaningViNoAccent": "mountains",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1246",
+        "sourceSenseId": "1246",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1246
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1247",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 127,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1247",
+        "term": "産休",
+        "reading": "さんきゅう",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1247",
+        "meaningVi": "maternity leave",
+        "meaningEn": "maternity leave"
+      },
+      "search": {
+        "termNoAccent": "産休",
+        "readingNoAccent": "さんきゅう",
+        "meaningViNoAccent": "maternity leave",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1247",
+        "sourceSenseId": "1247",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1247
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1248",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 128,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1248",
+        "term": "桟橋",
+        "reading": "さんきょう",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1248",
+        "meaningVi": "wharf, bridge, jetty, pier",
+        "meaningEn": "wharf, bridge, jetty, pier"
+      },
+      "search": {
+        "termNoAccent": "桟橋",
+        "readingNoAccent": "さんきょう",
+        "meaningViNoAccent": "wharf, bridge, jetty, pier",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1248",
+        "sourceSenseId": "1248",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1248
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1249",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 129,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1249",
+        "term": "参議院",
+        "reading": "さんぎいん",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1249",
+        "meaningVi": "House of Councillors",
+        "meaningEn": "House of Councillors"
+      },
+      "search": {
+        "termNoAccent": "参議院",
+        "readingNoAccent": "さんぎいん",
+        "meaningViNoAccent": "house of councillors",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1249",
+        "sourceSenseId": "1249",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1249
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1250",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 130,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1250",
+        "term": "産後",
+        "reading": "さんご",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1250",
+        "meaningVi": "postpartum, after childbirth",
+        "meaningEn": "postpartum, after childbirth"
+      },
+      "search": {
+        "termNoAccent": "産後",
+        "readingNoAccent": "さんご",
+        "meaningViNoAccent": "postpartum, after childbirth",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1250",
+        "sourceSenseId": "1250",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1250
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1251",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 131,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1251",
+        "term": "産出",
+        "reading": "さんしゅつ",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1251",
+        "meaningVi": "yield, produce",
+        "meaningEn": "yield, produce"
+      },
+      "search": {
+        "termNoAccent": "産出",
+        "readingNoAccent": "さんしゅつ",
+        "meaningViNoAccent": "yield, produce",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1251",
+        "sourceSenseId": "1251",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1251
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1252",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 132,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1252",
+        "term": "参照",
+        "reading": "さんしょう",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1252",
+        "meaningVi": "reference, consultation, consultation",
+        "meaningEn": "reference, consultation, consultation"
+      },
+      "search": {
+        "termNoAccent": "参照",
+        "readingNoAccent": "さんしょう",
+        "meaningViNoAccent": "reference, consultation, consultation",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1252",
+        "sourceSenseId": "1252",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1252
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1253",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 133,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1253",
+        "term": "参上",
+        "reading": "さんじょう",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1253",
+        "meaningVi": "calling on, visiting",
+        "meaningEn": "calling on, visiting"
+      },
+      "search": {
+        "termNoAccent": "参上",
+        "readingNoAccent": "さんじょう",
+        "meaningViNoAccent": "calling on, visiting",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1253",
+        "sourceSenseId": "1253",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1253
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1254",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 134,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1254",
+        "term": "賛成",
+        "reading": "さんせい",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1254",
+        "meaningVi": "approval, agreement, support, favour",
+        "meaningEn": "approval, agreement, support, favour"
+      },
+      "search": {
+        "termNoAccent": "賛成",
+        "readingNoAccent": "さんせい",
+        "meaningViNoAccent": "approval, agreement, support, favour",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1254",
+        "sourceSenseId": "1254",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1254
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1255",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 135,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1255",
+        "term": "賛美",
+        "reading": "さんび",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1255",
+        "meaningVi": "praise, adoration, glorification",
+        "meaningEn": "praise, adoration, glorification"
+      },
+      "search": {
+        "termNoAccent": "賛美",
+        "readingNoAccent": "さんび",
+        "meaningViNoAccent": "praise, adoration, glorification",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1255",
+        "sourceSenseId": "1255",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1255
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1256",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 136,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1256",
+        "term": "産婦人科",
+        "reading": "さんふじんか",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1256",
+        "meaningVi": "maternity and gynecology department",
+        "meaningEn": "maternity and gynecology department"
+      },
+      "search": {
+        "termNoAccent": "産婦人科",
+        "readingNoAccent": "さんふじんか",
+        "meaningViNoAccent": "maternity and gynecology department",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1256",
+        "sourceSenseId": "1256",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1256
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1257",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 137,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1257",
+        "term": "産物",
+        "reading": "さんぶつ",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1257",
+        "meaningVi": "product, result, fruit",
+        "meaningEn": "product, result, fruit"
+      },
+      "search": {
+        "termNoAccent": "産物",
+        "readingNoAccent": "さんぶつ",
+        "meaningViNoAccent": "product, result, fruit",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1257",
+        "sourceSenseId": "1257",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1257
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1258",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 138,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1258",
+        "term": "山腹",
+        "reading": "さんぷく",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1258",
+        "meaningVi": "hillside, mountainside",
+        "meaningEn": "hillside, mountainside"
+      },
+      "search": {
+        "termNoAccent": "山腹",
+        "readingNoAccent": "さんぷく",
+        "meaningViNoAccent": "hillside, mountainside",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1258",
+        "sourceSenseId": "1258",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1258
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1259",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 139,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1259",
+        "term": "山脈",
+        "reading": "さんみゃく",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1259",
+        "meaningVi": "mountain range",
+        "meaningEn": "mountain range"
+      },
+      "search": {
+        "termNoAccent": "山脈",
+        "readingNoAccent": "さんみゃく",
+        "meaningViNoAccent": "mountain range",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1259",
+        "sourceSenseId": "1259",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1259
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    },
+    {
+      "entryId": "n1_tanos_1260",
+      "lessonId": 9,
+      "level": "N1",
+      "order": 140,
+      "tags": [
+        "tanos",
+        "jlpt-vocab",
+        "n1-vocab-import",
+        "needs-vi-editorial"
+      ],
+      "classification": {
+        "wordType": "nan",
+        "origin": "tanos_jlpt_vocab_list"
+      },
+      "lemma": {
+        "vocabId": "n1_v1260",
+        "term": "財",
+        "reading": "ざい",
+        "labels": {
+          "hanViet": null
+        }
+      },
+      "sense": {
+        "senseId": "n1_s1260",
+        "meaningVi": "fortune, riches",
+        "meaningEn": "fortune, riches"
+      },
+      "search": {
+        "termNoAccent": "財",
+        "readingNoAccent": "ざい",
+        "meaningViNoAccent": "fortune, riches",
+        "hanVietNoAccent": null
+      },
+      "links": {
+        "sourceVocabId": "1260",
+        "sourceSenseId": "1260",
+        "sourceBook": "Tanos JLPT vocabulary list via Hanabira",
+        "sourceOrder": 1260
+      },
+      "legacy": {
+        "kanjiMeaning": null
+      }
+    }
+  ]
+}

@@ -16,16 +16,6 @@ final vocabPreviewProvider = FutureProvider.family<List<VocabData>, String>((
           tbl.reading.like('%?%').not(),
     );
   final result = await query.get();
-  // DEBUG: Check for specific Minna words
-  // final debugTerms = ['私', '見ます', '探します', '食べる'];
-  // for (final t in debugTerms) {
-  //   try {
-  //     final found = result.firstWhere((item) => item.term == t);
-  //     // print('DEBUG_TAGS_SPECIFIC: ${found.term} - ${found.tags} - ${found.level}');
-  //   } catch (_) {
-  //     // print('DEBUG_TAGS_SPECIFIC: $t NOT FOUND');
-  //   }
-  // }
   return result;
 });
 
@@ -34,18 +24,10 @@ class ContentRepository {
 
   ContentRepository(this._db);
 
-  Future<String> getDebugTags(String term) async {
-    final item = await (_db.select(
-      _db.vocab,
-    )..where((tbl) => tbl.term.equals(term))).getSingleOrNull();
-    return item != null
-        ? '${item.term}: ${item.tags} (Level: ${item.level})'
-        : '$term NOT FOUND';
-  }
-
   Future<void> updateProgress(int vocabId, bool isCorrect) {
     final correctDelta = isCorrect ? 1 : 0;
     final missedDelta = isCorrect ? 0 : 1;
+    final reviewedAt = DateTime.now().millisecondsSinceEpoch;
     // Single-round-trip upsert: insert on first encounter, or atomically
     // increment the appropriate counter on subsequent reviews.
     return _db.customStatement(
@@ -59,10 +41,10 @@ class ContentRepository {
         vocabId,
         correctDelta,
         missedDelta,
-        DateTime.now().millisecondsSinceEpoch,
+        reviewedAt,
         correctDelta,
         missedDelta,
-        DateTime.now().millisecondsSinceEpoch,
+        reviewedAt,
       ],
     );
   }

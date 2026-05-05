@@ -37,7 +37,7 @@ Widget _buildWidget({
           sentenceTemplate: sentenceTemplate,
           options: options,
           correctOption: correctOption,
-          onCheck: onCheck ?? (_, __) {},
+          onCheck: onCheck ?? (_, _) {},
         ),
       ),
     ),
@@ -86,7 +86,7 @@ void main() {
     _largeViewport(tester);
     bool called = false;
     await tester.pumpWidget(
-      _buildWidget(onCheck: (_, __) => called = true),
+      _buildWidget(onCheck: (_, _) => called = true),
     );
     await _pump(tester);
 
@@ -161,7 +161,7 @@ void main() {
     _largeViewport(tester);
     int checkCount = 0;
     await tester.pumpWidget(
-      _buildWidget(onCheck: (_, __) => checkCount++),
+      _buildWidget(onCheck: (_, _) => checkCount++),
     );
     await _pump(tester);
 

@@ -115,6 +115,8 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
       repo.fetchKanjiByLevel(StudyLevel.n5.shortLabel),
       repo.fetchKanjiByLevel(StudyLevel.n4.shortLabel),
       repo.fetchKanjiByLevel(StudyLevel.n3.shortLabel),
+      repo.fetchKanjiByLevel(StudyLevel.n2.shortLabel),
+      repo.fetchKanjiByLevel(StudyLevel.n1.shortLabel),
     ]);
     return [for (final bucket in buckets) ...bucket];
   }
@@ -126,6 +128,10 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
       case StudyLevel.n4:
         return _KanjiCollection.n4;
       case StudyLevel.n3:
+        return _KanjiCollection.n3;
+      case StudyLevel.n2:
+        return _KanjiCollection.n3;
+      case StudyLevel.n1:
         return _KanjiCollection.n3;
     }
   }

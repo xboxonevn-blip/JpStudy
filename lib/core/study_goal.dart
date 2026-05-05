@@ -51,29 +51,29 @@ extension StudyGoalExtension on StudyGoal {
   String get _labelVi {
     switch (this) {
       case StudyGoal.jlpt:
-        return 'Luyện thi JLPT';
+        return 'Luy?n thi JLPT';
       case StudyGoal.reading:
-        return 'Đọc tiếng Nhật';
+        return '??c ti?ng Nh?t';
       case StudyGoal.writing:
-        return 'Luyện viết';
+        return 'Luy?n vi?t';
     }
   }
 
   String get _labelJa {
     switch (this) {
       case StudyGoal.jlpt:
-        return 'JLPT試験対策';
+        return 'JLPT????';
       case StudyGoal.reading:
-        return '日本語の読み取り';
+        return '????????';
       case StudyGoal.writing:
-        return '書き練習';
+        return '????';
     }
   }
 
   String get _descEn {
     switch (this) {
       case StudyGoal.jlpt:
-        return 'Prepare for N5, N4, N3 exams';
+        return 'Prepare for N5, N4, N3, N2, N1 exams';
       case StudyGoal.reading:
         return 'Manga, news, books';
       case StudyGoal.writing:
@@ -84,9 +84,9 @@ extension StudyGoalExtension on StudyGoal {
   String get _descVi {
     switch (this) {
       case StudyGoal.jlpt:
-        return 'Chuẩn bị kỳ thi N5, N4, N3';
+        return 'Chu?n b? k? thi N5, N4, N3, N2, N1';
       case StudyGoal.reading:
-        return 'Manga, tin tức, sách';
+        return 'Manga, tin t?c, s?ch';
       case StudyGoal.writing:
         return 'Hiragana, Katakana, Kanji';
     }
@@ -95,11 +95,11 @@ extension StudyGoalExtension on StudyGoal {
   String get _descJa {
     switch (this) {
       case StudyGoal.jlpt:
-        return 'N5、N4、N3試験に備える';
+        return 'N5?N4?N3?N2?N1??????';
       case StudyGoal.reading:
-        return 'マンガ、ニュース、本';
+        return '??????????';
       case StudyGoal.writing:
-        return 'ひらがな、カタカナ、漢字';
+        return '????????????';
     }
   }
 }

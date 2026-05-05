@@ -1,0 +1,364 @@
+{
+  "lessonId": 4,
+  "level": "N2",
+  "source": "Hanabira grammar JSON",
+  "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
+  "tags": [
+    "source-hanabira",
+    "n2-grammar-import"
+  ],
+  "examples": [
+    {
+      "grammarPoint": "A。要するに B。",
+      "sentence": "このプロジェクトは成功しました。要するに、私たちのチームは素晴らしい仕事をしました。",
+      "translation": "This project was successful. In short, our team did a great job.",
+      "translationEn": "This project was successful. In short, our team did a great job.",
+      "romaji": "Kono purojekuto wa seikou shimashita. Yousuru ni, watashitachi no chiimu wa subarashii shigoto o shimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "A。要するに B。",
+      "sentence": "彼は料理が上手です。要するに、彼は優れたシェフです。",
+      "translation": "He is good at cooking. In a nutshell, he is an excellent chef.",
+      "translationEn": "He is good at cooking. In a nutshell, he is an excellent chef.",
+      "romaji": "Kare wa ryouri ga jouzu desu. Yousuru ni, kare wa sugureta shefu desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "A。要するに B。",
+      "sentence": "昨日はとても忙しかった。要するに、一日中働いていました。",
+      "translation": "Yesterday was very busy. To sum up, I was working all day.",
+      "translationEn": "Yesterday was very busy. To sum up, I was working all day.",
+      "romaji": "Kinou wa totemo isogashikatta. Yousuru ni, ichinichijuu hataraite imashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "A。要するに B。",
+      "sentence": "彼女は新しい仕事が好きです。要するに、彼女は満足しています。",
+      "translation": "She likes her new job. In short, she is satisfied.",
+      "translationEn": "She likes her new job. In short, she is satisfied.",
+      "romaji": "Kanojo wa atarashii shigoto ga suki desu. Yousuru ni, kanojo wa manzoku shiteimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun につき",
+      "sentence": "試験につき、今日は静かにしてください。",
+      "translation": "Due to the exam, please be quiet today.",
+      "translationEn": "Due to the exam, please be quiet today.",
+      "romaji": "Shiken ni tsuki, kyou wa shizuka ni shite kudasai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun につき",
+      "sentence": "このエリアは工事中につき、通行止めです。",
+      "translation": "The area is closed for passage due to construction.",
+      "translationEn": "The area is closed for passage due to construction.",
+      "romaji": "Kono eria wa koujichuu ni tsuki, tsuukoudome desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun につき",
+      "sentence": "博物館は整備中につき、入場料が無料です。",
+      "translation": "Due to maintenance, admission to the museum is free.",
+      "translationEn": "Due to maintenance, admission to the museum is free.",
+      "romaji": "Hakubutsukan wa seibichuu ni tsuki, nyuujouryou ga muryou desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun につき",
+      "sentence": "商品お一つにつき、1000円の割引があります。",
+      "translation": "There is a 1,000 yen discount per item.",
+      "translationEn": "There is a 1,000 yen discount per item.",
+      "romaji": "Shouhin o hitotsu ni tsuki, sen'en no waribiki ga arimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun にて",
+      "sentence": "駅前広場にてイベントが開催されます。",
+      "translation": "An event will be held at the station square.",
+      "translationEn": "An event will be held at the station square.",
+      "romaji": "Ekimae hiroba nite ibento ga kaisai saremasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun にて",
+      "sentence": "ホテルにて会議が行われます。",
+      "translation": "The meeting will take place at the hotel.",
+      "translationEn": "The meeting will take place at the hotel.",
+      "romaji": "Hoteru nite kaigi ga okonawaremasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun にて",
+      "sentence": "郵便局にて荷物を受け取りました。",
+      "translation": "I received the package at the post office.",
+      "translationEn": "I received the package at the post office.",
+      "romaji": "Yubinkyoku nite nimotsu wo uketorimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun にて",
+      "sentence": "インターネットにて調べたら、答えが見つかりました。",
+      "translation": "I searched online and found the answer.",
+      "translationEn": "I searched online and found the answer.",
+      "romaji": "Intaanetto nite shirabetara, kotae ga mitsukarimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun の ことだから",
+      "sentence": "料理が得意な彼のことだから、美味しい料理を作ってくれるでしょう。",
+      "translation": "Since he’s good at cooking, he’ll probably make delicious food.",
+      "translationEn": "Since he’s good at cooking, he’ll probably make delicious food.",
+      "romaji": "Ryouri ga tokui na kare no koto dakara, oishii ryouri wo tsukutte kureru deshou.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun の ことだから",
+      "sentence": "いつも遅刻する彼女のことだから、今日も遅れるかもしれない。",
+      "translation": "Because she’s always late, she might be late again today.",
+      "translationEn": "Because she’s always late, she might be late again today.",
+      "romaji": "Itsumo chikoku suru kanojo no koto dakara, kyou mo okureru kamoshirenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun の ことだから",
+      "sentence": "安い店のことだから、たくさん売れるはずだ。",
+      "translation": "Since it’s a cheap store, it should sell a lot.",
+      "translationEn": "Since it’s a cheap store, it should sell a lot.",
+      "romaji": "Yasui mise no koto dakara, takusan ureru hazu da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun の ことだから",
+      "sentence": "ドラマ好きな彼のことだから、最新のドラマについて話すといいでしょう。",
+      "translation": "Knowing he likes dramas, it’d be good to talk about the latest shows.",
+      "translationEn": "Knowing he likes dramas, it’d be good to talk about the latest shows.",
+      "romaji": "Dorama suki na kare no koto dakara, saishin no dorama ni tsuite hanasu to ii deshou.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を はじめ",
+      "sentence": "日本料理をはじめ、さまざまな料理がこのレストランで楽しめます。",
+      "translation": "You can enjoy various dishes in this restaurant, starting with Japanese cuisine.",
+      "translationEn": "You can enjoy various dishes in this restaurant, starting with Japanese cuisine.",
+      "romaji": "Nihon ryouri wo hajime, samazama na ryouri ga kono resutoran de tanoshimemasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を はじめ",
+      "sentence": "彼は絵画をはじめ、彫刻や写真もコレクションしている。",
+      "translation": "He collects not only paintings but also sculptures and photographs.",
+      "translationEn": "He collects not only paintings but also sculptures and photographs.",
+      "romaji": "Kare wa kaiga wo hajime, choukoku ya shashin mo korekushon shite iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を はじめ",
+      "sentence": "京都をはじめ、日本のいくつかの都市で伝統的な祭りが行われている。",
+      "translation": "Traditional festivals are held in several cities in Japan, including Kyoto.",
+      "translationEn": "Traditional festivals are held in several cities in Japan, including Kyoto.",
+      "romaji": "Kyouto wo hajime, Nihon no ikutsu ka no toshi de dentouteki na matsuri ga okonawarete iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を はじめ",
+      "sentence": "太陽をはじめ、地球や火星などの惑星も太陽系に含まれている。",
+      "translation": "Not only the Sun, but also planets such as Earth and Mars are included in the solar system.",
+      "translationEn": "Not only the Sun, but also planets such as Earth and Mars are included in the solar system.",
+      "romaji": "Taiyou wo hajime, chikyuu ya kasei nado no wakusei mo taiyoukei ni fukumarete iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を はじめとして",
+      "sentence": "東京をはじめとして、日本にはたくさんの観光スポットがあります。",
+      "translation": "There are many tourist spots in Japan, starting with Tokyo.",
+      "translationEn": "There are many tourist spots in Japan, starting with Tokyo.",
+      "romaji": "Tōkyō o hajime to shite, Nihon ni wa takusan no kankō supotto ga arimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を はじめとして",
+      "sentence": "彼は、ピアノをはじめとして、たくさんの楽器を演奏できます。",
+      "translation": "He can play many instruments, starting with piano.",
+      "translationEn": "He can play many instruments, starting with piano.",
+      "romaji": "Kare wa, piano o hajime to shite, takusan no gakki o ensō dekimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を はじめとして",
+      "sentence": "この本は手作りのガーゼマスクをはじめとして、便利な生活アイディアが満載です。",
+      "translation": "This book is packed with useful life hacks, including how to make a handmade gauze mask.",
+      "translationEn": "This book is packed with useful life hacks, including how to make a handmade gauze mask.",
+      "romaji": "Kono hon wa tezukuri no gāze masuku o hajime to shite, benrina seikatsu aidea ga mansai desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を はじめとして",
+      "sentence": "そのショッピングモールには、ZARAをはじめとして、多くのブランドが集まっています。",
+      "translation": "Many brands, including ZARA, gather in that shopping mall.",
+      "translationEn": "Many brands, including ZARA, gather in that shopping mall.",
+      "romaji": "Sono shoppingu mōru ni wa, ZARA o hajime to shite, ōku no burando ga atsumatte imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を はじめとする Noun",
+      "sentence": "彼はフランス語をはじめとする外国語が話せる。",
+      "translation": "He can speak foreign languages, starting with French.",
+      "translationEn": "He can speak foreign languages, starting with French.",
+      "romaji": "Kare wa furansugo o hajime to suru gaikokugo ga hanaseru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を はじめとする Noun",
+      "sentence": "このコンサートには、BTSをはじめとする人気アーティストが出演する予定です。",
+      "translation": "This concert is scheduled to feature popular artists, including BTS.",
+      "translationEn": "This concert is scheduled to feature popular artists, including BTS.",
+      "romaji": "Kono konsāto ni wa, BTS o hajime to suru ninki ātisuto ga shutsuen suru yotei desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を はじめとする Noun",
+      "sentence": "彼女は魚をはじめとする海の幸が大好きだ。",
+      "translation": "She loves seafood, starting with fish.",
+      "translationEn": "She loves seafood, starting with fish.",
+      "romaji": "Kanojo wa sakana o hajime to suru umi no sachi ga daisuki da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を はじめとする Noun",
+      "sentence": "この図書館には、子供向けの本をはじめとするさまざまなジャンルの本があります。",
+      "translation": "This library has various genres of books, including children's books.",
+      "translationEn": "This library has various genres of books, including children's books.",
+      "romaji": "Kono toshokan ni wa, kodomomuke no hon o hajime to suru samazama na janru no hon ga arimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を めぐって",
+      "sentence": "環境問題をめぐって、多くの議論が行われています。",
+      "translation": "Many discussions are held concerning environmental issues.",
+      "translationEn": "Many discussions are held concerning environmental issues.",
+      "romaji": "Kankyō mondai o megutte, ōku no giron ga okonawarete imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を めぐって",
+      "sentence": "彼の死をめぐって、いくつかの陰謀説が浮かび上がっている。",
+      "translation": "Several conspiracy theories have emerged regarding his death.",
+      "translationEn": "Several conspiracy theories have emerged regarding his death.",
+      "romaji": "Kare no shi o megutte, ikutsuka no inbōsetsu ga ukabiagatte iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を めぐって",
+      "sentence": "昇給をめぐって会社と労働組合が話し合いをしています。",
+      "translation": "The company and the labor union are having discussions about pay raises.",
+      "translationEn": "The company and the labor union are having discussions about pay raises.",
+      "romaji": "Shōkyū o megutte kaisha to rōdō kumiai ga hanashiai o shite imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun を めぐって",
+      "sentence": "この映画をめぐって、賛否両論が存在している。",
+      "translation": "There are both pros and cons regarding this movie.",
+      "translationEn": "There are both pros and cons regarding this movie.",
+      "romaji": "Kono eiga o megutte, sanpi ryōron ga sonzai shite iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    }
+  ]
+}

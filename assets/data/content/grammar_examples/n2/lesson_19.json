@@ -1,0 +1,364 @@
+{
+  "lessonId": 19,
+  "level": "N2",
+  "source": "Hanabira grammar JSON",
+  "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
+  "tags": [
+    "source-hanabira",
+    "n2-grammar-import"
+  ],
+  "examples": [
+    {
+      "grammarPoint": "～べきではない",
+      "sentence": "遅れる理由がないなら、遅れるべきではありません。",
+      "translation": "If there's no reason to be late, you shouldn’t be late.",
+      "translationEn": "If there's no reason to be late, you shouldn’t be late.",
+      "romaji": "Okureru riyuu ga nai nara, okureru beki dewa arimasen.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～べきではない",
+      "sentence": "子供に悪口を言うべきではありません。",
+      "translation": "You shouldn’t say hurtful things to children.",
+      "translationEn": "You shouldn’t say hurtful things to children.",
+      "romaji": "Kodomo ni waruguchi o iu beki dewa arimasen.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～べきではない",
+      "sentence": "この薬は一度に飲みすぎるべきではない。",
+      "translation": "You should not take too much of this medicine at once.",
+      "translationEn": "You should not take too much of this medicine at once.",
+      "romaji": "Kono kusuri wa ichido ni nomisugiru beki dewa nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～べきではない",
+      "sentence": "知らない人と個人情報を共有するべきではない。",
+      "translation": "You shouldn't share personal information with strangers.",
+      "translationEn": "You shouldn't share personal information with strangers.",
+      "romaji": "Shiranai hito to kojin jouhou o kyouyuu suru beki dewa nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～まい",
+      "sentence": "彼は今晩来るまい。",
+      "translation": "He probably won't come tonight.",
+      "translationEn": "He probably won't come tonight.",
+      "romaji": "Kare wa konban kuru mai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～まい",
+      "sentence": "こんなに遅れては、電車に間に合うまい。",
+      "translation": "Being this late, I probably won't make it for the train.",
+      "translationEn": "Being this late, I probably won't make it for the train.",
+      "romaji": "Konnani okurete wa, densha ni maniau mai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～まい",
+      "sentence": "あの人は絶対に忘れるまい。",
+      "translation": "That person will definitely not forget.",
+      "translationEn": "That person will definitely not forget.",
+      "romaji": "Ano hito wa zettai ni wasureru mai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～まい",
+      "sentence": "私は二度とその失敗を繰り返すまい。",
+      "translation": "I will not repeat that mistake again.",
+      "translationEn": "I will not repeat that mistake again.",
+      "romaji": "Watashi wa nidoto sono shippai o kurikaesu mai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～まで～て",
+      "sentence": "9時まで働いて、その後休憩しました。",
+      "translation": "I worked until 9 o'clock, and then took a break.",
+      "translationEn": "I worked until 9 o'clock, and then took a break.",
+      "romaji": "Ku-ji made hataraite, sono ato kyuukei shimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～まで～て",
+      "sentence": "夜まで勉強して、試験に合格しました。",
+      "translation": "I studied until night, and passed the exam.",
+      "translationEn": "I studied until night, and passed the exam.",
+      "romaji": "Yoru made benkyou shite, shiken ni goukaku shimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～まで～て",
+      "sentence": "最後のページまで読んで、本を閉じました。",
+      "translation": "I read until the last page, then closed the book.",
+      "translationEn": "I read until the last page, then closed the book.",
+      "romaji": "Saigo no peeji made yonde, hon o tojimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～まで～て",
+      "sentence": "電車が着くまで待って、友達と会いました。",
+      "translation": "I waited until the train arrived, and then met my friend.",
+      "translationEn": "I waited until the train arrived, and then met my friend.",
+      "romaji": "Densha ga tsuku made matte, tomodachi to aimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ままに",
+      "sentence": "子供が寝ているままに、静かに部屋を出ました。",
+      "translation": "I quietly left the room while the child was still sleeping.",
+      "translationEn": "I quietly left the room while the child was still sleeping.",
+      "romaji": "Kodomo ga nete iru mama ni, shizuka ni heya o demashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ままに",
+      "sentence": "窓が開いたままで、寒くなりました。",
+      "translation": "It got cold with the window left open.",
+      "translationEn": "It got cold with the window left open.",
+      "romaji": "Mado ga aita mama de, samuku narimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ままに",
+      "sentence": "彼は元気なままで老人ホームに入りました。",
+      "translation": "He entered the nursing home while still in good health.",
+      "translationEn": "He entered the nursing home while still in good health.",
+      "romaji": "Kare wa genki na mama de roujin hoomu ni hairimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ままに",
+      "sentence": "昔の思い出のままに、この町に戻りました。",
+      "translation": "I returned to this town with my old memories intact.",
+      "translationEn": "I returned to this town with my old memories intact.",
+      "romaji": "Mukashi no omoide no mama ni, kono machi ni modorimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～もかまわず",
+      "sentence": "彼は周りの人もかまわず、大声で話しました。",
+      "translation": "Without worrying about the people around him, he spoke loudly.",
+      "translationEn": "Without worrying about the people around him, he spoke loudly.",
+      "romaji": "Kare wa mawari no hito mo kamawazu, oogoe de hanashimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～もかまわず",
+      "sentence": "彼女は時間もかまわず、ゆっくりと本を読み続けました。",
+      "translation": "She kept reading the book leisurely, without worrying about the time.",
+      "translationEn": "She kept reading the book leisurely, without worrying about the time.",
+      "romaji": "Kanojo wa jikan mo kamawazu, yukkuri to hon o yomitsuzukemashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～もかまわず",
+      "sentence": "彼は寒さもかまわず、外で運動しました。",
+      "translation": "He exercised outside without worrying about the cold.",
+      "translationEn": "He exercised outside without worrying about the cold.",
+      "romaji": "Kare wa samusa mo kamawazu, soto de undou shimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～もかまわず",
+      "sentence": "彼女は危険もかまわず、火事の中に飛び込んで助けに行きました。",
+      "translation": "She jumped into the fire without fear of danger to help.",
+      "translationEn": "She jumped into the fire without fear of danger to help.",
+      "romaji": "Kanojo wa kiken mo kamawazu, kaji no naka ni tobikonde tasuke ni ikimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものか",
+      "sentence": "そんなこと、僕がやりたいものか。",
+      "translation": "No way do I want to do such a thing.",
+      "translationEn": "No way do I want to do such a thing.",
+      "romaji": "Sonna koto, boku ga yaritai mono ka.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものか",
+      "sentence": "こんな仕事、誰が引き受けようものか。",
+      "translation": "Who on earth would take on a job like this? (No one would!)",
+      "translationEn": "Who on earth would take on a job like this? (No one would!)",
+      "romaji": "Konna shigoto, dare ga hikiukeyou mono ka.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものか",
+      "sentence": "誰が彼に助けを求めようものか。",
+      "translation": "Who would ever ask him for help? (Certainly no one!)",
+      "translationEn": "Who would ever ask him for help? (Certainly no one!)",
+      "romaji": "Dare ga kare ni tasuke o motomeyou mono ka.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものか",
+      "sentence": "この寒い日に外で遊ぶなんて、無理なものか。",
+      "translation": "There's no way we can play outside on a day this cold.",
+      "translationEn": "There's no way we can play outside on a day this cold.",
+      "romaji": "Kono samui hi ni soto de asobu nante, muri na mono ka.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものがある",
+      "sentence": "彼のスピーチには心を打たれるものがある。",
+      "translation": "There's something moving about his speech.",
+      "translationEn": "There's something moving about his speech.",
+      "romaji": "Kare no supiichi ni wa kokoro o utareru mono ga aru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものがある",
+      "sentence": "この映画には考えさせられるものがある。",
+      "translation": "There's something about this movie that really makes you think.",
+      "translationEn": "There's something about this movie that really makes you think.",
+      "romaji": "Kono eiga ni wa kangaesaserareru mono ga aru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものがある",
+      "sentence": "彼の言うことにも一理あるものがある。",
+      "translation": "There's a certain point in what he says.",
+      "translationEn": "There's a certain point in what he says.",
+      "romaji": "Kare no iu koto ni mo ichiri aru mono ga aru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものがある",
+      "sentence": "毎日忙しすぎる生活には少し息苦しいものがある。",
+      "translation": "There's something a bit suffocating about being so busy every day.",
+      "translationEn": "There's something a bit suffocating about being so busy every day.",
+      "romaji": "Mainichi isogashisugiru seikatsu ni wa sukoshi ikigurushii mono ga aru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものだ",
+      "sentence": "若い時はたくさん遊ぶものだ。",
+      "translation": "It is natural to have a lot of fun when you are young.",
+      "translationEn": "It is natural to have a lot of fun when you are young.",
+      "romaji": "Wakai toki wa takusan asobu mono da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものだ",
+      "sentence": "約束をしたら、守るものだ。",
+      "translation": "If you make a promise, you should keep it.",
+      "translationEn": "If you make a promise, you should keep it.",
+      "romaji": "Yakusoku o shitara, mamoru mono da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものだ",
+      "sentence": "お客さんが来ると、お茶を出すものだ。",
+      "translation": "When guests arrive, it's customary to serve tea.",
+      "translationEn": "When guests arrive, it's customary to serve tea.",
+      "romaji": "Okyakusan ga kuru to, ocha o dasu mono da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものだ",
+      "sentence": "人生は困難に立ち向かうものだ。",
+      "translation": "In life, one ought to face hardships.",
+      "translationEn": "In life, one ought to face hardships.",
+      "romaji": "Jinsei wa konnan ni tachimukau mono da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    }
+  ]
+}

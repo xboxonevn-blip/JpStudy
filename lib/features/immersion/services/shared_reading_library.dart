@@ -8,14 +8,14 @@ class SharedReadingLibrary {
   const SharedReadingLibrary();
 
   static final _closingPlanRe = RegExp(
-    r'(たい|つもり|ようにしている|ことにしている|予定|大切にしたい)',
+    r'(ãŸã„|ã¤ã‚‚ã‚Š|ã‚ˆã†ã«ã—ã¦ã„ã‚‹|ã“ã¨ã«ã—ã¦ã„ã‚‹|äºˆå®š|å¤§åˆ‡ã«ã—ãŸã„)',
   );
   static final _immersionLevelRe = RegExp(r'/immersion/(n[1-5])/');
 
   Future<List<ImmersionArticle>> loadImmersionArticles() async {
     final assetPaths = await _loadLessonAssetPaths();
 
-    // Load all JSON files concurrently — pure I/O, no DB involvement.
+    // Load all JSON files concurrently â€” pure I/O, no DB involvement.
     final futures = assetPaths.map((path) async {
       try {
         final raw = await rootBundle.loadString(path);
@@ -92,7 +92,9 @@ class SharedReadingLibrary {
     const lessonRanges = <String, List<int>>{
       'n5': [1, 25],
       'n4': [26, 50],
-      'n3': [51, 75],
+      'n3': [1, 25],
+      'n2': [1, 25],
+      'n1': [1, 25],
     };
     final paths = <String>[];
     for (final entry in lessonRanges.entries) {
@@ -136,18 +138,21 @@ class SharedReadingLibrary {
         JlptReadingQuestion(
           id: '${article.id}-q1',
           type: JlptReadingQuestionType.mainIdea,
-          prompt: 'この文章のテーマとして最も近いものはどれですか。',
+          prompt:
+              'ã“ã®æ–‡ç« ã®ãƒ†ãƒ¼ãƒžã¨ã—ã¦æœ€ã‚‚è¿‘ã„ã‚‚ã®ã¯ã©ã‚Œã§ã™ã‹ã€‚',
           options: titleOptions.options,
           correctIndex: titleOptions.correctIndex,
-          explanation: 'タイトルと本文全体の流れから判断します。',
+          explanation:
+              'ã‚¿ã‚¤ãƒˆãƒ«ã¨æœ¬æ–‡å…¨ä½“ã®æµã‚Œã‹ã‚‰åˆ¤æ–­ã—ã¾ã™ã€‚',
         ),
         JlptReadingQuestion(
           id: '${article.id}-q2',
           type: JlptReadingQuestionType.detail,
-          prompt: '本文の内容と合うものはどれですか。',
+          prompt: 'æœ¬æ–‡ã®å†…å®¹ã¨åˆã†ã‚‚ã®ã¯ã©ã‚Œã§ã™ã‹ã€‚',
           options: detailOptions.options,
           correctIndex: detailOptions.correctIndex,
-          explanation: '第${detailParagraphIndex + 1}段落の内容と照らして確認します。',
+          explanation:
+              'ç¬¬${detailParagraphIndex + 1}æ®µè½ã®å†…å®¹ã¨ç…§ã‚‰ã—ã¦ç¢ºèªã—ã¾ã™ã€‚',
         ),
         JlptReadingQuestion(
           id: '${article.id}-q3',
@@ -155,7 +160,8 @@ class SharedReadingLibrary {
           prompt: endingQuestion.prompt,
           options: endingOptions.options,
           correctIndex: endingOptions.correctIndex,
-          explanation: '最後の段落の内容を手がかりに判断します。',
+          explanation:
+              'æœ€å¾Œã®æ®µè½ã®å†…å®¹ã‚’æ‰‹ãŒã‹ã‚Šã«åˆ¤æ–­ã—ã¾ã™ã€‚',
         ),
       ],
     );
@@ -178,7 +184,11 @@ class SharedReadingLibrary {
       }
     }
     if (options.length < 4) {
-      for (final extra in const <String>['日常生活', '学習の工夫', '社会の話題']) {
+      for (final extra in const <String>[
+        'æ—¥å¸¸ç”Ÿæ´»',
+        'å­¦ç¿’ã®å·¥å¤«',
+        'ç¤¾ä¼šã®è©±é¡Œ',
+      ]) {
         if (!options.contains(extra)) {
           options.add(extra);
         }
@@ -236,12 +246,13 @@ class SharedReadingLibrary {
     if (looksLikePlan) {
       return const _ClosingQuestion(
         type: JlptReadingQuestionType.inference,
-        prompt: '筆者がこれから大切にしたいこととして最も近いものはどれですか。',
+        prompt:
+            'ç­†è€…ãŒã“ã‚Œã‹ã‚‰å¤§åˆ‡ã«ã—ãŸã„ã“ã¨ã¨ã—ã¦æœ€ã‚‚è¿‘ã„ã‚‚ã®ã¯ã©ã‚Œã§ã™ã‹ã€‚',
       );
     }
     return const _ClosingQuestion(
       type: JlptReadingQuestionType.detail,
-      prompt: '文末の内容と合うものはどれですか。',
+      prompt: 'æ–‡æœ«ã®å†…å®¹ã¨åˆã†ã‚‚ã®ã¯ã©ã‚Œã§ã™ã‹ã€‚',
     );
   }
 

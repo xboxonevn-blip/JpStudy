@@ -1,0 +1,452 @@
+{
+  "lessonId": 17,
+  "level": "N1",
+  "source": "Hanabira grammar JSON",
+  "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
+  "tags": [
+    "source-hanabira",
+    "n1-grammar-import"
+  ],
+  "examples": [
+    {
+      "grammarPoint": "Verbる ともなく Verb",
+      "sentence": "遠くを見るともなく窓の外を眺めた。",
+      "translation": "I found myself gazing out the window, not really looking at anything in particular.",
+      "translationEn": "I found myself gazing out the window, not really looking at anything in particular.",
+      "romaji": "Tooku o miru tomonaku mado no soto o nagameta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる ともなく Verb",
+      "sentence": "知るともなく、彼が去ったことを感じた。",
+      "translation": "Without really knowing, I felt that he had left.",
+      "translationEn": "Without really knowing, I felt that he had left.",
+      "romaji": "Shiru tomonaku, kare ga satta koto o kanjita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる ともなく Verb",
+      "sentence": "本を読むともなく、ページをめくっていた。",
+      "translation": "Without intending to read, I was just flipping through the pages of the book.",
+      "translationEn": "Without intending to read, I was just flipping through the pages of the book.",
+      "romaji": "Hon o yomu tomonaku, peiji o mekutte ita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる ともなく Verb",
+      "sentence": "寝るともなく、ベッドに横になっていた。",
+      "translation": "I was lying in bed without really intending to sleep.",
+      "translationEn": "I was lying in bed without really intending to sleep.",
+      "romaji": "Neru tomonaku, beddo ni yoko ni natte ita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる ともなしに Verb",
+      "sentence": "本を読むともなしに眠ってしまった。",
+      "translation": "I ended up falling asleep while reading the book without really meaning to.",
+      "translationEn": "I ended up falling asleep while reading the book without really meaning to.",
+      "romaji": "Hon o yomu tomonashi ni nemutte shimatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる ともなしに Verb",
+      "sentence": "軽い気持ちで手紙を書くともなしに、彼に本心を告白した。",
+      "translation": "While writing a letter casually, I ended up confessing my true feelings to him.",
+      "translationEn": "While writing a letter casually, I ended up confessing my true feelings to him.",
+      "romaji": "Karui kimochi de tegami o kaku tomonashi ni, kare ni honshin o kokuhaku shita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる ともなしに Verb",
+      "sentence": "散歩をするともなしに、新しいカフェを見つけた。",
+      "translation": "While I was walking with no particular destination, I found a new cafe.",
+      "translationEn": "While I was walking with no particular destination, I found a new cafe.",
+      "romaji": "Sanpo o suru tomonashi ni, atarashii kafe o mitsuketa.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる ともなしに Verb",
+      "sentence": "洋服を整理するともなしに、昔の写真を見つけた。",
+      "translation": "As I was absentmindedly organizing clothes, I came across some old photos.",
+      "translationEn": "As I was absentmindedly organizing clothes, I came across some old photos.",
+      "romaji": "Youfuku o seiri suru tomonashi ni, mukashi no shashin o mitsuketa.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる なり",
+      "sentence": "家に帰るなり、すぐに寝た。",
+      "translation": "As soon as I got home, I went to sleep.",
+      "translationEn": "As soon as I got home, I went to sleep.",
+      "romaji": "Ie ni kaeru nari, sugu ni neta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる なり",
+      "sentence": "彼が駅に着くなり、電話をかけてきた。",
+      "translation": "He called me the moment he arrived at the station.",
+      "translationEn": "He called me the moment he arrived at the station.",
+      "romaji": "Kare ga eki ni tsuku nari, denwa o kakete kita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる なり",
+      "sentence": "ドアを開けるなり、犬が吠え始めた。",
+      "translation": "As soon as I opened the door, the dog started barking.",
+      "translationEn": "As soon as I opened the door, the dog started barking.",
+      "romaji": "Doa o akeru nari, inu ga hoe hajimeta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる なり",
+      "sentence": "テストが終わるなり、彼は教室を出て行った。",
+      "translation": "He left the classroom the moment the test ended.",
+      "translationEn": "He left the classroom the moment the test ended.",
+      "romaji": "Tesuto ga owaru nari, kare wa kyoushitsu o dete itta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる にとどまらず～も",
+      "sentence": "彼は仕事にとどまらず、ボランティア活動もしている。",
+      "translation": "He does not just work; he also does volunteer activities.",
+      "translationEn": "He does not just work; he also does volunteer activities.",
+      "romaji": "Kare wa shigoto ni todomarazu, borantia katsudou mo shite iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる にとどまらず～も",
+      "sentence": "この機能は写真撮影にとどまらず、動画撮影も可能です。",
+      "translation": "This function is not limited to taking photos; it can also record videos.",
+      "translationEn": "This function is not limited to taking photos; it can also record videos.",
+      "romaji": "Kono kinou wa shashin satsuei ni todomarazu, douga satsuei mo kanou desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる にとどまらず～も",
+      "sentence": "このレストランは日本料理にとどまらず、中華料理も提供しています。",
+      "translation": "This restaurant not only serves Japanese food, but also Chinese cuisine.",
+      "translationEn": "This restaurant not only serves Japanese food, but also Chinese cuisine.",
+      "romaji": "Kono resutoran wa Nihon ryouri ni todomarazu, Chuuka ryouri mo teikyou shiteimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる にとどまらず～も",
+      "sentence": "その企業は製造業にとどまらず、流通業務も手がけている。",
+      "translation": "That company’s operations go beyond manufacturing; they also handle distribution.",
+      "translationEn": "That company’s operations go beyond manufacturing; they also handle distribution.",
+      "romaji": "Sono kigyou wa seizougyou ni todomarazu, ryuutsuugyou mo tegakete iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる にはあたらない",
+      "sentence": "パニックに陥るにはあたらない。",
+      "translation": "There’s no need to panic.",
+      "translationEn": "There’s no need to panic.",
+      "romaji": "Panikku ni ochiiru ni wa ataranai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる にはあたらない",
+      "sentence": "彼に謝るにはあたらない。",
+      "translation": "There’s no need to apologize to him.",
+      "translationEn": "There’s no need to apologize to him.",
+      "romaji": "Kare ni ayamaru ni wa ataranai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる にはあたらない",
+      "sentence": "そのようなことを心配するにはあたらない。",
+      "translation": "It’s not worth worrying about such things.",
+      "translationEn": "It’s not worth worrying about such things.",
+      "romaji": "Sono you na koto o shinpai suru ni wa ataranai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる にはあたらない",
+      "sentence": "それについて深く考えるにはあたらない。",
+      "translation": "There’s no need to think too deeply about it.",
+      "translationEn": "There’s no need to think too deeply about it.",
+      "romaji": "Sore ni tsuite fukaku kangaeru ni wa ataranai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる にも",
+      "sentence": "明日雨が降ったとしても、傘を持つにも荷物が多すぎる。",
+      "translation": "Even if it rains tomorrow, I have too much luggage to bring an umbrella.",
+      "translationEn": "Even if it rains tomorrow, I have too much luggage to bring an umbrella.",
+      "romaji": "Ashita ame ga futta to shite mo, kasa o motsu ni mo nimotsu ga oosugiru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる にも",
+      "sentence": "試験に落ちたが、もう一度受けるにもお金が足りない。",
+      "translation": "I failed the exam, but I don’t have the money to take it again even if I wanted to.",
+      "translationEn": "I failed the exam, but I don’t have the money to take it again even if I wanted to.",
+      "romaji": "Shiken ni ochita ga, mou ichido ukeru ni mo okane ga tarinai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる にも",
+      "sentence": "彼に会いたいと思っても、彼に会うにも難しい状況だ。",
+      "translation": "Even if I want to see him, it's a difficult situation to meet him.",
+      "translationEn": "Even if I want to see him, it's a difficult situation to meet him.",
+      "romaji": "Kare ni aitai to omotte mo, kare ni au ni mo muzukashii joukyou da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる にも",
+      "sentence": "この空港から彼女の家に行くにもタクシーが必要だ。",
+      "translation": "I'd need a taxi to get from this airport to her house, even if I wanted to go.",
+      "translationEn": "I'd need a taxi to get from this airport to her house, even if I wanted to go.",
+      "romaji": "Kono kuukou kara kanojo no ie ni iku ni mo takushii ga hitsuyou da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる にも Verb れない",
+      "sentence": "彼を理解しようにも理解できない。",
+      "translation": "Even if I try to understand him, I can't.",
+      "translationEn": "Even if I try to understand him, I can't.",
+      "romaji": "Kare o rikai shiyou ni mo rikai dekinai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる にも Verb れない",
+      "sentence": "走ろうにも走れない。",
+      "translation": "Even if I want to run, I can't.",
+      "translationEn": "Even if I want to run, I can't.",
+      "romaji": "Hashirou ni mo hashirenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる にも Verb れない",
+      "sentence": "泣こうにも泣けない。",
+      "translation": "Even if I want to cry, I can't.",
+      "translationEn": "Even if I want to cry, I can't.",
+      "romaji": "Nakou ni mo nakenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる にも Verb れない",
+      "sentence": "忘れようにも忘れられない。",
+      "translation": "Even if I try to forget, I just can’t.",
+      "translationEn": "Even if I try to forget, I just can’t.",
+      "romaji": "Wasureyou ni mo wasurerarenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる べからざる Noun",
+      "sentence": "人を裏切るべからざる行為だ。",
+      "translation": "Betraying others is an act that must not be done.",
+      "translationEn": "Betraying others is an act that must not be done.",
+      "romaji": "Hito o uragiru bekara zaru koui da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる べからざる Noun",
+      "sentence": "子供を傷つけるべからざる行動だ。",
+      "translation": "Hurting a child is a behavior that must not happen.",
+      "translationEn": "Hurting a child is a behavior that must not happen.",
+      "romaji": "Kodomo o kizutsukeru bekara zaru koudou da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる べからざる Noun",
+      "sentence": "公に嘘をつくべからざる行動だ。",
+      "translation": "Lying publicly is an act that should not be done.",
+      "translationEn": "Lying publicly is an act that should not be done.",
+      "romaji": "Ooyake ni uso o tsuku bekara zaru koudou da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる べからざる Noun",
+      "sentence": "他人の財産を侵すべからざる行為だ。",
+      "translation": "Infringing on someone else’s property is an act that must not be performed.",
+      "translationEn": "Infringing on someone else’s property is an act that must not be performed.",
+      "romaji": "Tanin no zaisan o okasu bekara zaru koui da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる べからず",
+      "sentence": "嘘をつくべからず。",
+      "translation": "One must not tell lies.",
+      "translationEn": "One must not tell lies.",
+      "romaji": "Uso o tsuku bekara zu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる べからず",
+      "sentence": "彼らの秘密を漏らすべからず。",
+      "translation": "You must not leak their secrets.",
+      "translationEn": "You must not leak their secrets.",
+      "romaji": "Karera no himitsu o morasu bekara zu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる べからず",
+      "sentence": "ルールを破るべからず。",
+      "translation": "You must not break the rules.",
+      "translationEn": "You must not break the rules.",
+      "romaji": "Ruuru o yaburu bekara zu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる べからず",
+      "sentence": "勉強を怠るべからず。",
+      "translation": "One must not neglect their studies.",
+      "translationEn": "One must not neglect their studies.",
+      "romaji": "Benkyou o okotaru bekara zu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる べく",
+      "sentence": "成功するべく、日々努力しています。",
+      "translation": "In order to succeed, I am working hard every day.",
+      "translationEn": "In order to succeed, I am working hard every day.",
+      "romaji": "Seikou suru beku, hibi doryoku shite imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる べく",
+      "sentence": "健康を維持するべく、毎日運動をしています。",
+      "translation": "In order to maintain my health, I exercise every day.",
+      "translationEn": "In order to maintain my health, I exercise every day.",
+      "romaji": "Kenkou o iji suru beku, mainichi undou o shite imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる べく",
+      "sentence": "彼は学位を得るべく、毎日勉強しています。",
+      "translation": "He studies every day in order to get a degree.",
+      "translationEn": "He studies every day in order to get a degree.",
+      "romaji": "Kare wa gakui o eru beku, mainichi benkyou shite imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verbる べく",
+      "sentence": "早く目的地に到着するべく、タクシーを呼びました。",
+      "translation": "I called a taxi in order to arrive at the destination quickly.",
+      "translationEn": "I called a taxi in order to arrive at the destination quickly.",
+      "romaji": "Hayaku mokutekichi ni touchaku suru beku, takushii o yobimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    }
+  ]
+}

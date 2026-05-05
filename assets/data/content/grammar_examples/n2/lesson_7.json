@@ -1,0 +1,364 @@
+{
+  "lessonId": 7,
+  "level": "N2",
+  "source": "Hanabira grammar JSON",
+  "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
+  "tags": [
+    "source-hanabira",
+    "n2-grammar-import"
+  ],
+  "examples": [
+    {
+      "grammarPoint": "～かのようだ",
+      "sentence": "彼は犬が怖いかのようだ。",
+      "translation": "He seems as if he is scared of dogs.",
+      "translationEn": "He seems as if he is scared of dogs.",
+      "romaji": "Kare wa inu ga kowai ka no you da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～かのようだ",
+      "sentence": "この部屋は寒いかのようだ。",
+      "translation": "This room feels as if it's cold.",
+      "translationEn": "This room feels as if it's cold.",
+      "romaji": "Kono heya wa samui ka no you da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～かのようだ",
+      "sentence": "彼女は有名人であるかのようだ。",
+      "translation": "She acts as though she is a celebrity.",
+      "translationEn": "She acts as though she is a celebrity.",
+      "romaji": "Kanojo wa yuumeijin de aru ka no you da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～かのようだ",
+      "sentence": "彼は子供であるかのようだ。",
+      "translation": "He acts as if he's a child.",
+      "translationEn": "He acts as if he's a child.",
+      "romaji": "Kare wa kodomo de aru ka no you da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～か～まいか",
+      "sentence": "このプロジェクトを引き受けようか引き受けまいか、まだ決めていない。",
+      "translation": "I haven't decided whether to take on this project or not.",
+      "translationEn": "I haven't decided whether to take on this project or not.",
+      "romaji": "Kono purojekuto o hikiukeyou ka hikiukemai ka, mada kimete inai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～か～まいか",
+      "sentence": "彼が成功しようか成功するまいか、今は予測できない。",
+      "translation": "Whether he will succeed or not is unpredictable at the moment.",
+      "translationEn": "Whether he will succeed or not is unpredictable at the moment.",
+      "romaji": "Kare ga seikou shiyou ka seikou suru maika, ima wa yosoku dekinai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～か～まいか",
+      "sentence": "この問題は簡単であるか難しいであるまいか、意見が分かれている。",
+      "translation": "Opinions are divided on whether this problem is simple or difficult.",
+      "translationEn": "Opinions are divided on whether this problem is simple or difficult.",
+      "romaji": "Kono mondai wa kantan de aru ka muzukashii de aru maika, iken ga wakarete iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～か～まいか",
+      "sentence": "彼はリーダーであるかフォロワーであるまいか、自分で選ぶべきだ。",
+      "translation": "He should choose for himself whether he is a leader or a follower.",
+      "translationEn": "He should choose for himself whether he is a leader or a follower.",
+      "romaji": "Kare wa riidā de aru ka forowā de aru maika, jibun de erabu beki da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～からこそ",
+      "sentence": "失敗したからこそ、成功の意味がわかる。",
+      "translation": "It is precisely because I failed that I understand the meaning of success.",
+      "translationEn": "It is precisely because I failed that I understand the meaning of success.",
+      "romaji": "Shippai shita kara koso, seikou no imi ga wakaru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～からこそ",
+      "sentence": "苦しかったからこそ、今日の私がある。",
+      "translation": "It is precisely because I went through hardships that I am who I am today.",
+      "translationEn": "It is precisely because I went through hardships that I am who I am today.",
+      "romaji": "Kurushikatta kara koso, kyou no watashi ga aru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～からこそ",
+      "sentence": "彼は親切だからこそ、人気がある。",
+      "translation": "He is popular precisely because he is kind.",
+      "translationEn": "He is popular precisely because he is kind.",
+      "romaji": "Kare wa shinsetsu da kara koso, ninki ga aru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～からこそ",
+      "sentence": "昔の経験があるからこそ、その問題がよく理解できる。",
+      "translation": "I can understand that problem well precisely because I have past experience.",
+      "translationEn": "I can understand that problem well precisely because I have past experience.",
+      "romaji": "Mukashi no keiken ga aru kara koso, sono mondai ga yoku rikai dekiru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "〜からして",
+      "sentence": "彼の顔つきからして、何か悪いことがあったのだろう。",
+      "translation": "From his facial expression, something bad must have happened.",
+      "translationEn": "From his facial expression, something bad must have happened.",
+      "romaji": "Kare no kaotsuki kara shite, nanika warui koto ga atta no darou.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "〜からして",
+      "sentence": "この料理の見た目からして、おいしくなさそうだ。",
+      "translation": "Judging from the appearance of this dish, it doesn't look delicious.",
+      "translationEn": "Judging from the appearance of this dish, it doesn't look delicious.",
+      "romaji": "Kono ryouri no mitame kara shite, oishikunasa sou da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "〜からして",
+      "sentence": "彼女の試験成績からして、合格するのは難しいでしょう。",
+      "translation": "Considering her test scores, it will be difficult for her to pass.",
+      "translationEn": "Considering her test scores, it will be difficult for her to pass.",
+      "romaji": "Kanojo no shiken seiseki kara shite, goukaku suru no wa muzukashii deshou.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "〜からして",
+      "sentence": "その映画のタイトルからして、面白くないと思う。",
+      "translation": "Judging from the title of the movie, I think it's not interesting.",
+      "translationEn": "Judging from the title of the movie, I think it's not interesting.",
+      "romaji": "Sono eiga no taitoru kara shite, omoshirokunai to omou.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～からすると",
+      "sentence": "経験からすると、この仕事は難しいでしょう。",
+      "translation": "Considering their experience, this job might be difficult.",
+      "translationEn": "Considering their experience, this job might be difficult.",
+      "romaji": "Keiken kara suru to, kono shigoto wa muzukashii deshou.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～からすると",
+      "sentence": "評判からすると、あのレストランはとても美味しいです。",
+      "translation": "Judging from the reputation, that restaurant is very delicious.",
+      "translationEn": "Judging from the reputation, that restaurant is very delicious.",
+      "romaji": "Hyouban kara suru to, ano resutoran wa totemo oishii desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～からすると",
+      "sentence": "価格からすると、この商品は高品質のものと思われます。",
+      "translation": "Considering the price, this product seems to be of high quality.",
+      "translationEn": "Considering the price, this product seems to be of high quality.",
+      "romaji": "Kakaku kara suru to, kono shouhin wa kouhinshitsu no mono to omowaremasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～からすると",
+      "sentence": "このエリアですが、交通の便からすると、便利です。",
+      "translation": "As for this area, considering the transportation convenience, it's convenient.",
+      "translationEn": "As for this area, considering the transportation convenience, it's convenient.",
+      "romaji": "Kono eria desu ga, koutsuu no ben kara suru to, benri desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～からといって",
+      "sentence": "雨が降ったからといって、試合が中止になるわけではありません。",
+      "translation": "Just because it rained doesn't mean the game will be canceled.",
+      "translationEn": "Just because it rained doesn't mean the game will be canceled.",
+      "romaji": "Ame ga futta kara to itte, shiai ga chuushi ni naru wake de wa arimasen.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～からといって",
+      "sentence": "彼が有名だからといって、彼の意見がいつも正しいわけではない。",
+      "translation": "Just because he is famous doesn't mean his opinions are always correct.",
+      "translationEn": "Just because he is famous doesn't mean his opinions are always correct.",
+      "romaji": "Kare ga yuumei da kara to itte, kare no iken ga itsumo tadashii wake de wa nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～からといって",
+      "sentence": "このスープが辛いからといって、全ての人が辛いと感じるわけではない。",
+      "translation": "Just because this soup is spicy doesn't mean everyone will find it spicy.",
+      "translationEn": "Just because this soup is spicy doesn't mean everyone will find it spicy.",
+      "romaji": "Kono suupu ga karai kara to itte, subete no hito ga karai to kanjiru wake de wa nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～からといって",
+      "sentence": "彼女が泣いているからといって、悲しいわけではないかもしれない。",
+      "translation": "Just because she is crying doesn't necessarily mean she's sad.",
+      "translationEn": "Just because she is crying doesn't necessarily mean she's sad.",
+      "romaji": "Kanojo ga naiteiru kara to itte, kanashii wake de wa nai kamoshirenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～から～にかけて",
+      "sentence": "午前９時から午後５時にかけて、仕事をしています。",
+      "translation": "I work from 9 in the morning to 5 in the evening.",
+      "translationEn": "I work from 9 in the morning to 5 in the evening.",
+      "romaji": "Gozen ku-ji kara gogo go-ji ni kakete, shigoto wo shite imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～から～にかけて",
+      "sentence": "東京から大阪にかけて、新幹線が走っています。",
+      "translation": "The bullet train runs from Tokyo to Osaka.",
+      "translationEn": "The bullet train runs from Tokyo to Osaka.",
+      "romaji": "Toukyou kara Oosaka ni kakete, shinkansen ga hashitte imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～から～にかけて",
+      "sentence": "春から夏にかけて、花がたくさん咲いています。",
+      "translation": "Many flowers bloom between spring and summer.",
+      "translationEn": "Many flowers bloom between spring and summer.",
+      "romaji": "Haru kara natsu ni kakete, hana ga takusan saite imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～から～にかけて",
+      "sentence": "２０歳から３０歳にかけて、多くの人が大学を卒業し、仕事に就くことが一般的です。",
+      "translation": "It is common for many people to graduate from university and start working between the ages of 20 and 30.",
+      "translationEn": "It is common for many people to graduate from university and start working between the ages of 20 and 30.",
+      "romaji": "Hatachi kara sanjuu-sai ni kakete, ooku no hito ga daigaku wo sotsugyou shi, shigoto ni tsuku koto ga ippan-teki desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～からには",
+      "sentence": "試験に合格したからには、一所懸命働かなければならない。",
+      "translation": "Since I passed the exam, I have to work hard.",
+      "translationEn": "Since I passed the exam, I have to work hard.",
+      "romaji": "Shiken ni goukaku shita kara niwa, isshokenmei hatarakanakereba naranai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～からには",
+      "sentence": "約束したからには、守らなければなりません。",
+      "translation": "Since I made a promise, I must keep it.",
+      "translationEn": "Since I made a promise, I must keep it.",
+      "romaji": "Yakusoku shita kara niwa, mamoranakereba narimasen.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～からには",
+      "sentence": "この映画が面白いからには、友達にも見せたい。",
+      "translation": "Since this movie is interesting, I want to show it to my friends too.",
+      "translationEn": "Since this movie is interesting, I want to show it to my friends too.",
+      "romaji": "Kono eiga ga omoshiroi kara niwa, tomodachi ni mo misetai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～からには",
+      "sentence": "彼女が助けを求めたからには、手伝わなければならない。",
+      "translation": "Since she asked for help, I must help her.",
+      "translationEn": "Since she asked for help, I must help her.",
+      "romaji": "Kanojo ga tasuke wo motometa kara niwa, tetsudawanakereba naranai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    }
+  ]
+}

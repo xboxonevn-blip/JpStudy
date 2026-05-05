@@ -131,7 +131,7 @@ class ContentDatabase extends _$ContentDatabase {
         }
       },
       beforeOpen: (details) async {
-        // All four checks are independent — run them concurrently so the
+        // All four checks are independent â€” run them concurrently so the
         // content DB is ready in the time of the single slowest check.
         await Future.wait([
           _ensureMinnaVocabularySeeded(),
@@ -147,8 +147,9 @@ class ContentDatabase extends _$ContentDatabase {
 
   Future<void> _reseedMinnaVocabulary() async {
     await (delete(vocab)..where(
-      (tbl) => tbl.series.equals('minna') | tbl.series.equals('ShinKanzen'),
-    )).go();
+          (tbl) => tbl.series.equals('minna') | tbl.series.equals('ShinKanzen'),
+        ))
+        .go();
 
     await _seedMinnaVocabulary();
   }
@@ -158,19 +159,23 @@ class ContentDatabase extends _$ContentDatabase {
     final levelCol = vocab.level;
     final seriesCol = vocab.series;
     final countExpr = vocab.id.count();
-    final rows = await (selectOnly(vocab)
-          ..addColumns([levelCol, seriesCol, countExpr])
-          ..where(
-            _contentSeedSpecs.map((s) {
-              return vocab.level.equals(s.levelLabel) &
-                  vocab.series.equals(s.series);
-            }).reduce((a, b) => a | b),
-          )
-          ..groupBy([levelCol, seriesCol]))
-        .get();
+    final rows =
+        await (selectOnly(vocab)
+              ..addColumns([levelCol, seriesCol, countExpr])
+              ..where(
+                _contentSeedSpecs
+                    .map((s) {
+                      return vocab.level.equals(s.levelLabel) &
+                          vocab.series.equals(s.series);
+                    })
+                    .reduce((a, b) => a | b),
+              )
+              ..groupBy([levelCol, seriesCol]))
+            .get();
     final counts = {
       for (final row in rows)
-        '${row.read(levelCol)}:${row.read(seriesCol)}': row.read(countExpr) ?? 0,
+        '${row.read(levelCol)}:${row.read(seriesCol)}':
+            row.read(countExpr) ?? 0,
     };
     final missingSpecs = _contentSeedSpecs
         .where((s) => (counts['${s.levelLabel}:${s.series}'] ?? 0) == 0)
@@ -187,10 +192,10 @@ class ContentDatabase extends _$ContentDatabase {
       ..where(
         vocab.term.like('%?%') |
             vocab.reading.like('%?%') |
-            vocab.term.like('%ã%') |
-            vocab.reading.like('%ã%') |
-            vocab.term.like('%Ã%') |
-            vocab.reading.like('%Ã%'),
+            vocab.term.like('%Ã£%') |
+            vocab.reading.like('%Ã£%') |
+            vocab.term.like('%Ãƒ%') |
+            vocab.reading.like('%Ãƒ%'),
       );
     final corruptedRow = await corruptedQuery.getSingle();
     final corruptedCount = corruptedRow.read(corruptedCountExpr) ?? 0;
@@ -200,7 +205,7 @@ class ContentDatabase extends _$ContentDatabase {
   }
 
   Future<void> _seedMinnaVocabulary() {
-    // All level specs are independent — seed them concurrently so file I/O
+    // All level specs are independent â€” seed them concurrently so file I/O
     // for N5, N4, and N3 overlaps. DB writes still serialize through the isolate.
     return Future.wait(_contentSeedSpecs.map(_seedVocabularyLevel));
   }
@@ -209,16 +214,17 @@ class ContentDatabase extends _$ContentDatabase {
     // One GROUP BY query replaces N sequential COUNT queries (one per level).
     final levelCol = vocab.level;
     final countExpr = vocab.id.count();
-    final rows = await (selectOnly(vocab)
-          ..addColumns([levelCol, countExpr])
-          ..where(
-            vocab.series.equals('hajimete') &
-                vocab.level.isIn(
-                  _hajimeteSeedSpecs.map((s) => s.levelLabel).toList(),
-                ),
-          )
-          ..groupBy([levelCol]))
-        .get();
+    final rows =
+        await (selectOnly(vocab)
+              ..addColumns([levelCol, countExpr])
+              ..where(
+                vocab.series.equals('hajimete') &
+                    vocab.level.isIn(
+                      _hajimeteSeedSpecs.map((s) => s.levelLabel).toList(),
+                    ),
+              )
+              ..groupBy([levelCol]))
+            .get();
     final counts = {
       for (final row in rows) row.read(levelCol)!: row.read(countExpr) ?? 0,
     };
@@ -231,7 +237,7 @@ class ContentDatabase extends _$ContentDatabase {
   }
 
   Future<void> _seedHajimeteVocabulary() {
-    // All Hajimete level specs are independent — seed them concurrently.
+    // All Hajimete level specs are independent â€” seed them concurrently.
     return Future.wait(_hajimeteSeedSpecs.map(_seedHajimeteLevel));
   }
 
@@ -343,15 +349,16 @@ class ContentDatabase extends _$ContentDatabase {
     // One GROUP BY query replaces N sequential COUNT queries (one per level).
     final levelCol = kanji.jlptLevel;
     final countExpr = kanji.id.count();
-    final rows = await (selectOnly(kanji)
-          ..addColumns([levelCol, countExpr])
-          ..where(
-            kanji.jlptLevel.isIn(
-              _contentSeedSpecs.map((s) => s.levelLabel).toList(),
-            ),
-          )
-          ..groupBy([levelCol]))
-        .get();
+    final rows =
+        await (selectOnly(kanji)
+              ..addColumns([levelCol, countExpr])
+              ..where(
+                kanji.jlptLevel.isIn(
+                  _contentSeedSpecs.map((s) => s.levelLabel).toList(),
+                ),
+              )
+              ..groupBy([levelCol]))
+            .get();
     final counts = {
       for (final row in rows) row.read(levelCol)!: row.read(countExpr) ?? 0,
     };
@@ -367,15 +374,16 @@ class ContentDatabase extends _$ContentDatabase {
     // One GROUP BY query replaces N sequential COUNT queries (one per level).
     final levelCol = grammarPoint.level;
     final countExpr = grammarPoint.id.count();
-    final rows = await (selectOnly(grammarPoint)
-          ..addColumns([levelCol, countExpr])
-          ..where(
-            grammarPoint.level.isIn(
-              _contentSeedSpecs.map((s) => s.levelLabel).toList(),
-            ),
-          )
-          ..groupBy([levelCol]))
-        .get();
+    final rows =
+        await (selectOnly(grammarPoint)
+              ..addColumns([levelCol, countExpr])
+              ..where(
+                grammarPoint.level.isIn(
+                  _contentSeedSpecs.map((s) => s.levelLabel).toList(),
+                ),
+              )
+              ..groupBy([levelCol]))
+            .get();
     final counts = {
       for (final row in rows) row.read(levelCol)!: row.read(countExpr) ?? 0,
     };
@@ -392,10 +400,14 @@ class ContentDatabase extends _$ContentDatabase {
     await delete(grammarExample).go();
     await delete(grammarPoint).go();
 
-    // Phase 1: Load every (def, examples) file pair concurrently — pure I/O.
+    // Phase 1: Load every (def, examples) file pair concurrently â€” pure I/O.
     final filePairs = <({String defPath, String exPath})>[];
     for (final spec in _contentSeedSpecs) {
-      for (var lessonId = spec.startLesson; lessonId <= spec.endLesson; lessonId++) {
+      for (
+        var lessonId = spec.startLesson;
+        lessonId <= spec.endLesson;
+        lessonId++
+      ) {
         filePairs.add((
           defPath:
               'assets/data/content/grammar/${spec.levelLower}/grammar_${spec.levelLower}_$lessonId.json',
@@ -491,7 +503,7 @@ class ContentDatabase extends _$ContentDatabase {
     final startLesson = spec.startLesson;
     final endLesson = spec.endLesson;
 
-    // Load all lesson JSON files concurrently — each file is independent.
+    // Load all lesson JSON files concurrently â€” each file is independent.
     final perLessonFutures = [
       for (int lessonId = startLesson; lessonId <= endLesson; lessonId++)
         _loadCanonicalVocabRows(level: level, lessonId: lessonId),
@@ -614,7 +626,8 @@ class ContentDatabase extends _$ContentDatabase {
         if (term.isEmpty || meaningVi.isEmpty) continue;
 
         final labels = _asMap(lemma['labels']);
-        final payloadSeries = _readText(payload ?? const {}, 'series').nullIfEmpty() ??
+        final payloadSeries =
+            _readText(payload ?? const {}, 'series').nullIfEmpty() ??
             _seriesForCanonicalLevel(level);
         final tags = (entry['tags'] is List)
             ? (entry['tags'] as List)
@@ -811,7 +824,7 @@ class ContentDatabase extends _$ContentDatabase {
   }
 
   Future<void> _createContentIndexes() async {
-    // Vocab — most frequently queried columns for every vocab screen load.
+    // Vocab â€” most frequently queried columns for every vocab screen load.
     // Composite (level, series) covers the common getVocabByLevelAndSeries
     // pattern; (level) alone covers getVocabByLevel fallback queries.
     await customStatement(
@@ -823,14 +836,14 @@ class ContentDatabase extends _$ContentDatabase {
     await customStatement(
       'CREATE INDEX IF NOT EXISTS idx_vocab_series ON vocab(series)',
     );
-    // Kanji — queried by JLPT level on every kanji hub / practice screen open.
+    // Kanji â€” queried by JLPT level on every kanji hub / practice screen open.
     await customStatement(
       'CREATE INDEX IF NOT EXISTS idx_kanji_jlpt ON kanji(jlpt_level)',
     );
     await customStatement(
       'CREATE INDEX IF NOT EXISTS idx_kanji_lesson ON kanji(lesson_id)',
     );
-    // Grammar (content DB copy) — queried by level in JLPT mock exam builder.
+    // Grammar (content DB copy) â€” queried by level in JLPT mock exam builder.
     await customStatement(
       'CREATE INDEX IF NOT EXISTS idx_grammar_point_level ON grammar_point(level)',
     );
@@ -844,12 +857,12 @@ class ContentDatabase extends _$ContentDatabase {
   }
 
   Future<void> _seedMinnaKanji() {
-    // All level specs are independent — seed them concurrently.
+    // All level specs are independent â€” seed them concurrently.
     return Future.wait(_contentSeedSpecs.map(_seedKanjiLevel));
   }
 
   Future<void> _backfillKanjiDecompositionFromCanonical() async {
-    // Create all file-load futures before any await — pure IO, no deps between
+    // Create all file-load futures before any await â€” pure IO, no deps between
     // lessons, so all reads start concurrently in the event loop.
     final rowFutures = <Future<List<Map<String, dynamic>>>>[];
     final lessonIds = <int>[];
@@ -877,14 +890,16 @@ class ContentDatabase extends _$ContentDatabase {
         final lessonId = lessonIds[i];
         for (final row in allRowLists[i]) {
           final character = _readText(row, 'character');
-          final decompositionJson = _readNullableText(row, 'decomposition_json');
+          final decompositionJson = _readNullableText(
+            row,
+            'decomposition_json',
+          );
           if (character.isEmpty || decompositionJson == null) continue;
           b.update(
             kanji,
             KanjiCompanion(decompositionJson: Value(decompositionJson)),
             where: (tbl) =>
-                tbl.lessonId.equals(lessonId) &
-                tbl.character.equals(character),
+                tbl.lessonId.equals(lessonId) & tbl.character.equals(character),
           );
         }
       }
@@ -998,10 +1013,17 @@ class ContentDatabase extends _$ContentDatabase {
   }
 
   Future<void> _seedKanjiLevel(_ContentSeedSpec spec) async {
-    // Load all lesson files for this level concurrently — pure I/O, no deps.
+    // Load all lesson files for this level concurrently â€” pure I/O, no deps.
     final perLessonFutures = [
-      for (int lessonId = spec.startLesson; lessonId <= spec.endLesson; lessonId++)
-        _loadCanonicalKanjiRows(levelLower: spec.levelLower, lessonId: lessonId),
+      for (
+        int lessonId = spec.startLesson;
+        lessonId <= spec.endLesson;
+        lessonId++
+      )
+        _loadCanonicalKanjiRows(
+          levelLower: spec.levelLower,
+          lessonId: lessonId,
+        ),
     ];
     final perLessonRows = await Future.wait(perLessonFutures);
 
@@ -1118,7 +1140,9 @@ class _ContentSeedSpec {
 const _contentSeedSpecs = <_ContentSeedSpec>[
   _ContentSeedSpec('N5', 'n5', 1, 25, 'minna'),
   _ContentSeedSpec('N4', 'n4', 26, 50, 'minna'),
-  _ContentSeedSpec('N3', 'n3', 51, 75, 'ShinKanzen'),
+  _ContentSeedSpec('N3', 'n3', 1, 25, 'ShinKanzen'),
+  _ContentSeedSpec('N2', 'n2', 1, 25, 'ShinKanzen'),
+  _ContentSeedSpec('N1', 'n1', 1, 25, 'ShinKanzen'),
 ];
 
 class _HajimeteSeedSpec {

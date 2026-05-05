@@ -10,7 +10,7 @@ import 'package:jpstudy/features/study_hub/providers/study_hub_board_provider.da
 import 'package:jpstudy/features/study_hub/study_hub_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Widget _buildScreen() {
+Widget _buildScreen({AppLanguage language = AppLanguage.en}) {
   final router = GoRouter(
     routes: [
       GoRoute(path: '/', builder: (_, _) => const StudyHubScreen()),
@@ -24,7 +24,7 @@ Widget _buildScreen() {
 
   return ProviderScope(
     overrides: [
-      appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+      appLanguageProvider.overrideWith((ref) => language),
       studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
       studyHubDecksProvider.overrideWith(
         (ref) async => const StudyHubDecksBoard(
@@ -55,7 +55,18 @@ void main() {
     expect(find.text('Exam Checklist'), findsOneWidget);
     expect(find.text('Community Q&A'), findsOneWidget);
   });
+  testWidgets('does not overflow on compact phone width', (tester) async {
+    tester.view.physicalSize = const Size(360, 1200);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
 
+    await tester.pumpWidget(_buildScreen());
+    await tester.pumpAndSettle();
+
+    expect(tester.takeException(), isNull);
+    expect(find.text('Study Hub'), findsOneWidget);
+  });
   testWidgets('JLPT hero CTA opens coach route', (tester) async {
     await tester.pumpWidget(_buildScreen());
     await tester.pumpAndSettle();
@@ -91,6 +102,21 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('N4 Reading Bridge'), findsOneWidget);
+  });
+
+  testWidgets('resource level filters localize in Vietnamese', (tester) async {
+    tester.view.physicalSize = const Size(1440, 2600);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(_buildScreen(language: AppLanguage.vi));
+    await tester.pumpAndSettle();
+
+    expect(find.widgetWithText(ChoiceChip, 'Sơ cấp'), findsOneWidget);
+    expect(find.widgetWithText(ChoiceChip, 'Trung cấp'), findsOneWidget);
+    expect(find.widgetWithText(ChoiceChip, 'Nâng cao'), findsOneWidget);
+    expect(find.widgetWithText(ChoiceChip, 'Beginner'), findsNothing);
   });
 
   testWidgets('textbook tracker and exam date controls update UI state', (
@@ -169,3 +195,4 @@ void main() {
     expect(find.text('Reopen'), findsWidgets);
   });
 }
+

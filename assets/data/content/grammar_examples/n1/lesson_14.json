@@ -1,0 +1,452 @@
+{
+  "lessonId": 14,
+  "level": "N1",
+  "source": "Hanabira grammar JSON",
+  "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
+  "tags": [
+    "source-hanabira",
+    "n1-grammar-import"
+  ],
+  "examples": [
+    {
+      "grammarPoint": "Verb てからというもの",
+      "sentence": "彼女と別れてからというもの、一人で過ごす時間が増えました。",
+      "translation": "Ever since I broke up with her, I've spent more time alone.",
+      "translationEn": "Ever since I broke up with her, I've spent more time alone.",
+      "romaji": "Kanojo to wakarete kara to iu mono, hitori de sugosu jikan ga fuemashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb てからというもの",
+      "sentence": "子供が生まれてからというもの、自由な時間がなくなった。",
+      "translation": "Since the baby was born, I have had no free time.",
+      "translationEn": "Since the baby was born, I have had no free time.",
+      "romaji": "Kodomo ga umarete kara to iu mono, jiyū na jikan ga nakunatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb てからというもの",
+      "sentence": "新しい仕事を始めてからというもの、毎日忙しくなりました。",
+      "translation": "Ever since I started my new job, I've been busy every day.",
+      "translationEn": "Ever since I started my new job, I've been busy every day.",
+      "romaji": "Atarashii shigoto o hajimete kara to iu mono, mainichi isogashiku narimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb てからというもの",
+      "sentence": "大学に入ってからというもの、スポーツをする時間がなくなった。",
+      "translation": "I haven’t had time to play sports since I entered university.",
+      "translationEn": "I haven’t had time to play sports since I entered university.",
+      "romaji": "Daigaku ni haitte kara to iu mono, supōtsu o suru jikan ga nakunatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb てこそ",
+      "sentence": "実際に使ってこそ、その価値を理解できる。",
+      "translation": "You can only understand its value by actually using it.",
+      "translationEn": "You can only understand its value by actually using it.",
+      "romaji": "Jissai ni tsukatte koso, sono kachi o rikai dekiru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb てこそ",
+      "sentence": "自分で経験してこそ、大切なことが学べる。",
+      "translation": "Only by experiencing it yourself can you learn what’s truly important.",
+      "translationEn": "Only by experiencing it yourself can you learn what’s truly important.",
+      "romaji": "Jibun de keiken shite koso, taisetsu na koto ga manaberu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb てこそ",
+      "sentence": "失敗してこそ、成功の味がわかる。",
+      "translation": "Only by failing do you really understand the taste of success.",
+      "translationEn": "Only by failing do you really understand the taste of success.",
+      "romaji": "Shippai shite koso, seikō no aji ga wakaru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb てこそ",
+      "sentence": "努力してこそ、何かを成し遂げることができる。",
+      "translation": "Only through making an effort can you accomplish anything.",
+      "translationEn": "Only through making an effort can you accomplish anything.",
+      "romaji": "Doryoku shite koso, nanika o nashitogeru koto ga dekiru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ては",
+      "sentence": "彼女に会っては、いつも緊張してしまいます。",
+      "translation": "Whenever I meet her, I get nervous.",
+      "translationEn": "Whenever I meet her, I get nervous.",
+      "romaji": "Kanojo ni atte wa, itsumo kinchō shite shimaimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ては",
+      "sentence": "この部屋を掃除しては乱雑になり、片づけては散らかる。",
+      "translation": "Whenever I clean this room, it gets messy again, and whenever I tidy it, it gets cluttered again.",
+      "translationEn": "Whenever I clean this room, it gets messy again, and whenever I tidy it, it gets cluttered again.",
+      "romaji": "Kono heya o sōji shite wa konzatsu ni nari, katadzukete wa chirakaru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ては",
+      "sentence": "運動しては食べ、食べては運動する生活が続いている。",
+      "translation": "I keep exercising and then eating, and then eating and exercising.",
+      "translationEn": "I keep exercising and then eating, and then eating and exercising.",
+      "romaji": "Undō shite wa tabe, tabete wa undō suru seikatsu ga tsudzuite iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ては",
+      "sentence": "勉強しては寝て、寝ては勉強する日々です。",
+      "translation": "My days are spent studying and then sleeping, and then sleeping and studying.",
+      "translationEn": "My days are spent studying and then sleeping, and then sleeping and studying.",
+      "romaji": "Benkyō shite wa nete, nete wa benkyō suru hibi desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ては Verb",
+      "sentence": "私が通勤しては、電子書籍を読んでいます。",
+      "translation": "Whenever I commute, I read e-books.",
+      "translationEn": "Whenever I commute, I read e-books.",
+      "romaji": "Watashi ga tsūkin shite wa, denshi shoseki o yonde imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ては Verb",
+      "sentence": "友達が部屋に来ては、ゲームをしています。",
+      "translation": "Every time my friend comes to my room, we play games.",
+      "translationEn": "Every time my friend comes to my room, we play games.",
+      "romaji": "Tomodachi ga heya ni kite wa, gēmu o shite imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ては Verb",
+      "sentence": "彼が酒を飲んでは、運転を止めさせています。",
+      "translation": "Whenever he drinks alcohol, I make him stop driving.",
+      "translationEn": "Whenever he drinks alcohol, I make him stop driving.",
+      "romaji": "Kare ga sake o nonde wa, unten o tome sasete imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ては Verb",
+      "sentence": "私が新しい曲を作っては、すぐに録音します。",
+      "translation": "Every time I create a new song, I record it immediately.",
+      "translationEn": "Every time I create a new song, I record it immediately.",
+      "romaji": "Watashi ga atarashii kyoku o tsukutte wa, sugu ni rokuon shimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb てまでも",
+      "sentence": "試験に合格するために、寝る時間を削ってまでも勉強します。",
+      "translation": "I will study to pass the exam, even if it means cutting down on sleep.",
+      "translationEn": "I will study to pass the exam, even if it means cutting down on sleep.",
+      "romaji": "Shiken ni gōkaku suru tame ni, neru jikan o kezutte mademo benkyō shimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb てまでも",
+      "sentence": "彼女と結婚できるなら、どんな苦労をしてまでもお金を貯めたい。",
+      "translation": "If I can marry her, I'll save money no matter what hardships it takes.",
+      "translationEn": "If I can marry her, I'll save money no matter what hardships it takes.",
+      "romaji": "Kanojo to kekkon dekiru nara, donna kurō o shite mademo okane o tametai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb てまでも",
+      "sentence": "この会社で働きたいので、長時間かけてまでも通います。",
+      "translation": "Because I want to work at this company, I'll commute even if it means spending hours traveling.",
+      "translationEn": "Because I want to work at this company, I'll commute even if it means spending hours traveling.",
+      "romaji": "Kono kaisha de hatarakitai node, chōjikan kakete mademo kayoimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb てまでも",
+      "sentence": "彼の快復のためなら、何をしてまでも支えたい。",
+      "translation": "For his recovery, I'll support him no matter what it takes.",
+      "translationEn": "For his recovery, I'll support him no matter what it takes.",
+      "romaji": "Kare no kaifuku no tame nara, nani o shite mademo sasaetai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb てみせる",
+      "sentence": "彼はそのパズルを解いてみせた。",
+      "translation": "He solved the puzzle to show me.",
+      "translationEn": "He solved the puzzle to show me.",
+      "romaji": "Kare wa sono pazuru o toite miseta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb てみせる",
+      "sentence": "私はこの仕事ができることをやってみせます。",
+      "translation": "I will do this job to prove that I can.",
+      "translationEn": "I will do this job to prove that I can.",
+      "romaji": "Watashi wa kono shigoto ga dekiru koto o yatte misemasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb てみせる",
+      "sentence": "彼女は試験に合格するために一生懸命勉強してみせました。",
+      "translation": "She studied hard to prove she could pass the exam.",
+      "translationEn": "She studied hard to prove she could pass the exam.",
+      "romaji": "Kanojo wa shiken ni gōkaku suru tame ni isshōkenmei benkyō shite misemashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb てみせる",
+      "sentence": "彼は自分が何も恐れていないと跳んでみせた。",
+      "translation": "He jumped to show he wasn’t afraid of anything.",
+      "translationEn": "He jumped to show he wasn’t afraid of anything.",
+      "romaji": "Kare wa jibun ga nanimo osorete inai to tonde miseta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb てやまない",
+      "sentence": "私は母を思ってやまない。",
+      "translation": "I can't stop thinking of my mother.",
+      "translationEn": "I can't stop thinking of my mother.",
+      "romaji": "Watashi wa haha o omotte yamanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb てやまない",
+      "sentence": "彼は彼女を愛してやまない。",
+      "translation": "He loves her beyond measure.",
+      "translationEn": "He loves her beyond measure.",
+      "romaji": "Kare wa kanojo o aishite yamanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb てやまない",
+      "sentence": "彼は日本の文化を尊敬してやまない。",
+      "translation": "He has unceasing respect for Japanese culture.",
+      "translationEn": "He has unceasing respect for Japanese culture.",
+      "romaji": "Kare wa Nihon no bunka o sonkei shite yamanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb てやまない",
+      "sentence": "彼女の成功を願ってやまない。",
+      "translation": "I can’t stop hoping for her success.",
+      "translationEn": "I can’t stop hoping for her success.",
+      "romaji": "Kanojo no seikō o negatte yamanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ないではおかない",
+      "sentence": "彼女は毎回遅刻をしては、先生に怒られないではおかない。",
+      "translation": "Every time she's late, she inevitably gets scolded by the teacher.",
+      "translationEn": "Every time she's late, she inevitably gets scolded by the teacher.",
+      "romaji": "Kanojo wa maikai chikoku o shite wa, sensei ni okorarenaide wa okanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ないではおかない",
+      "sentence": "美味しいものがあれば、彼は食べないではおかない。",
+      "translation": "If there's delicious food, he can't help but eat it.",
+      "translationEn": "If there's delicious food, he can't help but eat it.",
+      "romaji": "Oishii mono ga areba, kare wa tabenai de wa okanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ないではおかない",
+      "sentence": "この小説は感動的で、読めば涙を流さないではおかない。",
+      "translation": "This novel is so moving that you can't help but shed tears when you read it.",
+      "translationEn": "This novel is so moving that you can't help but shed tears when you read it.",
+      "romaji": "Kono shōsetsu wa kandōteki de, yomeba namida o nagasanai de wa okanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ないではおかない",
+      "sentence": "毎日練習しているから、試合では勝たないではおかないだろう。",
+      "translation": "He practices every day, so he's bound to win the match.",
+      "translationEn": "He practices every day, so he's bound to win the match.",
+      "romaji": "Mainichi renshū shite iru kara, shiai de wa katanai de wa okanai darō.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ないではすまない",
+      "sentence": "失敗をしたら、謝らないではすまない。",
+      "translation": "If you make a mistake, you have to apologize—there’s no way around it.",
+      "translationEn": "If you make a mistake, you have to apologize—there’s no way around it.",
+      "romaji": "Shippai o shitara, ayamaranai de wa sumanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ないではすまない",
+      "sentence": "この問題は重大なので、報告しないではすまない。",
+      "translation": "This issue is so serious that I must report it.",
+      "translationEn": "This issue is so serious that I must report it.",
+      "romaji": "Kono mondai wa jūdai na node, hōkoku shinai de wa sumanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ないではすまない",
+      "sentence": "この映画はとても感動的で、泣かないではすまない。",
+      "translation": "This movie is so moving that you can’t help but cry.",
+      "translationEn": "This movie is so moving that you can’t help but cry.",
+      "romaji": "Kono eiga wa totemo kandōteki de, nakanai de wa sumanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ないではすまない",
+      "sentence": "子供が間違えたら、教えないではすまない。",
+      "translation": "If a child makes a mistake, you must correct them—there’s no avoiding it.",
+      "translationEn": "If a child makes a mistake, you must correct them—there’s no avoiding it.",
+      "romaji": "Kodomo ga machigaetara, oshienai de wa sumanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ないまでも",
+      "sentence": "全てを理解しないまでも、基本的なことは分かってほしい。",
+      "translation": "Even if you don't understand everything, I'd like you at least to grasp the basics.",
+      "translationEn": "Even if you don't understand everything, I'd like you at least to grasp the basics.",
+      "romaji": "Subete o rikai shinai made mo, kihonteki na koto wa wakatte hoshii.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ないまでも",
+      "sentence": "会えないまでも、電話で声を聞きたい。",
+      "translation": "Even if we can’t meet, I still want to hear your voice over the phone.",
+      "translationEn": "Even if we can’t meet, I still want to hear your voice over the phone.",
+      "romaji": "Aenai made mo, denwa de koe o kikitai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ないまでも",
+      "sentence": "毎日は無理にしても、週に一度くらいはジョギングを続けたい。",
+      "translation": "Even if I can't do it every day, I want to at least keep jogging once a week.",
+      "translationEn": "Even if I can't do it every day, I want to at least keep jogging once a week.",
+      "romaji": "Mainichi wa muri ni shite mo, shū ni ichido kurai wa jogingu o tsuzuketai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Verb ないまでも",
+      "sentence": "全員に気に入られないまでも、誠実に向き合いたい。",
+      "translation": "Even if not everyone will like me, I still want to face them sincerely.",
+      "translationEn": "Even if not everyone will like me, I still want to face them sincerely.",
+      "romaji": "Zen'in ni ki ni irarenai made mo, seijitsu ni mukiai tai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    }
+  ]
+}

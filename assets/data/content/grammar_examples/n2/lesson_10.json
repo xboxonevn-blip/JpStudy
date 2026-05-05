@@ -1,0 +1,364 @@
+{
+  "lessonId": 10,
+  "level": "N2",
+  "source": "Hanabira grammar JSON",
+  "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
+  "tags": [
+    "source-hanabira",
+    "n2-grammar-import"
+  ],
+  "examples": [
+    {
+      "grammarPoint": "～だらけ",
+      "sentence": "彼の部屋はゴミだらけだ。",
+      "translation": "His room is full of trash.",
+      "translationEn": "His room is full of trash.",
+      "romaji": "Kare no heya wa gomi darake da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～だらけ",
+      "sentence": "このビーチは岩だらけで泳ぎにくい。",
+      "translation": "This beach is full of rocks and is difficult to swim at.",
+      "translationEn": "This beach is full of rocks and is difficult to swim at.",
+      "romaji": "Kono bīchi wa iwa darake de oyogi nikui.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～だらけ",
+      "sentence": "彼の顔はしわだらけだ。",
+      "translation": "His face is covered with wrinkles.",
+      "translationEn": "His face is covered with wrinkles.",
+      "romaji": "Kare no kao wa shiwa darake da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～だらけ",
+      "sentence": "このリンゴは虫食いだらけだ。",
+      "translation": "This apple is riddled with wormholes.",
+      "translationEn": "This apple is riddled with wormholes.",
+      "romaji": "Kono ringo wa mushikui darake da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～っこない",
+      "sentence": "こんなに雪が降っているんだから、学校に間に合いっこない。",
+      "translation": "With snow falling this heavily, there's no way we'll make it to school on time.",
+      "translationEn": "With snow falling this heavily, there's no way we'll make it to school on time.",
+      "romaji": "Konna ni yuki ga futteirun dakara, gakkō ni maniai kkonai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～っこない",
+      "sentence": "彼は泳げないので、プールの向こう側に泳いで行きっこない。",
+      "translation": "Since he can’t swim, there’s no way he’ll make it to the other side of the pool.",
+      "translationEn": "Since he can’t swim, there’s no way he’ll make it to the other side of the pool.",
+      "romaji": "Kare wa oyogenai node, pūru no mukōgawa ni oyoide ikkonai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～っこない",
+      "sentence": "彼女はとても怖がりなので、一人で夜の公園に行きっこない。",
+      "translation": "She’s so timid, there’s no chance she’d go to the park alone at night.",
+      "translationEn": "She’s so timid, there’s no chance she’d go to the park alone at night.",
+      "romaji": "Kanojo wa totemo kowagari na node, hitori de yoru no kōen ni ikkonai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～っこない",
+      "sentence": "この短い時間で、その本を全部読むことはできっこない。",
+      "translation": "It's impossible to read the entire book in such a short time.",
+      "translationEn": "It's impossible to read the entire book in such a short time.",
+      "romaji": "Kono mijikai jikan de, sono hon o zenbu yomu koto wa dekikkonai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～つつ",
+      "sentence": "彼はテレビを見つつ、宿題をしていました。",
+      "translation": "He was doing his homework while watching TV.",
+      "translationEn": "He was doing his homework while watching TV.",
+      "romaji": "Kare wa terebi o mitsutsu, shukudai o shite imashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～つつ",
+      "sentence": "最近忙しいと思いつつ、毎日運動を続けています。",
+      "translation": "Although I feel busy these days, I still exercise every day.",
+      "translationEn": "Although I feel busy these days, I still exercise every day.",
+      "romaji": "Saikin isogashii to omoi tsutsu, mainichi undō o tsuzukete imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～つつ",
+      "sentence": "彼女は泣きつつ、笑顔で別れを告げた。",
+      "translation": "She was crying, yet she said goodbye with a smile on her face.",
+      "translationEn": "She was crying, yet she said goodbye with a smile on her face.",
+      "romaji": "Kanojo wa naki tsutsu, egao de wakare o tsugeta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～つつ",
+      "sentence": "雨に濡れつつ、彼は歩き続けました。",
+      "translation": "He continued walking even though he was getting soaked by the rain.",
+      "translationEn": "He continued walking even though he was getting soaked by the rain.",
+      "romaji": "Ame ni nure tsutsu, kare wa aruki tsuzukemashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～つつある",
+      "sentence": "地球温暖化は進行しつつある。",
+      "translation": "Global warming is in progress.",
+      "translationEn": "Global warming is in progress.",
+      "romaji": "Chikyū ondanka wa shinkō shitsutsu aru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～つつある",
+      "sentence": "この町は急速に発展しつつある。",
+      "translation": "This town is rapidly developing.",
+      "translationEn": "This town is rapidly developing.",
+      "romaji": "Kono machi wa kyūsoku ni hatten shitsutsu aru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～つつある",
+      "sentence": "子供たちは成長しつつある。",
+      "translation": "The children are growing up.",
+      "translationEn": "The children are growing up.",
+      "romaji": "Kodomo-tachi wa seichō shitsutsu aru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～つつある",
+      "sentence": "景気が回復しつつある。",
+      "translation": "The economy is recovering.",
+      "translationEn": "The economy is recovering.",
+      "romaji": "Keiki ga kaifuku shitsutsu aru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～っぱなし",
+      "sentence": "窓を開けっぱなしにして、部屋が寒くなってしまった。",
+      "translation": "I left the window open, and the room got cold.",
+      "translationEn": "I left the window open, and the room got cold.",
+      "romaji": "Mado o akeppanashi ni shite, heya ga samuku natte shimatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～っぱなし",
+      "sentence": "彼は音楽を聴くのが好きで、いつもイヤホンをつけっぱなしです。",
+      "translation": "He loves listening to music and always has his earphones on.",
+      "translationEn": "He loves listening to music and always has his earphones on.",
+      "romaji": "Kare wa ongaku o kiku no ga suki de, itsumo iyahon o tsukeppanashi desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～っぱなし",
+      "sentence": "子供はおもちゃを床に置きっぱなしで、片付けなかった。",
+      "translation": "The child left the toys on the floor and didn’t put them away.",
+      "translationEn": "The child left the toys on the floor and didn’t put them away.",
+      "romaji": "Kodomo wa omocha o yuka ni okippanashi de, katazukenakatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～っぱなし",
+      "sentence": "昨夜は忙しかったので、テレビをつけっぱなしにして寝てしまった。",
+      "translation": "I was busy last night, so I left the TV on and fell asleep.",
+      "translationEn": "I was busy last night, so I left the TV on and fell asleep.",
+      "romaji": "Sakuya wa isogashikatta node, terebi o tsukeppanashi ni shite nete shimatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～っぽい",
+      "sentence": "彼女は大人っぽい服を着ている。",
+      "translation": "She’s wearing clothes that look mature.",
+      "translationEn": "She’s wearing clothes that look mature.",
+      "romaji": "Kanojo wa otonappoi fuku o kite iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～っぽい",
+      "sentence": "この説明は分かりにくっぽい。",
+      "translation": "This explanation seems hard to understand.",
+      "translationEn": "This explanation seems hard to understand.",
+      "romaji": "Kono setsumei wa wakari nikuppoi.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～っぽい",
+      "sentence": "彼は疲れたっぽい顔をしている。",
+      "translation": "He has a face that looks tired.",
+      "translationEn": "He has a face that looks tired.",
+      "romaji": "Kare wa tsukareta ppoi kao o shite iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～っぽい",
+      "sentence": "この部屋は寒っぽい感じがする。",
+      "translation": "This room feels kind of chilly.",
+      "translationEn": "This room feels kind of chilly.",
+      "romaji": "Kono heya wa samuppoi kanji ga suru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ていられない",
+      "sentence": "こんなに忙しいのに、無理に遊んでいられない。",
+      "translation": "I'm so busy that I can't afford to just play around.",
+      "translationEn": "I'm so busy that I can't afford to just play around.",
+      "romaji": "Konna ni isogashii noni, muri ni asonde irarenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ていられない",
+      "sentence": "寒すぎて、外で待っていられない。",
+      "translation": "It's too cold; I can't keep waiting outside.",
+      "translationEn": "It's too cold; I can't keep waiting outside.",
+      "romaji": "Samusugite, soto de matte irarenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ていられない",
+      "sentence": "この問題は重要だから、放っておいていられない。",
+      "translation": "This issue is too important to ignore.",
+      "translationEn": "This issue is too important to ignore.",
+      "romaji": "Kono mondai wa jūyō dakara, houtte oite irarenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ていられない",
+      "sentence": "彼女の態度が我慢できず、黙っていられない。",
+      "translation": "I can't stand her attitude, so I can't stay silent.",
+      "translationEn": "I can't stand her attitude, so I can't stay silent.",
+      "romaji": "Kanojo no taido ga gaman dekizu, damatte irarenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～てかなわない",
+      "sentence": "こんなに暑くてかなわない。",
+      "translation": "I can’t stand this heat.",
+      "translationEn": "I can’t stand this heat.",
+      "romaji": "Konnani atsukute kanawanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～てかなわない",
+      "sentence": "彼の話は失礼すぎてかなわない。",
+      "translation": "His remarks are so rude I can’t put up with them.",
+      "translationEn": "His remarks are so rude I can’t put up with them.",
+      "romaji": "Kare no hanashi wa shitsurei sugite kanawanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～てかなわない",
+      "sentence": "映画があまりに感動的で、忘れられなくてかなわない。",
+      "translation": "The movie was so moving that I can’t stand how it stays on my mind.",
+      "translationEn": "The movie was so moving that I can’t stand how it stays on my mind.",
+      "romaji": "Eiga ga amari ni kandō-teki de, wasurerarenakute kanawanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～てかなわない",
+      "sentence": "彼女の笑顔がまぶしくてかなわない。",
+      "translation": "Her smile is so dazzling that it’s overwhelming.",
+      "translationEn": "Her smile is so dazzling that it’s overwhelming.",
+      "romaji": "Kanojo no egao ga mabushikute kanawanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    }
+  ]
+}

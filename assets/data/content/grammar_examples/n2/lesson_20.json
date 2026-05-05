@@ -1,0 +1,364 @@
+{
+  "lessonId": 20,
+  "level": "N2",
+  "source": "Hanabira grammar JSON",
+  "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
+  "tags": [
+    "source-hanabira",
+    "n2-grammar-import"
+  ],
+  "examples": [
+    {
+      "grammarPoint": "～ものだから",
+      "sentence": "試験が近いものだから、毎日勉強しています。",
+      "translation": "Because the exam is near, I'm studying every day.",
+      "translationEn": "Because the exam is near, I'm studying every day.",
+      "romaji": "Shiken ga chikai mono dakara, mainichi benkyou shiteimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものだから",
+      "sentence": "このレストランはとても人気があるものだから、予約しないと席がないかもしれません。",
+      "translation": "Because this restaurant is very popular, there might not be any seats if we don't reserve.",
+      "translationEn": "Because this restaurant is very popular, there might not be any seats if we don't reserve.",
+      "romaji": "Kono resutoran wa totemo ninki ga aru mono dakara, yoyaku shinai to seki ga nai kamoshiremasen.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものだから",
+      "sentence": "彼は若いものだから、まだたくさんの経験を積んでいない。",
+      "translation": "Because he is young, he hasn't accumulated much experience yet.",
+      "translationEn": "Because he is young, he hasn't accumulated much experience yet.",
+      "romaji": "Kare wa wakai mono dakara, mada takusan no keiken wo tsunde inai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものだから",
+      "sentence": "今日は寒いものだから、手袋を持って行きましょう。",
+      "translation": "Since it's cold today, let's bring gloves.",
+      "translationEn": "Since it's cold today, let's bring gloves.",
+      "romaji": "Kyou wa samui mono dakara, tebukuro wo motte ikimashou.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものではない",
+      "sentence": "そんなことを言うものではありません。",
+      "translation": "You should not say such a thing.",
+      "translationEn": "You should not say such a thing.",
+      "romaji": "Sonna koto o iu mono dewa arimasen.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものではない",
+      "sentence": "公共の場で大声を出すものではない。",
+      "translation": "You should not raise your voice in public places.",
+      "translationEn": "You should not raise your voice in public places.",
+      "romaji": "Koukyou no ba de oogoe o dasu mono dewa nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものではない",
+      "sentence": "彼の秘密を他の人に教えるものではありません。",
+      "translation": "You must not tell his secret to other people.",
+      "translationEn": "You must not tell his secret to other people.",
+      "romaji": "Kare no himitsu o hoka no hito ni oshieru mono dewa arimasen.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものではない",
+      "sentence": "安全な場所では遊んでいいが、危険なところで遊ぶものではない。",
+      "translation": "It's okay to play in safe places, but you should not play somewhere dangerous.",
+      "translationEn": "It's okay to play in safe places, but you should not play somewhere dangerous.",
+      "romaji": "Anzen na basho de wa asonde ii ga, kiken na tokoro de asobu mono dewa nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものなら",
+      "sentence": "帰れるものなら、今すぐ国へ帰りたい。",
+      "translation": "If I could possibly go back, I'd return to my country right now.",
+      "translationEn": "If I could possibly go back, I'd return to my country right now.",
+      "romaji": "Kaereru mono nara, ima sugu kuni e kaeritai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものなら",
+      "sentence": "できるものなら、世界を一周してみたい。",
+      "translation": "If it were possible, I'd love to travel around the world.",
+      "translationEn": "If it were possible, I'd love to travel around the world.",
+      "romaji": "Dekiru mono nara, sekai o isshuu shite mitai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものなら",
+      "sentence": "やり直せるものなら、子供の頃に戻りたい。",
+      "translation": "If I could redo my life, I'd go back to my childhood.",
+      "translationEn": "If I could redo my life, I'd go back to my childhood.",
+      "romaji": "Yarinaoseru mono nara, kodomo no koro ni modoritai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものなら",
+      "sentence": "元気になれるものなら、どんな薬でも試したい。",
+      "translation": "If it could make me healthy, I'd try any medicine.",
+      "translationEn": "If it could make me healthy, I'd try any medicine.",
+      "romaji": "Genki ni nareru mono nara, donna kusuri demo tameshitai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものの、～",
+      "sentence": "早起きしたものの、バスに間に合わなかった。",
+      "translation": "Even though I got up early, I didn't catch the bus in time.",
+      "translationEn": "Even though I got up early, I didn't catch the bus in time.",
+      "romaji": "Hayaoki shita mono no, basu ni maniawanakatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものの、～",
+      "sentence": "この部屋は広いものの、家具が少ない。",
+      "translation": "Although this room is spacious, there isn't much furniture.",
+      "translationEn": "Although this room is spacious, there isn't much furniture.",
+      "romaji": "Kono heya wa hiroi mono no, kagu ga sukunai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものの、～",
+      "sentence": "彼女は美しいものの、性格が悪い。",
+      "translation": "She is beautiful, but her personality is bad.",
+      "translationEn": "She is beautiful, but her personality is bad.",
+      "romaji": "Kanojo wa utsukushii mono no, seikaku ga warui.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ものの、～",
+      "sentence": "彼は有名な歌手であるものの、コンサートにあまり人が来なかった。",
+      "translation": "Although he is a famous singer, not many people came to his concert.",
+      "translationEn": "Although he is a famous singer, not many people came to his concert.",
+      "romaji": "Kare wa yuumei na kashu de aru mono no, konsaato ni amari hito ga konakatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～も～ば～も～",
+      "sentence": "彼は勉強もできればスポーツもできる。",
+      "translation": "He is good at studying and also at sports.",
+      "translationEn": "He is good at studying and also at sports.",
+      "romaji": "Kare wa benkyou mo dekireba supootsu mo dekiru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～も～ば～も～",
+      "sentence": "このレストランは値段も安ければ味もいい。",
+      "translation": "This restaurant is cheap, and the food is also good.",
+      "translationEn": "This restaurant is cheap, and the food is also good.",
+      "romaji": "Kono resutoran wa nedan mo yasukereba aji mo ii.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～も～ば～も～",
+      "sentence": "彼女はピアノも弾けばギターも弾く。",
+      "translation": "She plays both the piano and the guitar.",
+      "translationEn": "She plays both the piano and the guitar.",
+      "romaji": "Kanojo wa piano mo hikeba gitaa mo hiku.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～も～ば～も～",
+      "sentence": "人生には楽しい時もあれば辛い時もある。",
+      "translation": "In life, there are both fun times and tough times.",
+      "translationEn": "In life, there are both fun times and tough times.",
+      "romaji": "Jinsei ni wa tanoshii toki mo areba tsurai toki mo aru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～も同然だ",
+      "sentence": "彼とは長い付き合いだから、家族も同然だ。",
+      "translation": "I've known him for so long that he's practically family.",
+      "translationEn": "I've known him for so long that he's practically family.",
+      "romaji": "Kare to wa nagai tsukiai dakara, kazoku mo douzen da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～も同然だ",
+      "sentence": "毎日遅刻するなんて、来ていないも同然だ。",
+      "translation": "Being late every single day is as good as not coming at all.",
+      "translationEn": "Being late every single day is as good as not coming at all.",
+      "romaji": "Mainichi chikoku suru nante, kite inai mo douzen da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～も同然だ",
+      "sentence": "彼女と私は幼なじみで、姉妹も同然の仲です。",
+      "translation": "She and I are childhood friends, practically like sisters.",
+      "translationEn": "She and I are childhood friends, practically like sisters.",
+      "romaji": "Kanojo to watashi wa osananajimi de, shimai mo douzen no naka desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～も同然だ",
+      "sentence": "こんなに少ない給料じゃ、ただ働きも同然だ。",
+      "translation": "With such a small salary, it's practically like working for free.",
+      "translationEn": "With such a small salary, it's practically like working for free.",
+      "romaji": "Konna ni sukunai kyuuryou ja, tadabataraki mo douzen da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～やら～やら",
+      "sentence": "宿題やら掃除やら、やることがたくさんある。",
+      "translation": "I have lots of things to do, like homework and cleaning.",
+      "translationEn": "I have lots of things to do, like homework and cleaning.",
+      "romaji": "Shukudai yara souji yara, yaru koto ga takusan aru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～やら～やら",
+      "sentence": "野菜やら果物やら、色々な食べ物を買いました。",
+      "translation": "I bought all sorts of foods, such as vegetables and fruits.",
+      "translationEn": "I bought all sorts of foods, such as vegetables and fruits.",
+      "romaji": "Yasai yara kudamono yara, iroiro na tabemono wo kaimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～やら～やら",
+      "sentence": "彼女は歌がうまいやら踊れるやら、本当に多才だ。",
+      "translation": "She’s really talented—she can sing well, dance, and so on.",
+      "translationEn": "She’s really talented—she can sing well, dance, and so on.",
+      "romaji": "Kanojo wa uta ga umai yara odoreru yara, hontou ni tasai da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～やら～やら",
+      "sentence": "お店にはバッグやら靴やらアクセサリーやらが置いてある。",
+      "translation": "The store has all kinds of items like bags, shoes, accessories, etc.",
+      "translationEn": "The store has all kinds of items like bags, shoes, accessories, etc.",
+      "romaji": "Omise ni wa baggu yara kutsu yara akusesarii yara ga oite aru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ようがない",
+      "sentence": "彼の連絡先がわからないので、助けようがない。",
+      "translation": "I don't know his contact information, so there's no way I can help him.",
+      "translationEn": "I don't know his contact information, so there's no way I can help him.",
+      "romaji": "Kare no renrakusaki ga wakaranai node, tasukeyou ga nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ようがない",
+      "sentence": "ここまで壊れてしまったら、もう直しようがない。",
+      "translation": "Now that it's broken this badly, there's no way to fix it.",
+      "translationEn": "Now that it's broken this badly, there's no way to fix it.",
+      "romaji": "Koko made kowarete shimattara, mou naoshiyou ga nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ようがない",
+      "sentence": "証拠が全くないから、彼が犯人だと証明しようがない。",
+      "translation": "There’s no evidence at all, so there’s no way to prove he’s the culprit.",
+      "translationEn": "There’s no evidence at all, so there’s no way to prove he’s the culprit.",
+      "romaji": "Shouko ga mattaku nai kara, kare ga hannin da to shoumeishiyou ga nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ようがない",
+      "sentence": "突然英語で話しかけられて、何と答えればいいか分からず答えようがなかった。",
+      "translation": "I was suddenly spoken to in English and didn’t know how to respond, so there was no way for me to reply.",
+      "translationEn": "I was suddenly spoken to in English and didn’t know how to respond, so there was no way for me to reply.",
+      "romaji": "Totsuzen eigo de hanashikakerarete, nan to kotaereba ii ka wakarazu kotaeyou ga nakatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    }
+  ]
+}

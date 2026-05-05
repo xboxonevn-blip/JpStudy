@@ -1,0 +1,364 @@
+{
+  "lessonId": 22,
+  "level": "N2",
+  "source": "Hanabira grammar JSON",
+  "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
+  "tags": [
+    "source-hanabira",
+    "n2-grammar-import"
+  ],
+  "examples": [
+    {
+      "grammarPoint": "～を問わず",
+      "sentence": "このイベントは、年齢を問わず、誰でも参加できます。",
+      "translation": "This event is open to everyone, regardless of age.",
+      "translationEn": "This event is open to everyone, regardless of age.",
+      "romaji": "Kono ibento wa, nenrei o towazu, dare demo sanka dekimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～を問わず",
+      "sentence": "このスーパーは、日曜日を問わず、毎日開いています。",
+      "translation": "This supermarket is open every day, regardless of Sunday.",
+      "translationEn": "This supermarket is open every day, regardless of Sunday.",
+      "romaji": "Kono suupaa wa, nichiyoubi o towazu, mainichi aite imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～を問わず",
+      "sentence": "彼女は、暑さ寒さを問わず、毎朝散歩をしています。",
+      "translation": "She takes a walk every morning, no matter the heat or cold.",
+      "translationEn": "She takes a walk every morning, no matter the heat or cold.",
+      "romaji": "Kanojo wa, atsusa samusa o towazu, maiasa sanpo o shite imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～を問わず",
+      "sentence": "社長は、国籍を問わず、すべての社員を平等に扱っています。",
+      "translation": "The company president treats all employees equally, regardless of nationality.",
+      "translationEn": "The company president treats all employees equally, regardless of nationality.",
+      "romaji": "Shachou wa, kokuseki o towazu, subete no shain o byoudou ni atsukatte imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～を込めて",
+      "sentence": "愛を込めて料理を作りました。",
+      "translation": "I cooked the meal with love.",
+      "translationEn": "I cooked the meal with love.",
+      "romaji": "Ai wo komete ryouri wo tsukurimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～を込めて",
+      "sentence": "感謝を込めて先生にお礼の手紙を書きました。",
+      "translation": "I wrote a thank-you letter to my teacher, filled with gratitude.",
+      "translationEn": "I wrote a thank-you letter to my teacher, filled with gratitude.",
+      "romaji": "Kansha wo komete sensei ni orei no tegami wo kakimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～を込めて",
+      "sentence": "彼は全力を込めて最後の瞬間まで戦いました。",
+      "translation": "He fought until the last moment with all his strength.",
+      "translationEn": "He fought until the last moment with all his strength.",
+      "romaji": "Kare wa zenryoku wo komete saigo no shunkan made tatakaimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～を込めて",
+      "sentence": "彼女は悲しみを込めて友達へ別れの言葉を伝えました。",
+      "translation": "She conveyed her farewell words to her friend with sadness.",
+      "translationEn": "She conveyed her farewell words to her friend with sadness.",
+      "romaji": "Kanojo wa kanashimi wo komete tomodachi e wakare no kotoba wo tsutaemashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～を通じて",
+      "sentence": "インターネットを通じて友達と連絡を取ります。",
+      "translation": "I keep in touch with my friends through the internet.",
+      "translationEn": "I keep in touch with my friends through the internet.",
+      "romaji": "Intaanetto wo tsuujite tomodachi to renraku wo torimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～を通じて",
+      "sentence": "彼は一日を通じて熱心に働いています。",
+      "translation": "He works diligently throughout the day.",
+      "translationEn": "He works diligently throughout the day.",
+      "romaji": "Kare wa ichinichi wo tsuujite nesshin ni hataraite imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～を通じて",
+      "sentence": "このイベントは週末を通じて開催されます。",
+      "translation": "This event will take place throughout the weekend.",
+      "translationEn": "This event will take place throughout the weekend.",
+      "romaji": "Kono ibento wa shuumatsu wo tsuujite kaisai saremasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～を通じて",
+      "sentence": "その花は春を通じて咲いています。",
+      "translation": "The flowers bloom throughout the spring.",
+      "translationEn": "The flowers bloom throughout the spring.",
+      "romaji": "Sono hana wa haru wo tsuujite saiteimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～を頼りに",
+      "sentence": "彼女は地図を頼りに旅行をしている。",
+      "translation": "She is traveling relying on a map.",
+      "translationEn": "She is traveling relying on a map.",
+      "romaji": "Kanojo wa chizu wo tayori ni ryokou wo shite iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～を頼りに",
+      "sentence": "多くの人が彼の力を頼りに生活している。",
+      "translation": "Many people are living depending on his strength.",
+      "translationEn": "Many people are living depending on his strength.",
+      "romaji": "Ooku no hito ga kare no chikara wo tayori ni seikatsu shite iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～を頼りに",
+      "sentence": "このプロジェクトでは、君のスキルを頼りにしています。",
+      "translation": "In this project, we are counting on your skills.",
+      "translationEn": "In this project, we are counting on your skills.",
+      "romaji": "Kono purojekuto de wa, kimi no sukiru wo tayori ni shiteimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～を頼りに",
+      "sentence": "彼は友達の助けを頼りに問題を解決しようとした。",
+      "translation": "He tried to solve the problem relying on his friend's help.",
+      "translationEn": "He tried to solve the problem relying on his friend's help.",
+      "romaji": "Kare wa tomodachi no tasuke wo tayori ni mondai wo kaiketsu shiyou to shita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～一方",
+      "sentence": "技術が進化する一方、生活が忙しくなっている。",
+      "translation": "While technology advances, life is getting busier.",
+      "translationEn": "While technology advances, life is getting busier.",
+      "romaji": "Gijutsu ga shinka suru ippou, seikatsu ga isogashiku natte iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～一方",
+      "sentence": "日本語が上達する一方、英語力が下がっている気がする。",
+      "translation": "While my Japanese improves, I feel like my English ability is declining.",
+      "translationEn": "While my Japanese improves, I feel like my English ability is declining.",
+      "romaji": "Nihongo ga joutatsu suru ippou, eigo-ryoku ga sagatte iru ki ga suru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～一方",
+      "sentence": "この料理は美味しい一方、ちょっと高いです。",
+      "translation": "While this dish is delicious, it’s a bit expensive.",
+      "translationEn": "While this dish is delicious, it’s a bit expensive.",
+      "romaji": "Kono ryouri wa oishii ippou, chotto takai desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～一方",
+      "sentence": "彼は優しい一方、厳しい面もある。",
+      "translation": "While he is kind, he also has a strict side.",
+      "translationEn": "While he is kind, he also has a strict side.",
+      "romaji": "Kare wa yasashii ippou, kibishii men mo aru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～一方だ",
+      "sentence": "世界の人口は増える一方だ。",
+      "translation": "The world's population continues to increase.",
+      "translationEn": "The world's population continues to increase.",
+      "romaji": "Sekai no jinkou wa fueru ippou da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～一方だ",
+      "sentence": "この町の治安は悪化する一方だ。",
+      "translation": "Public safety in this town is getting worse and worse.",
+      "translationEn": "Public safety in this town is getting worse and worse.",
+      "romaji": "Kono machi no chian wa akka suru ippou da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～一方だ",
+      "sentence": "僕の日本語は上達する一方だ。",
+      "translation": "My Japanese keeps improving.",
+      "translationEn": "My Japanese keeps improving.",
+      "romaji": "Boku no nihongo wa joutatsu suru ippou da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～一方だ",
+      "sentence": "夏になると、暑さが厳しくなる一方だ。",
+      "translation": "As summer arrives, it just keeps getting hotter.",
+      "translationEn": "As summer arrives, it just keeps getting hotter.",
+      "romaji": "Natsu ni naru to, atsusa ga kibishiku naru ippou da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～上で",
+      "sentence": "調査を行った上で、結論を出しましょう。",
+      "translation": "Let's draw a conclusion after conducting the investigation.",
+      "translationEn": "Let's draw a conclusion after conducting the investigation.",
+      "romaji": "Chousa wo okonatta ue de, ketsuron wo dashimashou.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～上で",
+      "sentence": "就職活動を終えた上で、進学するかどうか決めます。",
+      "translation": "I will decide whether to continue my studies after finishing my job hunting.",
+      "translationEn": "I will decide whether to continue my studies after finishing my job hunting.",
+      "romaji": "Shuushoku katsudou wo oeta ue de, shingaku suru ka dou ka kimemasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～上で",
+      "sentence": "試着した上で、この服を買うかどうか考えます。",
+      "translation": "I'll think about whether to buy these clothes after trying them on.",
+      "translationEn": "I'll think about whether to buy these clothes after trying them on.",
+      "romaji": "Shichaku shita ue de, kono fuku wo kau ka dou ka kangaemasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～上で",
+      "sentence": "経験者の意見を聞いた上で、プロジェクトの方向性を決定しましょう。",
+      "translation": "Let's decide the direction of the project after listening to those with experience.",
+      "translationEn": "Let's decide the direction of the project after listening to those with experience.",
+      "romaji": "Keiken sha no iken wo kiita ue de, purojekuto no houkousei wo kettei shimashou.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～上に",
+      "sentence": "彼は頭がいい上に、スポーツも得意です。",
+      "translation": "In addition to being smart, he is also good at sports.",
+      "translationEn": "In addition to being smart, he is also good at sports.",
+      "romaji": "Kare wa atama ga ii ue ni, supo-tsu mo tokui desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～上に",
+      "sentence": "このドレスは美しい上に、値段も安いです。",
+      "translation": "This dress is not only beautiful but also affordable.",
+      "translationEn": "This dress is not only beautiful but also affordable.",
+      "romaji": "Kono doresu wa utsukushii ue ni, nedan mo yasui desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～上に",
+      "sentence": "彼女は優しい上に、料理も上手です。",
+      "translation": "Besides being kind, she is also good at cooking.",
+      "translationEn": "Besides being kind, she is also good at cooking.",
+      "romaji": "Kanojo wa yasashii ue ni, ryouri mo jouzu desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～上に",
+      "sentence": "彼は社長の上に、有名な作家でもある。",
+      "translation": "Not only is he a company president, but he is also a famous writer.",
+      "translationEn": "Not only is he a company president, but he is also a famous writer.",
+      "romaji": "Kare wa shachou no ue ni, yuumei na sakka demo aru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,364 @@
+{
+  "lessonId": 8,
+  "level": "N2",
+  "source": "Hanabira grammar JSON",
+  "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
+  "tags": [
+    "source-hanabira",
+    "n2-grammar-import"
+  ],
+  "examples": [
+    {
+      "grammarPoint": "～から見ると",
+      "sentence": "費用から見ると、このプランはお得です。",
+      "translation": "In terms of cost, this plan is a good deal.",
+      "translationEn": "In terms of cost, this plan is a good deal.",
+      "romaji": "Hiyou kara miru to, kono puran wa otoku desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～から見ると",
+      "sentence": "彼女の意見から見ると、社長の決定は理解できる。",
+      "translation": "From her perspective, the president's decision is understandable.",
+      "translationEn": "From her perspective, the president's decision is understandable.",
+      "romaji": "Kanojo no iken kara miru to, shachou no kettei wa rikai dekiru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～から見ると",
+      "sentence": "実力から見ると、彼はチームで最も優れている。",
+      "translation": "In terms of ability, he is the best in the team.",
+      "translationEn": "In terms of ability, he is the best in the team.",
+      "romaji": "Jitsuryoku kara miru to, kare wa chiimu de mottomo sugurete iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～から見ると",
+      "sentence": "健康面から見ると、この食品は良くない。",
+      "translation": "From the standpoint of health, this food is not good.",
+      "translationEn": "From the standpoint of health, this food is not good.",
+      "romaji": "Kenkoumen kara miru to, kono shokuhin wa yokunai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～から言うと",
+      "sentence": "値段から言うと、この商品が最もお得です。",
+      "translation": "Speaking from the viewpoint of price, this product is the best deal.",
+      "translationEn": "Speaking from the viewpoint of price, this product is the best deal.",
+      "romaji": "Nedan kara iuto, kono shouhin ga mottomo otoku desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～から言うと",
+      "sentence": "味から言って、このレストランはおいしいと思います。",
+      "translation": "In terms of taste, I think this restaurant is delicious.",
+      "translationEn": "In terms of taste, I think this restaurant is delicious.",
+      "romaji": "Aji kara itte, kono resutoran wa oishii to omoimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～から言うと",
+      "sentence": "便利さから言って、このアパートは最適な場所にあります。",
+      "translation": "Speaking from the perspective of convenience, this apartment is in the best location.",
+      "translationEn": "Speaking from the perspective of convenience, this apartment is in the best location.",
+      "romaji": "Benrisa kara itte, kono apaato wa saiteki na basho ni arimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～から言うと",
+      "sentence": "健康から言うと、毎日運動することが大切です。",
+      "translation": "From the viewpoint of health, it is important to exercise every day.",
+      "translationEn": "From the viewpoint of health, it is important to exercise every day.",
+      "romaji": "Kenkou kara iuto, mainichi undou suru koto ga taisetsu desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～くせに",
+      "sentence": "彼はいつも遅刻してくるくせに、自分が待たされるのが嫌いだ。",
+      "translation": "He’s always late, yet he hates being kept waiting.",
+      "translationEn": "He’s always late, yet he hates being kept waiting.",
+      "romaji": "Kare wa itsumo chikoku shite kuru kuse ni, jibun ga matasareru no ga kirai da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～くせに",
+      "sentence": "悪いなと言ってるくせに、また同じことを繰り返している。",
+      "translation": "He says he's sorry, yet he keeps doing the same thing.",
+      "translationEn": "He says he's sorry, yet he keeps doing the same thing.",
+      "romaji": "Warui na to itteru kuse ni, mata onaji koto o kurikaeshite iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～くせに",
+      "sentence": "彼は背が高いくせに、バスケが下手だ。",
+      "translation": "Despite being tall, he's bad at basketball.",
+      "translationEn": "Despite being tall, he's bad at basketball.",
+      "romaji": "Kare wa se ga takai kuse ni, basuke ga heta da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～くせに",
+      "sentence": "この店は有名なのくせに、サービスが悪い。",
+      "translation": "Despite being famous, this store has poor service.",
+      "translationEn": "Despite being famous, this store has poor service.",
+      "romaji": "Kono mise wa yuumei na no kuse ni, saabisu ga warui.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ことから",
+      "sentence": "彼は毎日運動することから、体が丈夫です。",
+      "translation": "Because he exercises every day, he is physically strong.",
+      "translationEn": "Because he exercises every day, he is physically strong.",
+      "romaji": "Kare wa mainichi undou suru koto kara, karada ga joubu desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ことから",
+      "sentence": "この店のサービスがいいことから、いつも混んでいます。",
+      "translation": "This store is always crowded because of its good service.",
+      "translationEn": "This store is always crowded because of its good service.",
+      "romaji": "Kono mise no saabisu ga ii koto kara, itsumo konde imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ことから",
+      "sentence": "彼女は親切なことから、みんなに好かれています。",
+      "translation": "She’s well-liked by everyone due to her kindness.",
+      "translationEn": "She’s well-liked by everyone due to her kindness.",
+      "romaji": "Kanojo wa shinsetsu na koto kara, minna ni sukarete imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ことから",
+      "sentence": "その会社の評判が良いことから、就職先として人気があります。",
+      "translation": "Because that company’s reputation is good, it’s popular as a place to work.",
+      "translationEn": "Because that company’s reputation is good, it’s popular as a place to work.",
+      "romaji": "Sono kaisha no hyouban ga yoi koto kara, shuushoku-saki toshite ninki ga arimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ことに",
+      "sentence": "彼が急に帰国することに驚いた。",
+      "translation": "I was surprised that he suddenly returned to his home country.",
+      "translationEn": "I was surprised that he suddenly returned to his home country.",
+      "romaji": "Kare ga kyuu ni kikoku suru koto ni odoroita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ことに",
+      "sentence": "彼女が優勝したことに感動した。",
+      "translation": "I was moved by the fact that she won the championship.",
+      "translationEn": "I was moved by the fact that she won the championship.",
+      "romaji": "Kanojo ga yuushou shita koto ni kandou shita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ことに",
+      "sentence": "彼がいつも遅刻することに腹が立つ。",
+      "translation": "I get angry that he is always late.",
+      "translationEn": "I get angry that he is always late.",
+      "romaji": "Kare ga itsumo chikoku suru koto ni hara ga tatsu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ことに",
+      "sentence": "彼女がこんなに美しいことに気がつかなかった。",
+      "translation": "I hadn’t realized how beautiful she was.",
+      "translationEn": "I hadn’t realized how beautiful she was.",
+      "romaji": "Kanojo ga konna ni utsukushii koto ni ki ga tsukanakatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ことになっている",
+      "sentence": "日本では、左側を運転することになっています。",
+      "translation": "In Japan, it is decided that people drive on the left side.",
+      "translationEn": "In Japan, it is decided that people drive on the left side.",
+      "romaji": "Nihon de wa, hidarigawa o unten suru koto ni natte imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ことになっている",
+      "sentence": "会社の規則では、制服を着ることになっている。",
+      "translation": "According to the company rules, we are supposed to wear uniforms.",
+      "translationEn": "According to the company rules, we are supposed to wear uniforms.",
+      "romaji": "Kaisha no kisoku de wa, seifuku o kiru koto ni natte iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ことになっている",
+      "sentence": "彼女は明日結婚することになっています。",
+      "translation": "She is supposed to get married tomorrow.",
+      "translationEn": "She is supposed to get married tomorrow.",
+      "romaji": "Kanojo wa ashita kekkon suru koto ni natte imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ことになっている",
+      "sentence": "この商品は高品質だということになっています。",
+      "translation": "It is said (or generally accepted) that this product is of high quality.",
+      "translationEn": "It is said (or generally accepted) that this product is of high quality.",
+      "romaji": "Kono shouhin wa kouhinshitsu da to iu koto ni natte imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～さえ～ば",
+      "sentence": "お金さえあれば、幸せです。",
+      "translation": "As long as I have money, I’m happy.",
+      "translationEn": "As long as I have money, I’m happy.",
+      "romaji": "Okane sae areba, shiawase desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～さえ～ば",
+      "sentence": "試験に合格しさえすれば、卒業できます。",
+      "translation": "If only I pass the exam, I can graduate.",
+      "translationEn": "If only I pass the exam, I can graduate.",
+      "romaji": "Shiken ni goukaku shi sae sureba, sotsugyou dekimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～さえ～ば",
+      "sentence": "野菜さえたくさん食べれば、母は喜びます。",
+      "translation": "As long as I eat plenty of vegetables, my mother will be happy.",
+      "translationEn": "As long as I eat plenty of vegetables, my mother will be happy.",
+      "romaji": "Yasai sae takusan tabereba, haha wa yorokobimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～さえ～ば",
+      "sentence": "交通費さえ支払ってもらえれば、どこへでも行きます。",
+      "translation": "As long as my transportation costs are covered, I’ll go anywhere.",
+      "translationEn": "As long as my transportation costs are covered, I’ll go anywhere.",
+      "romaji": "Koutsuuhi sae shiharatte moraereba, doko e demo ikimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ざるを得ない",
+      "sentence": "この仕事は締め切りが近いので、残業せざるを得ない。",
+      "translation": "Since the deadline is near, I have no choice but to work overtime.",
+      "translationEn": "Since the deadline is near, I have no choice but to work overtime.",
+      "romaji": "Kono shigoto wa shimekiri ga chikai no de, zangyou sezaru wo enai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ざるを得ない",
+      "sentence": "電車が遅れたため、タクシーに乗るざるを得なかった。",
+      "translation": "Because the train was delayed, I had no choice but to take a taxi.",
+      "translationEn": "Because the train was delayed, I had no choice but to take a taxi.",
+      "romaji": "Densha ga okureta tame, takushii ni noru zaru wo enakatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ざるを得ない",
+      "sentence": "彼女の説明が納得できなかったが、とりあえず信じざるを得ない。",
+      "translation": "I couldn’t really accept her explanation, but for now I have no choice but to believe her.",
+      "translationEn": "I couldn’t really accept her explanation, but for now I have no choice but to believe her.",
+      "romaji": "Kanojo no setsumei ga nattoku dekinakatta ga, toriaezu shinjizaru wo enai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～ざるを得ない",
+      "sentence": "この状況では、新しい計画を立て直さざるを得ない。",
+      "translation": "In this situation, we have no choice but to revise the new plan.",
+      "translationEn": "In this situation, we have no choice but to revise the new plan.",
+      "romaji": "Kono joukyou de wa, atarashii keikaku wo tatenaosazaru wo enai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    }
+  ]
+}

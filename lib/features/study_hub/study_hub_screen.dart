@@ -84,10 +84,26 @@ String _lessonLabel(AppLanguage l, int current, int total) => _tr(
   ja: '$current / $total レッスン',
 );
 
-String _levelLabel(StudyResourceLevel level) => switch (level) {
-  StudyResourceLevel.beginner => 'Beginner',
-  StudyResourceLevel.intermediate => 'Intermediate',
-  StudyResourceLevel.advanced => 'Advanced',
+String _levelLabel(AppLanguage language, StudyResourceLevel level) =>
+    switch (level) {
+      StudyResourceLevel.beginner => _tr(
+        language,
+        en: 'Beginner',
+        vi: 'Sơ cấp',
+        ja: '初級',
+      ),
+      StudyResourceLevel.intermediate => _tr(
+        language,
+        en: 'Intermediate',
+        vi: 'Trung cấp',
+        ja: '中級',
+      ),
+      StudyResourceLevel.advanced => _tr(
+        language,
+        en: 'Advanced',
+        vi: 'Nâng cao',
+        ja: '上級',
+      ),
 };
 
 // ---------------------------------------------------------------------------
@@ -300,7 +316,7 @@ class StudyHubScreen extends ConsumerWidget {
                   .map((levelOption) {
                     final selected = hub.selectedLevels.contains(levelOption);
                     return ChoiceChip(
-                      label: Text(_levelLabel(levelOption)),
+                      label: Text(_levelLabel(language, levelOption)),
                       selected: selected,
                       onSelected: (_) => ref
                           .read(studyHubProvider.notifier)
@@ -353,7 +369,7 @@ class StudyHubScreen extends ConsumerWidget {
                       title: resource.title,
                       subtitle: resource.subtitle,
                       status: AppStatusChip(
-                        label: _levelLabel(resource.level),
+                        label: _levelLabel(language, resource.level),
                         tone: _levelTone(resource.level),
                       ),
                     ),

@@ -1,0 +1,452 @@
+{
+  "lessonId": 6,
+  "level": "N1",
+  "source": "Hanabira grammar JSON",
+  "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
+  "tags": [
+    "source-hanabira",
+    "n1-grammar-import"
+  ],
+  "examples": [
+    {
+      "grammarPoint": "Noun ならいざ知らず",
+      "sentence": "数学ならいざ知らず、物理なんて全然わからない。",
+      "translation": "Math might be manageable, but as for physics, I'm completely clueless.",
+      "translationEn": "Math might be manageable, but as for physics, I'm completely clueless.",
+      "romaji": "Suugaku nara iza shirazu, butsuri nante zenzen wakaranai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun ならいざ知らず",
+      "sentence": "5キロならいざ知らず、10キロなんて走れません。",
+      "translation": "Maybe I could run 5 kilometers, but 10 kilometers is out of the question.",
+      "translationEn": "Maybe I could run 5 kilometers, but 10 kilometers is out of the question.",
+      "romaji": "Go kiro nara iza shirazu, juu kiro nante hashiremasen.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun ならいざ知らず",
+      "sentence": "日本語ならいざ知らず、中国語なんて話せない。",
+      "translation": "I might be able to speak Japanese, but Chinese is impossible for me.",
+      "translationEn": "I might be able to speak Japanese, but Chinese is impossible for me.",
+      "romaji": "Nihongo nara iza shirazu, chuugokugo nante hanasenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun ならいざ知らず",
+      "sentence": "冷たい水ならいざ知らず、熱い水で泳ぐなんて考えたこともない。",
+      "translation": "Maybe cold water, but swimming in hot water never even crossed my mind.",
+      "translationEn": "Maybe cold water, but swimming in hot water never even crossed my mind.",
+      "romaji": "Tsumetai mizu nara iza shirazu, atsui mizu de oyogu nante kangaeta koto mo nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun + ならでは",
+      "sentence": "これは日本ならではの風景ですね。",
+      "translation": "This is a landscape you can only find in Japan.",
+      "translationEn": "This is a landscape you can only find in Japan.",
+      "romaji": "Kore wa Nihon nara dewa no fuukei desu ne.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun + ならでは",
+      "sentence": "新鮮な魚はこの町ならではの特産品です。",
+      "translation": "Fresh fish is a specialty unique to this town.",
+      "translationEn": "Fresh fish is a specialty unique to this town.",
+      "romaji": "Shinsen na sakana wa kono machi nara dewa no tokusanhin desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun + ならでは",
+      "sentence": "彼の技術は彼ならではのものだ。",
+      "translation": "His skills are unique to him.",
+      "translationEn": "His skills are unique to him.",
+      "romaji": "Kare no gijutsu wa kare nara dewa no mono da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun + ならでは",
+      "sentence": "この手作りの一品は、彼女ならではのものです。",
+      "translation": "This handmade item is something only she could produce.",
+      "translationEn": "This handmade item is something only she could produce.",
+      "romaji": "Kono tezukuri no ippin wa, kanojo nara dewa no mono desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun なり Noun なり",
+      "sentence": "映画なり、音楽なり、何か趣味はありますか。",
+      "translation": "Do you have any hobbies, such as movies or music?",
+      "translationEn": "Do you have any hobbies, such as movies or music?",
+      "romaji": "Eiga nari, ongaku nari, nanika shumi wa arimasu ka?",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun なり Noun なり",
+      "sentence": "紅茶なり、コーヒーなり、何か飲み物をください。",
+      "translation": "Please give me something to drink, like tea or coffee.",
+      "translationEn": "Please give me something to drink, like tea or coffee.",
+      "romaji": "Koucha nari, koohii nari, nanika nomimono o kudasai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun なり Noun なり",
+      "sentence": "パンなり、おにぎりなり、何か食べてください。",
+      "translation": "Please eat something—bread, onigiri, or whatever you’d like.",
+      "translationEn": "Please eat something—bread, onigiri, or whatever you’d like.",
+      "romaji": "Pan nari, onigiri nari, nanika tabete kudasai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun なり Noun なり",
+      "sentence": "タクシーなり、バスなりに乗って来てください。",
+      "translation": "Please come by either taxi or bus.",
+      "translationEn": "Please come by either taxi or bus.",
+      "romaji": "Takushii nari, basu nari ni notte kite kudasai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun なりとも",
+      "sentence": "時間が限られているので、一時間なりとも練習すべきだ。",
+      "translation": "Since time is limited, you should practice for at least an hour.",
+      "translationEn": "Since time is limited, you should practice for at least an hour.",
+      "romaji": "Jikan ga kagirarete iru node, ichi-jikan nari tomo renshuu subeki da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun なりとも",
+      "sentence": "彼には一言なりとも謝罪の言葉を聞きたい。",
+      "translation": "I’d like to hear at least a word of apology from him.",
+      "translationEn": "I’d like to hear at least a word of apology from him.",
+      "romaji": "Kare ni wa hitokoto nari tomo shazai no kotoba o kikitai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun なりとも",
+      "sentence": "このプロジェクトには、一人なりともメンバーが必要だ。",
+      "translation": "We need at least one member for this project.",
+      "translationEn": "We need at least one member for this project.",
+      "romaji": "Kono purojekuto ni wa, hitori nari tomo membaa ga hitsuyou da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun なりとも",
+      "sentence": "あなたには、一言なりとも感謝の言葉を述べたい。",
+      "translation": "I want to offer at least a word of gratitude to you.",
+      "translationEn": "I want to offer at least a word of gratitude to you.",
+      "romaji": "Anata ni wa, hitokoto nari tomo kansha no kotoba o nobetai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun に Noun を重ねて",
+      "sentence": "彼女は失敗に失敗を重ねて、とうとう会社を辞めた。",
+      "translation": "She piled up failures upon failures and finally quit the company.",
+      "translationEn": "She piled up failures upon failures and finally quit the company.",
+      "romaji": "Kanojo wa shippai ni shippai wo kasanete, toutou kaisha wo yameta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun に Noun を重ねて",
+      "sentence": "仕事に仕事を重ねて、彼は疲れ果てた。",
+      "translation": "He piled up work upon work and was completely exhausted.",
+      "translationEn": "He piled up work upon work and was completely exhausted.",
+      "romaji": "Shigoto ni shigoto wo kasanete, kare wa tsukarehateta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun に Noun を重ねて",
+      "sentence": "彼は試験に不合格になり、失望に失望を重ねていた。",
+      "translation": "He failed the exam and kept piling up his disappointments.",
+      "translationEn": "He failed the exam and kept piling up his disappointments.",
+      "romaji": "Kare wa shiken ni fugōkaku ni nari, shitsubō ni shitsubō wo kasanete ita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun に Noun を重ねて",
+      "sentence": "彼は問題に問題を重ねて、とうとう退学になった。",
+      "translation": "He kept piling up problems upon problems until he was finally expelled.",
+      "translationEn": "He kept piling up problems upon problems until he was finally expelled.",
+      "romaji": "Kare wa mondai ni mondai wo kasanete, toutou taigaku ni natta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun にあっては",
+      "sentence": "戦争時にあっては、すべての人々が困難に直面していました。",
+      "translation": "In wartime, all people were facing difficulties.",
+      "translationEn": "In wartime, all people were facing difficulties.",
+      "romaji": "Sensouji ni atte wa, subete no hito ga konnan ni chokumen shiteimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun にあっては",
+      "sentence": "経済危機にあっては、多くの企業が倒産の危機に瀕している。",
+      "translation": "In the economic crisis, many companies are on the verge of bankruptcy.",
+      "translationEn": "In the economic crisis, many companies are on the verge of bankruptcy.",
+      "romaji": "Keizai kiki ni atte wa, ooku no kigyou ga tousan no kiki ni hinshite iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun にあっては",
+      "sentence": "不況下にあっては、どの企業も経費削減を迫られている。",
+      "translation": "In times of recession, every company is forced to cut costs.",
+      "translationEn": "In times of recession, every company is forced to cut costs.",
+      "romaji": "Fukyouka ni atte wa, dono kigyou mo keihi sakugen o semararete iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun にあっては",
+      "sentence": "改革期にあっては、新しいアイデアを大切にする必要がある。",
+      "translation": "In a period of reform, it's necessary to value new ideas.",
+      "translationEn": "In a period of reform, it's necessary to value new ideas.",
+      "romaji": "Kaikaku ki ni atte wa, atarashii aidea o taisetsu ni suru hitsuyou ga aru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun にあるまじき Noun",
+      "sentence": "彼は教師にあるまじき言動をとった。",
+      "translation": "He took actions that are unbecoming of a teacher.",
+      "translationEn": "He took actions that are unbecoming of a teacher.",
+      "romaji": "Kare wa kyoushi ni aru majiki gendou wo totta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun にあるまじき Noun",
+      "sentence": "これは人間にあるまじき行為だ。",
+      "translation": "This is an act that is unfitting for a human.",
+      "translationEn": "This is an act that is unfitting for a human.",
+      "romaji": "Kore wa ningen ni aru majiki koui da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun にあるまじき Noun",
+      "sentence": "彼女は社長にあるまじき振る舞いをした。",
+      "translation": "She behaved in a way that is unbecoming of a president.",
+      "translationEn": "She behaved in a way that is unbecoming of a president.",
+      "romaji": "Kanojo wa shachou ni aru majiki furumai wo shita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun にあるまじき Noun",
+      "sentence": "それは社会人にあるまじき行動だ。",
+      "translation": "That is a behaviour that is not suitable for an adult.",
+      "translationEn": "That is a behaviour that is not suitable for an adult.",
+      "romaji": "Sore wa shakaijin ni aru majiki koudou da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun にして",
+      "sentence": "彼は医者にしてその基本的な知識がないのが信じられない。",
+      "translation": "I can't believe that even as a doctor, he doesn't have that basic knowledge.",
+      "translationEn": "I can't believe that even as a doctor, he doesn't have that basic knowledge.",
+      "romaji": "Kare wa isha ni shite sono kihonteki na chishiki ga nai no ga shinjirarenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun にして",
+      "sentence": "彼は経験豊富な運転手にして、事故を起こした。",
+      "translation": "Even as an experienced driver, he had an accident.",
+      "translationEn": "Even as an experienced driver, he had an accident.",
+      "romaji": "Kare wa keiken houfu na untenshu ni shite, jiko wo okoshita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun にして",
+      "sentence": "彼は成績優秀な生徒にして、その問題が解けなかった。",
+      "translation": "Even as an excellent student, he couldn't solve that problem.",
+      "translationEn": "Even as an excellent student, he couldn't solve that problem.",
+      "romaji": "Kare wa seiseki yuushuu na seito ni shite, sono mondai ga tokenakatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun にして",
+      "sentence": "彼は勉強家にして、その問題を理解できなかった。",
+      "translation": "Even as a studious person, he could not understand that problem.",
+      "translationEn": "Even as a studious person, he could not understand that problem.",
+      "romaji": "Kare wa benkyouka ni shite, sono mondai o rikai dekinakatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun にして初めて",
+      "sentence": "大人にして初めて、親の苦労が分かった。",
+      "translation": "Only when I became an adult did I understand my parents' struggles for the first time.",
+      "translationEn": "Only when I became an adult did I understand my parents' struggles for the first time.",
+      "romaji": "Otona ni shite hajimete, oya no kurou ga wakatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun にして初めて",
+      "sentence": "彼は40歳にして初めて、海外旅行を経験した。",
+      "translation": "Only when he turned 40 did he travel abroad for the first time.",
+      "translationEn": "Only when he turned 40 did he travel abroad for the first time.",
+      "romaji": "Kare wa yonjuu-sai ni shite hajimete, kaigai ryokou o keiken shita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun にして初めて",
+      "sentence": "彼女は親にして初めて、子育ての大変さを理解した。",
+      "translation": "It was only after she became a parent that she realized how challenging raising a child can be.",
+      "translationEn": "It was only after she became a parent that she realized how challenging raising a child can be.",
+      "romaji": "Kanojo wa oya ni shite hajimete, kosodate no taihensa o rikai shita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun にして初めて",
+      "sentence": "社長にして初めて、会社全体の重責を痛感した。",
+      "translation": "Only when he became president did he feel the full weight of responsibility for the entire company.",
+      "translationEn": "Only when he became president did he feel the full weight of responsibility for the entire company.",
+      "romaji": "Shachou ni shite hajimete, kaisha zentai no juuseki o tsuukan shita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun にすら",
+      "sentence": "彼にすらその問題は解けなかった。",
+      "translation": "Even he could not solve that problem.",
+      "translationEn": "Even he could not solve that problem.",
+      "romaji": "Kare ni sura sono mondai wa tokenakatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun にすら",
+      "sentence": "彼女はテストにすら合格しなかった。",
+      "translation": "She did not even pass the test.",
+      "translationEn": "She did not even pass the test.",
+      "romaji": "Kanojo wa tesuto ni sura goukaku shinakatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun にすら",
+      "sentence": "この犬は自分の名前にすら反応しない。",
+      "translation": "This dog doesn't even respond to its own name.",
+      "translationEn": "This dog doesn't even respond to its own name.",
+      "romaji": "Kono inu wa jibun no namae ni sura hannou shinai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun にすら",
+      "sentence": "彼にすら話す余裕がなかった。",
+      "translation": "I didn't even have the time to talk to him.",
+      "translationEn": "I didn't even have the time to talk to him.",
+      "romaji": "Kare ni sura hanasu yoyuu ga nakatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    }
+  ]
+}

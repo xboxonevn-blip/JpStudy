@@ -1,0 +1,364 @@
+{
+  "lessonId": 21,
+  "level": "N2",
+  "source": "Hanabira grammar JSON",
+  "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
+  "tags": [
+    "source-hanabira",
+    "n2-grammar-import"
+  ],
+  "examples": [
+    {
+      "grammarPoint": "～よりほかない",
+      "sentence": "試験が近いので、勉強するよりほかない。",
+      "translation": "Since the exam is near, there is no choice but to study.",
+      "translationEn": "Since the exam is near, there is no choice but to study.",
+      "romaji": "Shiken ga chikai node, benkyou suru yori hoka nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～よりほかない",
+      "sentence": "風邪がひどいので、早く寝るよりほかない。",
+      "translation": "My cold is severe, so I have no choice but to go to bed early.",
+      "translationEn": "My cold is severe, so I have no choice but to go to bed early.",
+      "romaji": "Kaze ga hidoi node, hayaku neru yori hoka nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～よりほかない",
+      "sentence": "バスが来ないので、歩くよりほかない。",
+      "translation": "Since the bus isn't coming, I have no choice but to walk.",
+      "translationEn": "Since the bus isn't coming, I have no choice but to walk.",
+      "romaji": "Basu ga konai node, aruku yori hoka nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～よりほかない",
+      "sentence": "お金がないので、安いものを買うよりほかない。",
+      "translation": "Since I have no money, I have no choice but to buy cheap things.",
+      "translationEn": "Since I have no money, I have no choice but to buy cheap things.",
+      "romaji": "Okane ga nai node, yasui mono o kau yori hoka nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～わけがない",
+      "sentence": "彼が怪我をしたから、試合に勝てるわけがない。",
+      "translation": "He got injured, so there's no way he can win the match.",
+      "translationEn": "He got injured, so there's no way he can win the match.",
+      "romaji": "Kare ga kega wo shita kara, shiai ni kateru wake ga nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～わけがない",
+      "sentence": "嘘ばかり言っている人を、信じるわけがない。",
+      "translation": "There's no way I can believe someone who constantly lies.",
+      "translationEn": "There's no way I can believe someone who constantly lies.",
+      "romaji": "Uso bakari itte iru hito wo, shinjiru wake ga nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～わけがない",
+      "sentence": "彼女は忙しいから、このパーティーに来るわけがない。",
+      "translation": "She's busy, so there's no way she can come to this party.",
+      "translationEn": "She's busy, so there's no way she can come to this party.",
+      "romaji": "Kanojo wa isogashii kara, kono paatii ni kuru wake ga nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～わけがない",
+      "sentence": "昨日はずっと寝ていたから、その事件を知るわけがない。",
+      "translation": "I was asleep all day yesterday, so there's no way I could know about that incident.",
+      "translationEn": "I was asleep all day yesterday, so there's no way I could know about that incident.",
+      "romaji": "Kinou wa zutto nete ita kara, sono jiken wo shiru wake ga nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～わけだ",
+      "sentence": "彼女が遅れたのは、電車が遅れたわけだ。",
+      "translation": "The reason she was late is that the train was delayed.",
+      "translationEn": "The reason she was late is that the train was delayed.",
+      "romaji": "Kanojo ga okureta no wa, densha ga okureta wake da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～わけだ",
+      "sentence": "授業が面白かったから、みんな熱心に聞いていたわけだ。",
+      "translation": "The class was interesting, so that's why everyone was listening intently.",
+      "translationEn": "The class was interesting, so that's why everyone was listening intently.",
+      "romaji": "Jugyou ga omoshirokatta kara, minna nesshin ni kiiteita wake da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～わけだ",
+      "sentence": "彼はとても忙しいですから、休みがほとんどないわけだ。",
+      "translation": "He's really busy, which is why he hardly has any time off.",
+      "translationEn": "He's really busy, which is why he hardly has any time off.",
+      "romaji": "Kare wa totemo isogashii desu kara, yasumi ga hotondo nai wake da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～わけだ",
+      "sentence": "この問題が難しいから、全然わからないわけだ。",
+      "translation": "This problem is tough, so no wonder I don't understand it at all.",
+      "translationEn": "This problem is tough, so no wonder I don't understand it at all.",
+      "romaji": "Kono mondai ga muzukashii kara, zenzen wakaranai wake da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～わけではない",
+      "sentence": "彼が勉強しないわけではないが、成績があまり良くない。",
+      "translation": "It's not that he doesn't study, but his grades aren't very good.",
+      "translationEn": "It's not that he doesn't study, but his grades aren't very good.",
+      "romaji": "Kare ga benkyou shinai wake dewa nai ga, seiseki ga amari yoku nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～わけではない",
+      "sentence": "このレストランが高いわけではないけど、毎日通うには少し高いね。",
+      "translation": "It's not that this restaurant is expensive, but it's a bit too pricey to go there every day.",
+      "translationEn": "It's not that this restaurant is expensive, but it's a bit too pricey to go there every day.",
+      "romaji": "Kono resutoran ga takai wake dewa nai kedo, mainichi kayou ni wa sukoshi takai ne.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～わけではない",
+      "sentence": "彼女が優しくないわけではないが、時々話し方がきついことがある。",
+      "translation": "It's not that she's unkind, but sometimes her manner of speaking can be harsh.",
+      "translationEn": "It's not that she's unkind, but sometimes her manner of speaking can be harsh.",
+      "romaji": "Kanojo ga yasashikunai wake dewa nai ga, tokidoki hanashikata ga kitsui koto ga aru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～わけではない",
+      "sentence": "彼が忙しいわけではないが、時間を上手に使えていないようだ。",
+      "translation": "It's not that he's busy; he just doesn't seem to use his time effectively.",
+      "translationEn": "It's not that he's busy; he just doesn't seem to use his time effectively.",
+      "romaji": "Kare ga isogashii wake dewa nai ga, jikan o jouzu ni tsukaete inai you da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～わけにはいかない",
+      "sentence": "試験が近いから、遊ぶわけにはいかない。",
+      "translation": "Since the exam is close, I can't afford to just play around.",
+      "translationEn": "Since the exam is close, I can't afford to just play around.",
+      "romaji": "Shiken ga chikai kara, asobu wake ni wa ikanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～わけにはいかない",
+      "sentence": "田中さんが待っているので、遅れるわけにはいかない。",
+      "translation": "Mr. Tanaka is waiting, so I absolutely must not be late.",
+      "translationEn": "Mr. Tanaka is waiting, so I absolutely must not be late.",
+      "romaji": "Tanaka-san ga matteiru node, okureru wake ni wa ikanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～わけにはいかない",
+      "sentence": "子供たちのために、この仕事を辞めるわけにはいかない。",
+      "translation": "For the sake of my kids, I can't afford to quit this job.",
+      "translationEn": "For the sake of my kids, I can't afford to quit this job.",
+      "romaji": "Kodomo-tachi no tame ni, kono shigoto o yameru wake ni wa ikanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～わけにはいかない",
+      "sentence": "この問題は重要だから、無視するわけにはいかない。",
+      "translation": "This issue is important, so I can't simply ignore it.",
+      "translationEn": "This issue is important, so I can't simply ignore it.",
+      "romaji": "Kono mondai wa juuyou dakara, mushi suru wake ni wa ikanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～をきっかけに",
+      "sentence": "結婚をきっかけに、彼は真剣に仕事を頑張り始めた。",
+      "translation": "Getting married was the catalyst for him to start working seriously.",
+      "translationEn": "Getting married was the catalyst for him to start working seriously.",
+      "romaji": "Kekkon o kikkake ni, kare wa shinken ni shigoto o ganbarihajimeta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～をきっかけに",
+      "sentence": "あの出会いをきっかけに、私たちは友達になりました。",
+      "translation": "That encounter led us to become friends.",
+      "translationEn": "That encounter led us to become friends.",
+      "romaji": "Ano deai o kikkake ni, watashitachi wa tomodachi ni narimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～をきっかけに",
+      "sentence": "コンサートをきっかけに、彼女は音楽の道に進むことを決めました。",
+      "translation": "Inspired by the concert, she decided to pursue music.",
+      "translationEn": "Inspired by the concert, she decided to pursue music.",
+      "romaji": "Konsaato o kikkake ni, kanojo wa ongaku no michi ni susumu koto o kimemashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～をきっかけに",
+      "sentence": "留学をきっかけに、私の外国語スキルが向上しました。",
+      "translation": "Studying abroad gave me the chance to improve my foreign language skills.",
+      "translationEn": "Studying abroad gave me the chance to improve my foreign language skills.",
+      "romaji": "Ryuugaku o kikkake ni, watashi no gaikokugo sukiru ga koujou shimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～を～として",
+      "sentence": "彼は教師を職業として働いています。",
+      "translation": "He works as a teacher.",
+      "translationEn": "He works as a teacher.",
+      "romaji": "Kare wa kyoushi o shokugyou toshite hataraite imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～を～として",
+      "sentence": "彼女はリーダーを役割として受け入れました。",
+      "translation": "She accepted the role of leader.",
+      "translationEn": "She accepted the role of leader.",
+      "romaji": "Kanojo wa riidaa o yakuwari toshite ukeiremashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～を～として",
+      "sentence": "私たちは彼を仲間として信頼しています。",
+      "translation": "We trust him as one of our own (a close companion).",
+      "translationEn": "We trust him as one of our own (a close companion).",
+      "romaji": "Watashitachi wa kare o nakama toshite shinrai shite imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～を～として",
+      "sentence": "このアーティストは伝統を基盤として作品を作ります。",
+      "translation": "This artist creates works with tradition as the foundation.",
+      "translationEn": "This artist creates works with tradition as the foundation.",
+      "romaji": "Kono aatisuto wa dentou o kiban toshite sakuhin o tsukurimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～を中心に",
+      "sentence": "このイベントは音楽を中心に楽しまれています。",
+      "translation": "This event is mainly enjoyed for its music.",
+      "translationEn": "This event is mainly enjoyed for its music.",
+      "romaji": "Kono ibento wa ongaku o chuushin ni tanoshimarete imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～を中心に",
+      "sentence": "彼の仕事は東京を中心に行われています。",
+      "translation": "His work is primarily conducted in and around Tokyo.",
+      "translationEn": "His work is primarily conducted in and around Tokyo.",
+      "romaji": "Kare no shigoto wa Toukyou o chuushin ni okonawarete imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～を中心に",
+      "sentence": "彼女は健康を中心に本を書いています。",
+      "translation": "She’s writing a book focusing on health.",
+      "translationEn": "She’s writing a book focusing on health.",
+      "romaji": "Kanojo wa kenkou o chuushin ni hon o kaite imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "～を中心に",
+      "sentence": "最近の研究は環境保護を中心に行われている。",
+      "translation": "Recent research is being carried out with a primary focus on environmental protection.",
+      "translationEn": "Recent research is being carried out with a primary focus on environmental protection.",
+      "romaji": "Saikin no kenkyuu wa kankyou hogo o chuushin ni okonawarete iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    }
+  ]
+}

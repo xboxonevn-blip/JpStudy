@@ -33,7 +33,7 @@ Widget _buildWidget({
         prompt: prompt,
         correctSentence: correctSentence,
         shuffledWords: shuffledWords,
-        onCheck: onCheck ?? (_, __) {},
+        onCheck: onCheck ?? (_, _) {},
         onReset: onReset ?? () {},
         feedback: feedback,
         explanation: explanation,
@@ -68,7 +68,7 @@ void main() {
       (tester) async {
     bool checkCalled = false;
     await tester.pumpWidget(
-      _buildWidget(onCheck: (_, __) => checkCalled = true),
+      _buildWidget(onCheck: (_, _) => checkCalled = true),
     );
     await _pump(tester);
 

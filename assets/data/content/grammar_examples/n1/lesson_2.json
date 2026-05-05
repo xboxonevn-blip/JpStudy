@@ -1,0 +1,452 @@
+{
+  "lessonId": 2,
+  "level": "N1",
+  "source": "Hanabira grammar JSON",
+  "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
+  "tags": [
+    "source-hanabira",
+    "n1-grammar-import"
+  ],
+  "examples": [
+    {
+      "grammarPoint": "A につけ B につけ",
+      "sentence": "彼には笑うにつけ泣くにつけ、とても魅力的だ。",
+      "translation": "He is very charming whether he’s laughing or crying.",
+      "translationEn": "He is very charming whether he’s laughing or crying.",
+      "romaji": "Kare ni wa warau ni tsuke naku ni tsuke, totemo miryokuteki da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "A につけ B につけ",
+      "sentence": "嬉しいにつけ悲しいにつけ、彼はいつも音楽を聴いている。",
+      "translation": "Whether he's happy or sad, he's always listening to music.",
+      "translationEn": "Whether he's happy or sad, he's always listening to music.",
+      "romaji": "Ureshii ni tsuke kanashii ni tsuke, kare wa itsumo ongaku o kiite iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "A につけ B につけ",
+      "sentence": "日中につけ夜間につけ、この景色は美しい。",
+      "translation": "This view is beautiful whether it's daytime or nighttime.",
+      "translationEn": "This view is beautiful whether it's daytime or nighttime.",
+      "romaji": "Nitchuu ni tsuke yakan ni tsuke, kono keishiki wa utsukushii.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "A につけ B につけ",
+      "sentence": "喜びにつけ悲しみにつけ、彼女はいつも私を支えてくれる。",
+      "translation": "Whether I’m joyful or sorrowful, she always supports me.",
+      "translationEn": "Whether I’m joyful or sorrowful, she always supports me.",
+      "romaji": "Yorokobi ni tsuke kanashimi ni tsuke, kanojo wa itsumo watashi o sasaete kureru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "A のやら B のやら",
+      "sentence": "彼が怒っているのやら、悲しいのやら、私には分からない。",
+      "translation": "I don't know whether he's angry or sad.",
+      "translationEn": "I don't know whether he's angry or sad.",
+      "romaji": "Kare ga okotte iru no yara, kanashii no yara, watashi ni wa wakaranai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "A のやら B のやら",
+      "sentence": "試験の結果が良いのやら悪いのやら、気になって仕方がない。",
+      "translation": "I can’t help worrying whether my exam results are good or bad.",
+      "translationEn": "I can’t help worrying whether my exam results are good or bad.",
+      "romaji": "Shiken no kekka ga yoi no yara warui no yara, ki ni natte shikata ga nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "A のやら B のやら",
+      "sentence": "彼女が私を好きなのやら嫌いなのやら、わからない。",
+      "translation": "I don’t know whether she likes me or hates me.",
+      "translationEn": "I don’t know whether she likes me or hates me.",
+      "romaji": "Kanojo ga watashi o suki na no yara kirai na no yara, wakaranai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "A のやら B のやら",
+      "sentence": "彼が本当に行くのやら行かないのやら、はっきりしない。",
+      "translation": "It’s unclear whether he will really go or not.",
+      "translationEn": "It’s unclear whether he will really go or not.",
+      "romaji": "Kare ga hontou ni iku no yara ikanai no yara, hakkiri shinai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun1 が Noun1 なら、 Noun2 も Noun2 だ",
+      "sentence": "鬼が鬼なら、人間も人間だ。",
+      "translation": "If demons are indeed demons, humans are likewise humans.",
+      "translationEn": "If demons are indeed demons, humans are likewise humans.",
+      "romaji": "Oni ga oni nara, ningen mo ningen da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun1 が Noun1 なら、 Noun2 も Noun2 だ",
+      "sentence": "彼が社長なら、私も社長だ。",
+      "translation": "If he is the president, then I'm the president too.",
+      "translationEn": "If he is the president, then I'm the president too.",
+      "romaji": "Kare ga shachou nara, watashi mo shachou da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun1 が Noun1 なら、 Noun2 も Noun2 だ",
+      "sentence": "貴様が戦士なら、俺も戦士だ。",
+      "translation": "If you're a warrior, then I'm a warrior as well.",
+      "translationEn": "If you're a warrior, then I'm a warrior as well.",
+      "romaji": "Kisama ga senshi nara, ore mo senshi da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun1 が Noun1 なら、 Noun2 も Noun2 だ",
+      "sentence": "ハムスターがペットなら、猫もペットだ。",
+      "translation": "If a hamster counts as a pet, then a cat is also a pet.",
+      "translationEn": "If a hamster counts as a pet, then a cat is also a pet.",
+      "romaji": "Hamusutā ga petto nara, neko mo petto da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun1 も Noun1 なら、Noun2 も Noun2 だ",
+      "sentence": "君も君なら、私も私だ。",
+      "translation": "If you are you, then I am also me.",
+      "translationEn": "If you are you, then I am also me.",
+      "romaji": "Kimi mo kimi nara, watashi mo watashi da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun1 も Noun1 なら、Noun2 も Noun2 だ",
+      "sentence": "夏も夏なら、冬も冬だ。",
+      "translation": "If it’s said that summer is summer, then winter is also winter.",
+      "translationEn": "If it’s said that summer is summer, then winter is also winter.",
+      "romaji": "Natsu mo natsu nara, fuyu mo fuyu da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun1 も Noun1 なら、Noun2 も Noun2 だ",
+      "sentence": "東京も東京なら、大阪も大阪だ。",
+      "translation": "If Tokyo is Tokyo, then Osaka is also Osaka (they each have their distinctive qualities).",
+      "translationEn": "If Tokyo is Tokyo, then Osaka is also Osaka (they each have their distinctive qualities).",
+      "romaji": "Toukyou mo toukyou nara, Oosaka mo Oosaka da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun1 も Noun1 なら、Noun2 も Noun2 だ",
+      "sentence": "犬も犬なら、猫も猫だ。",
+      "translation": "If dogs are dogs, then cats are also cats.",
+      "translationEn": "If dogs are dogs, then cats are also cats.",
+      "romaji": "Inu mo inu nara, neko mo neko da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun + あっての + Noun",
+      "sentence": "家族あっての私です。",
+      "translation": "I am who I am thanks to my family.",
+      "translationEn": "I am who I am thanks to my family.",
+      "romaji": "Kazoku atte no watashi desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun + あっての + Noun",
+      "sentence": "お客様あってのビジネスです。",
+      "translation": "A business is nothing without its customers.",
+      "translationEn": "A business is nothing without its customers.",
+      "romaji": "Okyakusama atte no bijinesu desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun + あっての + Noun",
+      "sentence": "練習あっての成功です。",
+      "translation": "Success is nothing without practice.",
+      "translationEn": "Success is nothing without practice.",
+      "romaji": "Renshuu atte no seikou desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun + あっての + Noun",
+      "sentence": "健康あっての仕事です。",
+      "translation": "Work is nothing without your health.",
+      "translationEn": "Work is nothing without your health.",
+      "romaji": "Kenkou atte no shigoto desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun かたがた",
+      "sentence": "東京へ出張のかたがた、友人に会いに行った。",
+      "translation": "While on a business trip to Tokyo, I also went to see a friend.",
+      "translationEn": "While on a business trip to Tokyo, I also went to see a friend.",
+      "romaji": "Toukyou e shucchou no kata gata, yuujin ni ai ni itta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun かたがた",
+      "sentence": "観光のかたがた、お土産を買いました。",
+      "translation": "While sightseeing, I bought some souvenirs.",
+      "translationEn": "While sightseeing, I bought some souvenirs.",
+      "romaji": "Kankou no kata gata, omiyage o kaimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun かたがた",
+      "sentence": "散歩のかたがた、ゴミを拾った。",
+      "translation": "While taking a walk, I also picked up trash.",
+      "translationEn": "While taking a walk, I also picked up trash.",
+      "romaji": "Sanpo no kata gata, gomi o hirotta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun かたがた",
+      "sentence": "学習のかたがた、音楽を聞いた。",
+      "translation": "While studying, I also listened to music.",
+      "translationEn": "While studying, I also listened to music.",
+      "romaji": "Gakushuu no kata gata, ongaku o kiita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun がてら",
+      "sentence": "散歩がてらに、近くの公園で花を摘みました。",
+      "translation": "While taking a walk, I picked some flowers in the nearby park.",
+      "translationEn": "While taking a walk, I picked some flowers in the nearby park.",
+      "romaji": "Sanpo gatera ni, chikaku no kouen de hana o tsumimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun がてら",
+      "sentence": "買い物がてら、友達に会いに行きました。",
+      "translation": "While I was out shopping, I went to see a friend.",
+      "translationEn": "While I was out shopping, I went to see a friend.",
+      "romaji": "Kaimono gatera, tomodachi ni ai ni ikimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun がてら",
+      "sentence": "彼女は旅行がてら、新しい言語を勉強しました。",
+      "translation": "She studied a new language while traveling.",
+      "translationEn": "She studied a new language while traveling.",
+      "romaji": "Kanojo wa ryokou gatera, atarashii gengo o benkyou shimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun がてら",
+      "sentence": "ドライブがてら、新しいアルバムを聞きました。",
+      "translation": "I listened to a new album while going for a drive.",
+      "translationEn": "I listened to a new album while going for a drive.",
+      "romaji": "Doraibu gatera, atarashii arubamu o kikimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun からある",
+      "sentence": "彼のコレクションは500個からある。",
+      "translation": "He has at least 500 items in his collection.",
+      "translationEn": "He has at least 500 items in his collection.",
+      "romaji": "Kare no korekushon wa gohyaku ko kara aru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun からある",
+      "sentence": "このビルは40階からある。",
+      "translation": "This building has at least 40 floors.",
+      "translationEn": "This building has at least 40 floors.",
+      "romaji": "Kono biru wa yonjuu kai kara aru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun からある",
+      "sentence": "彼の財産は10億円からある。",
+      "translation": "He has assets worth at least one billion yen.",
+      "translationEn": "He has assets worth at least one billion yen.",
+      "romaji": "Kare no zaisan wa juu oku en kara aru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun からある",
+      "sentence": "このマラソンは10kmからある。",
+      "translation": "This marathon is at least 10 kilometers long.",
+      "translationEn": "This marathon is at least 10 kilometers long.",
+      "romaji": "Kono marason wa juu kiro kara aru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun からする",
+      "sentence": "彼の態度からすると、彼はその計画に反対しているようだ。",
+      "translation": "Judging from his attitude, he seems to be against the plan.",
+      "translationEn": "Judging from his attitude, he seems to be against the plan.",
+      "romaji": "Kare no taido kara suru to, kare wa sono keikaku ni hantai shiteiru you da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun からする",
+      "sentence": "このレストランの雰囲気からすると、料理もすばらしいはずだ。",
+      "translation": "Judging from the atmosphere of this restaurant, the food must be wonderful.",
+      "translationEn": "Judging from the atmosphere of this restaurant, the food must be wonderful.",
+      "romaji": "Kono resutoran no fun'iki kara suru to, ryouri mo subarashii hazu da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun からする",
+      "sentence": "彼女の成績からすると、彼女は非常に勉強熱心な人でしょう。",
+      "translation": "Judging from her grades, she must be a very diligent student.",
+      "translationEn": "Judging from her grades, she must be a very diligent student.",
+      "romaji": "Kanojo no seiseki kara suru to, kanojo wa hijou ni benkyou nesshin na hito deshou.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun からする",
+      "sentence": "その会社の成長率からすると、将来的には大きな利益を得られるでしょう。",
+      "translation": "From the company's growth rate, it seems likely to gain substantial profits in the future.",
+      "translationEn": "From the company's growth rate, it seems likely to gain substantial profits in the future.",
+      "romaji": "Sono kaisha no seicho-ritsu kara suru to, shouraiteki ni wa ooki na rieki o erareru deshou.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun からの",
+      "sentence": "日本からの手紙を受け取りました。",
+      "translation": "I received a letter from Japan.",
+      "translationEn": "I received a letter from Japan.",
+      "romaji": "Nihon kara no tegami wo uketorimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun からの",
+      "sentence": "彼は東京からの旅行者です。",
+      "translation": "He is a traveler from Tokyo.",
+      "translationEn": "He is a traveler from Tokyo.",
+      "romaji": "Kare wa Tokyo kara no ryokousha desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun からの",
+      "sentence": "昨日、母からの電話がありました。",
+      "translation": "Yesterday, I got a call from my mother.",
+      "translationEn": "Yesterday, I got a call from my mother.",
+      "romaji": "Kinou, haha kara no denwa ga arimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    },
+    {
+      "grammarPoint": "Noun からの",
+      "sentence": "彼女は大学からの友人です。",
+      "translation": "She is a friend from college.",
+      "translationEn": "She is a friend from college.",
+      "romaji": "Kanojo wa daigaku kara no yuujin desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial"
+      ]
+    }
+  ]
+}

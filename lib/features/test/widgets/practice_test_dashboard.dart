@@ -35,6 +35,14 @@ class PracticeTestDashboard extends ConsumerWidget {
         color = Colors.teal;
         levelLabel = 'N3';
         break;
+      case StudyLevel.n2:
+        color = Colors.indigo;
+        levelLabel = 'N2';
+        break;
+      case StudyLevel.n1:
+        color = Colors.deepPurple;
+        levelLabel = 'N1';
+        break;
     }
 
     // Localization
@@ -87,8 +95,8 @@ class PracticeTestDashboard extends ConsumerWidget {
                 blurRadius: 8,
                 offset: const Offset(0, 4),
               ),
-              ],
-            ),
+            ],
+          ),
           padding: EdgeInsets.all(embedded ? 12 : 20),
           child: Row(
             children: [
