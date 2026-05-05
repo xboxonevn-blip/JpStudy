@@ -5,448 +5,549 @@
   "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
   "tags": [
     "source-hanabira",
-    "n1-grammar-import"
+    "n1-grammar-import",
+    "needs-human-review"
   ],
   "examples": [
+    {
+      "grammarPoint": "Verb ようか Verbるまいか",
+      "sentence": "彼に話そうか話すまいか、本当に迷っている。",
+      "translation": "I'm really unsure whether to talk to him or not.",
+      "translationEn": "Im really unsure whether to talk to him or not",
+      "romaji": "Kare ni hanasou ka hanasu mai ka, hontou ni mayotte iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Im really unsure whether to talk to him or not",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verb ようか Verbるまいか",
+      "sentence": "試験を受けようか受けまいか迷っています。",
+      "translation": "I'm wondering whether to take the exam or not.",
+      "translationEn": "Im wondering whether to take the exam or not",
+      "romaji": "Shiken o ukeyou ka ukemai ka mayotte imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Im wondering whether to take the exam or not",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verb ようか Verbるまいか",
+      "sentence": "あの人に謝ろうか謝るまいか考えています。",
+      "translation": "I'm considering whether to apologize to that person or not.",
+      "translationEn": "Im considering whether to apologize to that person or not",
+      "romaji": "Ano hito ni ayamarou ka ayamaru mai ka kangaete imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Im considering whether to apologize to that person or not",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verb ようか Verbるまいか",
+      "sentence": "進学しようかしまいか悩んでいる。",
+      "translation": "I'm worried about whether to continue my studies or not.",
+      "translationEn": "Im worried about whether to continue my studies or not",
+      "romaji": "Shingaku shiyou ka shimai ka nayande iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Im worried about whether to continue my studies or not",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verb ようが Verb るまいが",
+      "sentence": "彼が来ようが来るまいが、パーティーは始まります。",
+      "translation": "Whether he comes or not, the party will start.",
+      "translationEn": "Whether he comes or not, the party will start",
+      "romaji": "Kare ga koyou ga kurumai ga, paatii wa hajimarimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether he comes or not, the party will start",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verb ようが Verb るまいが",
+      "sentence": "勉強しようがしまいが、テストの結果は変わらない。",
+      "translation": "Whether you study or not, the test results won't change.",
+      "translationEn": "Whether you study or not, the test results wont change",
+      "romaji": "Benkyou shiyou ga shimai ga, tesuto no kekka wa kawaranai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether you study or not, the test results wont change",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verb ようが Verb るまいが",
+      "sentence": "雨が降ろうが降るまいが、ピクニックに行きます。",
+      "translation": "Whether it rains or not, we're going on a picnic.",
+      "translationEn": "Whether it rains or not, were going on a picnic",
+      "romaji": "Ame ga furou ga furumai ga, pikunikku ni ikimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether it rains or not, were going on a picnic",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verb ようが Verb るまいが",
+      "sentence": "暑かろうが寒かろうが、毎日ジョギングします。",
+      "translation": "Whether it's hot or cold, I jog every day.",
+      "translationEn": "Whether its hot or cold, I jog every day",
+      "romaji": "Atsukarou ga samukarou ga, mainichi jogingu shimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether its hot or cold, I jog every day",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verb ようがない",
+      "sentence": "電車が混んでいて、動きようがない。",
+      "translation": "The train is so crowded that I can't move.",
+      "translationEn": "The train is so crowded that I cant move",
+      "romaji": "Densha ga konde ite, ugoki you ga nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The train is so crowded that I cant move",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verb ようがない",
+      "sentence": "彼はとても早く走るので、追いつきようがない。",
+      "translation": "He runs so fast, there's no way I can catch up.",
+      "translationEn": "He runs so fast, theres no way I can catch up",
+      "romaji": "Kare wa totemo hayaku hashiru no de, oitsuki you ga nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He runs so fast, theres no way I can catch up",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verb ようがない",
+      "sentence": "私には理解しようがない。",
+      "translation": "There's no way for me to understand it.",
+      "translationEn": "Theres no way for me to understand it",
+      "romaji": "Watashi ni wa rikai shiyou ga nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Theres no way for me to understand it",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verb ようがない",
+      "sentence": "どうやっても、これを直しようがない。",
+      "translation": "No matter what I try, there's no way to fix this.",
+      "translationEn": "No matter what I try, theres no way to fix this",
+      "romaji": "Dou yatte mo, kore o naoshi you ga nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: No matter what I try, theres no way to fix this",
+      "translationViSource": "internal-en-example-draft"
+    },
     {
       "grammarPoint": "Verb ようと Verbる まいと",
       "sentence": "あなたが来ようと来るまいと、パーティーは予定通りに始まります。",
       "translation": "Whether you come or not, the party will start as scheduled.",
-      "translationEn": "Whether you come or not, the party will start as scheduled.",
+      "translationEn": "Whether you come or not, the party will start as scheduled",
       "romaji": "Anata ga koyou to kuru mai to, paatii wa yotei doori ni hajimarimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether you come or not, the party will start as scheduled",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ようと Verbる まいと",
       "sentence": "彼があそこに行こうと行くまいと、私たちは止めることができません。",
       "translation": "Whether he tries to go there or not, we can't stop him.",
-      "translationEn": "Whether he tries to go there or not, we can't stop him.",
+      "translationEn": "Whether he tries to go there or not, we cant stop him",
       "romaji": "Kare ga asoko ni ikou to iku mai to, watashitachi wa tomeru koto ga dekimasen.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether he tries to go there or not, we cant stop him",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ようと Verbる まいと",
       "sentence": "彼女が謝ろうと謝るまいと、事実は変わらない。",
       "translation": "Whether she apologizes or not, the fact won't change.",
-      "translationEn": "Whether she apologizes or not, the fact won't change.",
+      "translationEn": "Whether she apologizes or not, the fact wont change",
       "romaji": "Kanojo ga ayamarou to ayamaru mai to, jijitsu wa kawaranai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether she apologizes or not, the fact wont change",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ようと Verbる まいと",
       "sentence": "試験を受けようと受けるまいと、親として私はあなたを支えます。",
       "translation": "Whether you take the exam or not, I will support you as your parent.",
-      "translationEn": "Whether you take the exam or not, I will support you as your parent.",
+      "translationEn": "Whether you take the exam or not, I will support you as your parent",
       "romaji": "Shiken o ukeyou to ukeru mai to, oya to shite watashi wa anata o sasaemasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether you take the exam or not, I will support you as your parent",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ようにも",
       "sentence": "もう少し速く走ろうにも、足が痛くて無理だ。",
       "translation": "I'd like to run a bit faster, but I can’t because my leg hurts.",
-      "translationEn": "I'd like to run a bit faster, but I can’t because my leg hurts.",
+      "translationEn": "Id like to run a bit faster, but I can’t because my leg hurts",
       "romaji": "Mou sukoshi hayaku hashirou ni mo, ashi ga itakute muri da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Id like to run a bit faster, but I can’t because my leg hurts",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ようにも",
       "sentence": "彼に話そうにも、彼は私を無視している。",
       "translation": "I want to talk to him, but he's ignoring me.",
-      "translationEn": "I want to talk to him, but he's ignoring me.",
+      "translationEn": "I want to talk to him, but hes ignoring me",
       "romaji": "Kare ni hanasou ni mo, kare wa watashi o mushi shite iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I want to talk to him, but hes ignoring me",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ようにも",
       "sentence": "もっと勉強しようにも、時間がない。",
       "translation": "I want to study more, but I have no time.",
-      "translationEn": "I want to study more, but I have no time.",
+      "translationEn": "I want to study more, but I have no time",
       "romaji": "Motto benkyou shiyou ni mo, jikan ga nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I want to study more, but I have no time",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ようにも",
       "sentence": "彼女に謝ろうにも、彼女はもう怒っている。",
       "translation": "I would like to apologize to her, but she's already angry.",
-      "translationEn": "I would like to apologize to her, but she's already angry.",
+      "translationEn": "I would like to apologize to her, but shes already angry",
       "romaji": "Kanojo ni ayamarou ni mo, kanojo wa mou okotte iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I would like to apologize to her, but shes already angry",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ようにも Verb れない",
       "sentence": "彼を信じようにも信じられない証拠がある。",
       "translation": "Even if I want to believe him, there's evidence that prevents me from doing so.",
-      "translationEn": "Even if I want to believe him, there's evidence that prevents me from doing so.",
+      "translationEn": "Even if I want to believe him, theres evidence that prevents me from doing so",
       "romaji": "Kare o shinjiyou ni mo shinjirarenai shouko ga aru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Even if I want to believe him, theres evidence that prevents me from doing so",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ようにも Verb れない",
       "sentence": "早く出発しようにも車が故障してしまった。",
       "translation": "Even if I want to leave early, my car has broken down.",
-      "translationEn": "Even if I want to leave early, my car has broken down.",
+      "translationEn": "Even if I want to leave early, my car has broken down",
       "romaji": "Hayaku shuppatsu shiyou ni mo kuruma ga koshou shite shimatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Even if I want to leave early, my car has broken down",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ようにも Verb れない",
       "sentence": "彼に電話しようにも電話番号を知らない。",
       "translation": "I want to call him, but I don’t know his phone number.",
-      "translationEn": "I want to call him, but I don’t know his phone number.",
+      "translationEn": "I want to call him, but I don’t know his phone number",
       "romaji": "Kare ni denwa shiyou ni mo denwa bangou o shiranai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I want to call him, but I don’t know his phone number",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ようにも Verb れない",
       "sentence": "もっと勉強しようにも時間がない。",
       "translation": "I want to study more, but there is no time.",
-      "translationEn": "I want to study more, but there is no time.",
+      "translationEn": "I want to study more, but there is no time",
       "romaji": "Motto benkyou shiyou ni mo jikan ga nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I want to study more, but there is no time",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ようもない",
       "sentence": "この問題は解きようもない。",
       "translation": "It's impossible to solve this problem.",
-      "translationEn": "It's impossible to solve this problem.",
+      "translationEn": "Its impossible to solve this problem",
       "romaji": "Kono mondai wa toki you mo nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its impossible to solve this problem",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ようもない",
       "sentence": "これ以上我慢しようもない。",
       "translation": "It's impossible to endure any further.",
-      "translationEn": "It's impossible to endure any further.",
+      "translationEn": "Its impossible to endure any further",
       "romaji": "Kore ijou gaman shiyou mo nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its impossible to endure any further",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ようもない",
       "sentence": "彼には通じようもない。",
       "translation": "There's no way to get through to him.",
-      "translationEn": "There's no way to get through to him.",
+      "translationEn": "Theres no way to get through to him",
       "romaji": "Kare ni wa tsuujiyou mo nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Theres no way to get through to him",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ようもない",
       "sentence": "その薬は飲みようもない。",
       "translation": "It's impossible to take (swallow) that medicine.",
-      "translationEn": "It's impossible to take (swallow) that medicine.",
+      "translationEn": "Its impossible to take (swallow) that medicine",
       "romaji": "Sono kusuri wa nomiyou mo nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its impossible to take (swallow) that medicine",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる がままに",
       "sentence": "窓を開けるがままにしておいたら、風が部屋に入ってきました。",
       "translation": "I left the window open as it was, and the wind came into the room.",
-      "translationEn": "I left the window open as it was, and the wind came into the room.",
+      "translationEn": "I left the window open as it was, and the wind came into the room",
       "romaji": "Mado o akeru ga mama ni shite oitara, kaze ga heya ni haitte kimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I left the window open as it was, and the wind came into the room",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる がままに",
       "sentence": "彼女は涙を流すがままに、ただ黙って座っていた。",
       "translation": "She just sat quietly, letting her tears flow.",
-      "translationEn": "She just sat quietly, letting her tears flow.",
+      "translationEn": "She just sat quietly, letting her tears flow",
       "romaji": "Kanojo wa namida o nagasu ga mama ni, tada damatte suwatte ita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She just sat quietly, letting her tears flow",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる がままに",
       "sentence": "子供たちは笑うがままに、公園で走り回っていた。",
       "translation": "The children ran around the park, laughing freely as they pleased.",
-      "translationEn": "The children ran around the park, laughing freely as they pleased.",
+      "translationEn": "The children ran around the park, laughing freely as they pleased",
       "romaji": "Kodomo-tachi wa warau ga mama ni, kouen de hashirimawatte ita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The children ran around the park, laughing freely as they pleased",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる がままに",
       "sentence": "日が沈むがままに、私たちは海辺で話し続けました。",
       "translation": "We kept talking by the sea, letting the sun set as it would.",
-      "translationEn": "We kept talking by the sea, letting the sun set as it would.",
+      "translationEn": "We kept talking by the sea, letting the sun set as it would",
       "romaji": "Hi ga shizumu ga mama ni, watashitachi wa umibe de hanashi tsudzukemashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We kept talking by the sea, letting the sun set as it would",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる が早いか",
       "sentence": "部屋に入るが早いか、彼はテレビをつけた。",
       "translation": "No sooner had he entered the room than he turned on the TV.",
-      "translationEn": "No sooner had he entered the room than he turned on the TV.",
+      "translationEn": "No sooner had he entered the room than he turned on the TV",
       "romaji": "Heya ni hairu ga hayai ka, kare wa terebi o tsuketa.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: No sooner had he entered the room than he turned on the TV",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる が早いか",
       "sentence": "電車に乗るが早いか、私はすぐに眠ってしまった。",
       "translation": "As soon as I got on the train, I immediately fell asleep.",
-      "translationEn": "As soon as I got on the train, I immediately fell asleep.",
+      "translationEn": "As soon as I got on the train, I immediately fell asleep",
       "romaji": "Densha ni noru ga hayai ka, watashi wa sugu ni nemutte shimatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As soon as I got on the train, I immediately fell asleep",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる が早いか",
       "sentence": "彼女が見るが早いか、すぐに泣き始めた。",
       "translation": "The moment she looked, she began to cry.",
-      "translationEn": "The moment she looked, she began to cry.",
+      "translationEn": "The moment she looked, she began to cry",
       "romaji": "Kanojo ga miru ga hayai ka, sugu ni naki hajimeta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The moment she looked, she began to cry",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる が早いか",
       "sentence": "給料をもらうが早いか、全て使い果たしてしまった。",
       "translation": "No sooner had I received my salary than I spent it all.",
-      "translationEn": "No sooner had I received my salary than I spent it all.",
+      "translationEn": "No sooner had I received my salary than I spent it all",
       "romaji": "Kyuuryou o morau ga hayai ka, subete tsukaihatashite shimatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verbる くらいなら",
-      "sentence": "一人で行くくらいなら、家にいるほうがましです。",
-      "translation": "I'd rather stay at home than go alone.",
-      "translationEn": "I'd rather stay at home than go alone.",
-      "romaji": "Hitori de iku kurai nara, ie ni iru hou ga mashi desu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verbる くらいなら",
-      "sentence": "負けるくらいなら、試合をしないほうがいい。",
-      "translation": "Rather than lose, it's better not to compete.",
-      "translationEn": "Rather than lose, it's better not to compete.",
-      "romaji": "Makeru kurai nara, shiai o shinai hou ga ii.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verbる くらいなら",
-      "sentence": "遅刻するくらいなら、一日休んだほうがいい。",
-      "translation": "It's better to take a day off than to be late.",
-      "translationEn": "It's better to take a day off than to be late.",
-      "romaji": "Chikoku suru kurai nara, ichinichi yasunda hou ga ii.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verbる くらいなら",
-      "sentence": "痛い目に遭うくらいなら、そのリスクは避けます。",
-      "translation": "I'd rather avoid that risk than suffer the consequences.",
-      "translationEn": "I'd rather avoid that risk than suffer the consequences.",
-      "romaji": "Itai me ni au kurai nara, sono risuku wa sakemasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verbる こと なし に",
-      "sentence": "試験を勉強することなしに、合格しました。",
-      "translation": "I passed the exam without studying.",
-      "translationEn": "I passed the exam without studying.",
-      "romaji": "Shiken o benkyou suru koto nashi ni, goukaku shimashita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verbる こと なし に",
-      "sentence": "試着することなしに、服を買いました。",
-      "translation": "I bought the clothes without trying them on.",
-      "translationEn": "I bought the clothes without trying them on.",
-      "romaji": "Shichaku suru koto nashi ni, fuku o kaimashita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verbる こと なし に",
-      "sentence": "彼は働くことなしに生活しています。",
-      "translation": "He is living without working.",
-      "translationEn": "He is living without working.",
-      "romaji": "Kare wa hataraku koto nashi ni seikatsu shite imasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verbる こと なし に",
-      "sentence": "手続きをすることなしに、退職しました。",
-      "translation": "I retired without going through any procedures.",
-      "translationEn": "I retired without going through any procedures.",
-      "romaji": "Tetsuzuki o suru koto nashi ni, taishoku shimashita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verbる ことのないように",
-      "sentence": "車をなくすことのないように、駐車場で必ずロックしましょう。",
-      "translation": "Lock your car in the parking lot so you don't lose it.",
-      "translationEn": "Lock your car in the parking lot so you don't lose it.",
-      "romaji": "Kuruma o nakusu koto no nai you ni, chuushajou de kanarazu rokku shimashou.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verbる ことのないように",
-      "sentence": "風邪を引くことのないように、手をよく洗いましょう。",
-      "translation": "Wash your hands well so you don't catch a cold.",
-      "translationEn": "Wash your hands well so you don't catch a cold.",
-      "romaji": "Kaze o hiku koto no nai you ni, te o yoku araimashou.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verbる ことのないように",
-      "sentence": "試験に落ちることのないように、毎日勉強しましょう。",
-      "translation": "Study every day so you don't fail the exam.",
-      "translationEn": "Study every day so you don't fail the exam.",
-      "romaji": "Shiken ni ochiru koto no nai you ni, mainichi benkyou shimashou.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verbる ことのないように",
-      "sentence": "間違いをすることのないように、仕事を慎重に行いましょう。",
-      "translation": "Let's work carefully to avoid making mistakes.",
-      "translationEn": "Let's work carefully to avoid making mistakes.",
-      "romaji": "Machigai o suru koto no nai you ni, shigoto o shinchou ni okonaimashou.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verbる ときりがない",
-      "sentence": "彼の悪口を言うときりがない。",
-      "translation": "If we start talking about his faults, there's no end.",
-      "translationEn": "If we start talking about his faults, there's no end.",
-      "romaji": "Kare no waruguchi o iu to kiri ga nai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verbる ときりがない",
-      "sentence": "その問題を考えるときりがない。",
-      "translation": "If you start thinking about that problem, there's no end.",
-      "translationEn": "If you start thinking about that problem, there's no end.",
-      "romaji": "Sono mondai o kangaeru to kiri ga nai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verbる ときりがない",
-      "sentence": "彼女の美点を挙げるときりがない。",
-      "translation": "If you start listing her virtues, there would be no end.",
-      "translationEn": "If you start listing her virtues, there would be no end.",
-      "romaji": "Kanojo no biten o ageru to kiri ga nai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verbる ときりがない",
-      "sentence": "この世でおいしいものを食べるときりがない。",
-      "translation": "If you start eating all the delicious things in this world, there's no end.",
-      "translationEn": "If you start eating all the delicious things in this world, there's no end.",
-      "romaji": "Kono yo de oishii mono o taberu to kiri ga nai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: No sooner had I received my salary than I spent it all",
+      "translationViSource": "internal-en-example-draft"
     }
   ]
 }

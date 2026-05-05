@@ -1,330 +1,417 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N2",
   "lessonId": 13,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n2_l13_k001",
+      "kanjiId": "n2_jlpt_vocab_k097",
       "lessonId": 13,
       "level": "N2",
-      "character": "呠",
-      "strokeCount": 6,
-      "labels": {
-        "hanViet": "HAN 97",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "呠 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on97"
-        ],
-        "kunyomi": [
-          "kun97"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 呠 qua van canh N2.",
-        "en": "Remember 呠 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 97",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 97",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l13_k002",
-      "lessonId": 13,
-      "level": "N2",
-      "character": "呱",
-      "strokeCount": 7,
-      "labels": {
-        "hanViet": "HAN 98",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "呱 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on98"
-        ],
-        "kunyomi": [
-          "kun98"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 呱 qua van canh N2.",
-        "en": "Remember 呱 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 98",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 98",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l13_k003",
-      "lessonId": 13,
-      "level": "N2",
-      "character": "咂",
-      "strokeCount": 8,
-      "labels": {
-        "hanViet": "HAN 99",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "咂 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on99"
-        ],
-        "kunyomi": [
-          "kun99"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 咂 qua van canh N2.",
-        "en": "Remember 咂 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 99",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 99",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l13_k004",
-      "lessonId": 13,
-      "level": "N2",
-      "character": "咓",
+      "character": "持",
       "strokeCount": 9,
       "labels": {
-        "hanViet": "HAN 100",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "咓 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Trì",
+        "meaningVi": "to take (be in) charge of",
+        "meaningViDisplay": "持 (to take (be in) charge of)",
+        "meaningEn": "to take (be in) charge of"
       },
       "readings": {
-        "onyomi": [
-          "on100"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun100"
+          "うけもつ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 咓 qua van canh N2.",
-        "en": "Remember 咓 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 受け持つ (to take (be in) charge of).",
+        "en": "Appears in JLPT N2 vocabulary: 受け持つ (to take (be in) charge of)."
       },
       "decomposition": {
-        "hanViet": "HAN 100",
-        "structure": "standalone",
+        "hanViet": "Trì",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 100",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Tri",
+        "meaningViNoAccent": "to take (be in) charge of",
+        "meaningEnNoAccent": "to take (be in) charge of"
       },
+      "examples": [
+        {
+          "word": "受け持つ",
+          "reading": "うけもつ",
+          "meaning": "to take (be in) charge of"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l13_k005",
+      "kanjiId": "n2_jlpt_vocab_k098",
       "lessonId": 13,
       "level": "N2",
-      "character": "咤",
-      "strokeCount": 10,
+      "character": "薄",
+      "strokeCount": 16,
       "labels": {
-        "hanViet": "HAN 101",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "咤 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "dim, gloomy",
+        "meaningViDisplay": "薄 (dim, gloomy)",
+        "meaningEn": "dim, gloomy"
       },
       "readings": {
-        "onyomi": [
-          "on101"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun101"
+          "うすぐらい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 咤 qua van canh N2.",
-        "en": "Remember 咤 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 薄暗い (dim, gloomy).",
+        "en": "Appears in JLPT N2 vocabulary: 薄暗い (dim, gloomy)."
       },
       "decomposition": {
-        "hanViet": "HAN 101",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 101",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "dim, gloomy",
+        "meaningEnNoAccent": "dim, gloomy"
       },
+      "examples": [
+        {
+          "word": "薄暗い",
+          "reading": "うすぐらい",
+          "meaning": "dim, gloomy"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l13_k006",
+      "kanjiId": "n2_jlpt_vocab_k099",
       "lessonId": 13,
       "level": "N2",
-      "character": "咵",
-      "strokeCount": 11,
-      "labels": {
-        "hanViet": "HAN 102",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "咵 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on102"
-        ],
-        "kunyomi": [
-          "kun102"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 咵 qua van canh N2.",
-        "en": "Remember 咵 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 102",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 102",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l13_k007",
-      "lessonId": 13,
-      "level": "N2",
-      "character": "哆",
-      "strokeCount": 12,
-      "labels": {
-        "hanViet": "HAN 103",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "哆 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on103"
-        ],
-        "kunyomi": [
-          "kun103"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 哆 qua van canh N2.",
-        "en": "Remember 哆 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 103",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 103",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l13_k008",
-      "lessonId": 13,
-      "level": "N2",
-      "character": "哗",
+      "character": "暗",
       "strokeCount": 13,
       "labels": {
-        "hanViet": "HAN 104",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "哗 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Ám",
+        "meaningVi": "dim, gloomy",
+        "meaningViDisplay": "暗 (dim, gloomy)",
+        "meaningEn": "dim, gloomy"
       },
       "readings": {
-        "onyomi": [
-          "on104"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun104"
+          "うすぐらい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 哗 qua van canh N2.",
-        "en": "Remember 哗 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 薄暗い (dim, gloomy).",
+        "en": "Appears in JLPT N2 vocabulary: 薄暗い (dim, gloomy)."
       },
       "decomposition": {
-        "hanViet": "HAN 104",
-        "structure": "standalone",
+        "hanViet": "Ám",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 104",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Am",
+        "meaningViNoAccent": "dim, gloomy",
+        "meaningEnNoAccent": "dim, gloomy"
       },
+      "examples": [
+        {
+          "word": "薄暗い",
+          "reading": "うすぐらい",
+          "meaning": "dim, gloomy"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k100",
+      "lessonId": 13,
+      "level": "N2",
+      "character": "打",
+      "strokeCount": 5,
+      "labels": {
+        "hanViet": "Đả",
+        "meaningVi": "business meeting, previous arrangement, appointment",
+        "meaningViDisplay": "打 (business meeting, previous arrangement, appointment)",
+        "meaningEn": "business meeting, previous arrangement, appointment"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "うちあわせ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 打合せ (business meeting, previous arrangement, appointment).",
+        "en": "Appears in JLPT N2 vocabulary: 打合せ (business meeting, previous arrangement, appointment)."
+      },
+      "decomposition": {
+        "hanViet": "Đả",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Đa",
+        "meaningViNoAccent": "business meeting, previous arrangement, appointment",
+        "meaningEnNoAccent": "business meeting, previous arrangement, appointment"
+      },
+      "examples": [
+        {
+          "word": "打合せ",
+          "reading": "うちあわせ",
+          "meaning": "business meeting, previous arrangement, appointment"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k101",
+      "lessonId": 13,
+      "level": "N2",
+      "character": "合",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Hợp",
+        "meaningVi": "business meeting, previous arrangement, appointment",
+        "meaningViDisplay": "合 (business meeting, previous arrangement, appointment)",
+        "meaningEn": "business meeting, previous arrangement, appointment"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "うちあわせ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 打合せ (business meeting, previous arrangement, appointment).",
+        "en": "Appears in JLPT N2 vocabulary: 打合せ (business meeting, previous arrangement, appointment)."
+      },
+      "decomposition": {
+        "hanViet": "Hợp",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Hop",
+        "meaningViNoAccent": "business meeting, previous arrangement, appointment",
+        "meaningEnNoAccent": "business meeting, previous arrangement, appointment"
+      },
+      "examples": [
+        {
+          "word": "打合せ",
+          "reading": "うちあわせ",
+          "meaning": "business meeting, previous arrangement, appointment"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k102",
+      "lessonId": 13,
+      "level": "N2",
+      "character": "消",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Tiêu",
+        "meaningVi": "to deny, to negate, to contradict",
+        "meaningViDisplay": "消 (to deny, to negate, to contradict)",
+        "meaningEn": "to deny, to negate, to contradict"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "うちけす"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 打ち消す (to deny, to negate, to contradict).",
+        "en": "Appears in JLPT N2 vocabulary: 打ち消す (to deny, to negate, to contradict)."
+      },
+      "decomposition": {
+        "hanViet": "Tiêu",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Tieu",
+        "meaningViNoAccent": "to deny, to negate, to contradict",
+        "meaningEnNoAccent": "to deny, to negate, to contradict"
+      },
+      "examples": [
+        {
+          "word": "打ち消す",
+          "reading": "うちけす",
+          "meaning": "to deny, to negate, to contradict"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k103",
+      "lessonId": 13,
+      "level": "N2",
+      "character": "討",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Thảo",
+        "meaningVi": "to attack, to avenge",
+        "meaningViDisplay": "討 (to attack, to avenge)",
+        "meaningEn": "to attack, to avenge"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "うつ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 討つ (to attack, to avenge).",
+        "en": "Appears in JLPT N2 vocabulary: 討つ (to attack, to avenge)."
+      },
+      "decomposition": {
+        "hanViet": "Thảo",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Thao",
+        "meaningViNoAccent": "to attack, to avenge",
+        "meaningEnNoAccent": "to attack, to avenge"
+      },
+      "examples": [
+        {
+          "word": "討つ",
+          "reading": "うつ",
+          "meaning": "to attack, to avenge"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k104",
+      "lessonId": 13,
+      "level": "N2",
+      "character": "映",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Ánh",
+        "meaningVi": "to project, to reflect, to cast (shadow)",
+        "meaningViDisplay": "映 (to project, to reflect, to cast (shadow))",
+        "meaningEn": "to project, to reflect, to cast (shadow)"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "うつす"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 映す (to project, to reflect, to cast (shadow)).",
+        "en": "Appears in JLPT N2 vocabulary: 映す (to project, to reflect, to cast (shadow))."
+      },
+      "decomposition": {
+        "hanViet": "Ánh",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Anh",
+        "meaningViNoAccent": "to project, to reflect, to cast (shadow)",
+        "meaningEnNoAccent": "to project, to reflect, to cast (shadow)"
+      },
+      "examples": [
+        {
+          "word": "映す",
+          "reading": "うつす",
+          "meaning": "to project, to reflect, to cast (shadow)"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

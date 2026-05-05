@@ -1,330 +1,417 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N1",
   "lessonId": 15,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n1_l15_k001",
+      "kanjiId": "n1_jlpt_vocab_k113",
       "lessonId": 15,
       "level": "N1",
-      "character": "乨",
-      "strokeCount": 10,
+      "character": "否",
+      "strokeCount": 7,
       "labels": {
-        "hanViet": "HAN 113",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "乨 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Bĩ",
+        "meaningVi": "no, nay, yes, well",
+        "meaningViDisplay": "否 (no, nay, yes, well)",
+        "meaningEn": "no, nay, yes, well"
       },
       "readings": {
-        "onyomi": [
-          "on113"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun113"
+          "いいえ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 乨 qua van canh N1.",
-        "en": "Remember 乨 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 否 (no, nay, yes, well).",
+        "en": "Appears in JLPT N1 vocabulary: 否 (no, nay, yes, well)."
       },
       "decomposition": {
-        "hanViet": "HAN 113",
-        "structure": "standalone",
+        "hanViet": "Bĩ",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 113",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Bi",
+        "meaningViNoAccent": "no, nay, yes, well",
+        "meaningEnNoAccent": "no, nay, yes, well"
       },
+      "examples": [
+        {
+          "word": "否",
+          "reading": "いいえ",
+          "meaning": "no, nay, yes, well"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l15_k002",
+      "kanjiId": "n1_jlpt_vocab_k114",
       "lessonId": 15,
       "level": "N1",
-      "character": "乹",
-      "strokeCount": 11,
+      "character": "加",
+      "strokeCount": 5,
       "labels": {
-        "hanViet": "HAN 114",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "乹 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Gia",
+        "meaningVi": "moderate, right, random, not thorough, vague, irresponsible, halfhearted",
+        "meaningViDisplay": "加 (moderate, right, random, not thorough, vague, irresponsible, halfhearted)",
+        "meaningEn": "moderate, right, random, not thorough, vague, irresponsible, halfhearted"
       },
       "readings": {
-        "onyomi": [
-          "on114"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun114"
+          "いいかげん"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 乹 qua van canh N1.",
-        "en": "Remember 乹 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: いい加減 (moderate, right, random, not thorough, vague, irresponsible, halfhearted).",
+        "en": "Appears in JLPT N1 vocabulary: いい加減 (moderate, right, random, not thorough, vague, irresponsible, halfhearted)."
       },
       "decomposition": {
-        "hanViet": "HAN 114",
-        "structure": "standalone",
+        "hanViet": "Gia",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 114",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Gia",
+        "meaningViNoAccent": "moderate, right, random, not thorough, vague, irresponsible, halfhearted",
+        "meaningEnNoAccent": "moderate, right, random, not thorough, vague, irresponsible, halfhearted"
       },
+      "examples": [
+        {
+          "word": "いい加減",
+          "reading": "いいかげん",
+          "meaning": "moderate, right, random, not thorough, vague, irresponsible, halfhearted"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l15_k003",
+      "kanjiId": "n1_jlpt_vocab_k115",
       "lessonId": 15,
       "level": "N1",
-      "character": "亊",
+      "character": "減",
       "strokeCount": 12,
       "labels": {
-        "hanViet": "HAN 115",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "亊 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Giảm",
+        "meaningVi": "moderate, right, random, not thorough, vague, irresponsible, halfhearted",
+        "meaningViDisplay": "減 (moderate, right, random, not thorough, vague, irresponsible, halfhearted)",
+        "meaningEn": "moderate, right, random, not thorough, vague, irresponsible, halfhearted"
       },
       "readings": {
-        "onyomi": [
-          "on115"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun115"
+          "いいかげん"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 亊 qua van canh N1.",
-        "en": "Remember 亊 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: いい加減 (moderate, right, random, not thorough, vague, irresponsible, halfhearted).",
+        "en": "Appears in JLPT N1 vocabulary: いい加減 (moderate, right, random, not thorough, vague, irresponsible, halfhearted)."
       },
       "decomposition": {
-        "hanViet": "HAN 115",
-        "structure": "standalone",
+        "hanViet": "Giảm",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 115",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Giam",
+        "meaningViNoAccent": "moderate, right, random, not thorough, vague, irresponsible, halfhearted",
+        "meaningEnNoAccent": "moderate, right, random, not thorough, vague, irresponsible, halfhearted"
       },
+      "examples": [
+        {
+          "word": "いい加減",
+          "reading": "いいかげん",
+          "meaning": "moderate, right, random, not thorough, vague, irresponsible, halfhearted"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l15_k004",
+      "kanjiId": "n1_jlpt_vocab_k116",
       "lessonId": 15,
       "level": "N1",
-      "character": "些",
-      "strokeCount": 13,
+      "character": "言",
+      "strokeCount": 7,
       "labels": {
-        "hanViet": "HAN 116",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "些 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Ngôn",
+        "meaningVi": "excuse, explanation",
+        "meaningViDisplay": "言 (excuse, explanation)",
+        "meaningEn": "excuse, explanation"
       },
       "readings": {
-        "onyomi": [
-          "on116"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun116"
+          "いいわけ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 些 qua van canh N1.",
-        "en": "Remember 些 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 言い訳 (excuse, explanation).",
+        "en": "Appears in JLPT N1 vocabulary: 言い訳 (excuse, explanation)."
       },
       "decomposition": {
-        "hanViet": "HAN 116",
-        "structure": "standalone",
+        "hanViet": "Ngôn",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 116",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Ngon",
+        "meaningViNoAccent": "excuse, explanation",
+        "meaningEnNoAccent": "excuse, explanation"
       },
+      "examples": [
+        {
+          "word": "言い訳",
+          "reading": "いいわけ",
+          "meaning": "excuse, explanation"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l15_k005",
+      "kanjiId": "n1_jlpt_vocab_k117",
       "lessonId": 15,
       "level": "N1",
-      "character": "京",
-      "strokeCount": 14,
+      "character": "訳",
+      "strokeCount": 11,
       "labels": {
-        "hanViet": "HAN 117",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "京 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": null,
+        "meaningVi": "excuse, explanation",
+        "meaningViDisplay": "訳 (excuse, explanation)",
+        "meaningEn": "excuse, explanation"
       },
       "readings": {
-        "onyomi": [
-          "on117"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun117"
+          "いいわけ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 京 qua van canh N1.",
-        "en": "Remember 京 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 言い訳 (excuse, explanation).",
+        "en": "Appears in JLPT N1 vocabulary: 言い訳 (excuse, explanation)."
       },
       "decomposition": {
-        "hanViet": "HAN 117",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 117",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "excuse, explanation",
+        "meaningEnNoAccent": "excuse, explanation"
       },
+      "examples": [
+        {
+          "word": "言い訳",
+          "reading": "いいわけ",
+          "meaning": "excuse, explanation"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n1_l15_k006",
+      "kanjiId": "n1_jlpt_vocab_k118",
       "lessonId": 15,
       "level": "N1",
-      "character": "亽",
-      "strokeCount": 15,
+      "character": "家",
+      "strokeCount": 10,
       "labels": {
-        "hanViet": "HAN 118",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "亽 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Gia",
+        "meaningVi": "running away from home, leaving home",
+        "meaningViDisplay": "家 (running away from home, leaving home)",
+        "meaningEn": "running away from home, leaving home"
       },
       "readings": {
-        "onyomi": [
-          "on118"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun118"
+          "いえで"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 亽 qua van canh N1.",
-        "en": "Remember 亽 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 家出 (running away from home, leaving home).",
+        "en": "Appears in JLPT N1 vocabulary: 家出 (running away from home, leaving home)."
       },
       "decomposition": {
-        "hanViet": "HAN 118",
-        "structure": "standalone",
+        "hanViet": "Gia",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 118",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Gia",
+        "meaningViNoAccent": "running away from home, leaving home",
+        "meaningEnNoAccent": "running away from home, leaving home"
       },
+      "examples": [
+        {
+          "word": "家出",
+          "reading": "いえで",
+          "meaning": "running away from home, leaving home"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l15_k007",
+      "kanjiId": "n1_jlpt_vocab_k119",
       "lessonId": 15,
       "level": "N1",
-      "character": "从",
-      "strokeCount": 16,
+      "character": "出",
+      "strokeCount": 5,
       "labels": {
-        "hanViet": "HAN 119",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "从 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Xuất",
+        "meaningVi": "running away from home, leaving home",
+        "meaningViDisplay": "出 (running away from home, leaving home)",
+        "meaningEn": "running away from home, leaving home"
       },
       "readings": {
-        "onyomi": [
-          "on119"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun119"
+          "いえで"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 从 qua van canh N1.",
-        "en": "Remember 从 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 家出 (running away from home, leaving home).",
+        "en": "Appears in JLPT N1 vocabulary: 家出 (running away from home, leaving home)."
       },
       "decomposition": {
-        "hanViet": "HAN 119",
-        "structure": "standalone",
+        "hanViet": "Xuất",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 119",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Xuat",
+        "meaningViNoAccent": "running away from home, leaving home",
+        "meaningEnNoAccent": "running away from home, leaving home"
       },
+      "examples": [
+        {
+          "word": "家出",
+          "reading": "いえで",
+          "meaning": "running away from home, leaving home"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l15_k008",
+      "kanjiId": "n1_jlpt_vocab_k120",
       "lessonId": 15,
       "level": "N1",
-      "character": "仟",
-      "strokeCount": 17,
+      "character": "主",
+      "strokeCount": 5,
       "labels": {
-        "hanViet": "HAN 120",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "仟 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Chúa",
+        "meaningVi": "landlord",
+        "meaningViDisplay": "主 (landlord)",
+        "meaningEn": "landlord"
       },
       "readings": {
-        "onyomi": [
-          "on120"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun120"
+          "いえぬし"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 仟 qua van canh N1.",
-        "en": "Remember 仟 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 家主 (landlord).",
+        "en": "Appears in JLPT N1 vocabulary: 家主 (landlord)."
       },
       "decomposition": {
-        "hanViet": "HAN 120",
-        "structure": "standalone",
+        "hanViet": "Chúa",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 120",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Chua",
+        "meaningViNoAccent": "landlord",
+        "meaningEnNoAccent": "landlord"
       },
+      "examples": [
+        {
+          "word": "家主",
+          "reading": "いえぬし",
+          "meaning": "landlord"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

@@ -1,330 +1,415 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N2",
   "lessonId": 7,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n2_l07_k001",
+      "kanjiId": "n2_jlpt_vocab_k049",
       "lessonId": 7,
       "level": "N2",
-      "character": "儰",
-      "strokeCount": 6,
-      "labels": {
-        "hanViet": "HAN 49",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "儰 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on49"
-        ],
-        "kunyomi": [
-          "kun49"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 儰 qua van canh N2.",
-        "en": "Remember 儰 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 49",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 49",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l07_k002",
-      "lessonId": 7,
-      "level": "N2",
-      "character": "允",
-      "strokeCount": 7,
-      "labels": {
-        "hanViet": "HAN 50",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "允 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on50"
-        ],
-        "kunyomi": [
-          "kun50"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 允 qua van canh N2.",
-        "en": "Remember 允 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 50",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 50",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l07_k003",
-      "lessonId": 7,
-      "level": "N2",
-      "character": "兒",
+      "character": "育",
       "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 51",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "兒 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Dục",
+        "meaningVi": "childcare, nursing, upbringing",
+        "meaningViDisplay": "育 (childcare, nursing, upbringing)",
+        "meaningEn": "childcare, nursing, upbringing"
       },
       "readings": {
-        "onyomi": [
-          "on51"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun51"
+          "いくじ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 兒 qua van canh N2.",
-        "en": "Remember 兒 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 育児 (childcare, nursing, upbringing).",
+        "en": "Appears in JLPT N2 vocabulary: 育児 (childcare, nursing, upbringing)."
       },
       "decomposition": {
-        "hanViet": "HAN 51",
-        "structure": "standalone",
+        "hanViet": "Dục",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 51",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Duc",
+        "meaningViNoAccent": "childcare, nursing, upbringing",
+        "meaningEnNoAccent": "childcare, nursing, upbringing"
       },
+      "examples": [
+        {
+          "word": "育児",
+          "reading": "いくじ",
+          "meaning": "childcare, nursing, upbringing"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l07_k004",
+      "kanjiId": "n2_jlpt_vocab_k050",
       "lessonId": 7,
       "level": "N2",
-      "character": "兣",
-      "strokeCount": 9,
+      "character": "児",
+      "strokeCount": 7,
       "labels": {
-        "hanViet": "HAN 52",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "兣 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "childcare, nursing, upbringing",
+        "meaningViDisplay": "児 (childcare, nursing, upbringing)",
+        "meaningEn": "childcare, nursing, upbringing"
       },
       "readings": {
-        "onyomi": [
-          "on52"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun52"
+          "いくじ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 兣 qua van canh N2.",
-        "en": "Remember 兣 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 育児 (childcare, nursing, upbringing).",
+        "en": "Appears in JLPT N2 vocabulary: 育児 (childcare, nursing, upbringing)."
       },
       "decomposition": {
-        "hanViet": "HAN 52",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 52",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "childcare, nursing, upbringing",
+        "meaningEnNoAccent": "childcare, nursing, upbringing"
       },
+      "examples": [
+        {
+          "word": "育児",
+          "reading": "いくじ",
+          "meaning": "childcare, nursing, upbringing"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l07_k005",
+      "kanjiId": "n2_jlpt_vocab_k051",
       "lessonId": 7,
       "level": "N2",
-      "character": "兴",
-      "strokeCount": 10,
-      "labels": {
-        "hanViet": "HAN 53",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "兴 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on53"
-        ],
-        "kunyomi": [
-          "kun53"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 兴 qua van canh N2.",
-        "en": "Remember 兴 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 53",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 53",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l07_k006",
-      "lessonId": 7,
-      "level": "N2",
-      "character": "内",
-      "strokeCount": 11,
-      "labels": {
-        "hanViet": "HAN 54",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "内 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on54"
-        ],
-        "kunyomi": [
-          "kun54"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 内 qua van canh N2.",
-        "en": "Remember 内 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 54",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 54",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l07_k007",
-      "lessonId": 7,
-      "level": "N2",
-      "character": "冖",
+      "character": "幾",
       "strokeCount": 12,
       "labels": {
-        "hanViet": "HAN 55",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "冖 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "somewhat",
+        "meaningViDisplay": "幾 (somewhat)",
+        "meaningEn": "somewhat"
       },
       "readings": {
-        "onyomi": [
-          "on55"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun55"
+          "いくぶん"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 冖 qua van canh N2.",
-        "en": "Remember 冖 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 幾分 (somewhat).",
+        "en": "Appears in JLPT N2 vocabulary: 幾分 (somewhat)."
       },
       "decomposition": {
-        "hanViet": "HAN 55",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 55",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "somewhat",
+        "meaningEnNoAccent": "somewhat"
       },
+      "examples": [
+        {
+          "word": "幾分",
+          "reading": "いくぶん",
+          "meaning": "somewhat"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l07_k008",
+      "kanjiId": "n2_jlpt_vocab_k052",
       "lessonId": 7,
       "level": "N2",
-      "character": "冧",
-      "strokeCount": 13,
+      "character": "分",
+      "strokeCount": 4,
       "labels": {
-        "hanViet": "HAN 56",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "冧 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Phân",
+        "meaningVi": "somewhat",
+        "meaningViDisplay": "分 (somewhat)",
+        "meaningEn": "somewhat"
       },
       "readings": {
-        "onyomi": [
-          "on56"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun56"
+          "いくぶん"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 冧 qua van canh N2.",
-        "en": "Remember 冧 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 幾分 (somewhat).",
+        "en": "Appears in JLPT N2 vocabulary: 幾分 (somewhat)."
       },
       "decomposition": {
-        "hanViet": "HAN 56",
-        "structure": "standalone",
+        "hanViet": "Phân",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 56",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Phan",
+        "meaningViNoAccent": "somewhat",
+        "meaningEnNoAccent": "somewhat"
       },
+      "examples": [
+        {
+          "word": "幾分",
+          "reading": "いくぶん",
+          "meaning": "somewhat"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k053",
+      "lessonId": 7,
+      "level": "N2",
+      "character": "花",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": "Hoa",
+        "meaningVi": "(1) flower arrangement",
+        "meaningViDisplay": "花 ((1) flower arrangement)",
+        "meaningEn": "(1) flower arrangement"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いけばな"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 生け花 ((1) flower arrangement).",
+        "en": "Appears in JLPT N2 vocabulary: 生け花 ((1) flower arrangement)."
+      },
+      "decomposition": {
+        "hanViet": "Hoa",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Hoa",
+        "meaningViNoAccent": "(1) flower arrangement",
+        "meaningEnNoAccent": "(1) flower arrangement"
+      },
+      "examples": [
+        {
+          "word": "生け花",
+          "reading": "いけばな",
+          "meaning": "(1) flower arrangement"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k054",
+      "lessonId": 7,
+      "level": "N2",
+      "character": "以",
+      "strokeCount": 4,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "after this, from now on, hereafter, thereafter",
+        "meaningViDisplay": "以 (after this, from now on, hereafter, thereafter)",
+        "meaningEn": "after this, from now on, hereafter, thereafter"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いご"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 以後 (after this, from now on, hereafter, thereafter).",
+        "en": "Appears in JLPT N2 vocabulary: 以後 (after this, from now on, hereafter, thereafter)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "after this, from now on, hereafter, thereafter",
+        "meaningEnNoAccent": "after this, from now on, hereafter, thereafter"
+      },
+      "examples": [
+        {
+          "word": "以後",
+          "reading": "いご",
+          "meaning": "after this, from now on, hereafter, thereafter"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k055",
+      "lessonId": 7,
+      "level": "N2",
+      "character": "後",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Hậu",
+        "meaningVi": "after this, from now on, hereafter, thereafter",
+        "meaningViDisplay": "後 (after this, from now on, hereafter, thereafter)",
+        "meaningEn": "after this, from now on, hereafter, thereafter"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いご"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 以後 (after this, from now on, hereafter, thereafter).",
+        "en": "Appears in JLPT N2 vocabulary: 以後 (after this, from now on, hereafter, thereafter)."
+      },
+      "decomposition": {
+        "hanViet": "Hậu",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Hau",
+        "meaningViNoAccent": "after this, from now on, hereafter, thereafter",
+        "meaningEnNoAccent": "after this, from now on, hereafter, thereafter"
+      },
+      "examples": [
+        {
+          "word": "以後",
+          "reading": "いご",
+          "meaning": "after this, from now on, hereafter, thereafter"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k056",
+      "lessonId": 7,
+      "level": "N2",
+      "character": "降",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Giáng",
+        "meaningVi": "on and after, hereafter, thereafter",
+        "meaningViDisplay": "降 (on and after, hereafter, thereafter)",
+        "meaningEn": "on and after, hereafter, thereafter"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いこう"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 以降 (on and after, hereafter, thereafter).",
+        "en": "Appears in JLPT N2 vocabulary: 以降 (on and after, hereafter, thereafter)."
+      },
+      "decomposition": {
+        "hanViet": "Giáng",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Giang",
+        "meaningViNoAccent": "on and after, hereafter, thereafter",
+        "meaningEnNoAccent": "on and after, hereafter, thereafter"
+      },
+      "examples": [
+        {
+          "word": "以降",
+          "reading": "いこう",
+          "meaning": "on and after, hereafter, thereafter"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

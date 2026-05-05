@@ -5,360 +5,429 @@
   "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
   "tags": [
     "source-hanabira",
-    "n2-grammar-import"
+    "n2-grammar-import",
+    "needs-human-review"
   ],
   "examples": [
+    {
+      "grammarPoint": "～ことになっている",
+      "sentence": "日本では、左側を運転することになっています。",
+      "translation": "In Japan, it is decided that people drive on the left side.",
+      "translationEn": "In Japan, it is decided that people drive on the left side",
+      "romaji": "Nihon de wa, hidarigawa o unten suru koto ni natte imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: In Japan, it is decided that people drive on the left side",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～ことになっている",
+      "sentence": "会社の規則では、制服を着ることになっている。",
+      "translation": "According to the company rules, we are supposed to wear uniforms.",
+      "translationEn": "According to the company rules, we are supposed to wear uniforms",
+      "romaji": "Kaisha no kisoku de wa, seifuku o kiru koto ni natte iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: According to the company rules, we are supposed to wear uniforms",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～ことになっている",
+      "sentence": "彼女は明日結婚することになっています。",
+      "translation": "She is supposed to get married tomorrow.",
+      "translationEn": "She is supposed to get married tomorrow",
+      "romaji": "Kanojo wa ashita kekkon suru koto ni natte imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She is supposed to get married tomorrow",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～ことになっている",
+      "sentence": "この商品は高品質だということになっています。",
+      "translation": "It is said (or generally accepted) that this product is of high quality.",
+      "translationEn": "It is said (or generally accepted) that this product is of high quality",
+      "romaji": "Kono shouhin wa kouhinshitsu da to iu koto ni natte imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: It is said (or generally accepted) that this product is of high quality",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～さえ～ば",
+      "sentence": "お金さえあれば、幸せです。",
+      "translation": "As long as I have money, I’m happy.",
+      "translationEn": "As long as I have money, I’m happy",
+      "romaji": "Okane sae areba, shiawase desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As long as I have money, I’m happy",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～さえ～ば",
+      "sentence": "試験に合格しさえすれば、卒業できます。",
+      "translation": "If only I pass the exam, I can graduate.",
+      "translationEn": "If only I pass the exam, I can graduate",
+      "romaji": "Shiken ni goukaku shi sae sureba, sotsugyou dekimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If only I pass the exam, I can graduate",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～さえ～ば",
+      "sentence": "野菜さえたくさん食べれば、母は喜びます。",
+      "translation": "As long as I eat plenty of vegetables, my mother will be happy.",
+      "translationEn": "As long as I eat plenty of vegetables, my mother will be happy",
+      "romaji": "Yasai sae takusan tabereba, haha wa yorokobimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As long as I eat plenty of vegetables, my mother will be happy",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～さえ～ば",
+      "sentence": "交通費さえ支払ってもらえれば、どこへでも行きます。",
+      "translation": "As long as my transportation costs are covered, I’ll go anywhere.",
+      "translationEn": "As long as my transportation costs are covered, I’ll go anywhere",
+      "romaji": "Koutsuuhi sae shiharatte moraereba, doko e demo ikimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As long as my transportation costs are covered, I’ll go anywhere",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～ざるを得ない",
+      "sentence": "この仕事は締め切りが近いので、残業せざるを得ない。",
+      "translation": "Since the deadline is near, I have no choice but to work overtime.",
+      "translationEn": "Since the deadline is near, I have no choice but to work overtime",
+      "romaji": "Kono shigoto wa shimekiri ga chikai no de, zangyou sezaru wo enai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Since the deadline is near, I have no choice but to work overtime",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～ざるを得ない",
+      "sentence": "電車が遅れたため、タクシーに乗るざるを得なかった。",
+      "translation": "Because the train was delayed, I had no choice but to take a taxi.",
+      "translationEn": "Because the train was delayed, I had no choice but to take a taxi",
+      "romaji": "Densha ga okureta tame, takushii ni noru zaru wo enakatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Because the train was delayed, I had no choice but to take a taxi",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～ざるを得ない",
+      "sentence": "彼女の説明が納得できなかったが、とりあえず信じざるを得ない。",
+      "translation": "I couldn’t really accept her explanation, but for now I have no choice but to believe her.",
+      "translationEn": "I couldn’t really accept her explanation, but for now I have no choice but to believe her",
+      "romaji": "Kanojo no setsumei ga nattoku dekinakatta ga, toriaezu shinjizaru wo enai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I couldn’t really accept her explanation, but for now I have no choice but to believe her",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～ざるを得ない",
+      "sentence": "この状況では、新しい計画を立て直さざるを得ない。",
+      "translation": "In this situation, we have no choice but to revise the new plan.",
+      "translationEn": "In this situation, we have no choice but to revise the new plan",
+      "romaji": "Kono joukyou de wa, atarashii keikaku wo tatenaosazaru wo enai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: In this situation, we have no choice but to revise the new plan",
+      "translationViSource": "internal-en-example-draft"
+    },
     {
       "grammarPoint": "～ずにはいられない",
       "sentence": "この曲を聞くと、歌わずにはいられない。",
       "translation": "When I hear this song, I can’t help but sing.",
-      "translationEn": "When I hear this song, I can’t help but sing.",
+      "translationEn": "When I hear this song, I can’t help but sing",
       "romaji": "Kono kyoku o kiku to, utawazu ni wa irarenai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When I hear this song, I can’t help but sing",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～ずにはいられない",
       "sentence": "彼女が泣いているのを見ると、慰めずにはいられない。",
       "translation": "When I see her crying, I can’t resist comforting her.",
-      "translationEn": "When I see her crying, I can’t resist comforting her.",
+      "translationEn": "When I see her crying, I can’t resist comforting her",
       "romaji": "Kanojo ga naite iru no o miru to, nagusamezu ni wa irarenai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When I see her crying, I can’t resist comforting her",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～ずにはいられない",
       "sentence": "この小説は面白いので、読まずにはいられない。",
       "translation": "This novel is so interesting that I can’t help but read it.",
-      "translationEn": "This novel is so interesting that I can’t help but read it.",
+      "translationEn": "This novel is so interesting that I can’t help but read it",
       "romaji": "Kono shousetsu wa omoshiroi no de, yomazu ni wa irarenai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This novel is so interesting that I can’t help but read it",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～ずにはいられない",
       "sentence": "彼はおいしい料理を前にすると、食べずにはいられない。",
       "translation": "When he’s faced with delicious food, he can’t help but eat it.",
-      "translationEn": "When he’s faced with delicious food, he can’t help but eat it.",
+      "translationEn": "When he’s faced with delicious food, he can’t help but eat it",
       "romaji": "Kare wa oishii ryouri o mae ni suru to, tabezu ni wa irarenai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When he’s faced with delicious food, he can’t help but eat it",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～そうにない",
       "sentence": "この雨は止みそうにない。",
       "translation": "It doesn't seem like this rain will stop.",
-      "translationEn": "It doesn't seem like this rain will stop.",
+      "translationEn": "It doesnt seem like this rain will stop",
       "romaji": "Kono ame wa yami sou ni nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: It doesnt seem like this rain will stop",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～そうにない",
       "sentence": "彼が試験に合格しそうにない。",
       "translation": "It doesn't look like he'll pass the exam.",
-      "translationEn": "It doesn't look like he'll pass the exam.",
+      "translationEn": "It doesnt look like hell pass the exam",
       "romaji": "Kare ga shiken ni goukaku shi sou ni nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: It doesnt look like hell pass the exam",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～そうにない",
       "sentence": "この料理がおいしそうにない。",
       "translation": "This dish doesn't look like it will be tasty.",
-      "translationEn": "This dish doesn't look like it will be tasty.",
+      "translationEn": "This dish doesnt look like it will be tasty",
       "romaji": "Kono ryouri ga oishisou ni nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This dish doesnt look like it will be tasty",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～そうにない",
       "sentence": "この部屋はきれいそうにない。",
       "translation": "This room doesn't seem likely to be clean.",
-      "translationEn": "This room doesn't seem likely to be clean.",
+      "translationEn": "This room doesnt seem likely to be clean",
       "romaji": "Kono heya wa kirei sou ni nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This room doesnt seem likely to be clean",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～たかと思ったら",
       "sentence": "電話をかけたかと思ったら、すぐに彼女が出た。",
       "translation": "No sooner had I called than she picked up.",
-      "translationEn": "No sooner had I called than she picked up.",
+      "translationEn": "No sooner had I called than she picked up",
       "romaji": "Denwa o kaketa ka to omottara, sugu ni kanojo ga deta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: No sooner had I called than she picked up",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～たかと思ったら",
       "sentence": "離陸したかと思ったら、飛行機が揺れ始めた。",
       "translation": "As soon as we took off, the plane started shaking.",
-      "translationEn": "As soon as we took off, the plane started shaking.",
+      "translationEn": "As soon as we took off, the plane started shaking",
       "romaji": "Ririku shita ka to omottara, hikouki ga yure hajimeta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As soon as we took off, the plane started shaking",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～たかと思ったら",
       "sentence": "買い物に行ったかと思ったら、雨が降ってきた。",
       "translation": "No sooner had I gone shopping than it began to rain.",
-      "translationEn": "No sooner had I gone shopping than it began to rain.",
+      "translationEn": "No sooner had I gone shopping than it began to rain",
       "romaji": "Kaimono ni itta ka to omottara, ame ga futte kita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: No sooner had I gone shopping than it began to rain",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～たかと思ったら",
       "sentence": "仕事を終わったかと思ったら、上司が追加の仕事を持ってきた。",
       "translation": "As soon as I finished work, my boss brought more tasks.",
-      "translationEn": "As soon as I finished work, my boss brought more tasks.",
+      "translationEn": "As soon as I finished work, my boss brought more tasks",
       "romaji": "Shigoto o owatta ka to omottara, joushi ga tsuika no shigoto o motte kita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As soon as I finished work, my boss brought more tasks",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～たきり",
       "sentence": "彼は会社を辞めたきり、連絡がない。",
       "translation": "Ever since he quit the company, there's been no contact.",
-      "translationEn": "Ever since he quit the company, there's been no contact.",
+      "translationEn": "Ever since he quit the company, theres been no contact",
       "romaji": "Kare wa kaisha o yameta kiri, renraku ga nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Ever since he quit the company, theres been no contact",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～たきり",
       "sentence": "昨日の朝、メールを送ったきり、返事がない。",
       "translation": "I sent an email yesterday morning, and there's been no reply since then.",
-      "translationEn": "I sent an email yesterday morning, and there's been no reply since then.",
+      "translationEn": "I sent an email yesterday morning, and theres been no reply since then",
       "romaji": "Kinō no asa, mēru o okutta kiri, henji ga nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I sent an email yesterday morning, and theres been no reply since then",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～たきり",
       "sentence": "子供のころ海に行ったきりで、もう20年になる。",
       "translation": "It's been 20 years since I last went to the sea as a child.",
-      "translationEn": "It's been 20 years since I last went to the sea as a child.",
+      "translationEn": "Its been 20 years since I last went to the sea as a child",
       "romaji": "Kodomo no koro umi ni itta kiri de, mō nijūnen ni naru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its been 20 years since I last went to the sea as a child",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～たきり",
       "sentence": "彼女と別れたきり、彼女のことを考えなくなった。",
       "translation": "Ever since I broke up with her, I stopped thinking about her.",
-      "translationEn": "Ever since I broke up with her, I stopped thinking about her.",
+      "translationEn": "Ever since I broke up with her, I stopped thinking about her",
       "romaji": "Kanojo to wakareta kiri, kanojo no koto o kangaenaku natta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～だけあって",
-      "sentence": "彼は日本語が上手だけあって、日本人のように話すことができる。",
-      "translation": "As expected from his good Japanese skills, he can speak like a native.",
-      "translationEn": "As expected from his good Japanese skills, he can speak like a native.",
-      "romaji": "Kare wa nihongo ga jōzu dake atte, nihonjin no yō ni hanasu koto ga dekiru.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～だけあって",
-      "sentence": "このレストランは有名だけあって、料理がとても美味しい。",
-      "translation": "No wonder this restaurant is famous; the food is very delicious.",
-      "translationEn": "No wonder this restaurant is famous; the food is very delicious.",
-      "romaji": "Kono resutoran wa yūmei dake atte, ryōri ga totemo oishii.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～だけあって",
-      "sentence": "彼女は経験豊富なだけあって、その問題を簡単に解決できた。",
-      "translation": "It's natural that she's experienced; she solved the problem easily.",
-      "translationEn": "It's natural that she's experienced; she solved the problem easily.",
-      "romaji": "Kanojo wa keiken hōfu na dake atte, sono mondai o kantan ni kaiketsu dekita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～だけあって",
-      "sentence": "彼は優秀な学生だけあって、いつもテストの点数が高い。",
-      "translation": "As expected of an excellent student, he always scores high on tests.",
-      "translationEn": "As expected of an excellent student, he always scores high on tests.",
-      "romaji": "Kare wa yūshū na gakusei dake atte, itsumo tesuto no tensū ga takai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～だけましだ",
-      "sentence": "失敗するだけましだ。もっと大変なことにならなくてよかった。",
-      "translation": "At least we only failed—it could’ve been much worse.",
-      "translationEn": "At least we only failed—it could’ve been much worse.",
-      "romaji": "Shippai suru dake mashi da. Motto taihen na koto ni naranakute yokatta.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～だけましだ",
-      "sentence": "遅れるだけましだ。来られないよりはいい。",
-      "translation": "At least I’m only late. It’s better than not being able to come at all.",
-      "translationEn": "At least I’m only late. It’s better than not being able to come at all.",
-      "romaji": "Okureru dake mashi da. Korarenai yori wa ii.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～だけましだ",
-      "sentence": "小さな部屋だけましだ。全く部屋がないよりはいい。",
-      "translation": "At least we have a small room; it’s better than having no room at all.",
-      "translationEn": "At least we have a small room; it’s better than having no room at all.",
-      "romaji": "Chīsana heya dake mashi da. Mattaku heya ga nai yori wa ii.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～だけましだ",
-      "sentence": "彼が結婚しないだけましだ。大変なことになるところだったよ。",
-      "translation": "At least he’s not getting married—things could have gotten complicated.",
-      "translationEn": "At least he’s not getting married—things could have gotten complicated.",
-      "romaji": "Kare ga kekkon shinai dake mashi da. Taihen na koto ni naru tokoro datta yo.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～たところ",
-      "sentence": "掃除したところ、部屋がずっとキレイになりました。",
-      "translation": "I just finished cleaning, and the room is so much cleaner now.",
-      "translationEn": "I just finished cleaning, and the room is so much cleaner now.",
-      "romaji": "Sōji shita tokoro, heya ga zutto kirei ni narimashita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～たところ",
-      "sentence": "彼に聞いたところ、その質問の答えは分からないみたいです。",
-      "translation": "I just asked him, and it seems he doesn't know the answer.",
-      "translationEn": "I just asked him, and it seems he doesn't know the answer.",
-      "romaji": "Kare ni kiita tokoro, sono shitsumon no kotae wa wakaranai mitai desu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～たところ",
-      "sentence": "宿題を出したところ、先生が間違いを見つけました。",
-      "translation": "As soon as I turned in my homework, the teacher found a mistake.",
-      "translationEn": "As soon as I turned in my homework, the teacher found a mistake.",
-      "romaji": "Shukudai o dashita tokoro, sensei ga machigai o mitsukemashita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～たところ",
-      "sentence": "昼ごはんを食べたところ、気分が良くなりました。",
-      "translation": "Right after eating lunch, I started feeling better.",
-      "translationEn": "Right after eating lunch, I started feeling better.",
-      "romaji": "Hirugohan o tabeta tokoro, kibun ga yoku narimashita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～たとたん",
-      "sentence": "ドアを開けたとたん、雨が降り始めた。",
-      "translation": "As soon as I opened the door, it started raining.",
-      "translationEn": "As soon as I opened the door, it started raining.",
-      "romaji": "Doa o aketa totan, ame ga furi-hajimeta.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～たとたん",
-      "sentence": "電話をかけたとたん、バッテリーが切れた。",
-      "translation": "Just when I made the phone call, the battery died.",
-      "translationEn": "Just when I made the phone call, the battery died.",
-      "romaji": "Denwa o kaketa totan, batterī ga kireta.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～たとたん",
-      "sentence": "彼女に会ったとたん、思い出の歌が流れた。",
-      "translation": "No sooner had I met her than a nostalgic song started playing.",
-      "translationEn": "No sooner had I met her than a nostalgic song started playing.",
-      "romaji": "Kanojo ni atta totan, omoide no uta ga nagareta.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～たとたん",
-      "sentence": "テストが終わったとたん、リラックスできた。",
-      "translation": "The moment the test ended, I was able to relax.",
-      "translationEn": "The moment the test ended, I was able to relax.",
-      "romaji": "Tesuto ga owatta totan, rirakkusu dekita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Ever since I broke up with her, I stopped thinking about her",
+      "translationViSource": "internal-en-example-draft"
     }
   ]
 }

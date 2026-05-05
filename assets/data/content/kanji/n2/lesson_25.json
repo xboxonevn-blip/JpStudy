@@ -1,330 +1,416 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N2",
   "lessonId": 25,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n2_l25_k001",
+      "kanjiId": "n2_jlpt_vocab_k193",
       "lessonId": 25,
       "level": "N2",
-      "character": "厸",
-      "strokeCount": 6,
-      "labels": {
-        "hanViet": "HAN 193",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "厸 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on193"
-        ],
-        "kunyomi": [
-          "kun193"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 厸 qua van canh N2.",
-        "en": "Remember 厸 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 193",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 193",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l25_k002",
-      "lessonId": 25,
-      "level": "N2",
-      "character": "叉",
-      "strokeCount": 7,
-      "labels": {
-        "hanViet": "HAN 194",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "叉 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on194"
-        ],
-        "kunyomi": [
-          "kun194"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 叉 qua van canh N2.",
-        "en": "Remember 叉 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 194",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 194",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l25_k003",
-      "lessonId": 25,
-      "level": "N2",
-      "character": "叚",
-      "strokeCount": 8,
-      "labels": {
-        "hanViet": "HAN 195",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "叚 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on195"
-        ],
-        "kunyomi": [
-          "kun195"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 叚 qua van canh N2.",
-        "en": "Remember 叚 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 195",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 195",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l25_k004",
-      "lessonId": 25,
-      "level": "N2",
-      "character": "叫",
-      "strokeCount": 9,
-      "labels": {
-        "hanViet": "HAN 196",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "叫 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on196"
-        ],
-        "kunyomi": [
-          "kun196"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 叫 qua van canh N2.",
-        "en": "Remember 叫 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 196",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 196",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l25_k005",
-      "lessonId": 25,
-      "level": "N2",
-      "character": "叼",
+      "character": "恩",
       "strokeCount": 10,
       "labels": {
-        "hanViet": "HAN 197",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "叼 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Ân",
+        "meaningVi": "grace, favor, blessing, benefit",
+        "meaningViDisplay": "恩 (grace, favor, blessing, benefit)",
+        "meaningEn": "grace, favor, blessing, benefit"
       },
       "readings": {
-        "onyomi": [
-          "on197"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun197"
+          "おんけい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 叼 qua van canh N2.",
-        "en": "Remember 叼 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 恩恵 (grace, favor, blessing, benefit).",
+        "en": "Appears in JLPT N2 vocabulary: 恩恵 (grace, favor, blessing, benefit)."
       },
       "decomposition": {
-        "hanViet": "HAN 197",
-        "structure": "standalone",
+        "hanViet": "Ân",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 197",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "An",
+        "meaningViNoAccent": "grace, favor, blessing, benefit",
+        "meaningEnNoAccent": "grace, favor, blessing, benefit"
       },
+      "examples": [
+        {
+          "word": "恩恵",
+          "reading": "おんけい",
+          "meaning": "grace, favor, blessing, benefit"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l25_k006",
+      "kanjiId": "n2_jlpt_vocab_k194",
       "lessonId": 25,
       "level": "N2",
-      "character": "名",
-      "strokeCount": 11,
+      "character": "恵",
+      "strokeCount": 10,
       "labels": {
-        "hanViet": "HAN 198",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "名 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "grace, favor, blessing, benefit",
+        "meaningViDisplay": "恵 (grace, favor, blessing, benefit)",
+        "meaningEn": "grace, favor, blessing, benefit"
       },
       "readings": {
-        "onyomi": [
-          "on198"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun198"
+          "おんけい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 名 qua van canh N2.",
-        "en": "Remember 名 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 恩恵 (grace, favor, blessing, benefit).",
+        "en": "Appears in JLPT N2 vocabulary: 恩恵 (grace, favor, blessing, benefit)."
       },
       "decomposition": {
-        "hanViet": "HAN 198",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 198",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "grace, favor, blessing, benefit",
+        "meaningEnNoAccent": "grace, favor, blessing, benefit"
       },
+      "examples": [
+        {
+          "word": "恩恵",
+          "reading": "おんけい",
+          "meaning": "grace, favor, blessing, benefit"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l25_k007",
+      "kanjiId": "n2_jlpt_vocab_k195",
       "lessonId": 25,
       "level": "N2",
-      "character": "吞",
+      "character": "温",
       "strokeCount": 12,
       "labels": {
-        "hanViet": "HAN 199",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "吞 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Ồn",
+        "meaningVi": "greenhouse",
+        "meaningViDisplay": "温 (greenhouse)",
+        "meaningEn": "greenhouse"
       },
       "readings": {
-        "onyomi": [
-          "on199"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun199"
+          "おんしつ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 吞 qua van canh N2.",
-        "en": "Remember 吞 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 温室 (greenhouse).",
+        "en": "Appears in JLPT N2 vocabulary: 温室 (greenhouse)."
       },
       "decomposition": {
-        "hanViet": "HAN 199",
-        "structure": "standalone",
+        "hanViet": "Ồn",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 199",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "On",
+        "meaningViNoAccent": "greenhouse",
+        "meaningEnNoAccent": "greenhouse"
       },
+      "examples": [
+        {
+          "word": "温室",
+          "reading": "おんしつ",
+          "meaning": "greenhouse"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l25_k008",
+      "kanjiId": "n2_jlpt_vocab_k196",
       "lessonId": 25,
       "level": "N2",
-      "character": "启",
-      "strokeCount": 13,
+      "character": "室",
+      "strokeCount": 9,
       "labels": {
-        "hanViet": "HAN 200",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "启 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Thất",
+        "meaningVi": "greenhouse",
+        "meaningViDisplay": "室 (greenhouse)",
+        "meaningEn": "greenhouse"
       },
       "readings": {
-        "onyomi": [
-          "on200"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun200"
+          "おんしつ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 启 qua van canh N2.",
-        "en": "Remember 启 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 温室 (greenhouse).",
+        "en": "Appears in JLPT N2 vocabulary: 温室 (greenhouse)."
       },
       "decomposition": {
-        "hanViet": "HAN 200",
-        "structure": "standalone",
+        "hanViet": "Thất",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 200",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "That",
+        "meaningViNoAccent": "greenhouse",
+        "meaningEnNoAccent": "greenhouse"
       },
+      "examples": [
+        {
+          "word": "温室",
+          "reading": "おんしつ",
+          "meaning": "greenhouse"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k197",
+      "lessonId": 25,
+      "level": "N2",
+      "character": "泉",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Tuyền",
+        "meaningVi": "spa, hot spring, onsen",
+        "meaningViDisplay": "泉 (spa, hot spring, onsen)",
+        "meaningEn": "spa, hot spring, onsen"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "おんせん"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 温泉 (spa, hot spring, onsen).",
+        "en": "Appears in JLPT N2 vocabulary: 温泉 (spa, hot spring, onsen)."
+      },
+      "decomposition": {
+        "hanViet": "Tuyền",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Tuyen",
+        "meaningViNoAccent": "spa, hot spring, onsen",
+        "meaningEnNoAccent": "spa, hot spring, onsen"
+      },
+      "examples": [
+        {
+          "word": "温泉",
+          "reading": "おんせん",
+          "meaning": "spa, hot spring, onsen"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k198",
+      "lessonId": 25,
+      "level": "N2",
+      "character": "帯",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "temperate zone",
+        "meaningViDisplay": "帯 (temperate zone)",
+        "meaningEn": "temperate zone"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "おんたい"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 温帯 (temperate zone).",
+        "en": "Appears in JLPT N2 vocabulary: 温帯 (temperate zone)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "temperate zone",
+        "meaningEnNoAccent": "temperate zone"
+      },
+      "examples": [
+        {
+          "word": "温帯",
+          "reading": "おんたい",
+          "meaning": "temperate zone"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k199",
+      "lessonId": 25,
+      "level": "N2",
+      "character": "中",
+      "strokeCount": 4,
+      "labels": {
+        "hanViet": "Trung",
+        "meaningVi": "and Company, Messrs.",
+        "meaningViDisplay": "中 (and Company, Messrs.)",
+        "meaningEn": "and Company, Messrs."
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "おんちゅう"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 御中 (and Company, Messrs.).",
+        "en": "Appears in JLPT N2 vocabulary: 御中 (and Company, Messrs.)."
+      },
+      "decomposition": {
+        "hanViet": "Trung",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Trung",
+        "meaningViNoAccent": "and company, messrs.",
+        "meaningEnNoAccent": "and company, messrs."
+      },
+      "examples": [
+        {
+          "word": "御中",
+          "reading": "おんちゅう",
+          "meaning": "and Company, Messrs."
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k200",
+      "lessonId": 25,
+      "level": "N2",
+      "character": "人",
+      "strokeCount": 2,
+      "labels": {
+        "hanViet": "Nhân",
+        "meaningVi": "woman",
+        "meaningViDisplay": "人 (woman)",
+        "meaningEn": "woman"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "おんなのひと"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 女の人 (woman).",
+        "en": "Appears in JLPT N2 vocabulary: 女の人 (woman)."
+      },
+      "decomposition": {
+        "hanViet": "Nhân",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Nhan",
+        "meaningViNoAccent": "woman",
+        "meaningEnNoAccent": "woman"
+      },
+      "examples": [
+        {
+          "word": "女の人",
+          "reading": "おんなのひと",
+          "meaning": "woman"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

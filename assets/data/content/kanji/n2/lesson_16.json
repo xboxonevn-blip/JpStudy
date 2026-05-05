@@ -1,330 +1,417 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N2",
   "lessonId": 16,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n2_l16_k001",
+      "kanjiId": "n2_jlpt_vocab_k121",
       "lessonId": 16,
       "level": "N2",
-      "character": "仰",
-      "strokeCount": 6,
-      "labels": {
-        "hanViet": "HAN 121",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "仰 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on121"
-        ],
-        "kunyomi": [
-          "kun121"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 仰 qua van canh N2.",
-        "en": "Remember 仰 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 121",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 121",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l16_k002",
-      "lessonId": 16,
-      "level": "N2",
-      "character": "企",
-      "strokeCount": 7,
-      "labels": {
-        "hanViet": "HAN 122",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "企 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on122"
-        ],
-        "kunyomi": [
-          "kun122"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 企 qua van canh N2.",
-        "en": "Remember 企 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 122",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 122",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l16_k003",
-      "lessonId": 16,
-      "level": "N2",
-      "character": "伒",
+      "character": "英",
       "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 123",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "伒 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Anh",
+        "meaningVi": "sentence in English",
+        "meaningViDisplay": "英 (sentence in English)",
+        "meaningEn": "sentence in English"
       },
       "readings": {
-        "onyomi": [
-          "on123"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun123"
+          "えいぶん"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 伒 qua van canh N2.",
-        "en": "Remember 伒 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 英文 (sentence in English).",
+        "en": "Appears in JLPT N2 vocabulary: 英文 (sentence in English)."
       },
       "decomposition": {
-        "hanViet": "HAN 123",
-        "structure": "standalone",
+        "hanViet": "Anh",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 123",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Anh",
+        "meaningViNoAccent": "sentence in english",
+        "meaningEnNoAccent": "sentence in english"
       },
+      "examples": [
+        {
+          "word": "英文",
+          "reading": "えいぶん",
+          "meaning": "sentence in English"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l16_k004",
+      "kanjiId": "n2_jlpt_vocab_k122",
       "lessonId": 16,
       "level": "N2",
-      "character": "伣",
-      "strokeCount": 9,
+      "character": "文",
+      "strokeCount": 4,
       "labels": {
-        "hanViet": "HAN 124",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "伣 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Văn",
+        "meaningVi": "sentence in English",
+        "meaningViDisplay": "文 (sentence in English)",
+        "meaningEn": "sentence in English"
       },
       "readings": {
-        "onyomi": [
-          "on124"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun124"
+          "えいぶん"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 伣 qua van canh N2.",
-        "en": "Remember 伣 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 英文 (sentence in English).",
+        "en": "Appears in JLPT N2 vocabulary: 英文 (sentence in English)."
       },
       "decomposition": {
-        "hanViet": "HAN 124",
-        "structure": "standalone",
+        "hanViet": "Văn",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 124",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Van",
+        "meaningViNoAccent": "sentence in english",
+        "meaningEnNoAccent": "sentence in english"
       },
+      "examples": [
+        {
+          "word": "英文",
+          "reading": "えいぶん",
+          "meaning": "sentence in English"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l16_k005",
+      "kanjiId": "n2_jlpt_vocab_k123",
       "lessonId": 16,
       "level": "N2",
-      "character": "伴",
-      "strokeCount": 10,
+      "character": "和",
+      "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 125",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "伴 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Hoà",
+        "meaningVi": "English-Japanese (e.g. dictionary)",
+        "meaningViDisplay": "和 (English-Japanese (e.g. dictionary))",
+        "meaningEn": "English-Japanese (e.g. dictionary)"
       },
       "readings": {
-        "onyomi": [
-          "on125"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun125"
+          "えいわ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 伴 qua van canh N2.",
-        "en": "Remember 伴 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 英和 (English-Japanese (e.g. dictionary)).",
+        "en": "Appears in JLPT N2 vocabulary: 英和 (English-Japanese (e.g. dictionary))."
       },
       "decomposition": {
-        "hanViet": "HAN 125",
-        "structure": "standalone",
+        "hanViet": "Hoà",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 125",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Hoa",
+        "meaningViNoAccent": "english-japanese (e.g. dictionary)",
+        "meaningEnNoAccent": "english-japanese (e.g. dictionary)"
       },
+      "examples": [
+        {
+          "word": "英和",
+          "reading": "えいわ",
+          "meaning": "English-Japanese (e.g. dictionary)"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l16_k006",
+      "kanjiId": "n2_jlpt_vocab_k124",
       "lessonId": 16,
       "level": "N2",
-      "character": "佅",
+      "character": "液",
       "strokeCount": 11,
       "labels": {
-        "hanViet": "HAN 126",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "佅 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Giá",
+        "meaningVi": "liquid, fluid",
+        "meaningViDisplay": "液 (liquid, fluid)",
+        "meaningEn": "liquid, fluid"
       },
       "readings": {
-        "onyomi": [
-          "on126"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun126"
+          "えきたい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 佅 qua van canh N2.",
-        "en": "Remember 佅 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 液体 (liquid, fluid).",
+        "en": "Appears in JLPT N2 vocabulary: 液体 (liquid, fluid)."
       },
       "decomposition": {
-        "hanViet": "HAN 126",
-        "structure": "standalone",
+        "hanViet": "Giá",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 126",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Gia",
+        "meaningViNoAccent": "liquid, fluid",
+        "meaningEnNoAccent": "liquid, fluid"
       },
+      "examples": [
+        {
+          "word": "液体",
+          "reading": "えきたい",
+          "meaning": "liquid, fluid"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l16_k007",
+      "kanjiId": "n2_jlpt_vocab_k125",
       "lessonId": 16,
       "level": "N2",
-      "character": "佖",
+      "character": "体",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": "Thể",
+        "meaningVi": "liquid, fluid",
+        "meaningViDisplay": "体 (liquid, fluid)",
+        "meaningEn": "liquid, fluid"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "えきたい"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 液体 (liquid, fluid).",
+        "en": "Appears in JLPT N2 vocabulary: 液体 (liquid, fluid)."
+      },
+      "decomposition": {
+        "hanViet": "Thể",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "The",
+        "meaningViNoAccent": "liquid, fluid",
+        "meaningEnNoAccent": "liquid, fluid"
+      },
+      "examples": [
+        {
+          "word": "液体",
+          "reading": "えきたい",
+          "meaning": "liquid, fluid"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k126",
+      "lessonId": 16,
+      "level": "N2",
+      "character": "絵",
       "strokeCount": 12,
       "labels": {
-        "hanViet": "HAN 127",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "佖 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "colors, paints",
+        "meaningViDisplay": "絵 (colors, paints)",
+        "meaningEn": "colors, paints"
       },
       "readings": {
-        "onyomi": [
-          "on127"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun127"
+          "えのぐ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 佖 qua van canh N2.",
-        "en": "Remember 佖 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 絵の具 (colors, paints).",
+        "en": "Appears in JLPT N2 vocabulary: 絵の具 (colors, paints)."
       },
       "decomposition": {
-        "hanViet": "HAN 127",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 127",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "colors, paints",
+        "meaningEnNoAccent": "colors, paints"
       },
+      "examples": [
+        {
+          "word": "絵の具",
+          "reading": "えのぐ",
+          "meaning": "colors, paints"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l16_k008",
+      "kanjiId": "n2_jlpt_vocab_k127",
       "lessonId": 16,
       "level": "N2",
-      "character": "佧",
-      "strokeCount": 13,
+      "character": "具",
+      "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 128",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "佧 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Cụ",
+        "meaningVi": "colors, paints",
+        "meaningViDisplay": "具 (colors, paints)",
+        "meaningEn": "colors, paints"
       },
       "readings": {
-        "onyomi": [
-          "on128"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun128"
+          "えのぐ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 佧 qua van canh N2.",
-        "en": "Remember 佧 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 絵の具 (colors, paints).",
+        "en": "Appears in JLPT N2 vocabulary: 絵の具 (colors, paints)."
       },
       "decomposition": {
-        "hanViet": "HAN 128",
-        "structure": "standalone",
+        "hanViet": "Cụ",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 128",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Cu",
+        "meaningViNoAccent": "colors, paints",
+        "meaningEnNoAccent": "colors, paints"
       },
+      "examples": [
+        {
+          "word": "絵の具",
+          "reading": "えのぐ",
+          "meaning": "colors, paints"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k128",
+      "lessonId": 16,
+      "level": "N2",
+      "character": "偉",
+      "strokeCount": 11,
+      "labels": {
+        "hanViet": "Vĩ",
+        "meaningVi": "great, celebrated, eminent, terrible, awful, famous, remarkable, excellent",
+        "meaningViDisplay": "偉 (great, celebrated, eminent, terrible, awful, famous, remarkable, excellent)",
+        "meaningEn": "great, celebrated, eminent, terrible, awful, famous, remarkable, excellent"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "えらい"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 偉い (great, celebrated, eminent, terrible, awful, famous, remarkable, excellent).",
+        "en": "Appears in JLPT N2 vocabulary: 偉い (great, celebrated, eminent, terrible, awful, famous, remarkable, excellent)."
+      },
+      "decomposition": {
+        "hanViet": "Vĩ",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Vi",
+        "meaningViNoAccent": "great, celebrated, eminent, terrible, awful, famous, remarkable, excellent",
+        "meaningEnNoAccent": "great, celebrated, eminent, terrible, awful, famous, remarkable, excellent"
+      },
+      "examples": [
+        {
+          "word": "偉い",
+          "reading": "えらい",
+          "meaning": "great, celebrated, eminent, terrible, awful, famous, remarkable, excellent"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

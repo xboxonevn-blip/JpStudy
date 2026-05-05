@@ -5,360 +5,429 @@
   "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
   "tags": [
     "source-hanabira",
-    "n2-grammar-import"
+    "n2-grammar-import",
+    "needs-human-review"
   ],
   "examples": [
     {
-      "grammarPoint": "～ものだから",
-      "sentence": "試験が近いものだから、毎日勉強しています。",
-      "translation": "Because the exam is near, I'm studying every day.",
-      "translationEn": "Because the exam is near, I'm studying every day.",
-      "romaji": "Shiken ga chikai mono dakara, mainichi benkyou shiteimasu.",
+      "grammarPoint": "～まい",
+      "sentence": "彼は今晩来るまい。",
+      "translation": "He probably won't come tonight.",
+      "translationEn": "He probably wont come tonight",
+      "romaji": "Kare wa konban kuru mai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He probably wont come tonight",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～ものだから",
-      "sentence": "このレストランはとても人気があるものだから、予約しないと席がないかもしれません。",
-      "translation": "Because this restaurant is very popular, there might not be any seats if we don't reserve.",
-      "translationEn": "Because this restaurant is very popular, there might not be any seats if we don't reserve.",
-      "romaji": "Kono resutoran wa totemo ninki ga aru mono dakara, yoyaku shinai to seki ga nai kamoshiremasen.",
+      "grammarPoint": "～まい",
+      "sentence": "こんなに遅れては、電車に間に合うまい。",
+      "translation": "Being this late, I probably won't make it for the train.",
+      "translationEn": "Being this late, I probably wont make it for the train",
+      "romaji": "Konnani okurete wa, densha ni maniau mai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Being this late, I probably wont make it for the train",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～ものだから",
-      "sentence": "彼は若いものだから、まだたくさんの経験を積んでいない。",
-      "translation": "Because he is young, he hasn't accumulated much experience yet.",
-      "translationEn": "Because he is young, he hasn't accumulated much experience yet.",
-      "romaji": "Kare wa wakai mono dakara, mada takusan no keiken wo tsunde inai.",
+      "grammarPoint": "～まい",
+      "sentence": "あの人は絶対に忘れるまい。",
+      "translation": "That person will definitely not forget.",
+      "translationEn": "That person will definitely not forget",
+      "romaji": "Ano hito wa zettai ni wasureru mai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: That person will definitely not forget",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～ものだから",
-      "sentence": "今日は寒いものだから、手袋を持って行きましょう。",
-      "translation": "Since it's cold today, let's bring gloves.",
-      "translationEn": "Since it's cold today, let's bring gloves.",
-      "romaji": "Kyou wa samui mono dakara, tebukuro wo motte ikimashou.",
+      "grammarPoint": "～まい",
+      "sentence": "私は二度とその失敗を繰り返すまい。",
+      "translation": "I will not repeat that mistake again.",
+      "translationEn": "I will not repeat that mistake again",
+      "romaji": "Watashi wa nidoto sono shippai o kurikaesu mai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I will not repeat that mistake again",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～ものではない",
-      "sentence": "そんなことを言うものではありません。",
-      "translation": "You should not say such a thing.",
-      "translationEn": "You should not say such a thing.",
-      "romaji": "Sonna koto o iu mono dewa arimasen.",
+      "grammarPoint": "～まで～て",
+      "sentence": "9時まで働いて、その後休憩しました。",
+      "translation": "I worked until 9 o'clock, and then took a break.",
+      "translationEn": "I worked until 9 oclock, and then took a break",
+      "romaji": "Ku-ji made hataraite, sono ato kyuukei shimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I worked until 9 oclock, and then took a break",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～ものではない",
-      "sentence": "公共の場で大声を出すものではない。",
-      "translation": "You should not raise your voice in public places.",
-      "translationEn": "You should not raise your voice in public places.",
-      "romaji": "Koukyou no ba de oogoe o dasu mono dewa nai.",
+      "grammarPoint": "～まで～て",
+      "sentence": "夜まで勉強して、試験に合格しました。",
+      "translation": "I studied until night, and passed the exam.",
+      "translationEn": "I studied until night, and passed the exam",
+      "romaji": "Yoru made benkyou shite, shiken ni goukaku shimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I studied until night, and passed the exam",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～ものではない",
-      "sentence": "彼の秘密を他の人に教えるものではありません。",
-      "translation": "You must not tell his secret to other people.",
-      "translationEn": "You must not tell his secret to other people.",
-      "romaji": "Kare no himitsu o hoka no hito ni oshieru mono dewa arimasen.",
+      "grammarPoint": "～まで～て",
+      "sentence": "最後のページまで読んで、本を閉じました。",
+      "translation": "I read until the last page, then closed the book.",
+      "translationEn": "I read until the last page, then closed the book",
+      "romaji": "Saigo no peeji made yonde, hon o tojimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I read until the last page, then closed the book",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～ものではない",
-      "sentence": "安全な場所では遊んでいいが、危険なところで遊ぶものではない。",
-      "translation": "It's okay to play in safe places, but you should not play somewhere dangerous.",
-      "translationEn": "It's okay to play in safe places, but you should not play somewhere dangerous.",
-      "romaji": "Anzen na basho de wa asonde ii ga, kiken na tokoro de asobu mono dewa nai.",
+      "grammarPoint": "～まで～て",
+      "sentence": "電車が着くまで待って、友達と会いました。",
+      "translation": "I waited until the train arrived, and then met my friend.",
+      "translationEn": "I waited until the train arrived, and then met my friend",
+      "romaji": "Densha ga tsuku made matte, tomodachi to aimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I waited until the train arrived, and then met my friend",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～ものなら",
-      "sentence": "帰れるものなら、今すぐ国へ帰りたい。",
-      "translation": "If I could possibly go back, I'd return to my country right now.",
-      "translationEn": "If I could possibly go back, I'd return to my country right now.",
-      "romaji": "Kaereru mono nara, ima sugu kuni e kaeritai.",
+      "grammarPoint": "～ままに",
+      "sentence": "子供が寝ているままに、静かに部屋を出ました。",
+      "translation": "I quietly left the room while the child was still sleeping.",
+      "translationEn": "I quietly left the room while the child was still sleeping",
+      "romaji": "Kodomo ga nete iru mama ni, shizuka ni heya o demashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I quietly left the room while the child was still sleeping",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～ものなら",
-      "sentence": "できるものなら、世界を一周してみたい。",
-      "translation": "If it were possible, I'd love to travel around the world.",
-      "translationEn": "If it were possible, I'd love to travel around the world.",
-      "romaji": "Dekiru mono nara, sekai o isshuu shite mitai.",
+      "grammarPoint": "～ままに",
+      "sentence": "窓が開いたままで、寒くなりました。",
+      "translation": "It got cold with the window left open.",
+      "translationEn": "It got cold with the window left open",
+      "romaji": "Mado ga aita mama de, samuku narimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: It got cold with the window left open",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～ものなら",
-      "sentence": "やり直せるものなら、子供の頃に戻りたい。",
-      "translation": "If I could redo my life, I'd go back to my childhood.",
-      "translationEn": "If I could redo my life, I'd go back to my childhood.",
-      "romaji": "Yarinaoseru mono nara, kodomo no koro ni modoritai.",
+      "grammarPoint": "～ままに",
+      "sentence": "彼は元気なままで老人ホームに入りました。",
+      "translation": "He entered the nursing home while still in good health.",
+      "translationEn": "He entered the nursing home while still in good health",
+      "romaji": "Kare wa genki na mama de roujin hoomu ni hairimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He entered the nursing home while still in good health",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～ものなら",
-      "sentence": "元気になれるものなら、どんな薬でも試したい。",
-      "translation": "If it could make me healthy, I'd try any medicine.",
-      "translationEn": "If it could make me healthy, I'd try any medicine.",
-      "romaji": "Genki ni nareru mono nara, donna kusuri demo tameshitai.",
+      "grammarPoint": "～ままに",
+      "sentence": "昔の思い出のままに、この町に戻りました。",
+      "translation": "I returned to this town with my old memories intact.",
+      "translationEn": "I returned to this town with my old memories intact",
+      "romaji": "Mukashi no omoide no mama ni, kono machi ni modorimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I returned to this town with my old memories intact",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～ものの、～",
-      "sentence": "早起きしたものの、バスに間に合わなかった。",
-      "translation": "Even though I got up early, I didn't catch the bus in time.",
-      "translationEn": "Even though I got up early, I didn't catch the bus in time.",
-      "romaji": "Hayaoki shita mono no, basu ni maniawanakatta.",
+      "grammarPoint": "～もかまわず",
+      "sentence": "彼は周りの人もかまわず、大声で話しました。",
+      "translation": "Without worrying about the people around him, he spoke loudly.",
+      "translationEn": "Without worrying about the people around him, he spoke loudly",
+      "romaji": "Kare wa mawari no hito mo kamawazu, oogoe de hanashimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Without worrying about the people around him, he spoke loudly",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～ものの、～",
-      "sentence": "この部屋は広いものの、家具が少ない。",
-      "translation": "Although this room is spacious, there isn't much furniture.",
-      "translationEn": "Although this room is spacious, there isn't much furniture.",
-      "romaji": "Kono heya wa hiroi mono no, kagu ga sukunai.",
+      "grammarPoint": "～もかまわず",
+      "sentence": "彼女は時間もかまわず、ゆっくりと本を読み続けました。",
+      "translation": "She kept reading the book leisurely, without worrying about the time.",
+      "translationEn": "She kept reading the book leisurely, without worrying about the time",
+      "romaji": "Kanojo wa jikan mo kamawazu, yukkuri to hon o yomitsuzukemashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She kept reading the book leisurely, without worrying about the time",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～ものの、～",
-      "sentence": "彼女は美しいものの、性格が悪い。",
-      "translation": "She is beautiful, but her personality is bad.",
-      "translationEn": "She is beautiful, but her personality is bad.",
-      "romaji": "Kanojo wa utsukushii mono no, seikaku ga warui.",
+      "grammarPoint": "～もかまわず",
+      "sentence": "彼は寒さもかまわず、外で運動しました。",
+      "translation": "He exercised outside without worrying about the cold.",
+      "translationEn": "He exercised outside without worrying about the cold",
+      "romaji": "Kare wa samusa mo kamawazu, soto de undou shimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He exercised outside without worrying about the cold",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～ものの、～",
-      "sentence": "彼は有名な歌手であるものの、コンサートにあまり人が来なかった。",
-      "translation": "Although he is a famous singer, not many people came to his concert.",
-      "translationEn": "Although he is a famous singer, not many people came to his concert.",
-      "romaji": "Kare wa yuumei na kashu de aru mono no, konsaato ni amari hito ga konakatta.",
+      "grammarPoint": "～もかまわず",
+      "sentence": "彼女は危険もかまわず、火事の中に飛び込んで助けに行きました。",
+      "translation": "She jumped into the fire without fear of danger to help.",
+      "translationEn": "She jumped into the fire without fear of danger to help",
+      "romaji": "Kanojo wa kiken mo kamawazu, kaji no naka ni tobikonde tasuke ni ikimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She jumped into the fire without fear of danger to help",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～も～ば～も～",
-      "sentence": "彼は勉強もできればスポーツもできる。",
-      "translation": "He is good at studying and also at sports.",
-      "translationEn": "He is good at studying and also at sports.",
-      "romaji": "Kare wa benkyou mo dekireba supootsu mo dekiru.",
+      "grammarPoint": "～ものか",
+      "sentence": "そんなこと、僕がやりたいものか。",
+      "translation": "No way do I want to do such a thing.",
+      "translationEn": "No way do I want to do such a thing",
+      "romaji": "Sonna koto, boku ga yaritai mono ka.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: No way do I want to do such a thing",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～も～ば～も～",
-      "sentence": "このレストランは値段も安ければ味もいい。",
-      "translation": "This restaurant is cheap, and the food is also good.",
-      "translationEn": "This restaurant is cheap, and the food is also good.",
-      "romaji": "Kono resutoran wa nedan mo yasukereba aji mo ii.",
+      "grammarPoint": "～ものか",
+      "sentence": "こんな仕事、誰が引き受けようものか。",
+      "translation": "Who on earth would take on a job like this? (No one would!)",
+      "translationEn": "Who on earth would take on a job like this? (No one would!)",
+      "romaji": "Konna shigoto, dare ga hikiukeyou mono ka.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Who on earth would take on a job like this? (No one would!)",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～も～ば～も～",
-      "sentence": "彼女はピアノも弾けばギターも弾く。",
-      "translation": "She plays both the piano and the guitar.",
-      "translationEn": "She plays both the piano and the guitar.",
-      "romaji": "Kanojo wa piano mo hikeba gitaa mo hiku.",
+      "grammarPoint": "～ものか",
+      "sentence": "誰が彼に助けを求めようものか。",
+      "translation": "Who would ever ask him for help? (Certainly no one!)",
+      "translationEn": "Who would ever ask him for help? (Certainly no one!)",
+      "romaji": "Dare ga kare ni tasuke o motomeyou mono ka.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Who would ever ask him for help? (Certainly no one!)",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～も～ば～も～",
-      "sentence": "人生には楽しい時もあれば辛い時もある。",
-      "translation": "In life, there are both fun times and tough times.",
-      "translationEn": "In life, there are both fun times and tough times.",
-      "romaji": "Jinsei ni wa tanoshii toki mo areba tsurai toki mo aru.",
+      "grammarPoint": "～ものか",
+      "sentence": "この寒い日に外で遊ぶなんて、無理なものか。",
+      "translation": "There's no way we can play outside on a day this cold.",
+      "translationEn": "Theres no way we can play outside on a day this cold",
+      "romaji": "Kono samui hi ni soto de asobu nante, muri na mono ka.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Theres no way we can play outside on a day this cold",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～も同然だ",
-      "sentence": "彼とは長い付き合いだから、家族も同然だ。",
-      "translation": "I've known him for so long that he's practically family.",
-      "translationEn": "I've known him for so long that he's practically family.",
-      "romaji": "Kare to wa nagai tsukiai dakara, kazoku mo douzen da.",
+      "grammarPoint": "～ものがある",
+      "sentence": "彼のスピーチには心を打たれるものがある。",
+      "translation": "There's something moving about his speech.",
+      "translationEn": "Theres something moving about his speech",
+      "romaji": "Kare no supiichi ni wa kokoro o utareru mono ga aru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Theres something moving about his speech",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～も同然だ",
-      "sentence": "毎日遅刻するなんて、来ていないも同然だ。",
-      "translation": "Being late every single day is as good as not coming at all.",
-      "translationEn": "Being late every single day is as good as not coming at all.",
-      "romaji": "Mainichi chikoku suru nante, kite inai mo douzen da.",
+      "grammarPoint": "～ものがある",
+      "sentence": "この映画には考えさせられるものがある。",
+      "translation": "There's something about this movie that really makes you think.",
+      "translationEn": "Theres something about this movie that really makes you think",
+      "romaji": "Kono eiga ni wa kangaesaserareru mono ga aru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Theres something about this movie that really makes you think",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～も同然だ",
-      "sentence": "彼女と私は幼なじみで、姉妹も同然の仲です。",
-      "translation": "She and I are childhood friends, practically like sisters.",
-      "translationEn": "She and I are childhood friends, practically like sisters.",
-      "romaji": "Kanojo to watashi wa osananajimi de, shimai mo douzen no naka desu.",
+      "grammarPoint": "～ものがある",
+      "sentence": "彼の言うことにも一理あるものがある。",
+      "translation": "There's a certain point in what he says.",
+      "translationEn": "Theres a certain point in what he says",
+      "romaji": "Kare no iu koto ni mo ichiri aru mono ga aru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Theres a certain point in what he says",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～も同然だ",
-      "sentence": "こんなに少ない給料じゃ、ただ働きも同然だ。",
-      "translation": "With such a small salary, it's practically like working for free.",
-      "translationEn": "With such a small salary, it's practically like working for free.",
-      "romaji": "Konna ni sukunai kyuuryou ja, tadabataraki mo douzen da.",
+      "grammarPoint": "～ものがある",
+      "sentence": "毎日忙しすぎる生活には少し息苦しいものがある。",
+      "translation": "There's something a bit suffocating about being so busy every day.",
+      "translationEn": "Theres something a bit suffocating about being so busy every day",
+      "romaji": "Mainichi isogashisugiru seikatsu ni wa sukoshi ikigurushii mono ga aru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Theres something a bit suffocating about being so busy every day",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～やら～やら",
-      "sentence": "宿題やら掃除やら、やることがたくさんある。",
-      "translation": "I have lots of things to do, like homework and cleaning.",
-      "translationEn": "I have lots of things to do, like homework and cleaning.",
-      "romaji": "Shukudai yara souji yara, yaru koto ga takusan aru.",
+      "grammarPoint": "～ものだ",
+      "sentence": "若い時はたくさん遊ぶものだ。",
+      "translation": "It is natural to have a lot of fun when you are young.",
+      "translationEn": "It is natural to have a lot of fun when you are young",
+      "romaji": "Wakai toki wa takusan asobu mono da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: It is natural to have a lot of fun when you are young",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～やら～やら",
-      "sentence": "野菜やら果物やら、色々な食べ物を買いました。",
-      "translation": "I bought all sorts of foods, such as vegetables and fruits.",
-      "translationEn": "I bought all sorts of foods, such as vegetables and fruits.",
-      "romaji": "Yasai yara kudamono yara, iroiro na tabemono wo kaimashita.",
+      "grammarPoint": "～ものだ",
+      "sentence": "約束をしたら、守るものだ。",
+      "translation": "If you make a promise, you should keep it.",
+      "translationEn": "If you make a promise, you should keep it",
+      "romaji": "Yakusoku o shitara, mamoru mono da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If you make a promise, you should keep it",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～やら～やら",
-      "sentence": "彼女は歌がうまいやら踊れるやら、本当に多才だ。",
-      "translation": "She’s really talented—she can sing well, dance, and so on.",
-      "translationEn": "She’s really talented—she can sing well, dance, and so on.",
-      "romaji": "Kanojo wa uta ga umai yara odoreru yara, hontou ni tasai da.",
+      "grammarPoint": "～ものだ",
+      "sentence": "お客さんが来ると、お茶を出すものだ。",
+      "translation": "When guests arrive, it's customary to serve tea.",
+      "translationEn": "When guests arrive, its customary to serve tea",
+      "romaji": "Okyakusan ga kuru to, ocha o dasu mono da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When guests arrive, its customary to serve tea",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～やら～やら",
-      "sentence": "お店にはバッグやら靴やらアクセサリーやらが置いてある。",
-      "translation": "The store has all kinds of items like bags, shoes, accessories, etc.",
-      "translationEn": "The store has all kinds of items like bags, shoes, accessories, etc.",
-      "romaji": "Omise ni wa baggu yara kutsu yara akusesarii yara ga oite aru.",
+      "grammarPoint": "～ものだ",
+      "sentence": "人生は困難に立ち向かうものだ。",
+      "translation": "In life, one ought to face hardships.",
+      "translationEn": "In life, one ought to face hardships",
+      "romaji": "Jinsei wa konnan ni tachimukau mono da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～ようがない",
-      "sentence": "彼の連絡先がわからないので、助けようがない。",
-      "translation": "I don't know his contact information, so there's no way I can help him.",
-      "translationEn": "I don't know his contact information, so there's no way I can help him.",
-      "romaji": "Kare no renrakusaki ga wakaranai node, tasukeyou ga nai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～ようがない",
-      "sentence": "ここまで壊れてしまったら、もう直しようがない。",
-      "translation": "Now that it's broken this badly, there's no way to fix it.",
-      "translationEn": "Now that it's broken this badly, there's no way to fix it.",
-      "romaji": "Koko made kowarete shimattara, mou naoshiyou ga nai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～ようがない",
-      "sentence": "証拠が全くないから、彼が犯人だと証明しようがない。",
-      "translation": "There’s no evidence at all, so there’s no way to prove he’s the culprit.",
-      "translationEn": "There’s no evidence at all, so there’s no way to prove he’s the culprit.",
-      "romaji": "Shouko ga mattaku nai kara, kare ga hannin da to shoumeishiyou ga nai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～ようがない",
-      "sentence": "突然英語で話しかけられて、何と答えればいいか分からず答えようがなかった。",
-      "translation": "I was suddenly spoken to in English and didn’t know how to respond, so there was no way for me to reply.",
-      "translationEn": "I was suddenly spoken to in English and didn’t know how to respond, so there was no way for me to reply.",
-      "romaji": "Totsuzen eigo de hanashikakerarete, nan to kotaereba ii ka wakarazu kotaeyou ga nakatta.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: In life, one ought to face hardships",
+      "translationViSource": "internal-en-example-draft"
     }
   ]
 }

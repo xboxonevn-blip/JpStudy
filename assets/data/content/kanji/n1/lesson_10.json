@@ -1,330 +1,415 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N1",
   "lessonId": 10,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n1_l10_k001",
+      "kanjiId": "n1_jlpt_vocab_k073",
       "lessonId": 10,
       "level": "N1",
-      "character": "勈",
-      "strokeCount": 6,
-      "labels": {
-        "hanViet": "HAN 73",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "勈 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on73"
-        ],
-        "kunyomi": [
-          "kun73"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 勈 qua van canh N1.",
-        "en": "Remember 勈 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 73",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 73",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l10_k002",
-      "lessonId": 10,
-      "level": "N1",
-      "character": "務",
-      "strokeCount": 7,
-      "labels": {
-        "hanViet": "HAN 74",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "務 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on74"
-        ],
-        "kunyomi": [
-          "kun74"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 務 qua van canh N1.",
-        "en": "Remember 務 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 74",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 74",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l10_k003",
-      "lessonId": 10,
-      "level": "N1",
-      "character": "勪",
+      "character": "油",
       "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 75",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "勪 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Dầu",
+        "meaningVi": "oil painting",
+        "meaningViDisplay": "油 (oil painting)",
+        "meaningEn": "oil painting"
       },
       "readings": {
-        "onyomi": [
-          "on75"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun75"
+          "あぶらえ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 勪 qua van canh N1.",
-        "en": "Remember 勪 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 油絵 (oil painting).",
+        "en": "Appears in JLPT N1 vocabulary: 油絵 (oil painting)."
       },
       "decomposition": {
-        "hanViet": "HAN 75",
-        "structure": "standalone",
+        "hanViet": "Dầu",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 75",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Dau",
+        "meaningViNoAccent": "oil painting",
+        "meaningEnNoAccent": "oil painting"
       },
+      "examples": [
+        {
+          "word": "油絵",
+          "reading": "あぶらえ",
+          "meaning": "oil painting"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l10_k004",
+      "kanjiId": "n1_jlpt_vocab_k074",
       "lessonId": 10,
       "level": "N1",
-      "character": "勻",
-      "strokeCount": 9,
-      "labels": {
-        "hanViet": "HAN 76",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "勻 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on76"
-        ],
-        "kunyomi": [
-          "kun76"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 勻 qua van canh N1.",
-        "en": "Remember 勻 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 76",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 76",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l10_k005",
-      "lessonId": 10,
-      "level": "N1",
-      "character": "匌",
-      "strokeCount": 10,
-      "labels": {
-        "hanViet": "HAN 77",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "匌 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on77"
-        ],
-        "kunyomi": [
-          "kun77"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 匌 qua van canh N1.",
-        "en": "Remember 匌 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 77",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 77",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l10_k006",
-      "lessonId": 10,
-      "level": "N1",
-      "character": "匝",
-      "strokeCount": 11,
-      "labels": {
-        "hanViet": "HAN 78",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "匝 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on78"
-        ],
-        "kunyomi": [
-          "kun78"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 匝 qua van canh N1.",
-        "en": "Remember 匝 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 78",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 78",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l10_k007",
-      "lessonId": 10,
-      "level": "N1",
-      "character": "匮",
+      "character": "絵",
       "strokeCount": 12,
       "labels": {
-        "hanViet": "HAN 79",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "匮 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": null,
+        "meaningVi": "oil painting",
+        "meaningViDisplay": "絵 (oil painting)",
+        "meaningEn": "oil painting"
       },
       "readings": {
-        "onyomi": [
-          "on79"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun79"
+          "あぶらえ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 匮 qua van canh N1.",
-        "en": "Remember 匮 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 油絵 (oil painting).",
+        "en": "Appears in JLPT N1 vocabulary: 油絵 (oil painting)."
       },
       "decomposition": {
-        "hanViet": "HAN 79",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 79",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "oil painting",
+        "meaningEnNoAccent": "oil painting"
       },
+      "examples": [
+        {
+          "word": "油絵",
+          "reading": "あぶらえ",
+          "meaning": "oil painting"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n1_l10_k008",
+      "kanjiId": "n1_jlpt_vocab_k075",
       "lessonId": 10,
       "level": "N1",
-      "character": "匿",
-      "strokeCount": 13,
+      "character": "炙",
+      "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 80",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "匿 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": null,
+        "meaningVi": "to scorch",
+        "meaningViDisplay": "炙 (to scorch)",
+        "meaningEn": "to scorch"
       },
       "readings": {
-        "onyomi": [
-          "on80"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun80"
+          "あぶる"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 匿 qua van canh N1.",
-        "en": "Remember 匿 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 炙る (to scorch).",
+        "en": "Appears in JLPT N1 vocabulary: 炙る (to scorch)."
       },
       "decomposition": {
-        "hanViet": "HAN 80",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 80",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "to scorch",
+        "meaningEnNoAccent": "to scorch"
       },
+      "examples": [
+        {
+          "word": "炙る",
+          "reading": "あぶる",
+          "meaning": "to scorch"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k076",
+      "lessonId": 10,
+      "level": "N1",
+      "character": "甘",
+      "strokeCount": 5,
+      "labels": {
+        "hanViet": "Cam",
+        "meaningVi": "to behave like a spoiled child, to fawn on",
+        "meaningViDisplay": "甘 (to behave like a spoiled child, to fawn on)",
+        "meaningEn": "to behave like a spoiled child, to fawn on"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あまえる"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 甘える (to behave like a spoiled child, to fawn on).",
+        "en": "Appears in JLPT N1 vocabulary: 甘える (to behave like a spoiled child, to fawn on)."
+      },
+      "decomposition": {
+        "hanViet": "Cam",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Cam",
+        "meaningViNoAccent": "to behave like a spoiled child, to fawn on",
+        "meaningEnNoAccent": "to behave like a spoiled child, to fawn on"
+      },
+      "examples": [
+        {
+          "word": "甘える",
+          "reading": "あまえる",
+          "meaning": "to behave like a spoiled child, to fawn on"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k077",
+      "lessonId": 10,
+      "level": "N1",
+      "character": "雨",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "rain gear",
+        "meaningViDisplay": "雨 (rain gear)",
+        "meaningEn": "rain gear"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あまぐ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 雨具 (rain gear).",
+        "en": "Appears in JLPT N1 vocabulary: 雨具 (rain gear)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "rain gear",
+        "meaningEnNoAccent": "rain gear"
+      },
+      "examples": [
+        {
+          "word": "雨具",
+          "reading": "あまぐ",
+          "meaning": "rain gear"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k078",
+      "lessonId": 10,
+      "level": "N1",
+      "character": "具",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Cụ",
+        "meaningVi": "rain gear",
+        "meaningViDisplay": "具 (rain gear)",
+        "meaningEn": "rain gear"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あまぐ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 雨具 (rain gear).",
+        "en": "Appears in JLPT N1 vocabulary: 雨具 (rain gear)."
+      },
+      "decomposition": {
+        "hanViet": "Cụ",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Cu",
+        "meaningViNoAccent": "rain gear",
+        "meaningEnNoAccent": "rain gear"
+      },
+      "examples": [
+        {
+          "word": "雨具",
+          "reading": "あまぐ",
+          "meaning": "rain gear"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k079",
+      "lessonId": 10,
+      "level": "N1",
+      "character": "天",
+      "strokeCount": 4,
+      "labels": {
+        "hanViet": "Thiên",
+        "meaningVi": "heavenly, imperial",
+        "meaningViDisplay": "天 (heavenly, imperial)",
+        "meaningEn": "heavenly, imperial"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あまつ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 天 (heavenly, imperial).",
+        "en": "Appears in JLPT N1 vocabulary: 天 (heavenly, imperial)."
+      },
+      "decomposition": {
+        "hanViet": "Thiên",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Thien",
+        "meaningViNoAccent": "heavenly, imperial",
+        "meaningEnNoAccent": "heavenly, imperial"
+      },
+      "examples": [
+        {
+          "word": "天",
+          "reading": "あまつ",
+          "meaning": "heavenly, imperial"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k080",
+      "lessonId": 10,
+      "level": "N1",
+      "character": "網",
+      "strokeCount": 14,
+      "labels": {
+        "hanViet": "Võng",
+        "meaningVi": "net, network",
+        "meaningViDisplay": "網 (net, network)",
+        "meaningEn": "net, network"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あみ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 網 (net, network).",
+        "en": "Appears in JLPT N1 vocabulary: 網 (net, network)."
+      },
+      "decomposition": {
+        "hanViet": "Võng",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Vong",
+        "meaningViNoAccent": "net, network",
+        "meaningEnNoAccent": "net, network"
+      },
+      "examples": [
+        {
+          "word": "網",
+          "reading": "あみ",
+          "meaning": "net, network"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

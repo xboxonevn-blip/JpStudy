@@ -5,14 +5,15 @@ Status: code/data plumbing is complete and validated. Remaining work is editoria
 ## Current Seed Coverage
 
 - N3: local lesson ids 1-25 for grammar, examples, kanji, immersion.
-- N2: local lesson ids 1-25 for grammar, examples, kanji, immersion; grammar/vocab imported from Hanabira/Tanos and tagged `needs-vi-editorial`; kanji/immersion remain scaffold/manual-review.
-- N1: local lesson ids 1-25 for grammar, examples, kanji, immersion; grammar/vocab imported from Hanabira/Tanos and tagged `needs-vi-editorial`; kanji/immersion remain scaffold/manual-review.
+- N2: local lesson ids 1-25 for grammar, examples, kanji, immersion; 191 grammar explanations are user-approved Vietnamese drafts; 1797 vocab items remain internal Vietnamese drafts tagged `needs-human-review`; 200 derived kanji have user-approved Unihan stroke/Hán Việt metadata where available; 25 original reading passages are user-approved.
+- N1: local lesson ids 1-25 for grammar, examples, kanji, immersion; 245 grammar explanations are user-approved Vietnamese drafts; 3476 vocab items remain internal Vietnamese drafts tagged `needs-human-review`; 200 derived kanji have user-approved Unihan stroke/Hán Việt metadata where available; 25 original reading passages are user-approved.
 
 ## Editorial Exit Criteria
 
-- Review imported grammar explanations and add human-quality Vietnamese copy.
-- Replace synthetic kanji placeholders with a reviewed N2/N1 kanji syllabus, readings, meanings, examples, and stroke counts.
-- Replace immersion scaffold articles with natural graded reading passages and validated quizzes.
+- Improve approved N2/N1 grammar explanations with example-level Vietnamese translations when editorial time is available.
+- Review `docs/reports/upper-jlpt-vocab-vi-review.csv`, replacing `[VI cần duyệt]` fallback glosses with natural Vietnamese.
+- Review `docs/reports/upper-jlpt-kanji-unihan-review.csv` for kanji missing Unihan Hán Việt values, then replace derived kanji lists with a reviewed N2/N1 syllabus when available.
+- Add comprehension questions for approved N2/N1 immersion passages.
 - Remove `manual-review-needed` / `needs-vi-editorial` tags only after review passes.
 
 ## Guardrails

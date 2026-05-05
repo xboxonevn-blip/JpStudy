@@ -1,330 +1,415 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N1",
   "lessonId": 18,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n1_l18_k001",
+      "kanjiId": "n1_jlpt_vocab_k137",
       "lessonId": 18,
       "level": "N1",
-      "character": "倀",
-      "strokeCount": 10,
-      "labels": {
-        "hanViet": "HAN 137",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "倀 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on137"
-        ],
-        "kunyomi": [
-          "kun137"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 倀 qua van canh N1.",
-        "en": "Remember 倀 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 137",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 137",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l18_k002",
-      "lessonId": 18,
-      "level": "N1",
-      "character": "們",
+      "character": "異",
       "strokeCount": 11,
       "labels": {
-        "hanViet": "HAN 138",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "們 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": null,
+        "meaningVi": "objection, dissent, protest",
+        "meaningViDisplay": "異 (objection, dissent, protest)",
+        "meaningEn": "objection, dissent, protest"
       },
       "readings": {
-        "onyomi": [
-          "on138"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun138"
+          "いぎ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 們 qua van canh N1.",
-        "en": "Remember 們 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 異議 (objection, dissent, protest).",
+        "en": "Appears in JLPT N1 vocabulary: 異議 (objection, dissent, protest)."
       },
       "decomposition": {
-        "hanViet": "HAN 138",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 138",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "objection, dissent, protest",
+        "meaningEnNoAccent": "objection, dissent, protest"
       },
+      "examples": [
+        {
+          "word": "異議",
+          "reading": "いぎ",
+          "meaning": "objection, dissent, protest"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n1_l18_k003",
+      "kanjiId": "n1_jlpt_vocab_k138",
       "lessonId": 18,
       "level": "N1",
-      "character": "倢",
-      "strokeCount": 12,
+      "character": "議",
+      "strokeCount": 20,
       "labels": {
-        "hanViet": "HAN 139",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "倢 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Nghị",
+        "meaningVi": "objection, dissent, protest",
+        "meaningViDisplay": "議 (objection, dissent, protest)",
+        "meaningEn": "objection, dissent, protest"
       },
       "readings": {
-        "onyomi": [
-          "on139"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun139"
+          "いぎ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 倢 qua van canh N1.",
-        "en": "Remember 倢 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 異議 (objection, dissent, protest).",
+        "en": "Appears in JLPT N1 vocabulary: 異議 (objection, dissent, protest)."
       },
       "decomposition": {
-        "hanViet": "HAN 139",
-        "structure": "standalone",
+        "hanViet": "Nghị",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 139",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Nghi",
+        "meaningViNoAccent": "objection, dissent, protest",
+        "meaningEnNoAccent": "objection, dissent, protest"
       },
+      "examples": [
+        {
+          "word": "異議",
+          "reading": "いぎ",
+          "meaning": "objection, dissent, protest"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l18_k004",
+      "kanjiId": "n1_jlpt_vocab_k139",
       "lessonId": 18,
       "level": "N1",
-      "character": "倳",
+      "character": "軍",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Quân",
+        "meaningVi": "war, battle, campaign, fight",
+        "meaningViDisplay": "軍 (war, battle, campaign, fight)",
+        "meaningEn": "war, battle, campaign, fight"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いくさ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 軍 (war, battle, campaign, fight).",
+        "en": "Appears in JLPT N1 vocabulary: 軍 (war, battle, campaign, fight)."
+      },
+      "decomposition": {
+        "hanViet": "Quân",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Quan",
+        "meaningViNoAccent": "war, battle, campaign, fight",
+        "meaningEnNoAccent": "war, battle, campaign, fight"
+      },
+      "examples": [
+        {
+          "word": "軍",
+          "reading": "いくさ",
+          "meaning": "war, battle, campaign, fight"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k140",
+      "lessonId": 18,
+      "level": "N1",
+      "character": "戦",
       "strokeCount": 13,
       "labels": {
-        "hanViet": "HAN 140",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "倳 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": null,
+        "meaningVi": "war, battle, campaign, fight",
+        "meaningViDisplay": "戦 (war, battle, campaign, fight)",
+        "meaningEn": "war, battle, campaign, fight"
       },
       "readings": {
-        "onyomi": [
-          "on140"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun140"
+          "いくさ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 倳 qua van canh N1.",
-        "en": "Remember 倳 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 戦 (war, battle, campaign, fight).",
+        "en": "Appears in JLPT N1 vocabulary: 戦 (war, battle, campaign, fight)."
       },
       "decomposition": {
-        "hanViet": "HAN 140",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 140",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "war, battle, campaign, fight",
+        "meaningEnNoAccent": "war, battle, campaign, fight"
       },
+      "examples": [
+        {
+          "word": "戦",
+          "reading": "いくさ",
+          "meaning": "war, battle, campaign, fight"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n1_l18_k005",
+      "kanjiId": "n1_jlpt_vocab_k141",
       "lessonId": 18,
       "level": "N1",
-      "character": "偄",
-      "strokeCount": 14,
+      "character": "育",
+      "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 141",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "偄 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Dục",
+        "meaningVi": "rearing, training, nurture, cultivation, promotion",
+        "meaningViDisplay": "育 (rearing, training, nurture, cultivation, promotion)",
+        "meaningEn": "rearing, training, nurture, cultivation, promotion"
       },
       "readings": {
-        "onyomi": [
-          "on141"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun141"
+          "いくせい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 偄 qua van canh N1.",
-        "en": "Remember 偄 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 育成 (rearing, training, nurture, cultivation, promotion).",
+        "en": "Appears in JLPT N1 vocabulary: 育成 (rearing, training, nurture, cultivation, promotion)."
       },
       "decomposition": {
-        "hanViet": "HAN 141",
-        "structure": "standalone",
+        "hanViet": "Dục",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 141",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Duc",
+        "meaningViNoAccent": "rearing, training, nurture, cultivation, promotion",
+        "meaningEnNoAccent": "rearing, training, nurture, cultivation, promotion"
       },
+      "examples": [
+        {
+          "word": "育成",
+          "reading": "いくせい",
+          "meaning": "rearing, training, nurture, cultivation, promotion"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l18_k006",
+      "kanjiId": "n1_jlpt_vocab_k142",
       "lessonId": 18,
       "level": "N1",
-      "character": "偕",
-      "strokeCount": 15,
+      "character": "幾",
+      "strokeCount": 12,
       "labels": {
-        "hanViet": "HAN 142",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "偕 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": null,
+        "meaningVi": "many, numerous",
+        "meaningViDisplay": "幾 (many, numerous)",
+        "meaningEn": "many, numerous"
       },
       "readings": {
-        "onyomi": [
-          "on142"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun142"
+          "いくた"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 偕 qua van canh N1.",
-        "en": "Remember 偕 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 幾多 (many, numerous).",
+        "en": "Appears in JLPT N1 vocabulary: 幾多 (many, numerous)."
       },
       "decomposition": {
-        "hanViet": "HAN 142",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 142",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "many, numerous",
+        "meaningEnNoAccent": "many, numerous"
       },
+      "examples": [
+        {
+          "word": "幾多",
+          "reading": "いくた",
+          "meaning": "many, numerous"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n1_l18_k007",
+      "kanjiId": "n1_jlpt_vocab_k143",
       "lessonId": 18,
       "level": "N1",
-      "character": "偦",
-      "strokeCount": 16,
+      "character": "多",
+      "strokeCount": 6,
       "labels": {
-        "hanViet": "HAN 143",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "偦 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Đa",
+        "meaningVi": "many, numerous",
+        "meaningViDisplay": "多 (many, numerous)",
+        "meaningEn": "many, numerous"
       },
       "readings": {
-        "onyomi": [
-          "on143"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun143"
+          "いくた"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 偦 qua van canh N1.",
-        "en": "Remember 偦 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 幾多 (many, numerous).",
+        "en": "Appears in JLPT N1 vocabulary: 幾多 (many, numerous)."
       },
       "decomposition": {
-        "hanViet": "HAN 143",
-        "structure": "standalone",
+        "hanViet": "Đa",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 143",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Đa",
+        "meaningViNoAccent": "many, numerous",
+        "meaningEnNoAccent": "many, numerous"
       },
+      "examples": [
+        {
+          "word": "幾多",
+          "reading": "いくた",
+          "meaning": "many, numerous"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l18_k008",
+      "kanjiId": "n1_jlpt_vocab_k144",
       "lessonId": 18,
       "level": "N1",
-      "character": "偷",
-      "strokeCount": 17,
+      "character": "活",
+      "strokeCount": 9,
       "labels": {
-        "hanViet": "HAN 144",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "偷 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Hoạt",
+        "meaningVi": "to arrange (flowers)",
+        "meaningViDisplay": "活 (to arrange (flowers))",
+        "meaningEn": "to arrange (flowers)"
       },
       "readings": {
-        "onyomi": [
-          "on144"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun144"
+          "いける"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 偷 qua van canh N1.",
-        "en": "Remember 偷 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 活ける (to arrange (flowers)).",
+        "en": "Appears in JLPT N1 vocabulary: 活ける (to arrange (flowers))."
       },
       "decomposition": {
-        "hanViet": "HAN 144",
-        "structure": "standalone",
+        "hanViet": "Hoạt",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 144",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Hoat",
+        "meaningViNoAccent": "to arrange (flowers)",
+        "meaningEnNoAccent": "to arrange (flowers)"
       },
+      "examples": [
+        {
+          "word": "活ける",
+          "reading": "いける",
+          "meaning": "to arrange (flowers)"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

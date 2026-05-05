@@ -1,330 +1,416 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N2",
   "lessonId": 15,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n2_l15_k001",
+      "kanjiId": "n2_jlpt_vocab_k113",
       "lessonId": 15,
       "level": "N2",
-      "character": "乨",
-      "strokeCount": 10,
+      "character": "恨",
+      "strokeCount": 9,
       "labels": {
-        "hanViet": "HAN 113",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "乨 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Hận",
+        "meaningVi": "resentment",
+        "meaningViDisplay": "恨 (resentment)",
+        "meaningEn": "resentment"
       },
       "readings": {
-        "onyomi": [
-          "on113"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun113"
+          "うらみ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 乨 qua van canh N2.",
-        "en": "Remember 乨 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 恨み (resentment).",
+        "en": "Appears in JLPT N2 vocabulary: 恨み (resentment)."
       },
       "decomposition": {
-        "hanViet": "HAN 113",
-        "structure": "standalone",
+        "hanViet": "Hận",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 113",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Han",
+        "meaningViNoAccent": "resentment",
+        "meaningEnNoAccent": "resentment"
       },
+      "examples": [
+        {
+          "word": "恨み",
+          "reading": "うらみ",
+          "meaning": "resentment"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l15_k002",
+      "kanjiId": "n2_jlpt_vocab_k114",
       "lessonId": 15,
       "level": "N2",
-      "character": "乹",
-      "strokeCount": 11,
-      "labels": {
-        "hanViet": "HAN 114",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "乹 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on114"
-        ],
-        "kunyomi": [
-          "kun114"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 乹 qua van canh N2.",
-        "en": "Remember 乹 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 114",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 114",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l15_k003",
-      "lessonId": 15,
-      "level": "N2",
-      "character": "亊",
-      "strokeCount": 12,
-      "labels": {
-        "hanViet": "HAN 115",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "亊 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on115"
-        ],
-        "kunyomi": [
-          "kun115"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 亊 qua van canh N2.",
-        "en": "Remember 亊 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 115",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 115",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l15_k004",
-      "lessonId": 15,
-      "level": "N2",
-      "character": "些",
+      "character": "羨",
       "strokeCount": 13,
       "labels": {
-        "hanViet": "HAN 116",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "些 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "envious, enviable",
+        "meaningViDisplay": "羨 (envious, enviable)",
+        "meaningEn": "envious, enviable"
       },
       "readings": {
-        "onyomi": [
-          "on116"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun116"
+          "うらやましい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 些 qua van canh N2.",
-        "en": "Remember 些 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 羨ましい (envious, enviable).",
+        "en": "Appears in JLPT N2 vocabulary: 羨ましい (envious, enviable)."
       },
       "decomposition": {
-        "hanViet": "HAN 116",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 116",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "envious, enviable",
+        "meaningEnNoAccent": "envious, enviable"
       },
+      "examples": [
+        {
+          "word": "羨ましい",
+          "reading": "うらやましい",
+          "meaning": "envious, enviable"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l15_k005",
+      "kanjiId": "n2_jlpt_vocab_k115",
       "lessonId": 15,
       "level": "N2",
-      "character": "京",
-      "strokeCount": 14,
+      "character": "売",
+      "strokeCount": 7,
       "labels": {
-        "hanViet": "HAN 117",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "京 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "amount sold, proceeds",
+        "meaningViDisplay": "売 (amount sold, proceeds)",
+        "meaningEn": "amount sold, proceeds"
       },
       "readings": {
-        "onyomi": [
-          "on117"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun117"
+          "うりあげ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 京 qua van canh N2.",
-        "en": "Remember 京 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 売上 (amount sold, proceeds).",
+        "en": "Appears in JLPT N2 vocabulary: 売上 (amount sold, proceeds)."
       },
       "decomposition": {
-        "hanViet": "HAN 117",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 117",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "amount sold, proceeds",
+        "meaningEnNoAccent": "amount sold, proceeds"
       },
+      "examples": [
+        {
+          "word": "売上",
+          "reading": "うりあげ",
+          "meaning": "amount sold, proceeds"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l15_k006",
+      "kanjiId": "n2_jlpt_vocab_k116",
       "lessonId": 15,
       "level": "N2",
-      "character": "亽",
-      "strokeCount": 15,
+      "character": "上",
+      "strokeCount": 3,
       "labels": {
-        "hanViet": "HAN 118",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "亽 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Thượng",
+        "meaningVi": "amount sold, proceeds",
+        "meaningViDisplay": "上 (amount sold, proceeds)",
+        "meaningEn": "amount sold, proceeds"
       },
       "readings": {
-        "onyomi": [
-          "on118"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun118"
+          "うりあげ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 亽 qua van canh N2.",
-        "en": "Remember 亽 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 売上 (amount sold, proceeds).",
+        "en": "Appears in JLPT N2 vocabulary: 売上 (amount sold, proceeds)."
       },
       "decomposition": {
-        "hanViet": "HAN 118",
-        "structure": "standalone",
+        "hanViet": "Thượng",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 118",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Thuong",
+        "meaningViNoAccent": "amount sold, proceeds",
+        "meaningEnNoAccent": "amount sold, proceeds"
       },
+      "examples": [
+        {
+          "word": "売上",
+          "reading": "うりあげ",
+          "meaning": "amount sold, proceeds"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l15_k007",
+      "kanjiId": "n2_jlpt_vocab_k117",
       "lessonId": 15,
       "level": "N2",
-      "character": "从",
-      "strokeCount": 16,
+      "character": "切",
+      "strokeCount": 4,
       "labels": {
-        "hanViet": "HAN 119",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "从 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Thiết",
+        "meaningVi": "sold-out",
+        "meaningViDisplay": "切 (sold-out)",
+        "meaningEn": "sold-out"
       },
       "readings": {
-        "onyomi": [
-          "on119"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun119"
+          "うりきれ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 从 qua van canh N2.",
-        "en": "Remember 从 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 売り切れ (sold-out).",
+        "en": "Appears in JLPT N2 vocabulary: 売り切れ (sold-out)."
       },
       "decomposition": {
-        "hanViet": "HAN 119",
-        "structure": "standalone",
+        "hanViet": "Thiết",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 119",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Thiet",
+        "meaningViNoAccent": "sold-out",
+        "meaningEnNoAccent": "sold-out"
       },
+      "examples": [
+        {
+          "word": "売り切れ",
+          "reading": "うりきれ",
+          "meaning": "sold-out"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l15_k008",
+      "kanjiId": "n2_jlpt_vocab_k118",
       "lessonId": 15,
       "level": "N2",
-      "character": "仟",
-      "strokeCount": 17,
+      "character": "行",
+      "strokeCount": 6,
       "labels": {
-        "hanViet": "HAN 120",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "仟 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Hàng",
+        "meaningVi": "sales",
+        "meaningViDisplay": "行 (sales)",
+        "meaningEn": "sales"
       },
       "readings": {
-        "onyomi": [
-          "on120"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun120"
+          "うれゆき"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 仟 qua van canh N2.",
-        "en": "Remember 仟 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 売行き (sales).",
+        "en": "Appears in JLPT N2 vocabulary: 売行き (sales)."
       },
       "decomposition": {
-        "hanViet": "HAN 120",
-        "structure": "standalone",
+        "hanViet": "Hàng",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 120",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Hang",
+        "meaningViNoAccent": "sales",
+        "meaningEnNoAccent": "sales"
       },
+      "examples": [
+        {
+          "word": "売行き",
+          "reading": "うれゆき",
+          "meaning": "sales"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k119",
+      "lessonId": 15,
+      "level": "N2",
+      "character": "運",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Vận",
+        "meaningVi": "canal, waterway",
+        "meaningViDisplay": "運 (canal, waterway)",
+        "meaningEn": "canal, waterway"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "うんが"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 運河 (canal, waterway).",
+        "en": "Appears in JLPT N2 vocabulary: 運河 (canal, waterway)."
+      },
+      "decomposition": {
+        "hanViet": "Vận",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Van",
+        "meaningViNoAccent": "canal, waterway",
+        "meaningEnNoAccent": "canal, waterway"
+      },
+      "examples": [
+        {
+          "word": "運河",
+          "reading": "うんが",
+          "meaning": "canal, waterway"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k120",
+      "lessonId": 15,
+      "level": "N2",
+      "character": "河",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Hà",
+        "meaningVi": "canal, waterway",
+        "meaningViDisplay": "河 (canal, waterway)",
+        "meaningEn": "canal, waterway"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "うんが"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 運河 (canal, waterway).",
+        "en": "Appears in JLPT N2 vocabulary: 運河 (canal, waterway)."
+      },
+      "decomposition": {
+        "hanViet": "Hà",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Ha",
+        "meaningViNoAccent": "canal, waterway",
+        "meaningEnNoAccent": "canal, waterway"
+      },
+      "examples": [
+        {
+          "word": "運河",
+          "reading": "うんが",
+          "meaning": "canal, waterway"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

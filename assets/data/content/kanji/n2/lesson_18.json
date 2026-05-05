@@ -1,330 +1,417 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N2",
   "lessonId": 18,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n2_l18_k001",
+      "kanjiId": "n2_jlpt_vocab_k137",
       "lessonId": 18,
       "level": "N2",
-      "character": "倀",
-      "strokeCount": 10,
-      "labels": {
-        "hanViet": "HAN 137",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "倀 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on137"
-        ],
-        "kunyomi": [
-          "kun137"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 倀 qua van canh N2.",
-        "en": "Remember 倀 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 137",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 137",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l18_k002",
-      "lessonId": 18,
-      "level": "N2",
-      "character": "們",
-      "strokeCount": 11,
-      "labels": {
-        "hanViet": "HAN 138",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "們 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on138"
-        ],
-        "kunyomi": [
-          "kun138"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 們 qua van canh N2.",
-        "en": "Remember 們 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 138",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 138",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l18_k003",
-      "lessonId": 18,
-      "level": "N2",
-      "character": "倢",
-      "strokeCount": 12,
-      "labels": {
-        "hanViet": "HAN 139",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "倢 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on139"
-        ],
-        "kunyomi": [
-          "kun139"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 倢 qua van canh N2.",
-        "en": "Remember 倢 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 139",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 139",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l18_k004",
-      "lessonId": 18,
-      "level": "N2",
-      "character": "倳",
+      "character": "遠",
       "strokeCount": 13,
       "labels": {
-        "hanViet": "HAN 140",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "倳 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Viễn",
+        "meaningVi": "trip, hike, picnic",
+        "meaningViDisplay": "遠 (trip, hike, picnic)",
+        "meaningEn": "trip, hike, picnic"
       },
       "readings": {
-        "onyomi": [
-          "on140"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun140"
+          "えんそく"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 倳 qua van canh N2.",
-        "en": "Remember 倳 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 遠足 (trip, hike, picnic).",
+        "en": "Appears in JLPT N2 vocabulary: 遠足 (trip, hike, picnic)."
       },
       "decomposition": {
-        "hanViet": "HAN 140",
-        "structure": "standalone",
+        "hanViet": "Viễn",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 140",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Vien",
+        "meaningViNoAccent": "trip, hike, picnic",
+        "meaningEnNoAccent": "trip, hike, picnic"
       },
+      "examples": [
+        {
+          "word": "遠足",
+          "reading": "えんそく",
+          "meaning": "trip, hike, picnic"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l18_k005",
+      "kanjiId": "n2_jlpt_vocab_k138",
       "lessonId": 18,
       "level": "N2",
-      "character": "偄",
-      "strokeCount": 14,
+      "character": "延",
+      "strokeCount": 6,
       "labels": {
-        "hanViet": "HAN 141",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "偄 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Dang",
+        "meaningVi": "extension, elongation, prolongation, lengthening",
+        "meaningViDisplay": "延 (extension, elongation, prolongation, lengthening)",
+        "meaningEn": "extension, elongation, prolongation, lengthening"
       },
       "readings": {
-        "onyomi": [
-          "on141"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun141"
+          "えんちょう"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 偄 qua van canh N2.",
-        "en": "Remember 偄 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 延長 (extension, elongation, prolongation, lengthening).",
+        "en": "Appears in JLPT N2 vocabulary: 延長 (extension, elongation, prolongation, lengthening)."
       },
       "decomposition": {
-        "hanViet": "HAN 141",
-        "structure": "standalone",
+        "hanViet": "Dang",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 141",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Dang",
+        "meaningViNoAccent": "extension, elongation, prolongation, lengthening",
+        "meaningEnNoAccent": "extension, elongation, prolongation, lengthening"
       },
+      "examples": [
+        {
+          "word": "延長",
+          "reading": "えんちょう",
+          "meaning": "extension, elongation, prolongation, lengthening"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l18_k006",
+      "kanjiId": "n2_jlpt_vocab_k139",
       "lessonId": 18,
       "level": "N2",
-      "character": "偕",
-      "strokeCount": 15,
+      "character": "長",
+      "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 142",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "偕 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Trường",
+        "meaningVi": "extension, elongation, prolongation, lengthening",
+        "meaningViDisplay": "長 (extension, elongation, prolongation, lengthening)",
+        "meaningEn": "extension, elongation, prolongation, lengthening"
       },
       "readings": {
-        "onyomi": [
-          "on142"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun142"
+          "えんちょう"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 偕 qua van canh N2.",
-        "en": "Remember 偕 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 延長 (extension, elongation, prolongation, lengthening).",
+        "en": "Appears in JLPT N2 vocabulary: 延長 (extension, elongation, prolongation, lengthening)."
       },
       "decomposition": {
-        "hanViet": "HAN 142",
-        "structure": "standalone",
+        "hanViet": "Trường",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 142",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Truong",
+        "meaningViNoAccent": "extension, elongation, prolongation, lengthening",
+        "meaningEnNoAccent": "extension, elongation, prolongation, lengthening"
       },
+      "examples": [
+        {
+          "word": "延長",
+          "reading": "えんちょう",
+          "meaning": "extension, elongation, prolongation, lengthening"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l18_k007",
+      "kanjiId": "n2_jlpt_vocab_k140",
       "lessonId": 18,
       "level": "N2",
-      "character": "偦",
-      "strokeCount": 16,
+      "character": "煙",
+      "strokeCount": 13,
       "labels": {
-        "hanViet": "HAN 143",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "偦 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "chimney",
+        "meaningViDisplay": "煙 (chimney)",
+        "meaningEn": "chimney"
       },
       "readings": {
-        "onyomi": [
-          "on143"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun143"
+          "えんとつ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 偦 qua van canh N2.",
-        "en": "Remember 偦 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 煙突 (chimney).",
+        "en": "Appears in JLPT N2 vocabulary: 煙突 (chimney)."
       },
       "decomposition": {
-        "hanViet": "HAN 143",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 143",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "chimney",
+        "meaningEnNoAccent": "chimney"
       },
+      "examples": [
+        {
+          "word": "煙突",
+          "reading": "えんとつ",
+          "meaning": "chimney"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l18_k008",
+      "kanjiId": "n2_jlpt_vocab_k141",
       "lessonId": 18,
       "level": "N2",
-      "character": "偷",
-      "strokeCount": 17,
+      "character": "突",
+      "strokeCount": 9,
       "labels": {
-        "hanViet": "HAN 144",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "偷 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Đột",
+        "meaningVi": "chimney",
+        "meaningViDisplay": "突 (chimney)",
+        "meaningEn": "chimney"
       },
       "readings": {
-        "onyomi": [
-          "on144"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun144"
+          "えんとつ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 偷 qua van canh N2.",
-        "en": "Remember 偷 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 煙突 (chimney).",
+        "en": "Appears in JLPT N2 vocabulary: 煙突 (chimney)."
       },
       "decomposition": {
-        "hanViet": "HAN 144",
-        "structure": "standalone",
+        "hanViet": "Đột",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 144",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Đot",
+        "meaningViNoAccent": "chimney",
+        "meaningEnNoAccent": "chimney"
       },
+      "examples": [
+        {
+          "word": "煙突",
+          "reading": "えんとつ",
+          "meaning": "chimney"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k142",
+      "lessonId": 18,
+      "level": "N2",
+      "character": "追",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Truy",
+        "meaningVi": "to chase or run after someone, to run down, to pursue",
+        "meaningViDisplay": "追 (to chase or run after someone, to run down, to pursue)",
+        "meaningEn": "to chase or run after someone, to run down, to pursue"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "おいかける"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 追い掛ける (to chase or run after someone, to run down, to pursue).",
+        "en": "Appears in JLPT N2 vocabulary: 追い掛ける (to chase or run after someone, to run down, to pursue)."
+      },
+      "decomposition": {
+        "hanViet": "Truy",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Truy",
+        "meaningViNoAccent": "to chase or run after someone, to run down, to pursue",
+        "meaningEnNoAccent": "to chase or run after someone, to run down, to pursue"
+      },
+      "examples": [
+        {
+          "word": "追い掛ける",
+          "reading": "おいかける",
+          "meaning": "to chase or run after someone, to run down, to pursue"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k143",
+      "lessonId": 18,
+      "level": "N2",
+      "character": "掛",
+      "strokeCount": 11,
+      "labels": {
+        "hanViet": "Quẩy",
+        "meaningVi": "to chase or run after someone, to run down, to pursue",
+        "meaningViDisplay": "掛 (to chase or run after someone, to run down, to pursue)",
+        "meaningEn": "to chase or run after someone, to run down, to pursue"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "おいかける"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 追い掛ける (to chase or run after someone, to run down, to pursue).",
+        "en": "Appears in JLPT N2 vocabulary: 追い掛ける (to chase or run after someone, to run down, to pursue)."
+      },
+      "decomposition": {
+        "hanViet": "Quẩy",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Quay",
+        "meaningViNoAccent": "to chase or run after someone, to run down, to pursue",
+        "meaningEnNoAccent": "to chase or run after someone, to run down, to pursue"
+      },
+      "examples": [
+        {
+          "word": "追い掛ける",
+          "reading": "おいかける",
+          "meaning": "to chase or run after someone, to run down, to pursue"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k144",
+      "lessonId": 18,
+      "level": "N2",
+      "character": "越",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Việt",
+        "meaningVi": "to pass (e.g. car), to outdistance, to outstrip",
+        "meaningViDisplay": "越 (to pass (e.g. car), to outdistance, to outstrip)",
+        "meaningEn": "to pass (e.g. car), to outdistance, to outstrip"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "おいこす"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 追い越す (to pass (e.g. car), to outdistance, to outstrip).",
+        "en": "Appears in JLPT N2 vocabulary: 追い越す (to pass (e.g. car), to outdistance, to outstrip)."
+      },
+      "decomposition": {
+        "hanViet": "Việt",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Viet",
+        "meaningViNoAccent": "to pass (e.g. car), to outdistance, to outstrip",
+        "meaningEnNoAccent": "to pass (e.g. car), to outdistance, to outstrip"
+      },
+      "examples": [
+        {
+          "word": "追い越す",
+          "reading": "おいこす",
+          "meaning": "to pass (e.g. car), to outdistance, to outstrip"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

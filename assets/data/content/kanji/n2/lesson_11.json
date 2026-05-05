@@ -1,330 +1,417 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N2",
   "lessonId": 11,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n2_l11_k001",
+      "kanjiId": "n2_jlpt_vocab_k081",
       "lessonId": 11,
       "level": "N2",
-      "character": "卐",
-      "strokeCount": 14,
-      "labels": {
-        "hanViet": "HAN 81",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "卐 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on81"
-        ],
-        "kunyomi": [
-          "kun81"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 卐 qua van canh N2.",
-        "en": "Remember 卐 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 81",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 81",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l11_k002",
-      "lessonId": 11,
-      "level": "N2",
-      "character": "卡",
-      "strokeCount": 15,
-      "labels": {
-        "hanViet": "HAN 82",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "卡 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on82"
-        ],
-        "kunyomi": [
-          "kun82"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 卡 qua van canh N2.",
-        "en": "Remember 卡 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 82",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 82",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l11_k003",
-      "lessonId": 11,
-      "level": "N2",
-      "character": "卲",
-      "strokeCount": 16,
-      "labels": {
-        "hanViet": "HAN 83",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "卲 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on83"
-        ],
-        "kunyomi": [
-          "kun83"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 卲 qua van canh N2.",
-        "en": "Remember 卲 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 83",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 83",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l11_k004",
-      "lessonId": 11,
-      "level": "N2",
-      "character": "厃",
-      "strokeCount": 17,
-      "labels": {
-        "hanViet": "HAN 84",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "厃 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on84"
-        ],
-        "kunyomi": [
-          "kun84"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 厃 qua van canh N2.",
-        "en": "Remember 厃 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 84",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 84",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l11_k005",
-      "lessonId": 11,
-      "level": "N2",
-      "character": "厔",
-      "strokeCount": 6,
-      "labels": {
-        "hanViet": "HAN 85",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "厔 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on85"
-        ],
-        "kunyomi": [
-          "kun85"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 厔 qua van canh N2.",
-        "en": "Remember 厔 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 85",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 85",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l11_k006",
-      "lessonId": 11,
-      "level": "N2",
-      "character": "厥",
-      "strokeCount": 7,
-      "labels": {
-        "hanViet": "HAN 86",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "厥 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on86"
-        ],
-        "kunyomi": [
-          "kun86"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 厥 qua van canh N2.",
-        "en": "Remember 厥 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 86",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 86",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l11_k007",
-      "lessonId": 11,
-      "level": "N2",
-      "character": "厶",
+      "character": "妹",
       "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 87",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "厶 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Muội",
+        "meaningVi": "cousin (female)",
+        "meaningViDisplay": "妹 (cousin (female))",
+        "meaningEn": "cousin (female)"
       },
       "readings": {
-        "onyomi": [
-          "on87"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun87"
+          "いとこ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 厶 qua van canh N2.",
-        "en": "Remember 厶 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 従姉妹 (cousin (female)).",
+        "en": "Appears in JLPT N2 vocabulary: 従姉妹 (cousin (female))."
       },
       "decomposition": {
-        "hanViet": "HAN 87",
-        "structure": "standalone",
+        "hanViet": "Muội",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 87",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Muoi",
+        "meaningViNoAccent": "cousin (female)",
+        "meaningEnNoAccent": "cousin (female)"
       },
+      "examples": [
+        {
+          "word": "従姉妹",
+          "reading": "いとこ",
+          "meaning": "cousin (female)"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l11_k008",
+      "kanjiId": "n2_jlpt_vocab_k082",
       "lessonId": 11,
       "level": "N2",
-      "character": "叇",
+      "character": "威",
       "strokeCount": 9,
       "labels": {
-        "hanViet": "HAN 88",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "叇 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Uy",
+        "meaningVi": "to be proud, to swagger",
+        "meaningViDisplay": "威 (to be proud, to swagger)",
+        "meaningEn": "to be proud, to swagger"
       },
       "readings": {
-        "onyomi": [
-          "on88"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun88"
+          "いばる"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 叇 qua van canh N2.",
-        "en": "Remember 叇 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 威張る (to be proud, to swagger).",
+        "en": "Appears in JLPT N2 vocabulary: 威張る (to be proud, to swagger)."
       },
       "decomposition": {
-        "hanViet": "HAN 88",
-        "structure": "standalone",
+        "hanViet": "Uy",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 88",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Uy",
+        "meaningViNoAccent": "to be proud, to swagger",
+        "meaningEnNoAccent": "to be proud, to swagger"
       },
+      "examples": [
+        {
+          "word": "威張る",
+          "reading": "いばる",
+          "meaning": "to be proud, to swagger"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k083",
+      "lessonId": 11,
+      "level": "N2",
+      "character": "張",
+      "strokeCount": 11,
+      "labels": {
+        "hanViet": "Trương",
+        "meaningVi": "to be proud, to swagger",
+        "meaningViDisplay": "張 (to be proud, to swagger)",
+        "meaningEn": "to be proud, to swagger"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いばる"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 威張る (to be proud, to swagger).",
+        "en": "Appears in JLPT N2 vocabulary: 威張る (to be proud, to swagger)."
+      },
+      "decomposition": {
+        "hanViet": "Trương",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Truong",
+        "meaningViNoAccent": "to be proud, to swagger",
+        "meaningEnNoAccent": "to be proud, to swagger"
+      },
+      "examples": [
+        {
+          "word": "威張る",
+          "reading": "いばる",
+          "meaning": "to be proud, to swagger"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k084",
+      "lessonId": 11,
+      "level": "N2",
+      "character": "嫌",
+      "strokeCount": 13,
+      "labels": {
+        "hanViet": "Hiềm",
+        "meaningVi": "to hate, to dislike",
+        "meaningViDisplay": "嫌 (to hate, to dislike)",
+        "meaningEn": "to hate, to dislike"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いやがる"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 嫌がる (to hate, to dislike).",
+        "en": "Appears in JLPT N2 vocabulary: 嫌がる (to hate, to dislike)."
+      },
+      "decomposition": {
+        "hanViet": "Hiềm",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Hiem",
+        "meaningViNoAccent": "to hate, to dislike",
+        "meaningEnNoAccent": "to hate, to dislike"
+      },
+      "examples": [
+        {
+          "word": "嫌がる",
+          "reading": "いやがる",
+          "meaning": "to hate, to dislike"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k085",
+      "lessonId": 11,
+      "level": "N2",
+      "character": "煎",
+      "strokeCount": 13,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "to parch, to fry",
+        "meaningViDisplay": "煎 (to parch, to fry)",
+        "meaningEn": "to parch, to fry"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いる"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 煎る (to parch, to fry).",
+        "en": "Appears in JLPT N2 vocabulary: 煎る (to parch, to fry)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "to parch, to fry",
+        "meaningEnNoAccent": "to parch, to fry"
+      },
+      "examples": [
+        {
+          "word": "煎る",
+          "reading": "いる",
+          "meaning": "to parch, to fry"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k086",
+      "lessonId": 11,
+      "level": "N2",
+      "character": "炒",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Sao",
+        "meaningVi": "",
+        "meaningViDisplay": "炒 ()",
+        "meaningEn": ""
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いる"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 炒る ().",
+        "en": "Appears in JLPT N2 vocabulary: 炒る ()."
+      },
+      "decomposition": {
+        "hanViet": "Sao",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Sao",
+        "meaningViNoAccent": "",
+        "meaningEnNoAccent": ""
+      },
+      "examples": [
+        {
+          "word": "炒る",
+          "reading": "いる",
+          "meaning": ""
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k087",
+      "lessonId": 11,
+      "level": "N2",
+      "character": "入",
+      "strokeCount": 2,
+      "labels": {
+        "hanViet": "Nhập",
+        "meaningVi": "container, case, receptacle",
+        "meaningViDisplay": "入 (container, case, receptacle)",
+        "meaningEn": "container, case, receptacle"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いれもの"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 入れ物 (container, case, receptacle).",
+        "en": "Appears in JLPT N2 vocabulary: 入れ物 (container, case, receptacle)."
+      },
+      "decomposition": {
+        "hanViet": "Nhập",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Nhap",
+        "meaningViNoAccent": "container, case, receptacle",
+        "meaningEnNoAccent": "container, case, receptacle"
+      },
+      "examples": [
+        {
+          "word": "入れ物",
+          "reading": "いれもの",
+          "meaning": "container, case, receptacle"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k088",
+      "lessonId": 11,
+      "level": "N2",
+      "character": "引",
+      "strokeCount": 4,
+      "labels": {
+        "hanViet": "Dẫn",
+        "meaningVi": "gravity",
+        "meaningViDisplay": "引 (gravity)",
+        "meaningEn": "gravity"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いんりょく"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 引力 (gravity).",
+        "en": "Appears in JLPT N2 vocabulary: 引力 (gravity)."
+      },
+      "decomposition": {
+        "hanViet": "Dẫn",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Dan",
+        "meaningViNoAccent": "gravity",
+        "meaningEnNoAccent": "gravity"
+      },
+      "examples": [
+        {
+          "word": "引力",
+          "reading": "いんりょく",
+          "meaning": "gravity"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

@@ -5,360 +5,429 @@
   "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
   "tags": [
     "source-hanabira",
-    "n2-grammar-import"
+    "n2-grammar-import",
+    "needs-human-review"
   ],
   "examples": [
     {
-      "grammarPoint": "～上は",
-      "sentence": "試験に合格した上は、パーティーを開こう。",
-      "translation": "Now that I've passed the exam, let's have a party.",
-      "translationEn": "Now that I've passed the exam, let's have a party.",
-      "romaji": "Shiken ni goukaku shita ue wa, paatii wo hirakou.",
+      "grammarPoint": "～を問わず",
+      "sentence": "このイベントは、年齢を問わず、誰でも参加できます。",
+      "translation": "This event is open to everyone, regardless of age.",
+      "translationEn": "This event is open to everyone, regardless of age",
+      "romaji": "Kono ibento wa, nenrei o towazu, dare demo sanka dekimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This event is open to everyone, regardless of age",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～上は",
-      "sentence": "この仕事を引き受けた上は、最後までやり遂げるつもりだ。",
-      "translation": "Now that I have taken on this job, I intend to see it through to the end.",
-      "translationEn": "Now that I have taken on this job, I intend to see it through to the end.",
-      "romaji": "Kono shigoto wo hikiuketa ue wa, saigo made yaritogeru tsumori da.",
+      "grammarPoint": "～を問わず",
+      "sentence": "このスーパーは、日曜日を問わず、毎日開いています。",
+      "translation": "This supermarket is open every day, regardless of Sunday.",
+      "translationEn": "This supermarket is open every day, regardless of Sunday",
+      "romaji": "Kono suupaa wa, nichiyoubi o towazu, mainichi aite imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This supermarket is open every day, regardless of Sunday",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～上は",
-      "sentence": "親切だと言われた上は、手伝ってあげよう。",
-      "translation": "Since you said I'm kind, I'll help you out.",
-      "translationEn": "Since you said I'm kind, I'll help you out.",
-      "romaji": "Shinsetsu da to iwareta ue wa, tetsudatte ageyou.",
+      "grammarPoint": "～を問わず",
+      "sentence": "彼女は、暑さ寒さを問わず、毎朝散歩をしています。",
+      "translation": "She takes a walk every morning, no matter the heat or cold.",
+      "translationEn": "She takes a walk every morning, no matter the heat or cold",
+      "romaji": "Kanojo wa, atsusa samusa o towazu, maiasa sanpo o shite imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She takes a walk every morning, no matter the heat or cold",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～上は",
-      "sentence": "甘いものが好きな上は、このデザートをきっと気に入るでしょう。",
-      "translation": "Now that you like sweets, you'll surely enjoy this dessert.",
-      "translationEn": "Now that you like sweets, you'll surely enjoy this dessert.",
-      "romaji": "Amai mono ga suki na ue wa, kono dezaato wo kitto ki ni iru deshou.",
+      "grammarPoint": "～を問わず",
+      "sentence": "社長は、国籍を問わず、すべての社員を平等に扱っています。",
+      "translation": "The company president treats all employees equally, regardless of nationality.",
+      "translationEn": "The company president treats all employees equally, regardless of nationality",
+      "romaji": "Shachou wa, kokuseki o towazu, subete no shain o byoudou ni atsukatte imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The company president treats all employees equally, regardless of nationality",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～以上",
-      "sentence": "彼は忙しい以上、手伝いに行っても無駄だろう。",
-      "translation": "Since he's busy, it would be pointless to try helping him.",
-      "translationEn": "Since he's busy, it would be pointless to try helping him.",
-      "romaji": "Kare wa isogashii ijou, tetsudai ni itte mo muda darou.",
+      "grammarPoint": "～を込めて",
+      "sentence": "愛を込めて料理を作りました。",
+      "translation": "I cooked the meal with love.",
+      "translationEn": "I cooked the meal with love",
+      "romaji": "Ai wo komete ryouri wo tsukurimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I cooked the meal with love",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～以上",
-      "sentence": "約束した以上、守るべきだ。",
-      "translation": "Since I made a promise, I should keep it.",
-      "translationEn": "Since I made a promise, I should keep it.",
-      "romaji": "Yakusoku shita ijou, mamoru beki da.",
+      "grammarPoint": "～を込めて",
+      "sentence": "感謝を込めて先生にお礼の手紙を書きました。",
+      "translation": "I wrote a thank-you letter to my teacher, filled with gratitude.",
+      "translationEn": "I wrote a thank-you letter to my teacher, filled with gratitude",
+      "romaji": "Kansha wo komete sensei ni orei no tegami wo kakimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I wrote a thank-you letter to my teacher, filled with gratitude",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～以上",
-      "sentence": "締め切りが近い以上、全力で仕事をしなければならない。",
-      "translation": "As long as the deadline is near, I have to work with all my might.",
-      "translationEn": "As long as the deadline is near, I have to work with all my might.",
-      "romaji": "Shimekiri ga chikai ijou, zenryoku de shigoto wo shinakereba naranai.",
+      "grammarPoint": "～を込めて",
+      "sentence": "彼は全力を込めて最後の瞬間まで戦いました。",
+      "translation": "He fought until the last moment with all his strength.",
+      "translationEn": "He fought until the last moment with all his strength",
+      "romaji": "Kare wa zenryoku wo komete saigo no shunkan made tatakaimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He fought until the last moment with all his strength",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～以上",
-      "sentence": "彼女は大学生である以上、勉強が優先されるべきだ。",
-      "translation": "Since she's a college student, studying should be her priority.",
-      "translationEn": "Since she's a college student, studying should be her priority.",
-      "romaji": "Kanojo wa daigakusei de aru ijou, benkyou ga yuusen sareru beki da.",
+      "grammarPoint": "～を込めて",
+      "sentence": "彼女は悲しみを込めて友達へ別れの言葉を伝えました。",
+      "translation": "She conveyed her farewell words to her friend with sadness.",
+      "translationEn": "She conveyed her farewell words to her friend with sadness",
+      "romaji": "Kanojo wa kanashimi wo komete tomodachi e wakare no kotoba wo tsutaemashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She conveyed her farewell words to her friend with sadness",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～以来",
-      "sentence": "卒業以来、彼女に会っていない。",
-      "translation": "I haven't seen her since we graduated.",
-      "translationEn": "I haven't seen her since we graduated.",
-      "romaji": "Sotsugyou irai, kanojo ni atte inai.",
+      "grammarPoint": "～を通じて",
+      "sentence": "インターネットを通じて友達と連絡を取ります。",
+      "translation": "I keep in touch with my friends through the internet.",
+      "translationEn": "I keep in touch with my friends through the internet",
+      "romaji": "Intaanetto wo tsuujite tomodachi to renraku wo torimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I keep in touch with my friends through the internet",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～以来",
-      "sentence": "子供が生まれて以来、忙しくなった。",
-      "translation": "I've been busy ever since my child was born.",
-      "translationEn": "I've been busy ever since my child was born.",
-      "romaji": "Kodomo ga umarete irai, isogashiku natta.",
+      "grammarPoint": "～を通じて",
+      "sentence": "彼は一日を通じて熱心に働いています。",
+      "translation": "He works diligently throughout the day.",
+      "translationEn": "He works diligently throughout the day",
+      "romaji": "Kare wa ichinichi wo tsuujite nesshin ni hataraite imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He works diligently throughout the day",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～以来",
-      "sentence": "東京に引っ越して以来、友達が増えた。",
-      "translation": "I've made more friends since I moved to Tokyo.",
-      "translationEn": "I've made more friends since I moved to Tokyo.",
-      "romaji": "Toukyou ni hikkoshite irai, tomodachi ga fueta.",
+      "grammarPoint": "～を通じて",
+      "sentence": "このイベントは週末を通じて開催されます。",
+      "translation": "This event will take place throughout the weekend.",
+      "translationEn": "This event will take place throughout the weekend",
+      "romaji": "Kono ibento wa shuumatsu wo tsuujite kaisai saremasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This event will take place throughout the weekend",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～以来",
-      "sentence": "あの映画を見た以来、彼女は怖がりになった。",
-      "translation": "She's been easily frightened ever since she watched that movie.",
-      "translationEn": "She's been easily frightened ever since she watched that movie.",
-      "romaji": "Ano eiga wo mita irai, kanojo wa kowagari ni natta.",
+      "grammarPoint": "～を通じて",
+      "sentence": "その花は春を通じて咲いています。",
+      "translation": "The flowers bloom throughout the spring.",
+      "translationEn": "The flowers bloom throughout the spring",
+      "romaji": "Sono hana wa haru wo tsuujite saiteimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The flowers bloom throughout the spring",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～切る",
-      "sentence": "彼は試験勉強をがんばり切るつもりだ。",
-      "translation": "He intends to give his absolute all to exam study.",
-      "translationEn": "He intends to give his absolute all to exam study.",
-      "romaji": "Kare wa shiken benkyou o ganbari kiru tsumori da.",
+      "grammarPoint": "～を頼りに",
+      "sentence": "彼女は地図を頼りに旅行をしている。",
+      "translation": "She is traveling relying on a map.",
+      "translationEn": "She is traveling relying on a map",
+      "romaji": "Kanojo wa chizu wo tayori ni ryokou wo shite iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She is traveling relying on a map",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～切る",
-      "sentence": "この仕事を終わり切るまで、帰らないでください。",
-      "translation": "Please don't go home until you've completely finished this job.",
-      "translationEn": "Please don't go home until you've completely finished this job.",
-      "romaji": "Kono shigoto o owari kiru made, kaeranai de kudasai.",
+      "grammarPoint": "～を頼りに",
+      "sentence": "多くの人が彼の力を頼りに生活している。",
+      "translation": "Many people are living depending on his strength.",
+      "translationEn": "Many people are living depending on his strength",
+      "romaji": "Ooku no hito ga kare no chikara wo tayori ni seikatsu shite iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Many people are living depending on his strength",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～切る",
-      "sentence": "友達と喧嘩して、何も言い切れなかった。",
-      "translation": "I argued with my friend and couldn't say everything I wanted to say.",
-      "translationEn": "I argued with my friend and couldn't say everything I wanted to say.",
-      "romaji": "Tomodachi to kenka shite, nanimo iikirenakatta.",
+      "grammarPoint": "～を頼りに",
+      "sentence": "このプロジェクトでは、君のスキルを頼りにしています。",
+      "translation": "In this project, we are counting on your skills.",
+      "translationEn": "In this project, we are counting on your skills",
+      "romaji": "Kono purojekuto de wa, kimi no sukiru wo tayori ni shiteimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: In this project, we are counting on your skills",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～切る",
-      "sentence": "彼らは、そのゲームをやり切ることができました。",
-      "translation": "They were able to complete that game thoroughly.",
-      "translationEn": "They were able to complete that game thoroughly.",
-      "romaji": "Karera wa, sono geemu o yarikiru koto ga dekimashita.",
+      "grammarPoint": "～を頼りに",
+      "sentence": "彼は友達の助けを頼りに問題を解決しようとした。",
+      "translation": "He tried to solve the problem relying on his friend's help.",
+      "translationEn": "He tried to solve the problem relying on his friends help",
+      "romaji": "Kare wa tomodachi no tasuke wo tayori ni mondai wo kaiketsu shiyou to shita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He tried to solve the problem relying on his friends help",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～反面",
-      "sentence": "この車は速い反面、燃費が悪いです。",
-      "translation": "On the one hand, this car is fast, but on the other hand, it has poor fuel efficiency.",
-      "translationEn": "On the one hand, this car is fast, but on the other hand, it has poor fuel efficiency.",
-      "romaji": "Kono kuruma wa hayai hanmen, nenpi ga warui desu.",
+      "grammarPoint": "～一方",
+      "sentence": "技術が進化する一方、生活が忙しくなっている。",
+      "translation": "While technology advances, life is getting busier.",
+      "translationEn": "While technology advances, life is getting busier",
+      "romaji": "Gijutsu ga shinka suru ippou, seikatsu ga isogashiku natte iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: While technology advances, life is getting busier",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～反面",
-      "sentence": "彼は頭がいい反面、運動が苦手です。",
-      "translation": "On the one hand, he is smart, but on the other hand, he's not good at sports.",
-      "translationEn": "On the one hand, he is smart, but on the other hand, he's not good at sports.",
-      "romaji": "Kare wa atama ga ii hanmen, undou ga nigate desu.",
+      "grammarPoint": "～一方",
+      "sentence": "日本語が上達する一方、英語力が下がっている気がする。",
+      "translation": "While my Japanese improves, I feel like my English ability is declining.",
+      "translationEn": "While my Japanese improves, I feel like my English ability is declining",
+      "romaji": "Nihongo ga joutatsu suru ippou, eigo-ryoku ga sagatte iru ki ga suru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: While my Japanese improves, I feel like my English ability is declining",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～反面",
-      "sentence": "彼女は親切である反面、面倒見が良すぎることがある。",
-      "translation": "On the one hand, she is kind, but on the other hand, she can be too helpful.",
-      "translationEn": "On the one hand, she is kind, but on the other hand, she can be too helpful.",
-      "romaji": "Kanojo wa shinsetsu de aru hanmen, mendoumi ga yoi sugiru koto ga aru.",
+      "grammarPoint": "～一方",
+      "sentence": "この料理は美味しい一方、ちょっと高いです。",
+      "translation": "While this dish is delicious, it’s a bit expensive.",
+      "translationEn": "While this dish is delicious, it’s a bit expensive",
+      "romaji": "Kono ryouri wa oishii ippou, chotto takai desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: While this dish is delicious, it’s a bit expensive",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～反面",
-      "sentence": "この仕事は給料が高い反面、ストレスがたくさんあります。",
-      "translation": "On the one hand, this job pays well, but on the other hand, it's quite stressful.",
-      "translationEn": "On the one hand, this job pays well, but on the other hand, it's quite stressful.",
-      "romaji": "Kono shigoto wa kyuuryou ga takai hanmen, sutoresu ga takusan arimasu.",
+      "grammarPoint": "～一方",
+      "sentence": "彼は優しい一方、厳しい面もある。",
+      "translation": "While he is kind, he also has a strict side.",
+      "translationEn": "While he is kind, he also has a strict side",
+      "romaji": "Kare wa yasashii ippou, kibishii men mo aru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: While he is kind, he also has a strict side",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～向け",
-      "sentence": "この雑誌は若者向けです。",
-      "translation": "This magazine is aimed at young people.",
-      "translationEn": "This magazine is aimed at young people.",
-      "romaji": "Kono zasshi wa wakamono-muke desu.",
+      "grammarPoint": "～一方だ",
+      "sentence": "世界の人口は増える一方だ。",
+      "translation": "The world's population continues to increase.",
+      "translationEn": "The worlds population continues to increase",
+      "romaji": "Sekai no jinkou wa fueru ippou da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The worlds population continues to increase",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～向け",
-      "sentence": "スーパーで家族向けの食品セットが売っています。",
-      "translation": "The supermarket sells food sets intended for families.",
-      "translationEn": "The supermarket sells food sets intended for families.",
-      "romaji": "Suupaa de kazoku-muke no shokuhin setto ga utte imasu.",
+      "grammarPoint": "～一方だ",
+      "sentence": "この町の治安は悪化する一方だ。",
+      "translation": "Public safety in this town is getting worse and worse.",
+      "translationEn": "Public safety in this town is getting worse and worse",
+      "romaji": "Kono machi no chian wa akka suru ippou da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Public safety in this town is getting worse and worse",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～向け",
-      "sentence": "このアプリは初心者向けに作られています。",
-      "translation": "This application is designed for beginners.",
-      "translationEn": "This application is designed for beginners.",
-      "romaji": "Kono apuri wa shoshinsha-muke ni tsukurarete imasu.",
+      "grammarPoint": "～一方だ",
+      "sentence": "僕の日本語は上達する一方だ。",
+      "translation": "My Japanese keeps improving.",
+      "translationEn": "My Japanese keeps improving",
+      "romaji": "Boku no nihongo wa joutatsu suru ippou da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: My Japanese keeps improving",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～向け",
-      "sentence": "このレストランはビーガン向けのメニューが充実しています。",
-      "translation": "This restaurant has an extensive menu aimed at vegans.",
-      "translationEn": "This restaurant has an extensive menu aimed at vegans.",
-      "romaji": "Kono resutoran wa bi-gan-muke no menyu ga juujitsu shite imasu.",
+      "grammarPoint": "～一方だ",
+      "sentence": "夏になると、暑さが厳しくなる一方だ。",
+      "translation": "As summer arrives, it just keeps getting hotter.",
+      "translationEn": "As summer arrives, it just keeps getting hotter",
+      "romaji": "Natsu ni naru to, atsusa ga kibishiku naru ippou da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As summer arrives, it just keeps getting hotter",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～恐れがある",
-      "sentence": "地震が来る恐れがあるため、避難所に行ってください。",
-      "translation": "Please go to the evacuation center because there is a risk of an earthquake.",
-      "translationEn": "Please go to the evacuation center because there is a risk of an earthquake.",
-      "romaji": "Jishin ga kuru osore ga aru tame, hinanjo ni itte kudasai.",
+      "grammarPoint": "～上で",
+      "sentence": "調査を行った上で、結論を出しましょう。",
+      "translation": "Let's draw a conclusion after conducting the investigation.",
+      "translationEn": "Lets draw a conclusion after conducting the investigation",
+      "romaji": "Chousa wo okonatta ue de, ketsuron wo dashimashou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Lets draw a conclusion after conducting the investigation",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～恐れがある",
-      "sentence": "彼は事故に遭う恐れがあるので、注意して運転してください。",
-      "translation": "There's a possibility he might have an accident, so please drive carefully.",
-      "translationEn": "There's a possibility he might have an accident, so please drive carefully.",
-      "romaji": "Kare wa jiko ni au osore ga aru node, chuui shite unten shite kudasai.",
+      "grammarPoint": "～上で",
+      "sentence": "就職活動を終えた上で、進学するかどうか決めます。",
+      "translation": "I will decide whether to continue my studies after finishing my job hunting.",
+      "translationEn": "I will decide whether to continue my studies after finishing my job hunting",
+      "romaji": "Shuushoku katsudou wo oeta ue de, shingaku suru ka dou ka kimemasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I will decide whether to continue my studies after finishing my job hunting",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～恐れがある",
-      "sentence": "この薬を飲みすぎると、副作用の恐れがある。",
-      "translation": "If you take too much of this medicine, there is a risk of side effects.",
-      "translationEn": "If you take too much of this medicine, there is a risk of side effects.",
-      "romaji": "Kono kusuri wo nomisugiru to, fukusayou no osore ga aru.",
+      "grammarPoint": "～上で",
+      "sentence": "試着した上で、この服を買うかどうか考えます。",
+      "translation": "I'll think about whether to buy these clothes after trying them on.",
+      "translationEn": "Ill think about whether to buy these clothes after trying them on",
+      "romaji": "Shichaku shita ue de, kono fuku wo kau ka dou ka kangaemasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Ill think about whether to buy these clothes after trying them on",
+      "translationViSource": "internal-en-example-draft"
     },
     {
-      "grammarPoint": "～恐れがある",
-      "sentence": "低い予算でこのプロジェクトを進めると、品質が低くなる恐れがある。",
-      "translation": "If we proceed with this project on a low budget, the quality may suffer.",
-      "translationEn": "If we proceed with this project on a low budget, the quality may suffer.",
-      "romaji": "Hikui yosan de kono purojekuto wo susumeru to, hinshitsu ga hikuku naru osore ga aru.",
+      "grammarPoint": "～上で",
+      "sentence": "経験者の意見を聞いた上で、プロジェクトの方向性を決定しましょう。",
+      "translation": "Let's decide the direction of the project after listening to those with experience.",
+      "translationEn": "Lets decide the direction of the project after listening to those with experience",
+      "romaji": "Keiken sha no iken wo kiita ue de, purojekuto no houkousei wo kettei shimashou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～折には",
-      "sentence": "喉が渇く折には、このペットボトルの水を飲んでください。",
-      "translation": "When you get thirsty, please drink water from this bottle.",
-      "translationEn": "When you get thirsty, please drink water from this bottle.",
-      "romaji": "Nodo ga kawaku ori ni wa, kono pettobotoru no mizu o nonde kudasai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～折には",
-      "sentence": "この地域に来る折には、この神社に必ずお参りしましょう。",
-      "translation": "When you visit this area, make sure to go to this shrine.",
-      "translationEn": "When you visit this area, make sure to go to this shrine.",
-      "romaji": "Kono chiiki ni kuru ori ni wa, kono jinja ni kanarazu omairi shimashou.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～折には",
-      "sentence": "彼が元気じゃない折には、具合が悪いか尋ねてください。",
-      "translation": "If he doesn't seem well, please ask if he's feeling sick.",
-      "translationEn": "If he doesn't seem well, please ask if he's feeling sick.",
-      "romaji": "Kare ga genki ja nai ori ni wa, guai ga warui ka tazunete kudasai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～折には",
-      "sentence": "チャンスがある折には、躊躇せずに行動しましょう。",
-      "translation": "When you have an opportunity, act without hesitation.",
-      "translationEn": "When you have an opportunity, act without hesitation.",
-      "romaji": "Chansu ga aru ori ni wa, chuucho sezu ni koudou shimashou.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Lets decide the direction of the project after listening to those with experience",
+      "translationViSource": "internal-en-example-draft"
     }
   ]
 }

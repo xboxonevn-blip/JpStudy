@@ -1,330 +1,414 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N2",
   "lessonId": 2,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n2_l02_k001",
+      "kanjiId": "n2_jlpt_vocab_k009",
       "lessonId": 2,
       "level": "N2",
-      "character": "予",
-      "strokeCount": 14,
+      "character": "挙",
+      "strokeCount": 10,
       "labels": {
-        "hanViet": "HAN 9",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "予 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "to raise, to fly",
+        "meaningViDisplay": "挙 (to raise, to fly)",
+        "meaningEn": "to raise, to fly"
       },
       "readings": {
-        "onyomi": [
-          "on9"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun9"
+          "あげる"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 予 qua van canh N2.",
-        "en": "Remember 予 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 挙げる (to raise, to fly).",
+        "en": "Appears in JLPT N2 vocabulary: 挙げる (to raise, to fly)."
       },
       "decomposition": {
-        "hanViet": "HAN 9",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 9",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "to raise, to fly",
+        "meaningEnNoAccent": "to raise, to fly"
       },
+      "examples": [
+        {
+          "word": "挙げる",
+          "reading": "あげる",
+          "meaning": "to raise, to fly"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l02_k002",
+      "kanjiId": "n2_jlpt_vocab_k010",
       "lessonId": 2,
       "level": "N2",
-      "character": "亙",
+      "character": "憧",
       "strokeCount": 15,
       "labels": {
-        "hanViet": "HAN 10",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "亙 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "to long for, to yearn after, to admire",
+        "meaningViDisplay": "憧 (to long for, to yearn after, to admire)",
+        "meaningEn": "to long for, to yearn after, to admire"
       },
       "readings": {
-        "onyomi": [
-          "on10"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun10"
+          "あこがれる"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 亙 qua van canh N2.",
-        "en": "Remember 亙 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 憧れる (to long for, to yearn after, to admire).",
+        "en": "Appears in JLPT N2 vocabulary: 憧れる (to long for, to yearn after, to admire)."
       },
       "decomposition": {
-        "hanViet": "HAN 10",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 10",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "to long for, to yearn after, to admire",
+        "meaningEnNoAccent": "to long for, to yearn after, to admire"
       },
+      "examples": [
+        {
+          "word": "憧れる",
+          "reading": "あこがれる",
+          "meaning": "to long for, to yearn after, to admire"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l02_k003",
+      "kanjiId": "n2_jlpt_vocab_k011",
       "lessonId": 2,
       "level": "N2",
-      "character": "亪",
-      "strokeCount": 16,
-      "labels": {
-        "hanViet": "HAN 11",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "亪 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on11"
-        ],
-        "kunyomi": [
-          "kun11"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 亪 qua van canh N2.",
-        "en": "Remember 亪 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 11",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 11",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l02_k004",
-      "lessonId": 2,
-      "level": "N2",
-      "character": "亻",
-      "strokeCount": 17,
-      "labels": {
-        "hanViet": "HAN 12",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "亻 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on12"
-        ],
-        "kunyomi": [
-          "kun12"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 亻 qua van canh N2.",
-        "en": "Remember 亻 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 12",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 12",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l02_k005",
-      "lessonId": 2,
-      "level": "N2",
-      "character": "仌",
-      "strokeCount": 6,
-      "labels": {
-        "hanViet": "HAN 13",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "仌 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on13"
-        ],
-        "kunyomi": [
-          "kun13"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 仌 qua van canh N2.",
-        "en": "Remember 仌 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 13",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 13",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l02_k006",
-      "lessonId": 2,
-      "level": "N2",
-      "character": "仝",
+      "character": "足",
       "strokeCount": 7,
       "labels": {
-        "hanViet": "HAN 14",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "仝 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Túc",
+        "meaningVi": "footprints",
+        "meaningViDisplay": "足 (footprints)",
+        "meaningEn": "footprints"
       },
       "readings": {
-        "onyomi": [
-          "on14"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun14"
+          "あしあと"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 仝 qua van canh N2.",
-        "en": "Remember 仝 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 足跡 (footprints).",
+        "en": "Appears in JLPT N2 vocabulary: 足跡 (footprints)."
       },
       "decomposition": {
-        "hanViet": "HAN 14",
-        "structure": "standalone",
+        "hanViet": "Túc",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 14",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Tuc",
+        "meaningViNoAccent": "footprints",
+        "meaningEnNoAccent": "footprints"
       },
+      "examples": [
+        {
+          "word": "足跡",
+          "reading": "あしあと",
+          "meaning": "footprints"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l02_k007",
+      "kanjiId": "n2_jlpt_vocab_k012",
       "lessonId": 2,
       "level": "N2",
-      "character": "仮",
+      "character": "跡",
+      "strokeCount": 13,
+      "labels": {
+        "hanViet": "Tích",
+        "meaningVi": "footprints",
+        "meaningViDisplay": "跡 (footprints)",
+        "meaningEn": "footprints"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あしあと"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 足跡 (footprints).",
+        "en": "Appears in JLPT N2 vocabulary: 足跡 (footprints)."
+      },
+      "decomposition": {
+        "hanViet": "Tích",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Tich",
+        "meaningViNoAccent": "footprints",
+        "meaningEnNoAccent": "footprints"
+      },
+      "examples": [
+        {
+          "word": "足跡",
+          "reading": "あしあと",
+          "meaning": "footprints"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k013",
+      "lessonId": 2,
+      "level": "N2",
+      "character": "味",
       "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 15",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "仮 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Vị",
+        "meaningVi": "to taste, to savor, to relish",
+        "meaningViDisplay": "味 (to taste, to savor, to relish)",
+        "meaningEn": "to taste, to savor, to relish"
       },
       "readings": {
-        "onyomi": [
-          "on15"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun15"
+          "あじわう"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 仮 qua van canh N2.",
-        "en": "Remember 仮 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 味わう (to taste, to savor, to relish).",
+        "en": "Appears in JLPT N2 vocabulary: 味わう (to taste, to savor, to relish)."
       },
       "decomposition": {
-        "hanViet": "HAN 15",
-        "structure": "standalone",
+        "hanViet": "Vị",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 15",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Vi",
+        "meaningViNoAccent": "to taste, to savor, to relish",
+        "meaningEnNoAccent": "to taste, to savor, to relish"
       },
+      "examples": [
+        {
+          "word": "味わう",
+          "reading": "あじわう",
+          "meaning": "to taste, to savor, to relish"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l02_k008",
+      "kanjiId": "n2_jlpt_vocab_k014",
       "lessonId": 2,
       "level": "N2",
-      "character": "仿",
-      "strokeCount": 9,
+      "character": "預",
+      "strokeCount": 13,
       "labels": {
-        "hanViet": "HAN 16",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "仿 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Dự",
+        "meaningVi": "to keep in custody, to receive on deposit, to take charge of",
+        "meaningViDisplay": "預 (to keep in custody, to receive on deposit, to take charge of)",
+        "meaningEn": "to keep in custody, to receive on deposit, to take charge of"
       },
       "readings": {
-        "onyomi": [
-          "on16"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun16"
+          "あずかる"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 仿 qua van canh N2.",
-        "en": "Remember 仿 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 預かる (to keep in custody, to receive on deposit, to take charge of).",
+        "en": "Appears in JLPT N2 vocabulary: 預かる (to keep in custody, to receive on deposit, to take charge of)."
       },
       "decomposition": {
-        "hanViet": "HAN 16",
-        "structure": "standalone",
+        "hanViet": "Dự",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 16",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Du",
+        "meaningViNoAccent": "to keep in custody, to receive on deposit, to take charge of",
+        "meaningEnNoAccent": "to keep in custody, to receive on deposit, to take charge of"
       },
+      "examples": [
+        {
+          "word": "預かる",
+          "reading": "あずかる",
+          "meaning": "to keep in custody, to receive on deposit, to take charge of"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k015",
+      "lessonId": 2,
+      "level": "N2",
+      "character": "暖",
+      "strokeCount": 13,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "to warm up, to get warm",
+        "meaningViDisplay": "暖 (to warm up, to get warm)",
+        "meaningEn": "to warm up, to get warm"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あたたまる"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 暖まる (to warm up, to get warm).",
+        "en": "Appears in JLPT N2 vocabulary: 暖まる (to warm up, to get warm)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "to warm up, to get warm",
+        "meaningEnNoAccent": "to warm up, to get warm"
+      },
+      "examples": [
+        {
+          "word": "暖まる",
+          "reading": "あたたまる",
+          "meaning": "to warm up, to get warm"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k016",
+      "lessonId": 2,
+      "level": "N2",
+      "character": "厚",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "impudent, shameless, brazen",
+        "meaningViDisplay": "厚 (impudent, shameless, brazen)",
+        "meaningEn": "impudent, shameless, brazen"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あつかましい"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 厚かましい (impudent, shameless, brazen).",
+        "en": "Appears in JLPT N2 vocabulary: 厚かましい (impudent, shameless, brazen)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "impudent, shameless, brazen",
+        "meaningEnNoAccent": "impudent, shameless, brazen"
+      },
+      "examples": [
+        {
+          "word": "厚かましい",
+          "reading": "あつかましい",
+          "meaning": "impudent, shameless, brazen"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

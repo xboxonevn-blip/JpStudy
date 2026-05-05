@@ -1,330 +1,415 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N1",
   "lessonId": 19,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n1_l19_k001",
+      "kanjiId": "n1_jlpt_vocab_k145",
       "lessonId": 19,
       "level": "N1",
-      "character": "傈",
-      "strokeCount": 6,
-      "labels": {
-        "hanViet": "HAN 145",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "傈 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on145"
-        ],
-        "kunyomi": [
-          "kun145"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 傈 qua van canh N1.",
-        "en": "Remember 傈 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 145",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 145",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l19_k002",
-      "lessonId": 19,
-      "level": "N1",
-      "character": "備",
+      "character": "見",
       "strokeCount": 7,
       "labels": {
-        "hanViet": "HAN 146",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "備 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Kiến",
+        "meaningVi": "different opinion, objection",
+        "meaningViDisplay": "見 (different opinion, objection)",
+        "meaningEn": "different opinion, objection"
       },
       "readings": {
-        "onyomi": [
-          "on146"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun146"
+          "いけん"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 備 qua van canh N1.",
-        "en": "Remember 備 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 異見 (different opinion, objection).",
+        "en": "Appears in JLPT N1 vocabulary: 異見 (different opinion, objection)."
       },
       "decomposition": {
-        "hanViet": "HAN 146",
-        "structure": "standalone",
+        "hanViet": "Kiến",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 146",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Kien",
+        "meaningViNoAccent": "different opinion, objection",
+        "meaningEnNoAccent": "different opinion, objection"
       },
+      "examples": [
+        {
+          "word": "異見",
+          "reading": "いけん",
+          "meaning": "different opinion, objection"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l19_k003",
+      "kanjiId": "n1_jlpt_vocab_k146",
       "lessonId": 19,
       "level": "N1",
-      "character": "傪",
-      "strokeCount": 8,
+      "character": "向",
+      "strokeCount": 6,
       "labels": {
-        "hanViet": "HAN 147",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "傪 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Hướng",
+        "meaningVi": "intention, idea, inclination",
+        "meaningViDisplay": "向 (intention, idea, inclination)",
+        "meaningEn": "intention, idea, inclination"
       },
       "readings": {
-        "onyomi": [
-          "on147"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun147"
+          "いこう"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 傪 qua van canh N1.",
-        "en": "Remember 傪 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 意向 (intention, idea, inclination).",
+        "en": "Appears in JLPT N1 vocabulary: 意向 (intention, idea, inclination)."
       },
       "decomposition": {
-        "hanViet": "HAN 147",
-        "structure": "standalone",
+        "hanViet": "Hướng",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 147",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Huong",
+        "meaningViNoAccent": "intention, idea, inclination",
+        "meaningEnNoAccent": "intention, idea, inclination"
       },
+      "examples": [
+        {
+          "word": "意向",
+          "reading": "いこう",
+          "meaning": "intention, idea, inclination"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l19_k004",
+      "kanjiId": "n1_jlpt_vocab_k147",
       "lessonId": 19,
       "level": "N1",
-      "character": "傻",
-      "strokeCount": 9,
-      "labels": {
-        "hanViet": "HAN 148",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "傻 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on148"
-        ],
-        "kunyomi": [
-          "kun148"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 傻 qua van canh N1.",
-        "en": "Remember 傻 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 148",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 148",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l19_k005",
-      "lessonId": 19,
-      "level": "N1",
-      "character": "僌",
-      "strokeCount": 10,
-      "labels": {
-        "hanViet": "HAN 149",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "僌 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on149"
-        ],
-        "kunyomi": [
-          "kun149"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 僌 qua van canh N1.",
-        "en": "Remember 僌 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 149",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 149",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l19_k006",
-      "lessonId": 19,
-      "level": "N1",
-      "character": "僝",
+      "character": "移",
       "strokeCount": 11,
       "labels": {
-        "hanViet": "HAN 150",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "僝 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Dời",
+        "meaningVi": "switching over to",
+        "meaningViDisplay": "移 (switching over to)",
+        "meaningEn": "switching over to"
       },
       "readings": {
-        "onyomi": [
-          "on150"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun150"
+          "いこう"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 僝 qua van canh N1.",
-        "en": "Remember 僝 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 移行 (switching over to).",
+        "en": "Appears in JLPT N1 vocabulary: 移行 (switching over to)."
       },
       "decomposition": {
-        "hanViet": "HAN 150",
-        "structure": "standalone",
+        "hanViet": "Dời",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 150",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Doi",
+        "meaningViNoAccent": "switching over to",
+        "meaningEnNoAccent": "switching over to"
       },
+      "examples": [
+        {
+          "word": "移行",
+          "reading": "いこう",
+          "meaning": "switching over to"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l19_k007",
+      "kanjiId": "n1_jlpt_vocab_k148",
       "lessonId": 19,
       "level": "N1",
-      "character": "僮",
-      "strokeCount": 12,
-      "labels": {
-        "hanViet": "HAN 151",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "僮 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on151"
-        ],
-        "kunyomi": [
-          "kun151"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 僮 qua van canh N1.",
-        "en": "Remember 僮 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 151",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 151",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l19_k008",
-      "lessonId": 19,
-      "level": "N1",
-      "character": "僿",
+      "character": "碑",
       "strokeCount": 13,
       "labels": {
-        "hanViet": "HAN 152",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "僿 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": null,
+        "meaningVi": "stone monument bearing an inscription",
+        "meaningViDisplay": "碑 (stone monument bearing an inscription)",
+        "meaningEn": "stone monument bearing an inscription"
       },
       "readings": {
-        "onyomi": [
-          "on152"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun152"
+          "いしぶみ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 僿 qua van canh N1.",
-        "en": "Remember 僿 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 碑 (stone monument bearing an inscription).",
+        "en": "Appears in JLPT N1 vocabulary: 碑 (stone monument bearing an inscription)."
       },
       "decomposition": {
-        "hanViet": "HAN 152",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 152",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "stone monument bearing an inscription",
+        "meaningEnNoAccent": "stone monument bearing an inscription"
       },
+      "examples": [
+        {
+          "word": "碑",
+          "reading": "いしぶみ",
+          "meaning": "stone monument bearing an inscription"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k149",
+      "lessonId": 19,
+      "level": "N1",
+      "character": "衣",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Y",
+        "meaningVi": "clothing, costume, outfit, garment, dress",
+        "meaningViDisplay": "衣 (clothing, costume, outfit, garment, dress)",
+        "meaningEn": "clothing, costume, outfit, garment, dress"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いしょう"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 衣装 (clothing, costume, outfit, garment, dress).",
+        "en": "Appears in JLPT N1 vocabulary: 衣装 (clothing, costume, outfit, garment, dress)."
+      },
+      "decomposition": {
+        "hanViet": "Y",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Y",
+        "meaningViNoAccent": "clothing, costume, outfit, garment, dress",
+        "meaningEnNoAccent": "clothing, costume, outfit, garment, dress"
+      },
+      "examples": [
+        {
+          "word": "衣装",
+          "reading": "いしょう",
+          "meaning": "clothing, costume, outfit, garment, dress"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k150",
+      "lessonId": 19,
+      "level": "N1",
+      "character": "装",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "clothing, costume, outfit, garment, dress",
+        "meaningViDisplay": "装 (clothing, costume, outfit, garment, dress)",
+        "meaningEn": "clothing, costume, outfit, garment, dress"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いしょう"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 衣装 (clothing, costume, outfit, garment, dress).",
+        "en": "Appears in JLPT N1 vocabulary: 衣装 (clothing, costume, outfit, garment, dress)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "clothing, costume, outfit, garment, dress",
+        "meaningEnNoAccent": "clothing, costume, outfit, garment, dress"
+      },
+      "examples": [
+        {
+          "word": "衣装",
+          "reading": "いしょう",
+          "meaning": "clothing, costume, outfit, garment, dress"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k151",
+      "lessonId": 19,
+      "level": "N1",
+      "character": "苛",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "to tease, to torment, to persecute, to chastise",
+        "meaningViDisplay": "苛 (to tease, to torment, to persecute, to chastise)",
+        "meaningEn": "to tease, to torment, to persecute, to chastise"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いじめる"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 苛める (to tease, to torment, to persecute, to chastise).",
+        "en": "Appears in JLPT N1 vocabulary: 苛める (to tease, to torment, to persecute, to chastise)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "to tease, to torment, to persecute, to chastise",
+        "meaningEnNoAccent": "to tease, to torment, to persecute, to chastise"
+      },
+      "examples": [
+        {
+          "word": "苛める",
+          "reading": "いじめる",
+          "meaning": "to tease, to torment, to persecute, to chastise"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k152",
+      "lessonId": 19,
+      "level": "N1",
+      "character": "住",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": "Trú",
+        "meaningVi": "migration, immigration",
+        "meaningViDisplay": "住 (migration, immigration)",
+        "meaningEn": "migration, immigration"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いじゅう"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 移住 (migration, immigration).",
+        "en": "Appears in JLPT N1 vocabulary: 移住 (migration, immigration)."
+      },
+      "decomposition": {
+        "hanViet": "Trú",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Tru",
+        "meaningViNoAccent": "migration, immigration",
+        "meaningEnNoAccent": "migration, immigration"
+      },
+      "examples": [
+        {
+          "word": "移住",
+          "reading": "いじゅう",
+          "meaning": "migration, immigration"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

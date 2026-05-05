@@ -1,330 +1,416 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N1",
   "lessonId": 7,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n1_l07_k001",
+      "kanjiId": "n1_jlpt_vocab_k049",
       "lessonId": 7,
       "level": "N1",
-      "character": "儰",
-      "strokeCount": 6,
+      "character": "処",
+      "strokeCount": 5,
       "labels": {
-        "hanViet": "HAN 49",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "儰 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": null,
+        "meaningVi": "1. (uk) there, over there, that place, 2. (X) (col) genitals",
+        "meaningViDisplay": "処 (1. (uk) there, over there, that place, 2. (X) (col) genitals)",
+        "meaningEn": "1. (uk) there, over there, that place, 2. (X) (col) genitals"
       },
       "readings": {
-        "onyomi": [
-          "on49"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun49"
+          "あそこ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 儰 qua van canh N1.",
-        "en": "Remember 儰 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 彼処 (1. (uk) there, over there, that place, 2. (X) (col) genitals).",
+        "en": "Appears in JLPT N1 vocabulary: 彼処 (1. (uk) there, over there, that place, 2. (X) (col) genitals)."
       },
       "decomposition": {
-        "hanViet": "HAN 49",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 49",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "1. (uk) there, over there, that place, 2. (x) (col) genitals",
+        "meaningEnNoAccent": "1. (uk) there, over there, that place, 2. (x) (col) genitals"
       },
+      "examples": [
+        {
+          "word": "彼処",
+          "reading": "あそこ",
+          "meaning": "1. (uk) there, over there, that place, 2. (X) (col) genitals"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n1_l07_k002",
+      "kanjiId": "n1_jlpt_vocab_k050",
       "lessonId": 7,
       "level": "N1",
-      "character": "允",
-      "strokeCount": 7,
-      "labels": {
-        "hanViet": "HAN 50",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "允 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on50"
-        ],
-        "kunyomi": [
-          "kun50"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 允 qua van canh N1.",
-        "en": "Remember 允 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 50",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 50",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l07_k003",
-      "lessonId": 7,
-      "level": "N1",
-      "character": "兒",
-      "strokeCount": 8,
-      "labels": {
-        "hanViet": "HAN 51",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "兒 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on51"
-        ],
-        "kunyomi": [
-          "kun51"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 兒 qua van canh N1.",
-        "en": "Remember 兒 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 51",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 51",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l07_k004",
-      "lessonId": 7,
-      "level": "N1",
-      "character": "兣",
-      "strokeCount": 9,
-      "labels": {
-        "hanViet": "HAN 52",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "兣 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on52"
-        ],
-        "kunyomi": [
-          "kun52"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 兣 qua van canh N1.",
-        "en": "Remember 兣 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 52",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 52",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l07_k005",
-      "lessonId": 7,
-      "level": "N1",
-      "character": "兴",
+      "character": "値",
       "strokeCount": 10,
       "labels": {
-        "hanViet": "HAN 53",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "兴 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Trị",
+        "meaningVi": "value, price, cost, worth, merit",
+        "meaningViDisplay": "値 (value, price, cost, worth, merit)",
+        "meaningEn": "value, price, cost, worth, merit"
       },
       "readings": {
-        "onyomi": [
-          "on53"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun53"
+          "あたい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 兴 qua van canh N1.",
-        "en": "Remember 兴 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 値 (value, price, cost, worth, merit).",
+        "en": "Appears in JLPT N1 vocabulary: 値 (value, price, cost, worth, merit)."
       },
       "decomposition": {
-        "hanViet": "HAN 53",
-        "structure": "standalone",
+        "hanViet": "Trị",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 53",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Tri",
+        "meaningViNoAccent": "value, price, cost, worth, merit",
+        "meaningEnNoAccent": "value, price, cost, worth, merit"
       },
+      "examples": [
+        {
+          "word": "値",
+          "reading": "あたい",
+          "meaning": "value, price, cost, worth, merit"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l07_k006",
+      "kanjiId": "n1_jlpt_vocab_k051",
       "lessonId": 7,
       "level": "N1",
-      "character": "内",
-      "strokeCount": 11,
+      "character": "私",
+      "strokeCount": 7,
       "labels": {
-        "hanViet": "HAN 54",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "内 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Tư",
+        "meaningVi": "I (fem)",
+        "meaningViDisplay": "私 (I (fem))",
+        "meaningEn": "I (fem)"
       },
       "readings": {
-        "onyomi": [
-          "on54"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun54"
+          "あたし"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 内 qua van canh N1.",
-        "en": "Remember 内 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 私 (I (fem)).",
+        "en": "Appears in JLPT N1 vocabulary: 私 (I (fem))."
       },
       "decomposition": {
-        "hanViet": "HAN 54",
-        "structure": "standalone",
+        "hanViet": "Tư",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 54",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Tu",
+        "meaningViNoAccent": "i (fem)",
+        "meaningEnNoAccent": "i (fem)"
       },
+      "examples": [
+        {
+          "word": "私",
+          "reading": "あたし",
+          "meaning": "I (fem)"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l07_k007",
+      "kanjiId": "n1_jlpt_vocab_k052",
       "lessonId": 7,
       "level": "N1",
-      "character": "冖",
-      "strokeCount": 12,
+      "character": "当",
+      "strokeCount": 6,
       "labels": {
-        "hanViet": "HAN 55",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "冖 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": null,
+        "meaningVi": "hit, success, reaching the mark, per ..., vicinity, neighborhood",
+        "meaningViDisplay": "当 (hit, success, reaching the mark, per ..., vicinity, neighborhood)",
+        "meaningEn": "hit, success, reaching the mark, per ..., vicinity, neighborhood"
       },
       "readings": {
-        "onyomi": [
-          "on55"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun55"
+          "あたり"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 冖 qua van canh N1.",
-        "en": "Remember 冖 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 当たり (hit, success, reaching the mark, per ..., vicinity, neighborhood).",
+        "en": "Appears in JLPT N1 vocabulary: 当たり (hit, success, reaching the mark, per ..., vicinity, neighborhood)."
       },
       "decomposition": {
-        "hanViet": "HAN 55",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 55",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "hit, success, reaching the mark, per ..., vicinity, neighborhood",
+        "meaningEnNoAccent": "hit, success, reaching the mark, per ..., vicinity, neighborhood"
       },
+      "examples": [
+        {
+          "word": "当たり",
+          "reading": "あたり",
+          "meaning": "hit, success, reaching the mark, per ..., vicinity, neighborhood"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n1_l07_k008",
+      "kanjiId": "n1_jlpt_vocab_k053",
       "lessonId": 7,
       "level": "N1",
-      "character": "冧",
-      "strokeCount": 13,
+      "character": "前",
+      "strokeCount": 9,
       "labels": {
-        "hanViet": "HAN 56",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "冧 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Tiền",
+        "meaningVi": "usual, common, ordinary, natural, reasonable, obvious",
+        "meaningViDisplay": "前 (usual, common, ordinary, natural, reasonable, obvious)",
+        "meaningEn": "usual, common, ordinary, natural, reasonable, obvious"
       },
       "readings": {
-        "onyomi": [
-          "on56"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun56"
+          "あたりまえ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 冧 qua van canh N1.",
-        "en": "Remember 冧 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 当たり前 (usual, common, ordinary, natural, reasonable, obvious).",
+        "en": "Appears in JLPT N1 vocabulary: 当たり前 (usual, common, ordinary, natural, reasonable, obvious)."
       },
       "decomposition": {
-        "hanViet": "HAN 56",
-        "structure": "standalone",
+        "hanViet": "Tiền",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 56",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Tien",
+        "meaningViNoAccent": "usual, common, ordinary, natural, reasonable, obvious",
+        "meaningEnNoAccent": "usual, common, ordinary, natural, reasonable, obvious"
       },
+      "examples": [
+        {
+          "word": "当たり前",
+          "reading": "あたりまえ",
+          "meaning": "usual, common, ordinary, natural, reasonable, obvious"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k054",
+      "lessonId": 7,
+      "level": "N1",
+      "character": "他",
+      "strokeCount": 5,
+      "labels": {
+        "hanViet": "Tha",
+        "meaningVi": "another person, unrelated person, outsider, stranger",
+        "meaningViDisplay": "他 (another person, unrelated person, outsider, stranger)",
+        "meaningEn": "another person, unrelated person, outsider, stranger"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あだびと"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 他人 (another person, unrelated person, outsider, stranger).",
+        "en": "Appears in JLPT N1 vocabulary: 他人 (another person, unrelated person, outsider, stranger)."
+      },
+      "decomposition": {
+        "hanViet": "Tha",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Tha",
+        "meaningViNoAccent": "another person, unrelated person, outsider, stranger",
+        "meaningEnNoAccent": "another person, unrelated person, outsider, stranger"
+      },
+      "examples": [
+        {
+          "word": "他人",
+          "reading": "あだびと",
+          "meaning": "another person, unrelated person, outsider, stranger"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k055",
+      "lessonId": 7,
+      "level": "N1",
+      "character": "方",
+      "strokeCount": 4,
+      "labels": {
+        "hanViet": "Phương",
+        "meaningVi": "here and there",
+        "meaningViDisplay": "方 (here and there)",
+        "meaningEn": "here and there"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あちこち"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 彼方此方 (here and there).",
+        "en": "Appears in JLPT N1 vocabulary: 彼方此方 (here and there)."
+      },
+      "decomposition": {
+        "hanViet": "Phương",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Phuong",
+        "meaningViNoAccent": "here and there",
+        "meaningEnNoAccent": "here and there"
+      },
+      "examples": [
+        {
+          "word": "彼方此方",
+          "reading": "あちこち",
+          "meaning": "here and there"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k056",
+      "lessonId": 7,
+      "level": "N1",
+      "character": "此",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Thử",
+        "meaningVi": "here and there",
+        "meaningViDisplay": "此 (here and there)",
+        "meaningEn": "here and there"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あちこち"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 彼方此方 (here and there).",
+        "en": "Appears in JLPT N1 vocabulary: 彼方此方 (here and there)."
+      },
+      "decomposition": {
+        "hanViet": "Thử",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Thu",
+        "meaningViNoAccent": "here and there",
+        "meaningEnNoAccent": "here and there"
+      },
+      "examples": [
+        {
+          "word": "彼方此方",
+          "reading": "あちこち",
+          "meaning": "here and there"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

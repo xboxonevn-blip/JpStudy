@@ -1,330 +1,418 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N2",
   "lessonId": 12,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n2_l12_k001",
+      "kanjiId": "n2_jlpt_vocab_k089",
       "lessonId": 12,
       "level": "N2",
-      "character": "变",
-      "strokeCount": 10,
+      "character": "力",
+      "strokeCount": 2,
       "labels": {
-        "hanViet": "HAN 89",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "变 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Lực",
+        "meaningVi": "gravity",
+        "meaningViDisplay": "力 (gravity)",
+        "meaningEn": "gravity"
       },
       "readings": {
-        "onyomi": [
-          "on89"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun89"
+          "いんりょく"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 变 qua van canh N2.",
-        "en": "Remember 变 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 引力 (gravity).",
+        "en": "Appears in JLPT N2 vocabulary: 引力 (gravity)."
       },
       "decomposition": {
-        "hanViet": "HAN 89",
-        "structure": "standalone",
+        "hanViet": "Lực",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 89",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Luc",
+        "meaningViNoAccent": "gravity",
+        "meaningEnNoAccent": "gravity"
       },
+      "examples": [
+        {
+          "word": "引力",
+          "reading": "いんりょく",
+          "meaning": "gravity"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l12_k002",
+      "kanjiId": "n2_jlpt_vocab_k090",
       "lessonId": 12,
       "level": "N2",
-      "character": "叩",
-      "strokeCount": 11,
-      "labels": {
-        "hanViet": "HAN 90",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "叩 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on90"
-        ],
-        "kunyomi": [
-          "kun90"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 叩 qua van canh N2.",
-        "en": "Remember 叩 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 90",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 90",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l12_k003",
-      "lessonId": 12,
-      "level": "N2",
-      "character": "叺",
+      "character": "植",
       "strokeCount": 12,
       "labels": {
-        "hanViet": "HAN 91",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "叺 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Thực",
+        "meaningVi": "garden shrubs, trees, potted plant",
+        "meaningViDisplay": "植 (garden shrubs, trees, potted plant)",
+        "meaningEn": "garden shrubs, trees, potted plant"
       },
       "readings": {
-        "onyomi": [
-          "on91"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun91"
+          "うえき"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 叺 qua van canh N2.",
-        "en": "Remember 叺 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 植木 (garden shrubs, trees, potted plant).",
+        "en": "Appears in JLPT N2 vocabulary: 植木 (garden shrubs, trees, potted plant)."
       },
       "decomposition": {
-        "hanViet": "HAN 91",
-        "structure": "standalone",
+        "hanViet": "Thực",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 91",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Thuc",
+        "meaningViNoAccent": "garden shrubs, trees, potted plant",
+        "meaningEnNoAccent": "garden shrubs, trees, potted plant"
       },
+      "examples": [
+        {
+          "word": "植木",
+          "reading": "うえき",
+          "meaning": "garden shrubs, trees, potted plant"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l12_k004",
+      "kanjiId": "n2_jlpt_vocab_k091",
       "lessonId": 12,
       "level": "N2",
-      "character": "吋",
-      "strokeCount": 13,
+      "character": "木",
+      "strokeCount": 4,
       "labels": {
-        "hanViet": "HAN 92",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "吋 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Mộc",
+        "meaningVi": "garden shrubs, trees, potted plant",
+        "meaningViDisplay": "木 (garden shrubs, trees, potted plant)",
+        "meaningEn": "garden shrubs, trees, potted plant"
       },
       "readings": {
-        "onyomi": [
-          "on92"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun92"
+          "うえき"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 吋 qua van canh N2.",
-        "en": "Remember 吋 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 植木 (garden shrubs, trees, potted plant).",
+        "en": "Appears in JLPT N2 vocabulary: 植木 (garden shrubs, trees, potted plant)."
       },
       "decomposition": {
-        "hanViet": "HAN 92",
-        "structure": "standalone",
+        "hanViet": "Mộc",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 92",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Moc",
+        "meaningViNoAccent": "garden shrubs, trees, potted plant",
+        "meaningEnNoAccent": "garden shrubs, trees, potted plant"
       },
+      "examples": [
+        {
+          "word": "植木",
+          "reading": "うえき",
+          "meaning": "garden shrubs, trees, potted plant"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l12_k005",
+      "kanjiId": "n2_jlpt_vocab_k092",
       "lessonId": 12,
       "level": "N2",
-      "character": "吜",
-      "strokeCount": 14,
+      "character": "飢",
+      "strokeCount": 10,
       "labels": {
-        "hanViet": "HAN 93",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "吜 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Cơ",
+        "meaningVi": "to starve",
+        "meaningViDisplay": "飢 (to starve)",
+        "meaningEn": "to starve"
       },
       "readings": {
-        "onyomi": [
-          "on93"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun93"
+          "うえる"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 吜 qua van canh N2.",
-        "en": "Remember 吜 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 飢える (to starve).",
+        "en": "Appears in JLPT N2 vocabulary: 飢える (to starve)."
       },
       "decomposition": {
-        "hanViet": "HAN 93",
-        "structure": "standalone",
+        "hanViet": "Cơ",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 93",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Co",
+        "meaningViNoAccent": "to starve",
+        "meaningEnNoAccent": "to starve"
       },
+      "examples": [
+        {
+          "word": "飢える",
+          "reading": "うえる",
+          "meaning": "to starve"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l12_k006",
+      "kanjiId": "n2_jlpt_vocab_k093",
       "lessonId": 12,
       "level": "N2",
-      "character": "吭",
-      "strokeCount": 15,
+      "character": "浮",
+      "strokeCount": 10,
       "labels": {
-        "hanViet": "HAN 94",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "吭 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Phù",
+        "meaningVi": "to float, to rise to surface, to come to mind",
+        "meaningViDisplay": "浮 (to float, to rise to surface, to come to mind)",
+        "meaningEn": "to float, to rise to surface, to come to mind"
       },
       "readings": {
-        "onyomi": [
-          "on94"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun94"
+          "うかぶ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 吭 qua van canh N2.",
-        "en": "Remember 吭 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 浮ぶ (to float, to rise to surface, to come to mind).",
+        "en": "Appears in JLPT N2 vocabulary: 浮ぶ (to float, to rise to surface, to come to mind)."
       },
       "decomposition": {
-        "hanViet": "HAN 94",
-        "structure": "standalone",
+        "hanViet": "Phù",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 94",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Phu",
+        "meaningViNoAccent": "to float, to rise to surface, to come to mind",
+        "meaningEnNoAccent": "to float, to rise to surface, to come to mind"
       },
+      "examples": [
+        {
+          "word": "浮ぶ",
+          "reading": "うかぶ",
+          "meaning": "to float, to rise to surface, to come to mind"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l12_k007",
+      "kanjiId": "n2_jlpt_vocab_k094",
       "lessonId": 12,
       "level": "N2",
-      "character": "吾",
-      "strokeCount": 16,
+      "character": "承",
+      "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 95",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "吾 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Thừa",
+        "meaningVi": "(hum) to hear, to be told, to know",
+        "meaningViDisplay": "承 ((hum) to hear, to be told, to know)",
+        "meaningEn": "(hum) to hear, to be told, to know"
       },
       "readings": {
-        "onyomi": [
-          "on95"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun95"
+          "うけたまわる"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 吾 qua van canh N2.",
-        "en": "Remember 吾 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 承る ((hum) to hear, to be told, to know).",
+        "en": "Appears in JLPT N2 vocabulary: 承る ((hum) to hear, to be told, to know)."
       },
       "decomposition": {
-        "hanViet": "HAN 95",
-        "structure": "standalone",
+        "hanViet": "Thừa",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 95",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Thua",
+        "meaningViNoAccent": "(hum) to hear, to be told, to know",
+        "meaningEnNoAccent": "(hum) to hear, to be told, to know"
       },
+      "examples": [
+        {
+          "word": "承る",
+          "reading": "うけたまわる",
+          "meaning": "(hum) to hear, to be told, to know"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l12_k008",
+      "kanjiId": "n2_jlpt_vocab_k095",
       "lessonId": 12,
       "level": "N2",
-      "character": "呏",
-      "strokeCount": 17,
+      "character": "受",
+      "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 96",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "呏 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Thụ",
+        "meaningVi": "receipt",
+        "meaningViDisplay": "受 (receipt)",
+        "meaningEn": "receipt"
       },
       "readings": {
-        "onyomi": [
-          "on96"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun96"
+          "うけとり"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 呏 qua van canh N2.",
-        "en": "Remember 呏 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 受取 (receipt).",
+        "en": "Appears in JLPT N2 vocabulary: 受取 (receipt)."
       },
       "decomposition": {
-        "hanViet": "HAN 96",
-        "structure": "standalone",
+        "hanViet": "Thụ",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 96",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Thu",
+        "meaningViNoAccent": "receipt",
+        "meaningEnNoAccent": "receipt"
       },
+      "examples": [
+        {
+          "word": "受取",
+          "reading": "うけとり",
+          "meaning": "receipt"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k096",
+      "lessonId": 12,
+      "level": "N2",
+      "character": "取",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Thủ",
+        "meaningVi": "receipt",
+        "meaningViDisplay": "取 (receipt)",
+        "meaningEn": "receipt"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "うけとり"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 受取 (receipt).",
+        "en": "Appears in JLPT N2 vocabulary: 受取 (receipt)."
+      },
+      "decomposition": {
+        "hanViet": "Thủ",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Thu",
+        "meaningViNoAccent": "receipt",
+        "meaningEnNoAccent": "receipt"
+      },
+      "examples": [
+        {
+          "word": "受取",
+          "reading": "うけとり",
+          "meaning": "receipt"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

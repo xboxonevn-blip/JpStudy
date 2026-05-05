@@ -1,330 +1,416 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N1",
   "lessonId": 22,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n1_l22_k001",
+      "kanjiId": "n1_jlpt_vocab_k169",
       "lessonId": 22,
       "level": "N1",
-      "character": "删",
-      "strokeCount": 6,
+      "character": "一",
+      "strokeCount": 1,
       "labels": {
-        "hanViet": "HAN 169",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "删 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Nhất",
+        "meaningVi": "one by one, separately",
+        "meaningViDisplay": "一 (one by one, separately)",
+        "meaningEn": "one by one, separately"
       },
       "readings": {
-        "onyomi": [
-          "on169"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun169"
+          "いちいち"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 删 qua van canh N1.",
-        "en": "Remember 删 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 一々 (one by one, separately).",
+        "en": "Appears in JLPT N1 vocabulary: 一々 (one by one, separately)."
       },
       "decomposition": {
-        "hanViet": "HAN 169",
-        "structure": "standalone",
+        "hanViet": "Nhất",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 169",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Nhat",
+        "meaningViNoAccent": "one by one, separately",
+        "meaningEnNoAccent": "one by one, separately"
       },
+      "examples": [
+        {
+          "word": "一々",
+          "reading": "いちいち",
+          "meaning": "one by one, separately"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l22_k002",
+      "kanjiId": "n1_jlpt_vocab_k170",
       "lessonId": 22,
       "level": "N1",
-      "character": "刱",
-      "strokeCount": 7,
-      "labels": {
-        "hanViet": "HAN 170",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "刱 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on170"
-        ],
-        "kunyomi": [
-          "kun170"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 刱 qua van canh N1.",
-        "en": "Remember 刱 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 170",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 170",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l22_k003",
-      "lessonId": 22,
-      "level": "N1",
-      "character": "剂",
-      "strokeCount": 8,
-      "labels": {
-        "hanViet": "HAN 171",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "剂 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on171"
-        ],
-        "kunyomi": [
-          "kun171"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 剂 qua van canh N1.",
-        "en": "Remember 剂 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 171",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 171",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l22_k004",
-      "lessonId": 22,
-      "level": "N1",
-      "character": "剓",
-      "strokeCount": 9,
-      "labels": {
-        "hanViet": "HAN 172",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "剓 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on172"
-        ],
-        "kunyomi": [
-          "kun172"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 剓 qua van canh N1.",
-        "en": "Remember 剓 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 172",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 172",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l22_k005",
-      "lessonId": 22,
-      "level": "N1",
-      "character": "剤",
-      "strokeCount": 10,
-      "labels": {
-        "hanViet": "HAN 173",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "剤 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on173"
-        ],
-        "kunyomi": [
-          "kun173"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 剤 qua van canh N1.",
-        "en": "Remember 剤 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 173",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 173",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l22_k006",
-      "lessonId": 22,
-      "level": "N1",
-      "character": "創",
-      "strokeCount": 11,
-      "labels": {
-        "hanViet": "HAN 174",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "創 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on174"
-        ],
-        "kunyomi": [
-          "kun174"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 創 qua van canh N1.",
-        "en": "Remember 創 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 174",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 174",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l22_k007",
-      "lessonId": 22,
-      "level": "N1",
-      "character": "劆",
-      "strokeCount": 12,
-      "labels": {
-        "hanViet": "HAN 175",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "劆 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on175"
-        ],
-        "kunyomi": [
-          "kun175"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 劆 qua van canh N1.",
-        "en": "Remember 劆 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 175",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 175",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l22_k008",
-      "lessonId": 22,
-      "level": "N1",
-      "character": "劗",
+      "character": "概",
       "strokeCount": 13,
       "labels": {
-        "hanViet": "HAN 176",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "劗 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": null,
+        "meaningVi": "unconditionally, as a rule",
+        "meaningViDisplay": "概 (unconditionally, as a rule)",
+        "meaningEn": "unconditionally, as a rule"
       },
       "readings": {
-        "onyomi": [
-          "on176"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun176"
+          "いちがいに"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 劗 qua van canh N1.",
-        "en": "Remember 劗 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 一概に (unconditionally, as a rule).",
+        "en": "Appears in JLPT N1 vocabulary: 一概に (unconditionally, as a rule)."
       },
       "decomposition": {
-        "hanViet": "HAN 176",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 176",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "unconditionally, as a rule",
+        "meaningEnNoAccent": "unconditionally, as a rule"
       },
+      "examples": [
+        {
+          "word": "一概に",
+          "reading": "いちがいに",
+          "meaning": "unconditionally, as a rule"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k171",
+      "lessonId": 22,
+      "level": "N1",
+      "character": "著",
+      "strokeCount": 11,
+      "labels": {
+        "hanViet": "Trứ",
+        "meaningVi": "remarkable, considerable",
+        "meaningViDisplay": "著 (remarkable, considerable)",
+        "meaningEn": "remarkable, considerable"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いちじるしい"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 著しい (remarkable, considerable).",
+        "en": "Appears in JLPT N1 vocabulary: 著しい (remarkable, considerable)."
+      },
+      "decomposition": {
+        "hanViet": "Trứ",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Tru",
+        "meaningViNoAccent": "remarkable, considerable",
+        "meaningEnNoAccent": "remarkable, considerable"
+      },
+      "examples": [
+        {
+          "word": "著しい",
+          "reading": "いちじるしい",
+          "meaning": "remarkable, considerable"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k172",
+      "lessonId": 22,
+      "level": "N1",
+      "character": "同",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Đồng",
+        "meaningVi": "all present, all concerned, all of us",
+        "meaningViDisplay": "同 (all present, all concerned, all of us)",
+        "meaningEn": "all present, all concerned, all of us"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いちどう"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 一同 (all present, all concerned, all of us).",
+        "en": "Appears in JLPT N1 vocabulary: 一同 (all present, all concerned, all of us)."
+      },
+      "decomposition": {
+        "hanViet": "Đồng",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Đong",
+        "meaningViNoAccent": "all present, all concerned, all of us",
+        "meaningEnNoAccent": "all present, all concerned, all of us"
+      },
+      "examples": [
+        {
+          "word": "一同",
+          "reading": "いちどう",
+          "meaning": "all present, all concerned, all of us"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k173",
+      "lessonId": 22,
+      "level": "N1",
+      "character": "部",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Bộ",
+        "meaningVi": "1. one copy e.g. of a document, 2. a part, partly, some",
+        "meaningViDisplay": "部 (1. one copy e.g. of a document, 2. a part, partly, some)",
+        "meaningEn": "1. one copy e.g. of a document, 2. a part, partly, some"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いちぶ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 一部 (1. one copy e.g. of a document, 2. a part, partly, some).",
+        "en": "Appears in JLPT N1 vocabulary: 一部 (1. one copy e.g. of a document, 2. a part, partly, some)."
+      },
+      "decomposition": {
+        "hanViet": "Bộ",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Bo",
+        "meaningViNoAccent": "1. one copy e.g. of a document, 2. a part, partly, some",
+        "meaningEnNoAccent": "1. one copy e.g. of a document, 2. a part, partly, some"
+      },
+      "examples": [
+        {
+          "word": "一部",
+          "reading": "いちぶ",
+          "meaning": "1. one copy e.g. of a document, 2. a part, partly, some"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k174",
+      "lessonId": 22,
+      "level": "N1",
+      "character": "分",
+      "strokeCount": 4,
+      "labels": {
+        "hanViet": "Phân",
+        "meaningVi": "a part",
+        "meaningViDisplay": "分 (a part)",
+        "meaningEn": "a part"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いちぶぶん"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 一部分 (a part).",
+        "en": "Appears in JLPT N1 vocabulary: 一部分 (a part)."
+      },
+      "decomposition": {
+        "hanViet": "Phân",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Phan",
+        "meaningViNoAccent": "a part",
+        "meaningEnNoAccent": "a part"
+      },
+      "examples": [
+        {
+          "word": "一部分",
+          "reading": "いちぶぶん",
+          "meaning": "a part"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k175",
+      "lessonId": 22,
+      "level": "N1",
+      "character": "別",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": "Biết",
+        "meaningVi": "parting",
+        "meaningViDisplay": "別 (parting)",
+        "meaningEn": "parting"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いちべつ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 一別 (parting).",
+        "en": "Appears in JLPT N1 vocabulary: 一別 (parting)."
+      },
+      "decomposition": {
+        "hanViet": "Biết",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Biet",
+        "meaningViNoAccent": "parting",
+        "meaningEnNoAccent": "parting"
+      },
+      "examples": [
+        {
+          "word": "一別",
+          "reading": "いちべつ",
+          "meaning": "parting"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k176",
+      "lessonId": 22,
+      "level": "N1",
+      "character": "面",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "one side, one phase, front page, the other hand, the whole surface",
+        "meaningViDisplay": "面 (one side, one phase, front page, the other hand, the whole surface)",
+        "meaningEn": "one side, one phase, front page, the other hand, the whole surface"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いちめん"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 一面 (one side, one phase, front page, the other hand, the whole surface).",
+        "en": "Appears in JLPT N1 vocabulary: 一面 (one side, one phase, front page, the other hand, the whole surface)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "one side, one phase, front page, the other hand, the whole surface",
+        "meaningEnNoAccent": "one side, one phase, front page, the other hand, the whole surface"
+      },
+      "examples": [
+        {
+          "word": "一面",
+          "reading": "いちめん",
+          "meaning": "one side, one phase, front page, the other hand, the whole surface"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

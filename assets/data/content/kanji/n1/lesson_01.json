@@ -1,330 +1,415 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N1",
   "lessonId": 1,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n1_l01_k001",
+      "kanjiId": "n1_jlpt_vocab_k001",
       "lessonId": 1,
       "level": "N1",
-      "character": "一",
-      "strokeCount": 6,
-      "labels": {
-        "hanViet": "HAN 1",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "一 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on1"
-        ],
-        "kunyomi": [
-          "kun1"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 一 qua van canh N1.",
-        "en": "Remember 一 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 1",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 1",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l01_k002",
-      "lessonId": 1,
-      "level": "N1",
-      "character": "丑",
-      "strokeCount": 7,
-      "labels": {
-        "hanViet": "HAN 2",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "丑 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on2"
-        ],
-        "kunyomi": [
-          "kun2"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 丑 qua van canh N1.",
-        "en": "Remember 丑 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 2",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 2",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l01_k003",
-      "lessonId": 1,
-      "level": "N1",
-      "character": "丢",
-      "strokeCount": 8,
-      "labels": {
-        "hanViet": "HAN 3",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "丢 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on3"
-        ],
-        "kunyomi": [
-          "kun3"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 丢 qua van canh N1.",
-        "en": "Remember 丢 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 3",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 3",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l01_k004",
-      "lessonId": 1,
-      "level": "N1",
-      "character": "丳",
-      "strokeCount": 9,
-      "labels": {
-        "hanViet": "HAN 4",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "丳 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on4"
-        ],
-        "kunyomi": [
-          "kun4"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 丳 qua van canh N1.",
-        "en": "Remember 丳 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 4",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 4",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l01_k005",
-      "lessonId": 1,
-      "level": "N1",
-      "character": "乄",
-      "strokeCount": 10,
-      "labels": {
-        "hanViet": "HAN 5",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "乄 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on5"
-        ],
-        "kunyomi": [
-          "kun5"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 乄 qua van canh N1.",
-        "en": "Remember 乄 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 5",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 5",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l01_k006",
-      "lessonId": 1,
-      "level": "N1",
-      "character": "乕",
-      "strokeCount": 11,
-      "labels": {
-        "hanViet": "HAN 6",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "乕 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on6"
-        ],
-        "kunyomi": [
-          "kun6"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 乕 qua van canh N1.",
-        "en": "Remember 乕 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 6",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 6",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l01_k007",
-      "lessonId": 1,
-      "level": "N1",
-      "character": "书",
-      "strokeCount": 12,
-      "labels": {
-        "hanViet": "HAN 7",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "书 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on7"
-        ],
-        "kunyomi": [
-          "kun7"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 书 qua van canh N1.",
-        "en": "Remember 书 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 7",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 7",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l01_k008",
-      "lessonId": 1,
-      "level": "N1",
-      "character": "乷",
+      "character": "嗚",
       "strokeCount": 13,
       "labels": {
-        "hanViet": "HAN 8",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "乷 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Ô",
+        "meaningVi": "Ah!, Oh!, Alas!",
+        "meaningViDisplay": "嗚 (Ah!, Oh!, Alas!)",
+        "meaningEn": "Ah!, Oh!, Alas!"
       },
       "readings": {
-        "onyomi": [
-          "on8"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun8"
+          "ああ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 乷 qua van canh N1.",
-        "en": "Remember 乷 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 嗚呼 (Ah!, Oh!, Alas!).",
+        "en": "Appears in JLPT N1 vocabulary: 嗚呼 (Ah!, Oh!, Alas!)."
       },
       "decomposition": {
-        "hanViet": "HAN 8",
-        "structure": "standalone",
+        "hanViet": "Ô",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 8",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "O",
+        "meaningViNoAccent": "ah!, oh!, alas!",
+        "meaningEnNoAccent": "ah!, oh!, alas!"
       },
+      "examples": [
+        {
+          "word": "嗚呼",
+          "reading": "ああ",
+          "meaning": "Ah!, Oh!, Alas!"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k002",
+      "lessonId": 1,
+      "level": "N1",
+      "character": "呼",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Hô",
+        "meaningVi": "Ah!, Oh!, Alas!",
+        "meaningViDisplay": "呼 (Ah!, Oh!, Alas!)",
+        "meaningEn": "Ah!, Oh!, Alas!"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "ああ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 嗚呼 (Ah!, Oh!, Alas!).",
+        "en": "Appears in JLPT N1 vocabulary: 嗚呼 (Ah!, Oh!, Alas!)."
+      },
+      "decomposition": {
+        "hanViet": "Hô",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Ho",
+        "meaningViNoAccent": "ah!, oh!, alas!",
+        "meaningEnNoAccent": "ah!, oh!, alas!"
+      },
+      "examples": [
+        {
+          "word": "嗚呼",
+          "reading": "ああ",
+          "meaning": "Ah!, Oh!, Alas!"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k003",
+      "lessonId": 1,
+      "level": "N1",
+      "character": "相",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Tương",
+        "meaningVi": "together, mutually, fellow",
+        "meaningViDisplay": "相 (together, mutually, fellow)",
+        "meaningEn": "together, mutually, fellow"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あい"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 相 (together, mutually, fellow).",
+        "en": "Appears in JLPT N1 vocabulary: 相 (together, mutually, fellow)."
+      },
+      "decomposition": {
+        "hanViet": "Tương",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Tuong",
+        "meaningViNoAccent": "together, mutually, fellow",
+        "meaningEnNoAccent": "together, mutually, fellow"
+      },
+      "examples": [
+        {
+          "word": "相",
+          "reading": "あい",
+          "meaning": "together, mutually, fellow"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k004",
+      "lessonId": 1,
+      "level": "N1",
+      "character": "変",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "as ever, as usual, the same",
+        "meaningViDisplay": "変 (as ever, as usual, the same)",
+        "meaningEn": "as ever, as usual, the same"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あいかわらず"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 相変わらず (as ever, as usual, the same).",
+        "en": "Appears in JLPT N1 vocabulary: 相変わらず (as ever, as usual, the same)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "as ever, as usual, the same",
+        "meaningEnNoAccent": "as ever, as usual, the same"
+      },
+      "examples": [
+        {
+          "word": "相変わらず",
+          "reading": "あいかわらず",
+          "meaning": "as ever, as usual, the same"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k005",
+      "lessonId": 1,
+      "level": "N1",
+      "character": "愛",
+      "strokeCount": 13,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "civility, courtesy, compliments, sociability, graces",
+        "meaningViDisplay": "愛 (civility, courtesy, compliments, sociability, graces)",
+        "meaningEn": "civility, courtesy, compliments, sociability, graces"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あいそ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 愛想 (civility, courtesy, compliments, sociability, graces).",
+        "en": "Appears in JLPT N1 vocabulary: 愛想 (civility, courtesy, compliments, sociability, graces)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "civility, courtesy, compliments, sociability, graces",
+        "meaningEnNoAccent": "civility, courtesy, compliments, sociability, graces"
+      },
+      "examples": [
+        {
+          "word": "愛想",
+          "reading": "あいそ",
+          "meaning": "civility, courtesy, compliments, sociability, graces"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k006",
+      "lessonId": 1,
+      "level": "N1",
+      "character": "想",
+      "strokeCount": 13,
+      "labels": {
+        "hanViet": "Tưởng",
+        "meaningVi": "civility, courtesy, compliments, sociability, graces",
+        "meaningViDisplay": "想 (civility, courtesy, compliments, sociability, graces)",
+        "meaningEn": "civility, courtesy, compliments, sociability, graces"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あいそ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 愛想 (civility, courtesy, compliments, sociability, graces).",
+        "en": "Appears in JLPT N1 vocabulary: 愛想 (civility, courtesy, compliments, sociability, graces)."
+      },
+      "decomposition": {
+        "hanViet": "Tưởng",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Tuong",
+        "meaningViNoAccent": "civility, courtesy, compliments, sociability, graces",
+        "meaningEnNoAccent": "civility, courtesy, compliments, sociability, graces"
+      },
+      "examples": [
+        {
+          "word": "愛想",
+          "reading": "あいそ",
+          "meaning": "civility, courtesy, compliments, sociability, graces"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k007",
+      "lessonId": 1,
+      "level": "N1",
+      "character": "対",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "confrontation, facing, between ourselves, no third party, tete-a-tete",
+        "meaningViDisplay": "対 (confrontation, facing, between ourselves, no third party, tete-a-tete)",
+        "meaningEn": "confrontation, facing, between ourselves, no third party, tete-a-tete"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あいたい"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 相対 (confrontation, facing, between ourselves, no third party, tete-a-tete).",
+        "en": "Appears in JLPT N1 vocabulary: 相対 (confrontation, facing, between ourselves, no third party, tete-a-tete)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "confrontation, facing, between ourselves, no third party, tete-a-tete",
+        "meaningEnNoAccent": "confrontation, facing, between ourselves, no third party, tete-a-tete"
+      },
+      "examples": [
+        {
+          "word": "相対",
+          "reading": "あいたい",
+          "meaning": "confrontation, facing, between ourselves, no third party, tete-a-tete"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k008",
+      "lessonId": 1,
+      "level": "N1",
+      "character": "間",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Gian",
+        "meaningVi": "relation(ship)",
+        "meaningViDisplay": "間 (relation(ship))",
+        "meaningEn": "relation(ship)"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あいだがら"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 間柄 (relation(ship)).",
+        "en": "Appears in JLPT N1 vocabulary: 間柄 (relation(ship))."
+      },
+      "decomposition": {
+        "hanViet": "Gian",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Gian",
+        "meaningViNoAccent": "relation(ship)",
+        "meaningEnNoAccent": "relation(ship)"
+      },
+      "examples": [
+        {
+          "word": "間柄",
+          "reading": "あいだがら",
+          "meaning": "relation(ship)"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

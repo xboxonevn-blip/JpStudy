@@ -1,330 +1,416 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N1",
   "lessonId": 16,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n1_l16_k001",
+      "kanjiId": "n1_jlpt_vocab_k121",
       "lessonId": 16,
       "level": "N1",
-      "character": "仰",
+      "character": "如",
       "strokeCount": 6,
       "labels": {
-        "hanViet": "HAN 121",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "仰 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Như",
+        "meaningVi": "how, in what way",
+        "meaningViDisplay": "如 (how, in what way)",
+        "meaningEn": "how, in what way"
       },
       "readings": {
-        "onyomi": [
-          "on121"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun121"
+          "いかが"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 仰 qua van canh N1.",
-        "en": "Remember 仰 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 如何 (how, in what way).",
+        "en": "Appears in JLPT N1 vocabulary: 如何 (how, in what way)."
       },
       "decomposition": {
-        "hanViet": "HAN 121",
-        "structure": "standalone",
+        "hanViet": "Như",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 121",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Nhu",
+        "meaningViNoAccent": "how, in what way",
+        "meaningEnNoAccent": "how, in what way"
       },
+      "examples": [
+        {
+          "word": "如何",
+          "reading": "いかが",
+          "meaning": "how, in what way"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l16_k002",
+      "kanjiId": "n1_jlpt_vocab_k122",
       "lessonId": 16,
       "level": "N1",
-      "character": "企",
+      "character": "何",
       "strokeCount": 7,
       "labels": {
-        "hanViet": "HAN 122",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "企 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": null,
+        "meaningVi": "how, in what way",
+        "meaningViDisplay": "何 (how, in what way)",
+        "meaningEn": "how, in what way"
       },
       "readings": {
-        "onyomi": [
-          "on122"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun122"
+          "いかが"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 企 qua van canh N1.",
-        "en": "Remember 企 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 如何 (how, in what way).",
+        "en": "Appears in JLPT N1 vocabulary: 如何 (how, in what way)."
       },
       "decomposition": {
-        "hanViet": "HAN 122",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 122",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "how, in what way",
+        "meaningEnNoAccent": "how, in what way"
       },
+      "examples": [
+        {
+          "word": "如何",
+          "reading": "いかが",
+          "meaning": "how, in what way"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n1_l16_k003",
+      "kanjiId": "n1_jlpt_vocab_k123",
       "lessonId": 16,
       "level": "N1",
-      "character": "伒",
-      "strokeCount": 8,
+      "character": "生",
+      "strokeCount": 5,
       "labels": {
-        "hanViet": "HAN 123",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "伒 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Sinh",
+        "meaningVi": "to revive, to resuscitate, to make use of",
+        "meaningViDisplay": "生 (to revive, to resuscitate, to make use of)",
+        "meaningEn": "to revive, to resuscitate, to make use of"
       },
       "readings": {
-        "onyomi": [
-          "on123"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun123"
+          "いかす"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 伒 qua van canh N1.",
-        "en": "Remember 伒 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 生かす (to revive, to resuscitate, to make use of).",
+        "en": "Appears in JLPT N1 vocabulary: 生かす (to revive, to resuscitate, to make use of)."
       },
       "decomposition": {
-        "hanViet": "HAN 123",
-        "structure": "standalone",
+        "hanViet": "Sinh",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 123",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Sinh",
+        "meaningViNoAccent": "to revive, to resuscitate, to make use of",
+        "meaningEnNoAccent": "to revive, to resuscitate, to make use of"
       },
+      "examples": [
+        {
+          "word": "生かす",
+          "reading": "いかす",
+          "meaning": "to revive, to resuscitate, to make use of"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l16_k004",
+      "kanjiId": "n1_jlpt_vocab_k124",
       "lessonId": 16,
       "level": "N1",
-      "character": "伣",
-      "strokeCount": 9,
-      "labels": {
-        "hanViet": "HAN 124",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "伣 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on124"
-        ],
-        "kunyomi": [
-          "kun124"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 伣 qua van canh N1.",
-        "en": "Remember 伣 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 124",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 124",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l16_k005",
-      "lessonId": 16,
-      "level": "N1",
-      "character": "伴",
-      "strokeCount": 10,
-      "labels": {
-        "hanViet": "HAN 125",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "伴 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on125"
-        ],
-        "kunyomi": [
-          "kun125"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 伴 qua van canh N1.",
-        "en": "Remember 伴 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 125",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 125",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l16_k006",
-      "lessonId": 16,
-      "level": "N1",
-      "character": "佅",
-      "strokeCount": 11,
-      "labels": {
-        "hanViet": "HAN 126",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "佅 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on126"
-        ],
-        "kunyomi": [
-          "kun126"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 佅 qua van canh N1.",
-        "en": "Remember 佅 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 126",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 126",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l16_k007",
-      "lessonId": 16,
-      "level": "N1",
-      "character": "佖",
-      "strokeCount": 12,
-      "labels": {
-        "hanViet": "HAN 127",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "佖 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on127"
-        ],
-        "kunyomi": [
-          "kun127"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 佖 qua van canh N1.",
-        "en": "Remember 佖 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 127",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 127",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l16_k008",
-      "lessonId": 16,
-      "level": "N1",
-      "character": "佧",
+      "character": "雷",
       "strokeCount": 13,
       "labels": {
-        "hanViet": "HAN 128",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "佧 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Lôi",
+        "meaningVi": "thunder",
+        "meaningViDisplay": "雷 (thunder)",
+        "meaningEn": "thunder"
       },
       "readings": {
-        "onyomi": [
-          "on128"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun128"
+          "いかずち"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 佧 qua van canh N1.",
-        "en": "Remember 佧 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 雷 (thunder).",
+        "en": "Appears in JLPT N1 vocabulary: 雷 (thunder)."
       },
       "decomposition": {
-        "hanViet": "HAN 128",
-        "structure": "standalone",
+        "hanViet": "Lôi",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 128",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Loi",
+        "meaningViNoAccent": "thunder",
+        "meaningEnNoAccent": "thunder"
       },
+      "examples": [
+        {
+          "word": "雷",
+          "reading": "いかずち",
+          "meaning": "thunder"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k125",
+      "lessonId": 16,
+      "level": "N1",
+      "character": "怒",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Nộ",
+        "meaningVi": "anger, hatred",
+        "meaningViDisplay": "怒 (anger, hatred)",
+        "meaningEn": "anger, hatred"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いかり"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 怒り (anger, hatred).",
+        "en": "Appears in JLPT N1 vocabulary: 怒り (anger, hatred)."
+      },
+      "decomposition": {
+        "hanViet": "Nộ",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "No",
+        "meaningViNoAccent": "anger, hatred",
+        "meaningEnNoAccent": "anger, hatred"
+      },
+      "examples": [
+        {
+          "word": "怒り",
+          "reading": "いかり",
+          "meaning": "anger, hatred"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k126",
+      "lessonId": 16,
+      "level": "N1",
+      "character": "歪",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Quay",
+        "meaningVi": "to warp, to swerve, to deflect, to be crooked, to be distorted, to be bent, to incline, to slant, to be perv",
+        "meaningViDisplay": "歪 (to warp, to swerve, to deflect, to be crooked, to be distorted, to be bent, to incline, to slant, to be perv)",
+        "meaningEn": "to warp, to swerve, to deflect, to be crooked, to be distorted, to be bent, to incline, to slant, to be perv"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いがむ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 歪む (to warp, to swerve, to deflect, to be crooked, to be distorted, to be bent, to incline, to slant, to be perv).",
+        "en": "Appears in JLPT N1 vocabulary: 歪む (to warp, to swerve, to deflect, to be crooked, to be distorted, to be bent, to incline, to slant, to be perv)."
+      },
+      "decomposition": {
+        "hanViet": "Quay",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Quay",
+        "meaningViNoAccent": "to warp, to swerve, to deflect, to be crooked, to be distorted, to be bent, to incline, to slant, to be perv",
+        "meaningEnNoAccent": "to warp, to swerve, to deflect, to be crooked, to be distorted, to be bent, to incline, to slant, to be perv"
+      },
+      "examples": [
+        {
+          "word": "歪む",
+          "reading": "いがむ",
+          "meaning": "to warp, to swerve, to deflect, to be crooked, to be distorted, to be bent, to incline, to slant, to be perv"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k127",
+      "lessonId": 16,
+      "level": "N1",
+      "character": "粋",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "chic, style, purity, essence",
+        "meaningViDisplay": "粋 (chic, style, purity, essence)",
+        "meaningEn": "chic, style, purity, essence"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いき"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 粋 (chic, style, purity, essence).",
+        "en": "Appears in JLPT N1 vocabulary: 粋 (chic, style, purity, essence)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "chic, style, purity, essence",
+        "meaningEnNoAccent": "chic, style, purity, essence"
+      },
+      "examples": [
+        {
+          "word": "粋",
+          "reading": "いき",
+          "meaning": "chic, style, purity, essence"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k128",
+      "lessonId": 16,
+      "level": "N1",
+      "character": "域",
+      "strokeCount": 11,
+      "labels": {
+        "hanViet": "Vực",
+        "meaningVi": "outside the area",
+        "meaningViDisplay": "域 (outside the area)",
+        "meaningEn": "outside the area"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いきがい"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 域外 (outside the area).",
+        "en": "Appears in JLPT N1 vocabulary: 域外 (outside the area)."
+      },
+      "decomposition": {
+        "hanViet": "Vực",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Vuc",
+        "meaningViNoAccent": "outside the area",
+        "meaningEnNoAccent": "outside the area"
+      },
+      "examples": [
+        {
+          "word": "域外",
+          "reading": "いきがい",
+          "meaning": "outside the area"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

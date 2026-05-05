@@ -1,330 +1,415 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N1",
   "lessonId": 5,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n1_l05_k001",
+      "kanjiId": "n1_jlpt_vocab_k033",
       "lessonId": 5,
       "level": "N1",
-      "character": "倠",
-      "strokeCount": 14,
+      "character": "日",
+      "strokeCount": 4,
       "labels": {
-        "hanViet": "HAN 33",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "倠 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Nhật",
+        "meaningVi": "unlucky day",
+        "meaningViDisplay": "日 (unlucky day)",
+        "meaningEn": "unlucky day"
       },
       "readings": {
-        "onyomi": [
-          "on33"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun33"
+          "あくび"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 倠 qua van canh N1.",
-        "en": "Remember 倠 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 悪日 (unlucky day).",
+        "en": "Appears in JLPT N1 vocabulary: 悪日 (unlucky day)."
       },
       "decomposition": {
-        "hanViet": "HAN 33",
-        "structure": "standalone",
+        "hanViet": "Nhật",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 33",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Nhat",
+        "meaningViNoAccent": "unlucky day",
+        "meaningEnNoAccent": "unlucky day"
       },
+      "examples": [
+        {
+          "word": "悪日",
+          "reading": "あくび",
+          "meaning": "unlucky day"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l05_k002",
+      "kanjiId": "n1_jlpt_vocab_k034",
       "lessonId": 5,
       "level": "N1",
-      "character": "倱",
+      "character": "憧",
       "strokeCount": 15,
       "labels": {
-        "hanViet": "HAN 34",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "倱 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": null,
+        "meaningVi": "yearning, longing, aspiration",
+        "meaningViDisplay": "憧 (yearning, longing, aspiration)",
+        "meaningEn": "yearning, longing, aspiration"
       },
       "readings": {
-        "onyomi": [
-          "on34"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun34"
+          "あこがれ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 倱 qua van canh N1.",
-        "en": "Remember 倱 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 憧れ (yearning, longing, aspiration).",
+        "en": "Appears in JLPT N1 vocabulary: 憧れ (yearning, longing, aspiration)."
       },
       "decomposition": {
-        "hanViet": "HAN 34",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 34",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "yearning, longing, aspiration",
+        "meaningEnNoAccent": "yearning, longing, aspiration"
       },
+      "examples": [
+        {
+          "word": "憧れ",
+          "reading": "あこがれ",
+          "meaning": "yearning, longing, aspiration"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n1_l05_k003",
+      "kanjiId": "n1_jlpt_vocab_k035",
       "lessonId": 5,
       "level": "N1",
-      "character": "偂",
-      "strokeCount": 16,
+      "character": "顎",
+      "strokeCount": 18,
       "labels": {
-        "hanViet": "HAN 35",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "偂 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": null,
+        "meaningVi": "chin",
+        "meaningViDisplay": "顎 (chin)",
+        "meaningEn": "chin"
       },
       "readings": {
-        "onyomi": [
-          "on35"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun35"
+          "あご"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 偂 qua van canh N1.",
-        "en": "Remember 偂 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 顎 (chin).",
+        "en": "Appears in JLPT N1 vocabulary: 顎 (chin)."
       },
       "decomposition": {
-        "hanViet": "HAN 35",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 35",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "chin",
+        "meaningEnNoAccent": "chin"
       },
+      "examples": [
+        {
+          "word": "顎",
+          "reading": "あご",
+          "meaning": "chin"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n1_l05_k004",
+      "kanjiId": "n1_jlpt_vocab_k036",
       "lessonId": 5,
       "level": "N1",
-      "character": "偓",
-      "strokeCount": 17,
+      "character": "麻",
+      "strokeCount": 11,
       "labels": {
-        "hanViet": "HAN 36",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "偓 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Ma",
+        "meaningVi": "flax, linen, hemp",
+        "meaningViDisplay": "麻 (flax, linen, hemp)",
+        "meaningEn": "flax, linen, hemp"
       },
       "readings": {
-        "onyomi": [
-          "on36"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun36"
+          "あさ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 偓 qua van canh N1.",
-        "en": "Remember 偓 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 麻 (flax, linen, hemp).",
+        "en": "Appears in JLPT N1 vocabulary: 麻 (flax, linen, hemp)."
       },
       "decomposition": {
-        "hanViet": "HAN 36",
-        "structure": "standalone",
+        "hanViet": "Ma",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 36",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Ma",
+        "meaningViNoAccent": "flax, linen, hemp",
+        "meaningEnNoAccent": "flax, linen, hemp"
       },
+      "examples": [
+        {
+          "word": "麻",
+          "reading": "あさ",
+          "meaning": "flax, linen, hemp"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l05_k005",
+      "kanjiId": "n1_jlpt_vocab_k037",
       "lessonId": 5,
       "level": "N1",
-      "character": "偤",
-      "strokeCount": 6,
-      "labels": {
-        "hanViet": "HAN 37",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "偤 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on37"
-        ],
-        "kunyomi": [
-          "kun37"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 偤 qua van canh N1.",
-        "en": "Remember 偤 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 37",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 37",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l05_k006",
-      "lessonId": 5,
-      "level": "N1",
-      "character": "偵",
-      "strokeCount": 7,
-      "labels": {
-        "hanViet": "HAN 38",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "偵 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on38"
-        ],
-        "kunyomi": [
-          "kun38"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 偵 qua van canh N1.",
-        "en": "Remember 偵 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 38",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 38",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l05_k007",
-      "lessonId": 5,
-      "level": "N1",
-      "character": "傆",
-      "strokeCount": 8,
-      "labels": {
-        "hanViet": "HAN 39",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "傆 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on39"
-        ],
-        "kunyomi": [
-          "kun39"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 傆 qua van canh N1.",
-        "en": "Remember 傆 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 39",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 39",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l05_k008",
-      "lessonId": 5,
-      "level": "N1",
-      "character": "傗",
+      "character": "後",
       "strokeCount": 9,
       "labels": {
-        "hanViet": "HAN 40",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "傗 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Hậu",
+        "meaningVi": "day after tomorrow",
+        "meaningViDisplay": "後 (day after tomorrow)",
+        "meaningEn": "day after tomorrow"
       },
       "readings": {
-        "onyomi": [
-          "on40"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun40"
+          "あさって"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 傗 qua van canh N1.",
-        "en": "Remember 傗 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 明後日 (day after tomorrow).",
+        "en": "Appears in JLPT N1 vocabulary: 明後日 (day after tomorrow)."
       },
       "decomposition": {
-        "hanViet": "HAN 40",
-        "structure": "standalone",
+        "hanViet": "Hậu",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 40",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Hau",
+        "meaningViNoAccent": "day after tomorrow",
+        "meaningEnNoAccent": "day after tomorrow"
       },
+      "examples": [
+        {
+          "word": "明後日",
+          "reading": "あさって",
+          "meaning": "day after tomorrow"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k038",
+      "lessonId": 5,
+      "level": "N1",
+      "character": "朝",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Triều",
+        "meaningVi": "oversleeping, late riser",
+        "meaningViDisplay": "朝 (oversleeping, late riser)",
+        "meaningEn": "oversleeping, late riser"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あさねぼう"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 朝寝坊 (oversleeping, late riser).",
+        "en": "Appears in JLPT N1 vocabulary: 朝寝坊 (oversleeping, late riser)."
+      },
+      "decomposition": {
+        "hanViet": "Triều",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Trieu",
+        "meaningViNoAccent": "oversleeping, late riser",
+        "meaningEnNoAccent": "oversleeping, late riser"
+      },
+      "examples": [
+        {
+          "word": "朝寝坊",
+          "reading": "あさねぼう",
+          "meaning": "oversleeping, late riser"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k039",
+      "lessonId": 5,
+      "level": "N1",
+      "character": "寝",
+      "strokeCount": 13,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "oversleeping, late riser",
+        "meaningViDisplay": "寝 (oversleeping, late riser)",
+        "meaningEn": "oversleeping, late riser"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あさねぼう"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 朝寝坊 (oversleeping, late riser).",
+        "en": "Appears in JLPT N1 vocabulary: 朝寝坊 (oversleeping, late riser)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "oversleeping, late riser",
+        "meaningEnNoAccent": "oversleeping, late riser"
+      },
+      "examples": [
+        {
+          "word": "朝寝坊",
+          "reading": "あさねぼう",
+          "meaning": "oversleeping, late riser"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k040",
+      "lessonId": 5,
+      "level": "N1",
+      "character": "坊",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": "Phường",
+        "meaningVi": "oversleeping, late riser",
+        "meaningViDisplay": "坊 (oversleeping, late riser)",
+        "meaningEn": "oversleeping, late riser"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あさねぼう"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 朝寝坊 (oversleeping, late riser).",
+        "en": "Appears in JLPT N1 vocabulary: 朝寝坊 (oversleeping, late riser)."
+      },
+      "decomposition": {
+        "hanViet": "Phường",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Phuong",
+        "meaningViNoAccent": "oversleeping, late riser",
+        "meaningEnNoAccent": "oversleeping, late riser"
+      },
+      "examples": [
+        {
+          "word": "朝寝坊",
+          "reading": "あさねぼう",
+          "meaning": "oversleeping, late riser"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

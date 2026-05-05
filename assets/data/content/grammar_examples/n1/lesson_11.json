@@ -5,448 +5,549 @@
   "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
   "tags": [
     "source-hanabira",
-    "n1-grammar-import"
+    "n1-grammar-import",
+    "needs-human-review"
   ],
   "examples": [
+    {
+      "grammarPoint": "Noun をよそに",
+      "sentence": "経済危機をよそに、彼は高級な車を買った。",
+      "translation": "Despite the economic crisis, he bought a luxury car.",
+      "translationEn": "Despite the economic crisis, he bought a luxury car",
+      "romaji": "Keizai kiki wo yoso ni, kare wa koukyuu na kuruma wo katta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Despite the economic crisis, he bought a luxury car",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun をよそに",
+      "sentence": "試験が迫るをよそに、彼は遊び続けている。",
+      "translation": "Despite the approaching test, he keeps on playing.",
+      "translationEn": "Despite the approaching test, he keeps on playing",
+      "romaji": "Shiken ga semaru wo yoso ni, kare wa asobi tsuzukete iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Despite the approaching test, he keeps on playing",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun をよそに",
+      "sentence": "親の反対をよそに、彼女は彼と結婚しました。",
+      "translation": "Despite her parents' opposition, she married him.",
+      "translationEn": "Despite her parents opposition, she married him",
+      "romaji": "Oya no hantai wo yoso ni, kanojo wa kare to kekkon shimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Despite her parents opposition, she married him",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun をよそに",
+      "sentence": "その国の経済状況をよそに、多くの企業が進出し続けている。",
+      "translation": "Despite the country's economic situation, many companies continue to expand.",
+      "translationEn": "Despite the countrys economic situation, many companies continue to expand",
+      "romaji": "Sono kuni no keizai joukyou wo yoso ni, ooku no kigyou ga shinshutsu shi tsuzukete iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Despite the countrys economic situation, many companies continue to expand",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun を余儀なくされる",
+      "sentence": "彼は経済的困難により、退学を余儀なくされた。",
+      "translation": "Due to financial difficulties, he was forced to drop out of school.",
+      "translationEn": "Due to financial difficulties, he was forced to drop out of school",
+      "romaji": "Kare wa keizai-teki konnan ni yori, taigaku wo yogi naku saremashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Due to financial difficulties, he was forced to drop out of school",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun を余儀なくされる",
+      "sentence": "厳しい天候によって、私たちは遠足を中止する余儀なくされた。",
+      "translation": "We were forced to cancel the excursion due to the severe weather.",
+      "translationEn": "We were forced to cancel the excursion due to the severe weather",
+      "romaji": "Kibishi tenkou ni yotte, watashitachi wa ensoku wo chushi suru yogi naku sareta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We were forced to cancel the excursion due to the severe weather",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun を余儀なくされる",
+      "sentence": "怪我のため、彼は入院を余儀なくされた。",
+      "translation": "Due to his injury, he was forced to be hospitalized.",
+      "translationEn": "Due to his injury, he was forced to be hospitalized",
+      "romaji": "Kega no tame, kare wa nyuuin wo yogi naku sareta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Due to his injury, he was forced to be hospitalized",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun を余儀なくされる",
+      "sentence": "リストラの恐怖により、多くの従業員が転職を余儀なくされた。",
+      "translation": "Fear of layoffs forced many employees to change jobs.",
+      "translationEn": "Fear of layoffs forced many employees to change jobs",
+      "romaji": "Risutora no kyoufu ni yori, ooku no juugyouin ga tenshoku wo yogi naku sareta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Fear of layoffs forced many employees to change jobs",
+      "translationViSource": "internal-en-example-draft"
+    },
     {
       "grammarPoint": "Noun を前提として",
       "sentence": "成功を前提として、ビジネスプランを作成しました。",
       "translation": "We made a business plan on the assumption of success.",
-      "translationEn": "We made a business plan on the assumption of success.",
+      "translationEn": "We made a business plan on the assumption of success",
       "romaji": "Seikou wo zentei toshite, bijinesu puran wo sakusei shimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We made a business plan on the assumption of success",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を前提として",
       "sentence": "彼の勝利を前提として、パーティーの準備を始めました。",
       "translation": "We started preparing for the party assuming his victory.",
-      "translationEn": "We started preparing for the party assuming his victory.",
+      "translationEn": "We started preparing for the party assuming his victory",
       "romaji": "Kare no shouri wo zentei toshite, paatii no junbi wo hajimemashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We started preparing for the party assuming his victory",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を前提として",
       "sentence": "両親の理解を前提として、旅行計画を進めます。",
       "translation": "I will proceed with the travel plan based on my parents’ understanding.",
-      "translationEn": "I will proceed with the travel plan based on my parents’ understanding.",
+      "translationEn": "I will proceed with the travel plan based on my parents’ understanding",
       "romaji": "Ryoushin no rikai wo zentei toshite, ryokou keikaku wo susumemasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I will proceed with the travel plan based on my parents’ understanding",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を前提として",
       "sentence": "このプロジェクトは、資金が揃うことを前提としています。",
       "translation": "This project assumes that the funds will be in place.",
-      "translationEn": "This project assumes that the funds will be in place.",
+      "translationEn": "This project assumes that the funds will be in place",
       "romaji": "Kono purojekuto wa, shikin ga sorou koto wo zentei toshiteimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This project assumes that the funds will be in place",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を前提にして",
       "sentence": "好天を前提にして、明日のピクニックの計画を立てました。",
       "translation": "We planned tomorrow's picnic assuming fine weather.",
-      "translationEn": "We planned tomorrow's picnic assuming fine weather.",
+      "translationEn": "We planned tomorrows picnic assuming fine weather",
       "romaji": "Kouten wo zentei ni shite, ashita no pikunikku no keikaku wo tatemashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We planned tomorrows picnic assuming fine weather",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を前提にして",
       "sentence": "彼女の合格を前提にして、祝いのパーティーの準備を始めました。",
       "translation": "We started preparing for the celebration party assuming she would pass the exam.",
-      "translationEn": "We started preparing for the celebration party assuming she would pass the exam.",
+      "translationEn": "We started preparing for the celebration party assuming she would pass the exam",
       "romaji": "Kanojo no goukaku wo zentei ni shite, iwai no paatii no junbi wo hajimemashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We started preparing for the celebration party assuming she would pass the exam",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を前提にして",
       "sentence": "経済成長を前提にして、予算案が作られた。",
       "translation": "The budget was made on the assumption of economic growth.",
-      "translationEn": "The budget was made on the assumption of economic growth.",
+      "translationEn": "The budget was made on the assumption of economic growth",
       "romaji": "Keizai seichou wo zentei ni shite, yosan-an ga tsukurareta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The budget was made on the assumption of economic growth",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を前提にして",
       "sentence": "彼の参加を前提にして、会議の日程を決めました。",
       "translation": "We decided the meeting schedule assuming his participation.",
-      "translationEn": "We decided the meeting schedule assuming his participation.",
+      "translationEn": "We decided the meeting schedule assuming his participation",
       "romaji": "Kare no sanka wo zentei ni shite, kaigi no nittei wo kimemashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We decided the meeting schedule assuming his participation",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を境にして",
       "sentence": "父の死を境にして、彼の性格が一変した。",
       "translation": "His personality changed completely since his father's death.",
-      "translationEn": "His personality changed completely since his father's death.",
+      "translationEn": "His personality changed completely since his fathers death",
       "romaji": "Chichi no shi wo sakai ni shite, kare no seikaku ga ippen shita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: His personality changed completely since his fathers death",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を境にして",
       "sentence": "試験を境にして、休暇を取る予定です。",
       "translation": "I plan to take a vacation after the exam.",
-      "translationEn": "I plan to take a vacation after the exam.",
+      "translationEn": "I plan to take a vacation after the exam",
       "romaji": "Shiken wo sakai ni shite, kyuka wo toru yotei desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I plan to take a vacation after the exam",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を境にして",
       "sentence": "春を境にして、新しい生活を始めるつもりだ。",
       "translation": "I intend to start a new life from spring onwards.",
-      "translationEn": "I intend to start a new life from spring onwards.",
+      "translationEn": "I intend to start a new life from spring onwards",
       "romaji": "Haru wo sakai ni shite, atarashii seikatsu o hajimeru tsumori da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I intend to start a new life from spring onwards",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を境にして",
       "sentence": "彼女は入学を境にして、ファッションに興味を持ち始めた。",
       "translation": "She began to take an interest in fashion from the time she entered school.",
-      "translationEn": "She began to take an interest in fashion from the time she entered school.",
+      "translationEn": "She began to take an interest in fashion from the time she entered school",
       "romaji": "Kanojo wa nyuugaku wo sakai ni shite, fasshon ni kyoumi o mochi hajimeta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She began to take an interest in fashion from the time she entered school",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を機にして",
       "sentence": "引っ越しを機にして、家具を新しくしました。",
       "translation": "I took the opportunity of moving to get new furniture.",
-      "translationEn": "I took the opportunity of moving to get new furniture.",
+      "translationEn": "I took the opportunity of moving to get new furniture",
       "romaji": "Hikkoshi wo ki ni shite, kagu wo atarashiku shimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I took the opportunity of moving to get new furniture",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を機にして",
       "sentence": "卒業を機にして、新しい仕事を探し始めた。",
       "translation": "I started looking for a new job on the occasion of graduation.",
-      "translationEn": "I started looking for a new job on the occasion of graduation.",
+      "translationEn": "I started looking for a new job on the occasion of graduation",
       "romaji": "Sotsugyou wo ki ni shite, atarashii shigoto wo sagashi hajimeta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I started looking for a new job on the occasion of graduation",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を機にして",
       "sentence": "このプロジェクトの失敗を機にして、会社全体の仕事のやり方を見直すことにした。",
       "translation": "We decided to review the way the entire company works, taking this project's failure as an opportunity.",
-      "translationEn": "We decided to review the way the entire company works, taking this project's failure as an opportunity.",
+      "translationEn": "We decided to review the way the entire company works, taking this projects failure as an opportunity",
       "romaji": "Kono purojekuto no shippai wo ki ni shite, kaisha zentai no shigoto no yarikata wo minaosu koto ni shita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We decided to review the way the entire company works, taking this projects failure as an opportunity",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を機にして",
       "sentence": "結婚を機にして、私たちは新しい町へ引っ越しました。",
       "translation": "We moved to a new town on the occasion of our marriage.",
-      "translationEn": "We moved to a new town on the occasion of our marriage.",
+      "translationEn": "We moved to a new town on the occasion of our marriage",
       "romaji": "Kekkon wo ki ni shite, watashitachi wa atarashii machi e hikkoshimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We moved to a new town on the occasion of our marriage",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を皮切りに / を皮切りにして",
       "sentence": "彼はその論文を皮切りにして複数の研究を開始した。",
       "translation": "Starting with that thesis, he started multiple research projects.",
-      "translationEn": "Starting with that thesis, he started multiple research projects.",
+      "translationEn": "Starting with that thesis, he started multiple research projects",
       "romaji": "Kare wa sono ronbun o kawakiri ni shite fukusū no kenkyū o kaishi shita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Starting with that thesis, he started multiple research projects",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を皮切りに / を皮切りにして",
       "sentence": "彼女はこのコンペティションを皮切りにして彼女のダンスキャリアが飛躍的に成長した。",
       "translation": "Starting with this competition, her dance career drastically grew.",
-      "translationEn": "Starting with this competition, her dance career drastically grew.",
+      "translationEn": "Starting with this competition, her dance career drastically grew",
       "romaji": "Kanojo wa kono konpetishon o kawakiri ni shite kanojo no dansu kyaria ga hiyakuteki ni seichō shita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Starting with this competition, her dance career drastically grew",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を皮切りに / を皮切りにして",
       "sentence": "この映画を皮切りに、彼は人気俳優としての立場を確立した。",
       "translation": "Starting with this movie, he established his position as a popular actor.",
-      "translationEn": "Starting with this movie, he established his position as a popular actor.",
+      "translationEn": "Starting with this movie, he established his position as a popular actor",
       "romaji": "Kono eiga o kawakiri ni, kare wa ninki haiyū to shite no tachiba o kakuritsu shita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Starting with this movie, he established his position as a popular actor",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を皮切りに / を皮切りにして",
       "sentence": "このプロジェクトを皮切りにして、会社は新たな方向性を示し始めた。",
       "translation": "Starting with this project, the company began to show a new direction.",
-      "translationEn": "Starting with this project, the company began to show a new direction.",
+      "translationEn": "Starting with this project, the company began to show a new direction",
       "romaji": "Kono purojekuto o kawakiri ni shite, kaisha wa arata na hōkōsei o shimeshi hajimeta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Starting with this project, the company began to show a new direction",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を皮切りにして",
       "sentence": "彼はその日を皮切りにして毎日ジムに通い始めました。",
       "translation": "Starting from that day, he began to go to the gym every day.",
-      "translationEn": "Starting from that day, he began to go to the gym every day.",
+      "translationEn": "Starting from that day, he began to go to the gym every day",
       "romaji": "Kare wa sono hi o kawakiri ni shite mainichi jimu ni kayoi hajimemashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Starting from that day, he began to go to the gym every day",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を皮切りにして",
       "sentence": "新年会を皮切りにして、今年はたくさんのイベントが開催されます。",
       "translation": "Starting with the New Year's party, a lot of events will be held this year.",
-      "translationEn": "Starting with the New Year's party, a lot of events will be held this year.",
+      "translationEn": "Starting with the New Years party, a lot of events will be held this year",
       "romaji": "Shinnenkai o kawakiri ni shite, kotoshi wa takusan no ibento ga kaisai saremasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Starting with the New Years party, a lot of events will be held this year",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を皮切りにして",
       "sentence": "この映画を皮切りにして彼の人気は急上昇しました。",
       "translation": "Beginning with this movie, his popularity skyrocketed.",
-      "translationEn": "Beginning with this movie, his popularity skyrocketed.",
+      "translationEn": "Beginning with this movie, his popularity skyrocketed",
       "romaji": "Kono eiga o kawakiri ni shite kare no ninki wa kyūjōshō shimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Beginning with this movie, his popularity skyrocketed",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を皮切りにして",
       "sentence": "東京を皮切りにして、彼の展示会は全国で開かれる予定です。",
       "translation": "Starting in Tokyo, his exhibitions are set to be held nationwide.",
-      "translationEn": "Starting in Tokyo, his exhibitions are set to be held nationwide.",
+      "translationEn": "Starting in Tokyo, his exhibitions are set to be held nationwide",
       "romaji": "Tōkyō o kawakiri ni shite, kare no tenjikai wa zenkoku de hirakareru yotei desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Starting in Tokyo, his exhibitions are set to be held nationwide",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を禁じ得ない",
       "sentence": "この結果には驚きを禁じ得ない。",
       "translation": "I can't help but be surprised at this result.",
-      "translationEn": "I can't help but be surprised at this result.",
+      "translationEn": "I cant help but be surprised at this result",
       "romaji": "Kono kekka ni wa odoroki o kinjienai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I cant help but be surprised at this result",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を禁じ得ない",
       "sentence": "そのニュースを聞いて、彼の成功を祝福する気持ちを禁じ得ない。",
       "translation": "Hearing that news, I can't help but feel the urge to celebrate his success.",
-      "translationEn": "Hearing that news, I can't help but feel the urge to celebrate his success.",
+      "translationEn": "Hearing that news, I cant help but feel the urge to celebrate his success",
       "romaji": "Sono nyūsu o kiite, kare no seikō o shukufuku suru kimochi o kinjienai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Hearing that news, I cant help but feel the urge to celebrate his success",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を禁じ得ない",
       "sentence": "彼女の美しさには感動を禁じ得ない。",
       "translation": "I can't help but be moved by her beauty.",
-      "translationEn": "I can't help but be moved by her beauty.",
+      "translationEn": "I cant help but be moved by her beauty",
       "romaji": "Kanojo no utsukushisa ni wa kandō o kinjienai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I cant help but be moved by her beauty",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun を禁じ得ない",
       "sentence": "彼の話を聞いて、笑いを禁じ得ない。",
       "translation": "Hearing his story, I can't help but laugh.",
-      "translationEn": "Hearing his story, I can't help but laugh.",
+      "translationEn": "Hearing his story, I cant help but laugh",
       "romaji": "Kare no hanashi o kiite, warai o kinjienai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun を経て",
-      "sentence": "彼は苦労を経て成功を手に入れた。",
-      "translation": "He achieved success through hardships.",
-      "translationEn": "He achieved success through hardships.",
-      "romaji": "Kare wa kurō o hete seikō o te ni ireta.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun を経て",
-      "sentence": "彼女はニューヨークを経て日本に帰国した。",
-      "translation": "She returned to Japan via New York.",
-      "translationEn": "She returned to Japan via New York.",
-      "romaji": "Kanojo wa Nyūyōku o hete Nihon ni kikoku shita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun を経て",
-      "sentence": "私達は長い議論を経て決定を下した。",
-      "translation": "We made a decision through a long discussion.",
-      "translationEn": "We made a decision through a long discussion.",
-      "romaji": "Watashitachi wa nagai giron o hete kettei o kudashita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun を経て",
-      "sentence": "多くの修練を経て、彼は達人のレベルになった。",
-      "translation": "Through a lot of training, he reached a master's level.",
-      "translationEn": "Through a lot of training, he reached a master's level.",
-      "romaji": "Ōku no shuren o hete, kare wa tatsujin no reberu ni natta.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun を踏まえて",
-      "sentence": "過去の結果を踏まえて、新たな計画を立てました。",
-      "translation": "Based on previous results, we have made a new plan.",
-      "translationEn": "Based on previous results, we have made a new plan.",
-      "romaji": "Kako no kekka o fumaete, aratana keikaku o tatemashita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun を踏まえて",
-      "sentence": "現地の文化を踏まえて、プレゼンテーションを準備します。",
-      "translation": "I will prepare a presentation taking into account the local culture.",
-      "translationEn": "I will prepare a presentation taking into account the local culture.",
-      "romaji": "Genchi no bunka o fumaete, purezentēshon o junbi shimasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun を踏まえて",
-      "sentence": "教師の意見を踏まえて、規則を変更しました。",
-      "translation": "We changed the rules in light of the teachers' opinions.",
-      "translationEn": "We changed the rules in light of the teachers' opinions.",
-      "romaji": "Kyōshi no iken o fumaete, kisoku o henkō shimashita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun を踏まえて",
-      "sentence": "最新の研究結果を踏まえて、新しい薬が開発されました。",
-      "translation": "Considering the latest research findings, a new medicine has been developed.",
-      "translationEn": "Considering the latest research findings, a new medicine has been developed.",
-      "romaji": "Saishin no kenkyū kekka o fumaete, atarashii kusuri ga kaihatsu saremashita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun を限りに",
-      "sentence": "今年度を限りに、この大学での教授活動を終えるつもりです。",
-      "translation": "I intend to end my teaching activities at this university as of this academic year.",
-      "translationEn": "I intend to end my teaching activities at this university as of this academic year.",
-      "romaji": "Konnendo o kagiri ni, kono daigaku de no kyouju katsudou o oeru tsumori desu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun を限りに",
-      "sentence": "今日を限りに、タバコを吸うのをやめます。",
-      "translation": "As of today, I will stop smoking.",
-      "translationEn": "As of today, I will stop smoking.",
-      "romaji": "Kyou o kagiri ni, tabako o suu no o yamemasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun を限りに",
-      "sentence": "3月31日を限りに、会社を退職します。",
-      "translation": "I will leave the company as of March 31.",
-      "translationEn": "I will leave the company as of March 31.",
-      "romaji": "3-gatsu 31-nichi o kagiri ni, kaisha o taishoku shimasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun を限りに",
-      "sentence": "来週を限りに、この番組は終了します。",
-      "translation": "This program will end as of next week.",
-      "translationEn": "This program will end as of next week.",
-      "romaji": "Raishuu o kagiri ni, kono bangumi wa shuuryou shimasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Hearing his story, I cant help but laugh",
+      "translationViSource": "internal-en-example-draft"
     }
   ]
 }

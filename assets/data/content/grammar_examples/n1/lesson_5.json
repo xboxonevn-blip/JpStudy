@@ -5,448 +5,609 @@
   "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
   "tags": [
     "source-hanabira",
-    "n1-grammar-import"
+    "n1-grammar-import",
+    "needs-human-review"
   ],
   "examples": [
+    {
+      "grammarPoint": "Noun といったところだ",
+      "sentence": "彼の英語レベルは初級といったところだ。",
+      "translation": "His English level is at most beginner level.",
+      "translationEn": "His English level is at most beginner level",
+      "romaji": "Kare no eigo reberu wa shokyuu to itta tokoro da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: His English level is at most beginner level",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun といったところだ",
+      "sentence": "私の日本語の語彙は1000語といったところだ。",
+      "translation": "My Japanese vocabulary is limited to about 1000 words.",
+      "translationEn": "My Japanese vocabulary is limited to about 1000 words",
+      "romaji": "Watashi no nihongo no goi wa sen go to itta tokoro da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: My Japanese vocabulary is limited to about 1000 words",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun といったところだ",
+      "sentence": "彼が毎日ランニングできるのは5キロといったところだ。",
+      "translation": "He can run as much as 5 kilometers a day at most.",
+      "translationEn": "He can run as much as 5 kilometers a day at most",
+      "romaji": "Kare ga mainichi ranningu dekiru no wa go kiro to itta tokoro da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He can run as much as 5 kilometers a day at most",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun といったところだ",
+      "sentence": "その会社の従業員は20人といったところだ。",
+      "translation": "The employees at that company are limited to about 20 people.",
+      "translationEn": "The employees at that company are limited to about 20 people",
+      "romaji": "Sono kaisha no juugyouin wa nijuu nin to itta tokoro da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The employees at that company are limited to about 20 people",
+      "translationViSource": "internal-en-example-draft"
+    },
     {
       "grammarPoint": "Noun といわず Noun といわず",
       "sentence": "冬といわず夏といわず、彼はいつもアイスクリームを食べます。",
       "translation": "Be it winter or summer, he always eats ice cream.",
-      "translationEn": "Be it winter or summer, he always eats ice cream.",
+      "translationEn": "Be it winter or summer, he always eats ice cream",
       "romaji": "Fuyu to iwazu natsu to iwazu, kare wa itsumo aisukuriimu o tabemasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Be it winter or summer, he always eats ice cream",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun といわず Noun といわず",
       "sentence": "老いといわず若きといわず、全ての人がそのイベントを楽しめます。",
       "translation": "Whether old or young, everyone can enjoy that event.",
-      "translationEn": "Whether old or young, everyone can enjoy that event.",
+      "translationEn": "Whether old or young, everyone can enjoy that event",
       "romaji": "Oi to iwazu wakaki to iwazu, subete no hito ga sono ibento o tanoshimemasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether old or young, everyone can enjoy that event",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun といわず Noun といわず",
       "sentence": "男といわず女といわず、誰もがこの映画を楽しむでしょう。",
       "translation": "Be it men or women, everyone will enjoy this movie.",
-      "translationEn": "Be it men or women, everyone will enjoy this movie.",
+      "translationEn": "Be it men or women, everyone will enjoy this movie",
       "romaji": "Otoko to iwazu onna to iwazu, daremo ga kono eiga o tanoshimu deshou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Be it men or women, everyone will enjoy this movie",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun といわず Noun といわず",
       "sentence": "月といわず火といわず、あの店は毎日混んでいます。",
       "translation": "Be it Monday or Tuesday, that shop is busy every day.",
-      "translationEn": "Be it Monday or Tuesday, that shop is busy every day.",
+      "translationEn": "Be it Monday or Tuesday, that shop is busy every day",
       "romaji": "Getsu to iwazu ka to iwazu, ano mise wa mainichi konde imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Be it Monday or Tuesday, that shop is busy every day",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun + ときたら",
       "sentence": "寿司ときたら、彼は何も食べられない。",
       "translation": "When it comes to sushi, he can't eat anything.",
-      "translationEn": "When it comes to sushi, he can't eat anything.",
+      "translationEn": "When it comes to sushi, he cant eat anything",
       "romaji": "Sushi tokitara, kare wa nanimo taberarenai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When it comes to sushi, he cant eat anything",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun + ときたら",
       "sentence": "数学の問題ときたら、彼女はいつも困っている。",
       "translation": "When it comes to math problems, she's always struggling.",
-      "translationEn": "When it comes to math problems, she's always struggling.",
+      "translationEn": "When it comes to math problems, shes always struggling",
       "romaji": "Suugaku no mondai tokitara, kanojo wa itsumo komatte iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When it comes to math problems, shes always struggling",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun + ときたら",
       "sentence": "あの店のハンバーガーときたら、本当に美味しい。",
       "translation": "Speaking of that shop's hamburgers, they're really delicious.",
-      "translationEn": "Speaking of that shop's hamburgers, they're really delicious.",
+      "translationEn": "Speaking of that shops hamburgers, theyre really delicious",
       "romaji": "Ano mise no hanbaagaa tokitara, hontou ni oishii.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Speaking of that shops hamburgers, theyre really delicious",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun + ときたら",
       "sentence": "彼のいつもの態度ときたら、本当に困ったものだ。",
       "translation": "Speaking of his usual attitude, it's truly problematic.",
-      "translationEn": "Speaking of his usual attitude, it's truly problematic.",
+      "translationEn": "Speaking of his usual attitude, its truly problematic",
       "romaji": "Kare no itsumo no taido tokitara, hontou ni komatta mono da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Speaking of his usual attitude, its truly problematic",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun とは比べものにならない",
       "sentence": "新しい車の速さは古い車とは比べものにならない。",
       "translation": "The speed of the new car is not comparable to the old one.",
-      "translationEn": "The speed of the new car is not comparable to the old one.",
+      "translationEn": "The speed of the new car is not comparable to the old one",
       "romaji": "Atarashii kuruma no hayasa wa furui kuruma to wa kurabemono ni naranai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The speed of the new car is not comparable to the old one",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun とは比べものにならない",
       "sentence": "彼の英語のうまさは私とは比べものにならない。",
       "translation": "His English skills are beyond comparison with mine.",
-      "translationEn": "His English skills are beyond comparison with mine.",
+      "translationEn": "His English skills are beyond comparison with mine",
       "romaji": "Kare no eigo no umasa wa watashi to wa kurabemono ni naranai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: His English skills are beyond comparison with mine",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun とは比べものにならない",
       "sentence": "日本の技術は他の国とは比べものにならない。",
       "translation": "Japan's technology is not comparable to that of other countries.",
-      "translationEn": "Japan's technology is not comparable to that of other countries.",
+      "translationEn": "Japans technology is not comparable to that of other countries",
       "romaji": "Nihon no gijutsu wa hoka no kuni to wa kurabemono ni naranai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Japans technology is not comparable to that of other countries",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun とは比べものにならない",
       "sentence": "今回の地震の被害は前回とは比べものにならない。",
       "translation": "The damage from this earthquake is incomparable to the previous one.",
-      "translationEn": "The damage from this earthquake is incomparable to the previous one.",
+      "translationEn": "The damage from this earthquake is incomparable to the previous one",
       "romaji": "Konkai no jishin no higai wa zenkai to wa kurabemono ni naranai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The damage from this earthquake is incomparable to the previous one",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun + ともあろう + Noun",
       "sentence": "先生ともあろう者が、そんな間違いをするなんて。",
       "translation": "For a teacher, it's shocking to make such a mistake.",
-      "translationEn": "For a teacher, it's shocking to make such a mistake.",
+      "translationEn": "For a teacher, its shocking to make such a mistake",
       "romaji": "Sensei tomoarou mono ga, sonna machigai o suru nante.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: For a teacher, its shocking to make such a mistake",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun + ともあろう + Noun",
       "sentence": "大人ともあろう者が子供みたいにふるまってはいけない。",
       "translation": "It's not right for an adult to behave like a child.",
-      "translationEn": "It's not right for an adult to behave like a child.",
+      "translationEn": "Its not right for an adult to behave like a child",
       "romaji": "Otona tomoarou mono ga kodomo mitai ni furumatte wa ikenai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its not right for an adult to behave like a child",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun + ともあろう + Noun",
       "sentence": "社長ともあろう人がそんな失礼なことを言うなんて。",
       "translation": "It's shocking that someone who is the company president would say such a rude thing.",
-      "translationEn": "It's shocking that someone who is the company president would say such a rude thing.",
+      "translationEn": "Its shocking that someone who is the company president would say such a rude thing",
       "romaji": "Shachou tomoarou hito ga sonna shitsurei na koto o iu nante.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its shocking that someone who is the company president would say such a rude thing",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun + ともあろう + Noun",
       "sentence": "プロの選手ともあろう者が、試合に遅刻するなんて。",
       "translation": "For a professional athlete, being late to a match is unthinkable.",
-      "translationEn": "For a professional athlete, being late to a match is unthinkable.",
+      "translationEn": "For a professional athlete, being late to a match is unthinkable",
       "romaji": "Puro no senshu tomoarou mono ga, shiai ni chikoku suru nante.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: For a professional athlete, being late to a match is unthinkable",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun ともなると",
       "sentence": "クリスマスともなると、街中がきらきらと輝いて見えます。",
       "translation": "When it comes to Christmas time, the whole city sparkles.",
-      "translationEn": "When it comes to Christmas time, the whole city sparkles.",
+      "translationEn": "When it comes to Christmas time, the whole city sparkles",
       "romaji": "Kurisumasu to mo naru to, machijuu ga kirakira to kagayaite miemasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When it comes to Christmas time, the whole city sparkles",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun ともなると",
       "sentence": "子供が自分の過ちを認めるともなると、話は別ですね。",
       "translation": "When a child admits their mistake, that’s a different story.",
-      "translationEn": "When a child admits their mistake, that’s a different story.",
+      "translationEn": "When a child admits their mistake, that’s a different story",
       "romaji": "Kodomo ga jibun no ayamachi o mitomeru to mo naru to, hanashi wa betsu desu ne.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When a child admits their mistake, that’s a different story",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun ともなると",
       "sentence": "夏休みともなると、海辺は観光客で溢れかえります。",
       "translation": "When summer vacation comes, the seaside is filled with tourists.",
-      "translationEn": "When summer vacation comes, the seaside is filled with tourists.",
+      "translationEn": "When summer vacation comes, the seaside is filled with tourists",
       "romaji": "Natsu yasumi to mo naru to, umibe wa kankoukyaku de afurekaerimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When summer vacation comes, the seaside is filled with tourists",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun ともなると",
       "sentence": "試験週間ともなると、図書館はいつもより混雑します。",
       "translation": "When exam week arrives, the library gets more crowded than usual.",
-      "translationEn": "When exam week arrives, the library gets more crowded than usual.",
+      "translationEn": "When exam week arrives, the library gets more crowded than usual",
       "romaji": "Shiken shuukan to mo naru to, toshokan wa itsumo yori konzatsu shimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When exam week arrives, the library gets more crowded than usual",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun ともなれば",
       "sentence": "試験ともなれば、大抵の人が緊張するものです。",
       "translation": "When it comes to exams, most people get nervous.",
-      "translationEn": "When it comes to exams, most people get nervous.",
+      "translationEn": "When it comes to exams, most people get nervous",
       "romaji": "Shiken to mo nareba, taitei no hito ga kinchou suru mono desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When it comes to exams, most people get nervous",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun ともなれば",
       "sentence": "彼がリーダーともなれば、チームの性能はさらに向上するでしょう。",
       "translation": "If he becomes the leader, the team's performance will improve even more.",
-      "translationEn": "If he becomes the leader, the team's performance will improve even more.",
+      "translationEn": "If he becomes the leader, the teams performance will improve even more",
       "romaji": "Kare ga riidaa to mo nareba, chiimu no seinou wa sara ni koujou suru deshou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If he becomes the leader, the teams performance will improve even more",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun ともなれば",
       "sentence": "夏休みともなれば、観光地はいつも人であふれている。",
       "translation": "When it comes to summer vacation, tourist spots are always packed with people.",
-      "translationEn": "When it comes to summer vacation, tourist spots are always packed with people.",
+      "translationEn": "When it comes to summer vacation, tourist spots are always packed with people",
       "romaji": "Natsuyasumi to mo nareba, kankouchi wa itsumo hito de afurete iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When it comes to summer vacation, tourist spots are always packed with people",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun ともなれば",
       "sentence": "結婚ともなれば、ただ二人が愛し合っているだけではすまされない事情も多い。",
       "translation": "When it comes to marriage, there are often issues that can’t be solved by love alone.",
-      "translationEn": "When it comes to marriage, there are often issues that can’t be solved by love alone.",
+      "translationEn": "When it comes to marriage, there are often issues that can’t be solved by love alone",
       "romaji": "Kekkon to mo nareba, tada futari ga aishiatte iru dake de wa sumasarenai jijou mo oi.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When it comes to marriage, there are often issues that can’t be solved by love alone",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun と相まって",
       "sentence": "天気の良さと相まって、ピクニックは大成功でした。",
       "translation": "In combination with the good weather, the picnic was a great success.",
-      "translationEn": "In combination with the good weather, the picnic was a great success.",
+      "translationEn": "In combination with the good weather, the picnic was a great success",
       "romaji": "Tenki no yosa to aimatte, pikunikku wa daiseikou deshita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: In combination with the good weather, the picnic was a great success",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun と相まって",
       "sentence": "努力と運と相まって、彼は試験に合格しました。",
       "translation": "Thanks to both effort and luck, he passed the exam.",
-      "translationEn": "Thanks to both effort and luck, he passed the exam.",
+      "translationEn": "Thanks to both effort and luck, he passed the exam",
       "romaji": "Doryoku to un to aimatte, kare wa shiken ni goukaku shimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Thanks to both effort and luck, he passed the exam",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun と相まって",
       "sentence": "ひまわり油とガーリックと相まって、この料理は美味しいです。",
       "translation": "Combined with sunflower oil and garlic, this dish is delicious.",
-      "translationEn": "Combined with sunflower oil and garlic, this dish is delicious.",
+      "translationEn": "Combined with sunflower oil and garlic, this dish is delicious",
       "romaji": "Himawari abura to gaarikku to aimatte, kono ryouri wa oishii desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Combined with sunflower oil and garlic, this dish is delicious",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun と相まって",
       "sentence": "新しい技術と経験と相まって、私たちはこの問題を克服できました。",
       "translation": "Together with new technology and experience, we were able to overcome this problem.",
-      "translationEn": "Together with new technology and experience, we were able to overcome this problem.",
+      "translationEn": "Together with new technology and experience, we were able to overcome this problem",
       "romaji": "Atarashii gijutsu to keiken to aimatte, watashitachi wa kono mondai o kokufuku dekimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Together with new technology and experience, we were able to overcome this problem",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun なくして～はない",
       "sentence": "努力なくして成功はない。",
       "translation": "There is no success without effort.",
-      "translationEn": "There is no success without effort.",
+      "translationEn": "There is no success without effort",
       "romaji": "Doryoku nakushite seikou wa nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: There is no success without effort",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun なくして～はない",
       "sentence": "時間なくして完璧な作品は作れない。",
       "translation": "You cannot create a perfect work without time.",
-      "translationEn": "You cannot create a perfect work without time.",
+      "translationEn": "You cannot create a perfect work without time",
       "romaji": "Jikan nakushite kanpeki na sakuhin wa tsukurenai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: You cannot create a perfect work without time",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun なくして～はない",
       "sentence": "経験なくして成長はない。",
       "translation": "There is no growth without experience.",
-      "translationEn": "There is no growth without experience.",
+      "translationEn": "There is no growth without experience",
       "romaji": "Keiken nakushite seichou wa nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: There is no growth without experience",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun なくして～はない",
       "sentence": "リーダーシップなくしてグループの成功はない。",
       "translation": "Without leadership, there can be no success for the group.",
-      "translationEn": "Without leadership, there can be no success for the group.",
+      "translationEn": "Without leadership, there can be no success for the group",
       "romaji": "Riidaashippu nakushite guruupu no seikou wa nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Without leadership, there can be no success for the group",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun なしでは～ない",
       "sentence": "水なしでは生きられない。",
       "translation": "We cannot live without water.",
-      "translationEn": "We cannot live without water.",
+      "translationEn": "We cannot live without water",
       "romaji": "Mizu nashi de wa ikirarenai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We cannot live without water",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun なしでは～ない",
       "sentence": "彼の助けなしでは、この問題を解決することはできない。",
       "translation": "Without his help, I cannot solve this problem.",
-      "translationEn": "Without his help, I cannot solve this problem.",
+      "translationEn": "Without his help, I cannot solve this problem",
       "romaji": "Kare no tasuke nashi de wa, kono mondai o kaiketsu suru koto wa dekinai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Without his help, I cannot solve this problem",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun なしでは～ない",
       "sentence": "コンピュータなしでは、現代のビジネスは成り立たない。",
       "translation": "Modern business cannot function without computers.",
-      "translationEn": "Modern business cannot function without computers.",
+      "translationEn": "Modern business cannot function without computers",
       "romaji": "Konpyuuta nashi de wa, gendai no bijinesu wa naritatanai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Modern business cannot function without computers",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun なしでは～ない",
       "sentence": "友情なしでは、人生は退屈だろう。",
       "translation": "Life would be boring without friendship.",
-      "translationEn": "Life would be boring without friendship.",
+      "translationEn": "Life would be boring without friendship",
       "romaji": "Yuujou nashi de wa, jinsei wa taikutsu darou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun なしには～ない",
-      "sentence": "お金なしには生活ができない。",
-      "translation": "I cannot get by without money.",
-      "translationEn": "I cannot get by without money.",
-      "romaji": "Okane nashi ni wa seikatsu ga dekinai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun なしには～ない",
-      "sentence": "愛情なしには子育てができない。",
-      "translation": "You cannot raise a child without love.",
-      "translationEn": "You cannot raise a child without love.",
-      "romaji": "Aijou nashi ni wa kosodate ga dekinai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun なしには～ない",
-      "sentence": "彼なしにはこのプロジェクトを進められない。",
-      "translation": "Without him, I cannot move this project forward.",
-      "translationEn": "Without him, I cannot move this project forward.",
-      "romaji": "Kare nashi ni wa kono purojekuto o susumerarenai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun なしには～ない",
-      "sentence": "水なしには生きていけない。",
-      "translation": "I cannot live without water.",
-      "translationEn": "I cannot live without water.",
-      "romaji": "Mizu nashi ni wa ikite ikenai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Life would be boring without friendship",
+      "translationViSource": "internal-en-example-draft"
     }
   ]
 }

@@ -1,330 +1,417 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N1",
   "lessonId": 14,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n1_l14_k001",
+      "kanjiId": "n1_jlpt_vocab_k105",
       "lessonId": 14,
       "level": "N1",
-      "character": "哨",
-      "strokeCount": 14,
-      "labels": {
-        "hanViet": "HAN 105",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "哨 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on105"
-        ],
-        "kunyomi": [
-          "kun105"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 哨 qua van canh N1.",
-        "en": "Remember 哨 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 105",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 105",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l14_k002",
-      "lessonId": 14,
-      "level": "N1",
-      "character": "哹",
-      "strokeCount": 15,
-      "labels": {
-        "hanViet": "HAN 106",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "哹 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on106"
-        ],
-        "kunyomi": [
-          "kun106"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 哹 qua van canh N1.",
-        "en": "Remember 哹 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 106",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 106",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l14_k003",
-      "lessonId": 14,
-      "level": "N1",
-      "character": "丂",
-      "strokeCount": 16,
-      "labels": {
-        "hanViet": "HAN 107",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "丂 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on107"
-        ],
-        "kunyomi": [
-          "kun107"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 丂 qua van canh N1.",
-        "en": "Remember 丂 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 107",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 107",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l14_k004",
-      "lessonId": 14,
-      "level": "N1",
-      "character": "专",
-      "strokeCount": 17,
-      "labels": {
-        "hanViet": "HAN 108",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "专 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on108"
-        ],
-        "kunyomi": [
-          "kun108"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 专 qua van canh N1.",
-        "en": "Remember 专 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 108",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 108",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l14_k005",
-      "lessonId": 14,
-      "level": "N1",
-      "character": "两",
+      "character": "安",
       "strokeCount": 6,
       "labels": {
-        "hanViet": "HAN 109",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "两 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "An",
+        "meaningVi": "rest",
+        "meaningViDisplay": "安 (rest)",
+        "meaningEn": "rest"
       },
       "readings": {
-        "onyomi": [
-          "on109"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun109"
+          "あんせい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 两 qua van canh N1.",
-        "en": "Remember 两 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 安静 (rest).",
+        "en": "Appears in JLPT N1 vocabulary: 安静 (rest)."
       },
       "decomposition": {
-        "hanViet": "HAN 109",
-        "structure": "standalone",
+        "hanViet": "An",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 109",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "An",
+        "meaningViNoAccent": "rest",
+        "meaningEnNoAccent": "rest"
       },
+      "examples": [
+        {
+          "word": "安静",
+          "reading": "あんせい",
+          "meaning": "rest"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l14_k006",
+      "kanjiId": "n1_jlpt_vocab_k106",
       "lessonId": 14,
       "level": "N1",
-      "character": "丵",
-      "strokeCount": 7,
+      "character": "静",
+      "strokeCount": 14,
       "labels": {
-        "hanViet": "HAN 110",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "丵 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": null,
+        "meaningVi": "rest",
+        "meaningViDisplay": "静 (rest)",
+        "meaningEn": "rest"
       },
       "readings": {
-        "onyomi": [
-          "on110"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun110"
+          "あんせい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 丵 qua van canh N1.",
-        "en": "Remember 丵 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 安静 (rest).",
+        "en": "Appears in JLPT N1 vocabulary: 安静 (rest)."
       },
       "decomposition": {
-        "hanViet": "HAN 110",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 110",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "rest",
+        "meaningEnNoAccent": "rest"
       },
+      "examples": [
+        {
+          "word": "安静",
+          "reading": "あんせい",
+          "meaning": "rest"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n1_l14_k007",
+      "kanjiId": "n1_jlpt_vocab_k107",
       "lessonId": 14,
       "level": "N1",
-      "character": "乆",
+      "character": "定",
       "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 111",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "乆 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Định",
+        "meaningVi": "sure enough, as usual",
+        "meaningViDisplay": "定 (sure enough, as usual)",
+        "meaningEn": "sure enough, as usual"
       },
       "readings": {
-        "onyomi": [
-          "on111"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun111"
+          "あんのじょう"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 乆 qua van canh N1.",
-        "en": "Remember 乆 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 案の定 (sure enough, as usual).",
+        "en": "Appears in JLPT N1 vocabulary: 案の定 (sure enough, as usual)."
       },
       "decomposition": {
-        "hanViet": "HAN 111",
-        "structure": "standalone",
+        "hanViet": "Định",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 111",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Đinh",
+        "meaningViNoAccent": "sure enough, as usual",
+        "meaningEnNoAccent": "sure enough, as usual"
       },
+      "examples": [
+        {
+          "word": "案の定",
+          "reading": "あんのじょう",
+          "meaning": "sure enough, as usual"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l14_k008",
+      "kanjiId": "n1_jlpt_vocab_k108",
       "lessonId": 14,
       "level": "N1",
-      "character": "乗",
-      "strokeCount": 9,
+      "character": "余",
+      "strokeCount": 7,
       "labels": {
-        "hanViet": "HAN 112",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "乗 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Dư",
+        "meaningVi": "not very (this form only used as adverb), not much, remainder, rest, remnant, surplus, balance, excess, rema",
+        "meaningViDisplay": "余 (not very (this form only used as adverb), not much, remainder, rest, remnant, surplus, balance, excess, rema)",
+        "meaningEn": "not very (this form only used as adverb), not much, remainder, rest, remnant, surplus, balance, excess, rema"
       },
       "readings": {
-        "onyomi": [
-          "on112"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun112"
+          "あんまり"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 乗 qua van canh N1.",
-        "en": "Remember 乗 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 余り (not very (this form only used as adverb), not much, remainder, rest, remnant, surplus, balance, excess, rema).",
+        "en": "Appears in JLPT N1 vocabulary: 余り (not very (this form only used as adverb), not much, remainder, rest, remnant, surplus, balance, excess, rema)."
       },
       "decomposition": {
-        "hanViet": "HAN 112",
-        "structure": "standalone",
+        "hanViet": "Dư",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 112",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Du",
+        "meaningViNoAccent": "not very (this form only used as adverb), not much, remainder, rest, remnant, surplus, balance, excess, rema",
+        "meaningEnNoAccent": "not very (this form only used as adverb), not much, remainder, rest, remnant, surplus, balance, excess, rema"
       },
+      "examples": [
+        {
+          "word": "余り",
+          "reading": "あんまり",
+          "meaning": "not very (this form only used as adverb), not much, remainder, rest, remnant, surplus, balance, excess, rema"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k109",
+      "lessonId": 14,
+      "level": "N1",
+      "character": "依",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Y",
+        "meaningVi": "depending on",
+        "meaningViDisplay": "依 (depending on)",
+        "meaningEn": "depending on"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "い"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 依 (depending on).",
+        "en": "Appears in JLPT N1 vocabulary: 依 (depending on)."
+      },
+      "decomposition": {
+        "hanViet": "Y",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Y",
+        "meaningViNoAccent": "depending on",
+        "meaningEnNoAccent": "depending on"
+      },
+      "examples": [
+        {
+          "word": "依",
+          "reading": "い",
+          "meaning": "depending on"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k110",
+      "lessonId": 14,
+      "level": "N1",
+      "character": "良",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": "Lương",
+        "meaningVi": "good",
+        "meaningViDisplay": "良 (good)",
+        "meaningEn": "good"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いい"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 良い (good).",
+        "en": "Appears in JLPT N1 vocabulary: 良い (good)."
+      },
+      "decomposition": {
+        "hanViet": "Lương",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Luong",
+        "meaningViNoAccent": "good",
+        "meaningEnNoAccent": "good"
+      },
+      "examples": [
+        {
+          "word": "良い",
+          "reading": "いい",
+          "meaning": "good"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k111",
+      "lessonId": 14,
+      "level": "N1",
+      "character": "伊",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Y",
+        "meaningVi": "that one, Italy",
+        "meaningViDisplay": "伊 (that one, Italy)",
+        "meaningEn": "that one, Italy"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いい"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 伊井 (that one, Italy).",
+        "en": "Appears in JLPT N1 vocabulary: 伊井 (that one, Italy)."
+      },
+      "decomposition": {
+        "hanViet": "Y",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Y",
+        "meaningViNoAccent": "that one, italy",
+        "meaningEnNoAccent": "that one, italy"
+      },
+      "examples": [
+        {
+          "word": "伊井",
+          "reading": "いい",
+          "meaning": "that one, Italy"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k112",
+      "lessonId": 14,
+      "level": "N1",
+      "character": "井",
+      "strokeCount": 4,
+      "labels": {
+        "hanViet": "Tỉnh",
+        "meaningVi": "that one, Italy",
+        "meaningViDisplay": "井 (that one, Italy)",
+        "meaningEn": "that one, Italy"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いい"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 伊井 (that one, Italy).",
+        "en": "Appears in JLPT N1 vocabulary: 伊井 (that one, Italy)."
+      },
+      "decomposition": {
+        "hanViet": "Tỉnh",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Tinh",
+        "meaningViNoAccent": "that one, italy",
+        "meaningEnNoAccent": "that one, italy"
+      },
+      "examples": [
+        {
+          "word": "伊井",
+          "reading": "いい",
+          "meaning": "that one, Italy"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

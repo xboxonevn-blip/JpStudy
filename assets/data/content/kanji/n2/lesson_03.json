@@ -1,330 +1,413 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N2",
   "lessonId": 3,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n2_l03_k001",
+      "kanjiId": "n2_jlpt_vocab_k017",
       "lessonId": 3,
       "level": "N2",
-      "character": "伐",
-      "strokeCount": 10,
+      "character": "圧",
+      "strokeCount": 5,
       "labels": {
-        "hanViet": "HAN 17",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "伐 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "compression, condensation, pressure",
+        "meaningViDisplay": "圧 (compression, condensation, pressure)",
+        "meaningEn": "compression, condensation, pressure"
       },
       "readings": {
-        "onyomi": [
-          "on17"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun17"
+          "あっしゅく"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 伐 qua van canh N2.",
-        "en": "Remember 伐 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 圧縮 (compression, condensation, pressure).",
+        "en": "Appears in JLPT N2 vocabulary: 圧縮 (compression, condensation, pressure)."
       },
       "decomposition": {
-        "hanViet": "HAN 17",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 17",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "compression, condensation, pressure",
+        "meaningEnNoAccent": "compression, condensation, pressure"
       },
+      "examples": [
+        {
+          "word": "圧縮",
+          "reading": "あっしゅく",
+          "meaning": "compression, condensation, pressure"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l03_k002",
+      "kanjiId": "n2_jlpt_vocab_k018",
       "lessonId": 3,
       "level": "N2",
-      "character": "伡",
-      "strokeCount": 11,
-      "labels": {
-        "hanViet": "HAN 18",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "伡 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on18"
-        ],
-        "kunyomi": [
-          "kun18"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 伡 qua van canh N2.",
-        "en": "Remember 伡 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 18",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 18",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l03_k003",
-      "lessonId": 3,
-      "level": "N2",
-      "character": "伲",
-      "strokeCount": 12,
-      "labels": {
-        "hanViet": "HAN 19",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "伲 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on19"
-        ],
-        "kunyomi": [
-          "kun19"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 伲 qua van canh N2.",
-        "en": "Remember 伲 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 19",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 19",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l03_k004",
-      "lessonId": 3,
-      "level": "N2",
-      "character": "佃",
-      "strokeCount": 13,
-      "labels": {
-        "hanViet": "HAN 20",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "佃 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on20"
-        ],
-        "kunyomi": [
-          "kun20"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 佃 qua van canh N2.",
-        "en": "Remember 佃 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 20",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 20",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l03_k005",
-      "lessonId": 3,
-      "level": "N2",
-      "character": "佔",
-      "strokeCount": 14,
-      "labels": {
-        "hanViet": "HAN 21",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "佔 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on21"
-        ],
-        "kunyomi": [
-          "kun21"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 佔 qua van canh N2.",
-        "en": "Remember 佔 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 21",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 21",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l03_k006",
-      "lessonId": 3,
-      "level": "N2",
-      "character": "佥",
-      "strokeCount": 15,
-      "labels": {
-        "hanViet": "HAN 22",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "佥 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on22"
-        ],
-        "kunyomi": [
-          "kun22"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 佥 qua van canh N2.",
-        "en": "Remember 佥 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 22",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 22",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l03_k007",
-      "lessonId": 3,
-      "level": "N2",
-      "character": "佶",
-      "strokeCount": 16,
-      "labels": {
-        "hanViet": "HAN 23",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "佶 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on23"
-        ],
-        "kunyomi": [
-          "kun23"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 佶 qua van canh N2.",
-        "en": "Remember 佶 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 23",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 23",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l03_k008",
-      "lessonId": 3,
-      "level": "N2",
-      "character": "侇",
+      "character": "縮",
       "strokeCount": 17,
       "labels": {
-        "hanViet": "HAN 24",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "侇 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "compression, condensation, pressure",
+        "meaningViDisplay": "縮 (compression, condensation, pressure)",
+        "meaningEn": "compression, condensation, pressure"
       },
       "readings": {
-        "onyomi": [
-          "on24"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun24"
+          "あっしゅく"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 侇 qua van canh N2.",
-        "en": "Remember 侇 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 圧縮 (compression, condensation, pressure).",
+        "en": "Appears in JLPT N2 vocabulary: 圧縮 (compression, condensation, pressure)."
       },
       "decomposition": {
-        "hanViet": "HAN 24",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 24",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "compression, condensation, pressure",
+        "meaningEnNoAccent": "compression, condensation, pressure"
       },
+      "examples": [
+        {
+          "word": "圧縮",
+          "reading": "あっしゅく",
+          "meaning": "compression, condensation, pressure"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k019",
+      "lessonId": 3,
+      "level": "N2",
+      "character": "宛",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Uyển",
+        "meaningVi": "address, direction",
+        "meaningViDisplay": "宛 (address, direction)",
+        "meaningEn": "address, direction"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あてな"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 宛名 (address, direction).",
+        "en": "Appears in JLPT N2 vocabulary: 宛名 (address, direction)."
+      },
+      "decomposition": {
+        "hanViet": "Uyển",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Uyen",
+        "meaningViNoAccent": "address, direction",
+        "meaningEnNoAccent": "address, direction"
+      },
+      "examples": [
+        {
+          "word": "宛名",
+          "reading": "あてな",
+          "meaning": "address, direction"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k020",
+      "lessonId": 3,
+      "level": "N2",
+      "character": "名",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Danh",
+        "meaningVi": "address, direction",
+        "meaningViDisplay": "名 (address, direction)",
+        "meaningEn": "address, direction"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あてな"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 宛名 (address, direction).",
+        "en": "Appears in JLPT N2 vocabulary: 宛名 (address, direction)."
+      },
+      "decomposition": {
+        "hanViet": "Danh",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Danh",
+        "meaningViNoAccent": "address, direction",
+        "meaningEnNoAccent": "address, direction"
+      },
+      "examples": [
+        {
+          "word": "宛名",
+          "reading": "あてな",
+          "meaning": "address, direction"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k021",
+      "lessonId": 3,
+      "level": "N2",
+      "character": "暴",
+      "strokeCount": 15,
+      "labels": {
+        "hanViet": "Bạo",
+        "meaningVi": "to act violently, to rage, to struggle, to be riotous",
+        "meaningViDisplay": "暴 (to act violently, to rage, to struggle, to be riotous)",
+        "meaningEn": "to act violently, to rage, to struggle, to be riotous"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あばれる"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 暴れる (to act violently, to rage, to struggle, to be riotous).",
+        "en": "Appears in JLPT N2 vocabulary: 暴れる (to act violently, to rage, to struggle, to be riotous)."
+      },
+      "decomposition": {
+        "hanViet": "Bạo",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Bao",
+        "meaningViNoAccent": "to act violently, to rage, to struggle, to be riotous",
+        "meaningEnNoAccent": "to act violently, to rage, to struggle, to be riotous"
+      },
+      "examples": [
+        {
+          "word": "暴れる",
+          "reading": "あばれる",
+          "meaning": "to act violently, to rage, to struggle, to be riotous"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k022",
+      "lessonId": 3,
+      "level": "N2",
+      "character": "脂",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "fat, tallow, lard",
+        "meaningViDisplay": "脂 (fat, tallow, lard)",
+        "meaningEn": "fat, tallow, lard"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あぶら"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 脂 (fat, tallow, lard).",
+        "en": "Appears in JLPT N2 vocabulary: 脂 (fat, tallow, lard)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "fat, tallow, lard",
+        "meaningEnNoAccent": "fat, tallow, lard"
+      },
+      "examples": [
+        {
+          "word": "脂",
+          "reading": "あぶら",
+          "meaning": "fat, tallow, lard"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k023",
+      "lessonId": 3,
+      "level": "N2",
+      "character": "雨",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "sliding storm door",
+        "meaningViDisplay": "雨 (sliding storm door)",
+        "meaningEn": "sliding storm door"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あまど"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 雨戸 (sliding storm door).",
+        "en": "Appears in JLPT N2 vocabulary: 雨戸 (sliding storm door)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "sliding storm door",
+        "meaningEnNoAccent": "sliding storm door"
+      },
+      "examples": [
+        {
+          "word": "雨戸",
+          "reading": "あまど",
+          "meaning": "sliding storm door"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k024",
+      "lessonId": 3,
+      "level": "N2",
+      "character": "戸",
+      "strokeCount": 4,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "sliding storm door",
+        "meaningViDisplay": "戸 (sliding storm door)",
+        "meaningEn": "sliding storm door"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あまど"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 雨戸 (sliding storm door).",
+        "en": "Appears in JLPT N2 vocabulary: 雨戸 (sliding storm door)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "sliding storm door",
+        "meaningEnNoAccent": "sliding storm door"
+      },
+      "examples": [
+        {
+          "word": "雨戸",
+          "reading": "あまど",
+          "meaning": "sliding storm door"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

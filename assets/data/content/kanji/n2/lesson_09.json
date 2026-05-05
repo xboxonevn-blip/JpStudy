@@ -1,330 +1,416 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N2",
   "lessonId": 9,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n2_l09_k001",
+      "kanjiId": "n2_jlpt_vocab_k065",
       "lessonId": 9,
       "level": "N2",
-      "character": "剀",
+      "character": "段",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Đoạn",
+        "meaningVi": "greater, more, further, still more",
+        "meaningViDisplay": "段 (greater, more, further, still more)",
+        "meaningEn": "greater, more, further, still more"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いちだんと"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 一段と (greater, more, further, still more).",
+        "en": "Appears in JLPT N2 vocabulary: 一段と (greater, more, further, still more)."
+      },
+      "decomposition": {
+        "hanViet": "Đoạn",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Đoan",
+        "meaningViNoAccent": "greater, more, further, still more",
+        "meaningEnNoAccent": "greater, more, further, still more"
+      },
+      "examples": [
+        {
+          "word": "一段と",
+          "reading": "いちだんと",
+          "meaning": "greater, more, further, still more"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k066",
+      "lessonId": 9,
+      "level": "N2",
+      "character": "流",
       "strokeCount": 10,
       "labels": {
-        "hanViet": "HAN 65",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "剀 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Lưu",
+        "meaningVi": "first class, top grade, foremost, top-notch",
+        "meaningViDisplay": "流 (first class, top grade, foremost, top-notch)",
+        "meaningEn": "first class, top grade, foremost, top-notch"
       },
       "readings": {
-        "onyomi": [
-          "on65"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun65"
+          "いちりゅう"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 剀 qua van canh N2.",
-        "en": "Remember 剀 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 一流 (first class, top grade, foremost, top-notch).",
+        "en": "Appears in JLPT N2 vocabulary: 一流 (first class, top grade, foremost, top-notch)."
       },
       "decomposition": {
-        "hanViet": "HAN 65",
-        "structure": "standalone",
+        "hanViet": "Lưu",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 65",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Luu",
+        "meaningViNoAccent": "first class, top grade, foremost, top-notch",
+        "meaningEnNoAccent": "first class, top grade, foremost, top-notch"
       },
+      "examples": [
+        {
+          "word": "一流",
+          "reading": "いちりゅう",
+          "meaning": "first class, top grade, foremost, top-notch"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l09_k002",
+      "kanjiId": "n2_jlpt_vocab_k067",
       "lessonId": 9,
       "level": "N2",
-      "character": "剑",
-      "strokeCount": 11,
+      "character": "佚",
+      "strokeCount": 7,
       "labels": {
-        "hanViet": "HAN 66",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "剑 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Dật",
+        "meaningVi": "be lost, peace, hide, mistake, beautiful, in turn",
+        "meaningViDisplay": "佚 (be lost, peace, hide, mistake, beautiful, in turn)",
+        "meaningEn": "be lost, peace, hide, mistake, beautiful, in turn"
       },
       "readings": {
-        "onyomi": [
-          "on66"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun66"
+          "いつ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 剑 qua van canh N2.",
-        "en": "Remember 剑 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 佚 (be lost, peace, hide, mistake, beautiful, in turn).",
+        "en": "Appears in JLPT N2 vocabulary: 佚 (be lost, peace, hide, mistake, beautiful, in turn)."
       },
       "decomposition": {
-        "hanViet": "HAN 66",
-        "structure": "standalone",
+        "hanViet": "Dật",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 66",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Dat",
+        "meaningViNoAccent": "be lost, peace, hide, mistake, beautiful, in turn",
+        "meaningEnNoAccent": "be lost, peace, hide, mistake, beautiful, in turn"
       },
+      "examples": [
+        {
+          "word": "佚",
+          "reading": "いつ",
+          "meaning": "be lost, peace, hide, mistake, beautiful, in turn"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l09_k003",
+      "kanjiId": "n2_jlpt_vocab_k068",
       "lessonId": 9,
       "level": "N2",
-      "character": "剢",
-      "strokeCount": 12,
+      "character": "昨",
+      "strokeCount": 9,
       "labels": {
-        "hanViet": "HAN 67",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "剢 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "day before yesterday",
+        "meaningViDisplay": "昨 (day before yesterday)",
+        "meaningEn": "day before yesterday"
       },
       "readings": {
-        "onyomi": [
-          "on67"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun67"
+          "いっさくじつ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 剢 qua van canh N2.",
-        "en": "Remember 剢 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 一昨日 (day before yesterday).",
+        "en": "Appears in JLPT N2 vocabulary: 一昨日 (day before yesterday)."
       },
       "decomposition": {
-        "hanViet": "HAN 67",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 67",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "day before yesterday",
+        "meaningEnNoAccent": "day before yesterday"
       },
+      "examples": [
+        {
+          "word": "一昨日",
+          "reading": "いっさくじつ",
+          "meaning": "day before yesterday"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l09_k004",
+      "kanjiId": "n2_jlpt_vocab_k069",
       "lessonId": 9,
       "level": "N2",
-      "character": "剳",
-      "strokeCount": 13,
+      "character": "日",
+      "strokeCount": 4,
       "labels": {
-        "hanViet": "HAN 68",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "剳 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Nhật",
+        "meaningVi": "day before yesterday",
+        "meaningViDisplay": "日 (day before yesterday)",
+        "meaningEn": "day before yesterday"
       },
       "readings": {
-        "onyomi": [
-          "on68"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun68"
+          "いっさくじつ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 剳 qua van canh N2.",
-        "en": "Remember 剳 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 一昨日 (day before yesterday).",
+        "en": "Appears in JLPT N2 vocabulary: 一昨日 (day before yesterday)."
       },
       "decomposition": {
-        "hanViet": "HAN 68",
-        "structure": "standalone",
+        "hanViet": "Nhật",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 68",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Nhat",
+        "meaningViNoAccent": "day before yesterday",
+        "meaningEnNoAccent": "day before yesterday"
       },
+      "examples": [
+        {
+          "word": "一昨日",
+          "reading": "いっさくじつ",
+          "meaning": "day before yesterday"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l09_k005",
+      "kanjiId": "n2_jlpt_vocab_k070",
       "lessonId": 9,
       "level": "N2",
-      "character": "劄",
-      "strokeCount": 14,
+      "character": "年",
+      "strokeCount": 6,
       "labels": {
-        "hanViet": "HAN 69",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "劄 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Nên",
+        "meaningVi": "year before last",
+        "meaningViDisplay": "年 (year before last)",
+        "meaningEn": "year before last"
       },
       "readings": {
-        "onyomi": [
-          "on69"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun69"
+          "いっさくねん"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 劄 qua van canh N2.",
-        "en": "Remember 劄 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 一昨年 (year before last).",
+        "en": "Appears in JLPT N2 vocabulary: 一昨年 (year before last)."
       },
       "decomposition": {
-        "hanViet": "HAN 69",
-        "structure": "standalone",
+        "hanViet": "Nên",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 69",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Nen",
+        "meaningViNoAccent": "year before last",
+        "meaningEnNoAccent": "year before last"
       },
+      "examples": [
+        {
+          "word": "一昨年",
+          "reading": "いっさくねん",
+          "meaning": "year before last"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l09_k006",
+      "kanjiId": "n2_jlpt_vocab_k071",
       "lessonId": 9,
       "level": "N2",
-      "character": "劕",
-      "strokeCount": 15,
+      "character": "斉",
+      "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 70",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "劕 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "simultaneous, all at once",
+        "meaningViDisplay": "斉 (simultaneous, all at once)",
+        "meaningEn": "simultaneous, all at once"
       },
       "readings": {
-        "onyomi": [
-          "on70"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun70"
+          "いっせい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 劕 qua van canh N2.",
-        "en": "Remember 劕 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 一斉 (simultaneous, all at once).",
+        "en": "Appears in JLPT N2 vocabulary: 一斉 (simultaneous, all at once)."
       },
       "decomposition": {
-        "hanViet": "HAN 70",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 70",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "simultaneous, all at once",
+        "meaningEnNoAccent": "simultaneous, all at once"
       },
+      "examples": [
+        {
+          "word": "一斉",
+          "reading": "いっせい",
+          "meaning": "simultaneous, all at once"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l09_k007",
+      "kanjiId": "n2_jlpt_vocab_k072",
       "lessonId": 9,
       "level": "N2",
-      "character": "劦",
-      "strokeCount": 16,
+      "character": "旦",
+      "strokeCount": 5,
       "labels": {
-        "hanViet": "HAN 71",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "劦 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Đán",
+        "meaningVi": "once, for a moment, one morning, temporarily",
+        "meaningViDisplay": "旦 (once, for a moment, one morning, temporarily)",
+        "meaningEn": "once, for a moment, one morning, temporarily"
       },
       "readings": {
-        "onyomi": [
-          "on71"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun71"
+          "いったん"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 劦 qua van canh N2.",
-        "en": "Remember 劦 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 一旦 (once, for a moment, one morning, temporarily).",
+        "en": "Appears in JLPT N2 vocabulary: 一旦 (once, for a moment, one morning, temporarily)."
       },
       "decomposition": {
-        "hanViet": "HAN 71",
-        "structure": "standalone",
+        "hanViet": "Đán",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 71",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Đan",
+        "meaningViNoAccent": "once, for a moment, one morning, temporarily",
+        "meaningEnNoAccent": "once, for a moment, one morning, temporarily"
       },
+      "examples": [
+        {
+          "word": "一旦",
+          "reading": "いったん",
+          "meaning": "once, for a moment, one morning, temporarily"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l09_k008",
-      "lessonId": 9,
-      "level": "N2",
-      "character": "劷",
-      "strokeCount": 17,
-      "labels": {
-        "hanViet": "HAN 72",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "劷 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on72"
-        ],
-        "kunyomi": [
-          "kun72"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 劷 qua van canh N2.",
-        "en": "Remember 劷 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 72",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 72",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

@@ -1,330 +1,416 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N2",
   "lessonId": 14,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n2_l14_k001",
+      "kanjiId": "n2_jlpt_vocab_k105",
       "lessonId": 14,
       "level": "N2",
-      "character": "哨",
-      "strokeCount": 14,
+      "character": "写",
+      "strokeCount": 5,
       "labels": {
-        "hanViet": "HAN 105",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "哨 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "to be photographed, to be projected",
+        "meaningViDisplay": "写 (to be photographed, to be projected)",
+        "meaningEn": "to be photographed, to be projected"
       },
       "readings": {
-        "onyomi": [
-          "on105"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun105"
+          "うつる"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 哨 qua van canh N2.",
-        "en": "Remember 哨 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 写る (to be photographed, to be projected).",
+        "en": "Appears in JLPT N2 vocabulary: 写る (to be photographed, to be projected)."
       },
       "decomposition": {
-        "hanViet": "HAN 105",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 105",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "to be photographed, to be projected",
+        "meaningEnNoAccent": "to be photographed, to be projected"
       },
+      "examples": [
+        {
+          "word": "写る",
+          "reading": "うつる",
+          "meaning": "to be photographed, to be projected"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l14_k002",
+      "kanjiId": "n2_jlpt_vocab_k106",
       "lessonId": 14,
       "level": "N2",
-      "character": "哹",
-      "strokeCount": 15,
+      "character": "無",
+      "strokeCount": 12,
       "labels": {
-        "hanViet": "HAN 106",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "哹 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Vô",
+        "meaningVi": "yes or no, existence, flag indicator (comp), presence or absence marker",
+        "meaningViDisplay": "無 (yes or no, existence, flag indicator (comp), presence or absence marker)",
+        "meaningEn": "yes or no, existence, flag indicator (comp), presence or absence marker"
       },
       "readings": {
-        "onyomi": [
-          "on106"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun106"
+          "うむ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 哹 qua van canh N2.",
-        "en": "Remember 哹 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 有無 (yes or no, existence, flag indicator (comp), presence or absence marker).",
+        "en": "Appears in JLPT N2 vocabulary: 有無 (yes or no, existence, flag indicator (comp), presence or absence marker)."
       },
       "decomposition": {
-        "hanViet": "HAN 106",
-        "structure": "standalone",
+        "hanViet": "Vô",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 106",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Vo",
+        "meaningViNoAccent": "yes or no, existence, flag indicator (comp), presence or absence marker",
+        "meaningEnNoAccent": "yes or no, existence, flag indicator (comp), presence or absence marker"
       },
+      "examples": [
+        {
+          "word": "有無",
+          "reading": "うむ",
+          "meaning": "yes or no, existence, flag indicator (comp), presence or absence marker"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l14_k003",
+      "kanjiId": "n2_jlpt_vocab_k107",
       "lessonId": 14,
       "level": "N2",
-      "character": "丂",
-      "strokeCount": 16,
+      "character": "埋",
+      "strokeCount": 10,
       "labels": {
-        "hanViet": "HAN 107",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "丂 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Mai",
+        "meaningVi": "to bury, to fill up, to fill (a seat,  a vacant position)",
+        "meaningViDisplay": "埋 (to bury, to fill up, to fill (a seat,  a vacant position))",
+        "meaningEn": "to bury, to fill up, to fill (a seat,  a vacant position)"
       },
       "readings": {
-        "onyomi": [
-          "on107"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun107"
+          "うめる"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 丂 qua van canh N2.",
-        "en": "Remember 丂 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 埋める (to bury, to fill up, to fill (a seat,  a vacant position)).",
+        "en": "Appears in JLPT N2 vocabulary: 埋める (to bury, to fill up, to fill (a seat,  a vacant position))."
       },
       "decomposition": {
-        "hanViet": "HAN 107",
-        "structure": "standalone",
+        "hanViet": "Mai",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 107",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Mai",
+        "meaningViNoAccent": "to bury, to fill up, to fill (a seat,  a vacant position)",
+        "meaningEnNoAccent": "to bury, to fill up, to fill (a seat,  a vacant position)"
       },
+      "examples": [
+        {
+          "word": "埋める",
+          "reading": "うめる",
+          "meaning": "to bury, to fill up, to fill (a seat,  a vacant position)"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l14_k004",
+      "kanjiId": "n2_jlpt_vocab_k108",
       "lessonId": 14,
       "level": "N2",
-      "character": "专",
-      "strokeCount": 17,
+      "character": "敬",
+      "strokeCount": 12,
       "labels": {
-        "hanViet": "HAN 108",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "专 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Kính",
+        "meaningVi": "to show respect, to honour",
+        "meaningViDisplay": "敬 (to show respect, to honour)",
+        "meaningEn": "to show respect, to honour"
       },
       "readings": {
-        "onyomi": [
-          "on108"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun108"
+          "うやまう"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 专 qua van canh N2.",
-        "en": "Remember 专 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 敬う (to show respect, to honour).",
+        "en": "Appears in JLPT N2 vocabulary: 敬う (to show respect, to honour)."
       },
       "decomposition": {
-        "hanViet": "HAN 108",
-        "structure": "standalone",
+        "hanViet": "Kính",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 108",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Kinh",
+        "meaningViNoAccent": "to show respect, to honour",
+        "meaningEnNoAccent": "to show respect, to honour"
       },
+      "examples": [
+        {
+          "word": "敬う",
+          "reading": "うやまう",
+          "meaning": "to show respect, to honour"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l14_k005",
+      "kanjiId": "n2_jlpt_vocab_k109",
       "lessonId": 14,
       "level": "N2",
-      "character": "两",
-      "strokeCount": 6,
+      "character": "裏",
+      "strokeCount": 13,
       "labels": {
-        "hanViet": "HAN 109",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "两 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "to turn inside out, to turn (something) over",
+        "meaningViDisplay": "裏 (to turn inside out, to turn (something) over)",
+        "meaningEn": "to turn inside out, to turn (something) over"
       },
       "readings": {
-        "onyomi": [
-          "on109"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun109"
+          "うらがえす"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 两 qua van canh N2.",
-        "en": "Remember 两 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 裏返す (to turn inside out, to turn (something) over).",
+        "en": "Appears in JLPT N2 vocabulary: 裏返す (to turn inside out, to turn (something) over)."
       },
       "decomposition": {
-        "hanViet": "HAN 109",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 109",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "to turn inside out, to turn (something) over",
+        "meaningEnNoAccent": "to turn inside out, to turn (something) over"
       },
+      "examples": [
+        {
+          "word": "裏返す",
+          "reading": "うらがえす",
+          "meaning": "to turn inside out, to turn (something) over"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l14_k006",
+      "kanjiId": "n2_jlpt_vocab_k110",
       "lessonId": 14,
       "level": "N2",
-      "character": "丵",
+      "character": "返",
       "strokeCount": 7,
       "labels": {
-        "hanViet": "HAN 110",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "丵 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Phản",
+        "meaningVi": "to turn inside out, to turn (something) over",
+        "meaningViDisplay": "返 (to turn inside out, to turn (something) over)",
+        "meaningEn": "to turn inside out, to turn (something) over"
       },
       "readings": {
-        "onyomi": [
-          "on110"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun110"
+          "うらがえす"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 丵 qua van canh N2.",
-        "en": "Remember 丵 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 裏返す (to turn inside out, to turn (something) over).",
+        "en": "Appears in JLPT N2 vocabulary: 裏返す (to turn inside out, to turn (something) over)."
       },
       "decomposition": {
-        "hanViet": "HAN 110",
-        "structure": "standalone",
+        "hanViet": "Phản",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 110",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Phan",
+        "meaningViNoAccent": "to turn inside out, to turn (something) over",
+        "meaningEnNoAccent": "to turn inside out, to turn (something) over"
       },
+      "examples": [
+        {
+          "word": "裏返す",
+          "reading": "うらがえす",
+          "meaning": "to turn inside out, to turn (something) over"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l14_k007",
+      "kanjiId": "n2_jlpt_vocab_k111",
       "lessonId": 14,
       "level": "N2",
-      "character": "乆",
-      "strokeCount": 8,
+      "character": "口",
+      "strokeCount": 3,
       "labels": {
-        "hanViet": "HAN 111",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "乆 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Khẩu",
+        "meaningVi": "backdoor, rear entrance",
+        "meaningViDisplay": "口 (backdoor, rear entrance)",
+        "meaningEn": "backdoor, rear entrance"
       },
       "readings": {
-        "onyomi": [
-          "on111"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun111"
+          "うらぐち"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 乆 qua van canh N2.",
-        "en": "Remember 乆 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 裏口 (backdoor, rear entrance).",
+        "en": "Appears in JLPT N2 vocabulary: 裏口 (backdoor, rear entrance)."
       },
       "decomposition": {
-        "hanViet": "HAN 111",
-        "structure": "standalone",
+        "hanViet": "Khẩu",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 111",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Khau",
+        "meaningViNoAccent": "backdoor, rear entrance",
+        "meaningEnNoAccent": "backdoor, rear entrance"
       },
+      "examples": [
+        {
+          "word": "裏口",
+          "reading": "うらぐち",
+          "meaning": "backdoor, rear entrance"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l14_k008",
+      "kanjiId": "n2_jlpt_vocab_k112",
       "lessonId": 14,
       "level": "N2",
-      "character": "乗",
-      "strokeCount": 9,
+      "character": "占",
+      "strokeCount": 5,
       "labels": {
-        "hanViet": "HAN 112",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "乗 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Chiêm",
+        "meaningVi": "to forecast, to predict",
+        "meaningViDisplay": "占 (to forecast, to predict)",
+        "meaningEn": "to forecast, to predict"
       },
       "readings": {
-        "onyomi": [
-          "on112"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun112"
+          "うらなう"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 乗 qua van canh N2.",
-        "en": "Remember 乗 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 占う (to forecast, to predict).",
+        "en": "Appears in JLPT N2 vocabulary: 占う (to forecast, to predict)."
       },
       "decomposition": {
-        "hanViet": "HAN 112",
-        "structure": "standalone",
+        "hanViet": "Chiêm",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 112",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Chiem",
+        "meaningViNoAccent": "to forecast, to predict",
+        "meaningEnNoAccent": "to forecast, to predict"
       },
+      "examples": [
+        {
+          "word": "占う",
+          "reading": "うらなう",
+          "meaning": "to forecast, to predict"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

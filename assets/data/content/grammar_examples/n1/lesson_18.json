@@ -5,448 +5,609 @@
   "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
   "tags": [
     "source-hanabira",
-    "n1-grammar-import"
+    "n1-grammar-import",
+    "needs-human-review"
   ],
   "examples": [
+    {
+      "grammarPoint": "Verbる にも Verb れない",
+      "sentence": "彼を理解しようにも理解できない。",
+      "translation": "Even if I try to understand him, I can't.",
+      "translationEn": "Even if I try to understand him, I cant",
+      "romaji": "Kare o rikai shiyou ni mo rikai dekinai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Even if I try to understand him, I cant",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verbる にも Verb れない",
+      "sentence": "走ろうにも走れない。",
+      "translation": "Even if I want to run, I can't.",
+      "translationEn": "Even if I want to run, I cant",
+      "romaji": "Hashirou ni mo hashirenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Even if I want to run, I cant",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verbる にも Verb れない",
+      "sentence": "泣こうにも泣けない。",
+      "translation": "Even if I want to cry, I can't.",
+      "translationEn": "Even if I want to cry, I cant",
+      "romaji": "Nakou ni mo nakenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Even if I want to cry, I cant",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verbる にも Verb れない",
+      "sentence": "忘れようにも忘れられない。",
+      "translation": "Even if I try to forget, I just can’t.",
+      "translationEn": "Even if I try to forget, I just can’t",
+      "romaji": "Wasureyou ni mo wasurerarenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Even if I try to forget, I just can’t",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verbる べからざる Noun",
+      "sentence": "人を裏切るべからざる行為だ。",
+      "translation": "Betraying others is an act that must not be done.",
+      "translationEn": "Betraying others is an act that must not be done",
+      "romaji": "Hito o uragiru bekara zaru koui da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Betraying others is an act that must not be done",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verbる べからざる Noun",
+      "sentence": "子供を傷つけるべからざる行動だ。",
+      "translation": "Hurting a child is a behavior that must not happen.",
+      "translationEn": "Hurting a child is a behavior that must not happen",
+      "romaji": "Kodomo o kizutsukeru bekara zaru koudou da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Hurting a child is a behavior that must not happen",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verbる べからざる Noun",
+      "sentence": "公に嘘をつくべからざる行動だ。",
+      "translation": "Lying publicly is an act that should not be done.",
+      "translationEn": "Lying publicly is an act that should not be done",
+      "romaji": "Ooyake ni uso o tsuku bekara zaru koudou da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Lying publicly is an act that should not be done",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verbる べからざる Noun",
+      "sentence": "他人の財産を侵すべからざる行為だ。",
+      "translation": "Infringing on someone else’s property is an act that must not be performed.",
+      "translationEn": "Infringing on someone else’s property is an act that must not be performed",
+      "romaji": "Tanin no zaisan o okasu bekara zaru koui da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Infringing on someone else’s property is an act that must not be performed",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verbる べからず",
+      "sentence": "嘘をつくべからず。",
+      "translation": "One must not tell lies.",
+      "translationEn": "One must not tell lies",
+      "romaji": "Uso o tsuku bekara zu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: One must not tell lies",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verbる べからず",
+      "sentence": "彼らの秘密を漏らすべからず。",
+      "translation": "You must not leak their secrets.",
+      "translationEn": "You must not leak their secrets",
+      "romaji": "Karera no himitsu o morasu bekara zu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: You must not leak their secrets",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verbる べからず",
+      "sentence": "ルールを破るべからず。",
+      "translation": "You must not break the rules.",
+      "translationEn": "You must not break the rules",
+      "romaji": "Ruuru o yaburu bekara zu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: You must not break the rules",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verbる べからず",
+      "sentence": "勉強を怠るべからず。",
+      "translation": "One must not neglect their studies.",
+      "translationEn": "One must not neglect their studies",
+      "romaji": "Benkyou o okotaru bekara zu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: One must not neglect their studies",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verbる べく",
+      "sentence": "成功するべく、日々努力しています。",
+      "translation": "In order to succeed, I am working hard every day.",
+      "translationEn": "In order to succeed, I am working hard every day",
+      "romaji": "Seikou suru beku, hibi doryoku shite imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: In order to succeed, I am working hard every day",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verbる べく",
+      "sentence": "健康を維持するべく、毎日運動をしています。",
+      "translation": "In order to maintain my health, I exercise every day.",
+      "translationEn": "In order to maintain my health, I exercise every day",
+      "romaji": "Kenkou o iji suru beku, mainichi undou o shite imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: In order to maintain my health, I exercise every day",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verbる べく",
+      "sentence": "彼は学位を得るべく、毎日勉強しています。",
+      "translation": "He studies every day in order to get a degree.",
+      "translationEn": "He studies every day in order to get a degree",
+      "romaji": "Kare wa gakui o eru beku, mainichi benkyou shite imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He studies every day in order to get a degree",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verbる べく",
+      "sentence": "早く目的地に到着するべく、タクシーを呼びました。",
+      "translation": "I called a taxi in order to arrive at the destination quickly.",
+      "translationEn": "I called a taxi in order to arrive at the destination quickly",
+      "romaji": "Hayaku mokutekichi ni touchaku suru beku, takushii o yobimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I called a taxi in order to arrive at the destination quickly",
+      "translationViSource": "internal-en-example-draft"
+    },
     {
       "grammarPoint": "Verbる べくもない",
       "sentence": "その問題はとても難しく、解くべくもない。",
       "translation": "That problem is so difficult that it's impossible to solve.",
-      "translationEn": "That problem is so difficult that it's impossible to solve.",
+      "translationEn": "That problem is so difficult that its impossible to solve",
       "romaji": "Sono mondai wa totemo muzukashiku, toku beku mo nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: That problem is so difficult that its impossible to solve",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる べくもない",
       "sentence": "彼女はあまりに速く走って、追いつくべくもない。",
       "translation": "She runs so fast that there's no way to catch up.",
-      "translationEn": "She runs so fast that there's no way to catch up.",
+      "translationEn": "She runs so fast that theres no way to catch up",
       "romaji": "Kanojo wa amari ni hayaku hashitte, oitsuku beku mo nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She runs so fast that theres no way to catch up",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる べくもない",
       "sentence": "試験の筆記用具を忘れた。書くべくもない。",
       "translation": "I forgot my writing utensils for the test. It's impossible to write.",
-      "translationEn": "I forgot my writing utensils for the test. It's impossible to write.",
+      "translationEn": "I forgot my writing utensils for the test. Its impossible to write",
       "romaji": "Shiken no hikki yougu o wasureta. Kaku beku mo nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I forgot my writing utensils for the test. Its impossible to write",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる べくもない",
       "sentence": "彼はとても高く跳ぶ。追い越すべくもない。",
       "translation": "He jumps so high that there's no way to surpass him.",
-      "translationEn": "He jumps so high that there's no way to surpass him.",
+      "translationEn": "He jumps so high that theres no way to surpass him",
       "romaji": "Kare wa totemo takaku tobu. Oikosu beku mo nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He jumps so high that theres no way to surpass him",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる までもない",
       "sentence": "そんなに心配するまでもない。",
       "translation": "There's no need to worry that much.",
-      "translationEn": "There's no need to worry that much.",
+      "translationEn": "Theres no need to worry that much",
       "romaji": "Sonna ni shinpai suru made mo nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Theres no need to worry that much",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる までもない",
       "sentence": "電話するまでもないことだ。",
       "translation": "It's not something you need to call about.",
-      "translationEn": "It's not something you need to call about.",
+      "translationEn": "Its not something you need to call about",
       "romaji": "Denwa suru made mo nai koto da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its not something you need to call about",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる までもない",
       "sentence": "小さな失敗であきらめるまでもない。",
       "translation": "You don't need to give up over a small mistake.",
-      "translationEn": "You don't need to give up over a small mistake.",
+      "translationEn": "You dont need to give up over a small mistake",
       "romaji": "Chiisana shippai de akirameru made mo nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: You dont need to give up over a small mistake",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる までもない",
       "sentence": "この問題は、会議で話し合うまでもない。",
       "translation": "This problem doesn't need to be discussed at a meeting.",
-      "translationEn": "This problem doesn't need to be discussed at a meeting.",
+      "translationEn": "This problem doesnt need to be discussed at a meeting",
       "romaji": "Kono mondai wa, kaigi de hanashiau made mo nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This problem doesnt need to be discussed at a meeting",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる ものとする",
       "sentence": "ここでの話し合いは秘密とするものとします。",
       "translation": "The discussions here are to be kept confidential.",
-      "translationEn": "The discussions here are to be kept confidential.",
+      "translationEn": "The discussions here are to be kept confidential",
       "romaji": "Koko de no hanashiai wa himitsu to suru mono to shimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The discussions here are to be kept confidential",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる ものとする",
       "sentence": "この契約は明日から有効とするものとする。",
       "translation": "This contract shall become effective from tomorrow.",
-      "translationEn": "This contract shall become effective from tomorrow.",
+      "translationEn": "This contract shall become effective from tomorrow",
       "romaji": "Kono keiyaku wa ashita kara yuukou to suru mono to suru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This contract shall become effective from tomorrow",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる ものとする",
       "sentence": "彼をチームのリーダーとするものとします。",
       "translation": "We will designate him as the team leader.",
-      "translationEn": "We will designate him as the team leader.",
+      "translationEn": "We will designate him as the team leader",
       "romaji": "Kare o chiimu no riidaa to suru mono to shimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We will designate him as the team leader",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる ものとする",
       "sentence": "この件については終了とするものとする。",
       "translation": "We will consider this matter closed.",
-      "translationEn": "We will consider this matter closed.",
+      "translationEn": "We will consider this matter closed",
       "romaji": "Kono ken ni tsuite wa shuuryou to suru mono to suru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We will consider this matter closed",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる や否や",
       "sentence": "彼女が家に帰るや否や、すぐにテレビをつけました。",
       "translation": "As soon as she returned home, she turned on the TV.",
-      "translationEn": "As soon as she returned home, she turned on the TV.",
+      "translationEn": "As soon as she returned home, she turned on the TV",
       "romaji": "Kanojo ga ie ni kaeru ya ina ya, sugu ni terebi o tsukemashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As soon as she returned home, she turned on the TV",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる や否や",
       "sentence": "私が郵便箱を開けるや否や、手紙が落ちました。",
       "translation": "The moment I opened the mailbox, the letters fell out.",
-      "translationEn": "The moment I opened the mailbox, the letters fell out.",
+      "translationEn": "The moment I opened the mailbox, the letters fell out",
       "romaji": "Watashi ga yuubinbako o akeru ya ina ya, tegami ga ochimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The moment I opened the mailbox, the letters fell out",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる や否や",
       "sentence": "子供たちは学校が終わるや否や、公園に走りました。",
       "translation": "As soon as school was over, the children ran to the park.",
-      "translationEn": "As soon as school was over, the children ran to the park.",
+      "translationEn": "As soon as school was over, the children ran to the park",
       "romaji": "Kodomo-tachi wa gakkou ga owaru ya ina ya, kouen ni hashirimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As soon as school was over, the children ran to the park",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる や否や",
       "sentence": "父が新聞を読むや否や、何かに震えていました。",
       "translation": "The moment my father read the newspaper, he started trembling about something.",
-      "translationEn": "The moment my father read the newspaper, he started trembling about something.",
+      "translationEn": "The moment my father read the newspaper, he started trembling about something",
       "romaji": "Chichi ga shinbun o yomu ya ina ya, nanika ni furuete imashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The moment my father read the newspaper, he started trembling about something",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる 始末だ",
       "sentence": "忘れてしまって、パスポートを家に置いてくる始末だった。",
       "translation": "I ended up leaving my passport at home because I forgot.",
-      "translationEn": "I ended up leaving my passport at home because I forgot.",
+      "translationEn": "I ended up leaving my passport at home because I forgot",
       "romaji": "Wasurete shimatte, pasupooto o ie ni oite-kuru shimatsu datta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I ended up leaving my passport at home because I forgot",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる 始末だ",
       "sentence": "毎晩遅くまで働いて、倒れる始末だ。",
       "translation": "I work until late every night and end up collapsing.",
-      "translationEn": "I work until late every night and end up collapsing.",
+      "translationEn": "I work until late every night and end up collapsing",
       "romaji": "Maiban osoku made hataraite, taoreru shimatsu da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I work until late every night and end up collapsing",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる 始末だ",
       "sentence": "勉強しなかったので、試験に落ちる始末だ。",
       "translation": "I didn't study, so I ended up failing the exam.",
-      "translationEn": "I didn't study, so I ended up failing the exam.",
+      "translationEn": "I didnt study, so I ended up failing the exam",
       "romaji": "Benkyou shinakatta node, shiken ni ochiru shimatsu da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I didnt study, so I ended up failing the exam",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる 始末だ",
       "sentence": "電車が遅れたため、会議に遅れる始末だ。",
       "translation": "Because the train was delayed, I ended up being late for the meeting.",
-      "translationEn": "Because the train was delayed, I ended up being late for the meeting.",
+      "translationEn": "Because the train was delayed, I ended up being late for the meeting",
       "romaji": "Densha ga okureta tame, kaigi ni okureru shimatsu da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Because the train was delayed, I ended up being late for the meeting",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる 嫌いがある",
       "sentence": "彼女は遅刻する嫌いがある。",
       "translation": "She has a tendency to be late.",
-      "translationEn": "She has a tendency to be late.",
+      "translationEn": "She has a tendency to be late",
       "romaji": "Kanojo wa chikoku suru kirai ga aru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She has a tendency to be late",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる 嫌いがある",
       "sentence": "私の父はお酒を飲み過ぎる嫌いがある。",
       "translation": "My father has a habit of drinking too much alcohol.",
-      "translationEn": "My father has a habit of drinking too much alcohol.",
+      "translationEn": "My father has a habit of drinking too much alcohol",
       "romaji": "Watashi no chichi wa osake o nomisugiru kirai ga aru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: My father has a habit of drinking too much alcohol",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる 嫌いがある",
       "sentence": "彼は物をすぐ忘れる嫌いがある。",
       "translation": "He tends to forget things quickly.",
-      "translationEn": "He tends to forget things quickly.",
+      "translationEn": "He tends to forget things quickly",
       "romaji": "Kare wa mono o sugu wasureru kirai ga aru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He tends to forget things quickly",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる 嫌いがある",
       "sentence": "彼女は人の話を途中で切る嫌いがある。",
       "translation": "She has a habit of interrupting people while they are speaking.",
-      "translationEn": "She has a habit of interrupting people while they are speaking.",
+      "translationEn": "She has a habit of interrupting people while they are speaking",
       "romaji": "Kanojo wa hito no hanashi o tochuu de kiru kirai ga aru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "いつまで～のやら",
-      "sentence": "この試験勉強はいつまで続くのやら。",
-      "translation": "I don't know when this exam study will end.",
-      "translationEn": "I don't know when this exam study will end.",
-      "romaji": "Kono shiken benkyou wa itsumade tsuzuku no yara.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "いつまで～のやら",
-      "sentence": "彼の話がいつ終わるのやら、わからない。",
-      "translation": "I don't know when his talk will finish.",
-      "translationEn": "I don't know when his talk will finish.",
-      "romaji": "Kare no hanashi ga itsu owaru no yara, wakaranai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "いつまで～のやら",
-      "sentence": "この雨がいつまで降り続くのやら。",
-      "translation": "I don't know when this rain will stop.",
-      "translationEn": "I don't know when this rain will stop.",
-      "romaji": "Kono ame ga itsumade furitsuzuku no yara.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "いつまで～のやら",
-      "sentence": "コロナのパンデミックがいつまで続くのやら。",
-      "translation": "I don't know when this coronavirus pandemic will end.",
-      "translationEn": "I don't know when this coronavirus pandemic will end.",
-      "romaji": "Korona no pandemikku ga itsumade tsuzuku no yara.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～が Verb られる",
-      "sentence": "彼がこの問題を解けると思いますか？",
-      "translation": "Do you think he can solve this problem?",
-      "translationEn": "Do you think he can solve this problem?",
-      "romaji": "Kare ga kono mondai o tokeru to omoimasu ka?",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～が Verb られる",
-      "sentence": "私がその大きな箱を運べるか？",
-      "translation": "Can I carry that big box?",
-      "translationEn": "Can I carry that big box?",
-      "romaji": "Watashi ga sono ookina hako o hakoberu ka?",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～が Verb られる",
-      "sentence": "彼が早く走れると思います。",
-      "translation": "I think he can run fast.",
-      "translationEn": "I think he can run fast.",
-      "romaji": "Kare ga hayaku hashireru to omoimasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～が Verb られる",
-      "sentence": "彼女は日本語が話せる。",
-      "translation": "She can speak Japanese.",
-      "translationEn": "She can speak Japanese.",
-      "romaji": "Kanojo wa nihongo ga hanaseru.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～かと思いきや",
-      "sentence": "明日は晴れるかと思いきや、まさかの雨が降った。",
-      "translation": "I thought it would be sunny tomorrow, but unexpectedly it rained.",
-      "translationEn": "I thought it would be sunny tomorrow, but unexpectedly it rained.",
-      "romaji": "Ashita wa hareru ka to omoikiya, masaka no ame ga futta.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～かと思いきや",
-      "sentence": "彼が試験に落ちたかと思いきや、合格していた。",
-      "translation": "I thought he had failed the test, but he actually passed.",
-      "translationEn": "I thought he had failed the test, but he actually passed.",
-      "romaji": "Kare ga shiken ni ochita ka to omoikiya, goukaku shite ita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～かと思いきや",
-      "sentence": "このケーキは美味しそうだったかと思いきや、全然甘くなかった。",
-      "translation": "I thought this cake would be delicious, but it wasn’t sweet at all.",
-      "translationEn": "I thought this cake would be delicious, but it wasn’t sweet at all.",
-      "romaji": "Kono keeki wa oishisou datta ka to omoikiya, zenzen amakunakatta.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～かと思いきや",
-      "sentence": "列車が遅れるかと思いきや、時間通りに到着した。",
-      "translation": "I thought the train would be late, but it arrived on time.",
-      "translationEn": "I thought the train would be late, but it arrived on time.",
-      "romaji": "Ressha ga okureru ka to omoikiya, jikan doori ni touchaku shita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～がゆえに",
-      "sentence": "愛情がゆえに、彼は彼女を許した。",
-      "translation": "Because of love, he forgave her.",
-      "translationEn": "Because of love, he forgave her.",
-      "romaji": "Aijou ga yue ni, kare wa kanojo o yurushita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～がゆえに",
-      "sentence": "突然の雨がゆえに、試合は延期された。",
-      "translation": "Due to the sudden rain, the match was postponed.",
-      "translationEn": "Due to the sudden rain, the match was postponed.",
-      "romaji": "Totsuzen no ame ga yue ni, shiai wa enki sareta.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～がゆえに",
-      "sentence": "彼の努力がゆえに、彼は成功を収めた。",
-      "translation": "Because of his efforts, he achieved success.",
-      "translationEn": "Because of his efforts, he achieved success.",
-      "romaji": "Kare no doryoku ga yue ni, kare wa seikou o osameta.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～がゆえに",
-      "sentence": "彼の死がゆえに、彼の家族は深い悲しみに包まれた。",
-      "translation": "Due to his death, his family was enveloped in deep sorrow.",
-      "translationEn": "Due to his death, his family was enveloped in deep sorrow.",
-      "romaji": "Kare no shi ga yue ni, kare no kazoku wa fukai kanashimi ni tsutsumareta.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She has a habit of interrupting people while they are speaking",
+      "translationViSource": "internal-en-example-draft"
     }
   ]
 }

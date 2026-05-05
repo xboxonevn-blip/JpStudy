@@ -5,448 +5,609 @@
   "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
   "tags": [
     "source-hanabira",
-    "n1-grammar-import"
+    "n1-grammar-import",
+    "needs-human-review"
   ],
   "examples": [
+    {
+      "grammarPoint": "Verb ないではおかない",
+      "sentence": "彼女は毎回遅刻をしては、先生に怒られないではおかない。",
+      "translation": "Every time she's late, she inevitably gets scolded by the teacher.",
+      "translationEn": "Every time shes late, she inevitably gets scolded by the teacher",
+      "romaji": "Kanojo wa maikai chikoku o shite wa, sensei ni okorarenaide wa okanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Every time shes late, she inevitably gets scolded by the teacher",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verb ないではおかない",
+      "sentence": "美味しいものがあれば、彼は食べないではおかない。",
+      "translation": "If there's delicious food, he can't help but eat it.",
+      "translationEn": "If theres delicious food, he cant help but eat it",
+      "romaji": "Oishii mono ga areba, kare wa tabenai de wa okanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If theres delicious food, he cant help but eat it",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verb ないではおかない",
+      "sentence": "この小説は感動的で、読めば涙を流さないではおかない。",
+      "translation": "This novel is so moving that you can't help but shed tears when you read it.",
+      "translationEn": "This novel is so moving that you cant help but shed tears when you read it",
+      "romaji": "Kono shōsetsu wa kandōteki de, yomeba namida o nagasanai de wa okanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This novel is so moving that you cant help but shed tears when you read it",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verb ないではおかない",
+      "sentence": "毎日練習しているから、試合では勝たないではおかないだろう。",
+      "translation": "He practices every day, so he's bound to win the match.",
+      "translationEn": "He practices every day, so hes bound to win the match",
+      "romaji": "Mainichi renshū shite iru kara, shiai de wa katanai de wa okanai darō.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He practices every day, so hes bound to win the match",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verb ないではすまない",
+      "sentence": "失敗をしたら、謝らないではすまない。",
+      "translation": "If you make a mistake, you have to apologize—there’s no way around it.",
+      "translationEn": "If you make a mistake, you have to apologize—there’s no way around it",
+      "romaji": "Shippai o shitara, ayamaranai de wa sumanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If you make a mistake, you have to apologize—there’s no way around it",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verb ないではすまない",
+      "sentence": "この問題は重大なので、報告しないではすまない。",
+      "translation": "This issue is so serious that I must report it.",
+      "translationEn": "This issue is so serious that I must report it",
+      "romaji": "Kono mondai wa jūdai na node, hōkoku shinai de wa sumanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This issue is so serious that I must report it",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verb ないではすまない",
+      "sentence": "この映画はとても感動的で、泣かないではすまない。",
+      "translation": "This movie is so moving that you can’t help but cry.",
+      "translationEn": "This movie is so moving that you can’t help but cry",
+      "romaji": "Kono eiga wa totemo kandōteki de, nakanai de wa sumanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This movie is so moving that you can’t help but cry",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verb ないではすまない",
+      "sentence": "子供が間違えたら、教えないではすまない。",
+      "translation": "If a child makes a mistake, you must correct them—there’s no avoiding it.",
+      "translationEn": "If a child makes a mistake, you must correct them—there’s no avoiding it",
+      "romaji": "Kodomo ga machigaetara, oshienai de wa sumanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If a child makes a mistake, you must correct them—there’s no avoiding it",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verb ないまでも",
+      "sentence": "全てを理解しないまでも、基本的なことは分かってほしい。",
+      "translation": "Even if you don't understand everything, I'd like you at least to grasp the basics.",
+      "translationEn": "Even if you dont understand everything, Id like you at least to grasp the basics",
+      "romaji": "Subete o rikai shinai made mo, kihonteki na koto wa wakatte hoshii.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Even if you dont understand everything, Id like you at least to grasp the basics",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verb ないまでも",
+      "sentence": "会えないまでも、電話で声を聞きたい。",
+      "translation": "Even if we can’t meet, I still want to hear your voice over the phone.",
+      "translationEn": "Even if we can’t meet, I still want to hear your voice over the phone",
+      "romaji": "Aenai made mo, denwa de koe o kikitai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Even if we can’t meet, I still want to hear your voice over the phone",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verb ないまでも",
+      "sentence": "毎日は無理にしても、週に一度くらいはジョギングを続けたい。",
+      "translation": "Even if I can't do it every day, I want to at least keep jogging once a week.",
+      "translationEn": "Even if I cant do it every day, I want to at least keep jogging once a week",
+      "romaji": "Mainichi wa muri ni shite mo, shū ni ichido kurai wa jogingu o tsuzuketai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Even if I cant do it every day, I want to at least keep jogging once a week",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Verb ないまでも",
+      "sentence": "全員に気に入られないまでも、誠実に向き合いたい。",
+      "translation": "Even if not everyone will like me, I still want to face them sincerely.",
+      "translationEn": "Even if not everyone will like me, I still want to face them sincerely",
+      "romaji": "Zen'in ni ki ni irarenai made mo, seijitsu ni mukiai tai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Even if not everyone will like me, I still want to face them sincerely",
+      "translationViSource": "internal-en-example-draft"
+    },
     {
       "grammarPoint": "Verb ないものだろうか",
       "sentence": "もっと時間があれば、ここに来られないものだろうか。",
       "translation": "If I had more time, wouldn't it be possible to come here?",
-      "translationEn": "If I had more time, wouldn't it be possible to come here?",
+      "translationEn": "If I had more time, wouldnt it be possible to come here?",
       "romaji": "Motto jikan ga areba, koko ni korarenai mono darou ka.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If I had more time, wouldnt it be possible to come here?",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ないものだろうか",
       "sentence": "彼女にもっとよく説明すれば、理解できないものだろうか。",
       "translation": "If I explain it better to her, wouldn't she understand?",
-      "translationEn": "If I explain it better to her, wouldn't she understand?",
+      "translationEn": "If I explain it better to her, wouldnt she understand?",
       "romaji": "Kanojo ni motto yoku setsumei sureba, rikai dekinai mono darou ka.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If I explain it better to her, wouldnt she understand?",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ないものだろうか",
       "sentence": "この問題を解決する方法はないものだろうか。",
       "translation": "Isn't there a way to solve this problem?",
-      "translationEn": "Isn't there a way to solve this problem?",
+      "translationEn": "Isnt there a way to solve this problem?",
       "romaji": "Kono mondai o kaiketsu suru houhou wa nai mono darou ka.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Isnt there a way to solve this problem?",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ないものだろうか",
       "sentence": "自分の間違いを認められないものだろうか。",
       "translation": "Can't I admit my own mistakes?",
-      "translationEn": "Can't I admit my own mistakes?",
+      "translationEn": "Cant I admit my own mistakes?",
       "romaji": "Jibun no machigai o mitomerarenai mono darou ka.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Cant I admit my own mistakes?",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ないものでもない",
       "sentence": "旅行に行きたいと思わないものでもない。",
       "translation": "It's not that I never want to travel.",
-      "translationEn": "It's not that I never want to travel.",
+      "translationEn": "Its not that I never want to travel",
       "romaji": "Ryokou ni ikitai to omowanai mono demo nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its not that I never want to travel",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ないものでもない",
       "sentence": "彼の言ったこと全部が間違いないものでもない。",
       "translation": "It's not that everything he said is completely free from mistakes.",
-      "translationEn": "It's not that everything he said is completely free from mistakes.",
+      "translationEn": "Its not that everything he said is completely free from mistakes",
       "romaji": "Kare no itta koto zenbu ga machigai nai mono demo nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its not that everything he said is completely free from mistakes",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ないものでもない",
       "sentence": "その問題が解けないものでもない。",
       "translation": "It's not that the problem can't be solved.",
-      "translationEn": "It's not that the problem can't be solved.",
+      "translationEn": "Its not that the problem cant be solved",
       "romaji": "Sono mondai ga tokenai mono demo nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its not that the problem cant be solved",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ないものでもない",
       "sentence": "彼に会いたくないものでもない。",
       "translation": "It's not that I don't want to see him.",
-      "translationEn": "It's not that I don't want to see him.",
+      "translationEn": "Its not that I dont want to see him",
       "romaji": "Kare ni aitakunai mono demo nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its not that I dont want to see him",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb の ない Noun",
       "sentence": "笑いのない人生は、つまらない。",
       "translation": "A life without laughter is boring.",
-      "translationEn": "A life without laughter is boring.",
+      "translationEn": "A life without laughter is boring",
       "romaji": "Warai no nai jinsei wa, tsumaranai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: A life without laughter is boring",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb の ない Noun",
       "sentence": "水のない場所には、人は住めない。",
       "translation": "People cannot live in a place without water.",
-      "translationEn": "People cannot live in a place without water.",
+      "translationEn": "People cannot live in a place without water",
       "romaji": "Mizu no nai basho ni wa, hito wa sumenai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: People cannot live in a place without water",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb の ない Noun",
       "sentence": "言葉のない世界は、想像するのが難しい。",
       "translation": "It's hard to imagine a world without words.",
-      "translationEn": "It's hard to imagine a world without words.",
+      "translationEn": "Its hard to imagine a world without words",
       "romaji": "Kotoba no nai sekai wa, souzou suru no ga muzukashii.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its hard to imagine a world without words",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb の ない Noun",
       "sentence": "愛のない結婚は、長続きしない。",
       "translation": "A marriage without love will not last.",
-      "translationEn": "A marriage without love will not last.",
+      "translationEn": "A marriage without love will not last",
       "romaji": "Ai no nai kekkon wa, nagatsudzuki shinai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: A marriage without love will not last",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ば きりがない",
       "sentence": "悪口を言い始めればきりがない。",
       "translation": "Once I start speaking ill of someone, there's no end.",
-      "translationEn": "Once I start speaking ill of someone, there's no end.",
+      "translationEn": "Once I start speaking ill of someone, theres no end",
       "romaji": "Waruguchi o iihajimereba kiri ga nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Once I start speaking ill of someone, theres no end",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ば きりがない",
       "sentence": "彼の欠点を数えればきりがない。",
       "translation": "If I start counting his flaws, there will be no end.",
-      "translationEn": "If I start counting his flaws, there will be no end.",
+      "translationEn": "If I start counting his flaws, there will be no end",
       "romaji": "Kare no ketten o kazoereba kiri ga nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If I start counting his flaws, there will be no end",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ば きりがない",
       "sentence": "この国の美しい場所は、挙げればきりがない。",
       "translation": "If I start listing this country's beautiful places, there's no end.",
-      "translationEn": "If I start listing this country's beautiful places, there's no end.",
+      "translationEn": "If I start listing this countrys beautiful places, theres no end",
       "romaji": "Kono kuni no utsukushii basho wa, agereba kiri ga nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If I start listing this countrys beautiful places, theres no end",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ば きりがない",
       "sentence": "ほかにも例を挙げればきりがない。",
       "translation": "If I start giving more examples, there will be no end.",
-      "translationEn": "If I start giving more examples, there will be no end.",
+      "translationEn": "If I start giving more examples, there will be no end",
       "romaji": "Hoka ni mo rei o agereba kiri ga nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If I start giving more examples, there will be no end",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb もしないで",
       "sentence": "調べもしないで、答えを書きました。",
       "translation": "I wrote the answer without even investigating.",
-      "translationEn": "I wrote the answer without even investigating.",
+      "translationEn": "I wrote the answer without even investigating",
       "romaji": "Shirabe mo shinai de, kotae o kakimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I wrote the answer without even investigating",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb もしないで",
       "sentence": "彼は試験を勉強もしないで、テストに合格した。",
       "translation": "He passed the test without even studying.",
-      "translationEn": "He passed the test without even studying.",
+      "translationEn": "He passed the test without even studying",
       "romaji": "Kare wa shiken o benkyou mo shinai de, tesuto ni goukaku shita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He passed the test without even studying",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb もしないで",
       "sentence": "彼女はその本を読みもしないで、レポートを書いた。",
       "translation": "She wrote her report without even reading the book.",
-      "translationEn": "She wrote her report without even reading the book.",
+      "translationEn": "She wrote her report without even reading the book",
       "romaji": "Kanojo wa sono hon o yomi mo shinai de, repooto o kaita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She wrote her report without even reading the book",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb もしないで",
       "sentence": "準備もしないで、プレゼンテーションを始めました。",
       "translation": "He started the presentation without even preparing.",
-      "translationEn": "He started the presentation without even preparing.",
+      "translationEn": "He started the presentation without even preparing",
       "romaji": "Junbi mo shinai de, purezenteeshon o hajimemashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He started the presentation without even preparing",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb やしない",
       "sentence": "こんな時に泣きやしない。",
       "translation": "I would never cry at a time like this.",
-      "translationEn": "I would never cry at a time like this.",
+      "translationEn": "I would never cry at a time like this",
       "romaji": "Konna toki ni naki-yashinai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I would never cry at a time like this",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb やしない",
       "sentence": "私が彼を助けやしない。",
       "translation": "There's no way I'd help him.",
-      "translationEn": "There's no way I'd help him.",
+      "translationEn": "Theres no way Id help him",
       "romaji": "Watashi ga kare o tasuke-yashinai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Theres no way Id help him",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb やしない",
       "sentence": "彼がそんなことを言いやしない。",
       "translation": "He would never say such a thing.",
-      "translationEn": "He would never say such a thing.",
+      "translationEn": "He would never say such a thing",
       "romaji": "Kare ga sonna koto o ii-yashinai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He would never say such a thing",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb やしない",
       "sentence": "私がそんな高価なものを買いやしない。",
       "translation": "There's no way I'd buy something so expensive.",
-      "translationEn": "There's no way I'd buy something so expensive.",
+      "translationEn": "Theres no way Id buy something so expensive",
       "romaji": "Watashi ga sonna kouka na mono o kai-yashinai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Theres no way Id buy something so expensive",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb よう",
       "sentence": "この問題を解くように努力します。",
       "translation": "I will try to solve this problem.",
-      "translationEn": "I will try to solve this problem.",
+      "translationEn": "I will try to solve this problem",
       "romaji": "Kono mondai o toku you ni doryoku shimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I will try to solve this problem",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb よう",
       "sentence": "彼が言ったようにやりましょう。",
       "translation": "Let's do it the way he said.",
-      "translationEn": "Let's do it the way he said.",
+      "translationEn": "Lets do it the way he said",
       "romaji": "Kare ga itta you ni yarimashou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Lets do it the way he said",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb よう",
       "sentence": "毎日走るようにしています。",
       "translation": "I make it a point to run every day.",
-      "translationEn": "I make it a point to run every day.",
+      "translationEn": "I make it a point to run every day",
       "romaji": "Mainichi hashiru you ni shiteimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I make it a point to run every day",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb よう",
       "sentence": "自分の心を大切にするように。",
       "translation": "Try to take care of your own heart.",
-      "translationEn": "Try to take care of your own heart.",
+      "translationEn": "Try to take care of your own heart",
       "romaji": "Jibun no kokoro o taisetsu ni suru you ni.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verb ようか Verbるまいか",
-      "sentence": "彼に話そうか話すまいか、本当に迷っている。",
-      "translation": "I'm really unsure whether to talk to him or not.",
-      "translationEn": "I'm really unsure whether to talk to him or not.",
-      "romaji": "Kare ni hanasou ka hanasu mai ka, hontou ni mayotte iru.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verb ようか Verbるまいか",
-      "sentence": "試験を受けようか受けまいか迷っています。",
-      "translation": "I'm wondering whether to take the exam or not.",
-      "translationEn": "I'm wondering whether to take the exam or not.",
-      "romaji": "Shiken o ukeyou ka ukemai ka mayotte imasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verb ようか Verbるまいか",
-      "sentence": "あの人に謝ろうか謝るまいか考えています。",
-      "translation": "I'm considering whether to apologize to that person or not.",
-      "translationEn": "I'm considering whether to apologize to that person or not.",
-      "romaji": "Ano hito ni ayamarou ka ayamaru mai ka kangaete imasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verb ようか Verbるまいか",
-      "sentence": "進学しようかしまいか悩んでいる。",
-      "translation": "I'm worried about whether to continue my studies or not.",
-      "translationEn": "I'm worried about whether to continue my studies or not.",
-      "romaji": "Shingaku shiyou ka shimai ka nayande iru.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verb ようが Verb るまいが",
-      "sentence": "彼が来ようが来るまいが、パーティーは始まります。",
-      "translation": "Whether he comes or not, the party will start.",
-      "translationEn": "Whether he comes or not, the party will start.",
-      "romaji": "Kare ga koyou ga kurumai ga, paatii wa hajimarimasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verb ようが Verb るまいが",
-      "sentence": "勉強しようがしまいが、テストの結果は変わらない。",
-      "translation": "Whether you study or not, the test results won't change.",
-      "translationEn": "Whether you study or not, the test results won't change.",
-      "romaji": "Benkyou shiyou ga shimai ga, tesuto no kekka wa kawaranai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verb ようが Verb るまいが",
-      "sentence": "雨が降ろうが降るまいが、ピクニックに行きます。",
-      "translation": "Whether it rains or not, we're going on a picnic.",
-      "translationEn": "Whether it rains or not, we're going on a picnic.",
-      "romaji": "Ame ga furou ga furumai ga, pikunikku ni ikimasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verb ようが Verb るまいが",
-      "sentence": "暑かろうが寒かろうが、毎日ジョギングします。",
-      "translation": "Whether it's hot or cold, I jog every day.",
-      "translationEn": "Whether it's hot or cold, I jog every day.",
-      "romaji": "Atsukarou ga samukarou ga, mainichi jogingu shimasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verb ようがない",
-      "sentence": "電車が混んでいて、動きようがない。",
-      "translation": "The train is so crowded that I can't move.",
-      "translationEn": "The train is so crowded that I can't move.",
-      "romaji": "Densha ga konde ite, ugoki you ga nai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verb ようがない",
-      "sentence": "彼はとても早く走るので、追いつきようがない。",
-      "translation": "He runs so fast, there's no way I can catch up.",
-      "translationEn": "He runs so fast, there's no way I can catch up.",
-      "romaji": "Kare wa totemo hayaku hashiru no de, oitsuki you ga nai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verb ようがない",
-      "sentence": "私には理解しようがない。",
-      "translation": "There's no way for me to understand it.",
-      "translationEn": "There's no way for me to understand it.",
-      "romaji": "Watashi ni wa rikai shiyou ga nai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verb ようがない",
-      "sentence": "どうやっても、これを直しようがない。",
-      "translation": "No matter what I try, there's no way to fix this.",
-      "translationEn": "No matter what I try, there's no way to fix this.",
-      "romaji": "Dou yatte mo, kore o naoshi you ga nai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Try to take care of your own heart",
+      "translationViSource": "internal-en-example-draft"
     }
   ]
 }

@@ -1,330 +1,416 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N1",
   "lessonId": 25,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n1_l25_k001",
+      "kanjiId": "n1_jlpt_vocab_k193",
       "lessonId": 25,
       "level": "N1",
-      "character": "厸",
+      "character": "光",
       "strokeCount": 6,
       "labels": {
-        "hanViet": "HAN 193",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "厸 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Quang",
+        "meaningVi": "(flash of) lightning",
+        "meaningViDisplay": "光 ((flash of) lightning)",
+        "meaningEn": "(flash of) lightning"
       },
       "readings": {
-        "onyomi": [
-          "on193"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun193"
+          "いなびかり"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 厸 qua van canh N1.",
-        "en": "Remember 厸 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 稲光 ((flash of) lightning).",
+        "en": "Appears in JLPT N1 vocabulary: 稲光 ((flash of) lightning)."
       },
       "decomposition": {
-        "hanViet": "HAN 193",
-        "structure": "standalone",
+        "hanViet": "Quang",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 193",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Quang",
+        "meaningViNoAccent": "(flash of) lightning",
+        "meaningEnNoAccent": "(flash of) lightning"
       },
+      "examples": [
+        {
+          "word": "稲光",
+          "reading": "いなびかり",
+          "meaning": "(flash of) lightning"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l25_k002",
+      "kanjiId": "n1_jlpt_vocab_k194",
       "lessonId": 25,
       "level": "N1",
-      "character": "叉",
-      "strokeCount": 7,
+      "character": "古",
+      "strokeCount": 5,
       "labels": {
-        "hanViet": "HAN 194",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "叉 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Cổ",
+        "meaningVi": "antiquity, ancient times",
+        "meaningViDisplay": "古 (antiquity, ancient times)",
+        "meaningEn": "antiquity, ancient times"
       },
       "readings": {
-        "onyomi": [
-          "on194"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun194"
+          "いにしえ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 叉 qua van canh N1.",
-        "en": "Remember 叉 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 古 (antiquity, ancient times).",
+        "en": "Appears in JLPT N1 vocabulary: 古 (antiquity, ancient times)."
       },
       "decomposition": {
-        "hanViet": "HAN 194",
-        "structure": "standalone",
+        "hanViet": "Cổ",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 194",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Co",
+        "meaningViNoAccent": "antiquity, ancient times",
+        "meaningEnNoAccent": "antiquity, ancient times"
       },
+      "examples": [
+        {
+          "word": "古",
+          "reading": "いにしえ",
+          "meaning": "antiquity, ancient times"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l25_k003",
+      "kanjiId": "n1_jlpt_vocab_k195",
       "lessonId": 25,
       "level": "N1",
-      "character": "叚",
+      "character": "祈",
       "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 195",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "叚 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": null,
+        "meaningVi": "prayer, supplication",
+        "meaningViDisplay": "祈 (prayer, supplication)",
+        "meaningEn": "prayer, supplication"
       },
       "readings": {
-        "onyomi": [
-          "on195"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun195"
+          "いのり"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 叚 qua van canh N1.",
-        "en": "Remember 叚 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 祈り (prayer, supplication).",
+        "en": "Appears in JLPT N1 vocabulary: 祈り (prayer, supplication)."
       },
       "decomposition": {
-        "hanViet": "HAN 195",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 195",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "prayer, supplication",
+        "meaningEnNoAccent": "prayer, supplication"
       },
+      "examples": [
+        {
+          "word": "祈り",
+          "reading": "いのり",
+          "meaning": "prayer, supplication"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n1_l25_k004",
+      "kanjiId": "n1_jlpt_vocab_k196",
       "lessonId": 25,
       "level": "N1",
-      "character": "叫",
-      "strokeCount": 9,
+      "character": "鼾",
+      "strokeCount": 17,
       "labels": {
-        "hanViet": "HAN 196",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "叫 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": null,
+        "meaningVi": "snoring",
+        "meaningViDisplay": "鼾 (snoring)",
+        "meaningEn": "snoring"
       },
       "readings": {
-        "onyomi": [
-          "on196"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun196"
+          "いびき"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 叫 qua van canh N1.",
-        "en": "Remember 叫 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 鼾 (snoring).",
+        "en": "Appears in JLPT N1 vocabulary: 鼾 (snoring)."
       },
       "decomposition": {
-        "hanViet": "HAN 196",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 196",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "snoring",
+        "meaningEnNoAccent": "snoring"
       },
+      "examples": [
+        {
+          "word": "鼾",
+          "reading": "いびき",
+          "meaning": "snoring"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n1_l25_k005",
+      "kanjiId": "n1_jlpt_vocab_k197",
       "lessonId": 25,
       "level": "N1",
-      "character": "叼",
-      "strokeCount": 10,
+      "character": "今",
+      "strokeCount": 4,
       "labels": {
-        "hanViet": "HAN 197",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "叼 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Kim",
+        "meaningVi": "now, at this late hour",
+        "meaningViDisplay": "今 (now, at this late hour)",
+        "meaningEn": "now, at this late hour"
       },
       "readings": {
-        "onyomi": [
-          "on197"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun197"
+          "いまさら"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 叼 qua van canh N1.",
-        "en": "Remember 叼 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 今更 (now, at this late hour).",
+        "en": "Appears in JLPT N1 vocabulary: 今更 (now, at this late hour)."
       },
       "decomposition": {
-        "hanViet": "HAN 197",
-        "structure": "standalone",
+        "hanViet": "Kim",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 197",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Kim",
+        "meaningViNoAccent": "now, at this late hour",
+        "meaningEnNoAccent": "now, at this late hour"
       },
+      "examples": [
+        {
+          "word": "今更",
+          "reading": "いまさら",
+          "meaning": "now, at this late hour"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l25_k006",
+      "kanjiId": "n1_jlpt_vocab_k198",
       "lessonId": 25,
       "level": "N1",
-      "character": "名",
-      "strokeCount": 11,
+      "character": "更",
+      "strokeCount": 7,
       "labels": {
-        "hanViet": "HAN 198",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "名 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Canh Cành Cánh Ngạnh",
+        "meaningVi": "now, at this late hour",
+        "meaningViDisplay": "更 (now, at this late hour)",
+        "meaningEn": "now, at this late hour"
       },
       "readings": {
-        "onyomi": [
-          "on198"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun198"
+          "いまさら"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 名 qua van canh N1.",
-        "en": "Remember 名 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 今更 (now, at this late hour).",
+        "en": "Appears in JLPT N1 vocabulary: 今更 (now, at this late hour)."
       },
       "decomposition": {
-        "hanViet": "HAN 198",
-        "structure": "standalone",
+        "hanViet": "Canh Cành Cánh Ngạnh",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 198",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Canh Canh Canh Nganh",
+        "meaningViNoAccent": "now, at this late hour",
+        "meaningEnNoAccent": "now, at this late hour"
       },
+      "examples": [
+        {
+          "word": "今更",
+          "reading": "いまさら",
+          "meaning": "now, at this late hour"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l25_k007",
+      "kanjiId": "n1_jlpt_vocab_k199",
       "lessonId": 25,
       "level": "N1",
-      "character": "吞",
-      "strokeCount": 12,
+      "character": "未",
+      "strokeCount": 5,
       "labels": {
-        "hanViet": "HAN 199",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "吞 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Mùi",
+        "meaningVi": "as yet, hitherto, not yet (neg)",
+        "meaningViDisplay": "未 (as yet, hitherto, not yet (neg))",
+        "meaningEn": "as yet, hitherto, not yet (neg)"
       },
       "readings": {
-        "onyomi": [
-          "on199"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun199"
+          "いまだ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 吞 qua van canh N1.",
-        "en": "Remember 吞 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 未だ (as yet, hitherto, not yet (neg)).",
+        "en": "Appears in JLPT N1 vocabulary: 未だ (as yet, hitherto, not yet (neg))."
       },
       "decomposition": {
-        "hanViet": "HAN 199",
-        "structure": "standalone",
+        "hanViet": "Mùi",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 199",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Mui",
+        "meaningViNoAccent": "as yet, hitherto, not yet (neg)",
+        "meaningEnNoAccent": "as yet, hitherto, not yet (neg)"
       },
+      "examples": [
+        {
+          "word": "未だ",
+          "reading": "いまだ",
+          "meaning": "as yet, hitherto, not yet (neg)"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l25_k008",
+      "kanjiId": "n1_jlpt_vocab_k200",
       "lessonId": 25,
       "level": "N1",
-      "character": "启",
-      "strokeCount": 13,
+      "character": "民",
+      "strokeCount": 5,
       "labels": {
-        "hanViet": "HAN 200",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "启 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Dân",
+        "meaningVi": "emigration, immigration, emigrant, immigrant",
+        "meaningViDisplay": "民 (emigration, immigration, emigrant, immigrant)",
+        "meaningEn": "emigration, immigration, emigrant, immigrant"
       },
       "readings": {
-        "onyomi": [
-          "on200"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun200"
+          "いみん"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 启 qua van canh N1.",
-        "en": "Remember 启 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 移民 (emigration, immigration, emigrant, immigrant).",
+        "en": "Appears in JLPT N1 vocabulary: 移民 (emigration, immigration, emigrant, immigrant)."
       },
       "decomposition": {
-        "hanViet": "HAN 200",
-        "structure": "standalone",
+        "hanViet": "Dân",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 200",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Dan",
+        "meaningViNoAccent": "emigration, immigration, emigrant, immigrant",
+        "meaningEnNoAccent": "emigration, immigration, emigrant, immigrant"
       },
+      "examples": [
+        {
+          "word": "移民",
+          "reading": "いみん",
+          "meaning": "emigration, immigration, emigrant, immigrant"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

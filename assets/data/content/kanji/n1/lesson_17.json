@@ -1,330 +1,416 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N1",
   "lessonId": 17,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n1_l17_k001",
+      "kanjiId": "n1_jlpt_vocab_k129",
       "lessonId": 17,
       "level": "N1",
-      "character": "佸",
-      "strokeCount": 14,
+      "character": "外",
+      "strokeCount": 5,
       "labels": {
-        "hanViet": "HAN 129",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "佸 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Ngoại",
+        "meaningVi": "outside the area",
+        "meaningViDisplay": "外 (outside the area)",
+        "meaningEn": "outside the area"
       },
       "readings": {
-        "onyomi": [
-          "on129"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun129"
+          "いきがい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 佸 qua van canh N1.",
-        "en": "Remember 佸 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 域外 (outside the area).",
+        "en": "Appears in JLPT N1 vocabulary: 域外 (outside the area)."
       },
       "decomposition": {
-        "hanViet": "HAN 129",
-        "structure": "standalone",
+        "hanViet": "Ngoại",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 129",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Ngoai",
+        "meaningViNoAccent": "outside the area",
+        "meaningEnNoAccent": "outside the area"
       },
+      "examples": [
+        {
+          "word": "域外",
+          "reading": "いきがい",
+          "meaning": "outside the area"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l17_k002",
+      "kanjiId": "n1_jlpt_vocab_k130",
       "lessonId": 17,
       "level": "N1",
-      "character": "侉",
+      "character": "意",
+      "strokeCount": 13,
+      "labels": {
+        "hanViet": "Ý",
+        "meaningVi": "to be enthusiastic about",
+        "meaningViDisplay": "意 (to be enthusiastic about)",
+        "meaningEn": "to be enthusiastic about"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いきごむ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 意気込む (to be enthusiastic about).",
+        "en": "Appears in JLPT N1 vocabulary: 意気込む (to be enthusiastic about)."
+      },
+      "decomposition": {
+        "hanViet": "Ý",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Y",
+        "meaningViNoAccent": "to be enthusiastic about",
+        "meaningEnNoAccent": "to be enthusiastic about"
+      },
+      "examples": [
+        {
+          "word": "意気込む",
+          "reading": "いきごむ",
+          "meaning": "to be enthusiastic about"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k131",
+      "lessonId": 17,
+      "level": "N1",
+      "character": "込",
+      "strokeCount": 5,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "to be enthusiastic about",
+        "meaningViDisplay": "込 (to be enthusiastic about)",
+        "meaningEn": "to be enthusiastic about"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いきごむ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 意気込む (to be enthusiastic about).",
+        "en": "Appears in JLPT N1 vocabulary: 意気込む (to be enthusiastic about)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "to be enthusiastic about",
+        "meaningEnNoAccent": "to be enthusiastic about"
+      },
+      "examples": [
+        {
+          "word": "意気込む",
+          "reading": "いきごむ",
+          "meaning": "to be enthusiastic about"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k132",
+      "lessonId": 17,
+      "level": "N1",
+      "character": "経",
+      "strokeCount": 11,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "1. details, whole story, sequence of events, particulars, how it started, how things got this way, 2. c",
+        "meaningViDisplay": "経 (1. details, whole story, sequence of events, particulars, how it started, how things got this way, 2. c)",
+        "meaningEn": "1. details, whole story, sequence of events, particulars, how it started, how things got this way, 2. c"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いきさつ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 経緯 (1. details, whole story, sequence of events, particulars, how it started, how things got this way, 2. c).",
+        "en": "Appears in JLPT N1 vocabulary: 経緯 (1. details, whole story, sequence of events, particulars, how it started, how things got this way, 2. c)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "1. details, whole story, sequence of events, particulars, how it started, how things got this way, 2. c",
+        "meaningEnNoAccent": "1. details, whole story, sequence of events, particulars, how it started, how things got this way, 2. c"
+      },
+      "examples": [
+        {
+          "word": "経緯",
+          "reading": "いきさつ",
+          "meaning": "1. details, whole story, sequence of events, particulars, how it started, how things got this way, 2. c"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k133",
+      "lessonId": 17,
+      "level": "N1",
+      "character": "緯",
       "strokeCount": 15,
       "labels": {
-        "hanViet": "HAN 130",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "侉 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Vĩ",
+        "meaningVi": "1. details, whole story, sequence of events, particulars, how it started, how things got this way, 2. c",
+        "meaningViDisplay": "緯 (1. details, whole story, sequence of events, particulars, how it started, how things got this way, 2. c)",
+        "meaningEn": "1. details, whole story, sequence of events, particulars, how it started, how things got this way, 2. c"
       },
       "readings": {
-        "onyomi": [
-          "on130"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun130"
+          "いきさつ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 侉 qua van canh N1.",
-        "en": "Remember 侉 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 経緯 (1. details, whole story, sequence of events, particulars, how it started, how things got this way, 2. c).",
+        "en": "Appears in JLPT N1 vocabulary: 経緯 (1. details, whole story, sequence of events, particulars, how it started, how things got this way, 2. c)."
       },
       "decomposition": {
-        "hanViet": "HAN 130",
-        "structure": "standalone",
+        "hanViet": "Vĩ",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 130",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Vi",
+        "meaningViNoAccent": "1. details, whole story, sequence of events, particulars, how it started, how things got this way, 2. c",
+        "meaningEnNoAccent": "1. details, whole story, sequence of events, particulars, how it started, how things got this way, 2. c"
       },
+      "examples": [
+        {
+          "word": "経緯",
+          "reading": "いきさつ",
+          "meaning": "1. details, whole story, sequence of events, particulars, how it started, how things got this way, 2. c"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l17_k003",
+      "kanjiId": "n1_jlpt_vocab_k134",
       "lessonId": 17,
       "level": "N1",
-      "character": "侚",
-      "strokeCount": 16,
-      "labels": {
-        "hanViet": "HAN 131",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "侚 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on131"
-        ],
-        "kunyomi": [
-          "kun131"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 侚 qua van canh N1.",
-        "en": "Remember 侚 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 131",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 131",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l17_k004",
-      "lessonId": 17,
-      "level": "N1",
-      "character": "侫",
-      "strokeCount": 17,
-      "labels": {
-        "hanViet": "HAN 132",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "侫 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on132"
-        ],
-        "kunyomi": [
-          "kun132"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 侫 qua van canh N1.",
-        "en": "Remember 侫 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 132",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 132",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l17_k005",
-      "lessonId": 17,
-      "level": "N1",
-      "character": "侼",
+      "character": "行",
       "strokeCount": 6,
       "labels": {
-        "hanViet": "HAN 133",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "侼 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Hàng",
+        "meaningVi": "misunderstanding, estrangement, disagreement, crossing without meeting, going astray",
+        "meaningViDisplay": "行 (misunderstanding, estrangement, disagreement, crossing without meeting, going astray)",
+        "meaningEn": "misunderstanding, estrangement, disagreement, crossing without meeting, going astray"
       },
       "readings": {
-        "onyomi": [
-          "on133"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun133"
+          "いきちがい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 侼 qua van canh N1.",
-        "en": "Remember 侼 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 行き違い (misunderstanding, estrangement, disagreement, crossing without meeting, going astray).",
+        "en": "Appears in JLPT N1 vocabulary: 行き違い (misunderstanding, estrangement, disagreement, crossing without meeting, going astray)."
       },
       "decomposition": {
-        "hanViet": "HAN 133",
-        "structure": "standalone",
+        "hanViet": "Hàng",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 133",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Hang",
+        "meaningViNoAccent": "misunderstanding, estrangement, disagreement, crossing without meeting, going astray",
+        "meaningEnNoAccent": "misunderstanding, estrangement, disagreement, crossing without meeting, going astray"
       },
+      "examples": [
+        {
+          "word": "行き違い",
+          "reading": "いきちがい",
+          "meaning": "misunderstanding, estrangement, disagreement, crossing without meeting, going astray"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l17_k006",
+      "kanjiId": "n1_jlpt_vocab_k135",
       "lessonId": 17,
       "level": "N1",
-      "character": "俍",
-      "strokeCount": 7,
+      "character": "違",
+      "strokeCount": 12,
       "labels": {
-        "hanViet": "HAN 134",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "俍 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Vi",
+        "meaningVi": "misunderstanding, estrangement, disagreement, crossing without meeting, going astray",
+        "meaningViDisplay": "違 (misunderstanding, estrangement, disagreement, crossing without meeting, going astray)",
+        "meaningEn": "misunderstanding, estrangement, disagreement, crossing without meeting, going astray"
       },
       "readings": {
-        "onyomi": [
-          "on134"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun134"
+          "いきちがい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 俍 qua van canh N1.",
-        "en": "Remember 俍 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 行き違い (misunderstanding, estrangement, disagreement, crossing without meeting, going astray).",
+        "en": "Appears in JLPT N1 vocabulary: 行き違い (misunderstanding, estrangement, disagreement, crossing without meeting, going astray)."
       },
       "decomposition": {
-        "hanViet": "HAN 134",
-        "structure": "standalone",
+        "hanViet": "Vi",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 134",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Vi",
+        "meaningViNoAccent": "misunderstanding, estrangement, disagreement, crossing without meeting, going astray",
+        "meaningEnNoAccent": "misunderstanding, estrangement, disagreement, crossing without meeting, going astray"
       },
+      "examples": [
+        {
+          "word": "行き違い",
+          "reading": "いきちがい",
+          "meaning": "misunderstanding, estrangement, disagreement, crossing without meeting, going astray"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l17_k007",
+      "kanjiId": "n1_jlpt_vocab_k136",
       "lessonId": 17,
       "level": "N1",
-      "character": "俞",
-      "strokeCount": 8,
+      "character": "成",
+      "strokeCount": 6,
       "labels": {
-        "hanViet": "HAN 135",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "俞 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Thành",
+        "meaningVi": "suddenly",
+        "meaningViDisplay": "成 (suddenly)",
+        "meaningEn": "suddenly"
       },
       "readings": {
-        "onyomi": [
-          "on135"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun135"
+          "いきなり"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 俞 qua van canh N1.",
-        "en": "Remember 俞 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 行き成り (suddenly).",
+        "en": "Appears in JLPT N1 vocabulary: 行き成り (suddenly)."
       },
       "decomposition": {
-        "hanViet": "HAN 135",
-        "structure": "standalone",
+        "hanViet": "Thành",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 135",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Thanh",
+        "meaningViNoAccent": "suddenly",
+        "meaningEnNoAccent": "suddenly"
       },
+      "examples": [
+        {
+          "word": "行き成り",
+          "reading": "いきなり",
+          "meaning": "suddenly"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l17_k008",
-      "lessonId": 17,
-      "level": "N1",
-      "character": "俯",
-      "strokeCount": 9,
-      "labels": {
-        "hanViet": "HAN 136",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "俯 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on136"
-        ],
-        "kunyomi": [
-          "kun136"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 俯 qua van canh N1.",
-        "en": "Remember 俯 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 136",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 136",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

@@ -1,330 +1,416 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N2",
   "lessonId": 10,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n2_l10_k001",
+      "kanjiId": "n2_jlpt_vocab_k073",
       "lessonId": 10,
       "level": "N2",
-      "character": "勈",
-      "strokeCount": 6,
-      "labels": {
-        "hanViet": "HAN 73",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "勈 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on73"
-        ],
-        "kunyomi": [
-          "kun73"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 勈 qua van canh N2.",
-        "en": "Remember 勈 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 73",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 73",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l10_k002",
-      "lessonId": 10,
-      "level": "N2",
-      "character": "務",
-      "strokeCount": 7,
-      "labels": {
-        "hanViet": "HAN 74",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "務 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on74"
-        ],
-        "kunyomi": [
-          "kun74"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 務 qua van canh N2.",
-        "en": "Remember 務 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 74",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 74",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l10_k003",
-      "lessonId": 10,
-      "level": "N2",
-      "character": "勪",
+      "character": "定",
       "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 75",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "勪 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Định",
+        "meaningVi": "fixed, settled, definite",
+        "meaningViDisplay": "定 (fixed, settled, definite)",
+        "meaningEn": "fixed, settled, definite"
       },
       "readings": {
-        "onyomi": [
-          "on75"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun75"
+          "いってい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 勪 qua van canh N2.",
-        "en": "Remember 勪 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 一定 (fixed, settled, definite).",
+        "en": "Appears in JLPT N2 vocabulary: 一定 (fixed, settled, definite)."
       },
       "decomposition": {
-        "hanViet": "HAN 75",
-        "structure": "standalone",
+        "hanViet": "Định",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 75",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Đinh",
+        "meaningViNoAccent": "fixed, settled, definite",
+        "meaningEnNoAccent": "fixed, settled, definite"
       },
+      "examples": [
+        {
+          "word": "一定",
+          "reading": "いってい",
+          "meaning": "fixed, settled, definite"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l10_k004",
+      "kanjiId": "n2_jlpt_vocab_k074",
       "lessonId": 10,
       "level": "N2",
-      "character": "勻",
-      "strokeCount": 9,
-      "labels": {
-        "hanViet": "HAN 76",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "勻 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on76"
-        ],
-        "kunyomi": [
-          "kun76"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 勻 qua van canh N2.",
-        "en": "Remember 勻 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 76",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 76",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l10_k005",
-      "lessonId": 10,
-      "level": "N2",
-      "character": "匌",
-      "strokeCount": 10,
-      "labels": {
-        "hanViet": "HAN 77",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "匌 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on77"
-        ],
-        "kunyomi": [
-          "kun77"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 匌 qua van canh N2.",
-        "en": "Remember 匌 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 77",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 77",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l10_k006",
-      "lessonId": 10,
-      "level": "N2",
-      "character": "匝",
+      "character": "移",
       "strokeCount": 11,
       "labels": {
-        "hanViet": "HAN 78",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "匝 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Dời",
+        "meaningVi": "moving, transfer, demise",
+        "meaningViDisplay": "移 (moving, transfer, demise)",
+        "meaningEn": "moving, transfer, demise"
       },
       "readings": {
-        "onyomi": [
-          "on78"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun78"
+          "いてん"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 匝 qua van canh N2.",
-        "en": "Remember 匝 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 移転 (moving, transfer, demise).",
+        "en": "Appears in JLPT N2 vocabulary: 移転 (moving, transfer, demise)."
       },
       "decomposition": {
-        "hanViet": "HAN 78",
-        "structure": "standalone",
+        "hanViet": "Dời",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 78",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Doi",
+        "meaningViNoAccent": "moving, transfer, demise",
+        "meaningEnNoAccent": "moving, transfer, demise"
       },
+      "examples": [
+        {
+          "word": "移転",
+          "reading": "いてん",
+          "meaning": "moving, transfer, demise"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l10_k007",
+      "kanjiId": "n2_jlpt_vocab_k075",
       "lessonId": 10,
       "level": "N2",
-      "character": "匮",
-      "strokeCount": 12,
+      "character": "転",
+      "strokeCount": 11,
       "labels": {
-        "hanViet": "HAN 79",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "匮 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "moving, transfer, demise",
+        "meaningViDisplay": "転 (moving, transfer, demise)",
+        "meaningEn": "moving, transfer, demise"
       },
       "readings": {
-        "onyomi": [
-          "on79"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun79"
+          "いてん"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 匮 qua van canh N2.",
-        "en": "Remember 匮 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 移転 (moving, transfer, demise).",
+        "en": "Appears in JLPT N2 vocabulary: 移転 (moving, transfer, demise)."
       },
       "decomposition": {
-        "hanViet": "HAN 79",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 79",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "moving, transfer, demise",
+        "meaningEnNoAccent": "moving, transfer, demise"
       },
+      "examples": [
+        {
+          "word": "移転",
+          "reading": "いてん",
+          "meaning": "moving, transfer, demise"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l10_k008",
+      "kanjiId": "n2_jlpt_vocab_k076",
       "lessonId": 10,
       "level": "N2",
-      "character": "匿",
-      "strokeCount": 13,
+      "character": "井",
+      "strokeCount": 4,
       "labels": {
-        "hanViet": "HAN 80",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "匿 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Tỉnh",
+        "meaningVi": "water well",
+        "meaningViDisplay": "井 (water well)",
+        "meaningEn": "water well"
       },
       "readings": {
-        "onyomi": [
-          "on80"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun80"
+          "いど"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 匿 qua van canh N2.",
-        "en": "Remember 匿 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 井戸 (water well).",
+        "en": "Appears in JLPT N2 vocabulary: 井戸 (water well)."
       },
       "decomposition": {
-        "hanViet": "HAN 80",
-        "structure": "standalone",
+        "hanViet": "Tỉnh",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 80",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Tinh",
+        "meaningViNoAccent": "water well",
+        "meaningEnNoAccent": "water well"
       },
+      "examples": [
+        {
+          "word": "井戸",
+          "reading": "いど",
+          "meaning": "water well"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k077",
+      "lessonId": 10,
+      "level": "N2",
+      "character": "緯",
+      "strokeCount": 15,
+      "labels": {
+        "hanViet": "Vĩ",
+        "meaningVi": "latitude (nav.)",
+        "meaningViDisplay": "緯 (latitude (nav.))",
+        "meaningEn": "latitude (nav.)"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いど"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 緯度 (latitude (nav.)).",
+        "en": "Appears in JLPT N2 vocabulary: 緯度 (latitude (nav.))."
+      },
+      "decomposition": {
+        "hanViet": "Vĩ",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Vi",
+        "meaningViNoAccent": "latitude (nav.)",
+        "meaningEnNoAccent": "latitude (nav.)"
+      },
+      "examples": [
+        {
+          "word": "緯度",
+          "reading": "いど",
+          "meaning": "latitude (nav.)"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k078",
+      "lessonId": 10,
+      "level": "N2",
+      "character": "度",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Độ",
+        "meaningVi": "latitude (nav.)",
+        "meaningViDisplay": "度 (latitude (nav.))",
+        "meaningEn": "latitude (nav.)"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いど"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 緯度 (latitude (nav.)).",
+        "en": "Appears in JLPT N2 vocabulary: 緯度 (latitude (nav.))."
+      },
+      "decomposition": {
+        "hanViet": "Độ",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Đo",
+        "meaningViNoAccent": "latitude (nav.)",
+        "meaningEnNoAccent": "latitude (nav.)"
+      },
+      "examples": [
+        {
+          "word": "緯度",
+          "reading": "いど",
+          "meaning": "latitude (nav.)"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k079",
+      "lessonId": 10,
+      "level": "N2",
+      "character": "従",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "cousin (female)",
+        "meaningViDisplay": "従 (cousin (female))",
+        "meaningEn": "cousin (female)"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いとこ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 従姉妹 (cousin (female)).",
+        "en": "Appears in JLPT N2 vocabulary: 従姉妹 (cousin (female))."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "cousin (female)",
+        "meaningEnNoAccent": "cousin (female)"
+      },
+      "examples": [
+        {
+          "word": "従姉妹",
+          "reading": "いとこ",
+          "meaning": "cousin (female)"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k080",
+      "lessonId": 10,
+      "level": "N2",
+      "character": "姉",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": "Chị",
+        "meaningVi": "cousin (female)",
+        "meaningViDisplay": "姉 (cousin (female))",
+        "meaningEn": "cousin (female)"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いとこ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 従姉妹 (cousin (female)).",
+        "en": "Appears in JLPT N2 vocabulary: 従姉妹 (cousin (female))."
+      },
+      "decomposition": {
+        "hanViet": "Chị",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Chi",
+        "meaningViNoAccent": "cousin (female)",
+        "meaningEnNoAccent": "cousin (female)"
+      },
+      "examples": [
+        {
+          "word": "従姉妹",
+          "reading": "いとこ",
+          "meaning": "cousin (female)"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

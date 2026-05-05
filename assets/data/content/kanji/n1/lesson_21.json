@@ -1,330 +1,416 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N1",
   "lessonId": 21,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n1_l21_k001",
+      "kanjiId": "n1_jlpt_vocab_k161",
       "lessonId": 21,
       "level": "N1",
-      "character": "冘",
-      "strokeCount": 10,
-      "labels": {
-        "hanViet": "HAN 161",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "冘 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on161"
-        ],
-        "kunyomi": [
-          "kun161"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 冘 qua van canh N1.",
-        "en": "Remember 冘 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 161",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 161",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l21_k002",
-      "lessonId": 21,
-      "level": "N1",
-      "character": "冩",
+      "character": "頂",
       "strokeCount": 11,
       "labels": {
-        "hanViet": "HAN 162",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "冩 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Đính",
+        "meaningVi": "(top of) head, summit, spire",
+        "meaningViDisplay": "頂 ((top of) head, summit, spire)",
+        "meaningEn": "(top of) head, summit, spire"
       },
       "readings": {
-        "onyomi": [
-          "on162"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun162"
+          "いただき"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 冩 qua van canh N1.",
-        "en": "Remember 冩 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 頂 ((top of) head, summit, spire).",
+        "en": "Appears in JLPT N1 vocabulary: 頂 ((top of) head, summit, spire)."
       },
       "decomposition": {
-        "hanViet": "HAN 162",
-        "structure": "standalone",
+        "hanViet": "Đính",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 162",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Đinh",
+        "meaningViNoAccent": "(top of) head, summit, spire",
+        "meaningEnNoAccent": "(top of) head, summit, spire"
       },
+      "examples": [
+        {
+          "word": "頂",
+          "reading": "いただき",
+          "meaning": "(top of) head, summit, spire"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l21_k003",
+      "kanjiId": "n1_jlpt_vocab_k162",
       "lessonId": 21,
       "level": "N1",
-      "character": "冺",
-      "strokeCount": 12,
-      "labels": {
-        "hanViet": "HAN 163",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "冺 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on163"
-        ],
-        "kunyomi": [
-          "kun163"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 冺 qua van canh N1.",
-        "en": "Remember 冺 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 163",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 163",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l21_k004",
-      "lessonId": 21,
-      "level": "N1",
-      "character": "凋",
-      "strokeCount": 13,
-      "labels": {
-        "hanViet": "HAN 164",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "凋 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on164"
-        ],
-        "kunyomi": [
-          "kun164"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 凋 qua van canh N1.",
-        "en": "Remember 凋 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 164",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 164",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l21_k005",
-      "lessonId": 21,
-      "level": "N1",
-      "character": "凜",
-      "strokeCount": 14,
-      "labels": {
-        "hanViet": "HAN 165",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "凜 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on165"
-        ],
-        "kunyomi": [
-          "kun165"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 凜 qua van canh N1.",
-        "en": "Remember 凜 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 165",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 165",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l21_k006",
-      "lessonId": 21,
-      "level": "N1",
-      "character": "凭",
-      "strokeCount": 15,
-      "labels": {
-        "hanViet": "HAN 166",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "凭 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on166"
-        ],
-        "kunyomi": [
-          "kun166"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 凭 qua van canh N1.",
-        "en": "Remember 凭 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 166",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 166",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l21_k007",
-      "lessonId": 21,
-      "level": "N1",
-      "character": "凾",
-      "strokeCount": 16,
-      "labels": {
-        "hanViet": "HAN 167",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "凾 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on167"
-        ],
-        "kunyomi": [
-          "kun167"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 凾 qua van canh N1.",
-        "en": "Remember 凾 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 167",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 167",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l21_k008",
-      "lessonId": 21,
-      "level": "N1",
-      "character": "刏",
+      "character": "戴",
       "strokeCount": 17,
       "labels": {
-        "hanViet": "HAN 168",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "刏 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": null,
+        "meaningVi": "expression of gratitude before meals",
+        "meaningViDisplay": "戴 (expression of gratitude before meals)",
+        "meaningEn": "expression of gratitude before meals"
       },
       "readings": {
-        "onyomi": [
-          "on168"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun168"
+          "いただきます"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 刏 qua van canh N1.",
-        "en": "Remember 刏 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 戴きます (expression of gratitude before meals).",
+        "en": "Appears in JLPT N1 vocabulary: 戴きます (expression of gratitude before meals)."
       },
       "decomposition": {
-        "hanViet": "HAN 168",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 168",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "expression of gratitude before meals",
+        "meaningEnNoAccent": "expression of gratitude before meals"
       },
+      "examples": [
+        {
+          "word": "戴きます",
+          "reading": "いただきます",
+          "meaning": "expression of gratitude before meals"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k163",
+      "lessonId": 21,
+      "level": "N1",
+      "character": "至",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Chí",
+        "meaningVi": "very much, exceedingly, extremely",
+        "meaningViDisplay": "至 (very much, exceedingly, extremely)",
+        "meaningEn": "very much, exceedingly, extremely"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いたって"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 至って (very much, exceedingly, extremely).",
+        "en": "Appears in JLPT N1 vocabulary: 至って (very much, exceedingly, extremely)."
+      },
+      "decomposition": {
+        "hanViet": "Chí",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Chi",
+        "meaningViNoAccent": "very much, exceedingly, extremely",
+        "meaningEnNoAccent": "very much, exceedingly, extremely"
+      },
+      "examples": [
+        {
+          "word": "至って",
+          "reading": "いたって",
+          "meaning": "very much, exceedingly, extremely"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k164",
+      "lessonId": 21,
+      "level": "N1",
+      "character": "痛",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Thống",
+        "meaningVi": "to hurt, to feel a pain, to be injured",
+        "meaningViDisplay": "痛 (to hurt, to feel a pain, to be injured)",
+        "meaningEn": "to hurt, to feel a pain, to be injured"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いたむ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 痛む (to hurt, to feel a pain, to be injured).",
+        "en": "Appears in JLPT N1 vocabulary: 痛む (to hurt, to feel a pain, to be injured)."
+      },
+      "decomposition": {
+        "hanViet": "Thống",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Thong",
+        "meaningViNoAccent": "to hurt, to feel a pain, to be injured",
+        "meaningEnNoAccent": "to hurt, to feel a pain, to be injured"
+      },
+      "examples": [
+        {
+          "word": "痛む",
+          "reading": "いたむ",
+          "meaning": "to hurt, to feel a pain, to be injured"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k165",
+      "lessonId": 21,
+      "level": "N1",
+      "character": "炒",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Sao",
+        "meaningVi": "to stir-fry",
+        "meaningViDisplay": "炒 (to stir-fry)",
+        "meaningEn": "to stir-fry"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いためる"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 炒める (to stir-fry).",
+        "en": "Appears in JLPT N1 vocabulary: 炒める (to stir-fry)."
+      },
+      "decomposition": {
+        "hanViet": "Sao",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Sao",
+        "meaningViNoAccent": "to stir-fry",
+        "meaningEnNoAccent": "to stir-fry"
+      },
+      "examples": [
+        {
+          "word": "炒める",
+          "reading": "いためる",
+          "meaning": "to stir-fry"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k166",
+      "lessonId": 21,
+      "level": "N1",
+      "character": "労",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "to pity, to sympathize with, to console, to care for, to be kind to",
+        "meaningViDisplay": "労 (to pity, to sympathize with, to console, to care for, to be kind to)",
+        "meaningEn": "to pity, to sympathize with, to console, to care for, to be kind to"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いたわる"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 労る (to pity, to sympathize with, to console, to care for, to be kind to).",
+        "en": "Appears in JLPT N1 vocabulary: 労る (to pity, to sympathize with, to console, to care for, to be kind to)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "to pity, to sympathize with, to console, to care for, to be kind to",
+        "meaningEnNoAccent": "to pity, to sympathize with, to console, to care for, to be kind to"
+      },
+      "examples": [
+        {
+          "word": "労る",
+          "reading": "いたわる",
+          "meaning": "to pity, to sympathize with, to console, to care for, to be kind to"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k167",
+      "lessonId": 21,
+      "level": "N1",
+      "character": "市",
+      "strokeCount": 5,
+      "labels": {
+        "hanViet": "Thị",
+        "meaningVi": "market, fair",
+        "meaningViDisplay": "市 (market, fair)",
+        "meaningEn": "market, fair"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いち"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 市 (market, fair).",
+        "en": "Appears in JLPT N1 vocabulary: 市 (market, fair)."
+      },
+      "decomposition": {
+        "hanViet": "Thị",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Thi",
+        "meaningViNoAccent": "market, fair",
+        "meaningEnNoAccent": "market, fair"
+      },
+      "examples": [
+        {
+          "word": "市",
+          "reading": "いち",
+          "meaning": "market, fair"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k168",
+      "lessonId": 21,
+      "level": "N1",
+      "character": "位",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": "Vị",
+        "meaningVi": "place, situation, position, location",
+        "meaningViDisplay": "位 (place, situation, position, location)",
+        "meaningEn": "place, situation, position, location"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いち"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 位地 (place, situation, position, location).",
+        "en": "Appears in JLPT N1 vocabulary: 位地 (place, situation, position, location)."
+      },
+      "decomposition": {
+        "hanViet": "Vị",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Vi",
+        "meaningViNoAccent": "place, situation, position, location",
+        "meaningEnNoAccent": "place, situation, position, location"
+      },
+      "examples": [
+        {
+          "word": "位地",
+          "reading": "いち",
+          "meaning": "place, situation, position, location"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

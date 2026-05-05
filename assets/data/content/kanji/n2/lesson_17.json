@@ -1,330 +1,416 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N2",
   "lessonId": 17,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n2_l17_k001",
+      "kanjiId": "n2_jlpt_vocab_k129",
       "lessonId": 17,
       "level": "N2",
-      "character": "佸",
-      "strokeCount": 14,
+      "character": "宴",
+      "strokeCount": 10,
       "labels": {
-        "hanViet": "HAN 129",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "佸 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Yến",
+        "meaningVi": "party, banquet",
+        "meaningViDisplay": "宴 (party, banquet)",
+        "meaningEn": "party, banquet"
       },
       "readings": {
-        "onyomi": [
-          "on129"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun129"
+          "えんかい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 佸 qua van canh N2.",
-        "en": "Remember 佸 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 宴会 (party, banquet).",
+        "en": "Appears in JLPT N2 vocabulary: 宴会 (party, banquet)."
       },
       "decomposition": {
-        "hanViet": "HAN 129",
-        "structure": "standalone",
+        "hanViet": "Yến",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 129",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Yen",
+        "meaningViNoAccent": "party, banquet",
+        "meaningEnNoAccent": "party, banquet"
       },
+      "examples": [
+        {
+          "word": "宴会",
+          "reading": "えんかい",
+          "meaning": "party, banquet"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l17_k002",
+      "kanjiId": "n2_jlpt_vocab_k130",
       "lessonId": 17,
       "level": "N2",
-      "character": "侉",
-      "strokeCount": 15,
-      "labels": {
-        "hanViet": "HAN 130",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "侉 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on130"
-        ],
-        "kunyomi": [
-          "kun130"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 侉 qua van canh N2.",
-        "en": "Remember 侉 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 130",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 130",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l17_k003",
-      "lessonId": 17,
-      "level": "N2",
-      "character": "侚",
-      "strokeCount": 16,
-      "labels": {
-        "hanViet": "HAN 131",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "侚 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on131"
-        ],
-        "kunyomi": [
-          "kun131"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 侚 qua van canh N2.",
-        "en": "Remember 侚 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 131",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 131",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l17_k004",
-      "lessonId": 17,
-      "level": "N2",
-      "character": "侫",
-      "strokeCount": 17,
-      "labels": {
-        "hanViet": "HAN 132",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "侫 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on132"
-        ],
-        "kunyomi": [
-          "kun132"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 侫 qua van canh N2.",
-        "en": "Remember 侫 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 132",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 132",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l17_k005",
-      "lessonId": 17,
-      "level": "N2",
-      "character": "侼",
+      "character": "会",
       "strokeCount": 6,
       "labels": {
-        "hanViet": "HAN 133",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "侼 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Hội",
+        "meaningVi": "party, banquet",
+        "meaningViDisplay": "会 (party, banquet)",
+        "meaningEn": "party, banquet"
       },
       "readings": {
-        "onyomi": [
-          "on133"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun133"
+          "えんかい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 侼 qua van canh N2.",
-        "en": "Remember 侼 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 宴会 (party, banquet).",
+        "en": "Appears in JLPT N2 vocabulary: 宴会 (party, banquet)."
       },
       "decomposition": {
-        "hanViet": "HAN 133",
-        "structure": "standalone",
+        "hanViet": "Hội",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 133",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Hoi",
+        "meaningViNoAccent": "party, banquet",
+        "meaningEnNoAccent": "party, banquet"
       },
+      "examples": [
+        {
+          "word": "宴会",
+          "reading": "えんかい",
+          "meaning": "party, banquet"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l17_k006",
+      "kanjiId": "n2_jlpt_vocab_k131",
       "lessonId": 17,
       "level": "N2",
-      "character": "俍",
+      "character": "園",
+      "strokeCount": 13,
+      "labels": {
+        "hanViet": "Viên",
+        "meaningVi": "horticulture, gardening",
+        "meaningViDisplay": "園 (horticulture, gardening)",
+        "meaningEn": "horticulture, gardening"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "えんげい"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 園芸 (horticulture, gardening).",
+        "en": "Appears in JLPT N2 vocabulary: 園芸 (horticulture, gardening)."
+      },
+      "decomposition": {
+        "hanViet": "Viên",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Vien",
+        "meaningViNoAccent": "horticulture, gardening",
+        "meaningEnNoAccent": "horticulture, gardening"
+      },
+      "examples": [
+        {
+          "word": "園芸",
+          "reading": "えんげい",
+          "meaning": "horticulture, gardening"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k132",
+      "lessonId": 17,
+      "level": "N2",
+      "character": "芸",
       "strokeCount": 7,
       "labels": {
-        "hanViet": "HAN 134",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "俍 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "horticulture, gardening",
+        "meaningViDisplay": "芸 (horticulture, gardening)",
+        "meaningEn": "horticulture, gardening"
       },
       "readings": {
-        "onyomi": [
-          "on134"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun134"
+          "えんげい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 俍 qua van canh N2.",
-        "en": "Remember 俍 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 園芸 (horticulture, gardening).",
+        "en": "Appears in JLPT N2 vocabulary: 園芸 (horticulture, gardening)."
       },
       "decomposition": {
-        "hanViet": "HAN 134",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 134",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "horticulture, gardening",
+        "meaningEnNoAccent": "horticulture, gardening"
       },
+      "examples": [
+        {
+          "word": "園芸",
+          "reading": "えんげい",
+          "meaning": "horticulture, gardening"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l17_k007",
+      "kanjiId": "n2_jlpt_vocab_k133",
       "lessonId": 17,
       "level": "N2",
-      "character": "俞",
+      "character": "演",
+      "strokeCount": 14,
+      "labels": {
+        "hanViet": "Diễn",
+        "meaningVi": "play (theatrical)",
+        "meaningViDisplay": "演 (play (theatrical))",
+        "meaningEn": "play (theatrical)"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "えんげき"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 演劇 (play (theatrical)).",
+        "en": "Appears in JLPT N2 vocabulary: 演劇 (play (theatrical))."
+      },
+      "decomposition": {
+        "hanViet": "Diễn",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Dien",
+        "meaningViNoAccent": "play (theatrical)",
+        "meaningEnNoAccent": "play (theatrical)"
+      },
+      "examples": [
+        {
+          "word": "演劇",
+          "reading": "えんげき",
+          "meaning": "play (theatrical)"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k134",
+      "lessonId": 17,
+      "level": "N2",
+      "character": "劇",
+      "strokeCount": 15,
+      "labels": {
+        "hanViet": "Kịch",
+        "meaningVi": "play (theatrical)",
+        "meaningViDisplay": "劇 (play (theatrical))",
+        "meaningEn": "play (theatrical)"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "えんげき"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 演劇 (play (theatrical)).",
+        "en": "Appears in JLPT N2 vocabulary: 演劇 (play (theatrical))."
+      },
+      "decomposition": {
+        "hanViet": "Kịch",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Kich",
+        "meaningViNoAccent": "play (theatrical)",
+        "meaningEnNoAccent": "play (theatrical)"
+      },
+      "examples": [
+        {
+          "word": "演劇",
+          "reading": "えんげき",
+          "meaning": "play (theatrical)"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k135",
+      "lessonId": 17,
+      "level": "N2",
+      "character": "円",
+      "strokeCount": 4,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "circumference",
+        "meaningViDisplay": "円 (circumference)",
+        "meaningEn": "circumference"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "えんしゅう"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 円周 (circumference).",
+        "en": "Appears in JLPT N2 vocabulary: 円周 (circumference)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "circumference",
+        "meaningEnNoAccent": "circumference"
+      },
+      "examples": [
+        {
+          "word": "円周",
+          "reading": "えんしゅう",
+          "meaning": "circumference"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k136",
+      "lessonId": 17,
+      "level": "N2",
+      "character": "周",
       "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 135",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "俞 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Chu",
+        "meaningVi": "circumference",
+        "meaningViDisplay": "周 (circumference)",
+        "meaningEn": "circumference"
       },
       "readings": {
-        "onyomi": [
-          "on135"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun135"
+          "えんしゅう"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 俞 qua van canh N2.",
-        "en": "Remember 俞 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 円周 (circumference).",
+        "en": "Appears in JLPT N2 vocabulary: 円周 (circumference)."
       },
       "decomposition": {
-        "hanViet": "HAN 135",
-        "structure": "standalone",
+        "hanViet": "Chu",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 135",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Chu",
+        "meaningViNoAccent": "circumference",
+        "meaningEnNoAccent": "circumference"
       },
+      "examples": [
+        {
+          "word": "円周",
+          "reading": "えんしゅう",
+          "meaning": "circumference"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l17_k008",
-      "lessonId": 17,
-      "level": "N2",
-      "character": "俯",
-      "strokeCount": 9,
-      "labels": {
-        "hanViet": "HAN 136",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "俯 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on136"
-        ],
-        "kunyomi": [
-          "kun136"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 俯 qua van canh N2.",
-        "en": "Remember 俯 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 136",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 136",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

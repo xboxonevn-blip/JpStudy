@@ -1,330 +1,418 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N2",
   "lessonId": 6,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n2_l06_k001",
+      "kanjiId": "n2_jlpt_vocab_k041",
       "lessonId": 6,
       "level": "N2",
-      "character": "储",
+      "character": "案",
       "strokeCount": 10,
       "labels": {
-        "hanViet": "HAN 41",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "储 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "An Án Yên",
+        "meaningVi": "unexpectedly",
+        "meaningViDisplay": "案 (unexpectedly)",
+        "meaningEn": "unexpectedly"
       },
       "readings": {
-        "onyomi": [
-          "on41"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun41"
+          "あんがい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 储 qua van canh N2.",
-        "en": "Remember 储 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 案外 (unexpectedly).",
+        "en": "Appears in JLPT N2 vocabulary: 案外 (unexpectedly)."
       },
       "decomposition": {
-        "hanViet": "HAN 41",
-        "structure": "standalone",
+        "hanViet": "An Án Yên",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 41",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "An An Yen",
+        "meaningViNoAccent": "unexpectedly",
+        "meaningEnNoAccent": "unexpectedly"
       },
+      "examples": [
+        {
+          "word": "案外",
+          "reading": "あんがい",
+          "meaning": "unexpectedly"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l06_k002",
+      "kanjiId": "n2_jlpt_vocab_k042",
       "lessonId": 6,
       "level": "N2",
-      "character": "傹",
-      "strokeCount": 11,
+      "character": "外",
+      "strokeCount": 5,
       "labels": {
-        "hanViet": "HAN 42",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "傹 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Ngoại",
+        "meaningVi": "unexpectedly",
+        "meaningViDisplay": "外 (unexpectedly)",
+        "meaningEn": "unexpectedly"
       },
       "readings": {
-        "onyomi": [
-          "on42"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun42"
+          "あんがい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 傹 qua van canh N2.",
-        "en": "Remember 傹 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 案外 (unexpectedly).",
+        "en": "Appears in JLPT N2 vocabulary: 案外 (unexpectedly)."
       },
       "decomposition": {
-        "hanViet": "HAN 42",
-        "structure": "standalone",
+        "hanViet": "Ngoại",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 42",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Ngoai",
+        "meaningViNoAccent": "unexpectedly",
+        "meaningEnNoAccent": "unexpectedly"
       },
+      "examples": [
+        {
+          "word": "案外",
+          "reading": "あんがい",
+          "meaning": "unexpectedly"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l06_k003",
+      "kanjiId": "n2_jlpt_vocab_k043",
       "lessonId": 6,
       "level": "N2",
-      "character": "僊",
-      "strokeCount": 12,
+      "character": "言",
+      "strokeCount": 7,
       "labels": {
-        "hanViet": "HAN 43",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "僊 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Ngôn",
+        "meaningVi": "to start talking, to speak, to tell, to propose, to suggest, to break the ice",
+        "meaningViDisplay": "言 (to start talking, to speak, to tell, to propose, to suggest, to break the ice)",
+        "meaningEn": "to start talking, to speak, to tell, to propose, to suggest, to break the ice"
       },
       "readings": {
-        "onyomi": [
-          "on43"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun43"
+          "いいだす"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 僊 qua van canh N2.",
-        "en": "Remember 僊 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 言い出す (to start talking, to speak, to tell, to propose, to suggest, to break the ice).",
+        "en": "Appears in JLPT N2 vocabulary: 言い出す (to start talking, to speak, to tell, to propose, to suggest, to break the ice)."
       },
       "decomposition": {
-        "hanViet": "HAN 43",
-        "structure": "standalone",
+        "hanViet": "Ngôn",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 43",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Ngon",
+        "meaningViNoAccent": "to start talking, to speak, to tell, to propose, to suggest, to break the ice",
+        "meaningEnNoAccent": "to start talking, to speak, to tell, to propose, to suggest, to break the ice"
       },
+      "examples": [
+        {
+          "word": "言い出す",
+          "reading": "いいだす",
+          "meaning": "to start talking, to speak, to tell, to propose, to suggest, to break the ice"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l06_k004",
+      "kanjiId": "n2_jlpt_vocab_k044",
       "lessonId": 6,
       "level": "N2",
-      "character": "僛",
+      "character": "出",
+      "strokeCount": 5,
+      "labels": {
+        "hanViet": "Xuất",
+        "meaningVi": "to start talking, to speak, to tell, to propose, to suggest, to break the ice",
+        "meaningViDisplay": "出 (to start talking, to speak, to tell, to propose, to suggest, to break the ice)",
+        "meaningEn": "to start talking, to speak, to tell, to propose, to suggest, to break the ice"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いいだす"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 言い出す (to start talking, to speak, to tell, to propose, to suggest, to break the ice).",
+        "en": "Appears in JLPT N2 vocabulary: 言い出す (to start talking, to speak, to tell, to propose, to suggest, to break the ice)."
+      },
+      "decomposition": {
+        "hanViet": "Xuất",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Xuat",
+        "meaningViNoAccent": "to start talking, to speak, to tell, to propose, to suggest, to break the ice",
+        "meaningEnNoAccent": "to start talking, to speak, to tell, to propose, to suggest, to break the ice"
+      },
+      "examples": [
+        {
+          "word": "言い出す",
+          "reading": "いいだす",
+          "meaning": "to start talking, to speak, to tell, to propose, to suggest, to break the ice"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k045",
+      "lessonId": 6,
+      "level": "N2",
+      "character": "付",
+      "strokeCount": 5,
+      "labels": {
+        "hanViet": "Phó",
+        "meaningVi": "to tell, to tell on (someone), to order",
+        "meaningViDisplay": "付 (to tell, to tell on (someone), to order)",
+        "meaningEn": "to tell, to tell on (someone), to order"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いいつける"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 言い付ける (to tell, to tell on (someone), to order).",
+        "en": "Appears in JLPT N2 vocabulary: 言い付ける (to tell, to tell on (someone), to order)."
+      },
+      "decomposition": {
+        "hanViet": "Phó",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Pho",
+        "meaningViNoAccent": "to tell, to tell on (someone), to order",
+        "meaningEnNoAccent": "to tell, to tell on (someone), to order"
+      },
+      "examples": [
+        {
+          "word": "言い付ける",
+          "reading": "いいつける",
+          "meaning": "to tell, to tell on (someone), to order"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k046",
+      "lessonId": 6,
+      "level": "N2",
+      "character": "意",
       "strokeCount": 13,
       "labels": {
-        "hanViet": "HAN 44",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "僛 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Ý",
+        "meaningVi": "meaning, significance",
+        "meaningViDisplay": "意 (meaning, significance)",
+        "meaningEn": "meaning, significance"
       },
       "readings": {
-        "onyomi": [
-          "on44"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun44"
+          "いぎ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 僛 qua van canh N2.",
-        "en": "Remember 僛 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 意義 (meaning, significance).",
+        "en": "Appears in JLPT N2 vocabulary: 意義 (meaning, significance)."
       },
       "decomposition": {
-        "hanViet": "HAN 44",
-        "structure": "standalone",
+        "hanViet": "Ý",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 44",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Y",
+        "meaningViNoAccent": "meaning, significance",
+        "meaningEnNoAccent": "meaning, significance"
       },
+      "examples": [
+        {
+          "word": "意義",
+          "reading": "いぎ",
+          "meaning": "meaning, significance"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l06_k005",
+      "kanjiId": "n2_jlpt_vocab_k047",
       "lessonId": 6,
       "level": "N2",
-      "character": "僬",
-      "strokeCount": 14,
+      "character": "義",
+      "strokeCount": 13,
       "labels": {
-        "hanViet": "HAN 45",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "僬 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Nghĩa",
+        "meaningVi": "meaning, significance",
+        "meaningViDisplay": "義 (meaning, significance)",
+        "meaningEn": "meaning, significance"
       },
       "readings": {
-        "onyomi": [
-          "on45"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun45"
+          "いぎ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 僬 qua van canh N2.",
-        "en": "Remember 僬 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 意義 (meaning, significance).",
+        "en": "Appears in JLPT N2 vocabulary: 意義 (meaning, significance)."
       },
       "decomposition": {
-        "hanViet": "HAN 45",
-        "structure": "standalone",
+        "hanViet": "Nghĩa",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 45",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Nghia",
+        "meaningViNoAccent": "meaning, significance",
+        "meaningEnNoAccent": "meaning, significance"
       },
+      "examples": [
+        {
+          "word": "意義",
+          "reading": "いぎ",
+          "meaning": "meaning, significance"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l06_k006",
+      "kanjiId": "n2_jlpt_vocab_k048",
       "lessonId": 6,
       "level": "N2",
-      "character": "僽",
-      "strokeCount": 15,
+      "character": "生",
+      "strokeCount": 5,
       "labels": {
-        "hanViet": "HAN 46",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "僽 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Sinh",
+        "meaningVi": "vividly, lively",
+        "meaningViDisplay": "生 (vividly, lively)",
+        "meaningEn": "vividly, lively"
       },
       "readings": {
-        "onyomi": [
-          "on46"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun46"
+          "いきいき"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 僽 qua van canh N2.",
-        "en": "Remember 僽 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 生き生き (vividly, lively).",
+        "en": "Appears in JLPT N2 vocabulary: 生き生き (vividly, lively)."
       },
       "decomposition": {
-        "hanViet": "HAN 46",
-        "structure": "standalone",
+        "hanViet": "Sinh",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 46",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Sinh",
+        "meaningViNoAccent": "vividly, lively",
+        "meaningEnNoAccent": "vividly, lively"
       },
+      "examples": [
+        {
+          "word": "生き生き",
+          "reading": "いきいき",
+          "meaning": "vividly, lively"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l06_k007",
-      "lessonId": 6,
-      "level": "N2",
-      "character": "儎",
-      "strokeCount": 16,
-      "labels": {
-        "hanViet": "HAN 47",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "儎 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on47"
-        ],
-        "kunyomi": [
-          "kun47"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 儎 qua van canh N2.",
-        "en": "Remember 儎 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 47",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 47",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l06_k008",
-      "lessonId": 6,
-      "level": "N2",
-      "character": "償",
-      "strokeCount": 17,
-      "labels": {
-        "hanViet": "HAN 48",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "償 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on48"
-        ],
-        "kunyomi": [
-          "kun48"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 償 qua van canh N2.",
-        "en": "Remember 償 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 48",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 48",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

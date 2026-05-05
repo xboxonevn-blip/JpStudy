@@ -1,330 +1,417 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N2",
   "lessonId": 4,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n2_l04_k001",
+      "kanjiId": "n2_jlpt_vocab_k025",
       "lessonId": 4,
       "level": "N2",
-      "character": "侘",
-      "strokeCount": 6,
+      "character": "甘",
+      "strokeCount": 5,
       "labels": {
-        "hanViet": "HAN 25",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "侘 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Cam",
+        "meaningVi": "to pamper, to spoil",
+        "meaningViDisplay": "甘 (to pamper, to spoil)",
+        "meaningEn": "to pamper, to spoil"
       },
       "readings": {
-        "onyomi": [
-          "on25"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun25"
+          "あまやかす"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 侘 qua van canh N2.",
-        "en": "Remember 侘 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 甘やかす (to pamper, to spoil).",
+        "en": "Appears in JLPT N2 vocabulary: 甘やかす (to pamper, to spoil)."
       },
       "decomposition": {
-        "hanViet": "HAN 25",
-        "structure": "standalone",
+        "hanViet": "Cam",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 25",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Cam",
+        "meaningViNoAccent": "to pamper, to spoil",
+        "meaningEnNoAccent": "to pamper, to spoil"
       },
+      "examples": [
+        {
+          "word": "甘やかす",
+          "reading": "あまやかす",
+          "meaning": "to pamper, to spoil"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l04_k002",
+      "kanjiId": "n2_jlpt_vocab_k026",
       "lessonId": 4,
       "level": "N2",
-      "character": "侩",
+      "character": "余",
       "strokeCount": 7,
       "labels": {
-        "hanViet": "HAN 26",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "侩 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Dư",
+        "meaningVi": "to remain, to be left over, to be in excess, to be too many",
+        "meaningViDisplay": "余 (to remain, to be left over, to be in excess, to be too many)",
+        "meaningEn": "to remain, to be left over, to be in excess, to be too many"
       },
       "readings": {
-        "onyomi": [
-          "on26"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun26"
+          "あまる"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 侩 qua van canh N2.",
-        "en": "Remember 侩 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 余る (to remain, to be left over, to be in excess, to be too many).",
+        "en": "Appears in JLPT N2 vocabulary: 余る (to remain, to be left over, to be in excess, to be too many)."
       },
       "decomposition": {
-        "hanViet": "HAN 26",
-        "structure": "standalone",
+        "hanViet": "Dư",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 26",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Du",
+        "meaningViNoAccent": "to remain, to be left over, to be in excess, to be too many",
+        "meaningEnNoAccent": "to remain, to be left over, to be in excess, to be too many"
       },
+      "examples": [
+        {
+          "word": "余る",
+          "reading": "あまる",
+          "meaning": "to remain, to be left over, to be in excess, to be too many"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l04_k003",
+      "kanjiId": "n2_jlpt_vocab_k027",
       "lessonId": 4,
       "level": "N2",
-      "character": "侺",
+      "character": "編",
+      "strokeCount": 15,
+      "labels": {
+        "hanViet": "Biên",
+        "meaningVi": "knitting, web",
+        "meaningViDisplay": "編 (knitting, web)",
+        "meaningEn": "knitting, web"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あみもの"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 編物 (knitting, web).",
+        "en": "Appears in JLPT N2 vocabulary: 編物 (knitting, web)."
+      },
+      "decomposition": {
+        "hanViet": "Biên",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Bien",
+        "meaningViNoAccent": "knitting, web",
+        "meaningEnNoAccent": "knitting, web"
+      },
+      "examples": [
+        {
+          "word": "編物",
+          "reading": "あみもの",
+          "meaning": "knitting, web"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k028",
+      "lessonId": 4,
+      "level": "N2",
+      "character": "物",
       "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 27",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "侺 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Vật",
+        "meaningVi": "knitting, web",
+        "meaningViDisplay": "物 (knitting, web)",
+        "meaningEn": "knitting, web"
       },
       "readings": {
-        "onyomi": [
-          "on27"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun27"
+          "あみもの"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 侺 qua van canh N2.",
-        "en": "Remember 侺 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 編物 (knitting, web).",
+        "en": "Appears in JLPT N2 vocabulary: 編物 (knitting, web)."
       },
       "decomposition": {
-        "hanViet": "HAN 27",
-        "structure": "standalone",
+        "hanViet": "Vật",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 27",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Vat",
+        "meaningViNoAccent": "knitting, web",
+        "meaningEnNoAccent": "knitting, web"
       },
+      "examples": [
+        {
+          "word": "編物",
+          "reading": "あみもの",
+          "meaning": "knitting, web"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l04_k004",
+      "kanjiId": "n2_jlpt_vocab_k029",
       "lessonId": 4,
       "level": "N2",
-      "character": "俋",
+      "character": "危",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Nguy",
+        "meaningVi": "dangerous, critical, grave",
+        "meaningViDisplay": "危 (dangerous, critical, grave)",
+        "meaningEn": "dangerous, critical, grave"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あやうい"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 危うい (dangerous, critical, grave).",
+        "en": "Appears in JLPT N2 vocabulary: 危うい (dangerous, critical, grave)."
+      },
+      "decomposition": {
+        "hanViet": "Nguy",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Nguy",
+        "meaningViNoAccent": "dangerous, critical, grave",
+        "meaningEnNoAccent": "dangerous, critical, grave"
+      },
+      "examples": [
+        {
+          "word": "危うい",
+          "reading": "あやうい",
+          "meaning": "dangerous, critical, grave"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k030",
+      "lessonId": 4,
+      "level": "N2",
+      "character": "怪",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "suspicious, dubious, doubtful",
+        "meaningViDisplay": "怪 (suspicious, dubious, doubtful)",
+        "meaningEn": "suspicious, dubious, doubtful"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あやしい"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 怪しい (suspicious, dubious, doubtful).",
+        "en": "Appears in JLPT N2 vocabulary: 怪しい (suspicious, dubious, doubtful)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "suspicious, dubious, doubtful",
+        "meaningEnNoAccent": "suspicious, dubious, doubtful"
+      },
+      "examples": [
+        {
+          "word": "怪しい",
+          "reading": "あやしい",
+          "meaning": "suspicious, dubious, doubtful"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k031",
+      "lessonId": 4,
+      "level": "N2",
+      "character": "荒",
       "strokeCount": 9,
       "labels": {
-        "hanViet": "HAN 28",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "俋 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Hoang",
+        "meaningVi": "rough, rude, wild",
+        "meaningViDisplay": "荒 (rough, rude, wild)",
+        "meaningEn": "rough, rude, wild"
       },
       "readings": {
-        "onyomi": [
-          "on28"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun28"
+          "あらい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 俋 qua van canh N2.",
-        "en": "Remember 俋 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 荒い (rough, rude, wild).",
+        "en": "Appears in JLPT N2 vocabulary: 荒い (rough, rude, wild)."
       },
       "decomposition": {
-        "hanViet": "HAN 28",
-        "structure": "standalone",
+        "hanViet": "Hoang",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 28",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Hoang",
+        "meaningViNoAccent": "rough, rude, wild",
+        "meaningEnNoAccent": "rough, rude, wild"
       },
+      "examples": [
+        {
+          "word": "荒い",
+          "reading": "あらい",
+          "meaning": "rough, rude, wild"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l04_k005",
+      "kanjiId": "n2_jlpt_vocab_k032",
       "lessonId": 4,
       "level": "N2",
-      "character": "俜",
-      "strokeCount": 10,
-      "labels": {
-        "hanViet": "HAN 29",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "俜 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on29"
-        ],
-        "kunyomi": [
-          "kun29"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 俜 qua van canh N2.",
-        "en": "Remember 俜 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 29",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 29",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l04_k006",
-      "lessonId": 4,
-      "level": "N2",
-      "character": "俭",
+      "character": "粗",
       "strokeCount": 11,
       "labels": {
-        "hanViet": "HAN 30",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "俭 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Thô",
+        "meaningVi": "coarse, rough",
+        "meaningViDisplay": "粗 (coarse, rough)",
+        "meaningEn": "coarse, rough"
       },
       "readings": {
-        "onyomi": [
-          "on30"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun30"
+          "あらい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 俭 qua van canh N2.",
-        "en": "Remember 俭 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 粗い (coarse, rough).",
+        "en": "Appears in JLPT N2 vocabulary: 粗い (coarse, rough)."
       },
       "decomposition": {
-        "hanViet": "HAN 30",
-        "structure": "standalone",
+        "hanViet": "Thô",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 30",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Tho",
+        "meaningViNoAccent": "coarse, rough",
+        "meaningEnNoAccent": "coarse, rough"
       },
+      "examples": [
+        {
+          "word": "粗い",
+          "reading": "あらい",
+          "meaning": "coarse, rough"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l04_k007",
-      "lessonId": 4,
-      "level": "N2",
-      "character": "俾",
-      "strokeCount": 12,
-      "labels": {
-        "hanViet": "HAN 31",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "俾 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on31"
-        ],
-        "kunyomi": [
-          "kun31"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 俾 qua van canh N2.",
-        "en": "Remember 俾 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 31",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 31",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l04_k008",
-      "lessonId": 4,
-      "level": "N2",
-      "character": "倏",
-      "strokeCount": 13,
-      "labels": {
-        "hanViet": "HAN 32",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "倏 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on32"
-        ],
-        "kunyomi": [
-          "kun32"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 倏 qua van canh N2.",
-        "en": "Remember 倏 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 32",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 32",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

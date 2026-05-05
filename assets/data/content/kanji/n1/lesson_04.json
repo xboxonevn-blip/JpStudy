@@ -1,330 +1,416 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N1",
   "lessonId": 4,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n1_l04_k001",
+      "kanjiId": "n1_jlpt_vocab_k025",
       "lessonId": 4,
       "level": "N1",
-      "character": "侘",
-      "strokeCount": 6,
+      "character": "上",
+      "strokeCount": 3,
       "labels": {
-        "hanViet": "HAN 25",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "侘 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Thượng",
+        "meaningVi": "1. slope, advance income, crop yield, ascent, rise, advance, death, spinning, completion, stop, finish, after",
+        "meaningViDisplay": "上 (1. slope, advance income, crop yield, ascent, rise, advance, death, spinning, completion, stop, finish, after)",
+        "meaningEn": "1. slope, advance income, crop yield, ascent, rise, advance, death, spinning, completion, stop, finish, after"
       },
       "readings": {
-        "onyomi": [
-          "on25"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun25"
+          "あがり"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 侘 qua van canh N1.",
-        "en": "Remember 侘 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 上がり (1. slope, advance income, crop yield, ascent, rise, advance, death, spinning, completion, stop, finish, after).",
+        "en": "Appears in JLPT N1 vocabulary: 上がり (1. slope, advance income, crop yield, ascent, rise, advance, death, spinning, completion, stop, finish, after)."
       },
       "decomposition": {
-        "hanViet": "HAN 25",
-        "structure": "standalone",
+        "hanViet": "Thượng",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 25",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Thuong",
+        "meaningViNoAccent": "1. slope, advance income, crop yield, ascent, rise, advance, death, spinning, completion, stop, finish, after",
+        "meaningEnNoAccent": "1. slope, advance income, crop yield, ascent, rise, advance, death, spinning, completion, stop, finish, after"
       },
+      "examples": [
+        {
+          "word": "上がり",
+          "reading": "あがり",
+          "meaning": "1. slope, advance income, crop yield, ascent, rise, advance, death, spinning, completion, stop, finish, after"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l04_k002",
+      "kanjiId": "n1_jlpt_vocab_k026",
       "lessonId": 4,
       "level": "N1",
-      "character": "侩",
-      "strokeCount": 7,
-      "labels": {
-        "hanViet": "HAN 26",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "侩 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on26"
-        ],
-        "kunyomi": [
-          "kun26"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 侩 qua van canh N1.",
-        "en": "Remember 侩 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 26",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 26",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l04_k003",
-      "lessonId": 4,
-      "level": "N1",
-      "character": "侺",
-      "strokeCount": 8,
-      "labels": {
-        "hanViet": "HAN 27",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "侺 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on27"
-        ],
-        "kunyomi": [
-          "kun27"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 侺 qua van canh N1.",
-        "en": "Remember 侺 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 27",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 27",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l04_k004",
-      "lessonId": 4,
-      "level": "N1",
-      "character": "俋",
-      "strokeCount": 9,
-      "labels": {
-        "hanViet": "HAN 28",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "俋 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on28"
-        ],
-        "kunyomi": [
-          "kun28"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 俋 qua van canh N1.",
-        "en": "Remember 俋 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 28",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 28",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l04_k005",
-      "lessonId": 4,
-      "level": "N1",
-      "character": "俜",
-      "strokeCount": 10,
-      "labels": {
-        "hanViet": "HAN 29",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "俜 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on29"
-        ],
-        "kunyomi": [
-          "kun29"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 俜 qua van canh N1.",
-        "en": "Remember 俜 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 29",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 29",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l04_k006",
-      "lessonId": 4,
-      "level": "N1",
-      "character": "俭",
+      "character": "商",
       "strokeCount": 11,
       "labels": {
-        "hanViet": "HAN 30",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "俭 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Thương",
+        "meaningVi": "trader, shopkeeper, merchant",
+        "meaningViDisplay": "商 (trader, shopkeeper, merchant)",
+        "meaningEn": "trader, shopkeeper, merchant"
       },
       "readings": {
-        "onyomi": [
-          "on30"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun30"
+          "あきうど"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 俭 qua van canh N1.",
-        "en": "Remember 俭 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 商人 (trader, shopkeeper, merchant).",
+        "en": "Appears in JLPT N1 vocabulary: 商人 (trader, shopkeeper, merchant)."
       },
       "decomposition": {
-        "hanViet": "HAN 30",
-        "structure": "standalone",
+        "hanViet": "Thương",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 30",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Thuong",
+        "meaningViNoAccent": "trader, shopkeeper, merchant",
+        "meaningEnNoAccent": "trader, shopkeeper, merchant"
       },
+      "examples": [
+        {
+          "word": "商人",
+          "reading": "あきうど",
+          "meaning": "trader, shopkeeper, merchant"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l04_k007",
+      "kanjiId": "n1_jlpt_vocab_k027",
       "lessonId": 4,
       "level": "N1",
-      "character": "俾",
-      "strokeCount": 12,
+      "character": "人",
+      "strokeCount": 2,
       "labels": {
-        "hanViet": "HAN 31",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "俾 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Nhân",
+        "meaningVi": "trader, shopkeeper, merchant",
+        "meaningViDisplay": "人 (trader, shopkeeper, merchant)",
+        "meaningEn": "trader, shopkeeper, merchant"
       },
       "readings": {
-        "onyomi": [
-          "on31"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun31"
+          "あきうど"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 俾 qua van canh N1.",
-        "en": "Remember 俾 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 商人 (trader, shopkeeper, merchant).",
+        "en": "Appears in JLPT N1 vocabulary: 商人 (trader, shopkeeper, merchant)."
       },
       "decomposition": {
-        "hanViet": "HAN 31",
-        "structure": "standalone",
+        "hanViet": "Nhân",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 31",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Nhan",
+        "meaningViNoAccent": "trader, shopkeeper, merchant",
+        "meaningEnNoAccent": "trader, shopkeeper, merchant"
       },
+      "examples": [
+        {
+          "word": "商人",
+          "reading": "あきうど",
+          "meaning": "trader, shopkeeper, merchant"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l04_k008",
+      "kanjiId": "n1_jlpt_vocab_k028",
       "lessonId": 4,
       "level": "N1",
-      "character": "倏",
-      "strokeCount": 13,
+      "character": "空",
+      "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 32",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "倏 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Không",
+        "meaningVi": "vacancy, room for rent or lease",
+        "meaningViDisplay": "空 (vacancy, room for rent or lease)",
+        "meaningEn": "vacancy, room for rent or lease"
       },
       "readings": {
-        "onyomi": [
-          "on32"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun32"
+          "あきま"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 倏 qua van canh N1.",
-        "en": "Remember 倏 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 空間 (vacancy, room for rent or lease).",
+        "en": "Appears in JLPT N1 vocabulary: 空間 (vacancy, room for rent or lease)."
       },
       "decomposition": {
-        "hanViet": "HAN 32",
-        "structure": "standalone",
+        "hanViet": "Không",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 32",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Khong",
+        "meaningViNoAccent": "vacancy, room for rent or lease",
+        "meaningEnNoAccent": "vacancy, room for rent or lease"
       },
+      "examples": [
+        {
+          "word": "空間",
+          "reading": "あきま",
+          "meaning": "vacancy, room for rent or lease"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k029",
+      "lessonId": 4,
+      "level": "N1",
+      "character": "諦",
+      "strokeCount": 16,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "resignation, acceptance, consolation",
+        "meaningViDisplay": "諦 (resignation, acceptance, consolation)",
+        "meaningEn": "resignation, acceptance, consolation"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あきらめ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 諦め (resignation, acceptance, consolation).",
+        "en": "Appears in JLPT N1 vocabulary: 諦め (resignation, acceptance, consolation)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "resignation, acceptance, consolation",
+        "meaningEnNoAccent": "resignation, acceptance, consolation"
+      },
+      "examples": [
+        {
+          "word": "諦め",
+          "reading": "あきらめ",
+          "meaning": "resignation, acceptance, consolation"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k030",
+      "lessonId": 4,
+      "level": "N1",
+      "character": "呆",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": "Ngốc",
+        "meaningVi": "to be amazed, to be shocked",
+        "meaningViDisplay": "呆 (to be amazed, to be shocked)",
+        "meaningEn": "to be amazed, to be shocked"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あきれる"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 呆れる (to be amazed, to be shocked).",
+        "en": "Appears in JLPT N1 vocabulary: 呆れる (to be amazed, to be shocked)."
+      },
+      "decomposition": {
+        "hanViet": "Ngốc",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Ngoc",
+        "meaningViNoAccent": "to be amazed, to be shocked",
+        "meaningEnNoAccent": "to be amazed, to be shocked"
+      },
+      "examples": [
+        {
+          "word": "呆れる",
+          "reading": "あきれる",
+          "meaning": "to be amazed, to be shocked"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k031",
+      "lessonId": 4,
+      "level": "N1",
+      "character": "悪",
+      "strokeCount": 11,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "evil, wickedness",
+        "meaningViDisplay": "悪 (evil, wickedness)",
+        "meaningEn": "evil, wickedness"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あく"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 悪 (evil, wickedness).",
+        "en": "Appears in JLPT N1 vocabulary: 悪 (evil, wickedness)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "evil, wickedness",
+        "meaningEnNoAccent": "evil, wickedness"
+      },
+      "examples": [
+        {
+          "word": "悪",
+          "reading": "あく",
+          "meaning": "evil, wickedness"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k032",
+      "lessonId": 4,
+      "level": "N1",
+      "character": "灰",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Hôi",
+        "meaningVi": "puckery juice",
+        "meaningViDisplay": "灰 (puckery juice)",
+        "meaningEn": "puckery juice"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あく"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 灰 (puckery juice).",
+        "en": "Appears in JLPT N1 vocabulary: 灰 (puckery juice)."
+      },
+      "decomposition": {
+        "hanViet": "Hôi",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Hoi",
+        "meaningViNoAccent": "puckery juice",
+        "meaningEnNoAccent": "puckery juice"
+      },
+      "examples": [
+        {
+          "word": "灰",
+          "reading": "あく",
+          "meaning": "puckery juice"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

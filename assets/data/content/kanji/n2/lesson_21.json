@@ -1,330 +1,416 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N2",
   "lessonId": 21,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n2_l21_k001",
+      "kanjiId": "n2_jlpt_vocab_k161",
       "lessonId": 21,
       "level": "N2",
-      "character": "冘",
-      "strokeCount": 10,
-      "labels": {
-        "hanViet": "HAN 161",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "冘 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on161"
-        ],
-        "kunyomi": [
-          "kun161"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 冘 qua van canh N2.",
-        "en": "Remember 冘 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 161",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 161",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l21_k002",
-      "lessonId": 21,
-      "level": "N2",
-      "character": "冩",
-      "strokeCount": 11,
-      "labels": {
-        "hanViet": "HAN 162",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "冩 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on162"
-        ],
-        "kunyomi": [
-          "kun162"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 冩 qua van canh N2.",
-        "en": "Remember 冩 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 162",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 162",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l21_k003",
-      "lessonId": 21,
-      "level": "N2",
-      "character": "冺",
+      "character": "補",
       "strokeCount": 12,
       "labels": {
-        "hanViet": "HAN 163",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "冺 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Bổ",
+        "meaningVi": "to compensate for",
+        "meaningViDisplay": "補 (to compensate for)",
+        "meaningEn": "to compensate for"
       },
       "readings": {
-        "onyomi": [
-          "on163"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun163"
+          "おぎなう"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 冺 qua van canh N2.",
-        "en": "Remember 冺 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 補う (to compensate for).",
+        "en": "Appears in JLPT N2 vocabulary: 補う (to compensate for)."
       },
       "decomposition": {
-        "hanViet": "HAN 163",
-        "structure": "standalone",
+        "hanViet": "Bổ",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 163",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Bo",
+        "meaningViNoAccent": "to compensate for",
+        "meaningEnNoAccent": "to compensate for"
       },
+      "examples": [
+        {
+          "word": "補う",
+          "reading": "おぎなう",
+          "meaning": "to compensate for"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l21_k004",
+      "kanjiId": "n2_jlpt_vocab_k162",
       "lessonId": 21,
       "level": "N2",
-      "character": "凋",
-      "strokeCount": 13,
+      "character": "屋",
+      "strokeCount": 9,
       "labels": {
-        "hanViet": "HAN 164",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "凋 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Ốc",
+        "meaningVi": "outdoors",
+        "meaningViDisplay": "屋 (outdoors)",
+        "meaningEn": "outdoors"
       },
       "readings": {
-        "onyomi": [
-          "on164"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun164"
+          "おくがい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 凋 qua van canh N2.",
-        "en": "Remember 凋 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 屋外 (outdoors).",
+        "en": "Appears in JLPT N2 vocabulary: 屋外 (outdoors)."
       },
       "decomposition": {
-        "hanViet": "HAN 164",
-        "structure": "standalone",
+        "hanViet": "Ốc",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 164",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Oc",
+        "meaningViNoAccent": "outdoors",
+        "meaningEnNoAccent": "outdoors"
       },
+      "examples": [
+        {
+          "word": "屋外",
+          "reading": "おくがい",
+          "meaning": "outdoors"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l21_k005",
+      "kanjiId": "n2_jlpt_vocab_k163",
       "lessonId": 21,
       "level": "N2",
-      "character": "凜",
-      "strokeCount": 14,
+      "character": "送",
+      "strokeCount": 9,
       "labels": {
-        "hanViet": "HAN 165",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "凜 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Tống",
+        "meaningVi": "part of word written in kana",
+        "meaningViDisplay": "送 (part of word written in kana)",
+        "meaningEn": "part of word written in kana"
       },
       "readings": {
-        "onyomi": [
-          "on165"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun165"
+          "おくりがな"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 凜 qua van canh N2.",
-        "en": "Remember 凜 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 送り仮名 (part of word written in kana).",
+        "en": "Appears in JLPT N2 vocabulary: 送り仮名 (part of word written in kana)."
       },
       "decomposition": {
-        "hanViet": "HAN 165",
-        "structure": "standalone",
+        "hanViet": "Tống",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 165",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Tong",
+        "meaningViNoAccent": "part of word written in kana",
+        "meaningEnNoAccent": "part of word written in kana"
       },
+      "examples": [
+        {
+          "word": "送り仮名",
+          "reading": "おくりがな",
+          "meaning": "part of word written in kana"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l21_k006",
+      "kanjiId": "n2_jlpt_vocab_k164",
       "lessonId": 21,
       "level": "N2",
-      "character": "凭",
-      "strokeCount": 15,
+      "character": "仮",
+      "strokeCount": 6,
       "labels": {
-        "hanViet": "HAN 166",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "凭 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "part of word written in kana",
+        "meaningViDisplay": "仮 (part of word written in kana)",
+        "meaningEn": "part of word written in kana"
       },
       "readings": {
-        "onyomi": [
-          "on166"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun166"
+          "おくりがな"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 凭 qua van canh N2.",
-        "en": "Remember 凭 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 送り仮名 (part of word written in kana).",
+        "en": "Appears in JLPT N2 vocabulary: 送り仮名 (part of word written in kana)."
       },
       "decomposition": {
-        "hanViet": "HAN 166",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 166",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "part of word written in kana",
+        "meaningEnNoAccent": "part of word written in kana"
       },
+      "examples": [
+        {
+          "word": "送り仮名",
+          "reading": "おくりがな",
+          "meaning": "part of word written in kana"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l21_k007",
+      "kanjiId": "n2_jlpt_vocab_k165",
       "lessonId": 21,
       "level": "N2",
-      "character": "凾",
-      "strokeCount": 16,
+      "character": "怠",
+      "strokeCount": 9,
       "labels": {
-        "hanViet": "HAN 167",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "凾 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "to neglect, to be off guard, to be feeling better",
+        "meaningViDisplay": "怠 (to neglect, to be off guard, to be feeling better)",
+        "meaningEn": "to neglect, to be off guard, to be feeling better"
       },
       "readings": {
-        "onyomi": [
-          "on167"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun167"
+          "おこたる"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 凾 qua van canh N2.",
-        "en": "Remember 凾 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 怠る (to neglect, to be off guard, to be feeling better).",
+        "en": "Appears in JLPT N2 vocabulary: 怠る (to neglect, to be off guard, to be feeling better)."
       },
       "decomposition": {
-        "hanViet": "HAN 167",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 167",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "to neglect, to be off guard, to be feeling better",
+        "meaningEnNoAccent": "to neglect, to be off guard, to be feeling better"
       },
+      "examples": [
+        {
+          "word": "怠る",
+          "reading": "おこたる",
+          "meaning": "to neglect, to be off guard, to be feeling better"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l21_k008",
+      "kanjiId": "n2_jlpt_vocab_k166",
       "lessonId": 21,
       "level": "N2",
-      "character": "刏",
-      "strokeCount": 17,
+      "character": "押",
+      "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 168",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "刏 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Áp",
+        "meaningVi": "to stop, to restrain, to seize, to repress, to suppress, to press down",
+        "meaningViDisplay": "押 (to stop, to restrain, to seize, to repress, to suppress, to press down)",
+        "meaningEn": "to stop, to restrain, to seize, to repress, to suppress, to press down"
       },
       "readings": {
-        "onyomi": [
-          "on168"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun168"
+          "おさえる"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 刏 qua van canh N2.",
-        "en": "Remember 刏 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 押える (to stop, to restrain, to seize, to repress, to suppress, to press down).",
+        "en": "Appears in JLPT N2 vocabulary: 押える (to stop, to restrain, to seize, to repress, to suppress, to press down)."
       },
       "decomposition": {
-        "hanViet": "HAN 168",
-        "structure": "standalone",
+        "hanViet": "Áp",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 168",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Ap",
+        "meaningViNoAccent": "to stop, to restrain, to seize, to repress, to suppress, to press down",
+        "meaningEnNoAccent": "to stop, to restrain, to seize, to repress, to suppress, to press down"
       },
+      "examples": [
+        {
+          "word": "押える",
+          "reading": "おさえる",
+          "meaning": "to stop, to restrain, to seize, to repress, to suppress, to press down"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k167",
+      "lessonId": 21,
+      "level": "N2",
+      "character": "納",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Nạp",
+        "meaningVi": "to obtain, to reap, to pay, to supply, to accept",
+        "meaningViDisplay": "納 (to obtain, to reap, to pay, to supply, to accept)",
+        "meaningEn": "to obtain, to reap, to pay, to supply, to accept"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "おさめる"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 納める (to obtain, to reap, to pay, to supply, to accept).",
+        "en": "Appears in JLPT N2 vocabulary: 納める (to obtain, to reap, to pay, to supply, to accept)."
+      },
+      "decomposition": {
+        "hanViet": "Nạp",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Nap",
+        "meaningViNoAccent": "to obtain, to reap, to pay, to supply, to accept",
+        "meaningEnNoAccent": "to obtain, to reap, to pay, to supply, to accept"
+      },
+      "examples": [
+        {
+          "word": "納める",
+          "reading": "おさめる",
+          "meaning": "to obtain, to reap, to pay, to supply, to accept"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k168",
+      "lessonId": 21,
+      "level": "N2",
+      "character": "治",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Trị",
+        "meaningVi": "(1) to govern, to manage, (2) to subdue",
+        "meaningViDisplay": "治 ((1) to govern, to manage, (2) to subdue)",
+        "meaningEn": "(1) to govern, to manage, (2) to subdue"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "おさめる"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 治める ((1) to govern, to manage, (2) to subdue).",
+        "en": "Appears in JLPT N2 vocabulary: 治める ((1) to govern, to manage, (2) to subdue)."
+      },
+      "decomposition": {
+        "hanViet": "Trị",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Tri",
+        "meaningViNoAccent": "(1) to govern, to manage, (2) to subdue",
+        "meaningEnNoAccent": "(1) to govern, to manage, (2) to subdue"
+      },
+      "examples": [
+        {
+          "word": "治める",
+          "reading": "おさめる",
+          "meaning": "(1) to govern, to manage, (2) to subdue"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

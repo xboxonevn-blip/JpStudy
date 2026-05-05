@@ -5,96 +5,189 @@
   "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
   "tags": [
     "source-hanabira",
-    "n1-grammar-import"
+    "n1-grammar-import",
+    "needs-human-review"
   ],
   "examples": [
+    {
+      "grammarPoint": "Noun たりとも～ない",
+      "sentence": "一分たりとも無駄にするな。",
+      "translation": "Don’t waste even a single minute.",
+      "translationEn": "Don’t waste even a single minute",
+      "romaji": "Ippun tari tomo muda ni suru na.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Don’t waste even a single minute",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun たりとも～ない",
+      "sentence": "彼は一言たりとも話さない。",
+      "translation": "He doesn't speak even a single word.",
+      "translationEn": "He doesnt speak even a single word",
+      "romaji": "Kare wa hitokoto tari tomo hanasanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He doesnt speak even a single word",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun たりとも～ない",
+      "sentence": "彼女は一度たりともその映画を見たことがない。",
+      "translation": "She has never seen that movie, not even once.",
+      "translationEn": "She has never seen that movie, not even once",
+      "romaji": "Kanojo wa ichido tari tomo sono eiga o mita koto ga nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She has never seen that movie, not even once",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun たりとも～ない",
+      "sentence": "私は一枚たりともその写真を持っていない。",
+      "translation": "I don't have even a single picture of it.",
+      "translationEn": "I dont have even a single picture of it",
+      "romaji": "Watashi wa ichimai tari tomo sono shashin o motte inai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I dont have even a single picture of it",
+      "translationViSource": "internal-en-example-draft"
+    },
     {
       "grammarPoint": "Noun たる Noun",
       "sentence": "リーダーたる者は、常に先を見て行動すべきだ。",
       "translation": "A person who is a leader should always look ahead and act accordingly.",
-      "translationEn": "A person who is a leader should always look ahead and act accordingly.",
+      "translationEn": "A person who is a leader should always look ahead and act accordingly",
       "romaji": "Riidaa taru mono wa, tsune ni saki o mite koudou subeki da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: A person who is a leader should always look ahead and act accordingly",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun たる Noun",
       "sentence": "教師たる者、学生に模範を示すべきである。",
       "translation": "Someone who is a teacher should set a good example for the students.",
-      "translationEn": "Someone who is a teacher should set a good example for the students.",
+      "translationEn": "Someone who is a teacher should set a good example for the students",
       "romaji": "Kyoushi taru mono, gakusei ni mohan o shimesu beki de aru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Someone who is a teacher should set a good example for the students",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun たる Noun",
       "sentence": "母たる者、家族を愛するのは当然だ。",
       "translation": "If you are a mother, it’s natural to love your family.",
-      "translationEn": "If you are a mother, it’s natural to love your family.",
+      "translationEn": "If you are a mother, it’s natural to love your family",
       "romaji": "Haha taru mono, kazoku o aisuru no wa touzen da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If you are a mother, it’s natural to love your family",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun たる Noun",
       "sentence": "医者たる者、患者の安全を最優先に考えるべきだ。",
       "translation": "A person who is a doctor should make patient safety their top priority.",
-      "translationEn": "A person who is a doctor should make patient safety their top priority.",
+      "translationEn": "A person who is a doctor should make patient safety their top priority",
       "romaji": "Isha taru mono, kanja no anzen o saiyuusen ni kangaeru beki da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: A person who is a doctor should make patient safety their top priority",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun ですら",
       "sentence": "明日試験があるのに、彼はテキストですら読まない。",
       "translation": "He doesn’t even read the textbook, despite having a test tomorrow.",
-      "translationEn": "He doesn’t even read the textbook, despite having a test tomorrow.",
+      "translationEn": "He doesn’t even read the textbook, despite having a test tomorrow",
       "romaji": "Ashita shiken ga aru noni, kare wa tekisuto desura yomanai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He doesn’t even read the textbook, despite having a test tomorrow",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun ですら",
       "sentence": "この問題は専門家ですら解けない。",
       "translation": "Even an expert can’t solve this problem.",
-      "translationEn": "Even an expert can’t solve this problem.",
+      "translationEn": "Even an expert can’t solve this problem",
       "romaji": "Kono mondai wa senmonka desura tokenai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Even an expert can’t solve this problem",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun ですら",
       "sentence": "彼女は最後のスピーチですら泣いてしまった。",
       "translation": "She ended up crying, even during the final speech.",
-      "translationEn": "She ended up crying, even during the final speech.",
+      "translationEn": "She ended up crying, even during the final speech",
       "romaji": "Kanojo wa saigo no supiichi desura naite shimatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She ended up crying, even during the final speech",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun ですら",
       "sentence": "彼は毎日勉強しているが、基本の漢字ですら覚えられない。",
       "translation": "He studies every day, but can’t even remember basic kanji.",
-      "translationEn": "He studies every day, but can’t even remember basic kanji.",
+      "translationEn": "He studies every day, but can’t even remember basic kanji",
       "romaji": "Kare wa mainichi benkyou shite iru ga, kihon no kanji desura oboerarenai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He studies every day, but can’t even remember basic kanji",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun でなくてなんだろう",
@@ -104,8 +197,12 @@
       "romaji": "Kore ga shinjitsu de nakute nandarou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If this isn’t the truth, then what is?",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun でなくてなんだろう",
@@ -115,8 +212,12 @@
       "romaji": "Kare ga riidaa de nakute nandarou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If he isn’t the leader, then who is?",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun でなくてなんだろう",
@@ -126,8 +227,12 @@
       "romaji": "Kore ga ai de nakute nandarou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If this isn’t love, then what is?",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun でなくてなんだろう",
@@ -137,316 +242,372 @@
       "romaji": "Kore ga saikou no resutoran de nakute nandarou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If this isn’t the best restaurant, then what is?",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun ではあるまいし",
       "sentence": "彼女はプロの歌手ではあるまいし、完璧を求めるのは酷だ。",
       "translation": "She’s not a professional singer, so it’s rather harsh to demand perfection.",
-      "translationEn": "She’s not a professional singer, so it’s rather harsh to demand perfection.",
+      "translationEn": "She’s not a professional singer, so it’s rather harsh to demand perfection",
       "romaji": "Kanojo wa puro no kashu de wa aru mai shi, kanpeki o motomeru no wa koku da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She’s not a professional singer, so it’s rather harsh to demand perfection",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun ではあるまいし",
       "sentence": "彼は子供ではあるまいし、そんなにチョコレートばかり食べるのはどうかと思う。",
       "translation": "He’s not a child, so I’m not sure about him eating that much chocolate.",
-      "translationEn": "He’s not a child, so I’m not sure about him eating that much chocolate.",
+      "translationEn": "He’s not a child, so I’m not sure about him eating that much chocolate",
       "romaji": "Kare wa kodomo de wa aru mai shi, sonnani chokoreeto bakari taberu no wa douka to omou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He’s not a child, so I’m not sure about him eating that much chocolate",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun ではあるまいし",
       "sentence": "彼は医者ではあるまいし、あなたの健康状態を詮索する必要はない。",
       "translation": "He’s not a doctor, so he has no need to pry into your health.",
-      "translationEn": "He’s not a doctor, so he has no need to pry into your health.",
+      "translationEn": "He’s not a doctor, so he has no need to pry into your health",
       "romaji": "Kare wa isha de wa aru mai shi, anata no kenkou joutai o sensaku suru hitsuyou wa nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He’s not a doctor, so he has no need to pry into your health",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun ではあるまいし",
       "sentence": "この指輪は高価なものではあるまいし、落としても大したことはない。",
       "translation": "It’s not an expensive ring, so dropping it isn’t a big deal.",
-      "translationEn": "It’s not an expensive ring, so dropping it isn’t a big deal.",
+      "translationEn": "It’s not an expensive ring, so dropping it isn’t a big deal",
       "romaji": "Kono yubiwa wa kouka na mono de wa aru mai shi, otoshite mo taishita koto wa nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: It’s not an expensive ring, so dropping it isn’t a big deal",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun と Noun を兼ねて",
       "sentence": "お父さんは社長と経理部長を兼ねています。",
       "translation": "My father serves as both the company president and the head of accounting.",
-      "translationEn": "My father serves as both the company president and the head of accounting.",
+      "translationEn": "My father serves as both the company president and the head of accounting",
       "romaji": "Otousan wa shachou to keiri buchou o kanete imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: My father serves as both the company president and the head of accounting",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun と Noun を兼ねて",
       "sentence": "彼女は音楽教師とピアニストを兼ねています。",
       "translation": "She works as both a music teacher and a pianist.",
-      "translationEn": "She works as both a music teacher and a pianist.",
+      "translationEn": "She works as both a music teacher and a pianist",
       "romaji": "Kanojo wa ongaku kyoushi to pianisuto o kanete imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She works as both a music teacher and a pianist",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun と Noun を兼ねて",
       "sentence": "この部屋は寝室と書斎を兼ねています。",
       "translation": "This room serves as both a bedroom and a study.",
-      "translationEn": "This room serves as both a bedroom and a study.",
+      "translationEn": "This room serves as both a bedroom and a study",
       "romaji": "Kono heya wa shinshitsu to shosai o kanete imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This room serves as both a bedroom and a study",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun と Noun を兼ねて",
       "sentence": "彼は父と母を兼ねて子どもの世話をしている。",
       "translation": "He looks after his child, taking on both mother and father roles.",
-      "translationEn": "He looks after his child, taking on both mother and father roles.",
+      "translationEn": "He looks after his child, taking on both mother and father roles",
       "romaji": "Kare wa chichi to haha o kanete kodomo no sewa o shite iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He looks after his child, taking on both mother and father roles",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun といい Noun といい",
       "sentence": "日本の食べ物といい観光地といい、すべてが素晴らしいです。",
       "translation": "Both Japanese food and tourist spots are all wonderful.",
-      "translationEn": "Both Japanese food and tourist spots are all wonderful.",
+      "translationEn": "Both Japanese food and tourist spots are all wonderful",
       "romaji": "Nihon no tabemono to ii kankouchi to ii, subete ga subarashii desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Both Japanese food and tourist spots are all wonderful",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun といい Noun といい",
       "sentence": "彼の優しさといい、体力といい、彼は理想的なパートナーだ。",
       "translation": "Whether it's his kindness or stamina, he is an ideal partner.",
-      "translationEn": "Whether it's his kindness or stamina, he is an ideal partner.",
+      "translationEn": "Whether its his kindness or stamina, he is an ideal partner",
       "romaji": "Kare no yasashisa to ii, tairyoku to ii, kare wa risouteki na paatonaa da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether its his kindness or stamina, he is an ideal partner",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun といい Noun といい",
       "sentence": "この町の映画館といい、公園といい、老若男女が楽しめる。",
       "translation": "Not to mention the movie theaters and parks in this town, they are enjoyable for all ages.",
-      "translationEn": "Not to mention the movie theaters and parks in this town, they are enjoyable for all ages.",
+      "translationEn": "Not to mention the movie theaters and parks in this town, they are enjoyable for all ages",
       "romaji": "Kono machi no eigakan to ii, kouen to ii, rounyakunan'nyo ga tanoshimeru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Not to mention the movie theaters and parks in this town, they are enjoyable for all ages",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun といい Noun といい",
       "sentence": "彼の歌唱力といい、ダンスのスキルといい、完璧だ。",
       "translation": "Both his singing ability and his dance skills are perfect.",
-      "translationEn": "Both his singing ability and his dance skills are perfect.",
+      "translationEn": "Both his singing ability and his dance skills are perfect",
       "romaji": "Kare no kashou ryoku to ii, dansu no sukiru to ii, kanpeki da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Both his singing ability and his dance skills are perfect",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun という Noun",
       "sentence": "宮崎駿という人は有名なアニメーション監督です。",
       "translation": "The person called Hayao Miyazaki is a famous animation director.",
-      "translationEn": "The person called Hayao Miyazaki is a famous animation director.",
+      "translationEn": "The person called Hayao Miyazaki is a famous animation director",
       "romaji": "Miyazaki Hayao to iu hito wa yuumei na animation kantoku desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The person called Hayao Miyazaki is a famous animation director",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun という Noun",
       "sentence": "その恋人という女性は彼にとても厳しいです。",
       "translation": "The woman called his girlfriend is very strict with him.",
-      "translationEn": "The woman called his girlfriend is very strict with him.",
+      "translationEn": "The woman called his girlfriend is very strict with him",
       "romaji": "Sono koibito to iu josei wa kare ni totemo kibishii desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The woman called his girlfriend is very strict with him",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun という Noun",
       "sentence": "東京という都市は夜も賑やかです。",
       "translation": "The city called Tokyo is bustling even at night.",
-      "translationEn": "The city called Tokyo is bustling even at night.",
+      "translationEn": "The city called Tokyo is bustling even at night",
       "romaji": "Tokyo to iu toshi wa yoru mo nigiyaka desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The city called Tokyo is bustling even at night",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun という Noun",
       "sentence": "私は「ハリーポッター」という本が好きです。",
       "translation": "I like the book called 'Harry Potter'.",
-      "translationEn": "I like the book called 'Harry Potter'.",
+      "translationEn": "I like the book called Harry Potter",
       "romaji": "Watashi wa 'Harry Potter' to iu hon ga suki desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I like the book called Harry Potter",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun というところだ",
       "sentence": "今回の試験の合格者は半数というところだろう。",
       "translation": "The passers in this exam would be approximately half.",
-      "translationEn": "The passers in this exam would be approximately half.",
+      "translationEn": "The passers in this exam would be approximately half",
       "romaji": "Konkai no shiken no goukakusha wa hansuu to iu tokoro darou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The passers in this exam would be approximately half",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun というところだ",
       "sentence": "彼の力は80％というところだ。",
       "translation": "His strength is about 80%.",
-      "translationEn": "His strength is about 80%.",
+      "translationEn": "His strength is about 80%",
       "romaji": "Kare no chikara wa hachijuu paasento to iu tokoro da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: His strength is about 80%",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun というところだ",
       "sentence": "このプランに賛成の人は7割というところだ。",
       "translation": "About 70% of people agree with this plan.",
-      "translationEn": "About 70% of people agree with this plan.",
+      "translationEn": "About 70% of people agree with this plan",
       "romaji": "Kono puran ni sansei no hito wa nanawari to iu tokoro da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: About 70% of people agree with this plan",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun というところだ",
       "sentence": "課長の意見には、私としては90％というところでしょう。",
       "translation": "As for the section manager's opinion, I'd say I'm about 90% in agreement.",
-      "translationEn": "As for the section manager's opinion, I'd say I'm about 90% in agreement.",
+      "translationEn": "As for the section managers opinion, Id say Im about 90% in agreement",
       "romaji": "Kachou no iken ni wa, watashi toshite wa kyuujuu paasento to iu tokoro deshou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As for the section managers opinion, Id say Im about 90% in agreement",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun + というもの",
       "sentence": "子供というものは、毎日たくさん遊びます。",
       "translation": "Children, as a group, play a lot every day.",
-      "translationEn": "Children, as a group, play a lot every day.",
+      "translationEn": "Children, as a group, play a lot every day",
       "romaji": "Kodomo to iu mono wa, mainichi takusan asobimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Children, as a group, play a lot every day",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun + というもの",
       "sentence": "大学生というものは研究に時間をたくさんかけます。",
       "translation": "University students spend a lot of time on research.",
-      "translationEn": "University students spend a lot of time on research.",
+      "translationEn": "University students spend a lot of time on research",
       "romaji": "Daigakusei to iu mono wa kenkyuu ni jikan o takusan kakemasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: University students spend a lot of time on research",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun + というもの",
       "sentence": "日本文化というものは伝統的なものと新しいものが混ざっています。",
       "translation": "Japanese culture is a mixture of traditional and new.",
-      "translationEn": "Japanese culture is a mixture of traditional and new.",
+      "translationEn": "Japanese culture is a mixture of traditional and new",
       "romaji": "Nihon bunka to iu mono wa dentouteki na mono to atarashii mono ga mazatte imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Japanese culture is a mixture of traditional and new",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun + というもの",
       "sentence": "別れというものはいつも悲しいものです。",
       "translation": "Goodbyes are always sad.",
-      "translationEn": "Goodbyes are always sad.",
+      "translationEn": "Goodbyes are always sad",
       "romaji": "Wakare to iu mono wa itsumo kanashii mono desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun といったところだ",
-      "sentence": "彼の英語レベルは初級といったところだ。",
-      "translation": "His English level is at most beginner level.",
-      "translationEn": "His English level is at most beginner level.",
-      "romaji": "Kare no eigo reberu wa shokyuu to itta tokoro da.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun といったところだ",
-      "sentence": "私の日本語の語彙は1000語といったところだ。",
-      "translation": "My Japanese vocabulary is limited to about 1000 words.",
-      "translationEn": "My Japanese vocabulary is limited to about 1000 words.",
-      "romaji": "Watashi no nihongo no goi wa sen go to itta tokoro da.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun といったところだ",
-      "sentence": "彼が毎日ランニングできるのは5キロといったところだ。",
-      "translation": "He can run as much as 5 kilometers a day at most.",
-      "translationEn": "He can run as much as 5 kilometers a day at most.",
-      "romaji": "Kare ga mainichi ranningu dekiru no wa go kiro to itta tokoro da.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun といったところだ",
-      "sentence": "その会社の従業員は20人といったところだ。",
-      "translation": "The employees at that company are limited to about 20 people.",
-      "translationEn": "The employees at that company are limited to about 20 people.",
-      "romaji": "Sono kaisha no juugyouin wa nijuu nin to itta tokoro da.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Goodbyes are always sad",
+      "translationViSource": "internal-en-example-draft"
     }
   ]
 }

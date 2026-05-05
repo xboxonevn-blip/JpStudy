@@ -5,448 +5,609 @@
   "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
   "tags": [
     "source-hanabira",
-    "n1-grammar-import"
+    "n1-grammar-import",
+    "needs-human-review"
   ],
   "examples": [
+    {
+      "grammarPoint": "Noun のいかんによらず",
+      "sentence": "試験の結果のいかんによらず、自分を信じ続けてください。",
+      "translation": "Regardless of the test results, keep believing in yourself.",
+      "translationEn": "Regardless of the test results, keep believing in yourself",
+      "romaji": "Shiken no kekka no ikan ni yorazu, jibun o shinji tsudzukete kudasai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Regardless of the test results, keep believing in yourself",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun のいかんによらず",
+      "sentence": "天気のいかんによらず、毎日、ジョギングをします。",
+      "translation": "Regardless of the weather, I jog every day.",
+      "translationEn": "Regardless of the weather, I jog every day",
+      "romaji": "Tenki no ikan ni yorazu, mainichi, jogingu o shimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Regardless of the weather, I jog every day",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun のいかんによらず",
+      "sentence": "彼の年齢のいかんによらず、彼は非常に経験豊富です。",
+      "translation": "Regardless of his age, he is very experienced.",
+      "translationEn": "Regardless of his age, he is very experienced",
+      "romaji": "Kare no nenrei no ikan ni yorazu, kare wa hijou ni keikenhoufu desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Regardless of his age, he is very experienced",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun のいかんによらず",
+      "sentence": "国籍のいかんによらず、誰でもイベントに参加できます。",
+      "translation": "Regardless of nationality, anyone can participate in the event.",
+      "translationEn": "Regardless of nationality, anyone can participate in the event",
+      "romaji": "Kokuseki no ikan ni yorazu, daredemo ibento ni sanka dekimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Regardless of nationality, anyone can participate in the event",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun のごとき Noun",
+      "sentence": "彼は神のごとき存在だ。",
+      "translation": "He is an existence like a god.",
+      "translationEn": "He is an existence like a god",
+      "romaji": "Kare wa kami no gotoki sonzai da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He is an existence like a god",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun のごとき Noun",
+      "sentence": "彼女の美しさは花のごときものだ。",
+      "translation": "Her beauty is like a flower.",
+      "translationEn": "Her beauty is like a flower",
+      "romaji": "Kanojo no utsukushisa wa hana no gotoki mono da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Her beauty is like a flower",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun のごとき Noun",
+      "sentence": "彼は悪魔のごとき行動をした。",
+      "translation": "He acted like a devil.",
+      "translationEn": "He acted like a devil",
+      "romaji": "Kare wa akuma no gotoki koudou o shita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He acted like a devil",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun のごとき Noun",
+      "sentence": "この地方は春のごとき気候だ。",
+      "translation": "This region has a climate like spring.",
+      "translationEn": "This region has a climate like spring",
+      "romaji": "Kono chiho wa haru no gotoki kiko da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This region has a climate like spring",
+      "translationViSource": "internal-en-example-draft"
+    },
     {
       "grammarPoint": "Noun のことだから",
       "sentence": "彼のことだから、きっと大丈夫だと思う。",
       "translation": "Because it's him, I think it will certainly be fine.",
-      "translationEn": "Because it's him, I think it will certainly be fine.",
+      "translationEn": "Because its him, I think it will certainly be fine",
       "romaji": "Kare no koto dakara, kitto daijoubu da to omou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Because its him, I think it will certainly be fine",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun のことだから",
       "sentence": "この店のことだから、料理は美味しいはずです。",
       "translation": "Considering it's this restaurant, the food should be delicious.",
-      "translationEn": "Considering it's this restaurant, the food should be delicious.",
+      "translationEn": "Considering its this restaurant, the food should be delicious",
       "romaji": "Kono mise no koto dakara, ryouri wa oishii hazu desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Considering its this restaurant, the food should be delicious",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun のことだから",
       "sentence": "彼女のことだから、もうすぐ到着するでしょう。",
       "translation": "Since it's her, she will probably arrive soon.",
-      "translationEn": "Since it's her, she will probably arrive soon.",
+      "translationEn": "Since its her, she will probably arrive soon",
       "romaji": "Kanojo no koto dakara, mou sugu touchaku suru deshou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Since its her, she will probably arrive soon",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun のことだから",
       "sentence": "この会社のことだから、もうすぐ新製品が発表されるでしょう。",
       "translation": "Given this company, a new product will probably be announced soon.",
-      "translationEn": "Given this company, a new product will probably be announced soon.",
+      "translationEn": "Given this company, a new product will probably be announced soon",
       "romaji": "Kono kaisha no koto dakara, mou sugu shinseihin ga happyou sareru deshou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Given this company, a new product will probably be announced soon",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun の 嫌いがある",
       "sentence": "彼は魚の嫌いがあるので、寿司を食べません。",
       "translation": "He has a dislike for fish, so he doesn't eat sushi.",
-      "translationEn": "He has a dislike for fish, so he doesn't eat sushi.",
+      "translationEn": "He has a dislike for fish, so he doesnt eat sushi",
       "romaji": "Kare wa sakana no kirai ga aru node, sushi o tabemasen.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He has a dislike for fish, so he doesnt eat sushi",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun の 嫌いがある",
       "sentence": "彼女は高いところの嫌いがあるから、山登りはしない。",
       "translation": "She has a dislike for high places, so she doesn't go mountain climbing.",
-      "translationEn": "She has a dislike for high places, so she doesn't go mountain climbing.",
+      "translationEn": "She has a dislike for high places, so she doesnt go mountain climbing",
       "romaji": "Kanojo wa takai tokoro no kirai ga aru kara, yamanobori wa shinai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She has a dislike for high places, so she doesnt go mountain climbing",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun の 嫌いがある",
       "sentence": "私の父は人ごみの嫌いがあるので、混雑した場所には行かない。",
       "translation": "My father has a dislike for crowds, so he doesn't go to crowded places.",
-      "translationEn": "My father has a dislike for crowds, so he doesn't go to crowded places.",
+      "translationEn": "My father has a dislike for crowds, so he doesnt go to crowded places",
       "romaji": "Watashi no chichi wa hitogomi no kirai ga aru node, konzatsu shita basho ni wa ikanai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: My father has a dislike for crowds, so he doesnt go to crowded places",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun の 嫌いがある",
       "sentence": "子供の頃、私は野菜の嫌いがあったが、今は好きだ。",
       "translation": "When I was a child, I had a dislike for vegetables, but now I like them.",
-      "translationEn": "When I was a child, I had a dislike for vegetables, but now I like them.",
+      "translationEn": "When I was a child, I had a dislike for vegetables, but now I like them",
       "romaji": "Kodomo no koro, watashi wa yasai no kirai ga atta ga, ima wa suki da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When I was a child, I had a dislike for vegetables, but now I like them",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun の手前",
       "sentence": "試験の手前、遊びに行くのはやめた方がいい。",
       "translation": "Just before the exam, it's better to stop going out to play.",
-      "translationEn": "Just before the exam, it's better to stop going out to play.",
+      "translationEn": "Just before the exam, its better to stop going out to play",
       "romaji": "Shiken no temae, asobi ni iku no wa yameta hou ga ii.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Just before the exam, its better to stop going out to play",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun の手前",
       "sentence": "彼女と別れる手前、思い直しました。",
       "translation": "Just before breaking up with her, I changed my mind.",
-      "translationEn": "Just before breaking up with her, I changed my mind.",
+      "translationEn": "Just before breaking up with her, I changed my mind",
       "romaji": "Kanojo to wakareru temae, omoinaoshimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Just before breaking up with her, I changed my mind",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun の手前",
       "sentence": "締め切りの手前で、やっとレポートが完成しました。",
       "translation": "I finally finished the report just before the deadline.",
-      "translationEn": "I finally finished the report just before the deadline.",
+      "translationEn": "I finally finished the report just before the deadline",
       "romaji": "Shimekiri no temae de, yatto repooto ga kansei shimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I finally finished the report just before the deadline",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun の手前",
       "sentence": "選挙の手前、政治の話が多くなります。",
       "translation": "Just before the election, there will be a lot of political talk.",
-      "translationEn": "Just before the election, there will be a lot of political talk.",
+      "translationEn": "Just before the election, there will be a lot of political talk",
       "romaji": "Senkyo no temae, seiji no hanashi ga ooku narimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Just before the election, there will be a lot of political talk",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun の極み",
       "sentence": "彼の料理の極みは、誰もマネできない。",
       "translation": "The pinnacle of his cooking is something nobody can imitate.",
-      "translationEn": "The pinnacle of his cooking is something nobody can imitate.",
+      "translationEn": "The pinnacle of his cooking is something nobody can imitate",
       "romaji": "Kare no ryouri no kiwami wa, daremo mane dekinai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The pinnacle of his cooking is something nobody can imitate",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun の極み",
       "sentence": "彼女の努力の極みが、この成功を作り出した。",
       "translation": "The extreme of her effort has created this success.",
-      "translationEn": "The extreme of her effort has created this success.",
+      "translationEn": "The extreme of her effort has created this success",
       "romaji": "Kanojo no doryoku no kiwami ga, kono seikou wo tsukuridashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The extreme of her effort has created this success",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun の極み",
       "sentence": "彼は音楽の極みを追求し続けている。",
       "translation": "He continues to pursue the pinnacle of music.",
-      "translationEn": "He continues to pursue the pinnacle of music.",
+      "translationEn": "He continues to pursue the pinnacle of music",
       "romaji": "Kare wa ongaku no kiwami o tsuikyuu shitsuzukete iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He continues to pursue the pinnacle of music",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun の極み",
       "sentence": "この風景は美の極みだ。",
       "translation": "This scenery is the epitome of beauty.",
-      "translationEn": "This scenery is the epitome of beauty.",
+      "translationEn": "This scenery is the epitome of beauty",
       "romaji": "Kono fuukei wa bi no kiwami da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This scenery is the epitome of beauty",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun の 至り",
       "sentence": "彼の冗談には驚きの至りだ。",
       "translation": "His jokes are the height of surprise.",
-      "translationEn": "His jokes are the height of surprise.",
+      "translationEn": "His jokes are the height of surprise",
       "romaji": "Kare no joudan ni wa odoroki no itari da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: His jokes are the height of surprise",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun の 至り",
       "sentence": "父がプロジェクトのリーダーになったのは、光栄の至りです。",
       "translation": "It is the height of honor that my father became the project leader.",
-      "translationEn": "It is the height of honor that my father became the project leader.",
+      "translationEn": "It is the height of honor that my father became the project leader",
       "romaji": "Chichi ga purojekuto no riidaa ni natta no wa, kouei no itari desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: It is the height of honor that my father became the project leader",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun の 至り",
       "sentence": "彼女の素晴らしい演技には感動の至りだった。",
       "translation": "Her wonderful performance was the height of emotion.",
-      "translationEn": "Her wonderful performance was the height of emotion.",
+      "translationEn": "Her wonderful performance was the height of emotion",
       "romaji": "Kanojo no subarashii engi ni wa kandou no itari datta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Her wonderful performance was the height of emotion",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun の 至り",
       "sentence": "その失敗は恥ずかしさの至りだった。",
       "translation": "That failure was the height of embarrassment.",
-      "translationEn": "That failure was the height of embarrassment.",
+      "translationEn": "That failure was the height of embarrassment",
       "romaji": "Sono shippai wa hazukashisa no itari datta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: That failure was the height of embarrassment",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun はいざ知らず",
       "sentence": "彼が遅れるのはいざ知らず、彼女まで遅刻するとは意外だ。",
       "translation": "Well, I can understand him being late, but even her...? That's surprising.",
-      "translationEn": "Well, I can understand him being late, but even her...? That's surprising.",
+      "translationEn": "Well, I can understand him being late, but even her...? Thats surprising",
       "romaji": "Kare ga okureru no wa iza shirazu, kanojo made chikoku suru to wa igai da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Well, I can understand him being late, but even her...? Thats surprising",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun はいざ知らず",
       "sentence": "夏はいざ知らず、冬にアイスクリームを食べるのは寒すぎませんか？",
       "translation": "I can see eating ice cream in summer, but in winter…isn't it too cold?",
-      "translationEn": "I can see eating ice cream in summer, but in winter…isn't it too cold?",
+      "translationEn": "I can see eating ice cream in summer, but in winter...isnt it too cold?",
       "romaji": "Natsu wa iza shirazu, fuyu ni aisukuriimu o taberu no wa samusugimasen ka?",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I can see eating ice cream in summer, but in winter...isnt it too cold?",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun はいざ知らず",
       "sentence": "子供がテレビゲームに夢中になるのはいざ知らず、大人までそんなに夢中になるとは思わなかった。",
       "translation": "I can see why kids get hooked on video games, but I didn't think even adults would get that absorbed.",
-      "translationEn": "I can see why kids get hooked on video games, but I didn't think even adults would get that absorbed.",
+      "translationEn": "I can see why kids get hooked on video games, but I didnt think even adults would get that absorbed",
       "romaji": "Kodomo ga terebi geemu ni muchuu ni naru no wa iza shirazu, otona made sonnani muchuu ni naru to wa omowanakatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I can see why kids get hooked on video games, but I didnt think even adults would get that absorbed",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun はいざ知らず",
       "sentence": "苦しい時はいざ知らず、平時でもそんなに努力するなんてすばらしい。",
       "translation": "Well, I can understand working hard in tough times, but to do so even in normal times is impressive.",
-      "translationEn": "Well, I can understand working hard in tough times, but to do so even in normal times is impressive.",
+      "translationEn": "Well, I can understand working hard in tough times, but to do so even in normal times is impressive",
       "romaji": "Kurushii toki wa iza shirazu, heiji demo sonnani doryoku suru nante subarashii.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Well, I can understand working hard in tough times, but to do so even in normal times is impressive",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun はおろか～すら",
       "sentence": "彼は走るはおろか、速く歩くことすらできない。",
       "translation": "He can't even walk fast, let alone run.",
-      "translationEn": "He can't even walk fast, let alone run.",
+      "translationEn": "He cant even walk fast, let alone run",
       "romaji": "Kare wa hashiru wa oroka, hayaku aruku koto sura dekinai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He cant even walk fast, let alone run",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun はおろか～すら",
       "sentence": "日本語はおろか、英語さえ話しません。",
       "translation": "He doesn't even speak English, let alone Japanese.",
-      "translationEn": "He doesn't even speak English, let alone Japanese.",
+      "translationEn": "He doesnt even speak English, let alone Japanese",
       "romaji": "Nihongo wa oroka, eigo sae hanashimasen.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He doesnt even speak English, let alone Japanese",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun はおろか～すら",
       "sentence": "彼は食事はおろか、一日中何も飲まなかった。",
       "translation": "He didn't even drink anything all day, let alone eat a meal.",
-      "translationEn": "He didn't even drink anything all day, let alone eat a meal.",
+      "translationEn": "He didnt even drink anything all day, let alone eat a meal",
       "romaji": "Kare wa shokuji wa oroka, ichinichijuu nani mo nomanakatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He didnt even drink anything all day, let alone eat a meal",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun はおろか～すら",
       "sentence": "このレストランは味はおろか、サービスさえ悪い。",
       "translation": "Never mind the taste; even the service is bad.",
-      "translationEn": "Never mind the taste; even the service is bad.",
+      "translationEn": "Never mind the taste; even the service is bad",
       "romaji": "Kono resutoran wa aji wa oroka, saabisu sae warui.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Never mind the taste; even the service is bad",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun はおろか～まで",
       "sentence": "彼は英語はおろか、日本語までペラペラなんです。",
       "translation": "He is not just fluent in English, but even in Japanese.",
-      "translationEn": "He is not just fluent in English, but even in Japanese.",
+      "translationEn": "He is not just fluent in English, but even in Japanese",
       "romaji": "Kare wa eigo wa oroka, nihongo made perapera nan desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He is not just fluent in English, but even in Japanese",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun はおろか～まで",
       "sentence": "彼女は数学はおろか、物理まで得意なんです。",
       "translation": "She is not just good at math, but even at physics.",
-      "translationEn": "She is not just good at math, but even at physics.",
+      "translationEn": "She is not just good at math, but even at physics",
       "romaji": "Kanojo wa suugaku wa oroka, butsuri made tokui nan desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She is not just good at math, but even at physics",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun はおろか～まで",
       "sentence": "この料理は見た目はおろか、味まで最高だ。",
       "translation": "This dish is not only visually appealing, but it even tastes fantastic.",
-      "translationEn": "This dish is not only visually appealing, but it even tastes fantastic.",
+      "translationEn": "This dish is not only visually appealing, but it even tastes fantastic",
       "romaji": "Kono ryouri wa mitame wa oroka, aji made saikou da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This dish is not only visually appealing, but it even tastes fantastic",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun はおろか～まで",
       "sentence": "彼は歌はおろか、ダンスまで上手だ。",
       "translation": "He is not just good at singing, but even at dancing.",
-      "translationEn": "He is not just good at singing, but even at dancing.",
+      "translationEn": "He is not just good at singing, but even at dancing",
       "romaji": "Kare wa uta wa oroka, dansu made umai da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun はおろか～も",
-      "sentence": "絵を描くことはおろか、字さえ書けない。",
-      "translation": "Needless to say drawing pictures, he can’t even write letters.",
-      "translationEn": "Needless to say drawing pictures, he can’t even write letters.",
-      "romaji": "E wo kaku koto wa oroka, ji sae kakenai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun はおろか～も",
-      "sentence": "彼は英語はおろか、日本語もわからない。",
-      "translation": "Needless to say English, he doesn’t even understand Japanese.",
-      "translationEn": "Needless to say English, he doesn’t even understand Japanese.",
-      "romaji": "Kare wa eigo wa oroka, nihongo mo wakaranai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun はおろか～も",
-      "sentence": "彼女は数学はおろか、算数も得意ではない。",
-      "translation": "Needless to say mathematics, she isn’t even good at arithmetic.",
-      "translationEn": "Needless to say mathematics, she isn’t even good at arithmetic.",
-      "romaji": "Kanojo wa suugaku wa oroka, sansuu mo tokui dewa nai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun はおろか～も",
-      "sentence": "彼は走ることはおろか、歩くことも難しい。",
-      "translation": "Needless to say running, he finds even walking difficult.",
-      "translationEn": "Needless to say running, he finds even walking difficult.",
-      "romaji": "Kare wa hashiru koto wa oroka, aruku koto mo muzukashii.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun はさておき",
-      "sentence": "試験の結果はさておき、この学期はとても学ぶことが多かった。",
-      "translation": "Aside from the exam results, I learned a lot this semester.",
-      "translationEn": "Aside from the exam results, I learned a lot this semester.",
-      "romaji": "Shiken no kekka wa sateoki, kono gakki wa totemo manabu koto ga ookatta.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun はさておき",
-      "sentence": "天候はさておき、明日のピクニックは楽しみにしています。",
-      "translation": "Putting aside the weather, I am looking forward to tomorrow's picnic.",
-      "translationEn": "Putting aside the weather, I am looking forward to tomorrow's picnic.",
-      "romaji": "Tenkou wa sateoki, ashita no pikunikku wa tanoshimi ni shiteimasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun はさておき",
-      "sentence": "彼の性格はさておき、彼のスキルは認めざるを得ない。",
-      "translation": "Notwithstanding his personality, his skills are undeniable.",
-      "translationEn": "Notwithstanding his personality, his skills are undeniable.",
-      "romaji": "Kare no seikaku wa sateoki, kare no sukiru wa mitomezaru wo enai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Noun はさておき",
-      "sentence": "彼があまりにも遅いことはさておき、彼が来ると思われること自体が問題だ。",
-      "translation": "Aside from him being late, the issue is that he is expected to come at all.",
-      "translationEn": "Aside from him being late, the issue is that he is expected to come at all.",
-      "romaji": "Kare ga amari ni mo osoi koto wa sateoki, kare ga kuru to omowareru koto jitai ga mondai da.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He is not just good at singing, but even at dancing",
+      "translationViSource": "internal-en-example-draft"
     }
   ]
 }

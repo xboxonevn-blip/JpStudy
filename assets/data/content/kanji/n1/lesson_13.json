@@ -1,330 +1,417 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N1",
   "lessonId": 13,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n1_l13_k001",
+      "kanjiId": "n1_jlpt_vocab_k097",
       "lessonId": 13,
       "level": "N1",
-      "character": "呠",
-      "strokeCount": 6,
+      "character": "様",
+      "strokeCount": 14,
       "labels": {
-        "hanViet": "HAN 97",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "呠 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": null,
+        "meaningVi": "state, condition, circumstances, the way things are or should be, truth",
+        "meaningViDisplay": "様 (state, condition, circumstances, the way things are or should be, truth)",
+        "meaningEn": "state, condition, circumstances, the way things are or should be, truth"
       },
       "readings": {
-        "onyomi": [
-          "on97"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun97"
+          "ありさま"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 呠 qua van canh N1.",
-        "en": "Remember 呠 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 有様 (state, condition, circumstances, the way things are or should be, truth).",
+        "en": "Appears in JLPT N1 vocabulary: 有様 (state, condition, circumstances, the way things are or should be, truth)."
       },
       "decomposition": {
-        "hanViet": "HAN 97",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 97",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "state, condition, circumstances, the way things are or should be, truth",
+        "meaningEnNoAccent": "state, condition, circumstances, the way things are or should be, truth"
       },
+      "examples": [
+        {
+          "word": "有様",
+          "reading": "ありさま",
+          "meaning": "state, condition, circumstances, the way things are or should be, truth"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n1_l13_k002",
+      "kanjiId": "n1_jlpt_vocab_k098",
       "lessonId": 13,
       "level": "N1",
-      "character": "呱",
-      "strokeCount": 7,
-      "labels": {
-        "hanViet": "HAN 98",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "呱 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on98"
-        ],
-        "kunyomi": [
-          "kun98"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 呱 qua van canh N1.",
-        "en": "Remember 呱 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 98",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 98",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l13_k003",
-      "lessonId": 13,
-      "level": "N1",
-      "character": "咂",
+      "character": "或",
       "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 99",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "咂 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Hoặc",
+        "meaningVi": "a certain..., some...",
+        "meaningViDisplay": "或 (a certain..., some...)",
+        "meaningEn": "a certain..., some..."
       },
       "readings": {
-        "onyomi": [
-          "on99"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun99"
+          "ある"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 咂 qua van canh N1.",
-        "en": "Remember 咂 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 或る (a certain..., some...).",
+        "en": "Appears in JLPT N1 vocabulary: 或る (a certain..., some...)."
       },
       "decomposition": {
-        "hanViet": "HAN 99",
-        "structure": "standalone",
+        "hanViet": "Hoặc",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 99",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Hoac",
+        "meaningViNoAccent": "a certain..., some...",
+        "meaningEnNoAccent": "a certain..., some..."
       },
+      "examples": [
+        {
+          "word": "或る",
+          "reading": "ある",
+          "meaning": "a certain..., some..."
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l13_k004",
+      "kanjiId": "n1_jlpt_vocab_k099",
       "lessonId": 13,
       "level": "N1",
-      "character": "咓",
-      "strokeCount": 9,
-      "labels": {
-        "hanViet": "HAN 100",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "咓 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on100"
-        ],
-        "kunyomi": [
-          "kun100"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 咓 qua van canh N1.",
-        "en": "Remember 咓 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 100",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 100",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l13_k005",
-      "lessonId": 13,
-      "level": "N1",
-      "character": "咤",
-      "strokeCount": 10,
-      "labels": {
-        "hanViet": "HAN 101",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "咤 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on101"
-        ],
-        "kunyomi": [
-          "kun101"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 咤 qua van canh N1.",
-        "en": "Remember 咤 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 101",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 101",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l13_k006",
-      "lessonId": 13,
-      "level": "N1",
-      "character": "咵",
-      "strokeCount": 11,
-      "labels": {
-        "hanViet": "HAN 102",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "咵 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on102"
-        ],
-        "kunyomi": [
-          "kun102"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 咵 qua van canh N1.",
-        "en": "Remember 咵 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 102",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 102",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l13_k007",
-      "lessonId": 13,
-      "level": "N1",
-      "character": "哆",
+      "character": "慌",
       "strokeCount": 12,
       "labels": {
-        "hanViet": "HAN 103",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "哆 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Hoảng",
+        "meaningVi": "busy, hurried, confused, flurried",
+        "meaningViDisplay": "慌 (busy, hurried, confused, flurried)",
+        "meaningEn": "busy, hurried, confused, flurried"
       },
       "readings": {
-        "onyomi": [
-          "on103"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun103"
+          "あわただしい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 哆 qua van canh N1.",
-        "en": "Remember 哆 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 慌ただしい (busy, hurried, confused, flurried).",
+        "en": "Appears in JLPT N1 vocabulary: 慌ただしい (busy, hurried, confused, flurried)."
       },
       "decomposition": {
-        "hanViet": "HAN 103",
-        "structure": "standalone",
+        "hanViet": "Hoảng",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 103",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Hoang",
+        "meaningViNoAccent": "busy, hurried, confused, flurried",
+        "meaningEnNoAccent": "busy, hurried, confused, flurried"
       },
+      "examples": [
+        {
+          "word": "慌ただしい",
+          "reading": "あわただしい",
+          "meaning": "busy, hurried, confused, flurried"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l13_k008",
+      "kanjiId": "n1_jlpt_vocab_k100",
       "lessonId": 13,
       "level": "N1",
-      "character": "哗",
+      "character": "暗",
       "strokeCount": 13,
       "labels": {
-        "hanViet": "HAN 104",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "哗 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Ám",
+        "meaningVi": "assassination",
+        "meaningViDisplay": "暗 (assassination)",
+        "meaningEn": "assassination"
       },
       "readings": {
-        "onyomi": [
-          "on104"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun104"
+          "あんさつ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 哗 qua van canh N1.",
-        "en": "Remember 哗 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 暗殺 (assassination).",
+        "en": "Appears in JLPT N1 vocabulary: 暗殺 (assassination)."
       },
       "decomposition": {
-        "hanViet": "HAN 104",
-        "structure": "standalone",
+        "hanViet": "Ám",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 104",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Am",
+        "meaningViNoAccent": "assassination",
+        "meaningEnNoAccent": "assassination"
       },
+      "examples": [
+        {
+          "word": "暗殺",
+          "reading": "あんさつ",
+          "meaning": "assassination"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k101",
+      "lessonId": 13,
+      "level": "N1",
+      "character": "殺",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Sát",
+        "meaningVi": "assassination",
+        "meaningViDisplay": "殺 (assassination)",
+        "meaningEn": "assassination"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あんさつ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 暗殺 (assassination).",
+        "en": "Appears in JLPT N1 vocabulary: 暗殺 (assassination)."
+      },
+      "decomposition": {
+        "hanViet": "Sát",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Sat",
+        "meaningViNoAccent": "assassination",
+        "meaningEnNoAccent": "assassination"
+      },
+      "examples": [
+        {
+          "word": "暗殺",
+          "reading": "あんさつ",
+          "meaning": "assassination"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k102",
+      "lessonId": 13,
+      "level": "N1",
+      "character": "算",
+      "strokeCount": 14,
+      "labels": {
+        "hanViet": "Toán",
+        "meaningVi": "mental arithmetic",
+        "meaningViDisplay": "算 (mental arithmetic)",
+        "meaningEn": "mental arithmetic"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あんざん"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 暗算 (mental arithmetic).",
+        "en": "Appears in JLPT N1 vocabulary: 暗算 (mental arithmetic)."
+      },
+      "decomposition": {
+        "hanViet": "Toán",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Toan",
+        "meaningViNoAccent": "mental arithmetic",
+        "meaningEnNoAccent": "mental arithmetic"
+      },
+      "examples": [
+        {
+          "word": "暗算",
+          "reading": "あんざん",
+          "meaning": "mental arithmetic"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k103",
+      "lessonId": 13,
+      "level": "N1",
+      "character": "示",
+      "strokeCount": 5,
+      "labels": {
+        "hanViet": "Kì Thị",
+        "meaningVi": "hint, suggestion",
+        "meaningViDisplay": "示 (hint, suggestion)",
+        "meaningEn": "hint, suggestion"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あんじ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 暗示 (hint, suggestion).",
+        "en": "Appears in JLPT N1 vocabulary: 暗示 (hint, suggestion)."
+      },
+      "decomposition": {
+        "hanViet": "Kì Thị",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Ki Thi",
+        "meaningViNoAccent": "hint, suggestion",
+        "meaningEnNoAccent": "hint, suggestion"
+      },
+      "examples": [
+        {
+          "word": "暗示",
+          "reading": "あんじ",
+          "meaning": "hint, suggestion"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k104",
+      "lessonId": 13,
+      "level": "N1",
+      "character": "案",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "An Án Yên",
+        "meaningVi": "to be anxious, to ponder",
+        "meaningViDisplay": "案 (to be anxious, to ponder)",
+        "meaningEn": "to be anxious, to ponder"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あんじる"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 案じる (to be anxious, to ponder).",
+        "en": "Appears in JLPT N1 vocabulary: 案じる (to be anxious, to ponder)."
+      },
+      "decomposition": {
+        "hanViet": "An Án Yên",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "An An Yen",
+        "meaningViNoAccent": "to be anxious, to ponder",
+        "meaningEnNoAccent": "to be anxious, to ponder"
+      },
+      "examples": [
+        {
+          "word": "案じる",
+          "reading": "あんじる",
+          "meaning": "to be anxious, to ponder"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

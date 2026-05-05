@@ -1,330 +1,417 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N2",
   "lessonId": 22,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n2_l22_k001",
+      "kanjiId": "n2_jlpt_vocab_k169",
       "lessonId": 22,
       "level": "N2",
-      "character": "删",
-      "strokeCount": 6,
-      "labels": {
-        "hanViet": "HAN 169",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "删 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on169"
-        ],
-        "kunyomi": [
-          "kun169"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 删 qua van canh N2.",
-        "en": "Remember 删 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 169",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 169",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l22_k002",
-      "lessonId": 22,
-      "level": "N2",
-      "character": "刱",
-      "strokeCount": 7,
-      "labels": {
-        "hanViet": "HAN 170",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "刱 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on170"
-        ],
-        "kunyomi": [
-          "kun170"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 刱 qua van canh N2.",
-        "en": "Remember 刱 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 170",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 170",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l22_k003",
-      "lessonId": 22,
-      "level": "N2",
-      "character": "剂",
-      "strokeCount": 8,
-      "labels": {
-        "hanViet": "HAN 171",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "剂 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on171"
-        ],
-        "kunyomi": [
-          "kun171"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 剂 qua van canh N2.",
-        "en": "Remember 剂 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 171",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 171",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l22_k004",
-      "lessonId": 22,
-      "level": "N2",
-      "character": "剓",
-      "strokeCount": 9,
-      "labels": {
-        "hanViet": "HAN 172",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "剓 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on172"
-        ],
-        "kunyomi": [
-          "kun172"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 剓 qua van canh N2.",
-        "en": "Remember 剓 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 172",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 172",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l22_k005",
-      "lessonId": 22,
-      "level": "N2",
-      "character": "剤",
-      "strokeCount": 10,
-      "labels": {
-        "hanViet": "HAN 173",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "剤 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on173"
-        ],
-        "kunyomi": [
-          "kun173"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 剤 qua van canh N2.",
-        "en": "Remember 剤 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 173",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 173",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l22_k006",
-      "lessonId": 22,
-      "level": "N2",
-      "character": "創",
+      "character": "惜",
       "strokeCount": 11,
       "labels": {
-        "hanViet": "HAN 174",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "創 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Tiếc",
+        "meaningVi": "regrettable, disappointing, precious",
+        "meaningViDisplay": "惜 (regrettable, disappointing, precious)",
+        "meaningEn": "regrettable, disappointing, precious"
       },
       "readings": {
-        "onyomi": [
-          "on174"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun174"
+          "おしい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 創 qua van canh N2.",
-        "en": "Remember 創 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 惜しい (regrettable, disappointing, precious).",
+        "en": "Appears in JLPT N2 vocabulary: 惜しい (regrettable, disappointing, precious)."
       },
       "decomposition": {
-        "hanViet": "HAN 174",
-        "structure": "standalone",
+        "hanViet": "Tiếc",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 174",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Tiec",
+        "meaningViNoAccent": "regrettable, disappointing, precious",
+        "meaningEnNoAccent": "regrettable, disappointing, precious"
       },
+      "examples": [
+        {
+          "word": "惜しい",
+          "reading": "おしい",
+          "meaning": "regrettable, disappointing, precious"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l22_k007",
+      "kanjiId": "n2_jlpt_vocab_k170",
       "lessonId": 22,
       "level": "N2",
-      "character": "劆",
+      "character": "御",
       "strokeCount": 12,
       "labels": {
-        "hanViet": "HAN 175",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "劆 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Ngự",
+        "meaningVi": "bow",
+        "meaningViDisplay": "御 (bow)",
+        "meaningEn": "bow"
       },
       "readings": {
-        "onyomi": [
-          "on175"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun175"
+          "おじぎ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 劆 qua van canh N2.",
-        "en": "Remember 劆 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 御辞儀 (bow).",
+        "en": "Appears in JLPT N2 vocabulary: 御辞儀 (bow)."
       },
       "decomposition": {
-        "hanViet": "HAN 175",
-        "structure": "standalone",
+        "hanViet": "Ngự",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 175",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Ngu",
+        "meaningViNoAccent": "bow",
+        "meaningEnNoAccent": "bow"
       },
+      "examples": [
+        {
+          "word": "御辞儀",
+          "reading": "おじぎ",
+          "meaning": "bow"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l22_k008",
+      "kanjiId": "n2_jlpt_vocab_k171",
       "lessonId": 22,
       "level": "N2",
-      "character": "劗",
+      "character": "辞",
       "strokeCount": 13,
       "labels": {
-        "hanViet": "HAN 176",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "劗 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Từ",
+        "meaningVi": "bow",
+        "meaningViDisplay": "辞 (bow)",
+        "meaningEn": "bow"
       },
       "readings": {
-        "onyomi": [
-          "on176"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun176"
+          "おじぎ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 劗 qua van canh N2.",
-        "en": "Remember 劗 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 御辞儀 (bow).",
+        "en": "Appears in JLPT N2 vocabulary: 御辞儀 (bow)."
       },
       "decomposition": {
-        "hanViet": "HAN 176",
-        "structure": "standalone",
+        "hanViet": "Từ",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 176",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Tu",
+        "meaningViNoAccent": "bow",
+        "meaningEnNoAccent": "bow"
       },
+      "examples": [
+        {
+          "word": "御辞儀",
+          "reading": "おじぎ",
+          "meaning": "bow"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k172",
+      "lessonId": 22,
+      "level": "N2",
+      "character": "儀",
+      "strokeCount": 15,
+      "labels": {
+        "hanViet": "Nghi",
+        "meaningVi": "bow",
+        "meaningViDisplay": "儀 (bow)",
+        "meaningEn": "bow"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "おじぎ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 御辞儀 (bow).",
+        "en": "Appears in JLPT N2 vocabulary: 御辞儀 (bow)."
+      },
+      "decomposition": {
+        "hanViet": "Nghi",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Nghi",
+        "meaningViNoAccent": "bow",
+        "meaningEnNoAccent": "bow"
+      },
+      "examples": [
+        {
+          "word": "御辞儀",
+          "reading": "おじぎ",
+          "meaning": "bow"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k173",
+      "lessonId": 22,
+      "level": "N2",
+      "character": "伯",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": "Bá",
+        "meaningVi": "middle-aged gentleman, uncle",
+        "meaningViDisplay": "伯 (middle-aged gentleman, uncle)",
+        "meaningEn": "middle-aged gentleman, uncle"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "おじさん"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 伯父さん (middle-aged gentleman, uncle).",
+        "en": "Appears in JLPT N2 vocabulary: 伯父さん (middle-aged gentleman, uncle)."
+      },
+      "decomposition": {
+        "hanViet": "Bá",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Ba",
+        "meaningViNoAccent": "middle-aged gentleman, uncle",
+        "meaningEnNoAccent": "middle-aged gentleman, uncle"
+      },
+      "examples": [
+        {
+          "word": "伯父さん",
+          "reading": "おじさん",
+          "meaning": "middle-aged gentleman, uncle"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k174",
+      "lessonId": 22,
+      "level": "N2",
+      "character": "父",
+      "strokeCount": 4,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "middle-aged gentleman, uncle",
+        "meaningViDisplay": "父 (middle-aged gentleman, uncle)",
+        "meaningEn": "middle-aged gentleman, uncle"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "おじさん"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 伯父さん (middle-aged gentleman, uncle).",
+        "en": "Appears in JLPT N2 vocabulary: 伯父さん (middle-aged gentleman, uncle)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "middle-aged gentleman, uncle",
+        "meaningEnNoAccent": "middle-aged gentleman, uncle"
+      },
+      "examples": [
+        {
+          "word": "伯父さん",
+          "reading": "おじさん",
+          "meaning": "middle-aged gentleman, uncle"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k175",
+      "lessonId": 22,
+      "level": "N2",
+      "character": "小",
+      "strokeCount": 3,
+      "labels": {
+        "hanViet": "Tiểu",
+        "meaningVi": "middle-aged gentleman, uncle",
+        "meaningViDisplay": "小 (middle-aged gentleman, uncle)",
+        "meaningEn": "middle-aged gentleman, uncle"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "おじさん"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 小父さん (middle-aged gentleman, uncle).",
+        "en": "Appears in JLPT N2 vocabulary: 小父さん (middle-aged gentleman, uncle)."
+      },
+      "decomposition": {
+        "hanViet": "Tiểu",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Tieu",
+        "meaningViNoAccent": "middle-aged gentleman, uncle",
+        "meaningEnNoAccent": "middle-aged gentleman, uncle"
+      },
+      "examples": [
+        {
+          "word": "小父さん",
+          "reading": "おじさん",
+          "meaning": "middle-aged gentleman, uncle"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k176",
+      "lessonId": 22,
+      "level": "N2",
+      "character": "叔",
+      "strokeCount": 8,
+      "labels": {
+        "hanViet": "Thúc",
+        "meaningVi": "middle-aged gentleman, uncle",
+        "meaningViDisplay": "叔 (middle-aged gentleman, uncle)",
+        "meaningEn": "middle-aged gentleman, uncle"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "おじさん"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 叔父さん (middle-aged gentleman, uncle).",
+        "en": "Appears in JLPT N2 vocabulary: 叔父さん (middle-aged gentleman, uncle)."
+      },
+      "decomposition": {
+        "hanViet": "Thúc",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Thuc",
+        "meaningViNoAccent": "middle-aged gentleman, uncle",
+        "meaningEnNoAccent": "middle-aged gentleman, uncle"
+      },
+      "examples": [
+        {
+          "word": "叔父さん",
+          "reading": "おじさん",
+          "meaning": "middle-aged gentleman, uncle"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

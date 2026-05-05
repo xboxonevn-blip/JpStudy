@@ -1,330 +1,415 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N2",
   "lessonId": 20,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n2_l20_k001",
+      "kanjiId": "n2_jlpt_vocab_k153",
       "lessonId": 20,
       "level": "N2",
-      "character": "儐",
-      "strokeCount": 14,
-      "labels": {
-        "hanViet": "HAN 153",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "儐 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on153"
-        ],
-        "kunyomi": [
-          "kun153"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 儐 qua van canh N2.",
-        "en": "Remember 儐 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 153",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 153",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l20_k002",
-      "lessonId": 20,
-      "level": "N2",
-      "character": "儡",
-      "strokeCount": 15,
-      "labels": {
-        "hanViet": "HAN 154",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "儡 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on154"
-        ],
-        "kunyomi": [
-          "kun154"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 儡 qua van canh N2.",
-        "en": "Remember 儡 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 154",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 154",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l20_k003",
-      "lessonId": 20,
-      "level": "N2",
-      "character": "儲",
-      "strokeCount": 16,
-      "labels": {
-        "hanViet": "HAN 155",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "儲 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on155"
-        ],
-        "kunyomi": [
-          "kun155"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 儲 qua van canh N2.",
-        "en": "Remember 儲 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 155",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 155",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l20_k004",
-      "lessonId": 20,
-      "level": "N2",
-      "character": "元",
-      "strokeCount": 17,
-      "labels": {
-        "hanViet": "HAN 156",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "元 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on156"
-        ],
-        "kunyomi": [
-          "kun156"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 元 qua van canh N2.",
-        "en": "Remember 元 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 156",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 156",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l20_k005",
-      "lessonId": 20,
-      "level": "N2",
-      "character": "兔",
+      "character": "米",
       "strokeCount": 6,
       "labels": {
-        "hanViet": "HAN 157",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "兔 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "Europe and America, the West",
+        "meaningViDisplay": "米 (Europe and America, the West)",
+        "meaningEn": "Europe and America, the West"
       },
       "readings": {
-        "onyomi": [
-          "on157"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun157"
+          "おうべい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 兔 qua van canh N2.",
-        "en": "Remember 兔 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 欧米 (Europe and America, the West).",
+        "en": "Appears in JLPT N2 vocabulary: 欧米 (Europe and America, the West)."
       },
       "decomposition": {
-        "hanViet": "HAN 157",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 157",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "europe and america, the west",
+        "meaningEnNoAccent": "europe and america, the west"
       },
+      "examples": [
+        {
+          "word": "欧米",
+          "reading": "おうべい",
+          "meaning": "Europe and America, the West"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l20_k006",
+      "kanjiId": "n2_jlpt_vocab_k154",
       "lessonId": 20,
       "level": "N2",
-      "character": "入",
-      "strokeCount": 7,
+      "character": "用",
+      "strokeCount": 5,
       "labels": {
-        "hanViet": "HAN 158",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "入 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Dụng",
+        "meaningVi": "application, put to practical use",
+        "meaningViDisplay": "用 (application, put to practical use)",
+        "meaningEn": "application, put to practical use"
       },
       "readings": {
-        "onyomi": [
-          "on158"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun158"
+          "おうよう"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 入 qua van canh N2.",
-        "en": "Remember 入 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 応用 (application, put to practical use).",
+        "en": "Appears in JLPT N2 vocabulary: 応用 (application, put to practical use)."
       },
       "decomposition": {
-        "hanViet": "HAN 158",
-        "structure": "standalone",
+        "hanViet": "Dụng",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 158",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Dung",
+        "meaningViNoAccent": "application, put to practical use",
+        "meaningEnNoAccent": "application, put to practical use"
       },
+      "examples": [
+        {
+          "word": "応用",
+          "reading": "おうよう",
+          "meaning": "application, put to practical use"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l20_k007",
+      "kanjiId": "n2_jlpt_vocab_k155",
       "lessonId": 20,
       "level": "N2",
-      "character": "其",
+      "character": "大",
+      "strokeCount": 3,
+      "labels": {
+        "hanViet": "Đại",
+        "meaningVi": "main street",
+        "meaningViDisplay": "大 (main street)",
+        "meaningEn": "main street"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "おおどおり"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 大通り (main street).",
+        "en": "Appears in JLPT N2 vocabulary: 大通り (main street)."
+      },
+      "decomposition": {
+        "hanViet": "Đại",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Đai",
+        "meaningViNoAccent": "main street",
+        "meaningEnNoAccent": "main street"
+      },
+      "examples": [
+        {
+          "word": "大通り",
+          "reading": "おおどおり",
+          "meaning": "main street"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k156",
+      "lessonId": 20,
+      "level": "N2",
+      "character": "通",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": "Thông",
+        "meaningVi": "main street",
+        "meaningViDisplay": "通 (main street)",
+        "meaningEn": "main street"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "おおどおり"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 大通り (main street).",
+        "en": "Appears in JLPT N2 vocabulary: 大通り (main street)."
+      },
+      "decomposition": {
+        "hanViet": "Thông",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Thong",
+        "meaningViNoAccent": "main street",
+        "meaningEnNoAccent": "main street"
+      },
+      "examples": [
+        {
+          "word": "大通り",
+          "reading": "おおどおり",
+          "meaning": "main street"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k157",
+      "lessonId": 20,
+      "level": "N2",
+      "character": "凡",
+      "strokeCount": 3,
+      "labels": {
+        "hanViet": "Phàm",
+        "meaningVi": "about, roughly, as a rule, approximately",
+        "meaningViDisplay": "凡 (about, roughly, as a rule, approximately)",
+        "meaningEn": "about, roughly, as a rule, approximately"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "おおよそ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 大凡 (about, roughly, as a rule, approximately).",
+        "en": "Appears in JLPT N2 vocabulary: 大凡 (about, roughly, as a rule, approximately)."
+      },
+      "decomposition": {
+        "hanViet": "Phàm",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Pham",
+        "meaningViNoAccent": "about, roughly, as a rule, approximately",
+        "meaningEnNoAccent": "about, roughly, as a rule, approximately"
+      },
+      "examples": [
+        {
+          "word": "大凡",
+          "reading": "おおよそ",
+          "meaning": "about, roughly, as a rule, approximately"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k158",
+      "lessonId": 20,
+      "level": "N2",
+      "character": "帰",
+      "strokeCount": 10,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "return, welcome",
+        "meaningViDisplay": "帰 (return, welcome)",
+        "meaningEn": "return, welcome"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "おかえり"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: お帰り (return, welcome).",
+        "en": "Appears in JLPT N2 vocabulary: お帰り (return, welcome)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "return, welcome",
+        "meaningEnNoAccent": "return, welcome"
+      },
+      "examples": [
+        {
+          "word": "お帰り",
+          "reading": "おかえり",
+          "meaning": "return, welcome"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k159",
+      "lessonId": 20,
+      "level": "N2",
+      "character": "拝",
       "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 159",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "其 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "to worship, to beg, to make a supplication",
+        "meaningViDisplay": "拝 (to worship, to beg, to make a supplication)",
+        "meaningEn": "to worship, to beg, to make a supplication"
       },
       "readings": {
-        "onyomi": [
-          "on159"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun159"
+          "おがむ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 其 qua van canh N2.",
-        "en": "Remember 其 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 拝む (to worship, to beg, to make a supplication).",
+        "en": "Appears in JLPT N2 vocabulary: 拝む (to worship, to beg, to make a supplication)."
       },
       "decomposition": {
-        "hanViet": "HAN 159",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 159",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "to worship, to beg, to make a supplication",
+        "meaningEnNoAccent": "to worship, to beg, to make a supplication"
       },
+      "examples": [
+        {
+          "word": "拝む",
+          "reading": "おがむ",
+          "meaning": "to worship, to beg, to make a supplication"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l20_k008",
+      "kanjiId": "n2_jlpt_vocab_k160",
       "lessonId": 20,
       "level": "N2",
-      "character": "冇",
-      "strokeCount": 9,
+      "character": "代",
+      "strokeCount": 5,
       "labels": {
-        "hanViet": "HAN 160",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "冇 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Đại",
+        "meaningVi": "second helping, another cup",
+        "meaningViDisplay": "代 (second helping, another cup)",
+        "meaningEn": "second helping, another cup"
       },
       "readings": {
-        "onyomi": [
-          "on160"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun160"
+          "おかわり"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 冇 qua van canh N2.",
-        "en": "Remember 冇 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: お代わり (second helping, another cup).",
+        "en": "Appears in JLPT N2 vocabulary: お代わり (second helping, another cup)."
       },
       "decomposition": {
-        "hanViet": "HAN 160",
-        "structure": "standalone",
+        "hanViet": "Đại",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 160",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Đai",
+        "meaningViNoAccent": "second helping, another cup",
+        "meaningEnNoAccent": "second helping, another cup"
       },
+      "examples": [
+        {
+          "word": "お代わり",
+          "reading": "おかわり",
+          "meaning": "second helping, another cup"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

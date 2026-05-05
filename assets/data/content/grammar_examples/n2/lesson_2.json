@@ -5,360 +5,489 @@
   "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
   "tags": [
     "source-hanabira",
-    "n2-grammar-import"
+    "n2-grammar-import",
+    "needs-human-review"
   ],
   "examples": [
+    {
+      "grammarPoint": "A。そういえば B。",
+      "sentence": "映画。そういえば、彼は映画館で働いているんだ。",
+      "translation": "Movies. Speaking of which, he works at a movie theater.",
+      "translationEn": "Movies. Speaking of which, he works at a movie theater",
+      "romaji": "Eiga. Souieba, kare wa eigakan de hataraite irun da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Movies. Speaking of which, he works at a movie theater",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "A。そういえば B。",
+      "sentence": "山田さん。そういえば、彼女は今週末旅行しています。",
+      "translation": "Ms. Yamada. By the way, she is traveling this weekend.",
+      "translationEn": "Ms. Yamada. By the way, she is traveling this weekend",
+      "romaji": "Yamada-san. Souieba, kanojo wa konshuumatsu ryokou shite imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Ms. Yamada. By the way, she is traveling this weekend",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "A。そういえば B。",
+      "sentence": "そのレストラン。そういえば、次の週末そこでパーティーがあるんだ。",
+      "translation": "That restaurant. Now that you mention it, there's a party there next weekend.",
+      "translationEn": "That restaurant. Now that you mention it, theres a party there next weekend",
+      "romaji": "Sono resutoran. Souieba, tsugi no shuumatsu soko de paatii ga arun da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: That restaurant. Now that you mention it, theres a party there next weekend",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "A。そういえば B。",
+      "sentence": "寒い。そういえば、明日雪が降るらしいよ。",
+      "translation": "It's cold. Speaking of which, it seems like it will snow tomorrow.",
+      "translationEn": "Its cold. Speaking of which, it seems like it will snow tomorrow",
+      "romaji": "Samui. Souieba, ashita yuki ga furu rashii yo.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its cold. Speaking of which, it seems like it will snow tomorrow",
+      "translationViSource": "internal-en-example-draft"
+    },
     {
       "grammarPoint": "A。そこで B。",
       "sentence": "明日は試験があります。そこで今晩勉強しようと思います。",
       "translation": "There is an exam tomorrow. Therefore, I plan to study tonight.",
-      "translationEn": "There is an exam tomorrow. Therefore, I plan to study tonight.",
+      "translationEn": "There is an exam tomorrow. Therefore, I plan to study tonight",
       "romaji": "Ashita wa shiken ga arimasu. Soko de konban benkyou shiyou to omoimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: There is an exam tomorrow. Therefore, I plan to study tonight",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A。そこで B。",
       "sentence": "このレストランは混んでいます。そこで別の場所でランチを食べましょう。",
       "translation": "This restaurant is crowded. Therefore, let's eat lunch at a different place.",
-      "translationEn": "This restaurant is crowded. Therefore, let's eat lunch at a different place.",
+      "translationEn": "This restaurant is crowded. Therefore, lets eat lunch at a different place",
       "romaji": "Kono resutoran wa kondeimasu. Soko de betsu no basho de ranchi wo tabemashou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This restaurant is crowded. Therefore, lets eat lunch at a different place",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A。そこで B。",
       "sentence": "彼女はアレルギーがある。そこで彼女のために別の料理を作ります。",
       "translation": "She has an allergy. Therefore, I'll cook a different dish for her.",
-      "translationEn": "She has an allergy. Therefore, I'll cook a different dish for her.",
+      "translationEn": "She has an allergy. Therefore, Ill cook a different dish for her",
       "romaji": "Kanojo wa arerugii ga aru. Soko de kanojo no tame ni betsu no ryouri wo tsukurimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She has an allergy. Therefore, Ill cook a different dish for her",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A。そこで B。",
       "sentence": "傘を持っていない。そこで雨が止むまで待ちます。",
       "translation": "I don't have an umbrella. Therefore, I'll wait until the rain stops.",
-      "translationEn": "I don't have an umbrella. Therefore, I'll wait until the rain stops.",
+      "translationEn": "I dont have an umbrella. Therefore, Ill wait until the rain stops",
       "romaji": "Kasa wo motte inai. Soko de ame ga yamu made machimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I dont have an umbrella. Therefore, Ill wait until the rain stops",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A。それがB。",
       "sentence": "彼は勉強ができる。それが天才というものだ。",
       "translation": "He can study well. That's what you call a genius.",
-      "translationEn": "He can study well. That's what you call a genius.",
+      "translationEn": "He can study well. Thats what you call a genius",
       "romaji": "Kare wa benkyou ga dekiru. Sore ga tensai to iu mono da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He can study well. Thats what you call a genius",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A。それがB。",
       "sentence": "美味しい料理を作る。それが私の趣味なんです。",
       "translation": "I make delicious food. That's my hobby.",
-      "translationEn": "I make delicious food. That's my hobby.",
+      "translationEn": "I make delicious food. Thats my hobby",
       "romaji": "Oishii ryouri wo tsukuru. Sore ga watashi no shumi nan desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I make delicious food. Thats my hobby",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A。それがB。",
       "sentence": "彼女は私を助けてくれる。それが友達というものだ。",
       "translation": "She helps me. That's what a friend is.",
-      "translationEn": "She helps me. That's what a friend is.",
+      "translationEn": "She helps me. Thats what a friend is",
       "romaji": "Kanojo wa watashi wo tasukete kureru. Sore ga tomodachi to iu mono da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She helps me. Thats what a friend is",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A。それがB。",
       "sentence": "一人で長い旅をする。それが自由というものだ。",
       "translation": "Traveling alone for a long time. That's what freedom is.",
-      "translationEn": "Traveling alone for a long time. That's what freedom is.",
+      "translationEn": "Traveling alone for a long time. Thats what freedom is",
       "romaji": "Hitori de nagai tabi wo suru. Sore ga jiyuu to iu mono da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Traveling alone for a long time. Thats what freedom is",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A。それで B。",
       "sentence": "昨日は雨が降っていた。それで公園に行かなかった。",
       "translation": "It was raining yesterday. So, I didn't go to the park.",
-      "translationEn": "It was raining yesterday. So, I didn't go to the park.",
+      "translationEn": "It was raining yesterday. So, I didnt go to the park",
       "romaji": "Kinou wa ame ga futte ita. Sore de kouen ni ikanakatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: It was raining yesterday. So, I didnt go to the park",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A。それで B。",
       "sentence": "試験に落ちた。それで再試験を受けなければならない。",
       "translation": "I failed the exam. So, I have to take a re-exam.",
-      "translationEn": "I failed the exam. So, I have to take a re-exam.",
+      "translationEn": "I failed the exam. So, I have to take a re-exam",
       "romaji": "Shiken ni ochita. Sore de sai shiken wo ukenakereba naranai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I failed the exam. So, I have to take a re-exam",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A。それで B。",
       "sentence": "部屋が寒かった。それで暖房をつけた。",
       "translation": "The room was cold. So, I turned on the heater.",
-      "translationEn": "The room was cold. So, I turned on the heater.",
+      "translationEn": "The room was cold. So, I turned on the heater",
       "romaji": "Heya ga samukatta. Sore de danbou wo tsuketa.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The room was cold. So, I turned on the heater",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A。それで B。",
       "sentence": "今日は休みだ。それで映画を見に行く。",
       "translation": "Today is a holiday. So, I'm going to watch a movie.",
-      "translationEn": "Today is a holiday. So, I'm going to watch a movie.",
+      "translationEn": "Today is a holiday. So, Im going to watch a movie",
       "romaji": "Kyou wa yasumi da. Sore de eiga wo mi ni iku.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Today is a holiday. So, Im going to watch a movie",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A。それでも B。",
       "sentence": "今日は日曜日です。それでも、仕事に行かなければなりません。",
       "translation": "Today is Sunday. Nevertheless, I have to go to work.",
-      "translationEn": "Today is Sunday. Nevertheless, I have to go to work.",
+      "translationEn": "Today is Sunday. Nevertheless, I have to go to work",
       "romaji": "Kyou wa nichiyoubi desu. Sore demo, shigoto ni ikanakereba narimasen.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Today is Sunday. Nevertheless, I have to go to work",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A。それでも B。",
       "sentence": "彼は若いです。それでも、経験が豊富です。",
       "translation": "He is young. Even so, he has a lot of experience.",
-      "translationEn": "He is young. Even so, he has a lot of experience.",
+      "translationEn": "He is young. Even so, he has a lot of experience",
       "romaji": "Kare wa wakai desu. Sore demo, keiken ga houfu desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He is young. Even so, he has a lot of experience",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A。それでも B。",
       "sentence": "雨が降っています。それでも、散歩に行きたいです。",
       "translation": "It's raining. Still, I want to go for a walk.",
-      "translationEn": "It's raining. Still, I want to go for a walk.",
+      "translationEn": "Its raining. Still, I want to go for a walk",
       "romaji": "Ame ga futteimasu. Sore demo, sanpo ni ikitai desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its raining. Still, I want to go for a walk",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A。それでも B。",
       "sentence": "試験の結果が悪かったです。それでも、諦めません。",
       "translation": "The exam results were bad. But I won't give up.",
-      "translationEn": "The exam results were bad. But I won't give up.",
+      "translationEn": "The exam results were bad. But I wont give up",
       "romaji": "Shiken no kekka ga warukatta desu. Sore demo, akiramenai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The exam results were bad. But I wont give up",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A。それなのに B。",
       "sentence": "彼は頭がいい。それなのに、試験に落ちた。",
       "translation": "He is smart. Despite that, he failed the exam.",
-      "translationEn": "He is smart. Despite that, he failed the exam.",
+      "translationEn": "He is smart. Despite that, he failed the exam",
       "romaji": "Kare wa atama ga ii. Sore nanoni, shiken ni ochita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He is smart. Despite that, he failed the exam",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A。それなのに B。",
       "sentence": "私は早く起きた。それなのに、バスに遅れた。",
       "translation": "I woke up early. Even so, I was late for the bus.",
-      "translationEn": "I woke up early. Even so, I was late for the bus.",
+      "translationEn": "I woke up early. Even so, I was late for the bus",
       "romaji": "Watashi wa hayaku okita. Sore nanoni, basu ni okureta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I woke up early. Even so, I was late for the bus",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A。それなのに B。",
       "sentence": "昨日は晴れていた。それなのに、彼は傘を持っていた。",
       "translation": "It was sunny yesterday. Despite that, he had an umbrella.",
-      "translationEn": "It was sunny yesterday. Despite that, he had an umbrella.",
+      "translationEn": "It was sunny yesterday. Despite that, he had an umbrella",
       "romaji": "Kinou wa harete ita. Sore nanoni, kare wa kasa wo motte ita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: It was sunny yesterday. Despite that, he had an umbrella",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A。それなのに B。",
       "sentence": "彼女は運動が苦手だ。それなのに、マラソンを走ることにした。",
       "translation": "She is not good at sports. Nevertheless, she decided to run a marathon.",
-      "translationEn": "She is not good at sports. Nevertheless, she decided to run a marathon.",
+      "translationEn": "She is not good at sports. Nevertheless, she decided to run a marathon",
       "romaji": "Kanojo wa undou ga nigate da. Sore nanoni, marason wo hashiru koto ni shita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She is not good at sports. Nevertheless, she decided to run a marathon",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A。それなら B。",
       "sentence": "試験が近い。それなら、もっと勉強しなければならない。",
       "translation": "The exam is coming soon. If that's the case, I must study more.",
-      "translationEn": "The exam is coming soon. If that's the case, I must study more.",
+      "translationEn": "The exam is coming soon. If thats the case, I must study more",
       "romaji": "Shiken ga chikai. Sore nara, motto benkyou shinakereba naranai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The exam is coming soon. If thats the case, I must study more",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A。それなら B。",
       "sentence": "明日は雨が降るだろう。それなら、傘を持って行こう。",
       "translation": "It will probably rain tomorrow. In that case, let's bring an umbrella.",
-      "translationEn": "It will probably rain tomorrow. In that case, let's bring an umbrella.",
+      "translationEn": "It will probably rain tomorrow. In that case, lets bring an umbrella",
       "romaji": "Ashita wa ame ga furudarou. Sore nara, kasa wo motte ikou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: It will probably rain tomorrow. In that case, lets bring an umbrella",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A。それなら B。",
       "sentence": "彼らはもう帰った。それなら、私も帰ろう。",
       "translation": "They have already left. If that's the case, I'll go home too.",
-      "translationEn": "They have already left. If that's the case, I'll go home too.",
+      "translationEn": "They have already left. If thats the case, Ill go home too",
       "romaji": "Karera wa mou kaetta. Sore nara, watashi mo kaerou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: They have already left. If thats the case, Ill go home too",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A。それなら B。",
       "sentence": "あのレストランは予約がいっぱいだ。それなら、別の場所を探そう。",
       "translation": "Reservations at that restaurant are full. In that case, let's find another place.",
-      "translationEn": "Reservations at that restaurant are full. In that case, let's find another place.",
+      "translationEn": "Reservations at that restaurant are full. In that case, lets find another place",
       "romaji": "Ano resutoran wa yoyaku ga ippai da. Sore nara, betsu no basho wo sagasou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Reservations at that restaurant are full. In that case, lets find another place",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A それはそうと B。",
       "sentence": "それはそうと、今日の天気はいいですね。",
       "translation": "By the way, the weather is nice today, isn't it?",
-      "translationEn": "By the way, the weather is nice today, isn't it?",
+      "translationEn": "By the way, the weather is nice today, isnt it?",
       "romaji": "Sore wa sou to, kyou no tenki wa ii desu ne.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: By the way, the weather is nice today, isnt it?",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A それはそうと B。",
       "sentence": "映画は面白かったです。それはそうと、この店のラーメンはおいしいですよ。",
       "translation": "The movie was interesting. Speaking of which, this restaurant's ramen is delicious.",
-      "translationEn": "The movie was interesting. Speaking of which, this restaurant's ramen is delicious.",
+      "translationEn": "The movie was interesting. Speaking of which, this restaurants ramen is delicious",
       "romaji": "Eiga wa omoshirokatta desu. Sore wa sou to, kono mise no raamen wa oishii desu yo.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The movie was interesting. Speaking of which, this restaurants ramen is delicious",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A それはそうと B。",
       "sentence": "明日から夏休みですね。それはそうと、新しいカフェがオープンしたみたいです。",
       "translation": "Summer vacation starts tomorrow, huh? By the way, it seems a new cafe has opened.",
-      "translationEn": "Summer vacation starts tomorrow, huh? By the way, it seems a new cafe has opened.",
+      "translationEn": "Summer vacation starts tomorrow, huh? By the way, it seems a new cafe has opened",
       "romaji": "Ashita kara natsu yasumi desu ne. Sore wa sou to, atarashii kafe ga oopun shita mitai desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Summer vacation starts tomorrow, huh? By the way, it seems a new cafe has opened",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A それはそうと B。",
       "sentence": "昨日の試験は難しかった。それはそうと、週末にパーティーがあるのを知ってますか？",
       "translation": "Yesterday's exam was difficult. Speaking of which, do you know there's a party this weekend?",
-      "translationEn": "Yesterday's exam was difficult. Speaking of which, do you know there's a party this weekend?",
+      "translationEn": "Yesterdays exam was difficult. Speaking of which, do you know theres a party this weekend?",
       "romaji": "Kinou no shiken wa muzukashikatta. Sore wa sou to, shuumatsu ni paatii ga aru no wo shitte masu ka?",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "A。だが B。",
-      "sentence": "このレストランは値段が高い。だが、味はとてもいい。",
-      "translation": "This restaurant is expensive. But, the taste is very good.",
-      "translationEn": "This restaurant is expensive. But, the taste is very good.",
-      "romaji": "Kono resutoran wa nedan ga takai. Daga, aji wa totemo ii.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "A。だが B。",
-      "sentence": "彼は疲れている。だが、仕事を終わらせるまで休まない。",
-      "translation": "He is tired. However, he will not rest until he finishes work.",
-      "translationEn": "He is tired. However, he will not rest until he finishes work.",
-      "romaji": "Kare wa tsukarete iru. Daga, shigoto o owaraseru made yasumanai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "A。だが B。",
-      "sentence": "昨日は寒かった。だが、今日は暖かい。",
-      "translation": "Yesterday was cold. But, today is warm.",
-      "translationEn": "Yesterday was cold. But, today is warm.",
-      "romaji": "Kinou wa samukatta. Daga, kyou wa atatakai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "A。だが B。",
-      "sentence": "彼女は外見は地味だ。だが、性格が素晴らしい。",
-      "translation": "Her appearance is plain. However, she has a wonderful personality.",
-      "translationEn": "Her appearance is plain. However, she has a wonderful personality.",
-      "romaji": "Kanojo wa gaiken wa jimi da. Daga, seikaku ga subarashii.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Yesterdays exam was difficult. Speaking of which, do you know theres a party this weekend?",
+      "translationViSource": "internal-en-example-draft"
     }
   ]
 }

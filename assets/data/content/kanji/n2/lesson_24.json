@@ -1,330 +1,415 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N2",
   "lessonId": 24,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n2_l24_k001",
+      "kanjiId": "n2_jlpt_vocab_k185",
       "lessonId": 24,
       "level": "N2",
-      "character": "匰",
-      "strokeCount": 10,
+      "character": "母",
+      "strokeCount": 5,
       "labels": {
-        "hanViet": "HAN 185",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "匰 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Mẫu",
+        "meaningVi": "(hon) aunt",
+        "meaningViDisplay": "母 ((hon) aunt)",
+        "meaningEn": "(hon) aunt"
       },
       "readings": {
-        "onyomi": [
-          "on185"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun185"
+          "おばさん"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 匰 qua van canh N2.",
-        "en": "Remember 匰 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 伯母さん ((hon) aunt).",
+        "en": "Appears in JLPT N2 vocabulary: 伯母さん ((hon) aunt)."
       },
       "decomposition": {
-        "hanViet": "HAN 185",
-        "structure": "standalone",
+        "hanViet": "Mẫu",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 185",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Mau",
+        "meaningViNoAccent": "(hon) aunt",
+        "meaningEnNoAccent": "(hon) aunt"
       },
+      "examples": [
+        {
+          "word": "伯母さん",
+          "reading": "おばさん",
+          "meaning": "(hon) aunt"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l24_k002",
+      "kanjiId": "n2_jlpt_vocab_k186",
       "lessonId": 24,
       "level": "N2",
-      "character": "十",
-      "strokeCount": 11,
+      "character": "参",
+      "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 186",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "十 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "worship, shrine visit",
+        "meaningViDisplay": "参 (worship, shrine visit)",
+        "meaningEn": "worship, shrine visit"
       },
       "readings": {
-        "onyomi": [
-          "on186"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun186"
+          "おまいり"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 十 qua van canh N2.",
-        "en": "Remember 十 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: お参り (worship, shrine visit).",
+        "en": "Appears in JLPT N2 vocabulary: お参り (worship, shrine visit)."
       },
       "decomposition": {
-        "hanViet": "HAN 186",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 186",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "worship, shrine visit",
+        "meaningEnNoAccent": "worship, shrine visit"
       },
+      "examples": [
+        {
+          "word": "お参り",
+          "reading": "おまいり",
+          "meaning": "worship, shrine visit"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l24_k003",
+      "kanjiId": "n2_jlpt_vocab_k187",
       "lessonId": 24,
       "level": "N2",
-      "character": "卒",
-      "strokeCount": 12,
+      "character": "思",
+      "strokeCount": 9,
       "labels": {
-        "hanViet": "HAN 187",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "卒 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Tư",
+        "meaningVi": "unexpected, casual",
+        "meaningViDisplay": "思 (unexpected, casual)",
+        "meaningEn": "unexpected, casual"
       },
       "readings": {
-        "onyomi": [
-          "on187"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun187"
+          "おもいがけない"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 卒 qua van canh N2.",
-        "en": "Remember 卒 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 思い掛けない (unexpected, casual).",
+        "en": "Appears in JLPT N2 vocabulary: 思い掛けない (unexpected, casual)."
       },
       "decomposition": {
-        "hanViet": "HAN 187",
-        "structure": "standalone",
+        "hanViet": "Tư",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 187",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Tu",
+        "meaningViNoAccent": "unexpected, casual",
+        "meaningEnNoAccent": "unexpected, casual"
       },
+      "examples": [
+        {
+          "word": "思い掛けない",
+          "reading": "おもいがけない",
+          "meaning": "unexpected, casual"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l24_k004",
+      "kanjiId": "n2_jlpt_vocab_k188",
       "lessonId": 24,
       "level": "N2",
-      "character": "卣",
-      "strokeCount": 13,
+      "character": "込",
+      "strokeCount": 5,
       "labels": {
-        "hanViet": "HAN 188",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "卣 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "to be under impression that, to be convinced that",
+        "meaningViDisplay": "込 (to be under impression that, to be convinced that)",
+        "meaningEn": "to be under impression that, to be convinced that"
       },
       "readings": {
-        "onyomi": [
-          "on188"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun188"
+          "おもいこむ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 卣 qua van canh N2.",
-        "en": "Remember 卣 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 思い込む (to be under impression that, to be convinced that).",
+        "en": "Appears in JLPT N2 vocabulary: 思い込む (to be under impression that, to be convinced that)."
       },
       "decomposition": {
-        "hanViet": "HAN 188",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 188",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "to be under impression that, to be convinced that",
+        "meaningEnNoAccent": "to be under impression that, to be convinced that"
       },
+      "examples": [
+        {
+          "word": "思い込む",
+          "reading": "おもいこむ",
+          "meaning": "to be under impression that, to be convinced that"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l24_k005",
+      "kanjiId": "n2_jlpt_vocab_k189",
       "lessonId": 24,
       "level": "N2",
-      "character": "却",
-      "strokeCount": 14,
+      "character": "重",
+      "strokeCount": 9,
       "labels": {
-        "hanViet": "HAN 189",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "却 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Trọng",
+        "meaningVi": "heavy, massive, serious",
+        "meaningViDisplay": "重 (heavy, massive, serious)",
+        "meaningEn": "heavy, massive, serious"
       },
       "readings": {
-        "onyomi": [
-          "on189"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun189"
+          "おもたい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 却 qua van canh N2.",
-        "en": "Remember 却 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 重たい (heavy, massive, serious).",
+        "en": "Appears in JLPT N2 vocabulary: 重たい (heavy, massive, serious)."
       },
       "decomposition": {
-        "hanViet": "HAN 189",
-        "structure": "standalone",
+        "hanViet": "Trọng",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 189",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Trong",
+        "meaningViNoAccent": "heavy, massive, serious",
+        "meaningEnNoAccent": "heavy, massive, serious"
       },
+      "examples": [
+        {
+          "word": "重たい",
+          "reading": "おもたい",
+          "meaning": "heavy, massive, serious"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l24_k006",
+      "kanjiId": "n2_jlpt_vocab_k190",
       "lessonId": 24,
       "level": "N2",
-      "character": "厅",
-      "strokeCount": 15,
-      "labels": {
-        "hanViet": "HAN 190",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "厅 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on190"
-        ],
-        "kunyomi": [
-          "kun190"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 厅 qua van canh N2.",
-        "en": "Remember 厅 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 190",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 190",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l24_k007",
-      "lessonId": 24,
-      "level": "N2",
-      "character": "厖",
+      "character": "親",
       "strokeCount": 16,
       "labels": {
-        "hanViet": "HAN 191",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "厖 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Thân",
+        "meaningVi": "thumb",
+        "meaningViDisplay": "親 (thumb)",
+        "meaningEn": "thumb"
       },
       "readings": {
-        "onyomi": [
-          "on191"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun191"
+          "おやゆび"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 厖 qua van canh N2.",
-        "en": "Remember 厖 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 親指 (thumb).",
+        "en": "Appears in JLPT N2 vocabulary: 親指 (thumb)."
       },
       "decomposition": {
-        "hanViet": "HAN 191",
-        "structure": "standalone",
+        "hanViet": "Thân",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 191",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Than",
+        "meaningViNoAccent": "thumb",
+        "meaningEnNoAccent": "thumb"
       },
+      "examples": [
+        {
+          "word": "親指",
+          "reading": "おやゆび",
+          "meaning": "thumb"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l24_k008",
+      "kanjiId": "n2_jlpt_vocab_k191",
       "lessonId": 24,
       "level": "N2",
-      "character": "厧",
-      "strokeCount": 17,
+      "character": "指",
+      "strokeCount": 9,
       "labels": {
-        "hanViet": "HAN 192",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "厧 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Chỉ",
+        "meaningVi": "thumb",
+        "meaningViDisplay": "指 (thumb)",
+        "meaningEn": "thumb"
       },
       "readings": {
-        "onyomi": [
-          "on192"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun192"
+          "おやゆび"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 厧 qua van canh N2.",
-        "en": "Remember 厧 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 親指 (thumb).",
+        "en": "Appears in JLPT N2 vocabulary: 親指 (thumb)."
       },
       "decomposition": {
-        "hanViet": "HAN 192",
-        "structure": "standalone",
+        "hanViet": "Chỉ",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 192",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Chi",
+        "meaningViNoAccent": "thumb",
+        "meaningEnNoAccent": "thumb"
       },
+      "examples": [
+        {
+          "word": "親指",
+          "reading": "おやゆび",
+          "meaning": "thumb"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k192",
+      "lessonId": 24,
+      "level": "N2",
+      "character": "卸",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "to sell wholesale, grated (vegetables)",
+        "meaningViDisplay": "卸 (to sell wholesale, grated (vegetables))",
+        "meaningEn": "to sell wholesale, grated (vegetables)"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "おろす"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 卸す (to sell wholesale, grated (vegetables)).",
+        "en": "Appears in JLPT N2 vocabulary: 卸す (to sell wholesale, grated (vegetables))."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "to sell wholesale, grated (vegetables)",
+        "meaningEnNoAccent": "to sell wholesale, grated (vegetables)"
+      },
+      "examples": [
+        {
+          "word": "卸す",
+          "reading": "おろす",
+          "meaning": "to sell wholesale, grated (vegetables)"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

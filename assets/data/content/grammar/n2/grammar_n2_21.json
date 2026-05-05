@@ -1,90 +1,154 @@
 [
   {
     "lessonId": 21,
-    "title": "～よりほかない",
-    "titleEn": "Express that there is no other choice; 'have no choice but', 'cannot do anything but'.",
-    "structure": "Verb-dictionary form + よりほかない",
-    "structureEn": "Verb-dictionary form + よりほかない",
-    "explanation": "Express that there is no other choice; 'have no choice but', 'cannot do anything but'. (Ngu?n: Hanabira; b?n d?ch Vi?t c?n bi?n t?p.)",
-    "explanationEn": "The ～よりほかない grammar point is used to express that there is no other choice or alternative in a given situation. It can be translated as 'have no choice but to...', 'nothing but...', or 'cannot do anything but...'.",
+    "title": "～ものだから",
+    "titleEn": "Express the reason or cause for something; because, since, due to",
+    "structure": "Verb-plain + ものだから, い-Adjective + ものだから, な-Adjective + なものだから, Noun + なものだから",
+    "structureEn": "Verb-plain + ものだから, い-Adjective + ものだから, な-Adjective + なものだから, Noun + なものだから",
+    "explanation": "Mẫu ～ものだから dùng để diễn tả: sắc thái/cách dùng cần đối chiếu thêm; bởi vì; vì; do; do; bởi vì. Cấu trúc: Verb-plain + ものだから, い-Adjective + ものだから, な-Adjective + なものだから, Noun + なものだから. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationEn": "「～ものだから」 is used to explain a reason or cause from the speaker’s point of view. It can be translated as because, since, or due to. It often carries the nuance of you see, thats why",
     "level": "N2",
-    "tags": "source-hanabira,n2-grammar-import,needs-vi-editorial"
+    "tags": "source-hanabira,n2-grammar-import,machine-translated-vi,vi-editorial-approved",
+    "explanationViDraft": "Mẫu ～ものだから dùng để diễn tả: sắc thái/cách dùng cần đối chiếu thêm; bởi vì; vì; do; do; bởi vì. Cấu trúc: Verb-plain + ものだから, い-Adjective + ものだから, な-Adjective + なものだから, Noun + なものだから. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationViSource": "internal-en-grammar-draft",
+    "editorialSources": [
+      "Hanabira grammar JSON (source import)",
+      "JLPT Vietnam / JLPT Sensei Vietnam (manual QA reference only)",
+      "JLPT Global / JLPT Sensei / Practice Japanese (manual QA reference only)"
+    ],
+    "explanationViStatus": "approved-by-user"
   },
   {
     "lessonId": 21,
-    "title": "～わけがない",
-    "titleEn": "Expresses 'there’s no way' or 'it’s impossible', indicating a high degree of certainty.",
-    "structure": "Verb-casual + わけがない, い-Adjective + わけがない, な-Adjective + なわけがない, Noun + のわけがない",
-    "structureEn": "Verb-casual + わけがない, い-Adjective + わけがない, な-Adjective + なわけがない, Noun + のわけがない",
-    "explanation": "Expresses 'there’s no way' or 'it’s impossible', indicating a high degree of certainty. (Ngu?n: Hanabira; b?n d?ch Vi?t c?n bi?n t?p.)",
-    "explanationEn": "The ～わけがない grammar point is used to express that something is highly unlikely or impossible. It can be translated as 'there's no way' or 'it's impossible'.",
+    "title": "～ものではない",
+    "titleEn": "Expresses a strong negative suggestion or prohibition: should not, must not",
+    "structure": "Verb-dictionary form + ものではない",
+    "structureEn": "Verb-dictionary form + ものではない",
+    "explanation": "Mẫu ～ものではない dùng để diễn tả: diễn tả sắc thái/cách dùng cần đối chiếu thêm; sắc thái/cách dùng cần đối chiếu thêm. Cấu trúc: Verb-dictionary form + ものではない. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationEn": "「～ものではない」 is used to indicate that something should not or must not be done. It often appears in written or formal contexts, meaning it is not proper to... or you shouldn’t",
     "level": "N2",
-    "tags": "source-hanabira,n2-grammar-import,needs-vi-editorial"
+    "tags": "source-hanabira,n2-grammar-import,machine-translated-vi,vi-editorial-approved",
+    "explanationViDraft": "Mẫu ～ものではない dùng để diễn tả: diễn tả sắc thái/cách dùng cần đối chiếu thêm; sắc thái/cách dùng cần đối chiếu thêm. Cấu trúc: Verb-dictionary form + ものではない. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationViSource": "internal-en-grammar-draft",
+    "editorialSources": [
+      "Hanabira grammar JSON (source import)",
+      "JLPT Vietnam / JLPT Sensei Vietnam (manual QA reference only)",
+      "JLPT Global / JLPT Sensei / Practice Japanese (manual QA reference only)"
+    ],
+    "explanationViStatus": "approved-by-user"
   },
   {
     "lessonId": 21,
-    "title": "～わけだ",
-    "titleEn": "Express a logical conclusion or reason; 'it means', 'no wonder', 'the reason is'.",
-    "structure": "Verb-casual + わけだ, い-Adjective + わけだ, な-Adjective + なわけだ, Noun + のわけだ",
-    "structureEn": "Verb-casual + わけだ, い-Adjective + わけだ, な-Adjective + なわけだ, Noun + のわけだ",
-    "explanation": "Express a logical conclusion or reason; 'it means', 'no wonder', 'the reason is'. (Ngu?n: Hanabira; b?n d?ch Vi?t c?n bi?n t?p.)",
-    "explanationEn": "The ～わけだ grammar point is used to express a logical conclusion or reason. It can be translated as 'it means...', 'no wonder...', or 'that explains why...'.",
+    "title": "～ものなら",
+    "titleEn": "Expresses a conditional wish or unlikely possibility; if only, if it were possible",
+    "structure": "Verb-(potential/plain) form + ものなら, etc",
+    "structureEn": "Verb-(potential/plain) form + ものなら, etc",
+    "explanation": "Mẫu ～ものなら dùng để diễn tả: diễn tả sắc thái/cách dùng cần đối chiếu thêm; sắc thái/cách dùng cần đối chiếu thêm. Cấu trúc: Verb-(potential/plain) form + ものなら, etc. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationEn": "「～ものなら」 is used when expressing a strong wish under a hypothetical or difficult condition. It often implies that fulfilling this condition is unlikely or very hard, but if only it could happen, then",
     "level": "N2",
-    "tags": "source-hanabira,n2-grammar-import,needs-vi-editorial"
+    "tags": "source-hanabira,n2-grammar-import,machine-translated-vi,vi-editorial-approved",
+    "explanationViDraft": "Mẫu ～ものなら dùng để diễn tả: diễn tả sắc thái/cách dùng cần đối chiếu thêm; sắc thái/cách dùng cần đối chiếu thêm. Cấu trúc: Verb-(potential/plain) form + ものなら, etc. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationViSource": "internal-en-grammar-draft",
+    "editorialSources": [
+      "Hanabira grammar JSON (source import)",
+      "JLPT Vietnam / JLPT Sensei Vietnam (manual QA reference only)",
+      "JLPT Global / JLPT Sensei / Practice Japanese (manual QA reference only)"
+    ],
+    "explanationViStatus": "approved-by-user"
   },
   {
     "lessonId": 21,
-    "title": "～わけではない",
-    "titleEn": "Not necessarily; it doesn't mean that ~.",
-    "structure": "Verb-plain + わけではない, い-Adjective + わけではない, な-Adjective + だわけではない, Noun + だわけではない",
-    "structureEn": "Verb-plain + わけではない, い-Adjective + わけではない, な-Adjective + だわけではない, Noun + だわけではない",
-    "explanation": "Not necessarily; it doesn't mean that ~. (Ngu?n: Hanabira; b?n d?ch Vi?t c?n bi?n t?p.)",
-    "explanationEn": "The ～わけではない grammar point is used to express that something is not necessarily the case or 'it doesn’t mean that...' It negates a broad assumption or generalization.",
+    "title": "～ものの、～",
+    "titleEn": "Indicates contrast or contradiction between two clauses; although, but",
+    "structure": "Verb-casual + ものの, い-Adjective + ものの, な-Adjective + なものの, Noun + であるものの",
+    "structureEn": "Verb-casual + ものの, い-Adjective + ものの, な-Adjective + なものの, Noun + であるものの",
+    "explanation": "Mẫu ～ものの、～ dùng để diễn tả: biểu thị sắc thái/cách dùng cần đối chiếu thêm; sắc thái/cách dùng cần đối chiếu thêm; mặc dù. Cấu trúc: Verb-casual + ものの, い-Adjective + ものの, な-Adjective + なものの, Noun + であるものの. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationEn": "「～ものの」 is used to connect two parts of a sentence where the first part is true, yet the second part shows a contrasting or unexpected outcome. It can be translated as although, even though, or but still",
     "level": "N2",
-    "tags": "source-hanabira,n2-grammar-import,needs-vi-editorial"
+    "tags": "source-hanabira,n2-grammar-import,machine-translated-vi,vi-editorial-approved",
+    "explanationViDraft": "Mẫu ～ものの、～ dùng để diễn tả: biểu thị sắc thái/cách dùng cần đối chiếu thêm; sắc thái/cách dùng cần đối chiếu thêm; mặc dù. Cấu trúc: Verb-casual + ものの, い-Adjective + ものの, な-Adjective + なものの, Noun + であるものの. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationViSource": "internal-en-grammar-draft",
+    "editorialSources": [
+      "Hanabira grammar JSON (source import)",
+      "JLPT Vietnam / JLPT Sensei Vietnam (manual QA reference only)",
+      "JLPT Global / JLPT Sensei / Practice Japanese (manual QA reference only)"
+    ],
+    "explanationViStatus": "approved-by-user"
   },
   {
     "lessonId": 21,
-    "title": "～わけにはいかない",
-    "titleEn": "Expresses that one cannot (or must not) do something due to responsibility, social pressure, etc.",
-    "structure": "Verb-dictionary form + わけにはいかない",
-    "structureEn": "Verb-dictionary form + わけにはいかない",
-    "explanation": "Expresses that one cannot (or must not) do something due to responsibility, social pressure, etc. (Ngu?n: Hanabira; b?n d?ch Vi?t c?n bi?n t?p.)",
-    "explanationEn": "The ～わけにはいかない grammar point is used to express that you cannot afford to do something or are not allowed to do it. It often implies a sense of responsibility, moral/social obligation, or external pressure that prevents you from doing it.",
+    "title": "～も～ば～も～",
+    "titleEn": "Lists multiple attributes or actions applying to the same subject: both...and..., not only...but also",
+    "structure": "Noun/Verb/Adjective + も + (Verb/Adjective in ば-form) + も + (Verb/Adjective)",
+    "structureEn": "Noun/Verb/Adjective + も + (Verb/Adjective in ば-form) + も + (Verb/Adjective)",
+    "explanation": "Mẫu ～も～ば～も～ dùng để diễn tả: sắc thái/cách dùng cần đối chiếu thêm. Cấu trúc: Noun/Verb/Adjective + も + (Verb/Adjective in ば-form) + も + (Verb/Adjective). Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationEn": "「～も～ば～も～」 is used when describing multiple characteristics or actions. It often appears with the conditional form (ば) plus も, indicating that A is true, and also B is true. For example, He can do X, and he can also do Y. Its different from ～ば～ほど, which means the more... the more",
     "level": "N2",
-    "tags": "source-hanabira,n2-grammar-import,needs-vi-editorial"
+    "tags": "source-hanabira,n2-grammar-import,machine-translated-vi,vi-editorial-approved",
+    "explanationViDraft": "Mẫu ～も～ば～も～ dùng để diễn tả: sắc thái/cách dùng cần đối chiếu thêm. Cấu trúc: Noun/Verb/Adjective + も + (Verb/Adjective in ば-form) + も + (Verb/Adjective). Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationViSource": "internal-en-grammar-draft",
+    "editorialSources": [
+      "Hanabira grammar JSON (source import)",
+      "JLPT Vietnam / JLPT Sensei Vietnam (manual QA reference only)",
+      "JLPT Global / JLPT Sensei / Practice Japanese (manual QA reference only)"
+    ],
+    "explanationViStatus": "approved-by-user"
   },
   {
     "lessonId": 21,
-    "title": "～をきっかけに",
-    "titleEn": "Indicates that something serves as a trigger or starting point for another action/event.",
-    "structure": "Noun + をきっかけに",
-    "structureEn": "Noun + をきっかけに",
-    "explanation": "Indicates that something serves as a trigger or starting point for another action/event. (Ngu?n: Hanabira; b?n d?ch Vi?t c?n bi?n t?p.)",
-    "explanationEn": "「～をきっかけに」 is used with a noun to show that an event, thing, or situation became a trigger or motive that led to a new development or action. It translates as 'taking ... as an opportunity,' 'due to ...,' or 'inspired by ...'.",
+    "title": "～も同然だ",
+    "titleEn": "Indicates as good as, virtually, or practically the same as something",
+    "structure": "Noun + (も)同然だ, Verb-casual + (も)同然だ, etc",
+    "structureEn": "Noun + (も)同然だ, Verb-casual + (も)同然だ, etc",
+    "explanation": "Mẫu ～も同然だ dùng để diễn tả: biểu thị sắc thái/cách dùng cần đối chiếu thêm; sắc thái/cách dùng cần đối chiếu thêm. Cấu trúc: Noun + (も)同然だ, Verb-casual + (も)同然だ, etc. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationEn": "「～も同然だ」 means something is practically the same as (X). It emphasizes that although it may not be literally identical, there is hardly any difference in reality",
     "level": "N2",
-    "tags": "source-hanabira,n2-grammar-import,needs-vi-editorial"
+    "tags": "source-hanabira,n2-grammar-import,machine-translated-vi,vi-editorial-approved",
+    "explanationViDraft": "Mẫu ～も同然だ dùng để diễn tả: biểu thị sắc thái/cách dùng cần đối chiếu thêm; sắc thái/cách dùng cần đối chiếu thêm. Cấu trúc: Noun + (も)同然だ, Verb-casual + (も)同然だ, etc. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationViSource": "internal-en-grammar-draft",
+    "editorialSources": [
+      "Hanabira grammar JSON (source import)",
+      "JLPT Vietnam / JLPT Sensei Vietnam (manual QA reference only)",
+      "JLPT Global / JLPT Sensei / Practice Japanese (manual QA reference only)"
+    ],
+    "explanationViStatus": "approved-by-user"
   },
   {
     "lessonId": 21,
-    "title": "～を～として",
-    "titleEn": "Express 'as', 'in the capacity of', or 'taking something as...'.",
-    "structure": "Noun1 + を + Noun2 + として",
-    "structureEn": "Noun1 + を + Noun2 + として",
-    "explanation": "Express 'as', 'in the capacity of', or 'taking something as...'. (Ngu?n: Hanabira; b?n d?ch Vi?t c?n bi?n t?p.)",
-    "explanationEn": "The grammar pattern 「～を～として」 is used with nouns to indicate taking one thing 'as' or 'in the role of' another. It shows how a certain noun is being viewed or utilized.",
+    "title": "～やら～やら",
+    "titleEn": "Expresses various items or actions, things like..., and so on",
+    "structure": "Verb-casual + やら, い-Adjective + やら, な-Adjective + やら, Noun + やら",
+    "structureEn": "Verb-casual + やら, い-Adjective + やら, な-Adjective + やら, Noun + やら",
+    "explanation": "Mẫu ～やら～やら dùng để diễn tả: diễn tả sắc thái/cách dùng cần đối chiếu thêm; sắc thái/cách dùng cần đối chiếu thêm. Cấu trúc: Verb-casual + やら, い-Adjective + やら, な-Adjective + やら, Noun + やら. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationEn": "「～やら～やら」 is used to list multiple things or actions in a somewhat non-exhaustive way. It can be translated as things like A and B or A, B, and so on. The grammar is often Verb-casual + やら, Noun + やら, い-Adjective + やら, etc",
     "level": "N2",
-    "tags": "source-hanabira,n2-grammar-import,needs-vi-editorial"
+    "tags": "source-hanabira,n2-grammar-import,machine-translated-vi,vi-editorial-approved",
+    "explanationViDraft": "Mẫu ～やら～やら dùng để diễn tả: diễn tả sắc thái/cách dùng cần đối chiếu thêm; sắc thái/cách dùng cần đối chiếu thêm. Cấu trúc: Verb-casual + やら, い-Adjective + やら, な-Adjective + やら, Noun + やら. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationViSource": "internal-en-grammar-draft",
+    "editorialSources": [
+      "Hanabira grammar JSON (source import)",
+      "JLPT Vietnam / JLPT Sensei Vietnam (manual QA reference only)",
+      "JLPT Global / JLPT Sensei / Practice Japanese (manual QA reference only)"
+    ],
+    "explanationViStatus": "approved-by-user"
   },
   {
     "lessonId": 21,
-    "title": "～を中心に",
-    "titleEn": "Indicates that something is centered around or focused on a main topic or area.",
-    "structure": "Noun + を中心に",
-    "structureEn": "Noun + を中心に",
-    "explanation": "Indicates that something is centered around or focused on a main topic or area. (Ngu?n: Hanabira; b?n d?ch Vi?t c?n bi?n t?p.)",
-    "explanationEn": "「～を中心に」 is used with nouns to show that an action or situation is mainly or primarily about the specified noun. It can be translated as 'centered on', 'focusing on', or 'with ... as the main focus'.",
+    "title": "～ようがない",
+    "titleEn": "Expresses that there is no way (method) to do something; its impossible to do",
+    "structure": "Verb-ます stem + ようがない",
+    "structureEn": "Verb-ます stem + ようがない",
+    "explanation": "Mẫu ～ようがない dùng để diễn tả: diễn tả sắc thái/cách dùng cần đối chiếu thêm; sắc thái/cách dùng cần đối chiếu thêm. Cấu trúc: Verb-ます stem + ようがない. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationEn": "「～ようがない」 is used with the ます-stem of a verb to indicate that there is no means or method to carry out that action. It conveys the sense that its impossible to do something or that theres absolutely no way to achieve it",
     "level": "N2",
-    "tags": "source-hanabira,n2-grammar-import,needs-vi-editorial"
+    "tags": "source-hanabira,n2-grammar-import,machine-translated-vi,vi-editorial-approved",
+    "explanationViDraft": "Mẫu ～ようがない dùng để diễn tả: diễn tả sắc thái/cách dùng cần đối chiếu thêm; sắc thái/cách dùng cần đối chiếu thêm. Cấu trúc: Verb-ます stem + ようがない. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationViSource": "internal-en-grammar-draft",
+    "editorialSources": [
+      "Hanabira grammar JSON (source import)",
+      "JLPT Vietnam / JLPT Sensei Vietnam (manual QA reference only)",
+      "JLPT Global / JLPT Sensei / Practice Japanese (manual QA reference only)"
+    ],
+    "explanationViStatus": "approved-by-user"
   }
 ]

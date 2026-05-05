@@ -1,330 +1,416 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N2",
   "lessonId": 5,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n2_l05_k001",
+      "kanjiId": "n2_jlpt_vocab_k033",
       "lessonId": 5,
       "level": "N2",
-      "character": "倠",
-      "strokeCount": 14,
-      "labels": {
-        "hanViet": "HAN 33",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "倠 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on33"
-        ],
-        "kunyomi": [
-          "kun33"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 倠 qua van canh N2.",
-        "en": "Remember 倠 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 33",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 33",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l05_k002",
-      "lessonId": 5,
-      "level": "N2",
-      "character": "倱",
-      "strokeCount": 15,
-      "labels": {
-        "hanViet": "HAN 34",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "倱 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on34"
-        ],
-        "kunyomi": [
-          "kun34"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 倱 qua van canh N2.",
-        "en": "Remember 倱 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 34",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 34",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l05_k003",
-      "lessonId": 5,
-      "level": "N2",
-      "character": "偂",
-      "strokeCount": 16,
-      "labels": {
-        "hanViet": "HAN 35",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "偂 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on35"
-        ],
-        "kunyomi": [
-          "kun35"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 偂 qua van canh N2.",
-        "en": "Remember 偂 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 35",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 35",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l05_k004",
-      "lessonId": 5,
-      "level": "N2",
-      "character": "偓",
-      "strokeCount": 17,
-      "labels": {
-        "hanViet": "HAN 36",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "偓 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on36"
-        ],
-        "kunyomi": [
-          "kun36"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 偓 qua van canh N2.",
-        "en": "Remember 偓 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 36",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 36",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l05_k005",
-      "lessonId": 5,
-      "level": "N2",
-      "character": "偤",
+      "character": "争",
       "strokeCount": 6,
       "labels": {
-        "hanViet": "HAN 37",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "偤 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "to dispute, to argue, to be at variance, to compete",
+        "meaningViDisplay": "争 (to dispute, to argue, to be at variance, to compete)",
+        "meaningEn": "to dispute, to argue, to be at variance, to compete"
       },
       "readings": {
-        "onyomi": [
-          "on37"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun37"
+          "あらそう"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 偤 qua van canh N2.",
-        "en": "Remember 偤 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 争う (to dispute, to argue, to be at variance, to compete).",
+        "en": "Appears in JLPT N2 vocabulary: 争う (to dispute, to argue, to be at variance, to compete)."
       },
       "decomposition": {
-        "hanViet": "HAN 37",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 37",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "to dispute, to argue, to be at variance, to compete",
+        "meaningEnNoAccent": "to dispute, to argue, to be at variance, to compete"
       },
+      "examples": [
+        {
+          "word": "争う",
+          "reading": "あらそう",
+          "meaning": "to dispute, to argue, to be at variance, to compete"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l05_k006",
+      "kanjiId": "n2_jlpt_vocab_k034",
       "lessonId": 5,
       "level": "N2",
-      "character": "偵",
+      "character": "改",
       "strokeCount": 7,
       "labels": {
-        "hanViet": "HAN 38",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "偵 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "another time, again, over again, anew, formally",
+        "meaningViDisplay": "改 (another time, again, over again, anew, formally)",
+        "meaningEn": "another time, again, over again, anew, formally"
       },
       "readings": {
-        "onyomi": [
-          "on38"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun38"
+          "あらためて"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 偵 qua van canh N2.",
-        "en": "Remember 偵 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 改めて (another time, again, over again, anew, formally).",
+        "en": "Appears in JLPT N2 vocabulary: 改めて (another time, again, over again, anew, formally)."
       },
       "decomposition": {
-        "hanViet": "HAN 38",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 38",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "another time, again, over again, anew, formally",
+        "meaningEnNoAccent": "another time, again, over again, anew, formally"
       },
+      "examples": [
+        {
+          "word": "改めて",
+          "reading": "あらためて",
+          "meaning": "another time, again, over again, anew, formally"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l05_k007",
+      "kanjiId": "n2_jlpt_vocab_k035",
       "lessonId": 5,
       "level": "N2",
-      "character": "傆",
+      "character": "著",
+      "strokeCount": 11,
+      "labels": {
+        "hanViet": "Trứ",
+        "meaningVi": "to write, to publish",
+        "meaningViDisplay": "著 (to write, to publish)",
+        "meaningEn": "to write, to publish"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あらわす"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 著す (to write, to publish).",
+        "en": "Appears in JLPT N2 vocabulary: 著す (to write, to publish)."
+      },
+      "decomposition": {
+        "hanViet": "Trứ",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Tru",
+        "meaningViNoAccent": "to write, to publish",
+        "meaningEnNoAccent": "to write, to publish"
+      },
+      "examples": [
+        {
+          "word": "著す",
+          "reading": "あらわす",
+          "meaning": "to write, to publish"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k036",
+      "lessonId": 5,
+      "level": "N2",
+      "character": "有",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Hữu",
+        "meaningVi": "grateful, thankful, welcome, appreciated, evoking gratitude",
+        "meaningViDisplay": "有 (grateful, thankful, welcome, appreciated, evoking gratitude)",
+        "meaningEn": "grateful, thankful, welcome, appreciated, evoking gratitude"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "ありがたい"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 有難い (grateful, thankful, welcome, appreciated, evoking gratitude).",
+        "en": "Appears in JLPT N2 vocabulary: 有難い (grateful, thankful, welcome, appreciated, evoking gratitude)."
+      },
+      "decomposition": {
+        "hanViet": "Hữu",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Huu",
+        "meaningViNoAccent": "grateful, thankful, welcome, appreciated, evoking gratitude",
+        "meaningEnNoAccent": "grateful, thankful, welcome, appreciated, evoking gratitude"
+      },
+      "examples": [
+        {
+          "word": "有難い",
+          "reading": "ありがたい",
+          "meaning": "grateful, thankful, welcome, appreciated, evoking gratitude"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k037",
+      "lessonId": 5,
+      "level": "N2",
+      "character": "難",
+      "strokeCount": 19,
+      "labels": {
+        "hanViet": "Nan",
+        "meaningVi": "grateful, thankful, welcome, appreciated, evoking gratitude",
+        "meaningViDisplay": "難 (grateful, thankful, welcome, appreciated, evoking gratitude)",
+        "meaningEn": "grateful, thankful, welcome, appreciated, evoking gratitude"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "ありがたい"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 有難い (grateful, thankful, welcome, appreciated, evoking gratitude).",
+        "en": "Appears in JLPT N2 vocabulary: 有難い (grateful, thankful, welcome, appreciated, evoking gratitude)."
+      },
+      "decomposition": {
+        "hanViet": "Nan",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Nan",
+        "meaningViNoAccent": "grateful, thankful, welcome, appreciated, evoking gratitude",
+        "meaningEnNoAccent": "grateful, thankful, welcome, appreciated, evoking gratitude"
+      },
+      "examples": [
+        {
+          "word": "有難い",
+          "reading": "ありがたい",
+          "meaning": "grateful, thankful, welcome, appreciated, evoking gratitude"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k038",
+      "lessonId": 5,
+      "level": "N2",
+      "character": "在",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Tại",
+        "meaningVi": "to live, to be",
+        "meaningViDisplay": "在 (to live, to be)",
+        "meaningEn": "to live, to be"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "ある"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 在る (to live, to be).",
+        "en": "Appears in JLPT N2 vocabulary: 在る (to live, to be)."
+      },
+      "decomposition": {
+        "hanViet": "Tại",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Tai",
+        "meaningViNoAccent": "to live, to be",
+        "meaningEnNoAccent": "to live, to be"
+      },
+      "examples": [
+        {
+          "word": "在る",
+          "reading": "ある",
+          "meaning": "to live, to be"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k039",
+      "lessonId": 5,
+      "level": "N2",
+      "character": "安",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "An",
+        "meaningVi": "easy-going",
+        "meaningViDisplay": "安 (easy-going)",
+        "meaningEn": "easy-going"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あんい"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 安易 (easy-going).",
+        "en": "Appears in JLPT N2 vocabulary: 安易 (easy-going)."
+      },
+      "decomposition": {
+        "hanViet": "An",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "An",
+        "meaningViNoAccent": "easy-going",
+        "meaningEnNoAccent": "easy-going"
+      },
+      "examples": [
+        {
+          "word": "安易",
+          "reading": "あんい",
+          "meaning": "easy-going"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k040",
+      "lessonId": 5,
+      "level": "N2",
+      "character": "易",
       "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 39",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "傆 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Dịch",
+        "meaningVi": "easy-going",
+        "meaningViDisplay": "易 (easy-going)",
+        "meaningEn": "easy-going"
       },
       "readings": {
-        "onyomi": [
-          "on39"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun39"
+          "あんい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 傆 qua van canh N2.",
-        "en": "Remember 傆 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 安易 (easy-going).",
+        "en": "Appears in JLPT N2 vocabulary: 安易 (easy-going)."
       },
       "decomposition": {
-        "hanViet": "HAN 39",
-        "structure": "standalone",
+        "hanViet": "Dịch",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 39",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Dich",
+        "meaningViNoAccent": "easy-going",
+        "meaningEnNoAccent": "easy-going"
       },
+      "examples": [
+        {
+          "word": "安易",
+          "reading": "あんい",
+          "meaning": "easy-going"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l05_k008",
-      "lessonId": 5,
-      "level": "N2",
-      "character": "傗",
-      "strokeCount": 9,
-      "labels": {
-        "hanViet": "HAN 40",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "傗 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on40"
-        ],
-        "kunyomi": [
-          "kun40"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 傗 qua van canh N2.",
-        "en": "Remember 傗 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 40",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 40",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

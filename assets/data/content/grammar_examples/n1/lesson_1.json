@@ -5,448 +5,549 @@
   "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
   "tags": [
     "source-hanabira",
-    "n1-grammar-import"
+    "n1-grammar-import",
+    "needs-human-review"
   ],
   "examples": [
     {
       "grammarPoint": "A うが B うが",
       "sentence": "朝早かろうが夜遅かろうが、いつもバスが遅れる。",
       "translation": "No matter whether it's early morning or late at night, the bus is always late.",
-      "translationEn": "No matter whether it's early morning or late at night, the bus is always late.",
+      "translationEn": "No matter whether its early morning or late at night, the bus is always late",
       "romaji": "Asa hayakarou ga yoru osokarou ga, itsumo basu ga okureru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: No matter whether its early morning or late at night, the bus is always late",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A うが B うが",
       "sentence": "彼に話そうが話すまいが、結果は変わらない。",
       "translation": "Even if I talk to him or don't, the outcome won't change.",
-      "translationEn": "Even if I talk to him or don't, the outcome won't change.",
+      "translationEn": "Even if I talk to him or dont, the outcome wont change",
       "romaji": "Kare ni hanasou ga hanasu maiga, kekka wa kawaranai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Even if I talk to him or dont, the outcome wont change",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A うが B うが",
       "sentence": "この仕事をしようがしまいが、給料は同じだ。",
       "translation": "Whether I do this job or not, the salary is the same.",
-      "translationEn": "Whether I do this job or not, the salary is the same.",
+      "translationEn": "Whether I do this job or not, the salary is the same",
       "romaji": "Kono shigoto o shiyou ga shimai ga, kyuuryou wa onaji da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether I do this job or not, the salary is the same",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A うが B うが",
       "sentence": "あの人に話そうが話すまいが、理解してくれるとは思えない。",
       "translation": "I don't think that person would understand whether I talk to them or not.",
-      "translationEn": "I don't think that person would understand whether I talk to them or not.",
+      "translationEn": "I dont think that person would understand whether I talk to them or not",
       "romaji": "Ano hito ni hanasou ga hanasu maiga, rikai shite kureru to wa omoenai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I dont think that person would understand whether I talk to them or not",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A うと B うと",
       "sentence": "雨が降ろうと晴れようと、私は毎日ジョギングをします。",
       "translation": "Whether it's raining or sunny, I jog every day.",
-      "translationEn": "Whether it's raining or sunny, I jog every day.",
+      "translationEn": "Whether its raining or sunny, I jog every day",
       "romaji": "Ame ga furou to hareyou to, watashi wa mainichi jogingu o shimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether its raining or sunny, I jog every day",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A うと B うと",
       "sentence": "試験が難しかろうと易しかろうと、一生懸命勉強します。",
       "translation": "Whether the exam is difficult or easy, I will study hard.",
-      "translationEn": "Whether the exam is difficult or easy, I will study hard.",
+      "translationEn": "Whether the exam is difficult or easy, I will study hard",
       "romaji": "Shiken ga muzukashikarou to yasashikarou to, isshoukenmei benkyou shimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether the exam is difficult or easy, I will study hard",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A うと B うと",
       "sentence": "彼が学生であろうと社会人であろうと、私は彼を尊敬しています。",
       "translation": "Whether he's a student or a working adult, I respect him.",
-      "translationEn": "Whether he's a student or a working adult, I respect him.",
+      "translationEn": "Whether hes a student or a working adult, I respect him",
       "romaji": "Kare ga gakusei de arou to shakaijin de arou to, watashi wa kare o sonkei shiteimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether hes a student or a working adult, I respect him",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A うと B うと",
       "sentence": "その映画が新しいであろうと古いであろうと、面白ければ観ます。",
       "translation": "Whether the movie is new or old, if it's interesting, I'll watch it.",
-      "translationEn": "Whether the movie is new or old, if it's interesting, I'll watch it.",
+      "translationEn": "Whether the movie is new or old, if its interesting, Ill watch it",
       "romaji": "Sono eiga ga atarashii de arou to furui de arou to, omoshirokereba mimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether the movie is new or old, if its interesting, Ill watch it",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A かたわら B",
       "sentence": "彼は仕事をするかたわら、大学に通っている。",
       "translation": "While working, he also attends university.",
-      "translationEn": "While working, he also attends university.",
+      "translationEn": "While working, he also attends university",
       "romaji": "Kare wa shigoto o suru katawara, daigaku ni kayotte iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: While working, he also attends university",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A かたわら B",
       "sentence": "私は学生のかたわら、レストランでアルバイトをしている。",
       "translation": "While being a student, I work part-time at a restaurant.",
-      "translationEn": "While being a student, I work part-time at a restaurant.",
+      "translationEn": "While being a student, I work part-time at a restaurant",
       "romaji": "Watashi wa gakusei no katawara, resutoran de arubaito o shite iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: While being a student, I work part-time at a restaurant",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A かたわら B",
       "sentence": "彼女は医者のかたわら、趣味で絵を描いている。",
       "translation": "While being a doctor, she paints as a hobby.",
-      "translationEn": "While being a doctor, she paints as a hobby.",
+      "translationEn": "While being a doctor, she paints as a hobby",
       "romaji": "Kanojo wa isha no katawara, shumi de e o kaite iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: While being a doctor, she paints as a hobby",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A かたわら B",
       "sentence": "彼は仕事をするかたわら、ボランティア活動にも積極的に参加している。",
       "translation": "While doing his job, he also actively participates in volunteer work.",
-      "translationEn": "While doing his job, he also actively participates in volunteer work.",
+      "translationEn": "While doing his job, he also actively participates in volunteer work",
       "romaji": "Kare wa shigoto o suru katawara, borantia katsudou ni mo sekkyokuteki ni sanka shite iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: While doing his job, he also actively participates in volunteer work",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A かれ B かれ",
       "sentence": "冬かれ夏かれ、毎日ジョギングする。",
       "translation": "Whether it's winter or summer, I jog every day.",
-      "translationEn": "Whether it's winter or summer, I jog every day.",
+      "translationEn": "Whether its winter or summer, I jog every day",
       "romaji": "Fuyu kare natsu kare, mainichi jogingu suru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether its winter or summer, I jog every day",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A かれ B かれ",
       "sentence": "彼が来るかれ来ないかれ、パーティーは始める。",
       "translation": "Whether he comes or not, the party will start.",
-      "translationEn": "Whether he comes or not, the party will start.",
+      "translationEn": "Whether he comes or not, the party will start",
       "romaji": "Kare ga kuru kare konai kare, paatii wa hajimeru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether he comes or not, the party will start",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A かれ B かれ",
       "sentence": "勝つかれ負けるかれ、試合に出ることが大事だ。",
       "translation": "Whether we win or lose, it's important to take part in the match.",
-      "translationEn": "Whether we win or lose, it's important to take part in the match.",
+      "translationEn": "Whether we win or lose, its important to take part in the match",
       "romaji": "Katsu kare makeru kare, shiai ni deru koto ga daiji da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether we win or lose, its important to take part in the match",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A かれ B かれ",
       "sentence": "雨かれ雪かれ、犬の散歩は欠かさない。",
       "translation": "Whether it's raining or snowing, I never skip walking the dog.",
-      "translationEn": "Whether it's raining or snowing, I never skip walking the dog.",
+      "translationEn": "Whether its raining or snowing, I never skip walking the dog",
       "romaji": "Ame kare yuki kare, inu no sanpo wa kakasanai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether its raining or snowing, I never skip walking the dog",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A だの B だの",
       "sentence": "彼はいつも遅刻だの、仕事を忘れるだので困る。",
       "translation": "I'm troubled because he's always late, forgets work, and so on.",
-      "translationEn": "I'm troubled because he's always late, forgets work, and so on.",
+      "translationEn": "Im troubled because hes always late, forgets work, and so on",
       "romaji": "Kare wa itsumo chikoku dano, shigoto o wasureru dano de komaru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Im troubled because hes always late, forgets work, and so on",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A だの B だの",
       "sentence": "彼女は新しい服だの、化粧品だのによくお金を使います。",
       "translation": "She often spends money on new clothes, cosmetics, and so on.",
-      "translationEn": "She often spends money on new clothes, cosmetics, and so on.",
+      "translationEn": "She often spends money on new clothes, cosmetics, and so on",
       "romaji": "Kanojo wa atarashii fuku dano, keshouhin dano ni yoku okane o tsukaimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She often spends money on new clothes, cosmetics, and so on",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A だの B だの",
       "sentence": "彼が言うには、音楽だの映画だの本だのが好きらしい。",
       "translation": "He says he likes music, movies, books, and so on.",
-      "translationEn": "He says he likes music, movies, books, and so on.",
+      "translationEn": "He says he likes music, movies, books, and so on",
       "romaji": "Kare ga iu ni wa, ongaku dano, eiga dano, hon dano ga suki rashii.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He says he likes music, movies, books, and so on",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A だの B だの",
       "sentence": "子供にはお菓子だの、おもちゃだの、好きなものを限りなく与えてあげたい。",
       "translation": "I want to give children all the things they like, such as sweets and toys, without limit.",
-      "translationEn": "I want to give children all the things they like, such as sweets and toys, without limit.",
+      "translationEn": "I want to give children all the things they like, such as sweets and toys, without limit",
       "romaji": "Kodomo ni wa okashi dano, omocha dano, suki na mono o kagirinaku ataete agetai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I want to give children all the things they like, such as sweets and toys, without limit",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A であれ B であれ",
       "sentence": "雨であれ雪であれ、試合は中止にならない。",
       "translation": "Whether it's rain or snow, the match will not be canceled.",
-      "translationEn": "Whether it's rain or snow, the match will not be canceled.",
+      "translationEn": "Whether its rain or snow, the match will not be canceled",
       "romaji": "Ame deare yuki deare, shiai wa chuushi ni naranai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether its rain or snow, the match will not be canceled",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A であれ B であれ",
       "sentence": "男であれ女であれ、平等に扱われるべきだ。",
       "translation": "Whether man or woman, everyone should be treated equally.",
-      "translationEn": "Whether man or woman, everyone should be treated equally.",
+      "translationEn": "Whether man or woman, everyone should be treated equally",
       "romaji": "Otoko deare onna deare, byoudou ni atsukawareru beki da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether man or woman, everyone should be treated equally",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A であれ B であれ",
       "sentence": "豊かであれ貧乏であれ、真の幸福は金では買えない。",
       "translation": "Whether rich or poor, true happiness can't be bought with money.",
-      "translationEn": "Whether rich or poor, true happiness can't be bought with money.",
+      "translationEn": "Whether rich or poor, true happiness cant be bought with money",
       "romaji": "Yutaka deare binbou deare, shin no shiawase wa kane de wa kaenai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether rich or poor, true happiness cant be bought with money",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A であれ B であれ",
       "sentence": "経験者であれ初心者であれ、このゲームは楽しめる。",
       "translation": "Whether you're a veteran or a beginner, you can enjoy this game.",
-      "translationEn": "Whether you're a veteran or a beginner, you can enjoy this game.",
+      "translationEn": "Whether youre a veteran or a beginner, you can enjoy this game",
       "romaji": "Keikensha deare shoshinsha deare, kono geemu wa tanoshimeru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether youre a veteran or a beginner, you can enjoy this game",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A というか B というか",
       "sentence": "彼は無礼というか、直接的というか、とにかくはっきりしている。",
       "translation": "He's rather rude, or maybe just direct; in any case, he is very blunt.",
-      "translationEn": "He's rather rude, or maybe just direct; in any case, he is very blunt.",
+      "translationEn": "Hes rather rude, or maybe just direct; in any case, he is very blunt",
       "romaji": "Kare wa burei to iu ka, chokusetsuteki to iu ka, tonikaku hakkiri shite iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Hes rather rude, or maybe just direct; in any case, he is very blunt",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A というか B というか",
       "sentence": "この映画は面白いというか、変というか、とにかく不思議な雰囲気がある。",
       "translation": "This movie is interesting or maybe strange; anyway, it has a mysterious vibe.",
-      "translationEn": "This movie is interesting or maybe strange; anyway, it has a mysterious vibe.",
+      "translationEn": "This movie is interesting or maybe strange; anyway, it has a mysterious vibe",
       "romaji": "Kono eiga wa omoshiroi to iu ka, hen to iu ka, tonikaku fushigi na fun'iki ga aru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This movie is interesting or maybe strange; anyway, it has a mysterious vibe",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A というか B というか",
       "sentence": "彼の絵は素晴らしいというか、驚くべきというか、本当に見る価値がある。",
       "translation": "His paintings are wonderful, or perhaps astonishing; they're definitely worth seeing.",
-      "translationEn": "His paintings are wonderful, or perhaps astonishing; they're definitely worth seeing.",
+      "translationEn": "His paintings are wonderful, or perhaps astonishing; theyre definitely worth seeing",
       "romaji": "Kare no e wa subarashii to iu ka, odoroku beki to iu ka, hontou ni miru kachi ga aru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: His paintings are wonderful, or perhaps astonishing; theyre definitely worth seeing",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A というか B というか",
       "sentence": "彼女の服はかわいいというか、派手というか、とにかく人目を引く。",
       "translation": "Her outfit is cute or maybe flashy; in any case, it grabs people's attention.",
-      "translationEn": "Her outfit is cute or maybe flashy; in any case, it grabs people's attention.",
+      "translationEn": "Her outfit is cute or maybe flashy; in any case, it grabs peoples attention",
       "romaji": "Kanojo no fuku wa kawaii to iu ka, hade to iu ka, tonikaku hitome o hiku.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Her outfit is cute or maybe flashy; in any case, it grabs peoples attention",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A とも B とも",
       "sentence": "決断とも誤りとも、結果は時間が教えてくれるでしょう。",
       "translation": "Whether it's a wise decision or a mistake, time will show the result.",
-      "translationEn": "Whether it's a wise decision or a mistake, time will show the result.",
+      "translationEn": "Whether its a wise decision or a mistake, time will show the result",
       "romaji": "Ketsudan tomo ayamari tomo, kekka wa jikan ga oshiete kureru deshou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether its a wise decision or a mistake, time will show the result",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A とも B とも",
       "sentence": "彼は父とも兄とも、もう何年も話していない。",
       "translation": "He hasn't spoken to either his father or his brother in years.",
-      "translationEn": "He hasn't spoken to either his father or his brother in years.",
+      "translationEn": "He hasnt spoken to either his father or his brother in years",
       "romaji": "Kare wa chichi tomo ani tomo, mou nannen mo hanashite inai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He hasnt spoken to either his father or his brother in years",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A とも B とも",
       "sentence": "彼女とも友達とも映画を見に行くつもりです。",
       "translation": "I plan to go watch a movie either with my girlfriend or a friend.",
-      "translationEn": "I plan to go watch a movie either with my girlfriend or a friend.",
+      "translationEn": "I plan to go watch a movie either with my girlfriend or a friend",
       "romaji": "Kanojo tomo tomodachi tomo eiga o mi ni iku tsumori desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I plan to go watch a movie either with my girlfriend or a friend",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A とも B とも",
       "sentence": "このゲームには時間とも努力とも言えないほどの根気が必要です。",
       "translation": "This game requires a kind of persistence beyond just time or effort.",
-      "translationEn": "This game requires a kind of persistence beyond just time or effort.",
+      "translationEn": "This game requires a kind of persistence beyond just time or effort",
       "romaji": "Kono geemu ni wa jikan tomo doryoku tomo ienai hodo no konki ga hitsuyou desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This game requires a kind of persistence beyond just time or effort",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A にしろ B にしろ",
       "sentence": "暑いにしろ寒いにしろ、毎日運動するべきです。",
       "translation": "Whether it's hot or cold, you should exercise every day.",
-      "translationEn": "Whether it's hot or cold, you should exercise every day.",
+      "translationEn": "Whether its hot or cold, you should exercise every day",
       "romaji": "Atsui ni shiro samui ni shiro, mainichi undou suru beki desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether its hot or cold, you should exercise every day",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A にしろ B にしろ",
       "sentence": "合格するにしろ不合格になるにしろ、最善を尽くしました。",
       "translation": "Whether I pass or fail, I did my best.",
-      "translationEn": "Whether I pass or fail, I did my best.",
+      "translationEn": "Whether I pass or fail, I did my best",
       "romaji": "Goukaku suru ni shiro fukougaku ni naru ni shiro, saizen o tsukushimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether I pass or fail, I did my best",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A にしろ B にしろ",
       "sentence": "忙しいにしろ暇にしろ、時間を大切にすべきです。",
       "translation": "Whether you're busy or free, you should value your time.",
-      "translationEn": "Whether you're busy or free, you should value your time.",
+      "translationEn": "Whether youre busy or free, you should value your time",
       "romaji": "Isogashii ni shiro hima ni shiro, jikan o taisetsu ni subeki desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether youre busy or free, you should value your time",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "A にしろ B にしろ",
       "sentence": "大きいにしろ小さいにしろ、その箱は全部ここに運んでください。",
       "translation": "Whether they're large or small, please move all those boxes here.",
-      "translationEn": "Whether they're large or small, please move all those boxes here.",
+      "translationEn": "Whether theyre large or small, please move all those boxes here",
       "romaji": "Ookii ni shiro chiisai ni shiro, sono hako wa zenbu koko ni hakonde kudasai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "A にせよ B にせよ",
-      "sentence": "雨にせよ雪にせよ、試合は中止しない。",
-      "translation": "Whether it's rain or snow, the match won't be cancelled.",
-      "translationEn": "Whether it's rain or snow, the match won't be cancelled.",
-      "romaji": "Ame ni seyo yuki ni seyo, shiai wa chuushi shinai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "A にせよ B にせよ",
-      "sentence": "彼にせよ彼女にせよ、誰か一人が行くべきだ。",
-      "translation": "Whether it's him or her, someone should go.",
-      "translationEn": "Whether it's him or her, someone should go.",
-      "romaji": "Kare ni seyo kanojo ni seyo, dareka hitori ga iku beki da.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "A にせよ B にせよ",
-      "sentence": "成果にせよ努力にせよ、どちらも重要だ。",
-      "translation": "Whether it's results or effort, both are important.",
-      "translationEn": "Whether it's results or effort, both are important.",
-      "romaji": "Seika ni seyo doryoku ni seyo, dochira mo juuyou da.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "A にせよ B にせよ",
-      "sentence": "春にせよ秋にせよ、私は花が好きだ。",
-      "translation": "Whether it's spring or fall, I like flowers.",
-      "translationEn": "Whether it's spring or fall, I like flowers.",
-      "romaji": "Haru ni seyo aki ni seyo, watashi wa hana ga suki da.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether theyre large or small, please move all those boxes here",
+      "translationViSource": "internal-en-example-draft"
     }
   ]
 }

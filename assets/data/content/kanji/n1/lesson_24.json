@@ -1,330 +1,415 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N1",
   "lessonId": 24,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n1_l24_k001",
+      "kanjiId": "n1_jlpt_vocab_k185",
       "lessonId": 24,
       "level": "N1",
-      "character": "匰",
-      "strokeCount": 10,
-      "labels": {
-        "hanViet": "HAN 185",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "匰 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on185"
-        ],
-        "kunyomi": [
-          "kun185"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 匰 qua van canh N1.",
-        "en": "Remember 匰 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 185",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 185",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l24_k002",
-      "lessonId": 24,
-      "level": "N1",
-      "character": "十",
+      "character": "敗",
       "strokeCount": 11,
       "labels": {
-        "hanViet": "HAN 186",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "十 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Bại",
+        "meaningVi": "one defeat",
+        "meaningViDisplay": "敗 (one defeat)",
+        "meaningEn": "one defeat"
       },
       "readings": {
-        "onyomi": [
-          "on186"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun186"
+          "いっぱい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 十 qua van canh N1.",
-        "en": "Remember 十 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 一敗 (one defeat).",
+        "en": "Appears in JLPT N1 vocabulary: 一敗 (one defeat)."
       },
       "decomposition": {
-        "hanViet": "HAN 186",
-        "structure": "standalone",
+        "hanViet": "Bại",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 186",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Bai",
+        "meaningViNoAccent": "one defeat",
+        "meaningEnNoAccent": "one defeat"
       },
+      "examples": [
+        {
+          "word": "一敗",
+          "reading": "いっぱい",
+          "meaning": "one defeat"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l24_k003",
+      "kanjiId": "n1_jlpt_vocab_k186",
       "lessonId": 24,
       "level": "N1",
-      "character": "卒",
-      "strokeCount": 12,
+      "character": "時",
+      "strokeCount": 10,
       "labels": {
-        "hanViet": "HAN 187",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "卒 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Thì",
+        "meaningVi": "when, how soon",
+        "meaningViDisplay": "時 (when, how soon)",
+        "meaningEn": "when, how soon"
       },
       "readings": {
-        "onyomi": [
-          "on187"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun187"
+          "いつ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 卒 qua van canh N1.",
-        "en": "Remember 卒 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 何時 (when, how soon).",
+        "en": "Appears in JLPT N1 vocabulary: 何時 (when, how soon)."
       },
       "decomposition": {
-        "hanViet": "HAN 187",
-        "structure": "standalone",
+        "hanViet": "Thì",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 187",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Thi",
+        "meaningViNoAccent": "when, how soon",
+        "meaningEnNoAccent": "when, how soon"
       },
+      "examples": [
+        {
+          "word": "何時",
+          "reading": "いつ",
+          "meaning": "when, how soon"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l24_k004",
+      "kanjiId": "n1_jlpt_vocab_k187",
       "lessonId": 24,
       "level": "N1",
-      "character": "卣",
+      "character": "図",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "intention, aim, design",
+        "meaningViDisplay": "図 (intention, aim, design)",
+        "meaningEn": "intention, aim, design"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いと"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 意図 (intention, aim, design).",
+        "en": "Appears in JLPT N1 vocabulary: 意図 (intention, aim, design)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "intention, aim, design",
+        "meaningEnNoAccent": "intention, aim, design"
+      },
+      "examples": [
+        {
+          "word": "意図",
+          "reading": "いと",
+          "meaning": "intention, aim, design"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k188",
+      "lessonId": 24,
+      "level": "N1",
+      "character": "営",
+      "strokeCount": 11,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "to carry on (e.g. in ceremony), to run a business",
+        "meaningViDisplay": "営 (to carry on (e.g. in ceremony), to run a business)",
+        "meaningEn": "to carry on (e.g. in ceremony), to run a business"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いとなむ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 営む (to carry on (e.g. in ceremony), to run a business).",
+        "en": "Appears in JLPT N1 vocabulary: 営む (to carry on (e.g. in ceremony), to run a business)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "to carry on (e.g. in ceremony), to run a business",
+        "meaningEnNoAccent": "to carry on (e.g. in ceremony), to run a business"
+      },
+      "examples": [
+        {
+          "word": "営む",
+          "reading": "いとなむ",
+          "meaning": "to carry on (e.g. in ceremony), to run a business"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k189",
+      "lessonId": 24,
+      "level": "N1",
+      "character": "暇",
       "strokeCount": 13,
       "labels": {
-        "hanViet": "HAN 188",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "卣 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Hạ",
+        "meaningVi": "free time, leisure, leave, spare time, farewell",
+        "meaningViDisplay": "暇 (free time, leisure, leave, spare time, farewell)",
+        "meaningEn": "free time, leisure, leave, spare time, farewell"
       },
       "readings": {
-        "onyomi": [
-          "on188"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun188"
+          "いとま"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 卣 qua van canh N1.",
-        "en": "Remember 卣 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 暇 (free time, leisure, leave, spare time, farewell).",
+        "en": "Appears in JLPT N1 vocabulary: 暇 (free time, leisure, leave, spare time, farewell)."
       },
       "decomposition": {
-        "hanViet": "HAN 188",
-        "structure": "standalone",
+        "hanViet": "Hạ",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 188",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Ha",
+        "meaningViNoAccent": "free time, leisure, leave, spare time, farewell",
+        "meaningEnNoAccent": "free time, leisure, leave, spare time, farewell"
       },
+      "examples": [
+        {
+          "word": "暇",
+          "reading": "いとま",
+          "meaning": "free time, leisure, leave, spare time, farewell"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l24_k005",
+      "kanjiId": "n1_jlpt_vocab_k190",
       "lessonId": 24,
       "level": "N1",
-      "character": "却",
+      "character": "動",
+      "strokeCount": 11,
+      "labels": {
+        "hanViet": "Động",
+        "meaningVi": "a change",
+        "meaningViDisplay": "動 (a change)",
+        "meaningEn": "a change"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いどう"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 異動 (a change).",
+        "en": "Appears in JLPT N1 vocabulary: 異動 (a change)."
+      },
+      "decomposition": {
+        "hanViet": "Động",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Đong",
+        "meaningViNoAccent": "a change",
+        "meaningEnNoAccent": "a change"
+      },
+      "examples": [
+        {
+          "word": "異動",
+          "reading": "いどう",
+          "meaning": "a change"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k191",
+      "lessonId": 24,
+      "level": "N1",
+      "character": "挑",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": "Vẹo",
+        "meaningVi": "to challenge, to contend for, to make love to",
+        "meaningViDisplay": "挑 (to challenge, to contend for, to make love to)",
+        "meaningEn": "to challenge, to contend for, to make love to"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いどむ"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 挑む (to challenge, to contend for, to make love to).",
+        "en": "Appears in JLPT N1 vocabulary: 挑む (to challenge, to contend for, to make love to)."
+      },
+      "decomposition": {
+        "hanViet": "Vẹo",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Veo",
+        "meaningViNoAccent": "to challenge, to contend for, to make love to",
+        "meaningEnNoAccent": "to challenge, to contend for, to make love to"
+      },
+      "examples": [
+        {
+          "word": "挑む",
+          "reading": "いどむ",
+          "meaning": "to challenge, to contend for, to make love to"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k192",
+      "lessonId": 24,
+      "level": "N1",
+      "character": "稲",
       "strokeCount": 14,
       "labels": {
-        "hanViet": "HAN 189",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "却 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": null,
+        "meaningVi": "(flash of) lightning",
+        "meaningViDisplay": "稲 ((flash of) lightning)",
+        "meaningEn": "(flash of) lightning"
       },
       "readings": {
-        "onyomi": [
-          "on189"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun189"
+          "いなびかり"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 却 qua van canh N1.",
-        "en": "Remember 却 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 稲光 ((flash of) lightning).",
+        "en": "Appears in JLPT N1 vocabulary: 稲光 ((flash of) lightning)."
       },
       "decomposition": {
-        "hanViet": "HAN 189",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 189",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "(flash of) lightning",
+        "meaningEnNoAccent": "(flash of) lightning"
       },
+      "examples": [
+        {
+          "word": "稲光",
+          "reading": "いなびかり",
+          "meaning": "(flash of) lightning"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l24_k006",
-      "lessonId": 24,
-      "level": "N1",
-      "character": "厅",
-      "strokeCount": 15,
-      "labels": {
-        "hanViet": "HAN 190",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "厅 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on190"
-        ],
-        "kunyomi": [
-          "kun190"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 厅 qua van canh N1.",
-        "en": "Remember 厅 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 190",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 190",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l24_k007",
-      "lessonId": 24,
-      "level": "N1",
-      "character": "厖",
-      "strokeCount": 16,
-      "labels": {
-        "hanViet": "HAN 191",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "厖 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on191"
-        ],
-        "kunyomi": [
-          "kun191"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 厖 qua van canh N1.",
-        "en": "Remember 厖 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 191",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 191",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l24_k008",
-      "lessonId": 24,
-      "level": "N1",
-      "character": "厧",
-      "strokeCount": 17,
-      "labels": {
-        "hanViet": "HAN 192",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "厧 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on192"
-        ],
-        "kunyomi": [
-          "kun192"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 厧 qua van canh N1.",
-        "en": "Remember 厧 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 192",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 192",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

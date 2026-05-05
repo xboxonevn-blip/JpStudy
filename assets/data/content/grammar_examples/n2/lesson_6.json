@@ -5,360 +5,429 @@
   "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
   "tags": [
     "source-hanabira",
-    "n2-grammar-import"
+    "n2-grammar-import",
+    "needs-human-review"
   ],
   "examples": [
+    {
+      "grammarPoint": "～あまり",
+      "sentence": "昨日は疲れすぎたあまり、朝まで眠り続けました。",
+      "translation": "Yesterday, I was so tired that I slept until morning.",
+      "translationEn": "Yesterday, I was so tired that I slept until morning",
+      "romaji": "Kinō wa tsukare-sugita amari, asa made nemuri tsuzukemashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Yesterday, I was so tired that I slept until morning",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～あまり",
+      "sentence": "彼女はうれしいあまり、泣き出してしまった。",
+      "translation": "She was so happy that she ended up crying.",
+      "translationEn": "She was so happy that she ended up crying",
+      "romaji": "Kanojo wa ureshii amari, nakidashite shimatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She was so happy that she ended up crying",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～あまり",
+      "sentence": "彼は安全を確認するあまり、何回もドアをチェックしている。",
+      "translation": "He is so concerned about safety that he checks the door many times.",
+      "translationEn": "He is so concerned about safety that he checks the door many times",
+      "romaji": "Kare wa anzen o kakunin suru amari, nankai mo doa o chekku shite iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He is so concerned about safety that he checks the door many times",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～あまり",
+      "sentence": "寒さのあまり、彼は震えが止まらなかった。",
+      "translation": "It was so cold that he couldn't stop shivering.",
+      "translationEn": "It was so cold that he couldnt stop shivering",
+      "romaji": "Samusa no amari, kare wa furue ga tomaranakatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: It was so cold that he couldnt stop shivering",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～うちに",
+      "sentence": "元気なうちに、旅行を楽しんでください。",
+      "translation": "Enjoy traveling while you are healthy.",
+      "translationEn": "Enjoy traveling while you are healthy",
+      "romaji": "Genki na uchi ni, ryokō o tanoshinde kudasai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Enjoy traveling while you are healthy",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～うちに",
+      "sentence": "若いうちに、いろいろなことを学ぶべきだ。",
+      "translation": "One should learn various things while they are young.",
+      "translationEn": "One should learn various things while they are young",
+      "romaji": "Wakai uchi ni, iroiro na koto o manabu beki da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: One should learn various things while they are young",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～うちに",
+      "sentence": "子供が寝ているうちに、夕食の準備をしましょう。",
+      "translation": "Let's prepare dinner while the kids are sleeping.",
+      "translationEn": "Lets prepare dinner while the kids are sleeping",
+      "romaji": "Kodomo ga nete iru uchi ni, yūshoku no junbi o shimashō.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Lets prepare dinner while the kids are sleeping",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～うちに",
+      "sentence": "雨が降らないうちに、家に帰りましょう。",
+      "translation": "Let's go home before it starts raining.",
+      "translationEn": "Lets go home before it starts raining",
+      "romaji": "Ame ga furanai uchi ni, ie ni kaerimashō.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Lets go home before it starts raining",
+      "translationViSource": "internal-en-example-draft"
+    },
     {
       "grammarPoint": "～がい",
       "sentence": "この本は読みがいがあります。",
       "translation": "This book is worth reading.",
-      "translationEn": "This book is worth reading.",
+      "translationEn": "This book is worth reading",
       "romaji": "Kono hon wa yomi-gai ga arimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This book is worth reading",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～がい",
       "sentence": "早起きしがいがあると思いますよ。",
       "translation": "I think it's worth waking up early.",
-      "translationEn": "I think it's worth waking up early.",
+      "translationEn": "I think its worth waking up early",
       "romaji": "Hayaoki shigai ga aru to omoimasu yo.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I think its worth waking up early",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～がい",
       "sentence": "長い時間をかけがいのある仕事だ。",
       "translation": "It's a job worth spending a long time on.",
-      "translationEn": "It's a job worth spending a long time on.",
+      "translationEn": "Its a job worth spending a long time on",
       "romaji": "Nagai jikan o kake-gai no aru shigoto da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its a job worth spending a long time on",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～がい",
       "sentence": "彼とは話しがいがあるでしょう。",
       "translation": "It's worth talking to him.",
-      "translationEn": "It's worth talking to him.",
+      "translationEn": "Its worth talking to him",
       "romaji": "Kare to wa hanashi-gai ga aru deshō.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its worth talking to him",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～かいがあって",
       "sentence": "毎日勉強したかいがあって、テストに合格しました。",
       "translation": "Studying every day paid off—I passed the test.",
-      "translationEn": "Studying every day paid off—I passed the test.",
+      "translationEn": "Studying every day paid off—I passed the test",
       "romaji": "Mainichi benkyō shita kai ga atte, tesuto ni gōkaku shimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Studying every day paid off—I passed the test",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～かいがあって",
       "sentence": "練習のかいがあって、試合に勝つことができた。",
       "translation": "The practice paid off, and we were able to win the match.",
-      "translationEn": "The practice paid off, and we were able to win the match.",
+      "translationEn": "The practice paid off, and we were able to win the match",
       "romaji": "Renshū no kai ga atte, shiai ni katsu koto ga dekita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The practice paid off, and we were able to win the match",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～かいがあって",
       "sentence": "雨の中を走ってきたかいがあって、電車に間に合った。",
       "translation": "Running in the rain was worth it, as I made it to the train on time.",
-      "translationEn": "Running in the rain was worth it, as I made it to the train on time.",
+      "translationEn": "Running in the rain was worth it, as I made it to the train on time",
       "romaji": "Ame no naka o hashitte kita kai ga atte, densha ni maniatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Running in the rain was worth it, as I made it to the train on time",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～かいがあって",
       "sentence": "早起きして掃除をしたかいがあって、部屋がきれいになった。",
       "translation": "Waking up early to clean paid off; the room is now spotless.",
-      "translationEn": "Waking up early to clean paid off; the room is now spotless.",
+      "translationEn": "Waking up early to clean paid off; the room is now spotless",
       "romaji": "Hayaoki shite sōji o shita kai ga atte, heya ga kirei ni natta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Waking up early to clean paid off; the room is now spotless",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～かいもなく",
       "sentence": "長い間苦労したかいもなく、失敗してしまった。",
       "translation": "I struggled for a long time, but in the end, it was all in vain and I failed.",
-      "translationEn": "I struggled for a long time, but in the end, it was all in vain and I failed.",
+      "translationEn": "I struggled for a long time, but in the end, it was all in vain and I failed",
       "romaji": "Nagai aida kurō shita kai mo naku, shippai shite shimatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I struggled for a long time, but in the end, it was all in vain and I failed",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～かいもなく",
       "sentence": "このプロジェクトにたくさん時間をかけたかいもなく、うまくいかなかった。",
       "translation": "I spent a lot of time on this project, but it ended fruitlessly.",
-      "translationEn": "I spent a lot of time on this project, but it ended fruitlessly.",
+      "translationEn": "I spent a lot of time on this project, but it ended fruitlessly",
       "romaji": "Kono purojekuto ni takusan jikan o kaketa kai mo naku, umaku ikanakatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I spent a lot of time on this project, but it ended fruitlessly",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～かいもなく",
       "sentence": "助けを求めたかいもなく、誰も来なかった。",
       "translation": "He asked for help, but it was in vain as no one came.",
-      "translationEn": "He asked for help, but it was in vain as no one came.",
+      "translationEn": "He asked for help, but it was in vain as no one came",
       "romaji": "Tasuke o motometa kai mo naku, dare mo konakatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He asked for help, but it was in vain as no one came",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～かいもなく",
       "sentence": "色々な方法でダイエットを試みたかいもなく、全然痩せなかった。",
       "translation": "I tried various diet methods, but it was all for nothing—I didn't lose any weight.",
-      "translationEn": "I tried various diet methods, but it was all for nothing—I didn't lose any weight.",
+      "translationEn": "I tried various diet methods, but it was all for nothing—I didnt lose any weight",
       "romaji": "Iroirona hōhō de daietto o kokoromita kai mo naku, zenzen yasenakatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I tried various diet methods, but it was all for nothing—I didnt lose any weight",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～かける",
       "sentence": "彼女は食べかけのリンゴを置いて出かけた。",
       "translation": "She left a partially eaten apple and went out.",
-      "translationEn": "She left a partially eaten apple and went out.",
+      "translationEn": "She left a partially eaten apple and went out",
       "romaji": "Kanojo wa tabe-kake no ringo o oite dekaketa.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She left a partially eaten apple and went out",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～かける",
       "sentence": "子供たちはやりかけの宿題を机の上に残した。",
       "translation": "The children left their half-finished homework on the desk.",
-      "translationEn": "The children left their half-finished homework on the desk.",
+      "translationEn": "The children left their half-finished homework on the desk",
       "romaji": "Kodomotachi wa yari-kake no shukudai o tsukue no ue ni nokoshita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The children left their half-finished homework on the desk",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～かける",
       "sentence": "読みかけの本を夜になると探す。",
       "translation": "I look for the book I started reading once night comes.",
-      "translationEn": "I look for the book I started reading once night comes.",
+      "translationEn": "I look for the book I started reading once night comes",
       "romaji": "Yomi-kake no hon o yoru ni naru to sagasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I look for the book I started reading once night comes",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～かける",
       "sentence": "オフィスには、作りかけの書類がたくさんある。",
       "translation": "There are a lot of documents in the process of being created in the office.",
-      "translationEn": "There are a lot of documents in the process of being created in the office.",
+      "translationEn": "There are a lot of documents in the process of being created in the office",
       "romaji": "Ofisu ni wa, tsukuri-kake no shorui ga takusan aru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: There are a lot of documents in the process of being created in the office",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～がち",
       "sentence": "彼は風邪を引きがちです。",
       "translation": "He tends to catch colds easily.",
-      "translationEn": "He tends to catch colds easily.",
+      "translationEn": "He tends to catch colds easily",
       "romaji": "Kare wa kaze o hiki-gachi desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He tends to catch colds easily",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～がち",
       "sentence": "この地域は雨が降りがちです。",
       "translation": "This area tends to get a lot of rain.",
-      "translationEn": "This area tends to get a lot of rain.",
+      "translationEn": "This area tends to get a lot of rain",
       "romaji": "Kono chiiki wa ame ga furi-gachi desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This area tends to get a lot of rain",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～がち",
       "sentence": "彼女は忘れ物をしがちです。",
       "translation": "She tends to forget things.",
-      "translationEn": "She tends to forget things.",
+      "translationEn": "She tends to forget things",
       "romaji": "Kanojo wa wasuremono o shi-gachi desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She tends to forget things",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～がち",
       "sentence": "私は遅刻しがちなので、もっと早く起きないといけません。",
       "translation": "I tend to be late, so I need to wake up earlier.",
-      "translationEn": "I tend to be late, so I need to wake up earlier.",
+      "translationEn": "I tend to be late, so I need to wake up earlier",
       "romaji": "Watashi wa chikoku shi-gachi na no de, motto hayaku okinai to ikemasen.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～か～ないかのうちに",
-      "sentence": "駅に着くか着かないかのうちに、雨が降り出した。",
-      "translation": "No sooner had I arrived at the station than it started raining.",
-      "translationEn": "No sooner had I arrived at the station than it started raining.",
-      "romaji": "Eki ni tsuku ka tsukanai ka no uchi ni, ame ga furidashita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～か～ないかのうちに",
-      "sentence": "ケータイを買うか買わないかのうちに、新しいモデルが発売された。",
-      "translation": "As soon as I decided to buy the cell phone, a new model was released.",
-      "translationEn": "As soon as I decided to buy the cell phone, a new model was released.",
-      "romaji": "Keitai o kau ka kawanai ka no uchi ni, atarashii moderu ga hatsubai sareta.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～か～ないかのうちに",
-      "sentence": "彼が家を出るか出ないかのうちに、電話が鳴った。",
-      "translation": "The moment he left the house, the phone rang.",
-      "translationEn": "The moment he left the house, the phone rang.",
-      "romaji": "Kare ga ie o deru ka denai ka no uchi ni, denwa ga natta.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～か～ないかのうちに",
-      "sentence": "パーティーが始まるか始まらないかのうちに、彼女が泣き出した。",
-      "translation": "As soon as the party began, she started crying.",
-      "translationEn": "As soon as the party began, she started crying.",
-      "romaji": "Pātī ga hajimaru ka hajimaranai ka no uchi ni, kanojo ga nakidashita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～かねない",
-      "sentence": "彼はあまりにも無責任で、約束を破りかねない。",
-      "translation": "He is so irresponsible that he might break his promise.",
-      "translationEn": "He is so irresponsible that he might break his promise.",
-      "romaji": "Kare wa amarini mo musekinin de, yakusoku o yaburi-kane nai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～かねない",
-      "sentence": "注意しないと、事故を起こしかねない。",
-      "translation": "If you don't pay attention, you might cause an accident.",
-      "translationEn": "If you don't pay attention, you might cause an accident.",
-      "romaji": "Chūi shinai to, jiko o okoshi-kane nai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～かねない",
-      "sentence": "このアプリはバグが多いので、クラッシュしかねない。",
-      "translation": "Since this app has many bugs, it might crash.",
-      "translationEn": "Since this app has many bugs, it might crash.",
-      "romaji": "Kono apuri wa bagu ga ōi no de, kurasshu shi-kane nai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～かねない",
-      "sentence": "彼女は緊張しているので、失敗しかねない。",
-      "translation": "She's so nervous that she might fail.",
-      "translationEn": "She's so nervous that she might fail.",
-      "romaji": "Kanojo wa kinchō shite iru no de, shippai shi-kane nai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～かねる",
-      "sentence": "その問題は難しいので、私には解決しかねます。",
-      "translation": "Since that problem is difficult, I cannot solve it.",
-      "translationEn": "Since that problem is difficult, I cannot solve it.",
-      "romaji": "Sono mondai wa muzukashii no de, watashi ni wa kaiketsu shi-kanemasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～かねる",
-      "sentence": "彼の言っていることが真実かどうか判断しかねます。",
-      "translation": "I cannot judge whether what he is saying is true or not.",
-      "translationEn": "I cannot judge whether what he is saying is true or not.",
-      "romaji": "Kare no itte iru koto ga shinjitsu ka dō ka handan shi-kanemasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～かねる",
-      "sentence": "彼女が来るかどうか今すぐには分かりかねます。",
-      "translation": "I cannot immediately know whether she will come or not.",
-      "translationEn": "I cannot immediately know whether she will come or not.",
-      "romaji": "Kanojo ga kuru ka dō ka ima sugu ni wa wakari-kanemasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～かねる",
-      "sentence": "詳しい内容については説明しかねます。",
-      "translation": "I cannot explain the details.",
-      "translationEn": "I cannot explain the details.",
-      "romaji": "Kuwashii naiyō ni tsuite wa setsumei shi-kanemasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I tend to be late, so I need to wake up earlier",
+      "translationViSource": "internal-en-example-draft"
     }
   ]
 }

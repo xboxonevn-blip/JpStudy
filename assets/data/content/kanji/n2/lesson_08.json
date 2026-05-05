@@ -1,330 +1,415 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N2",
   "lessonId": 8,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n2_l08_k001",
+      "kanjiId": "n2_jlpt_vocab_k057",
       "lessonId": 8,
       "level": "N2",
-      "character": "冸",
-      "strokeCount": 14,
-      "labels": {
-        "hanViet": "HAN 57",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "冸 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on57"
-        ],
-        "kunyomi": [
-          "kun57"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 冸 qua van canh N2.",
-        "en": "Remember 冸 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 57",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 57",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l08_k002",
-      "lessonId": 8,
-      "level": "N2",
-      "character": "凉",
-      "strokeCount": 15,
-      "labels": {
-        "hanViet": "HAN 58",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "凉 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on58"
-        ],
-        "kunyomi": [
-          "kun58"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 凉 qua van canh N2.",
-        "en": "Remember 凉 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 58",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 58",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l08_k003",
-      "lessonId": 8,
-      "level": "N2",
-      "character": "凚",
-      "strokeCount": 16,
-      "labels": {
-        "hanViet": "HAN 59",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "凚 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on59"
-        ],
-        "kunyomi": [
-          "kun59"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 凚 qua van canh N2.",
-        "en": "Remember 凚 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 59",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 59",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l08_k004",
-      "lessonId": 8,
-      "level": "N2",
-      "character": "凫",
-      "strokeCount": 17,
-      "labels": {
-        "hanViet": "HAN 60",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "凫 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on60"
-        ],
-        "kunyomi": [
-          "kun60"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 凫 qua van canh N2.",
-        "en": "Remember 凫 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 60",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 60",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l08_k005",
-      "lessonId": 8,
-      "level": "N2",
-      "character": "凼",
-      "strokeCount": 6,
-      "labels": {
-        "hanViet": "HAN 61",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "凼 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on61"
-        ],
-        "kunyomi": [
-          "kun61"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 凼 qua van canh N2.",
-        "en": "Remember 凼 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 61",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 61",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l08_k006",
-      "lessonId": 8,
-      "level": "N2",
-      "character": "刍",
-      "strokeCount": 7,
-      "labels": {
-        "hanViet": "HAN 62",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "刍 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on62"
-        ],
-        "kunyomi": [
-          "kun62"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 刍 qua van canh N2.",
-        "en": "Remember 刍 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 62",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 62",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l08_k007",
-      "lessonId": 8,
-      "level": "N2",
-      "character": "刞",
-      "strokeCount": 8,
-      "labels": {
-        "hanViet": "HAN 63",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "刞 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on63"
-        ],
-        "kunyomi": [
-          "kun63"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 刞 qua van canh N2.",
-        "en": "Remember 刞 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 63",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 63",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l08_k008",
-      "lessonId": 8,
-      "level": "N2",
-      "character": "刯",
+      "character": "勇",
       "strokeCount": 9,
       "labels": {
-        "hanViet": "HAN 64",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "刯 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Dũng",
+        "meaningVi": "brave, valiant, gallant, courageous",
+        "meaningViDisplay": "勇 (brave, valiant, gallant, courageous)",
+        "meaningEn": "brave, valiant, gallant, courageous"
       },
       "readings": {
-        "onyomi": [
-          "on64"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun64"
+          "いさましい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 刯 qua van canh N2.",
-        "en": "Remember 刯 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 勇ましい (brave, valiant, gallant, courageous).",
+        "en": "Appears in JLPT N2 vocabulary: 勇ましい (brave, valiant, gallant, courageous)."
       },
       "decomposition": {
-        "hanViet": "HAN 64",
-        "structure": "standalone",
+        "hanViet": "Dũng",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 64",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Dung",
+        "meaningViNoAccent": "brave, valiant, gallant, courageous",
+        "meaningEnNoAccent": "brave, valiant, gallant, courageous"
       },
+      "examples": [
+        {
+          "word": "勇ましい",
+          "reading": "いさましい",
+          "meaning": "brave, valiant, gallant, courageous"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k058",
+      "lessonId": 8,
+      "level": "N2",
+      "character": "衣",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Y",
+        "meaningVi": "necessities of life (food,  clothing,  etc.)",
+        "meaningViDisplay": "衣 (necessities of life (food,  clothing,  etc.))",
+        "meaningEn": "necessities of life (food,  clothing,  etc.)"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いしょくじゅう"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 衣食住 (necessities of life (food,  clothing,  etc.)).",
+        "en": "Appears in JLPT N2 vocabulary: 衣食住 (necessities of life (food,  clothing,  etc.))."
+      },
+      "decomposition": {
+        "hanViet": "Y",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Y",
+        "meaningViNoAccent": "necessities of life (food,  clothing,  etc.)",
+        "meaningEnNoAccent": "necessities of life (food,  clothing,  etc.)"
+      },
+      "examples": [
+        {
+          "word": "衣食住",
+          "reading": "いしょくじゅう",
+          "meaning": "necessities of life (food,  clothing,  etc.)"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k059",
+      "lessonId": 8,
+      "level": "N2",
+      "character": "食",
+      "strokeCount": 9,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "necessities of life (food,  clothing,  etc.)",
+        "meaningViDisplay": "食 (necessities of life (food,  clothing,  etc.))",
+        "meaningEn": "necessities of life (food,  clothing,  etc.)"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いしょくじゅう"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 衣食住 (necessities of life (food,  clothing,  etc.)).",
+        "en": "Appears in JLPT N2 vocabulary: 衣食住 (necessities of life (food,  clothing,  etc.))."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "necessities of life (food,  clothing,  etc.)",
+        "meaningEnNoAccent": "necessities of life (food,  clothing,  etc.)"
+      },
+      "examples": [
+        {
+          "word": "衣食住",
+          "reading": "いしょくじゅう",
+          "meaning": "necessities of life (food,  clothing,  etc.)"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k060",
+      "lessonId": 8,
+      "level": "N2",
+      "character": "住",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": "Trú",
+        "meaningVi": "necessities of life (food,  clothing,  etc.)",
+        "meaningViDisplay": "住 (necessities of life (food,  clothing,  etc.))",
+        "meaningEn": "necessities of life (food,  clothing,  etc.)"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いしょくじゅう"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 衣食住 (necessities of life (food,  clothing,  etc.)).",
+        "en": "Appears in JLPT N2 vocabulary: 衣食住 (necessities of life (food,  clothing,  etc.))."
+      },
+      "decomposition": {
+        "hanViet": "Trú",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Tru",
+        "meaningViNoAccent": "necessities of life (food,  clothing,  etc.)",
+        "meaningEnNoAccent": "necessities of life (food,  clothing,  etc.)"
+      },
+      "examples": [
+        {
+          "word": "衣食住",
+          "reading": "いしょくじゅう",
+          "meaning": "necessities of life (food,  clothing,  etc.)"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k061",
+      "lessonId": 8,
+      "level": "N2",
+      "character": "地",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Địa",
+        "meaningVi": "malicious, ill-tempered, unkind",
+        "meaningViDisplay": "地 (malicious, ill-tempered, unkind)",
+        "meaningEn": "malicious, ill-tempered, unkind"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いじわる"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 意地悪 (malicious, ill-tempered, unkind).",
+        "en": "Appears in JLPT N2 vocabulary: 意地悪 (malicious, ill-tempered, unkind)."
+      },
+      "decomposition": {
+        "hanViet": "Địa",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Đia",
+        "meaningViNoAccent": "malicious, ill-tempered, unkind",
+        "meaningEnNoAccent": "malicious, ill-tempered, unkind"
+      },
+      "examples": [
+        {
+          "word": "意地悪",
+          "reading": "いじわる",
+          "meaning": "malicious, ill-tempered, unkind"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k062",
+      "lessonId": 8,
+      "level": "N2",
+      "character": "悪",
+      "strokeCount": 11,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "malicious, ill-tempered, unkind",
+        "meaningViDisplay": "悪 (malicious, ill-tempered, unkind)",
+        "meaningEn": "malicious, ill-tempered, unkind"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いじわる"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 意地悪 (malicious, ill-tempered, unkind).",
+        "en": "Appears in JLPT N2 vocabulary: 意地悪 (malicious, ill-tempered, unkind)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "malicious, ill-tempered, unkind",
+        "meaningEnNoAccent": "malicious, ill-tempered, unkind"
+      },
+      "examples": [
+        {
+          "word": "意地悪",
+          "reading": "いじわる",
+          "meaning": "malicious, ill-tempered, unkind"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k063",
+      "lessonId": 8,
+      "level": "N2",
+      "character": "一",
+      "strokeCount": 1,
+      "labels": {
+        "hanViet": "Nhất",
+        "meaningVi": "once, tentatively, in outline, for the time being",
+        "meaningViDisplay": "一 (once, tentatively, in outline, for the time being)",
+        "meaningEn": "once, tentatively, in outline, for the time being"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いちおう"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 一応 (once, tentatively, in outline, for the time being).",
+        "en": "Appears in JLPT N2 vocabulary: 一応 (once, tentatively, in outline, for the time being)."
+      },
+      "decomposition": {
+        "hanViet": "Nhất",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Nhat",
+        "meaningViNoAccent": "once, tentatively, in outline, for the time being",
+        "meaningEnNoAccent": "once, tentatively, in outline, for the time being"
+      },
+      "examples": [
+        {
+          "word": "一応",
+          "reading": "いちおう",
+          "meaning": "once, tentatively, in outline, for the time being"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k064",
+      "lessonId": 8,
+      "level": "N2",
+      "character": "応",
+      "strokeCount": 7,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "once, tentatively, in outline, for the time being",
+        "meaningViDisplay": "応 (once, tentatively, in outline, for the time being)",
+        "meaningEn": "once, tentatively, in outline, for the time being"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "いちおう"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 一応 (once, tentatively, in outline, for the time being).",
+        "en": "Appears in JLPT N2 vocabulary: 一応 (once, tentatively, in outline, for the time being)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "once, tentatively, in outline, for the time being",
+        "meaningEnNoAccent": "once, tentatively, in outline, for the time being"
+      },
+      "examples": [
+        {
+          "word": "一応",
+          "reading": "いちおう",
+          "meaning": "once, tentatively, in outline, for the time being"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

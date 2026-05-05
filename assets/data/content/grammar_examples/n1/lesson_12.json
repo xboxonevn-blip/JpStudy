@@ -5,448 +5,609 @@
   "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
   "tags": [
     "source-hanabira",
-    "n1-grammar-import"
+    "n1-grammar-import",
+    "needs-human-review"
   ],
   "examples": [
+    {
+      "grammarPoint": "Noun を経て",
+      "sentence": "彼は苦労を経て成功を手に入れた。",
+      "translation": "He achieved success through hardships.",
+      "translationEn": "He achieved success through hardships",
+      "romaji": "Kare wa kurō o hete seikō o te ni ireta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He achieved success through hardships",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun を経て",
+      "sentence": "彼女はニューヨークを経て日本に帰国した。",
+      "translation": "She returned to Japan via New York.",
+      "translationEn": "She returned to Japan via New York",
+      "romaji": "Kanojo wa Nyūyōku o hete Nihon ni kikoku shita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She returned to Japan via New York",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun を経て",
+      "sentence": "私達は長い議論を経て決定を下した。",
+      "translation": "We made a decision through a long discussion.",
+      "translationEn": "We made a decision through a long discussion",
+      "romaji": "Watashitachi wa nagai giron o hete kettei o kudashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We made a decision through a long discussion",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun を経て",
+      "sentence": "多くの修練を経て、彼は達人のレベルになった。",
+      "translation": "Through a lot of training, he reached a master's level.",
+      "translationEn": "Through a lot of training, he reached a masters level",
+      "romaji": "Ōku no shuren o hete, kare wa tatsujin no reberu ni natta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Through a lot of training, he reached a masters level",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun を踏まえて",
+      "sentence": "過去の結果を踏まえて、新たな計画を立てました。",
+      "translation": "Based on previous results, we have made a new plan.",
+      "translationEn": "Based on previous results, we have made a new plan",
+      "romaji": "Kako no kekka o fumaete, aratana keikaku o tatemashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Based on previous results, we have made a new plan",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun を踏まえて",
+      "sentence": "現地の文化を踏まえて、プレゼンテーションを準備します。",
+      "translation": "I will prepare a presentation taking into account the local culture.",
+      "translationEn": "I will prepare a presentation taking into account the local culture",
+      "romaji": "Genchi no bunka o fumaete, purezentēshon o junbi shimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I will prepare a presentation taking into account the local culture",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun を踏まえて",
+      "sentence": "教師の意見を踏まえて、規則を変更しました。",
+      "translation": "We changed the rules in light of the teachers' opinions.",
+      "translationEn": "We changed the rules in light of the teachers opinions",
+      "romaji": "Kyōshi no iken o fumaete, kisoku o henkō shimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We changed the rules in light of the teachers opinions",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun を踏まえて",
+      "sentence": "最新の研究結果を踏まえて、新しい薬が開発されました。",
+      "translation": "Considering the latest research findings, a new medicine has been developed.",
+      "translationEn": "Considering the latest research findings, a new medicine has been developed",
+      "romaji": "Saishin no kenkyū kekka o fumaete, atarashii kusuri ga kaihatsu saremashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Considering the latest research findings, a new medicine has been developed",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun を限りに",
+      "sentence": "今年度を限りに、この大学での教授活動を終えるつもりです。",
+      "translation": "I intend to end my teaching activities at this university as of this academic year.",
+      "translationEn": "I intend to end my teaching activities at this university as of this academic year",
+      "romaji": "Konnendo o kagiri ni, kono daigaku de no kyouju katsudou o oeru tsumori desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I intend to end my teaching activities at this university as of this academic year",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun を限りに",
+      "sentence": "今日を限りに、タバコを吸うのをやめます。",
+      "translation": "As of today, I will stop smoking.",
+      "translationEn": "As of today, I will stop smoking",
+      "romaji": "Kyou o kagiri ni, tabako o suu no o yamemasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As of today, I will stop smoking",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun を限りに",
+      "sentence": "3月31日を限りに、会社を退職します。",
+      "translation": "I will leave the company as of March 31.",
+      "translationEn": "I will leave the company as of March 31",
+      "romaji": "3-gatsu 31-nichi o kagiri ni, kaisha o taishoku shimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I will leave the company as of March 31",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "Noun を限りに",
+      "sentence": "来週を限りに、この番組は終了します。",
+      "translation": "This program will end as of next week.",
+      "translationEn": "This program will end as of next week",
+      "romaji": "Raishuu o kagiri ni, kono bangumi wa shuuryou shimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This program will end as of next week",
+      "translationViSource": "internal-en-example-draft"
+    },
     {
       "grammarPoint": "Noun 並み",
       "sentence": "彼はプロのボクサー並みの力を持っています。",
       "translation": "He has power equivalent to a professional boxer.",
-      "translationEn": "He has power equivalent to a professional boxer.",
+      "translationEn": "He has power equivalent to a professional boxer",
       "romaji": "Kare wa puro no bokusaa nami no chikara o motte imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He has power equivalent to a professional boxer",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun 並み",
       "sentence": "彼女の料理の腕前はレストラン並みです。",
       "translation": "Her cooking skills are like those of a restaurant.",
-      "translationEn": "Her cooking skills are like those of a restaurant.",
+      "translationEn": "Her cooking skills are like those of a restaurant",
       "romaji": "Kanojo no ryouri no udemae wa resutoran nami desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Her cooking skills are like those of a restaurant",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun 並み",
       "sentence": "このエリアの夏は砂漠並みの暑さです。",
       "translation": "The summer heat in this area is like a desert.",
-      "translationEn": "The summer heat in this area is like a desert.",
+      "translationEn": "The summer heat in this area is like a desert",
       "romaji": "Kono eria no natsu wa sabaku nami no atsusa desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The summer heat in this area is like a desert",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun 並み",
       "sentence": "今日の仕事は社長並みの忙しさだった。",
       "translation": "Today's work was as busy as a president's.",
-      "translationEn": "Today's work was as busy as a president's.",
+      "translationEn": "Todays work was as busy as a presidents",
       "romaji": "Kyou no shigoto wa shachou nami no isogashisa datta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Todays work was as busy as a presidents",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun + 前提で",
       "sentence": "説明できる英語力がある前提で、この仕事を引き受けてください。",
       "translation": "Please take on this job on the assumption that you have enough English skills to explain.",
-      "translationEn": "Please take on this job on the assumption that you have enough English skills to explain.",
+      "translationEn": "Please take on this job on the assumption that you have enough English skills to explain",
       "romaji": "Setsumei dekiru eigo-ryoku ga aru zentei de, kono shigoto o hikiukete kudasai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Please take on this job on the assumption that you have enough English skills to explain",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun + 前提で",
       "sentence": "彼が一緒に行く前提で、旅行の計画を立てました。",
       "translation": "I planned the trip on the assumption that he would go together.",
-      "translationEn": "I planned the trip on the assumption that he would go together.",
+      "translationEn": "I planned the trip on the assumption that he would go together",
       "romaji": "Kare ga issho ni iku zentei de, ryokou no keikaku o tatemashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I planned the trip on the assumption that he would go together",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun + 前提で",
       "sentence": "成功する前提で、このプロジェクトを進めています。",
       "translation": "We are moving forward with this project on the assumption that we will succeed.",
-      "translationEn": "We are moving forward with this project on the assumption that we will succeed.",
+      "translationEn": "We are moving forward with this project on the assumption that we will succeed",
       "romaji": "Seikou suru zentei de, kono purojekuto o susumete imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We are moving forward with this project on the assumption that we will succeed",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Noun + 前提で",
       "sentence": "雨が降らない前提で、ピクニックの準備をしました。",
       "translation": "I prepared for the picnic under the condition that it wouldn't rain.",
-      "translationEn": "I prepared for the picnic under the condition that it wouldn't rain.",
+      "translationEn": "I prepared for the picnic under the condition that it wouldnt rain",
       "romaji": "Ame ga furanai zentei de, pikunikku no junbi o shimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I prepared for the picnic under the condition that it wouldnt rain",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる / Noun(である) + 限り(は) (kagiri (wa))",
       "sentence": "私が生きている限りは、あなたを支えます。",
       "translation": "As long as I'm alive, I will support you.",
-      "translationEn": "As long as I'm alive, I will support you.",
+      "translationEn": "As long as Im alive, I will support you",
       "romaji": "Watashi ga ikite iru kagiri wa, anata o sasaemasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As long as Im alive, I will support you",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる / Noun(である) + 限り(は) (kagiri (wa))",
       "sentence": "子供が学校に通っている限り、私たちは彼らを守ります。",
       "translation": "As long as the kids are going to school, we will protect them.",
-      "translationEn": "As long as the kids are going to school, we will protect them.",
+      "translationEn": "As long as the kids are going to school, we will protect them",
       "romaji": "Kodomo ga gakkou ni kayotte iru kagiri, watashitachi wa karera o mamorimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As long as the kids are going to school, we will protect them",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる / Noun(である) + 限り(は) (kagiri (wa))",
       "sentence": "能力がある限り、最善を尽くします。",
       "translation": "I will do my best as long as I have the ability.",
-      "translationEn": "I will do my best as long as I have the ability.",
+      "translationEn": "I will do my best as long as I have the ability",
       "romaji": "Nouryoku ga aru kagiri, saizen o tsukushimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I will do my best as long as I have the ability",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verbる / Noun(である) + 限り(は) (kagiri (wa))",
       "sentence": "あなたがここにいる限り、私は安心です。",
       "translation": "As long as you're here, I feel safe.",
-      "translationEn": "As long as you're here, I feel safe.",
+      "translationEn": "As long as youre here, I feel safe",
       "romaji": "Anata ga koko ni iru kagiri, watashi wa anshin desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As long as youre here, I feel safe",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb がてら",
       "sentence": "散歩がてらに郵便局へ行った。",
       "translation": "I went to the post office while taking a walk.",
-      "translationEn": "I went to the post office while taking a walk.",
+      "translationEn": "I went to the post office while taking a walk",
       "romaji": "Sanpo gatera ni yūbinkyoku e itta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I went to the post office while taking a walk",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb がてら",
       "sentence": "買い物がてらに友達に会いに行った。",
       "translation": "I went to see a friend while doing some shopping.",
-      "translationEn": "I went to see a friend while doing some shopping.",
+      "translationEn": "I went to see a friend while doing some shopping",
       "romaji": "Kaimono gatera ni tomodachi ni ai ni itta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I went to see a friend while doing some shopping",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb がてら",
       "sentence": "ジョギングがてらに新聞を買いに行った。",
       "translation": "I went to buy a newspaper while jogging.",
-      "translationEn": "I went to buy a newspaper while jogging.",
+      "translationEn": "I went to buy a newspaper while jogging",
       "romaji": "Jogingu gatera ni shinbun o kai ni itta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I went to buy a newspaper while jogging",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb がてら",
       "sentence": "公園でピクニックがてら読書をした。",
       "translation": "I read a book while having a picnic in the park.",
-      "translationEn": "I read a book while having a picnic in the park.",
+      "translationEn": "I read a book while having a picnic in the park",
       "romaji": "Kōen de pikunikku gatera dokusho o shita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I read a book while having a picnic in the park",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb こそすれ",
       "sentence": "彼は友達を助けこそすれ、自分を卑下することはありません。",
       "translation": "He might help his friends, but he never belittles himself.",
-      "translationEn": "He might help his friends, but he never belittles himself.",
+      "translationEn": "He might help his friends, but he never belittles himself",
       "romaji": "Kare wa tomodachi o tasuke koso sure, jibun o higesuru koto wa arimasen.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He might help his friends, but he never belittles himself",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb こそすれ",
       "sentence": "彼女は料理こそすれ、掃除はほとんどしない。",
       "translation": "She might cook, but she rarely cleans.",
-      "translationEn": "She might cook, but she rarely cleans.",
+      "translationEn": "She might cook, but she rarely cleans",
       "romaji": "Kanojo wa ryōri koso sure, sōji wa hotondo shinai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She might cook, but she rarely cleans",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb こそすれ",
       "sentence": "私の兄は勉強こそすれ、遊ぶ時間がほとんどない。",
       "translation": "He might study a lot, but he barely has time to have fun.",
-      "translationEn": "He might study a lot, but he barely has time to have fun.",
+      "translationEn": "He might study a lot, but he barely has time to have fun",
       "romaji": "Watashi no ani wa benkyō koso sure, asobu jikan ga hotondo nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He might study a lot, but he barely has time to have fun",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb こそすれ",
       "sentence": "母は働きこそすれ、自分のために時間を使うことはほとんどない。",
       "translation": "My mother might work a lot, but she hardly spends any time on herself.",
-      "translationEn": "My mother might work a lot, but she hardly spends any time on herself.",
+      "translationEn": "My mother might work a lot, but she hardly spends any time on herself",
       "romaji": "Haha wa hataraki koso sure, jibun no tame ni jikan o tsukau koto wa hotondo nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: My mother might work a lot, but she hardly spends any time on herself",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb させられる",
       "sentence": "彼に無理やり飲ませられた。",
       "translation": "He forced me to drink against my will.",
-      "translationEn": "He forced me to drink against my will.",
+      "translationEn": "He forced me to drink against my will",
       "romaji": "Kare ni muriyari nomaserareta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He forced me to drink against my will",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb させられる",
       "sentence": "私は父に勉強させられました。",
       "translation": "My father made me study.",
-      "translationEn": "My father made me study.",
+      "translationEn": "My father made me study",
       "romaji": "Watashi wa chichi ni benkyō saseraremashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: My father made me study",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb させられる",
       "sentence": "子供たちは毎日ピアノを弾かせられる。",
       "translation": "The kids are made to play the piano every day.",
-      "translationEn": "The kids are made to play the piano every day.",
+      "translationEn": "The kids are made to play the piano every day",
       "romaji": "Kodomo-tachi wa mainichi piano o hikaserareru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The kids are made to play the piano every day",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb させられる",
       "sentence": "私たちは強制的に早起きさせられました。",
       "translation": "We were forcibly made to wake up early.",
-      "translationEn": "We were forcibly made to wake up early.",
+      "translationEn": "We were forcibly made to wake up early",
       "romaji": "Watashitachi wa kyōsei-teki ni hayaoki saseraremashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We were forcibly made to wake up early",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ざるを得ない",
       "sentence": "この仕事が嫌ならもう辞めざるを得ない。",
       "translation": "If you hate this job, you have no choice but to quit.",
-      "translationEn": "If you hate this job, you have no choice but to quit.",
+      "translationEn": "If you hate this job, you have no choice but to quit",
       "romaji": "Kono shigoto ga iya nara mō yamezaru o enai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If you hate this job, you have no choice but to quit",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ざるを得ない",
       "sentence": "試験が近いので、夜遅くまで勉強せざるを得ない。",
       "translation": "The exam is near, so I have no choice but to study late into the night.",
-      "translationEn": "The exam is near, so I have no choice but to study late into the night.",
+      "translationEn": "The exam is near, so I have no choice but to study late into the night",
       "romaji": "Shiken ga chikai no de, yoru osoku made benkyō sezaru o enai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The exam is near, so I have no choice but to study late into the night",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ざるを得ない",
       "sentence": "涙が止まらない。泣かざるを得ない。",
       "translation": "My tears won't stop. I can't help but cry.",
-      "translationEn": "My tears won't stop. I can't help but cry.",
+      "translationEn": "My tears wont stop. I cant help but cry",
       "romaji": "Namida ga tomaranai. Nakazaru o enai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: My tears wont stop. I cant help but cry",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "Verb ざるを得ない",
       "sentence": "先生の命令だから、従わざるを得ない。",
       "translation": "It's the teacher's order, so I have no choice but to comply.",
-      "translationEn": "It's the teacher's order, so I have no choice but to comply.",
+      "translationEn": "Its the teachers order, so I have no choice but to comply",
       "romaji": "Sensei no meirei dakara, shitagawazaru o enai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verb ずじまい",
-      "sentence": "日本へ来たのに、一度も富士山を見ずじまいで帰国してしまった。",
-      "translation": "I came to Japan but ended up going home without ever getting to see Mt. Fuji.",
-      "translationEn": "I came to Japan but ended up going home without ever getting to see Mt. Fuji.",
-      "romaji": "Nihon e kita noni, ichidomo Fuji-san o mizu jimai de kikoku shite shimatta.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verb ずじまい",
-      "sentence": "出張のため、彼女に会わずじまいだった。",
-      "translation": "Because I was on a business trip, I ended up not meeting her.",
-      "translationEn": "Because I was on a business trip, I ended up not meeting her.",
-      "romaji": "Shucchō no tame, kanojo ni awazu jimai datta.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verb ずじまい",
-      "sentence": "昨日は疲れすぎて、宿題をせずじまいだ。",
-      "translation": "I was too tired yesterday and ended up not doing my homework.",
-      "translationEn": "I was too tired yesterday and ended up not doing my homework.",
-      "romaji": "Kinō wa tsukare-sugite, shukudai o sezu jimai da.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verb ずじまい",
-      "sentence": "着物を買ったが、結局、一度も着ずじまいだ。",
-      "translation": "I bought a kimono, but in the end, I never got the chance to wear it.",
-      "translationEn": "I bought a kimono, but in the end, I never got the chance to wear it.",
-      "romaji": "Kimono o katta ga, kekkyoku, ichido mo kizu jimai da.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verb ずとも",
-      "sentence": "朝ごはんを食べずとも、働くことができます。",
-      "translation": "Even without eating breakfast, I can work.",
-      "translationEn": "Even without eating breakfast, I can work.",
-      "romaji": "Asagohan o tabezu tomo, hataraku koto ga dekimasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verb ずとも",
-      "sentence": "車がなくとも、バスで行くことができます。",
-      "translation": "Even without a car, you can go by bus.",
-      "translationEn": "Even without a car, you can go by bus.",
-      "romaji": "Kuruma ga nakutomo, basu de iku koto ga dekimasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verb ずとも",
-      "sentence": "お金がなくとも、幸せになれる。",
-      "translation": "Even without money, one can be happy.",
-      "translationEn": "Even without money, one can be happy.",
-      "romaji": "Okane ga nakutomo, shiawase ni nareru.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verb ずとも",
-      "sentence": "インターネットがなくとも、情報を得る方法はいくつかあります。",
-      "translation": "Even without the internet, there are several ways to obtain information.",
-      "translationEn": "Even without the internet, there are several ways to obtain information.",
-      "romaji": "Intānetto ga nakutomo, jōhō o eru hōhō wa ikutsu ka arimasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verb ずにはおかない",
-      "sentence": "彼が困っていると聞いたら、助けずにはおかない。",
-      "translation": "If I hear he is in trouble, I cannot help but assist him.",
-      "translationEn": "If I hear he is in trouble, I cannot help but assist him.",
-      "romaji": "Kare ga komatte iru to kiitara, tasukezuni wa okanai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verb ずにはおかない",
-      "sentence": "食事の準備がこのままだと、手伝わずにはおかないだろう。",
-      "translation": "If the meal prep stays like this, I won't be able to stop myself from helping.",
-      "translationEn": "If the meal prep stays like this, I won't be able to stop myself from helping.",
-      "romaji": "Shokuji no junbi ga kono mama da to, tetsudawazuni wa okanai darō.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verb ずにはおかない",
-      "sentence": "この問題が解決しないなら、改善策を考えずにはおかない。",
-      "translation": "If this issue isn't resolved, I can't help but think of a solution.",
-      "translationEn": "If this issue isn't resolved, I can't help but think of a solution.",
-      "romaji": "Kono mondai ga kaiketsu shinai nara, kaizen-saku o kangaezuni wa okanai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "Verb ずにはおかない",
-      "sentence": "彼女が泣いているのを見たら、慰めずにはおかない。",
-      "translation": "When I see her crying, I cannot help but comfort her.",
-      "translationEn": "When I see her crying, I cannot help but comfort her.",
-      "romaji": "Kanojo ga naite iru no o mitara, nagusamezuni wa okanai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its the teachers order, so I have no choice but to comply",
+      "translationViSource": "internal-en-example-draft"
     }
   ]
 }

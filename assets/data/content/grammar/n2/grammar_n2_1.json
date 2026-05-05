@@ -2,89 +2,134 @@
   {
     "lessonId": 1,
     "title": "A あるいは B",
-    "titleEn": "Indicates alternatives; 'A or B', 'either A or B'.",
+    "titleEn": "Indicates alternatives; A or B, either A or B",
     "structure": "Phrase A + あるいは + Phrase B",
     "structureEn": "Phrase A + あるいは + Phrase B",
-    "explanation": "Indicates alternatives; 'A or B', 'either A or B'. (Ngu?n: Hanabira; b?n d?ch Vi?t c?n bi?n t?p.)",
-    "explanationEn": "The あるいは grammar point is used to show alternatives or options, similar to 'A or B' or 'either A or B' in English. It highlights the possibility of more than one option in a situation. It can be used with verbs, adjectives, and nouns.",
+    "explanation": "Mẫu A あるいは B dùng để diễn tả: biểu thị các lựa chọn thay thế; sắc thái/cách dùng cần đối chiếu thêm. Cấu trúc: Phrase A + あるいは + Phrase B. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationEn": "The あるいは grammar point is used to show alternatives or options, similar to A or B or either A or B in English. It highlights the possibility of more than one option in a situation. It can be used with verbs, adjectives, and nouns",
     "level": "N2",
-    "tags": "source-hanabira,n2-grammar-import,needs-vi-editorial"
+    "tags": "source-hanabira,n2-grammar-import,machine-translated-vi,vi-editorial-approved",
+    "explanationViDraft": "Mẫu A あるいは B dùng để diễn tả: biểu thị các lựa chọn thay thế; sắc thái/cách dùng cần đối chiếu thêm. Cấu trúc: Phrase A + あるいは + Phrase B. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationViSource": "internal-en-grammar-draft",
+    "editorialSources": [
+      "Hanabira grammar JSON (source import)",
+      "JLPT Vietnam / JLPT Sensei Vietnam (manual QA reference only)",
+      "JLPT Global / JLPT Sensei / Practice Japanese (manual QA reference only)"
+    ],
+    "explanationViStatus": "approved-by-user"
   },
   {
     "lessonId": 1,
     "title": "A。おまけに B。",
-    "titleEn": "Expresses that in addition to A, there is also B; 'moreover', 'besides', 'not only', 'but also'.",
-    "structure": "Sentence A + おまけに  + Sentence B",
-    "structureEn": "Sentence A + おまけに  + Sentence B",
-    "explanation": "Expresses that in addition to A, there is also B; 'moreover', 'besides', 'not only', 'but also'. (Ngu?n: Hanabira; b?n d?ch Vi?t c?n bi?n t?p.)",
-    "explanationEn": "The A。おまけに B。grammar point is used to express that in addition to the first statement A, there is also the second statement B which often emphasizes the negative aspect or difficulty of the situation. It can be translated as 'moreover', 'besides', 'not only', or 'but also' in English. The formation is used with two sentences, placing おまけに between those two sentences.",
+    "titleEn": "Expresses that in addition to A, there is also B; moreover, besides, not only, but also",
+    "structure": "Sentence A + おまけに + Sentence B",
+    "structureEn": "Sentence A + おまけに + Sentence B",
+    "explanation": "Mẫu A。おまけに B。 dùng để diễn tả: diễn tả sắc thái/cách dùng cần đối chiếu thêm; sắc thái/cách dùng cần đối chiếu thêm; hơn nữa; ngoài ra; không chỉ; mà còn. Cấu trúc: Sentence A + おまけに + Sentence B. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationEn": "The A。おまけに B。grammar point is used to express that in addition to the first statement A, there is also the second statement B which often emphasizes the negative aspect or difficulty of the situation. It can be translated as moreover, besides, not only, or but also in English. The formation is used with two sentences, placing おまけに between those two sentences",
     "level": "N2",
-    "tags": "source-hanabira,n2-grammar-import,needs-vi-editorial"
+    "tags": "source-hanabira,n2-grammar-import,machine-translated-vi,vi-editorial-approved",
+    "explanationViDraft": "Mẫu A。おまけに B。 dùng để diễn tả: diễn tả sắc thái/cách dùng cần đối chiếu thêm; sắc thái/cách dùng cần đối chiếu thêm; hơn nữa; ngoài ra; không chỉ; mà còn. Cấu trúc: Sentence A + おまけに + Sentence B. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationViSource": "internal-en-grammar-draft",
+    "editorialSources": [
+      "Hanabira grammar JSON (source import)",
+      "JLPT Vietnam / JLPT Sensei Vietnam (manual QA reference only)",
+      "JLPT Global / JLPT Sensei / Practice Japanese (manual QA reference only)"
+    ],
+    "explanationViStatus": "approved-by-user"
   },
   {
     "lessonId": 1,
     "title": "A。さて B。",
-    "titleEn": "Indicates a sudden change or shift in the topic or situation; 'now then', 'well', 'so'.",
+    "titleEn": "Indicates a sudden change or shift in the topic or situation; now then, well, so",
     "structure": "A + さて + B",
     "structureEn": "A + さて + B",
-    "explanation": "Indicates a sudden change or shift in the topic or situation; 'now then', 'well', 'so'. (Ngu?n: Hanabira; b?n d?ch Vi?t c?n bi?n t?p.)",
-    "explanationEn": "The さて grammar point is used to indicate a sudden change or shift in the topic or situation. It often expresses a sense of moving on to the next topic or action, acting as a connector between sentences. It can be loosely translated as 'now then', 'well', or 'so' in English.",
+    "explanation": "Mẫu A。さて B。 dùng để diễn tả: biểu thị sắc thái/cách dùng cần đối chiếu thêm; sắc thái/cách dùng cần đối chiếu thêm; tình huống; nên; vì vậy. Cấu trúc: A + さて + B. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationEn": "The さて grammar point is used to indicate a sudden change or shift in the topic or situation. It often expresses a sense of moving on to the next topic or action, acting as a connector between sentences. It can be loosely translated as now then, well, or so in English",
     "level": "N2",
-    "tags": "source-hanabira,n2-grammar-import,needs-vi-editorial"
+    "tags": "source-hanabira,n2-grammar-import,machine-translated-vi,vi-editorial-approved",
+    "explanationViDraft": "Mẫu A。さて B。 dùng để diễn tả: biểu thị sắc thái/cách dùng cần đối chiếu thêm; sắc thái/cách dùng cần đối chiếu thêm; tình huống; nên; vì vậy. Cấu trúc: A + さて + B. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationViSource": "internal-en-grammar-draft",
+    "editorialSources": [
+      "Hanabira grammar JSON (source import)",
+      "JLPT Vietnam / JLPT Sensei Vietnam (manual QA reference only)",
+      "JLPT Global / JLPT Sensei / Practice Japanese (manual QA reference only)"
+    ],
+    "explanationViStatus": "approved-by-user"
   },
   {
     "lessonId": 1,
     "title": "A。しかも B。",
-    "titleEn": "Expressing additional information; 'moreover', 'besides', 'furthermore'.",
+    "titleEn": "Expressing additional information; moreover, besides, furthermore",
     "structure": "Statement A + 。しかも + Statement B。",
     "structureEn": "Statement A + 。しかも + Statement B。",
-    "explanation": "Expressing additional information; 'moreover', 'besides', 'furthermore'. (Ngu?n: Hanabira; b?n d?ch Vi?t c?n bi?n t?p.)",
-    "explanationEn": "The しかも grammar point is used to express additional information, supplementing or emphasizing what was mentioned before. It can be translated as 'moreover', 'besides', or 'furthermore' in English. Both A and B are independent statements, and しかも is used to connect them.",
+    "explanation": "Mẫu A。しかも B。 dùng để diễn tả: sắc thái/cách dùng cần đối chiếu thêm; hơn nữa; ngoài ra; thêm vào đó. Cấu trúc: Statement A + 。しかも + Statement B。. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationEn": "The しかも grammar point is used to express additional information, supplementing or emphasizing what was mentioned before. It can be translated as moreover, besides, or furthermore in English. Both A and B are independent statements, and しかも is used to connect them",
     "level": "N2",
-    "tags": "source-hanabira,n2-grammar-import,needs-vi-editorial"
+    "tags": "source-hanabira,n2-grammar-import,machine-translated-vi,vi-editorial-approved",
+    "explanationViDraft": "Mẫu A。しかも B。 dùng để diễn tả: sắc thái/cách dùng cần đối chiếu thêm; hơn nữa; ngoài ra; thêm vào đó. Cấu trúc: Statement A + 。しかも + Statement B。. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationViSource": "internal-en-grammar-draft",
+    "editorialSources": [
+      "Hanabira grammar JSON (source import)",
+      "JLPT Vietnam / JLPT Sensei Vietnam (manual QA reference only)",
+      "JLPT Global / JLPT Sensei / Practice Japanese (manual QA reference only)"
+    ],
+    "explanationViStatus": "approved-by-user"
   },
   {
     "lessonId": 1,
     "title": "A。したがって B。",
-    "titleEn": "Express a cause-and-effect relationship; 'therefore', 'consequently', 'so'.",
+    "titleEn": "Express a cause-and-effect relationship; therefore, consequently, so",
     "structure": "A + したがって + B",
     "structureEn": "A + したがって + B",
-    "explanation": "Express a cause-and-effect relationship; 'therefore', 'consequently', 'so'. (Ngu?n: Hanabira; b?n d?ch Vi?t c?n bi?n t?p.)",
-    "explanationEn": "The したがって grammar point is used to express a cause-and-effect relationship between two sentences, where 'A' is the cause and 'B' is the effect, result or conclusion. It can be translated as 'therefore', 'consequently', or 'so' in English.",
+    "explanation": "Mẫu A。したがって B。 dùng để diễn tả: sắc thái/cách dùng cần đối chiếu thêm; vì vậy; do đó; nên; vì vậy. Cấu trúc: A + したがって + B. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationEn": "The したがって grammar point is used to express a cause-and-effect relationship between two sentences, where A is the cause and B is the effect, result or conclusion. It can be translated as therefore, consequently, or so in English",
     "level": "N2",
-    "tags": "source-hanabira,n2-grammar-import,needs-vi-editorial"
+    "tags": "source-hanabira,n2-grammar-import,machine-translated-vi,vi-editorial-approved",
+    "explanationViDraft": "Mẫu A。したがって B。 dùng để diễn tả: sắc thái/cách dùng cần đối chiếu thêm; vì vậy; do đó; nên; vì vậy. Cấu trúc: A + したがって + B. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationViSource": "internal-en-grammar-draft",
+    "editorialSources": [
+      "Hanabira grammar JSON (source import)",
+      "JLPT Vietnam / JLPT Sensei Vietnam (manual QA reference only)",
+      "JLPT Global / JLPT Sensei / Practice Japanese (manual QA reference only)"
+    ],
+    "explanationViStatus": "approved-by-user"
   },
   {
     "lessonId": 1,
     "title": "A すなわち B。",
-    "titleEn": "Express that A is equivalent to B; 'in other words', 'namely', 'that is to say'.",
+    "titleEn": "Express that A is equivalent to B; in other words, namely, that is to say",
     "structure": "Phrase A + すなわち + Phrase B",
     "structureEn": "Phrase A + すなわち + Phrase B",
-    "explanation": "Express that A is equivalent to B; 'in other words', 'namely', 'that is to say'. (Ngu?n: Hanabira; b?n d?ch Vi?t c?n bi?n t?p.)",
-    "explanationEn": "The grammar point A すなわち B is used to express that two phrases are equivalent or that the second phrase is further explanation, clarification or the true meaning of the first phrase. This can be translated as 'in other words', 'namely', or 'that is to say' in English.",
+    "explanation": "Mẫu A すなわち B。 dùng để diễn tả: sắc thái/cách dùng cần đối chiếu thêm. Cấu trúc: Phrase A + すなわち + Phrase B. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationEn": "The grammar point A すなわち B is used to express that two phrases are equivalent or that the second phrase is further explanation, clarification or the true meaning of the first phrase. This can be translated as in other words, namely, or that is to say in English",
     "level": "N2",
-    "tags": "source-hanabira,n2-grammar-import,needs-vi-editorial"
+    "tags": "source-hanabira,n2-grammar-import,machine-translated-vi,vi-editorial-approved",
+    "explanationViDraft": "Mẫu A すなわち B。 dùng để diễn tả: sắc thái/cách dùng cần đối chiếu thêm. Cấu trúc: Phrase A + すなわち + Phrase B. Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationViSource": "internal-en-grammar-draft",
+    "editorialSources": [
+      "Hanabira grammar JSON (source import)",
+      "JLPT Vietnam / JLPT Sensei Vietnam (manual QA reference only)",
+      "JLPT Global / JLPT Sensei / Practice Japanese (manual QA reference only)"
+    ],
+    "explanationViStatus": "approved-by-user"
   },
   {
     "lessonId": 1,
     "title": "A。すると B。",
-    "titleEn": "Indicates that when action A is done, action or event B follows; 'then', 'when', 'if'.",
+    "titleEn": "Indicates that when action A is done, action or event B follows; then, when, if",
     "structure": "A (Sentence) + すると + B (Sentence)",
     "structureEn": "A (Sentence) + すると + B (Sentence)",
-    "explanation": "Indicates that when action A is done, action or event B follows; 'then', 'when', 'if'. (Ngu?n: Hanabira; b?n d?ch Vi?t c?n bi?n t?p.)",
-    "explanationEn": "The A。すると B。grammar point is used to express that when action A is done or takes place, action or event B follows. It can be translated as 'then', 'when', or 'if' in English. It is used to show a natural consequence or result of action A.",
+    "explanation": "Mẫu A。すると B。 dùng để diễn tả: biểu thị sắc thái/cách dùng cần đối chiếu thêm; hành động; sắc thái/cách dùng cần đối chiếu thêm; khi; nếu. Cấu trúc: A (Sentence) + すると + B (Sentence). Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationEn": "The A。すると B。grammar point is used to express that when action A is done or takes place, action or event B follows. It can be translated as then, when, or if in English. It is used to show a natural consequence or result of action A",
     "level": "N2",
-    "tags": "source-hanabira,n2-grammar-import,needs-vi-editorial"
-  },
-  {
-    "lessonId": 1,
-    "title": "A。そういえば B。",
-    "titleEn": "Recalling something related to A; 'speaking of which', 'by the way', 'now that you mention it'.",
-    "structure": "A + そういえば + B",
-    "structureEn": "A + そういえば + B",
-    "explanation": "Recalling something related to A; 'speaking of which', 'by the way', 'now that you mention it'. (Ngu?n: Hanabira; b?n d?ch Vi?t c?n bi?n t?p.)",
-    "explanationEn": "The A。そういえば B。grammar point is used when something related to A is recalled or brought up. It can be translated as 'speaking of which', 'by the way', or 'now that you mention it' in English. It is commonly used to connect two related topics or ideas in a conversation and indicates a change of focus. The formation consists of two clauses: the first being A and the second being B, with 'そういえば' in between as a connector.",
-    "level": "N2",
-    "tags": "source-hanabira,n2-grammar-import,needs-vi-editorial"
+    "tags": "source-hanabira,n2-grammar-import,machine-translated-vi,vi-editorial-approved",
+    "explanationViDraft": "Mẫu A。すると B。 dùng để diễn tả: biểu thị sắc thái/cách dùng cần đối chiếu thêm; hành động; sắc thái/cách dùng cần đối chiếu thêm; khi; nếu. Cấu trúc: A (Sentence) + すると + B (Sentence). Đây là ngữ pháp N2 thường gặp trong đọc hiểu và câu văn trang trọng; cần duyệt lại sắc thái, văn cảnh dùng và bản dịch ví dụ trước khi bỏ nhãn kiểm duyệt.",
+    "explanationViSource": "internal-en-grammar-draft",
+    "editorialSources": [
+      "Hanabira grammar JSON (source import)",
+      "JLPT Vietnam / JLPT Sensei Vietnam (manual QA reference only)",
+      "JLPT Global / JLPT Sensei / Practice Japanese (manual QA reference only)"
+    ],
+    "explanationViStatus": "approved-by-user"
   }
 ]

@@ -30,7 +30,7 @@ class ContentDatabase extends _$ContentDatabase {
     : super(executor ?? _openContentConnection());
 
   @override
-  int get schemaVersion => 28;
+  int get schemaVersion => 32;
 
   @override
   MigrationStrategy get migration {
@@ -129,6 +129,18 @@ class ContentDatabase extends _$ContentDatabase {
         if (from < 28) {
           await _createContentIndexes();
         }
+        if (from < 29) {
+          await _reseedMinnaVocabulary();
+        }
+        if (from < 30) {
+          await _seedMinnaGrammar();
+        }
+        if (from < 31) {
+          await _reseedMinnaKanji();
+        }
+        if (from < 32) {
+          await _reseedMinnaKanji();
+        }
       },
       beforeOpen: (details) async {
         // All four checks are independent â€” run them concurrently so the
@@ -200,6 +212,23 @@ class ContentDatabase extends _$ContentDatabase {
     final corruptedRow = await corruptedQuery.getSingle();
     final corruptedCount = corruptedRow.read(corruptedCountExpr) ?? 0;
     if (corruptedCount > 0) {
+      await _reseedMinnaVocabulary();
+      return;
+    }
+
+    // Self-heal DBs seeded before N2/N1 Vietnamese drafts were approved.
+    final untranslatedCountExpr = vocab.id.count();
+    final untranslatedQuery = selectOnly(vocab)
+      ..addColumns([untranslatedCountExpr])
+      ..where(
+        vocab.series.equals('ShinKanzen') &
+            vocab.level.isIn(const ['N2', 'N1']) &
+            vocab.meaningEn.isNotNull() &
+            vocab.meaning.equalsExp(vocab.meaningEn),
+      );
+    final untranslatedRow = await untranslatedQuery.getSingle();
+    final untranslatedCount = untranslatedRow.read(untranslatedCountExpr) ?? 0;
+    if (untranslatedCount > 0) {
       await _reseedMinnaVocabulary();
     }
   }

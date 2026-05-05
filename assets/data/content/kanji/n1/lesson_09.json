@@ -1,330 +1,416 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N1",
   "lessonId": 9,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n1_l09_k001",
+      "kanjiId": "n1_jlpt_vocab_k065",
       "lessonId": 9,
       "level": "N1",
-      "character": "剀",
-      "strokeCount": 10,
+      "character": "力",
+      "strokeCount": 2,
       "labels": {
-        "hanViet": "HAN 65",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "剀 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Lực",
+        "meaningVi": "stress, pressure",
+        "meaningViDisplay": "力 (stress, pressure)",
+        "meaningEn": "stress, pressure"
       },
       "readings": {
-        "onyomi": [
-          "on65"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun65"
+          "あつりょく"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 剀 qua van canh N1.",
-        "en": "Remember 剀 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 圧力 (stress, pressure).",
+        "en": "Appears in JLPT N1 vocabulary: 圧力 (stress, pressure)."
       },
       "decomposition": {
-        "hanViet": "HAN 65",
-        "structure": "standalone",
+        "hanViet": "Lực",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 65",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Luc",
+        "meaningViNoAccent": "stress, pressure",
+        "meaningEnNoAccent": "stress, pressure"
       },
+      "examples": [
+        {
+          "word": "圧力",
+          "reading": "あつりょく",
+          "meaning": "stress, pressure"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l09_k002",
+      "kanjiId": "n1_jlpt_vocab_k066",
       "lessonId": 9,
       "level": "N1",
-      "character": "剑",
-      "strokeCount": 11,
+      "character": "宛",
+      "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 66",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "剑 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Uyển",
+        "meaningVi": "addressed to",
+        "meaningViDisplay": "宛 (addressed to)",
+        "meaningEn": "addressed to"
       },
       "readings": {
-        "onyomi": [
-          "on66"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun66"
+          "あて"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 剑 qua van canh N1.",
-        "en": "Remember 剑 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 宛 (addressed to).",
+        "en": "Appears in JLPT N1 vocabulary: 宛 (addressed to)."
       },
       "decomposition": {
-        "hanViet": "HAN 66",
-        "structure": "standalone",
+        "hanViet": "Uyển",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 66",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Uyen",
+        "meaningViNoAccent": "addressed to",
+        "meaningEnNoAccent": "addressed to"
       },
+      "examples": [
+        {
+          "word": "宛",
+          "reading": "あて",
+          "meaning": "addressed to"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l09_k003",
+      "kanjiId": "n1_jlpt_vocab_k067",
       "lessonId": 9,
       "level": "N1",
-      "character": "剢",
-      "strokeCount": 12,
-      "labels": {
-        "hanViet": "HAN 67",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "剢 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on67"
-        ],
-        "kunyomi": [
-          "kun67"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 剢 qua van canh N1.",
-        "en": "Remember 剢 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 67",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 67",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l09_k004",
-      "lessonId": 9,
-      "level": "N1",
-      "character": "剳",
+      "character": "跡",
       "strokeCount": 13,
       "labels": {
-        "hanViet": "HAN 68",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "剳 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Tích",
+        "meaningVi": "heir, successor",
+        "meaningViDisplay": "跡 (heir, successor)",
+        "meaningEn": "heir, successor"
       },
       "readings": {
-        "onyomi": [
-          "on68"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun68"
+          "あとつぎ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 剳 qua van canh N1.",
-        "en": "Remember 剳 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 跡継ぎ (heir, successor).",
+        "en": "Appears in JLPT N1 vocabulary: 跡継ぎ (heir, successor)."
       },
       "decomposition": {
-        "hanViet": "HAN 68",
-        "structure": "standalone",
+        "hanViet": "Tích",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 68",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Tich",
+        "meaningViNoAccent": "heir, successor",
+        "meaningEnNoAccent": "heir, successor"
       },
+      "examples": [
+        {
+          "word": "跡継ぎ",
+          "reading": "あとつぎ",
+          "meaning": "heir, successor"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l09_k005",
+      "kanjiId": "n1_jlpt_vocab_k068",
       "lessonId": 9,
       "level": "N1",
-      "character": "劄",
-      "strokeCount": 14,
+      "character": "継",
+      "strokeCount": 13,
       "labels": {
-        "hanViet": "HAN 69",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "劄 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": null,
+        "meaningVi": "heir, successor",
+        "meaningViDisplay": "継 (heir, successor)",
+        "meaningEn": "heir, successor"
       },
       "readings": {
-        "onyomi": [
-          "on69"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun69"
+          "あとつぎ"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 劄 qua van canh N1.",
-        "en": "Remember 劄 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 跡継ぎ (heir, successor).",
+        "en": "Appears in JLPT N1 vocabulary: 跡継ぎ (heir, successor)."
       },
       "decomposition": {
-        "hanViet": "HAN 69",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 69",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "heir, successor",
+        "meaningEnNoAccent": "heir, successor"
       },
+      "examples": [
+        {
+          "word": "跡継ぎ",
+          "reading": "あとつぎ",
+          "meaning": "heir, successor"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n1_l09_k006",
+      "kanjiId": "n1_jlpt_vocab_k069",
       "lessonId": 9,
       "level": "N1",
-      "character": "劕",
-      "strokeCount": 15,
+      "character": "回",
+      "strokeCount": 6,
       "labels": {
-        "hanViet": "HAN 70",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "劕 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Hồi",
+        "meaningVi": "putting off, postponing",
+        "meaningViDisplay": "回 (putting off, postponing)",
+        "meaningEn": "putting off, postponing"
       },
       "readings": {
-        "onyomi": [
-          "on70"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun70"
+          "あとまわし"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 劕 qua van canh N1.",
-        "en": "Remember 劕 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 後回し (putting off, postponing).",
+        "en": "Appears in JLPT N1 vocabulary: 後回し (putting off, postponing)."
       },
       "decomposition": {
-        "hanViet": "HAN 70",
-        "structure": "standalone",
+        "hanViet": "Hồi",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 70",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Hoi",
+        "meaningViNoAccent": "putting off, postponing",
+        "meaningEnNoAccent": "putting off, postponing"
       },
+      "examples": [
+        {
+          "word": "後回し",
+          "reading": "あとまわし",
+          "meaning": "putting off, postponing"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l09_k007",
+      "kanjiId": "n1_jlpt_vocab_k070",
       "lessonId": 9,
       "level": "N1",
-      "character": "劦",
-      "strokeCount": 16,
+      "character": "貴",
+      "strokeCount": 12,
       "labels": {
-        "hanViet": "HAN 71",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "劦 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Quý",
+        "meaningVi": "you, lady",
+        "meaningViDisplay": "貴 (you, lady)",
+        "meaningEn": "you, lady"
       },
       "readings": {
-        "onyomi": [
-          "on71"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun71"
+          "あなた"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 劦 qua van canh N1.",
-        "en": "Remember 劦 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 貴女 (you, lady).",
+        "en": "Appears in JLPT N1 vocabulary: 貴女 (you, lady)."
       },
       "decomposition": {
-        "hanViet": "HAN 71",
-        "structure": "standalone",
+        "hanViet": "Quý",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 71",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Quy",
+        "meaningViNoAccent": "you, lady",
+        "meaningEnNoAccent": "you, lady"
       },
+      "examples": [
+        {
+          "word": "貴女",
+          "reading": "あなた",
+          "meaning": "you, lady"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l09_k008",
+      "kanjiId": "n1_jlpt_vocab_k071",
       "lessonId": 9,
       "level": "N1",
-      "character": "劷",
-      "strokeCount": 17,
+      "character": "女",
+      "strokeCount": 3,
       "labels": {
-        "hanViet": "HAN 72",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "劷 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Nữa",
+        "meaningVi": "you, lady",
+        "meaningViDisplay": "女 (you, lady)",
+        "meaningEn": "you, lady"
       },
       "readings": {
-        "onyomi": [
-          "on72"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun72"
+          "あなた"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 劷 qua van canh N1.",
-        "en": "Remember 劷 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 貴女 (you, lady).",
+        "en": "Appears in JLPT N1 vocabulary: 貴女 (you, lady)."
       },
       "decomposition": {
-        "hanViet": "HAN 72",
-        "structure": "standalone",
+        "hanViet": "Nữa",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 72",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Nua",
+        "meaningViNoAccent": "you, lady",
+        "meaningEnNoAccent": "you, lady"
       },
+      "examples": [
+        {
+          "word": "貴女",
+          "reading": "あなた",
+          "meaning": "you, lady"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k072",
+      "lessonId": 9,
+      "level": "N1",
+      "character": "溢",
+      "strokeCount": 13,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "to flood, to overflow, to brim over",
+        "meaningViDisplay": "溢 (to flood, to overflow, to brim over)",
+        "meaningEn": "to flood, to overflow, to brim over"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あふれる"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 溢れる (to flood, to overflow, to brim over).",
+        "en": "Appears in JLPT N1 vocabulary: 溢れる (to flood, to overflow, to brim over)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "to flood, to overflow, to brim over",
+        "meaningEnNoAccent": "to flood, to overflow, to brim over"
+      },
+      "examples": [
+        {
+          "word": "溢れる",
+          "reading": "あふれる",
+          "meaning": "to flood, to overflow, to brim over"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

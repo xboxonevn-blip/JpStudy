@@ -1,330 +1,415 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N1",
   "lessonId": 8,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n1_l08_k001",
+      "kanjiId": "n1_jlpt_vocab_k057",
       "lessonId": 8,
       "level": "N1",
-      "character": "冸",
-      "strokeCount": 14,
+      "character": "化",
+      "strokeCount": 4,
       "labels": {
-        "hanViet": "HAN 57",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "冸 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Hoá",
+        "meaningVi": "deterioration, growing worse, aggravation, degeneration, corruption",
+        "meaningViDisplay": "化 (deterioration, growing worse, aggravation, degeneration, corruption)",
+        "meaningEn": "deterioration, growing worse, aggravation, degeneration, corruption"
       },
       "readings": {
-        "onyomi": [
-          "on57"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun57"
+          "あっか"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 冸 qua van canh N1.",
-        "en": "Remember 冸 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 悪化 (deterioration, growing worse, aggravation, degeneration, corruption).",
+        "en": "Appears in JLPT N1 vocabulary: 悪化 (deterioration, growing worse, aggravation, degeneration, corruption)."
       },
       "decomposition": {
-        "hanViet": "HAN 57",
-        "structure": "standalone",
+        "hanViet": "Hoá",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 57",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Hoa",
+        "meaningViNoAccent": "deterioration, growing worse, aggravation, degeneration, corruption",
+        "meaningEnNoAccent": "deterioration, growing worse, aggravation, degeneration, corruption"
       },
+      "examples": [
+        {
+          "word": "悪化",
+          "reading": "あっか",
+          "meaning": "deterioration, growing worse, aggravation, degeneration, corruption"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l08_k002",
+      "kanjiId": "n1_jlpt_vocab_k058",
       "lessonId": 8,
       "level": "N1",
-      "character": "凉",
-      "strokeCount": 15,
-      "labels": {
-        "hanViet": "HAN 58",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "凉 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on58"
-        ],
-        "kunyomi": [
-          "kun58"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 凉 qua van canh N1.",
-        "en": "Remember 凉 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 58",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 58",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l08_k003",
-      "lessonId": 8,
-      "level": "N1",
-      "character": "凚",
-      "strokeCount": 16,
-      "labels": {
-        "hanViet": "HAN 59",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "凚 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on59"
-        ],
-        "kunyomi": [
-          "kun59"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 凚 qua van canh N1.",
-        "en": "Remember 凚 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 59",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 59",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l08_k004",
-      "lessonId": 8,
-      "level": "N1",
-      "character": "凫",
-      "strokeCount": 17,
-      "labels": {
-        "hanViet": "HAN 60",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "凫 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on60"
-        ],
-        "kunyomi": [
-          "kun60"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 凫 qua van canh N1.",
-        "en": "Remember 凫 through N1 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 60",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 60",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n1_l08_k005",
-      "lessonId": 8,
-      "level": "N1",
-      "character": "凼",
+      "character": "気",
       "strokeCount": 6,
       "labels": {
-        "hanViet": "HAN 61",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "凼 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": null,
+        "meaningVi": "not enough, too quick (short long etc.)",
+        "meaningViDisplay": "気 (not enough, too quick (short long etc.))",
+        "meaningEn": "not enough, too quick (short long etc.)"
       },
       "readings": {
-        "onyomi": [
-          "on61"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun61"
+          "あっけない"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 凼 qua van canh N1.",
-        "en": "Remember 凼 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 呆気ない (not enough, too quick (short long etc.)).",
+        "en": "Appears in JLPT N1 vocabulary: 呆気ない (not enough, too quick (short long etc.))."
       },
       "decomposition": {
-        "hanViet": "HAN 61",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 61",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "not enough, too quick (short long etc.)",
+        "meaningEnNoAccent": "not enough, too quick (short long etc.)"
       },
+      "examples": [
+        {
+          "word": "呆気ない",
+          "reading": "あっけない",
+          "meaning": "not enough, too quick (short long etc.)"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n1_l08_k006",
+      "kanjiId": "n1_jlpt_vocab_k059",
       "lessonId": 8,
       "level": "N1",
-      "character": "刍",
-      "strokeCount": 7,
+      "character": "口",
+      "strokeCount": 3,
       "labels": {
-        "hanViet": "HAN 62",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "刍 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Khẩu",
+        "meaningVi": "abuse, insult, slander, evil speaking",
+        "meaningViDisplay": "口 (abuse, insult, slander, evil speaking)",
+        "meaningEn": "abuse, insult, slander, evil speaking"
       },
       "readings": {
-        "onyomi": [
-          "on62"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun62"
+          "あっこう"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 刍 qua van canh N1.",
-        "en": "Remember 刍 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 悪口 (abuse, insult, slander, evil speaking).",
+        "en": "Appears in JLPT N1 vocabulary: 悪口 (abuse, insult, slander, evil speaking)."
       },
       "decomposition": {
-        "hanViet": "HAN 62",
-        "structure": "standalone",
+        "hanViet": "Khẩu",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 62",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Khau",
+        "meaningViNoAccent": "abuse, insult, slander, evil speaking",
+        "meaningEnNoAccent": "abuse, insult, slander, evil speaking"
       },
+      "examples": [
+        {
+          "word": "悪口",
+          "reading": "あっこう",
+          "meaning": "abuse, insult, slander, evil speaking"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l08_k007",
+      "kanjiId": "n1_jlpt_vocab_k060",
       "lessonId": 8,
       "level": "N1",
-      "character": "刞",
+      "character": "圧",
+      "strokeCount": 5,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "pressure, coercion, oppression",
+        "meaningViDisplay": "圧 (pressure, coercion, oppression)",
+        "meaningEn": "pressure, coercion, oppression"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あっぱく"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 圧迫 (pressure, coercion, oppression).",
+        "en": "Appears in JLPT N1 vocabulary: 圧迫 (pressure, coercion, oppression)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "pressure, coercion, oppression",
+        "meaningEnNoAccent": "pressure, coercion, oppression"
+      },
+      "examples": [
+        {
+          "word": "圧迫",
+          "reading": "あっぱく",
+          "meaning": "pressure, coercion, oppression"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k061",
+      "lessonId": 8,
+      "level": "N1",
+      "character": "迫",
       "strokeCount": 8,
       "labels": {
-        "hanViet": "HAN 63",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "刞 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Bách",
+        "meaningVi": "pressure, coercion, oppression",
+        "meaningViDisplay": "迫 (pressure, coercion, oppression)",
+        "meaningEn": "pressure, coercion, oppression"
       },
       "readings": {
-        "onyomi": [
-          "on63"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun63"
+          "あっぱく"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 刞 qua van canh N1.",
-        "en": "Remember 刞 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 圧迫 (pressure, coercion, oppression).",
+        "en": "Appears in JLPT N1 vocabulary: 圧迫 (pressure, coercion, oppression)."
       },
       "decomposition": {
-        "hanViet": "HAN 63",
-        "structure": "standalone",
+        "hanViet": "Bách",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 63",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Bach",
+        "meaningViNoAccent": "pressure, coercion, oppression",
+        "meaningEnNoAccent": "pressure, coercion, oppression"
       },
+      "examples": [
+        {
+          "word": "圧迫",
+          "reading": "あっぱく",
+          "meaning": "pressure, coercion, oppression"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n1_l08_k008",
+      "kanjiId": "n1_jlpt_vocab_k062",
       "lessonId": 8,
       "level": "N1",
-      "character": "刯",
-      "strokeCount": 9,
+      "character": "扱",
+      "strokeCount": 6,
       "labels": {
-        "hanViet": "HAN 64",
-        "meaningVi": "tu vung N1",
-        "meaningViDisplay": "刯 (tu vung N1)",
-        "meaningEn": "N1 vocabulary"
+        "hanViet": "Gắp",
+        "meaningVi": "treatment, service",
+        "meaningViDisplay": "扱 (treatment, service)",
+        "meaningEn": "treatment, service"
       },
       "readings": {
-        "onyomi": [
-          "on64"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun64"
+          "あつかい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 刯 qua van canh N1.",
-        "en": "Remember 刯 through N1 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 扱い (treatment, service).",
+        "en": "Appears in JLPT N1 vocabulary: 扱い (treatment, service)."
       },
       "decomposition": {
-        "hanViet": "HAN 64",
-        "structure": "standalone",
+        "hanViet": "Gắp",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 64",
-        "meaningViNoAccent": "tu vung n1",
-        "meaningEnNoAccent": "n1 vocabulary"
+        "hanVietNoAccent": "Gap",
+        "meaningViNoAccent": "treatment, service",
+        "meaningEnNoAccent": "treatment, service"
       },
+      "examples": [
+        {
+          "word": "扱い",
+          "reading": "あつかい",
+          "meaning": "treatment, service"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n1-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k063",
+      "lessonId": 8,
+      "level": "N1",
+      "character": "集",
+      "strokeCount": 12,
+      "labels": {
+        "hanViet": "Tập",
+        "meaningVi": "to gather, to collect, to assemble",
+        "meaningViDisplay": "集 (to gather, to collect, to assemble)",
+        "meaningEn": "to gather, to collect, to assemble"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あつまる"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 集まる (to gather, to collect, to assemble).",
+        "en": "Appears in JLPT N1 vocabulary: 集まる (to gather, to collect, to assemble)."
+      },
+      "decomposition": {
+        "hanViet": "Tập",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Tap",
+        "meaningViNoAccent": "to gather, to collect, to assemble",
+        "meaningEnNoAccent": "to gather, to collect, to assemble"
+      },
+      "examples": [
+        {
+          "word": "集まる",
+          "reading": "あつまる",
+          "meaning": "to gather, to collect, to assemble"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n1_jlpt_vocab_k064",
+      "lessonId": 8,
+      "level": "N1",
+      "character": "誂",
+      "strokeCount": 13,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "to give an order, to place an order",
+        "meaningViDisplay": "誂 (to give an order, to place an order)",
+        "meaningEn": "to give an order, to place an order"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "あつらえる"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N1: 誂える (to give an order, to place an order).",
+        "en": "Appears in JLPT N1 vocabulary: 誂える (to give an order, to place an order)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "to give an order, to place an order",
+        "meaningEnNoAccent": "to give an order, to place an order"
+      },
+      "examples": [
+        {
+          "word": "誂える",
+          "reading": "あつらえる",
+          "meaning": "to give an order, to place an order"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n1-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

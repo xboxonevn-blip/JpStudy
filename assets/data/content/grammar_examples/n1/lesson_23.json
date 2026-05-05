@@ -5,448 +5,609 @@
   "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
   "tags": [
     "source-hanabira",
-    "n1-grammar-import"
+    "n1-grammar-import",
+    "needs-human-review"
   ],
   "examples": [
+    {
+      "grammarPoint": "～なくはない",
+      "sentence": "それを終えるのは難しくなくはない。",
+      "translation": "It's not that it's impossible to finish it.",
+      "translationEn": "Its not that its impossible to finish it",
+      "romaji": "Sore o oeru no wa muzukashiku naku wa nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its not that its impossible to finish it",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～なくはない",
+      "sentence": "彼に話すのは怖くなくはない。",
+      "translation": "It's not that I'm entirely unafraid to talk to him.",
+      "translationEn": "Its not that Im entirely unafraid to talk to him",
+      "romaji": "Kare ni hanasu no wa kowaku naku wa nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its not that Im entirely unafraid to talk to him",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～なくはない",
+      "sentence": "映画を見に行く時間がなくはない。",
+      "translation": "It's not that I don't have time to go see a movie.",
+      "translationEn": "Its not that I dont have time to go see a movie",
+      "romaji": "Eiga o mi ni iku jikan ga naku wa nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its not that I dont have time to go see a movie",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～なくはない",
+      "sentence": "日本語で講演するのは難しくなくはない。",
+      "translation": "It's not impossible to give a lecture in Japanese, but it won't be easy.",
+      "translationEn": "Its not impossible to give a lecture in Japanese, but it wont be easy",
+      "romaji": "Nihongo de kouen suru no wa muzukashiku naku wa nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its not impossible to give a lecture in Japanese, but it wont be easy",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～なくもない",
+      "sentence": "彼がもうすぐ戻るなら、待つなくもない。",
+      "translation": "If he’s coming back soon, waiting wouldn’t be a bad idea.",
+      "translationEn": "If he’s coming back soon, waiting wouldn’t be a bad idea",
+      "romaji": "Kare ga mou sugu modoru nara, matsu naku mo nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If he’s coming back soon, waiting wouldn’t be a bad idea",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～なくもない",
+      "sentence": "この本が役に立つなら、買うなくもない。",
+      "translation": "If this book is useful, it might not be a bad idea to buy it.",
+      "translationEn": "If this book is useful, it might not be a bad idea to buy it",
+      "romaji": "Kono hon ga yaku ni tatsu nara, kau naku mo nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If this book is useful, it might not be a bad idea to buy it",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～なくもない",
+      "sentence": "天気が良ければ、ピクニックに行くなくもない。",
+      "translation": "If the weather is nice, it wouldn't be impossible for us to go on a picnic.",
+      "translationEn": "If the weather is nice, it wouldnt be impossible for us to go on a picnic",
+      "romaji": "Tenki ga yokereba, pikunikku ni iku naku mo nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If the weather is nice, it wouldnt be impossible for us to go on a picnic",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～なくもない",
+      "sentence": "そのプロジェクトが成功すれば、プロモーションもあり得なくもない。",
+      "translation": "If that project succeeds, a promotion might not be out of the question.",
+      "translationEn": "If that project succeeds, a promotion might not be out of the question",
+      "romaji": "Sono purojekuto ga seikou sureba, puromooshon mo arienaku mo nai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If that project succeeds, a promotion might not be out of the question",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～なら～なりに",
+      "sentence": "彼はまだ初心者なら初心者なりに頑張っている。",
+      "translation": "Since he’s still a beginner, he’s doing his best in his own beginner way.",
+      "translationEn": "Since he’s still a beginner, he’s doing his best in his own beginner way",
+      "romaji": "Kare wa mada shoshinsha nara shoshinsha nari ni ganbatteiru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Since he’s still a beginner, he’s doing his best in his own beginner way",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～なら～なりに",
+      "sentence": "この料理は辛いなら辛いなりに美味しい。",
+      "translation": "If this dish is spicy, it’s delicious in its own spicy way.",
+      "translationEn": "If this dish is spicy, it’s delicious in its own spicy way",
+      "romaji": "Kono ryouri wa karai nara karai nari ni oishii.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If this dish is spicy, it’s delicious in its own spicy way",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～なら～なりに",
+      "sentence": "あの人は変なら変なりに面白い。",
+      "translation": "If that person is strange, they’re interesting in their own strange way.",
+      "translationEn": "If that person is strange, they’re interesting in their own strange way",
+      "romaji": "Ano hito wa hen nara hen nari ni omoshiroi.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If that person is strange, they’re interesting in their own strange way",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～なら～なりに",
+      "sentence": "この町は小さいなら小さいなりに楽しい。",
+      "translation": "If this town is small, it’s fun in its own small way.",
+      "translationEn": "If this town is small, it’s fun in its own small way",
+      "romaji": "Kono machi wa chiisai nara chiisai nari ni tanoshii.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If this town is small, it’s fun in its own small way",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～には及ばない",
+      "sentence": "ファーストクラスに乗るには及ばない、エコノミーでも十分だ。",
+      "translation": "There’s no need to go as far as flying first class; economy is enough.",
+      "translationEn": "There’s no need to go as far as flying first class; economy is enough",
+      "romaji": "Faasuto kurasu ni noru ni wa oyobanai, ekonomii demo juubun da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: There’s no need to go as far as flying first class; economy is enough",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～には及ばない",
+      "sentence": "毎回会うたびにギフトを持って行くには及ばない。",
+      "translation": "There’s no need to bring a gift every time you meet her.",
+      "translationEn": "There’s no need to bring a gift every time you meet her",
+      "romaji": "Maikai au tabi ni gifuto o motte iku ni wa oyobanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: There’s no need to bring a gift every time you meet her",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～には及ばない",
+      "sentence": "その問題は先生に聞くには及ばない、自分で解決できる。",
+      "translation": "That issue doesn’t warrant asking the teacher; you can solve it yourself.",
+      "translationEn": "That issue doesn’t warrant asking the teacher; you can solve it yourself",
+      "romaji": "Sono mondai wa sensei ni kiku ni wa oyobanai, jibun de kaiketsu dekiru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: That issue doesn’t warrant asking the teacher; you can solve it yourself",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～には及ばない",
+      "sentence": "小さな失敗のために、あんなに辛辣な言葉を使うには及ばないだろう。",
+      "translation": "For such a small mistake, there’s no need to use such harsh words.",
+      "translationEn": "For such a small mistake, there’s no need to use such harsh words",
+      "romaji": "Chiisana shippai no tame ni, anna ni shinratsu na kotoba o tsukau ni wa oyobanai darou.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: For such a small mistake, there’s no need to use such harsh words",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～に堪えない",
+      "sentence": "彼の冗談は聞くに堪えない。",
+      "translation": "His jokes are unbearable to listen to.",
+      "translationEn": "His jokes are unbearable to listen to",
+      "romaji": "Kare no joudan wa kiku ni taenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: His jokes are unbearable to listen to",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～に堪えない",
+      "sentence": "その映画は見るに堪えないほどひどい出来だ。",
+      "translation": "That movie is so bad that it’s unbearable to watch.",
+      "translationEn": "That movie is so bad that it’s unbearable to watch",
+      "romaji": "Sono eiga wa miru ni taenai hodo hidoi deki da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: That movie is so bad that it’s unbearable to watch",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～に堪えない",
+      "sentence": "この小説は読むに堪えないほど退屈だ。",
+      "translation": "This novel is so boring that it’s unbearable to read.",
+      "translationEn": "This novel is so boring that it’s unbearable to read",
+      "romaji": "Kono shousetsu wa yomu ni taenai hodo taikutsu da.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This novel is so boring that it’s unbearable to read",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～に堪えない",
+      "sentence": "彼の行動は見るに堪えない。",
+      "translation": "His behavior is unbearable to watch.",
+      "translationEn": "His behavior is unbearable to watch",
+      "romaji": "Kare no koudou wa miru ni taenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: His behavior is unbearable to watch",
+      "translationViSource": "internal-en-example-draft"
+    },
     {
       "grammarPoint": "～に堪える",
       "sentence": "彼の歌声は聞くに堪える。",
       "translation": "His singing voice is worth listening to.",
-      "translationEn": "His singing voice is worth listening to.",
+      "translationEn": "His singing voice is worth listening to",
       "romaji": "Kare no utagoe wa kiku ni taeru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: His singing voice is worth listening to",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～に堪える",
       "sentence": "この小説は読むに堪える内容だ。",
       "translation": "This novel is worth reading.",
-      "translationEn": "This novel is worth reading.",
+      "translationEn": "This novel is worth reading",
       "romaji": "Kono shousetsu wa yomu ni taeru naiyou da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This novel is worth reading",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～に堪える",
       "sentence": "あの映画は見るに堪える名作だ。",
       "translation": "That movie is a masterpiece worth watching.",
-      "translationEn": "That movie is a masterpiece worth watching.",
+      "translationEn": "That movie is a masterpiece worth watching",
       "romaji": "Ano eiga wa miru ni taeru meisaku da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: That movie is a masterpiece worth watching",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～に堪える",
       "sentence": "彼の意見は十分に参考に堪える。",
       "translation": "His opinion is definitely worth considering.",
-      "translationEn": "His opinion is definitely worth considering.",
+      "translationEn": "His opinion is definitely worth considering",
       "romaji": "Kare no iken wa juubun ni sankou ni taeru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: His opinion is definitely worth considering",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～に耐える",
       "sentence": "彼は厳しい修行に耐えた。",
       "translation": "He endured the harsh training.",
-      "translationEn": "He endured the harsh training.",
+      "translationEn": "He endured the harsh training",
       "romaji": "Kare wa kibishii shugyou ni taeta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He endured the harsh training",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～に耐える",
       "sentence": "この橋は強風に耐えられる。",
       "translation": "This bridge can withstand strong winds.",
-      "translationEn": "This bridge can withstand strong winds.",
+      "translationEn": "This bridge can withstand strong winds",
       "romaji": "Kono hashi wa kyoufuu ni taerareru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This bridge can withstand strong winds",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～に耐える",
       "sentence": "彼女は苦しみに耐えた。",
       "translation": "She endured the pain.",
-      "translationEn": "She endured the pain.",
+      "translationEn": "She endured the pain",
       "romaji": "Kanojo wa kurushimi ni taeta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She endured the pain",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～に耐える",
       "sentence": "この建物は地震に耐えることができます。",
       "translation": "This building can withstand an earthquake.",
-      "translationEn": "This building can withstand an earthquake.",
+      "translationEn": "This building can withstand an earthquake",
       "romaji": "Kono tatemono wa jishin ni taeru koto ga dekimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This building can withstand an earthquake",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～に至った",
       "sentence": "彼は練習を重ねて、ついにプロのギタリストに至った。",
       "translation": "After repeated practice, he finally became a professional guitarist.",
-      "translationEn": "After repeated practice, he finally became a professional guitarist.",
+      "translationEn": "After repeated practice, he finally became a professional guitarist",
       "romaji": "Kare wa renshuu o kasanete, tsui ni puro no gitarisuto ni itatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: After repeated practice, he finally became a professional guitarist",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～に至った",
       "sentence": "調査を進めるうちに、驚くべき結論に至った。",
       "translation": "As the investigation progressed, it led to a surprising conclusion.",
-      "translationEn": "As the investigation progressed, it led to a surprising conclusion.",
+      "translationEn": "As the investigation progressed, it led to a surprising conclusion",
       "romaji": "Chousa o susumeru uchi ni, odoroku beki ketsuron ni itatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As the investigation progressed, it led to a surprising conclusion",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～に至った",
       "sentence": "この問題はついに国際的な対立に至った。",
       "translation": "This issue finally led to an international conflict.",
-      "translationEn": "This issue finally led to an international conflict.",
+      "translationEn": "This issue finally led to an international conflict",
       "romaji": "Kono mondai wa tsui ni kokusaiteki na tairitsu ni itatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This issue finally led to an international conflict",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～に至った",
       "sentence": "たくさんの失敗を経て、成功に至った。",
       "translation": "After many failures, I finally achieved success.",
-      "translationEn": "After many failures, I finally achieved success.",
+      "translationEn": "After many failures, I finally achieved success",
       "romaji": "Takusan no shippai o hete, seikou ni itatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: After many failures, I finally achieved success",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～に越したことはない",
       "sentence": "早く準備するに越したことはない。",
       "translation": "It's best to prepare early.",
-      "translationEn": "It's best to prepare early.",
+      "translationEn": "Its best to prepare early",
       "romaji": "Hayaku junbi suru ni koshita koto wa nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its best to prepare early",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～に越したことはない",
       "sentence": "新鮮な食材を使うに越したことはない。",
       "translation": "There's nothing better than using fresh ingredients.",
-      "translationEn": "There's nothing better than using fresh ingredients.",
+      "translationEn": "Theres nothing better than using fresh ingredients",
       "romaji": "Shinsen na shokuzai o tsukau ni koshita koto wa nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Theres nothing better than using fresh ingredients",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～に越したことはない",
       "sentence": "安全運転に越したことはない。",
       "translation": "Safe driving is always best.",
-      "translationEn": "Safe driving is always best.",
+      "translationEn": "Safe driving is always best",
       "romaji": "Anzen unten ni koshita koto wa nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Safe driving is always best",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～に越したことはない",
       "sentence": "健康的な生活を送るに越したことはない。",
       "translation": "There's nothing better than leading a healthy lifestyle.",
-      "translationEn": "There's nothing better than leading a healthy lifestyle.",
+      "translationEn": "Theres nothing better than leading a healthy lifestyle",
       "romaji": "Kenkouteki na seikatsu o okuru ni koshita koto wa nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Theres nothing better than leading a healthy lifestyle",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～に難くない",
       "sentence": "彼の喜びは想像に難くない。",
       "translation": "It's not hard to imagine his delight.",
-      "translationEn": "It's not hard to imagine his delight.",
+      "translationEn": "Its not hard to imagine his delight",
       "romaji": "Kare no yorokobi wa souzou ni katakunai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its not hard to imagine his delight",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～に難くない",
       "sentence": "この結果が彼女を失望させたことは理解に難くない。",
       "translation": "It's not difficult to understand that this outcome disappointed her.",
-      "translationEn": "It's not difficult to understand that this outcome disappointed her.",
+      "translationEn": "Its not difficult to understand that this outcome disappointed her",
       "romaji": "Kono kekka ga kanojo o shitsubou saseta koto wa rikai ni katakunai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its not difficult to understand that this outcome disappointed her",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～に難くない",
       "sentence": "彼が怒る気持ちは察するに難くない。",
       "translation": "It's not hard to guess why he is angry.",
-      "translationEn": "It's not hard to guess why he is angry.",
+      "translationEn": "Its not hard to guess why he is angry",
       "romaji": "Kare ga okoru kimochi wa sassuru ni katakunai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its not hard to guess why he is angry",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～に難くない",
       "sentence": "このような状況が起こった理由は想像に難くない。",
       "translation": "It's not hard to imagine why this situation occurred.",
-      "translationEn": "It's not hard to imagine why this situation occurred.",
+      "translationEn": "Its not hard to imagine why this situation occurred",
       "romaji": "Kono youna joukyou ga okotta riyuu wa souzou ni katakunai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～のは Noun ぐらいのものだ",
-      "sentence": "この小説を読むのは暇つぶしぐらいのものだ。",
-      "translation": "Reading this novel is nothing but a way to kill time.",
-      "translationEn": "Reading this novel is nothing but a way to kill time.",
-      "romaji": "Kono shousetsu o yomu no wa hima tsubushi gurai no mono da.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～のは Noun ぐらいのものだ",
-      "sentence": "今日の夕食で良かったのはピザぐらいのものだ。",
-      "translation": "About the only good thing at tonight's dinner was the pizza.",
-      "translationEn": "About the only good thing at tonight's dinner was the pizza.",
-      "romaji": "Kyou no yuushoku de yokatta no wa piza gurai no mono da.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～のは Noun ぐらいのものだ",
-      "sentence": "この映画を見るのは時間の無駄ぐらいのものだ。",
-      "translation": "Watching this movie is nothing but a waste of time.",
-      "translationEn": "Watching this movie is nothing but a waste of time.",
-      "romaji": "Kono eiga o miru no wa jikan no muda gurai no mono da.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～のは Noun ぐらいのものだ",
-      "sentence": "彼と話すのはストレスぐらいのものだ。",
-      "translation": "Talking to him is nothing but stressful.",
-      "translationEn": "Talking to him is nothing but stressful.",
-      "romaji": "Kare to hanasu no wa sutoresu gurai no mono da.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～ば～ものを",
-      "sentence": "早く起きれば、遅刻しなかったものを。",
-      "translation": "If only I'd woken up early, I wouldn't have been late.",
-      "translationEn": "If only I'd woken up early, I wouldn't have been late.",
-      "romaji": "Hayaku okireba, chikoku shinakatta mono o.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～ば～ものを",
-      "sentence": "もっと頑張れば、テストに合格したものを。",
-      "translation": "If only I'd tried harder, I would have passed the test.",
-      "translationEn": "If only I'd tried harder, I would have passed the test.",
-      "romaji": "Motto ganbareba, tesuto ni goukaku shita mono o.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～ば～ものを",
-      "sentence": "お金があれば、新しい車を買ったものを。",
-      "translation": "If only I had the money, I would have bought a new car.",
-      "translationEn": "If only I had the money, I would have bought a new car.",
-      "romaji": "Okane ga areba, atarashii kuruma o katta mono o.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～ば～ものを",
-      "sentence": "友達がいれば、一緒に遊んだものを。",
-      "translation": "If only I had a friend, I would have hung out together.",
-      "translationEn": "If only I had a friend, I would have hung out together.",
-      "romaji": "Tomodachi ga ireba, issho ni asonda mono o.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～びた",
-      "sentence": "大人びた考え方をする子供",
-      "translation": "A child who thinks in a very grown-up way",
-      "translationEn": "A child who thinks in a very grown-up way",
-      "romaji": "Otonabita kangaekata o suru kodomo",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～びた",
-      "sentence": "古びたカバンを捨てられない。",
-      "translation": "I can't throw away that old, worn-looking bag.",
-      "translationEn": "I can't throw away that old, worn-looking bag.",
-      "romaji": "Furubita kaban o suterarenai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～びた",
-      "sentence": "田舎びた雰囲気がこの町の魅力だ。",
-      "translation": "The countrified atmosphere is this town’s charm.",
-      "translationEn": "The countrified atmosphere is this town’s charm.",
-      "romaji": "Inakabita fun'iki ga kono machi no miryoku da.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～びた",
-      "sentence": "彼女は少し大人びた服装をしている。",
-      "translation": "She’s dressed in a slightly grown-up style.",
-      "translationEn": "She’s dressed in a slightly grown-up style.",
-      "romaji": "Kanojo wa sukoshi otonabita fukusou o shite iru.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～びる",
-      "sentence": "彼女は年齢より大人びている。",
-      "translation": "She seems older than her actual age.",
-      "translationEn": "She seems older than her actual age.",
-      "romaji": "Kanojo wa nenrei yori otona bite iru.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～びる",
-      "sentence": "この建物はすっかり古びている。",
-      "translation": "This building has become completely old and worn.",
-      "translationEn": "This building has become completely old and worn.",
-      "romaji": "Kono tatemono wa sukkari furubite iru.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～びる",
-      "sentence": "彼は都会育ちなのに、少し田舎びている話し方をする。",
-      "translation": "Even though he grew up in the city, he speaks in a somewhat country-like way.",
-      "translationEn": "Even though he grew up in the city, he speaks in a somewhat country-like way.",
-      "romaji": "Kare wa tokai sodachi na noni, sukoshi inakabite iru hanashikata o suru.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～びる",
-      "sentence": "子供が急に大人びる瞬間を見ると驚く。",
-      "translation": "It’s surprising when you see a child suddenly act grown-up.",
-      "translationEn": "It’s surprising when you see a child suddenly act grown-up.",
-      "romaji": "Kodomo ga kyuu ni otona biru shunkan o miru to odoroku.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～ぶった",
-      "sentence": "彼は何でも知っているかのようにぶった態度を取る。",
-      "translation": "He takes on an attitude as though he knows everything.",
-      "translationEn": "He takes on an attitude as though he knows everything.",
-      "romaji": "Kare wa nandemo shitteiru ka no you ni butta taido o toru.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～ぶった",
-      "sentence": "偉そうぶった物言いをされると、少し腹が立つ。",
-      "translation": "It irritates me when he speaks in such a high-and-mighty way.",
-      "translationEn": "It irritates me when he speaks in such a high-and-mighty way.",
-      "romaji": "Erasou butta monoii o sareru to, sukoshi hara ga tatsu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～ぶった",
-      "sentence": "彼女は大人ぶった口調で話しているが、実はまだ高校生だ。",
-      "translation": "She’s speaking in a very grown-up manner, but she’s actually still in high school.",
-      "translationEn": "She’s speaking in a very grown-up manner, but she’s actually still in high school.",
-      "romaji": "Kanojo wa otona butta kuchou de hanashite iru ga, jitsu wa mada koukousei da.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～ぶった",
-      "sentence": "いい子ぶった態度を取らなくてもいいよ。",
-      "translation": "You don't have to pretend to be such a goody-goody.",
-      "translationEn": "You don't have to pretend to be such a goody-goody.",
-      "romaji": "Ii ko butta taido o toranakute mo ii yo.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its not hard to imagine why this situation occurred",
+      "translationViSource": "internal-en-example-draft"
     }
   ]
 }

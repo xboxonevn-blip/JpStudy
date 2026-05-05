@@ -5,360 +5,489 @@
   "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
   "tags": [
     "source-hanabira",
-    "n2-grammar-import"
+    "n2-grammar-import",
+    "needs-human-review"
   ],
   "examples": [
+    {
+      "grammarPoint": "～において",
+      "sentence": "この大学において、英語のクラスが一番人気があります。",
+      "translation": "In this university, English classes are the most popular.",
+      "translationEn": "In this university, English classes are the most popular",
+      "romaji": "Kono daigaku ni oite, eigo no kurasu ga ichiban ninki ga arimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: In this university, English classes are the most popular",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～において",
+      "sentence": "彼の研究において新しい発見がありました。",
+      "translation": "In his research, there were new discoveries.",
+      "translationEn": "In his research, there were new discoveries",
+      "romaji": "Kare no kenkyuu ni oite atarashii hakken ga arimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: In his research, there were new discoveries",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～において",
+      "sentence": "運動会において、彼は大活躍しました。",
+      "translation": "At the sports festival, he performed exceptionally well.",
+      "translationEn": "At the sports festival, he performed exceptionally well",
+      "romaji": "Undoukai ni oite, kare wa daikatsuyaku shimashita.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: At the sports festival, he performed exceptionally well",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～において",
+      "sentence": "環境問題においては、みんなが責任を持って行動すべきです。",
+      "translation": "Regarding environmental issues, everyone should take responsibility and act accordingly.",
+      "translationEn": "Regarding environmental issues, everyone should take responsibility and act accordingly",
+      "romaji": "Kankyou mondai ni oite wa, minna ga sekinin wo motte koudou subeki desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Regarding environmental issues, everyone should take responsibility and act accordingly",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～にかかわらず",
+      "sentence": "天気にかかわらず、今日の試合は行われます。",
+      "translation": "The game today will be held, regardless of the weather.",
+      "translationEn": "The game today will be held, regardless of the weather",
+      "romaji": "Tenki ni kakawarazu, kyou no shiai wa okonawaremasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The game today will be held, regardless of the weather",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～にかかわらず",
+      "sentence": "彼は年齢にかかわらず、新しいことを学び続けています。",
+      "translation": "He continues to learn new things, regardless of his age.",
+      "translationEn": "He continues to learn new things, regardless of his age",
+      "romaji": "Kare wa nenrei ni kakawarazu, atarashii koto wo manabi tsuzukete imasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He continues to learn new things, regardless of his age",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～にかかわらず",
+      "sentence": "その仕事が難しいかどうかにかかわらず、彼女は努力し続けた。",
+      "translation": "Regardless of whether the job is difficult or not, she continued to make an effort.",
+      "translationEn": "Regardless of whether the job is difficult or not, she continued to make an effort",
+      "romaji": "Sono shigoto ga muzukashii ka dou ka ni kakawarazu, kanojo wa doryoku shi tsuzuketa.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Regardless of whether the job is difficult or not, she continued to make an effort",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～にかかわらず",
+      "sentence": "経験の有無にかかわらず、このプログラムは誰でも利用できます。",
+      "translation": "Regardless of experience, this program can be used by anyone.",
+      "translationEn": "Regardless of experience, this program can be used by anyone",
+      "romaji": "Keiken no umu ni kakawarazu, kono puroguramu wa daredemo riyou dekimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Regardless of experience, this program can be used by anyone",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～にかけては",
+      "sentence": "料理の腕前にかけては、彼女は誰にも負けません。",
+      "translation": "When it comes to cooking skills, she is second to none.",
+      "translationEn": "When it comes to cooking skills, she is second to none",
+      "romaji": "Ryouri no udemae ni kakete wa, kanojo wa dare ni mo makemasen.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When it comes to cooking skills, she is second to none",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～にかけては",
+      "sentence": "この町にかけては、彼の店が一番おいしいラーメンを売っています。",
+      "translation": "As far as this town is concerned, his store sells the most delicious ramen.",
+      "translationEn": "As far as this town is concerned, his store sells the most delicious ramen",
+      "romaji": "Kono machi ni kakete wa, kare no mise ga ichiban oishii raamen wo utteimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As far as this town is concerned, his store sells the most delicious ramen",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～にかけては",
+      "sentence": "音楽の知識にかけては、彼は私たちの中で一番詳しいです。",
+      "translation": "When it comes to music knowledge, he is the most knowledgeable among us.",
+      "translationEn": "When it comes to music knowledge, he is the most knowledgeable among us",
+      "romaji": "Ongaku no chishiki ni kakete wa, kare wa watashitachi no naka de ichiban kuwashii desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When it comes to music knowledge, he is the most knowledgeable among us",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～にかけては",
+      "sentence": "スポーツにかけては、彼はどんな競技も得意です。",
+      "translation": "When it comes to sports, he excels in any competition.",
+      "translationEn": "When it comes to sports, he excels in any competition",
+      "romaji": "Supootsu ni kakete wa, kare wa donna kyogi mo tokui desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When it comes to sports, he excels in any competition",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～にしたがって",
+      "sentence": "成長にしたがって、この植物の葉が大きくなります。",
+      "translation": "As it grows, the leaves of this plant become larger.",
+      "translationEn": "As it grows, the leaves of this plant become larger",
+      "romaji": "Seichou ni shitagatte, kono shokubutsu no ha ga ookiku narimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As it grows, the leaves of this plant become larger",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～にしたがって",
+      "sentence": "説明書にしたがって、家具を組み立ててください。",
+      "translation": "Please assemble the furniture according to the instructions.",
+      "translationEn": "Please assemble the furniture according to the instructions",
+      "romaji": "Setsumeisho ni shitagatte, kagu wo kumitatete kudasai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Please assemble the furniture according to the instructions",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～にしたがって",
+      "sentence": "年齢にしたがって、人の体力は低下します。",
+      "translation": "As people age, their physical strength declines.",
+      "translationEn": "As people age, their physical strength declines",
+      "romaji": "Nenrei ni shitagatte, hito no tairyoku wa teika shimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As people age, their physical strength declines",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～にしたがって",
+      "sentence": "運動にしたがって、心拍数が増加することが一般的です。",
+      "translation": "It is common for the heart rate to increase with exercise.",
+      "translationEn": "It is common for the heart rate to increase with exercise",
+      "romaji": "Undou ni shitagatte, shinpakusuu ga zouka suru koto ga ippan teki desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: It is common for the heart rate to increase with exercise",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～にしたら",
+      "sentence": "彼にしたら、早く帰りたいだろう。",
+      "translation": "From his perspective, he probably wants to go home early.",
+      "translationEn": "From his perspective, he probably wants to go home early",
+      "romaji": "Kare ni shitara, hayaku kaeritai darou.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: From his perspective, he probably wants to go home early",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～にしたら",
+      "sentence": "子供たちにしたら、この話はつまらないかもしれない。",
+      "translation": "If I were the children, this story might be boring.",
+      "translationEn": "If I were the children, this story might be boring",
+      "romaji": "Kodomo-tachi ni shitara, kono hanashi wa tsumaranai kamoshirenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If I were the children, this story might be boring",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～にしたら",
+      "sentence": "私にしたら、そのプレゼントは素晴らしいと思います。",
+      "translation": "From my perspective, I think that present is wonderful.",
+      "translationEn": "From my perspective, I think that present is wonderful",
+      "romaji": "Watashi ni shitara, sono purezento wa subarashii to omoimasu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: From my perspective, I think that present is wonderful",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～にしたら",
+      "sentence": "彼女にしたら、この映画が好きではないでしょう。",
+      "translation": "If I were her, I would not like this movie.",
+      "translationEn": "If I were her, I would not like this movie",
+      "romaji": "Kanojo ni shitara, kono eiga ga suki dewa nai deshou.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If I were her, I would not like this movie",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～にしろ～にしろ",
+      "sentence": "行くにしろ行かないにしろ、早く決めてください。",
+      "translation": "Either way, whether you go or not, please decide quickly.",
+      "translationEn": "Either way, whether you go or not, please decide quickly",
+      "romaji": "Iku ni shiro ikanai ni shiro, hayaku kimete kudasai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Either way, whether you go or not, please decide quickly",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～にしろ～にしろ",
+      "sentence": "彼が来るにしろ来ないにしろ、パーティーは始めましょう。",
+      "translation": "Be it if he comes or not, let's start the party either way.",
+      "translationEn": "Be it if he comes or not, lets start the party either way",
+      "romaji": "Kare ga kuru ni shiro konai ni shiro, paatii wa hajimemashou.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Be it if he comes or not, lets start the party either way",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～にしろ～にしろ",
+      "sentence": "雨が降るにしろ降らないにしろ、傘を持って行ったほうがいいです。",
+      "translation": "Either way, whether it rains or not, it's better to bring an umbrella.",
+      "translationEn": "Either way, whether it rains or not, its better to bring an umbrella",
+      "romaji": "Ame ga furu ni shiro furanai ni shiro, kasa wo motte itta hou ga ii desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Either way, whether it rains or not, its better to bring an umbrella",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～にしろ～にしろ",
+      "sentence": "このレストランが高いにしろ安いにしろ、料理は美味しいです。",
+      "translation": "In any case, whether this restaurant is expensive or cheap, the food is delicious.",
+      "translationEn": "In any case, whether this restaurant is expensive or cheap, the food is delicious",
+      "romaji": "Kono resutoran ga takai ni shiro yasui ni shiro, ryouri wa oishii desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: In any case, whether this restaurant is expensive or cheap, the food is delicious",
+      "translationViSource": "internal-en-example-draft"
+    },
     {
       "grammarPoint": "～につけ～につけ",
       "sentence": "外国へ行くにつけ、勉強するにつけ、言葉の壁にぶつかる。",
       "translation": "Whether I go abroad or study, I always encounter language barriers.",
-      "translationEn": "Whether I go abroad or study, I always encounter language barriers.",
+      "translationEn": "Whether I go abroad or study, I always encounter language barriers",
       "romaji": "Gaikoku e iku ni tsuke, benkyou suru ni tsuke, kotoba no kabe ni butsukaru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether I go abroad or study, I always encounter language barriers",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～につけ～につけ",
       "sentence": "彼と話すにつけ、彼が考えるにつけ、彼の知識に驚かされる。",
       "translation": "Whenever I talk to him or hear his thoughts, I'm always amazed by his knowledge.",
-      "translationEn": "Whenever I talk to him or hear his thoughts, I'm always amazed by his knowledge.",
+      "translationEn": "Whenever I talk to him or hear his thoughts, Im always amazed by his knowledge",
       "romaji": "Kare to hanasu ni tsuke, kare ga kangaeru ni tsuke, kare no chishiki ni odorokasareru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whenever I talk to him or hear his thoughts, Im always amazed by his knowledge",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～につけ～につけ",
       "sentence": "この公園で遊ぶにつけ、散歩するにつけ、子供時代を思い出す。",
       "translation": "Each time I play or take a walk in this park, it reminds me of my childhood.",
-      "translationEn": "Each time I play or take a walk in this park, it reminds me of my childhood.",
+      "translationEn": "Each time I play or take a walk in this park, it reminds me of my childhood",
       "romaji": "Kono kouen de asobu ni tsuke, sanpo suru ni tsuke, kodomo jidai wo omoidasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Each time I play or take a walk in this park, it reminds me of my childhood",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～につけ～につけ",
       "sentence": "春につけ、秋につけ、彼は母校を訪れる。",
       "translation": "Whether in spring or autumn, he visits his alma mater.",
-      "translationEn": "Whether in spring or autumn, he visits his alma mater.",
+      "translationEn": "Whether in spring or autumn, he visits his alma mater",
       "romaji": "Haru ni tsuke, aki ni tsuke, kare wa bokou wo otozureru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether in spring or autumn, he visits his alma mater",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～につれて",
       "sentence": "年を取るにつれて、健康に気をつけなければなりません。",
       "translation": "As you get older, you have to pay more attention to your health.",
-      "translationEn": "As you get older, you have to pay more attention to your health.",
+      "translationEn": "As you get older, you have to pay more attention to your health",
       "romaji": "Toshi wo toru ni tsurete, kenkou ni ki wo tsukenakereba narimasen.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As you get older, you have to pay more attention to your health",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～につれて",
       "sentence": "春が近づくにつれて、気温が上がる。",
       "translation": "As spring approaches, the temperature rises.",
-      "translationEn": "As spring approaches, the temperature rises.",
+      "translationEn": "As spring approaches, the temperature rises",
       "romaji": "Haru ga chikazuku ni tsurete, kion ga agaru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As spring approaches, the temperature rises",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～につれて",
       "sentence": "勉強するにつれて、だんだん分かるようになる。",
       "translation": "As I study, I gradually come to understand.",
-      "translationEn": "As I study, I gradually come to understand.",
+      "translationEn": "As I study, I gradually come to understand",
       "romaji": "Benkyou suru ni tsurete, dandan wakaru you ni naru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As I study, I gradually come to understand",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～につれて",
       "sentence": "経験が増えるにつれて、自信もついてくる。",
       "translation": "As your experience increases, so does your confidence.",
-      "translationEn": "As your experience increases, so does your confidence.",
+      "translationEn": "As your experience increases, so does your confidence",
       "romaji": "Keiken ga fueru ni tsurete, jishin mo tsuite kuru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～にともなって",
-      "sentence": "人口が増えるにともなって、交通渋滞も悪化しています。",
-      "translation": "As the population increases, traffic congestion is also getting worse.",
-      "translationEn": "As the population increases, traffic congestion is also getting worse.",
-      "romaji": "Jinkou ga fueru ni tomonatte, koutsuu juutai mo akka shiteimasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～にともなって",
-      "sentence": "季節の変わり目にともなって、体調を崩しやすくなります。",
-      "translation": "As the seasons change, it's easier to get out of shape.",
-      "translationEn": "As the seasons change, it's easier to get out of shape.",
-      "romaji": "Kisetsu no kawarime ni tomonatte, taichou wo kuzushi yasuku narimasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～にともなって",
-      "sentence": "経済の成長にともなって、雇用の機会も増えるでしょう。",
-      "translation": "As the economy grows, employment opportunities will also increase.",
-      "translationEn": "As the economy grows, employment opportunities will also increase.",
-      "romaji": "Keizai no seichou ni tomonatte, koyou no kikai mo fueru deshou.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～にともなって",
-      "sentence": "彼の昇進にともなって、引っ越しをすることになりました。",
-      "translation": "As a result of his promotion, we decided to move.",
-      "translationEn": "As a result of his promotion, we decided to move.",
-      "romaji": "Kare no shoushin ni tomonatte, hikkoshi wo suru koto ni narimashita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～にほかならない",
-      "sentence": "彼の成功は努力にほかならない。",
-      "translation": "His success is nothing but hard work.",
-      "translationEn": "His success is nothing but hard work.",
-      "romaji": "Kare no seikou wa doryoku ni hoka naranai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～にほかならない",
-      "sentence": "この痛みは寒さにほかならない。",
-      "translation": "This pain is nothing but the cold.",
-      "translationEn": "This pain is nothing but the cold.",
-      "romaji": "Kono itami wa samusa ni hoka naranai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～にほかならない",
-      "sentence": "彼の失敗の原因は慢心にほかならない。",
-      "translation": "The cause of his failure is nothing but overconfidence.",
-      "translationEn": "The cause of his failure is nothing but overconfidence.",
-      "romaji": "Kare no shippai no gen'in wa manshin ni hoka naranai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～にほかならない",
-      "sentence": "彼女の笑顔は明るさにほかならない。",
-      "translation": "Her smile is none other than brightness.",
-      "translationEn": "Her smile is none other than brightness.",
-      "romaji": "Kanojo no egao wa akarusa ni hoka naranai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～にもかかわらず",
-      "sentence": "忙しいにもかかわらず、彼は毎日運動しています。",
-      "translation": "Despite being busy, he exercises every day.",
-      "translationEn": "Despite being busy, he exercises every day.",
-      "romaji": "Isogashii ni mo kakawarazu, kare wa mainichi undou shiteimasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～にもかかわらず",
-      "sentence": "雨が降っているにもかかわらず、彼女は散歩に行きました。",
-      "translation": "Even though it was raining, she went for a walk.",
-      "translationEn": "Even though it was raining, she went for a walk.",
-      "romaji": "Ame ga futteiru ni mo kakawarazu, kanojo wa sanpo ni ikimashita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～にもかかわらず",
-      "sentence": "車が古いにもかかわらず、まだよく走ります。",
-      "translation": "In spite of the car being old, it still runs well.",
-      "translationEn": "In spite of the car being old, it still runs well.",
-      "romaji": "Kuruma ga furui ni mo kakawarazu, mada yoku hashirimasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～にもかかわらず",
-      "sentence": "結果が良くないにもかかわらず、彼は頑張り続けました。",
-      "translation": "Despite the results not being good, he continued to do his best.",
-      "translationEn": "Despite the results not being good, he continued to do his best.",
-      "romaji": "Kekka ga yoku nai ni mo kakawarazu, kare wa ganbari tsuzukemashita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～により",
-      "sentence": "この事故は運転手の不注意により起こりました。",
-      "translation": "This accident occurred due to the driver's carelessness.",
-      "translationEn": "This accident occurred due to the driver's carelessness.",
-      "romaji": "Kono jiko wa untenshu no fuchuui ni yori okorimashita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～により",
-      "sentence": "その映画は小説により制作されました。",
-      "translation": "The movie was produced based on the novel.",
-      "translationEn": "The movie was produced based on the novel.",
-      "romaji": "Sono eiga wa shousetsu ni yori seisaku saremashita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～により",
-      "sentence": "犯人は警察により逮捕されました。",
-      "translation": "The criminal was arrested by the police.",
-      "translationEn": "The criminal was arrested by the police.",
-      "romaji": "Hannin wa keisatsu ni yori taiho saremashita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～により",
-      "sentence": "会社の成長は従業員の努力により実現しました。",
-      "translation": "The company's growth was achieved through the efforts of its employees.",
-      "translationEn": "The company's growth was achieved through the efforts of its employees.",
-      "romaji": "Kaisha no seichou wa juugyouin no doryoku ni yori jitsugen shimashita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～にわたって",
-      "sentence": "彼女は一年にわたって日本語を勉強しました。",
-      "translation": "She studied Japanese for over a year.",
-      "translationEn": "She studied Japanese for over a year.",
-      "romaji": "Kanojo wa ichinen ni watatte nihongo wo benkyou shimashita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～にわたって",
-      "sentence": "このプロジェクトは50キロにわたって道路を建設します。",
-      "translation": "This project will construct roads across 50 kilometers.",
-      "translationEn": "This project will construct roads across 50 kilometers.",
-      "romaji": "Kono purojekuto wa gojukiro ni watatte douro wo kensetsu shimasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～にわたって",
-      "sentence": "彼の著作は数多くの国にわたって読まれている。",
-      "translation": "His writings are read throughout numerous countries.",
-      "translationEn": "His writings are read throughout numerous countries.",
-      "romaji": "Kare no chosaku wa kazu ooku no kuni ni watatte yomarete iru.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～にわたって",
-      "sentence": "その秘密は世代にわたって保たれ続けた。",
-      "translation": "The secret was kept over generations.",
-      "translationEn": "The secret was kept over generations.",
-      "romaji": "Sono himitsu wa sedai ni watatte tamotsu sareta.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～に先立ち",
-      "sentence": "会議に先立ち、資料を確認しましょう。",
-      "translation": "Before the meeting, let's check the materials.",
-      "translationEn": "Before the meeting, let's check the materials.",
-      "romaji": "Kaigi ni sakidachi, shiryou wo kakunin shimashou.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～に先立ち",
-      "sentence": "出発に先立ち、荷物を整理しました。",
-      "translation": "Before departure, I organized my luggage.",
-      "translationEn": "Before departure, I organized my luggage.",
-      "romaji": "Shuppatsu ni sakidachi, nimotsu wo seiri shimashita.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～に先立ち",
-      "sentence": "就寝に先立ち、歯を磨きます。",
-      "translation": "Before going to bed, I brush my teeth.",
-      "translationEn": "Before going to bed, I brush my teeth.",
-      "romaji": "Shuushin ni sakidachi, ha wo migakimasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～に先立ち",
-      "sentence": "映画の上映に先立ち、予告編が放映されます。",
-      "translation": "Before the movie screening, the trailers are shown.",
-      "translationEn": "Before the movie screening, the trailers are shown.",
-      "romaji": "Eiga no jouei ni sakidachi, yokokuhen ga houei saremasu.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As your experience increases, so does your confidence",
+      "translationViSource": "internal-en-example-draft"
     }
   ]
 }

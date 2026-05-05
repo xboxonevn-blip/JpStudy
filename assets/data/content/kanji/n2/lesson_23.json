@@ -1,330 +1,416 @@
 {
   "schemaVersion": 2,
   "dataset": "kanji",
-  "series": "starter-original",
+  "series": "vocab-derived",
+  "source": "Tanos JLPT vocabulary via Hanabira",
+  "license": "CC-BY / attribution required; see docs/credits/upper-jlpt-sources.md",
   "level": "N2",
   "lessonId": 23,
   "entryCount": 8,
+  "importStatus": "source-derived-unihan-approved",
+  "sourceNote": "Kanji selected from imported JLPT vocabulary terms. Stroke counts and Vietnamese readings checked against Unicode Unihan.",
   "entries": [
     {
-      "kanjiId": "n2_l23_k001",
+      "kanjiId": "n2_jlpt_vocab_k177",
       "lessonId": 23,
       "level": "N2",
-      "character": "动",
-      "strokeCount": 14,
+      "character": "教",
+      "strokeCount": 11,
       "labels": {
-        "hanViet": "HAN 177",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "动 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Giáo",
+        "meaningVi": "to be taught",
+        "meaningViDisplay": "教 (to be taught)",
+        "meaningEn": "to be taught"
       },
       "readings": {
-        "onyomi": [
-          "on177"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun177"
+          "おそわる"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 动 qua van canh N2.",
-        "en": "Remember 动 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 教わる (to be taught).",
+        "en": "Appears in JLPT N2 vocabulary: 教わる (to be taught)."
       },
       "decomposition": {
-        "hanViet": "HAN 177",
-        "structure": "standalone",
+        "hanViet": "Giáo",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 177",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Giao",
+        "meaningViNoAccent": "to be taught",
+        "meaningEnNoAccent": "to be taught"
       },
+      "examples": [
+        {
+          "word": "教わる",
+          "reading": "おそわる",
+          "meaning": "to be taught"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l23_k002",
+      "kanjiId": "n2_jlpt_vocab_k178",
       "lessonId": 23,
       "level": "N2",
-      "character": "効",
-      "strokeCount": 15,
+      "character": "落",
+      "strokeCount": 12,
       "labels": {
-        "hanViet": "HAN 178",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "効 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Lạc",
+        "meaningVi": "to calm down, to settle down",
+        "meaningViDisplay": "落 (to calm down, to settle down)",
+        "meaningEn": "to calm down, to settle down"
       },
       "readings": {
-        "onyomi": [
-          "on178"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun178"
+          "おちつく"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 効 qua van canh N2.",
-        "en": "Remember 効 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 落着く (to calm down, to settle down).",
+        "en": "Appears in JLPT N2 vocabulary: 落着く (to calm down, to settle down)."
       },
       "decomposition": {
-        "hanViet": "HAN 178",
-        "structure": "standalone",
+        "hanViet": "Lạc",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 178",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Lac",
+        "meaningViNoAccent": "to calm down, to settle down",
+        "meaningEnNoAccent": "to calm down, to settle down"
       },
+      "examples": [
+        {
+          "word": "落着く",
+          "reading": "おちつく",
+          "meaning": "to calm down, to settle down"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l23_k003",
+      "kanjiId": "n2_jlpt_vocab_k179",
       "lessonId": 23,
       "level": "N2",
-      "character": "勊",
-      "strokeCount": 16,
+      "character": "着",
+      "strokeCount": 11,
       "labels": {
-        "hanViet": "HAN 179",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "勊 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": null,
+        "meaningVi": "to calm down, to settle down",
+        "meaningViDisplay": "着 (to calm down, to settle down)",
+        "meaningEn": "to calm down, to settle down"
       },
       "readings": {
-        "onyomi": [
-          "on179"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun179"
+          "おちつく"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 勊 qua van canh N2.",
-        "en": "Remember 勊 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 落着く (to calm down, to settle down).",
+        "en": "Appears in JLPT N2 vocabulary: 落着く (to calm down, to settle down)."
       },
       "decomposition": {
-        "hanViet": "HAN 179",
-        "structure": "standalone",
+        "hanViet": null,
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 179",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "to calm down, to settle down",
+        "meaningEnNoAccent": "to calm down, to settle down"
       },
+      "examples": [
+        {
+          "word": "落着く",
+          "reading": "おちつく",
+          "meaning": "to calm down, to settle down"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
     {
-      "kanjiId": "n2_l23_k004",
+      "kanjiId": "n2_jlpt_vocab_k180",
       "lessonId": 23,
       "level": "N2",
-      "character": "勛",
-      "strokeCount": 17,
+      "character": "手",
+      "strokeCount": 4,
       "labels": {
-        "hanViet": "HAN 180",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "勛 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Thủ",
+        "meaningVi": "font of purifying water placed at entrance of shrine",
+        "meaningViDisplay": "手 (font of purifying water placed at entrance of shrine)",
+        "meaningEn": "font of purifying water placed at entrance of shrine"
       },
       "readings": {
-        "onyomi": [
-          "on180"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun180"
+          "おてあらい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 勛 qua van canh N2.",
-        "en": "Remember 勛 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 御手洗 (font of purifying water placed at entrance of shrine).",
+        "en": "Appears in JLPT N2 vocabulary: 御手洗 (font of purifying water placed at entrance of shrine)."
       },
       "decomposition": {
-        "hanViet": "HAN 180",
-        "structure": "standalone",
+        "hanViet": "Thủ",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 180",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Thu",
+        "meaningViNoAccent": "font of purifying water placed at entrance of shrine",
+        "meaningEnNoAccent": "font of purifying water placed at entrance of shrine"
       },
+      "examples": [
+        {
+          "word": "御手洗",
+          "reading": "おてあらい",
+          "meaning": "font of purifying water placed at entrance of shrine"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     },
     {
-      "kanjiId": "n2_l23_k005",
+      "kanjiId": "n2_jlpt_vocab_k181",
       "lessonId": 23,
       "level": "N2",
-      "character": "勬",
-      "strokeCount": 6,
-      "labels": {
-        "hanViet": "HAN 181",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "勬 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on181"
-        ],
-        "kunyomi": [
-          "kun181"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 勬 qua van canh N2.",
-        "en": "Remember 勬 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 181",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 181",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l23_k006",
-      "lessonId": 23,
-      "level": "N2",
-      "character": "勽",
-      "strokeCount": 7,
-      "labels": {
-        "hanViet": "HAN 182",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "勽 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on182"
-        ],
-        "kunyomi": [
-          "kun182"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 勽 qua van canh N2.",
-        "en": "Remember 勽 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 182",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 182",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l23_k007",
-      "lessonId": 23,
-      "level": "N2",
-      "character": "匎",
-      "strokeCount": 8,
-      "labels": {
-        "hanViet": "HAN 183",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "匎 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
-      },
-      "readings": {
-        "onyomi": [
-          "on183"
-        ],
-        "kunyomi": [
-          "kun183"
-        ]
-      },
-      "mnemonic": {
-        "vi": "Ghi nho 匎 qua van canh N2.",
-        "en": "Remember 匎 through N2 contexts."
-      },
-      "decomposition": {
-        "hanViet": "HAN 183",
-        "structure": "standalone",
-        "components": [],
-        "componentNames": [],
-        "relatedKanji": []
-      },
-      "search": {
-        "hanVietNoAccent": "han 183",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
-      },
-      "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
-    },
-    {
-      "kanjiId": "n2_l23_k008",
-      "lessonId": 23,
-      "level": "N2",
-      "character": "匟",
+      "character": "洗",
       "strokeCount": 9,
       "labels": {
-        "hanViet": "HAN 184",
-        "meaningVi": "tu vung N2",
-        "meaningViDisplay": "匟 (tu vung N2)",
-        "meaningEn": "N2 vocabulary"
+        "hanViet": "Tẩy",
+        "meaningVi": "font of purifying water placed at entrance of shrine",
+        "meaningViDisplay": "洗 (font of purifying water placed at entrance of shrine)",
+        "meaningEn": "font of purifying water placed at entrance of shrine"
       },
       "readings": {
-        "onyomi": [
-          "on184"
-        ],
+        "onyomi": [],
         "kunyomi": [
-          "kun184"
+          "おてあらい"
         ]
       },
       "mnemonic": {
-        "vi": "Ghi nho 匟 qua van canh N2.",
-        "en": "Remember 匟 through N2 contexts."
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 御手洗 (font of purifying water placed at entrance of shrine).",
+        "en": "Appears in JLPT N2 vocabulary: 御手洗 (font of purifying water placed at entrance of shrine)."
       },
       "decomposition": {
-        "hanViet": "HAN 184",
-        "structure": "standalone",
+        "hanViet": "Tẩy",
+        "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": "han 184",
-        "meaningViNoAccent": "tu vung n2",
-        "meaningEnNoAccent": "n2 vocabulary"
+        "hanVietNoAccent": "Tay",
+        "meaningViNoAccent": "font of purifying water placed at entrance of shrine",
+        "meaningEnNoAccent": "font of purifying water placed at entrance of shrine"
       },
+      "examples": [
+        {
+          "word": "御手洗",
+          "reading": "おてあらい",
+          "meaning": "font of purifying water placed at entrance of shrine"
+        }
+      ],
       "tags": [
-        "draft,manual-review-needed,n2-scaffold"
-      ]
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k182",
+      "lessonId": 23,
+      "level": "N2",
+      "character": "伝",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": null,
+        "meaningVi": "maid",
+        "meaningViDisplay": "伝 (maid)",
+        "meaningEn": "maid"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "おてつだいさん"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: お手伝いさん (maid).",
+        "en": "Appears in JLPT N2 vocabulary: お手伝いさん (maid)."
+      },
+      "decomposition": {
+        "hanViet": null,
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": null,
+        "meaningViNoAccent": "maid",
+        "meaningEnNoAccent": "maid"
+      },
+      "examples": [
+        {
+          "word": "お手伝いさん",
+          "reading": "おてつだいさん",
+          "meaning": "maid"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "needs-kanji-editorial",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata"
+      ],
+      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k183",
+      "lessonId": 23,
+      "level": "N2",
+      "character": "驚",
+      "strokeCount": 22,
+      "labels": {
+        "hanViet": "Kinh",
+        "meaningVi": "to surprise, to frighten, to create a stir",
+        "meaningViDisplay": "驚 (to surprise, to frighten, to create a stir)",
+        "meaningEn": "to surprise, to frighten, to create a stir"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "おどろかす"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 驚かす (to surprise, to frighten, to create a stir).",
+        "en": "Appears in JLPT N2 vocabulary: 驚かす (to surprise, to frighten, to create a stir)."
+      },
+      "decomposition": {
+        "hanViet": "Kinh",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Kinh",
+        "meaningViNoAccent": "to surprise, to frighten, to create a stir",
+        "meaningEnNoAccent": "to surprise, to frighten, to create a stir"
+      },
+      "examples": [
+        {
+          "word": "驚かす",
+          "reading": "おどろかす",
+          "meaning": "to surprise, to frighten, to create a stir"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
+    },
+    {
+      "kanjiId": "n2_jlpt_vocab_k184",
+      "lessonId": 23,
+      "level": "N2",
+      "character": "各",
+      "strokeCount": 6,
+      "labels": {
+        "hanViet": "Các",
+        "meaningVi": "each, every, either, respectively, severally",
+        "meaningViDisplay": "各 (each, every, either, respectively, severally)",
+        "meaningEn": "each, every, either, respectively, severally"
+      },
+      "readings": {
+        "onyomi": [],
+        "kunyomi": [
+          "おのおの"
+        ]
+      },
+      "mnemonic": {
+        "vi": "Kanji xu?t hi?n trong t? JLPT N2: 各々 (each, every, either, respectively, severally).",
+        "en": "Appears in JLPT N2 vocabulary: 各々 (each, every, either, respectively, severally)."
+      },
+      "decomposition": {
+        "hanViet": "Các",
+        "structure": "unknown",
+        "components": [],
+        "componentNames": [],
+        "relatedKanji": []
+      },
+      "search": {
+        "hanVietNoAccent": "Cac",
+        "meaningViNoAccent": "each, every, either, respectively, severally",
+        "meaningEnNoAccent": "each, every, either, respectively, severally"
+      },
+      "examples": [
+        {
+          "word": "各々",
+          "reading": "おのおの",
+          "meaning": "each, every, either, respectively, severally"
+        }
+      ],
+      "tags": [
+        "source-tanos-vocab-derived-kanji",
+        "n2-kanji-import",
+        "source-unihan-kanji-metadata",
+        "unihan-kanji-checked",
+        "kanji-metadata-approved"
+      ],
+      "metadataStatus": "approved-by-user"
     }
+  ],
+  "metadataSources": [
+    "Unicode Unihan kTotalStrokes",
+    "Unicode Unihan kVietnamese"
   ]
 }

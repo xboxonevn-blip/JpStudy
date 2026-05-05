@@ -5,360 +5,489 @@
   "license": "Creative Commons; see docs/credits/upper-jlpt-sources.md",
   "tags": [
     "source-hanabira",
-    "n2-grammar-import"
+    "n2-grammar-import",
+    "needs-human-review"
   ],
   "examples": [
+    {
+      "grammarPoint": "～っぱなし",
+      "sentence": "窓を開けっぱなしにして、部屋が寒くなってしまった。",
+      "translation": "I left the window open, and the room got cold.",
+      "translationEn": "I left the window open, and the room got cold",
+      "romaji": "Mado o akeppanashi ni shite, heya ga samuku natte shimatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I left the window open, and the room got cold",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～っぱなし",
+      "sentence": "彼は音楽を聴くのが好きで、いつもイヤホンをつけっぱなしです。",
+      "translation": "He loves listening to music and always has his earphones on.",
+      "translationEn": "He loves listening to music and always has his earphones on",
+      "romaji": "Kare wa ongaku o kiku no ga suki de, itsumo iyahon o tsukeppanashi desu.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He loves listening to music and always has his earphones on",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～っぱなし",
+      "sentence": "子供はおもちゃを床に置きっぱなしで、片付けなかった。",
+      "translation": "The child left the toys on the floor and didn’t put them away.",
+      "translationEn": "The child left the toys on the floor and didn’t put them away",
+      "romaji": "Kodomo wa omocha o yuka ni okippanashi de, katazukenakatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The child left the toys on the floor and didn’t put them away",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～っぱなし",
+      "sentence": "昨夜は忙しかったので、テレビをつけっぱなしにして寝てしまった。",
+      "translation": "I was busy last night, so I left the TV on and fell asleep.",
+      "translationEn": "I was busy last night, so I left the TV on and fell asleep",
+      "romaji": "Sakuya wa isogashikatta node, terebi o tsukeppanashi ni shite nete shimatta.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I was busy last night, so I left the TV on and fell asleep",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～っぽい",
+      "sentence": "彼女は大人っぽい服を着ている。",
+      "translation": "She’s wearing clothes that look mature.",
+      "translationEn": "She’s wearing clothes that look mature",
+      "romaji": "Kanojo wa otonappoi fuku o kite iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She’s wearing clothes that look mature",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～っぽい",
+      "sentence": "この説明は分かりにくっぽい。",
+      "translation": "This explanation seems hard to understand.",
+      "translationEn": "This explanation seems hard to understand",
+      "romaji": "Kono setsumei wa wakari nikuppoi.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This explanation seems hard to understand",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～っぽい",
+      "sentence": "彼は疲れたっぽい顔をしている。",
+      "translation": "He has a face that looks tired.",
+      "translationEn": "He has a face that looks tired",
+      "romaji": "Kare wa tsukareta ppoi kao o shite iru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He has a face that looks tired",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～っぽい",
+      "sentence": "この部屋は寒っぽい感じがする。",
+      "translation": "This room feels kind of chilly.",
+      "translationEn": "This room feels kind of chilly",
+      "romaji": "Kono heya wa samuppoi kanji ga suru.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This room feels kind of chilly",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～ていられない",
+      "sentence": "こんなに忙しいのに、無理に遊んでいられない。",
+      "translation": "I'm so busy that I can't afford to just play around.",
+      "translationEn": "Im so busy that I cant afford to just play around",
+      "romaji": "Konna ni isogashii noni, muri ni asonde irarenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Im so busy that I cant afford to just play around",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～ていられない",
+      "sentence": "寒すぎて、外で待っていられない。",
+      "translation": "It's too cold; I can't keep waiting outside.",
+      "translationEn": "Its too cold; I cant keep waiting outside",
+      "romaji": "Samusugite, soto de matte irarenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its too cold; I cant keep waiting outside",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～ていられない",
+      "sentence": "この問題は重要だから、放っておいていられない。",
+      "translation": "This issue is too important to ignore.",
+      "translationEn": "This issue is too important to ignore",
+      "romaji": "Kono mondai wa jūyō dakara, houtte oite irarenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This issue is too important to ignore",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～ていられない",
+      "sentence": "彼女の態度が我慢できず、黙っていられない。",
+      "translation": "I can't stand her attitude, so I can't stay silent.",
+      "translationEn": "I cant stand her attitude, so I cant stay silent",
+      "romaji": "Kanojo no taido ga gaman dekizu, damatte irarenai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I cant stand her attitude, so I cant stay silent",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～てかなわない",
+      "sentence": "こんなに暑くてかなわない。",
+      "translation": "I can’t stand this heat.",
+      "translationEn": "I can’t stand this heat",
+      "romaji": "Konnani atsukute kanawanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I can’t stand this heat",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～てかなわない",
+      "sentence": "彼の話は失礼すぎてかなわない。",
+      "translation": "His remarks are so rude I can’t put up with them.",
+      "translationEn": "His remarks are so rude I can’t put up with them",
+      "romaji": "Kare no hanashi wa shitsurei sugite kanawanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: His remarks are so rude I can’t put up with them",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～てかなわない",
+      "sentence": "映画があまりに感動的で、忘れられなくてかなわない。",
+      "translation": "The movie was so moving that I can’t stand how it stays on my mind.",
+      "translationEn": "The movie was so moving that I can’t stand how it stays on my mind",
+      "romaji": "Eiga ga amari ni kandō-teki de, wasurerarenakute kanawanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The movie was so moving that I can’t stand how it stays on my mind",
+      "translationViSource": "internal-en-example-draft"
+    },
+    {
+      "grammarPoint": "～てかなわない",
+      "sentence": "彼女の笑顔がまぶしくてかなわない。",
+      "translation": "Her smile is so dazzling that it’s overwhelming.",
+      "translationEn": "Her smile is so dazzling that it’s overwhelming",
+      "romaji": "Kanojo no egao ga mabushikute kanawanai.",
+      "tags": [
+        "source-hanabira",
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Her smile is so dazzling that it’s overwhelming",
+      "translationViSource": "internal-en-example-draft"
+    },
     {
       "grammarPoint": "～てからでないと",
       "sentence": "宿題をしてからでないと、遊びに行けません。",
       "translation": "You cannot go play until you’ve finished your homework.",
-      "translationEn": "You cannot go play until you’ve finished your homework.",
+      "translationEn": "You cannot go play until you’ve finished your homework",
       "romaji": "Shukudai o shite kara denai to, asobi ni ikemasen.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: You cannot go play until you’ve finished your homework",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～てからでないと",
       "sentence": "食事をしてからでないと、デザートを食べられません。",
       "translation": "You cannot eat dessert until after having a meal.",
-      "translationEn": "You cannot eat dessert until after having a meal.",
+      "translationEn": "You cannot eat dessert until after having a meal",
       "romaji": "Shokuji o shite kara denai to, dezāto o taberaremasen.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: You cannot eat dessert until after having a meal",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～てからでないと",
       "sentence": "チケットを買ってからでないと、映画を見られません。",
       "translation": "You can’t watch the movie until after you buy a ticket.",
-      "translationEn": "You can’t watch the movie until after you buy a ticket.",
+      "translationEn": "You can’t watch the movie until after you buy a ticket",
       "romaji": "Chiketto o katte kara denai to, eiga o miraremasen.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: You can’t watch the movie until after you buy a ticket",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～てからでないと",
       "sentence": "試験が終わってからでないと、休みを取れません。",
       "translation": "You can’t take time off until the exam is over.",
-      "translationEn": "You can’t take time off until the exam is over.",
+      "translationEn": "You can’t take time off until the exam is over",
       "romaji": "Shiken ga owatte kara denai to, yasumi o toremasen.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: You can’t take time off until the exam is over",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～てこそ",
       "sentence": "勉強してこそ、テストに合格できる。",
       "translation": "Only when you study can you pass the test.",
-      "translationEn": "Only when you study can you pass the test.",
+      "translationEn": "Only when you study can you pass the test",
       "romaji": "Benkyō shite koso, tesuto ni gōkaku dekiru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Only when you study can you pass the test",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～てこそ",
       "sentence": "素直になってこそ、相手の気持ちが分かります。",
       "translation": "Only when you’re honest can you understand the other person’s feelings.",
-      "translationEn": "Only when you’re honest can you understand the other person’s feelings.",
+      "translationEn": "Only when you’re honest can you understand the other person’s feelings",
       "romaji": "Sunao ni natte koso, aite no kimochi ga wakarimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Only when you’re honest can you understand the other person’s feelings",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～てこそ",
       "sentence": "静かでこそ、心が落ち着く。",
       "translation": "Only in silence can one’s mind be at peace.",
-      "translationEn": "Only in silence can one’s mind be at peace.",
+      "translationEn": "Only in silence can one’s mind be at peace",
       "romaji": "Shizuka de koso, kokoro ga ochitsuku.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Only in silence can one’s mind be at peace",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～てこそ",
       "sentence": "友達でこそ、お互いに助け合うのは当然だ。",
       "translation": "Precisely because we’re friends, it’s natural to help each other.",
-      "translationEn": "Precisely because we’re friends, it’s natural to help each other.",
+      "translationEn": "Precisely because we’re friends, it’s natural to help each other",
       "romaji": "Tomodachi de koso, otagai ni tasukeau no wa tōzen da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Precisely because we’re friends, it’s natural to help each other",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～でしょうがない",
       "sentence": "今日は暇で(は)しょうがない。",
       "translation": "I’m extremely bored today.",
-      "translationEn": "I’m extremely bored today.",
+      "translationEn": "I’m extremely bored today",
       "romaji": "Kyō wa hima de shō ga nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I’m extremely bored today",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～でしょうがない",
       "sentence": "試験が近いから不安でしょうがない。",
       "translation": "I’m so anxious because the exam is coming up.",
-      "translationEn": "I’m so anxious because the exam is coming up.",
+      "translationEn": "I’m so anxious because the exam is coming up",
       "romaji": "Shiken ga chikai kara fuan deshō ga nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I’m so anxious because the exam is coming up",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～でしょうがない",
       "sentence": "頭が痛くてしょうがないから、早退したい。",
       "translation": "My head hurts so much I can’t stand it—I want to leave early.",
-      "translationEn": "My head hurts so much I can’t stand it—I want to leave early.",
+      "translationEn": "My head hurts so much I can’t stand it—I want to leave early",
       "romaji": "Atama ga itakute shō ga nai kara, sōtai shitai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: My head hurts so much I can’t stand it—I want to leave early",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～でしょうがない",
       "sentence": "新しいゲームが気になってしょうがない。",
       "translation": "I can’t help but keep thinking about the new game.",
-      "translationEn": "I can’t help but keep thinking about the new game.",
+      "translationEn": "I can’t help but keep thinking about the new game",
       "romaji": "Atarashii gēmu ga ki ni natte shō ga nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I can’t help but keep thinking about the new game",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～でたまらない",
       "sentence": "この暑さは本当に暑くてたまらない。",
       "translation": "This heat is absolutely unbearable.",
-      "translationEn": "This heat is absolutely unbearable.",
+      "translationEn": "This heat is absolutely unbearable",
       "romaji": "Kono atsusa wa hontō ni atsukute tamaranai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This heat is absolutely unbearable",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～でたまらない",
       "sentence": "彼女のことが好きでたまらない。",
       "translation": "I like her so much I can hardly stand it.",
-      "translationEn": "I like her so much I can hardly stand it.",
+      "translationEn": "I like her so much I can hardly stand it",
       "romaji": "Kanojo no koto ga suki de tamaranai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I like her so much I can hardly stand it",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～でたまらない",
       "sentence": "この部屋は寒くてたまらない。",
       "translation": "This room is unbearably cold.",
-      "translationEn": "This room is unbearably cold.",
+      "translationEn": "This room is unbearably cold",
       "romaji": "Kono heya wa samukute tamaranai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This room is unbearably cold",
+      "translationViSource": "internal-en-example-draft"
     },
     {
       "grammarPoint": "～でたまらない",
       "sentence": "彼の態度を見ていると、腹が立ってたまらない。",
       "translation": "Seeing his attitude makes me extremely angry.",
-      "translationEn": "Seeing his attitude makes me extremely angry.",
+      "translationEn": "Seeing his attitude makes me extremely angry",
       "romaji": "Kare no taido o mite iru to, hara ga tatte tamaranai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～でならない",
-      "sentence": "彼の演技が素晴らしくてならない。",
-      "translation": "I can’t help but be amazed at his wonderful performance.",
-      "translationEn": "I can’t help but be amazed at his wonderful performance.",
-      "romaji": "Kare no engi ga subarashikute naranai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～でならない",
-      "sentence": "合格発表が気になってならない。",
-      "translation": "I can’t stop worrying about the exam results.",
-      "translationEn": "I can’t stop worrying about the exam results.",
-      "romaji": "Gōkaku happyō ga ki ni natte naranai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～でならない",
-      "sentence": "友達が引っ越してしまって、寂しくてならない。",
-      "translation": "My friend moved away, and I feel unbearably lonely.",
-      "translationEn": "My friend moved away, and I feel unbearably lonely.",
-      "romaji": "Tomodachi ga hikkoshite shimatte, sabishikute naranai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～でならない",
-      "sentence": "初めての海外旅行で、不安でならない。",
-      "translation": "It’s my first trip abroad, and I’m extremely anxious.",
-      "translationEn": "It’s my first trip abroad, and I’m extremely anxious.",
-      "romaji": "Hajimete no kaigai ryokō de, fuan de naranai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～でばかりはいられない",
-      "sentence": "いつも助けてもらってばかりはいられない。",
-      "translation": "I can’t just keep letting people help me all the time.",
-      "translationEn": "I can’t just keep letting people help me all the time.",
-      "romaji": "Itsumo tasukete moratte bakari wa irarenai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～でばかりはいられない",
-      "sentence": "好きな仕事ばかりしてはいられない。",
-      "translation": "I can’t afford to only do the work I love.",
-      "translationEn": "I can’t afford to only do the work I love.",
-      "romaji": "Suki na shigoto bakari shite wa irarenai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～でばかりはいられない",
-      "sentence": "親に頼ってばかりはいられない。",
-      "translation": "I can’t keep depending on my parents forever.",
-      "translationEn": "I can’t keep depending on my parents forever.",
-      "romaji": "Oya ni tayotte bakari wa irarenai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～でばかりはいられない",
-      "sentence": "休んでばかりはいられない。仕事もしなくちゃ。",
-      "translation": "I can’t just keep taking breaks; I have work to do as well.",
-      "translationEn": "I can’t just keep taking breaks; I have work to do as well.",
-      "romaji": "Yasunde bakari wa irarenai. Shigoto mo shinakucha.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～ではないか",
-      "sentence": "彼は優秀な学生ではないか。",
-      "translation": "Isn’t he an excellent student?",
-      "translationEn": "Isn’t he an excellent student?",
-      "romaji": "Kare wa yūshū na gakusei de wa nai ka.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～ではないか",
-      "sentence": "この料理は美味しいではないか。",
-      "translation": "Isn’t this dish delicious?",
-      "translationEn": "Isn’t this dish delicious?",
-      "romaji": "Kono ryōri wa oishii de wa nai ka.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～ではないか",
-      "sentence": "あなたは彼女の友達ではないか。",
-      "translation": "Aren’t you her friend?",
-      "translationEn": "Aren’t you her friend?",
-      "romaji": "Anata wa kanojo no tomodachi de wa nai ka.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～ではないか",
-      "sentence": "明日は休みではないか。",
-      "translation": "Tomorrow’s a day off, right?",
-      "translationEn": "Tomorrow’s a day off, right?",
-      "romaji": "Ashita wa yasumi de wa nai ka.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～てはならない",
-      "sentence": "ここでタバコを吸ってはならない。",
-      "translation": "You must not smoke here.",
-      "translationEn": "You must not smoke here.",
-      "romaji": "Koko de tabako o sutte wa naranai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～てはならない",
-      "sentence": "秘密を他人に話してはならない。",
-      "translation": "You cannot reveal this secret to others.",
-      "translationEn": "You cannot reveal this secret to others.",
-      "romaji": "Himitsu o tanin ni hanashite wa naranai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～てはならない",
-      "sentence": "この部屋に入ってはならない。",
-      "translation": "You must not enter this room.",
-      "translationEn": "You must not enter this room.",
-      "romaji": "Kono heya ni haitte wa naranai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
-    },
-    {
-      "grammarPoint": "～てはならない",
-      "sentence": "飲酒運転をしてはならない。",
-      "translation": "You must not drink and drive.",
-      "translationEn": "You must not drink and drive.",
-      "romaji": "Inshu unten o shite wa naranai.",
-      "tags": [
-        "source-hanabira",
-        "needs-vi-editorial"
-      ]
+        "needs-vi-editorial",
+        "machine-translated-vi",
+        "needs-human-review"
+      ],
+      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Seeing his attitude makes me extremely angry",
+      "translationViSource": "internal-en-example-draft"
     }
   ]
 }
