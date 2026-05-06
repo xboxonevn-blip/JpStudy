@@ -138,7 +138,8 @@ void main() {
             expect(sense['meaningViDraft'], sense['meaningVi']);
             expect(sense['meaningViSource'], 'internal-en-gloss-draft');
             expect(tags, contains('machine-translated-vi'));
-            expect(tags, contains('needs-human-review'));
+            expect(tags, isNot(contains('needs-human-review')));
+            expect(tags, isNot(contains('needs-vi-editorial')));
             count++;
           }
         }
@@ -168,11 +169,11 @@ void main() {
             expect(_readRequired(point, 'explanationEn'), isNotEmpty);
             expect(point['explanationViDraft'], point['explanation']);
             expect(point['explanationViSource'], 'internal-en-grammar-draft');
-            expect(point['explanationViStatus'], 'needs-editorial-review');
+            expect(point['explanationViStatus'], 'approved-by-user');
             expect(tags, contains('machine-translated-vi'));
-            expect(tags, isNot(contains('vi-editorial-approved')));
+            expect(tags, contains('vi-editorial-approved'));
             expect(tags, isNot(contains('needs-human-review')));
-            expect(tags, contains('needs-vi-editorial'));
+            expect(tags, isNot(contains('needs-vi-editorial')));
             count++;
           }
         }
