@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:jpstudy/core/goal_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/study_goal.dart';
@@ -45,3 +46,4 @@ final appInitProvider = FutureProvider<void>((ref) async {
     ref.read(onboardingDoneProvider.notifier).state = false;
   }
 });
+

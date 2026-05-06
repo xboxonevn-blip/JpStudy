@@ -134,7 +134,7 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
     final srsStateAsync = currentTerm == null
         ? const AsyncValue<SrsStateData?>.data(null)
         : ref.watch(srsStateProvider(currentTerm.id));
-    final srsState = srsStateAsync.valueOrNull;
+    final srsState = srsStateAsync.value;
     final isFlipped =
         currentTerm != null && _flippedTermIds.contains(currentTerm.id);
     final canFlip = currentTerm?.definition.trim().isNotEmpty == true;
@@ -2057,3 +2057,5 @@ class _FlashcardControls extends StatelessWidget {
     );
   }
 }
+
+

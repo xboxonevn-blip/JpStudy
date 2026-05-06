@@ -29,7 +29,7 @@ class _ContinueButtonState extends ConsumerState<ContinueButton> {
   Widget build(BuildContext context) {
     final actionAsync = ref.watch(continueActionProvider);
     final language = ref.watch(appLanguageProvider);
-    final latest = actionAsync.valueOrNull;
+    final latest = actionAsync.value;
     if (latest != null) {
       _lastAction = latest;
     }
@@ -356,3 +356,5 @@ class _ContinueButtonState extends ConsumerState<ContinueButton> {
     }
   }
 }
+
+

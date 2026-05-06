@@ -11,19 +11,22 @@ final immersionServiceProvider = Provider<ImmersionService>((ref) {
 });
 
 final readArticlesProvider =
-    StateNotifierProvider<ReadArticlesNotifier, Set<String>>((ref) {
-  final service = ref.watch(immersionServiceProvider);
-  final db = ref.watch(databaseProvider);
-  return ReadArticlesNotifier(service, AchievementDao(db));
-});
+    NotifierProvider<ReadArticlesNotifier, Set<String>>(
+  ReadArticlesNotifier.new,
+);
 
-class ReadArticlesNotifier extends StateNotifier<Set<String>> {
-  ReadArticlesNotifier(this._service, this._achievementDao) : super({}) {
+class ReadArticlesNotifier extends Notifier<Set<String>> {
+  late final ImmersionService _service;
+  late final AchievementDao _achievementDao;
+
+  @override
+  Set<String> build() {
+    _service = ref.watch(immersionServiceProvider);
+    final db = ref.watch(databaseProvider);
+    _achievementDao = AchievementDao(db);
     _load();
+    return {};
   }
-
-  final ImmersionService _service;
-  final AchievementDao _achievementDao;
 
   /// Article-read milestones that unlock the Avid Reader achievement.
   static const _milestones = [5, 10, 20];

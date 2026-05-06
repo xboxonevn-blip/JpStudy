@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:drift/native.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/data/daos/achievement_dao.dart';
 import 'package:jpstudy/data/daos/learn_dao.dart';
@@ -81,17 +82,25 @@ void main() {
   late AppDatabase db;
   late _RecordingLearnSessionService service;
   late MistakeRepository mistakeRepo;
+  late ProviderContainer container;
   late LearnSessionNotifier notifier;
 
   setUp(() {
     db = AppDatabase(executor: NativeDatabase.memory());
     service = _RecordingLearnSessionService(LearnDao(db), AchievementDao(db));
     mistakeRepo = MistakeRepository(db.mistakeDao);
-    notifier = LearnSessionNotifier(service, mistakeRepo);
+    container = ProviderContainer(
+      overrides: [
+        learnSessionProvider.overrideWith(
+          () => LearnSessionNotifier(service, mistakeRepo),
+        ),
+      ],
+    );
+    notifier = container.read(learnSessionProvider.notifier);
   });
 
   tearDown(() async {
-    notifier.dispose();
+    container.dispose();
     await db.close();
   });
 
@@ -150,8 +159,15 @@ void main() {
       'ignores result when session changes while persistence is in flight',
       () async {
         final blockingRepo = _BlockingMistakeRepository(db.mistakeDao);
-        final raceNotifier = LearnSessionNotifier(service, blockingRepo);
-        addTearDown(raceNotifier.dispose);
+        final raceContainer = ProviderContainer(
+          overrides: [
+            learnSessionProvider.overrideWith(
+              () => LearnSessionNotifier(service, blockingRepo),
+            ),
+          ],
+        );
+        addTearDown(raceContainer.dispose);
+        final raceNotifier = raceContainer.read(learnSessionProvider.notifier);
         raceNotifier.restoreSession(_singleQuestionSession(sessionId: 'first'));
 
         final resultFuture = raceNotifier.submitAnswer('meaning1');

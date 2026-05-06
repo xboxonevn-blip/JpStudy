@@ -51,6 +51,7 @@ Widget _buildHarness({
   Object? error,
 }) {
   return ProviderScope(
+    retry: (retryCount, error) => null,
     overrides: [
       appLanguageProvider.overrideWith((ref) => language),
       lessonKanjiProvider(_kLessonId).overrideWith((_) async {
@@ -92,7 +93,8 @@ void main() {
       final completer = Completer<List<KanjiItem>>();
       await tester.pumpWidget(
         ProviderScope(
-          overrides: [
+    retry: (retryCount, error) => null,
+    overrides: [
             appLanguageProvider.overrideWith((ref) => AppLanguage.en),
             lessonKanjiProvider(_kLessonId).overrideWith(
               (_) => completer.future,
@@ -249,3 +251,4 @@ void main() {
     });
   });
 }
+

@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 import '../../../core/services/cloud_sync_service.dart';
 
@@ -13,3 +14,4 @@ void refreshCloudSyncStatus(WidgetRef ref) {
   final current = ref.read(cloudSyncStatusRefreshProvider);
   ref.read(cloudSyncStatusRefreshProvider.notifier).state = current + 1;
 }
+

@@ -19,9 +19,9 @@ class GhostReviewBanner extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final palette = context.appPalette;
     final language = ref.watch(appLanguageProvider);
-    final grammarCount = ref.watch(grammarGhostCountProvider).valueOrNull ?? 0;
-    final vocabCount = ref.watch(vocabGhostCountProvider).valueOrNull ?? 0;
-    final vocabGhosts = ref.watch(vocabGhostsProvider).valueOrNull ?? [];
+    final grammarCount = ref.watch(grammarGhostCountProvider).value ?? 0;
+    final vocabCount = ref.watch(vocabGhostCountProvider).value ?? 0;
+    final vocabGhosts = ref.watch(vocabGhostsProvider).value ?? [];
     final totalCount = grammarCount + vocabCount;
 
     final cardMargin = embedded
@@ -201,3 +201,5 @@ class GhostReviewBanner extends ConsumerWidget {
     );
   }
 }
+
+

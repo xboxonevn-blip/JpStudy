@@ -48,7 +48,7 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
         .maybeWhen(data: (count) => count, orElse: () => 0);
     final (mistakeCount, vocabDue, grammarDue, kanjiDue) = ref.watch(
       dashboardProvider.select((v) {
-        final d = v.valueOrNull;
+        final d = v.value;
         return (
           d?.totalMistakeCount ?? 0,
           d?.vocabDue ?? 0,
@@ -506,3 +506,5 @@ class _FocusChip extends StatelessWidget {
     );
   }
 }
+
+

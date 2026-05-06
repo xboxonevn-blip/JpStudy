@@ -169,7 +169,7 @@ final dashboardProvider = StreamProvider.autoDispose<DashboardState>((ref) {
   });
 
   return controller.stream;
-});
+}, retry: (retryCount, error) => null);
 
 class DashboardState {
   const DashboardState({

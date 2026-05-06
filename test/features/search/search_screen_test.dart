@@ -68,6 +68,7 @@ const _kanji = [
 
 Widget buildSearchScreen({LessonRepository? repo}) {
   return ProviderScope(
+    retry: (retryCount, error) => null,
     overrides: [
       appLanguageProvider.overrideWith((ref) => AppLanguage.en),
       studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
@@ -94,6 +95,7 @@ Widget buildSearchRouterApp({LessonRepository? repo}) {
   );
 
   return ProviderScope(
+    retry: (retryCount, error) => null,
     overrides: [
       appLanguageProvider.overrideWith((ref) => AppLanguage.en),
       studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
@@ -114,7 +116,8 @@ void main() {
 
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [
+    retry: (retryCount, error) => null,
+    overrides: [
           appLanguageProvider.overrideWith((ref) => AppLanguage.en),
           studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
           searchIndexProvider.overrideWith((ref) async => const []),
@@ -292,7 +295,8 @@ void main() {
 
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [
+    retry: (retryCount, error) => null,
+    overrides: [
           appLanguageProvider.overrideWith((ref) => AppLanguage.en),
           studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
           searchIndexProvider.overrideWith(
@@ -378,3 +382,4 @@ void main() {
     expect(find.text('kanji:1'), findsOneWidget);
   });
 }
+

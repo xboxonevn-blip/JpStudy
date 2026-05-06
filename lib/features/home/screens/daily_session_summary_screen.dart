@@ -21,7 +21,7 @@ class DailySessionSummaryScreen extends ConsumerWidget {
     final language = ref.watch(appLanguageProvider);
     final (vocabDue, grammarDue, kanjiDue, totalFix) = ref.watch(
       dashboardProvider.select((v) {
-        final d = v.valueOrNull;
+        final d = v.value;
         return (
           d?.vocabDue ?? 0,
           d?.grammarDue ?? 0,
@@ -31,7 +31,7 @@ class DailySessionSummaryScreen extends ConsumerWidget {
       }),
     );
     final totalDue = vocabDue + grammarDue + kanjiDue;
-    final progress = ref.watch(dailySessionProgressProvider).valueOrNull;
+    final progress = ref.watch(dailySessionProgressProvider).value;
     final coachPlan = ref.watch(coachSessionPlanProvider);
     final percent = progress?.completionPercent(
           step1Done: totalDue == 0,
@@ -248,3 +248,5 @@ class _SummaryItem extends StatelessWidget {
     );
   }
 }
+
+

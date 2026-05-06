@@ -29,19 +29,19 @@ final progressCoachBoardProvider = FutureProvider<ProgressCoachBoard>((
   // Subscribe only to the due/mistake counts; streak/XP changes won't retrigger.
   ref.watch(
     dashboardProvider.select((v) {
-      final d = v.valueOrNull;
+      final d = v.value;
       return (d?.vocabDue ?? 0, d?.grammarDue ?? 0, d?.kanjiDue ?? 0);
     }),
   );
-  final dashboard = ref.read(dashboardProvider).valueOrNull;
+  final dashboard = ref.read(dashboardProvider).value;
 
   final summary = await summaryFuture;
   final reviewHistory = await reviewHistoryFuture;
   final attemptHistory = await attemptHistoryFuture;
   final retention = await retentionFuture;
-  final continueAction = ref.watch(continueActionProvider).valueOrNull;
+  final continueAction = ref.watch(continueActionProvider).value;
   final recoveryItems =
-      ref.watch(weaknessRadarProvider).valueOrNull ?? const [];
+      ref.watch(weaknessRadarProvider).value ?? const [];
 
   final totalDue =
       (dashboard?.vocabDue ?? 0) +
@@ -809,3 +809,5 @@ String _l(
       return ja;
   }
 }
+
+

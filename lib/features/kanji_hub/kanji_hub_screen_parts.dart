@@ -533,8 +533,8 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
 
     final lang = widget.language;
     final seenIds =
-        ref.watch(kanjiSeenIdsProvider).valueOrNull ?? const <int>{};
-    final dueIds = ref.watch(kanjiDueIdsProvider).valueOrNull ?? const <int>{};
+        ref.watch(kanjiSeenIdsProvider).value ?? const <int>{};
+    final dueIds = ref.watch(kanjiDueIdsProvider).value ?? const <int>{};
     final exploreTitle = lang.kanjiExplorePanelTitle();
     final levelLabel = lang.kanjiCurrentLevelLabel();
     final flashcardLabel = lang.kanjiFlashcardActionLabel();
@@ -2710,3 +2710,5 @@ class _RelatedStatCard extends StatelessWidget {
     );
   }
 }
+
+

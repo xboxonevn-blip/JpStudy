@@ -1,11 +1,17 @@
 import 'dart:convert';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/features/study_hub/providers/study_hub_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const _studyHubPrefsKey = 'study_hub.state.v1';
 
+StudyHubNotifier _notifier() {
+  final container = ProviderContainer();
+  addTearDown(container.dispose);
+  return container.read(studyHubProvider.notifier);
+}
 void main() {
   setUp(() {
     SharedPreferences.setMockInitialValues({});
@@ -79,7 +85,7 @@ void main() {
     test(
       'load with empty prefs marks loaded and seeds default threads',
       () async {
-        final notifier = StudyHubNotifier();
+        final notifier = _notifier();
         await notifier.load();
 
         expect(notifier.state.loaded, isTrue);
@@ -98,7 +104,7 @@ void main() {
         jsonEncode(storedState.toJson()),
       );
 
-      final notifier = StudyHubNotifier();
+      final notifier = _notifier();
       final loadFuture = notifier.load();
       notifier.toggleLevel(StudyResourceLevel.advanced);
 
@@ -108,7 +114,7 @@ void main() {
     });
 
     test('toggleLevel adds then removes level', () {
-      final notifier = StudyHubNotifier();
+      final notifier = _notifier();
       notifier.toggleLevel(StudyResourceLevel.beginner);
       expect(notifier.state.selectedLevels, {StudyResourceLevel.beginner});
 
@@ -117,7 +123,7 @@ void main() {
     });
 
     test('toggleTopic adds then removes topic', () {
-      final notifier = StudyHubNotifier();
+      final notifier = _notifier();
       notifier.toggleTopic(StudyResourceTopic.grammar);
       expect(notifier.state.selectedTopics, {StudyResourceTopic.grammar});
 
@@ -126,7 +132,7 @@ void main() {
     });
 
     test('toggleLabel adds then removes label', () {
-      final notifier = StudyHubNotifier();
+      final notifier = _notifier();
       notifier.toggleLabel('N5');
       expect(notifier.state.selectedLabels, {'N5'});
 
@@ -135,7 +141,7 @@ void main() {
     });
 
     test('clearFilters resets all filter sets', () {
-      final notifier = StudyHubNotifier();
+      final notifier = _notifier();
       notifier
         ..toggleLevel(StudyResourceLevel.beginner)
         ..toggleTopic(StudyResourceTopic.grammar)
@@ -148,7 +154,7 @@ void main() {
     });
 
     test('setPackLesson clamps to range 0..maxLesson', () {
-      final notifier = StudyHubNotifier();
+      final notifier = _notifier();
       notifier.setPackLesson(
         packId: 'minna_1',
         currentLesson: -5,
@@ -165,7 +171,7 @@ void main() {
     });
 
     test('toggleOnboardingStep adds then removes step', () {
-      final notifier = StudyHubNotifier();
+      final notifier = _notifier();
       notifier.toggleOnboardingStep('kana');
       expect(notifier.state.doneOnboardingSteps, {'kana'});
 
@@ -174,7 +180,7 @@ void main() {
     });
 
     test('addQuestion trims title/body and deduplicates tags', () {
-      final notifier = StudyHubNotifier();
+      final notifier = _notifier();
       final before = notifier.state.threads.length;
 
       notifier.addQuestion(
@@ -194,7 +200,7 @@ void main() {
     });
 
     test('addQuestion ignores empty trimmed title/body', () {
-      final notifier = StudyHubNotifier();
+      final notifier = _notifier();
       final before = notifier.state.threads.length;
 
       notifier.addQuestion(title: '   ', body: 'Body', tags: ['N5']);
@@ -204,7 +210,7 @@ void main() {
     });
 
     test('addAnswer ignores empty body', () {
-      final notifier = StudyHubNotifier();
+      final notifier = _notifier();
       notifier.addQuestion(title: 'Q', body: 'B', tags: ['N5']);
       final target = notifier.state.threads.first;
       final before = target.answers.length;
@@ -216,7 +222,7 @@ void main() {
     });
 
     test('addAnswer to thread with no answers marks it resolved', () {
-      final notifier = StudyHubNotifier();
+      final notifier = _notifier();
       notifier.addQuestion(title: 'Q', body: 'B', tags: ['N5']);
       final threadId = notifier.state.threads.first.id;
 
@@ -229,7 +235,7 @@ void main() {
     });
 
     test('toggleResolved flips resolved state', () {
-      final notifier = StudyHubNotifier();
+      final notifier = _notifier();
       notifier.addQuestion(title: 'Q', body: 'B', tags: ['N5']);
       final target = notifier.state.threads.first;
       final initial = target.resolved;
@@ -242,7 +248,7 @@ void main() {
     });
 
     test('upvoteThread increments thread upvotes', () {
-      final notifier = StudyHubNotifier();
+      final notifier = _notifier();
       notifier.addQuestion(title: 'Q', body: 'B', tags: ['N5']);
       final target = notifier.state.threads.first;
 
@@ -254,7 +260,7 @@ void main() {
     });
 
     test('upvoteAnswer increments matching answer upvotes', () {
-      final notifier = StudyHubNotifier();
+      final notifier = _notifier();
       notifier.addQuestion(title: 'Q', body: 'B', tags: ['N5']);
       final threadId = notifier.state.threads.first.id;
       notifier.addAnswer(threadId: threadId, body: 'Answer');
@@ -274,7 +280,7 @@ void main() {
     });
 
     test('toggleExamChecklist adds then removes item', () {
-      final notifier = StudyHubNotifier();
+      final notifier = _notifier();
       notifier.toggleExamChecklist('ticket');
       expect(notifier.state.examChecklistDone, {'ticket'});
 
@@ -283,7 +289,7 @@ void main() {
     });
 
     test('setExamDate sets and clears exam date', () {
-      final notifier = StudyHubNotifier();
+      final notifier = _notifier();
       final date = DateTime(2026, 12, 7);
       notifier.setExamDate(date);
       expect(notifier.state.examDate, date);
@@ -377,3 +383,4 @@ void main() {
     });
   });
 }
+

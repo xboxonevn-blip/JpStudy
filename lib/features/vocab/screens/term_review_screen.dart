@@ -227,12 +227,12 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
                 padding: const EdgeInsets.all(24.0),
                 child: Column(
                   children: [
-                    if (srsStateAsync.valueOrNull != null)
+                    if (srsStateAsync.value != null)
                       Padding(
                         padding: const EdgeInsets.only(bottom: 12),
                         child: _buildRetrievability(
                           language,
-                          srsStateAsync.valueOrNull!,
+                          srsStateAsync.value!,
                         ),
                       ),
                     ConfidenceRatingWidget(
@@ -669,3 +669,5 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
     }
   }
 }
+
+

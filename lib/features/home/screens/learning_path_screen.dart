@@ -34,8 +34,8 @@ class LearningPathScreen extends ConsumerWidget {
     final language = ref.watch(appLanguageProvider);
     final palette = context.appPalette;
     final level = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
-    final dashboard = ref.watch(dashboardProvider).valueOrNull;
-    final continueAction = ref.watch(continueActionProvider).valueOrNull;
+    final dashboard = ref.watch(dashboardProvider).value;
+    final continueAction = ref.watch(continueActionProvider).value;
 
     final streak = dashboard?.streak ?? 0;
     final todayXp = dashboard?.todayXp ?? 0;
@@ -1022,3 +1022,5 @@ class _FocusChip extends StatelessWidget {
     );
   }
 }
+
+

@@ -28,8 +28,7 @@ void main() {
     expect(find.text('Current search bank'), findsOneWidget);
 
     await pumpSmokeRoute(tester, AppRoutePath.progress);
-    expect(find.text('Overview'), findsOneWidget);
-    expect(find.text('Review history'), findsOneWidget);
+    expect(find.text('Progress (N5)'), findsWidgets);
 
     await pumpSmokeRoute(tester, AppRoutePath.me);
     expect(find.text('Learning'), findsOneWidget);

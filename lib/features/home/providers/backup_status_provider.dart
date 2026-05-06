@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const backupAutoEnabledPrefKey = 'backup.auto.enabled';
@@ -59,3 +60,4 @@ class BackupStatus {
     return age >= 2;
   }
 }
+

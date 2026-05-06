@@ -94,14 +94,14 @@ class JlptCoachScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final language = ref.watch(appLanguageProvider);
     final level = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
-    final snapshot = ref.watch(jlptCoachSnapshotProvider).valueOrNull;
+    final snapshot = ref.watch(jlptCoachSnapshotProvider).value;
     final overviewAsync = ref.watch(jlptPrepOverviewProvider(level));
     final overview =
-        overviewAsync.valueOrNull ?? const JlptPrepOverview.placeholder();
+        overviewAsync.value ?? const JlptPrepOverview.placeholder();
     final mistakeRepo = ref.watch(mistakeRepositoryProvider);
     final (vocabDue, grammarDue, kanjiDue) = ref.watch(
       dashboardProvider.select((v) {
-        final d = v.valueOrNull;
+        final d = v.value;
         return (d?.vocabDue ?? 0, d?.grammarDue ?? 0, d?.kanjiDue ?? 0);
       }),
     );
@@ -195,3 +195,5 @@ String _screenTitle(AppLanguage language) => switch (language) {
   AppLanguage.vi => 'Ôn thi JLPT',
   AppLanguage.ja => 'JLPT試験対策',
 };
+
+

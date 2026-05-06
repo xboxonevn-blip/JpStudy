@@ -106,11 +106,11 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
 
   // Subscribe only to vocabDue — streak/XP ticks won't re-fire all 13 queries.
   final dueCount = ref.watch(
-    dashboardProvider.select((v) => v.valueOrNull?.vocabDue ?? 0),
+    dashboardProvider.select((v) => v.value?.vocabDue ?? 0),
   );
   // Use current stream value; null while stream hasn't emitted yet (fine since
   // nextReview is nullable). Provider re-runs when stream emits a new value.
-  final nextReview = ref.watch(nextVocabReviewProvider).valueOrNull;
+  final nextReview = ref.watch(nextVocabReviewProvider).value;
 
   // Fire all 11 independent fetches in parallel.
   final n5Future = repo.getVocabByLevelAndSeries('N5', 'hajimete');
@@ -565,3 +565,5 @@ String _catalogErrorTitle(AppLanguage language) =>
 
 String _catalogRetryLabel(AppLanguage language) =>
     language.vocabCatalogRetryLabel();
+
+

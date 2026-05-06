@@ -340,16 +340,18 @@ class StudyHubState {
 
 const _prefsKey = 'study_hub.state.v1';
 
-final studyHubProvider = StateNotifierProvider<StudyHubNotifier, StudyHubState>(
-  (ref) {
-    return StudyHubNotifier()..load();
-  },
+final studyHubProvider = NotifierProvider<StudyHubNotifier, StudyHubState>(
+  StudyHubNotifier.new,
 );
 
-class StudyHubNotifier extends StateNotifier<StudyHubState> {
-  StudyHubNotifier() : super(StudyHubState.initial());
-
+class StudyHubNotifier extends Notifier<StudyHubState> {
   int _revision = 0;
+
+  @override
+  StudyHubState build() {
+    load();
+    return StudyHubState.initial();
+  }
 
   Future<void> load() async {
     final loadRevision = _revision;
@@ -387,7 +389,7 @@ class StudyHubNotifier extends StateNotifier<StudyHubState> {
   }
 
   bool _canApply(int revision) {
-    return mounted && revision == _revision;
+    return ref.mounted && revision == _revision;
   }
 
   void _applyLoadedState(StudyHubState next, int loadRevision) {

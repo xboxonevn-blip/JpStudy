@@ -50,7 +50,7 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
 ) async {
   final dashboardDue = ref.watch(
     dashboardProvider.select((v) {
-      final d = v.valueOrNull;
+      final d = v.value;
       if (d == null) return null;
       return (vocabDue: d.vocabDue, grammarDue: d.grammarDue, kanjiDue: d.kanjiDue);
     }),
@@ -62,8 +62,8 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
   final lessonRepo = ref.watch(lessonRepositoryProvider);
   final grammarRepo = ref.watch(grammarRepositoryProvider);
   final mistakeRepo = ref.watch(mistakeRepositoryProvider);
-  final recoveryPack = ref.watch(recoveryPackProvider).valueOrNull;
-  final nextGrammarReview = ref.watch(nextGrammarReviewProvider).valueOrNull;
+  final recoveryPack = ref.watch(recoveryPackProvider).value;
+  final nextGrammarReview = ref.watch(nextGrammarReviewProvider).value;
   final now = DateTime.now();
 
   // Fetch per-type top-N mistakes in parallel — each query is bounded by LIMIT
@@ -362,3 +362,5 @@ String _planHint(
       return ja;
   }
 }
+
+

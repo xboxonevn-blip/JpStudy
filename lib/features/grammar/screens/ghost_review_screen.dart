@@ -38,7 +38,7 @@ class GhostReviewScreen extends ConsumerWidget {
       ),
       body: ghostsAsync.when(
         data: (ghosts) {
-          final mistakes = mistakesAsync.valueOrNull ?? const <UserMistake>[];
+          final mistakes = mistakesAsync.value ?? const <UserMistake>[];
           final mistakeMap = {
             for (final mistake in mistakes) mistake.itemId: mistake,
           };
@@ -98,7 +98,7 @@ class GhostReviewScreen extends ConsumerWidget {
         error: (err, stack) =>
             Center(child: Text('${language.loadErrorLabel}: $err')),
       ),
-      floatingActionButton: ghostsAsync.valueOrNull?.isNotEmpty == true
+      floatingActionButton: ghostsAsync.value?.isNotEmpty == true
           ? Container(
               margin: const EdgeInsets.only(bottom: 16),
               child: FloatingActionButton.extended(
@@ -407,3 +407,5 @@ class _GhostClayCardState extends State<_GhostClayCard> {
     }
   }
 }
+
+

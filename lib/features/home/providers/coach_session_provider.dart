@@ -13,7 +13,7 @@ import 'package:jpstudy/features/vocab/vocab_ghost_providers.dart';
 final coachSessionPlanProvider = Provider<CoachSessionPlan>((ref) {
   final d = ref.watch(
     dashboardProvider.select((v) {
-      final s = v.valueOrNull;
+      final s = v.value;
       return (
         vocabDue: s?.vocabDue ?? 0,
         grammarDue: s?.grammarDue ?? 0,
@@ -26,8 +26,8 @@ final coachSessionPlanProvider = Provider<CoachSessionPlan>((ref) {
     }),
   );
   final language = ref.watch(appLanguageProvider);
-  final continueAction = ref.watch(continueActionProvider).valueOrNull;
-  final recoveryPack = ref.watch(recoveryPackProvider).valueOrNull;
+  final continueAction = ref.watch(continueActionProvider).value;
+  final recoveryPack = ref.watch(recoveryPackProvider).value;
   final grammarGhostCount = ref
       .watch(grammarGhostCountProvider)
       .maybeWhen(data: (count) => count, orElse: () => 0);
@@ -253,3 +253,5 @@ class CoachStep {
   final IconData icon;
   final Color color;
 }
+
+

@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 import '../../../data/db/database_provider.dart';
 import '../../../data/daos/learn_dao.dart';
@@ -14,12 +15,33 @@ import '../services/question_generator.dart';
 import '../services/learn_session_service.dart';
 
 /// Provider for managing Learn Mode sessions
-class LearnSessionNotifier extends StateNotifier<LearnSession?> {
-  final QuestionGenerator _questionGenerator = QuestionGenerator();
-  final LearnSessionService _learnService;
-  final MistakeRepository _mistakeRepo;
+class LearnSessionNotifier extends Notifier<LearnSession?> {
+  LearnSessionNotifier([LearnSessionService? learnService, MistakeRepository? mistakeRepo])
+    : _injectedLearnService = learnService,
+      _injectedMistakeRepo = mistakeRepo;
 
-  LearnSessionNotifier(this._learnService, this._mistakeRepo) : super(null);
+  final QuestionGenerator _questionGenerator = QuestionGenerator();
+  final LearnSessionService? _injectedLearnService;
+  final MistakeRepository? _injectedMistakeRepo;
+  late final LearnSessionService _learnService;
+  late final MistakeRepository _mistakeRepo;
+
+  @override
+  LearnSession? build() {
+    final injectedLearnService = _injectedLearnService;
+    final injectedMistakeRepo = _injectedMistakeRepo;
+    if (injectedLearnService != null && injectedMistakeRepo != null) {
+      _learnService = injectedLearnService;
+      _mistakeRepo = injectedMistakeRepo;
+    } else {
+      final db = ref.watch(databaseProvider);
+      _mistakeRepo = ref.watch(mistakeRepositoryProvider);
+      final learnDao = LearnDao(db);
+      final achievementDao = AchievementDao(db);
+      _learnService = LearnSessionService(learnDao, achievementDao);
+    }
+    return null;
+  }
 
   void restoreSession(LearnSession session) {
     state = session;
@@ -118,7 +140,7 @@ class LearnSessionNotifier extends StateNotifier<LearnSession?> {
       );
     }
 
-    if (!mounted) {
+    if (!ref.mounted) {
       return null;
     }
     final activeSession = state;
@@ -172,7 +194,7 @@ class LearnSessionNotifier extends StateNotifier<LearnSession?> {
     final questionIndex = session.currentQuestionIndex;
     final completedSession = session.copyWith(completedAt: DateTime.now());
     await _learnService.saveSession(completedSession);
-    if (!mounted) {
+    if (!ref.mounted) {
       return;
     }
     final activeSession = state;
@@ -192,16 +214,10 @@ class LearnSessionNotifier extends StateNotifier<LearnSession?> {
 
 /// Provider instance
 final learnSessionProvider =
-    StateNotifierProvider<LearnSessionNotifier, LearnSession?>((ref) {
-      final db = ref.watch(databaseProvider);
-      final mistakeRepo = ref.watch(mistakeRepositoryProvider);
-
-      final learnDao = LearnDao(db);
-      final achievementDao = AchievementDao(db);
-      final service = LearnSessionService(learnDao, achievementDao);
-
-      return LearnSessionNotifier(service, mistakeRepo);
-    });
+    NotifierProvider<LearnSessionNotifier, LearnSession?>(
+      LearnSessionNotifier.new,
+    );
 
 /// Provider for question timing
 final questionStartTimeProvider = StateProvider<DateTime?>((ref) => null);
+

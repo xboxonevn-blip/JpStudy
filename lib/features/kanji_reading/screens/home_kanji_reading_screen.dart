@@ -90,11 +90,11 @@ class _KanjiHubBody extends ConsumerWidget {
       return Center(child: Text(language.noTermsAvailableLabel));
     }
 
-    final allItems = allAsync.valueOrNull ?? const <KanjiItem>[];
+    final allItems = allAsync.value ?? const <KanjiItem>[];
     final scopedAllItems = _filterItems(allItems);
-    final dueItems = _filterItems(dueAsync.valueOrNull ?? const <KanjiItem>[]);
+    final dueItems = _filterItems(dueAsync.value ?? const <KanjiItem>[]);
     final unseenItems = _filterItems(
-      unseenAsync.valueOrNull ?? const <KanjiItem>[],
+      unseenAsync.value ?? const <KanjiItem>[],
     );
     final primaryItems = _resolvePrimaryItems(
       source: source,
@@ -459,3 +459,5 @@ class _KanjiRow extends StatelessWidget {
     );
   }
 }
+
+

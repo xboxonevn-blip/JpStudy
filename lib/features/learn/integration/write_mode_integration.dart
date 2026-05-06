@@ -39,8 +39,8 @@ class WriteModeIntegration extends ConsumerWidget {
       data: (terms) => kanjiAsync.when(
         data: (kanji) {
           final dueTerms =
-              dueTermsAsync.valueOrNull ?? const <UserLessonTermData>[];
-          final dueKanji = dueKanjiAsync.valueOrNull ?? const <KanjiItem>[];
+              dueTermsAsync.value ?? const <UserLessonTermData>[];
+          final dueKanji = dueKanjiAsync.value ?? const <KanjiItem>[];
           final vocabItems = _convertToVocabItems(terms, level.shortLabel);
           final dueVocabItems = _convertToVocabItems(dueTerms, level.shortLabel);
           return WriteModeScreen(
@@ -91,3 +91,5 @@ class WriteModeIntegration extends ConsumerWidget {
         .toList();
   }
 }
+
+

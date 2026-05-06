@@ -152,13 +152,13 @@ class _HajimeteChapterDetailScreenState
             if (detail == null) {
               return _EmptyState(language: language);
             }
-            final rawItems = itemsAsync.valueOrNull ?? _toVocabItems(detail);
+            final rawItems = itemsAsync.value ?? _toVocabItems(detail);
             final items = _orderedItems(rawItems);
-            final dueItems = dueItemsAsync.valueOrNull ?? const <VocabItem>[];
+            final dueItems = dueItemsAsync.value ?? const <VocabItem>[];
             final srsStates =
-                srsStatesAsync.valueOrNull ?? const <int, SrsStateData>{};
+                srsStatesAsync.value ?? const <int, SrsStateData>{};
             final userTerms =
-                userTermsAsync.valueOrNull ?? const <UserLessonTermData>[];
+                userTermsAsync.value ?? const <UserLessonTermData>[];
             _maybeSyncStarFlags(userTerms);
             final userTermsByItemId = mapHajimeteUserTermsByItemId(
               items,
@@ -1774,3 +1774,5 @@ String _noVocabSubtitle(AppLanguage language) => switch (language) {
   AppLanguage.en =>
     'Flashcards will appear here once this chapter has vocab data.',
 };
+
+

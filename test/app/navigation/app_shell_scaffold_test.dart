@@ -8,7 +8,7 @@ Future<void> _disposeSmokeApp(WidgetTester tester) async {
   await tester.pumpWidget(const SizedBox.shrink());
   await tester.idle();
   await tester.pump();
-  await tester.pump(const Duration(milliseconds: 100));
+  await tester.pump(const Duration(milliseconds: 500));
 }
 
 void main() {

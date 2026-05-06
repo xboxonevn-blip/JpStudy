@@ -71,8 +71,8 @@ class _GrammarListWidgetState extends ConsumerState<GrammarListWidget> {
           (sum, entry) => sum + entry.examples.length,
         );
 
-        final dueCount = dueAsync.valueOrNull ?? 0;
-        final ghostCount = ghostAsync.valueOrNull ?? 0;
+        final dueCount = dueAsync.value ?? 0;
+        final ghostCount = ghostAsync.value ?? 0;
 
         return Column(
           children: [
@@ -1118,3 +1118,5 @@ String _tr(
       return ja;
   }
 }
+
+

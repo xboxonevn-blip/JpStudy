@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const _dailySessionPrefPrefix = 'daily.session';
@@ -194,3 +195,4 @@ class DailySessionProgress {
   bool get isComplete =>
       doneSteps.contains(1) && doneSteps.contains(2) && doneSteps.contains(3);
 }
+

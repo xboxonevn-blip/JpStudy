@@ -5,12 +5,10 @@ const _practiceHubOrderPrefKey = 'home.practice_hub.order';
 const _practiceHubFocusModePrefKey = 'home.practice_hub.focus_mode';
 
 final practiceHubPreferencesProvider =
-    StateNotifierProvider<
+    NotifierProvider<
       PracticeHubPreferencesNotifier,
       PracticeHubPreferences
-    >((ref) {
-      return PracticeHubPreferencesNotifier()..load();
-    });
+    >(PracticeHubPreferencesNotifier.new);
 
 class PracticeHubPreferences {
   const PracticeHubPreferences({
@@ -42,9 +40,12 @@ class PracticeHubPreferences {
 }
 
 class PracticeHubPreferencesNotifier
-    extends StateNotifier<PracticeHubPreferences> {
-  PracticeHubPreferencesNotifier()
-    : super(const PracticeHubPreferences.initial());
+    extends Notifier<PracticeHubPreferences> {
+  @override
+  PracticeHubPreferences build() {
+    load();
+    return const PracticeHubPreferences.initial();
+  }
 
   Future<void> load() async {
     final prefs = await SharedPreferences.getInstance();

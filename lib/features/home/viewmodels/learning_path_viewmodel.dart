@@ -6,15 +6,19 @@ import '../models/unit.dart';
 import '../models/lesson_node.dart';
 
 final learningPathViewModelProvider =
-    StateNotifierProvider<LearningPathViewModel, AsyncValue<List<Unit>>>((ref) {
-      final repo = ref.watch(lessonRepositoryProvider);
-      return LearningPathViewModel(repo)..loadPath();
-    });
+    NotifierProvider<LearningPathViewModel, AsyncValue<List<Unit>>>(
+      LearningPathViewModel.new,
+    );
 
-class LearningPathViewModel extends StateNotifier<AsyncValue<List<Unit>>> {
-  final LessonRepository _repo;
+class LearningPathViewModel extends Notifier<AsyncValue<List<Unit>>> {
+  late final LessonRepository _repo;
 
-  LearningPathViewModel(this._repo) : super(const AsyncValue.loading());
+  @override
+  AsyncValue<List<Unit>> build() {
+    _repo = ref.watch(lessonRepositoryProvider);
+    loadPath();
+    return const AsyncValue.loading();
+  }
 
   Future<void> loadPath() async {
     try {
