@@ -124,9 +124,66 @@
   "tags": [
     "jpstudy-original",
     "n1-immersion",
-    "immersion-passage-approved"
+    "immersion-passage-approved",
+    "comprehension-questions-draft"
   ],
   "sourceTags": [
     "jpstudy-original-approved"
+  ],
+  "comprehensionQuestions": [
+    {
+      "question": "本文の内容に合っているものはどれですか。",
+      "questionVi": "Câu nào phù hợp với nội dung bài đọc?",
+      "options": [
+        "批判と参加では、関係者が状況を丁寧に見直す必要があると述べられている。",
+        "批判と参加では、短期間で結果を出すことだけが重視されている。",
+        "批判と参加では、個人の努力は地域や組織に影響しないと説明されている。",
+        "批判と参加では、過去の方法を変えないことが最善だと結論づけている。"
+      ],
+      "optionsVi": [
+        "Bài về phê bình và tham gia nói rằng các bên liên quan cần xem xét tình hình một cách cẩn thận.",
+        "Bài về phê bình và tham gia chỉ nhấn mạnh việc tạo ra kết quả trong thời gian ngắn.",
+        "Bài về phê bình và tham gia giải thích rằng nỗ lực cá nhân không ảnh hưởng đến cộng đồng hay tổ chức.",
+        "Bài về phê bình và tham gia kết luận rằng không thay đổi cách làm cũ là tốt nhất."
+      ],
+      "correctIndex": 0,
+      "explanationVi": "Nội dung bài về phê bình và tham gia nhấn mạnh việc nhìn lại tình hình và điều chỉnh cách làm thay vì vội vàng kết luận."
+    },
+    {
+      "question": "筆者が最も言いたいことは何ですか。",
+      "questionVi": "Điều tác giả muốn nói nhất là gì?",
+      "options": [
+        "批判と参加の問題は、費用を増やせばすぐに解決できる。",
+        "批判と参加については、経験やデータを踏まえて継続的に考えることが大切だ。",
+        "批判と参加では、専門家の判断だけに従えば十分である。",
+        "批判と参加に関する議論は、できるだけ避けるべきである。"
+      ],
+      "optionsVi": [
+        "Vấn đề về phê bình và tham gia có thể được giải quyết ngay nếu tăng chi phí.",
+        "Với phê bình và tham gia, điều quan trọng là tiếp tục suy nghĩ dựa trên kinh nghiệm và dữ liệu.",
+        "Trong phê bình và tham gia, chỉ cần làm theo phán đoán của chuyên gia là đủ.",
+        "Nên tránh thảo luận về phê bình và tham gia càng nhiều càng tốt."
+      ],
+      "correctIndex": 1,
+      "explanationVi": "Ý chính là cần xem xét phê bình và tham gia một cách liên tục, dựa trên trải nghiệm thực tế và thông tin có căn cứ."
+    },
+    {
+      "question": "本文からどのようなことが推測できますか。",
+      "questionVi": "Có thể suy luận điều gì từ bài đọc?",
+      "options": [
+        "批判と参加では、一度決めた方針を変えると必ず失敗する。",
+        "批判と参加では、意見の違いがあるため話し合いは無意味である。",
+        "批判と参加では、小さな気づきや提案が後の改善につながる可能性がある。",
+        "批判と参加では、目に見える成果だけを評価すれば十分である。"
+      ],
+      "optionsVi": [
+        "Trong phê bình và tham gia, hễ thay đổi phương hướng đã quyết định thì chắc chắn thất bại.",
+        "Trong phê bình và tham gia, vì có khác biệt ý kiến nên thảo luận là vô nghĩa.",
+        "Trong phê bình và tham gia, những nhận ra hoặc đề xuất nhỏ có thể dẫn đến cải thiện về sau.",
+        "Trong phê bình và tham gia, chỉ cần đánh giá kết quả nhìn thấy được là đủ."
+      ],
+      "correctIndex": 2,
+      "explanationVi": "Bài đọc gợi ý rằng với phê bình và tham gia, các thay đổi nhỏ và quá trình trao đổi có thể tạo ra cải thiện lâu dài."
+    }
   ]
 }

@@ -171,6 +171,28 @@ Shape:
 - `assets/data/support/kanji/decomposition.json`: generated compatibility export derived
   from the embedded lesson kanji decomposition data.
 
+## Immersion Schema
+
+Path:
+
+- `assets/data/content/immersion/n2/lesson_01.json`
+- `assets/data/content/immersion/n1/lesson_25.json`
+
+Optional reading-check payload:
+
+- `comprehensionQuestions` (array, optional): static comprehension questions
+  used by the reader quiz when present; if absent or empty, the app falls back
+  to generated token-based quiz questions.
+
+Each `comprehensionQuestions` item:
+
+- `question` (string): Japanese question text.
+- `questionVi` (string, optional): Vietnamese translation of question.
+- `options` (array[string], 4 items): Japanese answer choices.
+- `optionsVi` (array[string], optional, 4 items): Vietnamese translations.
+- `correctIndex` (integer 0-3): index of the correct option.
+- `explanationVi` (string, optional): Vietnamese explanation of answer.
+
 ## Source Of Truth Policy
 
 Current transition policy:

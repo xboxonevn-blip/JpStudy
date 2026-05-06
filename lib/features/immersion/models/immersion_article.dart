@@ -34,6 +34,50 @@ class ImmersionToken {
   }
 }
 
+class ComprehensionQuestion {
+  const ComprehensionQuestion({
+    required this.question,
+    required this.options,
+    required this.correctIndex,
+    this.questionVi,
+    this.optionsVi,
+    this.explanationVi,
+  });
+
+  final String question;
+  final List<String> options;
+  final int correctIndex;
+  final String? questionVi;
+  final List<String>? optionsVi;
+  final String? explanationVi;
+
+  factory ComprehensionQuestion.fromJson(Map<String, dynamic> json) {
+    return ComprehensionQuestion(
+      question: json['question']?.toString() ?? '',
+      options: (json['options'] as List<dynamic>? ?? const [])
+          .map((e) => e.toString())
+          .toList(),
+      correctIndex: json['correctIndex'] as int? ?? 0,
+      questionVi: json['questionVi']?.toString(),
+      optionsVi: (json['optionsVi'] as List<dynamic>?)
+          ?.map((e) => e.toString())
+          .toList(),
+      explanationVi: json['explanationVi']?.toString(),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'question': question,
+      'questionVi': questionVi,
+      'options': options,
+      'optionsVi': optionsVi,
+      'correctIndex': correctIndex,
+      'explanationVi': explanationVi,
+    };
+  }
+}
+
 class ImmersionArticle {
   static const localSourceLabel = 'JpStudy Original';
   static const _fallbackLevel = 'N5';
@@ -53,6 +97,7 @@ class ImmersionArticle {
     required this.publishedAt,
     required this.paragraphs,
     this.translation,
+    this.comprehensionQuestions = const [],
   });
 
   final String id;
@@ -64,6 +109,7 @@ class ImmersionArticle {
   final DateTime publishedAt;
   final List<List<ImmersionToken>> paragraphs;
   final String? translation;
+  final List<ComprehensionQuestion> comprehensionQuestions;
 
   String get level => officialLevel;
 
@@ -108,6 +154,11 @@ class ImmersionArticle {
           DateTime.now(),
       paragraphs: paragraphs,
       translation: _cleanOptionalText(json['translation']?.toString()),
+      comprehensionQuestions:
+          (json['comprehensionQuestions'] as List<dynamic>? ?? const [])
+              .whereType<Map<String, dynamic>>()
+              .map(ComprehensionQuestion.fromJson)
+              .toList(),
     );
   }
 
@@ -121,6 +172,7 @@ class ImmersionArticle {
     DateTime? publishedAt,
     List<List<ImmersionToken>>? paragraphs,
     String? translation,
+    List<ComprehensionQuestion>? comprehensionQuestions,
   }) {
     return ImmersionArticle(
       id: id ?? this.id,
@@ -136,6 +188,8 @@ class ImmersionArticle {
       publishedAt: publishedAt ?? this.publishedAt,
       paragraphs: paragraphs ?? this.paragraphs,
       translation: _cleanOptionalText(translation ?? this.translation),
+      comprehensionQuestions:
+          comprehensionQuestions ?? this.comprehensionQuestions,
     );
   }
 
@@ -217,6 +271,9 @@ class ImmersionArticle {
           .map((p) => p.map((t) => t.toJson()).toList())
           .toList(),
       'translation': translation,
+      'comprehensionQuestions': comprehensionQuestions
+          .map((q) => q.toJson())
+          .toList(),
     };
   }
 }

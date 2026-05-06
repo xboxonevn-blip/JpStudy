@@ -124,9 +124,66 @@
   "tags": [
     "jpstudy-original",
     "n1-immersion",
-    "immersion-passage-approved"
+    "immersion-passage-approved",
+    "comprehension-questions-draft"
   ],
   "sourceTags": [
     "jpstudy-original-approved"
+  ],
+  "comprehensionQuestions": [
+    {
+      "question": "本文の内容に合っているものはどれですか。",
+      "questionVi": "Câu nào phù hợp với nội dung bài đọc?",
+      "options": [
+        "データ化される身体では、関係者が状況を丁寧に見直す必要があると述べられている。",
+        "データ化される身体では、短期間で結果を出すことだけが重視されている。",
+        "データ化される身体では、個人の努力は地域や組織に影響しないと説明されている。",
+        "データ化される身体では、過去の方法を変えないことが最善だと結論づけている。"
+      ],
+      "optionsVi": [
+        "Bài về cơ thể bị dữ liệu hóa nói rằng các bên liên quan cần xem xét tình hình một cách cẩn thận.",
+        "Bài về cơ thể bị dữ liệu hóa chỉ nhấn mạnh việc tạo ra kết quả trong thời gian ngắn.",
+        "Bài về cơ thể bị dữ liệu hóa giải thích rằng nỗ lực cá nhân không ảnh hưởng đến cộng đồng hay tổ chức.",
+        "Bài về cơ thể bị dữ liệu hóa kết luận rằng không thay đổi cách làm cũ là tốt nhất."
+      ],
+      "correctIndex": 0,
+      "explanationVi": "Nội dung bài về cơ thể bị dữ liệu hóa nhấn mạnh việc nhìn lại tình hình và điều chỉnh cách làm thay vì vội vàng kết luận."
+    },
+    {
+      "question": "筆者が最も言いたいことは何ですか。",
+      "questionVi": "Điều tác giả muốn nói nhất là gì?",
+      "options": [
+        "データ化される身体の問題は、費用を増やせばすぐに解決できる。",
+        "データ化される身体については、経験やデータを踏まえて継続的に考えることが大切だ。",
+        "データ化される身体では、専門家の判断だけに従えば十分である。",
+        "データ化される身体に関する議論は、できるだけ避けるべきである。"
+      ],
+      "optionsVi": [
+        "Vấn đề về cơ thể bị dữ liệu hóa có thể được giải quyết ngay nếu tăng chi phí.",
+        "Với cơ thể bị dữ liệu hóa, điều quan trọng là tiếp tục suy nghĩ dựa trên kinh nghiệm và dữ liệu.",
+        "Trong cơ thể bị dữ liệu hóa, chỉ cần làm theo phán đoán của chuyên gia là đủ.",
+        "Nên tránh thảo luận về cơ thể bị dữ liệu hóa càng nhiều càng tốt."
+      ],
+      "correctIndex": 1,
+      "explanationVi": "Ý chính là cần xem xét cơ thể bị dữ liệu hóa một cách liên tục, dựa trên trải nghiệm thực tế và thông tin có căn cứ."
+    },
+    {
+      "question": "本文からどのようなことが推測できますか。",
+      "questionVi": "Có thể suy luận điều gì từ bài đọc?",
+      "options": [
+        "データ化される身体では、一度決めた方針を変えると必ず失敗する。",
+        "データ化される身体では、意見の違いがあるため話し合いは無意味である。",
+        "データ化される身体では、小さな気づきや提案が後の改善につながる可能性がある。",
+        "データ化される身体では、目に見える成果だけを評価すれば十分である。"
+      ],
+      "optionsVi": [
+        "Trong cơ thể bị dữ liệu hóa, hễ thay đổi phương hướng đã quyết định thì chắc chắn thất bại.",
+        "Trong cơ thể bị dữ liệu hóa, vì có khác biệt ý kiến nên thảo luận là vô nghĩa.",
+        "Trong cơ thể bị dữ liệu hóa, những nhận ra hoặc đề xuất nhỏ có thể dẫn đến cải thiện về sau.",
+        "Trong cơ thể bị dữ liệu hóa, chỉ cần đánh giá kết quả nhìn thấy được là đủ."
+      ],
+      "correctIndex": 2,
+      "explanationVi": "Bài đọc gợi ý rằng với cơ thể bị dữ liệu hóa, các thay đổi nhỏ và quá trình trao đổi có thể tạo ra cải thiện lâu dài."
+    }
   ]
 }

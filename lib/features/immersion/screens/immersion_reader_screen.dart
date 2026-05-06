@@ -314,6 +314,18 @@ class _ImmersionReaderScreenState extends ConsumerState<ImmersionReaderScreen> {
     ImmersionArticle article,
     AppLanguage language,
   ) {
+    if (article.comprehensionQuestions.isNotEmpty) {
+      return article.comprehensionQuestions
+          .map(
+            (question) => _ImmersionQuizQuestion(
+              prompt: question.questionVi ?? question.question,
+              options: question.optionsVi ?? question.options,
+              correctIndex: question.correctIndex,
+            ),
+          )
+          .toList();
+    }
+
     final random = Random(article.id.hashCode);
     final allTokens = article.paragraphs.expand((p) => p).toList();
 

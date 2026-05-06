@@ -100,9 +100,66 @@
   "tags": [
     "jpstudy-original",
     "n2-immersion",
-    "immersion-passage-approved"
+    "immersion-passage-approved",
+    "comprehension-questions-draft"
   ],
   "sourceTags": [
     "jpstudy-original-approved"
+  ],
+  "comprehensionQuestions": [
+    {
+      "question": "本文の内容に合っているものはどれですか。",
+      "questionVi": "Câu nào phù hợp với nội dung bài đọc?",
+      "options": [
+        "地域新聞の信頼では、関係者が状況を丁寧に見直す必要があると述べられている。",
+        "地域新聞の信頼では、短期間で結果を出すことだけが重視されている。",
+        "地域新聞の信頼では、個人の努力は地域や組織に影響しないと説明されている。",
+        "地域新聞の信頼では、過去の方法を変えないことが最善だと結論づけている。"
+      ],
+      "optionsVi": [
+        "Bài về báo địa phương nói rằng các bên liên quan cần xem xét tình hình một cách cẩn thận.",
+        "Bài về báo địa phương chỉ nhấn mạnh việc tạo ra kết quả trong thời gian ngắn.",
+        "Bài về báo địa phương giải thích rằng nỗ lực cá nhân không ảnh hưởng đến cộng đồng hay tổ chức.",
+        "Bài về báo địa phương kết luận rằng không thay đổi cách làm cũ là tốt nhất."
+      ],
+      "correctIndex": 0,
+      "explanationVi": "Nội dung bài về báo địa phương nhấn mạnh việc nhìn lại tình hình và điều chỉnh cách làm thay vì vội vàng kết luận."
+    },
+    {
+      "question": "筆者が最も言いたいことは何ですか。",
+      "questionVi": "Điều tác giả muốn nói nhất là gì?",
+      "options": [
+        "地域新聞の信頼の問題は、費用を増やせばすぐに解決できる。",
+        "地域新聞の信頼については、経験やデータを踏まえて継続的に考えることが大切だ。",
+        "地域新聞の信頼では、専門家の判断だけに従えば十分である。",
+        "地域新聞の信頼に関する議論は、できるだけ避けるべきである。"
+      ],
+      "optionsVi": [
+        "Vấn đề về báo địa phương có thể được giải quyết ngay nếu tăng chi phí.",
+        "Với báo địa phương, điều quan trọng là tiếp tục suy nghĩ dựa trên kinh nghiệm và dữ liệu.",
+        "Trong báo địa phương, chỉ cần làm theo phán đoán của chuyên gia là đủ.",
+        "Nên tránh thảo luận về báo địa phương càng nhiều càng tốt."
+      ],
+      "correctIndex": 1,
+      "explanationVi": "Ý chính là cần xem xét báo địa phương một cách liên tục, dựa trên trải nghiệm thực tế và thông tin có căn cứ."
+    },
+    {
+      "question": "本文からどのようなことが推測できますか。",
+      "questionVi": "Có thể suy luận điều gì từ bài đọc?",
+      "options": [
+        "地域新聞の信頼では、一度決めた方針を変えると必ず失敗する。",
+        "地域新聞の信頼では、意見の違いがあるため話し合いは無意味である。",
+        "地域新聞の信頼では、小さな気づきや提案が後の改善につながる可能性がある。",
+        "地域新聞の信頼では、目に見える成果だけを評価すれば十分である。"
+      ],
+      "optionsVi": [
+        "Trong báo địa phương, hễ thay đổi phương hướng đã quyết định thì chắc chắn thất bại.",
+        "Trong báo địa phương, vì có khác biệt ý kiến nên thảo luận là vô nghĩa.",
+        "Trong báo địa phương, những nhận ra hoặc đề xuất nhỏ có thể dẫn đến cải thiện về sau.",
+        "Trong báo địa phương, chỉ cần đánh giá kết quả nhìn thấy được là đủ."
+      ],
+      "correctIndex": 2,
+      "explanationVi": "Bài đọc gợi ý rằng với báo địa phương, các thay đổi nhỏ và quá trình trao đổi có thể tạo ra cải thiện lâu dài."
+    }
   ]
 }
