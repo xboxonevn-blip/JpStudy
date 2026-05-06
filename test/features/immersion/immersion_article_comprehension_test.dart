@@ -14,8 +14,7 @@ Map<String, dynamic> _articleJson({Object? comprehensionQuestions}) {
       ],
     ],
     'translation': 'Bản dịch mẫu.',
-    if (comprehensionQuestions != null)
-      'comprehensionQuestions': comprehensionQuestions,
+    'comprehensionQuestions': ?comprehensionQuestions,
   };
 }
 

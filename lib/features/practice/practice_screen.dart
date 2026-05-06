@@ -1358,7 +1358,7 @@ class _PracticeSpotlightCard extends StatelessWidget {
                     child: Icon(item.icon, color: accent, size: 19),
                   ),
                   const Spacer(),
-                  if (status != null) status!,
+                  ?status,
                 ],
               ),
               const SizedBox(height: 10),

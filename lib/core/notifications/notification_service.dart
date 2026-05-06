@@ -35,7 +35,7 @@ class NotificationService {
       android: androidSettings,
       iOS: iosSettings,
     );
-    await _plugin.initialize(initSettings);
+    await _plugin.initialize(settings: initSettings);
   }
 
   Future<void> enableDailyReminder({
@@ -58,11 +58,11 @@ class NotificationService {
       iOS: iosDetails,
     );
     await _plugin.periodicallyShow(
-      _dailyReminderId,
-      title,
-      body,
-      RepeatInterval.daily,
-      details,
+      id: _dailyReminderId,
+      title: title,
+      body: body,
+      repeatInterval: RepeatInterval.daily,
+      notificationDetails: details,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
     );
   }
@@ -71,7 +71,7 @@ class NotificationService {
     if (!_supportsNativeNotifications) {
       return;
     }
-    await _plugin.cancel(_dailyReminderId);
+    await _plugin.cancel(id: _dailyReminderId);
   }
 
   Future<void> showTestNotification({
@@ -93,6 +93,11 @@ class NotificationService {
       android: androidDetails,
       iOS: iosDetails,
     );
-    await _plugin.show(9999, title, body, details);
+    await _plugin.show(
+      id: 9999,
+      title: title,
+      body: body,
+      notificationDetails: details,
+    );
   }
 }

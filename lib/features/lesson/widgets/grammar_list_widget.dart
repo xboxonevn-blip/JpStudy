@@ -245,7 +245,7 @@ class _GrammarListWidgetState extends ConsumerState<GrammarListWidget> {
         'sessionType': sessionType,
         'blueprint': blueprint,
         'goalProfile': goalProfile,
-        if (allowedTypes != null) 'allowedTypes': allowedTypes,
+        'allowedTypes': ?allowedTypes,
       },
     );
   }

@@ -844,7 +844,7 @@ class _MascotRiveState extends ConsumerState<MascotRive>
                             alignment: Alignment.center,
                             clipBehavior: Clip.none,
                             children: [
-                              if (child != null) child,
+                              ?child,
                               IgnorePointer(
                                 child: CustomPaint(
                                   size: Size.square(mascotSize),
