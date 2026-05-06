@@ -32,6 +32,7 @@
 ### Grammar generation and normalization
 
 - `generate_n3_grammar_scaffold.py`: scaffolds N3 grammar lesson data
+- `generate_upper_jlpt_vi_grammar_drafts.py`: drafts Vietnamese grammar explanations for N2/N1 editorial review
 - `normalize_grammar_examples.py`: standardizes grammar example wording/shape
 - `normalize_n3_grammar_semantics.py`: normalizes N3 grammar semantics and labels
 - `upgrade_grammar_quality.py`: improves grammar payload quality and example richness
@@ -39,6 +40,8 @@
 
 ### Lesson/theme drafting
 
+- `generate_upper_jlpt_immersion_passages.py`: drafts upper-JLPT immersion passages for N2/N1 content review
+- `generate_upper_jlpt_vi_vocab_drafts.py`: drafts Vietnamese vocab glosses for N2/N1 editorial review
 - `generate_n3_quartet_drafts.py`: drafts N3 lesson/theme structures using the QUARTET mapping approach
 - `bootstrap_n3_starter.py`: creates a starter N3 lesson from open-source references
 - `quartet1_theme_map.json`: lesson/theme grouping input used by drafting scripts
@@ -53,6 +56,7 @@
 
 ### Source cache / external source prep
 
+- `apply_unihan_upper_kanji_metadata.py`: applies locally extracted Unihan metadata to upper-JLPT derived kanji review data
 - `build_jmdict_kanjidic_cache.py`: downloads and parses JMdict + KANJIDIC2 local caches
 - `hanviet_manual_overrides.json`: manual Han-Viet override table used by repair scripts
 

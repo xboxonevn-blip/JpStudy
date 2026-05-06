@@ -136,7 +136,7 @@ class ContentDatabase extends _$ContentDatabase {
           await _seedMinnaGrammar();
         }
         if (from < 31) {
-          await _reseedMinnaKanji();
+          // kanji reseed consolidated into v32
         }
         if (from < 32) {
           await _reseedMinnaKanji();

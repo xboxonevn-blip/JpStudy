@@ -59,8 +59,8 @@ void main() {
       );
       final maxAcceptedFalsePositiveRate = switch (tier) {
         'manual' => 0.08,
-        'curated' => 0.25,
-        'generated' => 0.25,
+        'curated' => 0.02,
+        'generated' => 0.02,
         _ => 0.25,
       };
       expect(

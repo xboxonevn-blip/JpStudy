@@ -451,68 +451,121 @@ void main() {
     );
   });
 
-  test('extra trailing stroke drops template score enough to reject clean manual writing', () {
+  test(
+    'extra trailing stroke drops template score enough to reject clean manual writing',
+    () {
+      const canvas = Size(220, 220);
+      final template = buildTemplate('manual');
+      final correct = buildStrokesFromTemplate(
+        template,
+        jitter: 0.25,
+        seed: 12,
+      );
+      final withExtraStroke = <List<Offset>>[
+        ...correct,
+        line(const Offset(180, 28), const Offset(196, 44), points: 3),
+      ];
+
+      final result = HandwritingEvaluator.evaluate(
+        strokes: withExtraStroke,
+        expectedStrokes: template.strokes.length,
+        canvasSize: canvas,
+        showGuide: false,
+        template: template,
+        scoringVersion: HandwritingScoringVersion.v2,
+      );
+
+      expect(
+        result.isCorrect,
+        isFalse,
+        reason:
+            'A clean answer plus an extra trailing flourish should be rejected: '
+            'score=${result.score.toStringAsFixed(3)} '
+            'template=${result.templateScore.toStringAsFixed(3)} '
+            'stroke=${result.strokeScore.toStringAsFixed(3)}',
+      );
+    },
+  );
+
+  test(
+    'unguided enclosure override still rejects weak order even when boxed shape looks right',
+    () {
+      const canvas = Size(220, 220);
+      final template = buildSunTemplate('manual');
+      final weakOrderSun = <List<Offset>>[
+        line(const Offset(92, 52), const Offset(150, 52)),
+        line(const Offset(92, 116), const Offset(150, 116)),
+        line(const Offset(92, 184), const Offset(150, 184)),
+        [
+          ...line(const Offset(92, 52), const Offset(92, 184), points: 5),
+          ...line(
+            const Offset(92, 184),
+            const Offset(150, 184),
+            points: 3,
+          ).skip(1),
+          ...line(
+            const Offset(150, 184),
+            const Offset(150, 52),
+            points: 5,
+          ).skip(1),
+        ],
+      ];
+
+      final result = HandwritingEvaluator.evaluate(
+        strokes: weakOrderSun,
+        expectedStrokes: template.strokes.length,
+        canvasSize: canvas,
+        showGuide: false,
+        template: template,
+        scoringVersion: HandwritingScoringVersion.v2,
+      );
+
+      expect(
+        result.isCorrect,
+        isFalse,
+        reason:
+            'Unguided enclosure override should not rescue visibly weak order: '
+            'score=${result.score.toStringAsFixed(3)} '
+            'order=${result.orderScore.toStringAsFixed(3)} '
+            'template=${result.templateScore.toStringAsFixed(3)} '
+            'direction=${result.templateScore.toStringAsFixed(3)}',
+      );
+    },
+  );
+
+  test('rejects swapped early strokes for curated and generated templates', () {
     const canvas = Size(220, 220);
-    final template = buildTemplate('manual');
-    final correct = buildStrokesFromTemplate(template, jitter: 0.25, seed: 12);
-    final withExtraStroke = <List<Offset>>[
-      ...correct,
-      line(const Offset(180, 28), const Offset(196, 44), points: 3),
-    ];
+    final templatesByQuality = loadTemplatesByQuality();
+    final samples = <String, Iterable<KanjiStrokeTemplate>>{
+      'curated': (templatesByQuality['curated'] ?? const []).take(13),
+      'generated': (templatesByQuality['generated'] ?? const []).take(40),
+    };
 
-    final result = HandwritingEvaluator.evaluate(
-      strokes: withExtraStroke,
-      expectedStrokes: template.strokes.length,
-      canvasSize: canvas,
-      showGuide: false,
-      template: template,
-      scoringVersion: HandwritingScoringVersion.v2,
-    );
+    for (final tier in samples.entries) {
+      for (final template in tier.value) {
+        final negatives = buildRegressionNegativeCases(template);
+        for (final caseName in ['order_swap_first_two', 'order_swap_mid']) {
+          final result = HandwritingEvaluator.evaluate(
+            strokes: negatives[caseName]!,
+            expectedStrokes: template.strokes.length,
+            canvasSize: canvas,
+            showGuide: false,
+            template: template,
+            scoringVersion: HandwritingScoringVersion.v2,
+          );
 
-    expect(
-      result.isCorrect,
-      isFalse,
-      reason:
-          'A clean answer plus an extra trailing flourish should be rejected: '
-          'score=${result.score.toStringAsFixed(3)} '
-          'template=${result.templateScore.toStringAsFixed(3)} '
-          'stroke=${result.strokeScore.toStringAsFixed(3)}',
-    );
-  });
-
-  test('unguided enclosure override still rejects weak order even when boxed shape looks right', () {
-    const canvas = Size(220, 220);
-    final template = buildSunTemplate('manual');
-    final weakOrderSun = <List<Offset>>[
-      line(const Offset(92, 52), const Offset(150, 52)),
-      line(const Offset(92, 116), const Offset(150, 116)),
-      line(const Offset(92, 184), const Offset(150, 184)),
-      [
-        ...line(const Offset(92, 52), const Offset(92, 184), points: 5),
-        ...line(const Offset(92, 184), const Offset(150, 184), points: 3).skip(1),
-        ...line(const Offset(150, 184), const Offset(150, 52), points: 5).skip(1),
-      ],
-    ];
-
-    final result = HandwritingEvaluator.evaluate(
-      strokes: weakOrderSun,
-      expectedStrokes: template.strokes.length,
-      canvasSize: canvas,
-      showGuide: false,
-      template: template,
-      scoringVersion: HandwritingScoringVersion.v2,
-    );
-
-    expect(
-      result.isCorrect,
-      isFalse,
-      reason:
-          'Unguided enclosure override should not rescue visibly weak order: '
-          'score=${result.score.toStringAsFixed(3)} '
-          'order=${result.orderScore.toStringAsFixed(3)} '
-          'template=${result.templateScore.toStringAsFixed(3)} '
-          'direction=${result.templateScore.toStringAsFixed(3)}',
-    );
+          expect(
+            result.isCorrect,
+            isFalse,
+            reason:
+                'Swapped early strokes should reject for '
+                '${tier.key}/${template.character}/$caseName: '
+                'score=${result.score.toStringAsFixed(3)} '
+                'order=${result.orderScore.toStringAsFixed(3)} '
+                'template=${result.templateScore.toStringAsFixed(3)}',
+          );
+        }
+      }
+    }
   });
 }
-

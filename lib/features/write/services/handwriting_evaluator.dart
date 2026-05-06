@@ -101,6 +101,8 @@ class HandwritingEvaluator {
       minTemplateScoreDelta: -0.06,
       minDirectionScoreDelta: -0.18,
     ),
+    '聞': _ThresholdOverride(minOrderScoreDelta: 0.04),
+    '読': _ThresholdOverride(minOrderScoreDelta: 0.04),
   };
 
   static HandwritingEvaluationResult evaluate({
@@ -384,7 +386,7 @@ class HandwritingEvaluator {
           requiredScore: showGuide ? 0.59 : 0.69,
           minStrokeScore: 0.48,
           minShapeScore: 0.40,
-          minOrderScore: 0.60,
+          minOrderScore: 0.74,
           minTemplateScore: 0.48,
           minDirectionScore: showGuide ? 0.68 : 0.74,
         );
@@ -398,7 +400,7 @@ class HandwritingEvaluator {
           requiredScore: showGuide ? 0.64 : 0.73,
           minStrokeScore: 0.52,
           minShapeScore: 0.38,
-          minOrderScore: 0.48,
+          minOrderScore: 0.70,
           minTemplateScore: 0.42,
           minDirectionScore: showGuide ? 0.58 : 0.64,
         );
