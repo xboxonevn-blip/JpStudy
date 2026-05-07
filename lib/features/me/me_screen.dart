@@ -13,6 +13,7 @@ import 'package:jpstudy/core/onboarding_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/core/theme_provider.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
+import 'package:jpstudy/features/auth/widgets/login_dialog.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/home/providers/cloud_sync_status_provider.dart';
 import 'package:jpstudy/features/me/providers/app_settings_controller.dart';
@@ -87,6 +88,26 @@ class _MeScreenState extends ConsumerState<MeScreen> {
           label: level.shortLabel,
           tone: AppStatusTone.primary,
         ),
+      ),
+    );
+    final accountSection = _SectionCard(
+      title: language.loginDialogTitle,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            language.loginDialogSubtitle,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: context.appPalette.ink.withValues(alpha: 0.65),
+                ),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          FilledButton.icon(
+            onPressed: () => LoginDialog.show(context),
+            icon: const Icon(Icons.login_rounded),
+            label: Text(language.loginSubmitLabel),
+          ),
+        ],
       ),
     );
     final learningSection = _SectionCard(
@@ -340,6 +361,8 @@ class _MeScreenState extends ConsumerState<MeScreen> {
             final leftColumn = Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                accountSection,
+                const SizedBox(height: AppSpacing.lg),
                 learningSection,
                 const SizedBox(height: AppSpacing.lg),
                 appearanceSection,

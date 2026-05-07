@@ -3136,6 +3136,116 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get loginDialogTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Sign in';
+      case AppLanguage.vi:
+        return '\u0110\u0103ng nh\u1eadp';
+      case AppLanguage.ja:
+        return '\u30ed\u30b0\u30a4\u30f3';
+    }
+  }
+
+  String get loginDialogSubtitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Sign in to sync your learning progress.';
+      case AppLanguage.vi:
+        return '\u0110\u0103ng nh\u1eadp \u0111\u1ec3 \u0111\u1ed3ng b\u1ed9 ti\u1ebfn tr\u00ecnh h\u1ecdc c\u1ee7a b\u1ea1n.';
+      case AppLanguage.ja:
+        return '\u5b66\u7fd2\u9032\u6357\u3092\u540c\u671f\u3059\u308b\u305f\u3081\u306b\u30b5\u30a4\u30f3\u30a4\u30f3\u3057\u3066\u304f\u3060\u3055\u3044\u3002';
+    }
+  }
+
+  String get signInWithGoogleLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Sign in with Google';
+      case AppLanguage.vi:
+        return '\u0110\u0103ng nh\u1eadp b\u1eb1ng Google';
+      case AppLanguage.ja:
+        return 'Google\u3067\u30b5\u30a4\u30f3\u30a4\u30f3';
+    }
+  }
+
+  String get orDividerLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'OR';
+      case AppLanguage.vi:
+        return 'HO\u1eb6C';
+      case AppLanguage.ja:
+        return '\u307e\u305f\u306f';
+    }
+  }
+
+  String get loginEmailLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Email';
+      case AppLanguage.vi:
+        return 'Email';
+      case AppLanguage.ja:
+        return '\u30e1\u30fc\u30eb\u30a2\u30c9\u30ec\u30b9';
+    }
+  }
+
+  String get loginPasswordLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Password';
+      case AppLanguage.vi:
+        return 'M\u1eadt kh\u1ea9u';
+      case AppLanguage.ja:
+        return '\u30d1\u30b9\u30ef\u30fc\u30c9';
+    }
+  }
+
+  String get loginSubmitLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Sign in';
+      case AppLanguage.vi:
+        return '\u0110\u0103ng nh\u1eadp';
+      case AppLanguage.ja:
+        return '\u30b5\u30a4\u30f3\u30a4\u30f3';
+    }
+  }
+
+  String get loginManualAccountFooterLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return "If Gmail isn't convenient, message me to issue an account.";
+      case AppLanguage.vi:
+        return 'N\u1ebfu kh\u00f4ng ti\u1ec7n d\u00f9ng Gmail h\u00e3y nh\u1eafn m\u00ecnh c\u1ea5p t\u00e0i kho\u1ea3n.';
+      case AppLanguage.ja:
+        return 'Gmail\u3092\u4f7f\u3048\u306a\u3044\u5834\u5408\u306f\u30a2\u30ab\u30a6\u30f3\u30c8\u306e\u767a\u884c\u3092\u4f9d\u983c\u3057\u3066\u304f\u3060\u3055\u3044\u3002';
+    }
+  }
+
+  String get comingSoonLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Coming soon';
+      case AppLanguage.vi:
+        return 'S\u1eafp ra m\u1eaft';
+      case AppLanguage.ja:
+        return '\u8fd1\u65e5\u516c\u958b';
+    }
+  }
+
+  String get loginEmptyFieldLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Please fill in both fields.';
+      case AppLanguage.vi:
+        return 'Vui l\u00f2ng \u0111i\u1ec1n \u0111\u1ea7y \u0111\u1ee7 c\u1ea3 hai \u00f4.';
+      case AppLanguage.ja:
+        return '\u4e21\u65b9\u306e\u9805\u76ee\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044\u3002';
+    }
+  }
+
   String get fullscreenLabel {
     switch (this) {
       case AppLanguage.en:
