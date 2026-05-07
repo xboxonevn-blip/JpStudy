@@ -211,16 +211,19 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
                   ),
                   FilledButton.icon(
                     onPressed: settings.isReady && status.isLinked
-                        ? () => controller.uploadToCloudFile(context, language)
+                        ? () => _runUpload(
+                            controller: controller,
+                            language: language,
+                          )
                         : null,
                     icon: const Icon(Icons.cloud_upload_outlined),
                     label: Text(controller.cloudSyncUploadLabel(language)),
                   ),
                   OutlinedButton.icon(
                     onPressed: settings.isReady && status.isLinked
-                        ? () => controller.downloadFromCloudFile(
-                            context,
-                            language,
+                        ? () => _runDownload(
+                            controller: controller,
+                            language: language,
                           )
                         : null,
                     icon: const Icon(Icons.cloud_download_outlined),
@@ -256,7 +259,7 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
             title: language.backupExportLabel,
             subtitle: _exportSubtitle(language),
             onTap: settings.isReady
-                ? () => controller.exportBackup(context, language)
+                ? () => _runExport(controller, language)
                 : null,
           ),
           const SizedBox(height: AppSpacing.sm),
@@ -265,7 +268,7 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
             title: language.backupImportLabel,
             subtitle: language.backupImportBody,
             onTap: settings.isReady
-                ? () => controller.importBackup(context, language)
+                ? () => _runImport(controller, language)
                 : null,
           ),
         ],
@@ -395,11 +398,207 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
         await controller.linkExistingCloudSyncFile(context, language);
         return;
       case _LinkedSyncPrimaryAction.upload:
-        await controller.uploadToCloudFile(context, language);
+        await _runUpload(controller: controller, language: language);
         return;
       case _LinkedSyncPrimaryAction.download:
-        await controller.downloadFromCloudFile(context, language);
+        await _runDownload(controller: controller, language: language);
         return;
+    }
+  }
+
+  Future<void> _runUpload({
+    required DataSettingsController controller,
+    required AppLanguage language,
+  }) async {
+    final choice = await _promptExportEncryption(language);
+    if (!mounted || choice.cancelled) return;
+    await controller.uploadToCloudFile(
+      context,
+      language,
+      passphrase: choice.passphrase,
+    );
+  }
+
+  Future<void> _runDownload({
+    required DataSettingsController controller,
+    required AppLanguage language,
+  }) async {
+    await controller.downloadFromCloudFile(
+      context,
+      language,
+      passphrasePrompt: () => _promptImportPassphrase(language),
+    );
+  }
+
+  Future<void> _runExport(
+    DataSettingsController controller,
+    AppLanguage language,
+  ) async {
+    final choice = await _promptExportEncryption(language);
+    if (!mounted || choice.cancelled) return;
+    await controller.exportBackup(
+      context,
+      language,
+      passphrase: choice.passphrase,
+    );
+  }
+
+  Future<void> _runImport(
+    DataSettingsController controller,
+    AppLanguage language,
+  ) async {
+    await controller.importBackup(
+      context,
+      language,
+      passphrasePrompt: () => _promptImportPassphrase(language),
+    );
+  }
+
+  Future<_ExportEncryptionChoice> _promptExportEncryption(
+    AppLanguage language,
+  ) async {
+    final mode = await showDialog<_ExportEncryptionMode>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(language.encryptBackupPromptTitle),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(_ExportEncryptionMode.cancel),
+            child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(_ExportEncryptionMode.plain),
+            child: Text(language.encryptNoLabel),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.of(context).pop(_ExportEncryptionMode.encrypt),
+            child: Text(language.encryptYesLabel),
+          ),
+        ],
+      ),
+    );
+    if (!mounted) return const _ExportEncryptionChoice.cancelled();
+    if (mode == null || mode == _ExportEncryptionMode.cancel) {
+      return const _ExportEncryptionChoice.cancelled();
+    }
+    if (mode == _ExportEncryptionMode.plain) {
+      return const _ExportEncryptionChoice.plain();
+    }
+    final passphrase = await _promptNewPassphrase(language);
+    if (passphrase == null) {
+      return const _ExportEncryptionChoice.cancelled();
+    }
+    return _ExportEncryptionChoice.encrypted(passphrase);
+  }
+
+  Future<String?> _promptNewPassphrase(AppLanguage language) async {
+    final passController = TextEditingController();
+    final confirmController = TextEditingController();
+    String? errorText;
+    try {
+      while (true) {
+        final entered = await showDialog<String?>(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) {
+            return StatefulBuilder(
+              builder: (context, setStateDialog) {
+                return AlertDialog(
+                  title: Text(language.passphraseLabel),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TextField(
+                        controller: passController,
+                        obscureText: true,
+                        autofocus: true,
+                        decoration: InputDecoration(
+                          labelText: language.passphraseLabel,
+                        ),
+                      ),
+                      const SizedBox(height: AppSpacing.sm),
+                      TextField(
+                        controller: confirmController,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          labelText: language.passphraseConfirmLabel,
+                          errorText: errorText,
+                        ),
+                      ),
+                    ],
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(null),
+                      child: Text(
+                        MaterialLocalizations.of(context).cancelButtonLabel,
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        if (passController.text.isEmpty) {
+                          setStateDialog(() {
+                            errorText = language.passphraseRequiredLabel;
+                          });
+                          return;
+                        }
+                        if (passController.text != confirmController.text) {
+                          setStateDialog(() {
+                            errorText = language.passphraseMismatchLabel;
+                          });
+                          return;
+                        }
+                        Navigator.of(context).pop(passController.text);
+                      },
+                      child: Text(MaterialLocalizations.of(context).okButtonLabel),
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+        );
+        if (!mounted) return null;
+        return entered;
+      }
+    } finally {
+      passController.dispose();
+      confirmController.dispose();
+    }
+  }
+
+  Future<String?> _promptImportPassphrase(AppLanguage language) async {
+    final controller = TextEditingController();
+    try {
+      final entered = await showDialog<String?>(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => AlertDialog(
+          title: Text(language.passphraseRequiredLabel),
+          content: TextField(
+            controller: controller,
+            obscureText: true,
+            autofocus: true,
+            decoration: InputDecoration(labelText: language.passphraseLabel),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(null),
+              child: Text(
+                MaterialLocalizations.of(context).cancelButtonLabel,
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.of(context).pop(controller.text),
+              child: Text(MaterialLocalizations.of(context).okButtonLabel),
+            ),
+          ],
+        ),
+      );
+      if (!mounted) return null;
+      return entered != null && entered.isEmpty ? null : entered;
+    } finally {
+      controller.dispose();
     }
   }
 
@@ -627,6 +826,22 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
 }
 
 enum _LinkedSyncPrimaryAction { create, choose, upload, download }
+
+enum _ExportEncryptionMode { plain, encrypt, cancel }
+
+class _ExportEncryptionChoice {
+  const _ExportEncryptionChoice.plain()
+    : passphrase = null,
+      cancelled = false;
+  const _ExportEncryptionChoice.encrypted(String this.passphrase)
+    : cancelled = false;
+  const _ExportEncryptionChoice.cancelled()
+    : passphrase = null,
+      cancelled = true;
+
+  final String? passphrase;
+  final bool cancelled;
+}
 
 class _LinkedSyncRecommendation {
   const _LinkedSyncRecommendation({

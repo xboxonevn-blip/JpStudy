@@ -3048,6 +3048,94 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get encryptBackupPromptTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Encrypt this backup?';
+      case AppLanguage.vi:
+        return 'M\u00e3 h\u00f3a b\u1ea3n sao l\u01b0u n\u00e0y?';
+      case AppLanguage.ja:
+        return '\u3053\u306e\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u3092\u6697\u53f7\u5316\u3057\u307e\u3059\u304b\uff1f';
+    }
+  }
+
+  String get passphraseLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Passphrase';
+      case AppLanguage.vi:
+        return 'M\u1eadt kh\u1ea9u';
+      case AppLanguage.ja:
+        return '\u30d1\u30b9\u30d5\u30ec\u30fc\u30ba';
+    }
+  }
+
+  String get passphraseConfirmLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Confirm passphrase';
+      case AppLanguage.vi:
+        return 'X\u00e1c nh\u1eadn m\u1eadt kh\u1ea9u';
+      case AppLanguage.ja:
+        return '\u30d1\u30b9\u30d5\u30ec\u30fc\u30ba\u306e\u78ba\u8a8d';
+    }
+  }
+
+  String get passphraseRequiredLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Passphrase required to decrypt this backup.';
+      case AppLanguage.vi:
+        return 'C\u1ea7n m\u1eadt kh\u1ea9u \u0111\u1ec3 gi\u1ea3i m\u00e3 b\u1ea3n sao l\u01b0u.';
+      case AppLanguage.ja:
+        return '\u3053\u306e\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u3092\u5fa9\u5143\u3059\u308b\u306b\u306f\u30d1\u30b9\u30d5\u30ec\u30fc\u30ba\u304c\u5fc5\u8981\u3067\u3059\u3002';
+    }
+  }
+
+  String get passphraseMismatchLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Passphrases do not match.';
+      case AppLanguage.vi:
+        return 'M\u1eadt kh\u1ea9u kh\u00f4ng tr\u00f9ng kh\u1edbp.';
+      case AppLanguage.ja:
+        return '\u30d1\u30b9\u30d5\u30ec\u30fc\u30ba\u304c\u4e00\u81f4\u3057\u307e\u305b\u3093\u3002';
+    }
+  }
+
+  String get backupDecryptionErrorLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Wrong passphrase or corrupted backup file.';
+      case AppLanguage.vi:
+        return 'Sai m\u1eadt kh\u1ea9u ho\u1eb7c file sao l\u01b0u h\u1ecfng.';
+      case AppLanguage.ja:
+        return '\u30d1\u30b9\u30d5\u30ec\u30fc\u30ba\u304c\u9055\u3046\u304b\u3001\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u304c\u7834\u640d\u3057\u3066\u3044\u307e\u3059\u3002';
+    }
+  }
+
+  String get encryptYesLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Encrypt';
+      case AppLanguage.vi:
+        return 'M\u00e3 h\u00f3a';
+      case AppLanguage.ja:
+        return '\u6697\u53f7\u5316';
+    }
+  }
+
+  String get encryptNoLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Plain text';
+      case AppLanguage.vi:
+        return 'V\u0103n b\u1ea3n th\u01b0\u1eddng';
+      case AppLanguage.ja:
+        return '\u5e73\u6587';
+    }
+  }
+
   String get fullscreenLabel {
     switch (this) {
       case AppLanguage.en:

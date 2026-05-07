@@ -4,6 +4,8 @@ import 'dart:math';
 import 'package:crypto/crypto.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'backup_encryption.dart';
+
 enum BackupImportDecision { apply, skipOlder, invalidChecksum }
 
 class BackupImportPlan {
@@ -23,19 +25,30 @@ class BackupSyncService {
 
   static const backupSyncMetaKey = 'syncMeta';
   static const backupSyncChecksumKey = 'checksum';
+  static const backupSyncEncryptionKey = 'encryption';
 
   static const _prefDeviceId = 'backup.sync.deviceId';
   static const _prefLastAppliedAt = 'backup.sync.lastAppliedAt';
   static const _envelopeVersion = 1;
 
+  /// Builds the export envelope with sync metadata and integrity checksum.
+  ///
+  /// When [passphrase] is supplied (non-null and non-empty), the working
+  /// payload is encrypted with [BackupEncryption] and embedded under
+  /// [backupSyncEncryptionKey]. The top-level [backupSyncMetaKey] and
+  /// [backupSyncChecksumKey] always describe the original plaintext so
+  /// conflict detection (`exportedAt`) and integrity (`sha256`) keep
+  /// working without requiring the passphrase.
   static Future<Map<String, dynamic>> buildExportEnvelope(
-    Map<String, dynamic> payload,
-  ) async {
+    Map<String, dynamic> payload, {
+    String? passphrase,
+  }) async {
     final prefs = await SharedPreferences.getInstance();
     final deviceId = _getOrCreateDeviceId(prefs);
     final working = Map<String, dynamic>.from(payload)
       ..remove(backupSyncMetaKey)
-      ..remove(backupSyncChecksumKey);
+      ..remove(backupSyncChecksumKey)
+      ..remove(backupSyncEncryptionKey);
 
     final exportedAt = _parseTime(working['exportedAt']) ?? DateTime.now();
     final meta = {
@@ -45,10 +58,56 @@ class BackupSyncService {
     };
     final forChecksum = {...working, backupSyncMetaKey: meta};
     final checksum = _checksum(forChecksum);
+
+    if (passphrase == null || passphrase.isEmpty) {
+      return {
+        ...working,
+        backupSyncMetaKey: meta,
+        backupSyncChecksumKey: checksum,
+      };
+    }
+
+    final encryptionBlock = await BackupEncryption.encrypt(
+      jsonEncode(working),
+      passphrase,
+    );
     return {
-      ...working,
       backupSyncMetaKey: meta,
       backupSyncChecksumKey: checksum,
+      backupSyncEncryptionKey: encryptionBlock,
+    };
+  }
+
+  /// Returns true when [envelope] carries an encrypted payload.
+  static bool isEnvelopeEncrypted(Map<String, dynamic> envelope) {
+    return envelope[backupSyncEncryptionKey] is Map;
+  }
+
+  /// Returns the plaintext envelope. If [envelope] is encrypted, the
+  /// payload is decrypted with [passphrase] and merged back with the
+  /// existing meta/checksum so callers can pass the result straight to
+  /// [prepareImport]. Throws [BackupDecryptionException] if decryption
+  /// fails or [passphrase] is missing for an encrypted envelope.
+  static Future<Map<String, dynamic>> tryDecryptEnvelope(
+    Map<String, dynamic> envelope,
+    String? passphrase,
+  ) async {
+    final block = envelope[backupSyncEncryptionKey];
+    if (block is! Map) {
+      return envelope;
+    }
+    if (passphrase == null || passphrase.isEmpty) {
+      throw BackupDecryptionException('passphrase-required');
+    }
+    final decryptedJson = await BackupEncryption.decrypt(
+      Map<String, dynamic>.from(block),
+      passphrase,
+    );
+    final decoded = jsonDecode(decryptedJson) as Map<String, dynamic>;
+    return {
+      ...decoded,
+      backupSyncMetaKey: envelope[backupSyncMetaKey],
+      backupSyncChecksumKey: envelope[backupSyncChecksumKey],
     };
   }
 
