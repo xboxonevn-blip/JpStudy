@@ -17,7 +17,11 @@ Future<void> main() async {
   } catch (_) {
     // Swallow: app runs in local-only mode if Firebase is unreachable.
   }
-  await NotificationService.instance.initialize();
+  // Same defence-in-depth as Firebase: if the local notification plugin fails
+  // (missing platform settings, sandbox, etc.) the app still boots offline.
+  try {
+    await NotificationService.instance.initialize();
+  } catch (_) {}
 
   // Note: Mobile ads initialization is skipped on desktop platforms
   // The google_mobile_ads package doesn't support Windows/macOS/Linux

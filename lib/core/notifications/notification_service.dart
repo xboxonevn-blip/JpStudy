@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -15,11 +17,17 @@ class NotificationService {
 
   static const int _dailyReminderId = 1001;
 
-  bool get isSupported => !kIsWeb;
+  bool get isSupported => _supportsNativeNotifications;
 
   /// Whether native OS notifications are supported on this platform.
-  /// Web and Windows do not support native notifications.
-  bool get _supportsNativeNotifications => !kIsWeb;
+  /// Web, Windows, and Linux desktop are excluded — flutter_local_notifications
+  /// 21+ requires platform-specific settings on Windows that we don't ship,
+  /// and Linux desktop has no native delivery target.
+  bool get _supportsNativeNotifications {
+    if (kIsWeb) return false;
+    if (Platform.isWindows || Platform.isLinux) return false;
+    return true;
+  }
 
   Future<void> initialize() async {
     if (!_supportsNativeNotifications) {
