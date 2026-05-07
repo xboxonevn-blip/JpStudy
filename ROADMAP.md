@@ -19,7 +19,8 @@ Build a Japanese learning app that combines:
 | Phase 1 | Learning foundation | Completed | Done |
 | Phase 2 | App structure and UI system | Completed | Done |
 | Phase 3 | Learning quality and release hardening | Completed | Done |
-| Phase 4 | Cloud sync ecosystem | Next / parked until explicitly started | Later |
+| Phase 4 | Cloud sync ecosystem | MVP shipped | Done |
+| Phase 5 | Hardening and ecosystem polish | In progress | Open |
 
 ## Phase summary
 
@@ -70,10 +71,36 @@ Maintenance direction:
 Primary goal:
 - add reliable backup and sync without weakening the local-first app model
 
+Shipped (file-based MVP):
+- manual export and import flows in `DataSettingsScreen`
+- daily auto-backup with retention of the 7 most recent files
+- linked sync target (user-picked file in any cloud-mounted folder) via
+  `CloudSyncService.linkTarget` / `unlinkTarget`
+- upload and download envelope flows with conflict detection
+  (`skipOlder`, `invalidChecksum`) backed by `BackupSyncService`
+- SHA-256 envelope checksum and stable device-id metadata
+- status surface (`cloudSyncStatusProvider`) for last sync time and direction
+- coverage in `test/core/cloud_sync_service_test.dart`,
+  `test/core/backup_sync_service_test.dart`,
+  `test/features/me/data_settings_screen_test.dart`
+
+Maintenance direction:
+- keep the local-first model: do not introduce backend services or vendor SDKs
+- keep envelope versioning stable and any new fields backward compatible
+- keep checksum and device-id metadata authoritative for conflict decisions
+
+### Phase 5 — Hardening and ecosystem polish
+
+Primary goal:
+- raise privacy, automation, and discovery quality on top of the working
+  Phase 4 cloud sync MVP without expanding scope into new platforms
+
 Near-term targets:
-- backup/export experience improvements
-- cloud sync MVP exploration for supported platforms
-- conflict-handling and data integrity design
+- AES-256-GCM at-rest encryption for backup envelopes (opt-in passphrase)
+- automatic upload trigger after meaningful study sessions when a sync target
+  is linked
+- conflict surface in the data settings UI when import is older than current
+- documentation pass for backup/sync architecture under `docs/`
 
 ## Current priorities
 
@@ -86,8 +113,8 @@ Near-term targets:
 
 ### Next
 
-- decide whether Phase 4 cloud backup/sync should start now or remain parked
-- draft the Phase 4 backup/sync design before implementing backend work
+- ship encrypted backup envelopes as the highest-value Phase 5 item
+- evaluate auto-upload trigger after clearer telemetry on session completion
 - keep any larger handwriting/content work behind explicit scoped plans
 
 ### Later
