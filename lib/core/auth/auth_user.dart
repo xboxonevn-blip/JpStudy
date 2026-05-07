@@ -1,0 +1,43 @@
+/// Identity-only view of the authenticated user. Keeps domain code free of
+/// Firebase imports so screens / tests can use a simple value object.
+class AuthUser {
+  const AuthUser({
+    required this.uid,
+    this.email,
+    this.displayName,
+    this.photoUrl,
+  });
+
+  final String uid;
+  final String? email;
+  final String? displayName;
+  final String? photoUrl;
+
+  String get initialsForAvatar {
+    final source = (displayName?.trim().isNotEmpty ?? false)
+        ? displayName!
+        : (email ?? '');
+    final letters = source
+        .split(RegExp(r'\s+'))
+        .where((part) => part.isNotEmpty)
+        .map((part) => part[0])
+        .take(2)
+        .join();
+    if (letters.isEmpty) return '?';
+    return letters.toUpperCase();
+  }
+
+  AuthUser copyWith({
+    String? uid,
+    String? email,
+    String? displayName,
+    String? photoUrl,
+  }) {
+    return AuthUser(
+      uid: uid ?? this.uid,
+      email: email ?? this.email,
+      displayName: displayName ?? this.displayName,
+      photoUrl: photoUrl ?? this.photoUrl,
+    );
+  }
+}

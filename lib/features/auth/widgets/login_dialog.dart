@@ -4,11 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/auth/auth_provider.dart';
+import 'package:jpstudy/core/auth/auth_service.dart';
 import 'package:jpstudy/core/language_provider.dart';
 
-/// Visual login dialog matching the agreed design. Auth handlers are stubs
-/// today (show a "coming soon" snackbar) and will be wired to the chosen
-/// backend in a follow-up.
+/// Login dialog wired to Firebase Auth via [AuthService].
 class LoginDialog extends ConsumerStatefulWidget {
   const LoginDialog({super.key});
 
@@ -28,6 +28,7 @@ class _LoginDialogState extends ConsumerState<LoginDialog> {
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
   bool _obscurePassword = true;
+  bool _busy = false;
 
   @override
   void initState() {
@@ -43,16 +44,49 @@ class _LoginDialogState extends ConsumerState<LoginDialog> {
     super.dispose();
   }
 
-  void _comingSoon(AppLanguage language) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(language.comingSoonLabel),
-        duration: const Duration(seconds: 2),
-      ),
-    );
+  String _errorMessage(AuthErrorKind kind, AppLanguage language) {
+    switch (kind) {
+      case AuthErrorKind.invalidCredentials:
+      case AuthErrorKind.userNotFound:
+      case AuthErrorKind.wrongPassword:
+        return language.authInvalidCredentialsLabel;
+      case AuthErrorKind.networkError:
+        return language.authNetworkErrorLabel;
+      case AuthErrorKind.userDisabled:
+        return language.authUserDisabledLabel;
+      case AuthErrorKind.tooManyAttempts:
+        return language.authTooManyAttemptsLabel;
+      case AuthErrorKind.cancelledByUser:
+        return language.authCancelledLabel;
+      case AuthErrorKind.notSupportedOnPlatform:
+        return language.authNotSupportedLabel;
+      case AuthErrorKind.unknown:
+        return language.authUnknownErrorLabel;
+    }
   }
 
-  void _handleEmailSubmit(AppLanguage language) {
+  Future<void> _handleGoogleSignIn(AppLanguage language) async {
+    if (_busy) return;
+    setState(() => _busy = true);
+    try {
+      final service = ref.read(authServiceProvider);
+      await service.signInWithGoogle();
+      if (!mounted) return;
+      Navigator.of(context).pop();
+    } on AuthException catch (e) {
+      if (!mounted) return;
+      if (e.kind != AuthErrorKind.cancelledByUser) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(_errorMessage(e.kind, language))),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  Future<void> _handleEmailSubmit(AppLanguage language) async {
+    if (_busy) return;
     if (_emailController.text.trim().isEmpty ||
         _passwordController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -60,7 +94,23 @@ class _LoginDialogState extends ConsumerState<LoginDialog> {
       );
       return;
     }
-    _comingSoon(language);
+    setState(() => _busy = true);
+    try {
+      final service = ref.read(authServiceProvider);
+      await service.signInWithEmail(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      if (!mounted) return;
+      Navigator.of(context).pop();
+    } on AuthException catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(_errorMessage(e.kind, language))),
+      );
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
   }
 
   @override
@@ -95,9 +145,25 @@ class _LoginDialogState extends ConsumerState<LoginDialog> {
               const SizedBox(height: AppSpacing.lg),
               _GoogleSignInButton(
                 label: language.signInWithGoogleLabel,
-                onPressed: () => _comingSoon(language),
+                onPressed:
+                    ref.read(authServiceProvider).isGoogleSignInSupported &&
+                            !_busy
+                        ? () => _handleGoogleSignIn(language)
+                        : null,
                 palette: palette,
               ),
+              if (!ref
+                  .read(authServiceProvider)
+                  .isGoogleSignInSupported) ...[
+                const SizedBox(height: AppSpacing.xs),
+                Text(
+                  language.authNotSupportedLabel,
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: palette.warning,
+                  ),
+                ),
+              ],
               const SizedBox(height: AppSpacing.md),
               _OrDivider(label: language.orDividerLabel, palette: palette),
               const SizedBox(height: AppSpacing.md),
@@ -133,7 +199,7 @@ class _LoginDialogState extends ConsumerState<LoginDialog> {
               SizedBox(
                 height: 48,
                 child: ElevatedButton(
-                  onPressed: () => _handleEmailSubmit(language),
+                  onPressed: _busy ? null : () => _handleEmailSubmit(language),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: palette.info,
                     foregroundColor: Colors.white,
@@ -145,7 +211,18 @@ class _LoginDialogState extends ConsumerState<LoginDialog> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  child: Text(language.loginSubmitLabel),
+                  child: _busy
+                      ? const SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2.5,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              Colors.white,
+                            ),
+                          ),
+                        )
+                      : Text(language.loginSubmitLabel),
                 ),
               ),
               const SizedBox(height: AppSpacing.md),
@@ -211,7 +288,7 @@ class _GoogleSignInButton extends StatelessWidget {
   });
 
   final String label;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final AppThemePalette palette;
 
   @override
