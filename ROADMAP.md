@@ -18,8 +18,8 @@ Build a Japanese learning app that combines:
 | :--- | :--- | :--- | :--- |
 | Phase 1 | Learning foundation | Completed | Done |
 | Phase 2 | App structure and UI system | Completed | Done |
-| Phase 3 | Learning quality and release hardening | In progress | 2026-03 to 2026-04 |
-| Phase 4 | Cloud sync ecosystem | Parked behind core hardening | Later |
+| Phase 3 | Learning quality and release hardening | Completed | Done |
+| Phase 4 | Cloud sync ecosystem | Next / parked until explicitly started | Later |
 
 ## Phase summary
 
@@ -44,7 +44,7 @@ Completed structural work includes:
 Primary goal:
 - improve learning quality through stronger content-backed grammar behavior, more reliable handwriting evaluation, and steadier core release paths
 
-Completed / active items:
+Completed items:
 - Ghost Review captures mistakes with context
 - FSRS is the active scheduling model
 - immersion reader cleanup is largely complete and is now maintenance-only unless new regressions appear
@@ -53,13 +53,17 @@ Completed / active items:
 - handwriting uses support assets for stroke templates and stroke vector data
 - N5/N4 handwriting template coverage and promotion workflow are in place
 - content/data layout has been refactored into runtime content, support assets, and archive data
+- route and release smoke coverage has been hardened around core study paths
+- Learn session resume is implemented and verified
+- N1/N2 immersion comprehension questions are available and human-approved
+- N1/N2 vocab and grammar Vietnamese editorial tags are marked reviewed
+- dependency refresh and Riverpod 3 migration are complete on `main`
 
-Remaining direction:
-- keep grammar audits green and update heuristics only when data-clean content still fails for the wrong reason
-- improve handwriting scoring quality and confidence further through a measurable audit pass before tuning thresholds
-- replace legacy flaky UI paths with stable focused regressions
+Maintenance direction:
+- keep grammar/content audits green after data or heuristic changes
+- keep handwriting scoring changes measurement-first
+- keep route smoke tests focused and stable instead of long/flaky walkthroughs
 - keep immersion regression-safe without reopening a large cleanup program
-- keep lesson/data quality audits active for the canonical report set
 
 ### Phase 4 — Cloud sync ecosystem
 
@@ -77,16 +81,14 @@ Near-term targets:
 
 - keep the repo baseline green with `flutter analyze`, `flutter test`, and `flutter build web`
 - keep `docs/reports/grammar-example-quality-report.json` current and green after grammar data or heuristic changes
-- continue the handwriting reliability pass as the main active learning-quality milestone
-- continue route / release hardening around mock exam and other core study flows
-- keep immersion in maintenance mode and fix only regressions / residual data defects
+- keep Phase 3 learning-quality surfaces in maintenance mode and fix regressions quickly
+- keep dependency upgrades isolated from feature work
 
 ### Next
 
-- extend route smoke / regression coverage for the main learning surfaces
-- run a measurement-first handwriting audit pass before any larger scoring refactor
-- schedule dependency refresh as a separate plan instead of mixing it into the grammar-hardening branch
-- resume cloud backup/sync groundwork only after the core learning flows are steadier
+- decide whether Phase 4 cloud backup/sync should start now or remain parked
+- draft the Phase 4 backup/sync design before implementing backend work
+- keep any larger handwriting/content work behind explicit scoped plans
 
 ### Later
 
@@ -105,7 +107,7 @@ The roadmap is on track when:
 
 - repo map: `PROJECT_STRUCTURE.md`
 - docs index: `docs/README.md`
-- active execution plan: `docs/plans/2026-03-24-grammar-hardening-execution-plan.md`
+- latest completed hardening plan: `docs/plans/2026-03-24-handwriting-reliability-route-hardening-plan.md`
 - handwriting audit note: `docs/notes/2026-04-02-handwriting-measurement-audit.md`
 - app architecture: `lib/README.md`
 - tooling index: `tooling/README.md`
