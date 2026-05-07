@@ -4,6 +4,7 @@ import 'package:jpstudy/core/platform_io.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'backup_encryption.dart';
 import 'backup_sync_service.dart';
 
 enum CloudSyncDirection { upload, download }
@@ -18,6 +19,8 @@ enum CloudSyncDownloadDecision {
   missingRemoteFile,
   invalidFormat,
   readFailed,
+  requiresPassphrase,
+  decryptionFailed,
 }
 
 class CloudSyncTarget {
@@ -171,7 +174,9 @@ class CloudSyncService {
     }
   }
 
-  static Future<CloudSyncDownloadResult> prepareDownload() async {
+  static Future<CloudSyncDownloadResult> prepareDownload({
+    String? passphrase,
+  }) async {
     final target = await getLinkedTarget();
     if (target == null) {
       return const CloudSyncDownloadResult(
@@ -197,7 +202,30 @@ class CloudSyncService {
         );
       }
 
-      final payload = Map<String, dynamic>.from(decoded);
+      final rawPayload = Map<String, dynamic>.from(decoded);
+      final Map<String, dynamic> payload;
+      if (BackupSyncService.isEnvelopeEncrypted(rawPayload)) {
+        if (passphrase == null || passphrase.isEmpty) {
+          return CloudSyncDownloadResult(
+            decision: CloudSyncDownloadDecision.requiresPassphrase,
+            target: target,
+            remoteExportedAt: BackupSyncService.parseExportedAt(rawPayload),
+          );
+        }
+        try {
+          payload = await BackupSyncService.tryDecryptEnvelope(
+            rawPayload,
+            passphrase,
+          );
+        } on BackupDecryptionException {
+          return CloudSyncDownloadResult(
+            decision: CloudSyncDownloadDecision.decryptionFailed,
+            target: target,
+          );
+        }
+      } else {
+        payload = rawPayload;
+      }
       final plan = await BackupSyncService.prepareImport(payload);
       var mappedDecision = switch (plan.decision) {
         BackupImportDecision.apply => CloudSyncDownloadDecision.apply,

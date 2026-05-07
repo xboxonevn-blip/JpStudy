@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:jpstudy/core/services/backup_encryption.dart';
 import 'package:jpstudy/core/services/backup_sync_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -187,6 +188,110 @@ void main() {
         BackupSyncService.backupSyncMetaKey: {'exportedAt': ''},
       });
       expect(parsed, isNull);
+    });
+  });
+
+  group('encryption', () {
+    const passphrase = 'correct horse battery staple';
+
+    test('plaintext envelope shape unchanged when no passphrase given',
+        () async {
+      final envelope = await BackupSyncService.buildExportEnvelope(payload());
+      expect(BackupSyncService.isEnvelopeEncrypted(envelope), isFalse);
+      expect(
+        envelope.containsKey(BackupSyncService.backupSyncEncryptionKey),
+        isFalse,
+      );
+      expect(envelope['version'], 2);
+    });
+
+    test('encrypted envelope hides payload but keeps meta and checksum',
+        () async {
+      final envelope = await BackupSyncService.buildExportEnvelope(
+        payload(),
+        passphrase: passphrase,
+      );
+      expect(BackupSyncService.isEnvelopeEncrypted(envelope), isTrue);
+      expect(envelope.containsKey('version'), isFalse);
+      expect(envelope.containsKey('lessons'), isFalse);
+      expect(
+        envelope.containsKey(BackupSyncService.backupSyncMetaKey),
+        isTrue,
+      );
+      expect(
+        envelope.containsKey(BackupSyncService.backupSyncChecksumKey),
+        isTrue,
+      );
+    });
+
+    test('tryDecryptEnvelope on plaintext returns the same envelope',
+        () async {
+      final envelope = await BackupSyncService.buildExportEnvelope(payload());
+      final restored = await BackupSyncService.tryDecryptEnvelope(
+        envelope,
+        null,
+      );
+      expect(identical(restored, envelope), isTrue);
+    });
+
+    test(
+        'tryDecryptEnvelope round-trips encrypted envelope back to original payload',
+        () async {
+      final original = payload();
+      final encrypted = await BackupSyncService.buildExportEnvelope(
+        original,
+        passphrase: passphrase,
+      );
+      final restored = await BackupSyncService.tryDecryptEnvelope(
+        encrypted,
+        passphrase,
+      );
+      expect(restored['version'], original['version']);
+      expect(restored['exportedAt'], original['exportedAt']);
+      expect(restored['lessons'], original['lessons']);
+      // Restored envelope should also let prepareImport run cleanly.
+      final plan = await BackupSyncService.prepareImport(restored);
+      expect(plan.decision, BackupImportDecision.apply);
+    });
+
+    test('tryDecryptEnvelope with wrong passphrase throws decryption error',
+        () async {
+      final encrypted = await BackupSyncService.buildExportEnvelope(
+        payload(),
+        passphrase: passphrase,
+      );
+      expect(
+        () => BackupSyncService.tryDecryptEnvelope(encrypted, 'wrong-pass'),
+        throwsA(isA<BackupDecryptionException>()),
+      );
+    });
+
+    test(
+        'tryDecryptEnvelope reports passphrase-required when none given for encrypted envelope',
+        () async {
+      final encrypted = await BackupSyncService.buildExportEnvelope(
+        payload(),
+        passphrase: passphrase,
+      );
+      try {
+        await BackupSyncService.tryDecryptEnvelope(encrypted, null);
+        fail('expected BackupDecryptionException');
+      } on BackupDecryptionException catch (e) {
+        expect(e.message, 'passphrase-required');
+      }
+    });
+
+    test('isEnvelopeEncrypted reflects presence of encryption block', () {
+      expect(
+        BackupSyncService.isEnvelopeEncrypted({'foo': 'bar'}),
+        isFalse,
+      );
+      expect(
+        BackupSyncService.isEnvelopeEncrypted({
+          BackupSyncService.backupSyncEncryptionKey: {'algorithm': 'aes-256-gcm'},
+        }),
+        isTrue,
+      );
     });
   });
 }

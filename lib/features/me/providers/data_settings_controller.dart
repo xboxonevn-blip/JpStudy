@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/services/backup_encryption.dart';
 import 'package:jpstudy/core/services/backup_sync_service.dart';
 import 'package:jpstudy/core/services/cloud_sync_service.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
@@ -151,8 +152,12 @@ class DataSettingsController extends Notifier<DataSettingsState> {
     }
   }
 
-  Future<void> exportBackup(BuildContext context, AppLanguage language) async {
-    final envelope = await _buildBackupEnvelope();
+  Future<void> exportBackup(
+    BuildContext context,
+    AppLanguage language, {
+    String? passphrase,
+  }) async {
+    final envelope = await _buildBackupEnvelope(passphrase: passphrase);
     final jsonText = const JsonEncoder.withIndent('  ').convert(envelope);
     final location = await getSaveLocation(
       suggestedName: 'jpstudy_backup.json',
@@ -178,7 +183,11 @@ class DataSettingsController extends Notifier<DataSettingsState> {
     }
   }
 
-  Future<void> importBackup(BuildContext context, AppLanguage language) async {
+  Future<void> importBackup(
+    BuildContext context,
+    AppLanguage language, {
+    Future<String?> Function()? passphrasePrompt,
+  }) async {
     final file = await openFile(
       acceptedTypeGroups: const [
         XTypeGroup(label: 'JSON', extensions: ['json']),
@@ -195,7 +204,29 @@ class DataSettingsController extends Notifier<DataSettingsState> {
 
     try {
       final content = await File(file.path).readAsString();
-      final data = jsonDecode(content) as Map<String, dynamic>;
+      final raw = jsonDecode(content) as Map<String, dynamic>;
+      Map<String, dynamic> data;
+      if (BackupSyncService.isEnvelopeEncrypted(raw)) {
+        if (passphrasePrompt == null) {
+          if (context.mounted) {
+            _showSnackBar(context, language.backupDecryptionErrorLabel);
+          }
+          return;
+        }
+        final entered = await passphrasePrompt();
+        if (entered == null || entered.isEmpty || !context.mounted) {
+          return;
+        }
+        try {
+          data = await BackupSyncService.tryDecryptEnvelope(raw, entered);
+        } on BackupDecryptionException {
+          if (!context.mounted) return;
+          _showSnackBar(context, language.backupDecryptionErrorLabel);
+          return;
+        }
+      } else {
+        data = raw;
+      }
       final importPlan = await BackupSyncService.prepareImport(data);
       if (!context.mounted) {
         return;
@@ -288,9 +319,10 @@ class DataSettingsController extends Notifier<DataSettingsState> {
 
   Future<void> uploadToCloudFile(
     BuildContext context,
-    AppLanguage language,
-  ) async {
-    final envelope = await _buildBackupEnvelope();
+    AppLanguage language, {
+    String? passphrase,
+  }) async {
+    final envelope = await _buildBackupEnvelope(passphrase: passphrase);
     final result = await CloudSyncService.uploadEnvelope(envelope);
     ref.invalidate(cloudSyncStatusProvider);
 
@@ -311,11 +343,25 @@ class DataSettingsController extends Notifier<DataSettingsState> {
 
   Future<void> downloadFromCloudFile(
     BuildContext context,
-    AppLanguage language,
-  ) async {
-    final result = await CloudSyncService.prepareDownload();
+    AppLanguage language, {
+    Future<String?> Function()? passphrasePrompt,
+  }) async {
+    var result = await CloudSyncService.prepareDownload();
     if (!context.mounted) {
       return;
+    }
+
+    if (result.decision == CloudSyncDownloadDecision.requiresPassphrase) {
+      if (passphrasePrompt == null) {
+        _showSnackBar(context, language.backupDecryptionErrorLabel);
+        return;
+      }
+      final entered = await passphrasePrompt();
+      if (entered == null || entered.isEmpty || !context.mounted) {
+        return;
+      }
+      result = await CloudSyncService.prepareDownload(passphrase: entered);
+      if (!context.mounted) return;
     }
 
     switch (result.decision) {
@@ -346,6 +392,10 @@ class DataSettingsController extends Notifier<DataSettingsState> {
         return;
       case CloudSyncDownloadDecision.missingRemoteFile:
         _showSnackBar(context, cloudSyncMissingRemoteLabel(language));
+        return;
+      case CloudSyncDownloadDecision.requiresPassphrase:
+      case CloudSyncDownloadDecision.decryptionFailed:
+        _showSnackBar(context, language.backupDecryptionErrorLabel);
         return;
     }
   }
@@ -675,10 +725,15 @@ class DataSettingsController extends Notifier<DataSettingsState> {
     return next;
   }
 
-  Future<Map<String, dynamic>> _buildBackupEnvelope() async {
+  Future<Map<String, dynamic>> _buildBackupEnvelope({
+    String? passphrase,
+  }) async {
     final repo = ref.read(lessonRepositoryProvider);
     final data = await repo.exportBackup();
-    return BackupSyncService.buildExportEnvelope(data);
+    return BackupSyncService.buildExportEnvelope(
+      data,
+      passphrase: passphrase,
+    );
   }
 
   Future<bool?> _confirmImport(
