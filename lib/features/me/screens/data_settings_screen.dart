@@ -6,6 +6,7 @@ import 'package:jpstudy/app/theme/app_breakpoints.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/auth/auth_provider.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/home/providers/cloud_sync_status_provider.dart';
@@ -274,6 +275,54 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
         ],
       ),
     );
+    final authState = ref.watch(authStateProvider);
+    final user = authState.maybeWhen(
+      data: (value) => value,
+      orElse: () => null,
+    );
+    final accountSyncSection = user == null
+        ? null
+        : _SectionCard(
+            title: language.firebaseStorageSectionTitle,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  language.firebaseStorageSectionSubtitle,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: Theme.of(context).hintColor,
+                      ),
+                ),
+                const SizedBox(height: AppSpacing.md),
+                Wrap(
+                  spacing: AppSpacing.sm,
+                  runSpacing: AppSpacing.sm,
+                  children: [
+                    FilledButton.icon(
+                      onPressed: settings.isReady
+                          ? () => _runFirebaseUpload(
+                                controller: controller,
+                                language: language,
+                              )
+                          : null,
+                      icon: const Icon(Icons.cloud_sync_outlined),
+                      label: Text(language.firebaseStorageUploadLabel),
+                    ),
+                    OutlinedButton.icon(
+                      onPressed: settings.isReady
+                          ? () => _runFirebaseDownload(
+                                controller: controller,
+                                language: language,
+                              )
+                          : null,
+                      icon: const Icon(Icons.cloud_download_outlined),
+                      label: Text(language.firebaseStorageDownloadLabel),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
 
     return Scaffold(
       appBar: AppBar(title: Text(_title(language))),
@@ -295,6 +344,10 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
                   ],
                   const SizedBox(height: AppSpacing.lg),
                   autoBackupSection,
+                  if (accountSyncSection != null) ...[
+                    const SizedBox(height: AppSpacing.lg),
+                    accountSyncSection,
+                  ],
                   const SizedBox(height: AppSpacing.lg),
                   cloudSyncSection,
                   const SizedBox(height: AppSpacing.lg),
@@ -320,6 +373,10 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
                       child: Column(
                         children: [
                           autoBackupSection,
+                          if (accountSyncSection != null) ...[
+                            const SizedBox(height: AppSpacing.lg),
+                            accountSyncSection,
+                          ],
                           const SizedBox(height: AppSpacing.lg),
                           manualBackupSection,
                         ],
@@ -424,6 +481,30 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
     required AppLanguage language,
   }) async {
     await controller.downloadFromCloudFile(
+      context,
+      language,
+      passphrasePrompt: () => _promptImportPassphrase(language),
+    );
+  }
+
+  Future<void> _runFirebaseUpload({
+    required DataSettingsController controller,
+    required AppLanguage language,
+  }) async {
+    final choice = await _promptExportEncryption(language);
+    if (!mounted || choice.cancelled) return;
+    await controller.uploadToFirebaseStorage(
+      context,
+      language,
+      passphrase: choice.passphrase,
+    );
+  }
+
+  Future<void> _runFirebaseDownload({
+    required DataSettingsController controller,
+    required AppLanguage language,
+  }) async {
+    await controller.downloadFromFirebaseStorage(
       context,
       language,
       passphrasePrompt: () => _promptImportPassphrase(language),

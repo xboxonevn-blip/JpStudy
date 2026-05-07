@@ -13,10 +13,15 @@ import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/services/backup_encryption.dart';
 import 'package:jpstudy/core/services/backup_sync_service.dart';
+import 'package:jpstudy/core/services/cloud_storage_sync_service.dart';
 import 'package:jpstudy/core/services/cloud_sync_service.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/home/providers/backup_status_provider.dart';
 import 'package:jpstudy/features/home/providers/cloud_sync_status_provider.dart';
+
+final cloudStorageSyncServiceProvider = Provider<CloudStorageSyncService>(
+  (ref) => CloudStorageSyncService(),
+);
 
 const _prefAutoBackup = 'backup.auto.enabled';
 const _prefAutoBackupTime = 'backup.auto.time';
@@ -395,6 +400,82 @@ class DataSettingsController extends Notifier<DataSettingsState> {
         return;
       case CloudSyncDownloadDecision.requiresPassphrase:
       case CloudSyncDownloadDecision.decryptionFailed:
+        _showSnackBar(context, language.backupDecryptionErrorLabel);
+        return;
+    }
+  }
+
+  Future<void> uploadToFirebaseStorage(
+    BuildContext context,
+    AppLanguage language, {
+    String? passphrase,
+  }) async {
+    final envelope = await _buildBackupEnvelope(passphrase: passphrase);
+    final service = ref.read(cloudStorageSyncServiceProvider);
+    final result = await service.uploadEnvelope(envelope);
+    if (!context.mounted) return;
+    final message = switch (result.decision) {
+      CloudStorageUploadDecision.uploaded =>
+        language.firebaseStorageUploadSuccessLabel,
+      CloudStorageUploadDecision.notSignedIn =>
+        language.firebaseStorageNotSignedInLabel,
+      CloudStorageUploadDecision.writeFailed =>
+        language.firebaseStorageUploadErrorLabel,
+    };
+    _showSnackBar(context, message);
+  }
+
+  Future<void> downloadFromFirebaseStorage(
+    BuildContext context,
+    AppLanguage language, {
+    Future<String?> Function()? passphrasePrompt,
+  }) async {
+    final service = ref.read(cloudStorageSyncServiceProvider);
+    var result = await service.prepareDownload();
+    if (!context.mounted) return;
+
+    if (result.decision == CloudStorageDownloadDecision.requiresPassphrase) {
+      if (passphrasePrompt == null) {
+        _showSnackBar(context, language.backupDecryptionErrorLabel);
+        return;
+      }
+      final entered = await passphrasePrompt();
+      if (entered == null || entered.isEmpty || !context.mounted) return;
+      result = await service.prepareDownload(passphrase: entered);
+      if (!context.mounted) return;
+    }
+
+    switch (result.decision) {
+      case CloudStorageDownloadDecision.apply:
+        final confirmed = await _confirmImport(context, language);
+        if (!context.mounted || confirmed != true || result.payload == null) {
+          return;
+        }
+        await _applyImportedPayload(
+          context,
+          language,
+          payload: result.payload!,
+          incomingExportedAt: result.remoteExportedAt,
+          onApplied: BackupSyncService.markImportApplied,
+          successMessage: language.firebaseStorageDownloadSuccessLabel,
+        );
+        return;
+      case CloudStorageDownloadDecision.skipOlder:
+        _showSnackBar(context, cloudSyncSkipOlderLabel(language));
+        return;
+      case CloudStorageDownloadDecision.notSignedIn:
+        _showSnackBar(context, language.firebaseStorageNotSignedInLabel);
+        return;
+      case CloudStorageDownloadDecision.noRemoteFile:
+        _showSnackBar(context, language.firebaseStorageNoRemoteFileLabel);
+        return;
+      case CloudStorageDownloadDecision.invalidChecksum:
+      case CloudStorageDownloadDecision.invalidFormat:
+      case CloudStorageDownloadDecision.readFailed:
+        _showSnackBar(context, cloudSyncDownloadErrorLabel(language));
+        return;
+      case CloudStorageDownloadDecision.requiresPassphrase:
+      case CloudStorageDownloadDecision.decryptionFailed:
         _showSnackBar(context, language.backupDecryptionErrorLabel);
         return;
     }
