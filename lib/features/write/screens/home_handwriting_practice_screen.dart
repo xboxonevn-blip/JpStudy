@@ -399,7 +399,7 @@ class _SessionHeader extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final palette = context.appPalette;
     final kanjiDue = ref.watch(
-      dashboardProvider.select((v) => v.valueOrNull?.kanjiDue ?? 0),
+      dashboardProvider.select((v) => v.value?.kanjiDue ?? 0),
     );
 
     final Color accent;
@@ -521,3 +521,5 @@ class _AllCaughtUpScreen extends StatelessWidget {
     );
   }
 }
+
+

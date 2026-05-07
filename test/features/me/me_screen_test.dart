@@ -36,7 +36,7 @@ Widget buildMeScreen() => ProviderScope(
   overrides: [
     appLanguageProvider.overrideWith((ref) => AppLanguage.en),
     studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
-    themeModeProvider.overrideWith((ref) => ThemeModeNotifier()),
+    themeModeProvider.overrideWith(ThemeModeNotifier.new),
     progressSummaryProvider.overrideWith((ref) async => _kSummary),
     cloudSyncStatusProvider.overrideWith((ref) async => _kEmptyCloudStatus),
     appSettingsControllerProvider.overrideWith(() => AppSettingsController()),

@@ -205,7 +205,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     final language = ref.watch(appLanguageProvider);
     final level = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
     final indexAsync = ref.watch(searchIndexProvider);
-    final indexEntries = indexAsync.valueOrNull ?? const <_SearchEntry>[];
+    final indexEntries = indexAsync.value ?? const <_SearchEntry>[];
     final vocabCount = indexEntries
         .where((entry) => entry.kind == _SearchKind.vocab)
         .length;
@@ -1583,3 +1583,5 @@ class _SearchMatch {
 }
 
 enum _SearchPromptKind { romaji, reading, meaning }
+
+

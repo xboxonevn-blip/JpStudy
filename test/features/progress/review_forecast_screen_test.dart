@@ -98,6 +98,7 @@ Widget _buildScreen({
   Object? error,
 }) {
   return ProviderScope(
+    retry: (retryCount, error) => null,
     overrides: [
       appLanguageProvider.overrideWith((ref) => language),
       reviewForecastProvider.overrideWith((_) async {
@@ -227,3 +228,4 @@ void main() {
     expect(find.text('復習予報'), findsWidgets);
   });
 }
+

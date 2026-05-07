@@ -503,7 +503,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
     AsyncValue<List<JlptMockSection>> bankAsync,
     List<JlptMockSection> sections,
   ) {
-    final snapshot = snapshotAsync.valueOrNull;
+    final snapshot = snapshotAsync.value;
     final questionCount = sections.fold<int>(
       0,
       (sum, section) => sum + section.questions.length,
@@ -1164,7 +1164,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
       jlptMockSectionsProvider((level: level, language: language)),
     );
     final palette = context.appPalette;
-    final previewSections = bankAsync.valueOrNull ?? const <JlptMockSection>[];
+    final previewSections = bankAsync.value ?? const <JlptMockSection>[];
 
     if (!_started) {
       return Scaffold(
@@ -2114,3 +2114,5 @@ class _DiagnosisPanel extends StatelessWidget {
     );
   }
 }
+
+

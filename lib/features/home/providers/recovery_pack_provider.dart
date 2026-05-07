@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 import 'package:jpstudy/core/services/recovery_pack_service.dart';
 
@@ -13,3 +14,4 @@ void refreshRecoveryPack(WidgetRef ref) {
   final current = ref.read(recoveryPackRefreshProvider);
   ref.read(recoveryPackRefreshProvider.notifier).state = current + 1;
 }
+

@@ -30,7 +30,7 @@ class PracticeScreen extends ConsumerWidget {
     final level = ref.watch(studyLevelProvider);
     final (vocabDue, grammarDue, kanjiDue, mistakeCount) = ref.watch(
       dashboardProvider.select((v) {
-        final d = v.valueOrNull;
+        final d = v.value;
         return (
           d?.vocabDue ?? 0,
           d?.grammarDue ?? 0,
@@ -1358,7 +1358,7 @@ class _PracticeSpotlightCard extends StatelessWidget {
                     child: Icon(item.icon, color: accent, size: 19),
                   ),
                   const Spacer(),
-                  if (status != null) status!,
+                  ?status,
                 ],
               ),
               const SizedBox(height: 10),
@@ -1484,3 +1484,5 @@ class _HeroStatChip extends StatelessWidget {
     );
   }
 }
+
+

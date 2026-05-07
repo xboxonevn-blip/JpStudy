@@ -32,7 +32,7 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
     final lessonsAsync = ref.watch(
       lessonMetaProvider(selectedLevel.shortLabel),
     );
-    final lessons = lessonsAsync.valueOrNull ?? const <LessonMeta>[];
+    final lessons = lessonsAsync.value ?? const <LessonMeta>[];
     final fallbackLessonId = _firstLessonIdForLevel(selectedLevel);
     final board = buildLibraryRoadmapBoard(
       language: language,
@@ -1527,3 +1527,5 @@ class _LessonTone {
     }
   }
 }
+
+

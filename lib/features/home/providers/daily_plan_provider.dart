@@ -94,7 +94,7 @@ final dailyPlanProvider = FutureProvider<DailyPlan>((ref) async {
   final db = ref.watch(databaseProvider);
   final dashboardData = ref.watch(
     dashboardProvider.select((v) {
-      final d = v.valueOrNull;
+      final d = v.value;
       if (d == null) return null;
       return (
         totalMistakeCount: d.totalMistakeCount,
@@ -359,3 +359,5 @@ String _planSubtitle(
       return ja;
   }
 }
+
+

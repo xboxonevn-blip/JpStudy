@@ -23,7 +23,7 @@ final practiceSessionBoardProvider = Provider<PracticeSessionBoard>((ref) {
   // Subscribe only to the fields that affect the board; streak/XP won't retrigger.
   ref.watch(
     dashboardProvider.select((v) {
-      final d = v.valueOrNull;
+      final d = v.value;
       return (
         d?.vocabDue ?? 0,
         d?.grammarDue ?? 0,
@@ -32,10 +32,10 @@ final practiceSessionBoardProvider = Provider<PracticeSessionBoard>((ref) {
       );
     }),
   );
-  final dashboard = ref.read(dashboardProvider).valueOrNull;
-  final continueAction = ref.watch(continueActionProvider).valueOrNull;
+  final dashboard = ref.read(dashboardProvider).value;
+  final continueAction = ref.watch(continueActionProvider).value;
   final weaknessItems =
-      ref.watch(weaknessRadarProvider).valueOrNull ?? const [];
+      ref.watch(weaknessRadarProvider).value ?? const [];
   final grammarGhostCount = ref
       .watch(grammarGhostCountProvider)
       .maybeWhen(data: (count) => count, orElse: () => 0);
@@ -766,3 +766,5 @@ String _l(
       return ja;
   }
 }
+
+

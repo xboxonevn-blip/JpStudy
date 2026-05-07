@@ -76,7 +76,7 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
   Widget build(BuildContext context) {
     final palette = context.appPalette;
     final language = ref.watch(appLanguageProvider);
-    final dashboard = ref.watch(dashboardProvider).valueOrNull;
+    final dashboard = ref.watch(dashboardProvider).value;
     final grammarGhostCount = ref
         .watch(grammarGhostCountProvider)
         .maybeWhen(data: (count) => count, orElse: () => 0);
@@ -84,12 +84,12 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
         .watch(vocabGhostCountProvider)
         .maybeWhen(data: (count) => count, orElse: () => 0);
     final ghostCount = grammarGhostCount + vocabGhostCount;
-    final continueAction = ref.watch(continueActionProvider).valueOrNull;
-    final progress = ref.watch(dailySessionProgressProvider).valueOrNull;
-    final recoveryPack = ref.watch(recoveryPackProvider).valueOrNull;
-    final nextVocabReview = ref.watch(nextVocabReviewProvider).valueOrNull;
-    final nextKanjiReview = ref.watch(nextKanjiReviewProvider).valueOrNull;
-    final nextGrammarReview = ref.watch(nextGrammarReviewProvider).valueOrNull;
+    final continueAction = ref.watch(continueActionProvider).value;
+    final progress = ref.watch(dailySessionProgressProvider).value;
+    final recoveryPack = ref.watch(recoveryPackProvider).value;
+    final nextVocabReview = ref.watch(nextVocabReviewProvider).value;
+    final nextKanjiReview = ref.watch(nextKanjiReviewProvider).value;
+    final nextGrammarReview = ref.watch(nextGrammarReviewProvider).value;
 
     final coachPlan = ref.watch(coachSessionPlanProvider);
 
@@ -369,7 +369,7 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
     if (_isSyncingDerivedProgress) {
       return;
     }
-    final progress = ref.read(dailySessionProgressProvider).valueOrNull;
+    final progress = ref.read(dailySessionProgressProvider).value;
     if (progress == null) {
       return;
     }
@@ -451,7 +451,7 @@ class _DailySessionCardState extends ConsumerState<DailySessionCard>
     required ContinueAction? continueAction,
     required DailySessionProgress? progress,
   }) {
-    final recoveryPack = ref.read(recoveryPackProvider).valueOrNull;
+    final recoveryPack = ref.read(recoveryPackProvider).value;
     final language = ref.read(appLanguageProvider);
     final totalDue =
         (dashboard?.vocabDue ?? 0) +
@@ -1241,3 +1241,5 @@ class _StreakBadge extends StatelessWidget {
     );
   }
 }
+
+

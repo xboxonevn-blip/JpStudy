@@ -96,8 +96,8 @@ class NineRouterClient {
     final json = await _postJson('/v1/chat/completions', {
       'model': model ?? config.defaultChatModel,
       'messages': messages.map((message) => message.toJson()).toList(),
-      if (temperature != null) 'temperature': temperature,
-      if (maxTokens != null) 'max_tokens': maxTokens,
+      'temperature': ?temperature,
+      'max_tokens': ?maxTokens,
     });
     final choices = json['choices'];
     if (choices is List && choices.isNotEmpty) {
@@ -126,7 +126,7 @@ class NineRouterClient {
     final json = await _postJson('/v1/embeddings', {
       'model': embeddingModel,
       'input': input,
-      if (dimensions != null) 'dimensions': dimensions,
+      'dimensions': ?dimensions,
     });
     final data = json['data'];
     if (data is List && data.isNotEmpty) {
@@ -162,10 +162,10 @@ class NineRouterClient {
         'model': selectedModel,
       if (provider != null && provider.isNotEmpty) 'provider': provider,
       'query': query,
-      if (maxResults != null) 'max_results': maxResults,
-      if (language != null) 'language': language,
-      if (country != null) 'country': country,
-      if (timeRange != null) 'time_range': timeRange,
+      'max_results': ?maxResults,
+      'language': ?language,
+      'country': ?country,
+      'time_range': ?timeRange,
     });
     final results = json['results'] ?? json['data'];
     if (results is! List) return const [];
@@ -185,7 +185,7 @@ class NineRouterClient {
       'model': model ?? config.defaultWebFetchModel,
       'url': url,
       'format': format,
-      if (maxCharacters != null) 'max_characters': maxCharacters,
+      'max_characters': ?maxCharacters,
     });
     return (json['content'] ?? json['text'] ?? json['markdown'] ?? '')
         .toString();
@@ -213,7 +213,7 @@ class NineRouterClient {
   }
 
   Map<String, String> _headers({String? contentType}) => {
-    if (contentType != null) 'Content-Type': contentType,
+    'Content-Type': ?contentType,
     if ((config.apiKey ?? '').isNotEmpty)
       'Authorization': 'Bearer ${config.apiKey}',
   };

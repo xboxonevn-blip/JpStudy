@@ -65,6 +65,7 @@ Widget _buildHarness({
   int ghostCount = 0,
 }) {
   return ProviderScope(
+    retry: (retryCount, error) => null,
     overrides: [
       lessonGrammarProvider(_kArgs).overrideWith((_) async {
         if (error != null) throw error;
@@ -110,7 +111,8 @@ void main() {
       final completer = Completer<List<GrammarPointData>>();
       await tester.pumpWidget(
         ProviderScope(
-          overrides: [
+    retry: (retryCount, error) => null,
+    overrides: [
             lessonGrammarProvider(_kArgs).overrideWith(
               (_) => completer.future,
             ),
@@ -292,3 +294,4 @@ void main() {
     });
   });
 }
+

@@ -22,11 +22,11 @@ class _CustomDecksScreenState extends ConsumerState<CustomDecksScreen> {
   @override
   Widget build(BuildContext context) {
     final language = ref.watch(appLanguageProvider);
-    final deckBoard = ref.watch(studyHubDecksProvider).valueOrNull;
-    final continueAction = ref.watch(continueActionProvider).valueOrNull;
+    final deckBoard = ref.watch(studyHubDecksProvider).value;
+    final continueAction = ref.watch(continueActionProvider).value;
     ref.watch(
       dashboardProvider.select((v) {
-        final d = v.valueOrNull;
+        final d = v.value;
         return (
           d?.vocabDue ?? 0,
           d?.grammarDue ?? 0,
@@ -36,7 +36,7 @@ class _CustomDecksScreenState extends ConsumerState<CustomDecksScreen> {
         );
       }),
     );
-    final dashboard = ref.read(dashboardProvider).valueOrNull;
+    final dashboard = ref.read(dashboardProvider).value;
     final recipes = _recipes(
       language,
       deckBoard: deckBoard,
@@ -607,3 +607,5 @@ class _TemplateMetric {
 
 
 enum _TemplateKind { kanjiDeck, grammarDrill, shadowing, sprintPack }
+
+

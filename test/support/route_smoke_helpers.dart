@@ -10,11 +10,12 @@ Future<void> pumpSmokeRoute(
   AppRouter.router.go(route, extra: extra);
   await tester.pump();
   await tester.pumpAndSettle(const Duration(milliseconds: 100));
+  await tester.pump(const Duration(milliseconds: 300));
 }
 
 Future<void> disposeSmokeApp(WidgetTester tester) async {
   await tester.pumpWidget(const SizedBox.shrink());
   await tester.idle();
   await tester.pump();
-  await tester.pumpAndSettle(const Duration(milliseconds: 100));
+  await tester.pumpAndSettle(const Duration(milliseconds: 500));
 }

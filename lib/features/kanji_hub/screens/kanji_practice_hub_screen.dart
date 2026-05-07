@@ -23,7 +23,7 @@ class KanjiPracticeHubScreen extends ConsumerWidget {
     final summaryAsync = ref.watch(
       kanjiHomeSummaryByLevelCodeProvider(resolvedLevelCode),
     );
-    final summary = summaryAsync.valueOrNull;
+    final summary = summaryAsync.value;
     final args =
         (launchArgs ??
                 KanjiPracticeArgs(
@@ -140,3 +140,5 @@ class _PracticeAction extends StatelessWidget {
     );
   }
 }
+
+

@@ -15,7 +15,7 @@ final achievementsProvider = FutureProvider<_AchievementWallData>((ref) async {
   final db = ref.watch(databaseProvider);
   final dao = AchievementDao(db);
   final rows = await dao.getAchievements();
-  final dashboard = ref.watch(dashboardProvider).valueOrNull;
+  final dashboard = ref.watch(dashboardProvider).value;
 
   final earned = <learn.AchievementType, _AchievementEntry>{};
   for (final row in rows) {
@@ -626,3 +626,5 @@ class _Category {
   final IconData icon;
   final List<learn.AchievementType> types;
 }
+
+

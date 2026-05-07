@@ -4,18 +4,20 @@ import 'package:uuid/uuid.dart';
 import '../models/flashcard_session.dart';
 import '../models/swipe_action.dart';
 
-class FlashcardSessionNotifier extends StateNotifier<FlashcardSession> {
+class FlashcardSessionNotifier extends Notifier<FlashcardSession> {
+  FlashcardSessionNotifier({required this.lessonId, required this.totalTerms});
+
   final int lessonId;
   final int totalTerms;
 
-  FlashcardSessionNotifier({required this.lessonId, required this.totalTerms})
-    : super(
-        FlashcardSession(
-          sessionId: const Uuid().v4(),
-          lessonId: lessonId,
-          startedAt: DateTime.now(),
-        ),
-      );
+  @override
+  FlashcardSession build() {
+    return FlashcardSession(
+      sessionId: const Uuid().v4(),
+      lessonId: lessonId,
+      startedAt: DateTime.now(),
+    );
+  }
 
   void handleSwipe(int termId, SwipeAction action) {
     switch (action) {
@@ -60,12 +62,12 @@ class FlashcardSessionNotifier extends StateNotifier<FlashcardSession> {
 
 // Provider factory
 final flashcardSessionProvider =
-    StateNotifierProvider.family<
+    NotifierProvider.family<
       FlashcardSessionNotifier,
       FlashcardSession,
       ({int lessonId, int totalTerms})
     >(
-      (ref, params) => FlashcardSessionNotifier(
+      (params) => FlashcardSessionNotifier(
         lessonId: params.lessonId,
         totalTerms: params.totalTerms,
       ),

@@ -57,6 +57,7 @@ Widget _buildScreen({
   Object? error,
 }) {
   return ProviderScope(
+    retry: (retryCount, error) => null,
     overrides: [
       appLanguageProvider.overrideWith((ref) => language),
       masterySnapshotProvider.overrideWith((_) async {
@@ -156,3 +157,4 @@ void main() {
     expect(find.text('JLPT 習熟度'), findsWidgets);
   });
 }
+

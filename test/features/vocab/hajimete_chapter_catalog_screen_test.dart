@@ -47,6 +47,7 @@ Widget _buildScreen({
   Object? error,
 }) {
   return ProviderScope(
+    retry: (retryCount, error) => null,
     overrides: [
       appLanguageProvider.overrideWith((ref) => language),
       // Override the exact provider instance the screen will watch.
@@ -211,3 +212,4 @@ void main() {
     expect(find.text('チャプター別カタログ'), findsOneWidget);
   });
 }
+

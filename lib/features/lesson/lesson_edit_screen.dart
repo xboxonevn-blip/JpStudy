@@ -406,7 +406,7 @@ class _LessonEditScreenState extends ConsumerState<LessonEditScreen> {
         (term) => [term.term, term.reading, term.definition, term.kanjiMeaning],
       ),
     ];
-    final csv = const ListToCsvConverter().convert(rows);
+    final csvContent = csv.encode(rows);
     final location = await getSaveLocation(
       suggestedName: 'lesson_${widget.lessonId}.csv',
       acceptedTypeGroups: const [
@@ -418,7 +418,7 @@ class _LessonEditScreenState extends ConsumerState<LessonEditScreen> {
     }
     try {
       final xfile = XFile.fromData(
-        utf8.encode(csv),
+        utf8.encode(csvContent),
         mimeType: 'text/csv',
         name: 'lesson_export.csv',
         path: location.path,
@@ -455,10 +455,7 @@ class _LessonEditScreenState extends ConsumerState<LessonEditScreen> {
     }
     try {
       final content = await file.readAsString();
-      final rows = const CsvToListConverter(
-        shouldParseNumbers: false,
-        eol: '\n',
-      ).convert(content);
+      final rows = csv.decode(content);
       final drafts = _parseCsvRows(rows);
       if (drafts.isEmpty) {
         if (!mounted) {

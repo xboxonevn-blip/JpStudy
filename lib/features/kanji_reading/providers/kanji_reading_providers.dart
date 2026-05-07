@@ -49,7 +49,7 @@ final kanjiReadingDueItemsByLevelCodeProvider =
 
       final cached = ref.read(
         kanjiByLevelCodeProvider(normalizedLevelCode),
-      ).valueOrNull;
+      ).value;
       if (cached != null) {
         return cached.where((k) => dueIds.contains(k.id)).toList();
       }
@@ -73,3 +73,5 @@ final kanjiReadingDueItemsProvider =
 });
 
 String _normalizeLevelCode(String levelCode) => levelCode.trim().toUpperCase();
+
+

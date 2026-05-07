@@ -40,8 +40,8 @@ class GrammarScreen extends ConsumerWidget {
     final level = ref.watch(studyLevelProvider);
     final levelLabel = level?.shortLabel ?? 'N5';
     final pointsAsync = ref.watch(grammarPointsProvider(levelLabel));
-    final dueCount = ref.watch(grammarDueCountProvider).valueOrNull ?? 0;
-    final ghostCount = ref.watch(grammarGhostCountProvider).valueOrNull ?? 0;
+    final dueCount = ref.watch(grammarDueCountProvider).value ?? 0;
+    final ghostCount = ref.watch(grammarGhostCountProvider).value ?? 0;
 
     return Scaffold(
       appBar: AppBar(
@@ -723,3 +723,5 @@ class _GrammarAsyncState extends StatelessWidget {
     );
   }
 }
+
+

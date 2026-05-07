@@ -31,7 +31,7 @@ class NextStepSuggestions extends ConsumerWidget {
     final language = ref.watch(appLanguageProvider);
     final (vocabDue, grammarDue, kanjiDue) = ref.watch(
       dashboardProvider.select((v) {
-        final d = v.valueOrNull;
+        final d = v.value;
         return (d?.vocabDue ?? 0, d?.grammarDue ?? 0, d?.kanjiDue ?? 0);
       }),
     );
@@ -41,8 +41,8 @@ class NextStepSuggestions extends ConsumerWidget {
     final vocabGhostCount = ref
         .watch(vocabGhostCountProvider)
         .maybeWhen(data: (c) => c, orElse: () => 0);
-    final vocabGhosts = ref.watch(vocabGhostsProvider).valueOrNull ?? [];
-    final continueAction = ref.watch(continueActionProvider).valueOrNull;
+    final vocabGhosts = ref.watch(vocabGhostsProvider).value ?? [];
+    final continueAction = ref.watch(continueActionProvider).value;
 
     final totalGhosts = grammarGhostCount + vocabGhostCount;
     final totalDue = vocabDue + grammarDue + kanjiDue;
@@ -286,3 +286,5 @@ class _StepTile extends StatelessWidget {
     );
   }
 }
+
+

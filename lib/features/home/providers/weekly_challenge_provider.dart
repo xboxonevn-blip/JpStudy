@@ -14,9 +14,9 @@ final weeklyChallengeProvider =
     FutureProvider.autoDispose<WeeklyChallenge>((ref) async {
   // React only to todayXp (used for xpTarget challenge) and week summary.
   // vocabDue/grammarDue/streak changes don't affect challenge progress.
-  ref.watch(dashboardProvider.select((v) => v.valueOrNull?.todayXp ?? 0));
-  final dashboard = ref.read(dashboardProvider).valueOrNull;
-  final weekSummary = ref.watch(weekSummaryProvider).valueOrNull;
+  ref.watch(dashboardProvider.select((v) => v.value?.todayXp ?? 0));
+  final dashboard = ref.read(dashboardProvider).value;
+  final weekSummary = ref.watch(weekSummaryProvider).value;
 
   final prefs = await SharedPreferences.getInstance();
   final now = DateTime.now();
@@ -147,3 +147,5 @@ int _computeProgress(
       return weekSummary?.daysStudied ?? 0;
   }
 }
+
+

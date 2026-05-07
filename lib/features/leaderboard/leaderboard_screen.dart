@@ -23,13 +23,13 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
     final language = ref.watch(appLanguageProvider);
     final (streak, todayXp) = ref.watch(
       dashboardProvider.select((v) {
-        final d = v.valueOrNull;
+        final d = v.value;
         return (d?.streak ?? 0, d?.todayXp ?? 0);
       }),
     );
-    final progress = ref.watch(progressSummaryProvider).valueOrNull;
-    final reviewHistory = ref.watch(reviewHistoryProvider).valueOrNull ?? const [];
-    final attemptHistory = ref.watch(attemptHistoryProvider).valueOrNull ?? const [];
+    final progress = ref.watch(progressSummaryProvider).value;
+    final reviewHistory = ref.watch(reviewHistoryProvider).value ?? const [];
+    final attemptHistory = ref.watch(attemptHistoryProvider).value ?? const [];
     final ranges = _ranges(language);
     final activeRange = ranges[_selectedRange];
     final board = _items(
@@ -477,3 +477,5 @@ class _LeaderboardItem {
   final String subtitle;
   final IconData icon;
 }
+
+

@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
-import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 
 class VocabTrackSummary {
   const VocabTrackSummary({
@@ -64,12 +63,7 @@ final vocabHomeSectionProvider = FutureProvider<VocabHomeSection>((ref) async {
   final repo = ref.watch(lessonRepositoryProvider);
   final selectedLevel = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
 
-  // Await the first emission from each stream so the body doesn't complete
-  // with AsyncLoading defaults and get re-triggered by the first value.
-  // Using .future suspends the body while keeping the subscription alive,
-  // which prevents the autoDispose restart loop that breaks tests.
-  final dashboard = await ref.watch(dashboardProvider.future);
-  final dueCount = dashboard.vocabDue;
+  final dueCount = (await ref.watch(allDueTermsProvider.future)).length;
   final nextReview = await ref.watch(nextVocabReviewProvider.future);
 
   // Fire all remaining independent queries concurrently.

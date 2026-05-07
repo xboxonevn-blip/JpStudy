@@ -142,7 +142,7 @@ class _EnhancedFlashcardState extends State<EnhancedFlashcard> {
                   alignment: Alignment.center,
                   children: [
                     ...previousChildren,
-                    if (currentChild != null) currentChild,
+                    ?currentChild,
                   ],
                 );
               },
