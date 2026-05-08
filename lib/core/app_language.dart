@@ -3246,6 +3246,204 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get authInvalidCredentialsLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Invalid email or password.';
+      case AppLanguage.vi:
+        return 'Email ho\u1eb7c m\u1eadt kh\u1ea9u kh\u00f4ng \u0111\u00fang.';
+      case AppLanguage.ja:
+        return '\u30e1\u30fc\u30eb\u30a2\u30c9\u30ec\u30b9\u307e\u305f\u306f\u30d1\u30b9\u30ef\u30fc\u30c9\u304c\u6b63\u3057\u304f\u3042\u308a\u307e\u305b\u3093\u3002';
+    }
+  }
+
+  String get authNetworkErrorLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Network error. Check your connection and try again.';
+      case AppLanguage.vi:
+        return 'L\u1ed7i m\u1ea1ng. Ki\u1ec3m tra k\u1ebft n\u1ed1i r\u1ed3i th\u1eed l\u1ea1i.';
+      case AppLanguage.ja:
+        return '\u30cd\u30c3\u30c8\u30ef\u30fc\u30af\u30a8\u30e9\u30fc\u3002\u63a5\u7d9a\u3092\u78ba\u8a8d\u3057\u3066\u518d\u8a66\u884c\u3057\u3066\u304f\u3060\u3055\u3044\u3002';
+    }
+  }
+
+  String get authUserDisabledLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'This account has been disabled.';
+      case AppLanguage.vi:
+        return 'T\u00e0i kho\u1ea3n n\u00e0y \u0111\u00e3 b\u1ecb v\u00f4 hi\u1ec7u h\u00f3a.';
+      case AppLanguage.ja:
+        return '\u3053\u306e\u30a2\u30ab\u30a6\u30f3\u30c8\u306f\u7121\u52b9\u5316\u3055\u308c\u3066\u3044\u307e\u3059\u3002';
+    }
+  }
+
+  String get authTooManyAttemptsLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Too many attempts. Try again later.';
+      case AppLanguage.vi:
+        return 'Qu\u00e1 nhi\u1ec1u l\u1ea7n th\u1eed. Vui l\u00f2ng th\u1eed l\u1ea1i sau.';
+      case AppLanguage.ja:
+        return '\u8a66\u884c\u56de\u6570\u304c\u591a\u3059\u304e\u307e\u3059\u3002\u3057\u3070\u3089\u304f\u3057\u3066\u304b\u3089\u518d\u8a66\u884c\u3057\u3066\u304f\u3060\u3055\u3044\u3002';
+    }
+  }
+
+  String get authCancelledLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Sign-in cancelled.';
+      case AppLanguage.vi:
+        return '\u0110\u00e3 h\u1ee7y \u0111\u0103ng nh\u1eadp.';
+      case AppLanguage.ja:
+        return '\u30b5\u30a4\u30f3\u30a4\u30f3\u304c\u30ad\u30e3\u30f3\u30bb\u30eb\u3055\u308c\u307e\u3057\u305f\u3002';
+    }
+  }
+
+  String get authNotSupportedLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Google sign-in is not supported on this platform.';
+      case AppLanguage.vi:
+        return '\u0110\u0103ng nh\u1eadp Google kh\u00f4ng h\u1ed7 tr\u1ee3 tr\u00ean n\u1ec1n t\u1ea3ng n\u00e0y.';
+      case AppLanguage.ja:
+        return '\u3053\u306e\u30d7\u30e9\u30c3\u30c8\u30d5\u30a9\u30fc\u30e0\u3067\u306fGoogle\u30b5\u30a4\u30f3\u30a4\u30f3\u306b\u5bfe\u5fdc\u3057\u3066\u3044\u307e\u305b\u3093\u3002';
+    }
+  }
+
+  String get authUnknownErrorLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Sign-in failed. Please try again.';
+      case AppLanguage.vi:
+        return '\u0110\u0103ng nh\u1eadp th\u1ea5t b\u1ea1i. Vui l\u00f2ng th\u1eed l\u1ea1i.';
+      case AppLanguage.ja:
+        return '\u30b5\u30a4\u30f3\u30a4\u30f3\u306b\u5931\u6557\u3057\u307e\u3057\u305f\u3002\u518d\u8a66\u884c\u3057\u3066\u304f\u3060\u3055\u3044\u3002';
+    }
+  }
+
+  String get signOutLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Sign out';
+      case AppLanguage.vi:
+        return '\u0110\u0103ng xu\u1ea5t';
+      case AppLanguage.ja:
+        return '\u30b5\u30a4\u30f3\u30a2\u30a6\u30c8';
+    }
+  }
+
+  String get signedInAsLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Signed in as';
+      case AppLanguage.vi:
+        return '\u0110\u00e3 \u0111\u0103ng nh\u1eadp';
+      case AppLanguage.ja:
+        return '\u30b5\u30a4\u30f3\u30a4\u30f3\u4e2d';
+    }
+  }
+
+  String get firebaseStorageSectionTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Account sync';
+      case AppLanguage.vi:
+        return '\u0110\u1ed3ng b\u1ed9 qua t\u00e0i kho\u1ea3n';
+      case AppLanguage.ja:
+        return '\u30a2\u30ab\u30a6\u30f3\u30c8\u540c\u671f';
+    }
+  }
+
+  String get firebaseStorageSectionSubtitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Sync your encrypted backup with your account on the cloud.';
+      case AppLanguage.vi:
+        return '\u0110\u1ed3ng b\u1ed9 b\u1ea3n sao l\u01b0u (\u0111\u00e3 m\u00e3 h\u00f3a) qua t\u00e0i kho\u1ea3n \u0111\u00e3 \u0111\u0103ng nh\u1eadp.';
+      case AppLanguage.ja:
+        return '\u30b5\u30a4\u30f3\u30a4\u30f3\u4e2d\u306e\u30a2\u30ab\u30a6\u30f3\u30c8\u3067\u6697\u53f7\u5316\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u3092\u540c\u671f\u3057\u307e\u3059\u3002';
+    }
+  }
+
+  String get firebaseStorageUploadLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Upload to cloud';
+      case AppLanguage.vi:
+        return 'T\u1ea3i l\u00ean \u0111\u00e1m m\u00e2y';
+      case AppLanguage.ja:
+        return '\u30af\u30e9\u30a6\u30c9\u306b\u30a2\u30c3\u30d7\u30ed\u30fc\u30c9';
+    }
+  }
+
+  String get firebaseStorageDownloadLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Pull from cloud';
+      case AppLanguage.vi:
+        return 'T\u1ea3i v\u1ec1 t\u1eeb \u0111\u00e1m m\u00e2y';
+      case AppLanguage.ja:
+        return '\u30af\u30e9\u30a6\u30c9\u304b\u3089\u53d6\u5f97';
+    }
+  }
+
+  String get firebaseStorageUploadSuccessLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Backup uploaded to your cloud account.';
+      case AppLanguage.vi:
+        return '\u0110\u00e3 t\u1ea3i b\u1ea3n sao l\u01b0u l\u00ean \u0111\u00e1m m\u00e2y.';
+      case AppLanguage.ja:
+        return '\u30af\u30e9\u30a6\u30c9\u306b\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u3092\u30a2\u30c3\u30d7\u30ed\u30fc\u30c9\u3057\u307e\u3057\u305f\u3002';
+    }
+  }
+
+  String get firebaseStorageUploadErrorLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Upload failed. Check your connection and try again.';
+      case AppLanguage.vi:
+        return 'T\u1ea3i l\u00ean th\u1ea5t b\u1ea1i. Ki\u1ec3m tra k\u1ebft n\u1ed1i r\u1ed3i th\u1eed l\u1ea1i.';
+      case AppLanguage.ja:
+        return '\u30a2\u30c3\u30d7\u30ed\u30fc\u30c9\u306b\u5931\u6557\u3057\u307e\u3057\u305f\u3002\u63a5\u7d9a\u3092\u78ba\u8a8d\u3057\u3066\u304f\u3060\u3055\u3044\u3002';
+    }
+  }
+
+  String get firebaseStorageDownloadSuccessLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Backup pulled from your cloud account.';
+      case AppLanguage.vi:
+        return '\u0110\u00e3 t\u1ea3i b\u1ea3n sao l\u01b0u t\u1eeb \u0111\u00e1m m\u00e2y.';
+      case AppLanguage.ja:
+        return '\u30af\u30e9\u30a6\u30c9\u304b\u3089\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u3092\u53d6\u5f97\u3057\u307e\u3057\u305f\u3002';
+    }
+  }
+
+  String get firebaseStorageNotSignedInLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Please sign in to use cloud sync.';
+      case AppLanguage.vi:
+        return 'Vui l\u00f2ng \u0111\u0103ng nh\u1eadp \u0111\u1ec3 d\u00f9ng \u0111\u1ed3ng b\u1ed9 \u0111\u00e1m m\u00e2y.';
+      case AppLanguage.ja:
+        return '\u30af\u30e9\u30a6\u30c9\u540c\u671f\u306b\u306f\u30b5\u30a4\u30f3\u30a4\u30f3\u304c\u5fc5\u8981\u3067\u3059\u3002';
+    }
+  }
+
+  String get firebaseStorageNoRemoteFileLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'No backup found in your cloud account yet.';
+      case AppLanguage.vi:
+        return 'Ch\u01b0a c\u00f3 b\u1ea3n sao l\u01b0u n\u00e0o tr\u00ean \u0111\u00e1m m\u00e2y.';
+      case AppLanguage.ja:
+        return '\u30af\u30e9\u30a6\u30c9\u306b\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u304c\u307e\u3060\u3042\u308a\u307e\u305b\u3093\u3002';
+    }
+  }
+
   String get fullscreenLabel {
     switch (this) {
       case AppLanguage.en:

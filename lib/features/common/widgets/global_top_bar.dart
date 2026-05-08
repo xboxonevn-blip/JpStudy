@@ -5,7 +5,10 @@ import 'package:jpstudy/app/theme/app_breakpoints.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/auth/auth_provider.dart';
+import 'package:jpstudy/core/auth/auth_user.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/features/auth/widgets/login_dialog.dart';
 
 class GlobalTopBar extends ConsumerWidget {
   const GlobalTopBar({super.key});
@@ -208,15 +211,25 @@ class _LanguagePicker extends ConsumerWidget {
   }
 }
 
-class _UserMenu extends StatelessWidget {
+class _UserMenu extends ConsumerWidget {
   const _UserMenu({required this.language, required this.compact});
 
   final AppLanguage language;
   final bool compact;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final palette = context.appPalette;
+    final user = ref.watch(authStateProvider).maybeWhen(
+          data: (value) => value,
+          orElse: () => null,
+        );
+    final displayName = (user?.displayName?.trim().isNotEmpty ?? false)
+        ? user!.displayName!
+        : (user?.email ?? _profileName(language));
+    final subtitle = user == null
+        ? _profileSubtitle(language)
+        : (user.email ?? language.signedInAsLabel);
 
     return PopupMenuButton<String>(
       position: PopupMenuPosition.under,
@@ -231,19 +244,21 @@ class _UserMenu extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                _profileName(language),
+                displayName,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: palette.ink,
                   fontSize: 16,
                 ),
+                overflow: TextOverflow.ellipsis,
               ),
               Text(
-                _profileSubtitle(language),
+                subtitle,
                 style: TextStyle(
                   color: palette.ink.withValues(alpha: 0.6),
                   fontSize: 12,
                 ),
+                overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 8),
               Divider(color: palette.outlineSoft),
@@ -311,16 +326,24 @@ class _UserMenu extends StatelessWidget {
         ),
         const PopupMenuDivider(),
         PopupMenuItem<String>(
-          value: 'logout',
+          value: user == null ? 'signin' : 'logout',
           child: Row(
             children: [
-              Icon(Icons.logout_rounded, color: palette.error, size: 20),
+              Icon(
+                user == null ? Icons.login_rounded : Icons.logout_rounded,
+                color: user == null ? palette.info : palette.error,
+                size: 20,
+              ),
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  _logoutMenuLabel(language),
+                  user == null
+                      ? language.loginSubmitLabel
+                      : _logoutMenuLabel(language),
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(color: palette.error),
+                  style: TextStyle(
+                    color: user == null ? palette.info : palette.error,
+                  ),
                 ),
               ),
             ],
@@ -330,36 +353,64 @@ class _UserMenu extends StatelessWidget {
       onSelected: (val) {
         if (val == 'premium') context.openPremium();
         if (val == 'settings') context.openMe();
+        if (val == 'signin') LoginDialog.show(context);
+        if (val == 'logout') ref.read(authServiceProvider).signOut();
       },
-      child: Container(
-        width: compact ? 34 : 38,
-        height: compact ? 34 : 38,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [palette.accent, palette.primary],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          shape: BoxShape.circle,
-          border: Border.all(color: palette.outlineSoft),
-          boxShadow: [
-            BoxShadow(
-              color: palette.accent.withValues(alpha: 0.18),
-              blurRadius: 14,
-              offset: const Offset(0, 6),
-            ),
-          ],
+      child: _Avatar(palette: palette, compact: compact, user: user),
+    );
+  }
+}
+
+class _Avatar extends StatelessWidget {
+  const _Avatar({
+    required this.palette,
+    required this.compact,
+    required this.user,
+  });
+
+  final AppThemePalette palette;
+  final bool compact;
+  final AuthUser? user;
+
+  @override
+  Widget build(BuildContext context) {
+    final size = compact ? 34.0 : 38.0;
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [palette.accent, palette.primary],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        alignment: Alignment.center,
-        child: Text(
-          'J',
-          style: TextStyle(
-            color: palette.bg,
-            fontWeight: FontWeight.bold,
-            fontSize: compact ? 16 : 18,
+        shape: BoxShape.circle,
+        border: Border.all(color: palette.outlineSoft),
+        image: (user?.photoUrl?.isNotEmpty ?? false)
+            ? DecorationImage(
+                image: NetworkImage(user!.photoUrl!),
+                fit: BoxFit.cover,
+              )
+            : null,
+        boxShadow: [
+          BoxShadow(
+            color: palette.accent.withValues(alpha: 0.18),
+            blurRadius: 14,
+            offset: const Offset(0, 6),
           ),
-        ),
+        ],
       ),
+      alignment: Alignment.center,
+      child: (user?.photoUrl?.isNotEmpty ?? false)
+          ? const SizedBox.shrink()
+          : Text(
+              user?.initialsForAvatar ?? 'J',
+              style: TextStyle(
+                color: palette.bg,
+                fontWeight: FontWeight.bold,
+                fontSize: compact ? 16 : 18,
+              ),
+            ),
     );
   }
 }

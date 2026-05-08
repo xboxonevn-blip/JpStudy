@@ -13,6 +13,7 @@ import 'package:jpstudy/core/onboarding_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/core/theme_provider.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
+import 'package:jpstudy/core/auth/auth_provider.dart';
 import 'package:jpstudy/features/auth/widgets/login_dialog.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/home/providers/cloud_sync_status_provider.dart';
@@ -90,24 +91,81 @@ class _MeScreenState extends ConsumerState<MeScreen> {
         ),
       ),
     );
+    final authState = ref.watch(authStateProvider);
+    final palette = context.appPalette;
     final accountSection = _SectionCard(
       title: language.loginDialogTitle,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            language.loginDialogSubtitle,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: context.appPalette.ink.withValues(alpha: 0.65),
+      child: authState.maybeWhen(
+        data: (user) {
+          if (user == null) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  language.loginDialogSubtitle,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: palette.ink.withValues(alpha: 0.65),
+                      ),
                 ),
-          ),
-          const SizedBox(height: AppSpacing.md),
-          FilledButton.icon(
-            onPressed: () => LoginDialog.show(context),
-            icon: const Icon(Icons.login_rounded),
-            label: Text(language.loginSubmitLabel),
-          ),
-        ],
+                const SizedBox(height: AppSpacing.md),
+                FilledButton.icon(
+                  onPressed: () => LoginDialog.show(context),
+                  icon: const Icon(Icons.login_rounded),
+                  label: Text(language.loginSubmitLabel),
+                ),
+              ],
+            );
+          }
+          return Row(
+            children: [
+              CircleAvatar(
+                radius: 22,
+                backgroundColor: palette.info.withValues(alpha: 0.18),
+                foregroundImage: user.photoUrl == null
+                    ? null
+                    : NetworkImage(user.photoUrl!),
+                child: Text(
+                  user.initialsForAvatar,
+                  style: TextStyle(
+                    color: palette.info,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+              const SizedBox(width: AppSpacing.md),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if ((user.displayName ?? '').isNotEmpty)
+                      Text(
+                        user.displayName!,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              fontWeight: FontWeight.w600,
+                            ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    Text(
+                      user.email ?? language.signedInAsLabel,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: palette.ink.withValues(alpha: 0.65),
+                          ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: AppSpacing.sm),
+              IconButton(
+                tooltip: language.signOutLabel,
+                onPressed: () =>
+                    ref.read(authServiceProvider).signOut(),
+                icon: const Icon(Icons.logout_rounded),
+              ),
+            ],
+          );
+        },
+        orElse: () => const Center(child: CircularProgressIndicator()),
       ),
     );
     final learningSection = _SectionCard(
