@@ -85,7 +85,8 @@ Shipped (file-based MVP):
   `test/features/me/data_settings_screen_test.dart`
 
 Maintenance direction:
-- keep the local-first model: do not introduce backend services or vendor SDKs
+- keep the local-first model: cloud transports must exchange the same portable
+  backup envelope instead of becoming a second persistence model
 - keep envelope versioning stable and any new fields backward compatible
 - keep checksum and device-id metadata authoritative for conflict decisions
 
@@ -96,11 +97,13 @@ Primary goal:
   Phase 4 cloud sync MVP without expanding scope into new platforms
 
 Near-term targets:
-- AES-256-GCM at-rest encryption for backup envelopes (opt-in passphrase)
+- AES-256-GCM at-rest encryption for backup envelopes (opt-in passphrase) — shipped
+- Firebase Auth + Storage account sync for the same backup envelope — shipped
 - automatic upload trigger after meaningful study sessions when a sync target
   is linked
 - conflict surface in the data settings UI when import is older than current
-- documentation pass for backup/sync architecture under `docs/`
+- documentation pass for backup/sync architecture under `docs/` — started in
+  `docs/notes/2026-05-08-backup-sync-architecture.md`
 
 ## Current priorities
 
@@ -113,7 +116,6 @@ Near-term targets:
 
 ### Next
 
-- ship encrypted backup envelopes as the highest-value Phase 5 item
 - evaluate auto-upload trigger after clearer telemetry on session completion
 - keep any larger handwriting/content work behind explicit scoped plans
 

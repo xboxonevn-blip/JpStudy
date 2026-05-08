@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/auth/auth_provider.dart';
+import 'package:jpstudy/core/auth/auth_user.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/services/cloud_sync_service.dart';
 import 'package:jpstudy/features/home/providers/cloud_sync_status_provider.dart';
@@ -54,10 +56,12 @@ Widget buildScreen({
     autoBackupEnabled: true,
   ),
   CloudSyncStatus status = _unlinkedStatus,
+  AuthUser? signedInUser,
 }) {
   return ProviderScope(
     overrides: [
       appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+      authStateProvider.overrideWith((ref) => Stream.value(signedInUser)),
       cloudSyncStatusProvider.overrideWith((ref) async => status),
       dataSettingsControllerProvider.overrideWith(
         () => _FakeDataSettingsController(state),
@@ -213,5 +217,17 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.textContaining('Last:'), findsOneWidget);
+  });
+
+  testWidgets('keeps account sync discoverable when signed out', (
+    tester,
+  ) async {
+    await tester.pumpWidget(buildScreen());
+    await tester.pumpAndSettle();
+
+    expect(find.text('Account sync'), findsOneWidget);
+    expect(find.text('Please sign in to use cloud sync.'), findsOneWidget);
+    expect(find.text('Upload to cloud'), findsNothing);
+    expect(find.text('Pull from cloud'), findsNothing);
   });
 }

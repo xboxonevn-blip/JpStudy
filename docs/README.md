@@ -13,5 +13,6 @@ Project documentation is grouped by purpose:
 Recommended reading order:
 - `README.md`
 - `ROADMAP.md`
+- `docs/notes/2026-05-08-backup-sync-architecture.md`
 - `docs/DATA_SCHEMA_V2.md`
 - `docs/reports/`

@@ -280,49 +280,51 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
       data: (value) => value,
       orElse: () => null,
     );
-    final accountSyncSection = user == null
-        ? null
-        : _SectionCard(
-            title: language.firebaseStorageSectionTitle,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+    final accountSyncSection = _SectionCard(
+      title: language.firebaseStorageSectionTitle,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            user == null
+                ? language.firebaseStorageNotSignedInLabel
+                : language.firebaseStorageSectionSubtitle,
+            style: Theme.of(
+              context,
+            ).textTheme.bodySmall?.copyWith(color: Theme.of(context).hintColor),
+          ),
+          if (user != null) ...[
+            const SizedBox(height: AppSpacing.md),
+            Wrap(
+              spacing: AppSpacing.sm,
+              runSpacing: AppSpacing.sm,
               children: [
-                Text(
-                  language.firebaseStorageSectionSubtitle,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context).hintColor,
-                      ),
+                FilledButton.icon(
+                  onPressed: settings.isReady
+                      ? () => _runFirebaseUpload(
+                          controller: controller,
+                          language: language,
+                        )
+                      : null,
+                  icon: const Icon(Icons.cloud_sync_outlined),
+                  label: Text(language.firebaseStorageUploadLabel),
                 ),
-                const SizedBox(height: AppSpacing.md),
-                Wrap(
-                  spacing: AppSpacing.sm,
-                  runSpacing: AppSpacing.sm,
-                  children: [
-                    FilledButton.icon(
-                      onPressed: settings.isReady
-                          ? () => _runFirebaseUpload(
-                                controller: controller,
-                                language: language,
-                              )
-                          : null,
-                      icon: const Icon(Icons.cloud_sync_outlined),
-                      label: Text(language.firebaseStorageUploadLabel),
-                    ),
-                    OutlinedButton.icon(
-                      onPressed: settings.isReady
-                          ? () => _runFirebaseDownload(
-                                controller: controller,
-                                language: language,
-                              )
-                          : null,
-                      icon: const Icon(Icons.cloud_download_outlined),
-                      label: Text(language.firebaseStorageDownloadLabel),
-                    ),
-                  ],
+                OutlinedButton.icon(
+                  onPressed: settings.isReady
+                      ? () => _runFirebaseDownload(
+                          controller: controller,
+                          language: language,
+                        )
+                      : null,
+                  icon: const Icon(Icons.cloud_download_outlined),
+                  label: Text(language.firebaseStorageDownloadLabel),
                 ),
               ],
             ),
-          );
+          ],
+        ],
+      ),
+    );
 
     return Scaffold(
       appBar: AppBar(title: Text(_title(language))),
@@ -344,10 +346,8 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
                   ],
                   const SizedBox(height: AppSpacing.lg),
                   autoBackupSection,
-                  if (accountSyncSection != null) ...[
-                    const SizedBox(height: AppSpacing.lg),
-                    accountSyncSection,
-                  ],
+                  const SizedBox(height: AppSpacing.lg),
+                  accountSyncSection,
                   const SizedBox(height: AppSpacing.lg),
                   cloudSyncSection,
                   const SizedBox(height: AppSpacing.lg),
@@ -373,10 +373,8 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
                       child: Column(
                         children: [
                           autoBackupSection,
-                          if (accountSyncSection != null) ...[
-                            const SizedBox(height: AppSpacing.lg),
-                            accountSyncSection,
-                          ],
+                          const SizedBox(height: AppSpacing.lg),
+                          accountSyncSection,
                           const SizedBox(height: AppSpacing.lg),
                           manualBackupSection,
                         ],
@@ -544,15 +542,18 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
         title: Text(language.encryptBackupPromptTitle),
         actions: [
           TextButton(
-            onPressed: () => Navigator.of(context).pop(_ExportEncryptionMode.cancel),
+            onPressed: () =>
+                Navigator.of(context).pop(_ExportEncryptionMode.cancel),
             child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
           ),
           TextButton(
-            onPressed: () => Navigator.of(context).pop(_ExportEncryptionMode.plain),
+            onPressed: () =>
+                Navigator.of(context).pop(_ExportEncryptionMode.plain),
             child: Text(language.encryptNoLabel),
           ),
           ElevatedButton(
-            onPressed: () => Navigator.of(context).pop(_ExportEncryptionMode.encrypt),
+            onPressed: () =>
+                Navigator.of(context).pop(_ExportEncryptionMode.encrypt),
             child: Text(language.encryptYesLabel),
           ),
         ],
@@ -631,7 +632,9 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
                         }
                         Navigator.of(context).pop(passController.text);
                       },
-                      child: Text(MaterialLocalizations.of(context).okButtonLabel),
+                      child: Text(
+                        MaterialLocalizations.of(context).okButtonLabel,
+                      ),
                     ),
                   ],
                 );
@@ -665,9 +668,7 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(null),
-              child: Text(
-                MaterialLocalizations.of(context).cancelButtonLabel,
-              ),
+              child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
             ),
             ElevatedButton(
               onPressed: () => Navigator.of(context).pop(controller.text),
@@ -911,9 +912,7 @@ enum _LinkedSyncPrimaryAction { create, choose, upload, download }
 enum _ExportEncryptionMode { plain, encrypt, cancel }
 
 class _ExportEncryptionChoice {
-  const _ExportEncryptionChoice.plain()
-    : passphrase = null,
-      cancelled = false;
+  const _ExportEncryptionChoice.plain() : passphrase = null, cancelled = false;
   const _ExportEncryptionChoice.encrypted(String this.passphrase)
     : cancelled = false;
   const _ExportEncryptionChoice.cancelled()
