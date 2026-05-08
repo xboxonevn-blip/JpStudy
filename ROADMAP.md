@@ -20,7 +20,7 @@ Build a Japanese learning app that combines:
 | Phase 2 | App structure and UI system | Completed | Done |
 | Phase 3 | Learning quality and release hardening | Completed | Done |
 | Phase 4 | Cloud sync ecosystem | MVP shipped | Done |
-| Phase 5 | Hardening and ecosystem polish | In progress | Open |
+| Phase 5 | Hardening and ecosystem polish | Completed | Done |
 
 ## Phase summary
 
@@ -96,14 +96,24 @@ Primary goal:
 - raise privacy, automation, and discovery quality on top of the working
   Phase 4 cloud sync MVP without expanding scope into new platforms
 
-Near-term targets:
-- AES-256-GCM at-rest encryption for backup envelopes (opt-in passphrase) — shipped
-- Firebase Auth + Storage account sync for the same backup envelope — shipped
-- automatic upload trigger after meaningful study sessions when a sync target
-  is linked
-- conflict surface in the data settings UI when import is older than current
-- documentation pass for backup/sync architecture under `docs/` — started in
+Shipped:
+- AES-256-GCM at-rest encryption for backup envelopes (opt-in passphrase)
+- Firebase Auth (Google + email/password) wired into the login dialog and
+  the top-right user menu
+- Firebase Storage account sync for the same backup envelope
+- automatic upload trigger after Learn / Test / Handwriting summary screens
+  via `AutoCloudUploadCoordinator` (debounced, signed-in only, plaintext)
+- explicit conflict prompt in the data settings UI when an import is older
+  than the last applied snapshot
+- backup/sync architecture note at
   `docs/notes/2026-05-08-backup-sync-architecture.md`
+
+Maintenance direction:
+- keep auto-upload plaintext-only; encryption stays user-driven via the
+  manual upload path
+- keep the older-import dialog modal — silent skip is no longer the default
+- update the architecture note when the envelope shape, sync targets, or
+  conflict semantics change
 
 ## Current priorities
 
@@ -116,8 +126,10 @@ Near-term targets:
 
 ### Next
 
-- evaluate auto-upload trigger after clearer telemetry on session completion
-- keep any larger handwriting/content work behind explicit scoped plans
+- collect early-user feedback on the cloud sync + auto-upload pair before
+  layering on richer per-record sync
+- decide whether to start a Phase 6 (gamification depth) or stay in
+  maintenance mode after a stabilization period
 
 ### Later
 
