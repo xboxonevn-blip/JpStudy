@@ -3444,6 +3444,39 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get autoCloudUploadLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Auto-upload to cloud';
+      case AppLanguage.vi:
+        return 'T\u1ef1 \u0111\u1ed9ng t\u1ea3i l\u00ean \u0111\u00e1m m\u00e2y';
+      case AppLanguage.ja:
+        return '\u30af\u30e9\u30a6\u30c9\u81ea\u52d5\u30a2\u30c3\u30d7\u30ed\u30fc\u30c9';
+    }
+  }
+
+  String get autoCloudUploadHint {
+    switch (this) {
+      case AppLanguage.en:
+        return 'After a completed study session, upload the latest backup to your signed-in account.';
+      case AppLanguage.vi:
+        return 'Sau khi ho\u00e0n th\u00e0nh phi\u00ean h\u1ecdc, t\u1ef1 t\u1ea3i b\u1ea3n sao l\u01b0u m\u1edbi nh\u1ea5t l\u00ean t\u00e0i kho\u1ea3n \u0111\u00e3 \u0111\u0103ng nh\u1eadp.';
+      case AppLanguage.ja:
+        return '\u5b66\u7fd2\u30bb\u30c3\u30b7\u30e7\u30f3\u5b8c\u4e86\u5f8c\u3001\u6700\u65b0\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u3092\u30b5\u30a4\u30f3\u30a4\u30f3\u4e2d\u306e\u30a2\u30ab\u30a6\u30f3\u30c8\u3078\u81ea\u52d5\u30a2\u30c3\u30d7\u30ed\u30fc\u30c9\u3057\u307e\u3059\u3002';
+    }
+  }
+
+  String get autoCloudUploadEncryptionWarning {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Auto-upload does not support encryption. Turn on encryption = upload manually.';
+      case AppLanguage.vi:
+        return 'T\u1ef1 \u0111\u1ed9ng t\u1ea3i l\u00ean kh\u00f4ng h\u1ed7 tr\u1ee3 m\u00e3 h\u00f3a. B\u1eadt m\u00e3 h\u00f3a = t\u1ea3i th\u1ee7 c\u00f4ng.';
+      case AppLanguage.ja:
+        return '\u81ea\u52d5\u30a2\u30c3\u30d7\u30ed\u30fc\u30c9\u306f\u6697\u53f7\u5316\u306b\u5bfe\u5fdc\u3057\u3066\u3044\u307e\u305b\u3093\u3002\u6697\u53f7\u5316\u3092\u4f7f\u3046\u5834\u5408\u306f\u624b\u52d5\u3067\u30a2\u30c3\u30d7\u30ed\u30fc\u30c9\u3057\u3066\u304f\u3060\u3055\u3044\u3002';
+    }
+  }
+
   String get fullscreenLabel {
     switch (this) {
       case AppLanguage.en:
