@@ -1,1 +1,38 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"jpstudy-v2","appId":"1:129949648924:android:4e2023b729a0cb3e8337d9","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"jpstudy-v2","configurations":{"android":"1:129949648924:android:4e2023b729a0cb3e8337d9","ios":"1:129949648924:ios:ad22cf784be09a1c8337d9","web":"1:129949648924:web:a4dbfa27af569b478337d9","windows":"1:129949648924:web:0b2d415594a5bf5f8337d9"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "jpstudy-v2",
+          "appId": "1:129949648924:android:4e2023b729a0cb3e8337d9",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "jpstudy-v2",
+          "configurations": {
+            "android": "1:129949648924:android:4e2023b729a0cb3e8337d9",
+            "ios": "1:129949648924:ios:ad22cf784be09a1c8337d9",
+            "web": "1:129949648924:web:a4dbfa27af569b478337d9",
+            "windows": "1:129949648924:web:0b2d415594a5bf5f8337d9"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
