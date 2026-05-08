@@ -5,6 +5,8 @@
 ## Structure
 
 - `index.json`
+- `kana/kana_chart.json`
+- `kanji/han_viet_on_rules.json`
 - `vocab/<level>/lesson_XX.json`
 - `kanji/<level>/lesson_XX.json`
 - `grammar/<level>/grammar_<level>_<lesson>.json`
@@ -23,6 +25,18 @@ Typical fields:
 - schema or version metadata
 - available datasets
 - lesson counts or level summaries
+
+## `kana/kana_chart.json`
+
+- Canonical beginner kana chart payload imported from the Drive scan.
+- Contains hiragana and katakana base rows, dakuten/handakuten variants, stroke counts, and compound kana.
+- Does not depend on publisher web pages.
+
+## `kanji/han_viet_on_rules.json`
+
+- Online-source-backed learner heuristics for guessing common On readings from Vietnamese Han-Viet labels.
+- Contains source URLs, blocked-domain policy, confidence scores, rule categories, and examples.
+- Rules are study hints only; lesson kanji readings remain the canonical runtime answer source.
 
 ## `vocab/<level>/lesson_XX.json`
 

@@ -1,0 +1,1775 @@
+{
+  "schemaVersion": 1,
+  "dataset": "kana",
+  "sourceScan": {
+    "sourceKind": "google_drive_folder",
+    "folderLabel": "Kanji cho nguoi moi bat dau",
+    "scanDate": "2026-05-08",
+    "notes": [
+      "Generated from downloaded Drive PDFs and standard kana chart facts.",
+      "Publisher website links were not fetched."
+    ],
+    "importedFiles": [
+      "Hiragana_[thocodehoctiengnhat].pdf",
+      "Hiragana_am_ghep_[thocodehoctiengnhat].pdf",
+      "katakana_[thocodehoctiengnhat].pdf",
+      "Katakana_am_ghep_[thocodehoctiengnhat].pdf"
+    ]
+  },
+  "scripts": {
+    "hiragana": {
+      "label": "Hiragana",
+      "entries": [
+        {
+          "order": 1,
+          "kana": "あ",
+          "romaji": "a",
+          "row": "a",
+          "column": "a",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 2,
+          "kana": "い",
+          "romaji": "i",
+          "row": "a",
+          "column": "i",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 3,
+          "kana": "う",
+          "romaji": "u",
+          "row": "a",
+          "column": "u",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 4,
+          "kana": "え",
+          "romaji": "e",
+          "row": "a",
+          "column": "e",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 5,
+          "kana": "お",
+          "romaji": "o",
+          "row": "a",
+          "column": "o",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 6,
+          "kana": "か",
+          "romaji": "ka",
+          "row": "k",
+          "column": "a",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 7,
+          "kana": "き",
+          "romaji": "ki",
+          "row": "k",
+          "column": "i",
+          "strokes": 4,
+          "mark": null
+        },
+        {
+          "order": 8,
+          "kana": "く",
+          "romaji": "ku",
+          "row": "k",
+          "column": "u",
+          "strokes": 1,
+          "mark": null
+        },
+        {
+          "order": 9,
+          "kana": "け",
+          "romaji": "ke",
+          "row": "k",
+          "column": "e",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 10,
+          "kana": "こ",
+          "romaji": "ko",
+          "row": "k",
+          "column": "o",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 11,
+          "kana": "さ",
+          "romaji": "sa",
+          "row": "s",
+          "column": "a",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 12,
+          "kana": "し",
+          "romaji": "shi",
+          "row": "s",
+          "column": "i",
+          "strokes": 1,
+          "mark": null
+        },
+        {
+          "order": 13,
+          "kana": "す",
+          "romaji": "su",
+          "row": "s",
+          "column": "u",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 14,
+          "kana": "せ",
+          "romaji": "se",
+          "row": "s",
+          "column": "e",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 15,
+          "kana": "そ",
+          "romaji": "so",
+          "row": "s",
+          "column": "o",
+          "strokes": 1,
+          "mark": null
+        },
+        {
+          "order": 16,
+          "kana": "た",
+          "romaji": "ta",
+          "row": "t",
+          "column": "a",
+          "strokes": 4,
+          "mark": null
+        },
+        {
+          "order": 17,
+          "kana": "ち",
+          "romaji": "chi",
+          "row": "t",
+          "column": "i",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 18,
+          "kana": "つ",
+          "romaji": "tsu",
+          "row": "t",
+          "column": "u",
+          "strokes": 1,
+          "mark": null
+        },
+        {
+          "order": 19,
+          "kana": "て",
+          "romaji": "te",
+          "row": "t",
+          "column": "e",
+          "strokes": 1,
+          "mark": null
+        },
+        {
+          "order": 20,
+          "kana": "と",
+          "romaji": "to",
+          "row": "t",
+          "column": "o",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 21,
+          "kana": "な",
+          "romaji": "na",
+          "row": "n",
+          "column": "a",
+          "strokes": 4,
+          "mark": null
+        },
+        {
+          "order": 22,
+          "kana": "に",
+          "romaji": "ni",
+          "row": "n",
+          "column": "i",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 23,
+          "kana": "ぬ",
+          "romaji": "nu",
+          "row": "n",
+          "column": "u",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 24,
+          "kana": "ね",
+          "romaji": "ne",
+          "row": "n",
+          "column": "e",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 25,
+          "kana": "の",
+          "romaji": "no",
+          "row": "n",
+          "column": "o",
+          "strokes": 1,
+          "mark": null
+        },
+        {
+          "order": 26,
+          "kana": "は",
+          "romaji": "ha",
+          "row": "h",
+          "column": "a",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 27,
+          "kana": "ひ",
+          "romaji": "hi",
+          "row": "h",
+          "column": "i",
+          "strokes": 1,
+          "mark": null
+        },
+        {
+          "order": 28,
+          "kana": "ふ",
+          "romaji": "fu",
+          "row": "h",
+          "column": "u",
+          "strokes": 4,
+          "mark": null
+        },
+        {
+          "order": 29,
+          "kana": "へ",
+          "romaji": "he",
+          "row": "h",
+          "column": "e",
+          "strokes": 1,
+          "mark": null
+        },
+        {
+          "order": 30,
+          "kana": "ほ",
+          "romaji": "ho",
+          "row": "h",
+          "column": "o",
+          "strokes": 4,
+          "mark": null
+        },
+        {
+          "order": 31,
+          "kana": "ま",
+          "romaji": "ma",
+          "row": "m",
+          "column": "a",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 32,
+          "kana": "み",
+          "romaji": "mi",
+          "row": "m",
+          "column": "i",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 33,
+          "kana": "む",
+          "romaji": "mu",
+          "row": "m",
+          "column": "u",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 34,
+          "kana": "め",
+          "romaji": "me",
+          "row": "m",
+          "column": "e",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 35,
+          "kana": "も",
+          "romaji": "mo",
+          "row": "m",
+          "column": "o",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 36,
+          "kana": "や",
+          "romaji": "ya",
+          "row": "y",
+          "column": "a",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 37,
+          "kana": "ゆ",
+          "romaji": "yu",
+          "row": "y",
+          "column": "i",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 38,
+          "kana": "よ",
+          "romaji": "yo",
+          "row": "y",
+          "column": "u",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 39,
+          "kana": "ら",
+          "romaji": "ra",
+          "row": "r",
+          "column": "a",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 40,
+          "kana": "り",
+          "romaji": "ri",
+          "row": "r",
+          "column": "i",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 41,
+          "kana": "る",
+          "romaji": "ru",
+          "row": "r",
+          "column": "u",
+          "strokes": 1,
+          "mark": null
+        },
+        {
+          "order": 42,
+          "kana": "れ",
+          "romaji": "re",
+          "row": "r",
+          "column": "e",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 43,
+          "kana": "ろ",
+          "romaji": "ro",
+          "row": "r",
+          "column": "o",
+          "strokes": 1,
+          "mark": null
+        },
+        {
+          "order": 44,
+          "kana": "わ",
+          "romaji": "wa",
+          "row": "w",
+          "column": "a",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 45,
+          "kana": "を",
+          "romaji": "o",
+          "row": "w",
+          "column": "i",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 46,
+          "kana": "ん",
+          "romaji": "n",
+          "row": "n",
+          "column": "a",
+          "strokes": 1,
+          "mark": null
+        },
+        {
+          "order": 47,
+          "kana": "が",
+          "romaji": "ga",
+          "row": "k",
+          "column": "a",
+          "strokes": 5,
+          "mark": "dakuten"
+        },
+        {
+          "order": 48,
+          "kana": "ぎ",
+          "romaji": "gi",
+          "row": "k",
+          "column": "i",
+          "strokes": 6,
+          "mark": "dakuten"
+        },
+        {
+          "order": 49,
+          "kana": "ぐ",
+          "romaji": "gu",
+          "row": "k",
+          "column": "u",
+          "strokes": 3,
+          "mark": "dakuten"
+        },
+        {
+          "order": 50,
+          "kana": "げ",
+          "romaji": "ge",
+          "row": "k",
+          "column": "e",
+          "strokes": 5,
+          "mark": "dakuten"
+        },
+        {
+          "order": 51,
+          "kana": "ご",
+          "romaji": "go",
+          "row": "k",
+          "column": "o",
+          "strokes": 4,
+          "mark": "dakuten"
+        },
+        {
+          "order": 52,
+          "kana": "ざ",
+          "romaji": "za",
+          "row": "s",
+          "column": "a",
+          "strokes": 5,
+          "mark": "dakuten"
+        },
+        {
+          "order": 53,
+          "kana": "じ",
+          "romaji": "ji",
+          "row": "s",
+          "column": "i",
+          "strokes": 3,
+          "mark": "dakuten"
+        },
+        {
+          "order": 54,
+          "kana": "ず",
+          "romaji": "zu",
+          "row": "s",
+          "column": "u",
+          "strokes": 4,
+          "mark": "dakuten"
+        },
+        {
+          "order": 55,
+          "kana": "ぜ",
+          "romaji": "ze",
+          "row": "s",
+          "column": "e",
+          "strokes": 5,
+          "mark": "dakuten"
+        },
+        {
+          "order": 56,
+          "kana": "ぞ",
+          "romaji": "zo",
+          "row": "s",
+          "column": "o",
+          "strokes": 3,
+          "mark": "dakuten"
+        },
+        {
+          "order": 57,
+          "kana": "だ",
+          "romaji": "da",
+          "row": "t",
+          "column": "a",
+          "strokes": 6,
+          "mark": "dakuten"
+        },
+        {
+          "order": 58,
+          "kana": "ぢ",
+          "romaji": "ji",
+          "row": "t",
+          "column": "i",
+          "strokes": 4,
+          "mark": "dakuten"
+        },
+        {
+          "order": 59,
+          "kana": "づ",
+          "romaji": "zu",
+          "row": "t",
+          "column": "u",
+          "strokes": 3,
+          "mark": "dakuten"
+        },
+        {
+          "order": 60,
+          "kana": "で",
+          "romaji": "de",
+          "row": "t",
+          "column": "e",
+          "strokes": 3,
+          "mark": "dakuten"
+        },
+        {
+          "order": 61,
+          "kana": "ど",
+          "romaji": "do",
+          "row": "t",
+          "column": "o",
+          "strokes": 4,
+          "mark": "dakuten"
+        },
+        {
+          "order": 62,
+          "kana": "ば",
+          "romaji": "ba",
+          "row": "h",
+          "column": "a",
+          "strokes": 5,
+          "mark": "dakuten"
+        },
+        {
+          "order": 63,
+          "kana": "び",
+          "romaji": "bi",
+          "row": "h",
+          "column": "i",
+          "strokes": 3,
+          "mark": "dakuten"
+        },
+        {
+          "order": 64,
+          "kana": "ぶ",
+          "romaji": "bu",
+          "row": "h",
+          "column": "u",
+          "strokes": 6,
+          "mark": "dakuten"
+        },
+        {
+          "order": 65,
+          "kana": "べ",
+          "romaji": "be",
+          "row": "h",
+          "column": "e",
+          "strokes": 3,
+          "mark": "dakuten"
+        },
+        {
+          "order": 66,
+          "kana": "ぼ",
+          "romaji": "bo",
+          "row": "h",
+          "column": "o",
+          "strokes": 6,
+          "mark": "dakuten"
+        },
+        {
+          "order": 67,
+          "kana": "ぱ",
+          "romaji": "pa",
+          "row": "h",
+          "column": "a",
+          "strokes": 4,
+          "mark": "handakuten"
+        },
+        {
+          "order": 68,
+          "kana": "ぴ",
+          "romaji": "pi",
+          "row": "h",
+          "column": "i",
+          "strokes": 2,
+          "mark": "handakuten"
+        },
+        {
+          "order": 69,
+          "kana": "ぷ",
+          "romaji": "pu",
+          "row": "h",
+          "column": "u",
+          "strokes": 5,
+          "mark": "handakuten"
+        },
+        {
+          "order": 70,
+          "kana": "ぺ",
+          "romaji": "pe",
+          "row": "h",
+          "column": "e",
+          "strokes": 2,
+          "mark": "handakuten"
+        },
+        {
+          "order": 71,
+          "kana": "ぽ",
+          "romaji": "po",
+          "row": "h",
+          "column": "o",
+          "strokes": 5,
+          "mark": "handakuten"
+        }
+      ],
+      "compounds": [
+        {
+          "order": 1,
+          "kana": "きゃ",
+          "romaji": "kya",
+          "row": "k",
+          "column": "a"
+        },
+        {
+          "order": 2,
+          "kana": "きゅ",
+          "romaji": "kyu",
+          "row": "k",
+          "column": "u"
+        },
+        {
+          "order": 3,
+          "kana": "きょ",
+          "romaji": "kyo",
+          "row": "k",
+          "column": "o"
+        },
+        {
+          "order": 4,
+          "kana": "しゃ",
+          "romaji": "sha",
+          "row": "s",
+          "column": "a"
+        },
+        {
+          "order": 5,
+          "kana": "しゅ",
+          "romaji": "shu",
+          "row": "s",
+          "column": "u"
+        },
+        {
+          "order": 6,
+          "kana": "しょ",
+          "romaji": "sho",
+          "row": "s",
+          "column": "o"
+        },
+        {
+          "order": 7,
+          "kana": "ちゃ",
+          "romaji": "cha",
+          "row": "t",
+          "column": "a"
+        },
+        {
+          "order": 8,
+          "kana": "ちゅ",
+          "romaji": "chu",
+          "row": "t",
+          "column": "u"
+        },
+        {
+          "order": 9,
+          "kana": "ちょ",
+          "romaji": "cho",
+          "row": "t",
+          "column": "o"
+        },
+        {
+          "order": 10,
+          "kana": "にゃ",
+          "romaji": "nya",
+          "row": "n",
+          "column": "a"
+        },
+        {
+          "order": 11,
+          "kana": "にゅ",
+          "romaji": "nyu",
+          "row": "n",
+          "column": "u"
+        },
+        {
+          "order": 12,
+          "kana": "にょ",
+          "romaji": "nyo",
+          "row": "n",
+          "column": "o"
+        },
+        {
+          "order": 13,
+          "kana": "ひゃ",
+          "romaji": "hya",
+          "row": "h",
+          "column": "a"
+        },
+        {
+          "order": 14,
+          "kana": "ひゅ",
+          "romaji": "hyu",
+          "row": "h",
+          "column": "u"
+        },
+        {
+          "order": 15,
+          "kana": "ひょ",
+          "romaji": "hyo",
+          "row": "h",
+          "column": "o"
+        },
+        {
+          "order": 16,
+          "kana": "みゃ",
+          "romaji": "mya",
+          "row": "m",
+          "column": "a"
+        },
+        {
+          "order": 17,
+          "kana": "みゅ",
+          "romaji": "myu",
+          "row": "m",
+          "column": "u"
+        },
+        {
+          "order": 18,
+          "kana": "みょ",
+          "romaji": "myo",
+          "row": "m",
+          "column": "o"
+        },
+        {
+          "order": 19,
+          "kana": "りゃ",
+          "romaji": "rya",
+          "row": "r",
+          "column": "a"
+        },
+        {
+          "order": 20,
+          "kana": "りゅ",
+          "romaji": "ryu",
+          "row": "r",
+          "column": "u"
+        },
+        {
+          "order": 21,
+          "kana": "りょ",
+          "romaji": "ryo",
+          "row": "r",
+          "column": "o"
+        },
+        {
+          "order": 22,
+          "kana": "ぎゃ",
+          "romaji": "gya",
+          "row": "g",
+          "column": "a"
+        },
+        {
+          "order": 23,
+          "kana": "ぎゅ",
+          "romaji": "gyu",
+          "row": "g",
+          "column": "u"
+        },
+        {
+          "order": 24,
+          "kana": "ぎょ",
+          "romaji": "gyo",
+          "row": "g",
+          "column": "o"
+        },
+        {
+          "order": 25,
+          "kana": "じゃ",
+          "romaji": "ja",
+          "row": "j",
+          "column": "a"
+        },
+        {
+          "order": 26,
+          "kana": "じゅ",
+          "romaji": "ju",
+          "row": "j",
+          "column": "u"
+        },
+        {
+          "order": 27,
+          "kana": "じょ",
+          "romaji": "jo",
+          "row": "j",
+          "column": "o"
+        },
+        {
+          "order": 28,
+          "kana": "びゃ",
+          "romaji": "bya",
+          "row": "b",
+          "column": "a"
+        },
+        {
+          "order": 29,
+          "kana": "びゅ",
+          "romaji": "byu",
+          "row": "b",
+          "column": "u"
+        },
+        {
+          "order": 30,
+          "kana": "びょ",
+          "romaji": "byo",
+          "row": "b",
+          "column": "o"
+        },
+        {
+          "order": 31,
+          "kana": "ぴゃ",
+          "romaji": "pya",
+          "row": "p",
+          "column": "a"
+        },
+        {
+          "order": 32,
+          "kana": "ぴゅ",
+          "romaji": "pyu",
+          "row": "p",
+          "column": "u"
+        },
+        {
+          "order": 33,
+          "kana": "ぴょ",
+          "romaji": "pyo",
+          "row": "p",
+          "column": "o"
+        }
+      ]
+    },
+    "katakana": {
+      "label": "Katakana",
+      "entries": [
+        {
+          "order": 1,
+          "kana": "ア",
+          "romaji": "a",
+          "row": "a",
+          "column": "a",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 2,
+          "kana": "イ",
+          "romaji": "i",
+          "row": "a",
+          "column": "i",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 3,
+          "kana": "ウ",
+          "romaji": "u",
+          "row": "a",
+          "column": "u",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 4,
+          "kana": "エ",
+          "romaji": "e",
+          "row": "a",
+          "column": "e",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 5,
+          "kana": "オ",
+          "romaji": "o",
+          "row": "a",
+          "column": "o",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 6,
+          "kana": "カ",
+          "romaji": "ka",
+          "row": "k",
+          "column": "a",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 7,
+          "kana": "キ",
+          "romaji": "ki",
+          "row": "k",
+          "column": "i",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 8,
+          "kana": "ク",
+          "romaji": "ku",
+          "row": "k",
+          "column": "u",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 9,
+          "kana": "ケ",
+          "romaji": "ke",
+          "row": "k",
+          "column": "e",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 10,
+          "kana": "コ",
+          "romaji": "ko",
+          "row": "k",
+          "column": "o",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 11,
+          "kana": "サ",
+          "romaji": "sa",
+          "row": "s",
+          "column": "a",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 12,
+          "kana": "シ",
+          "romaji": "shi",
+          "row": "s",
+          "column": "i",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 13,
+          "kana": "ス",
+          "romaji": "su",
+          "row": "s",
+          "column": "u",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 14,
+          "kana": "セ",
+          "romaji": "se",
+          "row": "s",
+          "column": "e",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 15,
+          "kana": "ソ",
+          "romaji": "so",
+          "row": "s",
+          "column": "o",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 16,
+          "kana": "タ",
+          "romaji": "ta",
+          "row": "t",
+          "column": "a",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 17,
+          "kana": "チ",
+          "romaji": "chi",
+          "row": "t",
+          "column": "i",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 18,
+          "kana": "ツ",
+          "romaji": "tsu",
+          "row": "t",
+          "column": "u",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 19,
+          "kana": "テ",
+          "romaji": "te",
+          "row": "t",
+          "column": "e",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 20,
+          "kana": "ト",
+          "romaji": "to",
+          "row": "t",
+          "column": "o",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 21,
+          "kana": "ナ",
+          "romaji": "na",
+          "row": "n",
+          "column": "a",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 22,
+          "kana": "ニ",
+          "romaji": "ni",
+          "row": "n",
+          "column": "i",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 23,
+          "kana": "ヌ",
+          "romaji": "nu",
+          "row": "n",
+          "column": "u",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 24,
+          "kana": "ネ",
+          "romaji": "ne",
+          "row": "n",
+          "column": "e",
+          "strokes": 4,
+          "mark": null
+        },
+        {
+          "order": 25,
+          "kana": "ノ",
+          "romaji": "no",
+          "row": "n",
+          "column": "o",
+          "strokes": 1,
+          "mark": null
+        },
+        {
+          "order": 26,
+          "kana": "ハ",
+          "romaji": "ha",
+          "row": "h",
+          "column": "a",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 27,
+          "kana": "ヒ",
+          "romaji": "hi",
+          "row": "h",
+          "column": "i",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 28,
+          "kana": "フ",
+          "romaji": "fu",
+          "row": "h",
+          "column": "u",
+          "strokes": 1,
+          "mark": null
+        },
+        {
+          "order": 29,
+          "kana": "ヘ",
+          "romaji": "he",
+          "row": "h",
+          "column": "e",
+          "strokes": 1,
+          "mark": null
+        },
+        {
+          "order": 30,
+          "kana": "ホ",
+          "romaji": "ho",
+          "row": "h",
+          "column": "o",
+          "strokes": 4,
+          "mark": null
+        },
+        {
+          "order": 31,
+          "kana": "マ",
+          "romaji": "ma",
+          "row": "m",
+          "column": "a",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 32,
+          "kana": "ミ",
+          "romaji": "mi",
+          "row": "m",
+          "column": "i",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 33,
+          "kana": "ム",
+          "romaji": "mu",
+          "row": "m",
+          "column": "u",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 34,
+          "kana": "メ",
+          "romaji": "me",
+          "row": "m",
+          "column": "e",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 35,
+          "kana": "モ",
+          "romaji": "mo",
+          "row": "m",
+          "column": "o",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 36,
+          "kana": "ヤ",
+          "romaji": "ya",
+          "row": "y",
+          "column": "a",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 37,
+          "kana": "ユ",
+          "romaji": "yu",
+          "row": "y",
+          "column": "i",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 38,
+          "kana": "ヨ",
+          "romaji": "yo",
+          "row": "y",
+          "column": "u",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 39,
+          "kana": "ラ",
+          "romaji": "ra",
+          "row": "r",
+          "column": "a",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 40,
+          "kana": "リ",
+          "romaji": "ri",
+          "row": "r",
+          "column": "i",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 41,
+          "kana": "ル",
+          "romaji": "ru",
+          "row": "r",
+          "column": "u",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 42,
+          "kana": "レ",
+          "romaji": "re",
+          "row": "r",
+          "column": "e",
+          "strokes": 1,
+          "mark": null
+        },
+        {
+          "order": 43,
+          "kana": "ロ",
+          "romaji": "ro",
+          "row": "r",
+          "column": "o",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 44,
+          "kana": "ワ",
+          "romaji": "wa",
+          "row": "w",
+          "column": "a",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 45,
+          "kana": "ヲ",
+          "romaji": "o",
+          "row": "w",
+          "column": "i",
+          "strokes": 3,
+          "mark": null
+        },
+        {
+          "order": 46,
+          "kana": "ン",
+          "romaji": "n",
+          "row": "n",
+          "column": "a",
+          "strokes": 2,
+          "mark": null
+        },
+        {
+          "order": 47,
+          "kana": "ガ",
+          "romaji": "ga",
+          "row": "k",
+          "column": "a",
+          "strokes": 4,
+          "mark": "dakuten"
+        },
+        {
+          "order": 48,
+          "kana": "ギ",
+          "romaji": "gi",
+          "row": "k",
+          "column": "i",
+          "strokes": 5,
+          "mark": "dakuten"
+        },
+        {
+          "order": 49,
+          "kana": "グ",
+          "romaji": "gu",
+          "row": "k",
+          "column": "u",
+          "strokes": 4,
+          "mark": "dakuten"
+        },
+        {
+          "order": 50,
+          "kana": "ゲ",
+          "romaji": "ge",
+          "row": "k",
+          "column": "e",
+          "strokes": 5,
+          "mark": "dakuten"
+        },
+        {
+          "order": 51,
+          "kana": "ゴ",
+          "romaji": "go",
+          "row": "k",
+          "column": "o",
+          "strokes": 4,
+          "mark": "dakuten"
+        },
+        {
+          "order": 52,
+          "kana": "ザ",
+          "romaji": "za",
+          "row": "s",
+          "column": "a",
+          "strokes": 5,
+          "mark": "dakuten"
+        },
+        {
+          "order": 53,
+          "kana": "ジ",
+          "romaji": "ji",
+          "row": "s",
+          "column": "i",
+          "strokes": 5,
+          "mark": "dakuten"
+        },
+        {
+          "order": 54,
+          "kana": "ズ",
+          "romaji": "zu",
+          "row": "s",
+          "column": "u",
+          "strokes": 4,
+          "mark": "dakuten"
+        },
+        {
+          "order": 55,
+          "kana": "ゼ",
+          "romaji": "ze",
+          "row": "s",
+          "column": "e",
+          "strokes": 4,
+          "mark": "dakuten"
+        },
+        {
+          "order": 56,
+          "kana": "ゾ",
+          "romaji": "zo",
+          "row": "s",
+          "column": "o",
+          "strokes": 4,
+          "mark": "dakuten"
+        },
+        {
+          "order": 57,
+          "kana": "ダ",
+          "romaji": "da",
+          "row": "t",
+          "column": "a",
+          "strokes": 5,
+          "mark": "dakuten"
+        },
+        {
+          "order": 58,
+          "kana": "ヂ",
+          "romaji": "ji",
+          "row": "t",
+          "column": "i",
+          "strokes": 5,
+          "mark": "dakuten"
+        },
+        {
+          "order": 59,
+          "kana": "ヅ",
+          "romaji": "zu",
+          "row": "t",
+          "column": "u",
+          "strokes": 5,
+          "mark": "dakuten"
+        },
+        {
+          "order": 60,
+          "kana": "デ",
+          "romaji": "de",
+          "row": "t",
+          "column": "e",
+          "strokes": 5,
+          "mark": "dakuten"
+        },
+        {
+          "order": 61,
+          "kana": "ド",
+          "romaji": "do",
+          "row": "t",
+          "column": "o",
+          "strokes": 4,
+          "mark": "dakuten"
+        },
+        {
+          "order": 62,
+          "kana": "バ",
+          "romaji": "ba",
+          "row": "h",
+          "column": "a",
+          "strokes": 4,
+          "mark": "dakuten"
+        },
+        {
+          "order": 63,
+          "kana": "ビ",
+          "romaji": "bi",
+          "row": "h",
+          "column": "i",
+          "strokes": 4,
+          "mark": "dakuten"
+        },
+        {
+          "order": 64,
+          "kana": "ブ",
+          "romaji": "bu",
+          "row": "h",
+          "column": "u",
+          "strokes": 3,
+          "mark": "dakuten"
+        },
+        {
+          "order": 65,
+          "kana": "ベ",
+          "romaji": "be",
+          "row": "h",
+          "column": "e",
+          "strokes": 3,
+          "mark": "dakuten"
+        },
+        {
+          "order": 66,
+          "kana": "ボ",
+          "romaji": "bo",
+          "row": "h",
+          "column": "o",
+          "strokes": 6,
+          "mark": "dakuten"
+        },
+        {
+          "order": 67,
+          "kana": "パ",
+          "romaji": "pa",
+          "row": "h",
+          "column": "a",
+          "strokes": 3,
+          "mark": "handakuten"
+        },
+        {
+          "order": 68,
+          "kana": "ピ",
+          "romaji": "pi",
+          "row": "h",
+          "column": "i",
+          "strokes": 3,
+          "mark": "handakuten"
+        },
+        {
+          "order": 69,
+          "kana": "プ",
+          "romaji": "pu",
+          "row": "h",
+          "column": "u",
+          "strokes": 2,
+          "mark": "handakuten"
+        },
+        {
+          "order": 70,
+          "kana": "ペ",
+          "romaji": "pe",
+          "row": "h",
+          "column": "e",
+          "strokes": 2,
+          "mark": "handakuten"
+        },
+        {
+          "order": 71,
+          "kana": "ポ",
+          "romaji": "po",
+          "row": "h",
+          "column": "o",
+          "strokes": 5,
+          "mark": "handakuten"
+        }
+      ],
+      "compounds": [
+        {
+          "order": 1,
+          "kana": "キャ",
+          "romaji": "kya",
+          "row": "k",
+          "column": "a"
+        },
+        {
+          "order": 2,
+          "kana": "キュ",
+          "romaji": "kyu",
+          "row": "k",
+          "column": "u"
+        },
+        {
+          "order": 3,
+          "kana": "キョ",
+          "romaji": "kyo",
+          "row": "k",
+          "column": "o"
+        },
+        {
+          "order": 4,
+          "kana": "シャ",
+          "romaji": "sha",
+          "row": "s",
+          "column": "a"
+        },
+        {
+          "order": 5,
+          "kana": "シュ",
+          "romaji": "shu",
+          "row": "s",
+          "column": "u"
+        },
+        {
+          "order": 6,
+          "kana": "ショ",
+          "romaji": "sho",
+          "row": "s",
+          "column": "o"
+        },
+        {
+          "order": 7,
+          "kana": "チャ",
+          "romaji": "cha",
+          "row": "t",
+          "column": "a"
+        },
+        {
+          "order": 8,
+          "kana": "チュ",
+          "romaji": "chu",
+          "row": "t",
+          "column": "u"
+        },
+        {
+          "order": 9,
+          "kana": "チョ",
+          "romaji": "cho",
+          "row": "t",
+          "column": "o"
+        },
+        {
+          "order": 10,
+          "kana": "ニャ",
+          "romaji": "nya",
+          "row": "n",
+          "column": "a"
+        },
+        {
+          "order": 11,
+          "kana": "ニュ",
+          "romaji": "nyu",
+          "row": "n",
+          "column": "u"
+        },
+        {
+          "order": 12,
+          "kana": "ニョ",
+          "romaji": "nyo",
+          "row": "n",
+          "column": "o"
+        },
+        {
+          "order": 13,
+          "kana": "ヒャ",
+          "romaji": "hya",
+          "row": "h",
+          "column": "a"
+        },
+        {
+          "order": 14,
+          "kana": "ヒュ",
+          "romaji": "hyu",
+          "row": "h",
+          "column": "u"
+        },
+        {
+          "order": 15,
+          "kana": "ヒョ",
+          "romaji": "hyo",
+          "row": "h",
+          "column": "o"
+        },
+        {
+          "order": 16,
+          "kana": "ミャ",
+          "romaji": "mya",
+          "row": "m",
+          "column": "a"
+        },
+        {
+          "order": 17,
+          "kana": "ミュ",
+          "romaji": "myu",
+          "row": "m",
+          "column": "u"
+        },
+        {
+          "order": 18,
+          "kana": "ミョ",
+          "romaji": "myo",
+          "row": "m",
+          "column": "o"
+        },
+        {
+          "order": 19,
+          "kana": "リャ",
+          "romaji": "rya",
+          "row": "r",
+          "column": "a"
+        },
+        {
+          "order": 20,
+          "kana": "リュ",
+          "romaji": "ryu",
+          "row": "r",
+          "column": "u"
+        },
+        {
+          "order": 21,
+          "kana": "リョ",
+          "romaji": "ryo",
+          "row": "r",
+          "column": "o"
+        },
+        {
+          "order": 22,
+          "kana": "ギャ",
+          "romaji": "gya",
+          "row": "g",
+          "column": "a"
+        },
+        {
+          "order": 23,
+          "kana": "ギュ",
+          "romaji": "gyu",
+          "row": "g",
+          "column": "u"
+        },
+        {
+          "order": 24,
+          "kana": "ギョ",
+          "romaji": "gyo",
+          "row": "g",
+          "column": "o"
+        },
+        {
+          "order": 25,
+          "kana": "ジャ",
+          "romaji": "ja",
+          "row": "j",
+          "column": "a"
+        },
+        {
+          "order": 26,
+          "kana": "ジュ",
+          "romaji": "ju",
+          "row": "j",
+          "column": "u"
+        },
+        {
+          "order": 27,
+          "kana": "ジョ",
+          "romaji": "jo",
+          "row": "j",
+          "column": "o"
+        },
+        {
+          "order": 28,
+          "kana": "ビャ",
+          "romaji": "bya",
+          "row": "b",
+          "column": "a"
+        },
+        {
+          "order": 29,
+          "kana": "ビュ",
+          "romaji": "byu",
+          "row": "b",
+          "column": "u"
+        },
+        {
+          "order": 30,
+          "kana": "ビョ",
+          "romaji": "byo",
+          "row": "b",
+          "column": "o"
+        },
+        {
+          "order": 31,
+          "kana": "ピャ",
+          "romaji": "pya",
+          "row": "p",
+          "column": "a"
+        },
+        {
+          "order": 32,
+          "kana": "ピュ",
+          "romaji": "pyu",
+          "row": "p",
+          "column": "u"
+        },
+        {
+          "order": 33,
+          "kana": "ピョ",
+          "romaji": "pyo",
+          "row": "p",
+          "column": "o"
+        }
+      ]
+    }
+  }
+}

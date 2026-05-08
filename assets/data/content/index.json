@@ -38,6 +38,27 @@
           "entries": 185
         }
       }
+    },
+    "hanVietOnRules": {
+      "rules": 32,
+      "sources": 5,
+      "sourcePolicy": {
+        "blockedDomainsExcludedCount": 2
+      }
+    },
+    "kana": {
+      "entries": 142,
+      "compounds": 66,
+      "scripts": {
+        "hiragana": {
+          "entries": 71,
+          "compounds": 33
+        },
+        "katakana": {
+          "entries": 71,
+          "compounds": 33
+        }
+      }
     }
   }
 }

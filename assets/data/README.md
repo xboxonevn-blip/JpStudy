@@ -6,12 +6,14 @@
 
 - `assets/data/content/index.json`
 - `assets/data/content/vocab/`
+- `assets/data/content/kana/`
 - `assets/data/content/kanji/`
 - `assets/data/content/grammar/`
 - `assets/data/content/grammar_examples/`
 - `assets/data/content/immersion/`
 
 These directories contain the learning content that the app loads at runtime.
+`content/kanji/han_viet_on_rules.json` is a sourced heuristic reference for Han-Viet to On-yomi study hints.
 
 ## Support assets
 
