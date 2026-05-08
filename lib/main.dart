@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/app.dart';
 import 'package:jpstudy/core/notifications/notification_service.dart';
+import 'package:jpstudy/features/me/providers/auto_cloud_upload_provider.dart';
 import 'package:jpstudy/firebase_options.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,5 +30,12 @@ Future<void> main() async {
   // On mobile, call MobileAds.instance.initialize() in a platform-specific entry point
   // or use conditional imports if ads are needed
 
-  runApp(const ProviderScope(child: App()));
+  final preferences = await SharedPreferences.getInstance();
+
+  runApp(
+    ProviderScope(
+      overrides: [sharedPreferencesProvider.overrideWithValue(preferences)],
+      child: const App(),
+    ),
+  );
 }
