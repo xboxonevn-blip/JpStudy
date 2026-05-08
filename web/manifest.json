@@ -1,12 +1,12 @@
 {
-    "name": "JpStudy - Học tiếng Nhật",
+    "name": "JpStudy",
     "short_name": "JpStudy",
     "start_url": ".",
     "display": "standalone",
     "display_override": ["window-controls-overlay", "standalone", "browser"],
-    "background_color": "#F5F0E8",
+    "background_color": "#F5EEE3",
     "theme_color": "#17324D",
-    "description": "Ứng dụng học tiếng Nhật toàn diện: Kanji, Từ vựng, Ngữ pháp, Đọc hiểu, Viết tay",
+    "description": "JpStudy helps JLPT learners build vocabulary, grammar, kanji, and handwriting skills with FSRS spaced repetition and local-first progress tracking.",
     "orientation": "any",
     "prefer_related_applications": false,
     "icons": [
