@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/auth/auth_user.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/services/auto_cloud_upload_coordinator.dart';
+import 'package:jpstudy/core/services/cloud_storage_sync_service.dart';
 import 'package:jpstudy/core/services/session_storage.dart';
 import 'package:jpstudy/core/services/session_storage_provider.dart';
 import 'package:jpstudy/data/db/app_database.dart' as app_db;
@@ -19,12 +22,34 @@ import 'package:jpstudy/features/learn/models/learn_session.dart' as learn;
 import 'package:jpstudy/features/learn/models/question.dart';
 import 'package:jpstudy/features/learn/models/question_type.dart';
 import 'package:jpstudy/features/learn/screens/learn_summary_screen.dart';
+import 'package:jpstudy/features/me/providers/auto_cloud_upload_provider.dart';
 import 'package:jpstudy/features/vocab/vocab_ghost_providers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FakeSessionStorage extends SessionStorage {
   @override
   Future<void> clearLearnSession(int lessonId) async {}
+}
+
+class _FakeCloudStorageSyncService implements CloudStorageSyncService {
+  int uploadCalls = 0;
+
+  @override
+  Future<CloudStorageUploadResult> uploadEnvelope(
+    Map<String, dynamic> envelope,
+  ) async {
+    uploadCalls += 1;
+    return const CloudStorageUploadResult(
+      decision: CloudStorageUploadDecision.uploaded,
+    );
+  }
+
+  @override
+  Future<CloudStorageDownloadResult> prepareDownload({
+    String? passphrase,
+  }) async {
+    throw UnimplementedError();
+  }
 }
 
 const _item = VocabItem(
@@ -93,34 +118,56 @@ const _continueAction = ContinueAction(
   label: 'practice',
 );
 
-Widget buildScreen(app_db.AppDatabase db) => ProviderScope(
-      overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-        databaseProvider.overrideWithValue(db),
-        sessionStorageProvider.overrideWithValue(FakeSessionStorage()),
-        recoveryPackProvider.overrideWith((ref) async => null),
-        weaknessRadarProvider.overrideWith((ref) async => const []),
-        dashboardProvider.overrideWith((ref) => Stream.value(_dashboard)),
-        continueActionProvider.overrideWith((ref) async => _continueAction),
-        grammarGhostCountProvider.overrideWith((ref) async* {
-          yield 0;
-        }),
-        vocabGhostCountProvider.overrideWith((ref) async* {
-          yield 0;
-        }),
-        vocabGhostsProvider.overrideWith((ref) async => const []),
-      ],
-      child: MaterialApp(
-        home: LearnSummaryScreen(
-          session: _session,
-          lessonTitle: 'Lesson 1',
-          config: const LearnConfig(questionCount: 3),
-        ),
-      ),
-    );
+late SharedPreferences _prefs;
+
+AutoCloudUploadCoordinator _autoUpload({
+  required _FakeCloudStorageSyncService storage,
+  AuthUser? user,
+}) => AutoCloudUploadCoordinator(
+  cloudStorageSync: storage,
+  envelopeBuilder: () async => {'version': 2},
+  authState: () => user,
+  preferences: _prefs,
+);
+
+Widget buildScreen(
+  app_db.AppDatabase db, {
+  AutoCloudUploadCoordinator? autoUpload,
+}) => ProviderScope(
+  overrides: [
+    appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+    databaseProvider.overrideWithValue(db),
+    sessionStorageProvider.overrideWithValue(FakeSessionStorage()),
+    autoCloudUploadProvider.overrideWithValue(
+      autoUpload ??
+          _autoUpload(storage: _FakeCloudStorageSyncService(), user: null),
+    ),
+    recoveryPackProvider.overrideWith((ref) async => null),
+    weaknessRadarProvider.overrideWith((ref) async => const []),
+    dashboardProvider.overrideWith((ref) => Stream.value(_dashboard)),
+    continueActionProvider.overrideWith((ref) async => _continueAction),
+    grammarGhostCountProvider.overrideWith((ref) async* {
+      yield 0;
+    }),
+    vocabGhostCountProvider.overrideWith((ref) async* {
+      yield 0;
+    }),
+    vocabGhostsProvider.overrideWith((ref) async => const []),
+  ],
+  child: MaterialApp(
+    home: LearnSummaryScreen(
+      session: _session,
+      lessonTitle: 'Lesson 1',
+      config: const LearnConfig(questionCount: 3),
+    ),
+  ),
+);
 
 void main() {
-  setUp(() => SharedPreferences.setMockInitialValues({}));
+  setUp(() async {
+    SharedPreferences.setMockInitialValues({});
+    _prefs = await SharedPreferences.getInstance();
+  });
 
   testWidgets('shows learn summary title and accuracy', (tester) async {
     final db = app_db.AppDatabase(executor: NativeDatabase.memory());
@@ -151,5 +198,25 @@ void main() {
 
     await tester.pumpWidget(Container());
     await tester.pump();
+  });
+
+  testWidgets('triggers auto cloud upload when summary opens', (tester) async {
+    final db = app_db.AppDatabase(executor: NativeDatabase.memory());
+    addTearDown(db.close);
+    final storage = _FakeCloudStorageSyncService();
+
+    await tester.pumpWidget(
+      buildScreen(
+        db,
+        autoUpload: _autoUpload(
+          storage: storage,
+          user: const AuthUser(uid: 'uid-1'),
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+
+    expect(storage.uploadCalls, 1);
   });
 }

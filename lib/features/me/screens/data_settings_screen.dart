@@ -293,6 +293,26 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
               context,
             ).textTheme.bodySmall?.copyWith(color: Theme.of(context).hintColor),
           ),
+          const SizedBox(height: AppSpacing.sm),
+          SwitchListTile(
+            value: settings.autoCloudUploadEnabled,
+            onChanged: user != null && settings.isReady
+                ? (value) => controller.setAutoCloudUpload(value, language)
+                : null,
+            contentPadding: EdgeInsets.zero,
+            title: Text(language.autoCloudUploadLabel),
+            subtitle: Text(language.autoCloudUploadHint),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+            child: Text(
+              language.autoCloudUploadEncryptionWarning,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: Theme.of(context).hintColor,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+          ),
           if (user != null) ...[
             const SizedBox(height: AppSpacing.md),
             Wrap(

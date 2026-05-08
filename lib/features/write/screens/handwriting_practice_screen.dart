@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ import '../../../data/models/kanji_item.dart';
 import '../../../data/models/mistake_context.dart';
 import '../../../data/repositories/lesson_repository.dart';
 import '../../common/widgets/japanese_background.dart';
+import '../../me/providers/auto_cloud_upload_provider.dart';
 import '../../mistakes/repositories/mistake_repository.dart';
 import '../services/handwriting_evaluator.dart';
 import '../services/kanji_stroke_template_service.dart';
@@ -1761,6 +1763,7 @@ class _HandwritingPracticeScreenState
     if (!mounted) {
       return;
     }
+    _triggerAutoUpload();
     final language = ref.read(appLanguageProvider);
     await showDialog<void>(
       context: context,
@@ -1793,6 +1796,24 @@ class _HandwritingPracticeScreenState
       return;
     }
     _finishAfterSummary();
+  }
+
+  void _triggerAutoUpload() {
+    try {
+      unawaited(
+        ref.read(autoCloudUploadProvider).maybeUpload().catchError((
+          Object error,
+          StackTrace stackTrace,
+        ) {
+          debugPrint(
+            'Handwriting summary auto-upload failed: $error\n$stackTrace',
+          );
+          return 'failed';
+        }),
+      );
+    } catch (error, stackTrace) {
+      debugPrint('Handwriting summary auto-upload failed: $error\n$stackTrace');
+    }
   }
 
   void _finishAfterSummary() {

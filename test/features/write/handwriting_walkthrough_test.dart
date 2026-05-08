@@ -6,17 +6,42 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/auth/auth_user.dart';
+import 'package:jpstudy/core/services/auto_cloud_upload_coordinator.dart';
+import 'package:jpstudy/core/services/cloud_storage_sync_service.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/db/content_database.dart';
 import 'package:jpstudy/data/db/database_provider.dart';
 import 'package:jpstudy/data/models/kanji_item.dart';
 import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
+import 'package:jpstudy/features/me/providers/auto_cloud_upload_provider.dart';
 import 'package:jpstudy/features/write/screens/handwriting_practice_screen.dart';
 import 'package:jpstudy/features/write/screens/write_mode_screen.dart';
 import 'package:jpstudy/features/write/services/kanji_stroke_template_service.dart';
 import 'package:jpstudy/features/write/widgets/handwriting_canvas.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+class _FakeCloudStorageSyncService implements CloudStorageSyncService {
+  int uploadCalls = 0;
+
+  @override
+  Future<CloudStorageUploadResult> uploadEnvelope(
+    Map<String, dynamic> envelope,
+  ) async {
+    uploadCalls += 1;
+    return const CloudStorageUploadResult(
+      decision: CloudStorageUploadDecision.uploaded,
+    );
+  }
+
+  @override
+  Future<CloudStorageDownloadResult> prepareDownload({
+    String? passphrase,
+  }) async {
+    throw UnimplementedError();
+  }
+}
 
 void main() {
   Finder animationControlFinder() => find.byWidgetPredicate(
@@ -512,7 +537,10 @@ void main() {
       await tester.pumpAndSettle();
 
       final nextButton = find
-          .text(AppLanguage.en.handwritingPracticeWrongFirstLabel, skipOffstage: false)
+          .text(
+            AppLanguage.en.handwritingPracticeWrongFirstLabel,
+            skipOffstage: false,
+          )
           .last;
       await tester.ensureVisible(nextButton);
       await tester.tap(nextButton);
@@ -863,6 +891,8 @@ void main() {
       final db = AppDatabase(executor: NativeDatabase.memory());
       final contentDb = ContentDatabase(executor: NativeDatabase.memory());
       final repo = LessonRepository(db, contentDb);
+      final storage = _FakeCloudStorageSyncService();
+      final prefs = await SharedPreferences.getInstance();
       addTearDown(() async {
         await contentDb.close();
         await db.close();
@@ -903,6 +933,14 @@ void main() {
           overrides: [
             databaseProvider.overrideWithValue(db),
             lessonRepositoryProvider.overrideWithValue(repo),
+            autoCloudUploadProvider.overrideWithValue(
+              AutoCloudUploadCoordinator(
+                cloudStorageSync: storage,
+                envelopeBuilder: () async => {'version': 2},
+                authState: () => const AuthUser(uid: 'uid-1'),
+                preferences: prefs,
+              ),
+            ),
           ],
           child: MaterialApp.router(routerConfig: router),
         ),
@@ -945,9 +983,9 @@ void main() {
 
       expect(find.text('Practice hub'), findsOneWidget);
       expect(find.byType(HandwritingPracticeScreen), findsNothing);
+      expect(storage.uploadCalls, 1);
     },
   );
-
 }
 
 class _HandwritingRebuildHost extends StatefulWidget {

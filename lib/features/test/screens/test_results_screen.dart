@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
@@ -11,6 +13,7 @@ import '../../../data/db/database_provider.dart';
 import '../../home/providers/recovery_pack_provider.dart';
 import '../../home/widgets/next_step_suggestions.dart';
 import '../../learn/models/question_type.dart';
+import '../../me/providers/auto_cloud_upload_provider.dart';
 import '../models/test_session.dart';
 import '../services/test_export_service.dart';
 import 'test_review_screen.dart';
@@ -42,8 +45,25 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
   @override
   void initState() {
     super.initState();
+    _triggerAutoUpload();
     _loadPinnedLesson();
     _checkPersonalBest();
+  }
+
+  void _triggerAutoUpload() {
+    try {
+      unawaited(
+        ref.read(autoCloudUploadProvider).maybeUpload().catchError((
+          Object error,
+          StackTrace stackTrace,
+        ) {
+          debugPrint('Test results auto-upload failed: $error\n$stackTrace');
+          return 'failed';
+        }),
+      );
+    } catch (error, stackTrace) {
+      debugPrint('Test results auto-upload failed: $error\n$stackTrace');
+    }
   }
 
   Future<void> _checkPersonalBest() async {
@@ -556,9 +576,9 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
                 Text(
                   language.lessonRecommendationsEmptyLabel,
                   style: TextStyle(
-                  fontSize: 14,
-                  color: context.appPalette.ink.withValues(alpha: 0.55),
-                ),
+                    fontSize: 14,
+                    color: context.appPalette.ink.withValues(alpha: 0.55),
+                  ),
                 ),
               ],
             ),
@@ -666,7 +686,10 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
     final isPinned = _pinnedLessonId == suggestion.lessonId;
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      leading: Icon(Icons.school_rounded, color: palette.ink.withValues(alpha: 0.5)),
+      leading: Icon(
+        Icons.school_rounded,
+        color: palette.ink.withValues(alpha: 0.5),
+      ),
       title: Text(title),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -697,7 +720,9 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
                 : language.pinLessonLabel,
             icon: Icon(
               isPinned ? Icons.push_pin : Icons.push_pin_outlined,
-              color: isPinned ? palette.primary : palette.ink.withValues(alpha: 0.5),
+              color: isPinned
+                  ? palette.primary
+                  : palette.ink.withValues(alpha: 0.5),
             ),
             onPressed: () => _togglePinnedLesson(suggestion.lessonId),
           ),
@@ -926,10 +951,7 @@ class _PersonalBestBanner extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            palette.warning,
-            palette.warning.withValues(alpha: 0.85),
-          ],
+          colors: [palette.warning, palette.warning.withValues(alpha: 0.85)],
         ),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [

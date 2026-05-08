@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
@@ -10,6 +12,7 @@ import 'package:jpstudy/data/daos/learn_dao.dart';
 import 'package:jpstudy/data/db/database_provider.dart';
 import 'package:jpstudy/features/home/providers/recovery_pack_provider.dart';
 import 'package:jpstudy/features/home/widgets/next_step_suggestions.dart';
+import 'package:jpstudy/features/me/providers/auto_cloud_upload_provider.dart';
 import '../models/achievement.dart';
 import '../models/learn_config.dart';
 import '../models/learn_session.dart';
@@ -40,12 +43,29 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
   @override
   void initState() {
     super.initState();
+    _triggerAutoUpload();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       _showPendingAchievements();
       _clearSavedSession();
       _checkPersonalBest();
     });
+  }
+
+  void _triggerAutoUpload() {
+    try {
+      unawaited(
+        ref.read(autoCloudUploadProvider).maybeUpload().catchError((
+          Object error,
+          StackTrace stackTrace,
+        ) {
+          debugPrint('Learn summary auto-upload failed: $error\n$stackTrace');
+          return 'failed';
+        }),
+      );
+    } catch (error, stackTrace) {
+      debugPrint('Learn summary auto-upload failed: $error\n$stackTrace');
+    }
   }
 
   Future<void> _checkPersonalBest() async {

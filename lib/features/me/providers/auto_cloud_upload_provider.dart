@@ -1,0 +1,26 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:jpstudy/core/auth/auth_provider.dart';
+import 'package:jpstudy/core/services/auto_cloud_upload_coordinator.dart';
+import 'package:jpstudy/core/services/backup_sync_service.dart';
+import 'package:jpstudy/data/repositories/lesson_repository.dart';
+import 'package:jpstudy/features/me/providers/data_settings_controller.dart';
+
+final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
+  throw StateError('SharedPreferences must be provided at app startup.');
+});
+
+final autoCloudUploadProvider = Provider<AutoCloudUploadCoordinator>((ref) {
+  final authService = ref.watch(authServiceProvider);
+  final repo = ref.watch(lessonRepositoryProvider);
+  return AutoCloudUploadCoordinator(
+    cloudStorageSync: ref.watch(cloudStorageSyncServiceProvider),
+    envelopeBuilder: () async {
+      final data = await repo.exportBackup();
+      return BackupSyncService.buildExportEnvelope(data);
+    },
+    authState: () => authService.currentUser,
+    preferences: ref.watch(sharedPreferencesProvider),
+  );
+});

@@ -230,4 +230,27 @@ void main() {
     expect(find.text('Upload to cloud'), findsNothing);
     expect(find.text('Pull from cloud'), findsNothing);
   });
+
+  testWidgets('shows signed-in auto-upload toggle and encryption note', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      buildScreen(
+        signedInUser: const AuthUser(uid: 'uid-1', email: 'user@example.com'),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Auto-upload to cloud'), findsOneWidget);
+    expect(
+      find.text(
+        'Auto-upload does not support encryption. Turn on encryption = upload manually.',
+      ),
+      findsOneWidget,
+    );
+    final tile = tester.widget<SwitchListTile>(
+      find.widgetWithText(SwitchListTile, 'Auto-upload to cloud'),
+    );
+    expect(tile.value, isTrue);
+  });
 }
