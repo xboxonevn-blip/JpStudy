@@ -4,14 +4,14 @@
 
 Web demo: https://jpstudy-v2.web.app
 
-Android APK: see latest GitHub Release.
+Android APK: see the latest GitHub Release.
 
 Source: this repo. Built with Flutter, Drift/SQLite for local data,
 Firebase Auth + Storage for opt-in cloud sync.
 
 [![Flutter](https://img.shields.io/badge/Flutter-App-02569B?logo=flutter&logoColor=white)](https://flutter.dev)
-[![CI](https://img.shields.io/github/actions/workflow/status/xboxonevn-blip/JpStudy-v2/ui-string-guard.yml?branch=master&label=CI)](https://github.com/xboxonevn-blip/JpStudy-v2/actions/workflows/ui-string-guard.yml)
-[![Last Commit](https://img.shields.io/github/last-commit/xboxonevn-blip/JpStudy-v2)](https://github.com/xboxonevn-blip/JpStudy-v2/commits/master)
+[![CI](https://img.shields.io/github/actions/workflow/status/xboxonevn-blip/JpStudy-v2/ui-string-guard.yml?branch=main&label=CI)](https://github.com/xboxonevn-blip/JpStudy-v2/actions/workflows/ui-string-guard.yml)
+[![Last Commit](https://img.shields.io/github/last-commit/xboxonevn-blip/JpStudy-v2)](https://github.com/xboxonevn-blip/JpStudy-v2/commits/main)
 [![Top Language](https://img.shields.io/github/languages/top/xboxonevn-blip/JpStudy-v2)](https://github.com/xboxonevn-blip/JpStudy-v2)
 [![Repo Size](https://img.shields.io/github/repo-size/xboxonevn-blip/JpStudy-v2)](https://github.com/xboxonevn-blip/JpStudy-v2)
 [![License Notes](https://img.shields.io/badge/docs-KanjiVG%20notes-6C63FF)](docs/third_party_kanjivg.md)
@@ -20,16 +20,17 @@ JpStudy-v2 is a local-first Flutter app for Japanese study that combines JLPT co
 
 ## Audit Snapshot
 
-Verified locally on `2026-04-02`:
+Verified locally on `2026-05-08`:
 
 - `flutter analyze` passed
-- `flutter test` passed (`1330` passing tests reported by Flutter)
-- `flutter build web` passed
+- `flutter test` passed
+- `flutter build web --release --base-href=/` passed
 
 Current product posture:
 
 - Core study flows are stable and broadly covered by automated tests.
-- The app is local-first today; cloud sync is still intentionally parked.
+- The app remains local-first, with Firebase Auth + Storage used for opt-in cloud backup and restore.
+- The public web build is configured for Firebase Hosting at `https://jpstudy-v2.web.app`.
 - Premium pricing and some community/referral surfaces are still local placeholder experiences, not live backend features.
 
 ## What the App Includes
@@ -54,7 +55,10 @@ Current product posture:
 ### App behavior
 
 - Local persistence with Drift + SQLite
+- Firebase Auth + Storage for opt-in cloud backup/sync
+- Firebase Analytics for core study events
 - JSON backup/export-import for study data
+- Mailto feedback entry in the user menu
 - Multi-language UI: English, Vietnamese, Japanese
 - Responsive Flutter shell for mobile and desktop/web layouts
 
@@ -65,6 +69,7 @@ Current product posture:
 - Core route graph and primary learning flows
 - Grammar data pipeline with canonical audit reports in `docs/reports/`
 - Handwriting engine with support assets under `assets/data/support/kanji/`
+- Firebase-backed sign-in, backup, and auto-upload flows for opted-in users
 - Large automated regression suite across feature flows
 
 ### Still in progress
@@ -75,9 +80,9 @@ Current product posture:
 
 ### Intentionally not live yet
 
-- Cloud sync ecosystem
 - Real premium billing backend
 - Full community/referral backend features
+- App-store distribution beyond direct APK and hosted web builds
 
 ## Tech Stack
 
@@ -85,6 +90,7 @@ Current product posture:
 - Riverpod
 - GoRouter
 - Drift + SQLite
+- Firebase Auth, Storage, Analytics, and Hosting
 - SharedPreferences and local files for settings/cache
 - Python and Dart tooling for content generation and validation
 
