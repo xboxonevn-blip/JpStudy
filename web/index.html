@@ -193,7 +193,39 @@
       </p>
     </div>
   </div>
-  <script src="flutter_bootstrap.js" async></script>
+  <script type="module">
+    const firebaseSdkVersion = "12.12.0";
+    window.flutterfire_web_sdk_version = firebaseSdkVersion;
+
+    async function preloadFirebaseSdk() {
+      const base = `https://www.gstatic.com/firebasejs/${firebaseSdkVersion}`;
+      const [firebaseCore, firebaseAuth, firebaseStorage, firebaseAnalytics] =
+        await Promise.all([
+          import(`${base}/firebase-app.js`),
+          import(`${base}/firebase-auth.js`),
+          import(`${base}/firebase-storage.js`),
+          import(`${base}/firebase-analytics.js`),
+        ]);
+
+      window.firebase_core = firebaseCore;
+      window.firebase_auth = firebaseAuth;
+      window.firebase_storage = firebaseStorage;
+      window.firebase_analytics = firebaseAnalytics;
+    }
+
+    function loadFlutterBootstrap() {
+      const script = document.createElement("script");
+      script.src = "flutter_bootstrap.js";
+      script.async = true;
+      document.body.appendChild(script);
+    }
+
+    preloadFirebaseSdk()
+      .catch((error) => {
+        console.warn("Firebase SDK preload failed; cloud features may be unavailable.", error);
+      })
+      .finally(loadFlutterBootstrap);
+  </script>
   <script>
     window.addEventListener("flutter-first-frame", function () {
       const shell = document.getElementById("jpstudy-shell");
