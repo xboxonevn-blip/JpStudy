@@ -1,5 +1,14 @@
 # JpStudy-v2
 
+## Try it
+
+Web demo: https://jpstudy-v2.web.app
+
+Android APK: see latest GitHub Release.
+
+Source: this repo. Built with Flutter, Drift/SQLite for local data,
+Firebase Auth + Storage for opt-in cloud sync.
+
 [![Flutter](https://img.shields.io/badge/Flutter-App-02569B?logo=flutter&logoColor=white)](https://flutter.dev)
 [![CI](https://img.shields.io/github/actions/workflow/status/xboxonevn-blip/JpStudy-v2/ui-string-guard.yml?branch=master&label=CI)](https://github.com/xboxonevn-blip/JpStudy-v2/actions/workflows/ui-string-guard.yml)
 [![Last Commit](https://img.shields.io/github/last-commit/xboxonevn-blip/JpStudy-v2)](https://github.com/xboxonevn-blip/JpStudy-v2/commits/master)
