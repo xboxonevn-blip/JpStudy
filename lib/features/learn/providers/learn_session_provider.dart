@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 
+import '../../../core/analytics/analytics_provider.dart';
 import '../../../data/db/database_provider.dart';
 import '../../../data/daos/learn_dao.dart';
 import '../../../data/daos/achievement_dao.dart';
@@ -16,9 +19,11 @@ import '../services/learn_session_service.dart';
 
 /// Provider for managing Learn Mode sessions
 class LearnSessionNotifier extends Notifier<LearnSession?> {
-  LearnSessionNotifier([LearnSessionService? learnService, MistakeRepository? mistakeRepo])
-    : _injectedLearnService = learnService,
-      _injectedMistakeRepo = mistakeRepo;
+  LearnSessionNotifier([
+    LearnSessionService? learnService,
+    MistakeRepository? mistakeRepo,
+  ]) : _injectedLearnService = learnService,
+       _injectedMistakeRepo = mistakeRepo;
 
   final QuestionGenerator _questionGenerator = QuestionGenerator();
   final LearnSessionService? _injectedLearnService;
@@ -74,6 +79,7 @@ class LearnSessionNotifier extends Notifier<LearnSession?> {
       startedAt: DateTime.now(),
       questions: questions,
     );
+    unawaited(ref.read(analyticsServiceProvider).logSessionStart('learn'));
   }
 
   /// Start an adaptive round based on previous performance
@@ -220,4 +226,3 @@ final learnSessionProvider =
 
 /// Provider for question timing
 final questionStartTimeProvider = StateProvider<DateTime?>((ref) => null);
-

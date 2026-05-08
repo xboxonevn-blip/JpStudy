@@ -1,8 +1,11 @@
+import 'dart:async';
 import 'dart:io' show Platform;
 
 import 'package:firebase_auth/firebase_auth.dart' as fb_auth;
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
+import 'package:jpstudy/core/analytics/analytics_service.dart';
 
 import 'auth_user.dart';
 
@@ -35,11 +38,14 @@ class AuthService {
   AuthService({
     fb_auth.FirebaseAuth? firebaseAuth,
     GoogleSignIn? googleSignIn,
+    AnalyticsService? analyticsService,
   }) : _auth = firebaseAuth ?? fb_auth.FirebaseAuth.instance,
-       _googleSignIn = googleSignIn ?? GoogleSignIn.instance;
+       _googleSignIn = googleSignIn ?? GoogleSignIn.instance,
+       _analyticsService = analyticsService;
 
   final fb_auth.FirebaseAuth _auth;
   final GoogleSignIn _googleSignIn;
+  final AnalyticsService? _analyticsService;
 
   bool _googleSignInInitialized = false;
 
@@ -73,6 +79,7 @@ class AuthService {
       if (user == null) {
         throw AuthException(AuthErrorKind.unknown);
       }
+      unawaited(_analyticsService?.logSignIn('email') ?? Future<void>.value());
       return user;
     } on fb_auth.FirebaseAuthException catch (e) {
       throw AuthException(_mapFirebaseError(e), e);
@@ -86,38 +93,41 @@ class AuthService {
       throw AuthException(AuthErrorKind.notSupportedOnPlatform);
     }
     try {
+      late final AuthUser user;
       if (kIsWeb) {
         // Firebase Auth handles the entire popup flow on web; google_sign_in
         // is unnecessary here and conflicts with the popup credential path.
         final provider = fb_auth.GoogleAuthProvider();
         final credential = await _auth.signInWithPopup(provider);
-        final user = _mapUser(credential.user);
-        if (user == null) {
+        final mappedUser = _mapUser(credential.user);
+        if (mappedUser == null) {
           throw AuthException(AuthErrorKind.unknown);
         }
-        return user;
+        user = mappedUser;
+      } else {
+        if (!_googleSignInInitialized) {
+          await _googleSignIn.initialize();
+          _googleSignInInitialized = true;
+        }
+        final account = await _googleSignIn.authenticate(
+          scopeHint: const ['email'],
+        );
+        final auth = account.authentication;
+        final idToken = auth.idToken;
+        if (idToken == null || idToken.isEmpty) {
+          throw AuthException(AuthErrorKind.unknown);
+        }
+        final credential = fb_auth.GoogleAuthProvider.credential(
+          idToken: idToken,
+        );
+        final result = await _auth.signInWithCredential(credential);
+        final mappedUser = _mapUser(result.user);
+        if (mappedUser == null) {
+          throw AuthException(AuthErrorKind.unknown);
+        }
+        user = mappedUser;
       }
-
-      if (!_googleSignInInitialized) {
-        await _googleSignIn.initialize();
-        _googleSignInInitialized = true;
-      }
-      final account = await _googleSignIn.authenticate(scopeHint: const [
-        'email',
-      ]);
-      final auth = account.authentication;
-      final idToken = auth.idToken;
-      if (idToken == null || idToken.isEmpty) {
-        throw AuthException(AuthErrorKind.unknown);
-      }
-      final credential = fb_auth.GoogleAuthProvider.credential(
-        idToken: idToken,
-      );
-      final result = await _auth.signInWithCredential(credential);
-      final user = _mapUser(result.user);
-      if (user == null) {
-        throw AuthException(AuthErrorKind.unknown);
-      }
+      unawaited(_analyticsService?.logSignIn('google') ?? Future<void>.value());
       return user;
     } on GoogleSignInException catch (e) {
       // The new google_sign_in API surfaces UserCancelled via this type.

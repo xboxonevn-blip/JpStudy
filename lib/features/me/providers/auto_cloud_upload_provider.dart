@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:jpstudy/core/analytics/analytics_provider.dart';
 import 'package:jpstudy/core/auth/auth_provider.dart';
 import 'package:jpstudy/core/services/auto_cloud_upload_coordinator.dart';
 import 'package:jpstudy/core/services/backup_sync_service.dart';
@@ -22,5 +23,6 @@ final autoCloudUploadProvider = Provider<AutoCloudUploadCoordinator>((ref) {
     },
     authState: () => authService.currentUser,
     preferences: ref.watch(sharedPreferencesProvider),
+    analyticsService: ref.watch(analyticsServiceProvider),
   );
 });

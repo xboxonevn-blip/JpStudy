@@ -1,12 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:jpstudy/core/analytics/analytics_provider.dart';
+
 import 'auth_service.dart';
 import 'auth_user.dart';
 
 /// The single source of truth for the auth service. Tests override this with
 /// a fake; production code never instantiates AuthService directly.
 final authServiceProvider = Provider<AuthService>((ref) {
-  return AuthService();
+  return AuthService(analyticsService: ref.watch(analyticsServiceProvider));
 });
 
 /// Streams the currently signed-in user, or null when signed out. Listeners

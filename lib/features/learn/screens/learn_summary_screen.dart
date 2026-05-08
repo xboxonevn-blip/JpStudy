@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
+import 'package:jpstudy/core/analytics/analytics_provider.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/services/recovery_pack_service.dart';
@@ -43,6 +44,7 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
   @override
   void initState() {
     super.initState();
+    _logSessionComplete();
     _triggerAutoUpload();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
@@ -50,6 +52,19 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
       _clearSavedSession();
       _checkPersonalBest();
     });
+  }
+
+  void _logSessionComplete() {
+    unawaited(
+      ref
+          .read(analyticsServiceProvider)
+          .logSessionComplete(
+            'learn',
+            xpGained: session.totalXP,
+            correctCount: session.correctCount,
+            totalCount: session.totalQuestions,
+          ),
+    );
   }
 
   void _triggerAutoUpload() {

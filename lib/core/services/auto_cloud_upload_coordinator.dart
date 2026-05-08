@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:jpstudy/core/analytics/analytics_service.dart';
 import 'package:jpstudy/core/auth/auth_user.dart';
 import 'package:jpstudy/core/services/cloud_storage_sync_service.dart';
 
@@ -14,6 +15,7 @@ class AutoCloudUploadCoordinator {
     required this.envelopeBuilder,
     required this.authState,
     required this.preferences,
+    this.analyticsService,
     this.minimumInterval = const Duration(minutes: 5),
     this.clock = DateTime.now,
   });
@@ -25,6 +27,7 @@ class AutoCloudUploadCoordinator {
   final BackupEnvelopeBuilder envelopeBuilder;
   final AuthStateReader authState;
   final SharedPreferences preferences;
+  final AnalyticsService? analyticsService;
   final Duration minimumInterval;
   final Clock clock;
 
@@ -66,6 +69,7 @@ class AutoCloudUploadCoordinator {
             lastUploadPreferenceKey,
             now.toIso8601String(),
           );
+          await analyticsService?.logCloudUpload('auto');
           return 'uploaded';
         case CloudStorageUploadDecision.notSignedIn:
           return 'notSignedIn';
