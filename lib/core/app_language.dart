@@ -3026,6 +3026,61 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get olderBackupTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Older backup detected';
+      case AppLanguage.vi:
+        return 'Phát hiện bản sao lưu cũ hơn';
+      case AppLanguage.ja:
+        return '古いバックアップを検出しました';
+    }
+  }
+
+  String olderBackupBody({required String incoming, required String current}) {
+    switch (this) {
+      case AppLanguage.en:
+        return 'This backup is from $incoming but your current data is from $current. Importing will overwrite newer progress with older data.';
+      case AppLanguage.vi:
+        return 'Bản sao lưu này từ $incoming nhưng dữ liệu hiện tại của bạn từ $current. Nhập vào sẽ ghi đè tiến độ mới hơn bằng dữ liệu cũ hơn.';
+      case AppLanguage.ja:
+        return 'このバックアップは$incomingのものですが、現在のデータは$currentのものです。インポートすると、新しい進捗が古いデータで上書きされます。';
+    }
+  }
+
+  String get olderBackupApplyLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Apply anyway';
+      case AppLanguage.vi:
+        return 'Vẫn áp dụng';
+      case AppLanguage.ja:
+        return 'それでも適用';
+    }
+  }
+
+  String get olderBackupAppliedLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Older backup applied';
+      case AppLanguage.vi:
+        return 'Đã áp dụng bản cũ';
+      case AppLanguage.ja:
+        return '古いバックアップを適用しました';
+    }
+  }
+
+  String get unknownTimestampLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'unknown';
+      case AppLanguage.vi:
+        return 'không rõ';
+      case AppLanguage.ja:
+        return '不明';
+    }
+  }
+
   String get backupImportSuccess {
     switch (this) {
       case AppLanguage.en:

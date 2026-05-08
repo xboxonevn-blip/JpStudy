@@ -257,7 +257,14 @@ class DataSettingsController extends Notifier<DataSettingsState> {
         return;
       }
       if (importPlan.decision == BackupImportDecision.skipOlder) {
-        _showSnackBar(context, cloudSyncSkipOlderLabel(language));
+        await _handleOlderImport(
+          context,
+          language,
+          payload: importPlan.payload,
+          incomingExportedAt: importPlan.incomingExportedAt,
+          onApplied: BackupSyncService.markImportApplied,
+          successMessage: language.backupImportSuccess,
+        );
         return;
       }
 
@@ -400,7 +407,17 @@ class DataSettingsController extends Notifier<DataSettingsState> {
         );
         return;
       case CloudSyncDownloadDecision.skipOlder:
-        _showSnackBar(context, cloudSyncSkipOlderLabel(language));
+        if (result.payload == null) {
+          return;
+        }
+        await _handleOlderImport(
+          context,
+          language,
+          payload: result.payload!,
+          incomingExportedAt: result.remoteExportedAt,
+          onApplied: CloudSyncService.markDownloadApplied,
+          successMessage: cloudSyncDownloadSuccessLabel(language),
+        );
         return;
       case CloudSyncDownloadDecision.invalidChecksum:
       case CloudSyncDownloadDecision.invalidFormat:
@@ -476,7 +493,17 @@ class DataSettingsController extends Notifier<DataSettingsState> {
         );
         return;
       case CloudStorageDownloadDecision.skipOlder:
-        _showSnackBar(context, cloudSyncSkipOlderLabel(language));
+        if (result.payload == null) {
+          return;
+        }
+        await _handleOlderImport(
+          context,
+          language,
+          payload: result.payload!,
+          incomingExportedAt: result.remoteExportedAt,
+          onApplied: BackupSyncService.markImportApplied,
+          successMessage: language.firebaseStorageDownloadSuccessLabel,
+        );
         return;
       case CloudStorageDownloadDecision.notSignedIn:
         _showSnackBar(context, language.firebaseStorageNotSignedInLabel);
@@ -852,13 +879,101 @@ class DataSettingsController extends Notifier<DataSettingsState> {
     );
   }
 
-  Future<void> _applyImportedPayload(
+  Future<void> _handleOlderImport(
     BuildContext context,
     AppLanguage language, {
     required Map<String, dynamic> payload,
     required DateTime? incomingExportedAt,
     required Future<void> Function(DateTime? incomingExportedAt) onApplied,
     required String successMessage,
+  }) async {
+    final lastAppliedAt = await BackupSyncService.getLastAppliedAt();
+    if (!context.mounted) {
+      return;
+    }
+    final confirmed = await _confirmOlderImport(
+      context,
+      language,
+      incomingExportedAt: incomingExportedAt,
+      lastAppliedAt: lastAppliedAt,
+    );
+    if (!context.mounted || confirmed != true) {
+      return;
+    }
+    final applied = await _applyImportedPayload(
+      context,
+      language,
+      payload: payload,
+      incomingExportedAt: incomingExportedAt,
+      onApplied: onApplied,
+      successMessage: successMessage,
+      showSuccessMessage: false,
+    );
+    if (!context.mounted || !applied) {
+      return;
+    }
+    _showSnackBar(context, language.olderBackupAppliedLabel);
+  }
+
+  Future<bool> _confirmOlderImport(
+    BuildContext context,
+    AppLanguage language, {
+    required DateTime? incomingExportedAt,
+    required DateTime? lastAppliedAt,
+  }) async {
+    final incoming = _formatImportTimestamp(
+      context,
+      language,
+      incomingExportedAt,
+    );
+    final current = _formatImportTimestamp(context, language, lastAppliedAt);
+    final confirmed = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        title: Text(language.olderBackupTitle),
+        content: Text(
+          language.olderBackupBody(incoming: incoming, current: current),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text(language.olderBackupApplyLabel),
+          ),
+        ],
+      ),
+    );
+    return confirmed ?? false;
+  }
+
+  String _formatImportTimestamp(
+    BuildContext context,
+    AppLanguage language,
+    DateTime? timestamp,
+  ) {
+    if (timestamp == null) {
+      return language.unknownTimestampLabel;
+    }
+    final localizations = MaterialLocalizations.of(context);
+    final date = localizations.formatMediumDate(timestamp);
+    final time = localizations.formatTimeOfDay(
+      TimeOfDay.fromDateTime(timestamp),
+    );
+    return '$date $time';
+  }
+
+  Future<bool> _applyImportedPayload(
+    BuildContext context,
+    AppLanguage language, {
+    required Map<String, dynamic> payload,
+    required DateTime? incomingExportedAt,
+    required Future<void> Function(DateTime? incomingExportedAt) onApplied,
+    required String successMessage,
+    bool showSuccessMessage = true,
   }) async {
     try {
       final repo = ref.read(lessonRepositoryProvider);
@@ -870,14 +985,18 @@ class DataSettingsController extends Notifier<DataSettingsState> {
       ref.invalidate(cloudSyncStatusProvider);
       ref.invalidate(lessonMetaProvider);
       if (!context.mounted) {
-        return;
+        return true;
       }
-      _showSnackBar(context, successMessage);
+      if (showSuccessMessage) {
+        _showSnackBar(context, successMessage);
+      }
+      return true;
     } catch (_) {
       if (!context.mounted) {
-        return;
+        return false;
       }
       _showSnackBar(context, language.backupImportError);
+      return false;
     }
   }
 
