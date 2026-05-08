@@ -12,6 +12,7 @@ import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/utils/grammar_english_notation.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
+import 'package:jpstudy/features/foundations/widgets/foundations_soft_suggest_gate.dart';
 import 'package:jpstudy/features/grammar/grammar_providers.dart';
 import 'package:jpstudy/features/grammar/screens/grammar_practice_screen.dart';
 
@@ -43,37 +44,40 @@ class GrammarScreen extends ConsumerWidget {
     final dueCount = ref.watch(grammarDueCountProvider).value ?? 0;
     final ghostCount = ref.watch(grammarGhostCountProvider).value ?? 0;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          level == null
-              ? _tr(
-                  language,
-                  en: 'Grammar',
-                  vi: 'Ng\u1eef ph\u00e1p',
-                  ja: '\u6587\u6cd5',
-                )
-              : '${_tr(language, en: 'Grammar', vi: 'Ng\u1eef ph\u00e1p', ja: '\u6587\u6cd5')} (${level.shortLabel})',
-        ),
-      ),
-      body: pointsAsync.when(
-        data: (points) => AppPageShell(
-          topPadding: AppSpacing.sm,
-          child: _GrammarHubContent(
-            language: language,
-            levelLabel: levelLabel,
-            points: points,
-            dueCount: dueCount,
-            ghostCount: ghostCount,
+    return FoundationsSoftSuggestGate(
+      surface: FoundationsSoftSuggestSurface.grammar,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            level == null
+                ? _tr(
+                    language,
+                    en: 'Grammar',
+                    vi: 'Ng\u1eef ph\u00e1p',
+                    ja: '\u6587\u6cd5',
+                  )
+                : '${_tr(language, en: 'Grammar', vi: 'Ng\u1eef ph\u00e1p', ja: '\u6587\u6cd5')} (${level.shortLabel})',
           ),
         ),
-        loading: () => const _GrammarAsyncState(
-          icon: Icons.auto_stories_rounded,
-          child: CircularProgressIndicator(),
-        ),
-        error: (err, _) => _GrammarAsyncState(
-          icon: Icons.error_outline_rounded,
-          child: Text('${language.loadErrorLabel}: $err'),
+        body: pointsAsync.when(
+          data: (points) => AppPageShell(
+            topPadding: AppSpacing.sm,
+            child: _GrammarHubContent(
+              language: language,
+              levelLabel: levelLabel,
+              points: points,
+              dueCount: dueCount,
+              ghostCount: ghostCount,
+            ),
+          ),
+          loading: () => const _GrammarAsyncState(
+            icon: Icons.auto_stories_rounded,
+            child: CircularProgressIndicator(),
+          ),
+          error: (err, _) => _GrammarAsyncState(
+            icon: Icons.error_outline_rounded,
+            child: Text('${language.loadErrorLabel}: $err'),
+          ),
         ),
       ),
     );
@@ -723,5 +727,3 @@ class _GrammarAsyncState extends StatelessWidget {
     );
   }
 }
-
-

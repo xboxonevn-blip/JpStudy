@@ -532,8 +532,7 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
     final palette = context.appPalette;
 
     final lang = widget.language;
-    final seenIds =
-        ref.watch(kanjiSeenIdsProvider).value ?? const <int>{};
+    final seenIds = ref.watch(kanjiSeenIdsProvider).value ?? const <int>{};
     final dueIds = ref.watch(kanjiDueIdsProvider).value ?? const <int>{};
     final exploreTitle = lang.kanjiExplorePanelTitle();
     final levelLabel = lang.kanjiCurrentLevelLabel();
@@ -1436,31 +1435,46 @@ class _KanjiDetailDialog extends StatelessWidget {
           ),
         ],
       ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            meaning,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              color: palette.primary,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 16),
-          if (item.onyomi != null && item.onyomi!.isNotEmpty)
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
             Text(
-              'Onyomi: ${item.onyomi}',
-              style: Theme.of(context).textTheme.bodyLarge,
+              meaning,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                color: palette.primary,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          if (item.kunyomi != null && item.kunyomi!.isNotEmpty)
-            Text(
-              'Kunyomi: ${item.kunyomi}',
-              style: Theme.of(context).textTheme.bodyLarge,
+            const SizedBox(height: 16),
+            if (item.onyomi != null && item.onyomi!.isNotEmpty)
+              Text(
+                'Onyomi: ${item.onyomi}',
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            if (item.kunyomi != null && item.kunyomi!.isNotEmpty)
+              Text(
+                'Kunyomi: ${item.kunyomi}',
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            const SizedBox(height: 8),
+            Text('Strokes: ${item.strokeCount} | Level: ${item.jlptLevel}'),
+            const SizedBox(height: 12),
+            Consumer(
+              builder: (context, ref, child) {
+                final rules = ref.watch(hanVietRulesProvider);
+                return rules.maybeWhen(
+                  data: (ruleSet) => HanVietInlinePanel(
+                    rules: ruleSet.rules,
+                    language: language,
+                  ),
+                  orElse: () => const SizedBox.shrink(),
+                );
+              },
             ),
-          const SizedBox(height: 8),
-          Text('Strokes: ${item.strokeCount} | Level: ${item.jlptLevel}'),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -2710,5 +2724,3 @@ class _RelatedStatCard extends StatelessWidget {
     );
   }
 }
-
-

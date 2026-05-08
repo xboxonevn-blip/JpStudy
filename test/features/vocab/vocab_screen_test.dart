@@ -349,7 +349,9 @@ Future<void> _pumpCatalog(WidgetTester tester) async {
 
 void main() {
   setUp(() {
-    SharedPreferences.setMockInitialValues({});
+    SharedPreferences.setMockInitialValues({
+      'foundations.softSuggest.vocab.shown': true,
+    });
   });
 
   testWidgets('VocabScreen shows catalog hero and all level sections', (
@@ -604,61 +606,59 @@ void main() {
     expect(find.text('Lessons 1–25'), findsWidgets);
   });
 
-  testWidgets(
-    'N2 core track opens Hajimete chapter catalog when data exists',
-    (tester) async {
-      final repo = _FakeVocabLessonRepository(
-        bank: {
-          'N5': List.generate(5, (i) => _item(i + 1, 'n5_$i', 'N5')),
-          'N4': List.generate(5, (i) => _item(i + 11, 'n4_$i', 'N4')),
-          'N3': List.generate(5, (i) => _item(i + 21, 'n3_$i', 'N3')),
-          'N2': List.generate(3, (i) => _item(i + 31, 'n2_$i', 'N2')),
-          'N1': List.generate(2, (i) => _item(i + 41, 'n1_$i', 'N1')),
-        },
-      );
+  testWidgets('N2 core track opens Hajimete chapter catalog when data exists', (
+    tester,
+  ) async {
+    final repo = _FakeVocabLessonRepository(
+      bank: {
+        'N5': List.generate(5, (i) => _item(i + 1, 'n5_$i', 'N5')),
+        'N4': List.generate(5, (i) => _item(i + 11, 'n4_$i', 'N4')),
+        'N3': List.generate(5, (i) => _item(i + 21, 'n3_$i', 'N3')),
+        'N2': List.generate(3, (i) => _item(i + 31, 'n2_$i', 'N2')),
+        'N1': List.generate(2, (i) => _item(i + 41, 'n1_$i', 'N1')),
+      },
+    );
 
-      await tester.pumpWidget(_buildRouterScreen(repo: repo));
-      await _pumpCatalog(tester);
+    await tester.pumpWidget(_buildRouterScreen(repo: repo));
+    await _pumpCatalog(tester);
 
-      await tester.ensureVisible(
-        find.byKey(const ValueKey('program_n2_n2_core')),
-      );
-      await _pumpCatalog(tester);
+    await tester.ensureVisible(
+      find.byKey(const ValueKey('program_n2_n2_core')),
+    );
+    await _pumpCatalog(tester);
 
-      await tester.tap(find.byKey(const ValueKey('program_n2_n2_core')));
-      await _pumpCatalog(tester);
+    await tester.tap(find.byKey(const ValueKey('program_n2_n2_core')));
+    await _pumpCatalog(tester);
 
-      expect(find.byType(HajimeteChapterCatalogScreen), findsOneWidget);
-    },
-  );
+    expect(find.byType(HajimeteChapterCatalogScreen), findsOneWidget);
+  });
 
-  testWidgets(
-    'N1 core track opens Hajimete chapter catalog when data exists',
-    (tester) async {
-      final repo = _FakeVocabLessonRepository(
-        bank: {
-          'N5': List.generate(5, (i) => _item(i + 1, 'n5_$i', 'N5')),
-          'N4': List.generate(5, (i) => _item(i + 11, 'n4_$i', 'N4')),
-          'N3': List.generate(5, (i) => _item(i + 21, 'n3_$i', 'N3')),
-          'N2': List.generate(3, (i) => _item(i + 31, 'n2_$i', 'N2')),
-          'N1': List.generate(4, (i) => _item(i + 41, 'n1_$i', 'N1')),
-        },
-      );
+  testWidgets('N1 core track opens Hajimete chapter catalog when data exists', (
+    tester,
+  ) async {
+    final repo = _FakeVocabLessonRepository(
+      bank: {
+        'N5': List.generate(5, (i) => _item(i + 1, 'n5_$i', 'N5')),
+        'N4': List.generate(5, (i) => _item(i + 11, 'n4_$i', 'N4')),
+        'N3': List.generate(5, (i) => _item(i + 21, 'n3_$i', 'N3')),
+        'N2': List.generate(3, (i) => _item(i + 31, 'n2_$i', 'N2')),
+        'N1': List.generate(4, (i) => _item(i + 41, 'n1_$i', 'N1')),
+      },
+    );
 
-      await tester.pumpWidget(_buildRouterScreen(repo: repo));
-      await _pumpCatalog(tester);
+    await tester.pumpWidget(_buildRouterScreen(repo: repo));
+    await _pumpCatalog(tester);
 
-      await tester.ensureVisible(
-        find.byKey(const ValueKey('program_n1_n1_core')),
-      );
-      await _pumpCatalog(tester);
+    await tester.ensureVisible(
+      find.byKey(const ValueKey('program_n1_n1_core')),
+    );
+    await _pumpCatalog(tester);
 
-      await tester.tap(find.byKey(const ValueKey('program_n1_n1_core')));
-      await _pumpCatalog(tester);
+    await tester.tap(find.byKey(const ValueKey('program_n1_n1_core')));
+    await _pumpCatalog(tester);
 
-      expect(find.byType(HajimeteChapterCatalogScreen), findsOneWidget);
-    },
-  );
+    expect(find.byType(HajimeteChapterCatalogScreen), findsOneWidget);
+  });
 
   testWidgets('Shin Kanzen companion cards show the canonical N3 track', (
     tester,

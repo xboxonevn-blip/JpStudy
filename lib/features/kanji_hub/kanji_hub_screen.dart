@@ -17,6 +17,9 @@ import 'package:jpstudy/data/models/radical_item.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/data/repositories/radical_repository.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
+import 'package:jpstudy/features/foundations/providers/foundations_providers.dart';
+import 'package:jpstudy/features/foundations/widgets/foundations_soft_suggest_gate.dart';
+import 'package:jpstudy/features/foundations/widgets/han_viet_inline_panel.dart';
 import 'package:jpstudy/features/kanji_hub/kanji_copy.dart';
 import 'package:jpstudy/features/kanji_hub/models/kanji_practice_args.dart';
 import 'package:jpstudy/features/kanji_hub/models/radical_detail_support.dart';
@@ -240,107 +243,136 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
     final isTablet = MediaQuery.of(context).size.width >= AppBreakpoints.tablet;
     final twoColumns = isDesktop || isTablet;
 
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: AppPageShell(
-        topPadding: AppSpacing.md,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _buildHeader(context, language),
-              const SizedBox(height: AppSpacing.lg),
-              homeSummary.when(
-                data: (summary) => _KanjiTodayPanel(
-                  key: const ValueKey('kanji_today_panel'),
-                  language: language,
-                  summary: summary,
-                  onReviewDue: () => _openPracticeHub(
-                    context,
-                    KanjiPracticeArgs(
-                      mode: KanjiPracticeMode.both,
-                      source: 'due',
-                      levelCode: _selectedLevel.shortLabel,
-                    ),
-                  ),
-                  onLearnNew: () => _openPracticeHub(
-                    context,
-                    KanjiPracticeArgs(
-                      mode: KanjiPracticeMode.both,
-                      source: 'new',
-                      levelCode: _selectedLevel.shortLabel,
-                    ),
-                  ),
-                  onExplore: () {
-                    _onClearRequested();
-                    _onCollectionSelected(_collectionFromLevel(_selectedLevel));
-                    final ctx = _gridPanelKey.currentContext;
-                    if (ctx != null) {
-                      Scrollable.ensureVisible(
-                        ctx,
-                        duration: reducedMotionDuration(
-                          context,
-                          const Duration(milliseconds: 350),
-                        ),
-                        curve: Curves.easeOut,
-                        alignmentPolicy:
-                            ScrollPositionAlignmentPolicy.keepVisibleAtStart,
-                      );
-                    }
-                  },
-                ),
-                loading: () => AppFeatureCard(
-                  key: const ValueKey('kanji_today_loading'),
-                  icon: Icons.auto_awesome_rounded,
-                  title: _kanjiSummaryLoadingTitle(language),
-                  subtitle: _kanjiSummaryLoadingSubtitle(language),
-                  status: const SizedBox(
-                    width: 18,
-                    height: 18,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  ),
-                  compact: true,
-                ),
-                error: (error, stackTrace) => AppFeatureCard(
-                  key: const ValueKey('kanji_today_error'),
-                  icon: Icons.error_outline_rounded,
-                  title: _kanjiSummaryErrorTitle(language),
-                  subtitle: _kanjiSummaryErrorSubtitle(language),
-                  primaryLabel: _kanjiSummaryRetryLabel(language),
-                  onPrimaryTap: () => ref.invalidate(kanjiHomeSummaryProvider),
-                  secondaryLabel: _kanjiExploreActionLabel(language),
-                  onSecondaryTap: () {
-                    _onCollectionSelected(_collectionFromLevel(_selectedLevel));
-                  },
-                  compact: true,
-                ),
-              ),
-              const SizedBox(height: AppSpacing.lg),
-              if (twoColumns)
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      flex: 4,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          _SearchDrawPanel(
-                            key: _searchDrawKey,
-                            language: language,
-                            onSearchQueryChanged: _onSearchQueryChanged,
-                            onCandidatesFound: _onCandidatesFound,
-                          ),
-                          const SizedBox(height: AppSpacing.xl),
-                          _KanjiMindmapPanel(language: language),
-                        ],
+    return FoundationsSoftSuggestGate(
+      surface: FoundationsSoftSuggestSurface.kanji,
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: AppPageShell(
+          topPadding: AppSpacing.md,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _buildHeader(context, language),
+                const SizedBox(height: AppSpacing.lg),
+                homeSummary.when(
+                  data: (summary) => _KanjiTodayPanel(
+                    key: const ValueKey('kanji_today_panel'),
+                    language: language,
+                    summary: summary,
+                    onReviewDue: () => _openPracticeHub(
+                      context,
+                      KanjiPracticeArgs(
+                        mode: KanjiPracticeMode.both,
+                        source: 'due',
+                        levelCode: _selectedLevel.shortLabel,
                       ),
                     ),
-                    const SizedBox(width: AppSpacing.xl),
-                    Expanded(
-                      flex: 6,
-                      child: _KanjiGridPanel(
+                    onLearnNew: () => _openPracticeHub(
+                      context,
+                      KanjiPracticeArgs(
+                        mode: KanjiPracticeMode.both,
+                        source: 'new',
+                        levelCode: _selectedLevel.shortLabel,
+                      ),
+                    ),
+                    onExplore: () {
+                      _onClearRequested();
+                      _onCollectionSelected(
+                        _collectionFromLevel(_selectedLevel),
+                      );
+                      final ctx = _gridPanelKey.currentContext;
+                      if (ctx != null) {
+                        Scrollable.ensureVisible(
+                          ctx,
+                          duration: reducedMotionDuration(
+                            context,
+                            const Duration(milliseconds: 350),
+                          ),
+                          curve: Curves.easeOut,
+                          alignmentPolicy:
+                              ScrollPositionAlignmentPolicy.keepVisibleAtStart,
+                        );
+                      }
+                    },
+                  ),
+                  loading: () => AppFeatureCard(
+                    key: const ValueKey('kanji_today_loading'),
+                    icon: Icons.auto_awesome_rounded,
+                    title: _kanjiSummaryLoadingTitle(language),
+                    subtitle: _kanjiSummaryLoadingSubtitle(language),
+                    status: const SizedBox(
+                      width: 18,
+                      height: 18,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    ),
+                    compact: true,
+                  ),
+                  error: (error, stackTrace) => AppFeatureCard(
+                    key: const ValueKey('kanji_today_error'),
+                    icon: Icons.error_outline_rounded,
+                    title: _kanjiSummaryErrorTitle(language),
+                    subtitle: _kanjiSummaryErrorSubtitle(language),
+                    primaryLabel: _kanjiSummaryRetryLabel(language),
+                    onPrimaryTap: () =>
+                        ref.invalidate(kanjiHomeSummaryProvider),
+                    secondaryLabel: _kanjiExploreActionLabel(language),
+                    onSecondaryTap: () {
+                      _onCollectionSelected(
+                        _collectionFromLevel(_selectedLevel),
+                      );
+                    },
+                    compact: true,
+                  ),
+                ),
+                const SizedBox(height: AppSpacing.lg),
+                if (twoColumns)
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        flex: 4,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            _SearchDrawPanel(
+                              key: _searchDrawKey,
+                              language: language,
+                              onSearchQueryChanged: _onSearchQueryChanged,
+                              onCandidatesFound: _onCandidatesFound,
+                            ),
+                            const SizedBox(height: AppSpacing.xl),
+                            _KanjiMindmapPanel(language: language),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: AppSpacing.xl),
+                      Expanded(
+                        flex: 6,
+                        child: _KanjiGridPanel(
+                          key: _gridPanelKey,
+                          selectedLevel: _selectedLevel,
+                          selectedCollection: _selectedCollection,
+                          onLevelSelected: _onLevelSelected,
+                          onCollectionSelected: _onCollectionSelected,
+                          kanjiFuture: _kanjiFuture,
+                          radicalFuture: _radicalFuture,
+                          allKanjiFuture: _allKanjiFuture,
+                          language: language,
+                          searchQuery: _searchQuery,
+                          candidateKanji: _candidateKanji,
+                          onClearRequested: _onClearRequested,
+                          onRelatedKanjiSelected: _onRelatedKanjiSelected,
+                        ),
+                      ),
+                    ],
+                  )
+                else
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      _KanjiGridPanel(
                         key: _gridPanelKey,
                         selectedLevel: _selectedLevel,
                         selectedCollection: _selectedCollection,
@@ -355,40 +387,19 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
                         onClearRequested: _onClearRequested,
                         onRelatedKanjiSelected: _onRelatedKanjiSelected,
                       ),
-                    ),
-                  ],
-                )
-              else
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    _KanjiGridPanel(
-                      key: _gridPanelKey,
-                      selectedLevel: _selectedLevel,
-                      selectedCollection: _selectedCollection,
-                      onLevelSelected: _onLevelSelected,
-                      onCollectionSelected: _onCollectionSelected,
-                      kanjiFuture: _kanjiFuture,
-                      radicalFuture: _radicalFuture,
-                      allKanjiFuture: _allKanjiFuture,
-                      language: language,
-                      searchQuery: _searchQuery,
-                      candidateKanji: _candidateKanji,
-                      onClearRequested: _onClearRequested,
-                      onRelatedKanjiSelected: _onRelatedKanjiSelected,
-                    ),
-                    const SizedBox(height: AppSpacing.xl),
-                    _SearchDrawPanel(
-                      key: _searchDrawKey,
-                      language: language,
-                      onSearchQueryChanged: _onSearchQueryChanged,
-                      onCandidatesFound: _onCandidatesFound,
-                    ),
-                    const SizedBox(height: AppSpacing.xl),
-                    _KanjiMindmapPanel(language: language),
-                  ],
-                ),
-            ],
+                      const SizedBox(height: AppSpacing.xl),
+                      _SearchDrawPanel(
+                        key: _searchDrawKey,
+                        language: language,
+                        onSearchQueryChanged: _onSearchQueryChanged,
+                        onCandidatesFound: _onCandidatesFound,
+                      ),
+                      const SizedBox(height: AppSpacing.xl),
+                      _KanjiMindmapPanel(language: language),
+                    ],
+                  ),
+              ],
+            ),
           ),
         ),
       ),

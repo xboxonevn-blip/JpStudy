@@ -13,6 +13,7 @@ import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/common/widgets/japanese_background.dart';
+import 'package:jpstudy/features/foundations/providers/foundations_providers.dart';
 import 'package:jpstudy/features/home/home_copy.dart';
 import 'package:jpstudy/features/kanji_hub/models/kanji_practice_args.dart';
 import 'package:jpstudy/features/home/providers/continue_provider.dart';
@@ -36,6 +37,7 @@ class LearningPathScreen extends ConsumerWidget {
     final level = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
     final dashboard = ref.watch(dashboardProvider).value;
     final continueAction = ref.watch(continueActionProvider).value;
+    final foundationsProgress = ref.watch(foundationsProgressProvider);
 
     final streak = dashboard?.streak ?? 0;
     final todayXp = dashboard?.todayXp ?? 0;
@@ -45,6 +47,17 @@ class LearningPathScreen extends ConsumerWidget {
         (dashboard?.kanjiDue ?? 0);
     final weakCount = dashboard?.totalMistakeCount ?? 0;
     final hasStartedToday = todayXp > 0;
+    final showFoundationsCard =
+        level == StudyLevel.n5 && foundationsProgress.percentComplete < 1.0;
+    final foundationsCard = showFoundationsCard
+        ? Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 14),
+            child: _FoundationsFeaturedCard(
+              language: language,
+              progress: foundationsProgress,
+            ),
+          )
+        : const SizedBox.shrink();
     final studyPromptCard = Padding(
       padding: const EdgeInsets.symmetric(horizontal: 14),
       child: AppSectionCard(
@@ -133,6 +146,10 @@ class LearningPathScreen extends ConsumerWidget {
                     return Column(
                       children: [
                         hero,
+                        if (showFoundationsCard) ...[
+                          const SizedBox(height: 10),
+                          foundationsCard,
+                        ],
                         const SizedBox(height: 10),
                         const DailyPlanCard()
                             .animate(delay: 60.ms)
@@ -186,6 +203,10 @@ class LearningPathScreen extends ConsumerWidget {
                   return Column(
                     children: [
                       hero,
+                      if (showFoundationsCard) ...[
+                        const SizedBox(height: 10),
+                        foundationsCard,
+                      ],
                       const SizedBox(height: 10),
                       const DailyPlanCard()
                           .animate(delay: 60.ms)
@@ -338,6 +359,70 @@ class LearningPathScreen extends ConsumerWidget {
 
   static String _momentumChipLabel(AppLanguage language, StudyLevel level) =>
       language.learningPathMomentumChipLabel(level.shortLabel);
+}
+
+class _FoundationsFeaturedCard extends StatelessWidget {
+  const _FoundationsFeaturedCard({
+    required this.language,
+    required this.progress,
+  });
+
+  final AppLanguage language;
+  final FoundationsProgress progress;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return AppSectionCard(
+      padding: const EdgeInsets.all(18),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(22),
+          onTap: context.openFoundations,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    width: 46,
+                    height: 46,
+                    decoration: BoxDecoration(
+                      color: palette.success.withValues(alpha: 0.14),
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: Icon(
+                      Icons.grass_rounded,
+                      color: palette.success,
+                      size: 24,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      '${language.foundationsTitle} - Bảng chữ Hiragana / Katakana / Hán Việt',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w900,
+                        color: palette.ink,
+                      ),
+                    ),
+                  ),
+                  const Icon(Icons.chevron_right_rounded),
+                ],
+              ),
+              const SizedBox(height: 12),
+              AppProgressStrip(
+                value: progress.percentComplete,
+                label:
+                    '${progress.studiedCount}/$foundationsKanaTotal kana (${(progress.percentComplete * 100).round()}%)',
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class _DojoHeroCard extends StatelessWidget {
@@ -1022,5 +1107,3 @@ class _FocusChip extends StatelessWidget {
     );
   }
 }
-
-

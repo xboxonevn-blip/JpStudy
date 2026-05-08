@@ -50,7 +50,9 @@ Widget _buildScreen({
   return ProviderScope(
     overrides: [
       appLanguageProvider.overrideWith((ref) => language),
-      studyLevelProvider.overrideWith((ref) => null), // levelLabel defaults to 'N5'
+      studyLevelProvider.overrideWith(
+        (ref) => null,
+      ), // levelLabel defaults to 'N5'
       grammarPointsProvider('N5').overrideWith((_) async => points),
       grammarDueCountProvider.overrideWith((_) async => dueCount),
       grammarGhostCountProvider.overrideWith((_) => Stream.value(ghostCount)),
@@ -69,23 +71,17 @@ Widget _buildRouterScreen({
   final router = GoRouter(
     initialLocation: '/',
     routes: [
-      GoRoute(
-        path: '/',
-        builder: (context, state) => const GrammarScreen(),
-      ),
+      GoRoute(path: '/', builder: (context, state) => const GrammarScreen()),
       GoRoute(
         name: 'grammar-practice',
         path: '/grammar-practice',
-        builder: (context, state) => const Scaffold(
-          body: Center(child: Text('GRAMMAR_PRACTICE')),
-        ),
+        builder: (context, state) =>
+            const Scaffold(body: Center(child: Text('GRAMMAR_PRACTICE'))),
       ),
       GoRoute(
         path: '/grammar/:id',
         builder: (context, state) => Scaffold(
-          body: Center(
-            child: Text('GRAMMAR_ID=${state.pathParameters['id']}'),
-          ),
+          body: Center(child: Text('GRAMMAR_ID=${state.pathParameters['id']}')),
         ),
       ),
     ],
@@ -116,7 +112,9 @@ Future<void> _pump(WidgetTester tester) async {
 
 void main() {
   setUp(() {
-    SharedPreferences.setMockInitialValues({});
+    SharedPreferences.setMockInitialValues({
+      'foundations.softSuggest.grammar.shown': true,
+    });
   });
 
   testWidgets(
@@ -138,9 +136,7 @@ void main() {
   testWidgets(
     'shows due count badge and review button label when reviews are waiting',
     (tester) async {
-      await tester.pumpWidget(
-        _buildScreen(points: [_stubPoint], dueCount: 3),
-      );
+      await tester.pumpWidget(_buildScreen(points: [_stubPoint], dueCount: 3));
       await _pump(tester);
 
       expect(find.text('3 ready'), findsWidgets); // status chip + metric tile
@@ -162,8 +158,9 @@ void main() {
     expect(find.textContaining('No grammar loaded for N5'), findsOneWidget);
   });
 
-  testWidgets('grammar point rows render with learned / new badges',
-      (tester) async {
+  testWidgets('grammar point rows render with learned / new badges', (
+    tester,
+  ) async {
     // VI locale: _GrammarPointRow title is point.grammarPoint directly
     await tester.pumpWidget(
       _buildScreen(
@@ -181,8 +178,9 @@ void main() {
     expect(find.text('Đã học'), findsWidgets);
   });
 
-  testWidgets('tapping grammar point row navigates to detail page',
-      (tester) async {
+  testWidgets('tapping grammar point row navigates to detail page', (
+    tester,
+  ) async {
     tester.view.physicalSize = const Size(1440, 2200);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
@@ -190,10 +188,7 @@ void main() {
 
     // VI locale so the row title is point.grammarPoint = 'てもいい' directly
     await tester.pumpWidget(
-      _buildRouterScreen(
-        language: AppLanguage.vi,
-        points: [_stubPoint],
-      ),
+      _buildRouterScreen(language: AppLanguage.vi, points: [_stubPoint]),
     );
     await tester.pumpAndSettle();
 

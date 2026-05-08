@@ -14,6 +14,7 @@ import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
+import 'package:jpstudy/features/foundations/widgets/foundations_soft_suggest_gate.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/vocab/models/vocab_review_args.dart';
 import 'package:jpstudy/features/vocab/vocab_copy.dart';
@@ -293,15 +294,34 @@ class VocabScreen extends ConsumerWidget {
     final catalogAsync = ref.watch(vocabCatalogProvider);
     final homeAsync = ref.watch(vocabHomeSectionProvider);
 
-    return Scaffold(
-      body: AppPageShell(
-        topPadding: AppSpacing.md,
-        child: catalogAsync.when(
-          data: (sections) => homeAsync.when(
-            data: (home) => _VocabCatalogBody(
-              language: language,
-              sections: sections,
-              home: home,
+    return FoundationsSoftSuggestGate(
+      surface: FoundationsSoftSuggestSurface.vocab,
+      child: Scaffold(
+        body: AppPageShell(
+          topPadding: AppSpacing.md,
+          child: catalogAsync.when(
+            data: (sections) => homeAsync.when(
+              data: (home) => _VocabCatalogBody(
+                language: language,
+                sections: sections,
+                home: home,
+              ),
+              loading: () => const Padding(
+                key: ValueKey('vocab_catalog_loading'),
+                padding: EdgeInsets.only(top: 120),
+                child: Center(child: CircularProgressIndicator()),
+              ),
+              error: (error, stack) => AppFeatureCard(
+                key: const ValueKey('vocab_catalog_error'),
+                icon: Icons.error_outline_rounded,
+                title: _catalogErrorTitle(language),
+                subtitle: error.toString(),
+                secondaryLabel: _catalogRetryLabel(language),
+                onSecondaryTap: () {
+                  ref.invalidate(vocabCatalogProvider);
+                  ref.invalidate(vocabHomeSectionProvider);
+                },
+              ),
             ),
             loading: () => const Padding(
               key: ValueKey('vocab_catalog_loading'),
@@ -314,24 +334,8 @@ class VocabScreen extends ConsumerWidget {
               title: _catalogErrorTitle(language),
               subtitle: error.toString(),
               secondaryLabel: _catalogRetryLabel(language),
-              onSecondaryTap: () {
-                ref.invalidate(vocabCatalogProvider);
-                ref.invalidate(vocabHomeSectionProvider);
-              },
+              onSecondaryTap: () => ref.invalidate(vocabCatalogProvider),
             ),
-          ),
-          loading: () => const Padding(
-            key: ValueKey('vocab_catalog_loading'),
-            padding: EdgeInsets.only(top: 120),
-            child: Center(child: CircularProgressIndicator()),
-          ),
-          error: (error, stack) => AppFeatureCard(
-            key: const ValueKey('vocab_catalog_error'),
-            icon: Icons.error_outline_rounded,
-            title: _catalogErrorTitle(language),
-            subtitle: error.toString(),
-            secondaryLabel: _catalogRetryLabel(language),
-            onSecondaryTap: () => ref.invalidate(vocabCatalogProvider),
           ),
         ),
       ),
@@ -565,5 +569,3 @@ String _catalogErrorTitle(AppLanguage language) =>
 
 String _catalogRetryLabel(AppLanguage language) =>
     language.vocabCatalogRetryLabel();
-
-
