@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/app/theme/app_breakpoints.dart';
@@ -9,6 +10,10 @@ import 'package:jpstudy/core/auth/auth_provider.dart';
 import 'package:jpstudy/core/auth/auth_user.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/features/auth/widgets/login_dialog.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+const _feedbackEmail = 'xboxonevn@gmail.com';
+const _feedbackAppVersion = '1.0.0+1';
 
 class GlobalTopBar extends ConsumerWidget {
   const GlobalTopBar({super.key});
@@ -220,10 +225,9 @@ class _UserMenu extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final palette = context.appPalette;
-    final user = ref.watch(authStateProvider).maybeWhen(
-          data: (value) => value,
-          orElse: () => null,
-        );
+    final user = ref
+        .watch(authStateProvider)
+        .maybeWhen(data: (value) => value, orElse: () => null);
     final displayName = (user?.displayName?.trim().isNotEmpty ?? false)
         ? user!.displayName!
         : (user?.email ?? _profileName(language));
@@ -324,6 +328,26 @@ class _UserMenu extends ConsumerWidget {
             ],
           ),
         ),
+        PopupMenuItem<String>(
+          value: 'feedback',
+          child: Row(
+            children: [
+              Icon(
+                Icons.feedback_outlined,
+                color: palette.ink.withValues(alpha: 0.7),
+                size: 20,
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  language.feedbackMenuLabel,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(color: palette.ink),
+                ),
+              ),
+            ],
+          ),
+        ),
         const PopupMenuDivider(),
         PopupMenuItem<String>(
           value: user == null ? 'signin' : 'logout',
@@ -350,15 +374,50 @@ class _UserMenu extends ConsumerWidget {
           ),
         ),
       ],
-      onSelected: (val) {
-        if (val == 'premium') context.openPremium();
-        if (val == 'settings') context.openMe();
-        if (val == 'signin') LoginDialog.show(context);
-        if (val == 'logout') ref.read(authServiceProvider).signOut();
+      onSelected: (val) async {
+        switch (val) {
+          case 'premium':
+            context.openPremium();
+          case 'settings':
+            context.openMe();
+          case 'feedback':
+            await _sendFeedback(context, language);
+          case 'signin':
+            LoginDialog.show(context);
+          case 'logout':
+            await ref.read(authServiceProvider).signOut();
+        }
       },
       child: _Avatar(palette: palette, compact: compact, user: user),
     );
   }
+}
+
+Future<void> _sendFeedback(BuildContext context, AppLanguage language) async {
+  final uri = Uri(
+    scheme: 'mailto',
+    path: _feedbackEmail,
+    queryParameters: {
+      'subject': 'JpStudy Feedback',
+      'body': _feedbackBody(language),
+    },
+  );
+  final launched = await launchUrl(uri);
+  if (launched || !context.mounted) return;
+  ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+    SnackBar(content: Text(language.feedbackLaunchErrorLabel(_feedbackEmail))),
+  );
+}
+
+String _feedbackBody(AppLanguage language) {
+  final platform = kIsWeb ? 'web' : defaultTargetPlatform.name;
+  return [
+    'App version: $_feedbackAppVersion',
+    'Platform: $platform',
+    'Locale: ${language.shortCode}',
+    '',
+    '',
+  ].join('\n');
 }
 
 class _Avatar extends StatelessWidget {

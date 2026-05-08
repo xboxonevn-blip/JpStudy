@@ -6951,4 +6951,26 @@ extension AppLanguageLabels on AppLanguage {
         return 'データ';
     }
   }
+
+  String get feedbackMenuLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Send feedback';
+      case AppLanguage.vi:
+        return 'Gửi phản hồi';
+      case AppLanguage.ja:
+        return 'フィードバック送信';
+    }
+  }
+
+  String feedbackLaunchErrorLabel(String email) {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Could not open email. Send to $email.';
+      case AppLanguage.vi:
+        return 'Không mở được email. Gửi tới $email.';
+      case AppLanguage.ja:
+        return 'メールを開けませんでした。$email に送ってください。';
+    }
+  }
 } // End extension
