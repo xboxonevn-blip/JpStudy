@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/services/auto_cloud_upload_coordinator.dart';
 import 'package:jpstudy/core/services/backup_encryption.dart';
 import 'package:jpstudy/core/services/backup_sync_service.dart';
 import 'package:jpstudy/core/services/cloud_storage_sync_service.dart';
@@ -26,6 +27,7 @@ final cloudStorageSyncServiceProvider = Provider<CloudStorageSyncService>(
 const _prefAutoBackup = 'backup.auto.enabled';
 const _prefAutoBackupTime = 'backup.auto.time';
 const _prefAutoBackupLast = 'backup.auto.last';
+const _prefAutoCloudUpload = AutoCloudUploadCoordinator.enabledPreferenceKey;
 const _lastAutoBackupSentinel = Object();
 
 final dataSettingsControllerProvider =
@@ -37,24 +39,29 @@ class DataSettingsState {
   const DataSettingsState({
     this.isReady = false,
     this.autoBackupEnabled = false,
+    this.autoCloudUploadEnabled = true,
     this.autoBackupTime = const TimeOfDay(hour: 2, minute: 0),
     this.lastAutoBackup,
   });
 
   final bool isReady;
   final bool autoBackupEnabled;
+  final bool autoCloudUploadEnabled;
   final TimeOfDay autoBackupTime;
   final DateTime? lastAutoBackup;
 
   DataSettingsState copyWith({
     bool? isReady,
     bool? autoBackupEnabled,
+    bool? autoCloudUploadEnabled,
     TimeOfDay? autoBackupTime,
     Object? lastAutoBackup = _lastAutoBackupSentinel,
   }) {
     return DataSettingsState(
       isReady: isReady ?? this.isReady,
       autoBackupEnabled: autoBackupEnabled ?? this.autoBackupEnabled,
+      autoCloudUploadEnabled:
+          autoCloudUploadEnabled ?? this.autoCloudUploadEnabled,
       autoBackupTime: autoBackupTime ?? this.autoBackupTime,
       lastAutoBackup: lastAutoBackup == _lastAutoBackupSentinel
           ? this.lastAutoBackup
@@ -118,6 +125,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
   Future<void> refresh() async {
     final prefs = await _ensurePrefs();
     final autoBackupEnabled = prefs.getBool(_prefAutoBackup) ?? false;
+    final autoCloudUploadEnabled = prefs.getBool(_prefAutoCloudUpload) ?? true;
     final autoBackupTime =
         _backupTimeFromPrefs(prefs) ?? const TimeOfDay(hour: 2, minute: 0);
     final lastRaw = prefs.getString(_prefAutoBackupLast);
@@ -128,6 +136,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
     state = state.copyWith(
       isReady: true,
       autoBackupEnabled: autoBackupEnabled,
+      autoCloudUploadEnabled: autoCloudUploadEnabled,
       autoBackupTime: autoBackupTime,
       lastAutoBackup: lastRaw == null ? null : DateTime.tryParse(lastRaw),
     );
@@ -155,6 +164,12 @@ class DataSettingsController extends Notifier<DataSettingsState> {
     if (state.autoBackupEnabled) {
       _scheduleAutoBackup();
     }
+  }
+
+  Future<void> setAutoCloudUpload(bool enabled, AppLanguage _) async {
+    final prefs = await _ensurePrefs();
+    await prefs.setBool(_prefAutoCloudUpload, enabled);
+    state = state.copyWith(autoCloudUploadEnabled: enabled, isReady: true);
   }
 
   Future<void> exportBackup(
@@ -811,10 +826,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
   }) async {
     final repo = ref.read(lessonRepositoryProvider);
     final data = await repo.exportBackup();
-    return BackupSyncService.buildExportEnvelope(
-      data,
-      passphrase: passphrase,
-    );
+    return BackupSyncService.buildExportEnvelope(data, passphrase: passphrase);
   }
 
   Future<bool?> _confirmImport(

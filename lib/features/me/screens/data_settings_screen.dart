@@ -293,6 +293,26 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
               context,
             ).textTheme.bodySmall?.copyWith(color: Theme.of(context).hintColor),
           ),
+          const SizedBox(height: AppSpacing.sm),
+          SwitchListTile(
+            value: settings.autoCloudUploadEnabled,
+            onChanged: user != null && settings.isReady
+                ? (value) => controller.setAutoCloudUpload(value, language)
+                : null,
+            contentPadding: EdgeInsets.zero,
+            title: Text(_autoCloudUploadLabel(language)),
+            subtitle: Text(_autoCloudUploadHint(language)),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+            child: Text(
+              _autoCloudUploadEncryptionWarning(language),
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: Theme.of(context).hintColor,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+          ),
           if (user != null) ...[
             const SizedBox(height: AppSpacing.md),
             Wrap(
@@ -415,6 +435,39 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
         return 'Tự động sao lưu, backup mang đi và đồng bộ qua file liên kết nằm ở đây.';
       case AppLanguage.ja:
         return '自動バックアップ、持ち運び用バックアップ、リンクファイル同期をここで管理します。';
+    }
+  }
+
+  String _autoCloudUploadLabel(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Auto-upload to cloud';
+      case AppLanguage.vi:
+        return 'Tự động tải lên đám mây';
+      case AppLanguage.ja:
+        return 'クラウド自動アップロード';
+    }
+  }
+
+  String _autoCloudUploadHint(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'After a completed study session, upload the latest backup to your signed-in account.';
+      case AppLanguage.vi:
+        return 'Sau khi hoàn thành phiên học, tự tải bản sao lưu mới nhất lên tài khoản đã đăng nhập.';
+      case AppLanguage.ja:
+        return '学習セッション完了後、最新バックアップをサインイン中のアカウントへ自動アップロードします。';
+    }
+  }
+
+  String _autoCloudUploadEncryptionWarning(AppLanguage language) {
+    switch (language) {
+      case AppLanguage.en:
+        return 'Auto-upload does not support encryption. Turn on encryption = upload manually.';
+      case AppLanguage.vi:
+        return 'Tự động tải lên không hỗ trợ mã hóa. Bật mã hóa = tải thủ công.';
+      case AppLanguage.ja:
+        return '自動アップロードは暗号化に対応していません。暗号化を使う場合は手動でアップロードしてください。';
     }
   }
 
