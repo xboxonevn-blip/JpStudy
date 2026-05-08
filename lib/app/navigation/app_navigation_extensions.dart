@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:jpstudy/app/navigation/app_route_locations.dart';
 import 'package:jpstudy/features/learn/models/learn_session_args.dart';
+import 'package:jpstudy/features/foundations/screens/kana_table_screen.dart';
 import 'package:jpstudy/features/lesson/lesson_practice_screen.dart';
 import 'package:jpstudy/features/test/models/home_mock_exam_launch_args.dart';
 import 'package:jpstudy/features/vocab/models/vocab_review_args.dart';
@@ -17,6 +18,14 @@ extension AppNavigationContext on BuildContext {
       pushNamed(AppRouteName.grammarPractice, extra: extra);
   void openSearch({Object? extra}) =>
       pushNamed(AppRouteName.search, extra: extra);
+  void openFoundations() => pushNamed(AppRouteName.foundations);
+  void openFoundationsKana(KanaScript script) => pushNamed(
+    AppRouteName.foundationsKana,
+    pathParameters: {'script': script.name},
+  );
+  void openFoundationsCompounds() =>
+      pushNamed(AppRouteName.foundationsCompounds);
+  void openFoundationsHanViet() => pushNamed(AppRouteName.foundationsHanViet);
   void openLibrary() => pushNamed(AppRouteName.library);
   void openStudy() => pushNamed(AppRouteName.study);
   void openStudyHub() => pushNamed(AppRouteName.studyHub);

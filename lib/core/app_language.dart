@@ -6973,4 +6973,169 @@ extension AppLanguageLabels on AppLanguage {
         return 'メールを開けませんでした。$email に送ってください。';
     }
   }
+
+  String get foundationsTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Foundations';
+      case AppLanguage.vi:
+        return 'Nền tảng';
+      case AppLanguage.ja:
+        return '基礎';
+    }
+  }
+
+  String get foundationsSubtitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Kana first, then Han-Viet reading hints for kanji.';
+      case AppLanguage.vi:
+        return 'Bảng chữ trước, rồi mẹo Hán Việt để đoán âm On.';
+      case AppLanguage.ja:
+        return 'かなから始め、漢越音のヒントで音読みを確認します。';
+    }
+  }
+
+  String get foundationsHiraganaLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Basic Hiragana';
+      case AppLanguage.vi:
+        return 'Hiragana cơ bản';
+      case AppLanguage.ja:
+        return 'ひらがな基礎';
+    }
+  }
+
+  String get foundationsKatakanaLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Basic Katakana';
+      case AppLanguage.vi:
+        return 'Katakana cơ bản';
+      case AppLanguage.ja:
+        return 'カタカナ基礎';
+    }
+  }
+
+  String get foundationsCompoundsLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Compound Kana';
+      case AppLanguage.vi:
+        return 'Âm ghép';
+      case AppLanguage.ja:
+        return '拗音';
+    }
+  }
+
+  String get hanVietRulesTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Han-Viet Rules';
+      case AppLanguage.vi:
+        return 'Quy tắc Hán Việt';
+      case AppLanguage.ja:
+        return '漢越音ルール';
+    }
+  }
+
+  String get hanVietRulesHint {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Search rules or patterns';
+      case AppLanguage.vi:
+        return 'Tìm quy tắc hoặc mẫu âm';
+      case AppLanguage.ja:
+        return 'ルールや型を検索';
+    }
+  }
+
+  String get hanVietInlinePanelTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Han-Viet Tips';
+      case AppLanguage.vi:
+        return 'Mẹo Hán Việt';
+      case AppLanguage.ja:
+        return '漢越音のヒント';
+    }
+  }
+
+  String get kanaIKnowItLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'I know this';
+      case AppLanguage.vi:
+        return 'Tôi đã thuộc';
+      case AppLanguage.ja:
+        return '覚えた';
+    }
+  }
+
+  String get kanaShowRomajiLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Show romaji';
+      case AppLanguage.vi:
+        return 'Hiện romaji';
+      case AppLanguage.ja:
+        return 'ローマ字を表示';
+    }
+  }
+
+  String get softSuggestFoundationsTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Kana first helps more.';
+      case AppLanguage.vi:
+        return 'Học bảng chữ trước có hiệu quả hơn.';
+      case AppLanguage.ja:
+        return '先にかなを学ぶと効果的です。';
+    }
+  }
+
+  String get softSuggestFoundationsBody {
+    switch (this) {
+      case AppLanguage.en:
+        return 'A short Foundations pass makes vocab, grammar, and kanji easier to read.';
+      case AppLanguage.vi:
+        return 'Học nhanh phần Nền tảng sẽ giúp đọc từ vựng, ngữ pháp và kanji dễ hơn.';
+      case AppLanguage.ja:
+        return '基礎を少し確認すると、語彙・文法・漢字が読みやすくなります。';
+    }
+  }
+
+  String get softSuggestGoFoundationsLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Open Foundations';
+      case AppLanguage.vi:
+        return 'Vào Foundations';
+      case AppLanguage.ja:
+        return '基礎へ';
+    }
+  }
+
+  String get softSuggestContinueLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Continue';
+      case AppLanguage.vi:
+        return 'Tiếp tục';
+      case AppLanguage.ja:
+        return '続ける';
+    }
+  }
+
+  String get foundationsSourceLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Source';
+      case AppLanguage.vi:
+        return 'Nguồn';
+      case AppLanguage.ja:
+        return '出典';
+    }
+  }
 } // End extension

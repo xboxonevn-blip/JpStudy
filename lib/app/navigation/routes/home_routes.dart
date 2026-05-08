@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:jpstudy/app/navigation/app_route_builders.dart';
+import 'package:jpstudy/app/navigation/routes/foundations_routes.dart';
 import 'package:jpstudy/features/games/match_game/lesson_match_screen.dart';
 import 'package:jpstudy/features/home/home_screen.dart';
 import 'package:jpstudy/features/home/screens/daily_session_summary_screen.dart';
@@ -51,6 +52,7 @@ StatefulShellBranch buildHomeBranch() {
         name: AppRouteName.search,
         builder: (context, state) => const SearchScreen(),
       ),
+      ...buildFoundationsRoutes(),
       GoRoute(
         path: AppRoutePath.lessonDetail,
         name: AppRouteName.lessonDetail,

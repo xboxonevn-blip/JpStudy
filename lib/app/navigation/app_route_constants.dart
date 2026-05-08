@@ -17,6 +17,11 @@ class AppRoutePath {
   static const grammarDetail = '/grammar/:id';
   static const grammarPractice = '/grammar-practice';
 
+  static const foundations = '/foundations';
+  static const foundationsKana = '/foundations/kana/:script';
+  static const foundationsCompounds = '/foundations/kana/compounds';
+  static const foundationsHanViet = '/foundations/han-viet';
+
   static const home = '/';
   static const roadmap = '/roadmap';
   static const today = '/today';
@@ -83,6 +88,11 @@ class AppRouteName {
   static const grammar = 'grammar';
   static const grammarDetail = 'grammar-detail';
   static const grammarPractice = 'grammar-practice';
+
+  static const foundations = 'foundations';
+  static const foundationsKana = 'foundations-kana';
+  static const foundationsCompounds = 'foundations-compounds';
+  static const foundationsHanViet = 'foundations-han-viet';
 
   static const home = 'home';
   static const roadmap = 'roadmap';
