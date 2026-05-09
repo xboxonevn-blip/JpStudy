@@ -14,6 +14,12 @@ class AppTheme {
   static const Color textSub = Color(0xFF61707F);
   static const String latinFontFamily = 'Manrope';
   static const String japanesePrimaryFontFamily = 'Yu Gothic UI';
+  static const List<String> vietnameseFontFallbacks = <String>[
+    'Roboto',
+    'Noto Sans',
+    'Arial',
+    'Segoe UI',
+  ];
   static const List<String> japaneseFontFallbacks = <String>[
     japanesePrimaryFontFamily,
     'Hiragino Sans',
@@ -279,7 +285,10 @@ class AppTheme {
     return const _AppTypography(
       bodyFontFamily: latinFontFamily,
       displayFontFamily: latinFontFamily,
-      fontFamilyFallback: japaneseFontFallbacks,
+      fontFamilyFallback: <String>[
+        ...vietnameseFontFallbacks,
+        ...japaneseFontFallbacks,
+      ],
     );
   }
 
