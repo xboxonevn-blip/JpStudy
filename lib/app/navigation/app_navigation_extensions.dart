@@ -18,7 +18,7 @@ extension AppNavigationContext on BuildContext {
       pushNamed(AppRouteName.grammarPractice, extra: extra);
   void openSearch({Object? extra}) =>
       pushNamed(AppRouteName.search, extra: extra);
-  void openFoundations() => pushNamed(AppRouteName.foundations);
+  void openFoundations() => goNamed(AppRouteName.foundations);
   void openFoundationsKana(KanaScript script) => pushNamed(
     AppRouteName.foundationsKana,
     pathParameters: {'script': script.name},

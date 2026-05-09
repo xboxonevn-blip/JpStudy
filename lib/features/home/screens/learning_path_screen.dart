@@ -146,11 +146,11 @@ class LearningPathScreen extends ConsumerWidget {
                   if (!useDesktopGrid) {
                     return Column(
                       children: [
-                        hero,
                         if (showFoundationsCard) ...[
-                          const SizedBox(height: 10),
                           foundationsCard,
+                          const SizedBox(height: 10),
                         ],
+                        hero,
                         const SizedBox(height: 10),
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 14),
@@ -208,11 +208,11 @@ class LearningPathScreen extends ConsumerWidget {
 
                   return Column(
                     children: [
-                      hero,
                       if (showFoundationsCard) ...[
-                        const SizedBox(height: 10),
                         foundationsCard,
+                        const SizedBox(height: 10),
                       ],
+                      hero,
                       const SizedBox(height: 10),
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 14),
@@ -413,7 +413,7 @@ class _FoundationsFeaturedCard extends StatelessWidget {
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
-                      '${language.foundationsTitle} - Báº£ng chá»¯ Hiragana / Katakana / HÃ¡n Viá»‡t',
+                      '${language.foundationsTitle} - Bảng chữ Hiragana / Katakana / Hán Việt',
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w900,
                         color: palette.ink,
@@ -429,6 +429,15 @@ class _FoundationsFeaturedCard extends StatelessWidget {
                 label:
                     '${progress.studiedCount}/$foundationsKanaTotal kana (${(progress.percentComplete * 100).round()}%)',
               ),
+              const SizedBox(height: 12),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: FilledButton.icon(
+                  onPressed: context.openFoundations,
+                  icon: const Icon(Icons.play_arrow_rounded),
+                  label: Text(_foundationsCtaLabel(language)),
+                ),
+              ),
             ],
           ),
         ),
@@ -436,6 +445,12 @@ class _FoundationsFeaturedCard extends StatelessWidget {
     );
   }
 }
+
+String _foundationsCtaLabel(AppLanguage language) => switch (language) {
+  AppLanguage.en => 'Start with kana',
+  AppLanguage.vi => 'Bắt đầu với bảng chữ',
+  AppLanguage.ja => 'かなから始める',
+};
 
 class _DojoHeroCard extends StatelessWidget {
   const _DojoHeroCard({
