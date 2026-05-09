@@ -1089,6 +1089,518 @@ class KanjiSrsStateCompanion extends UpdateCompanion<KanjiSrsStateData> {
   }
 }
 
+class $KanaSrsStateTable extends KanaSrsState
+    with TableInfo<$KanaSrsStateTable, KanaSrsStateData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $KanaSrsStateTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _kanaMeta = const VerificationMeta('kana');
+  @override
+  late final GeneratedColumn<String> kana = GeneratedColumn<String>(
+    'kana',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _scriptMeta = const VerificationMeta('script');
+  @override
+  late final GeneratedColumn<String> script = GeneratedColumn<String>(
+    'script',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _repsMeta = const VerificationMeta('reps');
+  @override
+  late final GeneratedColumn<int> reps = GeneratedColumn<int>(
+    'reps',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _lapsesMeta = const VerificationMeta('lapses');
+  @override
+  late final GeneratedColumn<int> lapses = GeneratedColumn<int>(
+    'lapses',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _stabilityMeta = const VerificationMeta(
+    'stability',
+  );
+  @override
+  late final GeneratedColumn<double> stability = GeneratedColumn<double>(
+    'stability',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0.0),
+  );
+  static const VerificationMeta _difficultyMeta = const VerificationMeta(
+    'difficulty',
+  );
+  @override
+  late final GeneratedColumn<double> difficulty = GeneratedColumn<double>(
+    'difficulty',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0.0),
+  );
+  static const VerificationMeta _dueAtMeta = const VerificationMeta('dueAt');
+  @override
+  late final GeneratedColumn<DateTime> dueAt = GeneratedColumn<DateTime>(
+    'due_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _lastReviewedAtMeta = const VerificationMeta(
+    'lastReviewedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> lastReviewedAt =
+      GeneratedColumn<DateTime>(
+        'last_reviewed_at',
+        aliasedName,
+        true,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+      );
+  @override
+  List<GeneratedColumn> get $columns => [
+    kana,
+    script,
+    reps,
+    lapses,
+    stability,
+    difficulty,
+    dueAt,
+    lastReviewedAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'kana_srs_state';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<KanaSrsStateData> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('kana')) {
+      context.handle(
+        _kanaMeta,
+        kana.isAcceptableOrUnknown(data['kana']!, _kanaMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_kanaMeta);
+    }
+    if (data.containsKey('script')) {
+      context.handle(
+        _scriptMeta,
+        script.isAcceptableOrUnknown(data['script']!, _scriptMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_scriptMeta);
+    }
+    if (data.containsKey('reps')) {
+      context.handle(
+        _repsMeta,
+        reps.isAcceptableOrUnknown(data['reps']!, _repsMeta),
+      );
+    }
+    if (data.containsKey('lapses')) {
+      context.handle(
+        _lapsesMeta,
+        lapses.isAcceptableOrUnknown(data['lapses']!, _lapsesMeta),
+      );
+    }
+    if (data.containsKey('stability')) {
+      context.handle(
+        _stabilityMeta,
+        stability.isAcceptableOrUnknown(data['stability']!, _stabilityMeta),
+      );
+    }
+    if (data.containsKey('difficulty')) {
+      context.handle(
+        _difficultyMeta,
+        difficulty.isAcceptableOrUnknown(data['difficulty']!, _difficultyMeta),
+      );
+    }
+    if (data.containsKey('due_at')) {
+      context.handle(
+        _dueAtMeta,
+        dueAt.isAcceptableOrUnknown(data['due_at']!, _dueAtMeta),
+      );
+    }
+    if (data.containsKey('last_reviewed_at')) {
+      context.handle(
+        _lastReviewedAtMeta,
+        lastReviewedAt.isAcceptableOrUnknown(
+          data['last_reviewed_at']!,
+          _lastReviewedAtMeta,
+        ),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {kana};
+  @override
+  KanaSrsStateData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return KanaSrsStateData(
+      kana: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}kana'],
+      )!,
+      script: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}script'],
+      )!,
+      reps: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}reps'],
+      )!,
+      lapses: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}lapses'],
+      )!,
+      stability: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}stability'],
+      )!,
+      difficulty: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}difficulty'],
+      )!,
+      dueAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}due_at'],
+      ),
+      lastReviewedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}last_reviewed_at'],
+      ),
+    );
+  }
+
+  @override
+  $KanaSrsStateTable createAlias(String alias) {
+    return $KanaSrsStateTable(attachedDatabase, alias);
+  }
+}
+
+class KanaSrsStateData extends DataClass
+    implements Insertable<KanaSrsStateData> {
+  final String kana;
+  final String script;
+  final int reps;
+  final int lapses;
+  final double stability;
+  final double difficulty;
+  final DateTime? dueAt;
+  final DateTime? lastReviewedAt;
+  const KanaSrsStateData({
+    required this.kana,
+    required this.script,
+    required this.reps,
+    required this.lapses,
+    required this.stability,
+    required this.difficulty,
+    this.dueAt,
+    this.lastReviewedAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['kana'] = Variable<String>(kana);
+    map['script'] = Variable<String>(script);
+    map['reps'] = Variable<int>(reps);
+    map['lapses'] = Variable<int>(lapses);
+    map['stability'] = Variable<double>(stability);
+    map['difficulty'] = Variable<double>(difficulty);
+    if (!nullToAbsent || dueAt != null) {
+      map['due_at'] = Variable<DateTime>(dueAt);
+    }
+    if (!nullToAbsent || lastReviewedAt != null) {
+      map['last_reviewed_at'] = Variable<DateTime>(lastReviewedAt);
+    }
+    return map;
+  }
+
+  KanaSrsStateCompanion toCompanion(bool nullToAbsent) {
+    return KanaSrsStateCompanion(
+      kana: Value(kana),
+      script: Value(script),
+      reps: Value(reps),
+      lapses: Value(lapses),
+      stability: Value(stability),
+      difficulty: Value(difficulty),
+      dueAt: dueAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(dueAt),
+      lastReviewedAt: lastReviewedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(lastReviewedAt),
+    );
+  }
+
+  factory KanaSrsStateData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return KanaSrsStateData(
+      kana: serializer.fromJson<String>(json['kana']),
+      script: serializer.fromJson<String>(json['script']),
+      reps: serializer.fromJson<int>(json['reps']),
+      lapses: serializer.fromJson<int>(json['lapses']),
+      stability: serializer.fromJson<double>(json['stability']),
+      difficulty: serializer.fromJson<double>(json['difficulty']),
+      dueAt: serializer.fromJson<DateTime?>(json['dueAt']),
+      lastReviewedAt: serializer.fromJson<DateTime?>(json['lastReviewedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'kana': serializer.toJson<String>(kana),
+      'script': serializer.toJson<String>(script),
+      'reps': serializer.toJson<int>(reps),
+      'lapses': serializer.toJson<int>(lapses),
+      'stability': serializer.toJson<double>(stability),
+      'difficulty': serializer.toJson<double>(difficulty),
+      'dueAt': serializer.toJson<DateTime?>(dueAt),
+      'lastReviewedAt': serializer.toJson<DateTime?>(lastReviewedAt),
+    };
+  }
+
+  KanaSrsStateData copyWith({
+    String? kana,
+    String? script,
+    int? reps,
+    int? lapses,
+    double? stability,
+    double? difficulty,
+    Value<DateTime?> dueAt = const Value.absent(),
+    Value<DateTime?> lastReviewedAt = const Value.absent(),
+  }) => KanaSrsStateData(
+    kana: kana ?? this.kana,
+    script: script ?? this.script,
+    reps: reps ?? this.reps,
+    lapses: lapses ?? this.lapses,
+    stability: stability ?? this.stability,
+    difficulty: difficulty ?? this.difficulty,
+    dueAt: dueAt.present ? dueAt.value : this.dueAt,
+    lastReviewedAt: lastReviewedAt.present
+        ? lastReviewedAt.value
+        : this.lastReviewedAt,
+  );
+  KanaSrsStateData copyWithCompanion(KanaSrsStateCompanion data) {
+    return KanaSrsStateData(
+      kana: data.kana.present ? data.kana.value : this.kana,
+      script: data.script.present ? data.script.value : this.script,
+      reps: data.reps.present ? data.reps.value : this.reps,
+      lapses: data.lapses.present ? data.lapses.value : this.lapses,
+      stability: data.stability.present ? data.stability.value : this.stability,
+      difficulty: data.difficulty.present
+          ? data.difficulty.value
+          : this.difficulty,
+      dueAt: data.dueAt.present ? data.dueAt.value : this.dueAt,
+      lastReviewedAt: data.lastReviewedAt.present
+          ? data.lastReviewedAt.value
+          : this.lastReviewedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('KanaSrsStateData(')
+          ..write('kana: $kana, ')
+          ..write('script: $script, ')
+          ..write('reps: $reps, ')
+          ..write('lapses: $lapses, ')
+          ..write('stability: $stability, ')
+          ..write('difficulty: $difficulty, ')
+          ..write('dueAt: $dueAt, ')
+          ..write('lastReviewedAt: $lastReviewedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    kana,
+    script,
+    reps,
+    lapses,
+    stability,
+    difficulty,
+    dueAt,
+    lastReviewedAt,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is KanaSrsStateData &&
+          other.kana == this.kana &&
+          other.script == this.script &&
+          other.reps == this.reps &&
+          other.lapses == this.lapses &&
+          other.stability == this.stability &&
+          other.difficulty == this.difficulty &&
+          other.dueAt == this.dueAt &&
+          other.lastReviewedAt == this.lastReviewedAt);
+}
+
+class KanaSrsStateCompanion extends UpdateCompanion<KanaSrsStateData> {
+  final Value<String> kana;
+  final Value<String> script;
+  final Value<int> reps;
+  final Value<int> lapses;
+  final Value<double> stability;
+  final Value<double> difficulty;
+  final Value<DateTime?> dueAt;
+  final Value<DateTime?> lastReviewedAt;
+  final Value<int> rowid;
+  const KanaSrsStateCompanion({
+    this.kana = const Value.absent(),
+    this.script = const Value.absent(),
+    this.reps = const Value.absent(),
+    this.lapses = const Value.absent(),
+    this.stability = const Value.absent(),
+    this.difficulty = const Value.absent(),
+    this.dueAt = const Value.absent(),
+    this.lastReviewedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  KanaSrsStateCompanion.insert({
+    required String kana,
+    required String script,
+    this.reps = const Value.absent(),
+    this.lapses = const Value.absent(),
+    this.stability = const Value.absent(),
+    this.difficulty = const Value.absent(),
+    this.dueAt = const Value.absent(),
+    this.lastReviewedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : kana = Value(kana),
+       script = Value(script);
+  static Insertable<KanaSrsStateData> custom({
+    Expression<String>? kana,
+    Expression<String>? script,
+    Expression<int>? reps,
+    Expression<int>? lapses,
+    Expression<double>? stability,
+    Expression<double>? difficulty,
+    Expression<DateTime>? dueAt,
+    Expression<DateTime>? lastReviewedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (kana != null) 'kana': kana,
+      if (script != null) 'script': script,
+      if (reps != null) 'reps': reps,
+      if (lapses != null) 'lapses': lapses,
+      if (stability != null) 'stability': stability,
+      if (difficulty != null) 'difficulty': difficulty,
+      if (dueAt != null) 'due_at': dueAt,
+      if (lastReviewedAt != null) 'last_reviewed_at': lastReviewedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  KanaSrsStateCompanion copyWith({
+    Value<String>? kana,
+    Value<String>? script,
+    Value<int>? reps,
+    Value<int>? lapses,
+    Value<double>? stability,
+    Value<double>? difficulty,
+    Value<DateTime?>? dueAt,
+    Value<DateTime?>? lastReviewedAt,
+    Value<int>? rowid,
+  }) {
+    return KanaSrsStateCompanion(
+      kana: kana ?? this.kana,
+      script: script ?? this.script,
+      reps: reps ?? this.reps,
+      lapses: lapses ?? this.lapses,
+      stability: stability ?? this.stability,
+      difficulty: difficulty ?? this.difficulty,
+      dueAt: dueAt ?? this.dueAt,
+      lastReviewedAt: lastReviewedAt ?? this.lastReviewedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (kana.present) {
+      map['kana'] = Variable<String>(kana.value);
+    }
+    if (script.present) {
+      map['script'] = Variable<String>(script.value);
+    }
+    if (reps.present) {
+      map['reps'] = Variable<int>(reps.value);
+    }
+    if (lapses.present) {
+      map['lapses'] = Variable<int>(lapses.value);
+    }
+    if (stability.present) {
+      map['stability'] = Variable<double>(stability.value);
+    }
+    if (difficulty.present) {
+      map['difficulty'] = Variable<double>(difficulty.value);
+    }
+    if (dueAt.present) {
+      map['due_at'] = Variable<DateTime>(dueAt.value);
+    }
+    if (lastReviewedAt.present) {
+      map['last_reviewed_at'] = Variable<DateTime>(lastReviewedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('KanaSrsStateCompanion(')
+          ..write('kana: $kana, ')
+          ..write('script: $script, ')
+          ..write('reps: $reps, ')
+          ..write('lapses: $lapses, ')
+          ..write('stability: $stability, ')
+          ..write('difficulty: $difficulty, ')
+          ..write('dueAt: $dueAt, ')
+          ..write('lastReviewedAt: $lastReviewedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 class $UserProgressTable extends UserProgress
     with TableInfo<$UserProgressTable, UserProgressData> {
   @override
@@ -11352,6 +11864,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
   late final $SrsStateTable srsState = $SrsStateTable(this);
   late final $KanjiSrsStateTable kanjiSrsState = $KanjiSrsStateTable(this);
+  late final $KanaSrsStateTable kanaSrsState = $KanaSrsStateTable(this);
   late final $UserProgressTable userProgress = $UserProgressTable(this);
   late final $AttemptTable attempt = $AttemptTable(this);
   late final $AttemptAnswerTable attemptAnswer = $AttemptAnswerTable(this);
@@ -11386,6 +11899,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final GrammarDao grammarDao = GrammarDao(this as AppDatabase);
   late final MistakeDao mistakeDao = MistakeDao(this as AppDatabase);
   late final KanjiSrsDao kanjiSrsDao = KanjiSrsDao(this as AppDatabase);
+  late final KanaSrsDao kanaSrsDao = KanaSrsDao(this as AppDatabase);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -11393,6 +11907,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   List<DatabaseSchemaEntity> get allSchemaEntities => [
     srsState,
     kanjiSrsState,
+    kanaSrsState,
     userProgress,
     attempt,
     attemptAnswer,
@@ -11979,6 +12494,267 @@ typedef $$KanjiSrsStateTableProcessedTableManager =
         BaseReferences<_$AppDatabase, $KanjiSrsStateTable, KanjiSrsStateData>,
       ),
       KanjiSrsStateData,
+      PrefetchHooks Function()
+    >;
+typedef $$KanaSrsStateTableCreateCompanionBuilder =
+    KanaSrsStateCompanion Function({
+      required String kana,
+      required String script,
+      Value<int> reps,
+      Value<int> lapses,
+      Value<double> stability,
+      Value<double> difficulty,
+      Value<DateTime?> dueAt,
+      Value<DateTime?> lastReviewedAt,
+      Value<int> rowid,
+    });
+typedef $$KanaSrsStateTableUpdateCompanionBuilder =
+    KanaSrsStateCompanion Function({
+      Value<String> kana,
+      Value<String> script,
+      Value<int> reps,
+      Value<int> lapses,
+      Value<double> stability,
+      Value<double> difficulty,
+      Value<DateTime?> dueAt,
+      Value<DateTime?> lastReviewedAt,
+      Value<int> rowid,
+    });
+
+class $$KanaSrsStateTableFilterComposer
+    extends Composer<_$AppDatabase, $KanaSrsStateTable> {
+  $$KanaSrsStateTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get kana => $composableBuilder(
+    column: $table.kana,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get script => $composableBuilder(
+    column: $table.script,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get reps => $composableBuilder(
+    column: $table.reps,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get lapses => $composableBuilder(
+    column: $table.lapses,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get stability => $composableBuilder(
+    column: $table.stability,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<double> get difficulty => $composableBuilder(
+    column: $table.difficulty,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get dueAt => $composableBuilder(
+    column: $table.dueAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get lastReviewedAt => $composableBuilder(
+    column: $table.lastReviewedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$KanaSrsStateTableOrderingComposer
+    extends Composer<_$AppDatabase, $KanaSrsStateTable> {
+  $$KanaSrsStateTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get kana => $composableBuilder(
+    column: $table.kana,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get script => $composableBuilder(
+    column: $table.script,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get reps => $composableBuilder(
+    column: $table.reps,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get lapses => $composableBuilder(
+    column: $table.lapses,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get stability => $composableBuilder(
+    column: $table.stability,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<double> get difficulty => $composableBuilder(
+    column: $table.difficulty,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get dueAt => $composableBuilder(
+    column: $table.dueAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get lastReviewedAt => $composableBuilder(
+    column: $table.lastReviewedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$KanaSrsStateTableAnnotationComposer
+    extends Composer<_$AppDatabase, $KanaSrsStateTable> {
+  $$KanaSrsStateTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get kana =>
+      $composableBuilder(column: $table.kana, builder: (column) => column);
+
+  GeneratedColumn<String> get script =>
+      $composableBuilder(column: $table.script, builder: (column) => column);
+
+  GeneratedColumn<int> get reps =>
+      $composableBuilder(column: $table.reps, builder: (column) => column);
+
+  GeneratedColumn<int> get lapses =>
+      $composableBuilder(column: $table.lapses, builder: (column) => column);
+
+  GeneratedColumn<double> get stability =>
+      $composableBuilder(column: $table.stability, builder: (column) => column);
+
+  GeneratedColumn<double> get difficulty => $composableBuilder(
+    column: $table.difficulty,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get dueAt =>
+      $composableBuilder(column: $table.dueAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get lastReviewedAt => $composableBuilder(
+    column: $table.lastReviewedAt,
+    builder: (column) => column,
+  );
+}
+
+class $$KanaSrsStateTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $KanaSrsStateTable,
+          KanaSrsStateData,
+          $$KanaSrsStateTableFilterComposer,
+          $$KanaSrsStateTableOrderingComposer,
+          $$KanaSrsStateTableAnnotationComposer,
+          $$KanaSrsStateTableCreateCompanionBuilder,
+          $$KanaSrsStateTableUpdateCompanionBuilder,
+          (
+            KanaSrsStateData,
+            BaseReferences<_$AppDatabase, $KanaSrsStateTable, KanaSrsStateData>,
+          ),
+          KanaSrsStateData,
+          PrefetchHooks Function()
+        > {
+  $$KanaSrsStateTableTableManager(_$AppDatabase db, $KanaSrsStateTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$KanaSrsStateTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$KanaSrsStateTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$KanaSrsStateTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> kana = const Value.absent(),
+                Value<String> script = const Value.absent(),
+                Value<int> reps = const Value.absent(),
+                Value<int> lapses = const Value.absent(),
+                Value<double> stability = const Value.absent(),
+                Value<double> difficulty = const Value.absent(),
+                Value<DateTime?> dueAt = const Value.absent(),
+                Value<DateTime?> lastReviewedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => KanaSrsStateCompanion(
+                kana: kana,
+                script: script,
+                reps: reps,
+                lapses: lapses,
+                stability: stability,
+                difficulty: difficulty,
+                dueAt: dueAt,
+                lastReviewedAt: lastReviewedAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String kana,
+                required String script,
+                Value<int> reps = const Value.absent(),
+                Value<int> lapses = const Value.absent(),
+                Value<double> stability = const Value.absent(),
+                Value<double> difficulty = const Value.absent(),
+                Value<DateTime?> dueAt = const Value.absent(),
+                Value<DateTime?> lastReviewedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => KanaSrsStateCompanion.insert(
+                kana: kana,
+                script: script,
+                reps: reps,
+                lapses: lapses,
+                stability: stability,
+                difficulty: difficulty,
+                dueAt: dueAt,
+                lastReviewedAt: lastReviewedAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$KanaSrsStateTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $KanaSrsStateTable,
+      KanaSrsStateData,
+      $$KanaSrsStateTableFilterComposer,
+      $$KanaSrsStateTableOrderingComposer,
+      $$KanaSrsStateTableAnnotationComposer,
+      $$KanaSrsStateTableCreateCompanionBuilder,
+      $$KanaSrsStateTableUpdateCompanionBuilder,
+      (
+        KanaSrsStateData,
+        BaseReferences<_$AppDatabase, $KanaSrsStateTable, KanaSrsStateData>,
+      ),
+      KanaSrsStateData,
       PrefetchHooks Function()
     >;
 typedef $$UserProgressTableCreateCompanionBuilder =
@@ -18653,6 +19429,8 @@ class $AppDatabaseManager {
       $$SrsStateTableTableManager(_db, _db.srsState);
   $$KanjiSrsStateTableTableManager get kanjiSrsState =>
       $$KanjiSrsStateTableTableManager(_db, _db.kanjiSrsState);
+  $$KanaSrsStateTableTableManager get kanaSrsState =>
+      $$KanaSrsStateTableTableManager(_db, _db.kanaSrsState);
   $$UserProgressTableTableManager get userProgress =>
       $$UserProgressTableTableManager(_db, _db.userProgress);
   $$AttemptTableTableManager get attempt =>

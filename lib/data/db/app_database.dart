@@ -5,6 +5,7 @@ import '../daos/achievement_dao.dart';
 import '../daos/grammar_dao.dart';
 import '../daos/mistake_dao.dart';
 import '../daos/kanji_srs_dao.dart';
+import '../daos/kana_srs_dao.dart';
 
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
@@ -18,10 +19,25 @@ import 'tables.dart';
 
 part 'app_database.g.dart';
 
+class KanaSrsState extends Table {
+  TextColumn get kana => text()();
+  TextColumn get script => text()();
+  IntColumn get reps => integer().withDefault(const Constant(0))();
+  IntColumn get lapses => integer().withDefault(const Constant(0))();
+  RealColumn get stability => real().withDefault(const Constant(0.0))();
+  RealColumn get difficulty => real().withDefault(const Constant(0.0))();
+  DateTimeColumn get dueAt => dateTime().nullable()();
+  DateTimeColumn get lastReviewedAt => dateTime().nullable()();
+
+  @override
+  Set<Column> get primaryKey => {kana};
+}
+
 @DriftDatabase(
   tables: [
     SrsState,
     KanjiSrsState,
+    KanaSrsState,
     UserProgress,
     Attempt,
     AttemptAnswer,
@@ -54,13 +70,14 @@ part 'app_database.g.dart';
     GrammarDao,
     MistakeDao,
     KanjiSrsDao,
+    KanaSrsDao,
   ],
 )
 class AppDatabase extends _$AppDatabase {
   AppDatabase({QueryExecutor? executor}) : super(executor ?? _openConnection());
 
   @override
-  int get schemaVersion => 28;
+  int get schemaVersion => 29;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -287,6 +304,12 @@ class AppDatabase extends _$AppDatabase {
       if (from < 28) {
         await _createSessionIndexes();
       }
+      if (from < 29) {
+        await migrator.createTable(kanaSrsState);
+        await customStatement(
+          'CREATE INDEX IF NOT EXISTS idx_kana_srs_due_at ON kana_srs_state(due_at)',
+        );
+      }
     },
     beforeOpen: (details) async {
       // Only reseed on first install or after an upgrade â€” on routine opens
@@ -308,6 +331,9 @@ class AppDatabase extends _$AppDatabase {
     );
     await customStatement(
       'CREATE INDEX IF NOT EXISTS idx_kanji_srs_next_review ON kanji_srs_state(next_review_at)',
+    );
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_kana_srs_due_at ON kana_srs_state(due_at)',
     );
     // Grammar lookup indexes â€” queried by level on every practice screen open.
     await customStatement(
