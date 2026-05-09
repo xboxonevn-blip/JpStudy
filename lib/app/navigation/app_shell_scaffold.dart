@@ -75,66 +75,28 @@ class AppShellScaffold extends ConsumerWidget {
 
         return Scaffold(
           backgroundColor: palette.bg,
-          extendBody: true,
-          body: Column(
-            children: [
-              const SafeArea(bottom: false, child: GlobalTopBar()),
-              Expanded(child: navigationShell),
-            ],
-          ),
-          bottomNavigationBar: SafeArea(
-            top: false,
-            minimum: const EdgeInsets.only(bottom: 12),
-            child: AppResponsiveFrame(
-              maxWidth: 980,
-              minHorizontalPadding: 12,
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [palette.elevated, palette.base],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
+          body: SafeArea(
+            child: Column(
+              children: [
+                const GlobalTopBar(),
+                Expanded(child: navigationShell),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8, bottom: 12),
+                  child: _MobileNavigationBar(
+                    language: language,
+                    bottomItems: bottomItems,
+                    selectedIndex: bottomSelected,
+                    onDestinationSelected: (index) {
+                      if (index < 4) {
+                        final branch = const [3, 4, 0, 6][index];
+                        _goToBranch(branch);
+                        return;
+                      }
+                      _showMoreSheet(context, items);
+                    },
                   ),
-                  borderRadius: BorderRadius.circular(30),
-                  border: Border.all(color: palette.outline),
-                  boxShadow: [
-                    BoxShadow(
-                      color: palette.primary.withValues(alpha: 0.10),
-                      blurRadius: 24,
-                      offset: const Offset(0, 12),
-                    ),
-                  ],
                 ),
-                child: NavigationBar(
-                  selectedIndex: bottomSelected,
-                  onDestinationSelected: (index) {
-                    if (index < 4) {
-                      final branch = const [3, 4, 0, 6][index];
-                      _goToBranch(branch);
-                      return;
-                    }
-                    _showMoreSheet(context, items);
-                  },
-                  height: 82,
-                  backgroundColor: Colors.transparent,
-                  indicatorColor: palette.primary.withValues(alpha: 0.14),
-                  destinations: [
-                    for (final item in bottomItems)
-                      NavigationDestination(
-                        icon: Icon(item.icon),
-                        selectedIcon: Icon(item.selectedIcon),
-                        label: item.label,
-                      ),
-                    NavigationDestination(
-                      icon: const Icon(Icons.dashboard_customize_outlined),
-                      selectedIcon: const Icon(
-                        Icons.dashboard_customize_rounded,
-                      ),
-                      label: _moreLabel(language),
-                    ),
-                  ],
-                ),
-              ),
+              ],
             ),
           ),
         );
@@ -235,6 +197,67 @@ class AppShellScaffold extends ConsumerWidget {
         selectedIcon: Icons.forum_rounded,
       ),
     ];
+  }
+}
+
+class _MobileNavigationBar extends StatelessWidget {
+  const _MobileNavigationBar({
+    required this.language,
+    required this.bottomItems,
+    required this.selectedIndex,
+    required this.onDestinationSelected,
+  });
+
+  final AppLanguage language;
+  final List<_ShellItem> bottomItems;
+  final int selectedIndex;
+  final ValueChanged<int> onDestinationSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return AppResponsiveFrame(
+      maxWidth: 980,
+      minHorizontalPadding: 12,
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [palette.elevated, palette.base],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(30),
+          border: Border.all(color: palette.outline),
+          boxShadow: [
+            BoxShadow(
+              color: palette.primary.withValues(alpha: 0.10),
+              blurRadius: 24,
+              offset: const Offset(0, 12),
+            ),
+          ],
+        ),
+        child: NavigationBar(
+          selectedIndex: selectedIndex,
+          onDestinationSelected: onDestinationSelected,
+          height: 82,
+          backgroundColor: Colors.transparent,
+          indicatorColor: palette.primary.withValues(alpha: 0.14),
+          destinations: [
+            for (final item in bottomItems)
+              NavigationDestination(
+                icon: Icon(item.icon),
+                selectedIcon: Icon(item.selectedIcon),
+                label: item.label,
+              ),
+            NavigationDestination(
+              icon: const Icon(Icons.dashboard_customize_outlined),
+              selectedIcon: const Icon(Icons.dashboard_customize_rounded),
+              label: _moreLabel(language),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
