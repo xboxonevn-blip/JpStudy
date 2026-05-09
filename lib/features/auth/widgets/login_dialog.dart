@@ -32,16 +32,7 @@ class _LoginDialogState extends ConsumerState<LoginDialog> {
   late final TextEditingController _passwordController;
   bool _obscurePassword = true;
   bool _busy = false;
-
-  void _showSnackAfterDismiss(
-    ScaffoldMessengerState messenger,
-    String message,
-  ) {
-    Navigator.of(context).pop();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      messenger.showSnackBar(SnackBar(content: Text(message)));
-    });
-  }
+  String? _inlineError;
 
   @override
   void initState() {
@@ -80,7 +71,10 @@ class _LoginDialogState extends ConsumerState<LoginDialog> {
 
   Future<void> _handleGoogleSignIn(AppLanguage language) async {
     if (_busy) return;
-    setState(() => _busy = true);
+    setState(() {
+      _busy = true;
+      _inlineError = null;
+    });
     try {
       final service = ref.read(authServiceProvider);
       await service.signInWithGoogle();
@@ -89,9 +83,7 @@ class _LoginDialogState extends ConsumerState<LoginDialog> {
     } on AuthException catch (e) {
       if (!mounted) return;
       if (e.kind != AuthErrorKind.cancelledByUser) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(_errorMessage(e.kind, language))),
-        );
+        setState(() => _inlineError = _errorMessage(e.kind, language));
       }
     } finally {
       if (mounted) setState(() => _busy = false);
@@ -103,27 +95,40 @@ class _LoginDialogState extends ConsumerState<LoginDialog> {
     final messenger = widget.messenger ?? ScaffoldMessenger.of(context);
     if (_emailController.text.trim().isEmpty ||
         _passwordController.text.isEmpty) {
-      messenger.showSnackBar(SnackBar(content: Text(language.loginEmptyFieldLabel)));
+      setState(() => _inlineError = language.loginEmptyFieldLabel);
+      messenger.showSnackBar(
+        SnackBar(content: Text(language.loginEmptyFieldLabel)),
+      );
       return;
     }
-    setState(() => _busy = true);
+    setState(() {
+      _busy = true;
+      _inlineError = null;
+    });
     try {
       final service = ref.read(authServiceProvider);
-      await service.signInWithEmail(
+      final user = await service.signInWithEmail(
         email: _emailController.text,
         password: _passwordController.text,
       );
+      if (!user.emailVerified) {
+        await service.sendEmailVerification();
+        messenger.showSnackBar(
+          SnackBar(content: Text(language.authEmailVerificationSentLabel)),
+        );
+      }
       if (!mounted) return;
       Navigator.of(context).pop();
     } on AuthException catch (e) {
       if (!mounted) return;
-      _showSnackAfterDismiss(messenger, _errorMessage(e.kind, language));
+      final message = _errorMessage(e.kind, language);
+      setState(() => _inlineError = message);
+      messenger.showSnackBar(SnackBar(content: Text(message)));
     } catch (_) {
       if (!mounted) return;
-      _showSnackAfterDismiss(
-        messenger,
-        _errorMessage(AuthErrorKind.unknown, language),
-      );
+      final message = _errorMessage(AuthErrorKind.unknown, language);
+      setState(() => _inlineError = message);
+      messenger.showSnackBar(SnackBar(content: Text(message)));
     } finally {
       if (mounted) setState(() => _busy = false);
     }
@@ -209,6 +214,16 @@ class _LoginDialogState extends ConsumerState<LoginDialog> {
                   },
                 ),
               ),
+              if (_inlineError != null) ...[
+                const SizedBox(height: AppSpacing.sm),
+                Text(
+                  _inlineError!,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: palette.error,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
               const SizedBox(height: AppSpacing.lg),
               SizedBox(
                 height: 48,

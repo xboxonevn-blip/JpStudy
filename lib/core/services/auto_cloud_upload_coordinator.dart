@@ -73,6 +73,11 @@ class AutoCloudUploadCoordinator {
           return 'uploaded';
         case CloudStorageUploadDecision.notSignedIn:
           return 'notSignedIn';
+        case CloudStorageUploadDecision.emailNotVerified:
+          return 'notSignedIn';
+        case CloudStorageUploadDecision.payloadTooLarge:
+          debugPrint('Auto cloud upload failed: payloadTooLarge');
+          return 'failed';
         case CloudStorageUploadDecision.writeFailed:
           debugPrint('Auto cloud upload failed: writeFailed');
           return 'failed';

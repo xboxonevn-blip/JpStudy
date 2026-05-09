@@ -36,6 +36,12 @@ class FakeAuthService implements AuthService {
   AuthUser? get currentUser => _currentUser;
 
   @override
+  Future<AuthUser?> reloadCurrentUser() async => _currentUser;
+
+  @override
+  Future<void> sendEmailVerification() async {}
+
+  @override
   bool get isGoogleSignInSupported => true;
 
   @override
@@ -84,6 +90,7 @@ class FakeAuthService implements AuthService {
 const _testUser = AuthUser(
   uid: 'uid-1',
   email: 'user@example.com',
+  emailVerified: true,
   displayName: 'Test User',
 );
 
@@ -215,7 +222,7 @@ void main() {
 
       await tester.tap(find.widgetWithText(ElevatedButton, 'Đăng nhập'));
       await tester.pumpAndSettle();
-      expect(find.text('Vui lòng điền đầy đủ cả hai ô.'), findsOneWidget);
+      expect(find.text('Vui lòng điền đầy đủ cả hai ô.'), findsWidgets);
       expect(fake.emailCalls, 0);
     },
   );
@@ -256,8 +263,8 @@ void main() {
     await tester.tap(find.widgetWithText(ElevatedButton, 'Đăng nhập'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Email hoặc mật khẩu không đúng.'), findsOneWidget);
-    expect(find.byType(LoginDialog), findsNothing);
+    expect(find.text('Email hoặc mật khẩu không đúng.'), findsWidgets);
+    expect(find.byType(LoginDialog), findsOneWidget);
   });
 
   testWidgets('submit surfaces unknown snackbar for AuthException unknown', (
@@ -278,8 +285,8 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text(AppLanguage.vi.authUnknownErrorLabel), findsOneWidget);
-    expect(find.byType(LoginDialog), findsNothing);
+    expect(find.text(AppLanguage.vi.authUnknownErrorLabel), findsWidgets);
+    expect(find.byType(LoginDialog), findsOneWidget);
   });
 
   testWidgets(
@@ -300,8 +307,8 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(find.text(AppLanguage.vi.authUnknownErrorLabel), findsOneWidget);
-      expect(find.byType(LoginDialog), findsNothing);
+      expect(find.text(AppLanguage.vi.authUnknownErrorLabel), findsWidgets);
+      expect(find.byType(LoginDialog), findsOneWidget);
     },
   );
 

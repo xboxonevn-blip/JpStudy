@@ -56,6 +56,19 @@ class AuthService {
 
   AuthUser? get currentUser => _mapUser(_auth.currentUser);
 
+  Future<AuthUser?> reloadCurrentUser() async {
+    final user = _auth.currentUser;
+    if (user == null) return null;
+    await user.reload();
+    return _mapUser(_auth.currentUser);
+  }
+
+  Future<void> sendEmailVerification() async {
+    final user = _auth.currentUser;
+    if (user == null || user.emailVerified) return;
+    await user.sendEmailVerification();
+  }
+
   /// Whether Google sign-in is supported on the current platform.
   /// Windows desktop has no `google_sign_in` plugin and Firebase Web popup
   /// requires a browser context, so we gate the UI accordingly. Instance
@@ -158,6 +171,7 @@ class AuthService {
     return AuthUser(
       uid: user.uid,
       email: user.email,
+      emailVerified: user.emailVerified,
       displayName: user.displayName,
       photoUrl: user.photoURL,
     );

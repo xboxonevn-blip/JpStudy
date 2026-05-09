@@ -6,7 +6,13 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 import 'backup_sync_service.dart';
 
-enum CloudStorageUploadDecision { uploaded, notSignedIn, writeFailed }
+enum CloudStorageUploadDecision {
+  uploaded,
+  notSignedIn,
+  emailNotVerified,
+  payloadTooLarge,
+  writeFailed,
+}
 
 enum CloudStorageDownloadDecision {
   apply,
@@ -14,10 +20,19 @@ enum CloudStorageDownloadDecision {
   invalidChecksum,
   invalidFormat,
   notSignedIn,
+  emailNotVerified,
   noRemoteFile,
   readFailed,
   requiresPassphrase,
   decryptionFailed,
+}
+
+enum CloudStorageDeleteDecision {
+  deleted,
+  notSignedIn,
+  emailNotVerified,
+  noRemoteFile,
+  deleteFailed,
 }
 
 class CloudStorageUploadResult {
@@ -39,6 +54,13 @@ class CloudStorageDownloadResult {
   final DateTime? remoteExportedAt;
 }
 
+class CloudStorageDeleteResult {
+  const CloudStorageDeleteResult({required this.decision, this.path});
+
+  final CloudStorageDeleteDecision decision;
+  final String? path;
+}
+
 /// Reads and writes the current user's encrypted backup envelope to Firebase
 /// Storage at `users/{uid}/backup.json`. Storage Security Rules ensure no
 /// other user can access this path.
@@ -55,26 +77,43 @@ class CloudStorageSyncService {
   final fb_auth.FirebaseAuth _auth;
   final FirebaseStorage _storage;
 
+  static const maxBackupBytes = 5 * 1024 * 1024;
   static const _backupFileName = 'backup.json';
 
-  String? _backupPathForCurrentUser() {
+  ({String path, bool emailVerified})? _backupPathForCurrentUser() {
     final user = _auth.currentUser;
     if (user == null) return null;
-    return 'users/${user.uid}/$_backupFileName';
+    return (
+      path: 'users/${user.uid}/$_backupFileName',
+      emailVerified: user.emailVerified,
+    );
   }
 
   Future<CloudStorageUploadResult> uploadEnvelope(
     Map<String, dynamic> envelope,
   ) async {
-    final path = _backupPathForCurrentUser();
-    if (path == null) {
+    final userBackup = _backupPathForCurrentUser();
+    if (userBackup == null) {
       return const CloudStorageUploadResult(
         decision: CloudStorageUploadDecision.notSignedIn,
+      );
+    }
+    final path = userBackup.path;
+    if (!userBackup.emailVerified) {
+      return CloudStorageUploadResult(
+        decision: CloudStorageUploadDecision.emailNotVerified,
+        path: path,
       );
     }
     try {
       final ref = _storage.ref(path);
       final bytes = Uint8List.fromList(utf8.encode(jsonEncode(envelope)));
+      if (bytes.length > maxBackupBytes) {
+        return CloudStorageUploadResult(
+          decision: CloudStorageUploadDecision.payloadTooLarge,
+          path: path,
+        );
+      }
       await ref.putData(
         bytes,
         SettableMetadata(contentType: 'application/json'),
@@ -94,10 +133,16 @@ class CloudStorageSyncService {
   Future<CloudStorageDownloadResult> prepareDownload({
     String? passphrase,
   }) async {
-    final path = _backupPathForCurrentUser();
-    if (path == null) {
+    final userBackup = _backupPathForCurrentUser();
+    if (userBackup == null) {
       return const CloudStorageDownloadResult(
         decision: CloudStorageDownloadDecision.notSignedIn,
+      );
+    }
+    final path = userBackup.path;
+    if (!userBackup.emailVerified) {
+      return const CloudStorageDownloadResult(
+        decision: CloudStorageDownloadDecision.emailNotVerified,
       );
     }
 
@@ -174,5 +219,45 @@ class CloudStorageSyncService {
       payload: plan.payload,
       remoteExportedAt: plan.incomingExportedAt,
     );
+  }
+
+  Future<CloudStorageDeleteResult> deleteRemoteBackup() async {
+    final userBackup = _backupPathForCurrentUser();
+    if (userBackup == null) {
+      return const CloudStorageDeleteResult(
+        decision: CloudStorageDeleteDecision.notSignedIn,
+      );
+    }
+    final path = userBackup.path;
+    if (!userBackup.emailVerified) {
+      return CloudStorageDeleteResult(
+        decision: CloudStorageDeleteDecision.emailNotVerified,
+        path: path,
+      );
+    }
+
+    try {
+      await _storage.ref(path).delete();
+      return CloudStorageDeleteResult(
+        decision: CloudStorageDeleteDecision.deleted,
+        path: path,
+      );
+    } on FirebaseException catch (e) {
+      if (e.code == 'object-not-found') {
+        return CloudStorageDeleteResult(
+          decision: CloudStorageDeleteDecision.noRemoteFile,
+          path: path,
+        );
+      }
+      return CloudStorageDeleteResult(
+        decision: CloudStorageDeleteDecision.deleteFailed,
+        path: path,
+      );
+    } catch (_) {
+      return CloudStorageDeleteResult(
+        decision: CloudStorageDeleteDecision.deleteFailed,
+        path: path,
+      );
+    }
   }
 }

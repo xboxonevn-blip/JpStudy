@@ -1,4 +1,6 @@
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/app.dart';
@@ -18,6 +20,7 @@ Future<void> main() async {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
+    await _activateFirebaseAppCheck();
   } catch (_) {
     // Swallow: app runs in local-only mode if Firebase is unreachable.
   }
@@ -47,4 +50,28 @@ Future<void> main() async {
   }
 
   runApp(UncontrolledProviderScope(container: container, child: const App()));
+}
+
+Future<void> _activateFirebaseAppCheck() async {
+  if (kIsWeb) {
+    const siteKey = String.fromEnvironment('JPSTUDY_RECAPTCHA_SITE_KEY');
+    if (siteKey.isEmpty) return;
+    await FirebaseAppCheck.instance.activate(
+      providerWeb: ReCaptchaV3Provider(siteKey),
+    );
+    return;
+  }
+
+  switch (defaultTargetPlatform) {
+    case TargetPlatform.android:
+      await FirebaseAppCheck.instance.activate(
+        providerAndroid: const AndroidPlayIntegrityProvider(),
+      );
+    case TargetPlatform.iOS:
+      await FirebaseAppCheck.instance.activate(
+        providerApple: const AppleAppAttestWithDeviceCheckFallbackProvider(),
+      );
+    default:
+      return;
+  }
 }

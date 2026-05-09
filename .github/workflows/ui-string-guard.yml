@@ -30,4 +30,20 @@ jobs:
       - name: Build web
         run: flutter build web
 
+  firebase-security-rules:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Test Storage security rules
+        run: npm run test:storage-rules
+
 

@@ -50,6 +50,11 @@ class _FakeCloudStorageSyncService implements CloudStorageSyncService {
   }) async {
     throw UnimplementedError();
   }
+
+  @override
+  Future<CloudStorageDeleteResult> deleteRemoteBackup() async {
+    throw UnimplementedError();
+  }
 }
 
 const _item = VocabItem(

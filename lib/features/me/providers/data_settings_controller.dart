@@ -451,6 +451,10 @@ class DataSettingsController extends Notifier<DataSettingsState> {
         language.firebaseStorageUploadSuccessLabel,
       CloudStorageUploadDecision.notSignedIn =>
         language.firebaseStorageNotSignedInLabel,
+      CloudStorageUploadDecision.emailNotVerified =>
+        language.firebaseStorageNotSignedInLabel,
+      CloudStorageUploadDecision.payloadTooLarge =>
+        language.firebaseStorageUploadErrorLabel,
       CloudStorageUploadDecision.writeFailed =>
         language.firebaseStorageUploadErrorLabel,
     };
@@ -506,6 +510,7 @@ class DataSettingsController extends Notifier<DataSettingsState> {
         );
         return;
       case CloudStorageDownloadDecision.notSignedIn:
+      case CloudStorageDownloadDecision.emailNotVerified:
         _showSnackBar(context, language.firebaseStorageNotSignedInLabel);
         return;
       case CloudStorageDownloadDecision.noRemoteFile:
@@ -521,6 +526,28 @@ class DataSettingsController extends Notifier<DataSettingsState> {
         _showSnackBar(context, language.backupDecryptionErrorLabel);
         return;
     }
+  }
+
+  Future<void> deleteFirebaseStorageBackup(
+    BuildContext context,
+    AppLanguage language,
+  ) async {
+    final service = ref.read(cloudStorageSyncServiceProvider);
+    final result = await service.deleteRemoteBackup();
+    if (!context.mounted) return;
+    final message = switch (result.decision) {
+      CloudStorageDeleteDecision.deleted =>
+        language.firebaseStorageDeleteSuccessLabel,
+      CloudStorageDeleteDecision.notSignedIn =>
+        language.firebaseStorageNotSignedInLabel,
+      CloudStorageDeleteDecision.emailNotVerified =>
+        language.firebaseStorageNotSignedInLabel,
+      CloudStorageDeleteDecision.noRemoteFile =>
+        language.firebaseStorageNoRemoteFileLabel,
+      CloudStorageDeleteDecision.deleteFailed =>
+        language.firebaseStorageDeleteErrorLabel,
+    };
+    _showSnackBar(context, message);
   }
 
   Future<void> performAutoBackup(

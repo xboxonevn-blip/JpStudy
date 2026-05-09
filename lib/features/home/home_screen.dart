@@ -2,6 +2,7 @@ import 'package:drift/drift.dart' hide Column;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
+import 'package:jpstudy/features/foundations/screens/kana_table_screen.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/gamification/level_calculator.dart';
 import 'package:jpstudy/core/goal_provider.dart';
@@ -222,6 +223,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ref.read(studyGoalProvider.notifier).state = goal;
     _setLevel(level);
     ref.read(onboardingDoneProvider.notifier).state = true;
+    if (goal == StudyGoal.writing) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          context.openFoundationsKana(KanaScript.hiragana);
+        }
+      });
+    }
   }
 
   void _showLanguageSheet(BuildContext context) {

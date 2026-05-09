@@ -3378,6 +3378,72 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get authEmailVerificationSentLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Verification email sent. Verify your email to enable cloud backup.';
+      case AppLanguage.vi:
+        return 'Đã gửi email xác minh. Hãy xác minh email để bật sao lưu đám mây.';
+      case AppLanguage.ja:
+        return '確認メールを送信しました。クラウドバックアップを有効にするにはメールを確認してください。';
+    }
+  }
+
+  String get firebaseStorageDeleteLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Delete cloud backup';
+      case AppLanguage.vi:
+        return 'Xóa sao lưu đám mây';
+      case AppLanguage.ja:
+        return 'クラウドバックアップを削除';
+    }
+  }
+
+  String get firebaseStorageDeleteConfirmTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Delete cloud backup?';
+      case AppLanguage.vi:
+        return 'Xóa sao lưu đám mây?';
+      case AppLanguage.ja:
+        return 'クラウドバックアップを削除しますか？';
+    }
+  }
+
+  String get firebaseStorageDeleteConfirmBody {
+    switch (this) {
+      case AppLanguage.en:
+        return 'This removes the remote backup for this account. Local progress stays on this device.';
+      case AppLanguage.vi:
+        return 'Thao tác này xóa bản sao lưu từ xa của tài khoản này. Tiến độ cục bộ vẫn giữ trên thiết bị.';
+      case AppLanguage.ja:
+        return 'このアカウントのリモートバックアップを削除します。端末内の進捗は残ります。';
+    }
+  }
+
+  String get firebaseStorageDeleteSuccessLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Cloud backup deleted.';
+      case AppLanguage.vi:
+        return 'Đã xóa sao lưu đám mây.';
+      case AppLanguage.ja:
+        return 'クラウドバックアップを削除しました。';
+    }
+  }
+
+  String get firebaseStorageDeleteErrorLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Could not delete cloud backup.';
+      case AppLanguage.vi:
+        return 'Không xóa được sao lưu đám mây.';
+      case AppLanguage.ja:
+        return 'クラウドバックアップを削除できませんでした。';
+    }
+  }
+
   String get signOutLabel {
     switch (this) {
       case AppLanguage.en:

@@ -76,27 +76,26 @@ class AppShellScaffold extends ConsumerWidget {
         return Scaffold(
           backgroundColor: palette.bg,
           body: SafeArea(
-            child: Column(
-              children: [
-                const GlobalTopBar(),
-                Expanded(child: navigationShell),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8, bottom: 12),
-                  child: _MobileNavigationBar(
-                    language: language,
-                    bottomItems: bottomItems,
-                    selectedIndex: bottomSelected,
-                    onDestinationSelected: (index) {
-                      if (index < 4) {
-                        final branch = const [4, 1, 0, 7][index];
-                        _goToBranch(branch);
-                        return;
-                      }
-                      _showMoreSheet(context, items);
-                    },
-                  ),
-                ),
-              ],
+            bottom: false,
+            child: navigationShell,
+          ),
+          bottomNavigationBar: SafeArea(
+            top: false,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8, bottom: 12),
+              child: _MobileNavigationBar(
+                language: language,
+                bottomItems: bottomItems,
+                selectedIndex: bottomSelected,
+                onDestinationSelected: (index) {
+                  if (index < 4) {
+                    final branch = const [4, 1, 0, 7][index];
+                    _goToBranch(branch);
+                    return;
+                  }
+                  _showMoreSheet(context, items);
+                },
+              ),
             ),
           ),
         );
@@ -438,8 +437,8 @@ String _kanji(AppLanguage language) => switch (language) {
   AppLanguage.ja => '基礎',
 };
 String _foundations(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Foundations',
-  AppLanguage.vi => 'Nền tảng',
+  AppLanguage.en => 'Kana',
+  AppLanguage.vi => 'Kana',
   AppLanguage.ja => '基礎',
 };
 String _vocab(AppLanguage language) => switch (language) {

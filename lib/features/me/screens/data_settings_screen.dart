@@ -339,6 +339,16 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
                   icon: const Icon(Icons.cloud_download_outlined),
                   label: Text(language.firebaseStorageDownloadLabel),
                 ),
+                OutlinedButton.icon(
+                  onPressed: settings.isReady
+                      ? () => _runFirebaseDelete(
+                          controller: controller,
+                          language: language,
+                        )
+                      : null,
+                  icon: const Icon(Icons.delete_outline),
+                  label: Text(language.firebaseStorageDeleteLabel),
+                ),
               ],
             ),
           ],
@@ -527,6 +537,31 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
       language,
       passphrasePrompt: () => _promptImportPassphrase(language),
     );
+  }
+
+  Future<void> _runFirebaseDelete({
+    required DataSettingsController controller,
+    required AppLanguage language,
+  }) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(language.firebaseStorageDeleteConfirmTitle),
+        content: Text(language.firebaseStorageDeleteConfirmBody),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text(language.firebaseStorageDeleteLabel),
+          ),
+        ],
+      ),
+    );
+    if (!mounted || confirmed != true) return;
+    await controller.deleteFirebaseStorageBackup(context, language);
   }
 
   Future<void> _runExport(

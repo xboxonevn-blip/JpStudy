@@ -82,6 +82,7 @@ app.*.symbols
 app.*.map.json
 
 # Local agent / tooling workspace
+node_modules/
 .venv_coding_agent/
 .claude/worktrees/
 .playwright-mcp/

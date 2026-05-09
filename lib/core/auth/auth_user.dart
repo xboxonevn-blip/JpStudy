@@ -4,12 +4,14 @@ class AuthUser {
   const AuthUser({
     required this.uid,
     this.email,
+    this.emailVerified = false,
     this.displayName,
     this.photoUrl,
   });
 
   final String uid;
   final String? email;
+  final bool emailVerified;
   final String? displayName;
   final String? photoUrl;
 
@@ -30,12 +32,14 @@ class AuthUser {
   AuthUser copyWith({
     String? uid,
     String? email,
+    bool? emailVerified,
     String? displayName,
     String? photoUrl,
   }) {
     return AuthUser(
       uid: uid ?? this.uid,
       email: email ?? this.email,
+      emailVerified: emailVerified ?? this.emailVerified,
       displayName: displayName ?? this.displayName,
       photoUrl: photoUrl ?? this.photoUrl,
     );
