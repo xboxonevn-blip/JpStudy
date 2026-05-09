@@ -15,8 +15,8 @@ class FakeAuthService implements AuthService {
   FakeAuthService({this.googleResult, this.emailResult});
 
   AuthUser? Function()? googleResult;
-  AuthUser? Function({required String email, required String password})?
-      emailResult;
+  Object? Function({required String email, required String password})?
+  emailResult;
   int googleCalls = 0;
   int emailCalls = 0;
   String? lastEmail;
@@ -61,8 +61,15 @@ class FakeAuthService implements AuthService {
     if (result == null) {
       throw AuthException(AuthErrorKind.invalidCredentials);
     }
-    emit(result);
-    return result;
+    if (result is Exception) {
+      throw result;
+    }
+    if (result is Error) {
+      throw result;
+    }
+    final user = result as AuthUser;
+    emit(user);
+    return user;
   }
 
   @override
@@ -114,8 +121,10 @@ void main() {
       await _openDialog(tester);
 
       expect(find.text('Đăng nhập'), findsWidgets);
-      expect(find.text('Đăng nhập để đồng bộ tiến trình học của bạn.'),
-          findsOneWidget);
+      expect(
+        find.text('Đăng nhập để đồng bộ tiến trình học của bạn.'),
+        findsOneWidget,
+      );
       expect(find.text('Đăng nhập bằng Google'), findsOneWidget);
       expect(find.text('HOẶC'), findsOneWidget);
       expect(
@@ -125,35 +134,33 @@ void main() {
     },
   );
 
-  testWidgets(
-    'renders email and password fields in Vietnamese',
-    (tester) async {
-      await _pumpHost(tester);
-      await _openDialog(tester);
+  testWidgets('renders email and password fields in Vietnamese', (
+    tester,
+  ) async {
+    await _pumpHost(tester);
+    await _openDialog(tester);
 
-      expect(find.text('Email'), findsOneWidget);
-      expect(find.text('Mật khẩu'), findsOneWidget);
-      expect(find.byIcon(Icons.mail_outline), findsOneWidget);
-      expect(find.byIcon(Icons.lock_outline), findsOneWidget);
-    },
-  );
+    expect(find.text('Email'), findsOneWidget);
+    expect(find.text('Mật khẩu'), findsOneWidget);
+    expect(find.byIcon(Icons.mail_outline), findsOneWidget);
+    expect(find.byIcon(Icons.lock_outline), findsOneWidget);
+  });
 
-  testWidgets(
-    'password visibility toggle flips the obscure-text icon',
-    (tester) async {
-      await _pumpHost(tester);
-      await _openDialog(tester);
+  testWidgets('password visibility toggle flips the obscure-text icon', (
+    tester,
+  ) async {
+    await _pumpHost(tester);
+    await _openDialog(tester);
 
-      expect(find.byIcon(Icons.visibility_off_outlined), findsOneWidget);
-      expect(find.byIcon(Icons.visibility_outlined), findsNothing);
+    expect(find.byIcon(Icons.visibility_off_outlined), findsOneWidget);
+    expect(find.byIcon(Icons.visibility_outlined), findsNothing);
 
-      await tester.tap(find.byIcon(Icons.visibility_off_outlined));
-      await tester.pumpAndSettle();
+    await tester.tap(find.byIcon(Icons.visibility_off_outlined));
+    await tester.pumpAndSettle();
 
-      expect(find.byIcon(Icons.visibility_outlined), findsOneWidget);
-      expect(find.byIcon(Icons.visibility_off_outlined), findsNothing);
-    },
-  );
+    expect(find.byIcon(Icons.visibility_outlined), findsOneWidget);
+    expect(find.byIcon(Icons.visibility_off_outlined), findsNothing);
+  });
 
   testWidgets('close button dismisses the dialog', (tester) async {
     await _pumpHost(tester);
@@ -165,20 +172,19 @@ void main() {
     expect(find.byType(LoginDialog), findsNothing);
   });
 
-  testWidgets(
-    'Google button calls signInWithGoogle and dismisses on success',
-    (tester) async {
-      final fake = FakeAuthService(googleResult: () => _testUser);
-      await _pumpHost(tester, authService: fake);
-      await _openDialog(tester);
+  testWidgets('Google button calls signInWithGoogle and dismisses on success', (
+    tester,
+  ) async {
+    final fake = FakeAuthService(googleResult: () => _testUser);
+    await _pumpHost(tester, authService: fake);
+    await _openDialog(tester);
 
-      await tester.tap(find.text('Đăng nhập bằng Google'));
-      await tester.pumpAndSettle();
+    await tester.tap(find.text('Đăng nhập bằng Google'));
+    await tester.pumpAndSettle();
 
-      expect(fake.googleCalls, 1);
-      expect(find.byType(LoginDialog), findsNothing);
-    },
-  );
+    expect(fake.googleCalls, 1);
+    expect(find.byType(LoginDialog), findsNothing);
+  });
 
   testWidgets(
     'Google button surfaces invalid-credentials snackbar on failure',
@@ -192,8 +198,10 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(fake.googleCalls, 1);
-      expect(find.text('Đăng nhập thất bại. Vui lòng thử lại.'),
-          findsOneWidget);
+      expect(
+        find.text('Đăng nhập thất bại. Vui lòng thử lại.'),
+        findsOneWidget,
+      );
       expect(find.byType(LoginDialog), findsOneWidget);
     },
   );
@@ -234,22 +242,66 @@ void main() {
     },
   );
 
+  testWidgets('submit with wrong password shows invalid-credentials snackbar', (
+    tester,
+  ) async {
+    // emailResult is null → fake throws invalidCredentials
+    final fake = FakeAuthService();
+    await _pumpHost(tester, authService: fake);
+    await _openDialog(tester);
+
+    final fields = find.byType(TextField);
+    await tester.enterText(fields.at(0), 'user@example.com');
+    await tester.enterText(fields.at(1), 'wrong');
+    await tester.tap(find.widgetWithText(ElevatedButton, 'Đăng nhập'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Email hoặc mật khẩu không đúng.'), findsOneWidget);
+    expect(find.byType(LoginDialog), findsNothing);
+  });
+
+  testWidgets('submit surfaces unknown snackbar for AuthException unknown', (
+    tester,
+  ) async {
+    final fake = FakeAuthService(
+      emailResult: ({required email, required password}) =>
+          AuthException(AuthErrorKind.unknown),
+    );
+    await _pumpHost(tester, authService: fake);
+    await _openDialog(tester);
+
+    final fields = find.byType(TextField);
+    await tester.enterText(fields.at(0), 'fake-test@example.com');
+    await tester.enterText(fields.at(1), 'wrongpass');
+    await tester.tap(
+      find.widgetWithText(ElevatedButton, AppLanguage.vi.loginSubmitLabel),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text(AppLanguage.vi.authUnknownErrorLabel), findsOneWidget);
+    expect(find.byType(LoginDialog), findsNothing);
+  });
+
   testWidgets(
-    'submit with wrong password shows invalid-credentials snackbar',
+    'submit surfaces unknown snackbar for non-AuthException failures',
     (tester) async {
-      // emailResult is null → fake throws invalidCredentials
-      final fake = FakeAuthService();
+      final fake = FakeAuthService(
+        emailResult: ({required email, required password}) =>
+            StateError('firebase web failed unexpectedly'),
+      );
       await _pumpHost(tester, authService: fake);
       await _openDialog(tester);
 
       final fields = find.byType(TextField);
-      await tester.enterText(fields.at(0), 'user@example.com');
-      await tester.enterText(fields.at(1), 'wrong');
-      await tester.tap(find.widgetWithText(ElevatedButton, 'Đăng nhập'));
+      await tester.enterText(fields.at(0), 'fake-test@example.com');
+      await tester.enterText(fields.at(1), 'wrongpass');
+      await tester.tap(
+        find.widgetWithText(ElevatedButton, AppLanguage.vi.loginSubmitLabel),
+      );
       await tester.pumpAndSettle();
 
-      expect(find.text('Email hoặc mật khẩu không đúng.'), findsOneWidget);
-      expect(find.byType(LoginDialog), findsOneWidget);
+      expect(find.text(AppLanguage.vi.authUnknownErrorLabel), findsOneWidget);
+      expect(find.byType(LoginDialog), findsNothing);
     },
   );
 

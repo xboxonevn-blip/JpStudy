@@ -64,77 +64,39 @@ class AppShellScaffold extends ConsumerWidget {
           );
         }
 
-        final bottomItems = [items[3], items[4], items[0], items[6]];
+        final bottomItems = [items[4], items[1], items[0], items[7]];
         final bottomSelected = switch (navigationShell.currentIndex) {
-          3 => 0,
-          4 => 1,
+          4 => 0,
+          1 => 1,
           0 => 2,
-          6 => 3,
+          7 => 3,
           _ => 4,
         };
 
         return Scaffold(
           backgroundColor: palette.bg,
-          extendBody: true,
-          body: Column(
-            children: [
-              const SafeArea(bottom: false, child: GlobalTopBar()),
-              Expanded(child: navigationShell),
-            ],
-          ),
-          bottomNavigationBar: SafeArea(
-            top: false,
-            minimum: const EdgeInsets.only(bottom: 12),
-            child: AppResponsiveFrame(
-              maxWidth: 980,
-              minHorizontalPadding: 12,
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [palette.elevated, palette.base],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
+          body: SafeArea(
+            child: Column(
+              children: [
+                const GlobalTopBar(),
+                Expanded(child: navigationShell),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8, bottom: 12),
+                  child: _MobileNavigationBar(
+                    language: language,
+                    bottomItems: bottomItems,
+                    selectedIndex: bottomSelected,
+                    onDestinationSelected: (index) {
+                      if (index < 4) {
+                        final branch = const [4, 1, 0, 7][index];
+                        _goToBranch(branch);
+                        return;
+                      }
+                      _showMoreSheet(context, items);
+                    },
                   ),
-                  borderRadius: BorderRadius.circular(30),
-                  border: Border.all(color: palette.outline),
-                  boxShadow: [
-                    BoxShadow(
-                      color: palette.primary.withValues(alpha: 0.10),
-                      blurRadius: 24,
-                      offset: const Offset(0, 12),
-                    ),
-                  ],
                 ),
-                child: NavigationBar(
-                  selectedIndex: bottomSelected,
-                  onDestinationSelected: (index) {
-                    if (index < 4) {
-                      final branch = const [3, 4, 0, 6][index];
-                      _goToBranch(branch);
-                      return;
-                    }
-                    _showMoreSheet(context, items);
-                  },
-                  height: 82,
-                  backgroundColor: Colors.transparent,
-                  indicatorColor: palette.primary.withValues(alpha: 0.14),
-                  destinations: [
-                    for (final item in bottomItems)
-                      NavigationDestination(
-                        icon: Icon(item.icon),
-                        selectedIcon: Icon(item.selectedIcon),
-                        label: item.label,
-                      ),
-                    NavigationDestination(
-                      icon: const Icon(Icons.dashboard_customize_outlined),
-                      selectedIcon: const Icon(
-                        Icons.dashboard_customize_rounded,
-                      ),
-                      label: _moreLabel(language),
-                    ),
-                  ],
-                ),
-              ),
+              ],
             ),
           ),
         );
@@ -152,10 +114,10 @@ class AppShellScaffold extends ConsumerWidget {
           child: ListView.separated(
             shrinkWrap: true,
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-            itemCount: items.length - 4,
+            itemCount: items.length - 5,
             separatorBuilder: (context, index) => const SizedBox(height: 8),
             itemBuilder: (context, index) {
-              final branchIndex = [1, 2, 5, 7, 8, 9][index];
+              final branchIndex = [2, 3, 6, 8, 9, 10][index];
               final item = items[branchIndex];
               return ListTile(
                 shape: RoundedRectangleBorder(
@@ -188,6 +150,11 @@ class AppShellScaffold extends ConsumerWidget {
         label: _kanji(language),
         icon: Icons.grid_view_outlined,
         selectedIcon: Icons.grid_view_rounded,
+      ),
+      _ShellItem(
+        label: _foundations(language),
+        icon: Icons.spa_outlined,
+        selectedIcon: Icons.spa_rounded,
       ),
       _ShellItem(
         label: _vocab(language),
@@ -235,6 +202,67 @@ class AppShellScaffold extends ConsumerWidget {
         selectedIcon: Icons.forum_rounded,
       ),
     ];
+  }
+}
+
+class _MobileNavigationBar extends StatelessWidget {
+  const _MobileNavigationBar({
+    required this.language,
+    required this.bottomItems,
+    required this.selectedIndex,
+    required this.onDestinationSelected,
+  });
+
+  final AppLanguage language;
+  final List<_ShellItem> bottomItems;
+  final int selectedIndex;
+  final ValueChanged<int> onDestinationSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return AppResponsiveFrame(
+      maxWidth: 980,
+      minHorizontalPadding: 12,
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [palette.elevated, palette.base],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(30),
+          border: Border.all(color: palette.outline),
+          boxShadow: [
+            BoxShadow(
+              color: palette.primary.withValues(alpha: 0.10),
+              blurRadius: 24,
+              offset: const Offset(0, 12),
+            ),
+          ],
+        ),
+        child: NavigationBar(
+          selectedIndex: selectedIndex,
+          onDestinationSelected: onDestinationSelected,
+          height: 82,
+          backgroundColor: Colors.transparent,
+          indicatorColor: palette.primary.withValues(alpha: 0.14),
+          destinations: [
+            for (final item in bottomItems)
+              NavigationDestination(
+                icon: Icon(item.icon),
+                selectedIcon: Icon(item.selectedIcon),
+                label: item.label,
+              ),
+            NavigationDestination(
+              icon: const Icon(Icons.dashboard_customize_outlined),
+              selectedIcon: const Icon(Icons.dashboard_customize_rounded),
+              label: _moreLabel(language),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -407,7 +435,12 @@ class _ShellBody extends StatelessWidget {
 String _kanji(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Kanji',
   AppLanguage.vi => 'Hán tự',
-  AppLanguage.ja => '漢字',
+  AppLanguage.ja => '基礎',
+};
+String _foundations(AppLanguage language) => switch (language) {
+  AppLanguage.en => 'Foundations',
+  AppLanguage.vi => 'Nền tảng',
+  AppLanguage.ja => '基礎',
 };
 String _vocab(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Vocab',
