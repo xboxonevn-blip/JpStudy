@@ -10,13 +10,16 @@ import 'package:jpstudy/core/language_provider.dart';
 
 /// Login dialog wired to Firebase Auth via [AuthService].
 class LoginDialog extends ConsumerStatefulWidget {
-  const LoginDialog({super.key});
+  const LoginDialog({super.key, this.messenger});
+
+  final ScaffoldMessengerState? messenger;
 
   static Future<void> show(BuildContext context) {
+    final messenger = ScaffoldMessenger.maybeOf(context);
     return showDialog<void>(
       context: context,
       barrierDismissible: true,
-      builder: (context) => const LoginDialog(),
+      builder: (context) => LoginDialog(messenger: messenger),
     );
   }
 
@@ -29,6 +32,16 @@ class _LoginDialogState extends ConsumerState<LoginDialog> {
   late final TextEditingController _passwordController;
   bool _obscurePassword = true;
   bool _busy = false;
+
+  void _showSnackAfterDismiss(
+    ScaffoldMessengerState messenger,
+    String message,
+  ) {
+    Navigator.of(context).pop();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      messenger.showSnackBar(SnackBar(content: Text(message)));
+    });
+  }
 
   @override
   void initState() {
@@ -87,11 +100,10 @@ class _LoginDialogState extends ConsumerState<LoginDialog> {
 
   Future<void> _handleEmailSubmit(AppLanguage language) async {
     if (_busy) return;
+    final messenger = widget.messenger ?? ScaffoldMessenger.of(context);
     if (_emailController.text.trim().isEmpty ||
         _passwordController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(language.loginEmptyFieldLabel)),
-      );
+      messenger.showSnackBar(SnackBar(content: Text(language.loginEmptyFieldLabel)));
       return;
     }
     setState(() => _busy = true);
@@ -105,8 +117,12 @@ class _LoginDialogState extends ConsumerState<LoginDialog> {
       Navigator.of(context).pop();
     } on AuthException catch (e) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(_errorMessage(e.kind, language))),
+      _showSnackAfterDismiss(messenger, _errorMessage(e.kind, language));
+    } catch (_) {
+      if (!mounted) return;
+      _showSnackAfterDismiss(
+        messenger,
+        _errorMessage(AuthErrorKind.unknown, language),
       );
     } finally {
       if (mounted) setState(() => _busy = false);
@@ -147,14 +163,12 @@ class _LoginDialogState extends ConsumerState<LoginDialog> {
                 label: language.signInWithGoogleLabel,
                 onPressed:
                     ref.read(authServiceProvider).isGoogleSignInSupported &&
-                            !_busy
-                        ? () => _handleGoogleSignIn(language)
-                        : null,
+                        !_busy
+                    ? () => _handleGoogleSignIn(language)
+                    : null,
                 palette: palette,
               ),
-              if (!ref
-                  .read(authServiceProvider)
-                  .isGoogleSignInSupported) ...[
+              if (!ref.read(authServiceProvider).isGoogleSignInSupported) ...[
                 const SizedBox(height: AppSpacing.xs),
                 Text(
                   language.authNotSupportedLabel,
