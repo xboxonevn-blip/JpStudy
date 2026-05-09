@@ -7138,4 +7138,103 @@ extension AppLanguageLabels on AppLanguage {
         return '出典';
     }
   }
+
+  String get kanaQuizTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Kana quiz';
+      case AppLanguage.vi:
+        return 'Luy\u1ec7n b\u1ea3ng ch\u1eef';
+      case AppLanguage.ja:
+        return '\u304b\u306a\u7df4\u7fd2';
+    }
+  }
+
+  String get kanaQuizDirectionAToBLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Choose the romaji reading';
+      case AppLanguage.vi:
+        return 'Ch\u1ecdn c\u00e1ch \u0111\u1ecdc romaji';
+      case AppLanguage.ja:
+        return '\u30ed\u30fc\u30de\u5b57\u3092\u9078\u3076';
+    }
+  }
+
+  String get kanaQuizDirectionBToALabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Choose the kana';
+      case AppLanguage.vi:
+        return 'Ch\u1ecdn kana \u0111\u00fang';
+      case AppLanguage.ja:
+        return '\u304b\u306a\u3092\u9078\u3076';
+    }
+  }
+
+  String get kanaGradeAgainLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Again';
+      case AppLanguage.vi:
+        return 'Sai';
+      case AppLanguage.ja:
+        return '\u3082\u3046\u4e00\u5ea6';
+    }
+  }
+
+  String get kanaGradeGoodLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Good';
+      case AppLanguage.vi:
+        return '\u0110\u00fang';
+      case AppLanguage.ja:
+        return '\u826f\u3044';
+    }
+  }
+
+  String get kanaGradeEasyLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Easy';
+      case AppLanguage.vi:
+        return 'D\u1ec5';
+      case AppLanguage.ja:
+        return '\u7c21\u5358';
+    }
+  }
+
+  String get kanaQuizSummaryTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Session complete';
+      case AppLanguage.vi:
+        return 'Ho\u00e0n th\u00e0nh bu\u1ed5i luy\u1ec7n';
+      case AppLanguage.ja:
+        return '\u30bb\u30c3\u30b7\u30e7\u30f3\u5b8c\u4e86';
+    }
+  }
+
+  String kanaDueTodayLabel(int count) {
+    switch (this) {
+      case AppLanguage.en:
+        return '$count kana due today';
+      case AppLanguage.vi:
+        return '$count kana \u0111\u1ebfn h\u1ea1n';
+      case AppLanguage.ja:
+        return '$count \u500b\u5fa9\u7fd2';
+    }
+  }
+
+  String get hanVietPanelMatchedBadge {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Relevant to this kanji';
+      case AppLanguage.vi:
+        return 'Li\u00ean quan \u0111\u1ebfn ch\u1eef n\u00e0y';
+      case AppLanguage.ja:
+        return '\u3053\u306e\u6f22\u5b57\u306b\u95a2\u9023';
+    }
+  }
 } // End extension
