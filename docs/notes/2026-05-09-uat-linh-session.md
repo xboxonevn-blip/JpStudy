@@ -1,113 +1,107 @@
-﻿## Summary (3 bullets)
-- Best moment: Kanji Hub search for `学` instantly filtered matching kanji and felt understandable even as a beginner.
-- Worst moment: Mobile at `414×896` showed only background + nav; no usable content.
-- Overall verdict from Linh: I can see this is a serious JLPT app, but I would not return tomorrow until mobile and Vietnamese onboarding are fixed.
+﻿# UAT session — Linh, Vietnamese N5 learner
+
+Target: https://jpstudy-v2.web.app  
+Date: 2026-05-09  
+Persona: Linh, 22, Hanoi, JLPT N5 in 6 months
+
+## Summary
+- Best moment: Mình bấm kanji `学` và thấy ngay phần Han-Viet Tips liên quan, cảm giác “à cái này đúng thứ mình cần”.
+- Worst moment: Ở mobile 414×896, màn hình chính gần như trống sau khi chờ, chỉ thấy thanh tab trên cùng.
+- Overall verdict: App có nhiều nội dung học Nhật tốt, nhưng onboarding đang lẫn tiếng Anh/Nhật và vài luồng quan trọng bị ẩn nên mình dễ bỏ cuộc.
 
 ## Task-by-task notes
 
 ### T1. First impression
-Screenshot: `docs/notes/uat-screenshots/2026-05-09-linh/t1-first-impression.png`
+Screenshot: `docs/notes/uat-screenshots/t1-desktop-landing.png`
 
-After 10 seconds, I understood this app is for Japanese/JLPT study, but the first screen mixed English labels with Japanese branding. I would tap `N5` first because it matches my goal, but I expected Vietnamese copy after seeing a Vietnam flag/language option. Branding feels more like a serious study dashboard than a friendly beginner JLPT app.
-
-Result screenshot: `docs/notes/uat-screenshots/2026-05-09-linh/t1-home-after-onboarding.png`
+Mình thấy app mở vào màn chọn level, thương hiệu JP Study + biểu tượng kanji nhìn đúng app học tiếng Nhật. Nhưng UI đang bằng tiếng Anh dù mình là người Việt: “Welcome”, “Choose your level”, “Beginner fundamentals”, nên mình không chắc app có dành cho người Việt không. Mình sẽ bấm N5 đầu tiên vì đang học JLPT N5.
 
 ### T2. Learn hiragana
-Screenshot: `docs/notes/uat-screenshots/2026-05-09-linh/t2-kanji-no-foundations.png`
+Screenshots: `docs/notes/uat-screenshots/t2-desktop-n5.png`, `docs/notes/uat-screenshots/t2-desktop-goal.png`, `docs/notes/uat-screenshots/t2-desktop-dashboard.png`
 
-I wanted hiragana, so I looked for `Kana`, `Hiragana`, or Vietnamese `Bảng chữ cái`; I only saw Kanji/Vocab/Grammar/Roadmap/Memory/Active/Exams. I opened Kanji because it was closest to “Japanese characters,” but it showed kanji drawing/search, not hiragana. I could not mark 5 kana “tôi đã thuộc” because I never found Foundations/Kana.
+Mình muốn luyện hiragana nhưng không thấy nhãn “Kana”, “Hiragana”, “Bảng chữ cái” ở landing. Sau khi chọn N5, app hỏi goal; mình chọn “Practice Writing” vì có chữ Hiragana/Katakana/Kanji nhỏ bên dưới, nhưng app lại đưa mình tới quick win N4 Practice Writing với câu 見ます. Mình không tìm được nơi đánh dấu 5 kana “tôi đã thuộc”; dashboard cũng không phản ánh tiến độ kana nào. Bị khựng vì task rất cơ bản nhưng đường vào không rõ.
 
 ### T3. Take a quiz
-Screenshot: `docs/notes/uat-screenshots/2026-05-09-linh/t3-quiz-start.png`
+Screenshot: `docs/notes/uat-screenshots/t3-desktop-quickwin.png`
 
-The Roadmap presented a quick question (“What does this mean?”) and answer buttons, so I understood it was a quiz-like practice. However, repeated clicks on answers did not clearly advance or show a summary within my patience window; feedback felt too subtle. I did not reach a 10-question summary or an `Again` flow.
-
-Result screenshot: `docs/notes/uat-screenshots/2026-05-09-linh/t3-quiz-after-answers.png`
+Mình không thấy CTA tiếng Việt “học bằng quiz”; app tự đưa một câu hỏi quick win. Prompt “What does this mean?” rõ, đáp án dạng nút dễ hiểu, feedback đúng màu xanh và câu “Nice...” khá động viên. Tuy nhiên mình không thể chạy đủ 10 câu từ UI hiện tại vì không thấy nút Next/Again/summary sau câu đầu trong vùng nhìn thấy.
 
 ### T4. Sign in with email
-Screenshot: `docs/notes/uat-screenshots/2026-05-09-linh/t4-signin-dialog.png`
+Screenshots: `docs/notes/uat-screenshots/t4-desktop-auth-entry.png`, `docs/notes/uat-screenshots/t4-desktop-signin-dialog.png`, `docs/notes/uat-screenshots/t4-desktop-email-error.png`, `docs/notes/uat-screenshots/t4-desktop-google-attempt.png`
 
-The avatar menu clearly exposed `Sign in`, and the dialog made the Google/email choices obvious. With `fake-test@example.com` / `wrongpass`, the app showed `Invalid email or password.` at the bottom, but it was in English, not Vietnamese. Google sign-in opened a Google Accounts popup/tab; the entry point was clear, and I stopped before OAuth.
-
-Result screenshots: `docs/notes/uat-screenshots/2026-05-09-linh/t4-email-error.png`, `docs/notes/uat-screenshots/2026-05-09-linh/t4-google-popup-entry.png`
+Mình tìm sign-in bằng avatar chữ J, khá hợp lý sau một lần đoán. Dialog sign-in rõ ràng, có Google và email/password. Khi nhập email giả `linh.fake@example.com` + mật khẩu sai rồi bấm Sign in, mình không thấy snackbar/error text hiện trên UI dù đã chờ; chỉ thấy form đứng yên. Bấm Google cũng không thấy popup mới xuất hiện trong phiên test, nên entry point có nhưng kết quả không rõ.
 
 ### T5. Find the Han-Viet aid
-Screenshot: `docs/notes/uat-screenshots/2026-05-09-linh/t5-search-gaku.png`
+Screenshots: `docs/notes/uat-screenshots/t5-desktop-kanji.png`, `docs/notes/uat-screenshots/t5-desktop-kanji-detail.png`, `docs/notes/uat-screenshots/t5-desktop-hanviet-dropdown.png`, `docs/notes/uat-screenshots/t5-desktop-hanviet-reference.png`
 
-I could search `学` in Kanji Hub and saw matching kanji cards quickly. I did not find a clearly labeled `Hán Việt` rules reference, nor an obvious way to open a detail page from the result card. Because the Han-Viet pattern aid was hidden or absent from this path, I could not verify whether a `学` rule appears first inline.
-
-Result screenshot: `docs/notes/uat-screenshots/2026-05-09-linh/t5-kanji-detail-gaku-2.png`
+Mình vào Kanji Hub và bấm `学` khá tự nhiên vì nó nằm ngay trong grid N5. Kanji detail hiện “Han-Viet Tips” và filter “Relevant to this kanji”; mở ra thấy rule “Initial c -> k -> kh -> gi...” và “Final c -> to -> ku”. Bấm More mở trang “Han-Viet Rules” và vẫn giữ modal `学`, làm mình hơi rối nhưng thấy reference đúng. Đây là luồng tốt nhất vì rule liên quan xuất hiện ngay trong detail.
 
 ### T6. Cross-feature: cloud sync
-Screenshot: `docs/notes/uat-screenshots/2026-05-09-linh/t6-settings-result.png`
+Screenshots: `docs/notes/uat-screenshots/t6-desktop-sync-settings.png`, `docs/notes/uat-screenshots/t6-desktop-manage-data.png`
 
-I found backup/sync via avatar → Settings/Me → Manage data, about 3 clicks from the study screen. `Data controls` clearly mentioned auto backup and account sync, but the wording was English and “manual only” felt technical. I understood cloud sync needs sign-in.
-
-Result screenshot: `docs/notes/uat-screenshots/2026-05-09-linh/t6-manage-data.png`
+Mình tìm backup bằng avatar → Settings/Me → Manage data, mất khoảng 3 click từ màn đang dùng; từ landing mới có thể mất 4 click nếu phải mở menu trước. Màn Data controls nói rõ “Auto backup” và “Account sync”, có giải thích cần sign in để cloud sync. Tuy nhiên label vẫn tiếng Anh và “Manual only” không giải thích ngay là giới hạn gì.
 
 ### T7. Recover from a wrong tab
-Screenshot: `docs/notes/uat-screenshots/2026-05-09-linh/t2-kanji-no-foundations.png`
+Screenshot: `docs/notes/uat-screenshots/t5-desktop-kanji.png`
 
-I could not start from Foundations because Foundations/Kana was not reachable from main navigation. From Kanji, switching tabs worked, but that did not test the requested Foundations recovery path. This task was blocked by missing Foundations navigation.
+Từ Kanji Hub, mình bấm nhầm Handwriting/Flashcard-style area và vẫn ở cùng Kanji Hub, không bị kẹt. Back từ Han-Viet Rules quay về đúng vùng Kanji/previous view theo kỳ vọng trong desktop flow. Nhưng vì không tìm được Foundations hub/kana area, mình không thể xác nhận đúng task “from foundations hub”.
 
-### T8. Mobile viewport (414×896)
-Screenshot: `docs/notes/uat-screenshots/2026-05-09-linh/t8-mobile-home.png`
+### T8. Mobile viewport 414×896
+Screenshots: `docs/notes/uat-screenshots/t8-mobile-landing.png`, `docs/notes/uat-screenshots/t8-mobile-landing-afterwait.png`, `docs/notes/uat-screenshots/t8-mobile-kanji.png`
 
-Mobile was the biggest failure: the page showed background and bottom nav only, with no home content. The bottom nav buttons were thumb-sized and readable, but the actual content area was blank, so T1/T2/T3 could not be completed. Opening Kanji from bottom nav also failed to reveal useful content in the available view.
-
-Result screenshot: `docs/notes/uat-screenshots/2026-05-09-linh/t8-mobile-kanji.png`
+Ở mobile, landing sau 10 giây và thêm 5 giây vẫn trống: chỉ có nền pattern và top tab bar Roadmap/Memory/Kanji/Exams/More. Mình bấm Kanji tab, tab chuyển active nhưng nội dung vẫn trống. Đây là blocker lớn với người dùng Android như mình; mình sẽ nghĩ app bị lỗi hoặc chưa tải xong.
 
 ## Issues found, categorized
 
-- **[CRITICAL] Mobile content blank** — mobile viewport `414×896`
-  - What Linh expected: Home content and study cards below the nav.
-  - What actually happened: Only background pattern and bottom nav appeared.
-  - Suggested fix in <10 words: Restore mobile body layout width/height.
+- **[CRITICAL] Mobile content blank** — mobile 414×896 landing/Kanji
+  - What Linh expected: Thấy màn chọn N5 hoặc nội dung học.
+  - What actually happened: Chỉ thấy tab bar, phần nội dung trống sau 15 giây.
+  - Suggested fix: Render mobile content reliably.
 
-- **[MAJOR] Foundations/Kana unreachable** — main navigation
-  - What Linh expected: `Bảng chữ cái`, `Kana`, or `Hiragana` top-level entry.
-  - What actually happened: No obvious Foundations/Kana nav item existed.
-  - Suggested fix in <10 words: Add Foundations to primary nav.
+- **[MAJOR] Hiragana path hidden** — desktop onboarding/Foundation task
+  - What Linh expected: Có Kana/Hiragana/Bảng chữ cái rõ ràng.
+  - What actually happened: Chọn Practice Writing dẫn tới quick win N4, không thấy toggle “tôi đã thuộc”.
+  - Suggested fix: Add visible Kana entry.
 
-- **[MAJOR] Hiragana progress impossible** — T2 kana task
-  - What Linh expected: Mark five kana as known.
-  - What actually happened: Could not find the kana area or known toggle.
-  - Suggested fix in <10 words: Surface kana from home and nav.
+- **[MAJOR] Email sign-in lacks visible error** — sign-in dialog
+  - What Linh expected: Snackbar báo email chưa đăng ký/sai mật khẩu.
+  - What actually happened: Form đứng yên, không có text lỗi nhìn thấy.
+  - Suggested fix: Show persistent inline error.
 
-- **[MAJOR] Han-Viet aid hidden** — Kanji Hub
-  - What Linh expected: `Hán Việt` rules visible from kanji learning.
-  - What actually happened: Search found `学`, but no rule reference/detail path was obvious.
-  - Suggested fix in <10 words: Add visible Han-Viet rules CTA.
+- **[MAJOR] Google sign-in attempt unclear** — sign-in dialog
+  - What Linh expected: Popup Google mở hoặc thông báo popup bị chặn.
+  - What actually happened: Không thấy popup/feedback sau khi bấm.
+  - Suggested fix: Confirm OAuth launch/failure.
 
-- **[MAJOR] Quiz feedback unclear** — Roadmap quick question
-  - What Linh expected: Answer → clear right/wrong → next question.
-  - What actually happened: Repeated clicks did not clearly advance or summarize.
-  - Suggested fix in <10 words: Add obvious feedback and next state.
+- **[MAJOR] Language mismatch for Vietnamese user** — entire desktop run
+  - What Linh expected: UI tiếng Việt hoặc tự nhận VI.
+  - What actually happened: Hầu hết label tiếng Anh, vài heading tiếng Nhật.
+  - Suggested fix: Default Vietnamese copy.
 
-- **[MINOR] Auth errors not localized** — email sign-in dialog
-  - What Linh expected: Vietnamese error text.
-  - What actually happened: Snackbar said `Invalid email or password.`.
-  - Suggested fix in <10 words: Localize Firebase auth snackbar.
+- **[MINOR] Han-Viet reference opens under modal** — Han-Viet Rules
+  - What Linh expected: Trang rules rõ ràng, modal đóng hoặc không che.
+  - What actually happened: Modal `学` vẫn phủ giữa trang rules.
+  - Suggested fix: Close modal on More.
 
-- **[MINOR] Onboarding language mismatch** — first run
-  - What Linh expected: Vietnamese onboarding copy.
-  - What actually happened: Most labels were English/Japanese.
-  - Suggested fix in <10 words: Default onboarding to Vietnamese.
+- **[MINOR] Onboarding selected N5 but quick win shows N4** — onboarding quick win
+  - What Linh expected: N5 practice after choosing N5.
+  - What actually happened: Header says “N4 | Practice Writing”.
+  - Suggested fix: Preserve selected level.
 
-- **[POLISH] Technical sync wording** — Data controls
-  - What Linh expected: Simple backup wording.
-  - What actually happened: `Manual only`, `portable backups`, and `linked file sync` felt technical.
-  - Suggested fix in <10 words: Use learner-friendly sync copy.
+- **[POLISH] “Me” profile labels feel generic** — settings/profile
+  - What Linh expected: “Hồ sơ”, “Dữ liệu”, “Đồng bộ”.
+  - What actually happened: “Me”, “Manage data”, “Progress”.
+  - Suggested fix: Localize profile labels.
 
 ## Delights
 
-- Kanji search for `学` filtered results quickly and felt powerful.
-- The Google/email sign-in entry points were visually clear.
-- Data controls clearly separated local backup from account sync.
-- The Japanese wave background and compact cards made the app feel focused.
+- Han-Viet Tips inside `学` detail felt directly useful, not buried in docs.
+- Kanji grid is visually clean; N5 kanji cards are easy to click.
+- Correct-answer feedback in quick win uses a clear green border and encouraging text.
+- Data controls separates local backup and account sync clearly once found.
 
 ## Top-3 changes to ship before sharing wider
 
-1. Fix mobile blank content so phone users can study at all.
-2. Add Foundations/Kana as a visible top-level path from nav and home.
-3. Localize onboarding/auth/settings copy for Vietnamese N5 learners.
+1. Fix mobile blank content at 414×896; Linh’s real phone path is blocked.
+2. Add an obvious Vietnamese “Hiragana/Kana nền tảng” entry with progress toggles.
+3. Localize onboarding/auth/settings and show visible auth errors.
