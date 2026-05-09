@@ -1,11 +1,9 @@
-import 'dart:async';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/app.dart';
 import 'package:jpstudy/core/notifications/notification_service.dart';
-import 'package:jpstudy/data/db/app_database.dart';
+import 'package:jpstudy/data/db/database_provider.dart';
 import 'package:jpstudy/features/foundations/services/kana_progress_migration.dart';
 import 'package:jpstudy/features/me/providers/auto_cloud_upload_provider.dart';
 import 'package:jpstudy/firebase_options.dart';
@@ -35,18 +33,18 @@ Future<void> main() async {
   // or use conditional imports if ads are needed
 
   final preferences = await SharedPreferences.getInstance();
-  final migrationDatabase = AppDatabase();
-  unawaited(
-    KanaProgressMigration(
-      dao: migrationDatabase.kanaSrsDao,
+  final container = ProviderContainer(
+    overrides: [sharedPreferencesProvider.overrideWithValue(preferences)],
+  );
+  final database = container.read(databaseProvider);
+  try {
+    await KanaProgressMigration(
+      dao: database.kanaSrsDao,
       preferences: preferences,
-    ).runIfNeeded().whenComplete(migrationDatabase.close),
-  );
+    ).runIfNeeded();
+  } catch (e, st) {
+    debugPrint('Kana migration failed: $e\n$st');
+  }
 
-  runApp(
-    ProviderScope(
-      overrides: [sharedPreferencesProvider.overrideWithValue(preferences)],
-      child: const App(),
-    ),
-  );
+  runApp(UncontrolledProviderScope(container: container, child: const App()));
 }
