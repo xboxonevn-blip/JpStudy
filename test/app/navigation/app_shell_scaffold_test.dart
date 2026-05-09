@@ -22,6 +22,7 @@ void main() {
     expect(find.byTooltip('Notifications'), findsOneWidget);
     expect(find.text('Roadmap'), findsWidgets);
     expect(find.text('Kanji'), findsOneWidget);
+    expect(find.text('Foundations'), findsOneWidget);
     expect(find.text('Vocab'), findsOneWidget);
     expect(find.text('Grammar'), findsOneWidget);
     expect(find.text('Memory'), findsOneWidget);
@@ -42,7 +43,7 @@ void main() {
     expect(find.text('JP Study'), findsOneWidget);
     expect(find.byTooltip('Choose language'), findsOneWidget);
     expect(find.text('Roadmap'), findsOneWidget);
-    expect(find.text('Memory'), findsOneWidget);
+    expect(find.text('Foundations'), findsOneWidget);
     expect(find.text('Kanji'), findsOneWidget);
     expect(find.text('Exams'), findsOneWidget);
     expect(find.text('More'), findsOneWidget);

@@ -64,12 +64,12 @@ class AppShellScaffold extends ConsumerWidget {
           );
         }
 
-        final bottomItems = [items[3], items[4], items[0], items[6]];
+        final bottomItems = [items[4], items[1], items[0], items[7]];
         final bottomSelected = switch (navigationShell.currentIndex) {
-          3 => 0,
-          4 => 1,
+          4 => 0,
+          1 => 1,
           0 => 2,
-          6 => 3,
+          7 => 3,
           _ => 4,
         };
 
@@ -88,7 +88,7 @@ class AppShellScaffold extends ConsumerWidget {
                     selectedIndex: bottomSelected,
                     onDestinationSelected: (index) {
                       if (index < 4) {
-                        final branch = const [3, 4, 0, 6][index];
+                        final branch = const [4, 1, 0, 7][index];
                         _goToBranch(branch);
                         return;
                       }
@@ -114,10 +114,10 @@ class AppShellScaffold extends ConsumerWidget {
           child: ListView.separated(
             shrinkWrap: true,
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-            itemCount: items.length - 4,
+            itemCount: items.length - 5,
             separatorBuilder: (context, index) => const SizedBox(height: 8),
             itemBuilder: (context, index) {
-              final branchIndex = [1, 2, 5, 7, 8, 9][index];
+              final branchIndex = [2, 3, 6, 8, 9, 10][index];
               final item = items[branchIndex];
               return ListTile(
                 shape: RoundedRectangleBorder(
@@ -150,6 +150,11 @@ class AppShellScaffold extends ConsumerWidget {
         label: _kanji(language),
         icon: Icons.grid_view_outlined,
         selectedIcon: Icons.grid_view_rounded,
+      ),
+      _ShellItem(
+        label: _foundations(language),
+        icon: Icons.spa_outlined,
+        selectedIcon: Icons.spa_rounded,
       ),
       _ShellItem(
         label: _vocab(language),
@@ -430,7 +435,12 @@ class _ShellBody extends StatelessWidget {
 String _kanji(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Kanji',
   AppLanguage.vi => 'Hán tự',
-  AppLanguage.ja => '漢字',
+  AppLanguage.ja => '基礎',
+};
+String _foundations(AppLanguage language) => switch (language) {
+  AppLanguage.en => 'Foundations',
+  AppLanguage.vi => 'Nền tảng',
+  AppLanguage.ja => '基礎',
 };
 String _vocab(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Vocab',

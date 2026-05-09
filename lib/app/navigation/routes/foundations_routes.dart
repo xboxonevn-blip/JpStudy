@@ -5,6 +5,10 @@ import 'package:jpstudy/features/foundations/screens/han_viet_reference_screen.d
 import 'package:jpstudy/features/foundations/screens/kana_table_screen.dart';
 import 'package:jpstudy/features/foundations/screens/kana_quiz_screen.dart';
 
+StatefulShellBranch buildFoundationsBranch() {
+  return StatefulShellBranch(routes: buildFoundationsRoutes());
+}
+
 List<RouteBase> buildFoundationsRoutes() {
   return [
     GoRoute(

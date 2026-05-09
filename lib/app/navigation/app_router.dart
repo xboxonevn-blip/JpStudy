@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/navigation/app_shell_scaffold.dart';
 import 'package:jpstudy/app/navigation/routes/exam_routes.dart';
+import 'package:jpstudy/app/navigation/routes/foundations_routes.dart';
 import 'package:jpstudy/app/navigation/routes/grammar_routes.dart';
 import 'package:jpstudy/app/navigation/routes/home_routes.dart';
 import 'package:jpstudy/app/navigation/routes/kanji_routes.dart';
@@ -17,6 +18,7 @@ class AppRouter {
             AppShellScaffold(navigationShell: navigationShell),
         branches: [
           buildKanjiBranch(),
+          buildFoundationsBranch(),
           buildVocabBranch(),
           buildGrammarBranch(),
           buildHomeBranch(),
