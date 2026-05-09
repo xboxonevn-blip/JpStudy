@@ -9,18 +9,40 @@ class HanVietInlinePanel extends StatelessWidget {
     super.key,
     required this.rules,
     required this.language,
+    this.kanji,
   });
 
   final List<HanVietRule> rules;
   final AppLanguage language;
+  final String? kanji;
 
   @override
   Widget build(BuildContext context) {
-    final preview = rules.take(3).toList(growable: false);
+    final matched = kanji == null
+        ? const <HanVietRule>[]
+        : rules
+              .where(
+                (rule) =>
+                    rule.examples.any((example) => example.kanji == kanji),
+              )
+              .toList(growable: false);
+    final filterActive = kanji != null && matched.isNotEmpty;
+    final preview = (filterActive ? matched : rules.take(3))
+        .take(3)
+        .toList(growable: false);
     return Card(
       child: ExpansionTile(
         key: const ValueKey('han_viet_inline_panel'),
-        title: Text(language.hanVietInlinePanelTitle),
+        title: Row(
+          children: [
+            Expanded(child: Text(language.hanVietInlinePanelTitle)),
+            if (filterActive)
+              Chip(
+                visualDensity: VisualDensity.compact,
+                label: Text(language.hanVietPanelMatchedBadge),
+              ),
+          ],
+        ),
         childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
         children: [
           for (final rule in preview)
@@ -35,7 +57,7 @@ class HanVietInlinePanel extends StatelessWidget {
             child: TextButton.icon(
               onPressed: () => context.push(AppRoutePath.foundationsHanViet),
               icon: const Icon(Icons.open_in_new_rounded),
-              label: const Text('Xem thêm'),
+              label: const Text('More'),
             ),
           ),
         ],

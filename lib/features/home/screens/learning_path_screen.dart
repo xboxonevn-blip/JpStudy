@@ -14,6 +14,7 @@ import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/common/widgets/japanese_background.dart';
 import 'package:jpstudy/features/foundations/providers/foundations_providers.dart';
+import 'package:jpstudy/features/foundations/widgets/kana_review_due_card.dart';
 import 'package:jpstudy/features/home/home_copy.dart';
 import 'package:jpstudy/features/kanji_hub/models/kanji_practice_args.dart';
 import 'package:jpstudy/features/home/providers/continue_provider.dart';
@@ -151,6 +152,11 @@ class LearningPathScreen extends ConsumerWidget {
                           foundationsCard,
                         ],
                         const SizedBox(height: 10),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 14),
+                          child: KanaReviewDueCard(),
+                        ),
+                        const SizedBox(height: 10),
                         const DailyPlanCard()
                             .animate(delay: 60.ms)
                             .fadeIn(duration: 340.ms)
@@ -207,6 +213,11 @@ class LearningPathScreen extends ConsumerWidget {
                         const SizedBox(height: 10),
                         foundationsCard,
                       ],
+                      const SizedBox(height: 10),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 14),
+                        child: KanaReviewDueCard(),
+                      ),
                       const SizedBox(height: 10),
                       const DailyPlanCard()
                           .animate(delay: 60.ms)
@@ -304,8 +315,9 @@ class LearningPathScreen extends ConsumerWidget {
             title: language.vocabReviewTitle(level.shortLabel),
             subtitle: switch (language) {
               AppLanguage.en => 'Due vocab queue for today',
-              AppLanguage.vi => 'Hàng đợi từ vựng đến hạn hôm nay',
-              AppLanguage.ja => '今日の語彙レビュー',
+              AppLanguage.vi =>
+                'HÃ ng Ä‘á»£i tá»« vá»±ng Ä‘áº¿n háº¡n hÃ´m nay',
+              AppLanguage.ja => 'ä»Šæ—¥ã®èªžå½™ãƒ¬ãƒ“ãƒ¥ãƒ¼',
             },
           ),
         );
@@ -339,8 +351,8 @@ class LearningPathScreen extends ConsumerWidget {
 
   static String _studyPromptTitle(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Keep the Japanese rhythm',
-    AppLanguage.vi => 'Giữ nhịp tiếng Nhật mỗi ngày',
-    AppLanguage.ja => '毎日の日本語リズムを保つ',
+    AppLanguage.vi => 'Giá»¯ nhá»‹p tiáº¿ng Nháº­t má»—i ngÃ y',
+    AppLanguage.ja => 'æ¯Žæ—¥ã®æ—¥æœ¬èªžãƒªã‚ºãƒ ã‚’ä¿ã¤',
   };
 
   static String _studyPromptSubtitle(AppLanguage language) =>
@@ -401,7 +413,7 @@ class _FoundationsFeaturedCard extends StatelessWidget {
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
-                      '${language.foundationsTitle} - Bảng chữ Hiragana / Katakana / Hán Việt',
+                      '${language.foundationsTitle} - Báº£ng chá»¯ Hiragana / Katakana / HÃ¡n Viá»‡t',
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w900,
                         color: palette.ink,
@@ -698,9 +710,9 @@ class _DojoHeroCard extends StatelessWidget {
   }
 
   static String _eyebrow(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'TODAY DOJO • 日本語 TRAINING',
-    AppLanguage.vi => 'DOJO HÔM NAY • LUYỆN NHẬT NGỮ',
-    AppLanguage.ja => '今日の道場 • 日本語トレーニング',
+    AppLanguage.en => 'TODAY DOJO â€¢ æ—¥æœ¬èªž TRAINING',
+    AppLanguage.vi => 'DOJO HÃ”M NAY â€¢ LUYá»†N NHáº¬T NGá»®',
+    AppLanguage.ja => 'ä»Šæ—¥ã®é“å ´ â€¢ æ—¥æœ¬èªžãƒˆãƒ¬ãƒ¼ãƒ‹ãƒ³ã‚°',
   };
 
   static String _title(
@@ -722,14 +734,14 @@ class _DojoHeroCard extends StatelessWidget {
 
   static String _streakLabel(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Streak',
-    AppLanguage.vi => 'Chuỗi',
-    AppLanguage.ja => '連続',
+    AppLanguage.vi => 'Chuá»—i',
+    AppLanguage.ja => 'é€£ç¶š',
   };
 
   static String _xpLabel(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Today XP',
-    AppLanguage.vi => 'XP hôm nay',
-    AppLanguage.ja => '今日のXP',
+    AppLanguage.vi => 'XP hÃ´m nay',
+    AppLanguage.ja => 'ä»Šæ—¥ã®XP',
   };
 
   static String _reviewLabel(AppLanguage language) => switch (language) {
@@ -927,20 +939,20 @@ class _LearningLanesPanel extends StatelessWidget {
   static String _dueChip(AppLanguage language, int dueCount) =>
       switch (language) {
         AppLanguage.en => '$dueCount due',
-        AppLanguage.vi => '$dueCount đến hạn',
-        AppLanguage.ja => '$dueCount件待機',
+        AppLanguage.vi => '$dueCount Ä‘áº¿n háº¡n',
+        AppLanguage.ja => '$dueCountä»¶å¾…æ©Ÿ',
       };
 
   static String _readyChip(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Ready now',
-    AppLanguage.vi => 'Sẵn sàng',
-    AppLanguage.ja => '今すぐ開始',
+    AppLanguage.vi => 'Sáºµn sÃ ng',
+    AppLanguage.ja => 'ä»Šã™ãé–‹å§‹',
   };
 
   static String _immersionChip(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Real Japanese',
-    AppLanguage.vi => 'Nhật ngữ thật',
-    AppLanguage.ja => '実際の日本語',
+    AppLanguage.vi => 'Nháº­t ngá»¯ tháº­t',
+    AppLanguage.ja => 'å®Ÿéš›ã®æ—¥æœ¬èªž',
   };
 
   static String _openLaneLabel(AppLanguage language) =>

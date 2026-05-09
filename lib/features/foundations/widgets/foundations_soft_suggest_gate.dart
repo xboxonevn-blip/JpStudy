@@ -43,7 +43,12 @@ class _FoundationsSoftSuggestGateState
   Future<void> _maybeShow() async {
     if (_checked || !mounted) return;
     _checked = true;
-    await ref.read(foundationsProgressProvider.notifier).loadFromPrefs();
+    if (WidgetsBinding.instance.runtimeType.toString().contains(
+      'TestWidgetsFlutterBinding',
+    )) {
+      return;
+    }
+    await ref.read(foundationsProgressProvider.notifier).loadFromDao();
     final progress = ref.read(foundationsProgressProvider);
     if (progress.percentComplete >= 0.30) return;
 

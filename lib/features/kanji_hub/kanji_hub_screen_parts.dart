@@ -1468,6 +1468,7 @@ class _KanjiDetailDialog extends StatelessWidget {
                   data: (ruleSet) => HanVietInlinePanel(
                     rules: ruleSet.rules,
                     language: language,
+                    kanji: item.character,
                   ),
                   orElse: () => const SizedBox.shrink(),
                 );
@@ -2724,3 +2725,5 @@ class _RelatedStatCard extends StatelessWidget {
     );
   }
 }
+
+
