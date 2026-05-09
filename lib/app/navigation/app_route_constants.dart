@@ -21,6 +21,7 @@ class AppRoutePath {
   static const foundationsKana = '/foundations/kana/:script';
   static const foundationsCompounds = '/foundations/kana/compounds';
   static const foundationsHanViet = '/foundations/han-viet';
+  static const foundationsQuiz = '/foundations/quiz';
 
   static const home = '/';
   static const roadmap = '/roadmap';
@@ -93,6 +94,7 @@ class AppRouteName {
   static const foundationsKana = 'foundations-kana';
   static const foundationsCompounds = 'foundations-compounds';
   static const foundationsHanViet = 'foundations-han-viet';
+  static const foundationsQuiz = 'foundations-quiz';
 
   static const home = 'home';
   static const roadmap = 'roadmap';

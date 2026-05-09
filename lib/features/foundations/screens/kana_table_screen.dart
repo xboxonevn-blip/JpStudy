@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
@@ -77,8 +78,8 @@ class _KanaTableScreenState extends ConsumerState<KanaTableScreen>
         bottom: TabBar(
           controller: _tabController,
           tabs: const [
-            Tab(text: 'Cơ bản'),
-            Tab(text: 'Âm ghép'),
+            Tab(text: 'CÃ†Â¡ bÃ¡ÂºÂ£n'),
+            Tab(text: 'Ãƒâ€šm ghÃƒÂ©p'),
           ],
         ),
       ),
@@ -112,6 +113,7 @@ class _KanaTableScreenState extends ConsumerState<KanaTableScreen>
                 child: _tabController.index == 0
                     ? _KanaGrid(
                         key: const ValueKey('kana_base_grid'),
+                        script: _script,
                         mode: KanaView.base,
                         entries: selected.entries
                             .map(_KanaCellData.fromEntry)
@@ -120,6 +122,7 @@ class _KanaTableScreenState extends ConsumerState<KanaTableScreen>
                       )
                     : _KanaGrid(
                         key: const ValueKey('kana_compound_grid'),
+                        script: _script,
                         mode: KanaView.compound,
                         entries: selected.compounds
                             .map(_KanaCellData.fromCompound)
@@ -140,11 +143,13 @@ class _KanaTableScreenState extends ConsumerState<KanaTableScreen>
 class _KanaGrid extends ConsumerWidget {
   const _KanaGrid({
     super.key,
+    required this.script,
     required this.mode,
     required this.entries,
     required this.showRomaji,
   });
 
+  final KanaScript script;
   final KanaView mode;
   final List<_KanaCellData> entries;
   final bool showRomaji;
@@ -187,6 +192,7 @@ class _KanaGrid extends ConsumerWidget {
                           : 'kana_cell_compound_${entry.kana}',
                     ),
                     entry: entry,
+                    script: script,
                     mode: mode,
                     showRomaji: showRomaji,
                     studied: progress.isStudied(entry.kana),
@@ -210,12 +216,14 @@ class _KanaCell extends ConsumerWidget {
   const _KanaCell({
     super.key,
     required this.entry,
+    required this.script,
     required this.mode,
     required this.showRomaji,
     required this.studied,
   });
 
   final _KanaCellData entry;
+  final KanaScript script;
   final KanaView mode;
   final bool showRomaji;
   final bool studied;
@@ -232,7 +240,7 @@ class _KanaCell extends ConsumerWidget {
       color: Colors.transparent,
       child: InkWell(
         borderRadius: BorderRadius.circular(14),
-        onTap: () => _showKanaSheet(context, ref, entry),
+        onTap: () => _showKanaSheet(context, ref, entry, script, mode),
         child: Container(
           key: containerKey,
           decoration: BoxDecoration(
@@ -290,6 +298,8 @@ class _KanaCell extends ConsumerWidget {
     BuildContext context,
     WidgetRef ref,
     _KanaCellData entry,
+    KanaScript script,
+    KanaView mode,
   ) {
     showModalBottomSheet<void>(
       context: context,
@@ -316,11 +326,12 @@ class _KanaCell extends ConsumerWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      '${entry.romaji} · ${entry.row}.${entry.column}',
+                      '${entry.romaji} Ã‚Â· ${entry.row}.${entry.column}',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 8),
                     FilledButton.icon(
+                      key: ValueKey('kana_mark_${entry.kana}'),
                       onPressed: () async {
                         final notifier = ref.read(
                           foundationsProgressProvider.notifier,
@@ -328,7 +339,10 @@ class _KanaCell extends ConsumerWidget {
                         if (studied) {
                           await notifier.unmarkStudied(entry.kana);
                         } else {
-                          await notifier.markStudied(entry.kana);
+                          await notifier.markStudied(
+                            entry.kana,
+                            _kanaScriptKey(script, mode),
+                          );
                         }
                       },
                       icon: Icon(
@@ -337,6 +351,15 @@ class _KanaCell extends ConsumerWidget {
                             : Icons.radio_button_unchecked_rounded,
                       ),
                       label: Text(language.kanaIKnowItLabel),
+                    ),
+                    const SizedBox(height: 12),
+                    OutlinedButton.icon(
+                      onPressed: () => context.openFoundationsQuiz(
+                        script: script,
+                        view: mode,
+                      ),
+                      icon: const Icon(Icons.quiz_rounded),
+                      label: Text(language.kanaQuizTitle),
                     ),
                     const SizedBox(height: 12),
                     Wrap(
@@ -395,4 +418,9 @@ class _KanaCellData {
       mark: 'yoon',
     );
   }
+}
+
+String _kanaScriptKey(KanaScript script, KanaView view) {
+  if (view == KanaView.base) return script.name;
+  return 'compound_';
 }

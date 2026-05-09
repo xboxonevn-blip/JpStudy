@@ -26,6 +26,19 @@ extension AppNavigationContext on BuildContext {
   void openFoundationsCompounds() =>
       pushNamed(AppRouteName.foundationsCompounds);
   void openFoundationsHanViet() => pushNamed(AppRouteName.foundationsHanViet);
+  void openFoundationsQuiz({
+    KanaScript? script,
+    KanaView? view,
+    bool fromDue = false,
+  }) => pushNamed(
+    AppRouteName.foundationsQuiz,
+    queryParameters: {
+      if (script != null) 'script': script.name,
+      if (view != null) 'view': view.name,
+      if (fromDue) 'source': 'due',
+    },
+  );
+  void popFoundations() => pop();
   void openLibrary() => pushNamed(AppRouteName.library);
   void openStudy() => pushNamed(AppRouteName.study);
   void openStudyHub() => pushNamed(AppRouteName.studyHub);

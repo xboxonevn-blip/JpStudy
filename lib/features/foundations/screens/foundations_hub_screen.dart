@@ -7,6 +7,7 @@ import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/foundations/providers/foundations_providers.dart';
+import 'package:jpstudy/features/foundations/widgets/kana_review_due_card.dart';
 import 'package:jpstudy/features/foundations/screens/kana_table_screen.dart';
 
 class FoundationsHubScreen extends ConsumerWidget {
@@ -25,6 +26,8 @@ class FoundationsHubScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _FoundationsHero(language: language, progress: progress),
+            const SizedBox(height: AppSpacing.md),
+            const KanaReviewDueCard(),
             const SizedBox(height: AppSpacing.lg),
             LayoutBuilder(
               builder: (context, constraints) {
@@ -126,7 +129,10 @@ class _FoundationsHero extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.lg),
           FilledButton.icon(
-            onPressed: () => context.openFoundationsKana(KanaScript.hiragana),
+            onPressed: () => context.openFoundationsQuiz(
+              script: KanaScript.hiragana,
+              view: KanaView.base,
+            ),
             icon: const Icon(Icons.play_arrow_rounded),
             label: Text(language.startQuizLabel),
           ),
