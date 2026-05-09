@@ -596,7 +596,7 @@ class _FirstWinPageState extends ConsumerState<_FirstWinPage> {
       case AppLanguage.en:
         return 'Get one quick win first';
       case AppLanguage.vi:
-        return 'Kiếm một chiến thắng nhỏ trước đã';
+        return 'Thử 1 câu quiz trước';
       case AppLanguage.ja:
         return '最初に小さな成功をひとつ';
     }
@@ -607,7 +607,7 @@ class _FirstWinPageState extends ConsumerState<_FirstWinPage> {
       case AppLanguage.en:
         return 'Try one tiny question now, then jump into your first guided session.';
       case AppLanguage.vi:
-        return 'Thử một câu hỏi nhỏ ngay bây giờ, rồi vào phiên học đầu tiên có hướng dẫn.';
+        return 'Chọn đáp án. App sẽ báo đúng/sai ngay và mở phiên học đầu tiên.';
       case AppLanguage.ja:
         return '今すぐ小さな問題を1つ解いて、そのまま最初のガイド付きセッションへ進みましょう。';
     }
@@ -629,7 +629,7 @@ class _FirstWinPageState extends ConsumerState<_FirstWinPage> {
       case AppLanguage.en:
         return 'Answer this one preview question to unlock your first session.';
       case AppLanguage.vi:
-        return 'Trả lời câu hỏi xem trước này để mở khóa phiên học đầu tiên.';
+        return 'Sau khi trả lời, nút Bắt đầu sẽ bật lên.';
       case AppLanguage.ja:
         return 'このプレビュー問題に答えて、最初のセッションを解放しましょう。';
     }
@@ -742,7 +742,7 @@ class _PreviewQuestionCard extends StatelessWidget {
       case AppLanguage.en:
         return 'Nice. This is the kind of quick win your first session will give you.';
       case AppLanguage.vi:
-        return 'Tốt. Đây là kiểu chiến thắng nhỏ mà phiên học đầu tiên sẽ đem lại.';
+        return 'Đúng rồi! Bấm Bắt đầu để học tiếp.';
       case AppLanguage.ja:
         return 'いいですね。最初のセッションでは、こんな小さな達成を積み重ねていきます。';
     }
@@ -751,9 +751,9 @@ class _PreviewQuestionCard extends StatelessWidget {
   String _answerLabel(AppLanguage language, String answer) {
     switch (language) {
       case AppLanguage.en:
-        return 'Correct answer: $answer';
+        return 'Not quite. Correct answer: $answer';
       case AppLanguage.vi:
-        return 'Đáp án đúng: $answer';
+        return 'Chưa đúng. Đáp án đúng: $answer. Bấm Bắt đầu để luyện tiếp.';
       case AppLanguage.ja:
         return '正解: $answer';
     }

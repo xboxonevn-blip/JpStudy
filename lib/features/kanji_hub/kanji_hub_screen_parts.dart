@@ -608,6 +608,11 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                         ),
                       ),
                     ),
+                    OutlinedButton.icon(
+                      onPressed: context.openFoundationsHanViet,
+                      icon: const Icon(Icons.auto_stories_outlined, size: 18),
+                      label: Text(widget.language.hanVietRulesTitle),
+                    ),
                   ],
                 ),
               ],
