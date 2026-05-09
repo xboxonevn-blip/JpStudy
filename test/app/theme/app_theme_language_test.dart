@@ -25,7 +25,10 @@ void main() {
       final theme = AppTheme.light(AppLanguage.vi);
 
       expect(theme.textTheme.bodyLarge?.fontFamily, AppTheme.latinFontFamily);
-      expect(theme.textTheme.displayLarge?.fontFamily, AppTheme.latinFontFamily);
+      expect(
+        theme.textTheme.displayLarge?.fontFamily,
+        AppTheme.latinFontFamily,
+      );
       expect(
         theme.textTheme.bodyLarge?.fontFamilyFallback,
         contains(AppTheme.japaneseFontFallbacks.first),
@@ -36,22 +39,25 @@ void main() {
       );
     });
 
-    test('Japanese theme uses Japanese primary font with Latin fallback at end', () {
-      final theme = AppTheme.light(AppLanguage.ja);
+    test(
+      'Japanese theme uses Japanese primary font with Latin fallback at end',
+      () {
+        final theme = AppTheme.light(AppLanguage.ja);
 
-      expect(
-        theme.textTheme.bodyLarge?.fontFamily,
-        AppTheme.japanesePrimaryFontFamily,
-      );
-      expect(
-        theme.textTheme.displayLarge?.fontFamily,
-        AppTheme.japanesePrimaryFontFamily,
-      );
-      expect(
-        theme.textTheme.bodyLarge?.fontFamilyFallback?.last,
-        AppTheme.latinFontFamily,
-      );
-    });
+        expect(
+          theme.textTheme.bodyLarge?.fontFamily,
+          AppTheme.japanesePrimaryFontFamily,
+        );
+        expect(
+          theme.textTheme.displayLarge?.fontFamily,
+          AppTheme.japanesePrimaryFontFamily,
+        );
+        expect(
+          theme.textTheme.bodyLarge?.fontFamilyFallback?.last,
+          AppTheme.latinFontFamily,
+        );
+      },
+    );
 
     test('English theme matches Vietnamese typography strategy', () {
       final theme = AppTheme.light(AppLanguage.en);
@@ -59,7 +65,11 @@ void main() {
       expect(theme.textTheme.bodyLarge?.fontFamily, AppTheme.latinFontFamily);
       expect(
         theme.textTheme.bodyLarge?.fontFamilyFallback,
-        AppTheme.japaneseFontFallbacks,
+        containsAll(AppTheme.vietnameseFontFallbacks),
+      );
+      expect(
+        theme.textTheme.bodyLarge?.fontFamilyFallback,
+        containsAll(AppTheme.japaneseFontFallbacks),
       );
     });
   });
