@@ -124,7 +124,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('Manual only'), findsOneWidget);
+    expect(find.text('Backup when you choose'), findsOneWidget);
   });
 
   testWidgets('shows unlink button only when linked file exists', (

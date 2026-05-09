@@ -46,8 +46,8 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
                 AppLanguage.ja => '自動バックアップON',
               }
             : switch (language) {
-                AppLanguage.en => 'Manual only',
-                AppLanguage.vi => 'Thủ công',
+                AppLanguage.en => 'Backup when you choose',
+                AppLanguage.vi => 'Sao lưu khi bạn muốn',
                 AppLanguage.ja => '手動のみ',
               },
         tone: settings.autoBackupEnabled
@@ -430,9 +430,9 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
   String _subtitle(AppLanguage language) {
     switch (language) {
       case AppLanguage.en:
-        return 'Auto backup, portable backups, and linked file sync live here.';
+        return 'Keep a safe copy of your progress here.';
       case AppLanguage.vi:
-        return 'Tự động sao lưu, backup mang đi và đồng bộ qua file liên kết nằm ở đây.';
+        return 'Giữ một bản sao an toàn cho tiến độ học của bạn.';
       case AppLanguage.ja:
         return '自動バックアップ、持ち運び用バックアップ、リンクファイル同期をここで管理します。';
     }
