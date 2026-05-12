@@ -1,0 +1,1 @@
+void announcePolite(String message) {}

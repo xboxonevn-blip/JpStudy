@@ -4,9 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/navigation/app_router.dart';
 import 'package:jpstudy/app/app_scroll_behavior.dart';
 import 'package:jpstudy/app/theme/app_theme.dart';
+import 'package:jpstudy/core/analytics/analytics_consent_banner.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/theme_provider.dart';
+import 'package:jpstudy/core/web_locale.dart';
 
 class App extends ConsumerWidget {
   const App({super.key});
@@ -15,6 +17,7 @@ class App extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final language = ref.watch(appLanguageProvider);
     final themeMode = ref.watch(themeModeProvider);
+    syncHtmlLang(language);
 
     return MaterialApp.router(
       title: 'JpStudy',
@@ -32,6 +35,8 @@ class App extends ConsumerWidget {
       // Disable the animation so theme swaps are instant and crash-free.
       themeAnimationDuration: Duration.zero,
       routerConfig: AppRouter.router,
+      builder: (context, child) =>
+          AnalyticsConsentBanner(child: child ?? const SizedBox.shrink()),
     );
   }
 }
