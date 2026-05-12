@@ -24,9 +24,7 @@ void main() {
 
   group('AppSectionHeader', () {
     testWidgets('renders title text', (tester) async {
-      await tester.pumpWidget(
-        _wrap(const AppSectionHeader(title: 'My Title')),
-      );
+      await tester.pumpWidget(_wrap(const AppSectionHeader(title: 'My Title')));
       await _pump(tester);
 
       expect(find.text('My Title'), findsOneWidget);
@@ -35,10 +33,7 @@ void main() {
     testWidgets('renders caption when provided', (tester) async {
       await tester.pumpWidget(
         _wrap(
-          const AppSectionHeader(
-            title: 'Title',
-            caption: 'Some caption text',
-          ),
+          const AppSectionHeader(title: 'Title', caption: 'Some caption text'),
         ),
       );
       await _pump(tester);
@@ -47,9 +42,7 @@ void main() {
     });
 
     testWidgets('caption is absent when null', (tester) async {
-      await tester.pumpWidget(
-        _wrap(const AppSectionHeader(title: 'Title')),
-      );
+      await tester.pumpWidget(_wrap(const AppSectionHeader(title: 'Title')));
       await _pump(tester);
 
       // No second Text widget beyond the title
@@ -57,21 +50,23 @@ void main() {
       expect(find.byType(Text), findsOneWidget);
     });
 
-    testWidgets('renders action TextButton when actionLabel + onActionTap provided',
-        (tester) async {
-      await tester.pumpWidget(
-        _wrap(
-          AppSectionHeader(
-            title: 'Title',
-            actionLabel: 'See All',
-            onActionTap: () {},
+    testWidgets(
+      'renders action TextButton when actionLabel + onActionTap provided',
+      (tester) async {
+        await tester.pumpWidget(
+          _wrap(
+            AppSectionHeader(
+              title: 'Title',
+              actionLabel: 'See All',
+              onActionTap: () {},
+            ),
           ),
-        ),
-      );
-      await _pump(tester);
+        );
+        await _pump(tester);
 
-      expect(find.text('See All'), findsOneWidget);
-    });
+        expect(find.text('See All'), findsOneWidget);
+      },
+    );
 
     testWidgets('action button fires onActionTap callback', (tester) async {
       var tapped = false;
@@ -92,10 +87,10 @@ void main() {
       expect(tapped, isTrue);
     });
 
-    testWidgets('action button absent when actionLabel is null', (tester) async {
-      await tester.pumpWidget(
-        _wrap(const AppSectionHeader(title: 'Title')),
-      );
+    testWidgets('action button absent when actionLabel is null', (
+      tester,
+    ) async {
+      await tester.pumpWidget(_wrap(const AppSectionHeader(title: 'Title')));
       await _pump(tester);
 
       expect(find.byType(TextButton), findsNothing);
@@ -108,9 +103,7 @@ void main() {
 
   group('AppStatusChip', () {
     testWidgets('renders label text', (tester) async {
-      await tester.pumpWidget(
-        _wrap(const AppStatusChip(label: 'Active')),
-      );
+      await tester.pumpWidget(_wrap(const AppStatusChip(label: 'Active')));
       await _pump(tester);
 
       expect(find.text('Active'), findsOneWidget);
@@ -143,7 +136,9 @@ void main() {
       expect(find.text('Progress'), findsOneWidget);
     });
 
-    testWidgets('FractionallySizedBox uses normalized value (0.5)', (tester) async {
+    testWidgets('FractionallySizedBox uses normalized value (0.5)', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _wrap(const AppProgressStrip(value: 0.5, label: 'label')),
       );

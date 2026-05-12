@@ -14,18 +14,19 @@ class AppTheme {
   static const Color textSub = Color(0xFF61707F);
   static const String latinFontFamily = 'Manrope';
   static const String japanesePrimaryFontFamily = 'Yu Gothic UI';
+  static const String vietnameseFallbackFontFamily = 'Noto Sans';
+  static const String japaneseFallbackFontFamily = 'Noto Sans JP';
+  static const String emojiFallbackFontFamily = 'Noto Color Emoji';
   static const List<String> vietnameseFontFallbacks = <String>[
-    'Roboto',
-    'Noto Sans',
-    'Arial',
-    'Segoe UI',
+    vietnameseFallbackFontFamily,
+    japaneseFallbackFontFamily,
+    emojiFallbackFontFamily,
   ];
   static const List<String> japaneseFontFallbacks = <String>[
     japanesePrimaryFontFamily,
-    'Hiragino Sans',
-    'Meiryo',
-    'Noto Sans JP',
-    'Noto Sans CJK JP',
+    japaneseFallbackFontFamily,
+    vietnameseFallbackFontFamily,
+    emojiFallbackFontFamily,
   ];
 
   static Color getDepthColor(Color color) {
@@ -273,10 +274,9 @@ class AppTheme {
         bodyFontFamily: japanesePrimaryFontFamily,
         displayFontFamily: japanesePrimaryFontFamily,
         fontFamilyFallback: <String>[
-          'Hiragino Sans',
-          'Meiryo',
-          'Noto Sans JP',
-          'Noto Sans CJK JP',
+          japaneseFallbackFontFamily,
+          vietnameseFallbackFontFamily,
+          emojiFallbackFontFamily,
           latinFontFamily,
         ],
       );

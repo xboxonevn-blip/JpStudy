@@ -27,7 +27,10 @@ class MatchEngine {
 
   MatchEngine(this._allVocab);
 
-  List<MatchCard> generateGame(int numberOfPairs, {List<VocabItem>? priorityItems}) {
+  List<MatchCard> generateGame(
+    int numberOfPairs, {
+    List<VocabItem>? priorityItems,
+  }) {
     if (_allVocab.isEmpty) return [];
 
     final cards = <MatchCard>[];
@@ -35,10 +38,9 @@ class MatchEngine {
 
     // 1. Select priority items first
     if (priorityItems != null && priorityItems.isNotEmpty) {
-      final validPriority =
-          priorityItems
-              .where((i) => _allVocab.any((v) => v.id == i.id))
-              .toList();
+      final validPriority = priorityItems
+          .where((i) => _allVocab.any((v) => v.id == i.id))
+          .toList();
       validPriority.shuffle(_random);
       selectedVocab.addAll(validPriority.take(numberOfPairs));
     }
@@ -46,10 +48,9 @@ class MatchEngine {
     // 2. Fill remaining slots with random items
     if (selectedVocab.length < numberOfPairs) {
       final remainingCount = numberOfPairs - selectedVocab.length;
-      final remainingVocab =
-          List<VocabItem>.from(_allVocab)
-            ..removeWhere((v) => selectedVocab.contains(v))
-            ..shuffle(_random);
+      final remainingVocab = List<VocabItem>.from(_allVocab)
+        ..removeWhere((v) => selectedVocab.contains(v))
+        ..shuffle(_random);
       selectedVocab.addAll(remainingVocab.take(remainingCount));
     }
 

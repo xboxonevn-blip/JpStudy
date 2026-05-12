@@ -56,43 +56,42 @@ void main() {
   Widget buildScreen({
     required bool? onboardingDone,
     DashboardState dashboard = _kDashboard,
-  }) =>
-      ProviderScope(
-        overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-          studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
-          onboardingDoneProvider.overrideWith((ref) => onboardingDone),
-          appInitProvider.overrideWith((ref) async {}),
-          databaseProvider.overrideWithValue(appDb),
-          lessonRepositoryProvider.overrideWithValue(repo),
-          dashboardProvider.overrideWith(
-            (ref) => Stream.value(dashboard),
-          ),
-          continueActionProvider.overrideWith(
-            (ref) async => const ContinueAction(
-              type: ContinueActionType.vocabReview,
-              label: 'Review vocab',
-              count: 3,
-            ),
-          ),
-          grammarGhostCountProvider.overrideWith((ref) async* {
-            yield 0;
-          }),
-          weaknessRadarProvider.overrideWith((ref) async => <WeaknessRadarItem>[]),
-          recoveryPackProvider.overrideWith((ref) async => null),
-          dailySessionProgressProvider.overrideWith(
-            (ref) async => DailySessionProgress.empty('2024-01-01'),
-          ),
-          backupStatusProvider.overrideWith(
-            (ref) async => const BackupStatus(enabled: false, lastBackupAt: null),
-          ),
-          appSettingsControllerProvider
-              .overrideWith(() => AppSettingsController()),
-          dataSettingsControllerProvider
-              .overrideWith(() => DataSettingsController()),
-        ],
-        child: const MaterialApp(home: HomeScreen()),
-      );
+  }) => ProviderScope(
+    overrides: [
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(AppLanguage.en),
+      ),
+      studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+      onboardingDoneProvider.overrideWith((ref) => onboardingDone),
+      appInitProvider.overrideWith((ref) async {}),
+      databaseProvider.overrideWithValue(appDb),
+      lessonRepositoryProvider.overrideWithValue(repo),
+      dashboardProvider.overrideWith((ref) => Stream.value(dashboard)),
+      continueActionProvider.overrideWith(
+        (ref) async => const ContinueAction(
+          type: ContinueActionType.vocabReview,
+          label: 'Review vocab',
+          count: 3,
+        ),
+      ),
+      grammarGhostCountProvider.overrideWith((ref) async* {
+        yield 0;
+      }),
+      weaknessRadarProvider.overrideWith((ref) async => <WeaknessRadarItem>[]),
+      recoveryPackProvider.overrideWith((ref) async => null),
+      dailySessionProgressProvider.overrideWith(
+        (ref) async => DailySessionProgress.empty('2024-01-01'),
+      ),
+      backupStatusProvider.overrideWith(
+        (ref) async => const BackupStatus(enabled: false, lastBackupAt: null),
+      ),
+      appSettingsControllerProvider.overrideWith(() => AppSettingsController()),
+      dataSettingsControllerProvider.overrideWith(
+        () => DataSettingsController(),
+      ),
+    ],
+    child: const MaterialApp(home: HomeScreen()),
+  );
 
   void configureView(WidgetTester tester) {
     tester.view.physicalSize = const Size(1440, 2560);
@@ -116,27 +115,29 @@ void main() {
   }
 
   group('onboarding routing', () {
-    testWidgets('shows loading indicator when onboarding state is null',
-        (tester) async {
+    testWidgets('shows loading indicator when onboarding state is null', (
+      tester,
+    ) async {
       configureView(tester);
       await tester.pumpWidget(buildScreen(onboardingDone: null));
       await tester.pump();
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
     });
 
-    testWidgets('shows onboarding screen when onboarding is incomplete',
-        (tester) async {
+    testWidgets('shows onboarding screen when onboarding is incomplete', (
+      tester,
+    ) async {
       configureView(tester);
       await tester.pumpWidget(buildScreen(onboardingDone: false));
       await pumpAndSettle(tester);
-      expect(
-          find.text(AppLanguage.en.onboardingWelcomeTitle), findsOneWidget);
+      expect(find.text(AppLanguage.en.onboardingWelcomeTitle), findsOneWidget);
     });
   });
 
   group('home screen — onboarding complete', () {
-    testWidgets('renders LearningPathScreen when onboarding is done',
-        (tester) async {
+    testWidgets('renders LearningPathScreen when onboarding is done', (
+      tester,
+    ) async {
       configureView(tester);
       await tester.pumpWidget(buildScreen(onboardingDone: true));
       await pumpAndSettle(tester);
@@ -144,8 +145,7 @@ void main() {
       await cleanUp(tester);
     });
 
-    testWidgets('shows header bar with streak and XP stats',
-        (tester) async {
+    testWidgets('shows header bar with streak and XP stats', (tester) async {
       configureView(tester);
       await tester.pumpWidget(buildScreen(onboardingDone: true));
       await pumpAndSettle(tester);
@@ -184,10 +184,9 @@ void main() {
 
     testWidgets('shows reviews due count in header', (tester) async {
       configureView(tester);
-      await tester.pumpWidget(buildScreen(
-        onboardingDone: true,
-        dashboard: _kDashboard,
-      ));
+      await tester.pumpWidget(
+        buildScreen(onboardingDone: true, dashboard: _kDashboard),
+      );
       await pumpAndSettle(tester);
       // vocabDue(3) + grammarDue(2) = 5 in the header stats
       expect(find.text('5'), findsWidgets);
@@ -196,20 +195,22 @@ void main() {
 
     testWidgets('XP shows simple number when goal reached', (tester) async {
       configureView(tester);
-      await tester.pumpWidget(buildScreen(
-        onboardingDone: true,
-        dashboard: const DashboardState(
-          streak: 1,
-          todayXp: 60,
-          vocabDue: 0,
-          grammarDue: 0,
-          kanjiDue: 0,
-          vocabMistakeCount: 0,
-          grammarMistakeCount: 0,
-          kanjiMistakeCount: 0,
-          totalMistakeCount: 0,
+      await tester.pumpWidget(
+        buildScreen(
+          onboardingDone: true,
+          dashboard: const DashboardState(
+            streak: 1,
+            todayXp: 60,
+            vocabDue: 0,
+            grammarDue: 0,
+            kanjiDue: 0,
+            vocabMistakeCount: 0,
+            grammarMistakeCount: 0,
+            kanjiMistakeCount: 0,
+            totalMistakeCount: 0,
+          ),
         ),
-      ));
+      );
       await pumpAndSettle(tester);
       // When XP >= 50, shows just "60" not "60/50"
       expect(find.text('60'), findsWidgets);

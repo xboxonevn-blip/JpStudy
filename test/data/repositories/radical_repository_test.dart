@@ -30,32 +30,38 @@ class _FakeAssetBundle extends CachingAssetBundle {
 }
 
 void main() {
-  test('falls back to source radicals asset when primary asset is missing', () async {
-    final bundle = _FakeAssetBundle({
-      'assets/data/support/kanji/radicals_214.source.json':
-          '[{"id":1,"kanji":"一","strokes":1,"vi_meaning":"nhat","vi_meaning_raw":"nhat"}]',
-    });
+  test(
+    'falls back to source radicals asset when primary asset is missing',
+    () async {
+      final bundle = _FakeAssetBundle({
+        'assets/data/support/kanji/radicals_214.source.json':
+            '[{"id":1,"kanji":"一","strokes":1,"vi_meaning":"nhat","vi_meaning_raw":"nhat"}]',
+      });
 
-    final repo = RadicalRepository(bundle: bundle);
-    final items = await repo.loadAll();
+      final repo = RadicalRepository(bundle: bundle);
+      final items = await repo.loadAll();
 
-    expect(items, isNotEmpty);
-    expect(items.first.id, 1);
-    expect(items.first.kanji, '一');
-  });
+      expect(items, isNotEmpty);
+      expect(items.first.id, 1);
+      expect(items.first.kanji, '一');
+    },
+  );
 
-  test('falls back to source radicals asset when primary asset is empty', () async {
-    final bundle = _FakeAssetBundle({
-      'assets/data/support/kanji/radicals_214.json': '   ',
-      'assets/data/support/kanji/radicals_214.source.json':
-          '[{"id":2,"kanji":"丨","strokes":1,"vi_meaning":"so","vi_meaning_raw":"so"}]',
-    });
+  test(
+    'falls back to source radicals asset when primary asset is empty',
+    () async {
+      final bundle = _FakeAssetBundle({
+        'assets/data/support/kanji/radicals_214.json': '   ',
+        'assets/data/support/kanji/radicals_214.source.json':
+            '[{"id":2,"kanji":"丨","strokes":1,"vi_meaning":"so","vi_meaning_raw":"so"}]',
+      });
 
-    final repo = RadicalRepository(bundle: bundle);
-    final items = await repo.loadAll();
+      final repo = RadicalRepository(bundle: bundle);
+      final items = await repo.loadAll();
 
-    expect(items, isNotEmpty);
-    expect(items.first.id, 2);
-    expect(items.first.kanji, '丨');
-  });
+      expect(items, isNotEmpty);
+      expect(items.first.id, 2);
+      expect(items.first.kanji, '丨');
+    },
+  );
 }

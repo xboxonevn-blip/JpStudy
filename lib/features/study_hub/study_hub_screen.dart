@@ -104,7 +104,7 @@ String _levelLabel(AppLanguage language, StudyResourceLevel level) =>
         vi: 'Nâng cao',
         ja: '上級',
       ),
-};
+    };
 
 // ---------------------------------------------------------------------------
 // Screen

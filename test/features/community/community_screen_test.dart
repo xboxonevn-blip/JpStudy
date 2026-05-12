@@ -7,7 +7,11 @@ import 'package:jpstudy/features/community/community_screen.dart';
 
 Widget buildScreen({AppLanguage language = AppLanguage.en}) {
   return ProviderScope(
-    overrides: [appLanguageProvider.overrideWith((ref) => language)],
+    overrides: [
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(language),
+      ),
+    ],
     child: const MaterialApp(home: CommunityScreen()),
   );
 }
@@ -32,10 +36,7 @@ void main() {
 
     expect(find.byType(AlertDialog), findsOneWidget);
     expect(find.text('Send feedback'), findsAtLeastNWidgets(1));
-    expect(
-      find.text('What would you like us to know?'),
-      findsOneWidget,
-    );
+    expect(find.text('What would you like us to know?'), findsOneWidget);
   });
 
   testWidgets('tapping Cancel closes the feedback dialog', (tester) async {

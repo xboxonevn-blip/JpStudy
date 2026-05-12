@@ -50,16 +50,15 @@ final _session = TestSession(
 );
 
 Widget buildScreen() => ProviderScope(
-      overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-      ],
-      child: MaterialApp(
-        home: TestReviewScreen(
-          session: _session,
-          lessonTitle: 'Lesson 1',
-        ),
-      ),
-    );
+  overrides: [
+    appLanguageProvider.overrideWith(
+      (ref) => AppLanguageController.test(AppLanguage.en),
+    ),
+  ],
+  child: MaterialApp(
+    home: TestReviewScreen(session: _session, lessonTitle: 'Lesson 1'),
+  ),
+);
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
@@ -72,8 +71,9 @@ void main() {
     expect(find.text('Wrong/Skipped'), findsOneWidget);
   });
 
-  testWidgets('shows review cards and retry wrong button on initial render',
-      (tester) async {
+  testWidgets('shows review cards and retry wrong button on initial render', (
+    tester,
+  ) async {
     await tester.pumpWidget(buildScreen());
     await tester.pump();
     expect(find.text('Retry Wrong'), findsOneWidget);

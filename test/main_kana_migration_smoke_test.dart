@@ -6,7 +6,7 @@ import 'package:jpstudy/data/db/database_provider.dart';
 import 'package:jpstudy/features/foundations/providers/foundations_providers.dart';
 import 'package:jpstudy/features/foundations/providers/kana_review_provider.dart';
 import 'package:jpstudy/features/foundations/services/kana_progress_migration.dart';
-import 'package:jpstudy/features/me/providers/auto_cloud_upload_provider.dart';
+import 'package:jpstudy/core/shared_preferences_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {

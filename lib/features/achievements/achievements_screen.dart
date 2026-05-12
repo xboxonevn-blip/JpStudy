@@ -227,11 +227,7 @@ class _CounterBadge extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            Icons.emoji_events_rounded,
-            color: palette.success,
-            size: 28,
-          ),
+          Icon(Icons.emoji_events_rounded, color: palette.success, size: 28),
           const SizedBox(width: 12),
           Text(
             '$unlocked / $total',
@@ -365,11 +361,7 @@ class _AchievementTile extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  Icons.check_circle,
-                  size: 14,
-                  color: palette.success,
-                ),
+                Icon(Icons.check_circle, size: 14, color: palette.success),
                 const SizedBox(width: 4),
                 Text(
                   _formatDate(context, entry!.earnedAt!),
@@ -626,5 +618,3 @@ class _Category {
   final IconData icon;
   final List<learn.AchievementType> types;
 }
-
-

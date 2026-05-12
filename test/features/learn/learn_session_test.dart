@@ -6,23 +6,24 @@ import 'package:jpstudy/features/learn/models/learn_session.dart';
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
-VocabItem _vocab(int id) => VocabItem(id: id, term: 'term$id', meaning: 'meaning$id', level: 'N5');
+VocabItem _vocab(int id) =>
+    VocabItem(id: id, term: 'term$id', meaning: 'meaning$id', level: 'N5');
 
 Question _q(int vocabId) => Question(
-      id: 'q$vocabId',
-      type: QuestionType.multipleChoice,
-      targetItem: _vocab(vocabId),
-      questionText: 'term$vocabId',
-      correctAnswer: 'meaning$vocabId',
-    );
+  id: 'q$vocabId',
+  type: QuestionType.multipleChoice,
+  targetItem: _vocab(vocabId),
+  questionText: 'term$vocabId',
+  correctAnswer: 'meaning$vocabId',
+);
 
 QuestionResult _result(Question q, {bool isCorrect = true}) => QuestionResult(
-      question: q,
-      userAnswer: isCorrect ? q.correctAnswer : 'wrong',
-      isCorrect: isCorrect,
-      timeTaken: const Duration(seconds: 2),
-      answeredAt: DateTime(2025),
-    );
+  question: q,
+  userAnswer: isCorrect ? q.correctAnswer : 'wrong',
+  isCorrect: isCorrect,
+  timeTaken: const Duration(seconds: 2),
+  answeredAt: DateTime(2025),
+);
 
 LearnSession _session({List<Question>? questions}) {
   return LearnSession(

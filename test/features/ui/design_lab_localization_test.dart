@@ -12,7 +12,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.vi),
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.vi),
+          ),
         ],
         child: const MaterialApp(home: DesignLabScreen()),
       ),

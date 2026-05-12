@@ -13,7 +13,11 @@ Widget buildConfigScreen({
   LearnConfig? startedWith,
 }) {
   return ProviderScope(
-    overrides: [appLanguageProvider.overrideWith((ref) => AppLanguage.en)],
+    overrides: [
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(AppLanguage.en),
+      ),
+    ],
     child: MaterialApp(
       home: LearnConfigScreen(
         lessonId: 1,
@@ -44,7 +48,11 @@ void main() {
     LearnConfig? captured;
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [appLanguageProvider.overrideWith((ref) => AppLanguage.en)],
+        overrides: [
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
+        ],
         child: MaterialApp(
           home: LearnConfigScreen(
             lessonId: 1,

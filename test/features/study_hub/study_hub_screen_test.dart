@@ -17,14 +17,17 @@ Widget _buildScreen({AppLanguage language = AppLanguage.en}) {
       GoRoute(
         name: 'jlpt-coach',
         path: '/jlpt/coach',
-        builder: (_, _) => const Scaffold(body: Center(child: Text('JLPT Coach'))),
+        builder: (_, _) =>
+            const Scaffold(body: Center(child: Text('JLPT Coach'))),
       ),
     ],
   );
 
   return ProviderScope(
     overrides: [
-      appLanguageProvider.overrideWith((ref) => language),
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(language),
+      ),
       studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
       studyHubDecksProvider.overrideWith(
         (ref) async => const StudyHubDecksBoard(
@@ -175,7 +178,10 @@ void main() {
 
     final askFields = find.byType(TextField);
     await tester.enterText(askFields.at(0), 'Is N3 hard?');
-    await tester.enterText(askFields.at(1), 'I am wondering how big the jump is.');
+    await tester.enterText(
+      askFields.at(1),
+      'I am wondering how big the jump is.',
+    );
     await tester.tap(find.text('Post'));
     await tester.pumpAndSettle();
 
@@ -187,7 +193,10 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Add an answer'), findsOneWidget);
-    await tester.enterText(find.byType(TextField).first, 'It is manageable with steady reading.');
+    await tester.enterText(
+      find.byType(TextField).first,
+      'It is manageable with steady reading.',
+    );
     await tester.tap(find.text('Post'));
     await tester.pumpAndSettle();
 
@@ -195,4 +204,3 @@ void main() {
     expect(find.text('Reopen'), findsWidgets);
   });
 }
-

@@ -33,7 +33,9 @@ class _DesignLabScreenState extends ConsumerState<DesignLabScreen> {
     final language = ref.watch(appLanguageProvider);
     return Scaffold(
       appBar: AppBar(
-        title: Text(_tr(language, 'Design Lab', 'Phòng thí nghiệm thiết kế', 'デザインラボ')),
+        title: Text(
+          _tr(language, 'Design Lab', 'Phòng thí nghiệm thiết kế', 'デザインラボ'),
+        ),
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -110,7 +112,12 @@ class _DesignLabScreenState extends ConsumerState<DesignLabScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            _tr(language, 'Live UI/UX Workflow', 'Quy trình UI/UX trực tiếp', 'ライブ UI/UX ワークフロー'),
+            _tr(
+              language,
+              'Live UI/UX Workflow',
+              'Quy trình UI/UX trực tiếp',
+              'ライブ UI/UX ワークフロー',
+            ),
             style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w800,
@@ -183,8 +190,18 @@ class _DesignLabScreenState extends ConsumerState<DesignLabScreen> {
       case LabStage.discover:
         return _panel(
           context: context,
-          title: _tr(language, 'Wireframe Snapshot', 'Ảnh chụp wireframe', 'ワイヤーフレームのスナップショット'),
-          subtitle: _tr(language, 'Block-level layout before visual polish.', 'Bố cục ở mức khối trước khi polish giao diện.', 'ビジュアル調整前のブロックレベルのレイアウトです。'),
+          title: _tr(
+            language,
+            'Wireframe Snapshot',
+            'Ảnh chụp wireframe',
+            'ワイヤーフレームのスナップショット',
+          ),
+          subtitle: _tr(
+            language,
+            'Block-level layout before visual polish.',
+            'Bố cục ở mức khối trước khi polish giao diện.',
+            'ビジュアル調整前のブロックレベルのレイアウトです。',
+          ),
           child: Column(
             children: [
               _skeletonBlock(context, height: 36),
@@ -204,8 +221,18 @@ class _DesignLabScreenState extends ConsumerState<DesignLabScreen> {
       case LabStage.visual:
         return _panel(
           context: context,
-          title: _tr(language, 'Visual Direction', 'Định hướng hình ảnh', 'ビジュアル方針'),
-          subtitle: _tr(language, 'Color, spacing, and card rhythm review.', 'Rà màu sắc, khoảng cách và nhịp điệu thẻ.', '色・余白・カードのリズムを確認します。'),
+          title: _tr(
+            language,
+            'Visual Direction',
+            'Định hướng hình ảnh',
+            'ビジュアル方針',
+          ),
+          subtitle: _tr(
+            language,
+            'Color, spacing, and card rhythm review.',
+            'Rà màu sắc, khoảng cách và nhịp điệu thẻ.',
+            '色・余白・カードのリズムを確認します。',
+          ),
           child: Column(
             children: [
               Container(
@@ -221,15 +248,24 @@ class _DesignLabScreenState extends ConsumerState<DesignLabScreen> {
               Row(
                 children: [
                   Expanded(
-                    child: _swatchCard(_tr(language, 'Primary', 'Chính', 'メイン'), palette.primary),
+                    child: _swatchCard(
+                      _tr(language, 'Primary', 'Chính', 'メイン'),
+                      palette.primary,
+                    ),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
-                    child: _swatchCard(_tr(language, 'Accent', 'Nhấn', 'アクセント'), palette.accent),
+                    child: _swatchCard(
+                      _tr(language, 'Accent', 'Nhấn', 'アクセント'),
+                      palette.accent,
+                    ),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
-                    child: _swatchCard(_tr(language, 'Neutral', 'Trung tính', 'ニュートラル'), palette.ink),
+                    child: _swatchCard(
+                      _tr(language, 'Neutral', 'Trung tính', 'ニュートラル'),
+                      palette.ink,
+                    ),
                   ),
                 ],
               ),
@@ -240,16 +276,61 @@ class _DesignLabScreenState extends ConsumerState<DesignLabScreen> {
         return _panel(
           context: context,
           title: _tr(language, 'Validation Notes', 'Ghi chú kiểm tra', '検証メモ'),
-          subtitle: _tr(language, 'Quick quality readout before merge.', 'Tóm tắt chất lượng nhanh trước khi merge.', 'マージ前の品質チェックを素早く確認します。'),
+          subtitle: _tr(
+            language,
+            'Quick quality readout before merge.',
+            'Tóm tắt chất lượng nhanh trước khi merge.',
+            'マージ前の品質チェックを素早く確認します。',
+          ),
           child: Wrap(
             spacing: 8,
             runSpacing: 8,
             children: [
-              _MetricChip(label: _tr(language, 'Tap targets >= 44px', 'Vùng chạm >= 44px', 'タップ領域 >= 44px'), ok: true),
-              _MetricChip(label: _tr(language, 'Text contrast pass', 'Độ tương phản chữ đạt', '文字コントラスト合格'), ok: true),
-              _MetricChip(label: _tr(language, 'Scroll behavior checked', 'Đã kiểm tra cuộn', 'スクロール挙動確認済み'), ok: true),
-              _MetricChip(label: _tr(language, 'Animation intensity reviewed', 'Đã rà cường độ animation', 'アニメーション強度を確認済み'), ok: false),
-              _MetricChip(label: _tr(language, 'QA walkthrough pass', 'Walkthrough QA đạt', 'QA ウォークスルー合格'), ok: false),
+              _MetricChip(
+                label: _tr(
+                  language,
+                  'Tap targets >= 44px',
+                  'Vùng chạm >= 44px',
+                  'タップ領域 >= 44px',
+                ),
+                ok: true,
+              ),
+              _MetricChip(
+                label: _tr(
+                  language,
+                  'Text contrast pass',
+                  'Độ tương phản chữ đạt',
+                  '文字コントラスト合格',
+                ),
+                ok: true,
+              ),
+              _MetricChip(
+                label: _tr(
+                  language,
+                  'Scroll behavior checked',
+                  'Đã kiểm tra cuộn',
+                  'スクロール挙動確認済み',
+                ),
+                ok: true,
+              ),
+              _MetricChip(
+                label: _tr(
+                  language,
+                  'Animation intensity reviewed',
+                  'Đã rà cường độ animation',
+                  'アニメーション強度を確認済み',
+                ),
+                ok: false,
+              ),
+              _MetricChip(
+                label: _tr(
+                  language,
+                  'QA walkthrough pass',
+                  'Walkthrough QA đạt',
+                  'QA ウォークスルー合格',
+                ),
+                ok: false,
+              ),
             ],
           ),
         );
@@ -259,16 +340,66 @@ class _DesignLabScreenState extends ConsumerState<DesignLabScreen> {
   Widget _progressChecklist(BuildContext context, AppLanguage language) {
     final palette = context.appPalette;
     final tasks = [
-      (1, _tr(language, 'Wireframe approved in team review', 'Wireframe đã được duyệt trong buổi review', 'ワイヤーフレームがレビューで承認済み')),
-      (2, _tr(language, 'Visual style tokenized (color/spacing/type)', 'Visual style đã token hóa (màu/khoảng cách/chữ)', 'ビジュアルスタイルをトークン化済み（色・余白・文字）')),
-      (3, _tr(language, 'Prototype tested on desktop + mobile', 'Prototype đã test trên desktop + mobile', 'プロトタイプを desktop + mobile で確認済み')),
-      (4, _tr(language, 'Feedback log written in docs/uiux-progress.md', 'Đã ghi log phản hồi trong docs/uiux-progress.md', 'docs/uiux-progress.md にフィードバックを記録済み')),
-      (5, _tr(language, 'Ready for handoff to production screen', 'Sẵn sàng bàn giao sang màn hình production', '本番画面への引き継ぎ準備完了')),
+      (
+        1,
+        _tr(
+          language,
+          'Wireframe approved in team review',
+          'Wireframe đã được duyệt trong buổi review',
+          'ワイヤーフレームがレビューで承認済み',
+        ),
+      ),
+      (
+        2,
+        _tr(
+          language,
+          'Visual style tokenized (color/spacing/type)',
+          'Visual style đã token hóa (màu/khoảng cách/chữ)',
+          'ビジュアルスタイルをトークン化済み（色・余白・文字）',
+        ),
+      ),
+      (
+        3,
+        _tr(
+          language,
+          'Prototype tested on desktop + mobile',
+          'Prototype đã test trên desktop + mobile',
+          'プロトタイプを desktop + mobile で確認済み',
+        ),
+      ),
+      (
+        4,
+        _tr(
+          language,
+          'Feedback log written in docs/uiux-progress.md',
+          'Đã ghi log phản hồi trong docs/uiux-progress.md',
+          'docs/uiux-progress.md にフィードバックを記録済み',
+        ),
+      ),
+      (
+        5,
+        _tr(
+          language,
+          'Ready for handoff to production screen',
+          'Sẵn sàng bàn giao sang màn hình production',
+          '本番画面への引き継ぎ準備完了',
+        ),
+      ),
     ];
     return _panel(
       context: context,
-      title: _tr(language, 'Process Checklist', 'Checklist quy trình', 'プロセスチェックリスト'),
-      subtitle: _tr(language, 'Track each iteration in one place.', 'Theo dõi từng iteration ở một nơi.', '各イテレーションを一箇所で管理します。'),
+      title: _tr(
+        language,
+        'Process Checklist',
+        'Checklist quy trình',
+        'プロセスチェックリスト',
+      ),
+      subtitle: _tr(
+        language,
+        'Track each iteration in one place.',
+        'Theo dõi từng iteration ở một nơi.',
+        '各イテレーションを一箇所で管理します。',
+      ),
       child: Column(
         children: [
           for (final (id, label) in tasks)
@@ -290,7 +421,12 @@ class _DesignLabScreenState extends ConsumerState<DesignLabScreen> {
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              _tr(language, 'Next: update docs/uiux-progress.md and docs/uiux-review-checklist.md', 'Tiếp theo: cập nhật docs/uiux-progress.md và docs/uiux-review-checklist.md', '次: docs/uiux-progress.md と docs/uiux-review-checklist.md を更新'),
+              _tr(
+                language,
+                'Next: update docs/uiux-progress.md and docs/uiux-review-checklist.md',
+                'Tiếp theo: cập nhật docs/uiux-progress.md và docs/uiux-review-checklist.md',
+                '次: docs/uiux-progress.md と docs/uiux-review-checklist.md を更新',
+              ),
               style: TextStyle(
                 color: palette.ink.withValues(alpha: 0.7),
                 fontWeight: FontWeight.w600,
@@ -328,7 +464,10 @@ class _DesignLabScreenState extends ConsumerState<DesignLabScreen> {
             ),
           ),
           const SizedBox(height: 4),
-          Text(subtitle, style: TextStyle(color: palette.ink.withValues(alpha: 0.7))),
+          Text(
+            subtitle,
+            style: TextStyle(color: palette.ink.withValues(alpha: 0.7)),
+          ),
           const SizedBox(height: 12),
           child,
         ],
@@ -375,7 +514,9 @@ class _MetricChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final palette = context.appPalette;
-    final bg = ok ? palette.success.withValues(alpha: 0.18) : palette.error.withValues(alpha: 0.1);
+    final bg = ok
+        ? palette.success.withValues(alpha: 0.18)
+        : palette.error.withValues(alpha: 0.1);
     final fg = ok ? palette.success : palette.error;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),

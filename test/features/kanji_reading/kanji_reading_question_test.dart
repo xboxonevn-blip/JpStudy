@@ -56,17 +56,20 @@ void main() {
       expect(q.prompt, 'ひ');
     });
 
-    test('readingToKanji mode falls back to character when both readings are null', () {
-      // Pathological — kanji with no readings stored — but the lookup must
-      // not crash. The character itself is the safest fallback.
-      final q = KanjiReadingQuestion(
-        target: kanji(character: '?', onyomi: null, kunyomi: null),
-        options: const ['?', '!'],
-        correctIndex: 0,
-        mode: KanjiQuizMode.readingToKanji,
-      );
-      expect(q.prompt, '?');
-    });
+    test(
+      'readingToKanji mode falls back to character when both readings are null',
+      () {
+        // Pathological — kanji with no readings stored — but the lookup must
+        // not crash. The character itself is the safest fallback.
+        final q = KanjiReadingQuestion(
+          target: kanji(character: '?', onyomi: null, kunyomi: null),
+          options: const ['?', '!'],
+          correctIndex: 0,
+          mode: KanjiQuizMode.readingToKanji,
+        );
+        expect(q.prompt, '?');
+      },
+    );
   });
 
   // ── promptLabel ───────────────────────────────────────────────────────────
@@ -186,15 +189,18 @@ void main() {
       }
     });
 
-    test('the option at correctIndex matches the expected answer for each mode', () {
-      final result = KanjiReadingQuestion.generate(fivePool, count: 5);
-      for (final q in result) {
-        final expected = q.mode == KanjiQuizMode.kanjiToReading
-            ? (q.target.onyomi ?? q.target.kunyomi ?? q.target.character)
-            : q.target.character;
-        expect(q.options[q.correctIndex], expected);
-      }
-    });
+    test(
+      'the option at correctIndex matches the expected answer for each mode',
+      () {
+        final result = KanjiReadingQuestion.generate(fivePool, count: 5);
+        for (final q in result) {
+          final expected = q.mode == KanjiQuizMode.kanjiToReading
+              ? (q.target.onyomi ?? q.target.kunyomi ?? q.target.character)
+              : q.target.character;
+          expect(q.options[q.correctIndex], expected);
+        }
+      },
+    );
 
     test('target of every question is one of the input pool items', () {
       final ids = fivePool.map((k) => k.id).toSet();
@@ -208,9 +214,7 @@ void main() {
       // Targets come from `pool`, but option strings should be drawn from
       // the (larger) distractorPool. We verify by giving a tiny pool with
       // only ONE usable target, and a richer distractor pool.
-      final tinyPool = [
-        kanji(id: 100, character: '夜', onyomi: 'ヤ'),
-      ];
+      final tinyPool = [kanji(id: 100, character: '夜', onyomi: 'ヤ')];
       final richDistractors = [
         kanji(id: 1, character: '日', onyomi: 'ニチ'),
         kanji(id: 2, character: '本', onyomi: 'ホン'),

@@ -91,10 +91,7 @@ void main() {
 
     test('clearTimeLimit=true overrides any timeLimitMinutes argument', () {
       // The implementation evaluates clearTimeLimit FIRST.
-      final updated = base.copyWith(
-        clearTimeLimit: true,
-        timeLimitMinutes: 99,
-      );
+      final updated = base.copyWith(clearTimeLimit: true, timeLimitMinutes: 99);
       expect(updated.timeLimitMinutes, isNull);
     });
 

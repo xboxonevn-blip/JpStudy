@@ -9,13 +9,16 @@ import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/common/widgets/error_state_widget.dart';
 import 'package:jpstudy/features/progress/providers/review_forecast_provider.dart';
 
-String _tr(AppLanguage l,
-        {required String en, required String vi, required String ja}) =>
-    switch (l) {
-      AppLanguage.en => en,
-      AppLanguage.vi => vi,
-      AppLanguage.ja => ja,
-    };
+String _tr(
+  AppLanguage l, {
+  required String en,
+  required String vi,
+  required String ja,
+}) => switch (l) {
+  AppLanguage.en => en,
+  AppLanguage.vi => vi,
+  AppLanguage.ja => ja,
+};
 
 class ReviewForecastScreen extends ConsumerWidget {
   const ReviewForecastScreen({super.key});
@@ -27,10 +30,9 @@ class ReviewForecastScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(_tr(language,
-            en: 'Review Forecast',
-            vi: 'Dự báo ôn tập',
-            ja: '復習予報')),
+        title: Text(
+          _tr(language, en: 'Review Forecast', vi: 'Dự báo ôn tập', ja: '復習予報'),
+        ),
       ),
       body: forecastAsync.when(
         data: (data) => _ForecastBody(data: data, language: language),
@@ -105,8 +107,7 @@ class _SummaryHero extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final weekTotal =
-        data.days.take(7).fold<int>(0, (sum, d) => sum + d.total);
+    final weekTotal = data.days.take(7).fold<int>(0, (sum, d) => sum + d.total);
 
     return AppSectionCard(
       padding: const EdgeInsets.all(20),
@@ -117,17 +118,27 @@ class _SummaryHero extends StatelessWidget {
               Expanded(
                 child: _HeroStat(
                   value: '${data.totalDueNow}',
-                  label: _tr(language,
-                      en: 'Due Today', vi: 'Đến hạn hôm nay', ja: '今日の復習'),
-                  color: data.totalDueNow > 0 ? palette.warning : palette.success,
+                  label: _tr(
+                    language,
+                    en: 'Due Today',
+                    vi: 'Đến hạn hôm nay',
+                    ja: '今日の復習',
+                  ),
+                  color: data.totalDueNow > 0
+                      ? palette.warning
+                      : palette.success,
                   palette: palette,
                 ),
               ),
               Expanded(
                 child: _HeroStat(
                   value: '$weekTotal',
-                  label: _tr(language,
-                      en: 'This Week', vi: 'Tuần này', ja: '今週'),
+                  label: _tr(
+                    language,
+                    en: 'This Week',
+                    vi: 'Tuần này',
+                    ja: '今週',
+                  ),
                   color: palette.info,
                   palette: palette,
                 ),
@@ -135,8 +146,12 @@ class _SummaryHero extends StatelessWidget {
               Expanded(
                 child: _HeroStat(
                   value: '${data.totalTracked}',
-                  label: _tr(language,
-                      en: 'Tracked', vi: 'Đang theo dõi', ja: '追跡中'),
+                  label: _tr(
+                    language,
+                    en: 'Tracked',
+                    vi: 'Đang theo dõi',
+                    ja: '追跡中',
+                  ),
                   color: palette.primary,
                   palette: palette,
                 ),
@@ -153,8 +168,11 @@ class _SummaryHero extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.speed_rounded,
-                    size: 18, color: palette.ink.withValues(alpha: 0.50)),
+                Icon(
+                  Icons.speed_rounded,
+                  size: 18,
+                  color: palette.ink.withValues(alpha: 0.50),
+                ),
                 const SizedBox(width: 8),
                 Text(
                   '${_tr(language, en: 'Avg Stability', vi: 'Ổn định TB', ja: '平均安定度')}: ${data.avgStability.toStringAsFixed(1)}',
@@ -238,10 +256,12 @@ class _ForecastChart extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _SectionLabel(
-            label: _tr(language,
-                en: '14-Day Forecast',
-                vi: 'Dự báo 14 ngày',
-                ja: '14日間の予報'),
+            label: _tr(
+              language,
+              en: '14-Day Forecast',
+              vi: 'Dự báo 14 ngày',
+              ja: '14日間の予報',
+            ),
             palette: palette,
           ),
           const SizedBox(height: 16),
@@ -294,19 +314,19 @@ class _ForecastChart extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _LegendDot(
-                  color: palette.primary,
-                  label: _tr(language,
-                      en: 'Vocab', vi: 'Từ vựng', ja: '語彙')),
+                color: palette.primary,
+                label: _tr(language, en: 'Vocab', vi: 'Từ vựng', ja: '語彙'),
+              ),
               const SizedBox(width: 16),
               _LegendDot(
-                  color: palette.secondary,
-                  label: _tr(language,
-                      en: 'Grammar', vi: 'Ngữ pháp', ja: '文法')),
+                color: palette.secondary,
+                label: _tr(language, en: 'Grammar', vi: 'Ngữ pháp', ja: '文法'),
+              ),
               const SizedBox(width: 16),
               _LegendDot(
-                  color: palette.accent,
-                  label: _tr(language,
-                      en: 'Kanji', vi: 'Kanji', ja: '漢字')),
+                color: palette.accent,
+                label: _tr(language, en: 'Kanji', vi: 'Kanji', ja: '漢字'),
+              ),
             ],
           ),
         ],
@@ -336,10 +356,10 @@ class _ForecastBar extends StatelessWidget {
 
     // Stacked: vocab (bottom) + grammar (mid) + kanji (top)
     final totalH = barHeight;
-    final vocabH =
-        day.total > 0 ? (day.vocabDue / day.total) * totalH : 0.0;
-    final grammarH =
-        day.total > 0 ? (day.grammarDue / day.total) * totalH : 0.0;
+    final vocabH = day.total > 0 ? (day.vocabDue / day.total) * totalH : 0.0;
+    final grammarH = day.total > 0
+        ? (day.grammarDue / day.total) * totalH
+        : 0.0;
     final kanjiH = totalH - vocabH - grammarH;
 
     return Tooltip(
@@ -421,10 +441,9 @@ class _LegendDot extends StatelessWidget {
           label,
           style: TextStyle(
             fontSize: 11,
-            color: Theme.of(context)
-                .extension<AppThemePalette>()!
-                .ink
-                .withValues(alpha: 0.55),
+            color: Theme.of(
+              context,
+            ).extension<AppThemePalette>()!.ink.withValues(alpha: 0.55),
           ),
         ),
       ],
@@ -448,17 +467,16 @@ class _StabilitySection extends StatelessWidget {
   final AppThemePalette palette;
 
   List<Color> get _bucketColors => [
-    palette.error,    // Critical - red
-    palette.warning,  // Weak - amber
-    palette.info,     // Growing - blue
-    palette.success,  // Strong - green
-    palette.accent,   // Mastered - purple
+    palette.error, // Critical - red
+    palette.warning, // Weak - amber
+    palette.info, // Growing - blue
+    palette.success, // Strong - green
+    palette.accent, // Mastered - purple
   ];
 
   @override
   Widget build(BuildContext context) {
-    final totalItems =
-        buckets.fold<int>(0, (sum, b) => sum + b.total);
+    final totalItems = buckets.fold<int>(0, (sum, b) => sum + b.total);
 
     return AppSectionCard(
       padding: const EdgeInsets.all(20),
@@ -466,10 +484,12 @@ class _StabilitySection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _SectionLabel(
-            label: _tr(language,
-                en: 'Memory Strength',
-                vi: 'Sức mạnh trí nhớ',
-                ja: '記憶の強さ'),
+            label: _tr(
+              language,
+              en: 'Memory Strength',
+              vi: 'Sức mạnh trí nhớ',
+              ja: '記憶の強さ',
+            ),
             palette: palette,
           ),
           const SizedBox(height: 14),
@@ -530,19 +550,15 @@ class _BucketRow extends StatelessWidget {
   String _localizedLabel() {
     switch (bucket.label) {
       case 'Critical':
-        return _tr(language,
-            en: 'Critical', vi: 'Nguy cấp', ja: '危険');
+        return _tr(language, en: 'Critical', vi: 'Nguy cấp', ja: '危険');
       case 'Weak':
         return _tr(language, en: 'Weak', vi: 'Yếu', ja: '弱い');
       case 'Growing':
-        return _tr(language,
-            en: 'Growing', vi: 'Đang phát triển', ja: '成長中');
+        return _tr(language, en: 'Growing', vi: 'Đang phát triển', ja: '成長中');
       case 'Strong':
-        return _tr(language,
-            en: 'Strong', vi: 'Mạnh', ja: '強い');
+        return _tr(language, en: 'Strong', vi: 'Mạnh', ja: '強い');
       case 'Mastered':
-        return _tr(language,
-            en: 'Mastered', vi: 'Thành thạo', ja: '習得済み');
+        return _tr(language, en: 'Mastered', vi: 'Thành thạo', ja: '習得済み');
       default:
         return bucket.label;
     }
@@ -550,8 +566,7 @@ class _BucketRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pct =
-        totalItems > 0 ? (bucket.total / totalItems * 100).round() : 0;
+    final pct = totalItems > 0 ? (bucket.total / totalItems * 100).round() : 0;
 
     return Row(
       children: [
@@ -626,10 +641,12 @@ class _ConfidenceSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _SectionLabel(
-            label: _tr(language,
-                en: 'Review Confidence',
-                vi: 'Tự tin khi ôn',
-                ja: '復習の自信度'),
+            label: _tr(
+              language,
+              en: 'Review Confidence',
+              vi: 'Tự tin khi ôn',
+              ja: '復習の自信度',
+            ),
             palette: palette,
           ),
           const SizedBox(height: 14),

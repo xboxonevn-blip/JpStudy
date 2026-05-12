@@ -11,17 +11,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 const _kLesson = 'Lesson 1';
 
 VocabItem _item(int id, String term, String meaning) => VocabItem(
-      id: id,
-      term: term,
-      meaning: meaning,
-      meaningEn: meaning,
-      level: 'N5',
-    );
+  id: id,
+  term: term,
+  meaning: meaning,
+  meaningEn: meaning,
+  level: 'N5',
+);
 
 Widget buildFlashcardScreen(List<VocabItem> items) {
   return ProviderScope(
     overrides: [
-      appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(AppLanguage.en),
+      ),
       // srsStateProvider returns null SRS (new card) for every id
       for (final item in items)
         srsStateProvider(item.id).overrideWith((ref) async => null),

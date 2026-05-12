@@ -65,7 +65,9 @@ class GhostReviewScreen extends ConsumerWidget {
                   Text(
                     language.ghostReviewEmptySubtitle,
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: palette.ink.withValues(alpha: 0.55)),
+                    style: TextStyle(
+                      color: palette.ink.withValues(alpha: 0.55),
+                    ),
                   ),
                 ],
               ),
@@ -204,7 +206,11 @@ class _GhostClayCardState extends State<_GhostClayCard> {
                   color: context.appPalette.error.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Icon(Icons.pest_control, size: 24, color: context.appPalette.error),
+                child: Icon(
+                  Icons.pest_control,
+                  size: 24,
+                  color: context.appPalette.error,
+                ),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -342,7 +348,9 @@ class _GhostClayCardState extends State<_GhostClayCard> {
     addRow(language.mistakeCorrectAnswerLabel, mistake.correctAnswer);
     final sourceLabel = _sourceLabel(language, mistake.source);
     if (sourceLabel.isNotEmpty) {
-      rows.add(_buildContextRow(language.mistakeSourceLabel, sourceLabel, palette));
+      rows.add(
+        _buildContextRow(language.mistakeSourceLabel, sourceLabel, palette),
+      );
     }
 
     if (rows.isEmpty) {
@@ -407,5 +415,3 @@ class _GhostClayCardState extends State<_GhostClayCard> {
     }
   }
 }
-
-

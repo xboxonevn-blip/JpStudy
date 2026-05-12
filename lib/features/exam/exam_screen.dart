@@ -89,9 +89,9 @@ class ExamScreen extends ConsumerWidget {
       Navigator.pop(context);
 
       if (allVocab.isEmpty) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(language.noTermsAvailableLabel)),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(language.noTermsAvailableLabel)));
         return;
       }
       if (!context.mounted) return;
@@ -188,7 +188,11 @@ class _ExamLevelCard extends StatelessWidget {
                 ),
                 borderRadius: BorderRadius.circular(18),
               ),
-              child: const Icon(Icons.timer_outlined, color: Colors.white, size: 26),
+              child: const Icon(
+                Icons.timer_outlined,
+                color: Colors.white,
+                size: 26,
+              ),
             ),
             const SizedBox(width: AppSpacing.md),
             Expanded(

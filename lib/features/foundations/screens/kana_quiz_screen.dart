@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
+import 'package:jpstudy/core/a11y_live_region.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/features/foundations/models/kana_entry.dart';
@@ -18,12 +19,20 @@ class KanaQuizScreen extends ConsumerStatefulWidget {
     this.view,
     this.sourceDue = false,
     this.poolOverride,
+    this.questionBuilderOverride,
   });
 
   final KanaScript? script;
   final KanaView? view;
   final bool sourceDue;
   final List<KanaQuizItem>? poolOverride;
+  final KanaQuizQuestion Function(
+    KanaQuizItem item,
+    List<KanaQuizItem> pool,
+    bool kanaToRomaji,
+    Random random,
+  )?
+  questionBuilderOverride;
 
   @override
   ConsumerState<KanaQuizScreen> createState() => _KanaQuizScreenState();
@@ -88,11 +97,21 @@ class _KanaQuizScreenState extends ConsumerState<KanaQuizScreen> {
                 total: _questions.length,
                 selected: _selected,
                 showResult: _showResult,
-                onSelect: (answer) => setState(() {
-                  _selected = answer;
-                  _showResult = true;
-                  if (answer == _questions[_index].correctAnswer) _correct += 1;
-                }),
+                onSelect: (answer) {
+                  final question = _questions[_index];
+                  final isCorrect = answer == question.correctAnswer;
+                  announcePolite(
+                    language.mcqResultAnnouncement(
+                      isCorrect: isCorrect,
+                      correctAnswer: question.correctAnswer,
+                    ),
+                  );
+                  setState(() {
+                    _selected = answer;
+                    _showResult = true;
+                    if (isCorrect) _correct += 1;
+                  });
+                },
                 onGrade: (grade) async {
                   final item = _questions[_index].item;
                   await ref
@@ -147,13 +166,23 @@ class _KanaQuizScreenState extends ConsumerState<KanaQuizScreen> {
       total: _questions.length,
       selected: _selected,
       showResult: _showResult,
-      onSelect: (answer) => setState(() {
-        _selected = answer;
-        _showResult = true;
-        if (answer == _questions[_index].correctAnswer) {
-          _correct += 1;
-        }
-      }),
+      onSelect: (answer) {
+        final question = _questions[_index];
+        final isCorrect = answer == question.correctAnswer;
+        announcePolite(
+          language.mcqResultAnnouncement(
+            isCorrect: isCorrect,
+            correctAnswer: question.correctAnswer,
+          ),
+        );
+        setState(() {
+          _selected = answer;
+          _showResult = true;
+          if (isCorrect) {
+            _correct += 1;
+          }
+        });
+      },
       onGrade: (grade) async {
         final item = _questions[_index].item;
         await ref
@@ -204,7 +233,12 @@ class _KanaQuizScreenState extends ConsumerState<KanaQuizScreen> {
     final selected = shuffled.take(min(10, shuffled.length)).toList();
     return [
       for (var i = 0; i < selected.length; i++)
-        _questionFor(selected[i], pool, i.isEven, random),
+        (widget.questionBuilderOverride ?? _questionFor)(
+          selected[i],
+          pool,
+          i.isEven,
+          random,
+        ),
     ];
   }
 
@@ -281,10 +315,23 @@ class _QuestionView extends StatelessWidget {
         ),
         const SizedBox(height: AppSpacing.xl),
         for (final choice in question.choices) ...[
-          FilledButton.tonal(
-            key: ValueKey('kana_choice_$choice'),
-            onPressed: showResult ? null : () => onSelect(choice),
-            child: Text(choice),
+          Semantics(
+            label: showResult && choice == question.correctAnswer
+                ? '\u0110\u00fang'
+                : showResult && choice == selected
+                ? 'Sai'
+                : choice,
+            button: true,
+            child: FilledButton.tonal(
+              key: ValueKey('kana_choice_$choice'),
+              style: _choiceStyle(choice),
+              onPressed: () {
+                if (!showResult) {
+                  onSelect(choice);
+                }
+              },
+              child: Text(choice),
+            ),
           ),
           const SizedBox(height: 10),
         ],
@@ -293,29 +340,90 @@ class _QuestionView extends StatelessWidget {
           Text(
             selected == question.correctAnswer
                 ? language.correctAnswerLabel
-                : '${language.correctAnswerLabel}: ${question.correctAnswer}',
+                : '${language.correctAnswerLabel} ${question.correctAnswer}',
             key: const ValueKey('kana_quiz_result'),
           ),
           const SizedBox(height: AppSpacing.md),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: [
-              OutlinedButton(
-                onPressed: () => onGrade(1),
-                child: Text(language.kanaGradeAgainLabel),
-              ),
-              FilledButton(
-                onPressed: () => onGrade(3),
-                child: Text(language.kanaGradeGoodLabel),
-              ),
-              FilledButton.tonal(
-                onPressed: () => onGrade(4),
-                child: Text(language.kanaGradeEasyLabel),
-              ),
-            ],
+          _GradeActions(
+            isCorrect: selected == question.correctAnswer,
+            onGrade: onGrade,
+            language: language,
           ),
         ],
+      ],
+    );
+  }
+
+  ButtonStyle? _choiceStyle(String choice) {
+    if (!showResult) {
+      return null;
+    }
+    if (choice == question.correctAnswer) {
+      return FilledButton.styleFrom(
+        backgroundColor: Colors.green.shade100,
+        foregroundColor: Colors.green.shade900,
+        side: BorderSide(color: Colors.green.shade400),
+      );
+    }
+    if (choice == selected) {
+      return FilledButton.styleFrom(
+        backgroundColor: Colors.red.shade100,
+        foregroundColor: Colors.red.shade900,
+        side: BorderSide(color: Colors.red.shade400),
+      );
+    }
+    return FilledButton.styleFrom(
+      side: BorderSide(color: Colors.grey.shade300),
+    );
+  }
+}
+
+class _GradeActions extends StatelessWidget {
+  const _GradeActions({
+    required this.isCorrect,
+    required this.onGrade,
+    required this.language,
+  });
+
+  final bool isCorrect;
+  final ValueChanged<int> onGrade;
+  final AppLanguage language;
+
+  @override
+  Widget build(BuildContext context) {
+    if (!isCorrect) {
+      return Wrap(
+        spacing: 8,
+        runSpacing: 8,
+        children: [
+          FilledButton(
+            key: const ValueKey('kana_auto_again_continue'),
+            onPressed: () => onGrade(1),
+            child: Text(language.kanaGradeAgainLabel),
+          ),
+          FilledButton.tonal(
+            onPressed: () => onGrade(2),
+            child: Text(language.kanaGradeHardLabel),
+          ),
+        ],
+      );
+    }
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: [
+        FilledButton.tonal(
+          onPressed: () => onGrade(2),
+          child: Text(language.kanaGradeHardLabel),
+        ),
+        FilledButton(
+          onPressed: () => onGrade(3),
+          child: Text(language.kanaGradeGoodLabel),
+        ),
+        FilledButton.tonal(
+          onPressed: () => onGrade(4),
+          child: Text(language.kanaGradeEasyLabel),
+        ),
       ],
     );
   }

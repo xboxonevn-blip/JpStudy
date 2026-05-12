@@ -26,9 +26,9 @@ class _FakeKanjiHubLessonRepository extends LessonRepository {
     this.dueKanji = const {},
     this.unseenKanji = const {},
   }) : super(
-          AppDatabase(executor: NativeDatabase.memory()),
-          ContentDatabase(executor: NativeDatabase.memory()),
-        );
+         AppDatabase(executor: NativeDatabase.memory()),
+         ContentDatabase(executor: NativeDatabase.memory()),
+       );
 
   final List<KanjiItem> n5Kanji;
   final List<KanjiItem> n4Kanji;
@@ -78,7 +78,9 @@ Widget _buildSubject({
   return ProviderScope(
     retry: (retryCount, error) => null,
     overrides: [
-      appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(AppLanguage.en),
+      ),
       studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
       lessonRepositoryProvider.overrideWithValue(repo),
       ...overrides,
@@ -86,8 +88,6 @@ Widget _buildSubject({
     child: const MaterialApp(home: KanjiHubScreen()),
   );
 }
-
-
 
 Future<void> _pumpKanjiHub(WidgetTester tester) async {
   await tester.pump();
@@ -136,9 +136,7 @@ _FakeKanjiHubLessonRepository _buildRepo({
         meaningEn: 'bright',
         examples: [],
         jlptLevel: 'N5',
-        decomposition: KanjiDecomposition(
-          components: ['\u65e5', '\u6708'],
-        ),
+        decomposition: KanjiDecomposition(components: ['\u65e5', '\u6708']),
       ),
       KanjiItem(
         id: 2,
@@ -149,9 +147,7 @@ _FakeKanjiHubLessonRepository _buildRepo({
         meaningEn: 'rest',
         examples: [],
         jlptLevel: 'N5',
-        decomposition: KanjiDecomposition(
-          components: ['\u4ebb', '\u6728'],
-        ),
+        decomposition: KanjiDecomposition(components: ['\u4ebb', '\u6728']),
       ),
     ],
     n4Kanji: const [
@@ -173,9 +169,7 @@ _FakeKanjiHubLessonRepository _buildRepo({
           ),
         ],
         jlptLevel: 'N4',
-        decomposition: KanjiDecomposition(
-          components: ['\u65e5', '\u5bfa'],
-        ),
+        decomposition: KanjiDecomposition(components: ['\u65e5', '\u5bfa']),
       ),
     ],
     n3Kanji: const [
@@ -188,9 +182,7 @@ _FakeKanjiHubLessonRepository _buildRepo({
         meaningEn: 'old',
         examples: [],
         jlptLevel: 'N3',
-        decomposition: KanjiDecomposition(
-          relatedKanji: ['\u65e5'],
-        ),
+        decomposition: KanjiDecomposition(relatedKanji: ['\u65e5']),
       ),
     ],
   );
@@ -250,7 +242,4 @@ void main() {
     expect(find.text('Could not load kanji summary'), findsOneWidget);
     expect(find.text('Retry'), findsOneWidget);
   });
-
 }
-
-

@@ -58,13 +58,15 @@ class _EnhancedFlashcardScreenState
     final language = ref.watch(appLanguageProvider);
     final currentItem = _displayItems[_currentIndex];
     final srsAsync = ref.watch(srsStateProvider(currentItem.id));
-    final retrievability = srsAsync.whenOrNull(data: (srs) {
-      if (srs == null) return null;
-      return _fsrsService.retrievability(
-        stability: srs.stability,
-        lastReviewedAt: srs.lastReviewedAt,
-      );
-    });
+    final retrievability = srsAsync.whenOrNull(
+      data: (srs) {
+        if (srs == null) return null;
+        return _fsrsService.retrievability(
+          stability: srs.stability,
+          lastReviewedAt: srs.lastReviewedAt,
+        );
+      },
+    );
     final progress = (_currentIndex + 1) / _displayItems.length;
 
     return Scaffold(
@@ -92,7 +94,8 @@ class _EnhancedFlashcardScreenState
                 item: currentItem,
                 showTermFirst: _settings.showTermFirst,
                 language: language,
-                onFlip: () => setState(() => _flippedIndices.add(_currentIndex)),
+                onFlip: () =>
+                    setState(() => _flippedIndices.add(_currentIndex)),
                 retrievability: retrievability,
               ),
             ),
@@ -119,9 +122,7 @@ class _EnhancedFlashcardScreenState
         child: LinearProgressIndicator(
           value: progress,
           backgroundColor: context.appPalette.outline,
-          valueColor: AlwaysStoppedAnimation<Color>(
-            context.appPalette.primary,
-          ),
+          valueColor: AlwaysStoppedAnimation<Color>(context.appPalette.primary),
         ),
       ),
     );
@@ -219,8 +220,9 @@ class _EnhancedFlashcardScreenState
   }
 
   void _showSummary() {
-    final flippedItems =
-        _flippedIndices.map((i) => _displayItems[i].id).toList();
+    final flippedItems = _flippedIndices
+        .map((i) => _displayItems[i].id)
+        .toList();
     final skippedItems = List.generate(_displayItems.length, (i) => i)
         .where((i) => !_flippedIndices.contains(i))
         .map((i) => _displayItems[i].id)

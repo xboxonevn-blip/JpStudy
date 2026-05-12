@@ -112,16 +112,16 @@ class GrammarExampleQualityAssessor {
 
   // Rune code set for _lastNonPunctuationChar — replaces per-character RegExp.
   static const Set<int> _terminalPunctAndSpaceRunes = {
-    0x20,   // space
-    0x09,   // tab
-    0x0A,   // LF
-    0x0D,   // CR
+    0x20, // space
+    0x09, // tab
+    0x0A, // LF
+    0x0D, // CR
     0x3000, // 　 ideographic space
     0x3002, // 。
     0xFF01, // ！
     0xFF1F, // ？
-    0x21,   // !
-    0x3F,   // ?
+    0x21, // !
+    0x3F, // ?
   };
 
   static GrammarExampleBlockQualityAssessment assessBlock({
@@ -306,7 +306,9 @@ class GrammarExampleQualityAssessor {
     final core = punctuation == null
         ? trimmed
         : trimmed.substring(0, trimmed.length - punctuation.length);
-    if (core.isEmpty || _isRequestLikeCore(core) || _isAlreadyNegativeCore(core)) {
+    if (core.isEmpty ||
+        _isRequestLikeCore(core) ||
+        _isAlreadyNegativeCore(core)) {
       return null;
     }
 
@@ -698,7 +700,9 @@ class GrammarExampleQualityAssessor {
 
   static bool _looksLikeIchidanPast(String core) {
     if (!core.endsWith('た') || core.runes.length < 2) return false;
-    final previous = _lastNonPunctuationChar(core.substring(0, core.length - 1));
+    final previous = _lastNonPunctuationChar(
+      core.substring(0, core.length - 1),
+    );
     if (previous == null) return false;
     if (_ichidanKana.contains(previous)) return true;
     return false;
@@ -707,7 +711,9 @@ class GrammarExampleQualityAssessor {
   static bool _looksLikeIchidanDictionary(String core) {
     if (!core.endsWith('る') || core.runes.length < 2) return false;
     if (_godanRuExceptions.any(core.endsWith)) return false;
-    final previous = _lastNonPunctuationChar(core.substring(0, core.length - 1));
+    final previous = _lastNonPunctuationChar(
+      core.substring(0, core.length - 1),
+    );
     if (previous == null) return false;
     if (_ichidanKana.contains(previous)) return true;
     return false;

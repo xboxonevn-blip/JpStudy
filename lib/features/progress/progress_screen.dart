@@ -1586,7 +1586,8 @@ class _ActivityCalendar extends ConsumerWidget {
               borderRadius: BorderRadius.circular(3),
             ),
           ),
-          if (i < _paletteFor(context).length - 1) const SizedBox(width: _cellGap),
+          if (i < _paletteFor(context).length - 1)
+            const SizedBox(width: _cellGap),
         ],
         const SizedBox(width: 4),
         Text(

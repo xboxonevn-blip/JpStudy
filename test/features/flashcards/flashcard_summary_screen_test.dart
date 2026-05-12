@@ -34,27 +34,26 @@ const _kContinueAction = ContinueAction(
 FlashcardSession _session({
   List<int> known = const [],
   List<int> needPractice = const [],
-}) =>
-    FlashcardSession(
-      sessionId: 'test',
-      lessonId: 1,
-      startedAt: DateTime(2026, 1, 1, 10),
-      completedAt: DateTime(2026, 1, 1, 10, 5),
-      knownTermIds: known,
-      needPracticeTermIds: needPractice,
-    );
+}) => FlashcardSession(
+  sessionId: 'test',
+  lessonId: 1,
+  startedAt: DateTime(2026, 1, 1, 10),
+  completedAt: DateTime(2026, 1, 1, 10, 5),
+  knownTermIds: known,
+  needPracticeTermIds: needPractice,
+);
 
 Widget buildSummary(FlashcardSession session) => ProviderScope(
-      overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-        dashboardProvider.overrideWith(
-          (ref) => Stream.value(_kEmptyDashboard),
-        ),
-        vocabGhostsProvider.overrideWith((ref) async => const []),
-        continueActionProvider.overrideWith((ref) async => _kContinueAction),
-      ],
-      child: MaterialApp(home: FlashcardSummaryScreen(session: session)),
-    );
+  overrides: [
+    appLanguageProvider.overrideWith(
+      (ref) => AppLanguageController.test(AppLanguage.en),
+    ),
+    dashboardProvider.overrideWith((ref) => Stream.value(_kEmptyDashboard)),
+    vocabGhostsProvider.overrideWith((ref) async => const []),
+    continueActionProvider.overrideWith((ref) async => _kContinueAction),
+  ],
+  child: MaterialApp(home: FlashcardSummaryScreen(session: session)),
+);
 
 // ---------------------------------------------------------------------------
 // Tests
@@ -62,54 +61,42 @@ Widget buildSummary(FlashcardSession session) => ProviderScope(
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
 
-  testWidgets(
-    'shows "Session Complete!" in AppBar',
-    (tester) async {
-      await tester.pumpWidget(buildSummary(_session()));
-      await tester.pump();
-      expect(find.text('Session Complete!'), findsOneWidget);
-      // Flush any pending async work before teardown
-      await tester.pumpWidget(Container());
-      await tester.pump(const Duration(milliseconds: 100));
-    },
-  );
+  testWidgets('shows "Session Complete!" in AppBar', (tester) async {
+    await tester.pumpWidget(buildSummary(_session()));
+    await tester.pump();
+    expect(find.text('Session Complete!'), findsOneWidget);
+    // Flush any pending async work before teardown
+    await tester.pumpWidget(Container());
+    await tester.pump(const Duration(milliseconds: 100));
+  });
 
-  testWidgets(
-    'shows accuracy percentage',
-    (tester) async {
-      final session = _session(known: [1, 2, 3, 4], needPractice: [5, 6]);
-      await tester.pumpWidget(buildSummary(session));
-      await tester.pump();
-      await tester.pump(const Duration(milliseconds: 200));
-      // 4 known / 6 total = 66%
-      expect(find.text('66%'), findsOneWidget);
-      await tester.pumpWidget(Container());
-      await tester.pump(const Duration(milliseconds: 100));
-    },
-  );
+  testWidgets('shows accuracy percentage', (tester) async {
+    final session = _session(known: [1, 2, 3, 4], needPractice: [5, 6]);
+    await tester.pumpWidget(buildSummary(session));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+    // 4 known / 6 total = 66%
+    expect(find.text('66%'), findsOneWidget);
+    await tester.pumpWidget(Container());
+    await tester.pump(const Duration(milliseconds: 100));
+  });
 
-  testWidgets(
-    'shows 100% when all cards known',
-    (tester) async {
-      final session = _session(known: [1, 2, 3]);
-      await tester.pumpWidget(buildSummary(session));
-      await tester.pump();
-      await tester.pump(const Duration(milliseconds: 200));
-      expect(find.text('100%'), findsOneWidget);
-      await tester.pumpWidget(Container());
-      await tester.pump(const Duration(milliseconds: 100));
-    },
-  );
+  testWidgets('shows 100% when all cards known', (tester) async {
+    final session = _session(known: [1, 2, 3]);
+    await tester.pumpWidget(buildSummary(session));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+    expect(find.text('100%'), findsOneWidget);
+    await tester.pumpWidget(Container());
+    await tester.pump(const Duration(milliseconds: 100));
+  });
 
-  testWidgets(
-    'shows Done button',
-    (tester) async {
-      await tester.pumpWidget(buildSummary(_session(known: [1])));
-      await tester.pump();
-      await tester.pump(const Duration(milliseconds: 200));
-      expect(find.text('Done'), findsOneWidget);
-      await tester.pumpWidget(Container());
-      await tester.pump(const Duration(milliseconds: 100));
-    },
-  );
+  testWidgets('shows Done button', (tester) async {
+    await tester.pumpWidget(buildSummary(_session(known: [1])));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+    expect(find.text('Done'), findsOneWidget);
+    await tester.pumpWidget(Container());
+    await tester.pump(const Duration(milliseconds: 100));
+  });
 }

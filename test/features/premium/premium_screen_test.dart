@@ -8,7 +8,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 Widget _buildScreen({AppLanguage language = AppLanguage.en}) {
   return ProviderScope(
-    overrides: [appLanguageProvider.overrideWith((ref) => language)],
+    overrides: [
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(language),
+      ),
+    ],
     child: const MaterialApp(home: PremiumScreen()),
   );
 }
@@ -40,7 +44,10 @@ void main() {
     await _pump(tester);
 
     expect(find.text('Starter'), findsWidgets); // chip + plan card
-    expect(find.text('Pro'), findsWidgets);     // chip + plan card (default selected)
+    expect(
+      find.text('Pro'),
+      findsWidgets,
+    ); // chip + plan card (default selected)
     expect(find.text('Coach'), findsOneWidget);
   });
 
@@ -93,7 +100,9 @@ void main() {
     expect(find.text('Free vs selected plan'), findsOneWidget);
   });
 
-  testWidgets('feature list is rendered with at least one item', (tester) async {
+  testWidgets('feature list is rendered with at least one item', (
+    tester,
+  ) async {
     await tester.pumpWidget(_buildScreen());
     await _pump(tester);
 
@@ -107,7 +116,9 @@ void main() {
     expect(find.text('Full reading library'), findsOneWidget);
   });
 
-  testWidgets('VI locale shows Vietnamese title and upgrade label', (tester) async {
+  testWidgets('VI locale shows Vietnamese title and upgrade label', (
+    tester,
+  ) async {
     await tester.pumpWidget(_buildScreen(language: AppLanguage.vi));
     await _pump(tester);
 

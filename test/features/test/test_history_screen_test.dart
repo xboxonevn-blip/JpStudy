@@ -36,7 +36,10 @@ class _FakeTestHistoryService extends TestHistoryService {
   }
 
   @override
-  Future<List<ProgressPoint>> getProgressData(int lessonId, {int limit = 10}) async {
+  Future<List<ProgressPoint>> getProgressData(
+    int lessonId, {
+    int limit = 10,
+  }) async {
     if (throwOnProgress) throw Exception('progress failed');
     return progress;
   }
@@ -83,7 +86,9 @@ Widget buildScreen({TestHistoryService? service}) {
   final db = AppDatabase(executor: NativeDatabase.memory());
   return ProviderScope(
     overrides: [
-      appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(AppLanguage.en),
+      ),
       databaseProvider.overrideWithValue(db),
       testHistoryServiceProvider.overrideWithValue(
         service ?? TestHistoryService(TestDao(db)),
@@ -98,10 +103,13 @@ Widget buildScreen({TestHistoryService? service}) {
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
 
-  testWidgets('shows attempt history app bar title with lesson name',
-      (tester) async {
+  testWidgets('shows attempt history app bar title with lesson name', (
+    tester,
+  ) async {
     final db = AppDatabase(executor: NativeDatabase.memory());
-    await tester.pumpWidget(buildScreen(service: TestHistoryService(TestDao(db))));
+    await tester.pumpWidget(
+      buildScreen(service: TestHistoryService(TestDao(db))),
+    );
     await tester.pump();
     expect(find.text('Attempt history: Lesson 1'), findsOneWidget);
     await tester.pumpWidget(Container());
@@ -123,8 +131,9 @@ void main() {
     expect(find.text(AppLanguage.en.testHistoryEmptyHintLabel), findsOneWidget);
   });
 
-  testWidgets('shows stats summary with test count, best score, and average',
-      (tester) async {
+  testWidgets('shows stats summary with test count, best score, and average', (
+    tester,
+  ) async {
     final service = _FakeTestHistoryService(
       history: [_record2, _record1],
       progress: _progress,
@@ -135,7 +144,10 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
 
-    expect(find.text(AppLanguage.en.testHistoryTestsTakenLabel), findsOneWidget);
+    expect(
+      find.text(AppLanguage.en.testHistoryTestsTakenLabel),
+      findsOneWidget,
+    );
     expect(find.text(AppLanguage.en.testHistoryBestScoreLabel), findsOneWidget);
     expect(find.text(AppLanguage.en.testHistoryAverageLabel), findsOneWidget);
     expect(find.text('2'), findsWidgets);
@@ -143,8 +155,9 @@ void main() {
     expect(find.text('80%'), findsOneWidget);
   });
 
-  testWidgets('shows progress chart when two or more progress points exist',
-      (tester) async {
+  testWidgets('shows progress chart when two or more progress points exist', (
+    tester,
+  ) async {
     final service = _FakeTestHistoryService(
       history: [_record2, _record1],
       progress: _progress,
@@ -155,30 +168,41 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
 
-    expect(find.text(AppLanguage.en.testHistoryProgressOverTimeLabel), findsOneWidget);
+    expect(
+      find.text(AppLanguage.en.testHistoryProgressOverTimeLabel),
+      findsOneWidget,
+    );
     expect(find.text(AppLanguage.en.testHistoryOldestLabel), findsOneWidget);
     expect(find.text(AppLanguage.en.testHistoryLatestLabel), findsOneWidget);
     expect(find.text('70'), findsOneWidget);
     expect(find.text('90'), findsOneWidget);
   });
 
-  testWidgets('hides progress chart when fewer than two progress points exist',
-      (tester) async {
-    final service = _FakeTestHistoryService(
-      history: [_record2],
-      progress: [ProgressPoint(date: DateTime(2026, 3, 11), score: 90, grade: 'A')],
-      best: _record2,
-      average: 90,
-    );
-    await tester.pumpWidget(buildScreen(service: service));
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 300));
+  testWidgets(
+    'hides progress chart when fewer than two progress points exist',
+    (tester) async {
+      final service = _FakeTestHistoryService(
+        history: [_record2],
+        progress: [
+          ProgressPoint(date: DateTime(2026, 3, 11), score: 90, grade: 'A'),
+        ],
+        best: _record2,
+        average: 90,
+      );
+      await tester.pumpWidget(buildScreen(service: service));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
 
-    expect(find.text(AppLanguage.en.testHistoryProgressOverTimeLabel), findsNothing);
-  });
+      expect(
+        find.text(AppLanguage.en.testHistoryProgressOverTimeLabel),
+        findsNothing,
+      );
+    },
+  );
 
-  testWidgets('shows history list entries with grade and score details',
-      (tester) async {
+  testWidgets('shows history list entries with grade and score details', (
+    tester,
+  ) async {
     final service = _FakeTestHistoryService(
       history: [_record2, _record1],
       progress: _progress,

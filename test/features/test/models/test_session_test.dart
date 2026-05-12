@@ -7,33 +7,59 @@ import 'package:jpstudy/features/test/models/test_session.dart';
 // ── Fixtures ─────────────────────────────────────────────────
 
 const _vocab1 = VocabItem(
-  id: 1, term: '水', reading: 'みず', meaning: 'nước', meaningEn: 'water', level: 'N5',
+  id: 1,
+  term: '水',
+  reading: 'みず',
+  meaning: 'nước',
+  meaningEn: 'water',
+  level: 'N5',
 );
 const _vocab2 = VocabItem(
-  id: 2, term: '火', reading: 'ひ', meaning: 'lửa', meaningEn: 'fire', level: 'N5',
+  id: 2,
+  term: '火',
+  reading: 'ひ',
+  meaning: 'lửa',
+  meaningEn: 'fire',
+  level: 'N5',
 );
 const _vocab3 = VocabItem(
-  id: 3, term: '山', reading: 'やま', meaning: 'núi', meaningEn: 'mountain', level: 'N5',
+  id: 3,
+  term: '山',
+  reading: 'やま',
+  meaning: 'núi',
+  meaningEn: 'mountain',
+  level: 'N5',
 );
 
 const _mcQ1 = Question(
-  id: 'q1', type: QuestionType.multipleChoice,
-  targetItem: _vocab1, questionText: 'What is 水?',
-  correctAnswer: 'water', options: ['water', 'fire'],
+  id: 'q1',
+  type: QuestionType.multipleChoice,
+  targetItem: _vocab1,
+  questionText: 'What is 水?',
+  correctAnswer: 'water',
+  options: ['water', 'fire'],
 );
 const _mcQ2 = Question(
-  id: 'q2', type: QuestionType.multipleChoice,
-  targetItem: _vocab2, questionText: 'What is 火?',
-  correctAnswer: 'fire', options: ['water', 'fire'],
+  id: 'q2',
+  type: QuestionType.multipleChoice,
+  targetItem: _vocab2,
+  questionText: 'What is 火?',
+  correctAnswer: 'fire',
+  options: ['water', 'fire'],
 );
 const _tfQ = Question(
-  id: 'q3', type: QuestionType.trueFalse,
-  targetItem: _vocab3, questionText: '山 means mountain',
-  correctAnswer: 'true', isStatementTrue: true,
+  id: 'q3',
+  type: QuestionType.trueFalse,
+  targetItem: _vocab3,
+  questionText: '山 means mountain',
+  correctAnswer: 'true',
+  isStatementTrue: true,
 );
 const _fbQ = Question(
-  id: 'q4', type: QuestionType.fillBlank,
-  targetItem: _vocab1, questionText: 'Water in Japanese is ___',
+  id: 'q4',
+  type: QuestionType.fillBlank,
+  targetItem: _vocab1,
+  questionText: 'Water in Japanese is ___',
   correctAnswer: 'みず',
 );
 
@@ -56,12 +82,16 @@ TestSession _session({
 }
 
 TestAnswer _correct(int index) => TestAnswer(
-  questionIndex: index, userAnswer: 'answer', isCorrect: true,
+  questionIndex: index,
+  userAnswer: 'answer',
+  isCorrect: true,
   answeredAt: DateTime(2024, 1, 1, 10, 1),
 );
 
 TestAnswer _wrong(int index) => TestAnswer(
-  questionIndex: index, userAnswer: 'wrong', isCorrect: false,
+  questionIndex: index,
+  userAnswer: 'wrong',
+  isCorrect: false,
   answeredAt: DateTime(2024, 1, 1, 10, 1),
 );
 
@@ -136,10 +166,7 @@ void main() {
     test('A for 90%+', () {
       // 9/10 = 90%
       final questions = List.generate(10, (i) => _mcQ1);
-      final answers = [
-        for (int i = 0; i < 9; i++) _correct(i),
-        _wrong(9),
-      ];
+      final answers = [for (int i = 0; i < 9; i++) _correct(i), _wrong(9)];
       final s = _session(questions: questions, answers: answers);
       expect(s.grade, 'A');
     });
@@ -230,7 +257,8 @@ void main() {
       final questions = List.generate(10, (_) => _mcQ1);
       final answers = [
         for (int i = 0; i < 8; i++) _correct(i),
-        _wrong(8), _wrong(9),
+        _wrong(8),
+        _wrong(9),
       ];
       final s = _session(questions: questions, answers: answers);
       // 8*5 = 40 base + 30 bonus = 70
@@ -412,10 +440,7 @@ void main() {
 
   group('TestSession — progress and completion', () {
     test('progress tracks answered fraction', () {
-      final s = _session(
-        questions: [_mcQ1, _mcQ2],
-        answers: [_correct(0)],
-      );
+      final s = _session(questions: [_mcQ1, _mcQ2], answers: [_correct(0)]);
       expect(s.progress, 0.5);
     });
 
@@ -441,7 +466,9 @@ void main() {
 
     test('calculates correct percentage', () {
       final tb = TypeBreakdown(
-        type: QuestionType.multipleChoice, total: 4, correct: 3,
+        type: QuestionType.multipleChoice,
+        total: 4,
+        correct: 3,
       );
       expect(tb.accuracy, 75.0);
     });

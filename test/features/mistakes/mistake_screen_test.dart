@@ -64,7 +64,9 @@ Widget buildScreen(
   StudyLevel? level,
 }) => ProviderScope(
   overrides: [
-    appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+    appLanguageProvider.overrideWith(
+      (ref) => AppLanguageController.test(AppLanguage.en),
+    ),
     studyLevelProvider.overrideWith((ref) => level),
     databaseProvider.overrideWithValue(db),
     contentDatabaseProvider.overrideWithValue(cdb),

@@ -493,9 +493,9 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
     // Fire examples fetch and level queries concurrently.
     final examplesFuture = pointIds.isEmpty
         ? Future.value(const <GrammarExample>[])
-        : (repo.db.select(repo.db.grammarExamples)
-              ..where((tbl) => tbl.grammarId.isIn(pointIds)))
-            .get();
+        : (repo.db.select(
+            repo.db.grammarExamples,
+          )..where((tbl) => tbl.grammarId.isIn(pointIds))).get();
     final levelResultsFuture = Future.wait(
       levels.map((level) => repo.fetchPointsByLevel(level)),
     );
@@ -1498,10 +1498,14 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
       decoration: BoxDecoration(
-        color: isUrgent ? palette.error.withValues(alpha: 0.1) : palette.elevated,
+        color: isUrgent
+            ? palette.error.withValues(alpha: 0.1)
+            : palette.elevated,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
-          color: isUrgent ? palette.error.withValues(alpha: 0.24) : palette.outline,
+          color: isUrgent
+              ? palette.error.withValues(alpha: 0.24)
+              : palette.outline,
         ),
       ),
       child: Row(
@@ -1509,7 +1513,9 @@ class _GrammarPracticeScreenState extends ConsumerState<GrammarPracticeScreen> {
           Icon(
             Icons.timer_outlined,
             size: 18,
-            color: isUrgent ? palette.error : palette.ink.withValues(alpha: 0.7),
+            color: isUrgent
+                ? palette.error
+                : palette.ink.withValues(alpha: 0.7),
           ),
           const SizedBox(width: 8),
           Text(

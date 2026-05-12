@@ -41,11 +41,13 @@ Widget _buildScreen({
 }) {
   return ProviderScope(
     overrides: [
-      appLanguageProvider.overrideWith((ref) => language),
-      grammarGhostsProvider.overrideWith((_) async => ghosts ?? []),
-      mistakesByTypeProvider('grammar').overrideWith(
-        (_) async => const <UserMistake>[],
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(language),
       ),
+      grammarGhostsProvider.overrideWith((_) async => ghosts ?? []),
+      mistakesByTypeProvider(
+        'grammar',
+      ).overrideWith((_) async => const <UserMistake>[]),
     ],
     child: const MaterialApp(home: GhostReviewScreen()),
   );
@@ -75,8 +77,9 @@ void main() {
     expect(find.text('You have not missed any grammar yet.'), findsOneWidget);
   });
 
-  testWidgets('non-empty ghosts renders card with grammar point headline',
-      (tester) async {
+  testWidgets('non-empty ghosts renders card with grammar point headline', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       _buildScreen(language: AppLanguage.vi, ghosts: [_stubGhost]),
     );
@@ -86,8 +89,9 @@ void main() {
     expect(find.text('てもいい'), findsOneWidget);
   });
 
-  testWidgets('info button tap shows ghost review info snackbar',
-      (tester) async {
+  testWidgets('info button tap shows ghost review info snackbar', (
+    tester,
+  ) async {
     await tester.pumpWidget(_buildScreen(ghosts: const []));
     await _pump(tester);
 
@@ -113,8 +117,9 @@ void main() {
     expect(find.text('Practice'), findsNothing);
   });
 
-  testWidgets('tapping card expands to show connection section label',
-      (tester) async {
+  testWidgets('tapping card expands to show connection section label', (
+    tester,
+  ) async {
     await tester.pumpWidget(_buildScreen(ghosts: [_stubGhost]));
     await _pump(tester);
 

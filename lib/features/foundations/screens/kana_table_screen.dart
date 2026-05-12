@@ -78,8 +78,8 @@ class _KanaTableScreenState extends ConsumerState<KanaTableScreen>
         bottom: TabBar(
           controller: _tabController,
           tabs: const [
-            Tab(text: 'CÃ†Â¡ bÃ¡ÂºÂ£n'),
-            Tab(text: 'Ãƒâ€šm ghÃƒÂ©p'),
+            Tab(text: 'Cơ bản'),
+            Tab(text: 'Âm ghép'),
           ],
         ),
       ),
@@ -326,7 +326,7 @@ class _KanaCell extends ConsumerWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      '${entry.romaji} Ã‚Â· ${entry.row}.${entry.column}',
+                      '${entry.romaji} · ${entry.row}.${entry.column}',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 8),

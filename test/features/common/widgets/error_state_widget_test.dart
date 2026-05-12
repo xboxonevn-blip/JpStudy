@@ -18,7 +18,11 @@ Widget _buildWidget({
   bool compact = false,
 }) {
   return ProviderScope(
-    overrides: [appLanguageProvider.overrideWith((ref) => language)],
+    overrides: [
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(language),
+      ),
+    ],
     child: MaterialApp(
       home: Scaffold(
         body: ErrorStateWidget(
@@ -69,7 +73,9 @@ void main() {
     );
   });
 
-  testWidgets('Connection keyword maps to noInternetErrorLabel', (tester) async {
+  testWidgets('Connection keyword maps to noInternetErrorLabel', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       _buildWidget(error: Exception('Connection failed')),
     );
@@ -88,13 +94,12 @@ void main() {
     );
     await _pump(tester);
 
-    expect(
-      find.text('Request timed out. Please try again.'),
-      findsOneWidget,
-    );
+    expect(find.text('Request timed out. Please try again.'), findsOneWidget);
   });
 
-  testWidgets('customMessage overrides friendly message mapping', (tester) async {
+  testWidgets('customMessage overrides friendly message mapping', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       _buildWidget(
         error: Exception('SocketException'),
@@ -105,7 +110,10 @@ void main() {
 
     // Custom message shown instead of the internet-error label
     expect(find.text('Database connection failed.'), findsOneWidget);
-    expect(find.text('No internet connection. Please try again.'), findsNothing);
+    expect(
+      find.text('No internet connection. Please try again.'),
+      findsNothing,
+    );
   });
 
   testWidgets('retry button is absent when onRetry is null', (tester) async {
@@ -115,7 +123,9 @@ void main() {
     expect(find.text('Retry'), findsNothing);
   });
 
-  testWidgets('retry button is present when onRetry is provided', (tester) async {
+  testWidgets('retry button is present when onRetry is provided', (
+    tester,
+  ) async {
     await tester.pumpWidget(_buildWidget(onRetry: () {}));
     await _pump(tester);
 

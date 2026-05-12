@@ -90,8 +90,9 @@ String jlptActionOpenReadingDrill(AppLanguage language) => switch (language) {
   AppLanguage.ja => '読解ドリルを開く',
 };
 
-String jlptActionOpenFinalReadingCheck(AppLanguage language) => switch (language) {
-  AppLanguage.en => 'Open final reading check',
-  AppLanguage.vi => 'Mở bài kiểm tra đọc cuối tuần',
-  AppLanguage.ja => '週末チェックを開く',
-};
+String jlptActionOpenFinalReadingCheck(AppLanguage language) =>
+    switch (language) {
+      AppLanguage.en => 'Open final reading check',
+      AppLanguage.vi => 'Mở bài kiểm tra đọc cuối tuần',
+      AppLanguage.ja => '週末チェックを開く',
+    };

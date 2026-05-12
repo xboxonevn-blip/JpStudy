@@ -4,57 +4,56 @@ import 'package:jpstudy/data/models/radical_item.dart';
 import 'package:jpstudy/features/kanji_hub/models/radical_detail_support.dart';
 
 void main() {
-  test('buildRelatedKanjiForRadical finds kanji containing radical component', () {
-    const radical = RadicalItem(
-      id: 85,
-      kanji: '\u6c34',
-      strokes: 4,
-      viMeaning: 'Thuy',
-    );
+  test(
+    'buildRelatedKanjiForRadical finds kanji containing radical component',
+    () {
+      const radical = RadicalItem(
+        id: 85,
+        kanji: '\u6c34',
+        strokes: 4,
+        viMeaning: 'Thuy',
+      );
 
-    final items = [
-      const KanjiItem(
-        id: 1,
-        lessonId: 1,
-        character: '\u6d77',
-        strokeCount: 9,
-        meaning: 'sea',
-        examples: [],
-        jlptLevel: 'N5',
-        decomposition: KanjiDecomposition(
-          components: ['\u6c35', '\u6bce'],
-          relatedKanji: ['\u6c34'],
+      final items = [
+        const KanjiItem(
+          id: 1,
+          lessonId: 1,
+          character: '\u6d77',
+          strokeCount: 9,
+          meaning: 'sea',
+          examples: [],
+          jlptLevel: 'N5',
+          decomposition: KanjiDecomposition(
+            components: ['\u6c35', '\u6bce'],
+            relatedKanji: ['\u6c34'],
+          ),
         ),
-      ),
-      const KanjiItem(
-        id: 2,
-        lessonId: 1,
-        character: '\u4f11',
-        strokeCount: 6,
-        meaning: 'rest',
-        examples: [],
-        jlptLevel: 'N5',
-        decomposition: KanjiDecomposition(
-          components: ['\u4ebb', '\u6728'],
+        const KanjiItem(
+          id: 2,
+          lessonId: 1,
+          character: '\u4f11',
+          strokeCount: 6,
+          meaning: 'rest',
+          examples: [],
+          jlptLevel: 'N5',
+          decomposition: KanjiDecomposition(components: ['\u4ebb', '\u6728']),
         ),
-      ),
-      const KanjiItem(
-        id: 3,
-        lessonId: 1,
-        character: '\u6cf3',
-        strokeCount: 8,
-        meaning: 'swim',
-        examples: [],
-        jlptLevel: 'N5',
-        decomposition: KanjiDecomposition(
-          components: ['\u6c34', '\u6c38'],
+        const KanjiItem(
+          id: 3,
+          lessonId: 1,
+          character: '\u6cf3',
+          strokeCount: 8,
+          meaning: 'swim',
+          examples: [],
+          jlptLevel: 'N5',
+          decomposition: KanjiDecomposition(components: ['\u6c34', '\u6c38']),
         ),
-      ),
-    ];
+      ];
 
-    final related = buildRelatedKanjiForRadical(radical, items);
-    expect(related, ['\u6d77', '\u6cf3']);
-  });
+      final related = buildRelatedKanjiForRadical(radical, items);
+      expect(related, ['\u6d77', '\u6cf3']);
+    },
+  );
 
   test('buildRelatedKanjiSummary groups related kanji by level order', () {
     const radical = RadicalItem(
@@ -73,9 +72,7 @@ void main() {
         meaning: 'bright',
         examples: [],
         jlptLevel: 'N5',
-        decomposition: KanjiDecomposition(
-          components: ['\u65e5', '\u6708'],
-        ),
+        decomposition: KanjiDecomposition(components: ['\u65e5', '\u6708']),
       ),
       const KanjiItem(
         id: 2,
@@ -85,9 +82,7 @@ void main() {
         meaning: 'time',
         examples: [],
         jlptLevel: 'N4',
-        decomposition: KanjiDecomposition(
-          components: ['\u65e5', '\u5bfa'],
-        ),
+        decomposition: KanjiDecomposition(components: ['\u65e5', '\u5bfa']),
       ),
       const KanjiItem(
         id: 3,
@@ -97,9 +92,7 @@ void main() {
         meaning: 'old',
         examples: [],
         jlptLevel: 'N3',
-        decomposition: KanjiDecomposition(
-          relatedKanji: ['\u65e5'],
-        ),
+        decomposition: KanjiDecomposition(relatedKanji: ['\u65e5']),
       ),
     ];
 

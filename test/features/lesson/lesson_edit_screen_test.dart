@@ -62,17 +62,20 @@ void main() {
   });
 
   Widget buildScreen() => ProviderScope(
-        overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-          studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
-          databaseProvider.overrideWithValue(appDb),
-          lessonRepositoryProvider.overrideWithValue(repo),
-        ],
-        child: const MaterialApp(home: LessonEditScreen(lessonId: 1)),
-      );
+    overrides: [
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(AppLanguage.en),
+      ),
+      studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+      databaseProvider.overrideWithValue(appDb),
+      lessonRepositoryProvider.overrideWithValue(repo),
+    ],
+    child: const MaterialApp(home: LessonEditScreen(lessonId: 1)),
+  );
 
-  testWidgets('shows back button and done button after loading',
-      (tester) async {
+  testWidgets('shows back button and done button after loading', (
+    tester,
+  ) async {
     await tester.pumpWidget(buildScreen());
     await tester.pump();
     await tester.pump();
@@ -80,8 +83,9 @@ void main() {
     expect(find.text(AppLanguage.en.doneLabel), findsOneWidget);
   });
 
-  testWidgets('shows title, description, and tags fields after loading',
-      (tester) async {
+  testWidgets('shows title, description, and tags fields after loading', (
+    tester,
+  ) async {
     await tester.pumpWidget(buildScreen());
     await tester.pump();
     await tester.pump();

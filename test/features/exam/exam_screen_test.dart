@@ -16,10 +16,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class _FakeLessonRepository extends LessonRepository {
   _FakeLessonRepository({required this.items, this.throwOnFetch = false})
-      : super(
-          AppDatabase(executor: NativeDatabase.memory()),
-          ContentDatabase(executor: NativeDatabase.memory()),
-        );
+    : super(
+        AppDatabase(executor: NativeDatabase.memory()),
+        ContentDatabase(executor: NativeDatabase.memory()),
+      );
 
   final List<VocabItem> items;
   final bool throwOnFetch;
@@ -47,13 +47,12 @@ const _sampleItem = VocabItem(
   level: 'N5',
 );
 
-Widget buildExamScreen({
-  LessonRepository? repo,
-  SessionStorage? storage,
-}) {
+Widget buildExamScreen({LessonRepository? repo, SessionStorage? storage}) {
   return ProviderScope(
     overrides: [
-      appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(AppLanguage.en),
+      ),
       if (repo != null) lessonRepositoryProvider.overrideWithValue(repo),
       if (storage != null) sessionStorageProvider.overrideWithValue(storage),
     ],
@@ -93,7 +92,9 @@ void main() {
     expect(find.text('Choose level'), findsOneWidget);
   });
 
-  testWidgets('shows snackbar when selected level has no terms', (tester) async {
+  testWidgets('shows snackbar when selected level has no terms', (
+    tester,
+  ) async {
     final repo = _FakeLessonRepository(items: const []);
 
     await tester.pumpWidget(buildExamScreen(repo: repo));
@@ -107,7 +108,9 @@ void main() {
     expect(find.text(AppLanguage.en.noTermsAvailableLabel), findsOneWidget);
   });
 
-  testWidgets('shows load error snackbar when repository throws', (tester) async {
+  testWidgets('shows load error snackbar when repository throws', (
+    tester,
+  ) async {
     final repo = _FakeLessonRepository(items: const [], throwOnFetch: true);
 
     await tester.pumpWidget(buildExamScreen(repo: repo));
@@ -120,8 +123,9 @@ void main() {
     expect(find.text(AppLanguage.en.loadErrorLabel), findsOneWidget);
   });
 
-  testWidgets('navigates to TestConfigScreen when terms are available',
-      (tester) async {
+  testWidgets('navigates to TestConfigScreen when terms are available', (
+    tester,
+  ) async {
     final repo = _FakeLessonRepository(items: const [_sampleItem]);
     final storage = _FakeSessionStorage();
 
@@ -134,6 +138,9 @@ void main() {
     await tester.pump(const Duration(milliseconds: 300));
 
     expect(find.byType(TestConfigScreen), findsOneWidget);
-    expect(find.textContaining(AppLanguage.en.mockExamTitle('N5')), findsWidgets);
+    expect(
+      find.textContaining(AppLanguage.en.mockExamTitle('N5')),
+      findsWidgets,
+    );
   });
 }

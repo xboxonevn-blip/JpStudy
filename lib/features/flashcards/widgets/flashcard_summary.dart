@@ -77,7 +77,10 @@ class FlashcardSummaryScreen extends ConsumerWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: _getAccuracyColor(context, accuracyPercent).withValues(alpha: 0.3),
+            color: _getAccuracyColor(
+              context,
+              accuracyPercent,
+            ).withValues(alpha: 0.3),
             blurRadius: 20,
             spreadRadius: 5,
           ),
@@ -143,7 +146,11 @@ class FlashcardSummaryScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildXPCard(BuildContext context, AppLanguage language, int xpEarned) {
+  Widget _buildXPCard(
+    BuildContext context,
+    AppLanguage language,
+    int xpEarned,
+  ) {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(

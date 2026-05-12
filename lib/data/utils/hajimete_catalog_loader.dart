@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 class HajimeteChapterCatalog {
@@ -11,7 +12,8 @@ class HajimeteChapterCatalog {
   final String levelCode;
   final List<HajimeteChapterSummary> chapters;
 
-  int get totalTerms => chapters.fold<int>(0, (sum, chapter) => sum + chapter.entryCount);
+  int get totalTerms =>
+      chapters.fold<int>(0, (sum, chapter) => sum + chapter.entryCount);
 }
 
 class HajimeteChapterSummary {
@@ -90,7 +92,9 @@ class HajimeteKanjiEntry {
 // assets), so caching indefinitely is safe and avoids repeated asset reads.
 final _catalogCache = <String, HajimeteChapterCatalog>{};
 
-Future<HajimeteChapterCatalog> loadHajimeteChapterCatalog(String levelCode) async {
+Future<HajimeteChapterCatalog> loadHajimeteChapterCatalog(
+  String levelCode,
+) async {
   final normalizedLevel = levelCode.trim().toUpperCase();
   final cached = _catalogCache[normalizedLevel];
   if (cached != null) return cached;
@@ -106,7 +110,10 @@ Future<HajimeteChapterCatalog> loadHajimeteChapterCatalog(String levelCode) asyn
   ]);
 
   final chapters = summaries.whereType<HajimeteChapterSummary>().toList();
-  final catalog = HajimeteChapterCatalog(levelCode: normalizedLevel, chapters: chapters);
+  final catalog = HajimeteChapterCatalog(
+    levelCode: normalizedLevel,
+    chapters: chapters,
+  );
   _catalogCache[normalizedLevel] = catalog;
   return catalog;
 }
@@ -116,10 +123,11 @@ Future<HajimeteChapterSummary?> _loadChapterSummary(
   int chapterId,
 ) async {
   final padded = chapterId.toString().padLeft(2, '0');
-  final path = 'assets/data/content/vocab/$levelLower/hajimete/hajimete_ch$padded.json';
+  final path =
+      'assets/data/content/vocab/$levelLower/hajimete/hajimete_ch$padded.json';
   try {
     final raw = await rootBundle.loadString(path);
-    final payload = json.decode(raw);
+    final payload = await compute(_decodeJsonPayload, raw);
     if (payload is! Map) return null;
 
     final map = payload.map((key, value) => MapEntry(key.toString(), value));
@@ -133,14 +141,22 @@ Future<HajimeteChapterSummary?> _loadChapterSummary(
     final sourceVocabIds = <String>[];
     for (final rawEntry in entries) {
       if (rawEntry is! Map) continue;
-      final entry = rawEntry.map((key, value) => MapEntry(key.toString(), value));
+      final entry = rawEntry.map(
+        (key, value) => MapEntry(key.toString(), value),
+      );
       final lemma = entry['lemma'] is Map
-          ? (entry['lemma'] as Map).map((key, value) => MapEntry(key.toString(), value))
+          ? (entry['lemma'] as Map).map(
+              (key, value) => MapEntry(key.toString(), value),
+            )
           : const <String, dynamic>{};
       final links = entry['links'] is Map
-          ? (entry['links'] as Map).map((key, value) => MapEntry(key.toString(), value))
+          ? (entry['links'] as Map).map(
+              (key, value) => MapEntry(key.toString(), value),
+            )
           : const <String, dynamic>{};
-      final term = repairPotentialMojibake((lemma['term'] ?? '').toString()).trim();
+      final term = repairPotentialMojibake(
+        (lemma['term'] ?? '').toString(),
+      ).trim();
       if (term.isNotEmpty && previewTerms.length < 4) {
         previewTerms.add(term);
       }
@@ -173,7 +189,7 @@ Future<HajimeteChapterDetail?> loadHajimeteChapterDetail(
 
   try {
     final raw = await rootBundle.loadString(path);
-    final payload = json.decode(raw);
+    final payload = await compute(_decodeJsonPayload, raw);
     if (payload is! Map) return null;
     final map = payload.map((key, value) => MapEntry(key.toString(), value));
     final entries = map['entries'] is List ? map['entries'] as List : const [];
@@ -181,11 +197,16 @@ Future<HajimeteChapterDetail?> loadHajimeteChapterDetail(
     return HajimeteChapterDetail(
       levelCode: normalizedLevel,
       chapterId: map['chapterId'] is int ? map['chapterId'] as int : chapterId,
-      title: _normalizeChapterTitle((map['chapterTitle'] ?? '').toString(), chapterId),
+      title: _normalizeChapterTitle(
+        (map['chapterTitle'] ?? '').toString(),
+        chapterId,
+      ),
       entries: [
         for (final rawEntry in entries)
           if (rawEntry is Map)
-            _mapChapterEntry(rawEntry.map((key, value) => MapEntry(key.toString(), value))),
+            _mapChapterEntry(
+              rawEntry.map((key, value) => MapEntry(key.toString(), value)),
+            ),
       ],
     );
   } catch (_) {
@@ -195,10 +216,14 @@ Future<HajimeteChapterDetail?> loadHajimeteChapterDetail(
 
 HajimeteChapterEntry _mapChapterEntry(Map<String, dynamic> entry) {
   final lemma = entry['lemma'] is Map
-      ? (entry['lemma'] as Map).map((key, value) => MapEntry(key.toString(), value))
+      ? (entry['lemma'] as Map).map(
+          (key, value) => MapEntry(key.toString(), value),
+        )
       : const <String, dynamic>{};
   final sense = entry['sense'] is Map
-      ? (entry['sense'] as Map).map((key, value) => MapEntry(key.toString(), value))
+      ? (entry['sense'] as Map).map(
+          (key, value) => MapEntry(key.toString(), value),
+        )
       : const <String, dynamic>{};
 
   return HajimeteChapterEntry(
@@ -220,7 +245,7 @@ Future<HajimeteKanjiChapterDetail?> loadHajimeteKanjiChapterDetail(
 
   try {
     final raw = await rootBundle.loadString(path);
-    final payload = json.decode(raw);
+    final payload = await compute(_decodeJsonPayload, raw);
     if (payload is! Map) return null;
     final map = payload.map((key, value) => MapEntry(key.toString(), value));
     final entries = map['entries'] is List ? map['entries'] as List : const [];
@@ -247,20 +272,32 @@ Future<HajimeteKanjiChapterDetail?> loadHajimeteKanjiChapterDetail(
 
 HajimeteKanjiEntry _mapKanjiEntry(Map<String, dynamic> entry) {
   final readings = entry['reading'] is Map
-      ? (entry['reading'] as Map).map((key, value) => MapEntry(key.toString(), value))
+      ? (entry['reading'] as Map).map(
+          (key, value) => MapEntry(key.toString(), value),
+        )
       : const <String, dynamic>{};
   final meanings = entry['meaning'] is Map
-      ? (entry['meaning'] as Map).map((key, value) => MapEntry(key.toString(), value))
+      ? (entry['meaning'] as Map).map(
+          (key, value) => MapEntry(key.toString(), value),
+        )
       : const <String, dynamic>{};
 
   final on = repairPotentialMojibake((readings['on'] ?? '').toString()).trim();
-  final kun = repairPotentialMojibake((readings['kun'] ?? '').toString()).trim();
+  final kun = repairPotentialMojibake(
+    (readings['kun'] ?? '').toString(),
+  ).trim();
 
   return HajimeteKanjiEntry(
-    character: repairPotentialMojibake((entry['kanji'] ?? '').toString()).trim(),
+    character: repairPotentialMojibake(
+      (entry['kanji'] ?? '').toString(),
+    ).trim(),
     reading: [on, kun].where((value) => value.isNotEmpty).join(' ・ '),
-    meaningVi: repairPotentialMojibake((meanings['vi'] ?? '').toString()).trim(),
-    meaningEn: repairPotentialMojibake((meanings['en'] ?? '').toString()).trim(),
+    meaningVi: repairPotentialMojibake(
+      (meanings['vi'] ?? '').toString(),
+    ).trim(),
+    meaningEn: repairPotentialMojibake(
+      (meanings['en'] ?? '').toString(),
+    ).trim(),
   );
 }
 
@@ -269,13 +306,17 @@ String repairPotentialMojibake(String input) {
   if (text.isEmpty) return text;
   if (!_looksLikeMojibake(text)) return text;
   try {
-    final repaired = utf8.decode(latin1.encode(text), allowMalformed: true).trim();
+    final repaired = utf8
+        .decode(latin1.encode(text), allowMalformed: true)
+        .trim();
     if (repaired.isEmpty) return text;
     return repaired;
   } catch (_) {
     return text;
   }
 }
+
+Object? _decodeJsonPayload(String raw) => json.decode(raw);
 
 final _chapterTitleWhitespaceRe = RegExp(r'\s+');
 

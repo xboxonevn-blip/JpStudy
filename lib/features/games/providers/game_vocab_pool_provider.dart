@@ -1,11 +1,13 @@
-﻿import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/repositories/content_repository.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/mistakes/repositories/mistake_repository.dart';
 
-final gameVocabPoolProvider = FutureProvider.autoDispose<List<VocabItem>>((ref) async {
+final gameVocabPoolProvider = FutureProvider.autoDispose<List<VocabItem>>((
+  ref,
+) async {
   final lessonRepo = ref.watch(lessonRepositoryProvider);
   final mistakeRepo = ref.watch(mistakeRepositoryProvider);
   final level = ref.watch(studyLevelProvider)?.shortLabel ?? 'N5';

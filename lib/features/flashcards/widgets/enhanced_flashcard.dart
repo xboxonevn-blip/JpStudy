@@ -140,10 +140,7 @@ class _EnhancedFlashcardState extends State<EnhancedFlashcard> {
               layoutBuilder: (currentChild, previousChildren) {
                 return Stack(
                   alignment: Alignment.center,
-                  children: [
-                    ...previousChildren,
-                    ?currentChild,
-                  ],
+                  children: [...previousChildren, ?currentChild],
                 );
               },
               child: showBack ? back : front,

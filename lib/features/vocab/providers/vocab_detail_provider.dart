@@ -36,15 +36,17 @@ class VocabDetail {
 // Provider
 // ---------------------------------------------------------------------------
 
-final vocabDetailProvider =
-    FutureProvider.family<VocabDetail?, int>((ref, vocabId) async {
+final vocabDetailProvider = FutureProvider.family<VocabDetail?, int>((
+  ref,
+  vocabId,
+) async {
   final contentDb = ref.watch(contentDatabaseProvider);
   final appDb = ref.watch(databaseProvider);
 
   // 1. Fetch vocab first (needed to know level + term for downstream queries)
-  final vocab = await (contentDb.select(contentDb.vocab)
-        ..where((t) => t.id.equals(vocabId)))
-      .getSingleOrNull();
+  final vocab = await (contentDb.select(
+    contentDb.vocab,
+  )..where((t) => t.id.equals(vocabId))).getSingleOrNull();
   if (vocab == null) return null;
 
   // 2–4. Fire SRS state, kanji batch lookup, and related vocab concurrently —
@@ -54,16 +56,17 @@ final vocabDetailProvider =
 
   final srsFuture = srsDao.getSrsState(vocabId);
   final kanjiFuture = kanjiChars.isNotEmpty
-      ? (contentDb.select(contentDb.kanji)
-              ..where((t) => t.character.isIn(kanjiChars)))
-          .get()
+      ? (contentDb.select(
+          contentDb.kanji,
+        )..where((t) => t.character.isIn(kanjiChars))).get()
       : Future.value(const <KanjiData>[]);
-  final relatedFuture = (contentDb.select(contentDb.vocab)
-        ..where(
-          (t) => t.level.equals(vocab.level) & t.id.equals(vocabId).not(),
-        )
-        ..limit(5))
-      .get();
+  final relatedFuture =
+      (contentDb.select(contentDb.vocab)
+            ..where(
+              (t) => t.level.equals(vocab.level) & t.id.equals(vocabId).not(),
+            )
+            ..limit(5))
+          .get();
 
   final srs = await srsFuture;
   final kanjiList = await kanjiFuture;

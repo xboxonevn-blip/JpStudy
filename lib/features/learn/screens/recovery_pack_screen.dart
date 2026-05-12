@@ -118,9 +118,7 @@ class _RecoveryPackEmpty extends StatelessWidget {
               Text(
                 _emptyBody(language),
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: palette.ink.withValues(alpha: 0.55),
-                ),
+                style: TextStyle(color: palette.ink.withValues(alpha: 0.55)),
               ),
             ],
           ),

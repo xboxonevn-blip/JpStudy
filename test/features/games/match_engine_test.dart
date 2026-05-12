@@ -2,12 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/features/games/match_game/logic/match_engine.dart';
 
-VocabItem _vocab(int id) => VocabItem(
-      id: id,
-      term: 'term$id',
-      meaning: 'meaning$id',
-      level: 'N5',
-    );
+VocabItem _vocab(int id) =>
+    VocabItem(id: id, term: 'term$id', meaning: 'meaning$id', level: 'N5');
 
 List<VocabItem> _vocabList(int count) =>
     List.generate(count, (i) => _vocab(i + 1));

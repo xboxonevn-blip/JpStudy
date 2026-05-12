@@ -14,7 +14,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
           dueKanaCountProvider.overrideWith((ref) => Stream.value(1)),
         ],
         child: const MaterialApp(home: Scaffold(body: KanaReviewDueCard())),

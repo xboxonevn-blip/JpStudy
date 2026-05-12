@@ -13,15 +13,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 void _mockShareChannel() {
   TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
       .setMockMethodCallHandler(
-    const MethodChannel('dev.fluttercommunity.plus/share'),
-    (_) async => null,
-  );
+        const MethodChannel('dev.fluttercommunity.plus/share'),
+        (_) async => null,
+      );
 }
 
 Widget _buildScreen({AppLanguage language = AppLanguage.en}) {
   return ProviderScope(
     overrides: [
-      appLanguageProvider.overrideWith((ref) => language),
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(language),
+      ),
       dashboardProvider.overrideWith(
         (ref) => Stream.value(
           const DashboardState(
@@ -94,10 +96,7 @@ void main() {
     await _pump(tester);
 
     expect(find.byType(SnackBar), findsOneWidget);
-    expect(
-      find.textContaining('Challenge enrollment'),
-      findsOneWidget,
-    );
+    expect(find.textContaining('Challenge enrollment'), findsOneWidget);
   });
 
   testWidgets('"Share snapshot" tap does NOT show a snackbar', (tester) async {

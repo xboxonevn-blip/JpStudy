@@ -6,6 +6,7 @@ class HomeSurface {
 
   static const double pageHorizontalPadding = 16;
   static const double panelRadius = 24;
+
   /// Palette-aware border — preferred when [BuildContext] is available.
   static Color panelBorderFor(BuildContext context) =>
       context.appPalette.outline;
@@ -33,11 +34,13 @@ class HomeSurface {
     Color? borderColor,
     BuildContext? context,
   }) {
-    final resolvedColors = colors ??
+    final resolvedColors =
+        colors ??
         (context != null
             ? [context.appPalette.elevated, context.appPalette.base]
             : const [Color(0xFFFFFFFF), Color(0xFFF6FBFF)]);
-    final resolvedBorder = borderColor ??
+    final resolvedBorder =
+        borderColor ??
         (context != null
             ? context.appPalette.outline
             : const Color(0xFFDCE8F8));

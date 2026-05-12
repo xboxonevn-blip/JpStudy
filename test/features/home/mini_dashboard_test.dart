@@ -34,21 +34,18 @@ const _kDashboard = DashboardState(
   totalMistakeCount: 0,
 );
 
-Widget _host({
-  required List<Override> overrides,
-}) =>
-    ProviderScope(
-      overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-        grammarGhostCountProvider.overrideWith((ref) async* {
-          yield 0;
-        }),
-        ...overrides,
-      ],
-      child: const MaterialApp(
-        home: Scaffold(body: MiniDashboard(compact: true)),
-      ),
-    );
+Widget _host({required List<Override> overrides}) => ProviderScope(
+  overrides: [
+    appLanguageProvider.overrideWith(
+      (ref) => AppLanguageController.test(AppLanguage.en),
+    ),
+    grammarGhostCountProvider.overrideWith((ref) async* {
+      yield 0;
+    }),
+    ...overrides,
+  ],
+  child: const MaterialApp(home: Scaffold(body: MiniDashboard(compact: true))),
+);
 
 void main() {
   group('MiniDashboard error state', () {
@@ -130,5 +127,3 @@ void main() {
     );
   });
 }
-
-

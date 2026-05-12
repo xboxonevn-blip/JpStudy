@@ -258,7 +258,9 @@ final dailyPlanProvider = FutureProvider<DailyPlan>((ref) async {
   // Only offer new-content steps when the review queue isn't overloaded, so
   // learners clear debt before acquiring more items.
   final totalDue =
-      dashboardData.vocabDue + dashboardData.grammarDue + dashboardData.kanjiDue;
+      dashboardData.vocabDue +
+      dashboardData.grammarDue +
+      dashboardData.kanjiDue;
   if (totalDue < 40) {
     steps.add(
       PlanStep(
@@ -359,5 +361,3 @@ String _planSubtitle(
       return ja;
   }
 }
-
-

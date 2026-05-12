@@ -162,7 +162,9 @@ Future<ProviderContainer> pumpLearnScreen(
 }) async {
   final container = ProviderContainer(
     overrides: [
-      appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(AppLanguage.en),
+      ),
       sessionStorageProvider.overrideWithValue(
         storage ?? CapturingSessionStorage(),
       ),
@@ -220,28 +222,26 @@ LearnSessionSnapshot resumeSnap() {
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
 
-  testWidgets(
-    'LearnScreen shows loading indicator when session is null',
-    (tester) async {
-      await pumpLearnScreen(tester, config: cfg(QuestionType.multipleChoice));
-      expect(find.byType(CircularProgressIndicator), findsOneWidget);
-    },
-  );
+  testWidgets('LearnScreen shows loading indicator when session is null', (
+    tester,
+  ) async {
+    await pumpLearnScreen(tester, config: cfg(QuestionType.multipleChoice));
+    expect(find.byType(CircularProgressIndicator), findsOneWidget);
+  });
 
-  testWidgets(
-    'LearnScreen starts fresh session when no resume snapshot',
-    (tester) async {
-      final storage = CapturingSessionStorage();
-      final container = await pumpLearnScreen(
-        tester,
-        config: cfg(QuestionType.multipleChoice, count: 3),
-        storage: storage,
-      );
-      await tester.pumpAndSettle();
-      expect(container.read(learnSessionProvider)!.questions, hasLength(3));
-      expect(storage.savedSnapshots.single.questions, hasLength(3));
-    },
-  );
+  testWidgets('LearnScreen starts fresh session when no resume snapshot', (
+    tester,
+  ) async {
+    final storage = CapturingSessionStorage();
+    final container = await pumpLearnScreen(
+      tester,
+      config: cfg(QuestionType.multipleChoice, count: 3),
+      storage: storage,
+    );
+    await tester.pumpAndSettle();
+    expect(container.read(learnSessionProvider)!.questions, hasLength(3));
+    expect(storage.savedSnapshots.single.questions, hasLength(3));
+  });
 
   testWidgets('LearnScreen restores session from resume snapshot', (
     tester,
@@ -255,16 +255,15 @@ void main() {
     expect(container.read(learnSessionProvider)!.currentQuestionIndex, 1);
   });
 
-  testWidgets(
-    'Multiple choice tap shows result UI for the chosen option',
-    (tester) async {
-      await pumpLearnScreen(tester, config: cfg(QuestionType.multipleChoice));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('fire'));
-      await tester.pumpAndSettle();
-      expect(find.text(AppLanguage.en.willRetryLabel), findsOneWidget);
-    },
-  );
+  testWidgets('Multiple choice tap shows result UI for the chosen option', (
+    tester,
+  ) async {
+    await pumpLearnScreen(tester, config: cfg(QuestionType.multipleChoice));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('fire'));
+    await tester.pumpAndSettle();
+    expect(find.text(AppLanguage.en.willRetryLabel), findsOneWidget);
+  });
 
   testWidgets('True/false tap shows result UI', (tester) async {
     await pumpLearnScreen(tester, config: cfg(QuestionType.trueFalse));
@@ -291,8 +290,10 @@ void main() {
         config: cfg(QuestionType.multipleChoice, count: 1),
       );
       await tester.pumpAndSettle();
-      final initialQuestionCount =
-          container.read(learnSessionProvider)!.questions.length;
+      final initialQuestionCount = container
+          .read(learnSessionProvider)!
+          .questions
+          .length;
 
       // First wrong answer → requeueQuestion called → list grows by 1.
       await tester.tap(find.text('fire'));

@@ -19,7 +19,7 @@ class _FakeFirebaseAnalytics extends Fake implements FirebaseAnalytics {
 void main() {
   test('public analytics methods can be called with a fake instance', () async {
     final fake = _FakeFirebaseAnalytics();
-    final service = AnalyticsService(instance: fake);
+    final service = AnalyticsService(instance: fake, enabled: true);
 
     await service.logSessionStart('learn');
     await service.logSessionComplete(
@@ -33,5 +33,14 @@ void main() {
     await service.logCloudDownload();
 
     expect(fake.events, hasLength(5));
+  });
+
+  test('does not log before consent', () async {
+    final fake = _FakeFirebaseAnalytics();
+    final service = AnalyticsService(instance: fake);
+
+    await service.logSessionStart('learn');
+
+    expect(fake.events, isEmpty);
   });
 }

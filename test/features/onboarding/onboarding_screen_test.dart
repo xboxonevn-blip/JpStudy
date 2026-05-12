@@ -2,8 +2,7 @@ import 'package:drift/native.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:jpstudy/core/app_language.dart';
-import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/shared_preferences_provider.dart';
 import 'package:jpstudy/core/study_goal.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/data/db/app_database.dart';
@@ -12,6 +11,7 @@ import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/common/widgets/clay_button.dart';
 import 'package:jpstudy/features/onboarding/onboarding_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FakeOnboardingLessonRepository extends LessonRepository {
   FakeOnboardingLessonRepository(
@@ -29,6 +29,11 @@ class FakeOnboardingLessonRepository extends LessonRepository {
 }
 
 void main() {
+  Future<SharedPreferences> prefs() async {
+    SharedPreferences.setMockInitialValues({'app.locale': 'en'});
+    return SharedPreferences.getInstance();
+  }
+
   testWidgets('Onboarding unlocks first session after preview answer', (
     tester,
   ) async {
@@ -77,7 +82,7 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          sharedPreferencesProvider.overrideWithValue(await prefs()),
           lessonRepositoryProvider.overrideWithValue(repo),
         ],
         child: MaterialApp(
@@ -146,7 +151,7 @@ void main() {
   // to Duration.zero so the user doesn't see any motion. These tests pin the
   // `reducedMotionDuration` gate so a future refactor can't silently drop it.
 
-  Widget hostOnboarding({required bool disableAnimations}) {
+  Future<Widget> hostOnboarding({required bool disableAnimations}) async {
     final db = AppDatabase(executor: NativeDatabase.memory());
     final contentDb = ContentDatabase(executor: NativeDatabase.memory());
     final repo = FakeOnboardingLessonRepository(
@@ -160,7 +165,7 @@ void main() {
     });
     return ProviderScope(
       overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+        sharedPreferencesProvider.overrideWithValue(await prefs()),
         lessonRepositoryProvider.overrideWithValue(repo),
       ],
       child: MaterialApp(
@@ -179,7 +184,7 @@ void main() {
   testWidgets(
     'disableAnimations=true → all AnimatedContainer durations collapse to zero',
     (tester) async {
-      await tester.pumpWidget(hostOnboarding(disableAnimations: true));
+      await tester.pumpWidget(await hostOnboarding(disableAnimations: true));
       await tester.pumpAndSettle();
 
       final containers = tester
@@ -206,7 +211,7 @@ void main() {
   testWidgets(
     'disableAnimations=false → AnimatedContainer durations remain non-zero',
     (tester) async {
-      await tester.pumpWidget(hostOnboarding(disableAnimations: false));
+      await tester.pumpWidget(await hostOnboarding(disableAnimations: false));
       await tester.pumpAndSettle();
 
       final containers = tester

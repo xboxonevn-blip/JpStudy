@@ -1,8 +1,4 @@
-﻿enum RecallSprintStrategy {
-  dueVocab,
-  mixedDue,
-  weakVocab,
-}
+enum RecallSprintStrategy { dueVocab, mixedDue, weakVocab }
 
 class RecallSprintArgs {
   const RecallSprintArgs({

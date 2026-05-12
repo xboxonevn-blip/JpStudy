@@ -321,10 +321,7 @@ class _HeroMetricBoard extends StatelessWidget {
             _HeroMetricRow(metric: metrics[index]),
             if (index != metrics.length - 1) ...[
               const SizedBox(height: AppSpacing.sm),
-              Container(
-                height: 1,
-                color: Colors.white.withValues(alpha: 0.12),
-              ),
+              Container(height: 1, color: Colors.white.withValues(alpha: 0.12)),
               const SizedBox(height: AppSpacing.sm),
             ],
           ],
@@ -385,8 +382,7 @@ String _subtitle(AppLanguage language) => switch (language) {
     'One focused hub for full mock, quick checks, reading drills, diagnosis, and a 7-day repair plan.',
   AppLanguage.vi =>
     'Một hub thống nhất cho thi thử đầy đủ, kiểm tra nhanh, đọc hiểu, chẩn đoán và kế hoạch vá lỗ hổng 7 ngày.',
-  AppLanguage.ja =>
-    'フル模試、クイックチェック、読解、診断、7日補強プランをひとつにまとめた入口です。',
+  AppLanguage.ja => 'フル模試、クイックチェック、読解、診断、7日補強プランをひとつにまとめた入口です。',
 };
 
 String _readinessLabel(AppLanguage language, JlptCoachSnapshot? snapshot) {

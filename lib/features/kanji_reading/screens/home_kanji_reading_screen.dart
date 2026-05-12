@@ -93,9 +93,7 @@ class _KanjiHubBody extends ConsumerWidget {
     final allItems = allAsync.value ?? const <KanjiItem>[];
     final scopedAllItems = _filterItems(allItems);
     final dueItems = _filterItems(dueAsync.value ?? const <KanjiItem>[]);
-    final unseenItems = _filterItems(
-      unseenAsync.value ?? const <KanjiItem>[],
-    );
+    final unseenItems = _filterItems(unseenAsync.value ?? const <KanjiItem>[]);
     final primaryItems = _resolvePrimaryItems(
       source: source,
       scopedAllItems: scopedAllItems,
@@ -459,5 +457,3 @@ class _KanjiRow extends StatelessWidget {
     );
   }
 }
-
-

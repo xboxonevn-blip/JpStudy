@@ -7,7 +7,8 @@ class KanjiStrokeVectorService {
 
   static final KanjiStrokeVectorService instance = KanjiStrokeVectorService._();
 
-  static const _assetPath = 'assets/data/support/kanji/kanjivg_stroke_paths_n5n4.json';
+  static const _assetPath =
+      'assets/data/support/kanji/kanjivg_stroke_paths_n5n4.json';
 
   static Map<String, KanjiStrokeVector>? debugVectorOverrides;
 

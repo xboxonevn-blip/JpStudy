@@ -15,10 +15,10 @@ import 'package:jpstudy/features/kanji_reading/providers/kanji_reading_providers
 // ---------------------------------------------------------------------------
 class _FakeLessonRepository extends LessonRepository {
   _FakeLessonRepository(this._kanjiByLevel)
-      : super(
-          AppDatabase(executor: NativeDatabase.memory()),
-          ContentDatabase(executor: NativeDatabase.memory()),
-        );
+    : super(
+        AppDatabase(executor: NativeDatabase.memory()),
+        ContentDatabase(executor: NativeDatabase.memory()),
+      );
 
   final Map<String, List<KanjiItem>> _kanjiByLevel;
   int fetchKanjiByIdsCallCount = 0;
@@ -40,23 +40,22 @@ class _FakeLessonRepository extends LessonRepository {
   Future<List<KanjiItem>> fetchUnseenKanjiByLevel(
     String level, {
     int limit = 15,
-  }) async =>
-      const [];
+  }) async => const [];
 }
 
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
 KanjiItem _kanji(int id, String level) => KanjiItem(
-      id: id,
-      lessonId: 1,
-      character: 'X',
-      strokeCount: 2,
-      meaning: 'm',
-      meaningEn: 'm',
-      examples: const [],
-      jlptLevel: level,
-    );
+  id: id,
+  lessonId: 1,
+  character: 'X',
+  strokeCount: 2,
+  meaning: 'm',
+  meaningEn: 'm',
+  examples: const [],
+  jlptLevel: level,
+);
 
 ProviderContainer _container({
   required AppDatabase db,
@@ -86,7 +85,9 @@ void main() {
     tearDown(() => db.close());
 
     test('lowercase levelCode resolves same as uppercase', () async {
-      final repo = _FakeLessonRepository({'N5': [_kanji(1, 'N5')]});
+      final repo = _FakeLessonRepository({
+        'N5': [_kanji(1, 'N5')],
+      });
       final container = _container(db: db, repo: repo);
       addTearDown(container.dispose);
 
@@ -98,12 +99,15 @@ void main() {
     });
 
     test('levelCode with surrounding whitespace is trimmed', () async {
-      final repo = _FakeLessonRepository({'N5': [_kanji(2, 'N5')]});
+      final repo = _FakeLessonRepository({
+        'N5': [_kanji(2, 'N5')],
+      });
       final container = _container(db: db, repo: repo);
       addTearDown(container.dispose);
 
-      final result =
-          await container.read(kanjiByLevelCodeProvider(' N5 ').future);
+      final result = await container.read(
+        kanjiByLevelCodeProvider(' N5 ').future,
+      );
       expect(result, hasLength(1));
     });
 
@@ -132,7 +136,9 @@ void main() {
     tearDown(() => db.close());
 
     test('returns empty list when no SRS rows exist', () async {
-      final repo = _FakeLessonRepository({'N5': [_kanji(1, 'N5')]});
+      final repo = _FakeLessonRepository({
+        'N5': [_kanji(1, 'N5')],
+      });
       final container = _container(db: db, repo: repo);
       addTearDown(container.dispose);
 
@@ -143,35 +149,38 @@ void main() {
       expect(repo.fetchKanjiByIdsCallCount, 0);
     });
 
-    test('returns only items that are due AND match the requested level', () async {
-      final repo = _FakeLessonRepository({
-        'N5': [_kanji(10, 'N5'), _kanji(11, 'N5')],
-        'N4': [_kanji(20, 'N4')],
-      });
-      final container = _container(db: db, repo: repo);
-      addTearDown(container.dispose);
+    test(
+      'returns only items that are due AND match the requested level',
+      () async {
+        final repo = _FakeLessonRepository({
+          'N5': [_kanji(10, 'N5'), _kanji(11, 'N5')],
+          'N4': [_kanji(20, 'N4')],
+        });
+        final container = _container(db: db, repo: repo);
+        addTearDown(container.dispose);
 
-      await db.kanjiSrsDao.insertTestState(
-        kanjiId: 10,
-        nextReviewAt: DateTime.now().subtract(const Duration(hours: 1)),
-      );
-      await db.kanjiSrsDao.insertTestState(
-        kanjiId: 20,
-        nextReviewAt: DateTime.now().subtract(const Duration(hours: 1)),
-      );
+        await db.kanjiSrsDao.insertTestState(
+          kanjiId: 10,
+          nextReviewAt: DateTime.now().subtract(const Duration(hours: 1)),
+        );
+        await db.kanjiSrsDao.insertTestState(
+          kanjiId: 20,
+          nextReviewAt: DateTime.now().subtract(const Duration(hours: 1)),
+        );
 
-      final n5Due = await container.read(
-        kanjiReadingDueItemsByLevelCodeProvider('N5').future,
-      );
-      expect(n5Due, hasLength(1));
-      expect(n5Due.first.id, 10);
+        final n5Due = await container.read(
+          kanjiReadingDueItemsByLevelCodeProvider('N5').future,
+        );
+        expect(n5Due, hasLength(1));
+        expect(n5Due.first.id, 10);
 
-      final n4Due = await container.read(
-        kanjiReadingDueItemsByLevelCodeProvider('N4').future,
-      );
-      expect(n4Due, hasLength(1));
-      expect(n4Due.first.id, 20);
-    });
+        final n4Due = await container.read(
+          kanjiReadingDueItemsByLevelCodeProvider('N4').future,
+        );
+        expect(n4Due, hasLength(1));
+        expect(n4Due.first.id, 20);
+      },
+    );
 
     test('returns empty when dueIds exist but none match the level', () async {
       final repo = _FakeLessonRepository({
@@ -214,7 +223,10 @@ void main() {
         kanjiReadingDueItemsByLevelCodeProvider('n5').future,
       );
 
-      expect(upper.map((k) => k.id).toSet(), equals(lower.map((k) => k.id).toSet()));
+      expect(
+        upper.map((k) => k.id).toSet(),
+        equals(lower.map((k) => k.id).toSet()),
+      );
     });
   });
 
@@ -227,38 +239,38 @@ void main() {
 
     tearDown(() => db.close());
 
-    test('uses cached level list and skips fetchKanjiByIds when pre-warmed', () async {
-      final repo = _FakeLessonRepository({
-        'N5': [_kanji(1, 'N5'), _kanji(2, 'N5')],
-      });
-      final container = _container(db: db, repo: repo);
-      addTearDown(container.dispose);
+    test(
+      'uses cached level list and skips fetchKanjiByIds when pre-warmed',
+      () async {
+        final repo = _FakeLessonRepository({
+          'N5': [_kanji(1, 'N5'), _kanji(2, 'N5')],
+        });
+        final container = _container(db: db, repo: repo);
+        addTearDown(container.dispose);
 
-      await db.kanjiSrsDao.insertTestState(
-        kanjiId: 1,
-        nextReviewAt: DateTime.now().subtract(const Duration(hours: 1)),
-      );
+        await db.kanjiSrsDao.insertTestState(
+          kanjiId: 1,
+          nextReviewAt: DateTime.now().subtract(const Duration(hours: 1)),
+        );
 
-      // Pre-warm and keep alive with a listener.
-      final sub = container.listen(
-        kanjiByLevelCodeProvider('N5'),
-        (_, _) {},
-      );
-      await container.read(kanjiByLevelCodeProvider('N5').future);
-      addTearDown(sub.close);
+        // Pre-warm and keep alive with a listener.
+        final sub = container.listen(kanjiByLevelCodeProvider('N5'), (_, _) {});
+        await container.read(kanjiByLevelCodeProvider('N5').future);
+        addTearDown(sub.close);
 
-      // Reset counter after pre-warm.
-      repo.fetchKanjiByIdsCallCount = 0;
+        // Reset counter after pre-warm.
+        repo.fetchKanjiByIdsCallCount = 0;
 
-      final result = await container.read(
-        kanjiReadingDueItemsByLevelCodeProvider('N5').future,
-      );
+        final result = await container.read(
+          kanjiReadingDueItemsByLevelCodeProvider('N5').future,
+        );
 
-      expect(result, hasLength(1));
-      expect(result.first.id, 1);
-      // Cache-hit path must not call fetchKanjiByIds.
-      expect(repo.fetchKanjiByIdsCallCount, 0);
-    });
+        expect(result, hasLength(1));
+        expect(result.first.id, 1);
+        // Cache-hit path must not call fetchKanjiByIds.
+        expect(repo.fetchKanjiByIdsCallCount, 0);
+      },
+    );
   });
 
   group('kanjiReadingDueItemsProvider — studyLevelProvider integration', () {
@@ -271,7 +283,9 @@ void main() {
     tearDown(() => db.close());
 
     test('returns empty list when studyLevelProvider is null', () async {
-      final repo = _FakeLessonRepository({'N5': [_kanji(1, 'N5')]});
+      final repo = _FakeLessonRepository({
+        'N5': [_kanji(1, 'N5')],
+      });
       final container = ProviderContainer(
         overrides: [
           databaseProvider.overrideWithValue(db),
@@ -290,19 +304,26 @@ void main() {
       expect(result, isEmpty);
     });
 
-    test('delegates to family provider when studyLevelProvider is N5', () async {
-      final repo = _FakeLessonRepository({'N5': [_kanji(1, 'N5')]});
-      final container = _container(db: db, repo: repo, level: StudyLevel.n5);
-      addTearDown(container.dispose);
+    test(
+      'delegates to family provider when studyLevelProvider is N5',
+      () async {
+        final repo = _FakeLessonRepository({
+          'N5': [_kanji(1, 'N5')],
+        });
+        final container = _container(db: db, repo: repo, level: StudyLevel.n5);
+        addTearDown(container.dispose);
 
-      await db.kanjiSrsDao.insertTestState(
-        kanjiId: 1,
-        nextReviewAt: DateTime.now().subtract(const Duration(hours: 1)),
-      );
+        await db.kanjiSrsDao.insertTestState(
+          kanjiId: 1,
+          nextReviewAt: DateTime.now().subtract(const Duration(hours: 1)),
+        );
 
-      final result = await container.read(kanjiReadingDueItemsProvider.future);
-      expect(result, hasLength(1));
-      expect(result.first.id, 1);
-    });
+        final result = await container.read(
+          kanjiReadingDueItemsProvider.future,
+        );
+        expect(result, hasLength(1));
+        expect(result.first.id, 1);
+      },
+    );
   });
 }

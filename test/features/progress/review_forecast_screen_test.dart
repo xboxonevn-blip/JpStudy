@@ -100,16 +100,15 @@ Widget _buildScreen({
   return ProviderScope(
     retry: (retryCount, error) => null,
     overrides: [
-      appLanguageProvider.overrideWith((ref) => language),
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(language),
+      ),
       reviewForecastProvider.overrideWith((_) async {
         if (error != null) throw error;
         return forecast ?? _kForecast;
       }),
     ],
-    child: MaterialApp(
-      theme: _kTheme,
-      home: const ReviewForecastScreen(),
-    ),
+    child: MaterialApp(theme: _kTheme, home: const ReviewForecastScreen()),
   );
 }
 
@@ -135,7 +134,7 @@ void main() {
 
     expect(find.text('Review Forecast'), findsWidgets);
     // Hero stat values
-    expect(find.text('5'), findsWidgets);   // Due Today = totalDueNow
+    expect(find.text('5'), findsWidgets); // Due Today = totalDueNow
     expect(find.text('17'), findsOneWidget); // This Week = weekTotal
     expect(find.text('58'), findsOneWidget); // Tracked = totalTracked
     // Hero stat labels
@@ -177,8 +176,9 @@ void main() {
     expect(find.text('Mastered'), findsOneWidget);
   });
 
-  testWidgets('confidence section is shown when confidence.total > 0',
-      (tester) async {
+  testWidgets('confidence section is shown when confidence.total > 0', (
+    tester,
+  ) async {
     tester.view.physicalSize = const Size(1440, 2400);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
@@ -194,8 +194,9 @@ void main() {
     expect(find.text('Easy'), findsOneWidget);
   });
 
-  testWidgets('confidence section is absent when confidence.total == 0',
-      (tester) async {
+  testWidgets('confidence section is absent when confidence.total == 0', (
+    tester,
+  ) async {
     await tester.pumpWidget(_buildScreen(forecast: _kForecastNoConfidence));
     await _pump(tester);
 
@@ -203,9 +204,7 @@ void main() {
   });
 
   testWidgets('error state renders friendly error widget', (tester) async {
-    await tester.pumpWidget(
-      _buildScreen(error: Exception('DB failure')),
-    );
+    await tester.pumpWidget(_buildScreen(error: Exception('DB failure')));
     await _pump(tester);
 
     expect(
@@ -228,4 +227,3 @@ void main() {
     expect(find.text('復習予報'), findsWidgets);
   });
 }
-

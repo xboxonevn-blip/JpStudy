@@ -143,7 +143,7 @@ class ContentDatabase extends _$ContentDatabase {
         }
       },
       beforeOpen: (details) async {
-        // All four checks are independent â€” run them concurrently so the
+        // All four checks are independent — run them concurrently so the
         // content DB is ready in the time of the single slowest check.
         await Future.wait([
           _ensureMinnaVocabularySeeded(),
@@ -204,10 +204,10 @@ class ContentDatabase extends _$ContentDatabase {
       ..where(
         vocab.term.like('%?%') |
             vocab.reading.like('%?%') |
-            vocab.term.like('%Ã£%') |
-            vocab.reading.like('%Ã£%') |
-            vocab.term.like('%Ãƒ%') |
-            vocab.reading.like('%Ãƒ%'),
+            vocab.term.like('%ã%') |
+            vocab.reading.like('%ã%') |
+            vocab.term.like('%Ã%') |
+            vocab.reading.like('%Ã%'),
       );
     final corruptedRow = await corruptedQuery.getSingle();
     final corruptedCount = corruptedRow.read(corruptedCountExpr) ?? 0;
@@ -234,7 +234,7 @@ class ContentDatabase extends _$ContentDatabase {
   }
 
   Future<void> _seedMinnaVocabulary() {
-    // All level specs are independent â€” seed them concurrently so file I/O
+    // All level specs are independent — seed them concurrently so file I/O
     // for N5, N4, and N3 overlaps. DB writes still serialize through the isolate.
     return Future.wait(_contentSeedSpecs.map(_seedVocabularyLevel));
   }
@@ -266,7 +266,7 @@ class ContentDatabase extends _$ContentDatabase {
   }
 
   Future<void> _seedHajimeteVocabulary() {
-    // All Hajimete level specs are independent â€” seed them concurrently.
+    // All Hajimete level specs are independent — seed them concurrently.
     return Future.wait(_hajimeteSeedSpecs.map(_seedHajimeteLevel));
   }
 
@@ -429,7 +429,7 @@ class ContentDatabase extends _$ContentDatabase {
     await delete(grammarExample).go();
     await delete(grammarPoint).go();
 
-    // Phase 1: Load every (def, examples) file pair concurrently â€” pure I/O.
+    // Phase 1: Load every (def, examples) file pair concurrently — pure I/O.
     final filePairs = <({String defPath, String exPath})>[];
     for (final spec in _contentSeedSpecs) {
       for (
@@ -532,7 +532,7 @@ class ContentDatabase extends _$ContentDatabase {
     final startLesson = spec.startLesson;
     final endLesson = spec.endLesson;
 
-    // Load all lesson JSON files concurrently â€” each file is independent.
+    // Load all lesson JSON files concurrently — each file is independent.
     final perLessonFutures = [
       for (int lessonId = startLesson; lessonId <= endLesson; lessonId++)
         _loadCanonicalVocabRows(level: level, lessonId: lessonId),
@@ -853,7 +853,7 @@ class ContentDatabase extends _$ContentDatabase {
   }
 
   Future<void> _createContentIndexes() async {
-    // Vocab â€” most frequently queried columns for every vocab screen load.
+    // Vocab — most frequently queried columns for every vocab screen load.
     // Composite (level, series) covers the common getVocabByLevelAndSeries
     // pattern; (level) alone covers getVocabByLevel fallback queries.
     await customStatement(
@@ -865,14 +865,14 @@ class ContentDatabase extends _$ContentDatabase {
     await customStatement(
       'CREATE INDEX IF NOT EXISTS idx_vocab_series ON vocab(series)',
     );
-    // Kanji â€” queried by JLPT level on every kanji hub / practice screen open.
+    // Kanji — queried by JLPT level on every kanji hub / practice screen open.
     await customStatement(
       'CREATE INDEX IF NOT EXISTS idx_kanji_jlpt ON kanji(jlpt_level)',
     );
     await customStatement(
       'CREATE INDEX IF NOT EXISTS idx_kanji_lesson ON kanji(lesson_id)',
     );
-    // Grammar (content DB copy) â€” queried by level in JLPT mock exam builder.
+    // Grammar (content DB copy) — queried by level in JLPT mock exam builder.
     await customStatement(
       'CREATE INDEX IF NOT EXISTS idx_grammar_point_level ON grammar_point(level)',
     );
@@ -886,12 +886,12 @@ class ContentDatabase extends _$ContentDatabase {
   }
 
   Future<void> _seedMinnaKanji() {
-    // All level specs are independent â€” seed them concurrently.
+    // All level specs are independent — seed them concurrently.
     return Future.wait(_contentSeedSpecs.map(_seedKanjiLevel));
   }
 
   Future<void> _backfillKanjiDecompositionFromCanonical() async {
-    // Create all file-load futures before any await â€” pure IO, no deps between
+    // Create all file-load futures before any await — pure IO, no deps between
     // lessons, so all reads start concurrently in the event loop.
     final rowFutures = <Future<List<Map<String, dynamic>>>>[];
     final lessonIds = <int>[];
@@ -1042,7 +1042,7 @@ class ContentDatabase extends _$ContentDatabase {
   }
 
   Future<void> _seedKanjiLevel(_ContentSeedSpec spec) async {
-    // Load all lesson files for this level concurrently â€” pure I/O, no deps.
+    // Load all lesson files for this level concurrently — pure I/O, no deps.
     final perLessonFutures = [
       for (
         int lessonId = spec.startLesson;

@@ -34,8 +34,7 @@ final practiceSessionBoardProvider = Provider<PracticeSessionBoard>((ref) {
   );
   final dashboard = ref.read(dashboardProvider).value;
   final continueAction = ref.watch(continueActionProvider).value;
-  final weaknessItems =
-      ref.watch(weaknessRadarProvider).value ?? const [];
+  final weaknessItems = ref.watch(weaknessRadarProvider).value ?? const [];
   final grammarGhostCount = ref
       .watch(grammarGhostCountProvider)
       .maybeWhen(data: (count) => count, orElse: () => 0);
@@ -766,5 +765,3 @@ String _l(
       return ja;
   }
 }
-
-

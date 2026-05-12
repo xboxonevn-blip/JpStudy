@@ -9,12 +9,14 @@ import 'package:jpstudy/features/learn/screens/recovery_pack_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Widget buildScreen({RecoveryPack? pack}) => ProviderScope(
-      overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-        recoveryPackProvider.overrideWith((ref) async => pack),
-      ],
-      child: const MaterialApp(home: RecoveryPackScreen()),
-    );
+  overrides: [
+    appLanguageProvider.overrideWith(
+      (ref) => AppLanguageController.test(AppLanguage.en),
+    ),
+    recoveryPackProvider.overrideWith((ref) async => pack),
+  ],
+  child: const MaterialApp(home: RecoveryPackScreen()),
+);
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));

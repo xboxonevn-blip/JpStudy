@@ -904,7 +904,6 @@ class _HeaderHero extends StatelessWidget {
   }
 }
 
-
 String _questionCountPillLabel(AppLanguage language, int count) {
   switch (language) {
     case AppLanguage.en:
@@ -1048,8 +1047,14 @@ class _ReadingPassageCard extends StatelessWidget {
             spacing: AppSpacing.sm,
             runSpacing: AppSpacing.sm,
             children: [
-              _MetaPill(label: _questionCountPillLabel(language, questionCount), color: palette.secondary),
-              _MetaPill(label: _minutesPillLabel(language, recommendedMinutes), color: palette.info),
+              _MetaPill(
+                label: _questionCountPillLabel(language, questionCount),
+                color: palette.secondary,
+              ),
+              _MetaPill(
+                label: _minutesPillLabel(language, recommendedMinutes),
+                color: palette.info,
+              ),
               for (final type in questionTypes.take(3))
                 _MetaPill(label: type, color: palette.accent),
             ],

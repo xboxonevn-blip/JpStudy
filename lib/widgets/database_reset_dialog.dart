@@ -6,7 +6,8 @@ import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import '../core/app_language.dart';
 import '../core/language_provider.dart';
 import 'database_reset_native.dart'
-    if (dart.library.js_interop) 'database_reset_web.dart' as reset_impl;
+    if (dart.library.js_interop) 'database_reset_web.dart'
+    as reset_impl;
 
 class DatabaseResetDialog extends ConsumerWidget {
   const DatabaseResetDialog({super.key});

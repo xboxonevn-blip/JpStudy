@@ -168,7 +168,8 @@ class _LanguagePicker extends ConsumerWidget {
       color: palette.elevated,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       tooltip: _languageTooltip(currentLang),
-      onSelected: (lang) => ref.read(appLanguageProvider.notifier).state = lang,
+      onSelected: (lang) =>
+          ref.read(appLanguageProvider.notifier).setLanguage(lang),
       itemBuilder: (context) => AppLanguage.values.map((lang) {
         return PopupMenuItem<AppLanguage>(
           value: lang,

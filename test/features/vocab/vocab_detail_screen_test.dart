@@ -51,15 +51,14 @@ Widget _buildRouterScreen({
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => const VocabDetailScreen(vocabId: _kVocabId),
+        builder: (context, state) =>
+            const VocabDetailScreen(vocabId: _kVocabId),
       ),
       GoRoute(
         path: '/kanji',
         builder: (context, state) => Scaffold(
           body: Center(
-            child: Text(
-              'KANJI_ID=${state.uri.queryParameters['kanjiId']}',
-            ),
+            child: Text('KANJI_ID=${state.uri.queryParameters['kanjiId']}'),
           ),
         ),
       ),
@@ -68,7 +67,9 @@ Widget _buildRouterScreen({
 
   return ProviderScope(
     overrides: [
-      appLanguageProvider.overrideWith((ref) => language),
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(language),
+      ),
       vocabDetailProvider(_kVocabId).overrideWith((_) async => detail),
     ],
     child: MaterialApp.router(routerConfig: router),
@@ -91,14 +92,18 @@ void main() {
     SharedPreferences.setMockInitialValues({});
   });
 
-  testWidgets('shows "Word not found" when provider returns null', (tester) async {
+  testWidgets('shows "Word not found" when provider returns null', (
+    tester,
+  ) async {
     await tester.pumpWidget(_buildRouterScreen(detail: null));
     await _pump(tester);
 
     expect(find.text('Word not found'), findsOneWidget);
   });
 
-  testWidgets('renders word term and reading when vocab has no kanji', (tester) async {
+  testWidgets('renders word term and reading when vocab has no kanji', (
+    tester,
+  ) async {
     const detail = VocabDetail(
       vocab: _stubVocab,
       kanjiList: [],
@@ -111,7 +116,9 @@ void main() {
     expect(find.byType(VocabDetailScreen), findsOneWidget);
   });
 
-  testWidgets('kanji row is rendered when kanjiList is non-empty', (tester) async {
+  testWidgets('kanji row is rendered when kanjiList is non-empty', (
+    tester,
+  ) async {
     const detail = VocabDetail(
       vocab: _stubVocab,
       kanjiList: [_stubKanji],

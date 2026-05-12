@@ -1,4 +1,3 @@
-
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:flutter/widgets.dart';
@@ -81,7 +80,9 @@ Future<void> seedSmokeGrammarPoint(
   required String sentence,
   required String translationEn,
 }) async {
-  final grammarId = await db.into(db.grammarPoints).insert(
+  final grammarId = await db
+      .into(db.grammarPoints)
+      .insert(
         GrammarPointsCompanion.insert(
           lessonId: Value(lessonId),
           grammarPoint: grammarPoint,
@@ -99,7 +100,9 @@ Future<void> seedSmokeGrammarPoint(
         ),
       );
 
-  await db.into(db.grammarExamples).insert(
+  await db
+      .into(db.grammarExamples)
+      .insert(
         GrammarExamplesCompanion.insert(
           grammarId: grammarId,
           japanese: sentence,
@@ -172,7 +175,9 @@ Future<void> pumpReleaseSmokeApp(
   await tester.pumpWidget(
     ProviderScope(
       overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+        appLanguageProvider.overrideWith(
+          (ref) => AppLanguageController.test(AppLanguage.en),
+        ),
         studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
         onboardingDoneProvider.overrideWith((ref) => true),
         appInitProvider.overrideWith((ref) async {}),
@@ -240,6 +245,7 @@ Future<void> pumpReleaseSmokeApp(
               hard: 3,
               good: 5,
               easy: 2,
+              xp: 0,
             ),
           ],
         ),
@@ -252,6 +258,7 @@ Future<void> pumpReleaseSmokeApp(
               hard: 3,
               good: 5,
               easy: 2,
+              xp: 0,
             ),
           ],
         ),
@@ -277,9 +284,7 @@ Future<void> pumpReleaseSmokeApp(
           (ref) async => const MasterySnapshot(levels: []),
         ),
         jlptCoachSnapshotProvider.overrideWith((ref) async => null),
-        jlptPrepOverviewProvider(
-          StudyLevel.n5,
-        ).overrideWith(
+        jlptPrepOverviewProvider(StudyLevel.n5).overrideWith(
           (ref) async => const JlptPrepOverview(
             quickMockQuestionCount: 20,
             readingPassageCount: 3,
@@ -300,4 +305,3 @@ Future<void> pumpReleaseSmokeApp(
 
   await tester.pumpAndSettle();
 }
-

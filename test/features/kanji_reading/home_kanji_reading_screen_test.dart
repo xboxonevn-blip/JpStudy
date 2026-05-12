@@ -82,7 +82,9 @@ Widget buildScreen({
 }) {
   return ProviderScope(
     overrides: [
-      appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(AppLanguage.en),
+      ),
       studyLevelProvider.overrideWith((ref) => level),
       kanjiByLevelCodeProvider.overrideWith(
         (ref, levelCode) async => allItemsByLevel[levelCode] ?? const [],

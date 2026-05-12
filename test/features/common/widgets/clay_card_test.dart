@@ -45,15 +45,15 @@ void main() {
     });
 
     testWidgets('accepts a custom color without throwing', (tester) async {
-      await tester.pumpWidget(
-        _buildHarness(color: Colors.blue),
-      );
+      await tester.pumpWidget(_buildHarness(color: Colors.blue));
       await _pump(tester);
 
       expect(tester.takeException(), isNull);
     });
 
-    testWidgets('applies custom padding to the inner Container', (tester) async {
+    testWidgets('applies custom padding to the inner Container', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _buildHarness(
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
@@ -63,7 +63,10 @@ void main() {
       await _pump(tester);
 
       final container = tester.widget<Container>(find.byType(Container).first);
-      expect(container.padding, equals(const EdgeInsets.symmetric(horizontal: 32, vertical: 8)));
+      expect(
+        container.padding,
+        equals(const EdgeInsets.symmetric(horizontal: 32, vertical: 8)),
+      );
     });
 
     testWidgets('fires onTap when tapped', (tester) async {
@@ -77,8 +80,9 @@ void main() {
       expect(tapped, isTrue);
     });
 
-    testWidgets('onTap is optional — tapping without callback does not throw',
-        (tester) async {
+    testWidgets('onTap is optional — tapping without callback does not throw', (
+      tester,
+    ) async {
       await tester.pumpWidget(_buildHarness()); // onTap = null
       await _pump(tester);
 
@@ -93,10 +97,12 @@ void main() {
       await _pump(tester);
 
       final semantics = tester.widget<Semantics>(
-        find.ancestor(
-          of: find.byType(GestureDetector),
-          matching: find.byType(Semantics),
-        ).first,
+        find
+            .ancestor(
+              of: find.byType(GestureDetector),
+              matching: find.byType(Semantics),
+            )
+            .first,
       );
       expect(semantics.container, isTrue);
     });

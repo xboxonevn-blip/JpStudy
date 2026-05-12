@@ -64,8 +64,9 @@ void main() {
     expect(find.text('Build the answer here.'), findsOneWidget);
   });
 
-  testWidgets('Check button is disabled when no words are selected',
-      (tester) async {
+  testWidgets('Check button is disabled when no words are selected', (
+    tester,
+  ) async {
     bool checkCalled = false;
     await tester.pumpWidget(
       _buildWidget(onCheck: (_, _) => checkCalled = true),
@@ -79,8 +80,9 @@ void main() {
     expect(checkCalled, isFalse);
   });
 
-  testWidgets('tapping a word chip moves it to the selection area',
-      (tester) async {
+  testWidgets('tapping a word chip moves it to the selection area', (
+    tester,
+  ) async {
     await tester.pumpWidget(_buildWidget());
     await _pump(tester);
 
@@ -92,8 +94,9 @@ void main() {
     expect(find.text('食べても'), findsOneWidget); // selected chip
   });
 
-  testWidgets('correct word order triggers onCheck with isCorrect=true',
-      (tester) async {
+  testWidgets('correct word order triggers onCheck with isCorrect=true', (
+    tester,
+  ) async {
     bool? result;
     await tester.pumpWidget(
       _buildWidget(onCheck: (isCorrect, _) => result = isCorrect),
@@ -110,14 +113,12 @@ void main() {
     await _pump(tester);
 
     expect(result, isTrue);
-    expect(
-      find.text('Nice. The sentence order is correct.'),
-      findsOneWidget,
-    );
+    expect(find.text('Nice. The sentence order is correct.'), findsOneWidget);
   });
 
-  testWidgets('wrong word order triggers onCheck with isCorrect=false',
-      (tester) async {
+  testWidgets('wrong word order triggers onCheck with isCorrect=false', (
+    tester,
+  ) async {
     bool? result;
     await tester.pumpWidget(
       _buildWidget(onCheck: (isCorrect, _) => result = isCorrect),
@@ -140,8 +141,9 @@ void main() {
     );
   });
 
-  testWidgets('tapping a selected word removes it back to available chunks',
-      (tester) async {
+  testWidgets('tapping a selected word removes it back to available chunks', (
+    tester,
+  ) async {
     await tester.pumpWidget(_buildWidget());
     await _pump(tester);
 
@@ -159,12 +161,11 @@ void main() {
     expect(find.text('Build the answer here.'), findsOneWidget);
   });
 
-  testWidgets('Reset clears selection and calls onReset callback',
-      (tester) async {
+  testWidgets('Reset clears selection and calls onReset callback', (
+    tester,
+  ) async {
     bool resetCalled = false;
-    await tester.pumpWidget(
-      _buildWidget(onReset: () => resetCalled = true),
-    );
+    await tester.pumpWidget(_buildWidget(onReset: () => resetCalled = true));
     await _pump(tester);
 
     await tester.tap(find.text('食べても'));
@@ -188,6 +189,6 @@ void main() {
     expect(find.text('Ghép câu trả lời ở đây.'), findsOneWidget);
     expect(find.text('Mảnh câu có sẵn'), findsOneWidget);
     expect(find.text('Kiểm tra'), findsOneWidget); // Check button
-    expect(find.text('Làm lại'), findsOneWidget);  // Reset button
+    expect(find.text('Làm lại'), findsOneWidget); // Reset button
   });
 }

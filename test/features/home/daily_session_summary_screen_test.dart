@@ -68,7 +68,9 @@ final _router = GoRouter(
 
 Widget buildScreen() => ProviderScope(
   overrides: [
-    appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+    appLanguageProvider.overrideWith(
+      (ref) => AppLanguageController.test(AppLanguage.en),
+    ),
     dashboardProvider.overrideWith((ref) => Stream.value(_kDashboard)),
     dailySessionProgressProvider.overrideWith((ref) async => _kProgress),
     coachSessionPlanProvider.overrideWith((ref) => _kCoachPlan),

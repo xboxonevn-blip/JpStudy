@@ -13,10 +13,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class _FakeLessonRepository extends LessonRepository {
   _FakeLessonRepository()
-      : super(
-          AppDatabase(executor: NativeDatabase.memory()),
-          content_db.ContentDatabase(executor: NativeDatabase.memory()),
-        );
+    : super(
+        AppDatabase(executor: NativeDatabase.memory()),
+        content_db.ContentDatabase(executor: NativeDatabase.memory()),
+      );
 
   @override
   Future<List<GrammarPoint>> fetchRandomGrammarPoints(
@@ -40,25 +40,27 @@ class _FakeLessonRepository extends LessonRepository {
 }
 
 GrammarPointData _ghost(int id, String point) => GrammarPointData(
-      point: GrammarPoint(
-        id: id,
-        grammarPoint: point,
-        meaning: 'meaning $id',
-        connection: 'connection $id',
-        explanation: 'explanation $id',
-        jlptLevel: 'N5',
-        isLearned: false,
-      ),
-      examples: const [],
-    );
+  point: GrammarPoint(
+    id: id,
+    grammarPoint: point,
+    meaning: 'meaning $id',
+    connection: 'connection $id',
+    explanation: 'explanation $id',
+    jlptLevel: 'N5',
+    isLearned: false,
+  ),
+  examples: const [],
+);
 
 Widget buildScreen(List<GrammarPointData> ghosts) => ProviderScope(
-      overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-        lessonRepositoryProvider.overrideWithValue(_FakeLessonRepository()),
-      ],
-      child: MaterialApp(home: GhostPracticeScreen(ghosts: ghosts)),
-    );
+  overrides: [
+    appLanguageProvider.overrideWith(
+      (ref) => AppLanguageController.test(AppLanguage.en),
+    ),
+    lessonRepositoryProvider.overrideWithValue(_FakeLessonRepository()),
+  ],
+  child: MaterialApp(home: GhostPracticeScreen(ghosts: ghosts)),
+);
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));

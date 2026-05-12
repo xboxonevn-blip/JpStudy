@@ -43,7 +43,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.vi),
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.vi),
+          ),
           studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
           jlptMockSectionsProvider((
             level: StudyLevel.n5,

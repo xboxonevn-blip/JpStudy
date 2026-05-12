@@ -195,4 +195,3 @@ class DailySessionProgress {
   bool get isComplete =>
       doneSteps.contains(1) && doneSteps.contains(2) && doneSteps.contains(3);
 }
-

@@ -104,8 +104,9 @@ void main() {
       expect(find.text('タップして裏面を表示'), findsOneWidget);
     });
 
-    testWidgets('non-EN locale shows kanjiMeaning on front when provided',
-        (tester) async {
+    testWidgets('non-EN locale shows kanjiMeaning on front when provided', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _buildHarness(item: _kKanjiItem, language: AppLanguage.vi),
       );
@@ -115,7 +116,9 @@ void main() {
       expect(find.text('eat + RU verb'), findsOneWidget);
     });
 
-    testWidgets('EN locale does NOT show kanjiMeaning on front', (tester) async {
+    testWidgets('EN locale does NOT show kanjiMeaning on front', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _buildHarness(item: _kKanjiItem, language: AppLanguage.en),
       );
@@ -127,8 +130,9 @@ void main() {
   });
 
   group('FlashcardWidget – flip interaction', () {
-    testWidgets('tapping card shows back face with reading and EN meaning',
-        (tester) async {
+    testWidgets('tapping card shows back face with reading and EN meaning', (
+      tester,
+    ) async {
       await tester.pumpWidget(_buildHarness());
       await _pump(tester);
 
@@ -189,12 +193,14 @@ void main() {
       expect(flipCount, equals(2));
     });
 
-    testWidgets('onFlip is optional — tapping without callback does not throw',
-        (tester) async {
-      await tester.pumpWidget(_buildHarness()); // onFlip = null
-      await _pump(tester);
+    testWidgets(
+      'onFlip is optional — tapping without callback does not throw',
+      (tester) async {
+        await tester.pumpWidget(_buildHarness()); // onFlip = null
+        await _pump(tester);
 
-      await expectLater(() => _tapAndFlip(tester), returnsNormally);
-    });
+        await expectLater(() => _tapAndFlip(tester), returnsNormally);
+      },
+    );
   });
 }

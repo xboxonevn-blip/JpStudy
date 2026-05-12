@@ -506,5 +506,3 @@ class _FocusChip extends StatelessWidget {
     );
   }
 }
-
-

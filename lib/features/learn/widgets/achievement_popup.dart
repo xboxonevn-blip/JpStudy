@@ -195,7 +195,10 @@ class AchievementBadge extends StatelessWidget {
                 ),
                 Text(
                   achievement.description,
-                  style: TextStyle(fontSize: 12, color: context.appPalette.ink.withValues(alpha: 0.55)),
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: context.appPalette.ink.withValues(alpha: 0.55),
+                  ),
                 ),
               ],
             ),

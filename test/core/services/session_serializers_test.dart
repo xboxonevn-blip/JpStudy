@@ -12,7 +12,11 @@ void main() {
   // Helpers
   // ---------------------------------------------------------------------------
 
-  VocabItem vocab({int id = 1, String term = '食べる', String meaning = 'to eat'}) {
+  VocabItem vocab({
+    int id = 1,
+    String term = '食べる',
+    String meaning = 'to eat',
+  }) {
     return VocabItem(id: id, term: term, meaning: meaning, level: 'N5');
   }
 
@@ -54,8 +58,10 @@ void main() {
       final restored = LearnConfig.fromJson(json);
 
       expect(restored.questionCount, 15);
-      expect(restored.enabledTypes,
-          [QuestionType.multipleChoice, QuestionType.fillBlank]);
+      expect(restored.enabledTypes, [
+        QuestionType.multipleChoice,
+        QuestionType.fillBlank,
+      ]);
       expect(restored.shuffleQuestions, false);
       expect(restored.enableHints, false);
       expect(restored.showCorrectAnswer, false);
@@ -297,8 +303,10 @@ void main() {
       final restored = TestConfigSerializer.fromJson(json);
 
       expect(restored.questionCount, 12);
-      expect(restored.enabledTypes,
-          [QuestionType.fillBlank, QuestionType.trueFalse]);
+      expect(restored.enabledTypes, [
+        QuestionType.fillBlank,
+        QuestionType.trueFalse,
+      ]);
       expect(restored.timeLimitMinutes, 15);
       expect(restored.shuffleQuestions, false);
       expect(restored.showCorrectAfterWrong, false);
@@ -322,8 +330,7 @@ void main() {
       expect(config.timeLimitMinutes, isNull);
     });
 
-    test('fromJson falls back to multipleChoice for unknown question type',
-        () {
+    test('fromJson falls back to multipleChoice for unknown question type', () {
       final json = <String, dynamic>{
         'enabledTypes': ['unknownType'],
       };

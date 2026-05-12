@@ -53,7 +53,9 @@ Widget buildLibraryScreen({
   return ProviderScope(
     retry: (retryCount, error) => null,
     overrides: [
-      appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(AppLanguage.en),
+      ),
       studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
       lessonMetaProvider('N5').overrideWith((ref) async {
         if (shouldThrow) {
@@ -231,4 +233,3 @@ void main() {
     expect(find.text('Lesson 2'), findsNothing);
   });
 }
-

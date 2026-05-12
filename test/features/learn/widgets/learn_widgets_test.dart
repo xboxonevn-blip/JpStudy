@@ -170,7 +170,9 @@ void main() {
   // -------------------------------------------------------------------------
 
   group('TrueFalseWidget', () {
-    testWidgets('renders True/False label and both choice tiles', (tester) async {
+    testWidgets('renders True/False label and both choice tiles', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _buildHarness(
           TrueFalseWidget(
@@ -253,8 +255,9 @@ void main() {
   // -------------------------------------------------------------------------
 
   group('FillBlankWidget', () {
-    testWidgets('renders Fill in the Blank label and Your Answer section',
-        (tester) async {
+    testWidgets('renders Fill in the Blank label and Your Answer section', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _buildHarness(
           FillBlankWidget(
@@ -271,8 +274,9 @@ void main() {
       expect(find.text('Check Answer'), findsOneWidget);
     });
 
-    testWidgets('Check Answer button calls onSubmit with typed text',
-        (tester) async {
+    testWidgets('Check Answer button calls onSubmit with typed text', (
+      tester,
+    ) async {
       String? submitted;
       await tester.pumpWidget(
         _buildHarness(
@@ -297,7 +301,8 @@ void main() {
       await tester.pumpWidget(
         _buildHarness(
           FillBlankWidget(
-            question: _kFillQuestion, // hint = 'Think about what you do with food.'
+            question:
+                _kFillQuestion, // hint = 'Think about what you do with food.'
             language: AppLanguage.en,
             onSubmit: (s) {},
           ),
@@ -324,14 +329,12 @@ void main() {
       await tester.tap(find.text('Show Hint'));
       await _pump(tester);
 
-      expect(
-        find.text('Think about what you do with food.'),
-        findsOneWidget,
-      );
+      expect(find.text('Think about what you do with food.'), findsOneWidget);
     });
 
-    testWidgets('showResult=true with wrong answer shows Correct Answer card',
-        (tester) async {
+    testWidgets('showResult=true with wrong answer shows Correct Answer card', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _buildHarness(
           FillBlankWidget(

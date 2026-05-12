@@ -107,10 +107,11 @@ class MistakeDao extends DatabaseAccessor<AppDatabase> with _$MistakeDaoMixin {
   /// One-shot count for a specific type — cheaper than getMistakesByType().length.
   Future<int> getMistakeCountByType(String type) async {
     final countExpr = userMistakes.id.count();
-    final row = await (selectOnly(userMistakes)
-          ..addColumns([countExpr])
-          ..where(userMistakes.type.equals(type)))
-        .getSingle();
+    final row =
+        await (selectOnly(userMistakes)
+              ..addColumns([countExpr])
+              ..where(userMistakes.type.equals(type)))
+            .getSingle();
     return row.read(countExpr) ?? 0;
   }
 
@@ -118,7 +119,8 @@ class MistakeDao extends DatabaseAccessor<AppDatabase> with _$MistakeDaoMixin {
   /// (vocab, grammar, kanji, total) using a single GROUP BY query.
   /// Transfers 3 rows instead of N full UserMistake rows — replaces the
   /// watchAllMistakes() + Dart-side counting pattern in the dashboard.
-  Stream<({int vocab, int grammar, int kanji, int total})> watchMistakeCounts() {
+  Stream<({int vocab, int grammar, int kanji, int total})>
+  watchMistakeCounts() {
     final countExpr = userMistakes.id.count();
     final typeCol = userMistakes.type;
     return (selectOnly(userMistakes)
@@ -138,18 +140,25 @@ class MistakeDao extends DatabaseAccessor<AppDatabase> with _$MistakeDaoMixin {
               kanji = c;
             }
           }
-          return (vocab: vocab, grammar: grammar, kanji: kanji, total: vocab + grammar + kanji);
+          return (
+            vocab: vocab,
+            grammar: grammar,
+            kanji: kanji,
+            total: vocab + grammar + kanji,
+          );
         });
   }
 
   /// One-shot version of [watchMistakeCounts] — useful for the initial snapshot.
-  Future<({int vocab, int grammar, int kanji, int total})> getMistakeCounts() async {
+  Future<({int vocab, int grammar, int kanji, int total})>
+  getMistakeCounts() async {
     final countExpr = userMistakes.id.count();
     final typeCol = userMistakes.type;
-    final rows = await (selectOnly(userMistakes)
-          ..addColumns([typeCol, countExpr])
-          ..groupBy([typeCol]))
-        .get();
+    final rows =
+        await (selectOnly(userMistakes)
+              ..addColumns([typeCol, countExpr])
+              ..groupBy([typeCol]))
+            .get();
     var vocab = 0, grammar = 0, kanji = 0;
     for (final row in rows) {
       final t = row.read(typeCol);
@@ -162,7 +171,12 @@ class MistakeDao extends DatabaseAccessor<AppDatabase> with _$MistakeDaoMixin {
         kanji = c;
       }
     }
-    return (vocab: vocab, grammar: grammar, kanji: kanji, total: vocab + grammar + kanji);
+    return (
+      vocab: vocab,
+      grammar: grammar,
+      kanji: kanji,
+      total: vocab + grammar + kanji,
+    );
   }
 
   /// Get all mistakes (unordered, unbounded — prefer [getTopMistakesByType] for
@@ -204,10 +218,8 @@ class MistakeDao extends DatabaseAccessor<AppDatabase> with _$MistakeDaoMixin {
           expression: tbl.lastMistakeAt,
           mode: OrderingMode.desc,
         ),
-        (tbl) => OrderingTerm(
-          expression: tbl.wrongCount,
-          mode: OrderingMode.desc,
-        ),
+        (tbl) =>
+            OrderingTerm(expression: tbl.wrongCount, mode: OrderingMode.desc),
       ]);
     if (limit != null) {
       query.limit(limit, offset: offset ?? 0);

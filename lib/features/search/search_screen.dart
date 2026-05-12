@@ -1583,5 +1583,3 @@ class _SearchMatch {
 }
 
 enum _SearchPromptKind { romaji, reading, meaning }
-
-

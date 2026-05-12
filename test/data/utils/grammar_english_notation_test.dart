@@ -47,20 +47,22 @@ void main() {
       expect(canonical, isEmpty);
     });
 
-    test('returns English fallback when all Japanese inputs contain Vietnamese',
-        () {
-      const viNote = 'động từ thể て';
-      final canonical = resolveCanonicalGrammarPointSource(
-        grammarPoint: viNote,
-        structure: viNote,
-        title: viNote,
-        structureEn: 'V-てはいけません',
-        titleEn: null,
-      );
-      // Should fall through to structureEn (which is in Japanese, not Vietnamese)
-      expect(canonical, isNotEmpty);
-      expect(containsVietnameseGrammarText(canonical), isFalse);
-    });
+    test(
+      'returns English fallback when all Japanese inputs contain Vietnamese',
+      () {
+        const viNote = 'động từ thể て';
+        final canonical = resolveCanonicalGrammarPointSource(
+          grammarPoint: viNote,
+          structure: viNote,
+          title: viNote,
+          structureEn: 'V-てはいけません',
+          titleEn: null,
+        );
+        // Should fall through to structureEn (which is in Japanese, not Vietnamese)
+        expect(canonical, isNotEmpty);
+        expect(containsVietnameseGrammarText(canonical), isFalse);
+      },
+    );
 
     test('prefers grammarPoint candidate when it has Japanese characters', () {
       final canonical = resolveCanonicalGrammarPointSource(
@@ -104,17 +106,11 @@ void main() {
     });
 
     test('normalizes spacing around / , +', () {
-      expect(
-        stripNonCanonicalGrammarNotes('A/B,C+D'),
-        'A / B, C + D',
-      );
+      expect(stripNonCanonicalGrammarNotes('A/B,C+D'), 'A / B, C + D');
     });
 
     test('collapses multiple spaces to single space', () {
-      expect(
-        stripNonCanonicalGrammarNotes('N1   に   N2'),
-        'N1 に N2',
-      );
+      expect(stripNonCanonicalGrammarNotes('N1   に   N2'), 'N1 に N2');
     });
   });
 
@@ -172,10 +168,7 @@ void main() {
     });
 
     test('replaces romaji title with Japanese version', () {
-      expect(
-        normalizeGrammarTitleEn('Because (kara)'),
-        'Because (から)',
-      );
+      expect(normalizeGrammarTitleEn('Because (kara)'), 'Because (から)');
     });
 
     test('replaces V-ru token', () {
@@ -208,24 +201,15 @@ void main() {
     });
 
     test('applies exact replacements', () {
-      expect(
-        normalizeGrammarStructureEn('V-て mo ii desu ka'),
-        'V-てもいいですか',
-      );
+      expect(normalizeGrammarStructureEn('V-て mo ii desu ka'), 'V-てもいいですか');
     });
 
     test('applies simple token replacements', () {
-      expect(
-        normalizeGrammarStructureEn('V-ru koto ni naru'),
-        contains('V-る'),
-      );
+      expect(normalizeGrammarStructureEn('V-ru koto ni naru'), contains('V-る'));
     });
 
     test('applies regex word-boundary replacements for desu ka', () {
-      expect(
-        normalizeGrammarStructureEn('N desu ka'),
-        contains('ですか'),
-      );
+      expect(normalizeGrammarStructureEn('N desu ka'), contains('ですか'));
     });
 
     test('applies regex replacement for wa particle', () {
@@ -235,10 +219,7 @@ void main() {
     });
 
     test('collapses double spaces', () {
-      expect(
-        normalizeGrammarStructureEn('N  desu'),
-        isNot(contains('  ')),
-      );
+      expect(normalizeGrammarStructureEn('N  desu'), isNot(contains('  ')));
     });
   });
 

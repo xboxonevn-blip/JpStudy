@@ -96,18 +96,17 @@ class _VocabGhostReviewScreenState
                 Text(
                   language.mnemonicHintLabel,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ],
             ),
             const SizedBox(height: 16),
             Text(
               _currentItem.displayMnemonic(language)!.trim(),
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyLarge
-                  ?.copyWith(height: 1.5),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyLarge?.copyWith(height: 1.5),
             ),
             const SizedBox(height: 24),
           ],
@@ -201,7 +200,10 @@ class _VocabGhostReviewScreenState
                       ),
                     ),
                   ),
-                  if ((_currentItem.displayMnemonic(language)?.trim().isNotEmpty ??
+                  if ((_currentItem
+                          .displayMnemonic(language)
+                          ?.trim()
+                          .isNotEmpty ??
                       false)) ...[
                     const SizedBox(width: 8),
                     SizedBox(
@@ -268,8 +270,8 @@ class _SummaryDialog extends ConsumerWidget {
     final color = accuracyPct >= 80
         ? palette.success
         : accuracyPct >= 50
-            ? palette.warning
-            : palette.error;
+        ? palette.warning
+        : palette.error;
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       title: Text(language.reviewCompleteLabel),
@@ -297,10 +299,7 @@ class _SummaryDialog extends ConsumerWidget {
         ],
       ),
       actions: [
-        FilledButton(
-          onPressed: onDone,
-          child: Text(language.doneLabel),
-        ),
+        FilledButton(onPressed: onDone, child: Text(language.doneLabel)),
       ],
     );
   }
@@ -327,10 +326,26 @@ class _GradeBreakdownRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        _GradePill(count: againCount, color: palette.error, label: language.reviewAgainLabel),
-        _GradePill(count: hardCount, color: palette.warning, label: language.reviewHardLabel),
-        _GradePill(count: goodCount, color: palette.info, label: language.reviewGoodLabel),
-        _GradePill(count: easyCount, color: palette.success, label: language.reviewEasyLabel),
+        _GradePill(
+          count: againCount,
+          color: palette.error,
+          label: language.reviewAgainLabel,
+        ),
+        _GradePill(
+          count: hardCount,
+          color: palette.warning,
+          label: language.reviewHardLabel,
+        ),
+        _GradePill(
+          count: goodCount,
+          color: palette.info,
+          label: language.reviewGoodLabel,
+        ),
+        _GradePill(
+          count: easyCount,
+          color: palette.success,
+          label: language.reviewEasyLabel,
+        ),
       ],
     );
   }
@@ -372,7 +387,11 @@ class _GradePill extends StatelessWidget {
         const SizedBox(height: 4),
         Text(
           label,
-          style: TextStyle(fontSize: 11, color: color, fontWeight: FontWeight.w600),
+          style: TextStyle(
+            fontSize: 11,
+            color: color,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ],
     );

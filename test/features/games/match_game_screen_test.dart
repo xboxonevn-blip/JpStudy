@@ -12,22 +12,24 @@ import 'package:jpstudy/features/games/providers/game_vocab_pool_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 VocabItem _vocab(int id, String term, String meaning) => VocabItem(
-      id: id,
-      term: term,
-      reading: '',
-      meaning: meaning,
-      meaningEn: meaning,
-      level: 'N5',
-    );
+  id: id,
+  term: term,
+  reading: '',
+  meaning: meaning,
+  meaningEn: meaning,
+  level: 'N5',
+);
 
 Widget buildScreen(List<VocabItem> items) => ProviderScope(
-      overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-        studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
-        gameVocabPoolProvider.overrideWith((ref) async => items),
-      ],
-      child: const MaterialApp(home: MatchGameScreen()),
-    );
+  overrides: [
+    appLanguageProvider.overrideWith(
+      (ref) => AppLanguageController.test(AppLanguage.en),
+    ),
+    studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+    gameVocabPoolProvider.overrideWith((ref) async => items),
+  ],
+  child: const MaterialApp(home: MatchGameScreen()),
+);
 
 Future<void> _pumpReady(WidgetTester tester) async {
   await tester.pumpWidget(const SizedBox.shrink());
@@ -45,12 +47,16 @@ void main() {
     await _pumpReady(tester);
   });
 
-  testWidgets('shows classic and time attack buttons when vocab exists', (tester) async {
-    await tester.pumpWidget(buildScreen([
-      _vocab(1, '?', 'fire'),
-      _vocab(2, '?', 'water'),
-      _vocab(3, '?', 'tree'),
-    ]));
+  testWidgets('shows classic and time attack buttons when vocab exists', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      buildScreen([
+        _vocab(1, '?', 'fire'),
+        _vocab(2, '?', 'water'),
+        _vocab(3, '?', 'tree'),
+      ]),
+    );
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));
     expect(

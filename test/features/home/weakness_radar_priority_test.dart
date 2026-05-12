@@ -1,4 +1,4 @@
-﻿import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/features/home/providers/weakness_radar_priority.dart';
 
@@ -47,8 +47,14 @@ void main() {
         lastMistakeAt: now.subtract(const Duration(days: 8)),
       );
 
-      expect(calculateMistakePriority(d1, now), greaterThan(calculateMistakePriority(d3, now)));
-      expect(calculateMistakePriority(d3, now), greaterThan(calculateMistakePriority(d7, now)));
+      expect(
+        calculateMistakePriority(d1, now),
+        greaterThan(calculateMistakePriority(d3, now)),
+      );
+      expect(
+        calculateMistakePriority(d3, now),
+        greaterThan(calculateMistakePriority(d7, now)),
+      );
     });
 
     test('higher wrongCount still increases score within same bucket', () {
@@ -63,7 +69,10 @@ void main() {
         lastMistakeAt: now.subtract(const Duration(hours: 30)),
       );
 
-      expect(calculateMistakePriority(high, now), greaterThan(calculateMistakePriority(low, now)));
+      expect(
+        calculateMistakePriority(high, now),
+        greaterThan(calculateMistakePriority(low, now)),
+      );
     });
 
     // ── Boundary hour transitions ────────────────────────────────────────────
@@ -225,8 +234,14 @@ void main() {
         wrongCount: 3,
         lastMistakeAt: now.subtract(const Duration(hours: 30)),
       );
-      expect(calculateMistakePriority(vocab, now), calculateMistakePriority(grammar, now));
-      expect(calculateMistakePriority(vocab, now), calculateMistakePriority(kanji, now));
+      expect(
+        calculateMistakePriority(vocab, now),
+        calculateMistakePriority(grammar, now),
+      );
+      expect(
+        calculateMistakePriority(vocab, now),
+        calculateMistakePriority(kanji, now),
+      );
     });
   });
 }

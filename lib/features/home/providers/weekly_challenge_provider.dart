@@ -10,8 +10,9 @@ import 'dashboard_provider.dart';
 
 const _prefKey = 'weekly.challenge';
 
-final weeklyChallengeProvider =
-    FutureProvider.autoDispose<WeeklyChallenge>((ref) async {
+final weeklyChallengeProvider = FutureProvider.autoDispose<WeeklyChallenge>((
+  ref,
+) async {
   // React only to todayXp (used for xpTarget challenge) and week summary.
   // vocabDue/grammarDue/streak changes don't affect challenge progress.
   ref.watch(dashboardProvider.select((v) => v.value?.todayXp ?? 0));
@@ -72,10 +73,7 @@ Future<void> _persist(
 ) async {
   await prefs.setString(
     '$_prefKey.$weekId',
-    jsonEncode({
-      'bonusAwarded': bonusAwarded,
-      'current': current,
-    }),
+    jsonEncode({'bonusAwarded': bonusAwarded, 'current': current}),
   );
 }
 
@@ -88,9 +86,7 @@ Future<void> _archivePreviousWeeks(
 ) async {
   final keys = prefs
       .getKeys()
-      .where(
-        (k) => k.startsWith('$_prefKey.') && !k.endsWith(currentWeekId),
-      )
+      .where((k) => k.startsWith('$_prefKey.') && !k.endsWith(currentWeekId))
       .toList();
 
   for (final key in keys) {
@@ -116,9 +112,7 @@ Future<void> _archivePreviousWeeks(
         final weekStart = monday.add(Duration(days: (week - 1) * 7));
         final oldChallenge = WeeklyChallenge.generate(weekStart);
 
-        await archiveChallenge(
-          oldChallenge.copyWith(current: storedCurrent),
-        );
+        await archiveChallenge(oldChallenge.copyWith(current: storedCurrent));
       }
     } catch (_) {
       // Ignore corrupted entries.
@@ -147,5 +141,3 @@ int _computeProgress(
       return weekSummary?.daysStudied ?? 0;
   }
 }
-
-

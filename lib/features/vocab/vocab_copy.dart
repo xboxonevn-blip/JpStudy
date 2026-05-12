@@ -12,8 +12,7 @@ extension VocabCopy on AppLanguage {
       'Start from the active lane, then browse the catalog only when you need it.',
     AppLanguage.vi =>
       'Bắt đầu từ lane đang học, rồi mới mở catalog khi thật sự cần.',
-    AppLanguage.ja =>
-      'まず学習中のレーンから始め、必要なときだけカタログを開きます。',
+    AppLanguage.ja => 'まず学習中のレーンから始め、必要なときだけカタログを開きます。',
   };
 
   String vocabDueNowLabel() => switch (this) {
@@ -87,21 +86,20 @@ extension VocabCopy on AppLanguage {
       'Seeded data exists here, but the study flow is not fully live yet.',
     AppLanguage.vi =>
       'Các track này đã có dữ liệu seed, nhưng flow học chưa mở hoàn chỉnh.',
-    AppLanguage.ja =>
-      'データはありますが、学習フローはまだ完全には公開されていません。',
+    AppLanguage.ja => 'データはありますが、学習フローはまだ完全には公開されていません。',
   };
 
-
-  String vocabLocalizedSectionSubtitle(String levelCode, String fallbackSubtitle) => switch (this) {
+  String vocabLocalizedSectionSubtitle(
+    String levelCode,
+    String fallbackSubtitle,
+  ) => switch (this) {
     AppLanguage.en => fallbackSubtitle,
     AppLanguage.vi =>
       levelCode == 'SE'
           ? 'Tiếng Nhật chuyên ngành cho kỹ sư phần mềm'
           : 'Lane từ vựng JLPT $levelCode',
     AppLanguage.ja =>
-      levelCode == 'SE'
-          ? 'エンジニア向け専門日本語トラック'
-          : 'JLPT $levelCode 語彙レーン',
+      levelCode == 'SE' ? 'エンジニア向け専門日本語トラック' : 'JLPT $levelCode 語彙レーン',
   };
 
   String vocabLocalizedProgramSubtitle(
@@ -134,26 +132,22 @@ extension VocabCopy on AppLanguage {
         'Listening-first training to reinforce vocabulary through audio context.',
       (AppLanguage.vi, 'listening') =>
         'Luyện nghe để khóa từ vựng theo ngữ cảnh âm thanh.',
-      (AppLanguage.ja, 'listening') =>
-        '音声コンテキストで語彙を定着させるリスニング特化トラックです。',
+      (AppLanguage.ja, 'listening') => '音声コンテキストで語彙を定着させるリスニング特化トラックです。',
       (AppLanguage.en, 'advanced') =>
         'Advanced expansion pack for dense N1 reading, nuance, and formal usage.',
       (AppLanguage.vi, 'advanced') =>
         'Gói mở rộng nâng cao cho N1: sắc thái, văn viết và đọc khó.',
-      (AppLanguage.ja, 'advanced') =>
-        'N1の高難度読解・ニュアンス・書き言葉に対応する上級パックです。',
+      (AppLanguage.ja, 'advanced') => 'N1の高難度読解・ニュアンス・書き言葉に対応する上級パックです。',
       (AppLanguage.en, 'specialized') =>
         'Technical Japanese for product, engineering, meetings, and documentation.',
       (AppLanguage.vi, 'specialized') =>
         'Tiếng Nhật chuyên ngành cho sản phẩm, kỹ thuật, meeting và tài liệu.',
-      (AppLanguage.ja, 'specialized') =>
-        'プロダクト・開発・会議・仕様書向けの専門日本語です。',
+      (AppLanguage.ja, 'specialized') => 'プロダクト・開発・会議・仕様書向けの専門日本語です。',
       (AppLanguage.en, _) =>
         'Usage-first vocabulary track for $levelCode with review-ready structure.',
       (AppLanguage.vi, _) =>
         'Track từ vựng ưu tiên cách dùng cho $levelCode, sẵn để vào review.',
-      (AppLanguage.ja, _) =>
-        '$levelCode の語彙を用法重視で学び、そのまま復習へつなげます。',
+      (AppLanguage.ja, _) => '$levelCode の語彙を用法重視で学び、そのまま復習へつなげます。',
     };
   }
 
@@ -174,8 +168,7 @@ extension VocabCopy on AppLanguage {
       'A catalog-style workspace for JLPT and companion vocab tracks.',
     AppLanguage.vi =>
       'Một workspace kiểu catalog cho lane JLPT và các track bổ trợ.',
-    AppLanguage.ja =>
-      'JLPTと補助トラックを一つにまとめたカタログ型ワークスペースです。',
+    AppLanguage.ja => 'JLPTと補助トラックを一つにまとめたカタログ型ワークスペースです。',
   };
 
   String vocabHeroDescription() => switch (this) {
@@ -183,8 +176,7 @@ extension VocabCopy on AppLanguage {
       'Browse by lane, compare tracks side-by-side, and jump straight into review when a level is live.',
     AppLanguage.vi =>
       'Duyệt theo từng lane, so sánh các track song song, rồi nhảy thẳng vào review khi level đã mở.',
-    AppLanguage.ja =>
-      'レーンごとに比較しながら選び、利用可能なレベルはそのまま復習に入れます。',
+    AppLanguage.ja => 'レーンごとに比較しながら選び、利用可能なレベルはそのまま復習に入れます。',
   };
 
   String vocabHeroScopeAllLabel() => switch (this) {
@@ -222,8 +214,7 @@ extension VocabCopy on AppLanguage {
       'A quick snapshot of how many vocab paths are already ready inside JP Study.',
     AppLanguage.vi =>
       'Ảnh chụp nhanh số lane và track từ vựng đã sẵn sàng trong JP Study.',
-    AppLanguage.ja =>
-      'JP Study 内で利用できる語彙トラックの状況をすばやく確認できます。',
+    AppLanguage.ja => 'JP Study 内で利用できる語彙トラックの状況をすばやく確認できます。',
   };
 
   String vocabHeroMetricPrograms() => switch (this) {
@@ -250,49 +241,51 @@ extension VocabCopy on AppLanguage {
     AppLanguage.ja => 'コアトラック',
   };
 
-  String vocabProgramTypeLabel(String programKind) => switch ((this, programKind)) {
-    (AppLanguage.en, 'minna') => 'Companion',
-    (AppLanguage.vi, 'minna') => 'Bổ trợ',
-    (AppLanguage.ja, 'minna') => '補助',
-    (AppLanguage.en, 'listening') => 'Listening',
-    (AppLanguage.vi, 'listening') => 'Luyện nghe',
-    (AppLanguage.ja, 'listening') => 'リスニング',
-    (AppLanguage.en, 'advanced') => 'Advanced',
-    (AppLanguage.vi, 'advanced') => 'Nâng cao',
-    (AppLanguage.ja, 'advanced') => '上級',
-    (AppLanguage.en, 'specialized') => 'Specialized',
-    (AppLanguage.vi, 'specialized') => 'Chuyên ngành',
-    (AppLanguage.ja, 'specialized') => '専門',
-    (_, 'shinkanzen') => switch (this) {
-      AppLanguage.en => 'Track',
-      AppLanguage.vi => 'Track',
-      AppLanguage.ja => 'トラック',
-    },
-    (_, 'core') => vocabTrackLabel(),
-    (_, _) => switch (this) {
-      AppLanguage.en => 'Track',
-      AppLanguage.vi => 'Track',
-      AppLanguage.ja => 'トラック',
-    },
-  };
+  String vocabProgramTypeLabel(String programKind) =>
+      switch ((this, programKind)) {
+        (AppLanguage.en, 'minna') => 'Companion',
+        (AppLanguage.vi, 'minna') => 'Bổ trợ',
+        (AppLanguage.ja, 'minna') => '補助',
+        (AppLanguage.en, 'listening') => 'Listening',
+        (AppLanguage.vi, 'listening') => 'Luyện nghe',
+        (AppLanguage.ja, 'listening') => 'リスニング',
+        (AppLanguage.en, 'advanced') => 'Advanced',
+        (AppLanguage.vi, 'advanced') => 'Nâng cao',
+        (AppLanguage.ja, 'advanced') => '上級',
+        (AppLanguage.en, 'specialized') => 'Specialized',
+        (AppLanguage.vi, 'specialized') => 'Chuyên ngành',
+        (AppLanguage.ja, 'specialized') => '専門',
+        (_, 'shinkanzen') => switch (this) {
+          AppLanguage.en => 'Track',
+          AppLanguage.vi => 'Track',
+          AppLanguage.ja => 'トラック',
+        },
+        (_, 'core') => vocabTrackLabel(),
+        (_, _) => switch (this) {
+          AppLanguage.en => 'Track',
+          AppLanguage.vi => 'Track',
+          AppLanguage.ja => 'トラック',
+        },
+      };
 
-  String vocabProgramFooterHint(String programKind) => switch ((this, programKind)) {
-    (AppLanguage.en, 'minna') => 'Textbook-paced path',
-    (AppLanguage.vi, 'minna') => 'Đi theo nhịp giáo trình',
-    (AppLanguage.ja, 'minna') => '教科書の進度で学ぶ',
-    (AppLanguage.en, 'listening') => 'Audio-context reinforcement',
-    (AppLanguage.vi, 'listening') => 'Củng cố bằng ngữ cảnh nghe',
-    (AppLanguage.ja, 'listening') => '音声コンテキストで定着',
-    (AppLanguage.en, 'advanced') => 'Dense reading and nuance pack',
-    (AppLanguage.vi, 'advanced') => 'Gói đọc khó và sắc thái',
-    (AppLanguage.ja, 'advanced') => '高難度読解とニュアンス',
-    (AppLanguage.en, 'specialized') => 'Domain-specific language pack',
-    (AppLanguage.vi, 'specialized') => 'Gói ngôn ngữ theo chuyên ngành',
-    (AppLanguage.ja, 'specialized') => '専門領域向けパック',
-    (AppLanguage.en, _) => 'Usage-first review path',
-    (AppLanguage.vi, _) => 'Track review ưu tiên cách dùng',
-    (AppLanguage.ja, _) => '用法重視の復習導線',
-  };
+  String vocabProgramFooterHint(String programKind) =>
+      switch ((this, programKind)) {
+        (AppLanguage.en, 'minna') => 'Textbook-paced path',
+        (AppLanguage.vi, 'minna') => 'Đi theo nhịp giáo trình',
+        (AppLanguage.ja, 'minna') => '教科書の進度で学ぶ',
+        (AppLanguage.en, 'listening') => 'Audio-context reinforcement',
+        (AppLanguage.vi, 'listening') => 'Củng cố bằng ngữ cảnh nghe',
+        (AppLanguage.ja, 'listening') => '音声コンテキストで定着',
+        (AppLanguage.en, 'advanced') => 'Dense reading and nuance pack',
+        (AppLanguage.vi, 'advanced') => 'Gói đọc khó và sắc thái',
+        (AppLanguage.ja, 'advanced') => '高難度読解とニュアンス',
+        (AppLanguage.en, 'specialized') => 'Domain-specific language pack',
+        (AppLanguage.vi, 'specialized') => 'Gói ngôn ngữ theo chuyên ngành',
+        (AppLanguage.ja, 'specialized') => '専門領域向けパック',
+        (AppLanguage.en, _) => 'Usage-first review path',
+        (AppLanguage.vi, _) => 'Track review ưu tiên cách dùng',
+        (AppLanguage.ja, _) => '用法重視の復習導線',
+      };
 
   String vocabProgramCountLabel(String count) => switch (this) {
     AppLanguage.en => '$count terms',
@@ -335,8 +328,7 @@ extension VocabCopy on AppLanguage {
       'This track already has seeded vocabulary data inside JP Study. The catalog volume and content are ready for preview.',
     AppLanguage.vi =>
       'Track này đã có dữ liệu từ vựng trong JP Study. Dữ liệu và cấu trúc catalog đã sẵn sàng để xem trước.',
-    AppLanguage.ja =>
-      'このトラックにはすでに JP Study 内の語彙データがあります。カタログ内容は確認できます。',
+    AppLanguage.ja => 'このトラックにはすでに JP Study 内の語彙データがあります。カタログ内容は確認できます。',
   };
 
   String vocabMeaningFirstLabel() => switch (this) {

@@ -17,22 +17,25 @@ class PersonalBest {
   final int attempts;
 }
 
-final personalBestsProvider =
-    FutureProvider.autoDispose<List<PersonalBest>>((ref) async {
+final personalBestsProvider = FutureProvider.autoDispose<List<PersonalBest>>((
+  ref,
+) async {
   final db = ref.watch(databaseProvider);
   return queryPersonalBests(db);
 });
 
 Future<List<PersonalBest>> queryPersonalBests(AppDatabase db) async {
-  final rows = await db.customSelect(
-    'SELECT mode, level, '
-    'MAX(CAST(score AS REAL) * 100.0 / total) AS best_pct, '
-    'COUNT(*) AS attempts '
-    'FROM attempt '
-    'WHERE score IS NOT NULL AND total IS NOT NULL AND total > 0 '
-    'GROUP BY mode, level '
-    'ORDER BY best_pct DESC',
-  ).get();
+  final rows = await db
+      .customSelect(
+        'SELECT mode, level, '
+        'MAX(CAST(score AS REAL) * 100.0 / total) AS best_pct, '
+        'COUNT(*) AS attempts '
+        'FROM attempt '
+        'WHERE score IS NOT NULL AND total IS NOT NULL AND total > 0 '
+        'GROUP BY mode, level '
+        'ORDER BY best_pct DESC',
+      )
+      .get();
 
   return rows.map((row) {
     return PersonalBest(
@@ -56,13 +59,15 @@ Future<bool> isNewPersonalBest(
   if (total <= 0) return false;
   final currentPct = (score * 100.0 / total);
 
-  final rows = await db.customSelect(
-    'SELECT MAX(CAST(score AS REAL) * 100.0 / total) AS best_pct '
-    'FROM attempt '
-    'WHERE mode = ? AND level = ? '
-    'AND score IS NOT NULL AND total IS NOT NULL AND total > 0',
-    variables: [Variable.withString(mode), Variable.withString(level)],
-  ).get();
+  final rows = await db
+      .customSelect(
+        'SELECT MAX(CAST(score AS REAL) * 100.0 / total) AS best_pct '
+        'FROM attempt '
+        'WHERE mode = ? AND level = ? '
+        'AND score IS NOT NULL AND total IS NOT NULL AND total > 0',
+        variables: [Variable.withString(mode), Variable.withString(level)],
+      )
+      .get();
 
   if (rows.isEmpty) return true;
   final prevBest = rows.first.readNullable<double>('best_pct');

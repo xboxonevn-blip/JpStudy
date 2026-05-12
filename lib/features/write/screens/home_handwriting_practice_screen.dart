@@ -521,5 +521,3 @@ class _AllCaughtUpScreen extends StatelessWidget {
     );
   }
 }
-
-

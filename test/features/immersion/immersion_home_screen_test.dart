@@ -27,13 +27,15 @@ class _StubImmersionService extends ImmersionService {
 }
 
 Widget buildImmersionScreen() => ProviderScope(
-      overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-        studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
-        immersionServiceProvider.overrideWithValue(_StubImmersionService()),
-      ],
-      child: const MaterialApp(home: ImmersionHomeScreen()),
-    );
+  overrides: [
+    appLanguageProvider.overrideWith(
+      (ref) => AppLanguageController.test(AppLanguage.en),
+    ),
+    studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+    immersionServiceProvider.overrideWithValue(_StubImmersionService()),
+  ],
+  child: const MaterialApp(home: ImmersionHomeScreen()),
+);
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));

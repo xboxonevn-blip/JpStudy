@@ -8,15 +8,14 @@ GrammarPointsCompanion _point({
   required int id,
   required String grammarPoint,
   String level = 'N5',
-}) =>
-    GrammarPointsCompanion.insert(
-      id: Value(id),
-      grammarPoint: grammarPoint,
-      meaning: 'meaning $id',
-      connection: 'conn $id',
-      explanation: 'explanation $id',
-      jlptLevel: level,
-    );
+}) => GrammarPointsCompanion.insert(
+  id: Value(id),
+  grammarPoint: grammarPoint,
+  meaning: 'meaning $id',
+  connection: 'conn $id',
+  explanation: 'explanation $id',
+  jlptLevel: level,
+);
 
 void main() {
   late AppDatabase db;
@@ -65,11 +64,10 @@ void main() {
   test('fetchDuePoints returns point with past nextReviewAt', () async {
     await db.into(db.grammarPoints).insert(_point(id: 1, grammarPoint: '〜ない'));
     final pastDate = DateTime.now().subtract(const Duration(hours: 1));
-    await db.into(db.grammarSrsState).insert(
-          GrammarSrsStateCompanion.insert(
-            grammarId: 1,
-            nextReviewAt: pastDate,
-          ),
+    await db
+        .into(db.grammarSrsState)
+        .insert(
+          GrammarSrsStateCompanion.insert(grammarId: 1, nextReviewAt: pastDate),
         );
 
     final result = await repository.fetchDuePoints();
@@ -80,7 +78,9 @@ void main() {
   test('fetchDuePoints excludes point with future nextReviewAt', () async {
     await db.into(db.grammarPoints).insert(_point(id: 1, grammarPoint: '〜ない'));
     final futureDate = DateTime.now().add(const Duration(days: 3));
-    await db.into(db.grammarSrsState).insert(
+    await db
+        .into(db.grammarSrsState)
+        .insert(
           GrammarSrsStateCompanion.insert(
             grammarId: 1,
             nextReviewAt: futureDate,
@@ -100,7 +100,9 @@ void main() {
 
   test('getGrammarDetail returns point with examples', () async {
     await db.into(db.grammarPoints).insert(_point(id: 5, grammarPoint: '〜て'));
-    await db.into(db.grammarExamples).insert(
+    await db
+        .into(db.grammarExamples)
+        .insert(
           GrammarExamplesCompanion.insert(
             grammarId: 5,
             japanese: '食べて、寝た。',
@@ -115,13 +117,16 @@ void main() {
     expect(result.examples.first.japanese, '食べて、寝た。');
   });
 
-  test('getGrammarDetail returns empty examples list when none exist', () async {
-    await db.into(db.grammarPoints).insert(_point(id: 6, grammarPoint: '〜に'));
+  test(
+    'getGrammarDetail returns empty examples list when none exist',
+    () async {
+      await db.into(db.grammarPoints).insert(_point(id: 6, grammarPoint: '〜に'));
 
-    final result = await repository.getGrammarDetail(6);
-    expect(result, isNotNull);
-    expect(result!.examples, isEmpty);
-  });
+      final result = await repository.getGrammarDetail(6);
+      expect(result, isNotNull);
+      expect(result!.examples, isEmpty);
+    },
+  );
 
   // ── markAsLearned ─────────────────────────────────────────────────────────
 
@@ -138,15 +143,20 @@ void main() {
     expect(srsStates.first.grammarId, 7);
   });
 
-  test('markAsLearned does not create duplicate SRS state on second call', () async {
-    await db.into(db.grammarPoints).insert(_point(id: 8, grammarPoint: '〜けど'));
+  test(
+    'markAsLearned does not create duplicate SRS state on second call',
+    () async {
+      await db
+          .into(db.grammarPoints)
+          .insert(_point(id: 8, grammarPoint: '〜けど'));
 
-    await repository.markAsLearned(8);
-    await repository.markAsLearned(8);
+      await repository.markAsLearned(8);
+      await repository.markAsLearned(8);
 
-    final srsStates = await db.select(db.grammarSrsState).get();
-    expect(srsStates.length, 1);
-  });
+      final srsStates = await db.select(db.grammarSrsState).get();
+      expect(srsStates.length, 1);
+    },
+  );
 
   // ── recordReview ──────────────────────────────────────────────────────────
 

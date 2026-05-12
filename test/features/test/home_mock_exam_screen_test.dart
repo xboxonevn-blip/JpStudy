@@ -74,23 +74,23 @@ const _sampleVocab = [
 ];
 
 TestSessionSnapshot _resumeSnapshot() => TestSessionSnapshot(
-      sessionKey: 'mock_N5',
-      sessionId: 'resume-1',
-      lessonId: -1,
-      startedAt: DateTime(2026, 3, 1, 11, 0),
-      currentQuestionIndex: 0,
-      questions: const [],
-      answers: const [],
-      flaggedQuestions: const {},
-      config: const TestConfig(questionCount: 1, timeLimitMinutes: 5),
-      adaptiveAdded: 0,
-      adaptiveMaxExtra: 0,
-      usedTypesByItem: const {},
-      adaptiveRepeatCount: const {},
-      adaptiveCorrectStreak: const {},
-      adaptiveCompleted: const {},
-      lastSavedAt: DateTime(2026, 3, 1, 11, 1),
-    );
+  sessionKey: 'mock_N5',
+  sessionId: 'resume-1',
+  lessonId: -1,
+  startedAt: DateTime(2026, 3, 1, 11, 0),
+  currentQuestionIndex: 0,
+  questions: const [],
+  answers: const [],
+  flaggedQuestions: const {},
+  config: const TestConfig(questionCount: 1, timeLimitMinutes: 5),
+  adaptiveAdded: 0,
+  adaptiveMaxExtra: 0,
+  usedTypesByItem: const {},
+  adaptiveRepeatCount: const {},
+  adaptiveCorrectStreak: const {},
+  adaptiveCompleted: const {},
+  lastSavedAt: DateTime(2026, 3, 1, 11, 1),
+);
 
 Widget buildScreen({
   StudyLevel? level,
@@ -98,25 +98,29 @@ Widget buildScreen({
   SessionStorage? storage,
   HomeMockExamLaunchArgs? launchArgs,
 }) => ProviderScope(
-      overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-        studyLevelProvider.overrideWith((ref) => level),
-        if (repo != null) lessonRepositoryProvider.overrideWithValue(repo),
-        if (storage != null) sessionStorageProvider.overrideWithValue(storage),
-      ],
-      child: MaterialApp(home: HomeMockExamScreen(launchArgs: launchArgs)),
-    );
+  overrides: [
+    appLanguageProvider.overrideWith(
+      (ref) => AppLanguageController.test(AppLanguage.en),
+    ),
+    studyLevelProvider.overrideWith((ref) => level),
+    if (repo != null) lessonRepositoryProvider.overrideWithValue(repo),
+    if (storage != null) sessionStorageProvider.overrideWithValue(storage),
+  ],
+  child: MaterialApp(home: HomeMockExamScreen(launchArgs: launchArgs)),
+);
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
 
-  testWidgets('shows mock exam title and level prompt when level is not selected',
-      (tester) async {
-    await tester.pumpWidget(buildScreen());
-    await tester.pump();
-    expect(find.text('Mock Exam'), findsOneWidget);
-    expect(find.text('Select JLPT level'), findsOneWidget);
-  });
+  testWidgets(
+    'shows mock exam title and level prompt when level is not selected',
+    (tester) async {
+      await tester.pumpWidget(buildScreen());
+      await tester.pump();
+      expect(find.text('Mock Exam'), findsOneWidget);
+      expect(find.text('Select JLPT level'), findsOneWidget);
+    },
+  );
 
   testWidgets('shows JLPT mock exam title for selected level', (tester) async {
     final db = AppDatabase(executor: NativeDatabase.memory());
@@ -138,8 +142,9 @@ void main() {
     await cdb.close();
   });
 
-  testWidgets('shows empty state when no vocab exists for selected level',
-      (tester) async {
+  testWidgets('shows empty state when no vocab exists for selected level', (
+    tester,
+  ) async {
     final db = AppDatabase(executor: NativeDatabase.memory());
     final cdb = ContentDatabase(executor: NativeDatabase.memory());
     final repo = FakeMockLessonRepository(
@@ -180,7 +185,9 @@ void main() {
     await cdb.close();
   });
 
-  testWidgets('navigates to TestConfigScreen when vocab exists', (tester) async {
+  testWidgets('navigates to TestConfigScreen when vocab exists', (
+    tester,
+  ) async {
     final db = AppDatabase(executor: NativeDatabase.memory());
     final cdb = ContentDatabase(executor: NativeDatabase.memory());
     final repo = FakeMockLessonRepository(
@@ -205,8 +212,9 @@ void main() {
     await cdb.close();
   });
 
-  testWidgets('uses launch args title override and session key suffix',
-      (tester) async {
+  testWidgets('uses launch args title override and session key suffix', (
+    tester,
+  ) async {
     final db = AppDatabase(executor: NativeDatabase.memory());
     final cdb = ContentDatabase(executor: NativeDatabase.memory());
     final repo = FakeMockLessonRepository(
@@ -239,8 +247,9 @@ void main() {
     await cdb.close();
   });
 
-  testWidgets('passes resume snapshot into TestConfigScreen when available',
-      (tester) async {
+  testWidgets('passes resume snapshot into TestConfigScreen when available', (
+    tester,
+  ) async {
     final db = AppDatabase(executor: NativeDatabase.memory());
     final cdb = ContentDatabase(executor: NativeDatabase.memory());
     final repo = FakeMockLessonRepository(
@@ -256,7 +265,9 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));
 
-    final screen = tester.widget<TestConfigScreen>(find.byType(TestConfigScreen));
+    final screen = tester.widget<TestConfigScreen>(
+      find.byType(TestConfigScreen),
+    );
     expect(screen.resumeSnapshot, isNotNull);
     expect(screen.onResume, isNotNull);
     expect(screen.onDiscardResume, isNotNull);

@@ -53,16 +53,16 @@ Widget _buildHarness({
   return ProviderScope(
     retry: (retryCount, error) => null,
     overrides: [
-      appLanguageProvider.overrideWith((ref) => language),
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(language),
+      ),
       lessonKanjiProvider(_kLessonId).overrideWith((_) async {
         if (error != null) throw error;
         return items ?? const [_kKanji];
       }),
     ],
     child: const MaterialApp(
-      home: Scaffold(
-        body: KanjiListWidget(lessonId: _kLessonId),
-      ),
+      home: Scaffold(body: KanjiListWidget(lessonId: _kLessonId)),
     ),
   );
 }
@@ -87,18 +87,22 @@ void _largeViewport(WidgetTester tester) {
 
 void main() {
   group('KanjiListWidget – async states', () {
-    testWidgets('shows CircularProgressIndicator while loading', (tester) async {
+    testWidgets('shows CircularProgressIndicator while loading', (
+      tester,
+    ) async {
       // Use a Completer so the future stays pending — async => value resolves
       // before the first pump() and would skip straight to data state.
       final completer = Completer<List<KanjiItem>>();
       await tester.pumpWidget(
         ProviderScope(
-    retry: (retryCount, error) => null,
-    overrides: [
-            appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-            lessonKanjiProvider(_kLessonId).overrideWith(
-              (_) => completer.future,
+          retry: (retryCount, error) => null,
+          overrides: [
+            appLanguageProvider.overrideWith(
+              (ref) => AppLanguageController.test(AppLanguage.en),
             ),
+            lessonKanjiProvider(
+              _kLessonId,
+            ).overrideWith((_) => completer.future),
           ],
           child: const MaterialApp(
             home: Scaffold(body: KanjiListWidget(lessonId: _kLessonId)),
@@ -162,8 +166,9 @@ void main() {
       expect(find.text('eat'), findsWidgets);
     });
 
-    testWidgets('VI locale shows meaning (Vietnamese) as primary meaning',
-        (tester) async {
+    testWidgets('VI locale shows meaning (Vietnamese) as primary meaning', (
+      tester,
+    ) async {
       await tester.pumpWidget(_buildHarness(language: AppLanguage.vi));
       await _pump(tester);
 
@@ -190,9 +195,7 @@ void main() {
     });
 
     testWidgets('all kanji items rendered in multi-item list', (tester) async {
-      await tester.pumpWidget(
-        _buildHarness(items: const [_kKanji, _kKanji2]),
-      );
+      await tester.pumpWidget(_buildHarness(items: const [_kKanji, _kKanji2]));
       await _pump(tester);
 
       expect(find.text('食'), findsWidgets);
@@ -201,8 +204,9 @@ void main() {
   });
 
   group('KanjiListWidget – expand/collapse', () {
-    testWidgets('tapping a row changes crossFadeState to showSecond',
-        (tester) async {
+    testWidgets('tapping a row changes crossFadeState to showSecond', (
+      tester,
+    ) async {
       _largeViewport(tester);
       await tester.pumpWidget(_buildHarness());
       await _pump(tester);
@@ -228,8 +232,9 @@ void main() {
       );
     });
 
-    testWidgets('tapping an expanded row collapses back to showFirst',
-        (tester) async {
+    testWidgets('tapping an expanded row collapses back to showFirst', (
+      tester,
+    ) async {
       _largeViewport(tester);
       await tester.pumpWidget(_buildHarness());
       await _pump(tester);
@@ -251,4 +256,3 @@ void main() {
     });
   });
 }
-

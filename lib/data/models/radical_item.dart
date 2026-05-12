@@ -35,7 +35,9 @@ class RadicalItem {
   String get displayMeaningVi => _RadicalViMeaningFormatter.format(viMeaning);
 
   String get searchMeaningVi {
-    final source = '${viMeaningRaw ?? ''} $displayMeaningVi'.trim().toLowerCase();
+    final source = '${viMeaningRaw ?? ''} $displayMeaningVi'
+        .trim()
+        .toLowerCase();
     return '$source ${_RadicalViMeaningFormatter.stripDiacritics(source)}';
   }
 }
@@ -48,13 +50,27 @@ class _RadicalViMeaningFormatter {
 
   static Map<int, int> _buildDiacriticMap() {
     final map = <int, int>{};
-    for (final c in 'àáạảãâầấậẩẫăằắặẳẵ'.runes) { map[c] = 0x61; }
-    for (final c in 'èéẹẻẽêềếệểễ'.runes) { map[c] = 0x65; }
-    for (final c in 'ìíịỉĩ'.runes) { map[c] = 0x69; }
-    for (final c in 'òóọỏõôồốộổỗơờớợởỡ'.runes) { map[c] = 0x6F; }
-    for (final c in 'ùúụủũưừứựửữ'.runes) { map[c] = 0x75; }
-    for (final c in 'ỳýỵỷỹ'.runes) { map[c] = 0x79; }
-    for (final c in 'đ'.runes) { map[c] = 0x64; }
+    for (final c in 'àáạảãâầấậẩẫăằắặẳẵ'.runes) {
+      map[c] = 0x61;
+    }
+    for (final c in 'èéẹẻẽêềếệểễ'.runes) {
+      map[c] = 0x65;
+    }
+    for (final c in 'ìíịỉĩ'.runes) {
+      map[c] = 0x69;
+    }
+    for (final c in 'òóọỏõôồốộổỗơờớợởỡ'.runes) {
+      map[c] = 0x6F;
+    }
+    for (final c in 'ùúụủũưừứựửữ'.runes) {
+      map[c] = 0x75;
+    }
+    for (final c in 'ỳýỵỷỹ'.runes) {
+      map[c] = 0x79;
+    }
+    for (final c in 'đ'.runes) {
+      map[c] = 0x64;
+    }
     return map;
   }
 
@@ -92,7 +108,11 @@ class _RadicalViMeaningFormatter {
 
     return normalized
         .split(' ')
-        .map((part) => part.isEmpty ? part : '${part[0].toUpperCase()}${part.substring(1)}')
+        .map(
+          (part) => part.isEmpty
+              ? part
+              : '${part[0].toUpperCase()}${part.substring(1)}',
+        )
         .join(' ');
   }
 
@@ -288,4 +308,5 @@ class _RadicalViMeaningFormatter {
     map['cua'] = 'cửa';
     map['canh'] = 'cánh';
     return map;
-  }}
+  }
+}

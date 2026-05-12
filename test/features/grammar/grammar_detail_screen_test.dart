@@ -51,8 +51,10 @@ const _stubExample = GrammarExample(
   translationEn: 'May I eat?',
 );
 
-typedef _GrammarDetailRecord
-    = ({GrammarPoint point, List<GrammarExample> examples});
+typedef _GrammarDetailRecord = ({
+  GrammarPoint point,
+  List<GrammarExample> examples,
+});
 
 // ---------------------------------------------------------------------------
 // Fake repository — no-ops markAsLearned so no DB write is attempted
@@ -76,18 +78,16 @@ Widget _buildScreen({
   GrammarRepository? repo,
 }) {
   final overrides = <Override>[
-    appLanguageProvider.overrideWith((ref) => language),
-    grammarDetailProvider(_kGrammarId).overrideWith(
-      (_) async => detail,
+    appLanguageProvider.overrideWith(
+      (ref) => AppLanguageController.test(language),
     ),
+    grammarDetailProvider(_kGrammarId).overrideWith((_) async => detail),
     if (repo != null) grammarRepositoryProvider.overrideWithValue(repo),
   ];
 
   return ProviderScope(
     overrides: overrides,
-    child: const MaterialApp(
-      home: GrammarDetailScreen(grammarId: _kGrammarId),
-    ),
+    child: const MaterialApp(home: GrammarDetailScreen(grammarId: _kGrammarId)),
   );
 }
 
@@ -114,12 +114,11 @@ void main() {
     expect(find.text('Grammar point not found.'), findsOneWidget);
   });
 
-  testWidgets('renders headline, JLPT badge, connection and explanation',
-      (tester) async {
+  testWidgets('renders headline, JLPT badge, connection and explanation', (
+    tester,
+  ) async {
     await tester.pumpWidget(
-      _buildScreen(
-        detail: (point: _stubPoint, examples: const []),
-      ),
+      _buildScreen(detail: (point: _stubPoint, examples: const [])),
     );
     await _pump(tester);
 
@@ -140,33 +139,29 @@ void main() {
 
   testWidgets('renders examples when list is non-empty', (tester) async {
     await tester.pumpWidget(
-      _buildScreen(
-        detail: (point: _stubPoint, examples: const [_stubExample]),
-      ),
+      _buildScreen(detail: (point: _stubPoint, examples: const [_stubExample])),
     );
     await _pump(tester);
 
     expect(find.text('食べてもいいですか？'), findsWidgets);
   });
 
-  testWidgets('"Mark done" button appears when point is not yet learned',
-      (tester) async {
+  testWidgets('"Mark done" button appears when point is not yet learned', (
+    tester,
+  ) async {
     await tester.pumpWidget(
-      _buildScreen(
-        detail: (point: _stubPoint, examples: const []),
-      ),
+      _buildScreen(detail: (point: _stubPoint, examples: const [])),
     );
     await _pump(tester);
 
     expect(find.text('Mark done'), findsOneWidget);
   });
 
-  testWidgets('"Mark done" button is absent when point is already learned',
-      (tester) async {
+  testWidgets('"Mark done" button is absent when point is already learned', (
+    tester,
+  ) async {
     await tester.pumpWidget(
-      _buildScreen(
-        detail: (point: _learnedPoint, examples: const []),
-      ),
+      _buildScreen(detail: (point: _learnedPoint, examples: const [])),
     );
     await _pump(tester);
 
@@ -213,4 +208,3 @@ void main() {
     expect(find.text('文法ポイント'), findsOneWidget);
   });
 }
-

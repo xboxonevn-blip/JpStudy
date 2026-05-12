@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/accessibility/reduced_motion.dart';
+import 'package:jpstudy/core/a11y_live_region.dart';
 
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
@@ -488,6 +489,15 @@ class _LearnScreenState extends ConsumerState<LearnScreen> {
             .read(learnSessionProvider.notifier)
             .requeueQuestion(result.question);
         _wrongRequeued.add(result.question.id);
+      }
+      final language = ref.read(appLanguageProvider);
+      if (result.question.type == QuestionType.multipleChoice) {
+        announcePolite(
+          language.mcqResultAnnouncement(
+            isCorrect: result.isCorrect,
+            correctAnswer: result.question.correctAnswer,
+          ),
+        );
       }
       setState(() {
         _showResult = true;

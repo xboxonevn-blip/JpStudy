@@ -26,11 +26,7 @@ class DailyPlanCard extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _Header(
-                  language: language,
-                  palette: palette,
-                  plan: plan,
-                ),
+                _Header(language: language, palette: palette, plan: plan),
                 const SizedBox(height: 12),
                 _PlanProgress(plan: plan, palette: palette),
                 const SizedBox(height: 14),
@@ -101,7 +97,7 @@ class _Header extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           child: Text(
-            '~${plan.totalMinutes} min',
+            '~${language.unitMinutesLabel(plan.totalMinutes)}',
             style: TextStyle(
               fontWeight: FontWeight.w700,
               fontSize: 11,
@@ -178,8 +174,8 @@ class _StepRow extends StatelessWidget {
     final iconColor = done
         ? palette.success
         : urgent
-            ? palette.error
-            : palette.primary;
+        ? palette.error
+        : palette.primary;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 6),
@@ -194,8 +190,8 @@ class _StepRow extends StatelessWidget {
               color: done
                   ? palette.success.withValues(alpha: 0.06)
                   : urgent
-                      ? palette.error.withValues(alpha: 0.05)
-                      : palette.surface.withValues(alpha: 0.6),
+                  ? palette.error.withValues(alpha: 0.05)
+                  : palette.surface.withValues(alpha: 0.6),
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
                 color: done
@@ -206,9 +202,7 @@ class _StepRow extends StatelessWidget {
             child: Row(
               children: [
                 Icon(
-                  done
-                      ? Icons.check_circle_rounded
-                      : _iconForType(step.type),
+                  done ? Icons.check_circle_rounded : _iconForType(step.type),
                   size: 20,
                   color: iconColor,
                 ),
@@ -225,13 +219,12 @@ class _StepRow extends StatelessWidget {
                           color: done
                               ? palette.ink.withValues(alpha: 0.45)
                               : palette.ink,
-                          decoration:
-                              done ? TextDecoration.lineThrough : null,
+                          decoration: done ? TextDecoration.lineThrough : null,
                         ),
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        '${step.count} ${_itemLabel(step.type, language)} · ${step.estimatedMinutes} min',
+                        '${step.count} ${_itemLabel(step.type, language)} · ${language.unitMinutesLabel(step.estimatedMinutes)}',
                         style: TextStyle(
                           fontSize: 11,
                           color: palette.ink.withValues(alpha: 0.5),
@@ -291,9 +284,7 @@ class _StepRow extends StatelessWidget {
       case PlanStepType.vocabReview:
         return step.urgency >= 2 ? 'Urgent Vocab Review' : 'Vocab Review';
       case PlanStepType.grammarReview:
-        return step.urgency >= 2
-            ? 'Urgent Grammar Review'
-            : 'Grammar Review';
+        return step.urgency >= 2 ? 'Urgent Grammar Review' : 'Grammar Review';
       case PlanStepType.kanjiReview:
         return step.urgency >= 2 ? 'Urgent Kanji Review' : 'Kanji Review';
       case PlanStepType.newVocab:

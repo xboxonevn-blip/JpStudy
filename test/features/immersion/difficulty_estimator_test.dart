@@ -104,45 +104,27 @@ void main() {
 
   group('DifficultyEstimator.colorForLevel', () {
     test('N5 returns green', () {
-      expect(
-        DifficultyEstimator.colorForLevel('N5'),
-        const Color(0xFF22C55E),
-      );
+      expect(DifficultyEstimator.colorForLevel('N5'), const Color(0xFF22C55E));
     });
 
     test('N4 returns teal', () {
-      expect(
-        DifficultyEstimator.colorForLevel('N4'),
-        const Color(0xFF14B8A6),
-      );
+      expect(DifficultyEstimator.colorForLevel('N4'), const Color(0xFF14B8A6));
     });
 
     test('N3 returns blue', () {
-      expect(
-        DifficultyEstimator.colorForLevel('N3'),
-        const Color(0xFF3B82F6),
-      );
+      expect(DifficultyEstimator.colorForLevel('N3'), const Color(0xFF3B82F6));
     });
 
     test('N2 returns amber', () {
-      expect(
-        DifficultyEstimator.colorForLevel('N2'),
-        const Color(0xFFF59E0B),
-      );
+      expect(DifficultyEstimator.colorForLevel('N2'), const Color(0xFFF59E0B));
     });
 
     test('N1 returns red', () {
-      expect(
-        DifficultyEstimator.colorForLevel('N1'),
-        const Color(0xFFEF4444),
-      );
+      expect(DifficultyEstimator.colorForLevel('N1'), const Color(0xFFEF4444));
     });
 
     test('unknown level returns gray', () {
-      expect(
-        DifficultyEstimator.colorForLevel('???'),
-        const Color(0xFF6B7280),
-      );
+      expect(DifficultyEstimator.colorForLevel('???'), const Color(0xFF6B7280));
     });
   });
 }

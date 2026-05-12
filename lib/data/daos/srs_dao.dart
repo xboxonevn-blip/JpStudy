@@ -89,10 +89,13 @@ class SrsDao extends DatabaseAccessor<AppDatabase> with _$SrsDaoMixin {
   /// a COUNT(*) query instead of fetching all rows.
   Future<int> getDueReviewCount() async {
     final countExpr = srsState.vocabId.count();
-    final row = await (selectOnly(srsState)
-          ..addColumns([countExpr])
-          ..where(srsState.nextReviewAt.isSmallerOrEqualValue(DateTime.now())))
-        .getSingle();
+    final row =
+        await (selectOnly(srsState)
+              ..addColumns([countExpr])
+              ..where(
+                srsState.nextReviewAt.isSmallerOrEqualValue(DateTime.now()),
+              ))
+            .getSingle();
     return row.read(countExpr) ?? 0;
   }
 
@@ -110,9 +113,9 @@ class SrsDao extends DatabaseAccessor<AppDatabase> with _$SrsDaoMixin {
   /// Replaces the N+1 pattern of calling [getSrsState] per term in a loop.
   Future<Map<int, SrsStateData>> getStatesForIds(List<int> vocabIds) async {
     if (vocabIds.isEmpty) return const {};
-    final rows = await (select(srsState)
-          ..where((t) => t.vocabId.isIn(vocabIds)))
-        .get();
+    final rows = await (select(
+      srsState,
+    )..where((t) => t.vocabId.isIn(vocabIds))).get();
     return {for (final r in rows) r.vocabId: r};
   }
 
@@ -120,13 +123,14 @@ class SrsDao extends DatabaseAccessor<AppDatabase> with _$SrsDaoMixin {
   /// Used by dailyPlanProvider to avoid fetching full rows for counting.
   Future<int> getCriticalDueCount() async {
     final countExpr = srsState.vocabId.count();
-    final row = await (selectOnly(srsState)
-          ..addColumns([countExpr])
-          ..where(
-            srsState.nextReviewAt.isSmallerOrEqualValue(DateTime.now()) &
-                srsState.stability.isSmallerThanValue(1.0),
-          ))
-        .getSingle();
+    final row =
+        await (selectOnly(srsState)
+              ..addColumns([countExpr])
+              ..where(
+                srsState.nextReviewAt.isSmallerOrEqualValue(DateTime.now()) &
+                    srsState.stability.isSmallerThanValue(1.0),
+              ))
+            .getSingle();
     return row.read(countExpr) ?? 0;
   }
 

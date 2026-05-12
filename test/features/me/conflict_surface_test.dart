@@ -106,7 +106,9 @@ void main() {
     final fakeRepo = repo!;
     return ProviderScope(
       overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+        appLanguageProvider.overrideWith(
+          (ref) => AppLanguageController.test(AppLanguage.en),
+        ),
         lessonRepositoryProvider.overrideWithValue(fakeRepo),
       ],
       child: MaterialApp(

@@ -6,25 +6,26 @@ import 'package:jpstudy/features/test/models/test_session.dart';
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
-VocabItem _vocab(int id) => VocabItem(id: id, term: 'term$id', meaning: 'meaning$id', level: 'N5');
+VocabItem _vocab(int id) =>
+    VocabItem(id: id, term: 'term$id', meaning: 'meaning$id', level: 'N5');
 
 Question _mc(int vocabId) => Question(
-      id: 'q$vocabId',
-      type: QuestionType.multipleChoice,
-      targetItem: _vocab(vocabId),
-      questionText: 'term$vocabId',
-      correctAnswer: 'meaning$vocabId',
-      options: ['meaning$vocabId', 'other1', 'other2'],
-    );
+  id: 'q$vocabId',
+  type: QuestionType.multipleChoice,
+  targetItem: _vocab(vocabId),
+  questionText: 'term$vocabId',
+  correctAnswer: 'meaning$vocabId',
+  options: ['meaning$vocabId', 'other1', 'other2'],
+);
 
 Question _tf(int vocabId) => Question(
-      id: 'q$vocabId',
-      type: QuestionType.trueFalse,
-      targetItem: _vocab(vocabId),
-      questionText: 'term$vocabId',
-      correctAnswer: 'true',
-      isStatementTrue: true,
-    );
+  id: 'q$vocabId',
+  type: QuestionType.trueFalse,
+  targetItem: _vocab(vocabId),
+  questionText: 'term$vocabId',
+  correctAnswer: 'true',
+  isStatementTrue: true,
+);
 
 TestSession _session({
   List<Question>? questions,
@@ -56,8 +57,16 @@ void main() {
 
   test('score is 100 when all correct', () {
     final answers = [
-      const TestAnswer(questionIndex: 0, userAnswer: 'meaning1', isCorrect: true),
-      const TestAnswer(questionIndex: 1, userAnswer: 'meaning2', isCorrect: true),
+      const TestAnswer(
+        questionIndex: 0,
+        userAnswer: 'meaning1',
+        isCorrect: true,
+      ),
+      const TestAnswer(
+        questionIndex: 1,
+        userAnswer: 'meaning2',
+        isCorrect: true,
+      ),
     ];
     final s = _session(questions: [_mc(1), _mc(2)], answers: answers);
     expect(s.score, 100.0);
@@ -65,7 +74,11 @@ void main() {
 
   test('score is 50 when half correct', () {
     final answers = [
-      const TestAnswer(questionIndex: 0, userAnswer: 'meaning1', isCorrect: true),
+      const TestAnswer(
+        questionIndex: 0,
+        userAnswer: 'meaning1',
+        isCorrect: true,
+      ),
       const TestAnswer(questionIndex: 1, userAnswer: 'wrong', isCorrect: false),
     ];
     final s = _session(questions: [_mc(1), _mc(2)], answers: answers);
@@ -86,7 +99,11 @@ void main() {
 
   test('grade F for score < 60', () {
     final answers = [
-      const TestAnswer(questionIndex: 0, userAnswer: 'meaning1', isCorrect: true),
+      const TestAnswer(
+        questionIndex: 0,
+        userAnswer: 'meaning1',
+        isCorrect: true,
+      ),
       const TestAnswer(questionIndex: 1, userAnswer: 'wrong', isCorrect: false),
       const TestAnswer(questionIndex: 2, userAnswer: 'wrong', isCorrect: false),
     ];
@@ -102,10 +119,7 @@ void main() {
       const TestAnswer(questionIndex: 1, userAnswer: 'b', isCorrect: false),
       const TestAnswer(questionIndex: 2, userAnswer: 'c', isCorrect: true),
     ];
-    final s = _session(
-      questions: [_mc(1), _mc(2), _mc(3)],
-      answers: answers,
-    );
+    final s = _session(questions: [_mc(1), _mc(2), _mc(3)], answers: answers);
     expect(s.correctCount, 2);
     expect(s.wrongCount, 1);
     expect(s.correctCount + s.wrongCount, s.totalQuestions);
@@ -163,7 +177,11 @@ void main() {
 
   test('weakTermIds includes wrong answers and unanswered', () {
     final answers = [
-      const TestAnswer(questionIndex: 0, userAnswer: 'meaning1', isCorrect: true),
+      const TestAnswer(
+        questionIndex: 0,
+        userAnswer: 'meaning1',
+        isCorrect: true,
+      ),
       const TestAnswer(questionIndex: 1, userAnswer: 'wrong', isCorrect: false),
     ];
     final s = _session(questions: [_mc(1), _mc(2), _mc(3)], answers: answers);
@@ -225,14 +243,15 @@ void main() {
 
   test('breakdownByType tracks totals and correct per type', () {
     final answers = [
-      const TestAnswer(questionIndex: 0, userAnswer: 'meaning1', isCorrect: true),
+      const TestAnswer(
+        questionIndex: 0,
+        userAnswer: 'meaning1',
+        isCorrect: true,
+      ),
       const TestAnswer(questionIndex: 1, userAnswer: 'true', isCorrect: true),
       const TestAnswer(questionIndex: 2, userAnswer: 'wrong', isCorrect: false),
     ];
-    final s = _session(
-      questions: [_mc(1), _tf(2), _mc(3)],
-      answers: answers,
-    );
+    final s = _session(questions: [_mc(1), _tf(2), _mc(3)], answers: answers);
     final breakdown = s.breakdownByType;
     expect(breakdown[QuestionType.multipleChoice]!.total, 2);
     expect(breakdown[QuestionType.multipleChoice]!.correct, 1);

@@ -61,7 +61,8 @@
       "Skill(update-config)",
       "Skill(update-config:*)",
       "Bash(xargs wc:*)",
-      "Bash(git restore:*)"
+      "Bash(git restore:*)",
+      "mcp__plugin_playwright_playwright__browser_navigate"
     ]
   },
   "enabledPlugins": {

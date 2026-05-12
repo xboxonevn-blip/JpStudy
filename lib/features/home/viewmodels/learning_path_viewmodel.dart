@@ -77,7 +77,9 @@ class LearningPathViewModel extends Notifier<AsyncValue<List<Unit>>> {
           nodes.add(
             LessonNode(
               lesson: lesson,
-              status: isCompleted ? LessonStatus.completed : LessonStatus.available,
+              status: isCompleted
+                  ? LessonStatus.completed
+                  : LessonStatus.available,
               stars: isCompleted ? 3 : 0,
               progress: (stats == null || stats.termCount == 0)
                   ? 0.0

@@ -11,19 +11,19 @@ import 'package:jpstudy/features/flashcards/integration/flashcard_mode_integrati
 import 'package:shared_preferences/shared_preferences.dart';
 
 UserLessonTermData _term(int id, String term) => UserLessonTermData(
-      id: id,
-      lessonId: 1,
-      term: term,
-      reading: term,
-      definition: 'def$id',
-      definitionEn: 'en$id',
-      mnemonicVi: '',
-      mnemonicEn: '',
-      kanjiMeaning: '',
-      isStarred: false,
-      isLearned: false,
-      orderIndex: id,
-    );
+  id: id,
+  lessonId: 1,
+  term: term,
+  reading: term,
+  definition: 'def$id',
+  definitionEn: 'en$id',
+  mnemonicVi: '',
+  mnemonicEn: '',
+  kanjiMeaning: '',
+  isStarred: false,
+  isLearned: false,
+  orderIndex: id,
+);
 
 Widget _build(
   AsyncValue<List<UserLessonTermData>> termsValue, {
@@ -32,7 +32,9 @@ Widget _build(
   final args = LessonTermsArgs(1, level.shortLabel, 'Test Lesson');
   return ProviderScope(
     overrides: [
-      appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(AppLanguage.en),
+      ),
       studyLevelProvider.overrideWith((ref) => level),
       lessonTermsProvider(args).overrideWith((ref) async {
         return termsValue.when(

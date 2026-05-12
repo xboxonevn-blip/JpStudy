@@ -596,9 +596,7 @@ class _FeedbackDialogState extends State<_FeedbackDialog> {
             if (text.isEmpty) {
               if (context.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(_feedbackDialogEmptyHint(language)),
-                  ),
+                  SnackBar(content: Text(_feedbackDialogEmptyHint(language))),
                 );
               }
               return;

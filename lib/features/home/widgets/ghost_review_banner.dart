@@ -163,20 +163,18 @@ class GhostReviewBanner extends ConsumerWidget {
                     ),
                   ),
                 ),
-              if (grammarCount > 0 && vocabCount > 0)
-                const SizedBox(width: 8),
+              if (grammarCount > 0 && vocabCount > 0) const SizedBox(width: 8),
               if (vocabCount > 0)
                 Expanded(
                   child: FilledButton.icon(
                     onPressed: vocabGhosts.isEmpty
                         ? null
                         : () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (_) => VocabGhostReviewScreen(
-                                  items: vocabGhosts,
-                                ),
-                              ),
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  VocabGhostReviewScreen(items: vocabGhosts),
                             ),
+                          ),
                     icon: const Icon(Icons.translate_rounded, size: 18),
                     label: Text(
                       'Vocab ($vocabCount)',
@@ -201,5 +199,3 @@ class GhostReviewBanner extends ConsumerWidget {
     );
   }
 }
-
-

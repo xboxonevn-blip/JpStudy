@@ -17,11 +17,9 @@ void main() {
       return ProviderScope(
         overrides: [
           appLanguageProvider.overrideWith(
-            (ref) => AppLanguage.en,
+            (ref) => AppLanguageController.test(AppLanguage.en),
           ),
-          studyLevelProvider.overrideWith(
-            (ref) => null,
-          ),
+          studyLevelProvider.overrideWith((ref) => null),
           progressSummaryProvider.overrideWith(
             (_) async => ProgressSummary(
               totalXp: 0,
@@ -34,21 +32,14 @@ void main() {
               totalQuestions: 0,
             ),
           ),
-          reviewHistoryProvider.overrideWith(
-            (_) async => <ReviewDaySummary>[],
-          ),
+          reviewHistoryProvider.overrideWith((_) async => <ReviewDaySummary>[]),
           activityCalendarProvider.overrideWith(
             (_) async => <ReviewDaySummary>[],
           ),
-          attemptHistoryProvider.overrideWith(
-            (_) async => <AttemptSummary>[],
-          ),
+          attemptHistoryProvider.overrideWith((_) async => <AttemptSummary>[]),
           srsRetentionProvider.overrideWith(
-            (_) async => const SrsStageBreakdown(
-              learning: 0,
-              young: 0,
-              mature: 0,
-            ),
+            (_) async =>
+                const SrsStageBreakdown(learning: 0, young: 0, mature: 0),
           ),
           weaknessRadarProvider.overrideWith((_) async => const []),
           masterySnapshotProvider.overrideWith(
@@ -65,9 +56,7 @@ void main() {
             ),
           ),
         ],
-        child: const MaterialApp(
-          home: ProgressScreen(),
-        ),
+        child: const MaterialApp(home: ProgressScreen()),
       );
     }
 
@@ -81,14 +70,13 @@ void main() {
       },
     );
 
-    testWidgets(
-      'shows streak count in bottom row for a 7-day streak',
-      (tester) async {
-        await tester.pumpWidget(buildSubject(streak: 7));
-        await tester.pumpAndSettle();
+    testWidgets('shows streak count in bottom row for a 7-day streak', (
+      tester,
+    ) async {
+      await tester.pumpWidget(buildSubject(streak: 7));
+      await tester.pumpAndSettle();
 
-        expect(find.text('7-day streak'), findsOneWidget);
-      },
-    );
+      expect(find.text('7-day streak'), findsOneWidget);
+    });
   });
 }

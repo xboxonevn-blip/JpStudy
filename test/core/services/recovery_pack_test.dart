@@ -65,16 +65,18 @@ void main() {
         expect(RecoveryPack.fromJson(json), isNull);
       });
 
-      test('fromJson returns null when createdAt is not a valid date string',
-          () {
-        final json = <String, dynamic>{
-          'source': 'exam',
-          'lessonTitle': 'Title',
-          'termIds': [1],
-          'createdAt': 'not_a_date',
-        };
-        expect(RecoveryPack.fromJson(json), isNull);
-      });
+      test(
+        'fromJson returns null when createdAt is not a valid date string',
+        () {
+          final json = <String, dynamic>{
+            'source': 'exam',
+            'lessonTitle': 'Title',
+            'termIds': [1],
+            'createdAt': 'not_a_date',
+          };
+          expect(RecoveryPack.fromJson(json), isNull);
+        },
+      );
 
       test('fromJson falls back to "exam" when source is null', () {
         final json = <String, dynamic>{
@@ -88,18 +90,20 @@ void main() {
         expect(pack!.source, 'exam');
       });
 
-      test('fromJson falls back to "Recovery Pack" when lessonTitle is null',
-          () {
-        final json = <String, dynamic>{
-          'source': 'test',
-          'lessonTitle': null,
-          'termIds': [5],
-          'createdAt': DateTime.now().toIso8601String(),
-        };
-        final pack = RecoveryPack.fromJson(json);
-        expect(pack, isNotNull);
-        expect(pack!.lessonTitle, 'Recovery Pack');
-      });
+      test(
+        'fromJson falls back to "Recovery Pack" when lessonTitle is null',
+        () {
+          final json = <String, dynamic>{
+            'source': 'test',
+            'lessonTitle': null,
+            'termIds': [5],
+            'createdAt': DateTime.now().toIso8601String(),
+          };
+          final pack = RecoveryPack.fromJson(json);
+          expect(pack, isNotNull);
+          expect(pack!.lessonTitle, 'Recovery Pack');
+        },
+      );
 
       test('fromJson ignores non-numeric entries in termIds list', () {
         final json = <String, dynamic>{
@@ -155,8 +159,9 @@ void main() {
           lessonTitle: 'Title',
           termIds: [1],
           // Slightly beyond 2 days to be definitively stale
-          createdAt:
-              DateTime.now().subtract(const Duration(days: 2, minutes: 1)),
+          createdAt: DateTime.now().subtract(
+            const Duration(days: 2, minutes: 1),
+          ),
         );
         expect(pack.isFresh, isFalse);
       });

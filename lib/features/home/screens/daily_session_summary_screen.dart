@@ -33,7 +33,8 @@ class DailySessionSummaryScreen extends ConsumerWidget {
     final totalDue = vocabDue + grammarDue + kanjiDue;
     final progress = ref.watch(dailySessionProgressProvider).value;
     final coachPlan = ref.watch(coachSessionPlanProvider);
-    final percent = progress?.completionPercent(
+    final percent =
+        progress?.completionPercent(
           step1Done: totalDue == 0,
           step2Done: totalFix == 0,
         ) ??
@@ -248,5 +249,3 @@ class _SummaryItem extends StatelessWidget {
     );
   }
 }
-
-

@@ -13,19 +13,27 @@ import 'package:jpstudy/features/learn/services/learn_session_service.dart';
 // ── Fixtures ─────────────────────────────────────────────────
 
 Question _mcQuestion(int id) => Question(
-  id: 'q$id', type: QuestionType.multipleChoice,
+  id: 'q$id',
+  type: QuestionType.multipleChoice,
   targetItem: VocabItem(id: id, term: '水$id', meaning: 'm$id', level: 'N5'),
-  questionText: 'Q$id?', correctAnswer: 'a$id',
+  questionText: 'Q$id?',
+  correctAnswer: 'a$id',
 );
 
 QuestionResult _correctResult(Question q) => QuestionResult(
-  question: q, userAnswer: q.correctAnswer, isCorrect: true,
-  timeTaken: const Duration(seconds: 5), answeredAt: DateTime(2024, 1, 1),
+  question: q,
+  userAnswer: q.correctAnswer,
+  isCorrect: true,
+  timeTaken: const Duration(seconds: 5),
+  answeredAt: DateTime(2024, 1, 1),
 );
 
 QuestionResult _wrongResult(Question q) => QuestionResult(
-  question: q, userAnswer: 'wrong', isCorrect: false,
-  timeTaken: const Duration(seconds: 5), answeredAt: DateTime(2024, 1, 1),
+  question: q,
+  userAnswer: 'wrong',
+  isCorrect: false,
+  timeTaken: const Duration(seconds: 5),
+  answeredAt: DateTime(2024, 1, 1),
 );
 
 /// Build a completed domain session with the given question count and correct count.
@@ -40,7 +48,13 @@ domain.LearnSession _buildSession({
     sessionId: 'sess-${DateTime.now().microsecondsSinceEpoch}',
     lessonId: 1,
     startedAt: DateTime(2024, 1, 1, 10, 0),
-    completedAt: DateTime(2024, 1, 1, 10, 0).add(totalTime ?? const Duration(minutes: 10)),
+    completedAt: DateTime(
+      2024,
+      1,
+      1,
+      10,
+      0,
+    ).add(totalTime ?? const Duration(minutes: 10)),
     questions: questions,
   );
 
@@ -116,7 +130,9 @@ void main() {
     });
 
     test('progress increases within level', () {
-      final info = LevelCalculator.calculate(175); // halfway through L2 (100-250)
+      final info = LevelCalculator.calculate(
+        175,
+      ); // halfway through L2 (100-250)
       expect(info.progress, closeTo(0.5, 0.01));
     });
 
@@ -204,18 +220,21 @@ void main() {
       expect(types, isNot(contains('speedDemon')));
     });
 
-    test('awards masteryComplete when all terms mastered and >= 10 questions', () async {
-      final session = _buildSession(
-        questionCount: 10,
-        correctCount: 10,
-        allMastered: true,
-      );
-      await service.saveSession(session);
+    test(
+      'awards masteryComplete when all terms mastered and >= 10 questions',
+      () async {
+        final session = _buildSession(
+          questionCount: 10,
+          correctCount: 10,
+          allMastered: true,
+        );
+        await service.saveSession(session);
 
-      final achievements = await achievementDao.getAchievements();
-      final types = achievements.map((a) => a.type).toList();
-      expect(types, contains('masteryComplete'));
-    });
+        final achievements = await achievementDao.getAchievements();
+        final types = achievements.map((a) => a.type).toList();
+        expect(types, contains('masteryComplete'));
+      },
+    );
 
     test('no masteryComplete when terms not mastered', () async {
       // Only 1 correct per term → not mastered
@@ -262,7 +281,10 @@ void main() {
 
       final achievements = await achievementDao.getAchievements();
       final types = achievements.map((a) => a.type).toSet();
-      expect(types, containsAll(['speedDemon', 'masteryComplete', 'firstLesson']));
+      expect(
+        types,
+        containsAll(['speedDemon', 'masteryComplete', 'firstLesson']),
+      );
     });
   });
 }

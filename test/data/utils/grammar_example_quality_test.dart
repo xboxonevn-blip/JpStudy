@@ -71,38 +71,35 @@ void main() {
       expect(assessment.notes, contains('prompt_falls_back_to_source'));
     });
 
-    test('supports broader negative transformations for plain and te-iru endings', () {
-      expect(
-        GrammarExampleQualityAssessor.transformToNegative(
-          '毎朝散歩することにしている。',
-        ),
-        '毎朝散歩することにしていない。',
-      );
-      expect(
-        GrammarExampleQualityAssessor.transformToNegative('明日ビザを取りに行く。'),
-        '明日ビザを取りに行かない。',
-      );
-      expect(
-        GrammarExampleQualityAssessor.transformToNegative('部屋は静かだ。'),
-        '部屋は静かではない。',
-      );
-      expect(
-        GrammarExampleQualityAssessor.transformToNegative('この道は危ない。'),
-        'この道は危なくない。',
-      );
-    });
+    test(
+      'supports broader negative transformations for plain and te-iru endings',
+      () {
+        expect(
+          GrammarExampleQualityAssessor.transformToNegative('毎朝散歩することにしている。'),
+          '毎朝散歩することにしていない。',
+        );
+        expect(
+          GrammarExampleQualityAssessor.transformToNegative('明日ビザを取りに行く。'),
+          '明日ビザを取りに行かない。',
+        );
+        expect(
+          GrammarExampleQualityAssessor.transformToNegative('部屋は静かだ。'),
+          '部屋は静かではない。',
+        );
+        expect(
+          GrammarExampleQualityAssessor.transformToNegative('この道は危ない。'),
+          'この道は危なくない。',
+        );
+      },
+    );
 
     test('does not transform already-negative or request-like statements', () {
       expect(
-        GrammarExampleQualityAssessor.transformToNegative(
-          'あの人が約束を忘れるはずがない。',
-        ),
+        GrammarExampleQualityAssessor.transformToNegative('あの人が約束を忘れるはずがない。'),
         isNull,
       );
       expect(
-        GrammarExampleQualityAssessor.transformToNegative(
-          'ここに名前を書いてください。',
-        ),
+        GrammarExampleQualityAssessor.transformToNegative('ここに名前を書いてください。'),
         isNull,
       );
     });

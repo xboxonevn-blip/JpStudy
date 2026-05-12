@@ -6,26 +6,37 @@ import 'package:jpstudy/features/learn/models/question_type.dart';
 // ── Helpers ───────────────────────────────────────────────────
 
 const _vocab = VocabItem(
-  id: 1, term: '水', reading: 'みず', meaning: 'nước', meaningEn: 'water', level: 'N5',
+  id: 1,
+  term: '水',
+  reading: 'みず',
+  meaning: 'nước',
+  meaningEn: 'water',
+  level: 'N5',
 );
 
 Question _mc(String correctAnswer, {List<String>? options}) => Question(
-  id: 'q', type: QuestionType.multipleChoice,
-  targetItem: _vocab, questionText: 'Q?',
+  id: 'q',
+  type: QuestionType.multipleChoice,
+  targetItem: _vocab,
+  questionText: 'Q?',
   correctAnswer: correctAnswer,
   options: options ?? [correctAnswer, 'wrong'],
 );
 
 Question _tf({required bool isTrue}) => Question(
-  id: 'q', type: QuestionType.trueFalse,
-  targetItem: _vocab, questionText: '水 means water',
+  id: 'q',
+  type: QuestionType.trueFalse,
+  targetItem: _vocab,
+  questionText: '水 means water',
   correctAnswer: isTrue ? 'true' : 'false',
   isStatementTrue: isTrue,
 );
 
 Question _fb(String correctAnswer) => Question(
-  id: 'q', type: QuestionType.fillBlank,
-  targetItem: _vocab, questionText: 'Fill in: ___',
+  id: 'q',
+  type: QuestionType.fillBlank,
+  targetItem: _vocab,
+  questionText: 'Fill in: ___',
   correctAnswer: correctAnswer,
 );
 

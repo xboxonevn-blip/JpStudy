@@ -14,26 +14,29 @@ void main() {
       expect(restored, plaintext);
     });
 
-    test('decrypt with wrong passphrase throws BackupDecryptionException',
-        () async {
-      final block = await BackupEncryption.encrypt(plaintext, passphrase);
-      expect(
-        () => BackupEncryption.decrypt(block, 'wrong-passphrase'),
-        throwsA(isA<BackupDecryptionException>()),
-      );
-    });
+    test(
+      'decrypt with wrong passphrase throws BackupDecryptionException',
+      () async {
+        final block = await BackupEncryption.encrypt(plaintext, passphrase);
+        expect(
+          () => BackupEncryption.decrypt(block, 'wrong-passphrase'),
+          throwsA(isA<BackupDecryptionException>()),
+        );
+      },
+    );
 
-    test('two encrypts of same plaintext produce different ciphertext',
-        () async {
-      final first = await BackupEncryption.encrypt(plaintext, passphrase);
-      final second = await BackupEncryption.encrypt(plaintext, passphrase);
-      expect(first['ciphertext'], isNot(second['ciphertext']));
-      expect(first['nonce'], isNot(second['nonce']));
-      expect(first['salt'], isNot(second['salt']));
-    });
+    test(
+      'two encrypts of same plaintext produce different ciphertext',
+      () async {
+        final first = await BackupEncryption.encrypt(plaintext, passphrase);
+        final second = await BackupEncryption.encrypt(plaintext, passphrase);
+        expect(first['ciphertext'], isNot(second['ciphertext']));
+        expect(first['nonce'], isNot(second['nonce']));
+        expect(first['salt'], isNot(second['salt']));
+      },
+    );
 
-    test('metadata block carries all required identification fields',
-        () async {
+    test('metadata block carries all required identification fields', () async {
       final block = await BackupEncryption.encrypt(plaintext, passphrase);
       expect(block['algorithm'], BackupEncryption.algorithm);
       expect(block['kdf'], BackupEncryption.kdf);
@@ -50,8 +53,7 @@ void main() {
       );
     });
 
-    test('decrypt with empty passphrase reports passphrase-required',
-        () async {
+    test('decrypt with empty passphrase reports passphrase-required', () async {
       final block = await BackupEncryption.encrypt(plaintext, passphrase);
       try {
         await BackupEncryption.decrypt(block, '');
@@ -66,10 +68,7 @@ void main() {
       final cipher = base64Decode(block['ciphertext'] as String);
       // Flip one byte in the middle of the ciphertext.
       cipher[cipher.length ~/ 2] ^= 0xFF;
-      final tampered = {
-        ...block,
-        'ciphertext': base64Encode(cipher),
-      };
+      final tampered = {...block, 'ciphertext': base64Encode(cipher)};
       try {
         await BackupEncryption.decrypt(tampered, passphrase);
         fail('expected BackupDecryptionException');

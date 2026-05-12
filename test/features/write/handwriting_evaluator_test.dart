@@ -19,15 +19,15 @@ List<List<Offset>> _horizontalStrokes(int count, {double startY = 100}) {
 
 /// Single diagonal stroke centered in a 200×200 canvas.
 List<List<Offset>> _diagonalStroke() => [
-      [const Offset(40, 40), const Offset(160, 160)],
-    ];
+  [const Offset(40, 40), const Offset(160, 160)],
+];
 
 /// Two vertical strokes that normalize to exactly (0,0)→(0,1) and (1,0)→(1,1).
 /// Use with _twoStrokeManualTemplate() on canvas Size(300,300).
 List<List<Offset>> _perfectTwoStrokeStrokes() => [
-      [const Offset(50, 50), const Offset(50, 250)],
-      [const Offset(250, 50), const Offset(250, 250)],
-    ];
+  [const Offset(50, 50), const Offset(50, 250)],
+  [const Offset(250, 50), const Offset(250, 250)],
+];
 
 KanjiStrokeTemplate _twoStrokeManualTemplate({String character = '門'}) =>
     KanjiStrokeTemplate(
@@ -42,22 +42,20 @@ KanjiStrokeTemplate _twoStrokeManualTemplate({String character = '門'}) =>
     );
 
 KanjiStrokeTemplate _oneStrokeTemplate(String quality) => KanjiStrokeTemplate(
-      character: '一',
-      quality: quality,
-      strokes: const [
-        StrokeTemplate(start: Point(0.0, 0.0), end: Point(1.0, 1.0)),
-      ],
-    );
+  character: '一',
+  quality: quality,
+  strokes: const [StrokeTemplate(start: Point(0.0, 0.0), end: Point(1.0, 1.0))],
+);
 
 /// Perfect diagonal — normalized start=(0,0), end=(1,1) matches template.
 List<List<Offset>> _perfectDiagonalStroke() => [
-      [const Offset(50, 50), const Offset(250, 250)],
-    ];
+  [const Offset(50, 50), const Offset(250, 250)],
+];
 
 /// Reversed diagonal — normalized start=(0,1), end=(1,0), opposite of template.
 List<List<Offset>> _reversedDiagonalStroke() => [
-      [const Offset(50, 250), const Offset(250, 50)],
-    ];
+  [const Offset(50, 250), const Offset(250, 50)],
+];
 
 // ---------------------------------------------------------------------------
 // Tests
@@ -102,16 +100,19 @@ void main() {
       );
     });
 
-    test('1 over with tolerance=0 (expected=5) returns 0.0 — ×2 over-penalty', () {
-      // effectiveDelta = 1×2 = 2, denom = 1 → 1−2 = clamped 0
-      expect(
-        HandwritingEvaluator.strokeScoreForCounts(
-          drawnStrokes: 6,
-          expectedStrokes: 5,
-        ),
-        0.0,
-      );
-    });
+    test(
+      '1 over with tolerance=0 (expected=5) returns 0.0 — ×2 over-penalty',
+      () {
+        // effectiveDelta = 1×2 = 2, denom = 1 → 1−2 = clamped 0
+        expect(
+          HandwritingEvaluator.strokeScoreForCounts(
+            drawnStrokes: 6,
+            expectedStrokes: 5,
+          ),
+          0.0,
+        );
+      },
+    );
 
     test('1 under with tolerance=1 (expected=6) returns 0.5', () {
       // effectiveDelta = 1, denom = 2 → 1−0.5 = 0.5
@@ -124,16 +125,19 @@ void main() {
       );
     });
 
-    test('1 over with tolerance=1 (expected=6) returns 0.0 — ×2 over-penalty', () {
-      // effectiveDelta = 1×2 = 2, denom = 2 → 1−1 = 0
-      expect(
-        HandwritingEvaluator.strokeScoreForCounts(
-          drawnStrokes: 7,
-          expectedStrokes: 6,
-        ),
-        0.0,
-      );
-    });
+    test(
+      '1 over with tolerance=1 (expected=6) returns 0.0 — ×2 over-penalty',
+      () {
+        // effectiveDelta = 1×2 = 2, denom = 2 → 1−1 = 0
+        expect(
+          HandwritingEvaluator.strokeScoreForCounts(
+            drawnStrokes: 7,
+            expectedStrokes: 6,
+          ),
+          0.0,
+        );
+      },
+    );
 
     test('2 under with tolerance=2 (expected=12) returns ~0.333', () {
       // effectiveDelta = 2, denom = 3 → 1−2/3 ≈ 0.333
@@ -227,7 +231,9 @@ void main() {
 
     test('drawing only 1 stroke for a 2-stroke kanji is rejected', () {
       final result = HandwritingEvaluator.evaluate(
-        strokes: [[const Offset(50, 50), const Offset(50, 250)]],
+        strokes: [
+          [const Offset(50, 50), const Offset(50, 250)],
+        ],
         expectedStrokes: 2,
         canvasSize: canvas,
         showGuide: false,
@@ -238,27 +244,30 @@ void main() {
       expect(result.strokeScore, 0.0);
     });
 
-    test('legacy and v2 scoring both accept perfect strokes but produce different scores', () {
-      final v2 = HandwritingEvaluator.evaluate(
-        strokes: _perfectTwoStrokeStrokes(),
-        expectedStrokes: 2,
-        canvasSize: canvas,
-        showGuide: false,
-        template: _twoStrokeManualTemplate(),
-        scoringVersion: HandwritingScoringVersion.v2,
-      );
-      final legacy = HandwritingEvaluator.evaluate(
-        strokes: _perfectTwoStrokeStrokes(),
-        expectedStrokes: 2,
-        canvasSize: canvas,
-        showGuide: false,
-        template: _twoStrokeManualTemplate(),
-        scoringVersion: HandwritingScoringVersion.legacy,
-      );
-      expect(v2.isCorrect, isTrue);
-      expect(legacy.isCorrect, isTrue);
-      expect(v2.score, isNot(equals(legacy.score)));
-    });
+    test(
+      'legacy and v2 scoring both accept perfect strokes but produce different scores',
+      () {
+        final v2 = HandwritingEvaluator.evaluate(
+          strokes: _perfectTwoStrokeStrokes(),
+          expectedStrokes: 2,
+          canvasSize: canvas,
+          showGuide: false,
+          template: _twoStrokeManualTemplate(),
+          scoringVersion: HandwritingScoringVersion.v2,
+        );
+        final legacy = HandwritingEvaluator.evaluate(
+          strokes: _perfectTwoStrokeStrokes(),
+          expectedStrokes: 2,
+          canvasSize: canvas,
+          showGuide: false,
+          template: _twoStrokeManualTemplate(),
+          scoringVersion: HandwritingScoringVersion.legacy,
+        );
+        expect(v2.isCorrect, isTrue);
+        expect(legacy.isCorrect, isTrue);
+        expect(v2.score, isNot(equals(legacy.score)));
+      },
+    );
   });
 
   group('simple template gate — 1-stroke template, unguided', () {
@@ -280,20 +289,23 @@ void main() {
         );
       });
 
-      test('$quality: reversed diagonal fails simple gate (templateScore≈0.574)', () {
-        final result = HandwritingEvaluator.evaluate(
-          strokes: _reversedDiagonalStroke(),
-          expectedStrokes: 1,
-          canvasSize: canvas,
-          showGuide: false,
-          template: _oneStrokeTemplate(quality),
-        );
-        expect(
-          result.isCorrect,
-          isFalse,
-          reason: '$quality reversed diagonal should fail simple gate',
-        );
-      });
+      test(
+        '$quality: reversed diagonal fails simple gate (templateScore≈0.574)',
+        () {
+          final result = HandwritingEvaluator.evaluate(
+            strokes: _reversedDiagonalStroke(),
+            expectedStrokes: 1,
+            canvasSize: canvas,
+            showGuide: false,
+            template: _oneStrokeTemplate(quality),
+          );
+          expect(
+            result.isCorrect,
+            isFalse,
+            reason: '$quality reversed diagonal should fail simple gate',
+          );
+        },
+      );
     }
 
     test('gate is skipped when showGuide=true — no crash, result returned', () {

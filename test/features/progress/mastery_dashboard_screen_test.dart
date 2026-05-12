@@ -59,7 +59,9 @@ Widget _buildScreen({
   return ProviderScope(
     retry: (retryCount, error) => null,
     overrides: [
-      appLanguageProvider.overrideWith((ref) => language),
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(language),
+      ),
       masterySnapshotProvider.overrideWith((_) async {
         if (error != null) throw error;
         return snapshot ?? _kSnapshot;
@@ -85,8 +87,9 @@ void main() {
     SharedPreferences.setMockInitialValues({});
   });
 
-  testWidgets('renders app bar title and hero card with overall stats',
-      (tester) async {
+  testWidgets('renders app bar title and hero card with overall stats', (
+    tester,
+  ) async {
     await tester.pumpWidget(_buildScreen());
     await _pump(tester);
 
@@ -98,13 +101,17 @@ void main() {
     expect(find.text('37%'), findsWidgets);
   });
 
-  testWidgets('overall progress rings show studied/mastered/total values',
-      (tester) async {
+  testWidgets('overall progress rings show studied/mastered/total values', (
+    tester,
+  ) async {
     await tester.pumpWidget(_buildScreen());
     await _pump(tester);
 
     expect(find.text('150'), findsOneWidget); // Studied ring value
-    expect(find.text('85'), findsWidgets);   // Mastered ring value (also in level card)
+    expect(
+      find.text('85'),
+      findsWidgets,
+    ); // Mastered ring value (also in level card)
     expect(find.text('230'), findsOneWidget); // Total ring value
     expect(find.text('Studied'), findsOneWidget);
     expect(find.text('Mastered'), findsOneWidget);
@@ -131,9 +138,7 @@ void main() {
   });
 
   testWidgets('error state renders friendly error widget', (tester) async {
-    await tester.pumpWidget(
-      _buildScreen(error: Exception('DB failure')),
-    );
+    await tester.pumpWidget(_buildScreen(error: Exception('DB failure')));
     await _pump(tester);
 
     // ErrorStateWidget maps unknown errors to the generic label
@@ -157,4 +162,3 @@ void main() {
     expect(find.text('JLPT 習熟度'), findsWidgets);
   });
 }
-

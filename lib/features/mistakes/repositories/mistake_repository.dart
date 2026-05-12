@@ -90,7 +90,8 @@ class MistakeRepository {
 
   /// Stream of mistake counts grouped by type — (vocab, grammar, kanji, total).
   /// Uses a GROUP BY query; only 3 rows are transferred regardless of deck size.
-  Stream<({int vocab, int grammar, int kanji, int total})> watchMistakeCounts() {
+  Stream<({int vocab, int grammar, int kanji, int total})>
+  watchMistakeCounts() {
     return _dao.watchMistakeCounts();
   }
 

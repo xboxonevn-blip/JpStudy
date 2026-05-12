@@ -10,10 +10,7 @@ void main() {
         MaterialApp(
           theme: ThemeData.light(),
           home: Scaffold(
-            body: ClayButton(
-              label: 'Test Button',
-              onPressed: () {},
-            ),
+            body: ClayButton(label: 'Test Button', onPressed: () {}),
           ),
         ),
       );
@@ -45,11 +42,7 @@ void main() {
         MaterialApp(
           theme: ThemeData.light(),
           home: Scaffold(
-            body: ClayButton(
-              label: 'Save',
-              icon: Icons.save,
-              onPressed: () {},
-            ),
+            body: ClayButton(label: 'Save', icon: Icons.save, onPressed: () {}),
           ),
         ),
       );
@@ -64,10 +57,7 @@ void main() {
         MaterialApp(
           theme: ThemeData.light(),
           home: Scaffold(
-            body: ClayButton(
-              label: 'Tap me',
-              onPressed: () => tapped++,
-            ),
+            body: ClayButton(label: 'Tap me', onPressed: () => tapped++),
           ),
         ),
       );
@@ -82,12 +72,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData.light(),
-          home: Scaffold(
-            body: ClayButton(
-              label: 'Disabled',
-              onPressed: null,
-            ),
-          ),
+          home: Scaffold(body: ClayButton(label: 'Disabled', onPressed: null)),
         ),
       );
 
@@ -96,18 +81,16 @@ void main() {
       expect(tapped, 0);
     });
 
-    testWidgets('semantics exposes merged label and disabled state',
-        (tester) async {
+    testWidgets('semantics exposes merged label and disabled state', (
+      tester,
+    ) async {
       final semantics = tester.ensureSemantics();
 
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData.light(),
           home: const Scaffold(
-            body: ClayButton(
-              label: 'Semantic Label',
-              onPressed: null,
-            ),
+            body: ClayButton(label: 'Semantic Label', onPressed: null),
           ),
         ),
       );
@@ -129,20 +112,18 @@ void main() {
         MaterialApp(
           theme: ThemeData.light(),
           home: const Scaffold(
-            body: ClayButton(
-              label: 'Sized',
-              width: 180,
-              height: 56,
-            ),
+            body: ClayButton(label: 'Sized', width: 180, height: 56),
           ),
         ),
       );
 
       final container = tester.widget<Container>(
-        find.descendant(
-          of: find.byType(AnimatedContainer),
-          matching: find.byType(Container),
-        ).first,
+        find
+            .descendant(
+              of: find.byType(AnimatedContainer),
+              matching: find.byType(Container),
+            )
+            .first,
       );
       expect(container.constraints, isNull);
     });
@@ -153,11 +134,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData.light(),
-          home: const Scaffold(
-            body: ClayCard(
-              child: Text('Card Content'),
-            ),
-          ),
+          home: const Scaffold(body: ClayCard(child: Text('Card Content'))),
         ),
       );
 
@@ -202,10 +179,12 @@ void main() {
       );
 
       final container = tester.widget<Container>(
-        find.descendant(
-          of: find.byType(ClayCard),
-          matching: find.byType(Container),
-        ).first,
+        find
+            .descendant(
+              of: find.byType(ClayCard),
+              matching: find.byType(Container),
+            )
+            .first,
       );
       expect(container.padding, customPadding);
       final decoration = container.decoration as BoxDecoration;
@@ -218,16 +197,11 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData.light(),
-          home: const Scaffold(
-            body: ClayCard(child: Text('Semantic Card')),
-          ),
+          home: const Scaffold(body: ClayCard(child: Text('Semantic Card'))),
         ),
       );
 
-      expect(
-        tester.getSemantics(find.byType(ClayCard)),
-        isNotNull,
-      );
+      expect(tester.getSemantics(find.byType(ClayCard)), isNotNull);
       semantics.dispose();
     });
   });

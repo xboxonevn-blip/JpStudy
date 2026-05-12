@@ -29,10 +29,12 @@ void main() {
     });
 
     test('serializes nested maps and lists', () {
-      const ctx = MistakeContext(extra: {
-        'attempts': [1, 2, 3],
-        'meta': {'kana': 'こんにちは'},
-      });
+      const ctx = MistakeContext(
+        extra: {
+          'attempts': [1, 2, 3],
+          'meta': {'kana': 'こんにちは'},
+        },
+      );
       // Decode round-trip — JSON key order is implementation-defined but
       // the structure must be intact.
       final decoded = jsonDecode(ctx.extraJson!) as Map<String, dynamic>;

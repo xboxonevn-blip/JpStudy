@@ -89,7 +89,9 @@ Widget buildScreen({
   KanjiPracticeArgs? launchArgs,
 }) => ProviderScope(
   overrides: [
-    appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+    appLanguageProvider.overrideWith(
+      (ref) => AppLanguageController.test(AppLanguage.en),
+    ),
     studyLevelProvider.overrideWith((ref) => level),
     lessonRepositoryProvider.overrideWithValue(repo),
     dashboardProvider.overrideWith(
@@ -397,7 +399,9 @@ void main() {
 
       final container = ProviderContainer(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
           lessonRepositoryProvider.overrideWithValue(repo),
           dashboardProvider.overrideWith(
             (ref) => Stream.value(

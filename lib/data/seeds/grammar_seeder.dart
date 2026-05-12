@@ -13,7 +13,7 @@ typedef _LessonData = ({int lessonId, List<dynamic> def, List<dynamic>? ex});
 class GrammarSeeder {
   final GrammarDao _dao;
 
-  // TÄƒng version nÃ y lÃªn khi thay Ä‘á»•i file JSON data
+  // Tăng version này lên khi thay đổi file JSON data
   static const int kGrammarDataVersion = 11;
   static const String kKeyGrammarVersion = 'grammar_data_version';
 
@@ -23,7 +23,7 @@ class GrammarSeeder {
     final prefs = await SharedPreferences.getInstance();
     final currentVersion = prefs.getInt(kKeyGrammarVersion) ?? 0;
 
-    // Smart Seeding: Chá»‰ cháº¡y náº¿u version thay Ä‘á»•i hoáº·c chÆ°a cÃ³ data
+    // Smart Seeding: Chỉ chạy nếu version thay đổi hoặc chưa có data
     if (currentVersion >= kGrammarDataVersion) {
       debugPrint(
         'âš¡ Skipping Grammar Seed: Data is up to date (v$currentVersion)',
@@ -44,7 +44,7 @@ class GrammarSeeder {
       _loadLevelJson('N1', 1, 25),
     ]);
 
-    // Cháº¡y trong transaction Ä‘á»ƒ Ä‘áº£m báº£o toÃ n váº¹n dá»¯ liá»‡u
+    // Chạy trong transaction để đảm bảo toàn vẹn dữ liệu
     await db.transaction(() async {
       await _seedLevelFromData('N5', allLevelData[0]);
       await _seedLevelFromData('N4', allLevelData[1]);
@@ -77,7 +77,7 @@ class GrammarSeeder {
     final exPath =
         'assets/data/content/grammar_examples/$ll/lesson_$lessonId.json';
 
-    // Fire both loads concurrently â€” they are completely independent.
+    // Fire both loads concurrently — they are completely independent.
     final defFuture = rootBundle
         .loadString(defPath)
         .then((s) => json.decode(s) as List<dynamic>);

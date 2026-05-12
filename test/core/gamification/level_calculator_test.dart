@@ -121,8 +121,11 @@ void main() {
     test('totalXp matches input', () {
       for (final xp in [0, 100, 500, 1000, 9999]) {
         final info = LevelCalculator.calculate(xp);
-        expect(info.totalXp, xp,
-            reason: 'totalXp should equal the input XP ($xp)');
+        expect(
+          info.totalXp,
+          xp,
+          reason: 'totalXp should equal the input XP ($xp)',
+        );
       }
     });
 
@@ -143,18 +146,18 @@ void main() {
     // -------------------------------------------------------------------------
 
     test('handles very high XP without throwing', () {
-      expect(
-        () => LevelCalculator.calculate(1000000),
-        returnsNormally,
-      );
+      expect(() => LevelCalculator.calculate(1000000), returnsNormally);
     });
 
     test('level increases monotonically as XP increases', () {
       int previousLevel = 0;
       for (var xp = 0; xp <= 5000; xp += 50) {
         final level = LevelCalculator.calculate(xp).level;
-        expect(level, greaterThanOrEqualTo(previousLevel),
-            reason: 'Level should not decrease at $xp XP');
+        expect(
+          level,
+          greaterThanOrEqualTo(previousLevel),
+          reason: 'Level should not decrease at $xp XP',
+        );
         previousLevel = level;
       }
     });

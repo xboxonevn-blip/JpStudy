@@ -42,9 +42,9 @@ final grammarGhostsProvider = FutureProvider<List<GrammarPointData>>((
 
   // Batch-fetch all examples in one query — avoids N*2 queries from Future.wait(getGrammarDetail).
   final pointIds = points.map((p) => p.id).toList();
-  final allExamples = await (repo.db.select(repo.db.grammarExamples)
-        ..where((tbl) => tbl.grammarId.isIn(pointIds)))
-      .get();
+  final allExamples = await (repo.db.select(
+    repo.db.grammarExamples,
+  )..where((tbl) => tbl.grammarId.isIn(pointIds))).get();
   final examplesByGrammarId = <int, List<GrammarExample>>{};
   for (final example in allExamples) {
     examplesByGrammarId.putIfAbsent(example.grammarId, () => []).add(example);

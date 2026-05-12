@@ -42,15 +42,21 @@ void main() {
       expect(v.displayMeaning(AppLanguage.en), 'kindergarten');
     });
 
-    test('English language falls back to VI meaning when meaningEn is null', () {
-      final v = item(meaning: 'Bệnh viện', meaningEn: null);
-      expect(v.displayMeaning(AppLanguage.en), 'Bệnh viện');
-    });
+    test(
+      'English language falls back to VI meaning when meaningEn is null',
+      () {
+        final v = item(meaning: 'Bệnh viện', meaningEn: null);
+        expect(v.displayMeaning(AppLanguage.en), 'Bệnh viện');
+      },
+    );
 
-    test('English language falls back to VI when meaningEn is empty string', () {
-      final v = item(meaning: 'Bệnh viện', meaningEn: '');
-      expect(v.displayMeaning(AppLanguage.en), 'Bệnh viện');
-    });
+    test(
+      'English language falls back to VI when meaningEn is empty string',
+      () {
+        final v = item(meaning: 'Bệnh viện', meaningEn: '');
+        expect(v.displayMeaning(AppLanguage.en), 'Bệnh viện');
+      },
+    );
 
     test('English language falls back when meaningEn is whitespace-only', () {
       // The implementation trims meaningEn before checking — confirm that
@@ -59,13 +65,16 @@ void main() {
       expect(v.displayMeaning(AppLanguage.en), 'Bệnh viện');
     });
 
-    test('Japanese language behaves like English (prefers EN, falls back to VI)', () {
-      final withEn = item(meaning: 'Bệnh viện', meaningEn: 'hospital');
-      expect(withEn.displayMeaning(AppLanguage.ja), 'hospital');
+    test(
+      'Japanese language behaves like English (prefers EN, falls back to VI)',
+      () {
+        final withEn = item(meaning: 'Bệnh viện', meaningEn: 'hospital');
+        expect(withEn.displayMeaning(AppLanguage.ja), 'hospital');
 
-      final noEn = item(meaning: 'Bệnh viện', meaningEn: null);
-      expect(noEn.displayMeaning(AppLanguage.ja), 'Bệnh viện');
-    });
+        final noEn = item(meaning: 'Bệnh viện', meaningEn: null);
+        expect(noEn.displayMeaning(AppLanguage.ja), 'Bệnh viện');
+      },
+    );
   });
 
   // ── displayMnemonic(language) ─────────────────────────────────────────────

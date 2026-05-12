@@ -49,7 +49,9 @@ Widget _buildScreen({
 }) {
   return ProviderScope(
     overrides: [
-      appLanguageProvider.overrideWith((ref) => language),
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(language),
+      ),
       studyLevelProvider.overrideWith(
         (ref) => null,
       ), // levelLabel defaults to 'N5'
@@ -89,7 +91,9 @@ Widget _buildRouterScreen({
 
   return ProviderScope(
     overrides: [
-      appLanguageProvider.overrideWith((ref) => language),
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(language),
+      ),
       studyLevelProvider.overrideWith((ref) => null),
       grammarPointsProvider('N5').overrideWith((_) async => points),
       grammarDueCountProvider.overrideWith((_) async => dueCount),

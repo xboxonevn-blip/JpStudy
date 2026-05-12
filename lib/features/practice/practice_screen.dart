@@ -331,7 +331,10 @@ class _StudyPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg),
-      decoration: HomeSurface.softPanel(radius: AppSpacing.radiusXxl, context: context),
+      decoration: HomeSurface.softPanel(
+        radius: AppSpacing.radiusXxl,
+        context: context,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -1484,5 +1487,3 @@ class _HeroStatChip extends StatelessWidget {
     );
   }
 }
-
-

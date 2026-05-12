@@ -57,7 +57,9 @@ final hajimeteChapterDueItemsProvider =
     ) async {
       final repo = ref.watch(lessonRepositoryProvider);
       final items = await ref.watch(hajimeteChapterItemsProvider(args).future);
-      final states = await repo.getSrsStatesForIds(items.map((item) => item.id).toList());
+      final states = await repo.getSrsStatesForIds(
+        items.map((item) => item.id).toList(),
+      );
       final now = DateTime.now();
       return items.where((item) {
         final state = states[item.id];
@@ -89,10 +91,10 @@ final hajimeteChapterUserTermsProvider =
     });
 
 final hajimeteKanjiChapterProvider =
-    FutureProvider.family<HajimeteKanjiChapterDetail?, HajimeteChapterDetailArgs>((
-      ref,
-      args,
-    ) {
+    FutureProvider.family<
+      HajimeteKanjiChapterDetail?,
+      HajimeteChapterDetailArgs
+    >((ref, args) {
       return loadHajimeteKanjiChapterDetail(args.levelCode, args.chapterId);
     });
 

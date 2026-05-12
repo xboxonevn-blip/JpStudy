@@ -48,7 +48,7 @@ final lessonTermsProvider =
         level: args.level,
         title: args.fallbackTitle,
       );
-      // Vocab and grammar seeding touch independent tables ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â run concurrently.
+      // Vocab and grammar seeding touch independent tables — run concurrently.
       await Future.wait([
         repo.seedTermsIfEmpty(args.lessonId, args.level),
         repo.seedGrammarIfEmpty(args.lessonId, args.level),
@@ -185,11 +185,13 @@ class WeekSummary {
     required this.totalReviewed,
     required this.accuracy,
     required this.daysStudied,
+    this.totalXp = 0,
   });
 
   final int totalReviewed;
-  final int accuracy; // percentage 0ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“100
+  final int accuracy; // percentage 0–100
   final int daysStudied;
+  final int totalXp;
 }
 
 final weekSummaryProvider = FutureProvider<WeekSummary>((ref) async {
@@ -201,6 +203,7 @@ final weekSummaryProvider = FutureProvider<WeekSummary>((ref) async {
   final cutoff = DateTime.now().subtract(const Duration(days: 7));
 
   final totalReviewed = history.fold(0, (s, d) => s + d.reviewed);
+  final totalXp = history.fold(0, (s, d) => s + d.xp);
   final daysStudied = history.where((d) => d.reviewed > 0).length;
 
   final weekAttempts = attempts
@@ -214,6 +217,7 @@ final weekSummaryProvider = FutureProvider<WeekSummary>((ref) async {
     totalReviewed: totalReviewed,
     accuracy: accuracy,
     daysStudied: daysStudied,
+    totalXp: totalXp,
   );
 });
 
@@ -439,6 +443,7 @@ class ReviewDaySummary {
     required this.hard,
     required this.good,
     required this.easy,
+    required this.xp,
   });
 
   final DateTime day;
@@ -447,6 +452,7 @@ class ReviewDaySummary {
   final int hard;
   final int good;
   final int easy;
+  final int xp;
 }
 
 class ProgressSummary {
@@ -476,11 +482,11 @@ class ProgressSummary {
 // to cache for the lifetime of the process.
 final _vocabCountCache = <String, int>{};
 final _kanjiCountCache = <String, int>{};
-// Cache keyed by "$level:$series:$start:$end" ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â lesson-range lists never change.
+// Cache keyed by "$level:$series:$start:$end" — lesson-range lists never change.
 final _vocabLessonRangeCache = <String, List<VocabItem>>{};
-// Full level+series vocab list cache ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â avoids re-mapping hundreds of DB rows.
+// Full level+series vocab list cache — avoids re-mapping hundreds of DB rows.
 final _vocabByLevelSeriesCache = <String, List<VocabItem>>{};
-// Full level kanji list cache ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â avoids re-fetching and re-mapping on every call.
+// Full level kanji list cache — avoids re-fetching and re-mapping on every call.
 final _kanjiByLevelCache = <String, List<KanjiItem>>{};
 
 class LessonRepository {
@@ -509,7 +515,7 @@ class LessonRepository {
   // Returns a map of lessonId -> {termCount, completedCount}
   Future<Map<int, LessonProgressStats>> getAllLessonProgress() async {
     // Single GROUP BY pass: COUNT(*) for total, SUM(CASE WHEN is_learned) for
-    // completed ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â replaces two separate aggregate queries on the same table.
+    // completed — replaces two separate aggregate queries on the same table.
     final rows = await _db
         .customSelect(
           'SELECT lesson_id, '
@@ -596,7 +602,7 @@ class LessonRepository {
     }
     final ids = lessons.map((lesson) => lesson.id).toList();
 
-    // Fire both aggregate queries concurrently ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â independent of each other.
+    // Fire both aggregate queries concurrently — independent of each other.
     // Single GROUP BY pass replaces loading full term rows for counting.
     final termCountsFuture = _db
         .customSelect(
@@ -646,7 +652,7 @@ class LessonRepository {
     return getVocabByLevelAndSeries(level, 'minna');
   }
 
-  /// COUNT(*) variant ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â use when only the number of terms is needed.
+  /// COUNT(*) variant — use when only the number of terms is needed.
   /// Avoids deserializing full vocab rows. Result is cached for the process
   /// lifetime since content DB data is read-only and never changes at runtime.
   Future<int> countVocabByLevelAndSeries(String level, String series) async {
@@ -845,7 +851,7 @@ class LessonRepository {
   }
 
   Future<int?> findNextToStudyLesson(String level) async {
-    // Single LEFT JOIN query with LIMIT 1 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â avoids fetching all lessons and
+    // Single LEFT JOIN query with LIMIT 1 — avoids fetching all lessons and
     // all lesson progress just to find the first incomplete one.
     final rows = await _db
         .customSelect(
@@ -931,14 +937,14 @@ class LessonRepository {
     required int endLesson,
   }) async {
     // Phase 1: ensure + seed each lesson sequentially (FK dependency within
-    // each lesson requires ordering: ensureLesson ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ seedTermsIfEmpty).
+    // each lesson requires ordering: ensureLesson â†’ seedTermsIfEmpty).
     for (int lessonId = startLesson; lessonId <= endLesson; lessonId++) {
       final title = await getLessonTitle(lessonId, 'Lesson $lessonId');
       await ensureLesson(lessonId: lessonId, level: level, title: title);
       await seedTermsIfEmpty(lessonId, level);
     }
 
-    // Phase 2: single bulk fetch for all lesson IDs ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â replaces N individual
+    // Phase 2: single bulk fetch for all lesson IDs — replaces N individual
     // fetchTerms(lessonId) calls with one WHERE lessonId IN (...) query.
     final lessonIds = List.generate(
       endLesson - startLesson + 1,
@@ -1043,15 +1049,14 @@ class LessonRepository {
     // Check if existing terms are the dummy ones and should be replaced
     final isDummy =
         existing.length == 2 &&
-        existing[0].term == 'ÃƒÂ¨Ã‚Â¦Ã¢â‚¬Â¹ÃƒÂ£Ã‚ÂÃ‚Â¾ÃƒÂ£Ã‚ÂÃ¢â€žÂ¢' &&
-        existing[1].term ==
-            'ÃƒÂ¦Ã…Â½Ã‚Â¢ÃƒÂ£Ã‚ÂÃ¢â‚¬â€ÃƒÂ£Ã‚ÂÃ‚Â¾ÃƒÂ£Ã‚ÂÃ¢â€žÂ¢';
+        existing[0].term == '見ます' &&
+        existing[1].term == '探します';
 
     if (existing.isNotEmpty && !isDummy) {
       // Try to backfill missing English without destructive reset.
       final missingEnglish = existing.any((t) => t.definitionEn.isEmpty);
       if (!missingEnglish) {
-        // All terms already have English definitions ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â nothing to do.
+        // All terms already have English definitions — nothing to do.
         return;
       }
 
@@ -1063,7 +1068,7 @@ class LessonRepository {
           refreshed.every((t) => t.definitionEn.isNotEmpty)) {
         return;
       }
-      // Backfill didn't fully succeed ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â data exists but some English still
+      // Backfill didn't fully succeed — data exists but some English still
       // missing; keep user data as-is rather than replacing.
       return;
     }
@@ -1383,7 +1388,7 @@ class LessonRepository {
       if (entries is! List) return const [];
 
       // Parse all entries synchronously, then resolve all HanViet lookups
-      // concurrently with Future.wait ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â HanVietLookup caches after first load
+      // concurrently with Future.wait — HanVietLookup caches after first load
       // and is concurrency-safe, so parallel resolution is correct here.
       final parsed =
           <
@@ -1479,7 +1484,7 @@ class LessonRepository {
       return const [];
     }
 
-    // Single batch query for all examples ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â replaces N individual round-trips
+    // Single batch query for all examples — replaces N individual round-trips
     // (N+1 pattern) with 2 total DB calls regardless of lesson size.
     final pointIds = points.map((p) => p.id).toList();
     final allExamples = await (_db.select(
@@ -1618,7 +1623,7 @@ class LessonRepository {
 
   Future<void> seedGrammarIfEmpty(int lessonId, String level) async {
     // If GrammarSeeder has already run at the current version, its data is
-    // authoritative and up-to-date ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â skip the resync check entirely.
+    // authoritative and up-to-date — skip the resync check entirely.
     // This also prevents the two concurrent paths (GrammarSeeder transaction
     // + seedGrammarIfEmpty) from racing on first launch.
     final prefs = await SharedPreferences.getInstance();
@@ -1695,7 +1700,7 @@ class LessonRepository {
       contentExamplesByPointId.putIfAbsent(ex.grammarPointId, () => []).add(ex);
     }
 
-    // Collect all app-side grammarIds for existing points ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â batch-delete their
+    // Collect all app-side grammarIds for existing points — batch-delete their
     // examples in one DELETE...WHERE id IN (...) instead of N individual deletes.
     final existingAppIds = <int>[];
     // Accumulate all example rows to insert; flush in a single batch at the end.
@@ -1788,7 +1793,7 @@ class LessonRepository {
       }
     }
 
-    // Phase A: Batch all updates for existing points ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â one DB round-trip
+    // Phase A: Batch all updates for existing points — one DB round-trip
     // regardless of how many grammar points already exist in the lesson.
     if (updateOps.isNotEmpty) {
       await _db.batch((batch) {
@@ -1815,7 +1820,7 @@ class LessonRepository {
       }
     }
 
-    // Phase B: Sequential inserts for new grammar points ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â auto-generated IDs
+    // Phase B: Sequential inserts for new grammar points — auto-generated IDs
     // are needed immediately as FK for the example rows collected below.
     for (final op in insertOps) {
       final pointId = await _db
@@ -1910,9 +1915,9 @@ class LessonRepository {
   }
 
   /// Returns kanji at [level] whose SRS state is currently due (nextReviewAt <= now).
-  /// Kanji with no SRS state row are excluded ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â they are "unseen", not "due".
+  /// Kanji with no SRS state row are excluded — they are "unseen", not "due".
   Future<List<KanjiItem>> fetchDueKanjiByLevel(String level) async {
-    // getDueKanjiIds() fetches only kanjiId values ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â no extra columns transferred.
+    // getDueKanjiIds() fetches only kanjiId values — no extra columns transferred.
     final dueIds = await _db.kanjiSrsDao.getDueKanjiIds();
     if (dueIds.isEmpty) return const [];
     final rows =
@@ -2230,7 +2235,7 @@ class LessonRepository {
   Future<int?> findFirstLessonWithDueKanji(String level) async {
     final dueIds = await _db.kanjiSrsDao.getDueKanjiIds();
     if (dueIds.isEmpty) return null;
-    // ORDER BY lesson_id + LIMIT 1 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â lets the DB find the minimum lessonId
+    // ORDER BY lesson_id + LIMIT 1 — lets the DB find the minimum lessonId
     // without fetching all matching rows into Dart for a Dart-side sort.
     final row =
         await (_contentDb.select(_contentDb.kanji)
@@ -2258,7 +2263,7 @@ class LessonRepository {
     required int kanjiId,
     required int grade,
   }) async {
-    // initializeSrsState uses INSERT OR IGNORE ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â safe to call unconditionally.
+    // initializeSrsState uses INSERT OR IGNORE — safe to call unconditionally.
     // This collapses ensureKanjiSrsState (SELECT + maybe INSERT) + getSrsState
     // (SELECT) into 2 round-trips instead of 2-3.
     await _db.kanjiSrsDao.initializeSrsState(kanjiId);
@@ -2280,8 +2285,8 @@ class LessonRepository {
       nextReviewAt: result.nextReviewAt,
     );
 
-    // Achievement: kanjiMaster ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â fires at milestones [10, 25, 50, 100].
-    // Only checked when this review crosses the Strong-tier threshold (ÃƒÂ¢Ã¢â‚¬Â°Ã‚Â¥21 days
+    // Achievement: kanjiMaster — fires at milestones [10, 25, 50, 100].
+    // Only checked when this review crosses the Strong-tier threshold (â‰¥21 days
     // stability), so the DB query is skipped on weaker reviews.
     if (result.stability >= 21.0) {
       const milestones = [10, 25, 50, 100];
@@ -2687,7 +2692,7 @@ class LessonRepository {
   /// Records one SRS review result.
   /// XP awarded per review scales with confidence so users who recall well
   /// progress faster on the leaderboard/dashboard:
-  ///   Again (1) ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ 2 XP  Hard (2) ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ 3 XP  Good (3) ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ 5 XP  Easy (4+) ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ 7 XP
+  ///   Again (1) â†’ 2 XP  Hard (2) â†’ 3 XP  Good (3) â†’ 5 XP  Easy (4+) â†’ 7 XP
   /// The counter increment and XP delta are written in a single UPDATE to avoid
   /// a second round-trip and eliminate any interleave from rapid taps.
   Future<void> recordReview({required int quality}) async {
@@ -2738,18 +2743,18 @@ class LessonRepository {
   /// Process an SRS review for a specific term.
   ///
   /// Query path (3 round-trips, down from up to 5):
-  ///   1. INSERT OR IGNORE srs_state   ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â ensures row exists, no-op if present
-  ///   2. SELECT srs_state + UPDATE user_progress ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â fired concurrently (different tables)
-  ///   3. UPDATE srs_state             ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â needs FSRS result from step 2
+  ///   1. INSERT OR IGNORE srs_state   — ensures row exists, no-op if present
+  ///   2. SELECT srs_state + UPDATE user_progress — fired concurrently (different tables)
+  ///   3. UPDATE srs_state             — needs FSRS result from step 2
   Future<FsrsReviewResult?> saveTermReview({
     required int termId,
     required int quality,
   }) async {
-    // Ensure row exists without a separate SELECT ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â INSERT OR IGNORE is a no-op
+    // Ensure row exists without a separate SELECT — INSERT OR IGNORE is a no-op
     // when the SRS state already exists, eliminating the conditional check.
     await _db.srsDao.initializeSrsState(termId);
 
-    // Fire stats update and SRS state fetch concurrently ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â they touch different
+    // Fire stats update and SRS state fetch concurrently — they touch different
     // tables (user_progress vs srs_state) and are fully independent.
     final recordFuture = recordReview(quality: quality);
     final srsState = await _db.srsDao.getSrsState(termId);
@@ -2872,6 +2877,7 @@ class LessonRepository {
             hard: row.reviewHardCount,
             good: row.reviewGoodCount,
             easy: row.reviewEasyCount,
+            xp: row.xp,
           ),
         )
         .toList();
@@ -2906,7 +2912,7 @@ class LessonRepository {
   Future<ProgressSummary> fetchProgressSummary() async {
     final today = _startOfDay(DateTime.now());
 
-    // Fire all four queries concurrently ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â none depend on each other's result.
+    // Fire all four queries concurrently — none depend on each other's result.
     // On devices where Drift uses a background isolate this gives true
     // parallelism; on single-isolate setups it still amortises event-loop
     // overhead across all four round-trips.
@@ -3008,7 +3014,7 @@ class LessonRepository {
         _db.userLessonTerm,
       )..where((tbl) => tbl.lessonId.equals(lessonId))).go();
       if (terms.isNotEmpty) {
-        // Batch all inserts ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â avoids N sequential round-trips inside the
+        // Batch all inserts — avoids N sequential round-trips inside the
         // transaction. Matches the pattern already used in appendTerms().
         await _db.batch((batch) {
           for (var i = 0; i < terms.length; i++) {

@@ -21,7 +21,8 @@ class FlashcardSettingsDialog extends ConsumerStatefulWidget {
       _FlashcardSettingsDialogState();
 }
 
-class _FlashcardSettingsDialogState extends ConsumerState<FlashcardSettingsDialog> {
+class _FlashcardSettingsDialogState
+    extends ConsumerState<FlashcardSettingsDialog> {
   late FlashcardSettings _settings;
 
   @override
@@ -116,7 +117,10 @@ class _FlashcardSettingsDialogState extends ConsumerState<FlashcardSettingsDialo
       title: Text(title, style: const TextStyle(fontWeight: FontWeight.w600)),
       subtitle: Text(
         subtitle,
-        style: TextStyle(fontSize: 12, color: context.appPalette.ink.withValues(alpha: 0.55)),
+        style: TextStyle(
+          fontSize: 12,
+          color: context.appPalette.ink.withValues(alpha: 0.55),
+        ),
       ),
       value: value,
       onChanged: onChanged,

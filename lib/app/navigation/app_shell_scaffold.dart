@@ -75,10 +75,7 @@ class AppShellScaffold extends ConsumerWidget {
 
         return Scaffold(
           backgroundColor: palette.bg,
-          body: SafeArea(
-            bottom: false,
-            child: navigationShell,
-          ),
+          body: SafeArea(bottom: false, child: navigationShell),
           bottomNavigationBar: SafeArea(
             top: false,
             child: Padding(
@@ -339,50 +336,57 @@ class _Sidebar extends StatelessWidget {
               itemBuilder: (context, index) {
                 final selected = index == currentIndex;
                 final item = items[index];
-                return InkWell(
-                  borderRadius: BorderRadius.circular(20),
-                  onTap: () => onTap(index),
-                  child: AnimatedContainer(
-                    duration: reducedMotionDuration(
-                      context,
-                      const Duration(milliseconds: 180),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 12,
-                    ),
-                    decoration: BoxDecoration(
-                      color: selected
-                          ? palette.primary.withValues(alpha: 0.14)
-                          : Colors.transparent,
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                        color: selected
-                            ? palette.primary.withValues(alpha: 0.28)
-                            : Colors.transparent,
-                      ),
-                    ),
-                    child: Column(
-                      children: [
-                        Icon(
-                          selected ? item.selectedIcon : item.icon,
+                return Semantics(
+                  label: item.label,
+                  button: true,
+                  selected: selected,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(20),
+                    onTap: () => onTap(index),
+                    child: ExcludeSemantics(
+                      child: AnimatedContainer(
+                        duration: reducedMotionDuration(
+                          context,
+                          const Duration(milliseconds: 180),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 12,
+                        ),
+                        decoration: BoxDecoration(
                           color: selected
-                              ? palette.primary
-                              : palette.ink.withValues(alpha: 0.72),
+                              ? palette.primary.withValues(alpha: 0.14)
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: selected
+                                ? palette.primary.withValues(alpha: 0.28)
+                                : Colors.transparent,
+                          ),
                         ),
-                        const SizedBox(height: 6),
-                        Text(
-                          item.label,
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.labelMedium
-                              ?.copyWith(
-                                fontWeight: FontWeight.w800,
-                                color: selected
-                                    ? palette.primary
-                                    : palette.ink.withValues(alpha: 0.72),
-                              ),
+                        child: Column(
+                          children: [
+                            Icon(
+                              selected ? item.selectedIcon : item.icon,
+                              color: selected
+                                  ? palette.primary
+                                  : palette.ink.withValues(alpha: 0.72),
+                            ),
+                            const SizedBox(height: 6),
+                            Text(
+                              item.label,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.labelMedium
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.w800,
+                                    color: selected
+                                        ? palette.primary
+                                        : palette.ink.withValues(alpha: 0.72),
+                                  ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 );

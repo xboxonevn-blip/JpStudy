@@ -14,7 +14,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
         ],
         child: MaterialApp(
           home: WriteModeScreen(

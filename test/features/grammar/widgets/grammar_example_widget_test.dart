@@ -64,8 +64,9 @@ void main() {
     expect(find.text('Fallback translation.'), findsNothing);
   });
 
-  testWidgets('EN locale falls back to translation when translationEn is null',
-      (tester) async {
+  testWidgets('EN locale falls back to translation when translationEn is null', (
+    tester,
+  ) async {
     // translation must be English — _cleanEnglishFreeText rejects Vietnamese text.
     await tester.pumpWidget(
       _buildWidget(
@@ -93,21 +94,25 @@ void main() {
     expect(find.text('Fallback.'), findsNothing);
   });
 
-  testWidgets('VI locale falls back to translation when translationVi is null',
-      (tester) async {
-    await tester.pumpWidget(
-      _buildWidget(
-        language: AppLanguage.vi,
-        translation: 'Fallback VI',
-        translationVi: null,
-      ),
-    );
-    await _pump(tester);
+  testWidgets(
+    'VI locale falls back to translation when translationVi is null',
+    (tester) async {
+      await tester.pumpWidget(
+        _buildWidget(
+          language: AppLanguage.vi,
+          translation: 'Fallback VI',
+          translationVi: null,
+        ),
+      );
+      await _pump(tester);
 
-    expect(find.text('Fallback VI'), findsOneWidget);
-  });
+      expect(find.text('Fallback VI'), findsOneWidget);
+    },
+  );
 
-  testWidgets('JA locale always uses translation field directly', (tester) async {
+  testWidgets('JA locale always uses translation field directly', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       _buildWidget(
         language: AppLanguage.ja,
@@ -124,22 +129,24 @@ void main() {
     expect(find.text('Not this either.'), findsNothing);
   });
 
-  testWidgets('showVietnamese=false renders translation directly regardless of locale',
-      (tester) async {
-    // showVietnamese=false returns `translation` directly, skipping all locale
-    // dispatch — used when the caller wants the raw fallback translation.
-    await tester.pumpWidget(
-      _buildWidget(
-        language: AppLanguage.vi,
-        translation: 'Direct raw translation.',
-        translationVi: 'Should be ignored.',
-        translationEn: 'Also ignored.',
-        showVietnamese: false,
-      ),
-    );
-    await _pump(tester);
+  testWidgets(
+    'showVietnamese=false renders translation directly regardless of locale',
+    (tester) async {
+      // showVietnamese=false returns `translation` directly, skipping all locale
+      // dispatch — used when the caller wants the raw fallback translation.
+      await tester.pumpWidget(
+        _buildWidget(
+          language: AppLanguage.vi,
+          translation: 'Direct raw translation.',
+          translationVi: 'Should be ignored.',
+          translationEn: 'Also ignored.',
+          showVietnamese: false,
+        ),
+      );
+      await _pump(tester);
 
-    expect(find.text('Direct raw translation.'), findsOneWidget);
-    expect(find.text('Should be ignored.'), findsNothing);
-  });
+      expect(find.text('Direct raw translation.'), findsOneWidget);
+      expect(find.text('Should be ignored.'), findsNothing);
+    },
+  );
 }

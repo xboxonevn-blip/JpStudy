@@ -62,25 +62,31 @@ class KanjiSrsDao extends DatabaseAccessor<AppDatabase>
   /// One-shot due count — cheaper than getDueReviews().length.
   Future<int> getDueReviewCount() async {
     final countExpr = kanjiSrsState.kanjiId.count();
-    final row = await (selectOnly(kanjiSrsState)
-          ..addColumns([countExpr])
-          ..where(
-            kanjiSrsState.nextReviewAt.isSmallerOrEqualValue(DateTime.now()),
-          ))
-        .getSingle();
+    final row =
+        await (selectOnly(kanjiSrsState)
+              ..addColumns([countExpr])
+              ..where(
+                kanjiSrsState.nextReviewAt.isSmallerOrEqualValue(
+                  DateTime.now(),
+                ),
+              ))
+            .getSingle();
     return row.read(countExpr) ?? 0;
   }
 
   /// COUNT of items that are both due now AND have stability < 1.0 (critical).
   Future<int> getCriticalDueCount() async {
     final countExpr = kanjiSrsState.kanjiId.count();
-    final row = await (selectOnly(kanjiSrsState)
-          ..addColumns([countExpr])
-          ..where(
-            kanjiSrsState.nextReviewAt.isSmallerOrEqualValue(DateTime.now()) &
-                kanjiSrsState.stability.isSmallerThanValue(1.0),
-          ))
-        .getSingle();
+    final row =
+        await (selectOnly(kanjiSrsState)
+              ..addColumns([countExpr])
+              ..where(
+                kanjiSrsState.nextReviewAt.isSmallerOrEqualValue(
+                      DateTime.now(),
+                    ) &
+                    kanjiSrsState.stability.isSmallerThanValue(1.0),
+              ))
+            .getSingle();
     return row.read(countExpr) ?? 0;
   }
 
@@ -133,10 +139,11 @@ class KanjiSrsDao extends DatabaseAccessor<AppDatabase>
   /// Used to gate the kanjiMaster achievement milestones.
   Future<int> getMasteredCount() async {
     final countExpr = kanjiSrsState.kanjiId.count();
-    final row = await (selectOnly(kanjiSrsState)
-          ..addColumns([countExpr])
-          ..where(kanjiSrsState.stability.isBiggerOrEqualValue(21.0)))
-        .getSingle();
+    final row =
+        await (selectOnly(kanjiSrsState)
+              ..addColumns([countExpr])
+              ..where(kanjiSrsState.stability.isBiggerOrEqualValue(21.0)))
+            .getSingle();
     return row.read(countExpr) ?? 0;
   }
 

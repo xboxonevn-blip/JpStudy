@@ -2114,5 +2114,3 @@ class _DiagnosisPanel extends StatelessWidget {
     );
   }
 }
-
-

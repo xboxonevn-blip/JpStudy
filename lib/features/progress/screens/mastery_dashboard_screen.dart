@@ -18,9 +18,12 @@ class MasteryDashboardScreen extends ConsumerWidget {
     final snapshotAsync = ref.watch(masterySnapshotProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text(_tr(language, 'JLPT Mastery', 'Tiến độ JLPT', 'JLPT 習熟度'))),
+      appBar: AppBar(
+        title: Text(_tr(language, 'JLPT Mastery', 'Tiến độ JLPT', 'JLPT 習熟度')),
+      ),
       body: snapshotAsync.when(
-        data: (snapshot) => _MasteryBody(snapshot: snapshot, language: language),
+        data: (snapshot) =>
+            _MasteryBody(snapshot: snapshot, language: language),
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => ErrorStateWidget(error: e, compact: true),
       ),
@@ -67,8 +70,8 @@ class _MasteryBody extends StatelessWidget {
               tone: overallRatio >= 0.8
                   ? AppStatusTone.success
                   : overallRatio >= 0.3
-                      ? AppStatusTone.warning
-                      : AppStatusTone.neutral,
+                  ? AppStatusTone.warning
+                  : AppStatusTone.neutral,
             ),
           ),
           const SizedBox(height: AppSpacing.xl),
@@ -77,7 +80,12 @@ class _MasteryBody extends StatelessWidget {
             child: Column(
               children: [
                 AppSectionHeader(
-                  title: _tr(language, 'Overall Progress', 'Tổng tiến độ', '全体の進捗'),
+                  title: _tr(
+                    language,
+                    'Overall Progress',
+                    'Tổng tiến độ',
+                    '全体の進捗',
+                  ),
                 ),
                 const SizedBox(height: AppSpacing.lg),
                 Row(

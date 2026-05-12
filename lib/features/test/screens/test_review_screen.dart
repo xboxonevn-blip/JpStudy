@@ -204,12 +204,16 @@ class _ReviewCard extends StatelessWidget {
             if (question.targetItem.hasDisplayReading)
               Text(
                 question.targetItem.reading!.trim(),
-                style: TextStyle(color: context.appPalette.ink.withValues(alpha: 0.55)),
+                style: TextStyle(
+                  color: context.appPalette.ink.withValues(alpha: 0.55),
+                ),
               ),
             const SizedBox(height: 8),
             Text(
               question.questionText,
-              style: TextStyle(color: context.appPalette.ink.withValues(alpha: 0.7)),
+              style: TextStyle(
+                color: context.appPalette.ink.withValues(alpha: 0.7),
+              ),
             ),
             const SizedBox(height: 12),
             Text(

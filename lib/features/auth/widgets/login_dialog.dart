@@ -28,6 +28,7 @@ class LoginDialog extends ConsumerStatefulWidget {
 }
 
 class _LoginDialogState extends ConsumerState<LoginDialog> {
+  final _formKey = GlobalKey<FormState>();
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
   bool _obscurePassword = true;
@@ -51,9 +52,11 @@ class _LoginDialogState extends ConsumerState<LoginDialog> {
   String _errorMessage(AuthErrorKind kind, AppLanguage language) {
     switch (kind) {
       case AuthErrorKind.invalidCredentials:
-      case AuthErrorKind.userNotFound:
-      case AuthErrorKind.wrongPassword:
         return language.authInvalidCredentialsLabel;
+      case AuthErrorKind.userNotFound:
+        return language.authUserNotFoundLabel;
+      case AuthErrorKind.wrongPassword:
+        return language.authWrongPasswordLabel;
       case AuthErrorKind.networkError:
         return language.authNetworkErrorLabel;
       case AuthErrorKind.userDisabled:
@@ -93,12 +96,7 @@ class _LoginDialogState extends ConsumerState<LoginDialog> {
   Future<void> _handleEmailSubmit(AppLanguage language) async {
     if (_busy) return;
     final messenger = widget.messenger ?? ScaffoldMessenger.of(context);
-    if (_emailController.text.trim().isEmpty ||
-        _passwordController.text.isEmpty) {
-      setState(() => _inlineError = language.loginEmptyFieldLabel);
-      messenger.showSnackBar(
-        SnackBar(content: Text(language.loginEmptyFieldLabel)),
-      );
+    if (!(_formKey.currentState?.validate() ?? false)) {
       return;
     }
     setState(() {
@@ -123,12 +121,10 @@ class _LoginDialogState extends ConsumerState<LoginDialog> {
       if (!mounted) return;
       final message = _errorMessage(e.kind, language);
       setState(() => _inlineError = message);
-      messenger.showSnackBar(SnackBar(content: Text(message)));
     } catch (_) {
       if (!mounted) return;
       final message = _errorMessage(AuthErrorKind.unknown, language);
       setState(() => _inlineError = message);
-      messenger.showSnackBar(SnackBar(content: Text(message)));
     } finally {
       if (mounted) setState(() => _busy = false);
     }
@@ -186,32 +182,50 @@ class _LoginDialogState extends ConsumerState<LoginDialog> {
               const SizedBox(height: AppSpacing.md),
               _OrDivider(label: language.orDividerLabel, palette: palette),
               const SizedBox(height: AppSpacing.md),
-              _LoginField(
-                controller: _emailController,
-                label: language.loginEmailLabel,
-                icon: Icons.mail_outline,
-                keyboardType: TextInputType.emailAddress,
-                palette: palette,
-              ),
-              const SizedBox(height: AppSpacing.sm),
-              _LoginField(
-                controller: _passwordController,
-                label: language.loginPasswordLabel,
-                icon: Icons.lock_outline,
-                obscureText: _obscurePassword,
-                palette: palette,
-                trailing: IconButton(
-                  icon: Icon(
-                    _obscurePassword
-                        ? Icons.visibility_off_outlined
-                        : Icons.visibility_outlined,
-                    color: palette.ink.withValues(alpha: 0.55),
-                    size: 20,
-                  ),
-                  splashRadius: 18,
-                  onPressed: () {
-                    setState(() => _obscurePassword = !_obscurePassword);
-                  },
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    _LoginField(
+                      controller: _emailController,
+                      label: language.loginEmailLabel,
+                      icon: Icons.mail_outline,
+                      keyboardType: TextInputType.emailAddress,
+                      palette: palette,
+                      validator: (value) {
+                        final email = (value ?? '').trim();
+                        if (email.isEmpty) return language.loginEmptyFieldLabel;
+                        final valid = RegExp(
+                          r'^[^@\s]+@[^@\s]+\.[^@\s]+$',
+                        ).hasMatch(email);
+                        return valid ? null : language.loginInvalidEmailLabel;
+                      },
+                    ),
+                    const SizedBox(height: AppSpacing.sm),
+                    _LoginField(
+                      controller: _passwordController,
+                      label: language.loginPasswordLabel,
+                      icon: Icons.lock_outline,
+                      obscureText: _obscurePassword,
+                      palette: palette,
+                      validator: (value) => (value ?? '').isEmpty
+                          ? language.loginEmptyFieldLabel
+                          : null,
+                      trailing: IconButton(
+                        icon: Icon(
+                          _obscurePassword
+                              ? Icons.visibility_off_outlined
+                              : Icons.visibility_outlined,
+                          color: palette.ink.withValues(alpha: 0.55),
+                          size: 20,
+                        ),
+                        splashRadius: 18,
+                        onPressed: () {
+                          setState(() => _obscurePassword = !_obscurePassword);
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
               if (_inlineError != null) ...[
@@ -439,6 +453,7 @@ class _LoginField extends StatelessWidget {
     this.obscureText = false,
     this.keyboardType,
     this.trailing,
+    this.validator,
   });
 
   final TextEditingController controller;
@@ -448,11 +463,13 @@ class _LoginField extends StatelessWidget {
   final bool obscureText;
   final TextInputType? keyboardType;
   final Widget? trailing;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: controller,
+      validator: validator,
       obscureText: obscureText,
       keyboardType: keyboardType,
       autocorrect: false,

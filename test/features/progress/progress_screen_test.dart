@@ -114,9 +114,11 @@ Widget buildProgressScreen({
   AsyncValue<SrsStageBreakdown>? retentionAsync,
   ProgressCoachBoard? coachBoard,
 }) => ProviderScope(
-    retry: (retryCount, error) => null,
-    overrides: [
-    appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+  retry: (retryCount, error) => null,
+  overrides: [
+    appLanguageProvider.overrideWith(
+      (ref) => AppLanguageController.test(AppLanguage.en),
+    ),
     studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
     progressSummaryProvider.overrideWith(
       (ref) async => summaryAsync?.requireValue ?? summary,
@@ -215,6 +217,7 @@ void main() {
             hard: 1,
             good: 6,
             easy: 3,
+            xp: 0,
           ),
         ],
       ),
@@ -423,5 +426,3 @@ void main() {
     expect(find.byType(ErrorStateWidget), findsOneWidget);
   });
 }
-
-

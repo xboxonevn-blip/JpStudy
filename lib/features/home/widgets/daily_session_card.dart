@@ -1241,5 +1241,3 @@ class _StreakBadge extends StatelessWidget {
     );
   }
 }
-
-

@@ -45,10 +45,7 @@ final _kAvailableNode = LessonNode(
   progress: 0.4, // 40 %
 );
 
-final _kLockedNode = LessonNode(
-  lesson: _kLesson,
-  status: LessonStatus.locked,
-);
+final _kLockedNode = LessonNode(lesson: _kLesson, status: LessonStatus.locked);
 
 final _kCompletedNode = LessonNode(
   lesson: _kLesson,
@@ -73,7 +70,11 @@ Widget _buildHarness({
   VoidCallback? onTap,
 }) {
   return ProviderScope(
-    overrides: [appLanguageProvider.overrideWith((ref) => language)],
+    overrides: [
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(language),
+      ),
+    ],
     child: MaterialApp(
       home: Scaffold(
         body: Center(
@@ -113,8 +114,9 @@ void main() {
       expect(find.text('Lesson 1'), findsOneWidget);
     });
 
-    testWidgets('renders progress percentage and track-progress label',
-        (tester) async {
+    testWidgets('renders progress percentage and track-progress label', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _buildHarness(node: _kAvailableNode, isPrimaryActive: true),
       );
@@ -135,8 +137,9 @@ void main() {
       expect(find.text('Basic greetings'), findsOneWidget);
     });
 
-    testWidgets('custom title (no Lesson prefix) is returned verbatim',
-        (tester) async {
+    testWidgets('custom title (no Lesson prefix) is returned verbatim', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _buildHarness(node: _kCustomNode, isPrimaryActive: true),
       );
@@ -158,8 +161,9 @@ void main() {
       expect(find.text('Bài 1'), findsOneWidget);
     });
 
-    testWidgets('VI locale shows Vietnamese track-progress label',
-        (tester) async {
+    testWidgets('VI locale shows Vietnamese track-progress label', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _buildHarness(
           node: _kAvailableNode,
@@ -223,10 +227,7 @@ void main() {
     testWidgets('available node fires onTap when tapped', (tester) async {
       var tapped = false;
       await tester.pumpWidget(
-        _buildHarness(
-          node: _kAvailableNode,
-          onTap: () => tapped = true,
-        ),
+        _buildHarness(node: _kAvailableNode, onTap: () => tapped = true),
       );
       await _pump(tester);
 
@@ -236,14 +237,12 @@ void main() {
       expect(tapped, isTrue);
     });
 
-    testWidgets('locked node does NOT fire onTap even when provided',
-        (tester) async {
+    testWidgets('locked node does NOT fire onTap even when provided', (
+      tester,
+    ) async {
       var tapped = false;
       await tester.pumpWidget(
-        _buildHarness(
-          node: _kLockedNode,
-          onTap: () => tapped = true,
-        ),
+        _buildHarness(node: _kLockedNode, onTap: () => tapped = true),
       );
       await _pump(tester);
 
@@ -254,17 +253,16 @@ void main() {
       expect(tapped, isFalse);
     });
 
-    testWidgets('available node with onTap=null does not throw', (tester) async {
+    testWidgets('available node with onTap=null does not throw', (
+      tester,
+    ) async {
       await tester.pumpWidget(_buildHarness(node: _kAvailableNode));
       await _pump(tester);
 
-      await expectLater(
-        () async {
-          await tester.tap(find.byType(GestureDetector));
-          await _pump(tester);
-        },
-        returnsNormally,
-      );
+      await expectLater(() async {
+        await tester.tap(find.byType(GestureDetector));
+        await _pump(tester);
+      }, returnsNormally);
     });
   });
 }

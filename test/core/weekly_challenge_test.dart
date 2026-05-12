@@ -13,7 +13,9 @@ void main() {
     });
 
     test('weekStart is always Monday', () {
-      final challenge = WeeklyChallenge.generate(DateTime(2026, 3, 12)); // Thursday
+      final challenge = WeeklyChallenge.generate(
+        DateTime(2026, 3, 12),
+      ); // Thursday
       expect(challenge.weekStart.weekday, DateTime.monday);
     });
 
@@ -25,7 +27,9 @@ void main() {
     test('reviewCount target is one of expected rotation values', () {
       final seen = <int>{};
       for (int w = 0; w < 30; w++) {
-        final challenge = WeeklyChallenge.generate(DateTime(2026, 1, 5 + w * 7));
+        final challenge = WeeklyChallenge.generate(
+          DateTime(2026, 1, 5 + w * 7),
+        );
         if (challenge.type == ChallengeType.reviewCount) {
           seen.add(challenge.target);
         }
@@ -36,7 +40,9 @@ void main() {
     test('accuracy target is one of expected rotation values', () {
       final seen = <int>{};
       for (int w = 0; w < 30; w++) {
-        final challenge = WeeklyChallenge.generate(DateTime(2026, 1, 5 + w * 7));
+        final challenge = WeeklyChallenge.generate(
+          DateTime(2026, 1, 5 + w * 7),
+        );
         if (challenge.type == ChallengeType.accuracy) {
           seen.add(challenge.target);
         }
@@ -47,7 +53,9 @@ void main() {
     test('streakDays target is one of expected rotation values', () {
       final seen = <int>{};
       for (int w = 0; w < 30; w++) {
-        final challenge = WeeklyChallenge.generate(DateTime(2026, 1, 5 + w * 7));
+        final challenge = WeeklyChallenge.generate(
+          DateTime(2026, 1, 5 + w * 7),
+        );
         if (challenge.type == ChallengeType.streakDays) {
           seen.add(challenge.target);
         }
@@ -58,7 +66,9 @@ void main() {
     test('xpTarget target is one of expected rotation values', () {
       final seen = <int>{};
       for (int w = 0; w < 30; w++) {
-        final challenge = WeeklyChallenge.generate(DateTime(2026, 1, 5 + w * 7));
+        final challenge = WeeklyChallenge.generate(
+          DateTime(2026, 1, 5 + w * 7),
+        );
         if (challenge.type == ChallengeType.xpTarget) {
           seen.add(challenge.target);
         }
@@ -69,7 +79,9 @@ void main() {
     test('lessonCount target is one of expected rotation values', () {
       final seen = <int>{};
       for (int w = 0; w < 30; w++) {
-        final challenge = WeeklyChallenge.generate(DateTime(2026, 1, 5 + w * 7));
+        final challenge = WeeklyChallenge.generate(
+          DateTime(2026, 1, 5 + w * 7),
+        );
         if (challenge.type == ChallengeType.lessonCount) {
           seen.add(challenge.target);
         }

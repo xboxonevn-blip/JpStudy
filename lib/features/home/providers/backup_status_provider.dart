@@ -60,4 +60,3 @@ class BackupStatus {
     return age >= 2;
   }
 }
-

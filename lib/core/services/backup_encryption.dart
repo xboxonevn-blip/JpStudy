@@ -40,9 +40,10 @@ class BackupEncryption {
       nonce: nonce,
     );
 
-    final cipherWithMac = Uint8List.fromList(
-      [...secretBox.cipherText, ...secretBox.mac.bytes],
-    );
+    final cipherWithMac = Uint8List.fromList([
+      ...secretBox.cipherText,
+      ...secretBox.mac.bytes,
+    ]);
 
     return {
       'algorithm': algorithm,
@@ -88,10 +89,7 @@ class BackupEncryption {
     }
   }
 
-  static Future<SecretKey> _deriveKey(
-    String passphrase,
-    List<int> salt,
-  ) async {
+  static Future<SecretKey> _deriveKey(String passphrase, List<int> salt) async {
     final pbkdf2 = Pbkdf2(
       macAlgorithm: Hmac.sha256(),
       iterations: iterations,
@@ -103,10 +101,7 @@ class BackupEncryption {
     );
   }
 
-  static List<int> _decodeBase64Field(
-    Map<String, dynamic> block,
-    String key,
-  ) {
+  static List<int> _decodeBase64Field(Map<String, dynamic> block, String key) {
     final raw = block[key];
     if (raw is! String || raw.isEmpty) {
       throw BackupDecryptionException('missing-$key');

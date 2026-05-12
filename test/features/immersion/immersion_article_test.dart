@@ -61,8 +61,11 @@ void main() {
     });
 
     test('hasMeaning false when meanings are blank strings', () {
-      final token =
-          ImmersionToken(surface: 'x', meaningEn: '  ', meaningVi: '');
+      final token = ImmersionToken(
+        surface: 'x',
+        meaningEn: '  ',
+        meaningVi: '',
+      );
       expect(token.hasMeaning, isFalse);
     });
 
@@ -233,11 +236,15 @@ void main() {
       );
       final after = DateTime.now();
       expect(
-        article.publishedAt.isAfter(before.subtract(const Duration(seconds: 1))),
+        article.publishedAt.isAfter(
+          before.subtract(const Duration(seconds: 1)),
+        ),
         isTrue,
       );
-      expect(article.publishedAt.isBefore(after.add(const Duration(seconds: 1))),
-          isTrue);
+      expect(
+        article.publishedAt.isBefore(after.add(const Duration(seconds: 1))),
+        isTrue,
+      );
     });
 
     test('paragraphs with tokens parsed correctly', () {
@@ -280,7 +287,9 @@ void main() {
     });
 
     test('falls back to officialLevel when estimatedDifficulty is null', () {
-      final article = ImmersionArticle.fromJson(_minimalJson(officialLevel: 'N4'));
+      final article = ImmersionArticle.fromJson(
+        _minimalJson(officialLevel: 'N4'),
+      );
       expect(article.effectiveDifficulty, 'N4');
     });
   });

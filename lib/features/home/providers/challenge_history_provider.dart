@@ -26,12 +26,12 @@ class ChallengeHistoryEntry {
   double get progress => target > 0 ? (current / target).clamp(0.0, 1.0) : 0.0;
 
   Map<String, dynamic> toJson() => {
-        'weekId': weekId,
-        'type': type.name,
-        'target': target,
-        'current': current,
-        'completed': completed,
-      };
+    'weekId': weekId,
+    'type': type.name,
+    'target': target,
+    'current': current,
+    'completed': completed,
+  };
 
   factory ChallengeHistoryEntry.fromJson(Map<String, dynamic> json) {
     return ChallengeHistoryEntry(
@@ -49,9 +49,9 @@ class ChallengeHistoryEntry {
 
 final challengeHistoryProvider =
     FutureProvider.autoDispose<List<ChallengeHistoryEntry>>((ref) async {
-  final prefs = await SharedPreferences.getInstance();
-  return _loadHistory(prefs);
-});
+      final prefs = await SharedPreferences.getInstance();
+      return _loadHistory(prefs);
+    });
 
 List<ChallengeHistoryEntry> _loadHistory(SharedPreferences prefs) {
   final raw = prefs.getString(_prefKey);

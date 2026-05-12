@@ -74,17 +74,19 @@ void main() {
     // Exact / normalized matching
     // -------------------------------------------------------------------------
 
-    test('matches Vietnamese helper labels that share the same Japanese core',
-        () {
-      final examples = findGrammarExamplesForDefinition(
-        exampleBlocks: exampleBlocks,
-        title: 'Động từ dạng ます',
-        grammarPoint: null,
-      );
+    test(
+      'matches Vietnamese helper labels that share the same Japanese core',
+      () {
+        final examples = findGrammarExamplesForDefinition(
+          exampleBlocks: exampleBlocks,
+          title: 'Động từ dạng ます',
+          grammarPoint: null,
+        );
 
-      expect(examples, isNotNull);
-      expect(examples!.single['sentence'], equals('私は毎日勉強します。'));
-    });
+        expect(examples, isNotNull);
+        expect(examples!.single['sentence'], equals('私は毎日勉強します。'));
+      },
+    );
 
     test('matches relaxed wave-dash labels with optional の variants', () {
       final examples = findGrammarExamplesForDefinition(
@@ -97,35 +99,33 @@ void main() {
       expect(examples!.single['sentence'], equals('車を買うために、貯金します。'));
     });
 
-    test('matches exact Japanese grammar point when title matches block key',
-        () {
-      final examples = findGrammarExamplesForDefinition(
-        exampleBlocks: exampleBlocks,
-        title: 'のに',
-        grammarPoint: null,
-      );
+    test(
+      'matches exact Japanese grammar point when title matches block key',
+      () {
+        final examples = findGrammarExamplesForDefinition(
+          exampleBlocks: exampleBlocks,
+          title: 'のに',
+          grammarPoint: null,
+        );
 
-      expect(examples, isNotNull);
-      expect(
-        examples!.single['sentence'],
-        equals('田中さんが来たのに、話しかけなかった。'),
-      );
-    });
+        expect(examples, isNotNull);
+        expect(examples!.single['sentence'], equals('田中さんが来たのに、話しかけなかった。'));
+      },
+    );
 
-    test('matches when grammarPoint param matches block (title is different)',
-        () {
-      final examples = findGrammarExamplesForDefinition(
-        exampleBlocks: exampleBlocks,
-        title: 'Unrelated title',
-        grammarPoint: 'のに',
-      );
+    test(
+      'matches when grammarPoint param matches block (title is different)',
+      () {
+        final examples = findGrammarExamplesForDefinition(
+          exampleBlocks: exampleBlocks,
+          title: 'Unrelated title',
+          grammarPoint: 'のに',
+        );
 
-      expect(examples, isNotNull);
-      expect(
-        examples!.single['sentence'],
-        equals('田中さんが来たのに、話しかけなかった。'),
-      );
-    });
+        expect(examples, isNotNull);
+        expect(examples!.single['sentence'], equals('田中さんが来たのに、話しかけなかった。'));
+      },
+    );
 
     test('matches when tilde variants are normalized (~ → 〜)', () {
       final examples = findGrammarExamplesForDefinition(
@@ -135,10 +135,7 @@ void main() {
       );
 
       expect(examples, isNotNull);
-      expect(
-        examples!.single['sentence'],
-        equals('ここで話してはいけません。'),
-      );
+      expect(examples!.single['sentence'], equals('ここで話してはいけません。'));
     });
 
     test('returns null when no block matches title or grammarPoint', () {
@@ -194,10 +191,7 @@ void main() {
 
     test('returns null when matching block examples is not a List', () {
       final blocks = [
-        {
-          'grammarPoint': 'のに',
-          'examples': 'not_a_list',
-        },
+        {'grammarPoint': 'のに', 'examples': 'not_a_list'},
       ];
 
       final result = findGrammarExamplesForDefinition(

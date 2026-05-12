@@ -45,13 +45,15 @@ class RoundStatisticsWidget extends ConsumerWidget {
             children: [
               Text(
                 language.roundProgressTitle,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium
-                    ?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: context.appPalette.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
@@ -160,10 +162,7 @@ class _BucketIndicator extends StatelessWidget {
           const SizedBox(height: 2),
           Text(
             '$percentage%',
-            style: TextStyle(
-              fontSize: 10,
-              color: color.withValues(alpha: 0.8),
-            ),
+            style: TextStyle(fontSize: 10, color: color.withValues(alpha: 0.8)),
           ),
         ],
       ),
@@ -196,10 +195,9 @@ class _AccuracyBar extends StatelessWidget {
           children: [
             Text(
               label,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium
-                  ?.copyWith(fontWeight: FontWeight.w600),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
             ),
             Text(
               '$accuracy%',
@@ -217,7 +215,9 @@ class _AccuracyBar extends StatelessWidget {
             value: total > 0 ? knownCount / total : 0,
             minHeight: 8,
             backgroundColor: context.appPalette.outline,
-            valueColor: AlwaysStoppedAnimation<Color>(_getAccuracyColor(context, accuracy)),
+            valueColor: AlwaysStoppedAnimation<Color>(
+              _getAccuracyColor(context, accuracy),
+            ),
           ),
         ),
       ],

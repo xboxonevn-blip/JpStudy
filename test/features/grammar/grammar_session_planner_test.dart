@@ -66,19 +66,21 @@ void main() {
       expect(session, hasLength(8));
     });
 
-    test('does not return more than targetCount even with maxQuestionsPerPoint',
-        () {
-      final bank = _largeBank(30);
-      final session = GrammarSessionPlanner(random: Random(99)).build(
-        allQuestions: bank,
-        targetCount: 6,
-        blueprint: GrammarPracticeBlueprint.drill,
-        goalProfile: GrammarGoalProfile.balanced,
-        antiRepeatWindow: 8,
-        maxQuestionsPerPoint: 2,
-      );
-      expect(session.length, lessThanOrEqualTo(6));
-    });
+    test(
+      'does not return more than targetCount even with maxQuestionsPerPoint',
+      () {
+        final bank = _largeBank(30);
+        final session = GrammarSessionPlanner(random: Random(99)).build(
+          allQuestions: bank,
+          targetCount: 6,
+          blueprint: GrammarPracticeBlueprint.drill,
+          goalProfile: GrammarGoalProfile.balanced,
+          antiRepeatWindow: 8,
+          maxQuestionsPerPoint: 2,
+        );
+        expect(session.length, lessThanOrEqualTo(6));
+      },
+    );
 
     // -------------------------------------------------------------------------
     // opener randomisation
@@ -253,41 +255,42 @@ void main() {
     // -------------------------------------------------------------------------
 
     test(
-        'antiRepeatWindow with diverse bank avoids same grammar point in window',
-        () {
-      // Use a larger pool with 5+ distinct grammar points so the planner has
-      // room to shuffle without being forced to repeat.
-      final bank = <GeneratedQuestion>[
-        _questionForPoint(1, 1, GrammarQuestionType.cloze),
-        _questionForPoint(2, 2, GrammarQuestionType.errorCorrection),
-        _questionForPoint(3, 3, GrammarQuestionType.errorReason),
-        _questionForPoint(4, 4, GrammarQuestionType.transformation),
-        _questionForPoint(5, 5, GrammarQuestionType.contextChoice),
-        _questionForPoint(1, 6, GrammarQuestionType.multipleChoice),
-        _questionForPoint(2, 7, GrammarQuestionType.pairContrast),
-        _questionForPoint(3, 8, GrammarQuestionType.sentenceBuilder),
-        _questionForPoint(4, 9, GrammarQuestionType.reverseMultipleChoice),
-        _questionForPoint(5, 10, GrammarQuestionType.cloze),
-      ];
-      const window = 3;
-      final session = GrammarSessionPlanner(random: Random(11)).build(
-        allQuestions: bank,
-        targetCount: 8,
-        blueprint: GrammarPracticeBlueprint.drill,
-        goalProfile: GrammarGoalProfile.balanced,
-        antiRepeatWindow: window,
-      );
-
-      // Verify no two consecutive questions belong to the same grammar point.
-      for (var i = 0; i < session.length - 1; i++) {
-        expect(
-          session[i].point.id == session[i + 1].point.id,
-          isFalse,
-          reason:
-              'Two consecutive questions from the same grammar point at positions $i and ${i + 1}',
+      'antiRepeatWindow with diverse bank avoids same grammar point in window',
+      () {
+        // Use a larger pool with 5+ distinct grammar points so the planner has
+        // room to shuffle without being forced to repeat.
+        final bank = <GeneratedQuestion>[
+          _questionForPoint(1, 1, GrammarQuestionType.cloze),
+          _questionForPoint(2, 2, GrammarQuestionType.errorCorrection),
+          _questionForPoint(3, 3, GrammarQuestionType.errorReason),
+          _questionForPoint(4, 4, GrammarQuestionType.transformation),
+          _questionForPoint(5, 5, GrammarQuestionType.contextChoice),
+          _questionForPoint(1, 6, GrammarQuestionType.multipleChoice),
+          _questionForPoint(2, 7, GrammarQuestionType.pairContrast),
+          _questionForPoint(3, 8, GrammarQuestionType.sentenceBuilder),
+          _questionForPoint(4, 9, GrammarQuestionType.reverseMultipleChoice),
+          _questionForPoint(5, 10, GrammarQuestionType.cloze),
+        ];
+        const window = 3;
+        final session = GrammarSessionPlanner(random: Random(11)).build(
+          allQuestions: bank,
+          targetCount: 8,
+          blueprint: GrammarPracticeBlueprint.drill,
+          goalProfile: GrammarGoalProfile.balanced,
+          antiRepeatWindow: window,
         );
-      }
-    });
+
+        // Verify no two consecutive questions belong to the same grammar point.
+        for (var i = 0; i < session.length - 1; i++) {
+          expect(
+            session[i].point.id == session[i + 1].point.id,
+            isFalse,
+            reason:
+                'Two consecutive questions from the same grammar point at positions $i and ${i + 1}',
+          );
+        }
+      },
+    );
 
     test('antiRepeatWindow of 0 does not crash', () {
       final bank = _largeBank(10);
@@ -360,8 +363,11 @@ void main() {
       );
 
       for (final q in session) {
-        expect(bankQuestions.contains(q.question), isTrue,
-            reason: '${q.question} was not in the input bank');
+        expect(
+          bankQuestions.contains(q.question),
+          isTrue,
+          reason: '${q.question} was not in the input bank',
+        );
       }
     });
 
@@ -380,8 +386,11 @@ void main() {
       );
 
       final unique = session.map((q) => q.question).toSet();
-      expect(unique.length, session.length,
-          reason: 'Session contains duplicate questions');
+      expect(
+        unique.length,
+        session.length,
+        reason: 'Session contains duplicate questions',
+      );
     });
   });
 }

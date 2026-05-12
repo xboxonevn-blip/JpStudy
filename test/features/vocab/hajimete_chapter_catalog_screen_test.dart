@@ -49,7 +49,9 @@ Widget _buildScreen({
   return ProviderScope(
     retry: (retryCount, error) => null,
     overrides: [
-      appLanguageProvider.overrideWith((ref) => language),
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(language),
+      ),
       // Override the exact provider instance the screen will watch.
       // HajimeteChapterCatalogArgs.== is defined by (levelCode, title, subtitle),
       // so _kArgs matches what the screen creates for these constructor params.
@@ -105,8 +107,9 @@ void main() {
     expect(find.text('Back to vocab'), findsOneWidget);
   });
 
-  testWidgets('hero card shows stat chips for chapter count and term count',
-      (tester) async {
+  testWidgets('hero card shows stat chips for chapter count and term count', (
+    tester,
+  ) async {
     _wideViewport(tester);
     await tester.pumpWidget(_buildScreen());
     await _pump(tester);
@@ -129,8 +132,9 @@ void main() {
     expect(find.text('Topic-first'), findsOneWidget);
   });
 
-  testWidgets('chapter catalog section label and caption are visible',
-      (tester) async {
+  testWidgets('chapter catalog section label and caption are visible', (
+    tester,
+  ) async {
     _wideViewport(tester);
     await tester.pumpWidget(_buildScreen());
     await _pump(tester);
@@ -139,7 +143,9 @@ void main() {
     expect(find.text('2 chapters are ready to open directly.'), findsOneWidget);
   });
 
-  testWidgets('chapter cards show title, entry count, and badge', (tester) async {
+  testWidgets('chapter cards show title, entry count, and badge', (
+    tester,
+  ) async {
     _wideViewport(tester);
     await tester.pumpWidget(_buildScreen());
     await _pump(tester);
@@ -180,7 +186,9 @@ void main() {
     );
   });
 
-  testWidgets('error state renders error card with retry option', (tester) async {
+  testWidgets('error state renders error card with retry option', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       _buildScreen(error: Exception('catalog load failed')),
     );
@@ -192,8 +200,9 @@ void main() {
     expect(find.text('Retry'), findsOneWidget);
   });
 
-  testWidgets('VI locale shows Vietnamese back button and section labels',
-      (tester) async {
+  testWidgets('VI locale shows Vietnamese back button and section labels', (
+    tester,
+  ) async {
     _wideViewport(tester);
     await tester.pumpWidget(_buildScreen(language: AppLanguage.vi));
     await _pump(tester);
@@ -202,8 +211,9 @@ void main() {
     expect(find.text('Catalog theo chapter'), findsOneWidget);
   });
 
-  testWidgets('JA locale shows Japanese back button and section labels',
-      (tester) async {
+  testWidgets('JA locale shows Japanese back button and section labels', (
+    tester,
+  ) async {
     _wideViewport(tester);
     await tester.pumpWidget(_buildScreen(language: AppLanguage.ja));
     await _pump(tester);
@@ -212,4 +222,3 @@ void main() {
     expect(find.text('チャプター別カタログ'), findsOneWidget);
   });
 }
-

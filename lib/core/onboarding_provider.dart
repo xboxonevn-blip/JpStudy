@@ -46,4 +46,3 @@ final appInitProvider = FutureProvider<void>((ref) async {
     ref.read(onboardingDoneProvider.notifier).state = false;
   }
 });
-

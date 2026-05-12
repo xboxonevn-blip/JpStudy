@@ -14,7 +14,11 @@ import 'package:jpstudy/features/premium/premium_screen.dart';
 import 'package:jpstudy/features/study_hub/providers/study_hub_board_provider.dart';
 
 Widget _wrap(Widget child) => ProviderScope(
-  overrides: [appLanguageProvider.overrideWith((ref) => AppLanguage.en)],
+  overrides: [
+    appLanguageProvider.overrideWith(
+      (ref) => AppLanguageController.test(AppLanguage.en),
+    ),
+  ],
   child: MaterialApp(home: child),
 );
 
@@ -41,7 +45,11 @@ void main() {
   ) async {
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [appLanguageProvider.overrideWith((ref) => AppLanguage.en)],
+        overrides: [
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
+        ],
         child: const MaterialApp(home: LeaderboardScreen()),
       ),
     );
@@ -63,7 +71,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
           dashboardProvider.overrideWith(
             (ref) => Stream.value(
               const DashboardState(
@@ -100,6 +110,7 @@ void main() {
                 hard: 3,
                 good: 8,
                 easy: 4,
+                xp: 0,
               ),
             ],
           ),
@@ -149,7 +160,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
           studyHubDecksProvider.overrideWith(
             (ref) async => const StudyHubDecksBoard(
               nextUp: StudyHubLessonDeck(
@@ -228,7 +241,9 @@ void main() {
           path: '/community',
           builder: (context, state) => ProviderScope(
             overrides: [
-              appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+              appLanguageProvider.overrideWith(
+                (ref) => AppLanguageController.test(AppLanguage.en),
+              ),
             ],
             child: const CommunityScreen(),
           ),

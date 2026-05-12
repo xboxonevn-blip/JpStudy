@@ -85,7 +85,9 @@ CoachStep _buildStep1({
     parts.add(_l(language, en: '$vocabDue vocab', vi: '$vocabDue từ vựng'));
   }
   if (grammarDue > 0) {
-    parts.add(_l(language, en: '$grammarDue grammar', vi: '$grammarDue ngữ pháp'));
+    parts.add(
+      _l(language, en: '$grammarDue grammar', vi: '$grammarDue ngữ pháp'),
+    );
   }
   if (kanjiDue > 0) {
     parts.add('$kanjiDue kanji');
@@ -126,25 +128,31 @@ CoachStep _buildStep2({
   final grammarTotal = grammarGhostCount + grammarMistakeCount;
   final vocabTotal = vocabGhostCount + vocabMistakeCount;
   if (grammarTotal > 0) {
-    parts.add(_l(
-      language,
-      en: '$grammarTotal grammar ghosts',
-      vi: '$grammarTotal lỗi ngữ pháp',
-    ));
+    parts.add(
+      _l(
+        language,
+        en: '$grammarTotal grammar ghosts',
+        vi: '$grammarTotal lỗi ngữ pháp',
+      ),
+    );
   }
   if (vocabTotal > 0) {
-    parts.add(_l(
-      language,
-      en: '$vocabTotal vocab mistakes',
-      vi: '$vocabTotal lỗi từ vựng',
-    ));
+    parts.add(
+      _l(
+        language,
+        en: '$vocabTotal vocab mistakes',
+        vi: '$vocabTotal lỗi từ vựng',
+      ),
+    );
   }
   if (kanjiMistakeCount > 0) {
-    parts.add(_l(
-      language,
-      en: '$kanjiMistakeCount kanji misses',
-      vi: '$kanjiMistakeCount lỗi kanji',
-    ));
+    parts.add(
+      _l(
+        language,
+        en: '$kanjiMistakeCount kanji misses',
+        vi: '$kanjiMistakeCount lỗi kanji',
+      ),
+    );
   }
   final breakdown = parts.join(' · ');
 
@@ -253,5 +261,3 @@ class CoachStep {
   final IconData icon;
   final Color color;
 }
-
-

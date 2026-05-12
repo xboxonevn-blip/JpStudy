@@ -9,22 +9,25 @@ extension HomeCopyX on AppLanguage {
     AppLanguage.ja => 'このホームは一覧より先に、学習セッションと次の一手を見せます。',
   };
 
-  String learningPathProgressLabel({required bool hasStartedToday}) => switch (this) {
-    AppLanguage.en =>
-      hasStartedToday
-          ? 'Today already has momentum.'
-          : 'One short session is enough to open today.',
-    AppLanguage.vi =>
-      hasStartedToday
-          ? 'Hôm nay đã có đà học.'
-          : 'Chỉ cần một buổi ngắn để mở nhịp hôm nay.',
-    AppLanguage.ja =>
-      hasStartedToday ? '今日はすでに学習の勢いがあります。' : '短い1セッションで今日の流れを作れます。',
-  };
+  String learningPathProgressLabel({required bool hasStartedToday}) =>
+      switch (this) {
+        AppLanguage.en =>
+          hasStartedToday
+              ? 'Today already has momentum.'
+              : 'One short session is enough to open today.',
+        AppLanguage.vi =>
+          hasStartedToday
+              ? 'Hôm nay đã có đà học.'
+              : 'Chỉ cần một buổi ngắn để mở nhịp hôm nay.',
+        AppLanguage.ja =>
+          hasStartedToday ? '今日はすでに学習の勢いがあります。' : '短い1セッションで今日の流れを作れます。',
+      };
 
   String learningPathFocusChipLabel(int dueCount) => switch (this) {
-    AppLanguage.en => dueCount > 0 ? '$dueCount reviews waiting' : 'Review queue is clear',
-    AppLanguage.vi => dueCount > 0 ? '$dueCount lượt ôn đang chờ' : 'Hàng ôn tập đang trống',
+    AppLanguage.en =>
+      dueCount > 0 ? '$dueCount reviews waiting' : 'Review queue is clear',
+    AppLanguage.vi =>
+      dueCount > 0 ? '$dueCount lượt ôn đang chờ' : 'Hàng ôn tập đang trống',
     AppLanguage.ja => dueCount > 0 ? '$dueCount件の復習が待機中' : '復習キューは空です',
   };
 
@@ -37,8 +40,7 @@ extension HomeCopyX on AppLanguage {
       weakCount > 0
           ? '$weakCount điểm yếu cần vá lại'
           : 'Điểm yếu đang trong tầm kiểm soát',
-    AppLanguage.ja =>
-      weakCount > 0 ? '$weakCount件の弱点を補強' : '弱点は今のところ安定しています',
+    AppLanguage.ja => weakCount > 0 ? '$weakCount件の弱点を補強' : '弱点は今のところ安定しています',
   };
 
   String learningPathMomentumChipLabel(String levelCode) => switch (this) {
@@ -139,8 +141,10 @@ extension HomeCopyX on AppLanguage {
   };
 
   String learningLanesSubtitle() => switch (this) {
-    AppLanguage.en => 'Every lane is action-first: drill, exam, or real reading.',
-    AppLanguage.vi => 'Mỗi hướng đều đi thẳng vào hành động: bài luyện, ôn thi, hoặc đọc tiếng Nhật thật.',
+    AppLanguage.en =>
+      'Every lane is action-first: drill, exam, or real reading.',
+    AppLanguage.vi =>
+      'Mỗi hướng đều đi thẳng vào hành động: bài luyện, ôn thi, hoặc đọc tiếng Nhật thật.',
     AppLanguage.ja => '記事一覧ではなく、ドリル・試験・実読の3レーンから始めます。',
   };
 

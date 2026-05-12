@@ -106,16 +106,16 @@ void _largeViewport(WidgetTester tester) {
 
 void main() {
   group('GrammarListWidget – async states', () {
-    testWidgets('shows CircularProgressIndicator while loading', (tester) async {
+    testWidgets('shows CircularProgressIndicator while loading', (
+      tester,
+    ) async {
       _largeViewport(tester);
       final completer = Completer<List<GrammarPointData>>();
       await tester.pumpWidget(
         ProviderScope(
-    retry: (retryCount, error) => null,
-    overrides: [
-            lessonGrammarProvider(_kArgs).overrideWith(
-              (_) => completer.future,
-            ),
+          retry: (retryCount, error) => null,
+          overrides: [
+            lessonGrammarProvider(_kArgs).overrideWith((_) => completer.future),
             grammarDueCountProvider.overrideWith((_) async => 0),
             grammarGhostCountProvider.overrideWith((_) => Stream.value(0)),
           ],
@@ -157,9 +157,7 @@ void main() {
 
     testWidgets('error state shows error message', (tester) async {
       _largeViewport(tester);
-      await tester.pumpWidget(
-        _buildHarness(error: Exception('load failed')),
-      );
+      await tester.pumpWidget(_buildHarness(error: Exception('load failed')));
       await _pump(tester);
 
       expect(find.textContaining('Error:'), findsOneWidget);
@@ -200,8 +198,9 @@ void main() {
       expect(find.text('Khu vực học Ngữ pháp'), findsOneWidget);
     });
 
-    testWidgets('Learn/Drill/Quiz mode segments are all visible',
-        (tester) async {
+    testWidgets('Learn/Drill/Quiz mode segments are all visible', (
+      tester,
+    ) async {
       _largeViewport(tester);
       await tester.pumpWidget(_buildHarness());
       await _pump(tester);
@@ -211,8 +210,9 @@ void main() {
       expect(find.text('Quiz'), findsOneWidget);
     });
 
-    testWidgets('initial mode is Learn — shows Start Learn Flow button',
-        (tester) async {
+    testWidgets('initial mode is Learn — shows Start Learn Flow button', (
+      tester,
+    ) async {
       _largeViewport(tester);
       await tester.pumpWidget(_buildHarness());
       await _pump(tester);
@@ -220,8 +220,9 @@ void main() {
       expect(find.text('Start Learn Flow (25)'), findsOneWidget);
     });
 
-    testWidgets('tapping Drill segment switches to drill action buttons',
-        (tester) async {
+    testWidgets('tapping Drill segment switches to drill action buttons', (
+      tester,
+    ) async {
       _largeViewport(tester);
       await tester.pumpWidget(_buildHarness());
       await _pump(tester);
@@ -294,4 +295,3 @@ void main() {
     });
   });
 }
-

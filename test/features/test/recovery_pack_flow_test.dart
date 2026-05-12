@@ -49,7 +49,9 @@ void main() {
   }) {
     return ProviderScope(
       overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+        appLanguageProvider.overrideWith(
+          (ref) => AppLanguageController.test(AppLanguage.en),
+        ),
         databaseProvider.overrideWithValue(db),
         dashboardProvider.overrideWith((_) => Stream.value(dashboard())),
         continueActionProvider.overrideWith(

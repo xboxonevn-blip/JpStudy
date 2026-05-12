@@ -364,7 +364,10 @@ class _HistoryItem extends StatelessWidget {
             height: 50,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: _getGradeColor(context, record.grade).withValues(alpha: 0.2),
+              color: _getGradeColor(
+                context,
+                record.grade,
+              ).withValues(alpha: 0.2),
             ),
             child: Center(
               child: Text(

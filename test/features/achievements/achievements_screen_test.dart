@@ -24,15 +24,15 @@ const _kEmptyDashboard = DashboardState(
 );
 
 Widget buildAchievementsScreen(AppDatabase db) => ProviderScope(
-      overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-        databaseProvider.overrideWithValue(db),
-        dashboardProvider.overrideWith(
-          (ref) => Stream.value(_kEmptyDashboard),
-        ),
-      ],
-      child: const MaterialApp(home: AchievementsScreen()),
-    );
+  overrides: [
+    appLanguageProvider.overrideWith(
+      (ref) => AppLanguageController.test(AppLanguage.en),
+    ),
+    databaseProvider.overrideWithValue(db),
+    dashboardProvider.overrideWith((ref) => Stream.value(_kEmptyDashboard)),
+  ],
+  child: const MaterialApp(home: AchievementsScreen()),
+);
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));

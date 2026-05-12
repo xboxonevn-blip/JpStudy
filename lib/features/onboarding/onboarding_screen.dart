@@ -449,7 +449,7 @@ class _FirstWinPageState extends ConsumerState<_FirstWinPage> {
                   children: [
                     const SizedBox(height: AppSpacing.lg),
                     Text(
-                      _firstWinTitle(widget.language),
+                      widget.language.onboardingFirstWinTitle,
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w800,
@@ -458,7 +458,7 @@ class _FirstWinPageState extends ConsumerState<_FirstWinPage> {
                     ),
                     const SizedBox(height: AppSpacing.sm),
                     Text(
-                      _firstWinSubtitle(widget.language),
+                      widget.language.onboardingFirstWinSubtitle,
                       style: TextStyle(
                         fontSize: 15,
                         color: context.appPalette.ink.withValues(alpha: 0.55),
@@ -485,7 +485,7 @@ class _FirstWinPageState extends ConsumerState<_FirstWinPage> {
                     if (showLoadingHint) ...[
                       const SizedBox(height: AppSpacing.sm),
                       Text(
-                        _loadingHint(widget.language),
+                        widget.language.onboardingFirstWinLoadingHint,
                         style: TextStyle(
                           fontSize: 12,
                           color: context.appPalette.ink.withValues(alpha: 0.55),
@@ -519,7 +519,7 @@ class _FirstWinPageState extends ConsumerState<_FirstWinPage> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: AppSpacing.sm),
                         child: Text(
-                          _unlockHint(widget.language),
+                          widget.language.onboardingFirstWinUnlockHint,
                           key: const ValueKey('onboarding_first_win_hint'),
                           style: TextStyle(
                             fontSize: 12,
@@ -590,50 +590,6 @@ class _FirstWinPageState extends ConsumerState<_FirstWinPage> {
     ];
     return (target: target, options: options);
   }
-
-  String _firstWinTitle(AppLanguage language) {
-    switch (language) {
-      case AppLanguage.en:
-        return 'Get one quick win first';
-      case AppLanguage.vi:
-        return 'Thử 1 câu quiz trước';
-      case AppLanguage.ja:
-        return '最初に小さな成功をひとつ';
-    }
-  }
-
-  String _firstWinSubtitle(AppLanguage language) {
-    switch (language) {
-      case AppLanguage.en:
-        return 'Try one tiny question now, then jump into your first guided session.';
-      case AppLanguage.vi:
-        return 'Chọn đáp án. App sẽ báo đúng/sai ngay và mở phiên học đầu tiên.';
-      case AppLanguage.ja:
-        return '今すぐ小さな問題を1つ解いて、そのまま最初のガイド付きセッションへ進みましょう。';
-    }
-  }
-
-  String _loadingHint(AppLanguage language) {
-    switch (language) {
-      case AppLanguage.en:
-        return 'Preparing a sample from your level...';
-      case AppLanguage.vi:
-        return 'Đang chuẩn bị một ví dụ theo trình độ của bạn...';
-      case AppLanguage.ja:
-        return 'あなたのレベルに合う例題を準備しています...';
-    }
-  }
-
-  String _unlockHint(AppLanguage language) {
-    switch (language) {
-      case AppLanguage.en:
-        return 'Answer this one preview question to unlock your first session.';
-      case AppLanguage.vi:
-        return 'Sau khi trả lời, nút Bắt đầu sẽ bật lên.';
-      case AppLanguage.ja:
-        return 'このプレビュー問題に答えて、最初のセッションを解放しましょう。';
-    }
-  }
 }
 
 class _PreviewQuestionCard extends StatelessWidget {
@@ -669,7 +625,7 @@ class _PreviewQuestionCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            _questionLabel(language),
+            language.onboardingFirstWinQuestionLabel,
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w700,
@@ -711,8 +667,8 @@ class _PreviewQuestionCard extends StatelessWidget {
             const SizedBox(height: AppSpacing.sm),
             Text(
               isCorrect
-                  ? _successLabel(language)
-                  : _answerLabel(language, options.first),
+                  ? language.onboardingFirstWinSuccessLabel
+                  : language.onboardingFirstWinAnswerLabel(options.first),
               style: TextStyle(
                 color: isCorrect
                     ? context.appPalette.success
@@ -724,39 +680,6 @@ class _PreviewQuestionCard extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  String _questionLabel(AppLanguage language) {
-    switch (language) {
-      case AppLanguage.en:
-        return 'What does this mean?';
-      case AppLanguage.vi:
-        return 'Từ này nghĩa là gì?';
-      case AppLanguage.ja:
-        return 'この言葉の意味は？';
-    }
-  }
-
-  String _successLabel(AppLanguage language) {
-    switch (language) {
-      case AppLanguage.en:
-        return 'Nice. This is the kind of quick win your first session will give you.';
-      case AppLanguage.vi:
-        return 'Đúng rồi! Bấm Bắt đầu để học tiếp.';
-      case AppLanguage.ja:
-        return 'いいですね。最初のセッションでは、こんな小さな達成を積み重ねていきます。';
-    }
-  }
-
-  String _answerLabel(AppLanguage language, String answer) {
-    switch (language) {
-      case AppLanguage.en:
-        return 'Not quite. Correct answer: $answer';
-      case AppLanguage.vi:
-        return 'Chưa đúng. Đáp án đúng: $answer. Bấm Bắt đầu để luyện tiếp.';
-      case AppLanguage.ja:
-        return '正解: $answer';
-    }
   }
 }
 
@@ -841,65 +764,21 @@ class _SessionPreview extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            _title(language),
+            language.onboardingSessionPreviewTitle,
             style: TextStyle(
               fontWeight: FontWeight.w800,
               color: context.appPalette.ink,
             ),
           ),
           const SizedBox(height: AppSpacing.sm),
-          _PreviewChip(label: _step1(language)),
+          _PreviewChip(label: language.onboardingSessionPreviewStep1),
           const SizedBox(height: AppSpacing.xs),
-          _PreviewChip(label: _step2(language)),
+          _PreviewChip(label: language.onboardingSessionPreviewStep2),
           const SizedBox(height: AppSpacing.xs),
-          _PreviewChip(label: _step3(language)),
+          _PreviewChip(label: language.onboardingSessionPreviewStep3),
         ],
       ),
     );
-  }
-
-  String _title(AppLanguage language) {
-    switch (language) {
-      case AppLanguage.en:
-        return '最初のガイド付きセッション';
-      case AppLanguage.vi:
-        return 'Phiên học đầu tiên của bạn';
-      case AppLanguage.ja:
-        return 'Your first guided session';
-    }
-  }
-
-  String _step1(AppLanguage language) {
-    switch (language) {
-      case AppLanguage.en:
-        return '1. まず短い復習を終える';
-      case AppLanguage.vi:
-        return '1. Dọn lượt ôn ngắn trước';
-      case AppLanguage.ja:
-        return '1. Clear quick reviews first';
-    }
-  }
-
-  String _step2(AppLanguage language) {
-    switch (language) {
-      case AppLanguage.en:
-        return '2. まだ新しいうちに弱点を直す';
-      case AppLanguage.vi:
-        return '2. Sửa điểm yếu khi lỗi còn mới';
-      case AppLanguage.ja:
-        return '2. Fix weak terms while they are fresh';
-    }
-  }
-
-  String _step3(AppLanguage language) {
-    switch (language) {
-      case AppLanguage.en:
-        return '3. 最後に1つ深い学習タスクで締める';
-      case AppLanguage.vi:
-        return '3. Kết phiên bằng một nhiệm vụ học sâu hơn';
-      case AppLanguage.ja:
-        return '3. Finish with one deeper study task';
-    }
   }
 }
 

@@ -174,10 +174,12 @@ void main() {
       );
       final weakest = profile.weakestFirst();
       // grammar (0.3) should come before vocab (0.5)
-      final grammarIdx =
-          weakest.indexWhere((s) => s.area == JlptSkillArea.grammar);
-      final vocabIdx =
-          weakest.indexWhere((s) => s.area == JlptSkillArea.vocabulary);
+      final grammarIdx = weakest.indexWhere(
+        (s) => s.area == JlptSkillArea.grammar,
+      );
+      final vocabIdx = weakest.indexWhere(
+        (s) => s.area == JlptSkillArea.vocabulary,
+      );
       expect(grammarIdx, lessThan(vocabIdx));
     });
 
@@ -192,14 +194,8 @@ void main() {
       final restored = JlptDiagnosisProfile.fromJson(json);
       expect(restored, isNotNull);
       expect(restored!.source, 'test');
-      expect(
-        restored.statFor(JlptSkillArea.vocabulary).correct,
-        8,
-      );
-      expect(
-        restored.statFor(JlptSkillArea.grammar).correct,
-        4,
-      );
+      expect(restored.statFor(JlptSkillArea.vocabulary).correct, 8);
+      expect(restored.statFor(JlptSkillArea.grammar).correct, 4);
     });
 
     test('fromJson returns null when stats is not a list', () {
@@ -233,10 +229,7 @@ void main() {
 
   group('buildJlptDiagnosisProfile', () {
     test('returns zero stats when signals list is empty', () {
-      final profile = buildJlptDiagnosisProfile(
-        source: 'test',
-        signals: [],
-      );
+      final profile = buildJlptDiagnosisProfile(source: 'test', signals: []);
       expect(profile.overallAccuracy, 0.0);
       for (final area in JlptSkillArea.values) {
         expect(profile.statFor(area).total, 0);
@@ -441,8 +434,11 @@ void main() {
       final plan = buildJlptSevenDayPlan(profile);
       final offsets = plan.items.map((i) => i.dayOffset).toList();
       for (var d = 0; d < 7; d++) {
-        expect(offsets.contains(d), isTrue,
-            reason: 'Day offset $d should be in the plan');
+        expect(
+          offsets.contains(d),
+          isTrue,
+          reason: 'Day offset $d should be in the plan',
+        );
       }
     });
 
@@ -455,8 +451,9 @@ void main() {
         JlptSkillArea.reading: (correct: 7, total: 10),
       });
       final plan = buildJlptSevenDayPlan(profile);
-      final grammarCount =
-          plan.items.where((i) => i.area == JlptSkillArea.grammar).length;
+      final grammarCount = plan.items
+          .where((i) => i.area == JlptSkillArea.grammar)
+          .length;
       for (final area in JlptSkillArea.values) {
         if (area == JlptSkillArea.grammar) continue;
         final count = plan.items.where((i) => i.area == area).length;
@@ -496,14 +493,8 @@ void main() {
       final profile = buildJlptDiagnosisProfile(
         source: 'round_trip_test',
         signals: [
-          const JlptSkillSignal(
-            area: JlptSkillArea.vocabulary,
-            correct: true,
-          ),
-          const JlptSkillSignal(
-            area: JlptSkillArea.grammar,
-            correct: false,
-          ),
+          const JlptSkillSignal(area: JlptSkillArea.vocabulary, correct: true),
+          const JlptSkillSignal(area: JlptSkillArea.grammar, correct: false),
         ],
         now: DateTime(2024, 7, 1),
       );
@@ -513,10 +504,7 @@ void main() {
       final json = snapshot.toJson();
       final restored = JlptCoachSnapshot.fromJson(json);
       expect(restored, isNotNull);
-      expect(
-        restored!.profile.statFor(JlptSkillArea.vocabulary).total,
-        1,
-      );
+      expect(restored!.profile.statFor(JlptSkillArea.vocabulary).total, 1);
       expect(restored.plan.items, hasLength(7));
     });
 

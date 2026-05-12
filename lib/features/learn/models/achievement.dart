@@ -7,10 +7,13 @@ enum AchievementType {
   levelUp,
   masteryComplete,
   speedDemon,
+
   /// Completed your very first lesson — triggered once, on first session save.
   firstLesson,
+
   /// Mastered 100 kanji via SRS — triggered from kanji review flow.
   kanjiMaster,
+
   /// Read 5 immersion articles — triggered from immersion reader.
   articleReader,
 }

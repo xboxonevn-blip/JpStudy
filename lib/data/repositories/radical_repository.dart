@@ -16,7 +16,10 @@ class RadicalRepository {
     return RadicalItem.decodeList(raw);
   }
 
-  Future<String> _loadWithFallback(AssetBundle bundle, String primaryPath) async {
+  Future<String> _loadWithFallback(
+    AssetBundle bundle,
+    String primaryPath,
+  ) async {
     try {
       final primary = await bundle.loadString(primaryPath);
       if (primary.trim().isNotEmpty) {

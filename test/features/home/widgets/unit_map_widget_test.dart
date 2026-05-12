@@ -53,10 +53,7 @@ final _kCompletedNode = LessonNode(
   status: LessonStatus.completed,
   progress: 1.0,
 );
-final _kLockedNode = LessonNode(
-  lesson: _kLesson2,
-  status: LessonStatus.locked,
-);
+final _kLockedNode = LessonNode(lesson: _kLesson2, status: LessonStatus.locked);
 
 Unit _kUnit({String title = 'Level 1'}) => Unit(
   id: 'u1',
@@ -84,13 +81,14 @@ Widget _buildHarness({
   void Function(LessonNode)? onNodeTap,
 }) {
   return ProviderScope(
-    overrides: [appLanguageProvider.overrideWith((ref) => language)],
+    overrides: [
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(language),
+      ),
+    ],
     child: MaterialApp(
       home: Scaffold(
-        body: UnitMapWidget(
-          unit: unit,
-          onNodeTap: onNodeTap ?? (_) {},
-        ),
+        body: UnitMapWidget(unit: unit, onNodeTap: onNodeTap ?? (_) {}),
       ),
     ),
   );
@@ -136,8 +134,9 @@ void main() {
       expect(find.text('レベル 1'), findsOneWidget);
     });
 
-    testWidgets('custom title (no Level prefix) is rendered verbatim',
-        (tester) async {
+    testWidgets('custom title (no Level prefix) is rendered verbatim', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _buildHarness(unit: _kUnit(title: 'Greetings Chapter')),
       );
@@ -162,8 +161,9 @@ void main() {
       expect(find.byType(LessonNodeWidget), findsNWidgets(2));
     });
 
-    testWidgets('empty nodes list renders header without node widgets',
-        (tester) async {
+    testWidgets('empty nodes list renders header without node widgets', (
+      tester,
+    ) async {
       await tester.pumpWidget(_buildHarness(unit: _kEmptyUnit()));
       await _pump(tester);
 
@@ -184,8 +184,9 @@ void main() {
       expect(find.text('Lesson 2'), findsOneWidget);
     });
 
-    testWidgets('lesson labels use localized title for VI locale',
-        (tester) async {
+    testWidgets('lesson labels use localized title for VI locale', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _buildHarness(unit: _kUnit(), language: AppLanguage.vi),
       );
@@ -198,14 +199,12 @@ void main() {
   });
 
   group('UnitMapWidget – node tap', () {
-    testWidgets('tapping a completed (unlocked) node fires onNodeTap',
-        (tester) async {
+    testWidgets('tapping a completed (unlocked) node fires onNodeTap', (
+      tester,
+    ) async {
       LessonNode? tappedNode;
       await tester.pumpWidget(
-        _buildHarness(
-          unit: _kUnit(),
-          onNodeTap: (node) => tappedNode = node,
-        ),
+        _buildHarness(unit: _kUnit(), onNodeTap: (node) => tappedNode = node),
       );
       await _pump(tester);
 

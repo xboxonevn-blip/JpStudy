@@ -28,7 +28,11 @@ const _kArgs = VocabMatchSessionArgs(items: _items, title: _kTitle);
 
 Widget _buildScreen({AppLanguage language = AppLanguage.en}) {
   return ProviderScope(
-    overrides: [appLanguageProvider.overrideWith((ref) => language)],
+    overrides: [
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(language),
+      ),
+    ],
     child: MaterialApp(home: VocabMatchSessionScreen(args: _kArgs)),
   );
 }
@@ -49,8 +53,9 @@ void main() {
     SharedPreferences.setMockInitialValues({});
   });
 
-  testWidgets('intro screen renders session title and start button',
-      (tester) async {
+  testWidgets('intro screen renders session title and start button', (
+    tester,
+  ) async {
     await tester.pumpWidget(_buildScreen());
     await _pump(tester);
 
@@ -62,8 +67,9 @@ void main() {
     expect(find.textContaining('${_items.length} terms'), findsOneWidget);
   });
 
-  testWidgets('"Start match" transitions to board with timer and grid',
-      (tester) async {
+  testWidgets('"Start match" transitions to board with timer and grid', (
+    tester,
+  ) async {
     await tester.pumpWidget(_buildScreen());
     await _pump(tester);
 
@@ -77,8 +83,9 @@ void main() {
     expect(find.text('cat'), findsOneWidget);
   });
 
-  testWidgets('tapping a card does not immediately complete the game',
-      (tester) async {
+  testWidgets('tapping a card does not immediately complete the game', (
+    tester,
+  ) async {
     tester.view.physicalSize = const Size(800, 1400);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
@@ -104,8 +111,9 @@ void main() {
     expect(find.textContaining('Time:'), findsOneWidget);
   });
 
-  testWidgets('all pairs matched shows summary and restart button',
-      (tester) async {
+  testWidgets('all pairs matched shows summary and restart button', (
+    tester,
+  ) async {
     tester.view.physicalSize = const Size(800, 1400);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
@@ -130,7 +138,9 @@ void main() {
     expect(find.text('Restart'), findsOneWidget);
   });
 
-  testWidgets('"Restart" from summary transitions back to board', (tester) async {
+  testWidgets('"Restart" from summary transitions back to board', (
+    tester,
+  ) async {
     tester.view.physicalSize = const Size(800, 1400);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
@@ -159,8 +169,9 @@ void main() {
     expect(find.text('Match round completed'), findsNothing);
   });
 
-  testWidgets('VI locale shows Vietnamese intro title and start label',
-      (tester) async {
+  testWidgets('VI locale shows Vietnamese intro title and start label', (
+    tester,
+  ) async {
     await tester.pumpWidget(_buildScreen(language: AppLanguage.vi));
     await _pump(tester);
 

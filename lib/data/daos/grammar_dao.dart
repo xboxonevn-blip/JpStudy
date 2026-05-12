@@ -92,23 +92,27 @@ class GrammarDao extends DatabaseAccessor<AppDatabase> with _$GrammarDaoMixin {
   }
 
   Future<DateTime?> getNextScheduledReview() async {
-    final row = await (select(grammarSrsState)
-          ..where((t) => t.nextReviewAt.isBiggerThanValue(DateTime.now()))
-          ..orderBy([(t) => OrderingTerm.asc(t.nextReviewAt)])
-          ..limit(1))
-        .getSingleOrNull();
+    final row =
+        await (select(grammarSrsState)
+              ..where((t) => t.nextReviewAt.isBiggerThanValue(DateTime.now()))
+              ..orderBy([(t) => OrderingTerm.asc(t.nextReviewAt)])
+              ..limit(1))
+            .getSingleOrNull();
     return row?.nextReviewAt;
   }
 
   /// One-shot due count — cheaper than getDueReviews().length.
   Future<int> getDueReviewCount() async {
     final countExpr = grammarSrsState.grammarId.count();
-    final row = await (selectOnly(grammarSrsState)
-          ..addColumns([countExpr])
-          ..where(
-            grammarSrsState.nextReviewAt.isSmallerOrEqualValue(DateTime.now()),
-          ))
-        .getSingle();
+    final row =
+        await (selectOnly(grammarSrsState)
+              ..addColumns([countExpr])
+              ..where(
+                grammarSrsState.nextReviewAt.isSmallerOrEqualValue(
+                  DateTime.now(),
+                ),
+              ))
+            .getSingle();
     return row.read(countExpr) ?? 0;
   }
 
@@ -134,23 +138,27 @@ class GrammarDao extends DatabaseAccessor<AppDatabase> with _$GrammarDaoMixin {
   /// COUNT of items that are both due now AND have stability < 1.0 (critical).
   Future<int> getCriticalDueCount() async {
     final countExpr = grammarSrsState.grammarId.count();
-    final row = await (selectOnly(grammarSrsState)
-          ..addColumns([countExpr])
-          ..where(
-            grammarSrsState.nextReviewAt.isSmallerOrEqualValue(DateTime.now()) &
-                grammarSrsState.stability.isSmallerThanValue(1.0),
-          ))
-        .getSingle();
+    final row =
+        await (selectOnly(grammarSrsState)
+              ..addColumns([countExpr])
+              ..where(
+                grammarSrsState.nextReviewAt.isSmallerOrEqualValue(
+                      DateTime.now(),
+                    ) &
+                    grammarSrsState.stability.isSmallerThanValue(1.0),
+              ))
+            .getSingle();
     return row.read(countExpr) ?? 0;
   }
 
   /// One-shot ghost count — cheaper than getGhostReviews().length.
   Future<int> getGhostReviewCount() async {
     final countExpr = grammarSrsState.grammarId.count();
-    final row = await (selectOnly(grammarSrsState)
-          ..addColumns([countExpr])
-          ..where(grammarSrsState.ghostReviewsDue.isBiggerThanValue(0)))
-        .getSingle();
+    final row =
+        await (selectOnly(grammarSrsState)
+              ..addColumns([countExpr])
+              ..where(grammarSrsState.ghostReviewsDue.isBiggerThanValue(0)))
+            .getSingle();
     return row.read(countExpr) ?? 0;
   }
 
@@ -185,12 +193,12 @@ class GrammarDao extends DatabaseAccessor<AppDatabase> with _$GrammarDaoMixin {
   Future<List<GrammarPoint>> getDuePoints() {
     final now = DateTime.now();
     return (select(grammarPoints).join([
-      innerJoin(
-        grammarSrsState,
-        grammarSrsState.grammarId.equalsExp(grammarPoints.id),
-        useColumns: false,
-      ),
-    ])..where(grammarSrsState.nextReviewAt.isSmallerOrEqualValue(now)))
+          innerJoin(
+            grammarSrsState,
+            grammarSrsState.grammarId.equalsExp(grammarPoints.id),
+            useColumns: false,
+          ),
+        ])..where(grammarSrsState.nextReviewAt.isSmallerOrEqualValue(now)))
         .map((row) => row.readTable(grammarPoints))
         .get();
   }
@@ -199,12 +207,12 @@ class GrammarDao extends DatabaseAccessor<AppDatabase> with _$GrammarDaoMixin {
   /// Single JOIN query — replaces the two-query (get ghost ids → get points) pattern.
   Future<List<GrammarPoint>> getGhostPoints() {
     return (select(grammarPoints).join([
-      innerJoin(
-        grammarSrsState,
-        grammarSrsState.grammarId.equalsExp(grammarPoints.id),
-        useColumns: false,
-      ),
-    ])..where(grammarSrsState.ghostReviewsDue.isBiggerThanValue(0)))
+          innerJoin(
+            grammarSrsState,
+            grammarSrsState.grammarId.equalsExp(grammarPoints.id),
+            useColumns: false,
+          ),
+        ])..where(grammarSrsState.ghostReviewsDue.isBiggerThanValue(0)))
         .map((row) => row.readTable(grammarPoints))
         .get();
   }

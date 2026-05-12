@@ -114,7 +114,9 @@ class MiniDashboard extends ConsumerWidget {
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
-                        border: Border.all(color: palette.warning.withValues(alpha: 0.25)),
+                        border: Border.all(
+                          color: palette.warning.withValues(alpha: 0.25),
+                        ),
                       ),
                       child: Icon(
                         Icons.insights_rounded,
@@ -232,7 +234,9 @@ class MiniDashboard extends ConsumerWidget {
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
-                        border: Border.all(color: palette.warning.withValues(alpha: 0.25)),
+                        border: Border.all(
+                          color: palette.warning.withValues(alpha: 0.25),
+                        ),
                       ),
                       child: Icon(
                         Icons.local_fire_department_rounded,

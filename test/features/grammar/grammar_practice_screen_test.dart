@@ -129,7 +129,9 @@ void main() {
         ProviderScope(
           overrides: [
             databaseProvider.overrideWithValue(db),
-            appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+            appLanguageProvider.overrideWith(
+              (ref) => AppLanguageController.test(AppLanguage.en),
+            ),
             studyLevelProvider.overrideWith((ref) => StudyLevel.n4),
           ],
           child: const MaterialApp(

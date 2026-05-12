@@ -5,38 +5,34 @@ import 'package:jpstudy/features/learn/models/question_type.dart';
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
-VocabItem _vocab() => const VocabItem(
-      id: 1,
-      term: 'term',
-      meaning: 'meaning',
-      level: 'N5',
-    );
+VocabItem _vocab() =>
+    const VocabItem(id: 1, term: 'term', meaning: 'meaning', level: 'N5');
 
 Question _mc({String correctAnswer = 'correct'}) => Question(
-      id: 'q1',
-      type: QuestionType.multipleChoice,
-      targetItem: _vocab(),
-      questionText: 'question',
-      correctAnswer: correctAnswer,
-      options: const ['correct', 'wrong1', 'wrong2'],
-    );
+  id: 'q1',
+  type: QuestionType.multipleChoice,
+  targetItem: _vocab(),
+  questionText: 'question',
+  correctAnswer: correctAnswer,
+  options: const ['correct', 'wrong1', 'wrong2'],
+);
 
 Question _tf({required bool isStatementTrue}) => Question(
-      id: 'q2',
-      type: QuestionType.trueFalse,
-      targetItem: _vocab(),
-      questionText: 'question',
-      correctAnswer: isStatementTrue ? 'true' : 'false',
-      isStatementTrue: isStatementTrue,
-    );
+  id: 'q2',
+  type: QuestionType.trueFalse,
+  targetItem: _vocab(),
+  questionText: 'question',
+  correctAnswer: isStatementTrue ? 'true' : 'false',
+  isStatementTrue: isStatementTrue,
+);
 
 Question _fill({required String correctAnswer}) => Question(
-      id: 'q3',
-      type: QuestionType.fillBlank,
-      targetItem: _vocab(),
-      questionText: 'question',
-      correctAnswer: correctAnswer,
-    );
+  id: 'q3',
+  type: QuestionType.fillBlank,
+  targetItem: _vocab(),
+  questionText: 'question',
+  correctAnswer: correctAnswer,
+);
 
 QuestionResult _result({
   required bool isCorrect,
@@ -126,7 +122,9 @@ void main() {
 
     test('exact full string match works for slash-containing answer', () {
       expect(
-        _fill(correctAnswer: 'to eat/to consume').checkAnswer('to eat/to consume'),
+        _fill(
+          correctAnswer: 'to eat/to consume',
+        ).checkAnswer('to eat/to consume'),
         isFalse,
       );
     });
@@ -143,7 +141,10 @@ void main() {
 
   group('QuestionResult.xpEarned', () {
     test('incorrect answer earns 0 XP', () {
-      expect(_result(isCorrect: false, type: QuestionType.multipleChoice).xpEarned, 0);
+      expect(
+        _result(isCorrect: false, type: QuestionType.multipleChoice).xpEarned,
+        0,
+      );
     });
 
     test('correct multipleChoice (slow) earns base 5 + difficulty 1 = 6', () {
@@ -157,16 +158,19 @@ void main() {
       );
     });
 
-    test('correct multipleChoice (fast <3s) earns 5 + 2 speed bonus + 1 diff = 8', () {
-      expect(
-        _result(
-          isCorrect: true,
-          type: QuestionType.multipleChoice,
-          timeTaken: const Duration(seconds: 2),
-        ).xpEarned,
-        8,
-      );
-    });
+    test(
+      'correct multipleChoice (fast <3s) earns 5 + 2 speed bonus + 1 diff = 8',
+      () {
+        expect(
+          _result(
+            isCorrect: true,
+            type: QuestionType.multipleChoice,
+            timeTaken: const Duration(seconds: 2),
+          ).xpEarned,
+          8,
+        );
+      },
+    );
 
     test('correct fillBlank (slow) earns 5 + difficulty 3 = 8', () {
       expect(

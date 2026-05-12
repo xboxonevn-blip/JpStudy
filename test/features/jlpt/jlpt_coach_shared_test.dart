@@ -30,9 +30,7 @@ JlptDiagnosisProfile _profile({
   );
 }
 
-JlptCoachSnapshot _snapshot({
-  required JlptDiagnosisProfile profile,
-}) {
+JlptCoachSnapshot _snapshot({required JlptDiagnosisProfile profile}) {
   return JlptCoachSnapshot(
     profile: profile,
     plan: JlptSevenDayPlan(
@@ -115,19 +113,22 @@ void main() {
       expect(jlptIsReadyForExam(snap), isFalse);
     });
 
-    test('returns false when one area is exactly at the 40% threshold minus one', () {
-      // Area at 3/8 = 37.5% — just below 40%.
-      final snap = _snapshot(
-        profile: _profile(
-          correct: 8,
-          total: 10,
-          overrides: {
-            JlptSkillArea.kanji: (correct: 3, total: 8), // 37.5%
-          },
-        ),
-      );
-      expect(jlptIsReadyForExam(snap), isFalse);
-    });
+    test(
+      'returns false when one area is exactly at the 40% threshold minus one',
+      () {
+        // Area at 3/8 = 37.5% — just below 40%.
+        final snap = _snapshot(
+          profile: _profile(
+            correct: 8,
+            total: 10,
+            overrides: {
+              JlptSkillArea.kanji: (correct: 3, total: 8), // 37.5%
+            },
+          ),
+        );
+        expect(jlptIsReadyForExam(snap), isFalse);
+      },
+    );
 
     test('returns true when an area is exactly at 40%', () {
       // Area at 4/10 = 40.0% — exactly at the threshold.
@@ -217,8 +218,9 @@ void main() {
     });
 
     test('all four area labels in English are unique', () {
-      final labels =
-          JlptSkillArea.values.map((a) => jlptAreaLabel(AppLanguage.en, a)).toSet();
+      final labels = JlptSkillArea.values
+          .map((a) => jlptAreaLabel(AppLanguage.en, a))
+          .toSet();
       expect(labels.length, JlptSkillArea.values.length);
     });
   });
@@ -236,8 +238,10 @@ void main() {
     });
 
     test('all four areas return distinct icons', () {
-      final icons =
-          JlptSkillArea.values.map(jlptIconForArea).map((i) => i.codePoint).toSet();
+      final icons = JlptSkillArea.values
+          .map(jlptIconForArea)
+          .map((i) => i.codePoint)
+          .toSet();
       expect(icons.length, JlptSkillArea.values.length);
     });
   });

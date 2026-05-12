@@ -11,7 +11,11 @@ void main() {
   testWidgets('renders, expands, and filters han viet rules', (tester) async {
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [appLanguageProvider.overrideWith((ref) => AppLanguage.en)],
+        overrides: [
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
+        ],
         child: const MaterialApp(
           home: HanVietReferenceScreen(key: ValueKey('han_viet_reference')),
         ),

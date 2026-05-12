@@ -15,25 +15,40 @@ void main() {
       expect(AppLanguage.ja.kanjiTodayTitle(), '今日 + 新規 + 探索');
       expect(AppLanguage.ja.kanjiExploreActionLabel(), '漢字を探す');
       expect(AppLanguage.ja.kanjiPracticeThisLabel(), 'この漢字を練習');
-      expect(AppLanguage.ja.kanjiRelatedLevelSectionLabel('N5', 12), 'N5 レーン — 12漢字');
+      expect(
+        AppLanguage.ja.kanjiRelatedLevelSectionLabel('N5', 12),
+        'N5 レーン — 12漢字',
+      );
     });
 
     group('grid panel labels', () {
       test('kanjiNoMatchLabel per language', () {
         expect(AppLanguage.en.kanjiNoMatchLabel(), 'No match in this level.');
-        expect(AppLanguage.vi.kanjiNoMatchLabel(), 'Không tìm thấy trong cấp này.');
+        expect(
+          AppLanguage.vi.kanjiNoMatchLabel(),
+          'Không tìm thấy trong cấp này.',
+        );
         expect(AppLanguage.ja.kanjiNoMatchLabel(), 'このレベルに一致する漢字がありません。');
       });
 
       test('kanjiNoKanjiFoundLabel per language', () {
         expect(AppLanguage.en.kanjiNoKanjiFoundLabel(), 'No kanji found.');
-        expect(AppLanguage.vi.kanjiNoKanjiFoundLabel(), 'Không tìm thấy Hán tự nào.');
+        expect(
+          AppLanguage.vi.kanjiNoKanjiFoundLabel(),
+          'Không tìm thấy Hán tự nào.',
+        );
         expect(AppLanguage.ja.kanjiNoKanjiFoundLabel(), '漢字が見つかりません。');
       });
 
       test('kanjiRadicalsNotFoundLabel per language', () {
-        expect(AppLanguage.en.kanjiRadicalsNotFoundLabel(), 'No radicals found.');
-        expect(AppLanguage.vi.kanjiRadicalsNotFoundLabel(), 'Không tìm thấy bộ thủ nào.');
+        expect(
+          AppLanguage.en.kanjiRadicalsNotFoundLabel(),
+          'No radicals found.',
+        );
+        expect(
+          AppLanguage.vi.kanjiRadicalsNotFoundLabel(),
+          'Không tìm thấy bộ thủ nào.',
+        );
         expect(AppLanguage.ja.kanjiRadicalsNotFoundLabel(), '部首が見つかりません。');
       });
 
@@ -62,9 +77,18 @@ void main() {
       });
 
       test('kanjiKeywordFilterLabel includes query and total', () {
-        expect(AppLanguage.en.kanjiKeywordFilterLabel('sun', 3), 'Keyword: sun (3)');
-        expect(AppLanguage.vi.kanjiKeywordFilterLabel('sun', 3), 'Từ khóa: sun (3)');
-        expect(AppLanguage.ja.kanjiKeywordFilterLabel('sun', 3), 'キーワード: sun (3)');
+        expect(
+          AppLanguage.en.kanjiKeywordFilterLabel('sun', 3),
+          'Keyword: sun (3)',
+        );
+        expect(
+          AppLanguage.vi.kanjiKeywordFilterLabel('sun', 3),
+          'Từ khóa: sun (3)',
+        );
+        expect(
+          AppLanguage.ja.kanjiKeywordFilterLabel('sun', 3),
+          'キーワード: sun (3)',
+        );
       });
     });
 

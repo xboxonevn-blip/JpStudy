@@ -727,9 +727,13 @@ class _Pill extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: active ? palette.primary.withValues(alpha: 0.10) : palette.surface,
+          color: active
+              ? palette.primary.withValues(alpha: 0.10)
+              : palette.surface,
           borderRadius: BorderRadius.circular(16),
-          border: active ? Border.all(color: palette.primary.withValues(alpha: 0.22)) : null,
+          border: active
+              ? Border.all(color: palette.primary.withValues(alpha: 0.22))
+              : null,
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -758,7 +762,10 @@ class _LabeledField extends StatelessWidget {
       children: [
         Text(
           label,
-          style: TextStyle(fontSize: 12, color: palette.ink.withValues(alpha: 0.55)),
+          style: TextStyle(
+            fontSize: 12,
+            color: palette.ink.withValues(alpha: 0.55),
+          ),
         ),
         const SizedBox(height: 6),
         child,
@@ -995,7 +1002,10 @@ class _TermField extends StatelessWidget {
       children: [
         Text(
           label,
-          style: TextStyle(fontSize: 12, color: palette.ink.withValues(alpha: 0.55)),
+          style: TextStyle(
+            fontSize: 12,
+            color: palette.ink.withValues(alpha: 0.55),
+          ),
         ),
         const SizedBox(height: 6),
         TextFormField(

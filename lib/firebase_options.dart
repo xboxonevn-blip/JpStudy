@@ -67,7 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '129949648924',
     projectId: 'jpstudy-v2',
     storageBucket: 'jpstudy-v2.firebasestorage.app',
-    iosClientId: '129949648924-efhe0b51c56i79772kb1pivq94ogouk6.apps.googleusercontent.com',
+    iosClientId:
+        '129949648924-efhe0b51c56i79772kb1pivq94ogouk6.apps.googleusercontent.com',
     iosBundleId: 'com.jpstudy.jpstudy',
   );
 

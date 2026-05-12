@@ -104,6 +104,8 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
 ) async {
   final repo = ref.read(lessonRepositoryProvider);
   final language = ref.watch(appLanguageProvider);
+  final activeLevel = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
+  final activeLevelCode = activeLevel.shortLabel;
 
   // Subscribe only to vocabDue — streak/XP ticks won't re-fire all 13 queries.
   final dueCount = ref.watch(
@@ -113,32 +115,52 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
   // nextReview is nullable). Provider re-runs when stream emits a new value.
   final nextReview = ref.watch(nextVocabReviewProvider).value;
 
-  // Fire all 11 independent fetches in parallel.
-  final n5Future = repo.getVocabByLevelAndSeries('N5', 'hajimete');
-  final n4Future = repo.getVocabByLevelAndSeries('N4', 'hajimete');
-  final n3Future = repo.getVocabByLevelAndSeries('N3', 'hajimete');
-  final n2Future = repo.getVocabByLevelAndSeries('N2', 'hajimete');
-  final n1Future = repo.getVocabByLevelAndSeries('N1', 'hajimete');
-  final shinkanzenN3Future = repo.getVocabByLevelAndSeries('N3', 'ShinKanzen');
-  final shinkanzenN3SummaryFuture = _loadShinkanzenManifestSummary('N3');
-  final shinkanzenN2SummaryFuture = _loadShinkanzenManifestSummary('N2');
-  final shinkanzenN1SummaryFuture = _loadShinkanzenManifestSummary('N1');
-  final minnaN5CountFuture = repo
-      .getVocabByLessonRange(
-        'N5',
-        startLesson: 1,
-        endLesson: 25,
-        series: 'minna',
-      )
-      .then((items) => items.length);
-  final minnaN4CountFuture = repo
-      .getVocabByLessonRange(
-        'N4',
-        startLesson: 26,
-        endLesson: 50,
-        series: 'minna',
-      )
-      .then((items) => items.length);
+  // Lazy-load only the active JLPT level. Other levels defer their DB/asset
+  // work until the user switches level, avoiding N1/N2/N3 startup reads for N5.
+  Future<List<VocabItem>> levelItems(String levelCode) =>
+      levelCode == activeLevelCode
+      ? repo.getVocabByLevelAndSeries(levelCode, 'hajimete')
+      : Future.value(const <VocabItem>[]);
+
+  Future<List<VocabItem>> shinkanzenItems(String levelCode) =>
+      levelCode == activeLevelCode
+      ? repo.getVocabByLevelAndSeries(levelCode, 'ShinKanzen')
+      : Future.value(const <VocabItem>[]);
+
+  Future<_SeriesManifestSummary> shinkanzenSummary(String levelCode) =>
+      levelCode == activeLevelCode
+      ? _loadShinkanzenManifestSummary(levelCode)
+      : Future.value(const _SeriesManifestSummary.empty());
+
+  final n5Future = levelItems('N5');
+  final n4Future = levelItems('N4');
+  final n3Future = levelItems('N3');
+  final n2Future = levelItems('N2');
+  final n1Future = levelItems('N1');
+  final shinkanzenN3Future = shinkanzenItems('N3');
+  final shinkanzenN3SummaryFuture = shinkanzenSummary('N3');
+  final shinkanzenN2SummaryFuture = shinkanzenSummary('N2');
+  final shinkanzenN1SummaryFuture = shinkanzenSummary('N1');
+  final minnaN5CountFuture = activeLevelCode == 'N5'
+      ? repo
+            .getVocabByLessonRange(
+              'N5',
+              startLesson: 1,
+              endLesson: 25,
+              series: 'minna',
+            )
+            .then((items) => items.length)
+      : Future.value(0);
+  final minnaN4CountFuture = activeLevelCode == 'N4'
+      ? repo
+            .getVocabByLessonRange(
+              'N4',
+              startLesson: 26,
+              endLesson: 50,
+              series: 'minna',
+            )
+            .then((items) => items.length)
+      : Future.value(0);
 
   final n5 = await n5Future;
   final n4 = await n4Future;

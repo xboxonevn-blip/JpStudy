@@ -187,12 +187,13 @@ String _immersionTitle(AppLanguage language) => switch (language) {
   AppLanguage.ja => '読解スピードラボ',
 };
 
-String _immersionSubtitle(AppLanguage language, StudyLevel level) =>
-    switch (language) {
-      AppLanguage.en =>
-        'Read real Japanese on the ${level.shortLabel} lane, save words, and keep exam stamina natural.',
-      AppLanguage.vi =>
-        'Đọc tiếng Nhật thật trên lane ${level.shortLabel}, lưu từ và giữ sức bền khi vào đề.',
-      AppLanguage.ja =>
-        '${level.shortLabel} レーンで実際の日本語を読み、語彙を保存しながら本番の持久力を整えます。',
-    };
+String _immersionSubtitle(
+  AppLanguage language,
+  StudyLevel level,
+) => switch (language) {
+  AppLanguage.en =>
+    'Read real Japanese on the ${level.shortLabel} lane, save words, and keep exam stamina natural.',
+  AppLanguage.vi =>
+    'Đọc tiếng Nhật thật trên lane ${level.shortLabel}, lưu từ và giữ sức bền khi vào đề.',
+  AppLanguage.ja => '${level.shortLabel} レーンで実際の日本語を読み、語彙を保存しながら本番の持久力を整えます。',
+};

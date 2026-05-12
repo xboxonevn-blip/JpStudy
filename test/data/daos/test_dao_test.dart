@@ -293,15 +293,9 @@ void main() {
     });
 
     test('returns all completed sessions across lessons', () async {
-      await dao.createSession(
-        makeSession(sessionId: 'all-1', lessonId: 1),
-      );
-      await dao.createSession(
-        makeSession(sessionId: 'all-2', lessonId: 2),
-      );
-      await dao.createSession(
-        makeSession(sessionId: 'all-3', lessonId: 3),
-      );
+      await dao.createSession(makeSession(sessionId: 'all-1', lessonId: 1));
+      await dao.createSession(makeSession(sessionId: 'all-2', lessonId: 2));
+      await dao.createSession(makeSession(sessionId: 'all-3', lessonId: 3));
 
       final all = await dao.getAllHistory();
       expect(all, hasLength(3));

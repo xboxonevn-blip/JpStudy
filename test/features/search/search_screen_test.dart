@@ -70,7 +70,9 @@ Widget buildSearchScreen({LessonRepository? repo}) {
   return ProviderScope(
     retry: (retryCount, error) => null,
     overrides: [
-      appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(AppLanguage.en),
+      ),
       studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
       if (repo != null) lessonRepositoryProvider.overrideWithValue(repo),
     ],
@@ -84,7 +86,8 @@ Widget buildSearchRouterApp({LessonRepository? repo}) {
       GoRoute(path: '/', builder: (context, state) => const SearchScreen()),
       GoRoute(
         path: '/vocab/:id',
-        builder: (context, state) => Text('vocab:${state.pathParameters['id']}'),
+        builder: (context, state) =>
+            Text('vocab:${state.pathParameters['id']}'),
       ),
       GoRoute(
         path: '/kanji',
@@ -97,7 +100,9 @@ Widget buildSearchRouterApp({LessonRepository? repo}) {
   return ProviderScope(
     retry: (retryCount, error) => null,
     overrides: [
-      appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(AppLanguage.en),
+      ),
       studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
       if (repo != null) lessonRepositoryProvider.overrideWithValue(repo),
     ],
@@ -116,9 +121,11 @@ void main() {
 
     await tester.pumpWidget(
       ProviderScope(
-    retry: (retryCount, error) => null,
-    overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+        retry: (retryCount, error) => null,
+        overrides: [
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
           studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
           searchIndexProvider.overrideWith((ref) async => const []),
         ],
@@ -295,9 +302,11 @@ void main() {
 
     await tester.pumpWidget(
       ProviderScope(
-    retry: (retryCount, error) => null,
-    overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+        retry: (retryCount, error) => null,
+        overrides: [
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
           studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
           searchIndexProvider.overrideWith(
             (ref) async => throw Exception('boom'),
@@ -382,4 +391,3 @@ void main() {
     expect(find.text('kanji:1'), findsOneWidget);
   });
 }
-

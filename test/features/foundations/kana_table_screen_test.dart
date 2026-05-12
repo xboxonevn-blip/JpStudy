@@ -84,7 +84,9 @@ void main() {
         ProviderScope(
           overrides: [
             databaseProvider.overrideWithValue(db),
-            appLanguageProvider.overrideWith((ref) => AppLanguage.vi),
+            appLanguageProvider.overrideWith(
+              (ref) => AppLanguageController.test(AppLanguage.vi),
+            ),
             kanaChartProvider.overrideWith((ref) async => chart),
             foundationsProgressProvider.overrideWith(
               () => _StaticFoundationsProgressController(),

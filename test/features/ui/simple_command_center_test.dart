@@ -60,7 +60,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
           dashboardProvider.overrideWith(
             (ref) => Stream.value(
               const DashboardState(
@@ -109,7 +111,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
           studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
           onboardingDoneProvider.overrideWith((ref) => true),
           appInitProvider.overrideWith((ref) async {}),
@@ -159,7 +163,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
           studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
           dashboardProvider.overrideWith(
             (ref) => Stream.value(
@@ -208,7 +214,9 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+            appLanguageProvider.overrideWith(
+              (ref) => AppLanguageController.test(AppLanguage.en),
+            ),
             studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
             dashboardProvider.overrideWith(
               (ref) => Stream.value(
@@ -258,7 +266,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
           _sprintOverride(),
         ],
         child: const MaterialApp(home: RecallSprintScreen()),
@@ -278,7 +288,9 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+            appLanguageProvider.overrideWith(
+              (ref) => AppLanguageController.test(AppLanguage.en),
+            ),
             _sprintOverride(),
           ],
           child: const MaterialApp(home: RecallSprintScreen()),
@@ -300,7 +312,9 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+            appLanguageProvider.overrideWith(
+              (ref) => AppLanguageController.test(AppLanguage.en),
+            ),
             _sprintOverride(),
           ],
           child: const MaterialApp(home: RecallSprintScreen()),
@@ -325,7 +339,9 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+            appLanguageProvider.overrideWith(
+              (ref) => AppLanguageController.test(AppLanguage.en),
+            ),
             _sprintOverride(),
           ],
           child: const MaterialApp(home: RecallSprintScreen()),
@@ -349,7 +365,9 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+            appLanguageProvider.overrideWith(
+              (ref) => AppLanguageController.test(AppLanguage.en),
+            ),
             _sprintOverride(),
           ],
           child: const MaterialApp(home: RecallSprintScreen()),
@@ -373,7 +391,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
           _sprintOverride(),
         ],
         child: const MaterialApp(home: RecallSprintScreen()),
@@ -395,7 +415,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
           _sprintOverride(),
         ],
         child: const MaterialApp(home: RecallSprintScreen()),
@@ -421,7 +443,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
           _sprintOverride(),
         ],
         child: const MaterialApp(home: RecallSprintScreen()),
@@ -452,7 +476,9 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+            appLanguageProvider.overrideWith(
+              (ref) => AppLanguageController.test(AppLanguage.en),
+            ),
             _sprintOverride(),
           ],
           child: const MaterialApp(home: RecallSprintScreen()),
@@ -491,7 +517,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
           _sprintOverride(),
         ],
         child: const MaterialApp(home: RecallSprintScreen()),
@@ -524,7 +552,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
           studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
           searchIndexProvider.overrideWith((ref) async => const []),
         ],
@@ -546,7 +576,9 @@ void main() {
       ProviderScope(
         overrides: [
           databaseProvider.overrideWithValue(db),
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
           studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
         ],
         child: const MaterialApp(home: MeScreen()),
@@ -563,7 +595,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
           studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
           lessonMetaProvider('N5').overrideWith((ref) async => const []),
         ],
@@ -605,7 +639,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
           studyLevelProvider.overrideWith((ref) => StudyLevel.n4),
           lessonMetaProvider('N4').overrideWith(
             (ref) async => const [
@@ -663,7 +699,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
           grammarDetailProvider(1).overrideWith(
             (ref) async => (point: point, examples: const [example]),
           ),
@@ -700,7 +738,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
           allDueTermsProvider.overrideWith((ref) async => const [dueTerm]),
         ],
         child: const MaterialApp(home: TermReviewScreen()),
@@ -713,4 +753,3 @@ void main() {
     expect(find.byType(FilledButton), findsOneWidget);
   });
 }
-

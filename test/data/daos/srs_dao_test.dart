@@ -73,18 +73,20 @@ void main() {
       expect(due, isEmpty);
     });
 
-    test('returns only past-due items when mix of past and future exists',
-        () async {
-      final past = DateTime.now().subtract(const Duration(minutes: 10));
-      final future = DateTime.now().add(const Duration(hours: 3));
-      await insertState(1, nextReviewAt: past);
-      await insertState(2, nextReviewAt: future);
-      await insertState(3, nextReviewAt: past);
+    test(
+      'returns only past-due items when mix of past and future exists',
+      () async {
+        final past = DateTime.now().subtract(const Duration(minutes: 10));
+        final future = DateTime.now().add(const Duration(hours: 3));
+        await insertState(1, nextReviewAt: past);
+        await insertState(2, nextReviewAt: future);
+        await insertState(3, nextReviewAt: past);
 
-      final due = await dao.getDueReviews();
-      expect(due, hasLength(2));
-      expect(due.map((r) => r.vocabId).toSet(), {1, 3});
-    });
+        final due = await dao.getDueReviews();
+        expect(due, hasLength(2));
+        expect(due.map((r) => r.vocabId).toSet(), {1, 3});
+      },
+    );
 
     test('returns all items when all are past-due', () async {
       for (var i = 1; i <= 5; i++) {
@@ -116,31 +118,35 @@ void main() {
       expect(result, isNull);
     });
 
-    test('returns nearest future review date when one future item exists',
-        () async {
-      final future = DateTime.now().add(const Duration(hours: 3));
-      await insertState(1, nextReviewAt: future);
+    test(
+      'returns nearest future review date when one future item exists',
+      () async {
+        final future = DateTime.now().add(const Duration(hours: 3));
+        await insertState(1, nextReviewAt: future);
 
-      final result = await dao.getNextScheduledReview();
-      expect(result, isNotNull);
-      expect(result!.isAfter(DateTime.now()), isTrue);
-    });
+        final result = await dao.getNextScheduledReview();
+        expect(result, isNotNull);
+        expect(result!.isAfter(DateTime.now()), isTrue);
+      },
+    );
 
-    test('returns the earliest future date when multiple future items exist',
-        () async {
-      final soon = DateTime.now().add(const Duration(hours: 1));
-      final later = DateTime.now().add(const Duration(hours: 5));
-      final latest = DateTime.now().add(const Duration(days: 2));
-      await insertState(1, nextReviewAt: later);
-      await insertState(2, nextReviewAt: soon);
-      await insertState(3, nextReviewAt: latest);
+    test(
+      'returns the earliest future date when multiple future items exist',
+      () async {
+        final soon = DateTime.now().add(const Duration(hours: 1));
+        final later = DateTime.now().add(const Duration(hours: 5));
+        final latest = DateTime.now().add(const Duration(days: 2));
+        await insertState(1, nextReviewAt: later);
+        await insertState(2, nextReviewAt: soon);
+        await insertState(3, nextReviewAt: latest);
 
-      final result = await dao.getNextScheduledReview();
-      expect(result, isNotNull);
-      // Should be the soonest future date
-      expect(result!.isBefore(later), isTrue);
-      expect(result.isBefore(latest), isTrue);
-    });
+        final result = await dao.getNextScheduledReview();
+        expect(result, isNotNull);
+        // Should be the soonest future date
+        expect(result!.isBefore(later), isTrue);
+        expect(result.isBefore(latest), isTrue);
+      },
+    );
 
     test('ignores past-due items and returns only future date', () async {
       final past = DateTime.now().subtract(const Duration(hours: 1));

@@ -52,7 +52,11 @@ final weaknessRadarProvider = FutureProvider<List<WeaknessRadarItem>>((
     dashboardProvider.select((v) {
       final d = v.value;
       if (d == null) return null;
-      return (vocabDue: d.vocabDue, grammarDue: d.grammarDue, kanjiDue: d.kanjiDue);
+      return (
+        vocabDue: d.vocabDue,
+        grammarDue: d.grammarDue,
+        kanjiDue: d.kanjiDue,
+      );
     }),
   );
   if (dashboardDue == null) return const [];
@@ -362,5 +366,3 @@ String _planHint(
       return ja;
   }
 }
-
-

@@ -9,31 +9,31 @@ import 'package:jpstudy/features/kanji_reading/screens/kanji_reading_quiz_screen
 import 'package:shared_preferences/shared_preferences.dart';
 
 KanjiReadingQuestion _question() => KanjiReadingQuestion(
-      target: const KanjiItem(
-        id: 1,
-        lessonId: 1,
-        character: '火',
-        strokeCount: 4,
-        onyomi: 'カ',
-        kunyomi: 'ひ',
-        meaning: 'fire',
-        meaningEn: 'fire',
-        examples: [],
-        jlptLevel: 'N5',
-      ),
-      options: const ['カ', 'スイ', 'モク', 'キン'],
-      correctIndex: 0,
-      mode: KanjiQuizMode.kanjiToReading,
-    );
+  target: const KanjiItem(
+    id: 1,
+    lessonId: 1,
+    character: '火',
+    strokeCount: 4,
+    onyomi: 'カ',
+    kunyomi: 'ひ',
+    meaning: 'fire',
+    meaningEn: 'fire',
+    examples: [],
+    jlptLevel: 'N5',
+  ),
+  options: const ['カ', 'スイ', 'モク', 'キン'],
+  correctIndex: 0,
+  mode: KanjiQuizMode.kanjiToReading,
+);
 
 Widget buildScreen(List<KanjiReadingQuestion> questions) => ProviderScope(
-      overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-      ],
-      child: MaterialApp(
-        home: KanjiReadingQuizScreen(questions: questions),
-      ),
-    );
+  overrides: [
+    appLanguageProvider.overrideWith(
+      (ref) => AppLanguageController.test(AppLanguage.en),
+    ),
+  ],
+  child: MaterialApp(home: KanjiReadingQuizScreen(questions: questions)),
+);
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));

@@ -2730,5 +2730,3 @@ class _RelatedStatCard extends StatelessWidget {
     );
   }
 }
-
-

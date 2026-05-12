@@ -175,26 +175,27 @@ class _PrepModeCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppSpacing.radiusXxl),
         child: Ink(
           padding: const EdgeInsets.all(AppSpacing.lg),
-          decoration: HomeSurface.softPanel(
-            radius: AppSpacing.radiusXxl,
-            colors: [
-              palette.elevated,
-              Color.lerp(
-                    palette.base,
-                    data.accent.withValues(alpha: 0.04),
-                    0.45,
-                  ) ??
-                  palette.base,
-            ],
-          ).copyWith(
-            boxShadow: [
-              BoxShadow(
-                color: data.accent.withValues(alpha: 0.10),
-                blurRadius: 18,
-                offset: const Offset(0, 10),
+          decoration:
+              HomeSurface.softPanel(
+                radius: AppSpacing.radiusXxl,
+                colors: [
+                  palette.elevated,
+                  Color.lerp(
+                        palette.base,
+                        data.accent.withValues(alpha: 0.04),
+                        0.45,
+                      ) ??
+                      palette.base,
+                ],
+              ).copyWith(
+                boxShadow: [
+                  BoxShadow(
+                    color: data.accent.withValues(alpha: 0.10),
+                    blurRadius: 18,
+                    offset: const Offset(0, 10),
+                  ),
+                ],
               ),
-            ],
-          ),
           child: Opacity(
             opacity: enabled ? 1 : 0.72,
             child: Column(
@@ -205,8 +206,7 @@ class _PrepModeCard extends StatelessWidget {
                   height: 3,
                   decoration: BoxDecoration(
                     color: data.accent.withValues(alpha: 0.72),
-                    borderRadius:
-                        BorderRadius.circular(AppSpacing.radiusPill),
+                    borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
                   ),
                 ),
                 const SizedBox(height: AppSpacing.md),
@@ -321,15 +321,17 @@ String _modesTitle(AppLanguage language) => switch (language) {
   AppLanguage.ja => '試験モード',
 };
 
-String _modesCaption(AppLanguage language, StudyLevel level) =>
-    switch (language) {
-      AppLanguage.en =>
-        'Everything below stays locked to ${level.shortLabel}, so mock, reading, and diagnosis all speak the same level.',
-      AppLanguage.vi =>
-        'Tất cả chế độ bên dưới đều bám đúng ${level.shortLabel}, để thi thử, đọc hiểu và chẩn đoán nói cùng một mức độ.',
-      AppLanguage.ja =>
-        '下のモードはすべて ${level.shortLabel} にそろえてあり、模試・読解・診断が同じ難度でつながります。',
-    };
+String _modesCaption(
+  AppLanguage language,
+  StudyLevel level,
+) => switch (language) {
+  AppLanguage.en =>
+    'Everything below stays locked to ${level.shortLabel}, so mock, reading, and diagnosis all speak the same level.',
+  AppLanguage.vi =>
+    'Tất cả chế độ bên dưới đều bám đúng ${level.shortLabel}, để thi thử, đọc hiểu và chẩn đoán nói cùng một mức độ.',
+  AppLanguage.ja =>
+    '下のモードはすべて ${level.shortLabel} にそろえてあり、模試・読解・診断が同じ難度でつながります。',
+};
 
 String _fullMockTitle(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Full mock',
@@ -351,15 +353,16 @@ String _quickMockTitle(AppLanguage language) => switch (language) {
   AppLanguage.ja => 'クイック模試',
 };
 
-String _quickMockSubtitle(AppLanguage language, StudyLevel level) =>
-    switch (language) {
-      AppLanguage.en =>
-        'A shorter timed check built from the ${level.shortLabel} vocabulary bank already in the app.',
-      AppLanguage.vi =>
-        'Bài kiểm tra ngắn có bấm giờ, dùng từ vựng ${level.shortLabel} đã có sẵn trong app.',
-      AppLanguage.ja =>
-        'アプリ内の ${level.shortLabel} 語彙バンクから作る短い時間制チェックです。',
-    };
+String _quickMockSubtitle(
+  AppLanguage language,
+  StudyLevel level,
+) => switch (language) {
+  AppLanguage.en =>
+    'A shorter timed check built from the ${level.shortLabel} vocabulary bank already in the app.',
+  AppLanguage.vi =>
+    'Bài kiểm tra ngắn có bấm giờ, dùng từ vựng ${level.shortLabel} đã có sẵn trong app.',
+  AppLanguage.ja => 'アプリ内の ${level.shortLabel} 語彙バンクから作る短い時間制チェックです。',
+};
 
 String _quickMockMeta(AppLanguage language, int questionCount) =>
     switch (language) {
@@ -380,14 +383,16 @@ String _readingDrillTitle(AppLanguage language) => switch (language) {
   AppLanguage.ja => '読解ドリル',
 };
 
-String _readingDrillSubtitle(AppLanguage language, StudyLevel level) =>
-    switch (language) {
-      AppLanguage.en =>
-        'Practice timed passages that stay on the ${level.shortLabel} track only.',
-      AppLanguage.vi =>
-        'Luyện bài đọc có bấm giờ, chỉ giữ đúng track ${level.shortLabel}.',
-      AppLanguage.ja => '${level.shortLabel} だけに絞った時間つき読解を回します。',
-    };
+String _readingDrillSubtitle(
+  AppLanguage language,
+  StudyLevel level,
+) => switch (language) {
+  AppLanguage.en =>
+    'Practice timed passages that stay on the ${level.shortLabel} track only.',
+  AppLanguage.vi =>
+    'Luyện bài đọc có bấm giờ, chỉ giữ đúng track ${level.shortLabel}.',
+  AppLanguage.ja => '${level.shortLabel} だけに絞った時間つき読解を回します。',
+};
 
 String _readingDrillMeta(
   AppLanguage language, {

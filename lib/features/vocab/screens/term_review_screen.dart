@@ -669,5 +669,3 @@ class _TermReviewScreenState extends ConsumerState<TermReviewScreen>
     }
   }
 }
-
-

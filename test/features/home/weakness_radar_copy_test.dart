@@ -8,14 +8,8 @@ void main() {
       weaknessRecoveryTitle(AppLanguage.ja, 'Lesson 5'),
       'Lesson 5 からのリカバリーパック',
     );
-    expect(
-      weaknessVocabTitle(AppLanguage.ja, '水'),
-      '語彙が不安定: 水',
-    );
-    expect(
-      weaknessRetentionTitle(AppLanguage.ja),
-      '新しいカードがまだ不安定です',
-    );
+    expect(weaknessVocabTitle(AppLanguage.ja, '水'), '語彙が不安定: 水');
+    expect(weaknessRetentionTitle(AppLanguage.ja), '新しいカードがまだ不安定です');
   });
 
   test('weakness due subtitle is localized in Japanese', () {

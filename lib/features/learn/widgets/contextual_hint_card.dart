@@ -36,11 +36,7 @@ class ContextualHintCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(
-                Icons.auto_stories_outlined,
-                size: 18,
-                color: palette.info,
-              ),
+              Icon(Icons.auto_stories_outlined, size: 18, color: palette.info),
               const SizedBox(width: 6),
               Text(
                 language.contextualLearningLabel,
@@ -55,17 +51,20 @@ class ContextualHintCard extends StatelessWidget {
           ),
           if (showReading) ...[
             const SizedBox(height: 6),
-            Text(reading, style: TextStyle(color: palette.ink.withValues(alpha: 0.55))),
+            Text(
+              reading,
+              style: TextStyle(color: palette.ink.withValues(alpha: 0.55)),
+            ),
           ],
           const SizedBox(height: 8),
-          Text(
-            lines.translation,
-            style: TextStyle(color: palette.ink),
-          ),
+          Text(lines.translation, style: TextStyle(color: palette.ink)),
           const SizedBox(height: 10),
           Text(
             language.contextualLearningHelperLabel,
-            style: TextStyle(color: palette.ink.withValues(alpha: 0.55), fontSize: 12),
+            style: TextStyle(
+              color: palette.ink.withValues(alpha: 0.55),
+              fontSize: 12,
+            ),
           ),
         ],
       ),

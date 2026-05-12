@@ -118,10 +118,9 @@ class CloudSyncService {
     final displayName = prefs.getString(_prefLinkedName);
     return CloudSyncTarget(
       path: path,
-      displayName:
-          displayName != null && displayName.isNotEmpty
-              ? displayName
-              : p.basename(path),
+      displayName: displayName != null && displayName.isNotEmpty
+          ? displayName
+          : p.basename(path),
     );
   }
 

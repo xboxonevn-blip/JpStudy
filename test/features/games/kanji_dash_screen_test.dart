@@ -23,7 +23,9 @@ VocabItem _vocab(int id, String term, String meaning) => VocabItem(
 Widget buildScreen(List<VocabItem> items, {bool disableAnimations = false}) =>
     ProviderScope(
       overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+        appLanguageProvider.overrideWith(
+          (ref) => AppLanguageController.test(AppLanguage.en),
+        ),
         studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
         gameVocabPoolProvider.overrideWith((ref) async => items),
       ],

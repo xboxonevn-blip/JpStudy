@@ -14,4 +14,3 @@ void refreshRecoveryPack(WidgetRef ref) {
   final current = ref.read(recoveryPackRefreshProvider);
   ref.read(recoveryPackRefreshProvider.notifier).state = current + 1;
 }
-

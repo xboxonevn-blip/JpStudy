@@ -12,6 +12,7 @@ StudyHubNotifier _notifier() {
   addTearDown(container.dispose);
   return container.read(studyHubProvider.notifier);
 }
+
 void main() {
   setUp(() {
     SharedPreferences.setMockInitialValues({});
@@ -383,4 +384,3 @@ void main() {
     });
   });
 }
-

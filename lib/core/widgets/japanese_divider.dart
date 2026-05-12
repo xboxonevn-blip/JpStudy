@@ -16,10 +16,7 @@ class JapaneseDivider extends StatelessWidget {
           Expanded(child: Divider(color: color, thickness: 0.8)),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Text(
-              icon,
-              style: TextStyle(fontSize: 14, color: color),
-            ),
+            child: Text(icon, style: TextStyle(fontSize: 14, color: color)),
           ),
           Expanded(child: Divider(color: color, thickness: 0.8)),
         ],

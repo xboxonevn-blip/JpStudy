@@ -270,4 +270,3 @@ String _jlptCoachSubtitle(AppLanguage language) {
       return 'フル模試、クイック模試、読解、診断、7日プラン。';
   }
 }
-

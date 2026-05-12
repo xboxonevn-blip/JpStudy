@@ -1774,5 +1774,3 @@ String _noVocabSubtitle(AppLanguage language) => switch (language) {
   AppLanguage.en =>
     'Flashcards will appear here once this chapter has vocab data.',
 };
-
-

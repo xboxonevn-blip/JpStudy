@@ -356,5 +356,3 @@ class _ContinueButtonState extends ConsumerState<ContinueButton> {
     }
   }
 }
-
-

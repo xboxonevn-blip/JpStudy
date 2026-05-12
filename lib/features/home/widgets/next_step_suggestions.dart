@@ -267,7 +267,9 @@ class _StepTile extends StatelessWidget {
                           '${step.count} ${step.count == 1 ? 'item' : 'items'}',
                           style: TextStyle(
                             fontSize: 12,
-                            color: context.appPalette.ink.withValues(alpha: 0.55),
+                            color: context.appPalette.ink.withValues(
+                              alpha: 0.55,
+                            ),
                           ),
                         ),
                     ],
@@ -286,5 +288,3 @@ class _StepTile extends StatelessWidget {
     );
   }
 }
-
-

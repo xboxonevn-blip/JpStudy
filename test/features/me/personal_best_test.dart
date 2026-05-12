@@ -19,7 +19,9 @@ void main() {
     int score,
     int total,
   ) async {
-    await db.into(db.attempt).insert(
+    await db
+        .into(db.attempt)
+        .insert(
           AttemptCompanion.insert(
             mode: mode,
             level: level,

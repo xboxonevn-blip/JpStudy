@@ -3,12 +3,12 @@ import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/features/jlpt/models/jlpt_coach_models.dart';
 
 UserMistake _mistake(DateTime lastAt) => UserMistake(
-      id: 1,
-      type: 'vocab',
-      itemId: 1,
-      wrongCount: 1,
-      lastMistakeAt: lastAt,
-    );
+  id: 1,
+  type: 'vocab',
+  itemId: 1,
+  wrongCount: 1,
+  lastMistakeAt: lastAt,
+);
 
 void main() {
   final now = DateTime(2026, 3, 1, 12);
@@ -44,9 +44,9 @@ void main() {
 
   test('totalDue excludes notDue', () {
     final mistakes = [
-      _mistake(now.subtract(const Duration(hours: 2))),    // notDue
-      _mistake(now.subtract(const Duration(hours: 48))),   // due1d
-      _mistake(now.subtract(const Duration(hours: 100))),  // due3d
+      _mistake(now.subtract(const Duration(hours: 2))), // notDue
+      _mistake(now.subtract(const Duration(hours: 48))), // due1d
+      _mistake(now.subtract(const Duration(hours: 100))), // due3d
     ];
     final b = computeMistakeDueBuckets(mistakes, now);
     expect(b.notDue, 1);

@@ -272,11 +272,7 @@ void main() {
     });
 
     test('omits optional fields when blank/null', () {
-      const e = KanjiExample(
-        word: '食べ物',
-        reading: 'たべもの',
-        meaning: 'thức ăn',
-      );
+      const e = KanjiExample(word: '食べ物', reading: 'たべもの', meaning: 'thức ăn');
       final json = e.toJson();
       expect(json.containsKey('meaningEn'), isFalse);
       expect(json.containsKey('sourceVocabId'), isFalse);
@@ -289,10 +285,7 @@ void main() {
 
   group('KanjiExample.resolvedWith', () {
     test('creates new example with provided word/reading/meaning', () {
-      const original = KanjiExample(
-        sourceVocabId: 'v42',
-        sourceSenseId: 's7',
-      );
+      const original = KanjiExample(sourceVocabId: 'v42', sourceSenseId: 's7');
       final resolved = original.resolvedWith(
         word: '食べ物',
         reading: 'たべもの',

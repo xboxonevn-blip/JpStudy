@@ -7,28 +7,51 @@ import 'package:jpstudy/features/learn/models/learn_session.dart';
 // ── Fixtures ─────────────────────────────────────────────────
 
 const _vocab1 = VocabItem(
-  id: 1, term: '水', reading: 'みず', meaning: 'nước', meaningEn: 'water', level: 'N5',
+  id: 1,
+  term: '水',
+  reading: 'みず',
+  meaning: 'nước',
+  meaningEn: 'water',
+  level: 'N5',
 );
 const _vocab2 = VocabItem(
-  id: 2, term: '火', reading: 'ひ', meaning: 'lửa', meaningEn: 'fire', level: 'N5',
+  id: 2,
+  term: '火',
+  reading: 'ひ',
+  meaning: 'lửa',
+  meaningEn: 'fire',
+  level: 'N5',
 );
 const _vocab3 = VocabItem(
-  id: 3, term: '山', reading: 'やま', meaning: 'núi', meaningEn: 'mountain', level: 'N5',
+  id: 3,
+  term: '山',
+  reading: 'やま',
+  meaning: 'núi',
+  meaningEn: 'mountain',
+  level: 'N5',
 );
 
 const _q1 = Question(
-  id: 'q1', type: QuestionType.multipleChoice,
-  targetItem: _vocab1, questionText: 'What is 水?',
-  correctAnswer: 'water', options: ['water', 'fire'],
+  id: 'q1',
+  type: QuestionType.multipleChoice,
+  targetItem: _vocab1,
+  questionText: 'What is 水?',
+  correctAnswer: 'water',
+  options: ['water', 'fire'],
 );
 const _q2 = Question(
-  id: 'q2', type: QuestionType.multipleChoice,
-  targetItem: _vocab2, questionText: 'What is 火?',
-  correctAnswer: 'fire', options: ['water', 'fire'],
+  id: 'q2',
+  type: QuestionType.multipleChoice,
+  targetItem: _vocab2,
+  questionText: 'What is 火?',
+  correctAnswer: 'fire',
+  options: ['water', 'fire'],
 );
 const _q3 = Question(
-  id: 'q3', type: QuestionType.fillBlank,
-  targetItem: _vocab3, questionText: '山 means ___',
+  id: 'q3',
+  type: QuestionType.fillBlank,
+  targetItem: _vocab3,
+  questionText: '山 means ___',
   correctAnswer: 'mountain',
 );
 
@@ -106,10 +129,7 @@ void main() {
     test('returns 1.0 for all correct', () {
       final s = _session(
         questions: [_q1, _q2],
-        results: [
-          _result(_q1, correct: true),
-          _result(_q2, correct: true),
-        ],
+        results: [_result(_q1, correct: true), _result(_q2, correct: true)],
       );
       expect(s.accuracy, 1.0);
     });
@@ -204,10 +224,7 @@ void main() {
     test('deduplicates repeated wrong answers for same term', () {
       final s = _session(
         questions: [_q1, _q1],
-        results: [
-          _result(_q1, correct: false),
-          _result(_q1, correct: false),
-        ],
+        results: [_result(_q1, correct: false), _result(_q1, correct: false)],
       );
       expect(s.weakTermIds, [_vocab1.id]); // deduplicated via toSet()
     });

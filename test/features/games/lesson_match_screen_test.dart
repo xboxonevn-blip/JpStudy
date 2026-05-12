@@ -27,16 +27,19 @@ UserLessonTermData _term(int id, String term, String definition) =>
     );
 
 Widget buildScreen(List<UserLessonTermData> items) => ProviderScope(
-      overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-        studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
-        lessonTermsProvider(const LessonTermsArgs(1, 'N5', 'Test Lesson'))
-            .overrideWith((ref) async => items),
-      ],
-      child: const MaterialApp(
-        home: LessonMatchScreen(lessonId: 1, lessonTitle: 'Test Lesson'),
-      ),
-    );
+  overrides: [
+    appLanguageProvider.overrideWith(
+      (ref) => AppLanguageController.test(AppLanguage.en),
+    ),
+    studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+    lessonTermsProvider(
+      const LessonTermsArgs(1, 'N5', 'Test Lesson'),
+    ).overrideWith((ref) async => items),
+  ],
+  child: const MaterialApp(
+    home: LessonMatchScreen(lessonId: 1, lessonTitle: 'Test Lesson'),
+  ),
+);
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
@@ -51,11 +54,13 @@ void main() {
   });
 
   testWidgets('shows start button when terms exist', (tester) async {
-    await tester.pumpWidget(buildScreen([
-      _term(1, '火', 'fire'),
-      _term(2, '水', 'water'),
-      _term(3, '木', 'tree'),
-    ]));
+    await tester.pumpWidget(
+      buildScreen([
+        _term(1, '火', 'fire'),
+        _term(2, '水', 'water'),
+        _term(3, '木', 'tree'),
+      ]),
+    );
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));
     expect(

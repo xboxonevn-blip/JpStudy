@@ -5,10 +5,9 @@ const _practiceHubOrderPrefKey = 'home.practice_hub.order';
 const _practiceHubFocusModePrefKey = 'home.practice_hub.focus_mode';
 
 final practiceHubPreferencesProvider =
-    NotifierProvider<
-      PracticeHubPreferencesNotifier,
-      PracticeHubPreferences
-    >(PracticeHubPreferencesNotifier.new);
+    NotifierProvider<PracticeHubPreferencesNotifier, PracticeHubPreferences>(
+      PracticeHubPreferencesNotifier.new,
+    );
 
 class PracticeHubPreferences {
   const PracticeHubPreferences({
@@ -39,8 +38,7 @@ class PracticeHubPreferences {
   }
 }
 
-class PracticeHubPreferencesNotifier
-    extends Notifier<PracticeHubPreferences> {
+class PracticeHubPreferencesNotifier extends Notifier<PracticeHubPreferences> {
   @override
   PracticeHubPreferences build() {
     load();

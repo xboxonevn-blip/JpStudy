@@ -54,10 +54,7 @@ class WeaknessRadarCard extends ConsumerWidget {
                           end: Alignment.bottomRight,
                         ),
                       ),
-                      child: Icon(
-                        Icons.radar_rounded,
-                        color: palette.ink,
-                      ),
+                      child: Icon(Icons.radar_rounded, color: palette.ink),
                     ),
                     const SizedBox(width: 10),
                     Expanded(

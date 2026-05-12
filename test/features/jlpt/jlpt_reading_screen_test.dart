@@ -44,7 +44,11 @@ void main() {
   testWidgets('JlptReadingScreen hiển thị tiếng Việt đúng', (tester) async {
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [appLanguageProvider.overrideWith((ref) => AppLanguage.vi)],
+        overrides: [
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.vi),
+          ),
+        ],
         child: const MaterialApp(home: JlptReadingScreen()),
       ),
     );
@@ -76,7 +80,9 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          appLanguageProvider.overrideWith(
+            (ref) => AppLanguageController.test(AppLanguage.en),
+          ),
           studyLevelProvider.overrideWith((ref) => StudyLevel.n4),
         ],
         child: const MaterialApp(home: JlptReadingScreen()),

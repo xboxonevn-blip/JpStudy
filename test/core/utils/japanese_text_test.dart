@@ -76,12 +76,14 @@ void main() {
       expect(shouldShowReading(term: 'たべる', reading: 'たべる'), isFalse);
     });
 
-    test('returns false when term is kana-only (reading would be redundant)',
-        () {
-      // Pure kana term → reading is unnecessary
-      expect(shouldShowReading(term: 'たべる', reading: 'たべる'), isFalse);
-      expect(shouldShowReading(term: 'いく', reading: 'いく'), isFalse);
-    });
+    test(
+      'returns false when term is kana-only (reading would be redundant)',
+      () {
+        // Pure kana term → reading is unnecessary
+        expect(shouldShowReading(term: 'たべる', reading: 'たべる'), isFalse);
+        expect(shouldShowReading(term: 'いく', reading: 'いく'), isFalse);
+      },
+    );
 
     test('returns true when term has kanji and reading differs', () {
       expect(shouldShowReading(term: '食べる', reading: 'たべる'), isTrue);

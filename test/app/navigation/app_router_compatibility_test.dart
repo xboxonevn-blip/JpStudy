@@ -20,7 +20,9 @@ import 'package:jpstudy/features/write/screens/home_handwriting_practice_screen.
 Widget _buildApp() {
   return ProviderScope(
     overrides: [
-      appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(AppLanguage.en),
+      ),
       studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
     ],
     child: MaterialApp.router(routerConfig: AppRouter.router),

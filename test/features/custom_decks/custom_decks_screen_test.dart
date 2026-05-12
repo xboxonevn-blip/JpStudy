@@ -34,7 +34,9 @@ Widget _buildRouterScreen({AppLanguage language = AppLanguage.en}) {
 
   return ProviderScope(
     overrides: [
-      appLanguageProvider.overrideWith((ref) => language),
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(language),
+      ),
       dashboardProvider.overrideWith(
         (ref) => Stream.value(
           const DashboardState(
@@ -80,30 +82,27 @@ void main() {
     SharedPreferences.setMockInitialValues({});
   });
 
-  testWidgets('Tapping Cram mode item navigates to /vocab/review with source=cram',
-      (tester) async {
-    await tester.pumpWidget(_buildRouterScreen());
-    await _pump(tester);
+  testWidgets(
+    'Tapping Cram mode item navigates to /vocab/review with source=cram',
+    (tester) async {
+      await tester.pumpWidget(_buildRouterScreen());
+      await _pump(tester);
 
-    // Scroll down to reveal the Active toolkit section (it's below the recipe card)
-    await tester.ensureVisible(find.text('Cram mode'));
-    await _pump(tester);
+      // Scroll down to reveal the Active toolkit section (it's below the recipe card)
+      await tester.ensureVisible(find.text('Cram mode'));
+      await _pump(tester);
 
-    await tester.tap(find.text('Cram mode'));
-    await _pump(tester);
+      await tester.tap(find.text('Cram mode'));
+      await _pump(tester);
 
-    expect(
-      find.textContaining('VOCAB_REVIEW_source=cram'),
-      findsOneWidget,
-    );
-    expect(
-      find.textContaining('title=Night Cram'),
-      findsOneWidget,
-    );
-  });
+      expect(find.textContaining('VOCAB_REVIEW_source=cram'), findsOneWidget);
+      expect(find.textContaining('title=Night Cram'), findsOneWidget);
+    },
+  );
 
-  testWidgets('Tapping Custom quiz shows snackbar (not cram navigation)',
-      (tester) async {
+  testWidgets('Tapping Custom quiz shows snackbar (not cram navigation)', (
+    tester,
+  ) async {
     await tester.pumpWidget(_buildRouterScreen());
     await _pump(tester);
 
@@ -119,9 +118,9 @@ void main() {
     expect(find.byType(SnackBar), findsOneWidget);
   });
 
-  testWidgets(
-      'Cram mode in VI language navigates with title=Nhồi nhanh',
-      (tester) async {
+  testWidgets('Cram mode in VI language navigates with title=Nhồi nhanh', (
+    tester,
+  ) async {
     await tester.pumpWidget(_buildRouterScreen(language: AppLanguage.vi));
     await _pump(tester);
 
@@ -131,19 +130,13 @@ void main() {
     await tester.tap(find.text('Chế độ nhồi nhanh'));
     await _pump(tester);
 
-    expect(
-      find.textContaining('VOCAB_REVIEW_source=cram'),
-      findsOneWidget,
-    );
-    expect(
-      find.textContaining('title=Nhồi nhanh'),
-      findsOneWidget,
-    );
+    expect(find.textContaining('VOCAB_REVIEW_source=cram'), findsOneWidget);
+    expect(find.textContaining('title=Nhồi nhanh'), findsOneWidget);
   });
 
-  testWidgets(
-      'Cram mode in JA language navigates with title=Night Cram',
-      (tester) async {
+  testWidgets('Cram mode in JA language navigates with title=Night Cram', (
+    tester,
+  ) async {
     await tester.pumpWidget(_buildRouterScreen(language: AppLanguage.ja));
     await _pump(tester);
 
@@ -156,10 +149,12 @@ void main() {
     );
     await _pump(tester);
 
-    await tester.tap(find.byWidgetPredicate(
-      (w) => w is Text && w.data == 'Cram mode',
-      description: 'JA cram mode item',
-    ));
+    await tester.tap(
+      find.byWidgetPredicate(
+        (w) => w is Text && w.data == 'Cram mode',
+        description: 'JA cram mode item',
+      ),
+    );
     await _pump(tester);
 
     expect(find.textContaining('VOCAB_REVIEW_source=cram'), findsOneWidget);

@@ -46,9 +46,10 @@ class AchievementDao extends DatabaseAccessor<AppDatabase>
 
   /// Returns true if an achievement of the given type and value already exists.
   Future<bool> hasAchievement(String type, int value) async {
-    final row = await (select(achievements)
-          ..where((t) => t.type.equals(type) & t.value.equals(value)))
-        .getSingleOrNull();
+    final row =
+        await (select(achievements)
+              ..where((t) => t.type.equals(type) & t.value.equals(value)))
+            .getSingleOrNull();
     return row != null;
   }
 }

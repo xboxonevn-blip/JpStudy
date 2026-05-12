@@ -66,39 +66,63 @@ void main() {
 
   test('perfectRound bonusXP is 50', () {
     expect(
-      Achievement(type: AchievementType.perfectRound, value: 0, earnedAt: DateTime(2025)).bonusXP,
+      Achievement(
+        type: AchievementType.perfectRound,
+        value: 0,
+        earnedAt: DateTime(2025),
+      ).bonusXP,
       50,
     );
   });
 
   test('streak bonusXP = value * 10', () {
     expect(
-      Achievement(type: AchievementType.streak, value: 5, earnedAt: DateTime(2025)).bonusXP,
+      Achievement(
+        type: AchievementType.streak,
+        value: 5,
+        earnedAt: DateTime(2025),
+      ).bonusXP,
       50,
     );
     expect(
-      Achievement(type: AchievementType.streak, value: 30, earnedAt: DateTime(2025)).bonusXP,
+      Achievement(
+        type: AchievementType.streak,
+        value: 30,
+        earnedAt: DateTime(2025),
+      ).bonusXP,
       300,
     );
   });
 
   test('levelUp bonusXP is 100', () {
     expect(
-      Achievement(type: AchievementType.levelUp, value: 10, earnedAt: DateTime(2025)).bonusXP,
+      Achievement(
+        type: AchievementType.levelUp,
+        value: 10,
+        earnedAt: DateTime(2025),
+      ).bonusXP,
       100,
     );
   });
 
   test('kanjiMaster bonusXP is 200', () {
     expect(
-      Achievement(type: AchievementType.kanjiMaster, value: 0, earnedAt: DateTime(2025)).bonusXP,
+      Achievement(
+        type: AchievementType.kanjiMaster,
+        value: 0,
+        earnedAt: DateTime(2025),
+      ).bonusXP,
       200,
     );
   });
 
   test('speedDemon bonusXP is 25', () {
     expect(
-      Achievement(type: AchievementType.speedDemon, value: 0, earnedAt: DateTime(2025)).bonusXP,
+      Achievement(
+        type: AchievementType.speedDemon,
+        value: 0,
+        earnedAt: DateTime(2025),
+      ).bonusXP,
       25,
     );
   });

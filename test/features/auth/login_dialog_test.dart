@@ -8,8 +8,9 @@ import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/auth/auth_provider.dart';
 import 'package:jpstudy/core/auth/auth_service.dart';
 import 'package:jpstudy/core/auth/auth_user.dart';
-import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/shared_preferences_provider.dart';
 import 'package:jpstudy/features/auth/widgets/login_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FakeAuthService implements AuthService {
   FakeAuthService({this.googleResult, this.emailResult});
@@ -100,10 +101,12 @@ Future<void> _pumpHost(
   FakeAuthService? authService,
 }) async {
   final fake = authService ?? FakeAuthService();
+  SharedPreferences.setMockInitialValues({'app.locale': language.name});
+  final prefs = await SharedPreferences.getInstance();
   await tester.pumpWidget(
     ProviderScope(
       overrides: [
-        appLanguageProvider.overrideWith((ref) => language),
+        sharedPreferencesProvider.overrideWithValue(prefs),
         authServiceProvider.overrideWithValue(fake),
       ],
       child: MaterialApp(
@@ -135,7 +138,9 @@ void main() {
       expect(find.text('Đăng nhập bằng Google'), findsOneWidget);
       expect(find.text('HOẶC'), findsOneWidget);
       expect(
-        find.text('Nếu không tiện dùng Gmail hãy nhắn mình cấp tài khoản.'),
+        find.text(
+          'Nếu không tiện dùng Google, hãy dùng tài khoản email do nhóm học hoặc quản trị viên cung cấp.',
+        ),
         findsOneWidget,
       );
     },
@@ -193,28 +198,22 @@ void main() {
     expect(find.byType(LoginDialog), findsNothing);
   });
 
-  testWidgets(
-    'Google button surfaces invalid-credentials snackbar on failure',
-    (tester) async {
-      // googleResult: null → service throws AuthException(unknown)
-      final fake = FakeAuthService();
-      await _pumpHost(tester, authService: fake);
-      await _openDialog(tester);
+  testWidgets('Google button surfaces inline error on failure', (tester) async {
+    // googleResult: null → service throws AuthException(unknown)
+    final fake = FakeAuthService();
+    await _pumpHost(tester, authService: fake);
+    await _openDialog(tester);
 
-      await tester.tap(find.text('Đăng nhập bằng Google'));
-      await tester.pumpAndSettle();
+    await tester.tap(find.text('Đăng nhập bằng Google'));
+    await tester.pumpAndSettle();
 
-      expect(fake.googleCalls, 1);
-      expect(
-        find.text('Đăng nhập thất bại. Vui lòng thử lại.'),
-        findsOneWidget,
-      );
-      expect(find.byType(LoginDialog), findsOneWidget);
-    },
-  );
+    expect(fake.googleCalls, 1);
+    expect(find.text('Đăng nhập thất bại. Vui lòng thử lại.'), findsOneWidget);
+    expect(find.byType(LoginDialog), findsOneWidget);
+  });
 
   testWidgets(
-    'submit with empty fields surfaces a validation snackbar without calling service',
+    'submit with empty fields surfaces inline validation without calling service',
     (tester) async {
       final fake = FakeAuthService();
       await _pumpHost(tester, authService: fake);
@@ -249,11 +248,13 @@ void main() {
     },
   );
 
-  testWidgets('submit with wrong password shows invalid-credentials snackbar', (
+  testWidgets('submit with wrong password shows specific inline error', (
     tester,
   ) async {
-    // emailResult is null → fake throws invalidCredentials
-    final fake = FakeAuthService();
+    final fake = FakeAuthService(
+      emailResult: ({required email, required password}) =>
+          AuthException(AuthErrorKind.wrongPassword),
+    );
     await _pumpHost(tester, authService: fake);
     await _openDialog(tester);
 
@@ -263,34 +264,55 @@ void main() {
     await tester.tap(find.widgetWithText(ElevatedButton, 'Đăng nhập'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Email hoặc mật khẩu không đúng.'), findsWidgets);
+    expect(find.text(AppLanguage.vi.authWrongPasswordLabel), findsWidgets);
     expect(find.byType(LoginDialog), findsOneWidget);
   });
 
-  testWidgets('submit surfaces unknown snackbar for AuthException unknown', (
+  testWidgets('submit with missing email shows specific inline error', (
     tester,
   ) async {
     final fake = FakeAuthService(
       emailResult: ({required email, required password}) =>
-          AuthException(AuthErrorKind.unknown),
+          AuthException(AuthErrorKind.userNotFound),
     );
     await _pumpHost(tester, authService: fake);
     await _openDialog(tester);
 
     final fields = find.byType(TextField);
-    await tester.enterText(fields.at(0), 'fake-test@example.com');
-    await tester.enterText(fields.at(1), 'wrongpass');
-    await tester.tap(
-      find.widgetWithText(ElevatedButton, AppLanguage.vi.loginSubmitLabel),
-    );
+    await tester.enterText(fields.at(0), 'missing@example.com');
+    await tester.enterText(fields.at(1), 'hunter2');
+    await tester.tap(find.widgetWithText(ElevatedButton, 'Đăng nhập'));
     await tester.pumpAndSettle();
 
-    expect(find.text(AppLanguage.vi.authUnknownErrorLabel), findsWidgets);
+    expect(find.text(AppLanguage.vi.authUserNotFoundLabel), findsWidgets);
     expect(find.byType(LoginDialog), findsOneWidget);
   });
 
   testWidgets(
-    'submit surfaces unknown snackbar for non-AuthException failures',
+    'submit surfaces unknown inline error for AuthException unknown',
+    (tester) async {
+      final fake = FakeAuthService(
+        emailResult: ({required email, required password}) =>
+            AuthException(AuthErrorKind.unknown),
+      );
+      await _pumpHost(tester, authService: fake);
+      await _openDialog(tester);
+
+      final fields = find.byType(TextField);
+      await tester.enterText(fields.at(0), 'fake-test@example.com');
+      await tester.enterText(fields.at(1), 'wrongpass');
+      await tester.tap(
+        find.widgetWithText(ElevatedButton, AppLanguage.vi.loginSubmitLabel),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text(AppLanguage.vi.authUnknownErrorLabel), findsWidgets);
+      expect(find.byType(LoginDialog), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'submit surfaces unknown inline error for non-AuthException failures',
     (tester) async {
       final fake = FakeAuthService(
         emailResult: ({required email, required password}) =>

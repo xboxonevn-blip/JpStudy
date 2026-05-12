@@ -41,7 +41,10 @@ void main() {
     });
 
     test('falls back to default source and lessonTitle when missing', () {
-      final json = {'termIds': [5], 'createdAt': DateTime.now().toIso8601String()};
+      final json = {
+        'termIds': [5],
+        'createdAt': DateTime.now().toIso8601String(),
+      };
       final pack = RecoveryPack.fromJson(json)!;
       expect(pack.source, 'exam');
       expect(pack.lessonTitle, 'Recovery Pack');
@@ -52,22 +55,28 @@ void main() {
 
   group('RecoveryPack.isFresh', () {
     RecoveryPack pack0(DateTime createdAt) => RecoveryPack(
-          source: 'mock_exam',
-          lessonTitle: 'L1',
-          termIds: [1],
-          createdAt: createdAt,
-        );
+      source: 'mock_exam',
+      lessonTitle: 'L1',
+      termIds: [1],
+      createdAt: createdAt,
+    );
 
     test('fresh when created now', () {
       expect(pack0(DateTime.now()).isFresh, isTrue);
     });
 
     test('fresh when created 1 day ago', () {
-      expect(pack0(DateTime.now().subtract(const Duration(days: 1))).isFresh, isTrue);
+      expect(
+        pack0(DateTime.now().subtract(const Duration(days: 1))).isFresh,
+        isTrue,
+      );
     });
 
     test('stale when created 3 days ago', () {
-      expect(pack0(DateTime.now().subtract(const Duration(days: 3))).isFresh, isFalse);
+      expect(
+        pack0(DateTime.now().subtract(const Duration(days: 3))).isFresh,
+        isFalse,
+      );
     });
   });
 

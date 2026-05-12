@@ -27,19 +27,24 @@ UserLessonTermData _term(int id, String term, String definition) =>
     );
 
 Widget buildScreen(List<UserLessonTermData> terms) => ProviderScope(
-      overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-        studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
-        lessonTitleProvider(const LessonTitleArgs(1, 'Lesson 1'))
-            .overrideWith((ref) async => 'Lesson 1'),
-        lessonTermsProvider(const LessonTermsArgs(1, 'N5', 'Lesson 1'))
-            .overrideWith((ref) async => terms),
-        lessonDueTermsProvider(1)
-            .overrideWith((ref) async => const <UserLessonTermData>[]),
-        srsStateProvider(1).overrideWith((ref) async => null),
-      ],
-      child: const MaterialApp(home: LessonDetailScreen(lessonId: 1)),
-    );
+  overrides: [
+    appLanguageProvider.overrideWith(
+      (ref) => AppLanguageController.test(AppLanguage.en),
+    ),
+    studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+    lessonTitleProvider(
+      const LessonTitleArgs(1, 'Lesson 1'),
+    ).overrideWith((ref) async => 'Lesson 1'),
+    lessonTermsProvider(
+      const LessonTermsArgs(1, 'N5', 'Lesson 1'),
+    ).overrideWith((ref) async => terms),
+    lessonDueTermsProvider(
+      1,
+    ).overrideWith((ref) async => const <UserLessonTermData>[]),
+    srsStateProvider(1).overrideWith((ref) async => null),
+  ],
+  child: const MaterialApp(home: LessonDetailScreen(lessonId: 1)),
+);
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
@@ -52,8 +57,9 @@ void main() {
     expect(find.byType(TabBar), findsOneWidget);
   });
 
-  testWidgets('shows tab bar with Flashcards, Grammar, Kanji tabs',
-      (tester) async {
+  testWidgets('shows tab bar with Flashcards, Grammar, Kanji tabs', (
+    tester,
+  ) async {
     await tester.pumpWidget(buildScreen([_term(1, '犬', 'dog')]));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));

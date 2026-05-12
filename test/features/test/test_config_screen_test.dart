@@ -46,32 +46,36 @@ Widget buildScreen({
   VoidCallback? onResume,
   Future<void> Function()? onDiscardResume,
 }) => ProviderScope(
-      overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-      ],
-      child: MaterialApp(
-        home: TestConfigScreen(
-          lessonId: 1,
-          lessonTitle: 'Lesson 1',
-          maxQuestions: maxQuestions,
-          initialConfig: initialConfig,
-          resumeSnapshot: resumeSnapshot,
-          onStart: onStart ?? (_) {},
-          onResume: onResume,
-          onDiscardResume: onDiscardResume,
-        ),
-      ),
-    );
+  overrides: [
+    appLanguageProvider.overrideWith(
+      (ref) => AppLanguageController.test(AppLanguage.en),
+    ),
+  ],
+  child: MaterialApp(
+    home: TestConfigScreen(
+      lessonId: 1,
+      lessonTitle: 'Lesson 1',
+      maxQuestions: maxQuestions,
+      initialConfig: initialConfig,
+      resumeSnapshot: resumeSnapshot,
+      onStart: onStart ?? (_) {},
+      onResume: onResume,
+      onDiscardResume: onDiscardResume,
+    ),
+  ),
+);
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
 
   testWidgets('shows resume card when snapshot exists', (tester) async {
-    await tester.pumpWidget(buildScreen(
-      resumeSnapshot: _resumeSnapshot,
-      onResume: () {},
-      onDiscardResume: () async {},
-    ));
+    await tester.pumpWidget(
+      buildScreen(
+        resumeSnapshot: _resumeSnapshot,
+        onResume: () {},
+        onDiscardResume: () async {},
+      ),
+    );
     await tester.pump();
 
     expect(find.text(AppLanguage.en.resumeSessionTitle), findsOneWidget);
@@ -79,16 +83,23 @@ void main() {
     expect(find.text(AppLanguage.en.discardButtonLabel), findsOneWidget);
   });
 
-  testWidgets('shows config hero and selected options from initial config', (tester) async {
+  testWidgets('shows config hero and selected options from initial config', (
+    tester,
+  ) async {
     await tester.pumpWidget(buildScreen());
     await tester.pump();
 
     expect(find.text(AppLanguage.en.configureTestLabel), findsOneWidget);
-    expect(find.text(AppLanguage.en.testQuestionsAvailableLabel(20)), findsOneWidget);
+    expect(
+      find.text(AppLanguage.en.testQuestionsAvailableLabel(20)),
+      findsOneWidget,
+    );
     expect(find.text(AppLanguage.en.timeLimitMinutesLabel(10)), findsWidgets);
   });
 
-  testWidgets('start button passes current config to onStart callback', (tester) async {
+  testWidgets('start button passes current config to onStart callback', (
+    tester,
+  ) async {
     TestConfig? started;
     await tester.pumpWidget(buildScreen(onStart: (config) => started = config));
     await tester.pump();
@@ -99,17 +110,22 @@ void main() {
 
     expect(started, isNotNull);
     expect(started!.questionCount, 10);
-    expect(started!.enabledTypes, [QuestionType.multipleChoice, QuestionType.trueFalse]);
+    expect(started!.enabledTypes, [
+      QuestionType.multipleChoice,
+      QuestionType.trueFalse,
+    ]);
     expect(started!.timeLimitMinutes, 10);
   });
 
   testWidgets('resume button triggers onResume callback', (tester) async {
     var resumed = false;
-    await tester.pumpWidget(buildScreen(
-      resumeSnapshot: _resumeSnapshot,
-      onResume: () => resumed = true,
-      onDiscardResume: () async {},
-    ));
+    await tester.pumpWidget(
+      buildScreen(
+        resumeSnapshot: _resumeSnapshot,
+        onResume: () => resumed = true,
+        onDiscardResume: () async {},
+      ),
+    );
     await tester.pump();
 
     await tester.tap(find.text(AppLanguage.en.resumeButtonLabel));
@@ -118,13 +134,17 @@ void main() {
     expect(resumed, isTrue);
   });
 
-  testWidgets('discard button removes resume card and triggers callback', (tester) async {
+  testWidgets('discard button removes resume card and triggers callback', (
+    tester,
+  ) async {
     var discarded = false;
-    await tester.pumpWidget(buildScreen(
-      resumeSnapshot: _resumeSnapshot,
-      onResume: () {},
-      onDiscardResume: () async => discarded = true,
-    ));
+    await tester.pumpWidget(
+      buildScreen(
+        resumeSnapshot: _resumeSnapshot,
+        onResume: () {},
+        onDiscardResume: () async => discarded = true,
+      ),
+    );
     await tester.pump();
 
     expect(find.text(AppLanguage.en.resumeSessionTitle), findsOneWidget);
@@ -136,15 +156,19 @@ void main() {
     expect(find.text(AppLanguage.en.resumeSessionTitle), findsNothing);
   });
 
-  testWidgets('clamps oversized initial question count down to max cap', (tester) async {
+  testWidgets('clamps oversized initial question count down to max cap', (
+    tester,
+  ) async {
     const oversized = TestConfig(questionCount: 999, timeLimitMinutes: 30);
     TestConfig? started;
 
-    await tester.pumpWidget(buildScreen(
-      initialConfig: oversized,
-      maxQuestions: 20,
-      onStart: (config) => started = config,
-    ));
+    await tester.pumpWidget(
+      buildScreen(
+        initialConfig: oversized,
+        maxQuestions: 20,
+        onStart: (config) => started = config,
+      ),
+    );
     await tester.pump();
 
     await tester.ensureVisible(find.text(AppLanguage.en.startTestLabel));
@@ -155,27 +179,32 @@ void main() {
     expect(started!.questionCount, 20);
   });
 
-  testWidgets('uses maxQuestions as default question count when initialConfig is null',
-      (tester) async {
-    TestConfig? started;
+  testWidgets(
+    'uses maxQuestions as default question count when initialConfig is null',
+    (tester) async {
+      TestConfig? started;
 
-    await tester.pumpWidget(buildScreen(
-      initialConfig: null,
-      maxQuestions: 7,
-      onStart: (config) => started = config,
-    ));
-    await tester.pump();
+      await tester.pumpWidget(
+        buildScreen(
+          initialConfig: null,
+          maxQuestions: 7,
+          onStart: (config) => started = config,
+        ),
+      );
+      await tester.pump();
 
-    await tester.ensureVisible(find.text(AppLanguage.en.startTestLabel));
-    await tester.tap(find.text(AppLanguage.en.startTestLabel));
-    await tester.pump();
+      await tester.ensureVisible(find.text(AppLanguage.en.startTestLabel));
+      await tester.tap(find.text(AppLanguage.en.startTestLabel));
+      await tester.pump();
 
-    expect(started, isNotNull);
-    expect(started!.questionCount, 7);
-  });
+      expect(started, isNotNull);
+      expect(started!.questionCount, 7);
+    },
+  );
 
-  testWidgets('summary reflects adaptive testing feedback state from config',
-      (tester) async {
+  testWidgets('summary reflects adaptive testing feedback state from config', (
+    tester,
+  ) async {
     await tester.pumpWidget(buildScreen());
     await tester.pump();
 

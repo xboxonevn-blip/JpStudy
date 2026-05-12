@@ -131,9 +131,9 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
       case AppLanguage.en:
         return 'Library';
       case AppLanguage.vi:
-        return 'ThÃ†Â° viÃ¡Â»â€¡n';
+        return 'Thư viện';
       case AppLanguage.ja:
-        return 'Ã£Æ’Â©Ã£â€šÂ¤Ã£Æ’â€“Ã£Æ’Â©Ã£Æ’Âª';
+        return 'ライブラリ';
     }
   }
 
@@ -142,100 +142,88 @@ class _LibraryScreenState extends ConsumerState<LibraryScreen> {
       case AppLanguage.en:
         return 'Search';
       case AppLanguage.vi:
-        return 'TÃƒÂ¬m kiÃ¡ÂºÂ¿m';
+        return 'Tìm kiếm';
       case AppLanguage.ja:
-        return 'Ã¦Â¤Å“Ã§Â´Â¢';
+        return '検索';
     }
   }
 }
 
 String _sectionsTitle(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Sections',
-  AppLanguage.vi => 'NhÃƒÂ³m hÃ¡Â»Âc',
-  AppLanguage.ja => 'Ã£â€šÂ»Ã£â€šÂ¯Ã£â€šÂ·Ã£Æ’Â§Ã£Æ’Â³',
+  AppLanguage.vi => 'Nhóm học',
+  AppLanguage.ja => 'セクション',
 };
 
 String _sectionsCaption(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Move between lookup, grammar, and the lesson roadmap.',
-  AppLanguage.vi =>
-    'Di chuyÃ¡Â»Æ’n giÃ¡Â»Â¯a tra cÃ¡Â»Â©u, ngÃ¡Â»Â¯ phÃƒÂ¡p, vÃƒÂ  roadmap lesson.',
-  AppLanguage.ja =>
-    'Ã¦Â¤Å“Ã§Â´Â¢Ã£Æ’Â»Ã¦â€“â€¡Ã¦Â³â€¢Ã£Æ’Â»Ã£Æ’Â¬Ã£Æ’Æ’Ã£â€šÂ¹Ã£Æ’Â³Ã£Æ’Â­Ã£Æ’Â¼Ã£Æ’â€°Ã£Æ’Å¾Ã£Æ’Æ’Ã£Æ’â€”Ã£â€šâ€™Ã¨Â¡Å’Ã£ÂÂÃ¦ÂÂ¥Ã£ÂÂ§Ã£ÂÂÃ£ÂÂ¾Ã£Ââ„¢Ã£â‚¬â€š',
+  AppLanguage.vi => 'Di chuyển giữa tra cứu, ngữ pháp, và roadmap lesson.',
+  AppLanguage.ja => '検索・文法・レッスンロードマップを行き来できます。',
 };
 
 String _lessonsTitle(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Lessons',
-  AppLanguage.vi => 'BÃƒÂ i hÃ¡Â»Âc',
-  AppLanguage.ja => 'Ã£Æ’Â¬Ã£Æ’Æ’Ã£â€šÂ¹Ã£Æ’Â³',
+  AppLanguage.vi => 'Bài học',
+  AppLanguage.ja => 'レッスン',
 };
 
-String _lessonsCaption(
-  AppLanguage language,
-  _LibraryFilter filter,
-) => switch (filter) {
-  _LibraryFilter.all => switch (language) {
-    AppLanguage.en => 'See the whole level with due lessons pulled forward.',
-    AppLanguage.vi =>
-      'Xem toÃƒÂ n bÃ¡Â»â„¢ level vÃ¡Â»â€ºi cÃƒÂ¡c lesson Ã„â€˜Ã¡ÂºÂ¿n hÃ¡ÂºÂ¡n Ã„â€˜Ã†Â°Ã¡Â»Â£c kÃƒÂ©o lÃƒÂªn trÃ†Â°Ã¡Â»â€ºc.',
-    AppLanguage.ja =>
-      'Ã¦Å“Å¸Ã©â„¢ÂÃ£ÂÂ®Ã£Ââ€šÃ£â€šâ€¹Ã£Æ’Â¬Ã£Æ’Æ’Ã£â€šÂ¹Ã£Æ’Â³Ã£â€šâ€™Ã¥â€°ÂÃ£ÂÂ«Ã¥â€¡ÂºÃ£Ââ€”Ã£ÂÂ¦Ã¥â€¦Â¨Ã¤Â½â€œÃ£â€šâ€™Ã¨Â¦â€¹Ã£â€šâ€°Ã£â€šÅ’Ã£ÂÂ¾Ã£Ââ„¢Ã£â‚¬â€š',
-  },
-  _LibraryFilter.due => switch (language) {
-    AppLanguage.en => 'Only lessons that currently need review attention.',
-    AppLanguage.vi =>
-      'ChÃ¡Â»â€° hiÃ¡Â»â€¡n cÃƒÂ¡c lesson Ã„â€˜ang cÃ¡ÂºÂ§n chÃƒÂº ÃƒÂ½ review.',
-    AppLanguage.ja =>
-      'Ã¤Â»Å Ã£Æ’Â¬Ã£Æ’â€œÃ£Æ’Â¥Ã£Æ’Â¼Ã¦Â³Â¨Ã¦â€žÂÃ£ÂÅ’Ã¥Â¿â€¦Ã¨Â¦ÂÃ£ÂÂªÃ£Æ’Â¬Ã£Æ’Æ’Ã£â€šÂ¹Ã£Æ’Â³Ã£ÂÂ®Ã£ÂÂ¿Ã¨Â¡Â¨Ã§Â¤ÂºÃ£Ââ€”Ã£ÂÂ¾Ã£Ââ„¢Ã£â‚¬â€š',
-  },
-  _LibraryFilter.active => switch (language) {
-    AppLanguage.en => 'Lessons already in motion but not finished yet.',
-    AppLanguage.vi =>
-      'CÃƒÂ¡c lesson Ã„â€˜ÃƒÂ£ bÃ¡ÂºÂ¯t Ã„â€˜Ã¡ÂºÂ§u nhÃ†Â°ng vÃ¡ÂºÂ«n chÃ†Â°a khÃƒÂ©p vÃƒÂ²ng.',
-    AppLanguage.ja =>
-      'Ã£Ââ„¢Ã£ÂÂ§Ã£ÂÂ«Ã©â‚¬Â²Ã£â€šÂÃ£ÂÂ¦Ã£Ââ€žÃ£ÂÂ¦Ã£â‚¬ÂÃ£ÂÂ¾Ã£ÂÂ Ã©â€“â€°Ã£ÂËœÃ£ÂÂ¦Ã£Ââ€žÃ£ÂÂªÃ£Ââ€žÃ£Æ’Â¬Ã£Æ’Æ’Ã£â€šÂ¹Ã£Æ’Â³Ã£ÂÂ§Ã£Ââ„¢Ã£â‚¬â€š',
-  },
-  _LibraryFilter.fresh => switch (language) {
-    AppLanguage.en => 'Fresh lessons you can open cleanly next.',
-    AppLanguage.vi =>
-      'CÃƒÂ¡c lesson cÃƒÂ²n sÃ¡ÂºÂ¡ch mÃƒÂ  bÃ¡ÂºÂ¡n cÃƒÂ³ thÃ¡Â»Æ’ mÃ¡Â»Å¸ tiÃ¡ÂºÂ¿p.',
-    AppLanguage.ja =>
-      'Ã¦Â¬Â¡Ã£ÂÂ«Ã£ÂÂÃ£â€šÅ’Ã£Ââ€žÃ£ÂÂ«Ã©â€“â€¹Ã£Ââ€˜Ã£â€šâ€¹Ã¦â€“Â°Ã£Ââ€”Ã£Ââ€žÃ£Æ’Â¬Ã£Æ’Æ’Ã£â€šÂ¹Ã£Æ’Â³Ã£ÂÂ§Ã£Ââ„¢Ã£â‚¬â€š',
-  },
-  _LibraryFilter.completed => switch (language) {
-    AppLanguage.en => 'Finished lessons you can revisit when needed.',
-    AppLanguage.vi =>
-      'CÃƒÂ¡c lesson Ã„â€˜ÃƒÂ£ hoÃƒÂ n thÃƒÂ nh Ã„â€˜Ã¡Â»Æ’ quay lÃ¡ÂºÂ¡i khi cÃ¡ÂºÂ§n.',
-    AppLanguage.ja =>
-      'Ã¥Â¿â€¦Ã¨Â¦ÂÃ£ÂÂªÃ¦â„¢â€šÃ£ÂÂ«Ã¦Ë†Â»Ã£â€šÅ’Ã£â€šâ€¹Ã¥Â®Å’Ã¤Âºâ€ Ã¦Â¸Ë†Ã£ÂÂ¿Ã£Æ’Â¬Ã£Æ’Æ’Ã£â€šÂ¹Ã£Æ’Â³Ã£ÂÂ§Ã£Ââ„¢Ã£â‚¬â€š',
-  },
-};
+String _lessonsCaption(AppLanguage language, _LibraryFilter filter) =>
+    switch (filter) {
+      _LibraryFilter.all => switch (language) {
+        AppLanguage.en =>
+          'See the whole level with due lessons pulled forward.',
+        AppLanguage.vi =>
+          'Xem toàn bộ level với các lesson đến hạn được kéo lên trước.',
+        AppLanguage.ja => '期限のあるレッスンを前に出して全体を見られます。',
+      },
+      _LibraryFilter.due => switch (language) {
+        AppLanguage.en => 'Only lessons that currently need review attention.',
+        AppLanguage.vi => 'Chỉ hiện các lesson đang cần chú ý review.',
+        AppLanguage.ja => '今レビュー注意が必要なレッスンのみ表示します。',
+      },
+      _LibraryFilter.active => switch (language) {
+        AppLanguage.en => 'Lessons already in motion but not finished yet.',
+        AppLanguage.vi => 'Các lesson đã bắt đầu nhưng vẫn chưa khép vòng.',
+        AppLanguage.ja => 'すでに進めていて、まだ閉じていないレッスンです。',
+      },
+      _LibraryFilter.fresh => switch (language) {
+        AppLanguage.en => 'Fresh lessons you can open cleanly next.',
+        AppLanguage.vi => 'Các lesson còn sạch mà bạn có thể mở tiếp.',
+        AppLanguage.ja => '次にきれいに開ける新しいレッスンです。',
+      },
+      _LibraryFilter.completed => switch (language) {
+        AppLanguage.en => 'Finished lessons you can revisit when needed.',
+        AppLanguage.vi => 'Các lesson đã hoàn thành để quay lại khi cần.',
+        AppLanguage.ja => '必要な時に戻れる完了済みレッスンです。',
+      },
+    };
 
 String _filterLabel(AppLanguage language, _LibraryFilter filter) =>
     switch (filter) {
       _LibraryFilter.all => switch (language) {
         AppLanguage.en => 'All',
-        AppLanguage.vi => 'TÃ¡ÂºÂ¥t cÃ¡ÂºÂ£',
-        AppLanguage.ja => 'Ã£Ââ„¢Ã£ÂÂ¹Ã£ÂÂ¦',
+        AppLanguage.vi => 'Tất cả',
+        AppLanguage.ja => 'すべて',
       },
       _LibraryFilter.due => switch (language) {
         AppLanguage.en => 'Due',
-        AppLanguage.vi => 'Ã„ÂÃ¡ÂºÂ¿n hÃ¡ÂºÂ¡n',
-        AppLanguage.ja => 'Ã¦Å“Å¸Ã©â„¢Â',
+        AppLanguage.vi => 'Đến hạn',
+        AppLanguage.ja => '期限',
       },
       _LibraryFilter.active => switch (language) {
         AppLanguage.en => 'In progress',
-        AppLanguage.vi => 'Ã„Âang hÃ¡Â»Âc',
-        AppLanguage.ja => 'Ã©â‚¬Â²Ã¨Â¡Å’Ã¤Â¸Â­',
+        AppLanguage.vi => 'Đang học',
+        AppLanguage.ja => '進行中',
       },
       _LibraryFilter.fresh => switch (language) {
         AppLanguage.en => 'New',
-        AppLanguage.vi => 'MÃ¡Â»â€ºi',
-        AppLanguage.ja => 'Ã¦â€“Â°Ã¨Â¦Â',
+        AppLanguage.vi => 'Mới',
+        AppLanguage.ja => '新規',
       },
       _LibraryFilter.completed => switch (language) {
         AppLanguage.en => 'Completed',
-        AppLanguage.vi => 'HoÃƒÂ n thÃƒÂ nh',
-        AppLanguage.ja => 'Ã¥Â®Å’Ã¤Âºâ€ ',
+        AppLanguage.vi => 'Hoàn thành',
+        AppLanguage.ja => '完了',
       },
     };
 
@@ -422,23 +410,21 @@ class _LibraryHero extends StatelessWidget {
   }
 
   String _eyebrow(AppLanguage language) => switch (language) {
-    AppLanguage.en => 'LIBRARY MAP Ã¢â‚¬Â¢ Ã¦â€”Â¥Ã¦Å“Â¬Ã¨ÂªÅ¾ CURRICULUM',
-    AppLanguage.vi =>
-      'BÃ¡ÂºÂ¢N Ã„ÂÃ¡Â»â€™ THÃ†Â¯ VIÃ¡Â»â€ N Ã¢â‚¬Â¢ GIÃƒÂO TRÃƒÅ’NH NHÃ¡ÂºÂ¬T NGÃ¡Â»Â®',
-    AppLanguage.ja =>
-      'Ã£Æ’Â©Ã£â€šÂ¤Ã£Æ’â€“Ã£Æ’Â©Ã£Æ’ÂªÃ£Æ’Å¾Ã£Æ’Æ’Ã£Æ’â€” Ã¢â‚¬Â¢ Ã¦â€”Â¥Ã¦Å“Â¬Ã¨ÂªÅ¾Ã£â€šÂ«Ã£Æ’ÂªÃ£â€šÂ­Ã£Æ’Â¥Ã£Æ’Â©Ã£Æ’Â ',
+    AppLanguage.en => 'LIBRARY MAP • 日本語 CURRICULUM',
+    AppLanguage.vi => 'BẢN ĐỒ THƯ VIỆN • GIÁO TRÌNH NHẬT NGỮ',
+    AppLanguage.ja => 'ライブラリマップ • 日本語カリキュラム',
   };
 
   String _primaryLabel(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Open lessons',
-    AppLanguage.vi => 'MÃ¡Â»Å¸ bÃƒÂ i hÃ¡Â»Âc',
-    AppLanguage.ja => 'Ã£Æ’Â¬Ã£Æ’Æ’Ã£â€šÂ¹Ã£Æ’Â³Ã£â€šâ€™Ã©â€“â€¹Ã£ÂÂ',
+    AppLanguage.vi => 'Mở bài học',
+    AppLanguage.ja => 'レッスンを開く',
   };
 
   String _secondaryLabel(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Search bank',
-    AppLanguage.vi => 'Tra cÃ¡Â»Â©u bank',
-    AppLanguage.ja => 'Ã¦Â¤Å“Ã§Â´Â¢Ã£Æ’ÂÃ£Æ’Â³Ã£â€šÂ¯',
+    AppLanguage.vi => 'Tra cứu bank',
+    AppLanguage.ja => '検索バンク',
   };
 }
 
@@ -477,8 +463,8 @@ class _HeroRecommendation extends StatelessWidget {
                 Text(
                   switch (language) {
                     AppLanguage.en => 'Recommended next',
-                    AppLanguage.vi => 'GÃ¡Â»Â£i ÃƒÂ½ tiÃ¡ÂºÂ¿p theo',
-                    AppLanguage.ja => 'Ã¦Â¬Â¡Ã£ÂÂ®Ã£ÂÅ Ã£Ââ„¢Ã£Ââ„¢Ã£â€šÂ',
+                    AppLanguage.vi => 'Gợi ý tiếp theo',
+                    AppLanguage.ja => '次のおすすめ',
                   },
                   style: const TextStyle(
                     color: Color(0xFFE2E8F0),
@@ -531,8 +517,8 @@ class _HeroStats extends StatelessWidget {
           Text(
             switch (language) {
               AppLanguage.en => 'LEVEL SIGNALS',
-              AppLanguage.vi => 'TÃƒÂN HIÃ¡Â»â€ U LEVEL',
-              AppLanguage.ja => 'Ã£Æ’Â¬Ã£Æ’â„¢Ã£Æ’Â«Ã¦Å’â€¡Ã¦Â¨â„¢',
+              AppLanguage.vi => 'TÍN HIỆU LEVEL',
+              AppLanguage.ja => 'レベル指標',
             },
             style: const TextStyle(
               color: Color(0xFFFFE4BF),
@@ -578,16 +564,15 @@ class _RoadmapPanel extends StatelessWidget {
           AppSectionHeader(
             title: switch (language) {
               AppLanguage.en => 'Roadmap',
-              AppLanguage.vi => 'LÃ¡Â»â„¢ trÃƒÂ¬nh',
-              AppLanguage.ja => 'Ã£Æ’Â­Ã£Æ’Â¼Ã£Æ’â€°Ã£Æ’Å¾Ã£Æ’Æ’Ã£Æ’â€”',
+              AppLanguage.vi => 'Lộ trình',
+              AppLanguage.ja => 'ロードマップ',
             },
             caption: switch (language) {
               AppLanguage.en =>
                 'Decide whether this level needs review cleanup, a resume pass, or a fresh lesson.',
               AppLanguage.vi =>
-                'QuyÃ¡ÂºÂ¿t Ã„â€˜Ã¡Â»â€¹nh level Ã„â€˜ang cÃ¡ÂºÂ§n dÃ¡Â»Ân review, hÃ¡Â»Âc tiÃ¡ÂºÂ¿p, hay mÃ¡Â»Å¸ lesson mÃ¡Â»â€ºi.',
-              AppLanguage.ja =>
-                'Ã¥Â¾Â©Ã§Â¿â€™Ã¦â€¢Â´Ã§Ââ€ Ã£Æ’Â»Ã¥â€ ÂÃ©â€“â€¹Ã£Æ’Â»Ã¦â€“Â°Ã£Ââ€”Ã£Ââ€žÃ£Æ’Â¬Ã£Æ’Æ’Ã£â€šÂ¹Ã£Æ’Â³Ã£ÂÂ®Ã£ÂÂ©Ã£â€šÅ’Ã£â€šâ€™Ã¥â€žÂªÃ¥â€¦Ë†Ã£Ââ„¢Ã£ÂÂ¹Ã£ÂÂÃ£Ââ€¹Ã£â€šâ€™Ã£Ââ€œÃ£Ââ€œÃ£ÂÂ§Ã¦Â±ÂºÃ£â€šÂÃ£â€šâ€°Ã£â€šÅ’Ã£ÂÂ¾Ã£Ââ„¢Ã£â‚¬â€š',
+                'Quyết định level đang cần dọn review, học tiếp, hay mở lesson mới.',
+              AppLanguage.ja => '復習整理・再開・新しいレッスンのどれを優先すべきかをここで決められます。',
             },
           ),
           const SizedBox(height: AppSpacing.md),
@@ -864,7 +849,7 @@ class _HeroStatLine extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${stat.label} Ã‚Â· ${stat.value}',
+                  '${stat.label} · ${stat.value}',
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 12,
@@ -957,38 +942,38 @@ class _QuickAccessRow extends StatelessWidget {
 
   String _vocabLabel(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Vocab',
-    AppLanguage.vi => 'TÃ¡Â»Â« vÃ¡Â»Â±ng',
-    AppLanguage.ja => 'Ã¨ÂªÅ¾Ã¥Â½â„¢',
+    AppLanguage.vi => 'Từ vựng',
+    AppLanguage.ja => '語彙',
   };
 
   String _vocabHint(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Terms by level',
-    AppLanguage.vi => 'TÃ¡Â»Â« theo cÃ¡ÂºÂ¥p Ã„â€˜Ã¡Â»â„¢',
-    AppLanguage.ja => 'Ã£Æ’Â¬Ã£Æ’â„¢Ã£Æ’Â«Ã¥Ë†Â¥Ã£ÂÂ®Ã¥ÂËœÃ¨ÂªÅ¾',
+    AppLanguage.vi => 'Từ theo cấp độ',
+    AppLanguage.ja => 'レベル別の単語',
   };
 
   String _grammarLabel(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Grammar',
-    AppLanguage.vi => 'NgÃ¡Â»Â¯ phÃƒÂ¡p',
-    AppLanguage.ja => 'Ã¦â€“â€¡Ã¦Â³â€¢',
+    AppLanguage.vi => 'Ngữ pháp',
+    AppLanguage.ja => '文法',
   };
 
   String _grammarHint(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Points and examples',
-    AppLanguage.vi => 'MÃ¡ÂºÂ«u vÃƒÂ  vÃƒÂ­ dÃ¡Â»Â¥',
-    AppLanguage.ja => 'Ã¦â€“â€¡Ã¥Å¾â€¹Ã£ÂÂ¨Ã¤Â¾â€¹Ã¦â€“â€¡',
+    AppLanguage.vi => 'Mẫu và ví dụ',
+    AppLanguage.ja => '文型と例文',
   };
 
   String _lookupLabel(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Lookup',
-    AppLanguage.vi => 'Tra cÃ¡Â»Â©u',
-    AppLanguage.ja => 'Ã¦Â¤Å“Ã§Â´Â¢',
+    AppLanguage.vi => 'Tra cứu',
+    AppLanguage.ja => '検索',
   };
 
   String _lookupHint(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Words, kanji, readings',
-    AppLanguage.vi => 'TÃ¡Â»Â«, kanji, cÃƒÂ¡ch Ã„â€˜Ã¡Â»Âc',
-    AppLanguage.ja => 'Ã¨ÂªÅ¾Ã¥Â½â„¢Ã£Æ’Â»Ã¦Â¼Â¢Ã¥Â­â€”Ã£Æ’Â»Ã¨ÂªÂ­Ã£ÂÂ¿',
+    AppLanguage.vi => 'Từ, kanji, cách đọc',
+    AppLanguage.ja => '語彙・漢字・読み',
   };
 }
 
@@ -1251,9 +1236,9 @@ class _LessonTile extends StatelessWidget {
         AppLanguage.en =>
           '${lesson.completedCount}/${lesson.termCount} terms are covered and ${lesson.dueCount} need review now.',
         AppLanguage.vi =>
-          '${lesson.completedCount}/${lesson.termCount} mÃ¡Â»Â¥c Ã„â€˜ÃƒÂ£ Ã„â€˜Ã†Â°Ã¡Â»Â£c chÃ¡ÂºÂ¡m vÃƒÂ  ${lesson.dueCount} mÃ¡Â»Â¥c cÃ¡ÂºÂ§n review ngay.',
+          '${lesson.completedCount}/${lesson.termCount} mục đã được chạm và ${lesson.dueCount} mục cần review ngay.',
         AppLanguage.ja =>
-          '${lesson.completedCount}/${lesson.termCount}Ã©Â â€¦Ã§â€ºÂ®Ã£ÂÂ¾Ã£ÂÂ§Ã©â‚¬Â²Ã£â€šâ€œÃ£ÂÂ§Ã£Ââ€žÃ£ÂÂ¦Ã£â‚¬Â${lesson.dueCount}Ã¤Â»Â¶Ã£ÂÅ’Ã¤Â»Å Ã£Æ’Â¬Ã£Æ’â€œÃ£Æ’Â¥Ã£Æ’Â¼Ã¥Â¾â€¦Ã£ÂÂ¡Ã£ÂÂ§Ã£Ââ„¢Ã£â‚¬â€š',
+          '${lesson.completedCount}/${lesson.termCount}項目まで進んでいて、${lesson.dueCount}件が今レビュー待ちです。',
       };
     }
     if (lesson.completedCount == 0) {
@@ -1261,9 +1246,8 @@ class _LessonTile extends StatelessWidget {
         AppLanguage.en =>
           '${lesson.termCount} fresh terms are waiting in this lesson.',
         AppLanguage.vi =>
-          '${lesson.termCount} mÃ¡Â»Â¥c mÃ¡Â»â€ºi Ã„â€˜ang chÃ¡Â»Â trong lesson nÃƒÂ y.',
-        AppLanguage.ja =>
-          '${lesson.termCount}Ã¥â‚¬â€¹Ã£ÂÂ®Ã¦â€“Â°Ã£Ââ€”Ã£Ââ€žÃ©Â â€¦Ã§â€ºÂ®Ã£ÂÅ’Ã£Ââ€œÃ£ÂÂ®Ã£Æ’Â¬Ã£Æ’Æ’Ã£â€šÂ¹Ã£Æ’Â³Ã£ÂÂ§Ã¥Â¾â€¦Ã£ÂÂ£Ã£ÂÂ¦Ã£Ââ€žÃ£ÂÂ¾Ã£Ââ„¢Ã£â‚¬â€š',
+          '${lesson.termCount} mục mới đang chờ trong lesson này.',
+        AppLanguage.ja => '${lesson.termCount}個の新しい項目がこのレッスンで待っています。',
       };
     }
     if (lesson.completedCount < lesson.termCount) {
@@ -1271,37 +1255,35 @@ class _LessonTile extends StatelessWidget {
         AppLanguage.en =>
           'This lesson is already moving, but still has room before it fully closes.',
         AppLanguage.vi =>
-          'Lesson nÃƒÂ y Ã„â€˜ÃƒÂ£ bÃ¡ÂºÂ¯t Ã„â€˜Ã¡ÂºÂ§u chÃ¡ÂºÂ¡y, nhÃ†Â°ng vÃ¡ÂºÂ«n cÃƒÂ²n khoÃ¡ÂºÂ£ng Ã„â€˜Ã¡Â»Æ’ khÃƒÂ©p vÃƒÂ²ng trÃ¡Â»Ân vÃ¡ÂºÂ¹n.',
-        AppLanguage.ja =>
-          'Ã£Ââ€œÃ£ÂÂ®Ã£Æ’Â¬Ã£Æ’Æ’Ã£â€šÂ¹Ã£Æ’Â³Ã£ÂÂ¯Ã©â‚¬Â²Ã¨Â¡Å’Ã¤Â¸Â­Ã£ÂÂ§Ã£Ââ„¢Ã£ÂÅ’Ã£â‚¬ÂÃ£ÂÂ¾Ã£ÂÂ Ã©â€“â€°Ã£ÂËœÃ¥Ë†â€¡Ã£â€šâ€¹Ã¤Â½â„¢Ã¥Å“Â°Ã£ÂÅ’Ã£Ââ€šÃ£â€šÅ Ã£ÂÂ¾Ã£Ââ„¢Ã£â‚¬â€š',
+          'Lesson này đã bắt đầu chạy, nhưng vẫn còn khoảng để khép vòng trọn vẹn.',
+        AppLanguage.ja => 'このレッスンは進行中ですが、まだ閉じ切る余地があります。',
       };
     }
     return switch (language) {
       AppLanguage.en =>
         'Finished lesson. Reopen it whenever you need a clean revisit.',
       AppLanguage.vi =>
-        'Lesson Ã„â€˜ÃƒÂ£ xong. CÃƒÂ³ thÃ¡Â»Æ’ mÃ¡Â»Å¸ lÃ¡ÂºÂ¡i bÃ¡ÂºÂ¥t cÃ¡Â»Â© khi nÃƒÂ o cÃ¡ÂºÂ§n ÃƒÂ´n sÃ¡ÂºÂ¡ch.',
-      AppLanguage.ja =>
-        'Ã¥Â®Å’Ã¤Âºâ€ Ã¦Â¸Ë†Ã£ÂÂ¿Ã£Æ’Â¬Ã£Æ’Æ’Ã£â€šÂ¹Ã£Æ’Â³Ã£ÂÂ§Ã£Ââ„¢Ã£â‚¬â€šÃ¥Â¿â€¦Ã¨Â¦ÂÃ£ÂÂªÃ¦â„¢â€šÃ£ÂÂ«Ã£ÂÂÃ£â€šÅ’Ã£Ââ€žÃ£ÂÂ«Ã¦Ë†Â»Ã£â€šÅ’Ã£ÂÂ¾Ã£Ââ„¢Ã£â‚¬â€š',
+        'Lesson đã xong. Có thể mở lại bất cứ khi nào cần ôn sạch.',
+      AppLanguage.ja => '完了済みレッスンです。必要な時にきれいに戻れます。',
     };
   }
 
   String _termsLabel(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Terms',
-    AppLanguage.vi => 'MÃ¡Â»Â¥c',
-    AppLanguage.ja => 'Ã©Â â€¦Ã§â€ºÂ®',
+    AppLanguage.vi => 'Mục',
+    AppLanguage.ja => '項目',
   };
 
   String _dueLabel(AppLanguage language) => switch (language) {
     AppLanguage.en => 'Due',
-    AppLanguage.vi => 'Ã„ÂÃ¡ÂºÂ¿n hÃ¡ÂºÂ¡n',
-    AppLanguage.ja => 'Ã¦Å“Å¸Ã©â„¢Â',
+    AppLanguage.vi => 'Đến hạn',
+    AppLanguage.ja => '期限',
   };
 
   String _stateLabel(AppLanguage language) => switch (language) {
     AppLanguage.en => 'State',
-    AppLanguage.vi => 'TrÃ¡ÂºÂ¡ng thÃƒÂ¡i',
-    AppLanguage.ja => 'Ã§Å Â¶Ã¦â€¦â€¹',
+    AppLanguage.vi => 'Trạng thái',
+    AppLanguage.ja => '状態',
   };
 }
 
@@ -1362,37 +1344,29 @@ class _FilteredEmptyLibrary extends StatelessWidget {
       child: Text(switch (filter) {
         _LibraryFilter.due => switch (language) {
           AppLanguage.en => 'No lessons are due right now.',
-          AppLanguage.vi =>
-            'HiÃ¡Â»â€¡n chÃ†Â°a cÃƒÂ³ lesson nÃƒÂ o Ã„â€˜Ã¡ÂºÂ¿n hÃ¡ÂºÂ¡n.',
-          AppLanguage.ja =>
-            'Ã¤Â»Å Ã£ÂÂ¯Ã¦Å“Å¸Ã©â„¢ÂÃ£ÂÂ®Ã£Æ’Â¬Ã£Æ’Æ’Ã£â€šÂ¹Ã£Æ’Â³Ã£ÂÂ¯Ã£Ââ€šÃ£â€šÅ Ã£ÂÂ¾Ã£Ââ€ºÃ£â€šâ€œÃ£â‚¬â€š',
+          AppLanguage.vi => 'Hiện chưa có lesson nào đến hạn.',
+          AppLanguage.ja => '今は期限のレッスンはありません。',
         },
         _LibraryFilter.active => switch (language) {
           AppLanguage.en => 'No lesson is currently mid-flight.',
-          AppLanguage.vi =>
-            'HiÃ¡Â»â€¡n chÃ†Â°a cÃƒÂ³ lesson nÃƒÂ o Ã„â€˜ang Ã¡Â»Å¸ giÃ¡Â»Â¯a chÃ¡ÂºÂ·ng.',
-          AppLanguage.ja =>
-            'Ã§ÂÂ¾Ã¥Å“Â¨Ã©â‚¬Â²Ã¨Â¡Å’Ã¤Â¸Â­Ã£ÂÂ®Ã£Æ’Â¬Ã£Æ’Æ’Ã£â€šÂ¹Ã£Æ’Â³Ã£ÂÂ¯Ã£Ââ€šÃ£â€šÅ Ã£ÂÂ¾Ã£Ââ€ºÃ£â€šâ€œÃ£â‚¬â€š',
+          AppLanguage.vi => 'Hiện chưa có lesson nào đang ở giữa chặng.',
+          AppLanguage.ja => '現在進行中のレッスンはありません。',
         },
         _LibraryFilter.fresh => switch (language) {
           AppLanguage.en => 'No untouched lesson is left in this level.',
           AppLanguage.vi =>
-            'KhÃƒÂ´ng cÃƒÂ²n lesson nÃƒÂ o hoÃƒÂ n toÃƒÂ n mÃ¡Â»â€ºi trong level nÃƒÂ y.',
-          AppLanguage.ja =>
-            'Ã£Ââ€œÃ£ÂÂ®Ã£Æ’Â¬Ã£Æ’â„¢Ã£Æ’Â«Ã£ÂÂ«Ã¦Å“ÂªÃ§Ââ‚¬Ã¦â€°â€¹Ã£Æ’Â¬Ã£Æ’Æ’Ã£â€šÂ¹Ã£Æ’Â³Ã£ÂÂ¯Ã¦Â®â€¹Ã£ÂÂ£Ã£ÂÂ¦Ã£Ââ€žÃ£ÂÂ¾Ã£Ââ€ºÃ£â€šâ€œÃ£â‚¬â€š',
+            'Không còn lesson nào hoàn toàn mới trong level này.',
+          AppLanguage.ja => 'このレベルに未着手レッスンは残っていません。',
         },
         _LibraryFilter.completed => switch (language) {
           AppLanguage.en => 'No completed lesson is tracked yet.',
-          AppLanguage.vi =>
-            'ChÃ†Â°a cÃƒÂ³ lesson hoÃƒÂ n thÃƒÂ nh nÃƒÂ o Ã„â€˜Ã†Â°Ã¡Â»Â£c ghi nhÃ¡ÂºÂ­n.',
-          AppLanguage.ja =>
-            'Ã¥Â®Å’Ã¤Âºâ€ Ã¦Â¸Ë†Ã£ÂÂ¿Ã£Æ’Â¬Ã£Æ’Æ’Ã£â€šÂ¹Ã£Æ’Â³Ã£ÂÂ¯Ã£ÂÂ¾Ã£ÂÂ Ã£Ââ€šÃ£â€šÅ Ã£ÂÂ¾Ã£Ââ€ºÃ£â€šâ€œÃ£â‚¬â€š',
+          AppLanguage.vi => 'Chưa có lesson hoàn thành nào được ghi nhận.',
+          AppLanguage.ja => '完了済みレッスンはまだありません。',
         },
         _LibraryFilter.all => switch (language) {
           AppLanguage.en => 'No lessons are available in this lane.',
-          AppLanguage.vi => 'KhÃƒÂ´ng cÃƒÂ³ lesson nÃƒÂ o trong lane nÃƒÂ y.',
-          AppLanguage.ja =>
-            'Ã£Ââ€œÃ£ÂÂ®Ã£Æ’Â¬Ã£Æ’Â¼Ã£Æ’Â³Ã£ÂÂ«Ã£ÂÂ¯Ã£Æ’Â¬Ã£Æ’Æ’Ã£â€šÂ¹Ã£Æ’Â³Ã£ÂÅ’Ã£Ââ€šÃ£â€šÅ Ã£ÂÂ¾Ã£Ââ€ºÃ£â€šâ€œÃ£â‚¬â€š',
+          AppLanguage.vi => 'Không có lesson nào trong lane này.',
+          AppLanguage.ja => 'このレーンにはレッスンがありません。',
         },
       }),
     );
@@ -1411,10 +1385,8 @@ class _EmptyLibrary extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       child: Text(switch (language) {
         AppLanguage.en => 'No lessons for this level yet.',
-        AppLanguage.vi =>
-          'ChÃ†Â°a cÃƒÂ³ bÃƒÂ i hÃ¡Â»Âc cho cÃ¡ÂºÂ¥p Ã„â€˜Ã¡Â»â„¢ nÃƒÂ y.',
-        AppLanguage.ja =>
-          'Ã£Ââ€œÃ£ÂÂ®Ã£Æ’Â¬Ã£Æ’â„¢Ã£Æ’Â«Ã£ÂÂ®Ã£Æ’Â¬Ã£Æ’Æ’Ã£â€šÂ¹Ã£Æ’Â³Ã£ÂÂ¯Ã£ÂÂ¾Ã£ÂÂ Ã£Ââ€šÃ£â€šÅ Ã£ÂÂ¾Ã£Ââ€ºÃ£â€šâ€œÃ£â‚¬â€š',
+        AppLanguage.vi => 'Chưa có bài học cho cấp độ này.',
+        AppLanguage.ja => 'このレベルのレッスンはまだありません。',
       }),
     );
   }
@@ -1503,29 +1475,27 @@ class _LessonTone {
       case 'due':
         return switch (language) {
           AppLanguage.en => 'Due',
-          AppLanguage.vi => 'Ã„ÂÃ¡ÂºÂ¿n hÃ¡ÂºÂ¡n',
-          AppLanguage.ja => 'Ã¦Å“Å¸Ã©â„¢Â',
+          AppLanguage.vi => 'Đến hạn',
+          AppLanguage.ja => '期限',
         };
       case 'fresh':
         return switch (language) {
           AppLanguage.en => 'New',
-          AppLanguage.vi => 'MÃ¡Â»â€ºi',
-          AppLanguage.ja => 'Ã¦â€“Â°Ã¨Â¦Â',
+          AppLanguage.vi => 'Mới',
+          AppLanguage.ja => '新規',
         };
       case 'active':
         return switch (language) {
           AppLanguage.en => 'Active',
-          AppLanguage.vi => 'Ã„Âang hÃ¡Â»Âc',
-          AppLanguage.ja => 'Ã©â‚¬Â²Ã¨Â¡Å’Ã¤Â¸Â­',
+          AppLanguage.vi => 'Đang học',
+          AppLanguage.ja => '進行中',
         };
       default:
         return switch (language) {
           AppLanguage.en => 'Done',
           AppLanguage.vi => 'Xong',
-          AppLanguage.ja => 'Ã¥Â®Å’Ã¤Âºâ€ ',
+          AppLanguage.ja => '完了',
         };
     }
   }
 }
-
-

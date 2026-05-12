@@ -215,8 +215,7 @@ String _readinessEmptyBody(AppLanguage language) => switch (language) {
     'Finish one reading drill or one full mock and this area will turn into a personalized readiness map with a repair plan.',
   AppLanguage.vi =>
     'Hoàn thành 1 bài reading drill hoặc 1 full mock, khu vực này sẽ đổi thành readiness map và kế hoạch sửa lỗ hổng cho riêng bạn.',
-  AppLanguage.ja =>
-    '読解ドリルかフル模試を1回終えると、ここが個別の準備度マップと補強プランに変わります。',
+  AppLanguage.ja => '読解ドリルかフル模試を1回終えると、ここが個別の準備度マップと補強プランに変わります。',
 };
 
 String _baselineChip(AppLanguage language) => switch (language) {

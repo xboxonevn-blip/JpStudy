@@ -55,24 +55,30 @@ void main() {
   group('SwipeDirection enum', () {
     test('has exactly 4 directions', () {
       expect(SwipeDirection.values.length, 4);
-      expect(SwipeDirection.values, containsAll([
-        SwipeDirection.left,
-        SwipeDirection.right,
-        SwipeDirection.up,
-        SwipeDirection.down,
-      ]));
+      expect(
+        SwipeDirection.values,
+        containsAll([
+          SwipeDirection.left,
+          SwipeDirection.right,
+          SwipeDirection.up,
+          SwipeDirection.down,
+        ]),
+      );
     });
   });
 
   group('SwipeAction enum', () {
     test('has exactly 4 actions', () {
       expect(SwipeAction.values.length, 4);
-      expect(SwipeAction.values, containsAll([
-        SwipeAction.know,
-        SwipeAction.needPractice,
-        SwipeAction.star,
-        SwipeAction.skip,
-      ]));
+      expect(
+        SwipeAction.values,
+        containsAll([
+          SwipeAction.know,
+          SwipeAction.needPractice,
+          SwipeAction.star,
+          SwipeAction.skip,
+        ]),
+      );
     });
   });
 }

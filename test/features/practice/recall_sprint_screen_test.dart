@@ -8,19 +8,27 @@ import 'package:jpstudy/features/practice/screens/recall_sprint_screen.dart';
 // ── Fixtures ─────────────────────────────────────────────────
 
 const _q1 = SprintQuestion(
-  term: '水', correct: 'water', options: ['water', 'fire', 'tree', 'sky'],
+  term: '水',
+  correct: 'water',
+  options: ['water', 'fire', 'tree', 'sky'],
 );
 const _q2 = SprintQuestion(
-  term: '火', correct: 'fire', options: ['water', 'fire', 'tree', 'sky'],
+  term: '火',
+  correct: 'fire',
+  options: ['water', 'fire', 'tree', 'sky'],
 );
 const _q3 = SprintQuestion(
-  term: '木', correct: 'tree', options: ['water', 'fire', 'tree', 'sky'],
+  term: '木',
+  correct: 'tree',
+  options: ['water', 'fire', 'tree', 'sky'],
 );
 
 Widget _buildScreen({List<SprintQuestion> questions = const [_q1, _q2, _q3]}) {
   return ProviderScope(
     overrides: [
-      appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(AppLanguage.en),
+      ),
       recallSprintQuestionsProvider.overrideWith((ref) async => questions),
     ],
     child: const MaterialApp(home: RecallSprintScreen()),
@@ -31,8 +39,9 @@ Widget _buildScreen({List<SprintQuestion> questions = const [_q1, _q2, _q3]}) {
 
 void main() {
   group('RecallSprintScreen — empty state', () {
-    testWidgets('shows not-enough-terms message when questions empty',
-        (tester) async {
+    testWidgets('shows not-enough-terms message when questions empty', (
+      tester,
+    ) async {
       await tester.pumpWidget(_buildScreen(questions: []));
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 100));
@@ -93,8 +102,9 @@ void main() {
       expect(find.text('Next'), findsOneWidget);
     });
 
-    testWidgets('selecting wrong answer shows Not quite feedback',
-        (tester) async {
+    testWidgets('selecting wrong answer shows Not quite feedback', (
+      tester,
+    ) async {
       await tester.pumpWidget(_buildScreen());
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 100));
@@ -125,8 +135,9 @@ void main() {
       expect(find.textContaining('火'), findsWidgets);
     });
 
-    testWidgets('completing all correctly shows sprint complete',
-        (tester) async {
+    testWidgets('completing all correctly shows sprint complete', (
+      tester,
+    ) async {
       await tester.pumpWidget(_buildScreen());
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 100));

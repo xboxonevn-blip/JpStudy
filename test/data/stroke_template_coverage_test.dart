@@ -6,16 +6,18 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   Map<String, int> loadKanjiStrokeCounts(String level) {
     final dir = Directory('assets/data/content/kanji/$level');
-    final files = dir
-        .listSync()
-        .whereType<File>()
-        .where((f) => f.path.endsWith('.json'))
-        .toList()
-      ..sort((a, b) => a.path.compareTo(b.path));
+    final files =
+        dir
+            .listSync()
+            .whereType<File>()
+            .where((f) => f.path.endsWith('.json'))
+            .toList()
+          ..sort((a, b) => a.path.compareTo(b.path));
 
     final result = <String, int>{};
     for (final file in files) {
-      final wrapper = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
+      final wrapper =
+          jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
       final data = wrapper['entries'] as List<dynamic>;
       for (final entry in data) {
         final item = entry as Map<String, dynamic>;
@@ -26,7 +28,9 @@ void main() {
   }
 
   test('stroke template coverage includes all N5 and N4 kanji', () {
-    final raw = File('assets/data/support/kanji/stroke_templates.json').readAsStringSync();
+    final raw = File(
+      'assets/data/support/kanji/stroke_templates.json',
+    ).readAsStringSync();
     final templates = (jsonDecode(raw) as List<dynamic>)
         .cast<Map<String, dynamic>>();
     final templateChars = templates
@@ -38,15 +42,13 @@ void main() {
     final needed = {...n5, ...n4};
 
     final missing = needed.difference(templateChars);
-    expect(
-      missing,
-      isEmpty,
-      reason: 'Missing templates: ${missing.join(',')}',
-    );
+    expect(missing, isEmpty, reason: 'Missing templates: ${missing.join(',')}');
   });
 
   test('template strokes match kanji strokeCount for N5/N4 set', () {
-    final raw = File('assets/data/support/kanji/stroke_templates.json').readAsStringSync();
+    final raw = File(
+      'assets/data/support/kanji/stroke_templates.json',
+    ).readAsStringSync();
     final templates = (jsonDecode(raw) as List<dynamic>)
         .cast<Map<String, dynamic>>();
 
@@ -76,7 +78,9 @@ void main() {
   });
 
   test('high-frequency N5 has a manual template pack baseline', () {
-    final raw = File('assets/data/support/kanji/stroke_templates.json').readAsStringSync();
+    final raw = File(
+      'assets/data/support/kanji/stroke_templates.json',
+    ).readAsStringSync();
     final templates = (jsonDecode(raw) as List<dynamic>)
         .cast<Map<String, dynamic>>();
     final manualN5 = templates.where((entry) {
@@ -93,7 +97,9 @@ void main() {
   });
 
   test('N4 has curated and manual rollout packs', () {
-    final raw = File('assets/data/support/kanji/stroke_templates.json').readAsStringSync();
+    final raw = File(
+      'assets/data/support/kanji/stroke_templates.json',
+    ).readAsStringSync();
     final templates = (jsonDecode(raw) as List<dynamic>)
         .cast<Map<String, dynamic>>();
 

@@ -34,7 +34,9 @@ const _kSummary = ProgressSummary(
 
 Widget buildMeScreen() => ProviderScope(
   overrides: [
-    appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+    appLanguageProvider.overrideWith(
+      (ref) => AppLanguageController.test(AppLanguage.en),
+    ),
     studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
     themeModeProvider.overrideWith(ThemeModeNotifier.new),
     progressSummaryProvider.overrideWith((ref) async => _kSummary),

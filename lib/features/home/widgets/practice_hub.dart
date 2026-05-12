@@ -84,7 +84,10 @@ class PracticeHub extends ConsumerWidget {
         HomeSurface.pageHorizontalPadding,
         0,
       ),
-      child: Container(decoration: HomeSurface.softPanel(context: context), child: content),
+      child: Container(
+        decoration: HomeSurface.softPanel(context: context),
+        child: content,
+      ),
     );
   }
 }
@@ -201,6 +204,7 @@ class _PracticeHubContent extends StatelessWidget {
                         width: tileWidth,
                         child: _PracticeTile(
                           item: item,
+                          language: language,
                           compact: true,
                           onTap: () {
                             if (item.extra != null) {
@@ -229,6 +233,7 @@ class _PracticeHubContent extends StatelessWidget {
                   final item = tiles[index];
                   return _PracticeTile(
                     item: item,
+                    language: language,
                     compact: false,
                     onTap: () {
                       if (item.extra != null) {
@@ -265,7 +270,9 @@ class _FocusModeHint extends StatelessWidget {
       decoration: BoxDecoration(
         color: context.appPalette.warning.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(embedded ? 10 : 12),
-        border: Border.all(color: context.appPalette.warning.withValues(alpha: 0.30)),
+        border: Border.all(
+          color: context.appPalette.warning.withValues(alpha: 0.30),
+        ),
       ),
       child: Row(
         children: [
@@ -305,11 +312,13 @@ class _FocusModeHint extends StatelessWidget {
 class _PracticeTile extends StatelessWidget {
   const _PracticeTile({
     required this.item,
+    required this.language,
     required this.onTap,
     required this.compact,
   });
 
   final PracticeDestination item;
+  final AppLanguage language;
   final VoidCallback onTap;
   final bool compact;
 
@@ -403,7 +412,7 @@ class _PracticeTile extends StatelessWidget {
                   item.estimatedMinutes! > 0) ...[
                 SizedBox(height: compact ? 2 : 4),
                 Text(
-                  '~${item.estimatedMinutes} min',
+                  language.unitMinutesApprox(item.estimatedMinutes!),
                   style: TextStyle(
                     fontSize: compact ? 9.8 : 11,
                     color: palette.ink.withValues(alpha: 0.55),
@@ -418,5 +427,3 @@ class _PracticeTile extends StatelessWidget {
     );
   }
 }
-
-

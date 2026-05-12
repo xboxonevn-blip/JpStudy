@@ -12,8 +12,8 @@ final immersionServiceProvider = Provider<ImmersionService>((ref) {
 
 final readArticlesProvider =
     NotifierProvider<ReadArticlesNotifier, Set<String>>(
-  ReadArticlesNotifier.new,
-);
+      ReadArticlesNotifier.new,
+    );
 
 class ReadArticlesNotifier extends Notifier<Set<String>> {
   late final ImmersionService _service;

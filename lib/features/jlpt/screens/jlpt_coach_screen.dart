@@ -195,5 +195,3 @@ String _screenTitle(AppLanguage language) => switch (language) {
   AppLanguage.vi => 'Ôn thi JLPT',
   AppLanguage.ja => 'JLPT試験対策',
 };
-
-

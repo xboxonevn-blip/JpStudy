@@ -31,7 +31,9 @@ Widget _buildScreen({
 }) {
   return ProviderScope(
     overrides: [
-      appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(AppLanguage.en),
+      ),
       studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
       dashboardProvider.overrideWith((ref) => Stream.value(dashboard)),
       continueActionProvider.overrideWith(

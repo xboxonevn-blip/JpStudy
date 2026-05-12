@@ -62,10 +62,7 @@ Set<String> _buildGrammarLabelKeys(String? rawValue) {
 }
 
 String _compactLabel(String value) {
-  return value
-      .toLowerCase()
-      .replaceAll(_labelCompactRe, '')
-      .trim();
+  return value.toLowerCase().replaceAll(_labelCompactRe, '').trim();
 }
 
 String _extractJapaneseCore(String value) {

@@ -85,33 +85,31 @@ void main() {
     },
   );
 
-  test(
-    'vector clearCache drops stale debug vectors between runs',
-    () async {
-      KanjiStrokeVectorService.setDebugVectorOverrides({
-        'X': const KanjiStrokeVector(
-          character: 'X',
-          strokes: ['M0,0 L100,100'],
-          viewBox: [0, 0, 100, 100],
-        ),
-      });
+  test('vector clearCache drops stale debug vectors between runs', () async {
+    KanjiStrokeVectorService.setDebugVectorOverrides({
+      'X': const KanjiStrokeVector(
+        character: 'X',
+        strokes: ['M0,0 L100,100'],
+        viewBox: [0, 0, 100, 100],
+      ),
+    });
 
-      final first = await KanjiStrokeVectorService.instance.getVector('X');
-      expect(first, isNotNull);
-      expect(first!.strokes, hasLength(1));
+    final first = await KanjiStrokeVectorService.instance.getVector('X');
+    expect(first, isNotNull);
+    expect(first!.strokes, hasLength(1));
 
-      KanjiStrokeVectorService.setDebugVectorOverrides(null);
-      KanjiStrokeVectorService.clearCache();
+    KanjiStrokeVectorService.setDebugVectorOverrides(null);
+    KanjiStrokeVectorService.clearCache();
 
-      final second = await KanjiStrokeVectorService.instance.getVector('X');
-      expect(
-        second,
-        isNull,
-        reason: 'Clearing the cache after removing debug overrides must not '
-            'retain stale vector data from a previous run.',
-      );
-    },
-  );
+    final second = await KanjiStrokeVectorService.instance.getVector('X');
+    expect(
+      second,
+      isNull,
+      reason:
+          'Clearing the cache after removing debug overrides must not '
+          'retain stale vector data from a previous run.',
+    );
+  });
 
   test(
     'projected 四 template from live vector accepts guide-aligned rough writing',

@@ -74,6 +74,30 @@ void main() {
     });
   });
 
+  test('font fallback list excludes unused CJK regional families', () {
+    final fallbackFamilies = <String>{
+      ...AppTheme.vietnameseFontFallbacks,
+      ...AppTheme.japaneseFontFallbacks,
+    };
+
+    expect(fallbackFamilies, contains(AppTheme.japaneseFallbackFontFamily));
+    expect(fallbackFamilies, contains(AppTheme.vietnameseFallbackFontFamily));
+    expect(fallbackFamilies, contains(AppTheme.emojiFallbackFontFamily));
+    expect(
+      fallbackFamilies.any((font) => font.contains('Noto Sans SC')),
+      isFalse,
+    );
+    expect(
+      fallbackFamilies.any((font) => font.contains('Noto Sans HK')),
+      isFalse,
+    );
+    expect(
+      fallbackFamilies.any((font) => font.contains('Noto Sans KR')),
+      isFalse,
+    );
+    expect(fallbackFamilies.any((font) => font.contains('Symbols')), isFalse);
+  });
+
   group('dark theme typography', () {
     test('Japanese dark theme keeps Japanese typography', () {
       final theme = AppTheme.dark(AppLanguage.ja);

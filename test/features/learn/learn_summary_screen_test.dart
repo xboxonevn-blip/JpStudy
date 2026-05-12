@@ -140,7 +140,9 @@ Widget buildScreen(
   AutoCloudUploadCoordinator? autoUpload,
 }) => ProviderScope(
   overrides: [
-    appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+    appLanguageProvider.overrideWith(
+      (ref) => AppLanguageController.test(AppLanguage.en),
+    ),
     databaseProvider.overrideWithValue(db),
     sessionStorageProvider.overrideWithValue(FakeSessionStorage()),
     autoCloudUploadProvider.overrideWithValue(

@@ -1100,8 +1100,8 @@ class GrammarQuestionGenerator {
       score += 1;
     }
 
-    final sentenceDelta =
-        (targetSentenceLen - candidateExample.japanese.length).abs();
+    final sentenceDelta = (targetSentenceLen - candidateExample.japanese.length)
+        .abs();
     if (sentenceDelta <= 6) {
       score += 2;
     } else if (sentenceDelta <= 12) {
@@ -1211,21 +1211,22 @@ class GrammarQuestionGenerator {
   }) {
     // Schwartzian transform: compute each score once (O(n)) rather than
     // recomputing it O(n log n) times inside the sort comparator.
-    final scored = pool
-        .where((item) => item.id != target.id)
-        .map(
-          (item) => (
-            point: item,
-            score: _relatedPointScore(
-              target: target,
-              candidate: item,
-              language: language,
-              targetFormula: targetFormula,
-            ),
-          ),
-        )
-        .toList()
-      ..shuffle();
+    final scored =
+        pool
+            .where((item) => item.id != target.id)
+            .map(
+              (item) => (
+                point: item,
+                score: _relatedPointScore(
+                  target: target,
+                  candidate: item,
+                  language: language,
+                  targetFormula: targetFormula,
+                ),
+              ),
+            )
+            .toList()
+          ..shuffle();
     scored.sort((a, b) => b.score.compareTo(a.score));
     return scored.map((s) => s.point).toList(growable: false);
   }

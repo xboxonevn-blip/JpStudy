@@ -40,8 +40,7 @@ final progressCoachBoardProvider = FutureProvider<ProgressCoachBoard>((
   final attemptHistory = await attemptHistoryFuture;
   final retention = await retentionFuture;
   final continueAction = ref.watch(continueActionProvider).value;
-  final recoveryItems =
-      ref.watch(weaknessRadarProvider).value ?? const [];
+  final recoveryItems = ref.watch(weaknessRadarProvider).value ?? const [];
 
   final totalDue =
       (dashboard?.vocabDue ?? 0) +
@@ -809,5 +808,3 @@ String _l(
       return ja;
   }
 }
-
-

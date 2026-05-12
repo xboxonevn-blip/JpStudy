@@ -3369,6 +3369,17 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get loginInvalidEmailLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Invalid email address.';
+      case AppLanguage.vi:
+        return 'Email kh?ng h?p l?';
+      case AppLanguage.ja:
+        return '?????????????????';
+    }
+  }
+
   String get authInvalidCredentialsLabel {
     switch (this) {
       case AppLanguage.en:
@@ -7306,6 +7317,17 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String unitMinutesApprox(int count) {
+    switch (this) {
+      case AppLanguage.en:
+        return '~$count min';
+      case AppLanguage.vi:
+        return '~$count ph?t';
+      case AppLanguage.ja:
+        return '?$count?';
+    }
+  }
+
   String get kanaQuizTitle {
     switch (this) {
       case AppLanguage.en:
@@ -7350,6 +7372,17 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get kanaGradeHardLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Hard';
+      case AppLanguage.vi:
+        return 'Kh\u00f3';
+      case AppLanguage.ja:
+        return '\u96e3\u3057\u3044';
+    }
+  }
+
   String get kanaGradeGoodLabel {
     switch (this) {
       case AppLanguage.en:
@@ -7391,6 +7424,50 @@ extension AppLanguageLabels on AppLanguage {
         return '$count kana \u0111\u1ebfn h\u1ea1n';
       case AppLanguage.ja:
         return '$count \u500b\u5fa9\u7fd2';
+    }
+  }
+
+  String get onboardingSessionPreviewTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Your first guided session';
+      case AppLanguage.vi:
+        return 'Phi?n h?c ??u ti?n c?a b?n';
+      case AppLanguage.ja:
+        return '?????????????';
+    }
+  }
+
+  String get onboardingSessionPreviewStep1 {
+    switch (this) {
+      case AppLanguage.en:
+        return '1. Clear quick reviews first';
+      case AppLanguage.vi:
+        return '1. D?n l??t ?n ng?n tr??c';
+      case AppLanguage.ja:
+        return '1. ??????????';
+    }
+  }
+
+  String get onboardingSessionPreviewStep2 {
+    switch (this) {
+      case AppLanguage.en:
+        return '2. Fix weak terms while they are fresh';
+      case AppLanguage.vi:
+        return '2. S?a ?i?m y?u khi l?i c?n m?i';
+      case AppLanguage.ja:
+        return '2. ?????????????';
+    }
+  }
+
+  String get onboardingSessionPreviewStep3 {
+    switch (this) {
+      case AppLanguage.en:
+        return '3. Finish with one deeper study task';
+      case AppLanguage.vi:
+        return '3. K?t phi?n b?ng m?t nhi?m v? h?c s?u h?n';
+      case AppLanguage.ja:
+        return '3. ???1????????????';
     }
   }
 

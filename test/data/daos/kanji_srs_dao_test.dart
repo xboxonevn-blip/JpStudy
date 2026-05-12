@@ -143,13 +143,15 @@ void main() {
       expect(result!.kanjiId, 10);
     });
 
-    test('initializeSrsState is idempotent due to unique key on kanjiId',
-        () async {
-      await dao.initializeSrsState(5);
-      await dao.initializeSrsState(5); // should be ignored
-      final result = await dao.getSrsState(5);
-      expect(result, isNotNull);
-    });
+    test(
+      'initializeSrsState is idempotent due to unique key on kanjiId',
+      () async {
+        await dao.initializeSrsState(5);
+        await dao.initializeSrsState(5); // should be ignored
+        final result = await dao.getSrsState(5);
+        expect(result, isNotNull);
+      },
+    );
 
     test('default stability is 1.0 after initialization', () async {
       await dao.initializeSrsState(20);

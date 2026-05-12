@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:drift/drift.dart' hide Column;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -205,7 +207,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ref.read(studyLevelProvider.notifier).state = selected;
     if (selected != StudyLevel.n3 &&
         ref.read(appLanguageProvider) == AppLanguage.ja) {
-      ref.read(appLanguageProvider.notifier).state = AppLanguage.en;
+      unawaited(
+        ref.read(appLanguageProvider.notifier).setLanguage(AppLanguage.en),
+      );
     }
   }
 
@@ -243,7 +247,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           allowJapanese: allowJapanese,
           uiLanguage: ref.read(appLanguageProvider),
           onSelected: (language) {
-            ref.read(appLanguageProvider.notifier).state = language;
+            unawaited(
+              ref.read(appLanguageProvider.notifier).setLanguage(language),
+            );
             Navigator.of(context).pop();
           },
         );

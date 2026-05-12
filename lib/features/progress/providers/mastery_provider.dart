@@ -130,43 +130,44 @@ Future<MasterySnapshot> _fetchMasterySnapshot(
     final gm = grammarMastery[level];
     final km = kanjiMastery[level];
 
-    result.add(LevelMastery(
-      level: level,
-      vocab: CategoryMastery(
-        total: vTotal,
-        studied: vm?.studied ?? 0,
-        learning: vm?.learning ?? 0,
-        young: vm?.young ?? 0,
-        mature: vm?.mature ?? 0,
+    result.add(
+      LevelMastery(
+        level: level,
+        vocab: CategoryMastery(
+          total: vTotal,
+          studied: vm?.studied ?? 0,
+          learning: vm?.learning ?? 0,
+          young: vm?.young ?? 0,
+          mature: vm?.mature ?? 0,
+        ),
+        grammar: CategoryMastery(
+          total: gTotal,
+          studied: gm?.studied ?? 0,
+          learning: gm?.learning ?? 0,
+          young: gm?.young ?? 0,
+          mature: gm?.mature ?? 0,
+        ),
+        kanji: CategoryMastery(
+          total: kTotal,
+          studied: km?.studied ?? 0,
+          learning: km?.learning ?? 0,
+          young: km?.young ?? 0,
+          mature: km?.mature ?? 0,
+        ),
       ),
-      grammar: CategoryMastery(
-        total: gTotal,
-        studied: gm?.studied ?? 0,
-        learning: gm?.learning ?? 0,
-        young: gm?.young ?? 0,
-        mature: gm?.mature ?? 0,
-      ),
-      kanji: CategoryMastery(
-        total: kTotal,
-        studied: km?.studied ?? 0,
-        learning: km?.learning ?? 0,
-        young: km?.young ?? 0,
-        mature: km?.mature ?? 0,
-      ),
-    ));
+    );
   }
 
   return MasterySnapshot(levels: result);
 }
 
 /// Count vocab items per level from content database.
-Future<Map<String, int>> _countContentVocabByLevel(
-  ContentDatabase db,
-) async {
-  final rows = await (db.selectOnly(db.vocab)
-        ..addColumns([db.vocab.level, db.vocab.id.count()])
-        ..groupBy([db.vocab.level]))
-      .get();
+Future<Map<String, int>> _countContentVocabByLevel(ContentDatabase db) async {
+  final rows =
+      await (db.selectOnly(db.vocab)
+            ..addColumns([db.vocab.level, db.vocab.id.count()])
+            ..groupBy([db.vocab.level]))
+          .get();
   final map = <String, int>{};
   for (final row in rows) {
     final level = row.read(db.vocab.level);
@@ -179,13 +180,12 @@ Future<Map<String, int>> _countContentVocabByLevel(
 }
 
 /// Count kanji items per level from content database.
-Future<Map<String, int>> _countContentKanjiByLevel(
-  ContentDatabase db,
-) async {
-  final rows = await (db.selectOnly(db.kanji)
-        ..addColumns([db.kanji.jlptLevel, db.kanji.id.count()])
-        ..groupBy([db.kanji.jlptLevel]))
-      .get();
+Future<Map<String, int>> _countContentKanjiByLevel(ContentDatabase db) async {
+  final rows =
+      await (db.selectOnly(db.kanji)
+            ..addColumns([db.kanji.jlptLevel, db.kanji.id.count()])
+            ..groupBy([db.kanji.jlptLevel]))
+          .get();
   final map = <String, int>{};
   for (final row in rows) {
     final level = row.read(db.kanji.jlptLevel);
@@ -199,10 +199,14 @@ Future<Map<String, int>> _countContentKanjiByLevel(
 
 /// Count grammar points per level from app database.
 Future<Map<String, int>> _countGrammarByLevel(AppDatabase db) async {
-  final rows = await (db.selectOnly(db.grammarPoints)
-        ..addColumns([db.grammarPoints.jlptLevel, db.grammarPoints.id.count()])
-        ..groupBy([db.grammarPoints.jlptLevel]))
-      .get();
+  final rows =
+      await (db.selectOnly(db.grammarPoints)
+            ..addColumns([
+              db.grammarPoints.jlptLevel,
+              db.grammarPoints.id.count(),
+            ])
+            ..groupBy([db.grammarPoints.jlptLevel]))
+          .get();
   final map = <String, int>{};
   for (final row in rows) {
     final level = row.read(db.grammarPoints.jlptLevel);
@@ -226,12 +230,12 @@ _MasteryAccum _accumulate(_MasteryAccum prev, double stability) {
 }
 
 CategoryMastery _fromAccum(_MasteryAccum a) => CategoryMastery(
-      total: 0, // placeholder — overridden in caller
-      studied: a.$1,
-      learning: a.$2,
-      young: a.$3,
-      mature: a.$4,
-    );
+  total: 0, // placeholder — overridden in caller
+  studied: a.$1,
+  learning: a.$2,
+  young: a.$3,
+  mature: a.$4,
+);
 
 /// Vocab mastery: join SrsState → UserLessonTerm → UserLesson to get level,
 /// then bucket by stability.  Single pass — no intermediate stability list.
@@ -253,10 +257,7 @@ Future<Map<String, CategoryMastery>> _vocabMasteryByLevel(
   for (final row in rows) {
     final level = row.readTable(db.userLesson).level;
     final stability = row.readTable(db.srsState).stability;
-    byLevel[level] = _accumulate(
-      byLevel[level] ?? (0, 0, 0, 0),
-      stability,
-    );
+    byLevel[level] = _accumulate(byLevel[level] ?? (0, 0, 0, 0), stability);
   }
 
   return {for (final e in byLevel.entries) e.key: _fromAccum(e.value)};
@@ -278,10 +279,7 @@ Future<Map<String, CategoryMastery>> _grammarMasteryByLevel(
   for (final row in rows) {
     final level = row.readTable(db.grammarPoints).jlptLevel;
     final stability = row.readTable(db.grammarSrsState).stability;
-    byLevel[level] = _accumulate(
-      byLevel[level] ?? (0, 0, 0, 0),
-      stability,
-    );
+    byLevel[level] = _accumulate(byLevel[level] ?? (0, 0, 0, 0), stability);
   }
 
   return {for (final e in byLevel.entries) e.key: _fromAccum(e.value)};
@@ -298,21 +296,16 @@ Future<Map<String, CategoryMastery>> _kanjiMasteryByLevel(
 
   // Build id→level map from content DB.
   final kanjiIds = srsRows.map((r) => r.kanjiId).toList();
-  final kanjiRows = await (contentDb.select(contentDb.kanji)
-        ..where((t) => t.id.isIn(kanjiIds)))
-      .get();
-  final idToLevel = <int, String>{
-    for (final k in kanjiRows) k.id: k.jlptLevel,
-  };
+  final kanjiRows = await (contentDb.select(
+    contentDb.kanji,
+  )..where((t) => t.id.isIn(kanjiIds))).get();
+  final idToLevel = <int, String>{for (final k in kanjiRows) k.id: k.jlptLevel};
 
   final byLevel = <String, _MasteryAccum>{};
   for (final srs in srsRows) {
     final level = idToLevel[srs.kanjiId];
     if (level == null) continue;
-    byLevel[level] = _accumulate(
-      byLevel[level] ?? (0, 0, 0, 0),
-      srs.stability,
-    );
+    byLevel[level] = _accumulate(byLevel[level] ?? (0, 0, 0, 0), srs.stability);
   }
 
   return {for (final e in byLevel.entries) e.key: _fromAccum(e.value)};

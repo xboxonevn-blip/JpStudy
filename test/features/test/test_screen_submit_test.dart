@@ -42,16 +42,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 // ---------------------------------------------------------------------------
 
 DashboardState _emptyDashboard() => const DashboardState(
-      streak: 0,
-      todayXp: 0,
-      vocabDue: 0,
-      grammarDue: 0,
-      kanjiDue: 0,
-      vocabMistakeCount: 0,
-      grammarMistakeCount: 0,
-      kanjiMistakeCount: 0,
-      totalMistakeCount: 0,
-    );
+  streak: 0,
+  todayXp: 0,
+  vocabDue: 0,
+  grammarDue: 0,
+  kanjiDue: 0,
+  vocabMistakeCount: 0,
+  grammarMistakeCount: 0,
+  kanjiMistakeCount: 0,
+  totalMistakeCount: 0,
+);
 
 void main() {
   setUp(() {
@@ -80,7 +80,9 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+            appLanguageProvider.overrideWith(
+              (ref) => AppLanguageController.test(AppLanguage.en),
+            ),
             databaseProvider.overrideWithValue(db),
             dashboardProvider.overrideWith(
               (_) => Stream.value(_emptyDashboard()),
@@ -136,7 +138,8 @@ void main() {
       expect(
         preSubmit,
         isEmpty,
-        reason: 'checking an answer must not write to the mistake bank; '
+        reason:
+            'checking an answer must not write to the mistake bank; '
             'only the final _submitTest() does',
       );
 
@@ -175,7 +178,8 @@ void main() {
       expect(
         postSubmit.first.source,
         'test',
-        reason: 'source must be tagged so the mistake bank UI can attribute '
+        reason:
+            'source must be tagged so the mistake bank UI can attribute '
             'it to a test session',
       );
 
@@ -213,7 +217,9 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+            appLanguageProvider.overrideWith(
+              (ref) => AppLanguageController.test(AppLanguage.en),
+            ),
             databaseProvider.overrideWithValue(db),
             dashboardProvider.overrideWith(
               (_) => Stream.value(_emptyDashboard()),

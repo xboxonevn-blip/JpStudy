@@ -12,7 +12,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 Widget _buildScreen({AppLanguage language = AppLanguage.en}) {
   return ProviderScope(
-    overrides: [appLanguageProvider.overrideWith((ref) => language)],
+    overrides: [
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(language),
+      ),
+    ],
     child: const MaterialApp(home: DesignLabScreen()),
   );
 }
@@ -64,8 +68,9 @@ void main() {
     );
   });
 
-  testWidgets('switching to Visual stage shows Visual Direction panel',
-      (tester) async {
+  testWidgets('switching to Visual stage shows Visual Direction panel', (
+    tester,
+  ) async {
     await tester.pumpWidget(_buildScreen());
     await _pump(tester);
 
@@ -76,8 +81,9 @@ void main() {
     expect(find.text('Primary'), findsOneWidget); // colour swatch label
   });
 
-  testWidgets('switching to Validate stage shows validation chips',
-      (tester) async {
+  testWidgets('switching to Validate stage shows validation chips', (
+    tester,
+  ) async {
     await tester.pumpWidget(_buildScreen());
     await _pump(tester);
 
@@ -101,14 +107,8 @@ void main() {
     // Panel title
     expect(find.text('Process Checklist'), findsOneWidget);
     // Task 1 (pre-checked) and task 3 (unchecked)
-    expect(
-      find.text('Wireframe approved in team review'),
-      findsOneWidget,
-    );
-    expect(
-      find.text('Prototype tested on desktop + mobile'),
-      findsOneWidget,
-    );
+    expect(find.text('Wireframe approved in team review'), findsOneWidget);
+    expect(find.text('Prototype tested on desktop + mobile'), findsOneWidget);
   });
 
   testWidgets('unchecked task can be toggled on', (tester) async {

@@ -7,40 +7,36 @@ import 'package:jpstudy/core/auth/auth_user.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/features/common/widgets/global_top_bar.dart';
 
-Widget _wrap(AppLanguage language, {AuthUser? signedInUser}) =>
-    ProviderScope(
-      overrides: [
-        appLanguageProvider.overrideWith((ref) => language),
-        authStateProvider.overrideWith(
-          (ref) => Stream.value(signedInUser),
-        ),
-      ],
-      child: const MaterialApp(
-        home: Scaffold(body: GlobalTopBar()),
-      ),
-    );
+Widget _wrap(AppLanguage language, {AuthUser? signedInUser}) => ProviderScope(
+  overrides: [
+    appLanguageProvider.overrideWith(
+      (ref) => AppLanguageController.test(language),
+    ),
+    authStateProvider.overrideWith((ref) => Stream.value(signedInUser)),
+  ],
+  child: const MaterialApp(home: Scaffold(body: GlobalTopBar())),
+);
 
 void main() {
-  testWidgets(
-    'GlobalTopBar shows Sign in entry when signed out',
-    (tester) async {
-      await tester.pumpWidget(_wrap(AppLanguage.en));
-      await tester.pumpAndSettle();
+  testWidgets('GlobalTopBar shows Sign in entry when signed out', (
+    tester,
+  ) async {
+    await tester.pumpWidget(_wrap(AppLanguage.en));
+    await tester.pumpAndSettle();
 
-      expect(find.byTooltip('Choose language'), findsOneWidget);
-      expect(find.byTooltip('Notifications'), findsOneWidget);
+    expect(find.byTooltip('Choose language'), findsOneWidget);
+    expect(find.byTooltip('Notifications'), findsOneWidget);
 
-      await tester.tap(find.byTooltip('Profile'));
-      await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Profile'));
+    await tester.pumpAndSettle();
 
-      expect(find.text('Upgrade to Premium'), findsOneWidget);
-      expect(find.text('Invite friends'), findsOneWidget);
-      expect(find.text('Settings'), findsOneWidget);
-      // Signed-out users see Sign in instead of Log out.
-      expect(find.text('Sign in'), findsOneWidget);
-      expect(find.text('Log out'), findsNothing);
-    },
-  );
+    expect(find.text('Upgrade to Premium'), findsOneWidget);
+    expect(find.text('Invite friends'), findsOneWidget);
+    expect(find.text('Settings'), findsOneWidget);
+    // Signed-out users see Sign in instead of Log out.
+    expect(find.text('Sign in'), findsOneWidget);
+    expect(find.text('Log out'), findsNothing);
+  });
 
   testWidgets(
     'GlobalTopBar shows Log out + signed-in identity when authenticated',

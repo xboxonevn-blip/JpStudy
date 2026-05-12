@@ -1,4 +1,4 @@
-﻿import 'package:jpstudy/data/db/app_database.dart';
+import 'package:jpstudy/data/db/app_database.dart';
 
 int calculateMistakePriority(UserMistake mistake, DateTime now) {
   final age = now.difference(mistake.lastMistakeAt);
@@ -11,7 +11,7 @@ int calculateMistakePriority(UserMistake mistake, DateTime now) {
   }
 
   var baseScore = mistake.wrongCount * 10;
-  
+
   if (isDue1d) {
     baseScore += 50; // Highest priority to catch it right after the first day
   } else if (isDue3d) {

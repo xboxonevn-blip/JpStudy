@@ -276,7 +276,7 @@ class AppDatabase extends _$AppDatabase {
       }
       if (from < 27) {
         // Remove duplicate srs_state rows (keep the row with the highest id
-        // for each vocab_id â€” most recently inserted, most up-to-date state).
+        // for each vocab_id — most recently inserted, most up-to-date state).
         await customStatement(
           'DELETE FROM srs_state '
           'WHERE id NOT IN ('
@@ -289,7 +289,7 @@ class AppDatabase extends _$AppDatabase {
           'CREATE UNIQUE INDEX IF NOT EXISTS idx_srs_state_vocab_unique '
           'ON srs_state(vocab_id)',
         );
-        // Same for grammar_srs_state â€” one row per grammar point.
+        // Same for grammar_srs_state — one row per grammar point.
         await customStatement(
           'DELETE FROM grammar_srs_state '
           'WHERE id NOT IN ('
@@ -312,7 +312,7 @@ class AppDatabase extends _$AppDatabase {
       }
     },
     beforeOpen: (details) async {
-      // Only reseed on first install or after an upgrade â€” on routine opens
+      // Only reseed on first install or after an upgrade — on routine opens
       // all 75 INSERT OR IGNORE calls are guaranteed no-ops and waste
       // 75 round-trips to the background isolate on every app start.
       if (details.wasCreated || details.hadUpgrade) {
@@ -322,7 +322,7 @@ class AppDatabase extends _$AppDatabase {
   );
 
   Future<void> _createPerformanceIndexes() async {
-    // SRS due-date indexes â€” every dashboard heartbeat scans these columns.
+    // SRS due-date indexes — every dashboard heartbeat scans these columns.
     await customStatement(
       'CREATE INDEX IF NOT EXISTS idx_srs_next_review ON srs_state(next_review_at)',
     );
@@ -335,7 +335,7 @@ class AppDatabase extends _$AppDatabase {
     await customStatement(
       'CREATE INDEX IF NOT EXISTS idx_kana_srs_due_at ON kana_srs_state(due_at)',
     );
-    // Grammar lookup indexes â€” queried by level on every practice screen open.
+    // Grammar lookup indexes — queried by level on every practice screen open.
     await customStatement(
       'CREATE INDEX IF NOT EXISTS idx_grammar_points_jlpt ON grammar_points(jlpt_level)',
     );
@@ -349,7 +349,7 @@ class AppDatabase extends _$AppDatabase {
     await customStatement(
       'CREATE INDEX IF NOT EXISTS idx_lesson_term_lesson ON user_lesson_term(lesson_id)',
     );
-    // Ghost reviews â€” queried by ghost_reviews_due > 0 for ghost session load.
+    // Ghost reviews — queried by ghost_reviews_due > 0 for ghost session load.
     await customStatement(
       'CREATE INDEX IF NOT EXISTS idx_grammar_srs_ghost ON grammar_srs_state(ghost_reviews_due)',
     );
@@ -357,7 +357,7 @@ class AppDatabase extends _$AppDatabase {
   }
 
   Future<void> _createSessionIndexes() async {
-    // Learn/test session lookup by lesson â€” every lesson screen open hits these.
+    // Learn/test session lookup by lesson — every lesson screen open hits these.
     await customStatement(
       'CREATE INDEX IF NOT EXISTS idx_learn_sessions_lesson '
       'ON learn_sessions(lesson_id)',
@@ -366,7 +366,7 @@ class AppDatabase extends _$AppDatabase {
       'CREATE INDEX IF NOT EXISTS idx_test_sessions_lesson '
       'ON test_sessions(lesson_id)',
     );
-    // Answer FK indexes â€” session answer lookups without full-table scans.
+    // Answer FK indexes — session answer lookups without full-table scans.
     await customStatement(
       'CREATE INDEX IF NOT EXISTS idx_learn_answers_session '
       'ON learn_answers(session_id)',
@@ -375,17 +375,17 @@ class AppDatabase extends _$AppDatabase {
       'CREATE INDEX IF NOT EXISTS idx_test_answers_session '
       'ON test_answers(session_id)',
     );
-    // UserProgress day lookup â€” scanned on every dashboard and XP update.
+    // UserProgress day lookup — scanned on every dashboard and XP update.
     await customStatement(
       'CREATE INDEX IF NOT EXISTS idx_user_progress_day ON user_progress(day)',
     );
-    // UserMistakes top-N by type â€” weakness radar and mistake screen both
+    // UserMistakes top-N by type — weakness radar and mistake screen both
     // filter by type + order by last_mistake_at + wrong_count DESC.
     await customStatement(
       'CREATE INDEX IF NOT EXISTS idx_user_mistakes_type_date '
       'ON user_mistakes(type, last_mistake_at DESC)',
     );
-    // Attempt + AttemptAnswer indexes â€” ghost grammar query filters on these.
+    // Attempt + AttemptAnswer indexes — ghost grammar query filters on these.
     await customStatement(
       'CREATE INDEX IF NOT EXISTS idx_attempt_mode ON attempt(mode)',
     );

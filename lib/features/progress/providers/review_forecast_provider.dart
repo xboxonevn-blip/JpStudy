@@ -85,16 +85,20 @@ class ReviewForecast {
 // ---------------------------------------------------------------------------
 
 // Minimal projection type — only the columns the forecast algorithm needs.
-typedef _SrsRow = ({DateTime nextReviewAt, double stability, int? lastConfidence});
+typedef _SrsRow = ({
+  DateTime nextReviewAt,
+  double stability,
+  int? lastConfidence,
+});
 
 Future<List<_SrsRow>> _fetchVocabProjection(AppDatabase db) async {
-  final rows = await (db.selectOnly(db.srsState)
-        ..addColumns([
-          db.srsState.nextReviewAt,
-          db.srsState.stability,
-          db.srsState.lastConfidence,
-        ]))
-      .get();
+  final rows =
+      await (db.selectOnly(db.srsState)..addColumns([
+            db.srsState.nextReviewAt,
+            db.srsState.stability,
+            db.srsState.lastConfidence,
+          ]))
+          .get();
   return [
     for (final r in rows)
       (
@@ -106,12 +110,12 @@ Future<List<_SrsRow>> _fetchVocabProjection(AppDatabase db) async {
 }
 
 Future<List<_SrsRow>> _fetchGrammarProjection(AppDatabase db) async {
-  final rows = await (db.selectOnly(db.grammarSrsState)
-        ..addColumns([
-          db.grammarSrsState.nextReviewAt,
-          db.grammarSrsState.stability,
-        ]))
-      .get();
+  final rows =
+      await (db.selectOnly(db.grammarSrsState)..addColumns([
+            db.grammarSrsState.nextReviewAt,
+            db.grammarSrsState.stability,
+          ]))
+          .get();
   return [
     for (final r in rows)
       (
@@ -123,12 +127,12 @@ Future<List<_SrsRow>> _fetchGrammarProjection(AppDatabase db) async {
 }
 
 Future<List<_SrsRow>> _fetchKanjiProjection(AppDatabase db) async {
-  final rows = await (db.selectOnly(db.kanjiSrsState)
-        ..addColumns([
-          db.kanjiSrsState.nextReviewAt,
-          db.kanjiSrsState.stability,
-        ]))
-      .get();
+  final rows =
+      await (db.selectOnly(db.kanjiSrsState)..addColumns([
+            db.kanjiSrsState.nextReviewAt,
+            db.kanjiSrsState.stability,
+          ]))
+          .get();
   return [
     for (final r in rows)
       (
@@ -204,10 +208,14 @@ final reviewForecastProvider = FutureProvider<ReviewForecast>((ref) async {
     sumStability += s.stability;
     stabCount++;
     switch (s.lastConfidence) {
-      case 1: again++;
-      case 2: hard++;
-      case 3: good++;
-      case 4: easy++;
+      case 1:
+        again++;
+      case 2:
+        hard++;
+      case 3:
+        good++;
+      case 4:
+        easy++;
     }
   }
   for (final s in allGrammar) {
@@ -266,10 +274,13 @@ final reviewForecastProvider = FutureProvider<ReviewForecast>((ref) async {
     days: days,
     stabilityBuckets: stabilityBuckets,
     confidence: ConfidenceBreakdown(
-        again: again, hard: hard, good: good, easy: easy),
+      again: again,
+      hard: hard,
+      good: good,
+      easy: easy,
+    ),
     totalTracked: totalTracked,
     totalDueNow: totalDueNow,
     avgStability: avgStability,
   );
 });
-

@@ -119,12 +119,7 @@ void main() {
     });
 
     test('returns false when reading is null', () {
-      const item = VocabItem(
-        id: 2,
-        term: '猫',
-        meaning: 'mèo',
-        level: 'N5',
-      );
+      const item = VocabItem(id: 2, term: '猫', meaning: 'mèo', level: 'N5');
       expect(item.hasDisplayReading, isFalse);
     });
 
@@ -150,16 +145,19 @@ void main() {
       expect(item.hasDisplayReading, isFalse);
     });
 
-    test('returns false for kana-only term even if reading differs only by spacing', () {
-      const item = VocabItem(
-        id: 5,
-        term: 'ねこ',
-        reading: ' ねこ ',
-        meaning: 'mèo',
-        level: 'N5',
-      );
-      expect(item.hasDisplayReading, isFalse);
-    });
+    test(
+      'returns false for kana-only term even if reading differs only by spacing',
+      () {
+        const item = VocabItem(
+          id: 5,
+          term: 'ねこ',
+          reading: ' ねこ ',
+          meaning: 'mèo',
+          level: 'N5',
+        );
+        expect(item.hasDisplayReading, isFalse);
+      },
+    );
   });
 
   group('KanjiItem.displayMnemonic', () {
@@ -181,11 +179,17 @@ void main() {
     });
 
     test('English uses English mnemonic', () {
-      expect(item.displayMnemonic(AppLanguage.en), 'Three trees make a forest.');
+      expect(
+        item.displayMnemonic(AppLanguage.en),
+        'Three trees make a forest.',
+      );
     });
 
     test('Japanese UI uses English mnemonic', () {
-      expect(item.displayMnemonic(AppLanguage.ja), 'Three trees make a forest.');
+      expect(
+        item.displayMnemonic(AppLanguage.ja),
+        'Three trees make a forest.',
+      );
     });
 
     test('returns null when selected mnemonic is blank', () {

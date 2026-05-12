@@ -87,9 +87,7 @@ void main() {
     });
 
     test('every type maps to a unique difficulty', () {
-      final difficulties = QuestionType.values
-          .map((t) => t.difficulty)
-          .toSet();
+      final difficulties = QuestionType.values.map((t) => t.difficulty).toSet();
       expect(difficulties.length, QuestionType.values.length);
     });
   });

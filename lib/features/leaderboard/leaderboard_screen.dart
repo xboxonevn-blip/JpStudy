@@ -41,12 +41,19 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
       reviewHistory: reviewHistory,
       attemptHistory: attemptHistory,
     );
-    final totalReviewed = reviewHistory.fold<int>(0, (sum, day) => sum + day.reviewed);
+    final totalReviewed = reviewHistory.fold<int>(
+      0,
+      (sum, day) => sum + day.reviewed,
+    );
     final bestScore = attemptHistory.isEmpty
         ? 0
         : attemptHistory
-            .map((attempt) => attempt.total == 0 ? 0 : ((attempt.score / attempt.total) * 100).round())
-            .reduce((a, b) => a > b ? a : b);
+              .map(
+                (attempt) => attempt.total == 0
+                    ? 0
+                    : ((attempt.score / attempt.total) * 100).round(),
+              )
+              .reduce((a, b) => a > b ? a : b);
     final personalXp = activeRange.personalXp(progress?.todayXp ?? todayXp);
 
     return Scaffold(
@@ -103,12 +110,30 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
                     spacing: AppSpacing.sm,
                     runSpacing: AppSpacing.sm,
                     children: [
-                      AppMetricPill(label: _todayLabel(language), value: '$personalXp XP'),
-                      AppMetricPill(label: _streakLabel(language), value: '$streak'),
-                      AppMetricPill(label: _leagueLabel(language), value: activeRange.league),
-                      AppMetricPill(label: _positionLabel(language), value: '#${board.last.rank}'),
-                      AppMetricPill(label: _reviewedLabel(language), value: '$totalReviewed'),
-                      AppMetricPill(label: _bestRunLabel(language), value: bestScore == 0 ? '—' : '$bestScore%'),
+                      AppMetricPill(
+                        label: _todayLabel(language),
+                        value: '$personalXp XP',
+                      ),
+                      AppMetricPill(
+                        label: _streakLabel(language),
+                        value: '$streak',
+                      ),
+                      AppMetricPill(
+                        label: _leagueLabel(language),
+                        value: activeRange.league,
+                      ),
+                      AppMetricPill(
+                        label: _positionLabel(language),
+                        value: '#${board.last.rank}',
+                      ),
+                      AppMetricPill(
+                        label: _reviewedLabel(language),
+                        value: '$totalReviewed',
+                      ),
+                      AppMetricPill(
+                        label: _bestRunLabel(language),
+                        value: bestScore == 0 ? '—' : '$bestScore%',
+                      ),
                     ],
                   ),
                 ],
@@ -121,7 +146,10 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
                 children: [
                   AppSectionHeader(
                     title: _challengeTitle(language),
-                    caption: _challengeCaption(language, activeRange.challengeTitle),
+                    caption: _challengeCaption(
+                      language,
+                      activeRange.challengeTitle,
+                    ),
                   ),
                   const SizedBox(height: AppSpacing.md),
                   AppProgressStrip(
@@ -133,8 +161,12 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
                     icon: Icons.local_fire_department_rounded,
                     title: activeRange.challengeTitle,
                     subtitle: activeRange.challengeSubtitle(language),
-                    status: AppStatusChip(label: activeRange.reward, tone: AppStatusTone.success),
-                    onTap: () => _showChallengeDetail(context, language, activeRange),
+                    status: AppStatusChip(
+                      label: activeRange.reward,
+                      tone: AppStatusTone.success,
+                    ),
+                    onTap: () =>
+                        _showChallengeDetail(context, language, activeRange),
                   ),
                 ],
               ),
@@ -152,7 +184,9 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
                 subtitle: item.subtitle,
                 status: AppStatusChip(
                   label: '#${item.rank}',
-                  tone: item.rank <= 3 ? AppStatusTone.warning : AppStatusTone.neutral,
+                  tone: item.rank <= 3
+                      ? AppStatusTone.warning
+                      : AppStatusTone.neutral,
                 ),
                 onTap: () => _snack(context, _profileSoon(language, item.name)),
               ),
@@ -241,145 +275,255 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
 }
 
 List<_LeaderboardRange> _ranges(AppLanguage language) => switch (language) {
-      AppLanguage.en => const [
-          _LeaderboardRange('This week', 'Silver', '7-day streak race', '120 XP reward', 0.44, 1.0, 18),
-          _LeaderboardRange('This month', 'Gold', 'Monthly consistency cup', '540 XP reward', 0.68, 4.2, 11),
-          _LeaderboardRange('Friends', 'Private', 'Friends mini ladder', 'Badge reward', 0.81, 1.6, 4),
-        ],
-      AppLanguage.vi => const [
-          _LeaderboardRange('Tuần này', 'Bạc', 'Đua streak 7 ngày', 'Thưởng 120 XP', 0.44, 1.0, 18),
-          _LeaderboardRange('Tháng này', 'Vàng', 'Cúp đều đặn theo tháng', 'Thưởng 540 XP', 0.68, 4.2, 11),
-          _LeaderboardRange('Bạn bè', 'Riêng', 'Bảng mini với bạn bè', 'Thưởng huy hiệu', 0.81, 1.6, 4),
-        ],
-      AppLanguage.ja => const [
-          _LeaderboardRange('今週', 'シルバー', '7日 streak race', '120 XP 報酬', 0.44, 1.0, 18),
-          _LeaderboardRange('今月', 'ゴールド', '月間 consistency cup', '540 XP 報酬', 0.68, 4.2, 11),
-          _LeaderboardRange('友達', 'プライベート', '友達だけのミニ ladder', 'バッジ報酬', 0.81, 1.6, 4),
-        ],
-    };
+  AppLanguage.en => const [
+    _LeaderboardRange(
+      'This week',
+      'Silver',
+      '7-day streak race',
+      '120 XP reward',
+      0.44,
+      1.0,
+      18,
+    ),
+    _LeaderboardRange(
+      'This month',
+      'Gold',
+      'Monthly consistency cup',
+      '540 XP reward',
+      0.68,
+      4.2,
+      11,
+    ),
+    _LeaderboardRange(
+      'Friends',
+      'Private',
+      'Friends mini ladder',
+      'Badge reward',
+      0.81,
+      1.6,
+      4,
+    ),
+  ],
+  AppLanguage.vi => const [
+    _LeaderboardRange(
+      'Tuần này',
+      'Bạc',
+      'Đua streak 7 ngày',
+      'Thưởng 120 XP',
+      0.44,
+      1.0,
+      18,
+    ),
+    _LeaderboardRange(
+      'Tháng này',
+      'Vàng',
+      'Cúp đều đặn theo tháng',
+      'Thưởng 540 XP',
+      0.68,
+      4.2,
+      11,
+    ),
+    _LeaderboardRange(
+      'Bạn bè',
+      'Riêng',
+      'Bảng mini với bạn bè',
+      'Thưởng huy hiệu',
+      0.81,
+      1.6,
+      4,
+    ),
+  ],
+  AppLanguage.ja => const [
+    _LeaderboardRange(
+      '今週',
+      'シルバー',
+      '7日 streak race',
+      '120 XP 報酬',
+      0.44,
+      1.0,
+      18,
+    ),
+    _LeaderboardRange(
+      '今月',
+      'ゴールド',
+      '月間 consistency cup',
+      '540 XP 報酬',
+      0.68,
+      4.2,
+      11,
+    ),
+    _LeaderboardRange('友達', 'プライベート', '友達だけのミニ ladder', 'バッジ報酬', 0.81, 1.6, 4),
+  ],
+};
 
 List<_LeaderboardItem> _items(
   AppLanguage language,
   int todayXp,
   int streak,
-  int rangeIndex,
-  {
+  int rangeIndex, {
   ProgressSummary? progress,
   List<ReviewDaySummary> reviewHistory = const [],
   List<AttemptSummary> attemptHistory = const [],
-}
-) {
-  final multiplier = switch (rangeIndex) { 0 => 1, 1 => 4, _ => 2 };
+}) {
+  final multiplier = switch (rangeIndex) {
+    0 => 1,
+    1 => 4,
+    _ => 2,
+  };
   final reviewed = reviewHistory.fold<int>(0, (sum, day) => sum + day.reviewed);
   final attempts = attemptHistory.length;
   final correctRate = progress == null || progress.totalQuestions == 0
       ? 0
       : ((progress.totalCorrect / progress.totalQuestions) * 100).round();
-  final personalXp = ((progress?.totalXp ?? (todayXp * 40 + 2200)) * multiplier).clamp(0, 999999);
+  final personalXp = ((progress?.totalXp ?? (todayXp * 40 + 2200)) * multiplier)
+      .clamp(0, 999999);
   final personalRank = switch (rangeIndex) {
-    0 => personalXp > 14000 ? 6 : personalXp > 9000 ? 12 : 18,
-    1 => personalXp > 40000 ? 5 : personalXp > 24000 ? 8 : 11,
-    _ => reviewed > 120 ? 2 : reviewed > 40 ? 3 : 4,
+    0 =>
+      personalXp > 14000
+          ? 6
+          : personalXp > 9000
+          ? 12
+          : 18,
+    1 =>
+      personalXp > 40000
+          ? 5
+          : personalXp > 24000
+          ? 8
+          : 11,
+    _ =>
+      reviewed > 120
+          ? 2
+          : reviewed > 40
+          ? 3
+          : 4,
   };
   return [
-    _LeaderboardItem(1, 'AoiSensei', _rowSubtitle(language, 18400 * multiplier, 41), Icons.workspace_premium_rounded),
-    _LeaderboardItem(2, 'NekoReader', _rowSubtitle(language, 16320 * multiplier, 33), Icons.bolt_rounded),
-    _LeaderboardItem(3, 'KanaPilot', _rowSubtitle(language, 15110 * multiplier, 28), Icons.local_fire_department_rounded),
+    _LeaderboardItem(
+      1,
+      'AoiSensei',
+      _rowSubtitle(language, 18400 * multiplier, 41),
+      Icons.workspace_premium_rounded,
+    ),
+    _LeaderboardItem(
+      2,
+      'NekoReader',
+      _rowSubtitle(language, 16320 * multiplier, 33),
+      Icons.bolt_rounded,
+    ),
+    _LeaderboardItem(
+      3,
+      'KanaPilot',
+      _rowSubtitle(language, 15110 * multiplier, 28),
+      Icons.local_fire_department_rounded,
+    ),
     _LeaderboardItem(
       personalRank,
       _you(language),
-      _personalSubtitle(language, personalXp, streak, reviewed, attempts, correctRate),
+      _personalSubtitle(
+        language,
+        personalXp,
+        streak,
+        reviewed,
+        attempts,
+        correctRate,
+      ),
       Icons.person_rounded,
     ),
   ];
 }
 
 String _title(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'Leaderboard',
-      AppLanguage.vi => 'Xếp hạng',
-      AppLanguage.ja => 'ランキング',
-    };
+  AppLanguage.en => 'Leaderboard',
+  AppLanguage.vi => 'Xếp hạng',
+  AppLanguage.ja => 'ランキング',
+};
 String _heroTitle(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'Turn consistency into momentum',
-      AppLanguage.vi => 'Biến sự đều đặn thành đà tiến',
-      AppLanguage.ja => '継続を勢いに変える',
-    };
+  AppLanguage.en => 'Turn consistency into momentum',
+  AppLanguage.vi => 'Biến sự đều đặn thành đà tiến',
+  AppLanguage.ja => '継続を勢いに変える',
+};
 String _heroSubtitle(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'Weekly leagues, monthly ladders, and friends races that fit your current study rhythm.',
-      AppLanguage.vi => 'Giải tuần, ladder tháng và cuộc đua bạn bè vừa với nhịp học hiện tại của bạn.',
-      AppLanguage.ja => '今の学習リズムに合う週間リーグ、月間 ladder、友達レースです。',
-    };
+  AppLanguage.en =>
+    'Weekly leagues, monthly ladders, and friends races that fit your current study rhythm.',
+  AppLanguage.vi =>
+    'Giải tuần, ladder tháng và cuộc đua bạn bè vừa với nhịp học hiện tại của bạn.',
+  AppLanguage.ja => '今の学習リズムに合う週間リーグ、月間 ladder、友達レースです。',
+};
 String _joinLabel(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'Join challenge',
-      AppLanguage.vi => 'Vào thử thách',
-      AppLanguage.ja => 'チャレンジ参加',
-    };
+  AppLanguage.en => 'Join challenge',
+  AppLanguage.vi => 'Vào thử thách',
+  AppLanguage.ja => 'チャレンジ参加',
+};
 String _shareLabel(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'Share snapshot',
-      AppLanguage.vi => 'Chia sẻ snapshot',
-      AppLanguage.ja => 'スナップ共有',
-    };
+  AppLanguage.en => 'Share snapshot',
+  AppLanguage.vi => 'Chia sẻ snapshot',
+  AppLanguage.ja => 'スナップ共有',
+};
 String _rangeTitle(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'Ranking range',
-      AppLanguage.vi => 'Phạm vi xếp hạng',
-      AppLanguage.ja => 'ランキング範囲',
-    };
+  AppLanguage.en => 'Ranking range',
+  AppLanguage.vi => 'Phạm vi xếp hạng',
+  AppLanguage.ja => 'ランキング範囲',
+};
 String _rangeCaption(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'Switch views without losing your place on the screen.',
-      AppLanguage.vi => 'Đổi góc nhìn mà không rời khỏi màn hiện tại.',
-      AppLanguage.ja => '画面を離れずに表示範囲を切り替えられます。',
-    };
+  AppLanguage.en => 'Switch views without losing your place on the screen.',
+  AppLanguage.vi => 'Đổi góc nhìn mà không rời khỏi màn hiện tại.',
+  AppLanguage.ja => '画面を離れずに表示範囲を切り替えられます。',
+};
 String _todayLabel(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'Today',
-      AppLanguage.vi => 'Hôm nay',
-      AppLanguage.ja => '今日',
-    };
+  AppLanguage.en => 'Today',
+  AppLanguage.vi => 'Hôm nay',
+  AppLanguage.ja => '今日',
+};
 String _streakLabel(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'Streak',
-      AppLanguage.vi => 'Chuỗi',
-      AppLanguage.ja => '連続',
-    };
+  AppLanguage.en => 'Streak',
+  AppLanguage.vi => 'Chuỗi',
+  AppLanguage.ja => '連続',
+};
 String _leagueLabel(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'League',
-      AppLanguage.vi => 'Giải',
-      AppLanguage.ja => 'リーグ',
-    };
+  AppLanguage.en => 'League',
+  AppLanguage.vi => 'Giải',
+  AppLanguage.ja => 'リーグ',
+};
 String _positionLabel(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'Position',
-      AppLanguage.vi => 'Vị trí',
-      AppLanguage.ja => '順位',
-    };
+  AppLanguage.en => 'Position',
+  AppLanguage.vi => 'Vị trí',
+  AppLanguage.ja => '順位',
+};
 String _reviewedLabel(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'Reviewed',
-      AppLanguage.vi => 'Đã ôn',
-      AppLanguage.ja => '復習数',
-    };
+  AppLanguage.en => 'Reviewed',
+  AppLanguage.vi => 'Đã ôn',
+  AppLanguage.ja => '復習数',
+};
 String _bestRunLabel(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'Best run',
-      AppLanguage.vi => 'Lần tốt nhất',
-      AppLanguage.ja => 'ベスト',
-    };
+  AppLanguage.en => 'Best run',
+  AppLanguage.vi => 'Lần tốt nhất',
+  AppLanguage.ja => 'ベスト',
+};
 String _challengeTitle(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'Featured challenge',
-      AppLanguage.vi => 'Thử thách nổi bật',
-      AppLanguage.ja => '注目チャレンジ',
-    };
-String _challengeCaption(AppLanguage language, String challenge) => switch (language) {
+  AppLanguage.en => 'Featured challenge',
+  AppLanguage.vi => 'Thử thách nổi bật',
+  AppLanguage.ja => '注目チャレンジ',
+};
+String _challengeCaption(AppLanguage language, String challenge) =>
+    switch (language) {
       AppLanguage.en => 'Focus on $challenge to climb faster.',
       AppLanguage.vi => 'Tập trung vào $challenge để leo nhanh hơn.',
       AppLanguage.ja => '$challenge に集中すると、より早く順位を上げられます。',
     };
 String _topTitle(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'Top learners',
-      AppLanguage.vi => 'Top người học',
-      AppLanguage.ja => '上位学習者',
-    };
+  AppLanguage.en => 'Top learners',
+  AppLanguage.vi => 'Top người học',
+  AppLanguage.ja => '上位学習者',
+};
 String _topCaption(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'Rankings reflect your XP and streak — live sync coming soon.',
-      AppLanguage.vi => 'Xếp hạng dựa trên XP và streak của bạn — đồng bộ thật sẽ sớm có.',
-      AppLanguage.ja => 'XP と streak を基にしたランキングです。ライブ同期は近日追加予定。',
-    };
-String _rowSubtitle(AppLanguage language, int xp, int streak) => switch (language) {
+  AppLanguage.en =>
+    'Rankings reflect your XP and streak — live sync coming soon.',
+  AppLanguage.vi =>
+    'Xếp hạng dựa trên XP và streak của bạn — đồng bộ thật sẽ sớm có.',
+  AppLanguage.ja => 'XP と streak を基にしたランキングです。ライブ同期は近日追加予定。',
+};
+String _rowSubtitle(AppLanguage language, int xp, int streak) =>
+    switch (language) {
       AppLanguage.en => '$xp XP · $streak-day streak',
       AppLanguage.vi => '$xp XP · chuỗi $streak ngày',
       AppLanguage.ja => '$xp XP ・ $streak日連続',
@@ -392,20 +536,23 @@ String _personalSubtitle(
   int attempts,
   int correctRate,
 ) => switch (language) {
-      AppLanguage.en => '$xp XP · $streak-day streak · $reviewed reviewed · $attempts runs · $correctRate% correct',
-      AppLanguage.vi => '$xp XP · chuỗi $streak ngày · đã ôn $reviewed · $attempts lượt chạy · đúng $correctRate%',
-      AppLanguage.ja => '$xp XP ・ $streak日連続 ・ 復習$reviewed件 ・ $attempts回実行 ・ 正答率$correctRate%',
-    };
+  AppLanguage.en =>
+    '$xp XP · $streak-day streak · $reviewed reviewed · $attempts runs · $correctRate% correct',
+  AppLanguage.vi =>
+    '$xp XP · chuỗi $streak ngày · đã ôn $reviewed · $attempts lượt chạy · đúng $correctRate%',
+  AppLanguage.ja =>
+    '$xp XP ・ $streak日連続 ・ 復習$reviewed件 ・ $attempts回実行 ・ 正答率$correctRate%',
+};
 String _you(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'You',
-      AppLanguage.vi => 'Bạn',
-      AppLanguage.ja => 'あなた',
-    };
+  AppLanguage.en => 'You',
+  AppLanguage.vi => 'Bạn',
+  AppLanguage.ja => 'あなた',
+};
 String _joinSoon(AppLanguage language) => switch (language) {
-      AppLanguage.en => 'Challenge enrollment will connect to live events later.',
-      AppLanguage.vi => 'Đăng ký thử thách sẽ được nối với sự kiện thật sau.',
-      AppLanguage.ja => 'チャレンジ参加は後で live event と接続されます。',
-    };
+  AppLanguage.en => 'Challenge enrollment will connect to live events later.',
+  AppLanguage.vi => 'Đăng ký thử thách sẽ được nối với sự kiện thật sau.',
+  AppLanguage.ja => 'チャレンジ参加は後で live event と接続されます。',
+};
 String _snapshotText(
   AppLanguage language, {
   required String league,
@@ -421,30 +568,39 @@ String _snapshotText(
   return switch (language) {
     AppLanguage.en =>
       'My JpStudy leaderboard snapshot 🏆\n'
-      'League: $league | Position: #$rank\n'
-      '$xp XP · $streak-day streak · $reviewed reviewed$best\n'
-      '#JpStudy #JapaneseLearning',
+          'League: $league | Position: #$rank\n'
+          '$xp XP · $streak-day streak · $reviewed reviewed$best\n'
+          '#JpStudy #JapaneseLearning',
     AppLanguage.vi =>
       'Snapshot xếp hạng JpStudy 🏆\n'
-      'Giải: $league | Vị trí: #$rank\n'
-      '$xp XP · chuỗi $streak ngày · đã ôn $reviewed$bestVi\n'
-      '#JpStudy #HọcTiếngNhật',
+          'Giải: $league | Vị trí: #$rank\n'
+          '$xp XP · chuỗi $streak ngày · đã ôn $reviewed$bestVi\n'
+          '#JpStudy #HọcTiếngNhật',
     AppLanguage.ja =>
       'JpStudy ランキング スナップショット 🏆\n'
-      'リーグ: $league | 順位: #$rank\n'
-      '$xp XP ・ $streak日連続 ・ 復習$reviewed件$bestJa\n'
-      '#JpStudy #日本語学習',
+          'リーグ: $league | 順位: #$rank\n'
+          '$xp XP ・ $streak日連続 ・ 復習$reviewed件$bestJa\n'
+          '#JpStudy #日本語学習',
   };
 }
+
 String _profileSoon(AppLanguage language, String name) => switch (language) {
-      AppLanguage.en => '$name\'s full profile will be available in a future update.',
-      AppLanguage.vi => 'Hồ sơ đầy đủ của $name sẽ có trong bản cập nhật sau.',
-      AppLanguage.ja => '$name のプロフィール詳細は今後のアップデートで追加予定です。',
-    };
+  AppLanguage.en =>
+    '$name\'s full profile will be available in a future update.',
+  AppLanguage.vi => 'Hồ sơ đầy đủ của $name sẽ có trong bản cập nhật sau.',
+  AppLanguage.ja => '$name のプロフィール詳細は今後のアップデートで追加予定です。',
+};
 
 class _LeaderboardRange {
-  const _LeaderboardRange(this.label, this.league, this.challengeTitle,
-      this.reward, this.challengeProgress, this.xpMultiplier, this.position);
+  const _LeaderboardRange(
+    this.label,
+    this.league,
+    this.challengeTitle,
+    this.reward,
+    this.challengeProgress,
+    this.xpMultiplier,
+    this.position,
+  );
 
   final String label;
   final String league;
@@ -457,16 +613,19 @@ class _LeaderboardRange {
   int personalXp(int baseXp) => (baseXp * xpMultiplier).round();
 
   String challengeProgressLabel(AppLanguage language) => switch (language) {
-        AppLanguage.en => 'Progress ${(challengeProgress * 100).round()}% toward $reward',
-        AppLanguage.vi => 'Tiến độ ${(challengeProgress * 100).round()}% tới $reward',
-        AppLanguage.ja => '$reward に向けて ${(challengeProgress * 100).round()}% 進行',
-      };
+    AppLanguage.en =>
+      'Progress ${(challengeProgress * 100).round()}% toward $reward',
+    AppLanguage.vi =>
+      'Tiến độ ${(challengeProgress * 100).round()}% tới $reward',
+    AppLanguage.ja => '$reward に向けて ${(challengeProgress * 100).round()}% 進行',
+  };
 
   String challengeSubtitle(AppLanguage language) => switch (language) {
-        AppLanguage.en => 'Keep daily XP flowing and avoid missing two sessions in a row.',
-        AppLanguage.vi => 'Giữ XP hằng ngày chảy đều và tránh nghỉ liền hai phiên.',
-        AppLanguage.ja => '毎日の XP を維持し、2セッション連続で休まないようにします。',
-      };
+    AppLanguage.en =>
+      'Keep daily XP flowing and avoid missing two sessions in a row.',
+    AppLanguage.vi => 'Giữ XP hằng ngày chảy đều và tránh nghỉ liền hai phiên.',
+    AppLanguage.ja => '毎日の XP を維持し、2セッション連続で休まないようにします。',
+  };
 }
 
 class _LeaderboardItem {
@@ -477,5 +636,3 @@ class _LeaderboardItem {
   final String subtitle;
   final IconData icon;
 }
-
-

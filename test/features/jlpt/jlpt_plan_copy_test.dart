@@ -56,18 +56,22 @@ void main() {
       }
     });
 
-    test('every localizer returns three distinct strings (no missing translations)', () {
-      // A common bug: VI and JA cases get copy-pasted from EN. Assert that
-      // each function gives a unique string per language.
-      for (final (fn, _) in localizers) {
-        final outputs = AppLanguage.values.map(fn).toSet();
-        expect(
-          outputs.length,
-          AppLanguage.values.length,
-          reason: '${fn.runtimeType} produced duplicate strings across languages',
-        );
-      }
-    });
+    test(
+      'every localizer returns three distinct strings (no missing translations)',
+      () {
+        // A common bug: VI and JA cases get copy-pasted from EN. Assert that
+        // each function gives a unique string per language.
+        for (final (fn, _) in localizers) {
+          final outputs = AppLanguage.values.map(fn).toSet();
+          expect(
+            outputs.length,
+            AppLanguage.values.length,
+            reason:
+                '${fn.runtimeType} produced duplicate strings across languages',
+          );
+        }
+      },
+    );
   });
 
   // ── EN convention: "Open X" prefix ────────────────────────────────────────

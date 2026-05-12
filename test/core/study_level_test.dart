@@ -86,7 +86,7 @@ void main() {
     });
 
     test('English description content matches the documented copy', () {
-      // Pin exact strings â€” accidental copy edits would change onboarding UX.
+      // Pin exact strings — accidental copy edits would change onboarding UX.
       expect(
         StudyLevel.n5.description(AppLanguage.en),
         'Beginner fundamentals',

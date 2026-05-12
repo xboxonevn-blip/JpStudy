@@ -1,10 +1,4 @@
-enum ChallengeType {
-  reviewCount,
-  accuracy,
-  streakDays,
-  xpTarget,
-  lessonCount,
-}
+enum ChallengeType { reviewCount, accuracy, streakDays, xpTarget, lessonCount }
 
 class WeeklyChallenge {
   const WeeklyChallenge({

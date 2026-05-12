@@ -4,8 +4,7 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final rulesAsset =
-      File('assets/data/content/kanji/han_viet_on_rules.json');
+  final rulesAsset = File('assets/data/content/kanji/han_viet_on_rules.json');
 
   Map<String, dynamic> loadRulesAsset() {
     return jsonDecode(rulesAsset.readAsStringSync()) as Map<String, dynamic>;
@@ -57,7 +56,8 @@ void main() {
 
   test('han viet to on-yomi rules cover common learner mappings', () {
     final asset = loadRulesAsset();
-    final rules = (asset['rules'] as List<dynamic>).cast<Map<String, dynamic>>();
+    final rules = (asset['rules'] as List<dynamic>)
+        .cast<Map<String, dynamic>>();
 
     Map<String, dynamic> byId(String id) =>
         rules.singleWhere((rule) => rule['id'] == id);
@@ -72,16 +72,19 @@ void main() {
     expect(byId('usage-kanji-compounds-often-use-on')['examples'], isNotEmpty);
   });
 
-  test('han viet to on-yomi rules are registered and avoid blocked sources', () {
-    final raw = rulesAsset.readAsStringSync();
-    final pubspec = File('pubspec.yaml').readAsStringSync();
-    final index =
-        jsonDecode(File('assets/data/content/index.json').readAsStringSync())
-            as Map<String, dynamic>;
+  test(
+    'han viet to on-yomi rules are registered and avoid blocked sources',
+    () {
+      final raw = rulesAsset.readAsStringSync();
+      final pubspec = File('pubspec.yaml').readAsStringSync();
+      final index =
+          jsonDecode(File('assets/data/content/index.json').readAsStringSync())
+              as Map<String, dynamic>;
 
-    expect(pubspec, contains('assets/data/content/kanji/'));
-    expect(index['datasets'], contains('hanVietOnRules'));
-    expect(raw, isNot(contains('thocodehoctiengnhat.com')));
-    expect(raw, isNot(contains('nhaikanji.com')));
-  });
+      expect(pubspec, contains('assets/data/content/kanji/'));
+      expect(index['datasets'], contains('hanVietOnRules'));
+      expect(raw, isNot(contains('thocodehoctiengnhat.com')));
+      expect(raw, isNot(contains('nhaikanji.com')));
+    },
+  );
 }

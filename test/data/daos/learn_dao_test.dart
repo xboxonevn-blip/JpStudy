@@ -219,18 +219,10 @@ void main() {
       final newer = DateTime.now();
 
       await dao.createSession(
-        makeSession(
-          sessionId: 'old-session',
-          lessonId: 4,
-          completedAt: older,
-        ),
+        makeSession(sessionId: 'old-session', lessonId: 4, completedAt: older),
       );
       await dao.createSession(
-        makeSession(
-          sessionId: 'new-session',
-          lessonId: 4,
-          completedAt: newer,
-        ),
+        makeSession(sessionId: 'new-session', lessonId: 4, completedAt: newer),
       );
 
       final history = await dao.getSessionHistory(4);
@@ -245,12 +237,14 @@ void main() {
   // ---------------------------------------------------------------------------
 
   group('recordAnswer / getSessionAnswers', () {
-    test('getSessionAnswers returns empty list when no answers recorded',
-        () async {
-      await dao.createSession(makeSession(sessionId: 'ans-empty'));
-      final answers = await dao.getSessionAnswers('ans-empty');
-      expect(answers, isEmpty);
-    });
+    test(
+      'getSessionAnswers returns empty list when no answers recorded',
+      () async {
+        await dao.createSession(makeSession(sessionId: 'ans-empty'));
+        final answers = await dao.getSessionAnswers('ans-empty');
+        expect(answers, isEmpty);
+      },
+    );
 
     test('recordAnswer inserts answer for a session', () async {
       await dao.createSession(makeSession(sessionId: 'ans-session'));
@@ -260,44 +254,45 @@ void main() {
       expect(rowId, greaterThan(0));
     });
 
-    test('getSessionAnswers returns answers ordered by questionIndex', () async {
-      await dao.createSession(makeSession(sessionId: 'ans-order'));
-      for (var i in [2, 0, 1]) {
+    test(
+      'getSessionAnswers returns answers ordered by questionIndex',
+      () async {
+        await dao.createSession(makeSession(sessionId: 'ans-order'));
+        for (var i in [2, 0, 1]) {
+          await dao.recordAnswer(
+            makeAnswer(
+              sessionId: 'ans-order',
+              questionIndex: i,
+              termId: i + 10,
+            ),
+          );
+        }
+
+        final answers = await dao.getSessionAnswers('ans-order');
+        expect(answers, hasLength(3));
+        expect(answers.map((a) => a.questionIndex).toList(), [0, 1, 2]);
+      },
+    );
+
+    test(
+      'getSessionAnswers returns only answers for the specified session',
+      () async {
+        await dao.createSession(makeSession(sessionId: 's-filter-1'));
+        await dao.createSession(makeSession(sessionId: 's-filter-2'));
+
+        await dao.recordAnswer(makeAnswer(sessionId: 's-filter-1', termId: 1));
+        await dao.recordAnswer(makeAnswer(sessionId: 's-filter-2', termId: 2));
         await dao.recordAnswer(
-          makeAnswer(
-            sessionId: 'ans-order',
-            questionIndex: i,
-            termId: i + 10,
-          ),
+          makeAnswer(sessionId: 's-filter-1', questionIndex: 1, termId: 3),
         );
-      }
 
-      final answers = await dao.getSessionAnswers('ans-order');
-      expect(answers, hasLength(3));
-      expect(answers.map((a) => a.questionIndex).toList(), [0, 1, 2]);
-    });
-
-    test('getSessionAnswers returns only answers for the specified session',
-        () async {
-      await dao.createSession(makeSession(sessionId: 's-filter-1'));
-      await dao.createSession(makeSession(sessionId: 's-filter-2'));
-
-      await dao.recordAnswer(
-        makeAnswer(sessionId: 's-filter-1', termId: 1),
-      );
-      await dao.recordAnswer(
-        makeAnswer(sessionId: 's-filter-2', termId: 2),
-      );
-      await dao.recordAnswer(
-        makeAnswer(sessionId: 's-filter-1', questionIndex: 1, termId: 3),
-      );
-
-      final session1Answers = await dao.getSessionAnswers('s-filter-1');
-      expect(session1Answers, hasLength(2));
-      expect(
-        session1Answers.every((a) => a.sessionId == 's-filter-1'),
-        isTrue,
-      );
-    });
+        final session1Answers = await dao.getSessionAnswers('s-filter-1');
+        expect(session1Answers, hasLength(2));
+        expect(
+          session1Answers.every((a) => a.sessionId == 's-filter-1'),
+          isTrue,
+        );
+      },
+    );
   });
 }

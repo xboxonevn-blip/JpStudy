@@ -14,21 +14,21 @@ List<PracticeDestination> _build({
   int kanjiDue = 0,
   StudyLevel? level,
   bool preferImmersion = false,
-}) =>
-    buildPracticeDestinations(
-      language: AppLanguage.en,
-      ghostCount: ghostCount,
-      mistakeCount: mistakeCount,
-      dueReviewCount: dueReviewCount,
-      vocabDue: vocabDue,
-      grammarDue: grammarDue,
-      kanjiDue: kanjiDue,
-      level: level,
-      preferImmersion: preferImmersion,
-    );
+}) => buildPracticeDestinations(
+  language: AppLanguage.en,
+  ghostCount: ghostCount,
+  mistakeCount: mistakeCount,
+  dueReviewCount: dueReviewCount,
+  vocabDue: vocabDue,
+  grammarDue: grammarDue,
+  kanjiDue: kanjiDue,
+  level: level,
+  preferImmersion: preferImmersion,
+);
 
 String _topId(List<PracticeDestination> list) => list.first.id;
-List<String> _ids(List<PracticeDestination> list) => list.map((d) => d.id).toList();
+List<String> _ids(List<PracticeDestination> list) =>
+    list.map((d) => d.id).toList();
 
 // ── Tests ────────────────────────────────────────────────────
 
@@ -46,10 +46,20 @@ void main() {
 
     test('all expected IDs present', () {
       final ids = _build().map((d) => d.id).toSet();
-      expect(ids, containsAll([
-        'jlpt_coach', 'match', 'ghost', 'recall_sprint',
-        'kanji_dash', 'handwriting', 'kanji_reading', 'immersion', 'mistakes',
-      ]));
+      expect(
+        ids,
+        containsAll([
+          'jlpt_coach',
+          'match',
+          'ghost',
+          'recall_sprint',
+          'kanji_dash',
+          'handwriting',
+          'kanji_reading',
+          'immersion',
+          'mistakes',
+        ]),
+      );
     });
   });
 
@@ -189,14 +199,16 @@ void main() {
     test('returns all when total <= limit', () {
       final dests = _build().take(2).toList();
       final result = selectFocusPracticeDestinations(
-        rankedDestinations: dests, limit: 3,
+        rankedDestinations: dests,
+        limit: 3,
       );
       expect(result.length, 2);
     });
 
     test('returns exactly limit items when more available', () {
       final result = selectFocusPracticeDestinations(
-        rankedDestinations: _build(), limit: 3,
+        rankedDestinations: _build(),
+        limit: 3,
       );
       expect(result.length, 3);
     });
@@ -207,43 +219,53 @@ void main() {
       // Build destinations with ghost (badge=5) and mistakes (badge=3)
       final dests = _build(ghostCount: 5, mistakeCount: 3);
       final result = selectFocusPracticeDestinations(
-        rankedDestinations: dests, limit: 2,
+        rankedDestinations: dests,
+        limit: 2,
       );
       final resultIds = result.map((d) => d.id).toSet();
       expect(resultIds, contains('ghost'));
       expect(resultIds, contains('mistakes'));
     });
 
-    test('fills remaining slots from ranked list when not enough urgent items', () {
-      // Only one urgent item (ghost), limit=3 → fills 2 more from ranking
-      final dests = _build(ghostCount: 5);
-      final result = selectFocusPracticeDestinations(
-        rankedDestinations: dests, limit: 3,
-      );
-      expect(result.length, 3);
-      expect(result.any((d) => d.id == 'ghost'), isTrue);
-    });
+    test(
+      'fills remaining slots from ranked list when not enough urgent items',
+      () {
+        // Only one urgent item (ghost), limit=3 → fills 2 more from ranking
+        final dests = _build(ghostCount: 5);
+        final result = selectFocusPracticeDestinations(
+          rankedDestinations: dests,
+          limit: 3,
+        );
+        expect(result.length, 3);
+        expect(result.any((d) => d.id == 'ghost'), isTrue);
+      },
+    );
 
     test('no duplicates in result', () {
       final dests = _build(ghostCount: 5, mistakeCount: 3, dueReviewCount: 10);
       final result = selectFocusPracticeDestinations(
-        rankedDestinations: dests, limit: 4,
+        rankedDestinations: dests,
+        limit: 4,
       );
       final ids = result.map((d) => d.id).toList();
       expect(ids.toSet().length, ids.length);
     });
 
-    test('focus routes (grammar-practice, mistakes, handwriting, immersion) are prioritized', () {
-      // No badges but focus routes should still be preferred
-      final dests = _build(level: StudyLevel.n5); // handwriting gets +4
-      final result = selectFocusPracticeDestinations(
-        rankedDestinations: dests, limit: 3,
-      );
-      final ids = result.map((d) => d.id).toSet();
-      // At least one focus route appears in top 3
-      final focusRouteIds = {'ghost', 'mistakes', 'handwriting', 'immersion'};
-      expect(ids.intersection(focusRouteIds), isNotEmpty);
-    });
+    test(
+      'focus routes (grammar-practice, mistakes, handwriting, immersion) are prioritized',
+      () {
+        // No badges but focus routes should still be preferred
+        final dests = _build(level: StudyLevel.n5); // handwriting gets +4
+        final result = selectFocusPracticeDestinations(
+          rankedDestinations: dests,
+          limit: 3,
+        );
+        final ids = result.map((d) => d.id).toSet();
+        // At least one focus route appears in top 3
+        final focusRouteIds = {'ghost', 'mistakes', 'handwriting', 'immersion'};
+        expect(ids.intersection(focusRouteIds), isNotEmpty);
+      },
+    );
   });
 
   // ── applyPracticeDestinationOrder ────────────────────────────
@@ -252,7 +274,8 @@ void main() {
     test('returns original order when preferredOrder is empty', () {
       final dests = _build();
       final result = applyPracticeDestinationOrder(
-        rankedDestinations: dests, preferredOrder: [],
+        rankedDestinations: dests,
+        preferredOrder: [],
       );
       expect(_ids(result), _ids(dests));
     });
@@ -261,7 +284,8 @@ void main() {
       final dests = _build();
       final preferred = ['handwriting', 'immersion', 'match'];
       final result = applyPracticeDestinationOrder(
-        rankedDestinations: dests, preferredOrder: preferred,
+        rankedDestinations: dests,
+        preferredOrder: preferred,
       );
       expect(_ids(result).take(3).toList(), preferred);
     });
@@ -270,7 +294,8 @@ void main() {
       final dests = _build();
       final preferred = ['handwriting'];
       final result = applyPracticeDestinationOrder(
-        rankedDestinations: dests, preferredOrder: preferred,
+        rankedDestinations: dests,
+        preferredOrder: preferred,
       );
       expect(result.first.id, 'handwriting');
       expect(result.length, dests.length);
@@ -279,7 +304,8 @@ void main() {
     test('unknown ids in preferredOrder are silently ignored', () {
       final dests = _build();
       final result = applyPracticeDestinationOrder(
-        rankedDestinations: dests, preferredOrder: ['nonexistent_id', 'match'],
+        rankedDestinations: dests,
+        preferredOrder: ['nonexistent_id', 'match'],
       );
       expect(result.first.id, 'match');
       expect(result.length, dests.length);

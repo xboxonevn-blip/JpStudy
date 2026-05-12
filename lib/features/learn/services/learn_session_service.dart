@@ -141,5 +141,4 @@ class LearnSessionService {
     // D2: kanjiMaster — trigger from kanji SRS review flow when mastered count crosses 100.
     // D2: articleReader — trigger from immersion reader when completed article count crosses 5.
   }
-
 }

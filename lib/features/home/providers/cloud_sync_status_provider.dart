@@ -14,4 +14,3 @@ void refreshCloudSyncStatus(WidgetRef ref) {
   final current = ref.read(cloudSyncStatusRefreshProvider);
   ref.read(cloudSyncStatusRefreshProvider.notifier).state = current + 1;
 }
-

@@ -34,7 +34,10 @@ void main() {
       expect(mistakes, hasLength(1));
       // First insert sets wrongCount = requiredCorrectStreak (2),
       // then on conflict increments by 1 → 3.
-      expect(mistakes.first.wrongCount, greaterThan(MistakeDao.requiredCorrectStreak));
+      expect(
+        mistakes.first.wrongCount,
+        greaterThan(MistakeDao.requiredCorrectStreak),
+      );
     });
 
     test('stores context fields when provided', () async {
@@ -57,15 +60,17 @@ void main() {
       expect(m.extraJson, '{"level":"N4"}');
     });
 
-    test('different type+itemId combinations are stored as separate rows',
-        () async {
-      await dao.addMistake('vocab', 1);
-      await dao.addMistake('grammar', 1);
-      await dao.addMistake('vocab', 2);
+    test(
+      'different type+itemId combinations are stored as separate rows',
+      () async {
+        await dao.addMistake('vocab', 1);
+        await dao.addMistake('grammar', 1);
+        await dao.addMistake('vocab', 2);
 
-      final all = await dao.getAllMistakes();
-      expect(all, hasLength(3));
-    });
+        final all = await dao.getAllMistakes();
+        expect(all, hasLength(3));
+      },
+    );
 
     test('null context fields are accepted', () async {
       await dao.addMistake('kanji', 5);
@@ -316,8 +321,9 @@ void main() {
       final vocabCount = await dao.watchMistakeItemCount(type: 'vocab').first;
       expect(vocabCount, 2);
 
-      final grammarCount =
-          await dao.watchMistakeItemCount(type: 'grammar').first;
+      final grammarCount = await dao
+          .watchMistakeItemCount(type: 'grammar')
+          .first;
       expect(grammarCount, 1);
     });
   });

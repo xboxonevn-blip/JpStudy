@@ -92,7 +92,10 @@ class _LearnConfigScreenState extends ConsumerState<LearnConfigScreen> {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [context.appPalette.primary, context.appPalette.primary.withValues(alpha: 0.7)],
+          colors: [
+            context.appPalette.primary,
+            context.appPalette.primary.withValues(alpha: 0.7),
+          ],
         ),
         borderRadius: BorderRadius.circular(20),
       ),
@@ -228,7 +231,10 @@ class _LearnConfigScreenState extends ConsumerState<LearnConfigScreen> {
         const SizedBox(height: 8),
         Text(
           language.selectQuestionTypesLabel,
-          style: TextStyle(fontSize: 14, color: context.appPalette.ink.withValues(alpha: 0.55)),
+          style: TextStyle(
+            fontSize: 14,
+            color: context.appPalette.ink.withValues(alpha: 0.55),
+          ),
         ),
         const SizedBox(height: 12),
         Wrap(

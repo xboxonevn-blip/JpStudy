@@ -60,7 +60,9 @@ Widget buildScreen({
 }) {
   return ProviderScope(
     overrides: [
-      appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(AppLanguage.en),
+      ),
       authStateProvider.overrideWith((ref) => Stream.value(signedInUser)),
       cloudSyncStatusProvider.overrideWith((ref) async => status),
       dataSettingsControllerProvider.overrideWith(

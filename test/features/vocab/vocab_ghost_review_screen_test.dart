@@ -8,22 +8,22 @@ import 'package:jpstudy/features/vocab/screens/vocab_ghost_review_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 VocabItem _vocab(int id, String term, String meaning) => VocabItem(
-      id: id,
-      term: term,
-      reading: 'reading',
-      meaning: meaning,
-      meaningEn: meaning,
-      level: 'N5',
-    );
+  id: id,
+  term: term,
+  reading: 'reading',
+  meaning: meaning,
+  meaningEn: meaning,
+  level: 'N5',
+);
 
 Widget buildScreen(List<VocabItem> items) => ProviderScope(
-      overrides: [
-        appLanguageProvider.overrideWith((ref) => AppLanguage.en),
-      ],
-      child: MaterialApp(
-        home: VocabGhostReviewScreen(items: items),
-      ),
-    );
+  overrides: [
+    appLanguageProvider.overrideWith(
+      (ref) => AppLanguageController.test(AppLanguage.en),
+    ),
+  ],
+  child: MaterialApp(home: VocabGhostReviewScreen(items: items)),
+);
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
@@ -35,10 +35,9 @@ void main() {
   });
 
   testWidgets('shows progress counter and indicator', (tester) async {
-    await tester.pumpWidget(buildScreen([
-      _vocab(1, '火', 'fire'),
-      _vocab(2, '水', 'water'),
-    ]));
+    await tester.pumpWidget(
+      buildScreen([_vocab(1, '火', 'fire'), _vocab(2, '水', 'water')]),
+    );
     await tester.pump();
     expect(find.text('1 / 2'), findsOneWidget);
     expect(find.byType(LinearProgressIndicator), findsOneWidget);

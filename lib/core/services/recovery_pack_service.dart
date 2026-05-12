@@ -74,7 +74,9 @@ class RecoveryPackService {
     final prefs = await SharedPreferences.getInstance();
     final payload = RecoveryPack(
       source: 'mock_exam',
-      lessonTitle: lessonTitle.trim().isEmpty ? recoveryLessonTitle : lessonTitle,
+      lessonTitle: lessonTitle.trim().isEmpty
+          ? recoveryLessonTitle
+          : lessonTitle,
       termIds: ids,
       createdAt: DateTime.now(),
     );

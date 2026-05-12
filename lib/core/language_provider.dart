@@ -17,15 +17,19 @@ class AppLanguageController extends StateNotifier<AppLanguage> {
   AppLanguageController(this._preferences)
     : super(_initialLanguage(_preferences));
 
-  final SharedPreferences _preferences;
+  AppLanguageController.test(AppLanguage language)
+    : _preferences = null,
+      super(language);
+
+  final SharedPreferences? _preferences;
 
   Future<void> setLanguage(AppLanguage language) async {
     state = language;
-    await _preferences.setString(prefAppLocale, language.name);
+    await _preferences?.setString(prefAppLocale, language.name);
   }
 
-  static AppLanguage _initialLanguage(SharedPreferences preferences) {
-    final stored = preferences.getString(prefAppLocale);
+  static AppLanguage _initialLanguage(SharedPreferences? preferences) {
+    final stored = preferences?.getString(prefAppLocale);
     final storedLanguage = AppLanguage.values
         .where((language) => language.name == stored)
         .firstOrNull;

@@ -1895,10 +1895,7 @@ class _CardContent extends StatelessWidget {
       layoutBuilder: (currentChild, previousChildren) {
         return Stack(
           alignment: Alignment.center,
-          children: [
-            ...previousChildren,
-            ?currentChild,
-          ],
+          children: [...previousChildren, ?currentChild],
         );
       },
       child: showBack ? back : front,
@@ -2057,5 +2054,3 @@ class _FlashcardControls extends StatelessWidget {
     );
   }
 }
-
-

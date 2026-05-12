@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
-import 'package:jpstudy/core/app_language.dart';
-import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
+import 'package:jpstudy/core/shared_preferences_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/core/services/fsrs_service.dart';
 import 'package:jpstudy/data/db/app_database.dart';
@@ -40,6 +39,8 @@ class _FakeVocabLessonRepository extends LessonRepository {
   final Map<String, List<VocabItem>> bank;
   final Map<String, List<UserLessonTermData>> hajimeteChapterTerms;
   late final Map<int, SrsStateData> srsStates;
+  final levelSeriesCalls = <String>[];
+  final lessonRangeCalls = <String>[];
 
   @override
   Future<List<VocabItem>> getVocabByLevel(String level) async {
@@ -51,6 +52,7 @@ class _FakeVocabLessonRepository extends LessonRepository {
     String level,
     String series,
   ) async {
+    levelSeriesCalls.add('$level:$series');
     return bank[level] ?? const [];
   }
 
@@ -136,6 +138,7 @@ class _FakeVocabLessonRepository extends LessonRepository {
     required int endLesson,
     String series = 'minna',
   }) async {
+    lessonRangeCalls.add('$level:$series:$startLesson-$endLesson');
     if (level == 'N5' && startLesson == 1 && endLesson == 25) {
       return bank['N5'] ?? const [];
     }
@@ -225,7 +228,7 @@ Widget _buildScreen({
 }) {
   return ProviderScope(
     overrides: [
-      appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+      sharedPreferencesProvider.overrideWithValue(_prefs),
       studyLevelProvider.overrideWith((ref) => level),
       lessonRepositoryProvider.overrideWithValue(repo),
       dashboardProvider.overrideWith(
@@ -315,7 +318,7 @@ Widget _buildRouterScreen({required LessonRepository repo}) {
 
   return ProviderScope(
     overrides: [
-      appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+      sharedPreferencesProvider.overrideWithValue(_prefs),
       studyLevelProvider.overrideWith((ref) => StudyLevel.n4),
       lessonRepositoryProvider.overrideWithValue(repo),
       dashboardProvider.overrideWith(
@@ -347,7 +350,60 @@ Future<void> _pumpCatalog(WidgetTester tester) async {
   }
 }
 
+late SharedPreferences _prefs;
+
 void main() {
+  setUp(() async {
+    SharedPreferences.setMockInitialValues({'app.locale': 'en'});
+    _prefs = await SharedPreferences.getInstance();
+  });
+
+  test('vocabCatalogProvider only loads active JLPT level', () async {
+    final repo = _FakeVocabLessonRepository(
+      bank: {
+        'N5': [_item(1, '?', 'N5')],
+        'N4': [_item(2, '?', 'N4')],
+        'N3': [_item(3, '?', 'N3')],
+        'N2': [_item(4, '?', 'N2')],
+        'N1': [_item(5, '?', 'N1')],
+      },
+    );
+    final container = ProviderContainer(
+      overrides: [
+        sharedPreferencesProvider.overrideWithValue(_prefs),
+        studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+        lessonRepositoryProvider.overrideWithValue(repo),
+        dashboardProvider.overrideWith(
+          (ref) => Stream.value(
+            const DashboardState(
+              streak: 0,
+              todayXp: 0,
+              vocabDue: 0,
+              grammarDue: 0,
+              kanjiDue: 0,
+              vocabMistakeCount: 0,
+              grammarMistakeCount: 0,
+              kanjiMistakeCount: 0,
+              totalMistakeCount: 0,
+            ),
+          ),
+        ),
+        nextVocabReviewProvider.overrideWith((ref) => Stream.value(null)),
+      ],
+    );
+    addTearDown(container.dispose);
+
+    await container.read(vocabCatalogProvider.future);
+
+    expect(repo.levelSeriesCalls, contains('N5:hajimete'));
+    expect(repo.levelSeriesCalls, isNot(contains('N4:hajimete')));
+    expect(repo.levelSeriesCalls, isNot(contains('N3:hajimete')));
+    expect(repo.levelSeriesCalls, isNot(contains('N2:hajimete')));
+    expect(repo.levelSeriesCalls, isNot(contains('N1:hajimete')));
+    expect(repo.levelSeriesCalls, isNot(contains('N3:ShinKanzen')));
+    expect(repo.lessonRangeCalls, contains('N5:minna:1-25'));
+    expect(repo.lessonRangeCalls, isNot(contains('N4:minna:26-50')));
+  });
   setUp(() {
     SharedPreferences.setMockInitialValues({
       'foundations.softSuggest.vocab.shown': true,
@@ -573,7 +629,7 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          sharedPreferencesProvider.overrideWithValue(_prefs),
           studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
           lessonRepositoryProvider.overrideWithValue(repo),
           allDueTermsProvider.overrideWith(
@@ -717,7 +773,7 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+            sharedPreferencesProvider.overrideWithValue(_prefs),
             studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
             lessonRepositoryProvider.overrideWithValue(repo),
             allDueTermsProvider.overrideWith(
@@ -834,7 +890,7 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          sharedPreferencesProvider.overrideWithValue(_prefs),
           studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
           lessonRepositoryProvider.overrideWithValue(repo),
           hajimeteChapterCatalogProvider.overrideWith(
@@ -915,7 +971,7 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+          sharedPreferencesProvider.overrideWithValue(_prefs),
           lessonRepositoryProvider.overrideWithValue(
             _FakeVocabLessonRepository(
               bank: {
@@ -1066,7 +1122,7 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+            sharedPreferencesProvider.overrideWithValue(_prefs),
             lessonRepositoryProvider.overrideWithValue(repo),
             hajimeteChapterDetailProvider.overrideWith(
               (ref, arg) async => detail,
@@ -1158,7 +1214,7 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            appLanguageProvider.overrideWith((ref) => AppLanguage.en),
+            sharedPreferencesProvider.overrideWithValue(_prefs),
             studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
             lessonRepositoryProvider.overrideWithValue(repo),
             allDueTermsProvider.overrideWith(

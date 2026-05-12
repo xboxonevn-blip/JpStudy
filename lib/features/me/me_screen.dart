@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
@@ -104,8 +106,8 @@ class _MeScreenState extends ConsumerState<MeScreen> {
                 Text(
                   language.loginDialogSubtitle,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: palette.ink.withValues(alpha: 0.65),
-                      ),
+                    color: palette.ink.withValues(alpha: 0.65),
+                  ),
                 ),
                 const SizedBox(height: AppSpacing.md),
                 FilledButton.icon(
@@ -141,15 +143,15 @@ class _MeScreenState extends ConsumerState<MeScreen> {
                       Text(
                         user.displayName!,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
+                          fontWeight: FontWeight.w600,
+                        ),
                         overflow: TextOverflow.ellipsis,
                       ),
                     Text(
                       user.email ?? language.signedInAsLabel,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: palette.ink.withValues(alpha: 0.65),
-                          ),
+                        color: palette.ink.withValues(alpha: 0.65),
+                      ),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ],
@@ -158,8 +160,7 @@ class _MeScreenState extends ConsumerState<MeScreen> {
               const SizedBox(width: AppSpacing.sm),
               IconButton(
                 tooltip: language.signOutLabel,
-                onPressed: () =>
-                    ref.read(authServiceProvider).signOut(),
+                onPressed: () => ref.read(authServiceProvider).signOut(),
                 icon: const Icon(Icons.logout_rounded),
               ),
             ],
@@ -185,8 +186,11 @@ class _MeScreenState extends ConsumerState<MeScreen> {
                     ref.read(studyLevelProvider.notifier).state = candidate;
                     if (candidate != StudyLevel.n3 &&
                         ref.read(appLanguageProvider) == AppLanguage.ja) {
-                      ref.read(appLanguageProvider.notifier).state =
-                          AppLanguage.en;
+                      unawaited(
+                        ref
+                            .read(appLanguageProvider.notifier)
+                            .setLanguage(AppLanguage.en),
+                      );
                     }
                   },
                 ),
@@ -205,8 +209,11 @@ class _MeScreenState extends ConsumerState<MeScreen> {
                       appLanguage == AppLanguage.ja && level != StudyLevel.n3
                       ? null
                       : (_) {
-                          ref.read(appLanguageProvider.notifier).state =
-                              appLanguage;
+                          unawaited(
+                            ref
+                                .read(appLanguageProvider.notifier)
+                                .setLanguage(appLanguage),
+                          );
                         },
                 ),
             ],

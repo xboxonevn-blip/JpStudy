@@ -81,13 +81,12 @@ void main() {
     expect(find.text('てから'), findsOneWidget);
   });
 
-  testWidgets('Check button is disabled before any option is selected',
-      (tester) async {
+  testWidgets('Check button is disabled before any option is selected', (
+    tester,
+  ) async {
     _largeViewport(tester);
     bool called = false;
-    await tester.pumpWidget(
-      _buildWidget(onCheck: (_, _) => called = true),
-    );
+    await tester.pumpWidget(_buildWidget(onCheck: (_, _) => called = true));
     await _pump(tester);
 
     // Tap the key-identified check button; disabled buttons ignore taps.
@@ -113,15 +112,19 @@ void main() {
     expect(find.text('Selected: ながら'), findsOneWidget);
   });
 
-  testWidgets('correct option fires onCheck with isCorrect=true', (tester) async {
+  testWidgets('correct option fires onCheck with isCorrect=true', (
+    tester,
+  ) async {
     _largeViewport(tester);
     bool? result;
     String? chosen;
     await tester.pumpWidget(
-      _buildWidget(onCheck: (isCorrect, selected) {
-        result = isCorrect;
-        chosen = selected;
-      }),
+      _buildWidget(
+        onCheck: (isCorrect, selected) {
+          result = isCorrect;
+          chosen = selected;
+        },
+      ),
     );
     await _pump(tester);
 
@@ -137,7 +140,9 @@ void main() {
     expect(chosen, equals('ながら'));
   });
 
-  testWidgets('wrong option fires onCheck with isCorrect=false', (tester) async {
+  testWidgets('wrong option fires onCheck with isCorrect=false', (
+    tester,
+  ) async {
     _largeViewport(tester);
     bool? result;
     await tester.pumpWidget(
@@ -156,13 +161,12 @@ void main() {
     expect(result, isFalse);
   });
 
-  testWidgets('after checking, options are locked (re-tapping does nothing)',
-      (tester) async {
+  testWidgets('after checking, options are locked (re-tapping does nothing)', (
+    tester,
+  ) async {
     _largeViewport(tester);
     int checkCount = 0;
-    await tester.pumpWidget(
-      _buildWidget(onCheck: (_, _) => checkCount++),
-    );
+    await tester.pumpWidget(_buildWidget(onCheck: (_, _) => checkCount++));
     await _pump(tester);
 
     // Select and check once
