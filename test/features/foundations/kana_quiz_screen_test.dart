@@ -214,12 +214,13 @@ void main() {
       find.byKey(const ValueKey('kana_auto_again_continue')),
       findsOneWidget,
     );
-    expect(find.text('Again'), findsNothing);
+    expect(find.text('Again'), findsOneWidget);
+    expect(find.text('Hard'), findsOneWidget);
     expect(find.text('Good'), findsNothing);
     expect(find.text('Easy'), findsNothing);
   });
 
-  testWidgets('kana quiz shows only Good and Easy after correct answer', (
+  testWidgets('kana quiz shows Hard, Good, and Easy after correct answer', (
     tester,
   ) async {
     final db = AppDatabase(executor: NativeDatabase.memory());

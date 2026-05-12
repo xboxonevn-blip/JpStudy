@@ -69,8 +69,9 @@ StudyHubDecksBoard buildStudyHubDecksBoard(List<LessonMeta> meta) {
     // Priority: due items first, then incomplete ones by ID
     if (a.dueCount > 0 && b.dueCount == 0) return -1;
     if (b.dueCount > 0 && a.dueCount == 0) return 1;
-    if (a.dueCount > 0 && b.dueCount > 0)
+    if (a.dueCount > 0 && b.dueCount > 0) {
       return b.dueCount.compareTo(a.dueCount);
+    }
 
     if (!a.isFinished && b.isFinished) return -1;
     if (a.isFinished && !b.isFinished) return 1;

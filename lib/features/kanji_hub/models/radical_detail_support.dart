@@ -65,8 +65,9 @@ RadicalRelatedKanjiSummary buildRelatedKanjiSummary(
 
   for (final item in kanjiItems) {
     if (!containsRadical(item)) continue;
-    if (allItems.any((existing) => existing.character == item.character))
+    if (allItems.any((existing) => existing.character == item.character)) {
       continue;
+    }
 
     allItems.add(item);
     final level = _normalizedLevel(item.jlptLevel);

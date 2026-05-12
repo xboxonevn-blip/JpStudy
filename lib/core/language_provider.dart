@@ -17,9 +17,7 @@ class AppLanguageController extends StateNotifier<AppLanguage> {
   AppLanguageController(this._preferences)
     : super(_initialLanguage(_preferences));
 
-  AppLanguageController.test(AppLanguage language)
-    : _preferences = null,
-      super(language);
+  AppLanguageController.test(super.language) : _preferences = null;
 
   final SharedPreferences? _preferences;
 
