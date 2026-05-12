@@ -1,9 +1,12 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 
 class AnalyticsService {
-  AnalyticsService({FirebaseAnalytics? instance}) : _analytics = instance;
+  AnalyticsService({FirebaseAnalytics? instance, bool enabled = false})
+    : _analytics = instance,
+      _enabled = enabled;
 
   final FirebaseAnalytics? _analytics;
+  final bool _enabled;
 
   Future<void> logSessionStart(String mode) {
     return _logEvent('study_session_start', {'mode': mode});
@@ -36,6 +39,7 @@ class AnalyticsService {
   }
 
   Future<void> _logEvent(String name, [Map<String, Object>? parameters]) async {
+    if (!_enabled) return;
     try {
       final analytics = _analytics ?? FirebaseAnalytics.instance;
       await analytics.logEvent(name: name, parameters: parameters);
