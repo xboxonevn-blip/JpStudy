@@ -54,7 +54,7 @@
 - Linh click/gõ: Test widget nhập `学`, `hoc`, `gaku`, `manabu`; live smoke mở search panel.
 - Quan sát: Search hiện 学 qua kanji, Hán Việt không dấu, onyomi romaji, kunyomi romaji. Screenshot `tests/uat-kanji-2026-05-13/B4-search-panel-desktop.png`.
 - IMPLEMENTED/PASS — search đã match `character`, meaning, examples, readings, Hán Việt, component names; normalize tiếng Việt không dấu.
-- Fix commit: `dd56c535`.
+- Fix commit: `dd56c535`, `e42d8a57`.
 ### B5. Handwriting Auto-Find
 - Linh nghĩ: “Mình muốn vẽ 一 để app đoán.”
 - Linh click/gõ: Smoke mở vùng vẽ/toggle/nút tìm.
@@ -242,7 +242,7 @@
 - [MEDIUM] [SEARCH-UAT]: Search variants `hoc/gaku/manabu` lacked deterministic coverage — fix: `dd56c535`.
   - Repro: Search did not include normalized Hán Việt/component/example fields.
   - File: `lib/features/kanji_hub/kanji_hub_screen_parts.dart`, `test/features/kanji_hub/kanji_hub_screen_test.dart`.
-  - Verify: `flutter test test/features/kanji_hub/kanji_hub_screen_test.dart` PASS 4/4; live smoke screenshot saved.
+  - Verify: `flutter test test/features/kanji_hub/kanji_hub_screen_test.dart` PASS 4/4; live desktop/mobile screenshots saved; normalized highlight uses same matcher as filtering.
 - [LOW] [KANJI-ADVANCED-UAT]: Handwriting scoring, FSRS batch summary, offline/cloud sync need seeded/manual UAT harness.
   - Repro: Full production mutation unsafe with shared admin account.
   - File: Multiple Kanji/session/sync modules.
@@ -261,6 +261,7 @@
 - `7e78bc24 fix(i18n): restore analytics consent Vietnamese`
 - `e96b24bd test(i18n): expect fixed consent Vietnamese`
 - `dd56c535 fix(kanji): match hanviet search variants`
+- `e42d8a57 fix(kanji): highlight normalized search matches`
 
 ## Top changes deferred
 - Add handwriting pointer-trace test for 一 and 学.
@@ -275,10 +276,10 @@
 
 ## Final verification
 - Live URL: https://jpstudy-v2.web.app/#/kanji
-- Desktop screenshot: `tests/uat-kanji-2026-05-13/live-redo-A1-desktop-kanji-dd56c535.png`
-- Mobile screenshot: `tests/uat-kanji-2026-05-13/live-redo-A3-mobile-kanji-dd56c535.png`
+- Desktop screenshot: `tests/uat-kanji-2026-05-13/live-final-desktop-kanji-e42d8a57.png`
+- Mobile screenshot: `tests/uat-kanji-2026-05-13/live-final-mobile-kanji-e42d8a57.png`
 - Console: 0 warnings/errors in final MCP smoke.
 - Data integrity: `flutter test test/data/upper_jlpt_content_integrity_test.dart` PASS 24/24.
-- Kanji hub widget tests: `flutter test test/features/kanji_hub/kanji_hub_screen_test.dart` PASS 4/4.
+- Kanji hub widget tests: `flutter test test/features/kanji_hub/kanji_hub_screen_test.dart` PASS 4/4, including `?`, `hoc`, accented `h?c`, `gaku`, `manabu`, `gakkou`, and `xyz` empty state.
 - Scoped analyze: `flutter analyze lib test` PASS.
-- Build/deploy after `dd56c535`: PASS.
+- Build/deploy after `e42d8a57`: PASS; console warnings/errors 0 on desktop + mobile.
