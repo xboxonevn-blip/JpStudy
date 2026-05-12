@@ -30,6 +30,7 @@ class AppShellScaffold extends ConsumerWidget {
               child: Column(
                 children: [
                   const GlobalTopBar(),
+                  _SemanticNavigationLandmarks(items: items),
                   Expanded(
                     child: AppResponsiveFrame(
                       maxWidth: AppResponsiveMetrics.shellMaxWidth(
@@ -75,7 +76,15 @@ class AppShellScaffold extends ConsumerWidget {
 
         return Scaffold(
           backgroundColor: palette.bg,
-          body: SafeArea(bottom: false, child: navigationShell),
+          body: SafeArea(
+            bottom: false,
+            child: Stack(
+              children: [
+                navigationShell,
+                _SemanticNavigationLandmarks(items: items),
+              ],
+            ),
+          ),
           bottomNavigationBar: SafeArea(
             top: false,
             child: Padding(
@@ -198,6 +207,39 @@ class AppShellScaffold extends ConsumerWidget {
         selectedIcon: Icons.forum_rounded,
       ),
     ];
+  }
+}
+
+class _SemanticNavigationLandmarks extends StatelessWidget {
+  const _SemanticNavigationLandmarks({required this.items});
+
+  final List<_ShellItem> items;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      left: 0,
+      top: 0,
+      child: ExcludeFocus(
+        child: Opacity(
+          opacity: 0,
+          child: SizedBox(
+            width: 1,
+            height: items.length.toDouble().clamp(1, 100),
+            child: Column(
+              children: [
+                for (final item in items)
+                  Semantics(
+                    label: item.label,
+                    button: true,
+                    child: const SizedBox(width: 1, height: 1),
+                  ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 
