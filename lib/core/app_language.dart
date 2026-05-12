@@ -716,6 +716,74 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get analyticsConsentTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Help improve JpStudy';
+      case AppLanguage.vi:
+        return 'Gi?p c?i thi?n JpStudy';
+      case AppLanguage.ja:
+        return 'JpStudy??????';
+    }
+  }
+
+  String get analyticsConsentBody {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Allow anonymous Firebase Analytics so we can understand feature usage. You can decline and keep using the app.';
+      case AppLanguage.vi:
+        return 'Cho ph?p Firebase Analytics ?n danh ?? nh?m hi?u c?ch d?ng t?nh n?ng. B?n c? th? t? ch?i v? v?n d?ng app b?nh th??ng.';
+      case AppLanguage.ja:
+        return '???Firebase Analytics???????????????????????????????????';
+    }
+  }
+
+  String get analyticsConsentAcceptLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Allow';
+      case AppLanguage.vi:
+        return 'Cho ph?p';
+      case AppLanguage.ja:
+        return '??';
+    }
+  }
+
+  String get analyticsConsentDeclineLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'No thanks';
+      case AppLanguage.vi:
+        return 'Kh?ng, c?m ?n';
+      case AppLanguage.ja:
+        return '?????';
+    }
+  }
+
+  String mcqResultAnnouncement({
+    required bool isCorrect,
+    required String correctAnswer,
+  }) {
+    if (isCorrect) {
+      switch (this) {
+        case AppLanguage.en:
+          return 'Correct answer';
+        case AppLanguage.vi:
+          return '??p ?n ??ng';
+        case AppLanguage.ja:
+          return '????';
+      }
+    }
+    switch (this) {
+      case AppLanguage.en:
+        return 'Incorrect. Correct answer is $correctAnswer';
+      case AppLanguage.vi:
+        return '??p ?n sai, ??p ?n ??ng l? $correctAnswer';
+      case AppLanguage.ja:
+        return '?????????$correctAnswer??';
+    }
+  }
+
   String get correctLabel {
     switch (this) {
       case AppLanguage.en:
@@ -3271,11 +3339,11 @@ extension AppLanguageLabels on AppLanguage {
   String get loginManualAccountFooterLabel {
     switch (this) {
       case AppLanguage.en:
-        return "If Gmail isn't convenient, message me to issue an account.";
+        return "If Google sign-in isn't convenient, use the email account provided by your study group or admin.";
       case AppLanguage.vi:
-        return 'N\u1ebfu kh\u00f4ng ti\u1ec7n d\u00f9ng Gmail h\u00e3y nh\u1eafn m\u00ecnh c\u1ea5p t\u00e0i kho\u1ea3n.';
+        return 'Nếu không tiện dùng Google, hãy dùng tài khoản email do nhóm học hoặc quản trị viên cung cấp.';
       case AppLanguage.ja:
-        return 'Gmail\u3092\u4f7f\u3048\u306a\u3044\u5834\u5408\u306f\u30a2\u30ab\u30a6\u30f3\u30c8\u306e\u767a\u884c\u3092\u4f9d\u983c\u3057\u3066\u304f\u3060\u3055\u3044\u3002';
+        return 'Googleでログインしにくい場合は、学習グループまたは管理者から提供されたメールアカウントを使用してください。';
     }
   }
 
@@ -3309,6 +3377,28 @@ extension AppLanguageLabels on AppLanguage {
         return 'Email ho\u1eb7c m\u1eadt kh\u1ea9u kh\u00f4ng \u0111\u00fang.';
       case AppLanguage.ja:
         return '\u30e1\u30fc\u30eb\u30a2\u30c9\u30ec\u30b9\u307e\u305f\u306f\u30d1\u30b9\u30ef\u30fc\u30c9\u304c\u6b63\u3057\u304f\u3042\u308a\u307e\u305b\u3093\u3002';
+    }
+  }
+
+  String get authUserNotFoundLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'No account found for this email.';
+      case AppLanguage.vi:
+        return 'Không tìm thấy tài khoản với email này.';
+      case AppLanguage.ja:
+        return 'このメールアドレスのアカウントが見つかりません。';
+    }
+  }
+
+  String get authWrongPasswordLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Password is incorrect.';
+      case AppLanguage.vi:
+        return 'Mật khẩu không đúng.';
+      case AppLanguage.ja:
+        return 'パスワードが正しくありません。';
     }
   }
 
@@ -4847,6 +4937,17 @@ extension AppLanguageLabels on AppLanguage {
         return '$minutes phút';
       case AppLanguage.ja:
         return '$minutes分';
+    }
+  }
+
+  String unitMinutesLabel(int minutes) {
+    switch (this) {
+      case AppLanguage.en:
+        return '$minutes min';
+      case AppLanguage.vi:
+        return '$minutes ph?t';
+      case AppLanguage.ja:
+        return '$minutes?';
     }
   }
 
@@ -7290,6 +7391,83 @@ extension AppLanguageLabels on AppLanguage {
         return '$count kana \u0111\u1ebfn h\u1ea1n';
       case AppLanguage.ja:
         return '$count \u500b\u5fa9\u7fd2';
+    }
+  }
+
+  String get onboardingFirstWinTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Get one quick win first';
+      case AppLanguage.vi:
+        return 'Thử 1 câu quiz trước';
+      case AppLanguage.ja:
+        return '最初に小さな成功をひとつ';
+    }
+  }
+
+  String get onboardingFirstWinSubtitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Try one tiny question now, then jump into your first guided session.';
+      case AppLanguage.vi:
+        return 'Chọn đáp án. App sẽ báo đúng/sai ngay và mở phiên học đầu tiên.';
+      case AppLanguage.ja:
+        return '今すぐ小さな問題を1つ解いて、そのまま最初のガイド付きセッションへ進みましょう。';
+    }
+  }
+
+  String get onboardingFirstWinLoadingHint {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Preparing a sample from your level...';
+      case AppLanguage.vi:
+        return 'Đang chuẩn bị một ví dụ theo trình độ của bạn...';
+      case AppLanguage.ja:
+        return 'あなたのレベルに合う例題を準備しています...';
+    }
+  }
+
+  String get onboardingFirstWinUnlockHint {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Answer this one preview question to unlock your first session.';
+      case AppLanguage.vi:
+        return 'Sau khi trả lời, nút Bắt đầu sẽ bật lên.';
+      case AppLanguage.ja:
+        return 'このプレビュー問題に答えて、最初のセッションを解放しましょう。';
+    }
+  }
+
+  String get onboardingFirstWinQuestionLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'What does this mean?';
+      case AppLanguage.vi:
+        return 'Từ này nghĩa là gì?';
+      case AppLanguage.ja:
+        return 'この言葉の意味は？';
+    }
+  }
+
+  String get onboardingFirstWinSuccessLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Nice. This is the kind of quick win your first session will give you.';
+      case AppLanguage.vi:
+        return 'Đúng rồi! Bấm Bắt đầu để học tiếp.';
+      case AppLanguage.ja:
+        return 'いいですね。最初のセッションでは、こんな小さな達成を積み重ねていきます。';
+    }
+  }
+
+  String onboardingFirstWinAnswerLabel(String answer) {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Not quite. Correct answer: $answer';
+      case AppLanguage.vi:
+        return 'Chưa đúng. Đáp án đúng: $answer. Bấm Bắt đầu để luyện tiếp.';
+      case AppLanguage.ja:
+        return '正解: $answer';
     }
   }
 
