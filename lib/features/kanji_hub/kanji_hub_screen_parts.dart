@@ -1106,49 +1106,59 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                                 for (final filter in _KanjiSrsFilter.values)
                                   Padding(
                                     padding: const EdgeInsets.only(right: 6),
-                                    child: ChoiceChip(
-                                      label: Text(
-                                        _srsFilterLabel(
-                                          lang,
-                                          filter,
-                                          allItems.length,
-                                          dueIds,
-                                          seenIds,
-                                        ),
-                                        style: const TextStyle(fontSize: 11),
-                                      ),
+                                    child: Semantics(
+                                      button: true,
                                       selected: _srsFilter == filter,
-                                      onSelected: (val) => setState(
-                                        () => _srsFilter = val
-                                            ? filter
-                                            : _KanjiSrsFilter.all,
-                                      ),
-                                      showCheckmark: false,
-                                      selectedColor: _srsFilterColor(
+                                      label: _srsFilterLabel(
+                                        lang,
                                         filter,
-                                        context.appPalette,
-                                      ).withValues(alpha: 0.18),
-                                      labelStyle: TextStyle(
-                                        color: _srsFilter == filter
-                                            ? _srsFilterColor(
-                                                filter,
-                                                context.appPalette,
-                                              )
-                                            : context.appPalette.ink.withValues(
-                                                alpha: 0.65,
-                                              ),
-                                        fontWeight: _srsFilter == filter
-                                            ? FontWeight.bold
-                                            : FontWeight.normal,
+                                        allItems.length,
+                                        dueIds,
+                                        seenIds,
                                       ),
-                                      side: BorderSide(
-                                        color: _srsFilter == filter
-                                            ? _srsFilterColor(
-                                                filter,
-                                                context.appPalette,
-                                              ).withValues(alpha: 0.5)
-                                            : context.appPalette.outline
-                                                  .withValues(alpha: 0.4),
+                                      child: ChoiceChip(
+                                        label: Text(
+                                          _srsFilterLabel(
+                                            lang,
+                                            filter,
+                                            allItems.length,
+                                            dueIds,
+                                            seenIds,
+                                          ),
+                                          style: const TextStyle(fontSize: 11),
+                                        ),
+                                        selected: _srsFilter == filter,
+                                        onSelected: (val) => setState(
+                                          () => _srsFilter = val
+                                              ? filter
+                                              : _KanjiSrsFilter.all,
+                                        ),
+                                        showCheckmark: false,
+                                        selectedColor: _srsFilterColor(
+                                          filter,
+                                          context.appPalette,
+                                        ).withValues(alpha: 0.18),
+                                        labelStyle: TextStyle(
+                                          color: _srsFilter == filter
+                                              ? _srsFilterColor(
+                                                  filter,
+                                                  context.appPalette,
+                                                )
+                                              : context.appPalette.ink
+                                                    .withValues(alpha: 0.65),
+                                          fontWeight: _srsFilter == filter
+                                              ? FontWeight.bold
+                                              : FontWeight.normal,
+                                        ),
+                                        side: BorderSide(
+                                          color: _srsFilter == filter
+                                              ? _srsFilterColor(
+                                                  filter,
+                                                  context.appPalette,
+                                                ).withValues(alpha: 0.5)
+                                              : context.appPalette.outline
+                                                    .withValues(alpha: 0.4),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -1396,80 +1406,97 @@ class _KanjiTile extends StatelessWidget {
         ? palette.primary.withValues(alpha: 0.8)
         : palette.outline.withValues(alpha: 0.5);
 
-    return AnimatedContainer(
-      duration: reducedMotionDuration(
-        context,
-        const Duration(milliseconds: 180),
-      ),
-      decoration: BoxDecoration(
-        boxShadow: isHighlighted
-            ? [
-                BoxShadow(
-                  color: palette.primary.withValues(alpha: 0.18),
-                  blurRadius: 14,
-                  spreadRadius: 1,
-                  offset: const Offset(0, 6),
+    final hanViet = item.decomposition?.hanViet?.trim();
+    final semanticName = hanViet == null || hanViet.isEmpty
+        ? item.meaning
+        : hanViet;
+    final semanticLabel =
+        'H\u1ecdc $semanticName, '
+        'onyomi ${item.onyomi?.trim().isNotEmpty == true ? item.onyomi!.trim() : '-'}, '
+        'kunyomi ${item.kunyomi?.trim().isNotEmpty == true ? item.kunyomi!.trim() : '-'}, '
+        '${item.jlptLevel}';
+
+    return Semantics(
+      button: true,
+      label: semanticLabel,
+      child: AnimatedContainer(
+        duration: reducedMotionDuration(
+          context,
+          const Duration(milliseconds: 180),
+        ),
+        decoration: BoxDecoration(
+          boxShadow: isHighlighted
+              ? [
+                  BoxShadow(
+                    color: palette.primary.withValues(alpha: 0.18),
+                    blurRadius: 14,
+                    spreadRadius: 1,
+                    offset: const Offset(0, 6),
+                  ),
+                ]
+              : null,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Material(
+          color: background,
+          borderRadius: BorderRadius.circular(12),
+          clipBehavior: Clip.antiAlias,
+          child: InkWell(
+            onTap: onTap,
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: borderColor,
+                  width: isHighlighted ? 1.6 : 1,
                 ),
-              ]
-            : null,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Material(
-        color: background,
-        borderRadius: BorderRadius.circular(12),
-        clipBehavior: Clip.antiAlias,
-        child: InkWell(
-          onTap: onTap,
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: borderColor,
-                width: isHighlighted ? 1.6 : 1,
+                borderRadius: BorderRadius.circular(12),
               ),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Stack(
-              children: [
-                if (isHighlighted)
-                  Positioned(
-                    right: 4,
-                    top: 4,
-                    child: Container(
-                      width: 8,
-                      height: 8,
-                      decoration: BoxDecoration(
-                        color: palette.primary,
-                        shape: BoxShape.circle,
+              child: Stack(
+                children: [
+                  if (isHighlighted)
+                    Positioned(
+                      right: 4,
+                      top: 4,
+                      child: Container(
+                        width: 8,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          color: palette.primary,
+                          shape: BoxShape.circle,
+                        ),
                       ),
                     ),
-                  ),
-                if (srsStatus != _KanjiSrsStatus.unseen)
-                  Positioned(
-                    left: 5,
-                    bottom: 5,
-                    child: Container(
-                      width: 7,
-                      height: 7,
-                      decoration: BoxDecoration(
-                        color: srsStatus == _KanjiSrsStatus.due
-                            ? palette.warning
-                            : palette.success,
-                        shape: BoxShape.circle,
+                  if (srsStatus != _KanjiSrsStatus.unseen)
+                    Positioned(
+                      left: 5,
+                      bottom: 5,
+                      child: Container(
+                        width: 7,
+                        height: 7,
+                        decoration: BoxDecoration(
+                          color: srsStatus == _KanjiSrsStatus.due
+                              ? palette.warning
+                              : palette.success,
+                          shape: BoxShape.circle,
+                        ),
                       ),
                     ),
-                  ),
-                Center(
-                  child: Text(
-                    item.character,
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      color: isHighlighted ? palette.primary : palette.ink,
-                      fontWeight: isHighlighted
-                          ? FontWeight.w800
-                          : FontWeight.w500,
+                  Center(
+                    child: Text(
+                      item.character,
+                      style: Theme.of(context).textTheme.headlineMedium
+                          ?.copyWith(
+                            color: isHighlighted
+                                ? palette.primary
+                                : palette.ink,
+                            fontWeight: isHighlighted
+                                ? FontWeight.w800
+                                : FontWeight.w500,
+                          ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

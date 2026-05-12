@@ -4,10 +4,10 @@ import 'package:jpstudy/data/daos/kanji_srs_dao.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 
 class _SeededKanjiBatchHarness {
-  _SeededKanjiBatchHarness(this.dao, {this.totalN5Kanji = 185});
+  _SeededKanjiBatchHarness(this.dao);
 
   final KanjiSrsDao dao;
-  final int totalN5Kanji;
+  static const int totalN5Kanji = 185;
   int xp = 0;
 
   Future<void> rateBatch(List<int> ratings) async {
