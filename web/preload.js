@@ -29,8 +29,17 @@ function setAccessibleViewport() {
 
 window.setAccessibleViewport = setAccessibleViewport;
 
+function wireA11yNavigation() {
+  document.querySelectorAll(".jpstudy-a11y-nav [data-route]").forEach((item) => {
+    item.addEventListener("click", () => {
+      window.location.hash = item.getAttribute("data-route") || "/";
+    });
+  });
+}
+
 function loadFlutterBootstrap() {
   setAccessibleViewport();
+  wireA11yNavigation();
   const script = document.createElement("script");
   script.src = "flutter_bootstrap.js";
   script.async = true;

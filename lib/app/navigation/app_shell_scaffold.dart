@@ -160,11 +160,9 @@ class AppShellScaffold extends ConsumerWidget {
   }
 
   void _goToBranch(BuildContext context, int index) {
-    if (index == navigationShell.currentIndex) {
-      navigationShell.goBranch(index, initialLocation: true);
-      return;
-    }
-    context.go(_branchInitialLocations[index]);
+    final location = _branchInitialLocations[index];
+    navigationShell.goBranch(index, initialLocation: true);
+    GoRouter.of(context).go(location);
   }
 
   List<_ShellItem> _buildItems(AppLanguage language) {
