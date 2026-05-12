@@ -1,4 +1,4 @@
-import 'dart:async';
+﻿import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -130,17 +130,15 @@ void main() {
       await _pumpHost(tester);
       await _openDialog(tester);
 
-      expect(find.text('Đăng nhập'), findsWidgets);
+      expect(find.text(AppLanguage.vi.loginDialogTitle), findsWidgets);
       expect(
-        find.text('Đăng nhập để đồng bộ tiến trình học của bạn.'),
+        find.text(AppLanguage.vi.loginDialogSubtitle),
         findsOneWidget,
       );
-      expect(find.text('Đăng nhập bằng Google'), findsOneWidget);
-      expect(find.text('HOẶC'), findsOneWidget);
+      expect(find.text(AppLanguage.vi.signInWithGoogleLabel), findsOneWidget);
+      expect(find.text(AppLanguage.vi.orDividerLabel), findsOneWidget);
       expect(
-        find.text(
-          'Nếu không tiện dùng Google, hãy dùng tài khoản email do nhóm học hoặc quản trị viên cung cấp.',
-        ),
+        find.text(AppLanguage.vi.loginManualAccountFooterLabel),
         findsOneWidget,
       );
     },
@@ -153,7 +151,7 @@ void main() {
     await _openDialog(tester);
 
     expect(find.text('Email'), findsOneWidget);
-    expect(find.text('Mật khẩu'), findsOneWidget);
+    expect(find.text(AppLanguage.vi.loginPasswordLabel), findsOneWidget);
     expect(find.byIcon(Icons.mail_outline), findsOneWidget);
     expect(find.byIcon(Icons.lock_outline), findsOneWidget);
   });
@@ -191,7 +189,7 @@ void main() {
     await _pumpHost(tester, authService: fake);
     await _openDialog(tester);
 
-    await tester.tap(find.text('Đăng nhập bằng Google'));
+    await tester.tap(find.text(AppLanguage.vi.signInWithGoogleLabel));
     await tester.pumpAndSettle();
 
     expect(fake.googleCalls, 1);
@@ -199,16 +197,16 @@ void main() {
   });
 
   testWidgets('Google button surfaces inline error on failure', (tester) async {
-    // googleResult: null → service throws AuthException(unknown)
+    // googleResult: null â†’ service throws AuthException(unknown)
     final fake = FakeAuthService();
     await _pumpHost(tester, authService: fake);
     await _openDialog(tester);
 
-    await tester.tap(find.text('Đăng nhập bằng Google'));
+    await tester.tap(find.text(AppLanguage.vi.signInWithGoogleLabel));
     await tester.pumpAndSettle();
 
     expect(fake.googleCalls, 1);
-    expect(find.text('Đăng nhập thất bại. Vui lòng thử lại.'), findsOneWidget);
+    expect(find.text(AppLanguage.vi.authUnknownErrorLabel), findsOneWidget);
     expect(find.byType(LoginDialog), findsOneWidget);
   });
 
@@ -219,9 +217,9 @@ void main() {
       await _pumpHost(tester, authService: fake);
       await _openDialog(tester);
 
-      await tester.tap(find.widgetWithText(ElevatedButton, 'Đăng nhập'));
+      await tester.tap(find.widgetWithText(ElevatedButton, AppLanguage.vi.loginSubmitLabel));
       await tester.pumpAndSettle();
-      expect(find.text('Vui lòng điền đầy đủ cả hai ô.'), findsWidgets);
+      expect(find.text(AppLanguage.vi.loginEmptyFieldLabel), findsWidgets);
       expect(fake.emailCalls, 0);
     },
   );
@@ -238,7 +236,7 @@ void main() {
       final fields = find.byType(TextField);
       await tester.enterText(fields.at(0), 'user@example.com');
       await tester.enterText(fields.at(1), 'hunter2');
-      await tester.tap(find.widgetWithText(ElevatedButton, 'Đăng nhập'));
+      await tester.tap(find.widgetWithText(ElevatedButton, AppLanguage.vi.loginSubmitLabel));
       await tester.pumpAndSettle();
 
       expect(fake.emailCalls, 1);
@@ -261,7 +259,7 @@ void main() {
     final fields = find.byType(TextField);
     await tester.enterText(fields.at(0), 'user@example.com');
     await tester.enterText(fields.at(1), 'wrong');
-    await tester.tap(find.widgetWithText(ElevatedButton, 'Đăng nhập'));
+    await tester.tap(find.widgetWithText(ElevatedButton, AppLanguage.vi.loginSubmitLabel));
     await tester.pumpAndSettle();
 
     expect(find.text(AppLanguage.vi.authWrongPasswordLabel), findsWidgets);
@@ -281,7 +279,7 @@ void main() {
     final fields = find.byType(TextField);
     await tester.enterText(fields.at(0), 'missing@example.com');
     await tester.enterText(fields.at(1), 'hunter2');
-    await tester.tap(find.widgetWithText(ElevatedButton, 'Đăng nhập'));
+    await tester.tap(find.widgetWithText(ElevatedButton, AppLanguage.vi.loginSubmitLabel));
     await tester.pumpAndSettle();
 
     expect(find.text(AppLanguage.vi.authUserNotFoundLabel), findsWidgets);

@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+﻿import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
@@ -39,8 +39,8 @@ void main() {
 
   test('unitMinutesLabel localizes minute units', () {
     expect(AppLanguage.en.unitMinutesLabel(5), '5 min');
-    expect(AppLanguage.vi.unitMinutesLabel(5), '5 ph?t');
-    expect(AppLanguage.ja.unitMinutesLabel(5), '5?');
+    expect(AppLanguage.vi.unitMinutesLabel(5), '5 phút');
+    expect(AppLanguage.ja.unitMinutesLabel(5), '5分');
   });
 
   test('htmlLangForLanguage maps app language to BCP47 language code', () {

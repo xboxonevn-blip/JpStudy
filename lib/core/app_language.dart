@@ -4956,9 +4956,9 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return '$minutes min';
       case AppLanguage.vi:
-        return '$minutes ph?t';
+        return '$minutes phút';
       case AppLanguage.ja:
-        return '$minutes?';
+        return '$minutes分';
     }
   }
 

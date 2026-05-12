@@ -217,22 +217,18 @@ class _SemanticNavigationLandmarks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      left: 0,
-      top: 0,
-      child: SizedBox(
-        width: 1,
-        height: items.length.toDouble().clamp(1, 100),
-        child: Column(
-          children: [
-            for (final item in items)
-              Semantics(
-                label: item.label,
-                button: true,
-                child: const SizedBox(width: 1, height: 1),
-              ),
-          ],
-        ),
+    return SizedBox(
+      width: 1,
+      height: items.length.toDouble().clamp(1, 100),
+      child: Column(
+        children: [
+          for (final item in items)
+            Semantics(
+              label: item.label,
+              button: true,
+              child: const SizedBox(width: 1, height: 1),
+            ),
+        ],
       ),
     );
   }
