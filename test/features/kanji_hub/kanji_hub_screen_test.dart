@@ -69,6 +69,19 @@ class _FakeKanjiHubLessonRepository extends LessonRepository {
 
   @override
   Future<Set<int>> fetchDueKanjiIds() async => const {};
+
+  @override
+  Future<int> countDueKanjiByLevel(String level) async =>
+      dueKanji[level]?.length ?? 0;
+
+  @override
+  Future<int> countUnseenKanjiByLevel(String level) async =>
+      unseenKanji[level]?.length ??
+      fetchKanjiByLevel(level).then((items) => items.length);
+
+  @override
+  Future<int> countKanjiByLevel(String level) async =>
+      fetchKanjiByLevel(level).then((items) => items.length);
 }
 
 Widget _buildSubject({
