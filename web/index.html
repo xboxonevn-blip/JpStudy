@@ -57,6 +57,15 @@
       overflow: hidden;
     }
 
+    .jpstudy-a11y-nav {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+
     #jpstudy-shell {
       position: fixed;
       inset: 0;
@@ -170,6 +179,12 @@
   </style>
 </head>
 <body>
+  <nav class="jpstudy-a11y-nav" aria-label="?i?u h??ng ch?nh">
+    <button type="button">H?n t?</button>
+    <button type="button">T? v?ng</button>
+    <button type="button">Ng? ph?p</button>
+    <button type="button">L? tr?nh</button>
+  </nav>
   <div id="jpstudy-shell" aria-live="polite">
     <div class="jpstudy-shell-card">
       <div class="jpstudy-shell-top">
