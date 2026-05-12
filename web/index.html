@@ -59,11 +59,20 @@
 
     .jpstudy-a11y-nav {
       position: absolute;
+      left: 0;
+      top: 0;
+      width: 1px;
+      height: 4px;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .jpstudy-a11y-nav button {
       width: 1px;
       height: 1px;
-      overflow: hidden;
-      clip: rect(0 0 0 0);
-      white-space: nowrap;
+      padding: 0;
+      border: 0;
+      opacity: 0.01;
     }
 
     #jpstudy-shell {
