@@ -35,6 +35,21 @@ function wireA11yNavigation() {
       window.location.hash = item.getAttribute("data-route") || "/";
     });
   });
+
+  window.addEventListener("pointerup", (event) => {
+    if (window.innerWidth < 900 || event.clientX > 190) return;
+    const routes = [
+      [225, 295, "/kanji"],
+      [305, 375, "/foundations"],
+      [385, 455, "/vocab"],
+      [465, 535, "/grammar"],
+      [545, 615, "/"],
+      [625, 695, "/memory"],
+      [705, 775, "/active"],
+    ];
+    const match = routes.find(([top, bottom]) => event.clientY >= top && event.clientY <= bottom);
+    if (match) window.location.hash = match[2];
+  }, { passive: true });
 }
 
 function loadFlutterBootstrap() {
