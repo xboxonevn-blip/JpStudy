@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/layout/app_responsive_frame.dart';
+import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:jpstudy/app/theme/app_breakpoints.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/accessibility/reduced_motion.dart';
@@ -46,7 +47,7 @@ class AppShellScaffold extends ConsumerWidget {
                             _Sidebar(
                               items: items,
                               currentIndex: navigationShell.currentIndex,
-                              onTap: _goToBranch,
+                              onTap: (index) => _goToBranch(context, index),
                             ),
                             const SizedBox(width: 18),
                             Expanded(
@@ -79,9 +80,14 @@ class AppShellScaffold extends ConsumerWidget {
           body: SafeArea(
             bottom: false,
             child: Stack(
+              fit: StackFit.expand,
               children: [
                 navigationShell,
-                _SemanticNavigationLandmarks(items: items),
+                Positioned(
+                  left: 0,
+                  top: 0,
+                  child: _SemanticNavigationLandmarks(items: items),
+                ),
               ],
             ),
           ),
@@ -96,7 +102,7 @@ class AppShellScaffold extends ConsumerWidget {
                 onDestinationSelected: (index) {
                   if (index < 4) {
                     final branch = const [4, 1, 0, 7][index];
-                    _goToBranch(branch);
+                    _goToBranch(context, branch);
                     return;
                   }
                   _showMoreSheet(context, items);
@@ -132,7 +138,7 @@ class AppShellScaffold extends ConsumerWidget {
                 title: Text(item.label),
                 onTap: () {
                   Navigator.of(sheetContext).pop();
-                  _goToBranch(branchIndex);
+                  _goToBranch(context, branchIndex);
                 },
               );
             },
@@ -142,11 +148,12 @@ class AppShellScaffold extends ConsumerWidget {
     );
   }
 
-  void _goToBranch(int index) {
-    navigationShell.goBranch(
-      index,
-      initialLocation: index == navigationShell.currentIndex,
-    );
+  void _goToBranch(BuildContext context, int index) {
+    if (index == navigationShell.currentIndex) {
+      navigationShell.goBranch(index, initialLocation: true);
+      return;
+    }
+    context.go(_branchInitialLocations[index]);
   }
 
   List<_ShellItem> _buildItems(AppLanguage language) {
@@ -540,3 +547,17 @@ class _ShellItem {
   final IconData icon;
   final IconData selectedIcon;
 }
+
+const _branchInitialLocations = <String>[
+  AppRoutePath.kanji,
+  AppRoutePath.foundations,
+  AppRoutePath.vocab,
+  AppRoutePath.grammar,
+  AppRoutePath.home,
+  AppRoutePath.memory,
+  AppRoutePath.active,
+  AppRoutePath.examCenter,
+  AppRoutePath.leaderboard,
+  AppRoutePath.premium,
+  AppRoutePath.community,
+];
