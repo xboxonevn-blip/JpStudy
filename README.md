@@ -110,6 +110,7 @@ There is no first-class `macos/` or `linux/` runner in this repository right now
 - App architecture: `lib/README.md`
 - Repo structure: `PROJECT_STRUCTURE.md`
 - Product roadmap: `ROADMAP.md`
+- Security hardening: `SECURITY.md`
 - Docs index: `docs/README.md`
 - Test strategy: `test/README.md`
 - Data layout: `assets/data/README.md`
