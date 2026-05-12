@@ -37,7 +37,7 @@
         "headers": [
           {
             "key": "Content-Security-Policy",
-            "value": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval' https://www.gstatic.com https://www.googletagmanager.com; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://fonts.gstatic.com https://www.gstatic.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-ancestors 'none'"
+            "value": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval' https://www.gstatic.com https://www.googletagmanager.com https://accounts.google.com; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://fonts.gstatic.com https://www.gstatic.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-ancestors 'none'"
           },
           {
             "key": "X-Content-Type-Options",
