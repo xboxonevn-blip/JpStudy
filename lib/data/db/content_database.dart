@@ -4,6 +4,7 @@ import 'dart:collection';
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'content_tables.dart';
 import '../utils/grammar_example_matching.dart';
@@ -37,8 +38,8 @@ class ContentDatabase extends _$ContentDatabase {
     return MigrationStrategy(
       onCreate: (Migrator m) async {
         await m.createAll();
-        await _seedMinnaVocabulary();
-        await _seedHajimeteVocabulary();
+        await _seedMinnaVocabularyForActiveLevel();
+        await _seedHajimeteVocabularyForActiveLevel();
         await _seedMinnaGrammar();
         await _seedMinnaKanji();
         await _createContentIndexes();
@@ -146,8 +147,8 @@ class ContentDatabase extends _$ContentDatabase {
         // All four checks are independent — run them concurrently so the
         // content DB is ready in the time of the single slowest check.
         await Future.wait([
-          _ensureMinnaVocabularySeeded(),
-          _ensureHajimeteVocabularySeeded(),
+          _ensureMinnaVocabularySeededForActiveLevel(),
+          _ensureHajimeteVocabularySeededForActiveLevel(),
           _ensureMinnaGrammarSeeded(),
           _ensureMinnaKanjiSeeded(),
         ]);
@@ -166,7 +167,9 @@ class ContentDatabase extends _$ContentDatabase {
     await _seedMinnaVocabulary();
   }
 
-  Future<void> _ensureMinnaVocabularySeeded() async {
+  Future<void> _ensureMinnaVocabularySeeded([
+    Iterable<_ContentSeedSpec> specs = _contentSeedSpecs,
+  ]) async {
     // One GROUP BY query replaces N sequential COUNT queries (one per level).
     final levelCol = vocab.level;
     final seriesCol = vocab.series;
@@ -175,7 +178,7 @@ class ContentDatabase extends _$ContentDatabase {
         await (selectOnly(vocab)
               ..addColumns([levelCol, seriesCol, countExpr])
               ..where(
-                _contentSeedSpecs
+                specs
                     .map((s) {
                       return vocab.level.equals(s.levelLabel) &
                           vocab.series.equals(s.series);
@@ -189,7 +192,7 @@ class ContentDatabase extends _$ContentDatabase {
         '${row.read(levelCol)}:${row.read(seriesCol)}':
             row.read(countExpr) ?? 0,
     };
-    final missingSpecs = _contentSeedSpecs
+    final missingSpecs = specs
         .where((s) => (counts['${s.levelLabel}:${s.series}'] ?? 0) == 0)
         .toList();
     if (missingSpecs.isNotEmpty) {
@@ -233,13 +236,31 @@ class ContentDatabase extends _$ContentDatabase {
     }
   }
 
+  Future<void> _ensureMinnaVocabularySeededForActiveLevel() async {
+    final activeLevel = await _activeStudyLevelLabel();
+    await _ensureMinnaVocabularySeeded(
+      _contentSeedSpecs.where((s) => s.levelLabel == activeLevel),
+    );
+  }
+
   Future<void> _seedMinnaVocabulary() {
     // All level specs are independent — seed them concurrently so file I/O
     // for N5, N4, and N3 overlaps. DB writes still serialize through the isolate.
     return Future.wait(_contentSeedSpecs.map(_seedVocabularyLevel));
   }
 
-  Future<void> _ensureHajimeteVocabularySeeded() async {
+  Future<void> _seedMinnaVocabularyForActiveLevel() async {
+    final activeLevel = await _activeStudyLevelLabel();
+    await Future.wait(
+      _contentSeedSpecs
+          .where((s) => s.levelLabel == activeLevel)
+          .map(_seedVocabularyLevel),
+    );
+  }
+
+  Future<void> _ensureHajimeteVocabularySeeded([
+    Iterable<_HajimeteSeedSpec> specs = _hajimeteSeedSpecs,
+  ]) async {
     // One GROUP BY query replaces N sequential COUNT queries (one per level).
     final levelCol = vocab.level;
     final countExpr = vocab.id.count();
@@ -248,16 +269,14 @@ class ContentDatabase extends _$ContentDatabase {
               ..addColumns([levelCol, countExpr])
               ..where(
                 vocab.series.equals('hajimete') &
-                    vocab.level.isIn(
-                      _hajimeteSeedSpecs.map((s) => s.levelLabel).toList(),
-                    ),
+                    vocab.level.isIn(specs.map((s) => s.levelLabel).toList()),
               )
               ..groupBy([levelCol]))
             .get();
     final counts = {
       for (final row in rows) row.read(levelCol)!: row.read(countExpr) ?? 0,
     };
-    final missingSpecs = _hajimeteSeedSpecs
+    final missingSpecs = specs
         .where((s) => (counts[s.levelLabel] ?? 0) == 0)
         .toList();
     if (missingSpecs.isNotEmpty) {
@@ -265,9 +284,25 @@ class ContentDatabase extends _$ContentDatabase {
     }
   }
 
+  Future<void> _ensureHajimeteVocabularySeededForActiveLevel() async {
+    final activeLevel = await _activeStudyLevelLabel();
+    await _ensureHajimeteVocabularySeeded(
+      _hajimeteSeedSpecs.where((s) => s.levelLabel == activeLevel),
+    );
+  }
+
   Future<void> _seedHajimeteVocabulary() {
     // All Hajimete level specs are independent — seed them concurrently.
     return Future.wait(_hajimeteSeedSpecs.map(_seedHajimeteLevel));
+  }
+
+  Future<void> _seedHajimeteVocabularyForActiveLevel() async {
+    final activeLevel = await _activeStudyLevelLabel();
+    await Future.wait(
+      _hajimeteSeedSpecs
+          .where((s) => s.levelLabel == activeLevel)
+          .map(_seedHajimeteLevel),
+    );
   }
 
   Future<void> _reseedHajimeteVocab() async {
@@ -1192,6 +1227,19 @@ const _hajimeteSeedSpecs = <_HajimeteSeedSpec>[
 
 extension _StringNullIfEmpty on String {
   String? nullIfEmpty() => trim().isEmpty ? null : this;
+}
+
+Future<String> _activeStudyLevelLabel() async {
+  try {
+    final prefs = await SharedPreferences.getInstance();
+    final stored = prefs.getString('onboarding.level')?.toUpperCase();
+    return switch (stored) {
+      'N1' || 'N2' || 'N3' || 'N4' || 'N5' => stored!,
+      _ => 'N5',
+    };
+  } catch (_) {
+    return 'N5';
+  }
 }
 
 QueryExecutor _openContentConnection() {
