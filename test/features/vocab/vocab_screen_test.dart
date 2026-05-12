@@ -253,7 +253,10 @@ Widget _buildScreen({
   );
 }
 
-Widget _buildRouterScreen({required LessonRepository repo}) {
+Widget _buildRouterScreen({
+  required LessonRepository repo,
+  StudyLevel level = StudyLevel.n5,
+}) {
   final router = GoRouter(
     initialLocation: '/',
     routes: [
@@ -319,7 +322,7 @@ Widget _buildRouterScreen({required LessonRepository repo}) {
   return ProviderScope(
     overrides: [
       sharedPreferencesProvider.overrideWithValue(_prefs),
-      studyLevelProvider.overrideWith((ref) => StudyLevel.n4),
+      studyLevelProvider.overrideWith((ref) => level),
       lessonRepositoryProvider.overrideWithValue(repo),
       dashboardProvider.overrideWith(
         (ref) => Stream.value(
@@ -675,7 +678,9 @@ void main() {
       },
     );
 
-    await tester.pumpWidget(_buildRouterScreen(repo: repo));
+    await tester.pumpWidget(
+      _buildRouterScreen(repo: repo, level: StudyLevel.n2),
+    );
     await _pumpCatalog(tester);
 
     await tester.ensureVisible(
@@ -702,7 +707,9 @@ void main() {
       },
     );
 
-    await tester.pumpWidget(_buildRouterScreen(repo: repo));
+    await tester.pumpWidget(
+      _buildRouterScreen(repo: repo, level: StudyLevel.n1),
+    );
     await _pumpCatalog(tester);
 
     await tester.ensureVisible(
@@ -729,7 +736,7 @@ void main() {
       },
     );
 
-    await tester.pumpWidget(_buildScreen(repo: repo));
+    await tester.pumpWidget(_buildScreen(repo: repo, level: StudyLevel.n3));
     await _pumpCatalog(tester);
 
     await tester.ensureVisible(
