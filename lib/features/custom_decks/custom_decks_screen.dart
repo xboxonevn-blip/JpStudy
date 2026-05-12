@@ -339,9 +339,9 @@ String _templateValue(AppLanguage language, _TemplateKind kind) {
       };
     case _TemplateKind.sprintPack:
       return switch (language) {
-        AppLanguage.en => '15 min',
-        AppLanguage.vi => '15 ph?t',
-        AppLanguage.ja => '15?',
+        AppLanguage.en => language.unitMinutesLabel(15),
+        AppLanguage.vi => language.unitMinutesLabel(15),
+        AppLanguage.ja => language.unitMinutesLabel(15),
       };
   }
 }
@@ -367,7 +367,7 @@ List<_StudyRecipe> _recipes(
       _StudyRecipe(
         'Night cram',
         'Fast catch-up session for overdue cards and weak items.',
-        nextUp != null ? '${12 + nextUp.dueCount} min' : '18 min',
+        language.unitMinutesLabel(nextUp != null ? 12 + nextUp.dueCount : 18),
         'Recall',
         'High',
         'Power',
@@ -401,7 +401,7 @@ List<_StudyRecipe> _recipes(
       _StudyRecipe(
         'Mixed sprint',
         'Blend kanji, vocab, and grammar into one focused block.',
-        activeCount > 0 ? '${18 + activeCount * 2} min' : '22 min',
+        language.unitMinutesLabel(activeCount > 0 ? 18 + activeCount * 2 : 22),
         'Mixed',
         'Balanced',
         'New',
@@ -435,7 +435,7 @@ List<_StudyRecipe> _recipes(
       _StudyRecipe(
         'Speaking loop',
         'Build a compact loop for shadowing and speaking confidence.',
-        '15 min',
+        language.unitMinutesLabel(15),
         'Output',
         'Medium',
         'Beta',

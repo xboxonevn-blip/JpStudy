@@ -3339,11 +3339,11 @@ extension AppLanguageLabels on AppLanguage {
   String get loginManualAccountFooterLabel {
     switch (this) {
       case AppLanguage.en:
-        return "If Google sign-in isn't convenient, use the email account provided by your study group or admin.";
+        return 'Need an account? Use Google sign-in or contact support.';
       case AppLanguage.vi:
-        return 'Nếu không tiện dùng Google, hãy dùng tài khoản email do nhóm học hoặc quản trị viên cung cấp.';
+        return 'C\u1ea7n t\u00e0i kho\u1ea3n? \u0110\u0103ng nh\u1eadp b\u1eb1ng Google ho\u1eb7c li\u00ean h\u1ec7 h\u1ed7 tr\u1ee3.';
       case AppLanguage.ja:
-        return 'Googleでログインしにくい場合は、学習グループまたは管理者から提供されたメールアカウントを使用してください。';
+        return '\u30a2\u30ab\u30a6\u30f3\u30c8\u304c\u5fc5\u8981\u3067\u3059\u304b\uff1fGoogle\u30ed\u30b0\u30a4\u30f3\u3092\u4f7f\u3046\u304b\u3001\u30b5\u30dd\u30fc\u30c8\u306b\u9023\u7d61\u3057\u3066\u304f\u3060\u3055\u3044\u3002';
     }
   }
 
@@ -7322,9 +7322,9 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return '~$count min';
       case AppLanguage.vi:
-        return '~$count ph?t';
+        return '~$count ph\u00fat';
       case AppLanguage.ja:
-        return '?$count?';
+        return '\u7d04$count\u5206';
     }
   }
 
@@ -7432,9 +7432,9 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Your first guided session';
       case AppLanguage.vi:
-        return 'Phi?n h?c ??u ti?n c?a b?n';
+        return 'Phi\u00ean h\u1ecdc \u0111\u1ea7u ti\u00ean c\u1ee7a b\u1ea1n';
       case AppLanguage.ja:
-        return '?????????????';
+        return '\u6700\u521d\u306e\u30ac\u30a4\u30c9\u4ed8\u304d\u30bb\u30c3\u30b7\u30e7\u30f3';
     }
   }
 
@@ -7443,9 +7443,9 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return '1. Clear quick reviews first';
       case AppLanguage.vi:
-        return '1. D?n l??t ?n ng?n tr??c';
+        return '1. D\u1ecdn l\u01b0\u1ee3t \u00f4n ng\u1eafn tr\u01b0\u1edbc';
       case AppLanguage.ja:
-        return '1. ??????????';
+        return '1. \u307e\u305a\u77ed\u3044\u5fa9\u7fd2\u3092\u7d42\u3048\u308b';
     }
   }
 
@@ -7454,9 +7454,9 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return '2. Fix weak terms while they are fresh';
       case AppLanguage.vi:
-        return '2. S?a ?i?m y?u khi l?i c?n m?i';
+        return '2. S\u1eeda \u0111i\u1ec3m y\u1ebfu khi l\u1ed7i c\u00f2n m\u1edbi';
       case AppLanguage.ja:
-        return '2. ?????????????';
+        return '2. \u307e\u3060\u65b0\u3057\u3044\u3046\u3061\u306b\u5f31\u70b9\u3092\u76f4\u3059';
     }
   }
 
@@ -7465,9 +7465,9 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return '3. Finish with one deeper study task';
       case AppLanguage.vi:
-        return '3. K?t phi?n b?ng m?t nhi?m v? h?c s?u h?n';
+        return '3. K\u1ebft phi\u00ean b\u1eb1ng m\u1ed9t nhi\u1ec7m v\u1ee5 h\u1ecdc s\u00e2u h\u01a1n';
       case AppLanguage.ja:
-        return '3. ???1????????????';
+        return '3. \u6700\u5f8c\u306b1\u3064\u6df1\u3044\u5b66\u7fd2\u30bf\u30b9\u30af\u3067\u7de0\u3081\u308b';
     }
   }
 
@@ -7476,9 +7476,9 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Get one quick win first';
       case AppLanguage.vi:
-        return 'Thử 1 câu quiz trước';
+        return 'Th\u1eed 1 c\u00e2u quiz tr\u01b0\u1edbc';
       case AppLanguage.ja:
-        return '最初に小さな成功をひとつ';
+        return '\u6700\u521d\u306b\u5c0f\u3055\u306a\u6210\u529f\u3092\u3072\u3068\u3064';
     }
   }
 
@@ -7487,9 +7487,9 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Try one tiny question now, then jump into your first guided session.';
       case AppLanguage.vi:
-        return 'Chọn đáp án. App sẽ báo đúng/sai ngay và mở phiên học đầu tiên.';
+        return 'Ch\u1ecdn \u0111\u00e1p \u00e1n. App s\u1ebd b\u00e1o \u0111\u00fang/sai ngay v\u00e0 m\u1edf phi\u00ean h\u1ecdc \u0111\u1ea7u ti\u00ean.';
       case AppLanguage.ja:
-        return '今すぐ小さな問題を1つ解いて、そのまま最初のガイド付きセッションへ進みましょう。';
+        return '\u4eca\u3059\u3050\u5c0f\u3055\u306a\u554f\u984c\u30921\u3064\u89e3\u3044\u3066\u3001\u305d\u306e\u307e\u307e\u6700\u521d\u306e\u30ac\u30a4\u30c9\u4ed8\u304d\u30bb\u30c3\u30b7\u30e7\u30f3\u3078\u9032\u307f\u307e\u3057\u3087\u3046\u3002';
     }
   }
 
@@ -7498,9 +7498,9 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Preparing a sample from your level...';
       case AppLanguage.vi:
-        return 'Đang chuẩn bị một ví dụ theo trình độ của bạn...';
+        return '\u0110ang chu\u1ea9n b\u1ecb m\u1ed9t v\u00ed d\u1ee5 theo tr\u00ecnh \u0111\u1ed9 c\u1ee7a b\u1ea1n...';
       case AppLanguage.ja:
-        return 'あなたのレベルに合う例題を準備しています...';
+        return '\u3042\u306a\u305f\u306e\u30ec\u30d9\u30eb\u306b\u5408\u3046\u4f8b\u984c\u3092\u6e96\u5099\u3057\u3066\u3044\u307e\u3059...';
     }
   }
 
@@ -7509,9 +7509,9 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Answer this one preview question to unlock your first session.';
       case AppLanguage.vi:
-        return 'Sau khi trả lời, nút Bắt đầu sẽ bật lên.';
+        return 'Sau khi tr\u1ea3 l\u1eddi, n\u00fat B\u1eaft \u0111\u1ea7u s\u1ebd b\u1eadt l\u00ean.';
       case AppLanguage.ja:
-        return 'このプレビュー問題に答えて、最初のセッションを解放しましょう。';
+        return '\u3053\u306e\u30d7\u30ec\u30d3\u30e5\u30fc\u554f\u984c\u306b\u7b54\u3048\u3066\u3001\u6700\u521d\u306e\u30bb\u30c3\u30b7\u30e7\u30f3\u3092\u89e3\u653e\u3057\u307e\u3057\u3087\u3046\u3002';
     }
   }
 
@@ -7520,9 +7520,9 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'What does this mean?';
       case AppLanguage.vi:
-        return 'Từ này nghĩa là gì?';
+        return 'T\u1eeb n\u00e0y ngh\u0129a l\u00e0 g\u00ec?';
       case AppLanguage.ja:
-        return 'この言葉の意味は？';
+        return '\u3053\u306e\u8a00\u8449\u306e\u610f\u5473\u306f\uff1f';
     }
   }
 
@@ -7531,9 +7531,9 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Nice. This is the kind of quick win your first session will give you.';
       case AppLanguage.vi:
-        return 'Đúng rồi! Bấm Bắt đầu để học tiếp.';
+        return '\u0110\u00fang r\u1ed3i! B\u1ea5m B\u1eaft \u0111\u1ea7u \u0111\u1ec3 h\u1ecdc ti\u1ebfp.';
       case AppLanguage.ja:
-        return 'いいですね。最初のセッションでは、こんな小さな達成を積み重ねていきます。';
+        return '\u3044\u3044\u3067\u3059\u306d\u3002\u6700\u521d\u306e\u30bb\u30c3\u30b7\u30e7\u30f3\u3067\u306f\u3001\u3053\u3093\u306a\u5c0f\u3055\u306a\u9054\u6210\u3092\u7a4d\u307f\u91cd\u306d\u3066\u3044\u304d\u307e\u3059\u3002';
     }
   }
 
@@ -7542,9 +7542,9 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Not quite. Correct answer: $answer';
       case AppLanguage.vi:
-        return 'Chưa đúng. Đáp án đúng: $answer. Bấm Bắt đầu để luyện tiếp.';
+        return 'Ch\u01b0a \u0111\u00fang. \u0110\u00e1p \u00e1n \u0111\u00fang: $answer. B\u1ea5m B\u1eaft \u0111\u1ea7u \u0111\u1ec3 luy\u1ec7n ti\u1ebfp.';
       case AppLanguage.ja:
-        return '正解: $answer';
+        return '\u6b63\u89e3: $answer';
     }
   }
 
