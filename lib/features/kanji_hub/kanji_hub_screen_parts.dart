@@ -466,6 +466,121 @@ class _KanjiRecognitionCandidate {
   _KanjiRecognitionCandidate(this.kanji, this.score);
 }
 
+bool _matchesKanjiSearch(KanjiItem item, String normalizedQuery) {
+  if (normalizedQuery.isEmpty) return true;
+  final fields = <String?>[
+    item.character,
+    item.meaning,
+    item.meaningEn,
+    item.onyomi,
+    item.kunyomi,
+    item.decomposition?.hanViet,
+    item.decomposition?.structure,
+    ...(item.decomposition?.componentNames ?? const <String>[]),
+    ...item.examples.expand((example) sync* {
+      yield example.word;
+      yield example.reading;
+      yield example.meaning;
+      yield example.meaningEn;
+    }),
+  ];
+  return fields
+      .whereType<String>()
+      .map(_normalizeKanjiSearch)
+      .any((field) => field.contains(normalizedQuery));
+}
+
+String _normalizeKanjiSearch(String value) {
+  final buffer = StringBuffer();
+  for (final rune in value.trim().toLowerCase().runes) {
+    final replacement = _vietnameseSearchFold[rune];
+    if (replacement != null) {
+      buffer.write(replacement);
+      continue;
+    }
+    final char = String.fromCharCode(rune);
+    if (char == '-' ||
+        char == ' ' ||
+        char == '.' ||
+        rune == 0x00b7 ||
+        rune == 0x30fc) {
+      continue;
+    }
+    buffer.write(char);
+  }
+  return buffer.toString();
+}
+
+const _vietnameseSearchFold = <int, String>{
+  0x00e0: 'a',
+  0x00e1: 'a',
+  0x1ea3: 'a',
+  0x00e3: 'a',
+  0x1ea1: 'a',
+  0x0103: 'a',
+  0x1eb1: 'a',
+  0x1eaf: 'a',
+  0x1eb3: 'a',
+  0x1eb5: 'a',
+  0x1eb7: 'a',
+  0x00e2: 'a',
+  0x1ea7: 'a',
+  0x1ea5: 'a',
+  0x1ea9: 'a',
+  0x1eab: 'a',
+  0x1ead: 'a',
+  0x00e8: 'e',
+  0x00e9: 'e',
+  0x1ebb: 'e',
+  0x1ebd: 'e',
+  0x1eb9: 'e',
+  0x00ea: 'e',
+  0x1ec1: 'e',
+  0x1ebf: 'e',
+  0x1ec3: 'e',
+  0x1ec5: 'e',
+  0x1ec7: 'e',
+  0x00ec: 'i',
+  0x00ed: 'i',
+  0x1ec9: 'i',
+  0x0129: 'i',
+  0x1ecb: 'i',
+  0x00f2: 'o',
+  0x00f3: 'o',
+  0x1ecf: 'o',
+  0x00f5: 'o',
+  0x1ecd: 'o',
+  0x00f4: 'o',
+  0x1ed3: 'o',
+  0x1ed1: 'o',
+  0x1ed5: 'o',
+  0x1ed7: 'o',
+  0x1ed9: 'o',
+  0x01a1: 'o',
+  0x1edd: 'o',
+  0x1edb: 'o',
+  0x1edf: 'o',
+  0x1ee1: 'o',
+  0x1ee3: 'o',
+  0x00f9: 'u',
+  0x00fa: 'u',
+  0x1ee7: 'u',
+  0x0169: 'u',
+  0x1ee5: 'u',
+  0x01b0: 'u',
+  0x1eeb: 'u',
+  0x1ee9: 'u',
+  0x1eed: 'u',
+  0x1eef: 'u',
+  0x1ef1: 'u',
+  0x1ef3: 'y',
+  0x00fd: 'y',
+  0x1ef7: 'y',
+  0x1ef9: 'y',
+  0x1ef5: 'y',
+  0x0111: 'd',
+};
+
 class _KanjiGridPanel extends ConsumerStatefulWidget {
   const _KanjiGridPanel({
     super.key,
@@ -945,19 +1060,9 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                             )
                             .toList();
                       } else if (widget.searchQuery.trim().isNotEmpty) {
-                        final q = widget.searchQuery.trim().toLowerCase();
+                        final q = _normalizeKanjiSearch(widget.searchQuery);
                         items = items
-                            .where(
-                              (k) =>
-                                  k.character.toLowerCase().contains(q) ||
-                                  k.meaning.toLowerCase().contains(q) ||
-                                  (k.meaningEn?.toLowerCase().contains(q) ??
-                                      false) ||
-                                  (k.onyomi?.toLowerCase().contains(q) ??
-                                      false) ||
-                                  (k.kunyomi?.toLowerCase().contains(q) ??
-                                      false),
-                            )
+                            .where((k) => _matchesKanjiSearch(k, q))
                             .toList();
                       }
 
@@ -993,7 +1098,7 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          // ── SRS status filter chips ──────────────────────
+                          // SRS status filter chips
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(
@@ -1050,8 +1155,9 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                               ],
                             ),
                           ),
-                          const SizedBox(height: AppSpacing.xs),
-                          // ── Stroke count filter chips ─────────────────────
+                          const SizedBox(
+                            height: AppSpacing.xs,
+                          ), // Stroke count filter chips
                           if (strokeCounts.isNotEmpty)
                             SingleChildScrollView(
                               scrollDirection: Axis.horizontal,

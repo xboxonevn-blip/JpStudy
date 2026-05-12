@@ -152,6 +152,26 @@ _FakeKanjiHubLessonRepository _buildRepo({
         decomposition: KanjiDecomposition(components: ['\u65e5', '\u6708']),
       ),
       KanjiItem(
+        id: 5,
+        lessonId: 1,
+        character: '\u5b66',
+        strokeCount: 8,
+        onyomi: 'GAKU',
+        kunyomi: 'manabu',
+        meaning: 'hoc',
+        meaningEn: 'study',
+        examples: [
+          KanjiExample(
+            word: '\u5b66\u6821',
+            reading: 'gakkou',
+            meaning: 'truong hoc',
+            meaningEn: 'school',
+          ),
+        ],
+        jlptLevel: 'N5',
+        decomposition: KanjiDecomposition(hanViet: 'hoc'),
+      ),
+      KanjiItem(
         id: 2,
         lessonId: 1,
         character: '\u4f11',
@@ -254,5 +274,23 @@ void main() {
     expect(find.byKey(const ValueKey('kanji_today_error')), findsOneWidget);
     expect(find.text('Could not load kanji summary'), findsOneWidget);
     expect(find.text('Retry'), findsOneWidget);
+  });
+
+  testWidgets('kanji search matches kanji, readings, and Vietnamese hanviet', (
+    tester,
+  ) async {
+    await _mockRadicalsAsset();
+    await tester.pumpWidget(_buildSubject(repo: _buildRepo()));
+    await _pumpKanjiHub(tester);
+
+    final searchField = find.byType(TextField);
+    expect(searchField, findsOneWidget);
+
+    for (final query in ['\u5b66', 'hoc', 'gaku', 'manabu']) {
+      await tester.enterText(searchField, query);
+      await tester.pump(const Duration(milliseconds: 300));
+      expect(find.text('\u5b66'), findsWidgets, reason: 'query=$query');
+      expect(find.text('bright'), findsNothing, reason: 'query=$query');
+    }
   });
 }
