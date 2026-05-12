@@ -68,8 +68,11 @@ class AppResponsiveFrame extends StatelessWidget {
             maxWidth ??
             AppResponsiveMetrics.contentMaxWidth(constraints.maxWidth);
 
+        final isHeightUnbounded = !constraints.maxHeight.isFinite;
+
         return Align(
           alignment: alignment,
+          heightFactor: isHeightUnbounded ? 1 : null,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
             child: ConstrainedBox(
