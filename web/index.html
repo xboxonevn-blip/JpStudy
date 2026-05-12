@@ -193,63 +193,7 @@
       </p>
     </div>
   </div>
-  <script type="module">
-    const firebaseSdkVersion = "12.12.0";
-    window.flutterfire_web_sdk_version = firebaseSdkVersion;
-
-    async function preloadFirebaseSdk() {
-      const base = `https://www.gstatic.com/firebasejs/${firebaseSdkVersion}`;
-      const [firebaseCore, firebaseAuth, firebaseStorage, firebaseAnalytics] =
-        await Promise.all([
-          import(`${base}/firebase-app.js`),
-          import(`${base}/firebase-auth.js`),
-          import(`${base}/firebase-storage.js`),
-          import(`${base}/firebase-analytics.js`),
-        ]);
-
-      window.firebase_core = firebaseCore;
-      window.firebase_auth = firebaseAuth;
-      window.firebase_storage = firebaseStorage;
-      window.firebase_analytics = firebaseAnalytics;
-    }
-
-    function setAccessibleViewport() {
-      let viewport = document.querySelector('meta[name="viewport"]');
-      if (!viewport) {
-        viewport = document.createElement("meta");
-        viewport.name = "viewport";
-        document.head.appendChild(viewport);
-      }
-      viewport.content = "width=device-width, initial-scale=1.0";
-    }
-
-    window.setAccessibleViewport = setAccessibleViewport;
-
-    function loadFlutterBootstrap() {
-      setAccessibleViewport();
-      const script = document.createElement("script");
-      script.src = "flutter_bootstrap.js";
-      script.async = true;
-      document.body.appendChild(script);
-    }
-
-    preloadFirebaseSdk()
-      .catch((error) => {
-        console.warn("Firebase SDK preload failed; cloud features may be unavailable.", error);
-      })
-      .finally(loadFlutterBootstrap);
-  </script>
-  <script>
-    window.addEventListener("flutter-first-frame", function () {
-      if (typeof window.setAccessibleViewport === "function") {
-        window.setAccessibleViewport();
-      }
-      const shell = document.getElementById("jpstudy-shell");
-      if (shell) {
-        shell.classList.add("is-hidden");
-        window.setTimeout(() => shell.remove(), 320);
-      }
-    });
-  </script>
+  <script type="module" src="preload.js"></script>
+  <script src="flutter-shell.js" defer></script>
 </body>
 </html>
