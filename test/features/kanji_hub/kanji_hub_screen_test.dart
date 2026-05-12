@@ -286,11 +286,24 @@ void main() {
     final searchField = find.byType(TextField);
     expect(searchField, findsOneWidget);
 
-    for (final query in ['\u5b66', 'hoc', 'gaku', 'manabu']) {
+    final hocWithTone = String.fromCharCodes([0x68, 0x1ecd, 0x63]);
+    for (final query in [
+      '\u5b66',
+      'hoc',
+      hocWithTone,
+      'gaku',
+      'manabu',
+      'gakkou',
+    ]) {
       await tester.enterText(searchField, query);
       await tester.pump(const Duration(milliseconds: 300));
       expect(find.text('\u5b66'), findsWidgets, reason: 'query=$query');
       expect(find.text('bright'), findsNothing, reason: 'query=$query');
     }
+
+    await tester.enterText(searchField, 'xyz');
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.byKey(const ValueKey('empty_state')), findsOneWidget);
+    expect(find.text('\\u5b66'), findsNothing);
   });
 }

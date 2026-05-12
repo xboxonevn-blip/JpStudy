@@ -1288,56 +1288,21 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                                       itemCount: items.length,
                                       itemBuilder: (context, index) {
                                         final item = items[index];
+                                        final normalizedQuery =
+                                            _normalizeKanjiSearch(
+                                              widget.searchQuery,
+                                            );
                                         return _KanjiTile(
                                           item: item,
                                           isHighlighted:
                                               widget.candidateKanji.contains(
                                                 item.character,
                                               ) ||
-                                              (widget.searchQuery
-                                                      .trim()
-                                                      .isNotEmpty &&
-                                                  (item.character
-                                                          .toLowerCase()
-                                                          .contains(
-                                                            widget.searchQuery
-                                                                .trim()
-                                                                .toLowerCase(),
-                                                          ) ||
-                                                      item.meaning
-                                                          .toLowerCase()
-                                                          .contains(
-                                                            widget.searchQuery
-                                                                .trim()
-                                                                .toLowerCase(),
-                                                          ) ||
-                                                      (item.meaningEn
-                                                              ?.toLowerCase()
-                                                              .contains(
-                                                                widget
-                                                                    .searchQuery
-                                                                    .trim()
-                                                                    .toLowerCase(),
-                                                              ) ??
-                                                          false) ||
-                                                      (item.onyomi
-                                                              ?.toLowerCase()
-                                                              .contains(
-                                                                widget
-                                                                    .searchQuery
-                                                                    .trim()
-                                                                    .toLowerCase(),
-                                                              ) ??
-                                                          false) ||
-                                                      (item.kunyomi
-                                                              ?.toLowerCase()
-                                                              .contains(
-                                                                widget
-                                                                    .searchQuery
-                                                                    .trim()
-                                                                    .toLowerCase(),
-                                                              ) ??
-                                                          false))),
+                                              (normalizedQuery.isNotEmpty &&
+                                                  _matchesKanjiSearch(
+                                                    item,
+                                                    normalizedQuery,
+                                                  )),
                                           srsStatus: dueIds.contains(item.id)
                                               ? _KanjiSrsStatus.due
                                               : seenIds.contains(item.id)
