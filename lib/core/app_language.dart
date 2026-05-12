@@ -721,7 +721,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Help improve JpStudy';
       case AppLanguage.vi:
-        return 'Gi?p c?i thi?n JpStudy';
+        return 'Giúp cải thiện JpStudy';
       case AppLanguage.ja:
         return 'JpStudy??????';
     }
@@ -732,7 +732,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Allow anonymous Firebase Analytics so we can understand feature usage. You can decline and keep using the app.';
       case AppLanguage.vi:
-        return 'Cho ph?p Firebase Analytics ?n danh ?? nh?m hi?u c?ch d?ng t?nh n?ng. B?n c? th? t? ch?i v? v?n d?ng app b?nh th??ng.';
+        return 'Cho phép Firebase Analytics ẩn danh để nhóm hiểu cách dùng tính năng. Bạn có thể từ chối và vẫn dùng app bình thường.';
       case AppLanguage.ja:
         return '???Firebase Analytics???????????????????????????????????';
     }
@@ -743,7 +743,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Allow';
       case AppLanguage.vi:
-        return 'Cho ph?p';
+        return 'Cho phép';
       case AppLanguage.ja:
         return '??';
     }
@@ -754,7 +754,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'No thanks';
       case AppLanguage.vi:
-        return 'Kh?ng, c?m ?n';
+        return 'Không, cảm ơn';
       case AppLanguage.ja:
         return '?????';
     }
