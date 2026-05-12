@@ -75,13 +75,14 @@ class AppShellScaffold extends ConsumerWidget {
           _ => 4,
         };
 
-        return Scaffold(
-          backgroundColor: palette.bg,
-          body: SafeArea(
+        return ColoredBox(
+          color: palette.bg,
+          child: SafeArea(
             bottom: false,
             child: Stack(
+              fit: StackFit.expand,
               children: [
-                Positioned.fill(child: navigationShell),
+                navigationShell,
                 Positioned(
                   left: 0,
                   top: 0,
