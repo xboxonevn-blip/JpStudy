@@ -87,26 +87,31 @@ class AppShellScaffold extends ConsumerWidget {
                   top: 0,
                   child: _SemanticNavigationLandmarks(items: items),
                 ),
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: SafeArea(
+                    top: false,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 8, bottom: 12),
+                      child: _MobileNavigationBar(
+                        language: language,
+                        bottomItems: bottomItems,
+                        selectedIndex: bottomSelected,
+                        onDestinationSelected: (index) {
+                          if (index < 4) {
+                            final branch = const [4, 1, 0, 7][index];
+                            _goToBranch(context, branch);
+                            return;
+                          }
+                          _showMoreSheet(context, items);
+                        },
+                      ),
+                    ),
+                  ),
+                ),
               ],
-            ),
-          ),
-          bottomNavigationBar: SafeArea(
-            top: false,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 8, bottom: 12),
-              child: _MobileNavigationBar(
-                language: language,
-                bottomItems: bottomItems,
-                selectedIndex: bottomSelected,
-                onDestinationSelected: (index) {
-                  if (index < 4) {
-                    final branch = const [4, 1, 0, 7][index];
-                    _goToBranch(context, branch);
-                    return;
-                  }
-                  _showMoreSheet(context, items);
-                },
-              ),
             ),
           ),
         );
