@@ -437,38 +437,38 @@ class _ShellBody extends StatelessWidget {
 
 String _kanji(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Kanji',
-  AppLanguage.vi => 'Hán tự',
-  AppLanguage.ja => '基礎',
+  AppLanguage.vi => 'H\u00e1n t\u1ef1',
+  AppLanguage.ja => '\u6f22\u5b57',
 };
 String _foundations(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Kana',
   AppLanguage.vi => 'Kana',
-  AppLanguage.ja => '基礎',
+  AppLanguage.ja => '\u304b\u306a',
 };
 String _vocab(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Vocab',
-  AppLanguage.vi => 'Từ vựng',
-  AppLanguage.ja => '語彙',
+  AppLanguage.vi => 'T\u1eeb v\u1ef1ng',
+  AppLanguage.ja => '\u8a9e\u5f59',
 };
 String _grammar(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Grammar',
-  AppLanguage.vi => 'Ngữ pháp',
-  AppLanguage.ja => '文法',
+  AppLanguage.vi => 'Ng\u1eef ph\u00e1p',
+  AppLanguage.ja => '\u6587\u6cd5',
 };
 String _roadmap(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Roadmap',
-  AppLanguage.vi => 'Lộ trình',
-  AppLanguage.ja => 'ロードマップ',
+  AppLanguage.vi => 'L\u1ed9 tr\u00ecnh',
+  AppLanguage.ja => '\u30ed\u30fc\u30c9\u30de\u30c3\u30d7',
 };
 String _memory(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Memory',
-  AppLanguage.vi => 'Ghi nhớ',
-  AppLanguage.ja => '記憶',
+  AppLanguage.vi => 'Ghi nh\u1edb',
+  AppLanguage.ja => '\u8a18\u61b6',
 };
 String _active(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Active',
-  AppLanguage.vi => 'Chủ động',
-  AppLanguage.ja => '能動',
+  AppLanguage.vi => 'Ch\u1ee7 \u0111\u1ed9ng',
+  AppLanguage.ja => '\u30a2\u30af\u30c6\u30a3\u30d6',
 };
 String _exam(AppLanguage language) => switch (language) {
   AppLanguage.en => 'Exams',
