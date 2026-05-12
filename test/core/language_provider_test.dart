@@ -1,4 +1,4 @@
-﻿import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
@@ -65,8 +65,8 @@ void main() {
 
   test('analytics consent copy is localized', () {
     expect(AppLanguage.vi.analyticsConsentTitle, contains('JpStudy'));
-    expect(AppLanguage.vi.analyticsConsentAcceptLabel, 'Cho ph?p');
-    expect(AppLanguage.vi.analyticsConsentDeclineLabel, 'Kh?ng, c?m ?n');
+    expect(AppLanguage.vi.analyticsConsentAcceptLabel, 'Cho phép');
+    expect(AppLanguage.vi.analyticsConsentDeclineLabel, 'Không, cảm ơn');
   });
 
   test('loginManualAccountFooterLabel stays non-personal', () {
