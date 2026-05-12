@@ -4,6 +4,7 @@ import 'package:drift/drift.dart' hide Column;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
+import 'package:jpstudy/app/theme/app_breakpoints.dart';
 import 'package:jpstudy/features/foundations/screens/kana_table_screen.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/gamification/level_calculator.dart';
@@ -89,6 +90,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     if (!onboardingDone) {
       return OnboardingScreen(onComplete: _handleOnboardingComplete);
+    }
+
+    final isMobile = MediaQuery.sizeOf(context).width < AppBreakpoints.tablet;
+    if (isMobile) {
+      return _MobileHomeFallback(
+        language: language,
+        level: level ?? StudyLevel.n5,
+        onLanguageTap: () => _showLanguageSheet(context),
+        onLevelChanged: _setLevel,
+      );
     }
 
     return Scaffold(
@@ -257,6 +268,216 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 }
+
+class _MobileHomeFallback extends StatelessWidget {
+  const _MobileHomeFallback({
+    required this.language,
+    required this.level,
+    required this.onLanguageTap,
+    required this.onLevelChanged,
+  });
+
+  final AppLanguage language;
+  final StudyLevel level;
+  final VoidCallback onLanguageTap;
+  final ValueChanged<StudyLevel> onLevelChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return Scaffold(
+      backgroundColor: palette.bg,
+      appBar: AppBar(
+        toolbarHeight: 72,
+        backgroundColor: Colors.transparent,
+        automaticallyImplyLeading: false,
+        titleSpacing: 16,
+        title: HeaderBar(
+          level: level,
+          language: language,
+          onLanguageTap: onLanguageTap,
+          onLevelChanged: onLevelChanged,
+          onSettingsTap: () => context.openMe(),
+        ),
+        elevation: 0,
+        scrolledUnderElevation: 0,
+      ),
+      body: ListView(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 120),
+        children: [
+          _MobileHomeCard(
+            icon: Icons.spa_rounded,
+            title: _mobileFoundationsTitle(language),
+            subtitle: _mobileFoundationsSubtitle(language),
+            cta: _mobileStartLabel(language),
+            onTap: context.openFoundations,
+          ),
+          _MobileHomeCard(
+            icon: Icons.auto_awesome_rounded,
+            title: _mobilePlanTitle(language),
+            subtitle: _mobilePlanSubtitle(language),
+            cta: _mobileStudyLabel(language),
+            onTap: context.openStudy,
+          ),
+          _MobileHomeCard(
+            icon: Icons.translate_rounded,
+            title: _mobileVocabTitle(language),
+            subtitle: _mobileVocabSubtitle(language),
+            cta: _mobileOpenLabel(language),
+            onTap: context.openVocab,
+          ),
+          _MobileHomeCard(
+            icon: Icons.account_tree_rounded,
+            title: _mobileGrammarTitle(language),
+            subtitle: _mobileGrammarSubtitle(language),
+            cta: _mobileOpenLabel(language),
+            onTap: context.openGrammar,
+          ),
+          _MobileHomeCard(
+            icon: Icons.grid_view_rounded,
+            title: _mobileKanjiTitle(language),
+            subtitle: _mobileKanjiSubtitle(language),
+            cta: _mobileOpenLabel(language),
+            onTap: context.openKanji,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _MobileHomeCard extends StatelessWidget {
+  const _MobileHomeCard({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    required this.cta,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final String cta;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return Card(
+      margin: const EdgeInsets.only(bottom: 12),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(24),
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(18),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(icon, color: palette.primary, size: 30),
+              const SizedBox(height: 12),
+              Text(
+                title,
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w900),
+              ),
+              const SizedBox(height: 6),
+              Text(subtitle),
+              const SizedBox(height: 12),
+              Text(
+                cta,
+                style: TextStyle(
+                  color: palette.primary,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+String _mobileFoundationsTitle(AppLanguage language) => switch (language) {
+  AppLanguage.en => 'Foundations',
+  AppLanguage.vi => 'Nền tảng',
+  AppLanguage.ja => '基礎',
+};
+
+String _mobileFoundationsSubtitle(AppLanguage language) => switch (language) {
+  AppLanguage.en => 'Kana, basic sounds, and Han-Viet essentials.',
+  AppLanguage.vi => 'Bảng chữ Kana, âm cơ bản và Hán Việt cốt lõi.',
+  AppLanguage.ja => 'かな、基本音、漢越の基礎。',
+};
+
+String _mobilePlanTitle(AppLanguage language) => switch (language) {
+  AppLanguage.en => "Today's plan",
+  AppLanguage.vi => 'Bảng kế hoạch hôm nay',
+  AppLanguage.ja => '今日の学習計画',
+};
+
+String _mobilePlanSubtitle(AppLanguage language) => switch (language) {
+  AppLanguage.en => 'Start with a short focused session.',
+  AppLanguage.vi => 'Bắt đầu bằng một phiên học ngắn, tập trung.',
+  AppLanguage.ja => '短い集中セッションから始めましょう。',
+};
+
+String _mobileVocabTitle(AppLanguage language) => switch (language) {
+  AppLanguage.en => 'Learn vocab',
+  AppLanguage.vi => 'Học từ vựng',
+  AppLanguage.ja => '語彙を学ぶ',
+};
+
+String _mobileVocabSubtitle(AppLanguage language) => switch (language) {
+  AppLanguage.en => 'Review due words and learn new terms.',
+  AppLanguage.vi => 'Ôn từ đến hạn và học từ mới.',
+  AppLanguage.ja => '復習語彙と新しい語彙。',
+};
+
+String _mobileGrammarTitle(AppLanguage language) => switch (language) {
+  AppLanguage.en => 'Learn grammar',
+  AppLanguage.vi => 'Học ngữ pháp',
+  AppLanguage.ja => '文法を学ぶ',
+};
+
+String _mobileGrammarSubtitle(AppLanguage language) => switch (language) {
+  AppLanguage.en => 'Practice JLPT patterns with examples.',
+  AppLanguage.vi => 'Luyện mẫu câu JLPT với ví dụ.',
+  AppLanguage.ja => 'JLPT文型を例文で練習。',
+};
+
+String _mobileKanjiTitle(AppLanguage language) => switch (language) {
+  AppLanguage.en => 'Learn Kanji',
+  AppLanguage.vi => 'Học Kanji',
+  AppLanguage.ja => '漢字を学ぶ',
+};
+
+String _mobileKanjiSubtitle(AppLanguage language) => switch (language) {
+  AppLanguage.en => 'Explore readings, meanings, and writing.',
+  AppLanguage.vi => 'Khám phá âm đọc, nghĩa và luyện viết.',
+  AppLanguage.ja => '読み、意味、書き方を確認。',
+};
+
+String _mobileStartLabel(AppLanguage language) => switch (language) {
+  AppLanguage.en => 'Start',
+  AppLanguage.vi => 'Bắt đầu',
+  AppLanguage.ja => '開始',
+};
+
+String _mobileStudyLabel(AppLanguage language) => switch (language) {
+  AppLanguage.en => 'Study now',
+  AppLanguage.vi => 'Học ngay',
+  AppLanguage.ja => '今すぐ学習',
+};
+
+String _mobileOpenLabel(AppLanguage language) => switch (language) {
+  AppLanguage.en => 'Open',
+  AppLanguage.vi => 'Mở',
+  AppLanguage.ja => '開く',
+};
 
 class _AchievementDialog extends StatelessWidget {
   const _AchievementDialog({required this.achievement, required this.language});
