@@ -1,0 +1,9 @@
+- generic [ref=e19] [cursor=pointer]:
+  - button "Enable accessibility" [ref=e20]
+  - navigation "Điều hướng chính" [ref=e1]:
+    - button "Hán tự" [ref=e2]
+    - button "Từ vựng" [ref=e3]
+    - button "Ngữ pháp" [ref=e4]
+    - button "Lộ trình" [ref=e5]
+  - generic:
+    - document
