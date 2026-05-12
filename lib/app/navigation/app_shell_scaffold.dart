@@ -80,9 +80,8 @@ class AppShellScaffold extends ConsumerWidget {
           body: SafeArea(
             bottom: false,
             child: Stack(
-              fit: StackFit.expand,
               children: [
-                navigationShell,
+                Positioned.fill(child: navigationShell),
                 Positioned(
                   left: 0,
                   top: 0,
