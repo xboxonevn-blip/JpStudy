@@ -84,7 +84,7 @@ class GrammarScreen extends ConsumerWidget {
   }
 }
 
-class _GrammarHubContent extends StatelessWidget {
+class _GrammarHubContent extends StatefulWidget {
   const _GrammarHubContent({
     required this.language,
     required this.levelLabel,
@@ -100,8 +100,21 @@ class _GrammarHubContent extends StatelessWidget {
   final int ghostCount;
 
   @override
+  State<_GrammarHubContent> createState() => _GrammarHubContentState();
+}
+
+class _GrammarHubContentState extends State<_GrammarHubContent> {
+  String _query = '';
+
+  @override
   Widget build(BuildContext context) {
+    final language = widget.language;
+    final levelLabel = widget.levelLabel;
+    final points = widget.points;
+    final dueCount = widget.dueCount;
+    final ghostCount = widget.ghostCount;
     final learnedCount = points.where((point) => point.isLearned).length;
+    final filteredPoints = _filterGrammarPoints(points, _query);
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -325,12 +338,41 @@ class _GrammarHubContent extends StatelessWidget {
                         ? () => context.openGrammarPractice()
                         : null,
                   ),
+                  const SizedBox(height: AppSpacing.md),
+                  TextField(
+                    key: const ValueKey('grammar_search_field'),
+                    onChanged: (value) => setState(() => _query = value),
+                    textInputAction: TextInputAction.search,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.search_rounded),
+                      suffixIcon: _query.isEmpty
+                          ? null
+                          : IconButton(
+                              tooltip: _tr(
+                                language,
+                                en: 'Clear grammar search',
+                                vi: 'X?a t?m ki?m ng? ph?p',
+                                ja: '????????',
+                              ),
+                              onPressed: () => setState(() => _query = ''),
+                              icon: const Icon(Icons.close_rounded),
+                            ),
+                      hintText: _tr(
+                        language,
+                        en: 'Search ?, wa, topic marker...',
+                        vi: 'T?m ?, wa, tr? t? ch? ??...',
+                        ja: '??wa?topic marker ???...',
+                      ),
+                    ),
+                  ),
                   const SizedBox(height: AppSpacing.lg),
                   if (points.isEmpty)
                     _EmptyGrammarBank(
                       language: language,
                       levelLabel: levelLabel,
                     )
+                  else if (filteredPoints.isEmpty)
+                    _EmptyGrammarSearch(language: language, query: _query)
                   else ...[
                     Text(
                       _tr(
@@ -346,12 +388,16 @@ class _GrammarHubContent extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: AppSpacing.md),
-                    for (var index = 0; index < points.length; index++) ...[
+                    for (
+                      var index = 0;
+                      index < filteredPoints.length;
+                      index++
+                    ) ...[
                       _GrammarPointRow(
                         language: language,
-                        point: points[index],
+                        point: filteredPoints[index],
                       ),
-                      if (index != points.length - 1)
+                      if (index != filteredPoints.length - 1)
                         const SizedBox(height: AppSpacing.sm),
                     ],
                   ],
@@ -363,6 +409,71 @@ class _GrammarHubContent extends StatelessWidget {
       },
     );
   }
+}
+
+List<GrammarPoint> _filterGrammarPoints(
+  List<GrammarPoint> points,
+  String query,
+) {
+  final normalizedQuery = _normalizeGrammarSearch(query);
+  if (normalizedQuery.isEmpty) return points;
+  return points
+      .where((point) {
+        final haystack = [
+          point.grammarPoint,
+          point.meaning,
+          point.meaningVi ?? '',
+          point.meaningEn ?? '',
+          point.connection,
+          point.connectionEn ?? '',
+          point.titleEn ?? '',
+          point.explanation,
+          _grammarSearchAlias(point),
+        ].join(' ');
+        return _normalizeGrammarSearch(haystack).contains(normalizedQuery);
+      })
+      .toList(growable: false);
+}
+
+String _grammarSearchAlias(GrammarPoint point) {
+  final text =
+      '${point.grammarPoint} ${point.connection} ${point.meaningEn ?? ''}'
+          .toLowerCase();
+  final aliases = <String>[];
+  if (text.contains('\u306f')) {
+    aliases.add('wa topic marker chu de tro tu chu de');
+  }
+  if (text.contains('\u304c')) {
+    aliases.add('ga subject marker chu ngu tro tu chu ngu');
+  }
+  if (text.contains('\u3092')) {
+    aliases.add('wo object marker tan ngu');
+  }
+  if (text.contains('\u306b')) {
+    aliases.add('ni time place destination thoi gian noi chon diem den');
+  }
+  if (text.contains('\u3067')) {
+    aliases.add('de place means action noi dien ra bang phuong tien');
+  }
+  if (text.contains('\u3078')) {
+    aliases.add('e he direction huong den');
+  }
+  return aliases.join(' ');
+}
+
+String _normalizeGrammarSearch(String input) {
+  const from =
+      '\u00e0\u00e1\u1ea1\u1ea3\u00e3\u00e2\u1ea7\u1ea5\u1ead\u1ea9\u1eab\u0103\u1eb1\u1eaf\u1eb7\u1eb3\u1eb5\u00e8\u00e9\u1eb9\u1ebb\u1ebd\u00ea\u1ec1\u1ebf\u1ec7\u1ec3\u1ec5\u00ec\u00ed\u1ecb\u1ec9\u0129\u00f2\u00f3\u1ecd\u1ecf\u00f5\u00f4\u1ed3\u1ed1\u1ed9\u1ed5\u1ed7\u01a1\u1edd\u1edb\u1ee3\u1edf\u1ee1\u00f9\u00fa\u1ee5\u1ee7\u0169\u01b0\u1eeb\u1ee9\u1ef1\u1eed\u1eef\u1ef3\u00fd\u1ef5\u1ef7\u1ef9\u0111';
+  const to =
+      'aaaaaaaaaaaaaaaaaeeeeeeeeeeeiiiiiooooooooooooooooouuuuuuuuuuuyyyyyd';
+  final lower = input.toLowerCase().trim();
+  final buffer = StringBuffer();
+  for (final rune in lower.runes) {
+    final char = String.fromCharCode(rune);
+    final index = from.indexOf(char);
+    buffer.write(index >= 0 ? to[index] : char);
+  }
+  return buffer.toString();
 }
 
 class _GrammarHeroCard extends StatelessWidget {
@@ -692,6 +803,39 @@ class _EmptyGrammarBank extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _EmptyGrammarSearch extends StatelessWidget {
+  const _EmptyGrammarSearch({required this.language, required this.query});
+
+  final AppLanguage language;
+  final String query;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      decoration: BoxDecoration(
+        color: palette.surface,
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: palette.outline),
+      ),
+      child: Text(
+        _tr(
+          language,
+          en: 'No grammar point matches "$query".',
+          vi: 'Chưa tìm thấy mẫu ngữ pháp khớp "$query".',
+          ja: '「$query」に一致する文法はありません。',
+        ),
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+          color: palette.ink.withValues(alpha: 0.72),
+          fontWeight: FontWeight.w700,
+        ),
       ),
     );
   }

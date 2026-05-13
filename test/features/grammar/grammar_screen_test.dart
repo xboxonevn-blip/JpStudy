@@ -36,6 +36,18 @@ const _learnedPoint = GrammarPoint(
   isLearned: true,
 );
 
+const _topicPoint = GrammarPoint(
+  id: 3,
+  grammarPoint: '〜は〜です',
+  meaning: 'mẫu câu chủ đề cơ bản',
+  meaningVi: 'mẫu câu chủ đề cơ bản',
+  meaningEn: 'topic marker sentence pattern',
+  connection: 'N1 は N2 です',
+  explanation: 'Uses は to mark the topic.',
+  jlptLevel: 'N5',
+  isLearned: false,
+);
+
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
@@ -180,6 +192,30 @@ void main() {
     expect(find.text('Mới'), findsOneWidget);
     // 'Đã học' appears in both the status chip and hero metric tile
     expect(find.text('Đã học'), findsWidgets);
+  });
+
+  testWidgets('grammar bank search finds は by wa and topic marker', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _buildScreen(language: AppLanguage.vi, points: [_stubPoint, _topicPoint]),
+    );
+    await _pump(tester);
+
+    await tester.enterText(
+      find.byKey(const ValueKey('grammar_search_field')),
+      'wa',
+    );
+    await tester.pumpAndSettle();
+    expect(find.textContaining('ch? ??'), findsOneWidget);
+    expect(find.textContaining('???c ph?p'), findsNothing);
+
+    await tester.enterText(
+      find.byKey(const ValueKey('grammar_search_field')),
+      'topic marker',
+    );
+    await tester.pumpAndSettle();
+    expect(find.textContaining('ch? ??'), findsOneWidget);
   });
 
   testWidgets('tapping grammar point row navigates to detail page', (
