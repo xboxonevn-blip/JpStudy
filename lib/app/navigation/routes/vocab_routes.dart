@@ -68,7 +68,7 @@ StatefulShellBranch buildVocabBranch() {
           final query = state.uri.queryParameters;
           return HajimeteChapterDetailScreen(
             levelCode: query['level'] ?? 'N5',
-            chapterId: int.tryParse(query['chapterId'] ?? '') ?? 1,
+            chapterId: parseVocabHajimeteChapterId(query),
             laneTitle: query['title'] ?? 'Hajimete no Nihongo Tango',
           );
         },
@@ -94,4 +94,8 @@ StatefulShellBranch buildVocabBranch() {
       ),
     ],
   );
+}
+
+int parseVocabHajimeteChapterId(Map<String, String> query) {
+  return int.tryParse(query['chapterId'] ?? query['id'] ?? '') ?? 1;
 }

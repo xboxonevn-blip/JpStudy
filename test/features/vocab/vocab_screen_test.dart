@@ -287,7 +287,12 @@ Widget _buildRouterScreen({
         builder: (context, state) => HajimeteChapterDetailScreen(
           levelCode: state.uri.queryParameters['level'] ?? 'N5',
           chapterId:
-              int.tryParse(state.uri.queryParameters['chapterId'] ?? '') ?? 1,
+              int.tryParse(
+                state.uri.queryParameters['chapterId'] ??
+                    state.uri.queryParameters['id'] ??
+                    '',
+              ) ??
+              1,
           laneTitle:
               state.uri.queryParameters['title'] ?? 'Hajimete no Nihongo Tango',
         ),
@@ -1184,6 +1189,54 @@ void main() {
         find.byKey(const ValueKey('hajimete_card_review_102_hint')),
         findsOneWidget,
       );
+    },
+  );
+
+  testWidgets(
+    'Vocab hub search finds Vietnamese, English, and Japanese terms',
+    (tester) async {
+      final repo = _FakeVocabLessonRepository(
+        bank: {
+          'N5': [
+            const VocabItem(
+              id: 42,
+              term: '食べます',
+              reading: 'たべます',
+              meaning: 'ăn',
+              meaningEn: 'eat',
+              level: 'N5',
+              tags: ['tabemasu'],
+            ),
+          ],
+        },
+      );
+
+      await tester.pumpWidget(_buildRouterScreen(repo: repo));
+      await _pumpCatalog(tester);
+
+      await tester.enterText(
+        find.byKey(const ValueKey('vocab_search_field')),
+        'an',
+      );
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
+      expect(find.textContaining('食べます'), findsWidgets);
+
+      await tester.enterText(
+        find.byKey(const ValueKey('vocab_search_field')),
+        'eat',
+      );
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
+      expect(find.textContaining('食べます'), findsWidgets);
+
+      await tester.enterText(
+        find.byKey(const ValueKey('vocab_search_field')),
+        '食べ',
+      );
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
+      expect(find.textContaining('食べます'), findsWidgets);
     },
   );
 

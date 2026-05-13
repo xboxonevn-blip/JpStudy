@@ -46,6 +46,12 @@ class _VocabCatalogBody extends ConsumerWidget {
           home: home,
         ),
         const SizedBox(height: AppSpacing.xl),
+        _VocabSearchCard(
+          key: const ValueKey('vocab_search_card'),
+          language: language,
+          levelCode: selectedLevel?.shortLabel ?? home.selectedLevelCode,
+        ),
+        const SizedBox(height: AppSpacing.xl),
         _VocabHero(
           key: const ValueKey('vocab_catalog_hero'),
           language: language,
@@ -1473,3 +1479,187 @@ _VocabCatalogSection _buildJlptSection({
     ],
   );
 }
+
+class _VocabSearchCard extends ConsumerStatefulWidget {
+  const _VocabSearchCard({
+    super.key,
+    required this.language,
+    required this.levelCode,
+  });
+
+  final AppLanguage language;
+  final String levelCode;
+
+  @override
+  ConsumerState<_VocabSearchCard> createState() => _VocabSearchCardState();
+}
+
+class _VocabSearchCardState extends ConsumerState<_VocabSearchCard> {
+  final TextEditingController _controller = TextEditingController();
+  String _query = '';
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    final query = _query.trim();
+
+    return AppSectionCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.search_rounded, color: palette.primary),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  _vocabSearchTitle(widget.language),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          TextField(
+            key: const ValueKey('vocab_search_field'),
+            controller: _controller,
+            textInputAction: TextInputAction.search,
+            decoration: InputDecoration(
+              prefixIcon: const Icon(Icons.search_rounded),
+              hintText: _vocabSearchHint(widget.language),
+              suffixIcon: query.isEmpty
+                  ? null
+                  : IconButton(
+                      tooltip: _vocabSearchClear(widget.language),
+                      onPressed: () {
+                        _controller.clear();
+                        setState(() => _query = '');
+                      },
+                      icon: const Icon(Icons.close_rounded),
+                    ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(18),
+              ),
+            ),
+            onChanged: (value) => setState(() => _query = value),
+          ),
+          if (query.isNotEmpty) ...[
+            const SizedBox(height: 12),
+            FutureBuilder<List<VocabItem>>(
+              future: _searchVocab(
+                ref.read(lessonRepositoryProvider),
+                widget.levelCode,
+                query,
+              ),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState != ConnectionState.done) {
+                  return const LinearProgressIndicator(minHeight: 3);
+                }
+                final results = snapshot.data ?? const <VocabItem>[];
+                if (results.isEmpty) {
+                  return Text(_vocabSearchEmpty(widget.language, query));
+                }
+                return Wrap(
+                  spacing: 10,
+                  runSpacing: 10,
+                  children: [
+                    for (final item in results.take(8))
+                      ActionChip(
+                        avatar: const Icon(Icons.translate_rounded, size: 18),
+                        label: Text(
+                          '${item.term}${item.hasDisplayReading ? ' · ${item.reading}' : ''} — ${item.displayMeaning(widget.language)}',
+                        ),
+                        onPressed: () => context.push('/vocab/${item.id}'),
+                      ),
+                  ],
+                );
+              },
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+Future<List<VocabItem>> _searchVocab(
+  LessonRepository repo,
+  String levelCode,
+  String query,
+) async {
+  final safeQuery = query.trim();
+  if (safeQuery.isEmpty || safeQuery.length > 80) return const [];
+  final items = await Future.wait([
+    repo.getVocabByLevelAndSeries(levelCode, 'minna'),
+    repo.getVocabByLevelAndSeries(levelCode, 'hajimete'),
+  ]);
+  final normalizedQuery = _normalizeVocabSearchText(safeQuery);
+  final exactQuery = safeQuery.toLowerCase();
+  final results = <VocabItem>[];
+  for (final item in items.expand((list) => list)) {
+    final haystack = [
+      item.term,
+      item.reading ?? '',
+      item.meaning,
+      item.meaningEn ?? '',
+      item.kanjiMeaning ?? '',
+      item.mnemonicVi ?? '',
+      item.mnemonicEn ?? '',
+      ...?item.tags,
+    ].join(' ');
+    final normalizedHaystack = _normalizeVocabSearchText(haystack);
+    if (normalizedHaystack.contains(normalizedQuery) ||
+        haystack.toLowerCase().contains(exactQuery)) {
+      results.add(item);
+    }
+  }
+  return results.take(12).toList(growable: false);
+}
+
+String _normalizeVocabSearchText(String input) {
+  const from =
+      'àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ';
+  const to =
+      'aaaaaaaaaaaaaaaaaeeeeeeeeeeeiiiiiooooooooooooooooouuuuuuuuuuuyyyyyd';
+  final lower = input.toLowerCase();
+  final buffer = StringBuffer();
+  for (final rune in lower.runes) {
+    final char = String.fromCharCode(rune);
+    final index = from.indexOf(char);
+    buffer.write(index >= 0 ? to[index] : char);
+  }
+  return buffer.toString();
+}
+
+String _vocabSearchTitle(AppLanguage language) => switch (language) {
+  AppLanguage.vi => 'Tra nhanh từ vựng',
+  AppLanguage.ja => '語彙をすばやく検索',
+  AppLanguage.en => 'Quick vocab lookup',
+};
+
+String _vocabSearchHint(AppLanguage language) => switch (language) {
+  AppLanguage.vi => 'Gõ tabemasu, ăn, 食べる...',
+  AppLanguage.ja => 'tabemasu、食べる、meaning...',
+  AppLanguage.en => 'Try tabemasu, eat, 食べる...',
+};
+
+String _vocabSearchClear(AppLanguage language) => switch (language) {
+  AppLanguage.vi => 'Xóa tìm kiếm',
+  AppLanguage.ja => '検索をクリア',
+  AppLanguage.en => 'Clear search',
+};
+
+String _vocabSearchEmpty(AppLanguage language, String query) =>
+    switch (language) {
+      AppLanguage.vi => 'Chưa tìm thấy "$query" trong lane hiện tại.',
+      AppLanguage.ja => '現在のレーンに「$query」は見つかりません。',
+      AppLanguage.en => 'No matches for "$query" in the current lane.',
+    };
