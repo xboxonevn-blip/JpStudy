@@ -16,11 +16,7 @@ StatefulShellBranch buildExamBranch() {
       GoRoute(
         path: AppRoutePath.examCenter,
         name: AppRouteName.examCenter,
-        builder: (context, state) => HomeMockExamScreen(
-          launchArgs: state.extra is HomeMockExamLaunchArgs
-              ? state.extra as HomeMockExamLaunchArgs
-              : null,
-        ),
+        builder: (context, state) => const ExamCenterHubScreen(),
       ),
       GoRoute(
         path: AppRoutePath.practiceMockExam,

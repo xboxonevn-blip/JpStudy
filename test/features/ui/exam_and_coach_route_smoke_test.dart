@@ -16,7 +16,8 @@ void main() {
       AppRouter.router.routeInformationProvider.value.uri.path,
       AppRoutePath.examCenter,
     );
-    expect(find.textContaining('Mock Exam'), findsWidgets);
+    expect(find.textContaining('JLPT'), findsWidgets);
+    expect(find.textContaining('mock'), findsWidgets);
 
     await disposeSmokeApp(tester);
   });
@@ -29,7 +30,8 @@ void main() {
       AppRouter.router.routeInformationProvider.value.uri.path,
       AppRoutePath.practiceMockExam,
     );
-    expect(find.textContaining('Mock Exam'), findsWidgets);
+    expect(find.textContaining('JLPT'), findsWidgets);
+    expect(find.textContaining('mock'), findsWidgets);
 
     await disposeSmokeApp(tester);
   });
