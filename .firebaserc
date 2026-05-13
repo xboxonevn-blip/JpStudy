@@ -1,5 +1,18 @@
 {
   "projects": {
     "default": "jpstudy-v2"
-  }
+  },
+  "targets": {
+    "jpstudy-v2": {
+      "hosting": {
+        "jpstudy": [
+          "jpstudy"
+        ],
+        "jpstudy-v2": [
+          "jpstudy-v2"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
