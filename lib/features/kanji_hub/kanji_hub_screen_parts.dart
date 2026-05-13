@@ -27,9 +27,8 @@ class _KanjiTodayPanel extends StatelessWidget {
             caption: _kanjiTodayCaption(language, summary.levelCode),
           ),
           const SizedBox(height: AppSpacing.md),
-          Wrap(
-            spacing: AppSpacing.md,
-            runSpacing: AppSpacing.md,
+          AppFluidGrid(
+            maxColumns: 3,
             children: [
               _KanjiTodayAction(
                 key: const ValueKey('kanji_cta_due'),

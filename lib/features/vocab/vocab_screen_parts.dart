@@ -271,9 +271,8 @@ class _VocabTodaySection extends ConsumerWidget {
             caption: _todayCaption(language),
           ),
           const SizedBox(height: AppSpacing.md),
-          Wrap(
-            spacing: AppSpacing.md,
-            runSpacing: AppSpacing.md,
+          AppFluidGrid(
+            maxColumns: 3,
             children: [
               _TodayMetric(
                 key: const ValueKey('vocab_today_due'),

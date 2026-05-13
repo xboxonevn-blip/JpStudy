@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/app/navigation/app_route_locations.dart';
-import 'package:jpstudy/app/theme/app_breakpoints.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
@@ -116,30 +115,83 @@ class _GrammarHubContentState extends State<_GrammarHubContent> {
     final learnedCount = points.where((point) => point.isLearned).length;
     final filteredPoints = _filterGrammarPoints(points, _query);
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final columns = constraints.maxWidth >= 1180
-            ? 3
-            : constraints.maxWidth >= AppBreakpoints.tablet
-            ? 2
-            : 1;
-        final itemWidth = columns <= 1
-            ? constraints.maxWidth
-            : (constraints.maxWidth - AppSpacing.md * (columns - 1)) / columns;
-
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _GrammarHeroCard(
+          language: language,
+          levelLabel: levelLabel,
+          totalCount: points.length,
+          learnedCount: learnedCount,
+          dueCount: dueCount,
+          ghostCount: ghostCount,
+          primaryActionLabel: ghostCount > 0
+              ? language.ghostReviewBannerActionLabel
+              : dueCount > 0
+              ? _tr(
+                  language,
+                  en: 'Review $dueCount now',
+                  vi: '\u00d4n $dueCount m\u1ee5c ngay',
+                  ja: '$dueCount \u4ef6\u3092\u4eca\u3059\u3050\u5fa9\u7fd2',
+                )
+              : _tr(
+                  language,
+                  en: 'Run a light drill',
+                  vi: 'L\u00e0m m\u1ed9t phi\u00ean nh\u1eb9',
+                  ja: '\u8efd\u3044\u30c9\u30ea\u30eb\u3092\u59cb\u3081\u308b',
+                ),
+          onPrimaryActionTap: () {
+            if (ghostCount > 0) {
+              context.openGrammarPractice(extra: GrammarPracticeMode.ghost);
+              return;
+            }
+            context.openGrammarPractice();
+          },
+        ),
+        const SizedBox(height: AppSpacing.md),
+        AppFluidGrid(
+          maxColumns: 3,
           children: [
-            _GrammarHeroCard(
-              language: language,
-              levelLabel: levelLabel,
-              totalCount: points.length,
-              learnedCount: learnedCount,
-              dueCount: dueCount,
-              ghostCount: ghostCount,
-              primaryActionLabel: ghostCount > 0
-                  ? language.ghostReviewBannerActionLabel
-                  : dueCount > 0
+            AppFeatureCard(
+              icon: Icons.psychology_alt_rounded,
+              title: _tr(
+                language,
+                en: 'Today\'s review lane',
+                vi: 'L\u01b0\u1ee3t \u00f4n h\u00f4m nay',
+                ja: '\u4eca\u65e5\u306e\u5fa9\u7fd2\u30ec\u30fc\u30f3',
+              ),
+              subtitle: dueCount > 0
+                  ? _tr(
+                      language,
+                      en: 'Keep grammar active with a focused review session before the queue piles up.',
+                      vi: 'Gi\u1eef ng\u1eef ph\u00e1p lu\u00f4n t\u01b0\u01a1i b\u1eb1ng m\u1ed9t phi\u00ean \u00f4n t\u1eadp ng\u1eafn tr\u01b0\u1edbc khi h\u00e0ng ch\u1edd d\u1ed3n l\u1ea1i.',
+                      ja: '\u30ad\u30e5\u30fc\u304c\u3075\u304f\u3089\u3080\u524d\u306b\u3001\u77ed\u3044\u5fa9\u7fd2\u3067\u6587\u6cd5\u3092\u7dad\u6301\u3057\u307e\u3057\u3087\u3046\u3002',
+                    )
+                  : _tr(
+                      language,
+                      en: 'No grammar is due right now, so this is a good moment for a light drill or quick check-in.',
+                      vi: 'Hi\u1ec7n ch\u01b0a c\u00f3 ng\u1eef ph\u00e1p \u0111\u1ebfn h\u1ea1n, v\u00ec v\u1eady b\u1ea1n c\u00f3 th\u1ec3 l\u00e0m m\u1ed9t phi\u00ean luy\u1ec7n nh\u1eb9 ho\u1eb7c ki\u1ec3m tra nhanh.',
+                      ja: '\u4eca\u306f\u5fa9\u7fd2\u4e88\u5b9a\u306e\u6587\u6cd5\u306f\u306a\u3044\u306e\u3067\u3001\u8efd\u3044\u30c9\u30ea\u30eb\u3067\u611f\u899a\u3092\u4fdd\u3066\u307e\u3059\u3002',
+                    ),
+              status: AppStatusChip(
+                label: dueCount > 0
+                    ? _tr(
+                        language,
+                        en: '$dueCount ready',
+                        vi: '$dueCount \u0111ang ch\u1edd',
+                        ja: '$dueCount \u4ef6\u5f85\u6a5f\u4e2d',
+                      )
+                    : _tr(
+                        language,
+                        en: 'All clear',
+                        vi: '\u0110\u00e3 xong',
+                        ja: '\u30aa\u30fc\u30eb\u30af\u30ea\u30a2',
+                      ),
+                tone: dueCount > 0
+                    ? AppStatusTone.warning
+                    : AppStatusTone.success,
+              ),
+              primaryLabel: dueCount > 0
                   ? _tr(
                       language,
                       en: 'Review $dueCount now',
@@ -152,261 +204,178 @@ class _GrammarHubContentState extends State<_GrammarHubContent> {
                       vi: 'L\u00e0m m\u1ed9t phi\u00ean nh\u1eb9',
                       ja: '\u8efd\u3044\u30c9\u30ea\u30eb\u3092\u59cb\u3081\u308b',
                     ),
-              onPrimaryActionTap: () {
-                if (ghostCount > 0) {
-                  context.openGrammarPractice(extra: GrammarPracticeMode.ghost);
-                  return;
-                }
-                context.openGrammarPractice();
-              },
+              onPrimaryTap: () => context.openGrammarPractice(),
             ),
-            const SizedBox(height: AppSpacing.md),
-            Wrap(
-              spacing: AppSpacing.md,
-              runSpacing: AppSpacing.md,
-              children: [
-                SizedBox(
-                  width: itemWidth,
-                  child: AppFeatureCard(
-                    icon: Icons.psychology_alt_rounded,
-                    title: _tr(
-                      language,
-                      en: 'Today\'s review lane',
-                      vi: 'L\u01b0\u1ee3t \u00f4n h\u00f4m nay',
-                      ja: '\u4eca\u65e5\u306e\u5fa9\u7fd2\u30ec\u30fc\u30f3',
-                    ),
-                    subtitle: dueCount > 0
-                        ? _tr(
-                            language,
-                            en: 'Keep grammar active with a focused review session before the queue piles up.',
-                            vi: 'Gi\u1eef ng\u1eef ph\u00e1p lu\u00f4n t\u01b0\u01a1i b\u1eb1ng m\u1ed9t phi\u00ean \u00f4n t\u1eadp ng\u1eafn tr\u01b0\u1edbc khi h\u00e0ng ch\u1edd d\u1ed3n l\u1ea1i.',
-                            ja: '\u30ad\u30e5\u30fc\u304c\u3075\u304f\u3089\u3080\u524d\u306b\u3001\u77ed\u3044\u5fa9\u7fd2\u3067\u6587\u6cd5\u3092\u7dad\u6301\u3057\u307e\u3057\u3087\u3046\u3002',
-                          )
-                        : _tr(
-                            language,
-                            en: 'No grammar is due right now, so this is a good moment for a light drill or quick check-in.',
-                            vi: 'Hi\u1ec7n ch\u01b0a c\u00f3 ng\u1eef ph\u00e1p \u0111\u1ebfn h\u1ea1n, v\u00ec v\u1eady b\u1ea1n c\u00f3 th\u1ec3 l\u00e0m m\u1ed9t phi\u00ean luy\u1ec7n nh\u1eb9 ho\u1eb7c ki\u1ec3m tra nhanh.',
-                            ja: '\u4eca\u306f\u5fa9\u7fd2\u4e88\u5b9a\u306e\u6587\u6cd5\u306f\u306a\u3044\u306e\u3067\u3001\u8efd\u3044\u30c9\u30ea\u30eb\u3067\u611f\u899a\u3092\u4fdd\u3066\u307e\u3059\u3002',
-                          ),
-                    status: AppStatusChip(
-                      label: dueCount > 0
-                          ? _tr(
-                              language,
-                              en: '$dueCount ready',
-                              vi: '$dueCount \u0111ang ch\u1edd',
-                              ja: '$dueCount \u4ef6\u5f85\u6a5f\u4e2d',
-                            )
-                          : _tr(
-                              language,
-                              en: 'All clear',
-                              vi: '\u0110\u00e3 xong',
-                              ja: '\u30aa\u30fc\u30eb\u30af\u30ea\u30a2',
-                            ),
-                      tone: dueCount > 0
-                          ? AppStatusTone.warning
-                          : AppStatusTone.success,
-                    ),
-                    primaryLabel: dueCount > 0
-                        ? _tr(
-                            language,
-                            en: 'Review $dueCount now',
-                            vi: '\u00d4n $dueCount m\u1ee5c ngay',
-                            ja: '$dueCount \u4ef6\u3092\u4eca\u3059\u3050\u5fa9\u7fd2',
-                          )
-                        : _tr(
-                            language,
-                            en: 'Run a light drill',
-                            vi: 'L\u00e0m m\u1ed9t phi\u00ean nh\u1eb9',
-                            ja: '\u8efd\u3044\u30c9\u30ea\u30eb\u3092\u59cb\u3081\u308b',
-                          ),
-                    onPrimaryTap: () => context.openGrammarPractice(),
-                  ),
-                ),
-                SizedBox(
-                  width: itemWidth,
-                  child: AppFeatureCard(
-                    icon: Icons.auto_fix_high_rounded,
-                    title: ghostCount > 0
-                        ? language.ghostReviewBannerTitle(ghostCount)
-                        : language.ghostReviewAllClearTitle,
-                    subtitle: ghostCount > 0
-                        ? language.ghostReviewBannerSubtitle
-                        : language.ghostReviewAllClearSubtitle,
-                    status: AppStatusChip(
-                      label: ghostCount > 0
-                          ? _tr(
-                              language,
-                              en: '$ghostCount weak spots',
-                              vi: '$ghostCount \u0111i\u1ec3m y\u1ebfu',
-                              ja: '$ghostCount \u4ef6\u306e\u5f31\u70b9',
-                            )
-                          : _tr(
-                              language,
-                              en: 'All clear',
-                              vi: '\u0110\u00e3 xong',
-                              ja: '\u30aa\u30fc\u30eb\u30af\u30ea\u30a2',
-                            ),
-                      tone: ghostCount > 0
-                          ? AppStatusTone.warning
-                          : AppStatusTone.success,
-                    ),
-                    primaryLabel: ghostCount == 0
-                        ? _tr(
-                            language,
-                            en: 'Browse the bank',
-                            vi: 'M\u1edf kho ng\u1eef ph\u00e1p',
-                            ja: '\u30d0\u30f3\u30af\u3092\u898b\u308b',
-                          )
-                        : null,
-                    onPrimaryTap: ghostCount == 0 && points.isNotEmpty
-                        ? () => context.push(
-                            AppRouteLocation.grammarDetail(points.first.id),
-                          )
-                        : null,
-                  ),
-                ),
-                SizedBox(
-                  width: itemWidth,
-                  child: AppFeatureCard(
-                    icon: Icons.library_books_rounded,
-                    title: _tr(
-                      language,
-                      en: '$levelLabel grammar bank',
-                      vi: 'Kho ng\u1eef ph\u00e1p $levelLabel',
-                      ja: '$levelLabel \u6587\u6cd5\u30d0\u30f3\u30af',
-                    ),
-                    subtitle: _tr(
-                      language,
-                      en: 'Browse ${points.length} patterns, meanings, and detail pages whenever you want a slower study pass.',
-                      vi: 'Duy\u1ec7t ${points.length} m\u1eabu ng\u1eef ph\u00e1p, \u00fd ngh\u0129a v\u00e0 trang chi ti\u1ebft b\u1ea5t c\u1ee9 l\u00fac n\u00e0o b\u1ea1n mu\u1ed1n h\u1ecdc ch\u1eadm h\u01a1n.',
-                      ja: '${points.length} \u500b\u306e\u6587\u6cd5\u30d1\u30bf\u30fc\u30f3\u3068\u610f\u5473\u3001\u8a73\u7d30\u30da\u30fc\u30b8\u3092\u3001\u843d\u3061\u7740\u3044\u3066\u898b\u8fd4\u305b\u307e\u3059\u3002',
-                    ),
-                    status: AppStatusChip(label: levelLabel),
-                    primaryLabel: _tr(
+            AppFeatureCard(
+              icon: Icons.auto_fix_high_rounded,
+              title: ghostCount > 0
+                  ? language.ghostReviewBannerTitle(ghostCount)
+                  : language.ghostReviewAllClearTitle,
+              subtitle: ghostCount > 0
+                  ? language.ghostReviewBannerSubtitle
+                  : language.ghostReviewAllClearSubtitle,
+              status: AppStatusChip(
+                label: ghostCount > 0
+                    ? _tr(
+                        language,
+                        en: '$ghostCount weak spots',
+                        vi: '$ghostCount \u0111i\u1ec3m y\u1ebfu',
+                        ja: '$ghostCount \u4ef6\u306e\u5f31\u70b9',
+                      )
+                    : _tr(
+                        language,
+                        en: 'All clear',
+                        vi: '\u0110\u00e3 xong',
+                        ja: '\u30aa\u30fc\u30eb\u30af\u30ea\u30a2',
+                      ),
+                tone: ghostCount > 0
+                    ? AppStatusTone.warning
+                    : AppStatusTone.success,
+              ),
+              primaryLabel: ghostCount == 0
+                  ? _tr(
                       language,
                       en: 'Browse the bank',
                       vi: 'M\u1edf kho ng\u1eef ph\u00e1p',
                       ja: '\u30d0\u30f3\u30af\u3092\u898b\u308b',
-                    ),
-                    onPrimaryTap: points.isNotEmpty
-                        ? () => context.push(
-                            AppRouteLocation.grammarDetail(points.first.id),
-                          )
-                        : null,
-                    secondaryLabel: dueCount > 0
-                        ? _tr(
-                            language,
-                            en: 'Start review',
-                            vi: 'B\u1eaft \u0111\u1ea7u \u00f4n',
-                            ja: '\u5fa9\u7fd2\u3092\u59cb\u3081\u308b',
-                          )
-                        : null,
-                    onSecondaryTap: dueCount > 0
-                        ? () => context.openGrammarPractice()
-                        : null,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: AppSpacing.md),
-            AppSectionCard(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AppSectionHeader(
-                    title: _tr(
-                      language,
-                      en: 'Grammar bank',
-                      vi: 'Kho ng\u1eef ph\u00e1p',
-                      ja: '\u6587\u6cd5\u30d0\u30f3\u30af',
-                    ),
-                    caption: _tr(
-                      language,
-                      en: '$learnedCount of ${points.length} points marked learned in this lane.',
-                      vi: '\u0110\u00e3 \u0111\u00e1nh d\u1ea5u h\u1ecdc xong $learnedCount / ${points.length} \u0111i\u1ec3m ng\u1eef ph\u00e1p trong lane n\u00e0y.',
-                      ja: '\u3053\u306e\u30ec\u30fc\u30f3\u3067 ${points.length} \u9805\u76ee\u4e2d $learnedCount \u9805\u76ee\u3092\u5b66\u7fd2\u6e08\u307f\u306b\u3057\u3066\u3044\u307e\u3059\u3002',
-                    ),
-                    actionLabel: dueCount > 0
-                        ? _tr(
-                            language,
-                            en: 'Start review',
-                            vi: 'B\u1eaft \u0111\u1ea7u \u00f4n',
-                            ja: '\u5fa9\u7fd2\u3092\u59cb\u3081\u308b',
-                          )
-                        : null,
-                    onActionTap: dueCount > 0
-                        ? () => context.openGrammarPractice()
-                        : null,
-                  ),
-                  const SizedBox(height: AppSpacing.md),
-                  TextField(
-                    key: const ValueKey('grammar_search_field'),
-                    onChanged: (value) => setState(() => _query = value),
-                    textInputAction: TextInputAction.search,
-                    decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.search_rounded),
-                      suffixIcon: _query.isEmpty
-                          ? null
-                          : IconButton(
-                              tooltip: _tr(
-                                language,
-                                en: 'Clear grammar search',
-                                vi: 'X?a t?m ki?m ng? ph?p',
-                                ja: '????????',
-                              ),
-                              onPressed: () => setState(() => _query = ''),
-                              icon: const Icon(Icons.close_rounded),
-                            ),
-                      hintText: _tr(
-                        language,
-                        en: 'Search ?, wa, topic marker...',
-                        vi: 'T?m ?, wa, tr? t? ch? ??...',
-                        ja: '??wa?topic marker ???...',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: AppSpacing.lg),
-                  if (points.isEmpty)
-                    _EmptyGrammarBank(
-                      language: language,
-                      levelLabel: levelLabel,
                     )
-                  else if (filteredPoints.isEmpty)
-                    _EmptyGrammarSearch(language: language, query: _query)
-                  else ...[
-                    Text(
-                      _tr(
-                        language,
-                        en: 'Tap any point to open examples, explanations, and practice entry points.',
-                        vi: 'Ch\u1ea1m v\u00e0o b\u1ea5t k\u1ef3 \u0111i\u1ec3m n\u00e0o \u0111\u1ec3 m\u1edf v\u00ed d\u1ee5, gi\u1ea3i th\u00edch v\u00e0 l\u1ed1i v\u00e0o b\u00e0i luy\u1ec7n.',
-                        ja: '\u5404\u9805\u76ee\u3092\u30bf\u30c3\u30d7\u3059\u308b\u3068\u3001\u4f8b\u6587\u30fb\u89e3\u8aac\u30fb\u7df4\u7fd2\u3078\u9032\u3081\u307e\u3059\u3002',
-                      ),
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: context.appPalette.ink.withValues(alpha: 0.7),
-                        fontWeight: FontWeight.w700,
-                        height: 1.45,
-                      ),
-                    ),
-                    const SizedBox(height: AppSpacing.md),
-                    for (
-                      var index = 0;
-                      index < filteredPoints.length;
-                      index++
-                    ) ...[
-                      _GrammarPointRow(
-                        language: language,
-                        point: filteredPoints[index],
-                      ),
-                      if (index != filteredPoints.length - 1)
-                        const SizedBox(height: AppSpacing.sm),
-                    ],
-                  ],
-                ],
+                  : null,
+              onPrimaryTap: ghostCount == 0 && points.isNotEmpty
+                  ? () => context.push(
+                      AppRouteLocation.grammarDetail(points.first.id),
+                    )
+                  : null,
+            ),
+            AppFeatureCard(
+              icon: Icons.library_books_rounded,
+              title: _tr(
+                language,
+                en: '$levelLabel grammar bank',
+                vi: 'Kho ng\u1eef ph\u00e1p $levelLabel',
+                ja: '$levelLabel \u6587\u6cd5\u30d0\u30f3\u30af',
               ),
+              subtitle: _tr(
+                language,
+                en: 'Browse ${points.length} patterns, meanings, and detail pages whenever you want a slower study pass.',
+                vi: 'Duy\u1ec7t ${points.length} m\u1eabu ng\u1eef ph\u00e1p, \u00fd ngh\u0129a v\u00e0 trang chi ti\u1ebft b\u1ea5t c\u1ee9 l\u00fac n\u00e0o b\u1ea1n mu\u1ed1n h\u1ecdc ch\u1eadm h\u01a1n.',
+                ja: '${points.length} \u500b\u306e\u6587\u6cd5\u30d1\u30bf\u30fc\u30f3\u3068\u610f\u5473\u3001\u8a73\u7d30\u30da\u30fc\u30b8\u3092\u3001\u843d\u3061\u7740\u3044\u3066\u898b\u8fd4\u305b\u307e\u3059\u3002',
+              ),
+              status: AppStatusChip(label: levelLabel),
+              primaryLabel: _tr(
+                language,
+                en: 'Browse the bank',
+                vi: 'M\u1edf kho ng\u1eef ph\u00e1p',
+                ja: '\u30d0\u30f3\u30af\u3092\u898b\u308b',
+              ),
+              onPrimaryTap: points.isNotEmpty
+                  ? () => context.push(
+                      AppRouteLocation.grammarDetail(points.first.id),
+                    )
+                  : null,
+              secondaryLabel: dueCount > 0
+                  ? _tr(
+                      language,
+                      en: 'Start review',
+                      vi: 'B\u1eaft \u0111\u1ea7u \u00f4n',
+                      ja: '\u5fa9\u7fd2\u3092\u59cb\u3081\u308b',
+                    )
+                  : null,
+              onSecondaryTap: dueCount > 0
+                  ? () => context.openGrammarPractice()
+                  : null,
             ),
           ],
-        );
-      },
+        ),
+        const SizedBox(height: AppSpacing.md),
+        AppSectionCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppSectionHeader(
+                title: _tr(
+                  language,
+                  en: 'Grammar bank',
+                  vi: 'Kho ng\u1eef ph\u00e1p',
+                  ja: '\u6587\u6cd5\u30d0\u30f3\u30af',
+                ),
+                caption: _tr(
+                  language,
+                  en: '$learnedCount of ${points.length} points marked learned in this lane.',
+                  vi: '\u0110\u00e3 \u0111\u00e1nh d\u1ea5u h\u1ecdc xong $learnedCount / ${points.length} \u0111i\u1ec3m ng\u1eef ph\u00e1p trong lane n\u00e0y.',
+                  ja: '\u3053\u306e\u30ec\u30fc\u30f3\u3067 ${points.length} \u9805\u76ee\u4e2d $learnedCount \u9805\u76ee\u3092\u5b66\u7fd2\u6e08\u307f\u306b\u3057\u3066\u3044\u307e\u3059\u3002',
+                ),
+                actionLabel: dueCount > 0
+                    ? _tr(
+                        language,
+                        en: 'Start review',
+                        vi: 'B\u1eaft \u0111\u1ea7u \u00f4n',
+                        ja: '\u5fa9\u7fd2\u3092\u59cb\u3081\u308b',
+                      )
+                    : null,
+                onActionTap: dueCount > 0
+                    ? () => context.openGrammarPractice()
+                    : null,
+              ),
+              const SizedBox(height: AppSpacing.md),
+              TextField(
+                key: const ValueKey('grammar_search_field'),
+                onChanged: (value) => setState(() => _query = value),
+                textInputAction: TextInputAction.search,
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.search_rounded),
+                  suffixIcon: _query.isEmpty
+                      ? null
+                      : IconButton(
+                          tooltip: _tr(
+                            language,
+                            en: 'Clear grammar search',
+                            vi: 'X?a t?m ki?m ng? ph?p',
+                            ja: '????????',
+                          ),
+                          onPressed: () => setState(() => _query = ''),
+                          icon: const Icon(Icons.close_rounded),
+                        ),
+                  hintText: _tr(
+                    language,
+                    en: 'Search ?, wa, topic marker...',
+                    vi: 'T?m ?, wa, tr? t? ch? ??...',
+                    ja: '??wa?topic marker ???...',
+                  ),
+                ),
+              ),
+              const SizedBox(height: AppSpacing.lg),
+              if (points.isEmpty)
+                _EmptyGrammarBank(language: language, levelLabel: levelLabel)
+              else if (filteredPoints.isEmpty)
+                _EmptyGrammarSearch(language: language, query: _query)
+              else ...[
+                Text(
+                  _tr(
+                    language,
+                    en: 'Tap any point to open examples, explanations, and practice entry points.',
+                    vi: 'Ch\u1ea1m v\u00e0o b\u1ea5t k\u1ef3 \u0111i\u1ec3m n\u00e0o \u0111\u1ec3 m\u1edf v\u00ed d\u1ee5, gi\u1ea3i th\u00edch v\u00e0 l\u1ed1i v\u00e0o b\u00e0i luy\u1ec7n.',
+                    ja: '\u5404\u9805\u76ee\u3092\u30bf\u30c3\u30d7\u3059\u308b\u3068\u3001\u4f8b\u6587\u30fb\u89e3\u8aac\u30fb\u7df4\u7fd2\u3078\u9032\u3081\u307e\u3059\u3002',
+                  ),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: context.appPalette.ink.withValues(alpha: 0.7),
+                    fontWeight: FontWeight.w700,
+                    height: 1.45,
+                  ),
+                ),
+                const SizedBox(height: AppSpacing.md),
+                for (var index = 0; index < filteredPoints.length; index++) ...[
+                  _GrammarPointRow(
+                    language: language,
+                    point: filteredPoints[index],
+                  ),
+                  if (index != filteredPoints.length - 1)
+                    const SizedBox(height: AppSpacing.sm),
+                ],
+              ],
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
