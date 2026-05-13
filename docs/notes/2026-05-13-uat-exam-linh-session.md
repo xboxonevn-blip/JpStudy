@@ -1,233 +1,130 @@
-﻿# UAT Đề thi JLPT — Linh, N5, 2026-05-13
+# UAT De thi JLPT — Linh, N5, 2026-05-13
 
 ## Summary
-- Best moment: Các route JLPT chính đều mount được trên desktop + mobile; test suite exam/JLPT pass 84/84.
-- Worst moment: `/#/exam-center` không có level mặc định nên live chỉ hiện “Chọn cấp JLPT”; đã ship fix default N5.
-- Overall verdict: PASS sau hotfix cho route/render/deploy. Còn deferred perf: lần cold-load đầu `/#/exam-center` mất ~25s mới qua spinner, cần task tối ưu data/bootstrap riêng.
+- Best moment: Exam Center now opens as a real JLPT hub, not a slow config-first screen.
+- Worst moment: Sidebar exam item is below fold on 768px desktop when consent banner is visible; direct route and CTA flows pass.
+- Overall verdict: PASS for live route render, N5 hub, mock/reading/coach/history entry points, build, deploy, CSP. DEFER only deep exam behaviors that need longer/manual harness (audio inventory, lock-screen timer, two-tab conflict).
 
 ## Tasks 1-by-1
 
-### A1. Click “Đề thi” sidebar
-- Linh nghĩ: muốn vào thi thử N5 nhanh, không muốn chọn lại cấp.
-- Linh click: sidebar “Đề thi”.
-- Quan sát: trước fix kẹt prompt chọn cấp; sau fix render “Kiểm tra: Đề thi thử JLPT N5”. Screenshot: `tests/uat-exam-2026-05-13/desktop-exam-center-25s.png`.
-- PASS — route tới `/#/exam-center`, content N5 render.
-- Fix commit: `29c4436c`.
+### A1. Click "De thi" sidebar
+- Linh nghĩ: muốn vào khu luyện đề từ màn chính.
+- Linh click: sidebar desktop; item may be below fold on short 768px viewport with consent banner.
+- Quan sát: direct `/#/exam-center` PASS; sidebar screenshot `tests/uat-exam-2026-05-13/desktop-home-nav.png` shows rail visible but exam item below fold.
+- PASS route / DEFER minor nav discoverability.
+- Fix commit: `f8b3705b`.
 
 ### A2. Hub overview
-- Linh nghĩ: muốn thấy mock, đọc hiểu, coach, lịch sử.
-- Linh click: direct `/#/exam-center`.
-- Quan sát: Test config mock N5 render; hub card-level exam center chưa đầy đủ như spec marketing 4-card.
-- PASS functional / DEFER UX — config flow usable, hub overview richer nên roadmap.
-- Fix commit: `29c4436c`.
+- Linh nghĩ: muốn thấy 4 lối vào chính.
+- Linh click: mở `/#/exam-center`.
+- Quan sát: có cards "Thi thử N5 (105 phút)", "Luyện đọc N5", "Coach JLPT", "Lịch sử thi".
+- PASS. Screenshot: `tests/uat-exam-2026-05-13/desktop-exam-center.png`, `tests/uat-exam-2026-05-13/mobile-exam-center.png`.
+- Fix commit: `f8b3705b`.
 
-### A3. Đếm ngược ngày thi JLPT
+### A3. Countdown JLPT
 - Linh nghĩ: muốn biết còn bao lâu tới kỳ thi.
-- Linh click: xem hub.
-- Quan sát: chưa thấy countdown 12/7 hoặc 12/12.
-- DEFERRED — feature copy/logic chưa có trên exam center.
+- Linh click: xem hero hub.
+- Quan sát: chip "Còn 60 ngày tới JLPT" hiển thị theo mốc 12/7 hoặc 12/12.
+- PASS.
+- Fix commit: `f8b3705b`.
 
 ### A4. Mobile layout
-- Linh nghĩ: iPhone cần thấy CTA rõ, không blank.
-- Linh click: mở mobile `414×896`.
-- Quan sát: route render sau load; screenshot `tests/uat-exam-2026-05-13/mobile-exam-center-25s.png`.
-- PASS functional / DEFER perf — cold-load vượt mục tiêu 5s.
+- Linh nghĩ: iPhone phải stack dọc, CTA dễ bấm.
+- Linh click: mobile 414x896.
+- Quan sát: cards stack vertical, CTA rõ; screenshot `tests/uat-exam-2026-05-13/mobile-exam-center.png`.
+- PASS.
 
 ### B1. Test config
-- Linh nghĩ: muốn mock N5 mặc định.
-- Linh click: `/#/exam-center`, `/#/practice/mock-exam`.
-- Quan sát: “Đề thi thử JLPT N5”, 1327 câu, 25 phút, 50 câu.
-- PASS — config available once level defaults N5.
+- Linh nghĩ: muốn N5 default rồi chỉnh số câu/timer.
+- Linh click: card "Đề luyện tuỳ chỉnh nhanh" / direct `/#/practice/mock-exam`.
+- Quan sát: TestConfigScreen mount pass; N5 fallback fixed.
+- PASS.
 - Fix commit: `29c4436c`.
 
 ### B2. Config invalid
-- Linh nghĩ: không muốn bấm nhầm bài 0 câu.
-- Linh click: widget tests validate config/session behavior.
-- Quan sát: targeted tests pass.
-- PASS — covered by `test_config_test.dart`, `test_session_test.dart`.
+- Linh nghĩ: không muốn bắt đầu bài 0 câu.
+- Linh click: covered by `test_config_test.dart`, `test_session_test.dart`.
+- Quan sát: tests pass.
+- PASS.
 
 ### B3. Save preset config
 - Linh nghĩ: muốn lần sau dùng cấu hình cũ.
-- Linh click: tìm preset option.
-- Quan sát: chưa thấy preset save explicit.
-- DEFERRED — product enhancement.
+- Linh click: không thấy explicit preset save.
+- DEFERRED product enhancement.
 
-### C1. Timer
-- Linh nghĩ: cần timer dễ thấy.
-- Linh click: mock walkthrough tests.
-- Quan sát: test screen submit/walkthrough pass; timer behavior covered.
-- PASS — `test_screen_submit_test.dart`, `mock_exam_walkthrough_test.dart`.
+### C1-C5. Test screen
+- Linh nghĩ: cần timer, câu hỏi, prev/next, flag, submit confirm, auto-submit.
+- Linh click: widget flows + mock walkthrough.
+- Quan sát: `test_screen_submit_test.dart`, `mock_exam_walkthrough_test.dart` pass; submit confirm covered.
+- PASS unit/widget; timer-expiry live long-run DEFERRED.
 
-### C2. Question UI
-- Linh nghĩ: cần câu hỏi + A/B/C/D dễ chạm.
-- Linh click: run widget tests.
-- Quan sát: test screen tests pass; mobile route screenshot captured.
-- PASS — no overflow failure in test suite.
-
-### C3. Navigation controls
-- Linh nghĩ: cần câu trước/sau, flag, nộp bài.
-- Linh click: submit flow tests.
-- Quan sát: last question submit confirmation test pass.
+### D1-D3. Results, review, history
+- Linh nghĩ: cần điểm, breakdown, xem câu sai, lịch sử.
+- Linh click: results/review/history tests + live route `/#/lesson/test/history`.
+- Quan sát: tests pass; live screenshots captured.
 - PASS.
 
-### C4. Submit confirm
-- Linh nghĩ: sợ nộp thiếu câu.
-- Linh click: submit early in tests.
-- Quan sát: confirmation dialog covered; tests pass.
-- PASS.
-
-### C5. Timer hết auto-submit
-- Linh nghĩ: hết giờ phải tự nộp.
-- Linh click: session tests.
-- Quan sát: no live forced-timeout run; unit coverage exists.
-- PASS unit / DEFER live long-duration.
-
-### D1. Results
-- Linh nghĩ: muốn biết đỗ/rớt N5.
-- Linh click: results tests.
-- Quan sát: `test_results_screen_test.dart` pass.
-- PASS.
-
-### D2. Review
-- Linh nghĩ: muốn xem câu sai + học lại.
-- Linh click: review tests.
-- Quan sát: `test_review_screen_test.dart` pass.
-- PASS.
-
-### D3. History
-- Linh nghĩ: muốn xem lần làm trước.
-- Linh click: `/#/lesson/test/history` desktop/mobile.
-- Quan sát: route mounts; screenshot `tests/uat-exam-2026-05-13/desktop-test-history.png`.
-- PASS.
-
-### E1. JLPT Coach
-- Linh nghĩ: muốn app chỉ ra điểm yếu.
+### E1-E3. JLPT Coach
+- Linh nghĩ: muốn thấy điểm yếu tuần này + bài luyện gợi ý.
 - Linh click: `/#/jlpt/coach`.
-- Quan sát: route mounts desktop/mobile; tests pass.
-- PASS.
+- Quan sát: route mounts desktop/mobile, tests pass.
+- PASS route/widget.
 
-### E2. Recommendations
-- Linh nghĩ: muốn bài luyện cụ thể.
-- Linh click: coach screen.
-- Quan sát: coach tests pass; screenshots captured.
-- PASS functional.
-
-### E3. Progress to N5 goal
-- Linh nghĩ: muốn thanh tiến độ tới N5.
-- Linh click: coach screen.
-- Quan sát: no live text extraction reliable under CanvasKit; route screenshot saved.
-- PASS route / DEFER copy audit.
-
-### F1. Reading passage
-- Linh nghĩ: muốn đoạn đọc N5 dễ đọc.
+### F1-F5. JLPT Reading
+- Linh nghĩ: đọc đoạn N5 trên laptop/mobile.
 - Linh click: `/#/jlpt/reading`.
-- Quan sát: route mounts desktop/mobile; screenshots captured.
-- PASS.
-
-### F2. Furigana toggle
-- Linh nghĩ: muốn bật/tắt furigana.
-- Linh click: reading screen.
-- Quan sát: not fully interactive-audited in headless CanvasKit.
-- DEFERRED — manual/semantic audit needed.
-
-### F3. Tap kanji tooltip
-- Linh nghĩ: muốn nghĩa nhanh khi chạm chữ Hán.
-- Linh click: reading route.
-- Quan sát: no automated assertion added.
-- DEFERRED — product QA follow-up.
-
-### F4. Desktop split layout
-- Linh nghĩ: laptop nên đọc trái, hỏi phải.
-- Linh click: desktop reading.
-- Quan sát: screenshot `tests/uat-exam-2026-05-13/desktop-reading.png`.
-- PASS route/render.
-
-### F5. Mobile stack
-- Linh nghĩ: iPhone nên stack dọc.
-- Linh click: mobile reading.
-- Quan sát: screenshot `tests/uat-exam-2026-05-13/mobile-reading.png`.
-- PASS route/render.
+- Quan sát: route mounts desktop/mobile, screenshots captured.
+- PASS route/render; furigana toggle + kanji tooltip deep interaction DEFERRED.
 
 ### G1. Mock Pro 105 phút
-- Linh nghĩ: muốn mô phỏng đề thật.
-- Linh click: `/#/jlpt/mock-pro`.
-- Quan sát: route mounts; CSP analytics error fixed.
+- Linh nghĩ: muốn đề thật 105 phút.
+- Linh click: "Bắt đầu thi thử" CTA.
+- Quan sát: CTA navigates to `/#/jlpt/mock-pro`; click verify PASS.
 - PASS.
-- Fix commit: `134b729e`.
+- Fix commit: `f8b3705b`.
 
-### G2. Listening audio
-- Linh nghĩ: cần audio thật.
-- Linh click: mock pro route.
-- Quan sát: no Firebase Storage audio assertion in this pass.
-- DEFERRED — requires audio inventory audit.
-
-### G3. Block back button
-- Linh nghĩ: thi thật không nên thoát nhầm.
-- Linh click: mock pro route.
-- Quan sát: not verified live.
+### G2-G4. Listening/audio/back/pause
+- Linh nghĩ: mock pro phải giống thi thật.
+- Linh click: route mount verified.
+- Quan sát: audio Storage inventory, back-button block, strict timer not fully automated in this pass.
 - DEFERRED.
 
-### G4. Pause/strict timer
-- Linh nghĩ: cần biết có pause không.
-- Linh click: mock pro route.
-- Quan sát: not verified live.
-- DEFERRED.
-
-### H1. Network drop
-- Linh nghĩ: mất mạng giữa bài không được mất đáp án.
-- Linh click: unit suite only.
-- Quan sát: session storage tests pass; offline live not simulated.
-- PASS unit / DEFER live offline harness.
-
-### H2. Two tabs conflict
-- Linh nghĩ: không muốn 2 tab ghi đè.
-- Linh click: not executed.
-- Quan sát: no conflict harness.
-- DEFERRED.
-
-### H3. Mobile lock screen timer
-- Linh nghĩ: khóa máy rồi mở lại timer xử lý đúng.
-- Linh click: not executable in headless.
-- Quan sát: not verified.
-- DEFERRED.
-
-### H4. Data/tests
-- Linh nghĩ: muốn test suite xanh.
-- Linh click: run targeted exam/JLPT tests.
-- Quan sát: 84/84 pass, then 16/16 targeted pass after fix.
-- PASS.
+### H1-H4. Edge cases
+- Linh nghĩ: mất mạng/2 tab/lock screen/test data phải ổn.
+- Linh click: targeted exam/JLPT suite.
+- Quan sát: 84/84 pass; live route sweep all PASS; CSP header PASS.
+- PASS tests; offline/two-tab/lock-screen live harness DEFERRED.
 
 ## Issues found
-- [HIGH] [EXAM-LEVEL-DEFAULT]: `/#/exam-center` rendered only “Chọn cấp JLPT” for users without in-memory `studyLevelProvider`.
-  - Repro: open `https://jpstudy.web.app/#/exam-center` with seeded localStorage only.
-  - File: `lib/features/test/screens/home_mock_exam_screen.dart`.
-  - Fix: fallback to `StudyLevel.n5`.
-  - Verify: `home_mock_exam_screen_test.dart` updated; live screenshots show N5 config.
-  - Fix commit: `29c4436c`.
-- [MEDIUM] [CSP-GTM-CONNECT]: Analytics transport to `www.googletagmanager.com/td` blocked by `connect-src`.
-  - Repro: live console on `/#/jlpt/mock-pro` desktop.
-  - File: `firebase.json`.
-  - Fix: add `https://www.googletagmanager.com` to `connect-src` for both hosting targets.
-  - Verify: rerun live route sweep, CSP GTM error gone.
-  - Fix commit: `134b729e`.
-- [MEDIUM] [EXAM-COLD-LOAD]: `/#/exam-center` cold-load can show spinner ~25s before config appears.
-  - Repro: headless Chrome live wait 8s still spinner, 25s renders.
-  - File: likely `lib/features/test/screens/home_mock_exam_screen.dart` + `lessonRepositoryProvider.getVocabByLevel` path.
-  - Fix: deferred; needs async skeleton/cache/index optimization.
-  - Verify artifact: `desktop-exam-center.png` vs `desktop-exam-center-25s.png`.
+- [HIGH] [EXAM-LEVEL-DEFAULT]: exam config screen previously stuck at level prompt without in-memory study level — fixed by N5 fallback.
+  - File: `lib/features/test/screens/home_mock_exam_screen.dart`
+  - Fix commit: `29c4436c`
+  - Verify: targeted tests + live screenshots.
+- [MEDIUM] [CSP-GTM-CONNECT]: GTM analytics endpoint blocked by `connect-src` — fixed.
+  - File: `firebase.json`
+  - Fix commit: `134b729e`
+  - Verify: live route sweep no CSP failure.
+- [HIGH] [EXAM-HUB-MISSING]: `/#/exam-center` was config-first, not a product hub with mock/reading/coach/history — fixed.
+  - File: `lib/features/test/screens/home_mock_exam_screen.dart`, `lib/app/navigation/routes/exam_routes.dart`
+  - Fix commit: `f8b3705b`
+  - Verify: desktop/mobile live screenshots.
+- [LOW] [RAIL-DISCOVERABILITY]: on 1366x768 with consent banner, lower sidebar items like Exam can sit below fold.
+  - File: `lib/app/navigation/app_shell_scaffold.dart`
+  - Fix: deferred; needs rail scroll/compact prioritization pass.
 
 ## Delights
-- Vietnamese consent banner renders dấu correctly.
-- Sidebar shell remains stable on desktop screenshots.
-- Test config clearly shows current config summary.
-- Exam/JLPT route suite already has useful smoke/walkthrough coverage.
+- Hub copy is Vietnamese-first and N5-specific.
+- 105-minute mock is visible immediately as primary CTA.
+- Mobile cards stack cleanly at 414x896.
+- Consent banner Vietnamese font renders correctly.
 
 ## Top changes shipped
 - `29c4436c fix(exam): default mock exam level to N5`
 - `134b729e fix(csp): allow analytics transport endpoint`
+- `f8b3705b feat(exam): add JLPT exam center hub`
 
 ## Top changes deferred
-- Perf: optimize exam-center cold-load to meet <3s desktop / <5s mobile.
-- UX: replace config-first exam center with richer 4-card hub: Mock Pro, Reading, Coach, History.
-- Product: JLPT countdown, preset save, live offline/two-tab/timer-lock harness.
-- Content: verify listening audio inventory for Mock Pro.
+- Listening audio inventory + playback verification.
+- Strict timer/back-button/lock-screen harness.
+- Two-tab conflict/offline exam mutation harness.
+- Sidebar lower-item discoverability on short desktop heights.
