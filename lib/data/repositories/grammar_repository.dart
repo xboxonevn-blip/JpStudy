@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../db/app_database.dart';
 import '../db/database_provider.dart';
 import '../../core/services/fsrs_service.dart';
+import '../seeds/grammar_seeder.dart';
 
 final grammarRepositoryProvider = Provider<GrammarRepository>((ref) {
   final db = ref.watch(databaseProvider);
@@ -16,7 +17,14 @@ class GrammarRepository {
   GrammarRepository(this._db);
 
   /// Fetch all grammar points for a specific JLPT level
-  Future<List<GrammarPoint>> fetchPointsByLevel(String level) {
+  Future<List<GrammarPoint>> fetchPointsByLevel(String level) async {
+    final existingForLevel = await (_db.select(_db.grammarPoints)
+          ..where((table) => table.jlptLevel.equals(level))
+          ..limit(1))
+        .get();
+    if (existingForLevel.isEmpty) {
+      await GrammarSeeder(_db.grammarDao).seedGrammarData(_db);
+    }
     return _db.grammarDao.getGrammarPointsByLevel(level);
   }
 

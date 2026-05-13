@@ -23,10 +23,16 @@ class GrammarSeeder {
     final prefs = await SharedPreferences.getInstance();
     final currentVersion = prefs.getInt(kKeyGrammarVersion) ?? 0;
 
-    // Smart Seeding: Chỉ chạy nếu version thay đổi hoặc chưa có data
-    if (currentVersion >= kGrammarDataVersion) {
+    final existingCount =
+        await (_dao.db.selectOnly(_dao.db.grammarPoints)
+              ..addColumns([_dao.db.grammarPoints.id.count()]))
+            .map((row) => row.read(_dao.db.grammarPoints.id.count()) ?? 0)
+            .getSingle();
+
+    // Smart Seeding: skip only when both version and DB rows are present.
+    if (currentVersion >= kGrammarDataVersion && existingCount > 0) {
       debugPrint(
-        'âš¡ Skipping Grammar Seed: Data is up to date (v$currentVersion)',
+        'Skipping Grammar Seed: Data is up to date (v$currentVersion)',
       );
       return;
     }
