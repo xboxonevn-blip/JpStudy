@@ -1605,9 +1605,14 @@ Future<List<VocabItem>> _searchVocab(
   final exactQuery = safeQuery.toLowerCase();
   final results = <VocabItem>[];
   for (final item in items.expand((list) => list)) {
+    final readingRomaji = kanaToRomaji(item.reading ?? '');
+    final termRomaji = kanaToRomaji(item.term);
     final haystack = [
       item.term,
       item.reading ?? '',
+      readingRomaji,
+      termRomaji,
+      ..._vocabSearchVerbAliases(item),
       item.meaning,
       item.meaningEn ?? '',
       item.kanjiMeaning ?? '',
@@ -1622,6 +1627,18 @@ Future<List<VocabItem>> _searchVocab(
     }
   }
   return results.take(12).toList(growable: false);
+}
+
+List<String> _vocabSearchVerbAliases(VocabItem item) {
+  final reading = item.reading ?? item.term;
+  final romaji = kanaToRomaji(reading);
+  if (romaji.isEmpty) return const [];
+  final aliases = <String>{romaji};
+  if (romaji.endsWith('masu')) {
+    final stem = romaji.substring(0, romaji.length - 4);
+    aliases.add('${stem}ru');
+  }
+  return aliases.toList(growable: false);
 }
 
 String _normalizeVocabSearchText(String input) {

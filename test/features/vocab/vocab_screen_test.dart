@@ -1205,7 +1205,6 @@ void main() {
               meaning: 'ăn',
               meaningEn: 'eat',
               level: 'N5',
-              tags: ['tabemasu'],
             ),
           ],
         },
@@ -1233,6 +1232,14 @@ void main() {
       await tester.enterText(
         find.byKey(const ValueKey('vocab_search_field')),
         '食べ',
+      );
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
+      expect(find.textContaining('食べます'), findsWidgets);
+
+      await tester.enterText(
+        find.byKey(const ValueKey('vocab_search_field')),
+        'tabemasu',
       );
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 500));
