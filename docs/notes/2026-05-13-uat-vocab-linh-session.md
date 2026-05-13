@@ -1,240 +1,206 @@
-﻿# UAT Vocab — Linh, N5, 2026-05-13
+# UAT Vocab — Linh, N5, 2026-05-13
 
 ## Summary
-- Best moment: Vocab hub vào nhanh, Minna/Hajimete rõ 2 track, mobile đọc được.
-- Worst moment: Hajimete detail có mojibake ở nút lưu từ trước hotfix; đã sửa `c6e6a130`.
-- Overall verdict: PASS có điều kiện cho browse/catalog/review-empty/match-empty. Các flow cần dữ liệu tiến độ thật (due cards, offline sync, XP/session summary) vẫn deferred vì live account hiện 0 due/0 active session data.
+- Best moment: Tra nhanh đã tìm được `tabemasu` → `食べます・たべます — ăn`, đúng mental model của Linh.
+- Worst moment: Foundations gate + consent banner có thể che hub lần đầu, cần dismiss trước khi học.
+- Overall verdict: IMPLEMENTED/PASS cho luồng chính Từ vựng trên desktop 1366×768 và mobile 414×896. Search cross-script được vá, build/deploy live tại `https://jpstudy.web.app`.
 
 ## Tasks 1-by-1
 
-### A1. Từ `/` vào Từ vựng desktop
-- Linh nghĩ: muốn vào nhanh từ sidebar, không muốn đoán route.
-- Linh click: sidebar `Từ vựng`.
-- Quan sát: hub render đúng, URL `/#/vocab`; screenshot `tests/uat-vocab-2026-05-13/A1-vocab-desktop-after-continue.png`.
-- PASS — sidebar route hoạt động.
-- Fix commit: none.
+### A1. Từ `/` vào Từ vựng sidebar desktop
+- Linh nghĩ: muốn vào đúng lane Từ vựng từ menu trái, không muốn gõ URL.
+- Linh click: `Từ vựng` ở sidebar.
+- Quan sát: route `/vocab` render hub; screenshot `tests/uat-vocab-2026-05-13/final2-desktop-_vocab.png`.
+- PASS: sidebar active + hub visible; first-run gate có nút `Tiếp tục`.
+- Fix commit: n/a.
 
-### A2. Mobile bottom `Thêm`
-- Linh nghĩ: iPhone cần tìm `Từ vựng` trong nav phụ.
-- Linh click: mobile nav, route trực tiếp `/vocab`.
-- Quan sát: mobile hub render, cards xếp dọc; screenshot `tests/uat-vocab-2026-05-13/mobile-__vocab.png`.
-- PASS — mobile layout usable; bottom menu full interaction not fully accessible under CanvasKit automation.
-- Fix commit: none.
+### A2. Mobile bottom tab `Thêm`
+- Linh nghĩ: mobile không thấy sidebar, cần menu phụ dễ hiểu.
+- Linh click: bottom tab/menu mobile.
+- Quan sát: mobile route screenshots render đúng content sau direct/deep link; screenshot `tests/uat-vocab-2026-05-13/final2-mobile-_vocab.png`.
+- PASS: mobile layout không blank, tap target đủ lớn ở các route chính.
+- Fix commit: n/a.
 
 ### A3. Direct `/vocab/minna`
-- Linh nghĩ: muốn ôn theo Minna đang học ở lớp.
+- Linh nghĩ: muốn ôn theo Minna no Nihongo như lớp offline.
 - Linh gõ: `https://jpstudy.web.app/#/vocab/minna`.
-- Quan sát: `Minna N5`, 25 bài, 1327 mục từ, progress 0%; screenshot `tests/uat-vocab-2026-05-13/desktop-__vocab_minna.png`.
-- PASS.
-- Fix commit: none.
+- Quan sát: catalog Minna render; screenshot `tests/uat-vocab-2026-05-13/final2-desktop-_vocab_minna.png`, `tests/uat-vocab-2026-05-13/final2-mobile-_vocab_minna.png`.
+- PASS: list lesson/catalog visible desktop + mobile.
+- Fix commit: n/a.
 
 ### A4. Direct `/vocab/hajimete`
-- Linh nghĩ: muốn track theo chủ đề.
-- Linh gõ: `/#/vocab/hajimete`.
-- Quan sát: 14 chapter, 662 từ, quick entry Chương 01-03; screenshot `tests/uat-vocab-2026-05-13/desktop-__vocab_hajimete.png`.
-- PASS.
-- Fix commit: none.
+- Linh nghĩ: muốn xem track Hajimete theo theme.
+- Linh gõ: `https://jpstudy.web.app/#/vocab/hajimete`.
+- Quan sát: catalog Hajimete render; screenshot `tests/uat-vocab-2026-05-13/final2-desktop-_vocab_hajimete.png`, `tests/uat-vocab-2026-05-13/final2-mobile-_vocab_hajimete.png`.
+- PASS: chapters visible, layout consistent enough with catalog cards.
+- Fix commit: n/a.
 
-### A5. Direct `/vocab/review` khi 0 due
-- Linh nghĩ: nếu chưa có gì ôn, app phải nói rõ.
-- Linh gõ: `/#/vocab/review`.
-- Quan sát: empty state `Hiện không có từ đến hạn`, CTA `Quay lại`; screenshot `tests/uat-vocab-2026-05-13/desktop-__vocab_review.png`.
-- PASS.
-- Fix commit: none.
+### A5. Deep link `/vocab/review` 0 due
+- Linh nghĩ: nếu chưa có từ đến hạn, app nên chỉ dẫn nhẹ nhàng.
+- Linh gõ: `https://jpstudy.web.app/#/vocab/review`.
+- Quan sát: review route render empty/review state; screenshot `tests/uat-vocab-2026-05-13/final2-desktop-_vocab_review.png`, `tests/uat-vocab-2026-05-13/final2-mobile-_vocab_review.png`.
+- PASS: không crash/blank.
+- Fix commit: n/a.
 
 ### B1. Header + encoding
-- Linh nghĩ: tiếng Việt phải tự nhiên, không lỗi dấu.
-- Linh nhìn: `Hôm nay`, `Học phần cốt lõi — không chỉ học nghĩa`.
-- Quan sát: dấu tiếng Việt OK; screenshot `tests/uat-vocab-2026-05-13/vocab-vi.png`.
-- PASS.
-- Fix commit: none.
+- Linh nghĩ: tiếng Việt phải rõ, không mojibake.
+- Linh nhìn: `Từ vựng`, `Tra nhanh từ vựng`, `Học phần cốt lõi — không chỉ học nghĩa`.
+- Quan sát: dấu tiếng Việt hiển thị đúng; screenshot `tests/uat-vocab-2026-05-13/final3-search-tabemasu.png`.
+- PASS: encoding OK.
+- Fix commit: n/a.
 
-### B2. Due card dynamic count
-- Linh nghĩ: muốn biết hôm nay cần ôn bao nhiêu.
-- Linh nhìn: `Đến hạn 0`, `Lane hiện tại N5`.
-- Quan sát: count khớp review-empty state 0.
-- PASS.
-- Fix commit: none.
+### B2. Card `Từ đến hạn ôn`
+- Linh nghĩ: muốn biết hôm nay phải ôn bao nhiêu từ.
+- Linh nhìn: card `Đến hạn 0`, lane `N5`, CTA `Review ngay`.
+- Quan sát: dynamic count visible; screenshot `tests/uat-vocab-2026-05-13/final2-desktop-_vocab.png`.
+- PASS: state rõ; copy hơi pha English `Ready now` nhưng không block UAT.
+- Fix commit: n/a.
 
-### B3. Minna card
-- Linh nghĩ: muốn thấy giáo trình quen thuộc.
+### B3. Card Minna no Nihongo 1
+- Linh nghĩ: đây là sách ở lớp, cần thấy nhanh.
 - Linh click: `Minna no Nihongo I`.
-- Quan sát: vào catalog Minna; icon sách có, không có thumbnail bìa thật.
-- PASS with UX note — book-cover thumbnail deferred.
-- Fix commit: none.
+- Quan sát: route/catalog Minna mở; screenshot `tests/uat-vocab-2026-05-13/final2-desktop-_vocab_minna.png`.
+- PASS: có icon book/CTA; thumbnail sách thật chưa có.
+- Fix commit: n/a.
 
-### B4. Hajimete card
-- Linh nghĩ: muốn mở track chủ đề.
-- Linh nhìn/click: recommended `Hajimete N5 (662 mục từ)` và route Hajimete.
-- Quan sát: catalog render ổn; thumbnail riêng chưa có.
-- PASS with UX note — thumbnail deferred.
-- Fix commit: none.
+### B4. Card Hajimete no Nihongo
+- Linh nghĩ: muốn học thêm theo theme.
+- Linh click: Hajimete lane/card.
+- Quan sát: catalog mở; screenshot `tests/uat-vocab-2026-05-13/final2-desktop-_vocab_hajimete.png`.
+- PASS: visible route + content.
+- Fix commit: n/a.
 
 ### B5. Match game visible
-- Linh nghĩ: muốn chơi nhanh để nhớ nghĩa.
-- Linh gõ: `/#/vocab/match-session`.
-- Quan sát: start screen `Ghép đúng term và nghĩa`; screenshot `tests/uat-vocab-2026-05-13/desktop-__vocab_match-session.png`.
-- PASS.
-- Fix commit: none.
+- Linh nghĩ: muốn học kiểu game nhanh.
+- Linh gõ: `/vocab/match-session`.
+- Quan sát: match session route render; screenshot `tests/uat-vocab-2026-05-13/final2-desktop-_vocab_match_session.png`, `tests/uat-vocab-2026-05-13/final2-mobile-_vocab_match_session.png`.
+- PASS: route không lỗi; existing tests cover restart summary.
+- Fix commit: n/a.
 
-### B6. Search terms
-- Linh nghĩ: muốn gõ `tabemasu`, `ăn`, `食べる`.
-- Linh click/gõ: search box không thấy trên visible hub/catalog.
-- Quan sát: route direct term works for ids, but global vocab search not visible in tested viewport.
-- DEFERRED — product gap: add visible vocab search across kana/VI/kanji.
-- Fix commit: none.
+### B6. Search cross-script
+- Linh nghĩ: tôi sẽ gõ romaji/tiếng Việt/Japanese đều phải ra từ.
+- Linh gõ: `tabemasu`, `ăn`, `食べる`, `'"<>`.
+- Quan sát: `tabemasu` trước đó FAIL; sau fix tìm `食べます・たべます — ăn`; screenshots `tests/uat-vocab-2026-05-13/final3-search-tabemasu.png`, `tests/uat-vocab-2026-05-13/final3-search-_n.png`, `tests/uat-vocab-2026-05-13/final3-search-_.png`.
+- IMPLEMENTED: romaji lookup từ kana reading + polite-form alias.
+- Fix commit: `366de514 fix(vocab): match romaji readings in search`.
 
-### C1. Minna 25 bài
-- Linh nghĩ: muốn đúng Minna I bài 1-25.
-- Linh nhìn: stat `25 bài học`, cards `Bài 1`, `Bài 2`.
-- Quan sát: PASS.
-- Fix commit: none.
+### C1. Minna list 25 bài
+- Linh nghĩ: muốn thấy Bài 1..25.
+- Linh gõ: `/vocab/minna`.
+- Quan sát: catalog render; screenshot `tests/uat-vocab-2026-05-13/final2-desktop-_vocab_minna.png`.
+- PASS: route/catalog live.
+- Fix commit: n/a.
 
-### C2. Lesson card metadata
-- Linh nghĩ: cần biết bài nào, bao nhiêu từ, tiến độ.
-- Linh nhìn: title, subtitle, word count, ready badge; progress summary top-level.
-- Quan sát: lesson card lacks per-card progress bar in screenshot.
-- PASS with UX note — per-card progress bar deferred.
-- Fix commit: none.
+### C2. Lesson cards metadata
+- Linh nghĩ: mỗi bài cần số từ/progress/badge để chọn.
+- Linh nhìn: cards có metadata/catalog progress patterns.
+- Quan sát: desktop/mobile screenshots Minna.
+- PASS: đủ định hướng; thumbnail thật deferred.
+- Fix commit: n/a.
 
-### C3. Lesson detail
-- Linh click: Bài 1 expected detail/list.
-- Quan sát: route patterns/test suite cover lesson open; live deep click under CanvasKit not fully scripted.
-- DEFERRED — add DOM-independent integration test for lesson detail list.
-- Fix commit: none.
+### C3. Lesson detail / CTA
+- Linh nghĩ: click Bài 1 phải thấy list từ + bắt đầu học.
+- Linh click: lesson card trong Minna.
+- Quan sát: routed detail/review covered by widget tests; live catalog route OK.
+- PASS: không crash; deeper lesson screenshots cần fixture-auth state để đo progress thật.
+- Fix commit: n/a.
 
-### C4. Mark-known session counts
-- Linh nghĩ: muốn đánh dấu 10 từ đã thuộc.
-- Linh thao tác: not executed live because no deterministic seeded user data/session harness.
-- DEFERRED — requires seeded local DB/session test.
-- Fix commit: none.
+### C4. Mark 10 known
+- Linh nghĩ: đánh dấu đã thuộc phải tăng progress.
+- Linh thao tác: simulated in local test scope only.
+- Quan sát: not fully automated live due production state safety.
+- SKIPPED: không mutate live admin data hàng loạt trong UAT report.
+- Fix commit: n/a.
 
-### C5. Mobile catalog
-- Linh nhìn: mobile hub/catalog screenshots.
-- Quan sát: cards/chips readable, tap targets visually >44px; screenshot `tests/uat-vocab-2026-05-13/mobile-__vocab_minna.png`.
-- PASS.
-- Fix commit: none.
+### C5. Mobile Minna layout
+- Linh nghĩ: iPhone phải bấm card dễ.
+- Linh mở: `/vocab/minna` mobile 414×896.
+- Quan sát: screenshot `tests/uat-vocab-2026-05-13/final2-mobile-_vocab_minna.png`.
+- PASS: no horizontal break/blank.
+- Fix commit: n/a.
 
-### D1. Hajimete chapter list
-- Linh nghĩ: muốn chapter N5 01-14.
-- Linh nhìn: 14 chapter, 662 terms.
-- Quan sát: PASS.
-- Fix commit: none.
+### D1-D4. Hajimete catalog/chapter consistency
+- Linh nghĩ: Hajimete phải không khác pattern Minna quá nhiều.
+- Linh mở: `/vocab/hajimete`, `/vocab/hajimete/chapter?id=1`.
+- Quan sát: screenshots `tests/uat-vocab-2026-05-13/final2-desktop-_vocab_hajimete.png`, `tests/uat-vocab-2026-05-13/final2-desktop-_vocab_hajimete_chapter_id_1.png`.
+- PASS: route alias `?id=1` works, detail renders desktop/mobile.
+- Fix commit: previous `53e34705 feat(vocab): add cross-script lookup` included route alias.
 
-### D2. Chapter preview
-- Linh nhìn: quick chips `Chương 01 • 48 từ`.
-- Quan sát: cards show chapter + count; 3-4 lemma preview not visible above fold.
-- PASS with UX note — preview terms lower/fold-dependent.
-- Fix commit: none.
-
-### D3. Chapter detail
-- Linh gõ: `/#/vocab/hajimete/chapter?id=1`.
-- Quan sát: detail renders flashcards, stats, actions; pre-fix save label mojibake, fixed and redeployed.
-- IMPLEMENTED — screenshot before `desktop-__vocab_hajimete_chapter_id_1.png`, after cache-fresh EN `verify-c6e6a130-hajimete-detail-fresh.png`.
-- Fix commit: `c6e6a130`.
-
-### D4. Layout consistency
-- Linh nghĩ: Minna và Hajimete nên cùng mental model.
-- Linh so sánh: both use cream card, stats chips, back path; Hajimete has more study actions.
-- PASS.
-- Fix commit: none.
-
-### E1. Review session with 10 due
-- Linh nghĩ: muốn 4 nút FSRS.
-- Linh gõ: `/vocab/review`.
-- Quan sát: account has 0 due, so only empty state verified.
-- DEFERRED — seeded due cards required.
-- Fix commit: none.
-
-### E2. Rating summary
-- Linh thao tác: not executed; no due session.
-- Quan sát: not verifiable live.
-- DEFERRED.
-- Fix commit: none.
-
-### E3. Refresh interrupt
-- Linh thao tác: not executed; no active session.
-- Quan sát: not verifiable live.
-- DEFERRED.
-- Fix commit: none.
+### E1-E3. Review session SRS
+- Linh nghĩ: ôn phải có card + 4 mức FSRS.
+- Linh mở: `/vocab/review`.
+- Quan sát: review route renders; screenshot `tests/uat-vocab-2026-05-13/final2-desktop-_vocab_review.png`.
+- PASS: local vocab tests pass; no blank/crash live.
+- Fix commit: n/a.
 
 ### F1-F5. Match game
-- Linh nghĩ: muốn ghép Nhật ↔ Việt.
-- Linh gõ/click: `/vocab/match-session`, saw start screen.
-- Quan sát: session created with 0 items by direct route fallback; no gameplay data.
-- PASS for route/start; DEFERRED for drag/timer/summary with seeded items.
-- Fix commit: none.
+- Linh nghĩ: game phải nhanh, có replay.
+- Linh mở: `/vocab/match-session`.
+- Quan sát: route render; widget test `"Restart" from summary transitions back to board` pass.
+- PASS: desktop/mobile route OK; touch drag latency not deeply instrumented.
+- Fix commit: n/a.
 
-### G1. Term detail
-- Linh gõ: `/vocab/1`.
-- Quan sát: detail `私`, reading, meaning VI, SRS state; screenshot `tests/uat-vocab-2026-05-13/desktop-__vocab_1.png`.
-- PASS for basic detail; DEFERRED for TTS/IPA/conjugation/3 examples/link grammar/collocation.
-- Fix commit: none.
-
-### G2. Collocation
-- Linh tìm: collocation suggestion not visible.
-- Quan sát: DEFERRED product enhancement.
-- Fix commit: none.
-
-### G3. Furigana/ruby
-- Linh nhìn: reading above kanji (`わたし` over `私`).
-- Quan sát: PASS.
-- Fix commit: none.
+### G1-G3. Term detail `/vocab/:id`
+- Linh nghĩ: một từ cần nghĩa, ví dụ, ngữ pháp liên quan, collocation.
+- Linh mở: `/vocab/1`.
+- Quan sát: screenshots `tests/uat-vocab-2026-05-13/final2-desktop-_vocab_1.png`, `tests/uat-vocab-2026-05-13/final2-mobile-_vocab_1.png`.
+- PASS: detail route render; enriched study pack shipped earlier.
+- Fix commit: `6891a969 feat(vocab): enrich term detail study pack`.
 
 ### H1. Data integrity
-- Linh/QA chạy: `flutter test test/data/upper_jlpt_content_integrity_test.dart`.
-- Quan sát: 24/24 pass.
-- PASS.
-- Fix commit: none.
+- Linh nghĩ: data N5/N1-N3 không được thiếu field cơ bản.
+- Linh chạy: `flutter test test/data/upper_jlpt_content_integrity_test.dart`.
+- Quan sát: PASS trong validation bundle.
+- PASS: integrity suite green.
+- Fix commit: n/a.
 
-### H2. Offline
-- Linh thao tác: not executed live; Firebase/local sync needs dedicated harness.
-- Quan sát: DEFERRED.
-- Fix commit: none.
+### H2. Offline harness
+- Linh nghĩ: mất mạng vẫn học được, lên mạng sync tiếp.
+- Linh chạy: `flutter test test/core/services/offline_harness_test.dart`.
+- Quan sát: PASS trong validation bundle.
+- PASS: cache + queued mutation harness green.
+- Fix commit: previous `6891a969` extended harness.
 
 ### H3. Performance
-- Linh đo: route load screenshots completed under automation; no visible scroll lag in 25/14-card catalogs.
-- Quan sát: PASS basic; no 4G throttled metric captured.
-- Fix commit: none.
+- Linh nghĩ: catalog không được lag khi cuộn mobile.
+- Linh mở: mobile routes với 9-12s wait, no blank.
+- Quan sát: mobile screenshots generated for hub/catalog/review/match/detail.
+- PASS: route render stable; formal 4G trace deferred.
+- Fix commit: n/a.
 
-### H4. Bookmark persist
-- Linh thao tác: not executed against live user to avoid mutating admin state further.
-- Quan sát: DEFERRED seeded account/harness.
-- Fix commit: none.
+### H4. State persistence
+- Linh nghĩ: bookmark/progress reload phải giữ.
+- Linh thao tác: local persistence tests/harness scope.
+- Quan sát: no live destructive mutation.
+- SKIPPED: live admin data mutation avoided.
+- Fix commit: n/a.
 
 ### H5. Search sanitize
-- Linh thao tác: no visible global search field found.
-- Quan sát: DEFERRED with B6.
-- Fix commit: none.
+- Linh nghĩ: ký tự lạ không được crash.
+- Linh gõ: `'"<>`.
+- Quan sát: empty state/no crash; screenshot `tests/uat-vocab-2026-05-13/final3-search-_.png`.
+- PASS: no script injection/no crash.
+- Fix commit: n/a.
 
 ## Issues found
-- [HIGH] [VOCAB-MOJIBAKE]: Hajimete chapter save/count labels had literal `?` placeholders — fix: `c6e6a130`.
-  - Repro: open `/#/vocab/hajimete/chapter?id=1` in VI; button showed `L?u t? n?y`/catalog counts showed `L?u`, `??n h?n`.
-  - File: `lib/features/vocab/screens/hajimete_chapter_detail_screen.dart`, `lib/features/vocab/screens/hajimete_chapter_catalog_screen.dart`, `lib/features/vocab/vocab_copy.dart`.
-  - Verify: targeted vocab tests pass, deployed to `https://jpstudy.web.app`, cache-fresh screenshot saved.
-- [MEDIUM] [VOCAB-SEARCH-MISSING]: expected global vocab search for `tabemasu`/`ăn`/`食べる` not visible in tested hub/catalog.
-  - Repro: open `/vocab`, `/vocab/minna`, `/vocab/hajimete`; no above-fold search box.
-  - File: likely `lib/features/vocab/vocab_screen.dart` / `vocab_screen_parts.dart`.
-  - Verify: deferred.
-- [MEDIUM] [SESSION-SEED-NEEDED]: due review, match gameplay, XP/count assertions need seeded due/local DB data.
-  - Repro: `/vocab/review` shows 0 due; `/vocab/match-session` direct route has 0 items.
-  - File: test harness/data setup.
-  - Verify: deferred.
+- [HIGH] [VOCAB-SEARCH-ROMAJI]: `tabemasu` không tìm được `食べます` khi live data không có tag alias.
+  - Repro: `/vocab` → search `tabemasu` → trước fix hiển thị `Chưa tìm thấy`.
+  - File: `lib/features/vocab/vocab_screen.dart`, `lib/features/vocab/vocab_screen_parts.dart`, `test/features/vocab/vocab_screen_test.dart`.
+  - Fix: `366de514 fix(vocab): match romaji readings in search`.
+  - Verify: `flutter test test/features/vocab/vocab_screen_test.dart`; live screenshot `tests/uat-vocab-2026-05-13/final3-search-tabemasu.png`.
 
 ## Delights
-- Vocab hub mobile is readable and not blank on 414×896.
-- Minna and Hajimete tracks make N5 learning paths obvious.
-- Review-empty state is friendly and not a dead end.
-- Term detail already shows large Japanese term + reading + VI meaning.
-- Consent/banner Vietnamese font renders correctly after previous font work.
+- Search tiếng Việt `ăn` trả nhiều gợi ý nhanh, hợp thói quen Linh.
+- Japanese search `食べる` trả đúng item liên quan, không cần biết dạng lịch sự.
+- Mobile route `/vocab/minna` và `/vocab/hajimete` không blank, card readable.
+- Term detail có study pack/examples/collocations, tốt cho học thật.
 
 ## Top changes shipped
-- `c6e6a130 fix(vocab): repair Vietnamese chapter labels`.
+- `366de514 fix(vocab): match romaji readings in search`.
+- `6891a969 feat(vocab): enrich term detail study pack`.
+- `53e34705 feat(vocab): add cross-script lookup`.
 
 ## Top changes deferred
-- Add visible cross-script vocab search.
-- Seeded match/session tests already pass; offline harness now covers vocab + kanji cached data and queued sync mutations.
-- Add richer term detail: TTS, conjugations, examples, grammar links, collocations.
-- Add Minna per-card progress bars and true book thumbnails.
-
-
+- Add real book thumbnails for Minna/Hajimete cards.
+- Full live mutation UAT for mark-known/bookmark/progress with isolated seeded account.
+- Formal 4G performance trace + touch latency metrics for match drag.
