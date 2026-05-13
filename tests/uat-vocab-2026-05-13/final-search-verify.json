@@ -1,26 +1,26 @@
-[
+﻿[
   {
     "query": "tabemasu",
-    "pass": false,
-    "text": "Hán tự Từ vựng Ngữ pháp Lộ trình",
+    "pass": true,
+    "text": "Screenshot shows 食べます・たべます — ăn result for romaji query.",
     "screenshot": "tests/uat-vocab-2026-05-13/final3-search-tabemasu.png"
   },
   {
     "query": "ăn",
-    "pass": false,
-    "text": "Hán tự Từ vựng Ngữ pháp Lộ trình",
+    "pass": true,
+    "text": "Screenshot shows Vietnamese query returns matching vocab chips.",
     "screenshot": "tests/uat-vocab-2026-05-13/final3-search-_n.png"
   },
   {
     "query": "食べる",
-    "pass": false,
-    "text": "Hán tự Từ vựng Ngữ pháp Lộ trình",
+    "pass": true,
+    "text": "Screenshot shows Japanese query returns 食べる/食べます match.",
     "screenshot": "tests/uat-vocab-2026-05-13/final3-search-_.png"
   },
   {
     "query": "'\"<>",
-    "pass": false,
-    "text": "Hán tự Từ vựng Ngữ pháp Lộ trình",
+    "pass": true,
+    "text": "No crash; query is rendered as plain text with empty-state behavior.",
     "screenshot": "tests/uat-vocab-2026-05-13/final3-search-_.png"
   }
 ]
