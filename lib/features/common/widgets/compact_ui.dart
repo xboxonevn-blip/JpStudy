@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jpstudy/app/layout/app_adaptive_layout.dart';
 import 'package:jpstudy/app/layout/app_responsive_frame.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
@@ -66,30 +67,118 @@ class AppSectionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final palette = context.appPalette;
-    return Container(
-      padding: padding,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [palette.elevated, palette.base],
-        ),
-        borderRadius: BorderRadius.circular(28),
-        border: Border.all(color: palette.outline.withValues(alpha: 0.95)),
-        boxShadow: [
-          BoxShadow(
-            color: palette.primary.withValues(alpha: 0.08),
-            blurRadius: 28,
-            offset: const Offset(0, 14),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth.isFinite
+            ? constraints.maxWidth
+            : MediaQuery.sizeOf(context).width;
+        final resolvedPadding = padding == const EdgeInsets.all(AppSpacing.xl)
+            ? AppFluidMetrics.sectionPaddingFor(width)
+            : padding;
+        return Container(
+          padding: resolvedPadding,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [palette.elevated, palette.base],
+            ),
+            borderRadius: BorderRadius.circular(28),
+            border: Border.all(color: palette.outline.withValues(alpha: 0.95)),
+            boxShadow: [
+              BoxShadow(
+                color: palette.primary.withValues(alpha: 0.08),
+                blurRadius: 28,
+                offset: const Offset(0, 14),
+              ),
+              BoxShadow(
+                color: palette.ink.withValues(alpha: 0.04),
+                blurRadius: 10,
+                offset: const Offset(0, 2),
+              ),
+            ],
           ),
-          BoxShadow(
-            color: palette.ink.withValues(alpha: 0.04),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: child,
+          child: child,
+        );
+      },
+    );
+  }
+}
+
+class AppFluidGrid extends StatelessWidget {
+  const AppFluidGrid({
+    super.key,
+    required this.children,
+    this.minItemWidth,
+    this.maxColumns = 4,
+    this.spacing,
+  });
+
+  final List<Widget> children;
+  final double? minItemWidth;
+  final int maxColumns;
+  final double? spacing;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppAdaptiveGrid(
+      minItemWidth: minItemWidth,
+      maxColumns: maxColumns,
+      spacing: spacing,
+      children: children,
+    );
+  }
+}
+
+class AppFluidTwoPane extends StatelessWidget {
+  const AppFluidTwoPane({
+    super.key,
+    required this.primary,
+    required this.secondary,
+    this.primaryFlex = 2,
+    this.secondaryFlex = 1,
+  });
+
+  final Widget primary;
+  final Widget secondary;
+  final int primaryFlex;
+  final int secondaryFlex;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppAdaptiveTwoPane(
+      primary: primary,
+      secondary: secondary,
+      primaryFlex: primaryFlex,
+      secondaryFlex: secondaryFlex,
+    );
+  }
+}
+
+class AppResponsiveSection extends StatelessWidget {
+  const AppResponsiveSection({super.key, required this.children, this.spacing});
+
+  final List<Widget> children;
+  final double? spacing;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth.isFinite
+            ? constraints.maxWidth
+            : MediaQuery.sizeOf(context).width;
+        final gap = spacing ?? AppFluidMetrics.gapFor(width);
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            for (var index = 0; index < children.length; index++) ...[
+              children[index],
+              if (index != children.length - 1) SizedBox(height: gap),
+            ],
+          ],
+        );
+      },
     );
   }
 }

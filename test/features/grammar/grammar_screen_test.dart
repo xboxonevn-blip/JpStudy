@@ -278,4 +278,36 @@ void main() {
 
     expect(find.text('文法'), findsWidgets);
   });
+
+  testWidgets('grammar hub adapts across viewport matrix', (tester) async {
+    const viewports = [
+      Size(360, 800),
+      Size(414, 896),
+      Size(768, 1024),
+      Size(1366, 768),
+      Size(1920, 1080),
+    ];
+
+    for (final viewport in viewports) {
+      tester.view.physicalSize = viewport;
+      tester.view.devicePixelRatio = 1;
+      await tester.pumpWidget(
+        _buildScreen(
+          language: AppLanguage.vi,
+          points: [_stubPoint, _topicPoint, _learnedPoint],
+        ),
+      );
+      await _pump(tester);
+
+      expect(find.text('Ngữ pháp'), findsWidgets);
+      expect(
+        find.byKey(const ValueKey('grammar_search_field')),
+        findsOneWidget,
+      );
+      expect(tester.takeException(), isNull);
+    }
+
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+  });
 }
