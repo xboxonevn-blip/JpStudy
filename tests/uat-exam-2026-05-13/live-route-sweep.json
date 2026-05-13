@@ -1,0 +1,162 @@
+[
+  {
+    "viewport": "desktop",
+    "route": "exam-center",
+    "status": "PASS",
+    "screenshot": "C:\\Users\\xboxo\\Documents\\GitHub\\JpStudy-v2\\tests\\uat-exam-2026-05-13\\desktop-exam-center.png",
+    "observation": "url=https://jpstudy.web.app/#/exam-center?uat=1778679840532; t=9052ms; canvas=1; textLen=32; title=JpStudy; errors=1",
+    "errors": [
+      "Error"
+    ]
+  },
+  {
+    "viewport": "desktop",
+    "route": "exam",
+    "status": "PASS",
+    "screenshot": "C:\\Users\\xboxo\\Documents\\GitHub\\JpStudy-v2\\tests\\uat-exam-2026-05-13\\desktop-exam.png",
+    "observation": "url=https://jpstudy.web.app/#/exam?uat=1778679849584; t=8320ms; canvas=1; textLen=32; title=JpStudy; errors=1",
+    "errors": [
+      "Error"
+    ]
+  },
+  {
+    "viewport": "desktop",
+    "route": "coach",
+    "status": "PASS",
+    "screenshot": "C:\\Users\\xboxo\\Documents\\GitHub\\JpStudy-v2\\tests\\uat-exam-2026-05-13\\desktop-coach.png",
+    "observation": "url=https://jpstudy.web.app/#/jlpt/coach?uat=1778679857904; t=8368ms; canvas=1; textLen=32; title=JpStudy; errors=1",
+    "errors": [
+      "Error"
+    ]
+  },
+  {
+    "viewport": "desktop",
+    "route": "reading",
+    "status": "PASS",
+    "screenshot": "C:\\Users\\xboxo\\Documents\\GitHub\\JpStudy-v2\\tests\\uat-exam-2026-05-13\\desktop-reading.png",
+    "observation": "url=https://jpstudy.web.app/#/jlpt/reading?uat=1778679866273; t=8337ms; canvas=1; textLen=32; title=JpStudy; errors=1",
+    "errors": [
+      "Error"
+    ]
+  },
+  {
+    "viewport": "desktop",
+    "route": "mock-pro",
+    "status": "PASS",
+    "screenshot": "C:\\Users\\xboxo\\Documents\\GitHub\\JpStudy-v2\\tests\\uat-exam-2026-05-13\\desktop-mock-pro.png",
+    "observation": "url=https://jpstudy.web.app/#/jlpt/mock-pro?uat=1778679874611; t=8324ms; canvas=1; textLen=32; title=JpStudy; errors=1",
+    "errors": [
+      "Error"
+    ]
+  },
+  {
+    "viewport": "desktop",
+    "route": "practice-mock",
+    "status": "PASS",
+    "screenshot": "C:\\Users\\xboxo\\Documents\\GitHub\\JpStudy-v2\\tests\\uat-exam-2026-05-13\\desktop-practice-mock.png",
+    "observation": "url=https://jpstudy.web.app/#/practice/mock-exam?uat=1778679882935; t=8358ms; canvas=1; textLen=32; title=JpStudy; errors=1",
+    "errors": [
+      "Error"
+    ]
+  },
+  {
+    "viewport": "desktop",
+    "route": "lesson-test-enhanced",
+    "status": "PASS",
+    "screenshot": "C:\\Users\\xboxo\\Documents\\GitHub\\JpStudy-v2\\tests\\uat-exam-2026-05-13\\desktop-lesson-test-enhanced.png",
+    "observation": "url=https://jpstudy.web.app/#/lesson/test/enhanced?uat=1778679891294; t=8217ms; canvas=1; textLen=32; title=JpStudy; errors=1",
+    "errors": [
+      "Error"
+    ]
+  },
+  {
+    "viewport": "desktop",
+    "route": "test-history",
+    "status": "PASS",
+    "screenshot": "C:\\Users\\xboxo\\Documents\\GitHub\\JpStudy-v2\\tests\\uat-exam-2026-05-13\\desktop-test-history.png",
+    "observation": "url=https://jpstudy.web.app/#/lesson/test/history?uat=1778679899511; t=8214ms; canvas=1; textLen=32; title=JpStudy; errors=1",
+    "errors": [
+      "Error"
+    ]
+  },
+  {
+    "viewport": "mobile",
+    "route": "exam-center",
+    "status": "PASS",
+    "screenshot": "C:\\Users\\xboxo\\Documents\\GitHub\\JpStudy-v2\\tests\\uat-exam-2026-05-13\\mobile-exam-center.png",
+    "observation": "url=https://jpstudy.web.app/#/exam-center?uat=1778679907834; t=11057ms; canvas=1; textLen=32; title=JpStudy; errors=1",
+    "errors": [
+      "Error"
+    ]
+  },
+  {
+    "viewport": "mobile",
+    "route": "exam",
+    "status": "PASS",
+    "screenshot": "C:\\Users\\xboxo\\Documents\\GitHub\\JpStudy-v2\\tests\\uat-exam-2026-05-13\\mobile-exam.png",
+    "observation": "url=https://jpstudy.web.app/#/exam?uat=1778679918892; t=8259ms; canvas=1; textLen=32; title=JpStudy; errors=1",
+    "errors": [
+      "Error"
+    ]
+  },
+  {
+    "viewport": "mobile",
+    "route": "coach",
+    "status": "PASS",
+    "screenshot": "C:\\Users\\xboxo\\Documents\\GitHub\\JpStudy-v2\\tests\\uat-exam-2026-05-13\\mobile-coach.png",
+    "observation": "url=https://jpstudy.web.app/#/jlpt/coach?uat=1778679927152; t=8278ms; canvas=1; textLen=32; title=JpStudy; errors=1",
+    "errors": [
+      "Error"
+    ]
+  },
+  {
+    "viewport": "mobile",
+    "route": "reading",
+    "status": "PASS",
+    "screenshot": "C:\\Users\\xboxo\\Documents\\GitHub\\JpStudy-v2\\tests\\uat-exam-2026-05-13\\mobile-reading.png",
+    "observation": "url=https://jpstudy.web.app/#/jlpt/reading?uat=1778679935430; t=8448ms; canvas=1; textLen=32; title=JpStudy; errors=1",
+    "errors": [
+      "Error"
+    ]
+  },
+  {
+    "viewport": "mobile",
+    "route": "mock-pro",
+    "status": "PASS",
+    "screenshot": "C:\\Users\\xboxo\\Documents\\GitHub\\JpStudy-v2\\tests\\uat-exam-2026-05-13\\mobile-mock-pro.png",
+    "observation": "url=https://jpstudy.web.app/#/jlpt/mock-pro?uat=1778679943878; t=8251ms; canvas=1; textLen=32; title=JpStudy; errors=1",
+    "errors": [
+      "Error"
+    ]
+  },
+  {
+    "viewport": "mobile",
+    "route": "practice-mock",
+    "status": "PASS",
+    "screenshot": "C:\\Users\\xboxo\\Documents\\GitHub\\JpStudy-v2\\tests\\uat-exam-2026-05-13\\mobile-practice-mock.png",
+    "observation": "url=https://jpstudy.web.app/#/practice/mock-exam?uat=1778679952129; t=8256ms; canvas=1; textLen=32; title=JpStudy; errors=1",
+    "errors": [
+      "Error"
+    ]
+  },
+  {
+    "viewport": "mobile",
+    "route": "lesson-test-enhanced",
+    "status": "PASS",
+    "screenshot": "C:\\Users\\xboxo\\Documents\\GitHub\\JpStudy-v2\\tests\\uat-exam-2026-05-13\\mobile-lesson-test-enhanced.png",
+    "observation": "url=https://jpstudy.web.app/#/lesson/test/enhanced?uat=1778679960386; t=8199ms; canvas=1; textLen=32; title=JpStudy; errors=1",
+    "errors": [
+      "Error"
+    ]
+  },
+  {
+    "viewport": "mobile",
+    "route": "test-history",
+    "status": "PASS",
+    "screenshot": "C:\\Users\\xboxo\\Documents\\GitHub\\JpStudy-v2\\tests\\uat-exam-2026-05-13\\mobile-test-history.png",
+    "observation": "url=https://jpstudy.web.app/#/lesson/test/history?uat=1778679968585; t=8198ms; canvas=1; textLen=32; title=JpStudy; errors=1",
+    "errors": [
+      "Error"
+    ]
+  }
+]
