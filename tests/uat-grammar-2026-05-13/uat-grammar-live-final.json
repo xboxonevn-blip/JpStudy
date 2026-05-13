@@ -1,0 +1,74 @@
+[
+  {
+    "viewport": "desktop",
+    "route": "/#/grammar",
+    "ms": 13288,
+    "pass": true,
+    "screenshot": "tests/uat-grammar-2026-05-13/final-desktop-_grammar.png",
+    "errors": []
+  },
+  {
+    "viewport": "desktop",
+    "route": "/#/grammar/1",
+    "ms": 10942,
+    "pass": true,
+    "screenshot": "tests/uat-grammar-2026-05-13/final-desktop-_grammar_1.png",
+    "errors": []
+  },
+  {
+    "viewport": "desktop",
+    "route": "/#/grammar-practice",
+    "ms": 10916,
+    "pass": true,
+    "screenshot": "tests/uat-grammar-2026-05-13/final-desktop-_grammar_practice.png",
+    "errors": []
+  },
+  {
+    "viewport": "mobile",
+    "route": "/#/grammar",
+    "ms": 11298,
+    "pass": true,
+    "screenshot": "tests/uat-grammar-2026-05-13/final-mobile-_grammar.png",
+    "errors": []
+  },
+  {
+    "viewport": "mobile",
+    "route": "/#/grammar/1",
+    "ms": 10896,
+    "pass": true,
+    "screenshot": "tests/uat-grammar-2026-05-13/final-mobile-_grammar_1.png",
+    "errors": []
+  },
+  {
+    "viewport": "mobile",
+    "route": "/#/grammar-practice",
+    "ms": 10950,
+    "pass": true,
+    "screenshot": "tests/uat-grammar-2026-05-13/final-mobile-_grammar_practice.png",
+    "errors": []
+  },
+  {
+    "viewport": "desktop",
+    "route": "search:wa",
+    "pass": true,
+    "screenshot": "tests/uat-grammar-2026-05-13/final-search-wa.png"
+  },
+  {
+    "viewport": "desktop",
+    "route": "search:topic marker",
+    "pass": true,
+    "screenshot": "tests/uat-grammar-2026-05-13/final-search-topic_marker.png"
+  },
+  {
+    "viewport": "desktop",
+    "route": "search:は",
+    "pass": true,
+    "screenshot": "tests/uat-grammar-2026-05-13/final-search-_.png"
+  },
+  {
+    "viewport": "desktop",
+    "route": "search:xyz",
+    "pass": true,
+    "screenshot": "tests/uat-grammar-2026-05-13/final-search-xyz.png"
+  }
+]
