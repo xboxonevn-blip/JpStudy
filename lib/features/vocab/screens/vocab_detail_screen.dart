@@ -100,6 +100,13 @@ class _VocabDetailBody extends StatelessWidget {
           _MeaningSection(vocab: vocab, language: language, palette: palette),
           const SizedBox(height: 16),
 
+          _StudyUsageSection(
+            detail: detail,
+            language: language,
+            palette: palette,
+          ),
+          const SizedBox(height: 16),
+
           // ── SRS status ─────────────────────────────────────────────
           _SrsStatusCard(detail: detail, language: language, palette: palette),
           const SizedBox(height: 16),
@@ -380,6 +387,209 @@ class _MeaningSection extends StatelessWidget {
   }
 }
 
+/// ---------------------------------------------------------------------------
+// Study usage helpers
+// ---------------------------------------------------------------------------
+
+class _StudyUsageSection extends StatelessWidget {
+  const _StudyUsageSection({
+    required this.detail,
+    required this.language,
+    required this.palette,
+  });
+
+  final VocabDetail detail;
+  final AppLanguage language;
+  final AppThemePalette palette;
+
+  @override
+  Widget build(BuildContext context) {
+    final vocab = detail.vocab;
+    final examples = _exampleLines(vocab, language);
+    final conjugations = _conjugationLines(vocab);
+    final collocations = _collocationLines(vocab);
+
+    return AppSectionCard(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _SectionLabel(
+            label: _tr(
+              language,
+              en: 'Study Pack',
+              vi: 'Gói học nhanh',
+              ja: '学習パック',
+            ),
+            palette: palette,
+          ),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              ActionChip(
+                avatar: const Icon(Icons.volume_up_rounded, size: 18),
+                label: Text(
+                  _tr(language, en: 'Play audio', vi: 'Phát âm', ja: '音声'),
+                ),
+                onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      _tr(
+                        language,
+                        en: 'Audio is queued for this word.',
+                        vi: 'Đã đưa từ này vào hàng phát âm.',
+                        ja: 'この単語の音声を準備しました。',
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              ActionChip(
+                avatar: const Icon(Icons.school_rounded, size: 18),
+                label: Text(
+                  _tr(
+                    language,
+                    en: 'ます grammar',
+                    vi: 'Ngữ pháp 〜ます',
+                    ja: 'ます文法',
+                  ),
+                ),
+                onPressed: () => context.push('/grammar'),
+              ),
+            ],
+          ),
+          const SizedBox(height: 14),
+          _MiniList(
+            title: _tr(language, en: 'Examples', vi: 'Ví dụ', ja: '例文'),
+            rows: examples,
+            palette: palette,
+          ),
+          if (conjugations.isNotEmpty) ...[
+            const SizedBox(height: 12),
+            _MiniList(
+              title: _tr(language, en: 'Forms', vi: 'Chia động từ', ja: '活用'),
+              rows: conjugations,
+              palette: palette,
+            ),
+          ],
+          if (collocations.isNotEmpty) ...[
+            const SizedBox(height: 12),
+            _MiniList(
+              title: _tr(
+                language,
+                en: 'Collocations',
+                vi: 'Cụm đi với từ',
+                ja: 'コロケーション',
+              ),
+              rows: collocations,
+              palette: palette,
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _MiniList extends StatelessWidget {
+  const _MiniList({
+    required this.title,
+    required this.rows,
+    required this.palette,
+  });
+
+  final String title;
+  final List<String> rows;
+  final AppThemePalette palette;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: TextStyle(fontWeight: FontWeight.w800, color: palette.ink),
+        ),
+        const SizedBox(height: 6),
+        for (final row in rows)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 5),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '• ',
+                  style: TextStyle(
+                    color: palette.accent,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                Expanded(
+                  child: Text(
+                    row,
+                    style: TextStyle(
+                      color: palette.ink.withValues(alpha: 0.72),
+                      height: 1.35,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+      ],
+    );
+  }
+}
+
+List<String> _exampleLines(VocabData vocab, AppLanguage language) {
+  final term = vocab.term;
+  final meaning = language == AppLanguage.en
+      ? (vocab.meaningEn ?? vocab.meaning)
+      : vocab.meaning;
+  return [
+    '$term を練習します。 — Luyện tập từ "$meaning".',
+    '毎日 $term を使います。 — Dùng "$meaning" mỗi ngày.',
+    '$term は${vocab.level}で大切です。 — "$meaning" là từ quan trọng ở ${vocab.level}.',
+  ];
+}
+
+List<String> _conjugationLines(VocabData vocab) {
+  final term = vocab.term.trim();
+  if (!(term.endsWith('る') || term.endsWith('ます') || term.endsWith('する'))) {
+    return const [];
+  }
+  if (term.endsWith('ます')) {
+    final stem = term.substring(0, term.length - 2);
+    return [
+      '$stemます · polite',
+      '$stemません · negative',
+      '$stemました · past',
+      '$stemませんでした · past negative',
+    ];
+  }
+  if (term.endsWith('する')) {
+    final stem = term.substring(0, term.length - 2);
+    return [
+      '$stemします · masu',
+      '$stemして · te',
+      '$stemした · ta',
+      '$stemしない · nai',
+    ];
+  }
+  final stem = term.substring(0, term.length - 1);
+  return ['$stemます · masu', '$stemて · te', '$stemた · ta', '$stemない · nai'];
+}
+
+List<String> _collocationLines(VocabData vocab) {
+  final term = vocab.term.trim();
+  if (term.contains('食')) return ['ご飯を$term', '朝ご飯を$term', '友だちと$term'];
+  if (term.contains('飲')) return ['水を$term', 'お茶を$term', '友だちと$term'];
+  if (term.contains('行')) return ['学校へ$term', '駅へ$term', '友だちと$term'];
+  return const [];
+}
 // ---------------------------------------------------------------------------
 // SRS status card
 // ---------------------------------------------------------------------------

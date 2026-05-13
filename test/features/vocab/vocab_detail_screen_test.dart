@@ -159,6 +159,26 @@ void main() {
     expect(find.text('KANJI_ID=$_kKanjiId'), findsOneWidget);
   });
 
+  testWidgets('renders study pack examples, conjugations, and collocations', (
+    tester,
+  ) async {
+    const detail = VocabDetail(
+      vocab: _stubVocab,
+      kanjiList: [_stubKanji],
+      relatedVocab: [],
+    );
+    await tester.pumpWidget(
+      _buildRouterScreen(detail: detail, language: AppLanguage.vi),
+    );
+    await _pump(tester);
+
+    expect(find.text('Gói học nhanh'), findsOneWidget);
+    expect(find.text('Ví dụ'), findsOneWidget);
+    expect(find.text('Chia động từ'), findsOneWidget);
+    expect(find.text('Cụm đi với từ'), findsOneWidget);
+    expect(find.textContaining('食べます'), findsOneWidget);
+    expect(find.text('ご飯を食べる'), findsOneWidget);
+  });
   testWidgets('VI locale shows Vietnamese app bar title', (tester) async {
     const detail = VocabDetail(
       vocab: _stubVocab,
