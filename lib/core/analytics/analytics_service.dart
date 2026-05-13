@@ -38,6 +38,42 @@ class AnalyticsService {
     return _logEvent('cloud_download');
   }
 
+  Future<void> logSrsReviewCompleted({
+    required String itemType,
+    required int rating,
+    String level = 'unknown',
+    double? intervalDays,
+  }) {
+    final parameters = <String, Object>{
+      'item_type': itemType,
+      'rating': rating,
+      'level': level,
+    };
+    if (intervalDays != null) {
+      parameters['interval_days'] = intervalDays;
+    }
+    return _logEvent('srs_review_completed', parameters);
+  }
+
+  Future<void> logN5MicroQuizCompleted({
+    required int correctCount,
+    required int totalCount,
+  }) {
+    final accuracy = totalCount <= 0 ? 0.0 : correctCount / totalCount;
+    return _logEvent('n5_micro_quiz_completed', {
+      'correct_count': correctCount,
+      'total_count': totalCount,
+      'accuracy': accuracy,
+    });
+  }
+
+  Future<void> logSessionQualityRated({
+    required String mode,
+    required int rating,
+  }) {
+    return _logEvent('session_quality_rated', {'mode': mode, 'rating': rating});
+  }
+
   Future<void> _logEvent(String name, [Map<String, Object>? parameters]) async {
     if (!_enabled) return;
     try {

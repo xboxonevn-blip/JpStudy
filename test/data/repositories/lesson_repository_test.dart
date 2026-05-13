@@ -1,9 +1,27 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:jpstudy/core/analytics/analytics_service.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/db/content_database.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
+
+class _FakeFirebaseAnalytics extends Fake implements FirebaseAnalytics {
+  final events = <String>[];
+  final params = <Map<String, Object>?>[];
+
+  @override
+  Future<void> logEvent({
+    required String name,
+    Map<String, Object>? parameters,
+    List<AnalyticsEventItem>? items,
+    AnalyticsCallOptions? callOptions,
+  }) async {
+    events.add(name);
+    params.add(parameters);
+  }
+}
 
 void main() {
   late AppDatabase db;
@@ -168,4 +186,23 @@ void main() {
       );
     },
   );
+
+  test('saveTermReview logs an SRS review completion event', () async {
+    final fake = _FakeFirebaseAnalytics();
+    final repo = LessonRepository(
+      db,
+      contentDb,
+      analyticsService: AnalyticsService(instance: fake, enabled: true),
+    );
+
+    await repo.saveTermReview(termId: 301, quality: 3);
+
+    expect(fake.events, ['srs_review_completed']);
+    expect(fake.params.single, {
+      'item_type': 'vocab',
+      'rating': 3,
+      'level': 'unknown',
+      'interval_days': isA<double>(),
+    });
+  });
 }

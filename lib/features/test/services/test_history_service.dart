@@ -2,13 +2,16 @@ import 'package:drift/drift.dart';
 
 import '../../../data/db/app_database.dart';
 import '../../../data/daos/test_dao.dart';
+import '../../../core/analytics/analytics_service.dart';
 import '../models/test_session.dart' as domain;
 
 /// Service for tracking test history and analytics
 class TestHistoryService {
   final TestDao _testDao;
+  final AnalyticsService? _analyticsService;
 
-  TestHistoryService(this._testDao);
+  TestHistoryService(this._testDao, {AnalyticsService? analyticsService})
+    : _analyticsService = analyticsService;
 
   /// Save a completed test
   Future<void> saveTest(domain.TestSession session) async {
@@ -43,7 +46,16 @@ class TestHistoryService {
         ),
       );
     }
+
+    if (_isN5Lesson(session.lessonId)) {
+      await _analyticsService?.logN5MicroQuizCompleted(
+        correctCount: session.correctCount,
+        totalCount: session.totalQuestions,
+      );
+    }
   }
+
+  bool _isN5Lesson(int lessonId) => lessonId >= 1 && lessonId <= 25;
 
   /// Get test history for a lesson
   Future<List<TestHistoryRecord>> getHistory(int lessonId) async {

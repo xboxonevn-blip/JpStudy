@@ -3,6 +3,8 @@ import 'package:drift/drift.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:jpstudy/core/analytics/analytics_provider.dart';
+import 'package:jpstudy/core/analytics/analytics_service.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/services/fsrs_service.dart';
 import 'package:jpstudy/core/study_level.dart';
@@ -26,6 +28,7 @@ final lessonRepositoryProvider = Provider<LessonRepository>((ref) {
   return LessonRepository(
     ref.watch(databaseProvider),
     ref.watch(contentDatabaseProvider),
+    analyticsService: ref.watch(analyticsServiceProvider),
   );
 });
 
@@ -490,10 +493,15 @@ final _vocabByLevelSeriesCache = <String, List<VocabItem>>{};
 final _kanjiByLevelCache = <String, List<KanjiItem>>{};
 
 class LessonRepository {
-  LessonRepository(this._db, this._contentDb);
+  LessonRepository(
+    this._db,
+    this._contentDb, {
+    AnalyticsService? analyticsService,
+  }) : _analyticsService = analyticsService;
 
   final AppDatabase _db;
   final ContentDatabase _contentDb;
+  final AnalyticsService? _analyticsService;
   final FsrsService _fsrsService = FsrsService();
   static const int _defaultLessonCount = 25;
   static final _seriesNormalizeRe = RegExp(r'[^a-z0-9]+');
@@ -2778,6 +2786,12 @@ class LessonRepository {
       difficulty: result.difficulty,
       lastConfidence: quality,
       nextReviewAt: result.nextReviewAt,
+    );
+
+    await _analyticsService?.logSrsReviewCompleted(
+      itemType: 'vocab',
+      rating: quality,
+      intervalDays: result.intervalDays,
     );
 
     return result;

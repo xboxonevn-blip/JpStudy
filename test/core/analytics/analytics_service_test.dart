@@ -4,6 +4,7 @@ import 'package:jpstudy/core/analytics/analytics_service.dart';
 
 class _FakeFirebaseAnalytics extends Fake implements FirebaseAnalytics {
   final events = <String>[];
+  final params = <Map<String, Object>?>[];
 
   @override
   Future<void> logEvent({
@@ -13,6 +14,7 @@ class _FakeFirebaseAnalytics extends Fake implements FirebaseAnalytics {
     AnalyticsCallOptions? callOptions,
   }) async {
     events.add(name);
+    params.add(parameters);
   }
 }
 
@@ -31,8 +33,19 @@ void main() {
     await service.logSignIn('google');
     await service.logCloudUpload('auto');
     await service.logCloudDownload();
+    await service.logSrsReviewCompleted(
+      itemType: 'vocab',
+      rating: 3,
+      intervalDays: 2.5,
+    );
+    await service.logN5MicroQuizCompleted(correctCount: 7, totalCount: 10);
+    await service.logSessionQualityRated(mode: 'review', rating: 4);
 
-    expect(fake.events, hasLength(5));
+    expect(fake.events, hasLength(8));
+    expect(fake.events, contains('srs_review_completed'));
+    expect(fake.events, contains('n5_micro_quiz_completed'));
+    expect(fake.events, contains('session_quality_rated'));
+    expect(fake.params.last, {'mode': 'review', 'rating': 4});
   });
 
   test('does not log before consent', () async {

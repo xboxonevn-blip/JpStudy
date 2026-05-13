@@ -14,6 +14,7 @@ import 'package:jpstudy/data/db/database_provider.dart';
 import 'package:jpstudy/features/home/providers/recovery_pack_provider.dart';
 import 'package:jpstudy/features/home/widgets/next_step_suggestions.dart';
 import 'package:jpstudy/features/me/providers/auto_cloud_upload_provider.dart';
+import 'package:jpstudy/shared/widgets/confidence_rating.dart';
 import '../models/achievement.dart';
 import '../models/learn_config.dart';
 import '../models/learn_session.dart';
@@ -40,6 +41,7 @@ class LearnSummaryScreen extends ConsumerStatefulWidget {
 class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
   LearnSession get session => widget.session;
   bool _isPersonalBest = false;
+  int _qualityRating = 0;
 
   @override
   void initState() {
@@ -174,6 +176,10 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
                 _buildPersonalBestBanner(language),
               ],
 
+              const SizedBox(height: 20),
+
+              _buildSessionQualityRating(),
+
               const SizedBox(height: 40),
 
               // Stats grid
@@ -287,6 +293,25 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildSessionQualityRating() {
+    return Semantics(
+      label: 'Session quality',
+      value: _qualityRating == 0 ? 'unrated' : '$_qualityRating of 5',
+      child: StarRating(
+        rating: _qualityRating,
+        size: 32,
+        onRatingChanged: (rating) {
+          setState(() => _qualityRating = rating);
+          unawaited(
+            ref
+                .read(analyticsServiceProvider)
+                .logSessionQualityRated(mode: 'learn', rating: rating),
+          );
+        },
+      ),
     );
   }
 

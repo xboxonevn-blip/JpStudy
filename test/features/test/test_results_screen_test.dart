@@ -1,7 +1,10 @@
 import 'package:drift/native.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:jpstudy/core/analytics/analytics_provider.dart';
+import 'package:jpstudy/core/analytics/analytics_service.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/auth/auth_user.dart';
 import 'package:jpstudy/core/language_provider.dart';
@@ -20,6 +23,7 @@ import 'package:jpstudy/features/me/providers/auto_cloud_upload_provider.dart';
 import 'package:jpstudy/features/test/models/test_session.dart' as test_model;
 import 'package:jpstudy/features/test/screens/test_results_screen.dart';
 import 'package:jpstudy/features/vocab/vocab_ghost_providers.dart';
+import 'package:jpstudy/shared/widgets/confidence_rating.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class _FakeCloudStorageSyncService implements CloudStorageSyncService {
@@ -45,6 +49,22 @@ class _FakeCloudStorageSyncService implements CloudStorageSyncService {
   @override
   Future<CloudStorageDeleteResult> deleteRemoteBackup() async {
     throw UnimplementedError();
+  }
+}
+
+class _FakeFirebaseAnalytics extends Fake implements FirebaseAnalytics {
+  final events = <String>[];
+  final params = <Map<String, Object>?>[];
+
+  @override
+  Future<void> logEvent({
+    required String name,
+    Map<String, Object>? parameters,
+    List<AnalyticsEventItem>? items,
+    AnalyticsCallOptions? callOptions,
+  }) async {
+    events.add(name);
+    params.add(parameters);
   }
 }
 
@@ -127,6 +147,7 @@ AutoCloudUploadCoordinator _autoUpload({
 Widget buildScreen(
   app_db.AppDatabase db, {
   AutoCloudUploadCoordinator? autoUpload,
+  AnalyticsService? analyticsService,
 }) => ProviderScope(
   overrides: [
     appLanguageProvider.overrideWith(
@@ -137,6 +158,8 @@ Widget buildScreen(
       autoUpload ??
           _autoUpload(storage: _FakeCloudStorageSyncService(), user: null),
     ),
+    if (analyticsService != null)
+      analyticsServiceProvider.overrideWithValue(analyticsService),
     recoveryPackProvider.overrideWith((ref) async => null),
     dashboardProvider.overrideWith((ref) => Stream.value(_dashboard)),
     continueActionProvider.overrideWith((ref) async => _continueAction),
@@ -211,5 +234,30 @@ void main() {
     await tester.pump(const Duration(milliseconds: 200));
 
     expect(storage.uploadCalls, 1);
+  });
+
+  testWidgets('rating test quality logs analytics event', (tester) async {
+    final db = app_db.AppDatabase(executor: NativeDatabase.memory());
+    addTearDown(db.close);
+    final fakeAnalytics = _FakeFirebaseAnalytics();
+
+    await tester.pumpWidget(
+      buildScreen(
+        db,
+        analyticsService: AnalyticsService(
+          instance: fakeAnalytics,
+          enabled: true,
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+
+    expect(find.byType(StarRating), findsOneWidget);
+    await tester.tap(find.byIcon(Icons.star_border_rounded).at(3));
+    await tester.pump();
+
+    expect(fakeAnalytics.events, contains('session_quality_rated'));
+    expect(fakeAnalytics.params.last, {'mode': 'test', 'rating': 4});
   });
 }

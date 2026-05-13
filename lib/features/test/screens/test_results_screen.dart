@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
+import 'package:jpstudy/core/analytics/analytics_provider.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/shared/widgets/confidence_rating.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../data/db/app_database.dart' as app_db;
 import '../../../data/db/database_provider.dart';
@@ -38,6 +40,7 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
 
   int? _pinnedLessonId;
   bool _isPersonalBest = false;
+  int _qualityRating = 0;
 
   TestSession get session => widget.session;
   String get lessonTitle => widget.lessonTitle;
@@ -159,6 +162,8 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
                 const SizedBox(height: 16),
                 _PersonalBestBanner(language: language),
               ],
+              const SizedBox(height: 20),
+              _buildSessionQualityRating(),
               const SizedBox(height: 32),
 
               // Stats grid
@@ -293,6 +298,25 @@ class _TestResultsScreenState extends ConsumerState<TestResultsScreen> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildSessionQualityRating() {
+    return Semantics(
+      label: 'Session quality',
+      value: _qualityRating == 0 ? 'unrated' : '$_qualityRating of 5',
+      child: StarRating(
+        rating: _qualityRating,
+        size: 32,
+        onRatingChanged: (rating) {
+          setState(() => _qualityRating = rating);
+          unawaited(
+            ref
+                .read(analyticsServiceProvider)
+                .logSessionQualityRated(mode: 'test', rating: rating),
+          );
+        },
+      ),
     );
   }
 
