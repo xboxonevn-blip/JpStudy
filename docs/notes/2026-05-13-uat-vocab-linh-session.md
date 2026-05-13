@@ -233,7 +233,8 @@
 
 ## Top changes deferred
 - Add visible cross-script vocab search.
-- Add seeded SRS/match/offline UAT harness for deterministic progress/XP/sync assertions.
+- Seeded match/session tests already pass; offline harness now covers vocab + kanji cached data and queued sync mutations.
 - Add richer term detail: TTS, conjugations, examples, grammar links, collocations.
 - Add Minna per-card progress bars and true book thumbnails.
+
 
