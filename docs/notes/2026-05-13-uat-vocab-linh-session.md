@@ -236,3 +236,4 @@
 - Add seeded SRS/match/offline UAT harness for deterministic progress/XP/sync assertions.
 - Add richer term detail: TTS, conjugations, examples, grammar links, collocations.
 - Add Minna per-card progress bars and true book thumbnails.
+
