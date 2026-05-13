@@ -113,12 +113,26 @@ void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
 
   testWidgets(
-    'shows mock exam title and level prompt when level is not selected',
+    'defaults to N5 mock exam when level is not selected',
     (tester) async {
-      await tester.pumpWidget(buildScreen());
+      final db = AppDatabase(executor: NativeDatabase.memory());
+      final cdb = ContentDatabase(executor: NativeDatabase.memory());
+      final repo = FakeMockLessonRepository(
+        db,
+        cdb,
+        itemsByLevel: const {'N5': []},
+      );
+
+      await tester.pumpWidget(buildScreen(repo: repo));
       await tester.pump();
-      expect(find.text('Mock Exam'), findsOneWidget);
-      expect(find.text('Select JLPT level'), findsOneWidget);
+      await tester.pump(const Duration(milliseconds: 100));
+      expect(find.text('JLPT N5 Mock Exam'), findsOneWidget);
+      expect(find.text('No terms available for this lesson.'), findsOneWidget);
+
+      await tester.pumpWidget(Container());
+      await tester.pump(const Duration(milliseconds: 100));
+      await db.close();
+      await cdb.close();
     },
   );
 

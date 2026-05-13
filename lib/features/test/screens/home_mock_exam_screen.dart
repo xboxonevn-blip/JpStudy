@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
+import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/core/services/session_storage_provider.dart';
 import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
@@ -23,14 +24,8 @@ class HomeMockExamScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final language = ref.watch(appLanguageProvider);
-    final level = ref.watch(studyLevelProvider);
-
-    if (level == null) {
-      return Scaffold(
-        appBar: AppBar(title: Text(language.practiceExamLabel)),
-        body: Center(child: Text(language.levelMenuTitle)),
-      );
-    }
+    final selectedLevel = ref.watch(studyLevelProvider);
+    final level = selectedLevel ?? StudyLevel.n5;
 
     final levelLabel = level.shortLabel;
     final repo = ref.read(lessonRepositoryProvider);
