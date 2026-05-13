@@ -52,9 +52,9 @@ extension VocabCopy on AppLanguage {
   };
 
   String vocabReviewSubtitle(int dueCount, String nextWindow) => switch (this) {
-    AppLanguage.en => '$dueCount due ? next $nextWindow',
-    AppLanguage.vi => '$dueCount thẻ đến hạn ? lượt tiếp $nextWindow',
-    AppLanguage.ja => '$dueCount件が期限 ? 次は$nextWindow',
+    AppLanguage.en => '$dueCount due · next $nextWindow',
+    AppLanguage.vi => '$dueCount thẻ đến hạn · lượt tiếp $nextWindow',
+    AppLanguage.ja => '$dueCount件が期限 · 次は$nextWindow',
   };
 
   String vocabCurrentTrackLine(String title, int termCount) => switch (this) {
@@ -403,5 +403,5 @@ extension VocabCopy on AppLanguage {
     AppLanguage.ja => '補助トラック',
   };
 
-  String vocabMetaSeparator() => ' ? ';
+  String vocabMetaSeparator() => ' · ';
 }

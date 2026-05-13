@@ -1591,8 +1591,8 @@ class _SavedPill extends StatelessWidget {
 }
 
 String _saveThisWordLabel(AppLanguage language) => switch (language) {
-  AppLanguage.vi => 'L?u t? n?y',
-  AppLanguage.ja => '???????',
+  AppLanguage.vi => 'Lưu từ này',
+  AppLanguage.ja => 'この語を保存',
   AppLanguage.en => 'Save this word',
 };
 

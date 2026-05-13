@@ -782,21 +782,21 @@ String _chapterBadge(AppLanguage language, String chapterNumber) =>
     };
 
 String _savedCountLabel(AppLanguage language, int count) => switch (language) {
-  AppLanguage.vi => 'L?u $count',
-  AppLanguage.ja => '?? $count',
+  AppLanguage.vi => 'Lưu $count',
+  AppLanguage.ja => '保存 $count',
   AppLanguage.en => 'Saved $count',
 };
 
 String _learnedCountLabel(AppLanguage language, int count) =>
     switch (language) {
-      AppLanguage.vi => 'H?c $count',
-      AppLanguage.ja => '?? $count',
+      AppLanguage.vi => 'Học $count',
+      AppLanguage.ja => '学習 $count',
       AppLanguage.en => 'Learned $count',
     };
 
 String _dueCountLabel(AppLanguage language, int count) => switch (language) {
-  AppLanguage.vi => '??n h?n $count',
-  AppLanguage.ja => '?? $count',
+  AppLanguage.vi => 'Đến hạn $count',
+  AppLanguage.ja => '期限 $count',
   AppLanguage.en => 'Due $count',
 };
 
