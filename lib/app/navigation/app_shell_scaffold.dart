@@ -8,6 +8,8 @@ import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/level_provider.dart';
+import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/features/common/widgets/global_top_bar.dart';
 
 class AppShellScaffold extends ConsumerWidget {
@@ -18,7 +20,12 @@ class AppShellScaffold extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final language = ref.watch(appLanguageProvider);
-    final items = _buildItems(language);
+    final level = ref.watch(studyLevelProvider);
+    final allItems = _buildItems(language);
+    final items = [
+      for (final branchIndex in visibleShellBranchIndicesForLevel(level))
+        allItems[branchIndex],
+    ];
     final palette = context.appPalette;
 
     return LayoutBuilder(
@@ -66,14 +73,16 @@ class AppShellScaffold extends ConsumerWidget {
           );
         }
 
-        final bottomItems = [items[4], items[1], items[0], items[7]];
-        final bottomSelected = switch (navigationShell.currentIndex) {
-          4 => 0,
-          1 => 1,
-          0 => 2,
-          7 => 3,
-          _ => 4,
-        };
+        final bottomBranchIndices = bottomShellBranchIndicesForLevel(level);
+        final bottomItems = [
+          for (final branchIndex in bottomBranchIndices) allItems[branchIndex],
+        ];
+        final bottomSelected = bottomItems.indexWhere(
+          (item) => item.branchIndex == navigationShell.currentIndex,
+        );
+        final selectedIndex = bottomSelected == -1
+            ? bottomItems.length
+            : bottomSelected;
 
         final viewport = MediaQuery.sizeOf(context);
         return SizedBox(
@@ -106,14 +115,13 @@ class AppShellScaffold extends ConsumerWidget {
                     child: _MobileNavigationBar(
                       language: language,
                       bottomItems: bottomItems,
-                      selectedIndex: bottomSelected,
+                      selectedIndex: selectedIndex,
                       onDestinationSelected: (index) {
-                        if (index < 4) {
-                          final branch = const [4, 1, 0, 7][index];
-                          _goToBranch(context, branch);
+                        if (index < bottomItems.length) {
+                          _goToBranch(context, bottomItems[index].branchIndex);
                           return;
                         }
-                        _showMoreSheet(context, items);
+                        _showMoreSheet(context, items, bottomBranchIndices);
                       },
                     ),
                   ),
@@ -126,7 +134,14 @@ class AppShellScaffold extends ConsumerWidget {
     );
   }
 
-  void _showMoreSheet(BuildContext context, List<_ShellItem> items) {
+  void _showMoreSheet(
+    BuildContext context,
+    List<_ShellItem> items,
+    List<int> bottomBranchIndices,
+  ) {
+    final moreItems = items
+        .where((item) => !bottomBranchIndices.contains(item.branchIndex))
+        .toList(growable: false);
     showModalBottomSheet<void>(
       context: context,
       showDragHandle: true,
@@ -136,11 +151,10 @@ class AppShellScaffold extends ConsumerWidget {
           child: ListView.separated(
             shrinkWrap: true,
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-            itemCount: items.length - 5,
+            itemCount: moreItems.length,
             separatorBuilder: (context, index) => const SizedBox(height: 8),
             itemBuilder: (context, index) {
-              final branchIndex = [2, 3, 6, 8, 9, 10][index];
-              final item = items[branchIndex];
+              final item = moreItems[index];
               return ListTile(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18),
@@ -149,7 +163,7 @@ class AppShellScaffold extends ConsumerWidget {
                 title: Text(item.label),
                 onTap: () {
                   Navigator.of(sheetContext).pop();
-                  _goToBranch(context, branchIndex);
+                  _goToBranch(context, item.branchIndex);
                 },
               );
             },
@@ -168,56 +182,67 @@ class AppShellScaffold extends ConsumerWidget {
   List<_ShellItem> _buildItems(AppLanguage language) {
     return [
       _ShellItem(
+        branchIndex: 0,
         label: _kanji(language),
         icon: Icons.grid_view_outlined,
         selectedIcon: Icons.grid_view_rounded,
       ),
       _ShellItem(
+        branchIndex: 1,
         label: _foundations(language),
         icon: Icons.spa_outlined,
         selectedIcon: Icons.spa_rounded,
       ),
       _ShellItem(
+        branchIndex: 2,
         label: _vocab(language),
         icon: Icons.translate_outlined,
         selectedIcon: Icons.translate_rounded,
       ),
       _ShellItem(
+        branchIndex: 3,
         label: _grammar(language),
         icon: Icons.account_tree_outlined,
         selectedIcon: Icons.account_tree_rounded,
       ),
       _ShellItem(
+        branchIndex: 4,
         label: _roadmap(language),
         icon: Icons.route_outlined,
         selectedIcon: Icons.route_rounded,
       ),
       _ShellItem(
+        branchIndex: 5,
         label: _memory(language),
         icon: Icons.psychology_alt_outlined,
         selectedIcon: Icons.psychology_alt_rounded,
       ),
       _ShellItem(
+        branchIndex: 6,
         label: _active(language),
         icon: Icons.bolt_outlined,
         selectedIcon: Icons.bolt_rounded,
       ),
       _ShellItem(
+        branchIndex: 7,
         label: _exam(language),
         icon: Icons.fact_check_outlined,
         selectedIcon: Icons.fact_check_rounded,
       ),
       _ShellItem(
+        branchIndex: 8,
         label: _leaderboard(language),
         icon: Icons.emoji_events_outlined,
         selectedIcon: Icons.emoji_events_rounded,
       ),
       _ShellItem(
+        branchIndex: 9,
         label: _upgrade(language),
         icon: Icons.diamond_outlined,
         selectedIcon: Icons.diamond_rounded,
       ),
       _ShellItem(
+        branchIndex: 10,
         label: _community(language),
         icon: Icons.forum_outlined,
         selectedIcon: Icons.forum_rounded,
@@ -383,15 +408,15 @@ class _Sidebar extends StatelessWidget {
               itemCount: items.length,
               separatorBuilder: (context, index) => const SizedBox(height: 6),
               itemBuilder: (context, index) {
-                final selected = index == currentIndex;
                 final item = items[index];
+                final selected = item.branchIndex == currentIndex;
                 return Semantics(
                   label: item.label,
                   button: true,
                   selected: selected,
                   child: InkWell(
                     borderRadius: BorderRadius.circular(20),
-                    onTap: () => onTap(index),
+                    onTap: () => onTap(item.branchIndex),
                     child: ExcludeSemantics(
                       child: AnimatedContainer(
                         duration: reducedMotionDuration(
@@ -547,14 +572,38 @@ String _moreLabel(AppLanguage language) => switch (language) {
 
 class _ShellItem {
   const _ShellItem({
+    required this.branchIndex,
     required this.label,
     required this.icon,
     required this.selectedIcon,
   });
 
+  final int branchIndex;
   final String label;
   final IconData icon;
   final IconData selectedIcon;
+}
+
+@visibleForTesting
+List<int> visibleShellBranchIndicesForLevel(StudyLevel? level) {
+  final allBranches = List<int>.generate(
+    _branchInitialLocations.length,
+    (i) => i,
+  );
+  if (level == null || level == StudyLevel.n5) {
+    return List<int>.unmodifiable(allBranches);
+  }
+  return List<int>.unmodifiable(
+    allBranches.where((branchIndex) => branchIndex != 1),
+  );
+}
+
+@visibleForTesting
+List<int> bottomShellBranchIndicesForLevel(StudyLevel? level) {
+  if (level == null || level == StudyLevel.n5) {
+    return const [4, 1, 0, 7];
+  }
+  return const [4, 0, 7];
 }
 
 const _branchInitialLocations = <String>[
