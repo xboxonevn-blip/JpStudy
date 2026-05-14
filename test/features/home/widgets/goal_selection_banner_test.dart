@@ -59,7 +59,7 @@ void main() {
 
     await tester.tap(find.text('Thi JLPT'));
     await tester.pump();
-    await tester.pump(const Duration(milliseconds: 350));
+    await tester.pumpAndSettle();
 
     expect(preferences.getString(prefOnboardingGoal), StudyGoal.jlpt.name);
     expect(find.text('Bạn học để làm gì?'), findsNothing);
@@ -75,7 +75,7 @@ void main() {
 
     await tester.tap(find.text('Để sau'));
     await tester.pump();
-    await tester.pump(const Duration(milliseconds: 350));
+    await tester.pumpAndSettle();
 
     final skipUntil = DateTime.fromMillisecondsSinceEpoch(
       preferences.getInt(prefOnboardingGoalSkipUntil)!,
