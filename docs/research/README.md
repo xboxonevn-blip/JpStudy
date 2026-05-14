@@ -128,7 +128,7 @@ Current D4.P5 blocker: N1 immersion content exists after root init, but direct a
 
 Current D4 synthesis blocker: P2-P5 all fail broad beta readiness. Universal priority is deploy/channel parity plus route-level level persistence; persona scope decisions follow immediately after.
 
-Current hosting parity note: `firebase.json` targets both `jpstudy-v2` and `jpstudy`; read-only Firebase channel check shows `jpstudy-v2` live last released `2026-05-13 01:32:40 +07` and `jpstudy` live last released `2026-05-13 21:34:45 +07`, both older than local `HEAD` `aa5a2c44` (`2026-05-14T14:03:01+07:00`). No deploy has been attempted in this pass.
+Current hosting posture: primary web Hosting is now `hosting:jpstudy` at `https://jpstudy.web.app`. Legacy default site `hosting:jpstudy-v2` / `https://jpstudy-v2.web.app` was disabled on `2026-05-14T20:18+07` with Firebase release type `SITE_DISABLE`; it still exists as a Firebase default site identity but should not receive deploys. Local `.firebaserc`, `firebase.json`, and release docs now target only `hosting:jpstudy`.
 
 Current D5.Q5.1 blocker: `FsrsService` is a legacy `17`-parameter FSRS-like scheduler, not current FSRS-6. New-card `Again`, `Hard`, and `Good` first intervals are `576`, `864`, and `3,456` minutes locally versus reference scheduler `1`, `5.5`, and `10` minutes; persisted SRS state has no FSRS learning/relearning state or step.
 
@@ -164,7 +164,7 @@ Current D8-compliance blocker: Privacy Policy / Terms route/link surface now has
 
 Current D8.Q8.2 status: web Firebase API key referrer restriction is currently passing for Identity Toolkit. Fake `https://evil.example/probe` referrer returns `403 API_KEY_HTTP_REFERRER_BLOCKED`; allowed Firebase Hosting referrers reach endpoint validation (`400 MISSING_ID_TOKEN`). `docs/FIREBASE_SECURITY_CHECKLIST.md` now records the repeatable non-mutating probe. Still manually verify GCP Console allowed-referrer list before public launch.
 
-Current D8.Q8.3 status: Auth authorized-domain source audit is measured but console-blocked for final proof. Source confirms `authDomain: jpstudy-v2.firebaseapp.com`; read-only Hosting CLI confirms `https://jpstudy-v2.web.app` and `https://jpstudy.web.app`. Repository docs now require removing `localhost` from production Auth authorized domains unless a time-boxed exception exists.
+Current D8.Q8.3 status: Auth authorized-domain source audit is measured but console-blocked for final proof. Source still correctly uses `authDomain: jpstudy-v2.firebaseapp.com`, while primary web Hosting is `https://jpstudy.web.app`; the disabled `https://jpstudy-v2.web.app` legacy site should be removed from production Auth/API-key allowlists where possible. Repository docs require removing `localhost` from production Auth authorized domains unless a time-boxed exception exists.
 
 Current D8.Q8.4 status: production error monitoring is absent. The app has consent-gated Firebase Analytics, but no `firebase_crashlytics`, no `sentry_flutter`, no global `FlutterError.onError` / `PlatformDispatcher.instance.onError` hook, no source-map/symbol upload, and no first-crash verification. Recommended design is Sentry for web beta first, with Crashlytics deferred to Android/iOS distribution.
 

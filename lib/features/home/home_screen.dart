@@ -24,6 +24,7 @@ import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/home/screens/learning_path_screen.dart';
 import 'package:jpstudy/features/home/widgets/header_bar.dart';
+import 'package:jpstudy/features/home/widgets/goal_selection_banner.dart';
 import 'package:jpstudy/core/models/streak_milestone.dart';
 import 'package:jpstudy/features/learn/models/achievement.dart' as model;
 import 'package:jpstudy/features/learn/services/learn_session_service.dart';
@@ -310,43 +311,48 @@ class _MobileHomeFallback extends StatelessWidget {
         scrolledUnderElevation: 0,
       ),
       body: AppPageShell(
-        child: AppFluidGrid(
-          maxColumns: 2,
+        child: Column(
           children: [
-            _MobileHomeCard(
-              icon: Icons.spa_rounded,
-              title: _mobileFoundationsTitle(language),
-              subtitle: _mobileFoundationsSubtitle(language),
-              cta: _mobileStartLabel(language),
-              onTap: context.openFoundations,
-            ),
-            _MobileHomeCard(
-              icon: Icons.auto_awesome_rounded,
-              title: _mobilePlanTitle(language),
-              subtitle: _mobilePlanSubtitle(language),
-              cta: _mobileStudyLabel(language),
-              onTap: context.openStudy,
-            ),
-            _MobileHomeCard(
-              icon: Icons.translate_rounded,
-              title: _mobileVocabTitle(language),
-              subtitle: _mobileVocabSubtitle(language),
-              cta: _mobileOpenLabel(language),
-              onTap: context.openVocab,
-            ),
-            _MobileHomeCard(
-              icon: Icons.account_tree_rounded,
-              title: _mobileGrammarTitle(language),
-              subtitle: _mobileGrammarSubtitle(language),
-              cta: _mobileOpenLabel(language),
-              onTap: context.openGrammar,
-            ),
-            _MobileHomeCard(
-              icon: Icons.grid_view_rounded,
-              title: _mobileKanjiTitle(language),
-              subtitle: _mobileKanjiSubtitle(language),
-              cta: _mobileOpenLabel(language),
-              onTap: context.openKanji,
+            const GoalSelectionBanner(),
+            AppFluidGrid(
+              maxColumns: 2,
+              children: [
+                _MobileHomeCard(
+                  icon: Icons.spa_rounded,
+                  title: _mobileFoundationsTitle(language),
+                  subtitle: _mobileFoundationsSubtitle(language),
+                  cta: _mobileStartLabel(language),
+                  onTap: context.openFoundations,
+                ),
+                _MobileHomeCard(
+                  icon: Icons.auto_awesome_rounded,
+                  title: _mobilePlanTitle(language),
+                  subtitle: _mobilePlanSubtitle(language),
+                  cta: _mobileStudyLabel(language),
+                  onTap: context.openStudy,
+                ),
+                _MobileHomeCard(
+                  icon: Icons.translate_rounded,
+                  title: _mobileVocabTitle(language),
+                  subtitle: _mobileVocabSubtitle(language),
+                  cta: _mobileOpenLabel(language),
+                  onTap: context.openVocab,
+                ),
+                _MobileHomeCard(
+                  icon: Icons.account_tree_rounded,
+                  title: _mobileGrammarTitle(language),
+                  subtitle: _mobileGrammarSubtitle(language),
+                  cta: _mobileOpenLabel(language),
+                  onTap: context.openGrammar,
+                ),
+                _MobileHomeCard(
+                  icon: Icons.grid_view_rounded,
+                  title: _mobileKanjiTitle(language),
+                  subtitle: _mobileKanjiSubtitle(language),
+                  cta: _mobileOpenLabel(language),
+                  onTap: context.openKanji,
+                ),
+              ],
             ),
           ],
         ),

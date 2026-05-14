@@ -23,16 +23,13 @@ Required launch secret: `JPSTUDY_RECAPTCHA_SITE_KEY` for web App Check.
    PowerShell:
    flutter build web --release --base-href=/ --dart-define=JPSTUDY_RECAPTCHA_SITE_KEY=$env:JPSTUDY_RECAPTCHA_SITE_KEY
 
-4. Deploy one explicit Hosting target:
-   firebase deploy --only hosting:jpstudy-v2
+4. Deploy the primary Hosting target:
+   firebase deploy --only hosting:jpstudy
 
-   Or, after confirming both channels should be refreshed:
-   firebase deploy --only hosting:jpstudy-v2,hosting:jpstudy
-
-Result: app available at https://jpstudy-v2.web.app
+Result: app available at https://jpstudy.web.app
 
 Post-deploy checks:
-- curl -I https://jpstudy-v2.web.app
+- curl -I https://jpstudy.web.app
 - Confirm Content-Security-Policy, X-Frame-Options, Referrer-Policy, and Permissions-Policy headers.
 - Re-run route smoke and performance smoke against the deployed URL.
 - Confirm Firebase Auth, Storage backup, App Check telemetry, and Analytics DebugView.

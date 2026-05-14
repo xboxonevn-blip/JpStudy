@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 const prefOnboardingCompleted = 'onboarding.completed';
 const prefOnboardingLevel = 'onboarding.level';
 const prefOnboardingGoal = 'onboarding.goal';
+const prefOnboardingGoalSkipUntil = 'onboarding.goal.skipUntil';
 
 /// null = still loading, false = show onboarding, true = show home
 final onboardingDoneProvider = StateProvider<bool?>((ref) => null);

@@ -7048,6 +7048,61 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get goalBannerTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'What\'s your study goal?';
+      case AppLanguage.vi:
+        return 'Bạn học để làm gì?';
+      case AppLanguage.ja:
+        return '学習の目的は？';
+    }
+  }
+
+  String get goalJlptOption {
+    switch (this) {
+      case AppLanguage.en:
+        return 'JLPT exam';
+      case AppLanguage.vi:
+        return 'Thi JLPT';
+      case AppLanguage.ja:
+        return 'JLPT試験';
+    }
+  }
+
+  String get goalReadOption {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Read manga & news';
+      case AppLanguage.vi:
+        return 'Đọc manga & tin tức';
+      case AppLanguage.ja:
+        return 'マンガとニュースを読む';
+    }
+  }
+
+  String get goalWriteOption {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Practice writing';
+      case AppLanguage.vi:
+        return 'Luyện viết';
+      case AppLanguage.ja:
+        return '書く練習';
+    }
+  }
+
+  String get goalLaterAction {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Later';
+      case AppLanguage.vi:
+        return 'Để sau';
+      case AppLanguage.ja:
+        return 'あとで';
+    }
+  }
+
   String get onboardingReadyTitle {
     switch (this) {
       case AppLanguage.en:

@@ -22,6 +22,7 @@ import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/home/widgets/daily_plan_card.dart';
 import 'package:jpstudy/features/home/widgets/daily_session_card.dart';
 import 'package:jpstudy/features/home/widgets/discover_practice_panel.dart';
+import 'package:jpstudy/features/home/widgets/goal_selection_banner.dart';
 import 'package:jpstudy/features/home/widgets/mini_dashboard.dart';
 import 'package:jpstudy/features/home/widgets/weakness_radar_card.dart';
 import 'package:jpstudy/features/home/widgets/weekly_challenge_card.dart';
@@ -146,6 +147,7 @@ class LearningPathScreen extends ConsumerWidget {
                   if (!useDesktopGrid) {
                     return Column(
                       children: [
+                        const GoalSelectionBanner(),
                         if (showFoundationsCard) ...[
                           foundationsCard,
                           const SizedBox(height: 10),
@@ -208,6 +210,7 @@ class LearningPathScreen extends ConsumerWidget {
 
                   return Column(
                     children: [
+                      const GoalSelectionBanner(),
                       if (showFoundationsCard) ...[
                         foundationsCard,
                         const SizedBox(height: 10),

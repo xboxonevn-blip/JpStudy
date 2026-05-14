@@ -33,7 +33,6 @@ flutter build web --dart-define=JPSTUDY_RECAPTCHA_SITE_KEY=your_site_key
 - In the production Firebase project, remove `localhost` from Auth authorized domains unless a time-boxed dev exception is documented.
 - Production Auth authorized domains should include only the deployed app origins and Firebase-required project domains, for example:
   - `jpstudy-v2.firebaseapp.com`
-  - `jpstudy-v2.web.app`
   - `jpstudy.web.app`
 - If local Auth testing is needed, prefer a separate dev Firebase project instead of re-adding `localhost` to production.
 - Monitor failed sign-in spikes and Firebase quota errors.
@@ -42,7 +41,6 @@ flutter build web --dart-define=JPSTUDY_RECAPTCHA_SITE_KEY=your_site_key
 
 - Keep the web Firebase API key restricted by HTTP referrer in Google Cloud Console.
 - Allowed web referrers should include production Firebase Hosting origins only:
-  - `https://jpstudy-v2.web.app/*`
   - `https://jpstudy.web.app/*`
 - Re-run this non-mutating probe before public launch and after key rotation:
 
@@ -72,13 +70,12 @@ Invoke-WebRequest `
 
 ## Hosting Headers
 
-- Firebase Hosting sets baseline browser hardening headers: `Content-Security-Policy`, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, and `Permissions-Policy` for both Hosting targets in `firebase.json`.
+- Firebase Hosting sets baseline browser hardening headers: `Content-Security-Policy`, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, and `Permissions-Policy` for the primary Hosting target in `firebase.json`.
 - The current CSP allows Flutter web, Firebase/Auth/API calls, Google Analytics/Tag Manager, Google sign-in, and font/image sources needed by the app. Keep `frame-ancestors 'none'`.
-- When adding a new external API, font, CDN, model endpoint, or auth provider, update `firebase.json` CSP explicitly and verify against both Hosting targets.
+- When adding a new external API, font, CDN, model endpoint, or auth provider, update `firebase.json` CSP explicitly and verify against the primary Hosting target.
 - Verify after deploy with:
 
 ```sh
-curl -I https://jpstudy-v2.web.app
 curl -I https://jpstudy.web.app
 ```
 

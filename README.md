@@ -2,7 +2,7 @@
 
 ## Try it
 
-Web demo: https://jpstudy-v2.web.app
+Web demo: https://jpstudy.web.app
 
 Android APK: see the latest GitHub Release.
 
@@ -30,7 +30,7 @@ Current product posture:
 
 - Core study flows are stable and broadly covered by automated tests.
 - The app remains local-first, with Firebase Auth + Storage used for opt-in cloud backup and restore.
-- The public web build is configured for Firebase Hosting at `https://jpstudy-v2.web.app`.
+- The public web build is configured for Firebase Hosting at `https://jpstudy.web.app`.
 - Premium pricing and some community/referral surfaces are still local placeholder experiences, not live backend features.
 
 ## What the App Includes
