@@ -10,8 +10,8 @@ import 'package:jpstudy/app/navigation/routes/memory_routes.dart';
 import 'package:jpstudy/app/navigation/routes/meta_routes.dart';
 import 'package:jpstudy/app/navigation/routes/practice_routes.dart';
 import 'package:jpstudy/app/navigation/routes/vocab_routes.dart';
-import 'package:jpstudy/features/home/home_screen.dart';
 import 'package:jpstudy/features/onboarding/language_select_screen.dart';
+import 'package:jpstudy/features/onboarding/level_select_screen.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -24,7 +24,7 @@ class AppRouter {
       GoRoute(
         path: AppRoutePath.onboardingLevel,
         name: AppRouteName.onboardingLevel,
-        builder: (context, state) => const HomeScreen(),
+        builder: (context, state) => const LevelSelectScreen(),
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) =>

@@ -6960,6 +6960,83 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get chooseLevelSubtitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Pick the JLPT level that should shape your roadmap.';
+      case AppLanguage.vi:
+        return 'Chọn cấp JLPT để app dựng đúng lộ trình cho bạn.';
+      case AppLanguage.ja:
+        return '学習ルートに使うJLPTレベルを選びます。';
+    }
+  }
+
+  String get levelN5Tagline {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Beginner foundations';
+      case AppLanguage.vi:
+        return 'Nhập môn';
+      case AppLanguage.ja:
+        return '入門';
+    }
+  }
+
+  String get levelN4Tagline {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Lower intermediate';
+      case AppLanguage.vi:
+        return 'Sơ trung cấp';
+      case AppLanguage.ja:
+        return '初中級';
+    }
+  }
+
+  String get levelN3Tagline {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Intermediate';
+      case AppLanguage.vi:
+        return 'Trung cấp';
+      case AppLanguage.ja:
+        return '中級';
+    }
+  }
+
+  String get levelN2Tagline {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Upper intermediate';
+      case AppLanguage.vi:
+        return 'Trung cao cấp';
+      case AppLanguage.ja:
+        return '上中級';
+    }
+  }
+
+  String get levelN1Tagline {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Advanced';
+      case AppLanguage.vi:
+        return 'Cao cấp';
+      case AppLanguage.ja:
+        return '上級';
+    }
+  }
+
+  String get levelStartAction {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Start';
+      case AppLanguage.vi:
+        return 'Bắt đầu';
+      case AppLanguage.ja:
+        return '始める';
+    }
+  }
+
   String get onboardingGoalTitle {
     switch (this) {
       case AppLanguage.en:
