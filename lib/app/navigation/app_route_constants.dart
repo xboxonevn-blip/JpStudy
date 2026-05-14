@@ -24,6 +24,8 @@ class AppRoutePath {
   static const foundationsQuiz = '/foundations/quiz';
 
   static const home = '/';
+  static const onboardingLanguage = '/onboarding/language';
+  static const onboardingLevel = '/onboarding/level';
   static const roadmap = '/roadmap';
   static const today = '/today';
   static const todaySessionSummary = '/today/session-summary';
@@ -99,6 +101,8 @@ class AppRouteName {
   static const foundationsQuiz = 'foundations-quiz';
 
   static const home = 'home';
+  static const onboardingLanguage = 'onboarding-language';
+  static const onboardingLevel = 'onboarding-level';
   static const roadmap = 'roadmap';
   static const today = 'today';
   static const todaySessionSummary = 'today-session-summary';

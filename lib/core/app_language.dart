@@ -6916,6 +6916,39 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get onboardingChooseLanguageTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Choose your language';
+      case AppLanguage.vi:
+        return 'Chọn ngôn ngữ';
+      case AppLanguage.ja:
+        return '言語を選んでください';
+    }
+  }
+
+  String get onboardingChooseLanguageSubtitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Set the app language before we tune your study path.';
+      case AppLanguage.vi:
+        return 'Chọn ngôn ngữ trước khi cá nhân hóa lộ trình học.';
+      case AppLanguage.ja:
+        return '学習ルートを調整する前に表示言語を設定します。';
+    }
+  }
+
+  String get languageContinueAction {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Continue';
+      case AppLanguage.vi:
+        return 'Tiếp tục';
+      case AppLanguage.ja:
+        return '続ける';
+    }
+  }
+
   String get onboardingLevelTitle {
     switch (this) {
       case AppLanguage.en:
