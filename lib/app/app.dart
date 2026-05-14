@@ -6,6 +6,7 @@ import 'package:jpstudy/app/app_scroll_behavior.dart';
 import 'package:jpstudy/app/theme/app_theme.dart';
 import 'package:jpstudy/core/analytics/analytics_consent_banner.dart';
 import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/error_monitoring/sentry_setup.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/onboarding_provider.dart';
 import 'package:jpstudy/core/theme_provider.dart';
@@ -37,8 +38,9 @@ class App extends ConsumerWidget {
       // Disable the animation so theme swaps are instant and crash-free.
       themeAnimationDuration: Duration.zero,
       routerConfig: AppRouter.router,
-      builder: (context, child) =>
-          AnalyticsConsentBanner(child: child ?? const SizedBox.shrink()),
+      builder: (context, child) => ErrorMonitoringGate(
+        child: AnalyticsConsentBanner(child: child ?? const SizedBox.shrink()),
+      ),
     );
   }
 }

@@ -4,6 +4,7 @@
 
 Prerequisites: `firebase login` already done.
 Required launch secret: `JPSTUDY_RECAPTCHA_SITE_KEY` for web App Check.
+Optional beta monitoring secret: `JPSTUDY_SENTRY_DSN`.
 
 1. One-time init (skip if firebase.json already has "hosting" section):
    firebase init hosting
@@ -23,6 +24,18 @@ Required launch secret: `JPSTUDY_RECAPTCHA_SITE_KEY` for web App Check.
    PowerShell:
    flutter build web --release --base-href=/ --dart-define=JPSTUDY_RECAPTCHA_SITE_KEY=$env:JPSTUDY_RECAPTCHA_SITE_KEY
 
+   With Sentry web error monitoring:
+   flutter build web --release --base-href=/ \
+     --dart-define=JPSTUDY_RECAPTCHA_SITE_KEY=$JPSTUDY_RECAPTCHA_SITE_KEY \
+     --dart-define=JPSTUDY_SENTRY_DSN=$JPSTUDY_SENTRY_DSN \
+     --dart-define=JPSTUDY_RELEASE=$(git rev-parse --short HEAD)
+
+   PowerShell:
+   flutter build web --release --base-href=/ `
+     --dart-define=JPSTUDY_RECAPTCHA_SITE_KEY=$env:JPSTUDY_RECAPTCHA_SITE_KEY `
+     --dart-define=JPSTUDY_SENTRY_DSN=$env:JPSTUDY_SENTRY_DSN `
+     --dart-define=JPSTUDY_RELEASE=$(git rev-parse --short HEAD)
+
 4. Deploy the primary Hosting target:
    firebase deploy --only hosting:jpstudy
 
@@ -33,6 +46,7 @@ Post-deploy checks:
 - Confirm Content-Security-Policy, X-Frame-Options, Referrer-Policy, and Permissions-Policy headers.
 - Re-run route smoke and performance smoke against the deployed URL.
 - Confirm Firebase Auth, Storage backup, App Check telemetry, and Analytics DebugView.
+- If `JPSTUDY_SENTRY_DSN` is set, force one non-production test exception and confirm it appears in Sentry before sharing the beta URL.
 
 ## Android APK (direct distribution)
 

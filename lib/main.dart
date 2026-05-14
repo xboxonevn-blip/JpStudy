@@ -1,10 +1,14 @@
 import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fb_auth;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/app.dart';
 import 'package:jpstudy/app/navigation/app_router.dart';
+import 'package:jpstudy/core/analytics/analytics_consent_provider.dart';
+import 'package:jpstudy/core/analytics/do_not_track.dart';
+import 'package:jpstudy/core/error_monitoring/sentry_setup.dart';
 import 'package:jpstudy/core/shared_preferences_provider.dart';
 import 'package:jpstudy/core/notifications/notification_service.dart';
 import 'package:jpstudy/data/db/database_provider.dart';
@@ -51,7 +55,22 @@ Future<void> main() async {
     debugPrint('Kana migration failed: $e\n$st');
   }
 
-  runApp(UncontrolledProviderScope(container: container, child: const App()));
+  var isSignedIn = false;
+  try {
+    isSignedIn = fb_auth.FirebaseAuth.instance.currentUser != null;
+  } catch (_) {}
+
+  await runAppWithOptionalErrorMonitoring(
+    config: ErrorMonitoringConfig.fromEnvironment(),
+    consentGranted: preferences.getBool(prefAnalyticsConsent) ?? false,
+    isSignedIn: isSignedIn,
+    doNotTrack: isDoNotTrackEnabled(),
+    appRunner: () {
+      runApp(
+        UncontrolledProviderScope(container: container, child: const App()),
+      );
+    },
+  );
 }
 
 Future<void> _activateFirebaseAppCheck() async {

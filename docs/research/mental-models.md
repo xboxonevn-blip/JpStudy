@@ -164,3 +164,7 @@ Mot man hinh co the dung hai duong render cho cung mot khai niem. Filter chip "4
 ## D4 / P2-P5 Live Re-Test 2026-05-15
 
 "Da co data" khong dong nghia voi "da mo cho nguoi hoc". Vocab live cho thay N4 co ca data, badge mo, CTA `Mo lane/Mo track`, va count that; N3/N2/N1 thi co card va ten track nhung van `Sap ra mat`, `Xem truoc`, `0 muc tu`, `0 Dang mo`. Vi vay moi tinh nang unlock can check bon lop rieng: content seed, catalog display, availability registry/CTA, va queue/review count. Thieu mot lop la nguoi hoc van thay bi khoa.
+
+## D8 / Q8.4
+
+Error monitoring cung la consent surface, khong chi la SDK. Neu gan Sentry vao `main` ma khong nhin consent, app se gui loi truoc khi nguoi hoc dong y; neu doi user bam chap nhan moi import code, crash dau tien van mat. Cach dung la tach ba lop: cau hinh DSN co hay khong, quyen gui theo consent/sign-in/Do Not Track, va co che bat SDK truoc `runApp` hoac bat muon sau khi quyen thay doi. Nhu vay beta co duong bat crash khi user cho phep, nhung mac dinh van im lang khi chua co DSN hoac chua co quyen.

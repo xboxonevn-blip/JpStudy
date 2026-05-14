@@ -128,7 +128,9 @@ back out a bad commit. Faster than branch-based rollback.
 | `GOOGLE_APPLICATION_CREDENTIALS` | Set permanently | Codex / tool scripts query BigQuery |
 | `JPSTUDY_RECAPTCHA_SITE_KEY` | Set permanently (User scope) | Web App Check via `--dart-define` at build |
 | `FIREBASE_TOKEN` | `firebase login:ci` | CI deploy automation (planned) |
-| `SENTRY_DSN` | Sentry project (planned) | Error monitoring (planned D8 Q8.4) |
+| `JPSTUDY_SENTRY_DSN` | Sentry project | Optional web error monitoring via `--dart-define` |
+| `JPSTUDY_SENTRY_ENVIRONMENT` | Optional | Sentry environment label, defaults to `production` |
+| `JPSTUDY_RELEASE` | Optional | Sentry release label for deploy correlation |
 
 ## Research notebook + Auto Research mission
 
