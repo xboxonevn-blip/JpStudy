@@ -47,10 +47,33 @@ void main() {
     for (final rule in rules.cast<Map<String, dynamic>>()) {
       expect(rule['id'], isA<String>());
       expect(rule['pattern'], isA<String>());
+      expect(rule['patternHv'], isA<String>());
+      expect((rule['patternHv'] as String).trim(), isNotEmpty);
+      expect(rule['patternJp'], isA<String>());
+      expect((rule['patternJp'] as String).trim(), isNotEmpty);
+      expect(rule['titleVi'], isA<String>());
+      expect((rule['titleVi'] as String).trim(), isNotEmpty);
+      expect(rule['titleEn'], isA<String>());
+      expect((rule['titleEn'] as String).trim(), isNotEmpty);
+      expect(rule['descriptionVi'], isA<String>());
+      expect((rule['descriptionVi'] as String).trim(), isNotEmpty);
+      expect(rule['descriptionEn'], isA<String>());
+      expect((rule['descriptionEn'] as String).trim(), isNotEmpty);
       expect(rule['onHint'], isA<List<dynamic>>());
       expect(rule['confidence'], isA<num>());
       expect(rule['sourceIds'], isA<List<dynamic>>());
       expect(rule['examples'], isA<List<dynamic>>());
+      for (final example
+          in (rule['examples'] as List<dynamic>).cast<Map<String, dynamic>>()) {
+        expect(example['kanji'], isA<String>());
+        expect((example['kanji'] as String).trim(), isNotEmpty);
+        expect(example['hanViet'], isA<String>());
+        expect((example['hanViet'] as String).trim(), isNotEmpty);
+        expect(example['on'], isA<String>());
+        expect((example['on'] as String).trim(), isNotEmpty);
+        expect(example['meaningVi'], isA<String>());
+        expect((example['meaningVi'] as String).trim(), isNotEmpty);
+      }
     }
   });
 
@@ -70,6 +93,35 @@ void main() {
     expect(byId('final-p-to-long-or-tsu')['examples'], isNotEmpty);
     expect(byId('rime-inh-anh-enh-to-ei')['onHint'], contains('ei'));
     expect(byId('usage-kanji-compounds-often-use-on')['examples'], isNotEmpty);
+  });
+
+  test('localized han viet rule examples include learner-facing glosses', () {
+    final asset = loadRulesAsset();
+    final rules = (asset['rules'] as List<dynamic>)
+        .cast<Map<String, dynamic>>();
+    final initialL = rules.singleWhere(
+      (rule) => rule['id'] == 'initial-l-to-r',
+    );
+
+    expect(initialL['titleVi'], 'Phụ âm đầu L → R');
+    expect(initialL['titleEn'], 'Initial L → R');
+    expect(initialL['descriptionVi'], contains('hàng R'));
+    expect(initialL['patternHv'], 'L');
+    expect(initialL['patternJp'], 'r');
+
+    final examples = (initialL['examples'] as List<dynamic>)
+        .cast<Map<String, dynamic>>();
+    expect(
+      examples,
+      contains(
+        allOf(
+          containsPair('kanji', '来'),
+          containsPair('hanViet', 'lai'),
+          containsPair('on', 'ライ (rai)'),
+          containsPair('meaningVi', 'đến'),
+        ),
+      ),
+    );
   });
 
   test(

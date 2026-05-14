@@ -18,6 +18,7 @@ class _HanVietReferenceScreenState
     extends ConsumerState<HanVietReferenceScreen> {
   final SearchController _searchController = SearchController();
   String _query = '';
+  _HanVietCategoryFilter _categoryFilter = _HanVietCategoryFilter.all;
 
   @override
   void dispose() {
@@ -34,7 +35,7 @@ class _HanVietReferenceScreenState
       appBar: AppBar(title: Text(language.hanVietRulesTitle)),
       body: rulesAsync.when(
         data: (ruleSet) {
-          final filtered = _filterRules(ruleSet.rules, _query);
+          final filtered = _filterRules(ruleSet.rules, _query, language);
           return ListView(
             padding: const EdgeInsets.all(AppSpacing.md),
             children: [
@@ -49,12 +50,20 @@ class _HanVietReferenceScreenState
                 onChanged: (value) => setState(() => _query = value),
               ),
               const SizedBox(height: AppSpacing.md),
+              _HanVietCategoryChips(
+                selected: _categoryFilter,
+                language: language,
+                onSelected: (filter) =>
+                    setState(() => _categoryFilter = filter),
+              ),
+              const SizedBox(height: AppSpacing.md),
               SizedBox.shrink(
                 key: ValueKey('han_viet_rule_list_count_${filtered.length}'),
               ),
               for (final rule in filtered)
                 _HanVietRuleTile(
                   rule: rule,
+                  language: language,
                   sourceIds: _sourceLabels(rule, ruleSet),
                   sourceLabel: language.foundationsSourceLabel,
                 ),
@@ -67,15 +76,18 @@ class _HanVietReferenceScreenState
     );
   }
 
-  List<HanVietRule> _filterRules(List<HanVietRule> rules, String query) {
+  List<HanVietRule> _filterRules(
+    List<HanVietRule> rules,
+    String query,
+    AppLanguage language,
+  ) {
     final normalized = query.trim().toLowerCase();
-    if (normalized.isEmpty) return rules;
     return rules
+        .where((rule) => _categoryFilter.matches(rule.category))
         .where(
           (rule) =>
-              rule.title.toLowerCase().contains(normalized) ||
-              rule.pattern.toLowerCase().contains(normalized) ||
-              (rule.explanation?.toLowerCase().contains(normalized) ?? false),
+              normalized.isEmpty ||
+              rule.searchableText(language).contains(normalized),
         )
         .toList(growable: false);
   }
@@ -88,14 +100,73 @@ class _HanVietReferenceScreenState
   }
 }
 
+enum _HanVietCategoryFilter {
+  all,
+  usage,
+  initial,
+  finalSound,
+  exception;
+
+  bool matches(String category) {
+    return switch (this) {
+      _HanVietCategoryFilter.all => true,
+      _HanVietCategoryFilter.usage => category == 'usage',
+      _HanVietCategoryFilter.initial => category == 'initial',
+      _HanVietCategoryFilter.finalSound =>
+        category == 'final' || category == 'rime' || category == 'long_vowel',
+      _HanVietCategoryFilter.exception => category == 'exception',
+    };
+  }
+
+  String label(AppLanguage language) {
+    return switch (this) {
+      _HanVietCategoryFilter.all => language.filterAllLabel,
+      _HanVietCategoryFilter.usage => language.hanVietCategoryUsage,
+      _HanVietCategoryFilter.initial => language.hanVietCategoryInitial,
+      _HanVietCategoryFilter.finalSound => language.hanVietCategoryFinal,
+      _HanVietCategoryFilter.exception => language.hanVietCategoryException,
+    };
+  }
+}
+
+class _HanVietCategoryChips extends StatelessWidget {
+  const _HanVietCategoryChips({
+    required this.selected,
+    required this.language,
+    required this.onSelected,
+  });
+
+  final _HanVietCategoryFilter selected;
+  final AppLanguage language;
+  final ValueChanged<_HanVietCategoryFilter> onSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: [
+        for (final filter in _HanVietCategoryFilter.values)
+          FilterChip(
+            label: Text(filter.label(language)),
+            selected: selected == filter,
+            onSelected: (_) => onSelected(filter),
+          ),
+      ],
+    );
+  }
+}
+
 class _HanVietRuleTile extends StatelessWidget {
   const _HanVietRuleTile({
     required this.rule,
+    required this.language,
     required this.sourceIds,
     required this.sourceLabel,
   });
 
   final HanVietRule rule;
+  final AppLanguage language;
   final List<String> sourceIds;
   final String sourceLabel;
 
@@ -104,41 +175,32 @@ class _HanVietRuleTile extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.only(bottom: 10),
       child: ExpansionTile(
-        title: Text(rule.title),
-        subtitle: Text(rule.pattern),
+        title: Text(rule.localizedTitle(language)),
+        subtitle: Text(rule.localizedPattern(language)),
         childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
         children: [
-          if (rule.explanation != null && rule.explanation!.trim().isNotEmpty)
+          if (rule.localizedDescription(language).trim().isNotEmpty)
             Align(
               alignment: Alignment.centerLeft,
-              child: Text(rule.explanation!),
+              child: Text(rule.localizedDescription(language)),
             ),
           const SizedBox(height: 12),
-          Table(
-            columnWidths: const {
-              0: FlexColumnWidth(1),
-              1: FlexColumnWidth(1.4),
-              2: FlexColumnWidth(1.4),
-              3: FlexColumnWidth(1.4),
-            },
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              language.hanVietExamplesLabel,
+              style: Theme.of(
+                context,
+              ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
             children: [
-              const TableRow(
-                children: [
-                  _HeaderCell('Kanji'),
-                  _HeaderCell('Onyomi'),
-                  _HeaderCell('Hán Việt'),
-                  _HeaderCell('Meaning'),
-                ],
-              ),
               for (final example in rule.examples)
-                TableRow(
-                  children: [
-                    _BodyCell(example.kanji),
-                    _BodyCell(example.onyomi),
-                    _BodyCell(example.hanViet),
-                    _BodyCell(example.meaning ?? ''),
-                  ],
-                ),
+                _HanVietExampleCard(example: example, language: language),
             ],
           ),
           const SizedBox(height: 12),
@@ -155,27 +217,74 @@ class _HanVietRuleTile extends StatelessWidget {
   }
 }
 
-class _HeaderCell extends StatelessWidget {
-  const _HeaderCell(this.text);
+class _HanVietExampleCard extends StatelessWidget {
+  const _HanVietExampleCard({required this.example, required this.language});
 
-  final String text;
+  final HanVietExample example;
+  final AppLanguage language;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(4),
-      child: Text(text, style: const TextStyle(fontWeight: FontWeight.w800)),
+    final colorScheme = Theme.of(context).colorScheme;
+    return ConstrainedBox(
+      constraints: const BoxConstraints(minWidth: 152, maxWidth: 220),
+      child: Material(
+        color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.55),
+        borderRadius: BorderRadius.circular(8),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(8),
+          onTap: () => _showExampleDialog(context),
+          key: ValueKey('han_viet_example_${example.kanji}'),
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  example.kanji,
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(example.hanViet),
+                Text(example.onyomi),
+                Text(
+                  example.localizedMeaning(language),
+                  style: TextStyle(color: colorScheme.onSurfaceVariant),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
-}
 
-class _BodyCell extends StatelessWidget {
-  const _BodyCell(this.text);
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(padding: const EdgeInsets.all(4), child: Text(text));
+  Future<void> _showExampleDialog(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(example.kanji),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(example.hanViet),
+              Text(example.onyomi),
+              Text(example.localizedMeaning(language)),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(language.closeLabel),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

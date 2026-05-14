@@ -48,8 +48,8 @@ class HanVietInlinePanel extends StatelessWidget {
           for (final rule in preview)
             ListTile(
               dense: true,
-              title: Text(rule.title),
-              subtitle: Text(rule.pattern),
+              title: Text(rule.localizedTitle(language)),
+              subtitle: Text(rule.localizedPattern(language)),
               contentPadding: EdgeInsets.zero,
             ),
           Align(

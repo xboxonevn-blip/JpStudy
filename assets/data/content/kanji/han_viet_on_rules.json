@@ -3,7 +3,7 @@
   "dataset": "han_viet_on_rules",
   "titleVi": "Quy tắc suy luận âm On từ âm Hán Việt",
   "scope": "heuristic learner reference for guessing common Sino-Japanese on-yomi from Vietnamese Han-Viet labels",
-  "lastUpdated": "2026-05-08",
+  "lastUpdated": "2026-05-15",
   "sourcePolicy": {
     "blockedDomainsExcludedCount": 2,
     "note": "Rules are paraphrased and normalized from allowed online learner sources. User-blocked domains were not accessed or cited. These are hints, not deterministic readings."
@@ -65,15 +65,25 @@
           "hanViet": "học sinh",
           "kanji": "学生",
           "kana": "がくせい",
-          "romaji": "gakusei"
+          "romaji": "gakusei",
+          "on": "がくせい (gakusei)",
+          "meaningVi": "học sinh"
         },
         {
           "hanViet": "quốc gia",
           "kanji": "国家",
           "kana": "こっか",
-          "romaji": "kokka"
+          "romaji": "kokka",
+          "on": "こっか (kokka)",
+          "meaningVi": "quốc gia"
         }
-      ]
+      ],
+      "patternHv": "từ ghép Hán tự",
+      "patternJp": "on-yomi",
+      "titleVi": "Từ ghép Hán tự thường dùng âm On",
+      "titleEn": "Kanji compounds → On-yomi",
+      "descriptionVi": "Cách dùng: Dùng tốt nhất khi đoán cách đọc từ ghép Hán tự; vẫn cần đối chiếu từ điển.",
+      "descriptionEn": "Kanji compounds copied from Chinese roots often prefer on-yomi."
     },
     {
       "id": "usage-hv-is-heuristic-not-reading-source",
@@ -94,15 +104,25 @@
           "hanViet": "hành",
           "kanji": "行",
           "kana": "こう/ぎょう/あん",
-          "romaji": "kou/gyou/an"
+          "romaji": "kou/gyou/an",
+          "on": "こう/ぎょう/あん (kou/gyou/an)",
+          "meaningVi": "đi/làm"
         },
         {
           "hanViet": "sinh",
           "kanji": "生",
           "kana": "せい/しょう",
-          "romaji": "sei/shou"
+          "romaji": "sei/shou",
+          "on": "せい/しょう (sei/shou)",
+          "meaningVi": "sinh/sống"
         }
-      ]
+      ],
+      "patternHv": "âm Hán Việt",
+      "patternJp": "gợi ý âm",
+      "titleVi": "Hán Việt là gợi ý, không phải đáp án",
+      "titleEn": "Han-Viet → Sound-family hint",
+      "descriptionVi": "Cách dùng: Một âm Hán Việt có thể ứng với nhiều âm On; không hiển thị như đáp án tuyệt đối.",
+      "descriptionEn": "Vietnamese Han-Viet labels only suggest likely sound families."
     },
     {
       "id": "usage-multiple-on-readings",
@@ -124,15 +144,25 @@
           "hanViet": "minh",
           "kanji": "明",
           "kana": "めい/みょう",
-          "romaji": "mei/myou"
+          "romaji": "mei/myou",
+          "on": "めい/みょう (mei/myou)",
+          "meaningVi": "sáng"
         },
         {
           "hanViet": "hạ",
           "kanji": "下",
           "kana": "か/げ",
-          "romaji": "ka/ge"
+          "romaji": "ka/ge",
+          "on": "か/げ (ka/ge)",
+          "meaningVi": "dưới"
         }
-      ]
+      ],
+      "patternHv": "một chữ Hán",
+      "patternJp": "nhiều âm On",
+      "titleVi": "Một kanji có thể có nhiều âm On",
+      "titleEn": "One Kanji → Multiple On-readings",
+      "descriptionVi": "Cách dùng: Ưu tiên âm xuất hiện trong từ ghép thực tế.",
+      "descriptionEn": "Historical on-yomi layers can give one kanji several on-readings."
     },
     {
       "id": "initial-l-to-r",
@@ -150,24 +180,36 @@
       "noteVi": "Lực, lâm, lệnh thường vào hàng r- trong âm On.",
       "examples": [
         {
-          "hanViet": "lực",
-          "kanji": "力",
-          "kana": "りょく/りき",
-          "romaji": "ryoku/riki"
+          "hanViet": "lai",
+          "kanji": "来",
+          "kana": "ライ",
+          "romaji": "rai",
+          "on": "ライ (rai)",
+          "meaningVi": "đến"
         },
         {
-          "hanViet": "lâm",
-          "kanji": "林",
-          "kana": "りん",
-          "romaji": "rin"
+          "hanViet": "lý",
+          "kanji": "理",
+          "kana": "リ",
+          "romaji": "ri",
+          "on": "リ (ri)",
+          "meaningVi": "lý/lẽ phải"
         },
         {
-          "hanViet": "lệnh",
-          "kanji": "令",
-          "kana": "れい",
-          "romaji": "rei"
+          "hanViet": "lương",
+          "kanji": "良",
+          "kana": "リョウ",
+          "romaji": "ryou",
+          "on": "リョウ (ryou)",
+          "meaningVi": "tốt"
         }
-      ]
+      ],
+      "patternHv": "L",
+      "patternJp": "r",
+      "titleVi": "Phụ âm đầu L → R",
+      "titleEn": "Initial L → R",
+      "descriptionVi": "Quy tắc phụ âm đầu: Phụ âm L trong Hán Việt thường tương ứng với hàng R trong tiếng Nhật.",
+      "descriptionEn": "Han-Viet initial L often maps to Japanese R row."
     },
     {
       "id": "initial-m-to-m",
@@ -187,21 +229,33 @@
           "hanViet": "môn",
           "kanji": "門",
           "kana": "もん",
-          "romaji": "mon"
+          "romaji": "mon",
+          "on": "もん (mon)",
+          "meaningVi": "cổng"
         },
         {
           "hanViet": "mãn",
           "kanji": "満",
           "kana": "まん",
-          "romaji": "man"
+          "romaji": "man",
+          "on": "まん (man)",
+          "meaningVi": "đầy"
         },
         {
           "hanViet": "mệnh",
           "kanji": "命",
           "kana": "めい/みょう",
-          "romaji": "mei/myou"
+          "romaji": "mei/myou",
+          "on": "めい/みょう (mei/myou)",
+          "meaningVi": "mệnh/sự sống"
         }
-      ]
+      ],
+      "patternHv": "M",
+      "patternJp": "m",
+      "titleVi": "Phụ âm đầu M → M",
+      "titleEn": "Initial M → M",
+      "descriptionVi": "Quy tắc phụ âm đầu: Nhóm này khá ổn định với từ phổ thông.",
+      "descriptionEn": "Han-Viet initial M usually stays M."
     },
     {
       "id": "initial-n-nh-to-n-j",
@@ -223,21 +277,33 @@
           "hanViet": "niên",
           "kanji": "年",
           "kana": "ねん",
-          "romaji": "nen"
+          "romaji": "nen",
+          "on": "ねん (nen)",
+          "meaningVi": "năm"
         },
         {
           "hanViet": "nhật",
           "kanji": "日",
           "kana": "にち/じつ",
-          "romaji": "nichi/jitsu"
+          "romaji": "nichi/jitsu",
+          "on": "にち/じつ (nichi/jitsu)",
+          "meaningVi": "ngày/mặt trời"
         },
         {
           "hanViet": "nhân",
           "kanji": "人",
           "kana": "じん/にん",
-          "romaji": "jin/nin"
+          "romaji": "jin/nin",
+          "on": "じん/にん (jin/nin)",
+          "meaningVi": "người"
         }
-      ]
+      ],
+      "patternHv": "N/NH",
+      "patternJp": "n/j/ny",
+      "titleVi": "Phụ âm đầu N/NH → N/J/NY",
+      "titleEn": "Initial N/NH → N/J/NY",
+      "descriptionVi": "Quy tắc phụ âm đầu: NH cần kiểm tra từ thực tế vì thường lệch theo âm lịch sử.",
+      "descriptionEn": "Han-Viet N often maps to N; NH may map to N or J/NY families."
     },
     {
       "id": "initial-ng-ngh-to-g-gy",
@@ -259,21 +325,33 @@
           "hanViet": "ngọc",
           "kanji": "玉",
           "kana": "ぎょく",
-          "romaji": "gyoku"
+          "romaji": "gyoku",
+          "on": "ぎょく (gyoku)",
+          "meaningVi": "ngọc"
         },
         {
           "hanViet": "ngưu",
           "kanji": "牛",
           "kana": "ぎゅう",
-          "romaji": "gyuu"
+          "romaji": "gyuu",
+          "on": "ぎゅう (gyuu)",
+          "meaningVi": "trâu/bò"
         },
         {
           "hanViet": "nghiệp",
           "kanji": "業",
           "kana": "ぎょう",
-          "romaji": "gyou"
+          "romaji": "gyou",
+          "on": "ぎょう (gyou)",
+          "meaningVi": "nghiệp"
         }
-      ]
+      ],
+      "patternHv": "NG/NGH",
+      "patternJp": "g/gy",
+      "titleVi": "Phụ âm đầu NG/NGH → G/GY",
+      "titleEn": "Initial NG/NGH → G/GY",
+      "descriptionVi": "Quy tắc phụ âm đầu: Hay gặp ở ngọc, ngưu, nghiệp.",
+      "descriptionEn": "Han-Viet NG/NGH often maps to G or GY."
     },
     {
       "id": "initial-b-ph-to-h-f",
@@ -296,21 +374,33 @@
           "hanViet": "bản",
           "kanji": "本",
           "kana": "ほん",
-          "romaji": "hon"
+          "romaji": "hon",
+          "on": "ほん (hon)",
+          "meaningVi": "gốc/sách"
         },
         {
           "hanViet": "pháp",
           "kanji": "法",
           "kana": "ほう",
-          "romaji": "hou"
+          "romaji": "hou",
+          "on": "ほう (hou)",
+          "meaningVi": "pháp/luật"
         },
         {
           "hanViet": "bất",
           "kanji": "不",
           "kana": "ふ/ぶ",
-          "romaji": "fu/bu"
+          "romaji": "fu/bu",
+          "on": "ふ/ぶ (fu/bu)",
+          "meaningVi": "không"
         }
-      ]
+      ],
+      "patternHv": "B/PH",
+      "patternJp": "h/f/b",
+      "titleVi": "Phụ âm đầu B/PH → H/F/B",
+      "titleEn": "Initial B/PH → H/F/B",
+      "descriptionVi": "Quy tắc phụ âm đầu: Nhóm p/b lịch sử đổi mạnh trong tiếng Nhật nên phải xem ví dụ.",
+      "descriptionEn": "Han-Viet B/PH often maps to H, F, or B depending on the kanji layer."
     },
     {
       "id": "initial-c-k-kh-gi-h-qu-to-k",
@@ -333,21 +423,33 @@
           "hanViet": "quốc",
           "kanji": "国",
           "kana": "こく",
-          "romaji": "koku"
+          "romaji": "koku",
+          "on": "こく (koku)",
+          "meaningVi": "nước/quốc gia"
         },
         {
           "hanViet": "học",
           "kanji": "学",
           "kana": "がく",
-          "romaji": "gaku"
+          "romaji": "gaku",
+          "on": "がく (gaku)",
+          "meaningVi": "học"
         },
         {
           "hanViet": "giới",
           "kanji": "界",
           "kana": "かい",
-          "romaji": "kai"
+          "romaji": "kai",
+          "on": "かい (kai)",
+          "meaningVi": "giới"
         }
-      ]
+      ],
+      "patternHv": "C/K/KH/GI/H/QU",
+      "patternJp": "k/g",
+      "titleVi": "Phụ âm đầu C/K/KH/GI/H/QU → K/G",
+      "titleEn": "Initial C/K/KH/GI/H/QU → K/G",
+      "descriptionVi": "Quy tắc phụ âm đầu: K/G voicing can change inside compounds.",
+      "descriptionEn": "Han-Viet C/K/KH/GI/H/QU often points to K or G families."
     },
     {
       "id": "initial-d-to-y",
@@ -367,21 +469,33 @@
           "hanViet": "dụng",
           "kanji": "用",
           "kana": "よう",
-          "romaji": "you"
+          "romaji": "you",
+          "on": "よう (you)",
+          "meaningVi": "dùng"
         },
         {
           "hanViet": "dương",
           "kanji": "陽",
           "kana": "よう",
-          "romaji": "you"
+          "romaji": "you",
+          "on": "よう (you)",
+          "meaningVi": "dương/mặt trời"
         },
         {
           "hanViet": "dược",
           "kanji": "薬",
           "kana": "やく",
-          "romaji": "yaku"
+          "romaji": "yaku",
+          "on": "やく (yaku)",
+          "meaningVi": "thuốc"
         }
-      ]
+      ],
+      "patternHv": "D/GI",
+      "patternJp": "y",
+      "titleVi": "Phụ âm đầu D/GI → Y",
+      "titleEn": "Initial D/GI → Y",
+      "descriptionVi": "Quy tắc phụ âm đầu: Dùng như tín hiệu phụ, nhất là dụng/dương/dược.",
+      "descriptionEn": "Han-Viet D/GI in some yodized rimes may map to Y."
     },
     {
       "id": "initial-ch-tr-to-sh-ch",
@@ -403,21 +517,33 @@
           "hanViet": "chủ",
           "kanji": "主",
           "kana": "しゅ",
-          "romaji": "shu"
+          "romaji": "shu",
+          "on": "しゅ (shu)",
+          "meaningVi": "chủ"
         },
         {
           "hanViet": "trung",
           "kanji": "中",
           "kana": "ちゅう",
-          "romaji": "chuu"
+          "romaji": "chuu",
+          "on": "ちゅう (chuu)",
+          "meaningVi": "giữa"
         },
         {
           "hanViet": "trực",
           "kanji": "直",
           "kana": "ちょく/じき",
-          "romaji": "choku/jiki"
+          "romaji": "choku/jiki",
+          "on": "ちょく/じき (choku/jiki)",
+          "meaningVi": "thẳng"
         }
-      ]
+      ],
+      "patternHv": "CH/TR",
+      "patternJp": "sh/ch",
+      "titleVi": "Phụ âm đầu CH/TR → SH/CH",
+      "titleEn": "Initial CH/TR → SH/CH",
+      "descriptionVi": "Quy tắc phụ âm đầu: Phổ biến trong chủ, trung, trực.",
+      "descriptionEn": "Han-Viet CH/TR often maps to SH or CH."
     },
     {
       "id": "initial-s-x-to-s-sh",
@@ -439,21 +565,33 @@
           "hanViet": "sinh",
           "kanji": "生",
           "kana": "せい/しょう",
-          "romaji": "sei/shou"
+          "romaji": "sei/shou",
+          "on": "せい/しょう (sei/shou)",
+          "meaningVi": "sinh/sống"
         },
         {
           "hanViet": "xã",
           "kanji": "社",
           "kana": "しゃ",
-          "romaji": "sha"
+          "romaji": "sha",
+          "on": "しゃ (sha)",
+          "meaningVi": "xã/công ty"
         },
         {
           "hanViet": "sơn",
           "kanji": "山",
           "kana": "さん",
-          "romaji": "san"
+          "romaji": "san",
+          "on": "さん (san)",
+          "meaningVi": "núi"
         }
-      ]
+      ],
+      "patternHv": "S/X",
+      "patternJp": "s/sh",
+      "titleVi": "Phụ âm đầu S/X → S/SH",
+      "titleEn": "Initial S/X → S/SH",
+      "descriptionVi": "Quy tắc phụ âm đầu: Nhìn nguyên âm sau để chọn sei/shou/sha/sou.",
+      "descriptionEn": "Han-Viet S/X often maps to S or SH."
     },
     {
       "id": "initial-t-th-to-t-s",
@@ -475,21 +613,33 @@
           "hanViet": "thiên",
           "kanji": "天",
           "kana": "てん",
-          "romaji": "ten"
+          "romaji": "ten",
+          "on": "てん (ten)",
+          "meaningVi": "trời"
         },
         {
           "hanViet": "tâm",
           "kanji": "心",
           "kana": "しん",
-          "romaji": "shin"
+          "romaji": "shin",
+          "on": "しん (shin)",
+          "meaningVi": "tâm"
         },
         {
           "hanViet": "thông",
           "kanji": "通",
           "kana": "つう",
-          "romaji": "tsuu"
+          "romaji": "tsuu",
+          "on": "つう (tsuu)",
+          "meaningVi": "thông/đi qua"
         }
-      ]
+      ],
+      "patternHv": "T/TH",
+      "patternJp": "t/s/sh",
+      "titleVi": "Phụ âm đầu T/TH → T/S/SH",
+      "titleEn": "Initial T/TH → T/S/SH",
+      "descriptionVi": "Quy tắc phụ âm đầu: Thiên -> ten/sen-type, tâm -> shin-type; cần dùng cùng vần.",
+      "descriptionEn": "Han-Viet T/TH often maps to T, S, or SH depending on rime."
     },
     {
       "id": "initial-d-with-stroke-to-t-d",
@@ -511,21 +661,33 @@
           "hanViet": "đông",
           "kanji": "東",
           "kana": "とう",
-          "romaji": "tou"
+          "romaji": "tou",
+          "on": "とう (tou)",
+          "meaningVi": "phía đông"
         },
         {
           "hanViet": "đồng",
           "kanji": "同",
           "kana": "どう",
-          "romaji": "dou"
+          "romaji": "dou",
+          "on": "どう (dou)",
+          "meaningVi": "cùng"
         },
         {
           "hanViet": "đạo",
           "kanji": "道",
           "kana": "どう",
-          "romaji": "dou"
+          "romaji": "dou",
+          "on": "どう (dou)",
+          "meaningVi": "đường/đạo"
         }
-      ]
+      ],
+      "patternHv": "Đ",
+      "patternJp": "t/d",
+      "titleVi": "Phụ âm đầu Đ → T/D",
+      "titleEn": "Initial Đ → T/D",
+      "descriptionVi": "Quy tắc phụ âm đầu: Đông, đồng, đạo là nhóm ví dụ hay gặp.",
+      "descriptionEn": "Han-Viet Đ often maps to T or D."
     },
     {
       "id": "initial-v-to-b-m",
@@ -547,21 +709,33 @@
           "hanViet": "vật",
           "kanji": "物",
           "kana": "ぶつ/もつ",
-          "romaji": "butsu/motsu"
+          "romaji": "butsu/motsu",
+          "on": "ぶつ/もつ (butsu/motsu)",
+          "meaningVi": "vật"
         },
         {
           "hanViet": "vạn",
           "kanji": "万",
           "kana": "まん/ばん",
-          "romaji": "man/ban"
+          "romaji": "man/ban",
+          "on": "まん/ばん (man/ban)",
+          "meaningVi": "vạn"
         },
         {
           "hanViet": "vị",
           "kanji": "味",
           "kana": "み",
-          "romaji": "mi"
+          "romaji": "mi",
+          "on": "み (mi)",
+          "meaningVi": "vị"
         }
-      ]
+      ],
+      "patternHv": "V",
+      "patternJp": "b/m",
+      "titleVi": "Phụ âm đầu V → B/M",
+      "titleEn": "Initial V → B/M",
+      "descriptionVi": "Quy tắc phụ âm đầu: Đây là nhóm nhiều ngoại lệ, chỉ nên dùng để mở rộng tìm kiếm.",
+      "descriptionEn": "Han-Viet V may surface as B, M, or lose the initial in common readings."
     },
     {
       "id": "final-n-m-to-n",
@@ -583,21 +757,33 @@
           "hanViet": "sơn",
           "kanji": "山",
           "kana": "さん",
-          "romaji": "san"
+          "romaji": "san",
+          "on": "さん (san)",
+          "meaningVi": "núi"
         },
         {
           "hanViet": "tâm",
           "kanji": "心",
           "kana": "しん",
-          "romaji": "shin"
+          "romaji": "shin",
+          "on": "しん (shin)",
+          "meaningVi": "tâm"
         },
         {
           "hanViet": "môn",
           "kanji": "門",
           "kana": "もん",
-          "romaji": "mon"
+          "romaji": "mon",
+          "on": "もん (mon)",
+          "meaningVi": "cổng"
         }
-      ]
+      ],
+      "patternHv": "-n/-m",
+      "patternJp": "-n",
+      "titleVi": "Âm cuối -n/-m → -n",
+      "titleEn": "Final -n/-m → -n",
+      "descriptionVi": "Quy tắc âm cuối: Âm On không giữ phân biệt -n/-m như tiếng Việt.",
+      "descriptionEn": "Han-Viet finals -n and -m often map to Japanese final -n."
     },
     {
       "id": "final-c-to-ku",
@@ -619,21 +805,33 @@
           "hanViet": "quốc",
           "kanji": "国",
           "kana": "こく",
-          "romaji": "koku"
+          "romaji": "koku",
+          "on": "こく (koku)",
+          "meaningVi": "nước/quốc gia"
         },
         {
           "hanViet": "học",
           "kanji": "学",
           "kana": "がく",
-          "romaji": "gaku"
+          "romaji": "gaku",
+          "on": "がく (gaku)",
+          "meaningVi": "học"
         },
         {
           "hanViet": "mục",
           "kanji": "目",
           "kana": "もく",
-          "romaji": "moku"
+          "romaji": "moku",
+          "on": "もく (moku)",
+          "meaningVi": "mắt/mục"
         }
-      ]
+      ],
+      "patternHv": "-c",
+      "patternJp": "-ku/-k",
+      "titleVi": "Âm cuối -c → -ku/-k",
+      "titleEn": "Final -c → -ku/-k",
+      "descriptionVi": "Quy tắc âm cuối: Khi ghép từ, -ku có thể gây âm ngắt hoặc biến âm.",
+      "descriptionEn": "Han-Viet final -c often maps to -ku/-k."
     },
     {
       "id": "final-t-to-tsu-chi",
@@ -656,21 +854,33 @@
           "hanViet": "nhất",
           "kanji": "一",
           "kana": "いち/いつ",
-          "romaji": "ichi/itsu"
+          "romaji": "ichi/itsu",
+          "on": "いち/いつ (ichi/itsu)",
+          "meaningVi": "một"
         },
         {
           "hanViet": "nhật",
           "kanji": "日",
           "kana": "にち/じつ",
-          "romaji": "nichi/jitsu"
+          "romaji": "nichi/jitsu",
+          "on": "にち/じつ (nichi/jitsu)",
+          "meaningVi": "ngày/mặt trời"
         },
         {
           "hanViet": "xuất",
           "kanji": "出",
           "kana": "しゅつ",
-          "romaji": "shutsu"
+          "romaji": "shutsu",
+          "on": "しゅつ (shutsu)",
+          "meaningVi": "ra/xuất"
         }
-      ]
+      ],
+      "patternHv": "-t",
+      "patternJp": "-tsu/-chi",
+      "titleVi": "Âm cuối -t → -tsu/-chi",
+      "titleEn": "Final -t → -tsu/-chi",
+      "descriptionVi": "Quy tắc âm cuối: Rất hữu ích với nhất, nhật, vật, xuất.",
+      "descriptionEn": "Han-Viet final -t often maps to -tsu or -chi."
     },
     {
       "id": "final-p-to-long-or-tsu",
@@ -694,21 +904,33 @@
           "hanViet": "pháp",
           "kanji": "法",
           "kana": "ほう",
-          "romaji": "hou"
+          "romaji": "hou",
+          "on": "ほう (hou)",
+          "meaningVi": "pháp/luật"
         },
         {
           "hanViet": "hiệp",
           "kanji": "協",
           "kana": "きょう",
-          "romaji": "kyou"
+          "romaji": "kyou",
+          "on": "きょう (kyou)",
+          "meaningVi": "hợp tác"
         },
         {
           "hanViet": "lập",
           "kanji": "立",
           "kana": "りつ",
-          "romaji": "ritsu"
+          "romaji": "ritsu",
+          "on": "りつ (ritsu)",
+          "meaningVi": "đứng/lập"
         }
-      ]
+      ],
+      "patternHv": "-p",
+      "patternJp": "trường âm/-tsu",
+      "titleVi": "Âm cuối -p → trường âm hoặc -tsu",
+      "titleEn": "Final -p → Long vowel or -tsu",
+      "descriptionVi": "Quy tắc âm cuối: Nhóm này nhiều biến thể; nên lưu cả ví dụ trực tiếp.",
+      "descriptionEn": "Han-Viet final -p often becomes a long vowel family, but some common kanji read as -tsu."
     },
     {
       "id": "final-ch-to-ku-ki",
@@ -730,21 +952,33 @@
           "hanViet": "trực",
           "kanji": "直",
           "kana": "ちょく/じき",
-          "romaji": "choku/jiki"
+          "romaji": "choku/jiki",
+          "on": "ちょく/じき (choku/jiki)",
+          "meaningVi": "thẳng"
         },
         {
           "hanViet": "dịch",
           "kanji": "易",
           "kana": "えき",
-          "romaji": "eki"
+          "romaji": "eki",
+          "on": "えき (eki)",
+          "meaningVi": "dễ/đổi"
         },
         {
           "hanViet": "thích",
           "kanji": "適",
           "kana": "てき",
-          "romaji": "teki"
+          "romaji": "teki",
+          "on": "てき (teki)",
+          "meaningVi": "thích hợp"
         }
-      ]
+      ],
+      "patternHv": "-ch",
+      "patternJp": "-ku/-ki",
+      "titleVi": "Âm cuối -ch → -ku/-ki",
+      "titleEn": "Final -ch → -ku/-ki",
+      "descriptionVi": "Quy tắc âm cuối: Dùng cùng nguyên âm trước nó để đoán chính xác hơn.",
+      "descriptionEn": "Han-Viet final -ch often maps near -ku, -ki, or palatalized readings."
     },
     {
       "id": "rime-inh-anh-enh-to-ei",
@@ -766,21 +1000,33 @@
           "hanViet": "anh",
           "kanji": "英",
           "kana": "えい",
-          "romaji": "ei"
+          "romaji": "ei",
+          "on": "えい (ei)",
+          "meaningVi": "anh/tinh hoa"
         },
         {
           "hanViet": "mệnh",
           "kanji": "命",
           "kana": "めい",
-          "romaji": "mei"
+          "romaji": "mei",
+          "on": "めい (mei)",
+          "meaningVi": "mệnh/sự sống"
         },
         {
           "hanViet": "sinh",
           "kanji": "生",
           "kana": "せい",
-          "romaji": "sei"
+          "romaji": "sei",
+          "on": "せい (sei)",
+          "meaningVi": "sinh/sống"
         }
-      ]
+      ],
+      "patternHv": "-inh/-anh/-ênh",
+      "patternJp": "ei",
+      "titleVi": "Vần -inh/-anh/-ênh → ei",
+      "titleEn": "Rime -inh/-anh/-ênh → ei",
+      "descriptionVi": "Quy tắc vần: Sinh có thêm shou, nhưng sei là gợi ý mạnh trong nhiều từ.",
+      "descriptionEn": "Han-Viet -inh/-anh/-ênh frequently points to ei or related long-e readings."
     },
     {
       "id": "rime-ien-iem-yen-to-en",
@@ -801,21 +1047,33 @@
           "hanViet": "niên",
           "kanji": "年",
           "kana": "ねん",
-          "romaji": "nen"
+          "romaji": "nen",
+          "on": "ねん (nen)",
+          "meaningVi": "năm"
         },
         {
           "hanViet": "niệm",
           "kanji": "念",
           "kana": "ねん",
-          "romaji": "nen"
+          "romaji": "nen",
+          "on": "ねん (nen)",
+          "meaningVi": "ý niệm"
         },
         {
           "hanViet": "thiền",
           "kanji": "禅",
           "kana": "ぜん",
-          "romaji": "zen"
+          "romaji": "zen",
+          "on": "ぜん (zen)",
+          "meaningVi": "thiền"
         }
-      ]
+      ],
+      "patternHv": "-iên/-iêm/-yên",
+      "patternJp": "en",
+      "titleVi": "Vần -iên/-iêm/-yên → en",
+      "titleEn": "Rime -iên/-iêm/-yên → en",
+      "descriptionVi": "Quy tắc vần: Âm đầu có thể thay đổi, nhưng phần cuối thường về -en.",
+      "descriptionEn": "Han-Viet -iên/-iêm/-yên often points to en."
     },
     {
       "id": "rime-ong-ung-uong-to-ou-uu",
@@ -839,21 +1097,33 @@
           "hanViet": "đông",
           "kanji": "東",
           "kana": "とう",
-          "romaji": "tou"
+          "romaji": "tou",
+          "on": "とう (tou)",
+          "meaningVi": "phía đông"
         },
         {
           "hanViet": "trung",
           "kanji": "中",
           "kana": "ちゅう",
-          "romaji": "chuu"
+          "romaji": "chuu",
+          "on": "ちゅう (chuu)",
+          "meaningVi": "giữa"
         },
         {
           "hanViet": "dương",
           "kanji": "陽",
           "kana": "よう",
-          "romaji": "you"
+          "romaji": "you",
+          "on": "よう (you)",
+          "meaningVi": "dương/mặt trời"
         }
-      ]
+      ],
+      "patternHv": "-ông/-ung/-ương",
+      "patternJp": "ou/uu/you",
+      "titleVi": "Vần -ông/-ung/-ương → ou/uu/you",
+      "titleEn": "Rime -ông/-ung/-ương → ou/uu/you",
+      "descriptionVi": "Quy tắc vần: Đây là nhóm tạo trường âm rất thường gặp.",
+      "descriptionEn": "Han-Viet -ông/-ung/-ương often points to ou, uu, or you."
     },
     {
       "id": "rime-ac-uoc-to-aku-yaku",
@@ -876,21 +1146,33 @@
           "hanViet": "ác",
           "kanji": "悪",
           "kana": "あく",
-          "romaji": "aku"
+          "romaji": "aku",
+          "on": "あく (aku)",
+          "meaningVi": "xấu/ác"
         },
         {
           "hanViet": "các",
           "kanji": "各",
           "kana": "かく",
-          "romaji": "kaku"
+          "romaji": "kaku",
+          "on": "かく (kaku)",
+          "meaningVi": "mỗi"
         },
         {
           "hanViet": "dược",
           "kanji": "薬",
           "kana": "やく",
-          "romaji": "yaku"
+          "romaji": "yaku",
+          "on": "やく (yaku)",
+          "meaningVi": "thuốc"
         }
-      ]
+      ],
+      "patternHv": "-ác/-ạc/-ước/-ược",
+      "patternJp": "aku/kaku/yaku",
+      "titleVi": "Vần -ác/-ạc/-ước/-ược → aku/kaku/yaku",
+      "titleEn": "Rime -ác/-ạc/-ước/-ược → aku/kaku/yaku",
+      "descriptionVi": "Quy tắc vần: Final -c kết hợp với a/ươ thường giữ dấu k rõ.",
+      "descriptionEn": "Han-Viet -ác/-ạc/-ước/-ược often points to aku, kaku, or yaku."
     },
     {
       "id": "rime-ich-to-eki-seki",
@@ -914,21 +1196,33 @@
           "hanViet": "dịch",
           "kanji": "駅",
           "kana": "えき",
-          "romaji": "eki"
+          "romaji": "eki",
+          "on": "えき (eki)",
+          "meaningVi": "ga"
         },
         {
           "hanViet": "lịch",
           "kanji": "歴",
           "kana": "れき",
-          "romaji": "reki"
+          "romaji": "reki",
+          "on": "れき (reki)",
+          "meaningVi": "lịch sử"
         },
         {
           "hanViet": "thạch",
           "kanji": "石",
           "kana": "せき",
-          "romaji": "seki"
+          "romaji": "seki",
+          "on": "せき (seki)",
+          "meaningVi": "đá"
         }
-      ]
+      ],
+      "patternHv": "-ịch/-ích",
+      "patternJp": "eki/seki/teki/reki",
+      "titleVi": "Vần -ịch/-ích → eki/seki",
+      "titleEn": "Rime -ịch/-ích → eki/seki",
+      "descriptionVi": "Quy tắc vần: Nhóm -ich/-ịch thường về e/i + k.",
+      "descriptionEn": "Han-Viet -ịch/-ích often points to eki, seki, teki, or reki."
     },
     {
       "id": "rime-uu-ieu-yeu-to-yuu-you",
@@ -950,21 +1244,33 @@
           "hanViet": "ngưu",
           "kanji": "牛",
           "kana": "ぎゅう",
-          "romaji": "gyuu"
+          "romaji": "gyuu",
+          "on": "ぎゅう (gyuu)",
+          "meaningVi": "trâu/bò"
         },
         {
           "hanViet": "yếu",
           "kanji": "要",
           "kana": "よう",
-          "romaji": "you"
+          "romaji": "you",
+          "on": "よう (you)",
+          "meaningVi": "cần/yếu"
         },
         {
           "hanViet": "biểu",
           "kanji": "表",
           "kana": "ひょう",
-          "romaji": "hyou"
+          "romaji": "hyou",
+          "on": "ひょう (hyou)",
+          "meaningVi": "biểu/bề mặt"
         }
-      ]
+      ],
+      "patternHv": "-ưu/-iêu/-yêu",
+      "patternJp": "yuu/you",
+      "titleVi": "Vần -ưu/-iêu/-yêu → yuu/you",
+      "titleEn": "Rime -ưu/-iêu/-yêu → yuu/you",
+      "descriptionVi": "Quy tắc vần: Chọn yuu/you theo âm đầu và chữ cụ thể.",
+      "descriptionEn": "Han-Viet -ưu/-iêu/-yêu often points to yuu or you."
     },
     {
       "id": "long-vowel-ou-from-ang-ong",
@@ -985,21 +1291,33 @@
           "hanViet": "công",
           "kanji": "工",
           "kana": "こう",
-          "romaji": "kou"
+          "romaji": "kou",
+          "on": "こう (kou)",
+          "meaningVi": "công việc"
         },
         {
           "hanViet": "trường",
           "kanji": "長",
           "kana": "ちょう",
-          "romaji": "chou"
+          "romaji": "chou",
+          "on": "ちょう (chou)",
+          "meaningVi": "dài/trưởng"
         },
         {
           "hanViet": "đông",
           "kanji": "東",
           "kana": "とう",
-          "romaji": "tou"
+          "romaji": "tou",
+          "on": "とう (tou)",
+          "meaningVi": "phía đông"
         }
-      ]
+      ],
+      "patternHv": "-ang/-ong/-ông",
+      "patternJp": "ou",
+      "titleVi": "Trường âm OU từ -ang/-ong/-ông",
+      "titleEn": "Long OU from -ang/-ong/-ông",
+      "descriptionVi": "Quy tắc trường âm: Ghi bằng おう/ょう tùy hàng âm.",
+      "descriptionEn": "Han-Viet -ang/-ong/-ông often produces long ou."
     },
     {
       "id": "long-vowel-ei-from-inh-anh",
@@ -1020,21 +1338,33 @@
           "hanViet": "anh",
           "kanji": "英",
           "kana": "えい",
-          "romaji": "ei"
+          "romaji": "ei",
+          "on": "えい (ei)",
+          "meaningVi": "anh/tinh hoa"
         },
         {
           "hanViet": "minh",
           "kanji": "明",
           "kana": "めい",
-          "romaji": "mei"
+          "romaji": "mei",
+          "on": "めい (mei)",
+          "meaningVi": "sáng"
         },
         {
           "hanViet": "lệnh",
           "kanji": "令",
           "kana": "れい",
-          "romaji": "rei"
+          "romaji": "rei",
+          "on": "れい (rei)",
+          "meaningVi": "mệnh lệnh"
         }
-      ]
+      ],
+      "patternHv": "-inh/-anh/-ênh",
+      "patternJp": "ei",
+      "titleVi": "Trường âm EI từ -inh/-anh",
+      "titleEn": "Long EI from -inh/-anh",
+      "descriptionVi": "Quy tắc trường âm: Có ngoại lệ sang shou/you, nhưng ei là tín hiệu mạnh.",
+      "descriptionEn": "Han-Viet -inh/-anh/-ênh often produces long ei."
     },
     {
       "id": "exception-onbin-gemination",
@@ -1059,21 +1389,33 @@
           "hanViet": "học hiệu",
           "kanji": "学校",
           "kana": "がっこう",
-          "romaji": "gakkou"
+          "romaji": "gakkou",
+          "on": "がっこう (gakkou)",
+          "meaningVi": "trường học"
         },
         {
           "hanViet": "xuất phát",
           "kanji": "出発",
           "kana": "しゅっぱつ",
-          "romaji": "shuppatsu"
+          "romaji": "shuppatsu",
+          "on": "しゅっぱつ (shuppatsu)",
+          "meaningVi": "xuất phát"
         },
         {
           "hanViet": "nhất bôi",
           "kanji": "一杯",
           "kana": "いっぱい",
-          "romaji": "ippai"
+          "romaji": "ippai",
+          "on": "いっぱい (ippai)",
+          "meaningVi": "một cốc/đầy"
         }
-      ]
+      ],
+      "patternHv": "ku/tsu",
+      "patternJp": "っ",
+      "titleVi": "Biến âm: ku/tsu → っ",
+      "titleEn": "Sound change: ku/tsu → っ",
+      "descriptionVi": "Ngoại lệ cần nhớ: Sau khi đoán âm từng chữ, vẫn cần áp dụng biến âm trong từ ghép.",
+      "descriptionEn": "Japanese sound changes can contract ku/tsu before another consonant into small tsu."
     },
     {
       "id": "exception-kun-mixed-readings",
@@ -1095,21 +1437,33 @@
           "hanViet": "thủ chỉ",
           "kanji": "手紙",
           "kana": "てがみ",
-          "romaji": "tegami"
+          "romaji": "tegami",
+          "on": "てがみ (tegami)",
+          "meaningVi": "thư"
         },
         {
           "hanViet": "đại nhân",
           "kanji": "大人",
           "kana": "おとな",
-          "romaji": "otona"
+          "romaji": "otona",
+          "on": "おとな (otona)",
+          "meaningVi": "người lớn"
         },
         {
           "hanViet": "kim nhật",
           "kanji": "今日",
           "kana": "きょう",
-          "romaji": "kyou"
+          "romaji": "kyou",
+          "on": "きょう (kyou)",
+          "meaningVi": "hôm nay"
         }
-      ]
+      ],
+      "patternHv": "từ phổ biến",
+      "patternJp": "kun/mixed",
+      "titleVi": "Ngoại lệ: âm Kun hoặc đọc hỗn hợp",
+      "titleEn": "Exception: kun or mixed readings",
+      "descriptionVi": "Ngoại lệ cần nhớ: Không ép mọi từ ghép Hán tự thành âm On.",
+      "descriptionEn": "Some common words use kun-yomi or mixed readings even when written with Sino-Japanese kanji."
     },
     {
       "id": "exception-word-level-han-viet",
@@ -1131,21 +1485,33 @@
           "hanViet": "quốc gia",
           "kanji": "国家",
           "kana": "こっか",
-          "romaji": "kokka"
+          "romaji": "kokka",
+          "on": "こっか (kokka)",
+          "meaningVi": "quốc gia"
         },
         {
           "hanViet": "nhật ký",
           "kanji": "日記",
           "kana": "にっき",
-          "romaji": "nikki"
+          "romaji": "nikki",
+          "on": "にっき (nikki)",
+          "meaningVi": "nhật ký"
         },
         {
           "hanViet": "học kỳ",
           "kanji": "学期",
           "kana": "がっき",
-          "romaji": "gakki"
+          "romaji": "gakki",
+          "on": "がっき (gakki)",
+          "meaningVi": "học kỳ"
         }
-      ]
+      ],
+      "patternHv": "từng chữ",
+      "patternJp": "từ ghép",
+      "titleVi": "Đoán từng chữ rồi ghép âm",
+      "titleEn": "Per-kanji reading → compound reading",
+      "descriptionVi": "Ngoại lệ cần nhớ: Âm Hán Việt của cả cụm không phải lúc nào map trực tiếp sang kana.",
+      "descriptionEn": "Guess each kanji reading, then combine and apply Japanese compound rules."
     },
     {
       "id": "exception-check-dictionary-before-drill",
@@ -1166,15 +1532,25 @@
           "hanViet": "hành",
           "kanji": "行",
           "kana": "こう/ぎょう/あん",
-          "romaji": "kou/gyou/an"
+          "romaji": "kou/gyou/an",
+          "on": "こう/ぎょう/あん (kou/gyou/an)",
+          "meaningVi": "đi/làm"
         },
         {
           "hanViet": "thượng",
           "kanji": "上",
           "kana": "じょう/しょう",
-          "romaji": "jou/shou"
+          "romaji": "jou/shou",
+          "on": "じょう/しょう (jou/shou)",
+          "meaningVi": "trên/thượng"
         }
-      ]
+      ],
+      "patternHv": "ứng viên",
+      "patternJp": "từ điển",
+      "titleVi": "Luôn kiểm từ điển trước khi luyện",
+      "titleEn": "Check dictionary-attested readings before drills",
+      "descriptionVi": "Ngoại lệ cần nhớ: Các rule này phù hợp làm gợi ý học kanji, không thay dữ liệu đọc chính thức.",
+      "descriptionEn": "Use the rules to generate candidates, then keep dictionary-attested readings in drills."
     }
   ]
 }

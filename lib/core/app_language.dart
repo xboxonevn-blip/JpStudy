@@ -7465,6 +7465,105 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get hanVietCategoryUsage {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Usage';
+      case AppLanguage.vi:
+        return 'Cách dùng';
+      case AppLanguage.ja:
+        return '使い方';
+    }
+  }
+
+  String get hanVietCategoryInitial {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Initial';
+      case AppLanguage.vi:
+        return 'Phụ âm đầu';
+      case AppLanguage.ja:
+        return '語頭音';
+    }
+  }
+
+  String get hanVietCategoryFinal {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Final';
+      case AppLanguage.vi:
+        return 'Phụ âm cuối';
+      case AppLanguage.ja:
+        return '語末音';
+    }
+  }
+
+  String get hanVietCategoryTone {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Tone';
+      case AppLanguage.vi:
+        return 'Thanh điệu';
+      case AppLanguage.ja:
+        return '声調';
+    }
+  }
+
+  String get hanVietCategoryException {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Exceptions';
+      case AppLanguage.vi:
+        return 'Ngoại lệ';
+      case AppLanguage.ja:
+        return '例外';
+    }
+  }
+
+  String get hanVietExamplesLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Examples';
+      case AppLanguage.vi:
+        return 'Ví dụ';
+      case AppLanguage.ja:
+        return '例';
+    }
+  }
+
+  String get hanVietConfidenceHigh {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Common';
+      case AppLanguage.vi:
+        return 'Phổ biến';
+      case AppLanguage.ja:
+        return 'よく使う';
+    }
+  }
+
+  String get hanVietConfidenceMedium {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Moderate';
+      case AppLanguage.vi:
+        return 'Vừa';
+      case AppLanguage.ja:
+        return '中程度';
+    }
+  }
+
+  String get hanVietConfidenceLow {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Rare';
+      case AppLanguage.vi:
+        return 'Hiếm';
+      case AppLanguage.ja:
+        return 'まれ';
+    }
+  }
+
   String get hanVietInlinePanelTitle {
     switch (this) {
       case AppLanguage.en:
