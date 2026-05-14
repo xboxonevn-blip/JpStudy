@@ -7471,6 +7471,50 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String kanaLockedHeadline(String level) {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Kana is N5 content — you are at $level';
+      case AppLanguage.vi:
+        return 'Bảng chữ là cấp N5 — bạn đang ở $level';
+      case AppLanguage.ja:
+        return 'かなはN5内容です — 現在は$level';
+    }
+  }
+
+  String kanaLockedBody(String level) {
+    switch (this) {
+      case AppLanguage.en:
+        return 'You are studying at $level. Switch to N5 to study Hiragana, Katakana, and Han-Viet reading hints.';
+      case AppLanguage.vi:
+        return 'Bạn đang học ở cấp $level. Chuyển sang N5 để học Hiragana, Katakana, và mẹo Hán Việt.';
+      case AppLanguage.ja:
+        return '現在は$levelを学習中です。N5に切り替えると、ひらがな、カタカナ、漢越読みのヒントを学べます。';
+    }
+  }
+
+  String get kanaLockedSwitchAction {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Switch to N5 now';
+      case AppLanguage.vi:
+        return 'Đổi sang N5 ngay';
+      case AppLanguage.ja:
+        return '今すぐN5に切り替える';
+    }
+  }
+
+  String kanaLockedBackAction(String level) {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Back to $level home';
+      case AppLanguage.vi:
+        return 'Quay về home $level';
+      case AppLanguage.ja:
+        return '$levelホームへ戻る';
+    }
+  }
+
   String get foundationsSourceLabel {
     switch (this) {
       case AppLanguage.en:
