@@ -7515,6 +7515,28 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String kanaSnackbarUnavailable(String level) {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Kana is not available at $level';
+      case AppLanguage.vi:
+        return 'Kana không khả dụng ở cấp $level';
+      case AppLanguage.ja:
+        return '$levelではかなを利用できません';
+    }
+  }
+
+  String get kanaSnackbarSwitchAction {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Switch?';
+      case AppLanguage.vi:
+        return 'Đổi N5?';
+      case AppLanguage.ja:
+        return '切り替える？';
+    }
+  }
+
   String get foundationsSourceLabel {
     switch (this) {
       case AppLanguage.en:
