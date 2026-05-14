@@ -16,6 +16,13 @@ Content tag chi la bien bao, khong phai chat luong. Neu cau giai thich tieng Vie
 
 Lo trinh sach khong phai lo trinh hoc. Neu N3-N1 co du noi dung theo cap JLPT va noi dung do tot, app khong can bat buoc di tiep Minna. Nhung neu app de nguoi hoc tin rang ho dang theo tiep "duong Minna", thieu Minna Chukyu se thanh loi hua sai. Vi vay nhan route phai theo bang chung: level nao, nguon nao, muc tieu nao.
 
+Coverage docs are part of product truth, not support collateral. If the catalog
+UI unlocks data-backed routes but docs still say "coming soon" or "publisher
+constraint" imprecisely, the app trains operators to debug a nonexistent data
+gap. The durable rule is evidence-first labeling: shipped assets decide route
+availability, publisher references explain scope, and negative findings prevent
+over-claiming.
+
 ## D2 / Q2.4
 
 Lien ket noi dung khong chi la co file vocab va file kanji. Muon goi y "hoc kanji nay truoc tu nay", app phai biet chu nao nam trong tu nao, chu do da co bai kanji nao, va nguoi hoc da hoc chua. Hien tai grammar gan voi vi du kha tot, nhung kanji-vocab moi la do thi thua; nen no dung de tim lo hong, chua dung de khoa duong hoc.

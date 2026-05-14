@@ -21,6 +21,24 @@ This app uses source-imported upper JLPT seed data with attribution.
 - Vietnamese websites/dictionaries/courses are not bulk-copied into the app unless a compatible license or explicit permission is verified.
 - Vietnamese explanations/meanings marked `needs-vi-editorial` or `needs-human-review` require human review before removing the tag.
 
+## Publisher Scope References
+
+These references are used to document route scope and learner-facing copy. They
+are not bulk-import sources.
+
+- 3A Corporation catalogue series page: https://www.3anet.co.jp/en/series.html
+  - Used to verify the Minna no Nihongo elementary I/II series framing.
+- 3A Corporation catalogue page: https://www.3anet.co.jp/en/catalogue.html
+  - Used to verify 3A's broader catalog structure, including elementary,
+    intermediate, advanced, and JLPT preparation categories.
+- Shin Kanzen Master N3 vocabulary audio page:
+  https://www.3anet.co.jp/shinkanzen_wb_n3/audio/ja_ctgy02.html
+  - Used as a publisher-hosted reference for the Shin Kanzen vocabulary route.
+- ASK Publishing order sheet:
+  https://ask-books.com/shoten_order/J_1.pdf
+  - Used as a publisher-hosted reference for ASK's JLPT vocabulary titles,
+    including Hajimete no Nihongo Noryoku Shiken Tango entries.
+
 ## Manual QA References
 
 - Vietnamese grammar pages found online may be used for human comparison only, not bulk import, until licensing is verified.
