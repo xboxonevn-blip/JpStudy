@@ -236,6 +236,7 @@ List<String> _patterns({
     patterns.add('tone-mark-delta');
   }
   if (RegExp(r'[�ÃÄÅÆÐÑØÙÞß]').hasMatch(display)) {
+    // mojibake marker
     patterns.add('mojibake');
   }
   if (raw.isNotEmpty && RegExp(r'^[\x00-\x7F]+$').hasMatch(raw)) {

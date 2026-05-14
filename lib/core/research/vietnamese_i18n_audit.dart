@@ -307,7 +307,9 @@ bool _isIntentionalMojibakeReferenceFile(String path) {
 }
 
 bool _isIntentionalMojibakeReferenceLine(String line) {
-  return line.contains('markers =') || line.contains('mojibake marker');
+  return line.contains('markers =') ||
+      line.contains('mojibake marker') ||
+      line.contains("RegExp(r'[�ÃÄÅÆÐÑØÙÞß]')");
 }
 
 final _vietnamesePattern = RegExp(
