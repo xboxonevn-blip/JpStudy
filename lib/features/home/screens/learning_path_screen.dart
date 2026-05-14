@@ -49,8 +49,7 @@ class LearningPathScreen extends ConsumerWidget {
         (dashboard?.kanjiDue ?? 0);
     final weakCount = dashboard?.totalMistakeCount ?? 0;
     final hasStartedToday = todayXp > 0;
-    final showFoundationsCard =
-        level == StudyLevel.n5 && foundationsProgress.percentComplete < 1.0;
+    final showFoundationsCard = level == StudyLevel.n5;
     final foundationsCard = showFoundationsCard
         ? Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14),
