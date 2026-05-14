@@ -108,3 +108,5 @@ Update this file whenever the user gives a persistent preference, constraint, or
   Prefer the active report set in `docs/reports/README.md`, and treat legacy snapshots like `full-content-audit.json` as stale until regenerated.
 - Active execution plans must be saved in-repo.
   Keep the current working plan in a file under `docs/plans/` so major multi-pass work does not lose direction between sessions.
+- User-provided Google Drive folders for N5-N1 kanji/vocab/ebook references may be used as supplemental reference material.
+  The source list is in `C:\Users\xboxo\Desktop\PC\Tai lieu N5 den N1 tham khao.txt`; do not access `https://nhaikanji.com/`.

@@ -279,3 +279,18 @@
 - Delta: -60 percentage points on confidence that beta runtime failures will be visible automatically.
 - Updated belief: product analytics and Firebase-side datasets do not equal runtime error monitoring.
 - New hypothesis: adding a web-capable error sink before broad beta will catch more release regressions than another local-only smoke test.
+
+## 2026-05-15T00:46:00+07:00 - Radicals Han-Viet drift is systemic, not a 5-15% cleanup
+
+- Prior belief: 214 Kangxi radicals likely had a small Vietnamese display cleanup, roughly 5-15% bad rows from tone marks, duplicate glosses, or conversion leftovers.
+- Actual observation: full Q2.7 audit checked `214` rows against Unicode Unihan `kVietnamese`: `85` leading-label mismatches, `78` missing Unihan/local compare rows, `51` near-matches, and `0` exact display matches because every row carries a local gloss. Duplicate-gloss pattern appeared in `29` rows.
+- Delta: mismatch plus missing compare rows hit `163 / 214` (`76.2%`), far beyond the prior 5-15% expectation.
+- Updated belief: the radical table came from an ASCII/raw-gloss normalization pipeline, not from reviewed Vietnamese editorial data. Unihan is good for checking the leading Han-Viet label, but glosses need a separate human/editorial source.
+- New hypothesis: a top-30 correction pass will remove the most visible wrong Han-Viet labels, but full learner-ready status needs a separate editorial source for radical glosses.
+
+## 2026-05-15T01:20:00+07:00 - GA4 BigQuery export still absent after auth was proven
+
+- Prior belief: after the first export window, `analytics_536663906.events_*` would likely exist and produce the first real 48h event-count baseline.
+- Actual observation: Node REST BigQuery auth passed with `SELECT 1 AS ok`, `asia-southeast1` listed only `firebase_crashlytics`, `firebase_messaging`, and `firebase_sessions`, `US` listed zero datasets, and `analytics_536663906` returned `404` in both locations.
+- Delta: confidence in producing a real NS datapoint during Sprint 1 drops from likely to blocked; the blocker is GA4 export provisioning or linking, not local credentials.
+- Updated belief: BigQuery readiness needs an explicit dataset-existence gate before any NS/funnel run. `firebase_sessions` presence is not evidence that Firebase Analytics export is live.

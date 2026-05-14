@@ -141,3 +141,11 @@ Seed du lieu la mot phan cua performance contract. Neu startup tu dong nap ca N1
 Sau khi bo all-level seed, con lai mot cau hoi chat hon: root co can grammar khong? Neu nguoi hoc chi mo home de xem ke hoach ngay, keo 25 bai grammar N5 va 25 file vi du van la qua som. Level-scoped la tang an toan dau tien; route-scoped moi la performance that. App nen nap "N5 grammar" khi route grammar/lesson can, khong phai khi shell vua song.
 
 Perf gate tot phai do dung hanh vi nguoi hoc gap: mo trang dau tien. Tong MB build cho biet app nang, nhung resource smoke cho biet root da keo nhung gi truoc khi can. Khi CI dem request va chan grammar JSON o root, moi lan ai them seed/ngam fetch moi se bi bat ngay thay vi doi UAT thay cham.
+
+## D2 / Q2.7
+
+Du lieu phien am va du lieu giai nghia la hai lop khac nhau. Unihan co the noi "bo nay doc Han-Viet la gi", nhung khong noi cach giai thich tieng Viet nao dep, gon, va dung cho nguoi hoc. Bang 214 bo thu hien tai tron hai lop do tu raw ASCII, nen mot dong co the vua dung am dau vua co gloss gay nhieu, hoac sai am dau nhung trong van co ve hop ly. Sua dung la tach audit: Unihan bat loi nhan Han-Viet, con gloss can nguon/editorial rieng.
+
+## D1 / Q1.4
+
+Telemetry co hai cong tac rieng: quyen truy cap va dong du lieu. `SELECT 1` chung minh service account, OAuth, va BigQuery job da dung; no khong chung minh GA4 dang xuat bang su kien. Neu dataset `analytics_536663906` chua ton tai, moi bao cao NS deu chi la gia lap du co credentials tot. Vi vay gate dung la: auth smoke truoc, dataset inventory sau, roi moi chay query su kien that.

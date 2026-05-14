@@ -3140,3 +3140,16 @@ This file records recent Codex work so future sessions can continue from the cur
   - `flutter test`
   - `flutter build web`
   - all passed
+
+### 2026-05-15 Sprint 1 Immediate Fixes
+
+- Unlocked the vocab catalog for data-backed programs and added scope copy so Minna/Hajimete/ShinKanzen availability is clearer.
+- Added a 214-radical Han-Viet audit against Unihan `kVietnamese`; the first pass found systemic drift rather than a small display cleanup.
+- Added a dependency-free Node BigQuery REST runner because the local default Python is Inkscape Python without `pip`.
+- Rechecked BigQuery access: service-account auth and `SELECT 1` pass, but `analytics_536663906` is still absent in both `asia-southeast1` and `US`, so real GA4 NS remains blocked.
+- Recorded user-provided N5-N1 Google Drive reference folders as supplemental sources and preserved the `nhaikanji.com` no-access constraint.
+- Focused verification passed:
+  - `flutter test test/features/vocab/vocab_screen_test.dart --plain-name "vocabCatalogProvider"`
+  - `flutter test test/features/vocab/vocab_copy_test.dart`
+  - `flutter test test/core/research/radicals_han_viet_audit_test.dart`
+  - `node --test test/tool/research/bigquery_rest_runner_node_test.js`
