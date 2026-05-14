@@ -53,26 +53,12 @@ List<RouteBase> buildFoundationsRoutes() {
     GoRoute(
       path: AppRoutePath.foundationsQuiz,
       name: AppRouteName.foundationsQuiz,
-      builder: (context, state) {
-        final script = switch (state.uri.queryParameters['script']) {
-          'hiragana' => KanaScript.hiragana,
-          'katakana' => KanaScript.katakana,
-          _ => null,
-        };
-        final view = switch (state.uri.queryParameters['view']) {
-          'base' => KanaView.base,
-          'compound' => KanaView.compound,
-            _ => null,
-        };
-        return _N5OnlyFoundationsRoute(
-          lockedMode: _FoundationsLockedMode.redirectHome,
-          child: KanaQuizScreen(
-            script: script,
-            view: view,
-            sourceDue: state.uri.queryParameters['source'] == 'due',
-          ),
-        );
-      },
+      builder: _buildKanaQuizRoute,
+    ),
+    GoRoute(
+      path: AppRoutePath.foundationsKanaQuiz,
+      name: AppRouteName.foundationsKanaQuiz,
+      builder: _buildKanaQuizRoute,
     ),
     GoRoute(
       path: AppRoutePath.foundationsHanViet,
@@ -83,6 +69,27 @@ List<RouteBase> buildFoundationsRoutes() {
       ),
     ),
   ];
+}
+
+Widget _buildKanaQuizRoute(BuildContext context, GoRouterState state) {
+  final script = switch (state.uri.queryParameters['script']) {
+    'hiragana' => KanaScript.hiragana,
+    'katakana' => KanaScript.katakana,
+    _ => null,
+  };
+  final view = switch (state.uri.queryParameters['view']) {
+    'base' => KanaView.base,
+    'compound' => KanaView.compound,
+    _ => null,
+  };
+  return _N5OnlyFoundationsRoute(
+    lockedMode: _FoundationsLockedMode.redirectHome,
+    child: KanaQuizScreen(
+      script: script,
+      view: view,
+      sourceDue: state.uri.queryParameters['source'] == 'due',
+    ),
+  );
 }
 
 enum _FoundationsLockedMode { renderLocked, redirectHome }

@@ -22,6 +22,7 @@ class AppRoutePath {
   static const foundationsCompounds = '/foundations/kana/compounds';
   static const foundationsHanViet = '/foundations/han-viet';
   static const foundationsQuiz = '/foundations/quiz';
+  static const foundationsKanaQuiz = '/foundations/kana-quiz';
 
   static const home = '/';
   static const onboardingLanguage = '/onboarding/language';
@@ -99,6 +100,7 @@ class AppRouteName {
   static const foundationsCompounds = 'foundations-compounds';
   static const foundationsHanViet = 'foundations-han-viet';
   static const foundationsQuiz = 'foundations-quiz';
+  static const foundationsKanaQuiz = 'foundations-kana-quiz';
 
   static const home = 'home';
   static const onboardingLanguage = 'onboarding-language';

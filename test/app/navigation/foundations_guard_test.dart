@@ -85,4 +85,17 @@ void main() {
 
     expect(find.byType(KanaLockedScreen), findsOneWidget);
   });
+
+  testWidgets('N4 legacy kana-quiz path redirects home with snackbar action', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _buildApp(level: StudyLevel.n4, initialLocation: '/foundations/kana-quiz'),
+    );
+    await tester.pump();
+    await tester.pumpAndSettle();
+
+    expect(find.text('Home route'), findsOneWidget);
+    expect(find.text('Kana không khả dụng ở cấp N4'), findsOneWidget);
+  });
 }
