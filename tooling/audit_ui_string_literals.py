@@ -30,6 +30,37 @@ INTENTIONAL_PATHS = {
     'lib/features/design_lab/design_lab_screen.dart': 'internal design playground',
 }
 
+INTENTIONAL_LITERALS = {
+    (
+        'lib/core/research/web_perf_budget.dart',
+        'canvaskit.wasm raw',
+    ): 'research perf budget report label',
+    (
+        'lib/core/research/web_perf_budget.dart',
+        'canvaskit.wasm gzip',
+    ): 'research perf budget report label',
+    (
+        'lib/core/research/web_perf_budget.dart',
+        'sqlite3.wasm raw',
+    ): 'research perf budget report label',
+    (
+        'lib/core/research/web_perf_budget.dart',
+        'sqlite3.wasm gzip',
+    ): 'research perf budget report label',
+    (
+        'lib/core/research/web_perf_budget.dart',
+        'total build raw',
+    ): 'research perf budget report label',
+    (
+        'lib/core/research/web_perf_budget.dart',
+        'total assets raw',
+    ): 'research perf budget report label',
+    (
+        'lib/core/research/web_perf_budget.dart',
+        'total JSON raw',
+    ): 'research perf budget report label',
+}
+
 IGNORE_EXACT = {'', '?', '?', '...', '?', 'XP', 'CSV', 'JSON'}
 IGNORE_SUBSTRINGS = (
     'assets/', '.json', '.dart', 'package:', 'http://', 'https://', 'Route',
@@ -70,7 +101,12 @@ def collect_candidates() -> tuple[dict[str, list[tuple[int, str]]], dict[str, li
                         continue
                     if not re.search(r'[A-Za-z?-??-??-??-?]', literal):
                         continue
-                    if rel in INTENTIONAL_PATHS:
+                    intentional_reason = INTENTIONAL_LITERALS.get(
+                        (rel, literal),
+                    )
+                    if intentional_reason is not None:
+                        intentional[rel].append((lineno, literal, intentional_reason))
+                    elif rel in INTENTIONAL_PATHS:
                         intentional[rel].append((lineno, literal, INTENTIONAL_PATHS[rel]))
                     else:
                         candidates[rel].append((lineno, literal))
