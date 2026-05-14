@@ -127,7 +127,7 @@ back out a bad commit. Faster than branch-based rollback.
 |---|---|---|
 | `GOOGLE_APPLICATION_CREDENTIALS` | Set permanently | Codex / tool scripts query BigQuery |
 | `JPSTUDY_RECAPTCHA_SITE_KEY` | Set permanently (User scope) | Web App Check via `--dart-define` at build |
-| `FIREBASE_TOKEN` | `firebase login:ci` | CI deploy automation (planned) |
+| `FIREBASE_TOKEN` | GitHub Actions secret from `firebase login:ci` | CI deploy automation for `hosting:jpstudy` |
 | `JPSTUDY_SENTRY_DSN` | Sentry project | Optional web error monitoring via `--dart-define` |
 | `JPSTUDY_SENTRY_ENVIRONMENT` | Optional | Sentry environment label, defaults to `production` |
 | `JPSTUDY_RELEASE` | Optional | Sentry release label for deploy correlation |
@@ -191,6 +191,10 @@ flutter build web --release `
 □ After 1-2 weeks monitoring, switch App Check from monitoring to
   enforce mode (Firebase Console → App Check → APIs tab → Storage →
   Enforce).
+□ Set GitHub Actions secrets `FIREBASE_TOKEN` and
+  `JPSTUDY_RECAPTCHA_SITE_KEY` to enable the `deploy-hosting` CI job.
+  Optional: set `JPSTUDY_SENTRY_DSN` for beta error monitoring. The job
+  intentionally skips deploy when required secrets are missing.
 ```
 
 ## Communication

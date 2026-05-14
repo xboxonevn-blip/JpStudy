@@ -71,4 +71,120 @@ jobs:
       - name: Test Storage security rules
         run: npm run test:storage-rules
 
+  deploy-hosting:
+    needs:
+      - ui-string-guard
+      - firebase-security-rules
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    env:
+      FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      JPSTUDY_RECAPTCHA_SITE_KEY: ${{ secrets.JPSTUDY_RECAPTCHA_SITE_KEY }}
+      JPSTUDY_SENTRY_DSN: ${{ secrets.JPSTUDY_SENTRY_DSN }}
+      JPSTUDY_SENTRY_ENVIRONMENT: production
+    steps:
+      - name: Check deploy secrets
+        id: deploy_gate
+        shell: bash
+        run: |
+          if [[ -z "${FIREBASE_TOKEN}" || -z "${JPSTUDY_RECAPTCHA_SITE_KEY}" ]]; then
+            echo "enabled=false" >> "${GITHUB_OUTPUT}"
+            echo "::warning title=Deploy skipped::Set FIREBASE_TOKEN and JPSTUDY_RECAPTCHA_SITE_KEY repository secrets to enable Firebase Hosting deploy."
+            exit 0
+          fi
+          echo "enabled=true" >> "${GITHUB_OUTPUT}"
+
+      - uses: actions/checkout@v4
+        if: steps.deploy_gate.outputs.enabled == 'true'
+
+      - uses: subosito/flutter-action@v2
+        if: steps.deploy_gate.outputs.enabled == 'true'
+        with:
+          channel: stable
+
+      - uses: actions/setup-node@v4
+        if: steps.deploy_gate.outputs.enabled == 'true'
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        if: steps.deploy_gate.outputs.enabled == 'true'
+        run: flutter pub get
+
+      - name: Install Node dependencies
+        if: steps.deploy_gate.outputs.enabled == 'true'
+        run: npm ci
+
+      - name: Build web for production
+        if: steps.deploy_gate.outputs.enabled == 'true'
+        shell: bash
+        run: |
+          RELEASE="${GITHUB_SHA::12}"
+          flutter build web --release --base-href=/ \
+            --dart-define=JPSTUDY_RECAPTCHA_SITE_KEY="${JPSTUDY_RECAPTCHA_SITE_KEY}" \
+            --dart-define=JPSTUDY_SENTRY_DSN="${JPSTUDY_SENTRY_DSN}" \
+            --dart-define=JPSTUDY_SENTRY_ENVIRONMENT="${JPSTUDY_SENTRY_ENVIRONMENT}" \
+            --dart-define=JPSTUDY_RELEASE="${RELEASE}"
+
+      - name: Deploy primary Firebase Hosting target
+        if: steps.deploy_gate.outputs.enabled == 'true'
+        run: npx firebase deploy --only hosting:jpstudy --project jpstudy-v2 --token "${FIREBASE_TOKEN}" --non-interactive
+
+      - name: Smoke primary and legacy hosting
+        if: steps.deploy_gate.outputs.enabled == 'true'
+        shell: bash
+        run: |
+          primary_status="$(curl -L -sS -o /tmp/jpstudy-primary.html -w '%{http_code}' "https://jpstudy.web.app/?ci-smoke=${GITHUB_RUN_ID}")"
+          if [[ "${primary_status}" != "200" ]]; then
+            echo "Expected https://jpstudy.web.app to return 200, got ${primary_status}"
+            exit 1
+          fi
+          legacy_status="$(curl -L -sS -o /tmp/jpstudy-legacy.html -w '%{http_code}' "https://jpstudy-v2.web.app/?legacy-disabled-check=${GITHUB_RUN_ID}")"
+          if [[ "${legacy_status}" != "404" ]]; then
+            echo "Expected disabled legacy https://jpstudy-v2.web.app to return 404, got ${legacy_status}"
+            exit 1
+          fi
+
+      - name: Install Playwright Chromium
+        if: steps.deploy_gate.outputs.enabled == 'true'
+        run: npx playwright install chromium
+
+      - name: Check live web resource smoke
+        if: steps.deploy_gate.outputs.enabled == 'true'
+        run: node tool/research/web_resource_smoke.js --url https://jpstudy.web.app/ --max-resources 100 --max-json 8 --max-grammar 0
+
+      - name: Lighthouse live gate
+        if: steps.deploy_gate.outputs.enabled == 'true'
+        shell: bash
+        run: |
+          npx --yes lighthouse@latest https://jpstudy.web.app/ \
+            --chrome-flags="--headless --no-sandbox" \
+            --only-categories=performance,accessibility,best-practices,seo \
+            --output=json \
+            --output-path=/tmp/jpstudy-lighthouse.json \
+            --quiet
+          node <<'NODE'
+          const fs = require('node:fs');
+          const report = JSON.parse(fs.readFileSync('/tmp/jpstudy-lighthouse.json', 'utf8'));
+          const thresholds = {
+            performance: 0.35,
+            accessibility: 0.80,
+            'best-practices': 0.75,
+            seo: 0.75,
+          };
+          const failures = [];
+          for (const [category, threshold] of Object.entries(thresholds)) {
+            const score = report.categories[category]?.score ?? 0;
+            console.log(`${category}: ${score}`);
+            if (score < threshold) {
+              failures.push(`${category} ${score} < ${threshold}`);
+            }
+          }
+          if (failures.length > 0) {
+            console.error(`Lighthouse gate failed: ${failures.join(', ')}`);
+            process.exit(1);
+          }
+          NODE
+
 

@@ -41,10 +41,16 @@ Optional beta monitoring secret: `JPSTUDY_SENTRY_DSN`.
 
 Result: app available at https://jpstudy.web.app
 
+GitHub Actions can deploy this same target on push to `main` through the
+`deploy-hosting` job after `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`
+are set as repository secrets. If either required secret is missing, the job
+skips deploy and leaves manual shipping as the release path.
+
 Post-deploy checks:
 - curl -I https://jpstudy.web.app
 - Confirm Content-Security-Policy, X-Frame-Options, Referrer-Policy, and Permissions-Policy headers.
 - Re-run route smoke and performance smoke against the deployed URL.
+- Re-run live web resource smoke and Lighthouse gates against `https://jpstudy.web.app`.
 - Confirm Firebase Auth, Storage backup, App Check telemetry, and Analytics DebugView.
 - If `JPSTUDY_SENTRY_DSN` is set, force one non-production test exception and confirm it appears in Sentry before sharing the beta URL.
 

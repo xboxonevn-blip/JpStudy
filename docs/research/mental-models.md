@@ -168,3 +168,7 @@ Mot man hinh co the dung hai duong render cho cung mot khai niem. Filter chip "4
 ## D8 / Q8.4
 
 Error monitoring cung la consent surface, khong chi la SDK. Neu gan Sentry vao `main` ma khong nhin consent, app se gui loi truoc khi nguoi hoc dong y; neu doi user bam chap nhan moi import code, crash dau tien van mat. Cach dung la tach ba lop: cau hinh DSN co hay khong, quyen gui theo consent/sign-in/Do Not Track, va co che bat SDK truoc `runApp` hoac bat muon sau khi quyen thay doi. Nhu vay beta co duong bat crash khi user cho phep, nhung mac dinh van im lang khi chua co DSN hoac chua co quyen.
+
+## D8 / Q8.5
+
+Deploy automation phai co che that bai dung luc, khong that bai vi secret chua duoc cap. Voi solo-dev `main`, workflow tot la: source CI phai bat loi moi commit; deploy job chi chay sau khi source CI xanh; neu thieu `FIREBASE_TOKEN` hoac App Check key thi skip co warning; neu co secret thi bat buoc deploy dung `hosting:jpstudy`, smoke primary/legacy, va do live resource + Lighthouse. Nhu vay repo da ma hoa release contract ma khong khoa duong commit trong luc credential setup con dang cho user.

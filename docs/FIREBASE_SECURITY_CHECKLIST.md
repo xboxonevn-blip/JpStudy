@@ -97,4 +97,7 @@ Hosting target if local target drift is reintroduced.
 ## CI
 
 - GitHub Actions runs UI string guard, `flutter analyze`, `flutter test`, a release-like web build, the D7 web performance budget report, `npm ci`, and `npm run test:storage-rules`.
-- Live post-deploy smoke, Lighthouse, branch protection, and failure notifications are not yet proven from repository files.
+- On push to `main`, the `deploy-hosting` job deploys only `hosting:jpstudy` when `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY` repository secrets are present.
+- The deploy job verifies primary Hosting returns `200`, the disabled legacy site returns `404`, runs live web resource smoke, and runs a Lighthouse live gate.
+- If the required deploy secrets are missing, the job skips deploy with a warning so normal CI remains green.
+- Branch protection and explicit failure notifications are not yet proven from repository files.
