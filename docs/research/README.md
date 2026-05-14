@@ -170,6 +170,8 @@ Current D8.Q8.4 status: production error monitoring is absent. The app has conse
 
 Current D8.Q8.5 status: CI is stronger than assumed. GitHub Actions run UI string guard, `flutter analyze`, `flutter test`, release-like web build, D7 web artifact budget, D7 local web resource smoke, and Firebase Storage rules tests. E8.7 renamed the workflow to `CI`, changed web build to `flutter build web --release --base-href=/ --dart-define=JPSTUDY_RECAPTCHA_SITE_KEY=ci-placeholder`, and added D7 budget gates. Still missing: deploy workflow, live route smoke, Lighthouse budget on live URL, explicit notification, and branch-protection proof.
 
+Current D8.Q8.6 status: manual release process is now primary-only and verified. Phase 5 deployed with `hosting:jpstudy`; primary returned `200` with expected headers, legacy `jpstudy-v2.web.app` returned `404`, and Firebase channel metadata shows legacy release type `SITE_DISABLE`. `docs/FIREBASE_SECURITY_CHECKLIST.md` no longer uses generic `firebase deploy --only hosting`. Still missing: automated deploy workflow, live route smoke, Lighthouse/trace gate, notification policy, and App Check telemetry/enforcement proof.
+
 ## Open Questions
 
 - Q1: Can we measure learning happening? Active.
@@ -203,6 +205,7 @@ Current D8.Q8.5 status: CI is stronger than assumed. GitHub Actions run UI strin
 - D8 compliance status update: Q8.3 measured; Auth authorized-domain final proof is manual Console work, and the security checklist now records the production-domain/localhost gate.
 - D8 compliance status update: Q8.4 measured; product analytics exists, but runtime crash/error monitoring is not wired. Web beta needs Sentry-style error capture or an explicit accepted risk before launch.
 - D8 compliance status update: Q8.5 measured and partially remediated; local CI gates plus build-artifact and local resource-count budgets exist, but live/deploy/Lighthouse/notification gates remain open.
+- D8 compliance status update: Q8.6 measured and partially remediated; manual primary-only deploy is proven, legacy default Hosting remains disabled, and active docs now avoid generic all-hosting deploy. Automated release remains deferred until secrets, live smoke, Lighthouse/trace, and notification policy are defined.
 
 ## Phase 0 Definition Of Done
 

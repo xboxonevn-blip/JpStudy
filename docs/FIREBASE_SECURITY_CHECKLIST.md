@@ -84,8 +84,15 @@ curl -I https://jpstudy.web.app
 ```sh
 npm run test:storage-rules
 firebase deploy --only storage
-firebase deploy --only hosting
+firebase deploy --only hosting:jpstudy
+curl -I https://jpstudy.web.app
+curl -I "https://jpstudy-v2.web.app/?legacy-disabled-check=1"
 ```
+
+The legacy default Hosting site `jpstudy-v2` cannot be deleted because Firebase
+marks it as the default site, but it must stay disabled. Do not use
+`firebase deploy --only hosting`, because that can deploy every configured
+Hosting target if local target drift is reintroduced.
 
 ## CI
 
