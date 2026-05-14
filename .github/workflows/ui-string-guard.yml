@@ -15,8 +15,16 @@ jobs:
         with:
           channel: stable
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
       - name: Install dependencies
         run: flutter pub get
+
+      - name: Install Node dependencies
+        run: npm ci
 
       - name: Check UI string literals
         run: python tooling/audit_ui_string_literals.py --check --max-candidates 0
@@ -32,6 +40,15 @@ jobs:
 
       - name: Check web performance budget
         run: dart run tool/research/web_perf_budget_report.dart --build-root build/web --budget docs/research/D7-performance/web_perf_budget.json --fail-on-violation
+
+      - name: Test web resource smoke tooling
+        run: npm run test:web-resource-smoke:unit
+
+      - name: Install Playwright Chromium
+        run: npx playwright install chromium
+
+      - name: Check web resource smoke
+        run: npm run test:web-resource-smoke
 
   firebase-security-rules:
     runs-on: ubuntu-latest

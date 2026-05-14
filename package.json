@@ -9,7 +9,9 @@
     "test": "test"
   },
   "scripts": {
-    "test:storage-rules": "firebase emulators:exec --only storage \"jest tooling/firebase/storage.rules.test.js --runInBand\""
+    "test:storage-rules": "firebase emulators:exec --only storage \"jest tooling/firebase/storage.rules.test.js --runInBand\"",
+    "test:web-resource-smoke": "node tool/research/web_resource_smoke.js --build-root build/web --max-resources 80 --max-json 5 --max-grammar 0",
+    "test:web-resource-smoke:unit": "node --test test/tool/research/web_resource_smoke_node_test.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +29,7 @@
     "@firebase/rules-unit-testing": "^5.0.1",
     "firebase": "^12.13.0",
     "firebase-tools": "^15.17.0",
-    "jest": "^30.4.2"
+    "jest": "^30.4.2",
+    "playwright": "^1.60.0"
   }
 }
