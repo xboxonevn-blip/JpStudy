@@ -131,6 +131,7 @@
 - Passing release web build is not enough evidence for beta deploy readiness: both live Firebase sites are older than current `HEAD`.
 - The basic `SHIPPING.md` web build command omits `JPSTUDY_RECAPTCHA_SITE_KEY`, so following it leaves web App Check inactive.
 - D7.Q7.2 found no route-level deferred JS chunks in the current release build. `main.dart.js` is one app bundle; route-level code splitting is not currently happening automatically.
+- D7.Q7.3 did not justify switching beta to Flutter `--wasm`: build passes, but raw output increases by `9.4%` because Skwasm and CanvasKit fallback are both emitted, and live compatibility/perf is still unproven.
 - Security docs are stale about CSP: they say strict CSP is not enabled, while `firebase.json` and live channels configure CSP.
 - GA4 measurement remains table-blocked: `analytics_536663906` is absent and Firebase-side datasets currently expose zero tables.
 

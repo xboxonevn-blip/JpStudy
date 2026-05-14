@@ -263,3 +263,11 @@
 - Delta: +35 percentage points on confidence that renderer choice/CDN behavior is a first-class D7 question, not a footnote.
 - Updated belief: optimize startup through separate renderer/runtime, content-request, and app-code-splitting tracks.
 - New hypothesis: D7.Q7.3 renderer comparison will change performance strategy more than small Dart UI code shaving.
+
+## 2026-05-14T19:31:00+07:00 - Wasm build is viable but not an obvious beta default
+
+- Prior belief: if `--wasm` worked, it might be an easy performance upgrade over the default renderer.
+- Actual observation: `--wasm` builds pass but emit Skwasm primary plus CanvasKit fallback, increasing raw output `62.48 MB -> 68.34 MB` (`+9.4%`); local smoke looked faster but had security-software injection noise.
+- Delta: -30 percentage points on confidence that switching to Wasm before live traces is low risk.
+- Updated belief: Wasm belongs on a preview channel until Firebase Hosting headers, browser matrix, and live perf are proven.
+- New hypothesis: release-channel stability matters more than renderer experimentation for the first controlled beta.
