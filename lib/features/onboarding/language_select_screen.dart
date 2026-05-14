@@ -30,6 +30,7 @@ class _LanguageSelectScreenState extends ConsumerState<LanguageSelectScreen> {
       return;
     }
     setState(() => _isSaving = true);
+    final returnTarget = _returnTarget();
 
     await ref.read(appLanguageProvider.notifier).setLanguage(selected);
     if (!mounted) {
@@ -45,11 +46,28 @@ class _LanguageSelectScreenState extends ConsumerState<LanguageSelectScreen> {
       if (!mounted) {
         return;
       }
-      context.go(AppRoutePath.home);
+      context.go(returnTarget);
       return;
     }
 
-    context.go(AppRoutePath.onboardingLevel);
+    final levelUri = Uri(
+      path: AppRoutePath.onboardingLevel,
+      queryParameters: returnTarget == AppRoutePath.home
+          ? null
+          : {'from': returnTarget},
+    );
+    context.go(levelUri.toString());
+  }
+
+  String _returnTarget() {
+    final from = GoRouterState.of(context).uri.queryParameters['from'];
+    if (from == null ||
+        from.isEmpty ||
+        from == AppRoutePath.onboardingLanguage ||
+        from == AppRoutePath.onboardingLevel) {
+      return AppRoutePath.home;
+    }
+    return from;
   }
 
   @override
@@ -91,8 +109,7 @@ class _LanguageSelectScreenState extends ConsumerState<LanguageSelectScreen> {
                       _LanguageOptionTile(
                         language: option,
                         selected: _selectedLanguage == option,
-                        onTap: () =>
-                            setState(() => _selectedLanguage = option),
+                        onTap: () => setState(() => _selectedLanguage = option),
                       ),
                     const Spacer(),
                     ElevatedButton(

@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/app.dart';
+import 'package:jpstudy/app/navigation/app_router.dart';
 import 'package:jpstudy/core/shared_preferences_provider.dart';
 import 'package:jpstudy/core/notifications/notification_service.dart';
 import 'package:jpstudy/data/db/database_provider.dart';
@@ -36,6 +37,7 @@ Future<void> main() async {
   // or use conditional imports if ads are needed
 
   final preferences = await SharedPreferences.getInstance();
+  AppRouter.configurePreferences(preferences);
   final container = ProviderContainer(
     overrides: [sharedPreferencesProvider.overrideWithValue(preferences)],
   );

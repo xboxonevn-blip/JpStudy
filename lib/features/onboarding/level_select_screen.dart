@@ -39,7 +39,18 @@ class _LevelSelectScreenState extends ConsumerState<LevelSelectScreen> {
     if (!mounted) {
       return;
     }
-    context.go(AppRoutePath.home);
+    context.go(_returnTarget());
+  }
+
+  String _returnTarget() {
+    final from = GoRouterState.of(context).uri.queryParameters['from'];
+    if (from == null ||
+        from.isEmpty ||
+        from == AppRoutePath.onboardingLanguage ||
+        from == AppRoutePath.onboardingLevel) {
+      return AppRoutePath.home;
+    }
+    return from;
   }
 
   @override
