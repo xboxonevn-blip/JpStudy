@@ -80,6 +80,9 @@ void main() {
       expect(language.vocabCatalogShinKanzenNote, isNotEmpty);
       expect(language.radicalGroupStrokeHeader(1), isNotEmpty);
       expect(language.radicalGroupSubtitle(2), isNotEmpty);
+      expect(language.navGroupLearning, isNotEmpty);
+      expect(language.navGroupProgress, isNotEmpty);
+      expect(language.navGroupOther, isNotEmpty);
     }
   });
 }

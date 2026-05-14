@@ -828,6 +828,39 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get navGroupLearning {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Learning';
+      case AppLanguage.vi:
+        return 'H\u1ecdc';
+      case AppLanguage.ja:
+        return '\u5b66\u7fd2';
+    }
+  }
+
+  String get navGroupProgress {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Progress';
+      case AppLanguage.vi:
+        return 'Ti\u1ebfn \u0111\u1ed9';
+      case AppLanguage.ja:
+        return '\u9032\u6357';
+    }
+  }
+
+  String get navGroupOther {
+    switch (this) {
+      case AppLanguage.en:
+        return 'More';
+      case AppLanguage.vi:
+        return 'Kh\u00e1c';
+      case AppLanguage.ja:
+        return '\u305d\u306e\u4ed6';
+    }
+  }
+
   String get nextLabel {
     switch (this) {
       case AppLanguage.en:

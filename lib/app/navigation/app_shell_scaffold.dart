@@ -12,6 +12,28 @@ import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/features/common/widgets/global_top_bar.dart';
 
+enum NavigationGroup { learning, progress, other, footer }
+
+const double _sidebarItemHeight = 44;
+const double _sidebarFooterItemHeight = 36;
+const double _sidebarGroupHeaderHeight = 18;
+const double _sidebarGroupGap = 12;
+const double _sidebarFooterDividerHeight = 13;
+
+@visibleForTesting
+const double sidebarItemHeightForTesting = _sidebarItemHeight;
+
+@visibleForTesting
+const double sidebarFooterItemHeightForTesting = _sidebarFooterItemHeight;
+
+@visibleForTesting
+const double sidebarEstimatedContentHeightForTesting =
+    (_sidebarGroupHeaderHeight * 3) +
+    (_sidebarItemHeight * 9) +
+    (_sidebarGroupGap * 2) +
+    _sidebarFooterDividerHeight +
+    _sidebarFooterItemHeight;
+
 class AppShellScaffold extends ConsumerWidget {
   const AppShellScaffold({super.key, required this.navigationShell});
 
@@ -52,6 +74,7 @@ class AppShellScaffold extends ConsumerWidget {
                         child: Row(
                           children: [
                             _Sidebar(
+                              language: language,
                               items: items,
                               currentIndex: navigationShell.currentIndex,
                               onTap: (index) => _goToBranch(context, index),
@@ -183,66 +206,77 @@ class AppShellScaffold extends ConsumerWidget {
     return [
       _ShellItem(
         branchIndex: 0,
+        group: NavigationGroup.learning,
         label: _kanji(language),
         icon: Icons.grid_view_outlined,
         selectedIcon: Icons.grid_view_rounded,
       ),
       _ShellItem(
         branchIndex: 1,
+        group: NavigationGroup.learning,
         label: _foundations(language),
         icon: Icons.spa_outlined,
         selectedIcon: Icons.spa_rounded,
       ),
       _ShellItem(
         branchIndex: 2,
+        group: NavigationGroup.learning,
         label: _vocab(language),
         icon: Icons.translate_outlined,
         selectedIcon: Icons.translate_rounded,
       ),
       _ShellItem(
         branchIndex: 3,
+        group: NavigationGroup.learning,
         label: _grammar(language),
         icon: Icons.account_tree_outlined,
         selectedIcon: Icons.account_tree_rounded,
       ),
       _ShellItem(
         branchIndex: 4,
+        group: NavigationGroup.progress,
         label: _roadmap(language),
         icon: Icons.route_outlined,
         selectedIcon: Icons.route_rounded,
       ),
       _ShellItem(
         branchIndex: 5,
+        group: NavigationGroup.progress,
         label: _memory(language),
         icon: Icons.psychology_alt_outlined,
         selectedIcon: Icons.psychology_alt_rounded,
       ),
       _ShellItem(
         branchIndex: 6,
+        group: NavigationGroup.progress,
         label: _active(language),
         icon: Icons.bolt_outlined,
         selectedIcon: Icons.bolt_rounded,
       ),
       _ShellItem(
         branchIndex: 7,
+        group: NavigationGroup.other,
         label: _exam(language),
         icon: Icons.fact_check_outlined,
         selectedIcon: Icons.fact_check_rounded,
       ),
       _ShellItem(
         branchIndex: 8,
+        group: NavigationGroup.other,
         label: _leaderboard(language),
         icon: Icons.emoji_events_outlined,
         selectedIcon: Icons.emoji_events_rounded,
       ),
       _ShellItem(
         branchIndex: 9,
+        group: NavigationGroup.footer,
         label: _upgrade(language),
         icon: Icons.diamond_outlined,
         selectedIcon: Icons.diamond_rounded,
       ),
       _ShellItem(
         branchIndex: 10,
+        group: NavigationGroup.other,
         label: _community(language),
         icon: Icons.forum_outlined,
         selectedIcon: Icons.forum_rounded,
@@ -338,11 +372,13 @@ class _MobileNavigationBar extends StatelessWidget {
 
 class _Sidebar extends StatelessWidget {
   const _Sidebar({
+    required this.language,
     required this.items,
     required this.currentIndex,
     required this.onTap,
   });
 
+  final AppLanguage language;
   final List<_ShellItem> items;
   final int currentIndex;
   final ValueChanged<int> onTap;
@@ -350,8 +386,17 @@ class _Sidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final palette = context.appPalette;
+    final bodyGroups = [
+      NavigationGroup.learning,
+      NavigationGroup.progress,
+      NavigationGroup.other,
+    ];
+    final footerItems = items
+        .where((item) => item.group == NavigationGroup.footer)
+        .toList(growable: false);
+
     return Container(
-      width: 158,
+      width: 176,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [palette.elevated, palette.base],
@@ -371,103 +416,207 @@ class _Sidebar extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(16, 18, 16, 10),
-            child: Column(
+            padding: const EdgeInsets.fromLTRB(14, 14, 14, 8),
+            child: Row(
               children: [
-                Container(
-                  width: 58,
-                  height: 58,
+                DecoratedBox(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    gradient: LinearGradient(
-                      colors: [palette.primary, palette.secondary],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
+                    borderRadius: BorderRadius.circular(14),
+                    color: palette.primary.withValues(alpha: 0.12),
+                  ),
+                  child: SizedBox(
+                    width: 36,
+                    height: 36,
+                    child: Icon(
+                      Icons.auto_stories_rounded,
+                      color: palette.primary,
+                      size: 22,
                     ),
                   ),
-                  child: const Icon(
-                    Icons.auto_stories_rounded,
-                    color: Colors.white,
-                  ),
                 ),
-                const SizedBox(height: 12),
-                Text(
-                  'JpStudy\n日本語',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.w900,
-                    height: 1.1,
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    'JpStudy',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.w900,
+                      height: 1,
+                    ),
                   ),
                 ),
               ],
             ),
           ),
           Expanded(
-            child: ListView.separated(
-              padding: const EdgeInsets.fromLTRB(10, 8, 10, 18),
-              itemCount: items.length,
-              separatorBuilder: (context, index) => const SizedBox(height: 6),
-              itemBuilder: (context, index) {
-                final item = items[index];
-                final selected = item.branchIndex == currentIndex;
-                return Semantics(
-                  label: item.label,
-                  button: true,
-                  selected: selected,
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(20),
-                    onTap: () => onTap(item.branchIndex),
-                    child: ExcludeSemantics(
-                      child: AnimatedContainer(
-                        duration: reducedMotionDuration(
-                          context,
-                          const Duration(milliseconds: 180),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 12,
-                        ),
-                        decoration: BoxDecoration(
-                          color: selected
-                              ? palette.primary.withValues(alpha: 0.14)
-                              : Colors.transparent,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: selected
-                                ? palette.primary.withValues(alpha: 0.28)
-                                : Colors.transparent,
-                          ),
-                        ),
-                        child: Column(
-                          children: [
-                            Icon(
-                              selected ? item.selectedIcon : item.icon,
-                              color: selected
-                                  ? palette.primary
-                                  : palette.ink.withValues(alpha: 0.72),
-                            ),
-                            const SizedBox(height: 6),
-                            Text(
-                              item.label,
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.labelMedium
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.w800,
-                                    color: selected
-                                        ? palette.primary
-                                        : palette.ink.withValues(alpha: 0.72),
-                                  ),
-                            ),
-                          ],
-                        ),
+            child: ListView(
+              padding: const EdgeInsets.fromLTRB(10, 6, 10, 8),
+              children: [
+                for (final group in bodyGroups) ...[
+                  if (items.any((item) => item.group == group)) ...[
+                    _NavigationGroupHeader(
+                      label: _navigationGroupLabel(language, group),
+                    ),
+                    for (final item in items.where(
+                      (item) => item.group == group,
+                    ))
+                      _SidebarItem(
+                        item: item,
+                        selected: item.branchIndex == currentIndex,
+                        onTap: () => onTap(item.branchIndex),
+                      ),
+                    if (group != NavigationGroup.other)
+                      const SizedBox(height: _sidebarGroupGap),
+                  ],
+                ],
+              ],
+            ),
+          ),
+          if (footerItems.isNotEmpty) ...[
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Divider(
+                height: _sidebarFooterDividerHeight,
+                color: palette.outline,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 2, 10, 12),
+              child: Column(
+                children: [
+                  for (final item in footerItems)
+                    _SidebarItem(
+                      item: item,
+                      selected: item.branchIndex == currentIndex,
+                      onTap: () => onTap(item.branchIndex),
+                      height: _sidebarFooterItemHeight,
+                      compact: true,
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _NavigationGroupHeader extends StatelessWidget {
+  const _NavigationGroupHeader({required this.label});
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return Semantics(
+      label: label,
+      header: true,
+      child: ExcludeSemantics(
+        child: SizedBox(
+          height: _sidebarGroupHeaderHeight,
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Text(
+                label.toUpperCase(),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: palette.ink.withValues(alpha: 0.50),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SidebarItem extends StatelessWidget {
+  const _SidebarItem({
+    required this.item,
+    required this.selected,
+    required this.onTap,
+    this.height = _sidebarItemHeight,
+    this.compact = false,
+  });
+
+  final _ShellItem item;
+  final bool selected;
+  final VoidCallback onTap;
+  final double height;
+  final bool compact;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    final textStyle = compact
+        ? Theme.of(context).textTheme.labelSmall
+        : Theme.of(context).textTheme.labelMedium;
+    final foreground = selected
+        ? palette.primary
+        : palette.ink.withValues(alpha: compact ? 0.62 : 0.74);
+
+    return Tooltip(
+      message: item.label,
+      waitDuration: const Duration(milliseconds: 350),
+      child: Semantics(
+        label: item.label,
+        button: true,
+        selected: selected,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(14),
+          onTap: onTap,
+          child: ExcludeSemantics(
+            child: AnimatedContainer(
+              duration: reducedMotionDuration(
+                context,
+                const Duration(milliseconds: 160),
+              ),
+              height: height,
+              padding: EdgeInsets.symmetric(horizontal: compact ? 10 : 12),
+              decoration: BoxDecoration(
+                color: selected
+                    ? palette.primary.withValues(alpha: 0.12)
+                    : Colors.transparent,
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(
+                  color: selected
+                      ? palette.primary.withValues(alpha: 0.24)
+                      : Colors.transparent,
+                ),
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    selected ? item.selectedIcon : item.icon,
+                    size: compact ? 18 : 20,
+                    color: foreground,
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      item.label,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: textStyle?.copyWith(
+                        fontWeight: FontWeight.w800,
+                        color: foreground,
                       ),
                     ),
                   ),
-                );
-              },
+                ],
+              ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
@@ -570,18 +719,40 @@ String _moreLabel(AppLanguage language) => switch (language) {
   AppLanguage.ja => 'その他',
 };
 
+String _navigationGroupLabel(AppLanguage language, NavigationGroup group) {
+  return switch (group) {
+    NavigationGroup.learning => language.navGroupLearning,
+    NavigationGroup.progress => language.navGroupProgress,
+    NavigationGroup.other => language.navGroupOther,
+    NavigationGroup.footer => '',
+  };
+}
+
 class _ShellItem {
   const _ShellItem({
     required this.branchIndex,
+    required this.group,
     required this.label,
     required this.icon,
     required this.selectedIcon,
   });
 
   final int branchIndex;
+  final NavigationGroup group;
   final String label;
   final IconData icon;
   final IconData selectedIcon;
+}
+
+@visibleForTesting
+NavigationGroup navigationGroupForShellBranch(int branchIndex) {
+  return switch (branchIndex) {
+    0 || 1 || 2 || 3 => NavigationGroup.learning,
+    4 || 5 || 6 => NavigationGroup.progress,
+    7 || 8 || 10 => NavigationGroup.other,
+    9 => NavigationGroup.footer,
+    _ => throw RangeError.index(branchIndex, _branchInitialLocations),
+  };
 }
 
 @visibleForTesting

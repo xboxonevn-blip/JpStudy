@@ -47,4 +47,24 @@ void main() {
       expect(bottomShellBranchIndicesForLevel(level), [4, 0, 7]);
     }
   });
+
+  test('desktop shell destinations are grouped with upgrade in footer', () {
+    expect(navigationGroupForShellBranch(0), NavigationGroup.learning);
+    expect(navigationGroupForShellBranch(1), NavigationGroup.learning);
+    expect(navigationGroupForShellBranch(2), NavigationGroup.learning);
+    expect(navigationGroupForShellBranch(3), NavigationGroup.learning);
+    expect(navigationGroupForShellBranch(4), NavigationGroup.progress);
+    expect(navigationGroupForShellBranch(5), NavigationGroup.progress);
+    expect(navigationGroupForShellBranch(6), NavigationGroup.progress);
+    expect(navigationGroupForShellBranch(7), NavigationGroup.other);
+    expect(navigationGroupForShellBranch(8), NavigationGroup.other);
+    expect(navigationGroupForShellBranch(10), NavigationGroup.other);
+    expect(navigationGroupForShellBranch(9), NavigationGroup.footer);
+  });
+
+  test('desktop sidebar exposes compact dimensions for grouped layout', () {
+    expect(sidebarItemHeightForTesting, 44);
+    expect(sidebarFooterItemHeightForTesting, 36);
+    expect(sidebarEstimatedContentHeightForTesting, lessThan(600));
+  });
 }
