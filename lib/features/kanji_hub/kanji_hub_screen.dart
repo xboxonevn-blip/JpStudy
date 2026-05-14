@@ -101,6 +101,8 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
         builder: (_) => _KanjiDetailDialog(
           item: resolvedItem,
           language: ref.read(appLanguageProvider),
+          relatedKanjiFuture: Future.value(allKanji),
+          onRelatedKanjiSelected: _onRelatedKanjiSelected,
         ),
       );
     });
@@ -623,45 +625,6 @@ String _strokeLabel(BuildContext context, int strokes) {
 String _radicalShortLabel(BuildContext context, int id) {
   final language = _kanjiHubDialogLanguage(context);
   return language.kanjiRadicalShortLabel(id);
-}
-
-String _relatedKanjiLabel(BuildContext context) {
-  final language = _kanjiHubDialogLanguage(context);
-  return language.kanjiRelatedKanjiLabel();
-}
-
-String _relatedCountLabel(BuildContext context) {
-  final language = _kanjiHubDialogLanguage(context);
-  return language.kanjiRelatedCountLabel();
-}
-
-String _openAllRelatedLabel(BuildContext context, int count) {
-  final language = _kanjiHubDialogLanguage(context);
-  return language.kanjiOpenAllRelatedLabel(count);
-}
-
-String _openLevelRelatedLabel(BuildContext context, String level) {
-  final language = _kanjiHubDialogLanguage(context);
-  return language.kanjiOpenLevelRelatedLabel(level);
-}
-
-String _flashcardLaneLabel(BuildContext context, String level) {
-  final language = _kanjiHubDialogLanguage(context);
-  return language.kanjiFlashcardLaneLabel(level);
-}
-
-String _writeLaneLabel(BuildContext context, String level) {
-  final language = _kanjiHubDialogLanguage(context);
-  return language.kanjiWriteLaneLabel(level);
-}
-
-String _relatedLevelSectionLabel(
-  BuildContext context,
-  String level,
-  int count,
-) {
-  final language = _kanjiHubDialogLanguage(context);
-  return language.kanjiRelatedLevelSectionLabel(level, count);
 }
 
 String _rawMeaningLabel(BuildContext context, String raw) {

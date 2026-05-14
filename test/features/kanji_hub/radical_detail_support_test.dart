@@ -103,4 +103,61 @@ void main() {
     expect(summary.byLevel.keys.toList(), ['N5', 'N4', 'N3']);
     expect(summary.byLevel['N4'], ['\u6642']);
   });
+
+  test(
+    'buildRelatedKanjiSummaryForKanji groups shared components by level',
+    () {
+      const source = KanjiItem(
+        id: 1,
+        lessonId: 1,
+        character: '\u660e',
+        strokeCount: 8,
+        meaning: 'bright',
+        examples: [],
+        jlptLevel: 'N5',
+        decomposition: KanjiDecomposition(components: ['\u65e5', '\u6708']),
+      );
+
+      final items = [
+        source,
+        const KanjiItem(
+          id: 2,
+          lessonId: 1,
+          character: '\u6642',
+          strokeCount: 10,
+          meaning: 'time',
+          examples: [],
+          jlptLevel: 'N4',
+          decomposition: KanjiDecomposition(components: ['\u65e5', '\u5bfa']),
+        ),
+        const KanjiItem(
+          id: 3,
+          lessonId: 1,
+          character: '\u6708',
+          strokeCount: 4,
+          meaning: 'moon',
+          examples: [],
+          jlptLevel: 'N5',
+          decomposition: KanjiDecomposition(relatedKanji: ['\u660e']),
+        ),
+        const KanjiItem(
+          id: 4,
+          lessonId: 1,
+          character: '\u4f11',
+          strokeCount: 6,
+          meaning: 'rest',
+          examples: [],
+          jlptLevel: 'N5',
+          decomposition: KanjiDecomposition(components: ['\u4ebb', '\u6728']),
+        ),
+      ];
+
+      final summary = buildRelatedKanjiSummaryForKanji(source, items);
+
+      expect(summary.allCharacters, ['\u6708', '\u6642']);
+      expect(summary.byLevel.keys.toList(), ['N5', 'N4']);
+      expect(summary.byLevel['N5'], ['\u6708']);
+      expect(summary.byLevel['N4'], ['\u6642']);
+    },
+  );
 }

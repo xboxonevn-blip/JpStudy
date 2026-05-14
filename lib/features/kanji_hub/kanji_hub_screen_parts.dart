@@ -260,8 +260,12 @@ class _SearchDrawPanelState extends State<_SearchDrawPanel> {
       if (!mounted) return;
       showDialog(
         context: context,
-        builder: (_) =>
-            _KanjiDetailDialog(item: item, language: widget.language),
+        builder: (_) => _KanjiDetailDialog(
+          item: item,
+          language: widget.language,
+          relatedKanjiFuture: Future.value(allItems),
+          onRelatedKanjiSelected: widget.onCandidatesFound,
+        ),
       );
     } catch (_) {}
   }
@@ -641,6 +645,18 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
       _radicalSortMode = _RadicalSortMode.byIndex;
     });
     widget.onClearRequested();
+  }
+
+  Future<List<KanjiItem>> _loadAllKanji() async {
+    final repo = ref.read(lessonRepositoryProvider);
+    final buckets = await Future.wait([
+      repo.fetchKanjiByLevel(StudyLevel.n5.shortLabel),
+      repo.fetchKanjiByLevel(StudyLevel.n4.shortLabel),
+      repo.fetchKanjiByLevel(StudyLevel.n3.shortLabel),
+      repo.fetchKanjiByLevel(StudyLevel.n2.shortLabel),
+      repo.fetchKanjiByLevel(StudyLevel.n1.shortLabel),
+    ]);
+    return [for (final bucket in buckets) ...bucket];
   }
 
   @override
@@ -1046,6 +1062,8 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                                                     builder: (_) =>
                                                         _RadicalDetailDialog(
                                                           item: item,
+                                                          language:
+                                                              widget.language,
                                                           kanjiFuture: widget
                                                               .allKanjiFuture,
                                                           onRelatedKanjiSelected:
@@ -1347,11 +1365,15 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                                           onTap: () {
                                             showDialog(
                                               context: context,
-                                              builder: (_) =>
-                                                  _KanjiDetailDialog(
-                                                    item: item,
-                                                    language: widget.language,
-                                                  ),
+                                              builder: (_) => _KanjiDetailDialog(
+                                                item: item,
+                                                language: widget.language,
+                                                relatedKanjiFuture:
+                                                    widget.allKanjiFuture ??
+                                                    _loadAllKanji(),
+                                                onRelatedKanjiSelected: widget
+                                                    .onRelatedKanjiSelected,
+                                              ),
                                             );
                                           },
                                         );
@@ -1531,17 +1553,46 @@ class _KanjiTile extends StatelessWidget {
   }
 }
 
-class _KanjiDetailDialog extends StatelessWidget {
-  const _KanjiDetailDialog({required this.item, required this.language});
+class _KanjiDetailDialog extends StatefulWidget {
+  const _KanjiDetailDialog({
+    required this.item,
+    required this.language,
+    this.relatedKanjiFuture,
+    this.onRelatedKanjiSelected,
+  });
   final KanjiItem item;
   final AppLanguage language;
+  final Future<List<KanjiItem>>? relatedKanjiFuture;
+  final ValueChanged<List<String>>? onRelatedKanjiSelected;
+
+  @override
+  State<_KanjiDetailDialog> createState() => _KanjiDetailDialogState();
+}
+
+class _KanjiDetailDialogState extends State<_KanjiDetailDialog> {
+  KanjiItem? _selectedPreviewItem;
+
+  void _selectPreview(KanjiItem item) {
+    setState(() => _selectedPreviewItem = item);
+  }
+
+  KanjiItem? _resolveSelectedPreview(List<KanjiItem> items) {
+    final selected = _selectedPreviewItem;
+    if (selected == null) return null;
+    for (final item in items) {
+      if (item.character == selected.character) {
+        return item;
+      }
+    }
+    return selected;
+  }
 
   @override
   Widget build(BuildContext context) {
     final palette = context.appPalette;
-    final meaning = switch (language) {
-      AppLanguage.vi => item.meaning,
-      _ => item.meaningEn ?? item.meaning,
+    final meaning = switch (widget.language) {
+      AppLanguage.vi => widget.item.meaning,
+      _ => widget.item.meaningEn ?? widget.item.meaning,
     };
 
     return AlertDialog(
@@ -1551,7 +1602,7 @@ class _KanjiDetailDialog extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            item.character,
+            widget.item.character,
             style: TextStyle(
               fontSize: 48,
               fontWeight: FontWeight.bold,
@@ -1577,18 +1628,20 @@ class _KanjiDetailDialog extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            if (item.onyomi != null && item.onyomi!.isNotEmpty)
+            if (widget.item.onyomi != null && widget.item.onyomi!.isNotEmpty)
               Text(
-                'Onyomi: ${item.onyomi}',
+                'Onyomi: ${widget.item.onyomi}',
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
-            if (item.kunyomi != null && item.kunyomi!.isNotEmpty)
+            if (widget.item.kunyomi != null && widget.item.kunyomi!.isNotEmpty)
               Text(
-                'Kunyomi: ${item.kunyomi}',
+                'Kunyomi: ${widget.item.kunyomi}',
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
             const SizedBox(height: 8),
-            Text('Strokes: ${item.strokeCount} | Level: ${item.jlptLevel}'),
+            Text(
+              'Strokes: ${widget.item.strokeCount} | Level: ${widget.item.jlptLevel}',
+            ),
             const SizedBox(height: 12),
             Consumer(
               builder: (context, ref, child) {
@@ -1596,13 +1649,42 @@ class _KanjiDetailDialog extends StatelessWidget {
                 return rules.maybeWhen(
                   data: (ruleSet) => HanVietInlinePanel(
                     rules: ruleSet.rules,
-                    language: language,
-                    kanji: item.character,
+                    language: widget.language,
+                    kanji: widget.item.character,
                   ),
                   orElse: () => const SizedBox.shrink(),
                 );
               },
             ),
+            if (widget.relatedKanjiFuture != null) ...[
+              const SizedBox(height: 16),
+              FutureBuilder<List<KanjiItem>>(
+                future: widget.relatedKanjiFuture,
+                builder: (context, snapshot) {
+                  final summary = snapshot.hasData
+                      ? buildRelatedKanjiSummaryForKanji(
+                          widget.item,
+                          snapshot.data!,
+                        )
+                      : const RadicalRelatedKanjiSummary(
+                          allItems: <KanjiItem>[],
+                          groups: <RadicalRelatedLevelGroup>[],
+                        );
+                  if (summary.isEmpty) return const SizedBox.shrink();
+                  final selectedPreview = _selectedPreviewItem == null
+                      ? null
+                      : _resolveSelectedPreview(summary.allItems);
+                  return _JpStudyFlowPanel(
+                    key: const ValueKey('kanji_detail_study_flow'),
+                    language: widget.language,
+                    summary: summary,
+                    selectedPreview: selectedPreview,
+                    onPreviewSelected: _selectPreview,
+                    onRelatedKanjiSelected: widget.onRelatedKanjiSelected,
+                  );
+                },
+              ),
+            ],
           ],
         ),
       ),
@@ -2188,10 +2270,12 @@ class _RadicalTile extends StatelessWidget {
 class _RadicalDetailDialog extends StatefulWidget {
   const _RadicalDetailDialog({
     required this.item,
+    required this.language,
     this.kanjiFuture,
     this.onRelatedKanjiSelected,
   });
   final RadicalItem item;
+  final AppLanguage language;
   final Future<List<KanjiItem>>? kanjiFuture;
   final ValueChanged<List<String>>? onRelatedKanjiSelected;
 
@@ -2319,191 +2403,13 @@ class _RadicalDetailDialogState extends State<_RadicalDetailDialog> {
                     final selectedPreview = _selectedPreviewItem == null
                         ? null
                         : _resolveSelectedPreview(summary.allItems);
-                    return Container(
-                      width: double.infinity,
-                      margin: const EdgeInsets.only(bottom: 20),
-                      padding: const EdgeInsets.all(14),
-                      decoration: BoxDecoration(
-                        color: palette.primary.withValues(alpha: 0.06),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  _relatedKanjiLabel(context),
-                                  style: Theme.of(context).textTheme.labelLarge
-                                      ?.copyWith(
-                                        fontWeight: FontWeight.w900,
-                                        color: palette.primary,
-                                      ),
-                                ),
-                              ),
-                              TextButton.icon(
-                                key: const ValueKey('open_related_all'),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                  widget.onRelatedKanjiSelected?.call(
-                                    summary.allCharacters,
-                                  );
-                                },
-                                icon: const Icon(
-                                  Icons.travel_explore_rounded,
-                                  size: 18,
-                                ),
-                                label: Text(
-                                  _openAllRelatedLabel(
-                                    context,
-                                    summary.totalCount,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 12),
-                          Wrap(
-                            spacing: 10,
-                            runSpacing: 10,
-                            children: [
-                              _RelatedStatCard(
-                                label: _relatedCountLabel(context),
-                                value: '${summary.totalCount}',
-                                tone: palette.primary,
-                              ),
-                              for (final group in summary.groups)
-                                _RelatedStatCard(
-                                  label: group.level,
-                                  value: '${group.count}',
-                                  tone: palette.accent,
-                                ),
-                            ],
-                          ),
-                          const SizedBox(height: 16),
-                          for (final group in summary.groups) ...[
-                            Text(
-                              _relatedLevelSectionLabel(
-                                context,
-                                group.level,
-                                group.count,
-                              ),
-                              style: Theme.of(context).textTheme.titleSmall
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.w900,
-                                    color: palette.ink,
-                                  ),
-                            ),
-                            const SizedBox(height: 8),
-                            Wrap(
-                              spacing: 8,
-                              runSpacing: 8,
-                              children: [
-                                TextButton.icon(
-                                  key: ValueKey(
-                                    'open_related_level_${group.level}',
-                                  ),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                    widget.onRelatedKanjiSelected?.call(
-                                      group.characters,
-                                    );
-                                  },
-                                  icon: const Icon(
-                                    Icons.arrow_circle_right_outlined,
-                                    size: 18,
-                                  ),
-                                  label: Text(
-                                    _openLevelRelatedLabel(
-                                      context,
-                                      group.level,
-                                    ),
-                                  ),
-                                ),
-                                OutlinedButton.icon(
-                                  key: ValueKey(
-                                    'study_flashcard_${group.level}',
-                                  ),
-                                  onPressed: () => _launchLevelPractice(
-                                    context,
-                                    group.level,
-                                    KanjiPracticeMode.read,
-                                  ),
-                                  icon: const Icon(
-                                    Icons.style_outlined,
-                                    size: 18,
-                                  ),
-                                  label: Text(
-                                    _flashcardLaneLabel(context, group.level),
-                                  ),
-                                ),
-                                ElevatedButton.icon(
-                                  key: ValueKey('study_write_${group.level}'),
-                                  onPressed: () => _launchLevelPractice(
-                                    context,
-                                    group.level,
-                                    KanjiPracticeMode.write,
-                                  ),
-                                  icon: const Icon(
-                                    Icons.edit_outlined,
-                                    size: 18,
-                                  ),
-                                  label: Text(
-                                    _writeLaneLabel(context, group.level),
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: palette.primary,
-                                    foregroundColor: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                            Wrap(
-                              spacing: 10,
-                              runSpacing: 10,
-                              children: [
-                                for (final relatedItem in group.items.take(4))
-                                  _RelatedKanjiPreviewCard(
-                                    key: ValueKey(
-                                      'preview_${group.level}_${relatedItem.character}',
-                                    ),
-                                    item: relatedItem,
-                                    isSelected:
-                                        selectedPreview?.character ==
-                                        relatedItem.character,
-                                    onTap: () => _selectPreview(relatedItem),
-                                  ),
-                              ],
-                            ),
-                            if (selectedPreview != null &&
-                                group.characters.contains(
-                                  selectedPreview.character,
-                                )) ...[
-                              const SizedBox(height: 12),
-                              _RadicalKanjiMicroDetailPanel(
-                                item: selectedPreview,
-                                onSearch: () => _launchKanjiUtility(
-                                  context,
-                                  selectedPreview,
-                                  '/search',
-                                ),
-                                onFlashcard: () => _launchKanjiPractice(
-                                  context,
-                                  selectedPreview,
-                                ),
-                                onWrite: () => _launchKanjiUtility(
-                                  context,
-                                  selectedPreview,
-                                  '/practice/handwriting',
-                                ),
-                              ),
-                            ],
-                            const SizedBox(height: 12),
-                          ],
-                        ],
-                      ),
+                    return _JpStudyFlowPanel(
+                      key: const ValueKey('radical_detail_study_flow'),
+                      language: widget.language,
+                      summary: summary,
+                      selectedPreview: selectedPreview,
+                      onPreviewSelected: _selectPreview,
+                      onRelatedKanjiSelected: widget.onRelatedKanjiSelected,
                     );
                   },
                 ),
@@ -2552,6 +2458,168 @@ class _RadicalDetailDialogState extends State<_RadicalDetailDialog> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _JpStudyFlowPanel extends StatelessWidget {
+  const _JpStudyFlowPanel({
+    super.key,
+    required this.language,
+    required this.summary,
+    required this.selectedPreview,
+    required this.onPreviewSelected,
+    this.onRelatedKanjiSelected,
+  });
+
+  final AppLanguage language;
+  final RadicalRelatedKanjiSummary summary;
+  final KanjiItem? selectedPreview;
+  final ValueChanged<KanjiItem> onPreviewSelected;
+  final ValueChanged<List<String>>? onRelatedKanjiSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.only(bottom: 20),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: palette.primary.withValues(alpha: 0.06),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  language.kanjiRelatedKanjiLabel(),
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    fontWeight: FontWeight.w900,
+                    color: palette.primary,
+                  ),
+                ),
+              ),
+              TextButton.icon(
+                key: const ValueKey('open_related_all'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  onRelatedKanjiSelected?.call(summary.allCharacters);
+                },
+                icon: const Icon(Icons.travel_explore_rounded, size: 18),
+                label: Text(
+                  language.kanjiOpenAllRelatedLabel(summary.totalCount),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 10,
+            runSpacing: 10,
+            children: [
+              _RelatedStatCard(
+                label: language.kanjiRelatedCountLabel(),
+                value: '${summary.totalCount}',
+                tone: palette.primary,
+              ),
+              for (final group in summary.groups)
+                _RelatedStatCard(
+                  label: group.level,
+                  value: '${group.count}',
+                  tone: palette.accent,
+                ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          for (final group in summary.groups) ...[
+            Text(
+              language.kanjiRelatedLevelSectionLabel(group.level, group.count),
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                fontWeight: FontWeight.w900,
+                color: palette.ink,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                TextButton.icon(
+                  key: ValueKey('open_related_level_${group.level}'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    onRelatedKanjiSelected?.call(group.characters);
+                  },
+                  icon: const Icon(Icons.arrow_circle_right_outlined, size: 18),
+                  label: Text(language.kanjiOpenLevelRelatedLabel(group.level)),
+                ),
+                OutlinedButton.icon(
+                  key: ValueKey('study_flashcard_${group.level}'),
+                  onPressed: () => _launchLevelPractice(
+                    context,
+                    group.level,
+                    KanjiPracticeMode.read,
+                  ),
+                  icon: const Icon(Icons.style_outlined, size: 18),
+                  label: Text(language.kanjiFlashcardLaneLabel(group.level)),
+                ),
+                ElevatedButton.icon(
+                  key: ValueKey('study_write_${group.level}'),
+                  onPressed: () => _launchLevelPractice(
+                    context,
+                    group.level,
+                    KanjiPracticeMode.write,
+                  ),
+                  icon: const Icon(Icons.edit_outlined, size: 18),
+                  label: Text(language.kanjiWriteLaneLabel(group.level)),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: palette.primary,
+                    foregroundColor: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Wrap(
+              spacing: 10,
+              runSpacing: 10,
+              children: [
+                for (final relatedItem in group.items.take(4))
+                  _RelatedKanjiPreviewCard(
+                    key: ValueKey(
+                      'preview_${group.level}_${relatedItem.character}',
+                    ),
+                    item: relatedItem,
+                    isSelected:
+                        selectedPreview?.character == relatedItem.character,
+                    onTap: () => onPreviewSelected(relatedItem),
+                  ),
+              ],
+            ),
+            if (selectedPreview != null &&
+                group.characters.contains(selectedPreview!.character)) ...[
+              const SizedBox(height: 12),
+              _RadicalKanjiMicroDetailPanel(
+                item: selectedPreview!,
+                onSearch: () =>
+                    _launchKanjiUtility(context, selectedPreview!, '/search'),
+                onFlashcard: () =>
+                    _launchKanjiPractice(context, selectedPreview!),
+                onWrite: () => _launchKanjiUtility(
+                  context,
+                  selectedPreview!,
+                  '/practice/handwriting',
+                ),
+              ),
+            ],
+            const SizedBox(height: 12),
+          ],
+        ],
       ),
     );
   }

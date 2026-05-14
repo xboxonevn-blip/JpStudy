@@ -410,4 +410,31 @@ void main() {
     await tester.pump(const Duration(seconds: 1));
     expect(find.text('\u9b31'), findsOneWidget);
   });
+
+  testWidgets('kanji detail dialog includes JP Study Flow related lanes', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1200, 1400);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await _mockRadicalsAsset();
+    await tester.pumpWidget(
+      _buildSubject(repo: _buildRepo(), language: AppLanguage.vi),
+    );
+    await _pumpKanjiHub(tester);
+
+    await tester.tap(find.text('\u660e').first);
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+
+    expect(
+      find.byKey(const ValueKey('kanji_detail_study_flow')),
+      findsOneWidget,
+    );
+    expect(find.text('Mở tất cả (2)'), findsOneWidget);
+    expect(find.text('Lane N4 \u2014 1 kanji'), findsOneWidget);
+    expect(find.text('Lane N3 \u2014 1 kanji'), findsOneWidget);
+  });
 }

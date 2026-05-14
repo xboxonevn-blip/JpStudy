@@ -94,7 +94,100 @@ RadicalRelatedKanjiSummary buildRelatedKanjiSummary(
     groups.add(RadicalRelatedLevelGroup(level: entry.key, items: entry.value));
   }
 
-  return RadicalRelatedKanjiSummary(allItems: allItems, groups: groups);
+  return RadicalRelatedKanjiSummary(
+    allItems: _orderedItemsByGroups(allItems, groups),
+    groups: groups,
+  );
+}
+
+RadicalRelatedKanjiSummary buildRelatedKanjiSummaryForKanji(
+  KanjiItem source,
+  List<KanjiItem> kanjiItems, {
+  int totalLimit = 24,
+  int limitPerLevel = 8,
+}) {
+  final sourceLinks = _componentLinkSet(source);
+  if (sourceLinks.isEmpty) {
+    return const RadicalRelatedKanjiSummary(
+      allItems: <KanjiItem>[],
+      groups: <RadicalRelatedLevelGroup>[],
+    );
+  }
+
+  final orderedLevels = <String>['N5', 'N4', 'N3', 'N2', 'N1'];
+  final allItems = <KanjiItem>[];
+  final grouped = <String, List<KanjiItem>>{};
+
+  bool isRelated(KanjiItem item) {
+    if (item.character == source.character) return false;
+    final links = _componentLinkSet(item);
+    if (links.contains(source.character)) return true;
+    if (source.decomposition?.relatedKanji.contains(item.character) ?? false) {
+      return true;
+    }
+    return links.any(sourceLinks.contains);
+  }
+
+  for (final item in kanjiItems) {
+    if (!isRelated(item)) continue;
+    if (allItems.any((existing) => existing.character == item.character)) {
+      continue;
+    }
+
+    allItems.add(item);
+    final level = _normalizedLevel(item.jlptLevel);
+    final bucket = grouped.putIfAbsent(level, () => <KanjiItem>[]);
+    if (!bucket.any((existing) => existing.character == item.character) &&
+        bucket.length < limitPerLevel) {
+      bucket.add(item);
+    }
+    if (allItems.length >= totalLimit) break;
+  }
+
+  final groups = <RadicalRelatedLevelGroup>[];
+  for (final level in orderedLevels) {
+    final bucket = grouped[level];
+    if (bucket != null && bucket.isNotEmpty) {
+      groups.add(RadicalRelatedLevelGroup(level: level, items: bucket));
+    }
+  }
+  for (final entry in grouped.entries) {
+    if (groups.any((group) => group.level == entry.key) ||
+        entry.value.isEmpty) {
+      continue;
+    }
+    groups.add(RadicalRelatedLevelGroup(level: entry.key, items: entry.value));
+  }
+
+  return RadicalRelatedKanjiSummary(
+    allItems: _orderedItemsByGroups(allItems, groups),
+    groups: groups,
+  );
+}
+
+Set<String> _componentLinkSet(KanjiItem item) {
+  final decomposition = item.decomposition;
+  if (decomposition == null) return const <String>{};
+  return <String>{
+    ...decomposition.components.map((value) => value.trim()),
+    ...decomposition.relatedKanji.map((value) => value.trim()),
+  }..removeWhere((value) => value.isEmpty);
+}
+
+List<KanjiItem> _orderedItemsByGroups(
+  List<KanjiItem> allItems,
+  List<RadicalRelatedLevelGroup> groups,
+) {
+  return <KanjiItem>[
+    for (final group in groups) ...group.items,
+    for (final item in allItems)
+      if (!groups.any(
+        (group) => group.items.any(
+          (groupItem) => groupItem.character == item.character,
+        ),
+      ))
+        item,
+  ];
 }
 
 String _normalizedLevel(String raw) {
