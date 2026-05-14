@@ -174,3 +174,24 @@
 
 - Build-artifact budgets now exist and pass, but they do not measure route resource count, Lighthouse score, TTI, or live Firebase Hosting compression/CDN behavior.
 - The largest JSON budget still permits `19.35 MB`; it is a regression gate, not proof that startup content loading is efficient.
+
+## 2026-05-14 - Q7.1 / E7.3
+
+- All-level grammar startup seeding is fixed locally, but no fresh browser resource-count smoke has proved the `250` first-load resource baseline improved.
+- The fix covers discovered grammar app/content DB seeders only; other content families still need browser-level request instrumentation.
+
+## 2026-05-14 - Q7.1 / E7.4
+
+- Post-fix resource count improved `250 -> 108`, but this is still manual Playwright evidence, not a checked-in CI gate.
+- Startup still fetches `50` active-level grammar JSON resources; the app is level-scoped but not route-minimal.
+- Firebase localhost referrer `403` noise remains in local browser perf smoke.
+
+## 2026-05-14 - Q7.1 / E7.5
+
+- Root grammar prefetch is removed locally, but no checked-in browser resource-count test prevents regression yet.
+- `69` first-route resources is localhost evidence only; Firebase Hosting compression/CDN and live auth/App Check behavior remain unmeasured after this patch.
+
+## 2026-05-14 - Q7.1 / E7.6
+
+- Local resource-count CI gate now exists, but it still serves `build/web`; it does not prove live Firebase Hosting headers, CDN behavior, App Check, or Auth/referrer behavior.
+- Lighthouse remains absent; the Playwright resource smoke is a request-count gate, not a full SM5 performance score.

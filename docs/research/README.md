@@ -150,7 +150,7 @@ Current D6.Q6.6 blocker: primary nav/quiz/grid targets mostly pass, but compact 
 
 Current D6.Q6.7 blocker: dark mode is wired and focused tests pass, but it is not parity-ready. Dark `ThemeData` lacks several light-theme component families, `ThemeMode.system` is unsupported, hardcoded light surfaces remain in Grammar repair prompts and Design Lab, and only one route-level dark visual probe exists.
 
-Current D7.Q7.1 blocker: release web build passes and E7.2 added a reproducible build-artifact budget gate, but no Lighthouse score exists because local Lighthouse/Chrome tooling is missing. Current budget report passes with `main.dart.js` `6.27 MB` raw / `1.76 MB` gzip, total `build/web` `62.48 MB`, JSON assets `19.35 MB`; first local release load still observed `250` resources with broad grammar JSON fetching.
+Current D7.Q7.1 blocker: release web build passes and E7.2 added a reproducible build-artifact budget gate, but no Lighthouse score exists because local Lighthouse/Chrome tooling was missing. E7.3 fixed discovered all-level grammar seed paths; E7.5 removed app DB startup grammar seeding while preserving requested-level lazy seeding for grammar screens, lessons, and JLPT mock. E7.6 added `npm run test:web-resource-smoke`; local first-route resource count is gated at `<=80` and currently passes at `38`, down from the original `250`, with first-route grammar JSON `0`. Current artifact budget passes with `main.dart.js` about `6.27 MB` raw / `1.76 MB` gzip, total `build/web` about `62.5 MB`, JSON assets `19.35 MB`.
 
 Current D8.Q8.1 blocker: release readiness is gated by hygiene and parity, not build compilation alone. Focused route/layout smoke tests pass after a stale `/exam-center` smoke assertion was updated, but both Firebase live sites are older than current `HEAD`; GA4 event tables are still absent; no fresh deploy/live route/perf probe has been run. E8.6 patched the App Check build flag and CSP doc drift in `SHIPPING.md` and `docs/FIREBASE_SECURITY_CHECKLIST.md`.
 
@@ -160,7 +160,7 @@ Current D8.Q8.2 status: web Firebase API key referrer restriction is currently p
 
 Current D8.Q8.3 status: Auth authorized-domain source audit is measured but console-blocked for final proof. Source confirms `authDomain: jpstudy-v2.firebaseapp.com`; read-only Hosting CLI confirms `https://jpstudy-v2.web.app` and `https://jpstudy.web.app`. Repository docs now require removing `localhost` from production Auth authorized domains unless a time-boxed exception exists.
 
-Current D8.Q8.5 status: CI is stronger than assumed. GitHub Actions run UI string guard, `flutter analyze`, `flutter test`, release-like web build, D7 web performance budget, and Firebase Storage rules tests. E8.7 renamed the workflow to `CI`, changed web build to `flutter build web --release --base-href=/ --dart-define=JPSTUDY_RECAPTCHA_SITE_KEY=ci-placeholder`, and added the D7 budget report gate. Still missing: deploy workflow, live route smoke, Lighthouse budget, explicit notification, and branch-protection proof.
+Current D8.Q8.5 status: CI is stronger than assumed. GitHub Actions run UI string guard, `flutter analyze`, `flutter test`, release-like web build, D7 web artifact budget, D7 local web resource smoke, and Firebase Storage rules tests. E8.7 renamed the workflow to `CI`, changed web build to `flutter build web --release --base-href=/ --dart-define=JPSTUDY_RECAPTCHA_SITE_KEY=ci-placeholder`, and added D7 budget gates. Still missing: deploy workflow, live route smoke, Lighthouse budget on live URL, explicit notification, and branch-protection proof.
 
 ## Open Questions
 
@@ -188,12 +188,12 @@ Current D8.Q8.5 status: CI is stronger than assumed. GitHub Actions run UI strin
 - D6 status update: Q6.5 measured; contrast needs token-level fixes before claiming WCAG 2.1 AA.
 - D6 status update: Q6.6 measured; touch target consistency needs a `44x44` hitbox policy before claiming mobile/tablet accessibility readiness.
 - D6 status update: Q6.7 measured; dark mode can remain available, but route-level parity needs component-theme mirroring, light-surface cleanup, and broader dark tests.
-- D7 status: Q7.1 measured and partially tooled; build-artifact budget exists and passes, but performance readiness still needs Lighthouse/Playwright resource-count tooling plus a first-route content-loading budget.
+- D7 status: Q7.1 measured and partially remediated; build-artifact and local Playwright resource-count budgets exist and pass, all-level/root grammar startup seeding is fixed, and local first-route resource count dropped from `250` baseline to `38` in the checked-in smoke. Performance readiness still needs live Firebase Hosting verification and Lighthouse/trace metrics.
 - D8 status: Q8.1 measured; shipping/security doc drift is patched, but before any beta deploy still run the full release gate, choose the deploy target explicitly, then rerun D4/D7 live probes.
 - D8 compliance status: Q8.1 measured and minimally implemented; Privacy/Terms routes, VI+EN draft copy, and links from Settings/Data, Onboarding, and Login exist, but final legal review remains required before public launch.
 - D8 compliance status update: Q8.2 measured; web API-key fake-referrer probe is blocked with `API_KEY_HTTP_REFERRER_BLOCKED`, but console restriction list still needs manual launch-gate review.
 - D8 compliance status update: Q8.3 measured; Auth authorized-domain final proof is manual Console work, and the security checklist now records the production-domain/localhost gate.
-- D8 compliance status update: Q8.5 measured and partially remediated; local CI gates plus build-artifact budget exist, but live/deploy/Lighthouse/notification gates remain open.
+- D8 compliance status update: Q8.5 measured and partially remediated; local CI gates plus build-artifact and local resource-count budgets exist, but live/deploy/Lighthouse/notification gates remain open.
 
 ## Phase 0 Definition Of Done
 

@@ -223,3 +223,35 @@
 - Delta: +45 percentage points on confidence that local-source regressions are CI-covered; +50 percentage points on confidence that release risk is specifically live/deploy/perf automation, not total CI absence.
 - Updated belief: rename and tune the existing CI, then add Lighthouse/live smoke only after deploy target and budget policy are explicit.
 - New hypothesis: branch protection and post-deploy probes will improve beta safety more than adding another generic PR test job.
+
+## 2026-05-14T18:16:00+07:00 - Grammar startup prefetch had two seeders
+
+- Prior belief: scoping content DB grammar seeding would likely remove the first-load grammar JSON spike.
+- Actual observation: app startup also fired `GrammarSeeder.seedGrammarData()` and loaded N1-N5 into the app DB.
+- Delta: +30 percentage points on confidence that level-scoped seed APIs are required before browser resource-count budgets can be meaningful.
+- Updated belief: every startup/on-demand seeder needs a level contract; fixing only one DB copy leaves performance risk in the other copy.
+- New hypothesis: after rebuild, first-route browser resource count should drop materially from the `250` baseline if grammar JSON was the dominant eager-fetch source.
+
+## 2026-05-14T18:29:00+07:00 - Lazy grammar seed cut first-route requests by more than half
+
+- Prior belief: resource count should drop materially if all-level grammar was the dominant eager-fetch source.
+- Actual observation: first-route resource count dropped `250 -> 108`; grammar resources are now `50` N5-only files.
+- Delta: +35 percentage points on confidence that grammar seeding was the main measured first-load request spike.
+- Updated belief: next D7 leverage is route-minimal active-level grammar loading and automated resource-count budgets, not generic bundle shaving.
+- New hypothesis: moving grammar seeding from app startup to grammar/lesson demand will remove most of the remaining `50` grammar JSON resources from root load.
+
+## 2026-05-14T18:38:00+07:00 - Root does not need grammar seed
+
+- Prior belief: some startup grammar seed might be needed for first-session readiness.
+- Actual observation: removing app DB startup grammar seed dropped root grammar resources `50 -> 0`; focused grammar screens still passed on-demand tests.
+- Delta: +45 percentage points on confidence that grammar should be entirely route-demanded.
+- Updated belief: provider initialization should avoid content seeding unless the root route immediately needs that content.
+- New hypothesis: a checked-in route resource smoke will catch more launch perf regressions than another static bundle-size threshold.
+
+## 2026-05-14T18:54:00+07:00 - Clean Chromium is stricter than manual browser smoke
+
+- Prior belief: the checked-in Playwright smoke would reproduce the manual `69` resource count closely.
+- Actual observation: clean Chromium reports `38` resources with `jsonCount=1`, because it avoids local extension noise and some cached/browser-side requests.
+- Delta: +20 percentage points on confidence that CI-local resource smoke is less noisy than ad hoc manual browser sessions.
+- Updated belief: use the checked-in smoke for regression gates; use manual browser/MCP sessions for investigation only.
+- New hypothesis: live Firebase Hosting resource count will differ again because compression/CDN/App Check/referrer behavior changes the request graph.
