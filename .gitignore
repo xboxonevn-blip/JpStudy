@@ -109,3 +109,9 @@ tests/
 tmp/
 .codex/sources/*.zip
 .codex/sources/Unihan/
+
+# Service account / cloud credentials (NEVER commit)
+*-service-account.json
+*-credentials.json
+jpstudy-v2-*.json
+.config/

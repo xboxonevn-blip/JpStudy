@@ -47,3 +47,31 @@ So nhieu it khi lam tieng Viet bi sai ngu phap, nhung no lam tieng Anh lo ngay: 
 ## D4 / Q4.P2
 
 Mot nguoi hoc N3 ban ron khong quan tam route nao la "duong chuan"; ho bam link nao thi app phai nho dung N3 o link do. Neu cap do chi duoc nap khi vao trang chu, moi deep link thanh mot canh cua bi hong va nguoi hoc thay noi dung N5/N4 sai voi minh. Mobile cung vay: neu nut bat dau nam duoi bottom nav, mot cu cham sai da lam mat ca phien hoc ngan.
+
+## D4 / Q4.P3
+
+Nguoi hoc N2 on thi cap toc khong can app nhac hoc nhe moi ngay; ho can mot ban dieu khien cho nhieu gio lien tiep. Neu trang chu noi dung N2 nhung link thang lai roi ve N5, app khong con dang tin trong luc on thi. Va neu he thong khong biet "toi co 3 gio hom nay", no se de xuat mot ke hoach 14 phut dung cho thoi quen, sai cho cramming.
+
+## D4 / Q4.P4
+
+Nguoi hoc lon tuoi can it bat ngo hon nguoi tre: chu du lon, nut bam ro, va mot ly do hoc gan voi doi song. Tablet root cua app gan dat dieu nay, nhung neu cac cua phu roi ve N5 hoac onboarding khong co muc tieu du lich/giai tri, app van noi sai y dinh hoc. Voi nhom nay, "don gian va dung muc tieu" quan trong hon nhieu nhanh hoc.
+
+## D4 / Q4.P5
+
+Nguoi hoc N1 bo di rat nhanh neu app noi sai trinh do. Diem dang mung la noi dung doc N1 co that: khi state da dung, immersion co deck kho va annotation huu ich. Diem hong la duong den no khong dang tin: link thang roi ve N5, study hub khong day N1 len truoc, va "news" khong ton tai. Voi nguoi nang cao, discovery la chat luong san pham.
+
+## D4 / Synthesis
+
+Nhieu persona khong lam app phuc tap hon neu app co mot truc tin cay: dung nguoi hoc, dung cap do, dung muc tieu. Hien tai truc do bi gay o live deep link, nen moi persona tu N3 den N1 deu co the bi keo ve N5. Khi truc nay vung, cac khac biet moi co nghia: 15 phut, 3 gio, du lich, hay doc N1 deu la bien the cua cung mot cau hoi "hom nay toi can phien hoc nao?".
+
+## D5 / Q5.1
+
+FSRS khong chi la cong thuc tinh ngay tiep theo. No la mot may trang thai: hoc moi, on lai, hoc lai, buoc nao trong vong lap ngan, va khi nao moi tot nghiep sang lich dai han. Neu bo trang thai do, app co the van cho ra so ngay hop ly tren giay, nhung nguoi hoc bam "quen" lai khong gap lai the ngay luc can nhat. Vi vay do retention ma scheduler sai trang thai se lam minh tin nham rang nguoi hoc dang nho.
+
+## D5 / Q5.2
+
+Streak chi co nghia khi no tra loi ro "ngay nao duoc tinh la hoc". Neu tu vung tinh, bai grammar khong tinh, test tinh, game tinh, thi streak khong con la thoi quen hoc ma la thoi quen di qua dung module. Muon dung streak de hieu retention, app can mot chinh sach ngay duy nhat: ranh gio nao, hoat dong nao tinh, miss mot ngay xu ly ra sao, va moi module deu ghi vao cung mot so cai.
+
+## D5 / Q5.3
+
+XP chi la mot ngon ngu dong vien khi moi man hinh hieu no giong nhau. Neu Learn hien `+XP` nhung dashboard khong tang, con game/test lai tang, nguoi hoc se thay he thong khong cong bang va minh cung khong doc duoc `todayXp` nhu cong hoc. Vi vay truoc khi dung XP cho analytics hay leaderboard, app can mot chinh sach tien te ro: nguon nao la XP tai khoan, nguon nao chi la diem phien hoc, va gioi han nao ngan viec cay diem thay vi hoc.
