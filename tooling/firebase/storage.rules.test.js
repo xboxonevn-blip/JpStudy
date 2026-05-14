@@ -28,6 +28,10 @@ function backupRef(context, uid = 'alice') {
   return context.storage().ref(`users/${uid}/backup.json`);
 }
 
+function legacyMigrationRef(context, uid = 'alice') {
+  return context.storage().ref(`users/${uid}/legacy_migration.json`);
+}
+
 describe('Firebase Storage rules', () => {
   test('allows owner to write valid backup JSON', async () => {
     const alice = testEnv.authenticatedContext('alice');
@@ -83,6 +87,26 @@ describe('Firebase Storage rules', () => {
 
     await assertFails(
       alice.storage().ref('public/backup.json').putString('{}', 'raw', {
+        contentType: 'application/json',
+      }),
+    );
+  });
+
+  test('allows owner to write legacy migration JSON', async () => {
+    const alice = testEnv.authenticatedContext('alice');
+
+    await assertSucceeds(
+      legacyMigrationRef(alice).putString('{}', 'raw', {
+        contentType: 'application/json',
+      }),
+    );
+  });
+
+  test('denies cross-user legacy migration writes', async () => {
+    const bob = testEnv.authenticatedContext('bob');
+
+    await assertFails(
+      legacyMigrationRef(bob, 'alice').putString('{}', 'raw', {
         contentType: 'application/json',
       }),
     );

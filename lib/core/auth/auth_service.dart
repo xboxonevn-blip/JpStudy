@@ -174,6 +174,7 @@ class AuthService {
       emailVerified: user.emailVerified,
       displayName: user.displayName,
       photoUrl: user.photoURL,
+      isAnonymous: user.isAnonymous,
     );
   }
 

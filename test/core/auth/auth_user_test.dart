@@ -35,11 +35,13 @@ void main() {
       email: 'a@b.c',
       displayName: 'A',
       photoUrl: 'http://x',
+      isAnonymous: true,
     );
     final copy = user.copyWith(displayName: 'B');
     expect(copy.uid, '1');
     expect(copy.email, 'a@b.c');
     expect(copy.displayName, 'B');
     expect(copy.photoUrl, 'http://x');
+    expect(copy.isAnonymous, isTrue);
   });
 }

@@ -21,6 +21,11 @@ service firebase.storage {
       allow create, update: if ownsUserPath(uid) && isBackupJson();
     }
 
+    match /users/{uid}/legacy_migration.json {
+      allow read, delete: if ownsUserPath(uid);
+      allow create, update: if ownsUserPath(uid) && isBackupJson();
+    }
+
     match /{allPaths=**} {
       allow read, write: if false;
     }

@@ -7,6 +7,7 @@ class AuthUser {
     this.emailVerified = false,
     this.displayName,
     this.photoUrl,
+    this.isAnonymous = false,
   });
 
   final String uid;
@@ -14,6 +15,7 @@ class AuthUser {
   final bool emailVerified;
   final String? displayName;
   final String? photoUrl;
+  final bool isAnonymous;
 
   String get initialsForAvatar {
     final source = (displayName?.trim().isNotEmpty ?? false)
@@ -35,6 +37,7 @@ class AuthUser {
     bool? emailVerified,
     String? displayName,
     String? photoUrl,
+    bool? isAnonymous,
   }) {
     return AuthUser(
       uid: uid ?? this.uid,
@@ -42,6 +45,7 @@ class AuthUser {
       emailVerified: emailVerified ?? this.emailVerified,
       displayName: displayName ?? this.displayName,
       photoUrl: photoUrl ?? this.photoUrl,
+      isAnonymous: isAnonymous ?? this.isAnonymous,
     );
   }
 }

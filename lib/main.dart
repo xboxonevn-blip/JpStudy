@@ -8,6 +8,7 @@ import 'package:jpstudy/app/app.dart';
 import 'package:jpstudy/app/navigation/app_router.dart';
 import 'package:jpstudy/core/analytics/analytics_consent_provider.dart';
 import 'package:jpstudy/core/analytics/do_not_track.dart';
+import 'package:jpstudy/core/auth/anonymous_auth_provider.dart';
 import 'package:jpstudy/core/error_monitoring/sentry_setup.dart';
 import 'package:jpstudy/core/shared_preferences_provider.dart';
 import 'package:jpstudy/core/notifications/notification_service.dart';
@@ -53,6 +54,13 @@ Future<void> main() async {
     ).runIfNeeded();
   } catch (e, st) {
     debugPrint('Kana migration failed: $e\n$st');
+  }
+  try {
+    await container
+        .read(anonymousAuthServiceProvider)
+        .ensureAuthenticated(preferences: preferences);
+  } catch (e, st) {
+    debugPrint('Anonymous auth bootstrap failed: $e\n$st');
   }
 
   var isSignedIn = false;

@@ -4,6 +4,8 @@
 
 - Deploy `storage.rules` before enabling cloud backup in production.
 - User backups are restricted to `users/{uid}/backup.json`.
+- Anonymous bootstrap migration snapshots are restricted to
+  `users/{uid}/legacy_migration.json`.
 - Reads, writes, and deletes require Firebase Auth and matching `request.auth.uid`.
 - Writes are limited to JSON payloads up to 5 MiB.
 - All other Storage paths are denied by default.

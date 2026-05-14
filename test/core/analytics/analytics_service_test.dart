@@ -5,6 +5,8 @@ import 'package:jpstudy/core/analytics/analytics_service.dart';
 class _FakeFirebaseAnalytics extends Fake implements FirebaseAnalytics {
   final events = <String>[];
   final params = <Map<String, Object>?>[];
+  String? userId;
+  final userProperties = <String, String?>{};
 
   @override
   Future<void> logEvent({
@@ -15,6 +17,23 @@ class _FakeFirebaseAnalytics extends Fake implements FirebaseAnalytics {
   }) async {
     events.add(name);
     params.add(parameters);
+  }
+
+  @override
+  Future<void> setUserId({
+    String? id,
+    AnalyticsCallOptions? callOptions,
+  }) async {
+    userId = id;
+  }
+
+  @override
+  Future<void> setUserProperty({
+    required String name,
+    required String? value,
+    AnalyticsCallOptions? callOptions,
+  }) async {
+    userProperties[name] = value;
   }
 }
 
@@ -52,12 +71,25 @@ void main() {
     expect(fake.params.last, {'mode': 'review', 'rating': 4});
   });
 
+  test('identifies user id and auth type after consent', () async {
+    final fake = _FakeFirebaseAnalytics();
+    final service = AnalyticsService(instance: fake, enabled: true);
+
+    await service.identifyUser(userId: 'anon-1', authType: 'anonymous');
+
+    expect(fake.userId, 'anon-1');
+    expect(fake.userProperties['auth_type'], 'anonymous');
+  });
+
   test('does not log before consent', () async {
     final fake = _FakeFirebaseAnalytics();
     final service = AnalyticsService(instance: fake);
 
     await service.logSessionStart('learn');
+    await service.identifyUser(userId: 'anon-1', authType: 'anonymous');
 
     expect(fake.events, isEmpty);
+    expect(fake.userId, isNull);
+    expect(fake.userProperties, isEmpty);
   });
 }

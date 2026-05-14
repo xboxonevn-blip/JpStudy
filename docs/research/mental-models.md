@@ -172,3 +172,7 @@ Error monitoring cung la consent surface, khong chi la SDK. Neu gan Sentry vao `
 ## D8 / Q8.5
 
 Deploy automation phai co che that bai dung luc, khong that bai vi secret chua duoc cap. Voi solo-dev `main`, workflow tot la: source CI phai bat loi moi commit; deploy job chi chay sau khi source CI xanh; neu thieu `FIREBASE_TOKEN` hoac App Check key thi skip co warning; neu co secret thi bat buoc deploy dung `hosting:jpstudy`, smoke primary/legacy, va do live resource + Lighthouse. Nhu vay repo da ma hoa release contract ma khong khoa duong commit trong luc credential setup con dang cho user.
+
+## Auth / Anonymous Bootstrap
+
+Anonymous Auth nen duoc xem nhu identity substrate, khong phai login UX. Neu app can UID de backup, migrate, gan support context, thi co the tao UID am tham sau Firebase/App Check init voi timeout ngan; UI van boot offline neu fail. Diem quan trong la tach ba viec: tao UID, di chuyen local progress len path dung owner, va sau nay moi thiet ke upgrade/link account. Cach tach nay giu onboarding khong ma sat nhung van tao duong an toan cho beta data.

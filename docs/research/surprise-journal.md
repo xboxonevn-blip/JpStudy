@@ -309,3 +309,11 @@
 - Delta: -50 percentage points on confidence that content seeding alone controls vocab readiness.
 - Updated belief: vocab readiness has at least four gates: seeded content, catalog visibility, availability/CTA state, and review queue counts.
 - New hypothesis: the availability registry or level whitelist was only opened for N4, while upper-level data remains visible but disabled.
+
+## 2026-05-15T06:08:00+07:00 - Anonymous Auth can be identity without a login wall
+
+- Prior belief: a durable UID probably required a visible login/upgrade moment before cloud identity could be trusted.
+- Actual observation: Firebase anonymous Auth can run before `runApp` with a 5-second timeout, reuse an existing user, fall back to local-only if offline, and still give Storage rules a real `request.auth.uid` for migration paths.
+- Delta: +45 percentage points on confidence that Phase 13 can ship without adding onboarding friction.
+- Updated belief: identity foundation and account-upgrade UX are separate phases. The app can establish a private UID now, then add soft upgrade/linking later.
+- New hypothesis: once live App Check + anonymous Auth are verified, Storage-backed safety nets can cover more beta data without forcing sign-in.

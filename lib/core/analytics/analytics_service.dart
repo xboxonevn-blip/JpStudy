@@ -81,6 +81,20 @@ class AnalyticsService {
     return _logEvent('session_quality_rated', {'mode': mode, 'rating': rating});
   }
 
+  Future<void> identifyUser({
+    required String userId,
+    required String authType,
+  }) async {
+    if (!_enabled) return;
+    try {
+      final analytics = _analytics ?? FirebaseAnalytics.instance;
+      await analytics.setUserId(id: userId);
+      await analytics.setUserProperty(name: 'auth_type', value: authType);
+    } catch (_) {
+      // Analytics identity must never interrupt study/auth/sync flows.
+    }
+  }
+
   Future<void> _logEvent(String name, [Map<String, Object>? parameters]) async {
     if (!_enabled) return;
     try {
