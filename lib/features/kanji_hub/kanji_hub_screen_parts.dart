@@ -750,6 +750,7 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                 child: Row(
                   children: [
                     _CollectionSelectorCard(
+                      key: const ValueKey('kanji_collection_n5'),
                       title: 'N5',
                       subtitle: StudyLevel.n5.description(widget.language),
                       selected:
@@ -759,6 +760,7 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                     ),
                     const SizedBox(width: 10),
                     _CollectionSelectorCard(
+                      key: const ValueKey('kanji_collection_n4'),
                       title: 'N4',
                       subtitle: StudyLevel.n4.description(widget.language),
                       selected:
@@ -768,6 +770,7 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                     ),
                     const SizedBox(width: 10),
                     _CollectionSelectorCard(
+                      key: const ValueKey('kanji_collection_n3'),
                       title: 'N3',
                       subtitle: StudyLevel.n3.description(widget.language),
                       selected:
@@ -777,6 +780,7 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                     ),
                     const SizedBox(width: 10),
                     _CollectionSelectorCard(
+                      key: const ValueKey('kanji_collection_radicals'),
                       title: '214',
                       subtitle: radicalsLabel,
                       selected:
@@ -993,6 +997,7 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                                               items,
                                             ).entries) ...[
                                           _RadicalSectionHeader(
+                                            language: widget.language,
                                             strokeCount: entry.key,
                                             count: entry.value.length,
                                           ),
@@ -1955,8 +1960,13 @@ Map<int, List<RadicalItem>> _groupRadicalsByStroke(List<RadicalItem> items) {
 }
 
 class _RadicalSectionHeader extends StatelessWidget {
-  const _RadicalSectionHeader({required this.strokeCount, required this.count});
+  const _RadicalSectionHeader({
+    required this.language,
+    required this.strokeCount,
+    required this.count,
+  });
 
+  final AppLanguage language;
   final int strokeCount;
   final int count;
 
@@ -1973,7 +1983,7 @@ class _RadicalSectionHeader extends StatelessWidget {
             border: Border.all(color: palette.primary.withValues(alpha: 0.2)),
           ),
           child: Text(
-            '$strokeCount n?t',
+            language.radicalGroupStrokeHeader(strokeCount),
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
               color: palette.primary,
               fontWeight: FontWeight.w900,
@@ -1982,7 +1992,7 @@ class _RadicalSectionHeader extends StatelessWidget {
         ),
         const SizedBox(width: 10),
         Text(
-          '$count b? th?',
+          language.radicalGroupSubtitle(count),
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
             color: palette.ink.withValues(alpha: 0.58),
             fontWeight: FontWeight.w700,
@@ -1995,6 +2005,7 @@ class _RadicalSectionHeader extends StatelessWidget {
 
 class _CollectionSelectorCard extends StatelessWidget {
   const _CollectionSelectorCard({
+    super.key,
     required this.title,
     required this.subtitle,
     required this.selected,

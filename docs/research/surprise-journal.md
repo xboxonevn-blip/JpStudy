@@ -294,3 +294,10 @@
 - Actual observation: Node REST BigQuery auth passed with `SELECT 1 AS ok`, `asia-southeast1` listed only `firebase_crashlytics`, `firebase_messaging`, and `firebase_sessions`, `US` listed zero datasets, and `analytics_536663906` returned `404` in both locations.
 - Delta: confidence in producing a real NS datapoint during Sprint 1 drops from likely to blocked; the blocker is GA4 export provisioning or linking, not local credentials.
 - Updated belief: BigQuery readiness needs an explicit dataset-existence gate before any NS/funnel run. `firebase_sessions` presence is not evidence that Firebase Analytics export is live.
+
+## 2026-05-15T01:55:00+07:00 - Mojibake bug was isolated to one UI header path
+
+- Prior belief: radical Vietnamese display problems were mostly data-layer `radicals_214.json` issues.
+- Actual observation: the stroke filter chips rendered `nét` correctly through `KanjiCopy`, while the radical group headers used separate hardcoded literals: `$strokeCount n?t` and `$count b? th?`.
+- Delta: same screen had two text paths with different quality; data cleanup alone would not touch the header mojibake.
+- Updated belief: dual render paths create dual bug surfaces. User-visible Vietnamese strings should route through `AppLanguage` or a feature copy layer, not local hardcoded literals.

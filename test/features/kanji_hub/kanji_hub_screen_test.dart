@@ -86,13 +86,14 @@ class _FakeKanjiHubLessonRepository extends LessonRepository {
 
 Widget _buildSubject({
   required LessonRepository repo,
+  AppLanguage language = AppLanguage.en,
   List<Override> overrides = const [],
 }) {
   return ProviderScope(
     retry: (retryCount, error) => null,
     overrides: [
       appLanguageProvider.overrideWith(
-        (ref) => AppLanguageController.test(AppLanguage.en),
+        (ref) => AppLanguageController.test(language),
       ),
       studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
       lessonRepositoryProvider.overrideWithValue(repo),
@@ -305,5 +306,33 @@ void main() {
     await tester.pump(const Duration(milliseconds: 300));
     expect(find.byKey(const ValueKey('empty_state')), findsOneWidget);
     expect(find.text('\\u5b66'), findsNothing);
+  });
+
+  testWidgets('radical group headers render Vietnamese tone marks', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1200, 1400);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await _mockRadicalsAsset();
+    await tester.pumpWidget(
+      _buildSubject(repo: _buildRepo(), language: AppLanguage.vi),
+    );
+    await _pumpKanjiHub(tester);
+
+    await tester.ensureVisible(
+      find.byKey(const ValueKey('kanji_collection_radicals')),
+    );
+    await tester.pump();
+    await tester.tap(find.byKey(const ValueKey('kanji_collection_radicals')));
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+
+    expect(find.text('4 nét'), findsWidgets);
+    expect(find.text('1 bộ thủ'), findsOneWidget);
+    expect(find.text('4 n?t'), findsNothing);
+    expect(find.text('1 b? th?'), findsNothing);
   });
 }

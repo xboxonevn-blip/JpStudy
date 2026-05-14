@@ -7130,6 +7130,28 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String radicalGroupStrokeHeader(int count) {
+    switch (this) {
+      case AppLanguage.en:
+        return '$count ${count == 1 ? 'stroke' : 'strokes'}';
+      case AppLanguage.vi:
+        return '$count nét';
+      case AppLanguage.ja:
+        return '$count画';
+    }
+  }
+
+  String radicalGroupSubtitle(int count) {
+    switch (this) {
+      case AppLanguage.en:
+        return '$count ${count == 1 ? 'radical' : 'radicals'}';
+      case AppLanguage.vi:
+        return '$count bộ thủ';
+      case AppLanguage.ja:
+        return '$count部首';
+    }
+  }
+
   String get onboardingReadyTitle {
     switch (this) {
       case AppLanguage.en:

@@ -78,6 +78,8 @@ void main() {
       expect(language.kanaSnackbarSwitchAction, isNotEmpty);
       expect(language.vocabCatalogMinnaNote, isNotEmpty);
       expect(language.vocabCatalogShinKanzenNote, isNotEmpty);
+      expect(language.radicalGroupStrokeHeader(1), isNotEmpty);
+      expect(language.radicalGroupSubtitle(2), isNotEmpty);
     }
   });
 }

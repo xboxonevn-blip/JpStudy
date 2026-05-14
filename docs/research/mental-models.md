@@ -149,3 +149,7 @@ Du lieu phien am va du lieu giai nghia la hai lop khac nhau. Unihan co the noi "
 ## D1 / Q1.4
 
 Telemetry co hai cong tac rieng: quyen truy cap va dong du lieu. `SELECT 1` chung minh service account, OAuth, va BigQuery job da dung; no khong chung minh GA4 dang xuat bang su kien. Neu dataset `analytics_536663906` chua ton tai, moi bao cao NS deu chi la gia lap du co credentials tot. Vi vay gate dung la: auth smoke truoc, dataset inventory sau, roi moi chay query su kien that.
+
+## Kanji / Radical Headers
+
+Mot man hinh co the dung hai duong render cho cung mot khai niem. Filter chip "4 net" da di qua copy helper nen dung dau tieng Viet, con header group lai hardcode local nen thanh mojibake. Khi user thay mot cho dung mot cho sai, dung gia thuyet dau tien la "font" hay "data" chua du; phai trace tung duong chuoi. Quy tac tot hon: moi label lap lai nen co mot API copy chung, vi copy path chung chinh la test surface chung.
