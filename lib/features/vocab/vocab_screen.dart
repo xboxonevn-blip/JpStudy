@@ -588,8 +588,8 @@ String _programFooterHint(_VocabProgramType type, AppLanguage language) =>
 
 String? _programScopeNote(_VocabProgramType type, AppLanguage language) =>
     switch (type) {
-      _VocabProgramType.minna => language.vocabCatalogMinnaNote(),
-      _VocabProgramType.shinkanzen => language.vocabCatalogShinKanzenNote(),
+    _VocabProgramType.minna => language.vocabCatalogMinnaNote,
+    _VocabProgramType.shinkanzen => language.vocabCatalogShinKanzenNote,
       _ => null,
     };
 

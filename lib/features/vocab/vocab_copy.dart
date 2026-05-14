@@ -89,18 +89,6 @@ extension VocabCopy on AppLanguage {
     AppLanguage.ja => 'データはありますが、学習フローはまだ完全には公開されていません。',
   };
 
-  String vocabCatalogMinnaNote() => switch (this) {
-    AppLanguage.en => 'Minna is available for N5 + N4 only (books I + II).',
-    AppLanguage.vi => 'Minna có cho N5 + N4 (sách I + II).',
-    AppLanguage.ja => 'みんなの日本語はN5・N4（初級I・II）のみです。',
-  };
-
-  String vocabCatalogShinKanzenNote() => switch (this) {
-    AppLanguage.en => 'Shin Kanzen Master starts at N3 and above.',
-    AppLanguage.vi => 'Shin Kanzen Master từ cấp N3 trở lên.',
-    AppLanguage.ja => '新完全マスターはN3以上向けです。',
-  };
-
   String vocabLocalizedSectionSubtitle(
     String levelCode,
     String fallbackSubtitle,

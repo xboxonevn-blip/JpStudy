@@ -7108,6 +7108,28 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get vocabCatalogMinnaNote {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Minna is available for N5 + N4 only (books I + II).';
+      case AppLanguage.vi:
+        return 'Minna có cho N5 + N4 (sách I + II).';
+      case AppLanguage.ja:
+        return 'みんなの日本語はN5・N4（初級I・II）のみです。';
+    }
+  }
+
+  String get vocabCatalogShinKanzenNote {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Shin Kanzen Master starts at N3 and above.';
+      case AppLanguage.vi:
+        return 'Shin Kanzen Master từ cấp N3 trở lên.';
+      case AppLanguage.ja:
+        return '新完全マスターはN3以上向けです。';
+    }
+  }
+
   String get onboardingReadyTitle {
     switch (this) {
       case AppLanguage.en:

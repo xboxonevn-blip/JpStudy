@@ -18,11 +18,11 @@ void main() {
       expect(AppLanguage.vi.vocabPreviewDialogClose(), 'Đóng');
       expect(AppLanguage.vi.vocabRangeLabel(1, 25), 'Bài 1–25');
       expect(
-        AppLanguage.vi.vocabCatalogMinnaNote(),
+        AppLanguage.vi.vocabCatalogMinnaNote,
         'Minna có cho N5 + N4 (sách I + II).',
       );
       expect(
-        AppLanguage.vi.vocabCatalogShinKanzenNote(),
+        AppLanguage.vi.vocabCatalogShinKanzenNote,
         'Shin Kanzen Master từ cấp N3 trở lên.',
       );
     });

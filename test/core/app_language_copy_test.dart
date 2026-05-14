@@ -76,6 +76,8 @@ void main() {
       expect(language.kanaLockedBackAction('N4'), contains('N4'));
       expect(language.kanaSnackbarUnavailable('N4'), contains('N4'));
       expect(language.kanaSnackbarSwitchAction, isNotEmpty);
+      expect(language.vocabCatalogMinnaNote, isNotEmpty);
+      expect(language.vocabCatalogShinKanzenNote, isNotEmpty);
     }
   });
 }
