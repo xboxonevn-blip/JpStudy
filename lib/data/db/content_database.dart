@@ -465,9 +465,13 @@ class ContentDatabase extends _$ContentDatabase {
 
   Future<void> _ensureMinnaGrammarSeededForActiveLevel() async {
     final activeLevel = await _activeStudyLevelLabel();
-    await _ensureMinnaGrammarSeeded(
-      _contentSeedSpecs.where((s) => s.levelLabel == activeLevel),
-    );
+    await ensureGrammarSeededForLevel(activeLevel);
+  }
+
+  Future<void> ensureGrammarSeededForLevel(String level) async {
+    final spec = _contentSeedSpecForLevel(level);
+    if (spec == null) return;
+    await _ensureMinnaGrammarSeeded([spec]);
   }
 
   Future<void> _seedMinnaGrammar([
@@ -484,10 +488,10 @@ class ContentDatabase extends _$ContentDatabase {
               ..addColumns([grammarPoint.id])
               ..where(grammarPoint.level.isIn(targetLevels)))
             .get();
-    final pointIds = [
-      for (final row in pointIdRows)
-        if (row.read(grammarPoint.id) case final id?) id,
-    ];
+    final pointIds = pointIdRows
+        .map((row) => row.read(grammarPoint.id))
+        .whereType<int>()
+        .toList();
     if (pointIds.isNotEmpty) {
       await (delete(
         grammarExample,
@@ -597,9 +601,8 @@ class ContentDatabase extends _$ContentDatabase {
 
   Future<void> _seedMinnaGrammarForActiveLevel() async {
     final activeLevel = await _activeStudyLevelLabel();
-    await _seedMinnaGrammar(
-      _contentSeedSpecs.where((s) => s.levelLabel == activeLevel),
-    );
+    final spec = _contentSeedSpecForLevel(activeLevel);
+    await _seedMinnaGrammar(spec == null ? const [] : [spec]);
   }
 
   Future<void> _seedVocabularyLevel(_ContentSeedSpec spec) async {
@@ -1248,6 +1251,16 @@ const _contentSeedSpecs = <_ContentSeedSpec>[
   _ContentSeedSpec('N2', 'n2', 1, 25, 'ShinKanzen'),
   _ContentSeedSpec('N1', 'n1', 1, 25, 'ShinKanzen'),
 ];
+
+_ContentSeedSpec? _contentSeedSpecForLevel(String level) {
+  final normalized = level.trim().toUpperCase();
+  for (final spec in _contentSeedSpecs) {
+    if (spec.levelLabel == normalized) {
+      return spec;
+    }
+  }
+  return null;
+}
 
 class _HajimeteSeedSpec {
   const _HajimeteSeedSpec(this.levelLabel, this.levelLower, this.chapterCount);

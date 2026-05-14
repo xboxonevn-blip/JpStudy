@@ -1630,19 +1630,27 @@ class LessonRepository {
   }
 
   Future<void> seedGrammarIfEmpty(int lessonId, String level) async {
+    final normalizedLevel = level.trim().toUpperCase();
+
     // If GrammarSeeder has already run at the current version, its data is
     // authoritative and up-to-date — skip the resync check entirely.
     // This also prevents the two concurrent paths (GrammarSeeder transaction
     // + seedGrammarIfEmpty) from racing on first launch.
     final prefs = await SharedPreferences.getInstance();
-    final seededVersion = prefs.getInt('grammar_data_version') ?? 0;
+    final seededVersion =
+        prefs.getInt(GrammarSeeder.versionKeyForLevel(normalizedLevel)) ??
+        prefs.getInt(GrammarSeeder.kKeyGrammarVersion) ??
+        0;
     if (seededVersion >= GrammarSeeder.kGrammarDataVersion) {
       // Data is fresh from the seeder; only do a lightweight insert if the
       // lesson has no rows at all (brand new install mid-seeder-run edge case).
       final count =
           await (_db.selectOnly(_db.grammarPoints)
                 ..addColumns([_db.grammarPoints.id.count()])
-                ..where(_db.grammarPoints.lessonId.equals(lessonId)))
+                ..where(
+                  _db.grammarPoints.lessonId.equals(lessonId) &
+                      _db.grammarPoints.jlptLevel.equals(normalizedLevel),
+                ))
               .map((row) => row.read(_db.grammarPoints.id.count()) ?? 0)
               .getSingle();
       if (count > 0) return;
@@ -1651,7 +1659,12 @@ class LessonRepository {
     // Check if grammar already exists for this lesson
     final existingPoints = await (_db.select(
       _db.grammarPoints,
-    )..where((tbl) => tbl.lessonId.equals(lessonId))).get();
+    )..where(
+          (tbl) =>
+              tbl.lessonId.equals(lessonId) &
+              tbl.jlptLevel.equals(normalizedLevel),
+        ))
+        .get();
 
     // Check if resync needed: Either empty or missing English explanations
     bool needsResync = existingPoints.isEmpty;
@@ -1681,10 +1694,17 @@ class LessonRepository {
       return;
     }
 
+    await _contentDb.ensureGrammarSeededForLevel(normalizedLevel);
+
     // Fetch from Content DB
     final contentPoints = await (_contentDb.select(
       _contentDb.grammarPoint,
-    )..where((tbl) => tbl.lessonId.equals(lessonId))).get();
+    )..where(
+          (tbl) =>
+              tbl.lessonId.equals(lessonId) &
+              tbl.level.equals(normalizedLevel),
+        ))
+        .get();
 
     if (contentPoints.isEmpty) {
       return;

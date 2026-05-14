@@ -221,6 +221,8 @@ Future<JlptMockSection?> _buildGrammarSection({
   required AppLanguage language,
   required Random random,
 }) async {
+  await contentDb.ensureGrammarSeededForLevel(level.shortLabel);
+
   final pointRows =
       await (contentDb.select(contentDb.grammarPoint)
             ..where((tbl) => tbl.level.equals(level.shortLabel))

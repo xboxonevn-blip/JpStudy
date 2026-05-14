@@ -23,7 +23,7 @@ class GrammarRepository {
           ..limit(1))
         .get();
     if (existingForLevel.isEmpty) {
-      await GrammarSeeder(_db.grammarDao).seedGrammarData(_db);
+      await GrammarSeeder(_db.grammarDao).seedGrammarDataForLevel(_db, level);
     }
     return _db.grammarDao.getGrammarPointsByLevel(level);
   }

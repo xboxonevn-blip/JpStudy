@@ -6,6 +6,7 @@ import 'package:jpstudy/core/analytics/analytics_service.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/db/content_database.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class _FakeFirebaseAnalytics extends Fake implements FirebaseAnalytics {
   final events = <String>[];
@@ -24,6 +25,8 @@ class _FakeFirebaseAnalytics extends Fake implements FirebaseAnalytics {
 }
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   late AppDatabase db;
   late ContentDatabase contentDb;
   late LessonRepository repository;
@@ -205,4 +208,17 @@ void main() {
       'interval_days': isA<double>(),
     });
   });
+
+  test(
+    'seedGrammarIfEmpty seeds the requested JLPT level when content DB opened on another active level',
+    () async {
+      SharedPreferences.setMockInitialValues({'onboarding.level': 'N5'});
+
+      await repository.seedGrammarIfEmpty(1, 'N3');
+
+      final points = await repository.fetchGrammarForLevel('N3', 1);
+      expect(points, isNotEmpty);
+      expect(points.every((item) => item.point.jlptLevel == 'N3'), isTrue);
+    },
+  );
 }

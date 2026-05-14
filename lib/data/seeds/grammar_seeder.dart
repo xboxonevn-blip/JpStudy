@@ -17,52 +17,65 @@ class GrammarSeeder {
   static const int kGrammarDataVersion = 11;
   static const String kKeyGrammarVersion = 'grammar_data_version';
 
+  static String versionKeyForLevel(String level) =>
+      '${kKeyGrammarVersion}_${level.trim().toUpperCase()}';
+
   GrammarSeeder(this._dao);
 
   Future<void> seedGrammarData(AppDatabase db) async {
+    final level = await _activeStudyLevelLabel();
+    await seedGrammarDataForLevel(db, level);
+  }
+
+  Future<void> seedGrammarDataForLevel(AppDatabase db, String level) async {
+    final normalizedLevel = _normalizeLevel(level);
+    if (normalizedLevel == null) return;
+
     final prefs = await SharedPreferences.getInstance();
-    final currentVersion = prefs.getInt(kKeyGrammarVersion) ?? 0;
+    final levelVersion =
+        prefs.getInt(versionKeyForLevel(normalizedLevel)) ??
+        prefs.getInt(kKeyGrammarVersion) ??
+        0;
 
     final existingCount =
         await (_dao.db.selectOnly(_dao.db.grammarPoints)
-              ..addColumns([_dao.db.grammarPoints.id.count()]))
+              ..addColumns([_dao.db.grammarPoints.id.count()])
+              ..where(_dao.db.grammarPoints.jlptLevel.equals(normalizedLevel)))
             .map((row) => row.read(_dao.db.grammarPoints.id.count()) ?? 0)
             .getSingle();
 
     // Smart Seeding: skip only when both version and DB rows are present.
-    if (currentVersion >= kGrammarDataVersion && existingCount > 0) {
+    if (levelVersion >= kGrammarDataVersion && existingCount > 0) {
       debugPrint(
-        'Skipping Grammar Seed: Data is up to date (v$currentVersion)',
+        'Skipping Grammar Seed $normalizedLevel: Data is up to date (v$levelVersion)',
       );
       return;
     }
 
-    debugPrint('ðŸ”„ Starting Grammar Seed (v$kGrammarDataVersion)...');
+    debugPrint(
+      'ðŸ”„ Starting Grammar Seed $normalizedLevel (v$kGrammarDataVersion)...',
+    );
     final stopwatch = Stopwatch()..start();
 
-    // Load all JSON files concurrently before opening the transaction so
-    // that asset I/O does not block or extend the DB transaction window.
-    final allLevelData = await Future.wait([
-      _loadLevelJson('N5', 1, 25),
-      _loadLevelJson('N4', 26, 50),
-      _loadLevelJson('N3', 1, 25),
-      _loadLevelJson('N2', 1, 25),
-      _loadLevelJson('N1', 1, 25),
-    ]);
+    final range = _lessonRangeForLevel(normalizedLevel);
+    final levelData = await _loadLevelJson(
+      normalizedLevel,
+      range.start,
+      range.end,
+    );
 
     // Chạy trong transaction để đảm bảo toàn vẹn dữ liệu
     await db.transaction(() async {
-      await _seedLevelFromData('N5', allLevelData[0]);
-      await _seedLevelFromData('N4', allLevelData[1]);
-      await _seedLevelFromData('N3', allLevelData[2]);
-      await _seedLevelFromData('N2', allLevelData[3]);
-      await _seedLevelFromData('N1', allLevelData[4]);
+      await _seedLevelFromData(normalizedLevel, levelData);
     });
 
-    await prefs.setInt(kKeyGrammarVersion, kGrammarDataVersion);
+    await prefs.setInt(
+      versionKeyForLevel(normalizedLevel),
+      kGrammarDataVersion,
+    );
     stopwatch.stop();
     debugPrint(
-      'Grammar Seed Completed in ${stopwatch.elapsedMilliseconds}ms. Version updated to $kGrammarDataVersion',
+      'Grammar Seed $normalizedLevel completed in ${stopwatch.elapsedMilliseconds}ms. Version updated to $kGrammarDataVersion',
     );
   }
 
@@ -127,7 +140,10 @@ class GrammarSeeder {
     // Hoist: fetch existing points ONCE per lesson, not once per grammar item.
     final existingPoints = await (_dao.db.select(
       _dao.db.grammarPoints,
-    )..where((tbl) => tbl.lessonId.equals(lessonId))).get();
+    )..where(
+          (tbl) => tbl.lessonId.equals(lessonId) & tbl.jlptLevel.equals(level),
+        ))
+        .get();
 
     for (final item in defJson) {
       final rawGrammarPoint = item['grammarPoint'] as String?;
@@ -326,5 +342,29 @@ class GrammarSeeder {
 
     return <String>{raw, normalized, compact, japaneseCore}
       ..removeWhere((value) => value.isEmpty);
+  }
+
+  ({int start, int end}) _lessonRangeForLevel(String level) => switch (level) {
+    'N5' => (start: 1, end: 25),
+    'N4' => (start: 26, end: 50),
+    'N3' || 'N2' || 'N1' => (start: 1, end: 25),
+    _ => (start: 1, end: 25),
+  };
+
+  String? _normalizeLevel(String level) {
+    final normalized = level.trim().toUpperCase();
+    return switch (normalized) {
+      'N1' || 'N2' || 'N3' || 'N4' || 'N5' => normalized,
+      _ => null,
+    };
+  }
+
+  Future<String> _activeStudyLevelLabel() async {
+    final prefs = await SharedPreferences.getInstance();
+    final stored = prefs.getString('onboarding.level')?.toUpperCase();
+    return switch (stored) {
+      'N1' || 'N2' || 'N3' || 'N4' || 'N5' => stored!,
+      _ => 'N5',
+    };
   }
 }
