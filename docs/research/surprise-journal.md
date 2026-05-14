@@ -255,3 +255,11 @@
 - Delta: +20 percentage points on confidence that CI-local resource smoke is less noisy than ad hoc manual browser sessions.
 - Updated belief: use the checked-in smoke for regression gates; use manual browser/MCP sessions for investigation only.
 - New hypothesis: live Firebase Hosting resource count will differ again because compression/CDN/App Check/referrer behavior changes the request graph.
+
+## 2026-05-14T19:16:34+07:00 - Renderer payload dominates raw web build
+
+- Prior belief: D7 bundle work would mostly center on `main.dart.js` and content JSON.
+- Actual observation: raw `build/web` is CanvasKit/Skwasm `52.6%`, content/support JSON `30.8%`, and top-level app JS only `10.6%`; no deferred route chunks are emitted.
+- Delta: +35 percentage points on confidence that renderer choice/CDN behavior is a first-class D7 question, not a footnote.
+- Updated belief: optimize startup through separate renderer/runtime, content-request, and app-code-splitting tracks.
+- New hypothesis: D7.Q7.3 renderer comparison will change performance strategy more than small Dart UI code shaving.
