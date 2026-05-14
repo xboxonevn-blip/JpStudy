@@ -72,6 +72,8 @@ Current D5.Q5.5 mistake/ghost docs: `D5-pedagogy/Q5.5-hypotheses.md`, `D5-pedago
 
 Current D5.Q5.6 cross-skill prerequisite docs: `D5-pedagogy/Q5.6-hypotheses.md`, `D5-pedagogy/Q5.6-experiment.md`, `D5-pedagogy/Q5.6-raw-output.md`, `D5-pedagogy/Q5.6-analysis.md`.
 
+Current D5.Q5.7 roadmap rationale: `D5-pedagogy/Q5.7-roadmap-design-rationale.md`.
+
 Current D6.Q6.1 card pattern docs: `D6-ui-ux/Q6.1-hypotheses.md`, `D6-ui-ux/Q6.1-experiment.md`, `D6-ui-ux/Q6.1-raw-output.md`, `D6-ui-ux/Q6.1-analysis.md`.
 
 Current D6.Q6.2 empty-state docs: `D6-ui-ux/Q6.2-hypotheses.md`, `D6-ui-ux/Q6.2-experiment.md`, `D6-ui-ux/Q6.2-raw-output.md`, `D6-ui-ux/Q6.2-analysis.md`.
@@ -148,6 +150,8 @@ Current D5.Q5.5 blocker: grammar ghost review has split sources of truth. The vi
 
 Current D5.Q5.6 blocker: cross-skill prerequisite remediation is not product-ready. Scoped kanji practice exists through `KanjiPracticeArgs.kanjiIds`, but there is no policy that maps weak vocab/grammar items to missing prerequisites; use advisory suggestions only, not hard gates.
 
+Current D5.Q5.7 status: textbook-aligned learning path is source-aware and advisory. N5/N4 show the local Minna I/II + Hajimete route, N3/N2/N1 show Hajimete + Shin Kanzen tracks, and N1 adds immersion. Remaining gap: per-textbook progress counters are not normalized yet.
+
 Current D6.Q6.1 blocker: card surfaces have an implicit taxonomy, not a documented one. `AppSectionCard`/`AppFeatureCard`, `HomeSurface.softPanel`, and practice-specific panels all exist; avoid mass refactor, but document allowed surface families before adding more one-off cards.
 
 Current D6.Q6.2 blocker: empty states are locally implemented and uneven. `EmptyStateWidget` exists but has zero feature usages; primary no-data states should be visible/explanatory/actionable, while optional dashboard cards may collapse only after successful loaded-empty state.
@@ -199,6 +203,7 @@ Current D8.Q8.7 status: telemetry is acceptable only for closed beta with explic
 - D5 status update: Q5.4 measured; onboarding needs a small profile/policy layer before claiming persona-specific first sessions or daily plans.
 - D5 status update: Q5.5 measured; grammar ghost state needs unification before using ghost practice as a reliable remediation loop.
 - D5 status update: Q5.6 measured; prerequisite logic should remain advisory until item-level dependency extraction, coverage labels, and telemetry exist.
+- D5 status update: Q5.7 implemented; home now exposes a source-aware textbook roadmap per JLPT level, but progress normalization remains a future data-model step.
 - D6 status: Q6.1 measured; visual card drift is manageable if the surface taxonomy is documented before more UI work.
 - D6 status update: Q6.2 measured; empty-state consistency needs a visible-primary vs optional-collapsible policy before broad UI polish.
 - D6 status update: Q6.3 measured; loading-state consistency needs a primary-blocking vs optional-panel policy before broad UI polish.

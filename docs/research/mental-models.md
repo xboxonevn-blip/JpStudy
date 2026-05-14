@@ -176,3 +176,7 @@ Deploy automation phai co che that bai dung luc, khong that bai vi secret chua d
 ## Auth / Anonymous Bootstrap
 
 Anonymous Auth nen duoc xem nhu identity substrate, khong phai login UX. Neu app can UID de backup, migrate, gan support context, thi co the tao UID am tham sau Firebase/App Check init voi timeout ngan; UI van boot offline neu fail. Diem quan trong la tach ba viec: tao UID, di chuyen local progress len path dung owner, va sau nay moi thiet ke upgrade/link account. Cach tach nay giu onboarding khong ma sat nhung van tao duong an toan cho beta data.
+
+## Textbook-Aligned Roadmap
+
+Lo trinh nha sach nen la lop dinh huong, khong phai hard gate. N5/N4 co the bam Minna I/II vi app co asset that; N3-N1 phai chuyen sang Hajimete + Shin Kanzen vi do la du lieu dang ship. Khi tach "hom nay hoc gi" khoi "duong sach nao dang theo", home van giu nhịp hanh dong nhanh nhung nguoi hoc khong bi hieu sai ve pham vi giao trinh.
