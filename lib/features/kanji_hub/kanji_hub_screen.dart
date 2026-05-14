@@ -30,7 +30,7 @@ import 'package:jpstudy/features/write/widgets/handwriting_canvas.dart';
 
 part 'kanji_hub_screen_parts.dart';
 
-enum _KanjiCollection { n5, n4, n3, radicals }
+enum _KanjiCollection { n5, n4, n3, n2, n1, radicals }
 
 class KanjiHubScreen extends ConsumerStatefulWidget {
   const KanjiHubScreen({super.key, this.initialKanjiId});
@@ -133,9 +133,9 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
       case StudyLevel.n3:
         return _KanjiCollection.n3;
       case StudyLevel.n2:
-        return _KanjiCollection.n3;
+        return _KanjiCollection.n2;
       case StudyLevel.n1:
-        return _KanjiCollection.n3;
+        return _KanjiCollection.n1;
     }
   }
 
@@ -153,6 +153,8 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
       _KanjiCollection.n5 => StudyLevel.n5,
       _KanjiCollection.n4 => StudyLevel.n4,
       _KanjiCollection.n3 => StudyLevel.n3,
+      _KanjiCollection.n2 => StudyLevel.n2,
+      _KanjiCollection.n1 => StudyLevel.n1,
       _KanjiCollection.radicals => StudyLevel.n5,
     };
     _activateLevel(level);

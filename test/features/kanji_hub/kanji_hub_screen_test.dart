@@ -23,6 +23,8 @@ class _FakeKanjiHubLessonRepository extends LessonRepository {
     required this.n5Kanji,
     required this.n4Kanji,
     required this.n3Kanji,
+    required this.n2Kanji,
+    required this.n1Kanji,
     this.dueKanji = const {},
     this.unseenKanji = const {},
   }) : super(
@@ -33,6 +35,8 @@ class _FakeKanjiHubLessonRepository extends LessonRepository {
   final List<KanjiItem> n5Kanji;
   final List<KanjiItem> n4Kanji;
   final List<KanjiItem> n3Kanji;
+  final List<KanjiItem> n2Kanji;
+  final List<KanjiItem> n1Kanji;
 
   /// Per-level due kanji (SRS-scheduled reviews). Defaults to empty (nothing due).
   final Map<String, List<KanjiItem>> dueKanji;
@@ -46,6 +50,8 @@ class _FakeKanjiHubLessonRepository extends LessonRepository {
       'N5' => n5Kanji,
       'N4' => n4Kanji,
       'N3' => n3Kanji,
+      'N2' => n2Kanji,
+      'N1' => n1Kanji,
       _ => const [],
     };
   }
@@ -111,6 +117,16 @@ Future<void> _pumpKanjiHub(WidgetTester tester) async {
 }
 
 Future<void> _mockRadicalsAsset() async {
+  final messenger =
+      TestWidgetsFlutterBinding.ensureInitialized().defaultBinaryMessenger;
+  const primaryRadicalsAsset = 'assets/data/support/kanji/radicals_214.json';
+  const fallbackRadicalsAsset =
+      'assets/data/support/kanji/radicals_214.source.json';
+  rootBundle.evict(primaryRadicalsAsset);
+  rootBundle.evict(fallbackRadicalsAsset);
+  addTearDown(() {
+    messenger.setMockMessageHandler('flutter/assets', null);
+  });
   const radicalsJson = [
     {
       'id': 72,
@@ -123,14 +139,13 @@ Future<void> _mockRadicalsAsset() async {
   final payload = ByteData.view(
     Uint8List.fromList(utf8.encode(jsonEncode(radicalsJson))).buffer,
   );
-  TestWidgetsFlutterBinding.ensureInitialized().defaultBinaryMessenger
-      .setMockMessageHandler('flutter/assets', (message) async {
-        final key = utf8.decode(message!.buffer.asUint8List());
-        if (key == 'assets/data/support/kanji/radicals_214.json') {
-          return payload;
-        }
-        return null;
-      });
+  messenger.setMockMessageHandler('flutter/assets', (message) async {
+    final key = utf8.decode(message!.buffer.asUint8List());
+    if (key == primaryRadicalsAsset) {
+      return payload;
+    }
+    return null;
+  });
 }
 
 _FakeKanjiHubLessonRepository _buildRepo({
@@ -217,6 +232,30 @@ _FakeKanjiHubLessonRepository _buildRepo({
         examples: [],
         jlptLevel: 'N3',
         decomposition: KanjiDecomposition(relatedKanji: ['\u65e5']),
+      ),
+    ],
+    n2Kanji: const [
+      KanjiItem(
+        id: 6,
+        lessonId: 4,
+        character: '\u66dc',
+        strokeCount: 18,
+        meaning: 'weekday',
+        meaningEn: 'weekday',
+        examples: [],
+        jlptLevel: 'N2',
+      ),
+    ],
+    n1Kanji: const [
+      KanjiItem(
+        id: 7,
+        lessonId: 5,
+        character: '\u9b31',
+        strokeCount: 29,
+        meaning: 'gloom',
+        meaningEn: 'gloom',
+        examples: [],
+        jlptLevel: 'N1',
       ),
     ],
   );
@@ -311,7 +350,7 @@ void main() {
   testWidgets('radical group headers render Vietnamese tone marks', (
     tester,
   ) async {
-    tester.view.physicalSize = const Size(1200, 1400);
+    tester.view.physicalSize = const Size(2000, 1400);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
@@ -334,5 +373,41 @@ void main() {
     expect(find.text('1 bộ thủ'), findsOneWidget);
     expect(find.text('4 n?t'), findsNothing);
     expect(find.text('1 b? th?'), findsNothing);
+  });
+
+  testWidgets('kanji hub renders N2 and N1 collection tabs and loads entries', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1200, 1400);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await _mockRadicalsAsset();
+    await tester.pumpWidget(
+      _buildSubject(repo: _buildRepo(), language: AppLanguage.vi),
+    );
+    await _pumpKanjiHub(tester);
+
+    expect(find.byKey(const ValueKey('kanji_collection_n2')), findsOneWidget);
+    expect(find.byKey(const ValueKey('kanji_collection_n1')), findsOneWidget);
+    expect(find.text('Trung cao cấp'), findsOneWidget);
+    expect(find.text('Cao cấp'), findsOneWidget);
+
+    await tester.ensureVisible(
+      find.byKey(const ValueKey('kanji_collection_n2')),
+    );
+    await tester.tap(find.byKey(const ValueKey('kanji_collection_n2')));
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+    expect(find.text('\u66dc'), findsOneWidget);
+
+    await tester.ensureVisible(
+      find.byKey(const ValueKey('kanji_collection_n1')),
+    );
+    await tester.tap(find.byKey(const ValueKey('kanji_collection_n1')));
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+    expect(find.text('\u9b31'), findsOneWidget);
   });
 }

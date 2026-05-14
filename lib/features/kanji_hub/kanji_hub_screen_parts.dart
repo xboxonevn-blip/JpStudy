@@ -241,6 +241,8 @@ class _SearchDrawPanelState extends State<_SearchDrawPanel> {
         ...await lessonRepo.fetchKanjiByLevel('N5'),
         ...await lessonRepo.fetchKanjiByLevel('N4'),
         ...await lessonRepo.fetchKanjiByLevel('N3'),
+        ...await lessonRepo.fetchKanjiByLevel('N2'),
+        ...await lessonRepo.fetchKanjiByLevel('N1'),
       ];
       final item = allItems.firstWhere(
         (k) => k.character == character,
@@ -777,6 +779,26 @@ class _KanjiGridPanelState extends ConsumerState<_KanjiGridPanel> {
                           widget.selectedCollection == _KanjiCollection.n3,
                       onTap: () =>
                           widget.onCollectionSelected(_KanjiCollection.n3),
+                    ),
+                    const SizedBox(width: 10),
+                    _CollectionSelectorCard(
+                      key: const ValueKey('kanji_collection_n2'),
+                      title: 'N2',
+                      subtitle: StudyLevel.n2.description(widget.language),
+                      selected:
+                          widget.selectedCollection == _KanjiCollection.n2,
+                      onTap: () =>
+                          widget.onCollectionSelected(_KanjiCollection.n2),
+                    ),
+                    const SizedBox(width: 10),
+                    _CollectionSelectorCard(
+                      key: const ValueKey('kanji_collection_n1'),
+                      title: 'N1',
+                      subtitle: StudyLevel.n1.description(widget.language),
+                      selected:
+                          widget.selectedCollection == _KanjiCollection.n1,
+                      onTap: () =>
+                          widget.onCollectionSelected(_KanjiCollection.n1),
                     ),
                     const SizedBox(width: 10),
                     _CollectionSelectorCard(
