@@ -93,14 +93,14 @@ class _KanaTableScreenState extends ConsumerState<KanaTableScreen>
               Padding(
                 padding: const EdgeInsets.all(AppSpacing.md),
                 child: SegmentedButton<KanaScript>(
-                  segments: const [
+                  segments: [
                     ButtonSegment(
                       value: KanaScript.hiragana,
-                      label: Text('Hiragana'),
+                      label: Text(language.kanaTableHiraganaLabel),
                     ),
                     ButtonSegment(
                       value: KanaScript.katakana,
-                      label: Text('Katakana'),
+                      label: Text(language.kanaTableKatakanaLabel),
                     ),
                   ],
                   selected: {_script},

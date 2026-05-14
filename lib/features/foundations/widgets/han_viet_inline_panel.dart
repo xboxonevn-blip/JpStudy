@@ -57,7 +57,7 @@ class HanVietInlinePanel extends StatelessWidget {
             child: TextButton.icon(
               onPressed: () => context.push(AppRoutePath.foundationsHanViet),
               icon: const Icon(Icons.open_in_new_rounded),
-              label: const Text('More'),
+              label: Text(language.commonMoreAction),
             ),
           ),
         ],

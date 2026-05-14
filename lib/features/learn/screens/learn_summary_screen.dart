@@ -178,7 +178,7 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
 
               const SizedBox(height: 20),
 
-              _buildSessionQualityRating(),
+              _buildSessionQualityRating(language),
 
               const SizedBox(height: 40),
 
@@ -296,9 +296,9 @@ class _LearnSummaryScreenState extends ConsumerState<LearnSummaryScreen> {
     );
   }
 
-  Widget _buildSessionQualityRating() {
+  Widget _buildSessionQualityRating(AppLanguage language) {
     return Semantics(
-      label: 'Session quality',
+      label: language.sessionQualityLabel,
       value: _qualityRating == 0 ? 'unrated' : '$_qualityRating of 5',
       child: StarRating(
         rating: _qualityRating,

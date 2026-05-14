@@ -806,6 +806,28 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get sessionQualityLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Session quality';
+      case AppLanguage.vi:
+        return 'Ch\u1ea5t l\u01b0\u1ee3ng bu\u1ed5i h\u1ecdc';
+      case AppLanguage.ja:
+        return '\u30bb\u30c3\u30b7\u30e7\u30f3\u54c1\u8cea';
+    }
+  }
+
+  String get commonMoreAction {
+    switch (this) {
+      case AppLanguage.en:
+        return 'More';
+      case AppLanguage.vi:
+        return 'Th\u00eam';
+      case AppLanguage.ja:
+        return '\u3082\u3063\u3068';
+    }
+  }
+
   String get nextLabel {
     switch (this) {
       case AppLanguage.en:
@@ -7473,6 +7495,24 @@ extension AppLanguageLabels on AppLanguage {
         return 'Hiện romaji';
       case AppLanguage.ja:
         return 'ローマ字を表示';
+    }
+  }
+
+  String get kanaTableHiraganaLabel {
+    switch (this) {
+      case AppLanguage.en:
+      case AppLanguage.vi:
+      case AppLanguage.ja:
+        return 'Hiragana';
+    }
+  }
+
+  String get kanaTableKatakanaLabel {
+    switch (this) {
+      case AppLanguage.en:
+      case AppLanguage.vi:
+      case AppLanguage.ja:
+        return 'Katakana';
     }
   }
 
