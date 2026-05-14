@@ -1003,6 +1003,7 @@ class _CompanionProgramCard extends StatelessWidget {
         ? palette.info
         : palette.secondary;
     final footerForeground = _foregroundFor(footerColor);
+    final scopeNote = _programScopeNote(program.type, language);
 
     return InkWell(
       key: ValueKey('program_${section.key}_${program.key}'),
@@ -1053,6 +1054,17 @@ class _CompanionProgramCard extends StatelessWidget {
                               ? AppStatusTone.primary
                               : AppStatusTone.primary,
                         ),
+                        if (scopeNote != null) ...[
+                          const SizedBox(width: 8),
+                          Tooltip(
+                            message: scopeNote,
+                            child: Icon(
+                              Icons.info_outline_rounded,
+                              size: 20,
+                              color: palette.ink.withValues(alpha: 0.62),
+                            ),
+                          ),
+                        ],
                       ],
                     ),
                     const SizedBox(height: AppSpacing.md),

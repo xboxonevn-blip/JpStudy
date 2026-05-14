@@ -17,6 +17,14 @@ void main() {
       expect(AppLanguage.vi.vocabPreviewCatalogTitle(), 'Xem trước / lộ trình');
       expect(AppLanguage.vi.vocabPreviewDialogClose(), 'Đóng');
       expect(AppLanguage.vi.vocabRangeLabel(1, 25), 'Bài 1–25');
+      expect(
+        AppLanguage.vi.vocabCatalogMinnaNote(),
+        'Minna có cho N5 + N4 (sách I + II).',
+      );
+      expect(
+        AppLanguage.vi.vocabCatalogShinKanzenNote(),
+        'Shin Kanzen Master từ cấp N3 trở lên.',
+      );
     });
 
     test('returns proper Japanese labels', () {

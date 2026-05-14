@@ -586,6 +586,13 @@ String _previewLabel(AppLanguage language) => language.vocabPreviewLabel();
 String _programFooterHint(_VocabProgramType type, AppLanguage language) =>
     language.vocabProgramFooterHint(type.name);
 
+String? _programScopeNote(_VocabProgramType type, AppLanguage language) =>
+    switch (type) {
+      _VocabProgramType.minna => language.vocabCatalogMinnaNote(),
+      _VocabProgramType.shinkanzen => language.vocabCatalogShinKanzenNote(),
+      _ => null,
+    };
+
 String _catalogErrorTitle(AppLanguage language) =>
     language.vocabCatalogErrorTitle();
 
