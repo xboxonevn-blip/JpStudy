@@ -14,6 +14,7 @@ import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/core/utils/kana_romaji.dart';
 import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
+import 'package:jpstudy/data/utils/hajimete_catalog_loader.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/foundations/widgets/foundations_soft_suggest_gate.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
@@ -117,8 +118,22 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
   // Catalog cards need availability/counts, not full vocab row hydration.
   // Count all real tracks so data-backed programs do not look locked merely
   // because another JLPT level is selected.
-  Future<int> hajimeteCount(String levelCode) =>
-      repo.countVocabByLevelAndSeries(levelCode, 'hajimete');
+  Future<int> hajimeteCount(String levelCode) async {
+    final storedCount = await repo.countVocabByLevelAndSeries(
+      levelCode,
+      'hajimete',
+    );
+    if (storedCount > 0) return storedCount;
+
+    try {
+      final catalog = await loadHajimeteChapterCatalog(
+        levelCode,
+      ).timeout(const Duration(seconds: 1));
+      return catalog.totalTerms;
+    } catch (_) {
+      return storedCount;
+    }
+  }
 
   Future<int> shinkanzenCount(String levelCode) =>
       repo.countVocabByLevelAndSeries(levelCode, 'ShinKanzen');
@@ -588,8 +603,8 @@ String _programFooterHint(_VocabProgramType type, AppLanguage language) =>
 
 String? _programScopeNote(_VocabProgramType type, AppLanguage language) =>
     switch (type) {
-    _VocabProgramType.minna => language.vocabCatalogMinnaNote,
-    _VocabProgramType.shinkanzen => language.vocabCatalogShinKanzenNote,
+      _VocabProgramType.minna => language.vocabCatalogMinnaNote,
+      _VocabProgramType.shinkanzen => language.vocabCatalogShinKanzenNote,
       _ => null,
     };
 

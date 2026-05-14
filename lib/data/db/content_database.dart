@@ -693,12 +693,7 @@ class ContentDatabase extends _$ContentDatabase {
   }
 
   String _hajimeteVocabAssetPath(String levelLower, String paddedChapterId) {
-    final nestedPath =
-        'assets/data/content/vocab/$levelLower/hajimete/hajimete_ch$paddedChapterId.json';
-    if (levelLower == 'n4' || levelLower == 'n5') {
-      return nestedPath;
-    }
-    return 'assets/data/content/vocab/$levelLower/hajimete_ch$paddedChapterId.json';
+    return 'assets/data/content/vocab/$levelLower/hajimete/hajimete_ch$paddedChapterId.json';
   }
 
   Future<List<Map<String, dynamic>>> _loadCanonicalVocabRows({

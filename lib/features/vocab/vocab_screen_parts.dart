@@ -28,12 +28,13 @@ class _VocabCatalogBody extends ConsumerWidget {
         .fold<int>(0, (sum, program) => sum + program.termCount);
     final liveSections = sections
         .where(
-          (section) => section.levelCode == 'N5' || section.levelCode == 'N4',
+          (section) => section.programs.any((program) => program.isInteractive),
         )
         .toList(growable: false);
     final previewSections = sections
         .where(
-          (section) => section.levelCode != 'N5' && section.levelCode != 'N4',
+          (section) =>
+              !section.programs.any((program) => program.isInteractive),
         )
         .toList(growable: false);
 

@@ -368,60 +368,63 @@ void main() {
     _prefs = await SharedPreferences.getInstance();
   });
 
-  test('vocabCatalogProvider counts all tracks without hydrating rows', () async {
-    final repo = _FakeVocabLessonRepository(
-      bank: {
-        'N5': [_item(1, '?', 'N5')],
-        'N4': [_item(2, '?', 'N4')],
-        'N3': [_item(3, '?', 'N3')],
-        'N2': [_item(4, '?', 'N2')],
-        'N1': [_item(5, '?', 'N1')],
-      },
-    );
-    final container = ProviderContainer(
-      overrides: [
-        sharedPreferencesProvider.overrideWithValue(_prefs),
-        studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
-        lessonRepositoryProvider.overrideWithValue(repo),
-        dashboardProvider.overrideWith(
-          (ref) => Stream.value(
-            const DashboardState(
-              streak: 0,
-              todayXp: 0,
-              vocabDue: 0,
-              grammarDue: 0,
-              kanjiDue: 0,
-              vocabMistakeCount: 0,
-              grammarMistakeCount: 0,
-              kanjiMistakeCount: 0,
-              totalMistakeCount: 0,
+  test(
+    'vocabCatalogProvider counts all tracks without hydrating rows',
+    () async {
+      final repo = _FakeVocabLessonRepository(
+        bank: {
+          'N5': [_item(1, '?', 'N5')],
+          'N4': [_item(2, '?', 'N4')],
+          'N3': [_item(3, '?', 'N3')],
+          'N2': [_item(4, '?', 'N2')],
+          'N1': [_item(5, '?', 'N1')],
+        },
+      );
+      final container = ProviderContainer(
+        overrides: [
+          sharedPreferencesProvider.overrideWithValue(_prefs),
+          studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+          lessonRepositoryProvider.overrideWithValue(repo),
+          dashboardProvider.overrideWith(
+            (ref) => Stream.value(
+              const DashboardState(
+                streak: 0,
+                todayXp: 0,
+                vocabDue: 0,
+                grammarDue: 0,
+                kanjiDue: 0,
+                vocabMistakeCount: 0,
+                grammarMistakeCount: 0,
+                kanjiMistakeCount: 0,
+                totalMistakeCount: 0,
+              ),
             ),
           ),
-        ),
-        nextVocabReviewProvider.overrideWith((ref) => Stream.value(null)),
-      ],
-    );
-    addTearDown(container.dispose);
+          nextVocabReviewProvider.overrideWith((ref) => Stream.value(null)),
+        ],
+      );
+      addTearDown(container.dispose);
 
-    await container.read(vocabCatalogProvider.future);
+      await container.read(vocabCatalogProvider.future);
 
-    expect(repo.levelSeriesCalls, isEmpty);
-    expect(
-      repo.countCalls,
-      containsAll([
-        'N5:hajimete',
-        'N4:hajimete',
-        'N3:hajimete',
-        'N2:hajimete',
-        'N1:hajimete',
-        'N3:ShinKanzen',
-        'N2:ShinKanzen',
-        'N1:ShinKanzen',
-      ]),
-    );
-    expect(repo.lessonRangeCalls, contains('N5:minna:1-25'));
-    expect(repo.lessonRangeCalls, contains('N4:minna:26-50'));
-  });
+      expect(repo.levelSeriesCalls, isEmpty);
+      expect(
+        repo.countCalls,
+        containsAll([
+          'N5:hajimete',
+          'N4:hajimete',
+          'N3:hajimete',
+          'N2:hajimete',
+          'N1:hajimete',
+          'N3:ShinKanzen',
+          'N2:ShinKanzen',
+          'N1:ShinKanzen',
+        ]),
+      );
+      expect(repo.lessonRangeCalls, contains('N5:minna:1-25'));
+      expect(repo.lessonRangeCalls, contains('N4:minna:26-50'));
+    },
+  );
 
   test(
     'vocabCatalogProvider unlocks every data-backed catalog program',
@@ -480,6 +483,58 @@ void main() {
       ]) {
         final dynamic program = programsByKey[key];
         expect(program, isNotNull, reason: key);
+        expect(program.isComingSoon, isFalse, reason: key);
+        expect(program.isInteractive, isTrue, reason: key);
+      }
+    },
+  );
+
+  test(
+    'vocabCatalogProvider falls back to bundled upper-level assets',
+    () async {
+      final repo = _FakeVocabLessonRepository(bank: const {});
+      final container = ProviderContainer(
+        overrides: [
+          sharedPreferencesProvider.overrideWithValue(_prefs),
+          studyLevelProvider.overrideWith((ref) => StudyLevel.n3),
+          lessonRepositoryProvider.overrideWithValue(repo),
+          dashboardProvider.overrideWith(
+            (ref) => Stream.value(
+              const DashboardState(
+                streak: 0,
+                todayXp: 0,
+                vocabDue: 0,
+                grammarDue: 0,
+                kanjiDue: 0,
+                vocabMistakeCount: 0,
+                grammarMistakeCount: 0,
+                kanjiMistakeCount: 0,
+                totalMistakeCount: 0,
+              ),
+            ),
+          ),
+          nextVocabReviewProvider.overrideWith((ref) => Stream.value(null)),
+        ],
+      );
+      addTearDown(container.dispose);
+
+      final sections = await container.read(vocabCatalogProvider.future);
+      final programsByKey = <String, dynamic>{
+        for (final dynamic section in sections)
+          for (final dynamic program in section.programs) program.key: program,
+      };
+
+      for (final key in const [
+        'n3_core',
+        'n3_companion',
+        'n2_core',
+        'n2_companion',
+        'n1_core',
+        'n1_companion',
+      ]) {
+        final dynamic program = programsByKey[key];
+        expect(program, isNotNull, reason: key);
+        expect(program.termCount, greaterThan(0), reason: key);
         expect(program.isComingSoon, isFalse, reason: key);
         expect(program.isInteractive, isTrue, reason: key);
       }
