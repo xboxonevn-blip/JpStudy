@@ -1416,7 +1416,7 @@ class _VocabCatalogProgram {
 
 _VocabCatalogSection _buildJlptSection({
   required String levelCode,
-  required List<VocabItem> items,
+  required int liveCount,
   required int dueCount,
   required DateTime? nextReview,
   required Color accent,
@@ -1429,7 +1429,6 @@ _VocabCatalogSection _buildJlptSection({
   required bool isInteractive,
   List<_VocabCatalogProgram> extraPrograms = const [],
 }) {
-  final liveCount = items.length;
   final chapterCount = _chapterCountForLevel(levelCode);
   final coreInteractive = isInteractive && liveCount > 0;
   final coreBadge = dueCount > 0

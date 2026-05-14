@@ -105,8 +105,6 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
 ) async {
   final repo = ref.read(lessonRepositoryProvider);
   final language = ref.watch(appLanguageProvider);
-  final activeLevel = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
-  final activeLevelCode = activeLevel.shortLabel;
 
   // Subscribe only to vocabDue — streak/XP ticks won't re-fire all 13 queries.
   final dueCount = ref.watch(
@@ -116,69 +114,76 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
   // nextReview is nullable). Provider re-runs when stream emits a new value.
   final nextReview = ref.watch(nextVocabReviewProvider).value;
 
-  // Lazy-load only the active JLPT level. Other levels defer their DB/asset
-  // work until the user switches level, avoiding N1/N2/N3 startup reads for N5.
-  Future<List<VocabItem>> levelItems(String levelCode) =>
-      levelCode == activeLevelCode
-      ? repo.getVocabByLevelAndSeries(levelCode, 'hajimete')
-      : Future.value(const <VocabItem>[]);
+  // Catalog cards need availability/counts, not full vocab row hydration.
+  // Count all real tracks so data-backed programs do not look locked merely
+  // because another JLPT level is selected.
+  Future<int> hajimeteCount(String levelCode) =>
+      repo.countVocabByLevelAndSeries(levelCode, 'hajimete');
 
-  Future<List<VocabItem>> shinkanzenItems(String levelCode) =>
-      levelCode == activeLevelCode
-      ? repo.getVocabByLevelAndSeries(levelCode, 'ShinKanzen')
-      : Future.value(const <VocabItem>[]);
+  Future<int> shinkanzenCount(String levelCode) =>
+      repo.countVocabByLevelAndSeries(levelCode, 'ShinKanzen');
 
   Future<_SeriesManifestSummary> shinkanzenSummary(String levelCode) =>
-      levelCode == activeLevelCode
-      ? _loadShinkanzenManifestSummary(levelCode)
-      : Future.value(const _SeriesManifestSummary.empty());
+      _loadShinkanzenManifestSummary(levelCode);
 
-  final n5Future = levelItems('N5');
-  final n4Future = levelItems('N4');
-  final n3Future = levelItems('N3');
-  final n2Future = levelItems('N2');
-  final n1Future = levelItems('N1');
-  final shinkanzenN3Future = shinkanzenItems('N3');
+  final n5CountFuture = hajimeteCount('N5');
+  final n4CountFuture = hajimeteCount('N4');
+  final n3CountFuture = hajimeteCount('N3');
+  final n2CountFuture = hajimeteCount('N2');
+  final n1CountFuture = hajimeteCount('N1');
+  final shinkanzenN3CountFuture = shinkanzenCount('N3');
+  final shinkanzenN2CountFuture = shinkanzenCount('N2');
+  final shinkanzenN1CountFuture = shinkanzenCount('N1');
   final shinkanzenN3SummaryFuture = shinkanzenSummary('N3');
   final shinkanzenN2SummaryFuture = shinkanzenSummary('N2');
   final shinkanzenN1SummaryFuture = shinkanzenSummary('N1');
-  final minnaN5CountFuture = activeLevelCode == 'N5'
-      ? repo
-            .getVocabByLessonRange(
-              'N5',
-              startLesson: 1,
-              endLesson: 25,
-              series: 'minna',
-            )
-            .then((items) => items.length)
-      : Future.value(0);
-  final minnaN4CountFuture = activeLevelCode == 'N4'
-      ? repo
-            .getVocabByLessonRange(
-              'N4',
-              startLesson: 26,
-              endLesson: 50,
-              series: 'minna',
-            )
-            .then((items) => items.length)
-      : Future.value(0);
+  final minnaN5CountFuture = repo
+      .getVocabByLessonRange(
+        'N5',
+        startLesson: 1,
+        endLesson: 25,
+        series: 'minna',
+      )
+      .then((items) => items.length);
+  final minnaN4CountFuture = repo
+      .getVocabByLessonRange(
+        'N4',
+        startLesson: 26,
+        endLesson: 50,
+        series: 'minna',
+      )
+      .then((items) => items.length);
 
-  final n5 = await n5Future;
-  final n4 = await n4Future;
-  final n3 = await n3Future;
-  final n2 = await n2Future;
-  final n1 = await n1Future;
-  final shinkanzenN3 = await shinkanzenN3Future;
+  final n5Count = await n5CountFuture;
+  final n4Count = await n4CountFuture;
+  final n3Count = await n3CountFuture;
+  final n2Count = await n2CountFuture;
+  final n1Count = await n1CountFuture;
+  final shinkanzenN3Count = await shinkanzenN3CountFuture;
+  final shinkanzenN2Count = await shinkanzenN2CountFuture;
+  final shinkanzenN1Count = await shinkanzenN1CountFuture;
   final shinkanzenN3Summary = await shinkanzenN3SummaryFuture;
   final shinkanzenN2Summary = await shinkanzenN2SummaryFuture;
   final shinkanzenN1Summary = await shinkanzenN1SummaryFuture;
   final minnaN5Count = await minnaN5CountFuture;
   final minnaN4Count = await minnaN4CountFuture;
+  final shinkanzenN3TermCount = shinkanzenN3Summary.importedTermCount > 0
+      ? shinkanzenN3Summary.importedTermCount
+      : shinkanzenN3Count;
+  final shinkanzenN2TermCount = shinkanzenN2Summary.importedTermCount > 0
+      ? shinkanzenN2Summary.importedTermCount
+      : shinkanzenN2Count;
+  final shinkanzenN1TermCount = shinkanzenN1Summary.importedTermCount > 0
+      ? shinkanzenN1Summary.importedTermCount
+      : shinkanzenN1Count;
+
+  int shinkanzenRouteCount(_SeriesManifestSummary summary) =>
+      summary.routeCount > 0 ? summary.routeCount : 25;
 
   return [
     _buildJlptSection(
       levelCode: 'N5',
-      items: n5,
+      liveCount: n5Count,
       dueCount: dueCount,
       nextReview: nextReview,
       accent: AppThemePalette.light.warning,
@@ -194,7 +199,7 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
     ),
     _buildJlptSection(
       levelCode: 'N4',
-      items: n4,
+      liveCount: n4Count,
       dueCount: dueCount,
       nextReview: nextReview,
       accent: AppThemePalette.light.primary,
@@ -210,7 +215,7 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
     ),
     _buildJlptSection(
       levelCode: 'N3',
-      items: n3,
+      liveCount: n3Count,
       dueCount: dueCount,
       nextReview: nextReview,
       accent: AppThemePalette.light.success,
@@ -221,19 +226,15 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
         'N3',
       ),
       companionType: _VocabProgramType.shinkanzen,
-      companionCountOverride: shinkanzenN3Summary.importedTermCount > 0
-          ? shinkanzenN3Summary.importedTermCount
-          : shinkanzenN3.length,
-      companionStructureCount: shinkanzenN3Summary.routeCount > 0
-          ? shinkanzenN3Summary.routeCount
-          : 25,
+      companionCountOverride: shinkanzenN3TermCount,
+      companionStructureCount: shinkanzenRouteCount(shinkanzenN3Summary),
       companionPreviewBody:
-          'Official 3A category route mapped for N3. ${shinkanzenN3Summary.readyRouteCount}/${shinkanzenN3Summary.routeCount > 0 ? shinkanzenN3Summary.routeCount : 25} route blocks are already imported with ${shinkanzenN3Summary.importedTermCount > 0 ? shinkanzenN3Summary.importedTermCount : shinkanzenN3.length} seeded terms in JP Study.',
+          'Official 3A category route mapped for N3. ${shinkanzenN3Summary.readyRouteCount}/${shinkanzenRouteCount(shinkanzenN3Summary)} route blocks are already imported with $shinkanzenN3TermCount seeded terms in JP Study.',
       isInteractive: true,
     ),
     _buildJlptSection(
       levelCode: 'N2',
-      items: n2,
+      liveCount: n2Count,
       dueCount: dueCount,
       nextReview: nextReview,
       accent: AppThemePalette.light.error,
@@ -244,16 +245,15 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
         'N2',
       ),
       companionType: _VocabProgramType.shinkanzen,
-      companionStructureCount: shinkanzenN2Summary.routeCount > 0
-          ? shinkanzenN2Summary.routeCount
-          : 51,
+      companionCountOverride: shinkanzenN2TermCount,
+      companionStructureCount: shinkanzenRouteCount(shinkanzenN2Summary),
       companionPreviewBody:
-          'Official 3A confirmation-test route mapped for N2. ${shinkanzenN2Summary.readyRouteCount}/${shinkanzenN2Summary.routeCount > 0 ? shinkanzenN2Summary.routeCount : 51} tests are already imported with ${shinkanzenN2Summary.importedTermCount} seeded terms in JP Study.',
+          'Official 3A confirmation-test route mapped for N2. ${shinkanzenN2Summary.readyRouteCount}/${shinkanzenRouteCount(shinkanzenN2Summary)} tests are already imported with $shinkanzenN2TermCount seeded terms in JP Study.',
       isInteractive: true,
     ),
     _buildJlptSection(
       levelCode: 'N1',
-      items: n1,
+      liveCount: n1Count,
       dueCount: dueCount,
       nextReview: nextReview,
       accent: AppThemePalette.light.info,
@@ -264,11 +264,10 @@ final vocabCatalogProvider = FutureProvider<List<_VocabCatalogSection>>((
         'N1',
       ),
       companionType: _VocabProgramType.shinkanzen,
-      companionStructureCount: shinkanzenN1Summary.routeCount > 0
-          ? shinkanzenN1Summary.routeCount
-          : 51,
+      companionCountOverride: shinkanzenN1TermCount,
+      companionStructureCount: shinkanzenRouteCount(shinkanzenN1Summary),
       companionPreviewBody:
-          'Official 3A confirmation-test route mapped for N1. ${shinkanzenN1Summary.readyRouteCount}/${shinkanzenN1Summary.routeCount > 0 ? shinkanzenN1Summary.routeCount : 51} tests are imported with ${shinkanzenN1Summary.importedTermCount} seeded terms so far.',
+          'Official 3A confirmation-test route mapped for N1. ${shinkanzenN1Summary.readyRouteCount}/${shinkanzenRouteCount(shinkanzenN1Summary)} tests are imported with $shinkanzenN1TermCount seeded terms so far.',
       extraPrograms: const [
         _VocabCatalogProgram(
           key: 'advanced_n1',

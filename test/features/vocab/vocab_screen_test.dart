@@ -41,6 +41,7 @@ class _FakeVocabLessonRepository extends LessonRepository {
   late final Map<int, SrsStateData> srsStates;
   final levelSeriesCalls = <String>[];
   final lessonRangeCalls = <String>[];
+  final countCalls = <String>[];
 
   @override
   Future<List<VocabItem>> getVocabByLevel(String level) async {
@@ -209,6 +210,7 @@ class _FakeVocabLessonRepository extends LessonRepository {
 
   @override
   Future<int> countVocabByLevelAndSeries(String level, String series) async {
+    countCalls.add('$level:$series');
     return bank[level]?.length ?? 0;
   }
 }
@@ -366,7 +368,7 @@ void main() {
     _prefs = await SharedPreferences.getInstance();
   });
 
-  test('vocabCatalogProvider only loads active JLPT level', () async {
+  test('vocabCatalogProvider counts all tracks without hydrating rows', () async {
     final repo = _FakeVocabLessonRepository(
       bank: {
         'N5': [_item(1, '?', 'N5')],
@@ -403,15 +405,87 @@ void main() {
 
     await container.read(vocabCatalogProvider.future);
 
-    expect(repo.levelSeriesCalls, contains('N5:hajimete'));
-    expect(repo.levelSeriesCalls, isNot(contains('N4:hajimete')));
-    expect(repo.levelSeriesCalls, isNot(contains('N3:hajimete')));
-    expect(repo.levelSeriesCalls, isNot(contains('N2:hajimete')));
-    expect(repo.levelSeriesCalls, isNot(contains('N1:hajimete')));
-    expect(repo.levelSeriesCalls, isNot(contains('N3:ShinKanzen')));
+    expect(repo.levelSeriesCalls, isEmpty);
+    expect(
+      repo.countCalls,
+      containsAll([
+        'N5:hajimete',
+        'N4:hajimete',
+        'N3:hajimete',
+        'N2:hajimete',
+        'N1:hajimete',
+        'N3:ShinKanzen',
+        'N2:ShinKanzen',
+        'N1:ShinKanzen',
+      ]),
+    );
     expect(repo.lessonRangeCalls, contains('N5:minna:1-25'));
-    expect(repo.lessonRangeCalls, isNot(contains('N4:minna:26-50')));
+    expect(repo.lessonRangeCalls, contains('N4:minna:26-50'));
   });
+
+  test(
+    'vocabCatalogProvider unlocks every data-backed catalog program',
+    () async {
+      final repo = _FakeVocabLessonRepository(
+        bank: {
+          'N5': [_item(1, 'n5', 'N5')],
+          'N4': [_item(2, 'n4', 'N4')],
+          'N3': [_item(3, 'n3', 'N3')],
+          'N2': [_item(4, 'n2', 'N2')],
+          'N1': [_item(5, 'n1', 'N1')],
+        },
+      );
+      final container = ProviderContainer(
+        overrides: [
+          sharedPreferencesProvider.overrideWithValue(_prefs),
+          studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+          lessonRepositoryProvider.overrideWithValue(repo),
+          dashboardProvider.overrideWith(
+            (ref) => Stream.value(
+              const DashboardState(
+                streak: 0,
+                todayXp: 0,
+                vocabDue: 0,
+                grammarDue: 0,
+                kanjiDue: 0,
+                vocabMistakeCount: 0,
+                grammarMistakeCount: 0,
+                kanjiMistakeCount: 0,
+                totalMistakeCount: 0,
+              ),
+            ),
+          ),
+          nextVocabReviewProvider.overrideWith((ref) => Stream.value(null)),
+        ],
+      );
+      addTearDown(container.dispose);
+
+      final sections = await container.read(vocabCatalogProvider.future);
+      final programsByKey = <String, dynamic>{
+        for (final dynamic section in sections)
+          for (final dynamic program in section.programs) program.key: program,
+      };
+
+      for (final key in const [
+        'n5_core',
+        'n5_companion',
+        'n4_core',
+        'n4_companion',
+        'n3_core',
+        'n3_companion',
+        'n2_core',
+        'n2_companion',
+        'n1_core',
+        'n1_companion',
+      ]) {
+        final dynamic program = programsByKey[key];
+        expect(program, isNotNull, reason: key);
+        expect(program.isComingSoon, isFalse, reason: key);
+        expect(program.isInteractive, isTrue, reason: key);
+      }
+    },
+  );
+
   setUp(() {
     SharedPreferences.setMockInitialValues({
       'foundations.softSuggest.vocab.shown': true,
