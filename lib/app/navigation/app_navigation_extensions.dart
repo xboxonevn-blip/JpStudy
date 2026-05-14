@@ -60,6 +60,8 @@ extension AppNavigationContext on BuildContext {
   void openForecast() => pushNamed(AppRouteName.forecast);
   void openAchievements() => pushNamed(AppRouteName.achievements);
   void openDesignLab() => pushNamed(AppRouteName.designLab);
+  void openPrivacy() => pushNamed(AppRouteName.privacy);
+  void openTerms() => pushNamed(AppRouteName.terms);
   void openLearnRecoveryPack() => pushNamed(AppRouteName.learnRecoveryPack);
   void openKanjiPractice({Object? extra}) =>
       pushNamed(AppRouteName.kanjiPractice, extra: extra);

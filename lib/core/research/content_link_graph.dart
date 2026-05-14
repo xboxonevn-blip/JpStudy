@@ -28,7 +28,10 @@ class ContentLinkGraphBuilder {
       }
     }
     final levels = {
-      for (final entry in buckets.entries) entry.key: entry.value.toReport(),
+      for (final entry in buckets.entries)
+        entry.key: entry.value.toReport(
+          cumulativeKanjiChars: _cumulativeKanjiChars(entry.key, buckets),
+        ),
     };
     return ContentLinkGraphReport(levels: _sortLevels(levels));
   }
@@ -71,6 +74,17 @@ class ContentLinkGraphReport {
             '${level.vocabKanjiCharsCovered} | '
             '${level.uniqueKanjiDatasetChars} |',
       '',
+      '## Cumulative Vocab To Kanji Coverage',
+      '',
+      '| Level | With kanji | Fully covered cumulative | Vocab kanji | Cumulative covered chars | Cumulative kanji chars |',
+      '|---|---:|---:|---:|---:|---:|',
+      for (final level in levels.values)
+        '| ${level.level} | ${level.vocabEntriesWithKanji} | '
+            '${level.vocabEntriesFullyCoveredByCumulativeKanjiDataset} | '
+            '${level.uniqueVocabKanji} | '
+            '${level.vocabKanjiCharsCoveredByCumulativeKanji} | '
+            '${level.cumulativeKanjiDatasetChars} |',
+      '',
       '## Kanji Example Links',
       '',
       '| Level | Kanji entries | Example words | Words in vocab | Example refs | Refs in vocab |',
@@ -101,9 +115,12 @@ class ContentLinkLevelReport {
     required this.vocabEntries,
     required this.vocabEntriesWithKanji,
     required this.vocabEntriesFullyCoveredByKanjiDataset,
+    required this.vocabEntriesFullyCoveredByCumulativeKanjiDataset,
     required this.uniqueVocabKanji,
     required this.uniqueKanjiDatasetChars,
+    required this.cumulativeKanjiDatasetChars,
     required this.vocabKanjiCharsCovered,
+    required this.vocabKanjiCharsCoveredByCumulativeKanji,
     required this.kanjiEntries,
     required this.kanjiExampleWords,
     required this.kanjiExampleWordsFoundInVocab,
@@ -119,9 +136,12 @@ class ContentLinkLevelReport {
     : vocabEntries = 0,
       vocabEntriesWithKanji = 0,
       vocabEntriesFullyCoveredByKanjiDataset = 0,
+      vocabEntriesFullyCoveredByCumulativeKanjiDataset = 0,
       uniqueVocabKanji = 0,
       uniqueKanjiDatasetChars = 0,
+      cumulativeKanjiDatasetChars = 0,
       vocabKanjiCharsCovered = 0,
+      vocabKanjiCharsCoveredByCumulativeKanji = 0,
       kanjiEntries = 0,
       kanjiExampleWords = 0,
       kanjiExampleWordsFoundInVocab = 0,
@@ -136,9 +156,12 @@ class ContentLinkLevelReport {
   final int vocabEntries;
   final int vocabEntriesWithKanji;
   final int vocabEntriesFullyCoveredByKanjiDataset;
+  final int vocabEntriesFullyCoveredByCumulativeKanjiDataset;
   final int uniqueVocabKanji;
   final int uniqueKanjiDatasetChars;
+  final int cumulativeKanjiDatasetChars;
   final int vocabKanjiCharsCovered;
+  final int vocabKanjiCharsCoveredByCumulativeKanji;
   final int kanjiEntries;
   final int kanjiExampleWords;
   final int kanjiExampleWordsFoundInVocab;
@@ -207,11 +230,17 @@ class _MutableLinkLevel {
     grammarExampleSentences += sentenceCount;
   }
 
-  ContentLinkLevelReport toReport() {
+  ContentLinkLevelReport toReport({required Set<String> cumulativeKanjiChars}) {
     final fullyCoveredEntries = vocabEntryKanji
         .where((chars) => chars.every(kanjiChars.contains))
         .length;
+    final cumulativeFullyCoveredEntries = vocabEntryKanji
+        .where((chars) => chars.every(cumulativeKanjiChars.contains))
+        .length;
     final coveredVocabChars = vocabKanji.where(kanjiChars.contains).length;
+    final cumulativeCoveredVocabChars = vocabKanji
+        .where(cumulativeKanjiChars.contains)
+        .length;
     final linkedExampleWords = kanjiExampleWordsSet.where(vocabTerms.contains);
     final linkedExampleRefs = kanjiExampleRefsSet.where(vocabIds.contains);
     return ContentLinkLevelReport(
@@ -219,9 +248,13 @@ class _MutableLinkLevel {
       vocabEntries: vocabEntries,
       vocabEntriesWithKanji: vocabEntriesWithKanji,
       vocabEntriesFullyCoveredByKanjiDataset: fullyCoveredEntries,
+      vocabEntriesFullyCoveredByCumulativeKanjiDataset:
+          cumulativeFullyCoveredEntries,
       uniqueVocabKanji: vocabKanji.length,
       uniqueKanjiDatasetChars: kanjiChars.length,
+      cumulativeKanjiDatasetChars: cumulativeKanjiChars.length,
       vocabKanjiCharsCovered: coveredVocabChars,
+      vocabKanjiCharsCoveredByCumulativeKanji: cumulativeCoveredVocabChars,
       kanjiEntries: kanjiEntries,
       kanjiExampleWords: kanjiExampleWordsSet.length,
       kanjiExampleWordsFoundInVocab: linkedExampleWords.length,
@@ -264,6 +297,24 @@ void _readVocab(
       kanji: kanji,
     );
   }
+}
+
+Set<String> _cumulativeKanjiChars(
+  String level,
+  Map<String, _MutableLinkLevel> buckets,
+) {
+  final levelNumber = _jlptLevelNumber(level);
+  if (levelNumber == null) return {...?buckets[level]?.kanjiChars};
+  return {
+    for (final entry in buckets.entries)
+      if ((_jlptLevelNumber(entry.key) ?? -1) >= levelNumber)
+        ...entry.value.kanjiChars,
+  };
+}
+
+int? _jlptLevelNumber(String value) {
+  final match = RegExp(r'^N([1-5])$').firstMatch(value);
+  return match == null ? null : int.parse(match.group(1)!);
 }
 
 void _readKanji(

@@ -11,6 +11,7 @@ import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/features/common/widgets/clay_button.dart';
 import 'package:jpstudy/features/common/widgets/japanese_background.dart';
+import 'package:jpstudy/features/legal/legal_document_screen.dart';
 
 class OnboardingScreen extends ConsumerStatefulWidget {
   const OnboardingScreen({super.key, required this.onComplete});
@@ -155,6 +156,8 @@ class _LevelPage extends StatelessWidget {
             color: context.appPalette.ink.withValues(alpha: 0.55),
           ),
         ),
+        const SizedBox(height: AppSpacing.md),
+        LegalDocumentLinks(language: language, compact: true),
         const SizedBox(height: AppSpacing.xxl),
         Text(
           language.onboardingLevelTitle,

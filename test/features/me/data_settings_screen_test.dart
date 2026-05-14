@@ -83,6 +83,8 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Data controls'), findsAtLeastNWidgets(1));
+    expect(find.text('Privacy Policy'), findsOneWidget);
+    expect(find.text('Terms of Service'), findsOneWidget);
     expect(find.text('Linked file sync'), findsAtLeastNWidgets(1));
     expect(find.byKey(const ValueKey('linked_sync_headline')), findsOneWidget);
     expect(find.text('How linked file sync works'), findsOneWidget);

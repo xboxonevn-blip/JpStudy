@@ -1,4 +1,4 @@
-﻿name: UI String Guard
+﻿name: CI
 
 on:
   push:
@@ -28,7 +28,10 @@ jobs:
         run: flutter test
 
       - name: Build web
-        run: flutter build web
+        run: flutter build web --release --base-href=/ --dart-define=JPSTUDY_RECAPTCHA_SITE_KEY=ci-placeholder
+
+      - name: Check web performance budget
+        run: dart run tool/research/web_perf_budget_report.dart --build-root build/web --budget docs/research/D7-performance/web_perf_budget.json --fail-on-violation
 
   firebase-security-rules:
     runs-on: ubuntu-latest

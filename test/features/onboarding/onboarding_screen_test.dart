@@ -98,6 +98,9 @@ void main() {
 
     await tester.pumpAndSettle();
 
+    expect(find.text('Privacy Policy'), findsOneWidget);
+    expect(find.text('Terms of Service'), findsOneWidget);
+
     await tester.tap(find.text('N5'));
     await tester.pumpAndSettle();
 

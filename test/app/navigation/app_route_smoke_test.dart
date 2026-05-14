@@ -24,13 +24,21 @@ void main() {
     expect(find.byType(SearchScreen), findsOneWidget);
 
     await pumpSmokeRoute(tester, AppRoutePath.examCenter);
-    expect(find.byType(HomeMockExamScreen), findsOneWidget);
+    expect(find.byType(ExamCenterHubScreen), findsOneWidget);
 
     await pumpSmokeRoute(tester, AppRoutePath.progress);
     expect(find.byType(ProgressScreen), findsOneWidget);
 
     await pumpSmokeRoute(tester, AppRoutePath.meData);
     expect(find.byType(DataSettingsScreen), findsOneWidget);
+
+    await pumpSmokeRoute(tester, '/privacy');
+    expect(find.text('Privacy Policy'), findsWidgets);
+    expect(find.textContaining('review-needed draft'), findsWidgets);
+
+    await pumpSmokeRoute(tester, '/terms');
+    expect(find.text('Terms of Service'), findsWidgets);
+    expect(find.textContaining('review-needed draft'), findsWidgets);
 
     await disposeSmokeApp(tester);
   });

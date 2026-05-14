@@ -7,6 +7,7 @@ import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/auth/auth_provider.dart';
 import 'package:jpstudy/core/auth/auth_service.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/features/legal/legal_document_screen.dart';
 
 /// Login dialog wired to Firebase Auth via [AuthService].
 class LoginDialog extends ConsumerStatefulWidget {
@@ -141,143 +142,153 @@ class _LoginDialogState extends ConsumerState<LoginDialog> {
       insetPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 380),
-        child: Container(
-          padding: const EdgeInsets.fromLTRB(24, 20, 24, 20),
-          decoration: BoxDecoration(
-            color: palette.elevated,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.16),
-                blurRadius: 32,
-                offset: const Offset(0, 12),
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _buildHeader(language, theme, palette),
-              const SizedBox(height: AppSpacing.lg),
-              _GoogleSignInButton(
-                label: language.signInWithGoogleLabel,
-                onPressed:
-                    ref.read(authServiceProvider).isGoogleSignInSupported &&
-                        !_busy
-                    ? () => _handleGoogleSignIn(language)
-                    : null,
-                palette: palette,
-              ),
-              if (!ref.read(authServiceProvider).isGoogleSignInSupported) ...[
-                const SizedBox(height: AppSpacing.xs),
-                Text(
-                  language.authNotSupportedLabel,
-                  textAlign: TextAlign.center,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: palette.warning,
-                  ),
+        child: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.fromLTRB(24, 20, 24, 20),
+            decoration: BoxDecoration(
+              color: palette.elevated,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.16),
+                  blurRadius: 32,
+                  offset: const Offset(0, 12),
                 ),
               ],
-              const SizedBox(height: AppSpacing.md),
-              _OrDivider(label: language.orDividerLabel, palette: palette),
-              const SizedBox(height: AppSpacing.md),
-              Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    _LoginField(
-                      controller: _emailController,
-                      label: language.loginEmailLabel,
-                      icon: Icons.mail_outline,
-                      keyboardType: TextInputType.emailAddress,
-                      palette: palette,
-                      validator: (value) {
-                        final email = (value ?? '').trim();
-                        if (email.isEmpty) return language.loginEmptyFieldLabel;
-                        final valid = RegExp(
-                          r'^[^@\s]+@[^@\s]+\.[^@\s]+$',
-                        ).hasMatch(email);
-                        return valid ? null : language.loginInvalidEmailLabel;
-                      },
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _buildHeader(language, theme, palette),
+                const SizedBox(height: AppSpacing.lg),
+                _GoogleSignInButton(
+                  label: language.signInWithGoogleLabel,
+                  onPressed:
+                      ref.read(authServiceProvider).isGoogleSignInSupported &&
+                          !_busy
+                      ? () => _handleGoogleSignIn(language)
+                      : null,
+                  palette: palette,
+                ),
+                if (!ref.read(authServiceProvider).isGoogleSignInSupported) ...[
+                  const SizedBox(height: AppSpacing.xs),
+                  Text(
+                    language.authNotSupportedLabel,
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: palette.warning,
                     ),
-                    const SizedBox(height: AppSpacing.sm),
-                    _LoginField(
-                      controller: _passwordController,
-                      label: language.loginPasswordLabel,
-                      icon: Icons.lock_outline,
-                      obscureText: _obscurePassword,
-                      palette: palette,
-                      validator: (value) => (value ?? '').isEmpty
-                          ? language.loginEmptyFieldLabel
-                          : null,
-                      trailing: IconButton(
-                        icon: Icon(
-                          _obscurePassword
-                              ? Icons.visibility_off_outlined
-                              : Icons.visibility_outlined,
-                          color: palette.ink.withValues(alpha: 0.55),
-                          size: 20,
-                        ),
-                        splashRadius: 18,
-                        onPressed: () {
-                          setState(() => _obscurePassword = !_obscurePassword);
+                  ),
+                ],
+                const SizedBox(height: AppSpacing.md),
+                _OrDivider(label: language.orDividerLabel, palette: palette),
+                const SizedBox(height: AppSpacing.md),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      _LoginField(
+                        controller: _emailController,
+                        label: language.loginEmailLabel,
+                        icon: Icons.mail_outline,
+                        keyboardType: TextInputType.emailAddress,
+                        palette: palette,
+                        validator: (value) {
+                          final email = (value ?? '').trim();
+                          if (email.isEmpty) {
+                            return language.loginEmptyFieldLabel;
+                          }
+                          final valid = RegExp(
+                            r'^[^@\s]+@[^@\s]+\.[^@\s]+$',
+                          ).hasMatch(email);
+                          return valid ? null : language.loginInvalidEmailLabel;
                         },
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: AppSpacing.sm),
+                      _LoginField(
+                        controller: _passwordController,
+                        label: language.loginPasswordLabel,
+                        icon: Icons.lock_outline,
+                        obscureText: _obscurePassword,
+                        palette: palette,
+                        validator: (value) => (value ?? '').isEmpty
+                            ? language.loginEmptyFieldLabel
+                            : null,
+                        trailing: IconButton(
+                          icon: Icon(
+                            _obscurePassword
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility_outlined,
+                            color: palette.ink.withValues(alpha: 0.55),
+                            size: 20,
+                          ),
+                          splashRadius: 18,
+                          onPressed: () {
+                            setState(
+                              () => _obscurePassword = !_obscurePassword,
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              if (_inlineError != null) ...[
+                if (_inlineError != null) ...[
+                  const SizedBox(height: AppSpacing.sm),
+                  Text(
+                    _inlineError!,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: palette.error,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+                const SizedBox(height: AppSpacing.lg),
+                SizedBox(
+                  height: 48,
+                  child: ElevatedButton(
+                    onPressed: _busy
+                        ? null
+                        : () => _handleEmailSubmit(language),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: palette.info,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      textStyle: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    child: _busy
+                        ? const SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2.5,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                Colors.white,
+                              ),
+                            ),
+                          )
+                        : Text(language.loginSubmitLabel),
+                  ),
+                ),
+                const SizedBox(height: AppSpacing.md),
+                LegalDocumentLinks(language: language, compact: true),
                 const SizedBox(height: AppSpacing.sm),
                 Text(
-                  _inlineError!,
+                  language.loginManualAccountFooterLabel,
+                  textAlign: TextAlign.center,
                   style: theme.textTheme.bodySmall?.copyWith(
-                    color: palette.error,
-                    fontWeight: FontWeight.w700,
+                    color: palette.ink.withValues(alpha: 0.55),
+                    fontStyle: FontStyle.italic,
                   ),
                 ),
               ],
-              const SizedBox(height: AppSpacing.lg),
-              SizedBox(
-                height: 48,
-                child: ElevatedButton(
-                  onPressed: _busy ? null : () => _handleEmailSubmit(language),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: palette.info,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    textStyle: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  child: _busy
-                      ? const SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2.5,
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              Colors.white,
-                            ),
-                          ),
-                        )
-                      : Text(language.loginSubmitLabel),
-                ),
-              ),
-              const SizedBox(height: AppSpacing.md),
-              Text(
-                language.loginManualAccountFooterLabel,
-                textAlign: TextAlign.center,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: palette.ink.withValues(alpha: 0.55),
-                  fontStyle: FontStyle.italic,
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),

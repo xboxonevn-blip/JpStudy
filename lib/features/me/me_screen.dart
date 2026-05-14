@@ -19,6 +19,7 @@ import 'package:jpstudy/core/auth/auth_provider.dart';
 import 'package:jpstudy/features/auth/widgets/login_dialog.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/home/providers/cloud_sync_status_provider.dart';
+import 'package:jpstudy/features/legal/legal_document_screen.dart';
 import 'package:jpstudy/features/me/providers/app_settings_controller.dart';
 import 'package:jpstudy/features/me/providers/data_settings_controller.dart';
 import 'package:jpstudy/features/me/widgets/challenge_history_card.dart';
@@ -370,6 +371,8 @@ class _MeScreenState extends ConsumerState<MeScreen> {
             icon: const Icon(Icons.storage_rounded),
             label: Text(_manageDataLabel(language)),
           ),
+          const SizedBox(height: AppSpacing.md),
+          LegalDocumentLinks(language: language),
         ],
       ),
     );

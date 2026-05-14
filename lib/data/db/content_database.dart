@@ -40,7 +40,7 @@ class ContentDatabase extends _$ContentDatabase {
         await m.createAll();
         await _seedMinnaVocabularyForActiveLevel();
         await _seedHajimeteVocabularyForActiveLevel();
-        await _seedMinnaGrammar();
+        await _seedMinnaGrammarForActiveLevel();
         await _seedMinnaKanji();
         await _createContentIndexes();
       },
@@ -149,7 +149,7 @@ class ContentDatabase extends _$ContentDatabase {
         await Future.wait([
           _ensureMinnaVocabularySeededForActiveLevel(),
           _ensureHajimeteVocabularySeededForActiveLevel(),
-          _ensureMinnaGrammarSeeded(),
+          _ensureMinnaGrammarSeededForActiveLevel(),
           _ensureMinnaKanjiSeeded(),
         ]);
       },
@@ -434,7 +434,11 @@ class ContentDatabase extends _$ContentDatabase {
     }
   }
 
-  Future<void> _ensureMinnaGrammarSeeded() async {
+  Future<void> _ensureMinnaGrammarSeeded([
+    Iterable<_ContentSeedSpec> specs = _contentSeedSpecs,
+  ]) async {
+    final specList = specs.toList(growable: false);
+    if (specList.isEmpty) return;
     // One GROUP BY query replaces N sequential COUNT queries (one per level).
     final levelCol = grammarPoint.level;
     final countExpr = grammarPoint.id.count();
@@ -443,7 +447,7 @@ class ContentDatabase extends _$ContentDatabase {
               ..addColumns([levelCol, countExpr])
               ..where(
                 grammarPoint.level.isIn(
-                  _contentSeedSpecs.map((s) => s.levelLabel).toList(),
+                  specList.map((s) => s.levelLabel).toList(),
                 ),
               )
               ..groupBy([levelCol]))
@@ -451,22 +455,51 @@ class ContentDatabase extends _$ContentDatabase {
     final counts = {
       for (final row in rows) row.read(levelCol)!: row.read(countExpr) ?? 0,
     };
-    for (final spec in _contentSeedSpecs) {
-      if ((counts[spec.levelLabel] ?? 0) == 0) {
-        await _seedMinnaGrammar();
-        return;
-      }
+    final missingSpecs = specList
+        .where((spec) => (counts[spec.levelLabel] ?? 0) == 0)
+        .toList(growable: false);
+    if (missingSpecs.isNotEmpty) {
+      await _seedMinnaGrammar(missingSpecs);
     }
   }
 
-  Future<void> _seedMinnaGrammar() async {
-    // Clear existing data to prevent duplicates and ensure fresh data
-    await delete(grammarExample).go();
-    await delete(grammarPoint).go();
+  Future<void> _ensureMinnaGrammarSeededForActiveLevel() async {
+    final activeLevel = await _activeStudyLevelLabel();
+    await _ensureMinnaGrammarSeeded(
+      _contentSeedSpecs.where((s) => s.levelLabel == activeLevel),
+    );
+  }
+
+  Future<void> _seedMinnaGrammar([
+    Iterable<_ContentSeedSpec> specs = _contentSeedSpecs,
+  ]) async {
+    final specList = specs.toList(growable: false);
+    if (specList.isEmpty) return;
+
+    // Clear existing data for target levels only to prevent duplicates while
+    // preserving levels that should stay lazy.
+    final targetLevels = specList.map((s) => s.levelLabel).toList();
+    final pointIdRows =
+        await (selectOnly(grammarPoint)
+              ..addColumns([grammarPoint.id])
+              ..where(grammarPoint.level.isIn(targetLevels)))
+            .get();
+    final pointIds = [
+      for (final row in pointIdRows)
+        if (row.read(grammarPoint.id) case final id?) id,
+    ];
+    if (pointIds.isNotEmpty) {
+      await (delete(
+        grammarExample,
+      )..where((tbl) => tbl.grammarPointId.isIn(pointIds))).go();
+    }
+    await (delete(
+      grammarPoint,
+    )..where((tbl) => tbl.level.isIn(targetLevels))).go();
 
     // Phase 1: Load every (def, examples) file pair concurrently — pure I/O.
     final filePairs = <({String defPath, String exPath})>[];
-    for (final spec in _contentSeedSpecs) {
+    for (final spec in specList) {
       for (
         var lessonId = spec.startLesson;
         lessonId <= spec.endLesson;
@@ -560,6 +593,13 @@ class ContentDatabase extends _$ContentDatabase {
         }
       });
     }
+  }
+
+  Future<void> _seedMinnaGrammarForActiveLevel() async {
+    final activeLevel = await _activeStudyLevelLabel();
+    await _seedMinnaGrammar(
+      _contentSeedSpecs.where((s) => s.levelLabel == activeLevel),
+    );
   }
 
   Future<void> _seedVocabularyLevel(_ContentSeedSpec spec) async {

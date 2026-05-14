@@ -65,6 +65,12 @@
 - N4/N5 kanji example `sourceVocabId` refs are not fully resolved (`353 / 381`, `401 / 452`).
 - Same-level coverage may understate true learner coverage because lower-level kanji should be cumulative, so Q2.4 does not prove exact prerequisite gaps yet.
 
+## 2026-05-14 - Q5.6 / E5.6
+
+- Cumulative lower-or-same-level kanji coverage still does not support hard prerequisite gating: only N1 `2483/6379`, N2 `1098/2991`, N3 `545/1786`, N4 `672/1719`, and N5 `549/1470` kanji-bearing vocab entries are fully covered.
+- Scoped kanji practice exists, but no discovered code path maps weak vocab/grammar items to prerequisite review.
+- The existing foundations gate is a one-time soft suggestion, not a per-item dependency engine.
+
 ## 2026-05-14 - Q2.5 / E2.5
 
 - Current JLPT does not publish official vocabulary/kanji/grammar item lists, so "official scope" cannot be verified as an exact checklist.
@@ -82,3 +88,89 @@
 - Balanced `app_language.dart` switch coverage (`680` returns per locale) is not enough to claim editorial readiness because terminology is still inconsistent.
 - `app_language.dart` is not the sole copy surface: `1,888` Vietnamese lines exist outside it.
 - Source/content encoding was not fully clean: Dart source had `7` mojibake hits before the D3 fix, and `3` docs files remain not UTF-8 decodable.
+
+## 2026-05-14 - Q6.3 / E6.3
+
+- Existing loaders are not consistent enough to claim a polished first-run experience: `CircularProgressIndicator` appears `69` times across `53` files, usually without copy.
+- Skeleton/shimmer is effectively absent; the only discovered structured skeleton is the progress coach board.
+- Six home/me loading branches collapse with `SizedBox.shrink()`, so optional-panel loading can be visually indistinguishable from positive absence.
+
+## 2026-05-14 - Q6.4 / E6.4
+
+- `ErrorStateWidget` exists, but shared error UI is not the default: only `13` feature usages were found after excluding self/test.
+- Several learner-facing routes can show raw exception text, including Foundations, Grammar, and Recall Sprint.
+- At least eight sampled error branches collapse with `SizedBox.shrink()`, so optional-panel failures can be indistinguishable from absent content.
+
+## 2026-05-14 - Q6.5 / E6.5
+
+- Current sampled UI cannot claim WCAG 2.1 AA: input hint text is `2.57:1`, below the `4.5:1` normal-text threshold.
+- `AppStatusChip.warning` is `2.55:1`; warning-colored small text is not contrast-safe on light surfaces.
+- `ink 0.45` helper text is `2.79:1`, and `ink 0.50`-`0.55` captions are large-only, not safe for small body/caption text.
+
+## 2026-05-14 - Q6.6 / E6.6
+
+- The UI cannot claim consistent `44x44` touch targets yet: several active controls intentionally shrink below the floor.
+- Discover Practice reorder is explicitly `28/34` with `MaterialTapTargetSize.shrinkWrap`, and the focus chip is a small custom `GestureDetector`.
+- Secondary controls repeat the pattern: top-bar notification `36/40`, mistake delete `36`, lesson inline zero-constraint icons, library/practice `minimumSize: Size(0, 0)` CTAs, and interactive `StarRating`.
+
+## 2026-05-14 - Q6.7 / E6.7
+
+- Dark mode is wired, but current evidence does not support a polished parity claim.
+- `AppTheme.dark` does not mirror several light-theme component families, including navigation bar, filled/outlined buttons, input decoration, and icon theme.
+- Hardcoded light surfaces remain in feature code, including Grammar repair prompts and Design Lab, and route-level dark visual coverage is currently narrow.
+
+## 2026-05-14 - Q7.1 / E7.1
+
+- No Lighthouse score was produced because local Lighthouse CLI and Chrome/Edge CLI availability were missing.
+- Release build passes, but current evidence does not support SM5 performance readiness.
+- First local release smoke observed `250` resources and broad grammar JSON fetching; JSON assets total `19.35 MB`.
+- Local Firebase analytics/installations produced localhost referer `403` errors, so console health is noisy outside approved hosting origins.
+
+## 2026-05-14 - Q8.1 / E8.1
+
+- Passing release web build is not enough evidence for beta deploy readiness: both live Firebase sites are older than current `HEAD`.
+- The basic `SHIPPING.md` web build command omits `JPSTUDY_RECAPTCHA_SITE_KEY`, so following it leaves web App Check inactive.
+- Security docs are stale about CSP: they say strict CSP is not enabled, while `firebase.json` and live channels configure CSP.
+- GA4 measurement remains table-blocked: `analytics_536663906` is absent and Firebase-side datasets currently expose zero tables.
+
+## 2026-05-14 - Q8.1 / E8.2
+
+- No `/privacy` or `/terms` route constants/routes were found in source.
+- No VI+EN Privacy Policy or Terms of Service copy was found; `terms` hits are vocabulary term-count labels.
+- Settings/Data controls, Onboarding, and Login do not link to legal documents.
+- Data controls exist, but they are not a substitute for policy/terms routes or consent-surface links.
+
+## 2026-05-14 - Q8.1 / E8.3
+
+- The route/link absence above has been cleared by a minimal implementation, but this is not legal clearance.
+- Privacy/Terms copy remains explicitly marked `review-needed draft`.
+- Public launch still lacks final support/contact wording and approved data-deletion policy language.
+
+## 2026-05-14 - Q8.2 / E8.4
+
+- The expected "web API key is currently unrestricted" risk did not reproduce: fake referrer probes were blocked with `API_KEY_HTTP_REFERRER_BLOCKED`.
+- The security checklist still lacked an explicit API-key restriction verification gate before E8.4.
+- This probe does not verify Android/iOS key package restrictions or the exact GCP Console allowed-referrer list.
+
+## 2026-05-14 - Q8.3 / E8.5
+
+- Firebase Auth authorized-domain allowlist is not verifiable from repository source or `firebase hosting:sites:list`.
+- `localhost` removal from production Auth authorized domains remains unverified until Firebase Console inspection.
+- Before E8.5, the security checklist had only a generic authorized-domain review line, not a production allowlist or explicit `localhost` removal gate.
+
+## 2026-05-14 - Q8.1 / E8.6
+
+- Release doc/config drift was reduced, but not converted into live release proof.
+- No deploy was attempted after adding the App Check build flag and CSP checklist updates.
+- Live channel freshness, App Check telemetry, and live route/perf probes remain unverified.
+
+## 2026-05-14 - Q8.5 / E8.7
+
+- The expected "CI is mostly absent" risk did not reproduce; the existing workflow already ran analyze/test/web build and Storage rules tests.
+- No workflow provides deploy automation, post-deploy live route smoke, Lighthouse/performance budgets, or explicit notification.
+- Branch protection cannot be verified from repository files.
+
+## 2026-05-14 - Q7.1 / E7.2
+
+- Build-artifact budgets now exist and pass, but they do not measure route resource count, Lighthouse score, TTI, or live Firebase Hosting compression/CDN behavior.
+- The largest JSON budget still permits `19.35 MB`; it is a regression gate, not proof that startup content loading is efficient.

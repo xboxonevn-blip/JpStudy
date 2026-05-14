@@ -3,6 +3,7 @@ import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:jpstudy/features/community/community_screen.dart';
 import 'package:jpstudy/features/design_lab/design_lab_screen.dart';
 import 'package:jpstudy/features/leaderboard/leaderboard_screen.dart';
+import 'package:jpstudy/features/legal/legal_document_screen.dart';
 import 'package:jpstudy/features/me/me_screen.dart';
 import 'package:jpstudy/features/me/screens/data_settings_screen.dart';
 import 'package:jpstudy/features/premium/premium_screen.dart';
@@ -71,6 +72,18 @@ StatefulShellBranch buildProfileBranch() {
         path: AppRoutePath.designLab,
         name: AppRouteName.designLab,
         builder: (context, state) => const DesignLabScreen(),
+      ),
+      GoRoute(
+        path: AppRoutePath.privacy,
+        name: AppRouteName.privacy,
+        builder: (context, state) =>
+            const LegalDocumentScreen(kind: LegalDocumentKind.privacy),
+      ),
+      GoRoute(
+        path: AppRoutePath.terms,
+        name: AppRouteName.terms,
+        builder: (context, state) =>
+            const LegalDocumentScreen(kind: LegalDocumentKind.terms),
       ),
     ],
   );

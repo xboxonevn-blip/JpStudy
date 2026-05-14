@@ -66,13 +66,45 @@ Current D5.Q5.2 streak docs: `D5-pedagogy/Q5.2-hypotheses.md`, `D5-pedagogy/Q5.2
 
 Current D5.Q5.3 XP/level docs: `D5-pedagogy/Q5.3-hypotheses.md`, `D5-pedagogy/Q5.3-experiment.md`, `D5-pedagogy/Q5.3-raw-output.md`, `D5-pedagogy/Q5.3-analysis.md`.
 
-Current blocker: Firebase CLI can see `jpstudy-v2`, but local `gcloud`/`bq` are unavailable, so GA4 BigQuery export readiness is not verified.
+Current D5.Q5.4 onboarding fork docs: `D5-pedagogy/Q5.4-hypotheses.md`, `D5-pedagogy/Q5.4-experiment.md`, `D5-pedagogy/Q5.4-raw-output.md`, `D5-pedagogy/Q5.4-analysis.md`.
+
+Current D5.Q5.5 mistake/ghost docs: `D5-pedagogy/Q5.5-hypotheses.md`, `D5-pedagogy/Q5.5-experiment.md`, `D5-pedagogy/Q5.5-raw-output.md`, `D5-pedagogy/Q5.5-analysis.md`.
+
+Current D5.Q5.6 cross-skill prerequisite docs: `D5-pedagogy/Q5.6-hypotheses.md`, `D5-pedagogy/Q5.6-experiment.md`, `D5-pedagogy/Q5.6-raw-output.md`, `D5-pedagogy/Q5.6-analysis.md`.
+
+Current D6.Q6.1 card pattern docs: `D6-ui-ux/Q6.1-hypotheses.md`, `D6-ui-ux/Q6.1-experiment.md`, `D6-ui-ux/Q6.1-raw-output.md`, `D6-ui-ux/Q6.1-analysis.md`.
+
+Current D6.Q6.2 empty-state docs: `D6-ui-ux/Q6.2-hypotheses.md`, `D6-ui-ux/Q6.2-experiment.md`, `D6-ui-ux/Q6.2-raw-output.md`, `D6-ui-ux/Q6.2-analysis.md`.
+
+Current D6.Q6.3 loading-state docs: `D6-ui-ux/Q6.3-hypotheses.md`, `D6-ui-ux/Q6.3-experiment.md`, `D6-ui-ux/Q6.3-raw-output.md`, `D6-ui-ux/Q6.3-analysis.md`.
+
+Current D6.Q6.4 error-state docs: `D6-ui-ux/Q6.4-hypotheses.md`, `D6-ui-ux/Q6.4-experiment.md`, `D6-ui-ux/Q6.4-raw-output.md`, `D6-ui-ux/Q6.4-analysis.md`.
+
+Current D6.Q6.5 contrast docs: `D6-ui-ux/Q6.5-hypotheses.md`, `D6-ui-ux/Q6.5-experiment.md`, `D6-ui-ux/Q6.5-raw-output.md`, `D6-ui-ux/Q6.5-analysis.md`, plus required violation register `D6-contrast-audit.md`.
+
+Current D6.Q6.6 touch-target docs: `D6-ui-ux/Q6.6-hypotheses.md`, `D6-ui-ux/Q6.6-experiment.md`, `D6-ui-ux/Q6.6-raw-output.md`, `D6-ui-ux/Q6.6-analysis.md`.
+
+Current D6.Q6.7 dark-mode parity docs: `D6-ui-ux/Q6.7-hypotheses.md`, `D6-ui-ux/Q6.7-experiment.md`, `D6-ui-ux/Q6.7-raw-output.md`, `D6-ui-ux/Q6.7-analysis.md`.
+
+Current D7.Q7.1 performance baseline docs: `D7-performance/Q7.1-hypotheses.md`, `D7-performance/Q7.1-experiment.md`, `D7-performance/Q7.1-raw-output.md`, `D7-performance/Q7.1-analysis.md`. Build budget: `D7-performance/web_perf_budget.json`; command: `dart run tool/research/web_perf_budget_report.dart --build-root build/web --budget docs/research/D7-performance/web_perf_budget.json --fail-on-violation`.
+
+Current D8.Q8.1 compliance docs: `D8-compliance/Q8.1-hypotheses.md`, `D8-compliance/Q8.1-experiment.md`, `D8-compliance/Q8.1-raw-output.md`, `D8-compliance/Q8.1-analysis.md`.
+
+Current D8.Q8.2 API-key restriction docs: `D8-compliance/Q8.2-hypotheses.md`, `D8-compliance/Q8.2-experiment.md`, `D8-compliance/Q8.2-raw-output.md`, `D8-compliance/Q8.2-analysis.md`.
+
+Current D8.Q8.3 Auth authorized-domain docs: `D8-compliance/Q8.3-hypotheses.md`, `D8-compliance/Q8.3-experiment.md`, `D8-compliance/Q8.3-raw-output.md`, `D8-compliance/Q8.3-analysis.md`.
+
+Current D8.Q8.5 CI/CD docs: `D8-compliance/Q8.5-hypotheses.md`, `D8-compliance/Q8.5-experiment.md`, `D8-compliance/Q8.5-raw-output.md`, `D8-compliance/Q8.5-analysis.md`.
+
+Current D8.Q8.1 release-risk docs: `D8-release-risk/Q8.1-hypotheses.md`, `D8-release-risk/Q8.1-experiment.md`, `D8-release-risk/Q8.1-raw-output.md`, `D8-release-risk/Q8.1-analysis.md`.
+
+Current measurement status: BigQuery service-account auth and Job User access are available for `jpstudy-v2`. Use `tool/research/bigquery_runner.py` with `GOOGLE_APPLICATION_CREDENTIALS` set; the handoff key path was missing locally, while `C:\Users\xboxo\.config\gcp\jpstudy-v2-591716a5e835.json` matches the service account. GA4 dataset `analytics_536663906` may appear up to 24h after first export. Current local check found `firebase_sessions` dataset but zero tables and no matching `sessions_*` tables yet.
 
 Current content blocker: `tool/research/content_vi_status_report.dart` finds `1,886` explicit open-review items, including `1,744` grammar examples, plus `5,273` machine-origin vocab items without approval/open-review status. Q2.2 also found `4 / 4` sampled N1/N2 approved grammar explanations scored clarity `2/5`.
 
 Current D2 routing note: local Minna vocab route stops at N4, but N3-N1 have `ShinKanzen`/`hajimete`; do not market N3+ as Minna continuation.
 
-Current link graph blocker: grammar examples are mostly linked, but same-level vocab-to-kanji coverage is shallow; do not add prerequisite gating yet.
+Current link graph blocker: grammar examples are mostly linked, but vocab-to-kanji coverage remains too shallow for hard prerequisite gating. Cumulative lower-or-same-level kanji coverage fully covers only N1 `2483/6379`, N2 `1098/2991`, N3 `545/1786`, N4 `672/1719`, and N5 `549/1470` kanji-bearing vocab entries.
 
 Current scope blocker: cumulative vocab count is broad enough by rough JLPT targets, but cumulative N1 kanji is only `889 / 2,000`; do not claim full N1/N2 kanji scope.
 
@@ -90,13 +122,45 @@ Current D4.P5 blocker: N1 immersion content exists after root init, but direct a
 
 Current D4 synthesis blocker: P2-P5 all fail broad beta readiness. Universal priority is deploy/channel parity plus route-level level persistence; persona scope decisions follow immediately after.
 
-Current hosting parity note: `firebase.json` targets both `jpstudy-v2` and `jpstudy`; read-only Firebase channel check shows `jpstudy-v2` live last released `2026-05-13 01:32:40`, older than local `HEAD` `e468d6c7` (`2026-05-14T11:52:56+07:00`). No deploy has been attempted in this pass.
+Current hosting parity note: `firebase.json` targets both `jpstudy-v2` and `jpstudy`; read-only Firebase channel check shows `jpstudy-v2` live last released `2026-05-13 01:32:40 +07` and `jpstudy` live last released `2026-05-13 21:34:45 +07`, both older than local `HEAD` `aa5a2c44` (`2026-05-14T14:03:01+07:00`). No deploy has been attempted in this pass.
 
 Current D5.Q5.1 blocker: `FsrsService` is a legacy `17`-parameter FSRS-like scheduler, not current FSRS-6. New-card `Again`, `Hard`, and `Good` first intervals are `576`, `864`, and `3,456` minutes locally versus reference scheduler `1`, `5.5`, and `10` minutes; persisted SRS state has no FSRS learning/relearning state or step.
 
 Current D5.Q5.2 blocker: global streak is device-local-midnight only, has no freeze/grace/repair policy, can miss grammar-review credit, and `user_progress.day` is not unique/upserted. Treat streak as gamification display, not a reliable cross-skill retention signal.
 
 Current D5.Q5.3 blocker: XP is fragmented across modules and has no daily cap, diminishing-return, or visible account-XP policy. Learn and flashcard screens can show `+XP` without a discovered global `user_progress` write, while tests/games/challenges do write globally. Treat `todayXp` and level as partially populated gamification counters, not normalized learning effort.
+
+Current D5.Q5.4 blocker: onboarding captures only level and one broad goal, then most downstream surfaces ignore the goal. There is no exam date, daily-minute, cramming, travel/fun, news-reading, group-study, or text-size/accessibility fork. Treat onboarding as minimal setup, not persona personalization.
+
+Current D5.Q5.5 blocker: grammar ghost review has split sources of truth. The visible ghost provider uses `grammar_srs_state.ghostReviewsDue`, but ghost practice answers do not update that field, and "mark mastered" clears old `AttemptAnswer` data instead. Vocab/kanji mistake bank is a simple correct-streak queue, not a scheduler.
+
+Current D5.Q5.6 blocker: cross-skill prerequisite remediation is not product-ready. Scoped kanji practice exists through `KanjiPracticeArgs.kanjiIds`, but there is no policy that maps weak vocab/grammar items to missing prerequisites; use advisory suggestions only, not hard gates.
+
+Current D6.Q6.1 blocker: card surfaces have an implicit taxonomy, not a documented one. `AppSectionCard`/`AppFeatureCard`, `HomeSurface.softPanel`, and practice-specific panels all exist; avoid mass refactor, but document allowed surface families before adding more one-off cards.
+
+Current D6.Q6.2 blocker: empty states are locally implemented and uneven. `EmptyStateWidget` exists but has zero feature usages; primary no-data states should be visible/explanatory/actionable, while optional dashboard cards may collapse only after successful loaded-empty state.
+
+Current D6.Q6.3 blocker: loading states work but are uneven. `CircularProgressIndicator` appears `69` times across `53` files, only one structured skeleton was found, and six home/me loading branches collapse with `SizedBox.shrink()`. Primary blocking routes need localized visible loaders; optional panels need compact loading/error treatment before beta telemetry.
+
+Current D6.Q6.4 blocker: error handling has good primitives but uneven adoption. `ErrorStateWidget` has `13` feature usages, broad error/retry grep finds `269` matches in `69` files, at least eight sampled error branches collapse with `SizedBox.shrink()`, and Foundations/Grammar/Recall Sprint can show raw exception text.
+
+Current D6.Q6.5 blocker: contrast is acceptable for nav and core body text, but not for small helper/status text. Input hints are `2.57:1`, `ink 0.45` helper text is `2.79:1`, `AppStatusChip.warning` is `2.55:1`, and warning/success/info/error semantic foregrounds are not safe for normal-size text on light surfaces.
+
+Current D6.Q6.6 blocker: primary nav/quiz/grid targets mostly pass, but compact overrides break touch safety. Clear risks include discover reorder `28/34` shrink-wrapped icon, discover focus chip small `GestureDetector`, top-bar notification `36/40`, mistake delete `36`, library/practice `minimumSize: Size(0, 0)` action CTAs, lesson inline zero-constraint icons, and interactive `StarRating`.
+
+Current D6.Q6.7 blocker: dark mode is wired and focused tests pass, but it is not parity-ready. Dark `ThemeData` lacks several light-theme component families, `ThemeMode.system` is unsupported, hardcoded light surfaces remain in Grammar repair prompts and Design Lab, and only one route-level dark visual probe exists.
+
+Current D7.Q7.1 blocker: release web build passes and E7.2 added a reproducible build-artifact budget gate, but no Lighthouse score exists because local Lighthouse/Chrome tooling is missing. Current budget report passes with `main.dart.js` `6.27 MB` raw / `1.76 MB` gzip, total `build/web` `62.48 MB`, JSON assets `19.35 MB`; first local release load still observed `250` resources with broad grammar JSON fetching.
+
+Current D8.Q8.1 blocker: release readiness is gated by hygiene and parity, not build compilation alone. Focused route/layout smoke tests pass after a stale `/exam-center` smoke assertion was updated, but both Firebase live sites are older than current `HEAD`; GA4 event tables are still absent; no fresh deploy/live route/perf probe has been run. E8.6 patched the App Check build flag and CSP doc drift in `SHIPPING.md` and `docs/FIREBASE_SECURITY_CHECKLIST.md`.
+
+Current D8-compliance blocker: Privacy Policy / Terms route/link surface now has a minimal tested draft implementation, but it is not public-launch legal clearance. `/privacy` and `/terms` exist, VI+EN copy is present, and Settings/Data, Onboarding, and Login links are covered by focused tests. All copy remains marked `review-needed draft`; final legal review, support/contact details, and deletion-policy approval are still required.
+
+Current D8.Q8.2 status: web Firebase API key referrer restriction is currently passing for Identity Toolkit. Fake `https://evil.example/probe` referrer returns `403 API_KEY_HTTP_REFERRER_BLOCKED`; allowed Firebase Hosting referrers reach endpoint validation (`400 MISSING_ID_TOKEN`). `docs/FIREBASE_SECURITY_CHECKLIST.md` now records the repeatable non-mutating probe. Still manually verify GCP Console allowed-referrer list before public launch.
+
+Current D8.Q8.3 status: Auth authorized-domain source audit is measured but console-blocked for final proof. Source confirms `authDomain: jpstudy-v2.firebaseapp.com`; read-only Hosting CLI confirms `https://jpstudy-v2.web.app` and `https://jpstudy.web.app`. Repository docs now require removing `localhost` from production Auth authorized domains unless a time-boxed exception exists.
+
+Current D8.Q8.5 status: CI is stronger than assumed. GitHub Actions run UI string guard, `flutter analyze`, `flutter test`, release-like web build, D7 web performance budget, and Firebase Storage rules tests. E8.7 renamed the workflow to `CI`, changed web build to `flutter build web --release --base-href=/ --dart-define=JPSTUDY_RECAPTCHA_SITE_KEY=ci-placeholder`, and added the D7 budget report gate. Still missing: deploy workflow, live route smoke, Lighthouse budget, explicit notification, and branch-protection proof.
 
 ## Open Questions
 
@@ -114,6 +178,22 @@ Current D5.Q5.3 blocker: XP is fragmented across modules and has no daily cap, d
 - D5 status: Q5.1 measured; SRS scheduling is not FSRS-6-conformant and needs a state/step-aware scheduler decision before production SRS claims.
 - D5 status update: Q5.2 measured; streak policy/write paths need normalization before using streak in beta-retention interpretation.
 - D5 status update: Q5.3 measured; XP/level policy needs centralization before using XP for beta motivation analytics or competitive framing.
+- D5 status update: Q5.4 measured; onboarding needs a small profile/policy layer before claiming persona-specific first sessions or daily plans.
+- D5 status update: Q5.5 measured; grammar ghost state needs unification before using ghost practice as a reliable remediation loop.
+- D5 status update: Q5.6 measured; prerequisite logic should remain advisory until item-level dependency extraction, coverage labels, and telemetry exist.
+- D6 status: Q6.1 measured; visual card drift is manageable if the surface taxonomy is documented before more UI work.
+- D6 status update: Q6.2 measured; empty-state consistency needs a visible-primary vs optional-collapsible policy before broad UI polish.
+- D6 status update: Q6.3 measured; loading-state consistency needs a primary-blocking vs optional-panel policy before broad UI polish.
+- D6 status update: Q6.4 measured; error-state consistency needs severity rules before broad UI polish.
+- D6 status update: Q6.5 measured; contrast needs token-level fixes before claiming WCAG 2.1 AA.
+- D6 status update: Q6.6 measured; touch target consistency needs a `44x44` hitbox policy before claiming mobile/tablet accessibility readiness.
+- D6 status update: Q6.7 measured; dark mode can remain available, but route-level parity needs component-theme mirroring, light-surface cleanup, and broader dark tests.
+- D7 status: Q7.1 measured and partially tooled; build-artifact budget exists and passes, but performance readiness still needs Lighthouse/Playwright resource-count tooling plus a first-route content-loading budget.
+- D8 status: Q8.1 measured; shipping/security doc drift is patched, but before any beta deploy still run the full release gate, choose the deploy target explicitly, then rerun D4/D7 live probes.
+- D8 compliance status: Q8.1 measured and minimally implemented; Privacy/Terms routes, VI+EN draft copy, and links from Settings/Data, Onboarding, and Login exist, but final legal review remains required before public launch.
+- D8 compliance status update: Q8.2 measured; web API-key fake-referrer probe is blocked with `API_KEY_HTTP_REFERRER_BLOCKED`, but console restriction list still needs manual launch-gate review.
+- D8 compliance status update: Q8.3 measured; Auth authorized-domain final proof is manual Console work, and the security checklist now records the production-domain/localhost gate.
+- D8 compliance status update: Q8.5 measured and partially remediated; local CI gates plus build-artifact budget exist, but live/deploy/Lighthouse/notification gates remain open.
 
 ## Phase 0 Definition Of Done
 

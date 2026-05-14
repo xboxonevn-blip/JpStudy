@@ -75,3 +75,63 @@ Streak chi co nghia khi no tra loi ro "ngay nao duoc tinh la hoc". Neu tu vung t
 ## D5 / Q5.3
 
 XP chi la mot ngon ngu dong vien khi moi man hinh hieu no giong nhau. Neu Learn hien `+XP` nhung dashboard khong tang, con game/test lai tang, nguoi hoc se thay he thong khong cong bang va minh cung khong doc duoc `todayXp` nhu cong hoc. Vi vay truoc khi dung XP cho analytics hay leaderboard, app can mot chinh sach tien te ro: nguon nao la XP tai khoan, nguon nao chi la diem phien hoc, va gioi han nao ngan viec cay diem thay vi hoc.
+
+## D5 / Q5.4
+
+Onboarding ngan la tot neu no chi mo cua vao app. Nhung neu app dung cau tra loi do de hua "toi se hoc theo muc tieu cua ban", thi cau tra loi phai di tiep vao duong hoc dau tien, ke hoach ngay, va telemetry. Hien tai nguoi hoc chon JLPT, doc, hay viet, nhung phan lon he thong van hoi "cap do nao, co gi den han" thay vi "hom nay ban can on thi, doc tin, di du lich, hay hoc bang chu". Vi vay ca nhan hoa that can mot profile nho hon la them nhieu card chung.
+
+## D5 / Q5.5
+
+Sua loi chi work khi co mot so cai duy nhat noi "loi nay con hay da xong". Voi tu vung va kanji, so cai do la `user_mistakes`: sai thi tang so lan can sua, dung thi giam dan. Voi grammar, app dang co hai so cai: mot cai hien ghost, mot cai nut "da nam" xoa. Neu nguoi hoc lam dung ma ghost van con, cam giac khong phai la hoc kho ma la app khong tin minh. Truoc khi lam ghost thong minh hon, phai lam ghost dung mot nguon su that.
+
+## D5 / Q5.6
+
+Tien quyet hoc tap nen la loi khuyen truoc khi la cai khoa. App co the biet mot tu gom nhung chu kanji nao, va co the mo phien tap kanji theo danh sach ID. Nhung neu kho kanji chi bao phu tron ven khoang mot phan ba tu co kanji, khoa duong hoc se bien lo hong noi dung thanh loi hoc cua nguoi dung. Buoc dung hon la goi y "on may chu nay truoc", do nguoi hoc co chap nhan khong, roi xem lan thu lai co tot hon khong.
+
+## D6 / Q6.1
+
+Card khong can giong nhau het, nhung can biet minh dang dung loai nao. Man hinh hub can the thong tin lon va dep; trang chu can panel day du thong tin ma khong phinh; bai tap can o prompt/choice co mau trang thai. Neu khong dat ten ba ho nay, moi module se tu ve them mot kieu card moi va nguoi hoc phai hoc lai ngon ngu UI. Neu dat ten ro, khac biet tro thanh y do thay vi troi dat.
+
+## D6 / Q6.2
+
+Trang trong khong phai luc nao cung la loi. Neu khong co diem yeu nao, bien mat la on; neu khong co bai hoc vi data chua nap, bien mat lai lam nguoi hoc nghi app kem. Vi vay empty state can chia hai loai: cho noi dung chinh thi phai noi ro "khong co gi, vi sao, bam dau tiep"; cho panel phu thi chi duoc an khi da chac la trang thai tot. Cai quan trong la nguoi hoc phan biet duoc "da xong" voi "bi mat du lieu".
+
+## D6 / Q6.3
+
+Loading khong chi la cai vong tron cho dep. O man hinh chinh, no la loi hua rang app dang lam gi do cu the cho nguoi hoc: nap ngan hang cau hoi, nap deck dung cap, hay tinh ke hoach hom nay. Neu chi hien spinner, nguoi hoc khong biet cho cai gi; neu panel bien mat, ho khong biet la da xong hay bi mat du lieu. Vi vay loading state can theo muc do quan trong: route khoa phien hoc phai noi ro dang nap gi, panel phu co the yen lang hon nhung khong duoc giau loi.
+
+## D6 / Q6.4
+
+Loi can noi cho nguoi hoc biet nen lam gi tiep, khong phai noi stack trace. Neu bam on tap ma gap `Exception`, nguoi hoc khong co hanh dong nao ngoai thoat app; neu panel bien mat thi ho khong biet co loi. Loi nho sau mot hanh dong co the hien snackbar, nhung loi chan ca man hinh hoc can co thong diep than thien, nut thu lai, va neu can thi log rieng cho minh debug.
+
+## D6 / Q6.5
+
+Tuong phan khong chi la "nhin co dep khong"; no quyet dinh nguoi hoc co doc duoc loi giai thich nho hay khong. Chu chinh va menu dang on, nen app khong hong toan cuc. Diem yeu nam o chu phu: hint, caption, chip canh bao, nhan trang thai nho. Neu cac dong nay mo qua, nguoi hoc van thay man hinh dep nhung mat boi canh de quyet dinh buoc tiep theo. Vi vay sua dung la sua token nho truoc, khong doi ca theme.
+
+## D6 / Q6.6
+
+Nut nho khong phai luc nao cung sai; vung bam nho moi sai. App co the giu icon gon trong thanh cong cu, nhung hitbox phai van du lon cho ngon tay. Cac luong chinh nhu menu duoi, quiz, grid kanji dang tuong doi an toan. Loi nam o nhung noi minh co tinh "lam gon": shrinkWrap, constraint bang 0, nut 36px, chip tu ve. Vi vay chinh sach dung la them san 44px cho vung cham, khong phong to ca giao dien.
+
+## D6 / Q6.7
+
+Dark mode co hai muc: bat duoc va song duoc. App da bat duoc: theme co dark palette, setting luu duoc, test co qua. Nhung song duoc nghia la moi man hinh chinh deu khong co the sang bat ngo, input/button/chip co cung ngon ngu, va anh chup toi khong lam nguoi hoc bi lech mat. Hien tai dark mode la mot nen mong tot, chua phai loi hua parity.
+
+## D7 / Q7.1
+
+Performance khong chi la file JS to hay nho. Build web da qua, JS gzip chua phai tham hoa, nhung lan vao dau tien lai keo qua nhieu tai nguyen va nhieu file grammar. Neu nguoi hoc mo app tren mang yeu, moi file nho van thanh rat nhieu lan cho. Vi vay budget dau tien nen dem "route nay can bao nhieu request va bao nhieu JSON", khong chi dem tong MB cua build.
+
+## D8 / Q8.1
+
+Release readiness khong dong nghia voi "build duoc". Mot ban build co the qua, nhung live channel cu, tai lieu shipping sai flag App Check, CSP doc lech config, va smoke test cu van lam minh tin nham. Dung hon la xem release nhu mot hop dong: source nao dang len live, len target nao, build bang flag nao, test nao phai xanh, va sau deploy phai do lai route/perf tren dung URL.
+
+## D8 Compliance / Q8.1
+
+Quyen rieng tu va dieu khoan khong phai la file nam dau do trong repo; chung la mot phan cua hanh trinh nguoi dung. Neu nguoi hoc dang dang nhap Google, bat cloud backup, hay bat dau onboarding ma khong thay minh dong y voi gi va du lieu duoc dung ra sao, app khong co "consent surface". Sua dung la lam route va link nho, ro, do duoc bang test; noi dung phap ly co the can review rieng, nhung cai cua vao phai ton tai trong san pham truoc.
+
+Firebase API key restriction la mot lop chan o cua Google API, khac voi App Check. Neu key bi goi tu origin la, Google tra `API_KEY_HTTP_REFERRER_BLOCKED` truoc khi den logic Auth; neu origin hop le, request moi tiep tuc va co the loi binh thuong nhu `MISSING_ID_TOKEN`. Vi vay test dung la gui mot request khong tao user voi referrer gia: thay 403 thi biet lop key dang chan, nhung van phai giu App Check, Storage rules, quota va monitoring vi moi lop chan mot kieu abuse khac nhau.
+
+Auth authorized domains la hop dong giua Firebase Console va nhung origin duoc phep mo luong dang nhap. Source chi cho biet app dang mong doi domain nao; no khong chung minh Console da xoa `localhost` hay OAuth client da dung. Vi vay release gate phai co mot buoc manual ro rang: production project chi giu domain public can dung, local auth thi chuyen sang project dev.
+
+CI tot khong chi la "co test". No phai bao ve dung rui ro cua giai doan hien tai. Voi JpStudy, workflow da bat duoc loi source co ban: string guard, analyze, test, build web, storage rules. Nhung beta risk lai nam o live channel: build co dung flag App Check khong, deploy dung target khong, URL that co load dung route khong, perf co vuot budget khong. Vi vay CI nen tien hoa tu local gate sang release gate co target, budget va post-deploy probe.
+
+Perf budget dau tien khong can do tat ca. Neu Lighthouse chua chay duoc, van co the chan hoi quy bang nhung thu chac chan do duoc: `main.dart.js`, wasm, tong asset, tong JSON. Budget nay giong can nang: no khong noi nguoi hoc co cam thay nhanh khong, nhung no bao ngay khi app nang len bat thuong. Buoc tiep theo moi la do route that: bao nhieu request, bao nhieu JSON bi keo truoc khi can, va live CDN nen anh huong ra sao.

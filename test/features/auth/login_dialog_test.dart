@@ -1,4 +1,4 @@
-﻿import 'dart:async';
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -131,10 +131,7 @@ void main() {
       await _openDialog(tester);
 
       expect(find.text(AppLanguage.vi.loginDialogTitle), findsWidgets);
-      expect(
-        find.text(AppLanguage.vi.loginDialogSubtitle),
-        findsOneWidget,
-      );
+      expect(find.text(AppLanguage.vi.loginDialogSubtitle), findsOneWidget);
       expect(find.text(AppLanguage.vi.signInWithGoogleLabel), findsOneWidget);
       expect(find.text(AppLanguage.vi.orDividerLabel), findsOneWidget);
       expect(
@@ -217,7 +214,9 @@ void main() {
       await _pumpHost(tester, authService: fake);
       await _openDialog(tester);
 
-      await tester.tap(find.widgetWithText(ElevatedButton, AppLanguage.vi.loginSubmitLabel));
+      await tester.tap(
+        find.widgetWithText(ElevatedButton, AppLanguage.vi.loginSubmitLabel),
+      );
       await tester.pumpAndSettle();
       expect(find.text(AppLanguage.vi.loginEmptyFieldLabel), findsWidgets);
       expect(fake.emailCalls, 0);
@@ -236,7 +235,9 @@ void main() {
       final fields = find.byType(TextField);
       await tester.enterText(fields.at(0), 'user@example.com');
       await tester.enterText(fields.at(1), 'hunter2');
-      await tester.tap(find.widgetWithText(ElevatedButton, AppLanguage.vi.loginSubmitLabel));
+      await tester.tap(
+        find.widgetWithText(ElevatedButton, AppLanguage.vi.loginSubmitLabel),
+      );
       await tester.pumpAndSettle();
 
       expect(fake.emailCalls, 1);
@@ -259,7 +260,9 @@ void main() {
     final fields = find.byType(TextField);
     await tester.enterText(fields.at(0), 'user@example.com');
     await tester.enterText(fields.at(1), 'wrong');
-    await tester.tap(find.widgetWithText(ElevatedButton, AppLanguage.vi.loginSubmitLabel));
+    await tester.tap(
+      find.widgetWithText(ElevatedButton, AppLanguage.vi.loginSubmitLabel),
+    );
     await tester.pumpAndSettle();
 
     expect(find.text(AppLanguage.vi.authWrongPasswordLabel), findsWidgets);
@@ -279,7 +282,9 @@ void main() {
     final fields = find.byType(TextField);
     await tester.enterText(fields.at(0), 'missing@example.com');
     await tester.enterText(fields.at(1), 'hunter2');
-    await tester.tap(find.widgetWithText(ElevatedButton, AppLanguage.vi.loginSubmitLabel));
+    await tester.tap(
+      find.widgetWithText(ElevatedButton, AppLanguage.vi.loginSubmitLabel),
+    );
     await tester.pumpAndSettle();
 
     expect(find.text(AppLanguage.vi.authUserNotFoundLabel), findsWidgets);
@@ -339,6 +344,14 @@ void main() {
     expect(find.text('Sign in'), findsWidgets);
     expect(find.text('Sign in with Google'), findsOneWidget);
     expect(find.text('OR'), findsOneWidget);
+  });
+
+  testWidgets('English locale shows privacy and terms links', (tester) async {
+    await _pumpHost(tester, language: AppLanguage.en);
+    await _openDialog(tester);
+
+    expect(find.text('Privacy Policy'), findsOneWidget);
+    expect(find.text('Terms of Service'), findsOneWidget);
   });
 }
 

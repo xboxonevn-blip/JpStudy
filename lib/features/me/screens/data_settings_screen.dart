@@ -10,6 +10,7 @@ import 'package:jpstudy/core/auth/auth_provider.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 import 'package:jpstudy/features/home/providers/cloud_sync_status_provider.dart';
+import 'package:jpstudy/features/legal/legal_document_screen.dart';
 import 'package:jpstudy/features/me/providers/data_settings_controller.dart';
 
 class DataSettingsScreen extends ConsumerStatefulWidget {
@@ -370,6 +371,8 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   introCard,
+                  const SizedBox(height: AppSpacing.lg),
+                  LegalDocumentLinks(language: language),
                   if (!settings.isReady) ...[
                     const SizedBox(height: AppSpacing.lg),
                     const LinearProgressIndicator(minHeight: 3),
@@ -390,6 +393,8 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 introCard,
+                const SizedBox(height: AppSpacing.lg),
+                LegalDocumentLinks(language: language),
                 if (!settings.isReady) ...[
                   const SizedBox(height: AppSpacing.lg),
                   const LinearProgressIndicator(minHeight: 3),

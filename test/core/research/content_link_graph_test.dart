@@ -112,4 +112,86 @@ void main() {
     expect(n5.grammarExampleGroupsMatchedToPoint, 1);
     expect(n5.grammarExampleSentences, 3);
   });
+
+  test(
+    'counts cumulative lower-level kanji coverage for vocab prerequisites',
+    () async {
+      final tempDir = await Directory.systemTemp.createTemp('jpstudy_links_');
+      addTearDown(() async {
+        if (await tempDir.exists()) {
+          await tempDir.delete(recursive: true);
+        }
+      });
+      final root = Directory('${tempDir.path}/content');
+
+      await File('${root.path}/vocab/n3/core/lesson_01.json')
+          .create(recursive: true)
+          .then(
+            (file) => file.writeAsString(
+              jsonEncode({
+                'level': 'N3',
+                'entries': [
+                  {
+                    'lemma': {
+                      'term': '学校',
+                      'kanji': ['学', '校'],
+                    },
+                  },
+                  {
+                    'lemma': {
+                      'term': '新聞',
+                      'kanji': ['新', '聞'],
+                    },
+                  },
+                ],
+              }),
+            ),
+          );
+      await File('${root.path}/kanji/n5/lesson_01.json')
+          .create(recursive: true)
+          .then(
+            (file) => file.writeAsString(
+              jsonEncode({
+                'level': 'N5',
+                'entries': [
+                  {'character': '学'},
+                  {'character': '校'},
+                ],
+              }),
+            ),
+          );
+      await File('${root.path}/kanji/n4/lesson_01.json')
+          .create(recursive: true)
+          .then(
+            (file) => file.writeAsString(
+              jsonEncode({
+                'level': 'N4',
+                'entries': [
+                  {'character': '聞'},
+                ],
+              }),
+            ),
+          );
+      await File('${root.path}/kanji/n3/lesson_01.json')
+          .create(recursive: true)
+          .then(
+            (file) => file.writeAsString(
+              jsonEncode({
+                'level': 'N3',
+                'entries': [
+                  {'character': '新'},
+                ],
+              }),
+            ),
+          );
+
+      final report = ContentLinkGraphBuilder.scan(root);
+      final n3 = report.level('N3');
+
+      expect(n3.vocabEntriesFullyCoveredByKanjiDataset, 0);
+      expect(n3.vocabEntriesFullyCoveredByCumulativeKanjiDataset, 2);
+      expect(n3.cumulativeKanjiDatasetChars, 4);
+      expect(n3.vocabKanjiCharsCoveredByCumulativeKanji, 4);
+    },
+  );
 }
