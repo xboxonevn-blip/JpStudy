@@ -6927,6 +6927,9 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  // Onboarding flow + Kana gating.
+  String get chooseLanguageTitle => onboardingChooseLanguageTitle;
+
   String get onboardingChooseLanguageSubtitle {
     switch (this) {
       case AppLanguage.en:
@@ -6959,6 +6962,8 @@ extension AppLanguageLabels on AppLanguage {
         return 'JLPTレベルを選んでください';
     }
   }
+
+  String get chooseLevelTitle => onboardingLevelTitle;
 
   String get chooseLevelSubtitle {
     switch (this) {
@@ -7492,6 +7497,8 @@ extension AppLanguageLabels on AppLanguage {
         return '現在は$levelを学習中です。N5に切り替えると、ひらがな、カタカナ、漢越読みのヒントを学べます。';
     }
   }
+
+  String kanaLockedBodyTemplate(String level) => kanaLockedBody(level);
 
   String get kanaLockedSwitchAction {
     switch (this) {

@@ -53,4 +53,29 @@ void main() {
     expect(AppLanguage.en.reviewTermsDueLabel(1), '1 term due');
     expect(AppLanguage.en.reviewTermsDueLabel(2), '2 terms due');
   });
+
+  test('onboarding gate copy exists for all locales', () {
+    for (final language in AppLanguage.values) {
+      expect(language.chooseLanguageTitle, isNotEmpty);
+      expect(language.languageContinueAction, isNotEmpty);
+      expect(language.chooseLevelTitle, isNotEmpty);
+      expect(language.levelN5Tagline, isNotEmpty);
+      expect(language.levelN4Tagline, isNotEmpty);
+      expect(language.levelN3Tagline, isNotEmpty);
+      expect(language.levelN2Tagline, isNotEmpty);
+      expect(language.levelN1Tagline, isNotEmpty);
+      expect(language.levelStartAction, isNotEmpty);
+      expect(language.goalBannerTitle, isNotEmpty);
+      expect(language.goalJlptOption, isNotEmpty);
+      expect(language.goalReadOption, isNotEmpty);
+      expect(language.goalWriteOption, isNotEmpty);
+      expect(language.goalLaterAction, isNotEmpty);
+      expect(language.kanaLockedHeadline('N4'), contains('N4'));
+      expect(language.kanaLockedBodyTemplate('N4'), contains('N4'));
+      expect(language.kanaLockedSwitchAction, isNotEmpty);
+      expect(language.kanaLockedBackAction('N4'), contains('N4'));
+      expect(language.kanaSnackbarUnavailable('N4'), contains('N4'));
+      expect(language.kanaSnackbarSwitchAction, isNotEmpty);
+    }
+  });
 }

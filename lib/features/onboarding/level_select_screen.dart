@@ -71,7 +71,7 @@ class _LevelSelectScreenState extends ConsumerState<LevelSelectScreen> {
                   children: [
                     const Spacer(),
                     Text(
-                      language.onboardingLevelTitle,
+                      language.chooseLevelTitle,
                       style: TextStyle(
                         color: palette.ink,
                         fontSize: 28,

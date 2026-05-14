@@ -88,7 +88,7 @@ class _LanguageSelectScreenState extends ConsumerState<LanguageSelectScreen> {
                   children: [
                     const Spacer(),
                     Text(
-                      language.onboardingChooseLanguageTitle,
+                      language.chooseLanguageTitle,
                       style: TextStyle(
                         color: palette.ink,
                         fontSize: 28,

@@ -71,7 +71,7 @@ class KanaLockedScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: AppSpacing.sm),
                     Text(
-                      language.kanaLockedBody(levelLabel),
+                      language.kanaLockedBodyTemplate(levelLabel),
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: palette.ink.withValues(alpha: 0.70),
                         height: 1.35,
