@@ -3,9 +3,9 @@
 > Source of truth for project infrastructure. Read this FIRST before any
 > task that touches deployment, auth, billing, or external services.
 
-## Hosting sites (2 channels)
+## Hosting sites (primary + disabled default)
 
-JpStudy-v2 deploys to **two** Firebase Hosting sites in the same project:
+JpStudy-v2 deploys only to the primary Firebase Hosting site:
 
 | Site target | URL | Purpose |
 |---|---|---|
@@ -20,9 +20,9 @@ Deploy command:
 firebase deploy --only hosting:jpstudy
 ```
 
-When verifying live behaviour, check BOTH domains. CSP, App Check, and Auth
-authorized-domain config must include both. See `SHIPPING.md` for full
-release flow.
+When verifying live behaviour, check `https://jpstudy.web.app` as production.
+For hosting or security work, also confirm the disabled legacy URL still
+returns `404`. See `SHIPPING.md` for full release flow.
 
 ## Firebase / GCP identities
 
