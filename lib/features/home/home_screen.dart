@@ -217,8 +217,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     }
   }
 
-  void _setLevel(StudyLevel selected) {
-    ref.read(studyLevelProvider.notifier).state = selected;
+  Future<void> _setLevel(StudyLevel selected) async {
+    await setPersistedStudyLevel(ref, selected);
+    if (!mounted) {
+      return;
+    }
     if (selected != StudyLevel.n3 &&
         ref.read(appLanguageProvider) == AppLanguage.ja) {
       unawaited(

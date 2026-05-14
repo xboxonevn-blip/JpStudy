@@ -7,6 +7,7 @@ import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
+import 'package:jpstudy/core/onboarding_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
 
@@ -82,9 +83,11 @@ class KanaLockedScreen extends ConsumerWidget {
                       runSpacing: AppSpacing.sm,
                       children: [
                         FilledButton.icon(
-                          onPressed: () {
-                            ref.read(studyLevelProvider.notifier).state =
-                                StudyLevel.n5;
+                          onPressed: () async {
+                            await setPersistedStudyLevel(ref, StudyLevel.n5);
+                            if (!context.mounted) {
+                              return;
+                            }
                             context.go(AppRoutePath.foundations);
                           },
                           icon: const Icon(Icons.swap_horiz_rounded),

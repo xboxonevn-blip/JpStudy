@@ -14,6 +14,12 @@ const prefOnboardingGoalSkipUntil = 'onboarding.goal.skipUntil';
 /// null = still loading, false = show onboarding, true = show home
 final onboardingDoneProvider = StateProvider<bool?>((ref) => null);
 
+Future<void> setPersistedStudyLevel(WidgetRef ref, StudyLevel level) async {
+  ref.read(studyLevelProvider.notifier).state = level;
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setString(prefOnboardingLevel, level.name);
+}
+
 /// Reads SharedPreferences once on startup.
 /// Sets studyLevelProvider, studyGoalProvider, and onboardingDoneProvider.
 final appInitProvider = FutureProvider<void>((ref) async {

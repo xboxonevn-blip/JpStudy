@@ -183,8 +183,11 @@ class _MeScreenState extends ConsumerState<MeScreen> {
                 ChoiceChip(
                   label: Text(candidate.shortLabel),
                   selected: candidate == level,
-                  onSelected: (_) {
-                    ref.read(studyLevelProvider.notifier).state = candidate;
+                  onSelected: (_) async {
+                    await setPersistedStudyLevel(ref, candidate);
+                    if (!mounted) {
+                      return;
+                    }
                     if (candidate != StudyLevel.n3 &&
                         ref.read(appLanguageProvider) == AppLanguage.ja) {
                       unawaited(

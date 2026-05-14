@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
+import 'package:jpstudy/core/onboarding_provider.dart';
 import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/core/services/cloud_sync_service.dart';
 import 'package:jpstudy/core/theme_provider.dart';
@@ -65,6 +66,33 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));
     expect(find.text('Awards'), findsWidgets);
+    await tester.pumpWidget(Container());
+    for (var i = 0; i < 5; i++) {
+      await tester.pump(Duration.zero);
+    }
+  });
+
+  testWidgets('level chip updates provider and persists preference', (
+    tester,
+  ) async {
+    SharedPreferences.setMockInitialValues({
+      prefOnboardingLevel: StudyLevel.n5.name,
+      'foundations.kana.progress.hiragana': 'keep',
+    });
+    final prefs = await SharedPreferences.getInstance();
+    await tester.pumpWidget(buildMeScreen());
+    await tester.pump();
+
+    await tester.tap(find.widgetWithText(ChoiceChip, 'N4'));
+    await tester.pump();
+
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(MeScreen)),
+    );
+    expect(container.read(studyLevelProvider), StudyLevel.n4);
+    expect(prefs.getString(prefOnboardingLevel), StudyLevel.n4.name);
+    expect(prefs.getString('foundations.kana.progress.hiragana'), 'keep');
+
     await tester.pumpWidget(Container());
     for (var i = 0; i < 5; i++) {
       await tester.pump(Duration.zero);
