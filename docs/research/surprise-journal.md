@@ -271,3 +271,11 @@
 - Delta: -30 percentage points on confidence that switching to Wasm before live traces is low risk.
 - Updated belief: Wasm belongs on a preview channel until Firebase Hosting headers, browser matrix, and live perf are proven.
 - New hypothesis: release-channel stability matters more than renderer experimentation for the first controlled beta.
+
+## 2026-05-14T19:59:00+07:00 - Crashlytics dataset is not crash telemetry
+
+- Prior belief: the existing `firebase_crashlytics` BigQuery dataset might mean production crash monitoring was mostly Firebase-console setup.
+- Actual observation: the app has no `firebase_crashlytics` or `sentry_flutter` package, no `FlutterError.onError` / `PlatformDispatcher.instance.onError` hook, no source-map/symbol upload path, and no first-crash verification.
+- Delta: -60 percentage points on confidence that beta runtime failures will be visible automatically.
+- Updated belief: product analytics and Firebase-side datasets do not equal runtime error monitoring.
+- New hypothesis: adding a web-capable error sink before broad beta will catch more release regressions than another local-only smoke test.

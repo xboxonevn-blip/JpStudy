@@ -98,6 +98,8 @@ Current D8.Q8.2 API-key restriction docs: `D8-compliance/Q8.2-hypotheses.md`, `D
 
 Current D8.Q8.3 Auth authorized-domain docs: `D8-compliance/Q8.3-hypotheses.md`, `D8-compliance/Q8.3-experiment.md`, `D8-compliance/Q8.3-raw-output.md`, `D8-compliance/Q8.3-analysis.md`.
 
+Current D8.Q8.4 error-monitoring docs: `D8-compliance/Q8.4-hypotheses.md`, `D8-compliance/Q8.4-experiment.md`, `D8-compliance/Q8.4-raw-output.md`, `D8-compliance/Q8.4-analysis.md`.
+
 Current D8.Q8.5 CI/CD docs: `D8-compliance/Q8.5-hypotheses.md`, `D8-compliance/Q8.5-experiment.md`, `D8-compliance/Q8.5-raw-output.md`, `D8-compliance/Q8.5-analysis.md`.
 
 Current D8.Q8.1 release-risk docs: `D8-release-risk/Q8.1-hypotheses.md`, `D8-release-risk/Q8.1-experiment.md`, `D8-release-risk/Q8.1-raw-output.md`, `D8-release-risk/Q8.1-analysis.md`.
@@ -164,6 +166,8 @@ Current D8.Q8.2 status: web Firebase API key referrer restriction is currently p
 
 Current D8.Q8.3 status: Auth authorized-domain source audit is measured but console-blocked for final proof. Source confirms `authDomain: jpstudy-v2.firebaseapp.com`; read-only Hosting CLI confirms `https://jpstudy-v2.web.app` and `https://jpstudy.web.app`. Repository docs now require removing `localhost` from production Auth authorized domains unless a time-boxed exception exists.
 
+Current D8.Q8.4 status: production error monitoring is absent. The app has consent-gated Firebase Analytics, but no `firebase_crashlytics`, no `sentry_flutter`, no global `FlutterError.onError` / `PlatformDispatcher.instance.onError` hook, no source-map/symbol upload, and no first-crash verification. Recommended design is Sentry for web beta first, with Crashlytics deferred to Android/iOS distribution.
+
 Current D8.Q8.5 status: CI is stronger than assumed. GitHub Actions run UI string guard, `flutter analyze`, `flutter test`, release-like web build, D7 web artifact budget, D7 local web resource smoke, and Firebase Storage rules tests. E8.7 renamed the workflow to `CI`, changed web build to `flutter build web --release --base-href=/ --dart-define=JPSTUDY_RECAPTCHA_SITE_KEY=ci-placeholder`, and added D7 budget gates. Still missing: deploy workflow, live route smoke, Lighthouse budget on live URL, explicit notification, and branch-protection proof.
 
 ## Open Questions
@@ -197,6 +201,7 @@ Current D8.Q8.5 status: CI is stronger than assumed. GitHub Actions run UI strin
 - D8 compliance status: Q8.1 measured and minimally implemented; Privacy/Terms routes, VI+EN draft copy, and links from Settings/Data, Onboarding, and Login exist, but final legal review remains required before public launch.
 - D8 compliance status update: Q8.2 measured; web API-key fake-referrer probe is blocked with `API_KEY_HTTP_REFERRER_BLOCKED`, but console restriction list still needs manual launch-gate review.
 - D8 compliance status update: Q8.3 measured; Auth authorized-domain final proof is manual Console work, and the security checklist now records the production-domain/localhost gate.
+- D8 compliance status update: Q8.4 measured; product analytics exists, but runtime crash/error monitoring is not wired. Web beta needs Sentry-style error capture or an explicit accepted risk before launch.
 - D8 compliance status update: Q8.5 measured and partially remediated; local CI gates plus build-artifact and local resource-count budgets exist, but live/deploy/Lighthouse/notification gates remain open.
 
 ## Phase 0 Definition Of Done
