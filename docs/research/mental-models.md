@@ -160,3 +160,7 @@ Telemetry co hai cong tac rieng: quyen truy cap va dong du lieu. `SELECT 1` chun
 ## Kanji / Radical Headers
 
 Mot man hinh co the dung hai duong render cho cung mot khai niem. Filter chip "4 net" da di qua copy helper nen dung dau tieng Viet, con header group lai hardcode local nen thanh mojibake. Khi user thay mot cho dung mot cho sai, dung gia thuyet dau tien la "font" hay "data" chua du; phai trace tung duong chuoi. Quy tac tot hon: moi label lap lai nen co mot API copy chung, vi copy path chung chinh la test surface chung.
+
+## D4 / P2-P5 Live Re-Test 2026-05-15
+
+"Da co data" khong dong nghia voi "da mo cho nguoi hoc". Vocab live cho thay N4 co ca data, badge mo, CTA `Mo lane/Mo track`, va count that; N3/N2/N1 thi co card va ten track nhung van `Sap ra mat`, `Xem truoc`, `0 muc tu`, `0 Dang mo`. Vi vay moi tinh nang unlock can check bon lop rieng: content seed, catalog display, availability registry/CTA, va queue/review count. Thieu mot lop la nguoi hoc van thay bi khoa.

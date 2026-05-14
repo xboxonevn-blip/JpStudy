@@ -301,3 +301,11 @@
 - Actual observation: the stroke filter chips rendered `nét` correctly through `KanjiCopy`, while the radical group headers used separate hardcoded literals: `$strokeCount n?t` and `$count b? th?`.
 - Delta: same screen had two text paths with different quality; data cleanup alone would not touch the header mojibake.
 - Updated belief: dual render paths create dual bug surfaces. User-visible Vietnamese strings should route through `AppLanguage` or a feature copy layer, not local hardcoded literals.
+
+## 2026-05-15T03:31:00+07:00 - Vocab unlock has separate data and availability gates
+
+- Prior belief: after the T3 vocab-unlock work, data-backed N3/N2/N1 tracks would be open enough for P2/P3/P5 live UAT.
+- Actual observation: clean live onboarding shows N4 open (`Hajimete` 632 terms, `Minna II` 1,478 terms), but N3/N2/N1 still report `0 mục từ`, `0 Đang mở`, and cards remain `Sắp ra mắt` / `Xem trước`.
+- Delta: -50 percentage points on confidence that content seeding alone controls vocab readiness.
+- Updated belief: vocab readiness has at least four gates: seeded content, catalog visibility, availability/CTA state, and review queue counts.
+- New hypothesis: the availability registry or level whitelist was only opened for N4, while upper-level data remains visible but disabled.

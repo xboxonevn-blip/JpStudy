@@ -2,6 +2,27 @@
 
 Commit: `e468d6c7`
 
+## 2026-05-15 Live Re-Test Addendum
+
+Evidence:
+- `tests/uat-p2-2026-05-15/`
+- `tests/uat-p3-2026-05-15/`
+- `tests/uat-p4-2026-05-15/`
+- `tests/uat-p5-2026-05-15/`
+
+Scope: clean live onboarding from empty storage, Vietnamese selection, level selection, home gate, non-N5 Kana hiding, `/#/foundations`, and `/#/vocab` unlock state.
+
+| Persona | Onboarding + level | Kana hidden | Foundations lock | Vocab unlock |
+| --- | --- | --- | --- | --- |
+| P2 Anh Tuấn N3 | PASS | PASS | PASS | FAIL - N3 still `Sắp ra mắt`, `0 mục từ`, `0 Đang mở` |
+| P3 Mai N2 | PASS | PASS | PASS | FAIL - N2 still `Sắp ra mắt`, `0 mục từ`, `0 Đang mở` |
+| P4 Bác Hùng N4 | PASS | PASS | PASS | PASS - N4 `Hajimete` 632 terms + `Minna II` 1,478 terms open |
+| P5 Sora N1 | PASS | PASS | PASS | FAIL - N1/N1+ cards still preview-only |
+
+Updated verdict: route-level onboarding/Kana gating is materially better after deploy, but the broad beta verdict stays FAIL. The biggest new blocker is that "vocab unlock" is not uniform: N4 is open, while N3/N2/N1 still look like preview catalog entries despite data-backed track labels.
+
+Next action: audit the vocab availability registry/track state separately from content seeding. Treat "data exists", "catalog visible", "CTA enabled", and "review queue count" as four separate gates.
+
 ## Verdict
 
 JpStudy-v2 is not ready for 100 real Vietnamese JLPT learners across N5-N1 for 30 days.
