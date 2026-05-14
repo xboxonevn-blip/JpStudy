@@ -55,13 +55,14 @@ void main() {
 
   Widget buildScreen({
     required bool? onboardingDone,
+    StudyLevel level = StudyLevel.n5,
     DashboardState dashboard = _kDashboard,
   }) => ProviderScope(
     overrides: [
       appLanguageProvider.overrideWith(
         (ref) => AppLanguageController.test(AppLanguage.en),
       ),
-      studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+      studyLevelProvider.overrideWith((ref) => level),
       onboardingDoneProvider.overrideWith((ref) => onboardingDone),
       appInitProvider.overrideWith((ref) async {}),
       databaseProvider.overrideWithValue(appDb),
@@ -95,6 +96,13 @@ void main() {
 
   void configureView(WidgetTester tester) {
     tester.view.physicalSize = const Size(1440, 2560);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+  }
+
+  void configureMobileView(WidgetTester tester) {
+    tester.view.physicalSize = const Size(390, 844);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
@@ -179,6 +187,30 @@ void main() {
       await tester.pumpWidget(buildScreen(onboardingDone: true));
       await pumpAndSettle(tester);
       expect(find.text('EN'), findsOneWidget);
+      await cleanUp(tester);
+    });
+
+    testWidgets('mobile home shows foundations card for N5', (tester) async {
+      configureMobileView(tester);
+      await tester.pumpWidget(
+        buildScreen(onboardingDone: true, level: StudyLevel.n5),
+      );
+      await pumpAndSettle(tester);
+
+      expect(find.text('Foundations'), findsOneWidget);
+      await cleanUp(tester);
+    });
+
+    testWidgets('mobile home hides foundations card for non-N5 levels', (
+      tester,
+    ) async {
+      configureMobileView(tester);
+      await tester.pumpWidget(
+        buildScreen(onboardingDone: true, level: StudyLevel.n4),
+      );
+      await pumpAndSettle(tester);
+
+      expect(find.text('Foundations'), findsNothing);
       await cleanUp(tester);
     });
 

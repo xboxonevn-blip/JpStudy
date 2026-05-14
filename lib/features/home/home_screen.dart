@@ -317,13 +317,14 @@ class _MobileHomeFallback extends StatelessWidget {
             AppFluidGrid(
               maxColumns: 2,
               children: [
-                _MobileHomeCard(
-                  icon: Icons.spa_rounded,
-                  title: _mobileFoundationsTitle(language),
-                  subtitle: _mobileFoundationsSubtitle(language),
-                  cta: _mobileStartLabel(language),
-                  onTap: context.openFoundations,
-                ),
+                if (level == StudyLevel.n5)
+                  _MobileHomeCard(
+                    icon: Icons.spa_rounded,
+                    title: _mobileFoundationsTitle(language),
+                    subtitle: _mobileFoundationsSubtitle(language),
+                    cta: _mobileStartLabel(language),
+                    onTap: context.openFoundations,
+                  ),
                 _MobileHomeCard(
                   icon: Icons.auto_awesome_rounded,
                   title: _mobilePlanTitle(language),
