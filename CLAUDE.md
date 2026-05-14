@@ -91,6 +91,36 @@ HTTP referrers, etc., always include all four:
 - Riverpod for state management.
 - `shared_preferences` persists user choice across reloads.
 
+### Git workflow policy (mandatory)
+
+**Commit directly to `main`. DO NOT create feature branches.**
+
+This is a solo-dev project. Branching (e.g. `codex/jpstudy-2026-05-15-sprint1`)
+adds merge overhead with zero review benefit. Workflow:
+
+```
+git checkout main         # ALWAYS work on main
+git add <files>           # stage specific files (NOT git add -A)
+git commit -m "type(scope): subject"  # Conventional Commits
+git push origin main      # push directly
+```
+
+Rules:
+- One commit = one logical change (still applies)
+- Conventional Commits subject ≤ 72 chars
+- KHÔNG `git checkout -b <branch>` — Codex/agents must NOT create
+  branches without explicit user request
+- KHÔNG mega-commit ("update" / "Big Update" / "WIP")
+- KHÔNG `git push --force` on main unless rollback explicitly requested
+- KHÔNG skip hooks (`--no-verify`)
+
+If sprint contains many commits, push each commit individually OR
+push in batch after sprint cluster — both fine, as long as branch
+stays `main`.
+
+Rollback strategy without branches: use `git revert <hash>` to
+back out a bad commit. Faster than branch-based rollback.
+
 ### Required env vars for full build
 
 | Variable | Source | Purpose |
