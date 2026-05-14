@@ -175,4 +175,16 @@ void main() {
     expect(find.textContaining('Foundations -'), findsOneWidget);
     await cleanUp(tester);
   });
+
+  testWidgets('shows textbook roadmap for upper-level learners', (
+    tester,
+  ) async {
+    configureView(tester);
+    await pumpHome(tester, StudyLevel.n3);
+
+    expect(find.text('Textbook roadmap'), findsOneWidget);
+    expect(find.textContaining('Hajimete N3'), findsWidgets);
+    expect(find.textContaining('Shin Kanzen N3'), findsWidgets);
+    await cleanUp(tester);
+  });
 }

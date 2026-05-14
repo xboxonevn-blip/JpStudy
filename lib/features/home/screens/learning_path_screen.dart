@@ -16,6 +16,7 @@ import 'package:jpstudy/features/common/widgets/japanese_background.dart';
 import 'package:jpstudy/features/foundations/providers/foundations_providers.dart';
 import 'package:jpstudy/features/foundations/widgets/kana_review_due_card.dart';
 import 'package:jpstudy/features/home/home_copy.dart';
+import 'package:jpstudy/features/home/models/textbook_roadmap.dart';
 import 'package:jpstudy/features/kanji_hub/models/kanji_practice_args.dart';
 import 'package:jpstudy/features/home/providers/continue_provider.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
@@ -104,6 +105,10 @@ class LearningPathScreen extends ConsumerWidget {
         ),
       ),
     );
+    final textbookRoadmapPanel = Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 14),
+      child: _TextbookRoadmapPanel(language: language, level: level),
+    );
 
     return JapaneseBackground(
       child: SafeArea(
@@ -162,6 +167,10 @@ class LearningPathScreen extends ConsumerWidget {
                             .animate(delay: 60.ms)
                             .fadeIn(duration: 340.ms)
                             .slideY(begin: 0.06, end: 0),
+                        const SizedBox(height: 10),
+                        textbookRoadmapPanel
+                            .animate(delay: 90.ms)
+                            .fadeIn(duration: 320.ms),
                         const SizedBox(height: 10),
                         const DailySessionCard(compact: true)
                             .animate(delay: 120.ms)
@@ -224,6 +233,10 @@ class LearningPathScreen extends ConsumerWidget {
                       const DailyPlanCard()
                           .animate(delay: 60.ms)
                           .fadeIn(duration: 340.ms),
+                      const SizedBox(height: 12),
+                      textbookRoadmapPanel
+                          .animate(delay: 80.ms)
+                          .fadeIn(duration: 320.ms),
                       const SizedBox(height: 12),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -452,6 +465,190 @@ String _foundationsCtaLabel(AppLanguage language) => switch (language) {
   AppLanguage.vi => 'Bắt đầu với bảng chữ',
   AppLanguage.ja => 'かなから始める',
 };
+
+class _TextbookRoadmapPanel extends StatelessWidget {
+  const _TextbookRoadmapPanel({required this.language, required this.level});
+
+  final AppLanguage language;
+  final StudyLevel level;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+    final roadmap = textbookRoadmapForLevel(level);
+
+    return AppSectionCard(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AppSectionHeader(
+            title: language.textbookRoadmapTitle(),
+            caption: language.textbookRoadmapSubtitle(level.shortLabel),
+          ),
+          const SizedBox(height: 12),
+          for (final entry in roadmap.phases.indexed) ...[
+            if (entry.$1 > 0) const Divider(height: 20),
+            _TextbookPhaseRow(
+              language: language,
+              level: level,
+              phase: entry.$2,
+              phaseNumber: entry.$1 + 1,
+              color: _phaseColor(palette, entry.$1),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Color _phaseColor(AppThemePalette palette, int index) {
+    return switch (index % 4) {
+      0 => palette.primary,
+      1 => palette.accent,
+      2 => palette.secondary,
+      _ => palette.success,
+    };
+  }
+}
+
+class _TextbookPhaseRow extends StatelessWidget {
+  const _TextbookPhaseRow({
+    required this.language,
+    required this.level,
+    required this.phase,
+    required this.phaseNumber,
+    required this.color,
+  });
+
+  final AppLanguage language;
+  final StudyLevel level;
+  final TextbookRoadmapPhase phase;
+  final int phaseNumber;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    final palette = context.appPalette;
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: 36,
+          height: 36,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: color.withValues(alpha: 0.12),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: color.withValues(alpha: 0.2)),
+          ),
+          child: Text(
+            '$phaseNumber',
+            style: TextStyle(
+              color: color,
+              fontWeight: FontWeight.w900,
+              fontSize: 14,
+            ),
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Wrap(
+                spacing: 8,
+                runSpacing: 6,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  Text(
+                    language.textbookRoadmapPhaseLabel(phaseNumber),
+                    style: TextStyle(
+                      color: color,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  Text(
+                    language.textbookRoadmapDuration(phase.durationKey),
+                    style: TextStyle(
+                      color: palette.ink.withValues(alpha: 0.56),
+                      fontSize: 11,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 4),
+              Text(
+                language.textbookRoadmapPhaseTitle(phase.id, level.shortLabel),
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: palette.ink,
+                  fontWeight: FontWeight.w900,
+                  height: 1.2,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                language.textbookRoadmapPhaseDescription(
+                  phase.id,
+                  level.shortLabel,
+                ),
+                style: TextStyle(
+                  color: palette.ink.withValues(alpha: 0.68),
+                  fontSize: 12,
+                  height: 1.35,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 6,
+                runSpacing: 6,
+                children: [
+                  for (final key in phase.resourceKeys)
+                    _TextbookResourceChip(
+                      label: language.textbookRoadmapResourceLabel(key),
+                      color: color,
+                    ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _TextbookResourceChip extends StatelessWidget {
+  const _TextbookResourceChip({required this.label, required this.color});
+
+  final String label;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(color: color.withValues(alpha: 0.16)),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(
+          color: color,
+          fontSize: 10.5,
+          fontWeight: FontWeight.w800,
+          height: 1.15,
+        ),
+      ),
+    );
+  }
+}
 
 class _DojoHeroCard extends StatelessWidget {
   const _DojoHeroCard({

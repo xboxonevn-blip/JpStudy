@@ -207,4 +207,283 @@ extension HomeCopyX on AppLanguage {
     AppLanguage.vi => 'Mở hướng này',
     AppLanguage.ja => 'レーンを開く',
   };
+
+  String textbookRoadmapTitle() => switch (this) {
+    AppLanguage.en => 'Textbook roadmap',
+    AppLanguage.vi => 'Lộ trình theo giáo trình',
+    AppLanguage.ja => '教材ロードマップ',
+  };
+
+  String textbookRoadmapSubtitle(String levelCode) => switch (this) {
+    AppLanguage.en =>
+      '$levelCode path follows the books and drills actually shipped in JpStudy.',
+    AppLanguage.vi =>
+      'Lộ trình $levelCode bám theo giáo trình và bài luyện đang có thật trong JpStudy.',
+    AppLanguage.ja => '$levelCode は、JpStudy内で利用できる教材とドリルに沿って進みます。',
+  };
+
+  String textbookRoadmapPhaseLabel(int phaseNumber) => switch (this) {
+    AppLanguage.en => 'Phase $phaseNumber',
+    AppLanguage.vi => 'Giai đoạn $phaseNumber',
+    AppLanguage.ja => 'フェーズ$phaseNumber',
+  };
+
+  String textbookRoadmapDuration(String durationKey) => switch (durationKey) {
+    'n5_weeks_1_2' => switch (this) {
+      AppLanguage.en => 'Weeks 1-2',
+      AppLanguage.vi => 'Tuần 1-2',
+      AppLanguage.ja => '1-2週目',
+    },
+    'n5_weeks_3_6' => switch (this) {
+      AppLanguage.en => 'Weeks 3-6',
+      AppLanguage.vi => 'Tuần 3-6',
+      AppLanguage.ja => '3-6週目',
+    },
+    'n5_weeks_7_10' => switch (this) {
+      AppLanguage.en => 'Weeks 7-10',
+      AppLanguage.vi => 'Tuần 7-10',
+      AppLanguage.ja => '7-10週目',
+    },
+    'n5_weeks_11_12' => switch (this) {
+      AppLanguage.en => 'Weeks 11-12',
+      AppLanguage.vi => 'Tuần 11-12',
+      AppLanguage.ja => '11-12週目',
+    },
+    'n4_weeks_1_4' => switch (this) {
+      AppLanguage.en => 'Weeks 1-4',
+      AppLanguage.vi => 'Tuần 1-4',
+      AppLanguage.ja => '1-4週目',
+    },
+    'n4_weeks_5_8' => switch (this) {
+      AppLanguage.en => 'Weeks 5-8',
+      AppLanguage.vi => 'Tuần 5-8',
+      AppLanguage.ja => '5-8週目',
+    },
+    'n4_weeks_9_12' => switch (this) {
+      AppLanguage.en => 'Weeks 9-12',
+      AppLanguage.vi => 'Tuần 9-12',
+      AppLanguage.ja => '9-12週目',
+    },
+    'upper_month_1' => switch (this) {
+      AppLanguage.en => 'Month 1',
+      AppLanguage.vi => 'Tháng 1',
+      AppLanguage.ja => '1か月目',
+    },
+    'upper_month_2' => switch (this) {
+      AppLanguage.en => 'Month 2',
+      AppLanguage.vi => 'Tháng 2',
+      AppLanguage.ja => '2か月目',
+    },
+    'upper_month_3' => switch (this) {
+      AppLanguage.en => 'Month 3',
+      AppLanguage.vi => 'Tháng 3',
+      AppLanguage.ja => '3か月目',
+    },
+    'upper_mock_cycle' => switch (this) {
+      AppLanguage.en => 'Mock cycle',
+      AppLanguage.vi => 'Vòng luyện đề',
+      AppLanguage.ja => '模試サイクル',
+    },
+    'n1_immersion' => switch (this) {
+      AppLanguage.en => 'Ongoing',
+      AppLanguage.vi => 'Duy trì liên tục',
+      AppLanguage.ja => '継続',
+    },
+    _ => durationKey,
+  };
+
+  String textbookRoadmapPhaseTitle(String phaseId, String levelCode) =>
+      switch (phaseId) {
+        'n5_kana_kanji' => switch (this) {
+          AppLanguage.en => 'Kana mastery + first 50 kanji',
+          AppLanguage.vi => 'Làm chủ kana + 50 kanji đầu',
+          AppLanguage.ja => 'かな習得 + 最初の50漢字',
+        },
+        'n5_minna_1_12' => switch (this) {
+          AppLanguage.en => 'Minna I lessons 1-12',
+          AppLanguage.vi => 'Minna I bài 1-12',
+          AppLanguage.ja => 'みんな I 第1-12課',
+        },
+        'n5_minna_13_25' => switch (this) {
+          AppLanguage.en => 'Minna I lessons 13-25 + Hajimete N5',
+          AppLanguage.vi => 'Minna I bài 13-25 + Hajimete N5',
+          AppLanguage.ja => 'みんな I 第13-25課 + はじめてN5',
+        },
+        'n5_mock_review' => switch (this) {
+          AppLanguage.en => 'N5 mock exam + repair',
+          AppLanguage.vi => 'Đề N5 + vá điểm yếu',
+          AppLanguage.ja => 'N5模試 + 補強',
+        },
+        'n4_minna_26_37' => switch (this) {
+          AppLanguage.en => 'Minna II lessons 26-37',
+          AppLanguage.vi => 'Minna II bài 26-37',
+          AppLanguage.ja => 'みんな II 第26-37課',
+        },
+        'n4_minna_38_50' => switch (this) {
+          AppLanguage.en => 'Minna II lessons 38-50',
+          AppLanguage.vi => 'Minna II bài 38-50',
+          AppLanguage.ja => 'みんな II 第38-50課',
+        },
+        'n4_mock_reading' => switch (this) {
+          AppLanguage.en => 'N4 mock + reading practice',
+          AppLanguage.vi => 'Đề N4 + luyện đọc',
+          AppLanguage.ja => 'N4模試 + 読解練習',
+        },
+        _ when phaseId.endsWith('_vocab') => switch (this) {
+          AppLanguage.en => 'Hajimete $levelCode + Shin Kanzen vocabulary',
+          AppLanguage.vi => 'Hajimete $levelCode + Shin Kanzen từ vựng',
+          AppLanguage.ja => 'はじめて$levelCode + 新完全マスター語彙',
+        },
+        _ when phaseId.endsWith('_reading_listening_kanji') => switch (this) {
+          AppLanguage.en => 'Reading, listening, and kanji tracks',
+          AppLanguage.vi => 'Mạch đọc hiểu, nghe và kanji',
+          AppLanguage.ja => '読解・聴解・漢字トラック',
+        },
+        _ when phaseId.endsWith('_mock_repair') => switch (this) {
+          AppLanguage.en => '$levelCode mock exams + weak-area drill',
+          AppLanguage.vi => 'Đề $levelCode + luyện vùng yếu',
+          AppLanguage.ja => '$levelCode 模試 + 弱点補強',
+        },
+        _ when phaseId.endsWith('_retention') => switch (this) {
+          AppLanguage.en => 'Retention cycle',
+          AppLanguage.vi => 'Vòng giữ nhịp',
+          AppLanguage.ja => '定着サイクル',
+        },
+        'n1_immersion' => switch (this) {
+          AppLanguage.en => 'N1 immersion: news, long reads, manga',
+          AppLanguage.vi => 'N1 immersion: tin tức, bài đọc dài, manga',
+          AppLanguage.ja => 'N1多読: ニュース・長文・マンガ',
+        },
+        _ => phaseId,
+      };
+
+  String textbookRoadmapPhaseDescription(
+    String phaseId,
+    String levelCode,
+  ) => switch (phaseId) {
+    'n5_kana_kanji' => switch (this) {
+      AppLanguage.en =>
+        'Secure Hiragana/Katakana before grammar load increases.',
+      AppLanguage.vi =>
+        'Khóa chắc Hiragana/Katakana trước khi ngữ pháp bắt đầu dày lên.',
+      AppLanguage.ja => '文法量が増える前に、ひらがな・カタカナを固めます。',
+    },
+    'n5_minna_1_12' || 'n5_minna_13_25' => switch (this) {
+      AppLanguage.en =>
+        'Move through Minna I in order while adding vocabulary and kanji reviews.',
+      AppLanguage.vi =>
+        'Đi theo thứ tự Minna I, song song từ vựng và ôn kanji.',
+      AppLanguage.ja => 'みんなIを順番に進め、語彙と漢字レビューを並走します。',
+    },
+    'n4_minna_26_37' || 'n4_minna_38_50' => switch (this) {
+      AppLanguage.en =>
+        'Use Minna II as the spine, with Hajimete N4 vocabulary alongside it.',
+      AppLanguage.vi =>
+        'Lấy Minna II làm xương sống, đi kèm từ vựng Hajimete N4.',
+      AppLanguage.ja => 'みんなIIを軸に、はじめてN4語彙を並行します。',
+    },
+    _ when phaseId.endsWith('_vocab') => switch (this) {
+      AppLanguage.en =>
+        'Start $levelCode with vocabulary and grammar so reading drills have traction.',
+      AppLanguage.vi =>
+        'Mở $levelCode bằng từ vựng và ngữ pháp để bài đọc có nền.',
+      AppLanguage.ja => '$levelCode は語彙と文法から始め、読解の足場を作ります。',
+    },
+    _ when phaseId.endsWith('_reading_listening_kanji') => switch (this) {
+      AppLanguage.en =>
+        'Shift from item learning to skill lanes: reading, listening, kanji.',
+      AppLanguage.vi =>
+        'Chuyển từ học mục rời sang mạch kỹ năng: đọc, nghe, kanji.',
+      AppLanguage.ja => '単項目学習から、読解・聴解・漢字の技能レーンへ移ります。',
+    },
+    _
+        when phaseId.endsWith('_mock_repair') ||
+            phaseId == 'n5_mock_review' ||
+            phaseId == 'n4_mock_reading' =>
+      switch (this) {
+        AppLanguage.en =>
+          'Use mock results to choose review, writing, and weak-point repair.',
+        AppLanguage.vi =>
+          'Dùng kết quả đề để chọn phần ôn, viết và vá điểm yếu.',
+        AppLanguage.ja => '模試結果から、復習・書き取り・弱点補強を選びます。',
+      },
+    _ => switch (this) {
+      AppLanguage.en => 'Keep real Japanese input active after core drills.',
+      AppLanguage.vi =>
+        'Giữ đầu vào tiếng Nhật thật sau khi đã qua phần luyện chính.',
+      AppLanguage.ja => '主要ドリル後も、実際の日本語入力を続けます。',
+    },
+  };
+
+  String textbookRoadmapResourceLabel(String resourceKey) {
+    final level = RegExp(r'_n([1-5])').firstMatch(resourceKey)?.group(1);
+    final levelCode = level == null ? null : 'N$level';
+    return switch (resourceKey) {
+      'kana' => switch (this) {
+        AppLanguage.en => 'Hiragana + Katakana',
+        AppLanguage.vi => 'Hiragana + Katakana',
+        AppLanguage.ja => 'ひらがな + カタカナ',
+      },
+      'kanji_n5_core' => '50 N5 kanji',
+      'kanji_n5_plus' => '50 more N5 kanji',
+      'minna_i' || 'minna_i_l1_12' => 'Minna I L1-12',
+      'minna_i_l13_25' => 'Minna I L13-25',
+      'minna_ii_l26_37' => 'Minna II L26-37',
+      'minna_ii_l38_50' => 'Minna II L38-50',
+      'hajimete_n4_ch1_10' => 'Hajimete N4 ch1-10',
+      'hajimete_n4_ch11_20' => 'Hajimete N4 ch11-20',
+      _ when resourceKey.startsWith('hajimete_') => 'Hajimete $levelCode',
+      _ when resourceKey.startsWith('shin_kanzen_') => _shinKanzenResourceLabel(
+        resourceKey,
+        levelCode ?? '',
+      ),
+      _ when resourceKey.startsWith('jlpt_') =>
+        '${levelCode ?? resourceKey.toUpperCase()} mock exam',
+      'n4_reading_practice' => 'N4 reading practice',
+      'weak_point_review' => switch (this) {
+        AppLanguage.en => 'Weak-point repair',
+        AppLanguage.vi => 'Vá điểm yếu',
+        AppLanguage.ja => '弱点補強',
+      },
+      'reading_replay' => switch (this) {
+        AppLanguage.en => 'Repeat reading',
+        AppLanguage.vi => 'Đọc lặp',
+        AppLanguage.ja => '再読',
+      },
+      'immersion_n1' => switch (this) {
+        AppLanguage.en => 'N1 news + manga immersion',
+        AppLanguage.vi => 'N1 tin tức + manga immersion',
+        AppLanguage.ja => 'N1ニュース + マンガ多読',
+      },
+      _ => resourceKey,
+    };
+  }
+
+  String _shinKanzenResourceLabel(String resourceKey, String levelCode) {
+    final track = switch (resourceKey.split('_').last) {
+      'vocab' => switch (this) {
+        AppLanguage.en => 'Vocabulary',
+        AppLanguage.vi => 'Từ vựng',
+        AppLanguage.ja => '語彙',
+      },
+      'grammar' => switch (this) {
+        AppLanguage.en => 'Grammar',
+        AppLanguage.vi => 'Ngữ pháp',
+        AppLanguage.ja => '文法',
+      },
+      'reading' => switch (this) {
+        AppLanguage.en => 'Reading',
+        AppLanguage.vi => 'Đọc hiểu',
+        AppLanguage.ja => '読解',
+      },
+      'listening' => switch (this) {
+        AppLanguage.en => 'Listening',
+        AppLanguage.vi => 'Nghe hiểu',
+        AppLanguage.ja => '聴解',
+      },
+      'kanji' => 'Kanji',
+      _ => resourceKey,
+    };
+    return 'Shin Kanzen $levelCode $track';
+  }
 }
