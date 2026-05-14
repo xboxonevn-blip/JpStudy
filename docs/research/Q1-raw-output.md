@@ -99,6 +99,38 @@ Missing data:
 Qualified ids: synthetic_16, synthetic_39
 ```
 
+## E1.3 Event Export Report Output
+
+Command:
+
+```text
+dart run tool\research\north_star_report.dart --events docs\research\fixtures\north-star-events-e1.3.json --window-start 2026-05-01T00:00:00.000Z
+```
+
+Output:
+
+```text
+# North Star Report
+
+Commit: `8387e4440ed26aaea5caf1d51abb6023d234df18`
+Seed: `jpstudy-phase0-ns-v1`
+
+NS: 2.00%
+Qualified users: 1 / 50
+Observed users: 2
+
+Gate passes:
+- SRS reviews >= 20: 1
+- N5 micro-quiz >= 70%: 1
+- Session quality >= 4/5: 2
+
+Missing data:
+- Micro-quiz: 0
+- Quality rating: 0
+
+Qualified ids: u1
+```
+
 ## Verification Output
 
 ```text
@@ -109,6 +141,72 @@ flutter test test\features\test\test_history_service_test.dart
 flutter test test\features\learn\learn_summary_screen_test.dart
 flutter test test\features\test\test_results_screen_test.dart
 flutter analyze lib test tool
+dart run tool\research\north_star_report.dart --events docs\research\fixtures\north-star-events-e1.3.json --window-start 2026-05-01T00:00:00.000Z
 ```
 
 All targeted tests passed. Scoped analyzer passed. Full `flutter analyze` failed only because it analyzes `node_modules/firebase-tools/templates/init/functions/dart/server.dart`, which references unavailable `firebase_functions`.
+
+## E1.4 GA4 Export Report Output
+
+Command:
+
+```text
+dart run tool\research\north_star_report.dart --ga4-events docs\research\fixtures\north-star-ga4-events-e1.4.json --window-start 2026-05-01T00:00:00.000Z
+```
+
+Output:
+
+```text
+Running build hooks...Running build hooks...# North Star Report
+
+Commit: `8387e4440ed26aaea5caf1d51abb6023d234df18`
+Seed: `jpstudy-phase0-ns-v1`
+
+NS: 2.00%
+Qualified users: 1 / 50
+Observed users: 2
+
+Gate passes:
+- SRS reviews >= 20: 1
+- N5 micro-quiz >= 70%: 1
+- Session quality >= 4/5: 2
+
+Missing data:
+- Micro-quiz: 0
+- Quality rating: 0
+
+Qualified ids: u1
+```
+
+## E1.4 Verification Output
+
+```text
+flutter test test\core\research\north_star_eval_test.dart test\tool\research\north_star_report_test.dart
+flutter analyze lib test tool
+```
+
+Both commands passed.
+
+## E1.5 Firebase/GCP CLI Readiness Output
+
+Commands:
+
+```text
+npx firebase projects:list --json
+npx firebase apps:list --project jpstudy-v2 --json
+Get-Command gcloud
+Get-Command bq
+npx firebase --help | Select-String -Pattern 'analytics|bigquery|extensions' -CaseSensitive:$false
+```
+
+Observed:
+
+```text
+Firebase CLI: 15.17.0
+Project visible: jpstudy-v2, projectNumber 129949648924, state ACTIVE
+Apps visible: android, ios, web, windows all ACTIVE
+Web measurement ids in source: G-PKT7ELMCHR, G-G60JCZHXX7
+gcloud: not recognized
+bq: not recognized
+Firebase CLI help: no analytics or bigquery command surfaced; only extensions matched
+```

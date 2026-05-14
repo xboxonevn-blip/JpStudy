@@ -293,25 +293,25 @@ String _templateLabel(AppLanguage language, _TemplateKind kind) {
     case _TemplateKind.kanjiDeck:
       return switch (language) {
         AppLanguage.en => 'Kanji deck',
-        AppLanguage.vi => 'Deck Kanji',
+        AppLanguage.vi => 'Bộ thẻ kanji',
         AppLanguage.ja => '?????',
       };
     case _TemplateKind.grammarDrill:
       return switch (language) {
         AppLanguage.en => 'Grammar drill',
-        AppLanguage.vi => 'B?i ng? ph?p',
+        AppLanguage.vi => 'Bài ngữ pháp',
         AppLanguage.ja => '?????',
       };
     case _TemplateKind.shadowing:
       return switch (language) {
         AppLanguage.en => 'Shadowing',
-        AppLanguage.vi => 'Luy?n shadowing',
+        AppLanguage.vi => 'Luyện shadowing',
         AppLanguage.ja => '???????',
       };
     case _TemplateKind.sprintPack:
       return switch (language) {
         AppLanguage.en => 'Sprint pack',
-        AppLanguage.vi => 'G?i sprint',
+        AppLanguage.vi => 'Gói sprint',
         AppLanguage.ja => '????????',
       };
   }
@@ -322,19 +322,19 @@ String _templateValue(AppLanguage language, _TemplateKind kind) {
     case _TemplateKind.kanjiDeck:
       return switch (language) {
         AppLanguage.en => '250 cards',
-        AppLanguage.vi => '250 th?',
+        AppLanguage.vi => '250 thẻ',
         AppLanguage.ja => '250?',
       };
     case _TemplateKind.grammarDrill:
       return switch (language) {
         AppLanguage.en => '12 sets',
-        AppLanguage.vi => '12 b?',
+        AppLanguage.vi => '12 bộ',
         AppLanguage.ja => '12???',
       };
     case _TemplateKind.shadowing:
       return switch (language) {
         AppLanguage.en => 'Audio-ready',
-        AppLanguage.vi => 'S?n ?m thanh',
+        AppLanguage.vi => 'Sẵn âm thanh',
         AppLanguage.ja => '????',
       };
     case _TemplateKind.sprintPack:

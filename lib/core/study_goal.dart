@@ -51,22 +51,22 @@ extension StudyGoalExtension on StudyGoal {
   String get _labelVi {
     switch (this) {
       case StudyGoal.jlpt:
-        return 'Luy?n thi JLPT';
+        return 'Luyện thi JLPT';
       case StudyGoal.reading:
-        return '??c ti?ng Nh?t';
+        return 'Đọc tiếng Nhật';
       case StudyGoal.writing:
-        return 'Luy?n vi?t';
+        return 'Luyện viết';
     }
   }
 
   String get _labelJa {
     switch (this) {
       case StudyGoal.jlpt:
-        return 'JLPT????';
+        return 'JLPT対策';
       case StudyGoal.reading:
-        return '??????';
+        return '日本語を読む';
       case StudyGoal.writing:
-        return '????';
+        return '書く練習';
     }
   }
 
@@ -84,9 +84,9 @@ extension StudyGoalExtension on StudyGoal {
   String get _descVi {
     switch (this) {
       case StudyGoal.jlpt:
-        return 'Chu?n b? k? thi N5, N4, N3, N2, N1';
+        return 'Chuẩn bị kỳ thi N5, N4, N3, N2, N1';
       case StudyGoal.reading:
-        return 'Manga, tin t?c, s?ch';
+        return 'Manga, tin tức, sách';
       case StudyGoal.writing:
         return 'Hiragana, Katakana, Kanji';
     }
@@ -95,11 +95,11 @@ extension StudyGoalExtension on StudyGoal {
   String get _descJa {
     switch (this) {
       case StudyGoal.jlpt:
-        return 'N5?N4?N3?N2?N1??????';
+        return 'N5・N4・N3・N2・N1の試験対策';
       case StudyGoal.reading:
-        return '?????????';
+        return 'マンガ、ニュース、本';
       case StudyGoal.writing:
-        return '????????????';
+        return 'ひらがな、カタカナ、漢字';
     }
   }
 }

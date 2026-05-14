@@ -30,6 +30,13 @@ class AnalyticsService {
     return _logEvent('auth_sign_in', {'provider': provider});
   }
 
+  Future<void> logOnboardingCompleted({
+    required String level,
+    required String goal,
+  }) {
+    return _logEvent('onboarding_completed', {'level': level, 'goal': goal});
+  }
+
   Future<void> logCloudUpload(String trigger) {
     return _logEvent('cloud_upload', {'trigger': trigger});
   }

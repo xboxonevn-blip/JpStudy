@@ -7,6 +7,7 @@ import 'package:jpstudy/app/theme/app_theme.dart';
 import 'package:jpstudy/core/analytics/analytics_consent_banner.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
+import 'package:jpstudy/core/onboarding_provider.dart';
 import 'package:jpstudy/core/theme_provider.dart';
 import 'package:jpstudy/core/web_locale.dart';
 
@@ -17,6 +18,7 @@ class App extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final language = ref.watch(appLanguageProvider);
     final themeMode = ref.watch(themeModeProvider);
+    ref.watch(appInitProvider);
     syncHtmlLang(language);
 
     return MaterialApp.router(

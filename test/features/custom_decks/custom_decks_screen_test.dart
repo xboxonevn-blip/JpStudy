@@ -134,6 +134,26 @@ void main() {
     expect(find.textContaining('title=Nhồi nhanh'), findsOneWidget);
   });
 
+  testWidgets('VI starter templates use accented Vietnamese glossary copy', (
+    tester,
+  ) async {
+    await tester.pumpWidget(_buildRouterScreen(language: AppLanguage.vi));
+    await _pump(tester);
+
+    await tester.ensureVisible(find.text('Mẫu khởi đầu'));
+    await _pump(tester);
+
+    expect(find.text('Bộ thẻ kanji'), findsOneWidget);
+    expect(find.text('Bài ngữ pháp'), findsOneWidget);
+    expect(find.text('Luyện shadowing'), findsOneWidget);
+    expect(find.text('Gói sprint'), findsOneWidget);
+    expect(find.text('250 thẻ'), findsOneWidget);
+    expect(find.text('12 bộ'), findsOneWidget);
+    expect(find.text('Sẵn âm thanh'), findsOneWidget);
+    expect(find.textContaining('?'), findsNothing);
+    expect(find.text('Deck Kanji'), findsNothing);
+  });
+
   testWidgets('Cram mode in JA language navigates with title=Night Cram', (
     tester,
   ) async {

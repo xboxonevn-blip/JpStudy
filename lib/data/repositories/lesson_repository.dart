@@ -945,7 +945,7 @@ class LessonRepository {
     required int endLesson,
   }) async {
     // Phase 1: ensure + seed each lesson sequentially (FK dependency within
-    // each lesson requires ordering: ensureLesson â†’ seedTermsIfEmpty).
+    // each lesson requires ordering: ensureLesson -> seedTermsIfEmpty).
     for (int lessonId = startLesson; lessonId <= endLesson; lessonId++) {
       final title = await getLessonTitle(lessonId, 'Lesson $lessonId');
       await ensureLesson(lessonId: lessonId, level: level, title: title);
@@ -2294,7 +2294,7 @@ class LessonRepository {
     );
 
     // Achievement: kanjiMaster — fires at milestones [10, 25, 50, 100].
-    // Only checked when this review crosses the Strong-tier threshold (â‰¥21 days
+    // Only checked when this review crosses the Strong-tier threshold (>=21 days
     // stability), so the DB query is skipped on weaker reviews.
     if (result.stability >= 21.0) {
       const milestones = [10, 25, 50, 100];
@@ -2700,7 +2700,7 @@ class LessonRepository {
   /// Records one SRS review result.
   /// XP awarded per review scales with confidence so users who recall well
   /// progress faster on the leaderboard/dashboard:
-  ///   Again (1) â†’ 2 XP  Hard (2) â†’ 3 XP  Good (3) â†’ 5 XP  Easy (4+) â†’ 7 XP
+  ///   Again (1) -> 2 XP  Hard (2) -> 3 XP  Good (3) -> 5 XP  Easy (4+) -> 7 XP
   /// The counter increment and XP delta are written in a single UPDATE to avoid
   /// a second round-trip and eliminate any interleave from rapid taps.
   Future<void> recordReview({required int quality}) async {

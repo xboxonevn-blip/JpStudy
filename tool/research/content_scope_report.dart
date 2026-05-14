@@ -1,0 +1,17 @@
+import 'dart:io';
+
+import 'package:jpstudy/core/research/content_scope_report.dart';
+
+void main(List<String> args) {
+  final root = Directory(
+    _optionalValue(args, '--content-root') ?? 'assets/data/content',
+  );
+  final report = ContentScopeReportBuilder.scan(root);
+  stdout.writeln(report.toMarkdown(contentRoot: root.path));
+}
+
+String? _optionalValue(List<String> args, String name) {
+  final index = args.indexOf(name);
+  if (index < 0 || index + 1 >= args.length) return null;
+  return args[index + 1];
+}

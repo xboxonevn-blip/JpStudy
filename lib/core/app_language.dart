@@ -278,7 +278,7 @@ extension AppLanguageLabels on AppLanguage {
   String termsCountLabel(int count) {
     switch (this) {
       case AppLanguage.en:
-        return '$count terms';
+        return '$count ${count == 1 ? 'term' : 'terms'}';
       case AppLanguage.vi:
         return '$count thu\u1eadt ng\u1eef';
       case AppLanguage.ja:
@@ -1095,7 +1095,7 @@ extension AppLanguageLabels on AppLanguage {
   String itemsCountLabel(int count) {
     switch (this) {
       case AppLanguage.en:
-        return '$count items';
+        return '$count ${count == 1 ? 'item' : 'items'}';
       case AppLanguage.vi:
         return '$count mục';
       case AppLanguage.ja:
@@ -1273,7 +1273,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Practice Kanji ($count)';
       case AppLanguage.vi:
-        return 'Luyện Kanji ($count)';
+        return 'Luyện kanji ($count)';
       case AppLanguage.ja:
         return '漢字を練習 ($count)';
     }
@@ -1570,7 +1570,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Kanji Meaning';
       case AppLanguage.vi:
-        return 'Ngh\u0129a Kanji';
+        return 'Ngh\u0129a kanji';
       case AppLanguage.ja:
         return '\u6f22\u5b57\u306e\u610f\u5473';
     }
@@ -1909,7 +1909,7 @@ extension AppLanguageLabels on AppLanguage {
   String handwritingStrokeShortLabel(int count) {
     switch (this) {
       case AppLanguage.en:
-        return '$count strokes';
+        return '$count ${count == 1 ? 'stroke' : 'strokes'}';
       case AppLanguage.vi:
         return '$count nét';
       case AppLanguage.ja:
@@ -2426,7 +2426,7 @@ extension AppLanguageLabels on AppLanguage {
   String handwritingStrokeCountLabel(int count) {
     switch (this) {
       case AppLanguage.en:
-        return 'Expected: $count strokes';
+        return 'Expected: $count ${count == 1 ? 'stroke' : 'strokes'}';
       case AppLanguage.vi:
         return 'Số nét: $count';
       case AppLanguage.ja:
@@ -2767,7 +2767,7 @@ extension AppLanguageLabels on AppLanguage {
   String itemsReviewedViaSrsLabel(int count) {
     switch (this) {
       case AppLanguage.en:
-        return '$count items reviewed via SRS';
+        return '$count ${count == 1 ? 'item' : 'items'} reviewed via SRS';
       case AppLanguage.vi:
         return '$count m\u1ee5c \u0111\u00e3 \u00f4n qua SRS';
       case AppLanguage.ja:
@@ -4010,7 +4010,7 @@ extension AppLanguageLabels on AppLanguage {
   String lessonCountLabel(int count) {
     switch (this) {
       case AppLanguage.en:
-        return '$count lessons';
+        return '$count ${count == 1 ? 'lesson' : 'lessons'}';
       case AppLanguage.vi:
         return '$count b\xe0i h\u1ecdc';
       case AppLanguage.ja:
@@ -4756,7 +4756,7 @@ extension AppLanguageLabels on AppLanguage {
   String learnTermsAvailableLabel(int count) {
     switch (this) {
       case AppLanguage.en:
-        return '$count terms available';
+        return '$count ${count == 1 ? 'term' : 'terms'} available';
       case AppLanguage.vi:
         return '$count từ có sẵn';
       case AppLanguage.ja:
@@ -4767,7 +4767,7 @@ extension AppLanguageLabels on AppLanguage {
   String testQuestionsAvailableLabel(int count) {
     switch (this) {
       case AppLanguage.en:
-        return '$count questions available';
+        return '$count ${count == 1 ? 'question' : 'questions'} available';
       case AppLanguage.vi:
         return '$count câu hỏi có sẵn';
       case AppLanguage.ja:
@@ -5361,7 +5361,7 @@ extension AppLanguageLabels on AppLanguage {
   String unansweredSubmitLabel(int count) {
     switch (this) {
       case AppLanguage.en:
-        return 'You have $count unanswered questions. Submit anyway?';
+        return 'You have $count unanswered ${count == 1 ? 'question' : 'questions'}. Submit anyway?';
       case AppLanguage.vi:
         return 'B\u1ea1n c\u00f2n $count c\u00e2u ch\u01b0a tr\u1ea3 l\u1eddi. V\u1eabn n\u1ed9p b\u00e0i?';
       case AppLanguage.ja:
@@ -5526,7 +5526,7 @@ extension AppLanguageLabels on AppLanguage {
   String termsNeedPracticeLabel(int count) {
     switch (this) {
       case AppLanguage.en:
-        return '$count terms need practice';
+        return '$count ${count == 1 ? 'term needs' : 'terms need'} practice';
       case AppLanguage.vi:
         return '$count từ cần ôn luyện';
       case AppLanguage.ja:
@@ -6480,7 +6480,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'No reading decks available.';
       case AppLanguage.vi:
-        return 'Ch\u01b0a c\u00f3 deck b\u00e0i \u0111\u1ecdc.';
+        return 'Ch\u01b0a c\u00f3 b\u1ed9 th\u1ebb b\u00e0i \u0111\u1ecdc.';
       case AppLanguage.ja:
         return '\u8aad\u89e3\u30c7\u30c3\u30ad\u304c\u3042\u308a\u307e\u305b\u3093\u3002';
     }
@@ -7030,7 +7030,7 @@ extension AppLanguageLabels on AppLanguage {
   String reviewTermsDueLabel(int count) {
     switch (this) {
       case AppLanguage.en:
-        return '$count terms due';
+        return '$count ${count == 1 ? 'term' : 'terms'} due';
       case AppLanguage.vi:
         return '$count từ đến hạn';
       case AppLanguage.ja:

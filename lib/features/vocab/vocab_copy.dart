@@ -23,7 +23,7 @@ extension VocabCopy on AppLanguage {
 
   String vocabActiveLaneLabel() => switch (this) {
     AppLanguage.en => 'Active lane',
-    AppLanguage.vi => 'Lane hiện tại',
+    AppLanguage.vi => 'Nhánh học hiện tại',
     AppLanguage.ja => '現在のレーン',
   };
 
@@ -35,19 +35,19 @@ extension VocabCopy on AppLanguage {
 
   String vocabReviewNowLabel() => switch (this) {
     AppLanguage.en => 'Review now',
-    AppLanguage.vi => 'Review ngay',
+    AppLanguage.vi => 'Ôn ngay',
     AppLanguage.ja => '今すぐ復習',
   };
 
   String vocabCompanionShortcutLabel() => switch (this) {
     AppLanguage.en => 'Open companion lane',
-    AppLanguage.vi => 'Mở lane đồng hành',
+    AppLanguage.vi => 'Mở nhánh học đồng hành',
     AppLanguage.ja => '補助レーンを開く',
   };
 
   String vocabReviewTitle(String levelCode) => switch (this) {
     AppLanguage.en => '$levelCode review',
-    AppLanguage.vi => 'Review $levelCode',
+    AppLanguage.vi => 'Ôn $levelCode',
     AppLanguage.ja => '$levelCode 復習',
   };
 
@@ -65,7 +65,7 @@ extension VocabCopy on AppLanguage {
 
   String vocabLiveCatalogTitle() => switch (this) {
     AppLanguage.en => 'Live catalog',
-    AppLanguage.vi => 'Catalog đang mở',
+    AppLanguage.vi => 'Danh mục đang mở',
     AppLanguage.ja => '利用可能なカタログ',
   };
 
@@ -77,7 +77,7 @@ extension VocabCopy on AppLanguage {
 
   String vocabPreviewCatalogTitle() => switch (this) {
     AppLanguage.en => 'Preview / roadmap',
-    AppLanguage.vi => 'Preview / lộ trình',
+    AppLanguage.vi => 'Xem trước / lộ trình',
     AppLanguage.ja => 'プレビュー / ロードマップ',
   };
 

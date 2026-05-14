@@ -22,7 +22,7 @@ A qualified beta user must satisfy all gates within a 14-day window:
 - SRS reviews: local Drift `user_progress.reviewed_count` aggregates by day; per-item state in `srs_state`, `grammar_srs_state`, `kanji_srs_state`, `kana_srs_state`.
 - Quiz accuracy: local Drift `test_sessions.score`; learn-session accuracy in `learn_sessions`.
 - Session quality: `session_quality_rated` logs from learn/test summaries; no local durable table yet.
-- Firebase Analytics: now has `srs_review_completed`, `n5_micro_quiz_completed`, and `session_quality_rated` in addition to learn/auth/sync events.
+- Firebase Analytics: now has `onboarding_completed`, `srs_review_completed`, `n5_micro_quiz_completed`, and `session_quality_rated` in addition to learn/auth/sync events.
 
 ## Real-User Measurement Gap
 

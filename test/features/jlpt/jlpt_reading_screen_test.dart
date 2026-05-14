@@ -48,6 +48,7 @@ void main() {
           appLanguageProvider.overrideWith(
             (ref) => AppLanguageController.test(AppLanguage.vi),
           ),
+          studyLevelProvider.overrideWith((ref) => StudyLevel.n3),
         ],
         child: const MaterialApp(home: JlptReadingScreen()),
       ),
@@ -56,10 +57,7 @@ void main() {
     await tester.pump();
     for (var i = 0; i < 20; i++) {
       await tester.pump(const Duration(milliseconds: 200));
-      if (find
-          .text('Chọn đoạn văn và hoàn thành trong thời gian mục tiêu.')
-          .evaluate()
-          .isNotEmpty) {
+      if (find.byIcon(Icons.play_arrow_rounded).evaluate().isNotEmpty) {
         break;
       }
     }
@@ -69,9 +67,15 @@ void main() {
       find.text('Chọn đoạn văn và hoàn thành trong thời gian mục tiêu.'),
       findsOneWidget,
     );
-
     await tester.pumpWidget(const SizedBox.shrink());
     await tester.pumpAndSettle();
+  });
+
+  test('JLPT reading meta pills render Vietnamese diacritics', () {
+    expect(jlptReadingQuestionCountPillLabel(AppLanguage.vi, 3), '3 câu');
+    expect(jlptReadingMinutesPillLabel(AppLanguage.vi, 9), '9 phút');
+    expect(jlptReadingQuestionCountPillLabel(AppLanguage.ja, 3), '3問');
+    expect(jlptReadingMinutesPillLabel(AppLanguage.ja, 9), '9分');
   });
 
   testWidgets('JlptReadingScreen follows the selected JLPT track', (
@@ -92,7 +96,7 @@ void main() {
     await tester.pump();
     for (var i = 0; i < 20; i++) {
       await tester.pump(const Duration(milliseconds: 200));
-      if (find.text('N4 track').evaluate().isNotEmpty) {
+      if (find.byIcon(Icons.play_arrow_rounded).evaluate().isNotEmpty) {
         break;
       }
     }

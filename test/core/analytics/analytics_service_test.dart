@@ -33,6 +33,7 @@ void main() {
     await service.logSignIn('google');
     await service.logCloudUpload('auto');
     await service.logCloudDownload();
+    await service.logOnboardingCompleted(level: 'N5', goal: 'jlpt');
     await service.logSrsReviewCompleted(
       itemType: 'vocab',
       rating: 3,
@@ -41,7 +42,10 @@ void main() {
     await service.logN5MicroQuizCompleted(correctCount: 7, totalCount: 10);
     await service.logSessionQualityRated(mode: 'review', rating: 4);
 
-    expect(fake.events, hasLength(8));
+    expect(fake.events, hasLength(9));
+    expect(fake.events, contains('onboarding_completed'));
+    final onboardingIndex = fake.events.indexOf('onboarding_completed');
+    expect(fake.params[onboardingIndex], {'level': 'N5', 'goal': 'jlpt'});
     expect(fake.events, contains('srs_review_completed'));
     expect(fake.events, contains('n5_micro_quiz_completed'));
     expect(fake.events, contains('session_quality_rated'));

@@ -266,7 +266,7 @@ class HomeMockExamScreen extends ConsumerWidget {
         : 'mock_${suffix}_$levelLabel';
     final storage = ref.read(sessionStorageProvider);
 
-    // Fire vocab fetch and resume-session load concurrently Ã¢â‚¬â€ independent.
+    // Fire vocab fetch and resume-session load concurrently; they are independent.
     final combinedFuture = () async {
       final vocabFuture = repo.getVocabByLevel(levelLabel);
       final resumeFuture = storage.loadTestSession(sessionKey);

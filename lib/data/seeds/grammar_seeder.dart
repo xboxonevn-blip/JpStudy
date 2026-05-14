@@ -62,11 +62,11 @@ class GrammarSeeder {
     await prefs.setInt(kKeyGrammarVersion, kGrammarDataVersion);
     stopwatch.stop();
     debugPrint(
-      'âœ… Grammar Seed Completed in ${stopwatch.elapsedMilliseconds}ms. Version updated to $kGrammarDataVersion',
+      'Grammar Seed Completed in ${stopwatch.elapsedMilliseconds}ms. Version updated to $kGrammarDataVersion',
     );
   }
 
-  // â”€â”€ JSON loading (pure I/O, no DB) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // --- JSON loading (pure I/O, no DB) ---
 
   /// Loads all lesson JSON files for [level] concurrently.
   Future<List<_LessonData>> _loadLevelJson(String level, int start, int end) {
@@ -103,7 +103,7 @@ class GrammarSeeder {
     }
   }
 
-  // â”€â”€ DB seeding â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // --- DB seeding ---
 
   Future<void> _seedLevelFromData(
     String level,

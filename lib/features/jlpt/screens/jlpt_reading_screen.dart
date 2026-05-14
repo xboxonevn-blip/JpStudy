@@ -358,6 +358,7 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
                       : visiblePassages
                             .map((entry) => entry.recommendedMinutes)
                             .reduce((a, b) => a < b ? a : b);
+                  final compactWidth = MediaQuery.sizeOf(context).width < 600;
 
                   return ListView(
                     padding: const EdgeInsets.fromLTRB(
@@ -373,6 +374,7 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
                             subtitle: _intro(language),
                             hint: _seriousHint(language),
                             icon: Icons.menu_book_rounded,
+                            compact: compactWidth,
                             footer: Wrap(
                               spacing: AppSpacing.sm,
                               runSpacing: AppSpacing.sm,
@@ -479,16 +481,18 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
                           ),
                         )
                       else ...[
-                        _InlineNoticeCard(
-                          title: _tr(
-                            language,
-                            'Choose a focused reading set',
-                            'Chọn một bài đọc phù hợp',
-                            '集中して取り組むセットを選びましょう',
+                        if (!compactWidth) ...[
+                          _InlineNoticeCard(
+                            title: _tr(
+                              language,
+                              'Choose a focused reading set',
+                              'Chọn một bài đọc phù hợp',
+                              '集中して取り組むセットを選びましょう',
+                            ),
+                            message: _pickerGuideLabel(language),
                           ),
-                          message: _pickerGuideLabel(language),
-                        ),
-                        const SizedBox(height: AppSpacing.md),
+                          const SizedBox(height: AppSpacing.md),
+                        ],
                         LayoutBuilder(
                           builder: (context, constraints) {
                             final columns = constraints.maxWidth >= 1180
@@ -504,44 +508,27 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
                                 for (var i = 0; i < visiblePassages.length; i++)
                                   SizedBox(
                                     width: width,
-                                    child:
-                                        _ReadingPassageCard(
-                                              title: visiblePassages[i].title,
-                                              level: visiblePassages[i].level,
-                                              questionCount: visiblePassages[i]
-                                                  .questions
-                                                  .length,
-                                              recommendedMinutes:
-                                                  visiblePassages[i]
-                                                      .recommendedMinutes,
-                                              preview: _passagePreview(
-                                                visiblePassages[i],
-                                              ),
-                                              language: language,
-                                              previewLabel: _previewLabel(
-                                                language,
-                                              ),
-                                              startHint: _startHintLabel(
-                                                language,
-                                              ),
-                                              questionTypes: _questionTypeTags(
-                                                language,
-                                                visiblePassages[i],
-                                              ),
-                                              buttonLabel: _startLabel(
-                                                language,
-                                              ),
-                                              onTap: () => _startPassage(
-                                                visiblePassages[i],
-                                              ),
-                                            )
-                                            .animate(
-                                              delay: Duration(
-                                                milliseconds: 120 + (i * 45),
-                                              ),
-                                            )
-                                            .fadeIn(duration: 280.ms)
-                                            .slideY(begin: 0.06, end: 0),
+                                    child: _ReadingPassageCard(
+                                      title: visiblePassages[i].title,
+                                      level: visiblePassages[i].level,
+                                      questionCount:
+                                          visiblePassages[i].questions.length,
+                                      recommendedMinutes:
+                                          visiblePassages[i].recommendedMinutes,
+                                      preview: _passagePreview(
+                                        visiblePassages[i],
+                                      ),
+                                      language: language,
+                                      previewLabel: _previewLabel(language),
+                                      startHint: _startHintLabel(language),
+                                      questionTypes: _questionTypeTags(
+                                        language,
+                                        visiblePassages[i],
+                                      ),
+                                      buttonLabel: _startLabel(language),
+                                      onTap: () =>
+                                          _startPassage(visiblePassages[i]),
+                                    ),
                                   ),
                               ],
                             );
@@ -798,6 +785,7 @@ class _HeaderHero extends StatelessWidget {
     required this.subtitle,
     required this.hint,
     required this.icon,
+    this.compact = false,
     this.trailing,
     this.footer,
   });
@@ -807,6 +795,7 @@ class _HeaderHero extends StatelessWidget {
   final String subtitle;
   final String hint;
   final IconData icon;
+  final bool compact;
   final Widget? trailing;
   final Widget? footer;
 
@@ -814,7 +803,7 @@ class _HeaderHero extends StatelessWidget {
   Widget build(BuildContext context) {
     final palette = context.appPalette;
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(compact ? AppSpacing.lg : AppSpacing.xl),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -837,10 +826,10 @@ class _HeaderHero extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: const EdgeInsets.all(12),
+                padding: EdgeInsets.all(compact ? 10 : 12),
                 decoration: BoxDecoration(
                   color: Colors.white.withValues(alpha: 0.12),
-                  borderRadius: BorderRadius.circular(18),
+                  borderRadius: BorderRadius.circular(compact ? 16 : 18),
                   border: Border.all(
                     color: Colors.white.withValues(alpha: 0.16),
                   ),
@@ -865,7 +854,7 @@ class _HeaderHero extends StatelessWidget {
                     Text(
                       title,
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: compact ? 21 : 24,
                         fontWeight: FontWeight.w900,
                         color: Colors.white,
                       ),
@@ -885,18 +874,20 @@ class _HeaderHero extends StatelessWidget {
               if (trailing != null) ...[const SizedBox(width: 10), trailing!],
             ],
           ),
-          const SizedBox(height: 12),
-          Text(
-            hint,
-            style: TextStyle(
-              color: Colors.white.withValues(alpha: 0.78),
-              fontWeight: FontWeight.w600,
-              height: 1.4,
+          if (!compact) ...[
+            const SizedBox(height: 12),
+            Text(
+              hint,
+              style: TextStyle(
+                color: Colors.white.withValues(alpha: 0.78),
+                fontWeight: FontWeight.w600,
+                height: 1.4,
+              ),
             ),
-          ),
-          if (footer != null) ...[
-            const SizedBox(height: AppSpacing.md),
-            footer!,
+            if (footer != null) ...[
+              const SizedBox(height: AppSpacing.md),
+              footer!,
+            ],
           ],
         ],
       ),
@@ -904,25 +895,25 @@ class _HeaderHero extends StatelessWidget {
   }
 }
 
-String _questionCountPillLabel(AppLanguage language, int count) {
+String jlptReadingQuestionCountPillLabel(AppLanguage language, int count) {
   switch (language) {
     case AppLanguage.en:
       return '$count Q';
     case AppLanguage.vi:
-      return '$count c?u';
+      return '$count câu';
     case AppLanguage.ja:
-      return '$count?';
+      return '$count問';
   }
 }
 
-String _minutesPillLabel(AppLanguage language, int minutes) {
+String jlptReadingMinutesPillLabel(AppLanguage language, int minutes) {
   switch (language) {
     case AppLanguage.en:
       return '$minutes min';
     case AppLanguage.vi:
-      return '$minutes ph?t';
+      return '$minutes phút';
     case AppLanguage.ja:
-      return '$minutes?';
+      return '$minutes分';
   }
 }
 
@@ -1048,16 +1039,34 @@ class _ReadingPassageCard extends StatelessWidget {
             runSpacing: AppSpacing.sm,
             children: [
               _MetaPill(
-                label: _questionCountPillLabel(language, questionCount),
+                label: jlptReadingQuestionCountPillLabel(
+                  language,
+                  questionCount,
+                ),
                 color: palette.secondary,
               ),
               _MetaPill(
-                label: _minutesPillLabel(language, recommendedMinutes),
+                label: jlptReadingMinutesPillLabel(
+                  language,
+                  recommendedMinutes,
+                ),
                 color: palette.info,
               ),
               for (final type in questionTypes.take(3))
                 _MetaPill(label: type, color: palette.accent),
             ],
+          ),
+          const SizedBox(height: AppSpacing.md),
+          SizedBox(
+            width: double.infinity,
+            child: FilledButton.icon(
+              onPressed: onTap,
+              icon: const Icon(Icons.play_arrow_rounded),
+              label: Text(buttonLabel),
+              style: FilledButton.styleFrom(
+                minimumSize: const Size.fromHeight(48),
+              ),
+            ),
           ),
           const SizedBox(height: AppSpacing.md),
           Container(
@@ -1092,18 +1101,6 @@ class _ReadingPassageCard extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
-          ),
-          const SizedBox(height: AppSpacing.md),
-          SizedBox(
-            width: double.infinity,
-            child: FilledButton.icon(
-              onPressed: onTap,
-              icon: const Icon(Icons.play_arrow_rounded),
-              label: Text(buttonLabel),
-              style: FilledButton.styleFrom(
-                minimumSize: const Size.fromHeight(48),
-              ),
             ),
           ),
         ],

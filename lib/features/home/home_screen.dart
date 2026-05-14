@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
 import 'package:jpstudy/app/theme/app_breakpoints.dart';
+import 'package:jpstudy/core/analytics/analytics_provider.dart';
 import 'package:jpstudy/features/foundations/screens/kana_table_screen.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/gamification/level_calculator.dart';
@@ -233,6 +234,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     await prefs.setBool(prefOnboardingCompleted, true);
     await prefs.setString(prefOnboardingLevel, level.name);
     await prefs.setString(prefOnboardingGoal, goal.name);
+    unawaited(
+      ref
+          .read(analyticsServiceProvider)
+          .logOnboardingCompleted(level: level.shortLabel, goal: goal.name),
+    );
     if (!mounted) {
       return;
     }
