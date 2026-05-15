@@ -8,7 +8,7 @@ Primary app URL: `https://jpstudy.web.app`
 
 ## 1. GitHub Actions Secret-Backed Deploy
 
-Status: completed on `main`; latest re-confirmed on commit `3cb00b1f`.
+Status: completed on `main`; latest re-confirmed on commit `ebb425a9`.
 
 Goal: prove `deploy-hosting` performs a real build/deploy/live-smoke/Lighthouse
 run on `main`, not only the skip-safe wrapper.
@@ -29,7 +29,7 @@ Operator note:
 Evidence recorded:
 
 - GitHub Actions run URL:
-  `https://github.com/xboxonevn-blip/JpStudy/actions/runs/25929278168`
+  `https://github.com/xboxonevn-blip/JpStudy/actions/runs/25930999698`
 - `deploy-hosting` job step list shows these steps `success`, not
   `skipped`:
   - `Build web for production`
@@ -39,7 +39,7 @@ Evidence recorded:
   - `Lighthouse live gate`
 - Primary URL status: `https://jpstudy.web.app` returns `200`.
 - Legacy URL status: `https://jpstudy-v2.web.app` returns `404`.
-- Local live resource smoke after deploy: `resourceCount=17`, `jsonCount=1`,
+- Local live resource smoke after deploy: `resourceCount=27`, `jsonCount=1`,
   `grammarResourceCount=0`, `violations=[]`.
 
 ## 2. Sentry First-Issue Proof
@@ -49,12 +49,12 @@ Goal: prove source-wired Sentry is operational in a deployed web build.
 Current status:
 
 - Source wiring and the disabled-by-default smoke trigger are deployed on
-  `main`; latest CI/deploy proof is `3cb00b1f`.
+  `main`; latest CI/deploy proof is `ebb425a9`.
 - Manual CI smoke path is available through GitHub Actions `workflow_dispatch`
   input `sentry_smoke=true`. When `JPSTUDY_SENTRY_DSN` is present, the workflow
   builds with `JPSTUDY_SENTRY_SMOKE_EVENT=true`, deploys, and opens
   `https://jpstudy.web.app/?sentry-smoke=1` in Chromium.
-- Repository Actions secrets rechecked on `2026-05-15T23:51+07:00` include
+- Repository Actions secrets rechecked on `2026-05-16T00:28+07:00` include
   `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, but not
   `JPSTUDY_SENTRY_DSN`.
 
@@ -151,6 +151,10 @@ Evidence to record:
   (`analyticsadmin.googleapis.com`) for project `129949648924`, grant the
   service account Analytics read access, then probe
   `properties/536663906/dataRetentionSettings`.
+- Codex rechecked the source-verifiable path on `2026-05-16T00:28+07:00`.
+  The GA4 Admin probe still returns `403` because the Admin API is disabled,
+  and the service account also receives `403 PERMISSION_DENIED` from Service
+  Usage when checking that API state. Owner Console/API action is still needed.
 
 ## 7. App Check Enforcement Proof
 
