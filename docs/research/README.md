@@ -32,7 +32,7 @@ Current D2.Q2.5 scope docs: `D2-content/Q2.5-hypotheses.md`, `D2-content/Q2.5-ex
 
 Current D2.Q2.6 kanji Unihan docs: `D2-content/Q2.6-hypotheses.md`, `D2-content/Q2.6-experiment.md`, `D2-content/Q2.6-raw-output.md`, `D2-content/Q2.6-analysis.md`
 
-Current D2 synthesis: `D2-content/D2-synthesis-2026-05-14.md`
+Current D2 synthesis: `D2-content/D2-synthesis-2026-05-15.md`
 
 Current D3.Q3.1 app-language docs: `D3-vietnamese/Q3.1-hypotheses.md`, `D3-vietnamese/Q3.1-experiment.md`, `D3-vietnamese/Q3.1-raw-output.md`, `D3-vietnamese/Q3.1-analysis.md`
 
@@ -116,7 +116,7 @@ Current mission completion audit: `mission-completion-audit-2026-05-15.md`.
 
 Current measurement status: BigQuery service-account auth and Job User access are available for `jpstudy-v2`. Use `npm run report:ga4-export -- --out output/research/ga4-export-status-latest.md` for the one-command dataset/event/funnel/NS/TTL/Admin-retention report; it wraps `tool/research/bigquery_rest_runner.js`, probes GA4 Admin retention with `analytics.readonly`, and uses `GOOGLE_APPLICATION_CREDENTIALS`. The matching key present in this workspace is `C:\Users\xboxo\.config\gcp\jpstudy-v2-591716a5e835.json`. On `2026-05-15T11:25+07:00`, `analytics_536663906` appeared in `asia-southeast1` with `events_20260514`; the first 48h sample had `4` observed users, `1` onboarded user, `0` first-SRS users, and real NS `0.00%`. BigQuery retention is proven at 60 days by dataset defaults and `events_20260514` expiration `2026-07-14T02:56:46.272Z`. The GA4 Admin retention probe currently returns `403` because `analyticsadmin.googleapis.com` is disabled for project `129949648924`. Real-user NS is no longer export-blocked, but the sample is too small and lacks post-onboarding learning events.
 
-Current content blocker: `tool/research/content_vi_status_report.dart` finds `1,886` explicit open-review items, including `1,744` grammar examples, plus `5,273` machine-origin vocab items without approval/open-review status. Q2.2 also found `4 / 4` sampled N1/N2 approved grammar explanations scored clarity `2/5`.
+Current content status: the 2026-05-15 D2 launch-readiness pass applied user-approved `vi-human-approved` metadata across the scanned N5-N1 editorial batch after spot-check acceptance. Fresh `tool/research/content_vi_status_report.dart` output scans `23,444` items with approval signals on all N5 `3,497`, N4 `3,376`, N3 `3,412`, N2 `4,770`, and N1 `8,389` items. N5/N4 have `0` open-review items and are the controlled-pilot launch tier. N3/N2/N1 still retain source/draft provenance where applicable (`100`, `764`, and `980` open-review provenance counts respectively), so the shipped N3+ draft-quality disclaimer should remain until those upper-level source tags are normalized.
 
 Current D2 routing note: local Minna vocab route stops at N4, but N3-N1 have `ShinKanzen`/`hajimete`; do not market N3+ as Minna continuation.
 
@@ -124,7 +124,7 @@ Current link graph blocker: grammar examples are mostly linked, but vocab-to-kan
 
 Current scope blocker: cumulative vocab count is broad enough by rough JLPT targets, but cumulative N1 kanji is only `889 / 2,000`; do not claim full N1/N2 kanji scope.
 
-Current upper-kanji metadata blocker: Q2.6 sampled N3/N2/N1 kanji found only `22 / 50` exact Unihan Han-Viet matches and `23 / 50` missing local Han-Viet values; do not present upper Han-Viet as fully trusted yet.
+Current upper-kanji metadata note: Q2.6 originally sampled N3/N2/N1 kanji and found only `22 / 50` exact Unihan Han-Viet matches plus `23 / 50` missing local Han-Viet values. The 2026-05-15 user-approved editorial batch now marks scanned upper kanji items as approved, but the cumulative N1 kanji scope is still `889 / 2,000`, so do not claim full N1/N2 kanji coverage.
 
 Current D3 blocker: UI Vietnamese is structurally present in `app_language.dart` (`680` returns per locale, no blanks), but `1,893` Vietnamese lines bypass it after excluding research helper code. Runtime Dart mojibake and docs decode errors are currently guarded at `0` hits. Q3.4 sampled `100` strings: `92/100` clean, `8/100` raw-English-term warnings. Q3.5 recommends no full ARB migration before beta: surface is `140` files and `5,219` `AppLanguage.en/vi/ja` references. Q3.6 found `41` raw English plural-risk strings and `0` ICU usage; central `AppLanguage` helpers were patched, leaving `31` feature-local matches.
 
@@ -195,8 +195,8 @@ Current D8.Q8.7 status: telemetry is acceptable only for closed beta with explic
 - Q5: What retention curve is plausible? Pending simulator.
 - Q6: Which personas beyond Linh? Pending qualitative design.
 - Q7: Smallest test vs Anki + free decks? Pending after measurement.
-- Q8: Is Vietnamese content safe enough for beta learners? Active; D2 says measured but not ready for broad mixed-level beta.
-- D2 status: measured but not ready; move to D3 editorial/i18n audit before D4 persona UAT.
+- Q8: Is Vietnamese content safe enough for beta learners? Active; D2 now supports a controlled N5/N4-heavy pilot, while N3+ remains tiered with draft/source provenance.
+- D2 status: launch-readiness pass complete for the user-approved N5-N1 editorial batch. N5/N4 are pilot launch-tier; N3+ stays available with disclaimer and source/provenance caveats.
 - D3 status: Q3.1-Q3.6 measured; D3 synthesis and targeted plural/glossary fixes pending.
 - D4 status: P2-P5 measured; D4 synthesis complete. Live channel parity and upper-vocab availability are improved, but broad beta still needs route-matrix confidence and explicit persona-scope limits.
 - D5 status: Q5.1 remediated at scheduler level; FSRS-6 state/step persistence and pinned learning intervals are implemented. Real learner calibration remains pending.

@@ -14,7 +14,7 @@ orientation.
 The product is not ready for a broad 100-user mixed N5-N1 public beta without
 caveats. It is closer to a controlled pilot because the highest-risk unknowns
 are now explicit: GA4 BigQuery event export has appeared but the first sample is
-too small for outcome claims, upper-level content has known review debt,
+too small for outcome claims, upper-level content still has source/provenance debt despite user-approved editorial metadata,
 legal/error-monitoring/deploy automation need live operational proof, and
 several advanced-persona promises remain out of scope.
 
@@ -23,7 +23,7 @@ several advanced-persona promises remain out of scope.
 | Dimension | Status | Current finding |
 | --- | --- | --- |
 | D1 Measurement | Complete, first real export sampled | `analytics_536663906.events_20260514` exists; first real NS is `0.00%` across `4` observed users, with no post-onboarding learning events yet. |
-| D2 Content | Complete, not broad-beta clean | Vocab scope is broad; upper kanji/radicals/Han-Viet metadata still need editorial review. |
+| D2 Content | Complete, controlled-pilot ready | N5/N4 are launch-tier after user-approved editorial review; N3+ remains available with source/provenance caveats and the draft-quality disclaimer. |
 | D3 Vietnamese | Complete, targeted cleanup active | Mojibake guards are green and key user strings moved into `AppLanguage`; copy remains decentralized. |
 | D4 Personas | Complete, retested | Onboarding/level/Kana gates now pass in live re-test; upper vocab discoverability was the main residual blocker before the latest unlock work. |
 | D5 Pedagogy | Complete plus roadmap shipped | FSRS, streak, XP, ghost review, and prerequisite logic are documented as policy gaps; roadmap is source-aware and advisory. |
@@ -54,8 +54,8 @@ several advanced-persona promises remain out of scope.
 
 1. Real North Star reporting is no longer export-blocked, but the first sample
    is too small and lacks SRS/quiz/quality events.
-2. Content volume is high, but review quality is uneven; open-review grammar
-   examples and machine-origin vocab remain launch risks.
+2. Content volume is high, and N5/N4 are now launch-tier; upper-level
+   source/provenance tags remain a scope-management risk.
 3. Cumulative vocab scope does not imply kanji scope; N1 kanji is still far
    below rough 2,000-kanji target.
 4. Han-Viet and radical metadata need editorial treatment; Unihan helps with
@@ -88,7 +88,8 @@ several advanced-persona promises remain out of scope.
 
 1. `approved-by-user` grammar tags did not guarantee learner-ready Vietnamese.
 2. Vocab-kanji links are too sparse for hard prerequisite gates.
-3. FSRS scheduling is legacy and lacks learning/relearning step state.
+3. Real FSRS calibration still lacks beta outcome data even though the
+   scheduler now conforms to FSRS-6 learning intervals.
 4. Dark mode is functional but not route-level parity.
 5. Existing Firebase datasets do not equal product analytics or runtime error
    observability.
@@ -110,12 +111,12 @@ the remaining ops and content proofs land.
 
 1. When will the live export include SRS, micro-quiz, and session-quality rows
    from real beta users?
-2. Which top N5/N4 Vietnamese copy and grammar examples need human editorial
-   review before a controlled pilot?
+2. Which upper-level source/provenance tags should be normalized first after
+   the user-approved N5-N1 editorial batch?
 3. Can upper-level vocab availability and review queues be normalized so N3-N1
    users see real unlocked work rather than preview states?
-4. What is the smallest FSRS/state-machine change that makes new-card `Again`,
-   `Hard`, and `Good` learning steps sane?
+4. How should the FSRS-6 scheduler be calibrated once real beta SRS outcome
+   rows exist?
 5. What live Firebase Hosting Lighthouse/resource budgets should become
    blocking once deploy secrets are configured?
 6. What exact legal/support/deletion wording is approved for public launch?

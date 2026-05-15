@@ -13,8 +13,7 @@ resource/Lighthouse probes pass. Anonymous Auth is now enabled and live
 off until Firebase Storage is provisioned. Remaining blockers before the pilot
 are Firebase Storage setup, the first secret-backed GitHub deploy run, and real
 Sentry operational proof and a larger GA4 learning-event sample. Recruit N5/N4 first, then add scoped N3/N2
-testers only after upper vocab availability and review queues are verified on
-production.
+testers with the N3+ draft-quality disclaimer and source/provenance caveats.
 
 ## Highest-Leverage Findings Shipped
 
@@ -58,7 +57,8 @@ production.
 1. `approved-by-user` does not guarantee grammar explanation quality.
 2. Cumulative vocab volume does not imply N1/N2 kanji coverage.
 3. Vocab-kanji cross-links are too sparse for hard prerequisite gates.
-4. Current SRS logic is not FSRS-6-conformant and lacks learning-state steps.
+4. Real FSRS calibration is still unproven because beta SRS outcome rows are
+   not present yet.
 5. Crashlytics/Firebase datasets do not prove runtime error monitoring or
    product analytics readiness.
 
@@ -66,8 +66,8 @@ production.
 
 1. Phase 14-19 auth: account linking, soft upgrade UI, community gating, and
    cleanup functions.
-2. Editorial pass: N5/N4 learner-critical Vietnamese, grammar examples, radical
-   glosses, and upper Han-Viet blanks.
+2. Upper-level provenance cleanup: normalize N3/N2/N1 source/draft tags after
+   the user-approved N5-N1 editorial batch.
 3. Native release: Android/iOS Firebase App Check, package restrictions, and
    store-ready build pipelines.
 4. Performance: live Lighthouse/trace budgets, route-level resource budgets,
