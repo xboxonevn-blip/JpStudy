@@ -13,5 +13,5 @@ void main() {
     expect(result.stdout as String, contains('# FSRS Correctness Audit'));
     expect(result.stdout as String, contains('Blockers:'));
     expect(result.stdout as String, contains('- none'));
-  });
+  }, timeout: dartCliTestTimeout);
 }

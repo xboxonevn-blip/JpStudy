@@ -58,5 +58,6 @@ void main() {
         contains('Onboarding -> first SRS: 100.00%'),
       );
     },
+    timeout: dartCliTestTimeout,
   );
 }

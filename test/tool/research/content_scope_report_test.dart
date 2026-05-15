@@ -40,5 +40,5 @@ void main() {
     expect(result.exitCode, 0);
     expect(result.stdout as String, contains('# Content Scope Report'));
     expect(result.stdout as String, contains('| N5 | 1 | 0 | 0 | 0 |'));
-  });
+  }, timeout: dartCliTestTimeout);
 }

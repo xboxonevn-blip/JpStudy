@@ -64,20 +64,24 @@ void main() {
     expect(result.exitCode, 0);
     expect(result.stdout as String, contains('Qualified users: 1 / 50'));
     expect(result.stdout as String, contains('Observed users: 1'));
-  });
+  }, timeout: dartCliTestTimeout);
 
-  test('scores 10 deterministic simulated users from the CLI', () async {
-    final result = await runDartTool([
-      'tool/research/north_star_report.dart',
-      '--simulate-users',
-      '10',
-      '--window-start',
-      '2026-05-01T00:00:00.000Z',
-    ]);
+  test(
+    'scores 10 deterministic simulated users from the CLI',
+    () async {
+      final result = await runDartTool([
+        'tool/research/north_star_report.dart',
+        '--simulate-users',
+        '10',
+        '--window-start',
+        '2026-05-01T00:00:00.000Z',
+      ]);
 
-    expect(result.stderr, isEmpty);
-    expect(result.exitCode, 0);
-    expect(result.stdout as String, contains('Observed users: 10'));
-    expect(result.stdout as String, contains('Seed: `jpstudy-phase0-ns-v1`'));
-  });
+      expect(result.stderr, isEmpty);
+      expect(result.exitCode, 0);
+      expect(result.stdout as String, contains('Observed users: 10'));
+      expect(result.stdout as String, contains('Seed: `jpstudy-phase0-ns-v1`'));
+    },
+    timeout: dartCliTestTimeout,
+  );
 }

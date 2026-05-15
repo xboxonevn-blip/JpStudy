@@ -55,5 +55,5 @@ void main() {
     expect(result.exitCode, 0);
     expect(result.stdout as String, contains('# Content Link Graph Report'));
     expect(result.stdout as String, contains('| N5 | 1 | 1 | 1 | 1 | 1 | 1 |'));
-  });
+  }, timeout: dartCliTestTimeout);
 }

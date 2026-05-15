@@ -64,5 +64,5 @@ extension Copy on AppLanguage {
       contains('| Hardcoded Vietnamese lines | 1 |'),
     );
     expect(result.stdout as String, contains('| Mojibake hits | 1 |'));
-  });
+  }, timeout: dartCliTestTimeout);
 }

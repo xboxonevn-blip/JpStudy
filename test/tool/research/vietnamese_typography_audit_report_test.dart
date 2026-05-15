@@ -55,5 +55,5 @@ extension Copy on AppLanguage {
     expect(result.stdout as String, contains('# Vietnamese Typography Audit'));
     expect(result.stdout as String, contains('| Sample size | 1 |'));
     expect(result.stdout as String, contains('| Average score | 5.00 |'));
-  });
+  }, timeout: dartCliTestTimeout);
 }

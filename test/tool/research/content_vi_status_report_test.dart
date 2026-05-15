@@ -44,5 +44,5 @@ void main() {
     expect(result.stdout as String, contains('Files scanned: `1`'));
     expect(result.stdout as String, contains('| N1 | 1 | 1 | 1 | 0 |'));
     expect(result.stdout as String, contains('| vocab | 1 | 1 | 1 | 0 |'));
-  });
+  }, timeout: dartCliTestTimeout);
 }

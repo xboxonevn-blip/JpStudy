@@ -61,5 +61,5 @@ void main() {
       result.stdout as String,
       contains('| N1 | n1_k001 | 作 | Tác | tác | match |'),
     );
-  });
+  }, timeout: dartCliTestTimeout);
 }
