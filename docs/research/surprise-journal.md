@@ -364,3 +364,10 @@
 - Actual observation: daily-plan critical counts and retention stage breakdown still used the legacy `stability < 1.0` proxy. FSRS-6 learning cards can have stability above `1.0`, so the proxy hid due learning steps from planning.
 - Delta: +25 percentage points on confidence that state-machine persistence must flow into analytics/query code, not only review writes.
 - Updated belief: any SRS query named "learning", "critical", or "stage" must read explicit FSRS state before using stability brackets.
+
+## 2026-05-15T21:10:00+07:00 - Launch readiness needed auditable tiering, not only nicer Vietnamese
+
+- Prior belief: the D2 pass would mostly be a rewrite exercise over N5/N4 text.
+- Actual observation: many N5/N4 strings were already readable, but the audit could not distinguish reviewed launch-tier content from untouched data until tags were normalized and user-approved batches were recorded. N3+ also needed visible draft-tier UX instead of silent availability.
+- Delta: +55 percentage points on confidence that content launch readiness depends on provenance and UI tiering as much as prose quality.
+- Updated belief: beginner-heavy pilot content needs two artifacts for trust: fluent Vietnamese and an explicit review signal. Upper levels can remain available only when the app labels them as editorial draft.
