@@ -107,6 +107,32 @@ void main() {
     ));
   });
 
+  test('skips legacy migration when storage migration is disabled', () async {
+    SharedPreferences.setMockInitialValues({'learn_session_1': 'cached'});
+    final prefs = await SharedPreferences.getInstance();
+    final gateway = _FakeAnonymousAuthGateway();
+    final analytics = _FakeAnalyticsService();
+    final migration = _FakeLegacyMigrationService();
+    final service = AnonymousAuthService(
+      gateway: gateway,
+      analyticsService: analytics,
+      legacyMigrationService: migration,
+      legacyMigrationEnabled: false,
+    );
+
+    final result = await service.ensureAuthenticated(preferences: prefs);
+
+    expect(result.decision, AnonymousAuthDecision.signedInAnonymously);
+    expect(result.user?.isAnonymous, isTrue);
+    expect(gateway.signInCalls, 1);
+    expect(migration.calls, 0);
+    expect(result.migrationResult, isNull);
+    expect(analytics.identified.single, (
+      userId: 'anon-1',
+      authType: 'anonymous',
+    ));
+  });
+
   test('times out and keeps app booting offline', () async {
     SharedPreferences.setMockInitialValues({});
     final prefs = await SharedPreferences.getInstance();

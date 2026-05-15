@@ -72,6 +72,7 @@ class AnonymousAuthService {
     AnalyticsService? analyticsService,
     LegacyMigrationService? legacyMigrationService,
     this.timeout = const Duration(seconds: 5),
+    this.legacyMigrationEnabled = true,
   }) : _gateway = gateway ?? FirebaseAnonymousAuthGateway(),
        _analyticsService = analyticsService,
        _legacyMigrationService =
@@ -81,6 +82,7 @@ class AnonymousAuthService {
   final AnalyticsService? _analyticsService;
   final LegacyMigrationService _legacyMigrationService;
   final Duration timeout;
+  final bool legacyMigrationEnabled;
 
   Future<AnonymousAuthResult> ensureAuthenticated({
     required SharedPreferences preferences,
@@ -97,10 +99,12 @@ class AnonymousAuthService {
     try {
       final user = await _gateway.signInAnonymously().timeout(timeout);
       await _identify(user);
-      final migration = await _legacyMigrationService.migrateIfNeeded(
-        preferences: preferences,
-        user: user,
-      );
+      final migration = legacyMigrationEnabled
+          ? await _legacyMigrationService.migrateIfNeeded(
+              preferences: preferences,
+              user: user,
+            )
+          : null;
       return AnonymousAuthResult(
         decision: AnonymousAuthDecision.signedInAnonymously,
         user: user,
