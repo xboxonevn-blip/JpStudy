@@ -5,9 +5,14 @@
     "titleEn": "Plain Form (Politeness Distinction)",
     "structure": "Thể thông thường vs Thể lịch sự",
     "structureEn": "Plain Form vs Polite Form",
-    "explanation": "Cách dùng thể thông thường (Văn nói thân mật). * `書きます` -> `書く`\n* `書きません` -> `書かない`\n* `書きました` -> `書いた`\n* `書きませんでした` -> `書かなかった`",
+    "explanation": "Thể thông thường dùng trong văn nói thân mật, nhật ký hoặc khi trích dẫn suy nghĩ.\n* `書きます` -> `書く`.\n* `書きません` -> `書かない`.\n* `書きました` -> `書いた`.\n* `書きませんでした` -> `書かなかった`.",
+    "explanationViDraft": "Cách dùng thể thông thường (Văn nói thân mật). * `書きます` -> `書く`\n* `書きません` -> `書かない`\n* `書きました` -> `書いた`\n* `書きませんでした` -> `書かなかった`",
     "explanationEn": "Usage of Plain Form (Casual Speech). * `書きます` -> `書く`\n* `書きません` -> `書かない`\n* `書きました` -> `書いた`\n* `書きませんでした` -> `書かなかった`",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 20,
@@ -15,9 +20,14 @@
     "titleEn": "Questions in Plain Form",
     "structure": "S?",
     "structureEn": "S?",
-    "explanation": "Trong văn nói thân mật, thường bỏ `か` ở cuối câu hỏi và lên giọng. * `飲みますか` -> `飲む？`",
+    "explanation": "Trong hội thoại thân mật, thường bỏ `か` ở cuối câu hỏi và lên giọng ở cuối câu. Ví dụ: `飲みますか` -> `飲む？`.",
+    "explanationViDraft": "Trong văn nói thân mật, thường bỏ `か` ở cuối câu hỏi và lên giọng. * `飲みますか` -> `飲む？`",
     "explanationEn": "In casual speech, omit `か` and raise intonation for questions. * `飲みますか` -> `飲む？`",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 20,
@@ -25,9 +35,14 @@
     "titleEn": "Dropping Particles (Casual Speech)",
     "structure": "Bỏ `は`, `を`, `へ`...",
     "structureEn": "Drop `は`, `を`, `へ`...",
-    "explanation": "Trong hội thoại thân mật, các trợ từ như `は`, `を`, `へ` thường bị lược bỏ nếu nghĩa đã rõ ràng.",
+    "explanation": "Trong hội thoại thân mật, các trợ từ như `は`, `を`, `へ` có thể bị lược bỏ khi nghĩa đã rõ từ ngữ cảnh.",
+    "explanationViDraft": "Trong hội thoại thân mật, các trợ từ như `は`, `を`, `へ` thường bị lược bỏ nếu nghĩa đã rõ ràng.",
     "explanationEn": "In casual conversation, particles like `は`, `を`, `へ` are often dropped if the meaning is clear.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 20,
@@ -35,8 +50,13 @@
     "titleEn": "..., but (けど)",
     "structure": "S1 けど、 S2",
     "structureEn": "S1 けど、S2",
-    "explanation": "Giống `が` (nhưng), dùng trong văn nói thân mật để nối câu hoặc làm nhẹ câu nói. * `チケットがあるけど、一緒に行かない？`: Tôi có vé này, đi cùng không?",
+    "explanation": "`けど` giống `が`, nghĩa là “nhưng”. Trong văn nói thân mật, `けど` cũng hay dùng để nối câu hoặc làm câu nói mềm hơn.",
+    "explanationViDraft": "Giống `が` (nhưng), dùng trong văn nói thân mật để nối câu hoặc làm nhẹ câu nói. * `チケットがあるけど、一緒に行かない？`: Tôi có vé này, đi cùng không?",
     "explanationEn": "Same as `が` (but), used in casual speech to connect sentences or soften the tone. * `チケットがあるけど、一緒に行かない？`: I have tickets, wanna go together?",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]

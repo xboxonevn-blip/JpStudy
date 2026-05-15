@@ -5,9 +5,14 @@
     "titleEn": "Connecting verbs (V-て, V-て)",
     "structure": "V1て、[V2て、] ～ ます",
     "structureEn": "V1-て, [V2-て,] ...",
-    "explanation": "Nối các hành động xảy ra liên tiếp theo trật tự thời gian. * `朝ジョギングをして、シャワーを浴びて、会社へ行きます`: Sáng tôi chạy bộ, tắm, rồi đi làm.",
+    "explanation": "Dùng thể `て` để nối các hành động xảy ra lần lượt theo thời gian. Ví dụ: sáng chạy bộ, tắm, rồi đi làm.",
+    "explanationViDraft": "Nối các hành động xảy ra liên tiếp theo trật tự thời gian. * `朝ジョギングをして、シャワーを浴びて、会社へ行きます`: Sáng tôi chạy bộ, tắm, rồi đi làm.",
     "explanationEn": "Connects consecutive actions in chronological order. * `朝ジョギングをして、シャワーを浴びて、会社へ行きます`: In the morning I jog, take a shower, and go to work.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 16,
@@ -15,9 +20,14 @@
     "titleEn": "After V1, V2",
     "structure": "V1て から V2",
     "structureEn": "V1-てから V2",
-    "explanation": "Sau khi làm V1 thì làm V2. * Nhấn mạnh thứ tự trước sau.",
+    "explanation": "Dùng để nói sau khi làm V1 thì mới làm V2. Mẫu này nhấn mạnh thứ tự trước sau rõ hơn so với chỉ nối bằng thể `て`.",
+    "explanationViDraft": "Sau khi làm V1 thì làm V2. * Nhấn mạnh thứ tự trước sau.",
     "explanationEn": "Verb 2 after Verb 1. * Emphasizes the sequence.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 16,
@@ -25,9 +35,14 @@
     "titleEn": "N1 has A N2 (Feature Description)",
     "structure": "N1 は N2 が A (Tính từ)",
     "structureEn": "N1 は N2 が A",
-    "explanation": "Miêu tả đặc điểm cụ thể (N2) của một chủ đề lớn (N1). * `象は鼻が長いです`: Con voi thì vòi dài.",
+    "explanation": "Dùng để miêu tả một đặc điểm cụ thể của chủ đề lớn N1. Ví dụ: `象は鼻が長いです` = nói về voi thì vòi dài.",
+    "explanationViDraft": "Miêu tả đặc điểm cụ thể (N2) của một chủ đề lớn (N1). * `象は鼻が長いです`: Con voi thì vòi dài.",
     "explanationEn": "Describing a specific feature (N2) of a main topic (N1). * `象は鼻が長いです`: Elephants have long trunks (As for elephants, the trunk is long).",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 16,
@@ -35,8 +50,13 @@
     "titleEn": "Connecting Adjectives/Nouns (and)",
     "structure": "Aい -> Aくて / Aな -> Aで / N -> Nで",
     "structureEn": "A-い -> A-くて / A-な -> A-で / N -> N-で",
-    "explanation": "Nối tính từ hoặc danh từ (Và, vừa... vừa...). * `高い` -> `高くて`\n* `親切` -> `親切で`\n* `学生` -> `学生で`",
+    "explanation": "Dùng để nối nhiều tính chất hoặc thông tin danh từ trong cùng một câu.\n* Tính từ i: `高い` -> `高くて`.\n* Tính từ na: `親切` -> `親切で`.\n* Danh từ: `学生` -> `学生で`.",
+    "explanationViDraft": "Nối tính từ hoặc danh từ (Và, vừa... vừa...). * `高い` -> `高くて`\n* `親切` -> `親切で`\n* `学生` -> `学生で`",
     "explanationEn": "Connecting adjectives or nouns (And...). * `高い` -> `高くて`\n* `親切` -> `親切で`\n* `学生` -> `学生で`",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]

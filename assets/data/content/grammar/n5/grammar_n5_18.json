@@ -5,9 +5,14 @@
     "titleEn": "Dictionary Form (V-る)",
     "structure": "Vる (Dictionary Form)",
     "structureEn": "V-る",
-    "explanation": "Cách chia động từ sang thể Từ điển. * **Nhóm I**: Chuyển cột `i` sang cột `u`.\n* **Nhóm II**: Bỏ `ます` thêm `る`.\n* **Nhóm III**: `きます` -> `くる`; `します` -> `する`.",
+    "explanation": "Thể từ điển là dạng nguyên thể dùng trong từ điển và nhiều mẫu ngữ pháp.\n* Nhóm I: đổi âm hàng `い` sang hàng `う`.\n* Nhóm II: bỏ `ます`, thêm `る`.\n* Nhóm III: `きます` -> `くる`; `します` -> `する`.",
+    "explanationViDraft": "Cách chia động từ sang thể Từ điển. * **Nhóm I**: Chuyển cột `i` sang cột `u`.\n* **Nhóm II**: Bỏ `ます` thêm `る`.\n* **Nhóm III**: `きます` -> `くる`; `します` -> `する`.",
     "explanationEn": "Conjugating verbs to Dictionary Form. * **Group I**: Change `i` column to `u` column.\n* **Group II**: Drop `ます`, add `る`.\n* **Group III**: `きます` -> `くる`; `します` -> `する`.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 18,
@@ -15,9 +20,14 @@
     "titleEn": "Can do (Potential)",
     "structure": "Vる こと ができます",
     "structureEn": "V-る ことができます",
-    "explanation": "Có thể làm gì đó (Năng lực, Sự cho phép). * `ピアノを弾くことができます`: Tôi có thể chơi đàn Piano.",
+    "explanation": "Dùng để nói có thể làm một việc gì đó, vì có năng lực hoặc vì hoàn cảnh cho phép. Ví dụ: `ピアノを弾くことができます` = tôi có thể chơi piano.",
+    "explanationViDraft": "Có thể làm gì đó (Năng lực, Sự cho phép). * `ピアノを弾くことができます`: Tôi có thể chơi đàn Piano.",
     "explanationEn": "Can do something (Ability / Possibility). * `ピアノを弾くことができます`: I can play the piano.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 18,
@@ -25,18 +35,28 @@
     "titleEn": "My hobby is ...",
     "structure": "趣味は N / Vる こと です",
     "structureEn": "趣味は N / V-ることです",
-    "explanation": "Sở thích là ~. * Dùng danh từ hoặc `Vる こと` (để danh từ hóa động từ).",
+    "explanation": "Dùng để nói sở thích. Sau `趣味は` có thể dùng danh từ hoặc `Vること` để biến động từ thành một cụm danh từ.",
+    "explanationViDraft": "Sở thích là ~. * Dùng danh từ hoặc `Vる こと` (để danh từ hóa động từ).",
     "explanationEn": "My hobby is ~. * Use a Noun or `Vる こと` (to nominalize a verb).",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 18,
-    "title": "Ttrước khi (Mae ni)",
+    "title": "Trước khi (Mae ni)",
     "titleEn": "Before ... (前に)",
     "structure": "Vる / N の / Thời gian + まえに、V2",
     "structureEn": "V-る / N の / Time + 前に, V2",
-    "explanation": "Trước khi làm V1 thì làm V2. * `寝る前に、本を読みます`: Trước khi ngủ, tôi đọc sách.",
+    "explanation": "Dùng để nói làm V2 trước khi làm V1 hoặc trước một thời điểm/sự kiện. Ví dụ: `寝る前に、本を読みます` = trước khi ngủ, tôi đọc sách.",
+    "explanationViDraft": "Trước khi làm V1 thì làm V2. * `寝る前に、本を読みます`: Trước khi ngủ, tôi đọc sách.",
     "explanationEn": "Before doing V1, do V2. * `寝る前に、本を読みます`: Before sleeping, I read a book.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]

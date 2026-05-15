@@ -5,9 +5,14 @@
     "titleEn": "Ta-form (Plain Past)",
     "structure": "Vた",
     "structureEn": "V-た",
-    "explanation": "Cách chia động từ sang thể Ta (Quá khứ ngắn). * Quy tắc giống thể `て` (Thay `て` bằng `た`, `で` bằng `だ`).",
+    "explanation": "Thể `た` là dạng quá khứ ngắn. Quy tắc chia giống thể `て`: đổi `て` thành `た`, đổi `で` thành `だ`.",
+    "explanationViDraft": "Cách chia động từ sang thể Ta (Quá khứ ngắn). * Quy tắc giống thể `て` (Thay `て` bằng `た`, `で` bằng `だ`).",
     "explanationEn": "Conjugating verbs to Ta-form (Plain Past). * Same rules as `Te-form` (Replace `te` with `ta`, `de` with `da`).",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 19,
@@ -15,9 +20,14 @@
     "titleEn": "Have done ... (Experience)",
     "structure": "Vた こと があります",
     "structureEn": "V-た ことがあります",
-    "explanation": "Đã từng làm gì đó (Kinh nghiệm trong quá khứ). * `馬に乗ったことがあります`: Tôi đã từng cưỡi ngựa.",
+    "explanation": "Dùng để nói đã từng làm một việc gì đó trong quá khứ. Ví dụ: `馬に乗ったことがあります` = tôi đã từng cưỡi ngựa.",
+    "explanationViDraft": "Đã từng làm gì đó (Kinh nghiệm trong quá khứ). * `馬に乗ったことがあります`: Tôi đã từng cưỡi ngựa.",
     "explanationEn": "Have done something before (Experience). * `馬に乗ったことがあります`: I have ridden a horse.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 19,
@@ -25,9 +35,14 @@
     "titleEn": "Do ... and ... etc. (Representative Actions)",
     "structure": "V1たり、V2たり します",
     "structureEn": "V1-たり, V2-たり します",
-    "explanation": "Làm V1, làm V2, ... (Liệt kê hành động tiêu biểu, không theo thứ tự). * `日曜日はテニスをしたり、映画を見たりしました`: Chủ nhật tôi đã chơi tennis, xem phim (và làm các việc khác).",
+    "explanation": "Dùng để liệt kê vài hành động tiêu biểu, không cần theo đúng thứ tự thời gian và không có nghĩa là chỉ làm các hành động đó.",
+    "explanationViDraft": "Làm V1, làm V2, ... (Liệt kê hành động tiêu biểu, không theo thứ tự). * `日曜日はテニスをしたり、映画を見たりしました`: Chủ nhật tôi đã chơi tennis, xem phim (và làm các việc khác).",
     "explanationEn": "Do V1, do V2, etc. (Listing representative actions, order doesn't matter). * `日曜日はテニスをしたり、映画を見たりしました`: On Sunday I played tennis, watched a movie, etc.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 19,
@@ -35,8 +50,13 @@
     "titleEn": "Become (なります)",
     "structure": "Aい->く / Aな->に / N->に + なります",
     "structureEn": "A-く / A-に / N-に + なります",
-    "explanation": "Trở nên, trở thành (Sự thay đổi trạng thái). * `寒くなります`: Trở nên lạnh đi.\n* `元気になります`: Trở nên khỏe mạnh (hồi phục).\n* `２５歳になります`: Sang tuổi 25.",
+    "explanation": "`なります` diễn tả sự thay đổi trạng thái.\n* Tính từ i: `寒い` -> `寒くなります`.\n* Tính từ na: `元気` -> `元気になります`.\n* Danh từ: `２５歳になります` = sang tuổi 25.",
+    "explanationViDraft": "Trở nên, trở thành (Sự thay đổi trạng thái). * `寒くなります`: Trở nên lạnh đi.\n* `元気になります`: Trở nên khỏe mạnh (hồi phục).\n* `２５歳になります`: Sang tuổi 25.",
     "explanationEn": "Become / Get (Change of state). * `寒くなります`: It gets cold.\n* `元気になります`: Get well.\n* `２５歳になります`: Turn 25 years old.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]

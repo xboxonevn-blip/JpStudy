@@ -5,9 +5,14 @@
     "titleEn": "Nai-form (Plain Negative)",
     "structure": "Vない",
     "structureEn": "V-ない",
-    "explanation": "Cách chia động từ sang thể Nai (Phủ định ngắn). * **Nhóm I**: Chuyển cột `i` thành cột `a` + `ない`. (Trừ `い` -> `わ`)\n* **Nhóm II**: Bỏ `ます` thêm `ない`.\n* **Nhóm III**: `きます` -> `こない`; `します` -> `しない`.",
+    "explanation": "Thể `ない` là dạng phủ định ngắn của động từ.\n* Nhóm I: đổi âm hàng `い` sang hàng `あ`, rồi thêm `ない`; riêng âm `い` đổi thành `わ`.\n* Nhóm II: bỏ `ます`, thêm `ない`.\n* Nhóm III: `きます` -> `こない`; `します` -> `しない`.",
+    "explanationViDraft": "Cách chia động từ sang thể Nai (Phủ định ngắn). * **Nhóm I**: Chuyển cột `i` thành cột `a` + `ない`. (Trừ `い` -> `わ`)\n* **Nhóm II**: Bỏ `ます` thêm `ない`.\n* **Nhóm III**: `きます` -> `こない`; `します` -> `しない`.",
     "explanationEn": "Conjugating verbs to Nai-form (Plain Negative). * **Group I**: Change `i` column to `a` column + `ない`. (Exception: `い` -> `わ`)\n* **Group II**: Drop `ます`, add `ない`.\n* **Group III**: `きます` -> `こない`; `します` -> `しない`.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 17,
@@ -15,9 +20,14 @@
     "titleEn": "Please don't ... (Prohibition)",
     "structure": "Vないで ください",
     "structureEn": "V-ないでください",
-    "explanation": "Yêu cầu ai đó đừng làm gì (lịch sự). * `ここで写真を撮らないでください`: Xin đừng chụp ảnh ở đây.",
+    "explanation": "Dùng để yêu cầu ai đó đừng làm gì một cách lịch sự. Ví dụ: `ここで写真を撮らないでください` = xin đừng chụp ảnh ở đây.",
+    "explanationViDraft": "Yêu cầu ai đó đừng làm gì (lịch sự). * `ここで写真を撮らないでください`: Xin đừng chụp ảnh ở đây.",
     "explanationEn": "Polite request not to do something. * `ここで写真を撮らないでください`: Please do not take photos here.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 17,
@@ -25,9 +35,14 @@
     "titleEn": "Must ... (Obligation)",
     "structure": "Vない (bỏ い) + ければ なりません",
     "structureEn": "V-なければなりません",
-    "explanation": "Phải làm gì đó (bắt buộc, nghĩa vụ). * `薬を飲まなければなりません`: Phải uống thuốc.",
+    "explanation": "Dùng để nói nghĩa vụ hoặc việc bắt buộc phải làm. Ví dụ: `薬を飲まなければなりません` = phải uống thuốc.",
+    "explanationViDraft": "Phải làm gì đó (bắt buộc, nghĩa vụ). * `薬を飲まなければなりません`: Phải uống thuốc.",
     "explanationEn": "Must do something (Obligation). * `薬を飲まなければなりません`: Must take medicine.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 17,
@@ -35,8 +50,13 @@
     "titleEn": "Don't have to ... (Not Necessary)",
     "structure": "Vない (bỏ い) + くても いいです",
     "structureEn": "V-なくてもいいです",
-    "explanation": "Không làm gì đó cũng được (Không cần phải). * `明日来なくてもいいです`: Ngày mai không đến cũng được.",
+    "explanation": "Dùng để nói không cần làm một việc gì đó cũng được. Ví dụ: `明日来なくてもいいです` = ngày mai không đến cũng được.",
+    "explanationViDraft": "Không làm gì đó cũng được (Không cần phải). * `明日来なくてもいいです`: Ngày mai không đến cũng được.",
     "explanationEn": "Need not do (Not necessary). * `明日来なくてもいいです`: You don't have to come tomorrow.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]
