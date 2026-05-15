@@ -72,12 +72,18 @@ Local commands run during the completion audit:
 GitHub Actions summary:
 
 - Current source gates pass on `main`. Latest verified run:
-  `25933463058` on `316f80c8`.
+  `25937256519` on `927ef848`.
 - `ui-string-guard`, `firebase-security-rules`, and `deploy-hosting` all
   completed with `success`.
 - `deploy-hosting` ran the real secret-backed path: production web build,
   deploy to `hosting:jpstudy`, primary/legacy smoke, live resource smoke, and
   Lighthouse live gate all completed with `success`.
+- `npm run report:launch-readiness -- --json` now performs a single aggregate
+  proof check. Latest run on `2026-05-16T02:49+07:00` returned
+  `complete=false` with blockers `legal-approval-missing`,
+  `sentry-dsn-missing`, `storage-not-provisioned`, `deletion-proof-missing`,
+  `ga4-retention-proof-missing`, `ga4-learning-events-missing`, and
+  `app-check-enforcement-deferred`.
 
 ## Missing Or Weakly Verified Requirements
 
@@ -86,10 +92,11 @@ These prevent marking the active goal complete:
 1. Legal approval is still missing. `/privacy` and `/terms` are implemented and
    tested, but docs still mark the copy as `review-needed draft`.
 2. Sentry is source-wired but not operationally proven. A real
-   `JPSTUDY_SENTRY_DSN` and first deployed issue URL are still missing. Recheck
-   on `2026-05-16T00:53+07:00` found repository Actions secrets
+   `JPSTUDY_SENTRY_DSN` and first deployed issue URL are still missing. The
+   Sentry readiness report rechecked on `2026-05-16T02:24+07:00` found source
+   and workflow smoke gates present, repository Actions secrets
    `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, but no
-   `JPSTUDY_SENTRY_DSN`.
+   `JPSTUDY_SENTRY_DSN`; no event was sent by that readiness report.
 3. Firebase Storage migration remains blocked. Anonymous Auth works, but the
    Storage bucket/rules/CORS path is not provisioned/proven, so
    `JPSTUDY_ENABLE_LEGACY_STORAGE_MIGRATION` must stay unset/false. A

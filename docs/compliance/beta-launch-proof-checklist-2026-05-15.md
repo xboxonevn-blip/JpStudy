@@ -6,6 +6,18 @@ secret values, or private user data.
 
 Primary app URL: `https://jpstudy.web.app`
 
+Aggregate status command:
+
+```powershell
+npm run report:launch-readiness -- --json
+```
+
+Latest run on `2026-05-16T02:49+07:00` returned `complete=false` with
+blockers: `legal-approval-missing`, `sentry-dsn-missing`,
+`storage-not-provisioned`, `deletion-proof-missing`,
+`ga4-retention-proof-missing`, `ga4-learning-events-missing`, and
+`app-check-enforcement-deferred`.
+
 ## 1. GitHub Actions Secret-Backed Deploy
 
 Status: completed on `main`; latest re-confirmed on commit `316f80c8`.
