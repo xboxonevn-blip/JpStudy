@@ -19,6 +19,9 @@ Required setup:
 
 Operator note:
 
+- `JPSTUDY_RECAPTCHA_SITE_KEY` was set as a repository secret on
+  2026-05-15 without exposing the value in logs. `FIREBASE_TOKEN` remains the
+  required blocker for the real deploy path.
 - `firebase login:ci` must be run in an interactive user terminal. A Codex
   non-interactive attempt on 2026-05-15 returned `Cannot run login:ci in
   non-interactive mode.`

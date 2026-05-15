@@ -88,8 +88,9 @@ These prevent marking the active goal complete:
 2. Sentry is source-wired but not operationally proven. A real
    `JPSTUDY_SENTRY_DSN` and first deployed issue URL are still missing.
 3. GitHub Actions deploy is not secret-backed yet. `deploy-hosting` completed,
-   but actual build/deploy/live smoke/Lighthouse steps were skipped until
-   `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY` repository secrets exist.
+   but actual build/deploy/live smoke/Lighthouse steps were skipped. The
+   `JPSTUDY_RECAPTCHA_SITE_KEY` repository secret now exists; `FIREBASE_TOKEN`
+   is still missing.
 4. Firebase Storage migration remains blocked. Anonymous Auth works, but the
    Storage bucket/rules/CORS path is not provisioned/proven, so
    `JPSTUDY_ENABLE_LEGACY_STORAGE_MIGRATION` must stay unset/false. A
