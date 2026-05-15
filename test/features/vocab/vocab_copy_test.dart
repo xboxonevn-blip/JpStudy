@@ -33,5 +33,13 @@ void main() {
       expect(AppLanguage.ja.vocabMeaningFirstLabel(), '意味 + 読み');
       expect(AppLanguage.ja.vocabRangeLabel(1, 25), '1–25課');
     });
+
+    test('uses singular English term labels for one item', () {
+      expect(AppLanguage.en.vocabProgramCountLabel('1'), '1 term');
+      expect(
+        AppLanguage.en.vocabCurrentTrackLine('Starter', 1),
+        'Recommended next step: Starter (1 term).',
+      );
+    });
   });
 }

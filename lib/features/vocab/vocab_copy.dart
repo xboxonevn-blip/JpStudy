@@ -58,7 +58,8 @@ extension VocabCopy on AppLanguage {
   };
 
   String vocabCurrentTrackLine(String title, int termCount) => switch (this) {
-    AppLanguage.en => 'Recommended next step: $title ($termCount terms).',
+    AppLanguage.en =>
+      'Recommended next step: $title (${termsCountLabel(termCount)}).',
     AppLanguage.vi => 'Bước tiếp theo gợi ý: $title ($termCount mục từ).',
     AppLanguage.ja => 'おすすめの次ステップ: $title（$termCount語）。',
   };
@@ -288,7 +289,7 @@ extension VocabCopy on AppLanguage {
       };
 
   String vocabProgramCountLabel(String count) => switch (this) {
-    AppLanguage.en => '$count terms',
+    AppLanguage.en => _englishTermCountFromLabel(count),
     AppLanguage.vi => '$count mục từ',
     AppLanguage.ja => '$count語',
   };
@@ -404,4 +405,12 @@ extension VocabCopy on AppLanguage {
   };
 
   String vocabMetaSeparator() => ' · ';
+}
+
+String _englishTermCountFromLabel(String count) {
+  final label = count.trim();
+  final parsed = int.tryParse(label.replaceAll(',', ''));
+  return parsed == null
+      ? '$label terms'
+      : AppLanguage.en.termsCountLabel(parsed);
 }

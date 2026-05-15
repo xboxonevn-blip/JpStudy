@@ -22,7 +22,7 @@ D3.Q3.1-Q3.6 covered:
 7. Remaining visible typography/editorial issue is mixed English product language: `8/100` sampled strings had raw-English-term warnings.
 8. Full ARB migration before beta is not worth the risk: `AppLanguage` appears in `140` lib files and `AppLanguage.en/vi/ja` references occur `5,219` times.
 9. Current generated localization state is absent: `0` `.arb` files and no `l10n.yaml`, though `flutter_localizations` and `MaterialApp.locale` already exist.
-10. Plural risk exists mostly for English: Q3.6 found `41` raw English count-plural strings and only `5` relevant manual singular guards. Central `AppLanguage` helper patch reduced remaining grep matches to `31`.
+10. Plural risk exists mostly for English: Q3.6 found `41` raw English count-plural strings and only `5` relevant manual singular guards. Central `AppLanguage` helper patch reduced remaining grep matches to `31`; the 2026-05-15 `VocabCopy` follow-up reduced them to `29`.
 
 ## Beta Readiness Implication
 
