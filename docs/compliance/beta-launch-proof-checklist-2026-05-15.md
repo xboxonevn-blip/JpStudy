@@ -92,14 +92,14 @@ Required setup:
 
 - Create/provision Firebase Storage for project `jpstudy-v2`.
 - Deploy `storage.rules`.
-- Configure CORS for the web app origin.
+- Configure CORS for the web app origin with `storage.cors.json`.
 - Keep `JPSTUDY_ENABLE_LEGACY_STORAGE_MIGRATION=false` until proof passes.
 
 Evidence to record:
 
 - Storage bucket name and console URL.
 - Rules deploy command output.
-- CORS config command output or console proof.
+- CORS config command output or console proof from `storage.cors.json`.
 - Live web run with `JPSTUDY_ENABLE_LEGACY_STORAGE_MIGRATION=true` where:
   - anonymous sign-in succeeds,
   - `users/{uid}/legacy_migration.json` is created,

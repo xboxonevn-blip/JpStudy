@@ -5,15 +5,18 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const DEFAULT_PROJECT = 'jpstudy-v2';
+const DEFAULT_CORS_FILE = 'storage.cors.json';
 
 function parseArgs(argv) {
   const args = {
     project: DEFAULT_PROJECT,
+    corsFile: DEFAULT_CORS_FILE,
   };
   for (let index = 0; index < argv.length; index += 1) {
     const item = argv[index];
     if (item === '--out') args.out = argv[++index];
     else if (item === '--project') args.project = argv[++index];
+    else if (item === '--cors-file') args.corsFile = argv[++index];
     else if (item === '--skip-emulator') args.skipEmulator = true;
     else if (item === '--json') args.json = true;
     else if (item === '--help' || item === '-h') args.help = true;
@@ -27,6 +30,7 @@ function printHelp() {
   node tool/research/storage_readiness_report.js
   node tool/research/storage_readiness_report.js --out output/research/storage-readiness-latest.md
   node tool/research/storage_readiness_report.js --skip-emulator
+  node tool/research/storage_readiness_report.js --cors-file storage.cors.json
 `);
 }
 
@@ -74,14 +78,44 @@ function collectStatus(args) {
     generatedAt: new Date().toISOString(),
     project: args.project,
     rulesTest,
+    cors: readCorsConfig(args.corsFile),
     dryRun,
   };
 }
 
-function classifyStorageReadiness({ rulesTest, dryRun }) {
+function readCorsConfig(corsFile) {
+  if (!fs.existsSync(corsFile)) {
+    return {
+      path: corsFile,
+      exists: false,
+      origins: [],
+    };
+  }
+  try {
+    const parsed = JSON.parse(fs.readFileSync(corsFile, 'utf8'));
+    const origins = parsed.flatMap((entry) => entry.origin || []);
+    return {
+      path: corsFile,
+      exists: true,
+      origins,
+    };
+  } catch (error) {
+    return {
+      path: corsFile,
+      exists: false,
+      origins: [],
+      error: error.message,
+    };
+  }
+}
+
+function classifyStorageReadiness({ rulesTest, cors, dryRun }) {
   const dryOutput = dryRun?.output || '';
   if (/Firebase Storage has not been set up/i.test(dryOutput)) {
     return { ready: false, reason: 'storage-not-provisioned' };
+  }
+  if (cors?.exists === false) {
+    return { ready: false, reason: 'cors-config-missing' };
   }
   if (rulesTest?.status !== 0 && rulesTest?.status !== 'skipped') {
     return { ready: false, reason: 'rules-emulator-failed' };
@@ -118,6 +152,13 @@ function buildMarkdownReport(status) {
     `Rules emulator status: \`${statusLabel(status.rulesTest.status)}\``,
     '',
     ...fenced(status.rulesTest.output),
+    '',
+    '## CORS Config',
+    '',
+    `CORS file: \`${status.cors?.path || DEFAULT_CORS_FILE}\``,
+    `CORS config: \`${status.cors?.exists ? 'present' : 'missing'}\``,
+    `Origins: \`${(status.cors?.origins || []).join(', ') || 'none'}\``,
+    status.cors?.error ? `Error: \`${status.cors.error}\`` : '',
     '',
     '## Production Storage Dry Run',
     '',
@@ -162,4 +203,5 @@ module.exports = {
   buildShellCommand,
   buildMarkdownReport,
   classifyStorageReadiness,
+  readCorsConfig,
 };

@@ -3,12 +3,24 @@
 ## Storage Rules
 
 - Deploy `storage.rules` before enabling cloud backup in production.
+- Apply `storage.cors.json` to the provisioned Firebase Storage bucket before
+  browser upload/download proof.
 - User backups are restricted to `users/{uid}/backup.json`.
 - Anonymous bootstrap migration snapshots are restricted to
   `users/{uid}/legacy_migration.json`.
 - Reads, writes, and deletes require Firebase Auth and matching `request.auth.uid`.
 - Writes are limited to JSON payloads up to 5 MiB.
 - All other Storage paths are denied by default.
+
+After the bucket exists, apply and verify CORS:
+
+```powershell
+gcloud storage buckets update gs://<firebase-storage-bucket> --cors-file=storage.cors.json
+gcloud storage buckets describe gs://<firebase-storage-bucket> --format="json(cors_config)"
+```
+
+Current checked-in CORS origin is the primary production app:
+`https://jpstudy.web.app`.
 
 ## App Check
 
