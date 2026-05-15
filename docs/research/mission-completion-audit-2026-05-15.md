@@ -71,7 +71,9 @@ Local commands run during the completion audit:
 
 GitHub Actions summary:
 
-- Current source gates pass on `main`.
+- Current source gates pass on `main`. Latest verified run:
+  `25907947623` on `b8d21ecd`, after serializing source checks to avoid
+  GitHub runner queue failures.
 - `deploy-hosting` completes as a skip-safe wrapper when deploy secrets are
   missing.
 - Actual deploy/live-smoke/Lighthouse proof remains blocked until the required
