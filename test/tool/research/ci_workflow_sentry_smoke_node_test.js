@@ -11,3 +11,11 @@ test('CI workflow exposes a manual Sentry smoke trigger', () => {
   assert.match(workflow, /name: Trigger Sentry smoke event/);
   assert.match(workflow, /sentry-smoke=1/);
 });
+
+test('CI workflow keeps live Lighthouse performance gate lenient', () => {
+  assert.match(
+    workflow,
+    /artifact and\s*\n\s*\/\/ resource-smoke budgets are the deterministic performance gates\./,
+  );
+  assert.match(workflow, /performance: 0\.20,/);
+});
