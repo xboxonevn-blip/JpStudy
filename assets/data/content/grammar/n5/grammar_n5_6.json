@@ -5,9 +5,14 @@
     "titleEn": "N を V (Transitive Verbs)",
     "structure": "N を V (tha động từ)",
     "structureEn": "N を V (transitive verb)",
-    "explanation": "Trợ từ `を` chỉ đối tượng chịu tác động của hành động (tân ngữ). * `本を読みます`: Đọc sách.\n* `水を飲みます`: Uống nước.",
+    "explanation": "`を` đánh dấu đối tượng trực tiếp của hành động.\n* `本を読みます`: đọc sách.\n* `水を飲みます`: uống nước.",
+    "explanationViDraft": "Trợ từ `を` chỉ đối tượng chịu tác động của hành động (tân ngữ). * `本を読みます`: Đọc sách.\n* `水を飲みます`: Uống nước.",
     "explanationEn": "Particle `を` marks the direct object of a transitive verb. * `本を読みます`: Read a book.\n* `水を飲みます`: Drink water.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 6,
@@ -15,9 +20,14 @@
     "titleEn": "Do N (N を します)",
     "structure": "N を します",
     "structureEn": "N を します",
-    "explanation": "Làm hành động N (danh từ chỉ hành động). * Ví dụ: `サッカー` (bóng đá) -> `サッカーをします` (chơi bóng đá).",
+    "explanation": "Dùng với danh từ chỉ hoạt động để nói “làm/chơi/thực hiện N”. Ví dụ: `サッカーをします` = chơi bóng đá.",
+    "explanationViDraft": "Làm hành động N (danh từ chỉ hành động). * Ví dụ: `サッカー` (bóng đá) -> `サッカーをします` (chơi bóng đá).",
     "explanationEn": "Do N (action noun). * Example: `サッカー` (soccer) -> `サッカーをします` (play soccer).",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 6,
@@ -25,9 +35,14 @@
     "titleEn": "What do you do? (何をしますか)",
     "structure": "何を しますか",
     "structureEn": "何をしますか",
-    "explanation": "Dùng để hỏi ai đó làm gì. Mẫu này thường đi với động từ hành động.",
+    "explanation": "Dùng để hỏi người khác sẽ làm gì hoặc đang làm gì. Với `を`, `何` thường đọc là `なに`.",
+    "explanationViDraft": "Dùng để hỏi ai đó làm gì. Mẫu này thường đi với động từ hành động.",
     "explanationEn": "Question: What do you do? Used to ask what action someone is performing.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 6,
@@ -35,9 +50,14 @@
     "titleEn": "What (何 / なん / なに)",
     "structure": "何 (なん) / 何 (なに)",
     "structureEn": "なん / なに",
-    "explanation": "Cách đọc của `何` (Cái gì). 1. Đọc là `なん` khi đứng trước `d`, `n`, `t` hoặc hậu tố đếm.\n2. Đọc là `なに` trong các trường hợp còn lại (đặc biệt khi đi với `を`).",
+    "explanation": "`何` có hai cách đọc chính.\n* Đọc là `なん` trước âm `d`, `n`, `t` hoặc trước từ đếm.\n* Đọc là `なに` trong nhiều trường hợp khác, đặc biệt khi đi với `を`.",
+    "explanationViDraft": "Cách đọc của `何` (Cái gì). 1. Đọc là `なん` khi đứng trước `d`, `n`, `t` hoặc hậu tố đếm.\n2. Đọc là `なに` trong các trường hợp còn lại (đặc biệt khi đi với `を`).",
     "explanationEn": "Readings of `何` (What). 1. Read as `なん` before `d`, `n`, `t` or counters.\n2. Read as `なに` otherwise (especially with `を`).",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 6,
@@ -45,9 +65,14 @@
     "titleEn": "Action at a place (Particle で)",
     "structure": "N (địa điểm) で V",
     "structureEn": "N (Place) で V",
-    "explanation": "Trợ từ `で` chỉ địa điểm nơi diễn ra hành động. * Khác với `に` (chỉ sự tồn tại) và `へ` (chỉ phương hướng).",
+    "explanation": "`で` chỉ nơi diễn ra hành động. Phân biệt với `に` chỉ nơi tồn tại và `へ` chỉ hướng di chuyển.",
+    "explanationViDraft": "Trợ từ `で` chỉ địa điểm nơi diễn ra hành động. * Khác với `に` (chỉ sự tồn tại) và `へ` (chỉ phương hướng).",
     "explanationEn": "Particle `で` indicates the place where an action occurs. * Distinct from `に` (existence) and `へ` (direction).",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 6,
@@ -55,9 +80,14 @@
     "titleEn": "Won't you...? (Invitation)",
     "structure": "Vませんか",
     "structureEn": "V-ませんか",
-    "explanation": "Dạng phủ định nghi vấn dùng để mời mọc, rủ rê người khác làm gì đó cùng mình một cách lịch sự. * Dịch: \"Anh/chị có muốn ~ không?\" hoặc \"Cùng ~ nhé?\"",
+    "explanation": "Dùng để mời hoặc rủ người khác làm gì đó một cách lịch sự. Có thể hiểu là “Anh/chị có muốn ... không?” hoặc “Cùng ... nhé?”.",
+    "explanationViDraft": "Dạng phủ định nghi vấn dùng để mời mọc, rủ rê người khác làm gì đó cùng mình một cách lịch sự. * Dịch: \"Anh/chị có muốn ~ không?\" hoặc \"Cùng ~ nhé?\"",
     "explanationEn": "Negative question form used to politely invite someone to do something. * Translation: \"Would you like to ~?\" or \"Shall we ~?\"",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 6,
@@ -65,8 +95,13 @@
     "titleEn": "Let's... (Suggestion)",
     "structure": "Vましょう",
     "structureEn": "V-ましょう",
-    "explanation": "Đề nghị người khác cùng làm gì đó, hoặc đáp lại lời mời `Vませんか`. * Dịch: \"Chúng ta cùng ~ nào.\"",
+    "explanation": "Dùng để đề nghị cùng làm gì đó hoặc để đồng ý với lời mời `Vませんか`. Nghĩa gần với “chúng ta cùng ... nhé/nào”.",
+    "explanationViDraft": "Đề nghị người khác cùng làm gì đó, hoặc đáp lại lời mời `Vませんか`. * Dịch: \"Chúng ta cùng ~ nào.\"",
     "explanationEn": "Propose to do something together, or respond to `Vませんか`. * Translation: \"Let's ~.\"",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]

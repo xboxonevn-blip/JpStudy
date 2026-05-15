@@ -5,9 +5,14 @@
     "titleEn": "With N (Tool/Means) (Particle で)",
     "structure": "N (công cụ) で V",
     "structureEn": "N (Tool) で V",
-    "explanation": "Trợ từ `で` chỉ phương tiện, công cụ dùng để thực hiện hành động. * Ăn bằng đũa, viết bằng bút chì, nói bằng tiếng Nhật...",
+    "explanation": "`で` chỉ công cụ hoặc phương tiện dùng để thực hiện hành động: ăn bằng đũa, viết bằng bút chì, nói bằng tiếng Nhật...",
+    "explanationViDraft": "Trợ từ `で` chỉ phương tiện, công cụ dùng để thực hiện hành động. * Ăn bằng đũa, viết bằng bút chì, nói bằng tiếng Nhật...",
     "explanationEn": "Particle `で` indicates the tool or means used to perform an action. * Eat with chopsticks, write with a pencil, speak in Japanese...",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 7,
@@ -15,9 +20,14 @@
     "titleEn": "How do you say ~ in ...?",
     "structure": "\"～\" は 〇〇語(Tiếng ...) で 何ですか",
     "structureEn": "\"~\" は [Language] で 何ですか",
-    "explanation": "Hỏi cách nói một từ/câu trong một ngôn ngữ khác.",
+    "explanation": "Dùng để hỏi một từ hoặc cụm từ được nói như thế nào trong ngôn ngữ khác.",
+    "explanationViDraft": "Hỏi cách nói một từ/câu trong một ngôn ngữ khác.",
     "explanationEn": "Ask how to say a word/phrase in another language.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 7,
@@ -25,9 +35,14 @@
     "titleEn": "To Give (あげます)",
     "structure": "N (người) に [N (vật) を] あげます",
     "structureEn": "N (Person) に [N (Thing) を] あげます",
-    "explanation": "Động từ `あげます`: Tặng, cho. * `に`: Chỉ người nhận.\n* Không dùng `あげます` khi người nhận là người nói (tôi).",
+    "explanation": "`あげます` nghĩa là cho/tặng. Người nhận đi với `に`. Không dùng `あげます` khi người nhận là bản thân người nói.",
+    "explanationViDraft": "Động từ `あげます`: Tặng, cho. * `に`: Chỉ người nhận.\n* Không dùng `あげます` khi người nhận là người nói (tôi).",
     "explanationEn": "Verb `あげます`: To give. * `に`: Marks the recipient.\n* Do not use `あげます` when the receiver is oneself.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 7,
@@ -35,9 +50,14 @@
     "titleEn": "To Receive (もらいます)",
     "structure": "N (người) に [N (vật) を] もらいます",
     "structureEn": "N (Person) に [N (Thing) を] もらいます",
-    "explanation": "Động từ `もらいます`: Nhận. * `に` (hoặc `から`): Chỉ người cho/tặng.\n* Chủ ngữ là người nhận.",
+    "explanation": "`もらいます` nghĩa là nhận. Chủ ngữ là người nhận; người cho/tặng đi với `に` hoặc `から`.",
+    "explanationViDraft": "Động từ `もらいます`: Nhận. * `に` (hoặc `から`): Chỉ người cho/tặng.\n* Chủ ngữ là người nhận.",
     "explanationEn": "Verb `もらいます`: To receive. * `に` (or `から`): Marks the giver.\n* Subject is the receiver.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 7,
@@ -45,8 +65,13 @@
     "titleEn": "Already (もう V-ました)",
     "structure": "もう Vました",
     "structureEn": "もう V-ました",
-    "explanation": "Đã làm gì đó rồi. * Câu hỏi: `もう Vましたか` (Đã ~ chưa?)\n* Trả lời: `はい、もう Vました` (Rồi), `いいえ、まだです` (Chưa).",
+    "explanation": "`もう Vました` nghĩa là “đã làm rồi”.\n* Hỏi: `もう Vましたか` = đã ... chưa?\n* Trả lời: `はい、もう Vました` = rồi; `いいえ、まだです` = chưa.",
+    "explanationViDraft": "Đã làm gì đó rồi. * Câu hỏi: `もう Vましたか` (Đã ~ chưa?)\n* Trả lời: `はい、もう Vました` (Rồi), `いいえ、まだです` (Chưa).",
     "explanationEn": "Already did something. * Question: `もう Vましたか` (Have you ~ yet?)\n* Reply: `はい、もう Vました` (Yes, already) / `いいえ、まだです` (No, not yet).",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]

@@ -5,9 +5,14 @@
     "titleEn": "Adjectives (i/na)",
     "structure": "Aい (tính từ i) / Aな (tính từ na)",
     "structureEn": "A-い (i-adjectives) / A-な (na-adjectives)",
-    "explanation": "Tính từ dùng để miêu tả sự vật, trạng thái hoặc làm vị ngữ. * **Tính từ i**: Thường kết thúc bằng `い` khi ở dạng từ điển.\n* **Tính từ na**: Khi bổ nghĩa cho danh từ thì thêm `な`, còn khi đứng cuối câu thì không dùng `な`.",
+    "explanation": "Tính từ dùng để miêu tả sự vật, con người hoặc trạng thái.\n* Tính từ i thường kết thúc bằng `い` ở dạng từ điển.\n* Tính từ na thêm `な` khi đứng trước danh từ, nhưng không thêm `な` khi đứng cuối câu.",
+    "explanationViDraft": "Tính từ dùng để miêu tả sự vật, trạng thái hoặc làm vị ngữ. * **Tính từ i**: Thường kết thúc bằng `い` khi ở dạng từ điển.\n* **Tính từ na**: Khi bổ nghĩa cho danh từ thì thêm `な`, còn khi đứng cuối câu thì không dùng `な`.",
     "explanationEn": "Adjectives describe things or states and can also be used as predicates. * **i-adjectives**: Usually end in `い` in dictionary form.\n* **na-adjectives**: Add `な` before a noun, but do not use `な` at the end of a sentence.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 8,
@@ -15,9 +20,14 @@
     "titleEn": "Negative Adjectives",
     "structure": "Aい -> Aくないです / Aな -> Aじゃありません",
     "structureEn": "A-い -> A-くないです / A-な -> A-じゃありません",
-    "explanation": "Dùng để nói một tính chất nào đó không đúng. * `Aい`: Bỏ `い`, rồi thêm `くないです`.\n* `Aな`: Dùng `じゃありません` giống danh từ.",
+    "explanation": "Dùng để nói một tính chất không đúng.\n* Tính từ i: bỏ `い`, thêm `くないです`.\n* Tính từ na: dùng `じゃありません`, giống câu danh từ.",
+    "explanationViDraft": "Dùng để nói một tính chất nào đó không đúng. * `Aい`: Bỏ `い`, rồi thêm `くないです`.\n* `Aな`: Dùng `じゃありません` giống danh từ.",
     "explanationEn": "Used to say that an adjective does not apply. * `Aい`: Drop `い` and add `くないです`.\n* `Aな`: Use `じゃありません`, just like with nouns.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 8,
@@ -25,9 +35,14 @@
     "titleEn": "Modifying Nouns with Adjectives",
     "structure": "Aな + N / Aい + N",
     "structureEn": "A-な + N / A-い + N",
-    "explanation": "Mẫu này dùng khi tính từ đứng trước danh từ. * `Aい`: Giữ nguyên rồi đặt trước danh từ.\n* `Aな`: Thêm `な` trước danh từ.",
+    "explanation": "Dùng khi tính từ bổ nghĩa trực tiếp cho danh từ.\n* Tính từ i: đặt nguyên dạng trước danh từ.\n* Tính từ na: thêm `な` trước danh từ.",
+    "explanationViDraft": "Mẫu này dùng khi tính từ đứng trước danh từ. * `Aい`: Giữ nguyên rồi đặt trước danh từ.\n* `Aな`: Thêm `な` trước danh từ.",
     "explanationEn": "Use this pattern when an adjective comes before a noun. * `Aい`: Keep it as is before the noun.\n* `Aな`: Add `な` before the noun.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 8,
@@ -35,9 +50,14 @@
     "titleEn": "..., but ... (Particle が)",
     "structure": "S1 が、 S2",
     "structureEn": "S1 が、S2",
-    "explanation": "`が` nối hai vế khi vế sau mang ý đối lập hoặc trái kỳ vọng so với vế trước.",
+    "explanation": "`が` nối hai vế câu khi vế sau đối lập hoặc khác với điều người nghe có thể đoán từ vế trước.",
+    "explanationViDraft": "`が` nối hai vế khi vế sau mang ý đối lập hoặc trái kỳ vọng so với vế trước.",
     "explanationEn": "`が` connects two clauses when the second contrasts with or goes against the expectation of the first.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 8,
@@ -45,9 +65,14 @@
     "titleEn": "Very / Not very (Degree Adverbs)",
     "structure": "とても A (khẳng định) / あまり A (phủ định)",
     "structureEn": "とても A (affirmative) / あまり A (negative)",
-    "explanation": "Đây là hai phó từ chỉ mức độ thường gặp. * `とても`: rất, dùng trong câu khẳng định.\n* `あまり`: không... lắm, thường đi với câu phủ định.",
+    "explanation": "Hai phó từ chỉ mức độ thường gặp.\n* `とても`: rất, dùng với câu khẳng định.\n* `あまり`: không ... lắm, thường đi với câu phủ định.",
+    "explanationViDraft": "Đây là hai phó từ chỉ mức độ thường gặp. * `とても`: rất, dùng trong câu khẳng định.\n* `あまり`: không... lắm, thường đi với câu phủ định.",
     "explanationEn": "These are common adverbs of degree. * `とても`: very, used with affirmative statements.\n* `あまり`: not very, usually used with negative statements.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 8,
@@ -55,9 +80,14 @@
     "titleEn": "How is...? (どうですか)",
     "structure": "N は どうですか",
     "structureEn": "N は どうですか",
-    "explanation": "Mẫu này dùng để hỏi cảm nhận, tình trạng hoặc đặc điểm của một sự vật, nơi chốn hay người nào đó.",
+    "explanation": "Dùng để hỏi cảm nhận, tình trạng hoặc đặc điểm của một người, vật, địa điểm hay sự việc.",
+    "explanationViDraft": "Mẫu này dùng để hỏi cảm nhận, tình trạng hoặc đặc điểm của một sự vật, nơi chốn hay người nào đó.",
     "explanationEn": "Use this pattern to ask about the impression, condition, or quality of a thing, place, or person.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 8,
@@ -65,8 +95,13 @@
     "titleEn": "What kind of N?",
     "structure": "どんな N ですか",
     "structureEn": "どんな N ですか",
-    "explanation": "Dùng để hỏi cụ thể một người hay vật thuộc kiểu nào, có đặc điểm ra sao.",
+    "explanation": "Dùng để hỏi người hoặc vật thuộc loại nào, có đặc điểm ra sao.",
+    "explanationViDraft": "Dùng để hỏi cụ thể một người hay vật thuộc kiểu nào, có đặc điểm ra sao.",
     "explanationEn": "Use this to ask what kind of person or thing something is, or what characteristics it has.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]
