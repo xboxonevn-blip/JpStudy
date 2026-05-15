@@ -5,9 +5,14 @@
     "titleEn": "Volitional Form (Let's/Intent)",
     "structure": "V (Ý định)",
     "structureEn": "V (Volitional Form)",
-    "explanation": "Cách chia động từ sang thể Ý định. * **Nhóm I**: Chuyển cột `i` thành cột `o` + `う`.\n* **Nhóm II**: Bỏ `ます` thêm `よう`.\n* **Nhóm III**: `きます` -> `こよう`; `します` -> `しよう`.",
+    "explanation": "Thể ý định dùng để rủ rê thân mật hoặc nói ý định của bản thân.\n* Nhóm I: đổi âm hàng `い` sang hàng `お`, rồi thêm `う`.\n* Nhóm II: bỏ `ます`, thêm `よう`.\n* Nhóm III: `きます` -> `こよう`; `します` -> `しよう`.",
+    "explanationViDraft": "Cách chia động từ sang thể Ý định. * **Nhóm I**: Chuyển cột `i` thành cột `o` + `う`.\n* **Nhóm II**: Bỏ `ます` thêm `よう`.\n* **Nhóm III**: `きます` -> `こよう`; `します` -> `しよう`.",
     "explanationEn": "Conjugating verbs to Volitional Form. * **Group I**: Change `i` column to `o` column + `う`.\n* **Group II**: Drop `ます`, add `よう`.\n* **Group III**: `きます` -> `こよう`; `します` -> `しよう`.",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 31,
@@ -15,9 +20,14 @@
     "titleEn": "Intend to (つもり)",
     "structure": "Vる / Vない + つもりです",
     "structureEn": "V-る / V-ない + つもりです",
-    "explanation": "Dự định làm gì, không làm gì (Quyết tâm cao hơn `思います`). * `国へ行かないつもりです`: Tôi định sẽ không về nước.",
+    "explanation": "`つもりです` dùng để nói dự định làm hoặc không làm gì. Sắc thái là đã nghĩ khá rõ, mạnh hơn chỉ nói `と思います`.",
+    "explanationViDraft": "Dự định làm gì, không làm gì (Quyết tâm cao hơn `思います`). * `国へ行かないつもりです`: Tôi định sẽ không về nước.",
     "explanationEn": "Plan to do / not do something (Stronger determination than `思います`). * `国へ行かないつもりです`: I intend not to go back to my country.",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 31,
@@ -25,9 +35,14 @@
     "titleEn": "Plan/Schedule (予定)",
     "structure": "Vる / Nの + 予定です",
     "structureEn": "V-る / N の + 予定です",
-    "explanation": "Kế hoạch, dự định (đã được quyết định). * `7月の終わりにドイツへ行く予定です`: Theo kế hoạch tôi sẽ đi Đức vào cuối tháng 7.",
+    "explanation": "`予定です` dùng cho kế hoạch/lịch trình đã được quyết định hoặc sắp xếp trước.",
+    "explanationViDraft": "Kế hoạch, dự định (đã được quyết định). * `7月の終わりにドイツへ行く予定です`: Theo kế hoạch tôi sẽ đi Đức vào cuối tháng 7.",
     "explanationEn": "Plan / Schedule (Decided). * `7月の終わりにドイツへ行く予定です`: I am scheduled to go to Germany at the end of July.",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 31,
@@ -35,9 +50,13 @@
     "titleEn": "~ decide to do",
     "structure": "V辞書 / Vない + ことにする",
     "structureEn": "V辞書 / Vない + ことにする",
-    "explanation": "Diễn tả quyết định do bản thân đưa ra.",
+    "explanation": "`ことにする` diễn tả quyết định do chính người nói/người trong câu đưa ra.",
+    "explanationViDraft": "Diễn tả quyết định do bản thân đưa ra.",
     "explanationEn": "Expresses a personal decision.",
     "level": "N4",
-    "tags": "quality-upgrade,manual-review-needed"
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]

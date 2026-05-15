@@ -5,9 +5,14 @@
     "titleEn": "Just as ... (とおりに)",
     "structure": "Vる / Vた / Nの + とおりに、V2",
     "structureEn": "V-る / V-た / N の + とおりに, V2",
-    "explanation": "Làm V2 theo đúng như V1/N. * `私が言うとおりに、書いてください`: Hãy viết theo đúng như tôi nói.",
+    "explanation": "`とおりに` dùng để nói làm đúng theo lời nói, hướng dẫn, kế hoạch, mẫu hoặc cách đã thấy.",
+    "explanationViDraft": "Làm V2 theo đúng như V1/N. * `私が言うとおりに、書いてください`: Hãy viết theo đúng như tôi nói.",
     "explanationEn": "Do V2 exactly as V1/N. * `私が言うとおりに、書いてください`: Please write exactly as I say.",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 34,
@@ -15,9 +20,14 @@
     "titleEn": "After ... (あとで)",
     "structure": "Vた / Nの + あとで、V2",
     "structureEn": "V-た / N の + あとで, V2",
-    "explanation": "Sau khi làm V1 thì làm V2. * `てから` nhấn mạnh thứ tự ngay lập tức. `あとで` nhấn mạnh sự kiện xảy ra sau.",
+    "explanation": "`あとで` dùng để nói một việc xảy ra sau hành động hoặc sự kiện khác. So với `てから`, mẫu này nhấn mạnh “sau đó” hơn là thứ tự liền ngay.",
+    "explanationViDraft": "Sau khi làm V1 thì làm V2. * `てから` nhấn mạnh thứ tự ngay lập tức. `あとで` nhấn mạnh sự kiện xảy ra sau.",
     "explanationEn": "After doing V1, do V2. * Similar to `te kara` but emphasizes the event sequence.",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 34,
@@ -25,9 +35,14 @@
     "titleEn": "With/Without (State of action)",
     "structure": "V1て / V1ないで + V2",
     "structureEn": "V1-て / V1-ないで + V2",
-    "explanation": "Làm V2 trong trạng thái V1 (hoặc không V1). * `しょうゆをつけて食べます`: Ăn (kèm với) chấm xì dầu.\n* `何もつけないで食べます`: Ăn mà không chấm gì cả.",
+    "explanation": "Dùng để nói làm V2 trong trạng thái có làm hoặc không làm V1. Ví dụ: ăn có chấm xì dầu, hoặc ăn mà không chấm gì.",
+    "explanationViDraft": "Làm V2 trong trạng thái V1 (hoặc không V1). * `しょうゆをつけて食べます`: Ăn (kèm với) chấm xì dầu.\n* `何もつけないで食べます`: Ăn mà không chấm gì cả.",
     "explanationEn": "Do V2 with (or without) the state of V1. * `しょうゆをつけて食べます`: Eat with soy sauce.\n* `何もつけないで食べます`: Eat without dipping in anything.",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 34,
@@ -35,9 +50,13 @@
     "titleEn": "~ before",
     "structure": "V辞書 / Nの + 前に",
     "structureEn": "V辞書 / Nの + 前に",
-    "explanation": "Diễn tả làm gì trước hành động khác.",
+    "explanation": "`前に` dùng để nói làm một việc trước một hành động, sự kiện hoặc thời điểm khác.",
+    "explanationViDraft": "Diễn tả làm gì trước hành động khác.",
     "explanationEn": "Expresses doing something before another action.",
     "level": "N4",
-    "tags": "quality-upgrade,manual-review-needed"
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]

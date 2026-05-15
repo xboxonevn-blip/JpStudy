@@ -5,9 +5,14 @@
     "titleEn": "Conditional Form (ば)",
     "structure": "Vば / Aければ / A-N なら",
     "structureEn": "V-ば / A-ければ / A-N なら",
-    "explanation": "Nếu... thì... (Điều kiện giả định). * Động từ: Nhóm I (u->eba), Nhóm II (reba), Nhóm III (kureba, sureba).\n* Tính từ i: i -> kereba.\n* Tính từ na, Danh từ: Bỏ na/da -> nara.",
+    "explanation": "Thể điều kiện `ば` dùng để nói “nếu ... thì ...”.\n* Động từ: Nhóm I đổi âm cuối sang hàng `え` + `ば`; Nhóm II thêm `れば`; Nhóm III là `くれば`, `すれば`.\n* Tính từ i: `い` -> `ければ`.\n* Tính từ na/danh từ: dùng `なら`.",
+    "explanationViDraft": "Nếu... thì... (Điều kiện giả định). * Động từ: Nhóm I (u->eba), Nhóm II (reba), Nhóm III (kureba, sureba).\n* Tính từ i: i -> kereba.\n* Tính từ na, Danh từ: Bỏ na/da -> nara.",
     "explanationEn": "If... then... (Conditional). * Verbs: Group I (u->eba), Group II (reba), Group III (kureba, sureba).\n* i-adj: i -> kereba.\n* na-adj / Noun: nara.",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 35,
@@ -15,9 +20,14 @@
     "titleEn": "If it is N ... (Topic limitation)",
     "structure": "N なら",
     "structureEn": "N なら",
-    "explanation": "Nếu là N (giới hạn một chủ đề để đưa ra lời khuyên/thông tin). * `温泉なら、白馬がいいですよ`: Nếu là suối nước nóng thì Hakuba được đấy.",
+    "explanation": "`なら` dùng để giới hạn chủ đề rồi đưa ra lời khuyên, thông tin hoặc nhận xét: “nếu nói về N thì...”.",
+    "explanationViDraft": "Nếu là N (giới hạn một chủ đề để đưa ra lời khuyên/thông tin). * `温泉なら、白馬がいいですよ`: Nếu là suối nước nóng thì Hakuba được đấy.",
     "explanationEn": "If talk about N (Limiting the topic). * `温泉なら、白馬がいいですよ`: If you are talking about Onsen, Hakuba is good.",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 35,
@@ -25,10 +35,14 @@
     "titleEn": "~ why don’t you",
     "structure": "Vたら + どうですか",
     "structureEn": "Vたら + どうですか",
-    "explanation": "Dùng để đưa ra lời khuyên.",
+    "explanation": "`たらどうですか` dùng để đưa ra lời khuyên hoặc gợi ý: “thử ... thì sao?”.",
+    "explanationViDraft": "Dùng để đưa ra lời khuyên.",
     "explanationEn": "Used to give advice.",
     "level": "N4",
-    "tags": "quality-upgrade,manual-review-needed"
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 35,
@@ -36,9 +50,13 @@
     "titleEn": "~ even if",
     "structure": "Vて / Aくて / Nでも",
     "structureEn": "Vて / Aくて / Nでも",
-    "explanation": "Diễn tả giả định nhượng bộ: cho dù thế nào cũng.",
+    "explanation": "`ても` diễn tả điều kiện nhượng bộ: dù điều kiện xảy ra, kết quả vẫn như vậy hoặc vẫn trái với mong đợi.",
+    "explanationViDraft": "Diễn tả giả định nhượng bộ: cho dù thế nào cũng.",
     "explanationEn": "Expresses concession: even if.",
     "level": "N4",
-    "tags": "quality-upgrade,manual-review-needed"
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]
