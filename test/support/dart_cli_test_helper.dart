@@ -18,7 +18,7 @@ Future<ProcessResult> runDartTool(
   await _acquireLock(lockFile);
 
   try {
-    return Process.run(
+    return await Process.run(
       Platform.isWindows ? 'dart.bat' : 'dart',
       ['run', ...arguments],
       workingDirectory: repoRoot,
