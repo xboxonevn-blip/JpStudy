@@ -91,7 +91,10 @@ These prevent marking the active goal complete:
    `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY` repository secrets exist.
 4. Firebase Storage migration remains blocked. Anonymous Auth works, but the
    Storage bucket/rules/CORS path is not provisioned/proven, so
-   `JPSTUDY_ENABLE_LEGACY_STORAGE_MIGRATION` must stay unset/false.
+   `JPSTUDY_ENABLE_LEGACY_STORAGE_MIGRATION` must stay unset/false. A
+   2026-05-15 `firebase deploy --only storage --project jpstudy-v2 --dry-run`
+   check still reports that Firebase Storage has not been set up on the
+   project.
 5. First executed deletion runbook proof is missing. The runbook and Support ID
    surface exist, but no real deletion request has been executed end to end.
 6. GA4 UI retention proof is still console-only. BigQuery TTL is proven from
