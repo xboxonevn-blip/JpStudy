@@ -12,8 +12,9 @@ resource/Lighthouse probes pass. Anonymous Auth is now enabled and live
 `accounts:signUp` returns `200`, but Storage-backed legacy migration is gated
 off until Firebase Storage is provisioned. Remaining blockers before the pilot
 are Firebase Storage setup, the first secret-backed GitHub deploy run, and real
-Sentry operational proof and a larger GA4 learning-event sample. Recruit N5/N4 first, then add scoped N3/N2
-testers with the N3+ draft-quality disclaimer and source/provenance caveats.
+Sentry operational proof and a larger GA4 learning-event sample. Recruit N5/N4
+first, then add scoped N3/N2 testers with the N3+ route/scope note for
+non-Minna routing and incomplete N1 kanji coverage.
 
 ## Highest-Leverage Findings Shipped
 

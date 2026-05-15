@@ -117,9 +117,7 @@ ProviderContainer _buildContainer({
       allDueTermsProvider.overrideWith((ref) async {
         return (repo as _FakeVocabRepo).dueTerms;
       }),
-      nextVocabReviewProvider.overrideWith((ref) async* {
-        yield nextReview;
-      }),
+      vocabNextReviewSnapshotProvider.overrideWith((ref) => nextReview),
     ],
   );
 }

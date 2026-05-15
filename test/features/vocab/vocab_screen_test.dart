@@ -361,6 +361,9 @@ Widget _buildRouterScreen({
 
 Future<void> _pumpCatalog(WidgetTester tester) async {
   await tester.pump();
+  await tester.runAsync(() async {
+    await Future<void>.delayed(const Duration(seconds: 2));
+  });
   for (var i = 0; i < 10; i++) {
     await tester.pump(const Duration(milliseconds: 200));
   }
@@ -547,10 +550,12 @@ void main() {
     },
   );
 
-  setUp(() {
+  setUp(() async {
     SharedPreferences.setMockInitialValues({
+      'app.locale': 'en',
       'foundations.softSuggest.vocab.shown': true,
     });
+    _prefs = await SharedPreferences.getInstance();
   });
 
   testWidgets('VocabScreen shows catalog hero and all level sections', (
@@ -620,7 +625,7 @@ void main() {
     expect(todayTopLeft.dy, lessThan(heroTopLeft.dy));
   });
 
-  testWidgets('VocabScreen shows draft quality note for N3 level', (
+  testWidgets('VocabScreen shows upper-level scope note for N3 level', (
     tester,
   ) async {
     final repo = _FakeVocabLessonRepository(
@@ -634,7 +639,7 @@ void main() {
       find.byKey(const ValueKey('content_draft_quality_note')),
       findsOneWidget,
     );
-    expect(find.textContaining('N3+ content is still'), findsOneWidget);
+    expect(find.textContaining('N3+ uses JLPT-focused routes'), findsOneWidget);
   });
 
   testWidgets(

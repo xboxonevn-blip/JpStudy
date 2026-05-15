@@ -399,11 +399,11 @@ extension AppLanguageLabels on AppLanguage {
   String get contentDraftQualityNote {
     switch (this) {
       case AppLanguage.en:
-        return 'N3+ content is still under editorial review. Some explanations may not read naturally yet.';
+        return 'N3+ uses JLPT-focused routes instead of a Minna continuation. N1 kanji scope is still expanding.';
       case AppLanguage.vi:
-        return 'Nội dung cấp N3+ đang trong giai đoạn hoàn thiện biên tập. Một số giải thích có thể chưa tự nhiên.';
+        return 'Nội dung N3+ dùng lộ trình JLPT thay vì tiếp nối Minna. Phạm vi Hán tự N1 vẫn đang được mở rộng.';
       case AppLanguage.ja:
-        return 'N3以上のコンテンツは現在編集確認中です。一部の解説はまだ自然でない場合があります。';
+        return 'N3以上はみんなの日本語の続きではなくJLPT向けルートです。N1漢字の範囲は引き続き拡張中です。';
     }
   }
 

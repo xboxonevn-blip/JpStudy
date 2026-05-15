@@ -63,23 +63,24 @@ Future<_SeriesManifestSummary> _loadShinkanzenManifestSummary(
       return const _SeriesManifestSummary.empty();
     }
 
-    var readyRouteCount = 0;
-    var importedTermCount = 0;
+    final entryCountFutures = <Future<int>>[];
     for (final rawLesson in lessons) {
       if (rawLesson is! Map) continue;
       final lesson = rawLesson.map((k, v) => MapEntry(k.toString(), v));
       final fileName = (lesson['file'] ?? '').toString().trim();
       if (fileName.isEmpty) continue;
-      readyRouteCount += 1;
-      importedTermCount += await _loadShinkanzenEntryCount(
-        'assets/data/content/vocab/$levelLower/ShinKanzen/$fileName',
+      entryCountFutures.add(
+        _loadShinkanzenEntryCount(
+          'assets/data/content/vocab/$levelLower/ShinKanzen/$fileName',
+        ),
       );
     }
+    final entryCounts = await Future.wait(entryCountFutures);
 
     return _SeriesManifestSummary(
       routeCount: lessons.length,
-      readyRouteCount: readyRouteCount,
-      importedTermCount: importedTermCount,
+      readyRouteCount: entryCounts.length,
+      importedTermCount: entryCounts.fold<int>(0, (sum, count) => sum + count),
     );
   } catch (_) {
     return const _SeriesManifestSummary.empty();

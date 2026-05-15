@@ -59,12 +59,17 @@ class VocabHomeSection {
   }
 }
 
+final vocabNextReviewSnapshotProvider = Provider<DateTime?>((ref) {
+  return ref.watch(nextVocabReviewProvider).value;
+});
+
 final vocabHomeSectionProvider = FutureProvider<VocabHomeSection>((ref) async {
   final repo = ref.watch(lessonRepositoryProvider);
   final selectedLevel = ref.watch(studyLevelProvider) ?? StudyLevel.n5;
+  final dueTermsFuture = ref.watch(allDueTermsProvider.future);
+  final nextReview = ref.watch(vocabNextReviewSnapshotProvider);
 
-  final dueCount = (await ref.watch(allDueTermsProvider.future)).length;
-  final nextReview = await ref.watch(nextVocabReviewProvider.future);
+  final dueCount = (await dueTermsFuture).length;
 
   // Fire all remaining independent queries concurrently.
   final n5Future = repo.countVocabByLevelAndSeries('N5', 'hajimete');

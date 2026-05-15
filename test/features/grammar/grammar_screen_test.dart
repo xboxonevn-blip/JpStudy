@@ -275,7 +275,9 @@ void main() {
     expect(find.text('Ngữ pháp'), findsWidgets);
   });
 
-  testWidgets('shows draft quality note for N3 grammar lane', (tester) async {
+  testWidgets('shows upper-level scope note for N3 grammar lane', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       _buildScreen(language: AppLanguage.vi, level: StudyLevel.n3),
     );
@@ -285,7 +287,10 @@ void main() {
       find.byKey(const ValueKey('content_draft_quality_note')),
       findsOneWidget,
     );
-    expect(find.textContaining('Nội dung cấp N3+'), findsOneWidget);
+    expect(
+      find.textContaining('Nội dung N3+ dùng lộ trình JLPT'),
+      findsOneWidget,
+    );
   });
 
   testWidgets('JA locale shows Japanese app bar title', (tester) async {
