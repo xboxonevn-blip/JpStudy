@@ -52,7 +52,7 @@ UTF-8 parse check:
 |---|---|
 | JSON files parsed | 781 |
 | Invalid JSON / invalid UTF-8 | 0 |
-| Double-encoded UTF-8 markers (`Ã`, `â€`, `\u00c3`, `\ufffd`, `�`) | 0 |
+| Double-encoded UTF-8 marker families (Latin-A continuation, broken smart-punctuation bytes, escaped replacement code points) | 0 |
 | Probable `?` replacement artifacts | 442 matches in 62 files |
 
 The `?` queue is not the same as normal question punctuation. It is focused on patterns such as `xu?t hi?n`, `trong t?`, `Ng??i`, `Nh?n`, and `b?n d?ch`.
