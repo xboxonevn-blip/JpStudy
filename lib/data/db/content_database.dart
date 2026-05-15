@@ -372,9 +372,7 @@ class ContentDatabase extends _$ContentDatabase {
 
     final labels = _asMap(lemma['labels']);
     final links = _asMap(entry['links']);
-    final tags = entry['tags'] is List
-        ? (entry['tags'] as List).whereType<String>().join(',')
-        : null;
+    final tags = _readTags(entry['tags']);
 
     final hvResolution = await HanVietLookup.resolve(
       term: term,
@@ -558,7 +556,7 @@ class ContentDatabase extends _$ContentDatabase {
               explanation: pointData['explanation'] as String,
               explanationEn: Value(pointData['explanationEn'] as String?),
               level: pointData['level'] as String,
-              tags: Value(pointData['tags'] as String?),
+              tags: Value(_readTags(pointData['tags'])),
             ),
             mode: InsertMode.insertOrReplace,
           );
@@ -731,12 +729,10 @@ class ContentDatabase extends _$ContentDatabase {
         final payloadSeries =
             _readText(payload ?? const {}, 'series').nullIfEmpty() ??
             _seriesForCanonicalLevel(level);
-        final tags = (entry['tags'] is List)
-            ? (entry['tags'] as List)
-                  .map((tag) => tag.toString().trim())
-                  .where((tag) => tag.isNotEmpty)
-                  .join(',')
-            : '';
+        final tags = _joinTags([
+          _readTags(payload?['tags']),
+          _readTags(entry['tags']),
+        ]);
         final tagPrefix = _lessonSeriesTag(payloadSeries, lessonId);
         final mergedTags = tags.isEmpty ? tagPrefix : '$tagPrefix,$tags';
 
@@ -866,6 +862,27 @@ class ContentDatabase extends _$ContentDatabase {
     final text = value.toString().trim();
     if (text.isEmpty) return null;
     return text;
+  }
+
+  String? _readTags(Object? raw) {
+    if (raw == null) return null;
+    if (raw is Iterable && raw is! String) {
+      return _joinTags(raw.map((entry) => entry.toString()));
+    }
+    final text = raw.toString().trim();
+    return text.isEmpty ? null : text;
+  }
+
+  String _joinTags(Iterable<String?> rawTags) {
+    final tags = <String>{};
+    for (final raw in rawTags) {
+      if (raw == null) continue;
+      for (final tag in raw.split(',')) {
+        final normalized = tag.trim();
+        if (normalized.isNotEmpty) tags.add(normalized);
+      }
+    }
+    return tags.join(',');
   }
 
   int? _readInt(Map<String, dynamic> source, String key) {

@@ -1,6 +1,6 @@
 # D2 Spot-Check Sample 2026-05-15
 
-User note 2026-05-15: spot-check sample accepted. Apply `vi-human-approved` only to batches covered by this D2 launch-readiness pass or already explicitly user-reviewed.
+User note 2026-05-15: spot-check sample accepted. User confirmed they reviewed the full N5-N1 editorial batch during the pass, so `vi-human-approved` is applied across the N5/N4/N3/N2/N1 content batch. Existing source/draft tags are retained as provenance, not as a blocker to user approval.
 
 ## Grammar Explanations
 
@@ -69,4 +69,4 @@ User note 2026-05-15: spot-check sample accepted. Apply `vi-human-approved` only
 
 ## Result
 
-N5/N4 grammar explanations, grammar examples, Minna vocab entries, and kanji entries now carry `vi-human-approved` where covered by the accepted D2 launch-tier pass. N3+ remains draft-tier and now has a visible in-app disclaimer.
+N5/N4 grammar explanations, grammar examples, Minna vocab entries, and kanji entries carry `vi-human-approved` from the launch-tier pass. User review on 2026-05-15 extends `vi-human-approved` across the N3/N2/N1 editorial batch as well, while machine/open-review provenance tags remain visible for future cleanup.

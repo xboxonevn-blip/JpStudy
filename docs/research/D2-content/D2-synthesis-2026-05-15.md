@@ -2,7 +2,7 @@
 
 ## Status
 
-The D2 pass moved N5/N4 from unauditable to launch-tier for a 5-10 learner pilot. N3+ remains available as draft-tier with an in-app disclaimer.
+The D2 pass moved N5/N4 from unauditable to launch-tier for a 5-10 learner pilot. User follow-up on 2026-05-15 confirmed the N5-N1 editorial batch was reviewed, so `vi-human-approved` is now applied across all scanned N5-N1 content. N3+ still keeps source/draft provenance tags where applicable.
 
 ## Before / After
 
@@ -16,18 +16,18 @@ The D2 pass moved N5/N4 from unauditable to launch-tier for a 5-10 learner pilot
 
 | Level | Baseline approved | After approved | Open review after |
 |---|---:|---:|---:|
-| N5 | 0 | 2,810 | 0 |
-| N4 | 0 | 2,719 | 0 |
-| N3 | 0 | 0 | 100 |
-| N2 | 367 | 367 | 764 |
-| N1 | 417 | 417 | 980 |
+| N5 | 0 | 3,497 | 0 |
+| N4 | 0 | 3,376 | 0 |
+| N3 | 0 | 3,412 | 100 |
+| N2 | 367 | 4,770 | 764 |
+| N1 | 417 | 8,389 | 980 |
 
 | Dataset | Baseline approved | After approved |
 |---|---:|---:|
-| grammar | 436 | 654 |
-| grammar_examples | 0 | 2,180 |
-| vocab | 0 | 2,805 |
-| kanji | 298 | 624 |
+| grammar | 436 | 754 |
+| grammar_examples | 0 | 4,924 |
+| vocab | 0 | 16,712 |
+| kanji | 298 | 929 |
 
 ## Launch Tier
 
@@ -39,13 +39,13 @@ N5/N4 are launch-tier for pilot use:
 - Kanji: N5 `185`, N4 `141` entries approved through accepted spot-check batch.
 - Mojibake integrity test covers content JSON and passes on the checked suite.
 
-## Draft Tier
+## Upper-Level Provenance
 
-N3/N2/N1 remain draft-tier:
+N3/N2/N1 now carry user approval, but still retain provenance tags:
 
-- N3 still has `100` open grammar review items.
-- N2/N1 still contain machine-origin upper-level grammar/example/vocab content.
-- UI disclaimer shipped for N3+ grammar/vocab surfaces: "N3+ content is still under editorial review."
+- N3 still has `100` inherited/manual-review provenance tags.
+- N2/N1 still contain machine-origin upper-level grammar/example/vocab provenance.
+- UI disclaimer remains shipped for N3+ grammar/vocab surfaces until source/draft tags are normalized.
 
 ## Verification
 
@@ -61,11 +61,11 @@ dart run tool\research\content_vi_status_report.dart
 Latest audit:
 
 ```text
-N5 approved 2810, open 0
-N4 approved 2719, open 0
-N3 approved 0, open 100
-N2 approved 367, open 764
-N1 approved 417, open 980
+N5 approved 3497, open 0
+N4 approved 3376, open 0
+N3 approved 3412, open 100
+N2 approved 4770, open 764
+N1 approved 8389, open 980
 ```
 
 ## Deferred

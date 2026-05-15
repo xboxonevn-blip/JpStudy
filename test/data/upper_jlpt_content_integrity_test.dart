@@ -157,7 +157,7 @@ void main() {
           final decoded = jsonDecode(file.readAsStringSync()) as List<dynamic>;
           for (final rawPoint in decoded) {
             final point = rawPoint as Map<String, dynamic>;
-            final tags = _readRequired(point, 'tags');
+            final tags = _readTags(point, 'tags');
 
             expect(_readRequired(point, 'title'), isNot(contains('ã')));
             expect(_readRequired(point, 'structure'), isNot(contains('ã')));
@@ -325,4 +325,20 @@ String _readRequired(Map<String, dynamic> map, String key) {
   final value = map[key];
   expect(value, isA<String>(), reason: key);
   return value as String;
+}
+
+List<String> _readTags(Map<String, dynamic> map, String key) {
+  final value = map[key];
+  if (value is String) {
+    return value
+        .split(',')
+        .map((tag) => tag.trim())
+        .where((tag) => tag.isNotEmpty)
+        .toList(growable: false);
+  }
+  expect(value, isA<List<dynamic>>(), reason: key);
+  return (value as List<dynamic>)
+      .map((tag) => tag.toString().trim())
+      .where((tag) => tag.isNotEmpty)
+      .toList(growable: false);
 }
