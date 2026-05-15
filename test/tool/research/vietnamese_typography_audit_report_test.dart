@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../support/dart_cli_test_helper.dart';
+
 void main() {
   test('prints Vietnamese typography audit markdown', () async {
     final tempDir = await Directory.systemTemp.createTemp(
@@ -33,10 +35,8 @@ extension Copy on AppLanguage {
 }
 ''');
 
-    final result = await Process.run(
-      Platform.isWindows ? 'dart.bat' : 'dart',
+    final result = await runDartTool(
       [
-        'run',
         'tool/research/vietnamese_typography_audit_report.dart',
         '--app-language',
         appLanguage.path,

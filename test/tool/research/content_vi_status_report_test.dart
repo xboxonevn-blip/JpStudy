@@ -3,9 +3,10 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../support/dart_cli_test_helper.dart';
+
 void main() {
   test('prints Vietnamese content status from the CLI', () async {
-    final repoRoot = _repoRoot();
     final tempDir = await Directory.systemTemp.createTemp('jpstudy_content_');
     addTearDown(() async {
       if (await tempDir.exists()) {
@@ -31,12 +32,11 @@ void main() {
           ),
         );
 
-    final result = await Process.run(Platform.isWindows ? 'dart.bat' : 'dart', [
-      'run',
+    final result = await runDartTool([
       'tool/research/content_vi_status_report.dart',
       '--content-root',
       contentDir.path,
-    ], workingDirectory: repoRoot);
+    ]);
 
     expect(result.stderr, isEmpty);
     expect(result.exitCode, 0);
@@ -45,13 +45,4 @@ void main() {
     expect(result.stdout as String, contains('| N1 | 1 | 1 | 1 | 0 |'));
     expect(result.stdout as String, contains('| vocab | 1 | 1 | 1 | 0 |'));
   });
-}
-
-String _repoRoot() {
-  final githubWorkspace = Platform.environment['GITHUB_WORKSPACE'];
-  if (githubWorkspace != null &&
-      File('$githubWorkspace/pubspec.yaml').existsSync()) {
-    return githubWorkspace;
-  }
-  return Directory.current.path;
 }

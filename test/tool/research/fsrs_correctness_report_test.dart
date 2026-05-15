@@ -1,11 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter_test/flutter_test.dart';
+
+import '../../support/dart_cli_test_helper.dart';
 
 void main() {
   test('prints FSRS correctness audit from the CLI', () async {
-    final result = await Process.run(Platform.isWindows ? 'dart.bat' : 'dart', [
-      'run',
+    final result = await runDartTool([
       'tool/research/fsrs_correctness_report.dart',
     ]);
 

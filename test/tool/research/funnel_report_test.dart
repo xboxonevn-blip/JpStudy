@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../support/dart_cli_test_helper.dart';
+
 void main() {
   test(
     'scores open to onboarding to first SRS funnel from normalized events',
@@ -39,15 +41,13 @@ void main() {
         ]),
       );
 
-      final result =
-          await Process.run(Platform.isWindows ? 'dart.bat' : 'dart', [
-            'run',
-            'tool/research/funnel_report.dart',
-            '--events',
-            fixture.path,
-            '--window-start',
-            '2026-05-01T00:00:00.000Z',
-          ]);
+      final result = await runDartTool([
+        'tool/research/funnel_report.dart',
+        '--events',
+        fixture.path,
+        '--window-start',
+        '2026-05-01T00:00:00.000Z',
+      ]);
 
       expect(result.stderr, isEmpty);
       expect(result.exitCode, 0);

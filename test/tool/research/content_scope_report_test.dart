@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../support/dart_cli_test_helper.dart';
+
 void main() {
   test('prints content scope from the CLI', () async {
     final tempDir = await Directory.systemTemp.createTemp('jpstudy_scope_');
@@ -28,8 +30,7 @@ void main() {
           ),
         );
 
-    final result = await Process.run(Platform.isWindows ? 'dart.bat' : 'dart', [
-      'run',
+    final result = await runDartTool([
       'tool/research/content_scope_report.dart',
       '--content-root',
       root.path,

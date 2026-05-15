@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../support/dart_cli_test_helper.dart';
+
 void main() {
   test('prints kanji Unihan spot check from the CLI', () async {
     final tempDir = await Directory.systemTemp.createTemp(
@@ -35,10 +37,8 @@ void main() {
     final unihanReadings = File('${tempDir.path}/Unihan_Readings.txt');
     await unihanReadings.writeAsString('U+4F5C\tkVietnamese\ttác\n');
 
-    final result = await Process.run(
-      Platform.isWindows ? 'dart.bat' : 'dart',
+    final result = await runDartTool(
       [
-        'run',
         'tool/research/kanji_unihan_spot_check_report.dart',
         '--content-root',
         contentRoot.path,

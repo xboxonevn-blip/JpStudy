@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../support/dart_cli_test_helper.dart';
+
 void main() {
   test('prints Vietnamese i18n audit from the CLI', () async {
     final tempDir = await Directory.systemTemp.createTemp('jpstudy_i18n_cli_');
@@ -37,10 +39,8 @@ extension Copy on AppLanguage {
         .then((file) => file.writeAsString('{"text":"Ã¡"}'));
     await Directory('${tempDir.path}/docs').create(recursive: true);
 
-    final result = await Process.run(
-      Platform.isWindows ? 'dart.bat' : 'dart',
+    final result = await runDartTool(
       [
-        'run',
         'tool/research/vietnamese_i18n_audit_report.dart',
         '--app-language',
         appLanguage.path,
