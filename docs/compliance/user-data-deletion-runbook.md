@@ -52,6 +52,28 @@ target Firebase Auth, Firebase Storage, GA4 `userId`, and BigQuery `user_id`.
 If the user cannot open Data controls or no Auth user exists, record the
 limitation and delete only data that can be confidently matched.
 
+## Readiness Report
+
+Before executing a real test deletion, run the readiness report. It is
+read-only and never deletes data:
+
+```powershell
+npm run report:deletion-readiness -- --uid "<firebase-uid>"
+```
+
+Optional JSON/output forms:
+
+```powershell
+npm run report:deletion-readiness -- --uid "<firebase-uid>" --json
+npm run report:deletion-readiness -- --uid "<firebase-uid>" --out output\research\deletion-readiness-latest.md
+```
+
+Current known blockers: Firebase Storage is not provisioned, GA4 Admin
+API/deletion access is not available, `gcloud` is not installed locally, and
+no audited `firebase-admin` deletion tooling is installed. Until those are
+cleared, use the report as readiness evidence only and do not claim an executed
+deletion proof.
+
 ## Procedure
 
 ### 1. Freeze Identifiers

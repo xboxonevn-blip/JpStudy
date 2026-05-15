@@ -131,6 +131,8 @@ Safety:
 Evidence to record:
 
 - Support ID copied from the app.
+- Readiness report output:
+  `npm run report:deletion-readiness -- --uid "<firebase-uid>"`.
 - Auth user deletion result.
 - Storage `users/{uid}/...` deletion result.
 - GA4/BigQuery deletion request or documented limitation.

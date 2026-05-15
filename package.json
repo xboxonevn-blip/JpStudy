@@ -10,6 +10,7 @@
   },
   "scripts": {
     "report:ga4-export": "node tool/research/ga4_export_status_report.js",
+    "report:deletion-readiness": "node tool/research/deletion_readiness_report.js",
     "report:storage-readiness": "node tool/research/storage_readiness_report.js",
     "test:research-tooling": "node --test test/tool/research/*.js",
     "test:storage-rules": "firebase emulators:exec --only storage --project jpstudy-v2-test \"jest tooling/firebase/storage.rules.test.js --runInBand\"",
