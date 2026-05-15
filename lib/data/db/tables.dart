@@ -8,6 +8,8 @@ class SrsState extends Table {
   RealColumn get ease => real().withDefault(const Constant(2.5))();
   RealColumn get stability => real().withDefault(const Constant(1.0))();
   RealColumn get difficulty => real().withDefault(const Constant(5.0))();
+  IntColumn get fsrsState => integer().withDefault(const Constant(1))();
+  IntColumn get fsrsStep => integer().nullable()();
   IntColumn get lastConfidence => integer().withDefault(
     const Constant(0),
   )(); // 0=unknown, 1=again, 2=hard, 3=good, 4=easy

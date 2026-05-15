@@ -1,6 +1,7 @@
 import 'package:drift/drift.dart' hide isNull, isNotNull;
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:jpstudy/core/services/fsrs_service.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/repositories/grammar_repository.dart';
 
@@ -141,6 +142,8 @@ void main() {
     final srsStates = await db.select(db.grammarSrsState).get();
     expect(srsStates.length, 1);
     expect(srsStates.first.grammarId, 7);
+    expect(srsStates.first.fsrsState, FsrsCardState.learning.dbValue);
+    expect(srsStates.first.fsrsStep, 0);
   });
 
   test(

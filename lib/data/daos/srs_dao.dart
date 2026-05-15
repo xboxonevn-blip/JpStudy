@@ -1,4 +1,5 @@
 import 'package:drift/drift.dart';
+import '../../core/services/fsrs_service.dart';
 import '../db/app_database.dart';
 import '../db/tables.dart';
 
@@ -11,9 +12,9 @@ class SrsStageBreakdown {
     required this.mature,
   });
 
-  final int learning; // stability < 1.0
-  final int young; // 1.0 ≤ stability < 21.0
-  final int mature; // stability ≥ 21.0
+  final int learning; // FSRS learning/relearning state
+  final int young; // graduated review with stability < 21.0
+  final int mature; // graduated review with stability ≥ 21.0
 
   int get total => learning + young + mature;
 }
@@ -35,6 +36,8 @@ class SrsDao extends DatabaseAccessor<AppDatabase> with _$SrsDaoMixin {
       SrsStateCompanion.insert(
         vocabId: vocabId,
         nextReviewAt: DateTime.now(),
+        fsrsState: Value(FsrsCardState.learning.dbValue),
+        fsrsStep: const Value(0),
         // Defaults defined in table
       ),
       mode: InsertMode.insertOrIgnore,
@@ -51,6 +54,8 @@ class SrsDao extends DatabaseAccessor<AppDatabase> with _$SrsDaoMixin {
     required double difficulty,
     required int lastConfidence,
     required DateTime nextReviewAt,
+    FsrsCardState? fsrsState,
+    int? fsrsStep,
   }) {
     return (update(srsState)..where((t) => t.vocabId.equals(vocabId))).write(
       SrsStateCompanion(
@@ -62,6 +67,12 @@ class SrsDao extends DatabaseAccessor<AppDatabase> with _$SrsDaoMixin {
         lastConfidence: Value(lastConfidence),
         lastReviewedAt: Value(DateTime.now()),
         nextReviewAt: Value(nextReviewAt),
+        fsrsState: fsrsState == null
+            ? const Value.absent()
+            : Value(fsrsState.dbValue),
+        fsrsStep: fsrsState == null && fsrsStep == null
+            ? const Value.absent()
+            : Value(fsrsStep),
       ),
     );
   }
@@ -119,7 +130,7 @@ class SrsDao extends DatabaseAccessor<AppDatabase> with _$SrsDaoMixin {
     return {for (final r in rows) r.vocabId: r};
   }
 
-  /// COUNT of items that are both due now AND have stability < 1.0 (critical).
+  /// COUNT of due items still inside FSRS learning/relearning steps.
   /// Used by dailyPlanProvider to avoid fetching full rows for counting.
   Future<int> getCriticalDueCount() async {
     final countExpr = srsState.vocabId.count();
@@ -128,27 +139,30 @@ class SrsDao extends DatabaseAccessor<AppDatabase> with _$SrsDaoMixin {
               ..addColumns([countExpr])
               ..where(
                 srsState.nextReviewAt.isSmallerOrEqualValue(DateTime.now()) &
-                    srsState.stability.isSmallerThanValue(1.0),
+                    srsState.fsrsState.isIn([
+                      FsrsCardState.learning.dbValue,
+                      FsrsCardState.relearning.dbValue,
+                    ]),
               ))
             .getSingle();
     return row.read(countExpr) ?? 0;
   }
 
-  /// Returns counts of SRS items in each FSRS stability bracket.
+  /// Returns counts of SRS items in each FSRS progress bracket.
   /// Only items that have been reviewed at least once are counted.
   ///
   /// Uses a single SQL pass with conditional SUM expressions, reducing
   /// three separate COUNT queries down to one round-trip:
-  ///   SELECT SUM(CASE WHEN stability < 1   THEN 1 ELSE 0 END),
-  ///          SUM(CASE WHEN stability < 21  THEN 1 ELSE 0 END) — subtracted later,
-  ///          SUM(CASE WHEN stability >= 21 THEN 1 ELSE 0 END)
+  ///   SELECT SUM(CASE WHEN fsrs_state IN (1, 3) THEN 1 ELSE 0 END),
+  ///          SUM(CASE WHEN fsrs_state = 2 AND stability < 21 THEN 1 ELSE 0 END),
+  ///          SUM(CASE WHEN fsrs_state = 2 AND stability >= 21 THEN 1 ELSE 0 END)
   ///   FROM srs_state WHERE last_reviewed_at IS NOT NULL
   Future<SrsStageBreakdown> getStageBreakdown() async {
     final rows = await customSelect(
       'SELECT '
-      'SUM(CASE WHEN stability < 1.0                        THEN 1 ELSE 0 END) AS learning, '
-      'SUM(CASE WHEN stability >= 1.0 AND stability < 21.0  THEN 1 ELSE 0 END) AS young, '
-      'SUM(CASE WHEN stability >= 21.0                      THEN 1 ELSE 0 END) AS mature '
+      'SUM(CASE WHEN fsrs_state IN (1, 3) THEN 1 ELSE 0 END) AS learning, '
+      'SUM(CASE WHEN fsrs_state = 2 AND stability < 21.0 THEN 1 ELSE 0 END) AS young, '
+      'SUM(CASE WHEN fsrs_state = 2 AND stability >= 21.0 THEN 1 ELSE 0 END) AS mature '
       'FROM srs_state '
       'WHERE last_reviewed_at IS NOT NULL',
       readsFrom: {srsState},

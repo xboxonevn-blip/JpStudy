@@ -1,5 +1,6 @@
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:jpstudy/core/services/fsrs_service.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/daos/srs_dao.dart';
 
@@ -228,6 +229,8 @@ void main() {
       final result = await dao.getSrsState(42);
       expect(result, isNotNull);
       expect(result!.vocabId, 42);
+      expect(result.fsrsState, FsrsCardState.learning.dbValue);
+      expect(result.fsrsStep, 0);
     });
 
     test('initializeSrsState sets nextReviewAt to approximately now', () async {
@@ -239,5 +242,68 @@ void main() {
       expect(result!.nextReviewAt.isAfter(before), isTrue);
       expect(result.nextReviewAt.isBefore(after), isTrue);
     });
+
+    test('updateSrsState persists FSRS card state and step', () async {
+      await dao.initializeSrsState(9);
+      await dao.updateSrsState(
+        vocabId: 9,
+        box: 1,
+        repetitions: 1,
+        ease: 2.5,
+        stability: 8,
+        difficulty: 4,
+        lastConfidence: 4,
+        nextReviewAt: DateTime.now().add(const Duration(days: 4)),
+        fsrsState: FsrsCardState.review,
+        fsrsStep: null,
+      );
+
+      final result = await dao.getSrsState(9);
+      expect(result!.fsrsState, FsrsCardState.review.dbValue);
+      expect(result.fsrsStep, isNull);
+    });
+  });
+
+  group('getCriticalDueCount', () {
+    test('counts due FSRS learning cards regardless of stability', () async {
+      final past = DateTime.now().subtract(const Duration(minutes: 1));
+      await insertState(11, nextReviewAt: past, stability: 2.3065);
+      await dao.updateSrsState(
+        vocabId: 11,
+        box: 1,
+        repetitions: 1,
+        ease: 2.5,
+        stability: 2.3065,
+        difficulty: 5,
+        lastConfidence: 3,
+        nextReviewAt: past,
+        fsrsState: FsrsCardState.learning,
+        fsrsStep: 1,
+      );
+
+      expect(await dao.getCriticalDueCount(), 1);
+    });
+
+    test(
+      'does not count due graduated review cards with low stability',
+      () async {
+        final past = DateTime.now().subtract(const Duration(minutes: 1));
+        await insertState(12, nextReviewAt: past, stability: 0.5);
+        await dao.updateSrsState(
+          vocabId: 12,
+          box: 1,
+          repetitions: 1,
+          ease: 2.5,
+          stability: 0.5,
+          difficulty: 5,
+          lastConfidence: 3,
+          nextReviewAt: past,
+          fsrsState: FsrsCardState.review,
+          fsrsStep: null,
+        );
+
+        expect(await dao.getCriticalDueCount(), 0);
+      },
+    );
   });
 }

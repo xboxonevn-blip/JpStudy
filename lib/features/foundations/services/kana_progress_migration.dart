@@ -1,4 +1,5 @@
 import 'package:jpstudy/data/daos/kana_srs_dao.dart';
+import 'package:jpstudy/core/services/fsrs_service.dart';
 import 'package:jpstudy/features/foundations/models/kana_entry.dart';
 import 'package:jpstudy/features/foundations/providers/foundations_providers.dart';
 import 'package:jpstudy/features/foundations/services/foundations_content_service.dart';
@@ -40,6 +41,8 @@ class KanaProgressMigration {
         lapses: 0,
         dueAt: now,
         lastReviewedAt: now,
+        fsrsState: FsrsCardState.review,
+        fsrsStep: null,
       );
     }
     await preferences.setBool(foundationsKanaMigratedPrefsKey, true);

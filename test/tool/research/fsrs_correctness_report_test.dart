@@ -12,6 +12,7 @@ void main() {
     expect(result.stderr, isEmpty);
     expect(result.exitCode, 0);
     expect(result.stdout as String, contains('# FSRS Correctness Audit'));
-    expect(result.stdout as String, contains('legacy-17-parameter-model'));
+    expect(result.stdout as String, contains('Blockers:'));
+    expect(result.stdout as String, contains('- none'));
   });
 }

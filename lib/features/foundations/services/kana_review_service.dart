@@ -15,6 +15,8 @@ class KanaReviewService {
       stability: previous?.stability ?? 0.0,
       difficulty: previous?.difficulty ?? 0.0,
       lastReviewedAt: previous?.lastReviewedAt,
+      cardState: FsrsCardState.fromDbValue(previous?.fsrsState),
+      step: previous?.fsrsStep,
     );
     await dao.upsertReview(
       kana: kana,
@@ -25,6 +27,8 @@ class KanaReviewService {
       lapses: (previous?.lapses ?? 0) + (grade == 1 ? 1 : 0),
       dueAt: result.nextReviewAt,
       lastReviewedAt: DateTime.now(),
+      fsrsState: result.cardState,
+      fsrsStep: result.step,
     );
   }
 }

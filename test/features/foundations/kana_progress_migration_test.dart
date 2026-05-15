@@ -1,5 +1,6 @@
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:jpstudy/core/services/fsrs_service.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/features/foundations/services/kana_progress_migration.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,6 +22,9 @@ void main() {
 
     await migration.runIfNeeded();
     expect(await db.kanaSrsDao.studiedCount(), 5);
+    final migrated = await db.kanaSrsDao.getOrEmpty('あ');
+    expect(migrated!.fsrsState, FsrsCardState.review.dbValue);
+    expect(migrated.fsrsStep, isNull);
     expect(prefs.getBool(foundationsKanaMigratedPrefsKey), isTrue);
 
     await migration.runIfNeeded();

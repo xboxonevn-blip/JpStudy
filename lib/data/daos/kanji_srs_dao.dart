@@ -1,4 +1,5 @@
 import 'package:drift/drift.dart';
+import '../../core/services/fsrs_service.dart';
 import '../db/app_database.dart';
 import '../db/kanji_tables.dart';
 
@@ -20,6 +21,8 @@ class KanjiSrsDao extends DatabaseAccessor<AppDatabase>
       KanjiSrsStateCompanion.insert(
         kanjiId: kanjiId,
         nextReviewAt: DateTime.now(),
+        fsrsState: Value(FsrsCardState.learning.dbValue),
+        fsrsStep: const Value(0),
       ),
       mode: InsertMode.insertOrIgnore,
     );
@@ -31,6 +34,8 @@ class KanjiSrsDao extends DatabaseAccessor<AppDatabase>
     required double difficulty,
     required int lastConfidence,
     required DateTime nextReviewAt,
+    FsrsCardState? fsrsState,
+    int? fsrsStep,
   }) {
     return (update(
       kanjiSrsState,
@@ -41,6 +46,12 @@ class KanjiSrsDao extends DatabaseAccessor<AppDatabase>
         lastConfidence: Value(lastConfidence),
         lastReviewedAt: Value(DateTime.now()),
         nextReviewAt: Value(nextReviewAt),
+        fsrsState: fsrsState == null
+            ? const Value.absent()
+            : Value(fsrsState.dbValue),
+        fsrsStep: fsrsState == null && fsrsStep == null
+            ? const Value.absent()
+            : Value(fsrsStep),
       ),
     );
   }
@@ -74,7 +85,7 @@ class KanjiSrsDao extends DatabaseAccessor<AppDatabase>
     return row.read(countExpr) ?? 0;
   }
 
-  /// COUNT of items that are both due now AND have stability < 1.0 (critical).
+  /// COUNT of due items still inside FSRS learning/relearning steps.
   Future<int> getCriticalDueCount() async {
     final countExpr = kanjiSrsState.kanjiId.count();
     final row =
@@ -84,7 +95,10 @@ class KanjiSrsDao extends DatabaseAccessor<AppDatabase>
                 kanjiSrsState.nextReviewAt.isSmallerOrEqualValue(
                       DateTime.now(),
                     ) &
-                    kanjiSrsState.stability.isSmallerThanValue(1.0),
+                    kanjiSrsState.fsrsState.isIn([
+                      FsrsCardState.learning.dbValue,
+                      FsrsCardState.relearning.dbValue,
+                    ]),
               ))
             .getSingle();
     return row.read(countExpr) ?? 0;
@@ -130,6 +144,8 @@ class KanjiSrsDao extends DatabaseAccessor<AppDatabase>
       KanjiSrsStateCompanion.insert(
         kanjiId: kanjiId,
         nextReviewAt: nextReviewAt,
+        fsrsState: Value(FsrsCardState.learning.dbValue),
+        fsrsStep: const Value(0),
       ),
       mode: InsertMode.insertOrReplace,
     );

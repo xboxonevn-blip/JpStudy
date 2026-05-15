@@ -1,5 +1,6 @@
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:jpstudy/core/services/fsrs_service.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/daos/kanji_srs_dao.dart';
 
@@ -141,6 +142,8 @@ void main() {
       final result = await dao.getSrsState(10);
       expect(result, isNotNull);
       expect(result!.kanjiId, 10);
+      expect(result.fsrsState, FsrsCardState.learning.dbValue);
+      expect(result.fsrsStep, 0);
     });
 
     test(
@@ -186,6 +189,23 @@ void main() {
       expect(state!.stability, closeTo(7.5, 0.001));
       expect(state.difficulty, closeTo(3.2, 0.001));
       expect(state.lastConfidence, 4);
+    });
+
+    test('persists FSRS card state and step', () async {
+      await dao.initializeSrsState(43);
+      await dao.updateSrsState(
+        kanjiId: 43,
+        stability: 2.3065,
+        difficulty: 3.5,
+        lastConfidence: 3,
+        nextReviewAt: DateTime.now().add(const Duration(minutes: 10)),
+        fsrsState: FsrsCardState.learning,
+        fsrsStep: 1,
+      );
+
+      final state = await dao.getSrsState(43);
+      expect(state!.fsrsState, FsrsCardState.learning.dbValue);
+      expect(state.fsrsStep, 1);
     });
 
     test('sets lastReviewedAt when updateSrsState is called', () async {
@@ -308,6 +328,43 @@ void main() {
       final count = await dao.watchDueReviewCount().first;
       expect(count, 2);
     });
+  });
+
+  group('getCriticalDueCount', () {
+    test('counts due FSRS learning cards regardless of stability', () async {
+      final past = DateTime.now().subtract(const Duration(minutes: 1));
+      await insertReviewed(601, nextReviewAt: past, stability: 2.3065);
+      await dao.updateSrsState(
+        kanjiId: 601,
+        stability: 2.3065,
+        difficulty: 5,
+        lastConfidence: 3,
+        nextReviewAt: past,
+        fsrsState: FsrsCardState.learning,
+        fsrsStep: 1,
+      );
+
+      expect(await dao.getCriticalDueCount(), 1);
+    });
+
+    test(
+      'does not count due graduated review cards with low stability',
+      () async {
+        final past = DateTime.now().subtract(const Duration(minutes: 1));
+        await insertReviewed(602, nextReviewAt: past, stability: 0.5);
+        await dao.updateSrsState(
+          kanjiId: 602,
+          stability: 0.5,
+          difficulty: 5,
+          lastConfidence: 3,
+          nextReviewAt: past,
+          fsrsState: FsrsCardState.review,
+          fsrsStep: null,
+        );
+
+        expect(await dao.getCriticalDueCount(), 0);
+      },
+    );
   });
 
   // ---------------------------------------------------------------------------

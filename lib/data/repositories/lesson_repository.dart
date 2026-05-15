@@ -1657,14 +1657,13 @@ class LessonRepository {
     }
 
     // Check if grammar already exists for this lesson
-    final existingPoints = await (_db.select(
-      _db.grammarPoints,
-    )..where(
-          (tbl) =>
-              tbl.lessonId.equals(lessonId) &
-              tbl.jlptLevel.equals(normalizedLevel),
-        ))
-        .get();
+    final existingPoints =
+        await (_db.select(_db.grammarPoints)..where(
+              (tbl) =>
+                  tbl.lessonId.equals(lessonId) &
+                  tbl.jlptLevel.equals(normalizedLevel),
+            ))
+            .get();
 
     // Check if resync needed: Either empty or missing English explanations
     bool needsResync = existingPoints.isEmpty;
@@ -1697,14 +1696,13 @@ class LessonRepository {
     await _contentDb.ensureGrammarSeededForLevel(normalizedLevel);
 
     // Fetch from Content DB
-    final contentPoints = await (_contentDb.select(
-      _contentDb.grammarPoint,
-    )..where(
-          (tbl) =>
-              tbl.lessonId.equals(lessonId) &
-              tbl.level.equals(normalizedLevel),
-        ))
-        .get();
+    final contentPoints =
+        await (_contentDb.select(_contentDb.grammarPoint)..where(
+              (tbl) =>
+                  tbl.lessonId.equals(lessonId) &
+                  tbl.level.equals(normalizedLevel),
+            ))
+            .get();
 
     if (contentPoints.isEmpty) {
       return;
@@ -2303,6 +2301,8 @@ class LessonRepository {
       stability: state.stability,
       difficulty: state.difficulty,
       lastReviewedAt: state.lastReviewedAt,
+      cardState: FsrsCardState.fromDbValue(state.fsrsState),
+      step: state.fsrsStep,
     );
 
     await _db.kanjiSrsDao.updateSrsState(
@@ -2311,6 +2311,8 @@ class LessonRepository {
       difficulty: result.difficulty,
       lastConfidence: grade,
       nextReviewAt: result.nextReviewAt,
+      fsrsState: result.cardState,
+      fsrsStep: result.step,
     );
 
     // Achievement: kanjiMaster — fires at milestones [10, 25, 50, 100].
@@ -2795,6 +2797,8 @@ class LessonRepository {
       stability: srsState.stability,
       difficulty: srsState.difficulty,
       lastReviewedAt: srsState.lastReviewedAt,
+      cardState: FsrsCardState.fromDbValue(srsState.fsrsState),
+      step: srsState.fsrsStep,
     );
 
     await _db.srsDao.updateSrsState(
@@ -2806,6 +2810,8 @@ class LessonRepository {
       difficulty: result.difficulty,
       lastConfidence: quality,
       nextReviewAt: result.nextReviewAt,
+      fsrsState: result.cardState,
+      fsrsStep: result.step,
     );
 
     await _analyticsService?.logSrsReviewCompleted(
@@ -2842,8 +2848,9 @@ class LessonRepository {
             ease: const Value(2.5),
             stability: const Value(1.0),
             difficulty: const Value(5.0),
-            lastReviewedAt: Value(now),
             nextReviewAt: now,
+            fsrsState: Value(FsrsCardState.learning.dbValue),
+            fsrsStep: const Value(0),
           ),
           mode: InsertMode.insertOrIgnore,
         );
@@ -3154,7 +3161,9 @@ class LessonRepository {
     required double stability,
     required double difficulty,
     required DateTime nextReviewAt,
-    required DateTime lastReviewedAt,
+    DateTime? lastReviewedAt,
+    FsrsCardState fsrsState = FsrsCardState.learning,
+    int? fsrsStep = 0,
   }) {
     return _db
         .into(_db.srsState)
@@ -3168,6 +3177,8 @@ class LessonRepository {
             difficulty: Value(difficulty),
             lastReviewedAt: Value(lastReviewedAt),
             nextReviewAt: Value(nextReviewAt),
+            fsrsState: Value(fsrsState.dbValue),
+            fsrsStep: Value(fsrsStep),
           ),
         );
   }
@@ -3477,8 +3488,9 @@ class LessonRepository {
             ease: const Value(2.5),
             stability: const Value(1.0),
             difficulty: const Value(5.0),
-            lastReviewedAt: Value(now),
             nextReviewAt: now, // Due immediately
+            fsrsState: Value(FsrsCardState.learning.dbValue),
+            fsrsStep: const Value(0),
           ),
           mode: InsertMode.insertOrReplace,
         );

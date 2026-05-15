@@ -1,4 +1,5 @@
 import 'package:drift/drift.dart';
+import '../../core/services/fsrs_service.dart';
 import '../db/app_database.dart';
 import '../db/grammar_tables.dart';
 
@@ -46,6 +47,8 @@ class GrammarDao extends DatabaseAccessor<AppDatabase> with _$GrammarDaoMixin {
         nextReviewAt: DateTime.now(),
         streak: const Value(0),
         ease: const Value(2.5),
+        fsrsState: Value(FsrsCardState.learning.dbValue),
+        fsrsStep: const Value(0),
       ),
       mode: InsertMode.insertOrIgnore,
     );
@@ -60,6 +63,8 @@ class GrammarDao extends DatabaseAccessor<AppDatabase> with _$GrammarDaoMixin {
     required double difficulty,
     required DateTime nextReviewAt,
     int ghostReviewsDue = 0,
+    FsrsCardState? fsrsState,
+    int? fsrsStep,
   }) {
     return (update(
       grammarSrsState,
@@ -72,6 +77,12 @@ class GrammarDao extends DatabaseAccessor<AppDatabase> with _$GrammarDaoMixin {
         lastReviewedAt: Value(DateTime.now()),
         nextReviewAt: Value(nextReviewAt),
         ghostReviewsDue: Value(ghostReviewsDue),
+        fsrsState: fsrsState == null
+            ? const Value.absent()
+            : Value(fsrsState.dbValue),
+        fsrsStep: fsrsState == null && fsrsStep == null
+            ? const Value.absent()
+            : Value(fsrsStep),
       ),
     );
   }
@@ -135,7 +146,7 @@ class GrammarDao extends DatabaseAccessor<AppDatabase> with _$GrammarDaoMixin {
     )..where((t) => t.ghostReviewsDue.isBiggerThanValue(0))).get();
   }
 
-  /// COUNT of items that are both due now AND have stability < 1.0 (critical).
+  /// COUNT of due items still inside FSRS learning/relearning steps.
   Future<int> getCriticalDueCount() async {
     final countExpr = grammarSrsState.grammarId.count();
     final row =
@@ -145,7 +156,10 @@ class GrammarDao extends DatabaseAccessor<AppDatabase> with _$GrammarDaoMixin {
                 grammarSrsState.nextReviewAt.isSmallerOrEqualValue(
                       DateTime.now(),
                     ) &
-                    grammarSrsState.stability.isSmallerThanValue(1.0),
+                    grammarSrsState.fsrsState.isIn([
+                      FsrsCardState.learning.dbValue,
+                      FsrsCardState.relearning.dbValue,
+                    ]),
               ))
             .getSingle();
     return row.read(countExpr) ?? 0;

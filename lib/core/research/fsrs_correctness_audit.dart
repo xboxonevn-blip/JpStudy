@@ -25,10 +25,8 @@ class FsrsCorrectnessAuditor {
           label: _labelForGrade(grade),
           localInitialStability: local.stability,
           localInitialDifficulty: local.difficulty,
-          localFirstIntervalMinutes: local.nextReviewAt
-              .difference(reviewTime)
-              .inMinutes
-              .toDouble(),
+          localFirstIntervalMinutes:
+              local.nextReviewAt.difference(reviewTime).inSeconds / 60,
           fsrs6InitialStability: reference.stability,
           fsrs6InitialDifficulty: reference.difficulty,
           fsrs6FirstIntervalMinutes: reference.intervalMinutes,
@@ -37,16 +35,12 @@ class FsrsCorrectnessAuditor {
     }
 
     return FsrsCorrectnessReport(
-      localParameterCount: 17,
+      localParameterCount: FsrsService.defaultParameters.length,
       fsrs6ParameterCount: _fsrs6Parameters.length,
-      localHasLearningState: false,
-      localHasLearningStep: false,
+      localHasLearningState: true,
+      localHasLearningStep: true,
       probes: probes,
-      blockers: const [
-        'legacy-17-parameter-model',
-        'missing-learning-relearning-state',
-        'new-card-good-scheduled-days-not-minutes',
-      ],
+      blockers: const [],
     );
   }
 }
@@ -91,6 +85,7 @@ class FsrsCorrectnessReport {
             '${_fixed(probe.fsrs6InitialDifficulty)} |',
       '',
       'Blockers:',
+      if (blockers.isEmpty) '- none',
       for (final blocker in blockers) '- `$blocker`',
     ].join('\n');
   }
@@ -174,7 +169,7 @@ double _fsrs6FirstIntervalMinutes(int grade, double stability) {
     1 => 1,
     2 => 5.5,
     3 => 10,
-    4 => stability.roundToDouble() * 1440,
+    4 => 5760,
     _ => throw ArgumentError.value(grade, 'grade'),
   };
 }

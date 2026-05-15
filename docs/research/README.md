@@ -140,7 +140,7 @@ Current D4 synthesis blocker: P2-P5 still fail broad beta readiness, but the liv
 
 Current hosting posture: primary web Hosting is now `hosting:jpstudy` at `https://jpstudy.web.app`. Legacy default site `hosting:jpstudy-v2` / `https://jpstudy-v2.web.app` was disabled on `2026-05-14T20:18+07` with Firebase release type `SITE_DISABLE`; it still exists as a Firebase default site identity but should not receive deploys. Local `.firebaserc`, `firebase.json`, and release docs now target only `hosting:jpstudy`.
 
-Current D5.Q5.1 blocker: `FsrsService` is a legacy `17`-parameter FSRS-like scheduler, not current FSRS-6. New-card `Again`, `Hard`, and `Good` first intervals are `576`, `864`, and `3,456` minutes locally versus reference scheduler `1`, `5.5`, and `10` minutes; persisted SRS state has no FSRS learning/relearning state or step.
+Current D5.Q5.1 status: P0 scheduler bug remediated. `FsrsService` now uses the current FSRS-6 default vector (`21` params including decay), persists `fsrs_state` and `fsrs_step` across vocab/grammar/kanji/kana SRS tables, and pins new-card intervals to `Again=1m`, `Hard=5.5m`, `Good=10m`, `Easy=4d`. Remaining gap is calibration/outcome proof from real beta SRS events, not scheduler conformance.
 
 Current D5.Q5.2 blocker: global streak is device-local-midnight only, has no freeze/grace/repair policy, can miss grammar-review credit, and `user_progress.day` is not unique/upserted. Treat streak as gamification display, not a reliable cross-skill retention signal.
 
@@ -190,7 +190,7 @@ Current D8.Q8.7 status: telemetry is acceptable only for closed beta with explic
 
 - Q1: Can we measure learning happening? Active.
 - Q2: Where do users drop off before first SRS review? Pending eval events.
-- Q3: Is FSRS scheduling calibrated for Vietnamese N5 learners? Pending simulator.
+- Q3: Is FSRS scheduling calibrated for Vietnamese N5 learners? Scheduler conformance fixed; real beta retention data still pending.
 - Q4: Does Han Viet help? Pending experiment design.
 - Q5: What retention curve is plausible? Pending simulator.
 - Q6: Which personas beyond Linh? Pending qualitative design.
@@ -199,7 +199,7 @@ Current D8.Q8.7 status: telemetry is acceptable only for closed beta with explic
 - D2 status: measured but not ready; move to D3 editorial/i18n audit before D4 persona UAT.
 - D3 status: Q3.1-Q3.6 measured; D3 synthesis and targeted plural/glossary fixes pending.
 - D4 status: P2-P5 measured; D4 synthesis complete. Live channel parity and upper-vocab availability are improved, but broad beta still needs route-matrix confidence and explicit persona-scope limits.
-- D5 status: Q5.1 measured; SRS scheduling is not FSRS-6-conformant and needs a state/step-aware scheduler decision before production SRS claims.
+- D5 status: Q5.1 remediated at scheduler level; FSRS-6 state/step persistence and pinned learning intervals are implemented. Real learner calibration remains pending.
 - D5 status update: Q5.2 measured; streak policy/write paths need normalization before using streak in beta-retention interpretation.
 - D5 status update: Q5.3 measured; XP/level policy needs centralization before using XP for beta motivation analytics or competitive framing.
 - D5 status update: Q5.4 measured; onboarding needs a small profile/policy layer before claiming persona-specific first sessions or daily plans.

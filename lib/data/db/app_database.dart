@@ -26,6 +26,8 @@ class KanaSrsState extends Table {
   IntColumn get lapses => integer().withDefault(const Constant(0))();
   RealColumn get stability => real().withDefault(const Constant(0.0))();
   RealColumn get difficulty => real().withDefault(const Constant(0.0))();
+  IntColumn get fsrsState => integer().withDefault(const Constant(1))();
+  IntColumn get fsrsStep => integer().nullable()();
   DateTimeColumn get dueAt => dateTime().nullable()();
   DateTimeColumn get lastReviewedAt => dateTime().nullable()();
 
@@ -77,7 +79,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase({QueryExecutor? executor}) : super(executor ?? _openConnection());
 
   @override
-  int get schemaVersion => 29;
+  int get schemaVersion => 30;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -310,6 +312,25 @@ class AppDatabase extends _$AppDatabase {
           'CREATE INDEX IF NOT EXISTS idx_kana_srs_due_at ON kana_srs_state(due_at)',
         );
       }
+      if (from < 30) {
+        await _safeAddColumn(migrator, srsState, srsState.fsrsState);
+        await _safeAddColumn(migrator, srsState, srsState.fsrsStep);
+        await _safeAddColumn(
+          migrator,
+          grammarSrsState,
+          grammarSrsState.fsrsState,
+        );
+        await _safeAddColumn(
+          migrator,
+          grammarSrsState,
+          grammarSrsState.fsrsStep,
+        );
+        await _safeAddColumn(migrator, kanjiSrsState, kanjiSrsState.fsrsState);
+        await _safeAddColumn(migrator, kanjiSrsState, kanjiSrsState.fsrsStep);
+        await _safeAddColumn(migrator, kanaSrsState, kanaSrsState.fsrsState);
+        await _safeAddColumn(migrator, kanaSrsState, kanaSrsState.fsrsStep);
+        await _migrateFsrsCardState();
+      }
     },
     beforeOpen: (details) async {
       // Only reseed on first install or after an upgrade — on routine opens
@@ -354,6 +375,37 @@ class AppDatabase extends _$AppDatabase {
       'CREATE INDEX IF NOT EXISTS idx_grammar_srs_ghost ON grammar_srs_state(ghost_reviews_due)',
     );
     await _createSessionIndexes();
+  }
+
+  Future<void> _migrateFsrsCardState() async {
+    await customStatement(
+      'UPDATE srs_state '
+      'SET fsrs_state = CASE '
+      'WHEN repetitions = 0 OR last_reviewed_at IS NULL THEN 1 ELSE 2 END, '
+      'fsrs_step = CASE '
+      'WHEN repetitions = 0 OR last_reviewed_at IS NULL THEN 0 ELSE NULL END',
+    );
+    await customStatement(
+      'UPDATE grammar_srs_state '
+      'SET fsrs_state = CASE '
+      'WHEN last_reviewed_at IS NULL THEN 1 ELSE 2 END, '
+      'fsrs_step = CASE '
+      'WHEN last_reviewed_at IS NULL THEN 0 ELSE NULL END',
+    );
+    await customStatement(
+      'UPDATE kanji_srs_state '
+      'SET fsrs_state = CASE '
+      'WHEN last_reviewed_at IS NULL THEN 1 ELSE 2 END, '
+      'fsrs_step = CASE '
+      'WHEN last_reviewed_at IS NULL THEN 0 ELSE NULL END',
+    );
+    await customStatement(
+      'UPDATE kana_srs_state '
+      'SET fsrs_state = CASE '
+      'WHEN reps = 0 OR last_reviewed_at IS NULL THEN 1 ELSE 2 END, '
+      'fsrs_step = CASE '
+      'WHEN reps = 0 OR last_reviewed_at IS NULL THEN 0 ELSE NULL END',
+    );
   }
 
   Future<void> _createSessionIndexes() async {

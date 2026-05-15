@@ -45,6 +45,8 @@ class GrammarSrsState extends Table {
   )(); // Legacy ease factor (kept for migration)
   RealColumn get stability => real().withDefault(const Constant(1.0))();
   RealColumn get difficulty => real().withDefault(const Constant(5.0))();
+  IntColumn get fsrsState => integer().withDefault(const Constant(1))();
+  IntColumn get fsrsStep => integer().nullable()();
   DateTimeColumn get nextReviewAt => dateTime()();
   DateTimeColumn get lastReviewedAt => dateTime().nullable()();
 

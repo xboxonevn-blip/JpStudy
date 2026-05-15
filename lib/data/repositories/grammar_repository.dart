@@ -18,10 +18,11 @@ class GrammarRepository {
 
   /// Fetch all grammar points for a specific JLPT level
   Future<List<GrammarPoint>> fetchPointsByLevel(String level) async {
-    final existingForLevel = await (_db.select(_db.grammarPoints)
-          ..where((table) => table.jlptLevel.equals(level))
-          ..limit(1))
-        .get();
+    final existingForLevel =
+        await (_db.select(_db.grammarPoints)
+              ..where((table) => table.jlptLevel.equals(level))
+              ..limit(1))
+            .get();
     if (existingForLevel.isEmpty) {
       await GrammarSeeder(_db.grammarDao).seedGrammarDataForLevel(_db, level);
     }
@@ -92,6 +93,8 @@ class GrammarRepository {
       stability: state.stability,
       difficulty: state.difficulty,
       lastReviewedAt: state.lastReviewedAt,
+      cardState: FsrsCardState.fromDbValue(state.fsrsState),
+      step: state.fsrsStep,
     );
 
     await _db.grammarDao.updateSrsState(
@@ -102,6 +105,8 @@ class GrammarRepository {
       difficulty: result.difficulty,
       nextReviewAt: result.nextReviewAt,
       ghostReviewsDue: ghostReviewsDue,
+      fsrsState: result.cardState,
+      fsrsStep: result.step,
     );
   }
 

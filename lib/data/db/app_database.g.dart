@@ -89,6 +89,29 @@ class $SrsStateTable extends SrsState
     requiredDuringInsert: false,
     defaultValue: const Constant(5.0),
   );
+  static const VerificationMeta _fsrsStateMeta = const VerificationMeta(
+    'fsrsState',
+  );
+  @override
+  late final GeneratedColumn<int> fsrsState = GeneratedColumn<int>(
+    'fsrs_state',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(1),
+  );
+  static const VerificationMeta _fsrsStepMeta = const VerificationMeta(
+    'fsrsStep',
+  );
+  @override
+  late final GeneratedColumn<int> fsrsStep = GeneratedColumn<int>(
+    'fsrs_step',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _lastConfidenceMeta = const VerificationMeta(
     'lastConfidence',
   );
@@ -133,6 +156,8 @@ class $SrsStateTable extends SrsState
     ease,
     stability,
     difficulty,
+    fsrsState,
+    fsrsStep,
     lastConfidence,
     lastReviewedAt,
     nextReviewAt,
@@ -191,6 +216,18 @@ class $SrsStateTable extends SrsState
       context.handle(
         _difficultyMeta,
         difficulty.isAcceptableOrUnknown(data['difficulty']!, _difficultyMeta),
+      );
+    }
+    if (data.containsKey('fsrs_state')) {
+      context.handle(
+        _fsrsStateMeta,
+        fsrsState.isAcceptableOrUnknown(data['fsrs_state']!, _fsrsStateMeta),
+      );
+    }
+    if (data.containsKey('fsrs_step')) {
+      context.handle(
+        _fsrsStepMeta,
+        fsrsStep.isAcceptableOrUnknown(data['fsrs_step']!, _fsrsStepMeta),
       );
     }
     if (data.containsKey('last_confidence')) {
@@ -263,6 +300,14 @@ class $SrsStateTable extends SrsState
         DriftSqlType.double,
         data['${effectivePrefix}difficulty'],
       )!,
+      fsrsState: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}fsrs_state'],
+      )!,
+      fsrsStep: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}fsrs_step'],
+      ),
       lastConfidence: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}last_confidence'],
@@ -292,6 +337,8 @@ class SrsStateData extends DataClass implements Insertable<SrsStateData> {
   final double ease;
   final double stability;
   final double difficulty;
+  final int fsrsState;
+  final int? fsrsStep;
   final int lastConfidence;
   final DateTime? lastReviewedAt;
   final DateTime nextReviewAt;
@@ -303,6 +350,8 @@ class SrsStateData extends DataClass implements Insertable<SrsStateData> {
     required this.ease,
     required this.stability,
     required this.difficulty,
+    required this.fsrsState,
+    this.fsrsStep,
     required this.lastConfidence,
     this.lastReviewedAt,
     required this.nextReviewAt,
@@ -317,6 +366,10 @@ class SrsStateData extends DataClass implements Insertable<SrsStateData> {
     map['ease'] = Variable<double>(ease);
     map['stability'] = Variable<double>(stability);
     map['difficulty'] = Variable<double>(difficulty);
+    map['fsrs_state'] = Variable<int>(fsrsState);
+    if (!nullToAbsent || fsrsStep != null) {
+      map['fsrs_step'] = Variable<int>(fsrsStep);
+    }
     map['last_confidence'] = Variable<int>(lastConfidence);
     if (!nullToAbsent || lastReviewedAt != null) {
       map['last_reviewed_at'] = Variable<DateTime>(lastReviewedAt);
@@ -334,6 +387,10 @@ class SrsStateData extends DataClass implements Insertable<SrsStateData> {
       ease: Value(ease),
       stability: Value(stability),
       difficulty: Value(difficulty),
+      fsrsState: Value(fsrsState),
+      fsrsStep: fsrsStep == null && nullToAbsent
+          ? const Value.absent()
+          : Value(fsrsStep),
       lastConfidence: Value(lastConfidence),
       lastReviewedAt: lastReviewedAt == null && nullToAbsent
           ? const Value.absent()
@@ -355,6 +412,8 @@ class SrsStateData extends DataClass implements Insertable<SrsStateData> {
       ease: serializer.fromJson<double>(json['ease']),
       stability: serializer.fromJson<double>(json['stability']),
       difficulty: serializer.fromJson<double>(json['difficulty']),
+      fsrsState: serializer.fromJson<int>(json['fsrsState']),
+      fsrsStep: serializer.fromJson<int?>(json['fsrsStep']),
       lastConfidence: serializer.fromJson<int>(json['lastConfidence']),
       lastReviewedAt: serializer.fromJson<DateTime?>(json['lastReviewedAt']),
       nextReviewAt: serializer.fromJson<DateTime>(json['nextReviewAt']),
@@ -371,6 +430,8 @@ class SrsStateData extends DataClass implements Insertable<SrsStateData> {
       'ease': serializer.toJson<double>(ease),
       'stability': serializer.toJson<double>(stability),
       'difficulty': serializer.toJson<double>(difficulty),
+      'fsrsState': serializer.toJson<int>(fsrsState),
+      'fsrsStep': serializer.toJson<int?>(fsrsStep),
       'lastConfidence': serializer.toJson<int>(lastConfidence),
       'lastReviewedAt': serializer.toJson<DateTime?>(lastReviewedAt),
       'nextReviewAt': serializer.toJson<DateTime>(nextReviewAt),
@@ -385,6 +446,8 @@ class SrsStateData extends DataClass implements Insertable<SrsStateData> {
     double? ease,
     double? stability,
     double? difficulty,
+    int? fsrsState,
+    Value<int?> fsrsStep = const Value.absent(),
     int? lastConfidence,
     Value<DateTime?> lastReviewedAt = const Value.absent(),
     DateTime? nextReviewAt,
@@ -396,6 +459,8 @@ class SrsStateData extends DataClass implements Insertable<SrsStateData> {
     ease: ease ?? this.ease,
     stability: stability ?? this.stability,
     difficulty: difficulty ?? this.difficulty,
+    fsrsState: fsrsState ?? this.fsrsState,
+    fsrsStep: fsrsStep.present ? fsrsStep.value : this.fsrsStep,
     lastConfidence: lastConfidence ?? this.lastConfidence,
     lastReviewedAt: lastReviewedAt.present
         ? lastReviewedAt.value
@@ -415,6 +480,8 @@ class SrsStateData extends DataClass implements Insertable<SrsStateData> {
       difficulty: data.difficulty.present
           ? data.difficulty.value
           : this.difficulty,
+      fsrsState: data.fsrsState.present ? data.fsrsState.value : this.fsrsState,
+      fsrsStep: data.fsrsStep.present ? data.fsrsStep.value : this.fsrsStep,
       lastConfidence: data.lastConfidence.present
           ? data.lastConfidence.value
           : this.lastConfidence,
@@ -437,6 +504,8 @@ class SrsStateData extends DataClass implements Insertable<SrsStateData> {
           ..write('ease: $ease, ')
           ..write('stability: $stability, ')
           ..write('difficulty: $difficulty, ')
+          ..write('fsrsState: $fsrsState, ')
+          ..write('fsrsStep: $fsrsStep, ')
           ..write('lastConfidence: $lastConfidence, ')
           ..write('lastReviewedAt: $lastReviewedAt, ')
           ..write('nextReviewAt: $nextReviewAt')
@@ -453,6 +522,8 @@ class SrsStateData extends DataClass implements Insertable<SrsStateData> {
     ease,
     stability,
     difficulty,
+    fsrsState,
+    fsrsStep,
     lastConfidence,
     lastReviewedAt,
     nextReviewAt,
@@ -468,6 +539,8 @@ class SrsStateData extends DataClass implements Insertable<SrsStateData> {
           other.ease == this.ease &&
           other.stability == this.stability &&
           other.difficulty == this.difficulty &&
+          other.fsrsState == this.fsrsState &&
+          other.fsrsStep == this.fsrsStep &&
           other.lastConfidence == this.lastConfidence &&
           other.lastReviewedAt == this.lastReviewedAt &&
           other.nextReviewAt == this.nextReviewAt);
@@ -481,6 +554,8 @@ class SrsStateCompanion extends UpdateCompanion<SrsStateData> {
   final Value<double> ease;
   final Value<double> stability;
   final Value<double> difficulty;
+  final Value<int> fsrsState;
+  final Value<int?> fsrsStep;
   final Value<int> lastConfidence;
   final Value<DateTime?> lastReviewedAt;
   final Value<DateTime> nextReviewAt;
@@ -492,6 +567,8 @@ class SrsStateCompanion extends UpdateCompanion<SrsStateData> {
     this.ease = const Value.absent(),
     this.stability = const Value.absent(),
     this.difficulty = const Value.absent(),
+    this.fsrsState = const Value.absent(),
+    this.fsrsStep = const Value.absent(),
     this.lastConfidence = const Value.absent(),
     this.lastReviewedAt = const Value.absent(),
     this.nextReviewAt = const Value.absent(),
@@ -504,6 +581,8 @@ class SrsStateCompanion extends UpdateCompanion<SrsStateData> {
     this.ease = const Value.absent(),
     this.stability = const Value.absent(),
     this.difficulty = const Value.absent(),
+    this.fsrsState = const Value.absent(),
+    this.fsrsStep = const Value.absent(),
     this.lastConfidence = const Value.absent(),
     this.lastReviewedAt = const Value.absent(),
     required DateTime nextReviewAt,
@@ -517,6 +596,8 @@ class SrsStateCompanion extends UpdateCompanion<SrsStateData> {
     Expression<double>? ease,
     Expression<double>? stability,
     Expression<double>? difficulty,
+    Expression<int>? fsrsState,
+    Expression<int>? fsrsStep,
     Expression<int>? lastConfidence,
     Expression<DateTime>? lastReviewedAt,
     Expression<DateTime>? nextReviewAt,
@@ -529,6 +610,8 @@ class SrsStateCompanion extends UpdateCompanion<SrsStateData> {
       if (ease != null) 'ease': ease,
       if (stability != null) 'stability': stability,
       if (difficulty != null) 'difficulty': difficulty,
+      if (fsrsState != null) 'fsrs_state': fsrsState,
+      if (fsrsStep != null) 'fsrs_step': fsrsStep,
       if (lastConfidence != null) 'last_confidence': lastConfidence,
       if (lastReviewedAt != null) 'last_reviewed_at': lastReviewedAt,
       if (nextReviewAt != null) 'next_review_at': nextReviewAt,
@@ -543,6 +626,8 @@ class SrsStateCompanion extends UpdateCompanion<SrsStateData> {
     Value<double>? ease,
     Value<double>? stability,
     Value<double>? difficulty,
+    Value<int>? fsrsState,
+    Value<int?>? fsrsStep,
     Value<int>? lastConfidence,
     Value<DateTime?>? lastReviewedAt,
     Value<DateTime>? nextReviewAt,
@@ -555,6 +640,8 @@ class SrsStateCompanion extends UpdateCompanion<SrsStateData> {
       ease: ease ?? this.ease,
       stability: stability ?? this.stability,
       difficulty: difficulty ?? this.difficulty,
+      fsrsState: fsrsState ?? this.fsrsState,
+      fsrsStep: fsrsStep ?? this.fsrsStep,
       lastConfidence: lastConfidence ?? this.lastConfidence,
       lastReviewedAt: lastReviewedAt ?? this.lastReviewedAt,
       nextReviewAt: nextReviewAt ?? this.nextReviewAt,
@@ -585,6 +672,12 @@ class SrsStateCompanion extends UpdateCompanion<SrsStateData> {
     if (difficulty.present) {
       map['difficulty'] = Variable<double>(difficulty.value);
     }
+    if (fsrsState.present) {
+      map['fsrs_state'] = Variable<int>(fsrsState.value);
+    }
+    if (fsrsStep.present) {
+      map['fsrs_step'] = Variable<int>(fsrsStep.value);
+    }
     if (lastConfidence.present) {
       map['last_confidence'] = Variable<int>(lastConfidence.value);
     }
@@ -607,6 +700,8 @@ class SrsStateCompanion extends UpdateCompanion<SrsStateData> {
           ..write('ease: $ease, ')
           ..write('stability: $stability, ')
           ..write('difficulty: $difficulty, ')
+          ..write('fsrsState: $fsrsState, ')
+          ..write('fsrsStep: $fsrsStep, ')
           ..write('lastConfidence: $lastConfidence, ')
           ..write('lastReviewedAt: $lastReviewedAt, ')
           ..write('nextReviewAt: $nextReviewAt')
@@ -669,6 +764,29 @@ class $KanjiSrsStateTable extends KanjiSrsState
     requiredDuringInsert: false,
     defaultValue: const Constant(5.0),
   );
+  static const VerificationMeta _fsrsStateMeta = const VerificationMeta(
+    'fsrsState',
+  );
+  @override
+  late final GeneratedColumn<int> fsrsState = GeneratedColumn<int>(
+    'fsrs_state',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(1),
+  );
+  static const VerificationMeta _fsrsStepMeta = const VerificationMeta(
+    'fsrsStep',
+  );
+  @override
+  late final GeneratedColumn<int> fsrsStep = GeneratedColumn<int>(
+    'fsrs_step',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _lastConfidenceMeta = const VerificationMeta(
     'lastConfidence',
   );
@@ -710,6 +828,8 @@ class $KanjiSrsStateTable extends KanjiSrsState
     kanjiId,
     stability,
     difficulty,
+    fsrsState,
+    fsrsStep,
     lastConfidence,
     lastReviewedAt,
     nextReviewAt,
@@ -747,6 +867,18 @@ class $KanjiSrsStateTable extends KanjiSrsState
       context.handle(
         _difficultyMeta,
         difficulty.isAcceptableOrUnknown(data['difficulty']!, _difficultyMeta),
+      );
+    }
+    if (data.containsKey('fsrs_state')) {
+      context.handle(
+        _fsrsStateMeta,
+        fsrsState.isAcceptableOrUnknown(data['fsrs_state']!, _fsrsStateMeta),
+      );
+    }
+    if (data.containsKey('fsrs_step')) {
+      context.handle(
+        _fsrsStepMeta,
+        fsrsStep.isAcceptableOrUnknown(data['fsrs_step']!, _fsrsStepMeta),
       );
     }
     if (data.containsKey('last_confidence')) {
@@ -807,6 +939,14 @@ class $KanjiSrsStateTable extends KanjiSrsState
         DriftSqlType.double,
         data['${effectivePrefix}difficulty'],
       )!,
+      fsrsState: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}fsrs_state'],
+      )!,
+      fsrsStep: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}fsrs_step'],
+      ),
       lastConfidence: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}last_confidence'],
@@ -834,6 +974,8 @@ class KanjiSrsStateData extends DataClass
   final int kanjiId;
   final double stability;
   final double difficulty;
+  final int fsrsState;
+  final int? fsrsStep;
   final int lastConfidence;
   final DateTime? lastReviewedAt;
   final DateTime nextReviewAt;
@@ -842,6 +984,8 @@ class KanjiSrsStateData extends DataClass
     required this.kanjiId,
     required this.stability,
     required this.difficulty,
+    required this.fsrsState,
+    this.fsrsStep,
     required this.lastConfidence,
     this.lastReviewedAt,
     required this.nextReviewAt,
@@ -853,6 +997,10 @@ class KanjiSrsStateData extends DataClass
     map['kanji_id'] = Variable<int>(kanjiId);
     map['stability'] = Variable<double>(stability);
     map['difficulty'] = Variable<double>(difficulty);
+    map['fsrs_state'] = Variable<int>(fsrsState);
+    if (!nullToAbsent || fsrsStep != null) {
+      map['fsrs_step'] = Variable<int>(fsrsStep);
+    }
     map['last_confidence'] = Variable<int>(lastConfidence);
     if (!nullToAbsent || lastReviewedAt != null) {
       map['last_reviewed_at'] = Variable<DateTime>(lastReviewedAt);
@@ -867,6 +1015,10 @@ class KanjiSrsStateData extends DataClass
       kanjiId: Value(kanjiId),
       stability: Value(stability),
       difficulty: Value(difficulty),
+      fsrsState: Value(fsrsState),
+      fsrsStep: fsrsStep == null && nullToAbsent
+          ? const Value.absent()
+          : Value(fsrsStep),
       lastConfidence: Value(lastConfidence),
       lastReviewedAt: lastReviewedAt == null && nullToAbsent
           ? const Value.absent()
@@ -885,6 +1037,8 @@ class KanjiSrsStateData extends DataClass
       kanjiId: serializer.fromJson<int>(json['kanjiId']),
       stability: serializer.fromJson<double>(json['stability']),
       difficulty: serializer.fromJson<double>(json['difficulty']),
+      fsrsState: serializer.fromJson<int>(json['fsrsState']),
+      fsrsStep: serializer.fromJson<int?>(json['fsrsStep']),
       lastConfidence: serializer.fromJson<int>(json['lastConfidence']),
       lastReviewedAt: serializer.fromJson<DateTime?>(json['lastReviewedAt']),
       nextReviewAt: serializer.fromJson<DateTime>(json['nextReviewAt']),
@@ -898,6 +1052,8 @@ class KanjiSrsStateData extends DataClass
       'kanjiId': serializer.toJson<int>(kanjiId),
       'stability': serializer.toJson<double>(stability),
       'difficulty': serializer.toJson<double>(difficulty),
+      'fsrsState': serializer.toJson<int>(fsrsState),
+      'fsrsStep': serializer.toJson<int?>(fsrsStep),
       'lastConfidence': serializer.toJson<int>(lastConfidence),
       'lastReviewedAt': serializer.toJson<DateTime?>(lastReviewedAt),
       'nextReviewAt': serializer.toJson<DateTime>(nextReviewAt),
@@ -909,6 +1065,8 @@ class KanjiSrsStateData extends DataClass
     int? kanjiId,
     double? stability,
     double? difficulty,
+    int? fsrsState,
+    Value<int?> fsrsStep = const Value.absent(),
     int? lastConfidence,
     Value<DateTime?> lastReviewedAt = const Value.absent(),
     DateTime? nextReviewAt,
@@ -917,6 +1075,8 @@ class KanjiSrsStateData extends DataClass
     kanjiId: kanjiId ?? this.kanjiId,
     stability: stability ?? this.stability,
     difficulty: difficulty ?? this.difficulty,
+    fsrsState: fsrsState ?? this.fsrsState,
+    fsrsStep: fsrsStep.present ? fsrsStep.value : this.fsrsStep,
     lastConfidence: lastConfidence ?? this.lastConfidence,
     lastReviewedAt: lastReviewedAt.present
         ? lastReviewedAt.value
@@ -931,6 +1091,8 @@ class KanjiSrsStateData extends DataClass
       difficulty: data.difficulty.present
           ? data.difficulty.value
           : this.difficulty,
+      fsrsState: data.fsrsState.present ? data.fsrsState.value : this.fsrsState,
+      fsrsStep: data.fsrsStep.present ? data.fsrsStep.value : this.fsrsStep,
       lastConfidence: data.lastConfidence.present
           ? data.lastConfidence.value
           : this.lastConfidence,
@@ -950,6 +1112,8 @@ class KanjiSrsStateData extends DataClass
           ..write('kanjiId: $kanjiId, ')
           ..write('stability: $stability, ')
           ..write('difficulty: $difficulty, ')
+          ..write('fsrsState: $fsrsState, ')
+          ..write('fsrsStep: $fsrsStep, ')
           ..write('lastConfidence: $lastConfidence, ')
           ..write('lastReviewedAt: $lastReviewedAt, ')
           ..write('nextReviewAt: $nextReviewAt')
@@ -963,6 +1127,8 @@ class KanjiSrsStateData extends DataClass
     kanjiId,
     stability,
     difficulty,
+    fsrsState,
+    fsrsStep,
     lastConfidence,
     lastReviewedAt,
     nextReviewAt,
@@ -975,6 +1141,8 @@ class KanjiSrsStateData extends DataClass
           other.kanjiId == this.kanjiId &&
           other.stability == this.stability &&
           other.difficulty == this.difficulty &&
+          other.fsrsState == this.fsrsState &&
+          other.fsrsStep == this.fsrsStep &&
           other.lastConfidence == this.lastConfidence &&
           other.lastReviewedAt == this.lastReviewedAt &&
           other.nextReviewAt == this.nextReviewAt);
@@ -985,6 +1153,8 @@ class KanjiSrsStateCompanion extends UpdateCompanion<KanjiSrsStateData> {
   final Value<int> kanjiId;
   final Value<double> stability;
   final Value<double> difficulty;
+  final Value<int> fsrsState;
+  final Value<int?> fsrsStep;
   final Value<int> lastConfidence;
   final Value<DateTime?> lastReviewedAt;
   final Value<DateTime> nextReviewAt;
@@ -993,6 +1163,8 @@ class KanjiSrsStateCompanion extends UpdateCompanion<KanjiSrsStateData> {
     this.kanjiId = const Value.absent(),
     this.stability = const Value.absent(),
     this.difficulty = const Value.absent(),
+    this.fsrsState = const Value.absent(),
+    this.fsrsStep = const Value.absent(),
     this.lastConfidence = const Value.absent(),
     this.lastReviewedAt = const Value.absent(),
     this.nextReviewAt = const Value.absent(),
@@ -1002,6 +1174,8 @@ class KanjiSrsStateCompanion extends UpdateCompanion<KanjiSrsStateData> {
     required int kanjiId,
     this.stability = const Value.absent(),
     this.difficulty = const Value.absent(),
+    this.fsrsState = const Value.absent(),
+    this.fsrsStep = const Value.absent(),
     this.lastConfidence = const Value.absent(),
     this.lastReviewedAt = const Value.absent(),
     required DateTime nextReviewAt,
@@ -1012,6 +1186,8 @@ class KanjiSrsStateCompanion extends UpdateCompanion<KanjiSrsStateData> {
     Expression<int>? kanjiId,
     Expression<double>? stability,
     Expression<double>? difficulty,
+    Expression<int>? fsrsState,
+    Expression<int>? fsrsStep,
     Expression<int>? lastConfidence,
     Expression<DateTime>? lastReviewedAt,
     Expression<DateTime>? nextReviewAt,
@@ -1021,6 +1197,8 @@ class KanjiSrsStateCompanion extends UpdateCompanion<KanjiSrsStateData> {
       if (kanjiId != null) 'kanji_id': kanjiId,
       if (stability != null) 'stability': stability,
       if (difficulty != null) 'difficulty': difficulty,
+      if (fsrsState != null) 'fsrs_state': fsrsState,
+      if (fsrsStep != null) 'fsrs_step': fsrsStep,
       if (lastConfidence != null) 'last_confidence': lastConfidence,
       if (lastReviewedAt != null) 'last_reviewed_at': lastReviewedAt,
       if (nextReviewAt != null) 'next_review_at': nextReviewAt,
@@ -1032,6 +1210,8 @@ class KanjiSrsStateCompanion extends UpdateCompanion<KanjiSrsStateData> {
     Value<int>? kanjiId,
     Value<double>? stability,
     Value<double>? difficulty,
+    Value<int>? fsrsState,
+    Value<int?>? fsrsStep,
     Value<int>? lastConfidence,
     Value<DateTime?>? lastReviewedAt,
     Value<DateTime>? nextReviewAt,
@@ -1041,6 +1221,8 @@ class KanjiSrsStateCompanion extends UpdateCompanion<KanjiSrsStateData> {
       kanjiId: kanjiId ?? this.kanjiId,
       stability: stability ?? this.stability,
       difficulty: difficulty ?? this.difficulty,
+      fsrsState: fsrsState ?? this.fsrsState,
+      fsrsStep: fsrsStep ?? this.fsrsStep,
       lastConfidence: lastConfidence ?? this.lastConfidence,
       lastReviewedAt: lastReviewedAt ?? this.lastReviewedAt,
       nextReviewAt: nextReviewAt ?? this.nextReviewAt,
@@ -1062,6 +1244,12 @@ class KanjiSrsStateCompanion extends UpdateCompanion<KanjiSrsStateData> {
     if (difficulty.present) {
       map['difficulty'] = Variable<double>(difficulty.value);
     }
+    if (fsrsState.present) {
+      map['fsrs_state'] = Variable<int>(fsrsState.value);
+    }
+    if (fsrsStep.present) {
+      map['fsrs_step'] = Variable<int>(fsrsStep.value);
+    }
     if (lastConfidence.present) {
       map['last_confidence'] = Variable<int>(lastConfidence.value);
     }
@@ -1081,6 +1269,8 @@ class KanjiSrsStateCompanion extends UpdateCompanion<KanjiSrsStateData> {
           ..write('kanjiId: $kanjiId, ')
           ..write('stability: $stability, ')
           ..write('difficulty: $difficulty, ')
+          ..write('fsrsState: $fsrsState, ')
+          ..write('fsrsStep: $fsrsStep, ')
           ..write('lastConfidence: $lastConfidence, ')
           ..write('lastReviewedAt: $lastReviewedAt, ')
           ..write('nextReviewAt: $nextReviewAt')
@@ -1157,6 +1347,29 @@ class $KanaSrsStateTable extends KanaSrsState
     requiredDuringInsert: false,
     defaultValue: const Constant(0.0),
   );
+  static const VerificationMeta _fsrsStateMeta = const VerificationMeta(
+    'fsrsState',
+  );
+  @override
+  late final GeneratedColumn<int> fsrsState = GeneratedColumn<int>(
+    'fsrs_state',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(1),
+  );
+  static const VerificationMeta _fsrsStepMeta = const VerificationMeta(
+    'fsrsStep',
+  );
+  @override
+  late final GeneratedColumn<int> fsrsStep = GeneratedColumn<int>(
+    'fsrs_step',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _dueAtMeta = const VerificationMeta('dueAt');
   @override
   late final GeneratedColumn<DateTime> dueAt = GeneratedColumn<DateTime>(
@@ -1186,6 +1399,8 @@ class $KanaSrsStateTable extends KanaSrsState
     lapses,
     stability,
     difficulty,
+    fsrsState,
+    fsrsStep,
     dueAt,
     lastReviewedAt,
   ];
@@ -1241,6 +1456,18 @@ class $KanaSrsStateTable extends KanaSrsState
         difficulty.isAcceptableOrUnknown(data['difficulty']!, _difficultyMeta),
       );
     }
+    if (data.containsKey('fsrs_state')) {
+      context.handle(
+        _fsrsStateMeta,
+        fsrsState.isAcceptableOrUnknown(data['fsrs_state']!, _fsrsStateMeta),
+      );
+    }
+    if (data.containsKey('fsrs_step')) {
+      context.handle(
+        _fsrsStepMeta,
+        fsrsStep.isAcceptableOrUnknown(data['fsrs_step']!, _fsrsStepMeta),
+      );
+    }
     if (data.containsKey('due_at')) {
       context.handle(
         _dueAtMeta,
@@ -1289,6 +1516,14 @@ class $KanaSrsStateTable extends KanaSrsState
         DriftSqlType.double,
         data['${effectivePrefix}difficulty'],
       )!,
+      fsrsState: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}fsrs_state'],
+      )!,
+      fsrsStep: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}fsrs_step'],
+      ),
       dueAt: attachedDatabase.typeMapping.read(
         DriftSqlType.dateTime,
         data['${effectivePrefix}due_at'],
@@ -1314,6 +1549,8 @@ class KanaSrsStateData extends DataClass
   final int lapses;
   final double stability;
   final double difficulty;
+  final int fsrsState;
+  final int? fsrsStep;
   final DateTime? dueAt;
   final DateTime? lastReviewedAt;
   const KanaSrsStateData({
@@ -1323,6 +1560,8 @@ class KanaSrsStateData extends DataClass
     required this.lapses,
     required this.stability,
     required this.difficulty,
+    required this.fsrsState,
+    this.fsrsStep,
     this.dueAt,
     this.lastReviewedAt,
   });
@@ -1335,6 +1574,10 @@ class KanaSrsStateData extends DataClass
     map['lapses'] = Variable<int>(lapses);
     map['stability'] = Variable<double>(stability);
     map['difficulty'] = Variable<double>(difficulty);
+    map['fsrs_state'] = Variable<int>(fsrsState);
+    if (!nullToAbsent || fsrsStep != null) {
+      map['fsrs_step'] = Variable<int>(fsrsStep);
+    }
     if (!nullToAbsent || dueAt != null) {
       map['due_at'] = Variable<DateTime>(dueAt);
     }
@@ -1352,6 +1595,10 @@ class KanaSrsStateData extends DataClass
       lapses: Value(lapses),
       stability: Value(stability),
       difficulty: Value(difficulty),
+      fsrsState: Value(fsrsState),
+      fsrsStep: fsrsStep == null && nullToAbsent
+          ? const Value.absent()
+          : Value(fsrsStep),
       dueAt: dueAt == null && nullToAbsent
           ? const Value.absent()
           : Value(dueAt),
@@ -1373,6 +1620,8 @@ class KanaSrsStateData extends DataClass
       lapses: serializer.fromJson<int>(json['lapses']),
       stability: serializer.fromJson<double>(json['stability']),
       difficulty: serializer.fromJson<double>(json['difficulty']),
+      fsrsState: serializer.fromJson<int>(json['fsrsState']),
+      fsrsStep: serializer.fromJson<int?>(json['fsrsStep']),
       dueAt: serializer.fromJson<DateTime?>(json['dueAt']),
       lastReviewedAt: serializer.fromJson<DateTime?>(json['lastReviewedAt']),
     );
@@ -1387,6 +1636,8 @@ class KanaSrsStateData extends DataClass
       'lapses': serializer.toJson<int>(lapses),
       'stability': serializer.toJson<double>(stability),
       'difficulty': serializer.toJson<double>(difficulty),
+      'fsrsState': serializer.toJson<int>(fsrsState),
+      'fsrsStep': serializer.toJson<int?>(fsrsStep),
       'dueAt': serializer.toJson<DateTime?>(dueAt),
       'lastReviewedAt': serializer.toJson<DateTime?>(lastReviewedAt),
     };
@@ -1399,6 +1650,8 @@ class KanaSrsStateData extends DataClass
     int? lapses,
     double? stability,
     double? difficulty,
+    int? fsrsState,
+    Value<int?> fsrsStep = const Value.absent(),
     Value<DateTime?> dueAt = const Value.absent(),
     Value<DateTime?> lastReviewedAt = const Value.absent(),
   }) => KanaSrsStateData(
@@ -1408,6 +1661,8 @@ class KanaSrsStateData extends DataClass
     lapses: lapses ?? this.lapses,
     stability: stability ?? this.stability,
     difficulty: difficulty ?? this.difficulty,
+    fsrsState: fsrsState ?? this.fsrsState,
+    fsrsStep: fsrsStep.present ? fsrsStep.value : this.fsrsStep,
     dueAt: dueAt.present ? dueAt.value : this.dueAt,
     lastReviewedAt: lastReviewedAt.present
         ? lastReviewedAt.value
@@ -1423,6 +1678,8 @@ class KanaSrsStateData extends DataClass
       difficulty: data.difficulty.present
           ? data.difficulty.value
           : this.difficulty,
+      fsrsState: data.fsrsState.present ? data.fsrsState.value : this.fsrsState,
+      fsrsStep: data.fsrsStep.present ? data.fsrsStep.value : this.fsrsStep,
       dueAt: data.dueAt.present ? data.dueAt.value : this.dueAt,
       lastReviewedAt: data.lastReviewedAt.present
           ? data.lastReviewedAt.value
@@ -1439,6 +1696,8 @@ class KanaSrsStateData extends DataClass
           ..write('lapses: $lapses, ')
           ..write('stability: $stability, ')
           ..write('difficulty: $difficulty, ')
+          ..write('fsrsState: $fsrsState, ')
+          ..write('fsrsStep: $fsrsStep, ')
           ..write('dueAt: $dueAt, ')
           ..write('lastReviewedAt: $lastReviewedAt')
           ..write(')'))
@@ -1453,6 +1712,8 @@ class KanaSrsStateData extends DataClass
     lapses,
     stability,
     difficulty,
+    fsrsState,
+    fsrsStep,
     dueAt,
     lastReviewedAt,
   );
@@ -1466,6 +1727,8 @@ class KanaSrsStateData extends DataClass
           other.lapses == this.lapses &&
           other.stability == this.stability &&
           other.difficulty == this.difficulty &&
+          other.fsrsState == this.fsrsState &&
+          other.fsrsStep == this.fsrsStep &&
           other.dueAt == this.dueAt &&
           other.lastReviewedAt == this.lastReviewedAt);
 }
@@ -1477,6 +1740,8 @@ class KanaSrsStateCompanion extends UpdateCompanion<KanaSrsStateData> {
   final Value<int> lapses;
   final Value<double> stability;
   final Value<double> difficulty;
+  final Value<int> fsrsState;
+  final Value<int?> fsrsStep;
   final Value<DateTime?> dueAt;
   final Value<DateTime?> lastReviewedAt;
   final Value<int> rowid;
@@ -1487,6 +1752,8 @@ class KanaSrsStateCompanion extends UpdateCompanion<KanaSrsStateData> {
     this.lapses = const Value.absent(),
     this.stability = const Value.absent(),
     this.difficulty = const Value.absent(),
+    this.fsrsState = const Value.absent(),
+    this.fsrsStep = const Value.absent(),
     this.dueAt = const Value.absent(),
     this.lastReviewedAt = const Value.absent(),
     this.rowid = const Value.absent(),
@@ -1498,6 +1765,8 @@ class KanaSrsStateCompanion extends UpdateCompanion<KanaSrsStateData> {
     this.lapses = const Value.absent(),
     this.stability = const Value.absent(),
     this.difficulty = const Value.absent(),
+    this.fsrsState = const Value.absent(),
+    this.fsrsStep = const Value.absent(),
     this.dueAt = const Value.absent(),
     this.lastReviewedAt = const Value.absent(),
     this.rowid = const Value.absent(),
@@ -1510,6 +1779,8 @@ class KanaSrsStateCompanion extends UpdateCompanion<KanaSrsStateData> {
     Expression<int>? lapses,
     Expression<double>? stability,
     Expression<double>? difficulty,
+    Expression<int>? fsrsState,
+    Expression<int>? fsrsStep,
     Expression<DateTime>? dueAt,
     Expression<DateTime>? lastReviewedAt,
     Expression<int>? rowid,
@@ -1521,6 +1792,8 @@ class KanaSrsStateCompanion extends UpdateCompanion<KanaSrsStateData> {
       if (lapses != null) 'lapses': lapses,
       if (stability != null) 'stability': stability,
       if (difficulty != null) 'difficulty': difficulty,
+      if (fsrsState != null) 'fsrs_state': fsrsState,
+      if (fsrsStep != null) 'fsrs_step': fsrsStep,
       if (dueAt != null) 'due_at': dueAt,
       if (lastReviewedAt != null) 'last_reviewed_at': lastReviewedAt,
       if (rowid != null) 'rowid': rowid,
@@ -1534,6 +1807,8 @@ class KanaSrsStateCompanion extends UpdateCompanion<KanaSrsStateData> {
     Value<int>? lapses,
     Value<double>? stability,
     Value<double>? difficulty,
+    Value<int>? fsrsState,
+    Value<int?>? fsrsStep,
     Value<DateTime?>? dueAt,
     Value<DateTime?>? lastReviewedAt,
     Value<int>? rowid,
@@ -1545,6 +1820,8 @@ class KanaSrsStateCompanion extends UpdateCompanion<KanaSrsStateData> {
       lapses: lapses ?? this.lapses,
       stability: stability ?? this.stability,
       difficulty: difficulty ?? this.difficulty,
+      fsrsState: fsrsState ?? this.fsrsState,
+      fsrsStep: fsrsStep ?? this.fsrsStep,
       dueAt: dueAt ?? this.dueAt,
       lastReviewedAt: lastReviewedAt ?? this.lastReviewedAt,
       rowid: rowid ?? this.rowid,
@@ -1572,6 +1849,12 @@ class KanaSrsStateCompanion extends UpdateCompanion<KanaSrsStateData> {
     if (difficulty.present) {
       map['difficulty'] = Variable<double>(difficulty.value);
     }
+    if (fsrsState.present) {
+      map['fsrs_state'] = Variable<int>(fsrsState.value);
+    }
+    if (fsrsStep.present) {
+      map['fsrs_step'] = Variable<int>(fsrsStep.value);
+    }
     if (dueAt.present) {
       map['due_at'] = Variable<DateTime>(dueAt.value);
     }
@@ -1593,6 +1876,8 @@ class KanaSrsStateCompanion extends UpdateCompanion<KanaSrsStateData> {
           ..write('lapses: $lapses, ')
           ..write('stability: $stability, ')
           ..write('difficulty: $difficulty, ')
+          ..write('fsrsState: $fsrsState, ')
+          ..write('fsrsStep: $fsrsStep, ')
           ..write('dueAt: $dueAt, ')
           ..write('lastReviewedAt: $lastReviewedAt, ')
           ..write('rowid: $rowid')
@@ -4308,6 +4593,29 @@ class $GrammarSrsStateTable extends GrammarSrsState
     requiredDuringInsert: false,
     defaultValue: const Constant(5.0),
   );
+  static const VerificationMeta _fsrsStateMeta = const VerificationMeta(
+    'fsrsState',
+  );
+  @override
+  late final GeneratedColumn<int> fsrsState = GeneratedColumn<int>(
+    'fsrs_state',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(1),
+  );
+  static const VerificationMeta _fsrsStepMeta = const VerificationMeta(
+    'fsrsStep',
+  );
+  @override
+  late final GeneratedColumn<int> fsrsStep = GeneratedColumn<int>(
+    'fsrs_step',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _nextReviewAtMeta = const VerificationMeta(
     'nextReviewAt',
   );
@@ -4351,6 +4659,8 @@ class $GrammarSrsStateTable extends GrammarSrsState
     ease,
     stability,
     difficulty,
+    fsrsState,
+    fsrsStep,
     nextReviewAt,
     lastReviewedAt,
     ghostReviewsDue,
@@ -4400,6 +4710,18 @@ class $GrammarSrsStateTable extends GrammarSrsState
       context.handle(
         _difficultyMeta,
         difficulty.isAcceptableOrUnknown(data['difficulty']!, _difficultyMeta),
+      );
+    }
+    if (data.containsKey('fsrs_state')) {
+      context.handle(
+        _fsrsStateMeta,
+        fsrsState.isAcceptableOrUnknown(data['fsrs_state']!, _fsrsStateMeta),
+      );
+    }
+    if (data.containsKey('fsrs_step')) {
+      context.handle(
+        _fsrsStepMeta,
+        fsrsStep.isAcceptableOrUnknown(data['fsrs_step']!, _fsrsStepMeta),
       );
     }
     if (data.containsKey('next_review_at')) {
@@ -4468,6 +4790,14 @@ class $GrammarSrsStateTable extends GrammarSrsState
         DriftSqlType.double,
         data['${effectivePrefix}difficulty'],
       )!,
+      fsrsState: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}fsrs_state'],
+      )!,
+      fsrsStep: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}fsrs_step'],
+      ),
       nextReviewAt: attachedDatabase.typeMapping.read(
         DriftSqlType.dateTime,
         data['${effectivePrefix}next_review_at'],
@@ -4497,6 +4827,8 @@ class GrammarSrsStateData extends DataClass
   final double ease;
   final double stability;
   final double difficulty;
+  final int fsrsState;
+  final int? fsrsStep;
   final DateTime nextReviewAt;
   final DateTime? lastReviewedAt;
   final int ghostReviewsDue;
@@ -4507,6 +4839,8 @@ class GrammarSrsStateData extends DataClass
     required this.ease,
     required this.stability,
     required this.difficulty,
+    required this.fsrsState,
+    this.fsrsStep,
     required this.nextReviewAt,
     this.lastReviewedAt,
     required this.ghostReviewsDue,
@@ -4520,6 +4854,10 @@ class GrammarSrsStateData extends DataClass
     map['ease'] = Variable<double>(ease);
     map['stability'] = Variable<double>(stability);
     map['difficulty'] = Variable<double>(difficulty);
+    map['fsrs_state'] = Variable<int>(fsrsState);
+    if (!nullToAbsent || fsrsStep != null) {
+      map['fsrs_step'] = Variable<int>(fsrsStep);
+    }
     map['next_review_at'] = Variable<DateTime>(nextReviewAt);
     if (!nullToAbsent || lastReviewedAt != null) {
       map['last_reviewed_at'] = Variable<DateTime>(lastReviewedAt);
@@ -4536,6 +4874,10 @@ class GrammarSrsStateData extends DataClass
       ease: Value(ease),
       stability: Value(stability),
       difficulty: Value(difficulty),
+      fsrsState: Value(fsrsState),
+      fsrsStep: fsrsStep == null && nullToAbsent
+          ? const Value.absent()
+          : Value(fsrsStep),
       nextReviewAt: Value(nextReviewAt),
       lastReviewedAt: lastReviewedAt == null && nullToAbsent
           ? const Value.absent()
@@ -4556,6 +4898,8 @@ class GrammarSrsStateData extends DataClass
       ease: serializer.fromJson<double>(json['ease']),
       stability: serializer.fromJson<double>(json['stability']),
       difficulty: serializer.fromJson<double>(json['difficulty']),
+      fsrsState: serializer.fromJson<int>(json['fsrsState']),
+      fsrsStep: serializer.fromJson<int?>(json['fsrsStep']),
       nextReviewAt: serializer.fromJson<DateTime>(json['nextReviewAt']),
       lastReviewedAt: serializer.fromJson<DateTime?>(json['lastReviewedAt']),
       ghostReviewsDue: serializer.fromJson<int>(json['ghostReviewsDue']),
@@ -4571,6 +4915,8 @@ class GrammarSrsStateData extends DataClass
       'ease': serializer.toJson<double>(ease),
       'stability': serializer.toJson<double>(stability),
       'difficulty': serializer.toJson<double>(difficulty),
+      'fsrsState': serializer.toJson<int>(fsrsState),
+      'fsrsStep': serializer.toJson<int?>(fsrsStep),
       'nextReviewAt': serializer.toJson<DateTime>(nextReviewAt),
       'lastReviewedAt': serializer.toJson<DateTime?>(lastReviewedAt),
       'ghostReviewsDue': serializer.toJson<int>(ghostReviewsDue),
@@ -4584,6 +4930,8 @@ class GrammarSrsStateData extends DataClass
     double? ease,
     double? stability,
     double? difficulty,
+    int? fsrsState,
+    Value<int?> fsrsStep = const Value.absent(),
     DateTime? nextReviewAt,
     Value<DateTime?> lastReviewedAt = const Value.absent(),
     int? ghostReviewsDue,
@@ -4594,6 +4942,8 @@ class GrammarSrsStateData extends DataClass
     ease: ease ?? this.ease,
     stability: stability ?? this.stability,
     difficulty: difficulty ?? this.difficulty,
+    fsrsState: fsrsState ?? this.fsrsState,
+    fsrsStep: fsrsStep.present ? fsrsStep.value : this.fsrsStep,
     nextReviewAt: nextReviewAt ?? this.nextReviewAt,
     lastReviewedAt: lastReviewedAt.present
         ? lastReviewedAt.value
@@ -4610,6 +4960,8 @@ class GrammarSrsStateData extends DataClass
       difficulty: data.difficulty.present
           ? data.difficulty.value
           : this.difficulty,
+      fsrsState: data.fsrsState.present ? data.fsrsState.value : this.fsrsState,
+      fsrsStep: data.fsrsStep.present ? data.fsrsStep.value : this.fsrsStep,
       nextReviewAt: data.nextReviewAt.present
           ? data.nextReviewAt.value
           : this.nextReviewAt,
@@ -4631,6 +4983,8 @@ class GrammarSrsStateData extends DataClass
           ..write('ease: $ease, ')
           ..write('stability: $stability, ')
           ..write('difficulty: $difficulty, ')
+          ..write('fsrsState: $fsrsState, ')
+          ..write('fsrsStep: $fsrsStep, ')
           ..write('nextReviewAt: $nextReviewAt, ')
           ..write('lastReviewedAt: $lastReviewedAt, ')
           ..write('ghostReviewsDue: $ghostReviewsDue')
@@ -4646,6 +5000,8 @@ class GrammarSrsStateData extends DataClass
     ease,
     stability,
     difficulty,
+    fsrsState,
+    fsrsStep,
     nextReviewAt,
     lastReviewedAt,
     ghostReviewsDue,
@@ -4660,6 +5016,8 @@ class GrammarSrsStateData extends DataClass
           other.ease == this.ease &&
           other.stability == this.stability &&
           other.difficulty == this.difficulty &&
+          other.fsrsState == this.fsrsState &&
+          other.fsrsStep == this.fsrsStep &&
           other.nextReviewAt == this.nextReviewAt &&
           other.lastReviewedAt == this.lastReviewedAt &&
           other.ghostReviewsDue == this.ghostReviewsDue);
@@ -4672,6 +5030,8 @@ class GrammarSrsStateCompanion extends UpdateCompanion<GrammarSrsStateData> {
   final Value<double> ease;
   final Value<double> stability;
   final Value<double> difficulty;
+  final Value<int> fsrsState;
+  final Value<int?> fsrsStep;
   final Value<DateTime> nextReviewAt;
   final Value<DateTime?> lastReviewedAt;
   final Value<int> ghostReviewsDue;
@@ -4682,6 +5042,8 @@ class GrammarSrsStateCompanion extends UpdateCompanion<GrammarSrsStateData> {
     this.ease = const Value.absent(),
     this.stability = const Value.absent(),
     this.difficulty = const Value.absent(),
+    this.fsrsState = const Value.absent(),
+    this.fsrsStep = const Value.absent(),
     this.nextReviewAt = const Value.absent(),
     this.lastReviewedAt = const Value.absent(),
     this.ghostReviewsDue = const Value.absent(),
@@ -4693,6 +5055,8 @@ class GrammarSrsStateCompanion extends UpdateCompanion<GrammarSrsStateData> {
     this.ease = const Value.absent(),
     this.stability = const Value.absent(),
     this.difficulty = const Value.absent(),
+    this.fsrsState = const Value.absent(),
+    this.fsrsStep = const Value.absent(),
     required DateTime nextReviewAt,
     this.lastReviewedAt = const Value.absent(),
     this.ghostReviewsDue = const Value.absent(),
@@ -4705,6 +5069,8 @@ class GrammarSrsStateCompanion extends UpdateCompanion<GrammarSrsStateData> {
     Expression<double>? ease,
     Expression<double>? stability,
     Expression<double>? difficulty,
+    Expression<int>? fsrsState,
+    Expression<int>? fsrsStep,
     Expression<DateTime>? nextReviewAt,
     Expression<DateTime>? lastReviewedAt,
     Expression<int>? ghostReviewsDue,
@@ -4716,6 +5082,8 @@ class GrammarSrsStateCompanion extends UpdateCompanion<GrammarSrsStateData> {
       if (ease != null) 'ease': ease,
       if (stability != null) 'stability': stability,
       if (difficulty != null) 'difficulty': difficulty,
+      if (fsrsState != null) 'fsrs_state': fsrsState,
+      if (fsrsStep != null) 'fsrs_step': fsrsStep,
       if (nextReviewAt != null) 'next_review_at': nextReviewAt,
       if (lastReviewedAt != null) 'last_reviewed_at': lastReviewedAt,
       if (ghostReviewsDue != null) 'ghost_reviews_due': ghostReviewsDue,
@@ -4729,6 +5097,8 @@ class GrammarSrsStateCompanion extends UpdateCompanion<GrammarSrsStateData> {
     Value<double>? ease,
     Value<double>? stability,
     Value<double>? difficulty,
+    Value<int>? fsrsState,
+    Value<int?>? fsrsStep,
     Value<DateTime>? nextReviewAt,
     Value<DateTime?>? lastReviewedAt,
     Value<int>? ghostReviewsDue,
@@ -4740,6 +5110,8 @@ class GrammarSrsStateCompanion extends UpdateCompanion<GrammarSrsStateData> {
       ease: ease ?? this.ease,
       stability: stability ?? this.stability,
       difficulty: difficulty ?? this.difficulty,
+      fsrsState: fsrsState ?? this.fsrsState,
+      fsrsStep: fsrsStep ?? this.fsrsStep,
       nextReviewAt: nextReviewAt ?? this.nextReviewAt,
       lastReviewedAt: lastReviewedAt ?? this.lastReviewedAt,
       ghostReviewsDue: ghostReviewsDue ?? this.ghostReviewsDue,
@@ -4767,6 +5139,12 @@ class GrammarSrsStateCompanion extends UpdateCompanion<GrammarSrsStateData> {
     if (difficulty.present) {
       map['difficulty'] = Variable<double>(difficulty.value);
     }
+    if (fsrsState.present) {
+      map['fsrs_state'] = Variable<int>(fsrsState.value);
+    }
+    if (fsrsStep.present) {
+      map['fsrs_step'] = Variable<int>(fsrsStep.value);
+    }
     if (nextReviewAt.present) {
       map['next_review_at'] = Variable<DateTime>(nextReviewAt.value);
     }
@@ -4788,6 +5166,8 @@ class GrammarSrsStateCompanion extends UpdateCompanion<GrammarSrsStateData> {
           ..write('ease: $ease, ')
           ..write('stability: $stability, ')
           ..write('difficulty: $difficulty, ')
+          ..write('fsrsState: $fsrsState, ')
+          ..write('fsrsStep: $fsrsStep, ')
           ..write('nextReviewAt: $nextReviewAt, ')
           ..write('lastReviewedAt: $lastReviewedAt, ')
           ..write('ghostReviewsDue: $ghostReviewsDue')
@@ -11962,6 +12342,8 @@ typedef $$SrsStateTableCreateCompanionBuilder =
       Value<double> ease,
       Value<double> stability,
       Value<double> difficulty,
+      Value<int> fsrsState,
+      Value<int?> fsrsStep,
       Value<int> lastConfidence,
       Value<DateTime?> lastReviewedAt,
       required DateTime nextReviewAt,
@@ -11975,6 +12357,8 @@ typedef $$SrsStateTableUpdateCompanionBuilder =
       Value<double> ease,
       Value<double> stability,
       Value<double> difficulty,
+      Value<int> fsrsState,
+      Value<int?> fsrsStep,
       Value<int> lastConfidence,
       Value<DateTime?> lastReviewedAt,
       Value<DateTime> nextReviewAt,
@@ -12021,6 +12405,16 @@ class $$SrsStateTableFilterComposer
 
   ColumnFilters<double> get difficulty => $composableBuilder(
     column: $table.difficulty,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get fsrsState => $composableBuilder(
+    column: $table.fsrsState,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get fsrsStep => $composableBuilder(
+    column: $table.fsrsStep,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -12084,6 +12478,16 @@ class $$SrsStateTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<int> get fsrsState => $composableBuilder(
+    column: $table.fsrsState,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get fsrsStep => $composableBuilder(
+    column: $table.fsrsStep,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<int> get lastConfidence => $composableBuilder(
     column: $table.lastConfidence,
     builder: (column) => ColumnOrderings(column),
@@ -12133,6 +12537,12 @@ class $$SrsStateTableAnnotationComposer
     column: $table.difficulty,
     builder: (column) => column,
   );
+
+  GeneratedColumn<int> get fsrsState =>
+      $composableBuilder(column: $table.fsrsState, builder: (column) => column);
+
+  GeneratedColumn<int> get fsrsStep =>
+      $composableBuilder(column: $table.fsrsStep, builder: (column) => column);
 
   GeneratedColumn<int> get lastConfidence => $composableBuilder(
     column: $table.lastConfidence,
@@ -12188,6 +12598,8 @@ class $$SrsStateTableTableManager
                 Value<double> ease = const Value.absent(),
                 Value<double> stability = const Value.absent(),
                 Value<double> difficulty = const Value.absent(),
+                Value<int> fsrsState = const Value.absent(),
+                Value<int?> fsrsStep = const Value.absent(),
                 Value<int> lastConfidence = const Value.absent(),
                 Value<DateTime?> lastReviewedAt = const Value.absent(),
                 Value<DateTime> nextReviewAt = const Value.absent(),
@@ -12199,6 +12611,8 @@ class $$SrsStateTableTableManager
                 ease: ease,
                 stability: stability,
                 difficulty: difficulty,
+                fsrsState: fsrsState,
+                fsrsStep: fsrsStep,
                 lastConfidence: lastConfidence,
                 lastReviewedAt: lastReviewedAt,
                 nextReviewAt: nextReviewAt,
@@ -12212,6 +12626,8 @@ class $$SrsStateTableTableManager
                 Value<double> ease = const Value.absent(),
                 Value<double> stability = const Value.absent(),
                 Value<double> difficulty = const Value.absent(),
+                Value<int> fsrsState = const Value.absent(),
+                Value<int?> fsrsStep = const Value.absent(),
                 Value<int> lastConfidence = const Value.absent(),
                 Value<DateTime?> lastReviewedAt = const Value.absent(),
                 required DateTime nextReviewAt,
@@ -12223,6 +12639,8 @@ class $$SrsStateTableTableManager
                 ease: ease,
                 stability: stability,
                 difficulty: difficulty,
+                fsrsState: fsrsState,
+                fsrsStep: fsrsStep,
                 lastConfidence: lastConfidence,
                 lastReviewedAt: lastReviewedAt,
                 nextReviewAt: nextReviewAt,
@@ -12258,6 +12676,8 @@ typedef $$KanjiSrsStateTableCreateCompanionBuilder =
       required int kanjiId,
       Value<double> stability,
       Value<double> difficulty,
+      Value<int> fsrsState,
+      Value<int?> fsrsStep,
       Value<int> lastConfidence,
       Value<DateTime?> lastReviewedAt,
       required DateTime nextReviewAt,
@@ -12268,6 +12688,8 @@ typedef $$KanjiSrsStateTableUpdateCompanionBuilder =
       Value<int> kanjiId,
       Value<double> stability,
       Value<double> difficulty,
+      Value<int> fsrsState,
+      Value<int?> fsrsStep,
       Value<int> lastConfidence,
       Value<DateTime?> lastReviewedAt,
       Value<DateTime> nextReviewAt,
@@ -12299,6 +12721,16 @@ class $$KanjiSrsStateTableFilterComposer
 
   ColumnFilters<double> get difficulty => $composableBuilder(
     column: $table.difficulty,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get fsrsState => $composableBuilder(
+    column: $table.fsrsState,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get fsrsStep => $composableBuilder(
+    column: $table.fsrsStep,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -12347,6 +12779,16 @@ class $$KanjiSrsStateTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<int> get fsrsState => $composableBuilder(
+    column: $table.fsrsState,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get fsrsStep => $composableBuilder(
+    column: $table.fsrsStep,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<int> get lastConfidence => $composableBuilder(
     column: $table.lastConfidence,
     builder: (column) => ColumnOrderings(column),
@@ -12385,6 +12827,12 @@ class $$KanjiSrsStateTableAnnotationComposer
     column: $table.difficulty,
     builder: (column) => column,
   );
+
+  GeneratedColumn<int> get fsrsState =>
+      $composableBuilder(column: $table.fsrsState, builder: (column) => column);
+
+  GeneratedColumn<int> get fsrsStep =>
+      $composableBuilder(column: $table.fsrsStep, builder: (column) => column);
 
   GeneratedColumn<int> get lastConfidence => $composableBuilder(
     column: $table.lastConfidence,
@@ -12441,6 +12889,8 @@ class $$KanjiSrsStateTableTableManager
                 Value<int> kanjiId = const Value.absent(),
                 Value<double> stability = const Value.absent(),
                 Value<double> difficulty = const Value.absent(),
+                Value<int> fsrsState = const Value.absent(),
+                Value<int?> fsrsStep = const Value.absent(),
                 Value<int> lastConfidence = const Value.absent(),
                 Value<DateTime?> lastReviewedAt = const Value.absent(),
                 Value<DateTime> nextReviewAt = const Value.absent(),
@@ -12449,6 +12899,8 @@ class $$KanjiSrsStateTableTableManager
                 kanjiId: kanjiId,
                 stability: stability,
                 difficulty: difficulty,
+                fsrsState: fsrsState,
+                fsrsStep: fsrsStep,
                 lastConfidence: lastConfidence,
                 lastReviewedAt: lastReviewedAt,
                 nextReviewAt: nextReviewAt,
@@ -12459,6 +12911,8 @@ class $$KanjiSrsStateTableTableManager
                 required int kanjiId,
                 Value<double> stability = const Value.absent(),
                 Value<double> difficulty = const Value.absent(),
+                Value<int> fsrsState = const Value.absent(),
+                Value<int?> fsrsStep = const Value.absent(),
                 Value<int> lastConfidence = const Value.absent(),
                 Value<DateTime?> lastReviewedAt = const Value.absent(),
                 required DateTime nextReviewAt,
@@ -12467,6 +12921,8 @@ class $$KanjiSrsStateTableTableManager
                 kanjiId: kanjiId,
                 stability: stability,
                 difficulty: difficulty,
+                fsrsState: fsrsState,
+                fsrsStep: fsrsStep,
                 lastConfidence: lastConfidence,
                 lastReviewedAt: lastReviewedAt,
                 nextReviewAt: nextReviewAt,
@@ -12504,6 +12960,8 @@ typedef $$KanaSrsStateTableCreateCompanionBuilder =
       Value<int> lapses,
       Value<double> stability,
       Value<double> difficulty,
+      Value<int> fsrsState,
+      Value<int?> fsrsStep,
       Value<DateTime?> dueAt,
       Value<DateTime?> lastReviewedAt,
       Value<int> rowid,
@@ -12516,6 +12974,8 @@ typedef $$KanaSrsStateTableUpdateCompanionBuilder =
       Value<int> lapses,
       Value<double> stability,
       Value<double> difficulty,
+      Value<int> fsrsState,
+      Value<int?> fsrsStep,
       Value<DateTime?> dueAt,
       Value<DateTime?> lastReviewedAt,
       Value<int> rowid,
@@ -12557,6 +13017,16 @@ class $$KanaSrsStateTableFilterComposer
 
   ColumnFilters<double> get difficulty => $composableBuilder(
     column: $table.difficulty,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get fsrsState => $composableBuilder(
+    column: $table.fsrsState,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get fsrsStep => $composableBuilder(
+    column: $table.fsrsStep,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -12610,6 +13080,16 @@ class $$KanaSrsStateTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<int> get fsrsState => $composableBuilder(
+    column: $table.fsrsState,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get fsrsStep => $composableBuilder(
+    column: $table.fsrsStep,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<DateTime> get dueAt => $composableBuilder(
     column: $table.dueAt,
     builder: (column) => ColumnOrderings(column),
@@ -12649,6 +13129,12 @@ class $$KanaSrsStateTableAnnotationComposer
     column: $table.difficulty,
     builder: (column) => column,
   );
+
+  GeneratedColumn<int> get fsrsState =>
+      $composableBuilder(column: $table.fsrsState, builder: (column) => column);
+
+  GeneratedColumn<int> get fsrsStep =>
+      $composableBuilder(column: $table.fsrsStep, builder: (column) => column);
 
   GeneratedColumn<DateTime> get dueAt =>
       $composableBuilder(column: $table.dueAt, builder: (column) => column);
@@ -12696,6 +13182,8 @@ class $$KanaSrsStateTableTableManager
                 Value<int> lapses = const Value.absent(),
                 Value<double> stability = const Value.absent(),
                 Value<double> difficulty = const Value.absent(),
+                Value<int> fsrsState = const Value.absent(),
+                Value<int?> fsrsStep = const Value.absent(),
                 Value<DateTime?> dueAt = const Value.absent(),
                 Value<DateTime?> lastReviewedAt = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
@@ -12706,6 +13194,8 @@ class $$KanaSrsStateTableTableManager
                 lapses: lapses,
                 stability: stability,
                 difficulty: difficulty,
+                fsrsState: fsrsState,
+                fsrsStep: fsrsStep,
                 dueAt: dueAt,
                 lastReviewedAt: lastReviewedAt,
                 rowid: rowid,
@@ -12718,6 +13208,8 @@ class $$KanaSrsStateTableTableManager
                 Value<int> lapses = const Value.absent(),
                 Value<double> stability = const Value.absent(),
                 Value<double> difficulty = const Value.absent(),
+                Value<int> fsrsState = const Value.absent(),
+                Value<int?> fsrsStep = const Value.absent(),
                 Value<DateTime?> dueAt = const Value.absent(),
                 Value<DateTime?> lastReviewedAt = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
@@ -12728,6 +13220,8 @@ class $$KanaSrsStateTableTableManager
                 lapses: lapses,
                 stability: stability,
                 difficulty: difficulty,
+                fsrsState: fsrsState,
+                fsrsStep: fsrsStep,
                 dueAt: dueAt,
                 lastReviewedAt: lastReviewedAt,
                 rowid: rowid,
@@ -14744,6 +15238,8 @@ typedef $$GrammarSrsStateTableCreateCompanionBuilder =
       Value<double> ease,
       Value<double> stability,
       Value<double> difficulty,
+      Value<int> fsrsState,
+      Value<int?> fsrsStep,
       required DateTime nextReviewAt,
       Value<DateTime?> lastReviewedAt,
       Value<int> ghostReviewsDue,
@@ -14756,6 +15252,8 @@ typedef $$GrammarSrsStateTableUpdateCompanionBuilder =
       Value<double> ease,
       Value<double> stability,
       Value<double> difficulty,
+      Value<int> fsrsState,
+      Value<int?> fsrsStep,
       Value<DateTime> nextReviewAt,
       Value<DateTime?> lastReviewedAt,
       Value<int> ghostReviewsDue,
@@ -14825,6 +15323,16 @@ class $$GrammarSrsStateTableFilterComposer
 
   ColumnFilters<double> get difficulty => $composableBuilder(
     column: $table.difficulty,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get fsrsState => $composableBuilder(
+    column: $table.fsrsState,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get fsrsStep => $composableBuilder(
+    column: $table.fsrsStep,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -14901,6 +15409,16 @@ class $$GrammarSrsStateTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<int> get fsrsState => $composableBuilder(
+    column: $table.fsrsState,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get fsrsStep => $composableBuilder(
+    column: $table.fsrsStep,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<DateTime> get nextReviewAt => $composableBuilder(
     column: $table.nextReviewAt,
     builder: (column) => ColumnOrderings(column),
@@ -14965,6 +15483,12 @@ class $$GrammarSrsStateTableAnnotationComposer
     column: $table.difficulty,
     builder: (column) => column,
   );
+
+  GeneratedColumn<int> get fsrsState =>
+      $composableBuilder(column: $table.fsrsState, builder: (column) => column);
+
+  GeneratedColumn<int> get fsrsStep =>
+      $composableBuilder(column: $table.fsrsStep, builder: (column) => column);
 
   GeneratedColumn<DateTime> get nextReviewAt => $composableBuilder(
     column: $table.nextReviewAt,
@@ -15041,6 +15565,8 @@ class $$GrammarSrsStateTableTableManager
                 Value<double> ease = const Value.absent(),
                 Value<double> stability = const Value.absent(),
                 Value<double> difficulty = const Value.absent(),
+                Value<int> fsrsState = const Value.absent(),
+                Value<int?> fsrsStep = const Value.absent(),
                 Value<DateTime> nextReviewAt = const Value.absent(),
                 Value<DateTime?> lastReviewedAt = const Value.absent(),
                 Value<int> ghostReviewsDue = const Value.absent(),
@@ -15051,6 +15577,8 @@ class $$GrammarSrsStateTableTableManager
                 ease: ease,
                 stability: stability,
                 difficulty: difficulty,
+                fsrsState: fsrsState,
+                fsrsStep: fsrsStep,
                 nextReviewAt: nextReviewAt,
                 lastReviewedAt: lastReviewedAt,
                 ghostReviewsDue: ghostReviewsDue,
@@ -15063,6 +15591,8 @@ class $$GrammarSrsStateTableTableManager
                 Value<double> ease = const Value.absent(),
                 Value<double> stability = const Value.absent(),
                 Value<double> difficulty = const Value.absent(),
+                Value<int> fsrsState = const Value.absent(),
+                Value<int?> fsrsStep = const Value.absent(),
                 required DateTime nextReviewAt,
                 Value<DateTime?> lastReviewedAt = const Value.absent(),
                 Value<int> ghostReviewsDue = const Value.absent(),
@@ -15073,6 +15603,8 @@ class $$GrammarSrsStateTableTableManager
                 ease: ease,
                 stability: stability,
                 difficulty: difficulty,
+                fsrsState: fsrsState,
+                fsrsStep: fsrsStep,
                 nextReviewAt: nextReviewAt,
                 lastReviewedAt: lastReviewedAt,
                 ghostReviewsDue: ghostReviewsDue,

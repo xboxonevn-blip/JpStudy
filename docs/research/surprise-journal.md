@@ -349,3 +349,18 @@
 - Delta: +70 percentage points on confidence that BigQuery plumbing is operational; -40 percentage points on confidence that first export automatically yields learning-outcome signal.
 - Updated belief: dataset existence is necessary but not sufficient. The next measurement gate is event diversity and learner behavior after onboarding.
 - New hypothesis: a small beta seeding script or guided smoke flow should intentionally trigger SRS, micro-quiz, and quality-rating events before interpreting NS.
+
+## 2026-05-15T19:58:00+07:00 - FSRS correctness required state, not just formulas
+
+- Prior belief: replacing the legacy interval math with FSRS-6 formulas would be the main fix.
+- Actual observation: formulas alone were insufficient. Correct new-card and relearning behavior required persisted card `state` and `step` across vocab, grammar, kanji, and kana tables, plus a schema migration for existing rows.
+- Delta: +60 percentage points on confidence that the SRS loop now behaves like a learning scheduler instead of a day-scale interval calculator.
+- Updated belief: SRS correctness is a state-machine problem first and a parameter/formula problem second.
+- New hypothesis: early beta retention shifts will come more from minute-scale learning/relearning loops than from changing the default retention target.
+
+## 2026-05-15T20:35:00+07:00 - Learning metrics also needed FSRS state
+
+- Prior belief: after persisting `fsrs_state`, the remaining SRS UI metrics would mostly stay valid.
+- Actual observation: daily-plan critical counts and retention stage breakdown still used the legacy `stability < 1.0` proxy. FSRS-6 learning cards can have stability above `1.0`, so the proxy hid due learning steps from planning.
+- Delta: +25 percentage points on confidence that state-machine persistence must flow into analytics/query code, not only review writes.
+- Updated belief: any SRS query named "learning", "critical", or "stage" must read explicit FSRS state before using stability brackets.

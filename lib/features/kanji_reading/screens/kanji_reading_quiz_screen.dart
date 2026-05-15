@@ -75,6 +75,8 @@ class _KanjiReadingQuizScreenState
       difficulty: state.difficulty,
       grade: grade,
       lastReviewedAt: state.lastReviewedAt,
+      cardState: FsrsCardState.fromDbValue(state.fsrsState),
+      step: state.fsrsStep,
     );
     await dao.updateSrsState(
       kanjiId: kanjiId,
@@ -82,6 +84,8 @@ class _KanjiReadingQuizScreenState
       difficulty: result.difficulty,
       lastConfidence: grade,
       nextReviewAt: result.nextReviewAt,
+      fsrsState: result.cardState,
+      fsrsStep: result.step,
     );
   }
 

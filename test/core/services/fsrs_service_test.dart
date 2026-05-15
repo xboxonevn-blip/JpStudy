@@ -35,6 +35,77 @@ FsrsReviewResult _subsequentReview({
 // ── Tests ────────────────────────────────────────────────────
 
 void main() {
+  group('FsrsService.review — FSRS-6 scheduler conformance', () {
+    test('uses current FSRS-6 default parameter vector', () {
+      expect(FsrsService.defaultParameters, hasLength(21));
+      expect(FsrsService.defaultParameters[20], closeTo(0.1542, 0.0001));
+    });
+
+    test('schedules new-card learning steps like FSRS-6', () {
+      final now = DateTime(2024, 1, 1, 12, 0);
+
+      final again = _svc.review(
+        grade: 1,
+        stability: 0,
+        difficulty: 0,
+        lastReviewedAt: null,
+        now: now,
+      );
+      final hard = _svc.review(
+        grade: 2,
+        stability: 0,
+        difficulty: 0,
+        lastReviewedAt: null,
+        now: now,
+      );
+      final good = _svc.review(
+        grade: 3,
+        stability: 0,
+        difficulty: 0,
+        lastReviewedAt: null,
+        now: now,
+      );
+      final easy = _svc.review(
+        grade: 4,
+        stability: 0,
+        difficulty: 0,
+        lastReviewedAt: null,
+        now: now,
+      );
+
+      expect(again.nextReviewAt.difference(now), const Duration(minutes: 1));
+      expect(
+        hard.nextReviewAt.difference(now),
+        const Duration(minutes: 5, seconds: 30),
+      );
+      expect(good.nextReviewAt.difference(now), const Duration(minutes: 10));
+      expect(easy.nextReviewAt.difference(now), const Duration(days: 4));
+      expect(again.cardState, FsrsCardState.learning);
+      expect(again.step, 0);
+      expect(good.cardState, FsrsCardState.learning);
+      expect(good.step, 1);
+      expect(easy.cardState, FsrsCardState.review);
+      expect(easy.step, isNull);
+    });
+
+    test('again on review card enters FSRS relearning step', () {
+      final now = DateTime(2024, 1, 10, 12, 0);
+      final result = _svc.review(
+        grade: 1,
+        stability: 5,
+        difficulty: 5,
+        cardState: FsrsCardState.review,
+        step: null,
+        lastReviewedAt: now.subtract(const Duration(days: 5)),
+        now: now,
+      );
+
+      expect(result.cardState, FsrsCardState.relearning);
+      expect(result.step, 0);
+      expect(result.nextReviewAt.difference(now), const Duration(minutes: 10));
+    });
+  });
+
   // ── First review (new card) ───────────────────────────────
 
   group('FsrsService.review — first review (lastReviewedAt == null)', () {
@@ -354,7 +425,7 @@ void main() {
       },
     );
 
-    test('intervalDays is at least 0.01', () {
+    test('review lapse interval follows 10-minute relearning step', () {
       final result = _svc.review(
         grade: 1,
         stability: 0.001,
@@ -362,7 +433,7 @@ void main() {
         lastReviewedAt: DateTime(2024, 1, 1),
         now: DateTime(2024, 1, 1),
       );
-      expect(result.intervalDays, greaterThanOrEqualTo(0.01));
+      expect(result.intervalDays, closeTo(10 / (24 * 60), 0.00001));
     });
   });
 

@@ -480,7 +480,6 @@ class _LessonDetailScreenState extends ConsumerState<LessonDetailScreen> {
         ease: 2.5,
         stability: 1.0,
         difficulty: 5.0,
-        lastReviewedAt: now,
         nextReviewAt: now.add(const Duration(days: 1)),
       );
     } else {

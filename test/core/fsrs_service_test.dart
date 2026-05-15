@@ -5,6 +5,28 @@ void main() {
   final fsrs = FsrsService();
   final t0 = DateTime(2026, 1, 1, 12);
 
+  group('FSRS-6 learning schedule', () {
+    test('new-card intervals match reference steps', () {
+      final expected = <int, Duration>{
+        1: const Duration(minutes: 1),
+        2: const Duration(minutes: 5, seconds: 30),
+        3: const Duration(minutes: 10),
+        4: const Duration(days: 4),
+      };
+
+      for (final entry in expected.entries) {
+        final result = fsrs.review(
+          grade: entry.key,
+          stability: 0,
+          difficulty: 0,
+          lastReviewedAt: null,
+          now: t0,
+        );
+        expect(result.nextReviewAt.difference(t0), entry.value);
+      }
+    });
+  });
+
   // ── Initial review (first time seeing a card) ─────────────────────────────
 
   group('initial review (lastReviewedAt == null)', () {
@@ -161,7 +183,7 @@ void main() {
       expect(hard.stability, lessThan(good.stability));
     });
 
-    test('intervalDays >= 0.01 min clamp', () {
+    test('review lapse enters 10-minute relearning step', () {
       final r = fsrs.review(
         grade: 1,
         stability: 0.1,
@@ -169,7 +191,7 @@ void main() {
         lastReviewedAt: lastReview,
         now: t0,
       );
-      expect(r.intervalDays, greaterThanOrEqualTo(0.01));
+      expect(r.intervalDays, closeTo(10 / (24 * 60), 0.00001));
     });
   });
 

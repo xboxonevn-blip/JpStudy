@@ -1,5 +1,6 @@
 import 'package:drift/drift.dart';
 
+import '../../core/services/fsrs_service.dart';
 import '../db/app_database.dart';
 
 part 'kana_srs_dao.g.dart';
@@ -17,7 +18,17 @@ class KanaSrsDao extends DatabaseAccessor<AppDatabase> with _$KanaSrsDaoMixin {
     required int lapses,
     required DateTime dueAt,
     DateTime? lastReviewedAt,
+    FsrsCardState? fsrsState,
+    int? fsrsStep,
   }) {
+    final resolvedState =
+        fsrsState ??
+        (reps > 0 && lastReviewedAt != null
+            ? FsrsCardState.review
+            : FsrsCardState.learning);
+    final resolvedStep = fsrsState == null
+        ? (resolvedState == FsrsCardState.learning ? 0 : null)
+        : fsrsStep;
     return into(kanaSrsState).insertOnConflictUpdate(
       KanaSrsStateCompanion.insert(
         kana: kana,
@@ -28,6 +39,8 @@ class KanaSrsDao extends DatabaseAccessor<AppDatabase> with _$KanaSrsDaoMixin {
         difficulty: Value(difficulty),
         dueAt: Value(dueAt),
         lastReviewedAt: Value(lastReviewedAt ?? DateTime.now()),
+        fsrsState: Value(resolvedState.dbValue),
+        fsrsStep: Value(resolvedStep),
       ),
     );
   }
