@@ -17,6 +17,8 @@ Optional beta monitoring secret: `JPSTUDY_SENTRY_DSN`.
    flutter analyze
    flutter test
    npm run test:storage-rules
+   Review docs/compliance/user-data-deletion-runbook.md for current deletion
+   and retention launch gaps.
 
 3. Build with web App Check enabled:
    flutter build web --release --base-href=/ --dart-define=JPSTUDY_RECAPTCHA_SITE_KEY=$JPSTUDY_RECAPTCHA_SITE_KEY
@@ -52,6 +54,8 @@ Post-deploy checks:
 - Re-run route smoke and performance smoke against the deployed URL.
 - Re-run live web resource smoke and Lighthouse gates against `https://jpstudy.web.app`.
 - Confirm Firebase Auth, Storage backup, App Check telemetry, and Analytics DebugView.
+- Confirm the user-data deletion runbook still matches the deployed Auth,
+  Storage, GA4, and BigQuery setup.
 - If `JPSTUDY_SENTRY_DSN` is set, force one non-production test exception and confirm it appears in Sentry before sharing the beta URL.
 
 ## Android APK (direct distribution)
