@@ -40,6 +40,12 @@ test('buildMarkdownReport summarizes export, funnel, NS, and TTL evidence', () =
       quizGatePasses: 0,
       qualityGatePasses: 0,
     },
+    adminRetention: {
+      property: '536663906',
+      ok: false,
+      status: 403,
+      message: 'Google Analytics Admin API is disabled.',
+    },
   });
 
   assert.match(report, /# GA4 Export Status Report/);
@@ -50,7 +56,34 @@ test('buildMarkdownReport summarizes export, funnel, NS, and TTL evidence', () =
   assert.match(report, /First SRS users: `0`/);
   assert.match(report, /Real NS: `0\.00%`/);
   assert.match(report, /default_table_expiration_days.*60\.0/);
+  assert.match(report, /## GA4 Admin Retention/);
+  assert.match(report, /Property: `536663906`/);
+  assert.match(report, /Status: `403`/);
+  assert.match(report, /Google Analytics Admin API is disabled/);
   assert.match(report, /learning-outcome events are missing/);
+});
+
+test('buildMarkdownReport prints GA4 Admin retention settings when available', () => {
+  const report = buildMarkdownReport({
+    generatedAt: '2026-05-15T11:25:00+07:00',
+    location: 'asia-southeast1',
+    datasets: ['analytics_536663906'],
+    eventCounts: [],
+    datasetOptions: [],
+    tableOptions: [],
+    funnel: {},
+    northStar: {},
+    adminRetention: {
+      property: '536663906',
+      ok: true,
+      status: 200,
+      eventDataRetention: 'TWO_MONTHS',
+      resetUserDataOnNewActivity: true,
+    },
+  });
+
+  assert.match(report, /Event data retention: `TWO_MONTHS`/);
+  assert.match(report, /Reset user data on new activity: `true`/);
 });
 
 test('summarizeLearningReadiness identifies missing learning gates', () => {

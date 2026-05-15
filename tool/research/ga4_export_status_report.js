@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const childProcess = require('node:child_process');
+const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
 
@@ -8,12 +9,16 @@ const DEFAULT_PROJECT = 'jpstudy-v2';
 const DEFAULT_LOCATION = 'asia-southeast1';
 const DEFAULT_DAYS = 2;
 const PROPERTY_DATASET = 'analytics_536663906';
+const DEFAULT_PROPERTY_ID = '536663906';
+const TOKEN_URL = 'https://oauth2.googleapis.com/token';
+const ANALYTICS_ADMIN_SCOPE = 'https://www.googleapis.com/auth/analytics.readonly';
 
 function parseArgs(argv) {
   const args = {
     project: DEFAULT_PROJECT,
     location: DEFAULT_LOCATION,
     days: DEFAULT_DAYS,
+    property: DEFAULT_PROPERTY_ID,
   };
   for (let index = 0; index < argv.length; index += 1) {
     const item = argv[index];
@@ -22,6 +27,8 @@ function parseArgs(argv) {
     else if (item === '--project') args.project = argv[++index];
     else if (item === '--location') args.location = argv[++index];
     else if (item === '--days') args.days = Number(argv[++index]);
+    else if (item === '--property') args.property = argv[++index];
+    else if (item === '--skip-admin-retention') args.skipAdminRetention = true;
     else if (item === '--help' || item === '-h') args.help = true;
     else throw new Error(`Unknown argument: ${item}`);
   }
@@ -33,6 +40,7 @@ function printHelp() {
   node tool/research/ga4_export_status_report.js
   node tool/research/ga4_export_status_report.js --out docs/research/secure/ga4-export-status.md
   node tool/research/ga4_export_status_report.js --json
+  node tool/research/ga4_export_status_report.js --skip-admin-retention
 `);
 }
 
@@ -44,6 +52,92 @@ function runBigQuery({ project, location, query }) {
     { encoding: 'utf8' },
   );
   return JSON.parse(output);
+}
+
+function base64Url(value) {
+  return Buffer.from(value)
+    .toString('base64')
+    .replaceAll('+', '-')
+    .replaceAll('/', '_')
+    .replaceAll('=', '');
+}
+
+function signJwt(serviceAccount, scope) {
+  const now = Math.floor(Date.now() / 1000);
+  const header = base64Url(JSON.stringify({ alg: 'RS256', typ: 'JWT' }));
+  const payload = base64Url(
+    JSON.stringify({
+      iss: serviceAccount.client_email,
+      scope,
+      aud: TOKEN_URL,
+      iat: now,
+      exp: now + 3600,
+    }),
+  );
+  const unsigned = `${header}.${payload}`;
+  const signature = crypto
+    .createSign('RSA-SHA256')
+    .update(unsigned)
+    .sign(serviceAccount.private_key, 'base64')
+    .replaceAll('+', '-')
+    .replaceAll('/', '_')
+    .replaceAll('=', '');
+  return `${unsigned}.${signature}`;
+}
+
+async function getAccessToken(scope) {
+  const credentialsPath = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+  if (!credentialsPath) {
+    throw new Error('GOOGLE_APPLICATION_CREDENTIALS is required');
+  }
+  const serviceAccount = JSON.parse(fs.readFileSync(credentialsPath, 'utf8'));
+  const response = await fetch(TOKEN_URL, {
+    method: 'POST',
+    headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+      assertion: signJwt(serviceAccount, scope),
+    }),
+  });
+  const payload = await response.json();
+  if (!response.ok) {
+    throw new Error(`OAuth token request failed: ${JSON.stringify(payload)}`);
+  }
+  return payload.access_token;
+}
+
+async function fetchAdminRetention({ property }) {
+  try {
+    const token = await getAccessToken(ANALYTICS_ADMIN_SCOPE);
+    const response = await fetch(
+      `https://analyticsadmin.googleapis.com/v1alpha/properties/${property}/dataRetentionSettings`,
+      { headers: { authorization: `Bearer ${token}` } },
+    );
+    const payload = await response.json();
+    if (!response.ok) {
+      return {
+        property,
+        ok: false,
+        status: response.status,
+        message: payload?.error?.message ?? JSON.stringify(payload),
+      };
+    }
+    return {
+      property,
+      ok: true,
+      status: response.status,
+      name: payload.name,
+      eventDataRetention: payload.eventDataRetention,
+      resetUserDataOnNewActivity: payload.resetUserDataOnNewActivity,
+    };
+  } catch (error) {
+    return {
+      property,
+      ok: false,
+      status: 'not_available',
+      message: error.message,
+    };
+  }
 }
 
 function dateFilter(days) {
@@ -106,8 +200,11 @@ FROM users`,
   };
 }
 
-function collectStatus(args) {
+async function collectStatus(args) {
   const querySet = queries(args);
+  const adminRetention = args.skipAdminRetention
+    ? null
+    : await fetchAdminRetention({ property: args.property });
   const datasets = runBigQuery({ ...args, query: querySet.datasets }).map(
     (row) => row.schema_name,
   );
@@ -122,6 +219,7 @@ function collectStatus(args) {
       tableOptions: [],
       funnel: {},
       northStar: {},
+      adminRetention,
     };
   }
   return {
@@ -134,6 +232,7 @@ function collectStatus(args) {
     tableOptions: runBigQuery({ ...args, query: querySet.tableOptions }),
     funnel: runBigQuery({ ...args, query: querySet.funnel })[0] || {},
     northStar: runBigQuery({ ...args, query: querySet.northStar })[0] || {},
+    adminRetention,
   };
 }
 
@@ -165,6 +264,29 @@ function percent(numerator, denominator) {
 
 function optionValue(rows, name) {
   return rows.find((row) => row.option_name === name)?.option_value ?? 'n/a';
+}
+
+function adminRetentionLines(adminRetention) {
+  if (!adminRetention) return [];
+  const lines = [
+    '',
+    '## GA4 Admin Retention',
+    '',
+    `Property: \`${adminRetention.property}\``,
+    `Status: \`${adminRetention.status}\``,
+  ];
+  if (adminRetention.ok) {
+    lines.push(
+      `Event data retention: \`${adminRetention.eventDataRetention ?? 'n/a'}\``,
+      `Reset user data on new activity: \`${adminRetention.resetUserDataOnNewActivity ?? 'n/a'}\``,
+    );
+  } else {
+    lines.push(
+      'Result: `blocked`',
+      `Message: \`${adminRetention.message ?? 'n/a'}\``,
+    );
+  }
+  return lines;
 }
 
 function buildMarkdownReport(status) {
@@ -217,6 +339,7 @@ function buildMarkdownReport(status) {
     ...(status.tableOptions || []).map(
       (row) => `- \`${row.table_name}\` ${row.option_name}: \`${row.option_value}\``,
     ),
+    ...adminRetentionLines(status.adminRetention),
     '',
     '## Readiness',
     '',
@@ -228,13 +351,13 @@ function buildMarkdownReport(status) {
   return `${lines.join('\n')}\n`;
 }
 
-function main(argv = process.argv.slice(2)) {
+async function main(argv = process.argv.slice(2)) {
   const args = parseArgs(argv);
   if (args.help) {
     printHelp();
     return;
   }
-  const status = collectStatus(args);
+  const status = await collectStatus(args);
   const output = args.json
     ? `${JSON.stringify(status, null, 2)}\n`
     : buildMarkdownReport(status);
@@ -248,12 +371,10 @@ function main(argv = process.argv.slice(2)) {
 }
 
 if (require.main === module) {
-  try {
-    main();
-  } catch (error) {
+  main().catch((error) => {
     console.error(error.message);
     process.exit(1);
-  }
+  });
 }
 
 module.exports = {
