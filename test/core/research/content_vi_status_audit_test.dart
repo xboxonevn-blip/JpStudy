@@ -30,10 +30,7 @@ void main() {
                   'sense': {'meaningVi': 'da duyet'},
                 },
                 {
-                  'tags': [
-                    'vi-editorial-codex-pass',
-                    'vi-human-approved',
-                  ],
+                  'tags': ['vi-editorial-codex-pass', 'vi-human-approved'],
                   'sense': {'meaningVi': 'da duyet boi user'},
                 },
               ],
@@ -81,8 +78,9 @@ void main() {
     expect(report.filesScanned, 3);
     expect(report.totalItems, 5);
     expect(report.level('N1').items, 4);
-    expect(report.level('N1').machineTranslatedItems, 2);
+    expect(report.level('N1').machineTranslatedItems, 1);
     expect(report.level('N1').approvedItems, 3);
+    expect(report.level('N1').machineAndApprovedItems, 1);
     expect(report.level('N2').openReviewItems, 1);
     expect(report.dataset('grammar_examples').needsViEditorialItems, 1);
     expect(report.dataset('grammar_examples').needsHumanReviewItems, 1);
@@ -152,4 +150,53 @@ void main() {
     expect(report.dataset('grammar').openReviewItems, 1);
     expect(report.filesWithOpenReview, 1);
   });
+
+  test(
+    'human approval closes stale machine and review provenance tags',
+    () async {
+      final tempDir = await Directory.systemTemp.createTemp('jpstudy_content_');
+      addTearDown(() async {
+        if (await tempDir.exists()) {
+          await tempDir.delete(recursive: true);
+        }
+      });
+
+      await File(
+            '${tempDir.path}/assets/data/content/grammar_examples/n2/lesson_1.json',
+          )
+          .create(recursive: true)
+          .then(
+            (file) => file.writeAsString(
+              jsonEncode({
+                'level': 'N2',
+                'examples': [
+                  {
+                    'tags': [
+                      'machine-translated-vi',
+                      'needs-vi-editorial',
+                      'needs-human-review',
+                      'vi-human-approved',
+                    ],
+                    'translationVi': 'da duyet boi user',
+                  },
+                ],
+              }),
+            ),
+          );
+
+      final report = ContentViStatusAuditor.scan(
+        Directory('${tempDir.path}/assets/data/content'),
+      );
+
+      expect(report.totalItems, 1);
+      expect(report.level('N2').approvedItems, 1);
+      expect(report.level('N2').machineTranslatedItems, 0);
+      expect(report.level('N2').needsViEditorialItems, 0);
+      expect(report.level('N2').needsHumanReviewItems, 0);
+      expect(report.level('N2').openReviewItems, 0);
+      expect(report.level('N2').machineAndApprovedItems, 1);
+      expect(report.filesWithMachineTranslation, 0);
+      expect(report.filesWithOpenReview, 0);
+    },
+  );
 }

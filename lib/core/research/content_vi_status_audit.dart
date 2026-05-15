@@ -236,7 +236,7 @@ class _MutableContentViStatusBucket {
     if (status.openReview) openReviewItems += 1;
     if (status.approved) approvedItems += 1;
     if (status.hasDraftField) draftFieldItems += 1;
-    if (status.machineTranslated && status.approved) {
+    if (status.machineTranslationProvenance && status.approved) {
       machineAndApprovedItems += 1;
     }
   }
@@ -270,6 +270,7 @@ class _ContentViItem {
 class _ContentViItemStatus {
   const _ContentViItemStatus({
     required this.machineTranslated,
+    required this.machineTranslationProvenance,
     required this.needsViEditorial,
     required this.needsHumanReview,
     required this.approved,
@@ -277,6 +278,7 @@ class _ContentViItemStatus {
   });
 
   final bool machineTranslated;
+  final bool machineTranslationProvenance;
   final bool needsViEditorial;
   final bool needsHumanReview;
   final bool approved;
@@ -396,23 +398,27 @@ Map<String, Object?> _withInheritedTags(
 
 _ContentViItemStatus _statusFor(Map<String, Object?> item) {
   final tags = _tagsFrom(item).toSet();
+  final approved =
+      tags.contains('vi-human-approved') ||
+      tags.contains('vi-editorial-codex-pass') ||
+      tags.contains('vi-editorial-approved') ||
+      tags.contains('human-reviewed') ||
+      tags.contains('kanji-metadata-approved') ||
+      _hasApprovedStatus(item);
+  final machineTranslated =
+      tags.contains('machine-translated-vi') ||
+      tags.contains('vi-machine-draft');
+  final needsViEditorial =
+      tags.contains('needs-vi-editorial') || tags.contains('vi-needs-review');
+  final needsHumanReview =
+      tags.contains('needs-human-review') ||
+      tags.contains('manual-review-needed');
   return _ContentViItemStatus(
-    machineTranslated:
-        tags.contains('machine-translated-vi') ||
-        tags.contains('vi-machine-draft'),
-    needsViEditorial:
-        tags.contains('needs-vi-editorial') ||
-        tags.contains('vi-needs-review'),
-    needsHumanReview:
-        tags.contains('needs-human-review') ||
-        tags.contains('manual-review-needed'),
-    approved:
-        tags.contains('vi-human-approved') ||
-        tags.contains('vi-editorial-codex-pass') ||
-        tags.contains('vi-editorial-approved') ||
-        tags.contains('human-reviewed') ||
-        tags.contains('kanji-metadata-approved') ||
-        _hasApprovedStatus(item),
+    machineTranslated: machineTranslated && !approved,
+    machineTranslationProvenance: machineTranslated,
+    needsViEditorial: needsViEditorial && !approved,
+    needsHumanReview: needsHumanReview && !approved,
+    approved: approved,
     hasDraftField: _hasDraftField(item),
   );
 }

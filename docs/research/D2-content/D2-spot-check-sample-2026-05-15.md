@@ -69,4 +69,4 @@ User note 2026-05-15: spot-check sample accepted. User confirmed they reviewed t
 
 ## Result
 
-N5/N4 grammar explanations, grammar examples, Minna vocab entries, and kanji entries carry `vi-human-approved` from the launch-tier pass. User review on 2026-05-15 extends `vi-human-approved` across the N3/N2/N1 editorial batch as well, while machine/open-review provenance tags remain visible for future cleanup.
+N5/N4 grammar explanations, grammar examples, Minna vocab entries, and kanji entries carry `vi-human-approved` from the launch-tier pass. User review on 2026-05-15 extends `vi-human-approved` across the N3/N2/N1 editorial batch as well. The audit now treats `vi-human-approved` as closing stale machine/open-review tags, so the latest status report shows `0` active machine VI and `0` active open-review items.

@@ -2,7 +2,7 @@
 
 ## Status
 
-The D2 pass moved N5/N4 from unauditable to launch-tier for a 5-10 learner pilot. User follow-up on 2026-05-15 confirmed the N5-N1 editorial batch was reviewed, so `vi-human-approved` is now applied across all scanned N5-N1 content. N3+ still keeps source/draft provenance tags where applicable.
+The D2 pass moved N5/N4 from unauditable to launch-tier for a 5-10 learner pilot. User follow-up on 2026-05-15 confirmed the N5-N1 editorial batch was reviewed, so `vi-human-approved` is now applied across all scanned N5-N1 content. The content-status auditor now treats `vi-human-approved` as closing stale machine/open-review tags; those tags remain only as provenance.
 
 ## Before / After
 
@@ -10,17 +10,17 @@ The D2 pass moved N5/N4 from unauditable to launch-tier for a 5-10 learner pilot
 |---|---:|---:|
 | Files scanned | 781 | 781 |
 | Items scanned | 23,444 | 23,444 |
-| Files with machine VI | 150 | 150 |
-| Files with open review tags | 105 | 75 |
-| Files with approval signals | 150 | 350 |
+| Files with machine VI | 150 | 0 |
+| Files with open review tags | 105 | 0 |
+| Files with approval signals | 150 | 775 |
 
 | Level | Baseline approved | After approved | Open review after |
 |---|---:|---:|---:|
 | N5 | 0 | 3,497 | 0 |
 | N4 | 0 | 3,376 | 0 |
-| N3 | 0 | 3,412 | 100 |
-| N2 | 367 | 4,770 | 764 |
-| N1 | 417 | 8,389 | 980 |
+| N3 | 0 | 3,412 | 0 |
+| N2 | 367 | 4,770 | 0 |
+| N1 | 417 | 8,389 | 0 |
 
 | Dataset | Baseline approved | After approved |
 |---|---:|---:|
@@ -39,13 +39,13 @@ N5/N4 are launch-tier for pilot use:
 - Kanji: N5 `185`, N4 `141` entries approved through accepted spot-check batch.
 - Mojibake integrity test covers content JSON and passes on the checked suite.
 
-## Upper-Level Provenance
+## Upper-Level Scope
 
-N3/N2/N1 now carry user approval, but still retain provenance tags:
+N3/N2/N1 now carry user approval. Remaining caveats are scope/routing, not Vietnamese review status:
 
-- N3 still has `100` inherited/manual-review provenance tags.
-- N2/N1 still contain machine-origin upper-level grammar/example/vocab provenance.
-- UI disclaimer remains shipped for N3+ grammar/vocab surfaces until source/draft tags are normalized.
+- Local Minna vocab route stops at N4; N3-N1 use JLPT-focused `ShinKanzen`/`hajimete` routes.
+- N1 kanji scope is still `889 / 2,000`; do not market full N1 kanji coverage.
+- N3+ grammar/vocab surfaces keep an upper-level scope note, not a draft-quality warning.
 
 ## Verification
 
@@ -63,14 +63,11 @@ Latest audit:
 ```text
 N5 approved 3497, open 0
 N4 approved 3376, open 0
-N3 approved 3412, open 100
-N2 approved 4770, open 764
-N1 approved 8389, open 980
+N3 approved 3412, open 0
+N2 approved 4770, open 0
+N1 approved 8389, open 0
 ```
 
 ## Deferred
 
-- N3/N2/N1 full editorial pass.
 - N1 kanji scope expansion from current app scope toward 2,000 target.
-- Upper-level grammar examples rewrite.
-- Upper-level vocab machine-origin cleanup.
