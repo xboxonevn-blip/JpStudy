@@ -140,17 +140,24 @@ Active Karpathy-style Auto Research mission. See `docs/research/`:
 - `north-star-metric.md` — NS definition
 - `surprise-journal.md` — belief shifts log
 - `mental-models.md` — appended-only "why it works"
-- `synthesis-2026-05-14.md` — latest phase synthesis
+- `synthesis-2026-05-15.md` — latest phase synthesis
+- `mission-completion-audit-2026-05-15.md` — sprint/stop-condition
+  evidence map and remaining blockers
 
 Active dimensions:
 - D1 (measurement), D2 (content), D3 (Vietnamese), D4 (personas), D5
   (pedagogy), D6 (UI/UX), D7 (performance), D8 (compliance) +
   D8-release-risk.
 
-Active workstream (in progress as of 2026-05-14):
-- Curriculum-gating onboarding Phase 1-12 (language → level → home →
-  goal banner, with Kana hidden for N4+).
-- Phase 13 (anonymous auth) prompt queued but not started.
+Active workstream status (as of 2026-05-15):
+- Curriculum-gating onboarding Phase 1-13 source work is complete,
+  including anonymous Auth bootstrap and legacy migration gating.
+- Sprint 1-7 implementation/docs are substantially complete. Do not restart
+  completed work without checking `mission-completion-audit-2026-05-15.md`.
+- Remaining blockers are operational/legal proofs: legal approval,
+  Sentry DSN + first issue, secret-backed CI deploy/live smoke/Lighthouse,
+  Firebase Storage bucket/rules/CORS migration proof, first executed deletion
+  proof, GA4 UI retention proof, and later App Check enforcement proof.
 
 ## App Check (reCAPTCHA v3)
 
@@ -200,6 +207,13 @@ flutter build web --release `
   `JPSTUDY_RECAPTCHA_SITE_KEY` to enable the `deploy-hosting` CI job.
   Optional: set `JPSTUDY_SENTRY_DSN` for beta error monitoring. The job
   intentionally skips deploy when required secrets are missing.
+□ Provide/verify Sentry DSN and record a first deployed issue URL before
+  claiming production observability.
+□ Finalize legal review for `/privacy` and `/terms`; current copy remains
+  a review-needed beta draft.
+□ Execute one real deletion runbook case and record proof before public launch.
+□ Capture GA4 UI retention proof in Console; BigQuery TTL is source-proven,
+  but GA4 UI retention remains manual.
 ```
 
 ## Communication
