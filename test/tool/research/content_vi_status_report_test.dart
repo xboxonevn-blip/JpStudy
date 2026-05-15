@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('prints Vietnamese content status from the CLI', () async {
+    final repoRoot = _repoRoot();
     final tempDir = await Directory.systemTemp.createTemp('jpstudy_content_');
     addTearDown(() async {
       if (await tempDir.exists()) {
@@ -35,7 +36,7 @@ void main() {
       'tool/research/content_vi_status_report.dart',
       '--content-root',
       contentDir.path,
-    ]);
+    ], workingDirectory: repoRoot);
 
     expect(result.stderr, isEmpty);
     expect(result.exitCode, 0);
@@ -44,4 +45,13 @@ void main() {
     expect(result.stdout as String, contains('| N1 | 1 | 1 | 1 | 0 |'));
     expect(result.stdout as String, contains('| vocab | 1 | 1 | 1 | 0 |'));
   });
+}
+
+String _repoRoot() {
+  final githubWorkspace = Platform.environment['GITHUB_WORKSPACE'];
+  if (githubWorkspace != null &&
+      File('$githubWorkspace/pubspec.yaml').existsSync()) {
+    return githubWorkspace;
+  }
+  return Directory.current.path;
 }
