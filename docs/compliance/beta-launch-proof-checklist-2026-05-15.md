@@ -12,7 +12,7 @@ Aggregate status command:
 npm run report:launch-readiness -- --json
 ```
 
-Latest run on `2026-05-16T02:49+07:00` returned `complete=false` with
+Latest run on `2026-05-16T03:36+07:00` returned `complete=false` with
 blockers: `legal-approval-missing`, `sentry-dsn-missing`,
 `storage-not-provisioned`, `deletion-proof-missing`,
 `ga4-retention-proof-missing`, `ga4-learning-events-missing`, and
@@ -174,7 +174,37 @@ Evidence to record:
   and the service account also receives `403 PERMISSION_DENIED` from Service
   Usage when checking that API state. Owner Console/API action is still needed.
 
-## 7. App Check Enforcement Proof
+## 7. GA4 Learning Event Export Proof
+
+Goal: prove the three North Star learning event families are present in the
+source-verifiable GA4 BigQuery export.
+
+Current status:
+
+- Live client emission is proven by Playwright network capture on
+  `2026-05-16T03:33+07:00`:
+  - `srs_review_completed`: `22` batched vocab review rows, GA responses `204`.
+  - `n5_micro_quiz_completed`: GA response `204`; params
+    `correct_count=0`, `total_count=50`, `accuracy=0`.
+  - `session_quality_rated`: GA response `204`; params `mode=test`,
+    `rating=5`.
+- Export ingestion is still pending. Recheck on `2026-05-16T03:36+07:00`
+  found only `analytics_536663906.events_20260514`; the learning rows are not
+  in BigQuery yet.
+- The export report query now scores the quiz gate from the app's actual
+  telemetry params: `score`, or `accuracy * 100`, or
+  `correct_count / total_count * 100`.
+
+Evidence still required:
+
+- Rerun `npm run report:ga4-export -- --json` after the next GA4 daily export.
+- Confirm `eventCounts` includes `srs_review_completed`,
+  `n5_micro_quiz_completed`, and `session_quality_rated`.
+- Confirm `northStar.reviewGatePasses` can count the 20-review SRS gate.
+- For a nonzero NS sample, repeat the micro-quiz with at least 70% accuracy and
+  rate the session at least 4/5.
+
+## 8. App Check Enforcement Proof
 
 Goal: enforce App Check only after legitimate web traffic has been monitored.
 

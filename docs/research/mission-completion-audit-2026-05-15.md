@@ -79,7 +79,7 @@ GitHub Actions summary:
   deploy to `hosting:jpstudy`, primary/legacy smoke, live resource smoke, and
   Lighthouse live gate all completed with `success`.
 - `npm run report:launch-readiness -- --json` now performs a single aggregate
-  proof check. Latest run on `2026-05-16T02:49+07:00` returned
+  proof check. Latest run on `2026-05-16T03:36+07:00` returned
   `complete=false` with blockers `legal-approval-missing`,
   `sentry-dsn-missing`, `storage-not-provisioned`, `deletion-proof-missing`,
   `ga4-retention-proof-missing`, `ga4-learning-events-missing`, and
@@ -114,9 +114,14 @@ These prevent marking the active goal complete:
    same `403`; a 2026-05-16 Service Usage probe with the current
    service account also returned `403 PERMISSION_DENIED`, so Codex cannot enable
    or verify that API state from the current credentials.
-6. Real GA4 learning outcome sample is incomplete. BigQuery export exists, but
-   `srs_review_completed`, `n5_micro_quiz_completed`, and
-   `session_quality_rated` are not present in the observed real sample.
+6. Real GA4 learning outcome export sample is incomplete. A
+   `2026-05-16T03:33+07:00` Playwright network smoke on
+   `https://jpstudy.web.app` proved the deployed client sends all three
+   learning event families to GA4: `22` batched `srs_review_completed` rows
+   across `204` responses, plus earlier `n5_micro_quiz_completed` and
+   `session_quality_rated` `204` responses in the same live-smoke session.
+   BigQuery export still only exposes `events_20260514`, so these learning rows
+   are not present in the source-verifiable export sample yet.
 7. App Check enforcement proof remains future work. Current docs say enforce
    mode should wait until 1-2 weeks of monitoring.
 

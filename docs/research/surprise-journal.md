@@ -371,3 +371,10 @@
 - Actual observation: many N5/N4 strings were already readable, but the audit could not distinguish reviewed launch-tier content from untouched data until tags were normalized and user-approved batches were recorded. N3+ also needed visible draft-tier UX instead of silent availability.
 - Delta: +55 percentage points on confidence that content launch readiness depends on provenance and UI tiering as much as prose quality.
 - Updated belief: beginner-heavy pilot content needs two artifacts for trust: fluent Vietnamese and an explicit review signal. Upper levels can remain available only when the app labels them as editorial draft.
+
+## 2026-05-16T03:36:00+07:00 - Event names were not enough for NS scoring
+
+- Prior belief: once `n5_micro_quiz_completed` appeared in GA4 export, the export report could score the quiz gate.
+- Actual observation: the app emits `correct_count`, `total_count`, and `accuracy`, while the BigQuery report queried a nonexistent `score` parameter. The event family could arrive and still produce `quizGatePasses=0`.
+- Delta: -45 percentage points on confidence that event-name coverage alone proves measurement readiness.
+- Updated belief: telemetry contracts need parameter-level parity between app emitters, network proof, BigQuery SQL, and the NS scorer. Event presence is only the first gate.
