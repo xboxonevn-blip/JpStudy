@@ -5,9 +5,14 @@
     "titleEn": "Want (ほしい)",
     "structure": "N が ほしいです",
     "structureEn": "N が ほしいです",
-    "explanation": "Diễn tả mong muốn sở hữu đồ vật. * `ほしい` là tính từ đuôi i.",
+    "explanation": "`ほしい` dùng để nói mình muốn có một đồ vật hoặc điều gì đó. Đây là tính từ i, nên cách chia giống tính từ i.",
+    "explanationViDraft": "Diễn tả mong muốn sở hữu đồ vật. * `ほしい` là tính từ đuôi i.",
     "explanationEn": "Express desire to have something. * `ほしい` is an i-adjective.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 13,
@@ -15,9 +20,14 @@
     "titleEn": "Want to do (V-たい)",
     "structure": "Vます (bỏ ます) + たいです",
     "structureEn": "V-たいです",
-    "explanation": "Diễn tả mong muốn làm gì đó. * Tân ngữ có thể dùng `が` hoặc `を`.",
+    "explanation": "Dùng để nói muốn làm một hành động. Lấy dạng `ます`, bỏ `ます`, rồi thêm `たいです`. Tân ngữ có thể đi với `が` hoặc `を`.",
+    "explanationViDraft": "Diễn tả mong muốn làm gì đó. * Tân ngữ có thể dùng `が` hoặc `を`.",
     "explanationEn": "Express desire to do something. * Object marker can be `が` or `を`.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 13,
@@ -25,9 +35,14 @@
     "titleEn": "Go to do something (Purpose)",
     "structure": "N (địa điểm) へ N / Vます (bỏ ます) に 行きます/来ます/帰ります",
     "structureEn": "Place へ N / V-stem に いきます / きます / かえります",
-    "explanation": "Đi đến đâu để làm gì. * `に` chỉ mục đích hành động.",
+    "explanation": "Dùng để nói đi/đến/về một nơi nhằm làm gì đó. `に` trong mẫu này đánh dấu mục đích của việc di chuyển.",
+    "explanationViDraft": "Đi đến đâu để làm gì. * `に` chỉ mục đích hành động.",
     "explanationEn": "Go somewhere to do something. * `に` indicates the purpose.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 13,
@@ -35,9 +50,13 @@
     "titleEn": "~ won’t you / shall we",
     "structure": "Vます + ませんか",
     "structureEn": "V-ます + ませんか",
-    "explanation": "Dùng để mời hoặc rủ rê một cách lịch sự.",
+    "explanation": "Dùng để mời hoặc rủ người khác làm gì đó một cách lịch sự, giống “cùng ... nhé?” hoặc “anh/chị có muốn ... không?”.",
+    "explanationViDraft": "Dùng để mời hoặc rủ rê một cách lịch sự.",
     "explanationEn": "Used to make a polite invitation.",
     "level": "N5",
-    "tags": "quality-upgrade,manual-review-needed"
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]

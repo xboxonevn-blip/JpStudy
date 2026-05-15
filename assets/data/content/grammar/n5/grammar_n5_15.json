@@ -5,9 +5,14 @@
     "titleEn": "May I ...? (Permission)",
     "structure": "Vて もいいですか",
     "structureEn": "V-てもいいですか",
-    "explanation": "Xin phép làm gì đó. * Trả lời: `ええ、いいですよ` (Được chứ), `すみません、ちょっと…` (Xin lỗi, không được...).",
+    "explanation": "Dùng để xin phép làm gì đó.\n* `ええ、いいですよ`: được chứ.\n* `すみません、ちょっと…`: xin lỗi, hơi khó/không tiện.",
+    "explanationViDraft": "Xin phép làm gì đó. * Trả lời: `ええ、いいですよ` (Được chứ), `すみません、ちょっと…` (Xin lỗi, không được...).",
     "explanationEn": "Ask for permission. * Reply: `ええ、いいですよ` (Yes, you may) / `すみません、ちょっと…` (Sorry, but...).",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 15,
@@ -15,9 +20,14 @@
     "titleEn": "Must not ... (Prohibition)",
     "structure": "Vて は いけません",
     "structureEn": "V-てはいけません",
-    "explanation": "Cấm làm gì đó (Không được phép làm). * Dùng để nói về quy tắc, luật lệ.",
+    "explanation": "Dùng để nói không được phép làm một việc gì đó, thường trong quy tắc, nội quy hoặc luật lệ.",
+    "explanationViDraft": "Cấm làm gì đó (Không được phép làm). * Dùng để nói về quy tắc, luật lệ.",
     "explanationEn": "Prohibition (Must not do). * Used for rules and regulations.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 15,
@@ -25,9 +35,14 @@
     "titleEn": "State of being (V-ています)",
     "structure": "Vて います",
     "structureEn": "V-ています",
-    "explanation": "Diễn tả trạng thái hoặc thói quen, nghề nghiệp, tình trạng hôn nhân, nơi sống. * `結婚しています`: Đã kết hôn.\n* `知っています`: Biết.",
+    "explanation": "`Vています` không chỉ diễn tả hành động đang làm, mà còn có thể diễn tả trạng thái kéo dài như đã kết hôn, đang biết, đang sống ở đâu hoặc đang làm nghề gì.\n* `結婚しています`: đã kết hôn.\n* `知っています`: biết.",
+    "explanationViDraft": "Diễn tả trạng thái hoặc thói quen, nghề nghiệp, tình trạng hôn nhân, nơi sống. * `結婚しています`: Đã kết hôn.\n* `知っています`: Biết.",
     "explanationEn": "Expresses a state, habit, occupation, marital status, or residence. * `結婚しています`: Married.\n* `知っています`: Know.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 15,
@@ -35,9 +50,13 @@
     "titleEn": "~ may / it is okay to",
     "structure": "Vて + もかまいません",
     "structureEn": "Vて + もかまいません",
-    "explanation": "Diễn tả xin phép hoặc cho phép làm gì.",
+    "explanation": "Dùng để cho phép hoặc nói rằng làm việc đó cũng không sao. Sắc thái lịch sự/trang trọng hơn `Vてもいいです`.",
+    "explanationViDraft": "Diễn tả xin phép hoặc cho phép làm gì.",
     "explanationEn": "Expresses permission or that something is acceptable.",
     "level": "N5",
-    "tags": "quality-upgrade,manual-review-needed"
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]

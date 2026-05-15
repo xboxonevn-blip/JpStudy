@@ -5,9 +5,14 @@
     "titleEn": "Te-form (Conjugation)",
     "structure": "Vて",
     "structureEn": "V-て",
-    "explanation": "Cách chia động từ sang thể Te. * **Nhóm I**: i,chi,ri -> tte; mi,bi,ni -> nde; ki -> ite; gi -> ide; shi -> shite.\n* **Nhóm II**: Bỏ masu thêm te.\n* **Nhóm III**: kimasu -> kite; shimasu -> shite.",
+    "explanation": "Thể `て` là dạng nối rất quan trọng của động từ.\n* Nhóm I: `い・ち・り` -> `って`; `み・び・に` -> `んで`; `き` -> `いて`; `ぎ` -> `いで`; `し` -> `して`.\n* Nhóm II: bỏ `ます`, thêm `て`.\n* Nhóm III: `きます` -> `きて`; `します` -> `して`.",
+    "explanationViDraft": "Cách chia động từ sang thể Te. * **Nhóm I**: i,chi,ri -> tte; mi,bi,ni -> nde; ki -> ite; gi -> ide; shi -> shite.\n* **Nhóm II**: Bỏ masu thêm te.\n* **Nhóm III**: kimasu -> kite; shimasu -> shite.",
     "explanationEn": "Conjugating verbs to Te-form. * **Group I**: i,chi,ri -> tte; mi,bi,ni -> nde; ki -> ite; gi -> ide; shi -> shite.\n* **Group II**: Drop masu, add te.\n* **Group III**: kimasu -> kite; shimasu -> shite.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 14,
@@ -15,9 +20,14 @@
     "titleEn": "Please do ... (Request)",
     "structure": "Vて ください",
     "structureEn": "V-てください",
-    "explanation": "Yêu cầu, nhờ vả ai đó làm gì một cách lịch sự. * `書いてください`: Hãy viết đi.",
+    "explanation": "Dùng để yêu cầu hoặc nhờ ai đó làm gì một cách lịch sự. Ví dụ: `書いてください` = hãy viết đi / vui lòng viết.",
+    "explanationViDraft": "Yêu cầu, nhờ vả ai đó làm gì một cách lịch sự. * `書いてください`: Hãy viết đi.",
     "explanationEn": "Polite request. * `書いてください`: Please write.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 14,
@@ -25,9 +35,14 @@
     "titleEn": "I am doing ... (Present Continuous)",
     "structure": "Vて います",
     "structureEn": "V-ています",
-    "explanation": "Diễn tả hành động đang diễn ra tại thời điểm nói.",
+    "explanation": "Dùng để nói một hành động đang diễn ra tại thời điểm nói.",
+    "explanationViDraft": "Diễn tả hành động đang diễn ra tại thời điểm nói.",
     "explanationEn": "Expresses an action currently in progress.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 14,
@@ -35,8 +50,13 @@
     "titleEn": "Shall I ...? (Offer)",
     "structure": "Vましょうか",
     "structureEn": "V-ましょう ka",
-    "explanation": "Người nói đề nghị làm giúp người nghe việc gì đó. * `手伝いましょうか`: Tôi giúp bạn nhé?",
+    "explanation": "Dùng khi người nói đề nghị làm giúp người nghe một việc gì đó. Ví dụ: `手伝いましょうか` = để tôi giúp nhé?",
+    "explanationViDraft": "Người nói đề nghị làm giúp người nghe việc gì đó. * `手伝いましょうか`: Tôi giúp bạn nhé?",
     "explanationEn": "Offer to do something for the listener. * `手伝いましょうか`: Shall I help you?",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]

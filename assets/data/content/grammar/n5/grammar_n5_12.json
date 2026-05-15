@@ -5,9 +5,14 @@
     "titleEn": "Past Tense of Adjectives",
     "structure": "Aい -> Aかったです / Aな -> Aでした",
     "structureEn": "A-い -> A-かったです / A-な -> A-でした",
-    "explanation": "Quá khứ của tính từ. * `あつい` -> `あつかったです` (Đã nóng).\n* `ひま` -> `ひまでした` (Đã rảnh).",
+    "explanation": "Dùng để nói một tính chất đã đúng trong quá khứ.\n* Tính từ i: bỏ `い`, thêm `かったです`.\n* Tính từ na: dùng `でした`.",
+    "explanationViDraft": "Quá khứ của tính từ. * `あつい` -> `あつかったです` (Đã nóng).\n* `ひま` -> `ひまでした` (Đã rảnh).",
     "explanationEn": "Past tense of adjectives. * `あつい` -> `あつかったです` (Was hot).\n* `ひま` -> `ひまでした` (Was free).",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 12,
@@ -15,9 +20,14 @@
     "titleEn": "Comparison (N1 is more ... than N2)",
     "structure": "N1 は N2 より A です",
     "structureEn": "N1 は N2 より A です",
-    "explanation": "N1 thì A hơn N2. * `より`: Hơn.",
+    "explanation": "Dùng để so sánh hai thứ: N1 có tính chất A hơn N2. `より` nghĩa là “hơn/so với”.",
+    "explanationViDraft": "N1 thì A hơn N2. * `より`: Hơn.",
     "explanationEn": "N1 is more A than N2. * `より`: Than.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 12,
@@ -25,9 +35,14 @@
     "titleEn": "Superlative (The most ...)",
     "structure": "N1 (phạm vi) で 何/どこ/誰 が いちばん A ですか",
     "structureEn": "N1 で 何 / どこ / だれ が いちばん A ですか",
-    "explanation": "Trong phạm vi N1, cái gì/đâu/ai là A nhất? * Trả lời: `N2 が いちばん A です`.",
+    "explanation": "Dùng để hỏi trong một phạm vi, cái gì/nơi nào/ai là A nhất. Khi trả lời, dùng `N2 が いちばん A です`.",
+    "explanationViDraft": "Trong phạm vi N1, cái gì/đâu/ai là A nhất? * Trả lời: `N2 が いちばん A です`.",
     "explanationEn": "In N1, what/where/who is the most A? * Answer: `N2 is the most A`.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 12,
@@ -35,8 +50,13 @@
     "titleEn": "Comparison (Which is more ...?)",
     "structure": "N1 と N2 と どちらが A ですか",
     "structureEn": "N1 と N2 と どちらが A ですか",
-    "explanation": "Giữa N1 và N2, cái nào A hơn? * Trả lời: `N のほうが A です`.",
+    "explanation": "Dùng để hỏi giữa N1 và N2, bên nào A hơn. Câu trả lời thường là `N のほうが A です`.",
+    "explanationViDraft": "Giữa N1 và N2, cái nào A hơn? * Trả lời: `N のほうが A です`.",
     "explanationEn": "Between N1 and N2, which is more A? * Answer: `N is more A`.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]
