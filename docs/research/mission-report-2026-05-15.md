@@ -8,11 +8,13 @@ It is ready for the next controlled gate: a 5-10 learner pilot after the
 remaining ops blockers are closed. A fresh manual deploy of `3ae2ded9` proved
 the current `main` can serve on `https://jpstudy.web.app`, legacy
 `https://jpstudy-v2.web.app` remains `404`, CI is green, and live
-resource/Lighthouse probes pass. Remaining blockers before the pilot are
-server-side Anonymous Auth enablement, the first secret-backed GitHub deploy
-run, and real Sentry/GA4 operational proof. Recruit N5/N4 first, then add
-scoped N3/N2 testers only after upper vocab availability and review queues are
-verified on production.
+resource/Lighthouse probes pass. Anonymous Auth is now enabled and live
+`accounts:signUp` returns `200`, but Storage-backed legacy migration is gated
+off until Firebase Storage is provisioned. Remaining blockers before the pilot
+are Firebase Storage setup, the first secret-backed GitHub deploy run, and real
+Sentry/GA4 operational proof. Recruit N5/N4 first, then add scoped N3/N2
+testers only after upper vocab availability and review queues are verified on
+production.
 
 ## Highest-Leverage Findings Shipped
 
@@ -76,9 +78,9 @@ verified on production.
 
 Run a post-deploy beta-readiness cycle:
 
-1. Enable Firebase Anonymous Auth provider for project `jpstudy-v2`, then
-   verify live `accounts:signUp` returns `200` instead of
-   `ADMIN_ONLY_OPERATION`.
+1. Set up Firebase Storage for project `jpstudy-v2`, deploy `storage.rules`,
+   verify CORS from `https://jpstudy.web.app`, then enable
+   `JPSTUDY_ENABLE_LEGACY_STORAGE_MIGRATION=true`.
 2. Configure GitHub secrets: `FIREBASE_TOKEN`, `JPSTUDY_RECAPTCHA_SITE_KEY`,
    and optional `JPSTUDY_SENTRY_DSN`.
 3. Push a secret-backed deploy through CI and capture automated evidence for

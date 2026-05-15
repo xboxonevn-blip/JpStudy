@@ -131,6 +131,7 @@ back out a bad commit. Faster than branch-based rollback.
 | `JPSTUDY_SENTRY_DSN` | Sentry project | Optional web error monitoring via `--dart-define` |
 | `JPSTUDY_SENTRY_ENVIRONMENT` | Optional | Sentry environment label, defaults to `production` |
 | `JPSTUDY_RELEASE` | Optional | Sentry release label for deploy correlation |
+| `JPSTUDY_ENABLE_LEGACY_STORAGE_MIGRATION` | Optional | Set `true` only after Firebase Storage is provisioned and CORS-verified |
 
 ## Research notebook + Auto Research mission
 
@@ -188,6 +189,10 @@ flutter build web --release `
   project for local dev to retire localhost domain.
 □ Register App Check for jpstudy (android), jpstudy (ios), jpstudy
   (windows) — currently only jpstudy (web) registered.
+□ Set up Firebase Storage for `jpstudy-v2` before enabling legacy
+  migration. Current Spark/new-bucket state blocks Storage setup from CLI;
+  keep `JPSTUDY_ENABLE_LEGACY_STORAGE_MIGRATION` unset/false until the bucket,
+  rules deploy, and CORS preflight are verified.
 □ After 1-2 weeks monitoring, switch App Check from monitoring to
   enforce mode (Firebase Console → App Check → APIs tab → Storage →
   Enforce).

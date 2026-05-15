@@ -325,3 +325,11 @@
 - Delta: -60 percentage points on confidence that SP7 is operational from source changes alone; +60 percentage points that Firebase Console provider state must be an explicit release gate.
 - Updated belief: "auth source wired" and "Auth provider enabled" are separate launch proofs. The app's local-only fallback protects boot, but it does not prove identity/migration readiness.
 - New hypothesis: enabling Anonymous provider in Firebase Console should remove the live console error and allow Storage migration verification without any code change.
+
+## 2026-05-15T08:38:00+07:00 - Anonymous Auth unmasked missing Storage setup
+
+- Prior belief: once Anonymous provider was enabled, the Phase 13 migration path would likely verify end to end.
+- Actual observation: `accounts:signUp` now returns `200`, but live migration upload fails at Firebase Storage CORS/preflight, and `firebase deploy --only storage --project jpstudy-v2` reports Firebase Storage has not been set up.
+- Delta: +55 percentage points on confidence that identity and storage setup are separate operational gates.
+- Updated belief: keep anonymous sign-in active, but do not auto-run Storage migration until bucket/rules/CORS are proven.
+- New hypothesis: a build-time migration flag will preserve zero-friction identity while avoiding noisy live Storage failures on Spark/new-bucket projects.
