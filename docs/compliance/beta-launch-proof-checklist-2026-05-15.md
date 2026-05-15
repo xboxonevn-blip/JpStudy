@@ -113,6 +113,10 @@ Evidence to record:
 - Date and Google account used.
 - Cross-check with BigQuery dataset/table TTL evidence already recorded in the
   research notebook.
+- Optional source-verifiable path: enable Google Analytics Admin API
+  (`analyticsadmin.googleapis.com`) for project `129949648924`, grant the
+  service account Analytics read access, then probe
+  `properties/536663906/dataRetentionSettings`.
 
 ## 7. App Check Enforcement Proof
 

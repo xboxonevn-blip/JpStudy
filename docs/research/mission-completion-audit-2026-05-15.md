@@ -99,7 +99,10 @@ These prevent marking the active goal complete:
    surface exist, but no real deletion request has been executed end to end.
 6. GA4 UI retention proof is still console-only. BigQuery TTL is proven from
    dataset/table metadata, but the GA4 UI retention setting still needs source
-   evidence or a console proof.
+   evidence or a console proof. A 2026-05-15 Admin API probe against
+   `properties/536663906/dataRetentionSettings` returned `403
+   SERVICE_DISABLED` because `analyticsadmin.googleapis.com` is not enabled for
+   project `129949648924`.
 7. Real GA4 learning outcome sample is incomplete. BigQuery export exists, but
    `srs_review_completed`, `n5_micro_quiz_completed`, and
    `session_quality_rated` are not present in the observed real sample.
