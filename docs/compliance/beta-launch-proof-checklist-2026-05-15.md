@@ -24,6 +24,9 @@ Operator note:
   non-interactive mode.`
 - After generating the token, set it as GitHub repository secret
   `FIREBASE_TOKEN`. Do not paste the token into chat or commit it.
+- After both required secrets are set, run the `CI` workflow manually on
+  `main` from GitHub Actions, or push the next normal `main` commit. The
+  `deploy-hosting` job only performs the real deploy path on `main`.
 
 Evidence to record:
 
