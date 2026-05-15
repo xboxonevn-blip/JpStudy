@@ -5,9 +5,14 @@
     "titleEn": "Passive Voice (Ukemi)",
     "structure": "V (Bị động)",
     "structureEn": "V (Passive)",
-    "explanation": "Cách chia động từ sang thể Bị động. * **Nhóm I**: Chuyển cột `i` thành cột `a` + `れる`.\n* **Nhóm II**: Bỏ `ます` thêm `られる`.\n* **Nhóm III**: `きます` -> `こられる`; `します` -> `される`.",
+    "explanation": "Thể bị động dùng để nói chủ ngữ bị/được tác động bởi người hoặc sự việc khác.\n* Nhóm I: đổi âm hàng `い` sang hàng `あ`, rồi thêm `れる`.\n* Nhóm II: bỏ `ます`, thêm `られる`.\n* Nhóm III: `きます` -> `こられる`; `します` -> `される`.",
+    "explanationViDraft": "Cách chia động từ sang thể Bị động. * **Nhóm I**: Chuyển cột `i` thành cột `a` + `れる`.\n* **Nhóm II**: Bỏ `ます` thêm `られる`.\n* **Nhóm III**: `きます` -> `こられる`; `します` -> `される`.",
     "explanationEn": "Conjugating verbs to Passive Voice. * **Group I**: Change `i` column to `a` column + `れる`.\n* **Group II**: Drop `ます`, add `られる`.\n* **Group III**: `きます` -> `こられる`; `します` -> `される`.",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 37,
@@ -15,9 +20,14 @@
     "titleEn": "Passive (Direct - N1 is V-ed by N2)",
     "structure": "N1(người) は N2(người) に V (Bị động)",
     "structureEn": "N1 は N2 に V (Passive)",
-    "explanation": "N1 bị/được N2 làm gì đó. * `私は先生に褒められました`: Tôi được thầy giáo khen.",
+    "explanation": "Dùng khi N1 bị hoặc được N2 làm một hành động nào đó. Tùy ngữ cảnh, câu có thể mang nghĩa tích cực hoặc tiêu cực.",
+    "explanationViDraft": "N1 bị/được N2 làm gì đó. * `私は先生に褒められました`: Tôi được thầy giáo khen.",
     "explanationEn": "N1 was V-ed by N2. * `私は先生に褒められました`: I was praised by the teacher.",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 37,
@@ -25,9 +35,14 @@
     "titleEn": "Passive (Indirect/Suffering)",
     "structure": "N1 は N2 に N3 を V (Bị động)",
     "structureEn": "N1 は N2 に N3 を V (Passive)",
-    "explanation": "N1 bị N2 làm gì đó vào N3 (vật sở hữu). * `私は弟にパソコンを壊されました`: Tôi bị em trai làm hỏng máy tính.",
+    "explanation": "Dùng khi N1 bị ảnh hưởng vì N2 làm gì đó với đồ vật/người liên quan đến N1. Sắc thái thường là phiền hà hoặc bất lợi.",
+    "explanationViDraft": "N1 bị N2 làm gì đó vào N3 (vật sở hữu). * `私は弟にパソコンを壊されました`: Tôi bị em trai làm hỏng máy tính.",
     "explanationEn": "N1 had N3 V-ed by N2 (Suffering passive). * `私は弟にパソコンを壊されました`: My computer was broken by my younger brother.",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 37,
@@ -35,9 +50,13 @@
     "titleEn": "suffering passive",
     "structure": "N は N に Vられます",
     "structureEn": "N は N に Vられます",
-    "explanation": "Bị động diễn tả bị làm phiền hoặc gặp bất lợi.",
+    "explanation": "Đây là kiểu bị động nhấn mạnh người nói/chủ ngữ gặp phiền toái hoặc chịu bất lợi vì hành động của người khác.",
+    "explanationViDraft": "Bị động diễn tả bị làm phiền hoặc gặp bất lợi.",
     "explanationEn": "Passive expressing inconvenience or suffering.",
     "level": "N4",
-    "tags": "quality-upgrade,manual-review-needed"
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]

@@ -5,9 +5,14 @@
     "titleEn": "Because ... (te-form - Cause)",
     "structure": "Vて / Aくて / Aで / Nで、～",
     "structureEn": "V-て / A-くて / A-で / N-で, ~",
-    "explanation": "Vì ... nên ... (Nguyên nhân khách quan, cảm xúc, khả năng). * `ニュースを聞いて、びっくりしました`: Nghe tin tức xong, tôi giật mình (Vì nghe tin nên giật mình).",
+    "explanation": "Thể `て` có thể nêu nguyên nhân khách quan dẫn tới cảm xúc, trạng thái hoặc khả năng ở vế sau.",
+    "explanationViDraft": "Vì ... nên ... (Nguyên nhân khách quan, cảm xúc, khả năng). * `ニュースを聞いて、びっくりしました`: Nghe tin tức xong, tôi giật mình (Vì nghe tin nên giật mình).",
     "explanationEn": "Because ... (Cause/Reason - Objective, Emotion, Potential). * `ニュースを聞いて、びっくりしました`: I was surprised to hear the news.",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 39,
@@ -15,9 +20,14 @@
     "titleEn": "Since/Because ... (node)",
     "structure": "Thể thông thường / Aな / Nな + ので、～",
     "structureEn": "Plain Form / A-な / N-な + ので, ~",
-    "explanation": "Vì ... (Trình bày lý do nhẹ nhàng, khách quan, dùng khi xin phép). * `用事があるので、お先に失礼します`: Vì có việc bận nên tôi xin phép về trước.",
+    "explanation": "`ので` nêu lý do nhẹ nhàng, khách quan hơn `から`. Thường dùng khi giải thích, xin phép hoặc nói lịch sự.",
+    "explanationViDraft": "Vì ... (Trình bày lý do nhẹ nhàng, khách quan, dùng khi xin phép). * `用事があるので、お先に失礼します`: Vì có việc bận nên tôi xin phép về trước.",
     "explanationEn": "Because ... (Objective reason, Polite). * `用事があるので、お先に失礼します`: I have something to do, so I will be leaving now.",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 39,
@@ -25,10 +35,14 @@
     "titleEn": "~ because of",
     "structure": "Nの / 普通形 + ために",
     "structureEn": "Nの / 普通形 + ために",
-    "explanation": "Diễn tả nguyên nhân trang trọng.",
+    "explanation": "`ために` dùng để nêu nguyên nhân/lý do theo sắc thái trang trọng hoặc văn viết.",
+    "explanationViDraft": "Diễn tả nguyên nhân trang trọng.",
     "explanationEn": "Expresses a formal reason.",
     "level": "N4",
-    "tags": "quality-upgrade,manual-review-needed"
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 39,
@@ -36,9 +50,13 @@
     "titleEn": "~ thanks to",
     "structure": "Nの / 普通形 + おかげで",
     "structureEn": "Nの / 普通形 + おかげで",
-    "explanation": "Diễn tả nguyên nhân tốt.",
+    "explanation": "`おかげで` nêu nguyên nhân mang kết quả tốt, nghĩa là “nhờ có... mà...”.",
+    "explanationViDraft": "Diễn tả nguyên nhân tốt.",
     "explanationEn": "Expresses a positive cause.",
     "level": "N4",
-    "tags": "quality-upgrade,manual-review-needed"
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]

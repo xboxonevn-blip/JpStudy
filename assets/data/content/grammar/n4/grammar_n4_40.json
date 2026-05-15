@@ -5,9 +5,14 @@
     "titleEn": "Embedded Question (with Interrogative)",
     "structure": "Từ để hỏi + V / A / N (thể thông thường) + か、～",
     "structureEn": "Question Word + Plain Form + か, ~",
-    "explanation": "Lồng câu hỏi vào câu khác. * `財布がどこにあるか、わかりません`: Tôi không biết ví ở đâu.",
+    "explanation": "Dùng để đưa một câu hỏi có từ để hỏi vào bên trong câu khác. Ví dụ: không biết ví ở đâu, hỏi xem ai đến, kiểm tra khi nào bắt đầu.",
+    "explanationViDraft": "Lồng câu hỏi vào câu khác. * `財布がどこにあるか、わかりません`: Tôi không biết ví ở đâu.",
     "explanationEn": "Embedded question with interrogative. * `財布がどこにあるか、わかりません`: I don't know where my wallet is.",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 40,
@@ -15,9 +20,14 @@
     "titleEn": "Whether or not (Embedded Yes/No)",
     "structure": "Thể thông thường + かどうか、～",
     "structureEn": "Plain Form + かどうか, ~",
-    "explanation": "Có ... hay không (Yes/No Question lồng). * `間違いがないかどうか、調べてください`: Hãy kiểm tra xem có sai sót hay không.",
+    "explanation": "`かどうか` đưa câu hỏi có/không vào trong câu khác, nghĩa là “có ... hay không”.",
+    "explanationViDraft": "Có ... hay không (Yes/No Question lồng). * `間違いがないかどうか、調べてください`: Hãy kiểm tra xem có sai sót hay không.",
     "explanationEn": "Whether or not ... (Embedded Yes/No question). * `間違いがないかどうか、調べてください`: Please check whether there are any mistakes.",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 40,
@@ -25,9 +35,14 @@
     "titleEn": "Try doing ... (V-てみます)",
     "structure": "Vて みます",
     "structureEn": "V-てみます",
-    "explanation": "Làm thử việc gì đó xem sao. * `新しいシャツを着てみます`: Tôi mặc thử chiếc áo sơ mi mới.",
+    "explanation": "`てみます` dùng để thử làm một việc xem kết quả/thử cảm giác ra sao.",
+    "explanationViDraft": "Làm thử việc gì đó xem sao. * `新しいシャツを着てみます`: Tôi mặc thử chiếc áo sơ mi mới.",
     "explanationEn": "Try doing something. * `新しいシャツを着てみます`: I will try on the new shirt.",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 40,
@@ -35,9 +50,13 @@
     "titleEn": "~ whether or not",
     "structure": "普通形 + かどうか",
     "structureEn": "普通形 + かどうか",
-    "explanation": "Dùng để diễn tả có hay không trong mệnh đề phụ.",
+    "explanation": "`かどうか` dùng trong mệnh đề phụ để diễn tả “có hay không / liệu có ... không”.",
+    "explanationViDraft": "Dùng để diễn tả có hay không trong mệnh đề phụ.",
     "explanationEn": "Expresses whether or not in a subordinate clause.",
     "level": "N4",
-    "tags": "quality-upgrade,manual-review-needed"
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]
