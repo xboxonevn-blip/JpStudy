@@ -341,3 +341,11 @@
 - Delta: -50 percentage points on confidence that device reset alone satisfies the D8 deletion requirement for the Firebase Hosting product.
 - Updated belief: Analytics reset is a useful device-side control where supported, but web beta compliance still needs a GA4 deletion runbook and retention proof.
 - New hypothesis: the next highest-value compliance task is a support runbook that maps Auth UID, Storage backup, GA user deletion, and BigQuery export cleanup into one operator flow.
+
+## 2026-05-15T11:25:00+07:00 - GA4 export landed before learning events did
+
+- Prior belief: after the earlier `404`, the next blocker was likely export provisioning itself.
+- Actual observation: `analytics_536663906` now exists in `asia-southeast1`, but the first sample has only `page_view`, `user_engagement`, `session_start`, `first_visit`, and `onboarding_completed`; funnel is `4` opened / `1` onboarded / `0` first SRS, and real NS is `0.00%`.
+- Delta: +70 percentage points on confidence that BigQuery plumbing is operational; -40 percentage points on confidence that first export automatically yields learning-outcome signal.
+- Updated belief: dataset existence is necessary but not sufficient. The next measurement gate is event diversity and learner behavior after onboarding.
+- New hypothesis: a small beta seeding script or guided smoke flow should intentionally trigger SRS, micro-quiz, and quality-rating events before interpreting NS.

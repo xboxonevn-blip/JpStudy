@@ -12,7 +12,7 @@ resource/Lighthouse probes pass. Anonymous Auth is now enabled and live
 `accounts:signUp` returns `200`, but Storage-backed legacy migration is gated
 off until Firebase Storage is provisioned. Remaining blockers before the pilot
 are Firebase Storage setup, the first secret-backed GitHub deploy run, and real
-Sentry/GA4 operational proof. Recruit N5/N4 first, then add scoped N3/N2
+Sentry operational proof and a larger GA4 learning-event sample. Recruit N5/N4 first, then add scoped N3/N2
 testers only after upper vocab availability and review queues are verified on
 production.
 
@@ -41,8 +41,9 @@ production.
 
 ## Top Surprises
 
-1. GA4 BigQuery export stayed absent after credentials and project access were
-   proven; real NS is blocked on export provisioning.
+1. GA4 BigQuery export appeared after the first absence window, but the first
+   sample still has real NS `0.00%` across only `4` observed users and no
+   post-onboarding learning events.
 2. Radical Han-Viet drift was systemic: mismatch-or-missing compare rows were
    `163 / 214`, far above the expected 5-15%.
 3. Vocab readiness split into separate gates: content seed, catalog display,
@@ -85,8 +86,8 @@ Run a post-deploy beta-readiness cycle:
    and optional `JPSTUDY_SENTRY_DSN`.
 3. Push a secret-backed deploy through CI and capture automated evidence for
    primary `200`, legacy `404`, route smoke, resource smoke, and Lighthouse.
-4. Recheck GA4 BigQuery dataset existence and run the first real NS/SM1 query
-   if `analytics_536663906.events_*` exists.
+4. Keep polling GA4 BigQuery for SRS, micro-quiz, and session-quality rows; the
+   first export sample has only open/onboarding events.
 5. Run a narrow live UAT matrix for N5/N4 plus one N3/N2 path after deployment.
 6. Decide pilot scope: N5/N4 controlled pilot, or delay until upper-level
    vocab queues and advanced-reader discovery are production-proven.

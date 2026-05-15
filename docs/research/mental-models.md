@@ -184,3 +184,7 @@ Lo trinh nha sach nen la lop dinh huong, khong phai hard gate. N5/N4 co the bam 
 ## D8 / Q8.7
 
 Nut reset trong app va quyen xoa du lieu la hai viec khac nhau. `resetAnalyticsData()` chi yeu cau SDK xoa ma dinh danh phan tich cuc bo tren thiet bi, va tren web hien tai SDK Firebase con bao khong ho tro. Vi vay Data controls can co hanh dong ro rang cho nguoi hoc, nhung release gate dung van phai gom retention setting, GA user-deletion runbook, va BigQuery export TTL. Compliance tot la noi dung that cua he thong, khong phai chi mot nut trong UI.
+
+## D1 / First Real GA4 Export
+
+Dataset ton tai moi chi la cong tac mo duong ong. Lan xuat GA4 dau tien da chung minh BigQuery, TTL, va mapper query chay duoc, nhung chua co SRS, micro-quiz, hay quality rating thi North Star van bang 0 va khong noi gi ve hoc that. Measurement gate dung phai tach ba lop: export co bang, bang co dung su kien, va su kien co hanh vi hoc sau onboarding.

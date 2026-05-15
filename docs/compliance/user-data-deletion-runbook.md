@@ -29,7 +29,7 @@ currently unsupported by Firebase Analytics Web.
 | Firebase Auth | anonymous or linked user record | Firebase `uid`, email if linked | Anonymous Auth enabled on 2026-05-15 |
 | Firebase Storage | cloud backup and legacy migration payloads | `users/{uid}/...` | Storage bucket not set up yet; migration gated off |
 | GA4 | Analytics events and user properties | `userId`, `clientId`, `appInstanceId`, or normalized user-provided data | `userId` set only through consent-gated Analytics service |
-| BigQuery GA4 export | raw `events_*` tables | `user_id`, possibly `user_pseudo_id` | `analytics_536663906` dataset absent as of 2026-05-15 |
+| BigQuery GA4 export | raw `events_*` tables | `user_id`, possibly `user_pseudo_id` | `analytics_536663906` exists in `asia-southeast1`; tables expire after 60 days |
 
 ## Intake Checklist
 
@@ -119,7 +119,7 @@ Record the returned `deletionRequestTime`.
 
 ### 4. Delete BigQuery Export Rows
 
-If `jpstudy-v2.analytics_536663906` still does not exist, record:
+If `jpstudy-v2.analytics_536663906` does not exist, record:
 
 ```text
 BigQuery GA4 export cleanup: not applicable - dataset absent.
@@ -193,14 +193,15 @@ For privacy-minimal beta telemetry, use `2 months` unless a documented product
 reason requires `14 months`. The choice must be copied into the Privacy Policy
 and this runbook.
 
-When the GA4 BigQuery export dataset appears, set a dataset/table expiration
-policy or document why raw export retention is intentionally longer than GA4 UI
-retention.
+Current BigQuery export retention proof: `analytics_536663906` has
+`default_table_expiration_days=60.0` and
+`default_partition_expiration_days=60.0`; `events_20260514` expires at
+`2026-07-14T02:56:46.272Z`. Verify future GA4 tables inherit expiration during
+release checks.
 
 ## Open Launch Gaps
 
 - Firebase Storage bucket/rules/CORS setup is still blocked by Console setup.
-- GA4 BigQuery dataset `analytics_536663906` is still absent.
 - GA4 retention setting needs Console proof.
-- Live support ID copy flow needs beta verification on `https://jpstudy.web.app`.
+- First executed deletion request needs evidence across Auth, GA4, and BigQuery.
 - Privacy/Terms copy still needs human/legal review.

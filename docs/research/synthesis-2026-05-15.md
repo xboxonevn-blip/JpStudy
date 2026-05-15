@@ -13,16 +13,16 @@ orientation.
 
 The product is not ready for a broad 100-user mixed N5-N1 public beta without
 caveats. It is closer to a controlled pilot because the highest-risk unknowns
-are now explicit: GA4 BigQuery event export is still absent, upper-level
-content has known review debt, legal/error-monitoring/deploy automation need
-live operational proof, and several advanced-persona promises remain out of
-scope.
+are now explicit: GA4 BigQuery event export has appeared but the first sample is
+too small for outcome claims, upper-level content has known review debt,
+legal/error-monitoring/deploy automation need live operational proof, and
+several advanced-persona promises remain out of scope.
 
 ## 8 Dimension Status
 
 | Dimension | Status | Current finding |
 | --- | --- | --- |
-| D1 Measurement | Complete, blocked on real export | Synthetic NS/SM1 tooling exists, but `analytics_536663906` is still absent in BigQuery. |
+| D1 Measurement | Complete, first real export sampled | `analytics_536663906.events_20260514` exists; first real NS is `0.00%` across `4` observed users, with no post-onboarding learning events yet. |
 | D2 Content | Complete, not broad-beta clean | Vocab scope is broad; upper kanji/radicals/Han-Viet metadata still need editorial review. |
 | D3 Vietnamese | Complete, targeted cleanup active | Mojibake guards are green and key user strings moved into `AppLanguage`; copy remains decentralized. |
 | D4 Personas | Complete, retested | Onboarding/level/Kana gates now pass in live re-test; upper vocab discoverability was the main residual blocker before the latest unlock work. |
@@ -52,8 +52,8 @@ scope.
 
 ## Top 10 Findings
 
-1. Real North Star reporting is blocked by GA4 export table absence, not by
-   local BigQuery credentials.
+1. Real North Star reporting is no longer export-blocked, but the first sample
+   is too small and lacks SRS/quiz/quality events.
 2. Content volume is high, but review quality is uneven; open-review grammar
    examples and machine-origin vocab remain launch risks.
 3. Cumulative vocab scope does not imply kanji scope; N1 kanji is still far
@@ -75,8 +75,8 @@ scope.
 
 1. Radical Han-Viet drift hit `163 / 214` mismatch-or-missing compare rows,
    much larger than the expected 5-15%.
-2. GA4 BigQuery export was still absent even after service-account auth and
-   project access were proven.
+2. GA4 BigQuery export appeared only after an earlier absence window; first
+   useful learning-outcome rows are still missing.
 3. The vocab bug was not just "data locked"; N4 could be open while N3/N2/N1
    still failed other availability gates.
 4. Startup resource count fell sharply only after both grammar seed paths were
@@ -108,8 +108,8 @@ the remaining ops and content proofs land.
 
 ## Open Questions For Next Cycle
 
-1. When will GA4 export create `analytics_536663906.events_*`, and what is the
-   first real NS/SM1 baseline?
+1. When will the live export include SRS, micro-quiz, and session-quality rows
+   from real beta users?
 2. Which top N5/N4 Vietnamese copy and grammar examples need human editorial
    review before a controlled pilot?
 3. Can upper-level vocab availability and review queues be normalized so N3-N1

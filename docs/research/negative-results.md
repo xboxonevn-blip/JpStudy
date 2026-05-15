@@ -133,7 +133,7 @@
 - D7.Q7.2 found no route-level deferred JS chunks in the current release build. `main.dart.js` is one app bundle; route-level code splitting is not currently happening automatically.
 - D7.Q7.3 did not justify switching beta to Flutter `--wasm`: build passes, but raw output increases by `9.4%` because Skwasm and CanvasKit fallback are both emitted, and live compatibility/perf is still unproven.
 - Security docs are stale about CSP: they say strict CSP is not enabled, while `firebase.json` and live channels configure CSP.
-- GA4 measurement remains table-blocked: `analytics_536663906` is absent and Firebase-side datasets currently expose zero tables.
+- GA4 measurement was table-blocked during this check: `analytics_536663906` was absent and Firebase-side datasets exposed zero event tables. Later 2026-05-15 evidence shows the dataset appeared, but the first sample still lacks learning-outcome events.
 
 ## 2026-05-14 - Q8.1 / E8.2
 
