@@ -5,9 +5,14 @@
     "titleEn": "If/When (たら)",
     "structure": "Vた / Aかった / Aだった / Nだった + ら、～",
     "structureEn": "V-たら / A-かったら / A-だったら / N-だったら, ~",
-    "explanation": "Nếu... thì..., Sau khi... thì... * `雨が降ったら、行きません`: Nếu trời mưa thì tôi sẽ không đi.\n* `10時になったら、出かけましょう`: Sau khi đến 10 giờ thì chúng ta đi nhé.",
+    "explanation": "`たら` dùng để nói điều kiện “nếu ... thì ...” hoặc mốc thời gian “sau khi ... thì ...”.\n* Nếu trời mưa thì không đi.\n* Khi đến 10 giờ thì chúng ta đi.",
+    "explanationViDraft": "Nếu... thì..., Sau khi... thì... * `雨が降ったら、行きません`: Nếu trời mưa thì tôi sẽ không đi.\n* `10時になったら、出かけましょう`: Sau khi đến 10 giờ thì chúng ta đi nhé.",
     "explanationEn": "If... / When (After)... * `雨が降ったら、行きません`: If it rains, I won't go.\n* `10時になったら、出かけましょう`: Let's go when it turns 10.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 25,
@@ -15,9 +20,14 @@
     "titleEn": "Even if ... (ても)",
     "structure": "Vて / Aくて / Aで / Nで + も、 ～",
     "structureEn": "V-てmo / A-くても / A-でも / N-でも, ~",
-    "explanation": "Dù ... đi nữa thì cũng ... (Điều kiện nghịch). * `雨が降っても、行きます`: Dù trời mưa tôi vẫn đi.",
+    "explanation": "`ても` diễn tả điều kiện nghịch: dù điều kiện xảy ra, kết quả vẫn không thay đổi. Ví dụ: dù trời mưa vẫn đi.",
+    "explanationViDraft": "Dù ... đi nữa thì cũng ... (Điều kiện nghịch). * `雨が降っても、行きます`: Dù trời mưa tôi vẫn đi.",
     "explanationEn": "Even if ... * `雨が降っても、行きます`: Even if it rains, I will go.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 25,
@@ -25,9 +35,14 @@
     "titleEn": "What should I do? (どうしたら)",
     "structure": "どうしたら いいですか",
     "structureEn": "どうしたら いいですか",
-    "explanation": "Tôi nên làm thế nào thì được? (Xin lời khuyên). * `パスポートなるくしたんですが、どうしたらいいですか`: Tôi làm mất hộ chiếu rồi, tôi nên làm thế nào?",
+    "explanation": "`どうしたらいいですか` dùng để xin lời khuyên khi không biết nên làm gì: “tôi nên làm thế nào?”.",
+    "explanationViDraft": "Tôi nên làm thế nào thì được? (Xin lời khuyên). * `パスポートなるくしたんですが、どうしたらいいですか`: Tôi làm mất hộ chiếu rồi, tôi nên làm thế nào?",
     "explanationEn": "What should I do? (Asking for advice). * `パスポートなるくしたんですが、どうしたらいいですか`: I lost my passport, what should I do?",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 25,
@@ -35,9 +50,13 @@
     "titleEn": "~ if / in that case",
     "structure": "N / 普通形 + なら",
     "structureEn": "N / 普通形 + なら",
-    "explanation": "Diễn tả giả định dựa trên thông tin vừa biết.",
+    "explanation": "`なら` dùng khi đưa ra điều kiện dựa trên thông tin vừa nghe hoặc giả định đang được nhắc tới. Có thể hiểu là “nếu là/về chuyện đó thì...”.",
+    "explanationViDraft": "Diễn tả giả định dựa trên thông tin vừa biết.",
     "explanationEn": "Expresses a conditional based on given information.",
     "level": "N5",
-    "tags": "quality-upgrade,manual-review-needed"
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]

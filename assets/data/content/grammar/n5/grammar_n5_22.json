@@ -5,9 +5,14 @@
     "titleEn": "Noun Modifiers",
     "structure": "V (thể thông thường) / Aい / Aな / Nの + N",
     "structureEn": "V (Plain) / A-い / A-な / N の + N",
-    "explanation": "Mệnh đề bổ nghĩa cho danh từ đứng trước danh từ đó. * `私が住んでいるアパート`: Căn hộ mà tôi đang sống.",
+    "explanation": "Cụm bổ nghĩa đứng trước danh từ mà nó giải thích. Ví dụ: `私が住んでいるアパート` = căn hộ mà tôi đang sống.",
+    "explanationViDraft": "Mệnh đề bổ nghĩa cho danh từ đứng trước danh từ đó. * `私が住んでいるアパート`: Căn hộ mà tôi đang sống.",
     "explanationEn": "Noun modifier clause comes before the noun. * `私が住んでいるアパート`: The apartment where I live.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 22,
@@ -15,9 +20,14 @@
     "titleEn": "Likes/Wants Modified Noun",
     "structure": "V (bổ nghĩa) N が ...",
     "structureEn": "V (modifier) N が ...",
-    "explanation": "Dùng mệnh đề bổ nghĩa trong các mẫu câu `が` (thích, ghét, muốn...). * `私は父がくれた時計をなくしました`: Tôi làm mất cái đồng hồ bố tặng.",
+    "explanation": "Có thể dùng danh từ đã được bổ nghĩa trong các mẫu với `が`, như thích, ghét, muốn hoặc cần. Ví dụ: “cái đồng hồ bố tặng” là một cụm danh từ.",
+    "explanationViDraft": "Dùng mệnh đề bổ nghĩa trong các mẫu câu `が` (thích, ghét, muốn...). * `私は父がくれた時計をなくしました`: Tôi làm mất cái đồng hồ bố tặng.",
     "explanationEn": "Using noun modifiers in sentences. * `私は父がくれた時計をなくしました`: I lost the watch my father gave me.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 22,
@@ -25,10 +35,14 @@
     "titleEn": "relative clause with verbs",
     "structure": "V普通形 + N",
     "structureEn": "V普通形 + N",
-    "explanation": "Dùng mệnh đề động từ để bổ nghĩa cho danh từ.",
+    "explanation": "Dùng mệnh đề động từ ở thể thông thường để bổ nghĩa cho danh từ đứng sau.",
+    "explanationViDraft": "Dùng mệnh đề động từ để bổ nghĩa cho danh từ.",
     "explanationEn": "Uses a verb clause to modify a noun.",
     "level": "N5",
-    "tags": "quality-upgrade,manual-review-needed"
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 22,
@@ -36,9 +50,13 @@
     "titleEn": "relative clause with adjectives/nouns",
     "structure": "Aい / Aな / Nの + N",
     "structureEn": "Aい / Aな / Nの + N",
-    "explanation": "Dùng tính từ hoặc danh từ để bổ nghĩa cho danh từ.",
+    "explanation": "Tính từ i, tính từ na và danh từ + `の` đều có thể đứng trước danh từ để bổ nghĩa cho danh từ đó.",
+    "explanationViDraft": "Dùng tính từ hoặc danh từ để bổ nghĩa cho danh từ.",
     "explanationEn": "Uses adjectives or nouns to modify a noun.",
     "level": "N5",
-    "tags": "quality-upgrade,manual-review-needed"
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]
