@@ -8,10 +8,12 @@ Primary app URL: `https://jpstudy.web.app`
 
 ## 1. GitHub Actions Secret-Backed Deploy
 
+Status: completed on `main` for commit `a8194266`.
+
 Goal: prove `deploy-hosting` performs a real build/deploy/live-smoke/Lighthouse
 run on `main`, not only the skip-safe wrapper.
 
-Required setup:
+Completed setup:
 
 - Repository secret `FIREBASE_TOKEN`.
 - Repository secret `JPSTUDY_RECAPTCHA_SITE_KEY`.
@@ -19,22 +21,16 @@ Required setup:
 
 Operator note:
 
-- `JPSTUDY_RECAPTCHA_SITE_KEY` was set as a repository secret on
-  2026-05-15 without exposing the value in logs. `FIREBASE_TOKEN` remains the
-  required blocker for the real deploy path.
-- `firebase login:ci` must be run in an interactive user terminal. A Codex
-  non-interactive attempt on 2026-05-15 returned `Cannot run login:ci in
-  non-interactive mode.`
-- After generating the token, set it as GitHub repository secret
-  `FIREBASE_TOKEN`. Do not paste the token into chat or commit it.
-- After both required secrets are set, run the `CI` workflow manually on
-  `main` from GitHub Actions, or push the next normal `main` commit. The
-  `deploy-hosting` job only performs the real deploy path on `main`.
+- `JPSTUDY_RECAPTCHA_SITE_KEY` and `FIREBASE_TOKEN` are set as repository
+  secrets without exposing values in logs.
+- `JPSTUDY_SENTRY_DSN` remains optional for deploy and required only for
+  Sentry first-issue proof.
 
-Evidence to record:
+Evidence recorded:
 
-- GitHub Actions run URL.
-- `deploy-hosting` job step list where these steps are `success`, not
+- GitHub Actions run URL:
+  `https://github.com/xboxonevn-blip/JpStudy/actions/runs/25912786589`
+- `deploy-hosting` job step list shows these steps `success`, not
   `skipped`:
   - `Build web for production`
   - `Deploy primary Firebase Hosting target`
@@ -43,6 +39,8 @@ Evidence to record:
   - `Lighthouse live gate`
 - Primary URL status: `https://jpstudy.web.app` returns `200`.
 - Legacy URL status: `https://jpstudy-v2.web.app` returns `404`.
+- Local live resource smoke after deploy: `resourceCount=30`, `jsonCount=1`,
+  `grammarResourceCount=0`, `violations=[]`.
 
 ## 2. Sentry First-Issue Proof
 
