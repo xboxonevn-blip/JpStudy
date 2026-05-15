@@ -5,9 +5,14 @@
     "titleEn": "This/That/That over there (Demonstratives)",
     "structure": "これ / それ / あれ は N です",
     "structureEn": "これ / それ / あれ は N です",
-    "explanation": "Đại từ chỉ định, dùng để chỉ vật. * `これ` (Cái này): Vật ở gần người nói.\n* `それ` (Cái đó): Vật ở gần người nghe.\n* `あれ` (Cái kia): Vật ở xa cả người nói và người nghe.",
+    "explanation": "Các từ chỉ vật, dùng khi chưa nói ngay tên đồ vật.\n* `これ`: cái này, ở gần người nói.\n* `それ`: cái đó, ở gần người nghe.\n* `あれ`: cái kia, ở xa cả người nói và người nghe.",
+    "explanationViDraft": "Đại từ chỉ định, dùng để chỉ vật. * `これ` (Cái này): Vật ở gần người nói.\n* `それ` (Cái đó): Vật ở gần người nghe.\n* `あれ` (Cái kia): Vật ở xa cả người nói và người nghe.",
     "explanationEn": "Demonstratives used to refer to objects. * `これ` (This): Near speaker.\n* `それ` (That): Near listener.\n* `あれ` (That over there): Far from both.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 2,
@@ -15,9 +20,14 @@
     "titleEn": "This/That N (Demonstrative Adjectives)",
     "structure": "この / その / あの + N は ～ です",
     "structureEn": "この / その / あの + N は ~ です",
-    "explanation": "Từ chỉ định bổ nghĩa cho danh từ. * `この N`: Cái N này (gần người nói).\n* `その N`: Cái N đó (gần người nghe).\n* `あの N`: Cái N kia (xa cả hai).",
+    "explanation": "Các từ này luôn đứng trước danh từ để chỉ rõ “N nào”.\n* `この N`: N này, ở gần người nói.\n* `その N`: N đó, ở gần người nghe.\n* `あの N`: N kia, ở xa cả hai.",
+    "explanationViDraft": "Từ chỉ định bổ nghĩa cho danh từ. * `この N`: Cái N này (gần người nói).\n* `その N`: Cái N đó (gần người nghe).\n* `あの N`: Cái N kia (xa cả hai).",
     "explanationEn": "Demonstrative adjectives modifying a noun. * `この N`: This N.\n* `その N`: That N.\n* `あの N`: That N (over there).",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 2,
@@ -25,9 +35,14 @@
     "titleEn": "Yes/No Responses (そうです)",
     "structure": "S ですか。 → はい、そうです / いいえ、そうじゃありません",
     "structureEn": "S ですか → はい、そうです / いいえ、そうじゃありません",
-    "explanation": "Câu khẳng định và phủ định khi trả lời câu hỏi Yes/No với danh từ. * `はい、そうです`: Vâng, đúng vậy.\n* `いいえ、そうじゃありません` (hoặc `ちがいます`): Không, không phải vậy.",
+    "explanation": "Cách trả lời câu hỏi đúng/sai với câu danh từ.\n* `はい、そうです`: Vâng, đúng vậy.\n* `いいえ、そうじゃありません`: Không, không phải vậy.\n* `ちがいます` cũng có thể dùng để nói “không đúng/không phải”.",
+    "explanationViDraft": "Câu khẳng định và phủ định khi trả lời câu hỏi Yes/No với danh từ. * `はい、そうです`: Vâng, đúng vậy.\n* `いいえ、そうじゃありません` (hoặc `ちがいます`): Không, không phải vậy.",
     "explanationEn": "Affirmative and negative replies to Yes/No noun questions. * `はい、そうです`: Yes, that's correct.\n* `いいえ、そうじゃありません` (or `ちがいます`): No, that's not correct.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 2,
@@ -35,9 +50,14 @@
     "titleEn": "N1's N2 (Possession/Content)",
     "structure": "N1 の N2",
     "structureEn": "N1 の N2",
-    "explanation": "Trợ từ `の` nối hai danh từ. 1. **Sở hữu**: N2 của N1 (giống Bài 1).\n2. **Nội dung**: N2 nói về N1 (Ví dụ: `英語の雑誌` - Tạp chí tiếng Anh).",
+    "explanation": "`の` nối hai danh từ. Ngoài nghĩa sở hữu, `の` còn dùng để nói nội dung hoặc chủ đề của N2.\n* Sở hữu: N2 của N1.\n* Nội dung/chủ đề: `英語の雑誌` = tạp chí tiếng Anh.",
+    "explanationViDraft": "Trợ từ `の` nối hai danh từ. 1. **Sở hữu**: N2 của N1 (giống Bài 1).\n2. **Nội dung**: N2 nói về N1 (Ví dụ: `英語の雑誌` - Tạp chí tiếng Anh).",
     "explanationEn": "Particle `の` connecting two nouns. 1. **Possession**: N1's N2 (Like Lesson 1).\n2. **Content**: N2 about N1 (e.g. `英語の雑誌` - English magazine).",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 2,
@@ -45,9 +65,14 @@
     "titleEn": "Alternative Question (A or B?)",
     "structure": "S1 です か、 S2 です か",
     "structureEn": "S1 ですか、S2 ですか",
-    "explanation": "Câu hỏi lựa chọn. Chọn một trong hai phương án để trả lời. Không dùng `はい` hoặc `いいえ`.",
+    "explanation": "Đây là câu hỏi lựa chọn giữa hai phương án. Khi trả lời, chọn trực tiếp một phương án; không trả lời bằng `はい` hoặc `いいえ`.",
+    "explanationViDraft": "Câu hỏi lựa chọn. Chọn một trong hai phương án để trả lời. Không dùng `はい` hoặc `いいえ`.",
     "explanationEn": "Alternative question. Choose one of the options to answer. Do not use `Yes` or `No`.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 2,
@@ -55,8 +80,13 @@
     "titleEn": "What? (何 / なん / なに)",
     "structure": "これ / それ / あれ は 何（なん） です か",
     "structureEn": "これ / それ / あれ は 何ですか",
-    "explanation": "Câu hỏi với từ để hỏi `何` (cái gì). Dùng để hỏi tên gọi hoặc nội dung của vật.",
+    "explanation": "`何` là từ để hỏi “cái gì”. Trong mẫu này, dùng để hỏi tên gọi, loại đồ vật hoặc nội dung của một vật.",
+    "explanationViDraft": "Câu hỏi với từ để hỏi `何` (cái gì). Dùng để hỏi tên gọi hoặc nội dung của vật.",
     "explanationEn": "Question with `何` (what). Used to ask for the name or content of an object.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]

@@ -5,9 +5,14 @@
     "titleEn": "Movement Verbs (Go/Come/Return)",
     "structure": "N (địa điểm) へ 行きます / 来ます / 帰ります",
     "structureEn": "N (Place) へ いきます / きます / かえります",
-    "explanation": "Diễn tả hành động di chuyển. * Trợ từ `へ` (đọc là 'e') chỉ hướng đi.\n* `行きます` (ikimasu): Đi (rời xa người nói).\n* `来ます` (kimasu): Đến (hướng về người nói).\n* `帰ります` (kaerimasu): Về (nhà, quê hương).",
+    "explanation": "Mẫu này dùng để nói việc di chuyển đến một địa điểm.\n* `へ` đọc là `e`, chỉ hướng đi.\n* `行きます`: đi, rời khỏi vị trí hiện tại.\n* `来ます`: đến, hướng về phía người nói hoặc nơi đang nói tới.\n* `帰ります`: về nhà, về quê hoặc quay lại nơi mình thuộc về.",
+    "explanationViDraft": "Diễn tả hành động di chuyển. * Trợ từ `へ` (đọc là 'e') chỉ hướng đi.\n* `行きます` (ikimasu): Đi (rời xa người nói).\n* `来ます` (kimasu): Đến (hướng về người nói).\n* `帰ります` (kaerimasu): Về (nhà, quê hương).",
     "explanationEn": "Expresses movement. * Particle `へ` (read 'e') indicates direction.\n* `行きます`: To go (away from speaker).\n* `来ます`: To come (towards speaker).\n* `帰ります`: To return (home).",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 5,
@@ -15,9 +20,14 @@
     "titleEn": "Total Negation (Nowhere / Nothing)",
     "structure": "どこ [へ] も 行きません",
     "structureEn": "どこ [へ] も いきません",
-    "explanation": "Phủ định hoàn toàn với từ để hỏi + `も` + Động từ phủ định. * `どこ[へ]も`: Không đi đâu cả.\n* `なにも`: Không ăn/làm gì cả.",
+    "explanation": "Dùng từ để hỏi + `も` + động từ phủ định để nói “không ... gì/cả”.\n* `どこ[へ]も行きません`: không đi đâu cả.\n* `何も食べません`: không ăn gì cả.",
+    "explanationViDraft": "Phủ định hoàn toàn với từ để hỏi + `も` + Động từ phủ định. * `どこ[へ]も`: Không đi đâu cả.\n* `なにも`: Không ăn/làm gì cả.",
     "explanationEn": "Total negation with Question Word + `も` + Negative Verb. * `どこ[へ]も`: Go nowhere.\n* `なにも`: Do/eat nothing.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 5,
@@ -25,9 +35,14 @@
     "titleEn": "By means of transport (Particle で)",
     "structure": "N (phương tiện) で 行きます / 来ます / 帰ります",
     "structureEn": "N (Transport) で いきます / きます / かえります",
-    "explanation": "Trợ từ `để` chỉ phương tiện, cách thức. * Đi bằng cái gì (Taxi, Xe buýt, Tàu điện...).",
+    "explanation": "Trợ từ `で` chỉ phương tiện hoặc cách thức di chuyển. Dùng để nói đi bằng taxi, xe buýt, tàu điện, xe đạp...",
+    "explanationViDraft": "Trợ từ `để` chỉ phương tiện, cách thức. * Đi bằng cái gì (Taxi, Xe buýt, Tàu điện...).",
     "explanationEn": "Particle `で` indicates means of transport. * Go by taxi, bus, train, etc.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 5,
@@ -35,9 +50,14 @@
     "titleEn": "Going on foot (歩いて)",
     "structure": "歩いて (aruite) 行きます",
     "structureEn": "歩いて いきます",
-    "explanation": "Trường hợp đặc biệt: Đi bộ dùng `歩いて` (không dùng trợ từ `để`).",
+    "explanation": "Khi nói đi bộ, dùng `歩いて`. Đây là cách nói riêng, không dùng trợ từ `で` sau `歩いて`.",
+    "explanationViDraft": "Trường hợp đặc biệt: Đi bộ dùng `歩いて` (không dùng trợ từ `để`).",
     "explanationEn": "Special case: `歩いて` (on foot). Do not use particle `で`.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 5,
@@ -45,9 +65,14 @@
     "titleEn": "Doing with someone (Particle と)",
     "structure": "N (người/động vật) と V",
     "structureEn": "N (Person) と V",
-    "explanation": "Trợ từ `と` chỉ đối tượng cùng thực hiện hành động (với). * `一人で` (hitoride): Một mình (trường hợp đặc biệt, không dùng `と`).",
+    "explanation": "`と` chỉ người hoặc con vật cùng thực hiện hành động với mình. Riêng `一人で` nghĩa là “một mình”, không dùng `と`.",
+    "explanationViDraft": "Trợ từ `と` chỉ đối tượng cùng thực hiện hành động (với). * `一人で` (hitoride): Một mình (trường hợp đặc biệt, không dùng `と`).",
     "explanationEn": "Particle `と` indicates the person you do the action with (with). * `一人で` (alone): Special case, no `と`.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 5,
@@ -55,8 +80,13 @@
     "titleEn": "When (いつ)",
     "structure": "いつ V ます か",
     "structureEn": "いつ V-ますか",
-    "explanation": "Từ để hỏi về thời gian. Không dùng trợ từ `に` sau `いつ`.",
+    "explanation": "`いつ` dùng để hỏi “khi nào”. Không đặt trợ từ `に` sau `いつ`.",
+    "explanationViDraft": "Từ để hỏi về thời gian. Không dùng trợ từ `に` sau `いつ`.",
     "explanationEn": "Question word for time (When). Do not use particle `に` after `いつ`.",
-    "level": "N5"
+    "level": "N5",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]
