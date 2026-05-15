@@ -20,6 +20,24 @@ jobs:
           node-version: 24
           cache: npm
 
+      - name: Use system SQLite for CI native assets
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libsqlite3-dev
+          if grep -q '^hooks:' pubspec.yaml; then
+            echo "pubspec.yaml already has hooks; refusing to append CI SQLite override blindly."
+            exit 1
+          fi
+          cat >> pubspec.yaml <<'YAML'
+
+          hooks:
+            user_defines:
+              sqlite3:
+                source: system
+          YAML
+
       - name: Install dependencies
         run: flutter pub get
 
