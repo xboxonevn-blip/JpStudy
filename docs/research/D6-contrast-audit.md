@@ -17,6 +17,15 @@ Method: manual WCAG 2.1 contrast calculation from actual theme tokens, alpha-ble
 | Semantic small chips | success/info/error/accent text on light surfaces | `3.29`-`4.40:1` | large-only | Use contrast-safe semantic foregrounds |
 | Disabled-ish text | `ink 0.35` on `base` | `2.14:1` | exempt but weak | Keep only for inactive controls, not helper copy |
 
+## Fixed In Q6.5b - 2026-05-16
+
+| Surface | Token / component | New ratio | Status |
+|---|---|---:|---|
+| Input hints | `palette.ink.withValues(alpha: 0.68)` on `elevated` | `5.68:1` | pass |
+| Light semantic foregrounds | success/warning/error/info/accent on `elevated` | `5.70`-`7.10:1` | pass |
+| `AppStatusChip.warning` | warning foreground on warning-tinted bg | `5.56:1` | pass |
+| `AppStatusChip.success` | success foreground on success-tinted bg | `4.94:1` | pass |
+
 ## Passes
 
 - Sidebar inactive labels: `6.35`-`6.43:1`.
@@ -28,4 +37,4 @@ Method: manual WCAG 2.1 contrast calculation from actual theme tokens, alpha-ble
 
 ## Recommendation
 
-Fix token policy before one-off surface edits. First patch: hint text, `AppStatusChip`, and small semantic chip foregrounds. Then add a palette contrast test to prevent regressions.
+Token policy patch shipped for hint text, shared status chips, and light semantic foregrounds. Remaining work is an ad hoc sweep of active helper captions that still use low alpha `ink 0.45`-`0.55`.

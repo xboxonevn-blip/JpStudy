@@ -6,8 +6,8 @@ class AppTheme {
   // Component palette (used by ClayButton, ClayCard, grammar widgets, etc.)
   static const Color primary = Color(0xFF17324D);
   static const Color secondary = Color(0xFF20675B);
-  static const Color tertiary = Color(0xFFD66A3D);
-  static const Color error = Color(0xFFC44F59);
+  static const Color tertiary = Color(0xFFA64926);
+  static const Color error = Color(0xFF9B3440);
   static const Color neutral = Color(0xFFE5D7C4);
   static const Color surface = Color(0xFFFCF7F0);
   static const Color textMain = Color(0xFF15202B);
@@ -154,7 +154,7 @@ class AppTheme {
         ),
         hintStyle: _textStyle(
           typography,
-          color: palette.ink.withValues(alpha: 0.42),
+          color: palette.ink.withValues(alpha: 0.68),
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 20,

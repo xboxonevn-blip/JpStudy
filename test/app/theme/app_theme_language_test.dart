@@ -5,6 +5,17 @@ import 'package:jpstudy/app/theme/app_theme.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
 
+double _contrast(Color foreground, Color background) {
+  final resolvedForeground = foreground.a < 1
+      ? Color.alphaBlend(foreground, background)
+      : foreground;
+  final foregroundLuminance = resolvedForeground.computeLuminance() + 0.05;
+  final backgroundLuminance = background.computeLuminance() + 0.05;
+  return foregroundLuminance > backgroundLuminance
+      ? foregroundLuminance / backgroundLuminance
+      : backgroundLuminance / foregroundLuminance;
+}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -146,6 +157,59 @@ void main() {
     test('dark theme uses Material3', () {
       final theme = AppTheme.dark(AppLanguage.en);
       expect(theme.useMaterial3, isTrue);
+    });
+  });
+
+  group('light theme contrast', () {
+    test('semantic text colors meet AA contrast on light surfaces', () {
+      const palette = AppThemePalette.light;
+      final foregrounds = <String, Color>{
+        'success': palette.success,
+        'warning': palette.warning,
+        'error': palette.error,
+        'info': palette.info,
+        'accent': palette.accent,
+        'primary': palette.primary,
+        'secondary': palette.secondary,
+      };
+      final backgrounds = <String, Color>{
+        'bg': palette.bg,
+        'base': palette.base,
+        'surface': palette.surface,
+        'elevated': palette.elevated,
+      };
+
+      for (final foreground in foregrounds.entries) {
+        for (final background in backgrounds.entries) {
+          expect(
+            _contrast(foreground.value, background.value),
+            greaterThanOrEqualTo(4.5),
+            reason: '${foreground.key} on ${background.key}',
+          );
+        }
+      }
+    });
+
+    test('input hints and status chips keep readable contrast', () {
+      final theme = AppTheme.light(AppLanguage.vi);
+      const palette = AppThemePalette.light;
+      final hintColor = theme.inputDecorationTheme.hintStyle?.color;
+      expect(hintColor, isNotNull);
+      expect(
+        _contrast(hintColor!, palette.elevated),
+        greaterThanOrEqualTo(4.5),
+        reason: 'input hint on elevated fill',
+      );
+
+      final warningChipBg = Color.alphaBlend(
+        palette.warning.withValues(alpha: 0.16),
+        palette.elevated,
+      );
+      expect(
+        _contrast(palette.warning, warningChipBg),
+        greaterThanOrEqualTo(4.5),
+        reason: 'warning status chip text',
+      );
     });
   });
 
