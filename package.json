@@ -9,6 +9,7 @@
     "test": "test"
   },
   "scripts": {
+    "report:ga4-export": "node tool/research/ga4_export_status_report.js",
     "test:storage-rules": "firebase emulators:exec --only storage --project jpstudy-v2-test \"jest tooling/firebase/storage.rules.test.js --runInBand\"",
     "test:web-resource-smoke": "node tool/research/web_resource_smoke.js --build-root build/web --max-resources 80 --max-json 5 --max-grammar 0",
     "test:web-resource-smoke:unit": "node --test test/tool/research/web_resource_smoke_node_test.js"
