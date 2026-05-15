@@ -50,6 +50,10 @@ Current status:
 
 - Source wiring and the disabled-by-default smoke trigger are deployed on
   `main` (`5a19cd80`).
+- Manual CI smoke path is available through GitHub Actions `workflow_dispatch`
+  input `sentry_smoke=true`. When `JPSTUDY_SENTRY_DSN` is present, the workflow
+  builds with `JPSTUDY_SENTRY_SMOKE_EVENT=true`, deploys, and opens
+  `https://jpstudy.web.app/?sentry-smoke=1` in Chromium.
 - Repository Actions secrets rechecked on `2026-05-15T18:31+07:00` include
   `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, but not
   `JPSTUDY_SENTRY_DSN`.

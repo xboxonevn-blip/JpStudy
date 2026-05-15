@@ -5,6 +5,12 @@ on:
     branches: [ main, master ]
   pull_request:
   workflow_dispatch:
+    inputs:
+      sentry_smoke:
+        description: 'Deploy with JPSTUDY_SENTRY_SMOKE_EVENT=true and open ?sentry-smoke=1'
+        required: false
+        default: false
+        type: boolean
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -65,8 +71,8 @@ jobs:
       - name: Check web performance budget
         run: dart run tool/research/web_perf_budget_report.dart --build-root build/web --budget docs/research/D7-performance/web_perf_budget.json --fail-on-violation
 
-      - name: Test web resource smoke tooling
-        run: npm run test:web-resource-smoke:unit
+      - name: Test research tooling
+        run: npm run test:research-tooling
 
       - name: Install Playwright Chromium
         run: npx playwright install chromium
@@ -110,12 +116,17 @@ jobs:
       JPSTUDY_RECAPTCHA_SITE_KEY: ${{ secrets.JPSTUDY_RECAPTCHA_SITE_KEY }}
       JPSTUDY_SENTRY_DSN: ${{ secrets.JPSTUDY_SENTRY_DSN }}
       JPSTUDY_SENTRY_ENVIRONMENT: production
+      JPSTUDY_SENTRY_SMOKE_EVENT: ${{ github.event_name == 'workflow_dispatch' && inputs.sentry_smoke && 'true' || 'false' }}
     steps:
       - name: Check deploy secrets
         id: deploy_gate
         shell: bash
         run: |
           if [[ -z "${FIREBASE_TOKEN}" || -z "${JPSTUDY_RECAPTCHA_SITE_KEY}" ]]; then
+            if [[ "${JPSTUDY_SENTRY_SMOKE_EVENT}" == "true" ]]; then
+              echo "::error title=Sentry smoke unavailable::Sentry smoke requires FIREBASE_TOKEN and JPSTUDY_RECAPTCHA_SITE_KEY so the smoke build can be deployed."
+              exit 1
+            fi
             echo "enabled=false" >> "${GITHUB_OUTPUT}"
             echo "::warning title=Deploy skipped::Set FIREBASE_TOKEN and JPSTUDY_RECAPTCHA_SITE_KEY repository secrets to enable Firebase Hosting deploy."
             {
@@ -128,11 +139,20 @@ jobs:
             } >> "${GITHUB_STEP_SUMMARY}"
             exit 0
           fi
+          if [[ "${JPSTUDY_SENTRY_SMOKE_EVENT}" == "true" && -z "${JPSTUDY_SENTRY_DSN}" ]]; then
+            echo "::error title=Sentry smoke unavailable::Set JPSTUDY_SENTRY_DSN repository secret before running workflow_dispatch with sentry_smoke=true."
+            exit 1
+          fi
           echo "enabled=true" >> "${GITHUB_OUTPUT}"
+          echo "sentry_smoke_enabled=${JPSTUDY_SENTRY_SMOKE_EVENT}" >> "${GITHUB_OUTPUT}"
           {
             echo "### Firebase Hosting deploy enabled"
             echo ""
             echo "Required deploy secrets are present. This run will build, deploy, smoke-test, and Lighthouse-check \`hosting:jpstudy\`."
+            if [[ "${JPSTUDY_SENTRY_SMOKE_EVENT}" == "true" ]]; then
+              echo ""
+              echo "Sentry smoke is enabled for this manual run. The workflow will open \`/?sentry-smoke=1\` after deploy."
+            fi
           } >> "${GITHUB_STEP_SUMMARY}"
 
       - uses: actions/checkout@v4
@@ -166,7 +186,8 @@ jobs:
             --dart-define=JPSTUDY_RECAPTCHA_SITE_KEY="${JPSTUDY_RECAPTCHA_SITE_KEY}" \
             --dart-define=JPSTUDY_SENTRY_DSN="${JPSTUDY_SENTRY_DSN}" \
             --dart-define=JPSTUDY_SENTRY_ENVIRONMENT="${JPSTUDY_SENTRY_ENVIRONMENT}" \
-            --dart-define=JPSTUDY_RELEASE="${RELEASE}"
+            --dart-define=JPSTUDY_RELEASE="${RELEASE}" \
+            --dart-define=JPSTUDY_SENTRY_SMOKE_EVENT="${JPSTUDY_SENTRY_SMOKE_EVENT}"
 
       - name: Deploy primary Firebase Hosting target
         if: steps.deploy_gate.outputs.enabled == 'true'
@@ -190,6 +211,32 @@ jobs:
       - name: Install Playwright Chromium
         if: steps.deploy_gate.outputs.enabled == 'true'
         run: npx playwright install chromium
+
+      - name: Trigger Sentry smoke event
+        if: steps.deploy_gate.outputs.sentry_smoke_enabled == 'true'
+        shell: bash
+        run: |
+          node <<'NODE'
+          const { chromium } = require('playwright');
+          (async () => {
+            const browser = await chromium.launch({ args: ['--no-sandbox'] });
+            const page = await browser.newPage();
+            await page.goto(`https://jpstudy.web.app/?sentry-smoke=1&ci-smoke=${process.env.GITHUB_RUN_ID}`, {
+              waitUntil: 'networkidle',
+              timeout: 60000,
+            });
+            await page.waitForTimeout(3000);
+            await browser.close();
+          })().catch((error) => {
+            console.error(error);
+            process.exit(1);
+          });
+          NODE
+          {
+            echo "### Sentry smoke event triggered"
+            echo ""
+            echo "Opened \`https://jpstudy.web.app/?sentry-smoke=1\` in Chromium after deploy. Confirm the \`JpStudy Sentry smoke event\` issue in Sentry and record its URL."
+          } >> "${GITHUB_STEP_SUMMARY}"
 
       - name: Check live web resource smoke
         if: steps.deploy_gate.outputs.enabled == 'true'
