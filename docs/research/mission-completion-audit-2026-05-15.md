@@ -50,11 +50,13 @@ The goal is complete only when all of these are true:
 
 ## Verification Evidence
 
-Latest pushed commit checked in this session:
+Latest rolling CI/deploy-gate evidence is tracked in
+`docs/research/README.md` and
+`docs/research/D8-compliance/Q8.5-raw-output.md`. This audit intentionally
+does not duplicate the newest commit hash because the mission is still active
+and documentation-only blocker-proof commits may continue.
 
-- `411db9ba ci: summarize skipped hosting deploy gate`
-
-Local commands run after that commit:
+Local commands run during the completion audit:
 
 - `node --test test\tool\research\ga4_export_status_report_node_test.js`
   - Result: 2 passed, 0 failed.
@@ -67,16 +69,13 @@ Local commands run after that commit:
 - `flutter test`
   - Result: exit code 0.
 
-GitHub Actions:
+GitHub Actions summary:
 
-- Run `25903240127` for SHA
-  `411db9ba0aa402b2da73defd1330ff8310adc3af` completed with conclusion
-  `success`.
-- Job results:
-  - `firebase-security-rules`: success.
-  - `ui-string-guard`: success.
-  - `deploy-hosting`: success wrapper, but deploy/live/Lighthouse steps were
-    skipped because the deploy secret gate was not enabled.
+- Current source gates pass on `main`.
+- `deploy-hosting` completes as a skip-safe wrapper when deploy secrets are
+  missing.
+- Actual deploy/live-smoke/Lighthouse proof remains blocked until the required
+  repository secrets are configured.
 
 ## Missing Or Weakly Verified Requirements
 
