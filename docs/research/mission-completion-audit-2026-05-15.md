@@ -87,7 +87,7 @@ These prevent marking the active goal complete:
    tested, but docs still mark the copy as `review-needed draft`.
 2. Sentry is source-wired but not operationally proven. A real
    `JPSTUDY_SENTRY_DSN` and first deployed issue URL are still missing. Recheck
-   on `2026-05-16T00:28+07:00` found repository Actions secrets
+   on `2026-05-16T00:53+07:00` found repository Actions secrets
    `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, but no
    `JPSTUDY_SENTRY_DSN`.
 3. Firebase Storage migration remains blocked. Anonymous Auth works, but the
