@@ -57,6 +57,10 @@ Current status:
 - Repository Actions secrets rechecked on `2026-05-16T00:53+07:00` include
   `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, but not
   `JPSTUDY_SENTRY_DSN`.
+- Sentry readiness CLI rechecked on `2026-05-16T02:24+07:00` with
+  `npm run report:sentry-readiness -- --json`: source wiring and workflow smoke
+  gate are present, repo secrets metadata is readable, no event was sent, and
+  readiness remains `false` with reason `sentry-dsn-missing`.
 
 Required setup:
 
