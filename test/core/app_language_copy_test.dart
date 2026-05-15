@@ -13,6 +13,14 @@ void main() {
     expect(AppLanguage.en.termsCountLabel(2), '2 terms');
     expect(AppLanguage.en.itemsCountLabel(1), '1 item');
     expect(AppLanguage.en.itemsCountLabel(2), '2 items');
+    expect(AppLanguage.en.questionsCountLabel(1), '1 question');
+    expect(AppLanguage.en.questionsCountLabel(2), '2 questions');
+    expect(AppLanguage.en.decksCountLabel(1), '1 deck');
+    expect(AppLanguage.en.decksCountLabel(2), '2 decks');
+    expect(AppLanguage.en.sectionsCountLabel(1), '1 section');
+    expect(AppLanguage.en.sectionsCountLabel(2), '2 sections');
+    expect(AppLanguage.en.minutesCountLabel(1), '1 minute');
+    expect(AppLanguage.en.minutesCountLabel(2), '2 minutes');
     expect(AppLanguage.en.handwritingStrokeShortLabel(1), '1 stroke');
     expect(AppLanguage.en.handwritingStrokeShortLabel(2), '2 strokes');
     expect(AppLanguage.en.handwritingStrokeCountLabel(1), 'Expected: 1 stroke');

@@ -385,7 +385,7 @@ List<_StudyRecipe> _recipes(
           _QueueItem(
             Icons.psychology_alt_rounded,
             'Due queue',
-            '${continueCount == 0 ? dueTotal : continueCount} items need quick attention.',
+            '${language.itemsCountLabel(continueCount == 0 ? dueTotal : continueCount)} need quick attention.',
             'Due',
             AppStatusTone.warning,
           ),

@@ -164,7 +164,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('3 due'), findsWidgets);
+    expect(find.text('3 items due'), findsWidgets);
   });
 
   testWidgets(

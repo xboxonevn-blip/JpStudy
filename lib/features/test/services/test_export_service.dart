@@ -51,7 +51,9 @@ class TestExportService {
 
     if (session.weakTermIds.isNotEmpty) {
       buffer.writeln();
-      buffer.writeln('⚠️ ${session.weakTermIds.length} terms need practice');
+      buffer.writeln(
+        '⚠️ ${AppLanguage.en.termsNeedPracticeLabel(session.weakTermIds.length)}',
+      );
     }
 
     buffer.writeln();

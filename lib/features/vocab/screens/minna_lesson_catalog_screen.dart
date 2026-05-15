@@ -773,13 +773,13 @@ String _backLabel(AppLanguage language) => switch (language) {
 };
 
 String _statLessons(AppLanguage language, int count) => switch (language) {
-  AppLanguage.en => '$count lessons',
+  AppLanguage.en => language.lessonCountLabel(count),
   AppLanguage.vi => '$count bài học',
   AppLanguage.ja => '$count課',
 };
 
 String _statTerms(AppLanguage language, int count) => switch (language) {
-  AppLanguage.en => '$count terms',
+  AppLanguage.en => language.termsCountLabel(count),
   AppLanguage.vi => '$count mục từ',
   AppLanguage.ja => '$count語',
 };

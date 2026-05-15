@@ -265,7 +265,7 @@ String _matchIntroSubtitle(
     'Session này lấy từ chapter hiện tại với $count từ để luyện nhanh.',
   AppLanguage.ja => 'このセッションでは現在のチャプターから $count 語を使って練習します。',
   AppLanguage.en =>
-    'This session uses the current chapter and pulls from $count terms for a quick match round.',
+    'This session uses the current chapter and pulls from ${AppLanguage.en.termsCountLabel(count)} for a quick match round.',
 };
 
 String _startMatchLabel(AppLanguage language) => switch (language) {

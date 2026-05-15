@@ -1040,7 +1040,7 @@ class _TestConfigScreenState extends ConsumerState<TestConfigScreen> {
         chips: [
           _tr(
             language,
-            '$quickWarmupCount questions',
+            AppLanguage.en.questionsCountLabel(quickWarmupCount),
             '$quickWarmupCount câu',
             '$quickWarmupCount問',
           ),
@@ -1078,7 +1078,7 @@ class _TestConfigScreenState extends ConsumerState<TestConfigScreen> {
         chips: [
           _tr(
             language,
-            '$activeReviewCount questions',
+            AppLanguage.en.questionsCountLabel(activeReviewCount),
             '$activeReviewCount câu',
             '$activeReviewCount問',
           ),
@@ -1113,7 +1113,7 @@ class _TestConfigScreenState extends ConsumerState<TestConfigScreen> {
         chips: [
           _tr(
             language,
-            '${examConfig.questionCount} questions',
+            AppLanguage.en.questionsCountLabel(examConfig.questionCount),
             '${examConfig.questionCount} câu',
             '${examConfig.questionCount}問',
           ),

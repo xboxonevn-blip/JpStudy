@@ -14,11 +14,14 @@ import 'package:jpstudy/features/home/providers/continue_provider.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/home/providers/recovery_pack_provider.dart';
 import 'package:jpstudy/features/learn/models/question_type.dart';
+import 'package:jpstudy/features/me/providers/auto_cloud_upload_provider.dart';
 import 'package:jpstudy/features/test/models/test_config.dart';
 import 'package:jpstudy/features/test/screens/test_results_screen.dart';
 import 'package:jpstudy/features/test/screens/test_screen.dart';
 import 'package:jpstudy/features/vocab/vocab_ghost_providers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../support/noop_auto_cloud_upload.dart';
 
 // ---------------------------------------------------------------------------
 // Why this test exists
@@ -54,8 +57,11 @@ DashboardState _emptyDashboard() => const DashboardState(
 );
 
 void main() {
-  setUp(() {
+  late SharedPreferences prefs;
+
+  setUp(() async {
     SharedPreferences.setMockInitialValues({});
+    prefs = await SharedPreferences.getInstance();
   });
 
   testWidgets(
@@ -101,6 +107,9 @@ void main() {
             }),
             vocabGhostsProvider.overrideWith((_) async => const []),
             recoveryPackProvider.overrideWith((_) async => null),
+            autoCloudUploadProvider.overrideWithValue(
+              noopAutoCloudUpload(prefs),
+            ),
           ],
           child: const MaterialApp(
             home: TestScreen(
@@ -238,6 +247,9 @@ void main() {
             }),
             vocabGhostsProvider.overrideWith((_) async => const []),
             recoveryPackProvider.overrideWith((_) async => null),
+            autoCloudUploadProvider.overrideWithValue(
+              noopAutoCloudUpload(prefs),
+            ),
           ],
           child: const MaterialApp(
             home: TestScreen(

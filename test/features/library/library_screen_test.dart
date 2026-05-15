@@ -178,7 +178,7 @@ void main() {
   ) async {
     await _pumpScreen(tester, buildLibraryScreen());
     expect(
-      find.text('8/20 terms are covered and 3 need review now.'),
+      find.text('Covered: 8/20 terms. 3 items need review now.'),
       findsOneWidget,
     );
   });

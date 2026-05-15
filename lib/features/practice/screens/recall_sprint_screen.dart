@@ -443,7 +443,8 @@ class _SprintBody extends StatelessWidget {
   // ---- Labels ----
 
   String _batchSizeLabel(AppLanguage l, int count) => switch (l) {
-    AppLanguage.en => '$count questions from your review queue',
+    AppLanguage.en =>
+      '${AppLanguage.en.questionsCountLabel(count)} from your review queue',
     AppLanguage.vi => '$count câu hỏi từ hàng đợi ôn tập của bạn',
     AppLanguage.ja => 'レビューキューから$count問',
   };

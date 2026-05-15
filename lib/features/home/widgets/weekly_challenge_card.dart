@@ -184,7 +184,8 @@ class _ChallengeContent extends StatelessWidget {
     switch (challenge.type) {
       case ChallengeType.reviewCount:
         return switch (language) {
-          AppLanguage.en => 'Review ${challenge.target} items this week',
+          AppLanguage.en =>
+            'Review ${AppLanguage.en.itemsCountLabel(challenge.target)} this week',
           AppLanguage.vi => 'Ôn ${challenge.target} mục trong tuần này',
           AppLanguage.ja => '今週は ${challenge.target} 件を復習',
         };
@@ -208,7 +209,8 @@ class _ChallengeContent extends StatelessWidget {
         };
       case ChallengeType.lessonCount:
         return switch (language) {
-          AppLanguage.en => 'Complete ${challenge.target} lessons this week',
+          AppLanguage.en =>
+            'Complete ${AppLanguage.en.lessonCountLabel(challenge.target)} this week',
           AppLanguage.vi => 'Hoàn thành ${challenge.target} bài trong tuần này',
           AppLanguage.ja => '今週は ${challenge.target} レッスン完了',
         };

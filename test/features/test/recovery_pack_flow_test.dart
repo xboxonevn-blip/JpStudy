@@ -18,14 +18,20 @@ import 'package:jpstudy/features/learn/models/learn_session.dart';
 import 'package:jpstudy/features/learn/models/question.dart';
 import 'package:jpstudy/features/learn/models/question_type.dart';
 import 'package:jpstudy/features/learn/screens/learn_summary_screen.dart';
+import 'package:jpstudy/features/me/providers/auto_cloud_upload_provider.dart';
 import 'package:jpstudy/features/test/models/test_session.dart';
 import 'package:jpstudy/features/test/screens/test_results_screen.dart';
 import 'package:jpstudy/features/vocab/vocab_ghost_providers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../support/noop_auto_cloud_upload.dart';
+
 void main() {
-  setUp(() {
+  late SharedPreferences prefs;
+
+  setUp(() async {
     SharedPreferences.setMockInitialValues({});
+    prefs = await SharedPreferences.getInstance();
   });
 
   DashboardState dashboard() {
@@ -67,6 +73,7 @@ void main() {
           yield 0;
         }),
         vocabGhostsProvider.overrideWith((_) async => const []),
+        autoCloudUploadProvider.overrideWithValue(noopAutoCloudUpload(prefs)),
         if (recoveryPack != null)
           recoveryPackProvider.overrideWith((_) async => recoveryPack),
       ],

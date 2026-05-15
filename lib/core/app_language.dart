@@ -300,7 +300,7 @@ extension AppLanguageLabels on AppLanguage {
   String dueCountLabel(int count) {
     switch (this) {
       case AppLanguage.en:
-        return '$count due';
+        return '${itemsCountLabel(count)} due';
       case AppLanguage.vi:
         return '$count \u0111\u1ebfn h\u1ea1n';
       case AppLanguage.ja:
@@ -388,7 +388,7 @@ extension AppLanguageLabels on AppLanguage {
   String lessonSubtitle(int termCount) {
     switch (this) {
       case AppLanguage.en:
-        return 'Set • $termCount terms';
+        return 'Set • ${termsCountLabel(termCount)}';
       case AppLanguage.vi:
         return 'H\u1ecdc ph\u1ea7n c\xf3 $termCount thu\u1eadt ng\u1eef';
       case AppLanguage.ja:
@@ -1298,6 +1298,50 @@ extension AppLanguageLabels on AppLanguage {
         return '$count mục';
       case AppLanguage.ja:
         return '$count件';
+    }
+  }
+
+  String questionsCountLabel(int count) {
+    switch (this) {
+      case AppLanguage.en:
+        return '$count ${count == 1 ? 'question' : 'questions'}';
+      case AppLanguage.vi:
+        return '$count câu hỏi';
+      case AppLanguage.ja:
+        return '$count問';
+    }
+  }
+
+  String decksCountLabel(int count) {
+    switch (this) {
+      case AppLanguage.en:
+        return '$count ${count == 1 ? 'deck' : 'decks'}';
+      case AppLanguage.vi:
+        return '$count deck';
+      case AppLanguage.ja:
+        return '$countデッキ';
+    }
+  }
+
+  String sectionsCountLabel(int count) {
+    switch (this) {
+      case AppLanguage.en:
+        return '$count ${count == 1 ? 'section' : 'sections'}';
+      case AppLanguage.vi:
+        return '$count phần';
+      case AppLanguage.ja:
+        return '$countセクション';
+    }
+  }
+
+  String minutesCountLabel(int count) {
+    switch (this) {
+      case AppLanguage.en:
+        return '$count ${count == 1 ? 'minute' : 'minutes'}';
+      case AppLanguage.vi:
+        return '$count phút';
+      case AppLanguage.ja:
+        return '$count分';
     }
   }
 
@@ -4098,7 +4142,7 @@ extension AppLanguageLabels on AppLanguage {
   String reviewCountLabel(int count) {
     switch (this) {
       case AppLanguage.en:
-        return '$count due';
+        return '${itemsCountLabel(count)} due';
       case AppLanguage.vi:
         return '$count \u0111\u1ebfn h\u1ea1n';
       case AppLanguage.ja:
@@ -6885,7 +6929,7 @@ extension AppLanguageLabels on AppLanguage {
   String dueForReviewLabel(int count) {
     switch (this) {
       case AppLanguage.en:
-        return '$count due';
+        return '${itemsCountLabel(count)} due';
       case AppLanguage.vi:
         return '$count \u0111\u1ebfn h\u1ea1n';
       case AppLanguage.ja:

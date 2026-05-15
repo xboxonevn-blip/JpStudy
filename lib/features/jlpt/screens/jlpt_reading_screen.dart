@@ -214,7 +214,7 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
 
   String _perSetQuestionLabel(AppLanguage language, int count) => _tr(
     language,
-    '$count questions each',
+    '${AppLanguage.en.questionsCountLabel(count)} each',
     '$count câu mỗi bài',
     '各セット$count問',
   );
@@ -268,7 +268,7 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
     JlptReadingPassage passage,
   ) => _tr(
     language,
-    'This set asks for theme, detail, and inference across ${passage.questions.length} questions.',
+    'This set asks for theme, detail, and inference across ${AppLanguage.en.questionsCountLabel(passage.questions.length)}.',
     'Bài này kiểm tra ý chính, chi tiết và suy luận trong ${passage.questions.length} câu.',
     'このセットでは主旨・詳細・推論を ${passage.questions.length} 問で確認します。',
   );
@@ -575,7 +575,7 @@ class _JlptReadingScreenState extends ConsumerState<JlptReadingScreen> {
           title: passage.title,
           subtitle: _tr(
             language,
-            '${passage.level} • ${passage.questions.length} questions',
+            '${passage.level} • ${AppLanguage.en.questionsCountLabel(passage.questions.length)}',
             '${passage.level} • ${passage.questions.length} câu',
             '${passage.level} • ${passage.questions.length}問',
           ),

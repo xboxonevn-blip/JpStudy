@@ -23,7 +23,7 @@ extension KanjiCopy on AppLanguage {
   };
 
   String kanjiStrokeChipLabel(int count) => switch (this) {
-    AppLanguage.en => '$count strokes',
+    AppLanguage.en => handwritingStrokeShortLabel(count),
     AppLanguage.vi => '$count nét',
     AppLanguage.ja => '$count画',
   };

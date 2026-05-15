@@ -303,7 +303,7 @@ class _HeroCard extends StatelessWidget {
 
   String _subtitle(AppLanguage language) => switch (language) {
     AppLanguage.en =>
-      'Choose a level-based reading deck, tap words, and keep Japanese active. $readCount decks finished.',
+      'Choose a level-based reading deck, tap words, and keep Japanese active. ${AppLanguage.en.decksCountLabel(readCount)} finished.',
     AppLanguage.vi =>
       'Chọn deck bài đọc theo level, chạm từ và giữ nhịp tiếng Nhật. Đã xong $readCount deck.',
     AppLanguage.ja => 'レベル別の読解デッキで、単語を確認しながら日本語を動かします。$readCount デッキ完了。',

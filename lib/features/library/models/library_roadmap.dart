@@ -265,13 +265,13 @@ LibraryRoadmapAction _nextLessonAction(
     subtitle: isFresh
         ? _l(
             language,
-            en: '${lesson.termCount} terms are waiting in a clean lesson block.',
+            en: '${AppLanguage.en.termsCountLabel(lesson.termCount)} are waiting in a clean lesson block.',
             vi: '${lesson.termCount} mục đang chờ trong một lesson còn sạch.',
             ja: '${lesson.termCount}項目の新しいレッスンが待っています。',
           )
         : _l(
             language,
-            en: '${lesson.completedCount}/${lesson.termCount} terms are already moving in this lesson.',
+            en: '${lesson.completedCount}/${AppLanguage.en.termsCountLabel(lesson.termCount)} are already moving in this lesson.',
             vi: '${lesson.completedCount}/${lesson.termCount} mục đã được đụng trong lesson này.',
             ja: 'このレッスンは${lesson.completedCount}/${lesson.termCount}項目まで進んでいます。',
           ),

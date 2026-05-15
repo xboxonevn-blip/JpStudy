@@ -1232,9 +1232,14 @@ class _LessonTile extends StatelessWidget {
 
   String _lessonSummary(AppLanguage language, LessonMeta lesson) {
     if (lesson.dueCount > 0) {
+      final enProgress =
+          '${lesson.completedCount}/${AppLanguage.en.termsCountLabel(lesson.termCount)}';
+      final enDue = AppLanguage.en.itemsCountLabel(lesson.dueCount);
+      final enNeedVerb = lesson.dueCount == 1 ? 'needs' : 'need';
+
       return switch (language) {
         AppLanguage.en =>
-          '${lesson.completedCount}/${lesson.termCount} terms are covered and ${lesson.dueCount} need review now.',
+          'Covered: $enProgress. $enDue $enNeedVerb review now.',
         AppLanguage.vi =>
           '${lesson.completedCount}/${lesson.termCount} mục đã được chạm và ${lesson.dueCount} mục cần review ngay.',
         AppLanguage.ja =>

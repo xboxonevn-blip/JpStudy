@@ -364,12 +364,15 @@ String _quickMockSubtitle(
   AppLanguage.ja => 'アプリ内の ${level.shortLabel} 語彙バンクから作る短い時間制チェックです。',
 };
 
-String _quickMockMeta(AppLanguage language, int questionCount) =>
-    switch (language) {
-      AppLanguage.en => '$questionCount questions ready from your level bank',
-      AppLanguage.vi => '$questionCount câu hỏi sẵn sàng từ bank hiện tại',
-      AppLanguage.ja => '$questionCount 問を現在レベルから使用',
-    };
+String _quickMockMeta(
+  AppLanguage language,
+  int questionCount,
+) => switch (language) {
+  AppLanguage.en =>
+    '${AppLanguage.en.questionsCountLabel(questionCount)} ready from your level bank',
+  AppLanguage.vi => '$questionCount câu hỏi sẵn sàng từ bank hiện tại',
+  AppLanguage.ja => '$questionCount 問を現在レベルから使用',
+};
 
 String _comingSoonLabel(AppLanguage language) => switch (language) {
   AppLanguage.en => 'No bank yet',

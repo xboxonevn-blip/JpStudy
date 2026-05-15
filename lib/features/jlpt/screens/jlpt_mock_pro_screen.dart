@@ -365,7 +365,7 @@ class _JlptMockProScreenState extends ConsumerState<JlptMockProScreen> {
     required int sectionCount,
   }) => _tr(
     language,
-    '$questionCount questions • $totalMinutes minutes • $sectionCount sections',
+    '${AppLanguage.en.questionsCountLabel(questionCount)} • ${AppLanguage.en.minutesCountLabel(totalMinutes)} • ${AppLanguage.en.sectionsCountLabel(sectionCount)}',
     '$questionCount câu • $totalMinutes phút • $sectionCount phần',
     '$questionCount問 • $totalMinutes分 • $sectionCountセクション',
   );

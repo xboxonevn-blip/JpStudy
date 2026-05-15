@@ -182,7 +182,7 @@ CoachStep _buildStep3({
       ),
       detail: _l(
         language,
-        en: '${recoveryPack.itemCount} items to reinforce',
+        en: '${AppLanguage.en.itemsCountLabel(recoveryPack.itemCount)} to reinforce',
         vi: '${recoveryPack.itemCount} mục cần củng cố',
       ),
       icon: Icons.medical_services_outlined,

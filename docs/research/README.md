@@ -126,7 +126,7 @@ Current scope blocker: cumulative vocab count is broad enough by rough JLPT targ
 
 Current upper-kanji metadata note: Q2.6 originally sampled N3/N2/N1 kanji and found only `22 / 50` exact Unihan Han-Viet matches plus `23 / 50` missing local Han-Viet values. The 2026-05-15 user-approved editorial batch now marks scanned upper kanji items as approved, but the cumulative N1 kanji scope is still `889 / 2,000`, so do not claim full N1/N2 kanji coverage.
 
-Current D3 blocker: UI Vietnamese is structurally present in `app_language.dart` (`680` returns per locale, no blanks), but `1,893` Vietnamese lines bypass it after excluding research helper code. Runtime Dart mojibake and docs decode errors are currently guarded at `0` hits. Q3.4 sampled `100` strings: `92/100` clean, `8/100` raw-English-term warnings. Q3.5 recommends no full ARB migration before beta: surface is `140` files and `5,219` `AppLanguage.en/vi/ja` references. Q3.6 found `41` raw English plural-risk strings and `0` ICU usage; central `AppLanguage` helpers plus vocab follow-ups were patched, leaving `26` feature-local matches.
+Current D3 blocker: UI Vietnamese is structurally present in `app_language.dart` (`680` returns per locale, no blanks), but `1,893` Vietnamese lines bypass it after excluding research helper code. Runtime Dart mojibake and docs decode errors are currently guarded at `0` hits. Q3.4 sampled `100` strings: `92/100` clean, `8/100` raw-English-term warnings. Q3.5 recommends no full ARB migration before beta: surface is `140` files and `5,219` `AppLanguage.en/vi/ja` references. Q3.6 found `41` raw English plural-risk strings and `0` ICU usage; central `AppLanguage` helpers plus vocab/feature-local follow-ups reduced the tracked plural-risk grep to `0` matches.
 
 Current D4.P2 blocker: N3/VI works after root start, and the latest live vocab re-check shows Hajimete N3 plus Shin Kanzen N3 open with real counts. Remaining P2 risks are direct-route/channel trust outside the checked vocab slice, `/exam-center` parity, mobile reading CTA occlusion, and lack of a sharper busy-professional plan.
 
@@ -197,7 +197,7 @@ Current D8.Q8.7 status: telemetry is acceptable only for closed beta with explic
 - Q7: Smallest test vs Anki + free decks? Pending after measurement.
 - Q8: Is Vietnamese content safe enough for beta learners? Active; D2 now supports a controlled N5/N4-heavy pilot, while N3+ remains tiered with draft/source provenance.
 - D2 status: launch-readiness pass complete for the user-approved N5-N1 editorial batch. N5/N4 are pilot launch-tier; N3+ stays available with disclaimer and source/provenance caveats.
-- D3 status: Q3.1-Q3.6 measured; D3 synthesis and targeted plural/glossary fixes pending.
+- D3 status: Q3.1-Q3.6 measured; targeted English plural-risk fixes are guarded at `0` tracked matches. Glossary consolidation remains pending.
 - D4 status: P2-P5 measured; D4 synthesis complete. Live channel parity and upper-vocab availability are improved, but broad beta still needs route-matrix confidence and explicit persona-scope limits.
 - D5 status: Q5.1 remediated at scheduler level; FSRS-6 state/step persistence and pinned learning intervals are implemented. Real learner calibration remains pending.
 - D5 status update: Q5.2 measured; streak policy/write paths need normalization before using streak in beta-retention interpretation.
