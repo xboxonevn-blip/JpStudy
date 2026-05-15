@@ -2,6 +2,24 @@
 
 Commit: `e468d6c7`
 
+## 2026-05-15 Manual Deploy Re-Check Addendum
+
+Evidence:
+- Manual deploy of `47105e86` to `hosting:jpstudy` completed on 2026-05-15.
+- Primary `https://jpstudy.web.app/` returned `200`; legacy `https://jpstudy-v2.web.app/` returned `404`.
+- Live resource smoke returned `resourceCount=25`, `jsonCount=1`, `grammarResourceCount=0`, with no violations.
+- Screenshots captured under `output/playwright/`: `live-vocab-n3-open-lane.png`, `live-vocab-n1-open-lane.png`.
+
+Scope: seeded live `/#/vocab` checks for upper-level catalog availability after the vocab unlock fixes reached production.
+
+| Level | Live vocab catalog result |
+| --- | --- |
+| N3 | PASS - Hajimete N3 `1,784 mục từ` open; Shin Kanzen Master N3 `300 mục từ` open. |
+| N2 | PASS - Hajimete N2 `1,793 mục từ` open; Shin Kanzen Master N2 `1,797 mục từ` open. |
+| N1 | PASS - Hajimete N1 `3,463 mục từ` open; Shin Kanzen Master N1 `3,476 mục từ` open; N1+ correctly remains `Sắp ra mắt`. |
+
+Updated verdict: the stale upper-vocab live blocker from the earlier addendum is cleared for N3/N2/N1. Broad beta still stays FAIL because public-launch blockers remain outside this catalog slice: GA4 export tables are absent, Sentry has no live DSN/first issue, legal copy is still review-needed, and Storage migration cannot run until Firebase Storage is provisioned.
+
 ## 2026-05-15 Live Re-Test Addendum
 
 Evidence:
@@ -19,9 +37,9 @@ Scope: clean live onboarding from empty storage, Vietnamese selection, level sel
 | P4 Bác Hùng N4 | PASS | PASS | PASS | PASS - N4 `Hajimete` 632 terms + `Minna II` 1,478 terms open |
 | P5 Sora N1 | PASS | PASS | PASS | FAIL - N1/N1+ cards still preview-only |
 
-Updated verdict: route-level onboarding/Kana gating is materially better after deploy, but the broad beta verdict stays FAIL. The biggest new blocker is that "vocab unlock" is not uniform: N4 is open, while N3/N2/N1 still look like preview catalog entries despite data-backed track labels.
+Updated verdict: route-level onboarding/Kana gating is materially better after deploy, but the broad beta verdict stays FAIL. This addendum is superseded for upper-vocab catalog availability by the later `47105e86` manual deploy re-check above.
 
-Next action: audit the vocab availability registry/track state separately from content seeding. Treat "data exists", "catalog visible", "CTA enabled", and "review queue count" as four separate gates.
+Historical next action at that point was to separate "data exists", "catalog visible", "CTA enabled", and "review queue count"; the later manual deploy re-check shows the upper-level catalog availability gate is now open on live.
 
 ## Verdict
 
