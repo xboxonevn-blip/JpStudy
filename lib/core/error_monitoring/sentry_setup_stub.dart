@@ -12,3 +12,7 @@ Future<void> runWithErrorMonitoring({
 }
 
 Future<void> setErrorMonitoringUser(String? userId) async {}
+
+Future<void> captureErrorMonitoringSmokeEvent(
+  ErrorMonitoringConfig config,
+) async {}

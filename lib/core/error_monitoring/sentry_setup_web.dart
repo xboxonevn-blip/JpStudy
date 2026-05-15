@@ -24,6 +24,15 @@ Future<void> setErrorMonitoringUser(String? userId) async {
   });
 }
 
+Future<void> captureErrorMonitoringSmokeEvent(
+  ErrorMonitoringConfig config,
+) async {
+  await Sentry.captureException(
+    StateError('JpStudy Sentry smoke event'),
+    stackTrace: StackTrace.current,
+  );
+}
+
 void _configure(SentryFlutterOptions options, ErrorMonitoringConfig config) {
   options.dsn = config.dsn;
   options.environment = config.environment;

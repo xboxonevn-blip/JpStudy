@@ -62,4 +62,31 @@ void main() {
       isFalse,
     );
   });
+
+  test('sentry smoke event requires build flag and URL trigger', () {
+    const disabledConfig = ErrorMonitoringConfig(
+      dsn: 'https://example@sentry.io/1',
+    );
+    const enabledConfig = ErrorMonitoringConfig(
+      dsn: 'https://example@sentry.io/1',
+      smokeEventEnabled: true,
+    );
+
+    expect(
+      disabledConfig.shouldSendSmokeEvent(
+        Uri.parse('https://jpstudy.web.app/?sentry-smoke=1'),
+      ),
+      isFalse,
+    );
+    expect(
+      enabledConfig.shouldSendSmokeEvent(Uri.parse('https://jpstudy.web.app/')),
+      isFalse,
+    );
+    expect(
+      enabledConfig.shouldSendSmokeEvent(
+        Uri.parse('https://jpstudy.web.app/?sentry-smoke=1'),
+      ),
+      isTrue,
+    );
+  });
 }

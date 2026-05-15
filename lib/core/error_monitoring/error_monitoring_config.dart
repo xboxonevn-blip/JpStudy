@@ -4,6 +4,7 @@ class ErrorMonitoringConfig {
     this.environment = 'production',
     this.release = '',
     this.tracesSampleRate = 0,
+    this.smokeEventEnabled = false,
   });
 
   factory ErrorMonitoringConfig.fromEnvironment() {
@@ -15,6 +16,7 @@ class ErrorMonitoringConfig {
       ),
       release: String.fromEnvironment('JPSTUDY_RELEASE'),
       tracesSampleRate: 0,
+      smokeEventEnabled: bool.fromEnvironment('JPSTUDY_SENTRY_SMOKE_EVENT'),
     );
   }
 
@@ -22,8 +24,15 @@ class ErrorMonitoringConfig {
   final String environment;
   final String release;
   final double tracesSampleRate;
+  final bool smokeEventEnabled;
 
   bool get hasDsn => dsn.trim().isNotEmpty;
+
+  bool shouldSendSmokeEvent([Uri? uri]) {
+    if (!smokeEventEnabled) return false;
+    final value = (uri ?? Uri.base).queryParameters['sentry-smoke'];
+    return value == '1' || value?.toLowerCase() == 'true';
+  }
 }
 
 bool shouldStartErrorMonitoring({

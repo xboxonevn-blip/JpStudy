@@ -31,6 +31,7 @@ class ErrorMonitoringController {
     try {
       await impl.startErrorMonitoring(config);
       _errorMonitoringStarted = true;
+      await _captureSmokeEventIfNeeded(config);
     } catch (error, stackTrace) {
       debugPrint('Sentry init failed: $error\n$stackTrace');
     }
@@ -64,9 +65,19 @@ Future<void> runAppWithOptionalErrorMonitoring({
   try {
     await impl.runWithErrorMonitoring(config: config, appRunner: appRunner);
     _errorMonitoringStarted = true;
+    await _captureSmokeEventIfNeeded(config);
   } catch (error, stackTrace) {
     debugPrint('Sentry app runner failed: $error\n$stackTrace');
     await appRunner();
+  }
+}
+
+Future<void> _captureSmokeEventIfNeeded(ErrorMonitoringConfig config) async {
+  if (!config.shouldSendSmokeEvent()) return;
+  try {
+    await impl.captureErrorMonitoringSmokeEvent(config);
+  } catch (error, stackTrace) {
+    debugPrint('Sentry smoke event failed: $error\n$stackTrace');
   }
 }
 

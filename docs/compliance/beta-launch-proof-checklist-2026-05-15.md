@@ -52,12 +52,16 @@ Required setup:
 - Set `JPSTUDY_SENTRY_DSN` as a GitHub Actions secret, or pass it only through
   a local `--dart-define` for a non-public test build.
 - Keep `sendDefaultPii=false` and consent/sign-in gate behavior unchanged.
+- For an intentional smoke event, build with
+  `--dart-define=JPSTUDY_SENTRY_SMOKE_EVENT=true`, then open
+  `https://jpstudy.web.app/?sentry-smoke=1`. The smoke trigger is disabled
+  unless both the build flag and URL query parameter are present.
 
 Evidence to record:
 
 - Build or CI run URL showing `JPSTUDY_SENTRY_DSN` was supplied without
   revealing the value.
-- Sentry issue URL for one intentional non-production test exception.
+- Sentry issue URL for the intentional `JpStudy Sentry smoke event` exception.
 - Confirmation the event includes release/environment context and no learner
   prompt, answer, name, or free-text content.
 
