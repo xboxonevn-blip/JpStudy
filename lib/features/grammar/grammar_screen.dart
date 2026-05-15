@@ -11,6 +11,7 @@ import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/data/utils/grammar_english_notation.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
+import 'package:jpstudy/features/content_quality/widgets/content_draft_quality_note.dart';
 import 'package:jpstudy/features/foundations/widgets/foundations_soft_suggest_gate.dart';
 import 'package:jpstudy/features/grammar/grammar_providers.dart';
 import 'package:jpstudy/features/grammar/screens/grammar_practice_screen.dart';
@@ -149,6 +150,10 @@ class _GrammarHubContentState extends State<_GrammarHubContent> {
           },
         ),
         const SizedBox(height: AppSpacing.md),
+        if (isDraftQualityLevel(levelLabel)) ...[
+          ContentDraftQualityNote(language: language),
+          const SizedBox(height: AppSpacing.md),
+        ],
         AppFluidGrid(
           maxColumns: 3,
           children: [

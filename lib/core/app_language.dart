@@ -396,6 +396,17 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get contentDraftQualityNote {
+    switch (this) {
+      case AppLanguage.en:
+        return 'N3+ content is still under editorial review. Some explanations may not read naturally yet.';
+      case AppLanguage.vi:
+        return 'Nội dung cấp N3+ đang trong giai đoạn hoàn thiện biên tập. Một số giải thích có thể chưa tự nhiên.';
+      case AppLanguage.ja:
+        return 'N3以上のコンテンツは現在編集確認中です。一部の解説はまだ自然でない場合があります。';
+    }
+  }
+
   String get savedLabel {
     switch (this) {
       case AppLanguage.en:

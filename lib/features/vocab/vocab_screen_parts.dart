@@ -14,6 +14,7 @@ class _VocabCatalogBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedLevel = ref.watch(studyLevelProvider);
+    final activeLevelCode = selectedLevel?.shortLabel ?? home.selectedLevelCode;
     final totalPrograms = sections.fold<int>(
       0,
       (sum, section) => sum + section.programs.length,
@@ -50,9 +51,13 @@ class _VocabCatalogBody extends ConsumerWidget {
         _VocabSearchCard(
           key: const ValueKey('vocab_search_card'),
           language: language,
-          levelCode: selectedLevel?.shortLabel ?? home.selectedLevelCode,
+          levelCode: activeLevelCode,
         ),
         const SizedBox(height: AppSpacing.xl),
+        if (isDraftQualityLevel(activeLevelCode)) ...[
+          ContentDraftQualityNote(language: language),
+          const SizedBox(height: AppSpacing.xl),
+        ],
         _VocabHero(
           key: const ValueKey('vocab_catalog_hero'),
           language: language,

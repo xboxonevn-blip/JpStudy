@@ -620,6 +620,23 @@ void main() {
     expect(todayTopLeft.dy, lessThan(heroTopLeft.dy));
   });
 
+  testWidgets('VocabScreen shows draft quality note for N3 level', (
+    tester,
+  ) async {
+    final repo = _FakeVocabLessonRepository(
+      bank: {'N3': List.generate(6, (i) => _item(i + 21, 'n3_$i', 'N3'))},
+    );
+
+    await tester.pumpWidget(_buildScreen(repo: repo, level: StudyLevel.n3));
+    await _pumpCatalog(tester);
+
+    expect(
+      find.byKey(const ValueKey('content_draft_quality_note')),
+      findsOneWidget,
+    );
+    expect(find.textContaining('N3+ content is still'), findsOneWidget);
+  });
+
   testWidgets(
     'Today section hides companion shortcut when selected level has none',
     (tester) async {

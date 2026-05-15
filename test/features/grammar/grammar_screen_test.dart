@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
+import 'package:jpstudy/core/study_level.dart';
 import 'package:jpstudy/data/db/app_database.dart';
 import 'package:jpstudy/features/grammar/grammar_providers.dart';
 import 'package:jpstudy/features/grammar/grammar_screen.dart';
@@ -55,19 +56,19 @@ const _topicPoint = GrammarPoint(
 /// Simple wrapper — no router (navigation tests use [_buildRouterScreen]).
 Widget _buildScreen({
   AppLanguage language = AppLanguage.en,
+  StudyLevel? level,
   List<GrammarPoint> points = const [],
   int dueCount = 0,
   int ghostCount = 0,
 }) {
+  final levelLabel = level?.shortLabel ?? 'N5';
   return ProviderScope(
     overrides: [
       appLanguageProvider.overrideWith(
         (ref) => AppLanguageController.test(language),
       ),
-      studyLevelProvider.overrideWith(
-        (ref) => null,
-      ), // levelLabel defaults to 'N5'
-      grammarPointsProvider('N5').overrideWith((_) async => points),
+      studyLevelProvider.overrideWith((ref) => level),
+      grammarPointsProvider(levelLabel).overrideWith((_) async => points),
       grammarDueCountProvider.overrideWith((_) async => dueCount),
       grammarGhostCountProvider.overrideWith((_) => Stream.value(ghostCount)),
     ],
@@ -78,10 +79,12 @@ Widget _buildScreen({
 /// GoRouter wrapper for navigation tests.
 Widget _buildRouterScreen({
   AppLanguage language = AppLanguage.en,
+  StudyLevel? level,
   List<GrammarPoint> points = const [],
   int dueCount = 0,
   int ghostCount = 0,
 }) {
+  final levelLabel = level?.shortLabel ?? 'N5';
   final router = GoRouter(
     initialLocation: '/',
     routes: [
@@ -106,8 +109,8 @@ Widget _buildRouterScreen({
       appLanguageProvider.overrideWith(
         (ref) => AppLanguageController.test(language),
       ),
-      studyLevelProvider.overrideWith((ref) => null),
-      grammarPointsProvider('N5').overrideWith((_) async => points),
+      studyLevelProvider.overrideWith((ref) => level),
+      grammarPointsProvider(levelLabel).overrideWith((_) async => points),
       grammarDueCountProvider.overrideWith((_) async => dueCount),
       grammarGhostCountProvider.overrideWith((_) => Stream.value(ghostCount)),
     ],
@@ -270,6 +273,19 @@ void main() {
     await _pump(tester);
 
     expect(find.text('Ngữ pháp'), findsWidgets);
+  });
+
+  testWidgets('shows draft quality note for N3 grammar lane', (tester) async {
+    await tester.pumpWidget(
+      _buildScreen(language: AppLanguage.vi, level: StudyLevel.n3),
+    );
+    await _pump(tester);
+
+    expect(
+      find.byKey(const ValueKey('content_draft_quality_note')),
+      findsOneWidget,
+    );
+    expect(find.textContaining('Nội dung cấp N3+'), findsOneWidget);
   });
 
   testWidgets('JA locale shows Japanese app bar title', (tester) async {

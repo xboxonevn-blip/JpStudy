@@ -16,6 +16,7 @@ import 'package:jpstudy/data/models/vocab_item.dart';
 import 'package:jpstudy/data/repositories/lesson_repository.dart';
 import 'package:jpstudy/data/utils/hajimete_catalog_loader.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
+import 'package:jpstudy/features/content_quality/widgets/content_draft_quality_note.dart';
 import 'package:jpstudy/features/foundations/widgets/foundations_soft_suggest_gate.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
 import 'package:jpstudy/features/vocab/models/vocab_review_args.dart';
