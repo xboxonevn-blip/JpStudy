@@ -103,6 +103,9 @@ These prevent marking the active goal complete:
 8. App Check enforcement proof remains future work. Current docs say enforce
    mode should wait until 1-2 weeks of monitoring.
 
+Operator handoff for these proof gates:
+`docs/compliance/beta-launch-proof-checklist-2026-05-15.md`.
+
 ## Verdict
 
 The implementation and documentation sprints are substantially complete, and

@@ -158,6 +158,8 @@ Active workstream status (as of 2026-05-15):
   Sentry DSN + first issue, secret-backed CI deploy/live smoke/Lighthouse,
   Firebase Storage bucket/rules/CORS migration proof, first executed deletion
   proof, GA4 UI retention proof, and later App Check enforcement proof.
+  Operator handoff checklist:
+  `docs/compliance/beta-launch-proof-checklist-2026-05-15.md`.
 
 ## App Check (reCAPTCHA v3)
 

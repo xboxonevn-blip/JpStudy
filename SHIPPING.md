@@ -19,6 +19,8 @@ Optional beta monitoring secret: `JPSTUDY_SENTRY_DSN`.
    npm run test:storage-rules
    Review docs/compliance/user-data-deletion-runbook.md for current deletion
    and retention launch gaps.
+   Review docs/compliance/beta-launch-proof-checklist-2026-05-15.md for the
+   manual proof gates that still block the mission stopping condition.
 
 3. Build with web App Check enabled:
    flutter build web --release --base-href=/ --dart-define=JPSTUDY_RECAPTCHA_SITE_KEY=$JPSTUDY_RECAPTCHA_SITE_KEY
