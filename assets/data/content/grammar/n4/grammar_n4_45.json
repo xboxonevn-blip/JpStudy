@@ -5,9 +5,14 @@
     "titleEn": "In case/event of ... (場合)",
     "structure": "Thể thông thường / Aな / Nの + 場合は",
     "structureEn": "Plain Form / A-な / N の + 場合は",
-    "explanation": "Trong trường hợp... (Giả định tình huống). * `火事の場合は、逃げてください`: Trong trường hợp hỏa hoạn, hãy chạy thoát thân.",
+    "explanation": "`場合は` dùng khi nêu một tình huống giả định cần xử lý, nghĩa là “trong trường hợp...”. Sắc thái trang trọng hơn `とき` và hay dùng trong hướng dẫn/thông báo.",
+    "explanationViDraft": "Trong trường hợp... (Giả định tình huống). * `火事の場合は、逃げてください`: Trong trường hợp hỏa hoạn, hãy chạy thoát thân.",
     "explanationEn": "In case of ... * `火事の場合は、逃げてください`: In case of fire, please run away.",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 45,
@@ -15,9 +20,14 @@
     "titleEn": "Even though ... (のに - Complaint/Surprise)",
     "structure": "Thể thông thường / Aな / Nな + のに、～",
     "structureEn": "Plain Form / A-な / N-な + のに, ~",
-    "explanation": "Mặc dù ... thế mà ... (Diễn tả sự ngạc nhiên, thất vọng, bất mãn). * `約束をしたのに、彼女は来ませんでした`: Mặc dù đã hẹn rồi thế mà cô ấy không đến.",
+    "explanation": "`のに` nối hai vế trái ngược, thường kèm cảm giác bất ngờ, tiếc, than phiền hoặc không hài lòng của người nói.",
+    "explanationViDraft": "Mặc dù ... thế mà ... (Diễn tả sự ngạc nhiên, thất vọng, bất mãn). * `約束をしたのに、彼女は来ませんでした`: Mặc dù đã hẹn rồi thế mà cô ấy không đến.",
     "explanationEn": "Although ... / Even though ... (Surprise, complaint). * `約束をしたのに、彼女は来ませんでした`: Even though we made a promise, she didn't come.",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 45,
@@ -25,10 +35,14 @@
     "titleEn": "~ when",
     "structure": "Vる / Vた + とき",
     "structureEn": "Vる / Vた + とき",
-    "explanation": "Bổ sung cách phân biệt thời điểm trước và sau hành động.",
+    "explanation": "`Vる + とき` chỉ thời điểm trước hoặc trong khi hành động xảy ra; `Vた + とき` thường chỉ sau khi hành động đã xong. Cặp này giúp nói rõ mốc thời gian.",
+    "explanationViDraft": "Bổ sung cách phân biệt thời điểm trước và sau hành động.",
     "explanationEn": "Adds the before/after timing distinction with とき.",
     "level": "N4",
-    "tags": "quality-upgrade,manual-review-needed"
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 45,
@@ -36,9 +50,13 @@
     "titleEn": "~ even if",
     "structure": "Vて / Aくて / Nでも",
     "structureEn": "Vて / Aくて / Nでも",
-    "explanation": "Diễn tả nhượng bộ.",
+    "explanation": "`ても/でも` diễn tả “dù... cũng...”, khi kết quả vẫn không đổi dù điều kiện ở vế trước xảy ra.",
+    "explanationViDraft": "Diễn tả nhượng bộ.",
     "explanationEn": "Expresses concession.",
     "level": "N4",
-    "tags": "quality-upgrade,manual-review-needed"
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]

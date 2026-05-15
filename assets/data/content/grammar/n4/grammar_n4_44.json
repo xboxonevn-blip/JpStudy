@@ -5,9 +5,14 @@
     "titleEn": "Too much ... (すぎます)",
     "structure": "V (bỏ ます) / A (bỏ い/な) + すぎます",
     "structureEn": "V-stem / A-stem + すぎます",
-    "explanation": "Làm gì đó quá mức, Tính chất quá mức (Thường mang nghĩa không tốt). * `食べすぎます`: Ăn quá nhiều.\n* `このシャツは大きすぎます`: Cái áo này quá to.",
+    "explanation": "`すぎます` diễn tả mức độ vượt quá bình thường, thường mang sắc thái không tốt hoặc cần điều chỉnh. Gắn vào thân `ます` của động từ, tính từ i bỏ `い`, tính từ na bỏ `な`.",
+    "explanationViDraft": "Làm gì đó quá mức, Tính chất quá mức (Thường mang nghĩa không tốt). * `食べすぎます`: Ăn quá nhiều.\n* `このシャツは大きすぎます`: Cái áo này quá to.",
     "explanationEn": "Too much / Excessively. * `食べすぎます`: Eat too much.\n* `このシャツは大きすぎます`: This shirt is too big.",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 44,
@@ -15,9 +20,14 @@
     "titleEn": "Easy / Hard to do (yasui/nikui)",
     "structure": "V (bỏ ます) + やすい / にくい です",
     "structureEn": "V-stem + やすい / にくいです",
-    "explanation": "Dễ làm gì, Khó làm gì. * `このペンは書きやすいです`: Cái bút này dễ viết.\n* `この靴は歩きにくいです`: Đôi giày này khó đi bộ.",
+    "explanation": "`やすい/にくい` gắn vào thân `ます` để nói một việc dễ hoặc khó làm. Chủ ngữ thường là đồ vật, nơi chốn hoặc điều kiện khiến hành động dễ/khó.",
+    "explanationViDraft": "Dễ làm gì, Khó làm gì. * `このペンは書きやすいです`: Cái bút này dễ viết.\n* `この靴は歩きにくいです`: Đôi giày này khó đi bộ.",
     "explanationEn": "Easy to do / Hard to do. * `このペンは書きやすいです`: This pen is easy to write with.\n* `この靴は歩きにくいです`: These shoes are hard to walk in.",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 44,
@@ -25,9 +35,14 @@
     "titleEn": "Make (it) ... (State change)",
     "structure": "Aい->く / Aな->に / N->に + します",
     "structureEn": "A-い -> く / A-な -> に / N -> に + します",
-    "explanation": "Làm biến đổi trạng thái của đối tượng (Làm cho nó trở nên...). * `音を大きくします`: (Tôi) vặn to tiếng lên.\n* `部屋をきれいにします`: (Tôi) dọn phòng cho sạch.",
+    "explanation": "`〜く/〜にします` nói ai đó chủ động làm cho trạng thái thay đổi: làm to lên, làm sạch, hoặc chọn thành một trạng thái nào đó.",
+    "explanationViDraft": "Làm biến đổi trạng thái của đối tượng (Làm cho nó trở nên...). * `音を大きくします`: (Tôi) vặn to tiếng lên.\n* `部屋をきれいにします`: (Tôi) dọn phòng cho sạch.",
     "explanationEn": "Make something ... (Change the state). * `音を大きくします`: I make the sound louder.\n* `部屋をきれいにします`: I clean the room (make it clean).",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 44,
@@ -35,9 +50,13 @@
     "titleEn": "~ become",
     "structure": "Aく / Aなに / Nに + なる",
     "structureEn": "A-く / A-に / N-に + なる",
-    "explanation": "Diễn tả sự thay đổi trạng thái.",
+    "explanation": "`〜く/〜になります` nói trạng thái tự thay đổi hoặc dần trở thành như vậy. Chủ ngữ là thứ thay đổi, không nhấn mạnh người tác động.",
+    "explanationViDraft": "Diễn tả sự thay đổi trạng thái.",
     "explanationEn": "Expresses a change of state.",
     "level": "N4",
-    "tags": "quality-upgrade,manual-review-needed"
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]
