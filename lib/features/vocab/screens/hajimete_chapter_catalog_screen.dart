@@ -741,7 +741,7 @@ String _chapterCountLabel(AppLanguage language, int count) =>
 String _termCountLabel(AppLanguage language, int count) => switch (language) {
   AppLanguage.vi => '$count từ',
   AppLanguage.ja => '$count 語',
-  AppLanguage.en => '$count terms',
+  AppLanguage.en => language.termsCountLabel(count),
 };
 
 String _topicHintLabel(AppLanguage language) => switch (language) {
@@ -803,7 +803,7 @@ String _dueCountLabel(AppLanguage language, int count) => switch (language) {
 String _chapterMeta(AppLanguage language, int count) => switch (language) {
   AppLanguage.vi => '$count mục từ trong chapter này',
   AppLanguage.ja => 'このチャプターに $count 語があります',
-  AppLanguage.en => '$count terms inside this chapter',
+  AppLanguage.en => '${language.termsCountLabel(count)} inside this chapter',
 };
 
 String _chapterChipLabel(AppLanguage language, int chapterId, int entryCount) {
@@ -811,7 +811,8 @@ String _chapterChipLabel(AppLanguage language, int chapterId, int entryCount) {
   return switch (language) {
     AppLanguage.vi => 'Chương $padded • $entryCount từ',
     AppLanguage.ja => 'Chapter $padded • $entryCount 語',
-    AppLanguage.en => 'Chapter $padded • $entryCount terms',
+    AppLanguage.en =>
+      'Chapter $padded • ${language.termsCountLabel(entryCount)}',
   };
 }
 

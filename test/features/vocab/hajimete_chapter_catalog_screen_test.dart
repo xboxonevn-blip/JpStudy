@@ -37,6 +37,19 @@ const _kCatalog = HajimeteChapterCatalog(levelCode: 'N5', chapters: _kChapters);
 
 const _kEmptyCatalog = HajimeteChapterCatalog(levelCode: 'N5', chapters: []);
 
+const _kSingleTermCatalog = HajimeteChapterCatalog(
+  levelCode: 'N5',
+  chapters: [
+    HajimeteChapterSummary(
+      chapterId: 1,
+      title: 'One term',
+      entryCount: 1,
+      previewTerms: ['私'],
+      sourceVocabIds: [],
+    ),
+  ],
+);
+
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
@@ -118,6 +131,18 @@ void main() {
     expect(find.text('2 chapters'), findsWidgets);
     // _termCountLabel(en, 35) = '35 terms'  (15 + 20 = 35 total terms)
     expect(find.text('35 terms'), findsOneWidget);
+  });
+
+  testWidgets('English singular term labels use term not terms', (
+    tester,
+  ) async {
+    _wideViewport(tester);
+    await tester.pumpWidget(_buildScreen(catalog: _kSingleTermCatalog));
+    await _pump(tester);
+
+    expect(find.text('1 term'), findsOneWidget);
+    expect(find.text('1 term inside this chapter'), findsOneWidget);
+    expect(find.text('Chapter 01 • 1 term'), findsOneWidget);
   });
 
   testWidgets('hero card shows level code tag', (tester) async {
