@@ -17,6 +17,14 @@ Required setup:
 - Repository secret `JPSTUDY_RECAPTCHA_SITE_KEY`.
 - Optional repository secret `JPSTUDY_SENTRY_DSN`.
 
+Operator note:
+
+- `firebase login:ci` must be run in an interactive user terminal. A Codex
+  non-interactive attempt on 2026-05-15 returned `Cannot run login:ci in
+  non-interactive mode.`
+- After generating the token, set it as GitHub repository secret
+  `FIREBASE_TOKEN`. Do not paste the token into chat or commit it.
+
 Evidence to record:
 
 - GitHub Actions run URL.
