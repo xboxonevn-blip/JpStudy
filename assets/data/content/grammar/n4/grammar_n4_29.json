@@ -5,9 +5,14 @@
     "titleEn": "State of being (V-ています - Intransitive)",
     "structure": "N が Vて います (Tự động từ)",
     "structureEn": "N が V-ています (Intransitive)",
-    "explanation": "Diễn tả trạng thái kết quả của hành động (thường đi với tự động từ). * `窓が閉まっています`: Cửa sổ đang đóng (Trạng thái đã đóng).",
+    "explanation": "Dùng với tự động từ để nói trạng thái còn lại sau khi một việc đã xảy ra. Ví dụ: cửa sổ đã đóng và hiện đang ở trạng thái đóng.",
+    "explanationViDraft": "Diễn tả trạng thái kết quả của hành động (thường đi với tự động từ). * `窓が閉まっています`: Cửa sổ đang đóng (Trạng thái đã đóng).",
     "explanationEn": "Expresses the state resulting from an action (usually with Intransitive verbs). * `窓が閉まっています`: The window is closed (State).",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 29,
@@ -15,9 +20,14 @@
     "titleEn": "To finish completely / Regret (しまいました)",
     "structure": "Vて しまいました",
     "structureEn": "V-てしまいました",
-    "explanation": "1. Đã hoàn thành xong việc gì.\n2. Lỡ làm gì đó (Hối tiếc, phê phán nhẹ). * `全部読んでしまいました`: Tôi đã đọc xong hết rồi.\n* `パスポートをなくしてしまいました`: Tôi lỡ làm mất hộ chiếu rồi.",
+    "explanation": "`てしまいました` có hai nghĩa chính: làm xong hẳn một việc, hoặc lỡ làm điều gì không mong muốn nên có sắc thái tiếc nuối.",
+    "explanationViDraft": "1. Đã hoàn thành xong việc gì.\n2. Lỡ làm gì đó (Hối tiếc, phê phán nhẹ). * `全部読んでしまいました`: Tôi đã đọc xong hết rồi.\n* `パスポートをなくしてしまいました`: Tôi lỡ làm mất hộ chiếu rồi.",
     "explanationEn": "1. Completed an action completely.\n2. Did something by accident (Regret). * `全部読んでしまいました`: I finished reading it all.\n* `パスポートをなくしてしまいました`: I lost my passport (by mistake).",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 29,
@@ -25,10 +35,14 @@
     "titleEn": "~ ended up doing (casual)",
     "structure": "Vて + ちゃいました / じゃいました",
     "structureEn": "Vて + ちゃいました / じゃいました",
-    "explanation": "Dạng khẩu ngữ của 〜てしまいました.",
+    "explanation": "`ちゃいました` là dạng nói thân mật của `てしまいました`; `でしまいました` thường thành `じゃいました`.",
+    "explanationViDraft": "Dạng khẩu ngữ của 〜てしまいました.",
     "explanationEn": "Casual spoken form of 〜てしまいました.",
     "level": "N4",
-    "tags": "quality-upgrade,manual-review-needed"
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 29,
@@ -36,9 +50,13 @@
     "titleEn": "~ still doing / still in state",
     "structure": "まだ + Vています",
     "structureEn": "まだ + Vています",
-    "explanation": "Diễn tả trạng thái vẫn còn tiếp diễn.",
+    "explanation": "`まだ` đi với `Vています` để nói một hành động hoặc trạng thái vẫn còn tiếp diễn.",
+    "explanationViDraft": "Diễn tả trạng thái vẫn còn tiếp diễn.",
     "explanationEn": "Expresses that a state still continues.",
     "level": "N4",
-    "tags": "quality-upgrade,manual-review-needed"
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]

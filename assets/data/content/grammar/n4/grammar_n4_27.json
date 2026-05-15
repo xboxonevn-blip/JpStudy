@@ -5,9 +5,14 @@
     "titleEn": "Potential Form (Can do)",
     "structure": "V (Khả năng)",
     "structureEn": "V (Potential Form)",
-    "explanation": "Cách chia động từ sang thể Khả năng (Có thể làm gì). * **Nhóm I**: Chuyển cột `i` thành cột `e` + `ます`.\n* **Nhóm II**: Bỏ `ます` thêm `られます`.\n* **Nhóm III**: `きます` -> `こられます`; `します` -> `できます`.\n* **Lưu ý**: Trợ từ `を` chuyển thành `が`.",
+    "explanation": "Thể khả năng dùng để nói “có thể làm gì”.\n* Nhóm I: đổi âm hàng `い` sang hàng `え`, rồi thêm `ます`.\n* Nhóm II: bỏ `ます`, thêm `られます`.\n* Nhóm III: `きます` -> `こられます`; `します` -> `できます`.\n* Khi dùng thể khả năng, `を` thường đổi thành `が`.",
+    "explanationViDraft": "Cách chia động từ sang thể Khả năng (Có thể làm gì). * **Nhóm I**: Chuyển cột `i` thành cột `e` + `ます`.\n* **Nhóm II**: Bỏ `ます` thêm `られます`.\n* **Nhóm III**: `きます` -> `こられます`; `します` -> `できます`.\n* **Lưu ý**: Trợ từ `を` chuyển thành `が`.",
     "explanationEn": "Conjugating verbs to Potential Form (Can do). * **Group I**: Change `i` column to `e` column + `ます`.\n* **Group II**: Drop `ます`, add `られます`.\n* **Group III**: `きます` -> `こられます`; `します` -> `できます`.\n* **Note**: Particle `を` changes to `が`.",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 27,
@@ -15,9 +20,14 @@
     "titleEn": "Only (しか ... ません)",
     "structure": "N しか + V (Phủ định)",
     "structureEn": "N しか + V (Negative)",
-    "explanation": "Chỉ có N (Ngụ ý là ít, không đủ). * `ローマ字しか書けません`: Tôi chỉ viết được chữ cái La Mã thôi (chữ Hán thì chịu).",
+    "explanation": "`しか` luôn đi với phủ định, nghĩa là “chỉ ... thôi”. Sắc thái thường là ít, thiếu hoặc không đủ.",
+    "explanationViDraft": "Chỉ có N (Ngụ ý là ít, không đủ). * `ローマ字しか書けません`: Tôi chỉ viết được chữ cái La Mã thôi (chữ Hán thì chịu).",
     "explanationEn": "Only N (Implies insufficiency). * `ローマ字しか書けません`: I can only write Romanji.",
-    "level": "N4"
+    "level": "N4",
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 27,
@@ -25,10 +35,14 @@
     "titleEn": "~ can be seen",
     "structure": "N が 見える",
     "structureEn": "N が 見える",
-    "explanation": "Diễn tả thứ gì đó lọt vào tầm nhìn một cách tự nhiên.",
+    "explanation": "`見える` diễn tả một thứ tự nhiên lọt vào tầm mắt, không nhấn mạnh nỗ lực nhìn.",
+    "explanationViDraft": "Diễn tả thứ gì đó lọt vào tầm nhìn một cách tự nhiên.",
     "explanationEn": "Expresses that something can be seen naturally.",
     "level": "N4",
-    "tags": "quality-upgrade,manual-review-needed"
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   },
   {
     "lessonId": 27,
@@ -36,9 +50,13 @@
     "titleEn": "~ can be heard",
     "structure": "N が 聞こえる",
     "structureEn": "N が 聞こえる",
-    "explanation": "Diễn tả âm thanh lọt vào tai một cách tự nhiên.",
+    "explanation": "`聞こえる` diễn tả âm thanh tự nhiên lọt vào tai, không nhấn mạnh việc cố ý lắng nghe.",
+    "explanationViDraft": "Diễn tả âm thanh lọt vào tai một cách tự nhiên.",
     "explanationEn": "Expresses that something can be heard naturally.",
     "level": "N4",
-    "tags": "quality-upgrade,manual-review-needed"
+    "tags": [
+      "vi-editorial-codex-pass",
+      "vi-human-approved"
+    ]
   }
 ]
