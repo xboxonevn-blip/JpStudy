@@ -18,7 +18,7 @@ Scope: seeded live `/#/vocab` checks for upper-level catalog availability after 
 | N2 | PASS - Hajimete N2 `1,793 mục từ` open; Shin Kanzen Master N2 `1,797 mục từ` open. |
 | N1 | PASS - Hajimete N1 `3,463 mục từ` open; Shin Kanzen Master N1 `3,476 mục từ` open; N1+ correctly remains `Sắp ra mắt`. |
 
-Updated verdict: the stale upper-vocab live blocker from the earlier addendum is cleared for N3/N2/N1. Broad beta still stays FAIL because public-launch blockers remain outside this catalog slice: GA4 export tables are absent, Sentry has no live DSN/first issue, legal copy is still review-needed, and Storage migration cannot run until Firebase Storage is provisioned.
+Updated verdict: the stale upper-vocab live blocker from the earlier addendum is cleared for N3/N2/N1. Broad beta still stays FAIL because public-launch blockers remain outside this catalog slice: the first GA4 export sample lacks learning-outcome events, Sentry has no live DSN/first issue, legal copy is still review-needed, and Storage migration cannot run until Firebase Storage is provisioned.
 
 ## 2026-05-15 Live Re-Test Addendum
 
