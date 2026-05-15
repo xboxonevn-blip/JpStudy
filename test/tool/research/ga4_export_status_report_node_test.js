@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 
 const {
   buildMarkdownReport,
+  queries,
   summarizeLearningReadiness,
 } = require('../../../tool/research/ga4_export_status_report');
 
@@ -102,4 +103,18 @@ test('summarizeLearningReadiness identifies missing learning gates', () => {
       'session_quality_rated missing',
     ],
   );
+});
+
+test('north star export query scores quiz from app telemetry params', () => {
+  const query = queries({
+    project: 'jpstudy-v2',
+    location: 'asia-southeast1',
+    days: 2,
+  }).northStar;
+
+  assert.match(query, /key = "correct_count"/);
+  assert.match(query, /key = "total_count"/);
+  assert.match(query, /key = "accuracy"/);
+  assert.match(query, /SAFE_DIVIDE\(CAST\(correct_count AS FLOAT64\)/);
+  assert.match(query, /accuracy \* 100/);
 });

@@ -176,6 +176,9 @@ WHERE ${tableFilter}
     COALESCE(user_id, user_pseudo_id) AS uid,
     event_name,
     (SELECT value.int_value FROM UNNEST(event_params) WHERE key = "score") AS score,
+    (SELECT value.int_value FROM UNNEST(event_params) WHERE key = "correct_count") AS correct_count,
+    (SELECT value.int_value FROM UNNEST(event_params) WHERE key = "total_count") AS total_count,
+    (SELECT value.double_value FROM UNNEST(event_params) WHERE key = "accuracy") AS accuracy,
     (SELECT value.int_value FROM UNNEST(event_params) WHERE key = "rating") AS rating
   FROM ${eventsTable}
   WHERE ${tableFilter}
@@ -185,7 +188,16 @@ users AS (
   SELECT
     uid,
     COUNTIF(event_name = "srs_review_completed") AS review_count,
-    MAX(IF(event_name = "n5_micro_quiz_completed" AND score >= 70, 1, 0)) AS quiz_pass,
+    MAX(IF(
+      event_name = "n5_micro_quiz_completed" AND
+      COALESCE(
+        CAST(score AS FLOAT64),
+        accuracy * 100,
+        SAFE_DIVIDE(CAST(correct_count AS FLOAT64), NULLIF(CAST(total_count AS FLOAT64), 0)) * 100
+      ) >= 70,
+      1,
+      0
+    )) AS quiz_pass,
     MAX(IF(event_name = "session_quality_rated" AND rating >= 4, 1, 0)) AS quality_pass
   FROM events
   GROUP BY uid
@@ -379,5 +391,6 @@ if (require.main === module) {
 
 module.exports = {
   buildMarkdownReport,
+  queries,
   summarizeLearningReadiness,
 };
