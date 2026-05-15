@@ -43,13 +43,14 @@ currently unsupported by Firebase Analytics Web.
 5. If no identifier can be recovered, record the limitation and delete only
    data that can be confidently matched.
 
-## Current Identifier Gap
+## Support ID
 
-Anonymous users may not know their Firebase UID. Before public launch, add a
-Data controls action that copies the current support ID (`uid` when signed in,
-otherwise local/app instance identifier if available). Until then, deletion for
-anonymous-only web users can be incomplete if support cannot identify the UID or
-GA identifier.
+Data controls exposes a "Support ID" action for signed-in users, including
+anonymous Firebase users. The action copies the Firebase UID so support can
+target Firebase Auth, Firebase Storage, GA4 `userId`, and BigQuery `user_id`.
+
+If the user cannot open Data controls or no Auth user exists, record the
+limitation and delete only data that can be confidently matched.
 
 ## Procedure
 
@@ -201,5 +202,5 @@ retention.
 - Firebase Storage bucket/rules/CORS setup is still blocked by Console setup.
 - GA4 BigQuery dataset `analytics_536663906` is still absent.
 - GA4 retention setting needs Console proof.
-- Anonymous users need an in-app support ID copy action.
+- Live support ID copy flow needs beta verification on `https://jpstudy.web.app`.
 - Privacy/Terms copy still needs human/legal review.

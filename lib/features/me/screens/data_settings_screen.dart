@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/services.dart';
 import 'package:jpstudy/core/services/cloud_sync_service.dart';
 
 import 'package:jpstudy/app/theme/app_breakpoints.dart';
@@ -327,6 +328,15 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
           ),
           if (user != null) ...[
             const SizedBox(height: AppSpacing.md),
+            _ActionTile(
+              icon: Icons.badge_outlined,
+              title: language.supportIdLabel,
+              subtitle: language.supportIdBody(user.uid),
+              onTap: settings.isReady
+                  ? () => _copySupportId(user.uid, language)
+                  : null,
+            ),
+            const SizedBox(height: AppSpacing.md),
             Wrap(
               spacing: AppSpacing.sm,
               runSpacing: AppSpacing.sm,
@@ -476,6 +486,14 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  Future<void> _copySupportId(String uid, AppLanguage language) async {
+    await Clipboard.setData(ClipboardData(text: uid));
+    if (!mounted) return;
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(language.supportIdCopiedLabel)));
   }
 
   String _formatTime(TimeOfDay time) {

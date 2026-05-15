@@ -859,6 +859,39 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get supportIdLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Support ID';
+      case AppLanguage.vi:
+        return 'Mã hỗ trợ';
+      case AppLanguage.ja:
+        return 'サポートID';
+    }
+  }
+
+  String supportIdBody(String uid) {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Use this ID for support or data deletion requests: $uid';
+      case AppLanguage.vi:
+        return 'Dùng mã này khi cần hỗ trợ hoặc yêu cầu xóa dữ liệu: $uid';
+      case AppLanguage.ja:
+        return 'サポートやデータ削除依頼にこのIDを使います: $uid';
+    }
+  }
+
+  String get supportIdCopiedLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Support ID copied.';
+      case AppLanguage.vi:
+        return 'Đã sao chép mã hỗ trợ.';
+      case AppLanguage.ja:
+        return 'サポートIDをコピーしました。';
+    }
+  }
+
   String mcqResultAnnouncement({
     required bool isCorrect,
     required String correctAnswer,

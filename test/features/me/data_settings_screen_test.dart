@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:jpstudy/core/app_language.dart';
@@ -271,6 +272,49 @@ void main() {
       find.widgetWithText(SwitchListTile, 'Auto-upload to cloud'),
     );
     expect(tile.value, isTrue);
+  });
+
+  testWidgets('copies support ID for deletion support requests', (
+    tester,
+  ) async {
+    final clipboardCalls = <MethodCall>[];
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+      SystemChannels.platform,
+      (call) async {
+        if (call.method == 'Clipboard.setData') {
+          clipboardCalls.add(call);
+        }
+        return null;
+      },
+    );
+    addTearDown(
+      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        SystemChannels.platform,
+        null,
+      ),
+    );
+
+    await tester.pumpWidget(
+      buildScreen(
+        signedInUser: const AuthUser(uid: 'uid-1', email: 'user@example.com'),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Support ID'), findsOneWidget);
+    expect(
+      find.text('Use this ID for support or data deletion requests: uid-1'),
+      findsOneWidget,
+    );
+
+    await tester.ensureVisible(find.text('Support ID'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Support ID'));
+    await tester.pumpAndSettle();
+
+    expect(clipboardCalls, hasLength(1));
+    expect(clipboardCalls.single.arguments, {'text': 'uid-1'});
+    expect(find.text('Support ID copied.'), findsOneWidget);
   });
 
   testWidgets('resets analytics data on this device after confirmation', (
