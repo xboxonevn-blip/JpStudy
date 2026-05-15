@@ -2,6 +2,7 @@ import 'package:drift/native.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
@@ -128,6 +129,12 @@ void main() {
     await tester.pumpWidget(buildScreen(db, cdb, repo: repo, level: null));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
+
+    final deleteSize = tester.getSize(
+      find.byKey(const ValueKey('mistake_delete_button_kanji_1')),
+    );
+    expect(deleteSize.width, greaterThanOrEqualTo(AppTouchTargets.min));
+    expect(deleteSize.height, greaterThanOrEqualTo(AppTouchTargets.min));
 
     await tester.tap(find.text('Practice Kanji (1)'));
     await tester.pump();

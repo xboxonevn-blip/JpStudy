@@ -110,8 +110,9 @@ class GlobalTopBar extends ConsumerWidget {
               _LanguagePicker(currentLang: currentLang, compact: compact),
               SizedBox(width: controlGap),
               Container(
-                width: compact ? 36 : 40,
-                height: compact ? 36 : 40,
+                key: const ValueKey('global_notifications_touch_target'),
+                width: AppTouchTargets.min,
+                height: AppTouchTargets.min,
                 decoration: BoxDecoration(
                   color: palette.elevated,
                   borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
@@ -123,12 +124,10 @@ class GlobalTopBar extends ConsumerWidget {
                   tooltip: _notificationsTooltip(currentLang),
                   padding: EdgeInsets.zero,
                   constraints: BoxConstraints.tightFor(
-                    width: compact ? 36 : 40,
-                    height: compact ? 36 : 40,
+                    width: AppTouchTargets.min,
+                    height: AppTouchTargets.min,
                   ),
-                  visualDensity: compact
-                      ? VisualDensity.compact
-                      : VisualDensity.standard,
+                  visualDensity: VisualDensity.standard,
                   onPressed: () {},
                 ),
               ),

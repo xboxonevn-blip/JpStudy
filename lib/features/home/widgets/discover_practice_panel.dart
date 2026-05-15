@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/accessibility/reduced_motion.dart';
 import 'package:jpstudy/core/app_language.dart';
@@ -172,6 +173,7 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
                       ),
                       SizedBox(width: widget.dense ? 2 : 4),
                       IconButton(
+                        key: const ValueKey('discover_reorder_button'),
                         tooltip: _reorderTooltipLabel(language),
                         onPressed: orderedTiles.isEmpty
                             ? null
@@ -185,12 +187,9 @@ class _DiscoverPracticePanelState extends ConsumerState<DiscoverPracticePanel> {
                         ),
                         color: palette.ink.withValues(alpha: 0.7),
                         style: IconButton.styleFrom(
-                          minimumSize: Size(
-                            widget.dense ? 28 : 34,
-                            widget.dense ? 28 : 34,
-                          ),
+                          minimumSize: const Size.square(AppTouchTargets.min),
                           padding: EdgeInsets.zero,
-                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          tapTargetSize: MaterialTapTargetSize.padded,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
                               widget.dense ? 8 : 10,
@@ -464,43 +463,54 @@ class _FocusChip extends StatelessWidget {
     final palette = context.appPalette;
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: compact ? 6 : 8,
-          vertical: compact ? 3 : 5,
+      behavior: HitTestBehavior.opaque,
+      child: ConstrainedBox(
+        key: const ValueKey('discover_focus_chip_touch_target'),
+        constraints: const BoxConstraints(
+          minWidth: AppTouchTargets.min,
+          minHeight: AppTouchTargets.min,
         ),
-        decoration: BoxDecoration(
-          color: enabled
-              ? palette.warning.withValues(alpha: 0.18)
-              : palette.surface,
-          borderRadius: BorderRadius.circular(999),
-          border: Border.all(
-            color: enabled ? palette.warning : palette.outline,
-          ),
-        ),
-        child: Row(
-          children: [
-            Icon(
-              Icons.filter_alt_rounded,
-              size: compact ? 11 : 13,
-              color: enabled
-                  ? palette.warning
-                  : palette.ink.withValues(alpha: 0.55),
+        child: Center(
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: compact ? 6 : 8,
+              vertical: compact ? 3 : 5,
             ),
-            if (!compact) ...[
-              const SizedBox(width: 4),
-              Text(
-                label,
-                style: TextStyle(
+            decoration: BoxDecoration(
+              color: enabled
+                  ? palette.warning.withValues(alpha: 0.18)
+                  : palette.surface,
+              borderRadius: BorderRadius.circular(999),
+              border: Border.all(
+                color: enabled ? palette.warning : palette.outline,
+              ),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.filter_alt_rounded,
+                  size: compact ? 11 : 13,
                   color: enabled
                       ? palette.warning
-                      : palette.ink.withValues(alpha: 0.7),
-                  fontSize: 11,
-                  fontWeight: FontWeight.w800,
+                      : palette.ink.withValues(alpha: 0.55),
                 ),
-              ),
-            ],
-          ],
+                if (!compact) ...[
+                  const SizedBox(width: 4),
+                  Text(
+                    label,
+                    style: TextStyle(
+                      color: enabled
+                          ? palette.warning
+                          : palette.ink.withValues(alpha: 0.7),
+                      fontSize: 11,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
         ),
       ),
     );

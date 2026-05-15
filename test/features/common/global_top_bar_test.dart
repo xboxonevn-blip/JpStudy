@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/core/app_language.dart';
 import 'package:jpstudy/core/auth/auth_provider.dart';
 import 'package:jpstudy/core/auth/auth_user.dart';
@@ -65,5 +66,23 @@ void main() {
 
     expect(find.byTooltip('言語を選択'), findsOneWidget);
     expect(find.byTooltip('通知'), findsOneWidget);
+  });
+
+  testWidgets('notifications control keeps a 44px touch target', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(390, 844);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(_wrap(AppLanguage.en));
+    await tester.pumpAndSettle();
+
+    final size = tester.getSize(
+      find.byKey(const ValueKey('global_notifications_touch_target')),
+    );
+    expect(size.width, greaterThanOrEqualTo(AppTouchTargets.min));
+    expect(size.height, greaterThanOrEqualTo(AppTouchTargets.min));
   });
 }

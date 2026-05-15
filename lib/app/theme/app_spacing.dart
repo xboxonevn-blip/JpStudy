@@ -60,3 +60,8 @@ abstract final class AppSpacing {
   /// 999 px — fully rounded (pills, circular badges)
   static const double radiusPill = 999;
 }
+
+abstract final class AppTouchTargets {
+  /// Minimum active touch target for mobile/tablet controls.
+  static const double min = 44;
+}

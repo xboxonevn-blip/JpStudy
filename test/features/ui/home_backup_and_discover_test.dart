@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/features/grammar/grammar_providers.dart';
 import 'package:jpstudy/features/home/providers/backup_status_provider.dart';
 import 'package:jpstudy/features/home/providers/dashboard_provider.dart';
@@ -80,5 +81,40 @@ void main() {
           .crossFadeState,
       CrossFadeState.showFirst,
     );
+  });
+
+  testWidgets('dense discover controls keep 44px touch targets', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          dashboardProvider.overrideWith((_) => Stream.value(buildDashboard())),
+          grammarGhostCountProvider.overrideWith((_) async* {
+            yield 0;
+          }),
+        ],
+        child: const MaterialApp(
+          home: Scaffold(
+            body: SingleChildScrollView(
+              child: DiscoverPracticePanel(dense: true),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+
+    final focusSize = tester.getSize(
+      find.byKey(const ValueKey('discover_focus_chip_touch_target')),
+    );
+    final reorderSize = tester.getSize(
+      find.byKey(const ValueKey('discover_reorder_button')),
+    );
+    expect(focusSize.width, greaterThanOrEqualTo(AppTouchTargets.min));
+    expect(focusSize.height, greaterThanOrEqualTo(AppTouchTargets.min));
+    expect(reorderSize.width, greaterThanOrEqualTo(AppTouchTargets.min));
+    expect(reorderSize.height, greaterThanOrEqualTo(AppTouchTargets.min));
   });
 }

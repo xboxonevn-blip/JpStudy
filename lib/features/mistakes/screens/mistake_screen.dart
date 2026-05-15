@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:jpstudy/app/navigation/app_navigation_extensions.dart';
+import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import '../../../core/app_language.dart';
 import '../../../core/language_provider.dart';
@@ -228,14 +229,17 @@ class _MistakeScreenState extends ConsumerState<MistakeScreen> {
                                         ),
                                       ),
                                       IconButton(
+                                        key: ValueKey(
+                                          'mistake_delete_button_${mistake.type}_${mistake.itemId}',
+                                        ),
                                         icon: const Icon(
                                           Icons.delete_outline,
                                           size: 20,
                                         ),
                                         padding: const EdgeInsets.all(8),
                                         constraints: const BoxConstraints(
-                                          minWidth: 36,
-                                          minHeight: 36,
+                                          minWidth: AppTouchTargets.min,
+                                          minHeight: AppTouchTargets.min,
                                         ),
                                         onPressed: () {
                                           repo.removeMistake(
