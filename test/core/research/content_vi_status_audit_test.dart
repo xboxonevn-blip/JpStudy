@@ -29,6 +29,13 @@ void main() {
                   'tags': ['vi-editorial-approved'],
                   'sense': {'meaningVi': 'da duyet'},
                 },
+                {
+                  'tags': [
+                    'vi-editorial-codex-pass',
+                    'vi-human-approved',
+                  ],
+                  'sense': {'meaningVi': 'da duyet boi user'},
+                },
               ],
             }),
           ),
@@ -44,7 +51,7 @@ void main() {
               'level': 'N2',
               'examples': [
                 {
-                  'tags': ['needs-vi-editorial', 'needs-human-review'],
+                  'tags': ['vi-needs-review', 'needs-human-review'],
                   'translationViDraft': 'draft',
                 },
               ],
@@ -60,7 +67,7 @@ void main() {
           (file) => file.writeAsString(
             jsonEncode([
               {
-                'tags': 'machine-translated-vi,vi-editorial-approved',
+                'tags': 'vi-machine-draft,vi-editorial-approved',
                 'explanationViStatus': 'approved-by-user',
               },
             ]),
@@ -72,11 +79,12 @@ void main() {
     );
 
     expect(report.filesScanned, 3);
-    expect(report.totalItems, 4);
-    expect(report.level('N1').items, 3);
+    expect(report.totalItems, 5);
+    expect(report.level('N1').items, 4);
     expect(report.level('N1').machineTranslatedItems, 2);
-    expect(report.level('N1').approvedItems, 2);
+    expect(report.level('N1').approvedItems, 3);
     expect(report.level('N2').openReviewItems, 1);
+    expect(report.dataset('grammar_examples').needsViEditorialItems, 1);
     expect(report.dataset('grammar_examples').needsHumanReviewItems, 1);
     expect(report.filesWithOpenReview, 1);
   });

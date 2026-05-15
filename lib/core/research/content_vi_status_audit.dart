@@ -397,12 +397,18 @@ Map<String, Object?> _withInheritedTags(
 _ContentViItemStatus _statusFor(Map<String, Object?> item) {
   final tags = _tagsFrom(item).toSet();
   return _ContentViItemStatus(
-    machineTranslated: tags.contains('machine-translated-vi'),
-    needsViEditorial: tags.contains('needs-vi-editorial'),
+    machineTranslated:
+        tags.contains('machine-translated-vi') ||
+        tags.contains('vi-machine-draft'),
+    needsViEditorial:
+        tags.contains('needs-vi-editorial') ||
+        tags.contains('vi-needs-review'),
     needsHumanReview:
         tags.contains('needs-human-review') ||
         tags.contains('manual-review-needed'),
     approved:
+        tags.contains('vi-human-approved') ||
+        tags.contains('vi-editorial-codex-pass') ||
         tags.contains('vi-editorial-approved') ||
         tags.contains('human-reviewed') ||
         tags.contains('kanji-metadata-approved') ||
