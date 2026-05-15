@@ -109,9 +109,22 @@ jobs:
           if [[ -z "${FIREBASE_TOKEN}" || -z "${JPSTUDY_RECAPTCHA_SITE_KEY}" ]]; then
             echo "enabled=false" >> "${GITHUB_OUTPUT}"
             echo "::warning title=Deploy skipped::Set FIREBASE_TOKEN and JPSTUDY_RECAPTCHA_SITE_KEY repository secrets to enable Firebase Hosting deploy."
+            {
+              echo "### Firebase Hosting deploy skipped"
+              echo ""
+              echo "The CI validation jobs passed, but this run did not build, deploy, smoke-test, or Lighthouse-check production Hosting."
+              echo ""
+              echo "Set repository secrets \`FIREBASE_TOKEN\` and \`JPSTUDY_RECAPTCHA_SITE_KEY\` to enable the real deploy path."
+              echo "Use \`docs/compliance/beta-launch-proof-checklist-2026-05-15.md\` for the required launch proof."
+            } >> "${GITHUB_STEP_SUMMARY}"
             exit 0
           fi
           echo "enabled=true" >> "${GITHUB_OUTPUT}"
+          {
+            echo "### Firebase Hosting deploy enabled"
+            echo ""
+            echo "Required deploy secrets are present. This run will build, deploy, smoke-test, and Lighthouse-check \`hosting:jpstudy\`."
+          } >> "${GITHUB_STEP_SUMMARY}"
 
       - uses: actions/checkout@v4
         if: steps.deploy_gate.outputs.enabled == 'true'
