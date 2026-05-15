@@ -4,11 +4,14 @@
 
 JpStudy-v2 is not ready for a broad 100-user mixed N5-N1 beta.
 
-It is ready for the next controlled gate: a 5-10 learner pilot after one fresh
-secret-backed deploy proves the current `main` is live on `https://jpstudy.web.app`,
-legacy `https://jpstudy-v2.web.app` remains `404`, CI stays green, and live
-route/resource/Lighthouse probes pass. Recruit N5/N4 first, then add scoped
-N3/N2 testers only after upper vocab availability and review queues are
+It is ready for the next controlled gate: a 5-10 learner pilot after the
+remaining ops blockers are closed. A fresh manual deploy of `3ae2ded9` proved
+the current `main` can serve on `https://jpstudy.web.app`, legacy
+`https://jpstudy-v2.web.app` remains `404`, CI is green, and live
+resource/Lighthouse probes pass. Remaining blockers before the pilot are
+server-side Anonymous Auth enablement, the first secret-backed GitHub deploy
+run, and real Sentry/GA4 operational proof. Recruit N5/N4 first, then add
+scoped N3/N2 testers only after upper vocab availability and review queues are
 verified on production.
 
 ## Highest-Leverage Findings Shipped
@@ -73,12 +76,15 @@ verified on production.
 
 Run a post-deploy beta-readiness cycle:
 
-1. Configure GitHub secrets: `FIREBASE_TOKEN`, `JPSTUDY_RECAPTCHA_SITE_KEY`,
+1. Enable Firebase Anonymous Auth provider for project `jpstudy-v2`, then
+   verify live `accounts:signUp` returns `200` instead of
+   `ADMIN_ONLY_OPERATION`.
+2. Configure GitHub secrets: `FIREBASE_TOKEN`, `JPSTUDY_RECAPTCHA_SITE_KEY`,
    and optional `JPSTUDY_SENTRY_DSN`.
-2. Push a secret-backed deploy through CI and capture live evidence for primary
-   `200`, legacy `404`, route smoke, resource smoke, and Lighthouse.
-3. Recheck GA4 BigQuery dataset existence and run the first real NS/SM1 query
+3. Push a secret-backed deploy through CI and capture automated evidence for
+   primary `200`, legacy `404`, route smoke, resource smoke, and Lighthouse.
+4. Recheck GA4 BigQuery dataset existence and run the first real NS/SM1 query
    if `analytics_536663906.events_*` exists.
-4. Run a narrow live UAT matrix for N5/N4 plus one N3/N2 path after deployment.
-5. Decide pilot scope: N5/N4 controlled pilot, or delay until upper-level
+5. Run a narrow live UAT matrix for N5/N4 plus one N3/N2 path after deployment.
+6. Decide pilot scope: N5/N4 controlled pilot, or delay until upper-level
    vocab queues and advanced-reader discovery are production-proven.

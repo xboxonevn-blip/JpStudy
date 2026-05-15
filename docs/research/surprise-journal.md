@@ -317,3 +317,11 @@
 - Delta: +45 percentage points on confidence that Phase 13 can ship without adding onboarding friction.
 - Updated belief: identity foundation and account-upgrade UX are separate phases. The app can establish a private UID now, then add soft upgrade/linking later.
 - New hypothesis: once live App Check + anonymous Auth are verified, Storage-backed safety nets can cover more beta data without forcing sign-in.
+
+## 2026-05-15T08:20:00+07:00 - Live Auth proof depends on server-side provider state
+
+- Prior belief: after source wiring and an App Check-keyed deploy, anonymous Auth would likely work unless network/App Check failed.
+- Actual observation: live `accounts:signUp` reaches Identity Toolkit with the allowed referrer but returns `400 ADMIN_ONLY_OPERATION`; browser network and REST probes agree, so Firebase Anonymous provider is disabled server-side.
+- Delta: -60 percentage points on confidence that SP7 is operational from source changes alone; +60 percentage points that Firebase Console provider state must be an explicit release gate.
+- Updated belief: "auth source wired" and "Auth provider enabled" are separate launch proofs. The app's local-only fallback protects boot, but it does not prove identity/migration readiness.
+- New hypothesis: enabling Anonymous provider in Firebase Console should remove the live console error and allow Storage migration verification without any code change.
