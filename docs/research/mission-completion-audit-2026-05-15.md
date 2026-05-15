@@ -1,6 +1,6 @@
 # Mission Completion Audit - 2026-05-15
 
-Timestamp: `2026-05-15T16:52:31+07:00`
+Timestamp: `2026-05-15T18:31:36+07:00`
 
 Objective source: `C:\Users\xboxo\Desktop\PC\Goals JP study.txt`
 
@@ -33,8 +33,8 @@ The goal is complete only when all of these are true:
 | T4 textbook coverage docs | `5a062215 docs(content): document textbook coverage constraints`; `docs/CONTENT_COVERAGE.md` | Passed |
 | SP2 persona retest | `docs/research/D4-persona-synthesis.md` says P2-P5 pass for route/gate/catalog checks; broad beta still fail due ops/legal blockers | Partially passed |
 | SP4 Privacy/Terms route/link surface | `lib/features/legal/legal_document_screen.dart`; tests include `/privacy`, `/terms`, onboarding, settings/data, login links; `docs/research/README.md` marks copy as review-needed draft | Source passed; legal approval missing |
-| SP5 Sentry source wiring | `3c27e46f feat(observability): add Sentry web error monitoring`, `7a279bcb fix(observability): allow Sentry ingest in CSP`, `pubspec.yaml` has `sentry_flutter`, docs record optional DSN | Source passed; real DSN and first issue proof missing |
-| SP6 CI/CD | `.github/workflows/ui-string-guard.yml` runs UI guard, analyze, test, web build, perf budget, resource smoke, storage rules, and gated deploy job; run `25911033019` completed a real secret-backed deploy/live-smoke/Lighthouse path on `main` | Passed |
+| SP5 Sentry source wiring | `3c27e46f feat(observability): add Sentry web error monitoring`, `7a279bcb fix(observability): allow Sentry ingest in CSP`, `5a19cd80 feat(observability): add sentry smoke event trigger`, `pubspec.yaml` has `sentry_flutter`, docs record optional DSN | Source passed; real DSN and first issue proof missing |
+| SP6 CI/CD | `.github/workflows/ui-string-guard.yml` runs UI guard, analyze, test, web build, perf budget, resource smoke, storage rules, and gated deploy job; run `25914760009` completed a real secret-backed deploy/live-smoke/Lighthouse path on `main` | Passed |
 | SP7 anonymous auth | `ee711bf3 feat(auth): add anonymous auth bootstrap`, `lib/core/auth/anonymous_auth_service.dart`, `storage.rules`, `docs/research/D8-compliance/Q8.7-analysis.md` | Source/live auth passed; Storage migration proof blocked by missing bucket/setup |
 | T5 textbook roadmap | `63163f4d feat(roadmap): model textbook-aligned phases per level`, `828d84a4 feat(roadmap): show textbook phases on learning path`, roadmap tests | Passed |
 | T6 radical header mojibake | `2c452da4 fix(kanji): migrate radical group headers to i18n`; string guard remains 0 candidates | Passed |
@@ -72,7 +72,7 @@ Local commands run during the completion audit:
 GitHub Actions summary:
 
 - Current source gates pass on `main`. Latest verified run:
-  `25911033019` on `8eef59f7`.
+  `25914760009` on `5a19cd80`.
 - `ui-string-guard`, `firebase-security-rules`, and `deploy-hosting` all
   completed with `success`.
 - `deploy-hosting` ran the real secret-backed path: production web build,
@@ -86,12 +86,15 @@ These prevent marking the active goal complete:
 1. Legal approval is still missing. `/privacy` and `/terms` are implemented and
    tested, but docs still mark the copy as `review-needed draft`.
 2. Sentry is source-wired but not operationally proven. A real
-   `JPSTUDY_SENTRY_DSN` and first deployed issue URL are still missing.
+   `JPSTUDY_SENTRY_DSN` and first deployed issue URL are still missing. Recheck
+   on `2026-05-15T18:31+07:00` found repository Actions secrets
+   `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, but no
+   `JPSTUDY_SENTRY_DSN`.
 3. Firebase Storage migration remains blocked. Anonymous Auth works, but the
    Storage bucket/rules/CORS path is not provisioned/proven, so
    `JPSTUDY_ENABLE_LEGACY_STORAGE_MIGRATION` must stay unset/false. A
    2026-05-15 `firebase deploy --only storage --project jpstudy-v2 --dry-run`
-   check still reports that Firebase Storage has not been set up on the
+   recheck still reports that Firebase Storage has not been set up on the
    project.
 4. First executed deletion runbook proof is missing. The runbook and Support ID
    surface exist, but no real deletion request has been executed end to end.

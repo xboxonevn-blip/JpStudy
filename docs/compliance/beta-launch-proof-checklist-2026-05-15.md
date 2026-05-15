@@ -8,7 +8,7 @@ Primary app URL: `https://jpstudy.web.app`
 
 ## 1. GitHub Actions Secret-Backed Deploy
 
-Status: completed on `main` for commit `a8194266`.
+Status: completed on `main`; latest re-confirmed on commit `5a19cd80`.
 
 Goal: prove `deploy-hosting` performs a real build/deploy/live-smoke/Lighthouse
 run on `main`, not only the skip-safe wrapper.
@@ -29,7 +29,7 @@ Operator note:
 Evidence recorded:
 
 - GitHub Actions run URL:
-  `https://github.com/xboxonevn-blip/JpStudy/actions/runs/25912786589`
+  `https://github.com/xboxonevn-blip/JpStudy/actions/runs/25914760009`
 - `deploy-hosting` job step list shows these steps `success`, not
   `skipped`:
   - `Build web for production`
@@ -45,6 +45,14 @@ Evidence recorded:
 ## 2. Sentry First-Issue Proof
 
 Goal: prove source-wired Sentry is operational in a deployed web build.
+
+Current status:
+
+- Source wiring and the disabled-by-default smoke trigger are deployed on
+  `main` (`5a19cd80`).
+- Repository Actions secrets rechecked on `2026-05-15T18:31+07:00` include
+  `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, but not
+  `JPSTUDY_SENTRY_DSN`.
 
 Required setup:
 
@@ -69,6 +77,12 @@ Evidence to record:
 
 Goal: prove anonymous Auth plus Storage rules can write the legacy migration
 payload before enabling automatic migration.
+
+Current status:
+
+- Recheck on `2026-05-15T18:31+07:00`:
+  `firebase deploy --only storage --project jpstudy-v2 --dry-run` still fails
+  because Firebase Storage has not been set up for project `jpstudy-v2`.
 
 Required setup:
 
