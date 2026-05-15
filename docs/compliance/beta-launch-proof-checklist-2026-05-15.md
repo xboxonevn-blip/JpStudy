@@ -8,7 +8,7 @@ Primary app URL: `https://jpstudy.web.app`
 
 ## 1. GitHub Actions Secret-Backed Deploy
 
-Status: completed on `main`; latest re-confirmed on commit `ebb425a9`.
+Status: completed on `main`; latest re-confirmed on commit `316f80c8`.
 
 Goal: prove `deploy-hosting` performs a real build/deploy/live-smoke/Lighthouse
 run on `main`, not only the skip-safe wrapper.
@@ -29,7 +29,7 @@ Operator note:
 Evidence recorded:
 
 - GitHub Actions run URL:
-  `https://github.com/xboxonevn-blip/JpStudy/actions/runs/25930999698`
+  `https://github.com/xboxonevn-blip/JpStudy/actions/runs/25933463058`
 - `deploy-hosting` job step list shows these steps `success`, not
   `skipped`:
   - `Build web for production`
@@ -49,7 +49,7 @@ Goal: prove source-wired Sentry is operational in a deployed web build.
 Current status:
 
 - Source wiring and the disabled-by-default smoke trigger are deployed on
-  `main`; latest CI/deploy proof is `ebb425a9`.
+  `main`; latest CI/deploy proof is `316f80c8`.
 - Manual CI smoke path is available through GitHub Actions `workflow_dispatch`
   input `sentry_smoke=true`. When `JPSTUDY_SENTRY_DSN` is present, the workflow
   builds with `JPSTUDY_SENTRY_SMOKE_EVENT=true`, deploys, and opens
@@ -84,7 +84,7 @@ payload before enabling automatic migration.
 
 Current status:
 
-- Recheck on `2026-05-15T18:31+07:00`:
+- Recheck on `2026-05-16T01:19+07:00`:
   `firebase deploy --only storage --project jpstudy-v2 --dry-run` still fails
   because Firebase Storage has not been set up for project `jpstudy-v2`.
 
@@ -151,7 +151,7 @@ Evidence to record:
   (`analyticsadmin.googleapis.com`) for project `129949648924`, grant the
   service account Analytics read access, then probe
   `properties/536663906/dataRetentionSettings`.
-- Codex rechecked the source-verifiable path on `2026-05-16T00:28+07:00`.
+- Codex rechecked the source-verifiable path on `2026-05-16T01:19+07:00`.
   The GA4 Admin probe still returns `403` because the Admin API is disabled,
   and the service account also receives `403 PERMISSION_DENIED` from Service
   Usage when checking that API state. Owner Console/API action is still needed.

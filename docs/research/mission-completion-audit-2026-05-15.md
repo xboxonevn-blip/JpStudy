@@ -34,7 +34,7 @@ The goal is complete only when all of these are true:
 | SP2 persona retest | `docs/research/D4-persona-synthesis.md` says P2-P5 pass for route/gate/catalog checks; broad beta still fail due ops/legal blockers | Partially passed |
 | SP4 Privacy/Terms route/link surface | `lib/features/legal/legal_document_screen.dart`; tests include `/privacy`, `/terms`, onboarding, settings/data, login links; `docs/research/README.md` marks copy as review-needed draft | Source passed; legal approval missing |
 | SP5 Sentry source wiring | `3c27e46f feat(observability): add Sentry web error monitoring`, `7a279bcb fix(observability): allow Sentry ingest in CSP`, `5a19cd80 feat(observability): add sentry smoke event trigger`, `pubspec.yaml` has `sentry_flutter`, docs record optional DSN | Source passed; real DSN and first issue proof missing |
-| SP6 CI/CD | `.github/workflows/ui-string-guard.yml` runs UI guard, analyze, test, web build, perf budget, resource smoke, storage rules, and gated deploy job; run `25930999698` completed a real secret-backed deploy/live-smoke/Lighthouse path on `main` | Passed |
+| SP6 CI/CD | `.github/workflows/ui-string-guard.yml` runs UI guard, analyze, test, web build, perf budget, resource smoke, storage rules, and gated deploy job; run `25933463058` completed a real secret-backed deploy/live-smoke/Lighthouse path on `main` | Passed |
 | SP7 anonymous auth | `ee711bf3 feat(auth): add anonymous auth bootstrap`, `lib/core/auth/anonymous_auth_service.dart`, `storage.rules`, `docs/research/D8-compliance/Q8.7-analysis.md` | Source/live auth passed; Storage migration proof blocked by missing bucket/setup |
 | T5 textbook roadmap | `63163f4d feat(roadmap): model textbook-aligned phases per level`, `828d84a4 feat(roadmap): show textbook phases on learning path`, roadmap tests | Passed |
 | T6 radical header mojibake | `2c452da4 fix(kanji): migrate radical group headers to i18n`; string guard remains 0 candidates | Passed |
@@ -72,7 +72,7 @@ Local commands run during the completion audit:
 GitHub Actions summary:
 
 - Current source gates pass on `main`. Latest verified run:
-  `25930999698` on `ebb425a9`.
+  `25933463058` on `316f80c8`.
 - `ui-string-guard`, `firebase-security-rules`, and `deploy-hosting` all
   completed with `success`.
 - `deploy-hosting` ran the real secret-backed path: production web build,
@@ -93,7 +93,7 @@ These prevent marking the active goal complete:
 3. Firebase Storage migration remains blocked. Anonymous Auth works, but the
    Storage bucket/rules/CORS path is not provisioned/proven, so
    `JPSTUDY_ENABLE_LEGACY_STORAGE_MIGRATION` must stay unset/false. A
-   2026-05-15 `firebase deploy --only storage --project jpstudy-v2 --dry-run`
+   2026-05-16 `firebase deploy --only storage --project jpstudy-v2 --dry-run`
    recheck still reports that Firebase Storage has not been set up on the
    project.
 4. First executed deletion runbook proof is missing. The runbook and Support ID
@@ -103,7 +103,8 @@ These prevent marking the active goal complete:
    evidence or a console proof. A 2026-05-15 Admin API probe against
    `properties/536663906/dataRetentionSettings` returned `403
    SERVICE_DISABLED` because `analyticsadmin.googleapis.com` is not enabled for
-   project `129949648924`. A 2026-05-16 Service Usage probe with the current
+   project `129949648924`. A 2026-05-16T01:19+07:00 recheck still returns the
+   same `403`; a 2026-05-16 Service Usage probe with the current
    service account also returned `403 PERMISSION_DENIED`, so Codex cannot enable
    or verify that API state from the current credentials.
 6. Real GA4 learning outcome sample is incomplete. BigQuery export exists, but
