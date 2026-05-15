@@ -6,6 +6,8 @@ import 'package:jpstudy/app/theme/app_breakpoints.dart';
 import 'package:jpstudy/app/theme/app_spacing.dart';
 import 'package:jpstudy/app/theme/app_theme_palette.dart';
 import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/analytics/analytics_provider.dart';
+import 'package:jpstudy/core/analytics/analytics_service.dart';
 import 'package:jpstudy/core/auth/auth_provider.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/features/common/widgets/compact_ui.dart';
@@ -276,6 +278,15 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
         ],
       ),
     );
+    final analyticsSection = _SectionCard(
+      title: language.analyticsDataSectionTitle,
+      child: _ActionTile(
+        icon: Icons.analytics_outlined,
+        title: language.analyticsResetDeviceLabel,
+        subtitle: language.analyticsResetDeviceBody,
+        onTap: settings.isReady ? () => _runAnalyticsReset(language) : null,
+      ),
+    );
     final authState = ref.watch(authStateProvider);
     final user = authState.maybeWhen(
       data: (value) => value,
@@ -385,6 +396,8 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
                   cloudSyncSection,
                   const SizedBox(height: AppSpacing.lg),
                   manualBackupSection,
+                  const SizedBox(height: AppSpacing.lg),
+                  analyticsSection,
                 ],
               );
             }
@@ -412,6 +425,8 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
                           accountSyncSection,
                           const SizedBox(height: AppSpacing.lg),
                           manualBackupSection,
+                          const SizedBox(height: AppSpacing.lg),
+                          analyticsSection,
                         ],
                       ),
                     ),
@@ -425,6 +440,42 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _runAnalyticsReset(AppLanguage language) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(language.analyticsResetConfirmTitle),
+        content: Text(language.analyticsResetConfirmBody),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text(language.analyticsResetConfirmLabel),
+          ),
+        ],
+      ),
+    );
+    if (!mounted || confirmed != true) return;
+
+    final result = await ref
+        .read(analyticsServiceProvider)
+        .resetAnalyticsData();
+    if (!mounted) return;
+
+    final message = switch (result) {
+      AnalyticsResetResult.reset => language.analyticsResetSuccessLabel,
+      AnalyticsResetResult.unsupported =>
+        language.analyticsResetUnsupportedLabel,
+      AnalyticsResetResult.failed => language.analyticsResetErrorLabel,
+    };
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
   }
 
   String _formatTime(TimeOfDay time) {

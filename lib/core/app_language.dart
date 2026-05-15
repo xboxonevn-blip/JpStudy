@@ -760,6 +760,105 @@ extension AppLanguageLabels on AppLanguage {
     }
   }
 
+  String get analyticsDataSectionTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Analytics data';
+      case AppLanguage.vi:
+        return 'Dữ liệu phân tích';
+      case AppLanguage.ja:
+        return '分析データ';
+    }
+  }
+
+  String get analyticsResetDeviceLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Reset analytics on this device';
+      case AppLanguage.vi:
+        return 'Đặt lại Analytics trên thiết bị này';
+      case AppLanguage.ja:
+        return 'この端末の分析データをリセット';
+    }
+  }
+
+  String get analyticsResetDeviceBody {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Clears the local Firebase Analytics app instance ID where the SDK supports it. This does not erase reports already received by Google.';
+      case AppLanguage.vi:
+        return 'Xóa app instance ID Firebase Analytics cục bộ khi SDK hỗ trợ. Thao tác này không xóa các báo cáo Google đã nhận.';
+      case AppLanguage.ja:
+        return 'SDKが対応している場合、この端末のFirebase AnalyticsアプリインスタンスIDを消去します。Googleが受信済みのレポートは削除されません。';
+    }
+  }
+
+  String get analyticsResetConfirmTitle {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Reset device analytics?';
+      case AppLanguage.vi:
+        return 'Đặt lại Analytics của thiết bị?';
+      case AppLanguage.ja:
+        return '端末の分析データをリセットしますか？';
+    }
+  }
+
+  String get analyticsResetConfirmBody {
+    switch (this) {
+      case AppLanguage.en:
+        return 'JpStudy will ask Firebase Analytics to reset local analytics identifiers on this device.';
+      case AppLanguage.vi:
+        return 'JpStudy sẽ yêu cầu Firebase Analytics đặt lại mã định danh phân tích cục bộ trên thiết bị này.';
+      case AppLanguage.ja:
+        return 'JpStudyは、この端末のローカル分析IDをリセットするようFirebase Analyticsに要求します。';
+    }
+  }
+
+  String get analyticsResetConfirmLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Reset analytics';
+      case AppLanguage.vi:
+        return 'Đặt lại Analytics';
+      case AppLanguage.ja:
+        return '分析をリセット';
+    }
+  }
+
+  String get analyticsResetSuccessLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Analytics data reset on this device.';
+      case AppLanguage.vi:
+        return 'Đã đặt lại dữ liệu Analytics trên thiết bị này.';
+      case AppLanguage.ja:
+        return 'この端末の分析データをリセットしました。';
+    }
+  }
+
+  String get analyticsResetUnsupportedLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Firebase Analytics reset is not supported on this platform.';
+      case AppLanguage.vi:
+        return 'Nền tảng này chưa hỗ trợ đặt lại Firebase Analytics.';
+      case AppLanguage.ja:
+        return 'このプラットフォームではFirebase Analyticsのリセットはサポートされていません。';
+    }
+  }
+
+  String get analyticsResetErrorLabel {
+    switch (this) {
+      case AppLanguage.en:
+        return 'Failed to reset analytics data.';
+      case AppLanguage.vi:
+        return 'Không thể đặt lại dữ liệu Analytics.';
+      case AppLanguage.ja:
+        return '分析データをリセットできませんでした。';
+    }
+  }
+
   String mcqResultAnnouncement({
     required bool isCorrect,
     required String correctAnswer,

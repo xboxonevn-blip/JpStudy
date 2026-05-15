@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/analytics/analytics_provider.dart';
+import 'package:jpstudy/core/analytics/analytics_service.dart';
 import 'package:jpstudy/core/auth/auth_provider.dart';
 import 'package:jpstudy/core/auth/auth_user.dart';
 import 'package:jpstudy/core/language_provider.dart';
@@ -21,6 +24,15 @@ class _FakeDataSettingsController extends DataSettingsController {
 
   @override
   Future<void> initialize({BuildContext? hostContext}) async {}
+}
+
+class _FakeFirebaseAnalytics extends Fake implements FirebaseAnalytics {
+  int resetCount = 0;
+
+  @override
+  Future<void> resetAnalyticsData() async {
+    resetCount += 1;
+  }
 }
 
 const _unlinkedStatus = CloudSyncStatus(
@@ -57,6 +69,7 @@ Widget buildScreen({
   ),
   CloudSyncStatus status = _unlinkedStatus,
   AuthUser? signedInUser,
+  AnalyticsService? analyticsService,
 }) {
   return ProviderScope(
     overrides: [
@@ -68,6 +81,8 @@ Widget buildScreen({
       dataSettingsControllerProvider.overrideWith(
         () => _FakeDataSettingsController(state),
       ),
+      if (analyticsService != null)
+        analyticsServiceProvider.overrideWithValue(analyticsService),
     ],
     child: const MaterialApp(home: DataSettingsScreen()),
   );
@@ -256,5 +271,27 @@ void main() {
       find.widgetWithText(SwitchListTile, 'Auto-upload to cloud'),
     );
     expect(tile.value, isTrue);
+  });
+
+  testWidgets('resets analytics data on this device after confirmation', (
+    tester,
+  ) async {
+    final fakeAnalytics = _FakeFirebaseAnalytics();
+    await tester.pumpWidget(
+      buildScreen(analyticsService: AnalyticsService(instance: fakeAnalytics)),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Analytics data'), findsOneWidget);
+    await tester.drag(find.byType(ListView), const Offset(0, -1800));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Reset analytics on this device'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Reset analytics'));
+    await tester.pumpAndSettle();
+
+    expect(fakeAnalytics.resetCount, 1);
+    expect(find.text('Analytics data reset on this device.'), findsOneWidget);
   });
 }

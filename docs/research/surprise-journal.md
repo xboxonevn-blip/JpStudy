@@ -333,3 +333,11 @@
 - Delta: +55 percentage points on confidence that identity and storage setup are separate operational gates.
 - Updated belief: keep anonymous sign-in active, but do not auto-run Storage migration until bucket/rules/CORS are proven.
 - New hypothesis: a build-time migration flag will preserve zero-friction identity while avoiding noisy live Storage failures on Spark/new-bucket projects.
+
+## 2026-05-15T09:35:00+07:00 - Analytics reset is not a web-complete deletion control
+
+- Prior belief: adding `FirebaseAnalytics.resetAnalyticsData()` to Data controls would close the in-app telemetry reset gap for the web beta.
+- Actual observation: the Flutter Firebase Analytics wrapper can expose the reset action, but `firebase_analytics_web 0.6.1+5` throws `UnimplementedError('resetAnalyticsData() is not supported on Web.')`.
+- Delta: -50 percentage points on confidence that device reset alone satisfies the D8 deletion requirement for the Firebase Hosting product.
+- Updated belief: Analytics reset is a useful device-side control where supported, but web beta compliance still needs a GA4 deletion runbook and retention proof.
+- New hypothesis: the next highest-value compliance task is a support runbook that maps Auth UID, Storage backup, GA user deletion, and BigQuery export cleanup into one operator flow.

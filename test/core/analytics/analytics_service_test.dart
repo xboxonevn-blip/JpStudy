@@ -6,6 +6,8 @@ class _FakeFirebaseAnalytics extends Fake implements FirebaseAnalytics {
   final events = <String>[];
   final params = <Map<String, Object>?>[];
   String? userId;
+  int resetCount = 0;
+  Object? resetError;
   final userProperties = <String, String?>{};
 
   @override
@@ -34,6 +36,15 @@ class _FakeFirebaseAnalytics extends Fake implements FirebaseAnalytics {
     AnalyticsCallOptions? callOptions,
   }) async {
     userProperties[name] = value;
+  }
+
+  @override
+  Future<void> resetAnalyticsData() async {
+    final error = resetError;
+    if (error != null) {
+      throw error;
+    }
+    resetCount += 1;
   }
 }
 
@@ -92,4 +103,31 @@ void main() {
     expect(fake.userId, isNull);
     expect(fake.userProperties, isEmpty);
   });
+
+  test(
+    'resets analytics data even when event collection is disabled',
+    () async {
+      final fake = _FakeFirebaseAnalytics();
+      final service = AnalyticsService(instance: fake);
+
+      final result = await service.resetAnalyticsData();
+
+      expect(result, AnalyticsResetResult.reset);
+      expect(fake.resetCount, 1);
+    },
+  );
+
+  test(
+    'reports unsupported analytics reset separately from failures',
+    () async {
+      final fake = _FakeFirebaseAnalytics()
+        ..resetError = UnimplementedError('web unsupported');
+      final service = AnalyticsService(instance: fake, enabled: true);
+
+      final result = await service.resetAnalyticsData();
+
+      expect(result, AnalyticsResetResult.unsupported);
+      expect(fake.resetCount, 0);
+    },
+  );
 }

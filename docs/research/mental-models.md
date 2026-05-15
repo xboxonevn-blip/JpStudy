@@ -180,3 +180,7 @@ Anonymous Auth nen duoc xem nhu identity substrate, khong phai login UX. Neu app
 ## Textbook-Aligned Roadmap
 
 Lo trinh nha sach nen la lop dinh huong, khong phai hard gate. N5/N4 co the bam Minna I/II vi app co asset that; N3-N1 phai chuyen sang Hajimete + Shin Kanzen vi do la du lieu dang ship. Khi tach "hom nay hoc gi" khoi "duong sach nao dang theo", home van giu nhịp hanh dong nhanh nhung nguoi hoc khong bi hieu sai ve pham vi giao trinh.
+
+## D8 / Q8.7
+
+Nut reset trong app va quyen xoa du lieu la hai viec khac nhau. `resetAnalyticsData()` chi yeu cau SDK xoa ma dinh danh phan tich cuc bo tren thiet bi, va tren web hien tai SDK Firebase con bao khong ho tro. Vi vay Data controls can co hanh dong ro rang cho nguoi hoc, nhung release gate dung van phai gom retention setting, GA user-deletion runbook, va BigQuery export TTL. Compliance tot la noi dung that cua he thong, khong phai chi mot nut trong UI.

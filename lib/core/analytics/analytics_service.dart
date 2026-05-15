@@ -1,5 +1,7 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 
+enum AnalyticsResetResult { reset, unsupported, failed }
+
 class AnalyticsService {
   AnalyticsService({FirebaseAnalytics? instance, bool enabled = false})
     : _analytics = instance,
@@ -92,6 +94,18 @@ class AnalyticsService {
       await analytics.setUserProperty(name: 'auth_type', value: authType);
     } catch (_) {
       // Analytics identity must never interrupt study/auth/sync flows.
+    }
+  }
+
+  Future<AnalyticsResetResult> resetAnalyticsData() async {
+    try {
+      final analytics = _analytics ?? FirebaseAnalytics.instance;
+      await analytics.resetAnalyticsData();
+      return AnalyticsResetResult.reset;
+    } on UnimplementedError {
+      return AnalyticsResetResult.unsupported;
+    } catch (_) {
+      return AnalyticsResetResult.failed;
     }
   }
 
