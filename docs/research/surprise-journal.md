@@ -411,5 +411,5 @@
 
 - Prior belief: a temporary non-router loading `MaterialApp` would be a safe way to prevent direct-route widgets from mounting before persisted level state loaded.
 - Actual observation: on live web, that loading app stripped direct `/#/grammar` hash routes back to `/` before `MaterialApp.router` mounted. The first fix removed N5 fallback but introduced route loss. Seeding persisted providers before `runApp` let the router mount on the first frame and preserved direct hash URLs.
-- Delta: -50 percentage points on confidence that swapping root app types during bootstrap is harmless on Flutter web; +40 percentage points on confidence after live N3/N2/N1 direct-route checks showed no N5 fallback markers.
+- Delta: -50 percentage points on confidence that swapping root app types during bootstrap is harmless on Flutter web; +40 percentage points on confidence after live N4/N3/N2/N1 direct-route checks showed no N5 fallback markers.
 - Updated belief: web deep-link safety requires one router identity from the first frame. Bootstrap should preload provider state, not temporarily replace the router with a separate `MaterialApp`.

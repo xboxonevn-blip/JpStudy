@@ -11,7 +11,7 @@ Evidence:
 - Local `flutter analyze lib test` passed.
 - Local `flutter test` passed with `2279` tests.
 - Live Playwright checks seeded JSON-encoded SharedPreferences on
-  `https://jpstudy.web.app` for N3/N2/N1 and hard-loaded:
+  `https://jpstudy.web.app` for N4/N3/N2/N1 and hard-loaded:
   `/`, `/#/grammar`, `/#/vocab`, `/#/kanji`, `/#/study-hub`,
   `/#/immersion`, `/#/jlpt/reading`, `/#/jlpt/coach`,
   `/#/exam-center`.
@@ -20,6 +20,7 @@ Live matrix result:
 
 | Level | Direct route evidence |
 | --- | --- |
+| N4 | PASS - root, grammar, kanji, immersion, reading, and coach surfaced N4 labels; vocab, study hub, and exam center preserved route URL with no N5 fallback markers. |
 | N3 | PASS - root, grammar, kanji, immersion, reading, and coach surfaced N3 labels; vocab, study hub, and exam center preserved route URL with no N5 fallback markers. |
 | N2 | PASS - root, grammar, kanji, immersion, reading, and coach surfaced N2 labels; vocab, study hub, and exam center preserved route URL with no N5 fallback markers. |
 | N1 | PASS - root, grammar, kanji, immersion, reading, and coach surfaced N1 labels; vocab, study hub, and exam center preserved route URL with no N5 fallback markers. |
@@ -30,7 +31,7 @@ direct route URL plus absence of the previous N5 fallback markers, not a full
 visual/persona UX pass for those routes.
 
 Updated verdict: the live direct-route N5 fallback blocker is closed for
-seeded N3/N2/N1 hash routes. Broad beta still stays FAIL because persona-fit
+seeded N4/N3/N2/N1 hash routes. Broad beta still stays FAIL because persona-fit
 gaps and external launch proofs remain: legal approval, Sentry DSN/first issue,
 Storage/deletion proof, BigQuery-exported learning rows, GA4 UI retention proof,
 and App Check enforcement.
@@ -98,7 +99,7 @@ Historical next action at that point was to separate "data exists", "catalog vis
 
 JpStudy-v2 is not ready for 100 real Vietnamese JLPT learners across N5-N1 for 30 days.
 
-The N5 core module path is viable after earlier Linh fixes, and several upper-level content islands exist. The historical direct-route N5 fallback found by P2-P5 is now fixed for seeded N3/N2/N1 hash routes, but broad beta still fails on persona fit, route-depth confidence, and operational launch proofs.
+The N5 core module path is viable after earlier Linh fixes, and several upper-level content islands exist. The historical direct-route N5 fallback found by P2-P5 is now fixed for seeded N4/N3/N2/N1 hash routes, but broad beta still fails on persona fit, route-depth confidence, and operational launch proofs.
 
 ## Persona Outcomes
 
@@ -107,14 +108,14 @@ The N5 core module path is viable after earlier Linh fixes, and several upper-le
 | P1 Linh N5 casual mobile | PASS for core smoke after fixes | N5 kanji/vocab/grammar routes render, search fixes landed, N5 grammar bank is populated | Deep manual flows still deferred: handwriting scoring, progress mutation, offline/cloud sync, formal a11y/perf |
 | P2 Anh Tuấn N3 busy professional | FAIL | Root N3/VI, direct N3 grammar/kanji/reading/coach now preserve N3 on live | Mobile CTA/live copy defects; no sharper busy-professional plan; route-depth confidence still limited |
 | P3 Mai N2 cramming student | FAIL | Root N2/VI and direct N2 grammar/kanji/reading/coach now preserve N2 on live | No 3-hour cramming mode; exam center is shallow; group study mostly roadmap |
-| P4 Bác Hùng N4 tablet retiree | FAIL | Root N4/VI readable at tablet 125%; slow tap opens readable N4 learning plan | No travel/fun goal; no visible font-size setting; needs N4-specific post-fix matrix |
+| P4 Bác Hùng N4 tablet retiree | FAIL | Direct N4 grammar/kanji/immersion/reading/coach now preserve N4 on live; root N4/VI readable at tablet 125% | No travel/fun goal; no visible font-size setting; tablet/large-font route-depth confidence still limited |
 | P5 Sora N1 advanced reader | FAIL | Direct N1 grammar/kanji/immersion/reading/coach now preserve N1 on live | Study hub remains shallow; no news/current-world reading; no full N1 kanji coverage claim |
 
 ## Top Universal Pain Points
 
 1. Live channel parity and route-level bootstrap are not trustworthy.
    - Historical P2-P5 sessions reproduced direct-route fallback to N5 on live.
-   - 2026-05-16 live matrix closes the N3/N2/N1 N5-fallback class for seeded hash routes after `558fc151`.
+   - 2026-05-16 live matrix closes the N4/N3/N2/N1 N5-fallback class for seeded hash routes after `558fc151`.
    - Remaining risk is route depth/persona fit, not the previous level bootstrap fallback.
 
 2. Onboarding and planning do not model real study contexts.
@@ -145,7 +146,7 @@ The N5 core module path is viable after earlier Linh fixes, and several upper-le
 1. Keep route matrix as a release regression.
    - Matrix: levels N5/N4/N3/N2/N1 x routes `/`, `/#/grammar`, `/#/vocab`, `/#/kanji`, `/#/jlpt/reading`, `/#/jlpt/coach`, `/#/study-hub`, `/#/immersion`, `/#/exam-center`.
    - Pass threshold: every route preserves seeded level or intentionally labels its exception.
-   - Latest live proof: N3/N2/N1 passed on 2026-05-16 after `558fc151`.
+   - Latest live proof: N4/N3/N2/N1 passed on 2026-05-16/17 after `558fc151`.
 
 2. Make beta persona scope explicit.
    - Narrow beta: N5-N3 JLPT/habit learners only, no travel/news/group/cramming promises.
