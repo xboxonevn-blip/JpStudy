@@ -12,6 +12,10 @@ const DEFAULT_PROOF_STATE_PATH = path.join(
   'compliance',
   'launch-proof-state.json',
 );
+const DEFAULT_PROJECT = 'jpstudy-v2';
+const DEFAULT_PROPERTY = '536663906';
+const DEFAULT_ACCOUNT = '393943579';
+const DEFAULT_REPOSITORY = 'xboxonevn-blip/JpStudy';
 
 function parseArgs(argv) {
   const args = {};
@@ -380,7 +384,30 @@ function nextActionFor(blocker) {
   return `Resolve ${blocker}.`;
 }
 
-function buildMarkdownReport({ generatedAt, readiness, evidence }) {
+function buildOperatorUrls({
+  project = DEFAULT_PROJECT,
+  property = DEFAULT_PROPERTY,
+  account = DEFAULT_ACCOUNT,
+  repository = DEFAULT_REPOSITORY,
+  proofStatePath = DEFAULT_PROOF_STATE_PATH,
+} = {}) {
+  return {
+    proofState: proofStatePath.replaceAll('\\', '/'),
+    legalChecklist: 'docs/compliance/legal-approval-checklist.md',
+    appCheck: `https://console.firebase.google.com/u/1/project/${project}/appcheck`,
+    firebaseStorage: `https://console.firebase.google.com/u/1/project/${project}/storage`,
+    ga4Admin: `https://analytics.google.com/analytics/web/?authuser=1#/a${account}p${property}/admin`,
+    githubActions: `https://github.com/${repository}/actions/workflows/ui-string-guard.yml`,
+  };
+}
+
+function buildMarkdownReport({
+  generatedAt,
+  readiness,
+  evidence,
+  operatorUrls,
+}) {
+  const urls = operatorUrls || buildOperatorUrls();
   const blockers = readiness.blockers.length
     ? readiness.blockers.map((item) => `- ${item}`)
     : ['- none'];
@@ -406,6 +433,15 @@ function buildMarkdownReport({ generatedAt, readiness, evidence }) {
     `| GA4 learning events | ${(evidence.ga4.learningReadiness || []).join(', ') || 'present'} | ${(evidence.ga4.learningReadiness || []).length === 0 ? 'pass' : 'blocked'} |`,
     `| App Check enforcement | ${evidence.appCheck.source || `enforced=${Boolean(evidence.appCheck.enforced)}`} | ${evidence.appCheck.enforced ? 'pass' : 'blocked'} |`,
     '',
+    '## Operator URLs',
+    '',
+    `Proof state: \`${urls.proofState}\``,
+    `Legal checklist: \`${urls.legalChecklist}\``,
+    `App Check: \`${urls.appCheck}\``,
+    `Firebase Storage: \`${urls.firebaseStorage}\``,
+    `GA4 Admin: \`${urls.ga4Admin}\``,
+    `GitHub Actions: \`${urls.githubActions}\``,
+    '',
     '## Blockers',
     '',
     ...blockers,
@@ -429,6 +465,9 @@ async function main(argv = process.argv.slice(2)) {
     generatedAt: new Date().toISOString(),
     readiness,
     evidence,
+    operatorUrls: buildOperatorUrls({
+      proofStatePath: args.proofStatePath || DEFAULT_PROOF_STATE_PATH,
+    }),
   };
   const output = args.json
     ? `${JSON.stringify(report, null, 2)}\n`
@@ -452,6 +491,7 @@ if (require.main === module) {
 module.exports = {
   buildLaunchReadiness,
   buildMarkdownReport,
+  buildOperatorUrls,
   collectEvidence,
   parseArgs,
 };

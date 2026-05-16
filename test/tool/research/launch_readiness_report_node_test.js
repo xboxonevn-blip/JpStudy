@@ -8,6 +8,7 @@ const path = require('node:path');
 const {
   buildLaunchReadiness,
   buildMarkdownReport,
+  buildOperatorUrls,
   collectEvidence,
   parseArgs,
 } = require('../../../tool/research/launch_readiness_report');
@@ -85,6 +86,7 @@ test('buildMarkdownReport maps blockers to concrete evidence sections', () => {
       ga4: { adminRetentionOk: false, learningReadiness: [] },
       appCheck: { enforced: false },
     },
+    operatorUrls: buildOperatorUrls(),
   });
 
   assert.match(report, /# Beta Launch Readiness Report/);
@@ -92,6 +94,33 @@ test('buildMarkdownReport maps blockers to concrete evidence sections', () => {
   assert.match(report, /legal-approval-missing/);
   assert.match(report, /sentry-dsn-missing/);
   assert.match(report, /## Prompt-To-Artifact Checklist/);
+  assert.match(report, /## Operator URLs/);
+  assert.match(report, /Proof state: `docs\/compliance\/launch-proof-state\.json`/);
+  assert.match(report, /App Check: `https:\/\/console\.firebase\.google\.com\/u\/1\/project\/jpstudy-v2\/appcheck`/);
+  assert.match(report, /GA4 Admin: `https:\/\/analytics\.google\.com\/analytics\/web\/\?authuser=1#\/a393943579p536663906\/admin`/);
+});
+
+test('buildOperatorUrls points to launch proof consoles', () => {
+  const urls = buildOperatorUrls({
+    project: 'jpstudy-v2',
+    property: '536663906',
+    account: '393943579',
+    repository: 'xboxonevn-blip/JpStudy',
+  });
+
+  assert.equal(urls.proofState, 'docs/compliance/launch-proof-state.json');
+  assert.equal(
+    urls.appCheck,
+    'https://console.firebase.google.com/u/1/project/jpstudy-v2/appcheck',
+  );
+  assert.equal(
+    urls.ga4Admin,
+    'https://analytics.google.com/analytics/web/?authuser=1#/a393943579p536663906/admin',
+  );
+  assert.equal(
+    urls.githubActions,
+    'https://github.com/xboxonevn-blip/JpStudy/actions/workflows/ui-string-guard.yml',
+  );
 });
 
 test('parseArgs accepts a structured proof-state path', () => {
