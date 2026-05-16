@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 
 const {
   buildMarkdownReport,
+  buildOperatorUrls,
   buildSentryReadiness,
   parseArgs,
   repositoryFromRemoteUrl,
@@ -96,6 +97,7 @@ test('buildMarkdownReport records evidence without claiming first issue', () => 
         values: { JPSTUDY_SENTRY_DSN: false },
       },
       localEnv: { JPSTUDY_SENTRY_DSN: false },
+      operatorUrls: buildOperatorUrls('xboxonevn-blip/JpStudy'),
       readiness: {
         safeMode: true,
         eventSent: false,
@@ -112,6 +114,10 @@ test('buildMarkdownReport records evidence without claiming first issue', () => 
   assert.match(report, /Ready: `false`/);
   assert.match(report, /Reason: `sentry-dsn-missing`/);
   assert.match(report, /JPSTUDY_SENTRY_DSN is missing/);
+  assert.match(report, /## Operator URLs/);
+  assert.match(report, /settings\/secrets\/actions/);
+  assert.match(report, /actions\/workflows\/ui-string-guard\.yml/);
+  assert.match(report, /sentry-smoke=1/);
 });
 
 test('parseArgs supports JSON and repository override', () => {
@@ -126,4 +132,18 @@ test('repositoryFromRemoteUrl parses GitHub HTTPS origin', () => {
     repositoryFromRemoteUrl('https://github.com/xboxonevn-blip/JpStudy.git'),
     'xboxonevn-blip/JpStudy',
   );
+});
+
+test('buildOperatorUrls points to secrets, workflow, and smoke trigger', () => {
+  const urls = buildOperatorUrls('xboxonevn-blip/JpStudy');
+
+  assert.equal(
+    urls.actionsSecrets,
+    'https://github.com/xboxonevn-blip/JpStudy/settings/secrets/actions',
+  );
+  assert.equal(
+    urls.workflowDispatch,
+    'https://github.com/xboxonevn-blip/JpStudy/actions/workflows/ui-string-guard.yml',
+  );
+  assert.equal(urls.smokeUrl, 'https://jpstudy.web.app/?sentry-smoke=1');
 });

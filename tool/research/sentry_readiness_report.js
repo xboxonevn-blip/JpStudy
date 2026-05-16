@@ -7,6 +7,8 @@ const path = require('node:path');
 
 const DEFAULT_REPO = 'xboxonevn-blip/JpStudy';
 const WORKFLOW_PATH = '.github/workflows/ui-string-guard.yml';
+const WORKFLOW_FILE = 'ui-string-guard.yml';
+const SENTRY_SMOKE_URL = 'https://jpstudy.web.app/?sentry-smoke=1';
 
 function parseArgs(argv) {
   const args = {};
@@ -227,6 +229,14 @@ function buildSentryReadiness({ source, workflow, secrets, localEnv }) {
   };
 }
 
+function buildOperatorUrls(repository) {
+  return {
+    actionsSecrets: `https://github.com/${repository}/settings/secrets/actions`,
+    workflowDispatch: `https://github.com/${repository}/actions/workflows/${WORKFLOW_FILE}`,
+    smokeUrl: SENTRY_SMOKE_URL,
+  };
+}
+
 function present(value) {
   return value ? 'present' : 'missing';
 }
@@ -252,6 +262,12 @@ function buildMarkdownReport({ generatedAt, repository, status }) {
     `Reason: \`${readiness.reason}\``,
     '',
     'This command is readiness-only. It does not open the app and does not send a Sentry event.',
+    '',
+    '## Operator URLs',
+    '',
+    `Actions secrets: \`${status.operatorUrls?.actionsSecrets || buildOperatorUrls(repository).actionsSecrets}\``,
+    `Workflow dispatch: \`${status.operatorUrls?.workflowDispatch || buildOperatorUrls(repository).workflowDispatch}\``,
+    `Smoke URL: \`${status.operatorUrls?.smokeUrl || SENTRY_SMOKE_URL}\``,
     '',
     '## Source',
     '',
@@ -310,6 +326,7 @@ async function main(argv = process.argv.slice(2)) {
     workflow,
     secrets,
     localEnv,
+    operatorUrls: buildOperatorUrls(repository),
     readiness,
   };
   const report = {
@@ -339,6 +356,7 @@ if (require.main === module) {
 module.exports = {
   buildMarkdownReport,
   buildSentryReadiness,
+  buildOperatorUrls,
   collectLocalEnv,
   collectSourceStatus,
   collectWorkflowStatus,
