@@ -6,554 +6,360 @@
   "tags": [
     "source-hanabira",
     "n2-grammar-import",
-    "needs-human-review",
-    "vi-machine-draft",
-    "vi-needs-review"
+    "vi-editorial-codex-pass"
   ],
   "examples": [
     {
       "grammarPoint": "Noun を はじめとする Noun",
       "sentence": "彼はフランス語をはじめとする外国語が話せる。",
-      "translation": "He can speak foreign languages, starting with French.",
+      "translation": "Anh ấy nói được ngoại ngữ, bắt đầu từ tiếng Pháp.",
       "translationEn": "He can speak foreign languages, starting with French",
       "romaji": "Kare wa furansugo o hajime to suru gaikokugo ga hanaseru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He can speak foreign languages, starting with French",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun を はじめとする Noun",
       "sentence": "このコンサートには、BTSをはじめとする人気アーティストが出演する予定です。",
-      "translation": "This concert is scheduled to feature popular artists, including BTS.",
+      "translation": "Buổi hòa nhạc này dự kiến có các nghệ sĩ nổi tiếng, bao gồm BTS.",
       "translationEn": "This concert is scheduled to feature popular artists, including BTS",
       "romaji": "Kono konsāto ni wa, BTS o hajime to suru ninki ātisuto ga shutsuen suru yotei desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This concert is scheduled to feature popular artists, including BTS",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun を はじめとする Noun",
       "sentence": "彼女は魚をはじめとする海の幸が大好きだ。",
-      "translation": "She loves seafood, starting with fish.",
+      "translation": "Cô ấy rất thích hải sản, đặc biệt là cá.",
       "translationEn": "She loves seafood, starting with fish",
       "romaji": "Kanojo wa sakana o hajime to suru umi no sachi ga daisuki da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She loves seafood, starting with fish",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun を はじめとする Noun",
       "sentence": "この図書館には、子供向けの本をはじめとするさまざまなジャンルの本があります。",
-      "translation": "This library has various genres of books, including children's books.",
+      "translation": "Thư viện này có nhiều thể loại sách, bao gồm cả sách thiếu nhi.",
       "translationEn": "This library has various genres of books, including childrens books",
       "romaji": "Kono toshokan ni wa, kodomomuke no hon o hajime to suru samazama na janru no hon ga arimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This library has various genres of books, including childrens books",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun を めぐって",
       "sentence": "環境問題をめぐって、多くの議論が行われています。",
-      "translation": "Many discussions are held concerning environmental issues.",
+      "translation": "Nhiều cuộc thảo luận được tổ chức xoay quanh vấn đề môi trường.",
       "translationEn": "Many discussions are held concerning environmental issues",
       "romaji": "Kankyō mondai o megutte, ōku no giron ga okonawarete imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Many discussions are held concerning environmental issues",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun を めぐって",
       "sentence": "彼の死をめぐって、いくつかの陰謀説が浮かび上がっている。",
-      "translation": "Several conspiracy theories have emerged regarding his death.",
+      "translation": "Nhiều thuyết âm mưu đã xuất hiện xoay quanh cái chết của ông ấy.",
       "translationEn": "Several conspiracy theories have emerged regarding his death",
       "romaji": "Kare no shi o megutte, ikutsuka no inbōsetsu ga ukabiagatte iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Several conspiracy theories have emerged regarding his death",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun を めぐって",
       "sentence": "昇給をめぐって会社と労働組合が話し合いをしています。",
-      "translation": "The company and the labor union are having discussions about pay raises.",
+      "translation": "Công ty và công đoàn đang thảo luận về việc tăng lương.",
       "translationEn": "The company and the labor union are having discussions about pay raises",
       "romaji": "Shōkyū o megutte kaisha to rōdō kumiai ga hanashiai o shite imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The company and the labor union are having discussions about pay raises",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun を めぐって",
       "sentence": "この映画をめぐって、賛否両論が存在している。",
-      "translation": "There are both pros and cons regarding this movie.",
+      "translation": "Có cả ý kiến ủng hộ lẫn phản đối xoay quanh bộ phim này.",
       "translationEn": "There are both pros and cons regarding this movie",
       "romaji": "Kono eiga o megutte, sanpi ryōron ga sonzai shite iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: There are both pros and cons regarding this movie",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun を めぐる Noun",
       "sentence": "この事件をめぐる議論が続いています。",
-      "translation": "The debate concerning this incident continues.",
+      "translation": "Cuộc tranh luận xoay quanh sự việc này vẫn tiếp tục.",
       "translationEn": "The debate concerning this incident continues",
       "romaji": "Kono jiken o meguru giron ga tsudzuite imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The debate concerning this incident continues",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun を めぐる Noun",
       "sentence": "環境問題をめぐる国際会議が開かれます。",
-      "translation": "An international conference regarding environmental issues will be held.",
+      "translation": "Một hội nghị quốc tế về vấn đề môi trường sẽ được tổ chức.",
       "translationEn": "An international conference regarding environmental issues will be held",
       "romaji": "Kankyō mondai o meguru kokusai kaigi ga hirakaremasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: An international conference regarding environmental issues will be held",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun を めぐる Noun",
       "sentence": "彼の突然の辞任をめぐるうわさが広がっている。",
-      "translation": "Rumors are spreading concerning his sudden resignation.",
+      "translation": "Những tin đồn xoay quanh việc từ chức đột ngột của ông ấy đang lan rộng.",
       "translationEn": "Rumors are spreading concerning his sudden resignation",
       "romaji": "Kare no totsuzen no jinin o meguru uwasa ga hirogatte iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Rumors are spreading concerning his sudden resignation",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun を めぐる Noun",
       "sentence": "映画祭をめぐる活動が多くなっています。",
-      "translation": "There are increasing activities surrounding the film festival.",
+      "translation": "Các hoạt động xoay quanh liên hoan phim đang tăng lên.",
       "translationEn": "There are increasing activities surrounding the film festival",
       "romaji": "Eigashai o meguru katsudō ga ōku natte imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: There are increasing activities surrounding the film festival",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun を もとに",
       "sentence": "この映画は実話をもとに作られました。",
-      "translation": "This movie was made based on a true story.",
+      "translation": "Bộ phim này được làm dựa trên câu chuyện có thật.",
       "translationEn": "This movie was made based on a true story",
       "romaji": "Kono eiga wa jitsuwa o moto ni tsukuraremashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This movie was made based on a true story",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun を もとに",
       "sentence": "彼の経験をもとにアドバイスが必要だ。",
-      "translation": "Advice is needed based on his experience.",
+      "translation": "Cần lời khuyên dựa trên kinh nghiệm của anh ấy.",
       "translationEn": "Advice is needed based on his experience",
       "romaji": "Kare no keiken o moto ni adobaisu ga hitsuyō da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Advice is needed based on his experience",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun を もとに",
       "sentence": "データをもとに分析を行いました。",
-      "translation": "I performed an analysis based on the data.",
+      "translation": "Tôi đã thực hiện phân tích dựa trên dữ liệu.",
       "translationEn": "I performed an analysis based on the data",
       "romaji": "Dēta o moto ni bunseki o okonaimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I performed an analysis based on the data",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun を もとに",
       "sentence": "世界中の美術館をもとにコレクションを作りました。",
-      "translation": "I created a collection based on art galleries all over the world.",
+      "translation": "Tôi đã tạo một bộ sưu tập dựa trên các phòng tranh trên khắp thế giới.",
       "translationEn": "I created a collection based on art galleries all over the world",
       "romaji": "Sekaijū no bijutsukan o moto ni korekushon o tsukurimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I created a collection based on art galleries all over the world",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun を もとにして",
       "sentence": "彼の意見をもとにして、計画を変更しました。",
-      "translation": "Based on his opinion, we changed the plan.",
+      "translation": "Dựa trên ý kiến của anh ấy, chúng tôi đã thay đổi kế hoạch.",
       "translationEn": "Based on his opinion, we changed the plan",
       "romaji": "Kare no iken o moto ni shite, keikaku o henkō shimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Based on his opinion, we changed the plan",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun を もとにして",
       "sentence": "この小説は実話をもとにして書かれています。",
-      "translation": "This novel is written based on a true story.",
+      "translation": "Tiểu thuyết này được viết dựa trên câu chuyện có thật.",
       "translationEn": "This novel is written based on a true story",
       "romaji": "Kono shōsetsu wa jitsuwa o moto ni shite kakarete imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This novel is written based on a true story",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun を もとにして",
       "sentence": "資料をもとにして、レポートを作成しました。",
-      "translation": "I created the report based on the materials.",
+      "translation": "Tôi đã lập báo cáo dựa trên tài liệu.",
       "translationEn": "I created the report based on the materials",
       "romaji": "Shiryō o moto ni shite, repōto o sakusei shimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I created the report based on the materials",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun を もとにして",
       "sentence": "過去の成功例をもとにして、新しいプロジェクトを進める予定です。",
-      "translation": "We plan to proceed with the new project based on past successful examples.",
+      "translation": "Chúng tôi dự định triển khai dự án mới dựa trên các ví dụ thành công trước đây.",
       "translationEn": "We plan to proceed with the new project based on past successful examples",
       "romaji": "Kako no seikōrei o moto ni shite, atarashii purojekuto o susumeru yotei desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We plan to proceed with the new project based on past successful examples",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Verb ことなく",
       "sentence": "彼女は泣くことなく帰ってしまいました。",
-      "translation": "She went home without crying.",
+      "translation": "Cô ấy đã về nhà mà không khóc.",
       "translationEn": "She went home without crying",
       "romaji": "Kanojo wa naku koto naku kaette shimaimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She went home without crying",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Verb ことなく",
       "sentence": "彼は注意することなく突然出かけた。",
-      "translation": "He suddenly left without giving any warning.",
+      "translation": "Anh ấy đột ngột rời đi mà không báo trước.",
       "translationEn": "He suddenly left without giving any warning",
       "romaji": "Kare wa chūi suru koto naku totsuzen dekaketa.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He suddenly left without giving any warning",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Verb ことなく",
       "sentence": "山田さんは誰にも話すことなく会社を辞めました。",
-      "translation": "Mr. Yamada quit the company without talking to anyone.",
+      "translation": "Anh Yamada đã nghỉ việc mà không nói với ai.",
       "translationEn": "Mr. Yamada quit the company without talking to anyone",
       "romaji": "Yamada-san wa dare ni mo hanasu koto naku kaisha o yamemashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Mr. Yamada quit the company without talking to anyone",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Verb ことなく",
       "sentence": "２０年間、病気になることなく働いています。",
-      "translation": "I have been working for 20 years without getting sick.",
+      "translation": "Tôi đã làm việc suốt 20 năm mà không bị ốm.",
       "translationEn": "I have been working for 20 years without getting sick",
       "romaji": "Nijūnenkan, byōki ni naru koto naku hataraite imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I have been working for 20 years without getting sick",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Verb ないことには Verb ない",
       "sentence": "薬を飲まないことには、病気が治らない。",
-      "translation": "Unless you take the medicine, the illness won't get better.",
+      "translation": "Nếu không uống thuốc thì bệnh sẽ không khỏi.",
       "translationEn": "Unless you take the medicine, the illness wont get better",
       "romaji": "Kusuri o nomanai koto ni wa, byōki ga naoranai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Unless you take the medicine, the illness wont get better",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Verb ないことには Verb ない",
       "sentence": "この問題によく考えないことには、解決できない。",
-      "translation": "Unless you think carefully about this problem, you can't solve it.",
+      "translation": "Nếu không suy nghĩ kỹ về vấn đề này thì không thể giải quyết được.",
       "translationEn": "Unless you think carefully about this problem, you cant solve it",
       "romaji": "Kono mondai ni yoku kangaenai koto ni wa, kaiketsu dekinai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Unless you think carefully about this problem, you cant solve it",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Verb ないことには Verb ない",
       "sentence": "練習をしないことには、スキルが上達しない。",
-      "translation": "Unless you practice, your skills won't improve.",
+      "translation": "Nếu không luyện tập thì kỹ năng sẽ không tiến bộ.",
       "translationEn": "Unless you practice, your skills wont improve",
       "romaji": "Renshū o shinai koto ni wa, sukiru ga jōtatsu shinai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Unless you practice, your skills wont improve",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Verb ないことには Verb ない",
       "sentence": "手続きをしないことには、新しいパスポートがもらえない。",
-      "translation": "Unless you go through the procedures, you can't get a new passport.",
+      "translation": "Nếu không làm thủ tục thì không thể lấy hộ chiếu mới.",
       "translationEn": "Unless you go through the procedures, you cant get a new passport",
       "romaji": "Tetsuzuki o shinai koto ni wa, atarashii pasupōto ga moraenai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Unless you go through the procedures, you cant get a new passport",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～あげく",
       "sentence": "長い時間待ったあげく、電車が来なかった。",
-      "translation": "After waiting a long time, in the end, the train didn't come.",
+      "translation": "Sau khi chờ rất lâu, rốt cuộc tàu đã không đến.",
       "translationEn": "After waiting a long time, in the end, the train didnt come",
       "romaji": "Nagai jikan matta ageku, densha ga konakatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: After waiting a long time, in the end, the train didnt come",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～あげく",
       "sentence": "いろいろな方法を試したあげく、成功した。",
-      "translation": "After trying various methods, I finally succeeded.",
+      "translation": "Sau khi thử nhiều phương pháp, cuối cùng tôi đã thành công.",
       "translationEn": "After trying various methods, I finally succeeded",
       "romaji": "Iroiro na hōhō o tameshita ageku, seikō shita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: After trying various methods, I finally succeeded",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～あげく",
       "sentence": "彼は失敗のあげく、会社を辞める決心をした。",
-      "translation": "In the end, after his failures, he decided to quit the company.",
+      "translation": "Sau nhiều lần thất bại, cuối cùng anh ấy quyết định nghỉ việc.",
       "translationEn": "In the end, after his failures, he decided to quit the company",
       "romaji": "Kare wa shippai no ageku, kaisha o yameru kesshin o shita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: In the end, after his failures, he decided to quit the company",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～あげく",
       "sentence": "彼女は長い間悩んだあげく、その仕事を断った。",
-      "translation": "After worrying for a long time, she finally turned down the job.",
+      "translation": "Sau khi đắn đo rất lâu, cuối cùng cô ấy đã từ chối công việc đó.",
       "translationEn": "After worrying for a long time, she finally turned down the job",
       "romaji": "Kanojo wa nagai aida nayanda ageku, sono shigoto o kotowatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: After worrying for a long time, she finally turned down the job",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     }
   ]
 }

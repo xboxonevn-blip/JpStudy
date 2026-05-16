@@ -6,486 +6,316 @@
   "tags": [
     "source-hanabira",
     "n2-grammar-import",
-    "needs-human-review",
-    "vi-machine-draft",
-    "vi-needs-review"
+    "vi-editorial-codex-pass"
   ],
   "examples": [
     {
       "grammarPoint": "A。だが B。",
       "sentence": "このレストランは値段が高い。だが、味はとてもいい。",
-      "translation": "This restaurant is expensive. But, the taste is very good.",
+      "translation": "Nhà hàng này đắt. Nhưng hương vị rất ngon.",
       "translationEn": "This restaurant is expensive. But, the taste is very good",
       "romaji": "Kono resutoran wa nedan ga takai. Daga, aji wa totemo ii.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This restaurant is expensive. But, the taste is very good",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。だが B。",
       "sentence": "彼は疲れている。だが、仕事を終わらせるまで休まない。",
-      "translation": "He is tired. However, he will not rest until he finishes work.",
+      "translation": "Anh ấy mệt. Tuy nhiên, anh ấy sẽ không nghỉ cho đến khi hoàn thành công việc.",
       "translationEn": "He is tired. However, he will not rest until he finishes work",
       "romaji": "Kare wa tsukarete iru. Daga, shigoto o owaraseru made yasumanai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He is tired. However, he will not rest until he finishes work",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。だが B。",
       "sentence": "昨日は寒かった。だが、今日は暖かい。",
-      "translation": "Yesterday was cold. But, today is warm.",
+      "translation": "Hôm qua trời lạnh. Nhưng hôm nay ấm.",
       "translationEn": "Yesterday was cold. But, today is warm",
       "romaji": "Kinou wa samukatta. Daga, kyou wa atatakai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Yesterday was cold. But, today is warm",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。だが B。",
       "sentence": "彼女は外見は地味だ。だが、性格が素晴らしい。",
-      "translation": "Her appearance is plain. However, she has a wonderful personality.",
+      "translation": "Vẻ ngoài của cô ấy giản dị. Tuy nhiên, tính cách của cô ấy rất tuyệt.",
       "translationEn": "Her appearance is plain. However, she has a wonderful personality",
       "romaji": "Kanojo wa gaiken wa jimi da. Daga, seikaku ga subarashii.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Her appearance is plain. However, she has a wonderful personality",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。ただB。",
       "sentence": "彼は頭がいい。ただ、努力はあまりしない。",
-      "translation": "He is smart; however, he doesn't make much effort.",
+      "translation": "Anh ấy thông minh; tuy nhiên, anh ấy không cố gắng nhiều.",
       "translationEn": "He is smart; however, he doesnt make much effort",
       "romaji": "Kare wa atama ga ii. Tada, doryoku wa amari shinai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He is smart; however, he doesnt make much effort",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。ただB。",
       "sentence": "外は雨が降っている。ただ、家にいると暇だ。",
-      "translation": "It's raining outside, but I'm bored at home.",
+      "translation": "Ngoài trời đang mưa, nhưng ở nhà thì tôi chán.",
       "translationEn": "Its raining outside, but Im bored at home",
       "romaji": "Soto wa ame ga futte iru. Tada, ie ni iru to hima da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its raining outside, but Im bored at home",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。ただB。",
       "sentence": "そのレストランは値段が高い。ただ、サービスが良い。",
-      "translation": "That restaurant is expensive; however, the service is good.",
+      "translation": "Nhà hàng đó đắt; tuy nhiên, dịch vụ tốt.",
       "translationEn": "That restaurant is expensive; however, the service is good",
       "romaji": "Sono resutoran wa nedan ga takai. Tada, saabisu ga yoi.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: That restaurant is expensive; however, the service is good",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。ただB。",
       "sentence": "テストの結果は良くなかった。ただ、やり直すチャンスがある。",
-      "translation": "The test results were not good, but there's a chance to retake it.",
+      "translation": "Kết quả bài kiểm tra không tốt, nhưng vẫn còn cơ hội thi lại.",
       "translationEn": "The test results were not good, but theres a chance to retake it",
       "romaji": "Tesuto no kekka wa yokunakatta. Tada, yarinaosu chansu ga aru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The test results were not good, but theres a chance to retake it",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。ただしB。",
       "sentence": "この部屋を使ってもいいです。ただし、使った後で掃除してください。",
-      "translation": "You can use this room. However, please clean up after you use it.",
+      "translation": "Bạn có thể sử dụng phòng này. Tuy nhiên, sau khi dùng xong hãy dọn dẹp.",
       "translationEn": "You can use this room. However, please clean up after you use it",
       "romaji": "Kono heya wo tsukatte mo ii desu. Tadashi, tsukatta ato de souji shite kudasai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: You can use this room. However, please clean up after you use it",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。ただしB。",
       "sentence": "明日から出張で不在になります。ただし、緊急の場合は携帯に連絡してください。",
-      "translation": "I'll be away on a business trip starting tomorrow. However, in case of emergency, please contact me on my cell phone.",
+      "translation": "Từ ngày mai tôi sẽ đi công tác. Tuy nhiên, nếu có việc khẩn cấp, hãy liên lạc với tôi qua điện thoại di động.",
       "translationEn": "Ill be away on a business trip starting tomorrow. However, in case of emergency, please contact me on my cell phone",
       "romaji": "Ashita kara shucchou de fuzai ni narimasu. Tadashi, kinkyuu no baai wa keitai ni renraku shite kudasai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Ill be away on a business trip starting tomorrow. However, in case of emergency, please contact me on my cell phone",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。ただしB。",
       "sentence": "食事代は全額会社が負担します。ただし、アルコールのみ自己負担となります。",
-      "translation": "The company will cover the entire meal cost. However, alcohol expenses will be borne by the individual.",
+      "translation": "Công ty sẽ chi trả toàn bộ tiền ăn. Tuy nhiên, chi phí đồ uống có cồn do cá nhân tự chịu.",
       "translationEn": "The company will cover the entire meal cost. However, alcohol expenses will be borne by the individual",
       "romaji": "Shokuji dai wa zengaku kaisha ga futan shimasu. Tadashi, arukooru nomi jiko futan to narimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The company will cover the entire meal cost. However, alcohol expenses will be borne by the individual",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。ただしB。",
       "sentence": "図書館で本を借りることができます。ただし、期限内に返さなければなりません。",
-      "translation": "You can borrow books from the library. However, you must return them within the deadline.",
+      "translation": "Bạn có thể mượn sách ở thư viện. Tuy nhiên, phải trả trong thời hạn.",
       "translationEn": "You can borrow books from the library. However, you must return them within the deadline",
       "romaji": "Toshokan de hon wo kariru koto ga dekimasu. Tadashi, kigen nai ni kaesanakereba narimasen.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: You can borrow books from the library. However, you must return them within the deadline",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。だって B。",
       "sentence": "暇だって、映画を見に行こうよ。",
-      "translation": "Since we are free, let's go watch a movie.",
+      "translation": "Vì đang rảnh, chúng ta đi xem phim nhé.",
       "translationEn": "Since we are free, lets go watch a movie",
       "romaji": "Hima datte, eiga wo mi ni ikou yo.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Since we are free, lets go watch a movie",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。だって B。",
       "sentence": "寒いだって、コートを着てください。",
-      "translation": "Because it's cold, please wear a coat.",
+      "translation": "Vì trời lạnh, hãy mặc áo khoác.",
       "translationEn": "Because its cold, please wear a coat",
       "romaji": "Samui datte, ko-to wo kite kudasai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Because its cold, please wear a coat",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。だって B。",
       "sentence": "疲れているだって、休んだほうがいい。",
-      "translation": "Since you're tired, it's better to rest.",
+      "translation": "Vì bạn đang mệt, tốt hơn là nên nghỉ ngơi.",
       "translationEn": "Since youre tired, its better to rest",
       "romaji": "Tsukarete iru datte, yasunda hou ga ii.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Since youre tired, its better to rest",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。だって B。",
       "sentence": "彼女が料理上手だって、みんな彼女の作った料理を楽しみにしています。",
-      "translation": "Because she is good at cooking, everyone is looking forward to her dishes.",
+      "translation": "Vì cô ấy nấu ăn giỏi, mọi người đều mong chờ món cô ấy làm.",
       "translationEn": "Because she is good at cooking, everyone is looking forward to her dishes",
       "romaji": "Kanojo ga ryouri jouzu datte, minna kanojo no tsukutta ryouri wo tanoshimi ni shiteimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Because she is good at cooking, everyone is looking forward to her dishes",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。ちなみに B。",
       "sentence": "今日は授業がありません。ちなみに、明日も休みです。",
-      "translation": "There's no class today. By the way, tomorrow is also a day off.",
+      "translation": "Hôm nay không có lớp. Nhân tiện, ngày mai cũng được nghỉ.",
       "translationEn": "Theres no class today. By the way, tomorrow is also a day off",
       "romaji": "Kyou wa jugyou ga arimasen. Chinamini, asu mo yasumi desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Theres no class today. By the way, tomorrow is also a day off",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。ちなみに B。",
       "sentence": "この店のラーメンは美味しいです。ちなみに、餃子もおすすめです。",
-      "translation": "The ramen at this shop is delicious. By the way, their gyoza is also recommended.",
+      "translation": "Ramen ở quán này ngon. Nhân tiện, gyoza của quán cũng đáng thử.",
       "translationEn": "The ramen at this shop is delicious. By the way, their gyoza is also recommended",
       "romaji": "Kono mise no ramen wa oishii desu. Chinamini, gyoza mo osusume desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The ramen at this shop is delicious. By the way, their gyoza is also recommended",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。ちなみに B。",
       "sentence": "彼は今日は遅刻しました。ちなみに、昨日は欠席しました。",
-      "translation": "He was late today. By the way, he was absent yesterday.",
+      "translation": "Hôm nay anh ấy đến muộn. Nhân tiện, hôm qua anh ấy nghỉ.",
       "translationEn": "He was late today. By the way, he was absent yesterday",
       "romaji": "Kare wa kyou wa chikoku shimashita. Chinamini, kinou wa kesseki shimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He was late today. By the way, he was absent yesterday",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。ちなみに B。",
       "sentence": "映画は面白かったです。ちなみに、原作の方がもっといいですよ。",
-      "translation": "The movie was interesting. By the way, the original work is even better.",
+      "translation": "Bộ phim hay. Nhân tiện, bản gốc còn hay hơn.",
       "translationEn": "The movie was interesting. By the way, the original work is even better",
       "romaji": "Eiga wa omoshirokatta desu. Chinamini, gensaku no hou ga motto ii desu yo.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The movie was interesting. By the way, the original work is even better",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。ということは B。",
       "sentence": "彼女が泣いている。ということは何か悲しいことがあったに違いない。",
-      "translation": "She is crying. That means something sad must have happened.",
+      "translation": "Cô ấy đang khóc. Điều đó có nghĩa là chắc đã có chuyện buồn xảy ra.",
       "translationEn": "She is crying. That means something sad must have happened",
       "romaji": "Kanojo ga naite iru. To iu koto wa nanika kanashii koto ga atta ni chigainai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She is crying. That means something sad must have happened",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。ということは B。",
       "sentence": "このケーキが残っている。ということは、みんなお腹がいっぱいだったのかな。",
-      "translation": "This cake is left over. That means everyone must have been full, I guess.",
+      "translation": "Cái bánh này còn thừa. Điều đó có nghĩa là chắc mọi người đã no rồi.",
       "translationEn": "This cake is left over. That means everyone must have been full, I guess",
       "romaji": "Kono keeki ga nokotte iru. To iu koto wa, minna onaka ga ippai datta no ka na.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This cake is left over. That means everyone must have been full, I guess",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。ということは B。",
       "sentence": "道が渋滞している。ということは、事故があったのかもしれない。",
-      "translation": "The road is congested. That means there might have been an accident.",
+      "translation": "Đường đang tắc. Điều đó có nghĩa là có thể đã xảy ra tai nạn.",
       "translationEn": "The road is congested. That means there might have been an accident",
       "romaji": "Michi ga juutai shite iru. To iu koto wa, jiko ga atta no kamoshirenai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The road is congested. That means there might have been an accident",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。ということは B。",
       "sentence": "彼が試験に受かった。ということは、勉強がたくさん頑張ったんだね。",
-      "translation": "He passed the exam. That means he must have studied really hard.",
+      "translation": "Anh ấy đã đỗ kỳ thi. Điều đó có nghĩa là chắc anh ấy đã học rất chăm chỉ.",
       "translationEn": "He passed the exam. That means he must have studied really hard",
       "romaji": "Kare ga shiken ni ukatta. To iu koto wa, benkyou ga takusan ganbattan da ne.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He passed the exam. That means he must have studied really hard",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。というのは B。",
       "sentence": "彼は非常に疲れています。というのは、昨夜、車で遠くまで行ってきたためです。",
-      "translation": "He is very tired. That is to say, because he went far by car last night.",
+      "translation": "Anh ấy rất mệt. Lý do là tối qua anh ấy đã đi xa bằng ô tô.",
       "translationEn": "He is very tired. That is to say, because he went far by car last night",
       "romaji": "Kare wa hijou ni tsukareteimasu. To iu no wa, sakuya, kuruma de tooku made itte kita tame desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He is very tired. That is to say, because he went far by car last night",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。というのは B。",
       "sentence": "このレストランはおすすめです。というのは、料理が美味しいし、雰囲気もいいからです。",
-      "translation": "I recommend this restaurant. That is to say, because the food is delicious and the atmosphere is nice.",
+      "translation": "Tôi giới thiệu nhà hàng này. Lý do là đồ ăn ngon và không gian đẹp.",
       "translationEn": "I recommend this restaurant. That is to say, because the food is delicious and the atmosphere is nice",
       "romaji": "Kono resutoran wa osusume desu. To iu no wa, ryouri ga oishii shi, fun'iki mo ii kara desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I recommend this restaurant. That is to say, because the food is delicious and the atmosphere is nice",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。というのは B。",
       "sentence": "試験に落ちた。というのは、十分に勉強しなかったからです。",
-      "translation": "I failed the exam. In other words, because I didn't study enough.",
+      "translation": "Tôi thi trượt. Nói cách khác, vì tôi đã không học đủ.",
       "translationEn": "I failed the exam. In other words, because I didnt study enough",
       "romaji": "Shiken ni ochita. To iu no wa, juubun ni benkyou shinakatta kara desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I failed the exam. In other words, because I didnt study enough",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "A。というのは B。",
       "sentence": "彼女は独特な趣味がある。というのは、昆虫収集だ。",
-      "translation": "She has a unique hobby. Namely, insect collecting.",
+      "translation": "Cô ấy có sở thích độc đáo. Cụ thể là sưu tầm côn trùng.",
       "translationEn": "She has a unique hobby. Namely, insect collecting",
       "romaji": "Kanojo wa dokutoku na shumi ga aru. To iu no wa, konchuu shuushuu da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She has a unique hobby. Namely, insect collecting",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     }
   ]
 }
