@@ -148,8 +148,12 @@ async function fetchAdminRetention({ property }) {
 }
 
 function dateFilter(days) {
-  return `_TABLE_SUFFIX BETWEEN FORMAT_DATE("%Y%m%d", DATE_SUB(CURRENT_DATE(), INTERVAL ${days} DAY))
-    AND FORMAT_DATE("%Y%m%d", CURRENT_DATE())`;
+  const startDate = `FORMAT_DATE("%Y%m%d", DATE_SUB(CURRENT_DATE(), INTERVAL ${days} DAY))`;
+  const endDate = 'FORMAT_DATE("%Y%m%d", CURRENT_DATE())';
+  return `(
+      _TABLE_SUFFIX BETWEEN ${startDate} AND ${endDate}
+      OR _TABLE_SUFFIX BETWEEN CONCAT("intraday_", ${startDate}) AND CONCAT("intraday_", ${endDate})
+    )`;
 }
 
 function queries({ project, location, days }) {

@@ -146,3 +146,14 @@ test('north star export query scores quiz from app telemetry params', () => {
   assert.match(query, /SAFE_DIVIDE\(CAST\(correct_count AS FLOAT64\)/);
   assert.match(query, /accuracy \* 100/);
 });
+
+test('export queries include GA4 intraday tables', () => {
+  const query = queries({
+    project: 'jpstudy-v2',
+    location: 'asia-southeast1',
+    days: 2,
+  }).eventCounts;
+
+  assert.match(query, /events_\*/);
+  assert.match(query, /intraday_/);
+});
