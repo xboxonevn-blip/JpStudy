@@ -67,9 +67,9 @@
       "character": "憎",
       "strokeCount": 15,
       "labels": {
-        "hanViet": null,
-        "meaningVi": "likes and dislikes",
-        "meaningViDisplay": "憎 (likes and dislikes)",
+        "hanViet": "Tăng",
+        "meaningVi": "yêu ghét, thiện cảm và ác cảm",
+        "meaningViDisplay": "憎 (yêu ghét, thiện cảm và ác cảm)",
         "meaningEn": "likes and dislikes"
       },
       "readings": {
@@ -79,36 +79,36 @@
         ]
       },
       "mnemonic": {
-        "vi": "Kanji xuất hiện trong từ JLPT N1: 愛憎 (likes and dislikes).",
+        "vi": "Kanji xuất hiện trong từ JLPT N1: 愛憎 (yêu ghét, thiện cảm và ác cảm).",
         "en": "Appears in JLPT N1 vocabulary: 愛憎 (likes and dislikes)."
       },
       "decomposition": {
-        "hanViet": null,
+        "hanViet": "Tăng",
         "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": null,
-        "meaningViNoAccent": "likes and dislikes",
+        "hanVietNoAccent": "Tang",
+        "meaningViNoAccent": "yeu ghet, thien cam va ac cam",
         "meaningEnNoAccent": "likes and dislikes"
       },
       "examples": [
         {
           "word": "愛憎",
           "reading": "あいにく",
-          "meaning": "likes and dislikes"
+          "meaning": "yêu ghét, thiện cảm và ác cảm"
         }
       ],
       "tags": [
         "source-tanos-vocab-derived-kanji",
-        "needs-kanji-editorial",
         "n1-kanji-import",
         "source-unihan-kanji-metadata",
-        "vi-needs-review"
+        "unihan-kanji-checked",
+        "vi-editorial-codex-pass"
       ],
-      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+      "metadataStatus": "vi-editorial-codex-pass"
     },
     {
       "kanjiId": "n1_jlpt_vocab_k011",

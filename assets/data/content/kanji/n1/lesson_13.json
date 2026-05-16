@@ -17,9 +17,9 @@
       "character": "様",
       "strokeCount": 14,
       "labels": {
-        "hanViet": null,
-        "meaningVi": "state, condition, circumstances, the way things are or should be, truth",
-        "meaningViDisplay": "様 (state, condition, circumstances, the way things are or should be, truth)",
+        "hanViet": "Dạng",
+        "meaningVi": "tình trạng, dáng vẻ, hoàn cảnh",
+        "meaningViDisplay": "様 (tình trạng, dáng vẻ, hoàn cảnh)",
         "meaningEn": "state, condition, circumstances, the way things are or should be, truth"
       },
       "readings": {
@@ -29,36 +29,36 @@
         ]
       },
       "mnemonic": {
-        "vi": "Kanji xuất hiện trong từ JLPT N1: 有様 (state, condition, circumstances, the way things are or should be, truth).",
+        "vi": "Kanji xuất hiện trong từ JLPT N1: 有様 (tình trạng, dáng vẻ, hoàn cảnh).",
         "en": "Appears in JLPT N1 vocabulary: 有様 (state, condition, circumstances, the way things are or should be, truth)."
       },
       "decomposition": {
-        "hanViet": null,
+        "hanViet": "Dạng",
         "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": null,
-        "meaningViNoAccent": "state, condition, circumstances, the way things are or should be, truth",
+        "hanVietNoAccent": "Dang",
+        "meaningViNoAccent": "tinh trang, dang ve, hoan canh",
         "meaningEnNoAccent": "state, condition, circumstances, the way things are or should be, truth"
       },
       "examples": [
         {
           "word": "有様",
           "reading": "ありさま",
-          "meaning": "state, condition, circumstances, the way things are or should be, truth"
+          "meaning": "tình trạng, dáng vẻ, hoàn cảnh"
         }
       ],
       "tags": [
         "source-tanos-vocab-derived-kanji",
-        "needs-kanji-editorial",
         "n1-kanji-import",
         "source-unihan-kanji-metadata",
-        "vi-needs-review"
+        "unihan-kanji-checked",
+        "vi-editorial-codex-pass"
       ],
-      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+      "metadataStatus": "vi-editorial-codex-pass"
     },
     {
       "kanjiId": "n1_jlpt_vocab_k098",

@@ -67,9 +67,9 @@
       "character": "静",
       "strokeCount": 14,
       "labels": {
-        "hanViet": null,
-        "meaningVi": "rest",
-        "meaningViDisplay": "静 (rest)",
+        "hanViet": "Tĩnh",
+        "meaningVi": "nghỉ ngơi, yên tĩnh",
+        "meaningViDisplay": "静 (nghỉ ngơi, yên tĩnh)",
         "meaningEn": "rest"
       },
       "readings": {
@@ -79,36 +79,36 @@
         ]
       },
       "mnemonic": {
-        "vi": "Kanji xuất hiện trong từ JLPT N1: 安静 (rest).",
+        "vi": "Kanji xuất hiện trong từ JLPT N1: 安静 (nghỉ ngơi, yên tĩnh).",
         "en": "Appears in JLPT N1 vocabulary: 安静 (rest)."
       },
       "decomposition": {
-        "hanViet": null,
+        "hanViet": "Tĩnh",
         "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": null,
-        "meaningViNoAccent": "rest",
+        "hanVietNoAccent": "Tinh",
+        "meaningViNoAccent": "nghi ngoi, yen tinh",
         "meaningEnNoAccent": "rest"
       },
       "examples": [
         {
           "word": "安静",
           "reading": "あんせい",
-          "meaning": "rest"
+          "meaning": "nghỉ ngơi, yên tĩnh"
         }
       ],
       "tags": [
         "source-tanos-vocab-derived-kanji",
-        "needs-kanji-editorial",
         "n1-kanji-import",
         "source-unihan-kanji-metadata",
-        "vi-needs-review"
+        "unihan-kanji-checked",
+        "vi-editorial-codex-pass"
       ],
-      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+      "metadataStatus": "vi-editorial-codex-pass"
     },
     {
       "kanjiId": "n1_jlpt_vocab_k107",

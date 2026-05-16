@@ -367,9 +367,9 @@
       "character": "戯",
       "strokeCount": 15,
       "labels": {
-        "hanViet": null,
-        "meaningVi": "tease, prank, trick, practical joke, mischief",
-        "meaningViDisplay": "戯 (tease, prank, trick, practical joke, mischief)",
+        "hanViet": "Hí",
+        "meaningVi": "trò đùa, nghịch ngợm, trò tinh quái",
+        "meaningViDisplay": "戯 (trò đùa, nghịch ngợm, trò tinh quái)",
         "meaningEn": "tease, prank, trick, practical joke, mischief"
       },
       "readings": {
@@ -379,36 +379,36 @@
         ]
       },
       "mnemonic": {
-        "vi": "Kanji xuất hiện trong từ JLPT N1: 悪戯 (tease, prank, trick, practical joke, mischief).",
+        "vi": "Kanji xuất hiện trong từ JLPT N1: 悪戯 (trò đùa, nghịch ngợm, trò tinh quái).",
         "en": "Appears in JLPT N1 vocabulary: 悪戯 (tease, prank, trick, practical joke, mischief)."
       },
       "decomposition": {
-        "hanViet": null,
+        "hanViet": "Hí",
         "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": null,
-        "meaningViNoAccent": "tease, prank, trick, practical joke, mischief",
+        "hanVietNoAccent": "Hi",
+        "meaningViNoAccent": "tro dua, nghich ngom, tro tinh quai",
         "meaningEnNoAccent": "tease, prank, trick, practical joke, mischief"
       },
       "examples": [
         {
           "word": "悪戯",
           "reading": "いたずら",
-          "meaning": "tease, prank, trick, practical joke, mischief"
+          "meaning": "trò đùa, nghịch ngợm, trò tinh quái"
         }
       ],
       "tags": [
         "source-tanos-vocab-derived-kanji",
-        "needs-kanji-editorial",
         "n1-kanji-import",
         "source-unihan-kanji-metadata",
-        "vi-needs-review"
+        "unihan-kanji-checked",
+        "vi-editorial-codex-pass"
       ],
-      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+      "metadataStatus": "vi-editorial-codex-pass"
     }
   ],
   "metadataSources": [

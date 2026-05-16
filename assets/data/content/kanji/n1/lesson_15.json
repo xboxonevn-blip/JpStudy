@@ -217,9 +217,9 @@
       "character": "訳",
       "strokeCount": 11,
       "labels": {
-        "hanViet": null,
-        "meaningVi": "excuse, explanation",
-        "meaningViDisplay": "訳 (excuse, explanation)",
+        "hanViet": "Dịch",
+        "meaningVi": "lý do, lời giải thích, cớ",
+        "meaningViDisplay": "訳 (lý do, lời giải thích, cớ)",
         "meaningEn": "excuse, explanation"
       },
       "readings": {
@@ -229,36 +229,36 @@
         ]
       },
       "mnemonic": {
-        "vi": "Kanji xuất hiện trong từ JLPT N1: 言い訳 (excuse, explanation).",
+        "vi": "Kanji xuất hiện trong từ JLPT N1: 言い訳 (lý do, lời giải thích, cớ).",
         "en": "Appears in JLPT N1 vocabulary: 言い訳 (excuse, explanation)."
       },
       "decomposition": {
-        "hanViet": null,
+        "hanViet": "Dịch",
         "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": null,
-        "meaningViNoAccent": "excuse, explanation",
+        "hanVietNoAccent": "Dich",
+        "meaningViNoAccent": "ly do, loi giai thich, co",
         "meaningEnNoAccent": "excuse, explanation"
       },
       "examples": [
         {
           "word": "言い訳",
           "reading": "いいわけ",
-          "meaning": "excuse, explanation"
+          "meaning": "lý do, lời giải thích, cớ"
         }
       ],
       "tags": [
         "source-tanos-vocab-derived-kanji",
-        "needs-kanji-editorial",
         "n1-kanji-import",
         "source-unihan-kanji-metadata",
-        "vi-needs-review"
+        "unihan-kanji-checked",
+        "vi-editorial-codex-pass"
       ],
-      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+      "metadataStatus": "vi-editorial-codex-pass"
     },
     {
       "kanjiId": "n1_jlpt_vocab_k118",
