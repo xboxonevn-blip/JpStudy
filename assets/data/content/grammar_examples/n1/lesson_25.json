@@ -6,690 +6,448 @@
   "tags": [
     "source-hanabira",
     "n1-grammar-import",
-    "needs-human-review",
-    "vi-machine-draft",
-    "vi-needs-review"
+    "vi-editorial-codex-pass"
   ],
   "examples": [
     {
       "grammarPoint": "～ものとして",
       "sentence": "雨が降るものとして、傘を持って行きました。",
-      "translation": "Assuming it would rain, I took an umbrella.",
+      "translation": "Tôi mang ô với giả định trời sẽ mưa.",
       "translationEn": "Assuming it would rain, I took an umbrella",
       "romaji": "Ame ga furu mono to shite, kasa o motte ikimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Assuming it would rain, I took an umbrella",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ものとして",
       "sentence": "彼が病気なものとして、代わりに私が出席した。",
-      "translation": "On the assumption that he was sick, I attended in his place.",
+      "translation": "Với giả định anh ấy bị bệnh, tôi tham dự thay anh ấy.",
       "translationEn": "On the assumption that he was sick, I attended in his place",
       "romaji": "Kare ga byouki na mono to shite, kawari ni watashi ga shusseki shita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: On the assumption that he was sick, I attended in his place",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ものとして",
       "sentence": "このケーキが美味しいものとして、みんなに分けよう。",
-      "translation": "Let’s share this cake, assuming it’s delicious.",
+      "translation": "Cứ giả sử bánh này ngon, chúng ta hãy chia cho mọi người.",
       "translationEn": "Let’s share this cake, assuming it’s delicious",
       "romaji": "Kono keeki ga oishii mono to shite, minna ni wakeyou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Let’s share this cake, assuming it’s delicious",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ものとして",
       "sentence": "彼女が学生のものとして、学割を適用しました。",
-      "translation": "Assuming she is a student, I applied the student discount.",
+      "translation": "Với giả định cô ấy là sinh viên, tôi áp dụng giảm giá sinh viên.",
       "translationEn": "Assuming she is a student, I applied the student discount",
       "romaji": "Kanojo ga gakusei no mono to shite, gakuwari o tekiyou shimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Assuming she is a student, I applied the student discount",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～んがために",
       "sentence": "健康を保たんがために、毎日運動をしています。",
-      "translation": "I exercise daily in order to maintain my health.",
+      "translation": "Để giữ sức khỏe, tôi tập thể dục mỗi ngày.",
       "translationEn": "I exercise daily in order to maintain my health",
       "romaji": "Kenkou o tamotan ga tame ni, mainichi undou o shite imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I exercise daily in order to maintain my health",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～んがために",
       "sentence": "合格せんがために、一生懸命勉強します。",
-      "translation": "I study hard in order to pass.",
+      "translation": "Để đậu, tôi học chăm chỉ.",
       "translationEn": "I study hard in order to pass",
       "romaji": "Goukaku sen ga tame ni, isshoukenmei benkyou shimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I study hard in order to pass",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～んがために",
       "sentence": "明日の試験に備えんがため、今夜は早く寝るつもりです。",
-      "translation": "I plan to go to bed early so I can prepare for tomorrow’s exam.",
+      "translation": "Để chuẩn bị cho kỳ thi ngày mai, tối nay tôi định ngủ sớm.",
       "translationEn": "I plan to go to bed early so I can prepare for tomorrow’s exam",
       "romaji": "Ashita no shiken ni sonaen ga tame, kon'ya wa hayaku neru tsumori desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I plan to go to bed early so I can prepare for tomorrow’s exam",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～んがために",
       "sentence": "彼女の笑顔を見んがために、毎日会いに行きます。",
-      "translation": "I go to see her every day in order to see her smile.",
+      "translation": "Để được thấy nụ cười của cô ấy, tôi đến gặp cô ấy mỗi ngày.",
       "translationEn": "I go to see her every day in order to see her smile",
       "romaji": "Kanojo no egao o min ga tame ni, mainichi ai ni ikimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I go to see her every day in order to see her smile",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～んばかりに",
       "sentence": "彼は何も知らんばかりに、私の質問を無視した。",
-      "translation": "He ignored my question as if he didn’t know anything.",
+      "translation": "Anh ấy phớt lờ câu hỏi của tôi như thể chẳng biết gì.",
       "translationEn": "He ignored my question as if he didn’t know anything",
       "romaji": "Kare wa nanimo shir-an bakari ni, watashi no shitsumon o mushi shita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He ignored my question as if he didn’t know anything",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～んばかりに",
       "sentence": "その子は泣かんばかりに顔をしかめた。",
-      "translation": "The child made a face as if he were about to cry.",
+      "translation": "Đứa trẻ nhăn mặt như sắp khóc.",
       "translationEn": "The child made a face as if he were about to cry",
       "romaji": "Sono ko wa nakan bakari ni kao o shikameta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The child made a face as if he were about to cry",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～んばかりに",
       "sentence": "彼女は笑わんばかりに口元を押さえた。",
-      "translation": "She covered her mouth as though she were about to burst out laughing.",
+      "translation": "Cô ấy che miệng như sắp bật cười.",
       "translationEn": "She covered her mouth as though she were about to burst out laughing",
       "romaji": "Kanojo wa warawan bakari ni kuchimoto o osaeta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She covered her mouth as though she were about to burst out laughing",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～んばかりに",
       "sentence": "彼は退屈だと言わんばかりに、ため息を何度もついた。",
-      "translation": "He sighed over and over as if to say he was bored.",
+      "translation": "Anh ấy thở dài liên tục như muốn nói rằng mình đang chán.",
       "translationEn": "He sighed over and over as if to say he was bored",
       "romaji": "Kare wa taikutsu da to iwan bakari ni, tameiki o nando mo tsuita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He sighed over and over as if to say he was bored",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～差し支えない",
       "sentence": "多少遅くても差し支えないです。",
-      "translation": "It’s no problem if you’re a bit late.",
+      "translation": "Bạn đến hơi muộn cũng không sao.",
       "translationEn": "It’s no problem if you’re a bit late",
       "romaji": "Tashou osokute mo sashitsukaenai desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: It’s no problem if you’re a bit late",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～差し支えない",
       "sentence": "部屋が少し汚くても差し支えない。",
-      "translation": "It doesn’t matter if the room is slightly messy.",
+      "translation": "Phòng hơi bừa cũng không sao.",
       "translationEn": "It doesn’t matter if the room is slightly messy",
       "romaji": "Heya ga sukoshi kitanakute mo sashitsukaenai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: It doesn’t matter if the room is slightly messy",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～差し支えない",
       "sentence": "雨が降っても差し支えない。",
-      "translation": "It’s not an issue even if it rains.",
+      "translation": "Trời mưa cũng không vấn đề gì.",
       "translationEn": "It’s not an issue even if it rains",
       "romaji": "Ame ga futte mo sashitsukaenai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: It’s not an issue even if it rains",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～差し支えない",
       "sentence": "彼がここにいることが差し支えないですか？",
-      "translation": "Is it okay (no problem) for him to be here?",
+      "translation": "Anh ấy ở đây có ổn không?",
       "translationEn": "Is it okay (no problem) for him to be here?",
       "romaji": "Kare ga koko ni iru koto ga sashitsukaenai desu ka?",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Is it okay (no problem) for him to be here?",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～折に",
       "sentence": "父が病気の折に、私は留学していました。",
-      "translation": "When my father was ill, I was studying abroad.",
+      "translation": "Khi bố tôi bị bệnh, tôi đang du học.",
       "translationEn": "When my father was ill, I was studying abroad",
       "romaji": "Chichi ga byouki no ori ni, watashi wa ryuugaku shite imashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When my father was ill, I was studying abroad",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～折に",
       "sentence": "日本へ行く折に、お土産を買ってきてください。",
-      "translation": "When you go to Japan, please buy souvenirs.",
+      "translation": "Khi đi Nhật, hãy mua quà lưu niệm về nhé.",
       "translationEn": "When you go to Japan, please buy souvenirs",
       "romaji": "Nihon e iku ori ni, omiyage o katte kite kudasai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When you go to Japan, please buy souvenirs",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～折に",
       "sentence": "子供が寝ている折に、静かにしてください。",
-      "translation": "Please be quiet when the child is sleeping.",
+      "translation": "Khi đứa trẻ đang ngủ, hãy giữ yên lặng.",
       "translationEn": "Please be quiet when the child is sleeping",
       "romaji": "Kodomo ga nete iru ori ni, shizuka ni shite kudasai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Please be quiet when the child is sleeping",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～折に",
       "sentence": "彼に会う折に、この手紙を渡してください。",
-      "translation": "Please give him this letter when you see him.",
+      "translation": "Khi gặp anh ấy, hãy đưa lá thư này cho anh ấy.",
       "translationEn": "Please give him this letter when you see him",
       "romaji": "Kare ni au ori ni, kono tegami o watashite kudasai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Please give him this letter when you see him",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～極まりない",
       "sentence": "彼の失礼な態度は極まりない。",
-      "translation": "His rude attitude is utterly beyond words.",
+      "translation": "Thái độ vô lễ của anh ấy thật quá mức.",
       "translationEn": "His rude attitude is utterly beyond words",
       "romaji": "Kare no shitsurei na taido wa kiwamarinai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: His rude attitude is utterly beyond words",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～極まりない",
       "sentence": "その運転は危険極まりない。",
-      "translation": "That driving is extremely dangerous.",
+      "translation": "Cách lái xe đó cực kỳ nguy hiểm.",
       "translationEn": "That driving is extremely dangerous",
       "romaji": "Sono unten wa kiken kiwamarinai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: That driving is extremely dangerous",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～極まりない",
       "sentence": "彼女のわがままぶりは非常識極まりない。",
-      "translation": "Her selfishness is utterly irrational.",
+      "translation": "Sự ích kỷ của cô ấy vô lý đến cùng cực.",
       "translationEn": "Her selfishness is utterly irrational",
       "romaji": "Kanojo no wagamama-buri wa hijoushiki kiwamarinai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Her selfishness is utterly irrational",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～極まりない",
       "sentence": "この部屋の汚さは不衛生極まりない。",
-      "translation": "The filthiness of this room is extremely unsanitary.",
+      "translation": "Độ bẩn của căn phòng này cực kỳ mất vệ sinh.",
       "translationEn": "The filthiness of this room is extremely unsanitary",
       "romaji": "Kono heya no kitasa wa fueisei kiwamarinai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The filthiness of this room is extremely unsanitary",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～極まる",
       "sentence": "彼の言動は失礼極まる。",
-      "translation": "His words and actions are extremely rude.",
+      "translation": "Lời nói và hành động của anh ấy cực kỳ vô lễ.",
       "translationEn": "His words and actions are extremely rude",
       "romaji": "Kare no gendou wa shitsurei kiwamaru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: His words and actions are extremely rude",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～極まる",
       "sentence": "その態度は非常識極まる。",
-      "translation": "That behavior is utterly irrational.",
+      "translation": "Thái độ đó cực kỳ vô lý.",
       "translationEn": "That behavior is utterly irrational",
       "romaji": "Sono taido wa hijoushiki kiwamaru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: That behavior is utterly irrational",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～極まる",
       "sentence": "彼女の発言は無責任極まる。",
-      "translation": "Her remark is extremely irresponsible.",
+      "translation": "Phát ngôn của cô ấy cực kỳ vô trách nhiệm.",
       "translationEn": "Her remark is extremely irresponsible",
       "romaji": "Kanojo no hatsugen wa musekinin kiwamaru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Her remark is extremely irresponsible",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～極まる",
       "sentence": "このような誤解は遺憾極まる。",
-      "translation": "Such a misunderstanding is exceedingly regrettable.",
+      "translation": "Hiểu lầm như vậy thật vô cùng đáng tiếc.",
       "translationEn": "Such a misunderstanding is exceedingly regrettable",
       "romaji": "Kono youna gokai wa ikan kiwamaru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Such a misunderstanding is exceedingly regrettable",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～足りない",
       "sentence": "私の日本語の能力はまだまだ足りない。",
-      "translation": "My Japanese skills are still not enough.",
+      "translation": "Năng lực tiếng Nhật của tôi vẫn còn thiếu nhiều.",
       "translationEn": "My Japanese skills are still not enough",
       "romaji": "Watashi no nihongo no nouryoku wa madamada tarinai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: My Japanese skills are still not enough",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～足りない",
       "sentence": "時間が足りないから、今すぐ行かなきゃ。",
-      "translation": "We don't have enough time, so we must go right now.",
+      "translation": "Không đủ thời gian nên phải đi ngay.",
       "translationEn": "We dont have enough time, so we must go right now",
       "romaji": "Jikan ga tarinai kara, ima sugu ikanakya.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We dont have enough time, so we must go right now",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～足りない",
       "sentence": "彼の説明には詳細が足りない。",
-      "translation": "His explanation lacks detail.",
+      "translation": "Lời giải thích của anh ấy thiếu chi tiết.",
       "translationEn": "His explanation lacks detail",
       "romaji": "Kare no setsumei ni wa shousai ga tarinai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: His explanation lacks detail",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～足りない",
       "sentence": "料理するための食材が足りない。",
-      "translation": "There's not enough food to cook with.",
+      "translation": "Không đủ nguyên liệu để nấu ăn.",
       "translationEn": "Theres not enough food to cook with",
       "romaji": "Ryouri suru tame no shokuzai ga tarinai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Theres not enough food to cook with",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～足る Noun",
       "sentence": "彼は信頼に足る人物だ。",
-      "translation": "He is a person worthy of trust.",
+      "translation": "Anh ấy là người đáng tin cậy.",
       "translationEn": "He is a person worthy of trust",
       "romaji": "Kare wa shinrai ni taru jinbutsu da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He is a person worthy of trust",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～足る Noun",
       "sentence": "この小説は読むに足る価値がある。",
-      "translation": "This novel is well worth reading.",
+      "translation": "Cuốn tiểu thuyết này có giá trị đáng đọc.",
       "translationEn": "This novel is well worth reading",
       "romaji": "Kono shousetsu wa yomu ni taru kachi ga aru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This novel is well worth reading",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～足る Noun",
       "sentence": "検討に足るデータが十分に集まった。",
-      "translation": "We've gathered enough data to be worth examining.",
+      "translation": "Chúng tôi đã thu thập đủ dữ liệu đáng để xem xét.",
       "translationEn": "Weve gathered enough data to be worth examining",
       "romaji": "Kentou ni taru deeta ga juubun ni atsumatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Weve gathered enough data to be worth examining",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～足る Noun",
       "sentence": "彼の説明は信用に足るものだと思う。",
-      "translation": "I think his explanation is worthy of trust.",
+      "translation": "Tôi nghĩ lời giải thích của anh ấy đáng tin.",
       "translationEn": "I think his explanation is worthy of trust",
       "romaji": "Kare no setsumei wa shinyou ni taru mono da to omou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I think his explanation is worthy of trust",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～限りだ",
       "sentence": "彼女が急に辞めてしまった。驚きの限りだ。",
-      "translation": "She suddenly quit. I'm as shocked as can be.",
+      "translation": "Cô ấy đột ngột nghỉ việc. Tôi vô cùng ngạc nhiên.",
       "translationEn": "She suddenly quit. Im as shocked as can be",
       "romaji": "Kanojo ga kyuu ni yamete shimatta. Odoroki no kagiri da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She suddenly quit. Im as shocked as can be",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～限りだ",
       "sentence": "息子が成功した。嬉しい限りだ。",
-      "translation": "My son succeeded. I'm so happy.",
+      "translation": "Con trai tôi đã thành công. Tôi vô cùng vui.",
       "translationEn": "My son succeeded. Im so happy",
       "romaji": "Musuko ga seikou shita. Ureshii kagiri da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: My son succeeded. Im so happy",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～限りだ",
       "sentence": "こんなに綺麗な花が見られるなんて、幸せの限りだ。",
-      "translation": "I'm as happy as can be to see such beautiful flowers.",
+      "translation": "Được thấy những bông hoa đẹp thế này, tôi vô cùng hạnh phúc.",
       "translationEn": "Im as happy as can be to see such beautiful flowers",
       "romaji": "Konna ni kirei na hana ga mirareru nante, shiawase no kagiri da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Im as happy as can be to see such beautiful flowers",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～限りだ",
       "sentence": "試験に合格できて、ほっとした限りだ。",
-      "translation": "I passed the exam—what a relief!",
+      "translation": "Tôi đã đậu kỳ thi, thật nhẹ nhõm vô cùng.",
       "translationEn": "I passed the exam—what a relief!",
       "romaji": "Shiken ni goukaku dekite, hotto shita kagiri da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I passed the exam—what a relief!",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     }
   ]
 }

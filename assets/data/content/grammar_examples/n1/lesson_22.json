@@ -6,690 +6,448 @@
   "tags": [
     "source-hanabira",
     "n1-grammar-import",
-    "needs-human-review",
-    "vi-machine-draft",
-    "vi-needs-review"
+    "vi-editorial-codex-pass"
   ],
   "examples": [
     {
       "grammarPoint": "～とはいえ",
       "sentence": "彼は頭が良いとはいえ、少し怠け者だ。",
-      "translation": "Although he is smart, he is a bit lazy.",
+      "translation": "Dù anh ấy thông minh, anh ấy hơi lười.",
       "translationEn": "Although he is smart, he is a bit lazy",
       "romaji": "Kare wa atama ga yoi to wa ie, sukoshi namakemono da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Although he is smart, he is a bit lazy",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～とはいえ",
       "sentence": "このレストランは美味しいとはいえ、ちょっと高い。",
-      "translation": "While this restaurant is delicious, it's a bit expensive.",
+      "translation": "Nhà hàng này ngon thật, nhưng hơi đắt.",
       "translationEn": "While this restaurant is delicious, its a bit expensive",
       "romaji": "Kono resutoran wa oishii to wa ie, chotto takai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: While this restaurant is delicious, its a bit expensive",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～とはいえ",
       "sentence": "日本は小さい国だとはいえ、技術は世界一だ。",
-      "translation": "Even though Japan is a small country, its technology is among the best in the world.",
+      "translation": "Dù Nhật Bản là nước nhỏ, công nghệ của Nhật thuộc hàng đầu thế giới.",
       "translationEn": "Even though Japan is a small country, its technology is among the best in the world",
       "romaji": "Nihon wa chiisai kuni da to wa ie, gijutsu wa sekaiichi da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Even though Japan is a small country, its technology is among the best in the world",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～とはいえ",
       "sentence": "彼女は若いとはいえ、経験豊富だ。",
-      "translation": "Even though she is young, she is very experienced.",
+      "translation": "Dù cô ấy còn trẻ, cô ấy rất giàu kinh nghiệm.",
       "translationEn": "Even though she is young, she is very experienced",
       "romaji": "Kanojo wa wakai to wa ie, keiken houfu da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Even though she is young, she is very experienced",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～とみえて",
       "sentence": "彼は運動が得意とみえて、毎日ジムに行っています。",
-      "translation": "He seems to be good at exercise, as he goes to the gym every day.",
+      "translation": "Có vẻ anh ấy giỏi vận động, vì ngày nào cũng đi gym.",
       "translationEn": "He seems to be good at exercise, as he goes to the gym every day",
       "romaji": "Kare wa undou ga tokui to miete, mainichi jimu ni itteimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He seems to be good at exercise, as he goes to the gym every day",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～とみえて",
       "sentence": "彼女は忙しいとみえて、なかなか会えない。",
-      "translation": "She seems to be busy, as it's hard to meet her.",
+      "translation": "Có vẻ cô ấy bận nên khó gặp.",
       "translationEn": "She seems to be busy, as its hard to meet her",
       "romaji": "Kanojo wa isogashii to miete, nakanaka aenai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She seems to be busy, as its hard to meet her",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～とみえて",
       "sentence": "田中さんは疲れているとみえて、早く帰りました。",
-      "translation": "It seems that Tanaka-san was tired, as he went home early.",
+      "translation": "Có vẻ anh Tanaka mệt nên đã về sớm.",
       "translationEn": "It seems that Tanaka-san was tired, as he went home early",
       "romaji": "Tanaka-san wa tsukarete iru to miete, hayaku kaerimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: It seems that Tanaka-san was tired, as he went home early",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～とみえて",
       "sentence": "その店は人気だとみえて、いつも行列ができている。",
-      "translation": "That shop seems to be popular, as there is always a line.",
+      "translation": "Cửa hàng đó có vẻ nổi tiếng, vì lúc nào cũng có hàng người xếp hàng.",
       "translationEn": "That shop seems to be popular, as there is always a line",
       "romaji": "Sono mise wa ninki da to miete, itsumo retsu ga dekite iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: That shop seems to be popular, as there is always a line",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～とみられる",
       "sentence": "彼の行動は無責任とみられる。",
-      "translation": "His behavior is considered irresponsible.",
+      "translation": "Hành động của anh ấy được xem là vô trách nhiệm.",
       "translationEn": "His behavior is considered irresponsible",
       "romaji": "Kare no koudou wa musekinin to mirareru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: His behavior is considered irresponsible",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～とみられる",
       "sentence": "この絵はピカソの作品とみられている。",
-      "translation": "This painting is believed to be a work of Picasso.",
+      "translation": "Bức tranh này được cho là tác phẩm của Picasso.",
       "translationEn": "This painting is believed to be a work of Picasso",
       "romaji": "Kono e wa pikaso no sakuhin to mirareteiru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This painting is believed to be a work of Picasso",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～とみられる",
       "sentence": "地震の後、被害はさらに増加するとみられる。",
-      "translation": "After the earthquake, damage is expected to increase further.",
+      "translation": "Sau trận động đất, thiệt hại dự kiến sẽ còn tăng.",
       "translationEn": "After the earthquake, damage is expected to increase further",
       "romaji": "Jishin no ato, higai wa sara ni zouka suru to mirareru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: After the earthquake, damage is expected to increase further",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～とみられる",
       "sentence": "週末は天気が良くなるとみられる。",
-      "translation": "The weather is expected to improve on the weekend.",
+      "translation": "Thời tiết cuối tuần được dự báo sẽ tốt hơn.",
       "translationEn": "The weather is expected to improve on the weekend",
       "romaji": "Shuumatsu wa tenki ga yoku naru to mirareru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The weather is expected to improve on the weekend",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～とみると",
       "sentence": "この問題を数学の視点でとみると、解決策が見えてきます。",
-      "translation": "When one sees this problem from a mathematical perspective, a solution begins to emerge.",
+      "translation": "Nhìn vấn đề này từ góc độ toán học thì sẽ thấy hướng giải quyết.",
       "translationEn": "When one sees this problem from a mathematical perspective, a solution begins to emerge",
       "romaji": "Kono mondai o suugaku no shiten de to miru to, kaiketsusaku ga miete kimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When one sees this problem from a mathematical perspective, a solution begins to emerge",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～とみると",
       "sentence": "彼女が優秀な学生だとみると、その賞をもらったのは当然です。",
-      "translation": "Considering she is an excellent student, it's natural that she received that award.",
+      "translation": "Xét việc cô ấy là học sinh xuất sắc, nhận giải đó là điều đương nhiên.",
       "translationEn": "Considering she is an excellent student, its natural that she received that award",
       "romaji": "Kanojo ga yuushuuna gakusei da to miru to, sono shou o moratta no wa touzen desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Considering she is an excellent student, its natural that she received that award",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～とみると",
       "sentence": "彼が新入社員だとみると、その成果は素晴らしいです。",
-      "translation": "Viewing him as a new employee, his achievements are exceptional.",
+      "translation": "Nếu xem anh ấy là nhân viên mới thì thành tích đó thật xuất sắc.",
       "translationEn": "Viewing him as a new employee, his achievements are exceptional",
       "romaji": "Kare ga shinnyuushain da to miru to, sono seika wa subarashii desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Viewing him as a new employee, his achievements are exceptional",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～とみると",
       "sentence": "このパンダが絶滅危惧種だとみると、保護が必要です。",
-      "translation": "Considering this panda is an endangered species, it needs protection.",
+      "translation": "Nếu xem chú gấu trúc này là loài nguy cấp thì cần được bảo vệ.",
       "translationEn": "Considering this panda is an endangered species, it needs protection",
       "romaji": "Kono panda ga zetsumetsu kigushu da to miru to, hogo ga hitsuyou desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Considering this panda is an endangered species, it needs protection",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "どんなに～うが",
       "sentence": "どんなに頑張ろうが、彼の速さには追いつけない。",
-      "translation": "No matter how hard I try, I can't catch up with his speed.",
+      "translation": "Dù cố gắng đến đâu, tôi cũng không theo kịp tốc độ của anh ấy.",
       "translationEn": "No matter how hard I try, I cant catch up with his speed",
       "romaji": "Donna ni ganbarou ga, kare no hayasa ni wa oitsukenai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: No matter how hard I try, I cant catch up with his speed",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "どんなに～うが",
       "sentence": "どんなに食べようが、彼女は太らない。",
-      "translation": "No matter how much she eats, she doesn't gain weight.",
+      "translation": "Dù cô ấy ăn bao nhiêu cũng không béo.",
       "translationEn": "No matter how much she eats, she doesnt gain weight",
       "romaji": "Donna ni tabeyou ga, kanojo wa futoranai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: No matter how much she eats, she doesnt gain weight",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "どんなに～うが",
       "sentence": "どんなに寒かろうが、彼は毎日ジョギングをします。",
-      "translation": "No matter how cold it is, he goes jogging every day.",
+      "translation": "Dù lạnh thế nào, anh ấy vẫn chạy bộ mỗi ngày.",
       "translationEn": "No matter how cold it is, he goes jogging every day",
       "romaji": "Donna ni samukarou ga, kare wa mainichi jogging wo shimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: No matter how cold it is, he goes jogging every day",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "どんなに～うが",
       "sentence": "どんなに暑かろうが、エアコンは使いません。",
-      "translation": "No matter how hot it is, I don't use air conditioning.",
+      "translation": "Dù nóng thế nào, tôi cũng không dùng điều hòa.",
       "translationEn": "No matter how hot it is, I dont use air conditioning",
       "romaji": "Donna ni atsukarou ga, eakon wa tsukaimasen.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: No matter how hot it is, I dont use air conditioning",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～と言わんばかりに",
       "sentence": "彼女は優勝したと言わんばかりに笑った。",
-      "translation": "She laughed as if to say she won.",
+      "translation": "Cô ấy cười như thể muốn nói rằng mình đã vô địch.",
       "translationEn": "She laughed as if to say she won",
       "romaji": "Kanojo wa yuushou shita to iwan bakari ni waratta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She laughed as if to say she won",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～と言わんばかりに",
       "sentence": "彼は倒れると言わんばかりの疲労感があった。",
-      "translation": "He was so fatigued it was as if he might collapse.",
+      "translation": "Anh ấy mệt đến mức như sắp ngã quỵ.",
       "translationEn": "He was so fatigued it was as if he might collapse",
       "romaji": "Kare wa taoreru to iwan bakari no hiroukan ga atta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He was so fatigued it was as if he might collapse",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～と言わんばかりに",
       "sentence": "彼女は雨の日を恐れていて、晴れてほしいと言わんばかりに窓の外を見つめていた。",
-      "translation": "She was afraid of rainy days, almost as if to say she wanted it to be sunny, as she gazed out the window.",
+      "translation": "Cô ấy sợ ngày mưa, cứ nhìn ra ngoài cửa sổ như muốn trời nắng lên.",
       "translationEn": "She was afraid of rainy days, almost as if to say she wanted it to be sunny, as she gazed out the window",
       "romaji": "Kanojo wa ame no hi o osorete ite, harete hoshii to iwan bakari ni mado no soto o mitsumete ita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She was afraid of rainy days, almost as if to say she wanted it to be sunny, as she gazed out the window",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～と言わんばかりに",
       "sentence": "彼の行動は、誰にも信じてもらえないと言わんばかりだった。",
-      "translation": "His behavior was as if to say that no one would believe him.",
+      "translation": "Hành động của anh ấy như muốn nói rằng chẳng ai tin mình.",
       "translationEn": "His behavior was as if to say that no one would believe him",
       "romaji": "Kare no koudou wa, dare ni mo shinjite moraenai to iwan bakari datta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: His behavior was as if to say that no one would believe him",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～と言わんばかりの Noun",
       "sentence": "田中さんは嬉しくて飛び上がると言わんばかりの笑顔を見せた。",
-      "translation": "Tanaka showed a smile as if to say he was so happy he could jump for joy.",
+      "translation": "Anh Tanaka cười rạng rỡ như muốn nhảy cẫng lên vì vui.",
       "translationEn": "Tanaka showed a smile as if to say he was so happy he could jump for joy",
       "romaji": "Tanaka-san wa ureshikute tobiagaru to iwan bakari no egao wo miseta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Tanaka showed a smile as if to say he was so happy he could jump for joy",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～と言わんばかりの Noun",
       "sentence": "彼女は僕に話しかけると言わんばかりの視線を送った。",
-      "translation": "She sent me glances as if to say she wanted to speak with me.",
+      "translation": "Cô ấy nhìn tôi như muốn bắt chuyện.",
       "translationEn": "She sent me glances as if to say she wanted to speak with me",
       "romaji": "Kanojo wa boku ni hanashikakeru to iwan bakari no shisen wo okutta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She sent me glances as if to say she wanted to speak with me",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～と言わんばかりの Noun",
       "sentence": "その老人は寒さで震えていると言わんばかりの姿を見せていた。",
-      "translation": "The old man was shivering as if to say he was freezing from the cold.",
+      "translation": "Ông cụ trông run rẩy như đang rét cóng.",
       "translationEn": "The old man was shivering as if to say he was freezing from the cold",
       "romaji": "Sono roujin wa samusa de furueteiru to iwan bakari no sugata wo miseteita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The old man was shivering as if to say he was freezing from the cold",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～と言わんばかりの Noun",
       "sentence": "彼の体は緊張で固まっていると言わんばかりの風格を放っている。",
-      "translation": "He exudes an air as if his body were stiff from tension.",
+      "translation": "Anh ấy toát ra vẻ căng cứng như toàn thân đông lại vì hồi hộp.",
       "translationEn": "He exudes an air as if his body were stiff from tension",
       "romaji": "Kare no karada wa kinchou de katamatteiru to iwan bakari no fuukaku wo hanatteiru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He exudes an air as if his body were stiff from tension",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ながらに",
       "sentence": "彼女は生まれながらにして優れた音感を持っている。",
-      "translation": "She has had an excellent sense of pitch from birth.",
+      "translation": "Cô ấy bẩm sinh đã có cảm âm xuất sắc.",
       "translationEn": "She has had an excellent sense of pitch from birth",
       "romaji": "Kanojo wa umare nagara ni shite sugureta onkan o motte iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She has had an excellent sense of pitch from birth",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ながらに",
       "sentence": "彼は子供ながらに大人の会話を理解していた。",
-      "translation": "Even though he was just a child, he understood adult conversations.",
+      "translation": "Dù còn là trẻ con, anh ấy đã hiểu câu chuyện của người lớn.",
       "translationEn": "Even though he was just a child, he understood adult conversations",
       "romaji": "Kare wa kodomo nagara ni otona no kaiwa o rikaishite ita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Even though he was just a child, he understood adult conversations",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ながらに",
       "sentence": "彼女は涙ながらに真実を訴えた。",
-      "translation": "She pleaded the truth while in tears.",
+      "translation": "Cô ấy vừa khóc vừa khẩn thiết nói ra sự thật.",
       "translationEn": "She pleaded the truth while in tears",
       "romaji": "Kanojo wa namida nagara ni shinjitsu o uttaeta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She pleaded the truth while in tears",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ながらに",
       "sentence": "私たちは昔ながらに伝わる祭りを大切にしている。",
-      "translation": "We cherish the traditional festival that has been passed down unchanged from old times.",
+      "translation": "Chúng tôi trân trọng lễ hội truyền thống được truyền lại từ xưa.",
       "translationEn": "We cherish the traditional festival that has been passed down unchanged from old times",
       "romaji": "Watashi-tachi wa mukashi nagara ni tsutawaru matsuri o taisetsu ni shite iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We cherish the traditional festival that has been passed down unchanged from old times",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ながらの Noun",
       "sentence": "テレビを見ながらの夕食は、子供たちにとって楽しいだろう。",
-      "translation": "Eating dinner while watching TV might be fun for the children.",
+      "translation": "Ăn tối vừa xem TV có lẽ vui với trẻ con.",
       "translationEn": "Eating dinner while watching TV might be fun for the children",
       "romaji": "Terebi o mi-nagara no yuushoku wa, kodomotachi ni totte tanoshii darou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Eating dinner while watching TV might be fun for the children",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ながらの Noun",
       "sentence": "地図を読みながらの運転は危険です。",
-      "translation": "Driving while reading a map is dangerous.",
+      "translation": "Vừa lái xe vừa xem bản đồ rất nguy hiểm.",
       "translationEn": "Driving while reading a map is dangerous",
       "romaji": "Chizu o yomi-nagara no unten wa kiken desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Driving while reading a map is dangerous",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ながらの Noun",
       "sentence": "散歩しながらの会話はリラックスできます。",
-      "translation": "Talking during a walk can be relaxing.",
+      "translation": "Trò chuyện khi đi dạo giúp thư giãn.",
       "translationEn": "Talking during a walk can be relaxing",
       "romaji": "Sanpo shi-nagara no kaiwa wa rirakkusu dekimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Talking during a walk can be relaxing",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ながらの Noun",
       "sentence": "音楽を聴きながらの勉強は集中力を高めるかもしれません。",
-      "translation": "Studying while listening to music might improve concentration.",
+      "translation": "Học trong lúc nghe nhạc có thể tăng khả năng tập trung.",
       "translationEn": "Studying while listening to music might improve concentration",
       "romaji": "Ongaku o kiki-nagara no benkyou wa shuuchuuryoku o takameru kamoshiremasen.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Studying while listening to music might improve concentration",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ながらも",
       "sentence": "彼は貧しいながらも、幸せな生活を送っている。",
-      "translation": "Despite being poor, he leads a happy life.",
+      "translation": "Dù nghèo, anh ấy sống hạnh phúc.",
       "translationEn": "Despite being poor, he leads a happy life",
       "romaji": "Kare wa mazushii nagara mo, shiawase na seikatsu o okutte iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Despite being poor, he leads a happy life",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ながらも",
       "sentence": "僕は忙しいながらも、毎日運動しています。",
-      "translation": "Even though I am busy, I exercise every day.",
+      "translation": "Dù bận, tôi vẫn tập thể dục mỗi ngày.",
       "translationEn": "Even though I am busy, I exercise every day",
       "romaji": "Boku wa isogashii nagara mo, mainichi undou shiteimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Even though I am busy, I exercise every day",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ながらも",
       "sentence": "病気ながらも、彼は仕事を続けました。",
-      "translation": "Despite being sick, he continued working.",
+      "translation": "Dù đang bệnh, anh ấy vẫn tiếp tục làm việc.",
       "translationEn": "Despite being sick, he continued working",
       "romaji": "Byouki nagara mo, kare wa shigoto o tsuzukemashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Despite being sick, he continued working",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ながらも",
       "sentence": "雨が降っているながらも、彼は散歩に出かけた。",
-      "translation": "Even though it was raining, he went for a walk.",
+      "translation": "Dù trời mưa, anh ấy vẫn đi dạo.",
       "translationEn": "Even though it was raining, he went for a walk",
       "romaji": "Ame ga futte iru nagara mo, kare wa sanpo ni dekaketa.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Even though it was raining, he went for a walk",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     }
   ]
 }
