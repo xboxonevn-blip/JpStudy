@@ -7,7 +7,7 @@ This audit corrects the D2 approval-tag integrity violation found on 2026-05-16.
 ## Verification Commands
 
 ```bash
-flutter test test\core\research\content_vi_status_audit_test.dart test\tool\research\content_vi_status_report_test.dart
+flutter test test\data\content_review_taxonomy_integrity_test.dart test\data\upper_jlpt_content_integrity_test.dart test\core\research\content_vi_status_audit_test.dart test\tool\research\content_vi_status_report_test.dart
 dart run tool\research\content_vi_status_report.dart
 ```
 
@@ -72,6 +72,7 @@ N1/N2 are not launch-ready:
 - Placeholder examples: `1,744`.
 - Those 50 files now have honest root tags: `vi-machine-draft` and `vi-needs-review`.
 - `vi-human-approved` was removed from those files.
+- A stricter file-level follow-up also removed `vi-human-approved` from `48` mixed N1/N2 kanji lesson files that still contain `vi-needs-review` entries. Checked kanji metadata remains represented by `kanji-metadata-approved`; human approval is not used on mixed-debt files.
 - N2 still has `2,752` machine items and `1,004` open-review items.
 - N1 still has `4,701` machine items and `1,278` open-review items.
 

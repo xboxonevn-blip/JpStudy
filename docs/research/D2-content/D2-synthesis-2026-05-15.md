@@ -63,6 +63,7 @@ N1/N2 are draft-tier, not launch-tier:
 - `50` files under `assets/data/content/grammar_examples/n1/` and `assets/data/content/grammar_examples/n2/` still contain placeholder Vietnamese like `Bản dịch ví dụ cần biên tập từ: [English]`.
 - Those 50 files are tagged honestly with `vi-machine-draft` and `vi-needs-review`.
 - They no longer carry `vi-human-approved`.
+- A stricter file-level follow-up removed `vi-human-approved` from `48` mixed N1/N2 kanji lesson files because those files still contain `vi-needs-review` entries. Use `kanji-metadata-approved` for checked metadata; do not use human approval tags on mixed-debt files.
 - N2 current debt: `2,752` machine items, `1,004` open-review items.
 - N1 current debt: `4,701` machine items, `1,278` open-review items.
 - N1 kanji scope is still `889 / 2,000`; do not market full N1 kanji coverage.
@@ -72,7 +73,7 @@ N1/N2 are draft-tier, not launch-tier:
 Commands run for the correction:
 
 ```bash
-flutter test test\core\research\content_vi_status_audit_test.dart test\tool\research\content_vi_status_report_test.dart
+flutter test test\data\content_review_taxonomy_integrity_test.dart test\data\upper_jlpt_content_integrity_test.dart test\core\research\content_vi_status_audit_test.dart test\tool\research\content_vi_status_report_test.dart
 dart run tool\research\content_vi_status_report.dart
 ```
 

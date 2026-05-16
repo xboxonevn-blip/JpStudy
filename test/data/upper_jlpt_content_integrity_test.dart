@@ -213,7 +213,6 @@ void main() {
             if (labels['hanViet'] != null) {
               expect(tags, contains('kanji-metadata-approved'));
               expect(tags, isNot(contains('needs-kanji-editorial')));
-              expect(tags, contains('vi-human-approved'));
             } else {
               expect(
                 entry['metadataStatus'],

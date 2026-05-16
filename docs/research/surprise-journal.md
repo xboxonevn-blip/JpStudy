@@ -385,3 +385,10 @@
 - Actual observation: bulk `vi-human-approved` was applied to 23,444 items including 50 untranslated N1/N2 grammar-example placeholder files. Those files still contained `Bản dịch ví dụ cần biên tập từ: [English]` and draft/review tags.
 - Delta: -80 percentage points on confidence that approval tags can be trusted without content-state guards.
 - Updated belief: `approved` must mean content verified, not user-said-go. Tag taxonomy integrity requires automatic contradiction checks, and machine/open-review debt must stay visible until content is actually rewritten or reviewed.
+
+## 2026-05-16T04:55:00+07:00 - Item-level guards missed mixed-debt files
+
+- Prior belief: checking approval and review debt at the same item level was enough to protect the D2 taxonomy.
+- Actual observation: 48 N1/N2 kanji lesson files still had `vi-human-approved` on checked entries while the same file also contained `vi-needs-review` entries. The item-level guard passed, but the user-requested file-level grep failed.
+- Delta: -35 percentage points on confidence that nested content audits can ignore file-level provenance.
+- Updated belief: human approval tags need both item-level and file-level contradiction guards when a content file mixes reviewed and draft entries.
