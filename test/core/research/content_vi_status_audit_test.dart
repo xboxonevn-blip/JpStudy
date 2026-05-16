@@ -78,7 +78,7 @@ void main() {
     expect(report.filesScanned, 3);
     expect(report.totalItems, 5);
     expect(report.level('N1').items, 4);
-    expect(report.level('N1').machineTranslatedItems, 1);
+    expect(report.level('N1').machineTranslatedItems, 2);
     expect(report.level('N1').approvedItems, 3);
     expect(report.level('N1').machineAndApprovedItems, 1);
     expect(report.level('N2').openReviewItems, 1);
@@ -152,7 +152,7 @@ void main() {
   });
 
   test(
-    'human approval closes stale machine and review provenance tags',
+    'human approval never hides machine draft and review debt tags',
     () async {
       final tempDir = await Directory.systemTemp.createTemp('jpstudy_content_');
       addTearDown(() async {
@@ -190,13 +190,13 @@ void main() {
 
       expect(report.totalItems, 1);
       expect(report.level('N2').approvedItems, 1);
-      expect(report.level('N2').machineTranslatedItems, 0);
-      expect(report.level('N2').needsViEditorialItems, 0);
-      expect(report.level('N2').needsHumanReviewItems, 0);
-      expect(report.level('N2').openReviewItems, 0);
+      expect(report.level('N2').machineTranslatedItems, 1);
+      expect(report.level('N2').needsViEditorialItems, 1);
+      expect(report.level('N2').needsHumanReviewItems, 1);
+      expect(report.level('N2').openReviewItems, 1);
       expect(report.level('N2').machineAndApprovedItems, 1);
-      expect(report.filesWithMachineTranslation, 0);
-      expect(report.filesWithOpenReview, 0);
+      expect(report.filesWithMachineTranslation, 1);
+      expect(report.filesWithOpenReview, 1);
     },
   );
 }

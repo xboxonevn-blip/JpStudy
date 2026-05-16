@@ -414,10 +414,10 @@ _ContentViItemStatus _statusFor(Map<String, Object?> item) {
       tags.contains('needs-human-review') ||
       tags.contains('manual-review-needed');
   return _ContentViItemStatus(
-    machineTranslated: machineTranslated && !approved,
+    machineTranslated: machineTranslated,
     machineTranslationProvenance: machineTranslated,
-    needsViEditorial: needsViEditorial && !approved,
-    needsHumanReview: needsHumanReview && !approved,
+    needsViEditorial: needsViEditorial,
+    needsHumanReview: needsHumanReview,
     approved: approved,
     hasDraftField: _hasDraftField(item),
   );
