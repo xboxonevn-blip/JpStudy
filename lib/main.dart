@@ -10,6 +10,7 @@ import 'package:jpstudy/core/analytics/analytics_consent_provider.dart';
 import 'package:jpstudy/core/analytics/do_not_track.dart';
 import 'package:jpstudy/core/auth/anonymous_auth_provider.dart';
 import 'package:jpstudy/core/error_monitoring/sentry_setup.dart';
+import 'package:jpstudy/core/onboarding_provider.dart';
 import 'package:jpstudy/core/shared_preferences_provider.dart';
 import 'package:jpstudy/core/notifications/notification_service.dart';
 import 'package:jpstudy/data/db/database_provider.dart';
@@ -44,7 +45,10 @@ Future<void> main() async {
   final preferences = await SharedPreferences.getInstance();
   AppRouter.configurePreferences(preferences);
   final container = ProviderContainer(
-    overrides: [sharedPreferencesProvider.overrideWithValue(preferences)],
+    overrides: [
+      sharedPreferencesProvider.overrideWithValue(preferences),
+      ...persistedAppBootstrapOverrides(preferences),
+    ],
   );
   final database = container.read(databaseProvider);
   try {

@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:jpstudy/app/app.dart';
 import 'package:jpstudy/app/navigation/app_route_constants.dart';
 import 'package:jpstudy/app/navigation/app_router.dart';
+import 'package:jpstudy/core/auth/auth_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/onboarding_provider.dart';
 import 'package:jpstudy/core/shared_preferences_provider.dart';
@@ -18,15 +19,21 @@ void main() {
     AppRouter.router.go(AppRoutePath.home);
   });
 
-  testWidgets('app bootstrap gates direct routes until persisted state loads', (
+  testWidgets('app bootstrap keeps router mounted for direct links', (
     tester,
   ) async {
+    tester.view.physicalSize = const Size(1440, 1200);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
     SharedPreferences.setMockInitialValues({
       prefOnboardingCompleted: true,
       prefOnboardingLevel: 'n3',
       prefOnboardingGoal: 'jlpt',
       'app.locale': 'en',
       'analytics.consent': false,
+      'foundations.softSuggest.grammar.shown': true,
     });
     final prefs = await SharedPreferences.getInstance();
     final initCompleter = Completer<void>();
@@ -36,6 +43,9 @@ void main() {
       overrides: [
         sharedPreferencesProvider.overrideWithValue(prefs),
         appInitProvider.overrideWith((_) => initCompleter.future),
+        onboardingDoneProvider.overrideWith((_) => true),
+        studyLevelProvider.overrideWith((_) => StudyLevel.n3),
+        authStateProvider.overrideWith((_) => Stream.value(null)),
         grammarPointsProvider('N3').overrideWith((_) async => const []),
         grammarPointsProvider('N5').overrideWith((_) async => const []),
         grammarDueCountProvider.overrideWith((_) async => 0),
@@ -52,8 +62,12 @@ void main() {
     );
     await tester.pump();
 
-    expect(find.byKey(const ValueKey('app_bootstrap_loading')), findsOneWidget);
-    expect(find.textContaining('Grammar'), findsNothing);
+    expect(find.byKey(const ValueKey('app_bootstrap_loading')), findsNothing);
+    expect(
+      AppRouter.router.routeInformationProvider.value.uri.path,
+      AppRoutePath.grammar,
+    );
+    expect(find.text('Grammar (N3)'), findsOneWidget);
 
     initCompleter.complete();
     await tester.pumpWidget(const SizedBox.shrink());
@@ -82,6 +96,7 @@ void main() {
     final container = ProviderContainer(
       overrides: [
         sharedPreferencesProvider.overrideWithValue(prefs),
+        authStateProvider.overrideWith((_) => Stream.value(null)),
         grammarPointsProvider('N3').overrideWith((_) async => const []),
         grammarPointsProvider('N5').overrideWith((_) async => const []),
         grammarDueCountProvider.overrideWith((_) async => 0),

@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:jpstudy/core/goal_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/study_goal.dart';
@@ -13,6 +14,30 @@ const prefOnboardingGoalSkipUntil = 'onboarding.goal.skipUntil';
 
 /// null = still loading, false = show onboarding, true = show home
 final onboardingDoneProvider = StateProvider<bool?>((ref) => null);
+
+List<Override> persistedAppBootstrapOverrides(SharedPreferences prefs) {
+  final completed = prefs.getBool(prefOnboardingCompleted) ?? false;
+  final levelName = completed ? prefs.getString(prefOnboardingLevel) : null;
+  final level = levelName == null
+      ? null
+      : StudyLevel.values.firstWhere(
+          (l) => l.name == levelName,
+          orElse: () => StudyLevel.n5,
+        );
+  final goalName = completed ? prefs.getString(prefOnboardingGoal) : null;
+  final goal = goalName == null
+      ? null
+      : StudyGoal.values.firstWhere(
+          (g) => g.name == goalName,
+          orElse: () => StudyGoal.jlpt,
+        );
+
+  return [
+    onboardingDoneProvider.overrideWith((ref) => completed),
+    if (level != null) studyLevelProvider.overrideWith((ref) => level),
+    if (goal != null) studyGoalProvider.overrideWith((ref) => goal),
+  ];
+}
 
 Future<void> setPersistedStudyLevel(WidgetRef ref, StudyLevel level) async {
   ref.read(studyLevelProvider.notifier).state = level;
