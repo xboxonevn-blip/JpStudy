@@ -2,6 +2,10 @@
 
 ## Storage Rules
 
+- Beta status: Firebase Storage cloud backup and legacy migration are disabled
+  while `jpstudy-v2` stays on Spark. Keep this scaffolding for a future
+  cloud-sync rebuild; do not enable it until a bucket is provisioned and the
+  feature flag is intentionally turned on.
 - Deploy `storage.rules` before enabling cloud backup in production.
 - Apply `storage.cors.json` to the provisioned Firebase Storage bucket before
   browser upload/download proof.
@@ -40,8 +44,10 @@ flutter build web --dart-define=JPSTUDY_RECAPTCHA_SITE_KEY=your_site_key
 
 - Enable email verification if email/password sign-in is public.
 - The app sends a verification email after unverified email/password sign-in.
-- Cloud backup upload/download is blocked until `emailVerified` is true.
-- Users can delete their Firebase Storage cloud backup from Data controls.
+- Future cloud backup upload/download must stay blocked until `emailVerified`
+  is true.
+- Firebase Storage backup deletion is not a beta control because no beta
+  Storage data is created.
 - Enable Firebase Auth password policy.
 - Review Google sign-in authorized domains and OAuth clients.
 - In the production Firebase project, remove `localhost` from Auth authorized domains unless a time-boxed dev exception is documented.
