@@ -6,690 +6,448 @@
   "tags": [
     "source-hanabira",
     "n1-grammar-import",
-    "needs-human-review",
-    "vi-machine-draft",
-    "vi-needs-review"
+    "vi-editorial-codex-pass"
   ],
   "examples": [
     {
       "grammarPoint": "いつまで～のやら",
       "sentence": "この試験勉強はいつまで続くのやら。",
-      "translation": "I don't know when this exam study will end.",
+      "translation": "Không biết việc học thi này sẽ kéo dài đến bao giờ.",
       "translationEn": "I dont know when this exam study will end",
       "romaji": "Kono shiken benkyou wa itsumade tsuzuku no yara.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I dont know when this exam study will end",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "いつまで～のやら",
       "sentence": "彼の話がいつ終わるのやら、わからない。",
-      "translation": "I don't know when his talk will finish.",
+      "translation": "Không biết câu chuyện của anh ấy bao giờ mới kết thúc.",
       "translationEn": "I dont know when his talk will finish",
       "romaji": "Kare no hanashi ga itsu owaru no yara, wakaranai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I dont know when his talk will finish",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "いつまで～のやら",
       "sentence": "この雨がいつまで降り続くのやら。",
-      "translation": "I don't know when this rain will stop.",
+      "translation": "Không biết mưa này sẽ còn rơi đến bao giờ.",
       "translationEn": "I dont know when this rain will stop",
       "romaji": "Kono ame ga itsumade furitsuzuku no yara.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I dont know when this rain will stop",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "いつまで～のやら",
       "sentence": "コロナのパンデミックがいつまで続くのやら。",
-      "translation": "I don't know when this coronavirus pandemic will end.",
+      "translation": "Không biết đại dịch corona sẽ kéo dài đến bao giờ.",
       "translationEn": "I dont know when this coronavirus pandemic will end",
       "romaji": "Korona no pandemikku ga itsumade tsuzuku no yara.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I dont know when this coronavirus pandemic will end",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～が Verb られる",
       "sentence": "彼がこの問題を解けると思いますか？",
-      "translation": "Do you think he can solve this problem?",
+      "translation": "Bạn nghĩ anh ấy có giải được vấn đề này không?",
       "translationEn": "Do you think he can solve this problem?",
       "romaji": "Kare ga kono mondai o tokeru to omoimasu ka?",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Do you think he can solve this problem?",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～が Verb られる",
       "sentence": "私がその大きな箱を運べるか？",
-      "translation": "Can I carry that big box?",
+      "translation": "Tôi có bê được cái thùng lớn đó không?",
       "translationEn": "Can I carry that big box?",
       "romaji": "Watashi ga sono ookina hako o hakoberu ka?",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Can I carry that big box?",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～が Verb られる",
       "sentence": "彼が早く走れると思います。",
-      "translation": "I think he can run fast.",
+      "translation": "Tôi nghĩ anh ấy có thể chạy nhanh.",
       "translationEn": "I think he can run fast",
       "romaji": "Kare ga hayaku hashireru to omoimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I think he can run fast",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～が Verb られる",
       "sentence": "彼女は日本語が話せる。",
-      "translation": "She can speak Japanese.",
+      "translation": "Cô ấy nói được tiếng Nhật.",
       "translationEn": "She can speak Japanese",
       "romaji": "Kanojo wa nihongo ga hanaseru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She can speak Japanese",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～かと思いきや",
       "sentence": "明日は晴れるかと思いきや、まさかの雨が降った。",
-      "translation": "I thought it would be sunny tomorrow, but unexpectedly it rained.",
+      "translation": "Tôi tưởng ngày mai trời nắng, nào ngờ lại mưa.",
       "translationEn": "I thought it would be sunny tomorrow, but unexpectedly it rained",
       "romaji": "Ashita wa hareru ka to omoikiya, masaka no ame ga futta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I thought it would be sunny tomorrow, but unexpectedly it rained",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～かと思いきや",
       "sentence": "彼が試験に落ちたかと思いきや、合格していた。",
-      "translation": "I thought he had failed the test, but he actually passed.",
+      "translation": "Tôi tưởng anh ấy trượt kỳ thi, nào ngờ đã đậu.",
       "translationEn": "I thought he had failed the test, but he actually passed",
       "romaji": "Kare ga shiken ni ochita ka to omoikiya, goukaku shite ita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I thought he had failed the test, but he actually passed",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～かと思いきや",
       "sentence": "このケーキは美味しそうだったかと思いきや、全然甘くなかった。",
-      "translation": "I thought this cake would be delicious, but it wasn’t sweet at all.",
+      "translation": "Tôi tưởng bánh này ngon, nào ngờ chẳng ngọt chút nào.",
       "translationEn": "I thought this cake would be delicious, but it wasn’t sweet at all",
       "romaji": "Kono keeki wa oishisou datta ka to omoikiya, zenzen amakunakatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I thought this cake would be delicious, but it wasn’t sweet at all",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～かと思いきや",
       "sentence": "列車が遅れるかと思いきや、時間通りに到着した。",
-      "translation": "I thought the train would be late, but it arrived on time.",
+      "translation": "Tôi tưởng tàu sẽ trễ, nào ngờ đến đúng giờ.",
       "translationEn": "I thought the train would be late, but it arrived on time",
       "romaji": "Ressha ga okureru ka to omoikiya, jikan doori ni touchaku shita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I thought the train would be late, but it arrived on time",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～がゆえに",
       "sentence": "愛情がゆえに、彼は彼女を許した。",
-      "translation": "Because of love, he forgave her.",
+      "translation": "Vì tình yêu, anh ấy đã tha thứ cho cô ấy.",
       "translationEn": "Because of love, he forgave her",
       "romaji": "Aijou ga yue ni, kare wa kanojo o yurushita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Because of love, he forgave her",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～がゆえに",
       "sentence": "突然の雨がゆえに、試合は延期された。",
-      "translation": "Due to the sudden rain, the match was postponed.",
+      "translation": "Do cơn mưa bất ngờ, trận đấu bị hoãn.",
       "translationEn": "Due to the sudden rain, the match was postponed",
       "romaji": "Totsuzen no ame ga yue ni, shiai wa enki sareta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Due to the sudden rain, the match was postponed",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～がゆえに",
       "sentence": "彼の努力がゆえに、彼は成功を収めた。",
-      "translation": "Because of his efforts, he achieved success.",
+      "translation": "Nhờ nỗ lực, anh ấy đã đạt được thành công.",
       "translationEn": "Because of his efforts, he achieved success",
       "romaji": "Kare no doryoku ga yue ni, kare wa seikou o osameta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Because of his efforts, he achieved success",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～がゆえに",
       "sentence": "彼の死がゆえに、彼の家族は深い悲しみに包まれた。",
-      "translation": "Due to his death, his family was enveloped in deep sorrow.",
+      "translation": "Vì cái chết của anh ấy, gia đình anh ấy chìm trong nỗi đau sâu sắc.",
       "translationEn": "Due to his death, his family was enveloped in deep sorrow",
       "romaji": "Kare no shi ga yue ni, kare no kazoku wa fukai kanashimi ni tsutsumareta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Due to his death, his family was enveloped in deep sorrow",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～がゆえの Noun",
       "sentence": "愛がゆえの悲しみ。",
-      "translation": "Sadness due to love.",
+      "translation": "Nỗi buồn vì tình yêu.",
       "translationEn": "Sadness due to love",
       "romaji": "Ai ga yue no kanashimi.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Sadness due to love",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～がゆえの Noun",
       "sentence": "健康がゆえの幸せ。",
-      "translation": "Happiness due to good health.",
+      "translation": "Hạnh phúc nhờ sức khỏe.",
       "translationEn": "Happiness due to good health",
       "romaji": "Kenkou ga yue no shiawase.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Happiness due to good health",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～がゆえの Noun",
       "sentence": "悪行がゆえの罰。",
-      "translation": "Punishment due to wrongdoing.",
+      "translation": "Hình phạt vì hành vi xấu.",
       "translationEn": "Punishment due to wrongdoing",
       "romaji": "Akugyou ga yue no batsu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Punishment due to wrongdoing",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～がゆえの Noun",
       "sentence": "努力がゆえの成功。",
-      "translation": "Success due to effort.",
+      "translation": "Thành công nhờ nỗ lực.",
       "translationEn": "Success due to effort",
       "romaji": "Doryoku ga yue no seikou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Success due to effort",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～から Noun に 至る まで",
       "sentence": "このバンドの曲は、青年から老人に至るまで、人々に愛されています。",
-      "translation": "The songs of this band are loved by people ranging from the young to the elderly.",
+      "translation": "Bài hát của ban nhạc này được mọi người từ thanh niên đến người già yêu thích.",
       "translationEn": "The songs of this band are loved by people ranging from the young to the elderly",
       "romaji": "Kono bando no kyoku wa, seinen kara roujin ni itaru made, hitobito ni aisarete imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The songs of this band are loved by people ranging from the young to the elderly",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～から Noun に 至る まで",
       "sentence": "小さい物件から大きな建物に至るまで、全てのプロパティの管理を我々が行います。",
-      "translation": "We handle all property management, ranging from small units to large buildings.",
+      "translation": "Chúng tôi quản lý mọi bất động sản, từ căn nhỏ đến tòa nhà lớn.",
       "translationEn": "We handle all property management, ranging from small units to large buildings",
       "romaji": "Chiisai bukken kara ooki na tatemono ni itaru made, subete no property no kanri o wareware ga okonaimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We handle all property management, ranging from small units to large buildings",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～から Noun に 至る まで",
       "sentence": "朝のニュース放送から夜のドラマに至るまで、テレビは毎日見ています。",
-      "translation": "I watch TV every day, from the morning news broadcasts to the night dramas.",
+      "translation": "Tôi xem TV mỗi ngày, từ bản tin sáng đến phim truyền hình buổi tối.",
       "translationEn": "I watch TV every day, from the morning news broadcasts to the night dramas",
       "romaji": "Asa no nyuusu housou kara yoru no dorama ni itaru made, terebi wa mainichi mite imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I watch TV every day, from the morning news broadcasts to the night dramas",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～から Noun に 至る まで",
       "sentence": "この地域は、春から冬に至るまで旅行者で賑わいます。",
-      "translation": "This area is bustling with tourists from spring to winter.",
+      "translation": "Khu vực này nhộn nhịp du khách từ mùa xuân đến mùa đông.",
       "translationEn": "This area is bustling with tourists from spring to winter",
       "romaji": "Kono chiiki wa, haru kara fuyu ni itaru made ryokousha de nigiwaimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This area is bustling with tourists from spring to winter",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ごとく",
       "sentence": "彼は鳥のごとく飛んでいるように見えた。",
-      "translation": "He looked as though he was flying like a bird.",
+      "translation": "Anh ấy trông như đang bay như chim.",
       "translationEn": "He looked as though he was flying like a bird",
       "romaji": "Kare wa tori no gotoku tonde iru you ni mieta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He looked as though he was flying like a bird",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ごとく",
       "sentence": "彼は死んだごとく眠っていた。",
-      "translation": "He was sleeping as though he were dead.",
+      "translation": "Anh ấy ngủ như chết.",
       "translationEn": "He was sleeping as though he were dead",
       "romaji": "Kare wa shinda gotoku nemutte ita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He was sleeping as though he were dead",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ごとく",
       "sentence": "彼女はアイドルのごとく崇められている。",
-      "translation": "She is revered as if she were an idol.",
+      "translation": "Cô ấy được tôn sùng như thần tượng.",
       "translationEn": "She is revered as if she were an idol",
       "romaji": "Kanojo wa aidoru no gotoku agamerarete iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She is revered as if she were an idol",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ごとく",
       "sentence": "彼は風のごとく走った。",
-      "translation": "He ran like the wind.",
+      "translation": "Anh ấy chạy như gió.",
       "translationEn": "He ran like the wind",
       "romaji": "Kare wa kaze no gotoku hashitta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He ran like the wind",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～こととて",
       "sentence": "彼は裁判に勝つために全資産を使うこととて、弁護士に頼んだ。",
-      "translation": "Since he's using all his assets to win the trial, he hired a lawyer.",
+      "translation": "Vì dốc toàn bộ tài sản để thắng kiện, anh ấy đã thuê luật sư.",
       "translationEn": "Since hes using all his assets to win the trial, he hired a lawyer",
       "romaji": "Kare wa saiban ni katsu tame ni zenshisan o tsukau koto tote, bengoshi ni tanonda.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Since hes using all his assets to win the trial, he hired a lawyer",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～こととて",
       "sentence": "明日は大切な試験があることとて、今夜は早く寝ます。",
-      "translation": "Since I have an important exam tomorrow, I’m going to bed early tonight.",
+      "translation": "Vì ngày mai có kỳ thi quan trọng, tối nay tôi sẽ ngủ sớm.",
       "translationEn": "Since I have an important exam tomorrow, I’m going to bed early tonight",
       "romaji": "Ashita wa taisetsu na shiken ga aru koto tote, konya wa hayaku nemasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Since I have an important exam tomorrow, I’m going to bed early tonight",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～こととて",
       "sentence": "このプロジェクトの成功は会社の未来に影響することとて、全力を尽くします。",
-      "translation": "Because the success of this project will affect the company's future, I will do my best.",
+      "translation": "Vì thành công của dự án này ảnh hưởng đến tương lai công ty, tôi sẽ cố hết sức.",
       "translationEn": "Because the success of this project will affect the companys future, I will do my best",
       "romaji": "Kono purojekuto no seikou wa kaisha no mirai ni eikyou suru koto tote, zenryoku o tsukushimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Because the success of this project will affect the companys future, I will do my best",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～こととて",
       "sentence": "彼が有名人であることとて、プライバシーが保護されるべきだ。",
-      "translation": "Since he is a celebrity, his privacy should be protected.",
+      "translation": "Vì anh ấy là người nổi tiếng, quyền riêng tư của anh ấy nên được bảo vệ.",
       "translationEn": "Since he is a celebrity, his privacy should be protected",
       "romaji": "Kare ga yuumeijin de aru koto tote, puraibashii ga hogo sareru beki da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Since he is a celebrity, his privacy should be protected",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ずにすんだ",
       "sentence": "彼は事故を起こさずにすんだ。",
-      "translation": "He managed to avoid having an accident.",
+      "translation": "Anh ấy đã tránh được tai nạn.",
       "translationEn": "He managed to avoid having an accident",
       "romaji": "Kare wa jiko o okosazu ni sunda.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He managed to avoid having an accident",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ずにすんだ",
       "sentence": "私は手術せずにすんだ。",
-      "translation": "I was able to do without surgery.",
+      "translation": "Tôi không cần phải phẫu thuật.",
       "translationEn": "I was able to do without surgery",
       "romaji": "Watashi wa shujutsu sezu ni sunda.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I was able to do without surgery",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ずにすんだ",
       "sentence": "雨が降らずにすんだ。",
-      "translation": "We managed to avoid the rain.",
+      "translation": "May mà trời không mưa.",
       "translationEn": "We managed to avoid the rain",
       "romaji": "Ame ga furazu ni sunda.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We managed to avoid the rain",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ずにすんだ",
       "sentence": "罰金を払わずにすんだ。",
-      "translation": "I managed to avoid paying a fine.",
+      "translation": "Tôi đã tránh được việc phải nộp phạt.",
       "translationEn": "I managed to avoid paying a fine",
       "romaji": "Bakkin o harawazu ni sunda.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I managed to avoid paying a fine",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～だろうとなかろうと",
       "sentence": "試験が難しいだろうとなかろうと、全力で頑張ります。",
-      "translation": "Regardless of whether the exam is difficult or not, I will do my best.",
+      "translation": "Dù kỳ thi khó hay không, tôi sẽ cố hết sức.",
       "translationEn": "Regardless of whether the exam is difficult or not, I will do my best",
       "romaji": "Shiken ga muzukashii darou to nakarou to, zenryoku de ganbarimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Regardless of whether the exam is difficult or not, I will do my best",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～だろうとなかろうと",
       "sentence": "彼が来るだろうとなかろうと、私たちは始めます。",
-      "translation": "Whether he comes or not, we will start.",
+      "translation": "Dù anh ấy đến hay không, chúng tôi vẫn bắt đầu.",
       "translationEn": "Whether he comes or not, we will start",
       "romaji": "Kare ga kuru darou to nakarou to, watashitachi wa hajimemasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether he comes or not, we will start",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～だろうとなかろうと",
       "sentence": "この仕事が面白いだろうとなかろうと、私は続けます。",
-      "translation": "Whether this job is interesting or not, I will continue.",
+      "translation": "Dù công việc này thú vị hay không, tôi vẫn tiếp tục.",
       "translationEn": "Whether this job is interesting or not, I will continue",
       "romaji": "Kono shigoto ga omoshiroi darou to nakarou to, watashi wa tsuzukemasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether this job is interesting or not, I will continue",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～だろうとなかろうと",
       "sentence": "彼が賛成するだろうとなかろうと、私たちは進行します。",
-      "translation": "Whether he agrees or not, we will proceed.",
+      "translation": "Dù anh ấy đồng ý hay không, chúng tôi vẫn tiến hành.",
       "translationEn": "Whether he agrees or not, we will proceed",
       "romaji": "Kare ga sansei suru darou to nakarou to, watashitachi wa shinkou shimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether he agrees or not, we will proceed",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     }
   ]
 }
