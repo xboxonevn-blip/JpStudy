@@ -154,15 +154,15 @@ Active workstream status (as of 2026-05-17):
   including anonymous Auth bootstrap and legacy migration gating.
 - Sprint 1-7 implementation/docs are substantially complete. Do not restart
   completed work without checking `mission-completion-audit-2026-05-15.md`.
-- Latest source/CI/deploy proof: commit `65fd260e`, GitHub Actions run
-  `25969098910` succeeded. `ui-string-guard`, `firebase-security-rules`,
+- Latest source/CI/deploy proof: commit `17100cb1`, GitHub Actions run
+  `25969926890` succeeded. `ui-string-guard`, `firebase-security-rules`,
   and secret-backed `deploy-hosting` all completed with `success`, including
   production build, primary deploy, primary/legacy smoke, live resource smoke,
   and Lighthouse live gate.
 - Latest live route-matrix proof: `558fc151` fixed Flutter web hash-route
-  bootstrap by seeding persisted providers before `runApp`, while `5ee9788a`
-  and `65fd260e` record N4/N3/N2/N1 live direct-route checks with no N5
-  fallback markers across the audited hash routes.
+  bootstrap by seeding persisted providers before `runApp`. `17100cb1` adds
+  `npm run report:live-route-matrix`, and the latest run passed `36/36` N4/N3/N2/N1
+  live direct-route checks with no N5 fallback markers across audited hash routes.
 - Latest D2 content integrity correction: `a80fb702` plus
   `D2-honest-audit-2026-05-16-all-levels.md`.
   Current audit reports N5/N4 launch-tier and N3/N2/N1 launch-tier quality
