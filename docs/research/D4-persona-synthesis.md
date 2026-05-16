@@ -2,6 +2,39 @@
 
 Commit: `e468d6c7`
 
+## 2026-05-16 Live Route Matrix Addendum
+
+Evidence:
+- `558fc151 fix(app): preserve deep links during bootstrap`
+- GitHub Actions run `25968253599` completed with `success`:
+  `ui-string-guard`, `firebase-security-rules`, and `deploy-hosting`.
+- Local `flutter analyze lib test` passed.
+- Local `flutter test` passed with `2279` tests.
+- Live Playwright checks seeded JSON-encoded SharedPreferences on
+  `https://jpstudy.web.app` for N3/N2/N1 and hard-loaded:
+  `/`, `/#/grammar`, `/#/vocab`, `/#/kanji`, `/#/study-hub`,
+  `/#/immersion`, `/#/jlpt/reading`, `/#/jlpt/coach`,
+  `/#/exam-center`.
+
+Live matrix result:
+
+| Level | Direct route evidence |
+| --- | --- |
+| N3 | PASS - root, grammar, kanji, immersion, reading, and coach surfaced N3 labels; vocab, study hub, and exam center preserved route URL with no N5 fallback markers. |
+| N2 | PASS - root, grammar, kanji, immersion, reading, and coach surfaced N2 labels; vocab, study hub, and exam center preserved route URL with no N5 fallback markers. |
+| N1 | PASS - root, grammar, kanji, immersion, reading, and coach surfaced N1 labels; vocab, study hub, and exam center preserved route URL with no N5 fallback markers. |
+
+Scope caveat: some Flutter semantics snapshots for vocab, study hub, and exam
+center expose only sparse accessible text, so this matrix proves preserved
+direct route URL plus absence of the previous N5 fallback markers, not a full
+visual/persona UX pass for those routes.
+
+Updated verdict: the live direct-route N5 fallback blocker is closed for
+seeded N3/N2/N1 hash routes. Broad beta still stays FAIL because persona-fit
+gaps and external launch proofs remain: legal approval, Sentry DSN/first issue,
+Storage/deletion proof, BigQuery-exported learning rows, GA4 UI retention proof,
+and App Check enforcement.
+
 ## 2026-05-16 Source Route Bootstrap Addendum
 
 Evidence:
@@ -16,9 +49,11 @@ prevents init-state screens from reading a null level and defaulting to N5.
 Kanji Hub also follows late `studyLevelProvider` changes after first frame, so
 direct `/kanji` no longer has a separate stale internal selected-level path.
 
-Updated source verdict: the local route-bootstrap class of N5 fallback is
-closed by source tests. Broad beta still stays FAIL until the fixed source is
-deployed and the live route matrix is rerun across N5-N1.
+Updated source verdict: this addendum is superseded by the 2026-05-16 live
+route matrix above. The first source fix prevented null-level route widgets but
+the loading `MaterialApp` also stripped direct hash URLs; `558fc151` replaced
+that with first-frame persisted provider seeding and kept `MaterialApp.router`
+mounted.
 
 ## 2026-05-15 Manual Deploy Re-Check Addendum
 
@@ -63,24 +98,24 @@ Historical next action at that point was to separate "data exists", "catalog vis
 
 JpStudy-v2 is not ready for 100 real Vietnamese JLPT learners across N5-N1 for 30 days.
 
-The N5 core module path is viable after earlier Linh fixes, and several upper-level content islands exist. The blocker is reliability across real entry paths and persona fit: P2-P5 all found live direct routes that fall back to N5, plus important persona needs not represented in onboarding/planning/discovery.
+The N5 core module path is viable after earlier Linh fixes, and several upper-level content islands exist. The historical direct-route N5 fallback found by P2-P5 is now fixed for seeded N3/N2/N1 hash routes, but broad beta still fails on persona fit, route-depth confidence, and operational launch proofs.
 
 ## Persona Outcomes
 
 | Persona | Result | Strongest positive | Blocking failure |
 | --- | --- | --- | --- |
 | P1 Linh N5 casual mobile | PASS for core smoke after fixes | N5 kanji/vocab/grammar routes render, search fixes landed, N5 grammar bank is populated | Deep manual flows still deferred: handwriting scoring, progress mutation, offline/cloud sync, formal a11y/perf |
-| P2 Anh Tuấn N3 busy professional | FAIL | Root N3/VI, N3 grammar/coach/reading work after root init; local fixes added for app init and mobile reading CTA | Direct routes/live exam route unreliable; mobile CTA/live copy defects; N3 vocab confidence gap |
-| P3 Mai N2 cramming student | FAIL | Root N2/VI and desktop layout readable; leaderboard share exists | Direct N2 routes fall to N5; no 3-hour cramming mode; exam center stale; group study mostly roadmap |
-| P4 Bác Hùng N4 tablet retiree | FAIL | Root N4/VI readable at tablet 125%; slow tap opens readable N4 learning plan | Direct N4 routes fall to N5; no travel/fun goal; no visible font-size setting |
-| P5 Sora N1 advanced reader | FAIL | N1 immersion exists after root init: 25 decks and an annotated advanced passage | Direct N1 routes fall to N5; study hub hides N1 reading; no news/current-world reading |
+| P2 Anh Tuấn N3 busy professional | FAIL | Root N3/VI, direct N3 grammar/kanji/reading/coach now preserve N3 on live | Mobile CTA/live copy defects; no sharper busy-professional plan; route-depth confidence still limited |
+| P3 Mai N2 cramming student | FAIL | Root N2/VI and direct N2 grammar/kanji/reading/coach now preserve N2 on live | No 3-hour cramming mode; exam center is shallow; group study mostly roadmap |
+| P4 Bác Hùng N4 tablet retiree | FAIL | Root N4/VI readable at tablet 125%; slow tap opens readable N4 learning plan | No travel/fun goal; no visible font-size setting; needs N4-specific post-fix matrix |
+| P5 Sora N1 advanced reader | FAIL | Direct N1 grammar/kanji/immersion/reading/coach now preserve N1 on live | Study hub remains shallow; no news/current-world reading; no full N1 kanji coverage claim |
 
 ## Top Universal Pain Points
 
 1. Live channel parity and route-level bootstrap are not trustworthy.
-   - P2-P5 all reproduced direct-route fallback to N5 on live.
-   - Local source now has a global app-bootstrap gate plus Kanji Hub level-sync regression tests, but live route-matrix evidence after this patch is still missing.
-   - Live `/exam-center` remains stale/empty compared with local rich route mapping.
+   - Historical P2-P5 sessions reproduced direct-route fallback to N5 on live.
+   - 2026-05-16 live matrix closes the N3/N2/N1 N5-fallback class for seeded hash routes after `558fc151`.
+   - Remaining risk is route depth/persona fit, not the previous level bootstrap fallback.
 
 2. Onboarding and planning do not model real study contexts.
    - `StudyGoal` only supports `jlpt`, `reading`, and `writing`.
@@ -107,24 +142,21 @@ The N5 core module path is viable after earlier Linh fixes, and several upper-le
 
 ## What To Do Next
 
-1. Deploy or verify the Firebase Hosting channel before more local route debugging.
-   - Rationale: P2 local code already fixed one direct-route class, but P3-P5 still fail on live. More local patches will be hard to interpret until the beta URL matches source.
-   - Read-only check: `jpstudy-v2` live channel last release is `2026-05-13 01:32:40`; current `HEAD` is `e468d6c7` from `2026-05-14T11:52:56+07:00`. The beta URL is therefore older than current local source. No deploy was attempted.
-
-2. Rerun a route matrix after channel parity.
-   - Matrix: levels N5/N4/N3/N2/N1 x routes `/`, `/grammar`, `/vocab`, `/kanji`, `/jlpt/reading`, `/jlpt/coach`, `/study-hub`, `/immersion`, `/exam-center`.
+1. Keep route matrix as a release regression.
+   - Matrix: levels N5/N4/N3/N2/N1 x routes `/`, `/#/grammar`, `/#/vocab`, `/#/kanji`, `/#/jlpt/reading`, `/#/jlpt/coach`, `/#/study-hub`, `/#/immersion`, `/#/exam-center`.
    - Pass threshold: every route preserves seeded level or intentionally labels its exception.
+   - Latest live proof: N3/N2/N1 passed on 2026-05-16 after `558fc151`.
 
-3. Make beta persona scope explicit.
+2. Make beta persona scope explicit.
    - Narrow beta: N5-N3 JLPT/habit learners only, no travel/news/group/cramming promises.
    - Broad beta: implement intensity, travel/fun, group/share, and advanced-reader discovery before recruitment.
 
-4. Add three high-leverage smoke tests.
+3. Add three high-leverage smoke tests.
    - Direct-route level init across core routes.
    - Tablet/large-font root -> learning plan.
    - N1 root -> immersion N1 -> deck reader.
 
-5. Only then move to D5/D6 hardening.
+4. Only then move to D5/D6 hardening.
    - Current D4 says route trust and persona fit are higher leverage than more polishing inside a single screen.
 
 ## Beta Recommendation

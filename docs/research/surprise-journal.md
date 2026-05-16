@@ -406,3 +406,10 @@
 - Actual observation: screens with internal init-time state can still read null and default to N5 before app init resolves. Kanji Hub also had a second stale path because it copied the level into local state after first frame.
 - Delta: -35 percentage points on confidence that provider watch alone closes deep-link fallback; +45 percentage points on confidence after adding a router bootstrap gate and a Kanji late-level sync regression.
 - Updated belief: route trust requires preventing route widgets from mounting until persisted state is ready, plus tests for any screen that mirrors provider state internally.
+
+## 2026-05-17T00:44:00+07:00 - Bootstrap loading can destroy hash deep links
+
+- Prior belief: a temporary non-router loading `MaterialApp` would be a safe way to prevent direct-route widgets from mounting before persisted level state loaded.
+- Actual observation: on live web, that loading app stripped direct `/#/grammar` hash routes back to `/` before `MaterialApp.router` mounted. The first fix removed N5 fallback but introduced route loss. Seeding persisted providers before `runApp` let the router mount on the first frame and preserved direct hash URLs.
+- Delta: -50 percentage points on confidence that swapping root app types during bootstrap is harmless on Flutter web; +40 percentage points on confidence after live N3/N2/N1 direct-route checks showed no N5 fallback markers.
+- Updated belief: web deep-link safety requires one router identity from the first frame. Bootstrap should preload provider state, not temporarily replace the router with a separate `MaterialApp`.
