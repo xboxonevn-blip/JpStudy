@@ -38,6 +38,8 @@ Use the project owner account `chung.phukiengiabuon@gmail.com`
 
 1. Legal approval:
    - Review live `/privacy` and `/terms`.
+   - Use `docs/compliance/legal-approval-checklist.md` to check the specific
+     privacy/terms claims before approving.
    - Fill `docs/compliance/launch-proof-state.json`:
      `legal.approved=true`, `legal.reviewer`, `legal.approvedAt`,
      `legal.commit`, and `legal.evidence`.
@@ -197,6 +199,7 @@ Evidence to record:
 - Reviewer name or approval source.
 - Reviewed date.
 - Approved copy commit hash.
+- Completed `docs/compliance/legal-approval-checklist.md` review.
 - Confirmation contact/support, data categories, retention, deletion rights,
   anonymous UID handling, analytics consent, and Storage backup language were
   reviewed.
