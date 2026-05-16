@@ -392,3 +392,10 @@
 - Actual observation: 48 N1/N2 kanji lesson files still had `vi-human-approved` on checked entries while the same file also contained `vi-needs-review` entries. The item-level guard passed, but the user-requested file-level grep failed.
 - Delta: -35 percentage points on confidence that nested content audits can ignore file-level provenance.
 - Updated belief: human approval tags need both item-level and file-level contradiction guards when a content file mixes reviewed and draft entries.
+
+## 2026-05-16T06:10:00+07:00 - Upper-level launch tier needed reuse, not only translation
+
+- Prior belief: finishing N1/N2/N3 launch-tier status would mostly be direct translation of remaining machine-draft fields.
+- Actual observation: N1 Tanos vocab had 3,463 exact matches in the already reviewed N1 Hajimete set, leaving only 13 unmatched terms for manual translation. Reusing reviewed internal content reduced risk versus re-translating every gloss from English.
+- Delta: +50 percentage points on confidence that internal reviewed-source alignment is the safest path for large content batches.
+- Updated belief: D2 editorial work should first search for trusted in-repo equivalents, then translate only unmatched content. Launch-tier evidence still requires audit counts plus spot-check samples; Codex must not add `vi-human-approved`.
