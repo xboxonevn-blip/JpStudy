@@ -154,13 +154,18 @@ Active workstream status (as of 2026-05-16):
   including anonymous Auth bootstrap and legacy migration gating.
 - Sprint 1-7 implementation/docs are substantially complete. Do not restart
   completed work without checking `mission-completion-audit-2026-05-15.md`.
-- Latest source/CI/deploy proof: commit `12a0b7ea`, GitHub Actions run
-  `25948482462` succeeded, and live `https://jpstudy.web.app` was smoke
-  checked after deploy.
+- Latest source/CI/deploy proof: commit `ecec2f1c`, GitHub Actions run
+  `25953168060` succeeded. `ui-string-guard`, `firebase-security-rules`,
+  and secret-backed `deploy-hosting` all completed with `success`, including
+  production build, primary deploy, primary/legacy smoke, live resource smoke,
+  and Lighthouse live gate.
 - Remaining blockers are operational/legal proofs: legal approval,
   Sentry DSN + first issue, Firebase Storage bucket/rules/CORS migration proof,
   first executed deletion proof, GA4 UI retention proof, BigQuery-exported
-  learning-event rows, and later App Check enforcement proof.
+  learning-event rows, and later App Check enforcement proof. The local
+  `firebase-admin` tooling blocker for Auth deletion is resolved by
+  `tool/research/firebase_admin_delete_user.js`; live deletion proof still
+  requires Storage/GA4/operator gates.
   Operator handoff checklist:
   `docs/compliance/beta-launch-proof-checklist-2026-05-15.md`.
 
@@ -216,6 +221,9 @@ flutter build web --release `
 □ Finalize legal review for `/privacy` and `/terms`; current copy remains
   a review-needed beta draft.
 □ Execute one real deletion runbook case and record proof before public launch.
+  Auth deletion helper exists at `tool/research/firebase_admin_delete_user.js`;
+  it is dry-run by default and requires explicit `--execute` against a
+  dedicated test UID.
 □ Capture GA4 UI retention proof in Console; BigQuery TTL is source-proven,
   but GA4 UI retention remains manual.
 ```
