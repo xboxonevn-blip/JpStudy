@@ -39,6 +39,9 @@ void main() {
         'lib/features/progress/screens/review_forecast_screen.dart': [
           'L?m l?i',
           'Kh?',
+          'T?t',
+          'D?',
+          "ja: '??'",
           "'????'",
           "'???'",
         ],

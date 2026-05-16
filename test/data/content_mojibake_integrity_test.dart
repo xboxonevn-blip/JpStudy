@@ -44,4 +44,8 @@ const _knownQuestionMarkArtifacts = [
   'Th?i ??',
   '?i?u Ki?n',
   '?i?u Tra',
+  'one?s',
+  'XÂY DỰng',
+  'phÂN phÁT',
+  'thÂN thương',
 ];

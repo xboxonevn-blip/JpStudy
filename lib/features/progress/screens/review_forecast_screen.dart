@@ -701,7 +701,7 @@ class _ConfidenceSection extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               _ConfidencePill(
-                label: _tr(language, en: 'Good', vi: 'T?t', ja: '??'),
+                label: _tr(language, en: 'Good', vi: 'Tốt', ja: '良い'),
                 count: confidence.good,
                 total: total,
                 color: palette.success,
@@ -709,7 +709,7 @@ class _ConfidenceSection extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               _ConfidencePill(
-                label: _tr(language, en: 'Easy', vi: 'D?', ja: '??'),
+                label: _tr(language, en: 'Easy', vi: 'Dễ', ja: '簡単'),
                 count: confidence.easy,
                 total: total,
                 color: palette.info,
