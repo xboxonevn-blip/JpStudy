@@ -1,6 +1,6 @@
 # Mission Completion Audit - 2026-05-15
 
-Timestamp: `2026-05-16T11:01:31+07:00`
+Timestamp: `2026-05-16T11:47:00+07:00`
 
 Objective source: `C:\Users\xboxo\Desktop\PC\Goals JP study.txt`
 
@@ -48,7 +48,7 @@ The goal is complete only when all of these are true:
 | CI failure addendum Group C | `df021973 ci: use Java 21 for Firebase emulator`; `firebase-security-rules` passed in CI run `25901716829` | Passed |
 | CI failure addendum Group D | `8f34a3dc docs(workflow): commit directly to main, no feature branches`, `55010d68 feat(kanji): add N2 and N1 level tabs in Kanji Hub` | Passed |
 | Structured manual proof state | `beee04be tooling(launch): add structured proof state`; `docs/compliance/launch-proof-state.json`; `test/tool/research/launch_readiness_report_node_test.js` verifies complete proof metadata closes only manual gates and incomplete metadata stays blocked | Passed |
-| CI launch-readiness visibility | `31c6fc1a ci: report launch readiness blockers`, `3af9ff16 ci: publish launch readiness summary`; CI run `25951927799` shows `Report launch readiness blockers` success and publishes the markdown report to the GitHub Step Summary | Passed |
+| CI launch-readiness visibility | `31c6fc1a ci: report launch readiness blockers`, `3af9ff16 ci: publish launch readiness summary`; CI run `25952812357` shows `Report launch readiness blockers` success and publishes the markdown report to the GitHub Step Summary | Passed |
 | Synthesis and mission report | `6f3871a4 docs(research): synthesis 2026-05-15 beta readiness`, `924d5443 docs(research): final mission report 2026-05-15` | Passed |
 
 ## Verification Evidence
@@ -72,7 +72,7 @@ Local commands run during the completion audit:
 - `dart run tool\research\content_vi_status_report.dart`
   - Result: `23444/23444` content items approved; machine/open-review `0`.
 - `npm run test:research-tooling`
-  - Result: 28 passed, 0 failed.
+  - Result: 35 passed, 0 failed.
 - `npm run report:launch-readiness -- --json --proof-state docs/compliance/launch-proof-state.json`
   - Result: `complete=false` with the seven remaining proof blockers listed
     below.
@@ -80,7 +80,7 @@ Local commands run during the completion audit:
 GitHub Actions summary:
 
 - Current source gates pass on `main`. Latest verified run:
-  `25951927799` on `48c441d9`.
+  `25952812357` on `df27cc4b`.
 - `ui-string-guard`, `firebase-security-rules`, and `deploy-hosting` all
   completed with `success`.
 - `deploy-hosting` ran the real secret-backed path: production web build,
@@ -88,7 +88,7 @@ GitHub Actions summary:
   Lighthouse live gate all completed with `success`.
 - `npm run report:launch-readiness -- --json --proof-state docs/compliance/launch-proof-state.json`
   now performs a single aggregate proof check with structured manual proof
-  metadata. Latest run on `2026-05-16T09:49+07:00` returned
+  metadata. Latest run on `2026-05-16T11:31+07:00` returned
   `complete=false` with blockers `legal-approval-missing`,
   `sentry-dsn-missing`, `storage-not-provisioned`, `deletion-proof-missing`,
   `ga4-retention-proof-missing`, `ga4-learning-events-missing`, and
@@ -113,7 +113,8 @@ These prevent marking the active goal complete:
   recheck still reports that Firebase Storage has not been set up on the
   project.
 4. First executed deletion runbook proof is missing. The runbook and Support ID
-   surface exist, but no real deletion request has been executed end to end.
+   surface exist, and an audited safe-by-default Firebase Auth deletion helper
+   now exists, but no real deletion request has been executed end to end.
 5. GA4 UI retention proof is still console-only. BigQuery TTL is proven from
    dataset/table metadata, but the GA4 UI retention setting still needs source
    evidence or a console proof. A 2026-05-15 Admin API probe against
