@@ -154,8 +154,8 @@ Active workstream status (as of 2026-05-16):
   including anonymous Auth bootstrap and legacy migration gating.
 - Sprint 1-7 implementation/docs are substantially complete. Do not restart
   completed work without checking `mission-completion-audit-2026-05-15.md`.
-- Latest source/CI/deploy proof: commit `92658952`, GitHub Actions run
-  `25962998615` succeeded. `ui-string-guard`, `firebase-security-rules`,
+- Latest source/CI/deploy proof: commit `dd0fce40`, GitHub Actions run
+  `25965950740` succeeded. `ui-string-guard`, `firebase-security-rules`,
   and secret-backed `deploy-hosting` all completed with `success`, including
   production build, primary deploy, primary/legacy smoke, live resource smoke,
   and Lighthouse live gate.
@@ -174,6 +174,9 @@ Active workstream status (as of 2026-05-16):
   requires Storage/GA4/operator gates.
   Operator handoff checklist:
   `docs/compliance/beta-launch-proof-checklist-2026-05-15.md`.
+  Current readiness reports now include direct operator URLs for launch proof,
+  Storage, deletion, GA4 Admin, App Check, and GitHub Actions; these URLs do not
+  close proof gates by themselves.
 
 ## App Check (reCAPTCHA v3)
 

@@ -1,6 +1,6 @@
 # Mission Completion Audit - 2026-05-15
 
-Timestamp: `2026-05-16T20:08:33+07:00`
+Timestamp: `2026-05-16T22:56:02+07:00`
 
 Objective source: `C:\Users\xboxo\Desktop\PC\Goals JP study.txt`
 
@@ -60,21 +60,21 @@ Latest rolling CI/deploy-gate evidence is tracked here and in
 Local commands run during the completion audit:
 
 - `node --test test\tool\research\ga4_export_status_report_node_test.js`
-  - Result: 2 passed, 0 failed.
+  - Result: 5 passed, 0 failed.
 - `npm run test:web-resource-smoke:unit`
   - Result: 2 passed, 0 failed.
 - `python tooling\audit_ui_string_literals.py`
   - Result: wrote report with 0 remaining candidates.
-- `flutter analyze`
+- `flutter analyze lib test`
   - Result: no issues found.
 - `flutter test`
   - Result: exit code 0.
 - `dart run tool\research\content_vi_status_report.dart`
-  - Rechecked on 2026-05-16T20:08+07: files scanned `781`, items
+  - Rechecked on 2026-05-16T22:58+07: files scanned `781`, items
     `23,444`, files with machine VI `0`, files with open review tags `0`;
     N5-N1 all report machine/open-review `0/0`.
 - `npm run test:research-tooling`
-  - Result: 35 passed, 0 failed.
+  - Result: 43 passed, 0 failed.
 - `npm run report:launch-readiness -- --json --proof-state docs/compliance/launch-proof-state.json`
   - Result: `complete=false` with the seven remaining proof blockers listed
     below.
@@ -82,15 +82,18 @@ Local commands run during the completion audit:
 GitHub Actions summary:
 
 - Current source gates pass on `main`. Latest verified run:
-  `25962998615` on `92658952`.
+  `25965950740` on `dd0fce40`.
 - `ui-string-guard`, `firebase-security-rules`, and `deploy-hosting` all
   completed with `success`.
 - `deploy-hosting` ran the real secret-backed path: production web build,
   deploy to `hosting:jpstudy`, primary/legacy smoke, live resource smoke, and
   Lighthouse live gate all completed with `success`.
+- Latest readiness tooling also prints operator URLs for launch proof, Storage,
+  deletion, GA4 Admin, App Check, and GitHub Actions. These URLs improve handoff
+  but do not close proof gates by themselves.
 - `npm run report:launch-readiness -- --json --proof-state docs/compliance/launch-proof-state.json`
   now performs a single aggregate proof check with structured manual proof
-  metadata. Latest run on `2026-05-16T11:31+07:00` returned
+  metadata. Latest run on `2026-05-16T22:54+07:00` returned
   `complete=false` with blockers `legal-approval-missing`,
   `sentry-dsn-missing`, `storage-not-provisioned`, `deletion-proof-missing`,
   `ga4-retention-proof-missing`, `ga4-learning-events-missing`, and
@@ -104,7 +107,7 @@ These prevent marking the active goal complete:
    tested, but docs still mark the copy as `review-needed draft`.
 2. Sentry is source-wired but not operationally proven. A real
    `JPSTUDY_SENTRY_DSN` and first deployed issue URL are still missing. The
-  Sentry readiness report rechecked on `2026-05-16T20:08+07:00` found source
+  Sentry readiness report rechecked on `2026-05-16T22:58+07:00` found source
    and workflow smoke gates present, repository Actions secrets
    `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, but no
    `JPSTUDY_SENTRY_DSN`; no event was sent by that readiness report.
@@ -133,7 +136,7 @@ These prevent marking the active goal complete:
    rows, `session_quality_rated` with `mode=test`, `rating=5`, and a quiz-pass
    `n5_micro_quiz_completed` sample with `correct_count=10`,
    `total_count=10`, `accuracy=1.0`; all observed GA requests returned `204`.
-   A 2026-05-16T20:08+07:00 export recheck exposes daily tables
+   A 2026-05-16T22:58+07:00 export recheck exposes daily tables
    `events_20260514` and `events_20260515`, but still does not expose the
    required learning-event rows. The latest exported event names are
    `page_view`, `user_engagement`, `session_start`, `first_visit`, and

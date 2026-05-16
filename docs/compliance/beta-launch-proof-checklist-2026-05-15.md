@@ -25,11 +25,18 @@ approval must reference an existing git commit. Sentry, Storage, and GA4
 learning-event export gates remain source-verified and cannot be closed by the
 proof state file.
 
-Latest run on `2026-05-16T20:08+07:00` returned `complete=false` with
+Latest run on `2026-05-16T22:54+07:00` returned `complete=false` with
 blockers: `legal-approval-missing`, `sentry-dsn-missing`,
 `storage-not-provisioned`, `deletion-proof-missing`,
 `ga4-retention-proof-missing`, `ga4-learning-events-missing`, and
 `app-check-enforcement-deferred`.
+
+Operator URLs are now printed directly by:
+
+- `npm run report:launch-readiness -- --json --proof-state docs/compliance/launch-proof-state.json`
+- `npm run report:storage-readiness -- --json --skip-emulator`
+- `npm run report:deletion-readiness -- --uid "<firebase-uid>" --json`
+- `npm run report:ga4-export -- --json`
 
 ## Remaining Owner Gate Quick Actions
 
@@ -79,7 +86,7 @@ Use the project owner account `chung.phukiengiabuon@gmail.com`
 
 ## 1. GitHub Actions Secret-Backed Deploy
 
-Status: completed on `main`; latest re-confirmed on commit `92658952`.
+Status: completed on `main`; latest re-confirmed on commit `dd0fce40`.
 
 Goal: prove `deploy-hosting` performs a real build/deploy/live-smoke/Lighthouse
 run on `main`, not only the skip-safe wrapper.
@@ -100,7 +107,7 @@ Operator note:
 Evidence recorded:
 
 - GitHub Actions run URL:
-  `https://github.com/xboxonevn-blip/JpStudy/actions/runs/25962998615`
+  `https://github.com/xboxonevn-blip/JpStudy/actions/runs/25965950740`
 - `deploy-hosting` job step list shows these steps `success`, not
   `skipped`:
   - `Build web for production`
@@ -114,9 +121,9 @@ Evidence recorded:
   Playwright visual smoke on `2026-05-16T08:05+07:00` checked Kanji radical
   headers, Han-Viet rules, and Review Forecast labels on
   `https://jpstudy.web.app`.
-- Latest CI recheck on `2026-05-16T20:35+07:00` completed
+- Latest CI recheck on `2026-05-16T22:53+07:00` completed
   `ui-string-guard`, `firebase-security-rules`, and `deploy-hosting` with
-  `success` on commit `92658952` in GitHub Actions run `25962998615`.
+  `success` on commit `dd0fce40` in GitHub Actions run `25965950740`.
 
 ## 2. Sentry First-Issue Proof
 
@@ -125,7 +132,7 @@ Goal: prove source-wired Sentry is operational in a deployed web build.
 Current status:
 
 - Source wiring and the disabled-by-default smoke trigger are deployed on
-  `main`; latest CI/deploy proof is `92658952`.
+  `main`; latest CI/deploy proof is `dd0fce40`.
 - Manual CI smoke path is available through GitHub Actions `workflow_dispatch`
   input `sentry_smoke=true`. When `JPSTUDY_SENTRY_DSN` is present, the workflow
   builds with `JPSTUDY_SENTRY_SMOKE_EVENT=true`, deploys, and opens
@@ -133,7 +140,7 @@ Current status:
 - Repository Actions secrets rechecked on `2026-05-16T09:49+07:00` include
   `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, but not
   `JPSTUDY_SENTRY_DSN`.
-- Sentry readiness CLI rechecked on `2026-05-16T20:08+07:00` with
+- Sentry readiness CLI rechecked on `2026-05-16T22:58+07:00` with
   `npm run report:sentry-readiness -- --json`: source wiring and workflow smoke
   gate are present, repo secrets metadata is readable, no event was sent, and
   readiness remains `false` with reason `sentry-dsn-missing`.
@@ -268,7 +275,7 @@ Current status:
     `correct_count=10`, `total_count=10`, `accuracy=1.0`.
   - `session_quality_rated`: GA response `204`; params `mode=test`,
     `rating=5`.
-- Export ingestion is still pending. Recheck on `2026-05-16T20:08+07:00`
+- Export ingestion is still pending. Recheck on `2026-05-16T22:58+07:00`
   found daily tables `analytics_536663906.events_20260514` and
   `analytics_536663906.events_20260515`, but the learning rows are not in
   BigQuery yet. Latest exported event names are `page_view`,
