@@ -158,7 +158,7 @@
         "needs-kanji-editorial",
         "n1-kanji-import",
         "source-unihan-kanji-metadata",
-        "vi-human-approved"
+        "vi-needs-review"
       ],
       "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
@@ -208,7 +208,7 @@
         "needs-kanji-editorial",
         "n1-kanji-import",
         "source-unihan-kanji-metadata",
-        "vi-human-approved"
+        "vi-needs-review"
       ],
       "metadataStatus": "partial-unihan-needs-manual-han-viet"
     },
@@ -421,7 +421,5 @@
     "Unicode Unihan kTotalStrokes",
     "Unicode Unihan kVietnamese"
   ],
-  "tags": [
-    "vi-human-approved"
-  ]
+  "tags": []
 }

@@ -213,6 +213,16 @@ void main() {
             if (labels['hanViet'] != null) {
               expect(tags, contains('kanji-metadata-approved'));
               expect(tags, isNot(contains('needs-kanji-editorial')));
+              expect(tags, contains('vi-human-approved'));
+            } else {
+              expect(
+                entry['metadataStatus'],
+                'partial-unihan-needs-manual-han-viet',
+              );
+              expect(tags, contains('needs-kanji-editorial'));
+              expect(tags, contains('vi-needs-review'));
+              expect(tags, isNot(contains('kanji-metadata-approved')));
+              expect(tags, isNot(contains('vi-human-approved')));
             }
             count++;
           }
