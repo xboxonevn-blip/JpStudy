@@ -6,554 +6,360 @@
   "tags": [
     "source-hanabira",
     "n2-grammar-import",
-    "needs-human-review",
-    "vi-machine-draft",
-    "vi-needs-review"
+    "vi-editorial-codex-pass"
   ],
   "examples": [
     {
       "grammarPoint": "～か～ないかのうちに",
       "sentence": "駅に着くか着かないかのうちに、雨が降り出した。",
-      "translation": "No sooner had I arrived at the station than it started raining.",
+      "translation": "Tôi vừa đến ga thì trời bắt đầu mưa.",
       "translationEn": "No sooner had I arrived at the station than it started raining",
       "romaji": "Eki ni tsuku ka tsukanai ka no uchi ni, ame ga furidashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: No sooner had I arrived at the station than it started raining",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～か～ないかのうちに",
       "sentence": "ケータイを買うか買わないかのうちに、新しいモデルが発売された。",
-      "translation": "As soon as I decided to buy the cell phone, a new model was released.",
+      "translation": "Tôi vừa quyết định mua điện thoại thì mẫu mới đã ra mắt.",
       "translationEn": "As soon as I decided to buy the cell phone, a new model was released",
       "romaji": "Keitai o kau ka kawanai ka no uchi ni, atarashii moderu ga hatsubai sareta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As soon as I decided to buy the cell phone, a new model was released",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～か～ないかのうちに",
       "sentence": "彼が家を出るか出ないかのうちに、電話が鳴った。",
-      "translation": "The moment he left the house, the phone rang.",
+      "translation": "Anh ấy vừa ra khỏi nhà thì điện thoại reo.",
       "translationEn": "The moment he left the house, the phone rang",
       "romaji": "Kare ga ie o deru ka denai ka no uchi ni, denwa ga natta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The moment he left the house, the phone rang",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～か～ないかのうちに",
       "sentence": "パーティーが始まるか始まらないかのうちに、彼女が泣き出した。",
-      "translation": "As soon as the party began, she started crying.",
+      "translation": "Bữa tiệc vừa bắt đầu thì cô ấy bật khóc.",
       "translationEn": "As soon as the party began, she started crying",
       "romaji": "Pātī ga hajimaru ka hajimaranai ka no uchi ni, kanojo ga nakidashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As soon as the party began, she started crying",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～かねない",
       "sentence": "彼はあまりにも無責任で、約束を破りかねない。",
-      "translation": "He is so irresponsible that he might break his promise.",
+      "translation": "Anh ấy vô trách nhiệm đến mức có thể phá vỡ lời hứa.",
       "translationEn": "He is so irresponsible that he might break his promise",
       "romaji": "Kare wa amarini mo musekinin de, yakusoku o yaburi-kane nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He is so irresponsible that he might break his promise",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～かねない",
       "sentence": "注意しないと、事故を起こしかねない。",
-      "translation": "If you don't pay attention, you might cause an accident.",
+      "translation": "Nếu không cẩn thận, bạn có thể gây tai nạn.",
       "translationEn": "If you dont pay attention, you might cause an accident",
       "romaji": "Chūi shinai to, jiko o okoshi-kane nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If you dont pay attention, you might cause an accident",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～かねない",
       "sentence": "このアプリはバグが多いので、クラッシュしかねない。",
-      "translation": "Since this app has many bugs, it might crash.",
+      "translation": "Ứng dụng này nhiều lỗi nên có thể bị sập.",
       "translationEn": "Since this app has many bugs, it might crash",
       "romaji": "Kono apuri wa bagu ga ōi no de, kurasshu shi-kane nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Since this app has many bugs, it might crash",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～かねない",
       "sentence": "彼女は緊張しているので、失敗しかねない。",
-      "translation": "She's so nervous that she might fail.",
+      "translation": "Cô ấy căng thẳng nên có thể thất bại.",
       "translationEn": "Shes so nervous that she might fail",
       "romaji": "Kanojo wa kinchō shite iru no de, shippai shi-kane nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Shes so nervous that she might fail",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～かねる",
       "sentence": "その問題は難しいので、私には解決しかねます。",
-      "translation": "Since that problem is difficult, I cannot solve it.",
+      "translation": "Vấn đề đó khó nên tôi khó mà giải quyết được.",
       "translationEn": "Since that problem is difficult, I cannot solve it",
       "romaji": "Sono mondai wa muzukashii no de, watashi ni wa kaiketsu shi-kanemasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Since that problem is difficult, I cannot solve it",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～かねる",
       "sentence": "彼の言っていることが真実かどうか判断しかねます。",
-      "translation": "I cannot judge whether what he is saying is true or not.",
+      "translation": "Tôi khó mà phán đoán điều anh ấy nói có đúng sự thật hay không.",
       "translationEn": "I cannot judge whether what he is saying is true or not",
       "romaji": "Kare no itte iru koto ga shinjitsu ka dō ka handan shi-kanemasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I cannot judge whether what he is saying is true or not",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～かねる",
       "sentence": "彼女が来るかどうか今すぐには分かりかねます。",
-      "translation": "I cannot immediately know whether she will come or not.",
+      "translation": "Tôi chưa thể biết ngay liệu cô ấy có đến hay không.",
       "translationEn": "I cannot immediately know whether she will come or not",
       "romaji": "Kanojo ga kuru ka dō ka ima sugu ni wa wakari-kanemasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I cannot immediately know whether she will come or not",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～かねる",
       "sentence": "詳しい内容については説明しかねます。",
-      "translation": "I cannot explain the details.",
+      "translation": "Tôi không thể giải thích chi tiết.",
       "translationEn": "I cannot explain the details",
       "romaji": "Kuwashii naiyō ni tsuite wa setsumei shi-kanemasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I cannot explain the details",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～かのようだ",
       "sentence": "彼は犬が怖いかのようだ。",
-      "translation": "He seems as if he is scared of dogs.",
+      "translation": "Anh ấy trông như thể sợ chó.",
       "translationEn": "He seems as if he is scared of dogs",
       "romaji": "Kare wa inu ga kowai ka no you da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He seems as if he is scared of dogs",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～かのようだ",
       "sentence": "この部屋は寒いかのようだ。",
-      "translation": "This room feels as if it's cold.",
+      "translation": "Căn phòng này có vẻ lạnh.",
       "translationEn": "This room feels as if its cold",
       "romaji": "Kono heya wa samui ka no you da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This room feels as if its cold",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～かのようだ",
       "sentence": "彼女は有名人であるかのようだ。",
-      "translation": "She acts as though she is a celebrity.",
+      "translation": "Cô ấy cư xử như thể mình là người nổi tiếng.",
       "translationEn": "She acts as though she is a celebrity",
       "romaji": "Kanojo wa yuumeijin de aru ka no you da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She acts as though she is a celebrity",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～かのようだ",
       "sentence": "彼は子供であるかのようだ。",
-      "translation": "He acts as if he's a child.",
+      "translation": "Anh ấy cư xử như một đứa trẻ.",
       "translationEn": "He acts as if hes a child",
       "romaji": "Kare wa kodomo de aru ka no you da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He acts as if hes a child",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～か～まいか",
       "sentence": "このプロジェクトを引き受けようか引き受けまいか、まだ決めていない。",
-      "translation": "I haven't decided whether to take on this project or not.",
+      "translation": "Tôi vẫn chưa quyết định có nhận dự án này hay không.",
       "translationEn": "I havent decided whether to take on this project or not",
       "romaji": "Kono purojekuto o hikiukeyou ka hikiukemai ka, mada kimete inai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I havent decided whether to take on this project or not",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～か～まいか",
       "sentence": "彼が成功しようか成功するまいか、今は予測できない。",
-      "translation": "Whether he will succeed or not is unpredictable at the moment.",
+      "translation": "Hiện giờ khó dự đoán liệu anh ấy có thành công hay không.",
       "translationEn": "Whether he will succeed or not is unpredictable at the moment",
       "romaji": "Kare ga seikou shiyou ka seikou suru maika, ima wa yosoku dekinai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether he will succeed or not is unpredictable at the moment",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～か～まいか",
       "sentence": "この問題は簡単であるか難しいであるまいか、意見が分かれている。",
-      "translation": "Opinions are divided on whether this problem is simple or difficult.",
+      "translation": "Mọi người có ý kiến khác nhau về việc vấn đề này dễ hay khó.",
       "translationEn": "Opinions are divided on whether this problem is simple or difficult",
       "romaji": "Kono mondai wa kantan de aru ka muzukashii de aru maika, iken ga wakarete iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Opinions are divided on whether this problem is simple or difficult",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～か～まいか",
       "sentence": "彼はリーダーであるかフォロワーであるまいか、自分で選ぶべきだ。",
-      "translation": "He should choose for himself whether he is a leader or a follower.",
+      "translation": "Anh ấy nên tự chọn làm người dẫn dắt hay người đi theo.",
       "translationEn": "He should choose for himself whether he is a leader or a follower",
       "romaji": "Kare wa riidā de aru ka forowā de aru maika, jibun de erabu beki da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He should choose for himself whether he is a leader or a follower",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～からこそ",
       "sentence": "失敗したからこそ、成功の意味がわかる。",
-      "translation": "It is precisely because I failed that I understand the meaning of success.",
+      "translation": "Chính vì từng thất bại mà tôi hiểu ý nghĩa của thành công.",
       "translationEn": "It is precisely because I failed that I understand the meaning of success",
       "romaji": "Shippai shita kara koso, seikou no imi ga wakaru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: It is precisely because I failed that I understand the meaning of success",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～からこそ",
       "sentence": "苦しかったからこそ、今日の私がある。",
-      "translation": "It is precisely because I went through hardships that I am who I am today.",
+      "translation": "Chính vì đã trải qua khó khăn nên mới có tôi của ngày hôm nay.",
       "translationEn": "It is precisely because I went through hardships that I am who I am today",
       "romaji": "Kurushikatta kara koso, kyou no watashi ga aru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: It is precisely because I went through hardships that I am who I am today",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～からこそ",
       "sentence": "彼は親切だからこそ、人気がある。",
-      "translation": "He is popular precisely because he is kind.",
+      "translation": "Anh ấy được yêu mến chính vì anh ấy tốt bụng.",
       "translationEn": "He is popular precisely because he is kind",
       "romaji": "Kare wa shinsetsu da kara koso, ninki ga aru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He is popular precisely because he is kind",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～からこそ",
       "sentence": "昔の経験があるからこそ、その問題がよく理解できる。",
-      "translation": "I can understand that problem well precisely because I have past experience.",
+      "translation": "Chính vì có kinh nghiệm trước đây nên tôi hiểu rõ vấn đề đó.",
       "translationEn": "I can understand that problem well precisely because I have past experience",
       "romaji": "Mukashi no keiken ga aru kara koso, sono mondai ga yoku rikai dekiru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I can understand that problem well precisely because I have past experience",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "〜からして",
       "sentence": "彼の顔つきからして、何か悪いことがあったのだろう。",
-      "translation": "From his facial expression, something bad must have happened.",
+      "translation": "Nhìn vẻ mặt anh ấy là biết chắc đã có chuyện không hay.",
       "translationEn": "From his facial expression, something bad must have happened",
       "romaji": "Kare no kaotsuki kara shite, nanika warui koto ga atta no darou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: From his facial expression, something bad must have happened",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "〜からして",
       "sentence": "この料理の見た目からして、おいしくなさそうだ。",
-      "translation": "Judging from the appearance of this dish, it doesn't look delicious.",
+      "translation": "Chỉ nhìn món ăn này thôi đã thấy có vẻ không ngon.",
       "translationEn": "Judging from the appearance of this dish, it doesnt look delicious",
       "romaji": "Kono ryouri no mitame kara shite, oishikunasa sou da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Judging from the appearance of this dish, it doesnt look delicious",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "〜からして",
       "sentence": "彼女の試験成績からして、合格するのは難しいでしょう。",
-      "translation": "Considering her test scores, it will be difficult for her to pass.",
+      "translation": "Xét điểm thi của cô ấy thì có lẽ việc đậu sẽ khó.",
       "translationEn": "Considering her test scores, it will be difficult for her to pass",
       "romaji": "Kanojo no shiken seiseki kara shite, goukaku suru no wa muzukashii deshou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Considering her test scores, it will be difficult for her to pass",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "〜からして",
       "sentence": "その映画のタイトルからして、面白くないと思う。",
-      "translation": "Judging from the title of the movie, I think it's not interesting.",
+      "translation": "Chỉ nhìn tiêu đề phim thôi, tôi đã nghĩ nó không hay.",
       "translationEn": "Judging from the title of the movie, I think its not interesting",
       "romaji": "Sono eiga no taitoru kara shite, omoshirokunai to omou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Judging from the title of the movie, I think its not interesting",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～からすると",
       "sentence": "経験からすると、この仕事は難しいでしょう。",
-      "translation": "Considering their experience, this job might be difficult.",
+      "translation": "Xét theo kinh nghiệm thì công việc này có lẽ khó.",
       "translationEn": "Considering their experience, this job might be difficult",
       "romaji": "Keiken kara suru to, kono shigoto wa muzukashii deshou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Considering their experience, this job might be difficult",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～からすると",
       "sentence": "評判からすると、あのレストランはとても美味しいです。",
-      "translation": "Judging from the reputation, that restaurant is very delicious.",
+      "translation": "Xét theo danh tiếng thì nhà hàng đó rất ngon.",
       "translationEn": "Judging from the reputation, that restaurant is very delicious",
       "romaji": "Hyouban kara suru to, ano resutoran wa totemo oishii desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Judging from the reputation, that restaurant is very delicious",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～からすると",
       "sentence": "価格からすると、この商品は高品質のものと思われます。",
-      "translation": "Considering the price, this product seems to be of high quality.",
+      "translation": "Xét theo giá thì sản phẩm này có vẻ chất lượng cao.",
       "translationEn": "Considering the price, this product seems to be of high quality",
       "romaji": "Kakaku kara suru to, kono shouhin wa kouhinshitsu no mono to omowaremasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Considering the price, this product seems to be of high quality",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～からすると",
       "sentence": "このエリアですが、交通の便からすると、便利です。",
-      "translation": "As for this area, considering the transportation convenience, it's convenient.",
+      "translation": "Khu vực này xét về giao thông thì khá tiện lợi.",
       "translationEn": "As for this area, considering the transportation convenience, its convenient",
       "romaji": "Kono eria desu ga, koutsuu no ben kara suru to, benri desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As for this area, considering the transportation convenience, its convenient",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     }
   ]
 }

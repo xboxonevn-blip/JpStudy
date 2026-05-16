@@ -6,554 +6,360 @@
   "tags": [
     "source-hanabira",
     "n2-grammar-import",
-    "needs-human-review",
-    "vi-machine-draft",
-    "vi-needs-review"
+    "vi-editorial-codex-pass"
   ],
   "examples": [
     {
       "grammarPoint": "～からといって",
       "sentence": "雨が降ったからといって、試合が中止になるわけではありません。",
-      "translation": "Just because it rained doesn't mean the game will be canceled.",
+      "translation": "Chỉ vì trời mưa không có nghĩa là trận đấu sẽ bị hủy.",
       "translationEn": "Just because it rained doesnt mean the game will be canceled",
       "romaji": "Ame ga futta kara to itte, shiai ga chuushi ni naru wake de wa arimasen.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Just because it rained doesnt mean the game will be canceled",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～からといって",
       "sentence": "彼が有名だからといって、彼の意見がいつも正しいわけではない。",
-      "translation": "Just because he is famous doesn't mean his opinions are always correct.",
+      "translation": "Chỉ vì anh ấy nổi tiếng không có nghĩa là ý kiến của anh ấy luôn đúng.",
       "translationEn": "Just because he is famous doesnt mean his opinions are always correct",
       "romaji": "Kare ga yuumei da kara to itte, kare no iken ga itsumo tadashii wake de wa nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Just because he is famous doesnt mean his opinions are always correct",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～からといって",
       "sentence": "このスープが辛いからといって、全ての人が辛いと感じるわけではない。",
-      "translation": "Just because this soup is spicy doesn't mean everyone will find it spicy.",
+      "translation": "Chỉ vì món súp này cay không có nghĩa là ai cũng thấy cay.",
       "translationEn": "Just because this soup is spicy doesnt mean everyone will find it spicy",
       "romaji": "Kono suupu ga karai kara to itte, subete no hito ga karai to kanjiru wake de wa nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Just because this soup is spicy doesnt mean everyone will find it spicy",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～からといって",
       "sentence": "彼女が泣いているからといって、悲しいわけではないかもしれない。",
-      "translation": "Just because she is crying doesn't necessarily mean she's sad.",
+      "translation": "Chỉ vì cô ấy đang khóc không nhất thiết có nghĩa là cô ấy buồn.",
       "translationEn": "Just because she is crying doesnt necessarily mean shes sad",
       "romaji": "Kanojo ga naiteiru kara to itte, kanashii wake de wa nai kamoshirenai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Just because she is crying doesnt necessarily mean shes sad",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～から～にかけて",
       "sentence": "午前９時から午後５時にかけて、仕事をしています。",
-      "translation": "I work from 9 in the morning to 5 in the evening.",
+      "translation": "Tôi làm việc từ 9 giờ sáng đến 5 giờ chiều.",
       "translationEn": "I work from 9 in the morning to 5 in the evening",
       "romaji": "Gozen ku-ji kara gogo go-ji ni kakete, shigoto wo shite imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I work from 9 in the morning to 5 in the evening",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～から～にかけて",
       "sentence": "東京から大阪にかけて、新幹線が走っています。",
-      "translation": "The bullet train runs from Tokyo to Osaka.",
+      "translation": "Tàu Shinkansen chạy từ Tokyo đến Osaka.",
       "translationEn": "The bullet train runs from Tokyo to Osaka",
       "romaji": "Toukyou kara Oosaka ni kakete, shinkansen ga hashitte imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The bullet train runs from Tokyo to Osaka",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～から～にかけて",
       "sentence": "春から夏にかけて、花がたくさん咲いています。",
-      "translation": "Many flowers bloom between spring and summer.",
+      "translation": "Từ mùa xuân sang mùa hè, rất nhiều hoa nở.",
       "translationEn": "Many flowers bloom between spring and summer",
       "romaji": "Haru kara natsu ni kakete, hana ga takusan saite imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Many flowers bloom between spring and summer",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～から～にかけて",
       "sentence": "２０歳から３０歳にかけて、多くの人が大学を卒業し、仕事に就くことが一般的です。",
-      "translation": "It is common for many people to graduate from university and start working between the ages of 20 and 30.",
+      "translation": "Từ khoảng 20 đến 30 tuổi, nhiều người thường tốt nghiệp đại học rồi đi làm.",
       "translationEn": "It is common for many people to graduate from university and start working between the ages of 20 and 30",
       "romaji": "Hatachi kara sanjuu-sai ni kakete, ooku no hito ga daigaku wo sotsugyou shi, shigoto ni tsuku koto ga ippan-teki desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: It is common for many people to graduate from university and start working between the ages of 20 and 30",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～からには",
       "sentence": "試験に合格したからには、一所懸命働かなければならない。",
-      "translation": "Since I passed the exam, I have to work hard.",
+      "translation": "Đã đỗ kỳ thi rồi thì tôi phải làm việc chăm chỉ.",
       "translationEn": "Since I passed the exam, I have to work hard",
       "romaji": "Shiken ni goukaku shita kara niwa, isshokenmei hatarakanakereba naranai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Since I passed the exam, I have to work hard",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～からには",
       "sentence": "約束したからには、守らなければなりません。",
-      "translation": "Since I made a promise, I must keep it.",
+      "translation": "Đã hứa rồi thì phải giữ lời.",
       "translationEn": "Since I made a promise, I must keep it",
       "romaji": "Yakusoku shita kara niwa, mamoranakereba narimasen.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Since I made a promise, I must keep it",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～からには",
       "sentence": "この映画が面白いからには、友達にも見せたい。",
-      "translation": "Since this movie is interesting, I want to show it to my friends too.",
+      "translation": "Nếu bộ phim này hay như vậy thì tôi cũng muốn cho bạn bè xem.",
       "translationEn": "Since this movie is interesting, I want to show it to my friends too",
       "romaji": "Kono eiga ga omoshiroi kara niwa, tomodachi ni mo misetai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Since this movie is interesting, I want to show it to my friends too",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～からには",
       "sentence": "彼女が助けを求めたからには、手伝わなければならない。",
-      "translation": "Since she asked for help, I must help her.",
+      "translation": "Vì cô ấy đã nhờ giúp, tôi phải giúp cô ấy.",
       "translationEn": "Since she asked for help, I must help her",
       "romaji": "Kanojo ga tasuke wo motometa kara niwa, tetsudawanakereba naranai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Since she asked for help, I must help her",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～から見ると",
       "sentence": "費用から見ると、このプランはお得です。",
-      "translation": "In terms of cost, this plan is a good deal.",
+      "translation": "Xét về chi phí, gói này khá hời.",
       "translationEn": "In terms of cost, this plan is a good deal",
       "romaji": "Hiyou kara miru to, kono puran wa otoku desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: In terms of cost, this plan is a good deal",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～から見ると",
       "sentence": "彼女の意見から見ると、社長の決定は理解できる。",
-      "translation": "From her perspective, the president's decision is understandable.",
+      "translation": "Từ góc nhìn của cô ấy, quyết định của giám đốc có thể hiểu được.",
       "translationEn": "From her perspective, the presidents decision is understandable",
       "romaji": "Kanojo no iken kara miru to, shachou no kettei wa rikai dekiru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: From her perspective, the presidents decision is understandable",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～から見ると",
       "sentence": "実力から見ると、彼はチームで最も優れている。",
-      "translation": "In terms of ability, he is the best in the team.",
+      "translation": "Xét về năng lực, anh ấy là người giỏi nhất đội.",
       "translationEn": "In terms of ability, he is the best in the team",
       "romaji": "Jitsuryoku kara miru to, kare wa chiimu de mottomo sugurete iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: In terms of ability, he is the best in the team",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～から見ると",
       "sentence": "健康面から見ると、この食品は良くない。",
-      "translation": "From the standpoint of health, this food is not good.",
+      "translation": "Xét về mặt sức khỏe, thực phẩm này không tốt.",
       "translationEn": "From the standpoint of health, this food is not good",
       "romaji": "Kenkoumen kara miru to, kono shokuhin wa yokunai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: From the standpoint of health, this food is not good",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～から言うと",
       "sentence": "値段から言うと、この商品が最もお得です。",
-      "translation": "Speaking from the viewpoint of price, this product is the best deal.",
+      "translation": "Xét về giá cả, sản phẩm này là món hời nhất.",
       "translationEn": "Speaking from the viewpoint of price, this product is the best deal",
       "romaji": "Nedan kara iuto, kono shouhin ga mottomo otoku desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Speaking from the viewpoint of price, this product is the best deal",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～から言うと",
       "sentence": "味から言って、このレストランはおいしいと思います。",
-      "translation": "In terms of taste, I think this restaurant is delicious.",
+      "translation": "Xét về hương vị, tôi nghĩ nhà hàng này ngon.",
       "translationEn": "In terms of taste, I think this restaurant is delicious",
       "romaji": "Aji kara itte, kono resutoran wa oishii to omoimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: In terms of taste, I think this restaurant is delicious",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～から言うと",
       "sentence": "便利さから言って、このアパートは最適な場所にあります。",
-      "translation": "Speaking from the perspective of convenience, this apartment is in the best location.",
+      "translation": "Xét về sự tiện lợi, căn hộ này nằm ở vị trí tốt nhất.",
       "translationEn": "Speaking from the perspective of convenience, this apartment is in the best location",
       "romaji": "Benrisa kara itte, kono apaato wa saiteki na basho ni arimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Speaking from the perspective of convenience, this apartment is in the best location",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～から言うと",
       "sentence": "健康から言うと、毎日運動することが大切です。",
-      "translation": "From the viewpoint of health, it is important to exercise every day.",
+      "translation": "Xét từ góc độ sức khỏe, vận động mỗi ngày là điều quan trọng.",
       "translationEn": "From the viewpoint of health, it is important to exercise every day",
       "romaji": "Kenkou kara iuto, mainichi undou suru koto ga taisetsu desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: From the viewpoint of health, it is important to exercise every day",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～くせに",
       "sentence": "彼はいつも遅刻してくるくせに、自分が待たされるのが嫌いだ。",
-      "translation": "He’s always late, yet he hates being kept waiting.",
+      "translation": "Anh ấy lúc nào cũng đi muộn, vậy mà lại ghét bị người khác bắt chờ.",
       "translationEn": "He’s always late, yet he hates being kept waiting",
       "romaji": "Kare wa itsumo chikoku shite kuru kuse ni, jibun ga matasareru no ga kirai da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He’s always late, yet he hates being kept waiting",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～くせに",
       "sentence": "悪いなと言ってるくせに、また同じことを繰り返している。",
-      "translation": "He says he's sorry, yet he keeps doing the same thing.",
+      "translation": "Anh ấy miệng thì nói xin lỗi, vậy mà vẫn lặp lại chuyện cũ.",
       "translationEn": "He says hes sorry, yet he keeps doing the same thing",
       "romaji": "Warui na to itteru kuse ni, mata onaji koto o kurikaeshite iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He says hes sorry, yet he keeps doing the same thing",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～くせに",
       "sentence": "彼は背が高いくせに、バスケが下手だ。",
-      "translation": "Despite being tall, he's bad at basketball.",
+      "translation": "Anh ấy cao vậy mà chơi bóng rổ lại kém.",
       "translationEn": "Despite being tall, hes bad at basketball",
       "romaji": "Kare wa se ga takai kuse ni, basuke ga heta da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Despite being tall, hes bad at basketball",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～くせに",
       "sentence": "この店は有名なのくせに、サービスが悪い。",
-      "translation": "Despite being famous, this store has poor service.",
+      "translation": "Cửa hàng này nổi tiếng thế mà dịch vụ lại tệ.",
       "translationEn": "Despite being famous, this store has poor service",
       "romaji": "Kono mise wa yuumei na no kuse ni, saabisu ga warui.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Despite being famous, this store has poor service",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ことから",
       "sentence": "彼は毎日運動することから、体が丈夫です。",
-      "translation": "Because he exercises every day, he is physically strong.",
+      "translation": "Vì anh ấy tập thể dục mỗi ngày nên cơ thể khỏe mạnh.",
       "translationEn": "Because he exercises every day, he is physically strong",
       "romaji": "Kare wa mainichi undou suru koto kara, karada ga joubu desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Because he exercises every day, he is physically strong",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ことから",
       "sentence": "この店のサービスがいいことから、いつも混んでいます。",
-      "translation": "This store is always crowded because of its good service.",
+      "translation": "Vì dịch vụ của cửa hàng này tốt nên lúc nào cũng đông khách.",
       "translationEn": "This store is always crowded because of its good service",
       "romaji": "Kono mise no saabisu ga ii koto kara, itsumo konde imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This store is always crowded because of its good service",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ことから",
       "sentence": "彼女は親切なことから、みんなに好かれています。",
-      "translation": "She’s well-liked by everyone due to her kindness.",
+      "translation": "Vì cô ấy tốt bụng nên được mọi người yêu mến.",
       "translationEn": "She’s well-liked by everyone due to her kindness",
       "romaji": "Kanojo wa shinsetsu na koto kara, minna ni sukarete imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She’s well-liked by everyone due to her kindness",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ことから",
       "sentence": "その会社の評判が良いことから、就職先として人気があります。",
-      "translation": "Because that company’s reputation is good, it’s popular as a place to work.",
+      "translation": "Vì công ty đó có danh tiếng tốt nên được ưa chuộng như nơi làm việc.",
       "translationEn": "Because that company’s reputation is good, it’s popular as a place to work",
       "romaji": "Sono kaisha no hyouban ga yoi koto kara, shuushoku-saki toshite ninki ga arimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Because that company’s reputation is good, it’s popular as a place to work",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ことに",
       "sentence": "彼が急に帰国することに驚いた。",
-      "translation": "I was surprised that he suddenly returned to his home country.",
+      "translation": "Tôi ngạc nhiên khi anh ấy đột ngột về nước.",
       "translationEn": "I was surprised that he suddenly returned to his home country",
       "romaji": "Kare ga kyuu ni kikoku suru koto ni odoroita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I was surprised that he suddenly returned to his home country",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ことに",
       "sentence": "彼女が優勝したことに感動した。",
-      "translation": "I was moved by the fact that she won the championship.",
+      "translation": "Tôi xúc động khi cô ấy giành chức vô địch.",
       "translationEn": "I was moved by the fact that she won the championship",
       "romaji": "Kanojo ga yuushou shita koto ni kandou shita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I was moved by the fact that she won the championship",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ことに",
       "sentence": "彼がいつも遅刻することに腹が立つ。",
-      "translation": "I get angry that he is always late.",
+      "translation": "Tôi bực vì anh ấy lúc nào cũng đến muộn.",
       "translationEn": "I get angry that he is always late",
       "romaji": "Kare ga itsumo chikoku suru koto ni hara ga tatsu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I get angry that he is always late",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ことに",
       "sentence": "彼女がこんなに美しいことに気がつかなかった。",
-      "translation": "I hadn’t realized how beautiful she was.",
+      "translation": "Tôi đã không nhận ra cô ấy đẹp đến vậy.",
       "translationEn": "I hadn’t realized how beautiful she was",
       "romaji": "Kanojo ga konna ni utsukushii koto ni ki ga tsukanakatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I hadn’t realized how beautiful she was",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     }
   ]
 }
