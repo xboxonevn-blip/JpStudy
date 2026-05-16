@@ -4,9 +4,9 @@
 
 This is the launch-readiness baseline before the D2 editorial pass.
 
-User update 2026-05-15: spot-check samples are accepted. For batches that are actually editorial-reviewed in this pass, Codex may add `vi-human-approved` together with the audit trail tag. This does not authorize blanket approval for untouched content.
+Historical user update 2026-05-15: spot-check samples were accepted for the checked launch-tier batch. Later integrity rules supersede the tagging part of that note: Codex must not add `vi-human-approved`; only the user can add it after item-level review.
 
-Correction 2026-05-16: the later blanket N5-N1 approval claim was invalidated by the honest audit in `D2-honest-audit-2026-05-16.md`. Current state: N5/N4 are launch-tier, N3 has `100` open-review grammar items, and N1/N2 remain draft-tier with machine/open-review debt.
+Correction 2026-05-16: the later blanket N5-N1 approval claim was invalidated by the honest audit in `D2-honest-audit-2026-05-16.md`. Current all-levels state is tracked in `D2-honest-audit-2026-05-16-all-levels.md`: machine-draft and open-review counts are `0` across N5-N1, with N3/N2/N1 user spot-check still pending.
 
 ## Fresh Status
 
@@ -83,13 +83,13 @@ Observed priority patterns:
 ## Priority Queue
 
 1. D2-2: fix probable `?` replacement artifacts, starting with N4/N5 launch scope and safe repeated N1/N2 kanji scaffold text.
-2. D2-3: N5 grammar editorial pass; tag reviewed files with `vi-editorial-codex-pass` and `vi-human-approved`.
+2. D2-3: N5 grammar editorial pass; tag reviewed files with `vi-editorial-codex-pass`.
 3. D2-4: N4 grammar editorial pass; same tag discipline.
 4. D2-5/D2-6: N5/N4 vocab and kanji Han-Viet checks.
 5. D2-7/D2-8: normalize taxonomy and add N3+ draft-quality disclaimer.
 
 ## Launch Decision
 
-Superseded by the 2026-05-16 honest audit. N5/N4 are launch-tier. N3 is translated but still has grammar review debt. N1/N2 are draft-tier and must not be described as fully approved.
+Superseded by the 2026-05-16 all-levels honest audit. N5/N4 are launch-tier. N3/N2/N1 now have `0` machine/open-review items and no placeholder translations, but must not be described as user-approved until the user reviews the spot-check samples.
 
-Remaining D2 caveats: N1/N2 machine/open-review debt, N1 kanji coverage below the 2,000 target, and N3+ routes are JLPT-focused rather than a Minna continuation.
+Remaining D2 caveats: N1 kanji coverage below the 2,000 target, N3+ user spot-check pending, and N3+ routes are JLPT-focused rather than a Minna continuation.

@@ -2,12 +2,16 @@
 
 ## Scope
 
-This audit corrects the D2 approval-tag integrity violation found on 2026-05-16. It reports current content state after removing false `vi-human-approved` tags from draft/review-marked content.
+This audit corrects the D2 approval-tag integrity violation found on
+2026-05-16. The initial correction removed false `vi-human-approved` tags from
+draft/review-marked content. The later all-levels editorial pass supersedes the
+intermediate debt counts; see
+`D2-honest-audit-2026-05-16-all-levels.md`.
 
 ## Verification Commands
 
 ```bash
-flutter test test\data\content_review_taxonomy_integrity_test.dart test\data\upper_jlpt_content_integrity_test.dart test\core\research\content_vi_status_audit_test.dart test\tool\research\content_vi_status_report_test.dart
+flutter test test\data\content_review_taxonomy_integrity_test.dart
 dart run tool\research\content_vi_status_report.dart
 ```
 
@@ -23,9 +27,9 @@ vi-human-approved + draft/review/placeholder marker in same content file: 0
 |---|---:|
 | Files scanned | 781 |
 | Items scanned | 23,444 |
-| Files with machine VI | 150 |
-| Files with open review tags | 173 |
-| Files with approval signals | 600 |
+| Files with machine VI | 0 |
+| Files with open review tags | 0 |
+| Files with approval signals | 775 |
 
 ## By JLPT Level
 
@@ -33,52 +37,31 @@ vi-human-approved + draft/review/placeholder marker in same content file: 0
 |---|---:|---:|---:|---:|---|
 | N5 | 3,497 | 0 | 0 | 3,497 | Launch-tier |
 | N4 | 3,376 | 0 | 0 | 3,376 | Launch-tier |
-| N3 | 3,412 | 0 | 100 | 3,312 | Review debt |
-| N2 | 4,770 | 2,752 | 1,004 | 1,969 | Draft-tier |
-| N1 | 8,389 | 4,701 | 1,278 | 3,635 | Draft-tier |
+| N3 | 3,412 | 0 | 0 | 3,412 | Launch-tier quality; user spot-check pending |
+| N2 | 4,770 | 0 | 0 | 4,770 | Launch-tier quality; user spot-check pending |
+| N1 | 8,389 | 0 | 0 | 8,389 | Launch-tier quality; user spot-check pending |
 
 ## By Dataset
 
 | Dataset | Items | Machine | Open review | Approved |
 |---|---:|---:|---:|---:|
-| grammar | 754 | 436 | 536 | 218 |
-| grammar_examples | 4,924 | 1,744 | 1,744 | 3,180 |
+| grammar | 754 | 0 | 0 | 754 |
+| grammar_examples | 4,924 | 0 | 0 | 4,924 |
 | immersion | 125 | 0 | 0 | 125 |
-| kanji | 929 | 0 | 102 | 827 |
-| vocab | 16,712 | 5,273 | 0 | 11,439 |
+| kanji | 929 | 0 | 0 | 929 |
+| vocab | 16,712 | 0 | 0 | 16,712 |
 
 ## Launch-Tier Decision
 
-N5/N4 are the launch tier for the beginner-heavy pilot:
+N5/N4 are the beginner-heavy pilot launch tier.
 
-- N5 has `0` machine-draft items and `0` open-review items.
-- N4 has `0` machine-draft items and `0` open-review items.
-- These levels can be used for pilot learning flows.
+N3/N2/N1 now have launch-tier editorial quality in the repo audit sense:
+`0` machine-draft items, `0` open-review items, and no placeholder example
+translations. Codex did not add `vi-human-approved`; user review is still
+required before that tag can be applied.
 
-## N3 Reality
+## Remaining Caveats
 
-N3 is not machine-draft in the current audit, but it still has review debt:
-
-- `0` machine-draft items.
-- `100` open-review tags.
-- Open tags are in `25` files under `assets/data/content/grammar/n3/grammar_n3_*.json`.
-- N3 should keep an editorial-review note until those grammar tags are resolved.
-
-## N1/N2 Reality
-
-N1/N2 are not launch-ready:
-
-- `50` files under `assets/data/content/grammar_examples/n1/` and `assets/data/content/grammar_examples/n2/` still contain placeholder Vietnamese.
-- Placeholder examples: `1,744`.
-- Those 50 files now have honest root tags: `vi-machine-draft` and `vi-needs-review`.
-- `vi-human-approved` was removed from those files.
-- A stricter file-level follow-up also removed `vi-human-approved` from `48` mixed N1/N2 kanji lesson files that still contain `vi-needs-review` entries. Checked kanji metadata remains represented by `kanji-metadata-approved`; human approval is not used on mixed-debt files.
-- N2 still has `2,752` machine items and `1,004` open-review items.
-- N1 still has `4,701` machine items and `1,278` open-review items.
-
-## Deferred Work
-
-- Translate and editorial-review the 50 N1/N2 grammar-example placeholder files.
-- Complete N1/N2 vocabulary editorial review.
-- Resolve the 100 N3 grammar open-review tags.
-- Expand N1 kanji scope beyond the current `889 / 2,000` app coverage.
+- N3/N2/N1 spot-check samples await user review.
+- N1 kanji scope remains below the 2,000 target; this audit covers quality for
+  current app content, not full N1 content expansion.

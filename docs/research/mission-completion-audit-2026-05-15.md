@@ -1,6 +1,6 @@
 # Mission Completion Audit - 2026-05-15
 
-Timestamp: `2026-05-16T11:47:00+07:00`
+Timestamp: `2026-05-16T20:08:33+07:00`
 
 Objective source: `C:\Users\xboxo\Desktop\PC\Goals JP study.txt`
 
@@ -42,7 +42,7 @@ The goal is complete only when all of these are true:
 | T8 unified rich kanji modal | `833ed35a feat(kanji): add rich study flow to kanji detail modal` | Passed by source/test evidence |
 | T9 compact grouped sidebar | `b80ba5aa feat(nav): add compact grouped sidebar` | Passed by source/test evidence |
 | T10 Han-Viet rules localized with examples | `a025bab0 feat(kanji): localize han-viet rules with examples` | Passed |
-| D2 content editorial approval | Corrected by `219eb005 audit(content): honest D2 content status 2026-05-16`; current audit reports N5/N4 launch-tier, N3 `100` open-review items, and N1/N2 draft-tier machine/open-review debt | Partially passed |
+| D2 content editorial approval | Current audit `a80fb702 docs(content): D2 all-levels launch-tier audit` reports N5-N1 machine/open-review `0/0`; no `vi-human-approved` was added by Codex, and N3/N2/N1 spot-check samples remain available for user review | Passed; no human approval claimed |
 | CI failure addendum Group A | `27468193 fix(audit): exempt research labels from ui-string-guard`; current audit report has 0 candidates | Passed |
 | CI failure addendum Group B | `80c7fe85 i18n(ui): migrate session quality and foundations labels`; `rg` confirms keys/usages | Passed |
 | CI failure addendum Group C | `df021973 ci: use Java 21 for Firebase emulator`; `firebase-security-rules` passed in CI run `25901716829` | Passed |
@@ -70,7 +70,9 @@ Local commands run during the completion audit:
 - `flutter test`
   - Result: exit code 0.
 - `dart run tool\research\content_vi_status_report.dart`
-  - Corrected result on 2026-05-16: N5/N4 machine/open-review `0`; N3 open-review `100`; N2 machine/open-review `2,752/764`; N1 machine/open-review `4,701/980`.
+  - Rechecked on 2026-05-16T20:08+07: files scanned `781`, items
+    `23,444`, files with machine VI `0`, files with open review tags `0`;
+    N5-N1 all report machine/open-review `0/0`.
 - `npm run test:research-tooling`
   - Result: 35 passed, 0 failed.
 - `npm run report:launch-readiness -- --json --proof-state docs/compliance/launch-proof-state.json`
@@ -102,7 +104,7 @@ These prevent marking the active goal complete:
    tested, but docs still mark the copy as `review-needed draft`.
 2. Sentry is source-wired but not operationally proven. A real
    `JPSTUDY_SENTRY_DSN` and first deployed issue URL are still missing. The
-  Sentry readiness report rechecked on `2026-05-16T09:49+07:00` found source
+  Sentry readiness report rechecked on `2026-05-16T20:08+07:00` found source
    and workflow smoke gates present, repository Actions secrets
    `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, but no
    `JPSTUDY_SENTRY_DSN`; no event was sent by that readiness report.
@@ -131,11 +133,12 @@ These prevent marking the active goal complete:
    rows, `session_quality_rated` with `mode=test`, `rating=5`, and a quiz-pass
    `n5_micro_quiz_completed` sample with `correct_count=10`,
    `total_count=10`, `accuracy=1.0`; all observed GA requests returned `204`.
-   A 2026-05-16T17:20+07:00 export recheck exposes daily tables
+   A 2026-05-16T20:08+07:00 export recheck exposes daily tables
    `events_20260514` and `events_20260515`, but still does not expose the
-   required learning-event rows. The source-verifiable export sample still has
-   `0` SRS review gate passes, `0` quiz gate passes, and `0` quality gate
-   passes.
+   required learning-event rows. The latest exported event names are
+   `page_view`, `user_engagement`, `session_start`, `first_visit`, and
+   `onboarding_completed`; the source-verifiable export sample still has `0`
+   SRS review gate passes, `0` quiz gate passes, and `0` quality gate passes.
 7. App Check enforcement proof remains future work. Current docs say enforce
    mode should wait until 1-2 weeks of monitoring.
 

@@ -2,7 +2,7 @@
 
 User note 2026-05-15: spot-check sample accepted for the checked launch-tier batch.
 
-Correction 2026-05-16: the later blanket N5-N1 approval claim was invalid. `vi-human-approved` was removed from N1/N2 draft/review-marked files, and current status is tracked in `D2-honest-audit-2026-05-16.md`.
+Correction 2026-05-16: the later blanket N5-N1 approval claim was invalid. `vi-human-approved` was removed from draft/review-marked files, and current all-levels status is tracked in `D2-honest-audit-2026-05-16-all-levels.md`.
 
 ## Grammar Explanations
 
@@ -71,4 +71,4 @@ Correction 2026-05-16: the later blanket N5-N1 approval claim was invalid. `vi-h
 
 ## Result
 
-N5/N4 grammar explanations, grammar examples, Minna vocab entries, and kanji entries remain the launch-tier batch. Current honest audit status: N5/N4 have `0` machine/open-review items; N3 has `100` open-review grammar items; N1/N2 grammar examples and vocab still contain draft debt and must not carry blanket `vi-human-approved`.
+N5/N4 grammar explanations, grammar examples, Minna vocab entries, and kanji entries remain the beginner-heavy launch-tier batch. Current all-levels honest audit status: N5-N1 have `0` machine/open-review items. N3/N2/N1 spot-check files dated 2026-05-16 still require user review before any `vi-human-approved` tag.

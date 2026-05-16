@@ -25,7 +25,7 @@ approval must reference an existing git commit. Sentry, Storage, and GA4
 learning-event export gates remain source-verified and cannot be closed by the
 proof state file.
 
-Latest run on `2026-05-16T15:56+07:00` returned `complete=false` with
+Latest run on `2026-05-16T20:08+07:00` returned `complete=false` with
 blockers: `legal-approval-missing`, `sentry-dsn-missing`,
 `storage-not-provisioned`, `deletion-proof-missing`,
 `ga4-retention-proof-missing`, `ga4-learning-events-missing`, and
@@ -127,7 +127,7 @@ Current status:
 - Repository Actions secrets rechecked on `2026-05-16T09:49+07:00` include
   `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, but not
   `JPSTUDY_SENTRY_DSN`.
-- Sentry readiness CLI rechecked on `2026-05-16T09:49+07:00` with
+- Sentry readiness CLI rechecked on `2026-05-16T20:08+07:00` with
   `npm run report:sentry-readiness -- --json`: source wiring and workflow smoke
   gate are present, repo secrets metadata is readable, no event was sent, and
   readiness remains `false` with reason `sentry-dsn-missing`.
@@ -257,10 +257,12 @@ Current status:
     `correct_count=10`, `total_count=10`, `accuracy=1.0`.
   - `session_quality_rated`: GA response `204`; params `mode=test`,
     `rating=5`.
-- Export ingestion is still pending. Recheck on `2026-05-16T17:20+07:00`
+- Export ingestion is still pending. Recheck on `2026-05-16T20:08+07:00`
   found daily tables `analytics_536663906.events_20260514` and
   `analytics_536663906.events_20260515`, but the learning rows are not in
-  BigQuery yet.
+  BigQuery yet. Latest exported event names are `page_view`,
+  `user_engagement`, `session_start`, `first_visit`, and
+  `onboarding_completed`.
 - The export report query now scores the quiz gate from the app's actual
   telemetry params: `score`, or `accuracy * 100`, or
   `correct_count / total_count * 100`.

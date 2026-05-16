@@ -159,12 +159,12 @@ Active workstream status (as of 2026-05-16):
   and secret-backed `deploy-hosting` all completed with `success`, including
   production build, primary deploy, primary/legacy smoke, live resource smoke,
   and Lighthouse live gate.
-- Latest D2 content integrity correction: `a19a3ccc` plus
-  `D2-honest-audit-2026-05-16.md`.
-  N5/N4 are launch-tier; N3 has `100` grammar review-debt items; N1/N2 remain
-  draft-tier with machine/open-review debt. File-level guards now require
-  `vi-human-approved` to be absent from any file that still carries draft,
-  review, or placeholder markers. Do not claim full N5-N1 human approval.
+- Latest D2 content integrity correction: `a80fb702` plus
+  `D2-honest-audit-2026-05-16-all-levels.md`.
+  Current audit reports N5/N4 launch-tier and N3/N2/N1 launch-tier quality
+  with user spot-check still pending for the upper-level samples. Machine-draft
+  and open-review counts are `0` across all levels. Codex must not add
+  `vi-human-approved`; only the user can add that after item-level review.
 - Remaining blockers are operational/legal proofs: legal approval,
   Sentry DSN + first issue, Firebase Storage bucket/rules/CORS migration proof,
   first executed deletion proof, GA4 UI retention proof, BigQuery-exported
