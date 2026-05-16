@@ -363,7 +363,7 @@ function nextActionFor(blocker) {
     return 'Set JPSTUDY_SENTRY_DSN and run workflow_dispatch with sentry_smoke=true.';
   }
   if (blocker === 'storage-not-provisioned') {
-    return 'Provision Firebase Storage, deploy rules, apply storage.cors.json, then run migration proof.';
+    return 'Confirm/upgrade Blaze billing, provision Firebase Storage, deploy rules, apply storage.cors.json, then run migration proof.';
   }
   if (blocker === 'deletion-proof-missing') {
     return 'Execute the deletion runbook against a dedicated test UID, then record deletion proof in docs/compliance/launch-proof-state.json.';

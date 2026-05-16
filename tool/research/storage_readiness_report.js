@@ -6,6 +6,8 @@ const path = require('node:path');
 
 const DEFAULT_PROJECT = 'jpstudy-v2';
 const DEFAULT_CORS_FILE = 'storage.cors.json';
+const DEFAULT_CONTEXT_FILE = 'CLAUDE.md';
+const FIREBASE_STORAGE_DOCS_URL = 'https://firebase.google.com/docs/storage/web/start';
 
 function parseArgs(argv) {
   const args = {
@@ -77,9 +79,27 @@ function collectStatus(args) {
   return {
     generatedAt: new Date().toISOString(),
     project: args.project,
+    billingPrerequisite: readBillingPrerequisite(),
     rulesTest,
     cors: readCorsConfig(args.corsFile),
     dryRun,
+  };
+}
+
+function readBillingPrerequisite(contextFile = DEFAULT_CONTEXT_FILE) {
+  const context = fs.existsSync(contextFile)
+    ? fs.readFileSync(contextFile, 'utf8')
+    : '';
+  const currentPlan = /\*\*Plan\*\*:\s*Spark/i.test(context)
+    ? 'Spark'
+    : 'unknown';
+  return {
+    docsUrl: FIREBASE_STORAGE_DOCS_URL,
+    requiresBlaze: true,
+    currentPlan,
+    source: currentPlan === 'Spark' ? contextFile : 'Firebase docs',
+    note:
+      'Firebase currently requires the pay-as-you-go Blaze plan to use Cloud Storage for Firebase.',
   };
 }
 
@@ -146,6 +166,14 @@ function buildMarkdownReport(status) {
     `Ready: \`${readiness.ready}\``,
     `Reason: \`${readiness.reason}\``,
     '',
+    '## Billing Prerequisite',
+    '',
+    `Firebase docs: \`${status.billingPrerequisite?.docsUrl || FIREBASE_STORAGE_DOCS_URL}\``,
+    `Requires Blaze: \`${status.billingPrerequisite?.requiresBlaze === true}\``,
+    `Current documented plan: \`${status.billingPrerequisite?.currentPlan || 'unknown'}\``,
+    `Source: \`${status.billingPrerequisite?.source || 'Firebase docs'}\``,
+    status.billingPrerequisite?.note || '',
+    '',
     '## Storage Rules Emulator',
     '',
     `Command: \`${status.rulesTest.command}\``,
@@ -203,5 +231,6 @@ module.exports = {
   buildShellCommand,
   buildMarkdownReport,
   classifyStorageReadiness,
+  readBillingPrerequisite,
   readCorsConfig,
 };

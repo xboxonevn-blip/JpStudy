@@ -122,7 +122,9 @@ function buildDeletionReadiness({
   }
   if (storage?.reason === 'storage-not-provisioned') {
     blockers.push('Firebase Storage is not provisioned');
-    nextActions.push('Provision Firebase Storage in Console.');
+    nextActions.push(
+      'Confirm/upgrade Blaze billing, then provision Firebase Storage in Console.',
+    );
   } else if (storage?.ready === false) {
     blockers.push(`Firebase Storage readiness failed: ${storage.reason}`);
     nextActions.push('Fix Storage readiness before running a live deletion proof.');

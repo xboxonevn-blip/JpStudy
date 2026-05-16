@@ -5,6 +5,7 @@ const {
   buildShellCommand,
   buildMarkdownReport,
   classifyStorageReadiness,
+  readBillingPrerequisite,
 } = require('../../../tool/research/storage_readiness_report');
 
 test('classifyStorageReadiness blocks when production dry-run says Storage is not set up', () => {
@@ -36,6 +37,14 @@ test('buildMarkdownReport records rules and production dry-run evidence', () => 
   const report = buildMarkdownReport({
     generatedAt: '2026-05-15T12:00:00.000Z',
     project: 'jpstudy-v2',
+    billingPrerequisite: {
+      docsUrl: 'https://firebase.google.com/docs/storage/web/start',
+      requiresBlaze: true,
+      currentPlan: 'Spark',
+      source: 'CLAUDE.md',
+      note:
+        'Firebase currently requires the pay-as-you-go Blaze plan to use Cloud Storage for Firebase.',
+    },
     rulesTest: {
       command: 'npm run test:storage-rules',
       status: 0,
@@ -55,12 +64,26 @@ test('buildMarkdownReport records rules and production dry-run evidence', () => 
 
   assert.match(report, /# Firebase Storage Readiness Report/);
   assert.match(report, /Project: `jpstudy-v2`/);
+  assert.match(report, /## Billing Prerequisite/);
+  assert.match(report, /Requires Blaze: `true`/);
+  assert.match(report, /Current documented plan: `Spark`/);
   assert.match(report, /Rules emulator status: `pass`/);
   assert.match(report, /CORS config: `present`/);
   assert.match(report, /https:\/\/jpstudy\.web\.app/);
   assert.match(report, /Production dry-run status: `fail`/);
   assert.match(report, /Firebase Storage has not been set up/);
   assert.match(report, /storage-not-provisioned/);
+});
+
+test('readBillingPrerequisite records Spark context from CLAUDE.md', () => {
+  const prerequisite = readBillingPrerequisite();
+
+  assert.equal(prerequisite.requiresBlaze, true);
+  assert.equal(prerequisite.currentPlan, 'Spark');
+  assert.equal(
+    prerequisite.docsUrl,
+    'https://firebase.google.com/docs/storage/web/start',
+  );
 });
 
 test('buildShellCommand quotes arguments that contain spaces', () => {
