@@ -1,6 +1,6 @@
 # Mission Completion Audit - 2026-05-15
 
-Timestamp: `2026-05-15T18:31:36+07:00`
+Timestamp: `2026-05-16T08:57:12+07:00`
 
 Objective source: `C:\Users\xboxo\Desktop\PC\Goals JP study.txt`
 
@@ -28,7 +28,7 @@ The goal is complete only when all of these are true:
 | T3 vocab unlock | `20ae038c fix(vocab): unlock data-backed catalog programs`, `a2c59f6c fix(vocab): unlock upper-level catalog tracks from assets`, `cf70a27c docs(uat): record live vocab unlock verification` | Passed |
 | T1 radical audit | `482b6109 audit(content): spot-check 214 radicals Han-Viet readings`; `docs/research/D2-content/Q2.7-radicals-audit.md` | Passed |
 | SP8 BigQuery verification | `f876d72c docs(research): verify BigQuery GA4 dataset availability`, `bac7af3c docs(research): record first real GA4 export sample`, `8883a2c4 tooling(research): add GA4 export status report` | Passed, but learning-event sample incomplete |
-| T2 radical corrections | `7ad3edc2 fix(content): correct top-30 radicals Han-Viet readings` | Passed for top-30; full editorial status still not claimed |
+| T2 radical corrections | `7ad3edc2 fix(content): correct top-30 radicals Han-Viet readings` | Passed |
 | SP1 i18n/gating strings | `49997da7 i18n(onboarding): add gating flow string aliases`, `52140db3 i18n(vocab): centralize catalog scope notes`; `python tooling/audit_ui_string_literals.py` reports 0 candidates | Passed for current guard scope |
 | T4 textbook coverage docs | `5a062215 docs(content): document textbook coverage constraints`; `docs/CONTENT_COVERAGE.md` | Passed |
 | SP2 persona retest | `docs/research/D4-persona-synthesis.md` says P2-P5 pass for route/gate/catalog checks; broad beta still fail due ops/legal blockers | Partially passed |
@@ -42,19 +42,19 @@ The goal is complete only when all of these are true:
 | T8 unified rich kanji modal | `833ed35a feat(kanji): add rich study flow to kanji detail modal` | Passed by source/test evidence |
 | T9 compact grouped sidebar | `b80ba5aa feat(nav): add compact grouped sidebar` | Passed by source/test evidence |
 | T10 Han-Viet rules localized with examples | `a025bab0 feat(kanji): localize han-viet rules with examples` | Passed |
+| D2 content editorial approval | `6f80f1d0 docs(content): record accepted D2 editorial approval`; `dart run tool\research\content_vi_status_report.dart` on `2026-05-16T08:36+07:00` reports `23444/23444` items approved and `0` machine/open-review items across N5/N4/N3/N2/N1 | Passed |
 | CI failure addendum Group A | `27468193 fix(audit): exempt research labels from ui-string-guard`; current audit report has 0 candidates | Passed |
 | CI failure addendum Group B | `80c7fe85 i18n(ui): migrate session quality and foundations labels`; `rg` confirms keys/usages | Passed |
 | CI failure addendum Group C | `df021973 ci: use Java 21 for Firebase emulator`; `firebase-security-rules` passed in CI run `25901716829` | Passed |
 | CI failure addendum Group D | `8f34a3dc docs(workflow): commit directly to main, no feature branches`, `55010d68 feat(kanji): add N2 and N1 level tabs in Kanji Hub` | Passed |
+| Structured manual proof state | `beee04be tooling(launch): add structured proof state`; `docs/compliance/launch-proof-state.json`; `test/tool/research/launch_readiness_report_node_test.js` verifies complete proof metadata closes only manual gates and incomplete metadata stays blocked | Passed |
 | Synthesis and mission report | `6f3871a4 docs(research): synthesis 2026-05-15 beta readiness`, `924d5443 docs(research): final mission report 2026-05-15` | Passed |
 
 ## Verification Evidence
 
-Latest rolling CI/deploy-gate evidence is tracked in
-`docs/research/README.md` and
-`docs/research/D8-compliance/Q8.5-raw-output.md`. This audit intentionally
-does not duplicate the newest commit hash because the mission is still active
-and documentation-only blocker-proof commits may continue.
+Latest rolling CI/deploy-gate evidence is tracked here and in
+`docs/research/README.md` plus
+`docs/research/D8-compliance/Q8.5-raw-output.md`.
 
 Local commands run during the completion audit:
 
@@ -68,18 +68,26 @@ Local commands run during the completion audit:
   - Result: no issues found.
 - `flutter test`
   - Result: exit code 0.
+- `dart run tool\research\content_vi_status_report.dart`
+  - Result: `23444/23444` content items approved; machine/open-review `0`.
+- `npm run test:research-tooling`
+  - Result: 28 passed, 0 failed.
+- `npm run report:launch-readiness -- --json --proof-state docs/compliance/launch-proof-state.json`
+  - Result: `complete=false` with the seven remaining proof blockers listed
+    below.
 
 GitHub Actions summary:
 
 - Current source gates pass on `main`. Latest verified run:
-  `25948482462` on `12a0b7ea`.
+  `25949508519` on `beee04be`.
 - `ui-string-guard`, `firebase-security-rules`, and `deploy-hosting` all
   completed with `success`.
 - `deploy-hosting` ran the real secret-backed path: production web build,
   deploy to `hosting:jpstudy`, primary/legacy smoke, live resource smoke, and
   Lighthouse live gate all completed with `success`.
-- `npm run report:launch-readiness -- --json` now performs a single aggregate
-  proof check. Latest run on `2026-05-16T08:12+07:00` returned
+- `npm run report:launch-readiness -- --json --proof-state docs/compliance/launch-proof-state.json`
+  now performs a single aggregate proof check with structured manual proof
+  metadata. Latest run on `2026-05-16T08:57+07:00` returned
   `complete=false` with blockers `legal-approval-missing`,
   `sentry-dsn-missing`, `storage-not-provisioned`, `deletion-proof-missing`,
   `ga4-retention-proof-missing`, `ga4-learning-events-missing`, and
@@ -93,14 +101,14 @@ These prevent marking the active goal complete:
    tested, but docs still mark the copy as `review-needed draft`.
 2. Sentry is source-wired but not operationally proven. A real
    `JPSTUDY_SENTRY_DSN` and first deployed issue URL are still missing. The
-  Sentry readiness report rechecked on `2026-05-16T08:12+07:00` found source
+  Sentry readiness report rechecked on `2026-05-16T08:57+07:00` found source
    and workflow smoke gates present, repository Actions secrets
    `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, but no
    `JPSTUDY_SENTRY_DSN`; no event was sent by that readiness report.
 3. Firebase Storage migration remains blocked. Anonymous Auth works, but the
    Storage bucket/rules/CORS path is not provisioned/proven, so
    `JPSTUDY_ENABLE_LEGACY_STORAGE_MIGRATION` must stay unset/false. A
-  2026-05-16T08:12+07:00 `firebase deploy --only storage --project jpstudy-v2 --dry-run`
+  2026-05-16T08:57+07:00 `firebase deploy --only storage --project jpstudy-v2 --dry-run`
   recheck still reports that Firebase Storage has not been set up on the
   project.
 4. First executed deletion runbook proof is missing. The runbook and Support ID
@@ -120,14 +128,17 @@ These prevent marking the active goal complete:
    learning event families to GA4: `22` batched `srs_review_completed` rows
    across `204` responses, plus earlier `n5_micro_quiz_completed` and
    `session_quality_rated` `204` responses in the same live-smoke session.
-   A 2026-05-16T08:12+07:00 export recheck still only exposes
-   `events_20260514`, so these learning rows
+   A 2026-05-16T08:57+07:00 export recheck still does not expose the
+   required learning-event rows, so they
    are not present in the source-verifiable export sample yet.
 7. App Check enforcement proof remains future work. Current docs say enforce
    mode should wait until 1-2 weeks of monitoring.
 
 Operator handoff for these proof gates:
 `docs/compliance/beta-launch-proof-checklist-2026-05-15.md`.
+Manual proof metadata should be recorded in
+`docs/compliance/launch-proof-state.json`; that file cannot close Sentry,
+Storage, or GA4 learning-event export gates.
 
 ## Verdict
 
