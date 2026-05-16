@@ -6,690 +6,448 @@
   "tags": [
     "source-hanabira",
     "n1-grammar-import",
-    "needs-human-review",
-    "vi-machine-draft",
-    "vi-needs-review"
+    "vi-editorial-codex-pass"
   ],
   "examples": [
     {
       "grammarPoint": "Noun からの",
       "sentence": "日本からの手紙を受け取りました。",
-      "translation": "I received a letter from Japan.",
+      "translation": "Tôi đã nhận được thư từ Nhật Bản.",
       "translationEn": "I received a letter from Japan",
       "romaji": "Nihon kara no tegami wo uketorimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I received a letter from Japan",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun からの",
       "sentence": "彼は東京からの旅行者です。",
-      "translation": "He is a traveler from Tokyo.",
+      "translation": "Anh ấy là du khách đến từ Tokyo.",
       "translationEn": "He is a traveler from Tokyo",
       "romaji": "Kare wa Tokyo kara no ryokousha desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He is a traveler from Tokyo",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun からの",
       "sentence": "昨日、母からの電話がありました。",
-      "translation": "Yesterday, I got a call from my mother.",
+      "translation": "Hôm qua có cuộc gọi từ mẹ tôi.",
       "translationEn": "Yesterday, I got a call from my mother",
       "romaji": "Kinou, haha kara no denwa ga arimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Yesterday, I got a call from my mother",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun からの",
       "sentence": "彼女は大学からの友人です。",
-      "translation": "She is a friend from college.",
+      "translation": "Cô ấy là bạn từ thời đại học.",
       "translationEn": "She is a friend from college",
       "romaji": "Kanojo wa daigaku kara no yuujin desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She is a friend from college",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun から言わせれば",
       "sentence": "先生から言わせれば、毎日勉強するべきだ。",
-      "translation": "From the teacher's point of view, you should study every day.",
+      "translation": "Theo thầy cô mà nói, bạn nên học mỗi ngày.",
       "translationEn": "From the teachers point of view, you should study every day",
       "romaji": "Sensei kara iwasereba, mainichi benkyou suru beki da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: From the teachers point of view, you should study every day",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun から言わせれば",
       "sentence": "子供たちから言わせれば、もっと遊ぶ時間がほしい。",
-      "translation": "From the children's perspective, they want more time to play.",
+      "translation": "Theo trẻ con mà nói, chúng muốn có thêm thời gian chơi.",
       "translationEn": "From the childrens perspective, they want more time to play",
       "romaji": "Kodomo-tachi kara iwasereba, motto asobu jikan ga hoshii.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: From the childrens perspective, they want more time to play",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun から言わせれば",
       "sentence": "僕から言わせれば、そのプランは実行可能だ。",
-      "translation": "From my point of view, that plan is feasible.",
+      "translation": "Theo tôi mà nói, kế hoạch đó khả thi.",
       "translationEn": "From my point of view, that plan is feasible",
       "romaji": "Boku kara iwasereba, sono puran wa jikkou kanou da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: From my point of view, that plan is feasible",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun から言わせれば",
       "sentence": "犬から言わせれば、もっと散歩したいはずだ。",
-      "translation": "If the dog could talk, it would probably want more walks.",
+      "translation": "Nếu chú chó nói được, chắc nó sẽ muốn được đi dạo nhiều hơn.",
       "translationEn": "If the dog could talk, it would probably want more walks",
       "romaji": "Inu kara iwasereba, motto sanpo shitai hazu da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If the dog could talk, it would probably want more walks",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun + ぐるみ",
       "sentence": "家族ぐるみで旅行に行きました。",
-      "translation": "We went on a trip with the whole family.",
+      "translation": "Cả gia đình chúng tôi đã đi du lịch.",
       "translationEn": "We went on a trip with the whole family",
       "romaji": "Kazoku gurumi de ryokou ni ikimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We went on a trip with the whole family",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun + ぐるみ",
       "sentence": "クラスぐるみで遠足に行きました。",
-      "translation": "The entire class went on an excursion.",
+      "translation": "Cả lớp đã đi dã ngoại.",
       "translationEn": "The entire class went on an excursion",
       "romaji": "Kurasu gurumi de ensoku ni ikimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The entire class went on an excursion",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun + ぐるみ",
       "sentence": "この国は国民ぐるみでその法案を支持しています。",
-      "translation": "The entire population of the country supports that bill.",
+      "translation": "Toàn thể người dân nước này ủng hộ dự luật đó.",
       "translationEn": "The entire population of the country supports that bill",
       "romaji": "Kono kuni wa kokumin gurumi de sono houan wo shiji shiteimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The entire population of the country supports that bill",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun + ぐるみ",
       "sentence": "彼は友人ぐるみでそのクラブに参加した。",
-      "translation": "He joined the club along with all of his friends.",
+      "translation": "Anh ấy tham gia câu lạc bộ cùng với cả nhóm bạn.",
       "translationEn": "He joined the club along with all of his friends",
       "romaji": "Kare wa yuujin gurumi de sono kurabu ni sanka shita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He joined the club along with all of his friends",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun こそあれ",
       "sentence": "問題こそあれ、プロジェクトは順調に進んでいます。",
-      "translation": "Though there are problems, the project is progressing smoothly.",
+      "translation": "Dù có vấn đề, dự án vẫn tiến triển thuận lợi.",
       "translationEn": "Though there are problems, the project is progressing smoothly",
       "romaji": "Mondai koso are, purojekuto wa junchou ni susunde imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Though there are problems, the project is progressing smoothly",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun こそあれ",
       "sentence": "多少のリスクこそあれ、挑戦する価値はある。",
-      "translation": "Though there is some risk, it's worth taking on the challenge.",
+      "translation": "Dù có chút rủi ro, thử thách này vẫn đáng làm.",
       "translationEn": "Though there is some risk, its worth taking on the challenge",
       "romaji": "Tashou no risuku koso are, chousen suru kachi wa aru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Though there is some risk, its worth taking on the challenge",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun こそあれ",
       "sentence": "欠点こそあれ、彼の提案は興味深い。",
-      "translation": "Though it has flaws, his proposal is intriguing.",
+      "translation": "Dù có khuyết điểm, đề xuất của anh ấy vẫn thú vị.",
       "translationEn": "Though it has flaws, his proposal is intriguing",
       "romaji": "Ketten koso are, kare no teian wa kyoumibukai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Though it has flaws, his proposal is intriguing",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun こそあれ",
       "sentence": "不安こそあれ、今が行動するときだ。",
-      "translation": "Though there is anxiety, now is the time to act.",
+      "translation": "Dù có lo lắng, bây giờ là lúc hành động.",
       "translationEn": "Though there is anxiety, now is the time to act",
       "romaji": "Fuan koso are, ima ga koudou suru toki da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Though there is anxiety, now is the time to act",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun こそ～が",
       "sentence": "お金こそ必要だが、それだけが人生のすべてではない。",
-      "translation": "Money is indeed necessary, but it isn't everything in life.",
+      "translation": "Tiền đúng là cần thiết, nhưng không phải là tất cả của cuộc đời.",
       "translationEn": "Money is indeed necessary, but it isnt everything in life",
       "romaji": "Okane koso hitsuyou da ga, sore dake ga jinsei no subete de wa nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Money is indeed necessary, but it isnt everything in life",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun こそ～が",
       "sentence": "努力こそ大事だが、結果も見逃せない。",
-      "translation": "Effort is certainly crucial, but results also matter.",
+      "translation": "Nỗ lực đúng là quan trọng, nhưng cũng không thể bỏ qua kết quả.",
       "translationEn": "Effort is certainly crucial, but results also matter",
       "romaji": "Doryoku koso daiji da ga, kekka mo minogasenai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Effort is certainly crucial, but results also matter",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun こそ～が",
       "sentence": "健康こそ宝だが、ときには仕事を優先せざるを得ない。",
-      "translation": "Health is indeed a treasure, but sometimes you have to prioritize work.",
+      "translation": "Sức khỏe đúng là tài sản quý, nhưng đôi khi buộc phải ưu tiên công việc.",
       "translationEn": "Health is indeed a treasure, but sometimes you have to prioritize work",
       "romaji": "Kenkou koso takara da ga, toki ni wa shigoto o yuusen sezaru wo enai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Health is indeed a treasure, but sometimes you have to prioritize work",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun こそ～が",
       "sentence": "愛こそ力だが、表現するのは難しい。",
-      "translation": "Love is certainly a powerful force, but it's difficult to express.",
+      "translation": "Tình yêu đúng là sức mạnh, nhưng diễn đạt nó thì khó.",
       "translationEn": "Love is certainly a powerful force, but its difficult to express",
       "romaji": "Ai koso chikara da ga, hyougen suru no wa muzukashii.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Love is certainly a powerful force, but its difficult to express",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun こそすれ",
       "sentence": "感謝こそすれ、非難などできません。",
-      "translation": "I might feel grateful, but I could never criticize.",
+      "translation": "Tôi chỉ biết cảm ơn chứ không thể trách móc.",
       "translationEn": "I might feel grateful, but I could never criticize",
       "romaji": "Kansha koso sure, hinan nado dekimasen.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I might feel grateful, but I could never criticize",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun こそすれ",
       "sentence": "忙しさこそすれ、退屈することはありません。",
-      "translation": "I may be busy, but I'm never bored.",
+      "translation": "Tôi có bận thì có, nhưng không bao giờ thấy chán.",
       "translationEn": "I may be busy, but Im never bored",
       "romaji": "Isogashisa koso sure, taikutsu suru koto wa arimasen.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I may be busy, but Im never bored",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun こそすれ",
       "sentence": "後悔こそすれ、忘れることはできない。",
-      "translation": "I might regret it, but I can't forget it.",
+      "translation": "Tôi có hối tiếc thì có, nhưng không thể quên.",
       "translationEn": "I might regret it, but I cant forget it",
       "romaji": "Koukai koso sure, wasureru koto wa dekinai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I might regret it, but I cant forget it",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun こそすれ",
       "sentence": "疑問こそすれ、賛成はできない。",
-      "translation": "I may have doubts, but I cannot agree.",
+      "translation": "Tôi có nghi ngờ thì có, nhưng không thể đồng ý.",
       "translationEn": "I may have doubts, but I cannot agree",
       "romaji": "Gimon koso sure, sansei wa dekinai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I may have doubts, but I cannot agree",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun ごとき / Noun ごとく",
       "sentence": "彼は天使のごとく純粋だ。",
-      "translation": "He is as pure as an angel.",
+      "translation": "Anh ấy thuần khiết như thiên thần.",
       "translationEn": "He is as pure as an angel",
       "romaji": "Kare wa tenshi no gotoku junsui da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He is as pure as an angel",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun ごとき / Noun ごとく",
       "sentence": "悪魔のごとき行為をするな。",
-      "translation": "Don't engage in acts like those of a devil.",
+      "translation": "Đừng làm những hành vi như ác quỷ.",
       "translationEn": "Dont engage in acts like those of a devil",
       "romaji": "Akuma no gotoki koui o suru na.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Dont engage in acts like those of a devil",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun ごとき / Noun ごとく",
       "sentence": "彼女は雪のごとく白い肌をしている。",
-      "translation": "She has skin as white as snow.",
+      "translation": "Cô ấy có làn da trắng như tuyết.",
       "translationEn": "She has skin as white as snow",
       "romaji": "Kanojo wa yuki no gotoku shiroi hada o shiteiru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She has skin as white as snow",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun ごとき / Noun ごとく",
       "sentence": "彼は風のごとく去った。",
-      "translation": "He left like the wind.",
+      "translation": "Anh ấy rời đi như gió.",
       "translationEn": "He left like the wind",
       "romaji": "Kare wa kaze no gotoku satta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He left like the wind",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun じゃあるまいし",
       "sentence": "彼は子供じゃあるまいし、その問題をしっかりと解決するべきだ。",
-      "translation": "He’s not a child, so he should solve that problem properly.",
+      "translation": "Anh ấy đâu phải trẻ con, nên phải giải quyết vấn đề đó cho đàng hoàng.",
       "translationEn": "He’s not a child, so he should solve that problem properly",
       "romaji": "Kare wa kodomo ja aru mai shi, sono mondai o shikkari to kaiketsu suru beki da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He’s not a child, so he should solve that problem properly",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun じゃあるまいし",
       "sentence": "急ぐ必要はない、時間じゃあるまいし。",
-      "translation": "We don’t need to hurry; it’s not like we’re short of time.",
+      "translation": "Không cần vội; đâu phải chúng ta thiếu thời gian.",
       "translationEn": "We don’t need to hurry; it’s not like we’re short of time",
       "romaji": "Isogu hitsuyou wa nai, jikan ja aru mai shi.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We don’t need to hurry; it’s not like we’re short of time",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun じゃあるまいし",
       "sentence": "監督じゃあるまいし、試合の結果について心配するな。",
-      "translation": "You’re not the coach, so don’t worry about the game results.",
+      "translation": "Bạn đâu phải huấn luyện viên, đừng lo về kết quả trận đấu.",
       "translationEn": "You’re not the coach, so don’t worry about the game results",
       "romaji": "Kantoku ja aru mai shi, shiai no kekka ni tsuite shinpai suru na.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: You’re not the coach, so don’t worry about the game results",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun じゃあるまいし",
       "sentence": "飴じゃあるまいし、そのまま飲み込んでも大丈夫だよ。",
-      "translation": "It’s not candy, so it’s okay to just swallow it.",
+      "translation": "Nó đâu phải kẹo, cứ nuốt nguyên cũng không sao.",
       "translationEn": "It’s not candy, so it’s okay to just swallow it",
       "romaji": "Ame ja aru mai shi, sono mama nomikonde mo daijoubu da yo.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: It’s not candy, so it’s okay to just swallow it",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun ずくめ",
       "sentence": "彼は最近、失敗ずくめだ。",
-      "translation": "He has had nothing but failures recently.",
+      "translation": "Gần đây anh ấy toàn gặp thất bại.",
       "translationEn": "He has had nothing but failures recently",
       "romaji": "Kare wa saikin, shippai zukume da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He has had nothing but failures recently",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun ずくめ",
       "sentence": "この冬は雪ずくめで大変だ。",
-      "translation": "This winter has been nothing but snow, which is tough.",
+      "translation": "Mùa đông này toàn tuyết nên rất vất vả.",
       "translationEn": "This winter has been nothing but snow, which is tough",
       "romaji": "Kono fuyu wa yuki zukume de taihen da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This winter has been nothing but snow, which is tough",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun ずくめ",
       "sentence": "彼の話は嘘ずくめだった。",
-      "translation": "His story was full of nothing but lies.",
+      "translation": "Câu chuyện của anh ấy toàn là lời nói dối.",
       "translationEn": "His story was full of nothing but lies",
       "romaji": "Kare no hanashi wa uso zukume datta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: His story was full of nothing but lies",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun ずくめ",
       "sentence": "今日の仕事は忙しさずくめだった。",
-      "translation": "Today's work was nothing but constant busyness.",
+      "translation": "Công việc hôm nay toàn là bận rộn.",
       "translationEn": "Todays work was nothing but constant busyness",
       "romaji": "Kyou no shigoto wa isogashisa zukume datta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Todays work was nothing but constant busyness",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun だけではすまない",
       "sentence": "この問題は謝罪だけではすまない。",
-      "translation": "This problem cannot be settled with just an apology.",
+      "translation": "Vấn đề này không thể chỉ xin lỗi là xong.",
       "translationEn": "This problem cannot be settled with just an apology",
       "romaji": "Kono mondai wa shazai dake dewa sumanai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This problem cannot be settled with just an apology",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun だけではすまない",
       "sentence": "彼女が怒っているから、お菓子をあげただけではすまないよ。",
-      "translation": "She’s angry, so just giving her sweets won't fix it.",
+      "translation": "Cô ấy đang giận, nên chỉ cho bánh kẹo thôi không giải quyết được đâu.",
       "translationEn": "She’s angry, so just giving her sweets wont fix it",
       "romaji": "Kanojo ga okotte iru kara, okashi o ageta dake dewa sumanai yo.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She’s angry, so just giving her sweets wont fix it",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun だけではすまない",
       "sentence": "このプロジェクトの成功は努力だけではすまない。",
-      "translation": "Success on this project cannot be achieved with mere effort.",
+      "translation": "Thành công của dự án này không thể chỉ dựa vào nỗ lực.",
       "translationEn": "Success on this project cannot be achieved with mere effort",
       "romaji": "Kono purojekuto no seikou wa doryoku dake dewa sumanai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Success on this project cannot be achieved with mere effort",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun だけではすまない",
       "sentence": "資金調達だけではすまない、実際のビジネスプランも必要だ。",
-      "translation": "We can’t just finish with fundraising; we also need a real business plan.",
+      "translation": "Không thể chỉ dừng ở việc gọi vốn; còn cần cả kế hoạch kinh doanh thực tế.",
       "translationEn": "We can’t just finish with fundraising; we also need a real business plan",
       "romaji": "Shikin choutatsu dake dewa sumanai, jissai no bijinesu puran mo hitsuyou da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We can’t just finish with fundraising; we also need a real business plan",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     }
   ]
 }
