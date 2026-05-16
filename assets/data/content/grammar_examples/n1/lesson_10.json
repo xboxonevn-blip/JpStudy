@@ -6,690 +6,448 @@
   "tags": [
     "source-hanabira",
     "n1-grammar-import",
-    "needs-human-review",
-    "vi-machine-draft",
-    "vi-needs-review"
+    "vi-editorial-codex-pass"
   ],
   "examples": [
     {
       "grammarPoint": "Noun はおろか～も",
       "sentence": "絵を描くことはおろか、字さえ書けない。",
-      "translation": "Needless to say drawing pictures, he can’t even write letters.",
+      "translation": "Vẽ tranh thì khỏi nói, anh ấy đến chữ cũng không viết được.",
       "translationEn": "Needless to say drawing pictures, he can’t even write letters",
       "romaji": "E wo kaku koto wa oroka, ji sae kakenai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Needless to say drawing pictures, he can’t even write letters",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun はおろか～も",
       "sentence": "彼は英語はおろか、日本語もわからない。",
-      "translation": "Needless to say English, he doesn’t even understand Japanese.",
+      "translation": "Tiếng Anh thì khỏi nói, anh ấy còn không hiểu cả tiếng Nhật.",
       "translationEn": "Needless to say English, he doesn’t even understand Japanese",
       "romaji": "Kare wa eigo wa oroka, nihongo mo wakaranai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Needless to say English, he doesn’t even understand Japanese",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun はおろか～も",
       "sentence": "彼女は数学はおろか、算数も得意ではない。",
-      "translation": "Needless to say mathematics, she isn’t even good at arithmetic.",
+      "translation": "Toán cao cấp thì khỏi nói, cô ấy cả số học cũng không giỏi.",
       "translationEn": "Needless to say mathematics, she isn’t even good at arithmetic",
       "romaji": "Kanojo wa suugaku wa oroka, sansuu mo tokui dewa nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Needless to say mathematics, she isn’t even good at arithmetic",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun はおろか～も",
       "sentence": "彼は走ることはおろか、歩くことも難しい。",
-      "translation": "Needless to say running, he finds even walking difficult.",
+      "translation": "Chạy thì khỏi nói, ngay cả đi bộ anh ấy cũng thấy khó.",
       "translationEn": "Needless to say running, he finds even walking difficult",
       "romaji": "Kare wa hashiru koto wa oroka, aruku koto mo muzukashii.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Needless to say running, he finds even walking difficult",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun はさておき",
       "sentence": "試験の結果はさておき、この学期はとても学ぶことが多かった。",
-      "translation": "Aside from the exam results, I learned a lot this semester.",
+      "translation": "Chưa nói đến kết quả thi, học kỳ này tôi đã học được rất nhiều.",
       "translationEn": "Aside from the exam results, I learned a lot this semester",
       "romaji": "Shiken no kekka wa sateoki, kono gakki wa totemo manabu koto ga ookatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Aside from the exam results, I learned a lot this semester",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun はさておき",
       "sentence": "天候はさておき、明日のピクニックは楽しみにしています。",
-      "translation": "Putting aside the weather, I am looking forward to tomorrow's picnic.",
+      "translation": "Chưa nói đến thời tiết, tôi rất mong buổi dã ngoại ngày mai.",
       "translationEn": "Putting aside the weather, I am looking forward to tomorrows picnic",
       "romaji": "Tenkou wa sateoki, ashita no pikunikku wa tanoshimi ni shiteimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Putting aside the weather, I am looking forward to tomorrows picnic",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun はさておき",
       "sentence": "彼の性格はさておき、彼のスキルは認めざるを得ない。",
-      "translation": "Notwithstanding his personality, his skills are undeniable.",
+      "translation": "Chưa xét tính cách của anh ấy, kỹ năng của anh ấy thì không thể phủ nhận.",
       "translationEn": "Notwithstanding his personality, his skills are undeniable",
       "romaji": "Kare no seikaku wa sateoki, kare no sukiru wa mitomezaru wo enai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Notwithstanding his personality, his skills are undeniable",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun はさておき",
       "sentence": "彼があまりにも遅いことはさておき、彼が来ると思われること自体が問題だ。",
-      "translation": "Aside from him being late, the issue is that he is expected to come at all.",
+      "translation": "Chuyện anh ấy quá muộn thì tạm gác lại, vấn đề là người ta còn kỳ vọng anh ấy sẽ đến.",
       "translationEn": "Aside from him being late, the issue is that he is expected to come at all",
       "romaji": "Kare ga amari ni mo osoi koto wa sateoki, kare ga kuru to omowareru koto jitai ga mondai da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Aside from him being late, the issue is that he is expected to come at all",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun + はどうであれ",
       "sentence": "天候はどうであれ、試合は行われます。",
-      "translation": "No matter what the weather is, the match will be held.",
+      "translation": "Dù thời tiết thế nào, trận đấu vẫn diễn ra.",
       "translationEn": "No matter what the weather is, the match will be held",
       "romaji": "Tenkou wa dou de are, shiai wa okonawaremasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: No matter what the weather is, the match will be held",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun + はどうであれ",
       "sentence": "結果はどうであれ、最善を尽くすだけです。",
-      "translation": "No matter what the result is, all we can do is try our best.",
+      "translation": "Dù kết quả thế nào, chúng ta chỉ có thể cố hết sức.",
       "translationEn": "No matter what the result is, all we can do is try our best",
       "romaji": "Kekka wa dou de are, saizen wo tsukusu dake desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: No matter what the result is, all we can do is try our best",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun + はどうであれ",
       "sentence": "あなたの意見はどうであれ、私は彼を信じます。",
-      "translation": "No matter what your opinion is, I believe him.",
+      "translation": "Dù ý kiến của bạn thế nào, tôi vẫn tin anh ấy.",
       "translationEn": "No matter what your opinion is, I believe him",
       "romaji": "Anata no iken wa dou de are, watashi wa kare wo shinjimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: No matter what your opinion is, I believe him",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun + はどうであれ",
       "sentence": "試験の結果はどうであれ、あなたには何も変わりません。",
-      "translation": "No matter what the result of the test is, nothing will change for you.",
+      "translation": "Dù kết quả bài kiểm tra thế nào, với bạn cũng không có gì thay đổi.",
       "translationEn": "No matter what the result of the test is, nothing will change for you",
       "romaji": "Shiken no kekka wa dou de are, anata ni wa nani mo kawarimasen.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: No matter what the result of the test is, nothing will change for you",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun まみれ",
       "sentence": "彼は泥まみれになって帰ってきた。",
-      "translation": "He returned home covered in mud.",
+      "translation": "Anh ấy trở về nhà trong tình trạng đầy bùn.",
       "translationEn": "He returned home covered in mud",
       "romaji": "Kare wa doro mamire ni natte kaette kita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He returned home covered in mud",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun まみれ",
       "sentence": "彼女は涙まみれになりながら告白した。",
-      "translation": "She confessed while crying her eyes out.",
+      "translation": "Cô ấy vừa khóc đầm đìa vừa thú nhận.",
       "translationEn": "She confessed while crying her eyes out",
       "romaji": "Kanojo wa namida mamire ni narinagara kokuhaku shita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She confessed while crying her eyes out",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun まみれ",
       "sentence": "その事件後、彼はスキャンダルまみれになった。",
-      "translation": "After that incident, he was completely embroiled in scandal.",
+      "translation": "Sau vụ việc đó, anh ấy vướng đầy bê bối.",
       "translationEn": "After that incident, he was completely embroiled in scandal",
       "romaji": "Sono jiken go, kare wa sukandaru mamire ni natta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: After that incident, he was completely embroiled in scandal",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun まみれ",
       "sentence": "この部屋は埃まみれだ。",
-      "translation": "This room is covered in dust.",
+      "translation": "Căn phòng này phủ đầy bụi.",
       "translationEn": "This room is covered in dust",
       "romaji": "Kono heya wa hokori mamire da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This room is covered in dust",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun もさることながら Noun も",
       "sentence": "彼の歌唱力もさることながら、ダンスも素晴らしい。",
-      "translation": "Not only his singing ability but also his dancing is wonderful.",
+      "translation": "Giọng hát của anh ấy đã tuyệt, điệu nhảy cũng tuyệt vời.",
       "translationEn": "Not only his singing ability but also his dancing is wonderful",
       "romaji": "Kare no kashou-ryoku mo saru koto nagara, dansu mo subarashii.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Not only his singing ability but also his dancing is wonderful",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun もさることながら Noun も",
       "sentence": "このレストラン、味もさることながら、サービスもすばらしい。",
-      "translation": "At this restaurant, not only the taste but also the service is wonderful.",
+      "translation": "Nhà hàng này không chỉ món ăn mà dịch vụ cũng tuyệt vời.",
       "translationEn": "At this restaurant, not only the taste but also the service is wonderful",
       "romaji": "Kono resutoran, aji mo saru koto nagara, saabisu mo subarashii.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: At this restaurant, not only the taste but also the service is wonderful",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun もさることながら Noun も",
       "sentence": "彼女の美しさもさることながら、その知性も魅力的だ。",
-      "translation": "Not only her beauty but also her intelligence is attractive.",
+      "translation": "Cô ấy không chỉ đẹp mà trí tuệ cũng cuốn hút.",
       "translationEn": "Not only her beauty but also her intelligence is attractive",
       "romaji": "Kanojo no utsukushisa mo saru koto nagara, sono chisei mo miryoku-teki da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Not only her beauty but also her intelligence is attractive",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun もさることながら Noun も",
       "sentence": "その映画、ストーリーもさることながら、音楽も素晴らしかった。",
-      "translation": "In that movie, not only the story but also the music was wonderful.",
+      "translation": "Bộ phim đó không chỉ câu chuyện mà âm nhạc cũng tuyệt vời.",
       "translationEn": "In that movie, not only the story but also the music was wonderful",
       "romaji": "Sono eiga, sutoorii mo saru koto nagara, ongaku mo subarashikatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: In that movie, not only the story but also the music was wonderful",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun も兼ねて",
       "sentence": "散歩も兼ねて、公園に行きました。",
-      "translation": "I went to the park, also for a walk.",
+      "translation": "Tôi đi công viên kết hợp đi dạo.",
       "translationEn": "I went to the park, also for a walk",
       "romaji": "Sanpo mo kanete, kouen ni ikimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I went to the park, also for a walk",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun も兼ねて",
       "sentence": "今日は日本語の勉強も兼ねて、日本の映画を見ます。",
-      "translation": "Today, I will watch a Japanese movie, also to study Japanese.",
+      "translation": "Hôm nay tôi xem phim Nhật, cũng để học tiếng Nhật.",
       "translationEn": "Today, I will watch a Japanese movie, also to study Japanese",
       "romaji": "Kyou wa Nihongo no benkyou mo kanete, Nihon no eiga wo mimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Today, I will watch a Japanese movie, also to study Japanese",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun も兼ねて",
       "sentence": "仕事も兼ねて、海外に行く予定です。",
-      "translation": "I plan to go abroad, also for work.",
+      "translation": "Tôi dự định ra nước ngoài, đồng thời cũng vì công việc.",
       "translationEn": "I plan to go abroad, also for work",
       "romaji": "Shigoto mo kanete, kaigai ni iku yotei desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I plan to go abroad, also for work",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun も兼ねて",
       "sentence": "旅行も兼ねて、友人の結婚式に出席します。",
-      "translation": "I will attend a friend's wedding, also as a trip.",
+      "translation": "Tôi tham dự đám cưới của bạn, kết hợp đi du lịch.",
       "translationEn": "I will attend a friends wedding, also as a trip",
       "romaji": "Ryokou mo kanete, yuujin no kekkonshiki ni shusseki shimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I will attend a friends wedding, also as a trip",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun も相まって",
       "sentence": "気候も相まって、この地域は農業に適しています。",
-      "translation": "Combined with the climate, this area is suitable for agriculture.",
+      "translation": "Nhờ thêm yếu tố khí hậu, khu vực này thích hợp cho nông nghiệp.",
       "translationEn": "Combined with the climate, this area is suitable for agriculture",
       "romaji": "Kikou mo aimatte, kono chiiki wa nougyou ni tekishiteimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Combined with the climate, this area is suitable for agriculture",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun も相まって",
       "sentence": "彼の才能も相まって、彼は急速に昇進した。",
-      "translation": "Combined with his talent, he was rapidly promoted.",
+      "translation": "Cộng với tài năng của mình, anh ấy thăng tiến rất nhanh.",
       "translationEn": "Combined with his talent, he was rapidly promoted",
       "romaji": "Kare no sainou mo aimatte, kare wa kyuusoku ni shoushin shita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Combined with his talent, he was rapidly promoted",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun も相まって",
       "sentence": "技術進歩も相まって、私たちはより効率的に仕事をこなすことができるようになりました。",
-      "translation": "Combined with technological progress, we have become able to handle our work more efficiently.",
+      "translation": "Cùng với tiến bộ công nghệ, chúng tôi đã có thể xử lý công việc hiệu quả hơn.",
       "translationEn": "Combined with technological progress, we have become able to handle our work more efficiently",
       "romaji": "Gijutsu shinpo mo aimatte, watashitachi wa yori kouritsu-teki ni shigoto wo konasu koto ga dekiru you ni narimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Combined with technological progress, we have become able to handle our work more efficiently",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun も相まって",
       "sentence": "彼の努力も相まって、プロジェクトは成功しました。",
-      "translation": "Combined with his efforts, the project was successful.",
+      "translation": "Nhờ thêm nỗ lực của anh ấy, dự án đã thành công.",
       "translationEn": "Combined with his efforts, the project was successful",
       "romaji": "Kare no doryoku mo aimatte, purojekuto wa seikou shimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Combined with his efforts, the project was successful",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun を おいて他に Verb ない",
       "sentence": "この仕事を彼に任せる人をおいて他にいない。",
-      "translation": "Apart from him, there's no one else to entrust this job to.",
+      "translation": "Không ai khác ngoài anh ấy có thể được giao công việc này.",
       "translationEn": "Apart from him, theres no one else to entrust this job to",
       "romaji": "Kono shigoto wo kare ni makaseru hito wo oite hoka ni inai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Apart from him, theres no one else to entrust this job to",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun を おいて他に Verb ない",
       "sentence": "この問題を解決できるのは彼をおいて他にいない。",
-      "translation": "Apart from him, there's no one else who can solve this problem.",
+      "translation": "Không ai khác ngoài anh ấy có thể giải quyết vấn đề này.",
       "translationEn": "Apart from him, theres no one else who can solve this problem",
       "romaji": "Kono mondai wo kaiketsu dekiru no wa kare o oite hoka ni inai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Apart from him, theres no one else who can solve this problem",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun を おいて他に Verb ない",
       "sentence": "この地域で美味しい麺を作る店をおいて他にない。",
-      "translation": "There is no other restaurant in this area that makes delicious noodles apart from this one.",
+      "translation": "Ở khu vực này, không có quán nào ngoài quán này làm mì ngon.",
       "translationEn": "There is no other restaurant in this area that makes delicious noodles apart from this one",
       "romaji": "Kono chiiki de oishii men o tsukuru mise o oite hoka ni nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: There is no other restaurant in this area that makes delicious noodles apart from this one",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun を おいて他に Verb ない",
       "sentence": "彼女の歌声を超える歌手をおいて他にいない。",
-      "translation": "There is no other singer who could surpass her singing voice.",
+      "translation": "Không ca sĩ nào khác vượt qua được giọng hát của cô ấy.",
       "translationEn": "There is no other singer who could surpass her singing voice",
       "romaji": "Kanojo no utagoe o koeru kashu o oite hoka ni inai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: There is no other singer who could surpass her singing voice",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun をもって",
       "sentence": "彼は誠実さをもって人々に信頼されています。",
-      "translation": "He is trusted by people with his honesty.",
+      "translation": "Anh ấy được mọi người tin tưởng nhờ sự chân thành.",
       "translationEn": "He is trusted by people with his honesty",
       "romaji": "Kare wa seijitsusa wo motte hitobito ni shinrai sarete imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He is trusted by people with his honesty",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun をもって",
       "sentence": "この賞をもって、彼女の努力が認められました。",
-      "translation": "With this award, her efforts were recognized.",
+      "translation": "Với giải thưởng này, nỗ lực của cô ấy đã được công nhận.",
       "translationEn": "With this award, her efforts were recognized",
       "romaji": "Kono shou wo motte, kanojo no doryoku ga mitomeraremashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: With this award, her efforts were recognized",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun をもって",
       "sentence": "彼は強い決意をもって問題に取り組んだ。",
-      "translation": "He tackled the problem with strong determination.",
+      "translation": "Anh ấy đối mặt với vấn đề bằng quyết tâm mạnh mẽ.",
       "translationEn": "He tackled the problem with strong determination",
       "romaji": "Kare wa tsuyoi ketsui wo motte mondai ni torikunda.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He tackled the problem with strong determination",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun をもって",
       "sentence": "3月をもって、この店は閉店します。",
-      "translation": "This store will close at the end of March.",
+      "translation": "Cửa hàng này sẽ đóng cửa vào cuối tháng 3.",
       "translationEn": "This store will close at the end of March",
       "romaji": "Sangatsu wo motte, kono mise wa heiten shimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This store will close at the end of March",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun をものともせずに",
       "sentence": "彼女は怖さをものともせずに、暗闇の中へ進んで行った。",
-      "translation": "Despite her fear, she went ahead into the darkness.",
+      "translation": "Cô ấy không sợ hãi mà tiến vào bóng tối.",
       "translationEn": "Despite her fear, she went ahead into the darkness",
       "romaji": "Kanojo wa kowasa wo mono tomo sezu ni, kurayami no naka e susunde itta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Despite her fear, she went ahead into the darkness",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun をものともせずに",
       "sentence": "試験のプレッシャーをものともせずに、彼は自信満々に答えた。",
-      "translation": "Unfazed by the pressure of the exam, he answered with full confidence.",
+      "translation": "Không nao núng trước áp lực kỳ thi, anh ấy trả lời đầy tự tin.",
       "translationEn": "Unfazed by the pressure of the exam, he answered with full confidence",
       "romaji": "Shiken no puresshaa wo mono tomo sezu ni, kare wa jishin manman ni kotaeta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Unfazed by the pressure of the exam, he answered with full confidence",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun をものともせずに",
       "sentence": "彼は風雪をものともせずに山を登った。",
-      "translation": "He climbed the mountain unfazed by the wind and snow.",
+      "translation": "Anh ấy leo núi bất chấp mưa tuyết.",
       "translationEn": "He climbed the mountain unfazed by the wind and snow",
       "romaji": "Kare wa fuusetsu wo mono tomo sezu ni, yama wo nobotta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He climbed the mountain unfazed by the wind and snow",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun をものともせずに",
       "sentence": "彼は失敗をものともせずに、前に進み続けた。",
-      "translation": "He continued to move forward, undeterred by failure.",
+      "translation": "Anh ấy tiếp tục tiến lên, không nao núng trước thất bại.",
       "translationEn": "He continued to move forward, undeterred by failure",
       "romaji": "Kare wa shippai wo mono tomo sezu ni, mae ni susumi tsuzuketa.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He continued to move forward, undeterred by failure",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     }
   ]
 }

@@ -6,690 +6,448 @@
   "tags": [
     "source-hanabira",
     "n1-grammar-import",
-    "needs-human-review",
-    "vi-machine-draft",
-    "vi-needs-review"
+    "vi-editorial-codex-pass"
   ],
   "examples": [
     {
       "grammarPoint": "Noun に限ったことではない",
       "sentence": "この問題は日本に限ったことではない。",
-      "translation": "This issue is not only limited to Japan.",
+      "translation": "Vấn đề này không chỉ riêng Nhật Bản.",
       "translationEn": "This issue is not only limited to Japan",
       "romaji": "Kono mondai wa Nihon ni kagitta koto dewa nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This issue is not only limited to Japan",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun に限ったことではない",
       "sentence": "英語はアメリカに限ったことではない。",
-      "translation": "English is not just limited to America.",
+      "translation": "Tiếng Anh không chỉ giới hạn ở nước Mỹ.",
       "translationEn": "English is not just limited to America",
       "romaji": "Eigo wa Amerika ni kagitta koto dewa nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: English is not just limited to America",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun に限ったことではない",
       "sentence": "スマホの依存症は若者に限ったことではない。",
-      "translation": "Smartphone addiction is not only limited to young people.",
+      "translation": "Nghiện điện thoại thông minh không chỉ xảy ra ở giới trẻ.",
       "translationEn": "Smartphone addiction is not only limited to young people",
       "romaji": "Sumaho no izonshou wa wakamono ni kagitta koto dewa nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Smartphone addiction is not only limited to young people",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun に限ったことではない",
       "sentence": "地球温暖化は我々人間に限ったことではない。",
-      "translation": "Global warming is not just limited to us humans.",
+      "translation": "Hiện tượng nóng lên toàn cầu không chỉ là chuyện của con người chúng ta.",
       "translationEn": "Global warming is not just limited to us humans",
       "romaji": "Chikyuu ondanka wa wareware ningen ni kagitta koto dewa nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Global warming is not just limited to us humans",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun に限ったことでもない",
       "sentence": "この試験が難しいのは、数学に限ったことでもない。",
-      "translation": "The exam being difficult is not limited to just math.",
+      "translation": "Kỳ thi này khó không chỉ riêng môn toán.",
       "translationEn": "The exam being difficult is not limited to just math",
       "romaji": "Kono shiken ga muzukashii no wa, suugaku ni kagitta koto demo nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The exam being difficult is not limited to just math",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun に限ったことでもない",
       "sentence": "彼女が可愛いのは顔だけに限ったことでもない。性格も好きだ。",
-      "translation": "Her being cute is not just limited to her face. I also like her personality.",
+      "translation": "Cô ấy dễ thương không chỉ ở khuôn mặt; tôi cũng thích tính cách của cô ấy.",
       "translationEn": "Her being cute is not just limited to her face. I also like her personality",
       "romaji": "Kanojo ga kawaii no wa kao dake ni kagitta koto demo nai. Seikaku mo suki da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Her being cute is not just limited to her face. I also like her personality",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun に限ったことでもない",
       "sentence": "その問題が起こるのは、我々の国に限ったことでもない。",
-      "translation": "The occurrence of that problem is not limited to our country.",
+      "translation": "Vấn đề đó không chỉ xảy ra ở nước chúng ta.",
       "translationEn": "The occurrence of that problem is not limited to our country",
       "romaji": "Sono mondai ga okoru no wa, wareware no kuni ni kagitta koto demo nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The occurrence of that problem is not limited to our country",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun に限ったことでもない",
       "sentence": "この作家の本が売れているのは日本に限ったことでもない。",
-      "translation": "The selling of this author's books is not limited to just Japan.",
+      "translation": "Sách của tác giả này bán chạy không chỉ ở Nhật Bản.",
       "translationEn": "The selling of this authors books is not limited to just Japan",
       "romaji": "Kono sakka no hon ga urete iru no wa Nippon ni kagitta koto demo nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The selling of this authors books is not limited to just Japan",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun に限る",
       "sentence": "こういう時には家族に話すに限る。",
-      "translation": "At times like this, there's nothing better than talking to your family.",
+      "translation": "Những lúc thế này thì tốt nhất là nói với gia đình.",
       "translationEn": "At times like this, theres nothing better than talking to your family",
       "romaji": "Kou iu toki ni wa kazoku ni hanasu ni kagiru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: At times like this, theres nothing better than talking to your family",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun に限る",
       "sentence": "寒い冬には温かいお茶に限る。",
-      "translation": "In cold winter, there's nothing better than warm tea.",
+      "translation": "Mùa đông lạnh thì trà nóng là nhất.",
       "translationEn": "In cold winter, theres nothing better than warm tea",
       "romaji": "Samui fuyu ni wa atatakai ocha ni kagiru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: In cold winter, theres nothing better than warm tea",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun に限る",
       "sentence": "疲れたときは、よい睡眠に限る。",
-      "translation": "When you are tired, nothing is better than a good sleep.",
+      "translation": "Khi mệt, ngủ ngon là tốt nhất.",
       "translationEn": "When you are tired, nothing is better than a good sleep",
       "romaji": "Tsukareta toki wa, yoi suimin ni kagiru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When you are tired, nothing is better than a good sleep",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun に限る",
       "sentence": "ダイエットするなら、運動に限る。",
-      "translation": "If you want to go on a diet, there is nothing better than exercise.",
+      "translation": "Nếu muốn ăn kiêng thì vận động là tốt nhất.",
       "translationEn": "If you want to go on a diet, there is nothing better than exercise",
       "romaji": "Daietto suru nara, undou ni kagiru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If you want to go on a diet, there is nothing better than exercise",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun ぬいた Noun",
       "sentence": "このサラダはにんじんをぬいたサラダです。",
-      "translation": "This is a salad with the carrots removed.",
+      "translation": "Đây là món salad đã bỏ cà rốt.",
       "translationEn": "This is a salad with the carrots removed",
       "romaji": "Kono sarada wa ninjin o nuita sarada desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This is a salad with the carrots removed",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun ぬいた Noun",
       "sentence": "彼はコーヒーから砂糖をぬいた。",
-      "translation": "He removed the sugar from the coffee.",
+      "translation": "Anh ấy bỏ đường khỏi cà phê.",
       "translationEn": "He removed the sugar from the coffee",
       "romaji": "Kare wa koohii kara satou o nuita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He removed the sugar from the coffee",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun ぬいた Noun",
       "sentence": "私は料理から塩をぬいた。",
-      "translation": "I removed the salt from the cooking.",
+      "translation": "Tôi bỏ muối khỏi món ăn.",
       "translationEn": "I removed the salt from the cooking",
       "romaji": "Watashi wa ryouri kara shio o nuita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I removed the salt from the cooking",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun ぬいた Noun",
       "sentence": "彼女は服からシミをぬいた。",
-      "translation": "She removed the stain from the clothes.",
+      "translation": "Cô ấy tẩy vết bẩn khỏi quần áo.",
       "translationEn": "She removed the stain from the clothes",
       "romaji": "Kanojo wa fuku kara shimi o nuita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She removed the stain from the clothes",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun + ぬいて（~nuite)",
       "sentence": "私たちは、彼ぬいて全員が集まることができました。",
-      "translation": "We were able to gather everyone except for him.",
+      "translation": "Chúng tôi đã có thể tập hợp tất cả mọi người trừ anh ấy.",
       "translationEn": "We were able to gather everyone except for him",
       "romaji": "Watashitachi wa, kare nuite zen'in ga atsumaru koto ga dekimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We were able to gather everyone except for him",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun + ぬいて（~nuite)",
       "sentence": "このレストランはお子様メニューをぬいてすべてが美味しい。",
-      "translation": "Everything at this restaurant is delicious except for the kids' menu.",
+      "translation": "Nhà hàng này món nào cũng ngon, trừ thực đơn trẻ em.",
       "translationEn": "Everything at this restaurant is delicious except for the kids menu",
       "romaji": "Kono resutoran wa okosama menyuu o nuite subete ga oishii.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Everything at this restaurant is delicious except for the kids menu",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun + ぬいて（~nuite)",
       "sentence": "今日の仕事は昼休みをぬいて忙しかった。",
-      "translation": "Today's work was busy except for the lunch break.",
+      "translation": "Công việc hôm nay bận rộn, trừ giờ nghỉ trưa.",
       "translationEn": "Todays work was busy except for the lunch break",
       "romaji": "Kyou no shigoto wa hiruyasumi o nuite isogashikatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Todays work was busy except for the lunch break",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun + ぬいて（~nuite)",
       "sentence": "休暇の日をぬいて、毎日彼は働きます。",
-      "translation": "He works every day except for the holidays.",
+      "translation": "Trừ ngày nghỉ, ngày nào anh ấy cũng làm việc.",
       "translationEn": "He works every day except for the holidays",
       "romaji": "Kyuuka no hi o nuite, mainichi kare wa hatarakimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He works every day except for the holidays",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ぬく",
       "sentence": "彼は一日中本を読みぬく。",
-      "translation": "He will read the book all day long.",
+      "translation": "Anh ấy sẽ đọc hết cuốn sách suốt cả ngày.",
       "translationEn": "He will read the book all day long",
       "romaji": "Kare wa ichinichijuu hon o yominuku.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He will read the book all day long",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ぬく",
       "sentence": "私はこのプロジェクトを終わらせぬく。",
-      "translation": "I will finish this project completely.",
+      "translation": "Tôi sẽ hoàn thành dứt điểm dự án này.",
       "translationEn": "I will finish this project completely",
       "romaji": "Watashi wa kono purojekuto o owarasenuku.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I will finish this project completely",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ぬく",
       "sentence": "彼女は毎日ジムに行き、エクササイズを終わりぬく。",
-      "translation": "She goes to the gym every day and finishes her exercise completely.",
+      "translation": "Cô ấy đến phòng gym mỗi ngày và tập xong bài tập đến cùng.",
       "translationEn": "She goes to the gym every day and finishes her exercise completely",
       "romaji": "Kanojo wa mainichi jim ni iki, ekusasaizu o owari nuku.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She goes to the gym every day and finishes her exercise completely",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～ぬく",
       "sentence": "私たちはこのゲームを解きぬく。",
-      "translation": "We will solve this game completely.",
+      "translation": "Chúng tôi sẽ giải xong trò chơi này đến cùng.",
       "translationEn": "We will solve this game completely",
       "romaji": "Watashitachi wa kono geemu o tokinuku.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We will solve this game completely",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun+のいかんだ",
       "sentence": "彼が来るのいかんで決めよう。",
-      "translation": "Let's decide depending on whether he comes or not.",
+      "translation": "Hãy quyết định tùy theo việc anh ấy có đến hay không.",
       "translationEn": "Lets decide depending on whether he comes or not",
       "romaji": "Kare ga kuru no ikan de kimeyou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Lets decide depending on whether he comes or not",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun+のいかんだ",
       "sentence": "試験の結果のいかんで留年が決まります。",
-      "translation": "Whether you repeat a year or not depends on the test results.",
+      "translation": "Việc có lưu ban hay không phụ thuộc vào kết quả thi.",
       "translationEn": "Whether you repeat a year or not depends on the test results",
       "romaji": "Shiken no kekka no ikan de ryuunen ga kimarimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether you repeat a year or not depends on the test results",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun+のいかんだ",
       "sentence": "天気のいかんでは、ピクニックをキャンセルします。",
-      "translation": "I'll cancel the picnic depending on the weather.",
+      "translation": "Tùy thời tiết, tôi sẽ hủy buổi dã ngoại.",
       "translationEn": "Ill cancel the picnic depending on the weather",
       "romaji": "Tenki no ikan de wa, pikunikku o kyanseru shimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Ill cancel the picnic depending on the weather",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun+のいかんだ",
       "sentence": "彼の回答のいかんで、我々の次の行動が決まる。",
-      "translation": "Our next action depends on his response.",
+      "translation": "Hành động tiếp theo của chúng ta phụ thuộc vào câu trả lời của anh ấy.",
       "translationEn": "Our next action depends on his response",
       "romaji": "Kare no kaitou no ikan de, wareware no tsugi no koudou ga kimaru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Our next action depends on his response",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun のいかんでは",
       "sentence": "試験の結果のいかんでは、大学の入学許可を得られるかどうかが決まります。",
-      "translation": "Whether you can get permission to enter university depends on the result of the exam.",
+      "translation": "Việc có được phép vào đại học hay không phụ thuộc vào kết quả thi.",
       "translationEn": "Whether you can get permission to enter university depends on the result of the exam",
       "romaji": "Shiken no kekka no ikan dewa, daigaku no nyuugaku kyoka o erareru ka douka ga kimarimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether you can get permission to enter university depends on the result of the exam",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun のいかんでは",
       "sentence": "天気のいかんでは、ピクニックを延期するかもしれません。",
-      "translation": "Depending on the weather, we might delay the picnic.",
+      "translation": "Tùy thời tiết, chúng ta có thể hoãn buổi dã ngoại.",
       "translationEn": "Depending on the weather, we might delay the picnic",
       "romaji": "Tenki no ikan dewa, pikunikku o enki suru kamoshiremasen.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Depending on the weather, we might delay the picnic",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun のいかんでは",
       "sentence": "交通事情のいかんでは、遅れることがあります。",
-      "translation": "Depending on the traffic conditions, I might be late.",
+      "translation": "Tùy tình hình giao thông, tôi có thể đến muộn.",
       "translationEn": "Depending on the traffic conditions, I might be late",
       "romaji": "Koutsuujijou no ikan dewa, okureru koto ga arimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Depending on the traffic conditions, I might be late",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun のいかんでは",
       "sentence": "経済の状況のいかんでは、会社の将来は決まります。",
-      "translation": "Depending on the state of the economy, the company's future is determined.",
+      "translation": "Tương lai của công ty phụ thuộc vào tình hình kinh tế.",
       "translationEn": "Depending on the state of the economy, the companys future is determined",
       "romaji": "Keizai no joukyou no ikan dewa, kaisha no shourai wa kimarimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Depending on the state of the economy, the companys future is determined",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun のいかんにかかわらず",
       "sentence": "結果のいかんにかかわらず、彼は決定を後悔しなかった。",
-      "translation": "Regardless of the outcome, he didn't regret his decision.",
+      "translation": "Bất kể kết quả ra sao, anh ấy không hối hận về quyết định của mình.",
       "translationEn": "Regardless of the outcome, he didnt regret his decision",
       "romaji": "Kekka no ikan ni kakawarazu, kare wa kettei wo koukai shinakatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Regardless of the outcome, he didnt regret his decision",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun のいかんにかかわらず",
       "sentence": "年齢のいかんにかかわらず、どんな人でも学ぶことは可能です。",
-      "translation": "Regardless of age, anyone can learn.",
+      "translation": "Bất kể tuổi tác, ai cũng có thể học.",
       "translationEn": "Regardless of age, anyone can learn",
       "romaji": "Nenrei no ikan ni kakawarazu, donna hito demo manabu koto wa kanou desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Regardless of age, anyone can learn",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun のいかんにかかわらず",
       "sentence": "経験のいかんにかかわらず、始めることが大切です。",
-      "translation": "Regardless of experience, it's important to start.",
+      "translation": "Bất kể kinh nghiệm, điều quan trọng là bắt đầu.",
       "translationEn": "Regardless of experience, its important to start",
       "romaji": "Keiken no ikan ni kakawarazu, hajimeru koto ga taisetsu desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Regardless of experience, its important to start",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun のいかんにかかわらず",
       "sentence": "天候のいかんにかかわらず、ハイキングは予定通りに行われます。",
-      "translation": "Regardless of the weather, the hiking will take place as scheduled.",
+      "translation": "Bất kể thời tiết, chuyến leo núi vẫn diễn ra như kế hoạch.",
       "translationEn": "Regardless of the weather, the hiking will take place as scheduled",
       "romaji": "Tenkou no ikan ni kakawarazu, haikingu wa yotei doori ni okonawaremasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Regardless of the weather, the hiking will take place as scheduled",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun のいかんによっては",
       "sentence": "天気のいかんによっては、ピクニックを延期しましょう。",
-      "translation": "Depending on the weather, we should postpone the picnic.",
+      "translation": "Tùy thời tiết, chúng ta nên hoãn buổi dã ngoại.",
       "translationEn": "Depending on the weather, we should postpone the picnic",
       "romaji": "Tenki no ikan ni yotte wa, pikunikku o enki shimashou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Depending on the weather, we should postpone the picnic",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun のいかんによっては",
       "sentence": "試験の結果のいかんによっては、進学できます。",
-      "translation": "You can go on to further education, depending on the result of the exam.",
+      "translation": "Tùy kết quả thi, bạn có thể học lên.",
       "translationEn": "You can go on to further education, depending on the result of the exam",
       "romaji": "Shiken no kekka no ikan ni yotte wa, shingaku dekimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: You can go on to further education, depending on the result of the exam",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun のいかんによっては",
       "sentence": "状況のいかんによっては、早期退職を考えます。",
-      "translation": "Depending on the situation, I will consider early retirement.",
+      "translation": "Tùy tình hình, tôi sẽ cân nhắc nghỉ hưu sớm.",
       "translationEn": "Depending on the situation, I will consider early retirement",
       "romaji": "Joukyou no ikan ni yotte wa, souki taishoku o kangaemasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Depending on the situation, I will consider early retirement",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "Noun のいかんによっては",
       "sentence": "彼の反応のいかんによっては、私たちの次の行動を決めます。",
-      "translation": "Depending on his reaction, we will decide our next move.",
+      "translation": "Tùy phản ứng của anh ấy, chúng tôi sẽ quyết định hành động tiếp theo.",
       "translationEn": "Depending on his reaction, we will decide our next move",
       "romaji": "Kare no hannou no ikan ni yotte wa, watashitachi no tsugi no koudou o kimemasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Depending on his reaction, we will decide our next move",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     }
   ]
 }
