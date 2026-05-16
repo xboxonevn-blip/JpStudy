@@ -67,6 +67,12 @@ function hasFirebaseAdminDependency(packageJsonPath = 'package.json') {
   );
 }
 
+function hasAdminDeleteUserTool(
+  toolPath = path.join(__dirname, 'firebase_admin_delete_user.js'),
+) {
+  return fs.existsSync(toolPath);
+}
+
 function collectLiveStatus(args) {
   const storageScript = path.join(__dirname, 'storage_readiness_report.js');
   const ga4Script = path.join(__dirname, 'ga4_export_status_report.js');
@@ -92,6 +98,7 @@ function collectLiveStatus(args) {
     },
     localTools: {
       firebaseAdminDependency: hasFirebaseAdminDependency(),
+      adminDeleteUserTool: hasAdminDeleteUserTool(),
       gcloudAvailable: commandExists('gcloud'),
     },
   };
@@ -127,9 +134,9 @@ function buildDeletionReadiness({
   if (bigQuery?.datasetExists === false) {
     nextActions.push('Record BigQuery cleanup as not applicable: dataset absent.');
   }
-  if (!localTools?.firebaseAdminDependency) {
+  if (!localTools?.firebaseAdminDependency || !localTools?.adminDeleteUserTool) {
     blockers.push('firebase-admin dependency/tooling is not installed');
-    nextActions.push('Use Firebase Console for Auth deletion or add audited admin tooling.');
+    nextActions.push('Install firebase-admin and use the audited Auth delete helper.');
   }
   if (!localTools?.gcloudAvailable) {
     blockers.push('gcloud is not available for Storage/GA4 operator commands');
@@ -211,6 +218,7 @@ async function main(argv = process.argv.slice(2)) {
         bigQuery: { datasetExists: false, tableCount: 0 },
         localTools: {
           firebaseAdminDependency: hasFirebaseAdminDependency(),
+          adminDeleteUserTool: hasAdminDeleteUserTool(),
           gcloudAvailable: commandExists('gcloud'),
         },
       }
@@ -248,5 +256,6 @@ if (require.main === module) {
 module.exports = {
   buildDeletionReadiness,
   buildMarkdownReport,
+  hasAdminDeleteUserTool,
   parseArgs,
 };

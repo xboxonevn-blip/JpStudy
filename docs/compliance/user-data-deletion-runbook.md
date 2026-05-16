@@ -69,10 +69,11 @@ npm run report:deletion-readiness -- --uid "<firebase-uid>" --out output\researc
 ```
 
 Current known blockers: Firebase Storage is not provisioned, GA4 Admin
-API/deletion access is not available, `gcloud` is not installed locally, and
-no audited `firebase-admin` deletion tooling is installed. Until those are
-cleared, use the report as readiness evidence only and do not claim an executed
-deletion proof.
+API/deletion access is not available, and `gcloud` is not installed locally.
+Firebase Auth deletion tooling is audited at
+`tool/research/firebase_admin_delete_user.js`. Until all live-service blockers
+are cleared, use the report as readiness evidence only and do not claim an
+executed deletion proof.
 
 ## Procedure
 
@@ -176,8 +177,9 @@ Firebase Console -> Authentication -> Users -> search UID/email -> Delete
 
 or from Admin SDK tooling:
 
-```js
-await getAuth().deleteUser(uid);
+```powershell
+node tool/research/firebase_admin_delete_user.js --uid "$Uid"
+node tool/research/firebase_admin_delete_user.js --uid "$Uid" --execute
 ```
 
 Firebase notes that batch deletes do not trigger per-user delete events. If

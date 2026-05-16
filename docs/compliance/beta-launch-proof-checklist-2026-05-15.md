@@ -170,6 +170,17 @@ Evidence to record:
 - GA4/BigQuery deletion request or documented limitation.
 - Verification that the app no longer restores that user's cloud data.
 
+Current status:
+
+- Audited Firebase Auth deletion helper exists:
+  `tool/research/firebase_admin_delete_user.js`.
+- Dry-run helper defaults to `safeMode=true`; live Auth deletion requires
+  explicit `--execute`.
+- Recheck on `2026-05-16T11:29+07:00` removed the previous
+  `firebase-admin` tooling blocker. Remaining deletion proof blockers are
+  Storage provisioning, GA4 Admin deletion access, and `gcloud` or equivalent
+  operator path.
+
 ## 6. GA4 Retention UI Proof
 
 Goal: prove GA4 UI retention settings match the privacy/analytics policy.

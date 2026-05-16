@@ -13,7 +13,11 @@ test('buildDeletionReadiness reports operator blockers without deleting data', (
     storage: { ready: false, reason: 'storage-not-provisioned' },
     ga4: { adminRetention: { ok: false, status: 403 } },
     bigQuery: { datasetExists: true, tableCount: 1 },
-    localTools: { firebaseAdminDependency: false, gcloudAvailable: false },
+    localTools: {
+      firebaseAdminDependency: false,
+      adminDeleteUserTool: false,
+      gcloudAvailable: false,
+    },
   });
 
   assert.equal(readiness.safeMode, true);
@@ -32,7 +36,11 @@ test('buildDeletionReadiness blocks UID-scoped deletion when UID is missing', ()
     storage: { ready: true, reason: 'ready-for-live-migration-proof' },
     ga4: { adminRetention: { ok: true, status: 200 } },
     bigQuery: { datasetExists: true, tableCount: 1 },
-    localTools: { firebaseAdminDependency: true, gcloudAvailable: true },
+    localTools: {
+      firebaseAdminDependency: true,
+      adminDeleteUserTool: true,
+      gcloudAvailable: true,
+    },
   });
 
   assert.equal(readiness.executable, false);
@@ -69,4 +77,43 @@ test('parseArgs supports UID and JSON output', () => {
     uid: 'uid-1',
     json: true,
   });
+});
+
+test('buildDeletionReadiness accepts audited admin deletion tooling', () => {
+  const readiness = buildDeletionReadiness({
+    identifiers: { uid: 'uid-1' },
+    storage: { ready: true, reason: 'ready-for-live-migration-proof' },
+    ga4: { adminRetention: { ok: true, status: 200 } },
+    bigQuery: { datasetExists: true, tableCount: 1 },
+    localTools: {
+      firebaseAdminDependency: true,
+      adminDeleteUserTool: true,
+      gcloudAvailable: true,
+    },
+  });
+
+  assert.equal(readiness.executable, true);
+  assert.equal(
+    readiness.blockers.includes('firebase-admin dependency/tooling is not installed'),
+    false,
+  );
+});
+
+test('buildDeletionReadiness still blocks when admin helper is missing', () => {
+  const readiness = buildDeletionReadiness({
+    identifiers: { uid: 'uid-1' },
+    storage: { ready: true, reason: 'ready-for-live-migration-proof' },
+    ga4: { adminRetention: { ok: true, status: 200 } },
+    bigQuery: { datasetExists: true, tableCount: 1 },
+    localTools: {
+      firebaseAdminDependency: true,
+      adminDeleteUserTool: false,
+      gcloudAvailable: true,
+    },
+  });
+
+  assert.equal(readiness.executable, false);
+  assert.deepEqual(readiness.blockers, [
+    'firebase-admin dependency/tooling is not installed',
+  ]);
 });
