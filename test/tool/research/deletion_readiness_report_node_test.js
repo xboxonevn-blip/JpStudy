@@ -71,7 +71,7 @@ test('buildMarkdownReport includes evidence and safe-mode warning', () => {
   assert.match(report, /No deletion was performed/);
   assert.match(report, /## Operator URLs/);
   assert.match(report, /Firebase Auth users: `https:\/\/console\.firebase\.google\.com\/u\/1\/project\/jpstudy-v2\/authentication\/users`/);
-  assert.match(report, /Firebase Storage: `https:\/\/console\.firebase\.google\.com\/u\/1\/project\/jpstudy-v2\/storage`/);
+  assert.match(report, /Firebase Storage: `descoped for beta; no Storage deletion step`/);
   assert.match(report, /GA4 Admin: `https:\/\/analytics\.google\.com\/analytics\/web\/\?authuser=1#\/a393943579p536663906\/admin`/);
   assert.match(report, /BigQuery dataset: `https:\/\/console\.cloud\.google\.com\/bigquery\?project=jpstudy-v2&authuser=1`/);
 });
@@ -89,8 +89,8 @@ test('buildOperatorUrls points to deletion runbook consoles', () => {
     'https://console.firebase.google.com/u/1/project/jpstudy-v2/authentication/users',
   );
   assert.equal(
-    urls.firebaseStorage,
-    'https://console.firebase.google.com/u/1/project/jpstudy-v2/storage',
+    Object.hasOwn(urls, 'firebaseStorage'),
+    false,
   );
   assert.equal(
     urls.ga4Admin,

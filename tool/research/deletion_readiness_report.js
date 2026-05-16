@@ -156,7 +156,6 @@ function buildOperatorUrls({
 } = {}) {
   return {
     firebaseAuthUsers: `https://console.firebase.google.com/u/1/project/${project}/authentication/users`,
-    firebaseStorage: `https://console.firebase.google.com/u/1/project/${project}/storage`,
     ga4Admin: `https://analytics.google.com/analytics/web/?authuser=1#/a${account}p${property}/admin`,
     bigQueryDataset: `https://console.cloud.google.com/bigquery?project=${project}&authuser=1`,
   };
@@ -203,7 +202,7 @@ function buildMarkdownReport({
     '## Operator URLs',
     '',
     `Firebase Auth users: \`${urls.firebaseAuthUsers}\``,
-    `Firebase Storage: \`${urls.firebaseStorage}\``,
+    'Firebase Storage: `descoped for beta; no Storage deletion step`',
     `GA4 Admin: \`${urls.ga4Admin}\``,
     `BigQuery dataset: \`${urls.bigQueryDataset}\``,
     '',
