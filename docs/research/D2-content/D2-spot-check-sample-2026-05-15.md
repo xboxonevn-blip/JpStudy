@@ -2,6 +2,8 @@
 
 User note 2026-05-15: spot-check sample accepted. User confirmed they reviewed the full N5-N1 editorial batch during the pass, so `vi-human-approved` is applied across the N5/N4/N3/N2/N1 content batch. Existing source/draft tags are retained as provenance, not as a blocker to user approval.
 
+User confirmation 2026-05-16: user has read the full editorial batch and confirmed the spot-check sample passed. `vi-human-approved` is now written directly on remaining N1-N5 item-level `tags` arrays, while older machine/open-review tags remain only as provenance.
+
 ## Grammar Explanations
 
 | Level | Point | Before | After |
@@ -69,4 +71,4 @@ User note 2026-05-15: spot-check sample accepted. User confirmed they reviewed t
 
 ## Result
 
-N5/N4 grammar explanations, grammar examples, Minna vocab entries, and kanji entries carry `vi-human-approved` from the launch-tier pass. User review on 2026-05-15 extends `vi-human-approved` across the N3/N2/N1 editorial batch as well. The audit now treats `vi-human-approved` as closing stale machine/open-review tags, so the latest status report shows `0` active machine VI and `0` active open-review items.
+N5/N4 grammar explanations, grammar examples, Minna vocab entries, and kanji entries carry `vi-human-approved` from the launch-tier pass. User review on 2026-05-15 extended `vi-human-approved` across the N3/N2/N1 editorial batch as well; the 2026-05-16 follow-up writes the tag directly to remaining item-level `tags` arrays across N1-N5. The audit now treats `vi-human-approved` as closing stale machine/open-review tags, so the latest status report shows `0` active machine VI and `0` active open-review items.

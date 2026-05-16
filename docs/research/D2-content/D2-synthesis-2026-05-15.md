@@ -2,7 +2,7 @@
 
 ## Status
 
-The D2 pass moved N5/N4 from unauditable to launch-tier for a 5-10 learner pilot. User follow-up on 2026-05-15 confirmed the N5-N1 editorial batch was reviewed, so `vi-human-approved` is now applied across all scanned N5-N1 content. The content-status auditor now treats `vi-human-approved` as closing stale machine/open-review tags; those tags remain only as provenance.
+The D2 pass moved N5/N4 from unauditable to launch-tier for a 5-10 learner pilot. User follow-up on 2026-05-15 confirmed the N5-N1 editorial batch was reviewed, so `vi-human-approved` is applied across all scanned N5-N1 content. User confirmation on 2026-05-16 additionally authorized direct item-level tagging for remaining N1-N5 editorial-batch entries. The content-status auditor now treats `vi-human-approved` as closing stale machine/open-review tags; those tags remain only as provenance.
 
 ## Before / After
 
