@@ -149,15 +149,18 @@ Active dimensions:
   (pedagogy), D6 (UI/UX), D7 (performance), D8 (compliance) +
   D8-release-risk.
 
-Active workstream status (as of 2026-05-15):
+Active workstream status (as of 2026-05-16):
 - Curriculum-gating onboarding Phase 1-13 source work is complete,
   including anonymous Auth bootstrap and legacy migration gating.
 - Sprint 1-7 implementation/docs are substantially complete. Do not restart
   completed work without checking `mission-completion-audit-2026-05-15.md`.
+- Latest source/CI/deploy proof: commit `12a0b7ea`, GitHub Actions run
+  `25948482462` succeeded, and live `https://jpstudy.web.app` was smoke
+  checked after deploy.
 - Remaining blockers are operational/legal proofs: legal approval,
-  Sentry DSN + first issue, secret-backed CI deploy/live smoke/Lighthouse,
-  Firebase Storage bucket/rules/CORS migration proof, first executed deletion
-  proof, GA4 UI retention proof, and later App Check enforcement proof.
+  Sentry DSN + first issue, Firebase Storage bucket/rules/CORS migration proof,
+  first executed deletion proof, GA4 UI retention proof, BigQuery-exported
+  learning-event rows, and later App Check enforcement proof.
   Operator handoff checklist:
   `docs/compliance/beta-launch-proof-checklist-2026-05-15.md`.
 
@@ -205,10 +208,9 @@ flutter build web --release `
 □ After 1-2 weeks monitoring, switch App Check from monitoring to
   enforce mode (Firebase Console → App Check → APIs tab → Storage →
   Enforce).
-□ Set GitHub Actions secrets `FIREBASE_TOKEN` and
-  `JPSTUDY_RECAPTCHA_SITE_KEY` to enable the `deploy-hosting` CI job.
-  Optional: set `JPSTUDY_SENTRY_DSN` for beta error monitoring. The job
-  intentionally skips deploy when required secrets are missing.
+✓ GitHub Actions secrets `FIREBASE_TOKEN` and
+  `JPSTUDY_RECAPTCHA_SITE_KEY` are set; secret-backed deploy is proven.
+  Optional: set `JPSTUDY_SENTRY_DSN` for beta error monitoring.
 □ Provide/verify Sentry DSN and record a first deployed issue URL before
   claiming production observability.
 □ Finalize legal review for `/privacy` and `/terms`; current copy remains

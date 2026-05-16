@@ -12,7 +12,7 @@ Aggregate status command:
 npm run report:launch-readiness -- --json
 ```
 
-Latest run on `2026-05-16T03:36+07:00` returned `complete=false` with
+Latest run on `2026-05-16T08:12+07:00` returned `complete=false` with
 blockers: `legal-approval-missing`, `sentry-dsn-missing`,
 `storage-not-provisioned`, `deletion-proof-missing`,
 `ga4-retention-proof-missing`, `ga4-learning-events-missing`, and
@@ -20,7 +20,7 @@ blockers: `legal-approval-missing`, `sentry-dsn-missing`,
 
 ## 1. GitHub Actions Secret-Backed Deploy
 
-Status: completed on `main`; latest re-confirmed on commit `316f80c8`.
+Status: completed on `main`; latest re-confirmed on commit `12a0b7ea`.
 
 Goal: prove `deploy-hosting` performs a real build/deploy/live-smoke/Lighthouse
 run on `main`, not only the skip-safe wrapper.
@@ -41,7 +41,7 @@ Operator note:
 Evidence recorded:
 
 - GitHub Actions run URL:
-  `https://github.com/xboxonevn-blip/JpStudy/actions/runs/25933463058`
+  `https://github.com/xboxonevn-blip/JpStudy/actions/runs/25948482462`
 - `deploy-hosting` job step list shows these steps `success`, not
   `skipped`:
   - `Build web for production`
@@ -51,8 +51,10 @@ Evidence recorded:
   - `Lighthouse live gate`
 - Primary URL status: `https://jpstudy.web.app` returns `200`.
 - Legacy URL status: `https://jpstudy-v2.web.app` returns `404`.
-- Local live resource smoke after deploy: `resourceCount=27`, `jsonCount=1`,
-  `grammarResourceCount=0`, `violations=[]`.
+- Local live resource smoke after deploy remains covered by CI. Additional
+  Playwright visual smoke on `2026-05-16T08:05+07:00` checked Kanji radical
+  headers, Han-Viet rules, and Review Forecast labels on
+  `https://jpstudy.web.app`.
 
 ## 2. Sentry First-Issue Proof
 
@@ -61,15 +63,15 @@ Goal: prove source-wired Sentry is operational in a deployed web build.
 Current status:
 
 - Source wiring and the disabled-by-default smoke trigger are deployed on
-  `main`; latest CI/deploy proof is `316f80c8`.
+  `main`; latest CI/deploy proof is `12a0b7ea`.
 - Manual CI smoke path is available through GitHub Actions `workflow_dispatch`
   input `sentry_smoke=true`. When `JPSTUDY_SENTRY_DSN` is present, the workflow
   builds with `JPSTUDY_SENTRY_SMOKE_EVENT=true`, deploys, and opens
   `https://jpstudy.web.app/?sentry-smoke=1` in Chromium.
-- Repository Actions secrets rechecked on `2026-05-16T00:53+07:00` include
+- Repository Actions secrets rechecked on `2026-05-16T08:12+07:00` include
   `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, but not
   `JPSTUDY_SENTRY_DSN`.
-- Sentry readiness CLI rechecked on `2026-05-16T02:24+07:00` with
+- Sentry readiness CLI rechecked on `2026-05-16T08:12+07:00` with
   `npm run report:sentry-readiness -- --json`: source wiring and workflow smoke
   gate are present, repo secrets metadata is readable, no event was sent, and
   readiness remains `false` with reason `sentry-dsn-missing`.
@@ -100,7 +102,7 @@ payload before enabling automatic migration.
 
 Current status:
 
-- Recheck on `2026-05-16T01:19+07:00`:
+- Recheck on `2026-05-16T08:12+07:00`:
   `firebase deploy --only storage --project jpstudy-v2 --dry-run` still fails
   because Firebase Storage has not been set up for project `jpstudy-v2`.
 
@@ -188,7 +190,7 @@ Current status:
     `correct_count=0`, `total_count=50`, `accuracy=0`.
   - `session_quality_rated`: GA response `204`; params `mode=test`,
     `rating=5`.
-- Export ingestion is still pending. Recheck on `2026-05-16T03:36+07:00`
+- Export ingestion is still pending. Recheck on `2026-05-16T08:12+07:00`
   found only `analytics_536663906.events_20260514`; the learning rows are not
   in BigQuery yet.
 - The export report query now scores the quiz gate from the app's actual

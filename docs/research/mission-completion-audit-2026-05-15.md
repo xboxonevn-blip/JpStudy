@@ -72,14 +72,14 @@ Local commands run during the completion audit:
 GitHub Actions summary:
 
 - Current source gates pass on `main`. Latest verified run:
-  `25937256519` on `927ef848`.
+  `25948482462` on `12a0b7ea`.
 - `ui-string-guard`, `firebase-security-rules`, and `deploy-hosting` all
   completed with `success`.
 - `deploy-hosting` ran the real secret-backed path: production web build,
   deploy to `hosting:jpstudy`, primary/legacy smoke, live resource smoke, and
   Lighthouse live gate all completed with `success`.
 - `npm run report:launch-readiness -- --json` now performs a single aggregate
-  proof check. Latest run on `2026-05-16T03:36+07:00` returned
+  proof check. Latest run on `2026-05-16T08:12+07:00` returned
   `complete=false` with blockers `legal-approval-missing`,
   `sentry-dsn-missing`, `storage-not-provisioned`, `deletion-proof-missing`,
   `ga4-retention-proof-missing`, `ga4-learning-events-missing`, and
@@ -93,16 +93,16 @@ These prevent marking the active goal complete:
    tested, but docs still mark the copy as `review-needed draft`.
 2. Sentry is source-wired but not operationally proven. A real
    `JPSTUDY_SENTRY_DSN` and first deployed issue URL are still missing. The
-   Sentry readiness report rechecked on `2026-05-16T02:24+07:00` found source
+  Sentry readiness report rechecked on `2026-05-16T08:12+07:00` found source
    and workflow smoke gates present, repository Actions secrets
    `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, but no
    `JPSTUDY_SENTRY_DSN`; no event was sent by that readiness report.
 3. Firebase Storage migration remains blocked. Anonymous Auth works, but the
    Storage bucket/rules/CORS path is not provisioned/proven, so
    `JPSTUDY_ENABLE_LEGACY_STORAGE_MIGRATION` must stay unset/false. A
-   2026-05-16 `firebase deploy --only storage --project jpstudy-v2 --dry-run`
-   recheck still reports that Firebase Storage has not been set up on the
-   project.
+  2026-05-16T08:12+07:00 `firebase deploy --only storage --project jpstudy-v2 --dry-run`
+  recheck still reports that Firebase Storage has not been set up on the
+  project.
 4. First executed deletion runbook proof is missing. The runbook and Support ID
    surface exist, but no real deletion request has been executed end to end.
 5. GA4 UI retention proof is still console-only. BigQuery TTL is proven from
@@ -120,7 +120,8 @@ These prevent marking the active goal complete:
    learning event families to GA4: `22` batched `srs_review_completed` rows
    across `204` responses, plus earlier `n5_micro_quiz_completed` and
    `session_quality_rated` `204` responses in the same live-smoke session.
-   BigQuery export still only exposes `events_20260514`, so these learning rows
+   A 2026-05-16T08:12+07:00 export recheck still only exposes
+   `events_20260514`, so these learning rows
    are not present in the source-verifiable export sample yet.
 7. App Check enforcement proof remains future work. Current docs say enforce
    mode should wait until 1-2 weeks of monitoring.
