@@ -118,7 +118,7 @@ Current measurement status: BigQuery service-account auth and Job User access ar
 
 Update 2026-05-16T10:38+07: a live Playwright smoke rechecked `https://jpstudy.web.app` and observed `n5_micro_quiz_completed` (`correct_count=4`, `total_count=10`, `accuracy=0.4`) plus `session_quality_rated` (`mode=test`, `rating=5`) returning GA `204`; the same smoke session already had SRS review GA `204` evidence. `npm run report:ga4-export -- --json` now sees `events_20260514` and `events_20260515`, but the learning rows still are not exported, so `ga4-learning-events-missing` remains open.
 
-Current content status: the 2026-05-16 honest D2 audit scans `23,444` items. N5 `3,497` and N4 `3,376` have `0` machine/open-review items and are launch-tier. N3 has `0` machine items but `100` open-review grammar items. N2 has `2,752` machine and `764` open-review items. N1 has `4,701` machine and `980` open-review items. N1/N2 remain draft-tier; do not describe N5-N1 as fully human-approved.
+Current content status: the 2026-05-16 honest D2 audit scans `23,444` items. N5 `3,497` and N4 `3,376` have `0` machine/open-review items and are launch-tier. N3 has `0` machine items but `100` open-review grammar items. N2 has `2,752` machine and `955` open-review items. N1 has `4,701` machine and `1,225` open-review items. N1/N2 remain draft-tier; do not describe N5-N1 as fully human-approved.
 
 Current D2 routing note: local Minna vocab route stops at N4, but N3-N1 have `ShinKanzen`/`hajimete`; do not market N3+ as Minna continuation.
 

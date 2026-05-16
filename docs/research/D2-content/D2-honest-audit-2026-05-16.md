@@ -25,7 +25,7 @@ vi-human-approved + draft/review/placeholder marker in same content file: 0
 | Items scanned | 23,444 |
 | Files with machine VI | 150 |
 | Files with open review tags | 75 |
-| Files with approval signals | 650 |
+| Files with approval signals | 600 |
 
 ## By JLPT Level
 
@@ -34,14 +34,14 @@ vi-human-approved + draft/review/placeholder marker in same content file: 0
 | N5 | 3,497 | 0 | 0 | 3,497 | Launch-tier |
 | N4 | 3,376 | 0 | 0 | 3,376 | Launch-tier |
 | N3 | 3,412 | 0 | 100 | 3,312 | Review debt |
-| N2 | 4,770 | 2,752 | 764 | 2,209 | Draft-tier |
-| N1 | 8,389 | 4,701 | 980 | 3,933 | Draft-tier |
+| N2 | 4,770 | 2,752 | 955 | 2,018 | Draft-tier |
+| N1 | 8,389 | 4,701 | 1,225 | 3,688 | Draft-tier |
 
 ## By Dataset
 
 | Dataset | Items | Machine | Open review | Approved |
 |---|---:|---:|---:|---:|
-| grammar | 754 | 436 | 100 | 654 |
+| grammar | 754 | 436 | 536 | 218 |
 | grammar_examples | 4,924 | 1,744 | 1,744 | 3,180 |
 | immersion | 125 | 0 | 0 | 125 |
 | kanji | 929 | 0 | 0 | 929 |
@@ -72,8 +72,8 @@ N1/N2 are not launch-ready:
 - Placeholder examples: `1,744`.
 - Those 50 files now have honest root tags: `vi-machine-draft` and `vi-needs-review`.
 - `vi-human-approved` was removed from those files.
-- N2 still has `2,752` machine items and `764` open-review items.
-- N1 still has `4,701` machine items and `980` open-review items.
+- N2 still has `2,752` machine items and `955` open-review items.
+- N1 still has `4,701` machine items and `1,225` open-review items.
 
 ## Deferred Work
 
