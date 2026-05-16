@@ -26,7 +26,7 @@ The active mission is complete only if all are true:
 | Work directly on `main` | `git status --short --branch` shows `main...origin/main` | Passed |
 | Sprint 1-7 source/docs | Existing audit: `docs/research/mission-completion-audit-2026-05-15.md`; latest source context: `CLAUDE.md` | Passed |
 | T6-T10 live feedback fixes | Existing audit maps T6-T10 to commits/tests | Passed |
-| D2 editorial approval | Commit `207a62af content: mark editorial batch human-approved`; audit count `23444/23444` approved | Passed |
+| D2 editorial approval | Corrected by `219eb005 audit(content): honest D2 content status 2026-05-16`; N5/N4 launch-tier, N3 review debt, N1/N2 draft-tier | Partially passed |
 | Firebase Auth deletion tooling | Commit `df27cc4b tooling(deletion): add audited Firebase Auth delete helper`; `npm run test:research-tooling` passed 35 tests | Passed |
 | CI/deploy latest | GitHub Actions run `25953837011` for commit `995576f7`: `ui-string-guard`, `firebase-security-rules`, `deploy-hosting` all `success` | Passed |
 | Launch readiness aggregate | `npm run report:launch-readiness -- --json --proof-state docs/compliance/launch-proof-state.json` | Failed |

@@ -42,7 +42,7 @@ The goal is complete only when all of these are true:
 | T8 unified rich kanji modal | `833ed35a feat(kanji): add rich study flow to kanji detail modal` | Passed by source/test evidence |
 | T9 compact grouped sidebar | `b80ba5aa feat(nav): add compact grouped sidebar` | Passed by source/test evidence |
 | T10 Han-Viet rules localized with examples | `a025bab0 feat(kanji): localize han-viet rules with examples` | Passed |
-| D2 content editorial approval | `6f80f1d0 docs(content): record accepted D2 editorial approval`; `dart run tool\research\content_vi_status_report.dart` on `2026-05-16T08:36+07:00` reports `23444/23444` items approved and `0` machine/open-review items across N5/N4/N3/N2/N1 | Passed |
+| D2 content editorial approval | Corrected by `219eb005 audit(content): honest D2 content status 2026-05-16`; current audit reports N5/N4 launch-tier, N3 `100` open-review items, and N1/N2 draft-tier machine/open-review debt | Partially passed |
 | CI failure addendum Group A | `27468193 fix(audit): exempt research labels from ui-string-guard`; current audit report has 0 candidates | Passed |
 | CI failure addendum Group B | `80c7fe85 i18n(ui): migrate session quality and foundations labels`; `rg` confirms keys/usages | Passed |
 | CI failure addendum Group C | `df021973 ci: use Java 21 for Firebase emulator`; `firebase-security-rules` passed in CI run `25901716829` | Passed |
@@ -70,7 +70,7 @@ Local commands run during the completion audit:
 - `flutter test`
   - Result: exit code 0.
 - `dart run tool\research\content_vi_status_report.dart`
-  - Result: `23444/23444` content items approved; machine/open-review `0`.
+  - Corrected result on 2026-05-16: N5/N4 machine/open-review `0`; N3 open-review `100`; N2 machine/open-review `2,752/764`; N1 machine/open-review `4,701/980`.
 - `npm run test:research-tooling`
   - Result: 35 passed, 0 failed.
 - `npm run report:launch-readiness -- --json --proof-state docs/compliance/launch-proof-state.json`

@@ -67,8 +67,8 @@ non-Minna routing and incomplete N1 kanji coverage.
 
 1. Phase 14-19 auth: account linking, soft upgrade UI, community gating, and
    cleanup functions.
-2. Upper-level provenance cleanup: normalize N3/N2/N1 source/draft tags after
-   the user-approved N5-N1 editorial batch.
+2. Upper-level content cleanup: resolve N3 grammar review tags and perform real
+   editorial passes for N1/N2 draft-tier grammar examples and vocab.
 3. Native release: Android/iOS Firebase App Check, package restrictions, and
    store-ready build pipelines.
 4. Performance: live Lighthouse/trace budgets, route-level resource budgets,

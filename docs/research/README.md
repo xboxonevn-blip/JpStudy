@@ -118,7 +118,7 @@ Current measurement status: BigQuery service-account auth and Job User access ar
 
 Update 2026-05-16T10:38+07: a live Playwright smoke rechecked `https://jpstudy.web.app` and observed `n5_micro_quiz_completed` (`correct_count=4`, `total_count=10`, `accuracy=0.4`) plus `session_quality_rated` (`mode=test`, `rating=5`) returning GA `204`; the same smoke session already had SRS review GA `204` evidence. `npm run report:ga4-export -- --json` now sees `events_20260514` and `events_20260515`, but the learning rows still are not exported, so `ga4-learning-events-missing` remains open.
 
-Current content status: the 2026-05-15 D2 launch-readiness pass applied user-approved `vi-human-approved` metadata across the scanned N5-N1 editorial batch after spot-check acceptance. Fresh `tool/research/content_vi_status_report.dart` output scans `23,444` items with approval signals on all N5 `3,497`, N4 `3,376`, N3 `3,412`, N2 `4,770`, and N1 `8,389` items, with `0` active machine VI items and `0` active open-review items. N3+ remains scope-caveated because local Minna vocab stops at N4 and N1 kanji scope is incomplete, not because Vietnamese content is still unapproved.
+Current content status: the 2026-05-16 honest D2 audit scans `23,444` items. N5 `3,497` and N4 `3,376` have `0` machine/open-review items and are launch-tier. N3 has `0` machine items but `100` open-review grammar items. N2 has `2,752` machine and `764` open-review items. N1 has `4,701` machine and `980` open-review items. N1/N2 remain draft-tier; do not describe N5-N1 as fully human-approved.
 
 Current D2 routing note: local Minna vocab route stops at N4, but N3-N1 have `ShinKanzen`/`hajimete`; do not market N3+ as Minna continuation.
 
@@ -198,7 +198,7 @@ Current D8.Q8.7 status: telemetry is acceptable only for closed beta with explic
 - Q6: Which personas beyond Linh? Pending qualitative design.
 - Q7: Smallest test vs Anki + free decks? Pending after measurement.
 - Q8: Is Vietnamese content safe enough for beta learners? Active; D2 now supports a controlled N5-N1 pilot content set, with N3+ scope/routing caveats still visible.
-- D2 status: launch-readiness pass complete for the user-approved N5-N1 editorial batch. N5/N4 are pilot launch-tier; N3+ stays available with scope caveats for non-Minna routing and incomplete N1 kanji coverage.
+- D2 status: launch-readiness pass is clean for N5/N4 only. N3 has grammar review debt. N1/N2 are draft-tier with machine/open-review content; keep scope/disclaimer language visible and do not claim full N5-N1 human approval.
 - D3 status: Q3.1-Q3.6 measured; targeted English plural-risk fixes are guarded at `0` tracked matches. Glossary consolidation remains pending.
 - D4 status: P2-P5 measured; D4 synthesis complete. Live channel parity and upper-vocab availability are improved, but broad beta still needs route-matrix confidence and explicit persona-scope limits.
 - D5 status: Q5.1 remediated at scheduler level; FSRS-6 state/step persistence and pinned learning intervals are implemented. Real learner calibration remains pending.

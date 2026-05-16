@@ -6,7 +6,7 @@ This is the launch-readiness baseline before the D2 editorial pass.
 
 User update 2026-05-15: spot-check samples are accepted. For batches that are actually editorial-reviewed in this pass, Codex may add `vi-human-approved` together with the audit trail tag. This does not authorize blanket approval for untouched content.
 
-User update 2026-05-16: user confirmed they reviewed the full N5-N1 editorial batch during the pass. The latest audit supersedes the baseline below: `23,444 / 23,444` scanned items are approved, active machine VI is `0`, and active open-review items are `0`.
+Correction 2026-05-16: the later blanket N5-N1 approval claim was invalidated by the honest audit in `D2-honest-audit-2026-05-16.md`. Current state: N5/N4 are launch-tier, N3 has `100` open-review grammar items, and N1/N2 remain draft-tier with machine/open-review debt.
 
 ## Fresh Status
 
@@ -90,6 +90,6 @@ Observed priority patterns:
 
 ## Launch Decision
 
-Superseded by the accepted editorial batch and the 2026-05-16 audit rerun. N5/N4/N3/N2/N1 are auditable as user-approved for Vietnamese review status.
+Superseded by the 2026-05-16 honest audit. N5/N4 are launch-tier. N3 is translated but still has grammar review debt. N1/N2 are draft-tier and must not be described as fully approved.
 
-Remaining D2 caveat is scope, not review status: N1 kanji coverage is still below the 2,000 target, and N3+ routes are JLPT-focused rather than a Minna continuation.
+Remaining D2 caveats: N1/N2 machine/open-review debt, N1 kanji coverage below the 2,000 target, and N3+ routes are JLPT-focused rather than a Minna continuation.
