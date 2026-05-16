@@ -7,12 +7,19 @@ const path = require('node:path');
 const { summarizeLearningReadiness } = require('./ga4_export_status_report');
 const { classifyStorageReadiness } = require('./storage_readiness_report');
 
+const DEFAULT_PROOF_STATE_PATH = path.join(
+  'docs',
+  'compliance',
+  'launch-proof-state.json',
+);
+
 function parseArgs(argv) {
   const args = {};
   for (let index = 0; index < argv.length; index += 1) {
     const item = argv[index];
     if (item === '--json') args.json = true;
     else if (item === '--out') args.out = argv[++index];
+    else if (item === '--proof-state') args.proofStatePath = argv[++index];
     else if (item === '--legal-approved') args.legalApproved = true;
     else if (item === '--deletion-proof-executed') args.deletionProofExecuted = true;
     else if (item === '--app-check-enforced') args.appCheckEnforced = true;
@@ -34,6 +41,9 @@ Manual proof flags:
   --deletion-proof-executed
   --app-check-enforced
 
+Structured proof file:
+  --proof-state docs/compliance/launch-proof-state.json
+
 Without manual flags, those gates stay blocked.
 `);
 }
@@ -53,7 +63,56 @@ function safeRun(label, fn) {
   }
 }
 
-function legalEvidence({ approved }) {
+function loadProofState(proofStatePath = DEFAULT_PROOF_STATE_PATH) {
+  if (!fs.existsSync(proofStatePath)) {
+    return { path: proofStatePath, state: null };
+  }
+  const raw = fs.readFileSync(proofStatePath, 'utf8');
+  return { path: proofStatePath, state: JSON.parse(raw) };
+}
+
+function validateProofGate({ proofState, gate, statusField, requiredFields }) {
+  const entry = proofState?.state?.[gate];
+  if (!entry || entry[statusField] !== true) return null;
+
+  const missing = requiredFields.filter((field) => {
+    const value = entry[field];
+    return typeof value !== 'string' || value.trim().length === 0;
+  });
+  if (missing.length > 0) {
+    return {
+      ok: false,
+      source: `proof-state ${gate} missing ${missing.join(', ')}`,
+    };
+  }
+
+  return {
+    ok: true,
+    source: `proof-state ${proofState.path}`,
+  };
+}
+
+function legalEvidence({ approved, proofState }) {
+  if (approved) {
+    return {
+      approved: true,
+      source: 'manual flag --legal-approved',
+    };
+  }
+
+  const proof = validateProofGate({
+    proofState,
+    gate: 'legal',
+    statusField: 'approved',
+    requiredFields: ['reviewer', 'approvedAt', 'commit', 'evidence'],
+  });
+  if (proof) {
+    return {
+      approved: proof.ok,
+      source: proof.source,
+    };
+  }
+
   const screen = fs.existsSync('lib/features/legal/legal_document_screen.dart')
     ? fs.readFileSync('lib/features/legal/legal_document_screen.dart', 'utf8')
     : '';
@@ -63,27 +122,105 @@ function legalEvidence({ approved }) {
   const draftSignal =
     /legalDraftNotice/.test(screen) || /review-needed draft/.test(docs);
   return {
-    approved: Boolean(approved),
-    source: approved
-      ? 'manual flag --legal-approved'
-      : draftSignal
-        ? 'legalDraftNotice/review-needed draft present'
-        : 'no approval proof found',
+    approved: false,
+    source: draftSignal
+      ? 'legalDraftNotice/review-needed draft present'
+      : 'no approval proof found',
+  };
+}
+
+function deletionEvidence({ executed, proofState }) {
+  if (executed) {
+    return {
+      executed: true,
+      source: 'manual flag --deletion-proof-executed',
+    };
+  }
+  const proof = validateProofGate({
+    proofState,
+    gate: 'deletion',
+    statusField: 'executed',
+    requiredFields: ['executedAt', 'supportId', 'evidence'],
+  });
+  return proof
+    ? { executed: proof.ok, source: proof.source }
+    : { executed: false, source: 'no deletion proof found' };
+}
+
+function appCheckEvidence({ enforced, proofState }) {
+  if (enforced) {
+    return {
+      enforced: true,
+      source: 'manual flag --app-check-enforced',
+    };
+  }
+  const proof = validateProofGate({
+    proofState,
+    gate: 'appCheck',
+    statusField: 'enforced',
+    requiredFields: ['enforcedAt', 'evidence'],
+  });
+  return proof
+    ? { enforced: proof.ok, source: proof.source }
+    : { enforced: false, source: 'no App Check enforcement proof found' };
+}
+
+function ga4RetentionEvidence({ adminRetentionOk, proofState }) {
+  if (adminRetentionOk) {
+    return {
+      ok: true,
+      source: 'GA4 Admin API',
+    };
+  }
+  const proof = validateProofGate({
+    proofState,
+    gate: 'ga4Retention',
+    statusField: 'verified',
+    requiredFields: ['verifiedAt', 'retention', 'evidence'],
+  });
+  return proof
+    ? { ok: proof.ok, source: proof.source }
+    : { ok: false, source: 'no GA4 retention proof found' };
+}
+
+function mergeGa4Evidence({ ga4, proofState }) {
+  const retention = ga4RetentionEvidence({
+    adminRetentionOk: ga4.adminRetentionOk,
+    proofState,
+  });
+  return {
+    ...ga4,
+    adminRetentionOk: retention.ok,
+    adminRetentionSource: retention.source,
   };
 }
 
 function collectEvidence(args) {
+  const proofState = loadProofState(args.proofStatePath);
+
   if (args.skipLive) {
     return {
-      legal: legalEvidence({ approved: args.legalApproved }),
+      legal: legalEvidence({
+        approved: args.legalApproved,
+        proofState,
+      }),
       sentry: { ready: false, reason: 'live-check-skipped' },
       storage: { ready: false, reason: 'live-check-skipped' },
-      deletion: { executed: Boolean(args.deletionProofExecuted) },
-      ga4: {
-        adminRetentionOk: false,
-        learningReadiness: ['live-check-skipped'],
-      },
-      appCheck: { enforced: Boolean(args.appCheckEnforced) },
+      deletion: deletionEvidence({
+        executed: args.deletionProofExecuted,
+        proofState,
+      }),
+      ga4: mergeGa4Evidence({
+        ga4: {
+          adminRetentionOk: false,
+          learningReadiness: ['live-check-skipped'],
+        },
+        proofState,
+      }),
+      appCheck: appCheckEvidence({
+        enforced: args.appCheckEnforced,
+        proofState,
+      }),
     };
   }
 
@@ -122,18 +259,27 @@ function collectEvidence(args) {
       };
 
   return {
-    legal: legalEvidence({ approved: args.legalApproved }),
+    legal: legalEvidence({
+      approved: args.legalApproved,
+      proofState,
+    }),
     sentry: sentryRun.ok
       ? sentryRun.value.status.readiness
       : { ready: false, reason: sentryRun.error },
     storage,
     deletion: {
-      executed: Boolean(args.deletionProofExecuted),
+      ...deletionEvidence({
+        executed: args.deletionProofExecuted,
+        proofState,
+      }),
       readiness: deletionRun.ok ? deletionRun.value.readiness : null,
       error: deletionRun.ok ? null : deletionRun.error,
     },
-    ga4,
-    appCheck: { enforced: Boolean(args.appCheckEnforced) },
+    ga4: mergeGa4Evidence({ ga4, proofState }),
+    appCheck: appCheckEvidence({
+      enforced: args.appCheckEnforced,
+      proofState,
+    }),
   };
 }
 
@@ -158,7 +304,7 @@ function buildLaunchReadiness({ legal, sentry, storage, deletion, ga4, appCheck 
 
 function nextActionFor(blocker) {
   if (blocker === 'legal-approval-missing') {
-    return 'Approve /privacy and /terms, then rerun with --legal-approved.';
+    return 'Approve /privacy and /terms, then record legal proof in docs/compliance/launch-proof-state.json or rerun with --legal-approved.';
   }
   if (blocker === 'sentry-dsn-missing') {
     return 'Set JPSTUDY_SENTRY_DSN and run workflow_dispatch with sentry_smoke=true.';
@@ -167,16 +313,16 @@ function nextActionFor(blocker) {
     return 'Provision Firebase Storage, deploy rules, apply storage.cors.json, then run migration proof.';
   }
   if (blocker === 'deletion-proof-missing') {
-    return 'Execute the deletion runbook against a dedicated test UID, then rerun with --deletion-proof-executed.';
+    return 'Execute the deletion runbook against a dedicated test UID, then record deletion proof in docs/compliance/launch-proof-state.json or rerun with --deletion-proof-executed.';
   }
   if (blocker === 'ga4-retention-proof-missing') {
-    return 'Record GA4 Admin retention UI proof or enable Analytics Admin API for source verification.';
+    return 'Record GA4 Admin retention UI proof in docs/compliance/launch-proof-state.json or enable Analytics Admin API for source verification.';
   }
   if (blocker === 'ga4-learning-events-missing') {
     return 'Collect real srs_review_completed, n5_micro_quiz_completed, and session_quality_rated events.';
   }
   if (blocker === 'app-check-enforcement-deferred') {
-    return 'After 1-2 weeks monitoring, enforce App Check and rerun with --app-check-enforced.';
+    return 'After 1-2 weeks monitoring, enforce App Check, then record proof in docs/compliance/launch-proof-state.json or rerun with --app-check-enforced.';
   }
   return `Resolve ${blocker}.`;
 }
@@ -202,10 +348,10 @@ function buildMarkdownReport({ generatedAt, readiness, evidence }) {
     `| Legal approval | ${evidence.legal.source} | ${evidence.legal.approved ? 'pass' : 'blocked'} |`,
     `| Sentry first issue | reason=${evidence.sentry.reason || 'ready'} | ${evidence.sentry.ready ? 'pass' : 'blocked'} |`,
     `| Storage migration | reason=${evidence.storage.reason || 'ready'} | ${evidence.storage.ready ? 'pass' : 'blocked'} |`,
-    `| Deletion proof | executed=${Boolean(evidence.deletion.executed)} | ${evidence.deletion.executed ? 'pass' : 'blocked'} |`,
-    `| GA4 retention | adminRetentionOk=${Boolean(evidence.ga4.adminRetentionOk)} | ${evidence.ga4.adminRetentionOk ? 'pass' : 'blocked'} |`,
+    `| Deletion proof | ${evidence.deletion.source || `executed=${Boolean(evidence.deletion.executed)}`} | ${evidence.deletion.executed ? 'pass' : 'blocked'} |`,
+    `| GA4 retention | ${evidence.ga4.adminRetentionSource || `adminRetentionOk=${Boolean(evidence.ga4.adminRetentionOk)}`} | ${evidence.ga4.adminRetentionOk ? 'pass' : 'blocked'} |`,
     `| GA4 learning events | ${(evidence.ga4.learningReadiness || []).join(', ') || 'present'} | ${(evidence.ga4.learningReadiness || []).length === 0 ? 'pass' : 'blocked'} |`,
-    `| App Check enforcement | enforced=${Boolean(evidence.appCheck.enforced)} | ${evidence.appCheck.enforced ? 'pass' : 'blocked'} |`,
+    `| App Check enforcement | ${evidence.appCheck.source || `enforced=${Boolean(evidence.appCheck.enforced)}`} | ${evidence.appCheck.enforced ? 'pass' : 'blocked'} |`,
     '',
     '## Blockers',
     '',

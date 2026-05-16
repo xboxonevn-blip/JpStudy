@@ -12,6 +12,17 @@ Aggregate status command:
 npm run report:launch-readiness -- --json
 ```
 
+Structured manual proof state:
+
+```powershell
+npm run report:launch-readiness -- --json --proof-state docs/compliance/launch-proof-state.json
+```
+
+The proof state file may close only manual gates: legal approval, deletion
+execution, GA4 retention UI proof, and App Check enforcement. Each gate still
+requires explicit metadata. Sentry, Storage, and GA4 learning-event export gates
+remain source-verified and cannot be closed by the proof state file.
+
 Latest run on `2026-05-16T08:12+07:00` returned `complete=false` with
 blockers: `legal-approval-missing`, `sentry-dsn-missing`,
 `storage-not-provisioned`, `deletion-proof-missing`,
