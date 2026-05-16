@@ -8,6 +8,7 @@ const { classifyStorageReadiness } = require('./storage_readiness_report');
 
 const DEFAULT_PROJECT = 'jpstudy-v2';
 const DEFAULT_PROPERTY = '536663906';
+const DEFAULT_ACCOUNT = '393943579';
 
 function parseArgs(argv) {
   const args = {
@@ -153,6 +154,19 @@ function buildDeletionReadiness({
   };
 }
 
+function buildOperatorUrls({
+  project = DEFAULT_PROJECT,
+  property = DEFAULT_PROPERTY,
+  account = DEFAULT_ACCOUNT,
+} = {}) {
+  return {
+    firebaseAuthUsers: `https://console.firebase.google.com/u/1/project/${project}/authentication/users`,
+    firebaseStorage: `https://console.firebase.google.com/u/1/project/${project}/storage`,
+    ga4Admin: `https://analytics.google.com/analytics/web/?authuser=1#/a${account}p${property}/admin`,
+    bigQueryDataset: `https://console.cloud.google.com/bigquery?project=${project}&authuser=1`,
+  };
+}
+
 function valueOrMissing(value) {
   return value ? `\`${value}\`` : '`missing`';
 }
@@ -163,7 +177,9 @@ function buildMarkdownReport({
   property,
   identifiers,
   readiness,
+  operatorUrls,
 }) {
+  const urls = operatorUrls || buildOperatorUrls({ project, property });
   const blockers = readiness.blockers.length
     ? readiness.blockers.map((item) => `- ${item}`)
     : ['- none'];
@@ -188,6 +204,13 @@ function buildMarkdownReport({
     `GA client ID: ${valueOrMissing(identifiers.gaClientId)}`,
     `App instance ID: ${valueOrMissing(identifiers.appInstanceId)}`,
     `User-provided data: ${valueOrMissing(identifiers.userProvidedData)}`,
+    '',
+    '## Operator URLs',
+    '',
+    `Firebase Auth users: \`${urls.firebaseAuthUsers}\``,
+    `Firebase Storage: \`${urls.firebaseStorage}\``,
+    `GA4 Admin: \`${urls.ga4Admin}\``,
+    `BigQuery dataset: \`${urls.bigQueryDataset}\``,
     '',
     '## Blockers',
     '',
@@ -235,6 +258,10 @@ async function main(argv = process.argv.slice(2)) {
     property: args.property,
     identifiers,
     readiness,
+    operatorUrls: buildOperatorUrls({
+      project: args.project,
+      property: args.property,
+    }),
   };
   const output = args.json
     ? `${JSON.stringify(report, null, 2)}\n`
@@ -258,6 +285,7 @@ if (require.main === module) {
 module.exports = {
   buildDeletionReadiness,
   buildMarkdownReport,
+  buildOperatorUrls,
   hasAdminDeleteUserTool,
   parseArgs,
 };
