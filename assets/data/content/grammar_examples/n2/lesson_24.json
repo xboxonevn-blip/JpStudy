@@ -6,554 +6,360 @@
   "tags": [
     "source-hanabira",
     "n2-grammar-import",
-    "needs-human-review",
-    "vi-machine-draft",
-    "vi-needs-review"
+    "vi-editorial-codex-pass"
   ],
   "examples": [
     {
       "grammarPoint": "～上に",
       "sentence": "彼は頭がいい上に、スポーツも得意です。",
-      "translation": "In addition to being smart, he is also good at sports.",
+      "translation": "Anh ấy không chỉ thông minh mà còn giỏi thể thao.",
       "translationEn": "In addition to being smart, he is also good at sports",
       "romaji": "Kare wa atama ga ii ue ni, supo-tsu mo tokui desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: In addition to being smart, he is also good at sports",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～上に",
       "sentence": "このドレスは美しい上に、値段も安いです。",
-      "translation": "This dress is not only beautiful but also affordable.",
+      "translation": "Chiếc váy này không chỉ đẹp mà giá cũng rẻ.",
       "translationEn": "This dress is not only beautiful but also affordable",
       "romaji": "Kono doresu wa utsukushii ue ni, nedan mo yasui desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This dress is not only beautiful but also affordable",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～上に",
       "sentence": "彼女は優しい上に、料理も上手です。",
-      "translation": "Besides being kind, she is also good at cooking.",
+      "translation": "Cô ấy không chỉ tốt bụng mà còn nấu ăn giỏi.",
       "translationEn": "Besides being kind, she is also good at cooking",
       "romaji": "Kanojo wa yasashii ue ni, ryouri mo jouzu desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Besides being kind, she is also good at cooking",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～上に",
       "sentence": "彼は社長の上に、有名な作家でもある。",
-      "translation": "Not only is he a company president, but he is also a famous writer.",
+      "translation": "Anh ấy không chỉ là giám đốc công ty mà còn là nhà văn nổi tiếng.",
       "translationEn": "Not only is he a company president, but he is also a famous writer",
       "romaji": "Kare wa shachou no ue ni, yuumei na sakka demo aru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Not only is he a company president, but he is also a famous writer",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～上は",
       "sentence": "試験に合格した上は、パーティーを開こう。",
-      "translation": "Now that I've passed the exam, let's have a party.",
+      "translation": "Đã đậu kỳ thi rồi thì mở tiệc thôi.",
       "translationEn": "Now that Ive passed the exam, lets have a party",
       "romaji": "Shiken ni goukaku shita ue wa, paatii wo hirakou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Now that Ive passed the exam, lets have a party",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～上は",
       "sentence": "この仕事を引き受けた上は、最後までやり遂げるつもりだ。",
-      "translation": "Now that I have taken on this job, I intend to see it through to the end.",
+      "translation": "Đã nhận công việc này rồi, tôi định làm đến cùng.",
       "translationEn": "Now that I have taken on this job, I intend to see it through to the end",
       "romaji": "Kono shigoto wo hikiuketa ue wa, saigo made yaritogeru tsumori da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Now that I have taken on this job, I intend to see it through to the end",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～上は",
       "sentence": "親切だと言われた上は、手伝ってあげよう。",
-      "translation": "Since you said I'm kind, I'll help you out.",
+      "translation": "Đã được khen là tốt bụng rồi thì tôi sẽ giúp.",
       "translationEn": "Since you said Im kind, Ill help you out",
       "romaji": "Shinsetsu da to iwareta ue wa, tetsudatte ageyou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Since you said Im kind, Ill help you out",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～上は",
       "sentence": "甘いものが好きな上は、このデザートをきっと気に入るでしょう。",
-      "translation": "Now that you like sweets, you'll surely enjoy this dessert.",
+      "translation": "Nếu bạn thích đồ ngọt thì chắc sẽ thích món tráng miệng này.",
       "translationEn": "Now that you like sweets, youll surely enjoy this dessert",
       "romaji": "Amai mono ga suki na ue wa, kono dezaato wo kitto ki ni iru deshou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Now that you like sweets, youll surely enjoy this dessert",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～以上",
       "sentence": "彼は忙しい以上、手伝いに行っても無駄だろう。",
-      "translation": "Since he's busy, it would be pointless to try helping him.",
+      "translation": "Vì anh ấy bận nên có đến giúp cũng vô ích.",
       "translationEn": "Since hes busy, it would be pointless to try helping him",
       "romaji": "Kare wa isogashii ijou, tetsudai ni itte mo muda darou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Since hes busy, it would be pointless to try helping him",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～以上",
       "sentence": "約束した以上、守るべきだ。",
-      "translation": "Since I made a promise, I should keep it.",
+      "translation": "Đã hứa rồi thì nên giữ lời.",
       "translationEn": "Since I made a promise, I should keep it",
       "romaji": "Yakusoku shita ijou, mamoru beki da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Since I made a promise, I should keep it",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～以上",
       "sentence": "締め切りが近い以上、全力で仕事をしなければならない。",
-      "translation": "As long as the deadline is near, I have to work with all my might.",
+      "translation": "Vì hạn chót đã gần, tôi phải làm việc hết sức.",
       "translationEn": "As long as the deadline is near, I have to work with all my might",
       "romaji": "Shimekiri ga chikai ijou, zenryoku de shigoto wo shinakereba naranai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As long as the deadline is near, I have to work with all my might",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～以上",
       "sentence": "彼女は大学生である以上、勉強が優先されるべきだ。",
-      "translation": "Since she's a college student, studying should be her priority.",
+      "translation": "Vì cô ấy là sinh viên đại học, việc học nên được ưu tiên.",
       "translationEn": "Since shes a college student, studying should be her priority",
       "romaji": "Kanojo wa daigakusei de aru ijou, benkyou ga yuusen sareru beki da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Since shes a college student, studying should be her priority",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～以来",
       "sentence": "卒業以来、彼女に会っていない。",
-      "translation": "I haven't seen her since we graduated.",
+      "translation": "Từ khi tốt nghiệp, tôi chưa gặp cô ấy.",
       "translationEn": "I havent seen her since we graduated",
       "romaji": "Sotsugyou irai, kanojo ni atte inai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I havent seen her since we graduated",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～以来",
       "sentence": "子供が生まれて以来、忙しくなった。",
-      "translation": "I've been busy ever since my child was born.",
+      "translation": "Từ khi con chào đời, tôi trở nên bận rộn.",
       "translationEn": "Ive been busy ever since my child was born",
       "romaji": "Kodomo ga umarete irai, isogashiku natta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Ive been busy ever since my child was born",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～以来",
       "sentence": "東京に引っ越して以来、友達が増えた。",
-      "translation": "I've made more friends since I moved to Tokyo.",
+      "translation": "Từ khi chuyển đến Tokyo, tôi có thêm nhiều bạn.",
       "translationEn": "Ive made more friends since I moved to Tokyo",
       "romaji": "Toukyou ni hikkoshite irai, tomodachi ga fueta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Ive made more friends since I moved to Tokyo",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～以来",
       "sentence": "あの映画を見た以来、彼女は怖がりになった。",
-      "translation": "She's been easily frightened ever since she watched that movie.",
+      "translation": "Từ khi xem bộ phim đó, cô ấy trở nên dễ sợ hãi.",
       "translationEn": "Shes been easily frightened ever since she watched that movie",
       "romaji": "Ano eiga wo mita irai, kanojo wa kowagari ni natta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Shes been easily frightened ever since she watched that movie",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～切る",
       "sentence": "彼は試験勉強をがんばり切るつもりだ。",
-      "translation": "He intends to give his absolute all to exam study.",
+      "translation": "Anh ấy định cố gắng học thi đến cùng.",
       "translationEn": "He intends to give his absolute all to exam study",
       "romaji": "Kare wa shiken benkyou o ganbari kiru tsumori da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He intends to give his absolute all to exam study",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～切る",
       "sentence": "この仕事を終わり切るまで、帰らないでください。",
-      "translation": "Please don't go home until you've completely finished this job.",
+      "translation": "Đừng về cho đến khi hoàn thành hẳn công việc này.",
       "translationEn": "Please dont go home until youve completely finished this job",
       "romaji": "Kono shigoto o owari kiru made, kaeranai de kudasai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Please dont go home until youve completely finished this job",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～切る",
       "sentence": "友達と喧嘩して、何も言い切れなかった。",
-      "translation": "I argued with my friend and couldn't say everything I wanted to say.",
+      "translation": "Tôi cãi nhau với bạn và không thể nói hết những gì muốn nói.",
       "translationEn": "I argued with my friend and couldnt say everything I wanted to say",
       "romaji": "Tomodachi to kenka shite, nanimo iikirenakatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I argued with my friend and couldnt say everything I wanted to say",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～切る",
       "sentence": "彼らは、そのゲームをやり切ることができました。",
-      "translation": "They were able to complete that game thoroughly.",
+      "translation": "Họ đã chơi trọn vẹn trò chơi đó đến cuối.",
       "translationEn": "They were able to complete that game thoroughly",
       "romaji": "Karera wa, sono geemu o yarikiru koto ga dekimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: They were able to complete that game thoroughly",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～反面",
       "sentence": "この車は速い反面、燃費が悪いです。",
-      "translation": "On the one hand, this car is fast, but on the other hand, it has poor fuel efficiency.",
+      "translation": "Xe này chạy nhanh nhưng ngược lại tốn xăng.",
       "translationEn": "On the one hand, this car is fast, but on the other hand, it has poor fuel efficiency",
       "romaji": "Kono kuruma wa hayai hanmen, nenpi ga warui desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: On the one hand, this car is fast, but on the other hand, it has poor fuel efficiency",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～反面",
       "sentence": "彼は頭がいい反面、運動が苦手です。",
-      "translation": "On the one hand, he is smart, but on the other hand, he's not good at sports.",
+      "translation": "Anh ấy thông minh nhưng lại kém thể thao.",
       "translationEn": "On the one hand, he is smart, but on the other hand, hes not good at sports",
       "romaji": "Kare wa atama ga ii hanmen, undou ga nigate desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: On the one hand, he is smart, but on the other hand, hes not good at sports",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～反面",
       "sentence": "彼女は親切である反面、面倒見が良すぎることがある。",
-      "translation": "On the one hand, she is kind, but on the other hand, she can be too helpful.",
+      "translation": "Cô ấy tốt bụng nhưng đôi khi lại chăm sóc quá mức.",
       "translationEn": "On the one hand, she is kind, but on the other hand, she can be too helpful",
       "romaji": "Kanojo wa shinsetsu de aru hanmen, mendoumi ga yoi sugiru koto ga aru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: On the one hand, she is kind, but on the other hand, she can be too helpful",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～反面",
       "sentence": "この仕事は給料が高い反面、ストレスがたくさんあります。",
-      "translation": "On the one hand, this job pays well, but on the other hand, it's quite stressful.",
+      "translation": "Công việc này lương cao nhưng khá căng thẳng.",
       "translationEn": "On the one hand, this job pays well, but on the other hand, its quite stressful",
       "romaji": "Kono shigoto wa kyuuryou ga takai hanmen, sutoresu ga takusan arimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: On the one hand, this job pays well, but on the other hand, its quite stressful",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～向け",
       "sentence": "この雑誌は若者向けです。",
-      "translation": "This magazine is aimed at young people.",
+      "translation": "Tạp chí này dành cho giới trẻ.",
       "translationEn": "This magazine is aimed at young people",
       "romaji": "Kono zasshi wa wakamono-muke desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This magazine is aimed at young people",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～向け",
       "sentence": "スーパーで家族向けの食品セットが売っています。",
-      "translation": "The supermarket sells food sets intended for families.",
+      "translation": "Siêu thị bán các set thực phẩm dành cho gia đình.",
       "translationEn": "The supermarket sells food sets intended for families",
       "romaji": "Suupaa de kazoku-muke no shokuhin setto ga utte imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The supermarket sells food sets intended for families",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～向け",
       "sentence": "このアプリは初心者向けに作られています。",
-      "translation": "This application is designed for beginners.",
+      "translation": "Ứng dụng này được thiết kế cho người mới bắt đầu.",
       "translationEn": "This application is designed for beginners",
       "romaji": "Kono apuri wa shoshinsha-muke ni tsukurarete imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This application is designed for beginners",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～向け",
       "sentence": "このレストランはビーガン向けのメニューが充実しています。",
-      "translation": "This restaurant has an extensive menu aimed at vegans.",
+      "translation": "Nhà hàng này có thực đơn phong phú dành cho người ăn thuần chay.",
       "translationEn": "This restaurant has an extensive menu aimed at vegans",
       "romaji": "Kono resutoran wa bi-gan-muke no menyu ga juujitsu shite imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This restaurant has an extensive menu aimed at vegans",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～恐れがある",
       "sentence": "地震が来る恐れがあるため、避難所に行ってください。",
-      "translation": "Please go to the evacuation center because there is a risk of an earthquake.",
+      "translation": "Vì có nguy cơ động đất, hãy đến nơi sơ tán.",
       "translationEn": "Please go to the evacuation center because there is a risk of an earthquake",
       "romaji": "Jishin ga kuru osore ga aru tame, hinanjo ni itte kudasai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Please go to the evacuation center because there is a risk of an earthquake",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～恐れがある",
       "sentence": "彼は事故に遭う恐れがあるので、注意して運転してください。",
-      "translation": "There's a possibility he might have an accident, so please drive carefully.",
+      "translation": "Có khả năng anh ấy gặp tai nạn, nên hãy lái xe cẩn thận.",
       "translationEn": "Theres a possibility he might have an accident, so please drive carefully",
       "romaji": "Kare wa jiko ni au osore ga aru node, chuui shite unten shite kudasai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Theres a possibility he might have an accident, so please drive carefully",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～恐れがある",
       "sentence": "この薬を飲みすぎると、副作用の恐れがある。",
-      "translation": "If you take too much of this medicine, there is a risk of side effects.",
+      "translation": "Nếu uống quá nhiều thuốc này, có nguy cơ bị tác dụng phụ.",
       "translationEn": "If you take too much of this medicine, there is a risk of side effects",
       "romaji": "Kono kusuri wo nomisugiru to, fukusayou no osore ga aru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If you take too much of this medicine, there is a risk of side effects",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～恐れがある",
       "sentence": "低い予算でこのプロジェクトを進めると、品質が低くなる恐れがある。",
-      "translation": "If we proceed with this project on a low budget, the quality may suffer.",
+      "translation": "Nếu triển khai dự án này với ngân sách thấp, chất lượng có thể giảm.",
       "translationEn": "If we proceed with this project on a low budget, the quality may suffer",
       "romaji": "Hikui yosan de kono purojekuto wo susumeru to, hinshitsu ga hikuku naru osore ga aru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If we proceed with this project on a low budget, the quality may suffer",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     }
   ]
 }

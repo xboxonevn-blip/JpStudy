@@ -6,554 +6,360 @@
   "tags": [
     "source-hanabira",
     "n2-grammar-import",
-    "needs-human-review",
-    "vi-machine-draft",
-    "vi-needs-review"
+    "vi-editorial-codex-pass"
   ],
   "examples": [
     {
       "grammarPoint": "～折には",
       "sentence": "喉が渇く折には、このペットボトルの水を飲んでください。",
-      "translation": "When you get thirsty, please drink water from this bottle.",
+      "translation": "Khi khát nước, hãy uống nước trong chai này.",
       "translationEn": "When you get thirsty, please drink water from this bottle",
       "romaji": "Nodo ga kawaku ori ni wa, kono pettobotoru no mizu o nonde kudasai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When you get thirsty, please drink water from this bottle",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～折には",
       "sentence": "この地域に来る折には、この神社に必ずお参りしましょう。",
-      "translation": "When you visit this area, make sure to go to this shrine.",
+      "translation": "Khi đến khu vực này, nhất định hãy ghé thăm ngôi đền này.",
       "translationEn": "When you visit this area, make sure to go to this shrine",
       "romaji": "Kono chiiki ni kuru ori ni wa, kono jinja ni kanarazu omairi shimashou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When you visit this area, make sure to go to this shrine",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～折には",
       "sentence": "彼が元気じゃない折には、具合が悪いか尋ねてください。",
-      "translation": "If he doesn't seem well, please ask if he's feeling sick.",
+      "translation": "Khi anh ấy có vẻ không khỏe, hãy hỏi xem anh ấy có mệt không.",
       "translationEn": "If he doesnt seem well, please ask if hes feeling sick",
       "romaji": "Kare ga genki ja nai ori ni wa, guai ga warui ka tazunete kudasai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: If he doesnt seem well, please ask if hes feeling sick",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～折には",
       "sentence": "チャンスがある折には、躊躇せずに行動しましょう。",
-      "translation": "When you have an opportunity, act without hesitation.",
+      "translation": "Khi có cơ hội, hãy hành động không do dự.",
       "translationEn": "When you have an opportunity, act without hesitation",
       "romaji": "Chansu ga aru ori ni wa, chuucho sezu ni koudou shimashou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When you have an opportunity, act without hesitation",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～末",
       "sentence": "長い議論の末、ようやく意見がまとまった。",
-      "translation": "After a long discussion, we finally reached a consensus.",
+      "translation": "Sau cuộc thảo luận dài, cuối cùng ý kiến cũng thống nhất.",
       "translationEn": "After a long discussion, we finally reached a consensus",
       "romaji": "Nagai giron no sue, youyaku iken ga matomatta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: After a long discussion, we finally reached a consensus",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～末",
       "sentence": "一週間の勉強の末、試験に合格した。",
-      "translation": "After a week of studying, I passed the exam.",
+      "translation": "Sau một tuần học, tôi đã đậu kỳ thi.",
       "translationEn": "After a week of studying, I passed the exam",
       "romaji": "Isshuukan no benkyou no sue, shiken ni goukaku shita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: After a week of studying, I passed the exam",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～末",
       "sentence": "何度も失敗の末、成功を手に入れた。",
-      "translation": "After many failures, I finally achieved success.",
+      "translation": "Sau nhiều lần thất bại, tôi cuối cùng đã đạt được thành công.",
       "translationEn": "After many failures, I finally achieved success",
       "romaji": "Nando mo shippai no sue, seikou wo te ni ireta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: After many failures, I finally achieved success",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～末",
       "sentence": "彼との別れの末、新しい人生を始めた。",
-      "translation": "After breaking up with him, I started a new life.",
+      "translation": "Sau cuộc chia tay với anh ấy, tôi bắt đầu cuộc sống mới.",
       "translationEn": "After breaking up with him, I started a new life",
       "romaji": "Kare to no wakare no sue, atarashii jinsei wo hajimeta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: After breaking up with him, I started a new life",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～次第",
       "sentence": "仕事が終わり次第、帰ります。",
-      "translation": "I will go home as soon as I finish work.",
+      "translation": "Xong việc là tôi sẽ về nhà.",
       "translationEn": "I will go home as soon as I finish work",
       "romaji": "Shigoto ga owari shidai, kaerimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I will go home as soon as I finish work",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～次第",
       "sentence": "お客様のご意見次第で、サービスを改善します。",
-      "translation": "We will improve our services depending on customer feedback.",
+      "translation": "Chúng tôi sẽ cải thiện dịch vụ tùy theo ý kiến khách hàng.",
       "translationEn": "We will improve our services depending on customer feedback",
       "romaji": "Okyakusama no goiken shidai de, saabisu wo kaizen shimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We will improve our services depending on customer feedback",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～次第",
       "sentence": "彼の返事次第で、パーティーに行くかどうか決めます。",
-      "translation": "I will decide whether or not to go to the party depending on his answer.",
+      "translation": "Tôi sẽ quyết định có đi tiệc hay không tùy theo câu trả lời của anh ấy.",
       "translationEn": "I will decide whether or not to go to the party depending on his answer",
       "romaji": "Kare no henji shidai de, paatii ni iku ka dou ka kimemasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I will decide whether or not to go to the party depending on his answer",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～次第",
       "sentence": "天気次第で、ピクニックを予定しています。",
-      "translation": "We are planning a picnic depending on the weather.",
+      "translation": "Chúng tôi dự định đi dã ngoại tùy theo thời tiết.",
       "translationEn": "We are planning a picnic depending on the weather",
       "romaji": "Tenki shidai de, pikunikku wo yotei shite imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We are planning a picnic depending on the weather",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～次第で",
       "sentence": "仕事の終わり次第で、家に帰る時間が変わります。",
-      "translation": "Depending on when I finish work, the time I go home may change.",
+      "translation": "Thời gian về nhà sẽ thay đổi tùy theo lúc tôi xong việc.",
       "translationEn": "Depending on when I finish work, the time I go home may change",
       "romaji": "Shigoto no owari shidai de, ie ni kaeru jikan ga kawarimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Depending on when I finish work, the time I go home may change",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～次第で",
       "sentence": "天気次第で、ピクニックに行く予定です。",
-      "translation": "We plan to go on a picnic depending on the weather.",
+      "translation": "Chúng tôi dự định đi dã ngoại tùy theo thời tiết.",
       "translationEn": "We plan to go on a picnic depending on the weather",
       "romaji": "Tenki shidai de, pikunikku ni iku yotei desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We plan to go on a picnic depending on the weather",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～次第で",
       "sentence": "彼の気分次第で、パーティーに参加するかどうか決まります。",
-      "translation": "Whether he participates in the party depends on his mood.",
+      "translation": "Việc anh ấy có tham gia tiệc hay không tùy thuộc vào tâm trạng của anh ấy.",
       "translationEn": "Whether he participates in the party depends on his mood",
       "romaji": "Kare no kibun shidai de, paatii ni sanka suru ka dou ka kimarimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Whether he participates in the party depends on his mood",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～次第で",
       "sentence": "会議の進行次第で、決定が変わるかもしれません。",
-      "translation": "The decision may change depending on how the meeting progresses.",
+      "translation": "Quyết định có thể thay đổi tùy theo tiến độ cuộc họp.",
       "translationEn": "The decision may change depending on how the meeting progresses",
       "romaji": "Kaigi no shinkou shidai de, kettei ga kawaru kamoshiremasen.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The decision may change depending on how the meeting progresses",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～次第です",
       "sentence": "天気次第ですが、明日はピクニックに行こうと思います。",
-      "translation": "It depends on the weather, but I’m thinking of going for a picnic tomorrow.",
+      "translation": "Còn tùy thời tiết, nhưng tôi đang nghĩ mai sẽ đi dã ngoại.",
       "translationEn": "It depends on the weather, but I’m thinking of going for a picnic tomorrow",
       "romaji": "Tenki shidai desu ga, ashita wa pikunikku ni ikou to omoimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: It depends on the weather, but I’m thinking of going for a picnic tomorrow",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～次第です",
       "sentence": "試験の結果次第ですが、留学したいと考えています。",
-      "translation": "It depends on my exam results, but I'm considering studying abroad.",
+      "translation": "Còn tùy kết quả thi, nhưng tôi đang cân nhắc đi du học.",
       "translationEn": "It depends on my exam results, but Im considering studying abroad",
       "romaji": "Shiken no kekka shidai desu ga, ryuugaku shitai to kangaete imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: It depends on my exam results, but Im considering studying abroad",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～次第です",
       "sentence": "お客様のご意見次第で新メニューを追加する次第です。",
-      "translation": "We intend to add a new menu item depending on our customers’ feedback.",
+      "translation": "Chúng tôi dự định thêm món mới tùy theo ý kiến khách hàng.",
       "translationEn": "We intend to add a new menu item depending on our customers’ feedback",
       "romaji": "Okyakusama no goiken shidai de shin menyuu wo tsuika suru shidai desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We intend to add a new menu item depending on our customers’ feedback",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～次第です",
       "sentence": "申請が完了次第ですので、手続きが終わったらパスポートを受け取れます。",
-      "translation": "As soon as the application is completed, you'll be able to receive your passport.",
+      "translation": "Sau khi đơn được hoàn tất, bạn có thể nhận hộ chiếu khi thủ tục xong.",
       "translationEn": "As soon as the application is completed, youll be able to receive your passport",
       "romaji": "Shinsei ga kanryou shidai desu no de, tetsudzuki ga owattara pasupooto wo uketoremasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As soon as the application is completed, youll be able to receive your passport",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～気味",
       "sentence": "最近寝不足気味で、ちょっと疲れています。",
-      "translation": "Lately, I'm feeling somewhat sleep-deprived and a bit tired.",
+      "translation": "Gần đây tôi hơi thiếu ngủ nên hơi mệt.",
       "translationEn": "Lately, Im feeling somewhat sleep-deprived and a bit tired",
       "romaji": "Saikin nebusoku gimi de, chotto tsukarete imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Lately, Im feeling somewhat sleep-deprived and a bit tired",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～気味",
       "sentence": "この部屋は暗い気味だから、もっと明るい照明をつけよう。",
-      "translation": "This room is a bit dark, so let's install brighter lighting.",
+      "translation": "Căn phòng này hơi tối, nên hãy lắp đèn sáng hơn.",
       "translationEn": "This room is a bit dark, so lets install brighter lighting",
       "romaji": "Kono heya wa kurai gimi dakara, motto akarui shoumei wo tsukeyou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This room is a bit dark, so lets install brighter lighting",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～気味",
       "sentence": "彼女は緊張気味で話していました。",
-      "translation": "She was speaking somewhat nervously.",
+      "translation": "Cô ấy nói với vẻ hơi căng thẳng.",
       "translationEn": "She was speaking somewhat nervously",
       "romaji": "Kanojo wa kinchou gimi de hanashite imashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She was speaking somewhat nervously",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～気味",
       "sentence": "彼の声は風邪気味だったね。",
-      "translation": "His voice sounded like he might have a slight cold.",
+      "translation": "Giọng anh ấy nghe như hơi bị cảm.",
       "translationEn": "His voice sounded like he might have a slight cold",
       "romaji": "Kare no koe wa kaze gimi datta ne.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: His voice sounded like he might have a slight cold",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～限り",
       "sentence": "元気な限り、運動し続けます。",
-      "translation": "As long as I'm healthy, I'll keep exercising.",
+      "translation": "Chừng nào còn khỏe, tôi sẽ tiếp tục vận động.",
       "translationEn": "As long as Im healthy, Ill keep exercising",
       "romaji": "Genki na kagiri, undou shi tsuzukemasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As long as Im healthy, Ill keep exercising",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～限り",
       "sentence": "お金がある限り、旅行を楽しみたい。",
-      "translation": "As long as I have money, I'd like to travel.",
+      "translation": "Chừng nào còn tiền, tôi muốn tận hưởng du lịch.",
       "translationEn": "As long as I have money, Id like to travel",
       "romaji": "Okane ga aru kagiri, ryokou o tanoshimitai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As long as I have money, Id like to travel",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～限り",
       "sentence": "彼が話し続ける限り、このプロジェクトのメリットが伝わるでしょう。",
-      "translation": "As long as he keeps talking about it, the benefits of this project will be conveyed.",
+      "translation": "Chừng nào anh ấy còn tiếp tục nói về nó, lợi ích của dự án này sẽ được truyền đạt.",
       "translationEn": "As long as he keeps talking about it, the benefits of this project will be conveyed",
       "romaji": "Kare ga hanashi tsudzukeru kagiri, kono purojekuto no meritto ga tsutawaru deshou.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As long as he keeps talking about it, the benefits of this project will be conveyed",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～限り",
       "sentence": "勉強する限り、試験に合格できる可能性が高まります。",
-      "translation": "As long as you study, you'll have a higher chance of passing the exam.",
+      "translation": "Chừng nào còn học, khả năng đậu kỳ thi sẽ cao hơn.",
       "translationEn": "As long as you study, youll have a higher chance of passing the exam",
       "romaji": "Benkyou suru kagiri, shiken ni goukaku dekiru kanousei ga takamarimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: As long as you study, youll have a higher chance of passing the exam",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～際に",
       "sentence": "出発の際に、パスポートを忘れないでください。",
-      "translation": "When departing, please don't forget your passport.",
+      "translation": "Khi khởi hành, đừng quên hộ chiếu.",
       "translationEn": "When departing, please dont forget your passport",
       "romaji": "Shuppatsu no sai ni, pasupooto wo wasurenai de kudasai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When departing, please dont forget your passport",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～際に",
       "sentence": "地震が起こる際に、すぐに避難してください。",
-      "translation": "When an earthquake occurs, please evacuate immediately.",
+      "translation": "Khi xảy ra động đất, hãy sơ tán ngay.",
       "translationEn": "When an earthquake occurs, please evacuate immediately",
       "romaji": "Jishin ga okoru sai ni, sugu ni hinan shite kudasai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When an earthquake occurs, please evacuate immediately",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～際に",
       "sentence": "日本へ来る際に、お土産をたくさん買うつもりです。",
-      "translation": "When I come to Japan, I plan to buy lots of souvenirs.",
+      "translation": "Khi đến Nhật, tôi định mua nhiều quà lưu niệm.",
       "translationEn": "When I come to Japan, I plan to buy lots of souvenirs",
       "romaji": "Nihon e kuru sai ni, omiyage wo takusan kau tsumori desu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: When I come to Japan, I plan to buy lots of souvenirs",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～際に",
       "sentence": "面接の際に、スーツを着用してください。",
-      "translation": "Please wear a suit when attending the interview.",
+      "translation": "Khi phỏng vấn, hãy mặc vest.",
       "translationEn": "Please wear a suit when attending the interview",
       "romaji": "Mensetsu no sai ni, suutsu wo chakuyou shite kudasai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Please wear a suit when attending the interview",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     }
   ]
 }

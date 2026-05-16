@@ -6,554 +6,360 @@
   "tags": [
     "source-hanabira",
     "n2-grammar-import",
-    "needs-human-review",
-    "vi-machine-draft",
-    "vi-needs-review"
+    "vi-editorial-codex-pass"
   ],
   "examples": [
     {
       "grammarPoint": "～よりほかない",
       "sentence": "試験が近いので、勉強するよりほかない。",
-      "translation": "Since the exam is near, there is no choice but to study.",
+      "translation": "Vì kỳ thi sắp đến, chỉ còn cách học.",
       "translationEn": "Since the exam is near, there is no choice but to study",
       "romaji": "Shiken ga chikai node, benkyou suru yori hoka nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Since the exam is near, there is no choice but to study",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～よりほかない",
       "sentence": "風邪がひどいので、早く寝るよりほかない。",
-      "translation": "My cold is severe, so I have no choice but to go to bed early.",
+      "translation": "Bị cảm nặng nên chỉ còn cách đi ngủ sớm.",
       "translationEn": "My cold is severe, so I have no choice but to go to bed early",
       "romaji": "Kaze ga hidoi node, hayaku neru yori hoka nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: My cold is severe, so I have no choice but to go to bed early",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～よりほかない",
       "sentence": "バスが来ないので、歩くよりほかない。",
-      "translation": "Since the bus isn't coming, I have no choice but to walk.",
+      "translation": "Xe buýt không đến nên chỉ còn cách đi bộ.",
       "translationEn": "Since the bus isnt coming, I have no choice but to walk",
       "romaji": "Basu ga konai node, aruku yori hoka nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Since the bus isnt coming, I have no choice but to walk",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～よりほかない",
       "sentence": "お金がないので、安いものを買うよりほかない。",
-      "translation": "Since I have no money, I have no choice but to buy cheap things.",
+      "translation": "Không có tiền nên chỉ còn cách mua đồ rẻ.",
       "translationEn": "Since I have no money, I have no choice but to buy cheap things",
       "romaji": "Okane ga nai node, yasui mono o kau yori hoka nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Since I have no money, I have no choice but to buy cheap things",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～わけがない",
       "sentence": "彼が怪我をしたから、試合に勝てるわけがない。",
-      "translation": "He got injured, so there's no way he can win the match.",
+      "translation": "Anh ấy bị thương nên không thể nào thắng trận được.",
       "translationEn": "He got injured, so theres no way he can win the match",
       "romaji": "Kare ga kega wo shita kara, shiai ni kateru wake ga nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He got injured, so theres no way he can win the match",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～わけがない",
       "sentence": "嘘ばかり言っている人を、信じるわけがない。",
-      "translation": "There's no way I can believe someone who constantly lies.",
+      "translation": "Không đời nào tôi tin một người toàn nói dối.",
       "translationEn": "Theres no way I can believe someone who constantly lies",
       "romaji": "Uso bakari itte iru hito wo, shinjiru wake ga nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Theres no way I can believe someone who constantly lies",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～わけがない",
       "sentence": "彼女は忙しいから、このパーティーに来るわけがない。",
-      "translation": "She's busy, so there's no way she can come to this party.",
+      "translation": "Cô ấy bận nên không thể nào đến bữa tiệc này.",
       "translationEn": "Shes busy, so theres no way she can come to this party",
       "romaji": "Kanojo wa isogashii kara, kono paatii ni kuru wake ga nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Shes busy, so theres no way she can come to this party",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～わけがない",
       "sentence": "昨日はずっと寝ていたから、その事件を知るわけがない。",
-      "translation": "I was asleep all day yesterday, so there's no way I could know about that incident.",
+      "translation": "Hôm qua tôi ngủ suốt ngày nên không thể nào biết vụ việc đó.",
       "translationEn": "I was asleep all day yesterday, so theres no way I could know about that incident",
       "romaji": "Kinou wa zutto nete ita kara, sono jiken wo shiru wake ga nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: I was asleep all day yesterday, so theres no way I could know about that incident",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～わけだ",
       "sentence": "彼女が遅れたのは、電車が遅れたわけだ。",
-      "translation": "The reason she was late is that the train was delayed.",
+      "translation": "Cô ấy đến muộn là do tàu bị trễ.",
       "translationEn": "The reason she was late is that the train was delayed",
       "romaji": "Kanojo ga okureta no wa, densha ga okureta wake da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The reason she was late is that the train was delayed",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～わけだ",
       "sentence": "授業が面白かったから、みんな熱心に聞いていたわけだ。",
-      "translation": "The class was interesting, so that's why everyone was listening intently.",
+      "translation": "Vì buổi học thú vị nên mọi người mới chăm chú nghe.",
       "translationEn": "The class was interesting, so thats why everyone was listening intently",
       "romaji": "Jugyou ga omoshirokatta kara, minna nesshin ni kiiteita wake da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: The class was interesting, so thats why everyone was listening intently",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～わけだ",
       "sentence": "彼はとても忙しいですから、休みがほとんどないわけだ。",
-      "translation": "He's really busy, which is why he hardly has any time off.",
+      "translation": "Anh ấy rất bận nên hầu như không có ngày nghỉ.",
       "translationEn": "Hes really busy, which is why he hardly has any time off",
       "romaji": "Kare wa totemo isogashii desu kara, yasumi ga hotondo nai wake da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Hes really busy, which is why he hardly has any time off",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～わけだ",
       "sentence": "この問題が難しいから、全然わからないわけだ。",
-      "translation": "This problem is tough, so no wonder I don't understand it at all.",
+      "translation": "Vấn đề này khó nên thảo nào tôi chẳng hiểu gì.",
       "translationEn": "This problem is tough, so no wonder I dont understand it at all",
       "romaji": "Kono mondai ga muzukashii kara, zenzen wakaranai wake da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This problem is tough, so no wonder I dont understand it at all",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～わけではない",
       "sentence": "彼が勉強しないわけではないが、成績があまり良くない。",
-      "translation": "It's not that he doesn't study, but his grades aren't very good.",
+      "translation": "Không phải anh ấy không học, nhưng điểm không tốt lắm.",
       "translationEn": "Its not that he doesnt study, but his grades arent very good",
       "romaji": "Kare ga benkyou shinai wake dewa nai ga, seiseki ga amari yoku nai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its not that he doesnt study, but his grades arent very good",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～わけではない",
       "sentence": "このレストランが高いわけではないけど、毎日通うには少し高いね。",
-      "translation": "It's not that this restaurant is expensive, but it's a bit too pricey to go there every day.",
+      "translation": "Không phải nhà hàng này đắt, nhưng đi mỗi ngày thì hơi tốn.",
       "translationEn": "Its not that this restaurant is expensive, but its a bit too pricey to go there every day",
       "romaji": "Kono resutoran ga takai wake dewa nai kedo, mainichi kayou ni wa sukoshi takai ne.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its not that this restaurant is expensive, but its a bit too pricey to go there every day",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～わけではない",
       "sentence": "彼女が優しくないわけではないが、時々話し方がきついことがある。",
-      "translation": "It's not that she's unkind, but sometimes her manner of speaking can be harsh.",
+      "translation": "Không phải cô ấy không tốt bụng, nhưng đôi khi cách nói khá gắt.",
       "translationEn": "Its not that shes unkind, but sometimes her manner of speaking can be harsh",
       "romaji": "Kanojo ga yasashikunai wake dewa nai ga, tokidoki hanashikata ga kitsui koto ga aru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its not that shes unkind, but sometimes her manner of speaking can be harsh",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～わけではない",
       "sentence": "彼が忙しいわけではないが、時間を上手に使えていないようだ。",
-      "translation": "It's not that he's busy; he just doesn't seem to use his time effectively.",
+      "translation": "Không phải anh ấy bận, có vẻ anh ấy dùng thời gian chưa hiệu quả.",
       "translationEn": "Its not that hes busy; he just doesnt seem to use his time effectively",
       "romaji": "Kare ga isogashii wake dewa nai ga, jikan o jouzu ni tsukaete inai you da.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Its not that hes busy; he just doesnt seem to use his time effectively",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～わけにはいかない",
       "sentence": "試験が近いから、遊ぶわけにはいかない。",
-      "translation": "Since the exam is close, I can't afford to just play around.",
+      "translation": "Kỳ thi sắp đến nên tôi không thể cứ chơi được.",
       "translationEn": "Since the exam is close, I cant afford to just play around",
       "romaji": "Shiken ga chikai kara, asobu wake ni wa ikanai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Since the exam is close, I cant afford to just play around",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～わけにはいかない",
       "sentence": "田中さんが待っているので、遅れるわけにはいかない。",
-      "translation": "Mr. Tanaka is waiting, so I absolutely must not be late.",
+      "translation": "Anh Tanaka đang chờ nên tôi không thể đến muộn.",
       "translationEn": "Mr. Tanaka is waiting, so I absolutely must not be late",
       "romaji": "Tanaka-san ga matteiru node, okureru wake ni wa ikanai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Mr. Tanaka is waiting, so I absolutely must not be late",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～わけにはいかない",
       "sentence": "子供たちのために、この仕事を辞めるわけにはいかない。",
-      "translation": "For the sake of my kids, I can't afford to quit this job.",
+      "translation": "Vì con cái, tôi không thể bỏ công việc này.",
       "translationEn": "For the sake of my kids, I cant afford to quit this job",
       "romaji": "Kodomo-tachi no tame ni, kono shigoto o yameru wake ni wa ikanai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: For the sake of my kids, I cant afford to quit this job",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～わけにはいかない",
       "sentence": "この問題は重要だから、無視するわけにはいかない。",
-      "translation": "This issue is important, so I can't simply ignore it.",
+      "translation": "Vấn đề này quan trọng nên tôi không thể làm ngơ.",
       "translationEn": "This issue is important, so I cant simply ignore it",
       "romaji": "Kono mondai wa juuyou dakara, mushi suru wake ni wa ikanai.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This issue is important, so I cant simply ignore it",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～をきっかけに",
       "sentence": "結婚をきっかけに、彼は真剣に仕事を頑張り始めた。",
-      "translation": "Getting married was the catalyst for him to start working seriously.",
+      "translation": "Việc kết hôn là động lực khiến anh ấy bắt đầu làm việc nghiêm túc.",
       "translationEn": "Getting married was the catalyst for him to start working seriously",
       "romaji": "Kekkon o kikkake ni, kare wa shinken ni shigoto o ganbarihajimeta.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Getting married was the catalyst for him to start working seriously",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～をきっかけに",
       "sentence": "あの出会いをきっかけに、私たちは友達になりました。",
-      "translation": "That encounter led us to become friends.",
+      "translation": "Nhờ cuộc gặp gỡ đó, chúng tôi đã trở thành bạn.",
       "translationEn": "That encounter led us to become friends",
       "romaji": "Ano deai o kikkake ni, watashitachi wa tomodachi ni narimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: That encounter led us to become friends",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～をきっかけに",
       "sentence": "コンサートをきっかけに、彼女は音楽の道に進むことを決めました。",
-      "translation": "Inspired by the concert, she decided to pursue music.",
+      "translation": "Buổi hòa nhạc là cơ duyên khiến cô ấy quyết định đi theo con đường âm nhạc.",
       "translationEn": "Inspired by the concert, she decided to pursue music",
       "romaji": "Konsaato o kikkake ni, kanojo wa ongaku no michi ni susumu koto o kimemashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Inspired by the concert, she decided to pursue music",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～をきっかけに",
       "sentence": "留学をきっかけに、私の外国語スキルが向上しました。",
-      "translation": "Studying abroad gave me the chance to improve my foreign language skills.",
+      "translation": "Du học là cơ hội giúp năng lực ngoại ngữ của tôi tiến bộ.",
       "translationEn": "Studying abroad gave me the chance to improve my foreign language skills",
       "romaji": "Ryuugaku o kikkake ni, watashi no gaikokugo sukiru ga koujou shimashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Studying abroad gave me the chance to improve my foreign language skills",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～を～として",
       "sentence": "彼は教師を職業として働いています。",
-      "translation": "He works as a teacher.",
+      "translation": "Anh ấy làm nghề giáo viên.",
       "translationEn": "He works as a teacher",
       "romaji": "Kare wa kyoushi o shokugyou toshite hataraite imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: He works as a teacher",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～を～として",
       "sentence": "彼女はリーダーを役割として受け入れました。",
-      "translation": "She accepted the role of leader.",
+      "translation": "Cô ấy đã chấp nhận vai trò lãnh đạo.",
       "translationEn": "She accepted the role of leader",
       "romaji": "Kanojo wa riidaa o yakuwari toshite ukeiremashita.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She accepted the role of leader",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～を～として",
       "sentence": "私たちは彼を仲間として信頼しています。",
-      "translation": "We trust him as one of our own (a close companion).",
+      "translation": "Chúng tôi tin tưởng anh ấy như một người đồng đội.",
       "translationEn": "We trust him as one of our own (a close companion)",
       "romaji": "Watashitachi wa kare o nakama toshite shinrai shite imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: We trust him as one of our own (a close companion)",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～を～として",
       "sentence": "このアーティストは伝統を基盤として作品を作ります。",
-      "translation": "This artist creates works with tradition as the foundation.",
+      "translation": "Nghệ sĩ này sáng tác tác phẩm dựa trên nền tảng truyền thống.",
       "translationEn": "This artist creates works with tradition as the foundation",
       "romaji": "Kono aatisuto wa dentou o kiban toshite sakuhin o tsukurimasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This artist creates works with tradition as the foundation",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～を中心に",
       "sentence": "このイベントは音楽を中心に楽しまれています。",
-      "translation": "This event is mainly enjoyed for its music.",
+      "translation": "Sự kiện này chủ yếu xoay quanh âm nhạc.",
       "translationEn": "This event is mainly enjoyed for its music",
       "romaji": "Kono ibento wa ongaku o chuushin ni tanoshimarete imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: This event is mainly enjoyed for its music",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～を中心に",
       "sentence": "彼の仕事は東京を中心に行われています。",
-      "translation": "His work is primarily conducted in and around Tokyo.",
+      "translation": "Công việc của anh ấy chủ yếu diễn ra ở Tokyo và khu vực lân cận.",
       "translationEn": "His work is primarily conducted in and around Tokyo",
       "romaji": "Kare no shigoto wa Toukyou o chuushin ni okonawarete imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: His work is primarily conducted in and around Tokyo",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～を中心に",
       "sentence": "彼女は健康を中心に本を書いています。",
-      "translation": "She’s writing a book focusing on health.",
+      "translation": "Cô ấy đang viết một cuốn sách tập trung vào sức khỏe.",
       "translationEn": "She’s writing a book focusing on health",
       "romaji": "Kanojo wa kenkou o chuushin ni hon o kaite imasu.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: She’s writing a book focusing on health",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     },
     {
       "grammarPoint": "～を中心に",
       "sentence": "最近の研究は環境保護を中心に行われている。",
-      "translation": "Recent research is being carried out with a primary focus on environmental protection.",
+      "translation": "Nghiên cứu gần đây được tiến hành với trọng tâm là bảo vệ môi trường.",
       "translationEn": "Recent research is being carried out with a primary focus on environmental protection",
       "romaji": "Saikin no kenkyuu wa kankyou hogo o chuushin ni okonawarete iru.",
       "tags": [
         "source-hanabira",
-        "needs-vi-editorial",
-        "machine-translated-vi",
-        "needs-human-review",
-        "vi-machine-draft",
-        "vi-needs-review"
-      ],
-      "translationViDraft": "Bản dịch ví dụ cần biên tập từ: Recent research is being carried out with a primary focus on environmental protection",
-      "translationViSource": "internal-en-example-draft"
+        "vi-editorial-codex-pass"
+      ]
     }
   ]
 }
