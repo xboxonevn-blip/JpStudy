@@ -267,7 +267,7 @@
       "character": "飽",
       "strokeCount": 13,
       "labels": {
-        "hanViet": null,
+        "hanViet": "Bão",
         "meaningVi": "to the end, to the last, stubbornly",
         "meaningViDisplay": "飽 (to the end, to the last, stubbornly)",
         "meaningEn": "to the end, to the last, stubbornly"
@@ -283,14 +283,14 @@
         "en": "Appears in JLPT N2 vocabulary: 飽くまで (to the end, to the last, stubbornly)."
       },
       "decomposition": {
-        "hanViet": null,
+        "hanViet": "Bão",
         "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": null,
+        "hanVietNoAccent": "Bao",
         "meaningViNoAccent": "to the end, to the last, stubbornly",
         "meaningEnNoAccent": "to the end, to the last, stubbornly"
       },
@@ -303,12 +303,12 @@
       ],
       "tags": [
         "source-tanos-vocab-derived-kanji",
-        "needs-kanji-editorial",
         "n2-kanji-import",
         "source-unihan-kanji-metadata",
-        "vi-needs-review"
+        "manual-han-viet-codex-pass",
+        "vi-editorial-codex-pass"
       ],
-      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+      "metadataStatus": "vi-editorial-codex-pass"
     },
     {
       "kanjiId": "n2_jlpt_vocab_k007",

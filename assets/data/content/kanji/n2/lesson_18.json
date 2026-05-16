@@ -167,7 +167,7 @@
       "character": "煙",
       "strokeCount": 13,
       "labels": {
-        "hanViet": null,
+        "hanViet": "Yên",
         "meaningVi": "chimney",
         "meaningViDisplay": "煙 (chimney)",
         "meaningEn": "chimney"
@@ -183,14 +183,14 @@
         "en": "Appears in JLPT N2 vocabulary: 煙突 (chimney)."
       },
       "decomposition": {
-        "hanViet": null,
+        "hanViet": "Yên",
         "structure": "unknown",
         "components": [],
         "componentNames": [],
         "relatedKanji": []
       },
       "search": {
-        "hanVietNoAccent": null,
+        "hanVietNoAccent": "Yen",
         "meaningViNoAccent": "chimney",
         "meaningEnNoAccent": "chimney"
       },
@@ -203,12 +203,12 @@
       ],
       "tags": [
         "source-tanos-vocab-derived-kanji",
-        "needs-kanji-editorial",
         "n2-kanji-import",
         "source-unihan-kanji-metadata",
-        "vi-needs-review"
+        "manual-han-viet-codex-pass",
+        "vi-editorial-codex-pass"
       ],
-      "metadataStatus": "partial-unihan-needs-manual-han-viet"
+      "metadataStatus": "vi-editorial-codex-pass"
     },
     {
       "kanjiId": "n2_jlpt_vocab_k141",
