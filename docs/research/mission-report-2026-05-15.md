@@ -5,16 +5,16 @@
 JpStudy-v2 is not ready for a broad 100-user mixed N5-N1 beta.
 
 It is ready for the next controlled gate: a 5-10 learner pilot after the
-remaining ops blockers are closed. A fresh manual deploy of `3ae2ded9` proved
-the current `main` can serve on `https://jpstudy.web.app`, legacy
-`https://jpstudy-v2.web.app` remains `404`, CI is green, and live
-resource/Lighthouse probes pass. Anonymous Auth is now enabled and live
-`accounts:signUp` returns `200`, but Storage-backed legacy migration is gated
-off until Firebase Storage is provisioned. Remaining blockers before the pilot
-are Firebase Storage setup, the first secret-backed GitHub deploy run, and real
-Sentry operational proof and a larger GA4 learning-event sample. Recruit N5/N4
-first, then add scoped N3/N2 testers with the N3+ route/scope note for
-non-Minna routing and incomplete N1 kanji coverage.
+remaining ops blockers are closed. Later deploy evidence proved current `main`
+can serve on `https://jpstudy.web.app`, legacy `https://jpstudy-v2.web.app`
+remains `404`, CI is green, and live resource/Lighthouse probes pass.
+Anonymous Auth is now enabled and live `accounts:signUp` returns `200`, but
+Storage-backed legacy migration is gated off until Firebase Storage is
+provisioned. D2 content now reports `0` machine/open-review items across N5-N1;
+N3/N2/N1 still need user spot-check before any human-approval claim. Remaining
+blockers before the pilot are legal approval, Firebase Storage setup, Sentry
+operational proof, deletion proof, GA4 retention proof, exported GA4 learning
+rows, and later App Check enforcement.
 
 ## Highest-Leverage Findings Shipped
 
@@ -67,8 +67,8 @@ non-Minna routing and incomplete N1 kanji coverage.
 
 1. Phase 14-19 auth: account linking, soft upgrade UI, community gating, and
    cleanup functions.
-2. Upper-level content cleanup: resolve N3 grammar review tags and perform real
-   editorial passes for N1/N2 draft-tier grammar examples and vocab.
+2. Upper-level content follow-up: user spot-check for N3/N2/N1 editorial
+   samples, plus N1 kanji scope expansion beyond current app coverage.
 3. Native release: Android/iOS Firebase App Check, package restrictions, and
    store-ready build pipelines.
 4. Performance: live Lighthouse/trace budgets, route-level resource budgets,
@@ -83,12 +83,11 @@ Run a post-deploy beta-readiness cycle:
 1. Set up Firebase Storage for project `jpstudy-v2`, deploy `storage.rules`,
    verify CORS from `https://jpstudy.web.app`, then enable
    `JPSTUDY_ENABLE_LEGACY_STORAGE_MIGRATION=true`.
-2. Configure GitHub secrets: `FIREBASE_TOKEN`, `JPSTUDY_RECAPTCHA_SITE_KEY`,
-   and optional `JPSTUDY_SENTRY_DSN`.
-3. Push a secret-backed deploy through CI and capture automated evidence for
-   primary `200`, legacy `404`, route smoke, resource smoke, and Lighthouse.
-4. Keep polling GA4 BigQuery for SRS, micro-quiz, and session-quality rows; the
-   first export sample has only open/onboarding events.
-5. Run a narrow live UAT matrix for N5/N4 plus one N3/N2 path after deployment.
-6. Decide pilot scope: N5/N4 controlled pilot, or delay until upper-level
-   vocab queues and advanced-reader discovery are production-proven.
+2. Configure `JPSTUDY_SENTRY_DSN`, run the Sentry smoke path, and record the
+   first issue URL.
+3. Record legal approval and GA4 retention proof in the structured proof state.
+4. Execute the deletion runbook against a dedicated test UID after Storage and
+   GA4 operator access are ready.
+5. Keep polling GA4 BigQuery for SRS, micro-quiz, and session-quality rows; the
+   current export sample has only open/onboarding events.
+6. Decide pilot scope after the remaining operational proof gates close.
