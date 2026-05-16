@@ -10,6 +10,7 @@ const {
   buildMarkdownReport,
   buildOperatorUrls,
   collectEvidence,
+  mergeSentryEvidence,
   parseArgs,
 } = require('../../../tool/research/launch_readiness_report');
 
@@ -171,6 +172,37 @@ test('collectEvidence keeps legal blocked while draft notice remains', () => {
   assert.match(evidence.ga4.adminRetentionSource, /proof-state/);
   assert.equal(evidence.appCheck.enforced, true);
   assert.match(evidence.appCheck.source, /proof-state/);
+});
+
+test('mergeSentryEvidence requires first deployed issue proof', () => {
+  const readyWithoutProof = mergeSentryEvidence({
+    sentry: { ready: true, reason: 'ready-to-run-sentry-smoke' },
+    proofState: { path: 'proof.json', state: {} },
+  });
+
+  assert.equal(readyWithoutProof.ready, false);
+  assert.equal(readyWithoutProof.reason, 'sentry-first-issue-proof-missing');
+  assert.equal(readyWithoutProof.eventSent, false);
+
+  const readyWithProof = mergeSentryEvidence({
+    sentry: { ready: true, reason: 'ready-to-run-sentry-smoke' },
+    proofState: {
+      path: 'proof.json',
+      state: {
+        sentry: {
+          eventSent: true,
+          sentAt: '2026-05-17T05:00:00+07:00',
+          issueUrl: 'https://sentry.io/organizations/jpstudy/issues/1/',
+          workflowRun: 'https://github.com/xboxonevn-blip/JpStudy/actions/runs/1',
+          evidence: 'JpStudy Sentry smoke event observed in Sentry.',
+        },
+      },
+    },
+  });
+
+  assert.equal(readyWithProof.ready, true);
+  assert.equal(readyWithProof.eventSent, true);
+  assert.equal(readyWithProof.reason, 'sentry-first-issue-proof');
 });
 
 test('collectEvidence ignores incomplete proof-state metadata', () => {

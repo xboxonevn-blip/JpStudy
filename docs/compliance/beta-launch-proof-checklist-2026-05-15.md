@@ -18,14 +18,15 @@ Structured manual proof state:
 npm run report:launch-readiness -- --json --proof-state docs/compliance/launch-proof-state.json
 ```
 
-The proof state file may close only manual gates: legal approval, deletion
-execution, GA4 retention UI proof, and App Check enforcement. Each gate still
-requires explicit metadata. Date fields must parse as dates, and legal
-approval must reference an existing git commit. Sentry and GA4 learning-event
-export gates remain source-verified and cannot be closed by the proof state
-file. Firebase Storage is intentionally descoped for beta and recorded as
-deferred metadata because the app is local-first and the project remains on
-Spark.
+The proof state file may close only manual gates: legal approval, Sentry
+first-issue proof, deletion execution, GA4 retention UI proof, and App Check
+enforcement. Each gate still requires explicit metadata. Date fields must
+parse as dates, legal approval must reference an existing git commit, and
+Sentry proof must include both the workflow run URL and the first issue URL.
+GA4 learning-event export remains source-verified and cannot be closed by the
+proof state file. Firebase Storage is intentionally descoped for beta and
+recorded as deferred metadata because the app is local-first and the project
+remains on Spark.
 
 Latest post-descope run on `2026-05-17T04:07+07:00` returned
 `complete=false` with blockers: `legal-approval-missing`,
@@ -57,7 +58,9 @@ Use the project owner account `chung.phukiengiabuon@gmail.com`
 2. Sentry proof:
    - Add GitHub Actions secret `JPSTUDY_SENTRY_DSN`.
    - Run GitHub Actions `CI` manually with `sentry_smoke=true`.
-   - Record the first Sentry issue URL in the checklist/research docs.
+   - Fill `docs/compliance/launch-proof-state.json`:
+     `sentry.eventSent=true`, `sentry.sentAt`, `sentry.issueUrl`,
+     `sentry.workflowRun`, and `sentry.evidence`.
 3. Firebase Storage:
    - Descoped for beta by owner decision on `2026-05-17`.
    - Rationale: new Cloud Storage for Firebase buckets require Blaze, while

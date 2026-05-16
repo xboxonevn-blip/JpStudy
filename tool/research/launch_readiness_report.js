@@ -135,6 +135,15 @@ function gitCommitExists(value) {
   }
 }
 
+function isValidUrl(value) {
+  try {
+    const url = new URL(value);
+    return url.protocol === 'https:' || url.protocol === 'http:';
+  } catch (_) {
+    return false;
+  }
+}
+
 function legalEvidence({ approved, proofState }) {
   const draftSource = legalDraftSource();
   const proof = validateProofGate({
@@ -184,6 +193,45 @@ function legalDraftSource() {
   return /legalDraftNotice/.test(screen) || /review-needed draft/.test(docs)
     ? 'legalDraftNotice/review-needed draft present'
     : '';
+}
+
+function mergeSentryEvidence({ sentry, proofState }) {
+  if (!sentry.ready) return sentry;
+  const proof = validateProofGate({
+    proofState,
+    gate: 'sentry',
+    statusField: 'eventSent',
+    requiredFields: ['sentAt', 'issueUrl', 'workflowRun', 'evidence'],
+    validators: {
+      sentAt: (value) => (isValidDate(value) ? null : 'must be a date'),
+      issueUrl: (value) => (isValidUrl(value) ? null : 'must be a URL'),
+      workflowRun: (value) => (isValidUrl(value) ? null : 'must be a URL'),
+    },
+  });
+  if (proof?.ok) {
+    return {
+      ...sentry,
+      ready: true,
+      eventSent: true,
+      reason: 'sentry-first-issue-proof',
+      proofSource: proof.source,
+    };
+  }
+  return {
+    ...sentry,
+    ready: false,
+    eventSent: false,
+    reason: 'sentry-first-issue-proof-missing',
+    proofSource: proof?.source || 'no Sentry first-issue proof found',
+    blockers: [
+      ...(sentry.blockers || []),
+      'Sentry first deployed issue proof is missing',
+    ],
+    nextActions: [
+      ...(sentry.nextActions || []),
+      'Run workflow_dispatch with sentry_smoke=true, then record the Sentry issue URL in proof state.',
+    ],
+  };
 }
 
 function deletionEvidence({ executed, proofState }) {
@@ -330,7 +378,10 @@ function collectEvidence(args) {
       proofState,
     }),
     sentry: sentryRun.ok
-      ? sentryRun.value.status.readiness
+      ? mergeSentryEvidence({
+          sentry: sentryRun.value.status.readiness,
+          proofState,
+        })
       : { ready: false, reason: sentryRun.error },
     storage,
     deletion: {
@@ -376,6 +427,9 @@ function nextActionFor(blocker) {
   }
   if (blocker === 'sentry-dsn-missing') {
     return 'Set JPSTUDY_SENTRY_DSN and run workflow_dispatch with sentry_smoke=true.';
+  }
+  if (blocker === 'sentry-first-issue-proof-missing') {
+    return 'Run workflow_dispatch with sentry_smoke=true, then record Sentry issue proof in docs/compliance/launch-proof-state.json.';
   }
   if (blocker === 'deletion-proof-missing') {
     return 'Execute the deletion runbook against a dedicated test UID, then record deletion proof in docs/compliance/launch-proof-state.json.';
@@ -505,5 +559,6 @@ module.exports = {
   buildMarkdownReport,
   buildOperatorUrls,
   collectEvidence,
+  mergeSentryEvidence,
   parseArgs,
 };
