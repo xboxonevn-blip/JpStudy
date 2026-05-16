@@ -2,6 +2,24 @@
 
 Commit: `e468d6c7`
 
+## 2026-05-16 Source Route Bootstrap Addendum
+
+Evidence:
+- `50e91392 fix(kanji): sync hub with persisted level`
+- `a0dd28ab fix(app): gate router on persisted bootstrap`
+- `flutter analyze lib test` passed.
+- `flutter test` passed with `2279` tests.
+
+Scope: local source direct-route reliability. The app now withholds router
+content until `appInitProvider` has loaded persisted onboarding state, which
+prevents init-state screens from reading a null level and defaulting to N5.
+Kanji Hub also follows late `studyLevelProvider` changes after first frame, so
+direct `/kanji` no longer has a separate stale internal selected-level path.
+
+Updated source verdict: the local route-bootstrap class of N5 fallback is
+closed by source tests. Broad beta still stays FAIL until the fixed source is
+deployed and the live route matrix is rerun across N5-N1.
+
 ## 2026-05-15 Manual Deploy Re-Check Addendum
 
 Evidence:
@@ -61,7 +79,7 @@ The N5 core module path is viable after earlier Linh fixes, and several upper-le
 
 1. Live channel parity and route-level bootstrap are not trustworthy.
    - P2-P5 all reproduced direct-route fallback to N5 on live.
-   - Local source now has an app-shell init patch and direct grammar regression test, but production evidence still fails.
+   - Local source now has a global app-bootstrap gate plus Kanji Hub level-sync regression tests, but live route-matrix evidence after this patch is still missing.
    - Live `/exam-center` remains stale/empty compared with local rich route mapping.
 
 2. Onboarding and planning do not model real study contexts.

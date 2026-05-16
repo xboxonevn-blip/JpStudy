@@ -132,15 +132,15 @@ Current upper-kanji metadata note: Q2.6 originally sampled N3/N2/N1 kanji and fo
 
 Current D3 blocker: UI Vietnamese is structurally present in `app_language.dart` (`680` returns per locale, no blanks), but `1,893` Vietnamese lines bypass it after excluding research helper code. Runtime Dart mojibake and docs decode errors are currently guarded at `0` hits. Q3.4 sampled `100` strings: `92/100` clean, `8/100` raw-English-term warnings. Q3.5 recommends no full ARB migration before beta: surface is `140` files and `5,219` `AppLanguage.en/vi/ja` references. Q3.6 found `41` raw English plural-risk strings and `0` ICU usage; central `AppLanguage` helpers plus vocab/feature-local follow-ups reduced the tracked plural-risk grep to `0` matches.
 
-Current D4.P2 blocker: N3/VI works after root start, and the latest live vocab re-check shows Hajimete N3 plus Shin Kanzen N3 open with real counts. Remaining P2 risks are direct-route/channel trust outside the checked vocab slice, `/exam-center` parity, mobile reading CTA occlusion, and lack of a sharper busy-professional plan.
+Current D4.P2 blocker: N3/VI works after root start, and the latest live vocab re-check shows Hajimete N3 plus Shin Kanzen N3 open with real counts. Source now gates router mount on persisted bootstrap (`a0dd28ab`) and syncs Kanji Hub's late persisted level (`50e91392`), but live direct-route matrix proof after deploy is still missing. Remaining P2 risks are `/exam-center` parity, mobile reading CTA occlusion, and lack of a sharper busy-professional plan.
 
 Current D4.P3 blocker: N2/VI root start works, and the latest live vocab re-check shows Hajimete N2 plus Shin Kanzen N2 open with real counts. Mai's 3-hour/day cramming need is still not represented by onboarding or the daily plan; group study is share/roadmap only.
 
-Current D4.P4 blocker: N4/VI root and slow-tap learning plan work at tablet 125% zoom, but live direct study routes fall to N5. There is no travel/fun study goal and no visible font-size/accessibility setting.
+Current D4.P4 blocker: N4/VI root and slow-tap learning plan work at tablet 125% zoom. Source route-bootstrap fixes are in place, but live direct study routes still need a post-deploy route-matrix retest. There is no travel/fun study goal and no visible font-size/accessibility setting.
 
 Current D4.P5 blocker: N1 immersion content exists after root init, and the latest live vocab re-check shows Hajimete N1 plus Shin Kanzen N1 open with real counts while N1+ correctly remains future scope. Advanced-reader discovery is still incomplete: no obvious news/current-world reading path and no public claim of full N1 kanji coverage.
 
-Current D4 synthesis blocker: P2-P5 still fail broad beta readiness, but the live upper-vocab availability blocker is cleared. Universal priority has shifted to external launch proofs, route-matrix confidence beyond the vocab slice, and explicit persona scope limits.
+Current D4 synthesis blocker: P2-P5 still fail broad beta readiness, but the live upper-vocab availability blocker is cleared and source route-bootstrap fallback has a regression suite. Universal priority has shifted to external launch proofs, live route-matrix confidence after deploy, and explicit persona scope limits.
 
 Current hosting posture: primary web Hosting is now `hosting:jpstudy` at `https://jpstudy.web.app`. Legacy default site `hosting:jpstudy-v2` / `https://jpstudy-v2.web.app` was disabled on `2026-05-14T20:18+07` with Firebase release type `SITE_DISABLE`; it still exists as a Firebase default site identity but should not receive deploys. Local `.firebaserc`, `firebase.json`, and release docs now target only `hosting:jpstudy`.
 

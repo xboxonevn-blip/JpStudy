@@ -399,3 +399,10 @@
 - Actual observation: N1 Tanos vocab had 3,463 exact matches in the already reviewed N1 Hajimete set, leaving only 13 unmatched terms for manual translation. Reusing reviewed internal content reduced risk versus re-translating every gloss from English.
 - Delta: +50 percentage points on confidence that internal reviewed-source alignment is the safest path for large content batches.
 - Updated belief: D2 editorial work should first search for trusted in-repo equivalents, then translate only unmatched content. Launch-tier evidence still requires audit counts plus spot-check samples; Codex must not add `vi-human-approved`.
+
+## 2026-05-16T23:51:35+07:00 - Direct-route trust needed a real bootstrap gate
+
+- Prior belief: watching `appInitProvider` at the app level was probably enough, because reactive screens would update after persisted level loaded.
+- Actual observation: screens with internal init-time state can still read null and default to N5 before app init resolves. Kanji Hub also had a second stale path because it copied the level into local state after first frame.
+- Delta: -35 percentage points on confidence that provider watch alone closes deep-link fallback; +45 percentage points on confidence after adding a router bootstrap gate and a Kanji late-level sync regression.
+- Updated belief: route trust requires preventing route widgets from mounting until persisted state is ready, plus tests for any screen that mirrors provider state internally.
