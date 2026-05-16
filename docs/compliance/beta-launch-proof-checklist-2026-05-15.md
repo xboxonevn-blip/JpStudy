@@ -251,13 +251,13 @@ source-verifiable GA4 BigQuery export.
 Current status:
 
 - Live client emission is proven by Playwright network capture, latest recheck
-  `2026-05-16T10:37+07:00`:
+  `2026-05-16T17:17+07:00`:
   - `srs_review_completed`: `22` batched vocab review rows, GA responses `204`.
-  - `n5_micro_quiz_completed`: GA response `204`; params
-    `correct_count=4`, `total_count=10`, `accuracy=0.4`.
+  - `n5_micro_quiz_completed`: GA response `204`; latest quiz-pass params
+    `correct_count=10`, `total_count=10`, `accuracy=1.0`.
   - `session_quality_rated`: GA response `204`; params `mode=test`,
     `rating=5`.
-- Export ingestion is still pending. Recheck on `2026-05-16T10:38+07:00`
+- Export ingestion is still pending. Recheck on `2026-05-16T17:20+07:00`
   found daily tables `analytics_536663906.events_20260514` and
   `analytics_536663906.events_20260515`, but the learning rows are not in
   BigQuery yet.
@@ -271,8 +271,8 @@ Evidence still required:
 - Confirm `eventCounts` includes `srs_review_completed`,
   `n5_micro_quiz_completed`, and `session_quality_rated`.
 - Confirm `northStar.reviewGatePasses` can count the 20-review SRS gate.
-- For a nonzero NS quiz-gate sample, repeat the micro-quiz with at least 70%
-  accuracy. The latest session-quality smoke already proves a `5/5` event.
+- The nonzero NS quiz-gate client sample is already proven at `10/10`.
+  The latest session-quality smoke already proves a `5/5` event.
 
 ## 8. App Check Enforcement Proof
 
