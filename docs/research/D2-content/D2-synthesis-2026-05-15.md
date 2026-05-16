@@ -19,7 +19,7 @@ dart run tool\research\content_vi_status_report.dart
 | Files scanned | 781 |
 | Items scanned | 23,444 |
 | Files with machine VI | 150 |
-| Files with open review tags | 75 |
+| Files with open review tags | 173 |
 | Files with approval signals | 600 |
 
 | Level | Items | Machine | Open review | Approved |
@@ -27,15 +27,15 @@ dart run tool\research\content_vi_status_report.dart
 | N5 | 3,497 | 0 | 0 | 3,497 |
 | N4 | 3,376 | 0 | 0 | 3,376 |
 | N3 | 3,412 | 0 | 100 | 3,312 |
-| N2 | 4,770 | 2,752 | 955 | 2,018 |
-| N1 | 8,389 | 4,701 | 1,225 | 3,688 |
+| N2 | 4,770 | 2,752 | 1,004 | 1,969 |
+| N1 | 8,389 | 4,701 | 1,278 | 3,635 |
 
 | Dataset | Items | Machine | Open review | Approved |
 |---|---:|---:|---:|---:|
 | grammar | 754 | 436 | 536 | 218 |
 | grammar_examples | 4,924 | 1,744 | 1,744 | 3,180 |
 | vocab | 16,712 | 5,273 | 0 | 11,439 |
-| kanji | 929 | 0 | 0 | 929 |
+| kanji | 929 | 0 | 102 | 827 |
 | immersion | 125 | 0 | 0 | 125 |
 
 ## Launch Tier
@@ -63,8 +63,8 @@ N1/N2 are draft-tier, not launch-tier:
 - `50` files under `assets/data/content/grammar_examples/n1/` and `assets/data/content/grammar_examples/n2/` still contain placeholder Vietnamese like `Bản dịch ví dụ cần biên tập từ: [English]`.
 - Those 50 files are tagged honestly with `vi-machine-draft` and `vi-needs-review`.
 - They no longer carry `vi-human-approved`.
-- N2 current debt: `2,752` machine items, `955` open-review items.
-- N1 current debt: `4,701` machine items, `1,225` open-review items.
+- N2 current debt: `2,752` machine items, `1,004` open-review items.
+- N1 current debt: `4,701` machine items, `1,278` open-review items.
 - N1 kanji scope is still `889 / 2,000`; do not market full N1 kanji coverage.
 
 ## Verification
