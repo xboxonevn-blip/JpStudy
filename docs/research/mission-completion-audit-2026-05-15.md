@@ -148,8 +148,9 @@ These prevent marking the active goal complete:
 Operator handoff for these proof gates:
 `docs/compliance/beta-launch-proof-checklist-2026-05-15.md`.
 Manual proof metadata should be recorded in
-`docs/compliance/launch-proof-state.json`; that file cannot close Sentry,
-Storage, or GA4 learning-event export gates.
+`docs/compliance/launch-proof-state.json`; it now records Sentry first-issue
+proof metadata after DSN-backed smoke, but it cannot close Storage or GA4
+learning-event export gates.
 
 ## Verdict
 
