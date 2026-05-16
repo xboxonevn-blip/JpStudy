@@ -73,7 +73,7 @@ Use the project owner account `chung.phukiengiabuon@gmail.com`
 
 ## 1. GitHub Actions Secret-Backed Deploy
 
-Status: completed on `main`; latest re-confirmed on commit `a19a3ccc`.
+Status: completed on `main`; latest re-confirmed on commit `92658952`.
 
 Goal: prove `deploy-hosting` performs a real build/deploy/live-smoke/Lighthouse
 run on `main`, not only the skip-safe wrapper.
@@ -94,7 +94,7 @@ Operator note:
 Evidence recorded:
 
 - GitHub Actions run URL:
-  `https://github.com/xboxonevn-blip/JpStudy/actions/runs/25957463659`
+  `https://github.com/xboxonevn-blip/JpStudy/actions/runs/25962998615`
 - `deploy-hosting` job step list shows these steps `success`, not
   `skipped`:
   - `Build web for production`
@@ -108,9 +108,9 @@ Evidence recorded:
   Playwright visual smoke on `2026-05-16T08:05+07:00` checked Kanji radical
   headers, Han-Viet rules, and Review Forecast labels on
   `https://jpstudy.web.app`.
-- Latest CI recheck on `2026-05-16T15:50+07:00` completed
+- Latest CI recheck on `2026-05-16T20:35+07:00` completed
   `ui-string-guard`, `firebase-security-rules`, and `deploy-hosting` with
-  `success` on commit `a19a3ccc` in GitHub Actions run `25957463659`.
+  `success` on commit `92658952` in GitHub Actions run `25962998615`.
 
 ## 2. Sentry First-Issue Proof
 
@@ -119,7 +119,7 @@ Goal: prove source-wired Sentry is operational in a deployed web build.
 Current status:
 
 - Source wiring and the disabled-by-default smoke trigger are deployed on
-  `main`; latest CI/deploy proof is `a19a3ccc`.
+  `main`; latest CI/deploy proof is `92658952`.
 - Manual CI smoke path is available through GitHub Actions `workflow_dispatch`
   input `sentry_smoke=true`. When `JPSTUDY_SENTRY_DSN` is present, the workflow
   builds with `JPSTUDY_SENTRY_SMOKE_EVENT=true`, deploys, and opens

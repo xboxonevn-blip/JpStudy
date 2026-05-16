@@ -28,7 +28,7 @@ The active mission is complete only if all are true:
 | T6-T10 live feedback fixes | Existing audit maps T6-T10 to commits/tests | Passed |
 | D2 editorial approval | Current audit `a80fb702 docs(content): D2 all-levels launch-tier audit` reports N5-N1 machine/open-review `0/0`; no `vi-human-approved` was added by Codex, and N3/N2/N1 spot-check samples remain available for user review | Passed; no human approval claimed |
 | Firebase Auth deletion tooling | Commit `df27cc4b tooling(deletion): add audited Firebase Auth delete helper`; `npm run test:research-tooling` passed 35 tests | Passed |
-| CI/deploy latest | GitHub Actions run `25957463659` for commit `a19a3ccc`: `ui-string-guard`, `firebase-security-rules`, `deploy-hosting` all `success` | Passed |
+| CI/deploy latest | GitHub Actions run `25962998615` for commit `92658952`: `ui-string-guard`, `firebase-security-rules`, `deploy-hosting` all `success` | Passed |
 | Launch readiness aggregate | `npm run report:launch-readiness -- --json --proof-state docs/compliance/launch-proof-state.json` | Failed |
 | Sentry operational proof | `npm run report:sentry-readiness -- --json` reports `JPSTUDY_SENTRY_DSN=false` | Missing |
 | Storage migration proof | `firebase deploy --only storage --project jpstudy-v2 --dry-run` fails: Storage not set up | Missing |

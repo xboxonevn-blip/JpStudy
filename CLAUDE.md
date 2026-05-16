@@ -154,8 +154,8 @@ Active workstream status (as of 2026-05-16):
   including anonymous Auth bootstrap and legacy migration gating.
 - Sprint 1-7 implementation/docs are substantially complete. Do not restart
   completed work without checking `mission-completion-audit-2026-05-15.md`.
-- Latest source/CI/deploy proof: commit `a19a3ccc`, GitHub Actions run
-  `25957463659` succeeded. `ui-string-guard`, `firebase-security-rules`,
+- Latest source/CI/deploy proof: commit `92658952`, GitHub Actions run
+  `25962998615` succeeded. `ui-string-guard`, `firebase-security-rules`,
   and secret-backed `deploy-hosting` all completed with `success`, including
   production build, primary deploy, primary/legacy smoke, live resource smoke,
   and Lighthouse live gate.

@@ -82,7 +82,7 @@ Local commands run during the completion audit:
 GitHub Actions summary:
 
 - Current source gates pass on `main`. Latest verified run:
-  `25952812357` on `df27cc4b`.
+  `25962998615` on `92658952`.
 - `ui-string-guard`, `firebase-security-rules`, and `deploy-hosting` all
   completed with `success`.
 - `deploy-hosting` ran the real secret-backed path: production web build,
