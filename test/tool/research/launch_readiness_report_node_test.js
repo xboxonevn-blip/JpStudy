@@ -151,3 +151,25 @@ test('collectEvidence ignores incomplete proof-state metadata', () => {
   assert.equal(evidence.appCheck.enforced, false);
   assert.match(evidence.appCheck.source, /missing evidence/);
 });
+
+test('collectEvidence does not close gates from manual flags alone', () => {
+  const evidence = collectEvidence({
+    skipLive: true,
+    legalApproved: true,
+    deletionProofExecuted: true,
+    appCheckEnforced: true,
+  });
+
+  assert.equal(evidence.legal.approved, false);
+  assert.match(evidence.legal.source, /manual flag --legal-approved ignored/);
+  assert.equal(evidence.deletion.executed, false);
+  assert.match(
+    evidence.deletion.source,
+    /manual flag --deletion-proof-executed ignored/,
+  );
+  assert.equal(evidence.appCheck.enforced, false);
+  assert.match(
+    evidence.appCheck.source,
+    /manual flag --app-check-enforced ignored/,
+  );
+});

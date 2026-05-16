@@ -41,10 +41,13 @@ Manual proof flags:
   --deletion-proof-executed
   --app-check-enforced
 
+These legacy flags are accepted for compatibility but do not close launch
+gates. Use the structured proof file with required metadata instead.
+
 Structured proof file:
   --proof-state docs/compliance/launch-proof-state.json
 
-Without manual flags, those gates stay blocked.
+Without complete proof-state metadata, those gates stay blocked.
 `);
 }
 
@@ -93,13 +96,6 @@ function validateProofGate({ proofState, gate, statusField, requiredFields }) {
 }
 
 function legalEvidence({ approved, proofState }) {
-  if (approved) {
-    return {
-      approved: true,
-      source: 'manual flag --legal-approved',
-    };
-  }
-
   const proof = validateProofGate({
     proofState,
     gate: 'legal',
@@ -110,6 +106,13 @@ function legalEvidence({ approved, proofState }) {
     return {
       approved: proof.ok,
       source: proof.source,
+    };
+  }
+  if (approved) {
+    return {
+      approved: false,
+      source:
+        'manual flag --legal-approved ignored; use proof-state metadata',
     };
   }
 
@@ -130,39 +133,39 @@ function legalEvidence({ approved, proofState }) {
 }
 
 function deletionEvidence({ executed, proofState }) {
-  if (executed) {
-    return {
-      executed: true,
-      source: 'manual flag --deletion-proof-executed',
-    };
-  }
   const proof = validateProofGate({
     proofState,
     gate: 'deletion',
     statusField: 'executed',
     requiredFields: ['executedAt', 'supportId', 'evidence'],
   });
-  return proof
-    ? { executed: proof.ok, source: proof.source }
-    : { executed: false, source: 'no deletion proof found' };
+  if (proof) return { executed: proof.ok, source: proof.source };
+  if (executed) {
+    return {
+      executed: false,
+      source:
+        'manual flag --deletion-proof-executed ignored; use proof-state metadata',
+    };
+  }
+  return { executed: false, source: 'no deletion proof found' };
 }
 
 function appCheckEvidence({ enforced, proofState }) {
-  if (enforced) {
-    return {
-      enforced: true,
-      source: 'manual flag --app-check-enforced',
-    };
-  }
   const proof = validateProofGate({
     proofState,
     gate: 'appCheck',
     statusField: 'enforced',
     requiredFields: ['enforcedAt', 'evidence'],
   });
-  return proof
-    ? { enforced: proof.ok, source: proof.source }
-    : { enforced: false, source: 'no App Check enforcement proof found' };
+  if (proof) return { enforced: proof.ok, source: proof.source };
+  if (enforced) {
+    return {
+      enforced: false,
+      source:
+        'manual flag --app-check-enforced ignored; use proof-state metadata',
+    };
+  }
+  return { enforced: false, source: 'no App Check enforcement proof found' };
 }
 
 function ga4RetentionEvidence({ adminRetentionOk, proofState }) {
@@ -304,7 +307,7 @@ function buildLaunchReadiness({ legal, sentry, storage, deletion, ga4, appCheck 
 
 function nextActionFor(blocker) {
   if (blocker === 'legal-approval-missing') {
-    return 'Approve /privacy and /terms, then record legal proof in docs/compliance/launch-proof-state.json or rerun with --legal-approved.';
+    return 'Approve /privacy and /terms, then record legal proof in docs/compliance/launch-proof-state.json.';
   }
   if (blocker === 'sentry-dsn-missing') {
     return 'Set JPSTUDY_SENTRY_DSN and run workflow_dispatch with sentry_smoke=true.';
@@ -313,7 +316,7 @@ function nextActionFor(blocker) {
     return 'Provision Firebase Storage, deploy rules, apply storage.cors.json, then run migration proof.';
   }
   if (blocker === 'deletion-proof-missing') {
-    return 'Execute the deletion runbook against a dedicated test UID, then record deletion proof in docs/compliance/launch-proof-state.json or rerun with --deletion-proof-executed.';
+    return 'Execute the deletion runbook against a dedicated test UID, then record deletion proof in docs/compliance/launch-proof-state.json.';
   }
   if (blocker === 'ga4-retention-proof-missing') {
     return 'Record GA4 Admin retention UI proof in docs/compliance/launch-proof-state.json or enable Analytics Admin API for source verification.';
@@ -322,7 +325,7 @@ function nextActionFor(blocker) {
     return 'Wait for GA4 BigQuery export to include srs_review_completed, n5_micro_quiz_completed, and session_quality_rated rows, then rerun the GA4 export report.';
   }
   if (blocker === 'app-check-enforcement-deferred') {
-    return 'After 1-2 weeks monitoring, enforce App Check, then record proof in docs/compliance/launch-proof-state.json or rerun with --app-check-enforced.';
+    return 'After 1-2 weeks monitoring, enforce App Check, then record proof in docs/compliance/launch-proof-state.json.';
   }
   return `Resolve ${blocker}.`;
 }
