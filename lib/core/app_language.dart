@@ -734,7 +734,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.vi:
         return 'Giúp cải thiện JpStudy';
       case AppLanguage.ja:
-        return 'JpStudy??????';
+        return 'JpStudyの改善に協力';
     }
   }
 
@@ -745,7 +745,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.vi:
         return 'Cho phép Firebase Analytics ẩn danh để nhóm hiểu cách dùng tính năng. Bạn có thể từ chối và vẫn dùng app bình thường.';
       case AppLanguage.ja:
-        return '???Firebase Analytics???????????????????????????????????';
+        return '匿名のFirebase Analyticsを許可すると、機能の利用状況を把握できます。拒否してもアプリは使えます。';
     }
   }
 
@@ -756,7 +756,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.vi:
         return 'Cho phép';
       case AppLanguage.ja:
-        return '??';
+        return '許可';
     }
   }
 
@@ -767,7 +767,7 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.vi:
         return 'Không, cảm ơn';
       case AppLanguage.ja:
-        return '?????';
+        return '許可しない';
     }
   }
 
@@ -912,18 +912,18 @@ extension AppLanguageLabels on AppLanguage {
         case AppLanguage.en:
           return 'Correct answer';
         case AppLanguage.vi:
-          return '??p ?n ??ng';
+          return 'Đáp án đúng';
         case AppLanguage.ja:
-          return '????';
+          return '正解です';
       }
     }
     switch (this) {
       case AppLanguage.en:
         return 'Incorrect. Correct answer is $correctAnswer';
       case AppLanguage.vi:
-        return '??p ?n sai, ??p ?n ??ng l? $correctAnswer';
+        return 'Chưa đúng. Đáp án đúng là $correctAnswer.';
       case AppLanguage.ja:
-        return '?????????$correctAnswer??';
+        return '不正解です。正解は $correctAnswer です。';
     }
   }
 
@@ -3616,9 +3616,9 @@ extension AppLanguageLabels on AppLanguage {
       case AppLanguage.en:
         return 'Invalid email address.';
       case AppLanguage.vi:
-        return 'Email kh?ng h?p l?';
+        return 'Email không hợp lệ.';
       case AppLanguage.ja:
-        return '?????????????????';
+        return 'メールアドレスが無効です。';
     }
   }
 

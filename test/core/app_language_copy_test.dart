@@ -93,4 +93,32 @@ void main() {
       expect(language.navGroupOther, isNotEmpty);
     }
   });
+
+  test('critical localized copy does not contain replacement markers', () {
+    final samples = <String>[
+      AppLanguage.ja.analyticsConsentTitle,
+      AppLanguage.ja.analyticsConsentBody,
+      AppLanguage.ja.analyticsConsentAcceptLabel,
+      AppLanguage.ja.analyticsConsentDeclineLabel,
+      AppLanguage.vi.mcqResultAnnouncement(isCorrect: true, correctAnswer: 'A'),
+      AppLanguage.vi.mcqResultAnnouncement(
+        isCorrect: false,
+        correctAnswer: 'A',
+      ),
+      AppLanguage.ja.mcqResultAnnouncement(isCorrect: true, correctAnswer: 'A'),
+      AppLanguage.ja.mcqResultAnnouncement(
+        isCorrect: false,
+        correctAnswer: 'A',
+      ),
+      AppLanguage.vi.loginInvalidEmailLabel,
+      AppLanguage.ja.loginInvalidEmailLabel,
+    ];
+
+    for (final sample in samples) {
+      expect(sample, isNot(contains('???')));
+      expect(sample, isNot(contains('??')));
+      expect(sample, isNot(contains('kh?ng')));
+      expect(sample, isNot(contains('h?p')));
+    }
+  });
 }

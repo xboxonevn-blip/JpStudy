@@ -52,14 +52,14 @@ void main() {
   test('mcqResultAnnouncement localizes correct and wrong results', () {
     expect(
       AppLanguage.vi.mcqResultAnnouncement(isCorrect: true, correctAnswer: '?'),
-      '??p ?n ??ng',
+      'Đáp án đúng',
     );
     expect(
       AppLanguage.vi.mcqResultAnnouncement(
         isCorrect: false,
         correctAnswer: '?',
       ),
-      '??p ?n sai, ??p ?n ??ng l? ?',
+      'Chưa đúng. Đáp án đúng là ?.',
     );
   });
 
