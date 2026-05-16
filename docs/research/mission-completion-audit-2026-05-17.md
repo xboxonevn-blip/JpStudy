@@ -1,6 +1,6 @@
 # Mission Completion Audit - 2026-05-17
 
-Timestamp: `2026-05-17T02:08:37+07:00`
+Timestamp: `2026-05-17T03:30:37+07:00`
 
 Objective source: `C:\Users\xboxo\Desktop\PC\Goals JP study.txt`
 
@@ -21,21 +21,21 @@ The active mission is complete only if all are true:
 
 | Requirement | Evidence | Status |
 | --- | --- | --- |
-| Work directly on `main` | `git status --short --branch` shows `main...origin/main`; only untracked `tool/research/firebase_admin_set_password.js` remains intentionally untracked | Passed |
+| Work directly on `main` | `git status --short --branch --untracked-files=all` shows `main...origin/main`; only untracked `tool/research/firebase_admin_set_password.js` remains intentionally untracked | Passed |
 | Latest route-matrix evidence commit | `git log --oneline -20` includes `17100cb1 tooling(research): add live route matrix report` | Passed |
 | Sprint 1-7 source/docs | `docs/research/mission-completion-audit-2026-05-16.md`; `CLAUDE.md` active workstream status | Passed |
 | T6-T10 and later addenda | Prior audits plus latest route-bootstrap commits `50e91392`, `a0dd28ab`, `558fc151` | Passed for implemented scope |
-| D2 editorial approval integrity | `D2-honest-audit-2026-05-16-all-levels.md`; current policy says Codex must not add `vi-human-approved`; N3/N2/N1 spot-check remains user-review pending | Passed; no human approval claimed |
+| D2 editorial approval integrity | `D2-honest-audit-2026-05-16-all-levels.md`; `3b380191 fix(content): normalize N3 vocab and N1 kanji glosses`; current policy says Codex must not add `vi-human-approved`; N3/N2/N1 spot-check remains user-review pending | Passed; no human approval claimed |
 | FSRS-6 P0 | `lib/core/services/fsrs_service.dart`; D5.Q5.1 docs; pinned interval tests in test suite | Passed |
-| CI/deploy latest | GitHub Actions run `25969926890` for `17100cb1`: `ui-string-guard`, `firebase-security-rules`, and `deploy-hosting` all `success` | Passed |
-| Local verification for route fix | Before commit `558fc151`: `flutter analyze lib test` passed; `flutter test` passed with `2279` tests | Passed |
+| CI/deploy latest | GitHub Actions run `25971782498` for `302a2191`: `ui-string-guard`, `firebase-security-rules`, and `deploy-hosting` all `success` | Passed |
+| Local verification latest content/storage cluster | `flutter analyze lib test` passed; `flutter test` passed with `2286` tests; `npm run test:research-tooling` passed `48`; `dart run tool/research/content_vi_status_report.dart` reports machine/open-review `0/0` | Passed |
 | Live route matrix | `docs/research/D4-persona-synthesis.md` records Playwright checks for N4/N3/N2/N1 across `/`, `/#/grammar`, `/#/vocab`, `/#/kanji`, `/#/study-hub`, `/#/immersion`, `/#/jlpt/reading`, `/#/jlpt/coach`, `/#/exam-center`; `npm run report:live-route-matrix -- --json` passed `36/36` | Passed for N4-N1 seeded hash routes; sparse semantics caveat remains for some routes |
-| Launch readiness aggregate | `npm run report:launch-readiness -- --json --proof-state docs\compliance\launch-proof-state.json` at `2026-05-17T02:03+07` | Failed |
-| Sentry operational proof | `npm run report:sentry-readiness -- --json`: source/workflow gates present, GitHub secrets have `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, `JPSTUDY_SENTRY_DSN=false` | Missing |
+| Launch readiness aggregate | `npm run report:launch-readiness -- --json --proof-state docs\compliance\launch-proof-state.json` at `2026-05-17T03:30+07` | Failed |
+| Sentry operational proof | `npm run report:sentry-readiness -- --json` at `2026-05-17T03:30+07`: source/workflow gates present, GitHub secrets have `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, `JPSTUDY_SENTRY_DSN=false` | Missing |
 | Storage migration proof | Owner decision 2026-05-17 descopes Firebase Storage for beta; `npm run report:storage-readiness -- --json --skip-emulator` now reports `storage-descoped-for-beta` | Deferred for beta |
-| Deletion proof | `npm run report:deletion-readiness -- --uid iE3tNLHW7tTvTAL7WmSG2JyIovI2 --json`: executable `false`; blocked by GA4 Admin/deletion access and missing `gcloud` or console-equivalent proof | Missing |
+| Deletion proof | `npm run report:deletion-readiness -- --uid iE3tNLHW7tTvTAL7WmSG2JyIovI2 --json --skip-live`: executable `false`; blocked by GA4 Admin/deletion access and missing `gcloud` or console-equivalent proof | Missing |
 | GA4 retention proof | GA4 Admin API probe returns `403`; `docs/compliance/launch-proof-state.json` has `ga4Retention.verified=false` | Missing |
-| GA4 learning export | `npm run report:ga4-export -- --json`: BigQuery tables only `events_20260514` and `events_20260515`; learning rows still missing | Missing |
+| GA4 learning export | `npm run report:ga4-export -- --json` at `2026-05-17T03:30+07`: BigQuery tables `events_20260514` and `events_20260515`; event counts still only `page_view`, `user_engagement`, `session_start`, `first_visit`, `onboarding_completed`; learning rows still missing | Missing |
 | App Check enforcement | `docs/compliance/launch-proof-state.json` has `appCheck.enforced=false`; enforcement intentionally deferred until monitoring window | Deferred/missing |
 
 ## Latest Readiness Result
@@ -49,7 +49,7 @@ npm run report:launch-readiness -- --json --proof-state docs\compliance\launch-p
 Latest checked result:
 
 ```text
-generatedAt -> 2026-05-16T19:49:16.741Z
+generatedAt -> 2026-05-16T20:30:37.391Z
 complete -> false
 blockers:
 - legal-approval-missing
