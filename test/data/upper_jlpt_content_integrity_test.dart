@@ -109,7 +109,7 @@ void main() {
         },
       );
 
-      test('$level upper vocab has safe Vietnamese draft metadata', () {
+      test('$level upper vocab has safe Vietnamese editorial metadata', () {
         if (level == 'n3') return;
 
         var count = 0;
@@ -119,7 +119,7 @@ void main() {
           if (file.path.endsWith('index.json')) continue;
           final decoded =
               jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
-          expect(decoded['importStatus'], 'source-imported-vi-draft');
+          expect(decoded['importStatus'], 'vi-editorial-codex-pass');
           final entries = decoded['entries'] as List<dynamic>;
           for (final rawEntry in entries) {
             final entry = rawEntry as Map<String, dynamic>;
@@ -133,11 +133,13 @@ void main() {
             expect(_readRequired(sense, 'meaningVi'), isNotEmpty);
             expect(
               _readRequired(sense, 'meaningVi'),
-              isNot(_readRequired(sense, 'meaningEn')),
+              isNot(contains('[VI cần duyệt]')),
             );
-            expect(sense['meaningViDraft'], sense['meaningVi']);
-            expect(sense['meaningViSource'], 'internal-en-gloss-draft');
-            expect(tags, contains('machine-translated-vi'));
+            expect(sense, isNot(contains('meaningViDraft')));
+            expect(sense, isNot(contains('meaningViSource')));
+            expect(tags, contains('vi-editorial-codex-pass'));
+            expect(tags, isNot(contains('machine-translated-vi')));
+            expect(tags, isNot(contains('vi-machine-draft')));
             expect(tags, isNot(contains('needs-human-review')));
             expect(tags, isNot(contains('needs-vi-editorial')));
             count++;
@@ -147,7 +149,7 @@ void main() {
         expect(count, greaterThanOrEqualTo(1500));
       });
 
-      test('$level upper grammar has honest Vietnamese draft metadata', () {
+      test('$level upper grammar has honest Vietnamese editorial metadata', () {
         if (level == 'n3') return;
 
         var count = 0;
@@ -167,12 +169,13 @@ void main() {
               isNot(contains('[VI cần duyệt]')),
             );
             expect(_readRequired(point, 'explanationEn'), isNotEmpty);
-            expect(point['explanationViDraft'], point['explanation']);
-            expect(point['explanationViSource'], 'internal-en-grammar-draft');
-            expect(point['explanationViStatus'], 'vi-machine-draft');
-            expect(tags, contains('machine-translated-vi'));
-            expect(tags, contains('vi-machine-draft'));
-            expect(tags, contains('vi-needs-review'));
+            expect(point, isNot(contains('explanationViDraft')));
+            expect(point, isNot(contains('explanationViSource')));
+            expect(point['explanationViStatus'], 'vi-editorial-codex-pass');
+            expect(tags, contains('vi-editorial-codex-pass'));
+            expect(tags, isNot(contains('machine-translated-vi')));
+            expect(tags, isNot(contains('vi-machine-draft')));
+            expect(tags, isNot(contains('vi-needs-review')));
             expect(tags, isNot(contains('vi-editorial-approved')));
             count++;
           }
@@ -208,10 +211,20 @@ void main() {
             expect(tags, contains('source-unihan-kanji-metadata'));
             expect(
               entry['metadataStatus'],
-              anyOf('approved-by-user', 'partial-unihan-needs-manual-han-viet'),
+              anyOf(
+                'approved-by-user',
+                'partial-unihan-needs-manual-han-viet',
+                'vi-editorial-codex-pass',
+              ),
             );
             if (labels['hanViet'] != null) {
-              expect(tags, contains('kanji-metadata-approved'));
+              expect(
+                tags,
+                anyOf(
+                  contains('kanji-metadata-approved'),
+                  contains('vi-editorial-codex-pass'),
+                ),
+              );
               expect(tags, isNot(contains('needs-kanji-editorial')));
             } else {
               expect(
