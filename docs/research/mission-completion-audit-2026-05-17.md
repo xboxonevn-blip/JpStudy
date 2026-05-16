@@ -29,7 +29,7 @@ The active mission is complete only if all are true:
 | FSRS-6 P0 | `lib/core/services/fsrs_service.dart`; D5.Q5.1 docs; pinned interval tests in test suite | Passed |
 | CI/deploy latest | GitHub Actions run `25969098910` for `65fd260e`: `ui-string-guard`, `firebase-security-rules`, and `deploy-hosting` all `success` | Passed |
 | Local verification for route fix | Before commit `558fc151`: `flutter analyze lib test` passed; `flutter test` passed with `2279` tests | Passed |
-| Live route matrix | `docs/research/D4-persona-synthesis.md` records Playwright checks for N4/N3/N2/N1 across `/`, `/#/grammar`, `/#/vocab`, `/#/kanji`, `/#/study-hub`, `/#/immersion`, `/#/jlpt/reading`, `/#/jlpt/coach`, `/#/exam-center` | Passed for N4-N1 seeded hash routes; sparse semantics caveat remains for some routes |
+| Live route matrix | `docs/research/D4-persona-synthesis.md` records Playwright checks for N4/N3/N2/N1 across `/`, `/#/grammar`, `/#/vocab`, `/#/kanji`, `/#/study-hub`, `/#/immersion`, `/#/jlpt/reading`, `/#/jlpt/coach`, `/#/exam-center`; `npm run report:live-route-matrix -- --json` passed `36/36` | Passed for N4-N1 seeded hash routes; sparse semantics caveat remains for some routes |
 | Launch readiness aggregate | `npm run report:launch-readiness -- --json --proof-state docs\compliance\launch-proof-state.json` at `2026-05-17T01:20+07` | Failed |
 | Sentry operational proof | `npm run report:sentry-readiness -- --json`: source/workflow gates present, GitHub secrets have `FIREBASE_TOKEN` and `JPSTUDY_RECAPTCHA_SITE_KEY`, `JPSTUDY_SENTRY_DSN=false` | Missing |
 | Storage migration proof | `npm run report:storage-readiness -- --json --skip-emulator`: Spark prerequisite documented, CORS file present, dry-run says Firebase Storage not set up | Missing |

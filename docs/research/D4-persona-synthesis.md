@@ -15,6 +15,8 @@ Evidence:
   `/`, `/#/grammar`, `/#/vocab`, `/#/kanji`, `/#/study-hub`,
   `/#/immersion`, `/#/jlpt/reading`, `/#/jlpt/coach`,
   `/#/exam-center`.
+- Follow-up automation: `npm run report:live-route-matrix -- --json`
+  completed `36/36` live route checks on 2026-05-17.
 
 Live matrix result:
 
@@ -146,6 +148,7 @@ The N5 core module path is viable after earlier Linh fixes, and several upper-le
 1. Keep route matrix as a release regression.
    - Matrix: levels N5/N4/N3/N2/N1 x routes `/`, `/#/grammar`, `/#/vocab`, `/#/kanji`, `/#/jlpt/reading`, `/#/jlpt/coach`, `/#/study-hub`, `/#/immersion`, `/#/exam-center`.
    - Pass threshold: every route preserves seeded level or intentionally labels its exception.
+   - Command: `npm run report:live-route-matrix -- --json`.
    - Latest live proof: N4/N3/N2/N1 passed on 2026-05-16/17 after `558fc151`.
 
 2. Make beta persona scope explicit.

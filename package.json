@@ -12,6 +12,7 @@
     "report:ga4-export": "node tool/research/ga4_export_status_report.js",
     "report:deletion-readiness": "node tool/research/deletion_readiness_report.js",
     "report:launch-readiness": "node tool/research/launch_readiness_report.js",
+    "report:live-route-matrix": "node tool/research/live_route_matrix_report.js",
     "report:sentry-readiness": "node tool/research/sentry_readiness_report.js",
     "report:storage-readiness": "node tool/research/storage_readiness_report.js",
     "test:research-tooling": "node --test test/tool/research/*.js",

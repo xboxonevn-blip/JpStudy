@@ -140,7 +140,7 @@ Current D4.P4 blocker: N4/VI root and slow-tap learning plan work at tablet 125%
 
 Current D4.P5 blocker: N1 immersion content exists after root init, and the latest live vocab re-check shows Hajimete N1 plus Shin Kanzen N1 open with real counts while N1+ correctly remains future scope. Advanced-reader discovery is still incomplete: no obvious news/current-world reading path and no public claim of full N1 kanji coverage.
 
-Current D4 synthesis blocker: P2-P5 still fail broad beta readiness, but the live upper-vocab availability blocker is cleared and the 2026-05-16/17 live direct-route matrix for N4/N3/N2/N1 shows no N5 fallback markers after `558fc151`. Universal priority has shifted to external launch proofs, route-depth/persona confidence, and explicit persona scope limits.
+Current D4 synthesis blocker: P2-P5 still fail broad beta readiness, but the live upper-vocab availability blocker is cleared and the 2026-05-16/17 live direct-route matrix for N4/N3/N2/N1 shows no N5 fallback markers after `558fc151`. `npm run report:live-route-matrix -- --json` now reproduces this as a 36-route live smoke. Universal priority has shifted to external launch proofs, route-depth/persona confidence, and explicit persona scope limits.
 
 Current hosting posture: primary web Hosting is now `hosting:jpstudy` at `https://jpstudy.web.app`. Legacy default site `hosting:jpstudy-v2` / `https://jpstudy-v2.web.app` was disabled on `2026-05-14T20:18+07` with Firebase release type `SITE_DISABLE`; it still exists as a Firebase default site identity but should not receive deploys. Local `.firebaserc`, `firebase.json`, and release docs now target only `hosting:jpstudy`.
 
