@@ -149,16 +149,20 @@ Active dimensions:
   (pedagogy), D6 (UI/UX), D7 (performance), D8 (compliance) +
   D8-release-risk.
 
-Active workstream status (as of 2026-05-16):
+Active workstream status (as of 2026-05-17):
 - Curriculum-gating onboarding Phase 1-13 source work is complete,
   including anonymous Auth bootstrap and legacy migration gating.
 - Sprint 1-7 implementation/docs are substantially complete. Do not restart
   completed work without checking `mission-completion-audit-2026-05-15.md`.
-- Latest source/CI/deploy proof: commit `dd0fce40`, GitHub Actions run
-  `25965950740` succeeded. `ui-string-guard`, `firebase-security-rules`,
+- Latest source/CI/deploy proof: commit `65fd260e`, GitHub Actions run
+  `25969098910` succeeded. `ui-string-guard`, `firebase-security-rules`,
   and secret-backed `deploy-hosting` all completed with `success`, including
   production build, primary deploy, primary/legacy smoke, live resource smoke,
   and Lighthouse live gate.
+- Latest live route-matrix proof: `558fc151` fixed Flutter web hash-route
+  bootstrap by seeding persisted providers before `runApp`, while `5ee9788a`
+  and `65fd260e` record N4/N3/N2/N1 live direct-route checks with no N5
+  fallback markers across the audited hash routes.
 - Latest D2 content integrity correction: `a80fb702` plus
   `D2-honest-audit-2026-05-16-all-levels.md`.
   Current audit reports N5/N4 launch-tier and N3/N2/N1 launch-tier quality
@@ -172,6 +176,7 @@ Active workstream status (as of 2026-05-16):
   `firebase-admin` tooling blocker for Auth deletion is resolved by
   `tool/research/firebase_admin_delete_user.js`; live deletion proof still
   requires Storage/GA4/operator gates.
+  Latest completion audit: `docs/research/mission-completion-audit-2026-05-17.md`.
   Operator handoff checklist:
   `docs/compliance/beta-launch-proof-checklist-2026-05-15.md`.
   Current readiness reports now include direct operator URLs for launch proof,
