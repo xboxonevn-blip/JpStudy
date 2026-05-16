@@ -31,7 +31,7 @@ blockers: `legal-approval-missing`, `sentry-dsn-missing`,
 
 ## 1. GitHub Actions Secret-Backed Deploy
 
-Status: completed on `main`; latest re-confirmed on commit `12a0b7ea`.
+Status: completed on `main`; latest re-confirmed on commit `48c441d9`.
 
 Goal: prove `deploy-hosting` performs a real build/deploy/live-smoke/Lighthouse
 run on `main`, not only the skip-safe wrapper.
@@ -52,7 +52,7 @@ Operator note:
 Evidence recorded:
 
 - GitHub Actions run URL:
-  `https://github.com/xboxonevn-blip/JpStudy/actions/runs/25948482462`
+  `https://github.com/xboxonevn-blip/JpStudy/actions/runs/25951927799`
 - `deploy-hosting` job step list shows these steps `success`, not
   `skipped`:
   - `Build web for production`
@@ -66,6 +66,9 @@ Evidence recorded:
   Playwright visual smoke on `2026-05-16T08:05+07:00` checked Kanji radical
   headers, Han-Viet rules, and Review Forecast labels on
   `https://jpstudy.web.app`.
+- Latest CI recheck on `2026-05-16T10:59+07:00` completed
+  `ui-string-guard`, `firebase-security-rules`, and `deploy-hosting` with
+  `success` on commit `48c441d9`.
 
 ## 2. Sentry First-Issue Proof
 
