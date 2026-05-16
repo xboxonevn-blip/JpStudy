@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:jpstudy/app/app.dart';
 import 'package:jpstudy/core/app_language.dart';
+import 'package:jpstudy/core/auth/auth_provider.dart';
 import 'package:jpstudy/core/language_provider.dart';
 import 'package:jpstudy/core/level_provider.dart';
 import 'package:jpstudy/core/onboarding_provider.dart';
@@ -124,7 +125,11 @@ Future<void> pumpReleaseSmokeApp(
   addTearDown(tester.view.resetDevicePixelRatio);
 
   SharedPreferences.setMockInitialValues(const {
-    'backup.auto.enabled': true,
+    'app.locale': 'en',
+    prefOnboardingCompleted: true,
+    prefOnboardingLevel: 'n5',
+    prefOnboardingGoal: 'jlpt',
+    'backup.auto.enabled': false,
     'notifications.daily': false,
     'write.handwriting.strokeGuide.defaultExpanded': false,
   });
@@ -172,136 +177,150 @@ Future<void> pumpReleaseSmokeApp(
     ],
   );
 
+  final container = ProviderContainer(
+    overrides: [
+      appLanguageProvider.overrideWith(
+        (ref) => AppLanguageController.test(AppLanguage.en),
+      ),
+      studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
+      onboardingDoneProvider.overrideWith((ref) => true),
+      databaseProvider.overrideWithValue(appDb),
+      lessonRepositoryProvider.overrideWithValue(repo),
+      dashboardProvider.overrideWith(
+        (ref) => Stream.value(
+          const DashboardState(
+            streak: 5,
+            todayXp: 18,
+            vocabDue: 3,
+            grammarDue: 2,
+            kanjiDue: 1,
+            vocabMistakeCount: 0,
+            grammarMistakeCount: 1,
+            kanjiMistakeCount: 0,
+            totalMistakeCount: 1,
+          ),
+        ),
+      ),
+      grammarGhostCountProvider.overrideWith((ref) => Stream.value(0)),
+      vocabGhostCountProvider.overrideWith((ref) => Stream.value(0)),
+      nextVocabReviewProvider.overrideWith((ref) => Stream.value(null)),
+      nextKanjiReviewProvider.overrideWith((ref) => Stream.value(null)),
+      nextGrammarReviewProvider.overrideWith((ref) => Stream.value(null)),
+      continueActionProvider.overrideWith(
+        (ref) async => const ContinueAction(
+          type: ContinueActionType.vocabReview,
+          label: 'Review vocab',
+          count: 3,
+        ),
+      ),
+      dailySessionProgressProvider.overrideWith(
+        (ref) async => DailySessionProgress.empty('2026-03-19'),
+      ),
+      backupStatusProvider.overrideWith(
+        (ref) async => const BackupStatus(enabled: true, lastBackupAt: null),
+      ),
+      cloudSyncStatusProvider.overrideWith(
+        (ref) async => const CloudSyncStatus(
+          target: null,
+          lastSyncedAt: null,
+          lastRemoteExportedAt: null,
+          lastDirection: null,
+        ),
+      ),
+      progressSummaryProvider.overrideWith(
+        (ref) async => const ProgressSummary(
+          totalXp: 420,
+          todayXp: 36,
+          streak: 8,
+          longestStreak: 15,
+          totalDaysStudied: 42,
+          totalAttempts: 48,
+          totalCorrect: 39,
+          totalQuestions: 48,
+        ),
+      ),
+      reviewHistoryProvider.overrideWith(
+        (ref) async => [
+          ReviewDaySummary(
+            day: DateTime(2026, 3, 18),
+            reviewed: 12,
+            again: 2,
+            hard: 3,
+            good: 5,
+            easy: 2,
+            xp: 0,
+          ),
+        ],
+      ),
+      activityCalendarProvider.overrideWith(
+        (ref) async => [
+          ReviewDaySummary(
+            day: DateTime(2026, 3, 18),
+            reviewed: 12,
+            again: 2,
+            hard: 3,
+            good: 5,
+            easy: 2,
+            xp: 0,
+          ),
+        ],
+      ),
+      attemptHistoryProvider.overrideWith(
+        (ref) async => [
+          AttemptSummary(
+            id: 1,
+            mode: 'Grammar',
+            level: 'N5',
+            startedAt: DateTime(2026, 3, 19, 9, 30),
+            finishedAt: DateTime(2026, 3, 19, 9, 38),
+            score: 8,
+            total: 10,
+          ),
+        ],
+      ),
+      srsRetentionProvider.overrideWith(
+        (ref) async =>
+            const SrsStageBreakdown(learning: 4, young: 7, mature: 9),
+      ),
+      weaknessRadarProvider.overrideWith((ref) async => const []),
+      masterySnapshotProvider.overrideWith(
+        (ref) async => const MasterySnapshot(levels: []),
+      ),
+      jlptCoachSnapshotProvider.overrideWith((ref) async => null),
+      jlptPrepOverviewProvider(StudyLevel.n5).overrideWith(
+        (ref) async => const JlptPrepOverview(
+          quickMockQuestionCount: 20,
+          readingPassageCount: 3,
+          readingQuestionCount: 12,
+          fullMockQuestionCount: 60,
+          fullMockMinutes: 95,
+          fullMockSectionCount: 4,
+        ),
+      ),
+      searchIndexProvider.overrideWith((ref) async => const []),
+      authStateProvider.overrideWith((ref) => Stream.value(null)),
+      mistakeRepositoryProvider.overrideWithValue(mistakeRepo),
+      immersionServiceProvider.overrideWithValue(immersionService),
+      ...extraOverrides,
+    ],
+  );
+  addTearDown(container.dispose);
+
   await tester.pumpWidget(
-    ProviderScope(
-      overrides: [
-        appLanguageProvider.overrideWith(
-          (ref) => AppLanguageController.test(AppLanguage.en),
-        ),
-        studyLevelProvider.overrideWith((ref) => StudyLevel.n5),
-        onboardingDoneProvider.overrideWith((ref) => true),
-        appInitProvider.overrideWith((ref) async {}),
-        databaseProvider.overrideWithValue(appDb),
-        lessonRepositoryProvider.overrideWithValue(repo),
-        dashboardProvider.overrideWith(
-          (ref) => Stream.value(
-            const DashboardState(
-              streak: 5,
-              todayXp: 18,
-              vocabDue: 3,
-              grammarDue: 2,
-              kanjiDue: 1,
-              vocabMistakeCount: 0,
-              grammarMistakeCount: 1,
-              kanjiMistakeCount: 0,
-              totalMistakeCount: 1,
-            ),
-          ),
-        ),
-        grammarGhostCountProvider.overrideWith((ref) => Stream.value(0)),
-        vocabGhostCountProvider.overrideWith((ref) => Stream.value(0)),
-        nextVocabReviewProvider.overrideWith((ref) => Stream.value(null)),
-        nextKanjiReviewProvider.overrideWith((ref) => Stream.value(null)),
-        nextGrammarReviewProvider.overrideWith((ref) => Stream.value(null)),
-        continueActionProvider.overrideWith(
-          (ref) async => const ContinueAction(
-            type: ContinueActionType.vocabReview,
-            label: 'Review vocab',
-            count: 3,
-          ),
-        ),
-        dailySessionProgressProvider.overrideWith(
-          (ref) async => DailySessionProgress.empty('2026-03-19'),
-        ),
-        backupStatusProvider.overrideWith(
-          (ref) async => const BackupStatus(enabled: true, lastBackupAt: null),
-        ),
-        cloudSyncStatusProvider.overrideWith(
-          (ref) async => const CloudSyncStatus(
-            target: null,
-            lastSyncedAt: null,
-            lastRemoteExportedAt: null,
-            lastDirection: null,
-          ),
-        ),
-        progressSummaryProvider.overrideWith(
-          (ref) async => const ProgressSummary(
-            totalXp: 420,
-            todayXp: 36,
-            streak: 8,
-            longestStreak: 15,
-            totalDaysStudied: 42,
-            totalAttempts: 48,
-            totalCorrect: 39,
-            totalQuestions: 48,
-          ),
-        ),
-        reviewHistoryProvider.overrideWith(
-          (ref) async => [
-            ReviewDaySummary(
-              day: DateTime(2026, 3, 18),
-              reviewed: 12,
-              again: 2,
-              hard: 3,
-              good: 5,
-              easy: 2,
-              xp: 0,
-            ),
-          ],
-        ),
-        activityCalendarProvider.overrideWith(
-          (ref) async => [
-            ReviewDaySummary(
-              day: DateTime(2026, 3, 18),
-              reviewed: 12,
-              again: 2,
-              hard: 3,
-              good: 5,
-              easy: 2,
-              xp: 0,
-            ),
-          ],
-        ),
-        attemptHistoryProvider.overrideWith(
-          (ref) async => [
-            AttemptSummary(
-              id: 1,
-              mode: 'Grammar',
-              level: 'N5',
-              startedAt: DateTime(2026, 3, 19, 9, 30),
-              finishedAt: DateTime(2026, 3, 19, 9, 38),
-              score: 8,
-              total: 10,
-            ),
-          ],
-        ),
-        srsRetentionProvider.overrideWith(
-          (ref) async =>
-              const SrsStageBreakdown(learning: 4, young: 7, mature: 9),
-        ),
-        weaknessRadarProvider.overrideWith((ref) async => const []),
-        masterySnapshotProvider.overrideWith(
-          (ref) async => const MasterySnapshot(levels: []),
-        ),
-        jlptCoachSnapshotProvider.overrideWith((ref) async => null),
-        jlptPrepOverviewProvider(StudyLevel.n5).overrideWith(
-          (ref) async => const JlptPrepOverview(
-            quickMockQuestionCount: 20,
-            readingPassageCount: 3,
-            readingQuestionCount: 12,
-            fullMockQuestionCount: 60,
-            fullMockMinutes: 95,
-            fullMockSectionCount: 4,
-          ),
-        ),
-        searchIndexProvider.overrideWith((ref) async => const []),
-        mistakeRepositoryProvider.overrideWithValue(mistakeRepo),
-        immersionServiceProvider.overrideWithValue(immersionService),
-        ...extraOverrides,
-      ],
+    UncontrolledProviderScope(
+      container: container,
       child: const TickerMode(enabled: false, child: App()),
     ),
   );
 
+  await tester.pump();
+  await container.read(appInitProvider.future);
+  await tester.idle();
+  await tester.pumpWidget(
+    UncontrolledProviderScope(
+      container: container,
+      child: const TickerMode(enabled: false, child: App()),
+    ),
+  );
   await tester.pumpAndSettle();
 }

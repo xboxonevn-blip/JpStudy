@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,6 +16,48 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() {
   tearDown(() {
     AppRouter.router.go(AppRoutePath.home);
+  });
+
+  testWidgets('app bootstrap gates direct routes until persisted state loads', (
+    tester,
+  ) async {
+    SharedPreferences.setMockInitialValues({
+      prefOnboardingCompleted: true,
+      prefOnboardingLevel: 'n3',
+      prefOnboardingGoal: 'jlpt',
+      'app.locale': 'en',
+      'analytics.consent': false,
+    });
+    final prefs = await SharedPreferences.getInstance();
+    final initCompleter = Completer<void>();
+
+    AppRouter.router.go(AppRoutePath.grammar);
+    final container = ProviderContainer(
+      overrides: [
+        sharedPreferencesProvider.overrideWithValue(prefs),
+        appInitProvider.overrideWith((_) => initCompleter.future),
+        grammarPointsProvider('N3').overrideWith((_) async => const []),
+        grammarPointsProvider('N5').overrideWith((_) async => const []),
+        grammarDueCountProvider.overrideWith((_) async => 0),
+        grammarGhostCountProvider.overrideWith((_) => Stream.value(0)),
+      ],
+    );
+    addTearDown(container.dispose);
+
+    await tester.pumpWidget(
+      UncontrolledProviderScope(
+        container: container,
+        child: const TickerMode(enabled: false, child: App()),
+      ),
+    );
+    await tester.pump();
+
+    expect(find.byKey(const ValueKey('app_bootstrap_loading')), findsOneWidget);
+    expect(find.textContaining('Grammar'), findsNothing);
+
+    initCompleter.complete();
+    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.pump();
   });
 
   testWidgets('app bootstrap loads persisted level on direct grammar link', (

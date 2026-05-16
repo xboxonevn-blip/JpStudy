@@ -19,8 +19,24 @@ class App extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final language = ref.watch(appLanguageProvider);
     final themeMode = ref.watch(themeModeProvider);
-    ref.watch(appInitProvider);
+    final appInit = ref.watch(appInitProvider);
     syncHtmlLang(language);
+
+    if (appInit.isLoading && !appInit.hasValue && !appInit.hasError) {
+      return MaterialApp(
+        title: 'JpStudy',
+        debugShowCheckedModeBanner: false,
+        locale: language.locale,
+        supportedLocales: supportedAppLocales,
+        localizationsDelegates: GlobalMaterialLocalizations.delegates,
+        theme: AppTheme.light(language),
+        darkTheme: AppTheme.dark(language),
+        themeMode: themeMode,
+        scrollBehavior: const AppScrollBehavior(),
+        themeAnimationDuration: Duration.zero,
+        home: const _AppBootstrapLoading(),
+      );
+    }
 
     return MaterialApp.router(
       title: 'JpStudy',
@@ -40,6 +56,21 @@ class App extends ConsumerWidget {
       routerConfig: AppRouter.router,
       builder: (context, child) => ErrorMonitoringGate(
         child: AnalyticsConsentBanner(child: child ?? const SizedBox.shrink()),
+      ),
+    );
+  }
+}
+
+class _AppBootstrapLoading extends StatelessWidget {
+  const _AppBootstrapLoading();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(
+          key: ValueKey('app_bootstrap_loading'),
+        ),
       ),
     );
   }
