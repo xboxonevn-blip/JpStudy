@@ -8,13 +8,14 @@ It is ready for the next controlled gate: a 5-10 learner pilot after the
 remaining ops blockers are closed. Later deploy evidence proved current `main`
 can serve on `https://jpstudy.web.app`, legacy `https://jpstudy-v2.web.app`
 remains `404`, CI is green, and live resource/Lighthouse probes pass.
-Anonymous Auth is now enabled and live `accounts:signUp` returns `200`, but
-Storage-backed legacy migration is gated off until Firebase Storage is
-provisioned. D2 content now reports `0` machine/open-review items across N5-N1;
-N3/N2/N1 still need user spot-check before any human-approval claim. Remaining
-blockers before the pilot are legal approval, Firebase Storage setup, Sentry
-operational proof, deletion proof, GA4 retention proof, exported GA4 learning
-rows, and later App Check enforcement.
+Anonymous Auth is now enabled and live `accounts:signUp` returns `200`.
+Firebase Storage-backed cloud backup and legacy migration are descoped for beta
+by the 2026-05-17 owner decision because new Storage buckets require Blaze and
+the beta remains local-first on Spark. D2 content now reports `0`
+machine/open-review items across N5-N1; N3/N2/N1 still need user spot-check
+before any human-approval claim. Remaining blockers before the pilot are legal
+approval, Sentry operational proof, deletion proof, GA4 retention proof,
+exported GA4 learning rows, and later App Check enforcement.
 
 ## Highest-Leverage Findings Shipped
 
@@ -80,14 +81,13 @@ rows, and later App Check enforcement.
 
 Run a post-deploy beta-readiness cycle:
 
-1. Set up Firebase Storage for project `jpstudy-v2`, deploy `storage.rules`,
-   verify CORS from `https://jpstudy.web.app`, then enable
-   `JPSTUDY_ENABLE_LEGACY_STORAGE_MIGRATION=true`.
-2. Configure `JPSTUDY_SENTRY_DSN`, run the Sentry smoke path, and record the
+1. Configure `JPSTUDY_SENTRY_DSN`, run the Sentry smoke path, and record the
    first issue URL.
-3. Record legal approval and GA4 retention proof in the structured proof state.
-4. Execute the deletion runbook against a dedicated test UID after Storage and
-   GA4 operator access are ready.
-5. Keep polling GA4 BigQuery for SRS, micro-quiz, and session-quality rows; the
+2. Record legal approval and GA4 retention proof in the structured proof state.
+3. Execute the deletion runbook against a dedicated test UID after GA4 operator
+   access is ready.
+4. Keep polling GA4 BigQuery for SRS, micro-quiz, and session-quality rows; the
    current export sample has only open/onboarding events.
+5. Keep Firebase Storage scaffolding gated off for beta; revisit cloud backup in
+   a future sync rebuild.
 6. Decide pilot scope after the remaining operational proof gates close.

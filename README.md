@@ -6,8 +6,8 @@ Web demo: https://jpstudy.web.app
 
 Android APK: see the latest GitHub Release.
 
-Source: this repo. Built with Flutter, Drift/SQLite for local data,
-Firebase Auth + Storage for opt-in cloud sync.
+Source: this repo. Built with Flutter and Drift/SQLite for local data.
+Firebase Auth is used for identity; beta backup is local file export/import.
 
 [![Flutter](https://img.shields.io/badge/Flutter-App-02569B?logo=flutter&logoColor=white)](https://flutter.dev)
 [![CI](https://img.shields.io/github/actions/workflow/status/xboxonevn-blip/JpStudy-v2/ui-string-guard.yml?branch=main&label=CI)](https://github.com/xboxonevn-blip/JpStudy-v2/actions/workflows/ui-string-guard.yml)
@@ -29,7 +29,7 @@ Verified locally on `2026-05-08`:
 Current product posture:
 
 - Core study flows are stable and broadly covered by automated tests.
-- The app remains local-first, with Firebase Auth + Storage used for opt-in cloud backup and restore.
+- The app remains local-first. Beta backup uses local file export/import; account-based cloud backup is planned for a future release.
 - The public web build is configured for Firebase Hosting at `https://jpstudy.web.app`.
 - Premium pricing and some community/referral surfaces are still local placeholder experiences, not live backend features.
 
@@ -55,7 +55,7 @@ Current product posture:
 ### App behavior
 
 - Local persistence with Drift + SQLite
-- Firebase Auth + Storage for opt-in cloud backup/sync
+- Firebase Auth for identity
 - Firebase Analytics for core study events
 - JSON backup/export-import for study data
 - Mailto feedback entry in the user menu
@@ -69,7 +69,7 @@ Current product posture:
 - Core route graph and primary learning flows
 - Grammar data pipeline with canonical audit reports in `docs/reports/`
 - Handwriting engine with support assets under `assets/data/support/kanji/`
-- Firebase-backed sign-in, backup, and auto-upload flows for opted-in users
+- Firebase-backed sign-in plus local backup/export-import flows
 - Large automated regression suite across feature flows
 
 ### Still in progress
