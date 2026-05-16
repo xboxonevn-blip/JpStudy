@@ -411,6 +411,45 @@ void main() {
     expect(find.text('\u9b31'), findsOneWidget);
   });
 
+  testWidgets('kanji hub follows async persisted level after first frame', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1200, 1400);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await _mockRadicalsAsset();
+    final repo = _buildRepo();
+    final container = ProviderContainer(
+      retry: (retryCount, error) => null,
+      overrides: [
+        appLanguageProvider.overrideWith(
+          (ref) => AppLanguageController.test(AppLanguage.en),
+        ),
+        lessonRepositoryProvider.overrideWithValue(repo),
+      ],
+    );
+    addTearDown(container.dispose);
+    container.read(studyLevelProvider.notifier).state = StudyLevel.n5;
+
+    await tester.pumpWidget(
+      UncontrolledProviderScope(
+        container: container,
+        child: const MaterialApp(home: KanjiHubScreen()),
+      ),
+    );
+    await _pumpKanjiHub(tester);
+
+    container.read(studyLevelProvider.notifier).state = StudyLevel.n2;
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+    await tester.pump();
+
+    expect(find.text('\u66dc'), findsOneWidget);
+    expect(find.text('\u660e'), findsNothing);
+  });
+
   testWidgets('kanji detail dialog includes JP Study Flow related lanes', (
     tester,
   ) async {

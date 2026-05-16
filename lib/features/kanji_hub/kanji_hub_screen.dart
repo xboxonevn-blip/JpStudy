@@ -174,6 +174,14 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
     });
   }
 
+  void _syncPersistedLevel(StudyLevel? level) {
+    if (level == null || level == _selectedLevel) return;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted || level == _selectedLevel) return;
+      _activateLevel(level);
+    });
+  }
+
   void _onLevelSelected(StudyLevel level) {
     _activateLevel(level, refreshKanji: _kanjiFuture == null);
   }
@@ -240,6 +248,8 @@ class _KanjiHubScreenState extends ConsumerState<KanjiHubScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final persistedLevel = ref.watch(studyLevelProvider);
+    _syncPersistedLevel(persistedLevel);
     final language = ref.watch(appLanguageProvider);
     final homeSummary = ref.watch(kanjiHomeSummaryProvider);
     final isDesktop =
