@@ -23,7 +23,7 @@ execution, GA4 retention UI proof, and App Check enforcement. Each gate still
 requires explicit metadata. Sentry, Storage, and GA4 learning-event export gates
 remain source-verified and cannot be closed by the proof state file.
 
-Latest run on `2026-05-16T11:31+07:00` returned `complete=false` with
+Latest run on `2026-05-16T13:23+07:00` returned `complete=false` with
 blockers: `legal-approval-missing`, `sentry-dsn-missing`,
 `storage-not-provisioned`, `deletion-proof-missing`,
 `ga4-retention-proof-missing`, `ga4-learning-events-missing`, and
@@ -71,7 +71,7 @@ Use the project owner account `chung.phukiengiabuon@gmail.com`
 
 ## 1. GitHub Actions Secret-Backed Deploy
 
-Status: completed on `main`; latest re-confirmed on commit `df27cc4b`.
+Status: completed on `main`; latest re-confirmed on commit `54c61d1d`.
 
 Goal: prove `deploy-hosting` performs a real build/deploy/live-smoke/Lighthouse
 run on `main`, not only the skip-safe wrapper.
@@ -92,7 +92,7 @@ Operator note:
 Evidence recorded:
 
 - GitHub Actions run URL:
-  `https://github.com/xboxonevn-blip/JpStudy/actions/runs/25952812357`
+  `https://github.com/xboxonevn-blip/JpStudy/actions/runs/25954911634`
 - `deploy-hosting` job step list shows these steps `success`, not
   `skipped`:
   - `Build web for production`
@@ -106,9 +106,9 @@ Evidence recorded:
   Playwright visual smoke on `2026-05-16T08:05+07:00` checked Kanji radical
   headers, Han-Viet rules, and Review Forecast labels on
   `https://jpstudy.web.app`.
-- Latest CI recheck on `2026-05-16T11:46+07:00` completed
+- Latest CI recheck on `2026-05-16T13:38+07:00` completed
   `ui-string-guard`, `firebase-security-rules`, and `deploy-hosting` with
-  `success` on commit `df27cc4b`.
+  `success` on commit `54c61d1d`.
 
 ## 2. Sentry First-Issue Proof
 
