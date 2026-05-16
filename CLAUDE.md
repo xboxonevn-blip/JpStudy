@@ -189,6 +189,11 @@ Active workstream status (as of 2026-05-17):
   Storage, deletion, GA4 Admin, App Check, and GitHub Actions; these URLs do not
   close proof gates by themselves. Storage reports as
   `storage-descoped-for-beta`, not as a beta blocker.
+- Owner-provided study source folders from
+  `C:\Users\xboxo\Desktop\PC\Tai lieu N5 den N1 tham khao.txt` are recorded in
+  `docs/credits/upper-jlpt-sources.md` as manual QA/reference-only material.
+  Do not bulk-copy those materials without explicit licensing/ownership
+  clearance, and do not access `https://nhaikanji.com/` per owner note.
 
 ## App Check (reCAPTCHA v3)
 

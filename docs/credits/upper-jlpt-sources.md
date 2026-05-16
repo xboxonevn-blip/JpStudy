@@ -44,6 +44,13 @@ are not bulk-import sources.
 - Vietnamese grammar pages found online may be used for human comparison only, not bulk import, until licensing is verified.
 - Candidate QA references include JLPT Vietnam/JLPT Sensei Vietnam, Mazii grammar pages, JLPT Sensei, JLPT Global, and Practice Japanese.
 - Official JLPT sample texts, Aozora Bunko public-domain prose, NHK News Easy, and public reading-practice pages may be used as format/difficulty references only; N2/N1 immersion passages in this app are original JpStudy text.
+- Owner-provided Google Drive study folders may be used as manual QA/reference material only, not copied into app content unless ownership/licensing is explicitly cleared:
+  - N5 kanji/vocab/ebook folder: https://drive.google.com/drive/folders/1oFublPlnMK8aAKwntmOC2KHCIabMnHhJ?usp=drive_link
+  - N4 kanji/vocab/ebook folder: https://drive.google.com/drive/folders/1HiBF5hy4bEk1QHhF6q1oK_8Zd3Y9XTao?usp=drive_link
+  - N3 kanji/vocab/ebook folder: https://drive.google.com/drive/folders/1ExgP2urqQw9L_7QKvZq9R0gdrMhlHwH5?usp=drive_link
+  - N2 kanji/vocab/ebook folder: https://drive.google.com/drive/folders/1ep6rseIbs4rlnrXr4apRjSqqVKb7tzKi?usp=drive_link
+  - N1 kanji/vocab/ebook folder: https://drive.google.com/drive/folders/1EaVRjL3xs-vrhmqW30mg60rdwMUvN6QL?usp=sharing
+- Owner note from `C:\Users\xboxo\Desktop\PC\Tai lieu N5 den N1 tham khao.txt`: do not access `https://nhaikanji.com/`.
 
 ## Unicode Unihan
 
