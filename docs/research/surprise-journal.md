@@ -413,3 +413,17 @@
 - Actual observation: on live web, that loading app stripped direct `/#/grammar` hash routes back to `/` before `MaterialApp.router` mounted. The first fix removed N5 fallback but introduced route loss. Seeding persisted providers before `runApp` let the router mount on the first frame and preserved direct hash URLs.
 - Delta: -50 percentage points on confidence that swapping root app types during bootstrap is harmless on Flutter web; +40 percentage points on confidence after live N4/N3/N2/N1 direct-route checks showed no N5 fallback markers.
 - Updated belief: web deep-link safety requires one router identity from the first frame. Bootstrap should preload provider state, not temporarily replace the router with a separate `MaterialApp`.
+
+## 2026-05-17T03:20:00+07:00 - Storage blocker was a product-scope mismatch
+
+- Prior belief: beta launch needed Firebase Storage provisioning proof because legacy migration and cloud backup scaffolding existed.
+- Actual observation: the product decision is local-first beta on Spark. New Firebase Storage buckets require Blaze, so cloud backup and legacy Storage migration are optional future work, not beta requirements.
+- Delta: -70 percentage points on confidence that missing Storage provisioning should block beta launch.
+- Updated belief: launch readiness tooling must distinguish "required but failing" from "intentionally descoped." Keep Storage scaffolding gated for future rebuilds, but local file export/import is the beta backup path.
+
+## 2026-05-17T03:25:00+07:00 - Content counters missed semantic gloss defects
+
+- Prior belief: N3/N1 machine/open-review counters near zero were a strong proxy for spot-check quality.
+- Actual observation: owner spot-check found duplicated N3 glosses, wrong N3 meanings such as `合わせる`, and N1 kanji meanings copied from compound examples such as `稲光` into `稲`.
+- Delta: -45 percentage points on confidence that taxonomy counters alone prove content quality.
+- Updated belief: D2 evidence needs semantic spot-checks over representative vocab and kanji display glosses, not only tag-state integrity.
