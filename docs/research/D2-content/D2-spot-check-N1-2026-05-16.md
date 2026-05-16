@@ -23,16 +23,16 @@ Scope: 30 sampled N1 items after grammar rewrite, kanji Han-Viet correction, and
 | 17 | Vocab | 合間 | `[VI cần duyệt] interval` | khoảng thời gian |
 | 18 | Vocab | 曖昧 | `[VI cần duyệt] vague/ambiguous` | mơ hồ; không rõ ràng |
 | 19 | Vocab | 敢えて | `[VI cần duyệt] dare/challenge` | dám làm; cố ý; cả gan |
-| 20 | Kanji | 変 | HV missing | HV=Biến; vẫn như trước, như thường lệ, không đổi |
-| 21 | Kanji | 愛 | HV missing | HV=Ái; sự niềm nở, thiện cảm, phép xã giao |
-| 22 | Kanji | 対 | HV missing | HV=Đối; đối diện, đối đầu, giữa hai bên |
-| 23 | Kanji | 憎 | HV missing | HV=Tăng; yêu ghét, thiện cảm và ác cảm |
-| 24 | Kanji | 諦 | HV missing | HV=Đế; sự từ bỏ, chấp nhận, cam chịu |
-| 25 | Kanji | 憧 | HV missing | HV=Sung; sự ngưỡng mộ, khao khát, mong mỏi |
+| 20 | Kanji | 変 | HV missing | HV=Biến; thay đổi; biến đổi; khác thường |
+| 21 | Kanji | 愛 | HV missing | HV=Ái; yêu; yêu mến |
+| 22 | Kanji | 対 | HV missing | HV=Đối; đối diện; đối lập; đúng |
+| 23 | Kanji | 憎 | HV missing | HV=Tăng; ghét; căm ghét; sự thù ghét |
+| 24 | Kanji | 諦 | HV missing | HV=Đế; xét kỹ; chú ý |
+| 25 | Kanji | 憧 | HV missing | HV=Sung; khao khát; ngưỡng mộ |
 | 26 | Kanji | 顎 | HV missing | HV=Ngạc; cằm, hàm |
-| 27 | Kanji | 誂 | HV missing | HV=Điệu; đặt hàng, yêu cầu làm riêng |
-| 28 | Kanji | 溢 | HV missing | HV=Dật; tràn, ngập, tràn đầy |
+| 27 | Kanji | 誂 | HV missing | HV=Điệu; đặt làm riêng; đặt hàng |
+| 28 | Kanji | 溢 | HV missing | HV=Dật; tràn; đầy ắp |
 | 29 | Kanji | 鼾 | HV missing | HV=Hãn; tiếng ngáy |
-| 30 | Kanji | 稲 | HV missing | HV=Đạo; tia chớp, ánh chớp |
+| 30 | Kanji | 稲 | HV missing | HV=Đạo; lúa; cây lúa |
 
 Result: current audit reports N1 `machine=0`, `open-review=0`.

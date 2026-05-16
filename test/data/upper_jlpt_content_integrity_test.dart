@@ -149,6 +149,63 @@ void main() {
         expect(count, greaterThanOrEqualTo(1500));
       });
 
+      test('$level vocab Vietnamese glosses have no duplicate comma debt', () {
+        if (level != 'n3') return;
+
+        final offenders = <String>[];
+        for (final file in _jsonFiles(
+          Directory('assets/data/content/vocab/$level'),
+          recursive: true,
+        )) {
+          if (file.path.endsWith('index.json')) continue;
+          final decoded =
+              jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
+          for (final rawEntry in decoded['entries'] as List<dynamic>) {
+            final entry = rawEntry as Map<String, dynamic>;
+            final term = (entry['lemma'] as Map<String, dynamic>)['term'];
+            final sense = entry['sense'] as Map<String, dynamic>;
+            final meaningVi = _readRequired(sense, 'meaningVi');
+            if (meaningVi.contains(RegExp(r',[^\s]'))) {
+              offenders.add('${file.path} $term no-space comma: $meaningVi');
+            }
+            final parts = _splitTopLevelSemicolons(meaningVi)
+                .map((part) => part.trim().toLowerCase())
+                .where((part) => part.isNotEmpty)
+                .toList();
+            if (parts.toSet().length != parts.length) {
+              offenders.add('${file.path} $term duplicate gloss: $meaningVi');
+            }
+          }
+        }
+
+        expect(offenders, isEmpty, reason: offenders.take(40).join('\n'));
+      });
+
+      test(
+        '$level owner spot-check vocabulary and kanji defects stay fixed',
+        () {
+          if (level == 'n3') {
+            final entries = _vocabEntriesByTerm(level);
+            expect(_meaningVi(entries['計画']!), 'kế hoạch; dự án; chương trình');
+            expect(_meaningVi(entries['慎重']!), 'sự thận trọng; cẩn trọng');
+            expect(_meaningVi(entries['老い']!), 'tuổi già; sự lão hóa');
+            expect(
+              _meaningVi(entries['合わせる']!),
+              'ghép lại; kết hợp; điều chỉnh; làm cho khớp',
+            );
+            expect(_meaningVi(entries['合わせる']!), isNot(contains('đối lập')));
+          }
+
+          if (level == 'n1') {
+            final entry = _kanjiEntryByCharacter(level, '稲');
+            final labels = entry['labels'] as Map<String, dynamic>;
+            expect(labels['meaningVi'], 'lúa; cây lúa');
+            expect(labels['meaningViDisplay'], '稲 (lúa; cây lúa)');
+            expect(labels['meaningVi'], isNot(contains('tia chớp')));
+          }
+        },
+      );
+
       test('$level upper grammar has honest Vietnamese editorial metadata', () {
         if (level == 'n3') return;
 
@@ -334,9 +391,9 @@ int _countSourceVocab(String level) {
   return count;
 }
 
-List<File> _jsonFiles(Directory dir) {
+List<File> _jsonFiles(Directory dir, {bool recursive = false}) {
   return dir
-      .listSync()
+      .listSync(recursive: recursive)
       .whereType<File>()
       .where((file) => file.path.endsWith('.json'))
       .toList()
@@ -363,4 +420,57 @@ List<String> _readTags(Map<String, dynamic> map, String key) {
       .map((tag) => tag.toString().trim())
       .where((tag) => tag.isNotEmpty)
       .toList(growable: false);
+}
+
+Map<String, dynamic> _vocabEntriesByTerm(String level) {
+  final entries = <String, dynamic>{};
+  for (final file in _jsonFiles(
+    Directory('assets/data/content/vocab/$level'),
+    recursive: true,
+  )) {
+    if (file.path.endsWith('index.json')) continue;
+    final decoded = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
+    for (final rawEntry in decoded['entries'] as List<dynamic>) {
+      final entry = rawEntry as Map<String, dynamic>;
+      final lemma = entry['lemma'] as Map<String, dynamic>;
+      entries[lemma['term'] as String] = entry;
+    }
+  }
+  return entries;
+}
+
+String _meaningVi(Map<String, dynamic> entry) {
+  return _readRequired(entry['sense'] as Map<String, dynamic>, 'meaningVi');
+}
+
+Map<String, dynamic> _kanjiEntryByCharacter(String level, String character) {
+  for (final file in _jsonFiles(
+    Directory('assets/data/content/kanji/$level'),
+  )) {
+    final decoded = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
+    for (final rawEntry in decoded['entries'] as List<dynamic>) {
+      final entry = rawEntry as Map<String, dynamic>;
+      if (entry['character'] == character) return entry;
+    }
+  }
+  throw StateError('Missing kanji $character in $level');
+}
+
+List<String> _splitTopLevelSemicolons(String value) {
+  final parts = <String>[];
+  final buffer = StringBuffer();
+  var depth = 0;
+  for (final rune in value.runes) {
+    final char = String.fromCharCode(rune);
+    if (char == '(' || char == '（') depth++;
+    if (char == ')' || char == '）') depth = depth > 0 ? depth - 1 : 0;
+    if (char == ';' && depth == 0) {
+      parts.add(buffer.toString());
+      buffer.clear();
+    } else {
+      buffer.write(char);
+    }
+  }
+  parts.add(buffer.toString());
+  return parts;
 }

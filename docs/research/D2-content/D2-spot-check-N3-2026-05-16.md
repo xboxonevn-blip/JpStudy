@@ -8,19 +8,19 @@ Scope: 30 sampled N3 items after review-debt cleanup. This is a user-review samp
 | 2 | Grammar | 〜ようにする | Reviewed text | Diễn tả nỗ lực duy trì một thói quen hoặc cố tránh điều gì đó. |
 | 3 | Grammar | 〜つもりだ | Reviewed text | Diễn tả dự định hoặc ý định của người nói. |
 | 4 | Grammar | 〜ことにしている | Reviewed text | Diễn tả thói quen do bản thân quyết định duy trì. |
-| 5 | Vocab | 合わせる | Reviewed text | tham gia cùng nhau, đối lập, đối mặt, đoàn kết |
-| 6 | Vocab | 勇気 | Reviewed text | lòng can đảm, sự dũng cảm, lòng dũng cảm, sự can đảm, sự táo bạo |
+| 5 | Vocab | 合わせる | Reviewed text | ghép lại; kết hợp; điều chỉnh; làm cho khớp |
+| 6 | Vocab | 勇気 | Reviewed text | lòng can đảm; sự dũng cảm; sự táo bạo |
 | 7 | Vocab | ハイキング | Reviewed text | đi bộ đường dài |
 | 8 | Vocab | 穏やか | Reviewed text | bình tĩnh, nhẹ nhàng, yên tĩnh |
-| 9 | Vocab | ところで | Reviewed text | Nhân tiện, cho dù, dù thế nào đi chăng nữa |
-| 10 | Vocab | 鋭い | Reviewed text | nhọn, sắc nét |
-| 11 | Vocab | 計画 | Reviewed text | kế hoạch,dự án,kế hoạch,kế hoạch,chương trình |
-| 12 | Vocab | 慎重 | Reviewed text | sự thận trọng, sự thận trọng |
-| 13 | Vocab | ずっと | Reviewed text | liên tục, xuyên suốt, rất nhiều |
-| 14 | Vocab | 老い | Reviewed text | tuổi già,người già,người già,người già |
-| 15 | Vocab | 役割 | Reviewed text | vai trò, nhiệm vụ |
-| 16 | Vocab | 適当 | Reviewed text | thích hợp, vừa phải, tùy tiện |
-| 17 | Vocab | 一般 | Reviewed text | chung, phổ thông |
+| 9 | Vocab | ところで | Reviewed text | Nhân tiện; cho dù; dù thế nào đi chăng nữa |
+| 10 | Vocab | 鋭い | Reviewed text | nhọn; sắc nét |
+| 11 | Vocab | 計画 | Reviewed text | kế hoạch; dự án; chương trình |
+| 12 | Vocab | 慎重 | Reviewed text | sự thận trọng; cẩn trọng |
+| 13 | Vocab | ずっと | Reviewed text | liên tục; xuyên suốt; rất nhiều |
+| 14 | Vocab | 老い | Reviewed text | tuổi già; sự lão hóa |
+| 15 | Vocab | 役割 | Reviewed text | vai trò; nhiệm vụ |
+| 16 | Vocab | 適当 | Reviewed text | thích hợp; vừa phải; tùy tiện |
+| 17 | Vocab | 一般 | Reviewed text | chung; phổ thông |
 | 18 | Kanji | 作 | Reviewed text | HV=Tác; làm, tạo |
 | 19 | Kanji | 法 | Reviewed text | HV=Pháp; phép, phương pháp |
 | 20 | Kanji | 様 | Reviewed text | HV=Dạng; dáng vẻ, kiểu |
