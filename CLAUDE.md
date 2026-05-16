@@ -154,8 +154,8 @@ Active workstream status (as of 2026-05-17):
   including anonymous Auth bootstrap and legacy migration gating.
 - Sprint 1-7 implementation/docs are substantially complete. Do not restart
   completed work without checking `mission-completion-audit-2026-05-15.md`.
-- Latest source/CI/deploy proof: commit `17100cb1`, GitHub Actions run
-  `25969926890` succeeded. `ui-string-guard`, `firebase-security-rules`,
+- Latest source/CI/deploy proof: commit `52801def`, GitHub Actions run
+  `25971427791` succeeded. `ui-string-guard`, `firebase-security-rules`,
   and secret-backed `deploy-hosting` all completed with `success`, including
   production build, primary deploy, primary/legacy smoke, live resource smoke,
   and Lighthouse live gate.
@@ -163,25 +163,32 @@ Active workstream status (as of 2026-05-17):
   bootstrap by seeding persisted providers before `runApp`. `17100cb1` adds
   `npm run report:live-route-matrix`, and the latest run passed `36/36` N4/N3/N2/N1
   live direct-route checks with no N5 fallback markers across audited hash routes.
-- Latest D2 content integrity correction: `a80fb702` plus
-  `D2-honest-audit-2026-05-16-all-levels.md`.
+- Latest D2 content integrity correction: `3b380191` plus
+  `D2-spot-check-N3-2026-05-16.md` and
+  `D2-spot-check-N1-2026-05-16.md`.
   Current audit reports N5/N4 launch-tier and N3/N2/N1 launch-tier quality
-  with user spot-check still pending for the upper-level samples. Machine-draft
-  and open-review counts are `0` across all levels. Codex must not add
-  `vi-human-approved`; only the user can add that after item-level review.
+  with user spot-check still pending for the upper-level samples. The latest
+  owner spot-check defects fixed duplicated N3 vocab glosses and N1 kanji
+  compound-sourced meanings such as `稲`. Machine-draft and open-review counts
+  are `0` across all levels. Codex must not add `vi-human-approved`; only the
+  user can add that after item-level review.
 - Remaining blockers are operational/legal proofs: legal approval,
-  Sentry DSN + first issue, Firebase Storage bucket/rules/CORS migration proof,
-  first executed deletion proof, GA4 UI retention proof, BigQuery-exported
-  learning-event rows, and later App Check enforcement proof. The local
+  Sentry DSN + first issue, first executed deletion proof, GA4 UI retention
+  proof, BigQuery-exported learning-event rows, and later App Check enforcement
+  proof. Firebase Storage is descoped for beta by owner decision on 2026-05-17
+  because new buckets require Blaze and the beta stays Spark/local-first with
+  file export/import backup. Keep Storage scaffolding gated for future cloud
+  sync; do not require bucket provisioning for beta launch. The local
   `firebase-admin` tooling blocker for Auth deletion is resolved by
   `tool/research/firebase_admin_delete_user.js`; live deletion proof still
-  requires Storage/GA4/operator gates.
+  requires GA4/operator gates.
   Latest completion audit: `docs/research/mission-completion-audit-2026-05-17.md`.
   Operator handoff checklist:
   `docs/compliance/beta-launch-proof-checklist-2026-05-15.md`.
   Current readiness reports now include direct operator URLs for launch proof,
   Storage, deletion, GA4 Admin, App Check, and GitHub Actions; these URLs do not
-  close proof gates by themselves.
+  close proof gates by themselves. Storage reports as
+  `storage-descoped-for-beta`, not as a beta blocker.
 
 ## App Check (reCAPTCHA v3)
 
