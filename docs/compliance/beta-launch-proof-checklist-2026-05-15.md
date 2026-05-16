@@ -46,10 +46,14 @@ Use the project owner account `chung.phukiengiabuon@gmail.com`
    - Run GitHub Actions `CI` manually with `sentry_smoke=true`.
    - Record the first Sentry issue URL in the checklist/research docs.
 3. Firebase Storage proof:
+   - Project is currently on Spark. Firebase docs say projects that have not
+     upgraded to pay-as-you-go Blaze cannot use Cloud Storage for Firebase:
+     `https://firebase.google.com/docs/storage/web/start`.
    - Open
      `https://console.firebase.google.com/u/1/project/jpstudy-v2/storage`.
-   - Click "Get Started", choose the project location, then deploy rules and
-     apply `storage.cors.json`.
+   - Upgrade/confirm billing if needed, click "Get Started", choose the
+     irreversible bucket location intentionally, then deploy rules and apply
+     `storage.cors.json`.
 4. Deletion proof:
    - Use only the dedicated test UID/support ID.
    - Run `npm run report:deletion-readiness -- --uid "<uid>"`.
@@ -164,6 +168,10 @@ Current status:
 
 Required setup:
 
+- Confirm/upgrade billing plan first. `jpstudy-v2` is currently documented as
+  Spark, while Firebase currently requires Blaze to use Cloud Storage for
+  Firebase:
+  `https://firebase.google.com/docs/storage/web/start`.
 - Create/provision Firebase Storage for project `jpstudy-v2`.
 - Deploy `storage.rules`.
 - Configure CORS for the web app origin with `storage.cors.json`.

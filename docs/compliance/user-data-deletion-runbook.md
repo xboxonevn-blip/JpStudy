@@ -70,6 +70,9 @@ npm run report:deletion-readiness -- --uid "<firebase-uid>" --out output\researc
 
 Current known blockers: Firebase Storage is not provisioned, GA4 Admin
 API/deletion access is not available, and `gcloud` is not installed locally.
+Because `jpstudy-v2` is on Spark, Firebase's current Storage setup docs require
+Blaze before the owner can use Cloud Storage for Firebase:
+`https://firebase.google.com/docs/storage/web/start`.
 Firebase Auth deletion tooling is audited at
 `tool/research/firebase_admin_delete_user.js`. Until all live-service blockers
 are cleared, use the report as readiness evidence only and do not claim an

@@ -213,9 +213,10 @@ flutter build web --release `
 □ Register App Check for jpstudy (android), jpstudy (ios), jpstudy
   (windows) — currently only jpstudy (web) registered.
 □ Set up Firebase Storage for `jpstudy-v2` before enabling legacy
-  migration. Current Spark/new-bucket state blocks Storage setup from CLI;
-  keep `JPSTUDY_ENABLE_LEGACY_STORAGE_MIGRATION` unset/false until the bucket,
-  rules deploy, and CORS preflight are verified.
+  migration. Current Spark/new-bucket state blocks Storage setup from CLI, and
+  Firebase currently requires the pay-as-you-go Blaze plan to use Cloud Storage
+  for Firebase. Keep `JPSTUDY_ENABLE_LEGACY_STORAGE_MIGRATION` unset/false
+  until billing/location, bucket, rules deploy, and CORS preflight are verified.
 □ After 1-2 weeks monitoring, switch App Check from monitoring to
   enforce mode (Firebase Console → App Check → APIs tab → Storage →
   Enforce).
